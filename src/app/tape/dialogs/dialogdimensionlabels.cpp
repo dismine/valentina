@@ -29,8 +29,8 @@
 #include "ui_dialogdimensionlabels.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogDimensionLabels::DialogDimensionLabels(const QMap<MeasurementDimension, MeasurementDimension_p> &dimensions, bool fullCircumference,
-                                             QWidget *parent)
+DialogDimensionLabels::DialogDimensionLabels(const QMap<MeasurementDimension, MeasurementDimension_p> &dimensions,
+                                             bool fullCircumference, QWidget *parent)
     : QDialog(parent),
       ui(new Ui::DialogDimensionLabels),
       m_dimensions(dimensions),
@@ -130,8 +130,7 @@ void DialogDimensionLabels::InitDimensions()
 
     for(auto &dimension : m_dimensions)
     {
-        ui->comboBoxDimensionLabels->addItem(VAbstartMeasurementDimension::DimensionName(dimension->Type()),
-                                             static_cast<int>(dimension->Type()));
+        ui->comboBoxDimensionLabels->addItem(dimension->Name(), static_cast<int>(dimension->Type()));
     }
 
     ui->comboBoxDimensionLabels->blockSignals(false);

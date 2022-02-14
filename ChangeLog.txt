@@ -37,6 +37,7 @@
 - Improve creation by mouse for tool Spline.
 - Fix incorrect translation of known measurements.
 - Adjust combobox to fit a dimension label length.
+- Dimension custom name.
 
 # Valentina 0.7.49 July 1, 2021
 - Fix crash.

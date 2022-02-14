@@ -49,7 +49,7 @@ public:
     static const QString MeasurementMaxVerStr;
     static const QString CurrentSchema;
     static Q_DECL_CONSTEXPR const unsigned MeasurementMinVer = FormatVersion(0, 3, 0);
-    static Q_DECL_CONSTEXPR const unsigned MeasurementMaxVer = FormatVersion(0, 5, 2);
+    static Q_DECL_CONSTEXPR const unsigned MeasurementMaxVer = FormatVersion(0, 5, 3);
 
 protected:
     virtual unsigned MinVer() const override;
@@ -86,6 +86,7 @@ private:
     void ToV0_5_0();
     void ToV0_5_1();
     void ToV0_5_2();
+    void ToV0_5_3();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

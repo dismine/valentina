@@ -52,6 +52,62 @@ auto VAbstartMeasurementDimension::IsValid() -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VAbstartMeasurementDimension::RangeMin() const -> int
+{
+    if (m_circumference)
+    {
+        const int rangeMinCm = 20;
+        const int rangeMinMm = 200;
+        const int rangeMinInch = 8;
+
+        switch(Units())
+        {
+            case Unit::Cm:
+                return rangeMinCm;
+            case Unit::Mm:
+                return rangeMinMm;
+            case Unit::Inch:
+                return rangeMinInch;
+            default:
+                return 0;
+        }
+    }
+
+    return 1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstartMeasurementDimension::RangeMax() const -> int
+{
+    if (m_circumference)
+    {
+        const int rangeMaxCm = 272;
+        const int rangeMaxMm = 2720;
+        const int rangeMaxInch = 107;
+
+        switch(Units())
+        {
+            case Unit::Cm:
+                return rangeMaxCm;
+            case Unit::Mm:
+                return rangeMaxMm;
+            case Unit::Inch:
+                return rangeMaxInch;
+            default:
+                return 0;
+        }
+    }
+
+    return 100;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstartMeasurementDimension::Name() const -> QString
+{
+    return m_customName.isEmpty() ? DimensionName(Type()) : m_customName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VAbstartMeasurementDimension::ValidSteps() const -> QVector<qreal>
 {
     const qreal stepBarrier = 8.5;
@@ -205,33 +261,41 @@ auto VAbstartMeasurementDimension::DimensionName(MeasurementDimension type) -> Q
         case MeasurementDimension::Z:
             return tr("Hip", "dimension");
         default:
-            return QString();
+            return {};
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstartMeasurementDimension::DimensionToolTip(MeasurementDimension type, bool circumference, bool fc) -> QString
+auto VAbstartMeasurementDimension::DimensionToolTip(const MeasurementDimension_p &dimension, bool fc) -> QString
 {
-    switch(type)
+    if (dimension.isNull())
     {
-    case MeasurementDimension::X:
-        return tr("Height", "dimension");
-    case MeasurementDimension::Y:
-        if (circumference)
-        {
-            return fc ? tr("Chest full circumference", "dimension") : tr("Chest half circumference", "dimension");
-        }
-        else
-        {
-            return tr("Size");
-        }
-        return circumference ? tr("Chest circumference", "dimension") : tr("Size", "dimension");
-    case MeasurementDimension::W:
-        return fc ? tr("Waist full circumference", "dimension") : tr("Waist half circumference", "dimension");
-    case MeasurementDimension::Z:
-        return fc ? tr("Hip full circumference", "dimension") : tr("Hip half circumference", "dimension");
-    default:
-        return QString();
+        return {};
+    }
+
+    switch(dimension->Type())
+    {
+        case MeasurementDimension::Y:
+            if (dimension->CustomName().isEmpty() && dimension->IsCircumference())
+            {
+                return fc ? tr("Chest full circumference", "dimension") : tr("Chest half circumference", "dimension");
+            }
+            return {};
+        case MeasurementDimension::W:
+            if (dimension->CustomName().isEmpty() && dimension->IsCircumference())
+            {
+                return fc ? tr("Waist full circumference", "dimension") : tr("Waist half circumference", "dimension");
+            }
+            return {};
+        case MeasurementDimension::Z:
+            if (dimension->CustomName().isEmpty() && dimension->IsCircumference())
+            {
+                return fc ? tr("Hip full circumference", "dimension") : tr("Hip half circumference", "dimension");
+            }
+            return {};
+        case MeasurementDimension::X:
+        default:
+            return {};
     }
 }
 
@@ -246,52 +310,6 @@ VXMeasurementDimension::VXMeasurementDimension(Unit units, qreal min, qreal max,
     : VAbstartMeasurementDimension(units, min, max, step)
 {}
 
-//---------------------------------------------------------------------------------------------------------------------
-auto VXMeasurementDimension::Type() const -> MeasurementDimension
-{
-    return MeasurementDimension::X;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VXMeasurementDimension::RangeMin() const -> int
-{
-    const int rangeMinCm = 50;
-    const int rangeMinMm = 500;
-    const int rangeMinInch = 19;
-
-    switch(m_units)
-    {
-        case Unit::Cm:
-            return rangeMinCm;
-        case Unit::Mm:
-            return rangeMinMm;
-        case Unit::Inch:
-            return rangeMinInch;
-        default:
-            return 0;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VXMeasurementDimension::RangeMax() const -> int
-{
-    const int rangeMaxCm = 272;
-    const int rangeMaxMm = 2720;
-    const int rangeMaxInch = 107;
-
-    switch(m_units)
-    {
-        case Unit::Cm:
-            return rangeMaxCm;
-        case Unit::Mm:
-            return rangeMaxMm;
-        case Unit::Inch:
-            return rangeMaxInch;
-        default:
-            return 0;
-    }
-}
-
 // VYMeasurementDimension
 //---------------------------------------------------------------------------------------------------------------------
 VYMeasurementDimension::VYMeasurementDimension(Unit units)
@@ -302,68 +320,6 @@ VYMeasurementDimension::VYMeasurementDimension(Unit units)
 VYMeasurementDimension::VYMeasurementDimension(Unit units, qreal min, qreal max, qreal step)
     : VAbstartMeasurementDimension(units, min, max, step)
 {}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VYMeasurementDimension::Type() const -> MeasurementDimension
-{
-    return MeasurementDimension::Y;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VYMeasurementDimension::RangeMin() const -> int
-{
-    if (m_circumference)
-    {
-        const int rangeMinCm = 22;
-        const int rangeMinMm = 220;
-        const int rangeMinInch = 8;
-
-        switch(m_units)
-        {
-            case Unit::Cm:
-                return rangeMinCm;
-            case Unit::Mm:
-                return rangeMinMm;
-            case Unit::Inch:
-                return rangeMinInch;
-            default:
-                return 0;
-        }
-    }
-    else
-    {
-        const int rangeMinCir = 1;
-        return rangeMinCir;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VYMeasurementDimension::RangeMax() const -> int
-{
-    if (m_circumference)
-    {
-        const int rangeMaxCm = 72;
-        const int rangeMaxMm = 720;
-        const int rangeMaxInch = 29;
-
-        switch(m_units)
-        {
-            case Unit::Cm:
-                return rangeMaxCm;
-            case Unit::Mm:
-                return rangeMaxMm;
-            case Unit::Inch:
-                return rangeMaxInch;
-            default:
-                return 0;
-        }
-    }
-    else
-    {
-        const int rangeMaxCir = 100;
-        return rangeMaxCir;
-    }
-}
 
 // VWMeasurementDimension
 //---------------------------------------------------------------------------------------------------------------------
@@ -376,52 +332,6 @@ VWMeasurementDimension::VWMeasurementDimension(Unit units, qreal min, qreal max,
     : VAbstartMeasurementDimension(units, min, max, step)
 {}
 
-//---------------------------------------------------------------------------------------------------------------------
-auto VWMeasurementDimension::Type() const -> MeasurementDimension
-{
-    return MeasurementDimension::W;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VWMeasurementDimension::RangeMin() const -> int
-{
-    const int rangeMinCm = 20;
-    const int rangeMinMm = 200;
-    const int rangeMinInch = 8;
-
-    switch(m_units)
-    {
-        case Unit::Cm:
-            return rangeMinCm;
-        case Unit::Mm:
-            return rangeMinMm;
-        case Unit::Inch:
-            return rangeMinInch;
-        default:
-            return 0;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VWMeasurementDimension::RangeMax() const -> int
-{
-    const int rangeMaxCm = 65;
-    const int rangeMaxMm = 650;
-    const int rangeMaxInch = 26;
-
-    switch(m_units)
-    {
-        case Unit::Cm:
-            return rangeMaxCm;
-        case Unit::Mm:
-            return rangeMaxMm;
-        case Unit::Inch:
-            return rangeMaxInch;
-        default:
-            return 0;
-    }
-}
-
 // VZMeasurementDimension
 //---------------------------------------------------------------------------------------------------------------------
 VZMeasurementDimension::VZMeasurementDimension(Unit units)
@@ -433,53 +343,15 @@ VZMeasurementDimension::VZMeasurementDimension(Unit units, qreal min, qreal max,
     : VAbstartMeasurementDimension(units, min, max, step)
 {}
 
-//---------------------------------------------------------------------------------------------------------------------
-auto VZMeasurementDimension::Type() const -> MeasurementDimension
-{
-    return MeasurementDimension::Z;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VZMeasurementDimension::RangeMin() const -> int
-{
-    const int rangeMinCm = 20;
-    const int rangeMinMm = 200;
-    const int rangeMinInch = 8;
-
-    switch(m_units)
-    {
-        case Unit::Cm:
-            return rangeMinCm;
-        case Unit::Mm:
-            return rangeMinMm;
-        case Unit::Inch:
-            return rangeMinInch;
-        default:
-            return 0;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VZMeasurementDimension::RangeMax() const -> int
-{
-    const int rangeMaxCm = 75;
-    const int rangeMaxMm = 750;
-    const int rangeMaxInch = 30;
-
-    switch(m_units)
-    {
-        case Unit::Cm:
-            return rangeMaxCm;
-        case Unit::Mm:
-            return rangeMaxMm;
-        case Unit::Inch:
-            return rangeMaxInch;
-        default:
-            return 0;
-    }
-}
-
 // VDimensionRestriction
+//---------------------------------------------------------------------------------------------------------------------
+VDimensionRestriction::VDimensionRestriction(qreal min, qreal max, const QString &exclude) :
+    m_min(min),
+    m_max(max)
+{
+    SetExcludeString(exclude);
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 void VDimensionRestriction::SetExcludeString(const QString &exclude)
 {

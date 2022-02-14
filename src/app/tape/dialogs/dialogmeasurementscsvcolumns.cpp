@@ -255,8 +255,7 @@ QString DialogMeasurementsCSVColumns::ColumnHeader(int column) const
                 if (m_dimensions.size() > 0)
                 {
                     MeasurementDimension_p dimension = m_dimensions.at(0);
-                    return tr("Shift (%1):", "measurement column")
-                        .arg(VAbstartMeasurementDimension::DimensionName(dimension->Type()));
+                    return tr("Shift (%1):", "measurement column").arg(dimension->Name());
                 }
                 else
                 {
@@ -266,8 +265,7 @@ QString DialogMeasurementsCSVColumns::ColumnHeader(int column) const
                 if (m_dimensions.size() > 1)
                 {
                     MeasurementDimension_p dimension = m_dimensions.at(1);
-                    return tr("Shift (%1):", "measurement column")
-                        .arg(VAbstartMeasurementDimension::DimensionName(dimension->Type()));
+                    return tr("Shift (%1):", "measurement column").arg(dimension->Name());
                 }
                 else
                 {
@@ -277,8 +275,7 @@ QString DialogMeasurementsCSVColumns::ColumnHeader(int column) const
                 if (m_dimensions.size() > 2)
                 {
                     MeasurementDimension_p dimension = m_dimensions.at(2);
-                    return tr("Shift (%1):", "measurement column")
-                        .arg(VAbstartMeasurementDimension::DimensionName(dimension->Type()));
+                    return tr("Shift (%1):", "measurement column").arg(dimension->Name());
                 }
                 else
                 {
@@ -289,7 +286,7 @@ QString DialogMeasurementsCSVColumns::ColumnHeader(int column) const
             case MultisizeMeasurementsColumns::Description:
                 return tr("Description", "measurement column");
             default:
-                return QString();
+            return {};
         }
     }
 }
@@ -741,22 +738,19 @@ void DialogMeasurementsCSVColumns::RetranslateLabels()
         if (m_dimensions.size() > 0)
         {
             MeasurementDimension_p dimension = m_dimensions.at(0);
-            ui->labelShiftA->setText(tr("Shift (%1)*:")
-                                         .arg(VAbstartMeasurementDimension::DimensionName(dimension->Type())));
+            ui->labelShiftA->setText(tr("Shift (%1)*:").arg(dimension->Name()));
         }
 
         if (m_dimensions.size() > 1)
         {
             MeasurementDimension_p dimension = m_dimensions.at(1);
-            ui->labelShiftB->setText(tr("Shift (%1)*:")
-                                         .arg(VAbstartMeasurementDimension::DimensionName(dimension->Type())));
+            ui->labelShiftB->setText(tr("Shift (%1)*:").arg(dimension->Name()));
         }
 
         if (m_dimensions.size() > 2)
         {
             MeasurementDimension_p dimension = m_dimensions.at(2);
-            ui->labelShiftC->setText(tr("Shift (%1)*:")
-                                         .arg(VAbstartMeasurementDimension::DimensionName(dimension->Type())));
+            ui->labelShiftC->setText(tr("Shift (%1)*:").arg(dimension->Name()));
         }
     }
 }

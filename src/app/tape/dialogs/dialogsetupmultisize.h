@@ -33,6 +33,10 @@
 #include "../vformat/vdimensions.h"
 #include "../vmisc/def.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
+#include "../vmisc/defglobal.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
+
 class QDoubleSpinBox;
 
 namespace Ui
@@ -42,26 +46,29 @@ class DialogSetupMultisize;
 
 class DialogSetupMultisize : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogSetupMultisize(Unit unit, QWidget *parent = nullptr);
-    ~DialogSetupMultisize();
+    ~DialogSetupMultisize() override;
 
     auto Dimensions() const -> QVector<MeasurementDimension_p>;
 
     auto FullCircumference() const -> bool;
 
 protected:
-    virtual void changeEvent(QEvent* event) override;
-    virtual void showEvent(QShowEvent *event) override;
+    void showEvent(QShowEvent *event) override;
 
 private slots:
     void ShowFullCircumference();
+
+    void XDimensionCircumferenceChanged();
     void YDimensionCircumferenceChanged();
+    void WDimensionCircumferenceChanged();
+    void ZDimensionCircumferenceChanged();
 
 private:
-    Q_DISABLE_COPY(DialogSetupMultisize)
+    Q_DISABLE_COPY_MOVE(DialogSetupMultisize)
     Ui::DialogSetupMultisize *ui;
     bool m_isInitialized{false};
     QSharedPointer<VXMeasurementDimension> m_xDimension;
@@ -73,7 +80,7 @@ private:
 
     void InitDimensionMinMax(QDoubleSpinBox *doubleSpinBoxMinValue, QDoubleSpinBox *doubleSpinBoxMaxValue,
                              const MeasurementDimension_p &dimension);
-    void InitDimensionStep(QComboBox *comboBoxStep,const MeasurementDimension_p &dimension);
+    void InitDimensionStep(QComboBox *comboBoxStep, const MeasurementDimension_p &dimension);
 
     void InitDimension(QDoubleSpinBox *doubleSpinBoxMinValue, QDoubleSpinBox *doubleSpinBoxMaxValue,
                        QComboBox *comboBoxStep, const MeasurementDimension_p &dimension);

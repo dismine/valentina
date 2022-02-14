@@ -135,10 +135,8 @@ void DialogRestrictDimension::changeEvent(QEvent *event)
             {
                 MeasurementDimension_p dimension = m_dimensions.at(index);
 
-                name->setText(VAbstartMeasurementDimension::DimensionName(dimension->Type())+QChar(':'));
-                name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension->Type(),
-                                                                                dimension->IsCircumference(),
-                                                                                m_fullCircumference));
+                name->setText(dimension->Name()+QChar(':'));
+                name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension, m_fullCircumference));
 
                 InitDimensionGradation(dimension, control);
             }
@@ -412,10 +410,8 @@ void DialogRestrictDimension::InitDimensionsBaseValues()
         if (m_dimensions.size() > index)
         {
             MeasurementDimension_p dimension = m_dimensions.at(index);
-            name->setText(VAbstartMeasurementDimension::DimensionName(dimension->Type())+QChar(':'));
-            name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension->Type(),
-                                                                            dimension->IsCircumference(),
-                                                                            m_fullCircumference));
+            name->setText(dimension->Name()+QChar(':'));
+            name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension, m_fullCircumference));
 
             InitDimensionGradation(dimension, control);
         }

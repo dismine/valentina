@@ -1189,6 +1189,7 @@
     <addaction name="actionRestrictSecondDimension"/>
     <addaction name="actionRestrictThirdDimension"/>
     <addaction name="actionDimensionLabels"/>
+    <addaction name="actionDimensionCustomNames"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuMeasurements"/>
@@ -1625,6 +1626,17 @@
    </property>
    <property name="text">
     <string>Add separator</string>
+   </property>
+  </action>
+  <action name="actionDimensionCustomNames">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Dimension custom names</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
    </property>
   </action>
  </widget>

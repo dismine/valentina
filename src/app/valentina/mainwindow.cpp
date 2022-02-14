@@ -2140,6 +2140,30 @@ void MainWindow::StoreMultisizeMDimensions()
 
     QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
 
+    if (dimensions.size() > 0)
+    {
+        if (not dimensionALabel.isNull())
+        {
+            dimensionALabel->setText(dimensions.at(0)->Name()+QChar(':'));
+        }
+    }
+
+    if (dimensions.size() > 1)
+    {
+        if (not dimensionBLabel.isNull())
+        {
+            dimensionBLabel->setText(dimensions.at(1)->Name()+QChar(':'));
+        }
+    }
+
+    if (dimensions.size() > 2)
+    {
+        if (not dimensionCLabel.isNull())
+        {
+            dimensionCLabel->setText(dimensions.at(2)->Name()+QChar(':'));
+        }
+    }
+
     auto StoreDimension = [this, dimensions](int index, qreal currentBase)
     {
         if (dimensions.size() > index)
@@ -4483,23 +4507,22 @@ void MainWindow::InitDimensionControls()
         {
             if (dimensions.size() > index)
             {
-                MeasurementDimension_p dimension = dimensions.at(index);
+                const MeasurementDimension_p& dimension = dimensions.at(index);
 
                 if (name.isNull())
                 {
-                    name = new QLabel(VAbstartMeasurementDimension::DimensionName(dimension->Type())+QChar(':'));
+                    name = new QLabel(dimension->Name()+QChar(':'));
                 }
                 else
                 {
-                    name->setText(VAbstartMeasurementDimension::DimensionName(dimension->Type())+QChar(':'));
+                    name->setText(dimension->Name()+QChar(':'));
                 }
-                name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension->Type(),
-                                                                                dimension->IsCircumference(),
-                                                                                m->IsFullCircumference()));
+                name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension, m->IsFullCircumference()));
 
                 if (control.isNull())
                 {
                     control = new QComboBox;
+                    control->setSizeAdjustPolicy(QComboBox::AdjustToContents);
                 }
 
                 InitDimensionGradation(index, dimension, control);
@@ -7140,7 +7163,7 @@ void MainWindow::PrintPatternMessage(QEvent *event)
 void MainWindow::OpenWatermark(const QString &path)
 {
     QList<QPointer<WatermarkWindow>>::const_iterator i;
-    for (i = m_watermarkEditors.begin(); i != m_watermarkEditors.end(); ++i)
+    for (i = m_watermarkEditors.cbegin(); i != m_watermarkEditors.cend(); ++i)
     {
         if (not (*i).isNull() && not (*i)->CurrentFile().isEmpty()
                 && (*i)->CurrentFile() == AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), path))

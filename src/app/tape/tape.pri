@@ -2,6 +2,7 @@
 # This need for corect working file translations.pro
 
 SOURCES  += \
+    $$PWD/dialogs/dialogdimensioncustomnames.cpp \
     $$PWD/dialogs/dialogdimensionlabels.cpp \
     $$PWD/dialogs/dialogmeasurementscsvcolumns.cpp \
     $$PWD/dialogs/dialogrestrictdimension.cpp \
@@ -21,6 +22,7 @@ SOURCES  += \
 *msvc*:SOURCES += $$PWD/stable.cpp
 
 HEADERS  += \
+    $$PWD/dialogs/dialogdimensioncustomnames.h \
     $$PWD/dialogs/dialogdimensionlabels.h \
     $$PWD/dialogs/dialogmeasurementscsvcolumns.h \
     $$PWD/dialogs/dialogrestrictdimension.h \
@@ -39,6 +41,7 @@ HEADERS  += \
     $$PWD/dialogs/dialogsetupmultisize.h
 
 FORMS    += \
+    $$PWD/dialogs/dialogdimensioncustomnames.ui \
     $$PWD/dialogs/dialogdimensionlabels.ui \
     $$PWD/dialogs/dialogmeasurementscsvcolumns.ui \
     $$PWD/dialogs/dialogrestrictdimension.ui \

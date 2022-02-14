@@ -54,8 +54,8 @@
  */
 
 const QString VVSTConverter::MeasurementMinVerStr = QStringLiteral("0.3.0");
-const QString VVSTConverter::MeasurementMaxVerStr = QStringLiteral("0.5.2");
-const QString VVSTConverter::CurrentSchema        = QStringLiteral("://schema/multisize_measurements/v0.5.2.xsd");
+const QString VVSTConverter::MeasurementMaxVerStr = QStringLiteral("0.5.3");
+const QString VVSTConverter::CurrentSchema        = QStringLiteral("://schema/multisize_measurements/v0.5.3.xsd");
 
 //VVSTConverter::MeasurementMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VVSTConverter::MeasurementMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -73,7 +73,7 @@ VVSTConverter::VVSTConverter(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VVSTConverter::XSDSchema(unsigned ver) const
+auto VVSTConverter::XSDSchema(unsigned ver) const -> QString
 {
     QHash <unsigned, QString> schemas =
     {
@@ -85,17 +85,16 @@ QString VVSTConverter::XSDSchema(unsigned ver) const
         std::make_pair(FormatVersion(0, 4, 4), QStringLiteral("://schema/multisize_measurements/v0.4.4.xsd")),
         std::make_pair(FormatVersion(0, 5, 0), QStringLiteral("://schema/multisize_measurements/v0.5.0.xsd")),
         std::make_pair(FormatVersion(0, 5, 1), QStringLiteral("://schema/multisize_measurements/v0.5.1.xsd")),
-        std::make_pair(FormatVersion(0, 5, 2), CurrentSchema),
+        std::make_pair(FormatVersion(0, 5, 2), QStringLiteral("://schema/multisize_measurements/v0.5.2.xsd")),
+        std::make_pair(FormatVersion(0, 5, 3), CurrentSchema),
     };
 
     if (schemas.contains(ver))
     {
         return schemas.value(ver);
     }
-    else
-    {
-        InvalidVersion(ver);
-    }
+
+    InvalidVersion(ver);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -136,6 +135,10 @@ void VVSTConverter::ApplyPatches()
             ValidateXML(XSDSchema(FormatVersion(0, 5, 2)));
             Q_FALLTHROUGH();
         case (FormatVersion(0, 5, 2)):
+            ToV0_5_3();
+            ValidateXML(XSDSchema(FormatVersion(0, 5, 3)));
+            Q_FALLTHROUGH();
+        case (FormatVersion(0, 5, 3)):
             break;
         default:
             InvalidVersion(m_ver);
@@ -151,10 +154,10 @@ void VVSTConverter::DowngradeToCurrentMaxVersion()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VVSTConverter::IsReadOnly() const
+auto VVSTConverter::IsReadOnly() const -> bool
 {
     // Check if attribute read-only was not changed in file format
-    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMaxVer == FormatVersion(0, 5, 2),
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMaxVer == FormatVersion(0, 5, 3),
                       "Check attribute read-only.");
 
     // Possibly in future attribute read-only will change position etc.
@@ -522,5 +525,16 @@ void VVSTConverter::ToV0_5_2()
                       "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.5.2"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VVSTConverter::ToV0_5_3()
+{
+    // TODO. Delete if minimal supported version is 0.5.3
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FormatVersion(0, 5, 3),
+                      "Time to refactor the code.");
+
+    SetVersion(QStringLiteral("0.5.3"));
     Save();
 }

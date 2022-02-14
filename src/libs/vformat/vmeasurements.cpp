@@ -97,6 +97,7 @@ const QString VMeasurements::AttrCircumference     = QStringLiteral("circumferen
 const QString VMeasurements::AttrFullCircumference = QStringLiteral("fullCircumference");
 const QString VMeasurements::AttrLabel             = QStringLiteral("label");
 const QString VMeasurements::AttrDimension         = QStringLiteral("dimension");
+const QString VMeasurements::AttrCustomName        = QStringLiteral("customName");
 
 const QString VMeasurements::GenderMale    = QStringLiteral("male");
 const QString VMeasurements::GenderFemale  = QStringLiteral("female");
@@ -885,7 +886,7 @@ QString VMeasurements::MeasurementForDimension(IMD type) const
             }
         }
     }
-    return QString();
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -966,6 +967,25 @@ void VMeasurements::SetDimensionLabels(const QMap<MeasurementDimension, Dimesion
         if (labels.contains(type))
         {
             SaveDimesionLabels(dom, labels.value(type));
+        }
+    }
+
+    m_dimensions = ReadDimensions(); // Refresh cache
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::SetDimensionCustomNames(const QMap<MeasurementDimension, QString> &names)
+{
+    const QDomNodeList list = elementsByTagName(TagDimension);
+    for (int i=0; i < list.size(); ++i)
+    {
+        QDomElement dom = list.at(i).toElement();
+        const MeasurementDimension type = StrToDimensionType(GetParametrString(dom, AttrType));
+
+        if (names.contains(type))
+        {
+            SetAttributeOrRemoveIf<QString>(dom, AttrCustomName, names.value(type),
+                                            [](const QString &name) noexcept {return name.isEmpty();});
         }
     }
 
@@ -1223,7 +1243,7 @@ QDomElement VMeasurements::CreateDimensions(const QVector<MeasurementDimension_p
 {
     QDomElement dimensionsTag = createElement(TagDimensions);
 
-    for(auto &dimension : dimensions)
+    for(const auto &dimension : dimensions)
     {
         QDomElement dimensionTag = createElement(TagDimension);
 
@@ -1232,11 +1252,10 @@ QDomElement VMeasurements::CreateDimensions(const QVector<MeasurementDimension_p
         SetAttribute(dimensionTag, AttrMin, dimension->MinValue());
         SetAttribute(dimensionTag, AttrMax, dimension->MaxValue());
         SetAttribute(dimensionTag, AttrStep, dimension->Step());
-
-        if (dimension->Type() == MeasurementDimension::Y)
-        {
-            SetAttribute(dimensionTag, AttrCircumference, dimension->IsCircumference());
-        }
+        SetAttributeOrRemoveIf<bool>(dimensionTag, AttrCircumference, dimension->IsCircumference(),
+                                     [](bool c) noexcept {return c;});
+        SetAttributeOrRemoveIf<QString>(dimensionTag, AttrCustomName, dimension->CustomName(),
+                                     [](const QString &name) noexcept {return name.isEmpty();});
 
         dimensionsTag.appendChild(dimensionTag);
     }
@@ -1372,39 +1391,35 @@ auto VMeasurements::ReadDimensions() const -> VDimensions
         const qreal min = GetParametrDouble(dom, AttrMin, QChar('0'));
         const qreal max = GetParametrDouble(dom, AttrMax, QChar('0'));
         const qreal step = GetParametrDouble(dom, AttrStep, QStringLiteral("-1"));
-        const qreal base = GetParametrDouble(dom, AttrBase, QChar('0'));
 
-        const DimesionLabels labels = ReadDimensionLabels(dom);
+        MeasurementDimension_p dimension;
 
         if (type == MeasurementDimension::X)
         {
-            auto dimension = QSharedPointer<VXMeasurementDimension>::create(units, min, max, step);
-            dimension->SetBaseValue(base);
-            dimension->SetLabels(labels);
-            dimensions.insert(type, dimension);
+            dimension = QSharedPointer<VXMeasurementDimension>::create(units, min, max, step);
         }
         else if (type == MeasurementDimension::Y)
         {
-            auto dimension = QSharedPointer<VYMeasurementDimension>::create(units, min, max, step);
-            dimension->SetBaseValue(base);
-            dimension->SetCircumference(GetParametrBool(dom, AttrCircumference, trueStr));
-            dimension->SetLabels(labels);
-            dimensions.insert(type, dimension);
+            dimension = QSharedPointer<VYMeasurementDimension>::create(units, min, max, step);
         }
         else if (type == MeasurementDimension::W)
         {
-            auto dimension = QSharedPointer<VWMeasurementDimension>::create(units, min, max, step);
-            dimension->SetBaseValue(base);
-            dimension->SetLabels(labels);
-            dimensions.insert(type, dimension);
+            dimension = QSharedPointer<VWMeasurementDimension>::create(units, min, max, step);
         }
         else if (type == MeasurementDimension::Z)
         {
-            auto dimension = QSharedPointer<VZMeasurementDimension>::create(units, min, max, step);
-            dimension->SetBaseValue(base);
-            dimension->SetLabels(labels);
-            dimensions.insert(type, dimension);
+            dimension = QSharedPointer<VZMeasurementDimension>::create(units, min, max, step);
         }
+        else
+        {
+            continue;
+        }
+
+        dimension->SetBaseValue(GetParametrDouble(dom, AttrBase, QChar('0')));
+        dimension->SetCircumference(GetParametrBool(dom, AttrCircumference, trueStr));
+        dimension->SetCustomName(GetParametrEmptyString(dom, AttrCustomName));
+        dimension->SetLabels(ReadDimensionLabels(dom));
+        dimensions.insert(type, dimension);
     }
 
     return dimensions;

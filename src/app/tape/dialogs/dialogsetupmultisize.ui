@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>734</width>
-    <height>289</height>
+    <width>802</width>
+    <height>373</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,12 +30,41 @@
      <item>
       <widget class="QGroupBox" name="groupBoxXDimension">
        <property name="title">
-        <string comment="dimension">Height</string>
+        <string notr="true" comment="dimension">X</string>
        </property>
        <property name="checkable">
         <bool>true</bool>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QGroupBox" name="groupBoxCustomXDimensionName">
+          <property name="title">
+           <string>Custom name</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <widget class="QLabel" name="label_17">
+             <property name="text">
+              <string>Name:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="lineEditCustomXDimensionName">
+             <property name="clearButtonEnabled">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
         <item>
          <layout class="QFormLayout" name="formLayout_2">
           <property name="fieldGrowthPolicy">
@@ -117,13 +146,23 @@
           </item>
          </layout>
         </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxXDimensionCircumference">
+          <property name="text">
+           <string>Circumference</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
      </item>
      <item>
       <widget class="QGroupBox" name="groupBoxYDimension">
        <property name="title">
-        <string comment="dimension">Size</string>
+        <string notr="true" comment="dimension">Y</string>
        </property>
        <property name="checkable">
         <bool>true</bool>
@@ -132,6 +171,35 @@
         <bool>true</bool>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QGroupBox" name="groupBoxCustomYDimensionName">
+          <property name="title">
+           <string>Custom name</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <widget class="QLabel" name="label_18">
+             <property name="text">
+              <string>Name:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="lineEditCustomYDimensionName">
+             <property name="clearButtonEnabled">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
         <item>
          <layout class="QFormLayout" name="formLayout_3">
           <property name="fieldGrowthPolicy">
@@ -229,7 +297,7 @@
      <item>
       <widget class="QGroupBox" name="groupBoxWDimension">
        <property name="title">
-        <string comment="dimension">Waist</string>
+        <string notr="true" comment="dimension">W</string>
        </property>
        <property name="checkable">
         <bool>true</bool>
@@ -238,6 +306,35 @@
         <bool>false</bool>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QGroupBox" name="groupBoxCustomWDimensionName">
+          <property name="title">
+           <string>Custom name</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <widget class="QLabel" name="label_19">
+             <property name="text">
+              <string>Name:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="lineEditCustomWDimensionName">
+             <property name="clearButtonEnabled">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
         <item>
          <layout class="QFormLayout" name="formLayout_5">
           <property name="fieldGrowthPolicy">
@@ -319,13 +416,23 @@
           </item>
          </layout>
         </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxWDimensionCircumference">
+          <property name="text">
+           <string>Circumference</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
      </item>
      <item>
       <widget class="QGroupBox" name="groupBoxZDimension">
        <property name="title">
-        <string comment="dimension">Hip</string>
+        <string notr="true" comment="dimension">Z</string>
        </property>
        <property name="checkable">
         <bool>true</bool>
@@ -334,6 +441,35 @@
         <bool>false</bool>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QGroupBox" name="groupBoxCustomZDimensionName">
+          <property name="title">
+           <string>Custom name</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <item>
+            <widget class="QLabel" name="label_20">
+             <property name="text">
+              <string>Name:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="lineEditCustomZDimensionName">
+             <property name="clearButtonEnabled">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
         <item>
          <layout class="QFormLayout" name="formLayout_4">
           <property name="fieldGrowthPolicy">
@@ -415,6 +551,16 @@
           </item>
          </layout>
         </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxZDimensionCircumference">
+          <property name="text">
+           <string>Circumference</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
      </item>
@@ -422,6 +568,12 @@
    </item>
    <item>
     <widget class="QLabel" name="labelError">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="text">
       <string notr="true">_</string>
      </property>

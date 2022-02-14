@@ -34,6 +34,15 @@
 #include "../mapplication.h"
 #include "../vmisc/backport/qoverload.h"
 
+namespace
+{
+void InitDimensionTitle(QGroupBox *group, const MeasurementDimension_p &dimension)
+{
+    SCASSERT(group != nullptr)
+    group->setTitle(QStringLiteral("%1 (%2)").arg(dimension->Name(), dimension->Axis()));
+}
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 DialogSetupMultisize::DialogSetupMultisize(Unit unit, QWidget *parent) :
     QDialog(parent),
@@ -46,7 +55,6 @@ DialogSetupMultisize::DialogSetupMultisize(Unit unit, QWidget *parent) :
     ui->setupUi(this);
 
     ui->labelError->clear();
-    ui->checkBoxYDimensionCircumference->setChecked(m_yDimension->IsCircumference());
 
     InitXDimension();
     InitYDimension();
@@ -157,8 +165,47 @@ DialogSetupMultisize::DialogSetupMultisize(Unit unit, QWidget *parent) :
 
     connect(ui->checkBoxFullCircumference, &QCheckBox::stateChanged,
             this, &DialogSetupMultisize::ShowFullCircumference);
+
+    connect(ui->checkBoxXDimensionCircumference, &QCheckBox::stateChanged,
+            this, &DialogSetupMultisize::XDimensionCircumferenceChanged);
     connect(ui->checkBoxYDimensionCircumference, &QCheckBox::stateChanged,
             this, &DialogSetupMultisize::YDimensionCircumferenceChanged);
+    connect(ui->checkBoxWDimensionCircumference, &QCheckBox::stateChanged,
+            this, &DialogSetupMultisize::WDimensionCircumferenceChanged);
+    connect(ui->checkBoxZDimensionCircumference, &QCheckBox::stateChanged,
+            this, &DialogSetupMultisize::ZDimensionCircumferenceChanged);
+
+    connect(ui->lineEditCustomXDimensionName, &QLineEdit::textChanged, this, [this](const QString &text)
+    {
+        m_xDimension->SetCustomName(text);
+        InitDimensionTitle(ui->groupBoxXDimension, m_xDimension);
+
+        CheckState();
+    });
+
+    connect(ui->lineEditCustomYDimensionName, &QLineEdit::textChanged, this, [this](const QString &text)
+    {
+        m_yDimension->SetCustomName(text);
+        InitDimensionTitle(ui->groupBoxYDimension, m_yDimension);
+
+        CheckState();
+    });
+
+    connect(ui->lineEditCustomWDimensionName, &QLineEdit::textChanged, this, [this](const QString &text)
+    {
+        m_wDimension->SetCustomName(text);
+        InitDimensionTitle(ui->groupBoxWDimension, m_wDimension);
+
+        CheckState();
+    });
+
+    connect(ui->lineEditCustomZDimensionName, &QLineEdit::textChanged, this, [this](const QString &text)
+    {
+        m_zDimension->SetCustomName(text);
+        InitDimensionTitle(ui->groupBoxZDimension, m_zDimension);
+
+        CheckState();
+    });
 
     CheckState();
 }
@@ -176,21 +223,37 @@ auto DialogSetupMultisize::Dimensions() const -> QVector<MeasurementDimension_p>
 
     if (ui->groupBoxXDimension->isChecked())
     {
+        if (not ui->groupBoxCustomXDimensionName->isChecked())
+        {
+            m_xDimension->SetCustomName(QString());
+        }
         dimensions.append(m_xDimension);
     }
 
     if (ui->groupBoxYDimension->isChecked())
     {
+        if (not ui->groupBoxCustomYDimensionName->isChecked())
+        {
+            m_yDimension->SetCustomName(QString());
+        }
         dimensions.append(m_yDimension);
     }
 
     if (ui->groupBoxWDimension->isChecked())
     {
+        if (not ui->groupBoxCustomWDimensionName->isChecked())
+        {
+            m_wDimension->SetCustomName(QString());
+        }
         dimensions.append(m_wDimension);
     }
 
     if (ui->groupBoxZDimension->isChecked())
     {
+        if (not ui->groupBoxCustomZDimensionName->isChecked())
+        {
+            m_zDimension->SetCustomName(QString());
+        }
         dimensions.append(m_zDimension);
     }
 
@@ -201,19 +264,6 @@ auto DialogSetupMultisize::Dimensions() const -> QVector<MeasurementDimension_p>
 auto DialogSetupMultisize::FullCircumference() const -> bool
 {
     return ui->checkBoxFullCircumference->isChecked();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSetupMultisize::changeEvent(QEvent *event)
-{
-    if (event->type() == QEvent::LanguageChange)
-    {
-        // retranslate designer form (single inheritance approach)
-        ui->retranslateUi(this);
-    }
-
-    // remember to call base class implementation
-    QDialog::changeEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -257,12 +307,42 @@ void DialogSetupMultisize::ShowFullCircumference()
         comboBoxBase->blockSignals(false);
     };
 
+    ShowDimensionFullCircumference(ui->doubleSpinBoxXDimensionMinValue, ui->doubleSpinBoxXDimensionMaxValue,
+                                   ui->comboBoxXDimensionStep, ui->comboBoxXDimensionBase, m_xDimension);
     ShowDimensionFullCircumference(ui->doubleSpinBoxYDimensionMinValue, ui->doubleSpinBoxYDimensionMaxValue,
                                    ui->comboBoxYDimensionStep, ui->comboBoxYDimensionBase, m_yDimension);
     ShowDimensionFullCircumference(ui->doubleSpinBoxWDimensionMinValue, ui->doubleSpinBoxWDimensionMaxValue,
                                    ui->comboBoxWDimensionStep, ui->comboBoxWDimensionBase, m_wDimension);
     ShowDimensionFullCircumference(ui->doubleSpinBoxZDimensionMinValue, ui->doubleSpinBoxZDimensionMaxValue,
                                    ui->comboBoxZDimensionStep, ui->comboBoxZDimensionBase, m_zDimension);
+
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSetupMultisize::XDimensionCircumferenceChanged()
+{
+    bool checked = ui->checkBoxXDimensionCircumference->isChecked();
+    m_xDimension->SetCircumference(checked);
+
+    const bool c = m_xDimension->IsCircumference();
+    const QString unitStr = c ? " " + UnitsToStr(m_xDimension->Units()) : QString();
+
+    ui->doubleSpinBoxXDimensionMinValue->setSuffix(unitStr);
+    ui->doubleSpinBoxXDimensionMaxValue->setSuffix(unitStr);
+
+    InitDimension(ui->doubleSpinBoxXDimensionMinValue, ui->doubleSpinBoxXDimensionMaxValue, ui->comboBoxXDimensionStep,
+                  m_xDimension);
+
+    UpdateBase(ui->comboBoxXDimensionBase, m_xDimension);
+
+    ui->comboBoxXDimensionBase->blockSignals(true);
+    ui->comboBoxXDimensionBase->setCurrentIndex(-1);
+    ui->comboBoxXDimensionBase->blockSignals(false);
+
+    bool ok = false;
+    const qreal base = ui->comboBoxXDimensionBase->currentData().toDouble(&ok);
+    m_xDimension->SetBaseValue(ok ? base : -1);
 
     CheckState();
 }
@@ -296,6 +376,62 @@ void DialogSetupMultisize::YDimensionCircumferenceChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSetupMultisize::WDimensionCircumferenceChanged()
+{
+    bool checked = ui->checkBoxWDimensionCircumference->isChecked();
+    m_wDimension->SetCircumference(checked);
+
+    const bool c = m_wDimension->IsCircumference();
+    const QString unitStr = c ? " " + UnitsToStr(m_wDimension->Units()) : QString();
+
+    ui->doubleSpinBoxWDimensionMinValue->setSuffix(unitStr);
+    ui->doubleSpinBoxWDimensionMaxValue->setSuffix(unitStr);
+
+    InitDimension(ui->doubleSpinBoxWDimensionMinValue, ui->doubleSpinBoxWDimensionMaxValue, ui->comboBoxWDimensionStep,
+                  m_wDimension);
+
+    UpdateBase(ui->comboBoxWDimensionBase, m_wDimension);
+
+    ui->comboBoxWDimensionBase->blockSignals(true);
+    ui->comboBoxWDimensionBase->setCurrentIndex(-1);
+    ui->comboBoxWDimensionBase->blockSignals(false);
+
+    bool ok = false;
+    const qreal base = ui->comboBoxWDimensionBase->currentData().toDouble(&ok);
+    m_wDimension->SetBaseValue(ok ? base : -1);
+
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSetupMultisize::ZDimensionCircumferenceChanged()
+{
+    bool checked = ui->checkBoxZDimensionCircumference->isChecked();
+    m_zDimension->SetCircumference(checked);
+
+    const bool c = m_zDimension->IsCircumference();
+    const QString unitStr = c ? " " + UnitsToStr(m_zDimension->Units()) : QString();
+
+    ui->doubleSpinBoxZDimensionMinValue->setSuffix(unitStr);
+    ui->doubleSpinBoxZDimensionMaxValue->setSuffix(unitStr);
+
+    InitDimension(ui->doubleSpinBoxZDimensionMinValue, ui->doubleSpinBoxZDimensionMaxValue, ui->comboBoxZDimensionStep,
+                  m_zDimension);
+
+    UpdateBase(ui->comboBoxZDimensionBase, m_zDimension);
+
+    ui->comboBoxZDimensionBase->blockSignals(true);
+    ui->comboBoxZDimensionBase->setCurrentIndex(-1);
+    ui->comboBoxZDimensionBase->blockSignals(false);
+
+    bool ok = false;
+    const qreal base = ui->comboBoxZDimensionBase->currentData().toDouble(&ok);
+    m_zDimension->SetBaseValue(ok ? base : -1);
+
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSetupMultisize::CheckState()
 {
     ui->labelError->clear();
@@ -307,10 +443,12 @@ void DialogSetupMultisize::CheckState()
 
     int dimensions = 0;
 
-    auto CheckDimension = [this](QGroupBox *group, bool &dimensionValid, int &dimensions,
-                                 const MeasurementDimension_p &dimension)
+    auto CheckDimension = [this](QGroupBox *group, QGroupBox *nameGroup, QLineEdit *lineEdit, bool &dimensionValid,
+            int &dimensions, const MeasurementDimension_p &dimension)
     {
         SCASSERT(group != nullptr)
+        SCASSERT(nameGroup != nullptr)
+        SCASSERT(lineEdit != nullptr)
 
         if (group->isChecked())
         {
@@ -319,15 +457,29 @@ void DialogSetupMultisize::CheckState()
 
             if (ui->labelError->text().isEmpty() && not dimensionValid)
             {
-                ui->labelError->setText(tr("Please, provide correct data for dimensions"));
+                ui->labelError->setText(tr("Please, provide correct data for dimension %1").arg(dimension->Axis()));
+                return;
+            }
+
+            if (nameGroup->isChecked() && lineEdit->text().isEmpty())
+            {
+                if (ui->labelError->text().isEmpty())
+                {
+                    ui->labelError->setText(tr("Please, provide custom name for dimension %1").arg(dimension->Axis()));
+                    return;
+                }
             }
         }
     };
 
-    CheckDimension(ui->groupBoxXDimension, xDimensionValid, dimensions, m_xDimension);
-    CheckDimension(ui->groupBoxYDimension, yDimensionValid, dimensions, m_yDimension);
-    CheckDimension(ui->groupBoxWDimension, wDimensionValid, dimensions, m_wDimension);
-    CheckDimension(ui->groupBoxZDimension, zDimensionValid, dimensions, m_zDimension);
+    CheckDimension(ui->groupBoxXDimension, ui->groupBoxCustomXDimensionName, ui->lineEditCustomXDimensionName,
+                   xDimensionValid, dimensions, m_xDimension);
+    CheckDimension(ui->groupBoxYDimension, ui->groupBoxCustomYDimensionName, ui->lineEditCustomYDimensionName,
+                   yDimensionValid, dimensions, m_yDimension);
+    CheckDimension(ui->groupBoxWDimension, ui->groupBoxCustomWDimensionName, ui->lineEditCustomWDimensionName,
+                   wDimensionValid, dimensions, m_wDimension);
+    CheckDimension(ui->groupBoxZDimension, ui->groupBoxCustomZDimensionName, ui->lineEditCustomZDimensionName,
+                   zDimensionValid, dimensions, m_zDimension);
 
     if (ui->labelError->text().isEmpty() && dimensions == 0)
     {
@@ -431,6 +583,7 @@ void DialogSetupMultisize::InitDimension(QDoubleSpinBox *doubleSpinBoxMinValue, 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSetupMultisize::InitXDimension()
 {
+    InitDimensionTitle(ui->groupBoxXDimension, m_xDimension);
     InitDimension(ui->doubleSpinBoxXDimensionMinValue, ui->doubleSpinBoxXDimensionMaxValue, ui->comboBoxXDimensionStep,
                   m_xDimension);
 }
@@ -438,6 +591,7 @@ void DialogSetupMultisize::InitXDimension()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSetupMultisize::InitYDimension()
 {
+    InitDimensionTitle(ui->groupBoxYDimension,  m_yDimension);
     InitDimension(ui->doubleSpinBoxYDimensionMinValue, ui->doubleSpinBoxYDimensionMaxValue, ui->comboBoxYDimensionStep,
                   m_yDimension);
 }
@@ -445,6 +599,7 @@ void DialogSetupMultisize::InitYDimension()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSetupMultisize::InitWDimension()
 {
+    InitDimensionTitle(ui->groupBoxWDimension, m_wDimension);
     InitDimension(ui->doubleSpinBoxWDimensionMinValue, ui->doubleSpinBoxWDimensionMaxValue, ui->comboBoxWDimensionStep,
                   m_wDimension);
 }
@@ -452,6 +607,7 @@ void DialogSetupMultisize::InitWDimension()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSetupMultisize::InitZDimension()
 {
+    InitDimensionTitle(ui->groupBoxZDimension, m_zDimension);
     InitDimension(ui->doubleSpinBoxZDimensionMinValue, ui->doubleSpinBoxZDimensionMaxValue, ui->comboBoxZDimensionStep,
                   m_zDimension);
 }

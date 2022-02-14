@@ -130,6 +130,7 @@ public:
     auto Restriction(qreal base, qreal base2=0) const -> VDimensionRestriction;
 
     void SetDimensionLabels(const QMap<MeasurementDimension, DimesionLabels> &labels);
+    void SetDimensionCustomNames(const QMap<MeasurementDimension, QString> &names);
 
     static const QString TagVST;
     static const QString TagVIT;
@@ -171,6 +172,7 @@ public:
     static const QString AttrFullCircumference;
     static const QString AttrLabel;
     static const QString AttrDimension;
+    static const QString AttrCustomName;
 
     static const QString GenderMale;
     static const QString GenderFemale;

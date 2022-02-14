@@ -36,6 +36,7 @@
 #include "dialogs/dialogrestrictdimension.h"
 #include "dialogs/dialogdimensionlabels.h"
 #include "dialogs/dialogmeasurementscsvcolumns.h"
+#include "dialogs/dialogdimensioncustomnames.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/pmsystems.h"
@@ -2391,6 +2392,23 @@ void TMainWindow::EditDimensionLabels()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::DimensionCustomNames()
+{
+    const QMap<MeasurementDimension, MeasurementDimension_p > dimensions = m->Dimensions();
+
+    DialogDimensionCustomNames dialog(dimensions, this);
+    if (dialog.exec() == QDialog::Rejected)
+    {
+        return;
+    }
+
+    m->SetDimensionCustomNames(dialog.CustomNames());
+
+    MeasurementsWereSaved(false);
+    InitDimensionControls();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SetDefaultGUILanguage()
 {
     if (MApplication::VApp()->IsAppInGUIMode())
@@ -2716,6 +2734,10 @@ void TMainWindow::InitMenu()
         ui->actionDimensionLabels->setEnabled(true);
         connect(ui->actionDimensionLabels, &QAction::triggered, this, &TMainWindow::EditDimensionLabels);
 
+        ui->actionDimensionCustomNames->setVisible(true);
+        ui->actionDimensionCustomNames->setEnabled(true);
+        connect(ui->actionDimensionCustomNames, &QAction::triggered, this, &TMainWindow::DimensionCustomNames);
+
         // File
         ui->actionExportToIndividual->setVisible(true);
         ui->actionExportToIndividual->setEnabled(true);
@@ -2738,10 +2760,8 @@ void TMainWindow::InitDimensionsBaseValue()
         if (dimensions.size() > index)
         {
             MeasurementDimension_p dimension = dimensions.at(index);
-            name->setText(VAbstartMeasurementDimension::DimensionName(dimension->Type())+QChar(':'));
-            name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension->Type(),
-                                                                            dimension->IsCircumference(),
-                                                                            m->IsFullCircumference()));
+            name->setText(dimension->Name()+QChar(':'));
+            name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension, m->IsFullCircumference()));
 
             DimesionLabels labels = dimension->Labels();
 
@@ -2872,19 +2892,17 @@ void TMainWindow::InitDimensionControls()
     {
         if (dimensions.size() > index)
         {
-            MeasurementDimension_p dimension = dimensions.at(index);
+            const MeasurementDimension_p& dimension = dimensions.at(index);
 
             if (name == nullptr)
             {
-                name = new QLabel(VAbstartMeasurementDimension::DimensionName(dimension->Type())+QChar(':'));
+                name = new QLabel(dimension->Name()+QChar(':'));
             }
             else
             {
-                name->setText(VAbstartMeasurementDimension::DimensionName(dimension->Type())+QChar(':'));
+                name->setText(dimension->Name()+QChar(':'));
             }
-            name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension->Type(),
-                                                                            dimension->IsCircumference(),
-                                                                            m->IsFullCircumference()));
+            name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension, m->IsFullCircumference()));
 
             if (control == nullptr)
             {
@@ -2912,10 +2930,8 @@ void TMainWindow::InitDimesionShifts()
         {
             MeasurementDimension_p dimension = dimensions.at(index);
 
-            name->setText(tr("Shift (%1):").arg(VAbstartMeasurementDimension::DimensionName(dimension->Type())));
-            name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension->Type(),
-                                                                            dimension->IsCircumference(),
-                                                                            m->IsFullCircumference()));
+            name->setText(tr("Shift (%1):").arg(dimension->Name()));
+            name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension, m->IsFullCircumference()));
         }
     };
 
@@ -4649,7 +4665,7 @@ void TMainWindow::RetranslateTableHeaders()
         {
             const MeasurementDimension_p& dimension = dimensions.at(0);
             ui->tableWidget->horizontalHeaderItem(ColumnShiftA)->setText(
-                tr("%1 shift").arg(VAbstartMeasurementDimension::DimensionName(dimension->Type())));
+                tr("%1 shift").arg(dimension->Name()));
         }
 
         if (dimensions.size() < 2)
@@ -4660,7 +4676,7 @@ void TMainWindow::RetranslateTableHeaders()
         {
             const MeasurementDimension_p &dimension = dimensions.at(1);
             ui->tableWidget->horizontalHeaderItem(ColumnShiftB)->setText(
-                tr("%1 shift").arg(VAbstartMeasurementDimension::DimensionName(dimension->Type())));
+                tr("%1 shift").arg(dimension->Name()));
         }
 
         if (dimensions.size() < 3)
@@ -4671,7 +4687,7 @@ void TMainWindow::RetranslateTableHeaders()
         {
             const MeasurementDimension_p &dimension = dimensions.at(2);
             ui->tableWidget->horizontalHeaderItem(ColumnShiftC)->setText(
-                tr("%1 shift").arg(VAbstartMeasurementDimension::DimensionName(dimension->Type())));
+                tr("%1 shift").arg(dimension->Name()));
         }
     }
 }

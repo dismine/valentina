@@ -145,6 +145,7 @@ private slots:
     void RestrictThirdDimesion();
 
     void EditDimensionLabels();
+    void DimensionCustomNames();
 
     void SetDefaultGUILanguage();
 
