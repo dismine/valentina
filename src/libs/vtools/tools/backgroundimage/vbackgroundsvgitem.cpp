@@ -92,12 +92,11 @@ auto VBackgroundSVGItem::Renderer() const -> QSvgRenderer *
 {
     if (Stale())
     {
-        m_renderer->load(VBackgroundPatternImage::brokenImage);
-
         VBackgroundPatternImage image = Image();
         if (not image.IsValid())
         {
             MakeFresh();
+            m_renderer->load(VBackgroundPatternImage::brokenImage);
             return m_renderer;
         }
 
