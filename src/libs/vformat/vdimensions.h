@@ -268,8 +268,6 @@ public:
 
 private:
     Q_DISABLE_COPY_MOVE(VYMeasurementDimension) // NOLINT
-
-    bool m_circumference{true};
 };
 
 //---------------------------------------------------------------------------------------------------------------------
