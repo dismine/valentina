@@ -2205,6 +2205,62 @@
         <source>No data for the waist dimension.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Dimension X</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dimension Y</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dimension Z</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dimension W</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dimension X label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dimension Y label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dimension Z label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dimension W label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the X dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the Y dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the Z dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the W dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -7079,6 +7135,46 @@ Apply settings anyway?</source>
         <source>Invalid segment!</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Dimension X</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dimension Y</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dimension Z</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dimension W</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dimension X label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dimension Y label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dimension Z label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dimension W label</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSelectLanguage</name>
@@ -11416,6 +11512,22 @@ This option will take an affect after restart.</source>
     <message>
         <source>Do you really want to delete?</source>
         <translation>Do you really want to delete?</translation>
+    </message>
+    <message>
+        <source>No data for the X dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the Y dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the Z dimension.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No data for the W dimension.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
