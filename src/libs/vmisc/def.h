@@ -409,14 +409,26 @@ extern const QString warning_F;
 extern const QStringList builInFunctions;
 
 // Placeholders
-extern const QString pl_size;
 extern const QString pl_height;
-extern const QString pl_hip;
+extern const QString pl_size;
 extern const QString pl_waist;
-extern const QString pl_sizeLabel;
+extern const QString pl_hip;
+
 extern const QString pl_heightLabel;
+extern const QString pl_sizeLabel;
 extern const QString pl_hipLabel;
 extern const QString pl_waistLabel;
+
+extern const QString pl_dimensionX;
+extern const QString pl_dimensionY;
+extern const QString pl_dimensionW;
+extern const QString pl_dimensionZ;
+
+extern const QString pl_dimensionXLabel;
+extern const QString pl_dimensionYLabel;
+extern const QString pl_dimensionWLabel;
+extern const QString pl_dimensionZLabel;
+
 extern const QString pl_date;
 extern const QString pl_time;
 extern const QString pl_birthDate;

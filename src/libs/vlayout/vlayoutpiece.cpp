@@ -439,28 +439,36 @@ auto PrepareGradationPlaceholders(const VContainer *data) -> QMap<QString, QStri
 
     QString heightValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHeight());
     placeholders.insert(pl_height, heightValue);
+    placeholders.insert(pl_dimensionX, heightValue);
 
     QString sizeValue = QString::number(VAbstractValApplication::VApp()->GetDimensionSize());
     placeholders.insert(pl_size, sizeValue);
+    placeholders.insert(pl_dimensionY, sizeValue);
 
     QString hipValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHip());
     placeholders.insert(pl_hip, hipValue);
+    placeholders.insert(pl_dimensionZ, hipValue);
 
     QString waistValue = QString::number(VAbstractValApplication::VApp()->GetDimensionWaist());
     placeholders.insert(pl_waist, waistValue);
+    placeholders.insert(pl_dimensionW, waistValue);
 
     {
         QString label = VAbstractValApplication::VApp()->GetDimensionHeightLabel();
         placeholders.insert(pl_heightLabel, not label.isEmpty() ? label : heightValue);
+        placeholders.insert(pl_dimensionXLabel, not label.isEmpty() ? label : heightValue);
 
         label = VAbstractValApplication::VApp()->GetDimensionSizeLabel();
         placeholders.insert(pl_sizeLabel, not label.isEmpty() ? label : sizeValue);
+        placeholders.insert(pl_dimensionYLabel, not label.isEmpty() ? label : heightValue);
 
         label = VAbstractValApplication::VApp()->GetDimensionHipLabel();
         placeholders.insert(pl_hipLabel, not label.isEmpty() ? label : hipValue);
+        placeholders.insert(pl_dimensionZLabel, not label.isEmpty() ? label : heightValue);
 
         label = VAbstractValApplication::VApp()->GetDimensionWaistLabel();
         placeholders.insert(pl_waistLabel, not label.isEmpty() ? label : waistValue);
+        placeholders.insert(pl_dimensionWLabel, not label.isEmpty() ? label : heightValue);
     }
 
     {
@@ -485,8 +493,9 @@ auto ReplacePlaceholders(const QMap<QString, QString> &placeholders, QString lin
     {
         if (line.contains(per+placeholder+per) && placeholders.value(placeholder) == QChar('0'))
         {
-            VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+            VAbstractApplication::VApp()->IsPedantic()
+                    ? throw VException(errorMsg)
+                    : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         }
     };
 
@@ -494,6 +503,11 @@ auto ReplacePlaceholders(const QMap<QString, QString> &placeholders, QString lin
     TestDimension(pl_size, QObject::tr("No data for the size dimension."));
     TestDimension(pl_hip, QObject::tr("No data for the hip dimension."));
     TestDimension(pl_waist, QObject::tr("No data for the waist dimension."));
+
+    TestDimension(pl_dimensionX, QObject::tr("No data for the X dimension."));
+    TestDimension(pl_dimensionY, QObject::tr("No data for the Y dimension."));
+    TestDimension(pl_dimensionZ, QObject::tr("No data for the Z dimension."));
+    TestDimension(pl_dimensionW, QObject::tr("No data for the W dimension."));
 
     auto i = placeholders.constBegin();
     while (i != placeholders.constEnd())

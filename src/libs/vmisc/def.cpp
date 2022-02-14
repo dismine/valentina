@@ -134,14 +134,26 @@ const QStringList builInFunctions
     warning_F
 };
 
-const QString pl_size          = QStringLiteral("size");
-const QString pl_height        = QStringLiteral("height");
-const QString pl_hip           = QStringLiteral("hip");
-const QString pl_waist         = QStringLiteral("waist");
-const QString pl_sizeLabel     = QStringLiteral("sizeLabel");
-const QString pl_heightLabel   = QStringLiteral("heightLabel");
-const QString pl_hipLabel      = QStringLiteral("hipLabel");
-const QString pl_waistLabel    = QStringLiteral("waistLabel");
+const QString pl_size   = QStringLiteral("size");
+const QString pl_height = QStringLiteral("height");
+const QString pl_hip    = QStringLiteral("hip");
+const QString pl_waist  = QStringLiteral("waist");
+
+const QString pl_sizeLabel   = QStringLiteral("sizeLabel");
+const QString pl_heightLabel = QStringLiteral("heightLabel");
+const QString pl_hipLabel    = QStringLiteral("hipLabel");
+const QString pl_waistLabel  = QStringLiteral("waistLabel");
+
+const QString pl_dimensionX = QStringLiteral("dimensionX");
+const QString pl_dimensionY = QStringLiteral("dimensionY");
+const QString pl_dimensionW = QStringLiteral("dimensionW");
+const QString pl_dimensionZ = QStringLiteral("dimensionZ");
+
+const QString pl_dimensionXLabel = QStringLiteral("dimensionXLabel");
+const QString pl_dimensionYLabel = QStringLiteral("dimensionYLabel");
+const QString pl_dimensionWLabel = QStringLiteral("dimensionWLabel");
+const QString pl_dimensionZLabel = QStringLiteral("dimensionZLabel");
+
 const QString pl_date          = QStringLiteral("date");
 const QString pl_time          = QStringLiteral("time");
 const QString pl_birthDate     = QStringLiteral("birthDate");

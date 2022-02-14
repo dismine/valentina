@@ -537,31 +537,43 @@ void DialogEditLabel::InitPlaceholders()
 
     QString heightValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHeight());
     m_placeholders.insert(pl_height, qMakePair(tr("Height", "dimension"), heightValue));
+    m_placeholders.insert(pl_dimensionX, qMakePair(tr("Dimension X", "dimension"), heightValue));
 
     QString sizeValue = QString::number(VAbstractValApplication::VApp()->GetDimensionSize());
     m_placeholders.insert(pl_size, qMakePair(tr("Size", "dimension"), sizeValue));
+    m_placeholders.insert(pl_dimensionY, qMakePair(tr("Dimension Y", "dimension"), sizeValue));
 
     QString hipValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHip());
     m_placeholders.insert(pl_hip, qMakePair(tr("Hip", "dimension"), hipValue));
+    m_placeholders.insert(pl_dimensionZ, qMakePair(tr("Dimension Z", "dimension"), hipValue));
 
     QString waistValue = QString::number(VAbstractValApplication::VApp()->GetDimensionWaist());
     m_placeholders.insert(pl_waist, qMakePair(tr("Waist", "dimension"), waistValue));
+    m_placeholders.insert(pl_dimensionW, qMakePair(tr("Dimension W", "dimension"), waistValue));
 
     {
         QString label = VAbstractValApplication::VApp()->GetDimensionHeightLabel();
         m_placeholders.insert(pl_heightLabel, qMakePair(tr("Height label", "dimension"),
                                                         not label.isEmpty() ? label : heightValue));
+        m_placeholders.insert(pl_dimensionX, qMakePair(tr("Dimension X label", "dimension"),
+                                                        not label.isEmpty() ? label : heightValue));
 
         label = VAbstractValApplication::VApp()->GetDimensionSizeLabel();
         m_placeholders.insert(pl_sizeLabel, qMakePair(tr("Size label", "dimension"),
+                                                      not label.isEmpty() ? label : sizeValue));
+        m_placeholders.insert(pl_dimensionY, qMakePair(tr("Dimension Y label", "dimension"),
                                                       not label.isEmpty() ? label : sizeValue));
 
         label = VAbstractValApplication::VApp()->GetDimensionHipLabel();
         m_placeholders.insert(pl_hipLabel, qMakePair(tr("Hip label", "dimension"),
                                                      not label.isEmpty() ? label : hipValue));
+        m_placeholders.insert(pl_dimensionZ, qMakePair(tr("Dimension Z label", "dimension"),
+                                                       not label.isEmpty() ? label : hipValue));
 
         label = VAbstractValApplication::VApp()->GetDimensionWaistLabel();
         m_placeholders.insert(pl_waistLabel, qMakePair(tr("Waist label", "dimension"),
+                                                       not label.isEmpty() ? label : waistValue));
+        m_placeholders.insert(pl_dimensionW, qMakePair(tr("Dimension W label", "dimension"),
                                                        not label.isEmpty() ? label : waistValue));
     }
 
@@ -665,6 +677,11 @@ QString DialogEditLabel::ReplacePlaceholders(QString line) const
     TestDimension(pl_size, tr("No data for the size dimension."));
     TestDimension(pl_hip, tr("No data for the hip dimension."));
     TestDimension(pl_waist, tr("No data for the waist dimension."));
+
+    TestDimension(pl_dimensionX, tr("No data for the X dimension."));
+    TestDimension(pl_dimensionY, tr("No data for the Y dimension."));
+    TestDimension(pl_dimensionZ, tr("No data for the Z dimension."));
+    TestDimension(pl_dimensionW, tr("No data for the W dimension."));
 
     auto i = m_placeholders.constBegin();
     while (i != m_placeholders.constEnd())
