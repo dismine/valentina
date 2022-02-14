@@ -1278,6 +1278,21 @@
     </message>
 </context>
 <context>
+    <name>DialogDimensionCustomNames</name>
+    <message>
+        <source>Dimension custom names</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogDimensionLabels</name>
     <message>
         <source>Dimension labels</source>
@@ -5758,7 +5773,7 @@ Apply settings anyway?</source>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation type="unfinished">高度</translation>
+        <translation type="obsolete">高度</translation>
     </message>
     <message>
         <source>Min value:</source>
@@ -5795,24 +5810,10 @@ Apply settings anyway?</source>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation type="unfinished">尺码</translation>
+        <translation type="obsolete">尺码</translation>
     </message>
     <message>
         <source>Circumference</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Waist</source>
-        <comment>dimension</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hip</source>
-        <comment>dimension</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Please, provide correct data for dimensions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5825,6 +5826,22 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please, provide correct data for dimension %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please, provide custom name for dimension %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8813,6 +8830,10 @@ This option will take an affect after restart.</source>
         <source>Pixels</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Line width:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PuzzlePreferencesPathPage</name>
@@ -10343,6 +10364,10 @@ Do you want to save your changes?</source>
         <source>Add separator</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Dimension custom names</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabGrainline</name>
@@ -11155,12 +11180,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">尺码</translation>
-    </message>
-    <message>
-        <source>Chest circumference</source>
-        <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">尺码</translation>
     </message>
     <message>
         <source>Waist full circumference</source>
@@ -13369,6 +13389,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unable to get sheet page settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show tile number</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

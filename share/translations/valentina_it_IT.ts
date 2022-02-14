@@ -1821,6 +1821,21 @@
     </message>
 </context>
 <context>
+    <name>DialogDimensionCustomNames</name>
+    <message>
+        <source>Dimension custom names</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogDimensionLabels</name>
     <message>
         <source>Dimension labels</source>
@@ -7087,7 +7102,7 @@ Applicare la configurazione comunque?</translation>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation>Altezza</translation>
+        <translation type="vanished">Altezza</translation>
     </message>
     <message>
         <source>Min value:</source>
@@ -7124,24 +7139,10 @@ Applicare la configurazione comunque?</translation>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation>Taglia</translation>
+        <translation type="vanished">Taglia</translation>
     </message>
     <message>
         <source>Circumference</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Waist</source>
-        <comment>dimension</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hip</source>
-        <comment>dimension</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Please, provide correct data for dimensions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7154,6 +7155,22 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Nome:</translation>
+    </message>
+    <message>
+        <source>Please, provide correct data for dimension %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please, provide custom name for dimension %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10863,6 +10880,10 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
         <source>Pixels</source>
         <translation>Pixel</translation>
     </message>
+    <message>
+        <source>Line width:</source>
+        <translation type="unfinished">Spessore linea:</translation>
+    </message>
 </context>
 <context>
     <name>PuzzlePreferencesPathPage</name>
@@ -12717,6 +12738,10 @@ Vuoi salvare le tue modifiche?</translation>
         <source>Add separator</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Dimension custom names</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabGrainline</name>
@@ -13600,12 +13625,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Taglia</translation>
-    </message>
-    <message>
-        <source>Chest circumference</source>
-        <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Taglia</translation>
     </message>
     <message>
         <source>Waist full circumference</source>
@@ -15991,6 +16011,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unable to get sheet page settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show tile number</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1829,6 +1829,21 @@
     </message>
 </context>
 <context>
+    <name>DialogDimensionCustomNames</name>
+    <message>
+        <source>Dimension custom names</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Nombre</translation>
+    </message>
+    <message>
+        <source>Custom Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogDimensionLabels</name>
     <message>
         <source>Dimension labels</source>
@@ -7094,7 +7109,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation>Altura</translation>
+        <translation type="vanished">Altura</translation>
     </message>
     <message>
         <source>Min value:</source>
@@ -7131,7 +7146,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation>Talla</translation>
+        <translation type="vanished">Talla</translation>
     </message>
     <message>
         <source>Circumference</source>
@@ -7140,16 +7155,16 @@ Aplicar características de todos modos?</translation>
     <message>
         <source>Waist</source>
         <comment>dimension</comment>
-        <translation>Cintura</translation>
+        <translation type="vanished">Cintura</translation>
     </message>
     <message>
         <source>Hip</source>
         <comment>dimension</comment>
-        <translation>Cadera</translation>
+        <translation type="vanished">Cadera</translation>
     </message>
     <message>
         <source>Please, provide correct data for dimensions</source>
-        <translation>Por favor, proporcione los datos correctos para las dimensiones</translation>
+        <translation type="vanished">Por favor, proporcione los datos correctos para las dimensiones</translation>
     </message>
     <message>
         <source>Please, select at least one dimension</source>
@@ -7162,6 +7177,22 @@ Aplicar características de todos modos?</translation>
     <message>
         <source>Ready</source>
         <translation>Listo</translation>
+    </message>
+    <message>
+        <source>Custom name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Nombre:</translation>
+    </message>
+    <message>
+        <source>Please, provide correct data for dimension %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please, provide custom name for dimension %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10599,7 +10630,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>Opacity:</source>
-        <translation type="unfinished">Opacidad:</translation>
+        <translation>Opacidad:</translation>
     </message>
     <message>
         <source>Opacity value by default</source>
@@ -10874,6 +10905,10 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     <message>
         <source>Pixels</source>
         <translation>Píxeles</translation>
+    </message>
+    <message>
+        <source>Line width:</source>
+        <translation type="unfinished">Ancho línea:</translation>
     </message>
 </context>
 <context>
@@ -12729,6 +12764,10 @@ Quieres guardar los cambios?</translation>
         <source>Add separator</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Dimension custom names</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabGrainline</name>
@@ -13612,12 +13651,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Talla</translation>
-    </message>
-    <message>
-        <source>Chest circumference</source>
-        <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Talla</translation>
     </message>
     <message>
         <source>Waist full circumference</source>
@@ -16080,6 +16114,10 @@ Do you want to save your changes?</source>
         <source>Unable to get sheet page settings</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Show tile number</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPTileFactory</name>
@@ -17600,7 +17638,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Opacity:</source>
-        <translation type="unfinished">Opacidad:</translation>
+        <translation>Opacidad:</translation>
     </message>
 </context>
 <context>

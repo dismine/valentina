@@ -1829,6 +1829,21 @@
     </message>
 </context>
 <context>
+    <name>DialogDimensionCustomNames</name>
+    <message>
+        <source>Dimension custom names</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Naam</translation>
+    </message>
+    <message>
+        <source>Custom Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogDimensionLabels</name>
     <message>
         <source>Dimension labels</source>
@@ -7095,7 +7110,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation>Hoogte</translation>
+        <translation type="vanished">Hoogte</translation>
     </message>
     <message>
         <source>Min value:</source>
@@ -7132,7 +7147,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation>Maat</translation>
+        <translation type="vanished">Maat</translation>
     </message>
     <message>
         <source>Circumference</source>
@@ -7141,16 +7156,16 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Waist</source>
         <comment>dimension</comment>
-        <translation>Taille</translation>
+        <translation type="vanished">Taille</translation>
     </message>
     <message>
         <source>Hip</source>
         <comment>dimension</comment>
-        <translation>Heup</translation>
+        <translation type="vanished">Heup</translation>
     </message>
     <message>
         <source>Please, provide correct data for dimensions</source>
-        <translation>Gelieve de juiste gegevens aan te bieden voor de kolom</translation>
+        <translation type="vanished">Gelieve de juiste gegevens aan te bieden voor de kolom</translation>
     </message>
     <message>
         <source>Please, select at least one dimension</source>
@@ -7163,6 +7178,22 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Ready</source>
         <translation>Klaar</translation>
+    </message>
+    <message>
+        <source>Custom name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Naam:</translation>
+    </message>
+    <message>
+        <source>Please, provide correct data for dimension %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please, provide custom name for dimension %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10598,7 +10629,7 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <source>Opacity:</source>
-        <translation type="unfinished">Doorzichtigheid:</translation>
+        <translation>Doorzichtigheid:</translation>
     </message>
     <message>
         <source>Opacity value by default</source>
@@ -10873,6 +10904,10 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <source>Pixels</source>
         <translation>Pixels</translation>
+    </message>
+    <message>
+        <source>Line width:</source>
+        <translation type="unfinished">Lijnbreedte:</translation>
     </message>
 </context>
 <context>
@@ -12728,6 +12763,10 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Add separator</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Dimension custom names</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabGrainline</name>
@@ -13611,12 +13650,12 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Maat</translation>
+        <translation type="vanished">Maat</translation>
     </message>
     <message>
         <source>Chest circumference</source>
         <comment>dimension</comment>
-        <translation>Borstomtrek</translation>
+        <translation type="vanished">Borstomtrek</translation>
     </message>
     <message>
         <source>Waist full circumference</source>
@@ -16079,6 +16118,10 @@ Do you want to save your changes?</source>
         <source>Unable to get sheet page settings</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Show tile number</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPTileFactory</name>
@@ -17599,7 +17642,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Opacity:</source>
-        <translation type="unfinished">Doorzichtigheid:</translation>
+        <translation>Doorzichtigheid:</translation>
     </message>
 </context>
 <context>

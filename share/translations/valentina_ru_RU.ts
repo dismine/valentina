@@ -1829,6 +1829,21 @@
     </message>
 </context>
 <context>
+    <name>DialogDimensionCustomNames</name>
+    <message>
+        <source>Dimension custom names</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogDimensionLabels</name>
     <message>
         <source>Dimension labels</source>
@@ -7097,7 +7112,7 @@ Apply settings anyway?</source>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation>Рост</translation>
+        <translation type="vanished">Рост</translation>
     </message>
     <message>
         <source>Min value:</source>
@@ -7134,7 +7149,7 @@ Apply settings anyway?</source>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation>Размер</translation>
+        <translation type="vanished">Размер</translation>
     </message>
     <message>
         <source>Circumference</source>
@@ -7143,16 +7158,16 @@ Apply settings anyway?</source>
     <message>
         <source>Waist</source>
         <comment>dimension</comment>
-        <translation>Талия</translation>
+        <translation type="vanished">Талия</translation>
     </message>
     <message>
         <source>Hip</source>
         <comment>dimension</comment>
-        <translation>Бёдра</translation>
+        <translation type="vanished">Бёдра</translation>
     </message>
     <message>
         <source>Please, provide correct data for dimensions</source>
-        <translation>Пожалуйста, укажите правильные данные для измерений</translation>
+        <translation type="vanished">Пожалуйста, укажите правильные данные для измерений</translation>
     </message>
     <message>
         <source>Please, select at least one dimension</source>
@@ -7165,6 +7180,22 @@ Apply settings anyway?</source>
     <message>
         <source>Ready</source>
         <translation>Готово</translation>
+    </message>
+    <message>
+        <source>Custom name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please, provide correct data for dimension %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please, provide custom name for dimension %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10597,11 +10628,11 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Background image</source>
-        <translation type="unfinished">Фоновое изображение</translation>
+        <translation>Фоновое изображение</translation>
     </message>
     <message>
         <source>Opacity:</source>
-        <translation type="unfinished">Непрозрачность:</translation>
+        <translation>Непрозрачность:</translation>
     </message>
     <message>
         <source>Opacity value by default</source>
@@ -10876,6 +10907,10 @@ This option will take an affect after restart.</source>
     <message>
         <source>Pixels</source>
         <translation>Пиксели</translation>
+    </message>
+    <message>
+        <source>Line width:</source>
+        <translation type="unfinished">Ширина линии:</translation>
     </message>
 </context>
 <context>
@@ -12731,6 +12766,10 @@ Do you want to save your changes?</source>
         <source>Add separator</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Dimension custom names</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabGrainline</name>
@@ -13614,12 +13653,12 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Size</source>
-        <translation>Размер</translation>
+        <translation type="vanished">Размер</translation>
     </message>
     <message>
         <source>Chest circumference</source>
         <comment>dimension</comment>
-        <translation>Обхват груди</translation>
+        <translation type="vanished">Обхват груди</translation>
     </message>
     <message>
         <source>Waist full circumference</source>
@@ -16083,6 +16122,10 @@ Do you want to save your changes?</source>
         <source>Unable to get sheet page settings</source>
         <translation>Невозможно получить настройки страницы листа</translation>
     </message>
+    <message>
+        <source>Show tile number</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPTileFactory</name>
@@ -17604,7 +17647,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Opacity:</source>
-        <translation type="unfinished">Непрозрачность:</translation>
+        <translation>Непрозрачность:</translation>
     </message>
 </context>
 <context>

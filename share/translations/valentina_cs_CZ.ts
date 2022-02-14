@@ -1829,6 +1829,21 @@
     </message>
 </context>
 <context>
+    <name>DialogDimensionCustomNames</name>
+    <message>
+        <source>Dimension custom names</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Název</translation>
+    </message>
+    <message>
+        <source>Custom Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogDimensionLabels</name>
     <message>
         <source>Dimension labels</source>
@@ -7097,7 +7112,7 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Height</source>
         <comment>dimension</comment>
-        <translation>Výška</translation>
+        <translation type="vanished">Výška</translation>
     </message>
     <message>
         <source>Min value:</source>
@@ -7134,7 +7149,7 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Size</source>
         <comment>dimension</comment>
-        <translation>Velikost</translation>
+        <translation type="vanished">Velikost</translation>
     </message>
     <message>
         <source>Circumference</source>
@@ -7143,16 +7158,12 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Waist</source>
         <comment>dimension</comment>
-        <translation>Pas</translation>
+        <translation type="vanished">Pas</translation>
     </message>
     <message>
         <source>Hip</source>
         <comment>dimension</comment>
-        <translation>Kyčel</translation>
-    </message>
-    <message>
-        <source>Please, provide correct data for dimensions</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Kyčel</translation>
     </message>
     <message>
         <source>Please, select at least one dimension</source>
@@ -7165,6 +7176,22 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Ready</source>
         <translation>Připraven</translation>
+    </message>
+    <message>
+        <source>Custom name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Název:</translation>
+    </message>
+    <message>
+        <source>Please, provide correct data for dimension %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please, provide custom name for dimension %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10602,7 +10629,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <source>Opacity:</source>
-        <translation type="unfinished">Neprůhlednost:</translation>
+        <translation>Neprůhlednost:</translation>
     </message>
     <message>
         <source>Opacity value by default</source>
@@ -10877,6 +10904,10 @@ Tato volba se projeví po opětovném spuštění.</translation>
     <message>
         <source>Pixels</source>
         <translation>Pixely</translation>
+    </message>
+    <message>
+        <source>Line width:</source>
+        <translation type="unfinished">Šířka čáry:</translation>
     </message>
 </context>
 <context>
@@ -12732,6 +12763,10 @@ Chcete uložit změny?</translation>
         <source>Add separator</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Dimension custom names</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabGrainline</name>
@@ -13615,12 +13650,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Velikost</translation>
-    </message>
-    <message>
-        <source>Chest circumference</source>
-        <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Velikost</translation>
     </message>
     <message>
         <source>Waist full circumference</source>
@@ -16083,6 +16113,10 @@ Do you want to save your changes?</source>
         <source>Unable to get sheet page settings</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Show tile number</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPTileFactory</name>
@@ -17603,7 +17637,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Opacity:</source>
-        <translation type="unfinished">Neprůhlednost:</translation>
+        <translation>Neprůhlednost:</translation>
     </message>
 </context>
 <context>
