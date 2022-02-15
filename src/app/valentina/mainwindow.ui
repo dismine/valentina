@@ -2917,6 +2917,9 @@
    <property name="text">
     <string>Final measurements</string>
    </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+I</string>
+   </property>
   </action>
   <action name="actionExportFinalMeasurementsToCSV">
    <property name="enabled">
