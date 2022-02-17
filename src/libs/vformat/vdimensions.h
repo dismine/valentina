@@ -80,7 +80,7 @@ public:
 
     auto Error() const -> QString;
 
-    auto Units() const -> Unit;
+    auto Units() const -> Unit; // cppcheck-suppress functionStatic
 
     auto IsCircumference() const -> bool;
     void SetCircumference(bool circumference);
@@ -110,7 +110,7 @@ protected:
     auto IsRangeValid() -> bool;
     auto IsStepValid() -> bool;
     auto IsBaseValid() -> bool;
-    auto IsUnitsValid() const -> bool;
+    auto IsUnitsValid() const -> bool;  // cppcheck-suppress functionStatic
 
 private:
     Q_DISABLE_COPY_MOVE(VAbstartMeasurementDimension) // NOLINT
