@@ -3249,10 +3249,11 @@ void TMainWindow::RefreshTable(bool freshCall)
         }
         else if (meash->GetType() == VarType::MeasurementSeparator)
         {
-            QTableWidgetItem *item = AddCell(VAbstractApplication::VApp()->TrVars()->MToUser(meash->GetName()),
-                                             currentRow, ColumnName, Qt::AlignVCenter); // name
+            QTableWidgetItem *item = AddSeparatorCell(
+                        VAbstractApplication::VApp()->TrVars()->MToUser(meash->GetName()), currentRow, ColumnName,
+                        Qt::AlignVCenter); // name
             item->setData(Qt::UserRole, meash->GetName());
-            AddSeparatorCell(meash->GetDescription(), currentRow, ColumnFullName, Qt::AlignVCenter); // description
+            AddCell(meash->GetDescription(), currentRow, ColumnFullName, Qt::AlignVCenter); // description
 
             if (mType == MeasurementsType::Individual)
             {
