@@ -12,7 +12,7 @@
 
 #include <iostream>
 #include <iomanip>
-#include <memory>
+#include "make_unique.h"
 #include "drw_dbg.h"
 
 DRW_dbg *DRW_dbg::instance{nullptr};

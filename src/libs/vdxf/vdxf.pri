@@ -21,6 +21,7 @@ SOURCES += \
 
 HEADERS += \
     $$PWD/libdxfrw/drw_reserve.h \
+    $$PWD/libdxfrw/intern/make_unique.h \
     $$PWD/stable.h \
     $$PWD/vdxfengine.h \
     $$PWD/vdxfpaintdevice.h \
