@@ -22,6 +22,10 @@
 #include <QtGlobal>
 #include <ciso646>
 
+#if ((defined(_MSVC_LANG) && _MSVC_LANG < 201402L) || __cplusplus < 201402L)
+#include <memory>
+#endif
+
 #ifdef DRW_ASSERTS
 # define drw_assert(a) assert(a)
 #else
@@ -82,7 +86,7 @@
 #endif // defined(__cplusplus)
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 8, 0)
 
-#if ((defined(_MSVC_LANG) && _MSVC_LANG <= 201103L) || __cplusplus <= 201103L)
+#if ((defined(_MSVC_LANG) && _MSVC_LANG < 201402L) || __cplusplus < 201402L)
 template<typename T, typename... Args>
 std::unique_ptr<T> make_unique(Args&&... args) {
     return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
