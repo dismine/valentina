@@ -36,9 +36,10 @@
 extern "C" {
 #endif
 
-#define DEBUG_BREAK_USE_TRAP_INSTRUCTION 1
-#define DEBUG_BREAK_USE_BULTIN_TRAP      2
-#define DEBUG_BREAK_USE_SIGTRAP          3
+#define DEBUG_BREAK_USE_TRAP_INSTRUCTION  1
+#define DEBUG_BREAK_USE_BUILTIN_TRAP      2
+#define DEBUG_BREAK_USE_SIGTRAP           3
+#define DEBUG_BREAK_USE_BUILTIN_DEBUGTRAP 4
 
 #if defined(__i386__) || defined(__x86_64__)
     #define DEBUG_BREAK_IMPL DEBUG_BREAK_USE_TRAP_INSTRUCTION
@@ -90,8 +91,6 @@ __inline__ static void trap_instruction(void)
     /* Known problem:
      * Same problem and workaround as Thumb mode */
 }
-#elif defined(__aarch64__) && defined(__APPLE__)
-    #define DEBUG_BREAK_IMPL DEBUG_BREAK_USE_BULTIN_DEBUGTRAP
 #elif defined(__aarch64__)
     #define DEBUG_BREAK_IMPL DEBUG_BREAK_USE_TRAP_INSTRUCTION
 __attribute__((always_inline))
@@ -133,6 +132,12 @@ __inline__ static void trap_instruction(void)
     #define DEBUG_BREAK_IMPL DEBUG_BREAK_USE_SIGTRAP
 #endif
 
+#if defined(__has_builtin)
+# if __has_builtin(__builtin_debugtrap)
+#  undef DEBUG_BREAK_IMPL
+#  define DEBUG_BREAK_IMPL DEBUG_BREAK_USE_BUILTIN_DEBUGTRAP
+# endif
+#endif
 
 #ifndef DEBUG_BREAK_IMPL
 #error "debugbreak.h is not supported on this target"
@@ -142,13 +147,13 @@ __inline__ static void debug_break(void)
 {
     trap_instruction();
 }
-#elif DEBUG_BREAK_IMPL == DEBUG_BREAK_USE_BULTIN_DEBUGTRAP
+#elif DEBUG_BREAK_IMPL == DEBUG_BREAK_USE_BUILTIN_DEBUGTRAP
 __attribute__((always_inline))
 __inline__ static void debug_break(void)
 {
     __builtin_debugtrap();
 }
-#elif DEBUG_BREAK_IMPL == DEBUG_BREAK_USE_BULTIN_TRAP
+#elif DEBUG_BREAK_IMPL == DEBUG_BREAK_USE_BUILTIN_TRAP
 __attribute__((always_inline))
 __inline__ static void debug_break(void)
 {
