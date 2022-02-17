@@ -134,28 +134,33 @@ a unique pattern making tool.
 
 %build
 %if 0%{?suse_version} > 0
-  %if 0%{?suse_version} > 1500 # Tumbleweed
-    qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} LRELEASE=lrelease-pro Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
-  %endif
 
-  %if 0%{?suse_version} == 1500 # Leap
-    %if 0%{?sle_version} >= 150400 && 0%{?is_opensuse} # Leap 15.4
-      qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} LRELEASE=lrelease-pro Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
-    %else
-      qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} LRELEASE=lrelease-qt5 Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
-    %endif
-  %endif
+%if 0%{?suse_version} > 1500 # Tumbleweed
+qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} LRELEASE=lrelease-pro Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
+%endif
 
-  %if 0%{?suse_version} < 1500 && 0%{?suse_version} >= 1315
-    qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} LRELEASE=lrelease-qt5 Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
-  %else
-    qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
-  %endif
+%if 0%{?suse_version} == 1500 # Leap
+
+%if 0%{?sle_version} >= 150400 && 0%{?is_opensuse} # Leap 15.4
+qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} LRELEASE=lrelease-pro Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
 %else
-  %if 0%{?mageia} >= 6
-    qmake PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
-  %else
-    qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
+qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} LRELEASE=lrelease-qt5 Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
+%endif
+
+%endif
+
+%if 0%{?suse_version} < 1500 && 0%{?suse_version} >= 1315
+qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} LRELEASE=lrelease-qt5 Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
+%else
+qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
+%endif
+
+%else
+
+%if 0%{?mageia} >= 6
+qmake PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
+%else
+qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
 %endif
 
 %endif # 0%{?suse_version} > 0
