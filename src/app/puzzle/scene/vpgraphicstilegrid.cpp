@@ -3,7 +3,7 @@
 #include "../vptilefactory.h"
 #include "../layout/vplayout.h"
 #include "../layout/vpsheet.h"
-#include "qnamespace.h"
+#include "../vmisc/vmath.h"
 
 #include <QFileInfo>
 #include <QImageReader>
@@ -61,7 +61,7 @@ auto OptimizeFontSizeToFitTextInRect(QPainter *painter, const QRectF &drawRect, 
             factor = yFactor;
         }
 
-        error = abs(factor-1.0);
+        error = qFabs(factor-1);
         if (factor > 1 )
         {
             if (error < minError)
