@@ -63,8 +63,14 @@ BuildRequires: update-desktop-files
 Requires: libqt5-qtimageformats
 Requires: poppler-tools
 
-%if 0%{?suse_version} == 1310
-BuildRequires: libQt5XmlPatterns-devel
+%if 0%{?suse_version} > 1500
+BuildRequires: libqt5-linguist
+%endif
+
+%if 0%{?suse_version} == 1500
+%if 0%{?sle_version} >= 150400 && 0%{?is_opensuse}
+BuildRequires: libqt5-linguist
+%endif
 %endif
 
 %if 0%{?suse_version} >= 1315
@@ -72,15 +78,9 @@ BuildRequires: libqt5-linguist-devel
 BuildRequires: libqt5-qtxmlpatterns-devel
 %endif
 
-%if 0%{?suse_version} == 1500
-
-%if 0%{?sle_version} >= 150400 && 0%{?is_opensuse}
-BuildRequires: libqt5-linguist
+%if 0%{?suse_version} == 1310
+BuildRequires: libQt5XmlPatterns-devel
 %endif
-
-%elif 0%{?suse_version} > 1500
-BuildRequires: libqt5-linguist
-%endif # %if 0%{?suse_version} == 1500
 
 %endif # %if 0%{?suse_version} > 0
 
@@ -136,13 +136,17 @@ a unique pattern making tool.
 %if 0%{?suse_version} > 0
   %if 0%{?suse_version} > 1500 # Tumbleweed
     qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} LRELEASE=lrelease-pro Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
-  %elif 0%{?suse_version} == 1500 # Leap
+  %endif
+
+  %if 0%{?suse_version} == 1500 # Leap
     %if 0%{?sle_version} >= 150400 && 0%{?is_opensuse} # Leap 15.4
       qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} LRELEASE=lrelease-pro Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
     %else
       qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} LRELEASE=lrelease-qt5 Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
     %endif
-  %elif 0%{?suse_version} < 1500 && 0%{?suse_version} >= 1315
+  %endif
+
+  %if 0%{?suse_version} < 1500 && 0%{?suse_version} >= 1315
     qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} LRELEASE=lrelease-qt5 Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
   %else
     qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
