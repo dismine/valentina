@@ -71,6 +71,14 @@ BuildRequires: libqt5-linguist-devel
 BuildRequires: libqt5-qtxmlpatterns-devel
 %endif
 
+%if 0%{?sle_version} >= 150400 && 0%{?is_opensuse}
+BuildRequires: libqt5-linguist
+%endif
+
+%if 0%{?suse_version} > 1500
+BuildRequires: libqt5-linguist
+%endif
+
 %endif # %if 0%{?suse_version} > 0
 
 # CentOS 7.0 specifics
