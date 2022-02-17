@@ -135,13 +135,16 @@ a unique pattern making tool.
 %build
 %if 0%{?suse_version} > 0
 
-%if 0%{?suse_version} > 1500 # Tumbleweed
+# Tumbleweed
+%if 0%{?suse_version} > 1500
 qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} LRELEASE=lrelease-pro Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
 %endif
 
-%if 0%{?suse_version} == 1500 # Leap
+# Leap
+%if 0%{?suse_version} == 1500
 
-%if 0%{?sle_version} >= 150400 && 0%{?is_opensuse} # Leap 15.4
+# Leap 15.4
+%if 0%{?sle_version} >= 150400 && 0%{?is_opensuse}
 qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} LRELEASE=lrelease-pro Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
 %else
 qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} LRELEASE=lrelease-qt5 Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
