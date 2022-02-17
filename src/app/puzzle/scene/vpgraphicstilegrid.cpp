@@ -61,7 +61,7 @@ auto OptimizeFontSizeToFitTextInRect(QPainter *painter, const QRectF &drawRect, 
             factor = yFactor;
         }
 
-        error = abs(factor-1);
+        error = abs(factor-1.0);
         if (factor > 1 )
         {
             if (error < minError)
