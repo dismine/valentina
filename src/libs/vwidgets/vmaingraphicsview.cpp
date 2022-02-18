@@ -59,6 +59,7 @@
 #include "vcontrolpointspline.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
+#include "../vmisc/literals.h"
 #include "vabstractmainwindow.h"
 #include "global.h"
 #include "../ifc/xml/utils.h"

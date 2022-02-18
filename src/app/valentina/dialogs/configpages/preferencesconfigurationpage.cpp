@@ -31,6 +31,7 @@
 #include "../../core/vapplication.h"
 #include "../vpatterndb/pmsystems.h"
 #include "../vmisc/vvalentinasettings.h"
+#include "../vmisc/literals.h"
 
 #include <QDir>
 #include <QDirIterator>

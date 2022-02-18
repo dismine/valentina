@@ -47,6 +47,7 @@
 #include "../ifc/ifcdef.h"
 #include "../vmisc/def.h"
 #include "../vmisc/diagnostic.h"
+#include "../vmisc/literals.h"
 
 class QDomElement;
 class QDomNode;

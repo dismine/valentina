@@ -38,6 +38,7 @@
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
 #include "../vmisc/vabstractvalapplication.h"
+#include "../vmisc/literals.h"
 #include "global.h"
 
 #include "vgrainlineitem.h"

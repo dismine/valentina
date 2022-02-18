@@ -41,6 +41,7 @@
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
+#include "../vmisc/literals.h"
 #include "vtextgraphicsitem.h"
 
 const qreal resizeSquare = (3./*mm*/ / 25.4) * PrintDPI;

@@ -51,6 +51,7 @@
 #include "../vmisc/vmath.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/compatibility.h"
+#include "../vmisc/literals.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/vpassmark.h"

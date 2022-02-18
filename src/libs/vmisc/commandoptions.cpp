@@ -28,6 +28,7 @@
 
 #include "commandoptions.h"
 #include "def.h"
+#include "literals.h"
 
 #include <QStaticStringData>
 #include <QStringData>

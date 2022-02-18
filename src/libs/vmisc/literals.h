@@ -28,7 +28,8 @@
 #ifndef LITERALS_H
 #define LITERALS_H
 
-#include <QString>
+class QString;
+class QStringList;
 
 // From documantation: If you use QStringLiteral you should avoid declaring the same literal in multiple places: This
 // furthermore blows up the binary sizes.
@@ -40,5 +41,127 @@ extern const QString preferencesOtherIcon;
 extern const QString degreeSymbol;
 extern const QString trueStr;
 extern const QString falseStr;
+
+// functions
+extern const QString degTorad_F;
+extern const QString radTodeg_F;
+extern const QString sin_F;
+extern const QString cos_F;
+extern const QString tan_F;
+extern const QString asin_F;
+extern const QString acos_F;
+extern const QString atan_F;
+extern const QString sinh_F;
+extern const QString cosh_F;
+extern const QString tanh_F;
+extern const QString asinh_F;
+extern const QString acosh_F;
+extern const QString atanh_F;
+extern const QString sinD_F;
+extern const QString cosD_F;
+extern const QString tanD_F;
+extern const QString asinD_F;
+extern const QString acosD_F;
+extern const QString atanD_F;
+extern const QString log2_F;
+extern const QString log10_F;
+extern const QString log_F;
+extern const QString ln_F;
+extern const QString exp_F;
+extern const QString sqrt_F;
+extern const QString sign_F;
+extern const QString rint_F;
+extern const QString r2cm_F;
+extern const QString csrCm_F;
+extern const QString csrInch_F;
+extern const QString abs_F;
+extern const QString min_F;
+extern const QString max_F;
+extern const QString sum_F;
+extern const QString avg_F;
+extern const QString fmod_F;
+extern const QString warning_F;
+
+extern const QStringList builInFunctions;
+
+// Placeholders
+extern const QString pl_height;
+extern const QString pl_size;
+extern const QString pl_waist;
+extern const QString pl_hip;
+
+extern const QString pl_heightLabel;
+extern const QString pl_sizeLabel;
+extern const QString pl_hipLabel;
+extern const QString pl_waistLabel;
+
+extern const QString pl_dimensionX;
+extern const QString pl_dimensionY;
+extern const QString pl_dimensionW;
+extern const QString pl_dimensionZ;
+
+extern const QString pl_dimensionXLabel;
+extern const QString pl_dimensionYLabel;
+extern const QString pl_dimensionWLabel;
+extern const QString pl_dimensionZLabel;
+
+extern const QString pl_date;
+extern const QString pl_time;
+extern const QString pl_birthDate;
+extern const QString pl_patternName;
+extern const QString pl_patternNumber;
+extern const QString pl_author;
+extern const QString pl_customer;
+extern const QString pl_email;
+extern const QString pl_userMaterial;
+extern const QString pl_pExt;
+extern const QString pl_pUnits;
+extern const QString pl_pFileName;
+extern const QString pl_mFileName;
+extern const QString pl_mExt;
+extern const QString pl_mUnits;
+extern const QString pl_mSizeUnits;
+extern const QString pl_pLetter;
+extern const QString pl_pAnnotation;
+extern const QString pl_pOrientation;
+extern const QString pl_pRotation;
+extern const QString pl_pTilt;
+extern const QString pl_pFoldPosition;
+extern const QString pl_pName;
+extern const QString pl_pQuantity;
+extern const QString pl_mFabric;
+extern const QString pl_mLining;
+extern const QString pl_mInterfacing;
+extern const QString pl_mInterlining;
+extern const QString pl_wCut;
+extern const QString pl_wOnFold;
+extern const QString pl_measurement;
+extern const QString pl_finalMeasurement;
+
+extern const QString cursorArrowOpenHand;
+extern const QString cursorArrowCloseHand;
+
+extern const QString strOne;
+extern const QString strTwo;
+extern const QString strThree;
+
+extern const QString strStraightforward;
+extern const QString strBisector;
+extern const QString strIntersection;
+extern const QString strIntersectionOnlyLeft;
+extern const QString strIntersectionOnlyRight;
+extern const QString strIntersection2;
+extern const QString strIntersection2OnlyLeft;
+extern const QString strIntersection2OnlyRight;
+extern const QString strTypeIncrement;
+extern const QString strTypeSeparator;
+extern const QString strTypeMeasurement;
+
+extern const QString unitMM;
+extern const QString unitCM;
+extern const QString unitINCH;
+extern const QString unitPX;
+
+extern const QString valentinaNamespace;
 
 #endif // LITERALS_H

@@ -30,6 +30,7 @@
 #include "../qmuparser/qmudef.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../ifc/ifcdef.h"
+#include "../vmisc/literals.h"
 
 #include <QtTest>
 #include <QTranslator>

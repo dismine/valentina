@@ -42,6 +42,7 @@
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vmisc/def.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vmisc/literals.h"
 #include "vtranslatemeasurements.h"
 #include "pmsystems.h"
 

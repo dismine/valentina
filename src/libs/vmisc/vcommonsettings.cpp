@@ -47,6 +47,7 @@
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
 #include "../vmisc/compatibility.h"
+#include "../vmisc/literals.h"
 #include "../vpatterndb/pmsystems.h"
 
 const int VCommonSettings::defaultScrollingDuration = 300;

@@ -45,6 +45,7 @@
 #include "../vgeometry/vellipticalarc.h"
 #include "../vmisc/diagnostic.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vmisc/literals.h"
 #include "variables/varcradius.h"
 #include "variables/vcurveangle.h"
 #include "variables/vcurvelength.h"

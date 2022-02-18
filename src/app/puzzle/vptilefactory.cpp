@@ -7,6 +7,7 @@
 #include "qobject.h"
 #include "scene/vpmaingraphicsview.h"
 #include "../vmisc/def.h"
+#include "../vmisc/literals.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vlayout/vprintlayout.h"
 

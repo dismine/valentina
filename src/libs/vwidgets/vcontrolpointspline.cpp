@@ -46,6 +46,7 @@
 #include "../vwidgets/global.h"
 #include "../vgeometry/vgobject.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vmisc/literals.h"
 #include "vmaingraphicsscene.h"
 #include "vmaingraphicsview.h"
 #include "vgraphicssimpletextitem.h"

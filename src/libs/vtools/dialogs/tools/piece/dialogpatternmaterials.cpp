@@ -33,6 +33,7 @@
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vwidgets/vcomboboxdelegate.h"
 #include "../vmisc/vvalentinasettings.h"
+#include "../vmisc/literals.h"
 
 namespace
 {
