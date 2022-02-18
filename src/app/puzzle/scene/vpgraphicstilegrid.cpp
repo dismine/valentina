@@ -4,6 +4,7 @@
 #include "../layout/vplayout.h"
 #include "../layout/vpsheet.h"
 #include "../vmisc/vmath.h"
+#include "../vwidgets/global.h"
 
 #include <QFileInfo>
 #include <QImageReader>
@@ -13,6 +14,7 @@
 namespace
 {
 constexpr qreal penWidth = 1;
+constexpr qreal minTextFontSize = 5.0;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto SheetMargins(const VPSheetPtr &sheet) -> QMarginsF
@@ -30,17 +32,29 @@ auto OptimizeFontSizeToFitTextInRect(QPainter *painter, const QRectF &drawRect, 
                                      int flags = Qt::TextDontClip|Qt::TextWordWrap, double goalError =  0.01,
                                      int maxIterationNumber=10) -> QFont
 {
+    QFont font;
+
+    if (not drawRect.isValid())
+    {
+        font.setPointSizeF(0.00000001);
+        return font;
+    }
+
     painter->save();
 
-    QRect fontBoundRect;
-    QFont font;
     double minError = std::numeric_limits<double>::max();
     double error = std::numeric_limits<double>::max();
     int iterationNumber=0;
     while((error > goalError) && (iterationNumber<maxIterationNumber))
     {
         iterationNumber++;
-        fontBoundRect = painter->fontMetrics().boundingRect(drawRect.toRect(), flags, text);
+        QRect fontBoundRect = painter->fontMetrics().boundingRect(drawRect.toRect(), flags, text);
+        if (fontBoundRect.isNull())
+        {
+            font.setPointSizeF(0.00000001);
+            break;
+        }
+
         double xFactor = drawRect.width() / fontBoundRect.width();
         double yFactor = drawRect.height() / fontBoundRect.height();
         double factor;
@@ -74,7 +88,12 @@ auto OptimizeFontSizeToFitTextInRect(QPainter *painter, const QRectF &drawRect, 
             }
         }
         font = painter->font();
-        font.setPointSizeF(font.pointSizeF()*factor);
+        qreal size = font.pointSizeF()*factor;
+        if (size <= 0)
+        {
+            size = 0.00000001;
+        }
+        font.setPointSizeF(size);
         painter->setFont(font);
     }
     painter->restore();
@@ -145,19 +164,6 @@ void VPGraphicsTileGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem
     qreal xScale = layout->LayoutSettings().HorizontalScale();
     qreal yScale = layout->LayoutSettings().VerticalScale();
 
-    const qreal width = (layout->TileFactory()->DrawingAreaWidth() - VPTileFactory::tileStripeWidth) / xScale;
-    const qreal height = (layout->TileFactory()->DrawingAreaHeight() - VPTileFactory::tileStripeWidth) / yScale;
-
-    VPSheetPtr sheet = layout->GetSheet(m_sheetUuid);
-    QMarginsF sheetMargins = SheetMargins(sheet);
-
-    const int nbCol = layout->TileFactory()->ColNb(sheet);
-    const int nbRow = layout->TileFactory()->RowNb(sheet);
-
-    QFont font = OptimizeFontSizeToFitTextInRect(painter,
-                                                 QRectF(sheetMargins.left(), sheetMargins.top(), width/3., height/3.),
-                                                 QString::number(nbRow * nbCol));
-
     VWatermarkData watermarkData = layout->TileFactory()->WatermarkData();
 
     auto PaintWatermark = [painter, layout, xScale, yScale, watermarkData]
@@ -180,10 +186,25 @@ void VPGraphicsTileGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem
         }
     };
 
-    auto PaintTileNumber = [painter, layout, nbCol, font]
+    const qreal width = (layout->TileFactory()->DrawingAreaWidth() - VPTileFactory::tileStripeWidth) / xScale;
+    const qreal height = (layout->TileFactory()->DrawingAreaHeight() - VPTileFactory::tileStripeWidth) / yScale;
+
+    VPSheetPtr sheet = layout->GetSheet(m_sheetUuid);
+    QMarginsF sheetMargins = SheetMargins(sheet);
+
+    const int nbCol = layout->TileFactory()->ColNb(sheet);
+    const int nbRow = layout->TileFactory()->RowNb(sheet);
+
+    QFont font = OptimizeFontSizeToFitTextInRect(painter,
+                                                 QRectF(sheetMargins.left(), sheetMargins.top(), width/3., height/3.),
+                                                 QString::number(nbRow * nbCol));
+
+    const qreal scale = SceneScale(scene());
+
+    auto PaintTileNumber = [painter, layout, nbCol, font, scale]
             (const QRectF &img, int i, int j)
     {
-        if (layout->LayoutSettings().GetShowTileNumber())
+        if (layout->LayoutSettings().GetShowTileNumber() && font.pointSizeF() * scale >= minTextFontSize)
         {
             painter->save();
 
