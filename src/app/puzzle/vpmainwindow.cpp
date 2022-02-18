@@ -1935,7 +1935,6 @@ auto VPMainWindow::Template(VAbstractLayoutDialog::PaperSizeTemplate t) const ->
         case VAbstractLayoutDialog::PaperSizeTemplate::Letter:
         case VAbstractLayoutDialog::PaperSizeTemplate::Legal:
         case VAbstractLayoutDialog::PaperSizeTemplate::Tabloid:
-            return VAbstractLayoutDialog::GetTemplateSize(t, layoutUnit);
         case VAbstractLayoutDialog::PaperSizeTemplate::Roll24in:
         case VAbstractLayoutDialog::PaperSizeTemplate::Roll30in:
         case VAbstractLayoutDialog::PaperSizeTemplate::Roll36in:
@@ -1946,17 +1945,22 @@ auto VPMainWindow::Template(VAbstractLayoutDialog::PaperSizeTemplate t) const ->
         case VAbstractLayoutDialog::PaperSizeTemplate::Roll72in:
             return VAbstractLayoutDialog::GetTemplateSize(t, layoutUnit);
         case VAbstractLayoutDialog::PaperSizeTemplate::Custom:
-            return VAbstractLayoutDialog::GetTemplateSize(t, layoutUnit);
         default:
             break;
     }
-    return QSizeF();
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPMainWindow::SheetTemplate() const -> QSizeF
 {
     auto t = static_cast<VAbstractLayoutDialog::PaperSizeTemplate>(ui->comboBoxSheetTemplates->currentData().toInt());
+
+    if (t == VAbstractLayoutDialog::PaperSizeTemplate::Custom)
+    {
+        return {ui->doubleSpinBoxSheetPaperWidth->value(), ui->doubleSpinBoxSheetPaperHeight->value()};
+    }
+
     return Template(t);
 }
 
@@ -1964,6 +1968,12 @@ auto VPMainWindow::SheetTemplate() const -> QSizeF
 auto VPMainWindow::TileTemplate() const -> QSizeF
 {
     auto t = static_cast<VAbstractLayoutDialog::PaperSizeTemplate>(ui->comboBoxTileTemplates->currentData().toInt());
+
+    if (t == VAbstractLayoutDialog::PaperSizeTemplate::Custom)
+    {
+        return {ui->doubleSpinBoxTilePaperWidth->value(), ui->doubleSpinBoxTilePaperHeight->value()};
+    }
+
     return Template(t);
 }
 
