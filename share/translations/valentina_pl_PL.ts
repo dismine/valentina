@@ -10501,6 +10501,14 @@ This option will take an affect after restart.</source>
         <source>No data for the W dimension.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>z value move piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>z value move pieces</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QmuParser</name>
@@ -12614,10 +12622,6 @@ Czy chcesz zapisać zmiany?</translation>
         <translation type="vanished">Nieprawidłowa wersja. Maksymalna wspierana wersja to %1</translation>
     </message>
     <message>
-        <source>Error no unique id.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Could not change version.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13785,6 +13789,13 @@ Czy chcesz zapisać zmiany?</translation>
     </message>
 </context>
 <context>
+    <name>VLayoutConverter</name>
+    <message>
+        <source>Could not change version.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VLayoutExporter</name>
     <message>
         <source>Can&apos;t save file &apos;%1&apos;. Error: %2.</source>
@@ -14814,6 +14825,26 @@ Do you want to save your changes?</source>
         <source>Show tile number</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Z value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPTileFactory</name>
@@ -15134,6 +15165,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Error restoring backup file: %1.</source>
         <translation type="vanished">Błąd przywracania kopii zapasowej: %1.</translation>
+    </message>
+    <message>
+        <source>Error no unique id.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

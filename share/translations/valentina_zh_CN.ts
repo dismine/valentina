@@ -9405,6 +9405,14 @@ This option will take an affect after restart.</source>
         <source>No data for the W dimension.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>z value move piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>z value move pieces</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QmuParser</name>
@@ -11318,10 +11326,6 @@ Do you want to save your changes?</source>
 <context>
     <name>VAbstractConverter</name>
     <message>
-        <source>Error no unique id.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Could not change version.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12481,6 +12485,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VLayoutConverter</name>
+    <message>
+        <source>Could not change version.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VLayoutExporter</name>
     <message>
         <source>Can&apos;t save file &apos;%1&apos;. Error: %2.</source>
@@ -13507,6 +13518,26 @@ Do you want to save your changes?</source>
         <source>Show tile number</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Z value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPSheet</name>
@@ -13822,6 +13853,13 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Piece path doesn&apos;t contain nodes</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPatternConverter</name>
+    <message>
+        <source>Error no unique id.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

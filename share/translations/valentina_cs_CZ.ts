@@ -11526,6 +11526,14 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <source>No data for the W dimension.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>z value move piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>z value move pieces</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -13789,7 +13797,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Error no unique id.</source>
-        <translation>Chyba. Žádný jedinečný identifikátor.</translation>
+        <translation type="vanished">Chyba. Žádný jedinečný identifikátor.</translation>
     </message>
     <message>
         <source>Could not change version.</source>
@@ -15176,6 +15184,13 @@ Chcete uložit změny?</translation>
     </message>
 </context>
 <context>
+    <name>VLayoutConverter</name>
+    <message>
+        <source>Could not change version.</source>
+        <translation type="unfinished">Nebylo možné změnit verzi.</translation>
+    </message>
+</context>
+<context>
     <name>VLayoutExporter</name>
     <message>
         <source>Can&apos;t save file &apos;%1&apos;. Error: %2.</source>
@@ -16205,6 +16220,26 @@ Do you want to save your changes?</source>
         <source>Show tile number</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Z value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPTileFactory</name>
@@ -16533,6 +16568,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Error restoring backup file: %1.</source>
         <translation type="vanished">Chyba při obnově záložního souboru: %1.</translation>
+    </message>
+    <message>
+        <source>Error no unique id.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

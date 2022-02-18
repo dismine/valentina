@@ -11510,6 +11510,14 @@ This option will take an affect after restart.</source>
         <source>No data for the W dimension.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>z value move piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>z value move pieces</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -13773,7 +13781,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Error no unique id.</source>
-        <translation>Erreur : id non unique.</translation>
+        <translation type="vanished">Erreur : id non unique.</translation>
     </message>
     <message>
         <source>Could not change version.</source>
@@ -15150,6 +15158,13 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
 </context>
 <context>
+    <name>VLayoutConverter</name>
+    <message>
+        <source>Could not change version.</source>
+        <translation type="unfinished">La version n&apos;a pas pu être changée.</translation>
+    </message>
+</context>
+<context>
     <name>VLayoutExporter</name>
     <message>
         <source>Can&apos;t save file &apos;%1&apos;. Error: %2.</source>
@@ -16179,6 +16194,26 @@ Do you want to save your changes?</source>
         <source>Show tile number</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Z value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPTileFactory</name>
@@ -16507,6 +16542,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Error restoring backup file: %1.</source>
         <translation type="vanished">Erreur de restauration du fichier de backup: %1.</translation>
+    </message>
+    <message>
+        <source>Error no unique id.</source>
+        <translation type="unfinished">Erreur : id non unique.</translation>
     </message>
 </context>
 <context>
