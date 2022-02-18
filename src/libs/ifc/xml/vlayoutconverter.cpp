@@ -38,8 +38,8 @@
  */
 
 const QString VLayoutConverter::LayoutMinVerStr = QStringLiteral("0.1.0");
-const QString VLayoutConverter::LayoutMaxVerStr = QStringLiteral("0.1.0");
-const QString VLayoutConverter::CurrentSchema   = QStringLiteral("://schema/layout/v0.1.0.xsd");
+const QString VLayoutConverter::LayoutMaxVerStr = QStringLiteral("0.1.1");
+const QString VLayoutConverter::CurrentSchema   = QStringLiteral("://schema/layout/v0.1.1.xsd");
 
 //VLayoutConverter::LayoutMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VLayoutConverter::LayoutMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -88,7 +88,8 @@ auto VLayoutConverter::XSDSchema(unsigned ver) const -> QString
 {
     QHash <unsigned, QString> schemas =
     {
-        std::make_pair(FormatVersion(0, 1, 0), CurrentSchema),
+        std::make_pair(FormatVersion(0, 1, 0), QStringLiteral("://schema/layout/v0.1.0.xsd")),
+        std::make_pair(FormatVersion(0, 1, 1), CurrentSchema),
     };
 
     if (schemas.contains(ver))
@@ -105,6 +106,10 @@ void VLayoutConverter::ApplyPatches()
     switch (m_ver)
     {
         case (FormatVersion(0, 1, 0)):
+            ToV0_1_1();
+            ValidateXML(XSDSchema(FormatVersion(0, 1, 1)));
+            Q_FALLTHROUGH();
+        case (FormatVersion(0, 1, 1)):
             break;
         default:
             InvalidVersion(m_ver);
@@ -119,7 +124,18 @@ void VLayoutConverter::DowngradeToCurrentMaxVersion()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutConverter::IsReadOnly() const
+auto VLayoutConverter::IsReadOnly() const -> bool
 {
     return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutConverter::ToV0_1_1()
+{
+    // TODO. Delete if minimal supported version is 0.1.1
+    Q_STATIC_ASSERT_X(VLayoutConverter::LayoutMinVer < FormatVersion(0, 1, 1),
+                      "Time to refactor the code.");
+
+    SetVersion(QStringLiteral("0.1.1"));
+    Save();
 }

@@ -305,6 +305,8 @@ void VPSheetSceneData::ConnectPiece(VPGraphicsPiece *piece)
 
     QObject::connect(layout.data(), &VPLayout::PieceTransformationChanged, piece,
                      &VPGraphicsPiece::on_RefreshPiece);
+    QObject::connect(layout.data(), &VPLayout::PieceZValueChanged, piece,
+                     &VPGraphicsPiece::PieceZValueChanged);
     QObject::connect(layout.data(), &VPLayout::PieceSelectionChanged,
                      m_rotationControls, &VPGraphicsPieceControls::on_UpdateControls);
     QObject::connect(layout.data(), &VPLayout::PiecePositionValidityChanged,

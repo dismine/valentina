@@ -153,7 +153,7 @@ void VPLayoutFileWriter::WriteFile(const VPLayoutPtr &layout, QIODevice *file)
 void VPLayoutFileWriter::WriteLayout(const VPLayoutPtr &layout)
 {
     writeStartElement(ML::TagLayout);
-    SetAttribute(ML::AttrVersion, VLayoutConverter::LayoutMaxVerStr);
+    SetAttribute(AttrLayoutVersion, VLayoutConverter::LayoutMaxVerStr);
     WriteLayoutProperties(layout);
     WritePieceList(layout->GetUnplacedPieces(), ML::TagUnplacedPieces);
     WriteSheets(layout);
@@ -273,6 +273,8 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
                                   [](qreal xs) noexcept {return VFuzzyComparePossibleNulls(xs, 1.0);});
     SetAttributeOrRemoveIf<qreal>(ML::AttrYScale, piece->GetYScale(),
                                   [](qreal ys) noexcept {return VFuzzyComparePossibleNulls(ys, 1.0);});
+    SetAttributeOrRemoveIf<qreal>(ML::AttrZValue, piece->ZValue(),
+                                  [](qreal z) noexcept {return VFuzzyComparePossibleNulls(z, 1.0);});
 
     writeStartElement(ML::TagSeamLine);
     writeCharacters(PathToString(piece->GetContourPoints()));

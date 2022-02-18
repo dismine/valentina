@@ -471,6 +471,7 @@ void VPLayoutFileReader::ReadPiece(const VPPiecePtr &piece)
     piece->SetHideMainPath(not ReadAttributeBool(attribs, ML::AttrShowSeamline, trueStr));
     piece->SetXScale(ReadAttributeDouble(attribs, ML::AttrXScale, QChar('1')));
     piece->SetYScale(ReadAttributeDouble(attribs, ML::AttrYScale, QChar('1')));
+    piece->SetZValue(ReadAttributeDouble(attribs, ML::AttrZValue, QChar('1')));
 
     bool pieceMirrored = ReadAttributeBool(attribs, ML::AttrMirrored, falseStr);
     piece->SetMirror(pieceMirrored);

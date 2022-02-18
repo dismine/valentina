@@ -58,6 +58,7 @@
 #include "undocommands/vpundoaddsheet.h"
 #include "undocommands/vpundopiecerotate.h"
 #include "undocommands/vpundopiecemove.h"
+#include "undocommands/vpundopiecezvaluemove.h"
 #include "dialogs/dialogsavemanuallayout.h"
 #include "../vdxf/libdxfrw/drw_base.h"
 #include "../vmisc/dialogs/dialogselectlanguage.h"
@@ -687,6 +688,16 @@ void VPMainWindow::SetupMenu()
     redoAction->setIcon(QIcon::fromTheme("edit-redo"));
     ui->menuSheet->addAction(redoAction);
     ui->toolBarUndoCommands->addAction(redoAction);
+
+    // Z value
+    connect(ui->actionZValueBottom, &QAction::triggered, this,
+            [this](){ZValueMove(static_cast<int>(ML::ZValueMove::Bottom));});
+    connect(ui->actionZValueDown, &QAction::triggered, this,
+            [this](){ZValueMove(static_cast<int>(ML::ZValueMove::Down));});
+    connect(ui->actionZValueUp, &QAction::triggered, this,
+            [this](){ZValueMove(static_cast<int>(ML::ZValueMove::Up));});
+    connect(ui->actionZValueTop, &QAction::triggered, this,
+            [this](){ZValueMove(static_cast<int>(ML::ZValueMove::Top));});
 
     // Watermark
     connect(ui->actionWatermarkEditor, &QAction::triggered, this, &VPMainWindow::CreateWatermark);
@@ -3150,6 +3161,39 @@ void VPMainWindow::PrintLayoutTiledSheets(QPrinter *printer, const QList<VPSheet
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::ZValueMove(int move)
+{
+    VPSheetPtr sheet = m_layout->GetFocusedSheet();
+    if (sheet.isNull())
+    {
+        return;
+    }
+
+    QList<VPPiecePtr> selectedPieces = sheet->GetSelectedPieces();
+    if (selectedPieces.isEmpty())
+    {
+        return;
+    }
+
+    QList<VPPiecePtr> allPieces = sheet->GetPieces();
+    if (allPieces.isEmpty() || (allPieces.size() == selectedPieces.size()))
+    {
+        return;
+    }
+
+    auto zMove = static_cast<ML::ZValueMove>(move);
+
+    if (selectedPieces.size() == 1)
+    {
+        m_layout->UndoStack()->push(new VPUndoPieceZValueMove(ConstFirst(selectedPieces), zMove));
+    }
+    else if (selectedPieces.size() > 1)
+    {
+        m_layout->UndoStack()->push(new VPUndoPiecesZValueMove(allPieces, zMove));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionNew_triggered()
 {
     VPApplication::VApp()->NewMainWindow();
@@ -3664,6 +3708,7 @@ void VPMainWindow::ToolBarStyles()
     ToolBarStyle(ui->mainToolBar);
     ToolBarStyle(ui->toolBarZoom);
     ToolBarStyle(ui->toolBarUndoCommands);
+    ToolBarStyle(ui->toolBarZValue);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

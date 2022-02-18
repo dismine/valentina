@@ -479,6 +479,8 @@ private:
 
     void PrintLayoutSheets(QPrinter *printer, const QList<VPSheetPtr> &sheets);
     void PrintLayoutTiledSheets(QPrinter *printer, const QList<VPSheetPtr> &sheets);
+
+    void ZValueMove(int move);
 };
 
 #endif // VPMAINWINDOW_H

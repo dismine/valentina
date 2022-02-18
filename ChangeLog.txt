@@ -1,3 +1,6 @@
+# Valentina 0.7.51 (unreleased)
+- Z value change for a layout piece.
+
 # Valentina 0.7.50 February 14, 2022
 - Fix regression. Minimal seam allowance width is less than the point accuracy values.
 - Call autosave only in GUI mode.

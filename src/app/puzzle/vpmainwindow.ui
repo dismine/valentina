@@ -1973,6 +1973,27 @@
     <bool>false</bool>
    </attribute>
   </widget>
+  <widget class="QToolBar" name="toolBarZValue">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="windowTitle">
+    <string>Z value</string>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextUnderIcon</enum>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionZValueBottom"/>
+   <addaction name="actionZValueDown"/>
+   <addaction name="actionZValueUp"/>
+   <addaction name="actionZValueTop"/>
+  </widget>
   <action name="actionOpen">
    <property name="icon">
     <iconset theme="document-open">
@@ -2337,6 +2358,38 @@
     <enum>QAction::ApplicationSpecificRole</enum>
    </property>
   </action>
+  <action name="actionZValueBottom">
+   <property name="icon">
+    <iconset theme="go-bottom"/>
+   </property>
+   <property name="text">
+    <string>Bottom</string>
+   </property>
+  </action>
+  <action name="actionZValueDown">
+   <property name="icon">
+    <iconset theme="go-down"/>
+   </property>
+   <property name="text">
+    <string>Down</string>
+   </property>
+  </action>
+  <action name="actionZValueUp">
+   <property name="icon">
+    <iconset theme="go-up"/>
+   </property>
+   <property name="text">
+    <string>Up</string>
+   </property>
+  </action>
+  <action name="actionZValueTop">
+   <property name="icon">
+    <iconset theme="go-top"/>
+   </property>
+   <property name="text">
+    <string>Top</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
@@ -2364,8 +2417,8 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupRotationDirection"/>
-  <buttongroup name="buttonGroupTileOrientation"/>
   <buttongroup name="buttonGroupSheetOrientation"/>
+  <buttongroup name="buttonGroupTileOrientation"/>
+  <buttongroup name="buttonGroupRotationDirection"/>
  </buttongroups>
 </ui>

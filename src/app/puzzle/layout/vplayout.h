@@ -106,6 +106,7 @@ signals:
     void PieceSheetChanged(const VPPiecePtr &piece);
     void ActiveSheetChanged(const VPSheetPtr &focusedSheet);
     void PieceTransformationChanged(const VPPiecePtr &piece);
+    void PieceZValueChanged(const VPPiecePtr &piece);
     void TransformationOriginChanged();
     void SheetListChanged();
     void PieceSelectionChanged(const VPPiecePtr &piece);

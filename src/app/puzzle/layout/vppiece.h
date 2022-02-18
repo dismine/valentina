@@ -128,6 +128,9 @@ public:
     auto CopyNumber() const -> quint16;
     void SetCopyNumber(quint16 newCopyNumber);
 
+    auto ZValue() const -> qreal;
+    void SetZValue(qreal newZValue);
+
 private:
     Q_DISABLE_COPY_MOVE(VPPiece) // NOLINT
 
@@ -140,6 +143,8 @@ private:
     bool m_hasSuperpositionWithPieces{false};
 
     quint16 m_copyNumber{1};
+
+    qreal m_zValue{1.0};
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -201,6 +206,18 @@ inline auto VPPiece::HasSuperpositionWithPieces() const -> bool
 inline void VPPiece::SetHasSuperpositionWithPieces(bool newHasSuperpositionWithPieces)
 {
     m_hasSuperpositionWithPieces = newHasSuperpositionWithPieces;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VPPiece::ZValue() const -> qreal
+{
+    return m_zValue;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VPPiece::SetZValue(qreal newZValue)
+{
+    m_zValue = newZValue;
 }
 
 Q_DECLARE_METATYPE(VPPiecePtr) // NOLINT

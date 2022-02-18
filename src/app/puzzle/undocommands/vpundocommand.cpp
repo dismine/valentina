@@ -30,6 +30,11 @@
 Q_LOGGING_CATEGORY(vpUndo, "vp.undo")
 
 //---------------------------------------------------------------------------------------------------------------------
+VPUndoCommand::VPUndoCommand(QUndoCommand *parent)
+    : QUndoCommand(parent)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 VPUndoCommand::VPUndoCommand(bool allowMerge, QUndoCommand *parent)
     : QUndoCommand(parent),
       m_allowMerge(allowMerge)

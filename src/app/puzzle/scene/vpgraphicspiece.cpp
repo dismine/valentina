@@ -72,6 +72,11 @@ VPGraphicsPiece::VPGraphicsPiece(const VPPiecePtr &piece, QGraphicsItem *parent)
     setAcceptHoverEvents(true);
     setCursor(Qt::OpenHandCursor);
 
+    if (not piece.isNull())
+    {
+        setZValue(piece->ZValue());
+    }
+
     PaintPiece();
     InitLabels();
 }
@@ -666,12 +671,38 @@ auto VPGraphicsPiece::PieceColor() const -> QColor
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::on_RefreshPiece(const VPPiecePtr &piece)
 {
-    if (m_piece == piece)
+    VPPiecePtr p = m_piece.toStrongRef();
+    if (p.isNull())
     {
+        return;
+    }
+
+    if (p->GetUniqueID() == piece->GetUniqueID())
+    {
+        if (not piece.isNull())
+        {
+            setZValue(piece->ZValue());
+        }
+
         prepareGeometryChange();
         PaintPiece(); // refresh shapes
         InitLabels();
         emit PieceTransformationChanged();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPiece::PieceZValueChanged(const VPPiecePtr &piece)
+{
+    VPPiecePtr p = m_piece.toStrongRef();
+    if (p.isNull() || piece.isNull())
+    {
+        return;
+    }
+
+    if (p->GetUniqueID() == piece->GetUniqueID())
+    {
+        setZValue(piece->ZValue());
     }
 }
 

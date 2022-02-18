@@ -63,6 +63,7 @@ signals:
 
 public slots:
     void on_RefreshPiece(const VPPiecePtr &piece);
+    void PieceZValueChanged(const VPPiecePtr &piece);
 
 protected:
     auto boundingRect() const -> QRectF override;

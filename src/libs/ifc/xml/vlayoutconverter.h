@@ -37,29 +37,31 @@ class VLayoutConverter : public VAbstractConverter
 {
 public:
     explicit VLayoutConverter(const QString &fileName);
-    virtual ~VLayoutConverter() Q_DECL_EQ_DEFAULT;
+    ~VLayoutConverter() override =default;
 
-    virtual QString GetFormatVersionStr() const override;
+    auto GetFormatVersionStr() const -> QString override;
 
     static const QString LayoutMaxVerStr;
     static const QString CurrentSchema;
     static Q_DECL_CONSTEXPR const unsigned LayoutMinVer = FormatVersion(0, 1, 0);
-    static Q_DECL_CONSTEXPR const unsigned LayoutMaxVer = FormatVersion(0, 1, 0);
+    static Q_DECL_CONSTEXPR const unsigned LayoutMaxVer = FormatVersion(0, 1, 1);
 
 protected:
     void SetVersion(const QString &version) override;
 
-    virtual unsigned MinVer() const override;
-    virtual unsigned MaxVer() const override;
+    auto MinVer() const -> unsigned override;
+    auto MaxVer() const -> unsigned override;
 
-    virtual QString MinVerStr() const override;
-    virtual QString MaxVerStr() const override;
+    auto MinVerStr() const -> QString override;
+    auto MaxVerStr() const -> QString override;
 
-    virtual QString XSDSchema(unsigned ver) const override;
-    virtual void    ApplyPatches() override;
-    virtual void    DowngradeToCurrentMaxVersion() override;
+    auto XSDSchema(unsigned ver) const -> QString override;
+    void ApplyPatches() override;
+    void DowngradeToCurrentMaxVersion() override;
 
-    virtual bool IsReadOnly() const override;
+    auto IsReadOnly() const -> bool override;
+
+    void ToV0_1_1();
 
 private:
     Q_DISABLE_COPY(VLayoutConverter)
@@ -67,25 +69,25 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline unsigned VLayoutConverter::MinVer() const
+inline auto VLayoutConverter::MinVer() const -> unsigned
 {
     return LayoutMinVer;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline unsigned VLayoutConverter::MaxVer() const
+inline auto VLayoutConverter::MaxVer() const -> unsigned
 {
     return LayoutMaxVer;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString VLayoutConverter::MinVerStr() const
+inline auto VLayoutConverter::MinVerStr() const -> QString
 {
     return LayoutMinVerStr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString VLayoutConverter::MaxVerStr() const
+inline auto VLayoutConverter::MaxVerStr() const -> QString
 {
     return LayoutMaxVerStr;
 }

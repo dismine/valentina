@@ -40,6 +40,7 @@
 #include "../layout/vpsheet.h"
 #include "../layout/vppiece.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "undocommands/vpundopiecezvaluemove.h"
 #include "vptilefactory.h"
 #include "vpgraphicspiece.h"
 #include "vpgraphicspiececontrols.h"
@@ -193,6 +194,7 @@ void VPMainGraphicsView::dropEvent(QDropEvent *event)
 
             piece->ClearTransformations();
             piece->SetPosition(mapToScene(event->pos()));
+            piece->SetZValue(1.0);
 
             auto *command = new VPUndoMovePieceOnSheet(layout->GetFocusedSheet(), piece);
             layout->UndoStack()->push(command);
@@ -310,6 +312,22 @@ void VPMainGraphicsView::keyPressEvent(QKeyEvent *event)
         {
             RotatePiecesByAngle(-15);
         }
+    }
+    else if (event->key() == Qt::Key_Home)
+    {
+        ZValueMove(static_cast<int>(ML::ZValueMove::Top));
+    }
+    else if (event->key() == Qt::Key_PageUp)
+    {
+        ZValueMove(static_cast<int>(ML::ZValueMove::Up));
+    }
+    else if (event->key() == Qt::Key_PageDown)
+    {
+        ZValueMove(static_cast<int>(ML::ZValueMove::Down));
+    }
+    else if (event->key() == Qt::Key_End)
+    {
+        ZValueMove(static_cast<int>(ML::ZValueMove::Bottom));
     }
 }
 
@@ -663,6 +681,45 @@ void VPMainGraphicsView::ClearSelection()
     {
         piece->SetSelected(false);
         emit layout->PieceSelectionChanged(piece);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainGraphicsView::ZValueMove(int move)
+{
+    VPLayoutPtr layout = m_layout.toStrongRef();
+    if (layout.isNull())
+    {
+        return;
+    }
+
+    VPSheetPtr sheet = layout->GetFocusedSheet();
+    if (sheet.isNull())
+    {
+        return;
+    }
+
+    QList<VPPiecePtr> selectedPieces = sheet->GetSelectedPieces();
+    if (selectedPieces.isEmpty())
+    {
+        return;
+    }
+
+    QList<VPPiecePtr> allPieces = sheet->GetPieces();
+    if (allPieces.isEmpty() || (allPieces.size() == selectedPieces.size()))
+    {
+        return;
+    }
+
+    auto zMove = static_cast<ML::ZValueMove>(move);
+
+    if (selectedPieces.size() == 1)
+    {
+        layout->UndoStack()->push(new VPUndoPieceZValueMove(ConstFirst(selectedPieces), zMove));
+    }
+    else if (selectedPieces.size() > 1)
+    {
+        layout->UndoStack()->push(new VPUndoPiecesZValueMove(allPieces, zMove));
     }
 }
 

@@ -108,6 +108,8 @@ private:
 
     void SwitchScene(const VPSheetPtr &sheet);
     void ClearSelection();
+
+    void ZValueMove(int move);
 };
 
 #endif // VPMAINGRAPHICSVIEW_H

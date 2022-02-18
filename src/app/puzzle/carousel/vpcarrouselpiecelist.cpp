@@ -250,6 +250,7 @@ void VPCarrouselPieceList::contextMenuEvent(QContextMenuEvent *event)
                 piece->ClearTransformations();
                 QRectF rect = sheet->GetMarginsRect();
                 piece->SetPosition(QPointF(rect.topLeft().x() + 1, rect.topLeft().y() + 1));
+                piece->SetZValue(1.0);
                 auto *command = new VPUndoMovePieceOnSheet(layout->GetFocusedSheet(), piece);
                 layout->UndoStack()->push(command);
             }
