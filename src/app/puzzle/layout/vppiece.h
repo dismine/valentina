@@ -36,6 +36,10 @@
 #include "../vlayout/vlayoutpiece.h"
 #include "../layout/layoutdef.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
+#include "../vmisc/defglobal.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
+
 class VPLayout;
 class VPSheet;
 
@@ -44,12 +48,11 @@ class VPPiece : public VLayoutPiece
 public:
     VPPiece() = default;
     explicit VPPiece(const VLayoutPiece &layoutPiece);
-    virtual ~VPPiece() = default;
+    ~VPPiece() override = default;
 
     void Update(const VPPiecePtr &piece);
 
-    virtual auto GetUniqueID() const -> QString override;
-
+    auto GetUniqueID() const -> QString override;
 
     void ClearTransformations();
 
@@ -126,7 +129,7 @@ public:
     void SetCopyNumber(quint16 newCopyNumber);
 
 private:
-    Q_DISABLE_COPY(VPPiece)
+    Q_DISABLE_COPY_MOVE(VPPiece) // NOLINT
 
     VPLayoutWeakPtr m_layout{};
 
@@ -200,6 +203,6 @@ inline void VPPiece::SetHasSuperpositionWithPieces(bool newHasSuperpositionWithP
     m_hasSuperpositionWithPieces = newHasSuperpositionWithPieces;
 }
 
-Q_DECLARE_METATYPE(VPPiecePtr)
+Q_DECLARE_METATYPE(VPPiecePtr) // NOLINT
 
 #endif // VPPIECE_H

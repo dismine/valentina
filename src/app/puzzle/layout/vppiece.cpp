@@ -503,7 +503,7 @@ auto VPPiece::IsValid() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint16 VPPiece::CopyNumber() const
+auto VPPiece::CopyNumber() const -> quint16
 {
     return m_copyNumber;
 }

@@ -37,6 +37,10 @@
 #include "def.h"
 #include "layoutdef.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
+#include "../vmisc/defglobal.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
+
 class VPLayout;
 class VPPiece;
 class VMainGraphicsScene;
@@ -53,7 +57,7 @@ public:
     explicit VPSheetSceneData(const VPLayoutPtr &layout, const QUuid &sheetUuid);
     ~VPSheetSceneData();
 
-    VMainGraphicsScene *Scene() const;
+    auto Scene() const -> VMainGraphicsScene *;
 
     /**
      * @brief RefreshLayout Refreshes the rectangles for the layout border and the margin
@@ -90,7 +94,7 @@ public:
     void RefreshSheetSize();
 
 private:
-    Q_DISABLE_COPY(VPSheetSceneData)
+    Q_DISABLE_COPY_MOVE(VPSheetSceneData) // NOLINT
 
     VPLayoutWeakPtr m_layout{};
 
@@ -130,11 +134,11 @@ private:
 
 class VPSheet : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
-    explicit VPSheet(const VPLayoutPtr &layout);
+    explicit VPSheet(const VPLayoutPtr &layout, QObject *parent = nullptr);
 
-    virtual ~VPSheet() = default;
+    ~VPSheet() override = default;
 
     /**
      * @brief GetLayout Returns the Layout of the sheet
@@ -162,7 +166,7 @@ public:
 
     auto Uuid() const -> const QUuid &;
 
-    bool IsVisible() const;
+    auto IsVisible() const -> bool;
     void SetVisible(bool visible);
 
     auto GrainlineOrientation() const -> GrainlineType;
@@ -268,7 +272,7 @@ public:
     auto IgnoreMargins() const -> bool;
     void SetIgnoreMargins(bool newIgnoreMargins);
 
-    VPSheetSceneData *SceneData() const;
+    auto SceneData() const -> VPSheetSceneData *;
 
     void ClearSelection() const;
 
@@ -278,7 +282,7 @@ public slots:
     void CheckPiecePositionValidity(const VPPiecePtr &piece) const;
 
 private:
-    Q_DISABLE_COPY(VPSheet)
+    Q_DISABLE_COPY_MOVE(VPSheet) // NOLINT
 
     VPLayoutWeakPtr m_layout{};
 
@@ -312,6 +316,6 @@ private:
 
 };
 
-Q_DECLARE_METATYPE(VPSheetPtr)
+Q_DECLARE_METATYPE(VPSheetPtr) // NOLINT
 
 #endif // VPSHEET_H

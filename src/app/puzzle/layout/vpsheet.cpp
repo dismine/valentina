@@ -140,7 +140,7 @@ void VPSheetSceneData::PrepareForExport()
         VPSheetPtr sheet = layout->GetSheet(m_sheetUuid);
         m_slectedPiecesTmp = sheet->GetSelectedPieces();
 
-        for (const auto& piece : m_slectedPiecesTmp)
+        for (const auto& piece : qAsConst(m_slectedPiecesTmp))
         {
             if (not piece.isNull())
             {
@@ -171,7 +171,7 @@ void VPSheetSceneData::CleanAfterExport()
         layout->LayoutSettings().SetShowGrid(m_showGridTmp);
         layout->LayoutSettings().SetShowTiles(m_showTilesTmp);
 
-        for (const auto& piece : m_slectedPiecesTmp)
+        for (const auto& piece : qAsConst(m_slectedPiecesTmp))
         {
             if (not piece.isNull())
             {
@@ -319,9 +319,10 @@ void VPSheetSceneData::ConnectPiece(VPGraphicsPiece *piece)
 
 // VPSheet
 //---------------------------------------------------------------------------------------------------------------------
-VPSheet::VPSheet(const VPLayoutPtr &layout) :
-    m_layout(layout),
-    m_sceneData(new VPSheetSceneData(layout, Uuid()))
+VPSheet::VPSheet(const VPLayoutPtr &layout, QObject *parent)
+    : QObject(parent),
+      m_layout(layout),
+      m_sceneData(new VPSheetSceneData(layout, Uuid()))
 {
     SCASSERT(not layout.isNull())
 
@@ -574,7 +575,7 @@ void VPSheet::ValidatePiecesOutOfBound() const
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSheet::GetSheetRect() const -> QRectF
 {
-    return QRectF(QPoint(0, 0), m_size);
+    return {QPoint(0, 0), m_size};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -587,7 +588,7 @@ auto VPSheet::GetMarginsRect() const -> QRectF
         return rect;
     }
 
-    return QRectF(0, 0, m_size.width(), m_size.height());
+    return {0, 0, m_size.width(), m_size.height()};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
