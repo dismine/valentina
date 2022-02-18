@@ -35,14 +35,18 @@
 #include "scenedef.h"
 #include "../layout/layoutdef.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
+#include "../vmisc/defglobal.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
+
 class VTextManager;
 
 class VPGraphicsPiece : public QGraphicsObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VPGraphicsPiece(const VPPiecePtr &piece, QGraphicsItem *parent = nullptr);
-    ~VPGraphicsPiece() = default;
+    ~VPGraphicsPiece() override = default;
 
     /**
      * @brief GetPiece Returns the piece that corresponds to the graphics piece
@@ -50,7 +54,7 @@ public:
      */
     auto GetPiece() -> VPPiecePtr;
 
-    virtual int type() const override {return Type;}
+    auto type() const -> int override {return Type;}
     enum { Type = UserType + static_cast<int>(PGraphicsItem::Piece)};
 
     void SetStickyPoints(const QVector<QPointF> &newStickyPoint);
@@ -74,12 +78,15 @@ protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
+
     auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
 
     void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
 
 private:
-    Q_DISABLE_COPY(VPGraphicsPiece)
+    Q_DISABLE_COPY_MOVE(VPGraphicsPiece) // NOLINT
     VPPieceWeakPtr m_piece;
 
     QPainterPath m_cuttingLine{};
@@ -103,6 +110,8 @@ private:
 
     bool m_textAsPaths{false};
 
+    bool m_hoverMode{false};
+
     QVector<QGraphicsPathItem *> m_labelPathItems{};
     QVector<QGraphicsSimpleTextItem *> m_labelTextItems{};
 
@@ -112,7 +121,7 @@ private:
 
     void GroupMove(const QPointF &pos);
 
-    QColor PieceColor() const;
+    auto PieceColor() const -> QColor;
 };
 
 #endif // VPGRAPHICSPIECE_H

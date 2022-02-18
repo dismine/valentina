@@ -192,6 +192,20 @@ void VPGraphicsPiece::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPiece::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+{
+    m_hoverMode = true;
+    QGraphicsObject::hoverEnterEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPiece::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
+    m_hoverMode = false;
+    QGraphicsObject::hoverLeaveEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     VPPiecePtr piece = m_piece.toStrongRef();
@@ -397,8 +411,8 @@ void VPGraphicsPiece::InitPieceLabel(const QVector<QPointF> &labelShape, const V
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::PaintPiece(QPainter *painter)
 {
-    QBrush noBrush(Qt::NoBrush);
-    QBrush selectionBrush(QColor(255,160,160,60));
+    QBrush noBrush = m_hoverMode ? QBrush(QColor(199, 244, 249, 60)) : QBrush(Qt::NoBrush);
+    QBrush selectionBrush(QColor(255, 160, 160, 60));
 
     m_seamLine = QPainterPath();
     m_cuttingLine = QPainterPath();
