@@ -45,9 +45,9 @@
 
 #include "../exception/vexception.h"
 #include "../exception/vexceptionemptyparameter.h"
+#include "../exception/vexceptionwrongid.h"
 #include "../qmuparser/qmutokenparser.h"
 #include "../vmisc/def.h"
-#include "vabstractconverter.h"
 
 class QDomElement;
 
@@ -177,6 +177,22 @@ VPatternConverter::VPatternConverter(const QString &fileName)
 {
     m_ver = GetFormatVersion(GetFormatVersionStr());
     ValidateInputFile(CurrentSchema);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::Save()
+{
+    try
+    {
+        TestUniqueId();
+    }
+    catch (const VExceptionWrongId &e)
+    {
+        Q_UNUSED(e)
+        throw VException(tr("Error no unique id."));
+    }
+
+    VAbstractConverter::Save();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

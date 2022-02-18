@@ -35,7 +35,6 @@ class QString;
 
 class VLayoutConverter : public VAbstractConverter
 {
-    Q_DECLARE_TR_FUNCTIONS(VLayoutConverter)
 public:
     explicit VLayoutConverter(const QString &fileName);
     virtual ~VLayoutConverter() Q_DECL_EQ_DEFAULT;
@@ -48,6 +47,8 @@ public:
     static Q_DECL_CONSTEXPR const unsigned LayoutMaxVer = FormatVersion(0, 1, 0);
 
 protected:
+    void SetVersion(const QString &version) override;
+
     virtual unsigned MinVer() const override;
     virtual unsigned MaxVer() const override;
 

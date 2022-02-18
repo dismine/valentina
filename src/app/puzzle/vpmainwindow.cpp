@@ -438,34 +438,33 @@ auto VPMainWindow::LoadFile(QString path) -> bool
         VLayoutConverter converter(path);
         m_curFileFormatVersion = converter.GetCurrentFormatVersion();
         m_curFileFormatVersionStr = converter.GetFormatVersionStr();
-        path = converter.Convert();
+
+        QFile file(converter.Convert());
+        file.open(QIODevice::ReadOnly);
+
+        VPLayoutFileReader fileReader;
+        m_layout->Clear();
+
+        fileReader.ReadFile(m_layout, &file);
+
+        if (fileReader.hasError())
+        {
+            qCCritical(pWindow, "%s\n\n%s", qUtf8Printable(tr("File error.")),
+                       qUtf8Printable(tr("Unable to read a layout file. %1").arg(fileReader.errorString())));
+            lock.reset();
+
+            if (m_cmd->IsTestModeEnabled())
+            {
+                qApp->exit(V_EX_NOINPUT);
+            }
+            return false;
+        }
     }
     catch (VException &e)
     {
         qCCritical(pWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         lock.reset();
-        return false;
-    }
-
-    QFile file(path);
-    file.open(QIODevice::ReadOnly);
-
-    VPLayoutFileReader fileReader;
-    m_layout->Clear();
-
-    fileReader.ReadFile(m_layout, &file);
-
-    if (fileReader.hasError())
-    {
-        qCCritical(pWindow, "%s\n\n%s", qUtf8Printable(tr("File error.")),
-                   qUtf8Printable(tr("Unable to read a layout file. %1").arg(fileReader.errorString())));
-        lock.reset();
-
-        if (m_cmd->IsTestModeEnabled())
-        {
-            qApp->exit(V_EX_NOINPUT);
-        }
         return false;
     }
 

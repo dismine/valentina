@@ -44,7 +44,6 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 
 class VAbstractConverter :public VDomDocument
 {
-    Q_DECLARE_TR_FUNCTIONS(VAbstractConverter)
 public:
     explicit VAbstractConverter(const QString &fileName);
     virtual ~VAbstractConverter() Q_DECL_EQ_DEFAULT;
@@ -60,8 +59,8 @@ protected:
 
     void ValidateInputFile(const QString &currentSchema) const;
     Q_NORETURN void InvalidVersion(unsigned ver) const;
-    void Save();
-    void SetVersion(const QString &version);
+    virtual void Save();
+    virtual void SetVersion(const QString &version);
 
     virtual unsigned MinVer() const =0;
     virtual unsigned MaxVer() const =0;

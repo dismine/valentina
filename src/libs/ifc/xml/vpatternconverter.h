@@ -56,6 +56,8 @@ public:
     static Q_DECL_CONSTEXPR const unsigned PatternMaxVer = FormatVersion(0, 9, 0);
 
 protected:
+    void Save() override;
+
     virtual unsigned MinVer() const override;
     virtual unsigned MaxVer() const override;
 

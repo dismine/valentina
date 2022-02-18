@@ -61,7 +61,6 @@ const QString TagLine                = QStringLiteral("line");
 const QString TagScale               = QStringLiteral("scale");
 const QString TagWatermark           = QStringLiteral("watermark");
 
-const QString AttrVersion              = QStringLiteral("version");
 const QString AttrWarningSuperposition = QStringLiteral("warningSuperposition");
 const QString AttrWarningOutOfBound    = QStringLiteral("warningOutOfBound");
 const QString AttrStickyEdges          = QStringLiteral("stickyEdges");

@@ -50,7 +50,6 @@
 #include <QXmlSchemaValidator>
 
 #include "../exception/vexception.h"
-#include "../exception/vexceptionwrongid.h"
 #include "vdomdocument.h"
 
 //This class need for validation pattern file using XSD shema
@@ -339,17 +338,6 @@ void VAbstractConverter::ValidateInputFile(const QString &currentSchema) const
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractConverter::Save()
 {
-    try
-    {
-        TestUniqueId();
-    }
-    catch (const VExceptionWrongId &e)
-    {
-        Q_UNUSED(e)
-        VException ex(tr("Error no unique id."));
-        throw ex;
-    }
-
     m_tmpFile.resize(0);//clear previous content
     const int indent = 4;
     QTextStream out(&m_tmpFile);
@@ -358,8 +346,7 @@ void VAbstractConverter::Save()
 
     if (not m_tmpFile.flush())
     {
-        VException e(m_tmpFile.errorString());
-        throw e;
+        throw VException(m_tmpFile.errorString());
     }
 }
 
