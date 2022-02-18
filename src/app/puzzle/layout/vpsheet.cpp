@@ -166,7 +166,6 @@ void VPSheetSceneData::CleanAfterExport()
     m_graphicsSheet->SetShowMargin(true);
 
     m_rotationControls->setVisible(true);
-    m_rotationOrigin->setVisible(true);
 
     VPLayoutPtr layout = m_layout.toStrongRef();
     if (not layout.isNull())
