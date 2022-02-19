@@ -90,6 +90,8 @@ public:
     auto GetSourceLinesCount() const -> int;
     auto GetSourceLine(int i) const -> const TextLine&;
 
+    auto MaxLineWidth(int width) const -> int;
+
     void Update(const QString& qsName, const VPieceLabelData& data, const VContainer *pattern);
     void Update(VAbstractPattern* pDoc, const VContainer *pattern);
 

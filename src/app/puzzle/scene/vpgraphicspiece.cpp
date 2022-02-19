@@ -47,6 +47,7 @@
 
 #include "../vpapplication.h"
 
+#include "compatibility.h"
 #include "vlayoutpiecepath.h"
 #include "vplacelabelitem.h"
 
@@ -60,7 +61,81 @@ namespace
 {
 QColor mainColor = Qt::black;
 QColor errorColor = Qt::red;
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto LineMatrix(const VPPiecePtr &piece, const QPointF &topLeft, qreal angle, const QPointF &linePos,
+                       int maxLineWidth) -> QTransform
+{
+    if (piece.isNull())
+    {
+        return {};
+    }
+
+    QTransform labelMatrix;
+    labelMatrix.translate(topLeft.x(), topLeft.y());
+
+    if (piece->IsMirror())
+    {
+        labelMatrix.scale(-1, 1);
+        labelMatrix.rotate(-angle);
+        labelMatrix.translate(-maxLineWidth, 0);
+    }
+    else
+    {
+        labelMatrix.rotate(angle);
+    }
+
+    labelMatrix.translate(linePos.x(), linePos.y()); // Each string has own position
+    labelMatrix *= piece->GetMatrix();
+
+    return labelMatrix;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto LineFont(const TextLine& tl, const QFont &base) -> QFont
+{
+    QFont fnt = base;
+    fnt.setPixelSize(base.pixelSize() + tl.m_iFontSize);
+    fnt.setBold(tl.m_bold);
+    fnt.setItalic(tl.m_italic);
+    return fnt;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto LineText(const TextLine& tl, const QFontMetrics &fm, qreal width) -> QString
+{
+    QString qsText = tl.m_qsText;
+    if (TextWidth(fm, qsText) > width)
+    {
+        qsText = fm.elidedText(qsText, Qt::ElideMiddle, static_cast<int>(width));
+    }
+
+    return qsText;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto LineAlign(const TextLine& tl, const QString &text, const QFontMetrics &fm, qreal width) -> qreal
+{
+    const int lineWidth = TextWidth(fm, text);
+
+    qreal dX = 0;
+    if (tl.m_eAlign == 0 || (tl.m_eAlign & Qt::AlignLeft) > 0)
+    {
+        dX = 0;
+    }
+    else if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
+    {
+        dX = (width - lineWidth)/2;
+    }
+    else if ((tl.m_eAlign & Qt::AlignRight) > 0)
+    {
+        dX = width - lineWidth;
+    }
+
+    return dX;
+}
+}  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VPGraphicsPiece::VPGraphicsPiece(const VPPiecePtr &piece, QGraphicsItem *parent) :
@@ -302,108 +377,63 @@ void VPGraphicsPiece::InitPieceLabel(const QVector<QPointF> &labelShape, const V
         return;
     }
 
-    if (labelShape.count() > 2)
+    if (labelShape.count() <= 2)
     {
-        const qreal dW = QLineF(labelShape.at(0), labelShape.at(1)).length();
-        const qreal dH = QLineF(labelShape.at(1), labelShape.at(2)).length();
-        const qreal angle = - QLineF(labelShape.at(0), labelShape.at(1)).angle();
-        qreal dY = 0;
-        QColor color = PieceColor();
+        return;
+    }
 
-        for (int i = 0; i < tm.GetSourceLinesCount(); ++i)
+    const qreal dW = QLineF(labelShape.at(0), labelShape.at(1)).length();
+    const qreal dH = QLineF(labelShape.at(1), labelShape.at(2)).length();
+    const qreal angle = - QLineF(labelShape.at(0), labelShape.at(1)).angle();
+    const QColor color = PieceColor();
+    const int maxLineWidth = tm.MaxLineWidth(static_cast<int>(dW));
+
+    qreal dY = 0;
+
+    for (int i = 0; i < tm.GetSourceLinesCount(); ++i)
+    {
+        const TextLine& tl = tm.GetSourceLine(i);
+        const QFont fnt = LineFont(tl, tm.GetFont());
+        const QFontMetrics fm(fnt);
+
+        if (m_textAsPaths)
         {
-            const TextLine& tl = tm.GetSourceLine(i);
-            QFont fnt = tm.GetFont();
-            fnt.setPixelSize(tm.GetFont().pixelSize() + tl.m_iFontSize);
-            fnt.setBold(tl.m_bold);
-            fnt.setItalic(tl.m_italic);
+            dY += fm.height();
+        }
 
-            QFontMetrics fm(fnt);
+        if (dY > dH)
+        {
+            break;
+        }
 
-            if (m_textAsPaths)
-            {
-                dY += fm.height();
-            }
+        const QString qsText = LineText(tl, fm, dW);
+        const qreal dX = LineAlign(tl, qsText, fm, dW);
+        // set up the rotation around top-left corner matrix
+        const QTransform lineMatrix = LineMatrix(piece, labelShape.at(0), angle, QPointF(dX, dY), maxLineWidth);
 
-            if (dY > dH)
-            {
-                break;
-            }
+        if (m_textAsPaths)
+        {
+            QPainterPath path;
+            path.addText(0, - static_cast<qreal>(fm.ascent())/6., fnt, qsText);
 
-            QString qsText = tl.m_qsText;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
-            if (fm.horizontalAdvance(qsText) > dW)
-#else
-            if (fm.width(qsText) > dW)
-#endif
-            {
-                qsText = fm.elidedText(qsText, Qt::ElideMiddle, static_cast<int>(dW));
-            }
+            auto* item = new QGraphicsPathItem(this);
+            item->setPath(path);
+            item->setBrush(QBrush(color));
+            item->setTransform(lineMatrix);
+            m_labelPathItems.append(item);
 
-            qreal dX = 0;
-            if (tl.m_eAlign == 0 || (tl.m_eAlign & Qt::AlignLeft) > 0)
-            {
-                dX = 0;
-            }
-            else if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
-            {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
-                dX = (dW - fm.horizontalAdvance(qsText))/2;
-#else
-                dX = (dW - fm.width(qsText))/2;
-#endif
-            }
-            else if ((tl.m_eAlign & Qt::AlignRight) > 0)
-            {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
-                dX = dW - fm.horizontalAdvance(qsText);
-#else
-                dX = dW - fm.width(qsText);
-#endif
-            }
+            dY += tm.GetSpacing();
+        }
+        else
+        {
+            auto* item = new QGraphicsSimpleTextItem(this);
+            item->setFont(fnt);
+            item->setText(qsText);
+            item->setBrush(QBrush(color));
+            item->setTransform(lineMatrix);
+            m_labelTextItems.append(item);
 
-            // set up the rotation around top-left corner matrix
-            QTransform labelMatrix;
-            labelMatrix.translate(labelShape.at(0).x(), labelShape.at(0).y());
-            if (piece->IsMirror())
-            {
-                labelMatrix.scale(-1, 1);
-                labelMatrix.rotate(-angle);
-                labelMatrix.translate(-dW, 0);
-                labelMatrix.translate(dX, dY); // Each string has own position
-            }
-            else
-            {
-                labelMatrix.rotate(angle);
-                labelMatrix.translate(dX, dY); // Each string has own position
-            }
-
-            labelMatrix *= piece->GetMatrix();
-
-            if (m_textAsPaths)
-            {
-                QPainterPath path;
-                path.addText(0, - static_cast<qreal>(fm.ascent())/6., fnt, qsText);
-
-                auto* item = new QGraphicsPathItem(this);
-                item->setPath(path);
-                item->setBrush(QBrush(color));
-                item->setTransform(labelMatrix);
-                m_labelPathItems.append(item);
-
-                dY += tm.GetSpacing();
-            }
-            else
-            {
-                auto* item = new QGraphicsSimpleTextItem(this);
-                item->setFont(fnt);
-                item->setText(qsText);
-                item->setBrush(QBrush(color));
-                item->setTransform(labelMatrix);
-                m_labelTextItems.append(item);
-
-                dY += (fm.height() + tm.GetSpacing());
-            }
+            dY += (fm.height() + tm.GetSpacing());
         }
     }
 }

@@ -32,6 +32,7 @@
 #include <QStringList>
 #include <QSet>
 #include <QVector>
+#include <QFontMetrics>
 
 class QPointF;
 
@@ -250,6 +251,26 @@ inline auto SetIntersects(const QSet<T> &set1, const QSet<T> &set2) -> bool
         ++i;
     }
     return false;
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto TextWidth(const QFontMetrics &fm, const QString &text, int len = -1) -> int
+{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
+    return fm.horizontalAdvance(text, len);
+#else
+    return fm.width(text, len);
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto TextWidthF(const QFontMetricsF &fm, const QString &text) -> qreal
+{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
+    return fm.horizontalAdvance(text);
+#else
+    return fm.width(text);
 #endif
 }
 

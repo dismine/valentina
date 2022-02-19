@@ -492,6 +492,34 @@ auto VTextManager::GetSourceLine(int i) const -> const TextLine&
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VTextManager::MaxLineWidth(int width) const -> int
+{
+    int maxWidth = 0;
+    for (int i = 0; i < m_liLines.count(); ++i)
+    {
+        const TextLine& tl = m_liLines.at(i);
+
+        QFont fnt = m_font;
+        fnt.setPixelSize(fnt.pixelSize() + tl.m_iFontSize);
+        fnt.setBold(tl.m_bold);
+        fnt.setItalic(tl.m_italic);
+
+        QFontMetrics fm(fnt);
+
+        QString qsText = tl.m_qsText;
+
+        if (TextWidth(fm, qsText) > width)
+        {
+            qsText = fm.elidedText(qsText, Qt::ElideMiddle, width);
+        }
+
+        maxWidth = qMax(TextWidth(fm, qsText), maxWidth);
+    }
+
+    return maxWidth;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VTextManager::FitFontSize sets the font size just big enough, so that the text fits into rectangle of
  * size (fW, fH)
