@@ -185,6 +185,8 @@ void VPPiece::ClearTransformations()
     // (0,0) in the sheet coordinate system
     const QPointF offset = MappedDetailBoundingRect().topLeft();
     Translate(-offset.x(), -offset.y());
+
+    SetMirror(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
