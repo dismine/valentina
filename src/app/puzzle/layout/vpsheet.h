@@ -51,6 +51,7 @@ class VPGraphicsTileGrid;
 class VPGraphicsSheet;
 class VLayoutPiece;
 
+// cppcheck-suppress noCopyConstructor
 class VPSheetSceneData
 {
 public:
