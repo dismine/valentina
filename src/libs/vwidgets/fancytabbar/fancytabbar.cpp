@@ -29,6 +29,7 @@
 
 #include "fancytabbar.h"
 #include "stylehelper.h"
+#include "../vmisc/compatibility.h"
 
 #include <QMouseEvent>
 #include <QPainter>
@@ -92,11 +93,7 @@ QSize FancyTabBar::TabSizeHint(bool minimum) const
             {
                 sentence = sentence.isEmpty() ? sentence = word : sentence + QLatin1Char(' ') + word;
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
-                const int width = fm.horizontalAdvance(sentence);
-#else
-                const int width = fm.width(sentence);
-#endif
+                const int width = TextWidth(fm, sentence);
                 if (maxLabelwidth < width)
                 {
                     maxLabelwidth = width;
@@ -106,11 +103,7 @@ QSize FancyTabBar::TabSizeHint(bool minimum) const
         }
         else
         {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
-            const int width = fm.horizontalAdvance(tabText);
-#else
-            const int width = fm.width(tabText);
-#endif
+            const int width = TextWidth(fm, tabText);
             if (width > maxLabelwidth)
             {
                 maxLabelwidth = width;

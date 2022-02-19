@@ -48,6 +48,7 @@
 #include "../vmisc/vmath.h"
 #include "../vmisc/def.h"
 #include "../vmisc/vabstractvalapplication.h"
+#include "../vmisc/compatibility.h"
 #include "../ifc/exception/vexception.h"
 
 namespace
@@ -494,11 +495,7 @@ void VPoster::Ruler(QVector<QGraphicsItem *> &data, QGraphicsItem *parent, QRect
 
             qreal unitsWidth = 0;
             QFontMetrics fm(fnt);
-        #if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
-            unitsWidth = fm.horizontalAdvance(units->toPlainText());
-        #else
-            unitsWidth = fm.width(units->toPlainText());
-        #endif
+            unitsWidth = TextWidth(fm, units->toPlainText());
             units->setPos(rec.x() + step*0.5-unitsWidth*0.7,
                           rec.y() + rec.height()-static_cast<int>(allowance)-shortNotchHeight);
             units->setFont(fnt);

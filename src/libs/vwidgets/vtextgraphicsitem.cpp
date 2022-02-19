@@ -42,6 +42,7 @@
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
 #include "../vmisc/literals.h"
+#include "../vmisc/compatibility.h"
 #include "vtextgraphicsitem.h"
 
 const qreal resizeSquare = (3./*mm*/ / 25.4) * PrintDPI;
@@ -177,11 +178,7 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
             break;
         }
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
-        if (fm.horizontalAdvance(qsText) > iW)
-#else
-        if (fm.width(qsText) > iW)
-#endif
+        if (TextWidth(fm, qsText) > iW)
         {
             qsText = fm.elidedText(qsText, Qt::ElideMiddle, iW);
         }

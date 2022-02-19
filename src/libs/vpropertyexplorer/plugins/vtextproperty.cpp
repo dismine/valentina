@@ -19,6 +19,7 @@
  *************************************************************************/
 #include "vtextproperty.h"
 #include "../vproperty_p.h"
+#include "../vmisc/compatibility.h"
 
 #include <QPlainTextEdit>
 #include <QTextEdit>
@@ -39,11 +40,7 @@ void SetTabStopDistance(QPlainTextEdit *edit, int tabWidthChar)
 #else
     // compute the size of a char in double-precision
     static constexpr int bigNumber = 1000; // arbitrary big number.
-#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
-    const int many_char_width = fontMetrics.horizontalAdvance(testString.repeated(bigNumber));
-#else
-    const int many_char_width = fontMetrics.width(testString.repeated(bigNumber));
-#endif
+    const int many_char_width = TextWidth(fontMetrics, testString.repeated(bigNumber));
     const double singleCharWidthDouble = many_char_width / double(bigNumber);
     // set the tab stop with double precision
     edit->setTabStopDistance(tabWidthChar * singleCharWidthDouble);

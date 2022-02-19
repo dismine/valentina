@@ -9,6 +9,7 @@
 #include "../vmisc/def.h"
 #include "../vmisc/literals.h"
 #include "../vmisc/vcommonsettings.h"
+#include "../vmisc/compatibility.h"
 #include "../vlayout/vprintlayout.h"
 
 namespace
@@ -335,11 +336,7 @@ void VPTileFactory::DrawRuler(QPainter *painter) const
 
             qreal unitsWidth = 0;
             QFontMetrics fm(fnt);
-        #if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
-            unitsWidth = fm.horizontalAdvance(units);
-        #else
-            unitsWidth = fm.width(units);
-        #endif
+            unitsWidth = TextWidth(fm, units);
             painter->drawText(QPointF(step*0.5-unitsWidth*0.6,
                                       m_drawingAreaHeight - tileStripeWidth + notchHeight+shortNotchHeight), units);
         }
@@ -623,11 +620,7 @@ void VPTileFactory::DrawTextInformation(QPainter *painter, int row, int col, int
     td.setPageSize(QSizeF(m_drawingAreaHeight - UnitConvertor(2, Unit::Cm, Unit::Px), m_drawingAreaWidth));
 
     QFontMetrics metrix = QFontMetrics(td.defaultFont());
-#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
-    int maxWidth = metrix.horizontalAdvance(QString().fill('z', 50));
-#else
-    int maxWidth = metrix.width(QString().fill('z', 50));
-#endif
+    int maxWidth = TextWidth(metrix, QString().fill('z', 50));
     QString clippedSheetName = metrix.elidedText(sheetName, Qt::ElideMiddle, maxWidth);
 
     td.setHtml(QStringLiteral("<table width='100%' style='color:rgb(%1);'>"
