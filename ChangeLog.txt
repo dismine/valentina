@@ -2,6 +2,7 @@
 - Z value change for a layout piece.
 - Fix issue with Custom template.
 - Fix issue with tile font size.
+- [smart-pattern/valentina#171] System identifies two of the same curve.
 
 # Valentina 0.7.50 February 14, 2022
 - Fix regression. Minimal seam allowance width is less than the point accuracy values.
