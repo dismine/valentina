@@ -366,12 +366,9 @@ QVector<QPointF> PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3,
         const QVector<QPointF> tail = BezierTailPoints();
         return futureBezier.result() + tail;
     }
-    else
-    {
-        return BezierPoints() + BezierTailPoints();
-    }
+    return BezierPoints() + BezierTailPoints();
 }
-}
+}  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractCubicBezier::VAbstractCubicBezier(const GOType &type, const quint32 &idObject, const Draw &mode)

@@ -779,7 +779,7 @@ bool VToolSplinePath::IsMovable(int index) const
 void VToolSplinePath::RefreshCtrlPoints()
 {
     // Very important to disable control points. Without it the pogram can't move the curve.
-    for (auto point : qAsConst(controlPoints))
+    for (auto *point : qAsConst(controlPoints))
     {
         point->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
     }
@@ -841,7 +841,7 @@ void VToolSplinePath::RefreshCtrlPoints()
         controlPoints[j-1]->blockSignals(false);
     }
 
-    for (auto point : qAsConst(controlPoints))
+    for (auto *point : qAsConst(controlPoints))
     {
         point->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     }
