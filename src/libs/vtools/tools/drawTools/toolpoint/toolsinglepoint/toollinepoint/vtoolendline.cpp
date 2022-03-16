@@ -234,6 +234,7 @@ void VToolEndLine::SetVisualization()
         visual->SetAngle(VAbstractApplication::VApp()->TrVars()
                          ->FormulaToUser(formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
         visual->setLineStyle(LineStyleToPenStyle(m_lineType));
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }

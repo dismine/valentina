@@ -251,15 +251,13 @@ void Visualization::DrawLine(VScaledLine *lineItem, const QLineF &line, const QC
 
     QPen visPen = lineItem->pen();
     visPen.setColor(color);
-    visPen.setStyle(style);
+    visPen.setStyle(not line.isNull() ? style : Qt::NoPen);
 
     lineItem->setPen(visPen);
     if (not line.isNull())
     {
         lineItem->setLine(line);
     }
-
-    lineItem->setVisible(not line.isNull());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

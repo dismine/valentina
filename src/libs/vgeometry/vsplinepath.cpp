@@ -207,11 +207,6 @@ VSplinePath::~VSplinePath()
  */
 void VSplinePath::append(const VSplinePoint &point)
 {
-    if (d->path.size() > 0 && static_cast<QPointF>(ConstLast(d->path).P()) == static_cast<QPointF>(point.P())) //-V807
-    {
-        return;
-    }
-
     d->path.append(point);
     CreateName();
 }

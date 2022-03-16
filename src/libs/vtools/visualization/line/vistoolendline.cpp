@@ -63,14 +63,21 @@ void VisToolEndLine::RefreshGeometry()
     QLineF line;
     if (qFuzzyIsNull(length))
     {
-        if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
+        if (mode == Mode::Creation)
         {
-            line = QLineF(static_cast<QPointF>(*first), Visualization::scenePos);
-            line.setAngle(CorrectAngle(line.angle()));
+            if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
+            {
+                line = QLineF(static_cast<QPointF>(*first), Visualization::scenePos);
+                line.setAngle(CorrectAngle(line.angle()));
+            }
+            else
+            {
+                line = QLineF(static_cast<QPointF>(*first), Visualization::scenePos);
+            }
         }
         else
         {
-            line = QLineF(static_cast<QPointF>(*first), Visualization::scenePos);
+            DrawPoint(point, static_cast<QPointF>(*first), mainColor);
         }
     }
     else

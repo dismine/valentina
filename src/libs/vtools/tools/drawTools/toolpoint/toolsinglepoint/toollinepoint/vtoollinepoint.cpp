@@ -75,9 +75,11 @@ VToolLinePoint::VToolLinePoint(VAbstractPattern *doc, VContainer *data, const qu
     Q_ASSERT_X(basePointId != 0, Q_FUNC_INFO, "basePointId == 0"); //-V654 //-V712
     QPointF point1 = static_cast<QPointF>(*data->GeometricObject<VPointF>(basePointId));
     QPointF point2 = static_cast<QPointF>(*data->GeometricObject<VPointF>(id));
-    mainLine = new VScaledLine(QLineF(point1 - point2, QPointF()), this);
+    QLineF line(point1 - point2, QPointF());
+    mainLine = new VScaledLine(line, this);
     mainLine->SetBoldLine(false);
     mainLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
+    mainLine->setVisible(not line.isNull());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -107,7 +109,9 @@ void VToolLinePoint::RefreshGeometry()
     VToolSinglePoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(m_id));
     QPointF point = static_cast<QPointF>(*VDrawTool::data.GeometricObject<VPointF>(m_id));
     QPointF basePoint = static_cast<QPointF>(*VDrawTool::data.GeometricObject<VPointF>(basePointId));
-    mainLine->setLine(QLineF(basePoint - point, QPointF()));
+    QLineF line(basePoint - point, QPointF());
+    mainLine->setLine(line);
+    mainLine->setVisible(not line.isNull());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

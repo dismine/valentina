@@ -204,7 +204,8 @@ VSplineData::~VSplineData()
 qreal VSplineData::GetL(const QPointF &p1, const QPointF &p4, qreal kCurve)
 {
     static const qreal angle = 90;
-    const qreal radius = QLineF(p1, p4).length()/M_SQRT2;
+    qreal length = VFuzzyComparePoints(p1, p4) ? accuracyPointOnLine*2 : QLineF(p1, p4).length();
+    const qreal radius = length/M_SQRT2;
     return kCurve * radius * 4 / 3 * qTan( angle * M_PI_4 / 180.0 );
 }
 
