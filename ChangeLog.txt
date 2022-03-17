@@ -4,6 +4,7 @@
 - Fix issue with tile font size.
 - [smart-pattern/valentina#171] System identifies two of the same curve.
 - [smart-pattern/valentina#170] Incorrect work with curves.
+- Suspend use of qt_ntfs_permission_lookup. QTBUG-101168
 
 # Valentina 0.7.50 February 14, 2022
 - Fix regression. Minimal seam allowance width is less than the point accuracy values.

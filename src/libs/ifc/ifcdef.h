@@ -31,7 +31,7 @@
 
 #include <QtGlobal>
 #ifdef Q_OS_WIN
-   extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
+//   extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
 #  include <qt_windows.h>
 #endif /*Q_OS_WIN*/
 

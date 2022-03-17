@@ -986,9 +986,9 @@ bool VDomDocument::SafeCopy(const QString &source, const QString &destination, Q
 {
     bool result = false;
 
-#ifdef Q_OS_WIN32
-    qt_ntfs_permission_lookup++; // turn checking on
-#endif /*Q_OS_WIN32*/
+//#ifdef Q_OS_WIN32
+//    qt_ntfs_permission_lookup++; // turn checking on
+//#endif /*Q_OS_WIN32*/
 
     QTemporaryFile destFile(destination + QLatin1String(".XXXXXX"));
     destFile.setAutoRemove(false);// Will be renamed to be destination file
@@ -1042,9 +1042,9 @@ bool VDomDocument::SafeCopy(const QString &source, const QString &destination, Q
         }
     }
 
-#ifdef Q_OS_WIN32
-    qt_ntfs_permission_lookup--; // turn off check permission again
-#endif /*Q_OS_WIN32*/
+//#ifdef Q_OS_WIN32
+//    qt_ntfs_permission_lookup--; // turn off check permission again
+//#endif /*Q_OS_WIN32*/
 
     return result;
 }

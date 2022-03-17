@@ -42,9 +42,9 @@
 #include <QLockFile>
 #include <QMessageBox>
 
-#ifdef Q_OS_WIN
-extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
-#endif /*Q_OS_WIN*/
+//#ifdef Q_OS_WIN
+//extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
+//#endif /*Q_OS_WIN*/
 
 #if defined(Q_OS_MAC)
 #include <QStyleFactory>
@@ -259,9 +259,9 @@ auto VAbstractMainWindow::CheckFilePermissions(const QString &path, QWidget *mes
 {
     QFileInfo info(path);
 
-#ifdef Q_OS_WIN32
-        qt_ntfs_permission_lookup++; // turn checking on
-#endif /*Q_OS_WIN32*/
+//#ifdef Q_OS_WIN32
+//        qt_ntfs_permission_lookup++; // turn checking on
+//#endif /*Q_OS_WIN32*/
 
     if (not info.exists())
     {
@@ -271,9 +271,9 @@ auto VAbstractMainWindow::CheckFilePermissions(const QString &path, QWidget *mes
     // cppcheck-suppress unreadVariable
     const bool isFileWritable = info.isWritable();
 
-#ifdef Q_OS_WIN32
-        qt_ntfs_permission_lookup--; // turn it off again
-#endif /*Q_OS_WIN32*/
+//#ifdef Q_OS_WIN32
+//        qt_ntfs_permission_lookup--; // turn it off again
+//#endif /*Q_OS_WIN32*/
 
     if (not isFileWritable)
     {
@@ -286,13 +286,13 @@ auto VAbstractMainWindow::CheckFilePermissions(const QString &path, QWidget *mes
 
         if (messageBox.exec() == QMessageBox::Yes)
         {
-#ifdef Q_OS_WIN32
-            qt_ntfs_permission_lookup++; // turn checking on
-#endif /*Q_OS_WIN32*/
+//#ifdef Q_OS_WIN32
+//            qt_ntfs_permission_lookup++; // turn checking on
+//#endif /*Q_OS_WIN32*/
             bool changed = QFile::setPermissions(path, QFileInfo(path).permissions() | QFileDevice::WriteUser);
-#ifdef Q_OS_WIN32
-            qt_ntfs_permission_lookup--; // turn it off again
-#endif /*Q_OS_WIN32*/
+//#ifdef Q_OS_WIN32
+//            qt_ntfs_permission_lookup--; // turn it off again
+//#endif /*Q_OS_WIN32*/
 
             if (not changed)
             {
