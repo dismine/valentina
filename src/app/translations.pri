@@ -12,7 +12,6 @@ PMSYSTEMS += \
 # An example of using LOCALES="de_DE nl_NL"
 isEmpty(LOCALES){
     LANGUAGES += \
-        ru_RU \
         uk_UA \
         de_DE \
         cs_CZ \
@@ -83,17 +82,6 @@ macx{
     RESOURCES_DIR = "Contents/Resources"
 
         # Copy in bundle translation files.
-        exists($${TRANSLATIONS_PATH}/valentina_ru_RU.qm){
-            TRANSLATION_ru_RU.files += \
-                $$files($${TRANSLATIONS_PATH}/*_ru_RU.qm) \
-                $$[QT_INSTALL_TRANSLATIONS]/qtbase_ru.qm \
-                $$[QT_INSTALL_TRANSLATIONS]/qt_ru.qm \
-                $$[QT_INSTALL_TRANSLATIONS]/qtxmlpatterns_ru.qm \
-                $${TRANSLATIONS_PATH}/Localizable.strings
-            TRANSLATION_ru_RU.path = "$$RESOURCES_DIR/translations/ru_RU.lproj"
-            QMAKE_BUNDLE_DATA += TRANSLATION_ru_RU
-        }
-
         exists($${TRANSLATIONS_PATH}/valentina_uk_UA.qm){
             TRANSLATION_uk_UA.files += \
                 $$files($${TRANSLATIONS_PATH}/*_uk_UA.qm) \

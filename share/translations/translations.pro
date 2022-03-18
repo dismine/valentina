@@ -48,7 +48,6 @@ include(../../src/libs/vwidgets/vwidgets.pri)
 # When adding a translation here, also add it in the macx part (translations.pri).
 
 LANGUAGES += \
-    ru_RU \
     uk_UA \
     de_DE \
     cs_CZ \

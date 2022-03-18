@@ -204,6 +204,12 @@ void VAbstractApplication::LoadTranslation(const QString &locale)
         qDebug()<<"Locale is empty.";
         return;
     }
+
+    if (locale.startsWith(QLatin1String("ru")))
+    {
+        return;
+    }
+
     qDebug()<<"Checked locale:"<<locale;
 
     ClearTranslation();

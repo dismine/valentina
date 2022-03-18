@@ -103,7 +103,6 @@ QStringList SupportedLocales()
 {
     return QStringList
     {
-        "ru_RU",
         "uk_UA",
         "de_DE",
         "cs_CZ",
@@ -490,6 +489,11 @@ void InitLanguages(QComboBox *combobox)
         // get locale extracted by filename           "valentina_de_De.qm"
         locale.truncate(locale.lastIndexOf('.'));  // "valentina_de_De"
         locale.remove(0, locale.indexOf('_') + 1); // "de_De"
+
+        if (locale.startsWith(QLatin1String("ru")))
+        {
+            continue;
+        }
 
         if (not englishUS)
         {
