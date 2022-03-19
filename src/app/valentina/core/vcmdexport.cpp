@@ -128,7 +128,7 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
         bool a = IsOptionSet(key);
         bool b = IsOptionSet(LONG_OPTION_PAGEUNITS);
 
-        if ((a || b) && !(a && b))
+        if (a && !(a && b))
         {
             qCritical() << message << "\n";
             const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
