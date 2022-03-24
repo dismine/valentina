@@ -588,7 +588,13 @@ bool MainWindow::LoadMeasurements(const QString &path)
 //---------------------------------------------------------------------------------------------------------------------
 bool MainWindow::UpdateMeasurements(const QString &path, qreal baseA, qreal baseB, qreal baseC)
 {
-    m = OpenMeasurementFile(path);
+    return UpdateMeasurements(OpenMeasurementFile(path), baseA, baseB, baseC);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool MainWindow::UpdateMeasurements(const QSharedPointer<VMeasurements> &mFile, qreal baseA, qreal baseB, qreal baseC)
+{
+    m = mFile;
 
     if (m->isNull())
     {
@@ -4305,8 +4311,13 @@ void MainWindow::DimensionCBaseChanged()
 void MainWindow::GradationChanged()
 {
     m_gradation->stop();
-    if (UpdateMeasurements(AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->MPath()),
-                           m_currentDimensionA, m_currentDimensionB, m_currentDimensionC))
+
+    if (m->isNull())
+    {
+        m = OpenMeasurementFile(AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->MPath()));
+    }
+
+    if (UpdateMeasurements(m, m_currentDimensionA, m_currentDimensionB, m_currentDimensionC))
     {
         doc->LiteParseTree(Document::FullLiteParse);
         StoreDimensions();

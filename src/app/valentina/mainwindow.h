@@ -404,6 +404,8 @@ private:
 
     bool               LoadMeasurements(const QString &path);
     bool               UpdateMeasurements(const QString &path, qreal baseA, qreal baseB, qreal baseC);
+    bool               UpdateMeasurements(const QSharedPointer<VMeasurements> &mFile, qreal baseA, qreal baseB,
+                                          qreal baseC);
 
     void               ReopenFilesAfterCrash(QStringList &args);
     bool               DoExport(const VCommandLinePtr& expParams);
