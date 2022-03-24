@@ -81,11 +81,7 @@ private:
     void ToV0_4_0();
     void ToV0_4_1();
     void ToV0_4_2();
-    void ToV0_4_3();
-    void ToV0_4_4();
     void ToV0_5_0();
-    void ToV0_5_1();
-    void ToV0_5_2();
     void ToV0_5_3();
 };
 

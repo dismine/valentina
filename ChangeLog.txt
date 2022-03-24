@@ -7,6 +7,7 @@
 - Suspend use of qt_ntfs_permission_lookup. QTBUG-101168
 - Remove support for russian language.
 - Improve CLI. Better handle printer margins.
+- Improve file format conversion.
 
 # Valentina 0.7.50 February 14, 2022
 - Fix regression. Minimal seam allowance width is less than the point accuracy values.

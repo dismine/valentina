@@ -111,35 +111,24 @@ void VVITConverter::ApplyPatches()
     {
         case (FormatVersion(0, 2, 0)):
             ToV0_3_0();
-            ValidateXML(XSDSchema(FormatVersion(0, 3, 0)));
             Q_FALLTHROUGH();
         case (FormatVersion(0, 3, 0)):
             ToV0_3_1();
-            ValidateXML(XSDSchema(FormatVersion(0, 3, 1)));
             Q_FALLTHROUGH();
         case (FormatVersion(0, 3, 1)):
             ToV0_3_2();
-            ValidateXML(XSDSchema(FormatVersion(0, 3, 2)));
             Q_FALLTHROUGH();
         case (FormatVersion(0, 3, 2)):
             ToV0_3_3();
-            ValidateXML(XSDSchema(FormatVersion(0, 3, 3)));
             Q_FALLTHROUGH();
         case (FormatVersion(0, 3, 3)):
             ToV0_4_0();
-            ValidateXML(XSDSchema(FormatVersion(0, 4, 0)));
             Q_FALLTHROUGH();
         case (FormatVersion(0, 4, 0)):
-            ToV0_5_0();
-            ValidateXML(XSDSchema(FormatVersion(0, 5, 0)));
-            Q_FALLTHROUGH();
         case (FormatVersion(0, 5, 0)):
-            ToV0_5_1();
-            ValidateXML(XSDSchema(FormatVersion(0, 5, 1)));
-            Q_FALLTHROUGH();
         case (FormatVersion(0, 5, 1)):
             ToV0_5_2();
-            ValidateXML(XSDSchema(FormatVersion(0, 5, 2)));
+            ValidateXML(CurrentSchema);
             Q_FALLTHROUGH();
         case (FormatVersion(0, 5, 2)):
             break;
@@ -425,28 +414,6 @@ void VVITConverter::ToV0_4_0()
 
     SetVersion(QStringLiteral("0.4.0"));
     ConverCustomerNameToV0_4_0();
-    Save();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VVITConverter::ToV0_5_0()
-{
-    // TODO. Delete if minimal supported version is 0.5.0
-    Q_STATIC_ASSERT_X(VVITConverter::MeasurementMinVer < FormatVersion(0, 5, 0),
-                      "Time to refactor the code.");
-
-    SetVersion(QStringLiteral("0.5.0"));
-    Save();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VVITConverter::ToV0_5_1()
-{
-    // TODO. Delete if minimal supported version is 0.5.1
-    Q_STATIC_ASSERT_X(VVITConverter::MeasurementMinVer < FormatVersion(0, 5, 1),
-                      "Time to refactor the code.");
-
-    SetVersion(QStringLiteral("0.5.1"));
     Save();
 }
 

@@ -312,7 +312,8 @@ void VAbstractConverter::ValidateInputFile(const QString &currentSchema) const
         { // Version less than minimally supported version. Can't do anything.
             throw;
         }
-        else if (m_ver > MaxVer())
+
+        if (m_ver > MaxVer())
         { // Version bigger than maximum supported version. We still have a chance to open the file.
             try
             { // Try to open like the current version.

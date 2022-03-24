@@ -104,39 +104,23 @@ void VVSTConverter::ApplyPatches()
     {
         case (FormatVersion(0, 3, 0)):
             ToV0_4_0();
-            ValidateXML(XSDSchema(FormatVersion(0, 4, 0)));
             Q_FALLTHROUGH();
         case (FormatVersion(0, 4, 0)):
             ToV0_4_1();
-            ValidateXML(XSDSchema(FormatVersion(0, 4, 1)));
             Q_FALLTHROUGH();
         case (FormatVersion(0, 4, 1)):
             ToV0_4_2();
-            ValidateXML(XSDSchema(FormatVersion(0, 4, 2)));
             Q_FALLTHROUGH();
         case (FormatVersion(0, 4, 2)):
-            ToV0_4_3();
-            ValidateXML(XSDSchema(FormatVersion(0, 4, 3)));
-            Q_FALLTHROUGH();
         case (FormatVersion(0, 4, 3)):
-            ToV0_4_4();
-            ValidateXML(XSDSchema(FormatVersion(0, 4, 4)));
-            Q_FALLTHROUGH();
         case (FormatVersion(0, 4, 4)):
             ToV0_5_0();
-            ValidateXML(XSDSchema(FormatVersion(0, 5, 0)));
             Q_FALLTHROUGH();
         case (FormatVersion(0, 5, 0)):
-            ToV0_5_1();
-            ValidateXML(XSDSchema(FormatVersion(0, 5, 1)));
-            Q_FALLTHROUGH();
         case (FormatVersion(0, 5, 1)):
-            ToV0_5_2();
-            ValidateXML(XSDSchema(FormatVersion(0, 5, 2)));
-            Q_FALLTHROUGH();
         case (FormatVersion(0, 5, 2)):
             ToV0_5_3();
-            ValidateXML(XSDSchema(FormatVersion(0, 5, 3)));
+            ValidateXML(CurrentSchema);
             Q_FALLTHROUGH();
         case (FormatVersion(0, 5, 3)):
             break;
@@ -471,28 +455,6 @@ void VVSTConverter::ToV0_4_2()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VVSTConverter::ToV0_4_3()
-{
-    // TODO. Delete if minimal supported version is 0.4.3
-    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FormatVersion(0, 4, 3),
-                      "Time to refactor the code.");
-
-    SetVersion(QStringLiteral("0.4.3"));
-    Save();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VVSTConverter::ToV0_4_4()
-{
-    // TODO. Delete if minimal supported version is 0.4.4
-    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FormatVersion(0, 4, 4),
-                      "Time to refactor the code.");
-
-    SetVersion(QStringLiteral("0.4.4"));
-    Save();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VVSTConverter::ToV0_5_0()
 {
     // TODO. Delete if minimal supported version is 0.5.0
@@ -503,28 +465,6 @@ void VVSTConverter::ToV0_5_0()
     AddNewTagsForV0_5_0();
     RemoveTagsForV0_5_0();
     ConvertMeasurementsToV0_5_0();
-    Save();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VVSTConverter::ToV0_5_1()
-{
-    // TODO. Delete if minimal supported version is 0.5.1
-    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FormatVersion(0, 5, 1),
-                      "Time to refactor the code.");
-
-    SetVersion(QStringLiteral("0.5.1"));
-    Save();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VVSTConverter::ToV0_5_2()
-{
-    // TODO. Delete if minimal supported version is 0.5.2
-    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FormatVersion(0, 5, 2),
-                      "Time to refactor the code.");
-
-    SetVersion(QStringLiteral("0.5.2"));
     Save();
 }
 
