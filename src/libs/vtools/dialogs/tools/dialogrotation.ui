@@ -316,7 +316,7 @@
        <item>
         <widget class="QGroupBox" name="groupBoxVisibilityGroup">
          <property name="toolTip">
-          <string>Enable to create a visibility gropup from original objects</string>
+          <string>Enable to create a visibility group from original objects</string>
          </property>
          <property name="title">
           <string>Visibility Group</string>
@@ -416,14 +416,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>VPlainTextEdit</class>
-   <extends>QPlainTextEdit</extends>
-   <header location="global">vplaintextedit.h</header>
-  </customwidget>
-  <customwidget>
    <class>VCompleterLineEdit</class>
    <extends>QLineEdit</extends>
    <header>vlineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>VPlainTextEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header location="global">vplaintextedit.h</header>
   </customwidget>
  </customwidgets>
  <resources>
