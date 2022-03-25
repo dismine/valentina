@@ -359,6 +359,8 @@ void VPatternConverter::ApplyPatches()
         case (FormatVersion(0, 8, 6)):
         case (FormatVersion(0, 8, 7)):
         case (FormatVersion(0, 8, 8)):
+            ToV0_8_8();
+            Q_FALLTHROUGH();
         case (FormatVersion(0, 8, 9)):
         case (FormatVersion(0, 8, 10)):
         case (FormatVersion(0, 8, 11)):
@@ -516,6 +518,18 @@ void VPatternConverter::ToV0_6_2()
                       "Time to refactor the code.");
     SetVersion(QStringLiteral("0.6.2"));
     AddTagPreviewCalculationsV0_6_2();
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_8_8()
+{
+    // TODO. Delete if minimal supported version is 0.8.8
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 8, 8),
+                      "Time to refactor the code.");
+    SetVersion(QStringLiteral("0.8.8"));
+    RemoveGradationV0_8_8();
+    AddPieceUUIDV0_8_8();
     Save();
 }
 

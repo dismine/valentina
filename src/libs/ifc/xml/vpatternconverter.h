@@ -83,6 +83,7 @@ private:
     void ToV0_4_4();
     void ToV0_6_0();
     void ToV0_6_2();
+    void ToV0_8_8();
     void ToV0_9_0();
 
     void          TagUnitToV0_2_0();
