@@ -5,7 +5,7 @@
     <name>AddBackgroundImage</name>
     <message>
         <source>add background image</source>
-        <translation type="unfinished"></translation>
+        <translation>agregar imagen de fondo</translation>
     </message>
 </context>
 <context>
@@ -360,7 +360,7 @@
     <name>DeleteBackgroundImage</name>
     <message>
         <source>delete background image</source>
-        <translation type="unfinished"></translation>
+        <translation>borrar imagen de fondo</translation>
     </message>
 </context>
 <context>
@@ -489,7 +489,7 @@
     <name>DialogAddBackgroundImage</name>
     <message>
         <source>Background image</source>
-        <translation type="unfinished"></translation>
+        <translation>Imagen de fondo</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -2850,7 +2850,7 @@
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation>Habilitar para crear un grupo de visibilidad a partir de objetos originales</translation>
+        <translation type="vanished">Habilitar para crear un grupo de visibilidad a partir de objetos originales</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -2928,6 +2928,10 @@
         <source>Invalid alias</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Enable to create a visibility group from original objects</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogFlippingByLine</name>
@@ -2969,7 +2973,7 @@
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation>Habilitar para crear un grupo de visibilidad a partir de objetos originales</translation>
+        <translation type="vanished">Habilitar para crear un grupo de visibilidad a partir de objetos originales</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -3053,6 +3057,10 @@
     </message>
     <message>
         <source>Invalid alias</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable to create a visibility group from original objects</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3848,7 +3856,7 @@
     </message>
     <message>
         <source>Auto crop unused length</source>
-        <translation>Auto-cortar longitud no usada</translation>
+        <translation>Recorte automático del largo no usado</translation>
     </message>
     <message>
         <source>Unite pages (if possible)</source>
@@ -4058,7 +4066,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Auto crop unused width</source>
-        <translation>Recorte automático del ancho no utilizado</translation>
+        <translation>Recorte automático del ancho no usado</translation>
     </message>
     <message>
         <source>Prefer one sheet solution</source>
@@ -4075,7 +4083,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made.</source>
-        <translation type="unfinished"></translation>
+        <translation>Establezca el coeficiente de eficiencia del diseño. El coeficiente de eficiencia de diseño es la relación entre el área ocupada por las piezas y el límite de todas las piezas. Si el anidamiento alcanza el nivel requerido, el proceso se detiene. Si el valor es 0 no se realizará ninguna comprobación.</translation>
     </message>
 </context>
 <context>
@@ -4616,7 +4624,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation>Habilitar para crear un grupo de visibilidad a partir de objetos originales</translation>
+        <translation type="vanished">Habilitar para crear un grupo de visibilidad a partir de objetos originales</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -4700,6 +4708,10 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Invalid alias</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable to create a visibility group from original objects</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5135,7 +5147,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Unable to open temp file</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede abrir el archivo temporal</translation>
     </message>
 </context>
 <context>
@@ -6482,7 +6494,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation>Habilitar para crear un grupo de visibilidad a partir de objetos originales</translation>
+        <translation type="vanished">Habilitar para crear un grupo de visibilidad a partir de objetos originales</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -6563,6 +6575,10 @@ Aplicar características de todos modos?</translation>
     <message>
         <source>Default</source>
         <translation>Predeterminado</translation>
+    </message>
+    <message>
+        <source>Enable to create a visibility group from original objects</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6839,7 +6855,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Save manual layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar dieño manual</translation>
     </message>
 </context>
 <context>
@@ -7224,7 +7240,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Single-step between the column values</source>
-        <translation type="unfinished"></translation>
+        <translation>Un solo paso entre los valores de columna</translation>
     </message>
     <message>
         <source>Base:</source>
@@ -8174,44 +8190,44 @@ Aplicar características de todos modos?</translation>
     <name>HideAllBackgroundImages</name>
     <message>
         <source>hide all background images</source>
-        <translation type="unfinished"></translation>
+        <translation>ocultar todas las imágenes de fondo</translation>
     </message>
     <message>
         <source>show all background images</source>
-        <translation type="unfinished"></translation>
+        <translation>mostrar todas las imágenes de fondo</translation>
     </message>
 </context>
 <context>
     <name>HideBackgroundImage</name>
     <message>
         <source>hide a background image</source>
-        <translation type="unfinished"></translation>
+        <translation>ocultar la imagen de fondo</translation>
     </message>
     <message>
         <source>show a background image</source>
-        <translation type="unfinished"></translation>
+        <translation>mostrar la imagen de fondo</translation>
     </message>
 </context>
 <context>
     <name>HoldAllBackgroundImages</name>
     <message>
         <source>hold all background images</source>
-        <translation type="unfinished"></translation>
+        <translation>mantener todas las imágenes de fondo</translation>
     </message>
     <message>
         <source>unhold background images</source>
-        <translation type="unfinished"></translation>
+        <translation>anular la retención de imágenes de fondo</translation>
     </message>
 </context>
 <context>
     <name>HoldBackgroundImage</name>
     <message>
         <source>hold background image</source>
-        <translation type="unfinished"></translation>
+        <translation>mantener imagen de fondo</translation>
     </message>
     <message>
         <source>unhold background image</source>
-        <translation type="unfinished"></translation>
+        <translation>anular imagen de fondo</translation>
     </message>
 </context>
 <context>
@@ -8293,7 +8309,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Test mode doesn&apos;t support openning several files.</source>
-        <translation>El modo de prueba no soporta abrir varios archivos.</translation>
+        <translation type="vanished">El modo de prueba no soporta abrir varios archivos.</translation>
     </message>
     <message>
         <source>Please, provide one input file.</source>
@@ -8353,7 +8369,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>The pattern units</source>
-        <translation type="unfinished"></translation>
+        <translation>Las unidades del patrón</translation>
     </message>
     <message>
         <source>Invalid dimension A base value.</source>
@@ -8369,6 +8385,10 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Formula warning: %1. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test mode doesn&apos;t support opening several files.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9828,15 +9848,15 @@ el patrón.</translation>
     </message>
     <message>
         <source>Manual Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Diseño Manual</translation>
     </message>
     <message>
         <source>Open Puzzle</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir Puzzle</translation>
     </message>
     <message>
         <source>Open the Puzzle app</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir la aplicación Puzzle</translation>
     </message>
     <message>
         <source>Create</source>
@@ -9844,7 +9864,7 @@ el patrón.</translation>
     </message>
     <message>
         <source>Create manual layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Crear diseño manual</translation>
     </message>
     <message>
         <source>Update</source>
@@ -9852,7 +9872,7 @@ el patrón.</translation>
     </message>
     <message>
         <source>Update manual layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizar el diseño manual</translation>
     </message>
     <message>
         <source>Unable to prepare raw layout data.</source>
@@ -9860,11 +9880,11 @@ el patrón.</translation>
     </message>
     <message>
         <source>Manual layout files</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivos de diseño manual</translation>
     </message>
     <message>
         <source>Select manual layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccione diseño manual</translation>
     </message>
     <message>
         <source>Not supported dimension A value &apos;%1&apos; for this pattern file.</source>
@@ -9872,15 +9892,15 @@ el patrón.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set dimension A. Need a file with multisize measurements.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo establecer la dimensión A. Necesita un archivo con medidas multitalla.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set dimension A. File wasn&apos;t opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo establecer la dimensión A. No se abrió el archivo.</translation>
     </message>
     <message>
         <source>Not supported dimension B value &apos;%1&apos; for this pattern file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor de dimensión B no admitido &apos;%1&apos; para este archivo de patrón.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set dimension B. Need a file with multisize measurements.</source>
@@ -9888,7 +9908,7 @@ el patrón.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set dimension B. File wasn&apos;t opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo establecer la dimensión B. No se abrió el archivo.</translation>
     </message>
     <message>
         <source>Not supported dimension C value &apos;%1&apos; for this pattern file.</source>
@@ -9900,7 +9920,7 @@ el patrón.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set dimension C. File wasn&apos;t opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo establecer la dimensión C. No se abrió el archivo.</translation>
     </message>
     <message>
         <source>Could not create recipe file. %1</source>
@@ -9924,15 +9944,15 @@ el patrón.</translation>
     </message>
     <message>
         <source>Background images</source>
-        <translation type="unfinished"></translation>
+        <translation>Imágenes de fondo</translation>
     </message>
     <message>
         <source>Add background image</source>
-        <translation type="unfinished"></translation>
+        <translation>Agregar imagen de fondo</translation>
     </message>
     <message>
         <source>Unable to add background image</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede agregar la imagen de fondo</translation>
     </message>
     <message>
         <source>Invalid image. Error: %1</source>
@@ -9940,7 +9960,7 @@ el patrón.</translation>
     </message>
     <message>
         <source>Select background image</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar imagen de fondo</translation>
     </message>
     <message>
         <source>Unable to save image. Error: %1</source>
@@ -10130,7 +10150,7 @@ el patrón.</translation>
     <name>MoveBackgroundImage</name>
     <message>
         <source>move background image</source>
-        <translation type="unfinished"></translation>
+        <translation>mover imagen de fondo</translation>
     </message>
 </context>
 <context>
@@ -10176,7 +10196,7 @@ el patrón.</translation>
     <name>OpaqueBackgroundImage</name>
     <message>
         <source>change a background image opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiar la opacidad de una imagen de fondo</translation>
     </message>
 </context>
 <context>
@@ -10553,7 +10573,7 @@ el patrón.</translation>
     </message>
     <message>
         <source>My manual layouts</source>
-        <translation type="unfinished"></translation>
+        <translation>Mis diseños manuales</translation>
     </message>
 </context>
 <context>
@@ -10698,7 +10718,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>Background image</source>
-        <translation type="unfinished"></translation>
+        <translation>Imagen de fondo</translation>
     </message>
     <message>
         <source>Opacity:</source>
@@ -10717,11 +10737,11 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>Valentina&apos;s manual layout editor.</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor de diseño manual de Valentina.</translation>
     </message>
     <message>
         <source>The manual layout file.</source>
-        <translation type="unfinished"></translation>
+        <translation>El archivo de diseño manual.</translation>
     </message>
 </context>
 <context>
@@ -10876,7 +10896,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Formato</translation>
     </message>
     <message>
         <source>Unit:</source>
@@ -10924,11 +10944,11 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>Warning superposition of pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>Advertencia superposición de piezas</translation>
     </message>
     <message>
         <source>Warning pieces out of bound</source>
-        <translation type="unfinished"></translation>
+        <translation>Advertencia piezas fuera de límite</translation>
     </message>
     <message>
         <source>Sticky edges</source>
@@ -10940,7 +10960,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>Pieces gap</source>
-        <translation type="unfinished"></translation>
+        <translation>Hueco de las piezas</translation>
     </message>
     <message>
         <source>Tiles</source>
@@ -10948,7 +10968,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>Show Tiles on sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar mosaicos en la hoja</translation>
     </message>
     <message>
         <source>Show watermark preview</source>
@@ -11377,7 +11397,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>Piece name &apos;%1&apos; is not unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre de la pieza  &apos;%1&apos; no es único.</translation>
     </message>
     <message>
         <source>Could not find the segment start.</source>
@@ -11441,7 +11461,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pieza &apos;%1&apos;. Hilo de la tela no es valido.</translation>
     </message>
     <message>
         <source>Invalid global value for a passmark length. Piece &apos;%1&apos;. Length is less than minimal allowed.</source>
@@ -11449,11 +11469,11 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>move pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>mover piezas</translation>
     </message>
     <message>
         <source>rotate pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>rotar piezas</translation>
     </message>
     <message>
         <source>Cannot set printer page size</source>
@@ -11529,7 +11549,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>z value move pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>mover piezas valor z</translation>
     </message>
 </context>
 <context>
@@ -11829,7 +11849,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     <name>RenameBackgroundImage</name>
     <message>
         <source>rename background image</source>
-        <translation type="unfinished"></translation>
+        <translation>cambiar el nombre de la imagen de fondo</translation>
     </message>
 </context>
 <context>
@@ -11850,14 +11870,14 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     <name>ResetBackgroundImage</name>
     <message>
         <source>reset background image transformation</source>
-        <translation type="unfinished"></translation>
+        <translation>restablecer la transformación de la imagen de fondo</translation>
     </message>
 </context>
 <context>
     <name>RotateBackgroundImage</name>
     <message>
         <source>rotate background image</source>
-        <translation type="unfinished"></translation>
+        <translation>rotar imagen de fondo</translation>
     </message>
 </context>
 <context>
@@ -11906,7 +11926,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     <name>ScaleBackgroundImage</name>
     <message>
         <source>scale background image</source>
-        <translation type="unfinished"></translation>
+        <translation>escalar imagen de fondo</translation>
     </message>
 </context>
 <context>
@@ -12576,19 +12596,19 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Measurement name in is empty.</source>
-        <translation>El nombre de la medida esta vacío.</translation>
+        <translation type="vanished">El nombre de la medida esta vacío.</translation>
     </message>
     <message>
         <source>Merasurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
-        <translation>La medida &apos;%1&apos; no concuerda con expresiones regulares del patrón.</translation>
+        <translation type="vanished">La medida &apos;%1&apos; no concuerda con expresiones regulares del patrón.</translation>
     </message>
     <message>
         <source>Merasurement &apos;%1&apos; already used in file.</source>
-        <translation>La medida &apos;%1&apos; ya fue usada en el archivo.</translation>
+        <translation type="vanished">La medida &apos;%1&apos; ya fue usada en el archivo.</translation>
     </message>
     <message>
         <source>Measurement &apos;%1&apos; is not one of known measurements.</source>
-        <translation>La medida &apos;%1&apos; no es una de las medidas conocidas.</translation>
+        <translation type="vanished">La medida &apos;%1&apos; no es una de las medidas conocidas.</translation>
     </message>
     <message>
         <source>Individual measurements require at least 2 columns.</source>
@@ -12608,7 +12628,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Error in row %1. Measurement name is empty.</source>
-        <translation>Error en línea %1. El nombre de la medida esta vacío.</translation>
+        <translation type="vanished">Error en línea %1. El nombre de la medida esta vacío.</translation>
     </message>
     <message>
         <source>Cannot save settings. Access denied.</source>
@@ -12714,7 +12734,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Base Values:</source>
-        <translation type="unfinished"></translation>
+        <translation>Valores base:</translation>
     </message>
     <message>
         <source>Export to individual</source>
@@ -12734,7 +12754,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Restrict third dimension</source>
-        <translation type="unfinished"></translation>
+        <translation>Restringir la tercera dimensión</translation>
     </message>
     <message>
         <source>Dimension labels</source>
@@ -12746,7 +12766,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Invalid base value for dimension A</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor base no válido para la dimensión A</translation>
     </message>
     <message>
         <source>The table doesn&apos;t support dimension B</source>
@@ -12786,7 +12806,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Millimeters</source>
-        <translation type="unfinished"></translation>
+        <translation>Milímetros</translation>
     </message>
     <message>
         <source>Inches</source>
@@ -12862,6 +12882,30 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Dimension custom names</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement name is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement &apos;%1&apos; already used in the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement &apos;%1&apos; is not one of the known measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement &apos;%1&apos; already used in file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in row %1. The measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13400,7 +13444,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Universally Unique IDentifier of piece. Used to identifier piece while updating manual layout. Left empty to generate new value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Identificador Universalmente Único de la pieza. Se utiliza para identificar la pieza mientras se actualiza el diseño manual. Se deja vacío para generar nuevo valor.</translation>
     </message>
     <message>
         <source>Gradation label:</source>
@@ -13818,7 +13862,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Error openning a temp file: %1.</source>
-        <translation>Error abriendo archivo temporal: %1.</translation>
+        <translation type="vanished">Error abriendo archivo temporal: %1.</translation>
     </message>
     <message>
         <source>Invalid version. Minimum supported format version is %1</source>
@@ -13847,6 +13891,10 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>Validation error file %3 in line %1 column %2</source>
         <translation>Error de validación en el archivo %3 en la línea %1 columna %2</translation>
+    </message>
+    <message>
+        <source>Error opening a temp file: %1.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13943,7 +13991,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation>¿Quieres cambiar los permisos?</translation>
+        <translation type="vanished">¿Quieres cambiar los permisos?</translation>
     </message>
     <message>
         <source>Cannot set permissions for %1 to writable.</source>
@@ -13983,6 +14031,10 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>The file has no write permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to change the permissions?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14214,11 +14266,11 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Save as …</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar como …</translation>
     </message>
     <message>
         <source>Reset transformation</source>
-        <translation type="unfinished"></translation>
+        <translation>Restablecer transformación</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -14248,11 +14300,11 @@ Quieres guardar los cambios?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Content type mistmatch.</source>
+        <source>Not image.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Not image.</source>
+        <source>Content type mismatch.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14260,15 +14312,27 @@ Quieres guardar los cambios?</translation>
     <name>VBank</name>
     <message>
         <source>Preparing data for layout error: Detail &apos;%1&apos; square &lt;= 0</source>
-        <translation>Preparación de datos para error de diseño: Detalle &apos;%1&apos; cuadro &lt;= 0</translation>
+        <translation type="vanished">Preparación de datos para error de diseño: Detalle &apos;%1&apos; cuadro &lt;= 0</translation>
     </message>
     <message>
         <source>Preparing data for layout error: Layout paper sheet &lt;= 0</source>
-        <translation>Preparación de datos para el error de diseño: Hoja de papel del diseño &lt;= 0</translation>
+        <translation type="vanished">Preparación de datos para el error de diseño: Hoja de papel del diseño &lt;= 0</translation>
     </message>
     <message>
         <source>Preparing data for layout error: List of details is empty</source>
-        <translation>Preparación de datos para el error de diseño: la lista de detalles está vacía</translation>
+        <translation type="vanished">Preparación de datos para el error de diseño: la lista de detalles está vacía</translation>
+    </message>
+    <message>
+        <source>Error of preparing data for layout: Detail &apos;%1&apos; square &lt;= 0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error of preparing data for layout: Layout paper sheet &lt;= 0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error of preparing data for layout: List of details is empty</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14322,7 +14386,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Auto crop unused length (export mode).</source>
-        <translation>Auto cortar largo sin uso (modo de exportación).</translation>
+        <translation>Recorte automático del largo no usado (modo de exportación).</translation>
     </message>
     <message>
         <source>Unite pages if possible (export mode).</source>
@@ -14638,7 +14702,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Ignore printer margins (export mode). Use if need full paper space. In case of later printing you must account for the margins himself.</source>
-        <translation>Ignore los márgenes de la impresora (modo exportación). Use si necesita espacio en papel completo. En caso de impresión posterior deberá considerar por los márgenes el mismo.</translation>
+        <translation type="vanished">Ignore los márgenes de la impresora (modo exportación). Use si necesita espacio en papel completo. En caso de impresión posterior deberá considerar por los márgenes el mismo.</translation>
     </message>
     <message>
         <source>Number corresponding to tiled pdf page template (default = 0, export mode with tiled pdf format):</source>
@@ -14770,7 +14834,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Auto crop unused width (export mode).</source>
-        <translation>Auto cortar ancho sin uso (modo de exportación).</translation>
+        <translation>Recorte automático del ancho no usado (modo de exportación).</translation>
     </message>
     <message>
         <source>Set horizontal scale factor from 0.01 to 3.0 (default = 1.0, export mode).</source>
@@ -14806,7 +14870,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Set base for dimension A in the multisize measurements units (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Establecer base para la dimensión A en las unidades de medida multitalla (modo exportación).</translation>
     </message>
     <message>
         <source>The dimension A base</source>
@@ -14814,7 +14878,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Set base for dimension B in the multisize measurements units (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Establecer base para la dimensión B en las unidades de medidas multitalla (modo exportación).</translation>
     </message>
     <message>
         <source>The dimension B base</source>
@@ -14822,7 +14886,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Set base for dimension C in the multisize measurements units (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Establecer base para la dimensión C en las unidades de medidas multitalla (modo exportación).</translation>
     </message>
     <message>
         <source>The dimension C base</source>
@@ -14838,7 +14902,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Load pattern pieces form the raw layout data file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Cargue piezas de patrón desde el archivo de datos de diseño sin procesar.</translation>
     </message>
     <message>
         <source>The raw layout data file</source>
@@ -14846,7 +14910,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Number corresponding to output format (default = 0, export mode): &lt;not defined&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Número correspondiente al formato de salida (predeterminado = 0, modo exportación): &lt;not defined&gt;</translation>
     </message>
     <message>
         <source>Number corresponding to tiled pdf page template (default = 0, export mode with tiled pdf format): &lt;not defined&gt;</source>
@@ -14904,6 +14968,14 @@ Quieres guardar los cambios?</translation>
         <source>Layout units (as paper&apos;s one except px, export mode). Default units cm.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Load pattern pieces from the raw layout data file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore printer margins (export mode). Use if need full paper space. In case of later printing you must account for the margins themselves.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VCommonSettings</name>
@@ -14933,7 +15005,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>manual layouts</source>
-        <translation type="unfinished"></translation>
+        <translation>Diseños manuales</translation>
     </message>
 </context>
 <context>
@@ -15184,7 +15256,7 @@ Quieres guardar los cambios?</translation>
     <name>VLayoutConverter</name>
     <message>
         <source>Could not change version.</source>
-        <translation type="unfinished">No se pudo cambiar de versión.</translation>
+        <translation>No se pudo cambiar de versión.</translation>
     </message>
 </context>
 <context>
@@ -15203,7 +15275,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Can&apos;t open file &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede abrir el archivo &apos;%1&apos;</translation>
     </message>
     <message>
         <source>Export raw layout data failed. %1.</source>
@@ -15212,10 +15284,6 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
         <translation>¡La creación del archivo &apos;%1&apos; falló! %2</translation>
-    </message>
-    <message>
-        <source>Can&apos;t create an flat dxf file.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Can&apos;t create an AAMA dxf file.</source>
@@ -15247,6 +15315,10 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Raw Layout Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t create a flat dxf file.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -15459,33 +15531,41 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Export mode doesn&apos;t support openning several files.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">El modo de exportación no admite la apertura de varios archivos.</translation>
     </message>
     <message>
         <source>Import raw layout data does not support openning several layout files.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Importar datos de diseño sin procesar no admite la apertura de varios archivos de diseño.</translation>
     </message>
     <message>
         <source>Please, provide one input file.</source>
         <translation>Por favor, proporcione un archivo de entrada.</translation>
+    </message>
+    <message>
+        <source>Export mode doesn&apos;t support opening several files.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import raw layout data does not support opening several layout files.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VPCarrousel</name>
     <message>
         <source>Unplaced pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>Piezas sin colocar</translation>
     </message>
     <message>
         <source>Pieces of</source>
-        <translation type="unfinished"></translation>
+        <translation>Piezas de</translation>
     </message>
 </context>
 <context>
     <name>VPCarrouselPieceList</name>
     <message>
         <source>Move to Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Mover a la Hoja</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -15493,7 +15573,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Remove from Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Remover de la Hoja</translation>
     </message>
     <message>
         <source>Move to</source>
@@ -15569,14 +15649,14 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Remove from Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Remover de la Hoja</translation>
     </message>
 </context>
 <context>
     <name>VPLayout</name>
     <message>
         <source>Sheet %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoja %1</translation>
     </message>
 </context>
 <context>
@@ -15599,7 +15679,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Error in line %1. Grainline is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error en línea %1. Hilo de la tela esta vacío.</translation>
     </message>
     <message>
         <source>Error in line %1. Internal path shape is empty.</source>
@@ -15622,7 +15702,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Remove sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Remover Hoja</translation>
     </message>
 </context>
 <context>
@@ -15649,15 +15729,15 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Piece Carrousel</source>
-        <translation type="unfinished"></translation>
+        <translation>Carrusel de Piezas</translation>
     </message>
     <message>
         <source>Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Propiedades</translation>
     </message>
     <message>
         <source>Current piece properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Propiedades de la pieza actual</translation>
     </message>
     <message>
         <source>Current piece</source>
@@ -15701,23 +15781,23 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>No piece selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Ninguna pieza seleccionada</translation>
     </message>
     <message>
         <source>Sheet properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Propiedades de la hoja</translation>
     </message>
     <message>
         <source>Current sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoja actual</translation>
     </message>
     <message>
         <source>Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Formato</translation>
     </message>
     <message>
         <source>Remove unused length</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar longitud no utilizada</translation>
     </message>
     <message>
         <source>Margins</source>
@@ -15773,11 +15853,11 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Export Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar Hoja</translation>
     </message>
     <message>
         <source>Tiles properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Propiedades de Mosaicos</translation>
     </message>
     <message>
         <source>Tiled Pdf Export</source>
@@ -15785,11 +15865,11 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Show Tiles on sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar Mosaicos en la hoja</translation>
     </message>
     <message>
         <source>Layout properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Propiedades de Diseño</translation>
     </message>
     <message>
         <source>Layout</source>
@@ -15801,15 +15881,15 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Warning superposition of pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>Advertencia superposición de piezas</translation>
     </message>
     <message>
         <source>Warning pieces out of bound</source>
-        <translation type="unfinished"></translation>
+        <translation>Advertencia piezas fuera de límite</translation>
     </message>
     <message>
         <source>zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>zoom</translation>
     </message>
     <message>
         <source>Scale</source>
@@ -15825,7 +15905,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Save &amp;As</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar &amp;Como</translation>
     </message>
     <message>
         <source>&amp;Import Raw Layout Data</source>
@@ -15857,7 +15937,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Zoom 1:1</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoom 1:1</translation>
     </message>
     <message>
         <source>Zoom fit best</source>
@@ -15865,7 +15945,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Zoom sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoom de la hoja</translation>
     </message>
     <message>
         <source>Preferences</source>
@@ -15925,7 +16005,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Failed to open file, is it writable?</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo abrir el archivo, ¿se puede escribir?</translation>
     </message>
     <message>
         <source>&amp;New Window</source>
@@ -15973,7 +16053,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>&amp;Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hoja</translation>
     </message>
     <message>
         <source>&amp;Layout</source>
@@ -15989,7 +16069,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Transformation</source>
-        <translation type="unfinished"></translation>
+        <translation>Transformación</translation>
     </message>
     <message>
         <source>Translate</source>
@@ -16034,15 +16114,15 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Grainline orientation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Orientación del Hilo de la tela:</translation>
     </message>
     <message>
         <source>Force the grainline orientation to always be horizontal</source>
-        <translation type="unfinished"></translation>
+        <translation>Forzar que la orientación de la línea de la tela sea siempre horizontal</translation>
     </message>
     <message>
         <source>Force the grainline orientation to always be vertical</source>
-        <translation type="unfinished"></translation>
+        <translation>Forzar que la orientación de la línea de la tela sea siempre vertical</translation>
     </message>
     <message>
         <source>Ignore margins</source>
@@ -16066,7 +16146,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Pieces gap:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hueco de piezas:</translation>
     </message>
     <message>
         <source>Export Layout</source>
@@ -16078,7 +16158,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Add Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Agregar Hoja</translation>
     </message>
     <message>
         <source>Print</source>
@@ -16143,7 +16223,8 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>Layout has been modified.
 Do you want to save your changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>El diseño ha sido modificado.
+¿Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Save…</source>
@@ -16163,7 +16244,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Can&apos;t open file &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede abrir el archivo &apos;%1&apos;</translation>
     </message>
     <message>
         <source>Failed in flushing page to disk, disk full?</source>
@@ -16179,19 +16260,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The layout is invalid. Pieces superposition. Do you want to continue export?</source>
-        <translation type="unfinished"></translation>
+        <translation>El diseño es invalido. Superposición de piezas. ¿Quiere continuar con la exportación?</translation>
     </message>
     <message>
         <source>Sheet %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoja %1</translation>
     </message>
     <message>
         <source>translate pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>traducir piezas</translation>
     </message>
     <message>
         <source>rotate pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>rotar piezas</translation>
     </message>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
@@ -16211,7 +16292,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unable to get sheet page settings</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede obtener la configuración de la página hoja</translation>
     </message>
     <message>
         <source>Show tile number</source>
@@ -16263,14 +16344,14 @@ Do you want to save your changes?</source>
     <name>VPUndoAddSheet</name>
     <message>
         <source>add sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>agregar hoja</translation>
     </message>
 </context>
 <context>
     <name>VPUndoMovePieceOnSheet</name>
     <message>
         <source>move piece on sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>mover pieza en la hoja</translation>
     </message>
 </context>
 <context>
@@ -16298,7 +16379,7 @@ Do you want to save your changes?</source>
     <name>VPUndoRemoveSheet</name>
     <message>
         <source>add sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>agregar hoja</translation>
     </message>
 </context>
 <context>
@@ -16549,11 +16630,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating place lavel</source>
-        <translation>Error creando o actualizando etiqueta de lugar</translation>
+        <translation type="vanished">Error creando o actualizando etiqueta de lugar</translation>
     </message>
     <message>
         <source>Piece path doesn&apos;t contain nodes</source>
         <translation>La ruta de acceso de la pieza no contiene nodos</translation>
+    </message>
+    <message>
+        <source>Error creating or updating place label</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -16568,7 +16653,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error no unique id.</source>
-        <translation type="unfinished">Error identificador no único.</translation>
+        <translation>Error identificador no único.</translation>
     </message>
 </context>
 <context>
@@ -16590,11 +16675,11 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Content type mistmatch.</source>
+        <source>Not image.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Not image.</source>
+        <source>Content type mismatch.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -16697,7 +16782,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Failed to open file, is it writable?</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo abrir el archivo, ¿se puede escribir?</translation>
     </message>
     <message>
         <source>Failed in flushing page to disk, disk full?</source>
@@ -17749,7 +17834,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Background image</source>
-        <translation type="unfinished"></translation>
+        <translation>Imagen de fondo</translation>
     </message>
     <message>
         <source>Hold:</source>
@@ -19459,7 +19544,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Transformation</source>
-        <translation type="unfinished"></translation>
+        <translation>Transformación</translation>
     </message>
     <message>
         <source>Translate</source>
@@ -19512,7 +19597,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Background image</source>
-        <translation type="unfinished"></translation>
+        <translation>Imagen de fondo</translation>
     </message>
     <message>
         <source>Hold</source>
@@ -19524,7 +19609,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Reset transformation</source>
-        <translation type="unfinished"></translation>
+        <translation>Restablecer transformación</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -19976,7 +20061,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation>¿Quieres cambiar los permisos?</translation>
+        <translation type="vanished">¿Quieres cambiar los permisos?</translation>
     </message>
     <message>
         <source>Color</source>
@@ -20066,12 +20151,16 @@ Quiere guardar los cambios?</translation>
         <comment>color</comment>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Do you want to change the permissions?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ZValueMoveBackgroundImage</name>
     <message>
         <source>z value move a background image</source>
-        <translation type="unfinished"></translation>
+        <translation>mover una imagen de fondo a valor z</translation>
     </message>
 </context>
 <context>

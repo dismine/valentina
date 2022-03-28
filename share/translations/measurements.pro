@@ -25,7 +25,6 @@ PMSYSTEMS += \
     p31 p32 p33 p34 p35 p36 p37 p38 p39 p40 p41 p42 p43 p44 p45 p46 p47 p48 p49 p50 p51 p52 p53 p54 p998
 
 LANGUAGES += \
-    ru_RU \
     uk_UA \
     de_DE \
     cs_CZ \

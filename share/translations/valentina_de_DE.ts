@@ -2849,10 +2849,6 @@
         <translation>Über Achse spiegeln</translation>
     </message>
     <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Visibility Group</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2928,6 +2924,10 @@
         <source>Invalid alias</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Enable to create a visibility group from original objects</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogFlippingByLine</name>
@@ -2966,10 +2966,6 @@
     <message>
         <source>Flipping by line</source>
         <translation>Über Linie spiegeln</translation>
-    </message>
-    <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -3053,6 +3049,10 @@
     </message>
     <message>
         <source>Invalid alias</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable to create a visibility group from original objects</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4615,10 +4615,6 @@ Einstellungen trotzdem anwenden?</translation>
         <translation>Mittelpunkt</translation>
     </message>
     <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Visibility Group</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4700,6 +4696,10 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Invalid alias</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable to create a visibility group from original objects</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6481,10 +6481,6 @@ Einstellungen trotzdem anwenden?</translation>
         <translation>Dieser Punkt kann nicht der Ausgangspunkt sein. Bitte wähle einen anderen Ausgangspunkt</translation>
     </message>
     <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Visibility Group</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6563,6 +6559,10 @@ Einstellungen trotzdem anwenden?</translation>
     <message>
         <source>Default</source>
         <translation>Standard</translation>
+    </message>
+    <message>
+        <source>Enable to create a visibility group from original objects</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8293,7 +8293,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Test mode doesn&apos;t support openning several files.</source>
-        <translation>Der Test-Modus unterstützt das Öffnen mehrerer Dateien nicht.</translation>
+        <translation type="vanished">Der Test-Modus unterstützt das Öffnen mehrerer Dateien nicht.</translation>
     </message>
     <message>
         <source>Please, provide one input file.</source>
@@ -8369,6 +8369,10 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Formula warning: %1. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test mode doesn&apos;t support opening several files.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12574,19 +12578,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Measurement name in is empty.</source>
-        <translation>Name des Maßes in ist leer.</translation>
+        <translation type="vanished">Name des Maßes in ist leer.</translation>
     </message>
     <message>
         <source>Merasurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
-        <translation>Maß &apos;%1&apos; entspricht keinem RegEx pattern.</translation>
+        <translation type="vanished">Maß &apos;%1&apos; entspricht keinem RegEx pattern.</translation>
     </message>
     <message>
         <source>Merasurement &apos;%1&apos; already used in file.</source>
-        <translation>Maß &apos;%1&apos; wird bereits in Datei verwendet.</translation>
+        <translation type="vanished">Maß &apos;%1&apos; wird bereits in Datei verwendet.</translation>
     </message>
     <message>
         <source>Measurement &apos;%1&apos; is not one of known measurements.</source>
-        <translation>Maß &apos;%1&apos; ist kein bekanntes Maß.</translation>
+        <translation type="vanished">Maß &apos;%1&apos; ist kein bekanntes Maß.</translation>
     </message>
     <message>
         <source>Individual measurements require at least 2 columns.</source>
@@ -12606,7 +12610,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error in row %1. Measurement name is empty.</source>
-        <translation>Fehler in Zeile %1. Maß Bezeichnung ist leer.</translation>
+        <translation type="vanished">Fehler in Zeile %1. Maß Bezeichnung ist leer.</translation>
     </message>
     <message>
         <source>Cannot save settings. Access denied.</source>
@@ -12860,6 +12864,30 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Dimension custom names</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement name is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement &apos;%1&apos; already used in the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement &apos;%1&apos; is not one of the known measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement &apos;%1&apos; already used in file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in row %1. The measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13816,7 +13844,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error openning a temp file: %1.</source>
-        <translation>Fehler beim Öffnen der temporären Datei: %1.</translation>
+        <translation type="vanished">Fehler beim Öffnen der temporären Datei: %1.</translation>
     </message>
     <message>
         <source>Invalid version. Minimum supported format version is %1</source>
@@ -13844,6 +13872,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Validation error file %3 in line %1 column %2</source>
         <translation>Fehler bei der Gültigkeitsprüfung in Datei %3, Zeile %1, Spalte %2</translation>
+    </message>
+    <message>
+        <source>Error opening a temp file: %1.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13940,7 +13972,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation>Wollen Sie die Berechtigung ändern ?</translation>
+        <translation type="vanished">Wollen Sie die Berechtigung ändern ?</translation>
     </message>
     <message>
         <source>Cannot set permissions for %1 to writable.</source>
@@ -13980,6 +14012,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The file has no write permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to change the permissions?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14245,26 +14281,26 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Content type mistmatch.</source>
+        <source>Not image.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Not image.</source>
+        <source>Content type mismatch.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VBank</name>
     <message>
-        <source>Preparing data for layout error: Detail &apos;%1&apos; square &lt;= 0</source>
+        <source>Error of preparing data for layout: Detail &apos;%1&apos; square &lt;= 0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Preparing data for layout error: Layout paper sheet &lt;= 0</source>
+        <source>Error of preparing data for layout: Layout paper sheet &lt;= 0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Preparing data for layout error: List of details is empty</source>
+        <source>Error of preparing data for layout: List of details is empty</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14635,7 +14671,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Ignore printer margins (export mode). Use if need full paper space. In case of later printing you must account for the margins himself.</source>
-        <translation>Druckerränder ignorieren (Exportmodus). Verwenden sie diese Einstellung nur, wenn sie den vollen Papierplatz benötigen. Bei späterem Druck müssen Sie die Ränder selbst hinzufügen.</translation>
+        <translation type="vanished">Druckerränder ignorieren (Exportmodus). Verwenden sie diese Einstellung nur, wenn sie den vollen Papierplatz benötigen. Bei späterem Druck müssen Sie die Ränder selbst hinzufügen.</translation>
     </message>
     <message>
         <source>Number corresponding to tiled pdf page template (default = 0, export mode with tiled pdf format):</source>
@@ -14834,10 +14870,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Load pattern pieces form the raw layout data file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The raw layout data file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14899,6 +14931,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Layout units (as paper&apos;s one except px, export mode). Default units cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load pattern pieces from the raw layout data file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore printer margins (export mode). Use if need full paper space. In case of later printing you must account for the margins themselves.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -15180,7 +15220,7 @@ Do you want to save your changes?</source>
     <name>VLayoutConverter</name>
     <message>
         <source>Could not change version.</source>
-        <translation type="unfinished">Konnte Versionsnummer nicht ändern.</translation>
+        <translation>Konnte Versionsnummer nicht ändern.</translation>
     </message>
 </context>
 <context>
@@ -15208,10 +15248,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
         <translation>Fehler beim Erstellen der Datei &apos;%1&apos;! %2</translation>
-    </message>
-    <message>
-        <source>Can&apos;t create an flat dxf file.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Can&apos;t create an AAMA dxf file.</source>
@@ -15243,6 +15279,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Raw Layout Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t create a flat dxf file.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -15454,16 +15494,16 @@ Do you want to save your changes?</source>
         <translation>Eingehende Verbindung &apos;%1&apos; kann nicht aufgefangen werden</translation>
     </message>
     <message>
-        <source>Export mode doesn&apos;t support openning several files.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Import raw layout data does not support openning several layout files.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Please, provide one input file.</source>
         <translation>Bitte stellen Sie eine Eingabedatei zur Verfügung.</translation>
+    </message>
+    <message>
+        <source>Export mode doesn&apos;t support opening several files.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import raw layout data does not support opening several layout files.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -16544,11 +16584,11 @@ Do you want to save your changes?</source>
         <translation>Fehler beim Erstellen oder Aktualisieren des Pin-Punktes</translation>
     </message>
     <message>
-        <source>Error creating or updating place lavel</source>
+        <source>Piece path doesn&apos;t contain nodes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Piece path doesn&apos;t contain nodes</source>
+        <source>Error creating or updating place label</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -16564,7 +16604,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error no unique id.</source>
-        <translation type="unfinished">Fehler: uneindeutige ID.</translation>
+        <translation>Fehler: uneindeutige ID.</translation>
     </message>
 </context>
 <context>
@@ -16586,11 +16626,11 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Content type mistmatch.</source>
+        <source>Not image.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Not image.</source>
+        <source>Content type mismatch.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -19955,7 +19995,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation>Wollen Sie die Berechtigung ändern ?</translation>
+        <translation type="vanished">Wollen Sie die Berechtigung ändern ?</translation>
     </message>
     <message>
         <source>Color</source>
@@ -20043,6 +20083,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Light gray</source>
         <comment>color</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to change the permissions?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

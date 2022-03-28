@@ -2850,7 +2850,7 @@
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation>Zet aan om een zichtbaarheidsgroep aan te maken vanuit de originele objecten</translation>
+        <translation type="vanished">Zet aan om een zichtbaarheidsgroep aan te maken vanuit de originele objecten</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -2928,6 +2928,10 @@
         <source>Invalid alias</source>
         <translation>Ongeldige alias</translation>
     </message>
+    <message>
+        <source>Enable to create a visibility group from original objects</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogFlippingByLine</name>
@@ -2969,7 +2973,7 @@
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation>Zet aan om een zichtbaarheidsgroep aan te maken vanuit de originele objecten</translation>
+        <translation type="vanished">Zet aan om een zichtbaarheidsgroep aan te maken vanuit de originele objecten</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -3054,6 +3058,10 @@
     <message>
         <source>Invalid alias</source>
         <translation>Ongeldige alias</translation>
+    </message>
+    <message>
+        <source>Enable to create a visibility group from original objects</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4617,7 +4625,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation>Zet aan om een zichtbaarheidsgroep aan te maken vanuit de originele objecten</translation>
+        <translation type="vanished">Zet aan om een zichtbaarheidsgroep aan te maken vanuit de originele objecten</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -4702,6 +4710,10 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Invalid alias</source>
         <translation>Ongeldige alias</translation>
+    </message>
+    <message>
+        <source>Enable to create a visibility group from original objects</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6483,7 +6495,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation>Zet aan om een zichtbaarheidsgroep aan te maken vanuit de originele objecten</translation>
+        <translation type="vanished">Zet aan om een zichtbaarheidsgroep aan te maken vanuit de originele objecten</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -6564,6 +6576,10 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Default</source>
         <translation>Standaard</translation>
+    </message>
+    <message>
+        <source>Enable to create a visibility group from original objects</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8294,7 +8310,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Test mode doesn&apos;t support openning several files.</source>
-        <translation>Test modus ondersteunt niet het openen van verschillende bestanden.</translation>
+        <translation type="vanished">Test modus ondersteunt niet het openen van verschillende bestanden.</translation>
     </message>
     <message>
         <source>Please, provide one input file.</source>
@@ -8371,6 +8387,10 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Formula warning: %1. Program will be terminated.</source>
         <translation>Formule waarschuwing: %1. Programma wordt gestopt.</translation>
+    </message>
+    <message>
+        <source>Test mode doesn&apos;t support opening several files.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12575,19 +12595,19 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Measurement name in is empty.</source>
-        <translation>De maten naam is leeg.</translation>
+        <translation type="vanished">De maten naam is leeg.</translation>
     </message>
     <message>
         <source>Merasurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
-        <translation>Maat &apos;%1&apos; voldoet niet aan regex patroon.</translation>
+        <translation type="vanished">Maat &apos;%1&apos; voldoet niet aan regex patroon.</translation>
     </message>
     <message>
         <source>Merasurement &apos;%1&apos; already used in file.</source>
-        <translation>Maat &apos;%1&apos; reeds in gebruin in het bestand.</translation>
+        <translation type="vanished">Maat &apos;%1&apos; reeds in gebruin in het bestand.</translation>
     </message>
     <message>
         <source>Measurement &apos;%1&apos; is not one of known measurements.</source>
-        <translation>Maat &apos;%1&apos; is geen van de gekende maten.</translation>
+        <translation type="vanished">Maat &apos;%1&apos; is geen van de gekende maten.</translation>
     </message>
     <message>
         <source>Individual measurements require at least 2 columns.</source>
@@ -12607,7 +12627,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Error in row %1. Measurement name is empty.</source>
-        <translation>Fout in rij %1. maten naam is leeg.</translation>
+        <translation type="vanished">Fout in rij %1. maten naam is leeg.</translation>
     </message>
     <message>
         <source>Cannot save settings. Access denied.</source>
@@ -12861,6 +12881,30 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Dimension custom names</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement name is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement &apos;%1&apos; already used in the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement &apos;%1&apos; is not one of the known measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement &apos;%1&apos; already used in file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in row %1. The measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13817,7 +13861,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Error openning a temp file: %1.</source>
-        <translation>Fout bij het openen van een tijdelijk bestand: %1.</translation>
+        <translation type="vanished">Fout bij het openen van een tijdelijk bestand: %1.</translation>
     </message>
     <message>
         <source>Invalid version. Minimum supported format version is %1</source>
@@ -13846,6 +13890,10 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Validation error file %3 in line %1 column %2</source>
         <translation>Validatie fout bestand %3 op lijn %1 kolom %2</translation>
+    </message>
+    <message>
+        <source>Error opening a temp file: %1.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13942,7 +13990,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation>Wens je de rechten te veranderen?</translation>
+        <translation type="vanished">Wens je de rechten te veranderen?</translation>
     </message>
     <message>
         <source>Cannot set permissions for %1 to writable.</source>
@@ -13982,6 +14030,10 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>The file has no write permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to change the permissions?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14247,11 +14299,11 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Content type mistmatch.</source>
+        <source>Not image.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Not image.</source>
+        <source>Content type mismatch.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14259,15 +14311,27 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VBank</name>
     <message>
         <source>Preparing data for layout error: Detail &apos;%1&apos; square &lt;= 0</source>
-        <translation>Fout bij het voorbereiden van gegevens voor lay-out: Detail &apos;%1&apos; vierkant &lt;= 0</translation>
+        <translation type="vanished">Fout bij het voorbereiden van gegevens voor lay-out: Detail &apos;%1&apos; vierkant &lt;= 0</translation>
     </message>
     <message>
         <source>Preparing data for layout error: Layout paper sheet &lt;= 0</source>
-        <translation>Fout bij het voorbereiden van gegevens voor lay-out: Lay-out blad papier &lt;=0</translation>
+        <translation type="vanished">Fout bij het voorbereiden van gegevens voor lay-out: Lay-out blad papier &lt;=0</translation>
     </message>
     <message>
         <source>Preparing data for layout error: List of details is empty</source>
-        <translation>Fout bij het voorbereiden van gegevens voor lay-out: Detail lijst is leeg</translation>
+        <translation type="vanished">Fout bij het voorbereiden van gegevens voor lay-out: Detail lijst is leeg</translation>
+    </message>
+    <message>
+        <source>Error of preparing data for layout: Detail &apos;%1&apos; square &lt;= 0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error of preparing data for layout: Layout paper sheet &lt;= 0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error of preparing data for layout: List of details is empty</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14637,7 +14701,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Ignore printer margins (export mode). Use if need full paper space. In case of later printing you must account for the margins himself.</source>
-        <translation>Negeer de printer marges (export modus). Gebruik indien nodig de volledige pagina. In het geval van uitprinten moet je zelf met de marges rekening houden.</translation>
+        <translation type="vanished">Negeer de printer marges (export modus). Gebruik indien nodig de volledige pagina. In het geval van uitprinten moet je zelf met de marges rekening houden.</translation>
     </message>
     <message>
         <source>Number corresponding to tiled pdf page template (default = 0, export mode with tiled pdf format):</source>
@@ -14836,10 +14900,6 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Load pattern pieces form the raw layout data file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The raw layout data file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14901,6 +14961,14 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Layout units (as paper&apos;s one except px, export mode). Default units cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load pattern pieces from the raw layout data file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore printer margins (export mode). Use if need full paper space. In case of later printing you must account for the margins themselves.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -15183,7 +15251,7 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VLayoutConverter</name>
     <message>
         <source>Could not change version.</source>
-        <translation type="unfinished">Kon de versie niet veranderen.</translation>
+        <translation>Kon de versie niet veranderen.</translation>
     </message>
 </context>
 <context>
@@ -15211,10 +15279,6 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
         <translation>Bestand &apos;%1&apos; maken heeft gefaald! %2</translation>
-    </message>
-    <message>
-        <source>Can&apos;t create an flat dxf file.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Can&apos;t create an AAMA dxf file.</source>
@@ -15246,6 +15310,10 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Raw Layout Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t create a flat dxf file.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -15457,16 +15525,16 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>Kan niet beginnen met verwerken van inkomende connecties op naam &apos;%1&apos;</translation>
     </message>
     <message>
-        <source>Export mode doesn&apos;t support openning several files.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Import raw layout data does not support openning several layout files.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Please, provide one input file.</source>
         <translation>Alsublieft, verstrek één invoer bestand.</translation>
+    </message>
+    <message>
+        <source>Export mode doesn&apos;t support opening several files.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import raw layout data does not support opening several layout files.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -16548,11 +16616,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating place lavel</source>
-        <translation>Fout bij het aanmaken of bijwerken van de plaats niveau</translation>
+        <translation type="vanished">Fout bij het aanmaken of bijwerken van de plaats niveau</translation>
     </message>
     <message>
         <source>Piece path doesn&apos;t contain nodes</source>
         <translation>Patroondeel pad bevat geen knooppunten</translation>
+    </message>
+    <message>
+        <source>Error creating or updating place label</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -16567,7 +16639,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error no unique id.</source>
-        <translation type="unfinished">Fout geen unieke ID.</translation>
+        <translation>Fout geen unieke ID.</translation>
     </message>
 </context>
 <context>
@@ -16589,11 +16661,11 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Content type mistmatch.</source>
+        <source>Not image.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Not image.</source>
+        <source>Content type mismatch.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -19975,7 +20047,7 @@ Deze wijziging opslaan?</translation>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation>Wens je de rechten te veranderen?</translation>
+        <translation type="vanished">Wens je de rechten te veranderen?</translation>
     </message>
     <message>
         <source>Color</source>
@@ -20063,6 +20135,10 @@ Deze wijziging opslaan?</translation>
     <message>
         <source>Light gray</source>
         <comment>color</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to change the permissions?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

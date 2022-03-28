@@ -2850,7 +2850,7 @@
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation>Activer pour créer un groupe de visibilité à partir des objets d&apos;origine</translation>
+        <translation type="vanished">Activer pour créer un groupe de visibilité à partir des objets d&apos;origine</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -2928,6 +2928,10 @@
         <source>Invalid alias</source>
         <translation>Alias invalide</translation>
     </message>
+    <message>
+        <source>Enable to create a visibility group from original objects</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogFlippingByLine</name>
@@ -2969,7 +2973,7 @@
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation>Activer pour créer un groupe de visibilité à partir des objets d&apos;origine</translation>
+        <translation type="vanished">Activer pour créer un groupe de visibilité à partir des objets d&apos;origine</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -3054,6 +3058,10 @@
     <message>
         <source>Invalid alias</source>
         <translation>Alias invalide</translation>
+    </message>
+    <message>
+        <source>Enable to create a visibility group from original objects</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4614,7 +4622,7 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation>Activer pour créer un groupe de visibilité à partir des objets d&apos;origine</translation>
+        <translation type="vanished">Activer pour créer un groupe de visibilité à partir des objets d&apos;origine</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -4699,6 +4707,10 @@ Appliquer quand même les réglages ?</translation>
     <message>
         <source>Invalid alias</source>
         <translation>Alias invalide</translation>
+    </message>
+    <message>
+        <source>Enable to create a visibility group from original objects</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5287,7 +5299,7 @@ Appliquer quand même les réglages ?</translation>
     <name>DialogPiecePath</name>
     <message>
         <source>Piece path tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Outil de tracé de pièce</translation>
     </message>
     <message>
         <source>Path</source>
@@ -5451,7 +5463,7 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <source>Marks</source>
-        <translation type="unfinished"></translation>
+        <translation>Repères</translation>
     </message>
     <message>
         <source>T mark</source>
@@ -5463,7 +5475,7 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <source>Please, select a detail to insert into!</source>
-        <translation type="unfinished"></translation>
+        <translation>Merci de sélectionner un détail à insérer !</translation>
     </message>
     <message>
         <source>List of details is empty!</source>
@@ -5479,7 +5491,7 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <source>Each point in the &lt;b&gt;custom seam allowance&lt;/b&gt; path must be unique!</source>
-        <translation type="unfinished"></translation>
+        <translation>Chaque point du chemin de de la &lt;b&gt;marge de couture personnalisée&lt;/b&gt; doit être unique !</translation>
     </message>
     <message>
         <source>Cut on fabric</source>
@@ -5491,7 +5503,7 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <source>Intersection (only left)</source>
-        <translation type="unfinished"></translation>
+        <translation>Intersection (seulement à gauche)</translation>
     </message>
     <message>
         <source>Select if need designate the corner point as a passmark. Show only right passmark.</source>
@@ -5499,7 +5511,7 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <source>Intersection (only right)</source>
-        <translation type="unfinished"></translation>
+        <translation>Intersection (seulement à droite)</translation>
     </message>
     <message>
         <source>Control</source>
@@ -5511,11 +5523,11 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer une formule pour gérer la visibilité. Les valeurs différentes de &quot;0&quot; rendent un tracé visible.</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>Control visibility</source>
@@ -5523,7 +5535,7 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <source>Intersection 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Intersection 2</translation>
     </message>
     <message>
         <source>Intersection 2 (only left)</source>
@@ -5555,11 +5567,11 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <source>Continue the first point to the cutting contour</source>
-        <translation type="unfinished"></translation>
+        <translation>Continuer le premier point jusqu&apos;au contour de coupe</translation>
     </message>
     <message>
         <source>Continue the last point to the cutting contour</source>
-        <translation type="unfinished"></translation>
+        <translation>Continuer le dernier point jusqu&apos;au contour de coupe</translation>
     </message>
     <message>
         <source>The path is a cut contour. Use to control export to DXF-AAMA</source>
@@ -5689,7 +5701,7 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation>0</translation>
     </message>
     <message>
         <source>Point:</source>
@@ -5761,11 +5773,11 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer une formule pour gérer la visibilité. Les valeurs différentes de &quot;0&quot; rendent un tracé visible.</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
@@ -6480,7 +6492,7 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation>Activer pour créer un groupe de visibilité à partir des objets d&apos;origine</translation>
+        <translation type="vanished">Activer pour créer un groupe de visibilité à partir des objets d&apos;origine</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -6561,6 +6573,10 @@ Appliquer quand même les réglages ?</translation>
     <message>
         <source>Default</source>
         <translation>Défaut</translation>
+    </message>
+    <message>
+        <source>Enable to create a visibility group from original objects</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7068,7 +7084,7 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <source>The customer name from individual measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Le nom du ou de la client.e depuis les mesures individuelles</translation>
     </message>
     <message>
         <source>The customer email from individual measurements</source>
@@ -7080,11 +7096,11 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <source>Save label data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauvegarder les données de l&apos;étiquette.</translation>
     </message>
     <message>
         <source>Label data were changed. Do you want to save them before editing label template?</source>
-        <translation type="unfinished"></translation>
+        <translation>Les données de l&apos;étiquette ont été modifiées. Souhaitez-vous les enregistrer avant de modifier le modèle de l&apos;étiquette ?</translation>
     </message>
     <message>
         <source>Height</source>
@@ -8291,7 +8307,7 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <source>Test mode doesn&apos;t support openning several files.</source>
-        <translation>Le mode test ne supporte pas l&apos;ouverture de plusieurs fichiers.</translation>
+        <translation type="vanished">Le mode test ne supporte pas l&apos;ouverture de plusieurs fichiers.</translation>
     </message>
     <message>
         <source>Please, provide one input file.</source>
@@ -8367,6 +8383,10 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <source>Formula warning: %1. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test mode doesn&apos;t support opening several files.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9557,7 +9577,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>You can&apos;t use Layout mode yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous ne pouvez pas encore utiliser le mode Plan de coupe.</translation>
     </message>
     <message>
         <source>Zoom fit best current</source>
@@ -9569,7 +9589,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Export details skiping the Layout stage</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter les détails en passant l&apos;étape du Plan de coupe</translation>
     </message>
     <message>
         <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
@@ -10084,7 +10104,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>One or more pattern pieces are bigger than the paper format you selected. Please, select a bigger paper format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Une ou plusieurs pièces sont plus grandes que le format de papier sélectionné. Merci de choisir un format de papier plus grand.</translation>
     </message>
     <message>
         <source>Description</source>
@@ -10625,11 +10645,11 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Known materials:</source>
-        <translation type="unfinished"></translation>
+        <translation>Matériaux connus :</translation>
     </message>
     <message>
         <source>Manage list of known materials</source>
-        <translation type="unfinished"></translation>
+        <translation>Gérer la liste des matériaux connus</translation>
     </message>
     <message>
         <source>Manage</source>
@@ -10641,7 +10661,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Remeber pattern materials</source>
-        <translation type="unfinished"></translation>
+        <translation>Mémoriser les matériaux du patron</translation>
     </message>
     <message>
         <source>Curve approximation:</source>
@@ -10653,11 +10673,11 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Bold line width</source>
-        <translation type="unfinished"></translation>
+        <translation>Largeur de la ligne épaisse</translation>
     </message>
     <message>
         <source>Line width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Largeur de la ligne :</translation>
     </message>
     <message>
         <source>Millimiters</source>
@@ -10967,7 +10987,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Line width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Largeur de la ligne :</translation>
     </message>
 </context>
 <context>
@@ -11809,7 +11829,7 @@ This option will take an affect after restart.</source>
     <name>RemoveItemFromGroup</name>
     <message>
         <source>Remove item from group</source>
-        <translation type="unfinished"></translation>
+        <translation>Retirer l&apos;élément du groupe</translation>
     </message>
 </context>
 <context>
@@ -11865,21 +11885,21 @@ This option will take an affect after restart.</source>
     <name>SavePieceOptions</name>
     <message>
         <source>save detail options</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauvegarde les options du détail</translation>
     </message>
 </context>
 <context>
     <name>SavePiecePathOptions</name>
     <message>
         <source>save path options</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauvegarde les options de tracé</translation>
     </message>
 </context>
 <context>
     <name>SavePlaceLabelOptions</name>
     <message>
         <source>save place label options</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer les options de placement d&apos;étiquette</translation>
     </message>
 </context>
 <context>
@@ -12539,7 +12559,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Export from multisize measurements is not supported.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;export depuis des mesures multi-tailles n&apos;est pas prévu.</translation>
     </message>
     <message>
         <source>Customer name:</source>
@@ -12547,11 +12567,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Open multisize …</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir le multi-tailles …</translation>
     </message>
     <message>
         <source>Create from existing …</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer à partir d&apos;un existant …</translation>
     </message>
     <message>
         <source>Save…</source>
@@ -12559,42 +12579,34 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Import from CSV</source>
-        <translation type="unfinished"></translation>
+        <translation>Importer depuis un CSV</translation>
     </message>
     <message>
         <source>Measurement name in is empty.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Merasurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Le nom de la mesure est vide.</translation>
     </message>
     <message>
         <source>Merasurement &apos;%1&apos; already used in file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Mesure &apos;%1&apos; déjà utilisée dans le fichier.</translation>
     </message>
     <message>
         <source>Measurement &apos;%1&apos; is not one of known measurements.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">La mesure &apos;%1&apos; n&apos;est pas une des mesures connues. </translation>
     </message>
     <message>
         <source>Individual measurements require at least 2 columns.</source>
-        <translation type="unfinished"></translation>
+        <translation>Les mesures individuelles nécessitent au moins 2 colonnes.</translation>
     </message>
     <message>
         <source>Error in row %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur au rang %1.</translation>
     </message>
     <message>
         <source>Multisize measurements require at least 4 columns.</source>
-        <translation type="unfinished"></translation>
+        <translation>Les mesures multi-tailles nécessitent au moins 4 colonnes.</translation>
     </message>
     <message>
         <source>Imported file must not contain the same name twice.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error in row %1. Measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -12851,6 +12863,30 @@ Voulez-vous enregistrer les changements?</translation>
         <source>Dimension custom names</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Measurement name is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement &apos;%1&apos; already used in the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement &apos;%1&apos; is not one of the known measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement &apos;%1&apos; already used in file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in row %1. The measurement name is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabGrainline</name>
@@ -12884,15 +12920,15 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Center pin:</source>
-        <translation type="unfinished"></translation>
+        <translation>Point central :</translation>
     </message>
     <message>
         <source>Top pin:</source>
-        <translation type="unfinished"></translation>
+        <translation>Epingle supérieure :</translation>
     </message>
     <message>
         <source>Bottom pin:</source>
-        <translation type="unfinished"></translation>
+        <translation>Épingle inférieure :</translation>
     </message>
     <message>
         <source>Arrows:</source>
@@ -12947,15 +12983,15 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Center pin:</source>
-        <translation type="unfinished"></translation>
+        <translation>Point central :</translation>
     </message>
     <message>
         <source>Top left pin:</source>
-        <translation type="unfinished"></translation>
+        <translation>Épingle supérieure gauche :</translation>
     </message>
     <message>
         <source>Bottom right pin:</source>
-        <translation type="unfinished"></translation>
+        <translation>Épingle inférieure droite :</translation>
     </message>
     <message>
         <source>Angle:</source>
@@ -12967,11 +13003,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Label template:</source>
-        <translation type="unfinished"></translation>
+        <translation>Modèle d&apos;étiquette:</translation>
     </message>
     <message>
         <source>Edit template</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifier le modèle</translation>
     </message>
     <message>
         <source>Label data</source>
@@ -12987,11 +13023,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Annotation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Annotation :</translation>
     </message>
     <message>
         <source>A text field to add comments in</source>
-        <translation type="unfinished"></translation>
+        <translation>Un champ de texte pour ajouter des commentaires</translation>
     </message>
     <message>
         <source>Orientation:</source>
@@ -13003,15 +13039,15 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Tilt:</source>
-        <translation type="unfinished"></translation>
+        <translation>Basculer :</translation>
     </message>
     <message>
         <source>Fold position:</source>
-        <translation type="unfinished"></translation>
+        <translation>Position de la pliure :</translation>
     </message>
     <message>
         <source>Edit piece label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Éditer le modèle d&apos;étiquette de pièce</translation>
     </message>
     <message>
         <source>Options to control position a detail label. &lt;b&gt;Not available if a detail label template is empty&lt;/b&gt;.</source>
@@ -13027,7 +13063,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Edit pattern label</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifier l&apos;étiquette du patron</translation>
     </message>
     <message>
         <source>Pattern name:</source>
@@ -13047,11 +13083,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Date format:</source>
-        <translation type="unfinished"></translation>
+        <translation>Format de date:</translation>
     </message>
     <message>
         <source>Time format:</source>
-        <translation type="unfinished"></translation>
+        <translation>Format d&apos;heure:</translation>
     </message>
     <message>
         <source>Customer birth date:</source>
@@ -13071,11 +13107,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Pattern materials:</source>
-        <translation type="unfinished"></translation>
+        <translation>Matériaux du patron :</translation>
     </message>
     <message>
         <source>Manage list of pattern materials</source>
-        <translation type="unfinished"></translation>
+        <translation>Gérer la liste des matériaux du patron</translation>
     </message>
     <message>
         <source>Manage</source>
@@ -13126,7 +13162,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Marks</source>
-        <translation type="unfinished"></translation>
+        <translation>Repères</translation>
     </message>
     <message>
         <source>Select if need designate the corner point as a passmark</source>
@@ -13150,7 +13186,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Intersection (only left)</source>
-        <translation type="unfinished"></translation>
+        <translation>Intersection (seulement à gauche)</translation>
     </message>
     <message>
         <source>Select if need designate the corner point as a passmark. Show only right passmark.</source>
@@ -13158,11 +13194,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Intersection (only right)</source>
-        <translation type="unfinished"></translation>
+        <translation>Intersection (seulement à droite)</translation>
     </message>
     <message>
         <source>Intersection 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Intersection 2</translation>
     </message>
     <message>
         <source>Intersection 2 (only left)</source>
@@ -13345,7 +13381,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Force flipping</source>
-        <translation type="unfinished"></translation>
+        <translation>Forcer la rotation</translation>
     </message>
     <message>
         <source>Move on top</source>
@@ -13800,10 +13836,6 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Version inattendue &quot;%1&quot;.</translation>
     </message>
     <message>
-        <source>Error openning a temp file: %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Invalid version. Minimum supported format version is %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13829,6 +13861,10 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Validation error file %3 in line %1 column %2</source>
         <translation>Erreur de validation : fichier %3, ligne %1, colonne %2</translation>
+    </message>
+    <message>
+        <source>Error opening a temp file: %1.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13925,7 +13961,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation>Voulez-vous modifier les autorisations?</translation>
+        <translation type="vanished">Voulez-vous modifier les autorisations?</translation>
     </message>
     <message>
         <source>Cannot set permissions for %1 to writable.</source>
@@ -13967,12 +14003,16 @@ Voulez-vous enregistrer les changements?</translation>
         <source>The file has no write permissions.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Do you want to change the permissions?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VAbstractNode</name>
     <message>
         <source>This id (%1) is not unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cet identifiant (%1) n&apos;est pas unique.</translation>
     </message>
 </context>
 <context>
@@ -14089,6 +14129,10 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>saumon clair</translation>
     </message>
     <message>
+        <source>golden rod</source>
+        <translation type="vanished">jaune d&apos;or</translation>
+    </message>
+    <message>
         <source>orange</source>
         <translation>Orange</translation>
     </message>
@@ -14118,7 +14162,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>corn flower blue</source>
-        <translation type="unfinished"></translation>
+        <translation>bleu centaurée</translation>
     </message>
     <message>
         <source>Edit wrong formula</source>
@@ -14126,7 +14170,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>goldenrod</source>
-        <translation type="unfinished"></translation>
+        <translation>jaune d&apos;or</translation>
     </message>
 </context>
 <context>
@@ -14226,26 +14270,26 @@ Voulez-vous enregistrer les changements?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Content type mistmatch.</source>
+        <source>Not image.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Not image.</source>
+        <source>Content type mismatch.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VBank</name>
     <message>
-        <source>Preparing data for layout error: Detail &apos;%1&apos; square &lt;= 0</source>
+        <source>Error of preparing data for layout: Detail &apos;%1&apos; square &lt;= 0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Preparing data for layout error: Layout paper sheet &lt;= 0</source>
+        <source>Error of preparing data for layout: Layout paper sheet &lt;= 0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Preparing data for layout error: List of details is empty</source>
+        <source>Error of preparing data for layout: List of details is empty</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14568,7 +14612,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Export text as paths.</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter le texte sous forme de chemins.</translation>
     </message>
     <message>
         <source>Export only details. Export details as they positioned in the details mode. Any layout related options will be ignored.</source>
@@ -14612,10 +14656,6 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Number corresponding to layout page template (default = 0, export mode):</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ignore printer margins (export mode). Use if need full paper space. In case of later printing you must account for the margins himself.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -14815,10 +14855,6 @@ Voulez-vous enregistrer les changements?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Load pattern pieces form the raw layout data file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The raw layout data file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14882,6 +14918,14 @@ Voulez-vous enregistrer les changements?</translation>
         <source>Layout units (as paper&apos;s one except px, export mode). Default units cm.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Load pattern pieces from the raw layout data file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore printer margins (export mode). Use if need full paper space. In case of later printing you must account for the margins themselves.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VCommonSettings</name>
@@ -14899,11 +14943,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>templates</source>
-        <translation type="unfinished"></translation>
+        <translation>modèles</translation>
     </message>
     <message>
         <source>label templates</source>
-        <translation type="unfinished"></translation>
+        <translation>modèles d&apos;étiquettes</translation>
     </message>
     <message>
         <source>patterns</source>
@@ -15027,11 +15071,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Not unique id (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas un identifiant unique (%1)</translation>
     </message>
     <message>
         <source>This id (%1) is not unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cet identifiant (%1) n&apos;est pas unique.</translation>
     </message>
     <message>
         <source>Couldn&apos;t get version information.</source>
@@ -15066,7 +15110,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>This id (%1) is not unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cet identifiant (%1) n&apos;est pas unique.</translation>
     </message>
     <message>
         <source>Add to group</source>
@@ -15078,7 +15122,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Show label</source>
-        <translation type="unfinished"></translation>
+        <translation>Montrer l&apos;étiquette</translation>
     </message>
     <message>
         <source>Restore label position</source>
@@ -15089,7 +15133,7 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VException</name>
     <message>
         <source>Exception: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Exception : (%1)</translation>
     </message>
 </context>
 <context>
@@ -15161,7 +15205,7 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VLayoutConverter</name>
     <message>
         <source>Could not change version.</source>
-        <translation type="unfinished">La version n&apos;a pas pu être changée.</translation>
+        <translation>La version n&apos;a pas pu être changée.</translation>
     </message>
 </context>
 <context>
@@ -15191,10 +15235,6 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Création du fichier &apos;%1&apos; A échoué ! %2</translation>
     </message>
     <message>
-        <source>Can&apos;t create an flat dxf file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Can&apos;t create an AAMA dxf file.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15208,11 +15248,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>files</source>
-        <translation type="unfinished"></translation>
+        <translation>fichiers</translation>
     </message>
     <message>
         <source>Image files</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichiers d&apos;image</translation>
     </message>
     <message>
         <source>tiled</source>
@@ -15226,12 +15266,16 @@ Voulez-vous enregistrer les changements?</translation>
         <source>Raw Layout Data</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Can&apos;t create a flat dxf file.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VLayoutPiece</name>
     <message>
         <source>Piece %1 doesn&apos;t have shape.</source>
-        <translation type="unfinished"></translation>
+        <translation>La pièce %1 n&apos;a pas de forme.</translation>
     </message>
 </context>
 <context>
@@ -15273,11 +15317,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>In layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Dans isolation</translation>
     </message>
     <message>
         <source>Show label</source>
-        <translation type="unfinished"></translation>
+        <translation>Montrer l&apos;étiquette</translation>
     </message>
     <message>
         <source>Exclude</source>
@@ -15293,7 +15337,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Force flipping</source>
-        <translation type="unfinished"></translation>
+        <translation>Forcer la rotation</translation>
     </message>
     <message>
         <source>by length</source>
@@ -15345,15 +15389,15 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Intersection (only left)</source>
-        <translation type="unfinished"></translation>
+        <translation>Intersection (seulement à gauche)</translation>
     </message>
     <message>
         <source>Intersection (only right)</source>
-        <translation type="unfinished"></translation>
+        <translation>Intersection (seulement à droite)</translation>
     </message>
     <message>
         <source>Intersection 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Intersection 2</translation>
     </message>
     <message>
         <source>Intersection 2 (only left)</source>
@@ -15435,16 +15479,16 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Ne peut être à l&apos;écoute des connexions entrantes de %1</translation>
     </message>
     <message>
-        <source>Export mode doesn&apos;t support openning several files.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Import raw layout data does not support openning several layout files.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Please, provide one input file.</source>
         <translation>Merci de choisir un fichier.</translation>
+    </message>
+    <message>
+        <source>Export mode doesn&apos;t support opening several files.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import raw layout data does not support opening several layout files.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -16482,7 +16526,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating operation of flipping by line</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur lors de la création ou la mise à jour de l&apos;opération de rotation de ligne</translation>
     </message>
     <message>
         <source>Error creating or updating operation of flipping by axis</source>
@@ -16525,11 +16569,11 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error creating or updating place lavel</source>
+        <source>Piece path doesn&apos;t contain nodes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Piece path doesn&apos;t contain nodes</source>
+        <source>Error creating or updating place label</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -16545,7 +16589,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error no unique id.</source>
-        <translation type="unfinished">Erreur : id non unique.</translation>
+        <translation>Erreur : id non unique.</translation>
     </message>
 </context>
 <context>
@@ -16567,11 +16611,11 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Content type mistmatch.</source>
+        <source>Not image.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Not image.</source>
+        <source>Content type mismatch.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -16990,6 +17034,10 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>rotate pattern info label</source>
         <translation type="vanished">tourne l&apos;étiquette d&apos;information du patron</translation>
+    </message>
+    <message>
+        <source>In layout</source>
+        <translation type="vanished">Dans isolation</translation>
     </message>
     <message>
         <source>move grainline</source>
@@ -17862,7 +17910,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>In layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Dans isolation</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -17882,11 +17930,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Force flipping</source>
-        <translation type="unfinished"></translation>
+        <translation>Forcer la rotation</translation>
     </message>
     <message>
         <source>This id (%1) is not unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cet identifiant (%1) n&apos;est pas unique.</translation>
     </message>
     <message>
         <source>Tool was used after deleting.</source>
@@ -17927,7 +17975,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>This id (%1) is not unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cet identifiant (%1) n&apos;est pas unique.</translation>
     </message>
 </context>
 <context>
@@ -19928,7 +19976,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation>Voulez-vous modifier les autorisations?</translation>
+        <translation type="vanished">Voulez-vous modifier les autorisations?</translation>
     </message>
     <message>
         <source>Color</source>
@@ -20016,6 +20064,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Light gray</source>
         <comment>color</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to change the permissions?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

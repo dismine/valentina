@@ -5,70 +5,77 @@
     <name>AddBackgroundImage</name>
     <message>
         <source>add background image</source>
-        <translation type="unfinished"></translation>
+        <translation>הוסף תמונת רקע</translation>
+    </message>
+</context>
+<context>
+    <name>AddDet</name>
+    <message>
+        <source>add detail</source>
+        <translation type="vanished">הוסף פרט</translation>
     </message>
 </context>
 <context>
     <name>AddGroup</name>
     <message>
         <source>add group</source>
-        <translation type="unfinished"></translation>
+        <translation>הוסף קבוצה</translation>
     </message>
 </context>
 <context>
     <name>AddItemToGroup</name>
     <message>
         <source>Add item to group</source>
-        <translation type="unfinished"></translation>
+        <translation>הוסף פריט לקבוצה</translation>
     </message>
 </context>
 <context>
     <name>AddPatternPiece</name>
     <message>
         <source>add pattern piece %1</source>
-        <translation type="unfinished"></translation>
+        <translation>הוסף חלק גזרה 1%</translation>
     </message>
 </context>
 <context>
     <name>AddPiece</name>
     <message>
         <source>add detail</source>
-        <translation type="unfinished"></translation>
+        <translation>הוסף פרט</translation>
     </message>
 </context>
 <context>
     <name>AddToCalc</name>
     <message>
         <source>add object</source>
-        <translation type="unfinished"></translation>
+        <translation>הוסף אובייקט</translation>
     </message>
 </context>
 <context>
     <name>ChangeGroupOptions</name>
     <message>
         <source>rename group</source>
-        <translation type="unfinished"></translation>
+        <translation>שנה שם קבוצה</translation>
     </message>
 </context>
 <context>
     <name>ChangeGroupVisibility</name>
     <message>
         <source>change group visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>שנה נראות קבוצה</translation>
     </message>
 </context>
 <context>
     <name>ChangeMultipleGroupsVisibility</name>
     <message>
         <source>change multiple groups visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>שנה נראות קבוצות</translation>
     </message>
 </context>
 <context>
     <name>ColorPickerPopup</name>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>מותאם אישית</translation>
     </message>
 </context>
 <context>
@@ -81,12 +88,99 @@
         <source>Server name/IP</source>
         <translation type="vanished">שם שרת/IP</translation>
     </message>
+    <message>
+        <source>Secure connection</source>
+        <translation type="vanished">חיבור מקור</translation>
+    </message>
+    <message>
+        <source>Proxy settings</source>
+        <translation type="vanished">הגדרות פרוקסי</translation>
+    </message>
+    <message>
+        <source>Use Proxy</source>
+        <translation type="vanished">השתמש בפרוקסי</translation>
+    </message>
+    <message>
+        <source>Proxy address</source>
+        <translation type="vanished">כתובת פרוקסי</translation>
+    </message>
+    <message>
+        <source>Proxy user</source>
+        <translation type="vanished">משתמש פרוקסי</translation>
+    </message>
+    <message>
+        <source>User settings</source>
+        <translation type="vanished">הגדרות משתמש</translation>
+    </message>
+    <message>
+        <source>User Name</source>
+        <translation type="vanished">שם משתמש</translation>
+    </message>
+    <message>
+        <source>Save password</source>
+        <translation type="vanished">שמור סיסמה</translation>
+    </message>
+    <message>
+        <source>Password</source>
+        <translation type="vanished">סיסמה</translation>
+    </message>
+    <message>
+        <source>Proxy address:</source>
+        <translation type="vanished">כתובת פרוקסי:</translation>
+    </message>
+    <message>
+        <source>Proxy user:</source>
+        <translation type="vanished">משתמש פרוקסי:</translation>
+    </message>
+    <message>
+        <source>User Name:</source>
+        <translation type="vanished">שם משתמש:</translation>
+    </message>
+    <message>
+        <source>Password:</source>
+        <translation type="vanished">סיסמה</translation>
+    </message>
+</context>
+<context>
+    <name>ConfigDialog</name>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation type="vanished">וביטול</translation>
+    </message>
+    <message>
+        <source>&amp;Ok</source>
+        <translation type="vanished">ואישור</translation>
+    </message>
+    <message>
+        <source>Pattern</source>
+        <translation type="vanished">גזרה</translation>
+    </message>
+    <message>
+        <source>Community</source>
+        <translation type="vanished">קהילה</translation>
+    </message>
 </context>
 <context>
     <name>ConfigurationPage</name>
     <message>
+        <source>Default unit updated and will be used the next pattern creation</source>
+        <translation type="vanished">ברירת מחדל יחידת מידה עודכנה ותשומש ביצירת הגזרה הבאה</translation>
+    </message>
+    <message>
         <source>Save</source>
         <translation type="vanished">שמור</translation>
+    </message>
+    <message>
+        <source>Auto-save modified pattern</source>
+        <translation type="vanished">שמור אוטומטית שינויים בגזרה</translation>
+    </message>
+    <message>
+        <source>Language</source>
+        <translation type="vanished">שפה</translation>
+    </message>
+    <message>
+        <source>Default unit</source>
+        <translation type="vanished">ברירת מחדל יחידת מידה</translation>
     </message>
     <message>
         <source>Centimeters</source>
@@ -96,55 +190,125 @@
         <source>Millimiters</source>
         <translation type="vanished">מילימטר</translation>
     </message>
+    <message>
+        <source>Inches</source>
+        <translation type="vanished">אינצ&apos;ים</translation>
+    </message>
+    <message>
+        <source>Label language</source>
+        <translation type="vanished">שפת תווית</translation>
+    </message>
+    <message>
+        <source>Send crash reports</source>
+        <translation type="vanished">שלח דוח קריסה</translation>
+    </message>
+    <message>
+        <source>Send crash reports (recommended)</source>
+        <translation type="vanished">שלח דוח קריסה (מומלץ)</translation>
+    </message>
+    <message>
+        <source>Pattern Editing</source>
+        <translation type="vanished">עריכת גזרה</translation>
+    </message>
+    <message>
+        <source>Confirm item deletion</source>
+        <translation type="vanished">אשר מחיקה</translation>
+    </message>
+    <message>
+        <source>Toolbar</source>
+        <translation type="vanished">סרגל כלים</translation>
+    </message>
+    <message>
+        <source>The text appears under the icon. (recommended for beginners.)</source>
+        <translation type="vanished">הטקסט מופיע מתחת לאייקון (מומלץ עבור מתחילים)</translation>
+    </message>
+    <message>
+        <source>Default unit:</source>
+        <translation type="vanished">ברירת מחדל יחידת מידה</translation>
+    </message>
+    <message>
+        <source>Label language:</source>
+        <translation type="vanished">שפת תווית</translation>
+    </message>
+    <message>
+        <source>Pattern making system</source>
+        <translation type="vanished">שיטת תדמיתנות</translation>
+    </message>
+    <message>
+        <source>Pattern making system:</source>
+        <translation type="vanished">עריכת גזרה</translation>
+    </message>
+    <message>
+        <source>Book:</source>
+        <translation type="vanished">ספר</translation>
+    </message>
 </context>
 <context>
     <name>DelGroup</name>
     <message>
         <source>delete group</source>
-        <translation type="unfinished"></translation>
+        <translation>מחק קבוצה</translation>
     </message>
 </context>
 <context>
     <name>DelTool</name>
     <message>
         <source>delete tool</source>
-        <translation type="unfinished"></translation>
+        <translation>מחק כלי</translation>
     </message>
 </context>
 <context>
     <name>DeleteBackgroundImage</name>
     <message>
         <source>delete background image</source>
-        <translation type="unfinished"></translation>
+        <translation>מחק תמונת רקע</translation>
+    </message>
+</context>
+<context>
+    <name>DeleteDetail</name>
+    <message>
+        <source>delete tool</source>
+        <translation type="vanished">מחק כלי</translation>
     </message>
 </context>
 <context>
     <name>DeletePatternPiece</name>
     <message>
         <source>delete pattern piece %1</source>
-        <translation type="unfinished"></translation>
+        <translation>מחק חלק גזרה 1%</translation>
     </message>
 </context>
 <context>
     <name>DeletePiece</name>
     <message>
         <source>delete tool</source>
-        <translation type="unfinished"></translation>
+        <translation>מחק כלי</translation>
+    </message>
+</context>
+<context>
+    <name>Detail</name>
+    <message>
+        <source>Fabric</source>
+        <translation type="vanished">בד</translation>
+    </message>
+    <message>
+        <source>Lining</source>
+        <translation type="vanished">בטנה</translation>
     </message>
 </context>
 <context>
     <name>DialogAboutApp</name>
     <message>
         <source>About Valentina</source>
-        <translation type="unfinished"></translation>
+        <translation>אודות ולנטינה</translation>
     </message>
     <message>
         <source>Valentina version</source>
-        <translation type="unfinished"></translation>
+        <translation>גרסת ולנטינה</translation>
     </message>
     <message>
         <source>Contributors</source>
-        <translation type="unfinished"></translation>
+        <translation>תורמים</translation>
     </message>
     <message>
         <source>Web site : %1</source>
@@ -152,7 +316,7 @@
     </message>
     <message>
         <source>Cannot open your default browser</source>
-        <translation type="unfinished"></translation>
+        <translation>לא יכול לפתוח בדפדפן בררת המחדל</translation>
     </message>
     <message>
         <source>Build revision:</source>
@@ -164,18 +328,18 @@
     </message>
     <message>
         <source>Check For Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>בדוק עדכונים</translation>
     </message>
 </context>
 <context>
     <name>DialogAboutTape</name>
     <message>
         <source>About Tape</source>
-        <translation type="unfinished"></translation>
+        <translation>אודות סרט-מידה</translation>
     </message>
     <message>
         <source>Tape version</source>
-        <translation type="unfinished"></translation>
+        <translation>גרסת סרט-מידה</translation>
     </message>
     <message>
         <source>Build revision:</source>
@@ -183,7 +347,7 @@
     </message>
     <message>
         <source>This program is part of Valentina project.</source>
-        <translation type="unfinished"></translation>
+        <translation>התוכנה הזאת הנה חלק מפרויקט ולנטינה.</translation>
     </message>
     <message>
         <source>Build revision: %1</source>
@@ -195,7 +359,7 @@
     </message>
     <message>
         <source>Cannot open your default browser</source>
-        <translation type="unfinished"></translation>
+        <translation>לא יכול לפתוח בדפדפן בררת המחדל</translation>
     </message>
     <message>
         <source>Built on %1 at %2</source>
@@ -203,18 +367,18 @@
     </message>
     <message>
         <source>Check For Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>בדוק עדכונים</translation>
     </message>
 </context>
 <context>
     <name>DialogAddBackgroundImage</name>
     <message>
         <source>Background image</source>
-        <translation type="unfinished"></translation>
+        <translation>תמונת רקע</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>שם</translation>
     </message>
     <message>
         <source>Determine should an image built in or added as path to the file.</source>
@@ -222,7 +386,7 @@
     </message>
     <message>
         <source>Built in</source>
-        <translation type="unfinished"></translation>
+        <translation>מובנה</translation>
     </message>
 </context>
 <context>
@@ -264,83 +428,91 @@
         <translation type="vanished">סוג הקו</translation>
     </message>
     <message>
+        <source>Show line from first point to this point</source>
+        <translation type="vanished">הראה קו מהנקודה הראשונה לנקודה זו</translation>
+    </message>
+    <message>
         <source>Select second point of line</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר את הנקודה השניה של הקו</translation>
     </message>
     <message>
         <source>Point at distance along line</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה לאורך הקו</translation>
+    </message>
+    <message>
+        <source>Line color</source>
+        <translation type="vanished">צבע הקו</translation>
     </message>
     <message>
         <source>Edit length</source>
-        <translation type="unfinished"></translation>
+        <translation>ערוך אורך</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>אשף הפורמולות</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית הנקודה</translation>
     </message>
     <message>
         <source>First point:</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה ראשונה</translation>
     </message>
     <message>
         <source>First point of the line</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה ראשונה בקו</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה שניה</translation>
     </message>
     <message>
         <source>Second point of the line</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה שניה של הקו</translation>
     </message>
     <message>
         <source>Type of line:</source>
-        <translation type="unfinished"></translation>
+        <translation>סוג הקו:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation type="unfinished"></translation>
+        <translation>צבע הקו:</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית ייחודית</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר תווית ייחודית.</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
 </context>
 <context>
     <name>DialogArc</name>
     <message>
         <source>Arc</source>
-        <translation type="unfinished"></translation>
+        <translation>קשת</translation>
     </message>
     <message>
         <source>Radius</source>
@@ -355,16 +527,40 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>First angle</source>
+        <translation type="vanished">זווית ראשונה</translation>
+    </message>
+    <message>
+        <source>Value of first angle</source>
+        <translation type="vanished">ערך הזווית הראשונה</translation>
+    </message>
+    <message>
+        <source>Second angle</source>
+        <translation type="vanished">זווית שניה</translation>
+    </message>
+    <message>
+        <source>Value of second angle</source>
+        <translation type="vanished">ערך הזווית השניה</translation>
+    </message>
+    <message>
         <source>Center point</source>
         <translation type="vanished">נקודת מרכז</translation>
     </message>
     <message>
+        <source>Select point of center of arc</source>
+        <translation type="vanished">בחר את נקודת מרכז הקשת</translation>
+    </message>
+    <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>טעות</translation>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation type="unfinished"></translation>
+        <translation>רדיוס אינו יכול להיות ערך שלילי</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation type="vanished">צבע</translation>
     </message>
     <message>
         <source>Edit radius</source>
@@ -384,11 +580,11 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>אשף הפורמולות</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>First angle:</source>
@@ -396,7 +592,7 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <source>Second angle:</source>
@@ -412,7 +608,7 @@
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>צבע</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -428,7 +624,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -436,7 +632,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
 </context>
 <context>
@@ -458,12 +654,28 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>First angle</source>
+        <translation type="vanished">זווית ראשונה</translation>
+    </message>
+    <message>
+        <source>Value of first angle</source>
+        <translation type="vanished">ערך הזווית הראשונה</translation>
+    </message>
+    <message>
         <source>Length</source>
         <translation type="vanished">אורך</translation>
     </message>
     <message>
         <source>Center point</source>
         <translation type="vanished">נקודת מרכז</translation>
+    </message>
+    <message>
+        <source>Select point of center of arc</source>
+        <translation type="vanished">בחר נקודת מרכז הקשת</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation type="vanished">צבע</translation>
     </message>
     <message>
         <source>Edit radius</source>
@@ -478,20 +690,28 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Error</source>
+        <translation type="vanished">טעות</translation>
+    </message>
+    <message>
+        <source>Radius can&apos;t be negative</source>
+        <translation type="vanished">רדיוס אינו יכול להיות ערך שלילי</translation>
+    </message>
+    <message>
         <source>Radius:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>אשף הפורמולות</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <source>First angle:</source>
@@ -499,7 +719,7 @@
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Center point:</source>
@@ -507,7 +727,7 @@
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>צבע</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -523,7 +743,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -531,7 +751,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
 </context>
 <context>
@@ -577,44 +797,48 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Line color</source>
+        <translation type="vanished">צבע הקו</translation>
+    </message>
+    <message>
         <source>Edit length</source>
-        <translation type="unfinished"></translation>
+        <translation>ערוך אורך</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>אשף הפורמולות</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית הנקודה</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית ייחודית</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר תווית ייחודית.</translation>
     </message>
     <message>
         <source>First point:</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה ראשונה</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה שניה</translation>
     </message>
     <message>
         <source>Third point:</source>
@@ -622,38 +846,38 @@
     </message>
     <message>
         <source>Type of line:</source>
-        <translation type="unfinished"></translation>
+        <translation>סוג הקו:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation type="unfinished"></translation>
+        <translation>צבע הקו:</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
 </context>
 <context>
     <name>DialogCubicBezier</name>
     <message>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>צבע</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>שם</translation>
     </message>
     <message>
         <source>First point:</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה ראשונה</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה שניה</translation>
     </message>
     <message>
         <source>Third point:</source>
@@ -697,7 +921,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -705,7 +929,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
 </context>
 <context>
@@ -720,11 +944,11 @@
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>צבע</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>שם</translation>
     </message>
     <message>
         <source>Invalid spline path</source>
@@ -752,7 +976,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -760,7 +984,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
 </context>
 <context>
@@ -782,12 +1006,20 @@
         <translation type="vanished">סוג הקו</translation>
     </message>
     <message>
+        <source>Show line from first point to this point</source>
+        <translation type="vanished">הראה קו מהנקודה הראשונה לנקודה זו</translation>
+    </message>
+    <message>
         <source>Select axis point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Point intersect curve and axis</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color</source>
+        <translation type="vanished">צבע הקו</translation>
     </message>
     <message>
         <source>Edit angle</source>
@@ -799,15 +1031,15 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>אשף הפורמולות</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <source>Axis point:</source>
@@ -819,31 +1051,31 @@
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית הנקודה</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית ייחודית</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר תווית ייחודית.</translation>
     </message>
     <message>
         <source>Type of line:</source>
-        <translation type="unfinished"></translation>
+        <translation>סוג הקו:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation type="unfinished"></translation>
+        <translation>צבע הקו:</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
     <message>
         <source>Alias1:</source>
@@ -869,6 +1101,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Arc</source>
+        <translation type="vanished">קשת</translation>
+    </message>
+    <message>
         <source>Point label</source>
         <translation type="vanished">תווית הנקודה</translation>
     </message>
@@ -877,24 +1113,28 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Color</source>
+        <translation type="vanished">צבע</translation>
+    </message>
+    <message>
         <source>Edit length</source>
-        <translation type="unfinished"></translation>
+        <translation>ערוך אורך</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>אשף הפורמולות</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <source>Arc:</source>
@@ -902,19 +1142,23 @@
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית הנקודה</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית ייחודית</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר תווית ייחודית.</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="vanished">צבע</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Alias1:</source>
@@ -926,7 +1170,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
 </context>
 <context>
@@ -956,24 +1200,28 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Color</source>
+        <translation type="vanished">צבע</translation>
+    </message>
+    <message>
         <source>Edit length</source>
-        <translation type="unfinished"></translation>
+        <translation>ערוך אורך</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>אשף הפורמולות</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <source>Curve:</source>
@@ -981,19 +1229,23 @@
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית הנקודה</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית ייחודית</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר תווית ייחודית.</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="vanished">צבע</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Alias1:</source>
@@ -1005,7 +1257,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
 </context>
 <context>
@@ -1035,24 +1287,28 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Color</source>
+        <translation type="vanished">צבע</translation>
+    </message>
+    <message>
         <source>Edit length</source>
-        <translation type="unfinished"></translation>
+        <translation>ערוך אורך</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>אשף הפורמולות</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <source>Curve:</source>
@@ -1060,19 +1316,23 @@
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית הנקודה</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית ייחודית</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר תווית ייחודית.</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="vanished">צבע</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Alias1:</source>
@@ -1084,7 +1344,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
 </context>
 <context>
@@ -1095,11 +1355,11 @@
     </message>
     <message>
         <source>Format:</source>
-        <translation type="unfinished"></translation>
+        <translation>פורמט:</translation>
     </message>
     <message>
         <source>Insert a format</source>
-        <translation type="unfinished"></translation>
+        <translation>הכנס פורמט:</translation>
     </message>
     <message>
         <source>&lt;empty&gt;</source>
@@ -1109,65 +1369,269 @@
 <context>
     <name>DialogDetail</name>
     <message>
+        <source>Detail</source>
+        <translation type="vanished">פרט</translation>
+    </message>
+    <message>
+        <source>cm</source>
+        <translation type="vanished">ס&quot;מ</translation>
+    </message>
+    <message>
         <source>Options</source>
         <translation type="vanished">אפשרויות</translation>
+    </message>
+    <message>
+        <source>Name of detail</source>
+        <translation type="vanished">שם הפרט</translation>
+    </message>
+    <message>
+        <source>Seam allowance</source>
+        <translation type="vanished">תוספת תפר</translation>
     </message>
     <message>
         <source>Width</source>
         <translation type="vanished">רוחב</translation>
     </message>
     <message>
+        <source>Closed</source>
+        <translation type="vanished">סגור</translation>
+    </message>
+    <message>
         <source>Delete</source>
         <translation type="vanished">למחוק</translation>
     </message>
     <message>
+        <source>Reverse</source>
+        <translation type="vanished">הפוך</translation>
+    </message>
+    <message>
+        <source>Seam allowance tool</source>
+        <translation type="vanished">כלי תוספת תפר</translation>
+    </message>
+    <message>
+        <source>All objects in path should follow in clockwise direction.</source>
+        <translation type="vanished">כל האובייקטים צריכים להיות בכיוון השעון.</translation>
+    </message>
+    <message>
         <source>...</source>
         <translation type="vanished">...</translation>
+    </message>
+    <message>
+        <source>Ready!</source>
+        <translation type="vanished">מוכן!</translation>
+    </message>
+    <message>
+        <source>You need more points!</source>
+        <translation type="vanished">אתה צריך נקודות נוספות!</translation>
+    </message>
+    <message>
+        <source>First point can not equal the last point!</source>
+        <translation type="vanished">הנקודה הראשונה אינה יכולה להיות שווה לנקודה האחרונה!</translation>
+    </message>
+    <message>
+        <source>You have double points!</source>
+        <translation type="vanished">יש לך נקודות כפולות!</translation>
+    </message>
+    <message>
+        <source>You have to choose points in a clockwise direction!</source>
+        <translation type="vanished">עליך לבחור נקודות בכיוון השעון!</translation>
+    </message>
+    <message>
+        <source>Name of detail:</source>
+        <translation type="vanished">שם הפרט:</translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="vanished">רוחב:</translation>
+    </message>
+    <message>
+        <source>General</source>
+        <translation type="vanished">כללי</translation>
+    </message>
+    <message>
+        <source>Pattern piece data</source>
+        <translation type="vanished">מידע על חלק הגזרה</translation>
+    </message>
+    <message>
+        <source>Material/Cut number/Placement</source>
+        <translation type="vanished">חומר/מספר גזרה/מיקום</translation>
+    </message>
+    <message>
+        <source>Material type:</source>
+        <translation type="vanished">סוג חומר:</translation>
+    </message>
+    <message>
+        <source>Cut number:</source>
+        <translation type="vanished">מספר חיתוך:</translation>
+    </message>
+    <message>
+        <source>Placement:</source>
+        <translation type="vanished">מיקום:</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="vanished">הוסף</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="vanished">בטל</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="vanished">הסר</translation>
+    </message>
+    <message>
+        <source>Letter:</source>
+        <translation type="vanished">אות:</translation>
+    </message>
+    <message>
+        <source>Detail label visible</source>
+        <translation type="vanished">תווית פרט נראית</translation>
+    </message>
+    <message>
+        <source>Pattern label visible</source>
+        <translation type="vanished">תווית גזרה נראית</translation>
+    </message>
+    <message>
+        <source>Fabric</source>
+        <translation type="vanished">בד</translation>
+    </message>
+    <message>
+        <source>Lining</source>
+        <translation type="vanished">בטנה</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="vanished">ללא</translation>
+    </message>
+    <message>
+        <source>Cut on fold</source>
+        <translation type="vanished">חתוך על קיפול בד</translation>
+    </message>
+    <message>
+        <source> on Fold</source>
+        <translation type="vanished">על קיפול בד</translation>
+    </message>
+    <message>
+        <source>Update</source>
+        <translation type="vanished">עדכון</translation>
+    </message>
+    <message>
+        <source>on Fold</source>
+        <translation type="vanished">על קיפול בד</translation>
+    </message>
+    <message>
+        <source>You can choose one of the predefined materials or enter a new one</source>
+        <translation type="vanished">עליך לבחור אחד מהחומרים המוגדרים או להגדיר חומר חדש</translation>
+    </message>
+    <message>
+        <source>Forbid flipping</source>
+        <translation type="vanished">אסור היפוך</translation>
+    </message>
+    <message>
+        <source>Letter of pattern piece</source>
+        <translation type="vanished">אות חלק הגזרה</translation>
+    </message>
+    <message>
+        <source>Name can&apos;t be empty</source>
+        <translation type="vanished">השם אינו יכול להישאר ריק</translation>
+    </message>
+    <message>
+        <source>Grainline</source>
+        <translation type="vanished">קו ישר</translation>
+    </message>
+    <message>
+        <source>Grainline visible</source>
+        <translation type="vanished">קו ישר נראה</translation>
+    </message>
+    <message>
+        <source>Rotation:</source>
+        <translation type="vanished">סיבוב:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="vanished">אשף הפורמולות</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="vanished">ערך</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="vanished">חישובים</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="vanished">אורך</translation>
+    </message>
+    <message>
+        <source>Infinite/undefined result</source>
+        <translation type="vanished">תוצאה אינסופית\ בלתי מוגדרת</translation>
+    </message>
+    <message>
+        <source>Length should be positive</source>
+        <translation type="vanished">על האורך להיות חיובי</translation>
+    </message>
+    <message>
+        <source>Arrows:</source>
+        <translation type="vanished">חצים:</translation>
+    </message>
+    <message>
+        <source>Both</source>
+        <translation type="vanished">גם וגם</translation>
+    </message>
+    <message>
+        <source>Just front</source>
+        <translation type="vanished">רק קדמי</translation>
+    </message>
+    <message>
+        <source>Just rear</source>
+        <translation type="vanished">רק אחורי</translation>
     </message>
 </context>
 <context>
     <name>DialogDimensionCustomNames</name>
     <message>
         <source>Dimension custom names</source>
-        <translation type="unfinished"></translation>
+        <translation>שמות מימדים מוגדרים אישית</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>שם</translation>
     </message>
     <message>
         <source>Custom Name</source>
-        <translation type="unfinished"></translation>
+        <translation>שם מותאם אישית</translation>
     </message>
 </context>
 <context>
     <name>DialogDimensionLabels</name>
     <message>
         <source>Dimension labels</source>
-        <translation type="unfinished"></translation>
+        <translation>תוייות מימדים</translation>
     </message>
     <message>
         <source>Dimension:</source>
-        <translation type="unfinished"></translation>
+        <translation>מימד:</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית</translation>
     </message>
 </context>
 <context>
     <name>DialogDuplicateDetail</name>
     <message>
         <source>Dialog duplicate detail</source>
-        <translation type="unfinished"></translation>
+        <translation>דיאלוג העתקת פרט</translation>
     </message>
     <message>
         <source>Click to place duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>לחץ למיקום ההעתק</translation>
     </message>
 </context>
 <context>
@@ -1178,7 +1642,7 @@
     </message>
     <message>
         <source>Clear current and begin new label</source>
-        <translation type="unfinished"></translation>
+        <translation>מחק תווית נוכית והתחל תווית חדשה</translation>
     </message>
     <message>
         <source>Import from label template</source>
@@ -1190,17 +1654,17 @@
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>ערוך</translation>
     </message>
     <message>
         <source>Bold</source>
         <comment>Font formating</comment>
-        <translation type="unfinished"></translation>
+        <translation>מודגש</translation>
     </message>
     <message>
         <source>Italic</source>
         <comment>Font formating</comment>
-        <translation type="unfinished"></translation>
+        <translation>נטוי</translation>
     </message>
     <message>
         <source>Aligns with the left edge</source>
@@ -1208,7 +1672,7 @@
     </message>
     <message>
         <source>Centers horizontally in the available space</source>
-        <translation type="unfinished"></translation>
+        <translation>מקם אופקית במקום האפשרי</translation>
     </message>
     <message>
         <source>Aligns with the right edge</source>
@@ -1220,11 +1684,11 @@
     </message>
     <message>
         <source>Text:</source>
-        <translation type="unfinished"></translation>
+        <translation>טקסט:</translation>
     </message>
     <message>
         <source>Line of text</source>
-        <translation type="unfinished"></translation>
+        <translation>שורת טקסט</translation>
     </message>
     <message>
         <source>Insert placeholders</source>
@@ -1232,7 +1696,7 @@
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>תצוגה מקדימה</translation>
     </message>
     <message>
         <source>&lt;empty&gt;</source>
@@ -1240,31 +1704,31 @@
     </message>
     <message>
         <source>Create new template</source>
-        <translation type="unfinished"></translation>
+        <translation>צור תבנית חדשה</translation>
     </message>
     <message>
         <source>Creating new template will overwrite the current, do you want to continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>יצירת תבנית חדשה תמחק את הנוכחית, האם תרצה להמשיך?</translation>
     </message>
     <message>
         <source>Label template</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית תבנית</translation>
     </message>
     <message>
         <source>Export label template</source>
-        <translation type="unfinished"></translation>
+        <translation>ייצא תווית תבנית</translation>
     </message>
     <message>
         <source>template</source>
-        <translation type="unfinished"></translation>
+        <translation>תבנית</translation>
     </message>
     <message>
         <source>Could not save file</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן לשמור את הקובץ</translation>
     </message>
     <message>
         <source>Import template</source>
-        <translation type="unfinished"></translation>
+        <translation>ייבא תבנית</translation>
     </message>
     <message>
         <source>Import template will overwrite the current, do you want to continue?</source>
@@ -1272,43 +1736,43 @@
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished"></translation>
+        <translation>טעות קובץ.</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>תאריך</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>זמן</translation>
     </message>
     <message>
         <source>Pattern name</source>
-        <translation type="unfinished"></translation>
+        <translation>שם גזרה</translation>
     </message>
     <message>
         <source>Pattern number</source>
-        <translation type="unfinished"></translation>
+        <translation>מספר גזרה</translation>
     </message>
     <message>
         <source>Company name or designer name</source>
-        <translation type="unfinished"></translation>
+        <translation>שם חברה או מעצב</translation>
     </message>
     <message>
         <source>Customer name</source>
-        <translation type="unfinished"></translation>
+        <translation>שם לקוח</translation>
     </message>
     <message>
         <source>Pattern extension</source>
-        <translation type="unfinished"></translation>
+        <translation>תוספת גזרה</translation>
     </message>
     <message>
         <source>Pattern file name</source>
-        <translation type="unfinished"></translation>
+        <translation>שם קובץ גזרה</translation>
     </message>
     <message>
         <source>Measurments file name</source>
-        <translation type="unfinished"></translation>
+        <translation>שם קובץ מידות</translation>
     </message>
     <message>
         <source>Measurments extension</source>
@@ -1316,7 +1780,7 @@
     </message>
     <message>
         <source>Piece letter</source>
-        <translation type="unfinished"></translation>
+        <translation>אות חלק</translation>
     </message>
     <message>
         <source>Piece annotation</source>
@@ -1328,7 +1792,7 @@
     </message>
     <message>
         <source>Piece rotation</source>
-        <translation type="unfinished"></translation>
+        <translation>סיבוב חלק</translation>
     </message>
     <message>
         <source>Piece tilt</source>
@@ -1340,7 +1804,7 @@
     </message>
     <message>
         <source>Piece name</source>
-        <translation type="unfinished"></translation>
+        <translation>שם חלק</translation>
     </message>
     <message>
         <source>Quantity</source>
@@ -1352,7 +1816,7 @@
     </message>
     <message>
         <source>Fabric</source>
-        <translation type="unfinished"></translation>
+        <translation>בד</translation>
     </message>
     <message>
         <source>Material: Lining</source>
@@ -1360,7 +1824,7 @@
     </message>
     <message>
         <source>Lining</source>
-        <translation type="unfinished"></translation>
+        <translation>בטנה</translation>
     </message>
     <message>
         <source>Material: Interfacing</source>
@@ -1570,12 +2034,16 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Value of first angle</source>
+        <translation type="vanished">ערך הזווית הראשונה</translation>
+    </message>
+    <message>
         <source>Input data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>מידות</translation>
     </message>
     <message>
         <source>Increments</source>
@@ -1631,15 +2099,15 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>שם</translation>
     </message>
     <message>
         <source>Full name</source>
@@ -1670,11 +2138,11 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>אשף הפורמולות</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Calulation</source>
@@ -1694,7 +2162,7 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <source>Second angle:</source>
@@ -1714,7 +2182,7 @@
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>צבע</translation>
     </message>
     <message>
         <source>Edit radius1</source>
@@ -1746,7 +2214,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -1754,7 +2222,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
 </context>
 <context>
@@ -1784,8 +2252,16 @@
         <translation type="vanished">סוג הקו</translation>
     </message>
     <message>
+        <source>Show line from first point to this point</source>
+        <translation type="vanished">הראה קו מהנקודה הראשונה לנקודה זו</translation>
+    </message>
+    <message>
         <source>Point at distance and angle</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color</source>
+        <translation type="vanished">צבע הקו</translation>
     </message>
     <message>
         <source>Edit angle</source>
@@ -1793,23 +2269,23 @@
     </message>
     <message>
         <source>Edit length</source>
-        <translation type="unfinished"></translation>
+        <translation>ערוך אורך</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>אשף הפורמולות</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <source>Angle:</source>
@@ -1821,31 +2297,31 @@
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית הנקודה</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית ייחודית</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר תווית ייחודית.</translation>
     </message>
     <message>
         <source>Type of line:</source>
-        <translation type="unfinished"></translation>
+        <translation>סוג הקו:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation type="unfinished"></translation>
+        <translation>צבע הקו:</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
 </context>
 <context>
@@ -1884,7 +2360,7 @@
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>תצוגה מקדימה</translation>
     </message>
     <message>
         <source>Global</source>
@@ -1904,7 +2380,7 @@
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>שם</translation>
     </message>
     <message>
         <source>The calculated value</source>
@@ -1916,11 +2392,11 @@
     </message>
     <message>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>פרטים</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>שם</translation>
     </message>
     <message>
         <source>Calculated value:</source>
@@ -1932,7 +2408,7 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1940,7 +2416,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>אשף הפורמולות</translation>
     </message>
     <message>
         <source>Description:</source>
@@ -1960,7 +2436,7 @@
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>טעות</translation>
     </message>
     <message>
         <source>Empty field.</source>
@@ -1980,7 +2456,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Parser error: %1</source>
@@ -2070,16 +2546,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Visibility Group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>שם</translation>
     </message>
     <message>
         <source>Rotation</source>
@@ -2099,7 +2571,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -2111,7 +2583,7 @@
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>צבע</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -2119,7 +2591,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
     <message>
         <source>Invalid suffix</source>
@@ -2147,6 +2619,10 @@
     </message>
     <message>
         <source>Invalid alias</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable to create a visibility group from original objects</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2185,16 +2661,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Visibility Group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>שם</translation>
     </message>
     <message>
         <source>Rotation</source>
@@ -2214,7 +2686,7 @@
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -2226,7 +2698,7 @@
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>צבע</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -2234,7 +2706,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
     <message>
         <source>Invalid suffix</source>
@@ -2270,6 +2742,10 @@
     </message>
     <message>
         <source>Invalid alias</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable to create a visibility group from original objects</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2328,23 +2804,27 @@
     </message>
     <message>
         <source>Select second point of line</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר את הנקודה השניה של הקו</translation>
     </message>
     <message>
         <source>Perpendicular point along line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Line color</source>
+        <translation type="vanished">צבע הקו</translation>
+    </message>
+    <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית הנקודה</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית ייחודית</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר תווית ייחודית.</translation>
     </message>
     <message>
         <source>Base point:</source>
@@ -2360,26 +2840,26 @@
     </message>
     <message>
         <source>Type of line:</source>
-        <translation type="unfinished"></translation>
+        <translation>סוג הקו:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation type="unfinished"></translation>
+        <translation>צבע הקו:</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
 </context>
 <context>
     <name>DialogHistory</name>
     <message>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation>היסטוריה</translation>
     </message>
     <message>
         <source>Tool</source>
@@ -2463,7 +2943,7 @@
     </message>
     <message>
         <source>Curve</source>
-        <translation type="unfinished">עקומה</translation>
+        <translation>עיקול</translation>
     </message>
     <message>
         <source>Cubic bezier curve</source>
@@ -2471,7 +2951,7 @@
     </message>
     <message>
         <source>Arc</source>
-        <translation type="unfinished"></translation>
+        <translation>קשת</translation>
     </message>
     <message>
         <source>%1 with length %2</source>
@@ -2582,7 +3062,7 @@
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>שם</translation>
     </message>
     <message>
         <source>The calculated value</source>
@@ -2606,7 +3086,7 @@
     </message>
     <message>
         <source>Arc</source>
-        <translation type="unfinished"></translation>
+        <translation>קשת</translation>
     </message>
     <message>
         <source>Tables of Variables</source>
@@ -2642,7 +3122,7 @@
     </message>
     <message>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>פרטים</translation>
     </message>
     <message>
         <source>Move measurement up</source>
@@ -2654,7 +3134,7 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>שם</translation>
     </message>
     <message>
         <source>Calculated value:</source>
@@ -2674,7 +3154,7 @@
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>טעות</translation>
     </message>
     <message>
         <source>Empty field.</source>
@@ -2686,7 +3166,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Parser error: %1</source>
@@ -2702,11 +3182,11 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>אשף הפורמולות</translation>
     </message>
     <message>
         <source>Search</source>
@@ -2809,7 +3289,7 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">למחוק</translation>
+        <translation>למחוק</translation>
     </message>
     <message>
         <source>Number:</source>
@@ -2874,7 +3354,7 @@
     </message>
     <message>
         <source>cm</source>
-        <translation type="unfinished"></translation>
+        <translation>ס&quot;מ</translation>
     </message>
     <message>
         <source>Right:</source>
@@ -2900,10 +3380,6 @@
         <source>Vertical:</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
-    </message>
 </context>
 <context>
     <name>DialogLayoutSettings</name>
@@ -2913,7 +3389,7 @@
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>רוחב:</translation>
     </message>
     <message>
         <source>Height:</source>
@@ -2941,7 +3417,7 @@
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished"></translation>
+        <translation>אינצ&apos;ים</translation>
     </message>
     <message>
         <source>Pixels</source>
@@ -2988,6 +3464,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Custom</source>
+        <translation type="vanished">מותאם אישית</translation>
+    </message>
+    <message>
         <source>Wrong fields.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3029,7 +3509,7 @@
     <message>
         <source>None</source>
         <comment>Printer</comment>
-        <translation type="unfinished"></translation>
+        <translation>ללא</translation>
     </message>
     <message>
         <source>Text</source>
@@ -3122,36 +3602,44 @@ Apply settings anyway?</source>
         <translation type="vanished">סוג הקו</translation>
     </message>
     <message>
+        <source>Show line from first point to this point</source>
+        <translation type="vanished">הראה קו מהנקודה הראשונה לנקודה זו</translation>
+    </message>
+    <message>
         <source>Select second point</source>
         <translation>לבחור נקודה שנייה</translation>
     </message>
     <message>
         <source>Line between points</source>
-        <translation type="unfinished"></translation>
+        <translation>קו בין נקודות</translation>
+    </message>
+    <message>
+        <source>Line color</source>
+        <translation type="vanished">צבע הקו</translation>
     </message>
     <message>
         <source>First point:</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה ראשונה</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה שניה</translation>
     </message>
     <message>
         <source>Type of line:</source>
-        <translation type="unfinished"></translation>
+        <translation>סוג הקו:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation type="unfinished"></translation>
+        <translation>צבע הקו:</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
 </context>
 <context>
@@ -3190,35 +3678,35 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point at line intersection</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה במפגש קוים</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית הנקודה</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית ייחודית</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר תווית ייחודית.</translation>
     </message>
     <message>
         <source>First point:</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה ראשונה</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה שניה</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
 </context>
 <context>
@@ -3241,11 +3729,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation type="unfinished"></translation>
+        <translation>הראה קו מהנקודה הראשונה לנקודה זו</translation>
     </message>
     <message>
         <source>Select second point of line</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר את הנקודה השניה של הקו</translation>
     </message>
     <message>
         <source>Select axis point</source>
@@ -3264,6 +3752,10 @@ Apply settings anyway?</source>
         <translation>נקודה שנייה בשורה</translation>
     </message>
     <message>
+        <source>Line color</source>
+        <translation type="vanished">צבע הקו</translation>
+    </message>
+    <message>
         <source>Edit angle</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3273,15 +3765,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>אשף הפורמולות</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <source>Axis point:</source>
@@ -3297,31 +3789,31 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית הנקודה</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית ייחודית</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר תווית ייחודית.</translation>
     </message>
     <message>
         <source>Type of line:</source>
-        <translation type="unfinished"></translation>
+        <translation>סוג הקו:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation type="unfinished"></translation>
+        <translation>צבע הקו:</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
 </context>
 <context>
@@ -3332,7 +3824,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>מידות</translation>
     </message>
     <message>
         <source>Direct Height</source>
@@ -3456,7 +3948,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>תצוגה מקדימה</translation>
     </message>
     <message>
         <source>Input</source>
@@ -3485,12 +3977,12 @@ Apply settings anyway?</source>
     <message>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished"></translation>
+        <translation>שם</translation>
     </message>
     <message>
         <source>Value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Full name</source>
@@ -3518,11 +4010,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>שם</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Base value</source>
@@ -3557,11 +4049,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>אשף הפורמולות</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -3569,7 +4061,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Suffix:</source>
@@ -3581,11 +4073,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Edit length</source>
-        <translation type="unfinished"></translation>
+        <translation>ערוך אורך</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <source>Move</source>
@@ -3608,16 +4100,12 @@ Apply settings anyway?</source>
         <translation>נקודת מרכז</translation>
     </message>
     <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Visibility Group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>שם</translation>
     </message>
     <message>
         <source>Rotation</source>
@@ -3637,7 +4125,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -3649,7 +4137,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>צבע</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -3657,7 +4145,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
     <message>
         <source>Invalid suffix</source>
@@ -3695,6 +4183,10 @@ Apply settings anyway?</source>
         <source>Invalid alias</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Enable to create a visibility group from original objects</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogNewMeasurements</name>
@@ -3724,7 +4216,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished"></translation>
+        <translation>אינצ&apos;ים</translation>
     </message>
     <message>
         <source>Multisize</source>
@@ -3747,7 +4239,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished"></translation>
+        <translation>אינצ&apos;ים</translation>
     </message>
     <message>
         <source>Pattern piece name:</source>
@@ -3797,8 +4289,12 @@ Apply settings anyway?</source>
         <translation type="vanished">סוג הקו</translation>
     </message>
     <message>
+        <source>Show line from first point to this point</source>
+        <translation type="vanished">הראה קו מהנקודה הראשונה לנקודה זו</translation>
+    </message>
+    <message>
         <source>Select second point of line</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר את הנקודה השניה של הקו</translation>
     </message>
     <message>
         <source>Point along perpendicular</source>
@@ -3813,44 +4309,48 @@ Apply settings anyway?</source>
         <translation type="vanished">נקודה שנייה בשורה</translation>
     </message>
     <message>
+        <source>Line color</source>
+        <translation type="vanished">צבע הקו</translation>
+    </message>
+    <message>
         <source>Edit length</source>
-        <translation type="unfinished"></translation>
+        <translation>ערוך אורך</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>אשף הפורמולות</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית הנקודה</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית ייחודית</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר תווית ייחודית.</translation>
     </message>
     <message>
         <source>First point:</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה ראשונה</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה שניה</translation>
     </message>
     <message>
         <source>Additional angle degrees:</source>
@@ -3858,19 +4358,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Type of line:</source>
-        <translation type="unfinished"></translation>
+        <translation>סוג הקו:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation type="unfinished"></translation>
+        <translation>צבע הקו:</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
 </context>
 <context>
@@ -3885,7 +4385,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
 </context>
 <context>
@@ -3897,6 +4397,10 @@ Apply settings anyway?</source>
     <message>
         <source>Pattern description</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="vanished">מותאם אישית</translation>
     </message>
     <message>
         <source>Security</source>
@@ -3960,7 +4464,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>גזרה</translation>
     </message>
     <message>
         <source>For technical notes</source>
@@ -3968,7 +4472,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Label language:</source>
-        <translation type="unfinished"></translation>
+        <translation>שפת תווית</translation>
     </message>
     <message>
         <source>Passmark length:</source>
@@ -3996,6 +4500,17 @@ Apply settings anyway?</source>
     </message>
 </context>
 <context>
+    <name>DialogPatternXmlEdit</name>
+    <message>
+        <source>Cancel</source>
+        <translation type="vanished">בטל</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="vanished">שם</translation>
+    </message>
+</context>
+<context>
     <name>DialogPiecePath</name>
     <message>
         <source>Piece path tool</source>
@@ -4007,7 +4522,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>שם</translation>
     </message>
     <message>
         <source>Unnamed path</source>
@@ -4031,27 +4546,27 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Ready!</source>
-        <translation type="unfinished"></translation>
+        <translation>מוכן!</translation>
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation type="unfinished"></translation>
+        <translation>תוספת תפר</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>רוחב:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>אשף הפורמולות</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -4087,7 +4602,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Reverse</source>
-        <translation type="unfinished"></translation>
+        <translation>הפוך</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -4115,7 +4630,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>You need more points!</source>
-        <translation type="unfinished"></translation>
+        <translation>אתה צריך נקודות נוספות!</translation>
     </message>
     <message>
         <source>First point of &lt;b&gt;custom seam allowance&lt;/b&gt; cannot be equal to the last point!</source>
@@ -4123,7 +4638,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>You have double points!</source>
-        <translation type="unfinished"></translation>
+        <translation>יש לך נקודות כפולות!</translation>
     </message>
     <message>
         <source>Passmarks</source>
@@ -4327,7 +4842,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>U mark</source>
@@ -4373,19 +4888,19 @@ Apply settings anyway?</source>
     <name>DialogPlaceLabel</name>
     <message>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>רוחב:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>אשף הפורמולות</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -4503,20 +5018,28 @@ Apply settings anyway?</source>
         <translation type="vanished">תווית הנקודה</translation>
     </message>
     <message>
+        <source>Arc</source>
+        <translation type="vanished">קשת</translation>
+    </message>
+    <message>
+        <source>Select point of center of arc</source>
+        <translation type="vanished">בחר נקודת מרכז הקשת</translation>
+    </message>
+    <message>
         <source>Select an arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית הנקודה</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית ייחודית</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר תווית ייחודית.</translation>
     </message>
     <message>
         <source>Tangent point:</source>
@@ -4532,11 +5055,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
 </context>
 <context>
@@ -4558,6 +5081,10 @@ Apply settings anyway?</source>
         <translation type="vanished">תווית הנקודה</translation>
     </message>
     <message>
+        <source>Select point of center of arc</source>
+        <translation type="vanished">בחר נקודת מרכז הקשת</translation>
+    </message>
+    <message>
         <source>Select a circle center</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4567,11 +5094,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>טעות</translation>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation type="unfinished"></translation>
+        <translation>רדיוס אינו יכול להיות ערך שלילי</translation>
     </message>
     <message>
         <source>Radius:</source>
@@ -4579,27 +5106,27 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>אשף הפורמולות</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית הנקודה</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית ייחודית</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר תווית ייחודית.</translation>
     </message>
     <message>
         <source>Center of the circle:</source>
@@ -4615,11 +5142,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
 </context>
 <context>
@@ -4642,11 +5169,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר נקודת מרכז הקשת</translation>
     </message>
     <message>
         <source>Select second point of line</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר את הנקודה השניה של הקו</translation>
     </message>
     <message>
         <source>Point at intersection of arc and line</source>
@@ -4662,27 +5189,27 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>אשף הפורמולות</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית הנקודה</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית ייחודית</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר תווית ייחודית.</translation>
     </message>
     <message>
         <source>Center of arc:</source>
@@ -4698,11 +5225,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
 </context>
 <context>
@@ -4721,15 +5248,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית הנקודה</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית ייחודית</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר תווית ייחודית.</translation>
     </message>
     <message>
         <source>X: vertical point:</source>
@@ -4741,11 +5268,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
 </context>
 <context>
@@ -4760,15 +5287,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית הנקודה</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית ייחודית</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר תווית ייחודית.</translation>
     </message>
     <message>
         <source>First arc:</source>
@@ -4788,11 +5315,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
 </context>
 <context>
@@ -4804,6 +5331,10 @@ Apply settings anyway?</source>
     <message>
         <source>Point label</source>
         <translation type="vanished">תווית הנקודה</translation>
+    </message>
+    <message>
+        <source>Select point of center of arc</source>
+        <translation type="vanished">בחר נקודת מרכז הקשת</translation>
     </message>
     <message>
         <source>Select second circle center</source>
@@ -4819,11 +5350,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>טעות</translation>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation type="unfinished"></translation>
+        <translation>רדיוס אינו יכול להיות ערך שלילי</translation>
     </message>
     <message>
         <source>Radius of the first circle:</source>
@@ -4831,15 +5362,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>אשף הפורמולות</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <source>Radius of the second circle:</source>
@@ -4847,15 +5378,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית הנקודה</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית ייחודית</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר תווית ייחודית.</translation>
     </message>
     <message>
         <source>Center of the first circle:</source>
@@ -4875,11 +5406,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
 </context>
 <context>
@@ -4898,15 +5429,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית הנקודה</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית ייחודית</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר תווית ייחודית.</translation>
     </message>
     <message>
         <source>Vertical correction:</source>
@@ -4922,11 +5453,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
     <message>
         <source>Curve 1</source>
@@ -4949,7 +5480,7 @@ Apply settings anyway?</source>
     <name>DialogPreferences</name>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>העדפות</translation>
     </message>
     <message>
         <source>Configuration</source>
@@ -4957,7 +5488,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>גזרה</translation>
     </message>
     <message>
         <source>Paths</source>
@@ -5040,11 +5571,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>אשף הפורמולות</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -5068,14 +5599,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <source>This point cannot be origin point. Please, select another origin point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enable to create a visibility gropup from original objects</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5084,7 +5611,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>שם</translation>
     </message>
     <message>
         <source>Tags:</source>
@@ -5100,7 +5627,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Alias</source>
@@ -5112,7 +5639,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>צבע</translation>
     </message>
     <message>
         <source>Ready</source>
@@ -5120,7 +5647,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
     <message>
         <source>Invalid suffix</source>
@@ -5156,6 +5683,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable to create a visibility group from original objects</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5231,7 +5762,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>cm</source>
-        <translation type="unfinished"></translation>
+        <translation>ס&quot;מ</translation>
     </message>
     <message>
         <source>Templates:</source>
@@ -5243,7 +5774,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">אפשרויות</translation>
+        <translation>אפשרויות</translation>
     </message>
     <message>
         <source>Scale</source>
@@ -5256,10 +5787,6 @@ Apply settings anyway?</source>
     <message>
         <source>Vertical:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
     </message>
 </context>
 <context>
@@ -5325,7 +5852,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">אפשרויות</translation>
+        <translation>אפשרויות</translation>
     </message>
     <message>
         <source>Binary form</source>
@@ -5392,23 +5919,23 @@ Apply settings anyway?</source>
     <name>DialogSeamAllowance</name>
     <message>
         <source>Ready!</source>
-        <translation type="unfinished"></translation>
+        <translation>מוכן!</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished"></translation>
+        <translation>פרט</translation>
     </message>
     <message>
         <source>Grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>קו ישר</translation>
     </message>
     <message>
         <source>Reverse</source>
-        <translation type="unfinished"></translation>
+        <translation>הפוך</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -5424,11 +5951,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Infinite/undefined result</source>
-        <translation type="unfinished"></translation>
+        <translation>תוצאה אינסופית\ בלתי מוגדרת</translation>
     </message>
     <message>
         <source>Length should be positive</source>
-        <translation type="unfinished"></translation>
+        <translation>על האורך להיות חיובי</translation>
     </message>
     <message>
         <source>Parser error: %1</source>
@@ -5452,11 +5979,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>You need more points!</source>
-        <translation type="unfinished"></translation>
+        <translation>אתה צריך נקודות נוספות!</translation>
     </message>
     <message>
         <source>You have to choose points in a clockwise direction!</source>
-        <translation type="unfinished"></translation>
+        <translation>עליך לבחור נקודות בכיוון השעון!</translation>
     </message>
     <message>
         <source>First point cannot be equal to the last point!</source>
@@ -5464,7 +5991,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>You have double points!</source>
-        <translation type="unfinished"></translation>
+        <translation>יש לך נקודות כפולות!</translation>
     </message>
     <message>
         <source>Empty</source>
@@ -5480,15 +6007,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Both</source>
-        <translation type="unfinished"></translation>
+        <translation>גם וגם</translation>
     </message>
     <message>
         <source>Just front</source>
-        <translation type="unfinished"></translation>
+        <translation>רק קדמי</translation>
     </message>
     <message>
         <source>Just rear</source>
-        <translation type="unfinished"></translation>
+        <translation>רק אחורי</translation>
     </message>
     <message>
         <source>Pins</source>
@@ -5504,11 +6031,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>טעות</translation>
     </message>
     <message>
         <source>Edit length</source>
-        <translation type="unfinished"></translation>
+        <translation>ערוך אורך</translation>
     </message>
     <message>
         <source>Edit angle</source>
@@ -5802,7 +6329,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>שם</translation>
     </message>
     <message>
         <source>Please, provide correct data for dimension %1</source>
@@ -5849,51 +6376,55 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select second point of line</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר את הנקודה השניה של הקו</translation>
     </message>
     <message>
         <source>Special point on shoulder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Line color</source>
+        <translation type="vanished">צבע הקו</translation>
+    </message>
+    <message>
         <source>Edit length</source>
-        <translation type="unfinished"></translation>
+        <translation>ערוך אורך</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>אשף הפורמולות</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית הנקודה</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית ייחודית</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר תווית ייחודית.</translation>
     </message>
     <message>
         <source>First point:</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה ראשונה</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה שניה</translation>
     </message>
     <message>
         <source>Third point:</source>
@@ -5901,19 +6432,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Type of line:</source>
-        <translation type="unfinished"></translation>
+        <translation>סוג הקו:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation type="unfinished"></translation>
+        <translation>צבע הקו:</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
 </context>
 <context>
@@ -5944,19 +6475,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית ייחודית</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר תווית ייחודית.</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
 </context>
 <context>
@@ -5978,12 +6509,16 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Color</source>
+        <translation type="vanished">צבע</translation>
+    </message>
+    <message>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>צבע</translation>
     </message>
     <message>
         <source>First point:</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה ראשונה</translation>
     </message>
     <message>
         <source>Control point</source>
@@ -5995,11 +6530,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Second point:</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה שניה</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>שם</translation>
     </message>
     <message>
         <source>Invalid spline</source>
@@ -6007,15 +6542,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>אשף הפורמולות</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -6038,8 +6573,12 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Error</source>
+        <translation type="vanished">טעות</translation>
+    </message>
+    <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -6055,7 +6594,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -6063,7 +6602,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
 </context>
 <context>
@@ -6081,8 +6620,12 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Color</source>
+        <translation type="vanished">צבע</translation>
+    </message>
+    <message>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>צבע</translation>
     </message>
     <message>
         <source>Point:</source>
@@ -6102,7 +6645,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>שם</translation>
     </message>
     <message>
         <source>Invalid spline path</source>
@@ -6110,15 +6653,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>אשף הפורמולות</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -6141,12 +6684,16 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Error</source>
+        <translation type="vanished">טעות</translation>
+    </message>
+    <message>
         <source>Not used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -6166,7 +6713,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Alias:</source>
@@ -6174,14 +6721,14 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
 </context>
 <context>
     <name>DialogTapePreferences</name>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>העדפות</translation>
     </message>
     <message>
         <source>Configuration</source>
@@ -6201,6 +6748,14 @@ Apply settings anyway?</source>
 </context>
 <context>
     <name>DialogTool</name>
+    <message>
+        <source>Error</source>
+        <translation type="vanished">טעות</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="vanished">ערך</translation>
+    </message>
     <message>
         <source>First point</source>
         <translation>נקודה ראשונה</translation>
@@ -6290,15 +6845,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית הנקודה</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית ייחודית</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר תווית ייחודית.</translation>
     </message>
     <message>
         <source>First point of axis:</source>
@@ -6310,19 +6865,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First point:</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה ראשונה</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה שניה</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
 </context>
 <context>
@@ -6373,11 +6928,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית ייחודית</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר תווית ייחודית.</translation>
     </message>
     <message>
         <source>Second new dart point:</source>
@@ -6385,11 +6940,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished">כלי</translation>
+        <translation>כלי</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>הערות</translation>
     </message>
 </context>
 <context>
@@ -6408,7 +6963,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>וביטול</translation>
     </message>
     <message>
         <source>Error while calculation formula. You can try to undo last operation or fix broken formula.</source>
@@ -6506,6 +7061,10 @@ Apply settings anyway?</source>
     <message>
         <source>Feed error: invalid &quot;enclosure&quot; with the download link</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="vanished">טעות</translation>
     </message>
 </context>
 <context>
@@ -6610,10 +7169,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Test mode doesn&apos;t support openning several files.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Please, provide one input file.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6673,6 +7228,10 @@ Apply settings anyway?</source>
         <source>Formula warning: %1. Program will be terminated.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Test mode doesn&apos;t support opening several files.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
@@ -6706,7 +7265,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point at distance along line</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה במרחק לאורך הקו</translation>
     </message>
     <message>
         <source>Tools for creating lines.</source>
@@ -6718,59 +7277,59 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Line between points</source>
-        <translation type="unfinished"></translation>
+        <translation>קו בין נקודות</translation>
     </message>
     <message>
         <source>Point at line intersection</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה במפגש קוים</translation>
     </message>
     <message>
         <source>Tools for creating curves.</source>
-        <translation type="unfinished"></translation>
+        <translation>כלים ליצירת עיקול</translation>
     </message>
     <message>
         <source>Curve</source>
-        <translation>עקומה</translation>
+        <translation>עיקול</translation>
     </message>
     <message>
         <source>Tools for creating arcs.</source>
-        <translation type="unfinished"></translation>
+        <translation>כלים ליצירת קשתות.</translation>
     </message>
     <message>
         <source>Arc</source>
-        <translation type="unfinished"></translation>
+        <translation>קשת</translation>
     </message>
     <message>
         <source>Tools for creating details.</source>
-        <translation type="unfinished"></translation>
+        <translation>כלים ליצירת פרטים.</translation>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished"></translation>
+        <translation>פרט</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>וקובץ</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>ועזרה</translation>
     </message>
     <message>
         <source>&amp;Pattern piece</source>
-        <translation type="unfinished"></translation>
+        <translation>וחלק גזרה</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>מידות</translation>
     </message>
     <message>
         <source>Window</source>
-        <translation type="unfinished"></translation>
+        <translation>חלון</translation>
     </message>
     <message>
         <source>Toolbar files</source>
-        <translation type="unfinished"></translation>
+        <translation>קבצי סרגל כלים</translation>
     </message>
     <message>
         <source>ToolBar modes</source>
@@ -6778,19 +7337,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Toolbar pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>סרגל כלים גזרה</translation>
     </message>
     <message>
         <source>Toolbar options</source>
-        <translation type="unfinished"></translation>
+        <translation>אפשאות סרגל הכלים</translation>
     </message>
     <message>
         <source>Toolbar tools</source>
-        <translation type="unfinished"></translation>
+        <translation>כלי סרגל הכלים</translation>
     </message>
     <message>
         <source>Tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>אפשרויות כלים</translation>
     </message>
     <message>
         <source>New</source>
@@ -6798,23 +7357,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation>וחדש</translation>
     </message>
     <message>
         <source>Create a new pattern</source>
-        <translation>יצירת תבנית חדשה</translation>
+        <translation>יצירת גזרה חדשה</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>פתח</translation>
     </message>
     <message>
         <source>&amp;Open</source>
-        <translation type="unfinished"></translation>
+        <translation>ופתח</translation>
     </message>
     <message>
         <source>Open file with pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>פתח קובץ עם גזרה</translation>
     </message>
     <message>
         <source>Save</source>
@@ -6822,7 +7381,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
+        <translation>ושמור</translation>
     </message>
     <message>
         <source>Save pattern</source>
@@ -6834,11 +7393,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Draw</source>
-        <translation type="unfinished"></translation>
+        <translation>שרטט</translation>
     </message>
     <message>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>פרטים</translation>
     </message>
     <message>
         <source>Pointer tools</source>
@@ -6846,19 +7405,27 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>New pattern piece</source>
-        <translation type="unfinished"></translation>
+        <translation>חלק גזרה חדש</translation>
     </message>
     <message>
         <source>Add new pattern piece</source>
-        <translation type="unfinished"></translation>
+        <translation>הוסף חלק גזרה חדש</translation>
     </message>
     <message>
         <source>Change the label of pattern piece</source>
-        <translation type="unfinished"></translation>
+        <translation>שנה תווית חלק גזרה</translation>
+    </message>
+    <message>
+        <source>Table of variables</source>
+        <translation type="vanished">טבלת משתנים</translation>
+    </message>
+    <message>
+        <source>Tables of variables</source>
+        <translation type="vanished">טבלאות משתנים</translation>
     </message>
     <message>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation>היסטוריה</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
@@ -6866,7 +7433,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&amp;About Valentina</source>
-        <translation type="unfinished"></translation>
+        <translation>ואודות ולנטינה</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -6874,11 +7441,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Exit the application</source>
-        <translation type="unfinished"></translation>
+        <translation>צא מהתוכנה</translation>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>העדפות</translation>
     </message>
     <message>
         <source>Pattern properties</source>
@@ -6886,23 +7453,55 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Zoom in</source>
-        <translation type="unfinished"></translation>
+        <translation>התמקד</translation>
     </message>
     <message>
         <source>zoom in</source>
-        <translation type="unfinished"></translation>
+        <translation>התמקד</translation>
     </message>
     <message>
         <source>Zoom out</source>
-        <translation type="unfinished"></translation>
+        <translation>התרחק</translation>
+    </message>
+    <message>
+        <source>Original zoom </source>
+        <translation type="vanished">זום מקןרי</translation>
+    </message>
+    <message>
+        <source>Original Zoom </source>
+        <translation type="vanished">זום מקורי</translation>
     </message>
     <message>
         <source>Zoom fit best</source>
-        <translation type="unfinished"></translation>
+        <translation>זום מותאם</translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation type="vanished">הפסק</translation>
+    </message>
+    <message>
+        <source>Stop using tool</source>
+        <translation type="vanished">הפסק להשתמש בכלי</translation>
+    </message>
+    <message>
+        <source>Repot Bug...</source>
+        <translation type="vanished">דווח על תקלה...</translation>
     </message>
     <message>
         <source>Report bug</source>
-        <translation type="unfinished"></translation>
+        <translation>דווח על תקלה</translation>
+    </message>
+    <message>
+        <source>Close window</source>
+        <translation type="vanished">סגור חלון</translation>
+    </message>
+    <message>
+        <source>Online help</source>
+        <translation type="vanished">עזרה אונליין</translation>
+    </message>
+    <message>
+        <source>Show online help</source>
+        <translation type="vanished">הראה עזרה אונליין</translation>
     </message>
     <message>
         <source>Pattern piece %1</source>
@@ -6938,7 +7537,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר נקודת מרכז הקשת</translation>
     </message>
     <message>
         <source>Select point of curve path</source>
@@ -6982,7 +7581,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Could not save file</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן לשמור את הקובץ</translation>
     </message>
     <message>
         <source>Open file</source>
@@ -7043,7 +7642,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished"></translation>
+        <translation>טעות קובץ.</translation>
     </message>
     <message>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
@@ -7092,6 +7691,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Segment an arc</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seam allowance tool</source>
+        <translation type="vanished">כלי תוספת תפר</translation>
     </message>
     <message>
         <source>Union tool</source>
@@ -7527,7 +8130,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>שם</translation>
     </message>
     <message>
         <source>The calculated value</source>
@@ -7799,7 +8402,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>הסר</translation>
     </message>
     <message>
         <source>Edit current</source>
@@ -7839,7 +8442,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished"></translation>
+        <translation>עדכון</translation>
     </message>
     <message>
         <source>Update manual layout</source>
@@ -7896,10 +8499,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Could not create recipe file. %1</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
     </message>
     <message>
         <source>Shop</source>
@@ -7974,15 +8573,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>גזרה</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>שם</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Export final measurements error.</source>
@@ -8018,7 +8617,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished"></translation>
+        <translation>טעות קובץ.</translation>
     </message>
     <message>
         <source>Measurement file doesn&apos;t include all required measurements.</source>
@@ -8109,6 +8708,20 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>PathPage</name>
+    <message>
+        <source>Edit</source>
+        <translation type="vanished">ערוך</translation>
+    </message>
+</context>
+<context>
+    <name>PatternPage</name>
+    <message>
+        <source>Forbid flipping</source>
+        <translation type="vanished">אסור היפוך</translation>
+    </message>
+</context>
+<context>
     <name>PreferencesConfigurationPage</name>
     <message>
         <source>Save</source>
@@ -8116,7 +8729,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Auto-save modified pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>שמור אוטומטית שינויים בגזרה</translation>
     </message>
     <message>
         <source>Interval:</source>
@@ -8128,7 +8741,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>שפה</translation>
     </message>
     <message>
         <source>GUI language:</source>
@@ -8140,19 +8753,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Default unit:</source>
-        <translation type="unfinished"></translation>
+        <translation>ברירת מחדל יחידת מידה</translation>
     </message>
     <message>
         <source>Label language:</source>
-        <translation type="unfinished"></translation>
+        <translation>שפת תווית</translation>
     </message>
     <message>
         <source>Pattern making system</source>
-        <translation type="unfinished"></translation>
+        <translation>שיטת תדמיתנות</translation>
     </message>
     <message>
         <source>Pattern making system:</source>
-        <translation type="unfinished"></translation>
+        <translation>עריכת גזרה</translation>
     </message>
     <message>
         <source>Author:</source>
@@ -8160,7 +8773,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Book:</source>
-        <translation type="unfinished"></translation>
+        <translation>ספר</translation>
     </message>
     <message>
         <source>Pattern editing</source>
@@ -8172,7 +8785,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>סרגל כלים</translation>
     </message>
     <message>
         <source>The text appears under the icon (recommended for beginners).</source>
@@ -8188,11 +8801,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">מילימטר</translation>
+        <translation>מילימטרים</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished"></translation>
+        <translation>אינצ&apos;ים</translation>
     </message>
     <message>
         <source>Update a pattern only after a curve release</source>
@@ -8208,7 +8821,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>כללי</translation>
     </message>
     <message>
         <source>Double click calls Zoom fit best for current pattern piece</source>
@@ -8295,7 +8908,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished"></translation>
+        <translation>עדכון</translation>
     </message>
     <message>
         <source>Automatically check for updates each time the application starts</source>
@@ -8326,7 +8939,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>ערוך</translation>
     </message>
     <message>
         <source>Open Directory</source>
@@ -8385,7 +8998,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished"></translation>
+        <translation>אסור היפוך</translation>
     </message>
     <message>
         <source>Show a passmark both in the seam allowance and on the seam line.</source>
@@ -8413,7 +9026,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation type="unfinished"></translation>
+        <translation>תוספת תפר</translation>
     </message>
     <message>
         <source>Default value:</source>
@@ -8481,7 +9094,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished"></translation>
+        <translation>אינצ&apos;ים</translation>
     </message>
     <message>
         <source>Use OpenGL to render a scene.
@@ -8502,7 +9115,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Background image</source>
-        <translation type="unfinished"></translation>
+        <translation>תמונת רקע</translation>
     </message>
     <message>
         <source>Opacity:</source>
@@ -8532,7 +9145,7 @@ This option will take an affect after restart.</source>
     <name>PuzzlePreferencesConfigurationPage</name>
     <message>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>שפה</translation>
     </message>
     <message>
         <source>GUI language:</source>
@@ -8540,7 +9153,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>סרגל כלים</translation>
     </message>
     <message>
         <source>The text appears under the icon (recommended for beginners).</source>
@@ -8564,7 +9177,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>כללי</translation>
     </message>
     <message>
         <source>Graphical output</source>
@@ -8660,7 +9273,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished"></translation>
+        <translation>עדכון</translation>
     </message>
     <message>
         <source>Automatically check for updates each time the application starts</source>
@@ -8691,7 +9304,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>רוחב:</translation>
     </message>
     <message>
         <source>Height:</source>
@@ -8767,15 +9380,15 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">מילימטר</translation>
+        <translation>מילימטר</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">סנטימטרים</translation>
+        <translation>סנטימטרים</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished"></translation>
+        <translation>אינצ&apos;ים</translation>
     </message>
     <message>
         <source>Pixels</source>
@@ -8806,7 +9419,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>ערוך</translation>
     </message>
     <message>
         <source>Open Directory</source>
@@ -8920,7 +9533,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>cm</source>
-        <translation type="unfinished"></translation>
+        <translation>ס&quot;מ</translation>
     </message>
     <message>
         <source>inch</source>
@@ -8934,7 +9547,7 @@ This option will take an affect after restart.</source>
     <message>
         <source>Value</source>
         <extracomment>The text that appears in the second column header</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>px</source>
@@ -8974,11 +9587,11 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Fabric</source>
-        <translation type="unfinished"></translation>
+        <translation>בד</translation>
     </message>
     <message>
         <source>Lining</source>
-        <translation type="unfinished"></translation>
+        <translation>בטנה</translation>
     </message>
     <message>
         <source>Interfacing</source>
@@ -9038,7 +9651,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>טעות</translation>
     </message>
     <message>
         <source>Empty formula</source>
@@ -9537,7 +10150,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>מותאם אישית</translation>
     </message>
 </context>
 <context>
@@ -9558,7 +10171,7 @@ This option will take an affect after restart.</source>
     <name>RenameGroup</name>
     <message>
         <source>rename group</source>
-        <translation type="unfinished"></translation>
+        <translation>שנה שם קבוצה</translation>
     </message>
 </context>
 <context>
@@ -9638,16 +10251,20 @@ This option will take an affect after restart.</source>
 <context>
     <name>TMainWindow</name>
     <message>
+        <source>Name</source>
+        <translation type="vanished">שם</translation>
+    </message>
+    <message>
         <source>Calculated value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>פרטים</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>שם</translation>
     </message>
     <message>
         <source>Formula:</source>
@@ -9718,8 +10335,12 @@ This option will take an affect after restart.</source>
         <translation type="vanished">קובץ</translation>
     </message>
     <message>
+        <source>Window</source>
+        <translation type="vanished">חלון</translation>
+    </message>
+    <message>
         <source>Measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>מידות</translation>
     </message>
     <message>
         <source>Menu</source>
@@ -9736,6 +10357,10 @@ This option will take an affect after restart.</source>
     <message>
         <source>About &amp;Qt</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About Tape</source>
+        <translation type="vanished">אודות סרט-מידה</translation>
     </message>
     <message>
         <source>New</source>
@@ -9767,7 +10392,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>העדפות</translation>
     </message>
     <message>
         <source>untitled %1</source>
@@ -9779,11 +10404,11 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished"></translation>
+        <translation>טעות קובץ.</translation>
     </message>
     <message>
         <source>Could not save file</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן לשמור את הקובץ</translation>
     </message>
     <message>
         <source>measurements</source>
@@ -9803,7 +10428,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>טעות</translation>
     </message>
     <message>
         <source>Empty field.</source>
@@ -9815,6 +10440,10 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Individual measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>untitled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9832,7 +10461,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Open file</source>
@@ -10038,22 +10667,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Measurement name in is empty.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Merasurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Merasurement &apos;%1&apos; already used in file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Measurement &apos;%1&apos; is not one of known measurements.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Individual measurements require at least 2 columns.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10070,16 +10683,12 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error in row %1. Measurement name is empty.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cannot save settings. Access denied.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>וקובץ</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -10087,7 +10696,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>ועזרה</translation>
     </message>
     <message>
         <source>&amp;Measurements</source>
@@ -10099,7 +10708,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
+        <translation>ושמור</translation>
     </message>
     <message>
         <source>Save &amp;As …</source>
@@ -10115,7 +10724,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation>וחדש</translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
@@ -10124,7 +10733,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished"></translation>
+        <translation>שם</translation>
     </message>
     <message>
         <source>Full name</source>
@@ -10169,7 +10778,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Dimension:</source>
-        <translation type="unfinished"></translation>
+        <translation>מימד:</translation>
     </message>
     <message>
         <source>Select one of the dimensions to later use the measurement value in piece label</source>
@@ -10201,7 +10810,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Dimension labels</source>
-        <translation type="unfinished"></translation>
+        <translation>תוייות מימדים</translation>
     </message>
     <message>
         <source>The table doesn&apos;t provide dimensions</source>
@@ -10253,11 +10862,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished"></translation>
+        <translation>אינצ&apos;ים</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">סנטימטרים</translation>
+        <translation>סנטימטרים</translation>
     </message>
     <message>
         <source>Degrees</source>
@@ -10265,10 +10874,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Restrict first dimension</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>untitled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -10329,6 +10934,30 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Dimension custom names</source>
+        <translation>שמות מימדים מוגדרים אישית</translation>
+    </message>
+    <message>
+        <source>Measurement name is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement &apos;%1&apos; already used in the file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement &apos;%1&apos; is not one of the known measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement &apos;%1&apos; already used in file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in row %1. The measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10336,23 +10965,23 @@ Do you want to save your changes?</source>
     <name>TabGrainline</name>
     <message>
         <source>Grainline visible</source>
-        <translation type="unfinished"></translation>
+        <translation>קו ישר נראה</translation>
     </message>
     <message>
         <source>Rotation:</source>
-        <translation type="unfinished"></translation>
+        <translation>סיבוב:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>אשף הפורמולות</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -10360,7 +10989,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Center pin:</source>
@@ -10376,7 +11005,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Arrows:</source>
-        <translation type="unfinished"></translation>
+        <translation>חצים:</translation>
     </message>
 </context>
 <context>
@@ -10387,15 +11016,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Letter:</source>
-        <translation type="unfinished"></translation>
+        <translation>אות:</translation>
     </message>
     <message>
         <source>Letter of pattern piece</source>
-        <translation type="unfinished"></translation>
+        <translation>אות חלק הגזרה</translation>
     </message>
     <message>
         <source>Placement:</source>
-        <translation type="unfinished"></translation>
+        <translation>מיקום:</translation>
     </message>
     <message>
         <source>Labels</source>
@@ -10403,19 +11032,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>רוחב:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>אשף הפורמולות</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -10443,7 +11072,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern label visible</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית גזרה נראית</translation>
     </message>
     <message>
         <source>Label template:</source>
@@ -10479,7 +11108,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Rotation:</source>
-        <translation type="unfinished"></translation>
+        <translation>סיבוב:</translation>
     </message>
     <message>
         <source>Tilt:</source>
@@ -10666,19 +11295,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>אשף הפורמולות</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -10709,7 +11338,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>All objects in path should follow in clockwise direction.</source>
-        <translation type="unfinished"></translation>
+        <translation>כל האובייקטים צריכים להיות בכיוון השעון.</translation>
     </message>
     <message>
         <source>Forbid piece be mirrored in a layout.</source>
@@ -10717,31 +11346,31 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished"></translation>
+        <translation>אסור היפוך</translation>
     </message>
     <message>
         <source>Ready!</source>
-        <translation type="unfinished"></translation>
+        <translation>מוכן!</translation>
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation type="unfinished"></translation>
+        <translation>תוספת תפר</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>רוחב:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>אשף הפורמולות</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -10797,7 +11426,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Built in</source>
-        <translation type="unfinished"></translation>
+        <translation>מובנה</translation>
     </message>
     <message>
         <source>Hide the main path if the seam allowance is enabled</source>
@@ -10809,15 +11438,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Name of detail:</source>
-        <translation type="unfinished"></translation>
+        <translation>שם הפרט:</translation>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished"></translation>
+        <translation>פרט</translation>
     </message>
     <message>
         <source>Name can&apos;t be empty</source>
-        <translation type="unfinished"></translation>
+        <translation>השם אינו יכול להישאר ריק</translation>
     </message>
     <message>
         <source>Force piece to be always flipped in a layout.</source>
@@ -10859,7 +11488,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Custom</source>
         <comment>seam allowance</comment>
-        <translation type="unfinished"></translation>
+        <translation>מותאם אישית</translation>
     </message>
     <message>
         <source>Piece</source>
@@ -10886,10 +11515,47 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>TapeConfigDialog</name>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation type="vanished">וביטול</translation>
+    </message>
+    <message>
+        <source>&amp;Ok</source>
+        <translation type="vanished">ואישור</translation>
+    </message>
+</context>
+<context>
+    <name>TapeConfigurationPage</name>
+    <message>
+        <source>Language</source>
+        <translation type="vanished">שפה</translation>
+    </message>
+    <message>
+        <source>Pattern making system</source>
+        <translation type="vanished">שיטת תדמיתנות</translation>
+    </message>
+    <message>
+        <source>Book:</source>
+        <translation type="vanished">ספר</translation>
+    </message>
+    <message>
+        <source>Pattern making system:</source>
+        <translation type="vanished">עריכת גזרה</translation>
+    </message>
+</context>
+<context>
+    <name>TapePathPage</name>
+    <message>
+        <source>Edit</source>
+        <translation type="vanished">ערוך</translation>
+    </message>
+</context>
+<context>
     <name>TapePreferencesConfigurationPage</name>
     <message>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>שפה</translation>
     </message>
     <message>
         <source>GUI language:</source>
@@ -10901,11 +11567,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern making system</source>
-        <translation type="unfinished"></translation>
+        <translation>שיטת תדמיתנות</translation>
     </message>
     <message>
         <source>Pattern making system:</source>
-        <translation type="unfinished"></translation>
+        <translation>עריכת גזרה</translation>
     </message>
     <message>
         <source>Author:</source>
@@ -10913,7 +11579,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Book:</source>
-        <translation type="unfinished"></translation>
+        <translation>ספר</translation>
     </message>
     <message>
         <source>Measurements editing</source>
@@ -10925,7 +11591,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>סרגל כלים</translation>
     </message>
     <message>
         <source>The text appears under the icon (recommended for beginners).</source>
@@ -10953,7 +11619,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished"></translation>
+        <translation>עדכון</translation>
     </message>
     <message>
         <source>Automatically check for updates each time the application starts</source>
@@ -10984,7 +11650,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>ערוך</translation>
     </message>
     <message>
         <source>Open Directory</source>
@@ -11120,10 +11786,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error openning a temp file: %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Invalid version. Minimum supported format version is %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11147,6 +11809,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Validation error file %3 in line %1 column %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error opening a temp file: %1.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11217,7 +11883,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Custom</source>
         <comment>Paper format</comment>
-        <translation type="unfinished"></translation>
+        <translation>מותאם אישית</translation>
     </message>
 </context>
 <context>
@@ -11240,10 +11906,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export to CSV</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you want to change the premissions?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -11286,6 +11948,10 @@ Do you want to save your changes?</source>
         <source>The file has no write permissions.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Do you want to change the permissions?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VAbstractNode</name>
@@ -11298,7 +11964,7 @@ Do you want to save your changes?</source>
     <name>VAbstractOperation</name>
     <message>
         <source>Label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית</translation>
     </message>
     <message>
         <source>Length</source>
@@ -11351,7 +12017,7 @@ Do you want to save your changes?</source>
     <name>VAbstractPieceData</name>
     <message>
         <source>Detail</source>
-        <translation type="unfinished"></translation>
+        <translation>פרט</translation>
     </message>
 </context>
 <context>
@@ -11362,7 +12028,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית</translation>
     </message>
 </context>
 <context>
@@ -11511,7 +12177,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">למחוק</translation>
+        <translation>למחוק</translation>
     </message>
 </context>
 <context>
@@ -11537,26 +12203,26 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Content type mistmatch.</source>
+        <source>Not image.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Not image.</source>
+        <source>Content type mismatch.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VBank</name>
     <message>
-        <source>Preparing data for layout error: Detail &apos;%1&apos; square &lt;= 0</source>
+        <source>Error of preparing data for layout: Detail &apos;%1&apos; square &lt;= 0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Preparing data for layout error: Layout paper sheet &lt;= 0</source>
+        <source>Error of preparing data for layout: Layout paper sheet &lt;= 0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Preparing data for layout error: List of details is empty</source>
+        <source>Error of preparing data for layout: List of details is empty</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11782,10 +12448,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ignore printer margins (export mode). Use if need full paper space. In case of later printing you must account for the margins himself.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Number corresponding to tiled pdf page template (default = 0, export mode with tiled pdf format):</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11887,7 +12549,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>זמן</translation>
     </message>
     <message>
         <source>Coefficient</source>
@@ -11982,10 +12644,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Load pattern pieces form the raw layout data file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The raw layout data file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12047,6 +12705,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Layout units (as paper&apos;s one except px, export mode). Default units cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load pattern pieces from the raw layout data file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore printer margins (export mode). Use if need full paper space. In case of later printing you must account for the margins themselves.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12209,7 +12875,7 @@ Do you want to save your changes?</source>
     <name>VFormula</name>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>טעות</translation>
     </message>
     <message>
         <source>Data container is empty</source>
@@ -12252,7 +12918,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>טעות</translation>
     </message>
     <message>
         <source>Formula is empty</source>
@@ -12261,6 +12927,10 @@ Do you want to save your changes?</source>
 </context>
 <context>
     <name>VFormulaProperty</name>
+    <message>
+        <source>Value</source>
+        <translation type="vanished">ערך</translation>
+    </message>
     <message>
         <source>Formula</source>
         <translation type="unfinished"></translation>
@@ -12300,10 +12970,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Can&apos;t create an flat dxf file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Can&apos;t create an AAMA dxf file.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12335,6 +13001,10 @@ Do you want to save your changes?</source>
         <source>Raw Layout Data</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Can&apos;t create a flat dxf file.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VLayoutPiece</name>
@@ -12355,7 +13025,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>ללא</translation>
     </message>
     <message>
         <source>Height</source>
@@ -12398,7 +13068,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished"></translation>
+        <translation>אסור היפוך</translation>
     </message>
     <message>
         <source>Force flipping</source>
@@ -12544,15 +13214,15 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Export mode doesn&apos;t support openning several files.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Import raw layout data does not support openning several layout files.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Please, provide one input file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export mode doesn&apos;t support opening several files.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import raw layout data does not support opening several layout files.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12575,7 +13245,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">למחוק</translation>
+        <translation>למחוק</translation>
     </message>
     <message>
         <source>Remove from Sheet</source>
@@ -12602,15 +13272,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>This program is part of Valentina project.</source>
-        <translation type="unfinished"></translation>
+        <translation>התוכנה הזאת הנה חלק מפרויקט ולנטינה.</translation>
     </message>
     <message>
         <source>Check For Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>בדוק עדכונים</translation>
     </message>
     <message>
         <source>Cannot open your default browser</source>
-        <translation type="unfinished"></translation>
+        <translation>לא יכול לפתוח בדפדפן בררת המחדל</translation>
     </message>
     <message>
         <source>Build revision: %1</source>
@@ -12708,7 +13378,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>וקובץ</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -12716,7 +13386,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>ועזרה</translation>
     </message>
     <message>
         <source>Menu</source>
@@ -12744,7 +13414,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>שם</translation>
     </message>
     <message>
         <source>Seamline</source>
@@ -12789,14 +13459,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Format</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Width</source>
-        <translation type="obsolete">רוחב</translation>
-    </message>
-    <message>
-        <source>Length</source>
-        <translation type="obsolete">אורך</translation>
     </message>
     <message>
         <source>Remove unused length</source>
@@ -12900,11 +13562,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Open</source>
-        <translation type="unfinished"></translation>
+        <translation>ופתח</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
+        <translation>ושמור</translation>
     </message>
     <message>
         <source>Save &amp;As</source>
@@ -12920,7 +13582,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation>וחדש</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
@@ -12932,11 +13594,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Zoom in</source>
-        <translation type="unfinished"></translation>
+        <translation>התמקד</translation>
     </message>
     <message>
         <source>Zoom out</source>
-        <translation type="unfinished"></translation>
+        <translation>התרחק</translation>
     </message>
     <message>
         <source>Zoom 1:1</source>
@@ -12944,7 +13606,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Zoom fit best</source>
-        <translation type="unfinished"></translation>
+        <translation>זום מותאם</translation>
     </message>
     <message>
         <source>Zoom sheet</source>
@@ -12952,7 +13614,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>העדפות</translation>
     </message>
     <message>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
@@ -12960,7 +13622,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished"></translation>
+        <translation>טעות קובץ.</translation>
     </message>
     <message>
         <source>Fail to create layout.</source>
@@ -12972,15 +13634,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">סנטימטרים</translation>
+        <translation>סנטימטרים</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">מילימטר</translation>
+        <translation>מילימטר</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished"></translation>
+        <translation>אינצ&apos;ים</translation>
     </message>
     <message>
         <source>Scale:</source>
@@ -13032,7 +13694,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save as</source>
-        <translation type="unfinished">שמירה בשם</translation>
+        <translation>שמירה בשם</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window.</source>
@@ -13040,7 +13702,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Could not save file</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן לשמור את הקובץ</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
@@ -13109,11 +13771,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>רוחב:</translation>
     </message>
     <message>
         <source>Grainline orientation:</source>
@@ -13197,7 +13859,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>הסר</translation>
     </message>
     <message>
         <source>Unable to read a layout file. %1</source>
@@ -13234,7 +13896,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">שמור</translation>
+        <translation>שמור</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
@@ -13334,7 +13996,7 @@ Do you want to save your changes?</source>
     <message>
         <source>cm</source>
         <comment>unit</comment>
-        <translation type="unfinished"></translation>
+        <translation>ס&quot;מ</translation>
     </message>
     <message>
         <source>in</source>
@@ -13608,7 +14270,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Detail</source>
-        <translation type="unfinished"></translation>
+        <translation>פרט</translation>
     </message>
     <message>
         <source>Unnamed path</source>
@@ -13623,11 +14285,11 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error creating or updating place lavel</source>
+        <source>Piece path doesn&apos;t contain nodes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Piece path doesn&apos;t contain nodes</source>
+        <source>Error creating or updating place label</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13657,11 +14319,11 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Content type mistmatch.</source>
+        <source>Not image.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Not image.</source>
+        <source>Content type mismatch.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13728,7 +14390,7 @@ Do you want to save your changes?</source>
     <message>
         <source>cm</source>
         <comment>unit</comment>
-        <translation type="unfinished"></translation>
+        <translation>ס&quot;מ</translation>
     </message>
     <message>
         <source>in</source>
@@ -13865,6 +14527,17 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
 </context>
 <context>
+    <name>VTextManager</name>
+    <message>
+        <source> on Fold</source>
+        <translation type="vanished">על קיפול בד</translation>
+    </message>
+    <message>
+        <source>on Fold</source>
+        <translation type="vanished">על קיפול בד</translation>
+    </message>
+</context>
+<context>
     <name>VToolAlongLine</name>
     <message>
         <source>Length</source>
@@ -13876,7 +14549,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית</translation>
     </message>
 </context>
 <context>
@@ -13899,7 +14572,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית</translation>
     </message>
 </context>
 <context>
@@ -13922,14 +14595,14 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית</translation>
     </message>
 </context>
 <context>
     <name>VToolBasePoint</name>
     <message>
         <source>Label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית</translation>
     </message>
 </context>
 <context>
@@ -13940,7 +14613,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Length</source>
-        <translation type="unfinished">אורך</translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -13948,7 +14621,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית</translation>
     </message>
     <message>
         <source>Segment 1</source>
@@ -13963,7 +14636,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VToolCutArc</name>
     <message>
         <source>Arc</source>
-        <translation type="unfinished"></translation>
+        <translation>קשת</translation>
     </message>
     <message>
         <source>length</source>
@@ -13990,7 +14663,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VToolCutSpline</name>
     <message>
         <source>Curve</source>
-        <translation type="unfinished">עקומה</translation>
+        <translation>עיקול</translation>
     </message>
     <message>
         <source>length</source>
@@ -14005,7 +14678,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VToolCutSplinePath</name>
     <message>
         <source>Curve</source>
-        <translation type="unfinished">עקומה</translation>
+        <translation>עיקול</translation>
     </message>
     <message>
         <source>length</source>
@@ -14031,7 +14704,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VToolDoublePoint</name>
     <message>
         <source>Label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית</translation>
     </message>
 </context>
 <context>
@@ -14054,7 +14727,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית</translation>
     </message>
     <message>
         <source>Rotation</source>
@@ -14099,7 +14772,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית</translation>
     </message>
 </context>
 <context>
@@ -14117,7 +14790,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VToolLineIntersect</name>
     <message>
         <source>Label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית</translation>
     </message>
     <message>
         <source>Error calculating point &apos;%1&apos;. Lines (%2;%3) and (%4;%5) have no point of intersection</source>
@@ -14136,7 +14809,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית</translation>
     </message>
     <message>
         <source>Error calculating point &apos;%1&apos;. Line (%2;%3) doesn&apos;t have intersection with axis through point &apos;%4&apos; and angle %5°</source>
@@ -14155,7 +14828,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית</translation>
     </message>
 </context>
 <context>
@@ -14205,15 +14878,23 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Point at distance along line</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה במרחק לאורך הקו</translation>
     </message>
     <message>
         <source>Arc</source>
-        <translation type="unfinished"></translation>
+        <translation>קשת</translation>
     </message>
     <message>
         <source>Radius</source>
         <translation type="vanished">רדיוס</translation>
+    </message>
+    <message>
+        <source>First angle</source>
+        <translation type="vanished">זווית ראשונה</translation>
+    </message>
+    <message>
+        <source>Second angle</source>
+        <translation type="vanished">זווית שניה</translation>
     </message>
     <message>
         <source>Point along bisector</source>
@@ -14237,11 +14918,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Line between points</source>
-        <translation type="unfinished"></translation>
+        <translation>קו בין נקודות</translation>
     </message>
     <message>
         <source>Point at line intersection</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה במפגש קוים</translation>
     </message>
     <message>
         <source>Point along perpendicular</source>
@@ -14270,6 +14951,14 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>Point intersection line and axis</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color</source>
+        <translation type="vanished">צבע הקו</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation type="vanished">צבע</translation>
     </message>
     <message>
         <source>Point intersection curve and axis</source>
@@ -14328,6 +15017,10 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Name</source>
+        <translation type="vanished">שם</translation>
+    </message>
+    <message>
         <source>Cubic bezier curve</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14365,7 +15058,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית הנקודה</translation>
     </message>
     <message>
         <source>Position:</source>
@@ -14381,11 +15074,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Line color:</source>
-        <translation type="unfinished"></translation>
+        <translation>צבע הקו:</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Angle:</source>
@@ -14393,11 +15086,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>First point:</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה ראשונה</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה שניה</translation>
     </message>
     <message>
         <source>Center point:</source>
@@ -14417,7 +15110,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>צבע</translation>
     </message>
     <message>
         <source>Third point:</source>
@@ -14557,7 +15250,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>שם</translation>
     </message>
     <message>
         <source>C1: angle:</source>
@@ -14641,7 +15334,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Background image</source>
-        <translation type="unfinished"></translation>
+        <translation>תמונת רקע</translation>
     </message>
     <message>
         <source>Hold:</source>
@@ -14682,7 +15375,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית</translation>
     </message>
     <message>
         <source>Error calculating point &apos;%1&apos;. Circle with center &apos;%2&apos; and radius &apos;%3&apos; doesn&apos;t have intersection with line (%4;%5)</source>
@@ -14711,7 +15404,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית</translation>
     </message>
     <message>
         <source>Curve 1 segment 1</source>
@@ -14809,7 +15502,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="unfinished"></translation>
+        <translation>אסור היפוך</translation>
     </message>
     <message>
         <source>Force flipping</source>
@@ -14836,7 +15529,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית</translation>
     </message>
 </context>
 <context>
@@ -15662,7 +16355,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>None</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>ללא</translation>
     </message>
     <message>
         <source>Valentina team</source>
@@ -15768,6 +16461,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <source>fmod</source>
         <comment>Returns the floating-point remainder of numer/denom (rounded towards zero)</comment>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cm</source>
+        <comment>centimeter</comment>
+        <translation type="vanished">ס&quot;מ</translation>
     </message>
     <message>
         <source>Line_</source>
@@ -16235,7 +16933,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>רוחב:</translation>
     </message>
     <message>
         <source>Height:</source>
@@ -16263,7 +16961,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Background image</source>
-        <translation type="unfinished"></translation>
+        <translation>תמונת רקע</translation>
     </message>
     <message>
         <source>Hold</source>
@@ -16279,7 +16977,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">למחוק</translation>
+        <translation>למחוק</translation>
     </message>
     <message>
         <source>Hold All</source>
@@ -16303,15 +17001,15 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">מילימטר</translation>
+        <translation>מילימטר</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">סנטימטרים</translation>
+        <translation>סנטימטרים</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished"></translation>
+        <translation>אינצ&apos;ים</translation>
     </message>
 </context>
 <context>
@@ -16401,7 +17099,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>העדפות</translation>
     </message>
     <message>
         <source>Categories: %1.</source>
@@ -16500,7 +17198,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Text:</source>
-        <translation type="unfinished"></translation>
+        <translation>טקסט:</translation>
     </message>
     <message>
         <source>watermark text</source>
@@ -16508,7 +17206,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Rotation:</source>
-        <translation type="unfinished"></translation>
+        <translation>סיבוב:</translation>
     </message>
     <message>
         <source>Font:</source>
@@ -16545,7 +17243,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>וקובץ</translation>
     </message>
     <message>
         <source>Operations</source>
@@ -16565,7 +17263,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>פתח</translation>
     </message>
     <message>
         <source>New</source>
@@ -16581,7 +17279,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished"></translation>
+        <translation>טעות קובץ.</translation>
     </message>
     <message>
         <source>Watermark files</source>
@@ -16601,7 +17299,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Could not save file</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן לשמור את הקובץ</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
@@ -16677,16 +17375,12 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Do you want to change the premissions?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>צבע</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>צבע</translation>
     </message>
     <message>
         <source>Black</source>
@@ -16766,6 +17460,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Light gray</source>
         <comment>color</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to change the permissions?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

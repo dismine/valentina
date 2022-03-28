@@ -26,6 +26,7 @@
  **
  *************************************************************************/
 #include "tst_tslocaletranslation.h"
+#include "qnamespace.h"
 
 #include <QtTest>
 
@@ -40,8 +41,10 @@ void TST_TSLocaleTranslation::CheckPlaceMarkerExist_data()
 {
     QTest::addColumn<QString>("source");
     QTest::addColumn<QString>("translation");
+    QTest::addColumn<Qt::LayoutDirection>("direction");
 
-    const QString filename = QString("valentina_%1.ts").arg(m_locale);
+    const QString filename = QStringLiteral("valentina_%1.ts").arg(m_locale);
+    QLocale locale(m_locale);
 
     const QDomNodeList messages = LoadTSFile(filename);
     if (messages.isEmpty())
@@ -52,7 +55,7 @@ void TST_TSLocaleTranslation::CheckPlaceMarkerExist_data()
     for (qint32 i = 0, num = messages.size(); i < num; ++i)
     {
         const QDomElement message = messages.at(i).toElement();
-        if (message.isNull() == false)
+        if (!message.isNull())
         {
             const QString source = message.firstChildElement(TagSource).text();
             if (source.isEmpty())
@@ -75,12 +78,13 @@ void TST_TSLocaleTranslation::CheckPlaceMarkerExist_data()
                 continue;
             }
 
-            const QString message = QString("File '%1'. Check place holder source message '%2'").arg(filename, source);
-            QTest::newRow(qUtf8Printable(message)) << source << translation;
+            const QString message = QStringLiteral("File '%1'. Check place holder source message '%2'")
+                    .arg(filename, source);
+            QTest::newRow(qUtf8Printable(message)) << source << translation << locale.textDirection();
         }
         else
         {
-            const QString message = QString("File '%2'. Message %1 is null.").arg(i).arg(filename);
+            const QString message = QStringLiteral("File '%2'. Message %1 is null.").arg(i).arg(filename);
             QFAIL(qUtf8Printable(message));
         }
     }
@@ -91,15 +95,19 @@ void TST_TSLocaleTranslation::CheckPlaceMarkerExist()
 {
     QFETCH(QString, source);
     QFETCH(QString, translation);
+    QFETCH(Qt::LayoutDirection, direction);
 
     int sourceMarkCount = 0;
     int translationMarkCount = 0;
+    const QChar per('%');
 
     for (int i = 1; i <= 99; ++i)
     {
-        const QString marker = QLatin1String("%") + QString().setNum(i);
-        const bool sourceMark = source.indexOf(marker) != -1;
-        if (sourceMark)
+        const QString number = QString::number(i);
+        const QString sourceMarker = per + number;
+        const QString translationMarker = direction == Qt::RightToLeft ? number + per : sourceMarker;
+        const bool sourceMarkerFlag = source.indexOf(sourceMarker) != -1;
+        if (sourceMarkerFlag)
         {
             ++sourceMarkCount;
             if (sourceMarkCount != i)
@@ -111,8 +119,8 @@ void TST_TSLocaleTranslation::CheckPlaceMarkerExist()
             }
         }
 
-        const bool translationMark = translation.indexOf(marker) != -1;
-        if (translationMark)
+        const bool translationMarkerFlag = translation.indexOf(translationMarker) != -1;
+        if (translationMarkerFlag)
         {
             ++translationMarkCount;
             if (translationMarkCount != i)
@@ -124,7 +132,7 @@ void TST_TSLocaleTranslation::CheckPlaceMarkerExist()
             }
         }
 
-        if (sourceMark != translationMark)
+        if (sourceMarkerFlag != translationMarkerFlag)
         {
             const QString message =
                 QString("Compare to source string in the translation string '%1' was missed place marker ")
@@ -205,6 +213,12 @@ void TST_TSLocaleTranslation::TestPunctuation()
         QChar(0x2026)//…
     };
 
+
+    if (QLocale(locale).textDirection() != Qt::LeftToRight)
+    {
+        QSKIP("Not supported text direction");
+    }
+
     bool testFail = false;
     const QChar cSource = source.at(source.length()-1);
     QChar cPunctuation = cSource;
@@ -223,8 +237,8 @@ void TST_TSLocaleTranslation::TestPunctuation()
                 testFail = false;
             }
             else if (locale == QLatin1String("zh_CN")
-                     // Beside usage similar to that of English, the colon has other functions. Several compatibility
-                     // forms for Chinese and Japanese typography are encoded in Unicode.
+                     // Beside usage similar to that of English, the colon has other functions. Several
+                     // compatibility forms for Chinese and Japanese typography are encoded in Unicode.
                      // https://en.wikipedia.org/wiki/Colon_(punctuation)#Usage_in_other_languages
                      && (cSource == QLatin1Char(':') && cTranslation == QString("：")))
             {
@@ -240,7 +254,6 @@ void TST_TSLocaleTranslation::TestPunctuation()
             testFail = true;
         }
     }
-
     if (testFail)
     {
         const QString message = QString("Translation string does not end with the same punctuation character '%1' or "

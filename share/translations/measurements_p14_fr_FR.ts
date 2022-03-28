@@ -1477,7 +1477,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="858"/>
         <source>highbust_arc_half_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>demi_arc_surpoitrine_dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="860"/>
@@ -2179,7 +2179,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1147"/>
         <source>neck_side_to_highbust_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>encolure_cote_surpoitrine_dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1149"/>
@@ -2827,7 +2827,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1423"/>
         <source>bustpoint_to_waist_front</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>saillantpoitrine_taille_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1425"/>
@@ -3809,7 +3809,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1846"/>
         <source>crotch_length_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>longueur_fourche_dos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1848"/>
@@ -3992,7 +3992,7 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1933"/>
         <source>waist_natural_arc_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>demi_taille_naturel_devant</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1935"/>
@@ -4376,13 +4376,13 @@ A partir du point de Sur-Poitrine sur le Côté à l&apos;autre Côté du point 
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2103"/>
         <source>Highbust Back, over Shoulder, to Highbust level</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>surpoitrine dos, au-dessus de l&apos;épaule, arriver niveau surpoitrine</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2105"/>
         <source>From Highbust Back, over Shoulder, then aim at Bustpoint, stopping measurement at Highbust level.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Depuis surpoitrine dos, au-dessus de l&apos;épaule, puis viser le saillant de poitrine, en arrêtant la mesure au niveau de la surpoitrine</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2110"/>
