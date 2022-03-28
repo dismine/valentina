@@ -781,7 +781,7 @@ void VCommandLine::InitCommandLineOptions()
          translate("VCommandLine", "The measure unit")},
         {{SINGLE_OPTION_IGNORE_MARGINS, LONG_OPTION_IGNORE_MARGINS},
          translate("VCommandLine", "Ignore printer margins (export mode). Use if need full paper space. In case of "
-         "later printing you must account for the margins himself.")},
+         "later printing you must account for the margins themselves.")},
         {{SINGLE_OPTION_LEFT_MARGIN, LONG_OPTION_LEFT_MARGIN},
          translate("VCommandLine", "Page left margin in current units like 3.0 (export mode). If not set will be used "
          "value from default printer. Or 0 if none printers was found."),

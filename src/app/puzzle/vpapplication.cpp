@@ -511,14 +511,14 @@ void VPApplication::ProcessArguments(const VPCommandLinePtr &cmd)
     {
         if (not cmd->IsGuiEnabled() && args.count() > 1)
         {
-            qCCritical(pApp, "%s\n", qPrintable(tr("Export mode doesn't support openning several files.")));
+            qCCritical(pApp, "%s\n", qPrintable(tr("Export mode doesn't support opening several files.")));
             cmd.get()->parser.showHelp(V_EX_USAGE);
         }
 
         if (args.count() > 1 && not rawLayouts.isEmpty())
         {
             qCCritical(pApp, "%s\n",
-                       qPrintable(tr("Import raw layout data does not support openning several layout files.")));
+                       qPrintable(tr("Import raw layout data does not support opening several layout files.")));
             cmd.get()->parser.showHelp(V_EX_USAGE);
         }
 

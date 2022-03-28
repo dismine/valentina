@@ -169,7 +169,7 @@ auto VBackgroundPatternImage::IsValid() const -> bool
 
         if (not aliases.contains(m_contentType))
         {
-            m_errorString = tr("Content type mistmatch.");
+            m_errorString = tr("Content type mismatch.");
             return false;
         }
 

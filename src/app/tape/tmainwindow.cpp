@@ -3834,7 +3834,7 @@ QString TMainWindow::CheckMName(const QString &name, const QSet<QString> &import
 {
     if (name.isEmpty())
     {
-        throw VException(tr("Measurement name in is empty."));
+        throw VException(tr("Measurement name is empty."));
     }
 
     if (importedNames.contains(name))
@@ -3847,24 +3847,24 @@ QString TMainWindow::CheckMName(const QString &name, const QSet<QString> &import
         QRegularExpression rx(NameRegExp());
         if (not rx.match(name).hasMatch())
         {
-            throw VException(tr("Merasurement '%1' doesn't match regex pattern.").arg(name));
+            throw VException(tr("Measurement '%1' doesn't match regex pattern.").arg(name));
         }
 
         if (not data->IsUnique(name))
         {
-            throw VException(tr("Merasurement '%1' already used in file.").arg(name));
+            throw VException(tr("Measurement '%1' already used in the file.").arg(name));
         }
     }
     else
     {
         if (not ConvertToSet<QString>(AllGroupNames()).contains(name))
         {
-            throw VException(tr("Measurement '%1' is not one of known measurements.").arg(name));
+            throw VException(tr("Measurement '%1' is not one of the known measurements.").arg(name));
         }
 
         if (not data->IsUnique(name))
         {
-            throw VException(tr("Merasurement '%1' already used in file.").arg(name));
+            throw VException(tr("Measurement '%1' already used in file.").arg(name));
         }
     }
 
@@ -3933,7 +3933,7 @@ void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv, const QVe
             const QString name = csv.text(i, nameColumn).simplified();
             if (name.isEmpty())
             {
-                ShowError(tr("Error in row %1. Measurement name is empty.").arg(i));
+                ShowError(tr("Error in row %1. The measurement name is empty.").arg(i));
                 continue;
             }
 
@@ -4049,7 +4049,7 @@ void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv, const QVec
             const QString name = csv.text(i, nameColumn).simplified();
             if (name.isEmpty())
             {
-                ShowError(tr("Error in row %1. Measurement name is empty.").arg(i));
+                ShowError(tr("Error in row %1. The measurement name is empty.").arg(i));
                 continue;
             }
 

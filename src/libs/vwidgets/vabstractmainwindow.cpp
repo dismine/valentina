@@ -280,7 +280,7 @@ auto VAbstractMainWindow::CheckFilePermissions(const QString &path, QWidget *mes
         QMessageBox messageBox(messageBoxParent);
         messageBox.setIcon(QMessageBox::Question);
         messageBox.setText(tr("The file has no write permissions."));
-        messageBox.setInformativeText(tr("Do you want to change the premissions?"));
+        messageBox.setInformativeText(tr("Do you want to change the permissions?"));
         messageBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
         messageBox.setDefaultButton(QMessageBox::Yes);
 

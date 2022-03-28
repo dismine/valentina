@@ -97,9 +97,9 @@ void ZValueMoveBackgroundImage::redo()
 
             if (levels.contains(image.ZValue()))
             {
-                QVector<QUuid> lavel_images = levels.value(image.ZValue());
-                lavel_images.append(image.Id());
-                levels[image.ZValue()] = lavel_images;
+                QVector<QUuid> level_images = levels.value(image.ZValue());
+                level_images.append(image.Id());
+                levels[image.ZValue()] = level_images;
             }
             else
             {

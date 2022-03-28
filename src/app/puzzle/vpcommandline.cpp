@@ -144,7 +144,7 @@ void VPCommandLine::InitCommandLineOptions()
          translate("VCommandLine", "The filename of exported layout file. Use it to enable console export mode."),
          translate("VCommandLine", "The filename of layout file")},
         {{SINGLE_OPTION_RAW_LAYOUT, LONG_OPTION_RAW_LAYOUT},
-         translate("VCommandLine", "Load pattern pieces form the raw layout data file."),
+         translate("VCommandLine", "Load pattern pieces from the raw layout data file."),
          translate("VCommandLine", "The raw layout data file")},
         {{SINGLE_OPTION_EXP2FORMAT, LONG_OPTION_EXP2FORMAT},
          translate("VCommandLine", "Number corresponding to output format (default = 0, export mode): <not defined>"),

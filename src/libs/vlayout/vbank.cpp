@@ -336,7 +336,7 @@ bool VBank::PrepareUnsorted()
         if (square <= 0)
         {
             qCCritical(lBank) << VAbstractValApplication::warningMessageSignature +
-                                     tr("Preparing data for layout error: Detail '%1' square <= 0")
+                                     tr("Error of preparing data for layout: Detail '%1' square <= 0")
                                          .arg(details.at(i).GetName());
             prepare = false;
             return prepare;
@@ -361,7 +361,7 @@ bool VBank::PrepareDetails()
     if (layoutWidth <= 0)
     {
         qCCritical(lBank) << VAbstractValApplication::warningMessageSignature +
-                                 tr("Preparing data for layout error: Layout paper sheet <= 0");
+                                 tr("Error of preparing data for layout: Layout paper sheet <= 0");
         prepare = false;
         return prepare;
     }
@@ -369,7 +369,7 @@ bool VBank::PrepareDetails()
     if (details.isEmpty())
     {
         qCCritical(lBank) << VAbstractValApplication::warningMessageSignature +
-                                 tr("Preparing data for layout error: List of details is empty");
+                                 tr("Error of preparing data for layout: List of details is empty");
         prepare = false;
         return prepare;
     }

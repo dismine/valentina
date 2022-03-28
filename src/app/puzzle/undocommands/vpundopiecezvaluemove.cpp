@@ -244,9 +244,9 @@ auto VPUndoPieceZValueMove::Levels(const QList<VPPiecePtr> &pieces, bool skip) c
 
         if (levels.contains(p->ZValue()))
         {
-            QVector<QString> lavel_images = levels.value(p->ZValue());
-            lavel_images.append(p->GetUniqueID());
-            levels[p->ZValue()] = lavel_images;
+            QVector<QString> level_images = levels.value(p->ZValue());
+            level_images.append(p->GetUniqueID());
+            levels[p->ZValue()] = level_images;
         }
         else
         {
@@ -487,9 +487,9 @@ auto VPUndoPiecesZValueMove::Levels(const QList<VPPiecePtr> &allPieces, const QV
 
         if (levels.contains(p->ZValue()))
         {
-            QVector<QString> lavel_images = levels.value(p->ZValue());
-            lavel_images.append(p->GetUniqueID());
-            levels[p->ZValue()] = lavel_images;
+            QVector<QString> level_images = levels.value(p->ZValue());
+            level_images.append(p->GetUniqueID());
+            levels[p->ZValue()] = level_images;
         }
         else
         {

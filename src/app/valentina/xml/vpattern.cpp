@@ -1973,13 +1973,13 @@ void VPattern::ParsePlaceLabel(QDomElement &domElement, const Document &parse)
     }
     catch (const VExceptionBadId &e)
     {
-        VExceptionObjectError excep(tr("Error creating or updating place lavel"), domElement);
+        VExceptionObjectError excep(tr("Error creating or updating place label"), domElement);
         excep.AddMoreInformation(e.ErrorMessage());
         throw excep;
     }
     catch (qmu::QmuParserError &e)
     {
-        VExceptionObjectError excep(tr("Error creating or updating place lavel"), domElement);
+        VExceptionObjectError excep(tr("Error creating or updating place label"), domElement);
         excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
         throw excep;
     }

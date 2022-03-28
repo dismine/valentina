@@ -265,7 +265,7 @@ void VLayoutExporter::ExportToFlatDXF(QGraphicsScene *scene, const QList<QGraphi
         scene->render(&painter, m_imageRect, m_imageRect, Qt::IgnoreAspectRatio);
         if (not painter.end())
         {
-            qCritical() << tr("Can't create an flat dxf file.")
+            qCritical() << tr("Can't create a flat dxf file.")
                         << generator.ErrorString();
         }
     }
