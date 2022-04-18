@@ -1,4 +1,4 @@
-# Valentina 0.7.51 (unreleased)
+# Valentina 0.7.51 April 18, 2022
 - Z value change for a layout piece.
 - Fix issue with Custom template.
 - Fix issue with tile font size.

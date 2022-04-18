@@ -2,7 +2,7 @@ Format: 3.0 (native)
 Source: valentina
 Binary: valentina
 Architecture: i386 amd64
-Version: 0.7.50
+Version: 0.7.51
 Maintainer: Roman Telezhynskyi <dismine@gmail.com>
 Homepage: https://smart-pattern.com.ua
 Standards-Version: 3.9.5
@@ -14,9 +14,9 @@ Build-Depends: debhelper (>= 8.0.0),
                qttools5-dev-tools (>= 5.4.0), 
                libqt5xmlpatterns5-dev (>= 5.4.0),
                libqt5opengl5-dev (>= 5.4.0)
-Debtransform-Tar: valentina-0.7.50.v0.7.50.tar.gz
+Debtransform-Tar: valentina-0.7.51.v0.7.51.tar.gz
 Package-List: 
  valentina deb graphics optional
 Files: 
- 00000000000000000000000000000000 0 valentina-0.7.50.v0.7.50.tar.gz
+ 00000000000000000000000000000000 0 valentina-0.7.51.v0.7.51.tar.gz
 
