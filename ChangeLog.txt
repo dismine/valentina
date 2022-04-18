@@ -22,7 +22,7 @@
 - Table of variables is available in Details mode.
 - Fix incorrect comparison of the global length of passmark to minimal allowed value.
 - Make an increment name valid after user selected it from a completion list.
-- [smart-pattern/valentina#150] Fix Seam allowance not correct at intersection curve and axis.
+- [smart-pattern/valentina#145] Fix Seam allowance not correct at intersection curve and axis.
 - Show tooltip about defined user material in the label placeholder list.
 - Fix reading tiled page margins in console mode.
 - Fix handling numeric values passed in console mode.
