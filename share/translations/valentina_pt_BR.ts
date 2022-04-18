@@ -2849,10 +2849,6 @@
         <translation>Espelhar através do eixo</translation>
     </message>
     <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="vanished">Habilite para criar um grupo de visibilidade com os objetos originais</translation>
-    </message>
-    <message>
         <source>Visibility Group</source>
         <translation>Grupo de Visibilidade</translation>
     </message>
@@ -2970,10 +2966,6 @@
     <message>
         <source>Flipping by line</source>
         <translation>Espelhar através de linha</translation>
-    </message>
-    <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="vanished">Habilite para criar um grupo de visibilidade com os objetos originais</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -4622,10 +4614,6 @@ Aplicar configurações de qualquer forma?</translation>
     <message>
         <source>Center point</source>
         <translation>Ponto central</translation>
-    </message>
-    <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="vanished">Habilite para criar um grupo de visibilidade com os objetos originais</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -6492,10 +6480,6 @@ Aplicar configurações de qualquer forma?</translation>
     <message>
         <source>This point cannot be origin point. Please, select another origin point</source>
         <translation>Este ponto não pode ser o ponto de origem. Por favor, selecione outro ponto de origem</translation>
-    </message>
-    <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="vanished">Habilite para criar um grupo de visibilidade com os objetos originais</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -12591,22 +12575,6 @@ Deseja salvar suas mudanças?</translation>
         <translation>Importar de CSV</translation>
     </message>
     <message>
-        <source>Measurement name in is empty.</source>
-        <translation type="vanished">O nome da medida está vazio.</translation>
-    </message>
-    <message>
-        <source>Merasurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
-        <translation type="vanished">Medida &apos;%1&apos; não corresponde ao padrão regex.</translation>
-    </message>
-    <message>
-        <source>Merasurement &apos;%1&apos; already used in file.</source>
-        <translation type="vanished">Medida &apos;%1&apos; já utilizada no arquivo.</translation>
-    </message>
-    <message>
-        <source>Measurement &apos;%1&apos; is not one of known measurements.</source>
-        <translation type="vanished">Medida &apos;%1&apos; não é uma das medidas conhecidas.</translation>
-    </message>
-    <message>
         <source>Individual measurements require at least 2 columns.</source>
         <translation>As medidas individuais necessitam pelo menos 2 colunas.</translation>
     </message>
@@ -12621,10 +12589,6 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>Imported file must not contain the same name twice.</source>
         <translation>O arquivo importado não poderá conter duas vezes o mesmo nome.</translation>
-    </message>
-    <message>
-        <source>Error in row %1. Measurement name is empty.</source>
-        <translation type="vanished">Erro na linha %1. O nome da medida está vazio.</translation>
     </message>
     <message>
         <source>Cannot save settings. Access denied.</source>
@@ -13853,10 +13817,6 @@ Deseja salvar suas mudanças?</translation>
         <translation>Versão inesperada&quot;%1&quot;.</translation>
     </message>
     <message>
-        <source>Error openning a temp file: %1.</source>
-        <translation type="vanished">Erro ao abrir arquivo temporário: %1.</translation>
-    </message>
-    <message>
         <source>Invalid version. Minimum supported format version is %1</source>
         <translation>Versão inválida. O formato da versão mínima suportado é %1</translation>
     </message>
@@ -13980,10 +13940,6 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>Export to CSV</source>
         <translation>Exportar para CSV</translation>
-    </message>
-    <message>
-        <source>Do you want to change the premissions?</source>
-        <translation type="vanished">Você quer alterar as permissões?</translation>
     </message>
     <message>
         <source>Cannot set permissions for %1 to writable.</source>
@@ -14649,10 +14605,6 @@ Deseja salvar suas mudanças?</translation>
         <translation>Número correspondente ao modelo da página de layout (padrão = 0, modo de exportação):</translation>
     </message>
     <message>
-        <source>Ignore printer margins (export mode). Use if need full paper space. In case of later printing you must account for the margins himself.</source>
-        <translation type="vanished">Ignore as margens de impressão (modo de exportação). Use, se necessário, espaço de papel completo. Em caso de impressão posterior, você deve contabilizar as próprias margens.</translation>
-    </message>
-    <message>
         <source>Number corresponding to tiled pdf page template (default = 0, export mode with tiled pdf format):</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15216,10 +15168,6 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
         <translation>Criação do arquivo &apos;%1&apos; falhou! %2</translation>
-    </message>
-    <message>
-        <source>Can&apos;t create an flat dxf file.</source>
-        <translation type="vanished">Impossível criar um arquivo flat dxf.</translation>
     </message>
     <message>
         <source>Can&apos;t create an AAMA dxf file.</source>
@@ -19982,10 +19930,6 @@ Deseja salvar as alterações?</translation>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
         <translation>Ocorreu um erro desconhecido, como por exemplo, uma partição cheia impediu a gravação do arquivo bloqueado. Ignore caso deseje continuar (não recomendado, pode causar uma corrupção de dados).</translation>
-    </message>
-    <message>
-        <source>Do you want to change the premissions?</source>
-        <translation type="vanished">Você quer alterar as permissões?</translation>
     </message>
     <message>
         <source>Color</source>

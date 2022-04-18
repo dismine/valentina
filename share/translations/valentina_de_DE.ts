@@ -5,7 +5,7 @@
     <name>AddBackgroundImage</name>
     <message>
         <source>add background image</source>
-        <translation type="unfinished"></translation>
+        <translation>Hintergrundbild hinzufügen</translation>
     </message>
 </context>
 <context>
@@ -61,7 +61,7 @@
     <name>ChangeGroupOptions</name>
     <message>
         <source>rename group</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruppe umbenennen</translation>
     </message>
 </context>
 <context>
@@ -360,7 +360,7 @@
     <name>DeleteBackgroundImage</name>
     <message>
         <source>delete background image</source>
-        <translation type="unfinished"></translation>
+        <translation>Hintergrundbild entfernen</translation>
     </message>
 </context>
 <context>
@@ -396,7 +396,7 @@
     </message>
     <message>
         <source>Interfacing</source>
-        <translation type="vanished">Verbindungskante</translation>
+        <translation type="vanished">Einlage</translation>
     </message>
     <message>
         <source>Interlining</source>
@@ -489,7 +489,7 @@
     <name>DialogAddBackgroundImage</name>
     <message>
         <source>Background image</source>
-        <translation type="unfinished"></translation>
+        <translation>Hintergrundbild</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -497,11 +497,11 @@
     </message>
     <message>
         <source>Determine should an image built in or added as path to the file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestimmen Sie, ob das Bild in die Datei eingefügt oder als Pfad zur Datei hinzugefügt werden soll.</translation>
     </message>
     <message>
         <source>Built in</source>
-        <translation type="unfinished"></translation>
+        <translation>Eingefügt</translation>
     </message>
 </context>
 <context>
@@ -620,7 +620,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
 </context>
 <context>
@@ -751,11 +751,11 @@
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudonym:</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
 </context>
 <context>
@@ -878,11 +878,11 @@
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudonym:</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
 </context>
 <context>
@@ -1009,7 +1009,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
 </context>
 <context>
@@ -1080,11 +1080,11 @@
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudonym:</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
 </context>
 <context>
@@ -1139,11 +1139,11 @@
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudonym:</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
 </context>
 <context>
@@ -1250,15 +1250,15 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudonym1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudonym2:</translation>
     </message>
 </context>
 <context>
@@ -1341,15 +1341,15 @@
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudonym1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudonym2:</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
 </context>
 <context>
@@ -1432,15 +1432,15 @@
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudonym1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudonym2:</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
 </context>
 <context>
@@ -1523,15 +1523,15 @@
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudonym1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudonym2:</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
 </context>
 <context>
@@ -1709,7 +1709,7 @@
     </message>
     <message>
         <source>Pattern label visible</source>
-        <translation type="vanished">Musterbezeichnung sichtbar</translation>
+        <translation type="vanished">Schnittbezeichnung sichtbar</translation>
     </message>
     <message>
         <source>Fabric</source>
@@ -1725,7 +1725,7 @@
     </message>
     <message>
         <source>Interlining</source>
-        <translation type="vanished">Zwischenfutter</translation>
+        <translation type="vanished">Einlagestoff</translation>
     </message>
     <message>
         <source>None</source>
@@ -1832,7 +1832,7 @@
     <name>DialogDimensionCustomNames</name>
     <message>
         <source>Dimension custom names</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzerdefinierter Name der Maßbezeichnungen</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1840,18 +1840,18 @@
     </message>
     <message>
         <source>Custom Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzerdefinierter Name</translation>
     </message>
 </context>
 <context>
     <name>DialogDimensionLabels</name>
     <message>
         <source>Dimension labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Maßbezeichnungen</translation>
     </message>
     <message>
         <source>Dimension:</source>
-        <translation type="unfinished"></translation>
+        <translation>Maßbezeichnung:</translation>
     </message>
     <message>
         <source>Value</source>
@@ -2067,7 +2067,7 @@
     </message>
     <message>
         <source>Material: Interfacing</source>
-        <translation>Material: Verbindungskante</translation>
+        <translation>Material: Einlage</translation>
     </message>
     <message>
         <source>Interfacing</source>
@@ -2079,7 +2079,7 @@
     </message>
     <message>
         <source>Interlining</source>
-        <translation>Zwischenfutter</translation>
+        <translation>Einlagestoff</translation>
     </message>
     <message>
         <source>Word: Cut</source>
@@ -2123,23 +2123,23 @@
     </message>
     <message>
         <source>Measurements units</source>
-        <translation type="unfinished"></translation>
+        <translation>Maßeinheiten</translation>
     </message>
     <message>
         <source>Pattern units</source>
-        <translation type="unfinished"></translation>
+        <translation>Schnittmuster Einheiten</translation>
     </message>
     <message>
         <source>Size units</source>
-        <translation type="unfinished"></translation>
+        <translation>Größen Einheiten</translation>
     </message>
     <message>
         <source>Customer birth date</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunde Geburtsdatum</translation>
     </message>
     <message>
         <source>Customer email</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunde EMail</translation>
     </message>
     <message>
         <source>Height</source>
@@ -2154,36 +2154,36 @@
     <message>
         <source>Hip</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Hüfte</translation>
     </message>
     <message>
         <source>Waist</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Taille</translation>
     </message>
     <message>
         <source>Measurement: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Maß: %1</translation>
     </message>
     <message>
         <source>Height label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Körpergröße-Beschriftung</translation>
     </message>
     <message>
         <source>Size label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Größen-Beschriftung</translation>
     </message>
     <message>
         <source>Hip label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Hüfte-Beschriftung</translation>
     </message>
     <message>
         <source>Waist label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Taille-Beschriftung</translation>
     </message>
     <message>
         <source>Final measurement: %1</source>
@@ -2497,11 +2497,11 @@
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudonym:</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
 </context>
 <context>
@@ -2612,7 +2612,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
 </context>
 <context>
@@ -2763,7 +2763,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search history &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Suchhistorie &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Alt+Down</source>
@@ -2771,7 +2771,7 @@
     </message>
     <message>
         <source>0 results</source>
-        <translation type="unfinished"></translation>
+        <translation>0 Ergebnisse</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match Case &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -2850,7 +2850,7 @@
     </message>
     <message>
         <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Sichtbarkeitsgruppe</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -2862,15 +2862,15 @@
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stichworte:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jedes Stichwort mit Komma trennen.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Stichwörter hinzufügen</translation>
     </message>
     <message>
         <source>Tool</source>
@@ -2878,7 +2878,7 @@
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudonym:</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -2890,19 +2890,19 @@
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Fertig</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
     <message>
         <source>Invalid suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>ungültige Endung</translation>
     </message>
     <message>
         <source>Invalid group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültiger Gruppen Name</translation>
     </message>
     <message>
         <source>Label:</source>
@@ -2969,7 +2969,7 @@
     </message>
     <message>
         <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Sichtbarkeitsgruppe</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -2981,15 +2981,15 @@
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stichworte:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jedes Stichwort mit Komma trennen.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Stichwörter hinzufügen</translation>
     </message>
     <message>
         <source>Tool</source>
@@ -2997,7 +2997,7 @@
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudonym:</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -3009,19 +3009,19 @@
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Fertig</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
     <message>
         <source>Invalid suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>ungültige Endung</translation>
     </message>
     <message>
         <source>Invalid group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültiger Gruppen Name</translation>
     </message>
     <message>
         <source>Label:</source>
@@ -3080,15 +3080,15 @@
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stichworte:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jedes Stichwort mit Komma trennen.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Stichwörter hinzufügen</translation>
     </message>
 </context>
 <context>
@@ -3175,7 +3175,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
 </context>
 <context>
@@ -3358,7 +3358,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search history &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Suchhistorie &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Alt+Down</source>
@@ -3370,7 +3370,7 @@
     </message>
     <message>
         <source>0 results</source>
-        <translation type="unfinished"></translation>
+        <translation>0 Ergebnisse</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match Case &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -3601,7 +3601,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search history &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Suchhistorie &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Alt+Down</source>
@@ -3609,7 +3609,7 @@
     </message>
     <message>
         <source>0 results</source>
-        <translation type="unfinished"></translation>
+        <translation>0 Ergebnisse</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match Case &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -3761,15 +3761,15 @@
     </message>
     <message>
         <source>Scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Skalieren</translation>
     </message>
     <message>
         <source>Horizontal:</source>
-        <translation type="unfinished"></translation>
+        <translation>Horizontal:</translation>
     </message>
     <message>
         <source>Vertical:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertikal:</translation>
     </message>
 </context>
 <context>
@@ -4130,7 +4130,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
 </context>
 <context>
@@ -4197,7 +4197,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
 </context>
 <context>
@@ -4324,7 +4324,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
 </context>
 <context>
@@ -4483,7 +4483,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Fertig</translation>
     </message>
     <message>
         <source>Name</source>
@@ -4616,7 +4616,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Sichtbarkeitsgruppe</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -4628,15 +4628,15 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stichworte:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jedes Stichwort mit Komma trennen.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Stichwörter hinzufügen</translation>
     </message>
     <message>
         <source>Tool</source>
@@ -4644,7 +4644,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudonym:</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -4656,19 +4656,19 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Fertig</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
     <message>
         <source>Invalid suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>ungültige Endung</translation>
     </message>
     <message>
         <source>Invalid group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültiger Gruppen Name</translation>
     </message>
     <message>
         <source>Label:</source>
@@ -4909,7 +4909,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
 </context>
 <context>
@@ -5633,7 +5633,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Invalid segment!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültiges Segment!</translation>
     </message>
 </context>
 <context>
@@ -5842,7 +5842,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
 </context>
 <context>
@@ -5941,7 +5941,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
 </context>
 <context>
@@ -6036,7 +6036,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
 </context>
 <context>
@@ -6095,7 +6095,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
 </context>
 <context>
@@ -6162,7 +6162,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
 </context>
 <context>
@@ -6277,7 +6277,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
 </context>
 <context>
@@ -6324,7 +6324,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
     <message>
         <source>Curve 1</source>
@@ -6332,11 +6332,11 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudonym1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudonym2:</translation>
     </message>
     <message>
         <source>Curve 2</source>
@@ -6482,7 +6482,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Sichtbarkeitsgruppe</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -6490,15 +6490,15 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stichworte:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jedes Stichwort mit Komma trennen.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Stichwörter hinzufügen</translation>
     </message>
     <message>
         <source>Tool</source>
@@ -6506,7 +6506,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudonym</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -6518,19 +6518,19 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Fertig</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
     <message>
         <source>Invalid suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>ungültige Endung</translation>
     </message>
     <message>
         <source>Invalid group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültiger Gruppen Name</translation>
     </message>
     <message>
         <source>Invalid rotation point</source>
@@ -6554,7 +6554,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudonym:</translation>
     </message>
     <message>
         <source>Default</source>
@@ -6673,15 +6673,15 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Skalieren</translation>
     </message>
     <message>
         <source>Horizontal:</source>
-        <translation type="unfinished"></translation>
+        <translation>Horizontal:</translation>
     </message>
     <message>
         <source>Vertical:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertikal:</translation>
     </message>
 </context>
 <context>
@@ -6839,7 +6839,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Save manual layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Manuelles Layout speichern</translation>
     </message>
 </context>
 <context>
@@ -7070,15 +7070,15 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>The customer name from individual measurements</source>
-        <translation>Der Name des Kunden von individuellen Maßen</translation>
+        <translation>Name des Kunden der individuellen Maße</translation>
     </message>
     <message>
         <source>The customer email from individual measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunden-E-Mail der individuellen Maße</translation>
     </message>
     <message>
         <source>The customer birth date from individual measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Geburtsdatum der individuellen Maße</translation>
     </message>
     <message>
         <source>Save label data.</source>
@@ -7101,40 +7101,40 @@ Einstellungen trotzdem anwenden?</translation>
     <message>
         <source>Hip</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Hüfte</translation>
     </message>
     <message>
         <source>Waist</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Taille</translation>
     </message>
     <message>
         <source>Height label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Körpergröße-Beschriftung</translation>
     </message>
     <message>
         <source>Size label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Größen-Beschriftung</translation>
     </message>
     <message>
         <source>Hip label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Hüfte-Beschriftung</translation>
     </message>
     <message>
         <source>Waist label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Taille-Beschriftung</translation>
     </message>
     <message>
         <source>Measurement: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Maß: %1</translation>
     </message>
     <message>
         <source>Invalid segment!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültiges Segment!</translation>
     </message>
     <message>
         <source>Dimension X</source>
@@ -7248,7 +7248,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Fertig</translation>
     </message>
     <message>
         <source>Custom name</source>
@@ -7379,7 +7379,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
 </context>
 <context>
@@ -7422,7 +7422,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
 </context>
 <context>
@@ -7569,11 +7569,11 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudonym:</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
 </context>
 <context>
@@ -7728,11 +7728,11 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudonym:</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
 </context>
 <context>
@@ -7920,7 +7920,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
 </context>
 <context>
@@ -8031,7 +8031,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
 </context>
 <context>
@@ -10701,11 +10701,11 @@ Diese Option wird nach einem Neustart aktiv.</translation>
     </message>
     <message>
         <source>Background image</source>
-        <translation type="unfinished"></translation>
+        <translation>Hintergrundbild</translation>
     </message>
     <message>
         <source>Opacity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Deckkraft:</translation>
     </message>
     <message>
         <source>Opacity value by default</source>
@@ -11252,7 +11252,7 @@ Diese Option wird nach einem Neustart aktiv.</translation>
     </message>
     <message>
         <source>Interlining</source>
-        <translation>Zwischenfutter</translation>
+        <translation>Einlagestoff</translation>
     </message>
     <message>
         <source>Cut</source>
@@ -11750,7 +11750,7 @@ Diese Option wird nach einem Neustart aktiv.</translation>
     <name>QtColorPicker</name>
     <message>
         <source>Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Schwarz</translation>
     </message>
     <message>
         <source>White</source>
@@ -11758,63 +11758,63 @@ Diese Option wird nach einem Neustart aktiv.</translation>
     </message>
     <message>
         <source>Red</source>
-        <translation type="unfinished"></translation>
+        <translation>Rot</translation>
     </message>
     <message>
         <source>Dark red</source>
-        <translation type="unfinished"></translation>
+        <translation>Dunkles Rot</translation>
     </message>
     <message>
         <source>Green</source>
-        <translation type="unfinished"></translation>
+        <translation>Grün</translation>
     </message>
     <message>
         <source>Dark green</source>
-        <translation type="unfinished"></translation>
+        <translation>Dunkelgrün</translation>
     </message>
     <message>
         <source>Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Blau</translation>
     </message>
     <message>
         <source>Dark blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Dunkelblau</translation>
     </message>
     <message>
         <source>Cyan</source>
-        <translation type="unfinished"></translation>
+        <translation>Blaugrün</translation>
     </message>
     <message>
         <source>Dark cyan</source>
-        <translation type="unfinished"></translation>
+        <translation>Dunkelblaugrün</translation>
     </message>
     <message>
         <source>Magenta</source>
-        <translation type="unfinished"></translation>
+        <translation>Purpurrot</translation>
     </message>
     <message>
         <source>Dark magenta</source>
-        <translation type="unfinished"></translation>
+        <translation>Dunkelpurpurrot</translation>
     </message>
     <message>
         <source>Yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>Gelb</translation>
     </message>
     <message>
         <source>Dark yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>Dunkelgelb</translation>
     </message>
     <message>
         <source>Gray</source>
-        <translation type="unfinished"></translation>
+        <translation>Grau</translation>
     </message>
     <message>
         <source>Dark gray</source>
-        <translation type="unfinished"></translation>
+        <translation>Dunkelgrau</translation>
     </message>
     <message>
         <source>Light gray</source>
-        <translation type="unfinished"></translation>
+        <translation>Hellgrau</translation>
     </message>
     <message>
         <source>Custom</source>
@@ -11839,7 +11839,7 @@ Diese Option wird nach einem Neustart aktiv.</translation>
     <name>RenameGroup</name>
     <message>
         <source>rename group</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruppe umbenennen</translation>
     </message>
 </context>
 <context>
@@ -12577,22 +12577,6 @@ Do you want to save your changes?</source>
         <translation>Aus CSV importieren</translation>
     </message>
     <message>
-        <source>Measurement name in is empty.</source>
-        <translation type="vanished">Name des Maßes in ist leer.</translation>
-    </message>
-    <message>
-        <source>Merasurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
-        <translation type="vanished">Maß &apos;%1&apos; entspricht keinem RegEx pattern.</translation>
-    </message>
-    <message>
-        <source>Merasurement &apos;%1&apos; already used in file.</source>
-        <translation type="vanished">Maß &apos;%1&apos; wird bereits in Datei verwendet.</translation>
-    </message>
-    <message>
-        <source>Measurement &apos;%1&apos; is not one of known measurements.</source>
-        <translation type="vanished">Maß &apos;%1&apos; ist kein bekanntes Maß.</translation>
-    </message>
-    <message>
         <source>Individual measurements require at least 2 columns.</source>
         <translation>Individuelle Maße erfordern mindestens 2 Spalten.</translation>
     </message>
@@ -12607,10 +12591,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Imported file must not contain the same name twice.</source>
         <translation>Importierte Datei darf die selbe Bezeichnung nicht zweimal enthalten.</translation>
-    </message>
-    <message>
-        <source>Error in row %1. Measurement name is empty.</source>
-        <translation type="vanished">Fehler in Zeile %1. Maß Bezeichnung ist leer.</translation>
     </message>
     <message>
         <source>Cannot save settings. Access denied.</source>
@@ -12708,7 +12688,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Dimension:</source>
-        <translation type="unfinished"></translation>
+        <translation>Maßbezeichnung:</translation>
     </message>
     <message>
         <source>Select one of the dimensions to later use the measurement value in piece label</source>
@@ -12740,7 +12720,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Dimension labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Maßbezeichnungen</translation>
     </message>
     <message>
         <source>The table doesn&apos;t provide dimensions</source>
@@ -12812,7 +12792,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search history &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Suchhistorie &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Alt+Down</source>
@@ -12820,7 +12800,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>0 results</source>
-        <translation type="unfinished"></translation>
+        <translation>0 Ergebnisse</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match Case &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -12864,7 +12844,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Dimension custom names</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzerdefinierter Name der Maßbezeichnungen</translation>
     </message>
     <message>
         <source>Measurement name is empty.</source>
@@ -13356,7 +13336,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Built in</source>
-        <translation type="unfinished"></translation>
+        <translation>Eingefügt</translation>
     </message>
     <message>
         <source>Hide the main path if the seam allowance is enabled</source>
@@ -13754,12 +13734,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Waist</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Taille</translation>
     </message>
     <message>
         <source>Hip</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Hüfte</translation>
     </message>
     <message>
         <source>Chest full circumference</source>
@@ -13841,10 +13821,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Error replacing a symlink by real file: %1.</source>
         <translation type="vanished">Fehler beim Ersetzen eines symbolischen Links durch eine echte Datei: %1.</translation>
-    </message>
-    <message>
-        <source>Error openning a temp file: %1.</source>
-        <translation type="vanished">Fehler beim Öffnen der temporären Datei: %1.</translation>
     </message>
     <message>
         <source>Invalid version. Minimum supported format version is %1</source>
@@ -13952,11 +13928,11 @@ Do you want to save your changes?</source>
     <name>VAbstractMainWindow</name>
     <message>
         <source>Confirm format rewriting</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestätigen Sie das Überschreiben des Formats</translation>
     </message>
     <message>
         <source>This file is using previous format version v%1. The current is v%2. Saving the file with this app version will update the format version for this file. This may prevent you from be able to open the file with older app versions. Do you really want to continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Datei verwendet die vorherige Formatversion v%1. Die aktuelle Version ist v%2. Wenn Sie die Datei mit dieser App-Version speichern, wird die Formatversion für diese Datei aktualisiert. Dies kann verhindern, dass Sie die Datei mit älteren App-Versionen öffnen können. Möchten Sie wirklich fortfahren?</translation>
     </message>
     <message>
         <source>Comma-Separated Values</source>
@@ -13969,10 +13945,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Export to CSV</source>
         <translation>Als CSV exportieren</translation>
-    </message>
-    <message>
-        <source>Do you want to change the premissions?</source>
-        <translation type="vanished">Wollen Sie die Berechtigung ändern ?</translation>
     </message>
     <message>
         <source>Cannot set permissions for %1 to writable.</source>
@@ -14016,7 +13988,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Do you want to change the permissions?</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchtest du die Berechtigungen ändern?</translation>
     </message>
 </context>
 <context>
@@ -14670,10 +14642,6 @@ Do you want to save your changes?</source>
         <translation>Nummer entsprechend der Layoutseitenvorlage (Standard = 0, Exportmodus):</translation>
     </message>
     <message>
-        <source>Ignore printer margins (export mode). Use if need full paper space. In case of later printing you must account for the margins himself.</source>
-        <translation type="vanished">Druckerränder ignorieren (Exportmodus). Verwenden sie diese Einstellung nur, wenn sie den vollen Papierplatz benötigen. Bei späterem Druck müssen Sie die Ränder selbst hinzufügen.</translation>
-    </message>
-    <message>
         <source>Number corresponding to tiled pdf page template (default = 0, export mode with tiled pdf format):</source>
         <translation>Nummer entsprechend der gekachelten PDF-Seitenvorlage (Standard = 0, Exportmodus mit gekacheltem PDF-Format):</translation>
     </message>
@@ -15317,11 +15285,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Hip</source>
-        <translation type="unfinished"></translation>
+        <translation>Hüfte</translation>
     </message>
     <message>
         <source>Waist</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille</translation>
     </message>
 </context>
 <context>
@@ -15849,7 +15817,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Skalieren</translation>
     </message>
     <message>
         <source>&amp;Open</source>
@@ -16034,11 +16002,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Horizontal:</source>
-        <translation type="unfinished"></translation>
+        <translation>Horizontal:</translation>
     </message>
     <message>
         <source>Vertical:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertikal:</translation>
     </message>
     <message>
         <source>Relative translation</source>
@@ -17769,15 +17737,15 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudonym:</translation>
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudonym1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pseudonym2:</translation>
     </message>
     <message>
         <source>Point of intersection circle and segment</source>
@@ -17785,7 +17753,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Background image</source>
-        <translation type="unfinished"></translation>
+        <translation>Hintergrundbild</translation>
     </message>
     <message>
         <source>Hold:</source>
@@ -17797,7 +17765,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Opacity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Deckkraft:</translation>
     </message>
 </context>
 <context>
@@ -19504,11 +19472,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Horizontal:</source>
-        <translation type="unfinished"></translation>
+        <translation>Horizontal:</translation>
     </message>
     <message>
         <source>Vertical:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertikal:</translation>
     </message>
     <message>
         <source>Relative translation</source>
@@ -19516,7 +19484,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Skalieren</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -19548,7 +19516,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Background image</source>
-        <translation type="unfinished"></translation>
+        <translation>Hintergrundbild</translation>
     </message>
     <message>
         <source>Hold</source>
@@ -19682,11 +19650,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stichworte:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jedes Stichwort mit Komma trennen.</translation>
     </message>
     <message>
         <source>Filter by tags</source>
@@ -19809,7 +19777,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Opacity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Deckkraft:</translation>
     </message>
     <message>
         <source>Text</source>
@@ -19821,7 +19789,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>watermark text</source>
-        <translation type="unfinished"></translation>
+        <translation>Wasserzeichen Text</translation>
     </message>
     <message>
         <source>Rotation:</source>
@@ -19829,20 +19797,20 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Font:</source>
-        <translation type="unfinished"></translation>
+        <translation>Schrift:</translation>
     </message>
     <message>
         <source>The quick brown fox jumps over the lazy dog</source>
         <extracomment>Use native text to test a font options</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Der schnelle braune Fuchs springt über den faulen Hund</translation>
     </message>
     <message>
         <source>Edit font</source>
-        <translation type="unfinished"></translation>
+        <translation>Schriftart bearbeiten</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Bild</translation>
     </message>
     <message>
         <source>Path:</source>
@@ -19850,7 +19818,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>path to image</source>
-        <translation type="unfinished"></translation>
+        <translation>Pfad zum Bild</translation>
     </message>
     <message>
         <source>Browse…</source>
@@ -19858,7 +19826,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Gray color</source>
-        <translation type="unfinished"></translation>
+        <translation>Grauer Farbe</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -19894,7 +19862,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Watermark image</source>
-        <translation type="unfinished"></translation>
+        <translation>Wasserzeichen Bild</translation>
     </message>
     <message>
         <source>File error.</source>
@@ -19910,7 +19878,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>watermark</source>
-        <translation type="unfinished"></translation>
+        <translation>Wasserzeichen</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window.</source>
@@ -19951,7 +19919,8 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>The watermark has been modified.
 Do you want to save your changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Schnittmuster wurde geändert.
+Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
@@ -19963,15 +19932,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>untitled.vwm</source>
-        <translation type="unfinished"></translation>
+        <translation>unbenannt.vwm</translation>
     </message>
     <message>
         <source>Confirm format rewriting</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestätigen Sie das Überschreiben des Formats</translation>
     </message>
     <message>
         <source>This file is using previous format version v%1. The current is v%2. Saving the file with this app version will update the format version for this file. This may prevent you from be able to open the file with older app versions. Do you really want to continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Datei verwendet die vorherige Formatversion v%1. Die aktuelle Version ist v%2. Wenn Sie die Datei mit dieser App-Version speichern, wird die Formatversion für diese Datei aktualisiert. Dies kann verhindern, dass Sie die Datei mit älteren App-Versionen öffnen können. Möchten Sie wirklich fortfahren?</translation>
     </message>
     <message>
         <source>File saved</source>
@@ -19994,10 +19963,6 @@ Do you want to save your changes?</source>
         <translation>Ein unbekannter Fehler ist aufgetreten, zum Beispiel hat eine volle Festplattenpartition verhindert, dass die Sperrdatei geschrieben werden konnte. Ignorieren Sie diese Nachricht, wenn Sie fortfahren wollen (nicht empfohlen, kann zu Datenverlust führen).</translation>
     </message>
     <message>
-        <source>Do you want to change the premissions?</source>
-        <translation type="vanished">Wollen Sie die Berechtigung ändern ?</translation>
-    </message>
-    <message>
         <source>Color</source>
         <translation>Farbe</translation>
     </message>
@@ -20008,86 +19973,86 @@ Do you want to save your changes?</source>
     <message>
         <source>Black</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Schwarz</translation>
     </message>
     <message>
         <source>Red</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Rot</translation>
     </message>
     <message>
         <source>Dark red</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dunkelrot</translation>
     </message>
     <message>
         <source>Green</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Grün</translation>
     </message>
     <message>
         <source>Dark green</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dunkelgrün</translation>
     </message>
     <message>
         <source>Blue</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Blau</translation>
     </message>
     <message>
         <source>Dark blue</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dunkelblau</translation>
     </message>
     <message>
         <source>Cyan</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Blaugrün</translation>
     </message>
     <message>
         <source>Dark cyan</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dunkelblaugrün</translation>
     </message>
     <message>
         <source>Magenta</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Purpurrot</translation>
     </message>
     <message>
         <source>Dark magenta</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dunkelpurpurrot</translation>
     </message>
     <message>
         <source>Yellow</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gelb</translation>
     </message>
     <message>
         <source>Dark yellow</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dunkelgelb</translation>
     </message>
     <message>
         <source>Gray</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Grau</translation>
     </message>
     <message>
         <source>Dark gray</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dunkelgrau</translation>
     </message>
     <message>
         <source>Light gray</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Hellgrau</translation>
     </message>
     <message>
         <source>Do you want to change the permissions?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wollen Sie die Berechtigung ändern ?</translation>
     </message>
 </context>
 <context>

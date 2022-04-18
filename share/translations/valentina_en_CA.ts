@@ -13821,10 +13821,6 @@ Do you want to save your changes?</translation>
         <translation type="vanished">Error replacing a symlink by real file: %1.</translation>
     </message>
     <message>
-        <source>Error openning a temp file: %1.</source>
-        <translation type="vanished">Error openning a temp file: %1.</translation>
-    </message>
-    <message>
         <source>Invalid version. Minimum supported format version is %1</source>
         <translation type="unfinished"></translation>
     </message>

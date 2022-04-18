@@ -2849,10 +2849,6 @@
         <translation>Відзеркалити по вісі</translation>
     </message>
     <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="vanished">Увімкніть створення групи видимості з оригінальних об’єктів</translation>
-    </message>
-    <message>
         <source>Visibility Group</source>
         <translation>Група видимості</translation>
     </message>
@@ -2970,10 +2966,6 @@
     <message>
         <source>Flipping by line</source>
         <translation>Відзеркалити по лінії</translation>
-    </message>
-    <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="vanished">Увімкніть створення групи видимості з оригінальних об’єктів</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -4622,10 +4614,6 @@ Apply settings anyway?</source>
     <message>
         <source>Center point</source>
         <translation>Точка центру</translation>
-    </message>
-    <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="vanished">Увімкніть створення групи видимості з оригінальних об’єктів</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -6494,10 +6482,6 @@ Apply settings anyway?</source>
     <message>
         <source>This point cannot be origin point. Please, select another origin point</source>
         <translation>Ця точка може бути вихідною точкою. Будь ласка, виберіть іншу відправну точку операції</translation>
-    </message>
-    <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="vanished">Увімкніть створення групи видимості з оригінальних об’єктів</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -12597,22 +12581,6 @@ Do you want to save your changes?</source>
         <translation>Імпорт із CSV</translation>
     </message>
     <message>
-        <source>Measurement name in is empty.</source>
-        <translation type="vanished">Назва вимірювання порожня.</translation>
-    </message>
-    <message>
-        <source>Merasurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
-        <translation type="vanished">Вимірювання &quot;%1&quot; не відповідає шаблону регулярного виразу.</translation>
-    </message>
-    <message>
-        <source>Merasurement &apos;%1&apos; already used in file.</source>
-        <translation type="vanished">Вимірювання &quot;%1&quot; вже використовується у файлі.</translation>
-    </message>
-    <message>
-        <source>Measurement &apos;%1&apos; is not one of known measurements.</source>
-        <translation type="vanished">Вимірювання &quot;%1&quot; не є одним із відомих вимірювань.</translation>
-    </message>
-    <message>
         <source>Individual measurements require at least 2 columns.</source>
         <translation>Для окремих вимірювань потрібно щонайменше 2 колонки.</translation>
     </message>
@@ -12627,10 +12595,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Imported file must not contain the same name twice.</source>
         <translation>Імпортований файл не повинен містити однакову назву двічі.</translation>
-    </message>
-    <message>
-        <source>Error in row %1. Measurement name is empty.</source>
-        <translation type="vanished">Помилка в рядку %1. Назва вимірювання порожня.</translation>
     </message>
     <message>
         <source>Cannot save settings. Access denied.</source>
@@ -13863,10 +13827,6 @@ Do you want to save your changes?</source>
         <translation type="vanished">Помилка заміни символьного посилання на реальний файл: %1.</translation>
     </message>
     <message>
-        <source>Error openning a temp file: %1.</source>
-        <translation type="vanished">Помилка відкриття тимчасового файлу: %1.</translation>
-    </message>
-    <message>
         <source>Invalid version. Minimum supported format version is %1</source>
         <translation>Недійсна версія. Мінімальна підтримувана версія формату %1</translation>
     </message>
@@ -13989,10 +13949,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Export to CSV</source>
         <translation>Експортувати до CSV</translation>
-    </message>
-    <message>
-        <source>Do you want to change the premissions?</source>
-        <translation type="vanished">Ви хочете змінити дозволи?</translation>
     </message>
     <message>
         <source>Cannot set permissions for %1 to writable.</source>
@@ -14301,10 +14257,6 @@ Do you want to save your changes?</source>
         <translation>Тип вмісту порожній.</translation>
     </message>
     <message>
-        <source>Content type mistmatch.</source>
-        <translation type="vanished">Невідповідність типу вмісту.</translation>
-    </message>
-    <message>
         <source>Not image.</source>
         <translation>Не зображення.</translation>
     </message>
@@ -14315,18 +14267,6 @@ Do you want to save your changes?</source>
 </context>
 <context>
     <name>VBank</name>
-    <message>
-        <source>Preparing data for layout error: Detail &apos;%1&apos; square &lt;= 0</source>
-        <translation type="vanished">Помилка підготовки даних для розкладки: Деталь &quot;%1&quot; площа &lt;= 0</translation>
-    </message>
-    <message>
-        <source>Preparing data for layout error: Layout paper sheet &lt;= 0</source>
-        <translation type="vanished">Помилка підготовки даних для розкладки: Аркуша паперу розкладки &lt;= 0</translation>
-    </message>
-    <message>
-        <source>Preparing data for layout error: List of details is empty</source>
-        <translation type="vanished">Помилка підготовки даних для розкладки: Список деталей порожній</translation>
-    </message>
     <message>
         <source>Error of preparing data for layout: Detail &apos;%1&apos; square &lt;= 0</source>
         <translation type="unfinished"></translation>
@@ -14706,10 +14646,6 @@ Do you want to save your changes?</source>
         <translation>Номер, що відповідає шаблону сторінки розкладки (за замовчуванням = 0, режим експорту):</translation>
     </message>
     <message>
-        <source>Ignore printer margins (export mode). Use if need full paper space. In case of later printing you must account for the margins himself.</source>
-        <translation type="vanished">Ігнорувати поля принтера (режим експорту). Використовуйте, якщо потрібен повний простір канви. У разі подальшого друку ви повинні самі врахувати поля.</translation>
-    </message>
-    <message>
         <source>Number corresponding to tiled pdf page template (default = 0, export mode with tiled pdf format):</source>
         <translation>Номер, що відповідає шаблону сторінки pdf плиткою (за замовчуванням = 0, режим експорту pdf плиткою):</translation>
     </message>
@@ -14904,10 +14840,6 @@ Do you want to save your changes?</source>
     <message>
         <source>The filename of layout file</source>
         <translation>Ім&apos;я файлу розкладки</translation>
-    </message>
-    <message>
-        <source>Load pattern pieces form the raw layout data file.</source>
-        <translation type="vanished">Завантажити деталі з файлу необроблених даних розкладки.</translation>
     </message>
     <message>
         <source>The raw layout data file</source>
@@ -15290,10 +15222,6 @@ Do you want to save your changes?</source>
         <translation>Створення файлу &apos;%1&apos; не вдалося! %2</translation>
     </message>
     <message>
-        <source>Can&apos;t create an flat dxf file.</source>
-        <translation type="vanished">Не вдається створити плоский файл dxf.</translation>
-    </message>
-    <message>
         <source>Can&apos;t create an AAMA dxf file.</source>
         <translation>Не вдається створити файл AAMA dxf.</translation>
     </message>
@@ -15536,14 +15464,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>Не вдається почати слухати вхідні з&apos;єднання за іменем &apos;%1&apos;</translation>
-    </message>
-    <message>
-        <source>Export mode doesn&apos;t support openning several files.</source>
-        <translation type="vanished">Режим експорту не підтримує відкриття кількох файлів.</translation>
-    </message>
-    <message>
-        <source>Import raw layout data does not support openning several layout files.</source>
-        <translation type="vanished">Імпорт необроблених даних розкладки не підтримує відкриття кількох файлів розкладки.</translation>
     </message>
     <message>
         <source>Please, provide one input file.</source>
@@ -16637,10 +16557,6 @@ Do you want to save your changes?</source>
         <translation>Помилка створення чи оновлення точки шпильки</translation>
     </message>
     <message>
-        <source>Error creating or updating place lavel</source>
-        <translation type="vanished">Помилка створення або оновлення мітки місця</translation>
-    </message>
-    <message>
         <source>Piece path doesn&apos;t contain nodes</source>
         <translation>Контур деталі не містить вузлів</translation>
     </message>
@@ -16681,10 +16597,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Content type is empty.</source>
         <translation>Тип вмісту порожній.</translation>
-    </message>
-    <message>
-        <source>Content type mistmatch.</source>
-        <translation type="vanished">Невідповідність типу вмісту.</translation>
     </message>
     <message>
         <source>Not image.</source>
@@ -20071,10 +19983,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
         <translation>Сталася невідома помилка, наприклад переповнення розділу попередило запис lock файлу. Ігноруйте якщо бажаєте продовжити (не рекомендується, може призвести до втрати даних).</translation>
-    </message>
-    <message>
-        <source>Do you want to change the premissions?</source>
-        <translation type="vanished">Ви хочете змінити дозволи?</translation>
     </message>
     <message>
         <source>Color</source>

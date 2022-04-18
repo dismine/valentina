@@ -2841,10 +2841,6 @@
         <translation>Ruotare sull&apos;asse</translation>
     </message>
     <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="vanished">Seleziona per creare un Gruppo di Visibilità degli oggetti iniziali</translation>
-    </message>
-    <message>
         <source>Visibility Group</source>
         <translation>Gruppo di Visibilità</translation>
     </message>
@@ -2962,10 +2958,6 @@
     <message>
         <source>Flipping by line</source>
         <translation>Ruota sulla linea</translation>
-    </message>
-    <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="vanished">Seleziona per creare un Gruppo di Visibilità degli oggetti iniziali</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -4614,10 +4606,6 @@ Applicare la configurazione comunque?</translation>
     <message>
         <source>Center point</source>
         <translation>Punto centrale</translation>
-    </message>
-    <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="vanished">Seleziona per creare un Gruppo di Visibilità degli oggetti iniziali</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -6484,10 +6472,6 @@ Applicare la configurazione comunque?</translation>
     <message>
         <source>This point cannot be origin point. Please, select another origin point</source>
         <translation>Questo non può essere il punto di origine. Selezionane un altro, grazie</translation>
-    </message>
-    <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="vanished">Seleziona per creare un Gruppo di Visibilità degli oggetti iniziali</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -12583,10 +12567,6 @@ Vuoi salvare le tue modifiche?</translation>
         <translation>Importa da CSV</translation>
     </message>
     <message>
-        <source>Measurement name in is empty.</source>
-        <translation type="vanished">Nome della misura mancante.</translation>
-    </message>
-    <message>
         <source>Individual measurements require at least 2 columns.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12601,10 +12581,6 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>Imported file must not contain the same name twice.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error in row %1. Measurement name is empty.</source>
-        <translation type="vanished">Errore nella riga %1. Nome misura mancante.</translation>
     </message>
     <message>
         <source>Cannot save settings. Access denied.</source>

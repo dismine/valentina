@@ -2849,10 +2849,6 @@
         <translation>Kantelen via de aslijn</translation>
     </message>
     <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="vanished">Zet aan om een zichtbaarheidsgroep aan te maken vanuit de originele objecten</translation>
-    </message>
-    <message>
         <source>Visibility Group</source>
         <translation>Zichtbaarheid groep</translation>
     </message>
@@ -2970,10 +2966,6 @@
     <message>
         <source>Flipping by line</source>
         <translation>Kantelen via de lijn</translation>
-    </message>
-    <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="vanished">Zet aan om een zichtbaarheidsgroep aan te maken vanuit de originele objecten</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -4622,10 +4614,6 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Center point</source>
         <translation>Middelpunt</translation>
-    </message>
-    <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="vanished">Zet aan om een zichtbaarheidsgroep aan te maken vanuit de originele objecten</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -6492,10 +6480,6 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>This point cannot be origin point. Please, select another origin point</source>
         <translation>Dit punt kan geen startpunt zijn.  Gelieve een ander startpunt te kiezen</translation>
-    </message>
-    <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="vanished">Zet aan om een zichtbaarheidsgroep aan te maken vanuit de originele objecten</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -12594,22 +12578,6 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>Importeer van CSV</translation>
     </message>
     <message>
-        <source>Measurement name in is empty.</source>
-        <translation type="vanished">De maten naam is leeg.</translation>
-    </message>
-    <message>
-        <source>Merasurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
-        <translation type="vanished">Maat &apos;%1&apos; voldoet niet aan regex patroon.</translation>
-    </message>
-    <message>
-        <source>Merasurement &apos;%1&apos; already used in file.</source>
-        <translation type="vanished">Maat &apos;%1&apos; reeds in gebruin in het bestand.</translation>
-    </message>
-    <message>
-        <source>Measurement &apos;%1&apos; is not one of known measurements.</source>
-        <translation type="vanished">Maat &apos;%1&apos; is geen van de gekende maten.</translation>
-    </message>
-    <message>
         <source>Individual measurements require at least 2 columns.</source>
         <translation>Individuele maten vereisen ten minste 2 kolommen.</translation>
     </message>
@@ -12624,10 +12592,6 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Imported file must not contain the same name twice.</source>
         <translation>Geïmporteerd bestand mag geen tweemaal dezelfde naam bevatten.</translation>
-    </message>
-    <message>
-        <source>Error in row %1. Measurement name is empty.</source>
-        <translation type="vanished">Fout in rij %1. maten naam is leeg.</translation>
     </message>
     <message>
         <source>Cannot save settings. Access denied.</source>
@@ -13860,10 +13824,6 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="vanished">Fout bij het herplaatsen van een symlink van een bestaand bestand: %1.</translation>
     </message>
     <message>
-        <source>Error openning a temp file: %1.</source>
-        <translation type="vanished">Fout bij het openen van een tijdelijk bestand: %1.</translation>
-    </message>
-    <message>
         <source>Invalid version. Minimum supported format version is %1</source>
         <translation>Ongeldige versie. Minimaal ondersteund formaat is %1</translation>
     </message>
@@ -13987,10 +13947,6 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Export to CSV</source>
         <translation>Exporteer naar CSV</translation>
-    </message>
-    <message>
-        <source>Do you want to change the premissions?</source>
-        <translation type="vanished">Wens je de rechten te veranderen?</translation>
     </message>
     <message>
         <source>Cannot set permissions for %1 to writable.</source>
@@ -14309,18 +14265,6 @@ Wil je deze veranderingen opslaan?</translation>
 </context>
 <context>
     <name>VBank</name>
-    <message>
-        <source>Preparing data for layout error: Detail &apos;%1&apos; square &lt;= 0</source>
-        <translation type="vanished">Fout bij het voorbereiden van gegevens voor lay-out: Detail &apos;%1&apos; vierkant &lt;= 0</translation>
-    </message>
-    <message>
-        <source>Preparing data for layout error: Layout paper sheet &lt;= 0</source>
-        <translation type="vanished">Fout bij het voorbereiden van gegevens voor lay-out: Lay-out blad papier &lt;=0</translation>
-    </message>
-    <message>
-        <source>Preparing data for layout error: List of details is empty</source>
-        <translation type="vanished">Fout bij het voorbereiden van gegevens voor lay-out: Detail lijst is leeg</translation>
-    </message>
     <message>
         <source>Error of preparing data for layout: Detail &apos;%1&apos; square &lt;= 0</source>
         <translation type="unfinished"></translation>
@@ -14698,10 +14642,6 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Number corresponding to layout page template (default = 0, export mode):</source>
         <translation>Waarde die overeenkomt met het sjabloon van de opmaak pagina (standaard=0, export modus):</translation>
-    </message>
-    <message>
-        <source>Ignore printer margins (export mode). Use if need full paper space. In case of later printing you must account for the margins himself.</source>
-        <translation type="vanished">Negeer de printer marges (export modus). Gebruik indien nodig de volledige pagina. In het geval van uitprinten moet je zelf met de marges rekening houden.</translation>
     </message>
     <message>
         <source>Number corresponding to tiled pdf page template (default = 0, export mode with tiled pdf format):</source>
@@ -16613,10 +16553,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Error creating or updating pin point</source>
         <translation>Fout bij het maken of bijwerken van een pin punt</translation>
-    </message>
-    <message>
-        <source>Error creating or updating place lavel</source>
-        <translation type="vanished">Fout bij het aanmaken of bijwerken van de plaats niveau</translation>
     </message>
     <message>
         <source>Piece path doesn&apos;t contain nodes</source>
@@ -20044,10 +19980,6 @@ Deze wijziging opslaan?</translation>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
         <translation>Onbekende fout gebeurd, bijvoorbeeld een volledige partitie voorkomt het schrijven uit het vergrendelingsbestand. Negeren als u wilt doorgaan (niet aanbevolen, kan leiden tot gegevensbeschadiging).</translation>
-    </message>
-    <message>
-        <source>Do you want to change the premissions?</source>
-        <translation type="vanished">Wens je de rechten te veranderen?</translation>
     </message>
     <message>
         <source>Color</source>

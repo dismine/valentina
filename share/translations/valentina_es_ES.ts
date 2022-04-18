@@ -2849,10 +2849,6 @@
         <translation>Volteando por ejes</translation>
     </message>
     <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="vanished">Habilitar para crear un grupo de visibilidad a partir de objetos originales</translation>
-    </message>
-    <message>
         <source>Visibility Group</source>
         <translation>Grupo de Visibilidad</translation>
     </message>
@@ -2970,10 +2966,6 @@
     <message>
         <source>Flipping by line</source>
         <translation>Volteando por linea</translation>
-    </message>
-    <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="vanished">Habilitar para crear un grupo de visibilidad a partir de objetos originales</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -4621,10 +4613,6 @@ Aplicar características de todos modos?</translation>
     <message>
         <source>Center point</source>
         <translation>Punto central</translation>
-    </message>
-    <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="vanished">Habilitar para crear un grupo de visibilidad a partir de objetos originales</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -6491,10 +6479,6 @@ Aplicar características de todos modos?</translation>
     <message>
         <source>This point cannot be origin point. Please, select another origin point</source>
         <translation>Este punto no puede ser punto de origen. Por favor, seleccione otro punto de origen</translation>
-    </message>
-    <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="vanished">Habilitar para crear un grupo de visibilidad a partir de objetos originales</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -12595,22 +12579,6 @@ Quieres guardar los cambios?</translation>
         <translation>Importar desde CSV</translation>
     </message>
     <message>
-        <source>Measurement name in is empty.</source>
-        <translation type="vanished">El nombre de la medida esta vacío.</translation>
-    </message>
-    <message>
-        <source>Merasurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
-        <translation type="vanished">La medida &apos;%1&apos; no concuerda con expresiones regulares del patrón.</translation>
-    </message>
-    <message>
-        <source>Merasurement &apos;%1&apos; already used in file.</source>
-        <translation type="vanished">La medida &apos;%1&apos; ya fue usada en el archivo.</translation>
-    </message>
-    <message>
-        <source>Measurement &apos;%1&apos; is not one of known measurements.</source>
-        <translation type="vanished">La medida &apos;%1&apos; no es una de las medidas conocidas.</translation>
-    </message>
-    <message>
         <source>Individual measurements require at least 2 columns.</source>
         <translation>Las medidas individuales requiere al menos 2 columnas.</translation>
     </message>
@@ -12625,10 +12593,6 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>Imported file must not contain the same name twice.</source>
         <translation>Los archivos importados no deben contener el mismo nombre dos veces.</translation>
-    </message>
-    <message>
-        <source>Error in row %1. Measurement name is empty.</source>
-        <translation type="vanished">Error en línea %1. El nombre de la medida esta vacío.</translation>
     </message>
     <message>
         <source>Cannot save settings. Access denied.</source>
@@ -13861,10 +13825,6 @@ Quieres guardar los cambios?</translation>
         <translation type="vanished">Error al reemplazar un acceso directo por archivo real: %1.</translation>
     </message>
     <message>
-        <source>Error openning a temp file: %1.</source>
-        <translation type="vanished">Error abriendo archivo temporal: %1.</translation>
-    </message>
-    <message>
         <source>Invalid version. Minimum supported format version is %1</source>
         <translation>Versión invalida. La versión de formato mínimo admitido es %1</translation>
     </message>
@@ -13988,10 +13948,6 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>Export to CSV</source>
         <translation>Exportar a CSV</translation>
-    </message>
-    <message>
-        <source>Do you want to change the premissions?</source>
-        <translation type="vanished">¿Quieres cambiar los permisos?</translation>
     </message>
     <message>
         <source>Cannot set permissions for %1 to writable.</source>
@@ -14310,18 +14266,6 @@ Quieres guardar los cambios?</translation>
 </context>
 <context>
     <name>VBank</name>
-    <message>
-        <source>Preparing data for layout error: Detail &apos;%1&apos; square &lt;= 0</source>
-        <translation type="vanished">Preparación de datos para error de diseño: Detalle &apos;%1&apos; cuadro &lt;= 0</translation>
-    </message>
-    <message>
-        <source>Preparing data for layout error: Layout paper sheet &lt;= 0</source>
-        <translation type="vanished">Preparación de datos para el error de diseño: Hoja de papel del diseño &lt;= 0</translation>
-    </message>
-    <message>
-        <source>Preparing data for layout error: List of details is empty</source>
-        <translation type="vanished">Preparación de datos para el error de diseño: la lista de detalles está vacía</translation>
-    </message>
     <message>
         <source>Error of preparing data for layout: Detail &apos;%1&apos; square &lt;= 0</source>
         <translation type="unfinished"></translation>
@@ -14701,10 +14645,6 @@ Quieres guardar los cambios?</translation>
         <translation>Numero correspondiente a la plantilla de la pagina de diseño (predeterminado = 0, modo exportación):</translation>
     </message>
     <message>
-        <source>Ignore printer margins (export mode). Use if need full paper space. In case of later printing you must account for the margins himself.</source>
-        <translation type="vanished">Ignore los márgenes de la impresora (modo exportación). Use si necesita espacio en papel completo. En caso de impresión posterior deberá considerar por los márgenes el mismo.</translation>
-    </message>
-    <message>
         <source>Number corresponding to tiled pdf page template (default = 0, export mode with tiled pdf format):</source>
         <translation>Numero correspondiente a la plantilla de la pagina de mosaico pdf ( predeterminado = 0, modo exportacion con formato mosaico pdf):</translation>
     </message>
@@ -14899,10 +14839,6 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>The filename of layout file</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Load pattern pieces form the raw layout data file.</source>
-        <translation type="vanished">Cargue piezas de patrón desde el archivo de datos de diseño sin procesar.</translation>
     </message>
     <message>
         <source>The raw layout data file</source>
@@ -15528,14 +15464,6 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>No se puede comenzar a escuchar por conexiones entrantes en el nombre &apos;%1&apos;</translation>
-    </message>
-    <message>
-        <source>Export mode doesn&apos;t support openning several files.</source>
-        <translation type="vanished">El modo de exportación no admite la apertura de varios archivos.</translation>
-    </message>
-    <message>
-        <source>Import raw layout data does not support openning several layout files.</source>
-        <translation type="vanished">Importar datos de diseño sin procesar no admite la apertura de varios archivos de diseño.</translation>
     </message>
     <message>
         <source>Please, provide one input file.</source>
@@ -16627,10 +16555,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Error creating or updating pin point</source>
         <translation>Error creando o actualizando punto anclaje</translation>
-    </message>
-    <message>
-        <source>Error creating or updating place lavel</source>
-        <translation type="vanished">Error creando o actualizando etiqueta de lugar</translation>
     </message>
     <message>
         <source>Piece path doesn&apos;t contain nodes</source>
@@ -20058,10 +19982,6 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
         <translation>Ocurrió un error desconocido, por ejemplo una partición llena evitando que se escriba el archivo de bloqueo. Ignorelo si desea continuar (no se recomienda, puede causar corrupción de datos).</translation>
-    </message>
-    <message>
-        <source>Do you want to change the premissions?</source>
-        <translation type="vanished">¿Quieres cambiar los permisos?</translation>
     </message>
     <message>
         <source>Color</source>

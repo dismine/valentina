@@ -2849,10 +2849,6 @@
         <translation>Symétrie axiale</translation>
     </message>
     <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="vanished">Activer pour créer un groupe de visibilité à partir des objets d&apos;origine</translation>
-    </message>
-    <message>
         <source>Visibility Group</source>
         <translation>Groupe de visibilité</translation>
     </message>
@@ -2970,10 +2966,6 @@
     <message>
         <source>Flipping by line</source>
         <translation>Symétrie par rapport à une ligne</translation>
-    </message>
-    <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="vanished">Activer pour créer un groupe de visibilité à partir des objets d&apos;origine</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -4619,10 +4611,6 @@ Appliquer quand même les réglages ?</translation>
     <message>
         <source>Center point</source>
         <translation>Point central</translation>
-    </message>
-    <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="vanished">Activer pour créer un groupe de visibilité à partir des objets d&apos;origine</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -6489,10 +6477,6 @@ Appliquer quand même les réglages ?</translation>
     <message>
         <source>This point cannot be origin point. Please, select another origin point</source>
         <translation>Ce point ne peut pas être le point de départ. Sélectionner un autre point de départ</translation>
-    </message>
-    <message>
-        <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="vanished">Activer pour créer un groupe de visibilité à partir des objets d&apos;origine</translation>
     </message>
     <message>
         <source>Visibility Group</source>
@@ -12582,18 +12566,6 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Importer depuis un CSV</translation>
     </message>
     <message>
-        <source>Measurement name in is empty.</source>
-        <translation type="vanished">Le nom de la mesure est vide.</translation>
-    </message>
-    <message>
-        <source>Merasurement &apos;%1&apos; already used in file.</source>
-        <translation type="vanished">Mesure &apos;%1&apos; déjà utilisée dans le fichier.</translation>
-    </message>
-    <message>
-        <source>Measurement &apos;%1&apos; is not one of known measurements.</source>
-        <translation type="vanished">La mesure &apos;%1&apos; n&apos;est pas une des mesures connues. </translation>
-    </message>
-    <message>
         <source>Individual measurements require at least 2 columns.</source>
         <translation>Les mesures individuelles nécessitent au moins 2 colonnes.</translation>
     </message>
@@ -13958,10 +13930,6 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Export to CSV</source>
         <translation>Exporter vers CVS</translation>
-    </message>
-    <message>
-        <source>Do you want to change the premissions?</source>
-        <translation type="vanished">Voulez-vous modifier les autorisations?</translation>
     </message>
     <message>
         <source>Cannot set permissions for %1 to writable.</source>
@@ -19973,10 +19941,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
         <translation>Une erreur inconnue s&apos;est produite, par exemple une partition pleine empêche d&apos;écrire le fichier verrouillé. Ignorer pour continuer (déconseillé car pouvant causer une corruption de données).</translation>
-    </message>
-    <message>
-        <source>Do you want to change the premissions?</source>
-        <translation type="vanished">Voulez-vous modifier les autorisations?</translation>
     </message>
     <message>
         <source>Color</source>
