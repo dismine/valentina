@@ -443,7 +443,6 @@ win32:*g++* {
         $$[QT_INSTALL_TRANSLATIONS]/qt_ar.qm \
         $$[QT_INSTALL_TRANSLATIONS]/qt_pl.qm \
         $$[QT_INSTALL_TRANSLATIONS]/qt_pt.qm \
-        $$[QT_INSTALL_TRANSLATIONS]/qt_ru.qm \
         $$[QT_INSTALL_TRANSLATIONS]/qt_sk.qm \
         $$[QT_INSTALL_TRANSLATIONS]/qt_sl.qm \
         $$[QT_INSTALL_TRANSLATIONS]/qt_sv.qm \
