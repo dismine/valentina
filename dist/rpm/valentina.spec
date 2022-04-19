@@ -246,25 +246,7 @@ fi
 %{_datadir}/applications/tape.desktop
 %{_datadir}/applications/puzzle.desktop
 
-%dir %{_datadir}/icons/
-%dir %{_datadir}/icons/hicolor/
-%dir %{_datadir}/icons/hicolor/48x48/
-%dir %{_datadir}/icons/hicolor/48x48/apps/
-%dir %{_datadir}/icons/hicolor/48x48/mimetypes/
-%dir %{_datadir}/icons/hicolor/64x64/
-%dir %{_datadir}/icons/hicolor/64x64/apps/
-%dir %{_datadir}/icons/hicolor/64x64/mimetypes/
-%dir %{_datadir}/icons/hicolor/128x128/
-%dir %{_datadir}/icons/hicolor/128x128/apps/
-%dir %{_datadir}/icons/hicolor/128x128/mimetypes/
-%dir %{_datadir}/icons/hicolor/256x256/
-%dir %{_datadir}/icons/hicolor/256x256/apps/
-%dir %{_datadir}/icons/hicolor/256x256/mimetypes/
-%dir %{_datadir}/icons/hicolor/512x512/
-%dir %{_datadir}/icons/hicolor/512x512/apps/
-%dir %{_datadir}/icons/hicolor/512x512/mimetypes/
-%{_datadir}/icons/hicolor/*/apps/*.png
-%{_datadir}/icons/hicolor/*/mimetypes/*.png
+%{_datadir}/icons/hicolor
 
 %dir %{_datadir}/%{name}/
 %{_datadir}/%{name}/diagrams.rcc
