@@ -60,8 +60,8 @@ BuildRequires: libqt5-qttools
 BuildRequires: libQt5Svg-devel
 BuildRequires: update-desktop-files
 
-Requires: libqt5-qtimageformats
-Requires: poppler-tools
+Suggests: libqt5-qtimageformats
+Suggests: poppler-tools
 
 %if 0%{?suse_version} > 1500
 BuildRequires: libqt5-linguist
