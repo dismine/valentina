@@ -110,7 +110,6 @@ Source0:	%{name}-%{version}.tar.gz
 Group:		Graphics
 Summary:	Pattern Making Application
 BuildRoot:  %{_tmppath}/%{name}-%{version}-build 
-Packager:   Roman Telezhinskyi <dismine@gmail.com>   
 
 # Disables debug packages and stripping of binaries:
 %global _enable_debug_package 0
@@ -264,6 +263,6 @@ rm -f dist/debian/%{name}.1.gz dist/debian/tape.1.gz dist/debian/puzzle.1.gz dis
 
 
 %changelog
-* Sat Oct 24 2020 Roman Telezhynskyi
+* Sat Oct 24 2020 Roman Telezhynskyi <dismine@gmail.com> 
  - Auto build
 
