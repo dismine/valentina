@@ -50,6 +50,50 @@
 #   include "appimage.h"
 #endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 
+namespace
+{
+auto FilterLocales(const QStringList &locales) -> QStringList
+{
+    QStringList filtered;
+    for (const auto &locale : locales)
+    {
+        if (not locale.startsWith(QLatin1String("ru")))
+        {
+            filtered.append(locale);
+        }
+    }
+
+    return filtered;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto LoadQM(QTranslator *translator, const QString &filename, const QString &locale, const QString &qmDir) -> bool
+{
+    QStringList languages;
+    if (not locale.isEmpty())
+    {
+        languages.append(locale);
+    }
+    else
+    {
+        languages = QLocale().uiLanguages();
+    }
+
+    languages = FilterLocales(languages);
+
+    for (auto &locale : languages)
+    {
+        const bool loaded = translator->load(filename + locale, qmDir);
+        if (loaded)
+        {
+            return loaded;
+        }
+    }
+
+    return false;
+}
+}  // namespace
+
 const QString VAbstractApplication::warningMessageSignature = QStringLiteral("[PATTERN MESSAGE]");
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -109,7 +153,7 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
  * subdirectory inside an app bundle.
  * @return path to a directory that contain QM files.
  */
-QString VAbstractApplication::translationsPath(const QString &locale) const
+auto VAbstractApplication::translationsPath(const QString &locale) -> QString
 {
     const QString trPath = QStringLiteral("/translations");
 #ifdef Q_OS_WIN
@@ -201,51 +245,42 @@ void VAbstractApplication::LoadTranslation(const QString &locale)
 {
     if (locale.isEmpty())
     {
-        qDebug()<<"Locale is empty.";
-        return;
+        qDebug()<<"Default locale";
     }
-
-    if (locale.startsWith(QLatin1String("ru")))
+    else
     {
-        return;
+        qDebug()<<"Checked locale:"<<locale;
     }
-
-    qDebug()<<"Checked locale:"<<locale;
 
     ClearTranslation();
 
+    const QString appQmDir = VAbstractApplication::translationsPath(locale);
+
     qtTranslator = new QTranslator(this);
 #if defined(Q_OS_WIN) || defined(Q_OS_MAC)
-    qtTranslator->load("qt_" + locale, translationsPath(locale));
+    const QString qtQmDir = appQmDir;
 #else
-    qtTranslator->load("qt_" + locale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+    const QString qtQmDir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
 #endif
+    LoadQM(qtTranslator, QStringLiteral("qt_"), locale, qtQmDir);
     installTranslator(qtTranslator);
 
     qtxmlTranslator = new QTranslator(this);
-#if defined(Q_OS_WIN) || defined(Q_OS_MAC)
-    qtxmlTranslator->load("qtxmlpatterns_" + locale, translationsPath(locale));
-#else
-    qtxmlTranslator->load("qtxmlpatterns_" + locale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-#endif
+    LoadQM(qtxmlTranslator, QStringLiteral("qtxmlpatterns_"), locale, qtQmDir);
     installTranslator(qtxmlTranslator);
 
     qtBaseTranslator = new QTranslator(this);
-#if defined(Q_OS_WIN) || defined(Q_OS_MAC)
-    qtBaseTranslator->load("qtbase_" + locale, translationsPath(locale));
-#else
-    qtBaseTranslator->load("qtbase_" + locale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-#endif
+    LoadQM(qtBaseTranslator, QStringLiteral("qtbase_"), locale, qtQmDir);
     installTranslator(qtBaseTranslator);
 
     appTranslator = new QTranslator(this);
-    appTranslator->load("valentina_" + locale, translationsPath(locale));
+    LoadQM(appTranslator, QStringLiteral("valentina_"), locale, appQmDir);
     installTranslator(appTranslator);
 
     const QString system = Settings()->GetPMSystemCode();
 
     pmsTranslator = new QTranslator(this);
-    pmsTranslator->load("measurements_" + system + "_" + locale, translationsPath(locale));
+    LoadQM(pmsTranslator, QStringLiteral("measurements_") + Settings()->GetPMSystemCode() + '_', locale, appQmDir);
     installTranslator(pmsTranslator);
 
     InitTrVars();//Very important do it after load QM files.

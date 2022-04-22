@@ -423,7 +423,7 @@ void MApplication::InitOptions()
     qCDebug(mApp, "Command-line arguments: %s", qUtf8Printable(arguments().join(", ")));
     qCDebug(mApp, "Process ID: %s", qUtf8Printable(QString().setNum(applicationPid())));
 
-    LoadTranslation(QLocale().name());// By default the console version uses system locale
+    LoadTranslation(QString());// By default the console version uses system locale
 
     static const char * GENERIC_ICON_TO_CHECK = "document-open";
     if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)

@@ -473,7 +473,7 @@ void InitLanguages(QComboBox *combobox)
     combobox->clear();
 
     QStringList fileNames;
-    QDirIterator it(VAbstractApplication::VApp()->translationsPath(), QStringList("valentina_*.qm"), QDir::Files,
+    QDirIterator it(VAbstractApplication::translationsPath(), QStringList("valentina_*.qm"), QDir::Files,
                     QDirIterator::Subdirectories);
     while (it.hasNext())
     {

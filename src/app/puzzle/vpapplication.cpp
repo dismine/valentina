@@ -399,7 +399,7 @@ void VPApplication::InitOptions()
 
     QPixmapCache::setCacheLimit(50 * 1024 /* 50 MB */);
 
-    LoadTranslation(QLocale().name());// By default the console version uses system locale
+    LoadTranslation(QString());// By default the console version uses system locale
 
     VPCommandLine::Instance();
 

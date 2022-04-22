@@ -62,7 +62,7 @@ public:
 
     virtual const VTranslateVars *TrVars()=0;
 
-    QString translationsPath(const QString &locale = QString()) const;
+    static QString translationsPath(const QString &locale = QString());
 
     void LoadTranslation(const QString &locale);
 
