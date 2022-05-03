@@ -138,11 +138,11 @@ void VPPiece::Update(const VPPiecePtr &piece)
     }
 
     SetName(piece->GetName());
-    SetCountourPoints(piece->GetContourPoints(), IsHideMainPath());
-    SetSeamAllowancePoints(GetSeamAllowancePoints(), piece->IsSeamAllowance(), piece->IsSeamAllowanceBuiltIn());
-    SetInternalPaths(GetInternalPaths());
-    SetPassmarks(GetPassmarks());
-    SetPlaceLabels(GetPlaceLabels());
+    SetCountourPoints(piece->GetContourPoints(), piece->IsHideMainPath());
+    SetSeamAllowancePoints(piece->GetSeamAllowancePoints(), piece->IsSeamAllowance(), piece->IsSeamAllowanceBuiltIn());
+    SetInternalPaths(piece->GetInternalPaths());
+    SetPassmarks(piece->GetPassmarks());
+    SetPlaceLabels(piece->GetPlaceLabels());
 
     SetGrainlineEnabled(piece->IsGrainlineEnabled());
     SetGrainlineAngle(piece->GrainlineAngle());
