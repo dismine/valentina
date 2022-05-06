@@ -1,6 +1,7 @@
 # Valentina 0.7.52 (unreleased)
 - Fix crash when default locale is ru.
 - Puzzle app. Fix incorrect update of a layout piece.
+- Fix visualization for tool Point of intersection line and axis.
 
 # Valentina 0.7.51 April 18, 2022
 - Z value change for a layout piece.

@@ -258,6 +258,8 @@ void Visualization::DrawLine(VScaledLine *lineItem, const QLineF &line, const QC
     {
         lineItem->setLine(line);
     }
+
+    lineItem->setVisible(not line.isNull());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
