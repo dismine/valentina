@@ -56,14 +56,14 @@ public:
 private:
     Q_DISABLE_COPY(VisToolHeight)
     //base point in parent class
-    quint32              lineP1Id;//first point of line
-    quint32              lineP2Id;//second point of line
-    VScaledEllipse *point;
-    VScaledEllipse *base_point;
-    VScaledEllipse *lineP1;
-    VScaledEllipse *lineP2;
-    VScaledLine    *line;
-    VScaledLine    *line_intersection;
+    quint32              lineP1Id{NULL_ID};//first point of line
+    quint32              lineP2Id{NULL_ID};//second point of line
+    VScaledEllipse *point{nullptr};
+    VScaledEllipse *base_point{nullptr};
+    VScaledEllipse *lineP1{nullptr};
+    VScaledEllipse *lineP2{nullptr};
+    VScaledLine    *line{nullptr};
+    VScaledLine    *line_intersection{nullptr};
     void         ShowIntersection(const QLineF &height_line, const QLineF &base_line);
 };
 
