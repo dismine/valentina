@@ -1167,7 +1167,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Create new group</string>
+           <string>Visibility group</string>
           </property>
           <property name="text">
            <string notr="true">...</string>
