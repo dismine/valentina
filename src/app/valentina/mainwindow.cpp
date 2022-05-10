@@ -401,7 +401,7 @@ MainWindow::MainWindow(QWidget *parent)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::AddPP(const QString &PPName)
 {
-    if (doc->appendPP(PPName) == false)
+    if (not doc->appendPP(PPName))
     {
         qCDebug(vMainWindow, "Error creating pattern piece with the name %s.", qUtf8Printable(PPName));
         return;
@@ -433,7 +433,7 @@ void MainWindow::AddPP(const QString &PPName)
     initData.name = label;
     initData.nameActivPP = PPName;
 
-    auto spoint = VToolBasePoint::Create(initData);
+    auto *spoint = VToolBasePoint::Create(initData);
     emit ui->view->itemClicked(spoint);
 
     SetEnableTool(true);
