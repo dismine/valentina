@@ -168,10 +168,7 @@ void Visualization::MousePos(const QPointF &scenePos)
 {
     this->scenePos = scenePos;
     RefreshGeometry();
-    if (toolTip.isEmpty() == false)
-    {
-        emit ToolTip(toolTip);
-    }
+    RefreshToolTip();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -227,6 +224,15 @@ qreal Visualization::FindValFromUser(const QString &expression,
         }
     }
     return val;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void Visualization::RefreshToolTip() const
+{
+    if (!toolTip.isEmpty())
+    {
+        emit ToolTip(toolTip);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

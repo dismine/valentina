@@ -37,27 +37,32 @@
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
+#include "defglobal.h"
 #include "vispath.h"
 
 class VisToolArc final : public VisPath
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolArc(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolArc() Q_DECL_EQ_DEFAULT;
+    ~VisToolArc() override =default;
 
-    virtual void RefreshGeometry() override;
-    void         setRadius(const QString &expression);
-    void         setF1(const QString &expression);
-    void         setF2(const QString &expression);
-    virtual int  type() const override {return Type;}
+    void RefreshGeometry() override;
+    void setRadius(const QString &expression);
+    void setF1(const QString &expression);
+    void setF2(const QString &expression);
+    auto type() const -> int override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolArc)};
+
+    static auto CorrectAngle(qreal angle) -> qreal;
+    auto StickyEnd(qreal angle) const -> qreal;
 private:
-    Q_DISABLE_COPY(VisToolArc)
-    VScaledEllipse *arcCenter;
-    qreal           radius;
-    qreal           f1;
-    qreal           f2;
+    Q_DISABLE_COPY_MOVE(VisToolArc) // NOLINT
+    VScaledEllipse *arcCenter{nullptr};
+    VScaledEllipse *f1Point{nullptr};
+    qreal           radius{0};
+    qreal           f1{-1};
+    qreal           f2{-1};
 };
 
 #endif // VISTOOLARC_H

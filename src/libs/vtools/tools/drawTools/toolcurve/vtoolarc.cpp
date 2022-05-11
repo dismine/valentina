@@ -368,7 +368,7 @@ void VToolArc::SetVisualization()
     if (not vis.isNull())
     {
         const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
-        VisToolArc *visual = qobject_cast<VisToolArc *>(vis);
+        auto *visual = qobject_cast<VisToolArc *>(vis);
         SCASSERT(visual != nullptr)
 
         const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
@@ -381,6 +381,7 @@ void VToolArc::SetVisualization()
                           arc->GetFormulaF2(), VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
         visual->setLineStyle(LineStyleToPenStyle(arc->GetPenStyle()));
         visual->setApproximationScale(arc->GetApproximationScale());
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }

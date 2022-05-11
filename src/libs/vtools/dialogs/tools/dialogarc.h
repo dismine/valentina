@@ -48,39 +48,41 @@ namespace Ui
  */
 class DialogArc final : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     DialogArc(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogArc() override;
+    ~DialogArc() override;
 
-    quint32       GetCenter() const;
-    void          SetCenter(const quint32 &value);
+    auto GetCenter() const -> quint32;
+    void SetCenter(const quint32 &value);
 
-    QString       GetRadius() const;
-    void          SetRadius(const QString &value);
+    auto GetRadius() const -> QString;
+    void SetRadius(const QString &value);
 
-    QString       GetF1() const;
-    void          SetF1(const QString &value);
+    auto GetF1() const -> QString;
+    void SetF1(const QString &value);
 
-    QString       GetF2() const;
-    void          SetF2(const QString &value);
+    auto GetF2() const -> QString;
+    void SetF2(const QString &value);
 
-    QString       GetPenStyle() const;
-    void          SetPenStyle(const QString &value);
+    auto GetPenStyle() const -> QString;
+    void SetPenStyle(const QString &value);
 
-    QString       GetColor() const;
-    void          SetColor(const QString &value);
+    auto GetColor() const -> QString;
+    void SetColor(const QString &value);
 
-    qreal         GetApproximationScale() const;
-    void          SetApproximationScale(qreal value);
+    auto GetApproximationScale() const -> qreal;
+    void SetApproximationScale(qreal value);
 
-    void    SetNotes(const QString &notes);
-    QString GetNotes() const;
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
 
-    void    SetAliasSuffix(const QString &alias);
-    QString GetAliasSuffix() const;
+    void SetAliasSuffix(const QString &alias);
+    auto GetAliasSuffix() const -> QString;
+
+    void ShowDialog(bool click) override;
 public slots:
-    virtual void  ChosenObject(quint32 id, const SceneObject &type) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
     /**
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
@@ -93,30 +95,30 @@ public slots:
     void FXF2();
 
 protected:
-    virtual void  ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void  SaveData() override;
-    virtual void  closeEvent(QCloseEvent *event) override;
-    virtual bool  IsValid() const final;
+    void SaveData() override;
+    void closeEvent(QCloseEvent *event) override;
+    auto IsValid() const -> bool final;
 
 private slots:
     void ValidateAlias();
 private:
-    Q_DISABLE_COPY(DialogArc)
+    Q_DISABLE_COPY_MOVE(DialogArc) // NOLINT
 
     /** @brief ui keeps information about user interface */
     Ui::DialogArc *ui;
 
     /** @brief flagRadius true if value of radius is correct */
-    bool          flagRadius;
+    bool          flagRadius{false};
 
     /** @brief flagF1 true if value of first angle is correct */
-    bool          flagF1;
+    bool          flagF1{false};
 
     /** @brief flagF2 true if value of second angle is correct */
-    bool          flagF2;
+    bool          flagF2{false};
 
     bool          flagAlias{true};
 
@@ -130,30 +132,35 @@ private:
     QTimer        *timerF2;
 
     /** @brief radius formula of radius */
-    QString       radius;
+    QString       radius{};
 
     /** @brief f1 formula of first angle */
-    QString       f1;
+    QString       f1{};
 
     /** @brief f2 formula of second angle */
-    QString       f2;
+    QString       f2{};
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int           formulaBaseHeight;
-    int           formulaBaseHeightF1;
-    int           formulaBaseHeightF2;
+    int           formulaBaseHeight{0};
+    int           formulaBaseHeightF1{0};
+    int           formulaBaseHeightF2{0};
 
-    qreal         angleF1;
-    qreal         angleF2;
+    qreal         angleF1{INT_MIN};
+    qreal         angleF2{INT_MIN};
 
     QString       originAliasSuffix{};
 
-    void          EvalRadius();
-    void          EvalF();
+    bool stageRadius{true};
+    bool stageF1{false};
+
+    bool m_firstRelease{false};
+
+    void EvalRadius();
+    void EvalF();
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogArc::IsValid() const
+inline auto DialogArc::IsValid() const -> bool
 {
     return flagRadius && flagF1 && flagF2 && flagAlias;
 }

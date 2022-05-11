@@ -49,6 +49,7 @@
 #include "ui_dialogarc.h"
 #include "../vgeometry/varc.h"
 #include "../qmuparser/qmudef.h"
+#include "../vwidgets/vabstractmainwindow.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -59,20 +60,9 @@
 DialogArc::DialogArc(const VContainer *data, quint32 toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),
       ui(new Ui::DialogArc),
-      flagRadius(false),
-      flagF1(false),
-      flagF2(false),
       timerRadius(new QTimer(this)),
       timerF1(new QTimer(this)),
-      timerF2(new QTimer(this)),
-      radius(),
-      f1(),
-      f2(),
-      formulaBaseHeight(0),
-      formulaBaseHeightF1(0),
-      formulaBaseHeightF2(0),
-      angleF1(INT_MIN),
-      angleF2(INT_MIN)
+      timerF2(new QTimer(this))
 {
     ui->setupUi(this);
 
@@ -183,7 +173,7 @@ void DialogArc::SetF2(const QString &value)
     }
     ui->plainTextEditF2->setPlainText(f2);
 
-    VisToolArc *path = qobject_cast<VisToolArc *>(vis);
+    auto *path = qobject_cast<VisToolArc *>(vis);
     SCASSERT(path != nullptr)
     path->setF2(f2);
 
@@ -191,7 +181,7 @@ void DialogArc::SetF2(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogArc::GetPenStyle() const
+auto DialogArc::GetPenStyle() const -> QString
 {
     return GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine);
 }
@@ -203,7 +193,7 @@ void DialogArc::SetPenStyle(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogArc::GetColor() const
+auto DialogArc::GetColor() const -> QString
 {
     return GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack);
 }
@@ -215,7 +205,7 @@ void DialogArc::SetColor(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal DialogArc::GetApproximationScale() const
+auto DialogArc::GetApproximationScale() const -> qreal
 {
     return ui->doubleSpinBoxApproximationScale->value();
 }
@@ -225,7 +215,7 @@ void DialogArc::SetApproximationScale(qreal value)
 {
     ui->doubleSpinBoxApproximationScale->setValue(value);
 
-    VisToolArc *path = qobject_cast<VisToolArc *>(vis);
+    auto *path = qobject_cast<VisToolArc *>(vis);
     SCASSERT(path != nullptr)
             path->setApproximationScale(value);
 }
@@ -237,7 +227,7 @@ void DialogArc::SetNotes(const QString &notes)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogArc::GetNotes() const
+auto DialogArc::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }
@@ -251,9 +241,96 @@ void DialogArc::SetAliasSuffix(const QString &alias)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogArc::GetAliasSuffix() const
+auto DialogArc::GetAliasSuffix() const -> QString
 {
     return ui->lineEditAlias->text();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArc::ShowDialog(bool click)
+{
+    if (prepare)
+    {
+        auto *arcVis = qobject_cast<VisToolArc *>(vis);
+        SCASSERT(arcVis != nullptr)
+
+        auto FinishCreating = [this, arcVis]()
+        {
+            arcVis->SetMode(Mode::Show);
+            arcVis->RefreshGeometry();
+
+            emit ToolTip(QString());
+
+            setModal(true);
+            show();
+        };
+
+        if (click)
+        {
+            // The check need to ignore first release of mouse button.
+            // User can select point by clicking on a label.
+            if (not m_firstRelease)
+            {
+                m_firstRelease = true;
+                return;
+            }
+
+            /*We will ignore click if pointer is in point circle*/
+            auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
+            SCASSERT(scene != nullptr)
+            const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(GetCenter());
+            QLineF line = QLineF(static_cast<QPointF>(*point), scene->getScenePos());
+
+            auto Angle = [line]()
+            {
+                if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
+                {
+                    QLineF correction = line;
+                    correction.setAngle(VisToolArc::CorrectAngle(correction.angle()));
+                    return correction.angle();
+                }
+
+                return line.angle();
+            };
+
+            if (stageRadius)
+            {
+                //Radius of point circle, but little bigger. Need handle with hover sizes.
+                if (line.length() <= ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene()))*1.5)
+                {
+                    return;
+                }
+
+                QString radius = QString::number(VAbstractValApplication::VApp()->fromPixel(line.length()));
+                arcVis->setRadius(radius);
+                SetRadius(radius);
+
+                arcVis->RefreshGeometry();
+                stageRadius = false;
+                stageF1 = true;
+            }
+            else if (stageF1)
+            {
+                QString f1 = QString::number(Angle());
+                arcVis->setF1(f1);
+                SetF1(f1);
+
+                arcVis->RefreshGeometry();
+                stageF1 = false;
+            }
+            else
+            {
+                QString f2 = QString::number(arcVis->StickyEnd(Angle()));
+                arcVis->setF2(f2);
+                SetF2(f2);
+
+                FinishCreating();
+            }
+            return;
+        }
+
+        FinishCreating();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -272,7 +349,7 @@ void DialogArc::SetF1(const QString &value)
     }
     ui->plainTextEditF1->setPlainText(f1);
 
-    VisToolArc *path = qobject_cast<VisToolArc *>(vis);
+    auto *path = qobject_cast<VisToolArc *>(vis);
     SCASSERT(path != nullptr)
     path->setF1(f1);
 
@@ -295,7 +372,7 @@ void DialogArc::SetRadius(const QString &value)
     }
     ui->plainTextEditFormula->setPlainText(radius);
 
-    VisToolArc *path = qobject_cast<VisToolArc *>(vis);
+    auto *path = qobject_cast<VisToolArc *>(vis);
     SCASSERT(path != nullptr)
     path->setRadius(radius);
 
@@ -318,11 +395,15 @@ void DialogArc::ChosenObject(quint32 id, const SceneObject &type)
             {
                 if (vis != nullptr)
                 {
+                    auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+                    SCASSERT(window != nullptr)
+                    connect(vis.data(), &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
+
                     vis->VisualMode(id);
+                    vis->RefreshToolTip();
                 }
+
                 prepare = true;
-                this->setModal(true);
-                this->show();
             }
         }
     }
@@ -341,7 +422,7 @@ void DialogArc::SaveData()
     f1 = ui->plainTextEditF1->toPlainText();
     f2 = ui->plainTextEditF2->toPlainText();
 
-    VisToolArc *path = qobject_cast<VisToolArc *>(vis);
+    auto *path = qobject_cast<VisToolArc *>(vis);
     SCASSERT(path != nullptr)
 
     path->setObject1Id(GetCenter());
@@ -386,7 +467,7 @@ void DialogArc::ValidateAlias()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArc::FXRadius()
 {
-    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius"));
     dialog->SetFormula(GetRadius());
     dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
@@ -400,7 +481,7 @@ void DialogArc::FXRadius()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArc::FXF1()
 {
-    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit first angle"));
     dialog->SetFormula(GetF1());
     dialog->setPostfix(degreeSymbol);
@@ -414,7 +495,7 @@ void DialogArc::FXF1()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArc::FXF2()
 {
-    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit second angle"));
     dialog->SetFormula(GetF2());
     dialog->setPostfix(degreeSymbol);
@@ -479,7 +560,7 @@ void DialogArc::EvalF()
  * @brief GetCenter return id of center point
  * @return id id
  */
-quint32 DialogArc::GetCenter() const
+auto DialogArc::GetCenter() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxBasePoint);
 }
@@ -489,10 +570,9 @@ quint32 DialogArc::GetCenter() const
  * @brief GetRadius return formula of radius
  * @return formula
  */
-QString DialogArc::GetRadius() const
+auto DialogArc::GetRadius() const -> QString
 {
-    return VAbstractApplication::VApp()->TrVars()
-            ->TryFormulaFromUser(radius, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(radius, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -500,10 +580,9 @@ QString DialogArc::GetRadius() const
  * @brief GetF1 return formula first angle of arc
  * @return formula
  */
-QString DialogArc::GetF1() const
+auto DialogArc::GetF1() const -> QString
 {
-    return VAbstractApplication::VApp()->TrVars()
-            ->TryFormulaFromUser(f1, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(f1, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -511,8 +590,7 @@ QString DialogArc::GetF1() const
  * @brief GetF2 return formula second angle of arc
  * @return formula
  */
-QString DialogArc::GetF2() const
+auto DialogArc::GetF2() const -> QString
 {
-    return VAbstractApplication::VApp()->TrVars()
-            ->TryFormulaFromUser(f2, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(f2, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }

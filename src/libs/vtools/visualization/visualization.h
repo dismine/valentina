@@ -82,8 +82,10 @@ public:
                                  QSharedPointer<VInternalVariable> > *vars, bool fromUser = true);
 
     QString CurrentToolTip() const {return toolTip;}
+
+    void RefreshToolTip() const;
 signals:
-    void         ToolTip(const QString &toolTip);
+    void         ToolTip(const QString &toolTip) const;
 public slots:
     void         MousePos(const QPointF &scenePos);
 protected:
