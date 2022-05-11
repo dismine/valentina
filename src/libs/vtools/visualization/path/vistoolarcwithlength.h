@@ -38,26 +38,30 @@
 
 #include "../vmisc/def.h"
 #include "vispath.h"
+#include "defglobal.h"
 
 class VisToolArcWithLength final : public VisPath
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolArcWithLength(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolArcWithLength() Q_DECL_EQ_DEFAULT;
+    ~VisToolArcWithLength() override =default;
 
-    virtual void RefreshGeometry() override;
-    void         setRadius(const QString &expression);
-    void         setF1(const QString &expression);
-    void         setLength(const QString &expression);
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolArcWithLength)};
+    void RefreshGeometry() override;
+    void setRadius(const QString &expression);
+    void setF1(const QString &expression);
+    void setLength(const QString &expression);
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolArcWithLength)};
+
+    static auto CorrectAngle(qreal angle) -> qreal;
 private:
-    Q_DISABLE_COPY(VisToolArcWithLength)
-    VScaledEllipse *arcCenter;
-    qreal           radius;
-    qreal           f1;
-    qreal           length;
+    Q_DISABLE_COPY_MOVE(VisToolArcWithLength) // NOLINT
+    VScaledEllipse *arcCenter{nullptr};
+    VScaledEllipse *f1Point{nullptr};
+    qreal           radius{0};
+    qreal           f1{-1};
+    qreal           length{0};
 };
 
 #endif // VISTOOLARCWITHLENGTH_H

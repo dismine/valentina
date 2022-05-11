@@ -301,28 +301,20 @@ void DialogArc::ShowDialog(bool click)
                     return;
                 }
 
-                QString radius = QString::number(VAbstractValApplication::VApp()->fromPixel(line.length()));
-                arcVis->setRadius(radius);
-                SetRadius(radius);
-
+                SetRadius(QString::number(VAbstractValApplication::VApp()->fromPixel(line.length())));
                 arcVis->RefreshGeometry();
                 stageRadius = false;
                 stageF1 = true;
             }
             else if (stageF1)
             {
-                QString f1 = QString::number(Angle());
-                arcVis->setF1(f1);
-                SetF1(f1);
-
+                SetF1(QString::number(Angle()));
                 arcVis->RefreshGeometry();
                 stageF1 = false;
             }
             else
             {
-                QString f2 = QString::number(arcVis->StickyEnd(Angle()));
-                arcVis->setF2(f2);
-                SetF2(f2);
+                SetF2(QString::number(arcVis->StickyEnd(Angle())));
 
                 FinishCreating();
             }
@@ -395,7 +387,8 @@ void DialogArc::ChosenObject(quint32 id, const SceneObject &type)
             {
                 if (vis != nullptr)
                 {
-                    auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+                    auto *window = qobject_cast<VAbstractMainWindow *>(
+                                VAbstractValApplication::VApp()->getMainWindow());
                     SCASSERT(window != nullptr)
                     connect(vis.data(), &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
 

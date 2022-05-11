@@ -36,6 +36,7 @@
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
+#include "defglobal.h"
 #include "dialogtool.h"
 
 namespace Ui
@@ -45,40 +46,42 @@ namespace Ui
 
 class DialogArcWithLength final : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     DialogArcWithLength(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    ~DialogArcWithLength();
+    ~DialogArcWithLength() override;
 
-    quint32       GetCenter() const;
-    void          SetCenter(const quint32 &value);
+    auto GetCenter() const -> quint32;
+    void SetCenter(const quint32 &value);
 
-    QString       GetRadius() const;
-    void          SetRadius(const QString &value);
+    auto GetRadius() const -> QString;
+    void SetRadius(const QString &value);
 
-    QString       GetF1() const;
-    void          SetF1(const QString &value);
+    auto GetF1() const -> QString;
+    void SetF1(const QString &value);
 
-    QString       GetLength() const;
-    void          SetLength(const QString &value);
+    auto GetLength() const -> QString;
+    void SetLength(const QString &value);
 
-    QString       GetPenStyle() const;
-    void          SetPenStyle(const QString &value);
+    auto GetPenStyle() const -> QString;
+    void SetPenStyle(const QString &value);
 
-    QString       GetColor() const;
-    void          SetColor(const QString &value);
+    auto GetColor() const -> QString;
+    void SetColor(const QString &value);
 
-    qreal         GetApproximationScale() const;
-    void          SetApproximationScale(qreal value);
+    auto GetApproximationScale() const -> qreal;
+    void SetApproximationScale(qreal value);
 
-    void    SetNotes(const QString &notes);
-    QString GetNotes() const;
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
 
-    void    SetAliasSuffix(const QString &alias);
-    QString GetAliasSuffix() const;
+    void SetAliasSuffix(const QString &alias);
+    auto GetAliasSuffix() const -> QString;
+
+    void ShowDialog(bool click) override;
 public slots:
-    virtual void  ChosenObject(quint32 id, const SceneObject &type) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
     /**
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
@@ -86,66 +89,71 @@ public slots:
     void DeployF1TextEdit();
     void DeployLengthTextEdit();
 
-    void          FXRadius();
-    void          FXF1();
-    void          FXLength();
+    void FXRadius();
+    void FXF1();
+    void FXLength();
 
 protected:
-    virtual void  ShowVisualization() override;
+    void  ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void  SaveData() override;
-    virtual void  closeEvent(QCloseEvent *event) override;
-    virtual bool  IsValid() const final;
+    void SaveData() override;
+    void closeEvent(QCloseEvent *event) override;
+    auto IsValid() const -> bool final;
 
 private slots:
     void ValidateAlias();
 
 private:
-    Q_DISABLE_COPY(DialogArcWithLength)
+    Q_DISABLE_COPY_MOVE(DialogArcWithLength) // NOLINT
     Ui::DialogArcWithLength *ui;
 
     /** @brief flagRadius true if value of radius is correct */
-    bool          flagRadius;
+    bool flagRadius{false};
 
     /** @brief flagF1 true if value of first angle is correct */
-    bool          flagF1;
+    bool flagF1{false};
 
-    bool          flagLength;
+    bool flagLength{false};
 
-    bool          flagAlias{true};
+    bool flagAlias{true};
 
     /** @brief timerRadius timer of check formula of radius */
-    QTimer        *timerRadius;
+    QTimer *timerRadius;
 
     /** @brief timerF1 timer of check formula of first angle */
-    QTimer        *timerF1;
+    QTimer *timerF1;
 
-    QTimer        *timerLength;
+    QTimer *timerLength;
 
     /** @brief radius formula of radius */
-    QString       radius;
+    QString radius{};
 
     /** @brief f1 formula of first angle */
-    QString       f1;
+    QString f1{};
 
-    QString       length;
+    QString length{};
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int           formulaBaseHeightRadius;
-    int           formulaBaseHeightF1;
-    int           formulaBaseHeightLength;
+    int formulaBaseHeightRadius{0};
+    int formulaBaseHeightF1{0};
+    int formulaBaseHeightLength{0};
 
-    QString       originAliasSuffix{};
+    QString originAliasSuffix{};
 
-    void          Radius();
-    void          Length();
-    void          EvalF();
+    bool stageRadius{true};
+    bool stageF1{false};
+
+    bool m_firstRelease{false};
+
+    void Radius();
+    void Length();
+    void EvalF();
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogArcWithLength::IsValid() const
+inline auto DialogArcWithLength::IsValid() const -> bool
 {
     return flagRadius && flagF1 && flagLength && flagAlias;
 }
