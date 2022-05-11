@@ -327,18 +327,16 @@ void DialogMove::ShowDialog(bool click)
         stage1 = false;
         prepare = true;
 
-        VMainGraphicsScene *scene =
-                qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
+        auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
         SCASSERT(scene != nullptr)
         scene->clearSelection();
 
-        VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
+        auto *operation = qobject_cast<VisToolMove *>(vis);
         SCASSERT(operation != nullptr)
         operation->SetObjects(SourceToObjects(sourceObjects));
         operation->VisualMode();
 
-        VAbstractMainWindow *window =
-                qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+        auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
         SCASSERT(window != nullptr)
         connect(operation, &VisToolMove::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
 
@@ -358,7 +356,7 @@ void DialogMove::ShowDialog(bool click)
     }
     else if (not stage2 && not stage1 && prepare && click)
     {
-        VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
+        auto *operation = qobject_cast<VisToolMove *>(vis);
         SCASSERT(operation != nullptr)
 
         if (operation->LengthValue() > 0)
@@ -376,7 +374,7 @@ void DialogMove::ShowDialog(bool click)
     }
     else if (not stage1 && stage2 && prepare && click)
     {
-        VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
+        auto *operation = qobject_cast<VisToolMove *>(vis);
         SCASSERT(operation != nullptr)
 
         if (QGuiApplication::keyboardModifiers() == Qt::ControlModifier)
@@ -415,7 +413,7 @@ void DialogMove::ChosenObject(quint32 id, const SceneObject &type)
         {
             if (SetObject(id, ui->comboBoxRotationOriginPoint, QString()))
             {
-                VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
+                auto *operation = qobject_cast<VisToolMove *>(vis);
                 SCASSERT(operation != nullptr)
 
                 operation->SetRotationOriginPointId(id);
@@ -432,8 +430,8 @@ void DialogMove::SelectedObject(bool selected, quint32 object, quint32 tool)
     Q_UNUSED(tool)
     if (stage1)
     {
-        auto obj = std::find_if(sourceObjects.begin(), sourceObjects.end(),
-                                [object](const SourceItem &sItem) { return sItem.id == object; });
+        auto *obj = std::find_if(sourceObjects.begin(), sourceObjects.end(),
+                                 [object](const SourceItem &sItem) { return sItem.id == object; });
         if (selected)
         {
             if (obj == sourceObjects.cend())
@@ -445,7 +443,7 @@ void DialogMove::SelectedObject(bool selected, quint32 object, quint32 tool)
         }
         else
         {
-            if (obj != sourceObjects.end())
+            if (obj != sourceObjects.cend())
             {
                 sourceObjects.erase(obj);
             }

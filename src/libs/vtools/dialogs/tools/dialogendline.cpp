@@ -208,7 +208,7 @@ void DialogEndLine::FXLength()
  */
 void DialogEndLine::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare == false)// After first choose we ignore all objects
+    if (not prepare)// After first choose we ignore all objects
     {
         if (type == SceneObject::Point)
         {
@@ -218,8 +218,7 @@ void DialogEndLine::ChosenObject(quint32 id, const SceneObject &type)
                 {
                     vis->VisualMode(id);
                 }
-                VAbstractMainWindow *window =
-                        qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+                auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
                 SCASSERT(window != nullptr)
                 connect(vis.data(), &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
                 prepare = true;
@@ -267,7 +266,7 @@ void DialogEndLine::SetFormula(const QString &value)
     }
     ui->plainTextEditFormula->setPlainText(formulaLength);
 
-    VisToolEndLine *line = qobject_cast<VisToolEndLine *>(vis);
+    auto *line = qobject_cast<VisToolEndLine *>(vis);
     SCASSERT(line != nullptr)
     line->setLength(formulaLength);
 
@@ -291,7 +290,7 @@ void DialogEndLine::SetAngle(const QString &value)
     }
     ui->plainTextEditAngle->setPlainText(formulaAngle);
 
-    VisToolEndLine *line = qobject_cast<VisToolEndLine *>(vis);
+    auto *line = qobject_cast<VisToolEndLine *>(vis);
     SCASSERT(line != nullptr)
     line->SetAngle(formulaAngle);
 
@@ -307,13 +306,13 @@ void DialogEndLine::SetBasePointId(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxBasePoint, value);
 
-    VisToolEndLine *line = qobject_cast<VisToolEndLine *>(vis);
+    auto *line = qobject_cast<VisToolEndLine *>(vis);
     SCASSERT(line != nullptr)
     line->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogEndLine::GetLineColor() const
+auto DialogEndLine::GetLineColor() const -> QString
 {
     return GetComboBoxCurrentData(ui->comboBoxLineColor, ColorBlack);
 }
@@ -344,8 +343,7 @@ void DialogEndLine::ShowDialog(bool click)
             }
 
             /*We will ignore click if pointer is in point circle*/
-            VMainGraphicsScene *scene =
-                    qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
+            auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
             SCASSERT(scene != nullptr)
             const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(GetBasePointId());
             QLineF line = QLineF(static_cast<QPointF>(*point), scene->getScenePos());
@@ -358,7 +356,7 @@ void DialogEndLine::ShowDialog(bool click)
         }
         this->setModal(true);
 
-        VisToolEndLine *line = qobject_cast<VisToolEndLine *>(vis);
+        auto *line = qobject_cast<VisToolEndLine *>(vis);
         SCASSERT(line != nullptr)
 
         this->SetAngle(line->Angle());//Show in dialog angle what user choose
