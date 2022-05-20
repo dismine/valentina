@@ -52,7 +52,7 @@ namespace
  * @param y2 у coordinate second point.
  * @return squared length.
  */
-inline qreal CalcSqDistance(qreal x1, qreal y1, qreal x2, qreal y2)
+inline auto CalcSqDistance(qreal x1, qreal y1, qreal x2, qreal y2) -> qreal
 {
     const qreal dx = x2 - x1;
     const qreal dy = y2 - y1;
@@ -74,8 +74,8 @@ inline qreal CalcSqDistance(qreal x1, qreal y1, qreal x2, qreal y2)
  * @param points spline points coordinates.
  * @param approximationScale curve approximation scale.
  */
-QVector<QPointF> PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, qreal x4, qreal y4,
-                               qint16 level, QVector<QPointF> points, qreal approximationScale)
+auto PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, qreal x4, qreal y4,
+                   qint16 level, QVector<QPointF> points, qreal approximationScale) -> QVector<QPointF>
 {
     if (points.size() >= 2)
     {
@@ -373,17 +373,10 @@ QVector<QPointF> PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3,
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractCubicBezier::VAbstractCubicBezier(const GOType &type, const quint32 &idObject, const Draw &mode)
     : VAbstractBezier(type, idObject, mode)
-{
-}
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractCubicBezier::VAbstractCubicBezier(const VAbstractCubicBezier &curve)
-    : VAbstractBezier(curve)
-{
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VAbstractCubicBezier &VAbstractCubicBezier::operator=(const VAbstractCubicBezier &curve)
+auto VAbstractCubicBezier::operator=(const VAbstractCubicBezier &curve) -> VAbstractCubicBezier &
 {
     if ( &curve == this )
     {
@@ -395,8 +388,7 @@ VAbstractCubicBezier &VAbstractCubicBezier::operator=(const VAbstractCubicBezier
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractCubicBezier::~VAbstractCubicBezier()
-{
-}
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -409,8 +401,8 @@ VAbstractCubicBezier::~VAbstractCubicBezier()
  * @param pointName cutting point name.
  * @return point of cutting. This point is forth point of first spline and first point of second spline.
  */
-QPointF VAbstractCubicBezier::CutSpline(qreal length, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2,
-                                        QPointF &spl2p3, const QString &pointName) const
+auto VAbstractCubicBezier::CutSpline(qreal length, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2,
+                                     QPointF &spl2p3, const QString &pointName) const -> QPointF
 {
     //Always need return two splines, so we must correct wrong length.
     const qreal minLength = ToPixel(1, Unit::Mm);
@@ -500,7 +492,7 @@ QPointF VAbstractCubicBezier::CutSpline(qreal length, QPointF &spl1p2, QPointF &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractCubicBezier::NameForHistory(const QString &toolName) const
+auto VAbstractCubicBezier::NameForHistory(const QString &toolName) const -> QString
 {
     QString name = toolName + QString(" %1_%2").arg(GetP1().name(), GetP4().name());
     if (GetDuplicate() > 0)
@@ -589,8 +581,8 @@ void VAbstractCubicBezier::CreateAlias()
  * @param approximationScale curve approximation scale.
  * @return list of points.
  */
-QVector<QPointF> VAbstractCubicBezier::GetCubicBezierPoints(const QPointF &p1, const QPointF &p2, const QPointF &p3,
-                                                            const QPointF &p4, qreal approximationScale)
+auto VAbstractCubicBezier::GetCubicBezierPoints(const QPointF &p1, const QPointF &p2, const QPointF &p3,
+                                                const QPointF &p4, qreal approximationScale) -> QVector<QPointF>
 {
     QVector<QPointF> pvector;
     pvector.append(p1);
@@ -610,14 +602,14 @@ QVector<QPointF> VAbstractCubicBezier::GetCubicBezierPoints(const QPointF &p1, c
  * @param approximationScale curve approximation scale.
  * @return length.
  */
-qreal VAbstractCubicBezier::LengthBezier(const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4,
-                                         qreal approximationScale)
+auto VAbstractCubicBezier::LengthBezier(const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4,
+                                        qreal approximationScale) -> qreal
 {
     return PathLength(GetCubicBezierPoints(p1, p2, p3, p4, approximationScale));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VAbstractCubicBezier::RealLengthByT(qreal t) const
+auto VAbstractCubicBezier::RealLengthByT(qreal t) const -> qreal
 {
     if (t < 0 || t > 1)
     {

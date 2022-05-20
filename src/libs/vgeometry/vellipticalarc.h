@@ -46,84 +46,85 @@ class VEllipticalArcData;
 
 class VEllipticalArc final : public VAbstractArc
 {
-    Q_DECLARE_TR_FUNCTIONS(VEllipticalArc)
+    Q_DECLARE_TR_FUNCTIONS(VEllipticalArc) // NOLINT
 public:
     VEllipticalArc();
-    VEllipticalArc (const VPointF &center, qreal radius1, qreal radius2, const QString &formulaRadius1,
-                    const QString &formulaRadius2, qreal f1, const QString &formulaF1, qreal f2,
-                    const QString &formulaF2, qreal rotationAngle, const QString &formulaRotationAngle,
-                    quint32 idObject = 0, Draw mode = Draw::Calculation);
-    VEllipticalArc (const VPointF &center, qreal radius1, qreal radius2, qreal f1, qreal f2, qreal rotationAngle);
-    VEllipticalArc (qreal length, const QString &formulaLength, const VPointF &center, qreal radius1, qreal radius2,
-                    const QString &formulaRadius1, const QString &formulaRadius2, qreal f1, const QString &formulaF1,
-                    qreal rotationAngle, const QString &formulaRotationAngle, quint32 idObject = 0,
-                    Draw mode = Draw::Calculation);
-    VEllipticalArc (qreal length, const VPointF &center, qreal radius1, qreal radius2, qreal f1, qreal rotationAngle);
+    VEllipticalArc(const VPointF &center, qreal radius1, qreal radius2, const QString &formulaRadius1,
+                   const QString &formulaRadius2, qreal f1, const QString &formulaF1, qreal f2,
+                   const QString &formulaF2, qreal rotationAngle, const QString &formulaRotationAngle,
+                   quint32 idObject = 0, Draw mode = Draw::Calculation);
+    VEllipticalArc(const VPointF &center, qreal radius1, qreal radius2, qreal f1, qreal f2, qreal rotationAngle);
+    VEllipticalArc(qreal length, const QString &formulaLength, const VPointF &center, qreal radius1, qreal radius2,
+                   const QString &formulaRadius1, const QString &formulaRadius2, qreal f1, const QString &formulaF1,
+                   qreal rotationAngle, const QString &formulaRotationAngle, quint32 idObject = 0,
+                   Draw mode = Draw::Calculation);
+    VEllipticalArc(qreal length, const VPointF &center, qreal radius1, qreal radius2, qreal f1, qreal rotationAngle);
     VEllipticalArc(const VEllipticalArc &arc);
 
-    VEllipticalArc Rotate(QPointF originPoint, qreal degrees, const QString &prefix = QString()) const;
-    VEllipticalArc Flip(const QLineF &axis, const QString &prefix = QString()) const;
-    VEllipticalArc Move(qreal length, qreal angle, const QString &prefix = QString()) const;
+    auto Rotate(QPointF originPoint, qreal degrees, const QString &prefix = QString()) const -> VEllipticalArc;
+    auto Flip(const QLineF &axis, const QString &prefix = QString()) const -> VEllipticalArc;
+    auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VEllipticalArc;
 
-    virtual ~VEllipticalArc() override;
+    ~VEllipticalArc() override;
 
-    VEllipticalArc& operator= (const VEllipticalArc &arc);
+    auto operator= (const VEllipticalArc &arc) -> VEllipticalArc&;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VEllipticalArc(const VEllipticalArc &&arc) Q_DECL_NOTHROW;
-    VEllipticalArc &operator=(VEllipticalArc &&arc) Q_DECL_NOTHROW;
+    VEllipticalArc(VEllipticalArc &&arc) Q_DECL_NOTHROW;
+    auto operator=(VEllipticalArc &&arc) Q_DECL_NOTHROW -> VEllipticalArc &;
 #endif
 
-    QString GetFormulaRotationAngle () const;
-    void    SetFormulaRotationAngle (const QString &formula, qreal value);
-    void    SetRotationAngle(qreal value);
-    qreal   GetRotationAngle() const;
+    auto GetFormulaRotationAngle() const -> QString;
+    void SetFormulaRotationAngle(const QString &formula, qreal value);
+    void SetRotationAngle(qreal value);
+    auto GetRotationAngle() const -> qreal;
 
-    QString GetFormulaRadius1 () const;
-    void    SetFormulaRadius1 (const QString &formula, qreal value);
-    void    SetRadius1 (qreal value);
-    qreal   GetRadius1 () const;
+    auto GetFormulaRadius1() const -> QString;
+    void SetFormulaRadius1(const QString &formula, qreal value);
+    void SetRadius1(qreal value);
+    auto GetRadius1() const -> qreal;
 
-    QString GetFormulaRadius2 () const;
-    void    SetFormulaRadius2 (const QString &formula, qreal value);
-    void    SetRadius2 (qreal value);
-    qreal   GetRadius2 () const;
+    auto GetFormulaRadius2() const -> QString;
+    void SetFormulaRadius2(const QString &formula, qreal value);
+    void SetRadius2(qreal value);
+    auto GetRadius2() const -> qreal;
 
-    virtual qreal GetLength () const override;
+    auto GetLength() const -> qreal override;
 
-    QPointF GetP1() const;
-    QPointF GetP2() const;
+    auto GetP1() const -> QPointF;
+    auto GetP2() const -> QPointF;
 
-    QTransform GetTransform() const;
-    void       SetTransform(const QTransform &matrix, bool combine = false);
+    auto GetTransform() const -> QTransform;
+    void SetTransform(const QTransform &matrix, bool combine = false);
 
-    virtual VPointF GetCenter () const override;
-    virtual QVector<QPointF> GetPoints () const override;
-    virtual qreal GetStartAngle () const override;
-    virtual qreal GetEndAngle () const override;
+    auto GetCenter() const -> VPointF;
+    auto GetPoints() const -> QVector<QPointF> override;
+    auto GetStartAngle() const -> qreal override;
+    auto GetEndAngle() const -> qreal override;
 
-    QPointF CutArc (const qreal &length, VEllipticalArc &arc1, VEllipticalArc &arc2, const QString &pointName) const;
-    QPointF CutArc (const qreal &length, const QString &pointName) const;
+    auto CutArc (const qreal &length, VEllipticalArc &arc1, VEllipticalArc &arc2,
+                 const QString &pointName) const -> QPointF;
+    auto CutArc (const qreal &length, const QString &pointName) const -> QPointF;
 
-    static qreal OptimizeAngle(qreal angle);
+    static auto OptimizeAngle(qreal angle) -> qreal;
 protected:
-    virtual void CreateName() override;
-    virtual void CreateAlias() override;
-    virtual void FindF2(qreal length) override;
+    void CreateName() override;
+    void CreateAlias() override;
+    void FindF2(qreal length) override;
 private:
     QSharedDataPointer<VEllipticalArcData> d;
 
-    qreal MaxLength() const;
+    auto MaxLength() const -> qreal;
 
-    QPointF GetP(qreal angle) const;
+    auto GetP(qreal angle) const -> QPointF;
 
-    qreal RealEndAngle() const;
+    auto RealEndAngle() const -> qreal;
 };
 
-Q_DECLARE_METATYPE(VEllipticalArc)
-Q_DECLARE_TYPEINFO(VEllipticalArc, Q_MOVABLE_TYPE);
+Q_DECLARE_METATYPE(VEllipticalArc) // NOLINT
+Q_DECLARE_TYPEINFO(VEllipticalArc, Q_MOVABLE_TYPE); // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
-inline qreal VEllipticalArc::OptimizeAngle(qreal angle)
+inline auto VEllipticalArc::OptimizeAngle(qreal angle) -> qreal
 {
     return angle - 360.*qFloor(angle/360.);
 }

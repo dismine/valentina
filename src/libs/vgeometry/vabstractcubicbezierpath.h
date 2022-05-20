@@ -49,39 +49,39 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 
 class VAbstractCubicBezierPath : public VAbstractBezier
 {
-    Q_DECLARE_TR_FUNCTIONS(VAbstractCubicBezierPath)
+    Q_DECLARE_TR_FUNCTIONS(VAbstractCubicBezierPath) // NOLINT
 public:
-    VAbstractCubicBezierPath(const GOType &type, const quint32 &idObject = NULL_ID,
-                             const Draw &mode = Draw::Calculation);
-    VAbstractCubicBezierPath(const VAbstractCubicBezierPath &curve);
-    VAbstractCubicBezierPath& operator= (const VAbstractCubicBezierPath &curve);
-    virtual ~VAbstractCubicBezierPath();
+    explicit VAbstractCubicBezierPath(const GOType &type, const quint32 &idObject = NULL_ID,
+                                      const Draw &mode = Draw::Calculation);
+    VAbstractCubicBezierPath(const VAbstractCubicBezierPath &curve) = default;
+    auto operator= (const VAbstractCubicBezierPath &curve) -> VAbstractCubicBezierPath&;
+    ~VAbstractCubicBezierPath() override;
 
-    virtual qint32  CountSubSpl() const =0;
-    virtual qint32  CountPoints() const =0;
-    virtual void    Clear() =0;
-    virtual VSpline GetSpline(qint32 index) const =0;
-    virtual QVector<VSplinePoint> GetSplinePath() const =0;
+    virtual auto CountSubSpl() const -> qint32 =0;
+    virtual auto CountPoints() const -> qint32 =0;
+    virtual void Clear() =0;
+    virtual auto GetSpline(qint32 index) const -> VSpline =0;
+    virtual auto GetSplinePath() const -> QVector<VSplinePoint> =0;
 
-    virtual QPainterPath     GetPath() const override;
-    virtual QVector<QPointF> GetPoints() const override;
-    virtual qreal            GetLength() const override;
+    auto GetPath() const -> QPainterPath override;
+    auto GetPoints() const -> QVector<QPointF> override;
+    auto GetLength() const -> qreal override;
 
-    virtual QVector<DirectionArrow> DirectionArrows() const override;
+    auto DirectionArrows() const -> QVector<DirectionArrow> override;
 
-    int Segment(const QPointF &p) const;
+    auto Segment(const QPointF &p) const -> int;
 
-    QPointF CutSplinePath(qreal length, qint32 &p1, qint32 &p2, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2,
-                          QPointF &spl2p3, const QString &pointName) const;
+    auto CutSplinePath(qreal length, qint32 &p1, qint32 &p2, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2,
+                       QPointF &spl2p3, const QString &pointName) const -> QPointF;
 
-    virtual QString NameForHistory(const QString &toolName) const override;
+    auto NameForHistory(const QString &toolName) const -> QString override;
 
 protected:
-    virtual void CreateName() override;
-    virtual void CreateAlias() override;
+    void CreateName() override;
+    void CreateAlias() override;
 
-    virtual VPointF FirstPoint() const =0;
-    virtual VPointF LastPoint() const =0;
+    virtual auto FirstPoint() const -> VPointF =0;
+    virtual auto LastPoint() const -> VPointF =0;
 };
 
 QT_WARNING_POP

@@ -278,7 +278,7 @@ void VToolCutSpline::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolCutSpline::MakeToolTip() const
+auto VToolCutSpline::MakeToolTip() const -> QString
 {
     const auto spl = VAbstractTool::data.GeometricObject<VAbstractCubicBezier>(baseCurveId);
 

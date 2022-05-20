@@ -67,7 +67,7 @@ VAbstractArc::VAbstractArc(const VAbstractArc &arc)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractArc &VAbstractArc::operator=(const VAbstractArc &arc)
+auto VAbstractArc::operator=(const VAbstractArc &arc) -> VAbstractArc &
 {
     if ( &arc == this )
     {
@@ -81,11 +81,12 @@ VAbstractArc &VAbstractArc::operator=(const VAbstractArc &arc)
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractArc::VAbstractArc(VAbstractArc &&arc) Q_DECL_NOTHROW
-    : VAbstractCurve(arc), d (arc.d)
+    : VAbstractCurve(std::move(arc)),
+      d(std::move(arc.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractArc &VAbstractArc::operator=(VAbstractArc &&arc) Q_DECL_NOTHROW
+auto VAbstractArc::operator=(VAbstractArc &&arc) Q_DECL_NOTHROW -> VAbstractArc &
 {
     VAbstractCurve::operator=(arc);
     std::swap(d, arc.d);
@@ -94,11 +95,11 @@ VAbstractArc &VAbstractArc::operator=(VAbstractArc &&arc) Q_DECL_NOTHROW
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractArc::~VAbstractArc()
+VAbstractArc::~VAbstractArc() // NOLINT(hicpp-use-equals-default, modernize-use-equals-default)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractArc::GetFormulaF1() const
+auto VAbstractArc::GetFormulaF1() const -> QString
 {
     return d->formulaF1;
 }
@@ -111,13 +112,13 @@ void VAbstractArc::SetFormulaF1(const QString &formula, qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VAbstractArc::GetStartAngle() const
+auto VAbstractArc::GetStartAngle() const -> qreal
 {
     return d->f1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractArc::GetFormulaF2() const
+auto VAbstractArc::GetFormulaF2() const -> QString
 {
     return d->formulaF2;
 }
@@ -130,13 +131,13 @@ void VAbstractArc::SetFormulaF2(const QString &formula, qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VAbstractArc::GetEndAngle() const
+auto VAbstractArc::GetEndAngle() const -> qreal
 {
     return d->f2;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPointF VAbstractArc::GetCenter() const
+auto VAbstractArc::GetCenter() const -> VPointF
 {
     return d->center;
 }
@@ -148,7 +149,7 @@ void VAbstractArc::SetCenter(const VPointF &point)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractArc::GetFormulaLength() const
+auto VAbstractArc::GetFormulaLength() const -> QString
 {
     return d->formulaLength;
 }
@@ -168,7 +169,7 @@ void VAbstractArc::setId(const quint32 &id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractArc::NameForHistory(const QString &toolName) const
+auto VAbstractArc::NameForHistory(const QString &toolName) const -> QString
 {
     QString name = toolName + QString(" %1").arg(GetCenter().name());
 
@@ -193,13 +194,13 @@ QString VAbstractArc::NameForHistory(const QString &toolName) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VAbstractArc::IsFlipped() const
+auto VAbstractArc::IsFlipped() const -> bool
 {
     return d->isFlipped;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VAbstractArc::AngleArc() const
+auto VAbstractArc::AngleArc() const -> qreal
 {
     {
         const qreal angleDiff = qAbs(GetStartAngle() - GetEndAngle());

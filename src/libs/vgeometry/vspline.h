@@ -52,81 +52,81 @@ class VSpline final :public VAbstractCubicBezier
 {
 public:
     VSpline();
-    VSpline (const VSpline &spline );
-    VSpline (const VPointF &p1, const VPointF &p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve,
-             quint32 idObject = 0, Draw mode = Draw::Calculation);
-    VSpline (const VPointF &p1, const QPointF &p2, const QPointF &p3, const VPointF &p4, quint32 idObject = 0,
-             Draw mode = Draw::Calculation);
-    VSpline (const VPointF &p1, const VPointF &p4, qreal angle1, const QString &angle1Formula, qreal angle2,
-             const QString &angle2Formula, qreal c1Length, const QString &c1LengthFormula, qreal c2Length,
-             const QString &c2LengthFormula, quint32 idObject = 0, Draw mode = Draw::Calculation);
-    VSpline Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
-    VSpline Flip(const QLineF &axis, const QString &prefix = QString()) const;
-    VSpline Move(qreal length, qreal angle, const QString &prefix = QString()) const;
-    virtual ~VSpline();
+    VSpline(const VSpline &spline );
+    VSpline(const VPointF &p1, const VPointF &p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve,
+            quint32 idObject = 0, Draw mode = Draw::Calculation);
+    VSpline(const VPointF &p1, const QPointF &p2, const QPointF &p3, const VPointF &p4, quint32 idObject = 0,
+            Draw mode = Draw::Calculation);
+    VSpline(const VPointF &p1, const VPointF &p4, qreal angle1, const QString &angle1Formula, qreal angle2,
+            const QString &angle2Formula, qreal c1Length, const QString &c1LengthFormula, qreal c2Length,
+            const QString &c2LengthFormula, quint32 idObject = 0, Draw mode = Draw::Calculation);
+    auto Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const -> VSpline;
+    auto Flip(const QLineF &axis, const QString &prefix = QString()) const -> VSpline;
+    auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VSpline;
+    ~VSpline() override;
 
-    VSpline &operator=(const VSpline &spline);
+    auto operator=(const VSpline &spline) -> VSpline &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VSpline(const VSpline &&spline) Q_DECL_NOTHROW;
-    VSpline &operator=(VSpline &&spline) Q_DECL_NOTHROW;
+    VSpline(VSpline &&spline) Q_DECL_NOTHROW;
+    auto operator=(VSpline &&spline) Q_DECL_NOTHROW -> VSpline &;
 #endif
 
-    virtual VPointF GetP1 () const override;
-    void            SetP1 (const VPointF &p);
+    auto GetP1() const -> VPointF override;
+    void SetP1(const VPointF &p);
 
-    virtual VPointF GetP2 () const override;
-    virtual VPointF GetP3 () const override;
+    auto GetP2() const -> VPointF override;
+    auto GetP3() const -> VPointF override;
 
-    virtual VPointF GetP4 () const override;
-    void            SetP4 (const VPointF &p);
+    auto GetP4() const -> VPointF override;
+    void SetP4(const VPointF &p);
 
-    virtual qreal GetStartAngle () const override;
-    virtual qreal GetEndAngle() const override;
+    auto GetStartAngle() const -> qreal override;
+    auto GetEndAngle() const -> qreal override;
 
-    QString GetStartAngleFormula () const;
-    QString GetEndAngleFormula() const;
+    auto GetStartAngleFormula () const -> QString;
+    auto GetEndAngleFormula() const -> QString;
 
-    void    SetStartAngle(qreal angle, const QString &formula);
-    void    SetEndAngle(qreal angle, const QString &formula);
+    void SetStartAngle(qreal angle, const QString &formula);
+    void SetEndAngle(qreal angle, const QString &formula);
 
-    virtual qreal GetC1Length() const override;
-    virtual qreal GetC2Length() const override;
+    auto GetC1Length() const -> qreal override;
+    auto GetC2Length() const -> qreal override;
 
-    QString GetC1LengthFormula() const;
-    QString GetC2LengthFormula() const;
+    auto GetC1LengthFormula() const -> QString;
+    auto GetC2LengthFormula() const -> QString;
 
-    void    SetC1Length(qreal length, const QString &formula);
-    void    SetC2Length(qreal length, const QString &formula);
+    void SetC1Length(qreal length, const QString &formula);
+    void SetC2Length(qreal length, const QString &formula);
 
-    virtual qreal   GetLength () const override;
-    qreal   GetKasm1() const;
-    qreal   GetKasm2() const;
-    qreal   GetKcurve() const;
+    auto GetLength() const -> qreal override;
+    auto GetKasm1() const -> qreal;
+    auto GetKasm2() const -> qreal;
+    auto GetKcurve() const -> qreal;
 
     using VAbstractCubicBezier::CutSpline;
-    QPointF CutSpline(qreal length, VSpline &spl1, VSpline &spl2, const QString &pointName) const;
+    auto CutSpline(qreal length, VSpline &spl1, VSpline &spl2, const QString &pointName) const -> QPointF;
 
-    virtual QVector<QPointF> GetPoints () const override;
+    auto GetPoints() const -> QVector<QPointF> override;
     // cppcheck-suppress unusedFunction
-    static QVector<QPointF> SplinePoints(const QPointF &p1, const QPointF &p4, qreal angle1, qreal angle2, qreal kAsm1,
-                                         qreal kAsm2, qreal kCurve, qreal approximationScale);
-    qreal   ParamT(const QPointF &pBt) const;
+    static auto SplinePoints(const QPointF &p1, const QPointF &p4, qreal angle1, qreal angle2, qreal kAsm1,
+                             qreal kAsm2, qreal kCurve, qreal approximationScale) -> QVector<QPointF>;
+    auto ParamT(const QPointF &pBt) const -> qreal;
 
-    virtual QJsonObject ToJson() const override;
+    auto ToJson() const -> QJsonObject override;
 
 protected:
-    virtual QPointF GetControlPoint1() const override;
-    virtual QPointF GetControlPoint2() const override;
-    auto GetRealLength () const -> qreal override;
+    auto GetControlPoint1() const -> QPointF override;
+    auto GetControlPoint2() const -> QPointF override;
+    auto GetRealLength() const -> qreal override;
 private:
     QSharedDataPointer<VSplineData> d;
-    QVector<qreal> CalcT(qreal curveCoord1, qreal curveCoord2, qreal curveCoord3, qreal curveCoord4,
-                         qreal pointCoord) const;
-    static qint32  Cubic(QVector<qreal> &x, qreal a, qreal b, qreal c);
-    static int     Sign(long double ld);
+    static auto CalcT(qreal curveCoord1, qreal curveCoord2, qreal curveCoord3, qreal curveCoord4,
+                      qreal pointCoord) -> QVector<qreal>;
+    static auto Cubic(QVector<qreal> &x, qreal a, qreal b, qreal c) -> qint32;
+    static auto Sign(long double ld) -> int;
 };
 
-Q_DECLARE_METATYPE(VSpline)
-Q_DECLARE_TYPEINFO(VSpline, Q_MOVABLE_TYPE);
+Q_DECLARE_METATYPE(VSpline) // NOLINT
+Q_DECLARE_TYPEINFO(VSpline, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VSPLINE_H

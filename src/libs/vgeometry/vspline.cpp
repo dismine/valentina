@@ -40,7 +40,8 @@
  * @brief VSpline default constructor
  */
 VSpline::VSpline()
-    :VAbstractCubicBezier(GOType::Spline), d(new VSplineData)
+    : VAbstractCubicBezier(GOType::Spline),
+      d(new VSplineData)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -48,8 +49,9 @@ VSpline::VSpline()
  * @brief VSpline constructor.
  * @param spline spline from which the copy.
  */
-VSpline::VSpline ( const VSpline & spline )
-    :VAbstractCubicBezier(spline), d(spline.d)
+VSpline::VSpline(const VSpline &spline)
+    : VAbstractCubicBezier(spline),
+      d(spline.d)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -112,7 +114,7 @@ VSpline::VSpline(const VPointF &p1, const VPointF &p4, qreal angle1, const QStri
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSpline VSpline::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const
+auto VSpline::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const -> VSpline
 {
     const VPointF p1 = GetP1().Rotate(originPoint, degrees);
     const VPointF p4 = GetP4().Rotate(originPoint, degrees);
@@ -135,7 +137,7 @@ VSpline VSpline::Rotate(const QPointF &originPoint, qreal degrees, const QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSpline VSpline::Flip(const QLineF &axis, const QString &prefix) const
+auto VSpline::Flip(const QLineF &axis, const QString &prefix) const -> VSpline
 {
     const VPointF p1 = GetP1().Flip(axis);
     const VPointF p4 = GetP4().Flip(axis);
@@ -158,7 +160,7 @@ VSpline VSpline::Flip(const QLineF &axis, const QString &prefix) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSpline VSpline::Move(qreal length, qreal angle, const QString &prefix) const
+auto VSpline::Move(qreal length, qreal angle, const QString &prefix) const -> VSpline
 {
     const VPointF p1 = GetP1().Move(length, angle);
     const VPointF p4 = GetP4().Move(length, angle);
@@ -181,7 +183,7 @@ VSpline VSpline::Move(qreal length, qreal angle, const QString &prefix) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSpline::~VSpline()
+VSpline::~VSpline() // NOLINT(hicpp-use-equals-default, modernize-use-equals-default)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -189,14 +191,14 @@ VSpline::~VSpline()
  * @brief GetLength return length of spline.
  * @return length.
  */
-qreal VSpline::GetLength () const
+auto VSpline::GetLength () const -> qreal
 {
     return LengthBezier ( static_cast<QPointF>(GetP1()), static_cast<QPointF>(GetP2()), static_cast<QPointF>(GetP3()),
                           static_cast<QPointF>(GetP4()), GetApproximationScale());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VSpline::CutSpline(qreal length, VSpline &spl1, VSpline &spl2, const QString &pointName) const
+auto VSpline::CutSpline(qreal length, VSpline &spl1, VSpline &spl2, const QString &pointName) const -> QPointF
 {
     QPointF spl1p2;
     QPointF spl1p3;
@@ -217,7 +219,7 @@ QPointF VSpline::CutSpline(qreal length, VSpline &spl1, VSpline &spl2, const QSt
  * @brief GetPoints return list with spline points.
  * @return list of points.
  */
-QVector<QPointF> VSpline::GetPoints () const
+auto VSpline::GetPoints () const -> QVector<QPointF>
 {
     return GetCubicBezierPoints(static_cast<QPointF>(GetP1()), static_cast<QPointF>(GetP2()),
                                 static_cast<QPointF>(GetP3()), static_cast<QPointF>(GetP4()), GetApproximationScale());
@@ -236,8 +238,8 @@ QVector<QPointF> VSpline::GetPoints () const
  * @return list with spline points.
  */
 // cppcheck-suppress unusedFunction
-QVector<QPointF> VSpline::SplinePoints(const QPointF &p1, const QPointF &p4, qreal angle1, qreal angle2, qreal kAsm1,
-                                       qreal kAsm2, qreal kCurve, qreal approximationScale)
+auto VSpline::SplinePoints(const QPointF &p1, const QPointF &p4, qreal angle1, qreal angle2, qreal kAsm1,
+                           qreal kAsm2, qreal kCurve, qreal approximationScale) -> QVector<QPointF>
 {
     QLineF p1pX(p1.x(), p1.y(), p1.x() + 100, p1.y());
     p1pX.setAngle( angle1 );
@@ -254,7 +256,7 @@ QVector<QPointF> VSpline::SplinePoints(const QPointF &p1, const QPointF &p4, qre
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSpline &VSpline::operator =(const VSpline &spline)
+auto VSpline::operator =(const VSpline &spline) -> VSpline &
 {
     if ( &spline == this )
     {
@@ -267,12 +269,13 @@ VSpline &VSpline::operator =(const VSpline &spline)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VSpline::VSpline(const VSpline &&spline) Q_DECL_NOTHROW
-    :VAbstractCubicBezier(spline), d(spline.d)
+VSpline::VSpline(VSpline &&spline) Q_DECL_NOTHROW
+    : VAbstractCubicBezier(spline),
+      d(spline.d)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VSpline &VSpline::operator=(VSpline &&spline) Q_DECL_NOTHROW
+auto VSpline::operator=(VSpline &&spline) Q_DECL_NOTHROW -> VSpline &
 {
     VAbstractCubicBezier::operator=(spline);
     std::swap(d, spline.d);
@@ -285,7 +288,7 @@ VSpline &VSpline::operator=(VSpline &&spline) Q_DECL_NOTHROW
  * @brief GetP1 return first spline point.
  * @return first point.
  */
-VPointF VSpline::GetP1() const
+auto VSpline::GetP1() const -> VPointF
 {
     return d->p1;
 }
@@ -301,7 +304,7 @@ void VSpline::SetP1(const VPointF &p)
  * @brief GetP2 return first control point.
  * @return first control point.
  */
-VPointF VSpline::GetP2() const
+auto VSpline::GetP2() const -> VPointF
 {
     QLineF p1p2(d->p1.x(), d->p1.y(), d->p1.x() + d->c1Length, d->p1.y());
     p1p2.setAngle(d->angle1);
@@ -313,7 +316,7 @@ VPointF VSpline::GetP2() const
  * @brief GetP3 return second control point.
  * @return second control point.
  */
-VPointF VSpline::GetP3() const
+auto VSpline::GetP3() const -> VPointF
 {
     QLineF p4p3(d->p4.x(), d->p4.y(), d->p4.x() + d->c2Length, d->p4.y());
     p4p3.setAngle(d->angle2);
@@ -325,7 +328,7 @@ VPointF VSpline::GetP3() const
  * @brief GetP4 return last spline point.
  * @return остання точка сплайну.
  */
-VPointF VSpline::GetP4() const
+auto VSpline::GetP4() const -> VPointF
 {
     return d->p4;
 }
@@ -341,7 +344,7 @@ void VSpline::SetP4(const VPointF &p)
  * @brief GetAngle1 return first angle control line.
  * @return angle.
  */
-qreal VSpline::GetStartAngle() const
+auto VSpline::GetStartAngle() const -> qreal
 {
     return d->angle1;
 }
@@ -351,19 +354,19 @@ qreal VSpline::GetStartAngle() const
  * @brief GetAngle2 return second angle control line.
  * @return angle.
  */
-qreal VSpline::GetEndAngle() const
+auto VSpline::GetEndAngle() const -> qreal
 {
     return d->angle2;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VSpline::GetStartAngleFormula() const
+auto VSpline::GetStartAngleFormula() const -> QString
 {
     return d->angle1F;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VSpline::GetEndAngleFormula() const
+auto VSpline::GetEndAngleFormula() const -> QString
 {
     return d->angle2F;
 }
@@ -383,25 +386,25 @@ void VSpline::SetEndAngle(qreal angle, const QString &formula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VSpline::GetC1Length() const
+auto VSpline::GetC1Length() const -> qreal
 {
     return d->c1Length;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VSpline::GetC2Length() const
+auto VSpline::GetC2Length() const -> qreal
 {
     return d->c2Length;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VSpline::GetC1LengthFormula() const
+auto VSpline::GetC1LengthFormula() const -> QString
 {
     return d->c1LengthF;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VSpline::GetC2LengthFormula() const
+auto VSpline::GetC2LengthFormula() const -> QString
 {
     return d->c2LengthF;
 }
@@ -425,7 +428,7 @@ void VSpline::SetC2Length(qreal length, const QString &formula)
  * @brief GetKasm1 return coefficient of length first control line.
  * @return coefficient.
  */
-qreal VSpline::GetKasm1() const
+auto VSpline::GetKasm1() const -> qreal
 {
     return QLineF(static_cast<QPointF>(d->p1), static_cast<QPointF>(GetP2())).length() /
             VSplineData::GetL(static_cast<QPointF>(d->p1), static_cast<QPointF>(d->p4), d->kCurve);
@@ -436,7 +439,7 @@ qreal VSpline::GetKasm1() const
  * @brief GetKasm2 return coefficient of length second control line.
  * @return coefficient.
  */
-qreal VSpline::GetKasm2() const
+auto VSpline::GetKasm2() const -> qreal
 {
     return QLineF(static_cast<QPointF>(d->p4), static_cast<QPointF>(GetP3())).length() /
             VSplineData::GetL(static_cast<QPointF>(d->p1), static_cast<QPointF>(d->p4), d->kCurve);
@@ -447,13 +450,13 @@ qreal VSpline::GetKasm2() const
  * @brief GetKcurve return coefficient of curvature spline.
  * @return coefficient
  */
-qreal VSpline::GetKcurve() const
+auto VSpline::GetKcurve() const -> qreal
 {
     return d->kCurve;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VSpline::Sign(long double ld)
+auto VSpline::Sign(long double ld) -> int
 {
     if (qAbs(ld)<0.00000000001)
     {
@@ -481,7 +484,7 @@ int VSpline::Sign(long double ld)
  *         1 - 1 real root + 2 complex;
  *         2 - 1 real root + complex roots imaginary part is zero (i.e. 2 real roots).
  */
-qint32 VSpline::Cubic(QVector<qreal> &x, qreal a, qreal b, qreal c)
+auto VSpline::Cubic(QVector<qreal> &x, qreal a, qreal b, qreal c) -> qint32
 {
     //To find cubic equation roots in the case of real coefficients, calculated at the beginning
     const qreal q = (pow(a, 2) - 3*b)/9.;
@@ -494,26 +497,25 @@ qint32 VSpline::Cubic(QVector<qreal> &x, qreal a, qreal b, qreal c)
         x.insert(2, -2.*sqrt(q)*cos(t - (2*M_2PI/3.)) - a/3.);
         return(3);
     }
-    else
-    { // 1 real root + 2 complex
-        //Formula Cardano
-        const qreal aa = -Sign(r)*pow(fabs(r)+sqrt(pow(r, 2)-pow(q, 3)), 1./3.);
-        const qreal bb = Sign(aa) == 0 ? 0 : q/aa;
 
-        x.insert(0, aa+bb-a/3.); // Real root
-        x.insert(1, (-0.5)*(aa+bb)-a/3.); //Complex root
-        x.insert(2, (sqrt(3.)*0.5)*fabs(aa-bb)); // Complex root
-        if (qFuzzyIsNull(x.at(2)))
-        {
-            return(2);
-        }
-        return(1);
+    // 1 real root + 2 complex
+    //Formula Cardano
+    const qreal aa = -Sign(r)*pow(fabs(r)+sqrt(pow(r, 2)-pow(q, 3)), 1./3.);
+    const qreal bb = Sign(aa) == 0 ? 0 : q/aa;
+
+    x.insert(0, aa+bb-a/3.); // Real root
+    x.insert(1, (-0.5)*(aa+bb)-a/3.); //Complex root
+    x.insert(2, (sqrt(3.)*0.5)*fabs(aa-bb)); // Complex root
+    if (qFuzzyIsNull(x.at(2)))
+    {
+        return(2);
     }
+    return(1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<qreal> VSpline::CalcT (qreal curveCoord1, qreal curveCoord2, qreal curveCoord3,
-                               qreal curveCoord4, qreal pointCoord) const
+auto VSpline::CalcT(qreal curveCoord1, qreal curveCoord2, qreal curveCoord3, qreal curveCoord4,
+                    qreal pointCoord) -> QVector<qreal>
 {
     const qreal a = -curveCoord1 + 3*curveCoord2 - 3*curveCoord3 + curveCoord4;
     const qreal b = 3*curveCoord1 - 6*curveCoord2 + 3*curveCoord3;
@@ -524,11 +526,12 @@ QVector<qreal> VSpline::CalcT (qreal curveCoord1, qreal curveCoord2, qreal curve
     Cubic(t, b/a, c/a, d/a);
 
     QVector<qreal> retT;
-    for (int i=0; i < t.size(); ++i)
+    retT.reserve(t.size());
+    for (auto i : qAsConst(t))
     {
-        if ( t.at(i) >= 0 && t.at(i) <= 1 )
+        if (i >= 0 && i <= 1 )
         {
-            retT.append(t.at(i));
+            retT.append(i);
         }
     }
 
@@ -544,7 +547,7 @@ QVector<qreal> VSpline::CalcT (qreal curveCoord1, qreal curveCoord2, qreal curve
  * @param pBt point on curve
  * @return t coeffient that reprezent this point on curve. Return -1 if point doesn't belongs to curve.
  */
-qreal VSpline::ParamT (const QPointF &pBt) const
+auto VSpline::ParamT (const QPointF &pBt) const -> qreal
 {
     QVector<qreal> ts;
     // Calculate t coefficient for each axis
@@ -583,7 +586,7 @@ qreal VSpline::ParamT (const QPointF &pBt) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QJsonObject VSpline::ToJson() const
+auto VSpline::ToJson() const -> QJsonObject
 {
     QJsonObject object = VAbstractCubicBezier::ToJson();
     object[QLatin1String("aScale")] = GetApproximationScale();
@@ -601,13 +604,13 @@ QJsonObject VSpline::ToJson() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VSpline::GetControlPoint1() const
+auto VSpline::GetControlPoint1() const -> QPointF
 {
     return static_cast<QPointF>(GetP2 ());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VSpline::GetControlPoint2() const
+auto VSpline::GetControlPoint2() const -> QPointF
 {
     return static_cast<QPointF>(GetP3 ());
 }

@@ -47,35 +47,36 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 class VAbstractCubicBezier : public VAbstractBezier
 {
 public:
-    VAbstractCubicBezier(const GOType &type, const quint32 &idObject = NULL_ID, const Draw &mode = Draw::Calculation);
-    VAbstractCubicBezier(const VAbstractCubicBezier &curve);
-    VAbstractCubicBezier& operator= (const VAbstractCubicBezier &curve);
-    virtual ~VAbstractCubicBezier();
+    explicit VAbstractCubicBezier(const GOType &type, const quint32 &idObject = NULL_ID,
+                                  const Draw &mode = Draw::Calculation);
+    VAbstractCubicBezier(const VAbstractCubicBezier &curve) = default;
+    auto operator= (const VAbstractCubicBezier &curve) -> VAbstractCubicBezier&;
+    ~VAbstractCubicBezier() override;
 
-    virtual VPointF GetP1 () const =0;
-    virtual VPointF GetP2 () const =0;
-    virtual VPointF GetP3 () const =0;
-    virtual VPointF GetP4 () const =0;
+    virtual auto GetP1 () const -> VPointF =0;
+    virtual auto GetP2 () const -> VPointF =0;
+    virtual auto GetP3 () const -> VPointF =0;
+    virtual auto GetP4 () const -> VPointF =0;
 
-    QPointF CutSpline (qreal length, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2, QPointF &spl2p3,
-                       const QString &pointName) const;
+    auto CutSpline(qreal length, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2, QPointF &spl2p3,
+                   const QString &pointName) const -> QPointF;
 
-    virtual QString NameForHistory(const QString &toolName) const override;
+    auto NameForHistory(const QString &toolName) const -> QString override;
 
-    qreal GetParmT(qreal length) const;
-    qreal RealLengthByT(qreal t) const;
+    auto GetParmT(qreal length) const -> qreal;
+    auto RealLengthByT(qreal t) const -> qreal;
 
 protected:
-    virtual void CreateName() override;
-    virtual void CreateAlias() override;
+    void CreateName() override;
+    void CreateAlias() override;
 
-    static QVector<QPointF> GetCubicBezierPoints(const QPointF &p1, const QPointF &p2, const QPointF &p3,
-                                                 const QPointF &p4, qreal approximationScale);
-    static qreal            LengthBezier(const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4,
-                                         qreal approximationScale);
+    static auto GetCubicBezierPoints(const QPointF &p1, const QPointF &p2, const QPointF &p3,
+                                     const QPointF &p4, qreal approximationScale) -> QVector<QPointF>;
+    static auto LengthBezier(const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4,
+                             qreal approximationScale) -> qreal;
 
-    virtual QPointF GetControlPoint1() const =0;
-    virtual QPointF GetControlPoint2() const =0;
+    virtual auto GetControlPoint1() const -> QPointF =0;
+    virtual auto GetControlPoint2() const -> QPointF =0;
     virtual auto GetRealLength() const -> qreal =0;
 };
 
