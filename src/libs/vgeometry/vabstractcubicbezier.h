@@ -57,7 +57,8 @@ public:
     virtual VPointF GetP3 () const =0;
     virtual VPointF GetP4 () const =0;
 
-    QPointF CutSpline ( qreal length, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2, QPointF &spl2p3) const;
+    QPointF CutSpline (qreal length, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2, QPointF &spl2p3,
+                       const QString &pointName) const;
 
     virtual QString NameForHistory(const QString &toolName) const override;
 

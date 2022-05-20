@@ -74,7 +74,7 @@ void VisToolCutSpline::RefreshGeometry()
             QPointF spl1p3;
             QPointF spl2p2;
             QPointF spl2p3;
-            const QPointF p = spl->CutSpline (length, spl1p2, spl1p3, spl2p2, spl2p3 );
+            const QPointF p = spl->CutSpline(length, spl1p2, spl1p3, spl2p2, spl2p3, QString());
 
             VSpline sp1 = VSpline(spl->GetP1(), spl1p2, spl1p3, VPointF(p));
             sp1.SetApproximationScale(spl->GetApproximationScale());

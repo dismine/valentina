@@ -399,7 +399,7 @@ void TST_VArc::TestCutArc()
 
     VArc arc1;
     VArc arc2;
-    QPointF point = arc.CutArc(cutLength, arc1, arc2);
+    QPointF point = arc.CutArc(cutLength, arc1, arc2, QString());
 
     QCOMPARE(point, cutPoint);
 

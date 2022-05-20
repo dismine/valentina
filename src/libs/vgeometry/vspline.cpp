@@ -196,13 +196,13 @@ qreal VSpline::GetLength () const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VSpline::CutSpline(qreal length, VSpline &spl1, VSpline &spl2) const
+QPointF VSpline::CutSpline(qreal length, VSpline &spl1, VSpline &spl2, const QString &pointName) const
 {
     QPointF spl1p2;
     QPointF spl1p3;
     QPointF spl2p2;
     QPointF spl2p3;
-    const QPointF cutPoint = CutSpline (length, spl1p2, spl1p3, spl2p2, spl2p3 );
+    const QPointF cutPoint = CutSpline(length, spl1p2, spl1p3, spl2p2, spl2p3, pointName);
 
     spl1 = VSpline(GetP1(), spl1p2, spl1p3, VPointF(cutPoint));
     spl1.SetApproximationScale(GetApproximationScale());

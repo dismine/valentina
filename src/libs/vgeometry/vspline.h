@@ -104,7 +104,7 @@ public:
     qreal   GetKcurve() const;
 
     using VAbstractCubicBezier::CutSpline;
-    QPointF CutSpline ( qreal length, VSpline &spl1, VSpline &spl2) const;
+    QPointF CutSpline(qreal length, VSpline &spl1, VSpline &spl2, const QString &pointName) const;
 
     virtual QVector<QPointF> GetPoints () const override;
     // cppcheck-suppress unusedFunction

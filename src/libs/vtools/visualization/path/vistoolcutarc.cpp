@@ -70,7 +70,7 @@ void VisToolCutArc::RefreshGeometry()
         {
             VArc ar1;
             VArc ar2;
-            QPointF p = arc->CutArc(length, ar1, ar2);
+            QPointF p = arc->CutArc(length, ar1, ar2, QString());
             DrawPoint(point, p, mainColor);
 
             DrawPath(arc1, ar1.GetPath(), ar1.DirectionArrows(), Qt::darkGreen, lineStyle, Qt::RoundCap);

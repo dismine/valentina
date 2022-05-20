@@ -101,8 +101,8 @@ public:
     virtual qreal GetStartAngle () const override;
     virtual qreal GetEndAngle () const override;
 
-    QPointF CutArc (const qreal &length, VEllipticalArc &arc1, VEllipticalArc &arc2) const;
-    QPointF CutArc (const qreal &length) const;
+    QPointF CutArc (const qreal &length, VEllipticalArc &arc1, VEllipticalArc &arc2, const QString &pointName) const;
+    QPointF CutArc (const qreal &length, const QString &pointName) const;
 
     static qreal OptimizeAngle(qreal angle);
 protected:

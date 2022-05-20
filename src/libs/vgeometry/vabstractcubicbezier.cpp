@@ -406,10 +406,11 @@ VAbstractCubicBezier::~VAbstractCubicBezier()
  * @param spl1p3 third point of first spline
  * @param spl2p2 second point of second spline
  * @param spl2p3 third point of second spline
+ * @param pointName cutting point name.
  * @return point of cutting. This point is forth point of first spline and first point of second spline.
  */
 QPointF VAbstractCubicBezier::CutSpline(qreal length, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2,
-                                        QPointF &spl2p3) const
+                                        QPointF &spl2p3, const QString &pointName) const
 {
     //Always need return two splines, so we must correct wrong length.
     const qreal minLength = ToPixel(1, Unit::Mm);
@@ -423,7 +424,7 @@ QPointF VAbstractCubicBezier::CutSpline(qreal length, QPointF &spl1p2, QPointF &
         VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
                                           qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
 
-        return QPointF();
+        return {};
     }
 
     const qreal maxLength = fullLength - minLength;
@@ -432,8 +433,17 @@ QPointF VAbstractCubicBezier::CutSpline(qreal length, QPointF &spl1p2, QPointF &
     {
         length = minLength;
 
-        const QString errorMsg = QObject::tr("Curve '%1'. Length of a cut segment is too small. Optimize it to minimal "
-                                             "value.").arg(name());
+        QString errorMsg;
+        if (not pointName.isEmpty())
+        {
+            errorMsg = QObject::tr("Curve '%1'. Length of a cut segment (%2) is too small. Optimize it to minimal "
+                                   "value.").arg(name(), pointName);
+        }
+        else
+        {
+            errorMsg = QObject::tr("Curve '%1'. Length of a cut segment is too small. Optimize it to minimal value.")
+                    .arg(name());
+        }
         VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
                                           qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
@@ -441,8 +451,17 @@ QPointF VAbstractCubicBezier::CutSpline(qreal length, QPointF &spl1p2, QPointF &
     {
         length = maxLength;
 
-        const QString errorMsg = QObject::tr("Curve '%1'. Length of a cut segment is too big. Optimize it to maximal "
-                                             "value.").arg(name());
+        QString errorMsg;
+        if (not pointName.isEmpty())
+        {
+            errorMsg = QObject::tr("Curve '%1'. Length of a cut segment (%2) is too big. Optimize it to maximal value.")
+                    .arg(name(), pointName);
+        }
+        else
+        {
+            errorMsg = QObject::tr("Curve '%1'. Length of a cut segment is too big. Optimize it to maximal value.")
+                    .arg(name());
+        }
         VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
                                           qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }

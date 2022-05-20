@@ -143,7 +143,8 @@ VToolCutSpline* VToolCutSpline::Create(VToolCutInitData &initData)
     const qreal result = CheckFormula(initData.id, initData.formula, initData.data);
 
     QPointF spl1p2, spl1p3, spl2p2, spl2p3;
-    QPointF point = spl->CutSpline(VAbstractValApplication::VApp()->toPixel(result), spl1p2, spl1p3, spl2p2, spl2p3);
+    QPointF point = spl->CutSpline(VAbstractValApplication::VApp()->toPixel(result), spl1p2, spl1p3, spl2p2, spl2p3,
+                                   initData.name);
 
     VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
@@ -285,8 +286,11 @@ QString VToolCutSpline::MakeToolTip() const
             ->FormulaToUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     const qreal length = Visualization::FindValFromUser(expression, VAbstractTool::data.DataVariables());
 
+    const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
+
     QPointF spl1p2, spl1p3, spl2p2, spl2p3;
-    QPointF point = spl->CutSpline(VAbstractValApplication::VApp()->toPixel(length), spl1p2, spl1p3, spl2p2, spl2p3);
+    QPointF point = spl->CutSpline(VAbstractValApplication::VApp()->toPixel(length), spl1p2, spl1p3, spl2p2, spl2p3,
+                                   p->name());
 
     VSpline spline1 = VSpline(spl->GetP1(), spl1p2, spl1p3, VPointF(point));
     spline1.SetAliasSuffix(m_aliasSuffix1);

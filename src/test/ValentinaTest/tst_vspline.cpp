@@ -785,7 +785,7 @@ void TST_VSpline::TestLengthByPoint_data()
     const qreal length = spl.GetLength();
     const qreal testLength = length*(2.0/3.0);
     VSpline spl1, spl2;
-    const QPointF p = spl.CutSpline(testLength, spl1, spl2);
+    const QPointF p = spl.CutSpline(testLength, spl1, spl2, QString());
 
     QTest::newRow("Point on spline") << spl << p << testLength;
     QTest::newRow("Wrong point") << spl << QPointF(-10000, -10000) << -1.0;

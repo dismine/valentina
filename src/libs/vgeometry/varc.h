@@ -81,8 +81,8 @@ public:
 
     virtual QVector<QPointF> GetPoints () const override;
 
-    QPointF CutArc (qreal length, VArc &arc1, VArc &arc2) const;
-    QPointF CutArc (qreal length) const;
+    QPointF CutArc (qreal length, VArc &arc1, VArc &arc2, const QString &pointName) const;
+    QPointF CutArc (qreal length, const QString &pointName) const;
 protected:
     virtual void CreateName() override;
     virtual void CreateAlias() override;
@@ -93,6 +93,6 @@ private:
     qreal MaxLength() const;
 };
 
-Q_DECLARE_TYPEINFO(VArc, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VArc, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VARC_H

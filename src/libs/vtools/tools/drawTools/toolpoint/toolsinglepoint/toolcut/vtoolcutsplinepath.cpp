@@ -222,7 +222,7 @@ VPointF *VToolCutSplinePath::CutSplinePath(qreal length, const QSharedPointer<VA
     QPointF spl1p2, spl1p3, spl2p2, spl2p3;
     qint32 p1 = 0, p2 = 0;
 
-    const QPointF point = splPath->CutSplinePath(length, p1, p2, spl1p2, spl1p3, spl2p2, spl2p3);
+    const QPointF point = splPath->CutSplinePath(length, p1, p2, spl1p2, spl1p3, spl2p2, spl2p3, pName);
     VPointF *p = new VPointF(point);
     p->setName(pName);
 

@@ -127,13 +127,13 @@ VToolCutArc* VToolCutArc::Create(const QPointer<DialogTool> &dialog, VMainGraphi
  * @brief Create help create tool.
  * @param initData init data.
  */
-VToolCutArc* VToolCutArc::Create(VToolCutInitData &initData)
+auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc*
 {
     const QSharedPointer<VArc> arc = initData.data->GeometricObject<VArc>(initData.baseCurveId);
 
     //Declare special variable "CurrentLength"
-    VCurveLength *length = new VCurveLength(initData.baseCurveId, initData.baseCurveId, arc.data(),
-                                            *initData.data->GetPatternUnit());
+    auto *length = new VCurveLength(initData.baseCurveId, initData.baseCurveId, arc.data(),
+                                    *initData.data->GetPatternUnit());
     length->SetName(currentLength);
     initData.data->AddVariable(length);
 
@@ -141,7 +141,7 @@ VToolCutArc* VToolCutArc::Create(VToolCutInitData &initData)
 
     VArc arc1;
     VArc arc2;
-    QPointF point = arc->CutArc(VAbstractValApplication::VApp()->toPixel(result), arc1, arc2);
+    QPointF point = arc->CutArc(VAbstractValApplication::VApp()->toPixel(result), arc1, arc2, initData.name);
 
     arc1.SetAliasSuffix(initData.aliasSuffix1);
     arc2.SetAliasSuffix(initData.aliasSuffix2);
@@ -296,9 +296,11 @@ QString VToolCutArc::MakeToolTip() const
     const QString endAngleStr = tr("end angle");
     const QString radiusStr = tr("radius");
 
+    const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(m_id);
+
     VArc ar1;
     VArc ar2;
-    arc->CutArc(VAbstractValApplication::VApp()->toPixel(length), ar1, ar2);
+    arc->CutArc(VAbstractValApplication::VApp()->toPixel(length), ar1, ar2, point->name());
 
     ar1.setId(m_id + 1);
     ar1.SetAliasSuffix(m_aliasSuffix1);

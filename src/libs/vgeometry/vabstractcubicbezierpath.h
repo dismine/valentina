@@ -72,7 +72,7 @@ public:
     int Segment(const QPointF &p) const;
 
     QPointF CutSplinePath(qreal length, qint32 &p1, qint32 &p2, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2,
-                          QPointF &spl2p3) const;
+                          QPointF &spl2p3, const QString &pointName) const;
 
     virtual QString NameForHistory(const QString &toolName) const override;
 

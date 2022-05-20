@@ -347,7 +347,8 @@ qreal VEllipticalArc::GetEndAngle() const
  * @param arc2 second arc.
  * @return point cutting
  */
-QPointF VEllipticalArc::CutArc(const qreal &length, VEllipticalArc &arc1, VEllipticalArc &arc2) const
+QPointF VEllipticalArc::CutArc(const qreal &length, VEllipticalArc &arc1, VEllipticalArc &arc2,
+                               const QString &pointName) const
 {
     //Always need return two arcs, so we must correct wrong length.
     qreal len = 0;
@@ -363,7 +364,7 @@ QPointF VEllipticalArc::CutArc(const qreal &length, VEllipticalArc &arc1, VEllip
         VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
                                           qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
 
-        return QPointF();
+        return {};
     }
 
     const qreal maxLength = fullLength - minLength;
@@ -372,8 +373,17 @@ QPointF VEllipticalArc::CutArc(const qreal &length, VEllipticalArc &arc1, VEllip
     {
         len = minLength;
 
-        const QString errorMsg = QObject::tr("Curve '%1'. Length of a cut segment is too small. Optimize it to minimal "
-                                             "value.").arg(name());
+        QString errorMsg;
+        if (not pointName.isEmpty())
+        {
+            errorMsg = QObject::tr("Curve '%1'. Length of a cut segment (%2) is too small. Optimize it to minimal "
+                                   "value.").arg(name(), pointName);
+        }
+        else
+        {
+            errorMsg = QObject::tr("Curve '%1'. Length of a cut segment is too small. Optimize it to minimal value.")
+                    .arg(name());
+        }
         VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
                                           qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
@@ -381,8 +391,17 @@ QPointF VEllipticalArc::CutArc(const qreal &length, VEllipticalArc &arc1, VEllip
     {
         len = maxLength;
 
-        const QString errorMsg = QObject::tr("Curve '%1'. Length of a cut segment is too big. Optimize it to maximal "
-                                             "value.").arg(name());
+        QString errorMsg;
+        if (not pointName.isEmpty())
+        {
+            errorMsg = QObject::tr("Curve '%1'. Length of a cut segment (%2) is too big. Optimize it to maximal value.")
+                    .arg(name(), pointName);
+        }
+        else
+        {
+            errorMsg = QObject::tr("Curve '%1'. Length of a cut segment is too big. Optimize it to maximal value.")
+                    .arg(name());
+        }
         VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
                                           qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
@@ -405,11 +424,11 @@ QPointF VEllipticalArc::CutArc(const qreal &length, VEllipticalArc &arc1, VEllip
 
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VEllipticalArc::CutArc(const qreal &length) const
+QPointF VEllipticalArc::CutArc(const qreal &length, const QString &pointName) const
 {
     VEllipticalArc arc1;
     VEllipticalArc arc2;
-    return this->CutArc(length, arc1, arc2);
+    return this->CutArc(length, arc1, arc2, pointName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
