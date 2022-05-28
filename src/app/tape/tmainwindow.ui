@@ -1181,6 +1181,7 @@
     </property>
     <addaction name="actionAddKnown"/>
     <addaction name="actionAddCustom"/>
+    <addaction name="actionAddSeparator"/>
     <addaction name="actionDatabase"/>
     <addaction name="actionImportFromPattern"/>
     <addaction name="actionMeasurementDiagram"/>
