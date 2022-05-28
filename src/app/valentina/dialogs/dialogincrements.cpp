@@ -1101,7 +1101,10 @@ void DialogIncrements::UpdateSearchControlsTooltips()
 {
     auto UpdateToolTip = [](QAbstractButton *button)
     {
-        button->setToolTip(button->toolTip().arg(button->shortcut().toString(QKeySequence::NativeText)));
+        if (button->toolTip().contains(QLatin1String("%1")))
+        {
+            button->setToolTip(button->toolTip().arg(button->shortcut().toString(QKeySequence::NativeText)));
+        }
     };
 
     UpdateToolTip(ui->toolButtonCaseSensitive);
