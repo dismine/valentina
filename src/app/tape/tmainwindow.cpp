@@ -415,6 +415,9 @@ void TMainWindow::FileNew()
             DialogSetupMultisize setup(mUnit, this);
             if (setup.exec() == QDialog::Rejected)
             {
+                mUnit = Unit::Cm;
+                pUnit = mUnit;
+                mType = MeasurementsType::Individual;
                 return;
             }
 

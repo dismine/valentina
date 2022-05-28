@@ -4,6 +4,7 @@
 - Fix visualization for tool Point of intersection line and axis.
 - Improved curve segment warnings.
 - Tape app. Add action Add separator to menu.
+- Tape app. Fix crash after switching language.
 
 # Valentina 0.7.51 April 18, 2022
 - Z value change for a layout piece.
