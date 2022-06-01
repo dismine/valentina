@@ -5,6 +5,7 @@
 - Improved curve segment warnings.
 - Tape app. Add action Add separator to menu.
 - Tape app. Fix crash after switching language.
+- Fix Valentina app crash after canceling a tool.
 
 # Valentina 0.7.51 April 18, 2022
 - Z value change for a layout piece.

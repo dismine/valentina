@@ -182,6 +182,9 @@ void DialogAlongLine::DeployFormulaTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 DialogAlongLine::~DialogAlongLine()
 {
+    auto *locData = const_cast<VContainer *> (data);
+    locData->RemoveVariable(currentLength);
+
     delete ui;
 }
 
@@ -283,7 +286,7 @@ void DialogAlongLine::SetCurrentLength()
     SCASSERT(length != nullptr)
     length->SetName(currentLength);
 
-    VContainer *locData = const_cast<VContainer *> (data);
+    auto *locData = const_cast<VContainer *> (data);
     locData->AddVariable(length);
 }
 

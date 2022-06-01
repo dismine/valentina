@@ -147,6 +147,9 @@ void DialogCutArc::DeployFormulaTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 DialogCutArc::~DialogCutArc()
 {
+    auto *locData = const_cast<VContainer *> (data);
+    locData->RemoveVariable(currentLength);
+
     delete ui;
 }
 

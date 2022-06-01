@@ -106,6 +106,9 @@ DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, quint32 toolId,
 //---------------------------------------------------------------------------------------------------------------------
 DialogCutSplinePath::~DialogCutSplinePath()
 {
+    auto *locData = const_cast<VContainer *> (data);
+    locData->RemoveVariable(currentLength);
+
     delete ui;
 }
 
