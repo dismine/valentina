@@ -57,6 +57,9 @@ public slots:
     void SelectDetail(quint32 id);
     void ToggledPiece(quint32 id);
 
+protected:
+    virtual void changeEvent ( QEvent * event) override;
+
 private slots:
     void InLayoutStateChanged(int row, int column);
     void ShowContextMenu(const QPoint &pos);

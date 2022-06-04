@@ -124,6 +124,17 @@ void VWidgetDetails::ToggledPiece(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VWidgetDetails::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+    // remember to call base class implementation
+    QWidget::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VWidgetDetails::InLayoutStateChanged(int row, int column)
 {
     QTableWidgetItem *item = ui->tableWidget->item(row, PieceColumn::InLayout);
