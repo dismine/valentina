@@ -466,7 +466,7 @@ void VPLayoutFileReader::ReadPiece(const VPPiecePtr &piece)
     QString uuidStr = ReadAttributeString(attribs, ML::AttrID, QUuid::createUuid().toString());
     piece->SetUUID(QUuid(uuidStr));
 
-    piece->SetName(ReadAttributeEmptyString(attribs, ML::AttrGradationLabel));
+    piece->SetGradationId(ReadAttributeEmptyString(attribs, ML::AttrGradationLabel));
     piece->SetCopyNumber(static_cast<quint16>(ReadAttributeUInt(attribs, ML::AttrCopyNumber, QChar('1'))));
     piece->SetHideMainPath(not ReadAttributeBool(attribs, ML::AttrShowSeamline, trueStr));
     piece->SetXScale(ReadAttributeDouble(attribs, ML::AttrXScale, QChar('1')));
