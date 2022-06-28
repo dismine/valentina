@@ -515,7 +515,7 @@ auto VArc::CutPointFlipped(qreal length, qreal fullLength, const QString &pointN
     const qreal minLength = fullLength + ToPixel(1, Unit::Mm);
     const qreal maxLength = ToPixel(-1, Unit::Mm);
 
-    if (length > minLength)
+    if (length < minLength)
     {
         QString errorMsg;
         if (not pointName.isEmpty())
@@ -531,7 +531,7 @@ auto VArc::CutPointFlipped(qreal length, qreal fullLength, const QString &pointN
         VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
                                           qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
-    else if (length < maxLength)
+    else if (length > maxLength)
     {
         QString errorMsg;
         if (not pointName.isEmpty())

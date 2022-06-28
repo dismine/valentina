@@ -7,6 +7,7 @@
 - Tape app. Fix crash after switching language.
 - Fix Valentina app crash after canceling a tool.
 - Puzzle app. Fix reading a piece name.
+- Fix warning while segmenting flipped arc.
 
 # Valentina 0.7.51 April 18, 2022
 - Z value change for a layout piece.
