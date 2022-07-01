@@ -459,11 +459,22 @@ void VMeasurements::ClearForExport()
     for (int i=0; i < list.size(); ++i)
     {
         QDomElement domElement = list.at(i).toElement();
-        if (domElement.isNull() == false)
+        if (not domElement.isNull())
         {
-            if (qmu::QmuTokenParser::IsSingle(domElement.attribute(AttrValue)))
+            if (Type() == MeasurementsType::Individual)
             {
-                SetAttribute(domElement, AttrValue, QChar('0'));
+                if (qmu::QmuTokenParser::IsSingle(domElement.attribute(AttrValue)))
+                {
+                    SetAttribute(domElement, AttrValue, QChar('0'));
+                }
+            }
+            else if (Type() == MeasurementsType::Multisize)
+            {
+                SetAttribute(domElement, AttrBase, QChar('0'));
+                domElement.removeAttribute(AttrShiftA);
+                domElement.removeAttribute(AttrShiftB);
+                domElement.removeAttribute(AttrShiftC);
+                RemoveAllChildren(domElement);
             }
         }
     }

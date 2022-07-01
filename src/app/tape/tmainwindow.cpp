@@ -512,18 +512,10 @@ void TMainWindow::OpenTemplate()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::CreateFromExisting()
 {
-    const QString filter = tr("Individual measurements") + QStringLiteral(" (*.vit)");
-    //Use standard path to individual measurements
-    const QString pathTo = MApplication::VApp()->TapeSettings()->GetPathIndividualMeasurements();
+    const QString filter = tr("Measurements") + QStringLiteral(" (*.vst *.vit);;") + tr("All files") +
+                           QStringLiteral(" (*.*)");
 
-    bool usedNotExistedDir = false;
-    QDir directory(pathTo);
-    if (not directory.exists())
-    {
-        usedNotExistedDir = directory.mkpath(QChar('.'));
-    }
-
-    const QString mPath = QFileDialog::getOpenFileName(this, tr("Select file"), pathTo, filter, nullptr,
+    const QString mPath = QFileDialog::getOpenFileName(this, tr("Select file"), QDir::homePath(), filter, nullptr,
                                                        VAbstractApplication::VApp()->NativeFileDialog());
 
     if (not mPath.isEmpty())
@@ -536,11 +528,6 @@ void TMainWindow::CreateFromExisting()
         {
             MApplication::VApp()->NewMainWindow()->CreateFromExisting();
         }
-    }
-
-    if (usedNotExistedDir)
-    {
-        QDir(pathTo).rmpath(QChar('.'));
     }
 }
 
@@ -3679,15 +3666,13 @@ bool TMainWindow::LoadFromExistingFile(const QString &path)
                 throw VException(tr("File has unknown format."));
             }
 
-            if (mType == MeasurementsType::Multisize)
-            {
-                throw VException (tr("Export from multisize measurements is not supported."));
-            }
+            QScopedPointer<VAbstractMConverter> converter(
+                (mType == MeasurementsType::Individual) ? static_cast<VAbstractMConverter*>(new VVITConverter(path))
+                                                        : static_cast<VAbstractMConverter*>(new VVSTConverter(path)));
 
-            VVITConverter converter(path);
-            m_curFileFormatVersion = converter.GetCurrentFormatVersion();
-            m_curFileFormatVersionStr = converter.GetFormatVersionStr();
-            m->setXMLContent(converter.Convert());// Read again after conversion
+            m_curFileFormatVersion = converter->GetCurrentFormatVersion();
+            m_curFileFormatVersionStr = converter->GetFormatVersionStr();
+            m->setXMLContent(converter->Convert());// Read again after conversion
 
             if (not m->IsDefinedKnownNamesValid())
             {

@@ -8,6 +8,7 @@
 - Fix Valentina app crash after canceling a tool.
 - Puzzle app. Fix reading a piece name.
 - Fix warning while segmenting flipped arc.
+- Tape app. "Export from existing ..." now supports multisize measurements.
 
 # Valentina 0.7.51 April 18, 2022
 - Z value change for a layout piece.
