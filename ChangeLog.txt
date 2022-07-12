@@ -9,6 +9,7 @@
 - Puzzle app. Fix reading a piece name.
 - Fix warning while segmenting flipped arc.
 - Tape app. "Export from existing ..." now supports multisize measurements.
+- Fix main path validation. False positive double curve.
 
 # Valentina 0.7.51 April 18, 2022
 - Z value change for a layout piece.

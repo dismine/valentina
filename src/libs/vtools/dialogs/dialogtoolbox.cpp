@@ -146,8 +146,9 @@ auto DoubleCurve(const VPieceNode &firstNode, const VPieceNode &secondNode, cons
         }
 
         // The same curve, but different modeling objects
-        if (curve1->getIdObject() != NULL_ID && curve2->getIdObject() != NULL_ID &&
-                curve1->getIdObject() == curve2->getIdObject())
+        if (curve1->getMode() == Draw::Modeling && curve2->getMode() == Draw::Modeling &&
+            curve1->getIdObject() != NULL_ID && curve2->getIdObject() != NULL_ID &&
+            curve1->getIdObject() == curve2->getIdObject())
         {
             error = QObject::tr("Leave only one copy of curve '%1'").arg(curve1->name());
             return true;
