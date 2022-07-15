@@ -231,15 +231,14 @@ void VPattern::Parse(const Document &parse)
         }
         domNode = domNode.nextSibling();
     }
-    if (VApplication::VApp()->IsGUIMode())
+    if (VApplication::IsGUIMode())
     {
-        QTimer::singleShot(1000, Qt::VeryCoarseTimer, this, SLOT(RefreshPieceGeometry()));
+        QTimer::singleShot(1000, Qt::VeryCoarseTimer, this, &VPattern::RefreshPieceGeometry);
     }
     else if (VApplication::VApp()->CommandLine()->IsTestModeEnabled())
     {
         RefreshPieceGeometry();
     }
-    emit CheckLayout();
     m_parsing = false;
 }
 
@@ -3732,6 +3731,8 @@ void VPattern::RefreshPieceGeometry()
             return;
         }
     }
+
+    emit CheckLayout();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
