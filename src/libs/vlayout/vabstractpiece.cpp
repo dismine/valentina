@@ -1063,7 +1063,7 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
     if (width < 0)
     {
         qDebug()<<"Width < 0.";
-        return QVector<QPointF>();
+        return {};
     }
     width = qMax(width, VSAPoint::minSAWidth);
 
@@ -1078,7 +1078,7 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
         const QString errorMsg = tr("Piece '%1'. Not enough points to build seam allowance.").arg(name);
         VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
                                               qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
-        return QVector<QPointF>();
+        return {};
     }
 
     if (ConstLast(points).toPoint() != ConstFirst(points).toPoint())

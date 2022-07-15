@@ -249,7 +249,8 @@ void TST_VAbstractPiece::EquidistantRemoveLoop_data()
                      QStringLiteral("://loop_by_intersection/output.json"),
                      39.685039370078741 /*seam allowance width (1.05 cm)*/);
 
-    // See file src/app/share/collection/bugs/loop_start_point_on_line.val (private collection)
+    // See file valentina_private_collection/bugs/loop_start_point_on_line/loop_start_point_on_line.val
+    // (private collection)
     ASSERT_TEST_CASE("Loop for start point on line",
                      QStringLiteral("://loop_start_point_on_line/input.json"),
                      QStringLiteral("://loop_start_point_on_line/output.json"),
@@ -347,13 +348,13 @@ void TST_VAbstractPiece::LayoutAllowanceRemoveLoop_data()
                      QStringLiteral("://smart_pattern_#99/output.json"),
                      28.346456692913389 /*seam allowance width*/);
 
-    // See file src/app/share/collection/test/smart_pattern_#120.val (private collection)
+    // See file valentina_private_collection/test/smart_pattern_#120/smart_pattern_#120.val (private collection)
     ASSERT_TEST_CASE("Piece 1",
                      QStringLiteral("://smart_pattern_#120_piece_1/input.json"),
                      QStringLiteral("://smart_pattern_#120_piece_1/output.json"),
                      37.795275590551185);
 
-    // See file src/app/share/collection/test/smart_pattern_#120.val (private collection)
+    // See file valentina_private_collection/test/smart_pattern_#120/smart_pattern_#120.val (private collection)
     ASSERT_TEST_CASE("Piece 2",
                      QStringLiteral("://smart_pattern_#120_piece_2/input.json"),
                      QStringLiteral("://smart_pattern_#120_piece_2/output.json"),
@@ -949,6 +950,13 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data()
                      QStringLiteral("://smart_pattern_#145/input.json"),
                      QStringLiteral("://smart_pattern_#145/output.json"),
                      37.795275590551185 /*seam allowance width*/);
+
+    // See private test cases in file valentina_private_collection/bugs/women_jacket/women_jacket.val
+    // Point A38, size 32
+    ASSERT_TEST_CASE("women_jacket_A38",
+                     QStringLiteral("://women_jacket/input.json"),
+                     QStringLiteral("://women_jacket/output.json"),
+                     37.795275590551185 /*seam allowance width*/);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1048,7 +1056,7 @@ void TST_VAbstractPiece::EquidistantAngleType_data()
                      QStringLiteral("://panties_case2/output.json"),
                      26.45669291338583 /*seam allowance width*/);
 
-    // See file src/app/share/collection/bugs/smart_pattern_#113.val (private collection)
+    // See file valentina_private_collection/bugs/smart_pattern_#113/smart_pattern_#113.val (private collection)
     ASSERT_TEST_CASE("Эдит 6",
                      QStringLiteral("://smart_pattern_#113/input.json"),
                      QStringLiteral("://smart_pattern_#113/output.json"),

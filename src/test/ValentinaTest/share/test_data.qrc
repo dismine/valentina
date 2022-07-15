@@ -149,5 +149,7 @@
         <file>valid_allowance_case3/base.json</file>
         <file>smart_pattern_#145/input.json</file>
         <file>smart_pattern_#145/output.json</file>
+        <file>women_jacket/input.json</file>
+        <file>women_jacket/output.json</file>
     </qresource>
 </RCC>

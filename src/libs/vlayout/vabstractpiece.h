@@ -247,11 +247,14 @@ QVector<T> VAbstractPiece::RemoveDublicates(const QVector<T> &points, bool remov
 
     p.append(ConstFirst(points));
 
+    // Default accuracy is not enough
+    constexpr qreal accuracy = (0.5/*mm*/ / 25.4) * PrintDPI;
+
     for (int i = 0; i < points.size(); ++i)
     {
         for (int j = i+1; j < points.size(); ++j)
         {
-            if (not VFuzzyComparePoints(points.at(i), points.at(j)))
+            if (not VFuzzyComparePoints(points.at(i), points.at(j), accuracy))
             {
                 p.append(points.at(j));
                 i = j-1;
@@ -266,7 +269,7 @@ QVector<T> VAbstractPiece::RemoveDublicates(const QVector<T> &points, bool remov
         {
             // Path can't be closed
             // See issue #686
-            if (VFuzzyComparePoints(ConstFirst(p), ConstLast(p)))
+            if (VFuzzyComparePoints(ConstFirst(p), ConstLast(p), accuracy))
             {
                 p.removeLast();
             }
