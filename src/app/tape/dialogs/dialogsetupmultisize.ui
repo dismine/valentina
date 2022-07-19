@@ -147,9 +147,12 @@
          </layout>
         </item>
         <item>
-         <widget class="QCheckBox" name="checkBoxXDimensionCircumference">
+         <widget class="QCheckBox" name="checkBoxXDimensionBodyMeasurement">
+          <property name="toolTip">
+           <string>A body measurement measured in units of length.</string>
+          </property>
           <property name="text">
-           <string>Circumference</string>
+           <string>Body Measurement</string>
           </property>
           <property name="checked">
            <bool>true</bool>
@@ -282,9 +285,12 @@
          </layout>
         </item>
         <item>
-         <widget class="QCheckBox" name="checkBoxYDimensionCircumference">
+         <widget class="QCheckBox" name="checkBoxYDimensionBodyMeasurement">
+          <property name="toolTip">
+           <string>A body measurement measured in units of length. Circumference.</string>
+          </property>
           <property name="text">
-           <string>Circumference</string>
+           <string>Body Measurement</string>
           </property>
           <property name="checked">
            <bool>true</bool>
@@ -417,9 +423,12 @@
          </layout>
         </item>
         <item>
-         <widget class="QCheckBox" name="checkBoxWDimensionCircumference">
+         <widget class="QCheckBox" name="checkBoxWDimensionBodyMeasurement">
+          <property name="toolTip">
+           <string>A body measurement measured in units of length. Circumference.</string>
+          </property>
           <property name="text">
-           <string>Circumference</string>
+           <string>Body Measurement</string>
           </property>
           <property name="checked">
            <bool>true</bool>
@@ -552,9 +561,12 @@
          </layout>
         </item>
         <item>
-         <widget class="QCheckBox" name="checkBoxZDimensionCircumference">
+         <widget class="QCheckBox" name="checkBoxZDimensionBodyMeasurement">
+          <property name="toolTip">
+           <string>A body measurement measured in units of length. Circumference.</string>
+          </property>
           <property name="text">
-           <string>Circumference</string>
+           <string>Body Measurement</string>
           </property>
           <property name="checked">
            <bool>true</bool>

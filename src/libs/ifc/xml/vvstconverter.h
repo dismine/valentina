@@ -49,7 +49,7 @@ public:
     static const QString MeasurementMaxVerStr;
     static const QString CurrentSchema;
     static Q_DECL_CONSTEXPR const unsigned MeasurementMinVer = FormatVersion(0, 3, 0);
-    static Q_DECL_CONSTEXPR const unsigned MeasurementMaxVer = FormatVersion(0, 5, 3);
+    static Q_DECL_CONSTEXPR const unsigned MeasurementMaxVer = FormatVersion(0, 5, 4);
 
 protected:
     virtual unsigned MinVer() const override;
@@ -78,11 +78,13 @@ private:
     void RemoveTagsForV0_5_0();
     void ConvertMeasurementsToV0_5_0();
 
+    void ConvertCircumferenceAttreibuteToV0_5_4();
+
     void ToV0_4_0();
     void ToV0_4_1();
     void ToV0_4_2();
     void ToV0_5_0();
-    void ToV0_5_3();
+    void ToV0_5_4();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -166,14 +166,14 @@ DialogSetupMultisize::DialogSetupMultisize(Unit unit, QWidget *parent) :
     connect(ui->checkBoxFullCircumference, &QCheckBox::stateChanged,
             this, &DialogSetupMultisize::ShowFullCircumference);
 
-    connect(ui->checkBoxXDimensionCircumference, &QCheckBox::stateChanged,
-            this, &DialogSetupMultisize::XDimensionCircumferenceChanged);
-    connect(ui->checkBoxYDimensionCircumference, &QCheckBox::stateChanged,
-            this, &DialogSetupMultisize::YDimensionCircumferenceChanged);
-    connect(ui->checkBoxWDimensionCircumference, &QCheckBox::stateChanged,
-            this, &DialogSetupMultisize::WDimensionCircumferenceChanged);
-    connect(ui->checkBoxZDimensionCircumference, &QCheckBox::stateChanged,
-            this, &DialogSetupMultisize::ZDimensionCircumferenceChanged);
+    connect(ui->checkBoxXDimensionBodyMeasurement, &QCheckBox::stateChanged,
+            this, &DialogSetupMultisize::XDimensionBodyMeasurementChanged);
+    connect(ui->checkBoxYDimensionBodyMeasurement, &QCheckBox::stateChanged,
+            this, &DialogSetupMultisize::YDimensionBodyMeasurementChanged);
+    connect(ui->checkBoxWDimensionBodyMeasurement, &QCheckBox::stateChanged,
+            this, &DialogSetupMultisize::WDimensionBodyMeasurementChanged);
+    connect(ui->checkBoxZDimensionBodyMeasurement, &QCheckBox::stateChanged,
+            this, &DialogSetupMultisize::ZDimensionBodyMeasurementChanged);
 
     connect(ui->lineEditCustomXDimensionName, &QLineEdit::textChanged, this, [this](const QString &text)
     {
@@ -307,8 +307,6 @@ void DialogSetupMultisize::ShowFullCircumference()
         comboBoxBase->blockSignals(false);
     };
 
-    ShowDimensionFullCircumference(ui->doubleSpinBoxXDimensionMinValue, ui->doubleSpinBoxXDimensionMaxValue,
-                                   ui->comboBoxXDimensionStep, ui->comboBoxXDimensionBase, m_xDimension);
     ShowDimensionFullCircumference(ui->doubleSpinBoxYDimensionMinValue, ui->doubleSpinBoxYDimensionMaxValue,
                                    ui->comboBoxYDimensionStep, ui->comboBoxYDimensionBase, m_yDimension);
     ShowDimensionFullCircumference(ui->doubleSpinBoxWDimensionMinValue, ui->doubleSpinBoxWDimensionMaxValue,
@@ -320,16 +318,10 @@ void DialogSetupMultisize::ShowFullCircumference()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSetupMultisize::XDimensionCircumferenceChanged()
+void DialogSetupMultisize::XDimensionBodyMeasurementChanged()
 {
-    bool checked = ui->checkBoxXDimensionCircumference->isChecked();
-    m_xDimension->SetCircumference(checked);
-
-    const bool c = m_xDimension->IsCircumference();
-    const QString unitStr = c ? " " + UnitsToStr(m_xDimension->Units()) : QString();
-
-    ui->doubleSpinBoxXDimensionMinValue->setSuffix(unitStr);
-    ui->doubleSpinBoxXDimensionMaxValue->setSuffix(unitStr);
+    bool checked = ui->checkBoxXDimensionBodyMeasurement->isChecked();
+    m_xDimension->SetBodyMeasurement(checked);
 
     InitDimension(ui->doubleSpinBoxXDimensionMinValue, ui->doubleSpinBoxXDimensionMaxValue, ui->comboBoxXDimensionStep,
                   m_xDimension);
@@ -348,16 +340,10 @@ void DialogSetupMultisize::XDimensionCircumferenceChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSetupMultisize::YDimensionCircumferenceChanged()
+void DialogSetupMultisize::YDimensionBodyMeasurementChanged()
 {
-    bool checked = ui->checkBoxYDimensionCircumference->isChecked();
-    m_yDimension->SetCircumference(checked);
-
-    const bool c = m_yDimension->IsCircumference();
-    const QString unitStr = c ? " " + UnitsToStr(m_yDimension->Units()) : QString();
-
-    ui->doubleSpinBoxYDimensionMinValue->setSuffix(unitStr);
-    ui->doubleSpinBoxYDimensionMaxValue->setSuffix(unitStr);
+    bool checked = ui->checkBoxYDimensionBodyMeasurement->isChecked();
+    m_yDimension->SetBodyMeasurement(checked);
 
     InitDimension(ui->doubleSpinBoxYDimensionMinValue, ui->doubleSpinBoxYDimensionMaxValue, ui->comboBoxYDimensionStep,
                   m_yDimension);
@@ -376,16 +362,10 @@ void DialogSetupMultisize::YDimensionCircumferenceChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSetupMultisize::WDimensionCircumferenceChanged()
+void DialogSetupMultisize::WDimensionBodyMeasurementChanged()
 {
-    bool checked = ui->checkBoxWDimensionCircumference->isChecked();
-    m_wDimension->SetCircumference(checked);
-
-    const bool c = m_wDimension->IsCircumference();
-    const QString unitStr = c ? " " + UnitsToStr(m_wDimension->Units()) : QString();
-
-    ui->doubleSpinBoxWDimensionMinValue->setSuffix(unitStr);
-    ui->doubleSpinBoxWDimensionMaxValue->setSuffix(unitStr);
+    bool checked = ui->checkBoxWDimensionBodyMeasurement->isChecked();
+    m_wDimension->SetBodyMeasurement(checked);
 
     InitDimension(ui->doubleSpinBoxWDimensionMinValue, ui->doubleSpinBoxWDimensionMaxValue, ui->comboBoxWDimensionStep,
                   m_wDimension);
@@ -404,16 +384,10 @@ void DialogSetupMultisize::WDimensionCircumferenceChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSetupMultisize::ZDimensionCircumferenceChanged()
+void DialogSetupMultisize::ZDimensionBodyMeasurementChanged()
 {
-    bool checked = ui->checkBoxZDimensionCircumference->isChecked();
-    m_zDimension->SetCircumference(checked);
-
-    const bool c = m_zDimension->IsCircumference();
-    const QString unitStr = c ? " " + UnitsToStr(m_zDimension->Units()) : QString();
-
-    ui->doubleSpinBoxZDimensionMinValue->setSuffix(unitStr);
-    ui->doubleSpinBoxZDimensionMaxValue->setSuffix(unitStr);
+    bool checked = ui->checkBoxZDimensionBodyMeasurement->isChecked();
+    m_zDimension->SetBodyMeasurement(checked);
 
     InitDimension(ui->doubleSpinBoxZDimensionMinValue, ui->doubleSpinBoxZDimensionMaxValue, ui->comboBoxZDimensionStep,
                   m_zDimension);
@@ -513,33 +487,25 @@ void DialogSetupMultisize::InitDimensionMinMax(QDoubleSpinBox *doubleSpinBoxMinV
     dimension->SetMinValue(dimension->RangeMin());
     dimension->SetMaxValue(dimension->RangeMax());
 
-    const bool fc = ui->checkBoxFullCircumference->isChecked();
-    const bool c = dimension->IsCircumference();
+    const bool fc = dimension->Type() != MeasurementDimension::X ? ui->checkBoxFullCircumference->isChecked() : false;
+    const bool m = dimension->IsBodyMeasurement();
+    const QString unitStr = m ? " " + UnitsToStr(m_xDimension->Units()) : QString();
 
     doubleSpinBoxMinValue->blockSignals(true);
-    const QString unitStr = " " + UnitsToStr(dimension->Units());
-    if (c || dimension->Type() == MeasurementDimension::X)
-    {
-        doubleSpinBoxMinValue->setSuffix(unitStr);
-    }
-
+    doubleSpinBoxMinValue->setSuffix(unitStr);
     doubleSpinBoxMinValue->setDecimals(dimension->Units() == Unit::Mm ? 0 : 1);
-    doubleSpinBoxMinValue->setMinimum(c && fc ? dimension->RangeMin()*2 : dimension->RangeMin());
-    doubleSpinBoxMinValue->setMaximum(c && fc ? dimension->MaxValue()*2 : dimension->MaxValue());
-    doubleSpinBoxMinValue->setValue(c && fc ? dimension->MinValue()*2 : dimension->MinValue());
+    doubleSpinBoxMinValue->setMinimum(m && fc ? dimension->RangeMin()*2 : dimension->RangeMin());
+    doubleSpinBoxMinValue->setMaximum(m && fc ? dimension->MaxValue()*2 : dimension->MaxValue());
+    doubleSpinBoxMinValue->setValue(m && fc ? dimension->MinValue()*2 : dimension->MinValue());
     doubleSpinBoxMinValue->blockSignals(false);
 
     doubleSpinBoxMaxValue->blockSignals(true);
-    if (c || dimension->Type() == MeasurementDimension::X)
-    {
-        doubleSpinBoxMaxValue->setSuffix(unitStr);
-    }
-
+    doubleSpinBoxMaxValue->setSuffix(unitStr);
     doubleSpinBoxMaxValue->setDecimals(dimension->Units() == Unit::Mm ? 0 : 1);
-    doubleSpinBoxMaxValue->setMinimum(c && fc ? dimension->MinValue()*2 : dimension->MinValue());
-    doubleSpinBoxMaxValue->setMaximum(c && fc ? dimension->RangeMax()*2 : dimension->RangeMax());
-    doubleSpinBoxMaxValue->setValue(c && fc ? dimension->RangeMax()*2 : dimension->RangeMax());
-    doubleSpinBoxMaxValue->setValue(c && fc ? dimension->MaxValue()*2 : dimension->MaxValue());
+    doubleSpinBoxMaxValue->setMinimum(m && fc ? dimension->MinValue()*2 : dimension->MinValue());
+    doubleSpinBoxMaxValue->setMaximum(m && fc ? dimension->RangeMax()*2 : dimension->RangeMax());
+    doubleSpinBoxMaxValue->setValue(m && fc ? dimension->RangeMax()*2 : dimension->RangeMax());
+    doubleSpinBoxMaxValue->setValue(m && fc ? dimension->MaxValue()*2 : dimension->MaxValue());
     doubleSpinBoxMaxValue->blockSignals(false);
 }
 
@@ -549,9 +515,9 @@ void DialogSetupMultisize::InitDimensionStep(QComboBox *comboBoxStep,
 {
     SCASSERT(comboBoxStep != nullptr)
 
-    const bool fc = ui->checkBoxFullCircumference->isChecked();
-    const bool c = dimension->IsCircumference();
-    const QString unitStr = " " + UnitsToStr(dimension->Units());
+    const bool fc = dimension->Type() != MeasurementDimension::X ? ui->checkBoxFullCircumference->isChecked() : false;
+    const bool m = dimension->IsBodyMeasurement();
+    const QString unitStr = m ? " " + UnitsToStr(dimension->Units()) : QString();
 
     dimension->SetStep(-1);
 
@@ -560,8 +526,7 @@ void DialogSetupMultisize::InitDimensionStep(QComboBox *comboBoxStep,
     comboBoxStep->clear();
     for(auto step : steps)
     {
-        comboBoxStep->addItem(QStringLiteral("%1%2").arg(c && fc ? step*2 : step)
-                                  .arg(c || dimension->Type() == MeasurementDimension::X ? unitStr : QString()), step);
+        comboBoxStep->addItem(QStringLiteral("%1%2").arg(m && fc ? step*2 : step).arg(unitStr), step);
     }
 
     comboBoxStep->setCurrentIndex(-1); // force a user to select
@@ -621,16 +586,16 @@ void DialogSetupMultisize::DimensionMinValueChanged(qreal value, QDoubleSpinBox 
     SCASSERT(comboBoxStep != nullptr)
     SCASSERT(comboBoxBase != nullptr)
 
-    const bool fc = ui->checkBoxFullCircumference->isChecked();
-    const bool c = dimension->IsCircumference();
+    const bool fc = dimension->Type() != MeasurementDimension::X ? ui->checkBoxFullCircumference->isChecked() : false;
+    const bool m = dimension->IsBodyMeasurement();
 
-    dimension->SetMinValue(c && fc ? value / 2 : value);
+    dimension->SetMinValue(m && fc ? value / 2 : value);
 
     doubleSpinBoxMaxValue->blockSignals(true);
     doubleSpinBoxMaxValue->setMinimum(value);
     doubleSpinBoxMaxValue->blockSignals(false);
 
-    dimension->SetMaxValue(c && fc ? doubleSpinBoxMaxValue->value() / 2 : doubleSpinBoxMaxValue->value());
+    dimension->SetMaxValue(m && fc ? doubleSpinBoxMaxValue->value() / 2 : doubleSpinBoxMaxValue->value());
 
     UpdateSteps(comboBoxStep, dimension);
     UpdateBase(comboBoxBase, dimension);
@@ -647,16 +612,16 @@ void DialogSetupMultisize::DimensionMaxValueChanged(qreal value, QDoubleSpinBox 
     SCASSERT(comboBoxStep != nullptr)
     SCASSERT(comboBoxBase != nullptr)
 
-    const bool fc = ui->checkBoxFullCircumference->isChecked();
-    const bool c = dimension->IsCircumference();
+    const bool fc = dimension->Type() != MeasurementDimension::X ? ui->checkBoxFullCircumference->isChecked() : false;
+    const bool m = dimension->IsBodyMeasurement();
 
-    dimension->SetMaxValue(c && fc ? value / 2 : value);
+    dimension->SetMaxValue(m && fc ? value / 2 : value);
 
     doubleSpinBoxMinValue->blockSignals(true);
     doubleSpinBoxMinValue->setMaximum(value);
     doubleSpinBoxMinValue->blockSignals(false);
 
-    dimension->SetMinValue(c && fc ? doubleSpinBoxMinValue->value() / 2 : doubleSpinBoxMinValue->value());
+    dimension->SetMinValue(m && fc ? doubleSpinBoxMinValue->value() / 2 : doubleSpinBoxMinValue->value());
 
     UpdateSteps(comboBoxStep, dimension);
     UpdateBase(comboBoxBase, dimension);
@@ -707,17 +672,16 @@ void DialogSetupMultisize::UpdateSteps(QComboBox *comboBoxStep,
 
     comboBoxStep->blockSignals(true);
 
-    const QString unitStr = " " + UnitsToStr(dimension->Units());
     const QVector<qreal> steps = dimension->ValidSteps();
     comboBoxStep->clear();
 
-    const bool fc = ui->checkBoxFullCircumference->isChecked();
-    const bool c = dimension->IsCircumference();
+    const bool fc = dimension->Type() != MeasurementDimension::X ? ui->checkBoxFullCircumference->isChecked() : false;
+    const bool m = dimension->IsBodyMeasurement();
+    const QString unitStr = m ? " " + UnitsToStr(dimension->Units()) : QString();
 
     for(auto step : steps)
     {
-        comboBoxStep->addItem(QStringLiteral("%1%2").arg(c && fc ? step * 2 : step)
-                                  .arg(c ? unitStr : QString()), step);
+        comboBoxStep->addItem(QStringLiteral("%1%2").arg(m && fc ? step * 2 : step).arg(unitStr), step);
     }
 
     comboBoxStep->setCurrentIndex(comboBoxStep->findData(oldStep));
@@ -742,16 +706,15 @@ void DialogSetupMultisize::UpdateBase(QComboBox *comboBoxBase,
 
     comboBoxBase->blockSignals(true);
 
-    const QString unitStr = " " + UnitsToStr(dimension->Units());
     const QVector<qreal> bases = dimension->ValidBases();
     comboBoxBase->clear();
-    const bool fc = ui->checkBoxFullCircumference->isChecked();
-    const bool c = dimension->IsCircumference();
+    const bool fc = dimension->Type() != MeasurementDimension::X ? ui->checkBoxFullCircumference->isChecked() : false;
+    const bool m = dimension->IsBodyMeasurement();
+    const QString unitStr = m ? " " + UnitsToStr(dimension->Units()) : QString();
 
     for(auto base : bases)
     {
-        comboBoxBase->addItem(QStringLiteral("%1%2").arg(c && fc ? base * 2 : base)
-                                  .arg(c || dimension->Type() == MeasurementDimension::X ? unitStr : QString()), base);
+        comboBoxBase->addItem(QStringLiteral("%1%2").arg(m && fc ? base * 2 : base).arg(unitStr), base);
     }
 
     comboBoxBase->setCurrentIndex(comboBoxBase->findData(oldBase));

@@ -83,8 +83,8 @@ public:
     // cppcheck-suppress functionStatic
     auto Units() const -> Unit;
 
-    auto IsCircumference() const -> bool;
-    void SetCircumference(bool circumference);
+    auto IsBodyMeasurement() const -> bool;
+    void SetBodyMeasurement(bool measurement);
 
     auto RangeMin() const -> int;
     auto RangeMax() const -> int;
@@ -124,7 +124,7 @@ private:
     qreal          m_baseValue{0};
     QString        m_error{};
     DimesionLabels m_labels{};
-    bool           m_circumference{true};
+    bool           m_measurement{true};
     QString        m_customName{};
 };
 
@@ -189,15 +189,15 @@ inline auto VAbstartMeasurementDimension::Units() const -> Unit
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline auto VAbstartMeasurementDimension::IsCircumference() const -> bool
+inline auto VAbstartMeasurementDimension::IsBodyMeasurement() const -> bool
 {
-    return m_circumference;
+    return m_measurement;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline void VAbstartMeasurementDimension::SetCircumference(bool circumference)
+inline void VAbstartMeasurementDimension::SetBodyMeasurement(bool measurement)
 {
-    m_circumference = circumference;
+    m_measurement = measurement;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

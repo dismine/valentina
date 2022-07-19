@@ -168,7 +168,7 @@ public:
     static const QString AttrMin;
     static const QString AttrMax;
     static const QString AttrStep;
-    static const QString AttrCircumference;
+    static const QString AttrMeasurement;
     static const QString AttrFullCircumference;
     static const QString AttrLabel;
     static const QString AttrDimension;

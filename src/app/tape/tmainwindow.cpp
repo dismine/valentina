@@ -2761,7 +2761,7 @@ void TMainWindow::InitDimensionsBaseValue()
             }
             else
             {
-                if (dimension->IsCircumference() || dimension->Type() == MeasurementDimension::X)
+                if (dimension->IsBodyMeasurement() || dimension->Type() == MeasurementDimension::X)
                 {
                     if (dimension->Type() != MeasurementDimension::X && fc)
                     {
@@ -2829,7 +2829,7 @@ void TMainWindow::InitDimensionGradation(int index, const MeasurementDimension_p
             }
             else
             {
-                if (dimension->IsCircumference())
+                if (dimension->IsBodyMeasurement())
                 {
                     control->addItem(QString("%1 %2").arg(fc ? base*2 : base).arg(unit), base);
                 }

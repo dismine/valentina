@@ -205,7 +205,7 @@ auto DialogDimensionLabels::DimensionValue(const MeasurementDimension_p &dimensi
 
     if (dimension->Type() == MeasurementDimension::Y)
     {
-        if (dimension->IsCircumference())
+        if (dimension->IsBodyMeasurement())
         {
             return QString::number(m_fullCircumference ? value*2 : value);
         }

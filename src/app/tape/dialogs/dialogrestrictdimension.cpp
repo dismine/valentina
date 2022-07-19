@@ -756,7 +756,7 @@ void DialogRestrictDimension::FillBases(const QVector<qreal> &bases, const Measu
             }
             else
             {
-                if (dimension->IsCircumference())
+                if (dimension->IsBodyMeasurement())
                 {
                     control->addItem(QStringLiteral("%1 %2").arg(m_fullCircumference ? base*2 : base).arg(units), base);
                 }
@@ -787,7 +787,7 @@ void DialogRestrictDimension::FillBases(const QVector<qreal> &bases, const Measu
 auto DialogRestrictDimension::DimensionLabels(const QVector<qreal> &bases,
                                               const MeasurementDimension_p &dimension) const -> QStringList
 {
-    const bool showUnits = dimension->IsCircumference() || dimension->Type() == MeasurementDimension::X;
+    const bool showUnits = dimension->IsBodyMeasurement() || dimension->Type() == MeasurementDimension::X;
     const QString units = showUnits ? UnitsToStr(dimension->Units(), true) : QString();
     const DimesionLabels dimensionLabels = dimension->Labels();
 
@@ -817,7 +817,7 @@ auto DialogRestrictDimension::DimensionLabels(const QVector<qreal> &bases,
             }
             else
             {
-                if (dimension->IsCircumference())
+                if (dimension->IsBodyMeasurement())
                 {
                     labels.append(QStringLiteral("%1 %2").arg(m_fullCircumference ? base*2 : base).arg(units));
                 }

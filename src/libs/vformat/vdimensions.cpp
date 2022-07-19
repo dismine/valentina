@@ -54,7 +54,7 @@ auto VAbstartMeasurementDimension::IsValid() -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstartMeasurementDimension::RangeMin() const -> int
 {
-    if (m_circumference)
+    if (m_measurement)
     {
         const int rangeMinCm = 20;
         const int rangeMinMm = 200;
@@ -79,7 +79,7 @@ auto VAbstartMeasurementDimension::RangeMin() const -> int
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstartMeasurementDimension::RangeMax() const -> int
 {
-    if (m_circumference)
+    if (m_measurement)
     {
         const int rangeMaxCm = 272;
         const int rangeMaxMm = 2720;
@@ -276,19 +276,19 @@ auto VAbstartMeasurementDimension::DimensionToolTip(const MeasurementDimension_p
     switch(dimension->Type())
     {
         case MeasurementDimension::Y:
-            if (dimension->CustomName().isEmpty() && dimension->IsCircumference())
+            if (dimension->CustomName().isEmpty() && dimension->IsBodyMeasurement())
             {
                 return fc ? tr("Chest full circumference", "dimension") : tr("Chest half circumference", "dimension");
             }
             return {};
         case MeasurementDimension::W:
-            if (dimension->CustomName().isEmpty() && dimension->IsCircumference())
+            if (dimension->CustomName().isEmpty() && dimension->IsBodyMeasurement())
             {
                 return fc ? tr("Waist full circumference", "dimension") : tr("Waist half circumference", "dimension");
             }
             return {};
         case MeasurementDimension::Z:
-            if (dimension->CustomName().isEmpty() && dimension->IsCircumference())
+            if (dimension->CustomName().isEmpty() && dimension->IsBodyMeasurement())
             {
                 return fc ? tr("Hip full circumference", "dimension") : tr("Hip half circumference", "dimension");
             }

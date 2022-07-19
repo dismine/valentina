@@ -2146,7 +2146,7 @@ void MainWindow::StoreMultisizeMDimensions()
 
     QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
 
-    if (dimensions.size() > 0)
+    if (not dimensions.isEmpty())
     {
         if (not dimensionALabel.isNull())
         {
@@ -2190,9 +2190,9 @@ void MainWindow::StoreMultisizeMDimensions()
                     VAbstractValApplication::VApp()->SetDimensionSize(fc ? currentBase*2 : currentBase);
                     VAbstractValApplication::VApp()->SetDimensionSizeLabel(
                                 labels.value(currentBase, QString::number(fc ? currentBase*2 : currentBase)));
-                    const bool circumference = dimension->IsCircumference();
+                    const bool measurement = dimension->IsBodyMeasurement();
                     VAbstractValApplication::VApp()
-                            ->SetDimensionSizeUnits(circumference ? m->Units() : Unit::LAST_UNIT_DO_NOT_USE);
+                            ->SetDimensionSizeUnits(measurement ? m->Units() : Unit::LAST_UNIT_DO_NOT_USE);
                     break;
                 }
                 case MeasurementDimension::W:
@@ -4614,7 +4614,7 @@ void MainWindow::InitDimensionGradation(int index, const MeasurementDimension_p 
             }
             else
             {
-                if (dimension->IsCircumference())
+                if (dimension->IsBodyMeasurement())
                 {
                     control->addItem(QString("%1 %2").arg(fc ? base*2 : base).arg(unit), base);
                 }

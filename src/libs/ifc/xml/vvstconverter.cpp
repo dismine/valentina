@@ -54,8 +54,8 @@
  */
 
 const QString VVSTConverter::MeasurementMinVerStr = QStringLiteral("0.3.0");
-const QString VVSTConverter::MeasurementMaxVerStr = QStringLiteral("0.5.3");
-const QString VVSTConverter::CurrentSchema        = QStringLiteral("://schema/multisize_measurements/v0.5.3.xsd");
+const QString VVSTConverter::MeasurementMaxVerStr = QStringLiteral("0.5.4");
+const QString VVSTConverter::CurrentSchema        = QStringLiteral("://schema/multisize_measurements/v0.5.4.xsd");
 
 //VVSTConverter::MeasurementMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VVSTConverter::MeasurementMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -63,6 +63,9 @@ const QString VVSTConverter::CurrentSchema        = QStringLiteral("://schema/mu
 namespace
 {
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTagRead_Only, (QLatin1String("read-only")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrCircumference, (QLatin1String("circumference")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrMeasurement, (QLatin1String("measurement")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTagDimension, (QLatin1String("dimension")))
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -86,7 +89,8 @@ auto VVSTConverter::XSDSchema(unsigned ver) const -> QString
         std::make_pair(FormatVersion(0, 5, 0), QStringLiteral("://schema/multisize_measurements/v0.5.0.xsd")),
         std::make_pair(FormatVersion(0, 5, 1), QStringLiteral("://schema/multisize_measurements/v0.5.1.xsd")),
         std::make_pair(FormatVersion(0, 5, 2), QStringLiteral("://schema/multisize_measurements/v0.5.2.xsd")),
-        std::make_pair(FormatVersion(0, 5, 3), CurrentSchema),
+        std::make_pair(FormatVersion(0, 5, 3), QStringLiteral("://schema/multisize_measurements/v0.5.3.xsd")),
+        std::make_pair(FormatVersion(0, 5, 4), CurrentSchema),
     };
 
     if (schemas.contains(ver))
@@ -119,10 +123,11 @@ void VVSTConverter::ApplyPatches()
         case (FormatVersion(0, 5, 0)):
         case (FormatVersion(0, 5, 1)):
         case (FormatVersion(0, 5, 2)):
-            ToV0_5_3();
+        case (FormatVersion(0, 5, 3)):
+            ToV0_5_4();
             ValidateXML(CurrentSchema);
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 5, 3)):
+        case (FormatVersion(0, 5, 4)):
             break;
         default:
             InvalidVersion(m_ver);
@@ -141,7 +146,7 @@ void VVSTConverter::DowngradeToCurrentMaxVersion()
 auto VVSTConverter::IsReadOnly() const -> bool
 {
     // Check if attribute read-only was not changed in file format
-    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMaxVer == FormatVersion(0, 5, 3),
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMaxVer == FormatVersion(0, 5, 4),
                       "Check attribute read-only.");
 
     // Possibly in future attribute read-only will change position etc.
@@ -416,6 +421,22 @@ void VVSTConverter::ConvertMeasurementsToV0_5_0()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VVSTConverter::ConvertCircumferenceAttreibuteToV0_5_4()
+{
+    const QDomNodeList list = elementsByTagName(*strTagDimension);
+    for (int i=0; i < list.size(); ++i)
+    {
+        QDomElement dom = list.at(i).toElement();
+        if (dom.hasAttribute(*strAttrCircumference))
+        {
+            bool m = GetParametrBool(dom, *strAttrCircumference, trueStr);
+            dom.removeAttribute(*strAttrCircumference);
+            SetAttribute(dom, *strAttrMeasurement, m);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VVSTConverter::ToV0_4_0()
 {
     // TODO. Delete if minimal supported version is 0.4.0
@@ -469,12 +490,13 @@ void VVSTConverter::ToV0_5_0()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VVSTConverter::ToV0_5_3()
+void VVSTConverter::ToV0_5_4()
 {
-    // TODO. Delete if minimal supported version is 0.5.3
-    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FormatVersion(0, 5, 3),
+    // TODO. Delete if minimal supported version is 0.5.4
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FormatVersion(0, 5, 4),
                       "Time to refactor the code.");
 
-    SetVersion(QStringLiteral("0.5.3"));
+    SetVersion(QStringLiteral("0.5.4"));
+    ConvertCircumferenceAttreibuteToV0_5_4();
     Save();
 }

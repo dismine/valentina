@@ -62,13 +62,13 @@ protected:
 private slots:
     void ShowFullCircumference();
 
-    void XDimensionCircumferenceChanged();
-    void YDimensionCircumferenceChanged();
-    void WDimensionCircumferenceChanged();
-    void ZDimensionCircumferenceChanged();
+    void XDimensionBodyMeasurementChanged();
+    void YDimensionBodyMeasurementChanged();
+    void WDimensionBodyMeasurementChanged();
+    void ZDimensionBodyMeasurementChanged();
 
 private:
-    Q_DISABLE_COPY_MOVE(DialogSetupMultisize)
+    Q_DISABLE_COPY_MOVE(DialogSetupMultisize) // NOLINT
     Ui::DialogSetupMultisize *ui;
     bool m_isInitialized{false};
     QSharedPointer<VXMeasurementDimension> m_xDimension;

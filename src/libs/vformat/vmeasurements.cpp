@@ -93,7 +93,7 @@ const QString VMeasurements::AttrFullName          = QStringLiteral("full_name")
 const QString VMeasurements::AttrMin               = QStringLiteral("min");
 const QString VMeasurements::AttrMax               = QStringLiteral("max");
 const QString VMeasurements::AttrStep              = QStringLiteral("step");
-const QString VMeasurements::AttrCircumference     = QStringLiteral("circumference");
+const QString VMeasurements::AttrMeasurement       = QStringLiteral("measurement");
 const QString VMeasurements::AttrFullCircumference = QStringLiteral("fullCircumference");
 const QString VMeasurements::AttrLabel             = QStringLiteral("label");
 const QString VMeasurements::AttrDimension         = QStringLiteral("dimension");
@@ -1250,7 +1250,7 @@ void VMeasurements::CreateEmptyIndividualFile(Unit unit)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VMeasurements::CreateDimensions(const QVector<MeasurementDimension_p > &dimensions)
+auto VMeasurements::CreateDimensions(const QVector<MeasurementDimension_p > &dimensions) -> QDomElement
 {
     QDomElement dimensionsTag = createElement(TagDimensions);
 
@@ -1263,8 +1263,8 @@ QDomElement VMeasurements::CreateDimensions(const QVector<MeasurementDimension_p
         SetAttribute(dimensionTag, AttrMin, dimension->MinValue());
         SetAttribute(dimensionTag, AttrMax, dimension->MaxValue());
         SetAttribute(dimensionTag, AttrStep, dimension->Step());
-        SetAttributeOrRemoveIf<bool>(dimensionTag, AttrCircumference, dimension->IsCircumference(),
-                                     [](bool c) noexcept {return c;});
+        SetAttributeOrRemoveIf<bool>(dimensionTag, AttrMeasurement, dimension->IsBodyMeasurement(),
+                                     [](bool m) noexcept {return m;});
         SetAttributeOrRemoveIf<QString>(dimensionTag, AttrCustomName, dimension->CustomName(),
                                      [](const QString &name) noexcept {return name.isEmpty();});
 
@@ -1427,7 +1427,7 @@ auto VMeasurements::ReadDimensions() const -> VDimensions
         }
 
         dimension->SetBaseValue(GetParametrDouble(dom, AttrBase, QChar('0')));
-        dimension->SetCircumference(GetParametrBool(dom, AttrCircumference, trueStr));
+        dimension->SetBodyMeasurement(GetParametrBool(dom, AttrMeasurement, trueStr));
         dimension->SetCustomName(GetParametrEmptyString(dom, AttrCustomName));
         dimension->SetLabels(ReadDimensionLabels(dom));
         dimensions.insert(type, dimension);
