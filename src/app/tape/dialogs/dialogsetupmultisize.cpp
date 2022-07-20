@@ -406,6 +406,37 @@ void DialogSetupMultisize::ZDimensionBodyMeasurementChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSetupMultisize::CheckDimension(QGroupBox *group, QGroupBox *nameGroup, QLineEdit *lineEdit,
+                                          bool &dimensionValid, int &dimensions,
+                                          const MeasurementDimension_p &dimension)
+{
+    SCASSERT(group != nullptr)
+    SCASSERT(nameGroup != nullptr)
+    SCASSERT(lineEdit != nullptr)
+
+    if (group->isChecked())
+    {
+        dimensionValid = dimension->IsValid();
+        ++dimensions;
+
+        if (ui->labelError->text().isEmpty() && not dimensionValid)
+        {
+            ui->labelError->setText(tr("Please, provide correct data for dimension %1").arg(dimension->Axis()));
+            return;
+        }
+
+        if (nameGroup->isChecked() && lineEdit->text().isEmpty())
+        {
+            if (ui->labelError->text().isEmpty())
+            {
+                ui->labelError->setText(tr("Please, provide custom name for dimension %1").arg(dimension->Axis()));
+                return;
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSetupMultisize::CheckState()
 {
     ui->labelError->clear();
@@ -416,35 +447,6 @@ void DialogSetupMultisize::CheckState()
     bool zDimensionValid = true;
 
     int dimensions = 0;
-
-    auto CheckDimension = [this](QGroupBox *group, QGroupBox *nameGroup, QLineEdit *lineEdit, bool &dimensionValid,
-            int &dimensions, const MeasurementDimension_p &dimension)
-    {
-        SCASSERT(group != nullptr)
-        SCASSERT(nameGroup != nullptr)
-        SCASSERT(lineEdit != nullptr)
-
-        if (group->isChecked())
-        {
-            dimensionValid = dimension->IsValid();
-            ++dimensions;
-
-            if (ui->labelError->text().isEmpty() && not dimensionValid)
-            {
-                ui->labelError->setText(tr("Please, provide correct data for dimension %1").arg(dimension->Axis()));
-                return;
-            }
-
-            if (nameGroup->isChecked() && lineEdit->text().isEmpty())
-            {
-                if (ui->labelError->text().isEmpty())
-                {
-                    ui->labelError->setText(tr("Please, provide custom name for dimension %1").arg(dimension->Axis()));
-                    return;
-                }
-            }
-        }
-    };
 
     CheckDimension(ui->groupBoxXDimension, ui->groupBoxCustomXDimensionName, ui->lineEditCustomXDimensionName,
                    xDimensionValid, dimensions, m_xDimension);

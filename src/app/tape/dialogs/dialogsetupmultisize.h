@@ -38,6 +38,8 @@
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 
 class QDoubleSpinBox;
+class QGroupBox;
+class QLineEdit;
 
 namespace Ui
 {
@@ -76,6 +78,8 @@ private:
     QSharedPointer<VWMeasurementDimension> m_wDimension;
     QSharedPointer<VZMeasurementDimension> m_zDimension;
 
+    void CheckDimension(QGroupBox *group, QGroupBox *nameGroup, QLineEdit *lineEdit, bool &dimensionValid,
+                        int &dimensions, const MeasurementDimension_p &dimension);
     void CheckState();
 
     void InitDimensionMinMax(QDoubleSpinBox *doubleSpinBoxMinValue, QDoubleSpinBox *doubleSpinBoxMaxValue,
