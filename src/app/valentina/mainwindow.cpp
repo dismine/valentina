@@ -592,7 +592,8 @@ bool MainWindow::UpdateMeasurements(const QString &path, qreal baseA, qreal base
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool MainWindow::UpdateMeasurements(const QSharedPointer<VMeasurements> &mFile, qreal baseA, qreal baseB, qreal baseC)
+auto MainWindow::UpdateMeasurements(const QSharedPointer<VMeasurements> &mFile, qreal baseA, qreal baseB,
+                                    qreal baseC) -> bool
 {
     m = mFile;
 
@@ -606,7 +607,7 @@ bool MainWindow::UpdateMeasurements(const QSharedPointer<VMeasurements> &mFile, 
         qCCritical(vMainWindow, "%s", qUtf8Printable(tr("Measurement files types have not match.")));
         if (not VApplication::IsGUIMode())
         {
-            qApp->exit(V_EX_DATAERR);
+            QCoreApplication::exit(V_EX_DATAERR);
         }
         return false;
     }
@@ -617,8 +618,50 @@ bool MainWindow::UpdateMeasurements(const QSharedPointer<VMeasurements> &mFile, 
 
         if (not m->Dimensions().isEmpty())
         {
-            InitDimensionGradation(0, m->Dimensions().values().at(0), dimensionA);
-            DimensionABaseChanged();
+            const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
+
+            auto InitDimensionLabel = [this, dimensions](const MeasurementDimension_p& dimension,
+                                                         QPointer<QLabel> &name, QPointer<QComboBox> &control)
+            {
+                if (dimension.isNull())
+                {
+                    return;
+                }
+
+                if (name == nullptr)
+                {
+                    name = new QLabel(dimension->Name()+QChar(':'));
+                }
+                else
+                {
+                    name->setText(dimension->Name()+QChar(':'));
+                }
+                name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension, m->IsFullCircumference()));
+
+                if (control == nullptr)
+                {
+                    control = new QComboBox;
+                    control->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+                }
+            };
+
+            MeasurementDimension_p dimension = dimensions.at(0);
+            InitDimensionLabel(dimension, dimensionALabel, dimensionA);
+            InitDimensionGradation(0, dimension, dimensionA);
+
+            if (dimensions.size() > 1)
+            {
+                dimension = dimensions.at(1);
+                InitDimensionLabel(dimension, dimensionBLabel, dimensionB);
+                InitDimensionGradation(1, dimension, dimensionB);
+
+                if (dimensions.size() > 2)
+                {
+                    dimension = dimensions.at(2);
+                    InitDimensionLabel(dimension, dimensionCLabel, dimensionC);
+                    InitDimensionGradation(2, dimension, dimensionC);
+                }
+            }
         }
 
         m->StoreNames(false);
@@ -636,12 +679,10 @@ bool MainWindow::UpdateMeasurements(const QSharedPointer<VMeasurements> &mFile, 
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         if (not VApplication::IsGUIMode())
         {
-            qApp->exit(V_EX_NOINPUT);
+            QCoreApplication::exit(V_EX_NOINPUT);
         }
         return false;
     }
-
-
 
     return true;
 }
@@ -4600,11 +4641,12 @@ void MainWindow::InitDimensionGradation(int index, const MeasurementDimension_p 
             }
             else
             {
-                control->addItem(QString("%1 %2").arg(base).arg(unit), base);
+                control->addItem(QStringLiteral("%1 %2").arg(base).arg(unit), base);
             }
         }
     }
-    else if (dimension->Type() == MeasurementDimension::Y)
+    else if (dimension->Type() == MeasurementDimension::Y || dimension->Type() == MeasurementDimension::W ||
+             dimension->Type() == MeasurementDimension::Z)
     {
         for(auto base : bases)
         {
@@ -4616,26 +4658,12 @@ void MainWindow::InitDimensionGradation(int index, const MeasurementDimension_p 
             {
                 if (dimension->IsBodyMeasurement())
                 {
-                    control->addItem(QString("%1 %2").arg(fc ? base*2 : base).arg(unit), base);
+                    control->addItem(QStringLiteral("%1 %2").arg(fc ? base*2 : base).arg(unit), base);
                 }
                 else
                 {
                     control->addItem(QString::number(base), base);
                 }
-            }
-        }
-    }
-    else if (dimension->Type() == MeasurementDimension::W || dimension->Type() == MeasurementDimension::Z)
-    {
-        for(auto base : bases)
-        {
-            if (labels.contains(base) && not labels.value(base).isEmpty())
-            {
-                control->addItem(labels.value(base), base);
-            }
-            else
-            {
-                control->addItem(QString("%1 %2").arg(fc ? base*2 : base).arg(unit), base);
             }
         }
     }

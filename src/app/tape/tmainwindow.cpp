@@ -2815,11 +2815,12 @@ void TMainWindow::InitDimensionGradation(int index, const MeasurementDimension_p
             }
             else
             {
-                control->addItem(QString("%1 %2").arg(base).arg(unit), base);
+                control->addItem(QStringLiteral("%1 %2").arg(base).arg(unit), base);
             }
         }
     }
-    else if (dimension->Type() == MeasurementDimension::Y)
+    else if (dimension->Type() == MeasurementDimension::Y || dimension->Type() == MeasurementDimension::W ||
+             dimension->Type() == MeasurementDimension::Z)
     {
         for(auto base : bases)
         {
@@ -2831,26 +2832,12 @@ void TMainWindow::InitDimensionGradation(int index, const MeasurementDimension_p
             {
                 if (dimension->IsBodyMeasurement())
                 {
-                    control->addItem(QString("%1 %2").arg(fc ? base*2 : base).arg(unit), base);
+                    control->addItem(QStringLiteral("%1 %2").arg(fc ? base*2 : base).arg(unit), base);
                 }
                 else
                 {
                     control->addItem(QString::number(base), base);
                 }
-            }
-        }
-    }
-    else if (dimension->Type() == MeasurementDimension::W || dimension->Type() == MeasurementDimension::Z)
-    {
-        for(auto base : bases)
-        {
-            if (labels.contains(base) && not labels.value(base).isEmpty())
-            {
-                control->addItem(labels.value(base), base);
-            }
-            else
-            {
-                control->addItem(QString("%1 %2").arg(fc ? base*2 : base).arg(unit), base);
             }
         }
     }
@@ -2878,7 +2865,7 @@ void TMainWindow::InitDimensionControls()
     const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
     const QString unit = UnitsToStr(m->Units(), true);
 
-    auto InitControl = [this, dimensions, unit](int index, QLabel *&name, QComboBox *&control)
+    auto InitControl = [this, dimensions](int index, QLabel *&name, QComboBox *&control)
     {
         if (dimensions.size() > index)
         {
