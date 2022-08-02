@@ -4049,9 +4049,17 @@ void VPMainWindow::on_ExportLayout()
         return;
     }
 
-    DialogSaveManualLayout dialog(sheets.size(), false, m_layout->LayoutSettings().GetTitle(), this);
+    const QString layoutTitle = m_layout->LayoutSettings().GetTitle();
+    const QString fileName = layoutTitle.isEmpty() ? QFileInfo(curFile).baseName() : layoutTitle;
+
+    DialogSaveManualLayout dialog(sheets.size(), false, fileName, this);
 
     if (dialog.exec() == QDialog::Rejected)
+    {
+        return;
+    }
+
+    if (dialog.FileName().isEmpty())
     {
         return;
     }
@@ -4149,9 +4157,17 @@ void VPMainWindow::on_ExportSheet()
         }
     }
 
-    DialogSaveManualLayout dialog(1, false, sheet->GetName(), this);
+    const QString sheetTitle = sheet->GetName();
+    const QString fileName = sheetTitle.isEmpty() ? QFileInfo(curFile).baseName() : sheetTitle;
+
+    DialogSaveManualLayout dialog(1, false, fileName, this);
 
     if (dialog.exec() == QDialog::Rejected)
+    {
+        return;
+    }
+
+    if (dialog.FileName().isEmpty())
     {
         return;
     }
