@@ -33,43 +33,44 @@
 #include <QtGlobal>
 
 #include "vtranslatemeasurements.h"
+#include "../vmisc/defglobal.h"
 
 class VTranslateVars : public VTranslateMeasurements
 {
 public:
     explicit VTranslateVars();
-    virtual ~VTranslateVars() = default;
+    ~VTranslateVars() override = default;
 
-    bool VariablesFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
-    bool FunctionsFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
-    bool VariablesToUser(QString &newFormula, int position, const QString &token, int &bias) const;
+    auto VariablesFromUser(QString &newFormula, int position, const QString &token, int &bias) const -> bool;
+    auto FunctionsFromUser(QString &newFormula, int position, const QString &token, int &bias) const -> bool;
+    auto VariablesToUser(QString &newFormula, int position, const QString &token, int &bias) const -> bool;
 
-    QString InternalVarToUser(const QString &var) const;
+    auto InternalVarToUser(const QString &var) const -> QString;
 
-    QString VarToUser(const QString &var) const;
-    QString VarFromUser(const QString &var) const;
+    auto VarToUser(const QString &var) const -> QString;
+    auto VarFromUser(const QString &var) const -> QString;
 
-    QString PMSystemName(const QString &code) const;
-    QString PMSystemAuthor(const QString &code) const;
-    QString PMSystemBook(const QString &code) const;
+    auto PMSystemName(const QString &code) const -> QString;
+    auto PMSystemAuthor(const QString &code) const -> QString;
+    auto PMSystemBook(const QString &code) const -> QString;
 
-    QString FormulaFromUser(const QString &formula, bool osSeparator) const;
-    static QString TryFormulaFromUser(const QString &formula, bool osSeparator);
+    auto FormulaFromUser(const QString &formula, bool osSeparator) const -> QString;
+    static auto TryFormulaFromUser(const QString &formula, bool osSeparator) -> QString;
 
-    QString FormulaToUser(const QString &formula, bool osSeparator) const;
-    static QString TryFormulaToUser(const QString &formula, bool osSeparator);
+    auto FormulaToUser(const QString &formula, bool osSeparator) const -> QString;
+    static auto TryFormulaToUser(const QString &formula, bool osSeparator) -> QString;
 
-    virtual void Retranslate() override;
+    void Retranslate() override;
 
-    QMap<QString, QString> GetTranslatedFunctions() const;
-    QMap<QString, qmu::QmuTranslation> GetFunctions() const;
-    QMap<QString, qmu::QmuTranslation> GetFunctionsDescriptions() const;
-    QMap<QString, QString> GetFunctionsArguments() const;
+    auto GetTranslatedFunctions() const -> QMap<QString, QString>;
+    auto GetFunctions() const -> QMap<QString, qmu::QmuTranslation>;
+    auto GetFunctionsDescriptions() const -> QMap<QString, qmu::QmuTranslation>;
+    auto GetFunctionsArguments() const -> QMap<QString, QString>;
 
     static void BiasTokens(int position, int bias, QMap<int, QString> &tokens);
 
 private:
-    Q_DISABLE_COPY(VTranslateVars)
+    Q_DISABLE_COPY_MOVE(VTranslateVars) //NOLINT
     QMap<QString, qmu::QmuTranslation> PMSystemNames{};
     QMap<QString, qmu::QmuTranslation> PMSystemAuthors{};
     QMap<QString, qmu::QmuTranslation> PMSystemBooks{};
@@ -89,8 +90,15 @@ private:
     void InitSystem(const QString &code, const qmu::QmuTranslation &name, const qmu::QmuTranslation &author,
                     const qmu::QmuTranslation &book);
 
-    void CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens, QMap<int, QString> &numbers) const;
+    static void CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens, QMap<int, QString> &numbers);
 
+    void TranslateVarsFromUser(QString &newFormula, QMap<int, QString> &tokens, QMap<int, QString> &numbers) const;
+    static void TranslateNumbersFromUser(QString &newFormula, QMap<int, QString> &tokens, QMap<int, QString> &numbers,
+                                         bool osSeparator);
+
+    void TranslateVarsToUser(QString &newFormula, QMap<int, QString> &tokens, QMap<int, QString> &numbers) const;
+    static void TranslateNumbersToUser(QString &newFormula, QMap<int, QString> &tokens, QMap<int, QString> &numbers,
+                                       bool osSeparator);
 };
 
 #endif // VTRANSLATEVARS_H

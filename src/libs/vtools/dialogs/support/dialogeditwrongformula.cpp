@@ -62,7 +62,6 @@
 #include "../vpatterndb/variables/vlineangle.h"
 #include "../vpatterndb/variables/vlinelength.h"
 #include "../vpatterndb/variables/vmeasurement.h"
-#include "../ifc/xml/vdomdocument.h"
 #include "../vmisc/def.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
@@ -79,14 +78,7 @@ DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, quint32 t
       ui(new Ui::DialogEditWrongFormula),
       m_data(data),
       m_toolId(toolId),
-      formula(),
-      formulaBaseHeight(0),
-      checkZero(false),
-      checkLessThanZero(false),
-      postfix(),
-      restoreCursor(false),
-      timerFormula(new QTimer(this)),
-      flagFormula(false)
+      timerFormula(new QTimer(this))
 {
     SCASSERT(data != nullptr)
 
@@ -494,10 +486,9 @@ void DialogEditWrongFormula::SetPreviewCalculationsMode()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogEditWrongFormula::GetFormula() const
+auto DialogEditWrongFormula::GetFormula() const -> QString
 {
-    return VAbstractApplication::VApp()->TrVars()
-            ->TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -554,7 +545,7 @@ void DialogEditWrongFormula::SetDescription(const QString &name, qreal value, bo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal DialogEditWrongFormula::Eval(const FormulaData &formulaData, bool &flag)
+auto DialogEditWrongFormula::Eval(const FormulaData &formulaData, bool &flag) -> qreal
 {
     const qreal result = EvalToolFormula(this, formulaData, flag);
     CheckState(); // Disable Ok and Apply buttons if something wrong.
@@ -586,7 +577,7 @@ void DialogEditWrongFormula::ShowVariable(const QMap<key, val> &var)
         if (iMap.value()->Filter(m_toolId) == false)
         {// If we create this variable don't show
             ui->tableWidget->setRowCount(ui->tableWidget->rowCount() + 1);
-            QTableWidgetItem *item = new QTableWidgetItem(iMap.key());
+            auto *item = new QTableWidgetItem(iMap.key());
             QFont font = item->font();
             font.setBold(true);
             item->setFont(font);
@@ -619,16 +610,16 @@ void DialogEditWrongFormula::ShowMeasurements(const QMap<QString, QSharedPointer
         {
             continue; //skip this measurement
         }
-        if (iMap.value()->Filter(m_toolId) == false)
+        if (not iMap.value()->Filter(m_toolId))
         {// If we create this variable don't show
             ui->tableWidget->setRowCount(ui->tableWidget->rowCount() + 1);
-            QTableWidgetItem *itemName = new QTableWidgetItem(iMap.key());
+            auto *itemName = new QTableWidgetItem(iMap.key());
             QFont fontName = itemName->font();
             fontName.setBold(true);
             itemName->setFont(fontName);
             itemName->setToolTip(itemName->text());
 
-            QTableWidgetItem *itemFullName = new QTableWidgetItem();
+            auto *itemFullName = new QTableWidgetItem();
             QFont fontFullName = itemName->font();
             fontFullName.setBold(true);
             itemFullName->setFont(fontFullName);
@@ -735,7 +726,7 @@ void DialogEditWrongFormula::FilterVariablesEdited(const QString &filter)
 
         // show rows with matched filter
         const QList<QTableWidgetItem*> items = ui->tableWidget->findItems(filter, Qt::MatchContains);
-        for (auto item : items)
+        for (auto *item : items)
         {
             // If filter is empty findItems() for unknown reason returns nullptr items.
             if (item)

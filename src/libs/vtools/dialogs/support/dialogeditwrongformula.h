@@ -38,6 +38,8 @@
 #include <QtGlobal>
 #include <QDialog>
 
+#include "../vmisc/defglobal.h"
+
 class VMeasurement;
 struct FormulaData;
 class VContainer;
@@ -57,37 +59,38 @@ class DialogEditWrongFormula;
  */
 class DialogEditWrongFormula final : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT //NOLINT
 public:
     DialogEditWrongFormula(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogEditWrongFormula() override;
+    ~DialogEditWrongFormula() override;
 
-    QString      GetFormula() const;
-    void         SetFormula(const QString &value);
-    void         setCheckZero(bool value);
-    void         setCheckLessThanZero(bool value);
-    void         setPostfix(const QString &value);
-    void         SetMeasurementsMode();
-    void         SetIncrementsMode();
-    void         SetPreviewCalculationsMode();
+    auto GetFormula() const -> QString;
+    void SetFormula(const QString &value);
+    void setCheckZero(bool value);
+    void setCheckLessThanZero(bool value);
+    void setPostfix(const QString &value);
+    void SetMeasurementsMode();
+    void SetIncrementsMode();
+    void SetPreviewCalculationsMode();
 public slots:
     virtual void DialogAccepted();
     virtual void DialogRejected();
-    void         EvalFormula();
-    void         ValChanged(int row);
-    void         PutHere();
-    void         PutVal(QTableWidgetItem * item);
 
-    void         Measurements();
-    void         LengthLines();
-    void         RadiusArcs();
-    void         AnglesCurves();
-    void         LengthCurves();
-    void         CurvesCLength();
-    void         AngleLines();
-    void         Increments();
-    void         PreviewCalculations();
-    void         Functions();
+    void EvalFormula();
+    void ValChanged(int row);
+    void PutHere();
+    void PutVal(QTableWidgetItem * item);
+
+    void Measurements();
+    void LengthLines();
+    void RadiusArcs();
+    void AnglesCurves();
+    void LengthCurves();
+    void CurvesCLength();
+    void AngleLines();
+    void Increments();
+    void PreviewCalculations();
+    void Functions();
 signals:
     /**
      * @brief DialogClosed signal dialog closed
@@ -99,15 +102,15 @@ signals:
      */
     void DialogApplied();
 protected:
-    virtual bool IsValid() const final;
-    virtual void closeEvent(QCloseEvent *event) override;
-    virtual void showEvent( QShowEvent *event ) override;
-    virtual void resizeEvent(QResizeEvent *event) override;
+    virtual auto IsValid() const -> bool final;
+    void closeEvent(QCloseEvent *event) override;
+    void showEvent( QShowEvent *event ) override;
+    void resizeEvent(QResizeEvent *event) override;
     virtual void CheckState();
 private slots:
     void FilterVariablesEdited(const QString &filter);
 private:
-    Q_DISABLE_COPY(DialogEditWrongFormula)
+    Q_DISABLE_COPY_MOVE(DialogEditWrongFormula) //NOLINT
     Ui::DialogEditWrongFormula *ui;
 
     const VContainer *m_data;
@@ -115,19 +118,19 @@ private:
     quint32 m_toolId;
 
     /** @brief formula string with formula */
-    QString           formula;
+    QString formula{};
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int formulaBaseHeight;
+    int formulaBaseHeight{0};
 
-    bool checkZero;
-    bool checkLessThanZero;
-    QString postfix;
-    bool restoreCursor;
+    bool checkZero{false};
+    bool checkLessThanZero{false};
+    QString postfix{};
+    bool restoreCursor{false};
 
     QTimer *timerFormula;
 
-    bool flagFormula;
+    bool flagFormula{false};
 
     /** @brief m_isInitialized true if window is initialized */
     bool m_isInitialized{false};
@@ -142,11 +145,11 @@ private:
 
     void SetDescription(const QString &name, qreal value, bool specialUnits, const QString &description);
 
-    qreal Eval(const FormulaData &formulaData, bool &flag);
+    auto Eval(const FormulaData &formulaData, bool &flag) -> qreal;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogEditWrongFormula::IsValid() const
+inline auto DialogEditWrongFormula::IsValid() const -> bool
 {
     return flagFormula;
 }
