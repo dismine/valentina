@@ -2006,7 +2006,7 @@
     <string notr="true">Ctrl+O</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::ApplicationSpecificRole</enum>
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionSave">
@@ -2024,7 +2024,7 @@
     <string notr="true">Ctrl+S</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::ApplicationSpecificRole</enum>
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionSaveAs">
@@ -2042,7 +2042,7 @@
     <string notr="true">Ctrl+Shift+S</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::ApplicationSpecificRole</enum>
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionImportRawLayout">
@@ -2051,6 +2051,9 @@
    </property>
    <property name="text">
     <string>&amp;Import Raw Layout Data</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionExit">
@@ -2083,7 +2086,7 @@
     <string notr="true">Ctrl+N</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::ApplicationSpecificRole</enum>
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionAboutQt">
@@ -2187,7 +2190,7 @@
     <string>Add Sheet</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::ApplicationSpecificRole</enum>
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionPrintLayout">
@@ -2199,7 +2202,7 @@
     <string>Print</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::ApplicationSpecificRole</enum>
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionPrintPreviewLayout">
@@ -2211,7 +2214,7 @@
     <string>Print preview</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::ApplicationSpecificRole</enum>
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionPrintTiledLayout">
@@ -2223,7 +2226,7 @@
     <string>Print tiled</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::ApplicationSpecificRole</enum>
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionPrintPreviewTiledLayout">
@@ -2235,7 +2238,7 @@
     <string>Print preview tiled</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::ApplicationSpecificRole</enum>
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionExportLayout">
@@ -2243,7 +2246,7 @@
     <string>Export</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::ApplicationSpecificRole</enum>
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionPrintSheet">
@@ -2255,7 +2258,7 @@
     <string>Print</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::ApplicationSpecificRole</enum>
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionPrintPreviewSheet">
@@ -2267,7 +2270,7 @@
     <string>Print preview</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::ApplicationSpecificRole</enum>
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionPrintTiledSheet">
@@ -2279,7 +2282,7 @@
     <string>Print tiled</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::ApplicationSpecificRole</enum>
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionPrintPreviewTiledSheet">
@@ -2291,7 +2294,7 @@
     <string>Print preview tiled</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::ApplicationSpecificRole</enum>
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionExportSheet">
@@ -2299,7 +2302,7 @@
     <string>Export</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::ApplicationSpecificRole</enum>
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionWatermarkEditor">
@@ -2314,7 +2317,7 @@
     <string>Create or edit a watermark</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::ApplicationSpecificRole</enum>
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionEditCurrentWatermark">
@@ -2325,7 +2328,7 @@
     <string>Edit current</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::ApplicationSpecificRole</enum>
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionLoadWatermark">
@@ -2340,7 +2343,7 @@
     <string>Load</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::ApplicationSpecificRole</enum>
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionRemoveWatermark">
@@ -2355,12 +2358,13 @@
     <string>Remove</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::ApplicationSpecificRole</enum>
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionZValueBottom">
    <property name="icon">
-    <iconset theme="go-bottom"/>
+    <iconset theme="go-bottom">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Bottom</string>
@@ -2368,7 +2372,8 @@
   </action>
   <action name="actionZValueDown">
    <property name="icon">
-    <iconset theme="go-down"/>
+    <iconset theme="go-down">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Down</string>
@@ -2376,7 +2381,8 @@
   </action>
   <action name="actionZValueUp">
    <property name="icon">
-    <iconset theme="go-up"/>
+    <iconset theme="go-up">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Up</string>
@@ -2384,7 +2390,8 @@
   </action>
   <action name="actionZValueTop">
    <property name="icon">
-    <iconset theme="go-top"/>
+    <iconset theme="go-top">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Top</string>
@@ -2417,8 +2424,8 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupSheetOrientation"/>
   <buttongroup name="buttonGroupTileOrientation"/>
+  <buttongroup name="buttonGroupSheetOrientation"/>
   <buttongroup name="buttonGroupRotationDirection"/>
  </buttongroups>
 </ui>

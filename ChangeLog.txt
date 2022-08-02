@@ -12,6 +12,7 @@
 - Fix main path validation. False positive double curve.
 - Fix Setup multisize measurements dialog. Improved handling Height dimension.
 - Fix updating dimension labels in Valentina app.
+- Fix menu on Mac OS X.
 
 # Valentina 0.7.51 April 18, 2022
 - Z value change for a layout piece.

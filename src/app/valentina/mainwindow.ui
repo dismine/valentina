@@ -2698,6 +2698,9 @@
    <property name="shortcut">
     <string notr="true"/>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionPrintTiled">
    <property name="enabled">
@@ -2715,6 +2718,9 @@
    </property>
    <property name="shortcut">
     <string notr="true"/>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionPrintPreview">
@@ -2734,6 +2740,9 @@
    <property name="shortcut">
     <string notr="true"/>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionPrintPreviewTiled">
    <property name="enabled">
@@ -2752,6 +2761,9 @@
    <property name="shortcut">
     <string notr="true"/>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionExportAs">
    <property name="enabled">
@@ -2769,6 +2781,9 @@
    </property>
    <property name="shortcut">
     <string notr="true"/>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionLoadIndividual">
@@ -2909,6 +2924,9 @@
    <property name="text">
     <string>Label template editor</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionFinalMeasurements">
    <property name="enabled">
@@ -2928,6 +2946,9 @@
    <property name="text">
     <string>Export Final Measurements to CSV</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionNextPatternPiece">
    <property name="enabled">
@@ -2939,6 +2960,9 @@
    <property name="shortcut">
     <string>Ctrl+PgDown</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionPreviousPatternPiece">
    <property name="enabled">
@@ -2949,6 +2973,9 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+PgUp</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionIncreaseLabelFont">
@@ -2992,6 +3019,9 @@
    <property name="text">
     <string>Original label font</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionHideLabels">
    <property name="checkable">
@@ -3003,6 +3033,9 @@
    <property name="text">
     <string>Hide labels</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionExportRecipe">
    <property name="checkable">
@@ -3013,6 +3046,9 @@
    </property>
    <property name="text">
     <string>Export recipe</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionShowMainPath">
@@ -3028,6 +3064,9 @@
    <property name="toolTip">
     <string>Globally show pieces main path</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionLoadWatermark">
    <property name="enabled">
@@ -3039,6 +3078,9 @@
    </property>
    <property name="text">
     <string>Load</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionRemoveWatermark">
@@ -3052,6 +3094,9 @@
    <property name="text">
     <string>Remove</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionEditCurrentWatermark">
    <property name="enabled">
@@ -3059,6 +3104,9 @@
    </property>
    <property name="text">
     <string>Edit current</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionWatermarkEditor">
@@ -3072,6 +3120,9 @@
    <property name="toolTip">
     <string>Create or edit a watermark</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionOpenPuzzle">
    <property name="text">
@@ -3079,6 +3130,9 @@
    </property>
    <property name="toolTip">
     <string>Open the Puzzle app</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionCreateManualLayout">
@@ -3091,6 +3145,9 @@
    <property name="toolTip">
     <string>Create manual layout</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionUpdateManualLayout">
    <property name="enabled">
@@ -3102,10 +3159,16 @@
    <property name="toolTip">
     <string>Update manual layout</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionShop">
    <property name="text">
     <string>Shop</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionAddBackgroundImage">
@@ -3114,6 +3177,9 @@
    </property>
    <property name="text">
     <string>Add background image</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
  </widget>

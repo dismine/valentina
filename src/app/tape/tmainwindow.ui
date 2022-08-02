@@ -14,7 +14,7 @@
    <string notr="true"/>
   </property>
   <property name="windowIcon">
-   <iconset resource="share/resources/tapeicon.qrc">
+   <iconset>
     <normaloff>:/tapeicon/64x64/logo.png</normaloff>:/tapeicon/64x64/logo.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
@@ -51,7 +51,7 @@
       </property>
       <widget class="QWidget" name="tabMeasurements">
        <attribute name="icon">
-        <iconset resource="share/resources/tapeicon.qrc">
+        <iconset>
          <normaloff>:/tapeicon/16x16/measurement.png</normaloff>:/tapeicon/16x16/measurement.png</iconset>
        </attribute>
        <attribute name="title">
@@ -626,7 +626,7 @@
                    <string notr="true">...</string>
                   </property>
                   <property name="icon">
-                   <iconset resource="share/resources/tapeicon.qrc">
+                   <iconset>
                     <normaloff>:/tapeicon/24x24/fx.png</normaloff>:/tapeicon/24x24/fx.png</iconset>
                   </property>
                   <property name="iconSize">
@@ -818,7 +818,7 @@
       </widget>
       <widget class="QWidget" name="tabInformation">
        <attribute name="icon">
-        <iconset resource="share/resources/tapeicon.qrc">
+        <iconset>
          <normaloff>:/tapeicon/16x16/info.png</normaloff>:/tapeicon/16x16/info.png</iconset>
        </attribute>
        <attribute name="title">
@@ -1382,7 +1382,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/tapeicon.qrc">
+    <iconset>
      <normaloff>:/tapeicon/24x24/red_plus.png</normaloff>:/tapeicon/24x24/red_plus.png</iconset>
    </property>
    <property name="text">
@@ -1397,7 +1397,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/tapeicon.qrc">
+    <iconset>
      <normaloff>:/tapeicon/24x24/orange_plus.png</normaloff>:/tapeicon/24x24/orange_plus.png</iconset>
    </property>
    <property name="text">
@@ -1415,7 +1415,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/tapeicon.qrc">
+    <iconset>
      <normaloff>:/tapeicon/24x24/padlock_opened.png</normaloff>:/tapeicon/24x24/padlock_opened.png</iconset>
    </property>
    <property name="text">
@@ -1514,6 +1514,9 @@
    <property name="toolTip">
     <string>Import from CSV</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionMeasurementDiagram">
    <property name="checkable">
@@ -1523,7 +1526,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/tapeicon.qrc">
+    <iconset>
      <normaloff>:/tapeicon/24x24/mannequin.png</normaloff>:/tapeicon/24x24/mannequin.png</iconset>
    </property>
    <property name="text">
@@ -1622,7 +1625,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/tapeicon.qrc">
+    <iconset>
      <normaloff>:/tapeicon/24x24/separator.png</normaloff>:/tapeicon/24x24/separator.png</iconset>
    </property>
    <property name="text">
@@ -1646,12 +1649,10 @@
   <customwidget>
    <class>VPlainTextEdit</class>
    <extends>QPlainTextEdit</extends>
-   <header location="global">vplaintextedit.h</header>
+   <header>vplaintextedit.h</header>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="share/resources/tapeicon.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>actionMeasurementDiagram</sender>
