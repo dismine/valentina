@@ -13,6 +13,7 @@
 - Fix Setup multisize measurements dialog. Improved handling Height dimension.
 - Fix updating dimension labels in Valentina app.
 - Fix menu on Mac OS X.
+- Add function's argument template with name in the Formula Wizard.
 
 # Valentina 0.7.51 April 18, 2022
 - Z value change for a layout piece.

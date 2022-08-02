@@ -264,12 +264,10 @@ void DialogEditWrongFormula::ValChanged(int row)
  */
 void DialogEditWrongFormula::PutHere()
 {
-    const QTableWidgetItem *item = ui->tableWidget->currentItem();
+    QTableWidgetItem *item = ui->tableWidget->currentItem();
     if (item != nullptr)
     {
-        QTextCursor cursor = ui->plainTextEditFormula->textCursor();
-        cursor.insertText(ui->tableWidget->item(item->row(), ColumnName)->text());
-        ui->plainTextEditFormula->setTextCursor(cursor);
+        PutVal(item);
         ui->plainTextEditFormula->setFocus();
     }
 }
@@ -282,8 +280,20 @@ void DialogEditWrongFormula::PutHere()
 void DialogEditWrongFormula::PutVal(QTableWidgetItem *item)
 {
     SCASSERT(item != nullptr)
+    QTableWidgetItem *valItem = ui->tableWidget->item(item->row(), ColumnName);
     QTextCursor cursor = ui->plainTextEditFormula->textCursor();
-    cursor.insertText(ui->tableWidget->item(item->row(), ColumnName)->text());
+    if (ui->radioButtonFunctions->isChecked())
+    {
+        QString function = valItem->data(Qt::UserRole).toString();
+        const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
+        const QMap<QString, QString> functionsArguments = trVars->GetFunctionsArguments();
+        cursor.insertText(valItem->text() + functionsArguments.value(function));
+    }
+    else
+    {
+        cursor.insertText(valItem->text());
+    }
+
     ui->plainTextEditFormula->setTextCursor(cursor);
 }
 
@@ -653,15 +663,15 @@ void DialogEditWrongFormula::ShowFunctions()
     ui->tableWidget->setColumnHidden(ColumnFullName, true);
     ui->labelDescription->setText(QString());
 
-    const QMap<QString, qmu::QmuTranslation> functionsDescriptions =
-            VAbstractApplication::VApp()->TrVars()->GetFunctionsDescriptions();
-    const QMap<QString, qmu::QmuTranslation> functions = VAbstractApplication::VApp()->TrVars()->GetFunctions();
+    const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
+    const QMap<QString, qmu::QmuTranslation> functionsDescriptions = trVars->GetFunctionsDescriptions();
+    const QMap<QString, qmu::QmuTranslation> functions = trVars->GetFunctions();
     QMap<QString, qmu::QmuTranslation>::const_iterator i = functions.constBegin();
     while (i != functions.constEnd())
     {
         ui->tableWidget->setRowCount(ui->tableWidget->rowCount() + 1);
-        QTableWidgetItem *item =
-                new QTableWidgetItem(i.value().translate(VAbstractApplication::VApp()->Settings()->GetLocale()));
+        auto *item = new QTableWidgetItem(i.value().translate(VAbstractApplication::VApp()->Settings()->GetLocale()));
+        item->setData(Qt::UserRole, i.key());
         QFont font = item->font();
         font.setBold(true);
         item->setFont(font);

@@ -64,6 +64,7 @@ public:
     QMap<QString, QString> GetTranslatedFunctions() const;
     QMap<QString, qmu::QmuTranslation> GetFunctions() const;
     QMap<QString, qmu::QmuTranslation> GetFunctionsDescriptions() const;
+    QMap<QString, QString> GetFunctionsArguments() const;
 
     static void BiasTokens(int position, int bias, QMap<int, QString> &tokens);
 
@@ -75,6 +76,7 @@ private:
     QMap<QString, qmu::QmuTranslation> variables{};
     QMap<QString, qmu::QmuTranslation> functions{};
     QMap<QString, qmu::QmuTranslation> functionsDescriptions{};
+    QMap<QString, QString> functionsArguments{};
     QMap<QString, qmu::QmuTranslation> stDescriptions{};
     QMap<QString, QString> translatedFunctions{};
 
