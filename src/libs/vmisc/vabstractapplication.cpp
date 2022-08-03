@@ -277,8 +277,6 @@ void VAbstractApplication::LoadTranslation(const QString &locale)
     LoadQM(appTranslator, QStringLiteral("valentina_"), locale, appQmDir);
     installTranslator(appTranslator);
 
-    const QString system = Settings()->GetPMSystemCode();
-
     pmsTranslator = new QTranslator(this);
     LoadQM(pmsTranslator, QStringLiteral("measurements_") + Settings()->GetPMSystemCode() + '_', locale, appQmDir);
     installTranslator(pmsTranslator);
@@ -354,4 +352,14 @@ QFileDialog::Options VAbstractApplication::NativeFileDialog(QFileDialog::Options
     }
 
     return options;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractApplication::CheckSystemLocale()
+{
+    const QString defLocale = QLocale::system().name();
+    if (defLocale.startsWith(QLatin1String("ru")))
+    {
+        qFatal("Incompatible locale \"%s\"", qPrintable(defLocale));
+    }
 }

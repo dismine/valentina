@@ -33,9 +33,7 @@
 #include "../ifc/exception/vexceptionemptyparameter.h"
 #include "../ifc/exception/vexceptionwrongid.h"
 #include "../ifc/exception/vexceptioninvalidnotch.h"
-#include "../vwidgets/vmaingraphicsview.h"
 #include "../version.h"
-#include "../vmisc/vmath.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "../mainwindow.h"
 #include "../vmisc/qt_dispatch/qt_dispatch.h"
@@ -617,6 +615,8 @@ void VApplication::InitOptions()
     qDebug()<<"Command-line arguments:"<<arguments();
     qDebug()<<"Process ID:"<<applicationPid();
 
+    CheckSystemLocale();
+
     LoadTranslation(QString());// By default the console version uses system locale
 
     // Create command line parser after loading translations to show localized version.
@@ -628,7 +628,7 @@ void VApplication::InitOptions()
     }
 
     static const char * GENERIC_ICON_TO_CHECK = "document-open";
-    if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)
+    if (not QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK))
     {
         //If there is no default working icon theme then we should
         //use an icon theme that we provide via a .qrc file

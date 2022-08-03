@@ -106,6 +106,8 @@ protected:
 
     virtual void InitTrVars()=0;
 
+    static void CheckSystemLocale();
+
 protected slots:
     virtual void AboutToQuit()=0;
 
