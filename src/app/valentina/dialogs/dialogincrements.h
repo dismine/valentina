@@ -47,10 +47,10 @@ namespace Ui
  */
 class DialogIncrements : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     DialogIncrements(VContainer *data, VPattern *doc, QWidget *parent = nullptr);
-    virtual ~DialogIncrements() override;
+    ~DialogIncrements() override;
 
     void RestoreAfterClose();
 
@@ -61,12 +61,12 @@ public slots:
     void FullUpdateFromFile();
 
 protected:
-    virtual void closeEvent ( QCloseEvent * event ) override;
-    virtual void changeEvent ( QEvent * event) override;
-    virtual bool eventFilter(QObject *object, QEvent *event) override;
-    virtual void showEvent( QShowEvent *event ) override;
-    virtual void resizeEvent(QResizeEvent *event) override;
-    virtual bool IsValid() const final {return true;}
+    void closeEvent ( QCloseEvent * event ) override;
+    void changeEvent ( QEvent * event) override;
+    auto eventFilter(QObject *object, QEvent *event) -> bool override;
+    void showEvent( QShowEvent *event ) override;
+    void resizeEvent(QResizeEvent *event) override;
+    auto IsValid() const -> bool final {return true;}
 private slots:
     void ShowIncrementDetails();
     void AddIncrement();
@@ -83,73 +83,73 @@ private slots:
     void RefreshPattern();
 
 private:
-    Q_DISABLE_COPY(DialogIncrements)
+    Q_DISABLE_COPY_MOVE(DialogIncrements) // NOLINT
 
     /** @brief ui keeps information about user interface */
     Ui::DialogIncrements *ui;
 
     /** @brief data container with data */
-    VContainer           *data; // need because we must change data //-V703
+    VContainer *data; // need because we must change data //-V703
 
     /** @brief doc dom document container */
-    VPattern             *doc;
+    VPattern *doc;
 
     /** @brief m_completeData need to show all internal variables */
-    VContainer           m_completeData;
+    VContainer m_completeData;
 
-    int                  formulaBaseHeight{0};
-    int                  formulaBaseHeightPC{0};
+    int m_formulaBaseHeight{0};
+    int m_formulaBaseHeightPC{0};
 
     QSharedPointer<VTableSearch> m_search{};
     QSharedPointer<VTableSearch> m_searchPC{};
 
-    bool hasChanges{false};
+    bool m_hasChanges{false};
 
-    QVector<QPair<QString, QString>> renameList{};
+    QVector<QPair<QString, QString>> m_renameList{};
 
     QMenu *m_searchHistory;
     QMenu *m_searchHistoryPC;
 
     template <typename T>
-    void                 FillTable(const QMap<QString, T> &varTable, QTableWidget *table);
+    void FillTable(const QMap<QString, T> &varTable, QTableWidget *table);
 
-    void                 FillIncrementsTable(QTableWidget *table,
-                                             const QMap<QString, QSharedPointer<VIncrement> > &increments,
-                                             bool takePreviewCalculations);
+    static void FillIncrementsTable(QTableWidget *table, const QMap<QString, QSharedPointer<VIncrement> > &increments,
+                             bool takePreviewCalculations);
 
-    void                 FillIncrements();
-    void                 FillPreviewCalculations();
-    void                 FillLengthsLines();
-    void                 FillLengthLinesAngles();
-    void                 FillLengthsCurves();
-    void                 FillCurvesCLengths();
-    void                 FillRadiusesArcs();
-    void                 FillAnglesCurves();
+    void FillIncrements();
+    void FillPreviewCalculations();
+    void FillLengthsLines();
+    void FillLengthLinesAngles();
+    void FillLengthsCurves();
+    void FillCurvesCLengths();
+    void FillRadiusesArcs();
+    void FillAnglesCurves();
 
-    void                 ShowUnits();
-    void                 ShowHeaderUnits(QTableWidget *table, int column, const QString &unit);
+    void ShowUnits();
+    static void ShowHeaderUnits(QTableWidget *table, int column, const QString &unit);
 
-    QTableWidgetItem* AddCell(QTableWidget *table, const QString &text, int row, int column, int aligment,
-                              bool ok = true);
-    QTableWidgetItem* AddSeparatorCell(QTableWidget *table, const QString &text, int row, int column, int aligment,
-                                       bool ok = true);
+    static auto AddCell(QTableWidget *table, const QString &text, int row, int column, int aligment,
+                              bool ok = true) -> QTableWidgetItem*;
+    static auto AddSeparatorCell(QTableWidget *table, const QString &text, int row, int column, int aligment,
+                          bool ok = true) -> QTableWidgetItem*;
 
-    QString GetCustomName() const;
-    QString ClearIncrementName(const QString &name) const;
+    auto GetCustomName() const -> QString;
+    static auto ClearIncrementName(const QString &name) -> QString;
 
-    bool    EvalIncrementFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label, bool special);
-    void    Controls(QTableWidget *table);
-    void    EnableDetails(QTableWidget *table, bool enabled);
+    static auto EvalIncrementFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label,
+                              bool special) -> bool;
+    void Controls(QTableWidget *table);
+    void EnableDetails(QTableWidget *table, bool enabled);
 
     void LocalUpdateTree();
 
-    bool IncrementUsed(const QString &name) const;
+    auto IncrementUsed(const QString &name) const -> bool;
 
     void CacheRename(const QString &name, const QString &newName);
 
     void ShowTableIncrementDetails(QTableWidget *table);
 
-    QMenu *InitVarTypeMenu(QMenu *menu, bool incrementTab);
+    auto InitVarTypeMenu(QMenu *menu, bool incrementTab) -> QMenu *;
 
     void AddNewIncrement(IncrementType type);
 
@@ -159,7 +159,7 @@ private:
     void SaveIncrementsSearchRequest();
     void SavePreviewCalculationsSearchRequest();
     void UpdateSearchControlsTooltips();
-    void InitIncrementUnits(QComboBox *combo);
+    static void InitIncrementUnits(QComboBox *combo);
 };
 
 #endif // DIALOGINCREMENTS_H
