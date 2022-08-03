@@ -56,7 +56,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
 QT_WARNING_DISABLE_INTEL(1418)
 
-Q_LOGGING_CATEGORY(vApp, "v.application")
+Q_LOGGING_CATEGORY(vApp, "v.application") // NOLINT
 
 QT_WARNING_POP
 
@@ -64,25 +64,23 @@ Q_DECL_CONSTEXPR auto DAYS_TO_KEEP_LOGS = 3;
 
 namespace
 {
-QString AppFilePath(const QString &appName)
+auto AppFilePath(const QString &appName) -> QString
 {
     QString appNameExe = appName;
 #ifdef Q_OS_WIN
     appNameExe += ".exe";
 #endif
-    QFileInfo canonicalFile(QString("%1/%2").arg(QCoreApplication::applicationDirPath(), appNameExe));
+    QFileInfo canonicalFile(QStringLiteral("%1/%2").arg(QCoreApplication::applicationDirPath(), appNameExe));
     if (canonicalFile.exists())
     {
         return canonicalFile.absoluteFilePath();
     }
-    else
-    {
-        QFileInfo debugFile(QString("%1/../../%2/bin/%3")
-                                .arg(QCoreApplication::applicationDirPath(), appName, appNameExe));
-        return debugFile.exists() ? debugFile.absoluteFilePath() : appNameExe;
-    }
+
+    QFileInfo debugFile(QStringLiteral("%1/../../%2/bin/%3")
+                            .arg(QCoreApplication::applicationDirPath(), appName, appNameExe));
+    return debugFile.exists() ? debugFile.absoluteFilePath() : appNameExe;
 }
-}
+}  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
@@ -307,8 +305,6 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     }
 }
 
-#define DefWidth 1.2//mm
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VApplication constructor.
@@ -316,16 +312,12 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
  * @param argv command line.
  */
 VApplication::VApplication(int &argc, char **argv)
-    : VAbstractValApplication(argc, argv),
-      trVars(nullptr),
-      autoSaveTimer(nullptr),
-      lockLog(),
-      out(nullptr)
+    : VAbstractValApplication(argc, argv)
 {
-    setApplicationDisplayName(VER_PRODUCTNAME_STR);
-    setApplicationName(VER_INTERNALNAME_STR);
-    setOrganizationName(VER_COMPANYNAME_STR);
-    setOrganizationDomain(VER_COMPANYDOMAIN_STR);
+    setApplicationDisplayName(QStringLiteral(VER_PRODUCTNAME_STR));
+    setApplicationName(QStringLiteral(VER_INTERNALNAME_STR));
+    setOrganizationName(QStringLiteral(VER_COMPANYNAME_STR));
+    setOrganizationDomain(QStringLiteral(VER_COMPANYDOMAIN_STR));
     // Setting the Application version
     setApplicationVersion(APP_VERSION_STR);
     // making sure will create new instance...just in case we will ever do 2 objects of VApplication
@@ -337,7 +329,7 @@ VApplication::~VApplication()
 {
     qCDebug(vApp, "Application closing.");
     qInstallMessageHandler(nullptr); // Resore the message handler
-    delete trVars;
+    delete m_trVars;
     VCommandLine::Reset();
 }
 
@@ -386,7 +378,7 @@ void VApplication::NewValentina(const QString &fileName)
  * @return value that is returned from the receiver's event handler.
  */
 // reimplemented from QApplication so we can throw exceptions in slots
-bool VApplication::notify(QObject *receiver, QEvent *event)
+auto VApplication::notify(QObject *receiver, QEvent *event) -> bool
 {
     try
     {
@@ -465,7 +457,7 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VApplication::ActivateDarkMode()
 {
-     VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+     VValentinaSettings *settings = ValentinaSettings();
      if (settings->GetDarkMode())
      {
          QFile f(QStringLiteral(":qdarkstyle/style.qss"));
@@ -479,24 +471,23 @@ void VApplication::ActivateDarkMode()
              QTextStream ts(&f);
              qApp->setStyleSheet(ts.readAll());
          }
-
      }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VApplication::TapeFilePath() const
+auto VApplication::TapeFilePath() -> QString
 {
     return AppFilePath(QStringLiteral("tape"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VApplication::PuzzleFilePath() const
+auto VApplication::PuzzleFilePath() -> QString
 {
     return AppFilePath(QStringLiteral("puzzle"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VApplication::LogDirPath() const
+auto VApplication::LogDirPath() -> QString
 {
 #if defined(Q_OS_WIN) || defined(Q_OS_OSX)
     const QString logDirPath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString(),
@@ -510,16 +501,16 @@ QString VApplication::LogDirPath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VApplication::LogPath() const
+auto VApplication::LogPath() -> QString
 {
     return QStringLiteral("%1/valentina-pid%2.log").arg(LogDirPath()).arg(applicationPid());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VApplication::CreateLogDir() const
+auto VApplication::CreateLogDir() -> bool
 {
     QDir logDir(LogDirPath());
-    if (logDir.exists() == false)
+    if (not logDir.exists())
     {
         return logDir.mkpath(QChar('.')); // Create directory for log if need
     }
@@ -529,13 +520,13 @@ bool VApplication::CreateLogDir() const
 //---------------------------------------------------------------------------------------------------------------------
 void VApplication::BeginLogging()
 {
-    VlpCreateLock(lockLog, LogPath(), [this](){return new QFile(LogPath());});
+    VlpCreateLock(m_lockLog, LogPath(), [](){return new QFile(LogPath());});
 
-    if (lockLog->IsLocked())
+    if (m_lockLog->IsLocked())
     {
-        if (lockLog->GetProtected()->open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
+        if (m_lockLog->GetProtected()->open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
         {
-            out.reset(new QTextStream(lockLog->GetProtected().data()));
+            m_out.reset(new QTextStream(m_lockLog->GetProtected().data()));
             qInstallMessageHandler(noisyFailureMsgHandler);
             qCDebug(vApp, "Log file %s was locked.", qUtf8Printable(LogPath()));
         }
@@ -552,18 +543,18 @@ void VApplication::BeginLogging()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VApplication::ClearOldLogs() const
+void VApplication::ClearOldLogs()
 {
     const QString workingDirectory = QDir::currentPath();// Save the app working directory
     QDir logsDir(LogDirPath());
-    logsDir.setNameFilters(QStringList("*.log"));
-    logsDir.setCurrent(LogDirPath());
+    logsDir.setNameFilters(QStringList(QStringLiteral("*.log")));
+    QDir::setCurrent(LogDirPath());
 
     const QStringList allFiles = logsDir.entryList(QDir::NoDotAndDotDot | QDir::Files);
-    if (allFiles.isEmpty() == false)
+    if (not allFiles.isEmpty())
     {
         qCDebug(vApp, "Clearing old logs");
-        for (auto &fn : allFiles)
+        for (const auto &fn : allFiles)
         {
             QFileInfo info(fn);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
@@ -640,7 +631,7 @@ void VApplication::InitOptions()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList VApplication::LabelLanguages()
+auto VApplication::LabelLanguages() -> QStringList
 {
     QStringList list {"de",  // German
                       "en",  // English
@@ -666,32 +657,32 @@ void VApplication::StartLogging()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QTextStream *VApplication::LogFile()
+auto VApplication::LogFile() -> QTextStream *
 {
-    return out.get();
+    return m_out.get();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const VTranslateVars *VApplication::TrVars()
+auto VApplication::TrVars() -> const VTranslateVars *
 {
-    return trVars;
+    return m_trVars;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VApplication::InitTrVars()
 {
-    if (trVars != nullptr)
+    if (m_trVars != nullptr)
     {
-        trVars->Retranslate();
+        m_trVars->Retranslate();
     }
     else
     {
-        trVars = new VTranslateVars();
+        m_trVars = new VTranslateVars();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VApplication::event(QEvent *e)
+auto VApplication::event(QEvent *e) -> bool
 {
     switch(e->type())
     {
@@ -699,11 +690,11 @@ bool VApplication::event(QEvent *e)
         // Mac specific).
         case QEvent::FileOpen:
         {
-            QFileOpenEvent *fileOpenEvent = static_cast<QFileOpenEvent *>(e);
+            auto *fileOpenEvent = dynamic_cast<QFileOpenEvent *>(e);
             const QString macFileOpen = fileOpenEvent->file();
             if(not macFileOpen.isEmpty())
             {
-                MainWindow *window = qobject_cast<MainWindow*>(mainWindow);
+                auto *window = qobject_cast<MainWindow*>(mainWindow);
                 if (window)
                 {
                     window->LoadPattern(macFileOpen);  // open file in existing window
@@ -738,7 +729,7 @@ void VApplication::AboutToQuit()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VApplication::IsGUIMode()
+auto VApplication::IsGUIMode() -> bool
 {
     return (VCommandLine::instance != nullptr) && VCommandLine::instance->IsGuiEnabled();
 }
@@ -747,13 +738,13 @@ bool VApplication::IsGUIMode()
 /**
  * @brief IsAppInGUIMode little hack that allow to have access to application state from VAbstractApplication class.
  */
-bool VApplication::IsAppInGUIMode() const
+auto VApplication::IsAppInGUIMode() const -> bool
 {
     return IsGUIMode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VApplication::IsPedantic() const
+auto VApplication::IsPedantic() const -> bool
 {
     return (VCommandLine::instance != nullptr) && VCommandLine::instance->IsPedantic();
 }
@@ -765,7 +756,7 @@ auto VApplication::VApp() -> VApplication *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const VCommandLinePtr VApplication::CommandLine() const
+auto VApplication::CommandLine() -> VCommandLinePtr
 {
     return VCommandLine::instance;
 }

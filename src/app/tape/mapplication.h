@@ -30,41 +30,41 @@
 #define MAPPLICATION_H
 
 #include "../vpatterndb/vtranslatevars.h"
-#include "../vmisc/def.h"
 #include "vtapesettings.h"
 #include "../vmisc/vabstractapplication.h"
 #include "dialogs/dialogmdatabase.h"
 
 class TMainWindow;
 class QLocalServer;
+class QCommandLineParser;
 
 enum class SocketConnection : bool {Client = false, Server = true};
 
 class MApplication : public VAbstractApplication
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     MApplication(int &argc, char **argv);
-    virtual ~MApplication() override;
+    ~MApplication() override;
 
-    virtual bool notify(QObject * receiver, QEvent * event) override;
+    auto notify(QObject * receiver, QEvent * event) -> bool override;
 
-    bool IsTestMode() const;
-    virtual bool IsAppInGUIMode() const override;
-    TMainWindow *MainWindow();
-    QList<TMainWindow*> MainWindows();
-    TMainWindow *NewMainWindow();
+    auto IsTestMode() const -> bool;
+    auto IsAppInGUIMode() const -> bool override;
+    auto MainWindow() -> TMainWindow *;
+    auto MainWindows() -> QList<TMainWindow*>;
+    auto NewMainWindow() -> TMainWindow *;
 
     void InitOptions();
 
-    virtual const VTranslateVars *TrVars() override;
+    auto TrVars() -> const VTranslateVars * override;
 
-    virtual void  OpenSettings() override;
-    VTapeSettings *TapeSettings();
+    void OpenSettings() override;
+    auto TapeSettings() -> VTapeSettings *;
     void ActivateDarkMode();
 
-    QString diagramsPath() const;
+    static auto diagramsPath() -> QString;
 
     void ShowDataBase();
     void RetranslateGroups();
@@ -72,36 +72,47 @@ public:
 
     void ParseCommandLine(const SocketConnection &connection, const QStringList &arguments);
 
-    static MApplication *VApp();
+    static auto VApp() -> MApplication *;
 
 public slots:
     void ProcessCMD();
 
 protected:
-    virtual void InitTrVars() override;
-    virtual bool event(QEvent *e) override;
+    void InitTrVars() override;
+    auto event(QEvent *e) -> bool override;
 
 protected slots:
-    virtual void AboutToQuit() override;
+    void AboutToQuit() override;
 
 private slots:
     void NewLocalSocketConnection();
 
 private:
-    Q_DISABLE_COPY(MApplication)
-    QList<QPointer<TMainWindow> > mainWindows;
-    QLocalServer *localServer;
-    VTranslateVars *trVars;
-    QPointer<DialogMDataBase> dataBase;
-    bool testMode;
+    Q_DISABLE_COPY_MOVE(MApplication) // NOLINT
+    QList<QPointer<TMainWindow> > m_mainWindows{};
+    QLocalServer *m_localServer{nullptr};
+    VTranslateVars *m_trVars{nullptr};
+    QPointer<DialogMDataBase> m_dataBase{};
+    bool m_testMode{false};
 
     void Clean();
+
+    static void InitParserOptions(QCommandLineParser &parser);
+    void StartLocalServer(const QString &serverName);
+
+    void StartWithFiles(QCommandLineParser &parser);
+    void SingleStart(QCommandLineParser &parser);
+
+    static void ParseDimensionAOption(QCommandLineParser &parser, int &dimensionAValue, bool &flagDimensionA);
+    static void ParseDimensionBOption(QCommandLineParser &parser, int &dimensionBValue, bool &flagDimensionB);
+    static void ParseDimensionCOption(QCommandLineParser &parser, int &dimensionCValue, bool &flagDimensionC);
+    static void ParseUnitsOption(QCommandLineParser &parser, Unit &unit , bool &flagUnits);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline const VTranslateVars *MApplication::TrVars()
+inline auto MApplication::TrVars() -> const VTranslateVars *
 {
-    return trVars;
+    return m_trVars;
 }
 
 #endif // MAPPLICATION_H

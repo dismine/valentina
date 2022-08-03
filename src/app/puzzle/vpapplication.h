@@ -42,32 +42,32 @@ enum class SocketConnection : bool {Client = false, Server = true};
 
 class VPApplication : public VAbstractApplication
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VPApplication(int &argc, char **argv);
-    virtual ~VPApplication() override;
+    ~VPApplication() override;
 
-    virtual bool notify(QObject * receiver, QEvent * event) override;
+    auto notify(QObject * receiver, QEvent * event) -> bool override;
 
-    virtual bool IsAppInGUIMode() const override;
-    VPMainWindow *MainWindow();
-    QList<VPMainWindow*> MainWindows();
-    VPMainWindow *NewMainWindow();
-    VPMainWindow *NewMainWindow(const VPCommandLinePtr &cmd);
+    auto IsAppInGUIMode() const -> bool override;
+    auto MainWindow() -> VPMainWindow *;
+    auto MainWindows() -> QList<VPMainWindow*>;
+    auto NewMainWindow() -> VPMainWindow *;
+    auto NewMainWindow(const VPCommandLinePtr &cmd) -> VPMainWindow *;
 
     void InitOptions();
 
-    virtual const VTranslateVars *TrVars() override;
+    auto TrVars() -> const VTranslateVars * override;
 
-    virtual void  OpenSettings() override;
-    VPSettings *PuzzleSettings();
+    void OpenSettings() override;
+    auto PuzzleSettings() -> VPSettings *;
     void ActivateDarkMode();
 
     void ParseCommandLine(const SocketConnection &connection, const QStringList &arguments);
     void ProcessArguments(const VPCommandLinePtr &cmd);
 
-    static VPCommandLinePtr CommandLine();
-    static VPApplication *VApp();
+    static auto CommandLine() -> VPCommandLinePtr;
+    static auto VApp() -> VPApplication *;
 
     auto PreferencesDialog() const -> QSharedPointer<DialogPuzzlePreferences>;
     void SetPreferencesDialog(const QSharedPointer<DialogPuzzlePreferences> &newPreferencesDialog);
@@ -76,22 +76,27 @@ public slots:
     void ProcessCMD();
 
 protected:
-    virtual void InitTrVars() override;
-    virtual bool event(QEvent *e) override;
+    void InitTrVars() override;
+    auto event(QEvent *e) -> bool override;
 
 protected slots:
-    virtual void AboutToQuit() override;
+    void AboutToQuit() override;
 
 private slots:
     void NewLocalSocketConnection();
 
 private:
-    Q_DISABLE_COPY(VPApplication)
-    QList<QPointer<VPMainWindow> > mainWindows{};
-    QLocalServer *localServer{nullptr};
+    Q_DISABLE_COPY_MOVE(VPApplication) //NOLINT
+    QList<QPointer<VPMainWindow> > m_mainWindows{};
+    QLocalServer *m_localServer{nullptr};
     QWeakPointer<DialogPuzzlePreferences> m_preferencesDialog{};
 
     void Clean();
+
+    void StartLocalServer(const QString &serverName);
+
+    void StartWithFiles(const VPCommandLinePtr &cmd, const QStringList &rawLayouts);
+    void SingleStart(const VPCommandLinePtr &cmd, const QStringList &rawLayouts);
 };
 
 #endif // VPAPPLICATION_H

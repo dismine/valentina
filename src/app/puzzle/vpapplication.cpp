@@ -35,7 +35,11 @@
 #include "../ifc/exception/vexceptionemptyparameter.h"
 #include "../ifc/exception/vexceptionwrongid.h"
 #include "../vmisc/vsysexits.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+
 #include "../vmisc/qt_dispatch/qt_dispatch.h"
 #include "../fervor/fvupdater.h"
 
@@ -46,7 +50,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
 QT_WARNING_DISABLE_INTEL(1418)
 
-Q_LOGGING_CATEGORY(pApp, "p.application")
+Q_LOGGING_CATEGORY(pApp, "p.application") // NOLINT
 
 QT_WARNING_POP
 
@@ -246,10 +250,10 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
 VPApplication::VPApplication(int &argc, char **argv)
     :VAbstractApplication(argc, argv)
 {
-    setApplicationDisplayName(VER_PRODUCTNAME_STR);
-    setApplicationName(VER_INTERNALNAME_STR);
-    setOrganizationName(VER_COMPANYNAME_STR);
-    setOrganizationDomain(VER_COMPANYDOMAIN_STR);
+    setApplicationDisplayName(QStringLiteral(VER_PRODUCTNAME_STR));
+    setApplicationName(QStringLiteral(VER_INTERNALNAME_STR));
+    setOrganizationName(QStringLiteral(VER_COMPANYNAME_STR));
+    setOrganizationDomain(QStringLiteral(VER_COMPANYDOMAIN_STR));
     // Setting the Application version
     setApplicationVersion(APP_VERSION_STR);
     // We have been running Puzzle in two different cases.
@@ -261,7 +265,7 @@ VPApplication::VPApplication(int &argc, char **argv)
 //---------------------------------------------------------------------------------------------------------------------
 VPApplication::~VPApplication()
 {
-    qDeleteAll(mainWindows);
+    qDeleteAll(m_mainWindows);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -342,11 +346,11 @@ auto VPApplication::IsAppInGUIMode() const -> bool
 auto VPApplication::MainWindow()-> VPMainWindow *
 {
     Clean();
-    if (mainWindows.isEmpty())
+    if (m_mainWindows.isEmpty())
     {
         NewMainWindow();
     }
-    return mainWindows[0];
+    return m_mainWindows[0];
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -354,7 +358,8 @@ auto VPApplication::MainWindows() -> QList<VPMainWindow *>
 {
     Clean();
     QList<VPMainWindow*> list;
-    for (auto &w : mainWindows)
+    list.reserve(m_mainWindows.size());
+    for (auto &w : m_mainWindows)
     {
         list.append(w);
     }
@@ -373,7 +378,7 @@ auto VPApplication::NewMainWindow() -> VPMainWindow *
 auto VPApplication::NewMainWindow(const VPCommandLinePtr &cmd) -> VPMainWindow *
 {
     auto *puzzle = new VPMainWindow(cmd);
-    mainWindows.prepend(puzzle);
+    m_mainWindows.prepend(puzzle);
     if (not cmd->IsTestModeEnabled())
     {
         puzzle->show();
@@ -394,7 +399,7 @@ void VPApplication::InitOptions()
     qCDebug(pApp, "Build revision: %s", BUILD_REVISION);
     qCDebug(pApp, "%s", qUtf8Printable(buildCompatibilityString()));
     qCDebug(pApp, "Built on %s at %s", __DATE__, __TIME__);
-    qCDebug(pApp, "Command-line arguments: %s", qUtf8Printable(arguments().join(", ")));
+    qCDebug(pApp, "Command-line arguments: %s", qUtf8Printable(arguments().join(QStringLiteral(", "))));
     qCDebug(pApp, "Process ID: %s", qUtf8Printable(QString().setNum(applicationPid())));
 
     CheckSystemLocale();
@@ -406,13 +411,13 @@ void VPApplication::InitOptions()
     VPCommandLine::Instance();
 
     static const char * GENERIC_ICON_TO_CHECK = "document-open";
-    if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)
+    if (not QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK))
     {
        //If there is no default working icon theme then we should
        //use an icon theme that we provide via a .qrc file
        //This case happens under Windows and Mac OS X
        //This does not happen under GNOME or KDE
-       QIcon::setThemeName("win.icon.theme");
+        QIcon::setThemeName(QStringLiteral("win.icon.theme"));
     }
     ActivateDarkMode();
 }
@@ -440,10 +445,10 @@ auto VPApplication::PuzzleSettings() -> VPSettings *
 //---------------------------------------------------------------------------------------------------------------------
 void VPApplication::ActivateDarkMode()
 {
-    VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+    VPSettings *settings = PuzzleSettings();
     if (settings->GetDarkMode())
     {
-         QFile f(":qdarkstyle/style.qss");
+         QFile f(QStringLiteral(":qdarkstyle/style.qss"));
          if (!f.exists())
          {
              qDebug()<<"Unable to set stylesheet, file not found\n";
@@ -472,7 +477,7 @@ void VPApplication::ParseCommandLine(const SocketConnection &connection, const Q
         {
             qCDebug(pApp, "Connected to the server '%s'", qUtf8Printable(serverName));
             QTextStream stream(&socket);
-            stream << arguments.join(";;");
+            stream << arguments.join(QStringLiteral(";;"));
             stream.flush();
             socket.waitForBytesWritten();
             QCoreApplication::exit(V_EX_OK);
@@ -480,24 +485,7 @@ void VPApplication::ParseCommandLine(const SocketConnection &connection, const Q
         }
 
         qCDebug(pApp, "Can't establish connection to the server '%s'", qUtf8Printable(serverName));
-
-        localServer = new QLocalServer(this);
-        connect(localServer, &QLocalServer::newConnection, this, &VPApplication::NewLocalSocketConnection);
-        if (not localServer->listen(serverName))
-        {
-            qCDebug(pApp, "Can't begin to listen for incoming connections on name '%s'",
-                    qUtf8Printable(serverName));
-            if (localServer->serverError() == QAbstractSocket::AddressInUseError)
-            {
-                QLocalServer::removeServer(serverName);
-                if (not localServer->listen(serverName))
-                {
-                    qCWarning(pApp, "%s",
-                     qUtf8Printable(tr("Can't begin to listen for incoming connections on name '%1'").arg(serverName)));
-                }
-            }
-        }
-
+        StartLocalServer(serverName);
         LoadTranslation(PuzzleSettings()->GetLocale());
     }
 
@@ -509,54 +497,7 @@ void VPApplication::ProcessArguments(const VPCommandLinePtr &cmd)
 {
     const QStringList rawLayouts = cmd->OptionRawLayouts();
     const QStringList args = cmd->OptionFileNames();
-    if (args.count() > 0)
-    {
-        if (not cmd->IsGuiEnabled() && args.count() > 1)
-        {
-            qCCritical(pApp, "%s\n", qPrintable(tr("Export mode doesn't support opening several files.")));
-            cmd.get()->parser.showHelp(V_EX_USAGE);
-        }
-
-        if (args.count() > 1 && not rawLayouts.isEmpty())
-        {
-            qCCritical(pApp, "%s\n",
-                       qPrintable(tr("Import raw layout data does not support opening several layout files.")));
-            cmd.get()->parser.showHelp(V_EX_USAGE);
-        }
-
-        for (const auto &arg : args)
-        {
-            NewMainWindow(cmd);
-            if (not MainWindow()->LoadFile(arg))
-            {
-                if (not cmd->IsGuiEnabled())
-                {
-                    return; // process only one input file
-                }
-                delete MainWindow();
-                continue;
-            }
-
-            if (not rawLayouts.isEmpty())
-            {
-                MainWindow()->ImportRawLayouts(rawLayouts);
-            }
-        }
-    }
-    else
-    {
-        if (cmd->IsTestModeEnabled())
-        {
-            qCCritical(pApp, "%s\n", qPrintable(tr("Please, provide one input file.")));
-            cmd.get()->parser.showHelp(V_EX_USAGE);
-        }
-
-        NewMainWindow(cmd);
-        if (not rawLayouts.isEmpty())
-        {
-            MainWindow()->ImportRawLayouts(rawLayouts);
-        }
-    }
+    args.count() > 0 ? StartWithFiles(cmd, rawLayouts) : SingleStart(cmd, rawLayouts);
 
     if (not cmd->IsGuiEnabled())
     {
@@ -637,7 +578,7 @@ void VPApplication::AboutToQuit()
 //---------------------------------------------------------------------------------------------------------------------
 void VPApplication::NewLocalSocketConnection()
 {
-    QScopedPointer<QLocalSocket>socket(localServer->nextPendingConnection());
+    QScopedPointer<QLocalSocket>socket(m_localServer->nextPendingConnection());
     if (socket.isNull())
     {
         return;
@@ -647,7 +588,7 @@ void VPApplication::NewLocalSocketConnection()
     const QString arg = stream.readAll();
     if (not arg.isEmpty())
     {
-        ParseCommandLine(SocketConnection::Server, arg.split(";;"));
+        ParseCommandLine(SocketConnection::Server, arg.split(QStringLiteral(";;")));
     }
     MainWindow()->raise();
     MainWindow()->activateWindow();
@@ -669,12 +610,90 @@ void VPApplication::SetPreferencesDialog(const QSharedPointer<DialogPuzzlePrefer
 void VPApplication::Clean()
 {
     // cleanup any deleted main windows first
-    for (int i = mainWindows.count() - 1; i >= 0; --i)
+    for (int i = m_mainWindows.count() - 1; i >= 0; --i)
     {
-        if (mainWindows.at(i).isNull())
+        if (m_mainWindows.at(i).isNull())
         {
-            mainWindows.removeAt(i);
+            m_mainWindows.removeAt(i);
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPApplication::StartLocalServer(const QString &serverName)
+{
+    m_localServer = new QLocalServer(this);
+    connect(m_localServer, &QLocalServer::newConnection, this, &VPApplication::NewLocalSocketConnection);
+    if (not m_localServer->listen(serverName))
+    {
+        qCDebug(pApp, "Can't begin to listen for incoming connections on name '%s'",
+                qUtf8Printable(serverName));
+        if (m_localServer->serverError() == QAbstractSocket::AddressInUseError)
+        {
+            QLocalServer::removeServer(serverName);
+            if (not m_localServer->listen(serverName))
+            {
+                qCWarning(pApp, "%s",
+                          qUtf8Printable(tr("Can't begin to listen for incoming connections on name '%1'")
+                                             .arg(serverName)));
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPApplication::StartWithFiles(const VPCommandLinePtr &cmd, const QStringList &rawLayouts)
+{
+    const QStringList args = cmd->OptionFileNames();
+    if (args.count() > 0)
+    {
+        if (not cmd->IsGuiEnabled() && args.count() > 1)
+        {
+            qCCritical(pApp, "%s\n", qPrintable(tr("Export mode doesn't support opening several files.")));
+            cmd.get()->parser.showHelp(V_EX_USAGE);
+        }
+
+        if (args.count() > 1 && not rawLayouts.isEmpty())
+        {
+            qCCritical(pApp, "%s\n",
+                       qPrintable(tr("Import raw layout data does not support opening several layout files.")));
+            cmd.get()->parser.showHelp(V_EX_USAGE);
+        }
+
+        for (const auto &arg : args)
+        {
+            NewMainWindow(cmd);
+            if (not MainWindow()->LoadFile(arg))
+            {
+                if (not cmd->IsGuiEnabled())
+                {
+                    return; // process only one input file
+                }
+                delete MainWindow();
+                continue;
+            }
+
+            if (not rawLayouts.isEmpty())
+            {
+                MainWindow()->ImportRawLayouts(rawLayouts);
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPApplication::SingleStart(const VPCommandLinePtr &cmd, const QStringList &rawLayouts)
+{
+    if (cmd->IsTestModeEnabled())
+    {
+        qCCritical(pApp, "%s\n", qPrintable(tr("Please, provide one input file.")));
+        cmd.get()->parser.showHelp(V_EX_USAGE);
+    }
+
+    NewMainWindow(cmd);
+    if (not rawLayouts.isEmpty())
+    {
+        MainWindow()->ImportRawLayouts(rawLayouts);
     }
 }
 
@@ -685,7 +704,7 @@ auto VPApplication::CommandLine() -> VPCommandLinePtr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPApplication *VPApplication::VApp()
+auto VPApplication::VApp() -> VPApplication *
 {
     return qobject_cast<VPApplication*>(QCoreApplication::instance());
 }

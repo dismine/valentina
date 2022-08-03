@@ -35,10 +35,13 @@
 #include "../ifc/exception/vexceptionemptyparameter.h"
 #include "../ifc/exception/vexceptionwrongid.h"
 #include "../vmisc/vsysexits.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+
 #include "../vmisc/qt_dispatch/qt_dispatch.h"
 #include "../qmuparser/qmuparsererror.h"
-#include "../vpatterndb/variables/vmeasurement.h"
 #include "../fervor/fvupdater.h"
 
 #include <QDir>
@@ -53,6 +56,7 @@
 #include <QGridLayout>
 #include <QSpacerItem>
 #include <QThread>
+#include <QGlobalStatic>
 
 #if defined(APPIMAGE) && defined(Q_OS_LINUX)
 #   include "../vmisc/appimage.h"
@@ -62,11 +66,28 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
 QT_WARNING_DISABLE_INTEL(1418)
 
-Q_LOGGING_CATEGORY(mApp, "m.application")
+Q_LOGGING_CATEGORY(mApp, "m.application") // NOLINT
 
 QT_WARNING_POP
 
 #include <QCommandLineParser>
+
+namespace
+{
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_DIMENSION_A, (QLatin1String("dimensionA"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_DIMENSION_A, (QChar('a'))) // NOLINT
+
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_DIMENSION_B, (QLatin1String("dimensionB"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_DIMENSION_B, (QChar('b'))) // NOLINT
+
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_DIMENSION_C, (QLatin1String("dimensionC"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_DIMENSION_C, (QChar('c'))) // NOLINT
+
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_UNITS, (QLatin1String("units"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_UNITS, (QChar('u'))) // NOLINT
+
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_TEST, (QLatin1String("test"))) // NOLINT
+}  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
@@ -263,17 +284,12 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
 
 //---------------------------------------------------------------------------------------------------------------------
 MApplication::MApplication(int &argc, char **argv)
-    :VAbstractApplication(argc, argv),
-      mainWindows(),
-      localServer(nullptr),
-      trVars(nullptr),
-      dataBase(QPointer<DialogMDataBase>()),
-      testMode(false)
+    :VAbstractApplication(argc, argv)
 {
-    setApplicationDisplayName(VER_PRODUCTNAME_STR);
-    setApplicationName(VER_INTERNALNAME_STR);
-    setOrganizationName(VER_COMPANYNAME_STR);
-    setOrganizationDomain(VER_COMPANYDOMAIN_STR);
+    setApplicationDisplayName(QStringLiteral(VER_PRODUCTNAME_STR));
+    setApplicationName(QStringLiteral(VER_INTERNALNAME_STR));
+    setOrganizationName(QStringLiteral(VER_COMPANYNAME_STR));
+    setOrganizationDomain(QStringLiteral(VER_COMPANYDOMAIN_STR));
     // Setting the Application version
     setApplicationVersion(APP_VERSION_STR);
     // We have been running Tape in two different cases.
@@ -285,12 +301,12 @@ MApplication::MApplication(int &argc, char **argv)
 //---------------------------------------------------------------------------------------------------------------------
 MApplication::~MApplication()
 {
-    qDeleteAll(mainWindows);
+    qDeleteAll(m_mainWindows);
 
-    delete trVars;
-    if (not dataBase.isNull())
+    delete m_trVars;
+    if (not m_dataBase.isNull())
     {
-        delete dataBase;
+        delete m_dataBase;
     }
 }
 
@@ -302,7 +318,7 @@ MApplication::~MApplication()
  * @return value that is returned from the receiver's event handler.
  */
 // reimplemented from QApplication so we can throw exceptions in slots
-bool MApplication::notify(QObject *receiver, QEvent *event)
+auto MApplication::notify(QObject *receiver, QEvent *event) -> bool
 {
     try
     {
@@ -372,37 +388,38 @@ bool MApplication::notify(QObject *receiver, QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool MApplication::IsTestMode() const
+auto MApplication::IsTestMode() const -> bool
 {
-    return testMode;
+    return m_testMode;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief IsAppInGUIMode little hack that allow to have access to application state from VAbstractApplication class.
  */
-bool MApplication::IsAppInGUIMode() const
+auto MApplication::IsAppInGUIMode() const -> bool
 {
     return not IsTestMode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-TMainWindow *MApplication::MainWindow()
+auto MApplication::MainWindow() -> TMainWindow *
 {
     Clean();
-    if (mainWindows.isEmpty())
+    if (m_mainWindows.isEmpty())
     {
         NewMainWindow();
     }
-    return mainWindows[0];
+    return m_mainWindows[0];
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<TMainWindow *> MApplication::MainWindows()
+auto MApplication::MainWindows() -> QList<TMainWindow *>
 {
     Clean();
     QList<TMainWindow*> list;
-    for (auto &w : mainWindows)
+    list.reserve(m_mainWindows.size());
+    for (auto &w : m_mainWindows)
     {
         list.append(w);
     }
@@ -420,7 +437,7 @@ void MApplication::InitOptions()
     qCDebug(mApp, "Build revision: %s", BUILD_REVISION);
     qCDebug(mApp, "%s", qUtf8Printable(buildCompatibilityString()));
     qCDebug(mApp, "Built on %s at %s", __DATE__, __TIME__);
-    qCDebug(mApp, "Command-line arguments: %s", qUtf8Printable(arguments().join(", ")));
+    qCDebug(mApp, "Command-line arguments: %s", qUtf8Printable(arguments().join(QStringLiteral(", "))));
     qCDebug(mApp, "Process ID: %s", qUtf8Printable(QString().setNum(applicationPid())));
 
     CheckSystemLocale();
@@ -428,13 +445,13 @@ void MApplication::InitOptions()
     LoadTranslation(QString());// By default the console version uses system locale
 
     static const char * GENERIC_ICON_TO_CHECK = "document-open";
-    if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)
+    if (not QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK))
     {
        //If there is no default working icon theme then we should
        //use an icon theme that we provide via a .qrc file
        //This case happens under Windows and Mac OS X
        //This does not happen under GNOME or KDE
-       QIcon::setThemeName("win.icon.theme");
+       QIcon::setThemeName(QStringLiteral("win.icon.theme"));
     }
     ActivateDarkMode();
     QResource::registerResource(diagramsPath());
@@ -444,10 +461,10 @@ void MApplication::InitOptions()
 // Dark mode
 void MApplication::ActivateDarkMode()
 {
-    VTapeSettings *settings = MApplication::VApp()->TapeSettings();
+    VTapeSettings *settings = TapeSettings();
      if (settings->GetDarkMode())
      {
-         QFile f(":qdarkstyle/style.qss");
+         QFile f(QStringLiteral(":qdarkstyle/style.qss"));
          if (!f.exists())
          {
              qDebug()<<"Unable to set stylesheet, file not found\n";
@@ -465,18 +482,18 @@ void MApplication::ActivateDarkMode()
 //---------------------------------------------------------------------------------------------------------------------
 void MApplication::InitTrVars()
 {
-    if (trVars != nullptr)
+    if (m_trVars != nullptr)
     {
-        trVars->Retranslate();
+        m_trVars->Retranslate();
     }
     else
     {
-        trVars = new VTranslateVars();
+        m_trVars = new VTranslateVars();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool MApplication::event(QEvent *e)
+auto MApplication::event(QEvent *e) -> bool
 {
     switch(e->type())
     {
@@ -484,7 +501,7 @@ bool MApplication::event(QEvent *e)
         // Mac specific).
         case QEvent::FileOpen:
         {
-            QFileOpenEvent *fileOpenEvent = static_cast<QFileOpenEvent *>(e);
+            auto *fileOpenEvent = static_cast<QFileOpenEvent *>(e);
             const QString macFileOpen = fileOpenEvent->file();
             if(not macFileOpen.isEmpty())
             {
@@ -532,14 +549,14 @@ void MApplication::OpenSettings()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VTapeSettings *MApplication::TapeSettings()
+auto MApplication::TapeSettings() -> VTapeSettings *
 {
     SCASSERT(settings != nullptr)
     return qobject_cast<VTapeSettings *>(settings);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString MApplication::diagramsPath() const
+auto MApplication::diagramsPath() -> QString
 {
     const QString dPath = QStringLiteral("/diagrams.rcc");
 #ifdef Q_OS_WIN
@@ -568,40 +585,38 @@ QString MApplication::diagramsPath() const
     {
         return file.absoluteFilePath();
     }
-    else
-    {
+
 #if defined(APPIMAGE) && defined(Q_OS_LINUX)
-        /* Fix path to diagrams when run inside AppImage. */
-        return AppImageRoot() + PKGDATADIR + dPath;
+    /* Fix path to diagrams when run inside AppImage. */
+    return AppImageRoot() + PKGDATADIR + dPath;
 #else
-        return PKGDATADIR + dPath;
+    return PKGDATADIR + dPath;
 #endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
-    }
-#endif
+#endif // Unix
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void MApplication::ShowDataBase()
 {
-    if (dataBase.isNull())
+    if (m_dataBase.isNull())
     {
-        dataBase = new DialogMDataBase();
-        dataBase->setAttribute(Qt::WA_DeleteOnClose, true);
-        dataBase->setModal(false);
-        dataBase->show();
+        m_dataBase = new DialogMDataBase();
+        m_dataBase->setAttribute(Qt::WA_DeleteOnClose, true);
+        m_dataBase->setModal(false);
+        m_dataBase->show();
     }
     else
     {
-        dataBase->activateWindow();
+        m_dataBase->activateWindow();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void MApplication::RetranslateGroups()
 {
-    if (not dataBase.isNull())
+    if (not m_dataBase.isNull())
     {
-        dataBase->RetranslateGroups();
+        m_dataBase->RetranslateGroups();
     }
 }
 
@@ -609,7 +624,7 @@ void MApplication::RetranslateGroups()
 void MApplication::RetranslateTables()
 {
     const QList<TMainWindow*> list = MainWindows();
-    for (auto w : list)
+    for (auto *w : list)
     {
         w->RetranslateTable();
     }
@@ -622,49 +637,14 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
     parser.setApplicationDescription(tr("Valentina's measurements editor."));
     parser.addHelpOption();
     parser.addVersionOption();
-    parser.addPositionalArgument("filename", tr("The measurement file."));
 
-    const QString LONG_OPTION_DIMENSION_A = QStringLiteral("dimensionA");
-    const QString SINGLE_OPTION_DIMENSION_A = QChar('a');
-
-    const QString LONG_OPTION_DIMENSION_B = QStringLiteral("dimensionB");
-    const QString SINGLE_OPTION_DIMENSION_B = QChar('b');
-
-    const QString LONG_OPTION_DIMENSION_C = QStringLiteral("dimensionC");
-    const QString SINGLE_OPTION_DIMENSION_C = QChar('c');
-
-    const QString LONG_OPTION_UNITS = QStringLiteral("units");
-    const QString SINGLE_OPTION_UNITS = QChar('u');
-
-    const QString LONG_OPTION_TEST = QStringLiteral("test");
-
-    parser.addOptions(
-    {
-        {{SINGLE_OPTION_DIMENSION_A, LONG_OPTION_DIMENSION_A}, tr("Set base for dimension A in the table units."),
-             tr("The dimension A base")},
-
-        {{SINGLE_OPTION_DIMENSION_B, LONG_OPTION_DIMENSION_B}, tr("Set base for dimension B in the table units."),
-             tr("The dimension B base")},
-
-        {{SINGLE_OPTION_DIMENSION_C, LONG_OPTION_DIMENSION_C}, tr("Set base for dimension C in the table units."),
-             tr("The dimension C base")},
-
-        {{SINGLE_OPTION_UNITS, LONG_OPTION_UNITS}, tr("Set pattern file units: cm, mm, inch."),
-             tr("The pattern units")},
-
-        {LONG_OPTION_TEST,
-             tr("Use for unit testing. Run the program and open a file without showing the main window.")},
-
-        {LONG_OPTION_NO_HDPI_SCALING,
-             tr("Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). "
-                "Alternatively you can use the %1 environment variable.").arg("QT_AUTO_SCREEN_SCALE_FACTOR=0")},
-    });
+    InitParserOptions(parser);
 
     parser.process(arguments);
 
-    testMode = parser.isSet(LONG_OPTION_TEST);
+    m_testMode = parser.isSet(*LONG_OPTION_TEST);
 
-    if (not testMode && connection == SocketConnection::Client)
+    if (not m_testMode && connection == SocketConnection::Client)
     {
         const QString serverName = QCoreApplication::applicationName();
         QLocalSocket socket;
@@ -673,181 +653,24 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
         {
             qCDebug(mApp, "Connected to the server '%s'", qUtf8Printable(serverName));
             QTextStream stream(&socket);
-            stream << QCoreApplication::arguments().join(";;");
+            stream << QCoreApplication::arguments().join(QStringLiteral(";;"));
             stream.flush();
             socket.waitForBytesWritten();
-            qApp->exit(V_EX_OK);
+            QCoreApplication::exit(V_EX_OK);
             return;
         }
 
         qCDebug(mApp, "Can't establish connection to the server '%s'", qUtf8Printable(serverName));
-
-        localServer = new QLocalServer(this);
-        connect(localServer, &QLocalServer::newConnection, this, &MApplication::NewLocalSocketConnection);
-        if (not localServer->listen(serverName))
-        {
-            qCDebug(mApp, "Can't begin to listen for incoming connections on name '%s'",
-                    qUtf8Printable(serverName));
-            if (localServer->serverError() == QAbstractSocket::AddressInUseError)
-            {
-                QLocalServer::removeServer(serverName);
-                if (not localServer->listen(serverName))
-                {
-                    qCWarning(mApp, "%s",
-                     qUtf8Printable(tr("Can't begin to listen for incoming connections on name '%1'").arg(serverName)));
-                }
-            }
-        }
-
+        StartLocalServer(serverName);
         LoadTranslation(TapeSettings()->GetLocale());
     }
 
     const QStringList args = parser.positionalArguments();
-    if (args.count() > 0)
+    args.count() > 0 ? StartWithFiles(parser) : SingleStart(parser);
+
+    if (m_testMode)
     {
-        if (testMode && args.count() > 1)
-        {
-            qCCritical(mApp, "%s\n", qPrintable(tr("Test mode doesn't support opening several files.")));
-            parser.showHelp(V_EX_USAGE);
-        }
-
-        bool flagDimensionA = false;
-        bool flagDimensionB = false;
-        bool flagDimensionC = false;
-        bool flagUnits = false;
-
-        int dimensionAValue = 0;
-        int dimensionBValue = 0;
-        int dimensionCValue = 0;
-        Unit unit = Unit::Cm;
-
-        if (parser.isSet(LONG_OPTION_DIMENSION_A))
-        {
-            const QString value = parser.value(LONG_OPTION_DIMENSION_A);
-
-            bool ok = false;
-            dimensionAValue = value.toInt(&ok);
-            if(ok && dimensionAValue > 0)
-            {
-                flagDimensionA = true;
-            }
-            else
-            {
-                qCCritical(mApp, "%s\n", qPrintable(tr("Invalid dimension A base value.")));
-                parser.showHelp(V_EX_USAGE);
-            }
-        }
-
-        if (parser.isSet(LONG_OPTION_DIMENSION_B))
-        {
-            const QString value = parser.value(LONG_OPTION_DIMENSION_B);
-
-            bool ok = false;
-            dimensionBValue = value.toInt(&ok);
-            if(ok && dimensionBValue > 0)
-            {
-                flagDimensionB = true;
-            }
-            else
-            {
-                qCCritical(mApp, "%s\n", qPrintable(tr("Invalid dimension B base value.")));
-                parser.showHelp(V_EX_USAGE);
-            }
-        }
-
-        if (parser.isSet(LONG_OPTION_DIMENSION_C))
-        {
-            const QString value = parser.value(LONG_OPTION_DIMENSION_C);
-
-            bool ok = false;
-            dimensionCValue = value.toInt(&ok);
-            if(ok && dimensionCValue > 0)
-            {
-                flagDimensionC = true;
-            }
-            else
-            {
-                qCCritical(mApp, "%s\n", qPrintable(tr("Invalid dimension C base value.")));
-                parser.showHelp(V_EX_USAGE);
-            }
-        }
-
-        {
-            const QString unitValue = parser.value(LONG_OPTION_UNITS);
-            if (not unitValue.isEmpty())
-            {
-                if (QStringList{unitMM, unitCM, unitINCH}.contains(unitValue))
-                {
-                    flagUnits = true;
-                    unit = StrToUnits(unitValue);
-                }
-                else
-                {
-                    qCCritical(mApp, "%s\n", qPrintable(tr("Invalid base size argument. Must be cm, mm or inch.")));
-                    parser.showHelp(V_EX_USAGE);
-                }
-            }
-        }
-
-        for (const auto &arg : args)
-        {
-            NewMainWindow();
-            if (not MainWindow()->LoadFile(arg))
-            {
-                if (testMode)
-                {
-                    return; // process only one input file
-                }
-                delete MainWindow();
-                continue;
-            }
-
-            if (flagDimensionA)
-            {
-                if (not MainWindow()->SetDimensionABase(dimensionAValue))
-                {
-                    parser.showHelp(V_EX_USAGE);
-                }
-            }
-
-            if (flagDimensionB)
-            {
-                if (not MainWindow()->SetDimensionBBase(dimensionBValue))
-                {
-                    parser.showHelp(V_EX_USAGE);
-                }
-            }
-
-            if (flagDimensionC)
-            {
-                if (not MainWindow()->SetDimensionCBase(dimensionCValue))
-                {
-                    parser.showHelp(V_EX_USAGE);
-                }
-            }
-
-            if (flagUnits)
-            {
-                MainWindow()->SetPUnit(unit);
-            }
-        }
-    }
-    else
-    {
-        if (not testMode)
-        {
-            NewMainWindow();
-        }
-        else
-        {
-            qCCritical(mApp, "%s\n", qPrintable(tr("Please, provide one input file.")));
-            parser.showHelp(V_EX_USAGE);
-        }
-    }
-
-    if (testMode)
-    {
-        qApp->exit(V_EX_OK); // close program after processing in console mode
+        QCoreApplication::exit(V_EX_OK); // close program after processing in console mode
     }
 }
 
@@ -858,10 +681,10 @@ auto MApplication::VApp() -> MApplication *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-TMainWindow *MApplication::NewMainWindow()
+auto MApplication::NewMainWindow() -> TMainWindow *
 {
-    TMainWindow *tape = new TMainWindow();
-    mainWindows.prepend(tape);
+    auto *tape = new TMainWindow();
+    m_mainWindows.prepend(tape);
     if (not MApplication::VApp()->IsTestMode())
     {
         tape->show();
@@ -888,7 +711,7 @@ void MApplication::ProcessCMD()
 //---------------------------------------------------------------------------------------------------------------------
 void MApplication::NewLocalSocketConnection()
 {
-    QLocalSocket *socket = localServer->nextPendingConnection();
+    QLocalSocket *socket = m_localServer->nextPendingConnection();
     if (not socket)
     {
         return;
@@ -898,7 +721,7 @@ void MApplication::NewLocalSocketConnection()
     const QString arg = stream.readAll();
     if (not arg.isEmpty())
     {
-        ParseCommandLine(SocketConnection::Server, arg.split(";;"));
+        ParseCommandLine(SocketConnection::Server, arg.split(QStringLiteral(";;")));
     }
     delete socket;
     MainWindow()->raise();
@@ -909,11 +732,222 @@ void MApplication::NewLocalSocketConnection()
 void MApplication::Clean()
 {
     // cleanup any deleted main windows first
-    for (int i = mainWindows.count() - 1; i >= 0; --i)
+    for (int i = m_mainWindows.count() - 1; i >= 0; --i)
     {
-        if (mainWindows.at(i).isNull())
+        if (m_mainWindows.at(i).isNull())
         {
-            mainWindows.removeAt(i);
+            m_mainWindows.removeAt(i);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::InitParserOptions(QCommandLineParser &parser)
+{
+    parser.addPositionalArgument(QStringLiteral("filename"), tr("The measurement file."));
+
+    parser.addOptions(
+    {
+        {{*SINGLE_OPTION_DIMENSION_A, *LONG_OPTION_DIMENSION_A}, tr("Set base for dimension A in the table units."),
+             tr("The dimension A base")},
+
+        {{*SINGLE_OPTION_DIMENSION_B, *LONG_OPTION_DIMENSION_B}, tr("Set base for dimension B in the table units."),
+             tr("The dimension B base")},
+
+        {{*SINGLE_OPTION_DIMENSION_C, *LONG_OPTION_DIMENSION_C}, tr("Set base for dimension C in the table units."),
+             tr("The dimension C base")},
+
+        {{*SINGLE_OPTION_UNITS, *LONG_OPTION_UNITS}, tr("Set pattern file units: cm, mm, inch."),
+             tr("The pattern units")},
+
+        {*LONG_OPTION_TEST,
+             tr("Use for unit testing. Run the program and open a file without showing the main window.")},
+
+        {LONG_OPTION_NO_HDPI_SCALING,
+             tr("Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). "
+                "Alternatively you can use the %1 environment variable.").arg("QT_AUTO_SCREEN_SCALE_FACTOR=0")},
+     });
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::StartLocalServer(const QString &serverName)
+{
+    m_localServer = new QLocalServer(this);
+    connect(m_localServer, &QLocalServer::newConnection, this, &MApplication::NewLocalSocketConnection);
+    if (not m_localServer->listen(serverName))
+    {
+        qCDebug(mApp, "Can't begin to listen for incoming connections on name '%s'",
+                qUtf8Printable(serverName));
+        if (m_localServer->serverError() == QAbstractSocket::AddressInUseError)
+        {
+            QLocalServer::removeServer(serverName);
+            if (not m_localServer->listen(serverName))
+            {
+                qCWarning(mApp, "%s",
+                          qUtf8Printable(tr("Can't begin to listen for incoming connections on name '%1'")
+                                             .arg(serverName)));
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::StartWithFiles(QCommandLineParser &parser)
+{
+    const QStringList args = parser.positionalArguments();
+    if (args.count() <= 0)
+    {
+        return;
+    }
+
+    if (m_testMode && args.count() > 1)
+    {
+        qCCritical(mApp, "%s\n", qPrintable(tr("Test mode doesn't support opening several files.")));
+        parser.showHelp(V_EX_USAGE);
+    }
+
+    bool flagDimensionA = false;
+    bool flagDimensionB = false;
+    bool flagDimensionC = false;
+    bool flagUnits = false;
+
+    int dimensionAValue = 0;
+    int dimensionBValue = 0;
+    int dimensionCValue = 0;
+    Unit unit = Unit::Cm;
+
+    ParseDimensionAOption(parser, dimensionAValue, flagDimensionA);
+    ParseDimensionBOption(parser, dimensionBValue, flagDimensionB);
+    ParseDimensionCOption(parser, dimensionCValue, flagDimensionC);
+    ParseUnitsOption(parser, unit, flagUnits);
+
+    for (const auto &arg : args)
+    {
+        NewMainWindow();
+        if (not MainWindow()->LoadFile(arg))
+        {
+            if (m_testMode)
+            {
+                return; // process only one input file
+            }
+            delete MainWindow();
+            continue;
+        }
+
+        if (flagDimensionA && not MainWindow()->SetDimensionABase(dimensionAValue))
+        {
+            parser.showHelp(V_EX_USAGE);
+        }
+
+        if (flagDimensionB && not MainWindow()->SetDimensionBBase(dimensionBValue))
+        {
+            parser.showHelp(V_EX_USAGE);
+        }
+
+        if (flagDimensionC && not MainWindow()->SetDimensionCBase(dimensionCValue))
+        {
+            parser.showHelp(V_EX_USAGE);
+        }
+
+        if (flagUnits)
+        {
+            MainWindow()->SetPUnit(unit);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::SingleStart(QCommandLineParser &parser)
+{
+    if (not m_testMode)
+    {
+        NewMainWindow();
+    }
+    else
+    {
+        qCCritical(mApp, "%s\n", qPrintable(tr("Please, provide one input file.")));
+        parser.showHelp(V_EX_USAGE);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::ParseDimensionAOption(QCommandLineParser &parser, int &dimensionAValue, bool &flagDimensionA)
+{
+    if (parser.isSet(*LONG_OPTION_DIMENSION_A))
+    {
+        const QString value = parser.value(*LONG_OPTION_DIMENSION_A);
+
+        bool ok = false;
+        dimensionAValue = value.toInt(&ok);
+        if(ok && dimensionAValue > 0)
+        {
+            flagDimensionA = true;
+        }
+        else
+        {
+            qCCritical(mApp, "%s\n", qPrintable(tr("Invalid dimension A base value.")));
+            parser.showHelp(V_EX_USAGE);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::ParseDimensionBOption(QCommandLineParser &parser, int &dimensionBValue, bool &flagDimensionB)
+{
+    if (parser.isSet(*LONG_OPTION_DIMENSION_B))
+    {
+        const QString value = parser.value(*LONG_OPTION_DIMENSION_B);
+
+        bool ok = false;
+        dimensionBValue = value.toInt(&ok);
+        if(ok && dimensionBValue > 0)
+        {
+            flagDimensionB = true;
+        }
+        else
+        {
+            qCCritical(mApp, "%s\n", qPrintable(tr("Invalid dimension B base value.")));
+            parser.showHelp(V_EX_USAGE);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::ParseDimensionCOption(QCommandLineParser &parser, int &dimensionCValue, bool &flagDimensionC)
+{
+    if (parser.isSet(*LONG_OPTION_DIMENSION_C))
+    {
+        const QString value = parser.value(*LONG_OPTION_DIMENSION_C);
+
+        bool ok = false;
+        dimensionCValue = value.toInt(&ok);
+        if(ok && dimensionCValue > 0)
+        {
+            flagDimensionC = true;
+        }
+        else
+        {
+            qCCritical(mApp, "%s\n", qPrintable(tr("Invalid dimension C base value.")));
+            parser.showHelp(V_EX_USAGE);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::ParseUnitsOption(QCommandLineParser &parser, Unit &unit, bool &flagUnits)
+{
+    const QString unitValue = parser.value(*LONG_OPTION_UNITS);
+    if (not unitValue.isEmpty())
+    {
+        if (QStringList{unitMM, unitCM, unitINCH}.contains(unitValue))
+        {
+            flagUnits = true;
+            unit = StrToUnits(unitValue);
+        }
+        else
+        {
+            qCCritical(mApp, "%s\n", qPrintable(tr("Invalid base size argument. Must be cm, mm or inch.")));
+            parser.showHelp(V_EX_USAGE);
         }
     }
 }

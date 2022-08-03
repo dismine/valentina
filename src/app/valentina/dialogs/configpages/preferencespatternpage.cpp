@@ -28,11 +28,12 @@
 
 #include "preferencespatternpage.h"
 #include "ui_preferencespatternpage.h"
-#include "../../core/vapplication.h"
-#include "../ifc/xml/vabstractpattern.h"
 #include "../dialogdatetimeformats.h"
 #include "../dialogknownmaterials.h"
 #include "../vmisc/vvalentinasettings.h"
+#include "../vmisc/vabstractvalapplication.h"
+#include "../vwidgets/vmaingraphicsview.h"
+#include "../ifc/xml/vabstractpattern.h"
 
 #include <QMessageBox>
 #include <QDate>

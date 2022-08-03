@@ -30,7 +30,6 @@
 #define VAPPLICATION_H
 
 #include "../vmisc/vabstractvalapplication.h"
-#include "../vwidgets/vmaingraphicsview.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "vcmdexport.h"
 #include "vlockguard.h"
@@ -42,72 +41,73 @@ class VApplication;// use in define
  */
 class VApplication : public VAbstractValApplication
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
 
     VApplication(int &argc, char ** argv);
-    virtual ~VApplication() override;
-    static void        NewValentina(const QString &fileName = QString());
-    virtual bool       notify(QObject * receiver, QEvent * event) override;
+    ~VApplication() override;
 
-    void               InitOptions();
+    static void NewValentina(const QString &fileName = QString());
+    auto notify(QObject * receiver, QEvent * event) -> bool override;
 
-    QString            TapeFilePath() const;
-    QString            PuzzleFilePath() const;
+    void InitOptions();
 
-    QTimer             *getAutoSaveTimer() const;
-    void               setAutoSaveTimer(QTimer *value);
+    static auto TapeFilePath() -> QString;
+    static auto PuzzleFilePath() -> QString;
 
-    static QStringList LabelLanguages();
+    auto getAutoSaveTimer() const -> QTimer *;
+    void setAutoSaveTimer(QTimer *value);
 
-    void               StartLogging();
-    void               ActivateDarkMode();
-    QTextStream       *LogFile();
+    static auto LabelLanguages() -> QStringList;
 
-    virtual const VTranslateVars *TrVars() override;
+    void StartLogging();
+    void ActivateDarkMode();
+    auto LogFile() -> QTextStream *;
 
-    bool static IsGUIMode();
-    virtual bool IsAppInGUIMode() const override;
-    virtual bool IsPedantic() const override;
+    auto TrVars() -> const VTranslateVars * override;
 
-    static VApplication *VApp();
+    auto static IsGUIMode() -> bool;
+    auto IsAppInGUIMode() const -> bool override;
+    auto IsPedantic() const -> bool override;
+
+    static auto VApp() -> VApplication *;
 
 protected:
-    virtual void       InitTrVars() override;
-    virtual bool	   event(QEvent *e) override;
+    void InitTrVars() override;
+    auto event(QEvent *e) -> bool override;
 
 protected slots:
-    virtual void AboutToQuit() override;
+    void AboutToQuit() override;
 
 private:
-    Q_DISABLE_COPY(VApplication)
-    VTranslateVars     *trVars;
-    QTimer             *autoSaveTimer;
+    Q_DISABLE_COPY_MOVE(VApplication) // NOLINT
+    VTranslateVars *m_trVars{nullptr};
+    QTimer         *m_autoSaveTimer{nullptr};
 
-    QSharedPointer<VLockGuard<QFile>> lockLog;
-    std::shared_ptr<QTextStream> out;
+    QSharedPointer<VLockGuard<QFile>> m_lockLog{};
+    std::shared_ptr<QTextStream> m_out{nullptr};
 
-    QString            LogDirPath()const;
-    QString            LogPath()const;
-    bool               CreateLogDir()const;
-    void               BeginLogging();
-    void               ClearOldLogs()const;
+    static auto LogDirPath() -> QString;
+    static auto LogPath() -> QString;
+    static auto CreateLogDir() -> bool;
+    void BeginLogging();
+    static void ClearOldLogs();
 
 public:
     //moved to the end of class so merge should go
-    const VCommandLinePtr     CommandLine() const;
+    static auto CommandLine() -> VCommandLinePtr;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QTimer *VApplication::getAutoSaveTimer() const
+inline auto VApplication::getAutoSaveTimer() const -> QTimer *
 {
-    return autoSaveTimer;
+    return m_autoSaveTimer;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 inline void VApplication::setAutoSaveTimer(QTimer *value)
 {
-    autoSaveTimer = value;
+    m_autoSaveTimer = value;
 }
 
 #endif // VAPPLICATION_H
