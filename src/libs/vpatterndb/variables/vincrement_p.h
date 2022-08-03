@@ -70,7 +70,8 @@ public:
           formulaOk(incr.formulaOk),
           previewCalculation(incr.previewCalculation),
           data(incr.data),
-          incrType(incr.incrType)
+          incrType(incr.incrType),
+          specialUnits(incr.specialUnits)
     {}
 
     virtual  ~VIncrementData();
@@ -82,6 +83,7 @@ public:
     bool    previewCalculation{false};
     QSharedPointer<VContainer> data;
     IncrementType incrType{IncrementType::Increment};
+    bool specialUnits{false};
 
 private:
     Q_DISABLE_ASSIGN(VIncrementData)

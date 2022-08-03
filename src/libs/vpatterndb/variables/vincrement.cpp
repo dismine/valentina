@@ -149,3 +149,15 @@ void VIncrement::SetPreviewCalculation(bool value)
 {
     d->previewCalculation = value;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VIncrement::IsSpecialUnits() const
+{
+    return d->specialUnits;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VIncrement::SetSpecialUnits(bool special)
+{
+    d->specialUnits = special;
+}

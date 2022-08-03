@@ -48,6 +48,11 @@
 
 #define DIALOG_MAX_FORMULA_HEIGHT 64
 
+namespace
+{
+enum class IncrUnits : qint8 {Pattern, Degrees};
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogIncrements create dialog
@@ -89,6 +94,20 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     qCDebug(vDialog, "Showing variables.");
     ShowUnits();
 
+    InitIncrementUnits(ui->comboBoxIncrementUnits);
+    InitIncrementUnits(ui->comboBoxPreviewCalculationUnits);
+
+    ui->comboBoxIncrementUnits->blockSignals(true);
+    ui->comboBoxIncrementUnits->setCurrentIndex(-1);
+    ui->comboBoxIncrementUnits->blockSignals(true);
+
+    ui->comboBoxPreviewCalculationUnits->blockSignals(true);
+    ui->comboBoxPreviewCalculationUnits->setCurrentIndex(-1);
+    ui->comboBoxPreviewCalculationUnits->blockSignals(true);
+
+    connect(ui->comboBoxIncrementUnits, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            &DialogIncrements::SaveIncrUnits);
+
     FillIncrements();
     FillPreviewCalculations();
     FillLengthsLines();
@@ -101,7 +120,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     connect(this->doc, &VPattern::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
 
     ui->tabWidget->setCurrentIndex(0);
-    auto validator = new QRegularExpressionValidator(QRegularExpression(QStringLiteral("^$|")+NameRegExp()), this);
+    auto *validator = new QRegularExpressionValidator(QRegularExpression(QStringLiteral("^$|")+NameRegExp()), this);
     ui->lineEditName->setValidator(validator);
     ui->lineEditNamePC->setValidator(validator);
 
@@ -330,51 +349,57 @@ QString DialogIncrements::ClearIncrementName(const QString &name) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogIncrements::EvalIncrementFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label)
+auto DialogIncrements::EvalIncrementFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label,
+                                            bool special) -> bool
 {
-    const QString postfix =
-            UnitsToStr(VAbstractValApplication::VApp()->patternUnits());//Show unit in dialog lable (cm, mm or inch)
+    QString postfix;
+    if (special)
+    {
+        postfix = degreeSymbol;
+    }
+    else
+    {
+        postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits());//Show unit in dialog lable (cm, mm or inch)
+    }
     if (formula.isEmpty())
     {
         label->setText(tr("Error") + " (" + postfix + "). " + tr("Empty field."));
         label->setToolTip(tr("Empty field"));
         return false;
     }
-    else
+
+    try
     {
-        try
+        QString f;
+        // Replace line return character with spaces for calc if exist
+        if (fromUser)
         {
-            QString f;
-            // Replace line return character with spaces for calc if exist
-            if (fromUser)
-            {
-                f = VAbstractApplication::VApp()->TrVars()
-                        ->FormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
-            }
-            else
-            {
-                f = formula;
-            }
-            QScopedPointer<Calculator> cal(new Calculator());
-            const qreal result = cal->EvalFormula(data->DataVariables(), f);
-
-            if (qIsInf(result) || qIsNaN(result))
-            {
-                label->setText(tr("Error") + " (" + postfix + ").");
-                label->setToolTip(tr("Invalid result. Value is infinite or NaN. Please, check your calculations."));
-                return false;
-            }
-
-            label->setText(VAbstractApplication::VApp()->LocaleToString(result) + QChar(QChar::Space) + postfix);
-            label->setToolTip(tr("Value"));
-            return true;
+            f = VAbstractApplication::VApp()->TrVars()
+                    ->FormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
         }
-        catch (qmu::QmuParserError &e)
+        else
         {
-            label->setText(tr("Error") + " (" + postfix + "). " + tr("Parser error: %1").arg(e.GetMsg()));
-            label->setToolTip(tr("Parser error: %1").arg(e.GetMsg()));
+            f = formula;
+        }
+        QScopedPointer<Calculator> cal(new Calculator());
+        const qreal result = cal->EvalFormula(data->DataVariables(), f);
+
+        if (qIsInf(result) || qIsNaN(result))
+        {
+            label->setText(tr("Error") + " (" + postfix + ").");
+            label->setToolTip(tr("Invalid result. Value is infinite or NaN. Please, check your calculations."));
             return false;
         }
+
+        label->setText(VAbstractApplication::VApp()->LocaleToString(result) + QChar(QChar::Space) + postfix);
+        label->setToolTip(tr("Value"));
+        return true;
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        label->setText(tr("Error") + " (" + postfix + "). " + tr("Parser error: %1").arg(e.GetMsg()));
+        label->setToolTip(tr("Parser error: %1").arg(e.GetMsg()));
+        return false;
     }
 }
 
@@ -499,6 +524,10 @@ void DialogIncrements::EnableDetails(QTableWidget *table, bool enabled)
             ui->lineEditName->clear();
             ui->lineEditName->blockSignals(false);
 
+            ui->comboBoxIncrementUnits->blockSignals(true);
+            ui->comboBoxIncrementUnits->setCurrentIndex(-1);
+            ui->comboBoxIncrementUnits->blockSignals(false);
+
             ui->plainTextEditDescription->blockSignals(true);
             ui->plainTextEditDescription->clear();
             ui->plainTextEditDescription->blockSignals(false);
@@ -516,6 +545,10 @@ void DialogIncrements::EnableDetails(QTableWidget *table, bool enabled)
             ui->lineEditNamePC->blockSignals(true);
             ui->lineEditNamePC->clear();
             ui->lineEditNamePC->blockSignals(false);
+
+            ui->comboBoxPreviewCalculationUnits->blockSignals(true);
+            ui->comboBoxPreviewCalculationUnits->setCurrentIndex(-1);
+            ui->comboBoxPreviewCalculationUnits->blockSignals(false);
 
             ui->plainTextEditDescriptionPC->blockSignals(true);
             ui->plainTextEditDescriptionPC->clear();
@@ -536,6 +569,7 @@ void DialogIncrements::EnableDetails(QTableWidget *table, bool enabled)
         ui->pushButtonGrow->setEnabled(enabled);
         ui->toolButtonExpr->setEnabled(enabled);
         ui->lineEditName->setEnabled(enabled);
+        ui->comboBoxIncrementUnits->setEnabled(enabled);
         ui->plainTextEditDescription->setEnabled(enabled);
         ui->plainTextEditFormula->setEnabled(enabled);
     }
@@ -544,6 +578,7 @@ void DialogIncrements::EnableDetails(QTableWidget *table, bool enabled)
         ui->pushButtonGrowPC->setEnabled(enabled);
         ui->toolButtonExprPC->setEnabled(enabled);
         ui->lineEditNamePC->setEnabled(enabled);
+        ui->comboBoxPreviewCalculationUnits->setEnabled(enabled);
         ui->plainTextEditDescriptionPC->setEnabled(enabled);
         ui->plainTextEditFormulaPC->setEnabled(enabled);
     }
@@ -563,6 +598,8 @@ void DialogIncrements::EnableDetails(QTableWidget *table, bool enabled)
             ui->plainTextEditFormula->setVisible(not isSeparator);
             ui->pushButtonGrow->setVisible(not isSeparator);
             ui->toolButtonExpr->setVisible(not isSeparator);
+            ui->labelIncrementUnits->setVisible(not isSeparator);
+            ui->comboBoxIncrementUnits->setVisible(not isSeparator);
         }
         else if (table == ui->tableWidgetPC)
         {
@@ -572,6 +609,8 @@ void DialogIncrements::EnableDetails(QTableWidget *table, bool enabled)
             ui->plainTextEditFormulaPC->setVisible(not isSeparator);
             ui->pushButtonGrowPC->setVisible(not isSeparator);
             ui->toolButtonExprPC->setVisible(not isSeparator);
+            ui->labelPreviewCalculationUnits->setVisible(not isSeparator);
+            ui->comboBoxPreviewCalculationUnits->setVisible(not isSeparator);
         }
     }
 }
@@ -652,6 +691,7 @@ void DialogIncrements::ShowTableIncrementDetails(QTableWidget *table)
     QPlainTextEdit *plainTextEditDescription = nullptr;
     QPlainTextEdit *plainTextEditFormula = nullptr;
     QLabel *labelCalculatedValue = nullptr;
+    QComboBox *comboboxUnits = nullptr;
 
     if (table == ui->tableWidgetIncrement)
     {
@@ -659,6 +699,7 @@ void DialogIncrements::ShowTableIncrementDetails(QTableWidget *table)
         plainTextEditDescription = ui->plainTextEditDescription;
         plainTextEditFormula = ui->plainTextEditFormula;
         labelCalculatedValue = ui->labelCalculatedValue;
+        comboboxUnits = ui->comboBoxIncrementUnits;
     }
     else if (table == ui->tableWidgetPC)
     {
@@ -666,6 +707,7 @@ void DialogIncrements::ShowTableIncrementDetails(QTableWidget *table)
         plainTextEditDescription = ui->plainTextEditDescriptionPC;
         plainTextEditFormula = ui->plainTextEditFormulaPC;
         labelCalculatedValue = ui->labelCalculatedValuePC;
+        comboboxUnits = ui->comboBoxPreviewCalculationUnits;
     }
     else
     {
@@ -695,11 +737,16 @@ void DialogIncrements::ShowTableIncrementDetails(QTableWidget *table)
         lineEditName->setText(ClearIncrementName(incr->GetName()));
         lineEditName->blockSignals(false);
 
+        comboboxUnits->blockSignals(true);
+        comboboxUnits->setCurrentIndex(comboboxUnits->findData(
+            static_cast<int>(incr->IsSpecialUnits() ? IncrUnits::Degrees : IncrUnits::Pattern)));
+        comboboxUnits->blockSignals(false);
+
         plainTextEditDescription->blockSignals(true);
         plainTextEditDescription->setPlainText(incr->GetDescription());
         plainTextEditDescription->blockSignals(false);
 
-        EvalIncrementFormula(incr->GetFormula(), false, incr->GetData(), labelCalculatedValue);
+        EvalIncrementFormula(incr->GetFormula(), false, incr->GetData(), labelCalculatedValue, incr->IsSpecialUnits());
         plainTextEditFormula->blockSignals(true);
 
         QString formula =
@@ -1125,6 +1172,49 @@ void DialogIncrements::UpdateSearchControlsTooltips()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::InitIncrementUnits(QComboBox *combo)
+{
+    SCASSERT(combo != nullptr)
+
+    combo->blockSignals(true);
+
+    int current = -1;
+    if (combo->currentIndex() != -1)
+    {
+        current = combo->currentData().toInt();
+    }
+
+    QString units;
+    switch (VAbstractValApplication::VApp()->patternUnits())
+    {
+        case Unit::Mm:
+            units = tr("Millimeters");
+            break;
+        case Unit::Inch:
+            units = tr("Inches");
+            break;
+        case Unit::Cm:
+            units = tr("Centimeters");
+            break;
+        default:
+            units = QStringLiteral("<Invalid>");
+            break;
+    }
+
+    combo->clear();
+    combo->addItem(units, QVariant(static_cast<int>(IncrUnits::Pattern)));
+    combo->addItem(tr("Degrees"), QVariant(static_cast<int>(IncrUnits::Degrees)));
+
+    int i = combo->findData(current);
+    if (i != -1)
+    {
+        combo->setCurrentIndex(i);
+    }
+
+    combo->blockSignals(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FullUpdateFromFile update information in tables form file
  */
@@ -1222,9 +1312,13 @@ void DialogIncrements::FillIncrementsTable(QTableWidget *table,
         if (incr->GetType() == VarType::Increment)
         {
             AddCell(table, incr->GetName(), currentRow, 0, Qt::AlignVCenter); // name
-            AddCell(table, VAbstractApplication::VApp()->
-                    LocaleToString(*incr->GetValue()), currentRow, 1, Qt::AlignCenter,
-                    incr->IsFormulaOk()); // calculated value
+
+            QString calculatedValue = VAbstractApplication::VApp()->LocaleToString(*incr->GetValue());
+            if (incr->IsSpecialUnits())
+            {
+                calculatedValue = calculatedValue + degreeSymbol;
+            }
+            AddCell(table, calculatedValue, currentRow, 1, Qt::AlignCenter, incr->IsFormulaOk()); // calculated value
 
             QString formula =
                     VTranslateVars::TryFormulaToUser(incr->GetFormula(),
@@ -1270,7 +1364,7 @@ void DialogIncrements::AddSeparator()
  */
 void DialogIncrements::RemoveIncrement()
 {
-    QToolButton *button = qobject_cast<QToolButton *>(sender());
+    auto *button = qobject_cast<QToolButton *>(sender());
 
     QTableWidget *table = nullptr;
 
@@ -1470,9 +1564,49 @@ void DialogIncrements::SaveIncrName(const QString &text)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::SaveIncrUnits()
+{
+    auto *combo = qobject_cast<QComboBox *>(sender());
+
+    QTableWidget *table = nullptr;
+
+    if (combo == ui->comboBoxIncrementUnits)
+    {
+        table = ui->tableWidgetIncrement;
+    }
+    else if (combo == ui->comboBoxPreviewCalculationUnits)
+    {
+        table = ui->tableWidgetPC;
+    }
+    else
+    {
+        return;
+    }
+
+    const int row = table->currentRow();
+
+    if (row == -1)
+    {
+        return;
+    }
+
+    const QTableWidgetItem *nameField = table->item(row, 0);
+
+    const IncrUnits units = static_cast<IncrUnits>(combo->currentData().toInt());
+    doc->SetIncrementSpecialUnits(nameField->text(), units == IncrUnits::Degrees);
+    LocalUpdateTree();
+
+    table->blockSignals(true);
+    table->selectRow(row);
+    table->blockSignals(false);
+
+    ShowTableIncrementDetails(table);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::SaveIncrDescription()
 {
-    QPlainTextEdit *textEdit = qobject_cast<QPlainTextEdit *>(sender());
+    auto *textEdit = qobject_cast<QPlainTextEdit *>(sender());
 
     QTableWidget *table = nullptr;
 
@@ -1541,32 +1675,46 @@ void DialogIncrements::SaveIncrFormula()
     const QTableWidgetItem *nameField = table->item(row, 0);
 
     QString text = textEdit->toPlainText();
+    QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(nameField->text());
 
     QTableWidgetItem *formulaField = table->item(row, 2);
     if (formulaField->text() == text)
     {
         QTableWidgetItem *result = table->item(row, 1);
-        //Show unit in dialog lable (cm, mm or inch)
-        const QString postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits());
-        labelCalculatedValue->setText(result->text() + QChar(QChar::Space) +postfix);
+        if (incr->IsSpecialUnits())
+        {
+            labelCalculatedValue->setText(result->text() + QChar(QChar::Space) + degreeSymbol);
+        }
+        else
+        {
+            //Show unit in dialog lable (cm, mm or inch)
+            const QString postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits());
+            labelCalculatedValue->setText(result->text() + QChar(QChar::Space) +postfix);
+        }
         return;
     }
 
     if (text.isEmpty())
     {
-        //Show unit in dialog lable (cm, mm or inch)
-        const QString postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits());
-        labelCalculatedValue->setText(tr("Error") + " (" + postfix + "). " + tr("Empty field."));
+        if (incr->IsSpecialUnits())
+        {
+            labelCalculatedValue->setText(tr("Error") + " (" + degreeSymbol + "). " + tr("Empty field."));
+        }
+        else
+        {
+            //Show unit in dialog lable (cm, mm or inch)
+            const QString postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits());
+            labelCalculatedValue->setText(tr("Error") + " (" + postfix + "). " + tr("Empty field."));
+        }
         return;
     }
 
-    QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(nameField->text());
     if (incr->GetIncrementType() == IncrementType::Separator)
     {
         return;
     }
 
-    if (not EvalIncrementFormula(text, true, incr->GetData(), labelCalculatedValue))
+    if (not EvalIncrementFormula(text, true, incr->GetData(), labelCalculatedValue, incr->IsSpecialUnits()))
     {
         return;
     }

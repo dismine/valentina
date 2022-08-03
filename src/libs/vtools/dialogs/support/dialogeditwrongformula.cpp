@@ -197,17 +197,10 @@ void DialogEditWrongFormula::ValChanged(int row)
             const QSharedPointer<VMeasurement> stable = m_data->GetVariable<VMeasurement>(name);
             SetDescription(item->text(), *stable->GetValue(), stable->IsSpecialUnits(), stable->GetGuiText());
         }
-        else if (ui->radioButtonIncrements->isChecked())
+        else if (ui->radioButtonIncrements->isChecked() || ui->radioButtonPC->isChecked())
         {
             const QSharedPointer<VIncrement> incr = m_data->GetVariable<VIncrement>(name);
-            const bool specialUnits = false;
-            SetDescription(item->text(), *incr->GetValue(), specialUnits, incr->GetDescription());
-        }
-        else if (ui->radioButtonPC->isChecked())
-        {
-            const QSharedPointer<VIncrement> incr = m_data->GetVariable<VIncrement>(name);
-            const bool specialUnits = false;
-            SetDescription(item->text(), *incr->GetValue(), specialUnits, incr->GetDescription());
+            SetDescription(item->text(), *incr->GetValue(), incr->IsSpecialUnits(), incr->GetDescription());
         }
         else if (ui->radioButtonLengthLine->isChecked())
         {

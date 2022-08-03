@@ -4038,14 +4038,16 @@ void VPattern::ParseIncrementsElement(const QDomNode &node, const Document &pars
                                                                                        strTypeIncrement));
                     const QString formula = (type == IncrementType::Separator) ?
                                 QChar('0') : GetParametrString(domElement, AttrFormula, QChar('0'));
+                    const bool specialUnits = GetParametrBool(domElement, AttrSpecialUnits, falseStr);
 
                     bool ok = false;
                     const qreal value = EvalFormula(data, formula, &ok);
 
-                    VIncrement *increment = new VIncrement(data, name, type);
+                    auto *increment = new VIncrement(data, name, type);
                     increment->SetIndex(static_cast<quint32>(index++));
                     increment->SetFormula(value, formula, ok);
                     increment->SetDescription(desc);
+                    increment->SetSpecialUnits(specialUnits);
                     increment->SetPreviewCalculation(node.toElement().tagName() == TagPreviewCalculations);
                     data->AddUniqueVariable(increment);
                 }
@@ -4147,6 +4149,21 @@ void VPattern::SetIncrementDescription(const QString &name, const QString &text)
             node.removeAttribute(AttrDescription);
             emit patternChanged(false);
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::SetIncrementSpecialUnits(const QString &name, bool special)
+{
+    QDomElement node = FindIncrement(name);
+    if (not node.isNull())
+    {
+        SetAttributeOrRemoveIf<bool>(node, AttrSpecialUnits, special, [](bool special) noexcept {return not special;});
+        emit patternChanged(false);
+    }
+    else
+    {
+        qWarning() << tr("Can't find increment '%1'").arg(name);
     }
 }
 

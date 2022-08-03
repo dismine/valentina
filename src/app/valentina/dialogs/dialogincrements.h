@@ -75,6 +75,7 @@ private slots:
     void MoveUp();
     void MoveDown();
     void SaveIncrName(const QString &text);
+    void SaveIncrUnits();
     void SaveIncrDescription();
     void SaveIncrFormula();
     void DeployFormula();
@@ -136,7 +137,7 @@ private:
     QString GetCustomName() const;
     QString ClearIncrementName(const QString &name) const;
 
-    bool    EvalIncrementFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label);
+    bool    EvalIncrementFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label, bool special);
     void    Controls(QTableWidget *table);
     void    EnableDetails(QTableWidget *table, bool enabled);
 
@@ -158,6 +159,7 @@ private:
     void SaveIncrementsSearchRequest();
     void SavePreviewCalculationsSearchRequest();
     void UpdateSearchControlsTooltips();
+    void InitIncrementUnits(QComboBox *combo);
 };
 
 #endif // DIALOGINCREMENTS_H

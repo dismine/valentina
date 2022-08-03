@@ -71,6 +71,9 @@ public:
     bool IsPreviewCalculation() const;
     void SetPreviewCalculation(bool value);
 
+    bool IsSpecialUnits() const;
+    void SetSpecialUnits(bool special);
+
 private:
     QSharedDataPointer<VIncrementData> d;
 };

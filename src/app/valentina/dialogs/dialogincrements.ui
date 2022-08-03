@@ -119,7 +119,6 @@
            <property name="font">
             <font>
              <pointsize>14</pointsize>
-             <weight>75</weight>
              <italic>false</italic>
              <bold>true</bold>
             </font>
@@ -152,7 +151,6 @@
            <property name="font">
             <font>
              <pointsize>14</pointsize>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -187,7 +185,6 @@
            <property name="font">
             <font>
              <pointsize>14</pointsize>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -219,7 +216,6 @@
            <property name="font">
             <font>
              <pointsize>14</pointsize>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -508,27 +504,34 @@
             </widget>
            </item>
            <item row="4" column="0">
+            <widget class="QLabel" name="labelIncrementUnits">
+             <property name="text">
+              <string>Units:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0">
             <widget class="QLabel" name="labelCalculated">
              <property name="text">
               <string>Calculated value:</string>
              </property>
             </widget>
            </item>
-           <item row="4" column="1">
+           <item row="7" column="1">
             <widget class="QLabel" name="labelCalculatedValue">
              <property name="text">
               <string notr="true"/>
              </property>
             </widget>
            </item>
-           <item row="5" column="0">
+           <item row="8" column="0">
             <widget class="QLabel" name="labelFormula">
              <property name="text">
               <string>Formula:</string>
              </property>
             </widget>
            </item>
-           <item row="5" column="1">
+           <item row="8" column="1">
             <layout class="QHBoxLayout" name="horizontalLayoutValue">
              <item>
               <widget class="VPlainTextEdit" name="plainTextEditFormula">
@@ -624,14 +627,14 @@
              </item>
             </layout>
            </item>
-           <item row="7" column="0">
+           <item row="10" column="0">
             <widget class="QLabel" name="label_7">
              <property name="text">
               <string>Description:</string>
              </property>
             </widget>
            </item>
-           <item row="7" column="1">
+           <item row="10" column="1">
             <widget class="VPlainTextEdit" name="plainTextEditDescription">
              <property name="enabled">
               <bool>false</bool>
@@ -650,7 +653,7 @@
              </property>
             </widget>
            </item>
-           <item row="10" column="1">
+           <item row="13" column="1">
             <layout class="QHBoxLayout" name="horizontalLayout_5">
              <item>
               <spacer name="horizontalSpacer_3">
@@ -676,6 +679,16 @@
               </widget>
              </item>
             </layout>
+           </item>
+           <item row="4" column="1">
+            <widget class="QComboBox" name="comboBoxIncrementUnits">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="editable">
+              <bool>false</bool>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -761,7 +774,6 @@
            <property name="font">
             <font>
              <pointsize>14</pointsize>
-             <weight>75</weight>
              <italic>false</italic>
              <bold>true</bold>
             </font>
@@ -794,7 +806,6 @@
            <property name="font">
             <font>
              <pointsize>14</pointsize>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -829,7 +840,6 @@
            <property name="font">
             <font>
              <pointsize>14</pointsize>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -861,7 +871,6 @@
            <property name="font">
             <font>
              <pointsize>14</pointsize>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -1149,28 +1158,28 @@
              </property>
             </widget>
            </item>
-           <item row="4" column="0">
+           <item row="5" column="0">
             <widget class="QLabel" name="labelCalculatedPC">
              <property name="text">
               <string>Calculated value:</string>
              </property>
             </widget>
            </item>
-           <item row="4" column="1">
+           <item row="5" column="1">
             <widget class="QLabel" name="labelCalculatedValuePC">
              <property name="text">
               <string notr="true"/>
              </property>
             </widget>
            </item>
-           <item row="5" column="0">
+           <item row="7" column="0">
             <widget class="QLabel" name="labelFormulaPC">
              <property name="text">
               <string>Formula:</string>
              </property>
             </widget>
            </item>
-           <item row="5" column="1">
+           <item row="7" column="1">
             <layout class="QHBoxLayout" name="horizontalLayoutValue_2">
              <item>
               <widget class="VPlainTextEdit" name="plainTextEditFormulaPC">
@@ -1266,14 +1275,14 @@
              </item>
             </layout>
            </item>
-           <item row="7" column="0">
+           <item row="9" column="0">
             <widget class="QLabel" name="label_8">
              <property name="text">
               <string>Description:</string>
              </property>
             </widget>
            </item>
-           <item row="7" column="1">
+           <item row="9" column="1">
             <widget class="VPlainTextEdit" name="plainTextEditDescriptionPC">
              <property name="enabled">
               <bool>false</bool>
@@ -1292,7 +1301,7 @@
              </property>
             </widget>
            </item>
-           <item row="10" column="1">
+           <item row="12" column="1">
             <layout class="QHBoxLayout" name="horizontalLayout_7">
              <item>
               <spacer name="horizontalSpacer_6">
@@ -1318,6 +1327,20 @@
               </widget>
              </item>
             </layout>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="labelPreviewCalculationUnits">
+             <property name="text">
+              <string>Units:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QComboBox" name="comboBoxPreviewCalculationUnits">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -1585,7 +1608,7 @@
   <customwidget>
    <class>VPlainTextEdit</class>
    <extends>QPlainTextEdit</extends>
-   <header location="global">vplaintextedit.h</header>
+   <header>vplaintextedit.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

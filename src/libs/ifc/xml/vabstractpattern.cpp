@@ -150,8 +150,9 @@ const QString VAbstractPattern::AttrImageId           = QStringLiteral("imageId"
 
 const QString VAbstractPattern::AttrContentType     = QStringLiteral("contentType");
 
-const QString VAbstractPattern::AttrFormula     = QStringLiteral("formula");
-const QString VAbstractPattern::AttrDescription = QStringLiteral("description");
+const QString VAbstractPattern::AttrFormula      = QStringLiteral("formula");
+const QString VAbstractPattern::AttrDescription  = QStringLiteral("description");
+const QString VAbstractPattern::AttrSpecialUnits = QStringLiteral("specialUnits");
 
 const QString VAbstractPattern::NodeArc        = QStringLiteral("NodeArc");
 const QString VAbstractPattern::NodeElArc      = QStringLiteral("NodeElArc");

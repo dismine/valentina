@@ -4400,7 +4400,7 @@ void TMainWindow::InitMeasurementUnits()
             units = tr("Centimeters");
             break;
         default:
-            units = "<Invalid>";
+            units = QStringLiteral("<Invalid>");
             break;
     }
 

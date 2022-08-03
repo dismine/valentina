@@ -14,6 +14,7 @@
 - Fix updating dimension labels in Valentina app.
 - Fix menu on Mac OS X.
 - Add function's argument template with name in the Formula Wizard.
+- Unit type for increments.
 
 # Valentina 0.7.51 April 18, 2022
 - Z value change for a layout piece.

@@ -337,6 +337,7 @@ public:
 
     static const QString AttrFormula;
     static const QString AttrDescription;
+    static const QString AttrSpecialUnits;
 
     static const QString NodeArc;
     static const QString NodeElArc;

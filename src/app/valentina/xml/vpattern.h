@@ -93,6 +93,7 @@ public:
     void SetIncrementName(const QString &name, const QString &text);
     void SetIncrementFormula(const QString &name, const QString &text);
     void SetIncrementDescription(const QString &name, const QString &text);
+    void SetIncrementSpecialUnits(const QString &name, bool special);
 
     void ReplaceNameInFormula(QVector<VFormulaField> &expressions, const QString &name, const QString &newName);
 
