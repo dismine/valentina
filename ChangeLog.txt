@@ -15,6 +15,7 @@
 - Fix menu on Mac OS X.
 - Add function's argument template with name in the Formula Wizard.
 - Unit type for increments.
+- Support for options Force Flipping and Forbid Flipping in Puzzle.
 
 # Valentina 0.7.51 April 18, 2022
 - Z value change for a layout piece.

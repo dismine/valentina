@@ -263,6 +263,10 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
     SetAttribute(ML::AttrName, piece->GetName());
     SetAttributeOrRemoveIf<bool>(ML::AttrMirrored, piece->IsMirror(),
                                  [](bool mirrored) noexcept {return not mirrored;});
+    SetAttributeOrRemoveIf<bool>(ML::AttrForbidFlipping, piece->IsForbidFlipping(),
+                                 [](bool forbid) noexcept {return not forbid;});
+    SetAttributeOrRemoveIf<bool>(ML::AttrForceFlipping, piece->IsForceFlipping(),
+                                 [](bool force) noexcept {return not force;});
     SetAttribute(ML::AttrTransform, TransformToString(piece->GetMatrix()));
     SetAttributeOrRemoveIf<QString>(ML::AttrGradationLabel, piece->GetGradationId(),
                                     [](const QString &label) noexcept {return label.isEmpty();});

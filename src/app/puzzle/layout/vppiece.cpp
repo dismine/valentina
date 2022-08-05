@@ -127,6 +127,11 @@ VPPiece::VPPiece(const VLayoutPiece &layoutPiece)
     : VLayoutPiece(layoutPiece)
 {
     ClearTransformations();
+
+    if (IsForceFlipping())
+    {
+        Flip();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

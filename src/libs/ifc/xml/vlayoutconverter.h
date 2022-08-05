@@ -44,7 +44,7 @@ public:
     static const QString LayoutMaxVerStr;
     static const QString CurrentSchema;
     static Q_DECL_CONSTEXPR const unsigned LayoutMinVer = FormatVersion(0, 1, 0);
-    static Q_DECL_CONSTEXPR const unsigned LayoutMaxVer = FormatVersion(0, 1, 1);
+    static Q_DECL_CONSTEXPR const unsigned LayoutMaxVer = FormatVersion(0, 1, 2);
 
 protected:
     void SetVersion(const QString &version) override;
@@ -61,7 +61,7 @@ protected:
 
     auto IsReadOnly() const -> bool override;
 
-    void ToV0_1_1();
+    void ToV0_1_2();
 
 private:
     Q_DISABLE_COPY(VLayoutConverter)

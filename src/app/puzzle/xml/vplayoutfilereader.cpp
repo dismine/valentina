@@ -472,12 +472,10 @@ void VPLayoutFileReader::ReadPiece(const VPPiecePtr &piece)
     piece->SetXScale(ReadAttributeDouble(attribs, ML::AttrXScale, QChar('1')));
     piece->SetYScale(ReadAttributeDouble(attribs, ML::AttrYScale, QChar('1')));
     piece->SetZValue(ReadAttributeDouble(attribs, ML::AttrZValue, QChar('1')));
-
-    bool pieceMirrored = ReadAttributeBool(attribs, ML::AttrMirrored, falseStr);
-    piece->SetMirror(pieceMirrored);
-
-    QString matrix = ReadAttributeEmptyString(attribs, ML::AttrTransform);
-    piece->SetMatrix(StringToTransfrom(matrix));
+    piece->SetMirror(ReadAttributeBool(attribs, ML::AttrMirrored, falseStr));
+    piece->SetForbidFlipping(ReadAttributeBool(attribs, ML::AttrForbidFlipping, falseStr));
+    piece->SetForceFlipping(ReadAttributeBool(attribs, ML::AttrForceFlipping, falseStr));
+    piece->SetMatrix(StringToTransfrom(ReadAttributeEmptyString(attribs, ML::AttrTransform)));
 
     const QStringList tags
     {

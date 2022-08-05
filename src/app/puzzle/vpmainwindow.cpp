@@ -1304,6 +1304,9 @@ void VPMainWindow::SetPropertyTabCurrentPieceData()
         SetCheckBoxValue(ui->checkBoxCurrentPieceShowSeamline, not selectedPiece->IsHideMainPath());
         SetCheckBoxValue(ui->checkBoxCurrentPieceMirrorPiece, selectedPiece->IsMirror());
 
+        const bool disableFlipping = selectedPiece->IsForbidFlipping() || selectedPiece->IsForceFlipping();
+        ui->checkBoxCurrentPieceMirrorPiece->setDisabled(disableFlipping);
+
         if (not ui->checkBoxRelativeTranslation->isChecked())
         {
             QRectF rect = PiecesBoundingRect(selectedPieces);
