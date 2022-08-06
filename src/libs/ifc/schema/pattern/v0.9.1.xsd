@@ -82,7 +82,14 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element> 
-        <xs:element name="measurements" type="xs:string"/>
+        <xs:element name="measurements">
+          <xs:complexType>
+            <xs:attribute name="path" type="xs:string"/>
+            <xs:attribute name="dimensionA" type="dimesionValue"/>
+            <xs:attribute name="dimensionB" type="dimesionValue"/>
+            <xs:attribute name="dimensionC" type="dimesionValue"/>
+          </xs:complexType>
+        </xs:element> 
         <xs:element name="increments">
           <xs:complexType>
             <xs:sequence minOccurs="0" maxOccurs="unbounded">
@@ -1161,6 +1168,12 @@
   <xs:simpleType name="Transformation">
     <xs:restriction base="xs:string">
       <xs:pattern value="([-+]?\d+\.?\d*([eE][-+]?\d+)?;){8,}[-+]?\d+\.?\d*([eE][-+]?\d+)?"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="dimesionValue">
+    <xs:restriction base="xs:double">
+      <xs:minInclusive value="1"/>
+      <xs:maxInclusive value="2720"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>

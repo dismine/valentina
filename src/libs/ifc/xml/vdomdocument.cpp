@@ -635,33 +635,20 @@ quint32 VDomDocument::GetParametrId(const QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VDomDocument::UniqueTagText(const QString &tagName, const QString &defVal) const
+auto VDomDocument::UniqueTagText(const QString &tagName, const QString &defVal) const -> QString
 {
-    const QDomNodeList nodeList = this->elementsByTagName(tagName);
-    if (nodeList.isEmpty())
+    QDomElement domElement = UniqueTag(tagName);
+    if (not domElement.isNull())
     {
-        return defVal;
-    }
-    else
-    {
-        const QDomNode domNode = nodeList.at(0);
-        if (domNode.isNull() == false && domNode.isElement())
+        const QString text = domElement.text();
+        if (text.isEmpty())
         {
-            const QDomElement domElement = domNode.toElement();
-            if (domElement.isNull() == false)
-            {
-                const QString text = domElement.text();
-                if (text.isEmpty())
-                {
-                    return defVal;
-                }
-                else
-                {
-                    return text;
-                }
-            }
+            return defVal;
         }
+
+        return text;
     }
+
     return defVal;
 }
 
@@ -938,6 +925,27 @@ auto VDomDocument::setTagText(QDomElement &domElement, const QString &text) -> b
         return true;
     }
     return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDomElement VDomDocument::UniqueTag(const QString &tagName) const
+{
+    const QDomNodeList nodeList = this->elementsByTagName(tagName);
+    if (nodeList.isEmpty())
+    {
+        return {};
+    }
+
+    const QDomNode domNode = nodeList.at(0);
+    if (not domNode.isNull() && domNode.isElement())
+    {
+        const QDomElement domElement = domNode.toElement();
+        if (not domElement.isNull())
+        {
+            return domElement;
+        }
+    }
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -58,7 +58,6 @@
 #include "vtoolrecord.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/compatibility.h"
-#include "../vlayout/vtextmanager.h"
 #include "vpatternimage.h"
 #include "vbackgroundpatternimage.h"
 #include "vvalentinasettings.h"
@@ -147,6 +146,9 @@ const QString VAbstractPattern::AttrTransform         = QStringLiteral("transfor
 const QString VAbstractPattern::AttrHold              = QStringLiteral("hold");
 const QString VAbstractPattern::AttrZValue            = QStringLiteral("zValue");
 const QString VAbstractPattern::AttrImageId           = QStringLiteral("imageId");
+const QString VAbstractPattern::AttrDimensionA        = QStringLiteral("dimensionA");
+const QString VAbstractPattern::AttrDimensionB        = QStringLiteral("dimensionB");
+const QString VAbstractPattern::AttrDimensionC        = QStringLiteral("dimensionC");
 
 const QString VAbstractPattern::AttrContentType     = QStringLiteral("contentType");
 
@@ -167,6 +169,8 @@ bool VAbstractPattern::patternLabelWasChanged = false;
 
 namespace
 {
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, dimensionDefValue, (QLatin1String("-1")))
+
 void ReadExpressionAttribute(QVector<VFormulaField> &expressions, const QDomElement &element, const QString &attribute)
 {
     VFormulaField formula;
@@ -888,8 +892,20 @@ QString VAbstractPattern::MPath() const
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::SetMPath(const QString &path)
 {
-    if (setTagText(TagMeasurements, path))
+    QDomElement domElement = UniqueTag(TagMeasurements);
+    if (not domElement.isNull())
     {
+        if (not path.isEmpty())
+        {
+            SetAttribute(domElement, AttrPath, path);
+        }
+        else
+        {
+            domElement.removeAttribute(AttrPath);
+            domElement.removeAttribute(AttrDimensionA);
+            domElement.removeAttribute(AttrDimensionB);
+            domElement.removeAttribute(AttrDimensionC);
+        }
         m_MPath = path;
         patternLabelWasChanged = true;
         modified = true;
@@ -2406,6 +2422,93 @@ void VAbstractPattern::SetGroupTags(quint32 id, const QStringList &tags)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPattern::GetDimensionAValue() -> double
+{
+    QDomElement domElement = UniqueTag(TagMeasurements);
+    if (not domElement.isNull())
+    {
+        return GetParametrDouble(domElement, AttrDimensionA, *dimensionDefValue);
+    }
+
+    qDebug()<<"Can't save dimension A of measurements"<<Q_FUNC_INFO;
+    return -1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetDimensionAValue(double value)
+{
+    QDomElement domElement = UniqueTag(TagMeasurements);
+    if (not domElement.isNull())
+    {
+        SetAttribute(domElement, AttrDimensionA, value);
+        modified = true;
+        emit patternChanged(false);
+    }
+    else
+    {
+        qDebug()<<"Can't save dimension A of measurements"<<Q_FUNC_INFO;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPattern::GetDimensionBValue() -> double
+{
+    QDomElement domElement = UniqueTag(TagMeasurements);
+    if (not domElement.isNull())
+    {
+        return GetParametrDouble(domElement, AttrDimensionB, *dimensionDefValue);
+    }
+
+    qDebug()<<"Can't save dimension B of measurements"<<Q_FUNC_INFO;
+    return -1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetDimensionBValue(double value)
+{
+    QDomElement domElement = UniqueTag(TagMeasurements);
+    if (not domElement.isNull())
+    {
+        SetAttribute(domElement, AttrDimensionB, value);
+        modified = true;
+        emit patternChanged(false);
+    }
+    else
+    {
+        qDebug()<<"Can't save dimension B of measurements"<<Q_FUNC_INFO;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPattern::GetDimensionCValue() -> double
+{
+    QDomElement domElement = UniqueTag(TagMeasurements);
+    if (not domElement.isNull())
+    {
+        return GetParametrDouble(domElement, AttrDimensionC, *dimensionDefValue);
+    }
+
+    qDebug()<<"Can't save dimension C of measurements"<<Q_FUNC_INFO;
+    return -1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetDimensionCValue(double value)
+{
+    QDomElement domElement = UniqueTag(TagMeasurements);
+    if (not domElement.isNull())
+    {
+        SetAttribute(domElement, AttrDimensionC, value);
+        modified = true;
+        emit patternChanged(false);
+    }
+    else
+    {
+        qDebug()<<"Can't save dimension C of measurements"<<Q_FUNC_INFO;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QStringList VAbstractPattern::GetGroupCategories() const
 {
     QSet<QString> categories;
@@ -2626,9 +2729,15 @@ QString VAbstractPattern::ReadPatternName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractPattern::ReadMPath() const
+auto VAbstractPattern::ReadMPath() const -> QString
 {
-    return UniqueTagText(TagMeasurements);
+    QDomElement domElement = UniqueTag(TagMeasurements);
+    if (not domElement.isNull())
+    {
+        return domElement.attribute(AttrPath);
+    }
+
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

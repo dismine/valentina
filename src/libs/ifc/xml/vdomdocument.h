@@ -151,6 +151,7 @@ public:
 protected:
     bool           setTagText(const QString &tag, const QString &text);
     bool           setTagText(QDomElement &domElement, const QString &text);
+    QDomElement    UniqueTag(const QString &tagName) const;
     QString        UniqueTagText(const QString &tagName, const QString &defVal = QString()) const;
     void           CollectId(const QDomElement &node, QVector<quint32> &vector)const;
 

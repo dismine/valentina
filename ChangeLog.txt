@@ -16,6 +16,7 @@
 - Add function's argument template with name in the Formula Wizard.
 - Unit type for increments.
 - Support for options Force Flipping and Forbid Flipping in Puzzle.
+- Remember selected dimension values.
 
 # Valentina 0.7.51 April 18, 2022
 - Z value change for a layout piece.

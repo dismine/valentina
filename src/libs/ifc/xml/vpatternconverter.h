@@ -143,6 +143,8 @@ private:
     void AddPieceUUIDV0_8_8();
 
     void ConvertImageToV0_9_0();
+
+    void ConvertMeasurementsPathToV0_9_1();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

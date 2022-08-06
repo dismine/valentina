@@ -233,6 +233,15 @@ public:
     QStringList    GetGroupTags(vidtype id);
     void           SetGroupTags(quint32 id, const QStringList &tags);
 
+    auto GetDimensionAValue() -> double;
+    void SetDimensionAValue(double value);
+
+    auto GetDimensionBValue() -> double;
+    void SetDimensionBValue(double value);
+
+    auto GetDimensionCValue() -> double;
+    void SetDimensionCValue(double value);
+
     QStringList GetGroupCategories() const;
 
     QMap<quint32, VGroupData> GetGroups(const QString &patternPieceName = QString());
@@ -332,6 +341,9 @@ public:
     static const QString AttrHold;
     static const QString AttrZValue;
     static const QString AttrImageId;
+    static const QString AttrDimensionA;
+    static const QString AttrDimensionB;
+    static const QString AttrDimensionC;
 
     static const QString AttrContentType;
 

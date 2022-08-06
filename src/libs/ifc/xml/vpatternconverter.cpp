@@ -557,6 +557,7 @@ void VPatternConverter::ToV0_9_1()
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 9, 1),
                       "Time to refactor the code.");
 
+    ConvertMeasurementsPathToV0_9_1();
     SetVersion(QStringLiteral("0.9.1"));
     Save();
 }
@@ -2164,6 +2165,39 @@ void VPatternConverter::ConvertImageToV0_9_0()
                 QStringList data = SplitString();
                 setTagText(img, data.join("\n"));
             }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ConvertMeasurementsPathToV0_9_1()
+{
+    // TODO. Delete if minimal supported version is 0.9.1
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 9, 1),
+                      "Time to refactor the code.");
+
+    const QDomNodeList nodeList = this->elementsByTagName(*strMeasurements);
+    if (nodeList.isEmpty())
+    {
+        return;
+    }
+
+    const QDomNode domNode = nodeList.at(0);
+    if (not domNode.isNull() && domNode.isElement())
+    {
+        QDomElement domElement = domNode.toElement();
+        if (not domElement.isNull())
+        {
+            const QString path = domElement.text();
+            if (path.isEmpty())
+            {
+                return;
+            }
+
+            // Clean text
+            RemoveAllChildren(domElement);
+
+            domElement.setAttribute(*strPath, path);
         }
     }
 }

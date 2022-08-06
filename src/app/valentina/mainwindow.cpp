@@ -559,9 +559,14 @@ bool MainWindow::LoadMeasurements(const QString &path)
         }
         else if (m->Type() == MeasurementsType::Multisize)
         {
-            m_currentDimensionA = m->DimensionABase();
-            m_currentDimensionB = m->DimensionBBase();
-            m_currentDimensionC = m->DimensionCBase();
+            auto DimensionBase = [](qreal current, qreal tableBase)
+            {
+                return not VFuzzyComparePossibleNulls(current, -1) ? current : tableBase;
+            };
+
+            m_currentDimensionA = DimensionBase(doc->GetDimensionAValue(), m->DimensionABase());
+            m_currentDimensionB = DimensionBase(doc->GetDimensionBValue(), m->DimensionBBase());
+            m_currentDimensionC = DimensionBase(doc->GetDimensionCValue(), m->DimensionCBase());
         }
         ToolBarOption();
         SetDimensionBases();
@@ -575,7 +580,7 @@ bool MainWindow::LoadMeasurements(const QString &path)
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         if (not VApplication::IsGUIMode())
         {
-            qApp->exit(V_EX_NOINPUT);
+            QCoreApplication::exit(V_EX_NOINPUT);
         }
         return false;
     }
@@ -2339,15 +2344,13 @@ void MainWindow::SetDimensionBases()
 {
     const QList<MeasurementDimension_p> dimensions = m->Dimensions().values();
 
-    auto SetBase = [dimensions](int index, QPointer<QComboBox> control, double &value)
+    auto SetBase = [dimensions](int index, const QPointer<QComboBox>& control, double &value)
     {
         if (dimensions.size() > index)
         {
             SCASSERT(control != nullptr)
 
             control->blockSignals(true);
-
-            MeasurementDimension_p dimension = dimensions.at(index);
 
             const qint32 i = control->findData(value);
             if (i != -1)
@@ -4296,6 +4299,7 @@ void MainWindow::DimensionABaseChanged()
 {
     const qreal oldValue = m_currentDimensionA;
     m_currentDimensionA = dimensionA->currentData().toDouble();
+    doc->SetDimensionAValue(m_currentDimensionA);
 
     if (not VFuzzyComparePossibleNulls(oldValue, m_currentDimensionA))
     {
@@ -4321,6 +4325,7 @@ void MainWindow::DimensionBBaseChanged()
 {
     const qreal oldValue = m_currentDimensionB;
     m_currentDimensionB = dimensionB->currentData().toDouble();
+    doc->SetDimensionBValue(m_currentDimensionB);
 
     if (not VFuzzyComparePossibleNulls(oldValue, m_currentDimensionB))
     {
@@ -4341,6 +4346,7 @@ void MainWindow::DimensionCBaseChanged()
 {
     const qreal oldValue = m_currentDimensionC;
     m_currentDimensionC = dimensionC->currentData().toDouble();
+    doc->SetDimensionCValue(m_currentDimensionC);
 
     if (not VFuzzyComparePossibleNulls(oldValue, m_currentDimensionC))
     {
