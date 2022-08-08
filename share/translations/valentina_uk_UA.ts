@@ -3647,6 +3647,26 @@
         <source>F3</source>
         <translation>F3</translation>
     </message>
+    <message>
+        <source>Units:</source>
+        <translation type="unfinished">Одинці виміру:</translation>
+    </message>
+    <message>
+        <source>Millimeters</source>
+        <translation type="unfinished">Міліметри</translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished">Дюйми</translation>
+    </message>
+    <message>
+        <source>Centimeters</source>
+        <translation type="unfinished">Сантиметри</translation>
+    </message>
+    <message>
+        <source>Degrees</source>
+        <translation type="unfinished">Градуси</translation>
+    </message>
 </context>
 <context>
     <name>DialogInsertNode</name>
@@ -7239,7 +7259,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Circumference</source>
-        <translation>Окружність</translation>
+        <translation type="vanished">Окружність</translation>
     </message>
     <message>
         <source>Please, select at least one dimension</source>
@@ -7268,6 +7288,18 @@ Apply settings anyway?</source>
     <message>
         <source>Please, provide custom name for dimension %1</source>
         <translation>Будь ласка, надайте спеціальну назву для виміру %1</translation>
+    </message>
+    <message>
+        <source>A body measurement measured in units of length.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Body Measurement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A body measurement measured in units of length. Circumference.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9334,7 +9366,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Create new group</source>
-        <translation>Створити нову групу</translation>
+        <translation type="vanished">Створити нову групу</translation>
     </message>
     <message>
         <source>Groups</source>
@@ -9486,7 +9518,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Edit Current</source>
-        <translation>Редагувати поточну</translation>
+        <translation>Редагувати поточні</translation>
     </message>
     <message>
         <source>Edit linked to the pattern measurements</source>
@@ -9754,7 +9786,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Curved path tool which uses point as control handle</source>
-        <translation>Інструмент крива, що використовує точки як контрольні точки</translation>
+        <translation>Інструмент складна крива, що використовує точки як контрольні точки</translation>
     </message>
     <message>
         <source>Point of intersection arc and axis</source>
@@ -9818,7 +9850,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Edit current</source>
-        <translation>Редагувати поточну</translation>
+        <translation>Редагувати поточні</translation>
     </message>
     <message>
         <source>Editor</source>
@@ -9967,6 +9999,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Save Image</source>
         <translation>Зберегти зображення</translation>
+    </message>
+    <message>
+        <source>Visibility group</source>
+        <translation type="unfinished">Група видимості</translation>
     </message>
 </context>
 <context>
@@ -11537,6 +11573,14 @@ This option will take an affect after restart.</source>
         <source>z value move pieces</source>
         <translation>змінити значення глибини деталей</translation>
     </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -12558,7 +12602,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export from multisize measurements is not supported.</source>
-        <translation>Експорт із багаторозмірних вимірювань не підтримується.</translation>
+        <translation type="vanished">Експорт із багаторозмірних вимірювань не підтримується.</translation>
     </message>
     <message>
         <source>Customer name:</source>
@@ -13864,6 +13908,26 @@ Do you want to save your changes?</source>
         <source>Can&apos;t cut this spline</source>
         <translation>Не вдається розрізати криву</translation>
     </message>
+    <message>
+        <source>Unable to cut curve &apos;%1&apos;. The curve is too short.</source>
+        <translation type="unfinished">Неможливо розрізати криву &quot;%1&quot;. Крива занадто коротка.</translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
+        <translation type="unfinished">Крива &quot;%1&quot;. Довжина відрізка занадто мала. Оптимізуйте його до мінімального значення.</translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
+        <translation type="unfinished">Крива &quot;%1&quot;. Занадто велика довжина відрізка. Оптимізуйте його до максимального значення.</translation>
+    </message>
 </context>
 <context>
     <name>VAbstractLayoutDialog</name>
@@ -14201,6 +14265,29 @@ Do you want to save your changes?</source>
     <message>
         <source>Formula warning: %1. Program will be terminated.</source>
         <translation>Попередження у формулі: %1. Програму буде завершено.</translation>
+    </message>
+</context>
+<context>
+    <name>VArc</name>
+    <message>
+        <source>Unable to cut curve &apos;%1&apos;. The curve is too short.</source>
+        <translation type="unfinished">Неможливо розрізати криву &quot;%1&quot;. Крива занадто коротка.</translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
+        <translation type="unfinished">Крива &quot;%1&quot;. Довжина відрізка занадто мала. Оптимізуйте його до мінімального значення.</translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
+        <translation type="unfinished">Крива &quot;%1&quot;. Занадто велика довжина відрізка. Оптимізуйте його до максимального значення.</translation>
     </message>
 </context>
 <context>
@@ -16114,7 +16201,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Edit current</source>
-        <translation>Редагувати поточну</translation>
+        <translation>Редагувати поточні</translation>
     </message>
     <message>
         <source>Load</source>
@@ -16564,6 +16651,10 @@ Do you want to save your changes?</source>
         <source>Error creating or updating place label</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Can&apos;t find increment &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPatternConverter</name>
@@ -16770,7 +16861,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VSimpleCurve</name>
     <message>
         <source>VSimpleCurve::RefreshGeometry: pointer to curve is null.</source>
-        <translation>VSimpleCurve::RefreshGeometry: покажчик на криву має значення нуль.</translation>
+        <translation type="vanished">VSimpleCurve::RefreshGeometry: покажчик на криву має значення нуль.</translation>
     </message>
 </context>
 <context>
@@ -18904,7 +18995,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>asinh</source>
         <comment>hyperbolic arcus sine function</comment>
-        <translation>asibh</translation>
+        <translation>asinh</translation>
     </message>
     <message>
         <source>acosh</source>
@@ -19239,7 +19330,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>converts degrees to radian</source>
         <comment>functionm degTorad</comment>
-        <translation>перетворює градуси в радіани</translation>
+        <translation type="vanished">перетворює градуси в радіани</translation>
     </message>
     <message>
         <source>converts radian to degrees</source>
@@ -19430,6 +19521,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <source>Show a warning in calculations</source>
         <comment>function warning</comment>
         <translation>Показати попередження в розрахунках</translation>
+    </message>
+    <message>
+        <source>converts degrees to radian</source>
+        <comment>function degTorad</comment>
+        <translation type="unfinished">перетворює градуси в радіани</translation>
     </message>
 </context>
 <context>
@@ -19673,6 +19769,36 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>Categories: %1.</source>
         <translation>Категорії: %1.</translation>
+    </message>
+</context>
+<context>
+    <name>VisToolArc</name>
+    <message>
+        <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first angle, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°, second angle = %4°; &lt;b&gt;Mouse click&lt;/b&gt; - finish creating, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - sticking end, &lt;b&gt;%7&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VisToolArcWithLength</name>
+    <message>
+        <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first angle, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°, arc length = %4%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish creating, &lt;b&gt;%5&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

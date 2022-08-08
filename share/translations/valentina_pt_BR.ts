@@ -3647,6 +3647,26 @@
         <source>F3</source>
         <translation>F3</translation>
     </message>
+    <message>
+        <source>Units:</source>
+        <translation type="unfinished">Unidades:</translation>
+    </message>
+    <message>
+        <source>Millimeters</source>
+        <translation type="unfinished">Milímetros</translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished">Polegadas</translation>
+    </message>
+    <message>
+        <source>Centimeters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Degrees</source>
+        <translation type="unfinished">Graus</translation>
+    </message>
 </context>
 <context>
     <name>DialogInsertNode</name>
@@ -7233,7 +7253,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Circumference</source>
-        <translation>Circunferência</translation>
+        <translation type="vanished">Circunferência</translation>
     </message>
     <message>
         <source>Please, select at least one dimension</source>
@@ -7261,6 +7281,18 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Please, provide custom name for dimension %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A body measurement measured in units of length.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Body Measurement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A body measurement measured in units of length. Circumference.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9328,7 +9360,7 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Create new group</source>
-        <translation>Criar novo grupo</translation>
+        <translation type="vanished">Criar novo grupo</translation>
     </message>
     <message>
         <source>Groups</source>
@@ -9961,6 +9993,10 @@ Você quer salvar suas mudanças?</translation>
     <message>
         <source>Save Image</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visibility group</source>
+        <translation type="unfinished">Grupo de Visibilidade</translation>
     </message>
 </context>
 <context>
@@ -11531,6 +11567,14 @@ Esta opção terá um efeito após o reinício.</translation>
         <source>z value move pieces</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -12552,7 +12596,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Export from multisize measurements is not supported.</source>
-        <translation>Exportar medidas multi-tamanho não é suportado.</translation>
+        <translation type="vanished">Exportar medidas multi-tamanho não é suportado.</translation>
     </message>
     <message>
         <source>Customer name:</source>
@@ -13855,6 +13899,26 @@ Deseja salvar suas mudanças?</translation>
         <source>Can&apos;t cut this spline</source>
         <translation>Impossível cortar esta spline</translation>
     </message>
+    <message>
+        <source>Unable to cut curve &apos;%1&apos;. The curve is too short.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VAbstractLayoutDialog</name>
@@ -14191,6 +14255,29 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Formula warning: %1. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VArc</name>
+    <message>
+        <source>Unable to cut curve &apos;%1&apos;. The curve is too short.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -16512,6 +16599,10 @@ Você quer salvar as alterações?</translation>
         <source>Error creating or updating place label</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Can&apos;t find increment &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPatternConverter</name>
@@ -16710,13 +16801,6 @@ Você quer salvar as alterações?</translation>
     <message>
         <source>VRawLayout::ReadFile() failed.
 Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = %2</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>VSimpleCurve</name>
-    <message>
-        <source>VSimpleCurve::RefreshGeometry: pointer to curve is null.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -19186,7 +19270,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>converts degrees to radian</source>
         <comment>functionm degTorad</comment>
-        <translation>converte graus para radianos</translation>
+        <translation type="vanished">converte graus para radianos</translation>
     </message>
     <message>
         <source>converts radian to degrees</source>
@@ -19377,6 +19461,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <source>Show a warning in calculations</source>
         <comment>function warning</comment>
         <translation>Mostrar um alerta nos cálculos</translation>
+    </message>
+    <message>
+        <source>converts degrees to radian</source>
+        <comment>function degTorad</comment>
+        <translation type="unfinished">converte graus para radianos</translation>
     </message>
 </context>
 <context>
@@ -19620,6 +19709,36 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>Categories: %1.</source>
         <translation>Categorias: %1.</translation>
+    </message>
+</context>
+<context>
+    <name>VisToolArc</name>
+    <message>
+        <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first angle, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°, second angle = %4°; &lt;b&gt;Mouse click&lt;/b&gt; - finish creating, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - sticking end, &lt;b&gt;%7&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VisToolArcWithLength</name>
+    <message>
+        <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first angle, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°, arc length = %4%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish creating, &lt;b&gt;%5&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

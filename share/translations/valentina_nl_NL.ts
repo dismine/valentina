@@ -3647,6 +3647,26 @@
         <source>F3</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Units:</source>
+        <translation type="unfinished">Eenheden:</translation>
+    </message>
+    <message>
+        <source>Millimeters</source>
+        <translation type="unfinished">Millimeters</translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished">Inches</translation>
+    </message>
+    <message>
+        <source>Centimeters</source>
+        <translation type="unfinished">Centimeters</translation>
+    </message>
+    <message>
+        <source>Degrees</source>
+        <translation type="unfinished">Graden</translation>
+    </message>
 </context>
 <context>
     <name>DialogInsertNode</name>
@@ -7237,7 +7257,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Circumference</source>
-        <translation>Omtrek</translation>
+        <translation type="vanished">Omtrek</translation>
     </message>
     <message>
         <source>Please, select at least one dimension</source>
@@ -7265,6 +7285,18 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Please, provide custom name for dimension %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A body measurement measured in units of length.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Body Measurement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A body measurement measured in units of length. Circumference.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9331,7 +9363,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Create new group</source>
-        <translation>Maak een nieuwe groep</translation>
+        <translation type="vanished">Maak een nieuwe groep</translation>
     </message>
     <message>
         <source>Groups</source>
@@ -9964,6 +9996,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Save Image</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visibility group</source>
+        <translation type="unfinished">Zichtbaarheid groep</translation>
     </message>
 </context>
 <context>
@@ -11534,6 +11570,14 @@ Deze optie wordt actief na een herstart..</translation>
         <source>z value move pieces</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -12555,7 +12599,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Export from multisize measurements is not supported.</source>
-        <translation>Exporteren van multimaten maten wordt niet ondersteund.</translation>
+        <translation type="vanished">Exporteren van multimaten maten wordt niet ondersteund.</translation>
     </message>
     <message>
         <source>Customer name:</source>
@@ -13862,6 +13906,26 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Can&apos;t cut this spline</source>
         <translation>Kan deze vrijevormkromming niet knippen</translation>
     </message>
+    <message>
+        <source>Unable to cut curve &apos;%1&apos;. The curve is too short.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VAbstractLayoutDialog</name>
@@ -14199,6 +14263,29 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Formula warning: %1. Program will be terminated.</source>
         <translation>Formule waarschuwing: %1. Programma wordt gestopt.</translation>
+    </message>
+</context>
+<context>
+    <name>VArc</name>
+    <message>
+        <source>Unable to cut curve &apos;%1&apos;. The curve is too short.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -16562,6 +16649,10 @@ Do you want to save your changes?</source>
         <source>Error creating or updating place label</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Can&apos;t find increment &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPatternConverter</name>
@@ -16767,7 +16858,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VSimpleCurve</name>
     <message>
         <source>VSimpleCurve::RefreshGeometry: pointer to curve is null.</source>
-        <translation>VSimpleCurve::RefreshGeometry: pointer naar boog is null.</translation>
+        <translation type="vanished">VSimpleCurve::RefreshGeometry: pointer naar boog is null.</translation>
     </message>
 </context>
 <context>
@@ -19236,7 +19327,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>converts degrees to radian</source>
         <comment>functionm degTorad</comment>
-        <translation>omzetten graden naar radialen</translation>
+        <translation type="vanished">omzetten graden naar radialen</translation>
     </message>
     <message>
         <source>converts radian to degrees</source>
@@ -19427,6 +19518,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <source>Show a warning in calculations</source>
         <comment>function warning</comment>
         <translation>Toon een waarschuwing in berekeningen</translation>
+    </message>
+    <message>
+        <source>converts degrees to radian</source>
+        <comment>function degTorad</comment>
+        <translation type="unfinished">omzetten graden naar radialen</translation>
     </message>
 </context>
 <context>
@@ -19670,6 +19766,36 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>Categories: %1.</source>
         <translation>Categoriëen: %1.</translation>
+    </message>
+</context>
+<context>
+    <name>VisToolArc</name>
+    <message>
+        <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first angle, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°, second angle = %4°; &lt;b&gt;Mouse click&lt;/b&gt; - finish creating, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - sticking end, &lt;b&gt;%7&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VisToolArcWithLength</name>
+    <message>
+        <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first angle, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°, arc length = %4%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish creating, &lt;b&gt;%5&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

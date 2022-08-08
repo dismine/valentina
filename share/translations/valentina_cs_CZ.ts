@@ -3647,6 +3647,26 @@
         <source>F3</source>
         <translation>F3</translation>
     </message>
+    <message>
+        <source>Units:</source>
+        <translation type="unfinished">Jednotky:</translation>
+    </message>
+    <message>
+        <source>Millimeters</source>
+        <translation type="unfinished">Milimetry</translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished">Palce</translation>
+    </message>
+    <message>
+        <source>Centimeters</source>
+        <translation type="unfinished">Centimetry</translation>
+    </message>
+    <message>
+        <source>Degrees</source>
+        <translation type="unfinished">Stupně</translation>
+    </message>
 </context>
 <context>
     <name>DialogInsertNode</name>
@@ -7239,7 +7259,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Circumference</source>
-        <translation>Obvod</translation>
+        <translation type="vanished">Obvod</translation>
     </message>
     <message>
         <source>Please, select at least one dimension</source>
@@ -7268,6 +7288,18 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Please, provide custom name for dimension %1</source>
         <translation>Zadejte, prosím, vlastní název pro rozměr %1</translation>
+    </message>
+    <message>
+        <source>A body measurement measured in units of length.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Body Measurement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A body measurement measured in units of length. Circumference.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9335,7 +9367,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Create new group</source>
-        <translation>Vytvořit novou skupinu</translation>
+        <translation type="vanished">Vytvořit novou skupinu</translation>
     </message>
     <message>
         <source>Groups</source>
@@ -9968,6 +10000,10 @@ Chcete uložit své změny?</translation>
     <message>
         <source>Save Image</source>
         <translation>Uložit obrázek</translation>
+    </message>
+    <message>
+        <source>Visibility group</source>
+        <translation type="unfinished">Skupina viditelnosti</translation>
     </message>
 </context>
 <context>
@@ -11538,6 +11574,14 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <source>z value move pieces</source>
         <translation>z hodnota posunuje díly</translation>
     </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -12559,7 +12603,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Export from multisize measurements is not supported.</source>
-        <translation>Vyvedení měření více velikostí nepodporováno.</translation>
+        <translation type="vanished">Vyvedení měření více velikostí nepodporováno.</translation>
     </message>
     <message>
         <source>Customer name:</source>
@@ -13866,6 +13910,26 @@ Chcete uložit změny?</translation>
         <source>Can&apos;t cut this spline</source>
         <translation>Tuto hladkou křivku (křivka spline) nelze rozstřihnout</translation>
     </message>
+    <message>
+        <source>Unable to cut curve &apos;%1&apos;. The curve is too short.</source>
+        <translation type="unfinished">Nelze oříznout křivku &apos;%1&apos;. Křivka je příliš krátká.</translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
+        <translation type="unfinished">Křivka &apos;%1&apos;. Délka vyjmuté části je příliš malá. Vylaďte ji na nejmenší hodnotu.</translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
+        <translation type="unfinished">Křivka &apos;%1&apos;. Délka vyjmuté části je příliš velká. Vylaďte ji na největší hodnotu.</translation>
+    </message>
 </context>
 <context>
     <name>VAbstractLayoutDialog</name>
@@ -14203,6 +14267,29 @@ Chcete uložit změny?</translation>
     <message>
         <source>Formula warning: %1. Program will be terminated.</source>
         <translation>Upozornění na vzorec: %1. Program bude ukončen.</translation>
+    </message>
+</context>
+<context>
+    <name>VArc</name>
+    <message>
+        <source>Unable to cut curve &apos;%1&apos;. The curve is too short.</source>
+        <translation type="unfinished">Nelze oříznout křivku &apos;%1&apos;. Křivka je příliš krátká.</translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
+        <translation type="unfinished">Křivka &apos;%1&apos;. Délka vyjmuté části je příliš malá. Vylaďte ji na nejmenší hodnotu.</translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
+        <translation type="unfinished">Křivka &apos;%1&apos;. Délka vyjmuté části je příliš velká. Vylaďte ji na největší hodnotu.</translation>
     </message>
 </context>
 <context>
@@ -16567,6 +16654,10 @@ Chcete uložit své změny?</translation>
         <source>Error creating or updating place label</source>
         <translation>Chyba při vytváření nebo aktualizaci popisu umístění</translation>
     </message>
+    <message>
+        <source>Can&apos;t find increment &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPatternConverter</name>
@@ -16773,7 +16864,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <name>VSimpleCurve</name>
     <message>
         <source>VSimpleCurve::RefreshGeometry: pointer to curve is null.</source>
-        <translation>VSimpleCurve::RefreshGeometry: ukazatel na křivku je nulový.</translation>
+        <translation type="vanished">VSimpleCurve::RefreshGeometry: ukazatel na křivku je nulový.</translation>
     </message>
 </context>
 <context>
@@ -19242,7 +19333,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <source>converts degrees to radian</source>
         <comment>functionm degTorad</comment>
-        <translation>Převádí stupně na radiány</translation>
+        <translation type="vanished">Převádí stupně na radiány</translation>
     </message>
     <message>
         <source>converts radian to degrees</source>
@@ -19433,6 +19524,11 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <source>Show a warning in calculations</source>
         <comment>function warning</comment>
         <translation>Zobrazit varování ve výpočtech</translation>
+    </message>
+    <message>
+        <source>converts degrees to radian</source>
+        <comment>function degTorad</comment>
+        <translation type="unfinished">Převádí stupně na radiány</translation>
     </message>
 </context>
 <context>
@@ -19676,6 +19772,36 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <source>Categories: %1.</source>
         <translation>Skupiny: %1.</translation>
+    </message>
+</context>
+<context>
+    <name>VisToolArc</name>
+    <message>
+        <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first angle, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°, second angle = %4°; &lt;b&gt;Mouse click&lt;/b&gt; - finish creating, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - sticking end, &lt;b&gt;%7&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VisToolArcWithLength</name>
+    <message>
+        <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first angle, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°, arc length = %4%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish creating, &lt;b&gt;%5&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
