@@ -666,7 +666,12 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
     }
 
     const QStringList args = parser.positionalArguments();
-    args.count() > 0 ? StartWithFiles(parser) : SingleStart(parser);
+    bool success = args.count() > 0 ? StartWithFiles(parser) : SingleStart(parser);
+
+    if (not success)
+    {
+        return;
+    }
 
     if (m_testMode)
     {
@@ -792,12 +797,13 @@ void MApplication::StartLocalServer(const QString &serverName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MApplication::StartWithFiles(QCommandLineParser &parser)
+auto MApplication::StartWithFiles(QCommandLineParser &parser) -> bool
 {
     const QStringList args = parser.positionalArguments();
     if (args.count() <= 0)
     {
-        return;
+        QCoreApplication::exit(V_EX_DATAERR);
+        return false;
     }
 
     if (m_testMode && args.count() > 1)
@@ -828,7 +834,7 @@ void MApplication::StartWithFiles(QCommandLineParser &parser)
         {
             if (m_testMode)
             {
-                return; // process only one input file
+                return false; // process only one input file
             }
             delete MainWindow();
             continue;
@@ -854,10 +860,12 @@ void MApplication::StartWithFiles(QCommandLineParser &parser)
             MainWindow()->SetPUnit(unit);
         }
     }
+
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MApplication::SingleStart(QCommandLineParser &parser)
+auto MApplication::SingleStart(QCommandLineParser &parser) -> bool
 {
     if (not m_testMode)
     {
@@ -867,7 +875,10 @@ void MApplication::SingleStart(QCommandLineParser &parser)
     {
         qCCritical(mApp, "%s\n", qPrintable(tr("Please, provide one input file.")));
         parser.showHelp(V_EX_USAGE);
+        return false;
     }
+
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

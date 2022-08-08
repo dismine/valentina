@@ -101,8 +101,8 @@ private:
     static void InitParserOptions(QCommandLineParser &parser);
     void StartLocalServer(const QString &serverName);
 
-    void StartWithFiles(QCommandLineParser &parser);
-    void SingleStart(QCommandLineParser &parser);
+    auto StartWithFiles(QCommandLineParser &parser) -> bool;
+    auto SingleStart(QCommandLineParser &parser) -> bool;
 
     static void ParseDimensionAOption(QCommandLineParser &parser, int &dimensionAValue, bool &flagDimensionA);
     static void ParseDimensionBOption(QCommandLineParser &parser, int &dimensionBValue, bool &flagDimensionB);

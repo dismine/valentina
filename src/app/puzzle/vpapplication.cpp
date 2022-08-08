@@ -497,7 +497,12 @@ void VPApplication::ProcessArguments(const VPCommandLinePtr &cmd)
 {
     const QStringList rawLayouts = cmd->OptionRawLayouts();
     const QStringList args = cmd->OptionFileNames();
-    args.count() > 0 ? StartWithFiles(cmd, rawLayouts) : SingleStart(cmd, rawLayouts);
+    bool success = args.count() > 0 ? StartWithFiles(cmd, rawLayouts) : SingleStart(cmd, rawLayouts);
+
+    if (not success)
+    {
+        return;
+    }
 
     if (not cmd->IsGuiEnabled())
     {
@@ -642,52 +647,59 @@ void VPApplication::StartLocalServer(const QString &serverName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPApplication::StartWithFiles(const VPCommandLinePtr &cmd, const QStringList &rawLayouts)
+auto VPApplication::StartWithFiles(const VPCommandLinePtr &cmd, const QStringList &rawLayouts) -> bool
 {
     const QStringList args = cmd->OptionFileNames();
-    if (args.count() > 0)
+
+    if (args.count() <= 0)
     {
-        if (not cmd->IsGuiEnabled() && args.count() > 1)
+        QCoreApplication::exit(V_EX_DATAERR);
+        return false;
+    }
+
+    if (not cmd->IsGuiEnabled() && args.count() > 1)
+    {
+        qCCritical(pApp, "%s\n", qPrintable(tr("Export mode doesn't support opening several files.")));
+        cmd.get()->parser.showHelp(V_EX_USAGE);
+    }
+
+    if (args.count() > 1 && not rawLayouts.isEmpty())
+    {
+        qCCritical(pApp, "%s\n",
+                   qPrintable(tr("Import raw layout data does not support opening several layout files.")));
+        cmd.get()->parser.showHelp(V_EX_USAGE);
+    }
+
+    for (const auto &arg : args)
+    {
+        NewMainWindow(cmd);
+        if (not MainWindow()->LoadFile(arg))
         {
-            qCCritical(pApp, "%s\n", qPrintable(tr("Export mode doesn't support opening several files.")));
-            cmd.get()->parser.showHelp(V_EX_USAGE);
+            if (not cmd->IsGuiEnabled())
+            {
+                return false; // process only one input file
+            }
+            delete MainWindow();
+            continue;
         }
 
-        if (args.count() > 1 && not rawLayouts.isEmpty())
+        if (not rawLayouts.isEmpty())
         {
-            qCCritical(pApp, "%s\n",
-                       qPrintable(tr("Import raw layout data does not support opening several layout files.")));
-            cmd.get()->parser.showHelp(V_EX_USAGE);
-        }
-
-        for (const auto &arg : args)
-        {
-            NewMainWindow(cmd);
-            if (not MainWindow()->LoadFile(arg))
-            {
-                if (not cmd->IsGuiEnabled())
-                {
-                    return; // process only one input file
-                }
-                delete MainWindow();
-                continue;
-            }
-
-            if (not rawLayouts.isEmpty())
-            {
-                MainWindow()->ImportRawLayouts(rawLayouts);
-            }
+            MainWindow()->ImportRawLayouts(rawLayouts);
         }
     }
+
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPApplication::SingleStart(const VPCommandLinePtr &cmd, const QStringList &rawLayouts)
+auto VPApplication::SingleStart(const VPCommandLinePtr &cmd, const QStringList &rawLayouts) -> bool
 {
     if (cmd->IsTestModeEnabled())
     {
         qCCritical(pApp, "%s\n", qPrintable(tr("Please, provide one input file.")));
         cmd.get()->parser.showHelp(V_EX_USAGE);
+        return false;
     }
 
     NewMainWindow(cmd);
@@ -695,6 +707,8 @@ void VPApplication::SingleStart(const VPCommandLinePtr &cmd, const QStringList &
     {
         MainWindow()->ImportRawLayouts(rawLayouts);
     }
+
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

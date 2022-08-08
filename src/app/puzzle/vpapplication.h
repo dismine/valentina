@@ -96,8 +96,8 @@ private:
 
     void StartLocalServer(const QString &serverName);
 
-    void StartWithFiles(const VPCommandLinePtr &cmd, const QStringList &rawLayouts);
-    void SingleStart(const VPCommandLinePtr &cmd, const QStringList &rawLayouts);
+    auto StartWithFiles(const VPCommandLinePtr &cmd, const QStringList &rawLayouts) -> bool;
+    auto SingleStart(const VPCommandLinePtr &cmd, const QStringList &rawLayouts) -> bool;
 };
 
 #endif // VPAPPLICATION_H
