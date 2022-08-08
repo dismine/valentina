@@ -47,7 +47,7 @@ VPE::VProperty::VProperty(VPropertyPrivate *d)
 
 VPE::VProperty::~VProperty()
 {
-    setParent(nullptr);
+    VPE::VProperty::setParent(nullptr);
 
     while (!d_ptr->Children.isEmpty())
     {

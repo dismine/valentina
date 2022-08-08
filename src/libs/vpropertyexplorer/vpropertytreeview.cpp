@@ -30,13 +30,13 @@
 VPE::VPropertyTreeView::VPropertyTreeView(QWidget *parent)
     : QTreeView(parent), d_ptr(new VPropertyTreeViewPrivate())
 {
-    init();
+    VPE::VPropertyTreeView::init();
 }
 
 VPE::VPropertyTreeView::VPropertyTreeView(VPropertyModel *model, QWidget *parent)
     : QTreeView(parent), d_ptr(new VPropertyTreeViewPrivate())
 {
-    init();
+    VPE::VPropertyTreeView::init();
 
     if (model)
     {
@@ -49,7 +49,7 @@ VPE::VPropertyTreeView::VPropertyTreeView(VPropertyTreeViewPrivate *d, bool init
 {
     if (init_)
     {
-        init();
+        VPE::VPropertyTreeView::init();
     }
 }
 

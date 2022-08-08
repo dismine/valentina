@@ -110,6 +110,7 @@ protected:
 private slots:
     void FilterVariablesEdited(const QString &filter);
 private:
+    // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DialogEditWrongFormula) //NOLINT
     Ui::DialogEditWrongFormula *ui;
 

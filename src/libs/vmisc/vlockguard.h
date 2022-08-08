@@ -77,7 +77,6 @@ private:
     QString                   lockFile;
     QSharedPointer<QLockFile> lock;
 
-    // cppcheck-suppress functionStatic
     bool TryLock(const QString &lockName, int stale, int timeout);
 };
 

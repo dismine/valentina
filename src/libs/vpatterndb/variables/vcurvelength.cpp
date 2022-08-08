@@ -48,6 +48,7 @@ VCurveLength::VCurveLength(const quint32 &id, const quint32 &parentId, const VAb
     :VCurveVariable(id, parentId)
 {
     SetType(VarType::CurveLength);
+    // cppcheck-suppress unknownMacro
     SCASSERT(curve != nullptr)
     SetName(curve->name());
 

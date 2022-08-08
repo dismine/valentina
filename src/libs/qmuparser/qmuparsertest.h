@@ -242,7 +242,6 @@ private:
         return static_cast<qreal>( ( 1 + ( v * QRandomGenerator().bounded(static_cast<qreal>(RAND_MAX)) /
                                            ( RAND_MAX + 1.0 ) ) ) );
 #else
-        // cppcheck-suppress qrandCalled
         return static_cast<qreal>( ( 1 + ( v * qrand() / ( RAND_MAX + 1.0 ) ) ) );
 #endif
     }
@@ -253,7 +252,6 @@ private:
         return static_cast<qreal>( ( 1 + ( 1000.0f * QRandomGenerator().bounded(static_cast<qreal>(RAND_MAX)) /
                                            ( RAND_MAX + 1.0 ) ) ) );
 #else
-        // cppcheck-suppress qrandCalled
         return static_cast<qreal>( ( 1 + ( 1000.0f * static_cast<qreal>(qrand()) / ( RAND_MAX + 1.0 ) ) ) );
 #endif
     }
@@ -312,31 +310,18 @@ private:
     static int IsHexVal (const QString &a_szExpr, int *a_iPos, qreal *a_fVal, const QLocale &locale, bool cNumbers,
                          const QChar &decimal, const QChar &thousand);
 
-    // cppcheck-suppress functionStatic
     int TestNames();
-    // cppcheck-suppress functionStatic
     int TestSyntax();
-    // cppcheck-suppress functionStatic
     int TestMultiArg();
-    // cppcheck-suppress functionStatic
     int TestPostFix();
-    // cppcheck-suppress functionStatic
     int TestExpression();
-    // cppcheck-suppress functionStatic
     int TestInfixOprt();
-    // cppcheck-suppress functionStatic
     int TestBinOprt();
-    // cppcheck-suppress functionStatic
     int TestVarConst();
-    // cppcheck-suppress functionStatic
     int TestInterface();
-    // cppcheck-suppress functionStatic
     int TestException();
-    // cppcheck-suppress functionStatic
     int TestStrArg();
-    // cppcheck-suppress functionStatic
     int TestIfThenElse();
-    // cppcheck-suppress functionStatic
     int TestBulkMode();
 
     static void Abort();

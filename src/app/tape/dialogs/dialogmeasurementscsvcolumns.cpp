@@ -807,6 +807,7 @@ void DialogMeasurementsCSVColumns::CheckStatus()
     auto SetStatus = [this](bool status)
     {
         QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
+        // cppcheck-suppress unknownMacro
         SCASSERT(bOk != nullptr)
         bOk->setEnabled(status);
     };

@@ -46,6 +46,7 @@ VArcRadius::VArcRadius()
 VArcRadius::VArcRadius(const quint32 &id, const quint32 &parentId, const VArc *arc, Unit patternUnit)
     :VCurveVariable(id, parentId)
 {
+    // cppcheck-suppress unknownMacro
     SCASSERT(arc != nullptr)
 
     SetType(VarType::ArcRadius);

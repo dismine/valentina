@@ -126,6 +126,7 @@ private:
     Q_DISABLE_COPY(Visualization)
 };
 
+// cppcheck-suppress unknownMacro
 QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------

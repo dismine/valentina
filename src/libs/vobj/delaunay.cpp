@@ -28,6 +28,7 @@
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wold-style-cast")
+// cppcheck-suppress unknownMacro
 QT_WARNING_DISABLE_CLANG("-Wold-style-cast")
 QT_WARNING_DISABLE_GCC("-Wcast-qual")
 QT_WARNING_DISABLE_CLANG("-Wcast-qual")
@@ -792,11 +793,13 @@ static halfedge_t* del_valid_link( halfedge_t *b )
         {
             if( a == INSIDE )
             {
+                // cppcheck-suppress unreadVariable
                 g_p	= g;
                 gd	= b;
             }
             else
             {
+                // cppcheck-suppress unreadVariable
                 d_p = d;
                 dd	= b->pair;
             }

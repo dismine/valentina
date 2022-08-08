@@ -126,7 +126,8 @@ void TST_QmuParserErrorMsg::TestEErrorCodes()
     QFETCH(bool, pos);
 
     const QString translated = (*msg)[code];
-    const QString message = QString("String: '%1'.").arg(translated);
+    // cppcheck-suppress unreadVariable
+    const QString message = QStringLiteral("String: '%1'.").arg(translated);
 
     QVERIFY2((translated.indexOf(QLatin1String("$TOK$")) != -1) == tok, qUtf8Printable(message));
     QVERIFY2((translated.indexOf(QLatin1String("$POS$")) != -1) == pos, qUtf8Printable(message));

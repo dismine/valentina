@@ -113,7 +113,6 @@ public:
 
 private:
     DRW_TableEntry &operator=(const DRW_TableEntry &) Q_DECL_EQ_DELETE;
-    // cppcheck-suppress unsafeClassCanLeak
     DRW_Variant* curr{nullptr};
 };
 
@@ -642,7 +641,7 @@ public:
     }
 
 protected:
-    bool parseCode(int code, dxfReader *reader){return DRW_TableEntry::parseCode(code, reader);}
+    bool parseCode(int code, dxfReader *reader) override {return DRW_TableEntry::parseCode(code, reader);}
 };
 
 namespace DRW {

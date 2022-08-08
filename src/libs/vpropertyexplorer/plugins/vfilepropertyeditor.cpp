@@ -212,20 +212,19 @@ void VPE::VFileEditWidget::dropEvent(QDropEvent* event)
 }
 
 
-bool VPE::VFileEditWidget::checkMimeData(const QMimeData* data, QString& file) const
+auto VPE::VFileEditWidget::checkMimeData(const QMimeData* data, QString& file) const -> bool
 {
     if (data->hasUrls())
     {
         QList<QUrl> tmpUrlList = data->urls();
         QFileInfo tmpFileInfo;
 
-        for(const QUrl &tmpUrl : tmpUrlList)
+        auto tmpUrl = std::find_if(tmpUrlList.cbegin(), tmpUrlList.cend(),
+                                  [](const QUrl &tmpUrl){return QFile::exists(tmpUrl.toLocalFile());});
+
+        if (tmpUrl != tmpUrlList.cend())
         {
-            if (QFile::exists(tmpUrl.toLocalFile()))
-            {
-                tmpFileInfo = QFileInfo(tmpUrl.toLocalFile());
-                break;
-            }
+            tmpFileInfo = QFileInfo(tmpUrl->toLocalFile());
         }
 
         if (checkFileFilter(tmpFileInfo.fileName()))

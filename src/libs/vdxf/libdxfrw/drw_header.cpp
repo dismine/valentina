@@ -597,10 +597,10 @@ void DRW_Header::write(dxfWriter *writer, DRW::Version ver){
             writer->writeInt16(70, 3);
         writer->writeString(9, "$DIMTXSTY");
         if (getStr("$DIMTXSTY", &varStr))
-            if (ver == DRW::AC1009)
-                writer->writeUtf8Caps(7, varStr);
-            else
-                writer->writeUtf8String(7, varStr);
+//            if (ver == DRW::AC1009)
+//                writer->writeUtf8Caps(7, varStr);
+//            else
+            writer->writeUtf8String(7, varStr);
         else
             writer->writeString(7, "STANDARD");
         writer->writeString(9, "$DIMAUNIT");
@@ -640,10 +640,10 @@ void DRW_Header::write(dxfWriter *writer, DRW::Version ver){
             writer->writeInt16(70, 0);
         writer->writeString(9, "$DIMLDRBLK");
         if (getStr("$DIMLDRBLK", &varStr))
-            if (ver == DRW::AC1009)
-                writer->writeUtf8Caps(1, varStr);
-            else
-                writer->writeUtf8String(1, varStr);
+//            if (ver == DRW::AC1009)
+//                writer->writeUtf8Caps(1, varStr);
+//            else
+            writer->writeUtf8String(1, varStr);
         else
             writer->writeString(1, "STANDARD");
     //verify if exist "$DIMLUNIT" or obsolete "$DIMUNIT" (pre v2000)
@@ -710,26 +710,17 @@ void DRW_Header::write(dxfWriter *writer, DRW::Version ver){
                 writer->writeInt16(70, 0);
             writer->writeString(9, "$DIMLTYPE");
             if (getStr("$DIMLTYPE", &varStr))
-                if (ver == DRW::AC1009)
-                    writer->writeUtf8Caps(6, varStr);
-                else
-                    writer->writeUtf8String(6, varStr);
+                writer->writeUtf8String(6, varStr);
             else
                 writer->writeString(6, "");
             writer->writeString(9, "$DIMLTEX1");
             if (getStr("$DIMLTEX1", &varStr))
-                if (ver == DRW::AC1009)
-                    writer->writeUtf8Caps(6, varStr);
-                else
-                    writer->writeUtf8String(6, varStr);
+                writer->writeUtf8String(6, varStr);
             else
                 writer->writeString(6, "");
             writer->writeString(9, "$DIMLTEX2");
             if (getStr("$DIMLTEX2", &varStr))
-                if (ver == DRW::AC1009)
-                    writer->writeUtf8Caps(6, varStr);
-                else
-                    writer->writeUtf8String(6, varStr);
+                writer->writeUtf8String(6, varStr);
             else
                 writer->writeString(6, "");
             if (ver > DRW::AC1021) {// and post v2007 dim vars
@@ -939,10 +930,7 @@ void DRW_Header::write(dxfWriter *writer, DRW::Version ver){
     if (ver > DRW::AC1009) {
     writer->writeString(9, "$UCSBASE");
     if (getStr("$UCSBASE", &varStr))
-        if (ver == DRW::AC1009)
-            writer->writeUtf8Caps(2, varStr);
-        else
-            writer->writeUtf8String(2, varStr);
+        writer->writeUtf8String(2, varStr);
     else
         writer->writeString(2, "");
 }
@@ -987,10 +975,10 @@ void DRW_Header::write(dxfWriter *writer, DRW::Version ver){
     if (ver > DRW::AC1009) { //begin post r12 UCS vars
         writer->writeString(9, "$UCSORTHOREF");
         if (getStr("$UCSORTHOREF", &varStr))
-            if (ver == DRW::AC1009)
-                writer->writeUtf8Caps(2, varStr);
-            else
-                writer->writeUtf8String(2, varStr);
+//            if (ver == DRW::AC1009)
+//                writer->writeUtf8Caps(2, varStr);
+//            else
+            writer->writeUtf8String(2, varStr);
         else
             writer->writeString(2, "");
         writer->writeString(9, "$UCSORTHOVIEW");
@@ -1060,10 +1048,10 @@ void DRW_Header::write(dxfWriter *writer, DRW::Version ver){
         }
         writer->writeString(9, "$PUCSBASE");
         if (getStr("$PUCSBASE", &varStr))
-            if (ver == DRW::AC1009)
-                writer->writeUtf8Caps(2, varStr);
-            else
-                writer->writeUtf8String(2, varStr);
+//            if (ver == DRW::AC1009)
+//                writer->writeUtf8Caps(2, varStr);
+//            else
+            writer->writeUtf8String(2, varStr);
         else
             writer->writeString(2, "");
     } //end post r12 UCS vars
@@ -1108,10 +1096,10 @@ void DRW_Header::write(dxfWriter *writer, DRW::Version ver){
     if (ver > DRW::AC1009) { //begin post r12 PUCS vars
         writer->writeString(9, "$PUCSORTHOREF");
         if (getStr("$PUCSORTHOREF", &varStr))
-            if (ver == DRW::AC1009)
-                writer->writeUtf8Caps(2, varStr);
-            else
-                writer->writeUtf8String(2, varStr);
+//            if (ver == DRW::AC1009)
+//                writer->writeUtf8Caps(2, varStr);
+//            else
+            writer->writeUtf8String(2, varStr);
         else
             writer->writeString(2, "");
         writer->writeString(9, "$PUCSORTHOVIEW");
@@ -1359,10 +1347,10 @@ void DRW_Header::write(dxfWriter *writer, DRW::Version ver){
             writer->writeInt16(70, 3020);
         writer->writeString(9, "$CMLSTYLE");
         if (getStr("$CMLSTYLE", &varStr))
-            if (ver == DRW::AC1009)
-                writer->writeUtf8Caps(2, varStr);
-            else
-                writer->writeUtf8String(2, varStr);
+//            if (ver == DRW::AC1009)
+//                writer->writeUtf8Caps(2, varStr);
+//            else
+            writer->writeUtf8String(2, varStr);
         else
             writer->writeString(2, "Standard");
         writer->writeString(9, "$CMLJUST");
@@ -1414,18 +1402,18 @@ void DRW_Header::write(dxfWriter *writer, DRW::Version ver){
         }
         writer->writeString(9, "$HYPERLINKBASE");
         if (getStr("$HYPERLINKBASE", &varStr))
-            if (ver == DRW::AC1009)
-                writer->writeUtf8Caps(1, varStr);
-            else
-                writer->writeUtf8String(1, varStr);
+//            if (ver == DRW::AC1009)
+//                writer->writeUtf8Caps(1, varStr);
+//            else
+            writer->writeUtf8String(1, varStr);
         else
             writer->writeString(1, "");
         writer->writeString(9, "$STYLESHEET");
         if (getStr("$STYLESHEET", &varStr))
-            if (ver == DRW::AC1009)
-                writer->writeUtf8Caps(1, varStr);
-            else
-                writer->writeUtf8String(1, varStr);
+//            if (ver == DRW::AC1009)
+//                writer->writeUtf8Caps(1, varStr);
+//            else
+            writer->writeUtf8String(1, varStr);
         else
             writer->writeString(1, "");
         writer->writeString(9, "$XEDIT"); //RLZ bool flag, verify in bin version
@@ -1678,7 +1666,6 @@ void DRW_Header::write(dxfWriter *writer, DRW::Version ver){
 }
 
 void DRW_Header::addDouble(std::string key, double value, int code){
-    // cppcheck-suppress publicAllocationError
     curr = new DRW_Variant();
     curr->addDouble( value );
     curr->code = code;
@@ -1686,30 +1673,27 @@ void DRW_Header::addDouble(std::string key, double value, int code){
 }
 
 void DRW_Header::addInt(std::string key, int value, int code){
-    // cppcheck-suppress publicAllocationError
     curr = new DRW_Variant();
     curr->addInt( value );
     curr->code = code;
     vars[key] =curr;
 }
 
-void DRW_Header::addStr(std::string key, std::string value, int code){
-    // cppcheck-suppress publicAllocationError
+void DRW_Header::addStr(std::string key, const std::string &value, int code){
     curr = new DRW_Variant();
     curr->addString( value );
     curr->code = code;
     vars[key] =curr;
 }
 
-void DRW_Header::addCoord(std::string key, DRW_Coord value, int code){
-    // cppcheck-suppress publicAllocationError
+void DRW_Header::addCoord(std::string key, const DRW_Coord &value, int code){
     curr = new DRW_Variant();
     curr->addCoord( value );
     curr->code = code;
     vars[key] =curr;
 }
 
-bool DRW_Header::getDouble(std::string key, double *varDouble){
+bool DRW_Header::getDouble(const std::string &key, double *varDouble){
     bool result = false;
     auto it=vars.find( key);
     if (it != vars.end()) {
@@ -1724,7 +1708,7 @@ bool DRW_Header::getDouble(std::string key, double *varDouble){
     return result;
 }
 
-bool DRW_Header::getInt(std::string key, int *varInt){
+bool DRW_Header::getInt(const std::string &key, int *varInt){
     bool result = false;
     auto it=vars.find( key);
     if (it != vars.end()) {
@@ -1739,7 +1723,7 @@ bool DRW_Header::getInt(std::string key, int *varInt){
     return result;
 }
 
-bool DRW_Header::getStr(std::string key, std::string *varStr){
+bool DRW_Header::getStr(const std::string &key, std::string *varStr){
     bool result = false;
     auto it=vars.find( key);
     if (it != vars.end()) {
@@ -1754,7 +1738,7 @@ bool DRW_Header::getStr(std::string key, std::string *varStr){
     return result;
 }
 
-bool DRW_Header::getCoord(std::string key, DRW_Coord *varCoord){
+bool DRW_Header::getCoord(const std::string &key, DRW_Coord *varCoord){
     bool result = false;
     auto it=vars.find( key);
     if (it != vars.end()) {

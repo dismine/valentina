@@ -54,6 +54,7 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
 private:
+    // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VPGraphicsTileGrid) // NOLINT
 
     VPLayoutWeakPtr m_layout;

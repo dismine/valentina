@@ -263,7 +263,7 @@ public:
     }
 
 protected:
-    bool parseCode(int code, dxfReader *reader);
+    auto parseCode(int code, dxfReader *reader) -> bool override;
 
 public:
     double angle{0};  /*!< angle, code 50 */
@@ -946,11 +946,13 @@ public:
           fitpoint()
     {
         eType        = DRW::SPLINE;
-        
-        for(double v : p.knotslist) knotslist.push_back(v);
-        for(double v : p.weightlist) weightlist.push_back(v);
-        for(DRW_Coord *v : p.controllist) controllist.push_back(new DRW_Coord(*v));
-        for(DRW_Coord *v : p.fitlist) fitlist.push_back(new DRW_Coord(*v));
+
+        std::copy(p.knotslist.begin(), p.knotslist.end(), std::back_inserter(knotslist));
+        std::copy(p.weightlist.begin(), p.weightlist.end(), std::back_inserter(weightlist));
+        std::transform(p.controllist.cbegin(), p.controllist.cend(), std::back_inserter(controllist),
+                       [](DRW_Coord *v) { return new DRW_Coord(*v); });
+        std::transform(p.fitlist.cbegin(), p.fitlist.cend(), std::back_inserter(fitlist),
+                       [](DRW_Coord *v) { return new DRW_Coord(*v); });
     }
     
     ~DRW_Spline() {
@@ -991,9 +993,7 @@ public:
 
 private:
     DRW_Spline &operator=(const DRW_Spline &) Q_DECL_EQ_DELETE;
-    // cppcheck-suppress unsafeClassCanLeak
     DRW_Coord *controlpoint;   /*!< current control point to add data */
-    // cppcheck-suppress unsafeClassCanLeak
     DRW_Coord *fitpoint;       /*!< current fit point to add data */
 };
 
@@ -1350,7 +1350,7 @@ public:
     }
 
     DRW_Coord getClonepoint() const {return getPt2();}      /*!< Insertion for clones (Baseline & Continue), 12, 22 & 32 */
-    void setClonePoint(DRW_Coord &c){setPt2(c);}
+    void setClonePoint(const DRW_Coord &c){setPt2(c);}
 
     DRW_Coord getDimPoint() const {return getDefPoint();}   /*!< dim line location point, code 10, 20 & 30 */
     void setDimPoint(const DRW_Coord &p){setDefPoint(p);}
@@ -1584,7 +1584,6 @@ public:
 
 private:
     Q_DISABLE_COPY(DRW_Leader)
-    // cppcheck-suppress unsafeClassCanLeak
     DRW_Coord *vertexpoint;   /*!< current control point to add data */
 };
 

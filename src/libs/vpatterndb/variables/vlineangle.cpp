@@ -53,6 +53,7 @@ VLineAngle::VLineAngle(const VPointF *p1, const quint32 &p1Id, const VPointF *p2
 {
     SetType(VarType::LineAngle);
 
+    // cppcheck-suppress unknownMacro
     SCASSERT(p1 != nullptr)
     SCASSERT(p2 != nullptr)
 

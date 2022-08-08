@@ -37,7 +37,7 @@ VPE::VPropertySet::VPropertySet()
 VPE::VPropertySet::~VPropertySet()
 {
     // Delete all the properties
-    clear(true);
+    VPE::VPropertySet::clear(true);
 
     delete d_ptr;
 }
@@ -221,15 +221,8 @@ bool VPE::VPropertySet::hasProperty(VProperty *property, VProperty *parent) cons
     }
 
     const QList<VProperty*>& tmpChildrenList = (parent != nullptr ? parent->getChildren() : d_ptr->RootProperties);
-    for(auto tmpProp : tmpChildrenList)
-    {
-        if (tmpProp && (tmpProp == property || hasProperty(property, tmpProp)))
-        {
-            return true;
-        }
-    }
-
-    return false;
+    return std::any_of(tmpChildrenList.begin(), tmpChildrenList.end(), [this, property](VProperty* tmpProp)
+                       {return tmpProp && (tmpProp == property || hasProperty(property, tmpProp));});
 }
 
 void VPE::VPropertySet::cloneProperty(VProperty* property_to_clone, VProperty *parent_property,

@@ -615,6 +615,7 @@ private:
     PUB* qxt_p_ptr;
 };
 
+// cppcheck-suppress unknownMacro
 QT_WARNING_POP
 
 template <typename PUB, typename PVT>

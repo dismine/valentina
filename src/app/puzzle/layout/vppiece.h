@@ -132,6 +132,7 @@ public:
     void SetZValue(qreal newZValue);
 
 private:
+    // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VPPiece) // NOLINT
 
     VPLayoutWeakPtr m_layout{};

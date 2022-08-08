@@ -840,7 +840,8 @@ void TST_VSpline::TestFlip()
 
     const VSpline res = spl.Flip(axis, prefix);
 
-    const QString errorMsg = QString("The name doesn't contain the prefix '%1'.").arg(prefix);
+    // cppcheck-suppress unreadVariable
+    const QString errorMsg = QStringLiteral("The name doesn't contain the prefix '%1'.").arg(prefix);
     QVERIFY2(res.name().endsWith(prefix), qUtf8Printable(errorMsg));
 
     QCOMPARE(spl.GetLength(), res.GetLength());

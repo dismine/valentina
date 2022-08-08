@@ -48,6 +48,7 @@ signals:
     void AddItem(const QUuid &id);
     void DeleteItem(const QUuid &id);
 private:
+    // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DeleteBackgroundImage)
     VBackgroundPatternImage m_image;
     int m_index{-1};

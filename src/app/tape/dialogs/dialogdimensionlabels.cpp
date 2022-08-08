@@ -196,8 +196,6 @@ void DialogDimensionLabels::InitTable()
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogDimensionLabels::DimensionValue(const MeasurementDimension_p &dimension, qreal value) const -> QString
 {
-    QStringList labels;
-
     if (dimension->Type() == MeasurementDimension::X)
     {
         return QString::number(value);

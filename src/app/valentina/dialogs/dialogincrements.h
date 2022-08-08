@@ -83,6 +83,7 @@ private slots:
     void RefreshPattern();
 
 private:
+    // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DialogIncrements) // NOLINT
 
     /** @brief ui keeps information about user interface */

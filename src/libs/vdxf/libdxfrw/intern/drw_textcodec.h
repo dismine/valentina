@@ -25,7 +25,7 @@ public:
     static QTextCodec* CodecForName(const QString &name);
 
 private:
-    std::string correctCodePage(const std::string& s);
+    static auto correctCodePage(const std::string& s) -> std::string;
 
 private:
     Q_DISABLE_COPY(DRW_TextCodec)

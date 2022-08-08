@@ -62,7 +62,7 @@ protected:
 private:
     Q_DISABLE_COPY(VNodeArc)
 
-    VNodeArc(const VAbstractNodeInitData &initData, QObject *qoParent = nullptr);
+    explicit VNodeArc(const VAbstractNodeInitData &initData, QObject *qoParent = nullptr);
 };
 
 #endif // VNODEARC_H4

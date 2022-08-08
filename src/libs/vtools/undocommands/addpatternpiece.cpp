@@ -37,6 +37,7 @@ AddPatternPiece::AddPatternPiece(const QDomElement &xml, VAbstractPattern *doc, 
                                  QUndoCommand *parent)
     : VUndoCommand(xml, doc, parent), namePP(namePP)
 {
+    // cppcheck-suppress unknownMacro
     SCASSERT(namePP.isEmpty() == false)
     setText(tr("add pattern piece %1").arg(namePP));
 }

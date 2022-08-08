@@ -85,6 +85,7 @@ VCurveAngle::VCurveAngle(const quint32 &id, const quint32 &parentId, const VAbst
                          const VSpline &spl, CurveAngle angle, qint32 segment)
     :VCurveVariable(id, parentId)
 {
+    // cppcheck-suppress unknownMacro
     SCASSERT(baseCurve != nullptr)
 
     SetType(VarType::CurveAngle);

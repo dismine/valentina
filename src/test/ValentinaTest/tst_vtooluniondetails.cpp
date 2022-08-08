@@ -161,6 +161,7 @@ void TST_VToolUnionDetails::TestUnitingMainPaths()
         const VPieceNode resP = result.at(i).second;
         const VPieceNode outP = out.at(i).second;
 
+        // cppcheck-suppress unreadVariable
         const QString msg = QString("Index: %1. Got item with id = %2, type = %3; Expected item with id = %4, "
                                     "type = %5.")
                 .arg(i).arg(outP.GetId()).arg(static_cast<ToolVisHolderType>(outP.GetTypeTool()))

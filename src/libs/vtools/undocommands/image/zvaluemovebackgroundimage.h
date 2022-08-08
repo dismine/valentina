@@ -50,6 +50,7 @@ public:
     void undo() override;
     void redo() override;
 private:
+    // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(ZValueMoveBackgroundImage)
     QUuid m_id;
     ZValueMove m_move;

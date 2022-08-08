@@ -70,6 +70,7 @@ private slots:
     void ZDimensionBodyMeasurementChanged();
 
 private:
+    // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DialogSetupMultisize) // NOLINT
     Ui::DialogSetupMultisize *ui;
     bool m_isInitialized{false};

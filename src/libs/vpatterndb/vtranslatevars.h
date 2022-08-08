@@ -70,6 +70,7 @@ public:
     static void BiasTokens(int position, int bias, QMap<int, QString> &tokens);
 
 private:
+    // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VTranslateVars) //NOLINT
     QMap<QString, qmu::QmuTranslation> PMSystemNames{};
     QMap<QString, qmu::QmuTranslation> PMSystemAuthors{};

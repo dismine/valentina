@@ -78,14 +78,14 @@ void TST_TSLocaleTranslation::CheckPlaceMarkerExist_data()
                 continue;
             }
 
-            const QString message = QStringLiteral("File '%1'. Check place holder source message '%2'")
+            const QString caseName = QStringLiteral("File '%1'. Check place holder source message '%2'")
                     .arg(filename, source);
-            QTest::newRow(qUtf8Printable(message)) << source << translation << locale.textDirection();
+            QTest::newRow(qUtf8Printable(caseName)) << source << translation << locale.textDirection();
         }
         else
         {
-            const QString message = QStringLiteral("File '%2'. Message %1 is null.").arg(i).arg(filename);
-            QFAIL(qUtf8Printable(message));
+            const QString caseName = QStringLiteral("File '%2'. Message %1 is null.").arg(i).arg(filename);
+            QFAIL(qUtf8Printable(caseName));
         }
     }
 }
@@ -184,13 +184,13 @@ void TST_TSLocaleTranslation::TestPunctuation_data()
                 continue;
             }
 
-            const QString message = QString("File '%1'.").arg(filename);
-            QTest::newRow(qUtf8Printable(message)) << m_locale << source << translation;
+            const QString caseName = QStringLiteral("File '%1'.").arg(filename);
+            QTest::newRow(qUtf8Printable(caseName)) << m_locale << source << translation;
         }
         else
         {
-            const QString message = QString("File '%2'. Message %1 is null.").arg(i).arg(filename);
-            QFAIL(qUtf8Printable(message));
+            const QString caseName = QStringLiteral("File '%2'. Message %1 is null.").arg(i).arg(filename);
+            QFAIL(qUtf8Printable(caseName));
         }
     }
 }
@@ -303,13 +303,13 @@ void TST_TSLocaleTranslation::TestHTMLTags_data()
                 continue;
             }
 
-            const QString message = QString("File '%1'.").arg(filename);
-            QTest::newRow(qUtf8Printable(message)) << source << translation;
+            const QString caseName = QStringLiteral("File '%1'.").arg(filename);
+            QTest::newRow(qUtf8Printable(caseName)) << source << translation;
         }
         else
         {
-            const QString message = QString("File '%2'. Message %1 is null.").arg(i).arg(filename);
-            QFAIL(qUtf8Printable(message));
+            const QString caseName = QStringLiteral("File '%2'. Message %1 is null.").arg(i).arg(filename);
+            QFAIL(qUtf8Printable(caseName));
         }
     }
 }

@@ -226,24 +226,24 @@ void TST_BuitInRegExp::TestCheckInternalVaribleRegExp()
 
     static const QString regex = QStringLiteral("(.){1,}_(.){1,}$");
 
-    const QString sourceRegex = QLatin1String("^") + var + regex;
+    const QString sourceRegex = QChar('^') + var + regex;
     const QRegularExpression sourceRe(sourceRegex);
 
     const QString translated = m_trMs->InternalVarToUser(var);
-    const QString translationRegex = QLatin1String("^") + translated + regex;
+    const QString translationRegex = QChar('^') + translated + regex;
     const QRegularExpression translationRe(translationRegex);
 
     {
         if (sourceRe.match(originalName).hasMatch() || translationRe.match(originalName).hasMatch())
         {
-            const QString message = QString("Invalid original string '%1'").arg(originalName);
+            const QString message = QStringLiteral("Invalid original string '%1'").arg(originalName);
             QFAIL(qUtf8Printable(message));
         }
 
-        const QString translated = m_trMs->VarToUser(originalName);
-        if (sourceRe.match(translated).hasMatch() || translationRe.match(translated).hasMatch())
+        const QString translatedMessage = m_trMs->VarToUser(originalName);
+        if (sourceRe.match(translatedMessage).hasMatch() || translationRe.match(translatedMessage).hasMatch())
         {
-            const QString message = QString("Invalid translation string '%1'").arg(translated);
+            const QString message = QStringLiteral("Invalid translation string '%1'").arg(translatedMessage);
             QFAIL(qUtf8Printable(message));
         }
     }

@@ -34,12 +34,10 @@
 #include "../vgeometry/vsplinepath.h"
 #include "../vgeometry/vcubicbezierpath.h"
 #include "../vgeometry/vpointf.h"
-#include "../vtools/tools/vabstracttool.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutspline.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutsplinepath.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.h"
 #include "../xml/vpattern.h"
-#include "../vmisc/diagnostic.h"
 #include "../vmisc/vtablesearch.h"
 #include "../vmisc/vvalentinasettings.h"
 
@@ -214,6 +212,7 @@ void DialogHistory::FillTable()
     {
         cursorRow = CursorRow();
         QTableWidgetItem *item = ui->tableWidget->item(cursorRow, 0);
+        // cppcheck-suppress unknownMacro
         SCASSERT(item != nullptr)
         item->setIcon(QIcon("://icon/32x32/put_after.png"));
     }

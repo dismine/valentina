@@ -128,7 +128,6 @@ public slots:
     virtual void     PointNameChanged() {}
 protected:
     /** @brief data container with data */
-    // cppcheck-suppress duplInheritedMember
     const VContainer *data;
 
     /** @brief isInitialized true if window is initialized */
@@ -237,6 +236,7 @@ private:
                    const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID) const;
 };
 
+// cppcheck-suppress unknownMacro
 QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -3,24 +3,19 @@
 # Please, run this script from folder <root_folder>/scripts.
 
 # Because we use the last available cppcheck version usually we build it manually. 
-CPPCHECK="../../../../cppcheck/cppcheck"
+CPPCHECK="../../../../cppcheck-2.8/cppcheck"
 $CPPCHECK \
           -j4 -f -q \
           -UDRW_DBG \
           -U__INTEL_COMPILER_UPDATE \
-          -UqApp \
           --template '{file}:{line}:{message}:{id}' \
           --inline-suppr \
           --platform=unix64 \
-          --std=c++11 \
-          --std=posix \
+          --std=c++17 \
           --enable=all \
-          --library=qt.cfg \
-          --library=std.cfg \
-          --library=posix.cfg \
+          --library=qt \
+          --library=std \
+          --library=posix \
           --inconclusive \
-          --suppress=leakReturnValNotUsed:../src/app/valentina/core/vapplication.cpp \
-          --suppress=unmatchedSuppression:../src/libs/ifc/xml/vdomdocument.cpp \
-          --suppress=redundantCondition:../src/libs/vtools/tools/drawTools/toolcurve/vtoolsplinepath.cpp \
-          --suppress=unmatchedSuppression:../src/libs/vtools/tools/drawTools/toolcurve/vtoolsplinepath.cpp \
+          --suppress=*:*/vdxf/libdxfrw/intern/make_unique.h \
           ../src

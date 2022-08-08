@@ -80,7 +80,6 @@ public:
 
     auto Error() const -> QString;
 
-    // cppcheck-suppress functionStatic
     auto Units() const -> Unit;
 
     auto IsBodyMeasurement() const -> bool;
@@ -111,7 +110,6 @@ protected:
     auto IsRangeValid() -> bool;
     auto IsStepValid() -> bool;
     auto IsBaseValid() -> bool;
-    // cppcheck-suppress functionStatic
     auto IsUnitsValid() const -> bool;
 
 private:

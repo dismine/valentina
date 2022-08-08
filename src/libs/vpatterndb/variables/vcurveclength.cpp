@@ -78,6 +78,7 @@ VCurveCLength::VCurveCLength(const quint32 &id, const quint32 &parentId, const V
                              const VSpline &spl, CurveCLength cType, Unit patternUnit, qint32 segment)
     : VCurveVariable(id, parentId)
 {
+    // cppcheck-suppress unknownMacro
     SCASSERT(baseCurve != nullptr)
 
     SetType(VarType::CurveCLength);

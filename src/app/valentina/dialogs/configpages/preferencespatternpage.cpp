@@ -253,6 +253,7 @@ void PreferencesPatternPage::InitLabelDateTimeFormats()
 //---------------------------------------------------------------------------------------------------------------------
 void PreferencesPatternPage::InitComboBoxFormats(QComboBox *box, const QStringList &items, const QString &currentFormat)
 {
+    // cppcheck-suppress unknownMacro
     SCASSERT(box != nullptr)
 
     box->addItems(items);

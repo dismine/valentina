@@ -76,11 +76,11 @@ void MoveSpline::redo()
 //---------------------------------------------------------------------------------------------------------------------
 bool MoveSpline::mergeWith(const QUndoCommand *command)
 {
-    const MoveSpline *moveCommand = static_cast<const MoveSpline *>(command);
+    const auto *moveCommand = static_cast<const MoveSpline *>(command);
     SCASSERT(moveCommand != nullptr)
-    const quint32 id = moveCommand->getSplineId();
+    const quint32 splineId = moveCommand->getSplineId();
 
-    if (id != nodeId)
+    if (splineId != nodeId)
     {
         return false;
     }

@@ -87,6 +87,7 @@ void VAbstractLayoutDialog::InitTemplates(QComboBox *comboBoxTemplates)
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractLayoutDialog::InitTileTemplates(QComboBox *comboBoxTemplates, bool keepCustom)
 {
+    // cppcheck-suppress unknownMacro
     SCASSERT(comboBoxTemplates != nullptr)
     InitTemplates(comboBoxTemplates);
 

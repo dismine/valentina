@@ -207,6 +207,7 @@ void TST_VArc::TestGetPoints()
         {
             QLineF rLine(static_cast<QPointF>(center), point);
             const qreal value = qAbs(rLine.length() - radius);
+            // cppcheck-suppress unreadVariable
             const QString errorMsg = QString("Broken the first rule. All points should be on the same distance from "
                                              "the center. Error ='%1'.").arg(value);
             QVERIFY2(value <= epsRadius, qUtf8Printable(errorMsg));
@@ -229,6 +230,7 @@ void TST_VArc::TestGetPoints()
         // calculated square
         const qreal cSquare = qAbs(VAbstractPiece::SumTrapezoids(points)/2.0);
         const qreal value = qAbs(gSquare - cSquare);
+        // cppcheck-suppress unreadVariable
         const QString errorMsg =
                 QString("Broken the second rule. Interpolation has too big computing error. Error ='%1'.").arg(value);
         const qreal epsSquare = gSquare * 0.24 / 100; // computing error 0.24 % from origin square
@@ -267,6 +269,7 @@ void TST_VArc::TestRotation()
     QCOMPARE(arcOrigin.GetLength(), rotatedArc.GetLength());
     QCOMPARE(arcOrigin.AngleArc(), rotatedArc.AngleArc());
     QCOMPARE(arcOrigin.GetRadius(), rotatedArc.GetRadius());
+    // cppcheck-suppress unreadVariable
     const QString errorMsg = QString("The name doesn't contain the prefix '%1'.").arg(prefix);
     QVERIFY2(rotatedArc.name().endsWith(prefix), qUtf8Printable(errorMsg));
 }
@@ -332,6 +335,7 @@ void TST_VArc::TestFlip()
     VArc originArc(VPointF(center), radius, startAngle, endAngle);
     const VArc res = originArc.Flip(axis, prefix);
 
+    // cppcheck-suppress unreadVariable
     const QString errorMsg = QString("The name doesn't contain the prefix '%1'.").arg(prefix);
     QVERIFY2(res.name().endsWith(prefix), qUtf8Printable(errorMsg));
 

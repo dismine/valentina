@@ -283,6 +283,7 @@ private:
     void               StackDump(const QStack<token_type > &a_stVal, const QStack<token_type > &a_stOprt) const;
 };
 
+// cppcheck-suppress unknownMacro
 QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------

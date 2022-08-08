@@ -268,7 +268,6 @@ auto VAbstractMainWindow::CheckFilePermissions(const QString &path, QWidget *mes
         return true;
     }
 
-    // cppcheck-suppress unreadVariable
     const bool isFileWritable = info.isWritable();
 
 //#ifdef Q_OS_WIN32

@@ -135,6 +135,7 @@ public:
     explicit QmuParserWarning ( const QString &sMsg );
     QmuParserWarning ( const QmuParserWarning &a_Obj );
     QmuParserWarning& operator= ( const QmuParserWarning &a_Obj );
+    // cppcheck-suppress unknownMacro
     virtual ~QmuParserWarning() QMUP_NOEXCEPT_EXPR (true) override {}
 
     const QString& GetMsg() const;

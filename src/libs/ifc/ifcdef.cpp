@@ -217,6 +217,7 @@ QString PenStyleToLineStyle(Qt::PenStyle penStyle)
             break;
     }
 
+    // cppcheck-suppress unknownMacro
     QT_WARNING_POP
 
     return TypeLineLine;

@@ -57,6 +57,7 @@ public:
     auto AllowMerge() const -> bool;
 
 private:
+    // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(ScaleBackgroundImage)
 
     QUuid m_id;

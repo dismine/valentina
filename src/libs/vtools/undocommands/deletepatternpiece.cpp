@@ -98,7 +98,7 @@ void DeletePatternPiece::redo()
         emit doc->SetCurrentPP(namePP);//Without this user will not see this change
     }
     QDomElement rootElement = doc->documentElement();
-    const QDomElement patternPiece = doc->GetPPElement(namePP);
-    rootElement.removeChild(patternPiece);
+    const QDomElement patternPieceElement = doc->GetPPElement(namePP);
+    rootElement.removeChild(patternPieceElement);
     emit NeedFullParsing();
 }

@@ -80,6 +80,7 @@ protected slots:
     void AboutToQuit() override;
 
 private:
+    // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VApplication) // NOLINT
     VTranslateVars *m_trVars{nullptr};
     QTimer         *m_autoSaveTimer{nullptr};

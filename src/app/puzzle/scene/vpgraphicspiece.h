@@ -86,6 +86,7 @@ protected:
     void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
 
 private:
+    // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VPGraphicsPiece) // NOLINT
     VPPieceWeakPtr m_piece;
 

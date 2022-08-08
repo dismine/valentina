@@ -87,12 +87,12 @@ void MoveSPoint::redo()
 //---------------------------------------------------------------------------------------------------------------------
 bool MoveSPoint::mergeWith(const QUndoCommand *command)
 {
-    const MoveSPoint *moveCommand = static_cast<const MoveSPoint *>(command);
+    const auto *moveCommand = static_cast<const MoveSPoint *>(command);
     SCASSERT(moveCommand != nullptr)
-    const quint32 id = moveCommand->getSPointId();
+    const quint32 sPointId = moveCommand->getSPointId();
 
     qCDebug(vUndo, "Mergin.");
-    if (id != nodeId)
+    if (sPointId != nodeId)
     {
         qCDebug(vUndo, "Merging canceled.");
         return false;

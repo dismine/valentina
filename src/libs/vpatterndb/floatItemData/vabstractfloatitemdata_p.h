@@ -32,14 +32,12 @@
 #include <QPointF>
 #include <QSharedData>
 
-#include "../vmisc/diagnostic.h"
 #include "../vmisc/defglobal.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
-// cppcheck-suppress copyCtorAndEqOperator
 class VAbstractFloatItemDataPrivate : public QSharedData
 {
 public:

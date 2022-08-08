@@ -51,7 +51,6 @@ class VPGraphicsTileGrid;
 class VPGraphicsSheet;
 class VLayoutPiece;
 
-// cppcheck-suppress noCopyConstructor
 class VPSheetSceneData
 {
 public:
@@ -95,6 +94,7 @@ public:
     void RefreshSheetSize();
 
 private:
+    // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VPSheetSceneData) // NOLINT
 
     VPLayoutWeakPtr m_layout{};

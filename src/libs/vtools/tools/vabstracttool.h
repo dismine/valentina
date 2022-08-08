@@ -209,7 +209,8 @@ template <typename T>
 inline void VAbstractTool::AddVisualization()
 {
     T *visual = new T(getData());
-    VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
+    auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
+    // cppcheck-suppress unknownMacro
     SCASSERT(scene != nullptr)
     scene->addItem(visual);
 

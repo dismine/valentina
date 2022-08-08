@@ -47,6 +47,7 @@ public:
     void redo() override;
 
 private:
+    // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(ResetBackgroundImage)
 
     QUuid m_id;

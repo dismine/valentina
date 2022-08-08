@@ -31,8 +31,8 @@
 
 #include <QSharedData>
 
-#include "../vmisc/diagnostic.h"
 #include "../vmisc/defglobal.h"
+#include "../vmisc/typedef.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -46,7 +46,7 @@ public:
         :arcId(NULL_ID)
     {}
 
-    VArcRadiusData(const quint32 &arcId)
+    explicit VArcRadiusData(const quint32 &arcId)
         :arcId(arcId)
     {}
 

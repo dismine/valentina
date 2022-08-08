@@ -69,6 +69,6 @@ private:
     Q_DISABLE_COPY(VPropertyTreeView)
 };
 
-}
+}  // namespace VPE
 
 #endif // VPROPERTYTREEVIEWEEVIEW_H

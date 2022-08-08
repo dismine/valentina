@@ -2878,6 +2878,7 @@ bool dxfRW::processDimension() {
                 break; }
             }
 
+            // cppcheck-suppress unknownMacro
             QT_WARNING_POP
 
             return true;  //found new entity or ENDSEC, terminate

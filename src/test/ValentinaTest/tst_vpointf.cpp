@@ -77,6 +77,7 @@ void TST_VPointF::TestFlip()
 
     const VPointF res = originPoint.Flip(axis, prefix);
 
+    // cppcheck-suppress unreadVariable
     const QString errorMsg = QString("The name doesn't contain the prefix '%1'.").arg(prefix);
     QVERIFY2(res.name().endsWith(prefix), qUtf8Printable(errorMsg));
 

@@ -60,6 +60,7 @@ static inline QPaintEngine::PaintEngineFeatures svgEngineFeatures()
 {
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wsign-conversion")
+// cppcheck-suppress unknownMacro
 QT_WARNING_DISABLE_INTEL(68)
 QT_WARNING_DISABLE_INTEL(2022)
 
@@ -194,6 +195,7 @@ void VObjEngine::drawPath(const QPainterPath &path)
     delaunay2d_t *res = delaunay2d_from(points, num_points);//Calculate faces
 
     QPointF pf[MAX_POINTS];
+    // cppcheck-suppress unreadVariable
     bool skipFace=false;//Need skip first face
 
     for (quint32 i = 0; i < res->num_faces; i++ )
@@ -216,9 +218,9 @@ void VObjEngine::drawPath(const QPainterPath &path)
         if (skipFace == false )
         {
             QPolygonF face;
-            for ( int i = 0; i < num_verts; i++ )
+            for ( int ind = 0; ind < num_verts; ind++ )
             {
-                face << QPointF(pf[i]);
+                face << QPointF(pf[ind]);
             }
             QPolygonF united = polygon.united(face);
             qint64 sqUnited = Square(united);

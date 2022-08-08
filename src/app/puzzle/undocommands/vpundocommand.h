@@ -66,6 +66,7 @@ public:
     auto AllowMerge() const -> bool;
 
 private:
+    // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VPUndoCommand) // NOLINT
 
     bool m_allowMerge{false};

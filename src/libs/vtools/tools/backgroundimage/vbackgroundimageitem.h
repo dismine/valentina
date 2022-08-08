@@ -111,6 +111,7 @@ private slots:
     void ZValueChanged();
 
 private:
+    // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VBackgroundImageItem)
 
     VBackgroundPatternImage m_image;

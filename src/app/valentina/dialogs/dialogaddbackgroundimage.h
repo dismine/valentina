@@ -51,6 +51,7 @@ public:
     auto BuiltIn() const -> bool;
 
 private:
+    // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DialogAddBackgroundImage)
     Ui::DialogAddBackgroundImage *ui;
 };

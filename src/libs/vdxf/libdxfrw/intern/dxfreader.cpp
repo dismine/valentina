@@ -170,6 +170,7 @@ bool dxfReaderBinary::readInt32() {
     filestr->read(buffer,4);
     int32p = reinterpret_cast<unsigned int *>(buffer);
     intData = static_cast<signed int>(*int32p);
+    // cppcheck-suppress danglingLifetime
     DRW_DBG(intData); DRW_DBG("\n");
     return (filestr->good());
 }
@@ -181,6 +182,7 @@ bool dxfReaderBinary::readInt64() {
     filestr->read(buffer,8);
     int64p = reinterpret_cast<unsigned long long int *>(buffer);
     int64 = *int64p;
+    // cppcheck-suppress danglingLifetime
     DRW_DBG(int64); DRW_DBG(" int64\n");
     return (filestr->good());
 }
@@ -193,6 +195,7 @@ bool dxfReaderBinary::readDouble() {
     // cppcheck-suppress invalidPointerCast
     result = reinterpret_cast<double *>(buffer);
     doubleData = *result;
+    // cppcheck-suppress danglingLifetime
     DRW_DBG(doubleData); DRW_DBG("\n");
     return (filestr->good());
 }

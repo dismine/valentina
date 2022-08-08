@@ -44,6 +44,7 @@ DialogLayoutScale::DialogLayoutScale(bool printTiled, QWidget *parent)
     VAbstractApplication::VApp()->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
+    // cppcheck-suppress unknownMacro
     SCASSERT(bOk != nullptr)
     connect(bOk, &QPushButton::clicked, this, &DialogLayoutScale::Save);
 

@@ -713,6 +713,7 @@ auto VPLayoutFileReader::ReadMarker() -> VLayoutPlaceLabel
 
     marker.shape = shape;
 
+    // cppcheck-suppress unknownMacro
     QT_WARNING_POP
 
     return marker;

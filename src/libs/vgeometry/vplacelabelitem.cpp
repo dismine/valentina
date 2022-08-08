@@ -409,6 +409,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
         case PlaceLabelType::Circle:
             return CircleShape();
     }
+// cppcheck-suppress unknownMacro
 QT_WARNING_POP
 
     return PlaceLabelImg();

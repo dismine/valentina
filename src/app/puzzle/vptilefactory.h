@@ -105,6 +105,7 @@ public:
                                     const QString &watermarkPath, qreal xScale = 1.0, qreal yScale = 1.0);
 
 private:
+    // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VPTileFactory) // NOLINT
 
     VPLayoutWeakPtr  m_layout;

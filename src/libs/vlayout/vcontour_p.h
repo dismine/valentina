@@ -85,6 +85,7 @@ private:
     Q_DISABLE_ASSIGN(VContourData)
 };
 
+// cppcheck-suppress unknownMacro
 QT_WARNING_POP
 
 #endif // VCONTOUR_P_H

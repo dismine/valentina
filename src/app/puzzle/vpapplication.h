@@ -86,6 +86,7 @@ private slots:
     void NewLocalSocketConnection();
 
 private:
+    // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VPApplication) //NOLINT
     QList<QPointer<VPMainWindow> > m_mainWindows{};
     QLocalServer *m_localServer{nullptr};

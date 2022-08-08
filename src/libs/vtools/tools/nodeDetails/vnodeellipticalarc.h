@@ -59,7 +59,7 @@ protected:
 private:
     Q_DISABLE_COPY(VNodeEllipticalArc)
 
-    VNodeEllipticalArc(const VAbstractNodeInitData &initData, QObject *qoParent = nullptr);
+    explicit VNodeEllipticalArc(const VAbstractNodeInitData &initData, QObject *qoParent = nullptr);
 };
 
 #endif // VNODEELLIPTICALARC_H

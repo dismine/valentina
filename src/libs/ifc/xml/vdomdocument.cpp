@@ -711,7 +711,6 @@ void VDomDocument::CacheRefreshed()
 void VDomDocument::setXMLContent(const QString &fileName)
 {
     QFile file(fileName);
-    // cppcheck-suppress ConfigurationNotChecked
     if (file.open(QIODevice::ReadOnly) == false)
     {
         const QString errorMsg(tr("Can't open file %1:\n%2.").arg(fileName, file.errorString()));
@@ -766,7 +765,6 @@ bool VDomDocument::SaveDocument(const QString &fileName, QString &error)
     }
     bool success = false;
     QSaveFile file(fileName);
-    // cppcheck-suppress ConfigurationNotChecked
     if (file.open(QIODevice::WriteOnly))
     {
         // See issue #666. QDomDocument produces random attribute order.
@@ -1000,7 +998,6 @@ bool VDomDocument::SafeCopy(const QString &source, const QString &destination, Q
 
     QTemporaryFile destFile(destination + QLatin1String(".XXXXXX"));
     destFile.setAutoRemove(false);// Will be renamed to be destination file
-    // cppcheck-suppress ConfigurationNotChecked
     if (not destFile.open())
     {
         error = destFile.errorString();
@@ -1008,7 +1005,6 @@ bool VDomDocument::SafeCopy(const QString &source, const QString &destination, Q
     else
     {
         QFile sourceFile(source);
-        // cppcheck-suppress ConfigurationNotChecked
         if (sourceFile.open(QIODevice::ReadOnly))
         {
             result = true;

@@ -175,6 +175,7 @@ void TST_VMeasurements::ValidPMCodesMultisizeFile()
             QString error;
             const bool result = m->SaveDocument(fileName, error);
 
+            // cppcheck-suppress unreadVariable
             const QString message = QString("Error: %1 for code=%2").arg(error, listSystems.at(i));
             QVERIFY2(result, qUtf8Printable(message));
         }
@@ -227,6 +228,7 @@ void TST_VMeasurements::ValidPMCodesIndividualFile()
             QString error;
             const bool result = m->SaveDocument(fileName, error);
 
+            // cppcheck-suppress unreadVariable
             const QString message = QString("Error: %1 for code=%2").arg(error, listSystems.at(i));
             QVERIFY2(result, qUtf8Printable(message));
         }

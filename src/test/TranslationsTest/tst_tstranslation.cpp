@@ -55,7 +55,7 @@ void TST_TSTranslation::CheckEnglishLocalization_data()
     for (qint32 i = 0, num = messages.size(); i < num; ++i)
     {
         const QDomElement message = messages.at(i).toElement();
-        if (message.isNull() == false)
+        if (not message.isNull())
         {
             const QString source = message.firstChildElement(TagSource).text();
             if (source.isEmpty())
@@ -78,13 +78,14 @@ void TST_TSTranslation::CheckEnglishLocalization_data()
                 continue;
             }
 
-            const QString message = QString("File '%1'. Check modification source message '%2'.").arg(fileName, source);
-            QTest::newRow(qUtf8Printable(message)) << source << translation;
+            const QString caseName = QStringLiteral("File '%1'. Check modification source message '%2'.")
+                                        .arg(fileName, source);
+            QTest::newRow(qUtf8Printable(caseName)) << source << translation;
         }
         else
         {
-            const QString message = QString("Message %1 is null.").arg(i);
-            QFAIL(qUtf8Printable(message));
+            const QString caseName = QStringLiteral("Message %1 is null.").arg(i);
+            QFAIL(qUtf8Printable(caseName));
         }
     }
 }
@@ -215,7 +216,7 @@ void TST_TSTranslation::PrepareOriginalStrings()
     for (qint32 i = 0, num = messages.size(); i < num; ++i)
     {
         const QDomElement message = messages.at(i).toElement();
-        if (message.isNull() == false)
+        if (not message.isNull())
         {
             const QString source = message.firstChildElement(TagSource).text();
             if (source.isEmpty())
@@ -223,13 +224,13 @@ void TST_TSTranslation::PrepareOriginalStrings()
                 continue;
             }
 
-            const QString tag = QString("File '%1'. Check modification source message '%2'.").arg(fileName, source);
+            const QString tag = QStringLiteral("File '%1'. Check modification source message '%2'.").arg(fileName, source);
             QTest::newRow(qUtf8Printable(tag)) << source << message;
         }
         else
         {
-            const QString message = QString("Message %1 is null.").arg(i);
-            QFAIL(qUtf8Printable(message));
+            const QString errorMessage = QStringLiteral("Message %1 is null.").arg(i);
+            QFAIL(qUtf8Printable(errorMessage));
         }
     }
 }

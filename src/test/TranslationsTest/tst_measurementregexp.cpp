@@ -201,6 +201,7 @@ void TST_MeasurementRegExp::TestCombinations(int systemCounts, const QStringList
     QDir dir(TranslationsPath());
     const QStringList fileNames = dir.entryList(QStringList("measurements_p*_*.qm"));
 
+    // cppcheck-suppress unreadVariable
     const QString error = QString("Unexpected count of files. Excpected %1, got %2.")
             .arg(combinations).arg(fileNames.size());
     QVERIFY2(combinations == fileNames.size(), qUtf8Printable(error));

@@ -165,6 +165,7 @@ template <typename T>
 inline void Move(T &vector, int from, int to)
 {
     QT_WARNING_PUSH
+    // cppcheck-suppress unknownMacro
     QT_WARNING_DISABLE_GCC("-Wstrict-overflow")
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 6, 0)

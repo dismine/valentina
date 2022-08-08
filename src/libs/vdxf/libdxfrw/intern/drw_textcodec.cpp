@@ -221,16 +221,16 @@ std::string DRW_TextCodec::fromUtf8(const std::string &s) {
     return std::string(encodedString.constData());
 }
 
-std::string DRW_TextCodec::correctCodePage(const std::string& s) {
+auto DRW_TextCodec::correctCodePage(const std::string& s) -> std::string {
     //stringstream cause crash in OS/X, bug#3597944
-    QString cp = QString::fromStdString(s);
-    cp = cp.toUpper();
+    QString codePage = QString::fromStdString(s);
+    codePage = codePage.toUpper();
     QMap<QString, QStringList> codeMap = DRW_TextCodec::DXFCodePageMap();
 
     auto i = codeMap.constBegin();
     while (i != codeMap.constEnd())
     {
-        if (i.value().contains(cp))
+        if (i.value().contains(codePage))
         {
             return i.key().toStdString();
         }

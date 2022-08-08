@@ -584,7 +584,6 @@ static QString qxt_addCsvQuotes(QxtCsvModel::QuoteMode mode, QString field)
   Fields in the output file will be separated by \a separator. Set \a withHeader to true
   to output a row of headers at the top of the file.
  */
-// cppcheck-suppress funcArgNamesDifferent
 bool QxtCsvModel::toCSV(QIODevice* dest, QString &error, bool withHeader, QChar separator, QTextCodec* codec) const
 {
     const QxtCsvModelPrivate& d_ptr = qxt_d();
@@ -707,7 +706,6 @@ void QxtCsvModel::setQuoteMode(QuoteMode mode)
   */
 void QxtCsvModel::setText(int row, int column, const QString& value)
 {
-// cppcheck-suppress indexCalled
     setData(index(row, column), value);
 }
 
@@ -718,7 +716,6 @@ void QxtCsvModel::setText(int row, int column, const QString& value)
   */
 QString QxtCsvModel::text(int row, int column) const
 {
-// cppcheck-suppress indexCalled
     return data(index(row, column)).toString();
 }
 

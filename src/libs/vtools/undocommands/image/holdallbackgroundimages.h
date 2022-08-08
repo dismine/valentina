@@ -42,6 +42,7 @@ public:
     void undo() override;
     void redo() override;
 private:
+    // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(HoldAllBackgroundImages)
     bool m_hold;
     QMap<QUuid, bool> m_oldHold{};

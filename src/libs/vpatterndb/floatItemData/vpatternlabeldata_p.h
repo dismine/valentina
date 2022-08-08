@@ -32,15 +32,13 @@
 #include <QPointF>
 #include <QSharedData>
 
-#include "../vmisc/diagnostic.h"
+#include "../vmisc/typedef.h"
 #include "../vmisc/defglobal.h"
-#include "../ifc/ifcdef.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
-// cppcheck-suppress copyCtorAndEqOperator
 class VPatternLabelDataPrivate : public QSharedData
 {
 public:

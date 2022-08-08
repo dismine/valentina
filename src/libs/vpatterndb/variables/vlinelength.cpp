@@ -50,6 +50,7 @@ VLengthLine::VLengthLine(const VPointF *p1, const quint32 &p1Id, const VPointF *
                          Unit patternUnit)
     :VInternalVariable(), d(new VLengthLineData(p1Id, p2Id, patternUnit))
 {
+    // cppcheck-suppress unknownMacro
     SCASSERT(p1 != nullptr)
     SCASSERT(p2 != nullptr)
 

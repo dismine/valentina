@@ -123,7 +123,7 @@ void TST_ReadVal::PrepareVal(qreal val, const QLocale &locale)
 //---------------------------------------------------------------------------------------------------------------------
 void TST_ReadVal::PrepareString(const QString &str, const QLocale &locale, qreal val,  int count)
 {
-    const QString tag = QString("%1. String '%2'").arg(locale.name(), str);
+    const QString tag = QStringLiteral("%1. String '%2'").arg(locale.name(), str);
     QTest::newRow(qUtf8Printable(tag)) << str << count << val << locale;
 }
 
@@ -140,12 +140,14 @@ void TST_ReadVal::TestVal()
 
     const int resCount = ReadVal(formula, resVal, locale, locale.decimalPoint(), locale.groupSeparator());
 
-    QString errorMsg = QString("Conversion failed. Locale: '%1'.").arg(locale.name());
+    // cppcheck-suppress unreadVariable
+    QString errorMsg = QStringLiteral("Conversion failed. Locale: '%1'.").arg(locale.name());
     QVERIFY2(resCount == expCount, qUtf8Printable(errorMsg));
 
     if (resCount != -1)
     {
-        QString errorMsg = QString("Unexpected result. Locale: '%1'.").arg(locale.name());
+        // cppcheck-suppress unreadVariable
+        errorMsg = QStringLiteral("Unexpected result. Locale: '%1'.").arg(locale.name());
         QVERIFY2(QmuFuzzyComparePossibleNulls(resVal, expVal), qUtf8Printable(errorMsg));
     }
 }

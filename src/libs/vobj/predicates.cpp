@@ -111,6 +111,7 @@
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_MSVC(4701)
+// cppcheck-suppress unknownMacro
 QT_WARNING_DISABLE_GCC("-Wold-style-cast")
 QT_WARNING_DISABLE_GCC("-Wfloat-equal")
 #if defined(__GNUC__) && (__GNUC__ * 100 + __GNUC_MINOR__) >= 408

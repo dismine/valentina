@@ -35,7 +35,6 @@
 #include <QVector>
 #include <QtGlobal>
 
-#include "../ifc/ifcdef.h"
 #include "vabstractbezier.h"
 #include "vgeometrydef.h"
 

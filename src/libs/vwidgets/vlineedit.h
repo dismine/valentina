@@ -38,7 +38,7 @@ class VLineEdit : public QLineEdit
     Q_OBJECT
 public:
     explicit VLineEdit(QWidget * parent = nullptr);
-    VLineEdit(const QString &contents, QWidget *parent = nullptr);
+    explicit VLineEdit(const QString &contents, QWidget *parent = nullptr);
 
 protected:
     virtual void focusInEvent(QFocusEvent *e) override;

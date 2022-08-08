@@ -1937,7 +1937,6 @@ void QmuParserBase::Eval(qreal *results, int nBulkSize) const
     #endif
 
     int nMaxThreads = qMin(omp_get_max_threads(), s_MaxNumOpenMPThreads);
-    // cppcheck-suppress unreadVariable
     int ct=0;
     omp_set_num_threads(nMaxThreads);
 

@@ -82,6 +82,7 @@ private slots:
     void ImagePositionChanged(const QUuid &id);
 
 private:
+    // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VWidgetBackgroundImages)
     Ui::VWidgetBackgroundImages *ui;
     VAbstractPattern *m_doc;

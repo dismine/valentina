@@ -600,14 +600,14 @@ ColorPickerPopup::~ColorPickerPopup()
     If there is an item whole color is equal to \a col, returns a
     pointer to this item; otherwise returns 0.
 */
-ColorPickerItem *ColorPickerPopup::find(const QColor &col) const
+auto ColorPickerPopup::find(const QColor &col) const -> ColorPickerItem *
 {
-    for (auto *item : items)
+    auto item = std::find_if(items.begin(), items.end(),
+                             [col](ColorPickerItem *item){return item && item->color() == col;});
+
+    if (item != items.end())
     {
-        if (item && item->color() == col)
-        {
-            return item;
-        }
+        return *item;
     }
 
     return nullptr;
@@ -832,11 +832,10 @@ void ColorPickerPopup::keyPressEvent(QKeyEvent *e)
                 int i = 0;
                 while ((layoutItem = grid->itemAt(i)) != 0)
                 {
-                    QWidget *w = layoutItem->widget();
-                    if (w && w->inherits("ColorPickerItem"))
+                    QWidget *wl = layoutItem->widget();
+                    if (wl && wl->inherits("ColorPickerItem"))
                     {
-                        ColorPickerItem *litem
-                            = reinterpret_cast<ColorPickerItem *>(layoutItem->widget());
+                        auto *litem = reinterpret_cast<ColorPickerItem *>(layoutItem->widget());
                         if (litem != wi)
                         {
                             litem->setSelected(false);
@@ -858,11 +857,10 @@ void ColorPickerPopup::keyPressEvent(QKeyEvent *e)
                 int i = 0;
                 while ((layoutItem = grid->itemAt(i)) != 0)
                 {
-                    QWidget *w = layoutItem->widget();
-                    if (w && w->inherits("ColorPickerItem"))
+                    QWidget *wl = layoutItem->widget();
+                    if (wl && wl->inherits("ColorPickerItem"))
                     {
-                        ColorPickerItem *litem
-                            = reinterpret_cast<ColorPickerItem *>(layoutItem->widget());
+                        auto *litem = reinterpret_cast<ColorPickerItem *>(layoutItem->widget());
                         if (litem != wi)
                         {
                             litem->setSelected(false);

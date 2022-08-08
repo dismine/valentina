@@ -116,6 +116,7 @@ void TST_VSplinePath::TestRotation()
     QCOMPARE(rotatedPath.GetLength(), res.GetLength());
     QCOMPARE(rotatedPath.CountPoints(), res.CountPoints());
 
+    // cppcheck-suppress unreadVariable
     const QString errorMsg = QString("The name doesn't contain the prefix '%1'.").arg(prefix);
     QVERIFY2(res.name().endsWith(prefix), qUtf8Printable(errorMsg));
 
@@ -188,6 +189,7 @@ void TST_VSplinePath::TestFlip()
     const VSplinePath splPath(originPoints);
     const VSplinePath res = splPath.Flip(axis, prefix);
 
+    // cppcheck-suppress unreadVariable
     const QString errorMsg = QStringLiteral("The name doesn't contain the prefix '%1'.").arg(prefix);
     QVERIFY2(res.name().endsWith(prefix), qUtf8Printable(errorMsg));
 

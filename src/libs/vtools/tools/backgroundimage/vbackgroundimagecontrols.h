@@ -104,6 +104,7 @@ private slots:
     void ScreenChanged();
 
 private:
+    // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VBackgroundImageControls) // NOLINT
 
     QUuid m_id{};

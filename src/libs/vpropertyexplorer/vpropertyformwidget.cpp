@@ -40,7 +40,7 @@ VPE::VPropertyFormWidget::VPropertyFormWidget(const QString &title, const QStrin
                                          const QList<VProperty*>& properties, QWidget *parent)
     : QGroupBox(title, parent), d_ptr(new VPropertyFormWidgetPrivate(properties))
 {
-    build();
+    VPE::VPropertyFormWidget::build();
     setToolTip(description);
     setWhatsThis(description);
 }
@@ -51,7 +51,7 @@ VPE::VPropertyFormWidget::VPropertyFormWidget(VProperty *parent_property, QWidge
     if (parent_property)
     {
         d_ptr->Properties = parent_property->getChildren();
-        build();
+        VPE::VPropertyFormWidget::build();
         setTitle(parent_property->getName());
         setToolTip(parent_property->getDescription());
         setWhatsThis(parent_property->getDescription());
@@ -62,7 +62,7 @@ VPE::VPropertyFormWidget::VPropertyFormWidget(VPropertyFormWidgetPrivate *d_poin
                                               const QString &title, const QString &description)
     : QGroupBox(title, parent), d_ptr(d_pointer)
 {
-    build();
+    VPE::VPropertyFormWidget::build();
     setToolTip(description);
     setWhatsThis(description);
 }

@@ -36,7 +36,7 @@ class VPlainTextEdit : public QPlainTextEdit
     Q_OBJECT
 public:
     explicit VPlainTextEdit(QWidget * parent = nullptr);
-    VPlainTextEdit(const QString & text, QWidget * parent = nullptr);
+    explicit VPlainTextEdit(const QString & text, QWidget * parent = nullptr);
     virtual ~VPlainTextEdit();
 
     void SetMatchParenthesesEnabled(bool enabled);

@@ -45,7 +45,6 @@
 #include "qgraphicsscene.h"
 #include "qgraphicsview.h"
 #include "qnamespace.h"
-#include "vpgraphicspiece.h"
 
 namespace
 {
@@ -73,6 +72,7 @@ auto TransformationOrigin(const VPLayoutPtr &layout, const QRectF &boundingRect)
     origin.origin = boundingRect.center();
     origin.custom = false;
 
+    // cppcheck-suppress unknownMacro
     QT_WARNING_POP
 
     return origin;

@@ -45,6 +45,7 @@ VWidgetGroups::VWidgetGroups(VAbstractPattern *doc, QWidget *parent)
 {
     ui->setupUi(this);
 
+    // cppcheck-suppress unknownMacro
     SCASSERT(doc != nullptr)
     FillTable(doc->GetGroups());
 

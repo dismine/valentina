@@ -4519,6 +4519,7 @@ QRectF VPattern::ActiveDrawBoundingRect() const
     return rec;
 }
 
+// cppcheck-suppress unknownMacro
 QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -199,6 +199,7 @@ void MoveCursorToEnd(QPlainTextEdit *plainTextEdit)
 //---------------------------------------------------------------------------------------------------------------------
 void DeployFormula(QDialog *dialog, QPlainTextEdit *formula, QPushButton *buttonGrowLength, int formulaBaseHeight)
 {
+    // cppcheck-suppress unknownMacro
     SCASSERT(dialog != nullptr)
     SCASSERT(formula != nullptr)
     SCASSERT(buttonGrowLength != nullptr)

@@ -53,6 +53,7 @@ public:
     auto CustomNames() const -> QMap<MeasurementDimension, QString>;
 
 private:
+    // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DialogDimensionCustomNames) // NOLINT
     Ui::DialogDimensionCustomNames *ui;
 

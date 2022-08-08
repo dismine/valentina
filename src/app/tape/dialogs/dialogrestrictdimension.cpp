@@ -128,6 +128,7 @@ void DialogRestrictDimension::changeEvent(QEvent *event)
 
         auto RetranslateControls = [this](int index, QLabel *name, QComboBox *control)
         {
+            // cppcheck-suppress unknownMacro
             SCASSERT(name != nullptr)
             SCASSERT(control != nullptr)
 

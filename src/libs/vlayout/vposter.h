@@ -61,7 +61,6 @@ struct PosterData
 
 Q_DECLARE_TYPEINFO(PosterData, Q_MOVABLE_TYPE);
 
-// cppcheck-suppress noConstructor
 class VPoster
 {
     Q_DECLARE_TR_FUNCTIONS(VPoster)

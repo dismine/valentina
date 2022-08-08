@@ -45,6 +45,7 @@ void TST_VLockGuard::TryLock() const
     QSharedPointer<VLockGuard<char>> lock;
     VlpCreateLock(lock, fileName);
 
+    // cppcheck-suppress nullPointer
     fileName = lock->GetLockFile();
     QVERIFY2(QFileInfo::exists(fileName), "Lock file doesn't exist!");
 

@@ -62,7 +62,7 @@ protected:
 private:
     Q_DISABLE_COPY(VNodeSpline)
 
-    VNodeSpline(const VAbstractNodeInitData &initData, QObject *qoParent = nullptr);
+    explicit VNodeSpline(const VAbstractNodeInitData &initData, QObject *qoParent = nullptr);
 };
 
 #endif // VNODESPLINE_H

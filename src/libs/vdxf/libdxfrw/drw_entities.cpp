@@ -157,38 +157,38 @@ bool DRW_Entity::parseCode(int code, dxfReader *reader){
 //parses dxf 102 groups to read entity
 bool DRW_Entity::parseDxfGroups(int code, dxfReader *reader){
     std::list<DRW_Variant> ls;
-    DRW_Variant curr;
+    DRW_Variant c;
     int nc;
     std::string appName= reader->getString();
     if (!appName.empty() && appName.at(0)== '{'){
-        curr.addString(appName.substr(1, static_cast<size_t>(appName.size()-1)));
-        curr.code = code;
-        ls.push_back(curr);
+        c.addString(appName.substr(1, static_cast<size_t>(appName.size()-1)));
+        c.code = code;
+        ls.push_back(c);
         while (code !=102 && appName.at(0)== '}'){
             reader->readRec(&nc);
-            curr.code = code;
+            c.code = code;
             if (code == 330 || code == 360)
-                curr.addInt(reader->getHandleString());
+                c.addInt(reader->getHandleString());
             else {
                 switch (reader->type) {
                 case dxfReader::STRING:
-                    curr.addString(reader->getString());
+                    c.addString(reader->getString());
                     break;
                 case dxfReader::INT32:
                 case dxfReader::INT64:
-                    curr.addInt(reader->getInt32());
+                    c.addInt(reader->getInt32());
                     break;
                 case dxfReader::DOUBLE:
-                    curr.addDouble(reader->getDouble());
+                    c.addDouble(reader->getDouble());
                     break;
                 case dxfReader::BOOL:
-                    curr.addInt(reader->getInt32());
+                    c.addInt(reader->getInt32());
                     break;
                 default:
                     break;
                 }
             }
-            ls.push_back(curr);
+            ls.push_back(c);
         }
     }
 
