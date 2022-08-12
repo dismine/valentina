@@ -40,7 +40,7 @@ class CheckableMessageBoxPrivate;
 
 class VPROPERTYEXPLORERSHARED_EXPORT CheckableMessageBox : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
     Q_PROPERTY(QString text READ text WRITE setText)
     Q_PROPERTY(QPixmap iconPixmap READ iconPixmap WRITE setIconPixmap)
     Q_PROPERTY(bool isChecked READ isChecked WRITE setChecked)
@@ -128,7 +128,8 @@ private slots:
     void slotClicked(QAbstractButton *b);
 
 private:
-    Q_DISABLE_COPY(CheckableMessageBox)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(CheckableMessageBox) // NOLINT
     CheckableMessageBoxPrivate *d;
     enum DoNotAskAgainType{Question, Information};
 

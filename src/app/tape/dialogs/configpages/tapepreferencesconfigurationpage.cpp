@@ -30,7 +30,6 @@
 #include "ui_tapepreferencesconfigurationpage.h"
 #include "../../mapplication.h"
 #include "../../vtapesettings.h"
-#include "../vpatterndb/variables/vmeasurement.h"
 #include "../vpatterndb/pmsystems.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -100,7 +99,7 @@ TapePreferencesConfigurationPage::~TapePreferencesConfigurationPage()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList TapePreferencesConfigurationPage::Apply()
+auto TapePreferencesConfigurationPage::Apply() -> QStringList
 {
     QStringList preferences;
     VTapeSettings *settings = MApplication::VApp()->TapeSettings();
@@ -121,16 +120,16 @@ QStringList TapePreferencesConfigurationPage::Apply()
 
     if (m_langChanged || m_systemChanged)
     {
-        const QString locale = qvariant_cast<QString>(ui->langCombo->currentData());
+        const auto locale = qvariant_cast<QString>(ui->langCombo->currentData());
         settings->SetLocale(locale);
         m_langChanged = false;
 
-        const QString code = qvariant_cast<QString>(ui->systemCombo->currentData());
+        const auto code = qvariant_cast<QString>(ui->systemCombo->currentData());
         settings->SetPMSystemCode(code);
         m_systemChanged = false;
 
         VAbstractApplication::VApp()->LoadTranslation(locale);
-        qApp->processEvents();// force to call changeEvent
+        QCoreApplication::processEvents();// force to call changeEvent
 
         // Part about measurments will not be updated automatically
         MApplication::VApp()->RetranslateTables();
@@ -164,7 +163,7 @@ void TapePreferencesConfigurationPage::RetranslateUi()
     ui->osOptionCheck->setText(tr("With OS options") + QStringLiteral(" (%1)").arg(QLocale().decimalPoint()));
 
     {
-    const QString code = qvariant_cast<QString>(ui->systemCombo->currentData());
+    const auto code = qvariant_cast<QString>(ui->systemCombo->currentData());
     ui->systemCombo->blockSignals(true);
     ui->systemCombo->clear();
     InitPMSystems(ui->systemCombo);

@@ -53,9 +53,9 @@
 namespace
 {
 #ifdef Q_OS_WIN
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, PDFTOPS, (QLatin1String("pdftops.exe")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, PDFTOPS, (QLatin1String("pdftops.exe"))) // NOLINT
 #else
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, PDFTOPS, (QLatin1String("pdftops")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, PDFTOPS, (QLatin1String("pdftops"))) // NOLINT
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------

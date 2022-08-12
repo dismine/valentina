@@ -42,7 +42,7 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 
 class VPROPERTYEXPLORERSHARED_EXPORT VFileEditWidget : public QWidget
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit VFileEditWidget(QWidget* parent, bool is_directory = false);
@@ -112,7 +112,7 @@ protected:
     bool Directory;
 
 private:
-    Q_DISABLE_COPY(VFileEditWidget)
+    Q_DISABLE_COPY_MOVE(VFileEditWidget) // NOLINT
 };
 
 QT_WARNING_POP

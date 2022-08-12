@@ -60,7 +60,7 @@ struct VAbstractNodeInitData : VAbstractToolInitData
  */
 class VAbstractNode : public VAbstractTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VAbstractNode(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &idNode,
                   const QString &drawName = QString(), const quint32 &idTool = 0, QObject *parent = nullptr);
@@ -100,7 +100,7 @@ protected:
     virtual void ShowNode()=0;
     virtual void HideNode()=0;
 private:
-    Q_DISABLE_COPY(VAbstractNode)
+    Q_DISABLE_COPY_MOVE(VAbstractNode) // NOLINT
 };
 
 //---------------------------------------------------------------------------------------------------------------------

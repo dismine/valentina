@@ -921,9 +921,8 @@ void DialogPiecePath::EvalPassmarkLength()
 
     Eval(formulaData, m_flagFormulaPassmarkLength);
 
-    UpdateNodePassmarkLength(VAbstractApplication::VApp()->TrVars()
-                             ->TryFormulaFromUser(ui->plainTextEditPassmarkLength->toPlainText(),
-                                                  VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+    UpdateNodePassmarkLength(VTranslateVars::TryFormulaFromUser(
+        ui->plainTextEditPassmarkLength->toPlainText(), VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1584,8 +1583,7 @@ void DialogPiecePath::SetPieceId(quint32 id)
 QString DialogPiecePath::GetFormulaSAWidth() const
 {
     QString width = ui->plainTextEditFormulaWidth->toPlainText();
-    return VAbstractApplication::VApp()->TrVars()
-            ->TryFormulaFromUser(width, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(width, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1702,24 +1700,21 @@ void DialogPiecePath::NewItem(const VPieceNode &node)
 QString DialogPiecePath::GetFormulaSAWidthBefore() const
 {
     QString width = ui->plainTextEditFormulaWidthBefore->toPlainText();
-    return VAbstractApplication::VApp()->TrVars()
-            ->TryFormulaFromUser(width, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(width, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogPiecePath::GetFormulaSAWidthAfter() const
 {
     QString width = ui->plainTextEditFormulaWidthAfter->toPlainText();
-    return VAbstractApplication::VApp()->TrVars()
-            ->TryFormulaFromUser(width, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(width, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogPiecePath::GetFormulaVisible() const
 {
     QString formula = ui->plainTextEditFormulaVisible->toPlainText();
-    return VAbstractApplication::VApp()->TrVars()
-            ->TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1740,8 +1735,7 @@ void DialogPiecePath::SetFormulaVisible(const QString &formula)
 QString DialogPiecePath::GetFormulaPassmarkLength() const
 {
     QString formula = ui->plainTextEditPassmarkLength->toPlainText();
-    return VAbstractApplication::VApp()->TrVars()
-            ->TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

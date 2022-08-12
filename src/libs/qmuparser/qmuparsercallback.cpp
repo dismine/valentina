@@ -211,7 +211,7 @@ QmuParserCallback &QmuParserCallback::operator=(const QmuParserCallback &a_Fun)
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 QmuParserCallback::QmuParserCallback(QmuParserCallback &&a_Fun) Q_DECL_NOTHROW
-    : d (a_Fun.d)
+    : d (std::move(a_Fun.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

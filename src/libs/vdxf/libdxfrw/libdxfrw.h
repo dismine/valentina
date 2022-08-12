@@ -79,7 +79,7 @@ public:
     DRW::error getError() const;
 
 private:
-    Q_DISABLE_COPY(dxfRW)
+    Q_DISABLE_COPY_MOVE(dxfRW) // NOLINT
     /// used by read() to parse the content of the file
     bool processDxf();
     bool processHeader();

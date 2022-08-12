@@ -65,7 +65,7 @@ struct VToolNormalInitData : VToolLinePointInitData
  */
 class VToolNormal : public VToolLinePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     virtual void   setDialog() override;
     static VToolNormal* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
@@ -90,7 +90,7 @@ protected:
     virtual void   ReadToolAttributes(const QDomElement &domElement) override;
     virtual void   SetVisualization() override;
 private:
-    Q_DISABLE_COPY(VToolNormal)
+    Q_DISABLE_COPY_MOVE(VToolNormal) // NOLINT
 
     /** @brief secondPointId id second line point. */
     quint32        secondPointId;

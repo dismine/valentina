@@ -39,7 +39,7 @@
 
 class MoveLabel : public MoveAbstractLabel
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     MoveLabel(VAbstractPattern *doc, const QPointF &pos, const quint32 &id, QUndoCommand *parent = nullptr);
     virtual ~MoveLabel()=default;
@@ -49,7 +49,8 @@ public:
 protected:
     virtual void Do(const QPointF &pos) override;
 private:
-    Q_DISABLE_COPY(MoveLabel)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(MoveLabel) // NOLINT
     //Need for resizing scene rect
     QGraphicsScene *m_scene;
 };

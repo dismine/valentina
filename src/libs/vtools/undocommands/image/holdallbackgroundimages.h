@@ -43,7 +43,7 @@ public:
     void redo() override;
 private:
     // cppcheck-suppress unknownMacro
-    Q_DISABLE_COPY_MOVE(HoldAllBackgroundImages)
+    Q_DISABLE_COPY_MOVE(HoldAllBackgroundImages) // NOLINT
     bool m_hold;
     QMap<QUuid, bool> m_oldHold{};
 };

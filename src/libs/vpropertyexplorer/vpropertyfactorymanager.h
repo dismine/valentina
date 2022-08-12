@@ -29,6 +29,8 @@
 
 #include "vpropertyexplorer_global.h"
 
+#include "../vmisc/defglobal.h"
+
 namespace VPE
 {
 
@@ -38,7 +40,7 @@ class VPropertyFactoryManagerPrivate;
 
 class VPROPERTYEXPLORERSHARED_EXPORT VPropertyFactoryManager : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     //! Constructor
     explicit VPropertyFactoryManager(QObject* parent = nullptr);
@@ -89,7 +91,7 @@ protected:
     //! The default manager
     static VPropertyFactoryManager* DefaultManager;
 private:
-    Q_DISABLE_COPY(VPropertyFactoryManager)
+    Q_DISABLE_COPY_MOVE(VPropertyFactoryManager) // NOLINT
 };
 
 }

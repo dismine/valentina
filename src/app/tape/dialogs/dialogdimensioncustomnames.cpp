@@ -46,7 +46,7 @@ DialogDimensionCustomNames::~DialogDimensionCustomNames()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMap<MeasurementDimension, QString> DialogDimensionCustomNames::CustomNames() const
+auto DialogDimensionCustomNames::CustomNames() const -> QMap<MeasurementDimension, QString>
 {
     QMap<MeasurementDimension, QString> names;
 

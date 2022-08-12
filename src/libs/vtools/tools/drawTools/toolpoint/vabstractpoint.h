@@ -51,7 +51,7 @@
 
 class VAbstractPoint: public VDrawTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VAbstractPoint(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes);
     virtual ~VAbstractPoint() Q_DECL_EQ_DEFAULT;
@@ -72,7 +72,7 @@ protected:
     static void InitToolConnections(VMainGraphicsScene *scene, T *tool);
 
 private:
-    Q_DISABLE_COPY(VAbstractPoint)
+    Q_DISABLE_COPY_MOVE(VAbstractPoint) // NOLINT
 };
 
 //---------------------------------------------------------------------------------------------------------------------

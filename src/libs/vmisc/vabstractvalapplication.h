@@ -40,7 +40,7 @@ class VValentinaSettings;
 
 class VAbstractValApplication : public VAbstractApplication
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VAbstractValApplication(int &argc, char **argv);
     virtual ~VAbstractValApplication() =default;
@@ -167,7 +167,7 @@ protected:
     bool openingPattern{false};
 
 private:
-    Q_DISABLE_COPY(VAbstractValApplication)
+    Q_DISABLE_COPY_MOVE(VAbstractValApplication) // NOLINT
 };
 
 //---------------------------------------------------------------------------------------------------------------------

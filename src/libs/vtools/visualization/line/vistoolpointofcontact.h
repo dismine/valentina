@@ -41,7 +41,7 @@
 
 class VisToolPointOfContact : public VisLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolPointOfContact(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolPointOfContact() = default;
@@ -53,7 +53,8 @@ public:
     virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPointOfContact)};
 private:
-    Q_DISABLE_COPY(VisToolPointOfContact)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolPointOfContact) // NOLINT
     quint32               lineP2Id;
     quint32               radiusId;
     VScaledEllipse       *point;

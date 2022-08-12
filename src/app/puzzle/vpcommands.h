@@ -58,6 +58,6 @@ extern const QString LONG_OPTION_TILED_PDF_TOP_MARGIN;
 extern const QString LONG_OPTION_TILED_PDF_BOTTOM_MARGIN;
 extern const QString LONG_OPTION_TILED_PDF_LANDSCAPE;
 
-QStringList AllKeys();
+auto AllKeys() -> QStringList;
 
 #endif // VPCOMMANDS_H

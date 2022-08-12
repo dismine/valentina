@@ -30,6 +30,8 @@
 
 #include "vpropertyexplorer_global.h"
 
+#include "../vmisc/defglobal.h"
+
 namespace VPE
 {
 
@@ -39,7 +41,7 @@ class VPropertyTreeViewPrivate;
 
 class VPROPERTYEXPLORERSHARED_EXPORT VPropertyTreeView : public QTreeView
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     //! Default constructor
     explicit VPropertyTreeView(QWidget *parent = nullptr);
@@ -66,7 +68,7 @@ protected:
     VPropertyTreeViewPrivate* d_ptr;
 
 private:
-    Q_DISABLE_COPY(VPropertyTreeView)
+    Q_DISABLE_COPY_MOVE(VPropertyTreeView) // NOLINT
 };
 
 }  // namespace VPE

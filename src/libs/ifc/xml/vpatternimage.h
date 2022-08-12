@@ -36,7 +36,7 @@ class QMimeType;
 
 class VPatternImage
 {
-    Q_DECLARE_TR_FUNCTIONS(VPatternImage)
+    Q_DECLARE_TR_FUNCTIONS(VPatternImage) // NOLINT
 public:
     VPatternImage() = default;
 

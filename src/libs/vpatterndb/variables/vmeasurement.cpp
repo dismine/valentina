@@ -92,8 +92,8 @@ VMeasurement &VMeasurement::operator=(const VMeasurement &m)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VMeasurement::VMeasurement(const VMeasurement &&m) Q_DECL_NOTHROW
-    :VVariable(m), d(m.d)
+VMeasurement::VMeasurement(VMeasurement &&m) Q_DECL_NOTHROW
+    :VVariable(std::move(m)), d(std::move(m.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

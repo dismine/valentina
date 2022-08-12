@@ -59,11 +59,11 @@ struct PosterData
     QRect rect; // rect section
 };
 
-Q_DECLARE_TYPEINFO(PosterData, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(PosterData, Q_MOVABLE_TYPE); // NOLINT
 
 class VPoster
 {
-    Q_DECLARE_TR_FUNCTIONS(VPoster)
+    Q_DECLARE_TR_FUNCTIONS(VPoster) // NOLINT
 public:
     explicit VPoster(const QPrinter *printer);
 

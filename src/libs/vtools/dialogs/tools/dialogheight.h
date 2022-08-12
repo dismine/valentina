@@ -48,7 +48,7 @@ namespace Ui
  */
 class DialogHeight final : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     DialogHeight(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogHeight() override;
@@ -84,7 +84,7 @@ protected:
     virtual void     SaveData() override;
     virtual bool     IsValid() const final;
 private:
-    Q_DISABLE_COPY(DialogHeight)
+    Q_DISABLE_COPY_MOVE(DialogHeight) // NOLINT
 
     /** @brief ui keeps information about user interface */
     Ui::DialogHeight *ui;

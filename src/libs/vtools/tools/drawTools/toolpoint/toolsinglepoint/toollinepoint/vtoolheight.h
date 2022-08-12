@@ -64,7 +64,7 @@ struct VToolHeightInitData : VToolLinePointInitData
  */
 class VToolHeight: public VToolLinePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     virtual void   setDialog() override;
     static VToolHeight *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
@@ -89,7 +89,7 @@ protected:
     virtual void    SetVisualization() override;
     virtual QString MakeToolTip() const override;
 private:
-    Q_DISABLE_COPY(VToolHeight)
+    Q_DISABLE_COPY_MOVE(VToolHeight) // NOLINT
 
     /** @brief p1LineId id first point of line. */
     quint32         p1LineId;

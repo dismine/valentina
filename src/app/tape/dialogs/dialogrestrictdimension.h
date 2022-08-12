@@ -50,18 +50,18 @@ enum class RestrictDimension: qint8
 
 class DialogRestrictDimension : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     DialogRestrictDimension(const QList<MeasurementDimension_p> &dimensions,
                             const QMap<QString, VDimensionRestriction> &restrictions, RestrictDimension restrictionType,
                             bool fullCircumference, QWidget *parent = nullptr);
-    virtual ~DialogRestrictDimension();
+    ~DialogRestrictDimension() override;
 
     auto Restrictions() const -> QMap<QString, VDimensionRestriction>;
 
 protected:
-    virtual void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent* event) override;
 
 protected slots:
     void RowSelected();
@@ -73,7 +73,8 @@ private slots:
     void CellContextMenu(QPoint pos);
 
 private:
-    Q_DISABLE_COPY(DialogRestrictDimension)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogRestrictDimension) // NOLINT
     Ui::DialogRestrictDimension *ui;
 
     RestrictDimension m_restrictionType;
@@ -92,6 +93,11 @@ private:
     void EnableRestrictionControls(bool enable);
 
     void FillBases(const QVector<qreal> &bases, const MeasurementDimension_p &dimension, QComboBox *control) const;
+    static auto FillDimensionXBases(const QVector<qreal> &bases,
+                                    const MeasurementDimension_p &dimension) -> QStringList;
+    auto FillDimensionYBases(const QVector<qreal> &bases, const MeasurementDimension_p &dimension) const -> QStringList;
+    auto FillDimensionWZBases(const QVector<qreal> &bases,
+                              const MeasurementDimension_p &dimension) const -> QStringList;
 
     auto DimensionLabels(const QVector<qreal> &bases, const MeasurementDimension_p &dimension) const -> QStringList;
     auto DimensionRestrictedValues(const MeasurementDimension_p &dimension) const -> QVector<qreal>;

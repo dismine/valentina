@@ -52,17 +52,17 @@ void VLitePattern::DecrementReferens(quint32 id) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VLitePattern::GenerateLabel(const LabelType &type, const QString &reservedName) const
+auto VLitePattern::GenerateLabel(const LabelType &type, const QString &reservedName) const -> QString
 {
     Q_UNUSED(type)
     Q_UNUSED(reservedName)
-    return QString();
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VLitePattern::GenerateSuffix() const
+auto VLitePattern::GenerateSuffix() const -> QString
 {
-    return QString();
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -57,7 +57,7 @@ public:
 
     VCubicBezier &operator=(const VCubicBezier &curve);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VCubicBezier(const VCubicBezier &&curve) Q_DECL_NOTHROW;
+    VCubicBezier(VCubicBezier &&curve) Q_DECL_NOTHROW;
     VCubicBezier &operator=(VCubicBezier &&curve) Q_DECL_NOTHROW;
 #endif
 
@@ -90,6 +90,6 @@ private:
     QSharedDataPointer<VCubicBezierData> d;
 };
 
-Q_DECLARE_TYPEINFO(VCubicBezier, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VCubicBezier, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VCUBICBEZIER_H

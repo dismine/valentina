@@ -51,8 +51,8 @@ VInternalVariable &VInternalVariable::operator=(const VInternalVariable &var)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VInternalVariable::VInternalVariable(const VInternalVariable &&var) Q_DECL_NOTHROW
-    :d(var.d)
+VInternalVariable::VInternalVariable(VInternalVariable &&var) Q_DECL_NOTHROW
+    :d(std::move(var.d))
 {}
 
 #ifdef Q_COMPILER_RVALUE_REFS

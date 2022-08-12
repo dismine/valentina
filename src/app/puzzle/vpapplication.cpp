@@ -61,7 +61,7 @@ QT_WARNING_POP
 #include <QPixmapCache>
 
 //---------------------------------------------------------------------------------------------------------------------
-inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg) // NOLINT(readability-function-cognitive-complexity)
 {
     // only the GUI thread should display message boxes.  If you are
     // writing a multithreaded application and the error happens on
@@ -315,7 +315,7 @@ auto VPApplication::notify(QObject *receiver, QEvent *event) -> bool
     catch (const VExceptionToolWasDeleted &e)
     {
         qCCritical(pApp, "%s\n\n%s\n\n%s",
-                   qUtf8Printable("Unhadled deleting tool. Continue use object after deleting!"),
+                   qUtf8Printable(QStringLiteral("Unhadled deleting tool. Continue use object after deleting!")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         exit(V_EX_DATAERR);
     }
@@ -534,7 +534,7 @@ auto VPApplication::event(QEvent *e) -> bool
         // Mac specific).
         case QEvent::FileOpen:
         {
-            auto *fileOpenEvent = static_cast<QFileOpenEvent *>(e);
+            auto *fileOpenEvent = static_cast<QFileOpenEvent *>(e); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
             const QString macFileOpen = fileOpenEvent->file();
             if(not macFileOpen.isEmpty())
             {
@@ -670,7 +670,7 @@ auto VPApplication::StartWithFiles(const VPCommandLinePtr &cmd, const QStringLis
         cmd.get()->parser.showHelp(V_EX_USAGE);
     }
 
-    for (const auto &arg : args)
+    for (const auto &arg : args) // NOLINT(readability-use-anyofallof)
     {
         NewMainWindow(cmd);
         if (not MainWindow()->LoadFile(arg))

@@ -66,8 +66,8 @@ VCurveVariable &VCurveVariable::operator=(const VCurveVariable &var)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VCurveVariable::VCurveVariable(const VCurveVariable &&var) Q_DECL_NOTHROW
-    :VInternalVariable(var), d(var.d)
+VCurveVariable::VCurveVariable(VCurveVariable &&var) Q_DECL_NOTHROW
+    :VInternalVariable(std::move(var)), d(std::move(var.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

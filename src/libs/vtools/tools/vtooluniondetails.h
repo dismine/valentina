@@ -74,7 +74,7 @@ struct VToolUnionDetailsInitData : VAbstractToolInitData
  */
 class VToolUnionDetails : public VAbstractTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     static VToolUnionDetails *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                      VAbstractPattern *doc, VContainer *data);
@@ -113,7 +113,8 @@ protected:
     virtual void AddToFile() override;
     virtual void SetVisualization() override {}
 private:
-    Q_DISABLE_COPY(VToolUnionDetails)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VToolUnionDetails) // NOLINT
     /** @brief d1 first detail id. */
     quint32 d1id;
 

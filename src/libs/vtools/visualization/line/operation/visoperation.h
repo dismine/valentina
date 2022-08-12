@@ -36,7 +36,7 @@
 
 class VisOperation : public VisLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisOperation(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisOperation();
@@ -63,7 +63,7 @@ protected:
 
     void RefreshFlippedObjects(const QPointF &firstPoint, const QPointF &secondPoint);
 private:
-    Q_DISABLE_COPY(VisOperation)
+    Q_DISABLE_COPY_MOVE(VisOperation) // NOLINT
 };
 
 //---------------------------------------------------------------------------------------------------------------------

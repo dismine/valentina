@@ -65,7 +65,7 @@ struct VToolSinglePointInitData : VDrawToolInitData
  */
 class VToolSinglePoint: public VAbstractPoint, public VScenePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VToolSinglePoint(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes,
                      QGraphicsItem * parent = nullptr);
@@ -113,7 +113,7 @@ protected:
     static QPair<QString, QString> InitSegments(GOType curveType, qreal segLength, const VPointF *p, quint32 curveId,
                                                 VContainer *data, const QString &alias1, const QString &alias2);
 private:
-    Q_DISABLE_COPY(VToolSinglePoint) // NOLINT
+    Q_DISABLE_COPY_MOVE(VToolSinglePoint) // NOLINT
 };
 
 //---------------------------------------------------------------------------------------------------------------------

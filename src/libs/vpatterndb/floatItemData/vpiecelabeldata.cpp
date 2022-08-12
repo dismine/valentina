@@ -57,9 +57,9 @@ VPieceLabelData &VPieceLabelData::operator=(const VPieceLabelData &data)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VPieceLabelData::VPieceLabelData(const VPieceLabelData &&data) Q_DECL_NOTHROW
-    : VPatternLabelData(data),
-      d (data.d)
+VPieceLabelData::VPieceLabelData(VPieceLabelData &&data) Q_DECL_NOTHROW
+    : VPatternLabelData(std::move(data)),
+      d (std::move(data.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

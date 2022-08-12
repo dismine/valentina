@@ -48,7 +48,7 @@ namespace Ui
  */
 class DialogBisector final : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
 
     DialogBisector(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
@@ -96,7 +96,7 @@ protected:
     virtual void       closeEvent(QCloseEvent *event) override;
     virtual bool       IsValid() const final;
 private:
-    Q_DISABLE_COPY(DialogBisector)
+    Q_DISABLE_COPY_MOVE(DialogBisector) // NOLINT
 
     /** @brief ui keeps information about user interface */
     Ui::DialogBisector *ui;

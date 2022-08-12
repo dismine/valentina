@@ -36,7 +36,7 @@
 
 class SavePiecePathOptions : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     SavePiecePathOptions(quint32 pieceId, const VPiecePath &oldPath, const VPiecePath &newPath, VAbstractPattern *doc,
                          VContainer *data, quint32 id, QUndoCommand *parent = nullptr);
@@ -49,7 +49,8 @@ public:
     quint32      PathId() const;
     VPiecePath   NewPath() const;
 private:
-    Q_DISABLE_COPY(SavePiecePathOptions)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(SavePiecePathOptions) // NOLINT
 
     const VPiecePath m_oldPath;
     VPiecePath       m_newPath;

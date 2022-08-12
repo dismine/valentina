@@ -28,32 +28,31 @@
 
 #include "dialogaboutapp.h"
 #include "ui_dialogaboutapp.h"
-#include "../version.h"
 #include <QDate>
 #include <QDesktopServices>
 #include <QMessageBox>
 #include <QtDebug>
-#include "../core/vapplication.h"
 #include "../fervor/fvupdater.h"
+#include "../vmisc/projectversion.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vvalentinasettings.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogAboutApp::DialogAboutApp(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::DialogAboutApp),
-    isInitialized(false)
+    ui(new Ui::DialogAboutApp)
 {
     ui->setupUi(this);
 
     VAbstractValApplication::VApp()->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale())
                                                                            : setLocale(QLocale::c());
 
-    ui->label_Valentina_Version->setText(QString("Valentina %1").arg(APP_VERSION_STR));
-    ui->labelBuildRevision->setText(QString("Build revision: %1").arg(BUILD_REVISION));
+    ui->label_Valentina_Version->setText(QStringLiteral("Valentina %1").arg(APP_VERSION_STR));
+    ui->labelBuildRevision->setText(QStringLiteral("Build revision: %1").arg(QStringLiteral(BUILD_REVISION)));
     ui->label_QT_Version->setText(buildCompatibilityString());
 
-    QDate date = QLocale::c().toDate(QString(__DATE__).simplified(), QLatin1String("MMM d yyyy"));
-    ui->label_Valentina_Built->setText(tr("Built on %1 at %2").arg(date.toString(), __TIME__));
+    QDate date = QLocale::c().toDate(QStringLiteral(__DATE__).simplified(), QStringLiteral("MMM d yyyy"));
+    ui->label_Valentina_Built->setText(tr("Built on %1 at %2").arg(date.toString(), QStringLiteral(__TIME__)));
 
     ui->label_Legal_Stuff->setText(QApplication::translate("InternalStrings",
                                                            "The program is provided AS IS with NO WARRANTY OF ANY "
@@ -61,10 +60,11 @@ DialogAboutApp::DialogAboutApp(QWidget *parent) :
                                                            "AND FITNESS FOR A PARTICULAR PURPOSE."));
 
 
-    ui->pushButton_Web_Site->setText(tr("Web site : %1").arg(VER_COMPANYDOMAIN_STR));
+    ui->pushButton_Web_Site->setText(tr("Web site : %1").arg(QStringLiteral(VER_COMPANYDOMAIN_STR)));
     connect(ui->pushButton_Web_Site, &QPushButton::clicked, this, []()
     {
-        if (not QDesktopServices::openUrl(QUrl(QStringLiteral("https://%1").arg(VER_COMPANYDOMAIN_STR))))
+        if (not QDesktopServices::openUrl(
+                        QUrl(QStringLiteral("https://%1").arg(QStringLiteral(VER_COMPANYDOMAIN_STR)))))
         {
             qWarning() << tr("Cannot open your default browser");
         }
@@ -99,7 +99,7 @@ void DialogAboutApp::showEvent(QShowEvent *event)
         return;
     }
 
-    if (isInitialized)
+    if (m_isInitialized)
     {
         return;
     }
@@ -108,7 +108,7 @@ void DialogAboutApp::showEvent(QShowEvent *event)
     setMaximumSize(size());
     setMinimumSize(size());
 
-    isInitialized = true;//first show windows are held
+    m_isInitialized = true;//first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------

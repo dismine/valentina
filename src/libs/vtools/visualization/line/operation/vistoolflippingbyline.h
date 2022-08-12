@@ -35,7 +35,7 @@
 
 class VisToolFlippingByLine : public VisOperation
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolFlippingByLine(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolFlippingByLine() = default;
@@ -48,7 +48,8 @@ public:
     virtual int type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolFlippingByLine)};
 private:
-    Q_DISABLE_COPY(VisToolFlippingByLine)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolFlippingByLine) // NOLINT
     quint32         object2Id;
     VScaledEllipse *point1;
     VScaledEllipse *point2;

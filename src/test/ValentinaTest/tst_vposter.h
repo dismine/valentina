@@ -35,7 +35,7 @@ class QPrinter;
 
 class TST_VPoster : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit TST_VPoster(QObject *parent = nullptr);

@@ -50,7 +50,7 @@
  */
 class VTextGraphicsItem final : public VPieceItem
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VTextGraphicsItem(QGraphicsItem* pParent = nullptr);
     virtual ~VTextGraphicsItem() Q_DECL_EQ_DEFAULT;
@@ -85,7 +85,7 @@ signals:
     void SignalShrink();
 
 private:
-    Q_DISABLE_COPY(VTextGraphicsItem)
+    Q_DISABLE_COPY_MOVE(VTextGraphicsItem) // NOLINT
     QPointF      m_ptStartPos;
     QPointF      m_ptStart;
     QSizeF       m_szStart;

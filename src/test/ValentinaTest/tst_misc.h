@@ -31,9 +31,11 @@
 
 #include <QObject>
 
+#include "../vmisc/defglobal.h"
+
 class TST_Misc :public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_Misc(QObject *parent = nullptr);
 
@@ -50,7 +52,7 @@ private slots:
     void TestIssue485();
 
 private:
-    Q_DISABLE_COPY(TST_Misc)
+    Q_DISABLE_COPY_MOVE(TST_Misc) // NOLINT
 };
 
 #endif // TST_MISC_H

@@ -77,8 +77,8 @@ VLengthLine &VLengthLine::operator=(const VLengthLine &var)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLengthLine::VLengthLine(const VLengthLine &&var) Q_DECL_NOTHROW
-    :VInternalVariable(var), d(var.d)
+VLengthLine::VLengthLine(VLengthLine &&var) Q_DECL_NOTHROW
+    :VInternalVariable(std::move(var)), d(std::move(var.d))
 {}
 
 #ifdef Q_COMPILER_RVALUE_REFS

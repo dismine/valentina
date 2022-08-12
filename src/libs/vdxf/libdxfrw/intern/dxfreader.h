@@ -14,6 +14,7 @@
 #define DXFREADER_H
 
 #include "drw_textcodec.h"
+#include "../vmisc/defglobal.h"
 
 class dxfReader {
 public:
@@ -74,7 +75,7 @@ protected:
     unsigned long long int int64; //64 bits integer
     bool skip; //set to true for ascii dxf, false for binary
 private:
-    Q_DISABLE_COPY(dxfReader)
+    Q_DISABLE_COPY_MOVE(dxfReader) // NOLINT
     DRW_TextCodec decoder;
     bool m_bIgnoreComments {false};
 };

@@ -88,42 +88,50 @@ class QmuParserByteCode
 public:
     QmuParserByteCode();
     QmuParserByteCode(const QmuParserByteCode &a_ByteCode);
-    QmuParserByteCode& operator=(const QmuParserByteCode &a_ByteCode);
-    void          Assign(const QmuParserByteCode &a_ByteCode);
-    void          AddVar(qreal *a_pVar);
-    void          AddVal(qreal a_fVal);
-    void          AddOp(ECmdCode a_Oprt);
-    void          AddIfElse(ECmdCode a_Oprt);
-    void          AddAssignOp(qreal *a_pVar);
-    void          AddFun(generic_fun_type a_pFun, int a_iArgc);
-    void          AddBulkFun(generic_fun_type a_pFun, int a_iArgc);
-    void          AddStrFun(generic_fun_type a_pFun, int a_iArgc, int a_iIdx);
-    void          EnableOptimizer(bool bStat);
-    void          Finalize();
-    void          clear();
-    int           GetMaxStackSize() const;
-    int           GetSize() const;
-    const SToken* GetBase() const;
-    void          AsciiDump();
+    ~QmuParserByteCode()=default;
+
+    auto operator=(const QmuParserByteCode &a_ByteCode) -> QmuParserByteCode&;
+
+    void Assign(const QmuParserByteCode &a_ByteCode);
+    void AddVar(qreal *a_pVar);
+    void AddVal(qreal a_fVal);
+    void AddOp(ECmdCode a_Oprt);
+    void AddIfElse(ECmdCode a_Oprt);
+    void AddAssignOp(qreal *a_pVar);
+    void AddFun(generic_fun_type a_pFun, int a_iArgc);
+    void AddBulkFun(generic_fun_type a_pFun, int a_iArgc);
+    void AddStrFun(generic_fun_type a_pFun, int a_iArgc, int a_iIdx);
+    void EnableOptimizer(bool bStat);
+    void Finalize();
+    void clear();
+    auto GetMaxStackSize() const -> int;
+    auto GetSize() const -> int;
+    auto GetBase() const -> const SToken*;
+    void AsciiDump();
 private:
     /** @brief Token type for internal use only. */
-    typedef QmuParserToken<qreal, string_type> token_type;
+    using token_type = QmuParserToken<qreal, string_type>;
 
     /** @brief Token vector for storing the RPN. */
-    typedef QVector<SToken> rpn_type;
+    using rpn_type = QVector<SToken>;
 
     /** @brief Position in the Calculation array. */
-    unsigned m_iStackPos;
+    unsigned m_iStackPos{0};
 
     /** @brief Maximum size needed for the stack. */
-    unsigned m_iMaxStackSize;
+    unsigned m_iMaxStackSize{0};
 
     /** @brief The actual rpn storage. */
-    rpn_type m_vRPN;
+    rpn_type m_vRPN{};
 
-    bool     m_bEnableOptimizer;
+    bool m_bEnableOptimizer{true};
 
     void ConstantFolding(ECmdCode a_Oprt);
+
+    void OpPOW(int sz, bool &bOptimized);
+    void OpSUBADD(ECmdCode a_Oprt, int sz, bool &bOptimized);
+    void OpMUL(int sz, bool &bOptimized);
+    void OpDIV(int sz, bool &bOptimized);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -133,7 +141,7 @@ inline void QmuParserByteCode::EnableOptimizer(bool bStat)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline int QmuParserByteCode::GetMaxStackSize() const
+inline auto QmuParserByteCode::GetMaxStackSize() const -> int
 {
     return static_cast<int>(m_iMaxStackSize+1);
 }
@@ -143,7 +151,7 @@ inline int QmuParserByteCode::GetMaxStackSize() const
  * @brief Returns the number of entries in the bytecode.
  */
 // cppcheck-suppress unusedFunction
-inline int QmuParserByteCode::GetSize() const
+inline auto QmuParserByteCode::GetSize() const -> int
 {
     return m_vRPN.size();
 }

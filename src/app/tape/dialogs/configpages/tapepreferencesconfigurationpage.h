@@ -31,6 +31,8 @@
 
 #include <QWidget>
 
+#include "../vmisc/defglobal.h"
+
 namespace Ui
 {
     class TapePreferencesConfigurationPage;
@@ -38,17 +40,18 @@ namespace Ui
 
 class TapePreferencesConfigurationPage : public QWidget
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit TapePreferencesConfigurationPage(QWidget *parent = nullptr);
-    virtual ~TapePreferencesConfigurationPage();
+    ~TapePreferencesConfigurationPage() override;
 
-    QStringList Apply();
+    auto Apply() -> QStringList;
 protected:
-    virtual void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent* event) override;
 private:
-    Q_DISABLE_COPY(TapePreferencesConfigurationPage)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(TapePreferencesConfigurationPage) // NOLINT
     Ui::TapePreferencesConfigurationPage *ui;
     bool m_langChanged;
     bool m_systemChanged;

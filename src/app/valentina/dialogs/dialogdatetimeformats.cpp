@@ -37,7 +37,6 @@ DialogDateTimeFormats::DialogDateTimeFormats(const QDate &date, const QStringLis
       ui(new Ui::DialogDateTimeFormats),
       m_dateMode(true),
       m_date(date),
-      m_time(),
       m_predefined(predefinedFormats)
 {
     ui->setupUi(this);
@@ -51,7 +50,6 @@ DialogDateTimeFormats::DialogDateTimeFormats(const QTime &time, const QStringLis
     : QDialog(parent),
       ui(new Ui::DialogDateTimeFormats),
       m_dateMode(false),
-      m_date(),
       m_time(time),
       m_predefined(predefinedFormats)
 {
@@ -67,7 +65,7 @@ DialogDateTimeFormats::~DialogDateTimeFormats()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList DialogDateTimeFormats::GetFormats() const
+auto DialogDateTimeFormats::GetFormats() const -> QStringList
 {
     QStringList formats;
 
@@ -162,12 +160,12 @@ void DialogDateTimeFormats::SetFormatLines(const QStringList &predefined, const 
 
     int row = -1;
 
-    for (auto &item : predefined)
+    for (const auto &item : predefined)
     {
         ui->listWidget->insertItem(++row, AddListLine(item));
     }
 
-    for (auto &item : userDefined)
+    for (const auto &item : userDefined)
     {
         ui->listWidget->insertItem(++row, AddListLine(item));
     }
@@ -210,10 +208,10 @@ void DialogDateTimeFormats::SetupControls()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QListWidgetItem *DialogDateTimeFormats::AddListLine(const QString &format)
+auto DialogDateTimeFormats::AddListLine(const QString &format) -> QListWidgetItem *
 {
     const QString preview = m_dateMode ? m_date.toString(format) : m_time.toString(format);
-    QListWidgetItem *item = new QListWidgetItem(preview);
+    auto *item = new QListWidgetItem(preview);
     item->setData(Qt::UserRole, format);
     return item;
 }

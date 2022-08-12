@@ -31,6 +31,8 @@
 
 #include <QDialog>
 
+#include "../vmisc/defglobal.h"
+
 namespace Ui
 {
     class DialogMDataBase;
@@ -40,22 +42,22 @@ class QTreeWidgetItem;
 
 class DialogMDataBase : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogMDataBase(const QStringList &list, QWidget *parent = nullptr);
     explicit DialogMDataBase(QWidget *parent = nullptr);
-    virtual ~DialogMDataBase() override;
+    ~DialogMDataBase() override;
 
-    QStringList GetNewNames() const;
+    auto GetNewNames() const -> QStringList;
 
     void RetranslateGroups();
 
-    static QString ImgTag(const QString &number);
+    static auto ImgTag(const QString &number) -> QString;
 
 protected:
-    virtual void changeEvent(QEvent* event) override;
-    virtual bool eventFilter(QObject *target, QEvent *event) override;
+    void changeEvent(QEvent* event) override;
+    auto eventFilter(QObject *target, QEvent *event) -> bool override;
 
 private slots:
     void UpdateChecks(QTreeWidgetItem *item, int column);
@@ -65,48 +67,49 @@ private slots:
     void FilterMeasurements(const QString &search);
 
 private:
-    Q_DISABLE_COPY(DialogMDataBase)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogMDataBase) // NOLINT
     Ui::DialogMDataBase *ui;
-    bool selectMode;
-    QStringList list;
+    bool m_selectMode;
+    QStringList m_list{};
 
-    QTreeWidgetItem *groupA;
-    QTreeWidgetItem *groupB;
-    QTreeWidgetItem *groupC;
-    QTreeWidgetItem *groupD;
-    QTreeWidgetItem *groupE;
-    QTreeWidgetItem *groupF;
-    QTreeWidgetItem *groupG;
-    QTreeWidgetItem *groupH;
-    QTreeWidgetItem *groupI;
-    QTreeWidgetItem *groupJ;
-    QTreeWidgetItem *groupK;
-    QTreeWidgetItem *groupL;
-    QTreeWidgetItem *groupM;
-    QTreeWidgetItem *groupN;
-    QTreeWidgetItem *groupO;
-    QTreeWidgetItem *groupP;
-    QTreeWidgetItem *groupQ;
+    QTreeWidgetItem *m_groupA{nullptr};
+    QTreeWidgetItem *m_groupB{nullptr};
+    QTreeWidgetItem *m_groupC{nullptr};
+    QTreeWidgetItem *m_groupD{nullptr};
+    QTreeWidgetItem *m_groupE{nullptr};
+    QTreeWidgetItem *m_groupF{nullptr};
+    QTreeWidgetItem *m_groupG{nullptr};
+    QTreeWidgetItem *m_groupH{nullptr};
+    QTreeWidgetItem *m_groupI{nullptr};
+    QTreeWidgetItem *m_groupJ{nullptr};
+    QTreeWidgetItem *m_groupK{nullptr};
+    QTreeWidgetItem *m_groupL{nullptr};
+    QTreeWidgetItem *m_groupM{nullptr};
+    QTreeWidgetItem *m_groupN{nullptr};
+    QTreeWidgetItem *m_groupO{nullptr};
+    QTreeWidgetItem *m_groupP{nullptr};
+    QTreeWidgetItem *m_groupQ{nullptr};
 
     void InitDataBase(const QStringList &list = QStringList());
     void InitGroup(QTreeWidgetItem **group, const QString &groupName, const QStringList &mList,
                    const QStringList &list = QStringList());
-    void FilterGroup(QTreeWidgetItem *group, const QString &search);
+    static void FilterGroup(QTreeWidgetItem *group, const QString &search);
 
-    Q_REQUIRED_RESULT QTreeWidgetItem *AddGroup(const QString &text);
+    Q_REQUIRED_RESULT auto AddGroup(const QString &text) -> QTreeWidgetItem *;
 
     void AddMeasurement(QTreeWidgetItem *group, const QString &name, const QStringList &list);
 
     void ReadSettings();
     void WriteSettings();
 
-    QString ItemFullDescription(QTreeWidgetItem *item, bool showImage = true) const;
+    static auto ItemFullDescription(QTreeWidgetItem *item, bool showImage = true) -> QString;
 
-    void RetranslateGroup(QTreeWidgetItem *group, const QString &groupText, const QStringList &list);
-    void RetranslateMeasurement(QTreeWidgetItem *group, int index, const QString &name);
+    static void RetranslateGroup(QTreeWidgetItem *group, const QString &groupText, const QStringList &list);
+    static void RetranslateMeasurement(QTreeWidgetItem *group, int index, const QString &name);
 
-    void ChangeCheckState(QTreeWidgetItem *group, Qt::CheckState check);
-    Qt::CheckState GlobalCheckState() const;
+    static void ChangeCheckState(QTreeWidgetItem *group, Qt::CheckState check);
+    auto GlobalCheckState() const -> Qt::CheckState;
 };
 
 #endif // DIALOGMDATABASE_H

@@ -36,6 +36,8 @@
 #include "qmuparserdef.h"
 #include "qmutranslation.h"
 
+#include "../vmisc/defglobal.h"
+
 /** @file
     @brief This file defines the error class used by the parser.
 */
@@ -111,7 +113,8 @@ public:
     QString operator[] ( int a_iIdx ) const;
 
 private:
-    Q_DISABLE_COPY(QmuParserErrorMsg)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(QmuParserErrorMsg) // NOLINT
     QMap<int, QmuTranslation>  m_vErrMsg;  ///< A map with the predefined error messages
     static const self_type m_Instance;    ///< The instance pointer
 };

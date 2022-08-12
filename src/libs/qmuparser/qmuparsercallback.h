@@ -121,6 +121,6 @@ inline QmuParserCallback* QmuParserCallback::Clone() const
 
 } // namespace qmu
 
-Q_DECLARE_TYPEINFO(qmu::QmuParserCallback, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(qmu::QmuParserCallback, Q_MOVABLE_TYPE); // NOLINT
 
 #endif

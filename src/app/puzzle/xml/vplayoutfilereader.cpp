@@ -31,19 +31,22 @@
 #include <QXmlStreamAttributes>
 #include <ciso646>
 #include "vplayoutfilereader.h"
-#include "vplayoutfilewriter.h"
 #include "vplayoutliterals.h"
 #include "../layout/vpsheet.h"
 #include "../vlayout/vlayoutpiecepath.h"
 #include "../vlayout/vtextmanager.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/exception/vexceptionconversionerror.h"
+#include "../vpatterndb/floatItemData/floatitemdef.h"
+#include "../vgeometry/vgeometrydef.h"
+#include "../layout/vplayout.h"
+#include "../layout/vppiece.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
 QT_WARNING_DISABLE_INTEL(1418)
 
-Q_LOGGING_CATEGORY(MLReader, "mlReader")
+Q_LOGGING_CATEGORY(MLReader, "mlReader") // NOLINT
 
 QT_WARNING_POP
 
@@ -88,6 +91,7 @@ auto StringToPath(const QString &path) -> QVector<QPointF>
 {
     QVector<QPointF> p;
     QStringList points = path.split(ML::pointsSep);
+    p.reserve(points.size());
     for (const auto& point : points)
     {
         p.append(StringToPoint(point));
@@ -140,6 +144,7 @@ auto StringToLines(const QString &string) -> QVector<QLineF>
 {
     QStringList lines = string.split(ML::itemsSep);
     QVector<QLineF> path;
+    path.reserve(lines.size());
 
     for (const auto& line : lines)
     {
@@ -170,6 +175,7 @@ auto StringToMarkerShape(const QString &string) -> PlaceLabelImg
 {
     PlaceLabelImg shape;
     QStringList paths = string.split(ML::itemsSep);
+    shape.reserve(paths.size());
     for (const auto& path : paths)
     {
         shape.append(StringToPath(path));
@@ -956,7 +962,7 @@ auto VPLayoutFileReader::ReadAttributeBool(const QXmlStreamAttributes &attribs, 
     {
         VExceptionConversionError excep(message, name);
         excep.AddMoreInformation(e.ErrorMessage());
-        throw excep;
+        throw excep; // NOLINT(cert-err09-cpp)
     }
 
     return val;
@@ -983,7 +989,7 @@ auto VPLayoutFileReader::ReadAttributeDouble(const QXmlStreamAttributes &attribs
     {
         VExceptionConversionError excep(message, name);
         excep.AddMoreInformation(e.ErrorMessage());
-        throw excep;
+        throw excep; // NOLINT(cert-err09-cpp)
     }
     return param;
 }
@@ -1009,7 +1015,7 @@ auto VPLayoutFileReader::ReadAttributeUInt(const QXmlStreamAttributes &attribs, 
     {
         VExceptionConversionError excep(message, name);
         excep.AddMoreInformation(e.ErrorMessage());
-        throw excep;
+        throw excep; // NOLINT(cert-err09-cpp)
     }
     return param;
 }
@@ -1035,7 +1041,7 @@ auto VPLayoutFileReader::ReadAttributeInt(const QXmlStreamAttributes &attribs, c
     {
         VExceptionConversionError excep(message, name);
         excep.AddMoreInformation(e.ErrorMessage());
-        throw excep;
+        throw excep; // NOLINT(cert-err09-cpp)
     }
     return param;
 }

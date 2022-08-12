@@ -33,7 +33,7 @@
 
 class VisToolDuplicateDetail : public VisPath
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VisToolDuplicateDetail(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolDuplicateDetail() = default;
@@ -45,7 +45,7 @@ public:
     virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolDuplicateDetail)};
 private:
-    Q_DISABLE_COPY(VisToolDuplicateDetail)
+    Q_DISABLE_COPY_MOVE(VisToolDuplicateDetail) // NOLINT
     QPointF m_start;
     bool m_started;
     QPointF m_diff;

@@ -36,6 +36,8 @@
 #include <QString>
 #include <QtGlobal>
 
+#include "../vmisc/defglobal.h"
+
 namespace Ui
 {
     class DialogUndo;
@@ -45,7 +47,7 @@ enum class UndoButton {Undo, Fix, Cancel};
 
 class DialogUndo : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit DialogUndo(QWidget *parent = nullptr);
     UndoButton Result() const;
@@ -55,7 +57,8 @@ protected:
 private slots:
     void Cancel();
 private:
-    Q_DISABLE_COPY(DialogUndo)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogUndo) // NOLINT
     Ui::DialogUndo *ui;
     UndoButton result;
 };

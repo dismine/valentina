@@ -81,9 +81,9 @@ VCubicBezierPath &VCubicBezierPath::operator=(const VCubicBezierPath &curve)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VCubicBezierPath::VCubicBezierPath(const VCubicBezierPath &&curve) Q_DECL_NOTHROW
-    : VAbstractCubicBezierPath(curve),
-      d(curve.d)
+VCubicBezierPath::VCubicBezierPath(VCubicBezierPath &&curve) Q_DECL_NOTHROW
+    : VAbstractCubicBezierPath(std::move(curve)),
+      d(std::move(curve.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

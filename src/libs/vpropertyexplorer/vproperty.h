@@ -36,7 +36,9 @@
 #include <QtGlobal>
 
 #include "vpropertyexplorer_global.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 
 #include <ciso646>
 
@@ -64,7 +66,7 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 
 class VPROPERTYEXPLORERSHARED_EXPORT VProperty : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     enum DPC_DisplayColumn
     {
@@ -227,7 +229,7 @@ protected:
 private:
     // Provide access functions for the d_ptr
     Q_DECLARE_PRIVATE(VProperty)
-    Q_DISABLE_COPY(VProperty)
+    Q_DISABLE_COPY_MOVE(VProperty) // NOLINT
 };
 
 QT_WARNING_POP

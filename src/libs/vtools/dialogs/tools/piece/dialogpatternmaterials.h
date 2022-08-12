@@ -31,6 +31,8 @@
 
 #include <QDialog>
 
+#include "../vmisc/defglobal.h"
+
 namespace Ui
 {
     class DialogPatternMaterials;
@@ -40,7 +42,7 @@ class VComboBoxDelegate;
 
 class DialogPatternMaterials : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogPatternMaterials(const QMap<int, QString> &list, bool rememberPM, QWidget *parent = nullptr);
@@ -51,7 +53,8 @@ public:
     QStringList        GetKnownMaterials() const;
 
 private:
-    Q_DISABLE_COPY(DialogPatternMaterials)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogPatternMaterials) // NOLINT
     Ui::DialogPatternMaterials *ui;
     QStringList m_knownMaterials;
 

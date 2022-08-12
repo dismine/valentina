@@ -38,7 +38,7 @@ class QSvgRenderer;
 
 class VBackgroundSVGItem : public VBackgroundImageItem
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VBackgroundSVGItem(const VBackgroundPatternImage &image, VAbstractPattern *doc, QGraphicsItem *parent = nullptr);
     ~VBackgroundSVGItem() override;
@@ -53,7 +53,7 @@ private slots:
     void RepaintItem();
 
 private:
-    Q_DISABLE_COPY_MOVE(VBackgroundSVGItem)
+    Q_DISABLE_COPY_MOVE(VBackgroundSVGItem) // NOLINT
 
     QSvgRenderer *m_renderer{nullptr};
 

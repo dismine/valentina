@@ -45,7 +45,7 @@
 
 class VisToolMove : public VisOperation
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolMove(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolMove() = default;
@@ -67,7 +67,8 @@ public:
     virtual int type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolMove)};
 private:
-    Q_DISABLE_COPY(VisToolMove)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolMove) // NOLINT
     qreal           angle;
     qreal           rotationAngle;
     qreal           length;

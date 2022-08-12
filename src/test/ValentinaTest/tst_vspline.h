@@ -30,12 +30,13 @@
 #define TST_VSPLINE_H
 
 #include "../vtest/abstracttest.h"
+#include "../vmisc/defglobal.h"
 
 class VSpline;
 
 class TST_VSpline : public AbstractTest
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_VSpline(QObject *parent = nullptr);
 
@@ -57,7 +58,8 @@ private slots:
     void TestFlip();
 
 private:
-    Q_DISABLE_COPY(TST_VSpline)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(TST_VSpline) // NOLINT
     void CompareSplines(const VSpline &spl1, const VSpline &spl2) const;
 };
 

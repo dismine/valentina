@@ -41,13 +41,13 @@ struct VFinalMeasurement;
 
 class VPatternRecipe : public VDomDocument
 {
-    Q_DECLARE_TR_FUNCTIONS(VPatternRecipe)
+    Q_DECLARE_TR_FUNCTIONS(VPatternRecipe) // NOLINT
 public:
     explicit VPatternRecipe(VAbstractPattern *pattern, QObject *parent = nullptr);
     virtual ~VPatternRecipe() Q_DECL_EQ_DEFAULT;
 
 private:
-    Q_DISABLE_COPY(VPatternRecipe)
+    Q_DISABLE_COPY_MOVE(VPatternRecipe) // NOLINT
 
     VAbstractPattern *m_pattern;
 

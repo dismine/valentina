@@ -30,6 +30,8 @@
 
 #include <QDialog>
 
+#include "../vmisc/defglobal.h"
+
 namespace Ui
 {
     class DialogPuzzlePreferences;
@@ -42,19 +44,19 @@ class PuzzlePreferencesLayoutPage;
 
 class DialogPuzzlePreferences : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogPuzzlePreferences(QWidget *parent = nullptr);
-    virtual ~DialogPuzzlePreferences();
+    ~DialogPuzzlePreferences() override;
 
 signals:
     void UpdateProperties();
 
 protected:
-    virtual void showEvent(QShowEvent *event) override;
-    virtual void resizeEvent(QResizeEvent *event) override;
-    virtual void changeEvent(QEvent* event) override;
+    void showEvent(QShowEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
+    void changeEvent(QEvent* event) override;
 
 private slots:
     void Apply();
@@ -62,7 +64,8 @@ private slots:
     void PageChanged(QListWidgetItem *current, QListWidgetItem *previous);
 
 private:
-    Q_DISABLE_COPY(DialogPuzzlePreferences)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogPuzzlePreferences) // NOLINT
     Ui::DialogPuzzlePreferences *ui;
     bool m_isInitialized{false};
     PuzzlePreferencesConfigurationPage *m_configurationPage;

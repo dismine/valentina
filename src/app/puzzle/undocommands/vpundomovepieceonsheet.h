@@ -34,17 +34,17 @@
 
 class VPUndoMovePieceOnSheet : public VPUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VPUndoMovePieceOnSheet(const VPSheetPtr &sheet, const VPPiecePtr &piece, QUndoCommand *parent = nullptr);
-    virtual ~VPUndoMovePieceOnSheet()=default;
+    ~VPUndoMovePieceOnSheet() override =default;
 
-    virtual void undo() override;
-    virtual void redo() override;
-    virtual auto id() const -> int override;
+    void undo() override;
+    void redo() override;
+    auto id() const -> int override;
 
 private:
-    Q_DISABLE_COPY(VPUndoMovePieceOnSheet)
+    Q_DISABLE_COPY_MOVE(VPUndoMovePieceOnSheet) // NOLINT
 
     VPSheetWeakPtr m_oldSheet{};
     VPSheetWeakPtr m_sheet;

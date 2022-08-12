@@ -65,7 +65,7 @@ struct VToolBisectorInitData : VToolLinePointInitData
  */
 class VToolBisector : public VToolLinePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     static qreal   BisectorAngle(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint);
     static QPointF FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint,
@@ -92,7 +92,7 @@ protected:
     virtual void   ReadToolAttributes(const QDomElement &domElement) override;
     virtual void   SetVisualization() override;
 private:
-    Q_DISABLE_COPY(VToolBisector)
+    Q_DISABLE_COPY_MOVE(VToolBisector) // NOLINT
 
     /** @brief firstPointId id first point of angle. */
     quint32         firstPointId;

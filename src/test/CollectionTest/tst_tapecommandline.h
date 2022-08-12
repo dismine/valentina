@@ -30,10 +30,11 @@
 #define TST_TAPECOMMANDLINE_H
 
 #include "../vtest/abstracttest.h"
+#include "../vmisc/defglobal.h"
 
 class TST_TapeCommandLine : public AbstractTest
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_TapeCommandLine(QObject *parent = nullptr);
 
@@ -44,7 +45,7 @@ private slots:
     void cleanupTestCase();
 
 private:
-    Q_DISABLE_COPY(TST_TapeCommandLine)
+    Q_DISABLE_COPY_MOVE(TST_TapeCommandLine) // NOLINT
 
 };
 

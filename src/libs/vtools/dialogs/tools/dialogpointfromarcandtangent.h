@@ -46,7 +46,7 @@ namespace Ui
 
 class DialogPointFromArcAndTangent : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     DialogPointFromArcAndTangent(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
@@ -79,7 +79,7 @@ protected:
     virtual bool   IsValid() const final;
 
 private:
-    Q_DISABLE_COPY(DialogPointFromArcAndTangent)
+    Q_DISABLE_COPY_MOVE(DialogPointFromArcAndTangent) // NOLINT
 
     Ui::DialogPointFromArcAndTangent *ui;
 

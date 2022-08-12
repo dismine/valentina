@@ -48,7 +48,7 @@ class VPointF;
 
 class VSimplePoint : public VAbstractSimple, public VScenePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VSimplePoint(quint32 id, const QColor &currentColor, QObject *parent = nullptr);
     virtual ~VSimplePoint() = default;
@@ -94,7 +94,7 @@ protected:
     virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) override;
 
 private:
-    Q_DISABLE_COPY(VSimplePoint)
+    Q_DISABLE_COPY_MOVE(VSimplePoint) // NOLINT
 
     bool m_visualizationMode;
     bool m_alwaysHovered;

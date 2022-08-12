@@ -41,7 +41,7 @@
 
 class VisToolCurveIntersectAxis final : public VisLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolCurveIntersectAxis(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolCurveIntersectAxis() = default;
@@ -55,7 +55,8 @@ public:
     virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolLineIntersectAxis)};
 private:
-    Q_DISABLE_COPY(VisToolCurveIntersectAxis)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolCurveIntersectAxis) // NOLINT
     quint32         axisPointId;
     qreal           angle;
     VScaledEllipse *point;

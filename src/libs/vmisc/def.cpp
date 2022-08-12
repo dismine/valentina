@@ -281,11 +281,11 @@ void InitHighDpiScaling(int argc, char *argv[])
     }
 }
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTMark, (QLatin1String("tMark")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVMark, (QLatin1String("vMark")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVMark2, (QLatin1String("vMark2")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strUMark, (QLatin1String("uMark")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strBoxMark, (QLatin1String("boxMark")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTMark, (QLatin1String("tMark"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVMark, (QLatin1String("vMark"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVMark2, (QLatin1String("vMark2"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strUMark, (QLatin1String("uMark"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strBoxMark, (QLatin1String("boxMark"))) // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
 QString PassmarkLineTypeToString(PassmarkLineType type)

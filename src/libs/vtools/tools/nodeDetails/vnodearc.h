@@ -45,7 +45,7 @@
  */
 class VNodeArc :public VAbstractNode
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     static void Create(const VAbstractNodeInitData &initData);
 
@@ -60,7 +60,8 @@ protected:
     virtual void ShowNode() override {}
     virtual void HideNode() override {}
 private:
-    Q_DISABLE_COPY(VNodeArc)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VNodeArc) // NOLINT
 
     explicit VNodeArc(const VAbstractNodeInitData &initData, QObject *qoParent = nullptr);
 };

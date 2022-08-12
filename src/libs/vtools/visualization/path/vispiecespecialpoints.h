@@ -35,7 +35,7 @@ class VSimplePoint;
 
 class VisPieceSpecialPoints : public VisPath
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VisPieceSpecialPoints(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisPieceSpecialPoints() Q_DECL_EQ_DEFAULT;
@@ -49,7 +49,7 @@ public:
     virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::PieceSpecialPoints)};
 private:
-    Q_DISABLE_COPY(VisPieceSpecialPoints)
+    Q_DISABLE_COPY_MOVE(VisPieceSpecialPoints) // NOLINT
     QVector<VSimplePoint *> m_points;
     QVector<quint32>        m_spoints;
     bool                    m_showRect;

@@ -39,7 +39,7 @@
 
 class RenamePP :public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     RenamePP(VAbstractPattern *doc, const QString &newPPname, QComboBox *combo, QUndoCommand *parent = nullptr);
     virtual ~RenamePP() override;
@@ -51,7 +51,8 @@ public:
     QString      getNewPPname() const;
     QString      getOldPPname() const;
 private:
-    Q_DISABLE_COPY(RenamePP)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(RenamePP) // NOLINT
     QComboBox *combo;
     QString   newPPname;
     QString   oldPPname;

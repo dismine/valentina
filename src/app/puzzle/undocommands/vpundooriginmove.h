@@ -34,23 +34,23 @@
 
 class VPUndoOriginMove : public VPUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VPUndoOriginMove(const VPSheetPtr &sheet, const VPTransformationOrigon &origin, bool allowMerge = false,
                      QUndoCommand *parent = nullptr);
-    virtual ~VPUndoOriginMove()=default;
+    ~VPUndoOriginMove() override =default;
 
-    virtual void undo() override;
-    virtual void redo() override;
+    void undo() override;
+    void redo() override;
     // cppcheck-suppress unusedFunction
-    virtual auto mergeWith(const QUndoCommand *command) -> bool override;
-    virtual auto id() const -> int override;
+    auto mergeWith(const QUndoCommand *command) -> bool override;
+    auto id() const -> int override;
 
     auto Sheet() const -> VPSheetWeakPtr;
     auto Origin() const -> const VPTransformationOrigon &;
 
 private:
-    Q_DISABLE_COPY(VPUndoOriginMove)
+    Q_DISABLE_COPY_MOVE(VPUndoOriginMove) // NOLINT
 
     VPSheetWeakPtr         m_sheet;
     VPTransformationOrigon m_oldOrigin{};

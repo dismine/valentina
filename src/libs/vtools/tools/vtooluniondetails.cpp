@@ -42,7 +42,6 @@
 #include <new>
 
 #include "../dialogs/tools/dialoguniondetails.h"
-#include "../ifc/xml/vabstractconverter.h"
 #include "../ifc/xml/vdomdocument.h"
 #include "../ifc/xml/vpatternconverter.h"
 #include "../ifc/exception/vexceptionwrongid.h"
@@ -56,7 +55,6 @@
 #include "../vgeometry/vspline.h"
 #include "../vgeometry/vsplinepoint.h"
 #include "../vgeometry/vplacelabelitem.h"
-#include "../vmisc/diagnostic.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpiecepath.h"
@@ -71,7 +69,6 @@
 #include "nodeDetails/vtoolpin.h"
 #include "nodeDetails/vtoolplacelabel.h"
 #include "vdatatool.h"
-#include "vnodedetail.h"
 #include "vtoolseamallowance.h"
 
 const QString VToolUnionDetails::ToolType         = QStringLiteral("unionDetails");
@@ -93,7 +90,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
 QT_WARNING_DISABLE_INTEL(1418)
 
-Q_LOGGING_CATEGORY(vToolUnion, "v.toolUnion")
+Q_LOGGING_CATEGORY(vToolUnion, "v.toolUnion") // NOLINT
 
 QT_WARNING_POP
 

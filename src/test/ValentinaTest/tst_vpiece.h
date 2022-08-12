@@ -30,10 +30,11 @@
 #define TST_VDETAIL_H
 
 #include "../vtest/abstracttest.h"
+#include "../vmisc/defglobal.h"
 
 class TST_VPiece : public AbstractTest
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_VPiece(QObject *parent = nullptr);
 
@@ -43,7 +44,7 @@ private slots:
     void TestSAPassmark();
 
 private:
-    Q_DISABLE_COPY(TST_VPiece)
+    Q_DISABLE_COPY_MOVE(TST_VPiece) // NOLINT
 };
 
 #endif // TST_VDETAIL_H

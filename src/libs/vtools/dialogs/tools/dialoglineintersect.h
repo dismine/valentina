@@ -48,7 +48,7 @@ namespace Ui
  */
 class DialogLineIntersect : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     DialogLineIntersect(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogLineIntersect() override;
@@ -82,7 +82,7 @@ protected:
     virtual void            SaveData() override;
     virtual bool            IsValid() const final;
 private:
-    Q_DISABLE_COPY(DialogLineIntersect)
+    Q_DISABLE_COPY_MOVE(DialogLineIntersect) // NOLINT
 
     /** @brief ui keeps information about user interface */
     Ui::DialogLineIntersect *ui;

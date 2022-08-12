@@ -80,7 +80,8 @@ public:
 protected:
     virtual int metric(PaintDeviceMetric metric) const override;
 private:
-    Q_DISABLE_COPY(VDxfPaintDevice)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VDxfPaintDevice) // NOLINT
     VDxfEngine *engine;
     QString     fileName;
 };

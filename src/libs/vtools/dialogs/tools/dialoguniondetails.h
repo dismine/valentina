@@ -48,7 +48,7 @@ namespace Ui
  */
 class DialogUnionDetails : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     DialogUnionDetails(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogUnionDetails() override;
@@ -64,7 +64,7 @@ public slots:
 protected:
     virtual bool IsValid() const final {return true;}
 private:
-    Q_DISABLE_COPY(DialogUnionDetails)
+    Q_DISABLE_COPY_MOVE(DialogUnionDetails) // NOLINT
 
     /** @brief ui keeps information about user interface */
     Ui::DialogUnionDetails *ui;

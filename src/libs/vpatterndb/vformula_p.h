@@ -44,7 +44,7 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
 class VFormulaData : public QSharedData
 {
-    Q_DECLARE_TR_FUNCTIONS(VFormulaData)
+    Q_DECLARE_TR_FUNCTIONS(VFormulaData) // NOLINT
 public:
   VFormulaData()
   {}

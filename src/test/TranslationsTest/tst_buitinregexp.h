@@ -38,7 +38,7 @@ class VTranslateVars;
 
 class TST_BuitInRegExp : public TST_AbstractRegExp
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_BuitInRegExp(const QString &locale, QObject *parent = nullptr);
     virtual ~TST_BuitInRegExp() Q_DECL_EQ_DEFAULT;
@@ -66,7 +66,7 @@ private slots:
     void cleanupTestCase();
 
 private:
-    Q_DISABLE_COPY(TST_BuitInRegExp)
+    Q_DISABLE_COPY_MOVE(TST_BuitInRegExp) // NOLINT
 };
 
 #endif // TST_BUITINREGEXP_H

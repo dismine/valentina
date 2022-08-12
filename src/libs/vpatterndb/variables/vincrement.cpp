@@ -72,8 +72,8 @@ VIncrement &VIncrement::operator=(const VIncrement &incr)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VIncrement::VIncrement(const VIncrement &&incr) Q_DECL_NOTHROW
-    :VVariable(incr), d(incr.d)
+VIncrement::VIncrement(VIncrement &&incr) Q_DECL_NOTHROW
+    :VVariable(std::move(incr)), d(std::move(incr.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -29,33 +29,24 @@
 #include "mainwindowsnogui.h"
 #include "core/vapplication.h"
 #include "../vpatterndb/vcontainer.h"
-#include "../vobj/vobjpaintdevice.h"
-#include "../vdxf/vdxfpaintdevice.h"
 #include "dialogs/dialoglayoutsettings.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vmisc/dialogs/dialogexporttocsv.h"
 #include "../vmisc/qxtcsvmodel.h"
 #include "../vmisc/compatibility.h"
+#include "../vmisc/vsysexits.h"
 #include "../vformat/vmeasurements.h"
-#include "../vformat/vwatermark.h"
 #include "../vlayout/vlayoutgenerator.h"
 #include "dialogs/dialoglayoutprogress.h"
 #include "dialogs/dialogsavelayout.h"
-#include "dialogs/dialoglayoutscale.h"
 #include "../vlayout/vposter.h"
 #include "../vlayout/vlayoutexporter.h"
-#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
-#include "../vpatterndb/floatItemData/vpatternlabeldata.h"
-#include "../vpatterndb/floatItemData/vgrainlinedata.h"
-#include "../vpatterndb/measurements.h"
 #include "../vpatterndb/calculator.h"
 #include "../vtools/tools/vabstracttool.h"
-#include "../vtools/tools/vtoolseamallowance.h"
 #include "../ifc/xml/vvstconverter.h"
 #include "../ifc/xml/vvitconverter.h"
-#include "../ifc/xml/vwatermarkconverter.h"
-#include "../vlayout/vrawlayout.h"
 #include "../vmisc/vvalentinasettings.h"
+#include "../vdxf/libdxfrw/drw_base.h"
 
 #include <QFileDialog>
 #include <QFileInfo>
@@ -81,7 +72,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
 QT_WARNING_DISABLE_INTEL(1418)
 
-Q_LOGGING_CATEGORY(vMainNoGUIWindow, "v.mainnoguiwindow")
+Q_LOGGING_CATEGORY(vMainNoGUIWindow, "v.mainnoguiwindow") // NOLINT
 
 QT_WARNING_POP
 
@@ -427,7 +418,7 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
         ShowLayoutError(nestingState);
         if (not VApplication::IsGUIMode())
         {
-            qApp->exit(V_EX_DATAERR);
+            QCoreApplication::exit(V_EX_DATAERR);
         }
         return false;
     }
@@ -1294,7 +1285,7 @@ bool MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, boo
                                              .arg(i+1)));
                     if (not VApplication::IsGUIMode())
                     {
-                        qApp->exit(V_EX_DATAERR);
+                        QCoreApplication::exit(V_EX_DATAERR);
                     }
                     return false;
                 }
@@ -1305,7 +1296,7 @@ bool MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, boo
                           qUtf8Printable(tr("Parser error at line %1: %2.").arg(i+1).arg(e.GetMsg())));
                 if (not VApplication::IsGUIMode())
                 {
-                    qApp->exit(V_EX_DATAERR);
+                    QCoreApplication::exit(V_EX_DATAERR);
                 }
                 return false;
             }
@@ -1323,7 +1314,7 @@ bool MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, boo
                   qUtf8Printable(tr("File error %1.").arg(error)));
         if (not VApplication::IsGUIMode())
         {
-            qApp->exit(V_EX_CANTCREAT);
+            QCoreApplication::exit(V_EX_CANTCREAT);
         }
     }
 
@@ -1380,7 +1371,7 @@ QSharedPointer<VMeasurements> MainWindowsNoGUI::OpenMeasurementFile(const QStrin
 
         if (not VApplication::IsGUIMode())
         {
-            qApp->exit(V_EX_NOINPUT);
+            QCoreApplication::exit(V_EX_NOINPUT);
         }
         return m;
     }

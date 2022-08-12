@@ -42,20 +42,20 @@ namespace Ui
 
 class DialogFinalMeasurements : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogFinalMeasurements(VPattern *doc, QWidget *parent = nullptr);
-    virtual ~DialogFinalMeasurements();
+    ~DialogFinalMeasurements() override;
 
-    QVector<VFinalMeasurement> FinalMeasurements() const;
+    auto FinalMeasurements() const -> QVector<VFinalMeasurement>;
 
 protected:
-    virtual void closeEvent ( QCloseEvent * event ) override;
-    virtual void changeEvent ( QEvent * event) override;
-    virtual bool eventFilter(QObject *object, QEvent *event) override;
-    virtual void showEvent( QShowEvent *event ) override;
-    virtual void resizeEvent(QResizeEvent *event) override;
+    void closeEvent ( QCloseEvent * event ) override;
+    void changeEvent ( QEvent * event) override;
+    auto eventFilter(QObject *object, QEvent *event) -> bool override;
+    void showEvent( QShowEvent *event ) override;
+    void resizeEvent(QResizeEvent *event) override;
 private slots:
     void ShowFinalMeasurementDetails();
     void Add();
@@ -69,7 +69,7 @@ private slots:
     void Fx();
     void FullUpdateFromFile();
 private:
-    Q_DISABLE_COPY(DialogFinalMeasurements)
+    Q_DISABLE_COPY_MOVE(DialogFinalMeasurements) // NOLINT
     Ui::DialogFinalMeasurements *ui;
     /** @brief doc dom document container */
     VPattern                    *m_doc;
@@ -86,13 +86,13 @@ private:
     void ShowUnits();
 
     void AddCell(const QString &text, int row, int column, int aligment, bool ok = true);
-    bool EvalUserFormula(const QString &formula, bool fromUser);
+    auto EvalUserFormula(const QString &formula, bool fromUser) -> bool;
     void Controls();
     void EnableDetails(bool enabled);
 
     void UpdateTree();
 
-    qreal EvalFormula(const QString &formula, bool &ok);
+    auto EvalFormula(const QString &formula, bool &ok) -> qreal;
 
     void InitSearch();
     void InitSearchHistory();
@@ -101,7 +101,7 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QVector<VFinalMeasurement> DialogFinalMeasurements::FinalMeasurements() const
+inline auto DialogFinalMeasurements::FinalMeasurements() const -> QVector<VFinalMeasurement>
 {
     return m_measurements;
 }

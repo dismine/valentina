@@ -40,16 +40,16 @@ namespace Ui
 
 class PuzzlePreferencesLayoutPage : public QWidget
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit PuzzlePreferencesLayoutPage(QWidget *parent = nullptr);
-    ~PuzzlePreferencesLayoutPage();
+    ~PuzzlePreferencesLayoutPage() override;
 
-    QStringList Apply();
+    auto Apply() -> QStringList;
 
 protected:
-    virtual void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent* event) override;
 
 private slots:
     void ConvertPaperSize();
@@ -62,21 +62,22 @@ private slots:
     void SwapTileOrientation(bool checked);
 
 private:
-    Q_DISABLE_COPY(PuzzlePreferencesLayoutPage)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(PuzzlePreferencesLayoutPage) // NOLINT
     Ui::PuzzlePreferencesLayoutPage *ui;
     Unit m_oldLayoutUnit{Unit::Mm};
     bool m_settingsChanged{false};
 
     void InitLayoutUnits();
 
-    QSizeF Template(VAbstractLayoutDialog::PaperSizeTemplate t) const;
-    QSizeF SheetTemplate() const;
-    QSizeF TileTemplate() const;
+    auto Template(VAbstractLayoutDialog::PaperSizeTemplate t) const -> QSizeF;
+    auto SheetTemplate() const -> QSizeF;
+    auto TileTemplate() const -> QSizeF;
 
     void MinimumSheetPaperSize();
     void MinimumTilePaperSize();
 
-    Unit LayoutUnit() const;
+    auto LayoutUnit() const -> Unit;
     void SetLayoutUnit(Unit unit);
 
     void SheetSize(const QSizeF &size);
@@ -87,10 +88,10 @@ private:
     void SheetPaperSizeChanged();
     void TilePaperSizeChanged();
 
-    QMarginsF GetSheetMargins() const;
+    auto GetSheetMargins() const -> QMarginsF;
     void SetSheetMargins(const QMarginsF &value);
 
-    QMarginsF GetTileMargins() const;
+    auto GetTileMargins() const -> QMarginsF;
     void SetTileMargins(const QMarginsF &value);
 
     void SetPieceGap(qreal gap);

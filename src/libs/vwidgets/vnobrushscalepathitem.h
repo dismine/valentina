@@ -50,7 +50,7 @@ protected:
     enum { Type = UserType + static_cast<int>(Vis::NoBrush)};
 
 private:
-    Q_DISABLE_COPY(VNoBrushScalePathItem)
+    Q_DISABLE_COPY_MOVE(VNoBrushScalePathItem) // NOLINT
     qreal m_defaultWidth;
 };
 

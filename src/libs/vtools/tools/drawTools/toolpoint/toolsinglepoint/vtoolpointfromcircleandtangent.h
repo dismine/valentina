@@ -63,7 +63,7 @@ struct VToolPointFromCircleAndTangentInitData : VToolSinglePointInitData
 
 class VToolPointFromCircleAndTangent : public VToolSinglePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     virtual void setDialog() override;
     static VToolPointFromCircleAndTangent *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
@@ -95,7 +95,7 @@ protected:
     virtual void ReadToolAttributes(const QDomElement &domElement) override;
     virtual void SetVisualization() override;
 private:
-    Q_DISABLE_COPY(VToolPointFromCircleAndTangent)
+    Q_DISABLE_COPY_MOVE(VToolPointFromCircleAndTangent) // NOLINT
 
     quint32 circleCenterId;
     quint32 tangentPointId;

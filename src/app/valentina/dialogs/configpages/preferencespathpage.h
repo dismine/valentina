@@ -31,6 +31,8 @@
 
 #include <QWidget>
 
+#include "../vmisc/defglobal.h"
+
 namespace Ui
 {
     class PreferencesPathPage;
@@ -38,23 +40,24 @@ namespace Ui
 
 class PreferencesPathPage : public QWidget
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit PreferencesPathPage(QWidget *parent = nullptr);
-    virtual ~PreferencesPathPage();
+    ~PreferencesPathPage() override;
 
-    QStringList Apply();
+    auto Apply() -> QStringList;
 
 protected:
-    virtual void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent* event) override;
 
 private slots:
     void DefaultPath();
     void EditPath();
 
 private:
-    Q_DISABLE_COPY(PreferencesPathPage)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(PreferencesPathPage) // NOLINT
     Ui::PreferencesPathPage *ui;
 
     void InitTable();

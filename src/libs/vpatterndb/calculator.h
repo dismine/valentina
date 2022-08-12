@@ -68,7 +68,7 @@ protected:
     static qreal* VarFactory(const QString &a_szName, void *a_pUserData);
     static qreal Warning(const QString &warningMsg, qreal value);
 private:
-    Q_DISABLE_COPY(Calculator)
+    Q_DISABLE_COPY_MOVE(Calculator) // NOLINT
     QVector<QSharedPointer<qreal>> m_varsValues;
     const QHash<QString, QSharedPointer<VInternalVariable> > *m_vars;
 };

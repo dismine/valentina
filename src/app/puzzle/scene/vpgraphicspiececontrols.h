@@ -32,7 +32,7 @@
 #include <QGraphicsObject>
 
 #include "scenedef.h"
-#include "../layout/vpsheet.h"
+#include "../layout/layoutdef.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
@@ -64,6 +64,7 @@ class VPGraphicsTransformationOrigin : public QGraphicsObject
     Q_OBJECT // NOLINT
 public:
     explicit VPGraphicsTransformationOrigin(const VPLayoutPtr &layout, QGraphicsItem * parent = nullptr);
+    ~VPGraphicsTransformationOrigin() override = default;
 
     auto type() const -> int override {return Type;}
     enum { Type = UserType + static_cast<int>(PGraphicsItem::TransformationOrigin)};
@@ -86,6 +87,7 @@ protected:
     void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
 
 private:
+    // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VPGraphicsTransformationOrigin) // NOLINT
 
     bool            m_originVisible{true};
@@ -103,6 +105,7 @@ class VPGraphicsPieceControls : public QGraphicsObject
     Q_OBJECT // NOLINT
 public:
     explicit VPGraphicsPieceControls(const VPLayoutPtr &layout, QGraphicsItem * parent = nullptr);
+    ~VPGraphicsPieceControls() override = default;
 
     auto type() const -> int override {return Type;}
     enum { Type = UserType + static_cast<int>(PGraphicsItem::Handles)};

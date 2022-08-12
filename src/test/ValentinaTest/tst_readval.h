@@ -34,9 +34,11 @@
 #include <QObject>
 #include <QLocale>
 
+#include "../vmisc/defglobal.h"
+
 class TST_ReadVal : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_ReadVal(QObject *parent = nullptr);
 private slots:
@@ -46,7 +48,8 @@ private slots:
     void TestInvalidData();
     void cleanupTestCase();
 private:
-    Q_DISABLE_COPY(TST_ReadVal)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(TST_ReadVal) // NOLINT
     QLocale m_systemLocale;
 
     void PrepareVal(qreal val, const QLocale &locale);

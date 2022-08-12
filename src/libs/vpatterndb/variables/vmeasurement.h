@@ -60,7 +60,7 @@ public:
 
     VMeasurement &operator=(const VMeasurement &m);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VMeasurement(const VMeasurement &&m) Q_DECL_NOTHROW;
+    VMeasurement(VMeasurement &&m) Q_DECL_NOTHROW;
     VMeasurement &operator=(VMeasurement &&m) Q_DECL_NOTHROW;
 #endif
 
@@ -127,6 +127,6 @@ private:
     qreal Correction() const;
 };
 
-Q_DECLARE_TYPEINFO(VMeasurement, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VMeasurement, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VMULTISIZETABLEROW_H

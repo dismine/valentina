@@ -31,6 +31,8 @@
 
 #include <QWidget>
 
+#include "../vmisc/defglobal.h"
+
 class VAbstractPattern;
 class VContainer;
 class VPiece;
@@ -43,11 +45,11 @@ namespace Ui
 
 class VWidgetDetails : public QWidget
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit VWidgetDetails(VContainer *data, VAbstractPattern *doc, QWidget *parent = nullptr);
-    virtual ~VWidgetDetails();
+    ~VWidgetDetails() override;
 
 signals:
     void Highlight(quint32 id);
@@ -58,7 +60,7 @@ public slots:
     void ToggledPiece(quint32 id);
 
 protected:
-    virtual void changeEvent ( QEvent * event) override;
+    void changeEvent ( QEvent * event) override;
 
 private slots:
     void InLayoutStateChanged(int row, int column);
@@ -67,7 +69,8 @@ private slots:
     void on_checkBoxHideNotInLayout_stateChanged();
 
 private:
-    Q_DISABLE_COPY(VWidgetDetails)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VWidgetDetails) // NOLINT
     Ui::VWidgetDetails *ui;
     VAbstractPattern   *m_doc;
     VContainer         *m_data;
@@ -77,8 +80,8 @@ private:
     void ToggleSectionDetails(bool select);
     void ToggledPieceItem(QTableWidgetItem *item);
 
-    Q_REQUIRED_RESULT QTableWidgetItem *PrepareInLayoutColumnCell(const VPiece &det, quint32 id) const;
-    Q_REQUIRED_RESULT QTableWidgetItem *PreparePieceNameColumnCell(const VPiece &det) const;
+    static Q_REQUIRED_RESULT auto PrepareInLayoutColumnCell(const VPiece &det, quint32 id) -> QTableWidgetItem *;
+    static Q_REQUIRED_RESULT auto PreparePieceNameColumnCell(const VPiece &det) -> QTableWidgetItem *;
 };
 
 #endif // VWIDGETDETAILS_H

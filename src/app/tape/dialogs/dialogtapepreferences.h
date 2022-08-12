@@ -31,6 +31,8 @@
 
 #include <QDialog>
 
+#include "../vmisc/defglobal.h"
+
 namespace Ui
 {
     class DialogTapePreferences;
@@ -42,25 +44,26 @@ class QListWidgetItem;
 
 class DialogTapePreferences : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogTapePreferences(QWidget *parent = nullptr);
-    virtual ~DialogTapePreferences();
+    ~DialogTapePreferences() override;
 signals:
     void UpdateProperties();
 protected:
-    virtual void showEvent(QShowEvent *event) override;
-    virtual void resizeEvent(QResizeEvent *event) override;
-    virtual void changeEvent(QEvent* event) override;
+    void showEvent(QShowEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
+    void changeEvent(QEvent* event) override;
 private slots:
     void Apply();
     void Ok();
     void PageChanged(QListWidgetItem *current, QListWidgetItem *previous);
 private:
-    Q_DISABLE_COPY(DialogTapePreferences)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogTapePreferences) // NOLINT
     Ui::DialogTapePreferences *ui;
-    bool m_isInitialized;
+    bool m_isInitialized{false};
     TapePreferencesConfigurationPage *m_configurationPage;
     TapePreferencesPathPage          *m_pathPage;
 };

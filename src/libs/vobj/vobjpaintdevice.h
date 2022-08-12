@@ -36,6 +36,8 @@
 #include <QString>
 #include <QtGlobal>
 
+#include "../vmisc/defglobal.h"
+
 class QIODevice;
 class VObjEngine;
 
@@ -61,7 +63,8 @@ public:
 protected:
     virtual int metric(PaintDeviceMetric metric) const override;
 private:
-    Q_DISABLE_COPY(VObjPaintDevice)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VObjPaintDevice) // NOLINT
     QSharedPointer<VObjEngine> engine;
     QString     fileName;
     uint        owns_iodevice;

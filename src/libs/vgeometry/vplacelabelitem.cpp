@@ -228,8 +228,8 @@ VPlaceLabelItem &VPlaceLabelItem::operator=(const VPlaceLabelItem &item)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VPlaceLabelItem::VPlaceLabelItem(const VPlaceLabelItem &&item) Q_DECL_NOTHROW
- : VPointF(item), d(item.d)
+VPlaceLabelItem::VPlaceLabelItem(VPlaceLabelItem &&item) Q_DECL_NOTHROW
+    : VPointF(std::move(item)), d(std::move(item.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

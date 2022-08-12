@@ -52,7 +52,7 @@ Q_DECLARE_LOGGING_CATEGORY(lBank)
 
 class VBank
 {
-    Q_DECLARE_TR_FUNCTIONS(VBank)
+    Q_DECLARE_TR_FUNCTIONS(VBank) // NOLINT
 public:
     VBank();
 
@@ -86,7 +86,7 @@ public:
     bool IsRotationNeeded() const;
 
 private:
-    Q_DISABLE_COPY(VBank)
+    Q_DISABLE_COPY_MOVE(VBank) // NOLINT
     QVector<VLayoutPiece> details{};
 
     QMap<uint, QHash<int, qint64>> unsorted{};

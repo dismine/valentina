@@ -55,7 +55,8 @@ public:
     {}
 
 private:
-    Q_DISABLE_COPY(VPropertyModelPrivate)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VPropertyModelPrivate) // NOLINT
 };
 
 }

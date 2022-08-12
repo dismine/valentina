@@ -30,7 +30,13 @@
 
 #include "../vmisc/def.h"
 
-Q_LOGGING_CATEGORY(vTool, "v.tool")
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
+QT_WARNING_DISABLE_INTEL(1418)
+
+Q_LOGGING_CATEGORY(vTool, "v.tool") // NOLINT
+
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

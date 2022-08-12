@@ -556,7 +556,7 @@ private:
 };
 
 Q_DECLARE_METATYPE(CustomSARecord)
-Q_DECLARE_TYPEINFO(CustomSARecord, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(CustomSARecord, Q_MOVABLE_TYPE); // NOLINT
 /****************************************************************************
 ** This file is derived from code bearing the following notice:
 ** The sole author of this file, Adam Higerd, has explicitly disclaimed all
@@ -611,7 +611,7 @@ protected:
     }
 
 private:
-    Q_DISABLE_COPY(QxtPrivate)
+    Q_DISABLE_COPY_MOVE(QxtPrivate) // NOLINT
     PUB* qxt_p_ptr;
 };
 
@@ -651,7 +651,7 @@ public:
     return static_cast<PVT*>(pvt);
     }
 private:
-    Q_DISABLE_COPY(QxtPrivateInterface)
+    Q_DISABLE_COPY_MOVE(QxtPrivateInterface) // NOLINT
     QxtPrivate<PUB>* pvt;
 };
 

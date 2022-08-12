@@ -169,7 +169,7 @@ bool VAbstractPattern::patternLabelWasChanged = false;
 
 namespace
 {
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, dimensionDefValue, (QLatin1String("-1")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, dimensionDefValue, (QLatin1String("-1"))) // NOLINT
 
 void ReadExpressionAttribute(QVector<VFormulaField> &expressions, const QDomElement &element, const QString &attribute)
 {

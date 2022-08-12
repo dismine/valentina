@@ -59,7 +59,7 @@ struct VToolLinePointInitData : VToolSinglePointInitData
  */
 class VToolLinePoint : public VToolSinglePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VToolLinePoint(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine, const
                    QString &lineColor, const QString &formula, const quint32 &basePointId, const qreal &angle,
@@ -108,7 +108,7 @@ protected:
     virtual void      hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
     virtual QString   MakeToolTip() const override;
 private:
-    Q_DISABLE_COPY(VToolLinePoint)
+    Q_DISABLE_COPY_MOVE(VToolLinePoint) // NOLINT
 };
 
 #endif // VTOOLLINEPOINT_H

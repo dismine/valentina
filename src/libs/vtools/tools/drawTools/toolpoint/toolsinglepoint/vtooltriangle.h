@@ -66,7 +66,7 @@ struct VToolTriangleInitData : VToolSinglePointInitData
  */
 class VToolTriangle : public VToolSinglePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     virtual void   setDialog() override;
     static VToolTriangle *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
@@ -106,7 +106,7 @@ protected:
 private slots:
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
 private:
-    Q_DISABLE_COPY(VToolTriangle)
+    Q_DISABLE_COPY_MOVE(VToolTriangle) // NOLINT
     /** @brief axisP1Id id first axis point. */
     quint32        axisP1Id;
 

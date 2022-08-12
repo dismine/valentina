@@ -131,8 +131,8 @@ VGObject &VGObject::operator=(const VGObject &obj)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VGObject::VGObject(const VGObject &&obj) Q_DECL_NOTHROW
-    :d (obj.d)
+VGObject::VGObject(VGObject &&obj) Q_DECL_NOTHROW
+    :d (std::move(obj.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

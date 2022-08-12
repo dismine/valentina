@@ -55,12 +55,19 @@
 #include "undocommands/vpundomovepieceonsheet.h"
 
 #include <QLoggingCategory>
-Q_LOGGING_CATEGORY(pGraphicsPiece, "p.graphicsPiece")
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
+QT_WARNING_DISABLE_INTEL(1418)
+
+Q_LOGGING_CATEGORY(pGraphicsPiece, "p.graphicsPiece") // NOLINT
+
+QT_WARNING_POP
 
 namespace
 {
-QColor mainColor = Qt::black;
-QColor errorColor = Qt::red;
+Q_GLOBAL_STATIC_WITH_ARGS(QColor, mainColor, (Qt::black)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(QColor, errorColor, (Qt::red)) // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
 inline auto LineMatrix(const VPPiecePtr &piece, const QPointF &topLeft, qreal angle, const QPointF &linePos,
@@ -134,6 +141,12 @@ inline auto LineAlign(const TextLine& tl, const QString &text, const QFontMetric
     }
 
     return dX;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto SelectionBrush() -> QBrush
+{
+    return {QColor(255, 160, 160, 60)};
 }
 }  // namespace
 
@@ -229,7 +242,7 @@ void VPGraphicsPiece::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     GroupMove(event->pos());
 
     m_moveStartPoint = event->pos();
-    allowChangeMerge = true;
+    m_allowChangeMerge = true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -253,7 +266,7 @@ void VPGraphicsPiece::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
                 if (layout->LayoutSettings().GetStickyEdges() && m_hasStickyPosition)
                 {
                     auto *command = new VPUndoPieceMove(piece, m_stickyTranslateX, m_stickyTranslateY,
-                                                        allowChangeMerge);
+                                                        m_allowChangeMerge);
                     layout->UndoStack()->push(command);
 
                     SetStickyPoints(QVector<QPointF>());
@@ -261,7 +274,7 @@ void VPGraphicsPiece::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
             }
         }
 
-        allowChangeMerge = false;
+        m_allowChangeMerge = false;
         m_hasStickyPosition = false;
     }
 }
@@ -441,9 +454,6 @@ void VPGraphicsPiece::InitPieceLabel(const QVector<QPointF> &labelShape, const V
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::PaintPiece(QPainter *painter)
 {
-    QBrush noBrush = m_hoverMode ? QBrush(QColor(199, 244, 249, 60)) : QBrush(Qt::NoBrush);
-    QBrush selectionBrush(QColor(255, 160, 160, 60));
-
     m_seamLine = QPainterPath();
     m_cuttingLine = QPainterPath();
     m_grainline = QPainterPath();
@@ -459,6 +469,29 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
     }
 
     // initialises the seam line
+    PaintSeamLine(painter, piece);
+
+    // initiliases the cutting line
+    PaintCuttingLine(painter, piece);
+
+    // initialises the grainline
+    PaintGrainline(painter, piece);
+
+    // initialises the internal paths
+    PaintInternalPaths(painter, piece);
+
+    // initialises the passmarks
+    PaintPassmarks(painter, piece);
+
+    // initialises the place labels (buttons etc)
+    PaintPlaceLabels(painter, piece);
+
+    PaintStickyPath(painter);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPiece::PaintSeamLine(QPainter *painter, const VPPiecePtr &piece)
+{
     if (not piece->IsHideMainPath() || not piece->IsSeamAllowance())
     {
         QVector<QPointF> seamLinePoints = piece->GetMappedContourPoints();
@@ -473,14 +506,17 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
             if (painter != nullptr)
             {
                 painter->save();
-                painter->setBrush(piece->IsSelected() ? selectionBrush : noBrush);
+                painter->setBrush(piece->IsSelected() ? SelectionBrush() : NoBrush());
                 painter->drawPath(m_seamLine);
                 painter->restore();
             }
         }
     }
+}
 
-    // initiliases the cutting line
+//---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPiece::PaintCuttingLine(QPainter *painter, const VPPiecePtr &piece)
+{
     if (piece->IsSeamAllowance() && not piece->IsSeamAllowanceBuiltIn())
     {
         QVector<QPointF> cuttingLinepoints = piece->GetMappedSeamAllowancePoints();
@@ -495,14 +531,17 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
             if (painter != nullptr)
             {
                 painter->save();
-                painter->setBrush(piece->IsSelected() ? selectionBrush : noBrush);
+                painter->setBrush(piece->IsSelected() ? SelectionBrush() : NoBrush());
                 painter->drawPath(m_cuttingLine);
                 painter->restore();
             }
         }
     }
+}
 
-    // initialises the grainline
+//---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPiece::PaintGrainline(QPainter *painter, const VPPiecePtr &piece)
+{
     if(piece->IsGrainlineEnabled())
     {
         QVector<QPointF> grainLinepoints = piece->GetMappedGrainline();
@@ -519,16 +558,19 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
                 painter->save();
                 // here to fill the grainlines arrow. Not wanted for mvp
                 // later maybe if it's configurable
-//                painter->setBrush(blackBrush);
+                //                painter->setBrush(blackBrush);
 
-                painter->setBrush(noBrush);
+                painter->setBrush(NoBrush());
                 painter->drawPath(m_grainline);
                 painter->restore();
             }
         }
     }
+}
 
-    // initialises the internal paths
+//---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPiece::PaintInternalPaths(QPainter *painter, const VPPiecePtr &piece)
+{
     QVector<VLayoutPiecePath> internalPaths = piece->GetInternalPaths();
     for (const auto& piecePath : internalPaths)
     {
@@ -545,8 +587,11 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
         }
         m_internalPaths.addPath(path);
     }
+}
 
-    // initialises the passmarks
+//---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPiece::PaintPassmarks(QPainter *painter, const VPPiecePtr &piece)
+{
     QVector<VLayoutPassmark> passmarks = piece->GetMappedPassmarks();
     for(auto &passmark : passmarks)
     {
@@ -560,15 +605,18 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
         if (painter != nullptr)
         {
             painter->save();
-            painter->setBrush(noBrush);
+            painter->setBrush(NoBrush());
             painter->drawPath(passmarkPath);
             painter->restore();
         }
 
         m_passmarks.addPath(passmarkPath);
     }
+}
 
-    // initialises the place labels (buttons etc)
+//---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPiece::PaintPlaceLabels(QPainter *painter, const VPPiecePtr &piece)
+{
     QVector<VLayoutPlaceLabel> placeLabels = piece->GetMappedPlaceLabels();
     for(auto &placeLabel : placeLabels)
     {
@@ -577,14 +625,18 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
         if (painter != nullptr)
         {
             painter->save();
-            painter->setBrush(noBrush);
+            painter->setBrush(NoBrush());
             painter->drawPath(path);
             painter->restore();
         }
 
         m_placeLabels.addPath(path);
     }
+}
 
+//---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPiece::PaintStickyPath(QPainter *painter)
+{
     if (not m_stickyPoints.isEmpty())
     {
         m_stickyPath.moveTo(ConstFirst(m_stickyPoints));
@@ -600,7 +652,7 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
 
             QPen pen = painter->pen();
             pen.setStyle(Qt::DashLine);
-            pen.setColor(mainColor);
+            pen.setColor(*mainColor);
             painter->setPen(pen);
 
             painter->drawPath(m_stickyPath);
@@ -648,7 +700,7 @@ void VPGraphicsPiece::GroupMove(const QPointF &pos)
     if (pieces.size() == 1)
     {
         const VPPiecePtr &p = ConstFirst(pieces);
-        auto *command = new VPUndoPieceMove(piece, newPos.x(), newPos.y(), allowChangeMerge);
+        auto *command = new VPUndoPieceMove(piece, newPos.x(), newPos.y(), m_allowChangeMerge);
         layout->UndoStack()->push(command);
 
         if (layout->LayoutSettings().GetStickyEdges())
@@ -672,7 +724,7 @@ void VPGraphicsPiece::GroupMove(const QPointF &pos)
     }
     else if (pieces.size() > 1)
     {
-        auto *command = new VPUndoPiecesMove(pieces, newPos.x(), newPos.y(), allowChangeMerge);
+        auto *command = new VPUndoPiecesMove(pieces, newPos.x(), newPos.y(), m_allowChangeMerge);
         layout->UndoStack()->push(command);
     }
 }
@@ -683,13 +735,13 @@ auto VPGraphicsPiece::PieceColor() const -> QColor
     VPPiecePtr piece = m_piece.toStrongRef();
     if (piece.isNull())
     {
-        return mainColor;
+        return *mainColor;
     }
 
     VPLayoutPtr layout = piece->Layout();
     if (layout.isNull())
     {
-        return mainColor;
+        return *mainColor;
     }
 
     bool outOfBound = false;
@@ -706,10 +758,16 @@ auto VPGraphicsPiece::PieceColor() const -> QColor
 
     if (outOfBound || superposition)
     {
-        return errorColor;
+        return *errorColor;
     }
 
-    return mainColor;
+    return *mainColor;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPGraphicsPiece::NoBrush() const -> QBrush
+{
+    return m_hoverMode ? QBrush(QColor(199, 244, 249, 60)) : QBrush(Qt::NoBrush);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

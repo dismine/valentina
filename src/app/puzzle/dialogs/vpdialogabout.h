@@ -31,6 +31,8 @@
 
 #include <QDialog>
 
+#include "../vmisc/defglobal.h"
+
 namespace Ui
 {
     class VPDialogAbout;
@@ -38,22 +40,23 @@ namespace Ui
 
 class VPDialogAbout : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit VPDialogAbout(QWidget *parent = nullptr);
-    virtual ~VPDialogAbout();
+    ~VPDialogAbout() override;
 
 protected:
-    virtual void changeEvent(QEvent* event) override;
-    virtual void showEvent(QShowEvent *event) override;
+    void changeEvent(QEvent* event) override;
+    void showEvent(QShowEvent *event) override;
 
 private:
-    Q_DISABLE_COPY(VPDialogAbout)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VPDialogAbout) // NOLINT
     Ui::VPDialogAbout *ui;
-    bool isInitialized;
+    bool m_isInitialized;
 
-    void FontPointSize(QWidget *w, int pointSize);
+    static void FontPointSize(QWidget *w, int pointSize);
 
     void RetranslateUi();
 };

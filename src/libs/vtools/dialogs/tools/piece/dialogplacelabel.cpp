@@ -126,9 +126,8 @@ void DialogPlaceLabel::SetLabelType(PlaceLabelType type)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogPlaceLabel::GetWidth() const
 {
-    return VAbstractApplication::VApp()->TrVars()
-            ->TryFormulaFromUser(ui->plainTextEditFormulaWidth->toPlainText(),
-                                 VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(ui->plainTextEditFormulaWidth->toPlainText(),
+                                              VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -154,9 +153,8 @@ void DialogPlaceLabel::SetWidth(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogPlaceLabel::GetHeight() const
 {
-    return VAbstractApplication::VApp()->TrVars()
-            ->TryFormulaFromUser(ui->plainTextEditFormulaHeight->toPlainText(),
-                                 VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(ui->plainTextEditFormulaHeight->toPlainText(),
+                                              VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -182,9 +180,8 @@ void DialogPlaceLabel::SetHeight(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogPlaceLabel::GetAngle() const
 {
-    return VAbstractApplication::VApp()->TrVars()
-            ->TryFormulaFromUser(ui->plainTextEditFormulaAngle->toPlainText(),
-                                 VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(ui->plainTextEditFormulaAngle->toPlainText(),
+                                              VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -553,8 +550,7 @@ void DialogPlaceLabel::CheckPoint()
 QString DialogPlaceLabel::GetFormulaVisible() const
 {
     QString formula = ui->plainTextEditFormulaVisible->toPlainText();
-    return VAbstractApplication::VApp()->TrVars()
-            ->TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -145,8 +145,7 @@ void DialogRotation::SetOrigPointId(quint32 value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogRotation::GetAngle() const
 {
-    return VAbstractApplication::VApp()->TrVars()
-            ->TryFormulaFromUser(formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

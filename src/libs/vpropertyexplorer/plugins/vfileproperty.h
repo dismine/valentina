@@ -44,7 +44,7 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 
 class VPROPERTYEXPLORERSHARED_EXPORT VFileProperty : public VProperty
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VFileProperty(const QString &name);
 
@@ -109,7 +109,7 @@ public:
     virtual void setDirectory(bool is_directory);
 
 private:
-    Q_DISABLE_COPY(VFileProperty)
+    Q_DISABLE_COPY_MOVE(VFileProperty) // NOLINT
 };
 
 QT_WARNING_POP

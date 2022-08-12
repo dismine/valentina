@@ -44,7 +44,7 @@ public:
     void redo() override;
 private:
     // cppcheck-suppress unknownMacro
-    Q_DISABLE_COPY_MOVE(RenameBackgroundImage)
+    Q_DISABLE_COPY_MOVE(RenameBackgroundImage) // NOLINT
     QUuid m_id;
     QString m_name;
     QString m_oldName{};

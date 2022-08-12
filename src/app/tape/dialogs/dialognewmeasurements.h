@@ -40,23 +40,24 @@ namespace Ui
 
 class DialogNewMeasurements : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogNewMeasurements(QWidget *parent = nullptr);
-    ~DialogNewMeasurements();
+    ~DialogNewMeasurements() override;
 
-    MeasurementsType Type() const;
-    Unit MUnit() const;
+    auto Type() const -> MeasurementsType;
+    auto MUnit() const -> Unit;
 
 protected:
-    virtual void changeEvent(QEvent* event) override;
-    virtual void showEvent(QShowEvent *event) override;
+    void changeEvent(QEvent* event) override;
+    void showEvent(QShowEvent *event) override;
 
 private:
-    Q_DISABLE_COPY(DialogNewMeasurements)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogNewMeasurements) // NOLINT
     Ui::DialogNewMeasurements *ui;
-    bool isInitialized;
+    bool m_isInitialized;
 
     void InitMTypes();
     void InitUnits();

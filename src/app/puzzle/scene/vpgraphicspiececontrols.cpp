@@ -40,6 +40,7 @@
 #include "../vwidgets/global.h"
 #include "../layout/vplayout.h"
 #include "../layout/vppiece.h"
+#include "../layout/vpsheet.h"
 #include "../undocommands/vpundopiecerotate.h"
 #include "../undocommands/vpundooriginmove.h"
 #include "qgraphicsscene.h"
@@ -53,8 +54,8 @@ constexpr qreal penWidth = 2;
 const qreal centerRadius1 = 5;
 const qreal centerRadius2 = 10;
 
-const QColor defaultColor = Qt::black;
-const QColor hoverColor = Qt::green;
+Q_GLOBAL_STATIC_WITH_ARGS(const QColor, defaultColor, (Qt::black)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QColor, hoverColor, (Qt::green)) // NOLINT
 
 auto TransformationOrigin(const VPLayoutPtr &layout, const QRectF &boundingRect) -> VPTransformationOrigon
 {
@@ -83,7 +84,7 @@ auto TransformationOrigin(const VPLayoutPtr &layout, const QRectF &boundingRect)
 VPGraphicsTransformationOrigin::VPGraphicsTransformationOrigin(const VPLayoutPtr &layout, QGraphicsItem *parent)
     : QGraphicsObject(parent),
       m_layout(layout),
-      m_color(defaultColor)
+      m_color(*defaultColor)
 {
     SCASSERT(m_layout != nullptr)
     setCursor(Qt::OpenHandCursor);
@@ -209,14 +210,14 @@ void VPGraphicsTransformationOrigin::mouseReleaseEvent(QGraphicsSceneMouseEvent 
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsTransformationOrigin::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    m_color = hoverColor;
+    m_color = *hoverColor;
     QGraphicsObject::hoverEnterEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsTransformationOrigin::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    m_color = defaultColor;
+    m_color = *defaultColor;
     QGraphicsObject::hoverEnterEvent(event);
 }
 
@@ -419,7 +420,7 @@ void VPGraphicsPieceControls::mousePressEvent(QGraphicsSceneMouseEvent *event)
             QGraphicsView *view = ItemView();
             if (view != nullptr)
             {
-                setCursor(view->viewport()->cursor());
+                setCursor(view->viewport()->cursor()); // clazy:exclude=clazy-qt6-deprecated-api-fixes
             }
             event->ignore();
         }
@@ -502,7 +503,7 @@ void VPGraphicsPieceControls::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
             QGraphicsView *view = ItemView();
             if (view != nullptr)
             {
-                setCursor(view->viewport()->cursor());
+                setCursor(view->viewport()->cursor()); // clazy:exclude=clazy-qt6-deprecated-api-fixes
             }
         }
 
@@ -782,7 +783,7 @@ void VPGraphicsPieceControls::UpdateCursor(VPHandleCorner corner)
         QGraphicsView *view = ItemView();
         if (view != nullptr)
         {
-            setCursor(view->viewport()->cursor());
+            setCursor(view->viewport()->cursor()); // clazy:exclude=clazy-qt6-deprecated-api-fixes
         }
     }
 }

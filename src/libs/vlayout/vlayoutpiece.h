@@ -62,7 +62,7 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 
 class VLayoutPiece :public VAbstractPiece
 {
-    Q_DECLARE_TR_FUNCTIONS(VLayoutPiece)
+    Q_DECLARE_TR_FUNCTIONS(VLayoutPiece) // NOLINT
 public:
     VLayoutPiece();
     VLayoutPiece(const VLayoutPiece &detail);
@@ -71,7 +71,7 @@ public:
 
     VLayoutPiece &operator=(const VLayoutPiece &detail);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VLayoutPiece(const VLayoutPiece &&detail) Q_DECL_NOTHROW;
+    VLayoutPiece(VLayoutPiece &&detail) Q_DECL_NOTHROW;
     VLayoutPiece &operator=(VLayoutPiece &&detail) Q_DECL_NOTHROW;
 #endif
 
@@ -224,6 +224,6 @@ private:
 
 QT_WARNING_POP
 
-Q_DECLARE_TYPEINFO(VLayoutPiece, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VLayoutPiece, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VLAYOUTDETAIL_H

@@ -33,7 +33,7 @@
 
 class SavePlaceLabelOptions : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     SavePlaceLabelOptions(quint32 pieceId, const VPlaceLabelItem &oldLabel, const VPlaceLabelItem &newLabel,
                           VAbstractPattern *doc, VContainer *data, quint32 id, QUndoCommand *parent = nullptr);
@@ -47,7 +47,8 @@ public:
     quint32         LabelId() const;
     VPlaceLabelItem NewLabel() const;
 private:
-    Q_DISABLE_COPY(SavePlaceLabelOptions)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(SavePlaceLabelOptions) // NOLINT
 
     const VPlaceLabelItem m_oldLabel;
     VPlaceLabelItem       m_newLabel;

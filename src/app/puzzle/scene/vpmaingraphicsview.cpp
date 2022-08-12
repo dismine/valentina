@@ -34,14 +34,12 @@
 #include <QMenu>
 #include <QUndoStack>
 
-#include "../vptilefactory.h"
 #include "../carousel/vpmimedatapiece.h"
 #include "../layout/vplayout.h"
 #include "../layout/vpsheet.h"
 #include "../layout/vppiece.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "undocommands/vpundopiecezvaluemove.h"
-#include "vptilefactory.h"
 #include "vpgraphicspiece.h"
 #include "vpgraphicspiececontrols.h"
 
@@ -53,14 +51,21 @@
 
 #include <QLoggingCategory>
 
-Q_LOGGING_CATEGORY(pMainGraphicsView, "p.mainGraphicsView")
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
+QT_WARNING_DISABLE_INTEL(1418)
+
+Q_LOGGING_CATEGORY(pMainGraphicsView, "p.mainGraphicsView") // NOLINT
+
+QT_WARNING_POP
 
 namespace
 {
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wenum-enum-conversion")
 
-const QKeySequence restoreOriginShortcut = QKeySequence(Qt::ControlModifier + Qt::Key_Asterisk);
+Q_GLOBAL_STATIC_WITH_ARGS(const QKeySequence, restoreOriginShortcut, // NOLINT
+                          (QKeySequence(Qt::ControlModifier + Qt::Key_Asterisk)))
 
 QT_WARNING_POP
 }
@@ -82,7 +87,7 @@ VPMainGraphicsView::VPMainGraphicsView(const VPLayoutPtr &layout, QWidget *paren
     connect(layout.data(), &VPLayout::ActiveSheetChanged, this, &VPMainGraphicsView::on_ActiveSheetChanged);
 
     auto *restoreOrigin = new QAction(this);
-    restoreOrigin->setShortcut(restoreOriginShortcut);
+    restoreOrigin->setShortcut(*restoreOriginShortcut);
     connect(restoreOrigin, &QAction::triggered, this, &VPMainGraphicsView::RestoreOrigin);
     this->addAction(restoreOrigin);
 }
@@ -205,194 +210,88 @@ void VPMainGraphicsView::dropEvent(QDropEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::keyPressEvent(QKeyEvent *event)
 {
-    if(event->key() == Qt::Key_Backspace || event->key() == Qt::Key_Delete)
+    const bool shiftModifier = (event->modifiers() & Qt::ShiftModifier) != 0U;
+    const bool controlModifier = (event->modifiers() & Qt::ControlModifier) != 0U;
+    const bool altModifier = (event->modifiers() & Qt::AltModifier) != 0U;
+
+    switch(event->key())
     {
-        VPLayoutPtr layout = m_layout.toStrongRef();
-        if (layout.isNull())
-        {
-            return;
-        }
-
-        VPSheetPtr sheet = layout->GetFocusedSheet();
-        if (sheet.isNull())
-        {
-            return ;
-        }
-
-        const QList<VPGraphicsPiece *> &graphicsPieces = sheet->SceneData()->GraphicsPieces();
-        for(auto *graphicsPiece : graphicsPieces)
-        {
-            VPPiecePtr piece = graphicsPiece->GetPiece();
-
-            if(not piece.isNull() && piece->IsSelected())
+        case Qt::Key_Backspace:
+        case Qt::Key_Delete:
+            RemovePiece();
+            break;
+        case Qt::Key_Left:
+            shiftModifier ? TranslatePiecesOn(-10, 0) : TranslatePiecesOn(-1, 0);
+            break;
+        case Qt::Key_Right:
+            shiftModifier ? TranslatePiecesOn(10, 0) : TranslatePiecesOn(1, 0);
+            break;
+        case Qt::Key_Up:
+            shiftModifier ? TranslatePiecesOn(0, -10) : TranslatePiecesOn(0, -1);
+            break;
+        case Qt::Key_Down:
+            shiftModifier ? TranslatePiecesOn(0, 10) : TranslatePiecesOn(0, 1);
+            break;
+        case Qt::Key_BracketLeft:
+            if(controlModifier)
             {
-                piece->SetSelected(false);
-
-                VPLayoutPtr layout = m_layout.toStrongRef();
-                if (not layout.isNull())
-                {
-                    emit layout->PieceSelectionChanged(piece);
-
-                    auto *command = new VPUndoMovePieceOnSheet(VPSheetPtr(), piece);
-                    layout->UndoStack()->push(command);
-                }
+                RotatePiecesByAngle(90);
             }
-        }
-    }
-    else if (event->key() == Qt::Key_Left)
-    {
-        if((event->modifiers() & Qt::ShiftModifier) != 0U)
-        {
-            TranslatePiecesOn(-10, 0);
-        }
-        else
-        {
-            TranslatePiecesOn(-1, 0);
-        }
-    }
-    else if (event->key() == Qt::Key_Right)
-    {
-        if((event->modifiers() & Qt::ShiftModifier) != 0U)
-        {
-            TranslatePiecesOn(10, 0);
-        }
-        else
-        {
-            TranslatePiecesOn(1, 0);
-        }
-    }
-    else if (event->key() == Qt::Key_Up)
-    {
-        if((event->modifiers() & Qt::ShiftModifier) != 0U)
-        {
-            TranslatePiecesOn(0, -10);
-        }
-        else
-        {
-            TranslatePiecesOn(0, -1);
-        }
-    }
-    else if (event->key() == Qt::Key_Down)
-    {
-        if((event->modifiers() & Qt::ShiftModifier) != 0U)
-        {
-            TranslatePiecesOn(0, 10);
-        }
-        else
-        {
-            TranslatePiecesOn(0, 1);
-        }
-    }
-    else if (event->key() == Qt::Key_BracketLeft)
-    {
-        if((event->modifiers() & Qt::ControlModifier) != 0U)
-        {
-            RotatePiecesByAngle(90);
-        }
-        else if((event->modifiers() & Qt::AltModifier) != 0U)
-        {
-            RotatePiecesByAngle(1);
-        }
-        else
-        {
-            RotatePiecesByAngle(15);
-        }
-    }
-    else if (event->key() == Qt::Key_BracketRight)
-    {
-        if((event->modifiers() & Qt::ControlModifier) != 0U)
-        {
-            RotatePiecesByAngle(-90);
-        }
-        else if((event->modifiers() & Qt::AltModifier) != 0U)
-        {
-            RotatePiecesByAngle(-1);
-        }
-        else
-        {
-            RotatePiecesByAngle(-15);
-        }
-    }
-    else if (event->key() == Qt::Key_Home)
-    {
-        ZValueMove(static_cast<int>(ML::ZValueMove::Top));
-    }
-    else if (event->key() == Qt::Key_PageUp)
-    {
-        ZValueMove(static_cast<int>(ML::ZValueMove::Up));
-    }
-    else if (event->key() == Qt::Key_PageDown)
-    {
-        ZValueMove(static_cast<int>(ML::ZValueMove::Down));
-    }
-    else if (event->key() == Qt::Key_End)
-    {
-        ZValueMove(static_cast<int>(ML::ZValueMove::Bottom));
+            else if(altModifier)
+            {
+                RotatePiecesByAngle(1);
+            }
+            else
+            {
+                RotatePiecesByAngle(15);
+            }
+            break;
+        case Qt::Key_BracketRight:
+            if(controlModifier)
+            {
+                RotatePiecesByAngle(-90);
+            }
+            else if(altModifier)
+            {
+                RotatePiecesByAngle(-1);
+            }
+            else
+            {
+                RotatePiecesByAngle(-15);
+            }
+            break;
+        case Qt::Key_Home:
+            ZValueMove(static_cast<int>(ML::ZValueMove::Top));
+            break;
+        case Qt::Key_PageUp:
+            ZValueMove(static_cast<int>(ML::ZValueMove::Up));
+            break;
+        case Qt::Key_PageDown:
+            ZValueMove(static_cast<int>(ML::ZValueMove::Down));
+            break;
+        case Qt::Key_End:
+            ZValueMove(static_cast<int>(ML::ZValueMove::Bottom));
+            break;
+        default:
+            break;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::keyReleaseEvent(QKeyEvent *event)
 {
-    if (event->key() == Qt::Key_Left ||
-            event->key() == Qt::Key_Right ||
-            event->key() == Qt::Key_Up ||
-            event->key() == Qt::Key_Down ||
-            event->key() == Qt::Key_BracketLeft ||
-            event->key() == Qt::Key_BracketRight)
+    switch(event->key())
     {
-        if (not event->isAutoRepeat())
-        {
-            VPLayoutPtr layout = m_layout.toStrongRef();
-            if (layout.isNull())
-            {
-                return;
-            }
-
-            VPSheetPtr sheet = layout->GetFocusedSheet();
-            if (sheet.isNull())
-            {
-                return;
-            }
-
-            const QList<VPGraphicsPiece *> &graphicsPieces = sheet->SceneData()->GraphicsPieces();
-            if (m_hasStickyPosition && not graphicsPieces.isEmpty())
-            {
-                if (layout->LayoutSettings().GetStickyEdges())
-                {
-                    auto PreparePieces = [layout]()
-                    {
-                        QList<VPPiecePtr> pieces;
-                        VPSheetPtr sheet = layout->GetFocusedSheet();
-                        if (not sheet.isNull())
-                        {
-                            pieces = sheet->GetSelectedPieces();
-                        }
-
-                        return pieces;
-                    };
-
-                    QList<VPPiecePtr> pieces = PreparePieces();
-                    if (pieces.size() == 1)
-                    {
-                        const VPPiecePtr &p = ConstFirst(pieces);
-
-                        auto *command = new VPUndoPieceMove(p, m_stickyTranslateX, m_stickyTranslateY,
-                                                            m_allowChangeMerge);
-                        layout->UndoStack()->push(command);
-
-                        VPGraphicsPiece * gPiece = sheet->SceneData()->ScenePiece(p);
-                        if (gPiece != nullptr)
-                        {
-                            gPiece->SetStickyPoints(QVector<QPointF>());
-                        }
-                    }
-                }
-            }
-
-            m_allowChangeMerge = false;
-            m_hasStickyPosition = false;
-        }
+        case Qt::Key_Left:
+        case Qt::Key_Right:
+        case Qt::Key_Up:
+        case Qt::Key_Down:
+        case Qt::Key_BracketLeft:
+        case Qt::Key_BracketRight:
+            MovePiece(event);
+            break;
+        default:
+            break;
     }
 
     if (event->key() == Qt::Key_BracketLeft || event->key() == Qt::Key_BracketRight)
@@ -440,7 +339,7 @@ void VPMainGraphicsView::contextMenuEvent(QContextMenuEvent *event)
     QMenu menu;
 
     QAction *restoreOriginAction = menu.addAction(tr("Restore transformation origin"));
-    restoreOriginAction->setShortcut(restoreOriginShortcut);
+    restoreOriginAction->setShortcut(*restoreOriginShortcut);
     restoreOriginAction->setEnabled(not sheet.isNull() && sheet->TransformationOrigin().custom);
 
     QAction *removeSheetAction = menu.addAction(QIcon::fromTheme(QStringLiteral("edit-delete")), tr("Remove sheet"));
@@ -720,6 +619,99 @@ void VPMainGraphicsView::ZValueMove(int move)
     else if (selectedPieces.size() > 1)
     {
         layout->UndoStack()->push(new VPUndoPiecesZValueMove(allPieces, zMove));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainGraphicsView::RemovePiece() const
+{
+    VPLayoutPtr layout = m_layout.toStrongRef();
+    if (layout.isNull())
+    {
+        return;
+    }
+
+    VPSheetPtr sheet = layout->GetFocusedSheet();
+    if (sheet.isNull())
+    {
+        return ;
+    }
+
+    const QList<VPGraphicsPiece *> &graphicsPieces = sheet->SceneData()->GraphicsPieces();
+    for(auto *graphicsPiece : graphicsPieces)
+    {
+        VPPiecePtr piece = graphicsPiece->GetPiece();
+
+        if(not piece.isNull() && piece->IsSelected())
+        {
+            piece->SetSelected(false);
+
+            VPLayoutPtr layout = m_layout.toStrongRef();
+            if (not layout.isNull())
+            {
+                emit layout->PieceSelectionChanged(piece);
+
+                auto *command = new VPUndoMovePieceOnSheet(VPSheetPtr(), piece);
+                layout->UndoStack()->push(command);
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainGraphicsView::MovePiece(QKeyEvent *event)
+{
+    if (not event->isAutoRepeat())
+    {
+        VPLayoutPtr layout = m_layout.toStrongRef();
+        if (layout.isNull())
+        {
+            return;
+        }
+
+        VPSheetPtr sheet = layout->GetFocusedSheet();
+        if (sheet.isNull())
+        {
+            return;
+        }
+
+        const QList<VPGraphicsPiece *> &graphicsPieces = sheet->SceneData()->GraphicsPieces();
+        if (m_hasStickyPosition && not graphicsPieces.isEmpty())
+        {
+            if (layout->LayoutSettings().GetStickyEdges())
+            {
+                auto PreparePieces = [layout]()
+                {
+                    QList<VPPiecePtr> pieces;
+                    VPSheetPtr sheet = layout->GetFocusedSheet();
+                    if (not sheet.isNull())
+                    {
+                        pieces = sheet->GetSelectedPieces();
+                    }
+
+                    return pieces;
+                };
+
+                QList<VPPiecePtr> pieces = PreparePieces();
+                if (pieces.size() == 1)
+                {
+                    const VPPiecePtr &p = ConstFirst(pieces);
+
+                    auto *command = new VPUndoPieceMove(p, m_stickyTranslateX, m_stickyTranslateY,
+                                                        m_allowChangeMerge);
+                    layout->UndoStack()->push(command);
+
+                    VPGraphicsPiece * gPiece = sheet->SceneData()->ScenePiece(p);
+                    if (gPiece != nullptr)
+                    {
+                        gPiece->SetStickyPoints(QVector<QPointF>());
+                    }
+                }
+            }
+        }
+
+        m_allowChangeMerge = false;
+        m_hasStickyPosition = false;
     }
 }
 

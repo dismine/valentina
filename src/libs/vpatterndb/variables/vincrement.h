@@ -54,7 +54,7 @@ public:
 
     VIncrement &operator=(const VIncrement &incr);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VIncrement(const VIncrement &&incr) Q_DECL_NOTHROW;
+    VIncrement(VIncrement &&incr) Q_DECL_NOTHROW;
     VIncrement &operator=(VIncrement &&incr) Q_DECL_NOTHROW;
 #endif
 
@@ -78,6 +78,6 @@ private:
     QSharedDataPointer<VIncrementData> d;
 };
 
-Q_DECLARE_TYPEINFO(VIncrement, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VIncrement, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VINCREMENTTABLEROW_H

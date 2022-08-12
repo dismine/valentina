@@ -42,7 +42,7 @@
 
 class VisToolPointOfIntersectionArcs : public VisLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolPointOfIntersectionArcs(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolPointOfIntersectionArcs() = default;
@@ -57,7 +57,8 @@ public:
     virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPointOfIntersectionArcs)};
 private:
-    Q_DISABLE_COPY(VisToolPointOfIntersectionArcs)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolPointOfIntersectionArcs) // NOLINT
     quint32            arc1Id;
     quint32            arc2Id;
     CrossCirclesPoint  crossPoint;

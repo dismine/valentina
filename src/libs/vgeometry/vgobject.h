@@ -63,7 +63,7 @@ public:
 
     VGObject& operator= (const VGObject &obj);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VGObject(const VGObject &&obj) Q_DECL_NOTHROW;
+    VGObject(VGObject &&obj) Q_DECL_NOTHROW;
     VGObject &operator=(VGObject &&obj) Q_DECL_NOTHROW;
 #endif
 
@@ -126,6 +126,6 @@ private:
 
 QT_WARNING_POP
 
-Q_DECLARE_TYPEINFO(VGObject, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VGObject, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VGOBJECT_H

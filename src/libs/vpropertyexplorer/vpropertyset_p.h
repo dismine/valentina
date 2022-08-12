@@ -26,6 +26,8 @@
 #include <QMap>
 #include <QString>
 
+#include "vpropertyexplorer_global.h"
+
 namespace VPE
 {
 
@@ -47,7 +49,7 @@ public:
     {}
 
 private:
-    Q_DISABLE_COPY(VPropertySetPrivate)
+    Q_DISABLE_COPY_MOVE(VPropertySetPrivate) // NOLINT
 };
 
 }

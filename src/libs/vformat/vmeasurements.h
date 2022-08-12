@@ -48,7 +48,7 @@ using VDimensions = QMap<MeasurementDimension, MeasurementDimension_p>;
 
 class VMeasurements : public VDomDocument
 {
-    Q_DECLARE_TR_FUNCTIONS(VMeasurements)
+    Q_DECLARE_TR_FUNCTIONS(VMeasurements) // NOLINT
 public:
     explicit VMeasurements(VContainer *data);
     VMeasurements(Unit unit, VContainer *data);
@@ -203,7 +203,7 @@ public:
     VContainer *GetData() const;
 
 private:
-    Q_DISABLE_COPY(VMeasurements)
+    Q_DISABLE_COPY_MOVE(VMeasurements) // NOLINT
 
     /** @brief data container with data. */
     VContainer     *data;

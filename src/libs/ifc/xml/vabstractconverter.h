@@ -81,7 +81,7 @@ protected:
     void ValidateXML(const QString &schema) const;
 
 private:
-    Q_DISABLE_COPY(VAbstractConverter)
+    Q_DISABLE_COPY_MOVE(VAbstractConverter) // NOLINT
 
     QTemporaryFile m_tmpFile{};
 

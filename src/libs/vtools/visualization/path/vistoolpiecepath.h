@@ -39,7 +39,7 @@ class VSimplePoint;
 
 class VisToolPiecePath : public VisPath
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VisToolPiecePath(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolPiecePath() Q_DECL_EQ_DEFAULT;
@@ -53,7 +53,7 @@ protected:
     virtual void mousePressEvent( QGraphicsSceneMouseEvent * event ) override;
 
 private:
-    Q_DISABLE_COPY(VisToolPiecePath)
+    Q_DISABLE_COPY_MOVE(VisToolPiecePath) // NOLINT
     QVector<VSimplePoint *> m_points;
 
     VScaledLine *m_line;

@@ -79,8 +79,8 @@ void EnableDefButton(QPushButton *defButton, const QString &formula)
 QString GetFormulaFromUser(QPlainTextEdit *textEdit)
 {
     SCASSERT(textEdit != nullptr)
-    return VAbstractApplication::VApp()->TrVars()
-            ->TryFormulaFromUser(textEdit->toPlainText(), VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(textEdit->toPlainText(),
+                                              VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2037,9 +2037,8 @@ void DialogSeamAllowance::EditGrainlineFormula()
 
     DialogEditWrongFormula dlg(data, NULL_ID, this);
     dlg.setWindowTitle(title);
-    dlg.SetFormula(VAbstractApplication::VApp()->TrVars()
-                   ->TryFormulaFromUser(pleFormula->toPlainText(),
-                                        VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+    dlg.SetFormula(VTranslateVars::TryFormulaFromUser(pleFormula->toPlainText(),
+                                                      VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
     dlg.setCheckZero(bCheckZero);
     if (dlg.exec() == QDialog::Accepted)
     {
@@ -2095,9 +2094,8 @@ void DialogSeamAllowance::EditDLFormula()
 
     DialogEditWrongFormula dlg(data, NULL_ID, this);
     dlg.setWindowTitle(title);
-    dlg.SetFormula(VAbstractApplication::VApp()->TrVars()
-                   ->TryFormulaFromUser(pleFormula->toPlainText(),
-                                        VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+    dlg.SetFormula(VTranslateVars::TryFormulaFromUser(pleFormula->toPlainText(),
+                                                      VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
     dlg.setCheckZero(bCheckZero);
     if (dlg.exec() == QDialog::Accepted)
     {
@@ -2156,9 +2154,8 @@ void DialogSeamAllowance::EditPLFormula()
 
     DialogEditWrongFormula dlg(data, NULL_ID, this);
     dlg.setWindowTitle(title);
-    dlg.SetFormula(VAbstractApplication::VApp()->TrVars()
-                   ->TryFormulaFromUser(pleFormula->toPlainText(),
-                                        VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+    dlg.SetFormula(VTranslateVars::TryFormulaFromUser(pleFormula->toPlainText(),
+                                                      VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
     dlg.setCheckZero(bCheckZero);
     if (dlg.exec() == QDialog::Accepted)
     {
@@ -3463,8 +3460,7 @@ void DialogSeamAllowance::InitAllPinComboboxes()
 QString DialogSeamAllowance::GetFormulaSAWidth() const
 {
     QString width = uiTabPaths->plainTextEditFormulaWidth->toPlainText();
-    return VAbstractApplication::VApp()->TrVars()
-            ->TryFormulaFromUser(width, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(width, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

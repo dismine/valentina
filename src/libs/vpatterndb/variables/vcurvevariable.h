@@ -49,7 +49,7 @@ public:
 
     VCurveVariable &operator=(const VCurveVariable &var);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VCurveVariable(const VCurveVariable &&var) Q_DECL_NOTHROW;
+    VCurveVariable(VCurveVariable &&var) Q_DECL_NOTHROW;
     VCurveVariable &operator=(VCurveVariable &&var) Q_DECL_NOTHROW;
 #endif
 
@@ -64,6 +64,6 @@ private:
     QSharedDataPointer<VCurveVariableData> d;
 };
 
-Q_DECLARE_TYPEINFO(VCurveVariable, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VCurveVariable, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VCURVEVARIABLE_H

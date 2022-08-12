@@ -36,7 +36,6 @@
 #include <QCommandLineParser>
 
 #include "../dialogs/dialoglayoutsettings.h"
-#include "../vmisc/vsysexits.h"
 
 class VCommandLine;
 using VCommandLinePtr = std::shared_ptr<VCommandLine>;
@@ -54,110 +53,116 @@ public:
 
     //@brief tests if user enabled test mode from cmd, throws exception if not exactly 1 input VAL file supplied in
     //case test mode enabled
-    bool IsTestModeEnabled() const;
+    auto IsTestModeEnabled() const -> bool;
 
     //@brief Make all parsing warnings into errors. Have effect only in console mode. Use to force Valentina to
     //immediately terminate if a pattern contains a parsing warning.
-    bool IsPedantic() const;
+    auto IsPedantic() const -> bool;
 
-    bool IsNoScalingEnabled() const;
+    auto IsNoScalingEnabled() const -> bool;
 
     //@brief tests if user enabled export from cmd, throws exception if not exactly 1 input VAL file supplied in case
     //export enabled
-    bool IsExportEnabled() const;
+    auto IsExportEnabled() const -> bool;
 
     //@brief tests if user enabled export final measurements from cmd, throws exception if not exactly 1 input VAL
     //file supplied in case export enabled
-    bool IsExportFMEnabled() const;
+    auto IsExportFMEnabled() const -> bool;
 
     //@brief returns path to custom measure file or empty string
-    QString OptMeasurePath() const;
+    auto OptMeasurePath() const -> QString;
 
     //@brief returns the base name of layout files or empty string if not set
-    QString OptBaseName() const;
+    auto OptBaseName() const -> QString;
 
     //@brief returns the absolute path to output destination directory or path to application's current directory if
     //not set
-    QString OptDestinationPath() const;
+    auto OptDestinationPath() const -> QString;
 
     //@brief returns export type set, defaults 0 - svg
-    int OptExportType() const;
+    auto OptExportType() const -> int;
 
-    bool IsBinaryDXF() const;
-    bool IsTextAsPaths() const;
-    bool IsExportOnlyDetails() const;
-    bool IsCSVWithHeader() const;
+    auto IsBinaryDXF() const -> bool;
+    auto IsTextAsPaths() const -> bool;
+    auto IsExportOnlyDetails() const -> bool;
+    auto IsCSVWithHeader() const -> bool;
 
-    qreal ExportXScale() const;
-    qreal ExportYScale() const;
+    auto ExportXScale() const -> qreal;
+    auto ExportYScale() const -> qreal;
 
     //@brief returns the piece name regex or empty string if not set
-    QString OptExportSuchDetails() const;
+    auto OptExportSuchDetails() const -> QString;
 
     //@brief returns user selected csv codec or empty string if not set
-    QString OptCSVCodecName() const;
+    auto OptCSVCodecName() const -> QString;
 
     //@brief returns user selected csv separator or empty string if not set
-    QChar OptCSVSeparator() const;
+    auto OptCSVSeparator() const -> QChar;
 
     //@brief returns the destination path for export final measurements or empty string if not set
-    QString OptExportFMTo() const;
+    auto OptExportFMTo() const -> QString;
 
     //@brief returns list of user defined materials
-    QMap<int, QString> OptUserMaterials() const;
+    auto OptUserMaterials() const -> QMap<int, QString>;
 
     //generator creation is moved here ... because most options are for it only, so no need to create extra getters...
     //@brief creates VLayoutGenerator
-    VLayoutGeneratorPtr DefaultGenerator() const;
+    auto DefaultGenerator() const -> VLayoutGeneratorPtr;
 
     //@brief gets filenames which should be loaded
-    QStringList OptInputFileNames() const;
+    auto OptInputFileNames() const -> QStringList;
 
-    bool IsGuiEnabled()const;
+    auto IsGuiEnabled()const -> bool;
 
-    bool IsSetDimensionA() const;
-    bool IsSetDimensionB() const;
-    bool IsSetDimensionC() const;
+    auto IsSetDimensionA() const -> bool;
+    auto IsSetDimensionB() const -> bool;
+    auto IsSetDimensionC() const -> bool;
 
-    int OptDimensionA() const;
-    int OptDimensionB() const;
-    int OptDimensionC() const;
+    auto OptDimensionA() const -> int;
+    auto OptDimensionB() const -> int;
+    auto OptDimensionC() const -> int;
     
-    QMarginsF TiledPageMargins() const;
-    VAbstractLayoutDialog::PaperSizeTemplate OptTiledPaperSize() const;
-    PageOrientation OptTiledPageOrientation() const;
+    auto TiledPageMargins() const -> QMarginsF;
+    auto OptTiledPaperSize() const -> VAbstractLayoutDialog::PaperSizeTemplate;
+    auto OptTiledPageOrientation() const -> PageOrientation;
 
 protected:
 
     VCommandLine();
 
     //@brief returns VAbstractLayoutDialog::PaperSizeTemplate
-    VAbstractLayoutDialog::PaperSizeTemplate OptPaperSize() const;
+    auto OptPaperSize() const -> VAbstractLayoutDialog::PaperSizeTemplate;
 
-    Cases OptGroup() const;
+    auto OptGroup() const -> Cases;
 
     //@brief: called in destructor of application, so instance destroyed and new maybe created (never happen scenario though)
     static void Reset();
 
     //@brief called to create single object, by VApplication only
-    static VCommandLinePtr Get(const QCoreApplication& app);
+    static auto Get(const QCoreApplication& app) -> VCommandLinePtr;
 
 private:
-    Q_DISABLE_COPY(VCommandLine)
-    static VCommandLinePtr instance;
-    QCommandLineParser parser;
-    bool isGuiEnabled;
+    Q_DISABLE_COPY_MOVE(VCommandLine) // NOLINT
+    static VCommandLinePtr instance; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+    QCommandLineParser parser{};
+    bool isGuiEnabled{false};
     friend class VApplication;
     
-    VAbstractLayoutDialog::PaperSizeTemplate FormatSize(const QString &key) const;
+    auto FormatSize(const QString &key) const -> VAbstractLayoutDialog::PaperSizeTemplate;
 
     void InitCommandLineOptions();
-    bool IsOptionSet(const QString &option) const;
-    QString OptionValue(const QString &option) const;
-    QStringList OptionValues(const QString &option) const;
+    auto IsOptionSet(const QString &option) const -> bool;
+    auto OptionValue(const QString &option) const -> QString;
+    auto OptionValues(const QString &option) const -> QStringList;
 
-    int   OptNestingTime() const;
-    qreal OptEfficiencyCoefficient() const;
+    auto OptNestingTime() const -> int;
+    auto OptEfficiencyCoefficient() const -> qreal;
+
+    void TestPageformat() const;
+    void TestGapWidth() const;
+    void TestMargins() const;
+
+    auto ParseMargins(const DialogLayoutSettings &diag) const -> QMarginsF;
 };
 
 #endif // VCMDEXPORT_H

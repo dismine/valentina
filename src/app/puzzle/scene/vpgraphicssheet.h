@@ -33,6 +33,7 @@
 #include <QPainter>
 
 #include "../layout/layoutdef.h"
+#include "../vmisc/defglobal.h"
 
 class VPLayout;
 
@@ -40,7 +41,7 @@ class VPGraphicsSheet : public QGraphicsItem
 {
 public:
     explicit VPGraphicsSheet(const VPLayoutPtr &layout, QGraphicsItem *parent = nullptr);
-    ~VPGraphicsSheet()=default;
+    ~VPGraphicsSheet() override =default;
 
     auto boundingRect() const -> QRectF override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
@@ -63,7 +64,8 @@ public:
     void RefreshBoundingRect();
 
 private:
-    Q_DISABLE_COPY(VPGraphicsSheet)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VPGraphicsSheet) // NOLINT
 
     VPLayoutWeakPtr m_layout{};
 

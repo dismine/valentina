@@ -65,8 +65,8 @@ VVariable &VVariable::operator=(const VVariable &var)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VVariable::VVariable(const VVariable &&var) Q_DECL_NOTHROW
-    :VInternalVariable(var), d(var.d)
+VVariable::VVariable(VVariable &&var) Q_DECL_NOTHROW
+    :VInternalVariable(std::move(var)), d(std::move(var.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

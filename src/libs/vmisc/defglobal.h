@@ -30,8 +30,6 @@
 
 #include <QtGlobal>
 
-#include "backport/qoverload.h"
-
 constexpr qreal PrintDPI = 96.0;
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)

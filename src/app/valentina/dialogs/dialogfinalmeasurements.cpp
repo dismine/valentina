@@ -30,16 +30,14 @@
 #include "ui_dialogfinalmeasurements.h"
 #include "../vmisc/vvalentinasettings.h"
 #include "../vmisc/compatibility.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../qmuparser/qmudef.h"
-#include "../qmuparser/qmutokenparser.h"
-#include "../vpatterndb/vtranslatevars.h"
 #include "../vpatterndb/calculator.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
-#include "../core/vapplication.h"
 #include <QMenu>
 #include <qnumeric.h>
 
-#define DIALOG_MAX_FORMULA_HEIGHT 64
+constexpr int DIALOG_MAX_FORMULA_HEIGHT = 64;
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogFinalMeasurements::DialogFinalMeasurements(VPattern *doc, QWidget *parent)
@@ -74,8 +72,8 @@ DialogFinalMeasurements::DialogFinalMeasurements(VPattern *doc, QWidget *parent)
 
     connect(m_doc, &VPattern::FullUpdateFromFile, this, &DialogFinalMeasurements::FullUpdateFromFile);
 
-    ui->lineEditName->setValidator( new QRegularExpressionValidator(QRegularExpression(
-                                                                        QLatin1String("^$|")+NameRegExp()), this));
+    ui->lineEditName->setValidator(
+        new QRegularExpressionValidator(QRegularExpression(QStringLiteral("^$|")+NameRegExp()), this));
 
     connect(ui->tableWidget, &QTableWidget::itemSelectionChanged, this,
             &DialogFinalMeasurements::ShowFinalMeasurementDetails);
@@ -136,13 +134,13 @@ void DialogFinalMeasurements::changeEvent(QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogFinalMeasurements::eventFilter(QObject *object, QEvent *event)
+auto DialogFinalMeasurements::eventFilter(QObject *object, QEvent *event) -> bool
 {
-    if (QLineEdit *textEdit = qobject_cast<QLineEdit *>(object))
+    if (auto *textEdit = qobject_cast<QLineEdit *>(object))
     {
         if (event->type() == QEvent::KeyPress)
         {
-            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+            auto *keyEvent = static_cast<QKeyEvent *>(event); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
             if ((keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
             {
                 if (VAbstractApplication::VApp()->Settings()->GetOsSeparator())
@@ -162,7 +160,7 @@ bool DialogFinalMeasurements::eventFilter(QObject *object, QEvent *event)
         // pass the event on to the parent class
         return QDialog::eventFilter(object, event);
     }
-    return false;// pass the event to the widget
+    return false;// pass the event to the widget // clazy:exclude=base-class-event
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -416,14 +414,14 @@ void DialogFinalMeasurements::DeployFormula()
     {
         ui->plainTextEditFormula->setFixedHeight(DIALOG_MAX_FORMULA_HEIGHT);
         //Set icon from theme (internal for Windows system)
-        ui->pushButtonGrow->setIcon(QIcon::fromTheme("go-next",
+        ui->pushButtonGrow->setIcon(QIcon::fromTheme(QStringLiteral("go-next"),
                                                      QIcon(":/icons/win.icon.theme/16x16/actions/go-next.png")));
     }
     else
     {
        ui->plainTextEditFormula->setFixedHeight(formulaBaseHeight);
        //Set icon from theme (internal for Windows system)
-       ui->pushButtonGrow->setIcon(QIcon::fromTheme("go-down",
+       ui->pushButtonGrow->setIcon(QIcon::fromTheme(QStringLiteral("go-down"),
                                                     QIcon(":/icons/win.icon.theme/16x16/actions/go-down.png")));
     }
 
@@ -449,9 +447,8 @@ void DialogFinalMeasurements::Fx()
 
     QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(&m_data, NULL_ID, this));
     dialog->setWindowTitle(tr("Edit measurement"));
-    dialog->SetFormula(VAbstractApplication::VApp()->TrVars()
-                       ->TryFormulaFromUser(ui->plainTextEditFormula->toPlainText(),
-                                            VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+    dialog->SetFormula(VTranslateVars::TryFormulaFromUser(ui->plainTextEditFormula->toPlainText(),
+                                                          VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
     const QString postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
     dialog->setPostfix(postfix);//Show unit in dialog lable (cm, mm or inch)
 
@@ -518,14 +515,14 @@ void DialogFinalMeasurements::ShowUnits()
     {
         // calculated value
         const QString header = ui->tableWidget->horizontalHeaderItem(1)->text();
-        const QString unitHeader = QString("%1 (%2)").arg(header, unit);
+        const QString unitHeader = QStringLiteral("%1 (%2)").arg(header, unit);
         ui->tableWidget->horizontalHeaderItem(1)->setText(unitHeader);
     }
 
     {
         // formula
         const QString header = ui->tableWidget->horizontalHeaderItem(2)->text();
-        const QString unitHeader = QString("%1 (%2)").arg(header, unit);
+        const QString unitHeader = QStringLiteral("%1 (%2)").arg(header, unit);
         ui->tableWidget->horizontalHeaderItem(2)->setText(unitHeader);
     }
 }
@@ -533,7 +530,7 @@ void DialogFinalMeasurements::ShowUnits()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFinalMeasurements::AddCell(const QString &text, int row, int column, int aligment, bool ok)
 {
-    QTableWidgetItem *item = new QTableWidgetItem(text);
+    auto *item = new QTableWidgetItem(text);
     item->setTextAlignment(aligment);
 
     // set the item non-editable (view only), and non-selectable
@@ -552,7 +549,7 @@ void DialogFinalMeasurements::AddCell(const QString &text, int row, int column, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogFinalMeasurements::EvalUserFormula(const QString &formula, bool fromUser)
+auto DialogFinalMeasurements::EvalUserFormula(const QString &formula, bool fromUser) -> bool
 {
     const QString postfix =
             UnitsToStr(VAbstractValApplication::VApp()->patternUnits());//Show unit in dialog lable (cm, mm or inch)
@@ -562,44 +559,42 @@ bool DialogFinalMeasurements::EvalUserFormula(const QString &formula, bool fromU
         ui->labelCalculatedValue->setToolTip(tr("Empty field"));
         return false;
     }
-    else
+
+    try
     {
-        try
+        QString f;
+        // Replace line return character with spaces for calc if exist
+        if (fromUser)
         {
-            QString f;
-            // Replace line return character with spaces for calc if exist
-            if (fromUser)
-            {
-                f = VAbstractApplication::VApp()->TrVars()
-                        ->FormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
-            }
-            else
-            {
-                f = formula;
-            }
-            QScopedPointer<Calculator> cal(new Calculator());
-            const qreal result = cal->EvalFormula(m_data.DataVariables(), f);
-
-            if (qIsInf(result) || qIsNaN(result))
-            {
-                ui->labelCalculatedValue->setText(tr("Error") + " (" + postfix + ").");
-                ui->labelCalculatedValue->setToolTip(tr("Invalid result. Value is infinite or NaN. Please, check your "
-                                                        "calculations."));
-                return false;
-            }
-
-            ui->labelCalculatedValue->setText(
-                        VAbstractApplication::VApp()->LocaleToString(result) + QChar(QChar::Space) + postfix);
-            ui->labelCalculatedValue->setToolTip(tr("Value"));
-            return true;
+            f = VAbstractApplication::VApp()->TrVars()
+                    ->FormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
         }
-        catch (qmu::QmuParserError &e)
+        else
         {
-            ui->labelCalculatedValue->setText(tr("Error") + " (" + postfix + "). " +
-                                              tr("Parser error: %1").arg(e.GetMsg()));
-            ui->labelCalculatedValue->setToolTip(tr("Parser error: %1").arg(e.GetMsg()));
+            f = formula;
+        }
+        QScopedPointer<Calculator> cal(new Calculator());
+        const qreal result = cal->EvalFormula(m_data.DataVariables(), f);
+
+        if (qIsInf(result) || qIsNaN(result))
+        {
+            ui->labelCalculatedValue->setText(tr("Error") + " (" + postfix + ").");
+            ui->labelCalculatedValue->setToolTip(tr("Invalid result. Value is infinite or NaN. Please, check your "
+                                                    "calculations."));
             return false;
         }
+
+        ui->labelCalculatedValue->setText(
+                    VAbstractApplication::VApp()->LocaleToString(result) + QChar(QChar::Space) + postfix);
+        ui->labelCalculatedValue->setToolTip(tr("Value"));
+        return true;
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        ui->labelCalculatedValue->setText(tr("Error") + " (" + postfix + "). " +
+                                          tr("Parser error: %1").arg(e.GetMsg()));
+        ui->labelCalculatedValue->setToolTip(tr("Parser error: %1").arg(e.GetMsg()));
+        return false;
     }
 }
 
@@ -686,7 +681,7 @@ void DialogFinalMeasurements::UpdateTree()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal DialogFinalMeasurements::EvalFormula(const QString &formula, bool &ok)
+auto DialogFinalMeasurements::EvalFormula(const QString &formula, bool &ok) -> qreal
 {
     qreal result = 0;
     if (formula.isEmpty())
@@ -694,25 +689,23 @@ qreal DialogFinalMeasurements::EvalFormula(const QString &formula, bool &ok)
         ok = false;
         return result;
     }
-    else
-    {
-        try
-        {
-            // Replace line return character with spaces for calc if exist
-            QScopedPointer<Calculator> cal(new Calculator());
-            result = cal->EvalFormula(m_data.DataVariables(), formula);
 
-            if (qIsInf(result) || qIsNaN(result))
-            {
-                ok = false;
-                return 0;
-            }
-        }
-        catch (qmu::QmuParserError &)
+    try
+    {
+        // Replace line return character with spaces for calc if exist
+        QScopedPointer<Calculator> cal(new Calculator());
+        result = cal->EvalFormula(m_data.DataVariables(), formula);
+
+        if (qIsInf(result) || qIsNaN(result))
         {
             ok = false;
             return 0;
         }
+    }
+    catch (qmu::QmuParserError &)
+    {
+        ok = false;
+        return 0;
     }
 
     ok = true;
@@ -746,14 +739,14 @@ void DialogFinalMeasurements::InitSearch()
         SaveSearchRequest();
         InitSearchHistory();
         m_search->FindPrevious();
-        ui->labelResults->setText(QString("%1/%2").arg(m_search->MatchIndex()+1).arg(m_search->MatchCount()));
+        ui->labelResults->setText(QStringLiteral("%1/%2").arg(m_search->MatchIndex()+1).arg(m_search->MatchCount()));
     });
     connect(ui->toolButtonFindNext, &QToolButton::clicked, this, [this]()
     {
         SaveSearchRequest();
         InitSearchHistory();
         m_search->FindNext();
-        ui->labelResults->setText(QString("%1/%2").arg(m_search->MatchIndex()+1).arg(m_search->MatchCount()));
+        ui->labelResults->setText(QStringLiteral("%1/%2").arg(m_search->MatchIndex()+1).arg(m_search->MatchCount()));
     });
 
     connect(m_search.data(), &VTableSearch::HasResult, this, [this] (bool state)
@@ -763,7 +756,8 @@ void DialogFinalMeasurements::InitSearch()
 
         if (state)
         {
-            ui->labelResults->setText(QString("%1/%2").arg(m_search->MatchIndex()+1).arg(m_search->MatchCount()));
+            ui->labelResults->setText(
+                QStringLiteral("%1/%2").arg(m_search->MatchIndex()+1).arg(m_search->MatchCount()));
         }
         else
         {

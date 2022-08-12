@@ -45,7 +45,7 @@ class QDomElement;
 
 class VPatternConverter final : public VAbstractConverter
 {
-    Q_DECLARE_TR_FUNCTIONS(VPatternConverter)
+    Q_DECLARE_TR_FUNCTIONS(VPatternConverter) // NOLINT
 public:
     explicit VPatternConverter(const QString &fileName);
     virtual ~VPatternConverter() Q_DECL_EQ_DEFAULT;
@@ -71,7 +71,7 @@ protected:
     virtual bool IsReadOnly() const override;
 
 private:
-    Q_DISABLE_COPY(VPatternConverter)
+    Q_DISABLE_COPY_MOVE(VPatternConverter) // NOLINT
     static const QString PatternMinVerStr;
 
     void ToV0_2_0();

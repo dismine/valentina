@@ -270,8 +270,8 @@ auto VSpline::operator =(const VSpline &spline) -> VSpline &
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VSpline::VSpline(VSpline &&spline) Q_DECL_NOTHROW
-    : VAbstractCubicBezier(spline),
-      d(spline.d)
+    : VAbstractCubicBezier(std::move(spline)),
+      d(std::move(spline.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

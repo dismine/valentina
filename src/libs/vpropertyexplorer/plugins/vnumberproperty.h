@@ -85,7 +85,8 @@ public:
 public slots:
     void valueChanged(int i);
 private:
-    Q_DISABLE_COPY(VIntegerProperty) // NOLINT
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VIntegerProperty) // NOLINT
 
     double m_minValue;
     double m_maxValue;
@@ -146,7 +147,7 @@ public slots:
     void valueChanged(int i);
 
 private:
-    Q_DISABLE_COPY(VDoubleProperty)
+    Q_DISABLE_COPY_MOVE(VDoubleProperty) // NOLINT
 
     double m_minValue;
     double m_maxValue;

@@ -60,7 +60,8 @@ public:
     void printPT(double x, double y, double z);
 
 private:
-    Q_DISABLE_COPY(DRW_dbg)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DRW_dbg) // NOLINT
     DRW_dbg();
     ~DRW_dbg();
     static DRW_dbg *instance;

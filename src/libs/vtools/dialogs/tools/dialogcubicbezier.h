@@ -47,7 +47,7 @@ namespace Ui
 
 class DialogCubicBezier : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogCubicBezier(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
@@ -72,7 +72,7 @@ protected:
 private slots:
     void ValidateAlias();
 private:
-    Q_DISABLE_COPY(DialogCubicBezier)
+    Q_DISABLE_COPY_MOVE(DialogCubicBezier) // NOLINT
     Ui::DialogCubicBezier *ui;
 
     /** @brief spl spline */

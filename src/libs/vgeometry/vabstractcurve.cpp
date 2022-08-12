@@ -64,7 +64,7 @@ VAbstractCurve &VAbstractCurve::operator=(const VAbstractCurve &curve)
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractCurve::VAbstractCurve(VAbstractCurve &&curve) Q_DECL_NOTHROW
-    :VGObject(curve), d (curve.d)
+    :VGObject(std::move(curve)), d (std::move(curve.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

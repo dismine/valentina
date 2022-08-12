@@ -32,7 +32,6 @@
 #include <QMap>
 #include <QUuid>
 
-#include "def.h"
 #include "vplayoutsettings.h"
 #include "layoutdef.h"
 
@@ -44,9 +43,9 @@ struct VWatermarkData;
 
 class VPLayout : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
-    virtual ~VPLayout() = default;
+    ~VPLayout() override = default;
 
     static auto CreateLayout(QUndoStack *undoStack) -> VPLayoutPtr;
     static void AddPiece(const VPLayoutPtr &layout, const VPPiecePtr &piece);
@@ -83,7 +82,7 @@ public:
     auto PiecesForSheet(const VPSheetPtr &sheet) const -> QList<VPPiecePtr>;
     auto PiecesForSheet(const QUuid &uuid) const -> QList<VPPiecePtr>;
 
-    QUndoStack *UndoStack() const;
+    auto UndoStack() const -> QUndoStack *;
 
     void SetUndoStack(QUndoStack *newUndoStack);
 
@@ -100,7 +99,7 @@ public:
 
     auto IsSheetsUniform() const -> bool;
 
-    const QUuid &Uuid() const;
+    auto Uuid() const -> const QUuid &;
 
 signals:
     void PieceSheetChanged(const VPPiecePtr &piece);
@@ -119,7 +118,8 @@ protected:
     void AddPiece(const VPPiecePtr &piece);
 
 private:
-    Q_DISABLE_COPY(VPLayout)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VPLayout) // NOLINT
 
     QMap<QString, VPPiecePtr> m_pieces{};
 
@@ -137,6 +137,6 @@ private:
     QUuid m_uuid{QUuid::createUuid()};
 };
 
-Q_DECLARE_METATYPE(VPLayoutPtr)
+Q_DECLARE_METATYPE(VPLayoutPtr) // NOLINT
 
 #endif // VPLAYOUT_H

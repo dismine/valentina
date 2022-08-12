@@ -46,7 +46,7 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 
 class VPROPERTYEXPLORERSHARED_EXPORT VEmptyProperty : public VProperty
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     //! Standard constructor, takes a name and a parent property as argument
     explicit VEmptyProperty(const QString& name);
@@ -87,7 +87,7 @@ protected:
     explicit VEmptyProperty(VPropertyPrivate* d);
 
 private:
-    Q_DISABLE_COPY(VEmptyProperty)
+    Q_DISABLE_COPY_MOVE(VEmptyProperty) // NOLINT
 };
 
 QT_WARNING_POP

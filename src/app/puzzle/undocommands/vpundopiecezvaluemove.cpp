@@ -254,7 +254,7 @@ auto VPUndoPieceZValueMove::Levels(const QList<VPPiecePtr> &pieces, bool skip) c
         }
     }
 
-    return levels.values();
+    return levels.values(); // clazy:exclude=clazy-qt6-deprecated-api-fixes
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -497,11 +497,11 @@ auto VPUndoPiecesZValueMove::Levels(const QList<VPPiecePtr> &allPieces, const QV
         }
     }
 
-    return levels.values();
+    return levels.values(); // clazy:exclude=clazy-qt6-deprecated-api-fixes
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPUndoPiecesZValueMove::LevelStep(const QList<VPPiecePtr> &pieces) const -> qreal
+auto VPUndoPiecesZValueMove::LevelStep(const QList<VPPiecePtr> &pieces) -> qreal
 {
     QList<QVector<QString>> levels = Levels(pieces, QVector<QString>(), false);
     if (levels.isEmpty())

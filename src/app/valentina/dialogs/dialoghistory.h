@@ -52,19 +52,19 @@ namespace Ui
  */
 class DialogHistory : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     DialogHistory(VContainer *data, VPattern *doc, QWidget *parent = nullptr);
-    virtual ~DialogHistory() override;
+    ~DialogHistory() override;
 public slots:
-    virtual void      DialogAccepted() override;
+    void DialogAccepted() override;
     /** TODO ISSUE 79 : create real function
     * @brief DialogApply apply data and emit signal about applied dialog.
     */
-    virtual void      DialogApply() override {}
-    void              cellClicked(int row, int column);
-    void              ChangedCursor(quint32 id);
-    void              UpdateHistory();
+    void DialogApply() override {}
+    void cellClicked(int row, int column);
+    void ChangedCursor(quint32 id);
+    void UpdateHistory();
 signals:
     /**
      * @brief ShowHistoryTool signal change color of selected in records tool
@@ -73,36 +73,39 @@ signals:
      */
     void              ShowHistoryTool(quint32 id, bool enable);
 protected:
-    virtual void      closeEvent ( QCloseEvent * event ) override;
-    virtual void      changeEvent(QEvent* event) override;
-    virtual bool      IsValid() const final {return true;}
-    virtual void      showEvent( QShowEvent *event ) override;
+    void closeEvent ( QCloseEvent * event ) override;
+    void changeEvent(QEvent* event) override;
+    auto IsValid() const -> bool final {return true;}
+    void showEvent( QShowEvent *event ) override;
 private:
-    Q_DISABLE_COPY(DialogHistory)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogHistory) // NOLINT
 
     /** @brief ui keeps information about user interface */
     Ui::DialogHistory *ui;
 
     /** @brief doc dom document container */
-    VPattern          *doc;
+    VPattern *m_doc;
 
     /** @brief cursorRow save number of row where is cursor */
-    qint32            cursorRow{0};
+    qint32 m_cursorRow{0};
 
     /** @brief cursorToolRecordRow save number of row selected record */
-    qint32            cursorToolRecordRow{0};
+    qint32 m_cursorToolRecordRow{0};
     QSharedPointer<VTableSearch> m_search{};
 
     QMenu *m_searchHistory;
 
-    void              FillTable();
-    HistoryRecord     Record(const VToolRecord &tool) const;
-    void              InitialTable();
-    void              ShowPoint();
-    QString           PointName(quint32 pointId) const;
-    quint32           AttrUInt(const QDomElement &domElement, const QString &name) const;
-    void              RetranslateUi();
-    int               CursorRow() const;
+    void FillTable();
+    auto Record(const VToolRecord &tool) const -> HistoryRecord;
+    auto RecordDescription(const VToolRecord &tool, HistoryRecord record,
+                           const QDomElement &domElem) const -> HistoryRecord;
+    void InitialTable();
+    void ShowPoint();
+    auto PointName(quint32 pointId) const -> QString;
+    auto AttrUInt(const QDomElement &domElement, const QString &name) const -> quint32;
+    void RetranslateUi();
+    auto CursorRow() const -> int;
 
     void InitSearch();
     void InitSearchHistory();

@@ -34,17 +34,17 @@
 
 class VPUndoRemoveSheet : public VPUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VPUndoRemoveSheet(const VPSheetPtr &sheet, QUndoCommand *parent = nullptr);
-    virtual ~VPUndoRemoveSheet()=default;
+    ~VPUndoRemoveSheet() override =default;
 
-    virtual void undo() override;
-    virtual void redo() override;
-    virtual auto id() const -> int override;
+    void undo() override;
+    void redo() override;
+    auto id() const -> int override;
 
 private:
-    Q_DISABLE_COPY(VPUndoRemoveSheet)
+    Q_DISABLE_COPY_MOVE(VPUndoRemoveSheet) // NOLINT
 
     QList<VPPieceWeakPtr> m_pieces{};
     VPSheetWeakPtr        m_sheet;

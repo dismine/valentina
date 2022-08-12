@@ -44,7 +44,7 @@ public:
     void redo() override;
 private:
     // cppcheck-suppress unknownMacro
-    Q_DISABLE_COPY_MOVE(HideBackgroundImage)
+    Q_DISABLE_COPY_MOVE(HideBackgroundImage) // NOLINT
     QUuid m_id;
     bool m_hide;
     bool m_oldVisibility{false};

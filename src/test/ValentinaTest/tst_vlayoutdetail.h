@@ -33,7 +33,7 @@
 
 class TST_VLayoutDetail : public AbstractTest
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_VLayoutDetail(QObject *parent = nullptr);
 

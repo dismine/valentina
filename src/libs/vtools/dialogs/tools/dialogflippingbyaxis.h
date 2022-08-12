@@ -49,7 +49,7 @@ namespace Ui
 
 class DialogFlippingByAxis : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogFlippingByAxis(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
@@ -106,7 +106,7 @@ private slots:
     void PointChanged();
 
 private:
-    Q_DISABLE_COPY(DialogFlippingByAxis)
+    Q_DISABLE_COPY_MOVE(DialogFlippingByAxis) // NOLINT
 
     Ui::DialogFlippingByAxis *ui;
 

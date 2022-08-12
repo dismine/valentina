@@ -41,7 +41,7 @@
 
 class VisToolCutArc final : public VisPath
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolCutArc(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolCutArc() Q_DECL_EQ_DEFAULT;
@@ -51,7 +51,7 @@ public:
     virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolCutArc)};
 protected:
-    Q_DISABLE_COPY(VisToolCutArc)
+    Q_DISABLE_COPY_MOVE(VisToolCutArc) // NOLINT
     VScaledEllipse *point;
     VCurvePathItem *arc1;
     VCurvePathItem *arc2;

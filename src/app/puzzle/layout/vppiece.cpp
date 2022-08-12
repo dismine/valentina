@@ -29,7 +29,6 @@
 
 #include <QtMath>
 
-#include "../vmisc/def.h"
 #include "vpsheet.h"
 #include "vplayout.h"
 #include "../vlayout/vtextmanager.h"
@@ -40,7 +39,13 @@
 #include <QPainter>
 #include <QPainterPath>
 
-Q_LOGGING_CATEGORY(pPiece, "p.piece")
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
+QT_WARNING_DISABLE_INTEL(1418)
+
+Q_LOGGING_CATEGORY(pPiece, "p.piece") // NOLINT
+
+QT_WARNING_POP
 
 namespace
 {
@@ -207,7 +212,7 @@ void VPPiece::SetPosition(QPointF point)
 auto VPPiece::GetPosition() -> QPointF
 {
     QTransform matrix = GetMatrix();
-    return QPointF(matrix.dx(), matrix.dy());
+    return {matrix.dx(), matrix.dy()};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

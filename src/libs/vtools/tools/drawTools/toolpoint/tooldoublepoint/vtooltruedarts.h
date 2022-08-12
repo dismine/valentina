@@ -84,7 +84,7 @@ struct VToolTrueDartsInitData : VDrawToolInitData
 
 class VToolTrueDarts : public VToolDoublePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     static void    FindPoint(const QPointF &baseLineP1, const QPointF &baseLineP2, const QPointF &dartP1,
                              const QPointF &dartP2, const QPointF &dartP3, QPointF &p1, QPointF &p2);
@@ -115,7 +115,7 @@ protected:
     virtual void SetVisualization() override;
 
 private:
-    Q_DISABLE_COPY(VToolTrueDarts)
+    Q_DISABLE_COPY_MOVE(VToolTrueDarts) // NOLINT
     quint32 baseLineP1Id;
     quint32 baseLineP2Id;
     quint32 dartP1Id;

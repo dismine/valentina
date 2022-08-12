@@ -43,22 +43,20 @@
 #include <QGlobalStatic>
 
 #ifndef Q_OS_WIN
-    Q_GLOBAL_STATIC_WITH_ARGS(const QString, baseFilenameRegExp, (QLatin1String("^[^\\/]+$")))
+    Q_GLOBAL_STATIC_WITH_ARGS(const QString, baseFilenameRegExp, (QLatin1String("^[^\\/]+$"))) // NOLINT
 #else
-    Q_GLOBAL_STATIC_WITH_ARGS(const QString, baseFilenameRegExp, (QLatin1String("^[^\\:?\"*|\\/<>]+$")))
+    Q_GLOBAL_STATIC_WITH_ARGS(const QString, baseFilenameRegExp, (QLatin1String("^[^\\:?\"*|\\/<>]+$"))) // NOLINT
 #endif
 
-bool DialogSaveLayout::havePdf = false;
-bool DialogSaveLayout::tested  = false;
+bool DialogSaveLayout::havePdf = false; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+bool DialogSaveLayout::tested  = false; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName, QWidget *parent)
     :  VAbstractLayoutDialog(parent),
       ui(new Ui::DialogSaveLAyout),
-      count(count),
-      isInitialized(false),
-      m_mode(mode),
-      m_tiledExportMode(false)
+      m_count(count),
+      m_mode(mode)
 {
     ui->setupUi(this);
 
@@ -90,8 +88,7 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
         }
         else
         {
-            VException e(tr("The base filename does not match a regular expression."));
-            throw e;
+            throw VException(tr("The base filename does not match a regular expression."));
         }
     }
 
@@ -230,7 +227,7 @@ void DialogSaveLayout::SetBinaryDXFFormat(bool binary)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogSaveLayout::IsBinaryDXFFormat() const
+auto DialogSaveLayout::IsBinaryDXFFormat() const -> bool
 {
     switch(Format())
     {
@@ -278,7 +275,7 @@ bool DialogSaveLayout::IsBinaryDXFFormat() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogSaveLayout::MakeHelpFormatList()
+auto DialogSaveLayout::MakeHelpFormatList() -> QString
 {
    QString out(QStringLiteral("\n"));
    const auto formats = InitFormats();
@@ -316,8 +313,7 @@ void DialogSaveLayout::SetDestinationPath(const QString &cmdDestinationPath)
         QDir dir;
         if (not dir.cd(cmdDestinationPath))
         {
-            VException e(tr("The destination directory doesn't exists or is not readable."));
-            throw e;
+            throw VException(tr("The destination directory doesn't exists or is not readable."));
         }
         path = dir.absolutePath();
     }
@@ -327,7 +323,7 @@ void DialogSaveLayout::SetDestinationPath(const QString &cmdDestinationPath)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Draw DialogSaveLayout::Mode() const
+auto DialogSaveLayout::Mode() const -> Draw
 {
     return m_mode;
 }
@@ -339,19 +335,19 @@ DialogSaveLayout::~DialogSaveLayout()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogSaveLayout::Path() const
+auto DialogSaveLayout::Path() const -> QString
 {
     return ui->lineEditPath->text();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogSaveLayout::FileName() const
+auto DialogSaveLayout::FileName() const -> QString
 {
     return ui->lineEditFileName->text();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-LayoutExportFormats DialogSaveLayout::Format() const
+auto DialogSaveLayout::Format() const -> LayoutExportFormats
 {
     return static_cast<LayoutExportFormats>(ui->comboBoxFormat->currentData().toInt());
 }
@@ -361,7 +357,7 @@ void DialogSaveLayout::Save()
 {
     WriteSettings();
 
-    for (int i=0; i < count; ++i)
+    for (int i=0; i < m_count; ++i)
     {
         const QString name = Path()+'/'+FileName()+QString::number(i+1)+VLayoutExporter::ExportFormatSuffix(Format());
         if (QFile::exists(name))
@@ -374,10 +370,8 @@ void DialogSaveLayout::Save()
                 reject();
                 return;
             }
-            else
-            {
-                break;
-            }
+
+            break;
         }
     }
     accept();
@@ -503,7 +497,7 @@ void DialogSaveLayout::VerticalScaleChanged(double d)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogSaveLayout::IsTextAsPaths() const
+auto DialogSaveLayout::IsTextAsPaths() const -> bool
 {
     return ui->checkBoxTextAsPaths->isChecked();
 }
@@ -540,7 +534,7 @@ void DialogSaveLayout::SetTiledMargins(QMarginsF margins)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMarginsF DialogSaveLayout::GetTiledMargins() const
+auto DialogSaveLayout::GetTiledMargins() const -> QMarginsF
 {
     QMarginsF margins = QMarginsF(
         ui->doubleSpinBoxLeftField->value(),
@@ -563,7 +557,7 @@ void DialogSaveLayout::SetTiledPageFormat(PaperSizeTemplate format)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractLayoutDialog::PaperSizeTemplate DialogSaveLayout::GetTiledPageFormat() const
+auto DialogSaveLayout::GetTiledPageFormat() const -> VAbstractLayoutDialog::PaperSizeTemplate
 {
     if (ui->comboBoxTemplates->currentIndex() != -1)
     {
@@ -586,16 +580,14 @@ void DialogSaveLayout::SetTiledPageOrientation(PageOrientation orientation)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PageOrientation DialogSaveLayout::GetTiledPageOrientation() const
+auto DialogSaveLayout::GetTiledPageOrientation() const -> PageOrientation
 {
     if(ui->toolButtonPortrait->isChecked())
     {
         return PageOrientation::Portrait;
     }
-    else
-    {
-        return PageOrientation::Landscape;
-    }
+
+    return PageOrientation::Landscape;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -605,7 +597,7 @@ void DialogSaveLayout::SetXScale(qreal scale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal DialogSaveLayout::GetXScale() const
+auto DialogSaveLayout::GetXScale() const -> qreal
 {
     return ui->doubleSpinBoxHorizontalScale->value() / 100.;
 }
@@ -617,7 +609,7 @@ void DialogSaveLayout::SetYScale(qreal scale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal DialogSaveLayout::GetYScale() const
+auto DialogSaveLayout::GetYScale() const -> qreal
 {
     return ui->doubleSpinBoxVerticalScale->value() / 100.;
 }
@@ -631,7 +623,7 @@ void DialogSaveLayout::showEvent(QShowEvent *event)
         return;
     }
 
-    if (isInitialized)
+    if (m_isInitialized)
     {
         return;
     }
@@ -639,11 +631,11 @@ void DialogSaveLayout::showEvent(QShowEvent *event)
 
     setFixedHeight(size().height());
 
-    isInitialized = true;//first show windows are held
+    m_isInitialized = true;//first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogSaveLayout::SupportPSTest()
+auto DialogSaveLayout::SupportPSTest() -> bool
 {
     if (!tested)
     {
@@ -654,7 +646,7 @@ bool DialogSaveLayout::SupportPSTest()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<std::pair<QString, LayoutExportFormats> > DialogSaveLayout::InitFormats()
+auto DialogSaveLayout::InitFormats() -> QVector<std::pair<QString, LayoutExportFormats> >
 {
     QVector<std::pair<QString, LayoutExportFormats>> list;
 

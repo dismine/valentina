@@ -65,7 +65,7 @@ struct VToolLineInitData : VDrawToolInitData
  */
 class VToolLine: public VDrawTool, public VScaledLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     virtual void     setDialog() override;
     static VToolLine *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
@@ -114,7 +114,7 @@ protected:
     virtual void     SetVisualization() override;
     virtual QString  MakeToolTip() const override;
 private:
-    Q_DISABLE_COPY(VToolLine)
+    Q_DISABLE_COPY_MOVE(VToolLine) // NOLINT
 
     /** @brief firstPoint id first line point. */
     quint32           firstPoint;

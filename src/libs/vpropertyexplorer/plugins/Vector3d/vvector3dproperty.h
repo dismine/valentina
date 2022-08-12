@@ -75,7 +75,7 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 
 class VPROPERTYEXPLORERSHARED_EXPORT QVector3DProperty : public VProperty
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit QVector3DProperty(const QString& name);
 
@@ -113,7 +113,7 @@ public:
     virtual QVariant getValue() const override;
 
 private:
-    Q_DISABLE_COPY(QVector3DProperty)
+    Q_DISABLE_COPY_MOVE(QVector3DProperty) // NOLINT
 };
 
 QT_WARNING_POP

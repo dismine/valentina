@@ -32,6 +32,7 @@
 #include <QListWidgetItem>
 
 #include "../layout/layoutdef.h"
+#include "../vmisc/defglobal.h"
 
 class VPCarrouselPiece : public QListWidgetItem
 {
@@ -39,7 +40,7 @@ public:
     enum { Type = UserType + 1};
 
     explicit VPCarrouselPiece(const VPPiecePtr &piece, QListWidget* parent);
-    virtual ~VPCarrouselPiece() = default;
+    ~VPCarrouselPiece() override = default;
 
     /**
      * @brief GetPiece Returns the corresponding layout piece
@@ -61,7 +62,8 @@ public:
 
 
 private:
-    Q_DISABLE_COPY(VPCarrouselPiece)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VPCarrouselPiece) // NOLINT
     VPPieceWeakPtr m_piece;
 };
 

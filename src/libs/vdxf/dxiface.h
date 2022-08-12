@@ -89,7 +89,7 @@ public:
 
     dx_ifaceBlock* mBlock;              //container to store model entities
 private:
-    Q_DISABLE_COPY(dx_data)
+    Q_DISABLE_COPY_MOVE(dx_data) // NOLINT
 
 };
 
@@ -130,7 +130,7 @@ public:
     void AddASTMLayers();
 
 private:
-    Q_DISABLE_COPY(dx_iface)
+    Q_DISABLE_COPY_MOVE(dx_iface) // NOLINT
     dxfRW* dxfW; //pointer to writer, needed to send data
     dx_data cData; // class to store or read data
     DRW::Version version;

@@ -168,8 +168,7 @@ DialogMove::~DialogMove()
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogMove::GetAngle() const
 {
-    return VAbstractApplication::VApp()->TrVars()
-            ->TryFormulaFromUser(formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -194,8 +193,7 @@ void DialogMove::SetAngle(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogMove::GetLength() const
 {
-    return VAbstractApplication::VApp()->TrVars()
-            ->TryFormulaFromUser(formulaLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(formulaLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -220,8 +218,7 @@ void DialogMove::SetLength(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogMove::GetRotationAngle() const
 {
-    return VAbstractApplication::VApp()->TrVars()
-            ->TryFormulaFromUser(formulaRotationAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(formulaRotationAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

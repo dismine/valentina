@@ -46,7 +46,7 @@
  */
 class VGraphicsSimpleTextItem : public QObject, public QGraphicsSimpleTextItem
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VGraphicsSimpleTextItem(QGraphicsItem *parent = nullptr);
     explicit VGraphicsSimpleTextItem( const QString & text, QGraphicsItem *parent = nullptr );

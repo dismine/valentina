@@ -31,6 +31,8 @@
 
 #include <QDialog>
 
+#include "../vmisc/defglobal.h"
+
 namespace Ui
 {
     class DialogKnownMaterials;
@@ -38,14 +40,14 @@ namespace Ui
 
 class DialogKnownMaterials : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogKnownMaterials(QWidget *parent = nullptr);
-    virtual ~DialogKnownMaterials();
+    ~DialogKnownMaterials() override;
 
-    void        SetList(const QStringList &list);
-    QStringList GetList() const;
+    void SetList(const QStringList &list);
+    auto GetList() const -> QStringList;
 
 private slots:
     void ShowDetails();
@@ -54,7 +56,8 @@ private slots:
     void SaveText(const QString &text);
 
 private:
-    Q_DISABLE_COPY(DialogKnownMaterials)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogKnownMaterials) // NOLINT
     Ui::DialogKnownMaterials *ui;
 
     void SetupControls();

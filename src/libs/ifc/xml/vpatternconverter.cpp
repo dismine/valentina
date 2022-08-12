@@ -70,105 +70,105 @@ namespace
 {
 // The list of all string we use for conversion
 // Better to use global variables because repeating QStringLiteral blows up code size
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strUnit, (QLatin1String("unit")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVersion, (QLatin1String("version")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strName, (QLatin1String("name")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strBase, (QLatin1String("base")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strFormula, (QLatin1String("formula")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strId, (QLatin1String("id")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strKGrowth , (QLatin1String("kgrowth")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strKSize, (QLatin1String("ksize")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPoint, (QLatin1String("point")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strLength, (QLatin1String("length")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAngle, (QLatin1String("angle")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strC1Radius, (QLatin1String("c1Radius")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strC2Radius, (QLatin1String("c2Radius")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCRadius, (QLatin1String("cRadius")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strArc, (QLatin1String("arc")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAngle1, (QLatin1String("angle1")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAngle2, (QLatin1String("angle2")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strRadius, (QLatin1String("radius")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPathPoint, (QLatin1String("pathPoint")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strKAsm1, (QLatin1String("kAsm1")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strKAsm2, (QLatin1String("kAsm2")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPath, (QLatin1String("path")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strType, (QLatin1String("type")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCutArc, (QLatin1String("cutArc")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSpline, (QLatin1String("spline")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSplinePath, (QLatin1String("splinePath")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCutSpline, (QLatin1String("cutSpline")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCutSplinePath, (QLatin1String("cutSplinePath")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strColor, (QLatin1String("color")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMeasurements, (QLatin1String("measurements")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strIncrement, (QLatin1String("increment")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strIncrements, (QLatin1String("increments")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPreviewCalculations, (QLatin1String("previewCalculations")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strModeling, (QLatin1String("modeling")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTools, (QLatin1String("tools")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strIdTool, (QLatin1String("idTool")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strIdObject, (QLatin1String("idObject")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strChildren, (QLatin1String("children")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strChild, (QLatin1String("child")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPointOfIntersectionCurves, (QLatin1String("pointOfIntersectionCurves")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCurveIntersectAxis, (QLatin1String("curveIntersectAxis")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCurve, (QLatin1String("curve")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCurve1, (QLatin1String("curve1")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCurve2, (QLatin1String("curve2")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strModelingPath, (QLatin1String("modelingPath")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strModelingSpline, (QLatin1String("modelingSpline")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPointFromArcAndTangent, (QLatin1String("pointFromArcAndTangent")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPointOfIntersectionArcs, (QLatin1String("pointOfIntersectionArcs")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strFirstArc, (QLatin1String("firstArc")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSecondArc, (QLatin1String("secondArc")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strDetail, (QLatin1String("detail")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSupplement, (QLatin1String("supplement")))
-//Q_GLOBAL_STATIC_WITH_ARGS(const QString, strClosed, (QLatin1String("closed")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strWidth, (QLatin1String("width")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strHeight, (QLatin1String("height")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strNode, (QLatin1String("node")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strNodes, (QLatin1String("nodes")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strData, (QLatin1String("data")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPatternInfo, (QLatin1String("patternInfo")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strGrainline, (QLatin1String("grainline")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strReverse, (QLatin1String("reverse")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMx, (QLatin1String("mx")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMy, (QLatin1String("my")))
-//Q_GLOBAL_STATIC_WITH_ARGS(const QString, strForbidFlipping, (QLatin1String("forbidFlipping")))
-//Q_GLOBAL_STATIC_WITH_ARGS(const QString, strInLayout, (QLatin1String("inLayout")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSeamAllowance, (QLatin1String("seamAllowance")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strUUID, (QLatin1String("uuid")))
-//Q_GLOBAL_STATIC_WITH_ARGS(const QString, strNodeType, (QLatin1String("nodeType")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strDet, (QLatin1String("det")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTypeObject, (QLatin1String("typeObject")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strReadOnly, (QLatin1String("readOnly")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPatternLabel, (QLatin1String("patternLabel")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strImage, (QLatin1String("image")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAuthor, (QLatin1String("author")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strDescription, (QLatin1String("description")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strNotes, (QLatin1String("notes")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strGradation, (QLatin1String("gradation")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPatternName, (QLatin1String("patternName")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPatternNum, (QLatin1String("patternNumber")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCompanyName, (QLatin1String("company")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCustomerName, (QLatin1String("customer")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strLine, (QLatin1String("line")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strText, (QLatin1String("text")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strBold, (QLatin1String("bold")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strItalic, (QLatin1String("italic")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAlignment, (QLatin1String("alignment")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strFSIncrement, (QLatin1String("sfIncrement")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strShowDate, (QLatin1String("showDate")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strShowMeasurements, (QLatin1String("showMeasurements")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSize, (QLatin1String("size")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMCP, (QLatin1String("mcp")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strLetter, (QLatin1String("letter")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMaterial , (QLatin1String("material")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strUserDefined, (QLatin1String("userDef")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPlacement, (QLatin1String("placement")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCutNumber, (QLatin1String("cutNumber")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strQuantity, (QLatin1String("quantity")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strExtension, (QLatin1String("extension")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strContentType, (QLatin1String("contentType")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strUnit, (QLatin1String("unit"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVersion, (QLatin1String("version"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strName, (QLatin1String("name"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strBase, (QLatin1String("base"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strFormula, (QLatin1String("formula"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strId, (QLatin1String("id"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strKGrowth , (QLatin1String("kgrowth"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strKSize, (QLatin1String("ksize"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPoint, (QLatin1String("point"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strLength, (QLatin1String("length"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAngle, (QLatin1String("angle"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strC1Radius, (QLatin1String("c1Radius"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strC2Radius, (QLatin1String("c2Radius"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCRadius, (QLatin1String("cRadius"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strArc, (QLatin1String("arc"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAngle1, (QLatin1String("angle1"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAngle2, (QLatin1String("angle2"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strRadius, (QLatin1String("radius"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPathPoint, (QLatin1String("pathPoint"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strKAsm1, (QLatin1String("kAsm1"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strKAsm2, (QLatin1String("kAsm2"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPath, (QLatin1String("path"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strType, (QLatin1String("type"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCutArc, (QLatin1String("cutArc"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSpline, (QLatin1String("spline"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSplinePath, (QLatin1String("splinePath"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCutSpline, (QLatin1String("cutSpline"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCutSplinePath, (QLatin1String("cutSplinePath"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strColor, (QLatin1String("color"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMeasurements, (QLatin1String("measurements"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strIncrement, (QLatin1String("increment"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strIncrements, (QLatin1String("increments"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPreviewCalculations, (QLatin1String("previewCalculations"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strModeling, (QLatin1String("modeling"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTools, (QLatin1String("tools"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strIdTool, (QLatin1String("idTool"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strIdObject, (QLatin1String("idObject"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strChildren, (QLatin1String("children"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strChild, (QLatin1String("child"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPointOfIntersectionCurves, (QLatin1String("pointOfIntersectionCurves"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCurveIntersectAxis, (QLatin1String("curveIntersectAxis"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCurve, (QLatin1String("curve"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCurve1, (QLatin1String("curve1"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCurve2, (QLatin1String("curve2"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strModelingPath, (QLatin1String("modelingPath"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strModelingSpline, (QLatin1String("modelingSpline"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPointFromArcAndTangent, (QLatin1String("pointFromArcAndTangent"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPointOfIntersectionArcs, (QLatin1String("pointOfIntersectionArcs"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strFirstArc, (QLatin1String("firstArc"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSecondArc, (QLatin1String("secondArc"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strDetail, (QLatin1String("detail"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSupplement, (QLatin1String("supplement"))) // NOLINT
+//Q_GLOBAL_STATIC_WITH_ARGS(const QString, strClosed, (QLatin1String("closed"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strWidth, (QLatin1String("width"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strHeight, (QLatin1String("height"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strNode, (QLatin1String("node"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strNodes, (QLatin1String("nodes"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strData, (QLatin1String("data"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPatternInfo, (QLatin1String("patternInfo"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strGrainline, (QLatin1String("grainline"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strReverse, (QLatin1String("reverse"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMx, (QLatin1String("mx"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMy, (QLatin1String("my"))) // NOLINT
+//Q_GLOBAL_STATIC_WITH_ARGS(const QString, strForbidFlipping, (QLatin1String("forbidFlipping"))) // NOLINT
+//Q_GLOBAL_STATIC_WITH_ARGS(const QString, strInLayout, (QLatin1String("inLayout"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSeamAllowance, (QLatin1String("seamAllowance"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strUUID, (QLatin1String("uuid"))) // NOLINT
+//Q_GLOBAL_STATIC_WITH_ARGS(const QString, strNodeType, (QLatin1String("nodeType"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strDet, (QLatin1String("det"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTypeObject, (QLatin1String("typeObject"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strReadOnly, (QLatin1String("readOnly"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPatternLabel, (QLatin1String("patternLabel"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strImage, (QLatin1String("image"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAuthor, (QLatin1String("author"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strDescription, (QLatin1String("description"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strNotes, (QLatin1String("notes"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strGradation, (QLatin1String("gradation"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPatternName, (QLatin1String("patternName"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPatternNum, (QLatin1String("patternNumber"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCompanyName, (QLatin1String("company"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCustomerName, (QLatin1String("customer"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strLine, (QLatin1String("line"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strText, (QLatin1String("text"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strBold, (QLatin1String("bold"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strItalic, (QLatin1String("italic"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAlignment, (QLatin1String("alignment"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strFSIncrement, (QLatin1String("sfIncrement"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strShowDate, (QLatin1String("showDate"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strShowMeasurements, (QLatin1String("showMeasurements"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSize, (QLatin1String("size"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMCP, (QLatin1String("mcp"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strLetter, (QLatin1String("letter"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMaterial , (QLatin1String("material"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strUserDefined, (QLatin1String("userDef"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPlacement, (QLatin1String("placement"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCutNumber, (QLatin1String("cutNumber"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strQuantity, (QLatin1String("quantity"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strExtension, (QLatin1String("extension"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strContentType, (QLatin1String("contentType"))) // NOLINT
 } // anonymous namespace
 
 //---------------------------------------------------------------------------------------------------------------------

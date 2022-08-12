@@ -65,7 +65,7 @@ void VPUndoOriginMove::undo()
     }
 
     sheet->SetTransformationOrigin(m_oldOrigin);
-    layout->TransformationOriginChanged();
+    emit layout->TransformationOriginChanged();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

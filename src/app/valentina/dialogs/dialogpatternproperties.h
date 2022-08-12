@@ -33,8 +33,7 @@
 #include <QMap>
 #include <QPointer>
 
-#include "../vmisc/def.h"
-#include "../ifc/ifcdef.h"
+#include "../vmisc/defglobal.h"
 
 class VPattern;
 class VContainer;
@@ -49,14 +48,14 @@ namespace Ui
 
 class DialogPatternProperties : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit DialogPatternProperties(VPattern *doc, VContainer *pattern, QWidget *parent = nullptr);
-    virtual ~DialogPatternProperties() override;
+    ~DialogPatternProperties() override;
 signals:
     void UpddatePieces();
 protected:
-    virtual bool eventFilter(QObject *object, QEvent *event) override;
+    auto eventFilter(QObject *object, QEvent *event) -> bool override;
 private slots:
     void Apply();
     void Ok();
@@ -65,27 +64,28 @@ private slots:
     void SaveImage();
     void ShowImage();
 private:
-    Q_DISABLE_COPY(DialogPatternProperties)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogPatternProperties) // NOLINT
     Ui::DialogPatternProperties *ui;
-    VPattern               *doc;
-    VContainer             *pattern;
-    QMap<QCheckBox *, int> data{};
-    bool                   descriptionChanged{false};
-    bool                   defaultChanged{false};
-    bool                   securityChanged{false};
-    QAction                *deleteAction{nullptr};
-    QAction                *changeImageAction{nullptr};
-    QAction                *saveImageAction{nullptr};
-    QAction                *showImageAction{nullptr};
-    QCompleter             *m_completer{nullptr};
-    QStringList            m_variables{};
-    QString                m_oldPassmarkLength{};
+    VPattern *m_doc;
+    VContainer *m_pattern;
+    QMap<QCheckBox *, int> m_data{};
+    bool m_descriptionChanged{false};
+    bool m_defaultChanged{false};
+    bool m_securityChanged{false};
+    QAction *m_deleteAction{nullptr};
+    QAction *m_changeImageAction{nullptr};
+    QAction *m_saveImageAction{nullptr};
+    QAction *m_showImageAction{nullptr};
+    QCompleter *m_completer{nullptr};
+    QStringList m_variables{};
+    QString m_oldPassmarkLength{};
     QPointer<QTemporaryFile> m_tmpImage{};
 
-    void         SaveDescription();
-    void         SaveReadOnlyState();
+    void SaveDescription();
+    void SaveReadOnlyState();
 
-    void         InitImage();
+    void InitImage();
 
     void ValidatePassmarkLength() const;
 };

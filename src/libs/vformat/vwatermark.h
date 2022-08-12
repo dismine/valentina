@@ -33,7 +33,7 @@
 
 class VWatermark : public VDomDocument
 {
-    Q_DECLARE_TR_FUNCTIONS(VWatermark)
+    Q_DECLARE_TR_FUNCTIONS(VWatermark) // NOLINT
 public:
     VWatermark();
     virtual ~VWatermark() Q_DECL_EQ_DEFAULT;
@@ -57,7 +57,7 @@ public:
     static const QString AttrShow;
 
 private:
-    Q_DISABLE_COPY(VWatermark)
+    Q_DISABLE_COPY_MOVE(VWatermark) // NOLINT
 };
 
 #endif // VWATERMARK_H

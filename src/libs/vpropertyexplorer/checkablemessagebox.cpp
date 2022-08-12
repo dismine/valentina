@@ -105,7 +105,7 @@ public:
     QDialogButtonBox *buttonBox;
     QAbstractButton *clickedButton;
 private:
-    Q_DISABLE_COPY(CheckableMessageBoxPrivate)
+    Q_DISABLE_COPY_MOVE(CheckableMessageBoxPrivate) // NOLINT
 };
 
 CheckableMessageBox::CheckableMessageBox(QWidget *parent) :

@@ -36,15 +36,15 @@
 
 namespace
 {
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDataBaseGeometry, (QLatin1String("database/geometry")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchHistoryTape, (QLatin1String("searchHistory/tape")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDataBaseGeometry, (QLatin1String("database/geometry"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchHistoryTape, (QLatin1String("searchHistory/tape"))) // NOLINT
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeUseUnicodeProperties,
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeUseUnicodeProperties, // NOLINT
                           (QLatin1String("searchOptions/tapeUseUnicodeProperties")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeWholeWord,
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeWholeWord, // NOLINT
                           (QLatin1String("searchOptions/tapeWholeWord")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeRegexp, (QLatin1String("searchOptions/tapeRegexp")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeMatchCase,
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeRegexp, (QLatin1String("searchOptions/tapeRegexp"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeMatchCase, // NOLINT
                           (QLatin1String("searchOptions/tapeMatchCase")))
 }  // namespace
 
@@ -56,7 +56,7 @@ VTapeSettings::VTapeSettings(Format format, Scope scope, const QString &organiza
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QByteArray VTapeSettings::GetDataBaseGeometry() const
+auto VTapeSettings::GetDataBaseGeometry() const -> QByteArray
 {
     return value(*settingDataBaseGeometry).toByteArray();
 }

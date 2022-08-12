@@ -104,8 +104,8 @@ VPointF &VPointF::operator =(const VPointF &point)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VPointF::VPointF(const VPointF &&point) Q_DECL_NOTHROW
-    :VGObject(point), d(point.d)
+VPointF::VPointF(VPointF &&point) Q_DECL_NOTHROW
+    :VGObject(std::move(point)), d(std::move(point.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

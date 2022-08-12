@@ -67,7 +67,7 @@ struct VPiecePassmarkData
 };
 
 Q_DECLARE_METATYPE(VPiecePassmarkData)
-Q_DECLARE_TYPEINFO(VPiecePassmarkData, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VPiecePassmarkData, Q_MOVABLE_TYPE); // NOLINT
 
 QT_WARNING_POP
 

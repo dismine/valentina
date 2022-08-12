@@ -135,8 +135,8 @@ VPiece &VPiece::operator=(const VPiece &piece)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VPiece::VPiece(const VPiece &&piece) Q_DECL_NOTHROW
-    : VAbstractPiece(piece), d (piece.d)
+VPiece::VPiece(VPiece &&piece) Q_DECL_NOTHROW
+    : VAbstractPiece(std::move(piece)), d (std::move(piece.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

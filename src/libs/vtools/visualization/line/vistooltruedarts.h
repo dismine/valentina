@@ -41,7 +41,7 @@
 
 class VisToolTrueDarts :public VisLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolTrueDarts(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolTrueDarts() = default;
@@ -56,7 +56,8 @@ public:
     virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolTrueDarts)};
 private:
-    Q_DISABLE_COPY(VisToolTrueDarts)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolTrueDarts) // NOLINT
     quint32 baseLineP2Id;
     quint32 dartP1Id;
     quint32 dartP2Id;

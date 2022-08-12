@@ -48,7 +48,7 @@ namespace Ui
 
 class DialogCubicBezierPath : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogCubicBezierPath(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
@@ -72,7 +72,7 @@ private slots:
     void ValidateAlias();
 
 private:
-    Q_DISABLE_COPY(DialogCubicBezierPath)
+    Q_DISABLE_COPY_MOVE(DialogCubicBezierPath) // NOLINT
     Ui::DialogCubicBezierPath *ui;
 
     /** @brief path cubic bezier path */

@@ -35,6 +35,8 @@
 #include <QString>
 #include <QtGlobal>
 
+#include "../vmisc/defglobal.h"
+
 /**
     \brief Class showing a widget as popup window.
 
@@ -47,7 +49,7 @@
 */
 class VWidgetPopup : public QFrame
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     /** Constructor.
@@ -78,7 +80,8 @@ public slots:
     void Show(QPoint coord);
 
 protected:
-    Q_DISABLE_COPY(VWidgetPopup)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VWidgetPopup) // NOLINT
     QWidget *mWidget;
     bool mOwn;
     QWidget *mOldParent;

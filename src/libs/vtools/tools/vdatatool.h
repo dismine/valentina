@@ -46,7 +46,7 @@ Q_DECLARE_LOGGING_CATEGORY(vTool)
  */
 class VDataTool : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VDataTool(VContainer *data, QObject *parent = nullptr);
     virtual ~VDataTool() Q_DECL_EQ_DEFAULT;
@@ -63,7 +63,7 @@ protected:
     /** @brief _referens keep count tools what use this tool. If value more than 1 you can't delete tool. */
     quint32                _referens;
 private:
-    Q_DISABLE_COPY(VDataTool)
+    Q_DISABLE_COPY_MOVE(VDataTool) // NOLINT
 };
 
 //---------------------------------------------------------------------------------------------------------------------

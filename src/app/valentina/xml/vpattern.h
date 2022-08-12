@@ -45,7 +45,7 @@ class VToolSeamAllowance;
  */
 class VPattern : public VAbstractPattern
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VPattern(VContainer *data, VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail,
              QObject *parent = nullptr);
@@ -126,7 +126,8 @@ protected:
     virtual void   customEvent(QEvent * event) override;
 
 private:
-    Q_DISABLE_COPY(VPattern)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VPattern) // NOLINT
 
     /** @brief data container with data. */
     VContainer     *data;

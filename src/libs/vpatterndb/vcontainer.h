@@ -121,7 +121,7 @@ QT_WARNING_POP
  */
 class VContainer
 {
-    Q_DECLARE_TR_FUNCTIONS(VContainer)
+    Q_DECLARE_TR_FUNCTIONS(VContainer) // NOLINT
 public:
     VContainer(const VTranslateVars *trVars, const Unit *patternUnit, const QString &nspace);
     VContainer(const VContainer &data);
@@ -131,7 +131,7 @@ public:
 
     VContainer &operator=(const VContainer &data);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VContainer(const VContainer &&data) Q_DECL_NOTHROW;
+    VContainer(VContainer &&data) Q_DECL_NOTHROW;
     VContainer &operator=(VContainer &&data) Q_DECL_NOTHROW;
 #endif
 
@@ -246,7 +246,7 @@ private:
     static void ClearNamespace(const QString &nspace);
 };
 
-Q_DECLARE_TYPEINFO(VContainer, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VContainer, Q_MOVABLE_TYPE); // NOLINT
 
 /*
 *  Defintion of templated member functions of VContainer

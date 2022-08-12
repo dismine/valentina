@@ -45,7 +45,7 @@ namespace Ui
 
 class DialogTrueDarts : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     DialogTrueDarts(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
@@ -88,7 +88,7 @@ protected:
     virtual bool       IsValid() const final;
 
 private:
-    Q_DISABLE_COPY(DialogTrueDarts)
+    Q_DISABLE_COPY_MOVE(DialogTrueDarts) // NOLINT
     Ui::DialogTrueDarts *ui;
 
     QString d1PointName;

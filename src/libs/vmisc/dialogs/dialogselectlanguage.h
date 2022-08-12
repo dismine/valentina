@@ -30,6 +30,8 @@
 
 #include <QDialog>
 
+#include "../vmisc/defglobal.h"
+
 namespace Ui
 {
 class DialogSelectLanguage;
@@ -37,7 +39,7 @@ class DialogSelectLanguage;
 
 class DialogSelectLanguage : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogSelectLanguage(QWidget *parent = nullptr);
@@ -46,7 +48,8 @@ public:
     QString Locale() const;
 
 private:
-    Q_DISABLE_COPY(DialogSelectLanguage)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogSelectLanguage) // NOLINT
     Ui::DialogSelectLanguage *ui;
 };
 

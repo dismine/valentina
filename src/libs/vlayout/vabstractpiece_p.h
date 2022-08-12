@@ -47,7 +47,7 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
 class VAbstractPieceData : public QSharedData
 {
-    Q_DECLARE_TR_FUNCTIONS(VAbstractPieceData)
+    Q_DECLARE_TR_FUNCTIONS(VAbstractPieceData) // NOLINT
 public:
     VAbstractPieceData()
     {}

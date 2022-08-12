@@ -86,7 +86,7 @@ protected:
     bool readOnly;
 
 private:
-    Q_DISABLE_COPY(VTextProperty)
+    Q_DISABLE_COPY_MOVE(VTextProperty) // NOLINT
 };
 
 QT_WARNING_POP

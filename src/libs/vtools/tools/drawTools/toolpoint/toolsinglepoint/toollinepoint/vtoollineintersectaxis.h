@@ -64,7 +64,7 @@ struct VToolLineIntersectAxisInitData : VToolLinePointInitData
 
 class VToolLineIntersectAxis : public VToolLinePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     virtual ~VToolLineIntersectAxis() Q_DECL_EQ_DEFAULT;
     virtual void setDialog() override;
@@ -97,7 +97,7 @@ protected:
     virtual QString MakeToolTip() const override;
     virtual void    hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
 private:
-    Q_DISABLE_COPY(VToolLineIntersectAxis)
+    Q_DISABLE_COPY_MOVE(VToolLineIntersectAxis) // NOLINT
 
     QString formulaAngle;
     quint32 firstPointId;

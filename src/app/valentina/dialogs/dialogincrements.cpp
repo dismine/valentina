@@ -45,7 +45,7 @@
 #include <QtNumeric>
 #include <QMenu>
 
-#define DIALOG_MAX_FORMULA_HEIGHT 64
+constexpr int DIALOG_MAX_FORMULA_HEIGHT = 64;
 
 namespace
 {
@@ -62,8 +62,8 @@ enum class IncrUnits : qint8 {Pattern, Degrees};
 DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *parent)
     :DialogTool(data, NULL_ID, parent),
       ui(new Ui::DialogIncrements),
-      data(data),
-      doc(doc),
+      m_data(data),
+      m_doc(doc),
       m_completeData(doc->GetCompleteData()),
       m_searchHistory(new QMenu(this)),
       m_searchHistoryPC(new QMenu(this))
@@ -116,7 +116,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     FillRadiusesArcs();
     FillAnglesCurves();
 
-    connect(this->doc, &VPattern::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
+    connect(this->m_doc, &VPattern::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
 
     ui->tabWidget->setCurrentIndex(0);
     auto *validator = new QRegularExpressionValidator(QRegularExpression(QStringLiteral("^$|")+NameRegExp()), this);
@@ -171,13 +171,13 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
  */
 void DialogIncrements::FillIncrements()
 {
-    FillIncrementsTable(ui->tableWidgetIncrement, data->DataIncrementsWithSeparators(), false);
+    FillIncrementsTable(ui->tableWidgetIncrement, m_data->DataIncrementsWithSeparators(), false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::FillPreviewCalculations()
 {
-    FillIncrementsTable(ui->tableWidgetPC, data->DataIncrementsWithSeparators(), true);
+    FillIncrementsTable(ui->tableWidgetPC, m_data->DataIncrementsWithSeparators(), true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -331,7 +331,7 @@ auto DialogIncrements::GetCustomName() const -> QString
         name = CustomIncrSign + VAbstractApplication::VApp()->TrVars()->InternalVarToUser(increment_) +
                QString::number(num);
         num++;
-    } while (not data->IsUnique(name));
+    } while (not m_data->IsUnique(name));
     return name;
 }
 
@@ -586,7 +586,7 @@ void DialogIncrements::EnableDetails(QTableWidget *table, bool enabled)
     {
         const QTableWidgetItem *nameField = table->item(table->currentRow(), 0);
         SCASSERT(nameField != nullptr)
-        QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(nameField->text());
+        QSharedPointer<VIncrement> incr = m_data->GetVariable<VIncrement>(nameField->text());
         const bool isSeparator = incr->GetIncrementType() == IncrementType::Separator;
 
         if (table == ui->tableWidgetIncrement)
@@ -617,7 +617,7 @@ void DialogIncrements::EnableDetails(QTableWidget *table, bool enabled)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::LocalUpdateTree()
 {
-    doc->LiteParseIncrements();
+    m_doc->LiteParseIncrements();
 
     int row = ui->tableWidgetIncrement->currentRow();
 
@@ -642,7 +642,7 @@ void DialogIncrements::LocalUpdateTree()
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogIncrements::IncrementUsed(const QString &name) const -> bool
 {
-    const QVector<VFormulaField> expressions = doc->ListExpressions();
+    const QVector<VFormulaField> expressions = m_doc->ListExpressions();
 
     for(const auto &field : expressions)
     {
@@ -723,7 +723,7 @@ void DialogIncrements::ShowTableIncrementDetails(QTableWidget *table)
 
         try
         {
-            incr = data->GetVariable<VIncrement>(nameField->text());
+            incr = m_data->GetVariable<VIncrement>(nameField->text());
         }
         catch(const VExceptionBadId &e)
         {
@@ -811,15 +811,15 @@ void DialogIncrements::AddNewIncrement(IncrementType type)
     if (table->currentRow() == -1)
     {
         currentRow = table->rowCount();
-        incrementMode ? doc->AddEmptyIncrement(name, type) : doc->AddEmptyPreviewCalculation(name, type);
+        incrementMode ? m_doc->AddEmptyIncrement(name, type) : m_doc->AddEmptyPreviewCalculation(name, type);
     }
     else
     {
         currentRow  = table->currentRow()+1;
         const QTableWidgetItem *nameField = table->item(table->currentRow(), 0);
 
-        incrementMode ? doc->AddEmptyIncrementAfter(nameField->text(), name, type) :
-                        doc->AddEmptyPreviewCalculationAfter(nameField->text(), name, type);
+        incrementMode ? m_doc->AddEmptyIncrementAfter(nameField->text(), name, type) :
+                        m_doc->AddEmptyPreviewCalculationAfter(nameField->text(), name, type);
     }
 
     m_hasChanges = true;
@@ -1234,7 +1234,7 @@ void DialogIncrements::FullUpdateFromFile()
     ui->tableWidgetLinesAngles->clearContents();
     ui->tableWidgetRadiusesArcs->clearContents();
 
-    m_completeData = doc->GetCompleteData();
+    m_completeData = m_doc->GetCompleteData();
 
     FillIncrements();
     FillPreviewCalculations();
@@ -1257,17 +1257,17 @@ void DialogIncrements::RefreshPattern()
 {
     if (m_hasChanges)
     {
-        QVector<VFormulaField> expressions = doc->ListExpressions();
+        QVector<VFormulaField> expressions = m_doc->ListExpressions();
         for (auto &item : m_renameList)
         {
-            doc->ReplaceNameInFormula(expressions, item.first, item.second);
+            m_doc->ReplaceNameInFormula(expressions, item.first, item.second);
         }
         m_renameList.clear();
 
         const int row = ui->tableWidgetIncrement->currentRow();
         const int rowPC = ui->tableWidgetPC->currentRow();
 
-        doc->LiteParseTree(Document::FullLiteParse);
+        m_doc->LiteParseTree(Document::FullLiteParse);
 
         ui->tableWidgetIncrement->blockSignals(true);
         ui->tableWidgetIncrement->selectRow(row);
@@ -1395,11 +1395,11 @@ void DialogIncrements::RemoveIncrement()
 
     if (button == ui->toolButtonRemove)
     {
-        doc->RemoveIncrement(nameField->text());
+        m_doc->RemoveIncrement(nameField->text());
     }
     else if (button == ui->toolButtonRemovePC)
     {
-        doc->RemovePreviewCalculation(nameField->text());
+        m_doc->RemovePreviewCalculation(nameField->text());
     }
 
     m_hasChanges = true;
@@ -1440,11 +1440,11 @@ void DialogIncrements::MoveUp()
 
     if (button == ui->toolButtonUp)
     {
-        doc->MoveUpIncrement(nameField->text());
+        m_doc->MoveUpIncrement(nameField->text());
     }
     else if (button == ui->toolButtonUpPC)
     {
-        doc->MoveUpPreviewCalculation(nameField->text());
+        m_doc->MoveUpPreviewCalculation(nameField->text());
     }
 
     m_hasChanges = true;
@@ -1485,11 +1485,11 @@ void DialogIncrements::MoveDown()
 
     if (button == ui->toolButtonDown)
     {
-        doc->MoveDownIncrement(nameField->text());
+        m_doc->MoveDownIncrement(nameField->text());
     }
     else if (button == ui->toolButtonDownPC)
     {
-        doc->MoveDownPreviewCalculation(nameField->text());
+        m_doc->MoveDownPreviewCalculation(nameField->text());
     }
 
     m_hasChanges = true;
@@ -1531,7 +1531,7 @@ void DialogIncrements::SaveIncrName(const QString &text)
     QString newName = text.isEmpty() ? GetCustomName() : CustomIncrSign + text;
     bool updateFlag = not text.isEmpty();
 
-    if (not data->IsUnique(newName))
+    if (not m_data->IsUnique(newName))
     {
         updateFlag = false;
         qint32 num = 2;
@@ -1540,13 +1540,13 @@ void DialogIncrements::SaveIncrName(const QString &text)
         {
             name = name + '_' + QString::number(num);
             num++;
-        } while (not data->IsUnique(name));
+        } while (not m_data->IsUnique(name));
         newName = name;
     }
 
-    doc->SetIncrementName(nameField->text(), newName);
-    QVector<VFormulaField> expression = doc->ListIncrementExpressions();
-    doc->ReplaceNameInFormula(expression, nameField->text(), newName);
+    m_doc->SetIncrementName(nameField->text(), newName);
+    QVector<VFormulaField> expression = m_doc->ListIncrementExpressions();
+    m_doc->ReplaceNameInFormula(expression, nameField->text(), newName);
 
     CacheRename(nameField->text(), newName);
 
@@ -1558,7 +1558,7 @@ void DialogIncrements::SaveIncrName(const QString &text)
     else
     {
         nameField->setText(newName);
-        doc->LiteParseIncrements();
+        m_doc->LiteParseIncrements();
     }
 
     table->blockSignals(true);
@@ -1596,7 +1596,7 @@ void DialogIncrements::SaveIncrUnits()
     const QTableWidgetItem *nameField = table->item(row, 0);
 
     const IncrUnits units = static_cast<IncrUnits>(combo->currentData().toInt());
-    doc->SetIncrementSpecialUnits(nameField->text(), units == IncrUnits::Degrees);
+    m_doc->SetIncrementSpecialUnits(nameField->text(), units == IncrUnits::Degrees);
     LocalUpdateTree();
 
     table->blockSignals(true);
@@ -1636,7 +1636,7 @@ void DialogIncrements::SaveIncrDescription()
     const QTextCursor cursor = textEdit->textCursor();
 
     const QTableWidgetItem *nameField = table->item(row, 0);
-    doc->SetIncrementDescription(nameField->text(), textEdit->toPlainText());
+    m_doc->SetIncrementDescription(nameField->text(), textEdit->toPlainText());
     LocalUpdateTree();
 
     table->blockSignals(true);
@@ -1678,7 +1678,7 @@ void DialogIncrements::SaveIncrFormula()
     const QTableWidgetItem *nameField = table->item(row, 0);
 
     QString text = textEdit->toPlainText();
-    QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(nameField->text());
+    QSharedPointer<VIncrement> incr = m_data->GetVariable<VIncrement>(nameField->text());
 
     QTableWidgetItem *formulaField = table->item(row, 2);
     if (formulaField->text() == text)
@@ -1726,7 +1726,7 @@ void DialogIncrements::SaveIncrFormula()
     {
         const QString formula = VAbstractApplication::VApp()->TrVars()
                 ->FormulaFromUser(text, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
-        doc->SetIncrementFormula(nameField->text(), formula);
+        m_doc->SetIncrementFormula(nameField->text(), formula);
     }
     catch (qmu::QmuParserError &e) // Just in case something bad will happen
     {
@@ -1837,7 +1837,7 @@ void DialogIncrements::Fx()
     }
 
     const QTableWidgetItem *nameField = table->item(row, 0);
-    QSharedPointer<VIncrement> incr = data->GetVariable<VIncrement>(nameField->text());
+    QSharedPointer<VIncrement> incr = m_data->GetVariable<VIncrement>(nameField->text());
 
     QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(incr->GetData(), NULL_ID, this));
     dialog->setWindowTitle(tr("Edit increment"));
@@ -1852,7 +1852,7 @@ void DialogIncrements::Fx()
     {
         // Fix the bug #492. https://bitbucket.org/dismine/valentina/issues/492/valentina-crashes-when-add-an-increment
         // Because of the bug need to take QTableWidgetItem twice time. Previous update "killed" the pointer.
-        doc->SetIncrementFormula(table->item(row, 0)->text(), dialog->GetFormula());
+        m_doc->SetIncrementFormula(table->item(row, 0)->text(), dialog->GetFormula());
 
         m_hasChanges = true;
         LocalUpdateTree();
@@ -1871,7 +1871,7 @@ void DialogIncrements::closeEvent(QCloseEvent *event)
     ui->lineEditName->blockSignals(true);
     ui->plainTextEditDescription->blockSignals(true);
 
-    disconnect(this->doc, &VPattern::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
+    disconnect(this->m_doc, &VPattern::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
 
     VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
@@ -1996,7 +1996,7 @@ void DialogIncrements::RestoreAfterClose()
     // Because of bug on Mac OS with Qt 5.11 closing this dialog causes a crash. Instead of closing we will keep
     // dialog in memory and reuse it again. This function redo some moves made after close.
 
-    connect(this->doc, &VPattern::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
+    connect(this->m_doc, &VPattern::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
 
     ui->tabWidget->setCurrentIndex(0);
 

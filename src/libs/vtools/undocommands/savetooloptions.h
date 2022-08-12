@@ -40,7 +40,7 @@
 
 class SaveToolOptions : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     SaveToolOptions(const QDomElement &oldXml, const QDomElement &newXml, const QList<quint32> &oldDependencies,
                     const QList<quint32> &newDependencies, VAbstractPattern *doc, const quint32 &id,
@@ -55,7 +55,8 @@ public:
     quint32        getToolId() const;
     QList<quint32> NewDependencies() const;
 private:
-    Q_DISABLE_COPY(SaveToolOptions)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(SaveToolOptions) // NOLINT
     const QDomElement    oldXml;
     QDomElement          newXml;
     const QList<quint32> oldDependencies;

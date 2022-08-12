@@ -38,7 +38,7 @@ namespace Ui
 
 class DialogPin : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit DialogPin(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogPin();
@@ -61,7 +61,7 @@ protected:
     virtual bool IsValid() const final;
 
 private:
-    Q_DISABLE_COPY(DialogPin)
+    Q_DISABLE_COPY_MOVE(DialogPin) // NOLINT
     Ui::DialogPin *ui;
     bool m_showMode;
     bool m_flagPoint;

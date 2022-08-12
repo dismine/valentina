@@ -31,6 +31,8 @@
 
 #include <QDialog>
 
+#include "../vmisc/defglobal.h"
+
 namespace Ui
 {
     class DialogExportToCSV;
@@ -38,7 +40,7 @@ namespace Ui
 
 class DialogExportToCSV : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogExportToCSV(QWidget *parent = nullptr);
@@ -63,7 +65,8 @@ protected:
     virtual void showEvent(QShowEvent *event) override;
 
 private:
-    Q_DISABLE_COPY(DialogExportToCSV)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogExportToCSV) // NOLINT
     Ui::DialogExportToCSV *ui;
     bool isInitialized;
     QString m_fileName;

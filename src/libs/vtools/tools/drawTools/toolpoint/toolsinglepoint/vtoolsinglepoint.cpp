@@ -46,10 +46,8 @@
 #include "../../../../undocommands/label/movelabel.h"
 #include "../../../../undocommands/label/showlabel.h"
 #include "../ifc/exception/vexception.h"
-#include "../ifc/exception/vexceptionbadid.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vmisc/diagnostic.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vabstractcubicbezierpath.h"
@@ -71,7 +69,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
 QT_WARNING_DISABLE_INTEL(1418)
 
-Q_LOGGING_CATEGORY(vToolSinglePoint, "v.toolSinglePoint")
+Q_LOGGING_CATEGORY(vToolSinglePoint, "v.toolSinglePoint") // NOLINT
 
 QT_WARNING_POP
 

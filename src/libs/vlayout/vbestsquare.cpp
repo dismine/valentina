@@ -73,8 +73,8 @@ VBestSquare &VBestSquare::operator=(const VBestSquare &res)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VBestSquare::VBestSquare(const VBestSquare &&res) Q_DECL_NOTHROW
-    : d(res.d)
+VBestSquare::VBestSquare(VBestSquare &&res) Q_DECL_NOTHROW
+    : d(std::move(res.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

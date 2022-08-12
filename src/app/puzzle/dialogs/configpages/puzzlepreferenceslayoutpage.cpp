@@ -399,7 +399,7 @@ void PuzzlePreferencesLayoutPage::InitLayoutUnits()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSizeF PuzzlePreferencesLayoutPage::Template(VAbstractLayoutDialog::PaperSizeTemplate t) const
+auto PuzzlePreferencesLayoutPage::Template(VAbstractLayoutDialog::PaperSizeTemplate t) const -> QSizeF
 {
     const Unit layoutUnit = LayoutUnit();
 
@@ -413,7 +413,6 @@ QSizeF PuzzlePreferencesLayoutPage::Template(VAbstractLayoutDialog::PaperSizeTem
         case VAbstractLayoutDialog::PaperSizeTemplate::Letter:
         case VAbstractLayoutDialog::PaperSizeTemplate::Legal:
         case VAbstractLayoutDialog::PaperSizeTemplate::Tabloid:
-            return VAbstractLayoutDialog::GetTemplateSize(t, layoutUnit);
         case VAbstractLayoutDialog::PaperSizeTemplate::Roll24in:
         case VAbstractLayoutDialog::PaperSizeTemplate::Roll30in:
         case VAbstractLayoutDialog::PaperSizeTemplate::Roll36in:
@@ -422,13 +421,12 @@ QSizeF PuzzlePreferencesLayoutPage::Template(VAbstractLayoutDialog::PaperSizeTem
         case VAbstractLayoutDialog::PaperSizeTemplate::Roll48in:
         case VAbstractLayoutDialog::PaperSizeTemplate::Roll62in:
         case VAbstractLayoutDialog::PaperSizeTemplate::Roll72in:
-            return VAbstractLayoutDialog::GetTemplateSize(t, layoutUnit);
         case VAbstractLayoutDialog::PaperSizeTemplate::Custom:
             return VAbstractLayoutDialog::GetTemplateSize(t, layoutUnit);
         default:
             break;
     }
-    return QSizeF();
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

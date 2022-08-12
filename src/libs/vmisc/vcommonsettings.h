@@ -45,204 +45,205 @@ class QMarginsF;
 
 class VCommonSettings : public QSettings
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VCommonSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
               QObject *parent = nullptr);
     VCommonSettings(const QString &fileName, Format format, QObject *parent = nullptr);
+    ~VCommonSettings() override =default;
 
-    static QString SharePath(const QString &shareItem);
-    static QString MultisizeTablesPath();
-    static QString StandardTemplatesPath();
-    static QString LabelTemplatesPath();
+    static auto SharePath(const QString &shareItem) -> QString;
+    static auto MultisizeTablesPath() -> QString;
+    static auto StandardTemplatesPath() -> QString;
+    static auto LabelTemplatesPath() -> QString;
 
-    static QString PrepareStandardTemplates(const QString &currentPath);
-    static QString PrepareMultisizeTables(const QString &currentPath);
-    static QString PrepareLabelTemplates(const QString &currentPath);
+    static auto PrepareStandardTemplates(const QString &currentPath) -> QString;
+    static auto PrepareMultisizeTables(const QString &currentPath) -> QString;
+    static auto PrepareLabelTemplates(const QString &currentPath) -> QString;
 
-    static QString GetDefPathIndividualMeasurements();
-    QString GetPathIndividualMeasurements() const;
+    static auto GetDefPathIndividualMeasurements() -> QString;
+    auto GetPathIndividualMeasurements() const -> QString;
     void SetPathIndividualMeasurements(const QString &value);
 
-    static QString GetDefPathMultisizeMeasurements();
-    QString GetPathMultisizeMeasurements() const;
+    static auto GetDefPathMultisizeMeasurements() -> QString;
+    auto GetPathMultisizeMeasurements() const -> QString;
     void SetPathMultisizeMeasurements(const QString &value);
 
-    static QString GetDefPathPattern();
-    QString GetPathPattern() const;
+    static auto GetDefPathPattern() -> QString;
+    auto GetPathPattern() const -> QString;
     void SetPathPattern(const QString &value);
 
-    static QString GetDefPathTemplate();
-    QString GetPathTemplate() const;
+    static auto GetDefPathTemplate() -> QString;
+    auto GetPathTemplate() const -> QString;
     void SetPathTemplate(const QString &value);
 
-    static QString GetDefPathLabelTemplate();
-    QString GetPathLabelTemplate() const;
+    static auto GetDefPathLabelTemplate() -> QString;
+    auto GetPathLabelTemplate() const -> QString;
     void SetPathLabelTemplate(const QString &value);
 
-    static QString GetDefPathManualLayouts();
-    QString GetPathManualLayouts() const;
+    static auto GetDefPathManualLayouts() -> QString;
+    auto GetPathManualLayouts() const -> QString;
     void SetPathManualLayouts(const QString &value);
 
-    bool GetOsSeparator() const;
+    auto GetOsSeparator() const -> bool;
     void SetOsSeparator(const bool &value);
 
-    bool GetAutosaveState() const;
+    auto GetAutosaveState() const -> bool;
     void SetAutosaveState(const bool &value);
 
-    int  GetAutosaveTime() const;
+    auto GetAutosaveTime() const -> int;
     void SetAutosaveTime(const int &value);
 
-    bool IsLocaleSelected() const;
-    QString GetLocale() const;
+    auto IsLocaleSelected() const -> bool;
+    auto GetLocale() const -> QString;
     void SetLocale(const QString &value);
 
-    QString GetPMSystemCode() const;
+    auto GetPMSystemCode() const -> QString;
     void SetPMSystemCode(const QString &value);
 
-    QString GetUnit() const;
+    auto GetUnit() const -> QString;
     void SetUnit(const QString &value);
 
-    bool GetConfirmItemDelete() const;
+    auto GetConfirmItemDelete() const -> bool;
     void SetConfirmItemDelete(const bool &value);
 
-    bool GetConfirmFormatRewriting() const;
+    auto GetConfirmFormatRewriting() const -> bool;
     void SetConfirmFormatRewriting(const bool &value);
 
-    bool GetAskContinueIfLayoutStale() const;
+    auto GetAskContinueIfLayoutStale() const -> bool;
     void SetAskContinueIfLayoutStale(const bool &value);
 
-    bool GetToolBarStyle() const;
+    auto GetToolBarStyle() const -> bool;
     void SetToolBarStyle(const bool &value);
 
-    bool GetDarkMode() const;
+    auto GetDarkMode() const -> bool;
     void SetDarkMode(const bool &value);
 
-    bool IsFreeCurveMode() const;
+    auto IsFreeCurveMode() const -> bool;
     void SetFreeCurveMode(bool value);
 
-    bool IsDoubleClickZoomFitBestCurrentPP() const;
+    auto IsDoubleClickZoomFitBestCurrentPP() const -> bool;
     void SetDoubleClickZoomFitBestCurrentPP(bool value);
 
-    int  GetUndoCount() const;
+    auto GetUndoCount() const -> int;
     void SetUndoCount(const int &value);
 
-    QStringList GetRecentFileList() const;
+    auto GetRecentFileList() const -> QStringList;
     void SetRecentFileList(const QStringList &value);
 
-    QStringList GetRestoreFileList() const;
+    auto GetRestoreFileList() const -> QStringList;
     void SetRestoreFileList(const QStringList &value);
 
-    QByteArray GetGeometry() const;
+    auto GetGeometry() const -> QByteArray;
     void SetGeometry(const QByteArray &value);
 
-    QByteArray GetWindowState() const;
+    auto GetWindowState() const -> QByteArray;
     void SetWindowState(const QByteArray &value);
 
-    QByteArray GetToolbarsState() const;
+    auto GetToolbarsState() const -> QByteArray;
     void SetToolbarsState(const QByteArray &value);
 
-    QSize GetPreferenceDialogSize() const;
+    auto GetPreferenceDialogSize() const -> QSize;
     void SetPreferenceDialogSize(const QSize& sz);
 
-    QSize GetToolSeamAllowanceDialogSize() const;
-    void  SetToolSeamAllowanceDialogSize(const QSize& sz);
+    auto GetToolSeamAllowanceDialogSize() const -> QSize;
+    void SetToolSeamAllowanceDialogSize(const QSize& sz);
 
-    QSize GetFormulaWizardDialogSize() const;
-    void  SetFormulaWizardDialogSize(const QSize& sz);
+    auto GetFormulaWizardDialogSize() const -> QSize;
+    void SetFormulaWizardDialogSize(const QSize& sz);
 
-    QSize GetIncrementsDialogSize() const;
-    void  SetIncrementsDialogSize(const QSize& sz);
+    auto GetIncrementsDialogSize() const -> QSize;
+    void SetIncrementsDialogSize(const QSize& sz);
 
-    QSize GetFinalMeasurementsDialogSize() const;
-    void  SetFinalMeasurementsDialogSize(const QSize& sz);
+    auto GetFinalMeasurementsDialogSize() const -> QSize;
+    void SetFinalMeasurementsDialogSize(const QSize& sz);
 
-    QSize GetLayoutSettingsDialogSize() const;
-    void  SetLayoutSettingsDialogSize(const QSize& sz);
+    auto GetLayoutSettingsDialogSize() const -> QSize;
+    void SetLayoutSettingsDialogSize(const QSize& sz);
 
-    bool IsAutomaticallyCheckUpdates() const;
+    auto IsAutomaticallyCheckUpdates() const -> bool;
     void SetAutomaticallyCheckUpdates(bool value);
 
-    unsigned GetLatestSkippedVersion() const;
+    auto GetLatestSkippedVersion() const -> unsigned;
     void SetLatestSkippedVersion(unsigned value);
 
-    QDate GetDateOfLastRemind() const;
-    void  SetDateOfLastRemind(const QDate &date);
+    auto GetDateOfLastRemind() const -> QDate;
+    void SetDateOfLastRemind(const QDate &date);
 
-    bool GetForbidWorkpieceFlipping() const;
+    auto GetForbidWorkpieceFlipping() const -> bool;
     void SetForbidWorkpieceFlipping(bool value);
 
-    bool GetForceWorkpieceFlipping() const;
+    auto GetForceWorkpieceFlipping() const -> bool;
     void SetForceWorkpieceFlipping(bool value);
 
-    bool IsHideMainPath() const;
+    auto IsHideMainPath() const -> bool;
     void SetHideMainPath(bool value);
 
-    bool IsDoublePassmark() const;
+    auto IsDoublePassmark() const -> bool;
     void SetDoublePassmark(bool value);
 
     void SetCSVWithHeader(bool withHeader);
-    bool GetCSVWithHeader() const;
-    static bool GetDefCSVWithHeader();
+    auto GetCSVWithHeader() const -> bool;
+    static auto GetDefCSVWithHeader() -> bool;
 
     void SetCSVCodec(int mib);
-    int  GetCSVCodec() const;
-    static int GetDefCSVCodec();
+    auto GetCSVCodec() const -> int;
+    static auto GetDefCSVCodec() -> int;
 
-    void  SetCSVSeparator(const QChar &separator);
-    QChar GetCSVSeparator() const;
-    static QChar GetDefCSVSeparator();
+    void SetCSVSeparator(const QChar &separator);
+    auto GetCSVSeparator() const -> QChar;
+    static auto GetDefCSVSeparator() -> QChar;
 
     void SetDefaultSeamAllowance(double value);
-    double GetDefaultSeamAllowance();
+    auto GetDefaultSeamAllowance() -> double;
 
-    QFont GetLabelFont() const;
-    void  SetLabelFont(const QFont &f);
+    auto GetLabelFont() const -> QFont;
+    void SetLabelFont(const QFont &f);
 
-    int  GetLabelFontSize() const;
+    auto GetLabelFontSize() const -> int;
     void SetLabelFontSize(int size);
-    static int GetDefLabelFontSize();
+    static auto GetDefLabelFontSize() -> int;
 
-    bool GetHideLabels() const;
+    auto GetHideLabels() const -> bool;
     void SetHideLabels(bool value);
 
 #if !defined(Q_OS_WIN)
     static const QString unixStandardSharePath;
 #endif
 
-    QString GetLabelDateFormat() const;
-    void    SetLabelDateFormat(const QString &format);
+    auto GetLabelDateFormat() const -> QString;
+    void SetLabelDateFormat(const QString &format);
 
-    static QStringList PredefinedDateFormats();
-    QStringList GetUserDefinedDateFormats() const;
-    void        SetUserDefinedDateFormats(const QStringList &formats);
+    static auto PredefinedDateFormats() -> QStringList;
+    auto GetUserDefinedDateFormats() const -> QStringList;
+    void SetUserDefinedDateFormats(const QStringList &formats);
 
-    QString GetLabelTimeFormat() const;
-    void    SetLabelTimeFormat(const QString &format);
+    auto GetLabelTimeFormat() const -> QString;
+    void SetLabelTimeFormat(const QString &format);
 
-    static QStringList PredefinedTimeFormats();
-    QStringList GetUserDefinedTimeFormats() const;
-    void        SetUserDefinedTimeFormats(const QStringList &formats);
+    static auto PredefinedTimeFormats() -> QStringList;
+    auto GetUserDefinedTimeFormats() const -> QStringList;
+    void SetUserDefinedTimeFormats(const QStringList &formats);
 
-    qreal GetCurveApproximationScale() const;
-    void  SetCurveApproximationScale(qreal value);
+    auto GetCurveApproximationScale() const -> qreal;
+    void SetCurveApproximationScale(qreal value);
 
-    bool IsShowCurveDetails() const;
+    auto IsShowCurveDetails() const -> bool;
     void SetShowCurveDetails(bool value);
 
-    bool IsPieceShowMainPath() const;
+    auto IsPieceShowMainPath() const -> bool;
     void SetPieceShowMainPath(bool value);
 
-    bool IsDontUseNativeDialog() const;
+    auto IsDontUseNativeDialog() const -> bool;
     void SetDontUseNativeDialog(bool value);
 
-    static qreal DefaultLineWidth();
-    static qreal MinimalLineWidth();
-    static qreal MaximalLineWidth();
-    qreal GetLineWidth() const;
-    void  SetLineWidth(qreal width);
-    qreal WidthMainLine() const;
-    qreal WidthHairLine() const;
+    static auto DefaultLineWidth() -> qreal;
+    static auto MinimalLineWidth() -> qreal;
+    static auto MaximalLineWidth() -> qreal;
+    auto GetLineWidth() const -> qreal;
+    void SetLineWidth(qreal width);
+    auto WidthMainLine() const -> qreal;
+    auto WidthHairLine() const -> qreal;
 
     // settings for the tiled PDFs
     auto GetTiledPDFMargins(const Unit &unit) const -> QMarginsF;
@@ -254,37 +255,37 @@ public:
     static const int defaultScrollingDuration;
     static const int scrollingDurationMin;
     static const int scrollingDurationMax;
-    int GetScrollingDuration() const;
+    auto GetScrollingDuration() const -> int;
     void SetScrollingDuration(int duration);
 
     static const int defaultScrollingUpdateInterval;
     static const int scrollingUpdateIntervalMin;
     static const int scrollingUpdateIntervalMax;
-    int GetScrollingUpdateInterval() const;
+    auto GetScrollingUpdateInterval() const -> int;
     void SetScrollingUpdateInterval(int updateInterval);
 
     static const qreal defaultSensorMouseScale;
     static const qreal sensorMouseScaleMin;
     static const qreal sensorMouseScaleMax;
-    qreal GetSensorMouseScale() const;
+    auto GetSensorMouseScale() const -> qreal;
     void SetSensorMouseScale(qreal scale);
 
     static const qreal defaultWheelMouseScale;
     static const qreal wheelMouseScaleMin;
     static const qreal wheelMouseScaleMax;
-    qreal GetWheelMouseScale() const;
+    auto GetWheelMouseScale() const -> qreal;
     void SetWheelMouseScale(qreal scale);
 
     static const qreal defaultScrollingAcceleration;
     static const qreal scrollingAccelerationMin;
     static const qreal scrollingAccelerationMax;
-    qreal GetScrollingAcceleration() const;
+    auto GetScrollingAcceleration() const -> qreal;
     void SetScrollingAcceleration(qreal acceleration);
 
-    bool IsOpenGLRender() const;
+    auto IsOpenGLRender() const -> bool;
     void SetOpenGLRender(bool value);
 
-    bool GetGraphicalOutput() const;
+    auto GetGraphicalOutput() const -> bool;
     void SetGraphicalOutput(const bool &value);
 
     auto GetWatermarkEditorSize() const -> QSize;
@@ -296,38 +297,38 @@ public:
 protected:
 
     template <typename T>
-    static T GetCachedValue(const QSettings &settings, T &cache, const QString &setting, T defValue, T valueMin,
-                            T valueMax);
+    static auto GetCachedValue(const QSettings &settings, T &cache, const QString &setting, T defValue, T valueMin,
+                               T valueMax) -> T;
 
     template <class T>
-    static T ValueOrDef(const QSettings &settings, const QString &setting, const T &defValue);
+    static auto ValueOrDef(const QSettings &settings, const QString &setting, const T &defValue) -> T;
 
 private:
-    Q_DISABLE_COPY(VCommonSettings)
+    Q_DISABLE_COPY_MOVE(VCommonSettings) // NOLINT
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline qreal VCommonSettings::DefaultLineWidth()
+inline auto VCommonSettings::DefaultLineWidth() -> qreal
 {
     return 1.2; // mm
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline qreal VCommonSettings::MinimalLineWidth()
+inline auto VCommonSettings::MinimalLineWidth() -> qreal
 {
     return 0.5; // mm
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline qreal VCommonSettings::MaximalLineWidth()
+inline auto VCommonSettings::MaximalLineWidth() -> qreal
 {
     return 5.0; // mm
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template<typename T>
-T VCommonSettings::GetCachedValue(const QSettings &settings, T &cache, const QString &setting, T defValue, T valueMin,
-                                  T valueMax)
+auto VCommonSettings::GetCachedValue(const QSettings &settings, T &cache, const QString &setting, T defValue,
+                                     T valueMin, T valueMax) -> T
 {
     if (cache < 0)
     {
@@ -339,7 +340,7 @@ T VCommonSettings::GetCachedValue(const QSettings &settings, T &cache, const QSt
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class T>
-inline T VCommonSettings::ValueOrDef(const QSettings &settings, const QString &setting, const T &defValue)
+inline auto VCommonSettings::ValueOrDef(const QSettings &settings, const QString &setting, const T &defValue) -> T
 {
     const QVariant val = settings.value(setting, QVariant::fromValue(defValue));
     return val.canConvert<T>() ? val.value<T>() : defValue;
@@ -347,19 +348,16 @@ inline T VCommonSettings::ValueOrDef(const QSettings &settings, const QString &s
 
 //---------------------------------------------------------------------------------------------------------------------
 template <>
-inline Cases VCommonSettings::ValueOrDef<Cases>(const QSettings &settings, const QString &setting,
-                                                const Cases &defValue)
+inline auto VCommonSettings::ValueOrDef<Cases>(const QSettings &settings, const QString &setting,
+                                               const Cases &defValue) -> Cases
 {
     const QVariant val = settings.value(setting, QVariant::fromValue(static_cast<int>(defValue)));
-    const int g = val.canConvert<int>() ? val.value<int>() : static_cast<int>(defValue);
+    const int g = val.canConvert<int>() ? val.toInt() : static_cast<int>(defValue);
     if (g < static_cast<int>(Cases::CaseThreeGroup) || g >= static_cast<int>(Cases::UnknownCase))
     {
         return defValue;
     }
-    else
-    {
-        return static_cast<Cases>(g);
-    }
+    return static_cast<Cases>(g);
 }
 
 #endif // VCOMMONSETTINGS_H

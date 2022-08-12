@@ -41,7 +41,7 @@ class QDomElement;
 
 class VVITConverter final : public VAbstractMConverter
 {
-    Q_DECLARE_TR_FUNCTIONS(VVITConverter)
+    Q_DECLARE_TR_FUNCTIONS(VVITConverter) // NOLINT
 public:
     explicit VVITConverter(const QString &fileName);
     virtual ~VVITConverter() Q_DECL_EQ_DEFAULT;
@@ -64,7 +64,7 @@ protected:
     virtual bool    IsReadOnly() const override;
 
 private:
-    Q_DISABLE_COPY(VVITConverter)
+    Q_DISABLE_COPY_MOVE(VVITConverter) // NOLINT
     static const QString MeasurementMinVerStr;
 
     void AddNewTagsForV0_3_0();

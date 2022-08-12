@@ -45,7 +45,7 @@ private:
 
 class VRawLayout
 {
-    Q_DECLARE_TR_FUNCTIONS(VRawLayout)
+    Q_DECLARE_TR_FUNCTIONS(VRawLayout) // NOLINT
 public:
     VRawLayout();
 

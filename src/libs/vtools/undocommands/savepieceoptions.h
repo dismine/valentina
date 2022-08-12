@@ -36,7 +36,7 @@
 
 class SavePieceOptions : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     SavePieceOptions(const VPiece &oldDet, const VPiece &newDet, VAbstractPattern *doc, quint32 id,
                      QUndoCommand *parent = nullptr);
@@ -51,7 +51,8 @@ public:
 signals:
     void UpdateGroups();
 private:
-    Q_DISABLE_COPY(SavePieceOptions)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(SavePieceOptions) // NOLINT
 
     const VPiece    m_oldDet;
     VPiece          m_newDet;

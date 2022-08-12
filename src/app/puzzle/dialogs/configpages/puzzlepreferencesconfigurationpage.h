@@ -30,6 +30,8 @@
 
 #include <QWidget>
 
+#include "../vmisc/defglobal.h"
+
 namespace Ui
 {
     class PuzzlePreferencesConfigurationPage;
@@ -37,19 +39,20 @@ namespace Ui
 
 class PuzzlePreferencesConfigurationPage : public QWidget
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit PuzzlePreferencesConfigurationPage(QWidget *parent = nullptr);
-    virtual ~PuzzlePreferencesConfigurationPage();
+    ~PuzzlePreferencesConfigurationPage() override;
 
-    QStringList Apply();
+    auto Apply() -> QStringList;
 
 protected:
-    virtual void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent* event) override;
 
 private:
-    Q_DISABLE_COPY(PuzzlePreferencesConfigurationPage)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(PuzzlePreferencesConfigurationPage) // NOLINT
     Ui::PuzzlePreferencesConfigurationPage *ui;
     bool m_langChanged{false};
 };

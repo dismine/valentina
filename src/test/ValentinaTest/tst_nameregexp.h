@@ -33,7 +33,7 @@
 
 class TST_NameRegExp : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_NameRegExp(QObject *parent = nullptr);
 

@@ -33,7 +33,6 @@
 #include "../vmisc/def.h"
 #include "../vmisc/vsysexits.h"
 #include "dialogs/dialogexporttocsv.h"
-#include "../vwidgets/vmaingraphicsview.h"
 
 #include <QStyle>
 #include <QToolBar>
@@ -56,7 +55,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
 QT_WARNING_DISABLE_INTEL(1418)
 
-Q_LOGGING_CATEGORY(abstactMainWindow, "abs.MainWindow")
+Q_LOGGING_CATEGORY(abstactMainWindow, "abs.MainWindow") // NOLINT
 
 QT_WARNING_POP
 
@@ -371,7 +370,7 @@ bool VAbstractMainWindow::IgnoreLocking(int error, const QString &path, bool gui
                     break;
             }
 
-            qApp->exit(V_EX_NOINPUT);
+            QCoreApplication::exit(V_EX_NOINPUT);
         }
         return false;
     }

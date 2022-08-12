@@ -35,7 +35,7 @@
 
 class VGrainlineItem final : public VPieceItem
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VGrainlineItem(QGraphicsItem* pParent = nullptr);
     virtual ~VGrainlineItem() Q_DECL_EQ_DEFAULT;
@@ -71,7 +71,7 @@ protected:
     QPointF GetInsideCorner(int i, qreal dDist) const;
 
 private:
-    Q_DISABLE_COPY(VGrainlineItem)
+    Q_DISABLE_COPY_MOVE(VGrainlineItem) // NOLINT
     qreal                         m_dRotation;
     qreal                         m_dStartRotation;
     qreal                         m_dLength;

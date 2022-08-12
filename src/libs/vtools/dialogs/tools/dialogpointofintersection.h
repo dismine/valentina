@@ -48,7 +48,7 @@ namespace Ui
  */
 class DialogPointOfIntersection : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     DialogPointOfIntersection(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogPointOfIntersection() override;
@@ -75,7 +75,7 @@ protected:
     virtual void   SaveData() override;
     virtual bool   IsValid() const final;
 private:
-    Q_DISABLE_COPY(DialogPointOfIntersection)
+    Q_DISABLE_COPY_MOVE(DialogPointOfIntersection) // NOLINT
 
     /** @brief ui keeps information about user interface */
     Ui::DialogPointOfIntersection *ui;

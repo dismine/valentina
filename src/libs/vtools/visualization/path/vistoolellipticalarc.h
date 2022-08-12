@@ -40,7 +40,7 @@
 
 class VisToolEllipticalArc : public VisPath
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolEllipticalArc(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolEllipticalArc() Q_DECL_EQ_DEFAULT;
@@ -55,7 +55,7 @@ public:
     virtual int type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolEllipticalArc)};
 private:
-    Q_DISABLE_COPY(VisToolEllipticalArc)
+    Q_DISABLE_COPY_MOVE(VisToolEllipticalArc) // NOLINT
     VScaledEllipse *arcCenter;
     qreal           radius1;
     qreal           radius2;

@@ -126,8 +126,8 @@ VContour &VContour::operator=(const VContour &contour)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VContour::VContour(const VContour &&contour) Q_DECL_NOTHROW
-    :d (contour.d)
+VContour::VContour(VContour &&contour) Q_DECL_NOTHROW
+    :d (std::move(contour.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

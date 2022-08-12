@@ -140,7 +140,7 @@
 */
 class ColorPickerButton : public QFrame
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit ColorPickerButton(QWidget *parent);
@@ -164,7 +164,7 @@ protected:
 */
 class ColorPickerItem : public QFrame
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     ColorPickerItem(const QColor &color = Qt::white, const QString &text = QString(),
@@ -200,7 +200,7 @@ private:
 */
 class ColorPickerPopup : public QFrame
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     ColorPickerPopup(int width, bool withColorDialog,
@@ -238,7 +238,7 @@ protected:
     void regenerateGrid();
 
 private:
-    Q_DISABLE_COPY(ColorPickerPopup)
+    Q_DISABLE_COPY_MOVE(ColorPickerPopup) // NOLINT
     QMap<int, QMap<int, QWidget *> > widgetAt{};
     QList<ColorPickerItem *> items{};
     QGridLayout *grid{nullptr};

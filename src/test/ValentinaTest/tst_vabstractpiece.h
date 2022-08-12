@@ -35,7 +35,7 @@ class VSAPoint;
 
 class TST_VAbstractPiece : public AbstractTest
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_VAbstractPiece(QObject *parent = nullptr);
 

@@ -46,7 +46,7 @@ namespace Ui
 
 class DialogPointOfIntersectionArcs : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     DialogPointOfIntersectionArcs(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
@@ -80,7 +80,7 @@ protected:
     virtual bool   IsValid() const final;
 
 private:
-    Q_DISABLE_COPY(DialogPointOfIntersectionArcs)
+    Q_DISABLE_COPY_MOVE(DialogPointOfIntersectionArcs) // NOLINT
 
     Ui::DialogPointOfIntersectionArcs *ui;
 

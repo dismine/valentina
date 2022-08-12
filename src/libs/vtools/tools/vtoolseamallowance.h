@@ -57,7 +57,7 @@ struct VToolSeamAllowanceInitData : VAbstractToolInitData
 
 class VToolSeamAllowance : public VInteractiveTool, public QGraphicsPathItem
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     virtual ~VToolSeamAllowance() Q_DECL_EQ_DEFAULT;
 
@@ -174,7 +174,7 @@ private slots:
     void TogglePassmarkLineType(quint32 id, PassmarkLineType type);
 
 private:
-    Q_DISABLE_COPY(VToolSeamAllowance)
+    Q_DISABLE_COPY_MOVE(VToolSeamAllowance) // NOLINT
 
     QPainterPath m_mainPath; // Must be first to prevent crash
     QRectF       m_pieceBoundingRect{};

@@ -74,7 +74,7 @@ public:
      */
     VNodeDetail &operator=(const VNodeDetail &node);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VNodeDetail(const VNodeDetail &&node) Q_DECL_NOTHROW;
+    VNodeDetail(VNodeDetail &&node) Q_DECL_NOTHROW;
     VNodeDetail &operator=(VNodeDetail &&node) Q_DECL_NOTHROW;
 #endif
 
@@ -139,6 +139,6 @@ private:
 };
 
 Q_DECLARE_METATYPE(VNodeDetail)
-Q_DECLARE_TYPEINFO(VNodeDetail, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VNodeDetail, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VNODEDETAIL_H

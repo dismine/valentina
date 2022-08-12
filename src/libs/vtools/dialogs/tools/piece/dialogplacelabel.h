@@ -39,7 +39,7 @@ class VPlaceLabelItem;
 
 class DialogPlaceLabel : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogPlaceLabel(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
@@ -95,7 +95,7 @@ private slots:
     void FXVisible();
 
 private:
-    Q_DISABLE_COPY(DialogPlaceLabel)
+    Q_DISABLE_COPY_MOVE(DialogPlaceLabel) // NOLINT
     Ui::DialogPlaceLabel *ui;
     bool m_showMode;
 

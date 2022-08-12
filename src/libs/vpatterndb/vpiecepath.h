@@ -54,7 +54,7 @@ public:
 
     VPiecePath &operator=(const VPiecePath &path);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VPiecePath(const VPiecePath &&path) Q_DECL_NOTHROW;
+    VPiecePath(VPiecePath &&path) Q_DECL_NOTHROW;
     VPiecePath &operator=(VPiecePath &&path) Q_DECL_NOTHROW;
 #endif
 
@@ -145,7 +145,7 @@ private:
     QSharedDataPointer<VPiecePathData> d;
 };
 
-Q_DECLARE_TYPEINFO(VPiecePath, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VPiecePath, Q_MOVABLE_TYPE); // NOLINT
 Q_DECLARE_METATYPE(VPiecePath)
 
 #endif // VPIECEPATH_H

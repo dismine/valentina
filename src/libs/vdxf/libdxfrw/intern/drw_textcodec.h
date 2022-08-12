@@ -4,6 +4,7 @@
 #include <string>
 #include <QtGlobal>
 #include "../drw_base.h"
+#include "../vmisc/defglobal.h"
 
 class QTextCodec;
 class QStringList;
@@ -28,7 +29,8 @@ private:
     static auto correctCodePage(const std::string& s) -> std::string;
 
 private:
-    Q_DISABLE_COPY(DRW_TextCodec)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DRW_TextCodec) // NOLINT
     DRW::Version version{DRW::UNKNOWNV};
     std::string cp{};
     QTextCodec *conv{nullptr};

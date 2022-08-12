@@ -1091,7 +1091,8 @@ public:
     std::vector<DRW_HatchLoop *> looplist;  /*!< polyline list */
 
 private:
-    Q_DISABLE_COPY(DRW_Hatch)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DRW_Hatch) // NOLINT
     void clearEntities(){
         pt = line = nullptr;
         pline = nullptr;
@@ -1583,7 +1584,7 @@ public:
     std::vector<DRW_Coord *> vertexlist;  /*!< vertex points list, code 10, 20 & 30 */
 
 private:
-    Q_DISABLE_COPY(DRW_Leader)
+    Q_DISABLE_COPY_MOVE(DRW_Leader) // NOLINT
     DRW_Coord *vertexpoint;   /*!< current control point to add data */
 };
 

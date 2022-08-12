@@ -50,7 +50,7 @@ template <class T> class QSharedPointer;
  */
 class VToolCutSplinePath : public VToolCut
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     virtual void setDialog() override;
     static VToolCutSplinePath *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
@@ -76,7 +76,7 @@ protected:
     virtual void    SetVisualization() override;
     virtual QString MakeToolTip() const override;
 private:
-    Q_DISABLE_COPY(VToolCutSplinePath)
+    Q_DISABLE_COPY_MOVE(VToolCutSplinePath) // NOLINT
 
     VToolCutSplinePath(const VToolCutInitData &initData, QGraphicsItem *parent = nullptr);
 };

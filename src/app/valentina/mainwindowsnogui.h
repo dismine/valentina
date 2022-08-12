@@ -72,7 +72,7 @@ enum class PreviewQuatilty : bool {Fast = true, Slow = false};
 
 class MainWindowsNoGUI : public VAbstractMainWindow
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit MainWindowsNoGUI(QWidget *parent = nullptr);
     virtual ~MainWindowsNoGUI() override;
@@ -144,7 +144,7 @@ protected:
     void CheckRequiredMeasurements(const VMeasurements *m) const;
 
 private:
-    Q_DISABLE_COPY(MainWindowsNoGUI)
+    Q_DISABLE_COPY_MOVE(MainWindowsNoGUI) // NOLINT
 
     static QList<QGraphicsItem *> CreateShadows(const QList<QGraphicsItem *> &papers);
     static QList<QGraphicsScene *> CreateScenes(const QList<QGraphicsItem *> &papers,

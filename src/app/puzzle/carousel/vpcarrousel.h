@@ -32,8 +32,10 @@
 #include <QWidget>
 #include <QComboBox>
 #include <QScrollArea>
-#include "../layout/vppiece.h"
+#include <QUuid>
+
 #include "../layout/layoutdef.h"
+#include "../vmisc/defglobal.h"
 
 namespace Ui
 {
@@ -51,10 +53,10 @@ struct VPCarrouselSheet
 
 class VPCarrousel : public QWidget
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VPCarrousel(const VPLayoutPtr &layout, QWidget *parent = nullptr);
-    virtual ~VPCarrousel() = default;
+    ~VPCarrousel() override = default;
 
     /**
      * @brief SetOrientation Sets the orientation to the given value and refreshes
@@ -76,7 +78,7 @@ public:
      */
     void Clear();
 
-    VPLayoutWeakPtr Layout() const;
+    auto Layout() const -> VPLayoutWeakPtr;
 
 public slots:
     /**
@@ -86,7 +88,7 @@ public slots:
     void on_ActiveSheetChanged(const VPSheetPtr &sheet);
 
 protected:
-    virtual void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent* event) override;
 
 private slots:
 
@@ -97,7 +99,8 @@ private slots:
     void on_ActivePieceListChanged(int index);
 
 private:
-    Q_DISABLE_COPY(VPCarrousel)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VPCarrousel) // NOLINT
     Ui::VPCarrousel *ui;
 
     VPLayoutWeakPtr m_layout{};

@@ -47,7 +47,7 @@ struct VToolPiecePathInitData : VAbstractNodeInitData
 
 class VToolPiecePath : public VAbstractNode, public QGraphicsPathItem
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     static VToolPiecePath* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                   VContainer *data);
@@ -76,7 +76,8 @@ protected:
     virtual void HideNode() override;
     virtual void ToolCreation(const Source &typeCreation) override;
 private:
-    Q_DISABLE_COPY(VToolPiecePath)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VToolPiecePath) // NOLINT
 
     quint32 m_pieceId;
 

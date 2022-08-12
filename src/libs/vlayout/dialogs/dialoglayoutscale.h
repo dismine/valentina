@@ -30,6 +30,8 @@
 
 #include <QDialog>
 
+#include "../vmisc/defglobal.h"
+
 namespace Ui
 {
     class DialogLayoutScale;
@@ -37,7 +39,7 @@ namespace Ui
 
 class DialogLayoutScale final : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogLayoutScale(bool printTiled, QWidget *parent = nullptr);
@@ -62,7 +64,8 @@ private slots:
     void VerticalScaleChanged(double d);
 
 private:
-    Q_DISABLE_COPY(DialogLayoutScale)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogLayoutScale) // NOLINT
     Ui::DialogLayoutScale *ui;
     bool isInitialized{false};
     bool m_scaleConnected{true};

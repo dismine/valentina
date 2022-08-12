@@ -52,7 +52,7 @@ public:
 
     VVariable &operator=(const VVariable &var);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VVariable(const VVariable &&var) Q_DECL_NOTHROW;
+    VVariable(VVariable &&var) Q_DECL_NOTHROW;
     VVariable &operator=(VVariable &&var) Q_DECL_NOTHROW;
 #endif
 
@@ -63,6 +63,6 @@ private:
     QSharedDataPointer<VVariableData> d;
 };
 
-Q_DECLARE_TYPEINFO(VVariable, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VVariable, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VVARIABLE_H

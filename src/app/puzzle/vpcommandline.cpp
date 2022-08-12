@@ -31,12 +31,12 @@
 #include "../vmisc/literals.h"
 #include <QDebug>
 
-std::shared_ptr<VPCommandLine> VPCommandLine::instance = nullptr;
+std::shared_ptr<VPCommandLine> VPCommandLine::instance = nullptr; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 
-#define translate(context, source) QCoreApplication::translate((context), source)
+#define translate(context, source) QCoreApplication::translate((context), source)// NOLINT(cppcoreguidelines-macro-usage)
 
 //------------------------------------------------------------------------------------------------
-bool VPCommandLine::IsExportEnabled() const
+auto VPCommandLine::IsExportEnabled() const -> bool
 {
     const bool result = IsOptionSet(LONG_OPTION_EXPORT_FILE);
     int argSize = parser.positionalArguments().size();
@@ -49,7 +49,7 @@ bool VPCommandLine::IsExportEnabled() const
 }
 
 //----------------------------------------------------------------------------------------------
-QString VPCommandLine::OptionExportFile() const
+auto VPCommandLine::OptionExportFile() const -> QString
 {
     QString path;
     if (IsExportEnabled())
@@ -61,13 +61,13 @@ QString VPCommandLine::OptionExportFile() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList VPCommandLine::OptionRawLayouts() const
+auto VPCommandLine::OptionRawLayouts() const -> QStringList
 {
     return OptionValues(LONG_OPTION_RAW_LAYOUT);
 }
 
 //--------------------------------------------------------------------------------------------
-bool VPCommandLine::IsTestModeEnabled() const
+auto VPCommandLine::IsTestModeEnabled() const -> bool
 {
     const bool r = IsOptionSet(LONG_OPTION_TEST);
     if (r && parser.positionalArguments().size() != 1)
@@ -79,19 +79,19 @@ bool VPCommandLine::IsTestModeEnabled() const
 }
 
 //--------------------------------------------------------------------------------------------
-bool VPCommandLine::IsGuiEnabled() const
+auto VPCommandLine::IsGuiEnabled() const -> bool
 {
     return isGuiEnabled;
 }
 
 //--------------------------------------------------------------------------------------------
-QStringList VPCommandLine::OptionFileNames() const
+auto VPCommandLine::OptionFileNames() const -> QStringList
 {
     return parser.positionalArguments();
 }
 
 //-------------------------------------------------------------------------------------------
-bool VPCommandLine::IsNoScalingEnabled() const
+auto VPCommandLine::IsNoScalingEnabled() const -> bool
 {
     return IsOptionSet(LONG_OPTION_NO_HDPI_SCALING);
 }
@@ -103,9 +103,7 @@ void VPCommandLine::ShowHelp(int exitCode)
 }
 
 //----------------------------------------------------------------------------------------------
-VPCommandLine::VPCommandLine():
-    parser(),
-    isGuiEnabled(false)
+VPCommandLine::VPCommandLine()
 {
     parser.setApplicationDescription(translate("Puzzle", "Valentina's manual layout editor."));
     parser.addHelpOption();
@@ -116,7 +114,7 @@ VPCommandLine::VPCommandLine():
 }
 
 //-------------------------------------------------------------------------------------------
-VPCommandLinePtr VPCommandLine::Instance()
+auto VPCommandLine::Instance() -> VPCommandLinePtr
 {
     VPCommandLine::ProcessInstance(instance, QCoreApplication::arguments());
     return instance;
@@ -193,19 +191,19 @@ void VPCommandLine::InitCommandLineOptions()
 }
 
 //--------------------------------------------------------------------------------------------
-bool VPCommandLine::IsOptionSet(const QString &option) const
+auto VPCommandLine::IsOptionSet(const QString &option) const -> bool
 {
     return parser.isSet(option);
 }
 
 //-------------------------------------------------------------------------------------------
-QString VPCommandLine::OptionValue(const QString &option) const
+auto VPCommandLine::OptionValue(const QString &option) const -> QString
 {
     return parser.value(option);
 }
 
 //--------------------------------------------------------------------------------------------
-QStringList VPCommandLine::OptionValues(const QString &option) const
+auto VPCommandLine::OptionValues(const QString &option) const -> QStringList
 {
     return parser.values(option);
 }

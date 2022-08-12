@@ -40,11 +40,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     : QWidget(parent),
-      ui(new Ui::PreferencesConfigurationPage),
-      m_langChanged(false),
-      m_systemChanged(),
-      m_unitChanged(false),
-      m_labelLangChanged(false)
+      ui(new Ui::PreferencesConfigurationPage)
 {
     ui->setupUi(this);
     RetranslateUi();
@@ -169,7 +165,7 @@ PreferencesConfigurationPage::~PreferencesConfigurationPage()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList PreferencesConfigurationPage::Apply()
+auto PreferencesConfigurationPage::Apply() -> QStringList
 {
     // Tab General
     QStringList preferences;
@@ -263,7 +259,7 @@ void PreferencesConfigurationPage::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void PreferencesConfigurationPage::SetLabelComboBox(const QStringList &list)
 {
-    for (auto &name : list)
+    for (const auto &name : list)
     {
         ui->labelCombo->addItem(QLocale(name).nativeLanguageName(), name);
     }
@@ -284,7 +280,7 @@ void PreferencesConfigurationPage::RetranslateUi()
 
     {
     ui->unitCombo->blockSignals(true);
-    const QString unit = qvariant_cast<QString>(ui->unitCombo->currentData());
+    const auto unit = qvariant_cast<QString>(ui->unitCombo->currentData());
     ui->unitCombo->clear();
     InitUnits();
     ui->unitCombo->setCurrentIndex(ui->unitCombo->findData(unit));
@@ -292,7 +288,7 @@ void PreferencesConfigurationPage::RetranslateUi()
     }
 
     {
-    const QString code = qvariant_cast<QString>(ui->systemCombo->currentData());
+    const auto code = qvariant_cast<QString>(ui->systemCombo->currentData());
     ui->systemCombo->blockSignals(true);
     ui->systemCombo->clear();
     InitPMSystems(ui->systemCombo);

@@ -30,9 +30,11 @@
 
 #include <QItemDelegate>
 
+#include "../vmisc/defglobal.h"
+
 class VComboBoxDelegate : public QItemDelegate
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VComboBoxDelegate(const QStringList &items, QObject *parent = nullptr);
 
@@ -45,7 +47,8 @@ public:
     virtual void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option,
                                       const QModelIndex &index) const override;
 private:
-    Q_DISABLE_COPY(VComboBoxDelegate)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VComboBoxDelegate) // NOLINT
     QStringList m_items;
 };
 

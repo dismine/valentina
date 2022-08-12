@@ -30,36 +30,35 @@
 #include "../dialogs/dialoglayoutsettings.h"
 #include "../dialogs/dialogsavelayout.h"
 #include "../ifc/xml/vdomdocument.h"
-#include "../vformat/vmeasurements.h"
 #include "../vmisc/commandoptions.h"
+#include "../vmisc/vsysexits.h"
 #include "vvalentinasettings.h"
 #include "../vmisc/dialogs/dialogexporttocsv.h"
 #include "../vlayout/vlayoutgenerator.h"
-#include "../vpatterndb/variables/vmeasurement.h"
 #include <QDebug>
 #include <QTextCodec>
 
-VCommandLinePtr VCommandLine::instance = nullptr;
+VCommandLinePtr VCommandLine::instance = nullptr; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 
-#define translate(context, source) QCoreApplication::translate((context), (source))
+#define translate(context, source) QCoreApplication::translate((context), (source)) // NOLINT(cppcoreguidelines-macro-usage)
 
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-qreal Lo2Px(const QString &src, const DialogLayoutSettings &converter, bool *ok)
+auto Lo2Px(const QString &src, const DialogLayoutSettings &converter, bool *ok) -> qreal
 {
     return converter.LayoutToPixels(src.toDouble(ok));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal Pg2Px(const QString& src, const DialogLayoutSettings& converter, bool *ok)
+auto Pg2Px(const QString& src, const DialogLayoutSettings& converter, bool *ok) -> qreal
 {
     return converter.PageToPixels(src.toDouble(ok));
 }
 } // anonymous namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-VCommandLine::VCommandLine() : parser(), isGuiEnabled(false)
+VCommandLine::VCommandLine()
 {
     parser.setApplicationDescription(translate("VCommandLine", "Pattern making program."));
     parser.addHelpOption();
@@ -70,7 +69,7 @@ VCommandLine::VCommandLine() : parser(), isGuiEnabled(false)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractLayoutDialog::PaperSizeTemplate VCommandLine::FormatSize(const QString &key) const
+auto VCommandLine::FormatSize(const QString &key) const -> VAbstractLayoutDialog::PaperSizeTemplate
 {
     int ppsize = 0;
     if (IsOptionSet(key))
@@ -81,83 +80,16 @@ VAbstractLayoutDialog::PaperSizeTemplate VCommandLine::FormatSize(const QString 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
+auto VCommandLine::DefaultGenerator() const -> VLayoutGeneratorPtr
 {
     //this functions covers all options found into layout setup dialog, nothing to add here, unless dialog extended
 
     VLayoutGeneratorPtr res(new VLayoutGenerator());
     DialogLayoutSettings diag(res.get(), nullptr, true);
 
-    {
-        //just anonymous namespace ...don' like to have a,b,c,d everywhere defined
-        bool x = IsOptionSet(LONG_OPTION_PAGETEMPLATE);
-
-        bool a = IsOptionSet(LONG_OPTION_PAGEH);
-        bool b = IsOptionSet(LONG_OPTION_PAGEW);
-        bool c = IsOptionSet(LONG_OPTION_PAGEUNITS);
-
-        if ((a || b) && x)
-        {
-            qCritical() << translate("VCommandLine", "Cannot use pageformat and page explicit size together.")
-                        << "\n";
-            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
-        }
-
-        if ((a || b || c) && !(a && b && c))
-        {
-            qCritical() << translate("VCommandLine", "Page height, width, units must be used all 3 at once.") << "\n";
-            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
-        }
-
-    }
-
-    {
-        //just anonymous namespace ...don' like to have a,b,c,d everywhere defined
-        bool a = IsOptionSet(LONG_OPTION_GAPWIDTH);
-        bool b = IsOptionSet(LONG_OPTION_SHIFTUNITS);
-
-        if ((a || b) && !(a && b))
-        {
-            qCritical() << translate("VCommandLine", "Gap width must be used together with shift units.") << "\n";
-            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
-        }
-    }
-
-    auto CheckKey = [this](const QString &key, const QString &message)
-    {
-        bool a = IsOptionSet(key);
-        bool b = IsOptionSet(LONG_OPTION_PAGEUNITS);
-
-        if (a && !(a && b))
-        {
-            qCritical() << message << "\n";
-            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
-        }
-    };
-
-    if (not IsOptionSet(LONG_OPTION_IGNORE_MARGINS))
-    {
-        CheckKey(LONG_OPTION_LEFT_MARGIN,
-                 translate("VCommandLine", "Left margin must be used together with page units."));
-        CheckKey(LONG_OPTION_RIGHT_MARGIN,
-                 translate("VCommandLine", "Right margin must be used together with page units."));
-        CheckKey(LONG_OPTION_TOP_MARGIN,
-                 translate("VCommandLine", "Top margin must be used together with page units."));
-        CheckKey(LONG_OPTION_BOTTOM_MARGIN,
-                 translate("VCommandLine", "Bottom margin must be used together with page units."));
-    }
-
-    if (static_cast<LayoutExportFormats>(OptExportType()) == LayoutExportFormats::PDFTiled)
-    {
-        CheckKey(LONG_OPTION_TILED_PDF_LEFT_MARGIN,
-                 translate("VCommandLine", "Tiled left margin must be used together with page units."));
-        CheckKey(LONG_OPTION_TILED_PDF_RIGHT_MARGIN,
-                 translate("VCommandLine", "Tiled right margin must be used together with page units."));
-        CheckKey(LONG_OPTION_TILED_PDF_TOP_MARGIN,
-                 translate("VCommandLine", "Tiled top margin must be used together with page units."));
-        CheckKey(LONG_OPTION_TILED_PDF_BOTTOM_MARGIN,
-                 translate("VCommandLine", "Tiled bottom margin must be used together with page units."));
-    }
+    TestPageformat();
+    TestGapWidth();
+    TestMargins();
 
     // if present units MUST be set before any other to keep conversions correct
     if (!diag.SelectTemplate(OptPaperSize()))
@@ -234,57 +166,7 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
         diag.SetIgnoreAllFields(true);
     }
 
-    QMarginsF margins = diag.GetFields();
-
-    if (IsOptionSet(LONG_OPTION_LEFT_MARGIN))
-    {
-        bool ok = false;
-        qreal margin = Pg2Px(OptionValue(LONG_OPTION_LEFT_MARGIN), diag, &ok);
-        if (not ok)
-        {
-            qCritical() << translate("VCommandLine", "Invalid layout page left margin.") << "\n";
-            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
-        }
-        margins.setLeft(margin);
-    }
-
-    if (IsOptionSet(LONG_OPTION_RIGHT_MARGIN))
-    {
-        bool ok = false;
-        qreal margin = Pg2Px(OptionValue(LONG_OPTION_RIGHT_MARGIN), diag, &ok);
-        if (not ok)
-        {
-            qCritical() << translate("VCommandLine", "Invalid layout page right margin.") << "\n";
-            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
-        }
-        margins.setRight(margin);
-    }
-
-    if (IsOptionSet(LONG_OPTION_TOP_MARGIN))
-    {
-        bool ok = false;
-        qreal margin = Pg2Px(OptionValue(LONG_OPTION_TOP_MARGIN), diag, &ok);
-        if (not ok)
-        {
-            qCritical() << translate("VCommandLine", "Invalid layout page top margin.") << "\n";
-            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
-        }
-        margins.setTop(margin);
-    }
-
-    if (IsOptionSet(LONG_OPTION_BOTTOM_MARGIN))
-    {
-        bool ok = false;
-        qreal margin = Pg2Px(OptionValue(LONG_OPTION_BOTTOM_MARGIN), diag, &ok);
-        if (not ok)
-        {
-            qCritical() << translate("VCommandLine", "Invalid layout page bottom margin.") << "\n";
-            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
-        }
-        margins.setBottom(margin);
-    }
-
-    diag.SetFields(margins);
+    diag.SetFields(ParseMargins(diag));
     diag.SetFollowGrainline(IsOptionSet(LONG_OPTION_FOLLOW_GRAINLINE));
     diag.SetManualPriority(IsOptionSet(LONG_OPTION_MANUAL_PRIORITY));
     diag.SetNestQuantity(IsOptionSet(LONG_OPTION_NEST_QUANTITY));
@@ -296,8 +178,8 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
     return res;
 }
 
-//------------------------------------------------------------------------------------------------------
-VCommandLinePtr VCommandLine::Get(const QCoreApplication& app)
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommandLine::Get(const QCoreApplication& app) -> VCommandLinePtr
 {
     if (instance == nullptr)
     {
@@ -313,14 +195,14 @@ VCommandLinePtr VCommandLine::Get(const QCoreApplication& app)
     return instance;
 }
 
-//------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 void VCommandLine::Reset()
 {
     instance.reset();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VCommandLine::IsTestModeEnabled() const
+auto VCommandLine::IsTestModeEnabled() const -> bool
 {
     const bool r = IsOptionSet(LONG_OPTION_TEST);
     if (r && parser.positionalArguments().size() != 1)
@@ -332,20 +214,20 @@ bool VCommandLine::IsTestModeEnabled() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VCommandLine::IsPedantic() const
+auto VCommandLine::IsPedantic() const -> bool
 {
     // Pedantic doesn't work in GUI mode
     return IsGuiEnabled() ? false : IsOptionSet(LONG_OPTION_PENDANTIC);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VCommandLine::IsNoScalingEnabled() const
+auto VCommandLine::IsNoScalingEnabled() const -> bool
 {
     return IsOptionSet(LONG_OPTION_NO_HDPI_SCALING);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VCommandLine::IsExportEnabled() const
+auto VCommandLine::IsExportEnabled() const -> bool
 {
     const bool r = IsOptionSet(LONG_OPTION_BASENAME);
     if (r && parser.positionalArguments().size() != 1)
@@ -357,7 +239,7 @@ bool VCommandLine::IsExportEnabled() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VCommandLine::IsExportFMEnabled() const
+auto VCommandLine::IsExportFMEnabled() const -> bool
 {
     const bool r = IsOptionSet(LONG_OPTION_CSVEXPORTFM);
     if (r && parser.positionalArguments().size() != 1)
@@ -368,14 +250,14 @@ bool VCommandLine::IsExportFMEnabled() const
     return r;
 }
 
-//------------------------------------------------------------------------------------------------------
-VAbstractLayoutDialog::PaperSizeTemplate VCommandLine::OptPaperSize() const
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommandLine::OptPaperSize() const -> VAbstractLayoutDialog::PaperSizeTemplate
 {
     return FormatSize(LONG_OPTION_PAGETEMPLATE);
 }
 
-//------------------------------------------------------------------------------------------------------
-Cases VCommandLine::OptGroup() const
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommandLine::OptGroup() const -> Cases
 {
     int r = OptionValue(LONG_OPTION_GROUPPING).toInt();
     if ( r < 0 || r >= static_cast<int>(Cases::UnknownCase))
@@ -385,8 +267,8 @@ Cases VCommandLine::OptGroup() const
     return static_cast<Cases>(r);
 }
 
-//------------------------------------------------------------------------------------------------------
-QString VCommandLine::OptMeasurePath() const
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommandLine::OptMeasurePath() const -> QString
 {
     QString measure;
     if (IsOptionSet(LONG_OPTION_MEASUREFILE)
@@ -401,7 +283,7 @@ QString VCommandLine::OptMeasurePath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VCommandLine::OptBaseName() const
+auto VCommandLine::OptBaseName() const -> QString
 {
     QString path;
     if (IsExportEnabled())
@@ -413,7 +295,7 @@ QString VCommandLine::OptBaseName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VCommandLine::OptDestinationPath() const
+auto VCommandLine::OptDestinationPath() const -> QString
 {
     QString path;
     if (IsExportEnabled())
@@ -425,7 +307,7 @@ QString VCommandLine::OptDestinationPath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VCommandLine::OptExportType() const
+auto VCommandLine::OptExportType() const -> int
 {
     int r = 0;
     if (IsOptionSet(LONG_OPTION_EXP2FORMAT))
@@ -436,31 +318,31 @@ int VCommandLine::OptExportType() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VCommandLine::IsBinaryDXF() const
+auto VCommandLine::IsBinaryDXF() const -> bool
 {
     return IsOptionSet(LONG_OPTION_BINARYDXF);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VCommandLine::IsTextAsPaths() const
+auto VCommandLine::IsTextAsPaths() const -> bool
 {
     return IsOptionSet(LONG_OPTION_TEXT2PATHS);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VCommandLine::IsExportOnlyDetails() const
+auto VCommandLine::IsExportOnlyDetails() const -> bool
 {
     return IsOptionSet(LONG_OPTION_EXPORTONLYDETAILS);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VCommandLine::IsCSVWithHeader() const
+auto VCommandLine::IsCSVWithHeader() const -> bool
 {
     return IsOptionSet(LONG_OPTION_CSVWITHHEADER);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VCommandLine::ExportXScale() const
+auto VCommandLine::ExportXScale() const -> qreal
 {
     qreal xs = 1;
     if (IsOptionSet(LONG_OPTION_EXPXSCALE))
@@ -471,7 +353,7 @@ qreal VCommandLine::ExportXScale() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VCommandLine::ExportYScale() const
+auto VCommandLine::ExportYScale() const -> qreal
 {
     qreal ys = 1;
     if (IsOptionSet(LONG_OPTION_EXPYSCALE))
@@ -482,7 +364,7 @@ qreal VCommandLine::ExportYScale() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VCommandLine::OptExportSuchDetails() const
+auto VCommandLine::OptExportSuchDetails() const -> QString
 {
     QString path;
     if (IsExportEnabled())
@@ -494,30 +376,30 @@ QString VCommandLine::OptExportSuchDetails() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VCommandLine::OptCSVCodecName() const
+auto VCommandLine::OptCSVCodecName() const -> QString
 {
     return OptionValue(LONG_OPTION_CSVCODEC);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QChar VCommandLine::OptCSVSeparator() const
+auto VCommandLine::OptCSVSeparator() const -> QChar
 {
     const QString value = OptionValue(LONG_OPTION_CSVSEPARATOR);
     return not value.isEmpty() ? value.at(0) : QChar();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VCommandLine::OptExportFMTo() const
+auto VCommandLine::OptExportFMTo() const -> QString
 {
     return OptionValue(LONG_OPTION_CSVEXPORTFM);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMap<int, QString> VCommandLine::OptUserMaterials() const
+auto VCommandLine::OptUserMaterials() const -> QMap<int, QString>
 {
     QMap<int, QString> userMaterials;
     const QStringList values = OptionValues(LONG_OPTION_USER_MATERIAL);
-    for(auto &value : values)
+    for(const auto &value : values)
     {
         const QStringList parts = value.split('@');
         if (parts.size() != 2)
@@ -544,37 +426,37 @@ QMap<int, QString> VCommandLine::OptUserMaterials() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList VCommandLine::OptInputFileNames() const
+auto VCommandLine::OptInputFileNames() const -> QStringList
 {
     return parser.positionalArguments();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VCommandLine::IsGuiEnabled() const
+auto VCommandLine::IsGuiEnabled() const -> bool
 {
     return isGuiEnabled;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VCommandLine::IsSetDimensionA() const
+auto VCommandLine::IsSetDimensionA() const -> bool
 {
     return IsOptionSet(LONG_OPTION_DIMENSION_A);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VCommandLine::IsSetDimensionB() const
+auto VCommandLine::IsSetDimensionB() const -> bool
 {
     return IsOptionSet(LONG_OPTION_DIMENSION_B);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VCommandLine::IsSetDimensionC() const
+auto VCommandLine::IsSetDimensionC() const -> bool
 {
     return IsOptionSet(LONG_OPTION_DIMENSION_C);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VCommandLine::OptDimensionA() const
+auto VCommandLine::OptDimensionA() const -> int
 {
     const QString value = OptionValue(LONG_OPTION_DIMENSION_A);
 
@@ -590,7 +472,7 @@ int VCommandLine::OptDimensionA() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VCommandLine::OptDimensionB() const
+auto VCommandLine::OptDimensionB() const -> int
 {
     const QString value = OptionValue(LONG_OPTION_DIMENSION_B);
 
@@ -606,7 +488,7 @@ int VCommandLine::OptDimensionB() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VCommandLine::OptDimensionC() const
+auto VCommandLine::OptDimensionC() const -> int
 {
     const QString value = OptionValue(LONG_OPTION_DIMENSION_C);
 
@@ -692,13 +574,13 @@ auto VCommandLine::TiledPageMargins() const -> QMarginsF
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractLayoutDialog::PaperSizeTemplate VCommandLine::OptTiledPaperSize() const
+auto VCommandLine::OptTiledPaperSize() const -> VAbstractLayoutDialog::PaperSizeTemplate
 {
     return FormatSize(LONG_OPTION_TILED_PDF_PAGE_TEMPLATE);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PageOrientation VCommandLine::OptTiledPageOrientation() const
+auto VCommandLine::OptTiledPageOrientation() const -> PageOrientation
 {
     return static_cast<PageOrientation>(not IsOptionSet(LONG_OPTION_TILED_PDF_LANDSCAPE));
 }
@@ -892,25 +774,25 @@ void VCommandLine::InitCommandLineOptions()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VCommandLine::IsOptionSet(const QString &option) const
+auto VCommandLine::IsOptionSet(const QString &option) const -> bool
 {
     return parser.isSet(option);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VCommandLine::OptionValue(const QString &option) const
+auto VCommandLine::OptionValue(const QString &option) const -> QString
 {
     return parser.value(option);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList VCommandLine::OptionValues(const QString &option) const
+auto VCommandLine::OptionValues(const QString &option) const -> QStringList
 {
     return parser.values(option);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VCommandLine::OptNestingTime() const
+auto VCommandLine::OptNestingTime() const -> int
 {
     int time = VValentinaSettings::GetDefNestingTime();
     if (IsOptionSet(LONG_OPTION_NESTING_TIME))
@@ -930,7 +812,7 @@ int VCommandLine::OptNestingTime() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VCommandLine::OptEfficiencyCoefficient() const
+auto VCommandLine::OptEfficiencyCoefficient() const -> qreal
 {
     qreal coefficient = VValentinaSettings::GetDefEfficiencyCoefficient();
     if (IsOptionSet(LONG_OPTION_EFFICIENCY_COEFFICIENT))
@@ -947,6 +829,138 @@ qreal VCommandLine::OptEfficiencyCoefficient() const
     }
 
     return coefficient;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommandLine::TestPageformat() const
+{
+    bool x = IsOptionSet(LONG_OPTION_PAGETEMPLATE);
+
+    bool a = IsOptionSet(LONG_OPTION_PAGEH);
+    bool b = IsOptionSet(LONG_OPTION_PAGEW);
+    bool c = IsOptionSet(LONG_OPTION_PAGEUNITS);
+
+    if ((a || b) && x)
+    {
+        qCritical() << translate("VCommandLine", "Cannot use pageformat and page explicit size together.")
+                    << "\n";
+        const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+    }
+
+    if ((a || b || c) && !(a && b && c))
+    {
+        qCritical() << translate("VCommandLine", "Page height, width, units must be used all 3 at once.") << "\n";
+        const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommandLine::TestGapWidth() const
+{
+    bool a = IsOptionSet(LONG_OPTION_GAPWIDTH);
+    bool b = IsOptionSet(LONG_OPTION_SHIFTUNITS);
+
+    if ((a || b) && !(a && b))
+    {
+        qCritical() << translate("VCommandLine", "Gap width must be used together with shift units.") << "\n";
+        const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommandLine::TestMargins() const
+{
+    auto CheckKey = [this](const QString &key, const QString &message)
+    {
+        bool a = IsOptionSet(key);
+        bool b = IsOptionSet(LONG_OPTION_PAGEUNITS);
+
+        if (a && !(a && b))
+        {
+            qCritical() << message << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        }
+    };
+
+    if (not IsOptionSet(LONG_OPTION_IGNORE_MARGINS))
+    {
+        CheckKey(LONG_OPTION_LEFT_MARGIN,
+                 translate("VCommandLine", "Left margin must be used together with page units."));
+        CheckKey(LONG_OPTION_RIGHT_MARGIN,
+                 translate("VCommandLine", "Right margin must be used together with page units."));
+        CheckKey(LONG_OPTION_TOP_MARGIN,
+                 translate("VCommandLine", "Top margin must be used together with page units."));
+        CheckKey(LONG_OPTION_BOTTOM_MARGIN,
+                 translate("VCommandLine", "Bottom margin must be used together with page units."));
+    }
+
+    if (static_cast<LayoutExportFormats>(OptExportType()) == LayoutExportFormats::PDFTiled)
+    {
+        CheckKey(LONG_OPTION_TILED_PDF_LEFT_MARGIN,
+                 translate("VCommandLine", "Tiled left margin must be used together with page units."));
+        CheckKey(LONG_OPTION_TILED_PDF_RIGHT_MARGIN,
+                 translate("VCommandLine", "Tiled right margin must be used together with page units."));
+        CheckKey(LONG_OPTION_TILED_PDF_TOP_MARGIN,
+                 translate("VCommandLine", "Tiled top margin must be used together with page units."));
+        CheckKey(LONG_OPTION_TILED_PDF_BOTTOM_MARGIN,
+                 translate("VCommandLine", "Tiled bottom margin must be used together with page units."));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommandLine::ParseMargins(const DialogLayoutSettings &diag) const -> QMarginsF
+{
+    QMarginsF margins = diag.GetFields();
+
+    if (IsOptionSet(LONG_OPTION_LEFT_MARGIN))
+    {
+        bool ok = false;
+        qreal margin = Pg2Px(OptionValue(LONG_OPTION_LEFT_MARGIN), diag, &ok);
+        if (not ok)
+        {
+            qCritical() << translate("VCommandLine", "Invalid layout page left margin.") << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        }
+        margins.setLeft(margin);
+    }
+
+    if (IsOptionSet(LONG_OPTION_RIGHT_MARGIN))
+    {
+        bool ok = false;
+        qreal margin = Pg2Px(OptionValue(LONG_OPTION_RIGHT_MARGIN), diag, &ok);
+        if (not ok)
+        {
+            qCritical() << translate("VCommandLine", "Invalid layout page right margin.") << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        }
+        margins.setRight(margin);
+    }
+
+    if (IsOptionSet(LONG_OPTION_TOP_MARGIN))
+    {
+        bool ok = false;
+        qreal margin = Pg2Px(OptionValue(LONG_OPTION_TOP_MARGIN), diag, &ok);
+        if (not ok)
+        {
+            qCritical() << translate("VCommandLine", "Invalid layout page top margin.") << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        }
+        margins.setTop(margin);
+    }
+
+    if (IsOptionSet(LONG_OPTION_BOTTOM_MARGIN))
+    {
+        bool ok = false;
+        qreal margin = Pg2Px(OptionValue(LONG_OPTION_BOTTOM_MARGIN), diag, &ok);
+        if (not ok)
+        {
+            qCritical() << translate("VCommandLine", "Invalid layout page bottom margin.") << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        }
+        margins.setBottom(margin);
+    }
+
+    return margins;
 }
 
 #undef translate

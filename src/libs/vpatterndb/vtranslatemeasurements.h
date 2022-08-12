@@ -34,6 +34,7 @@
 #include <QtGlobal>
 
 #include "../qmuparser/qmutranslation.h"
+#include "../vmisc/defglobal.h"
 
 class VTranslateMeasurements
 {
@@ -56,7 +57,8 @@ protected:
     QMap<QString, qmu::QmuTranslation> measurements;
 
 private:
-    Q_DISABLE_COPY(VTranslateMeasurements)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VTranslateMeasurements) // NOLINT
     QMap<QString, qmu::QmuTranslation> guiTexts;
     QMap<QString, qmu::QmuTranslation> descriptions;
     QMap<QString, QString> numbers;

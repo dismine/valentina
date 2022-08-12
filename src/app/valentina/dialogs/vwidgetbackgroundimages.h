@@ -48,7 +48,7 @@ enum class ScaleUnit {Percent, Mm, Cm, Inch, Px};
 
 class VWidgetBackgroundImages : public QWidget
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit VWidgetBackgroundImages(VAbstractPattern *doc, QWidget *parent = nullptr);
@@ -83,7 +83,7 @@ private slots:
 
 private:
     // cppcheck-suppress unknownMacro
-    Q_DISABLE_COPY_MOVE(VWidgetBackgroundImages)
+    Q_DISABLE_COPY_MOVE(VWidgetBackgroundImages) // NOLINT
     Ui::VWidgetBackgroundImages *ui;
     VAbstractPattern *m_doc;
 

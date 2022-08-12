@@ -30,8 +30,6 @@
 #include <QTimer>
 
 #include "vpapplication.h"
-#include "../fervor/fvupdater.h"
-#include "../vmisc/vsysexits.h"
 #include "../vmisc/def.h"
 
 
@@ -44,7 +42,7 @@
 #   include "../vmisc/appimage.h"
 #endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 
-int main(int argc, char *argv[])
+auto main(int argc, char *argv[]) -> int
 {
 #if defined(APPIMAGE) && defined(Q_OS_LINUX)
     /* Fix path to ICU_DATA when run AppImage.*/
@@ -52,15 +50,15 @@ int main(int argc, char *argv[])
     auto FreeMemory = qScopeGuard([exe_dir] {free(exe_dir);});
 #endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 
-    Q_INIT_RESOURCE(puzzleicon);
-    Q_INIT_RESOURCE(theme);
-    Q_INIT_RESOURCE(icon);
-    Q_INIT_RESOURCE(schema);
-    Q_INIT_RESOURCE(flags);
-    Q_INIT_RESOURCE(style);
-    Q_INIT_RESOURCE(cursor);
+    Q_INIT_RESOURCE(puzzleicon); // NOLINT
+    Q_INIT_RESOURCE(theme); // NOLINT
+    Q_INIT_RESOURCE(icon); // NOLINT
+    Q_INIT_RESOURCE(schema); // NOLINT
+    Q_INIT_RESOURCE(flags); // NOLINT
+    Q_INIT_RESOURCE(style); // NOLINT
+    Q_INIT_RESOURCE(cursor); // NOLINT
 
-    QT_REQUIRE_VERSION(argc, argv, "5.4.0")// clazy:exclude=qstring-arg,qstring-allocations
+    QT_REQUIRE_VERSION(argc, argv, "5.4.0")// clazy:exclude=qstring-arg,qstring-allocations NOLINT
 
 #if defined(Q_OS_WIN)
     VAbstractApplication::WinAttachConsole();
@@ -82,5 +80,5 @@ int main(int argc, char *argv[])
     }
 #endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 
-    return app.exec();
+    return VPApplication::exec();
 }

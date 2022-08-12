@@ -62,10 +62,10 @@ const QString VVSTConverter::CurrentSchema        = QStringLiteral("://schema/mu
 
 namespace
 {
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTagRead_Only, (QLatin1String("read-only")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrCircumference, (QLatin1String("circumference")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrMeasurement, (QLatin1String("measurement")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTagDimension, (QLatin1String("dimension")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTagRead_Only, (QLatin1String("read-only"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrCircumference, (QLatin1String("circumference"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrMeasurement, (QLatin1String("measurement"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTagDimension, (QLatin1String("dimension"))) // NOLINT
 }
 
 //---------------------------------------------------------------------------------------------------------------------

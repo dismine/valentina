@@ -39,7 +39,7 @@
 
 class TogglePieceInLayout : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     TogglePieceInLayout(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
                         QUndoCommand *parent = nullptr);
@@ -49,7 +49,8 @@ public:
 signals:
     void Toggled(quint32 id);
 private:
-    Q_DISABLE_COPY(TogglePieceInLayout)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(TogglePieceInLayout) // NOLINT
     quint32     m_id;
     VContainer *m_data;
     bool        m_oldState;
@@ -62,7 +63,7 @@ enum class ForceForbidFlippingType : qint8 {ForceFlipping, ForbidFlipping};
 
 class TogglePieceForceForbidFlipping : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     TogglePieceForceForbidFlipping(quint32 id, bool state, ForceForbidFlippingType type, VContainer *data,
                                    VAbstractPattern *doc, QUndoCommand *parent = nullptr);
@@ -70,7 +71,7 @@ public:
     virtual void undo() override;
     virtual void redo() override;
 private:
-    Q_DISABLE_COPY(TogglePieceForceForbidFlipping)
+    Q_DISABLE_COPY_MOVE(TogglePieceForceForbidFlipping) // NOLINT
     quint32     m_id;
     VContainer *m_data;
     ForceForbidFlippingType m_type;

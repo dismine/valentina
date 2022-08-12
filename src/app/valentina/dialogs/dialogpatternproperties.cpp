@@ -45,8 +45,6 @@
 #include "../xml/vpattern.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../core/vapplication.h"
-#include "../vtools/dialogs/support/dialogeditlabel.h"
-#include "dialogknownmaterials.h"
 #include "../vmisc/vvalentinasettings.h"
 #include "../qmuparser/qmudef.h"
 #include "../ifc/xml/vpatternimage.h"
@@ -56,8 +54,8 @@
 DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pattern, QWidget *parent)
     : QDialog(parent),
       ui(new Ui::DialogPatternProperties),
-      doc(doc),
-      pattern(pattern)
+      m_doc(doc),
+      m_pattern(pattern)
 {
     ui->setupUi(this);
 
@@ -130,7 +128,7 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     ui->checkBoxPatternReadOnly->setChecked(readOnly);
     if (not readOnly)
     {
-        connect(ui->checkBoxPatternReadOnly, &QRadioButton::toggled, this, [this](){securityChanged = true;});
+        connect(ui->checkBoxPatternReadOnly, &QRadioButton::toggled, this, [this](){m_securityChanged = true;});
     }
     else
     {
@@ -163,8 +161,8 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     ValidatePassmarkLength();
 
     //Initialization change value. Set to default value after initialization
-    defaultChanged = false;
-    securityChanged = false;
+    m_defaultChanged = false;
+    m_securityChanged = false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -180,7 +178,7 @@ auto DialogPatternProperties::eventFilter(QObject *object, QEvent *event) -> boo
     {
         if (event->type() == QEvent::KeyPress)
         {
-            auto *keyEvent = static_cast<QKeyEvent *>(event);
+            auto *keyEvent = static_cast<QKeyEvent *>(event); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
             if ((keyEvent->key() == Qt::Key_Space) && ((keyEvent->modifiers() & Qt::ControlModifier) != 0U))
             {
                 m_completer->complete();
@@ -188,7 +186,7 @@ auto DialogPatternProperties::eventFilter(QObject *object, QEvent *event) -> boo
             }
         }
 
-        return false;
+        return false;// clazy:exclude=base-class-event
     }
 
     return QDialog::eventFilter(object, event);
@@ -222,18 +220,18 @@ void DialogPatternProperties::Ok()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::DescEdited()
 {
-    descriptionChanged = true;
+    m_descriptionChanged = true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::SaveDescription()
 {
-    if (descriptionChanged)
+    if (m_descriptionChanged)
     {
-        doc->SetNotes(ui->plainTextEditTechNotes->document()->toPlainText());
-        doc->SetDescription(ui->plainTextEditDescription->document()->toPlainText());
-        doc->SetLabelPrefix(qvariant_cast<QString>(ui->comboBoxLabelLanguage->currentData()));
-        doc->SetPassmarkLengthVariable(ui->lineEditPassmarkLength->text());
+        m_doc->SetNotes(ui->plainTextEditTechNotes->document()->toPlainText());
+        m_doc->SetDescription(ui->plainTextEditDescription->document()->toPlainText());
+        m_doc->SetLabelPrefix(qvariant_cast<QString>(ui->comboBoxLabelLanguage->currentData()));
+        m_doc->SetPassmarkLengthVariable(ui->lineEditPassmarkLength->text());
 
         if (m_oldPassmarkLength != ui->lineEditPassmarkLength->text())
         {
@@ -241,19 +239,19 @@ void DialogPatternProperties::SaveDescription()
             m_oldPassmarkLength = ui->lineEditPassmarkLength->text();
         }
 
-        descriptionChanged = false;
-        emit doc->patternChanged(false);
+        m_descriptionChanged = false;
+        emit m_doc->patternChanged(false);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::SaveReadOnlyState()
 {
-    if (securityChanged)
+    if (m_securityChanged)
     {
-        doc->SetReadOnly(ui->checkBoxPatternReadOnly->isChecked());
-        securityChanged = false;
-        emit doc->patternChanged(false);
+        m_doc->SetReadOnly(ui->checkBoxPatternReadOnly->isChecked());
+        m_securityChanged = false;
+        emit m_doc->patternChanged(false);
     }
 }
 
@@ -286,42 +284,42 @@ void DialogPatternProperties::InitImage()
     connect(ui->imageLabel, &QWidget::customContextMenuRequested, this, [this]()
     {
         QMenu menu(this);
-        menu.addAction(deleteAction);
-        menu.addAction(changeImageAction);
-        menu.addAction(saveImageAction);
-        menu.addAction(showImageAction);
+        menu.addAction(m_deleteAction);
+        menu.addAction(m_changeImageAction);
+        menu.addAction(m_saveImageAction);
+        menu.addAction(m_showImageAction);
         menu.exec(QCursor::pos());
         menu.show();
     });
 
-    deleteAction      = new QAction(tr("Delete image"), this);
-    changeImageAction = new QAction(tr("Change image"), this);
-    saveImageAction   = new QAction(tr("Save image to file"), this);
-    showImageAction   = new QAction(tr("Show image"), this);
+    m_deleteAction      = new QAction(tr("Delete image"), this);
+    m_changeImageAction = new QAction(tr("Change image"), this);
+    m_saveImageAction   = new QAction(tr("Save image to file"), this);
+    m_showImageAction   = new QAction(tr("Show image"), this);
 
-    connect(deleteAction, &QAction::triggered, this, [this]()
+    connect(m_deleteAction, &QAction::triggered, this, [this]()
     {
-        doc->DeleteImage();
+        m_doc->DeleteImage();
         ui->imageLabel->setText(tr("Change image"));
-        deleteAction->setEnabled(false);
-        saveImageAction->setEnabled(false);
-        showImageAction->setEnabled(false);
+        m_deleteAction->setEnabled(false);
+        m_saveImageAction->setEnabled(false);
+        m_showImageAction->setEnabled(false);
     });
 
-    connect(changeImageAction, &QAction::triggered, this, &DialogPatternProperties::ChangeImage);
-    connect(saveImageAction, &QAction::triggered, this, &DialogPatternProperties::SaveImage);
-    connect(showImageAction, &QAction::triggered, this, &DialogPatternProperties::ShowImage);
+    connect(m_changeImageAction, &QAction::triggered, this, &DialogPatternProperties::ChangeImage);
+    connect(m_saveImageAction, &QAction::triggered, this, &DialogPatternProperties::SaveImage);
+    connect(m_showImageAction, &QAction::triggered, this, &DialogPatternProperties::ShowImage);
 
-    const VPatternImage image = doc->GetImage();
+    const VPatternImage image = m_doc->GetImage();
     if (image.IsValid())
     {
         ui->imageLabel->setPixmap(image.GetPixmap(ui->imageLabel->width(), ui->imageLabel->height()));
     }
     else
     {
-        deleteAction->setEnabled(false);
-        saveImageAction->setEnabled(false);
-        showImageAction->setEnabled(false);
+        m_deleteAction->setEnabled(false);
+        m_saveImageAction->setEnabled(false);
+        m_showImageAction->setEnabled(false);
     }
 }
 
@@ -341,19 +339,19 @@ void DialogPatternProperties::ChangeImage()
             return;
         }
 
-        doc->SetImage(image);
+        m_doc->SetImage(image);
         ui->imageLabel->setPixmap(image.GetPixmap(ui->imageLabel->width(), ui->imageLabel->height()));
 
-        deleteAction->setEnabled(true);
-        saveImageAction->setEnabled(true);
-        showImageAction->setEnabled(true);
+        m_deleteAction->setEnabled(true);
+        m_saveImageAction->setEnabled(true);
+        m_showImageAction->setEnabled(true);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::SaveImage()
 {
-    const VPatternImage image = doc->GetImage();
+    const VPatternImage image = m_doc->GetImage();
 
     if (not image.IsValid())
     {
@@ -390,7 +388,7 @@ void DialogPatternProperties::SaveImage()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::ShowImage()
 {
-    const VPatternImage image = doc->GetImage();
+    const VPatternImage image = m_doc->GetImage();
 
     if (not image.IsValid())
     {

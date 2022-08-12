@@ -33,7 +33,7 @@
 
 class TST_FindPoint : public AbstractTest
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_FindPoint(QObject *parent = nullptr);
 

@@ -33,7 +33,7 @@
 
 class VPlainTextEdit : public QPlainTextEdit
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VPlainTextEdit(QWidget * parent = nullptr);
     explicit VPlainTextEdit(const QString & text, QWidget * parent = nullptr);

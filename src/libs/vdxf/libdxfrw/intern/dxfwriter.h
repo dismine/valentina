@@ -38,7 +38,7 @@ public:
 protected:
     std::ofstream *filestr;
 private:
-    Q_DISABLE_COPY(dxfWriter)
+    Q_DISABLE_COPY_MOVE(dxfWriter) // NOLINT
     DRW_TextCodec encoder;
 };
 

@@ -28,8 +28,8 @@
 
 #include "dialognewpattern.h"
 #include "ui_dialognewpattern.h"
-#include "../core/vapplication.h"
 #include "../vmisc/vvalentinasettings.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vpatterndb/vcontainer.h"
 
 #include <QFileDialog>
@@ -37,10 +37,11 @@
 #include <QPushButton>
 #include <QSettings>
 #include <QScreen>
+#include <QShowEvent>
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogNewPattern::DialogNewPattern(VContainer *data, const QString &patternPieceName, QWidget *parent)
-    :QDialog(parent), ui(new Ui::DialogNewPattern), data(data), isInitialized(false)
+    :QDialog(parent), ui(new Ui::DialogNewPattern), m_data(data)
 {
     ui->setupUi(this);
 
@@ -67,7 +68,7 @@ DialogNewPattern::~DialogNewPattern()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Unit DialogNewPattern::PatternUnit() const
+auto DialogNewPattern::PatternUnit() const -> Unit
 {
     const qint32 index = ui->comboBoxUnits->currentIndex();
     return StrToUnits(ui->comboBoxUnits->itemData(index).toString());
@@ -77,7 +78,7 @@ Unit DialogNewPattern::PatternUnit() const
 void DialogNewPattern::CheckState()
 {
     bool flagName = false;
-    if (ui->lineEditName->text().isEmpty() == false)
+    if (not ui->lineEditName->text().isEmpty())
     {
         flagName = true;
     }
@@ -96,7 +97,7 @@ void DialogNewPattern::showEvent(QShowEvent *event)
         return;
     }
 
-    if (isInitialized)
+    if (m_isInitialized)
     {
         return;
     }
@@ -105,7 +106,7 @@ void DialogNewPattern::showEvent(QShowEvent *event)
     setMaximumSize(size());
     setMinimumSize(size());
 
-    isInitialized = true;//first show windows are held
+    m_isInitialized = true;//first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -125,7 +126,7 @@ void DialogNewPattern::InitUnits()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogNewPattern::name() const
+auto DialogNewPattern::name() const -> QString
 {
     return ui->lineEditName->text();
 }

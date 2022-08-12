@@ -64,7 +64,7 @@ struct VToolLineIntersectInitData : VToolSinglePointInitData
  */
 class VToolLineIntersect:public VToolSinglePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     virtual void setDialog() override;
     static VToolLineIntersect *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
@@ -91,7 +91,7 @@ protected:
     virtual void    SetVisualization() override;
     virtual QString MakeToolTip() const override;
 private:
-    Q_DISABLE_COPY(VToolLineIntersect)
+    Q_DISABLE_COPY_MOVE(VToolLineIntersect) // NOLINT
 
     /** @brief p1Line1 id first point first line. */
     quint32       p1Line1;

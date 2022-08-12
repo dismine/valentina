@@ -42,7 +42,7 @@ struct VWatermarkData;
 
 class VPrintLayout : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VPrintLayout(QObject *parent = nullptr);
     virtual ~VPrintLayout();
@@ -127,7 +127,7 @@ private slots:
     void PrintPages (QPrinter *printer);
 
 private:
-    Q_DISABLE_COPY(VPrintLayout)
+    Q_DISABLE_COPY_MOVE(VPrintLayout) // NOLINT
 
     QString         m_fileName{};
     QSizeF          m_layoutPaperSize{};

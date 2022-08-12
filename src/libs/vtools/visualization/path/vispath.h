@@ -44,7 +44,7 @@ class VSimplePoint;
 
 class VisPath : public Visualization, public VCurvePathItem
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisPath(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisPath() = default;
@@ -61,7 +61,7 @@ protected:
 
     VSimplePoint *GetPoint(QVector<VSimplePoint *> &points, quint32 i, const QColor &color);
 private:
-    Q_DISABLE_COPY(VisPath)
+    Q_DISABLE_COPY_MOVE(VisPath) // NOLINT
 };
 
 #endif // VISPATH_H

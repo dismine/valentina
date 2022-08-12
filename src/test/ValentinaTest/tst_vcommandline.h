@@ -31,9 +31,11 @@
 
 #include <QObject>
 
+#include "../vmisc/defglobal.h"
+
 class TST_VCommandLine : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_VCommandLine(QObject *parent = nullptr);
 
@@ -41,7 +43,7 @@ private slots:
     void UniqueKeys();
 
 private:
-    Q_DISABLE_COPY(TST_VCommandLine)
+    Q_DISABLE_COPY_MOVE(TST_VCommandLine) // NOLINT
 };
 
 #endif // TST_VCOMMANDLINE_H

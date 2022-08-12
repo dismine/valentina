@@ -31,11 +31,13 @@
 
 #include <QLineEdit>
 
+#include "../vmisc/defglobal.h"
+
 class QStringListModel;
 
 class VLineEdit : public QLineEdit
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VLineEdit(QWidget * parent = nullptr);
     explicit VLineEdit(const QString &contents, QWidget *parent = nullptr);
@@ -45,7 +47,8 @@ protected:
     virtual void focusOutEvent(QFocusEvent *e) override;
     virtual void mousePressEvent(QMouseEvent *e) override;
 private:
-    Q_DISABLE_COPY(VLineEdit)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VLineEdit) // NOLINT
     bool m_selectOnMousePress;
 };
 
@@ -56,7 +59,7 @@ private:
   */
 class VCompleterLineEdit : public VLineEdit
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VCompleterLineEdit(QWidget *parent = nullptr);
 
@@ -72,7 +75,7 @@ private slots:
     void CompletionPopup();
 
 private:
-    Q_DISABLE_COPY(VCompleterLineEdit)
+    Q_DISABLE_COPY_MOVE(VCompleterLineEdit) // NOLINT
     QStringListModel *m_model;
 };
 

@@ -42,24 +42,25 @@ class QTableWidgetItem;
 
 class DialogDimensionLabels : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogDimensionLabels(const QMap<MeasurementDimension, MeasurementDimension_p > &dimensions,
                                    bool fullCircumference, QWidget *parent = nullptr);
-    virtual ~DialogDimensionLabels();
+    ~DialogDimensionLabels() override;
 
     auto Labels() const -> QMap<MeasurementDimension, DimesionLabels>;
 
 protected:
-    virtual void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent* event) override;
 
 private slots:
     void DimensionChanged();
     void LabelChanged(QTableWidgetItem *item);
 
 private:
-    Q_DISABLE_COPY(DialogDimensionLabels)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogDimensionLabels) // NOLINT
     Ui::DialogDimensionLabels *ui;
 
     QMap<MeasurementDimension, MeasurementDimension_p > m_dimensions;

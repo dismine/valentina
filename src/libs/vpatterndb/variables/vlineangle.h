@@ -50,7 +50,7 @@ public:
 
     VLineAngle &operator=(const VLineAngle &var);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VLineAngle(const VLineAngle &&var) Q_DECL_NOTHROW;
+    VLineAngle(VLineAngle &&var) Q_DECL_NOTHROW;
     VLineAngle &operator=(VLineAngle &&var) Q_DECL_NOTHROW;
 #endif
 
@@ -62,6 +62,6 @@ private:
     QSharedDataPointer<VLineAngleData> d;
 };
 
-Q_DECLARE_TYPEINFO(VLineAngle, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VLineAngle, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VLINEANGLE_H

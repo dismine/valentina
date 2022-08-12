@@ -40,14 +40,15 @@
 
 class DeletePatternPiece : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     DeletePatternPiece(VAbstractPattern *doc, const QString &namePP, QUndoCommand *parent = nullptr);
     virtual ~DeletePatternPiece() override;
     virtual void undo() override;
     virtual void redo() override;
 private:
-    Q_DISABLE_COPY(DeletePatternPiece)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DeletePatternPiece) // NOLINT
     QString     namePP;
     QDomElement patternPiece;
     QString     previousPPName;

@@ -38,12 +38,12 @@ class DialogSaveManualLayout;
 
 class DialogSaveManualLayout : public VAbstractLayoutDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogSaveManualLayout(int count, bool consoleExport, const QString &fileName = QString(),
                                     QWidget *parent = nullptr);
-    virtual ~DialogSaveManualLayout();
+    ~DialogSaveManualLayout() override;
 
     auto Path() const -> QString;
     auto FileName() const -> QString;
@@ -66,7 +66,7 @@ public:
     auto IsTilesScheme() const -> bool;
 
 protected:
-    virtual void showEvent(QShowEvent *event) override;
+    void showEvent(QShowEvent *event) override;
 
 private slots:
     void Save();
@@ -74,17 +74,16 @@ private slots:
     void ShowExample();
 
 private:
-    Q_DISABLE_COPY(DialogSaveManualLayout)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogSaveManualLayout) // NOLINT
     Ui::DialogSaveManualLayout *ui;
     int  m_count;
     bool m_isInitialized{false};
     bool m_scaleConnected{true};
     bool m_consoleExport;
 
-    static bool havePdf;
-    static bool tested;
-    static bool SupportPSTest();
-    static QVector<std::pair<QString, LayoutExportFormats> > InitFormats();
+    static auto SupportPSTest() -> bool;
+    static auto InitFormats() -> QVector<std::pair<QString, LayoutExportFormats> >;
 
     void RemoveFormatFromList(LayoutExportFormats format);
 

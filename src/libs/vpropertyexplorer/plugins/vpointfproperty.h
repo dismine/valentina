@@ -38,7 +38,7 @@ namespace VPE
 
 class VPROPERTYEXPLORERSHARED_EXPORT VPointFProperty : public VProperty
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VPointFProperty(const QString& name);
 
@@ -77,7 +77,7 @@ public:
     virtual QVariant getValue() const override;
 
 private:
-    Q_DISABLE_COPY(VPointFProperty)
+    Q_DISABLE_COPY_MOVE(VPointFProperty) // NOLINT
 };
 
 }

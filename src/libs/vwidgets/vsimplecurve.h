@@ -48,7 +48,7 @@ template <class T> class QSharedPointer;
 
 class VSimpleCurve : public VAbstractSimple, public VCurvePathItem
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VSimpleCurve(quint32 id, const QSharedPointer<VAbstractCurve> &curve, QObject *parent = nullptr);
     virtual ~VSimpleCurve() Q_DECL_EQ_DEFAULT;
@@ -80,7 +80,7 @@ protected:
     virtual void     ScalePenWidth() override;
 
 private:
-    Q_DISABLE_COPY(VSimpleCurve)
+    Q_DISABLE_COPY_MOVE(VSimpleCurve) // NOLINT
 
     QSharedPointer<VAbstractCurve> m_curve;
     bool m_isHovered;

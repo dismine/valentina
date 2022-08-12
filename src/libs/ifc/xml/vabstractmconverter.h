@@ -51,7 +51,7 @@ protected:
     static QMap<QString, QString> OldNamesToNewNames_InV0_3_3();
 
 private:
-    Q_DISABLE_COPY(VAbstractMConverter)
+    Q_DISABLE_COPY_MOVE(VAbstractMConverter) // NOLINT
 };
 
 #endif // VABSTRACTMCONVERTER_H

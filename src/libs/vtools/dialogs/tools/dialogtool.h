@@ -79,7 +79,7 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
  */
 class DialogTool : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     DialogTool(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual          ~DialogTool() override;
@@ -222,7 +222,7 @@ protected:
 
     void             InitNodeAngles(QComboBox *box);
 private:
-    Q_DISABLE_COPY(DialogTool)
+    Q_DISABLE_COPY_MOVE(DialogTool) // NOLINT
     void FillList(QComboBox *box, const QMap<QString, quint32> &list)const;
 
     template <typename T>

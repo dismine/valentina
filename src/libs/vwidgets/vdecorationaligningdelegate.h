@@ -30,11 +30,11 @@
 
 #include <QStyledItemDelegate>
 
-
+#include "../vmisc/defglobal.h"
 
 class VDecorationAligningDelegate : public QStyledItemDelegate
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit VDecorationAligningDelegate(Qt::Alignment alignment, QObject *parent = nullptr);
@@ -44,7 +44,8 @@ public:
     void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
 
 private:
-    Q_DISABLE_COPY(VDecorationAligningDelegate)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VDecorationAligningDelegate) // NOLINT
     Qt::Alignment const m_alignment;
 };
 

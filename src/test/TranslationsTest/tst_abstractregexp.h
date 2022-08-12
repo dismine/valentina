@@ -30,6 +30,7 @@
 #define TST_ABSTRACTREGEXP_H
 
 #include "../vtest/abstracttest.h"
+#include "../vmisc/defglobal.h"
 
 #include <QPointer>
 
@@ -38,7 +39,7 @@ class VTranslateVars;
 
 class TST_AbstractRegExp : public AbstractTest
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     TST_AbstractRegExp(const QString &locale, QObject *parent = nullptr);
     virtual ~TST_AbstractRegExp();
@@ -61,7 +62,7 @@ protected:
     void CallTestForValidCharacters();
 
 private:
-    Q_DISABLE_COPY(TST_AbstractRegExp)
+    Q_DISABLE_COPY_MOVE(TST_AbstractRegExp) // NOLINT
 };
 
 #endif // TST_ABSTRACTREGEXP_H

@@ -49,7 +49,7 @@ public:
 
     VBestSquare &operator=(const VBestSquare &res);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VBestSquare(const VBestSquare &&res) Q_DECL_NOTHROW;
+    VBestSquare(VBestSquare &&res) Q_DECL_NOTHROW;
     VBestSquare &operator=(VBestSquare &&res) Q_DECL_NOTHROW;
 #endif
 
@@ -78,6 +78,6 @@ private:
 
 };
 
-Q_DECLARE_TYPEINFO(VBestSquare, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VBestSquare, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VBESTSQUARE_H

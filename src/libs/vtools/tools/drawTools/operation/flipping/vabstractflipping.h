@@ -35,7 +35,7 @@
 
 class VAbstractFlipping : public VAbstractOperation
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     virtual ~VAbstractFlipping() Q_DECL_EQ_DEFAULT;
 protected:
@@ -76,7 +76,7 @@ protected:
                                         const QPointF &secondPoint, const QString &suffix, VContainer *data,
                                         quint32 id);
 private:
-    Q_DISABLE_COPY(VAbstractFlipping)
+    Q_DISABLE_COPY_MOVE(VAbstractFlipping) // NOLINT
 };
 
 //---------------------------------------------------------------------------------------------------------------------

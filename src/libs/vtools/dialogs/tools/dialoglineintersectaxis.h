@@ -45,7 +45,7 @@ namespace Ui
 
 class DialogLineIntersectAxis : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     DialogLineIntersectAxis(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
@@ -91,7 +91,7 @@ protected:
     virtual void closeEvent(QCloseEvent *event) override;
     virtual bool IsValid() const final;
 private:
-    Q_DISABLE_COPY(DialogLineIntersectAxis)
+    Q_DISABLE_COPY_MOVE(DialogLineIntersectAxis) // NOLINT
     Ui::DialogLineIntersectAxis *ui;
 
     QString formulaAngle;

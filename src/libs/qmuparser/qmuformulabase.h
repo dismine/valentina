@@ -51,7 +51,7 @@ protected:
     static qreal* AddVariable(const QString &a_szName, void *a_pUserData);
     void          SetSepForEval();
 private:
-    Q_DISABLE_COPY(QmuFormulaBase)
+    Q_DISABLE_COPY_MOVE(QmuFormulaBase) // NOLINT
 };
 
 } // namespace qmu

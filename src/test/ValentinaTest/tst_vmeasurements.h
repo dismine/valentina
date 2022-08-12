@@ -33,7 +33,7 @@
 
 class TST_VMeasurements : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_VMeasurements(QObject *parent = nullptr);
 

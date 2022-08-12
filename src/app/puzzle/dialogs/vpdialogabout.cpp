@@ -28,7 +28,7 @@
 
 #include "vpdialogabout.h"
 #include "ui_vpdialogabout.h"
-#include "../version.h"
+#include "../vmisc/projectversion.h"
 #include "../vmisc/def.h"
 #include "../fervor/fvupdater.h"
 
@@ -43,7 +43,7 @@
 VPDialogAbout::VPDialogAbout(QWidget *parent)
     :QDialog(parent),
       ui(new Ui::VPDialogAbout),
-      isInitialized(false)
+      m_isInitialized(false)
 {
     ui->setupUi(this);
 
@@ -52,7 +52,7 @@ VPDialogAbout::VPDialogAbout(QWidget *parent)
     RetranslateUi();
     connect(ui->pushButton_Web_Site, &QPushButton::clicked, this, []()
     {
-        if ( not QDesktopServices::openUrl(QUrl(VER_COMPANYDOMAIN_STR)))
+        if ( not QDesktopServices::openUrl(QUrl(QStringLiteral(VER_COMPANYDOMAIN_STR))))
         {
             qWarning() << tr("Cannot open your default browser");
         }
@@ -100,7 +100,7 @@ void VPDialogAbout::showEvent(QShowEvent *event)
         return;
     }
 
-    if (isInitialized)
+    if (m_isInitialized)
     {
         return;
     }
@@ -109,7 +109,7 @@ void VPDialogAbout::showEvent(QShowEvent *event)
     setMaximumSize(size());
     setMinimumSize(size());
 
-    isInitialized = true;//first show windows are held
+    m_isInitialized = true;//first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -125,17 +125,17 @@ void VPDialogAbout::FontPointSize(QWidget *w, int pointSize)
 //---------------------------------------------------------------------------------------------------------------------
 void VPDialogAbout::RetranslateUi()
 {
-    ui->label_Puzzle_Version->setText(QString("Puzzle %1").arg(APP_VERSION_STR));
-    ui->labelBuildRevision->setText(tr("Build revision: %1").arg(BUILD_REVISION));
+    ui->label_Puzzle_Version->setText(QStringLiteral("Puzzle %1").arg(APP_VERSION_STR));
+    ui->labelBuildRevision->setText(tr("Build revision: %1").arg(QStringLiteral(BUILD_REVISION)));
     ui->label_QT_Version->setText(buildCompatibilityString());
 
-    const QDate date = QLocale::c().toDate(QString(__DATE__).simplified(), QLatin1String("MMM d yyyy"));
-    ui->label_Puzzle_Built->setText(tr("Built on %1 at %2").arg(date.toString(), __TIME__));
+    const QDate date = QLocale::c().toDate(QStringLiteral(__DATE__).simplified(), QStringLiteral("MMM d yyyy"));
+    ui->label_Puzzle_Built->setText(tr("Built on %1 at %2").arg(date.toString(), QStringLiteral(__TIME__)));
 
     ui->label_Legal_Stuff->setText(QApplication::translate("InternalStrings",
                                                            "The program is provided AS IS with NO WARRANTY OF ANY "
                                                            "KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY "
                                                            "AND FITNESS FOR A PARTICULAR PURPOSE."));
 
-    ui->pushButton_Web_Site->setText(tr("Web site : %1").arg(VER_COMPANYDOMAIN_STR));
+    ui->pushButton_Web_Site->setText(tr("Web site : %1").arg(QStringLiteral(VER_COMPANYDOMAIN_STR)));
 }

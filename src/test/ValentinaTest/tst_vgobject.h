@@ -33,7 +33,7 @@
 
 class TST_VGObject  : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_VGObject(QObject *parent = nullptr);
 

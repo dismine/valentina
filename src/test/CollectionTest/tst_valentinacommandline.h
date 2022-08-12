@@ -30,10 +30,11 @@
 #define TST_VALENTINACOMMANDLINE_H
 
 #include "../vtest/abstracttest.h"
+#include "../vmisc/defglobal.h"
 
 class TST_ValentinaCommandLine : public AbstractTest
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_ValentinaCommandLine(QObject *parent = nullptr);
 
@@ -50,7 +51,7 @@ private slots:
     void cleanupTestCase();
 
 private:
-    Q_DISABLE_COPY(TST_ValentinaCommandLine)
+    Q_DISABLE_COPY_MOVE(TST_ValentinaCommandLine) // NOLINT
 };
 
 #endif // TST_VALENTINACOMMANDLINE_H

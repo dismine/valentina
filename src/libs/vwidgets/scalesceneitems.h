@@ -53,7 +53,7 @@ protected:
     bool m_isBoldLine;
 
 private:
-    Q_DISABLE_COPY(VScaledLine)
+    Q_DISABLE_COPY_MOVE(VScaledLine) // NOLINT
 };
 
 class VScaledEllipse : public QGraphicsEllipseItem
@@ -68,7 +68,7 @@ public:
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                        QWidget *widget = nullptr) override;
 private:
-    Q_DISABLE_COPY(VScaledEllipse)
+    Q_DISABLE_COPY_MOVE(VScaledEllipse) // NOLINT
 };
 
 #endif // SCALESCENEITEMS_H

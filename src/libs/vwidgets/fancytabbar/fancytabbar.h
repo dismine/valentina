@@ -41,7 +41,7 @@ class QPainter;
 
 class FancyTabBar : public QWidget
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     enum TabBarPosition
@@ -95,7 +95,7 @@ private slots:
     void EmitCurrentIndex();
 
 private:
-    Q_DISABLE_COPY(FancyTabBar)
+    Q_DISABLE_COPY_MOVE(FancyTabBar) // NOLINT
 
     enum Corner { OutsideBeginning, OutsideEnd, InsideBeginning, InsideEnd };
 

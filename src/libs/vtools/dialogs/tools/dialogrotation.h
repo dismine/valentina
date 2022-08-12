@@ -48,7 +48,7 @@ namespace Ui
 
 class DialogRotation : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit DialogRotation(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogRotation();
@@ -109,7 +109,7 @@ private slots:
     void PointChanged();
 
 private:
-    Q_DISABLE_COPY(DialogRotation)
+    Q_DISABLE_COPY_MOVE(DialogRotation) // NOLINT
     Ui::DialogRotation *ui;
 
     /** @brief timerAngle timer of check formula of angle */

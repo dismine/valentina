@@ -65,7 +65,7 @@ struct VToolBasePointInitData : VToolSinglePointInitData
  */
 class VToolBasePoint : public VToolSinglePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     virtual ~VToolBasePoint() =default;
     virtual void setDialog() override;
@@ -100,7 +100,7 @@ protected:
 private slots:
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
 private:
-    Q_DISABLE_COPY(VToolBasePoint)
+    Q_DISABLE_COPY_MOVE(VToolBasePoint) // NOLINT
 
     QString namePP;
 

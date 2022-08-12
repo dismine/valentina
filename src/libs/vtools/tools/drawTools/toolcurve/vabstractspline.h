@@ -71,7 +71,7 @@ struct VAbstractSplineInitData : VDrawToolInitData
 
 class VAbstractSpline:public VDrawTool, public QGraphicsPathItem
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes,
                     QGraphicsItem * parent = nullptr);
@@ -157,7 +157,7 @@ protected:
     static void InitElArcToolConnections(VMainGraphicsScene *scene, T *tool);
 
 private:
-    Q_DISABLE_COPY(VAbstractSpline)
+    Q_DISABLE_COPY_MOVE(VAbstractSpline) // NOLINT
 
     void InitDefShape();
 };
@@ -258,7 +258,7 @@ public:
 
     QString CenterPointName() const;
 private:
-    Q_DISABLE_COPY(VToolAbstractArc)
+    Q_DISABLE_COPY_MOVE(VToolAbstractArc) // NOLINT
 };
 
 #endif // VABSTRACTSPLINE_H

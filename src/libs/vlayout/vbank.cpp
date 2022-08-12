@@ -31,18 +31,16 @@
 #include <climits>
 #include <QLoggingCategory>
 
-#include "../vmisc/diagnostic.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/compatibility.h"
 #include "vlayoutdef.h"
 #include "../ifc/exception/vexception.h"
-#include "../vpatterndb/floatItemData/floatitemdef.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
 QT_WARNING_DISABLE_INTEL(1418)
 
-Q_LOGGING_CATEGORY(lBank, "layout.bank")
+Q_LOGGING_CATEGORY(lBank, "layout.bank") // NOLINT
 
 QT_WARNING_POP
 

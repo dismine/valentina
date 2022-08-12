@@ -48,7 +48,7 @@ namespace VPE
 
 class VPROPERTYEXPLORERSHARED_EXPORT VLineColorProperty : public VProperty
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     //! Constructor
     explicit VLineColorProperty(const QString& name);
@@ -102,7 +102,7 @@ protected:
     // No use of d-pointer in this case, because it is unlikely this will change. If it does, we can still add other
     //members by reimplementing the VPropertyPrivate class without touching this header file.
 private:
-    Q_DISABLE_COPY(VLineColorProperty)
+    Q_DISABLE_COPY_MOVE(VLineColorProperty) // NOLINT
 };
 
 }

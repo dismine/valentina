@@ -33,7 +33,7 @@
 #include <QElapsedTimer>
 #include <QTimer>
 
-#include "../vlayout/vlayoutdef.h"
+#include "../vmisc/defglobal.h"
 
 namespace Ui
 {
@@ -42,11 +42,11 @@ namespace Ui
 
 class DialogLayoutProgress : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogLayoutProgress(QElapsedTimer timer, qint64 timeout, QWidget *parent = nullptr);
-    ~DialogLayoutProgress();
+    ~DialogLayoutProgress() override;
 
 signals:
     void Abort();
@@ -58,16 +58,17 @@ public slots:
     void Efficiency(qreal value);
 
 protected:
-    virtual void showEvent(QShowEvent *event) override;
+    void showEvent(QShowEvent *event) override;
 
 private:
-    Q_DISABLE_COPY(DialogLayoutProgress)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogLayoutProgress) // NOLINT
     Ui::DialogLayoutProgress *ui;
     QMovie *m_movie;
     QElapsedTimer m_timer;
     qint64 m_timeout;
-    bool isInitialized{false};
-    QTimer *progressTimer;
+    bool m_isInitialized{false};
+    QTimer *m_progressTimer;
 };
 
 #endif // DIALOGLAYOUTPROGRESS_H

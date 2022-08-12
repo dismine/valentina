@@ -389,8 +389,7 @@ QString DialogShoulderPoint::GetTypeLine() const
  */
 QString DialogShoulderPoint::GetFormula() const
 {
-    return VAbstractApplication::VApp()->TrVars()
-            ->TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

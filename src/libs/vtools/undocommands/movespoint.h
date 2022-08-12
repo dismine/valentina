@@ -41,7 +41,7 @@ class QGraphicsScene;
 
 class MoveSPoint : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     MoveSPoint(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
                QUndoCommand *parent = nullptr);
@@ -55,7 +55,8 @@ public:
     double       getNewY() const;
     void         Do(double x, double y);
 private:
-    Q_DISABLE_COPY(MoveSPoint)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(MoveSPoint) // NOLINT
     double   oldX;
     double   oldY;
     double   newX;

@@ -41,11 +41,12 @@
 
 namespace
 {
-QStringList ComboBoxAllStrings(QComboBox *combo)
+auto ComboBoxAllStrings(QComboBox *combo) -> QStringList
 {
     SCASSERT(combo != nullptr)
 
     QStringList itemsInComboBox;
+    itemsInComboBox.reserve(combo->count());
     for (int index = 0; index < combo->count(); ++index)
     {
         itemsInComboBox << combo->itemText(index);
@@ -53,14 +54,12 @@ QStringList ComboBoxAllStrings(QComboBox *combo)
 
     return itemsInComboBox;
 }
-}
+}  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
     : QWidget(parent),
-      ui(new Ui::PreferencesPatternPage),
-      m_knownMaterials(),
-      m_oldLineUnit(Unit::Mm)
+      ui(new Ui::PreferencesPatternPage)
 {
     ui->setupUi(this);
     RetranslateUi();
@@ -125,7 +124,7 @@ PreferencesPatternPage::~PreferencesPatternPage()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList PreferencesPatternPage::Apply()
+auto PreferencesPatternPage::Apply() -> QStringList
 {
     QStringList preferences;
 
@@ -209,7 +208,7 @@ void PreferencesPatternPage::EditDateTimeFormats()
 {
     VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
-    QPushButton *button = qobject_cast<QPushButton *>(sender());
+    auto *button = qobject_cast<QPushButton *>(sender());
     if (button == ui->pushButtonEditDateFormats)
     {
         CallDateTimeFormatEditor(QDate::currentDate(), VCommonSettings::PredefinedDateFormats(),

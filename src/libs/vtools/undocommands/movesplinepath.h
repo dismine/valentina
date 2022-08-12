@@ -42,7 +42,7 @@ class QGraphicsScene;
 
 class MoveSplinePath : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     MoveSplinePath(VAbstractPattern *doc, const VSplinePath &oldSplPath, const VSplinePath &newSplPath,
                    const quint32 &id, QUndoCommand *parent = nullptr);
@@ -54,7 +54,8 @@ public:
     quint32      getSplinePathId() const;
     VSplinePath  getNewSplinePath() const;
 private:
-    Q_DISABLE_COPY(MoveSplinePath)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(MoveSplinePath) // NOLINT
     VSplinePath oldSplinePath;
     VSplinePath newSplinePath;
     QGraphicsScene *scene;

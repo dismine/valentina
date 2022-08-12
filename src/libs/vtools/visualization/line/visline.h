@@ -47,7 +47,7 @@
 
 class VisLine: public Visualization, public VScaledLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisLine(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisLine() = default;
@@ -66,7 +66,7 @@ protected:
     void         DrawRay(VScaledLine *lineItem, const QPointF &p, const QPointF &pTangent,
                          const QColor &color, Qt::PenStyle style);
 private:
-    Q_DISABLE_COPY(VisLine)
+    Q_DISABLE_COPY_MOVE(VisLine) // NOLINT
 };
 
 #endif // VISLINE_H

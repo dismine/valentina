@@ -42,7 +42,7 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 //! The VBoolProperty can take two states: True or False.
 class VPROPERTYEXPLORERSHARED_EXPORT VBoolProperty : public VProperty
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     //! Default constructor
     explicit VBoolProperty(const QString& name);
@@ -87,7 +87,7 @@ public slots:
     void StateChanged();
 
 private:
-    Q_DISABLE_COPY(VBoolProperty)
+    Q_DISABLE_COPY_MOVE(VBoolProperty) // NOLINT
 };
 
 QT_WARNING_POP

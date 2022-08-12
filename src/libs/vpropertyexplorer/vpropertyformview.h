@@ -43,7 +43,7 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 //! This class populates a form layout with the properties in a model
 class VPROPERTYEXPLORERSHARED_EXPORT VPropertyFormView : public VPropertyFormWidget
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     //! Constructor
     explicit VPropertyFormView(QWidget *parent = nullptr);
@@ -104,7 +104,7 @@ protected:
     virtual void connectPropertyFormWidget(VPropertyFormWidget* widget);
 
 private:
-    Q_DISABLE_COPY(VPropertyFormView)
+    Q_DISABLE_COPY_MOVE(VPropertyFormView) // NOLINT
 };
 
 QT_WARNING_POP

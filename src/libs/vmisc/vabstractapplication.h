@@ -55,7 +55,7 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 
 class VAbstractApplication : public QApplication
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VAbstractApplication(int &argc, char ** argv);
     virtual ~VAbstractApplication() =default;
@@ -112,7 +112,7 @@ protected slots:
     virtual void AboutToQuit()=0;
 
 private:
-    Q_DISABLE_COPY(VAbstractApplication)
+    Q_DISABLE_COPY_MOVE(VAbstractApplication) // NOLINT
 
     void ClearTranslation();
 };

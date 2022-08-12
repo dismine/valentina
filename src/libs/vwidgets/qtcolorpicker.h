@@ -54,13 +54,14 @@
 #include <QtCore/QEvent>
 #include <QFocusEvent>
 
+#include "../vmisc/defglobal.h"
 
 class ColorPickerPopup;
 class ColorPickerItem;
 
 class QtColorPicker : public QPushButton
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
     Q_PROPERTY(bool colorDialog READ colorDialogEnabled WRITE setColorDialogEnabled)
 
@@ -99,7 +100,8 @@ private Q_SLOTS:
     void popupClosed();
 
 private:
-    Q_DISABLE_COPY(QtColorPicker)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(QtColorPicker) // NOLINT
     ColorPickerPopup *popup{nullptr};
     QColor col{};
     bool withColorDialog{false};

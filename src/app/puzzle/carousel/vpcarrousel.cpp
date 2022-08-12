@@ -32,7 +32,9 @@
 #include <QScrollBar>
 #include <QFontMetrics>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../layout/vpsheet.h"
 #include "../layout/vplayout.h"
 
@@ -40,7 +42,13 @@
 #include <QMenu>
 #include <QPainter>
 
-Q_LOGGING_CATEGORY(pCarrousel, "p.carrousel")
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
+QT_WARNING_DISABLE_INTEL(1418)
+
+Q_LOGGING_CATEGORY(pCarrousel, "p.carrousel") // NOLINT
+
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 VPCarrousel::VPCarrousel(const VPLayoutPtr &layout, QWidget *parent) :
@@ -108,7 +116,7 @@ void VPCarrousel::Refresh()
 
         ui->comboBoxPieceList->blockSignals(true);
 
-        for (const auto& sheet: m_pieceLists)
+        for (const auto& sheet: qAsConst(m_pieceLists))
         {
             ui->comboBoxPieceList->addItem(GetSheetName(sheet), sheet.sheetUuid);
         }
@@ -227,7 +235,7 @@ void VPCarrousel::on_ActivePieceListChanged(int index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPLayoutWeakPtr VPCarrousel::Layout() const
+auto VPCarrousel::Layout() const -> VPLayoutWeakPtr
 {
     return m_layout;
 }

@@ -56,9 +56,9 @@ VPatternLabelData &VPatternLabelData::operator=(const VPatternLabelData &data)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VPatternLabelData::VPatternLabelData(const VPatternLabelData &&data) Q_DECL_NOTHROW
-    : VAbstractFloatItemData(data),
-      d (data.d)
+VPatternLabelData::VPatternLabelData(VPatternLabelData &&data) Q_DECL_NOTHROW
+    : VAbstractFloatItemData(std::move(data)),
+      d (std::move(data.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -37,6 +37,7 @@
 #include "../qmuparser/qmuparsererror.h"
 #include "../mainwindow.h"
 #include "../vmisc/qt_dispatch/qt_dispatch.h"
+#include "../vmisc/vsysexits.h"
 #include "vvalentinasettings.h"
 
 #include <QtDebug>
@@ -66,7 +67,7 @@ namespace
 {
 auto AppFilePath(const QString &appName) -> QString
 {
-    QString appNameExe = appName;
+    QString appNameExe = appName; // NOLINT(performance-unnecessary-copy-initialization)
 #ifdef Q_OS_WIN
     appNameExe += ".exe";
 #endif
@@ -417,7 +418,7 @@ auto VApplication::notify(QObject *receiver, QEvent *event) -> bool
     catch (const VExceptionToolWasDeleted &e)
     {
         qCCritical(vApp, "%s\n\n%s\n\n%s",
-                   qUtf8Printable("Unhadled deleting tool. Continue use object after deleting"),
+                   qUtf8Printable(QStringLiteral("Unhadled deleting tool. Continue use object after deleting")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         exit(V_EX_DATAERR);
     }
@@ -469,7 +470,7 @@ void VApplication::ActivateDarkMode()
          {
              f.open(QFile::ReadOnly | QFile::Text);
              QTextStream ts(&f);
-             qApp->setStyleSheet(ts.readAll());
+             qApp->setStyleSheet(ts.readAll()); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
          }
      }
 }
@@ -550,45 +551,45 @@ void VApplication::ClearOldLogs()
     logsDir.setNameFilters(QStringList(QStringLiteral("*.log")));
     QDir::setCurrent(LogDirPath());
 
+    // Restore working directory
+    auto restore = qScopeGuard([workingDirectory] { QDir::setCurrent(workingDirectory); });
+
     const QStringList allFiles = logsDir.entryList(QDir::NoDotAndDotDot | QDir::Files);
-    if (not allFiles.isEmpty())
+    if (allFiles.isEmpty())
     {
-        qCDebug(vApp, "Clearing old logs");
-        for (const auto &fn : allFiles)
-        {
-            QFileInfo info(fn);
+        qCDebug(vApp, "There are no old logs.");
+        return;
+    }
+
+    qCDebug(vApp, "Clearing old logs");
+    for (const auto &fn : allFiles)
+    {
+        QFileInfo info(fn);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
-            const QDateTime created = info.birthTime();
+        const QDateTime created = info.birthTime();
 #else
-            const QDateTime created = info.created();
+        const QDateTime created = info.created();
 #endif
-            if (created.daysTo(QDateTime::currentDateTime()) >= DAYS_TO_KEEP_LOGS)
+        if (created.daysTo(QDateTime::currentDateTime()) >= DAYS_TO_KEEP_LOGS)
+        {
+            VLockGuard<QFile> tmp(info.absoluteFilePath(), [&fn](){return new QFile(fn);});
+            if (tmp.GetProtected() != nullptr)
             {
-                VLockGuard<QFile> tmp(info.absoluteFilePath(), [&fn](){return new QFile(fn);});
-                if (tmp.GetProtected() != nullptr)
+                if (tmp.GetProtected()->remove())
                 {
-                    if (tmp.GetProtected()->remove())
-                    {
-                        qCDebug(vApp, "Deleted %s", qUtf8Printable(info.absoluteFilePath()));
-                    }
-                    else
-                    {
-                        qCDebug(vApp, "Could not delete %s", qUtf8Printable(info.absoluteFilePath()));
-                    }
+                    qCDebug(vApp, "Deleted %s", qUtf8Printable(info.absoluteFilePath()));
                 }
                 else
                 {
-                    qCDebug(vApp, "Failed to lock %s", qUtf8Printable(info.absoluteFilePath()));
+                    qCDebug(vApp, "Could not delete %s", qUtf8Printable(info.absoluteFilePath()));
                 }
+            }
+            else
+            {
+                qCDebug(vApp, "Failed to lock %s", qUtf8Printable(info.absoluteFilePath()));
             }
         }
     }
-    else
-    {
-        qCDebug(vApp, "There are no old logs.");
-    }
-
-    QDir::setCurrent(workingDirectory); // Restore working directory
 }
 
 //---------------------------------------------------------------------------------------------------------------------

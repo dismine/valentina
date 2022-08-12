@@ -72,7 +72,7 @@ struct VToolSplineInitData : VAbstractSplineInitData
  */
 class VToolSpline:public VAbstractSpline
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     virtual ~VToolSpline() =default;
     virtual void setDialog() override;
@@ -110,7 +110,7 @@ protected:
 private slots:
     void CurveReleased();
 private:
-    Q_DISABLE_COPY(VToolSpline)
+    Q_DISABLE_COPY_MOVE(VToolSpline) // NOLINT
     QPointF oldPosition;
 
     bool moved;

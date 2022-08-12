@@ -66,7 +66,7 @@ struct VToolShoulderPointInitData : VToolLinePointInitData
  */
 class VToolShoulderPoint : public VToolLinePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     virtual void   setDialog() override;
     static QPointF FindPoint(const QPointF &p1Line, const QPointF &p2Line, const QPointF &pShoulder,
@@ -99,7 +99,7 @@ protected:
 private slots:
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
 private:
-    Q_DISABLE_COPY(VToolShoulderPoint)
+    Q_DISABLE_COPY_MOVE(VToolShoulderPoint) // NOLINT
 
     /** @brief p2Line id second line point. */
     quint32         p2Line;

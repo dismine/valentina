@@ -36,7 +36,7 @@ namespace VPE
 
 class VPROPERTYEXPLORERSHARED_EXPORT VPropertyDelegate : public QStyledItemDelegate
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VPropertyDelegate(QObject *parent = nullptr);
     virtual ~VPropertyDelegate() override;

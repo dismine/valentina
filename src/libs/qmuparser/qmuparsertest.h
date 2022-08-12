@@ -60,7 +60,7 @@ namespace Test
  */
 class QMUPARSERSHARED_EXPORT QmuParserTester : public QObject // final
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     typedef int ( QmuParserTester::*testfun_type ) ();
 
@@ -70,7 +70,7 @@ public slots:
     void Run();
 
 private:
-    Q_DISABLE_COPY(QmuParserTester)
+    Q_DISABLE_COPY_MOVE(QmuParserTester) // NOLINT
     QVector<testfun_type> m_vTestFun;
     static int c_iCount;
 

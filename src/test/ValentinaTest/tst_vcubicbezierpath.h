@@ -31,9 +31,11 @@
 
 #include <QObject>
 
+#include "../vmisc/defglobal.h"
+
 class TST_VCubicBezierPath : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_VCubicBezierPath(QObject *parent = nullptr);
 
@@ -46,7 +48,7 @@ private slots:
     void TestSubSplPointsCount() const;
 
 private:
-    Q_DISABLE_COPY(TST_VCubicBezierPath)
+    Q_DISABLE_COPY_MOVE(TST_VCubicBezierPath) // NOLINT
 
 };
 

@@ -44,7 +44,7 @@ public:
 
     VAbstractFloatItemData &operator=(const VAbstractFloatItemData &data);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VAbstractFloatItemData(const VAbstractFloatItemData &&data) Q_DECL_NOTHROW;
+    VAbstractFloatItemData(VAbstractFloatItemData &&data) Q_DECL_NOTHROW;
     VAbstractFloatItemData &operator=(VAbstractFloatItemData &&data) Q_DECL_NOTHROW;
 #endif
 

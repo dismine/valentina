@@ -36,6 +36,7 @@
 #include <ciso646>
 
 #include "../vmisc/literals.h"
+#include "../vmisc/defglobal.h"
 #include "../layout/layoutdef.h"
 
 class VPLayout;
@@ -48,7 +49,7 @@ class VTextManager;
 
 class VPLayoutFileWriter : public QXmlStreamWriter
 {
-    Q_DECLARE_TR_FUNCTIONS(VPLayoutFileWriter)
+    Q_DECLARE_TR_FUNCTIONS(VPLayoutFileWriter) // NOLINT
 public:
     VPLayoutFileWriter()= default;
     ~VPLayoutFileWriter()= default;
@@ -56,6 +57,8 @@ public:
     void WriteFile(const VPLayoutPtr &layout, QIODevice *file);
 
 private:
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VPLayoutFileWriter) // NOLINT
     void WriteLayout(const VPLayoutPtr &layout);
     void WriteLayoutProperties(const VPLayoutPtr &layout);
     void WriteSheets(const VPLayoutPtr &layout);
@@ -73,7 +76,7 @@ private:
     void SetAttribute(const QString &name, const T &value);
 
     template <size_t N>
-    void SetAttribute(const QString &name, const char (&value)[N]);
+    void SetAttribute(const QString &name, const char (&value)[N]); //NOLINT(cppcoreguidelines-avoid-c-arrays) NOLINT(hicpp-avoid-c-arrays) NOLINT(modernize-avoid-c-arrays)
 
     template <typename T>
     void SetAttributeOrRemoveIf(const QString &name, const T &value,
@@ -112,7 +115,7 @@ inline void VPLayoutFileWriter::SetAttribute<bool>(const QString &name, const bo
 
 //---------------------------------------------------------------------------------------------------------------------
 template <size_t N>
-inline void VPLayoutFileWriter::SetAttribute(const QString &name, const char (&value)[N])
+inline void VPLayoutFileWriter::SetAttribute(const QString &name, const char (&value)[N]) //NOLINT(cppcoreguidelines-avoid-c-arrays) NOLINT(hicpp-avoid-c-arrays) NOLINT(modernize-avoid-c-arrays)
 {
     writeAttribute(name, QString(value));
 }

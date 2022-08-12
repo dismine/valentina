@@ -48,7 +48,7 @@ struct VToolFlippingByLineInitData : VAbstractOperationInitData
 
 class VToolFlippingByLine : public VAbstractFlipping
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     virtual ~VToolFlippingByLine() Q_DECL_EQ_DEFAULT;
     virtual void setDialog() override;
@@ -75,7 +75,7 @@ protected:
     virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     virtual QString MakeToolTip() const override;
 private:
-    Q_DISABLE_COPY(VToolFlippingByLine)
+    Q_DISABLE_COPY_MOVE(VToolFlippingByLine) // NOLINT
 
     quint32 m_firstLinePointId;
     quint32 m_secondLinePointId;

@@ -40,14 +40,15 @@
 
 class DelTool : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     DelTool(VAbstractPattern *doc, quint32 id, QUndoCommand *parent = nullptr);
     virtual ~DelTool() override =default;
     virtual void undo() override;
     virtual void redo() override;
 private:
-    Q_DISABLE_COPY(DelTool)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DelTool) // NOLINT
     QDomNode      parentNode{};
     quint32       siblingId{NULL_ID};
     const QString nameActivDraw;

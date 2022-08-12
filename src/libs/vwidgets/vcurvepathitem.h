@@ -58,7 +58,7 @@ public:
 protected:
     virtual void ScalePenWidth();
 private:
-    Q_DISABLE_COPY(VCurvePathItem)
+    Q_DISABLE_COPY_MOVE(VCurvePathItem) // NOLINT
 
     QVector<QPair<QLineF, QLineF>> m_directionArrows;
     QVector<QPointF> m_points;

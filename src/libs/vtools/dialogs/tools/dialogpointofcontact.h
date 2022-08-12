@@ -49,7 +49,7 @@ namespace Ui
  */
 class DialogPointOfContact : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     DialogPointOfContact(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogPointOfContact() override;
@@ -89,7 +89,7 @@ protected:
     virtual void   closeEvent(QCloseEvent *event) override;
     virtual bool   IsValid() const final;
 private:
-    Q_DISABLE_COPY(DialogPointOfContact)
+    Q_DISABLE_COPY_MOVE(DialogPointOfContact) // NOLINT
 
     /** @brief ui keeps information about user interface */
     Ui::DialogPointOfContact *ui;

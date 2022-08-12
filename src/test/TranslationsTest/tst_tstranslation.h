@@ -33,7 +33,7 @@
 
 class TST_TSTranslation : public TST_AbstractTranslation
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_TSTranslation(QObject *parent = nullptr);
 
@@ -48,7 +48,7 @@ private slots:
     void CheckInvalidCharacter();
 
 private:
-    Q_DISABLE_COPY(TST_TSTranslation)
+    Q_DISABLE_COPY_MOVE(TST_TSTranslation) // NOLINT
 
     void PrepareOriginalStrings();
 };

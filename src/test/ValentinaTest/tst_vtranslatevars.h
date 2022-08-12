@@ -33,11 +33,13 @@
 #include <QLocale>
 #include <QObject>
 
+#include "../vmisc/defglobal.h"
+
 class VTranslateVars;
 
 class TST_VTranslateVars : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_VTranslateVars(QObject *parent = nullptr);
 private slots:
@@ -48,7 +50,8 @@ private slots:
     void TestFormulaToUser();
     void cleanupTestCase();
 private:
-    Q_DISABLE_COPY(TST_VTranslateVars)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(TST_VTranslateVars) // NOLINT
     VTranslateVars *m_trMs;
     QLocale m_systemLocale;
 

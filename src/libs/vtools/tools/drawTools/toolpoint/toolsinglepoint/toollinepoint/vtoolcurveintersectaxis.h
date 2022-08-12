@@ -58,7 +58,7 @@ struct VToolCurveIntersectAxisInitData : VToolLinePointInitData
 
 class VToolCurveIntersectAxis : public VToolLinePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     virtual ~VToolCurveIntersectAxis() Q_DECL_EQ_DEFAULT;
     virtual void setDialog() override;
@@ -93,7 +93,7 @@ protected:
 
     void SetSegments(const QPair<QString, QString> &segments);
 private:
-    Q_DISABLE_COPY(VToolCurveIntersectAxis)
+    Q_DISABLE_COPY_MOVE(VToolCurveIntersectAxis) // NOLINT
     QString formulaAngle;
     quint32 curveId;
     QPair<QString, QString> m_segments{};

@@ -41,7 +41,7 @@ class WatermarkWindow;
 
 class WatermarkWindow : public QMainWindow
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit WatermarkWindow(const QString &patternPath, QWidget *parent = nullptr);
@@ -71,7 +71,8 @@ private slots:
     void WatermarkChangesWereSaved(bool saved);
 
 private:
-    Q_DISABLE_COPY(WatermarkWindow)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(WatermarkWindow) // NOLINT
     Ui::WatermarkWindow *ui;
     QString m_patternPath;
     QString m_curFile{};

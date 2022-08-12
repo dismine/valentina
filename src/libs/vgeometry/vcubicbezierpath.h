@@ -46,7 +46,7 @@ class VCubicBezierPathData;
 
 class VCubicBezierPath final : public VAbstractCubicBezierPath
 {
-    Q_DECLARE_TR_FUNCTIONS(VCubicBezierPath)
+    Q_DECLARE_TR_FUNCTIONS(VCubicBezierPath) // NOLINT
 public:
     explicit VCubicBezierPath(quint32 idObject = 0, Draw mode = Draw::Calculation);
     VCubicBezierPath(const VCubicBezierPath &curve);
@@ -58,7 +58,7 @@ public:
 
     VCubicBezierPath &operator=(const VCubicBezierPath &curve);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VCubicBezierPath(const VCubicBezierPath &&curve) Q_DECL_NOTHROW;
+    VCubicBezierPath(VCubicBezierPath &&curve) Q_DECL_NOTHROW;
     VCubicBezierPath &operator=(VCubicBezierPath &&curve) Q_DECL_NOTHROW;
 #endif
 
@@ -91,6 +91,6 @@ private:
     QSharedDataPointer<VCubicBezierPathData> d;
 };
 
-Q_DECLARE_TYPEINFO(VCubicBezierPath, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VCubicBezierPath, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VCUBICBEZIERPATH_H

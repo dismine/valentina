@@ -40,7 +40,7 @@ namespace VPE
 
 class VPROPERTYEXPLORERSHARED_EXPORT VShortcutEditWidget : public QWidget
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit VShortcutEditWidget(QWidget* parent);
@@ -86,7 +86,7 @@ protected:
     QLineEdit* LineEdit;
 
 private:
-    Q_DISABLE_COPY(VShortcutEditWidget)
+    Q_DISABLE_COPY_MOVE(VShortcutEditWidget) // NOLINT
 };
 
 }

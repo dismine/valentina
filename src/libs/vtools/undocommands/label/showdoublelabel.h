@@ -37,7 +37,7 @@ enum class ShowDoublePoint: qint8 { FirstPoint, SecondPoint };
 
 class ShowDoubleLabel : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     ShowDoubleLabel(VAbstractPattern *doc, quint32 toolId, quint32 pointId, bool visible, ShowDoublePoint type,
                     QUndoCommand *parent = nullptr);
@@ -46,7 +46,8 @@ public:
     virtual void undo() override;
     virtual void redo() override;
 private:
-    Q_DISABLE_COPY(ShowDoubleLabel)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(ShowDoubleLabel) // NOLINT
     bool m_visible;
     bool m_oldVisible;
     //Need for resizing scene rect

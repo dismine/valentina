@@ -30,9 +30,11 @@
 
 #include <QFrame>
 
+#include "../vmisc/defglobal.h"
+
 class VElidedLabel : public QFrame
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
     Q_PROPERTY(QString text READ text WRITE setText)
     Q_PROPERTY(bool IsElided READ IsElided)
     Q_PROPERTY(bool showElided READ ShowElided WRITE SetShowElided)
@@ -55,7 +57,8 @@ signals:
    void ElisionChanged(bool m_elided);
 
 private:
-   Q_DISABLE_COPY(VElidedLabel)
+   // cppcheck-suppress unknownMacro
+   Q_DISABLE_COPY_MOVE(VElidedLabel) // NOLINT
    bool    m_elided{false};
    bool    m_showElided{true};
    QString m_content{};

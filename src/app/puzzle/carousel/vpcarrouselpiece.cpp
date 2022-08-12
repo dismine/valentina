@@ -32,15 +32,17 @@
 #include <QMenu>
 #include <QPainter>
 
-#include "vpmimedatapiece.h"
-#include "vpcarrouselpiecelist.h"
-#include "vpcarrousel.h"
-#include "../layout/vpsheet.h"
 #include "../layout/vppiece.h"
 
 #include <QLoggingCategory>
 
-Q_LOGGING_CATEGORY(pCarrouselPiece, "p.carrouselPiece")
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
+QT_WARNING_DISABLE_INTEL(1418)
+
+Q_LOGGING_CATEGORY(pCarrouselPiece, "p.carrouselPiece") // NOLINT
+
+QT_WARNING_POP
 
 
 //---------------------------------------------------------------------------------------------------------------------

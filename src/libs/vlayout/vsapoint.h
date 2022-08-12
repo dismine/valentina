@@ -83,7 +83,7 @@ private:
 };
 
 Q_DECLARE_METATYPE(VSAPoint)
-Q_DECLARE_TYPEINFO(VSAPoint, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VSAPoint, Q_MOVABLE_TYPE); // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint() V_NOEXCEPT_EXPR (true)

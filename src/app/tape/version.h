@@ -29,11 +29,9 @@
 #ifndef VERSION_H
 #define VERSION_H
 
-#include "../../libs/vmisc/projectversion.h"
-
-#define VER_INTERNALNAME_STR        "Tape"
-#define VER_ORIGINALFILENAME_STR    "tape.exe"
-#define VER_PRODUCTNAME_STR         "Tape"
-#define VER_FILEDESCRIPTION_STR     "Valentina's measurements editor."
+#define VER_INTERNALNAME_STR        "Tape" // NOLINT(cppcoreguidelines-macro-usage)
+#define VER_ORIGINALFILENAME_STR    "tape.exe" // NOLINT(cppcoreguidelines-macro-usage)
+#define VER_PRODUCTNAME_STR         "Tape" // NOLINT(cppcoreguidelines-macro-usage)
+#define VER_FILEDESCRIPTION_STR     "Valentina's measurements editor." // NOLINT(cppcoreguidelines-macro-usage)
 
 #endif // VERSION_H

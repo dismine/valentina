@@ -36,7 +36,7 @@
 
 class VPieceItem : public QGraphicsObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     enum MoveType
     {
@@ -87,7 +87,7 @@ protected:
     virtual double GetAngle(const QPointF &pt) const;
 
 private:
-    Q_DISABLE_COPY(VPieceItem)
+    Q_DISABLE_COPY_MOVE(VPieceItem) // NOLINT
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(VPieceItem::MoveTypes)

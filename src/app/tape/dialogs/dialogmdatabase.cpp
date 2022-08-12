@@ -41,25 +41,7 @@
 DialogMDataBase::DialogMDataBase(const QStringList &list, QWidget *parent)
     :QDialog(parent),
       ui(new Ui::DialogMDataBase),
-      selectMode(true),
-      list(list),
-      groupA(nullptr),
-      groupB(nullptr),
-      groupC(nullptr),
-      groupD(nullptr),
-      groupE(nullptr),
-      groupF(nullptr),
-      groupG(nullptr),
-      groupH(nullptr),
-      groupI(nullptr),
-      groupJ(nullptr),
-      groupK(nullptr),
-      groupL(nullptr),
-      groupM(nullptr),
-      groupN(nullptr),
-      groupO(nullptr),
-      groupP(nullptr),
-      groupQ(nullptr)
+      m_selectMode(true)
 {
     ui->setupUi(this);
 
@@ -83,26 +65,7 @@ DialogMDataBase::DialogMDataBase(const QStringList &list, QWidget *parent)
 DialogMDataBase::DialogMDataBase(QWidget *parent)
     :QDialog(parent),
       ui(new Ui::DialogMDataBase),
-      selectMode(false),
-      list(),
-      groupA(nullptr),
-      groupB(nullptr),
-      groupC(nullptr),
-      groupD(nullptr),
-      groupE(nullptr),
-      groupF(nullptr),
-      groupG(nullptr),
-      groupH(nullptr),
-      groupI(nullptr),
-      groupJ(nullptr),
-      groupK(nullptr),
-      groupL(nullptr),
-      groupM(nullptr),
-      groupN(nullptr),
-      groupO(nullptr),
-      groupP(nullptr),
-      groupQ(nullptr)
-
+      m_selectMode(false)
 {
     ui->setupUi(this);
 
@@ -130,9 +93,9 @@ DialogMDataBase::~DialogMDataBase()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList DialogMDataBase::GetNewNames() const
+auto DialogMDataBase::GetNewNames() const -> QStringList
 {
-    if (selectMode)
+    if (m_selectMode)
     {
         QStringList newNames;
         QTreeWidgetItemIterator it(ui->treeWidget,
@@ -140,7 +103,7 @@ QStringList DialogMDataBase::GetNewNames() const
         while (*it)
         {
             const QString name = (*it)->data(0, Qt::UserRole).toString();
-            if (not list.contains(name))
+            if (not m_list.contains(name))
             {
                 newNames.append(name);
             }
@@ -148,41 +111,39 @@ QStringList DialogMDataBase::GetNewNames() const
         }
         return newNames;
     }
-    else
-    {
-        return QStringList();
-    }
+
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::RetranslateGroups()
 {
-    RetranslateGroup(groupA, "A. " + tr("Direct Height", "Measurement section"),              ListGroupA());
-    RetranslateGroup(groupB, "B. " + tr("Direct Width", "Measurement section"),               ListGroupB());
-    RetranslateGroup(groupC, "C. " + tr("Indentation", "Measurement section"),                ListGroupC());
-    RetranslateGroup(groupD, "D. " + tr("Hand", "Measurement section"),                       ListGroupD());
-    RetranslateGroup(groupE, "E. " + tr("Foot", "Measurement section"),                       ListGroupE());
-    RetranslateGroup(groupF, "F. " + tr("Head", "Measurement section"),                       ListGroupF());
-    RetranslateGroup(groupG, "G. " + tr("Circumference and Arc", "Measurement section"),      ListGroupG());
-    RetranslateGroup(groupH, "H. " + tr("Vertical", "Measurement section"),                   ListGroupH());
-    RetranslateGroup(groupI, "I. " + tr("Horizontal", "Measurement section"),                 ListGroupI());
-    RetranslateGroup(groupJ, "J. " + tr("Bust", "Measurement section"),                       ListGroupJ());
-    RetranslateGroup(groupK, "K. " + tr("Balance", "Measurement section"),                    ListGroupK());
-    RetranslateGroup(groupL, "L. " + tr("Arm", "Measurement section"),                        ListGroupL());
-    RetranslateGroup(groupM, "M. " + tr("Leg", "Measurement section"),                        ListGroupM());
-    RetranslateGroup(groupN, "N. " + tr("Crotch and Rise", "Measurement section"),            ListGroupN());
-    RetranslateGroup(groupO, "O. " + tr("Men & Tailoring", "Measurement section"),            ListGroupO());
-    RetranslateGroup(groupP, "P. " + tr("Historical & Specialty", "Measurement section"),     ListGroupP());
-    RetranslateGroup(groupQ, "Q. " + tr("Patternmaking measurements", "Measurement section"), ListGroupQ());
+    RetranslateGroup(m_groupA, "A. " + tr("Direct Height", "Measurement section"),              ListGroupA());
+    RetranslateGroup(m_groupB, "B. " + tr("Direct Width", "Measurement section"),               ListGroupB());
+    RetranslateGroup(m_groupC, "C. " + tr("Indentation", "Measurement section"),                ListGroupC());
+    RetranslateGroup(m_groupD, "D. " + tr("Hand", "Measurement section"),                       ListGroupD());
+    RetranslateGroup(m_groupE, "E. " + tr("Foot", "Measurement section"),                       ListGroupE());
+    RetranslateGroup(m_groupF, "F. " + tr("Head", "Measurement section"),                       ListGroupF());
+    RetranslateGroup(m_groupG, "G. " + tr("Circumference and Arc", "Measurement section"),      ListGroupG());
+    RetranslateGroup(m_groupH, "H. " + tr("Vertical", "Measurement section"),                   ListGroupH());
+    RetranslateGroup(m_groupI, "I. " + tr("Horizontal", "Measurement section"),                 ListGroupI());
+    RetranslateGroup(m_groupJ, "J. " + tr("Bust", "Measurement section"),                       ListGroupJ());
+    RetranslateGroup(m_groupK, "K. " + tr("Balance", "Measurement section"),                    ListGroupK());
+    RetranslateGroup(m_groupL, "L. " + tr("Arm", "Measurement section"),                        ListGroupL());
+    RetranslateGroup(m_groupM, "M. " + tr("Leg", "Measurement section"),                        ListGroupM());
+    RetranslateGroup(m_groupN, "N. " + tr("Crotch and Rise", "Measurement section"),            ListGroupN());
+    RetranslateGroup(m_groupO, "O. " + tr("Men & Tailoring", "Measurement section"),            ListGroupO());
+    RetranslateGroup(m_groupP, "P. " + tr("Historical & Specialty", "Measurement section"),     ListGroupP());
+    RetranslateGroup(m_groupQ, "Q. " + tr("Patternmaking measurements", "Measurement section"), ListGroupQ());
 
     ShowDescription(ui->treeWidget->currentItem(), 0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogMDataBase::ImgTag(const QString &number)
+auto DialogMDataBase::ImgTag(const QString &number) -> QString
 {
-    QString imgUrl("<img src=\"wrong.png\" align=\"center\"/>"); // In case of error
-    const QString filePath = QString("://diagrams/%1.svg")
+    QString imgUrl(QStringLiteral("<img src=\"wrong.png\" align=\"center\"/>")); // In case of error
+    const QString filePath = QStringLiteral("://diagrams/%1.svg")
             .arg(MapDiagrams(VAbstractApplication::VApp()->TrVars(), number));
     if (QFileInfo::exists(filePath))
     {
@@ -213,7 +174,8 @@ QString DialogMDataBase::ImgTag(const QString &number)
                 QByteArray byteArray;
                 QBuffer buffer(&byteArray);
                 scaledImg.save(&buffer, "PNG");
-                imgUrl = QString("<img src=\"data:image/png;base64,") + byteArray.toBase64() + "\" align=\"center\"/>";
+                imgUrl = QStringLiteral("<img src=\"data:image/png;base64,") + byteArray.toBase64() +
+                         QStringLiteral("\" align=\"center\"/>");
             }
         }
     }
@@ -235,11 +197,11 @@ void DialogMDataBase::changeEvent(QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogMDataBase::eventFilter(QObject *target, QEvent *event)
+auto DialogMDataBase::eventFilter(QObject *target, QEvent *event) -> bool
 {
     if (target == ui->treeWidget && event->type() == QEvent::KeyPress)
     {
-        QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+        auto *keyEvent = static_cast<QKeyEvent *>(event); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
         switch(keyEvent->key())
         {
             case Qt::Key_Up:
@@ -278,13 +240,13 @@ void DialogMDataBase::UpdateChecks(QTreeWidgetItem *item, int column)
         Qt::CheckState checkState = item->checkState(0);
         for (int i = 0; i < item->childCount(); ++i)
         {
-            if (not list.contains(item->child(i)->data(0, Qt::UserRole).toString()))
+            if (not m_list.contains(item->child(i)->data(0, Qt::UserRole).toString()))
             {
                 item->child(i)->setCheckState(0, checkState);
                 flag = true;
             }
 
-            if (flag == false) // All child in the list
+            if (not flag) // All child in the list
             {
                 item->setCheckState(0, Qt::Checked);
             }
@@ -338,22 +300,22 @@ void DialogMDataBase::TreeMenu(const QPoint &pos)
     QTreeWidgetItem *item = ui->treeWidget->currentItem();
     ShowDescription(item, model.column());
 
-    QAction *actionCollapseAll = new QAction(tr("Collapse All"), this);
+    auto *actionCollapseAll = new QAction(tr("Collapse All"), this);
     connect(actionCollapseAll, &QAction::triggered, ui->treeWidget, &QTreeWidget::collapseAll);
 
-    QAction *actionExpandeAll = new QAction(tr("Expand All"), this);
+    auto *actionExpandeAll = new QAction(tr("Expand All"), this);
     connect(actionExpandeAll, &QAction::triggered, ui->treeWidget, &QTreeWidget::expandAll);
 
     QMenu menu(this);
     menu.addAction(actionCollapseAll);
     menu.addAction(actionExpandeAll);
 
-    if (selectMode)
+    if (m_selectMode)
     {
         QString actionName;
         GlobalCheckState() == Qt::Checked ? actionName = tr("Check all") : actionName = tr("Uncheck all");
 
-        QAction *actionRecheck = new QAction(actionName, this);
+        auto *actionRecheck = new QAction(actionName, this);
         connect(actionRecheck, &QAction::triggered, this, &DialogMDataBase::Recheck);
 
         menu.addAction(actionRecheck);
@@ -364,50 +326,50 @@ void DialogMDataBase::TreeMenu(const QPoint &pos)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::Recheck()
 {
-    if (selectMode)
+    if (m_selectMode)
     {
         const Qt::CheckState check = GlobalCheckState();
 
-        ChangeCheckState(groupA, check);
-        ChangeCheckState(groupB, check);
-        ChangeCheckState(groupC, check);
-        ChangeCheckState(groupD, check);
-        ChangeCheckState(groupE, check);
-        ChangeCheckState(groupF, check);
-        ChangeCheckState(groupG, check);
-        ChangeCheckState(groupH, check);
-        ChangeCheckState(groupI, check);
-        ChangeCheckState(groupJ, check);
-        ChangeCheckState(groupK, check);
-        ChangeCheckState(groupL, check);
-        ChangeCheckState(groupM, check);
-        ChangeCheckState(groupN, check);
-        ChangeCheckState(groupO, check);
-        ChangeCheckState(groupP, check);
-        ChangeCheckState(groupQ, check);
+        ChangeCheckState(m_groupA, check);
+        ChangeCheckState(m_groupB, check);
+        ChangeCheckState(m_groupC, check);
+        ChangeCheckState(m_groupD, check);
+        ChangeCheckState(m_groupE, check);
+        ChangeCheckState(m_groupF, check);
+        ChangeCheckState(m_groupG, check);
+        ChangeCheckState(m_groupH, check);
+        ChangeCheckState(m_groupI, check);
+        ChangeCheckState(m_groupJ, check);
+        ChangeCheckState(m_groupK, check);
+        ChangeCheckState(m_groupL, check);
+        ChangeCheckState(m_groupM, check);
+        ChangeCheckState(m_groupN, check);
+        ChangeCheckState(m_groupO, check);
+        ChangeCheckState(m_groupP, check);
+        ChangeCheckState(m_groupQ, check);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::FilterMeasurements(const QString &search)
 {
-    FilterGroup(groupA, search);
-    FilterGroup(groupB, search);
-    FilterGroup(groupC, search);
-    FilterGroup(groupD, search);
-    FilterGroup(groupE, search);
-    FilterGroup(groupF, search);
-    FilterGroup(groupG, search);
-    FilterGroup(groupH, search);
-    FilterGroup(groupI, search);
-    FilterGroup(groupJ, search);
-    FilterGroup(groupK, search);
-    FilterGroup(groupL, search);
-    FilterGroup(groupM, search);
-    FilterGroup(groupN, search);
-    FilterGroup(groupO, search);
-    FilterGroup(groupP, search);
-    FilterGroup(groupQ, search);
+    FilterGroup(m_groupA, search);
+    FilterGroup(m_groupB, search);
+    FilterGroup(m_groupC, search);
+    FilterGroup(m_groupD, search);
+    FilterGroup(m_groupE, search);
+    FilterGroup(m_groupF, search);
+    FilterGroup(m_groupG, search);
+    FilterGroup(m_groupH, search);
+    FilterGroup(m_groupI, search);
+    FilterGroup(m_groupJ, search);
+    FilterGroup(m_groupK, search);
+    FilterGroup(m_groupL, search);
+    FilterGroup(m_groupM, search);
+    FilterGroup(m_groupN, search);
+    FilterGroup(m_groupO, search);
+    FilterGroup(m_groupP, search);
+    FilterGroup(m_groupQ, search);
 
     const QList<QTreeWidgetItem *> list = ui->treeWidget->selectedItems();
     list.isEmpty() ? ShowDescription(nullptr, -1) : ShowDescription(ConstFirst(list), 0);
@@ -416,23 +378,23 @@ void DialogMDataBase::FilterMeasurements(const QString &search)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::InitDataBase(const QStringList &list)
 {
-    InitGroup(&groupA, "A. " + tr("Direct Height", "Measurement section"),              ListGroupA(), list);
-    InitGroup(&groupB, "B. " + tr("Direct Width", "Measurement section"),               ListGroupB(), list);
-    InitGroup(&groupC, "C. " + tr("Indentation", "Measurement section"),                ListGroupC(), list);
-    InitGroup(&groupD, "D. " + tr("Hand", "Measurement section"),                       ListGroupD(), list);
-    InitGroup(&groupE, "E. " + tr("Foot", "Measurement section"),                       ListGroupE(), list);
-    InitGroup(&groupF, "F. " + tr("Head", "Measurement section"),                       ListGroupF(), list);
-    InitGroup(&groupG, "G. " + tr("Circumference and Arc", "Measurement section"),      ListGroupG(), list);
-    InitGroup(&groupH, "H. " + tr("Vertical", "Measurement section"),                   ListGroupH(), list);
-    InitGroup(&groupI, "I. " + tr("Horizontal", "Measurement section"),                 ListGroupI(), list);
-    InitGroup(&groupJ, "J. " + tr("Bust", "Measurement section"),                       ListGroupJ(), list);
-    InitGroup(&groupK, "K. " + tr("Balance", "Measurement section"),                    ListGroupK(), list);
-    InitGroup(&groupL, "L. " + tr("Arm", "Measurement section"),                        ListGroupL(), list);
-    InitGroup(&groupM, "M. " + tr("Leg", "Measurement section"),                        ListGroupM(), list);
-    InitGroup(&groupN, "N. " + tr("Crotch and Rise", "Measurement section"),            ListGroupN(), list);
-    InitGroup(&groupO, "O. " + tr("Men & Tailoring", "Measurement section"),            ListGroupO(), list);
-    InitGroup(&groupP, "P. " + tr("Historical & Specialty", "Measurement section"),     ListGroupP(), list);
-    InitGroup(&groupQ, "Q. " + tr("Patternmaking measurements", "Measurement section"), ListGroupQ(), list);
+    InitGroup(&m_groupA, "A. " + tr("Direct Height", "Measurement section"),              ListGroupA(), list);
+    InitGroup(&m_groupB, "B. " + tr("Direct Width", "Measurement section"),               ListGroupB(), list);
+    InitGroup(&m_groupC, "C. " + tr("Indentation", "Measurement section"),                ListGroupC(), list);
+    InitGroup(&m_groupD, "D. " + tr("Hand", "Measurement section"),                       ListGroupD(), list);
+    InitGroup(&m_groupE, "E. " + tr("Foot", "Measurement section"),                       ListGroupE(), list);
+    InitGroup(&m_groupF, "F. " + tr("Head", "Measurement section"),                       ListGroupF(), list);
+    InitGroup(&m_groupG, "G. " + tr("Circumference and Arc", "Measurement section"),      ListGroupG(), list);
+    InitGroup(&m_groupH, "H. " + tr("Vertical", "Measurement section"),                   ListGroupH(), list);
+    InitGroup(&m_groupI, "I. " + tr("Horizontal", "Measurement section"),                 ListGroupI(), list);
+    InitGroup(&m_groupJ, "J. " + tr("Bust", "Measurement section"),                       ListGroupJ(), list);
+    InitGroup(&m_groupK, "K. " + tr("Balance", "Measurement section"),                    ListGroupK(), list);
+    InitGroup(&m_groupL, "L. " + tr("Arm", "Measurement section"),                        ListGroupL(), list);
+    InitGroup(&m_groupM, "M. " + tr("Leg", "Measurement section"),                        ListGroupM(), list);
+    InitGroup(&m_groupN, "N. " + tr("Crotch and Rise", "Measurement section"),            ListGroupN(), list);
+    InitGroup(&m_groupO, "O. " + tr("Men & Tailoring", "Measurement section"),            ListGroupO(), list);
+    InitGroup(&m_groupP, "P. " + tr("Historical & Specialty", "Measurement section"),     ListGroupP(), list);
+    InitGroup(&m_groupQ, "Q. " + tr("Patternmaking measurements", "Measurement section"), ListGroupQ(), list);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -440,7 +402,7 @@ void DialogMDataBase::InitGroup(QTreeWidgetItem **group, const QString &groupNam
                                 const QStringList &list)
 {
     *group = AddGroup(groupName);
-    for (auto &m : mList)
+    for (const auto &m : mList)
     {
         AddMeasurement(*group, m, list);
     }
@@ -472,13 +434,13 @@ void DialogMDataBase::FilterGroup(QTreeWidgetItem *group, const QString &search)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QTreeWidgetItem *DialogMDataBase::AddGroup(const QString &text)
+auto DialogMDataBase::AddGroup(const QString &text) -> QTreeWidgetItem *
 {
-    QTreeWidgetItem *group = new QTreeWidgetItem(ui->treeWidget);
+    auto *group = new QTreeWidgetItem(ui->treeWidget);
     group->setText(0, text);
     group->setToolTip(0, text);
     group->setExpanded(true);
-    if (selectMode)
+    if (m_selectMode)
     {
         group->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
         group->setCheckState(0, Qt::Unchecked);
@@ -492,9 +454,9 @@ void DialogMDataBase::AddMeasurement(QTreeWidgetItem *group, const QString &name
 {
     SCASSERT(group != nullptr)
 
-    QTreeWidgetItem *m = new QTreeWidgetItem(group);
+    auto *m = new QTreeWidgetItem(group);
 
-    if (selectMode)
+    if (m_selectMode)
     {
         if (list.contains(name))
         {
@@ -530,17 +492,17 @@ void DialogMDataBase::WriteSettings()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogMDataBase::ItemFullDescription(QTreeWidgetItem *item, bool showImage) const
+auto DialogMDataBase::ItemFullDescription(QTreeWidgetItem *item, bool showImage) -> QString
 {
     if (item == nullptr || item->childCount() != 0)
     {
-        return QString();
+        return {};
     }
 
     const QString name = item->data(0, Qt::UserRole).toString();
     if (name.isEmpty())
     {
-        return QString();
+        return {};
     }
 
     const QString number = VAbstractApplication::VApp()->TrVars()->MNumber(name);
@@ -592,65 +554,66 @@ void DialogMDataBase::ChangeCheckState(QTreeWidgetItem *group, Qt::CheckState ch
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Qt::CheckState DialogMDataBase::GlobalCheckState() const
+auto DialogMDataBase::GlobalCheckState() const -> Qt::CheckState
 {
-    SCASSERT(groupA != nullptr)
-    SCASSERT(groupB != nullptr)
-    SCASSERT(groupC != nullptr)
-    SCASSERT(groupD != nullptr)
-    SCASSERT(groupE != nullptr)
-    SCASSERT(groupF != nullptr)
-    SCASSERT(groupG != nullptr)
-    SCASSERT(groupH != nullptr)
-    SCASSERT(groupI != nullptr)
-    SCASSERT(groupJ != nullptr)
-    SCASSERT(groupK != nullptr)
-    SCASSERT(groupL != nullptr)
-    SCASSERT(groupM != nullptr)
-    SCASSERT(groupN != nullptr)
-    SCASSERT(groupO != nullptr)
-    SCASSERT(groupP != nullptr)
-    SCASSERT(groupQ != nullptr)
+    SCASSERT(m_groupA != nullptr)
+    SCASSERT(m_groupB != nullptr)
+    SCASSERT(m_groupC != nullptr)
+    SCASSERT(m_groupD != nullptr)
+    SCASSERT(m_groupE != nullptr)
+    SCASSERT(m_groupF != nullptr)
+    SCASSERT(m_groupG != nullptr)
+    SCASSERT(m_groupH != nullptr)
+    SCASSERT(m_groupI != nullptr)
+    SCASSERT(m_groupJ != nullptr)
+    SCASSERT(m_groupK != nullptr)
+    SCASSERT(m_groupL != nullptr)
+    SCASSERT(m_groupM != nullptr)
+    SCASSERT(m_groupN != nullptr)
+    SCASSERT(m_groupO != nullptr)
+    SCASSERT(m_groupP != nullptr)
+    SCASSERT(m_groupQ != nullptr)
 
-    if (selectMode)
+    if (m_selectMode)
     {
-        if (groupA->checkState(0) == Qt::Unchecked &&
-            groupB->checkState(0) == Qt::Unchecked &&
-            groupC->checkState(0) == Qt::Unchecked &&
-            groupD->checkState(0) == Qt::Unchecked &&
-            groupE->checkState(0) == Qt::Unchecked &&
-            groupF->checkState(0) == Qt::Unchecked &&
-            groupG->checkState(0) == Qt::Unchecked &&
-            groupH->checkState(0) == Qt::Unchecked &&
-            groupI->checkState(0) == Qt::Unchecked &&
-            groupJ->checkState(0) == Qt::Unchecked &&
-            groupK->checkState(0) == Qt::Unchecked &&
-            groupL->checkState(0) == Qt::Unchecked &&
-            groupM->checkState(0) == Qt::Unchecked &&
-            groupN->checkState(0) == Qt::Unchecked &&
-            groupO->checkState(0) == Qt::Unchecked &&
-            groupP->checkState(0) == Qt::Unchecked &&
-            groupQ->checkState(0) == Qt::Unchecked)
+        if (m_groupA->checkState(0) == Qt::Unchecked &&
+            m_groupB->checkState(0) == Qt::Unchecked &&
+            m_groupC->checkState(0) == Qt::Unchecked &&
+            m_groupD->checkState(0) == Qt::Unchecked &&
+            m_groupE->checkState(0) == Qt::Unchecked &&
+            m_groupF->checkState(0) == Qt::Unchecked &&
+            m_groupG->checkState(0) == Qt::Unchecked &&
+            m_groupH->checkState(0) == Qt::Unchecked &&
+            m_groupI->checkState(0) == Qt::Unchecked &&
+            m_groupJ->checkState(0) == Qt::Unchecked &&
+            m_groupK->checkState(0) == Qt::Unchecked &&
+            m_groupL->checkState(0) == Qt::Unchecked &&
+            m_groupM->checkState(0) == Qt::Unchecked &&
+            m_groupN->checkState(0) == Qt::Unchecked &&
+            m_groupO->checkState(0) == Qt::Unchecked &&
+            m_groupP->checkState(0) == Qt::Unchecked &&
+            m_groupQ->checkState(0) == Qt::Unchecked)
         {
             return Qt::Checked;
         }
-        else if (groupA->checkState(0) == Qt::Checked &&
-                 groupB->checkState(0) == Qt::Checked &&
-                 groupC->checkState(0) == Qt::Checked &&
-                 groupD->checkState(0) == Qt::Checked &&
-                 groupE->checkState(0) == Qt::Checked &&
-                 groupF->checkState(0) == Qt::Checked &&
-                 groupG->checkState(0) == Qt::Checked &&
-                 groupH->checkState(0) == Qt::Checked &&
-                 groupI->checkState(0) == Qt::Checked &&
-                 groupJ->checkState(0) == Qt::Checked &&
-                 groupK->checkState(0) == Qt::Checked &&
-                 groupL->checkState(0) == Qt::Checked &&
-                 groupM->checkState(0) == Qt::Checked &&
-                 groupN->checkState(0) == Qt::Checked &&
-                 groupO->checkState(0) == Qt::Checked &&
-                 groupP->checkState(0) == Qt::Checked &&
-                 groupQ->checkState(0) == Qt::Checked)
+
+        if (m_groupA->checkState(0) == Qt::Checked &&
+            m_groupB->checkState(0) == Qt::Checked &&
+            m_groupC->checkState(0) == Qt::Checked &&
+            m_groupD->checkState(0) == Qt::Checked &&
+            m_groupE->checkState(0) == Qt::Checked &&
+            m_groupF->checkState(0) == Qt::Checked &&
+            m_groupG->checkState(0) == Qt::Checked &&
+            m_groupH->checkState(0) == Qt::Checked &&
+            m_groupI->checkState(0) == Qt::Checked &&
+            m_groupJ->checkState(0) == Qt::Checked &&
+            m_groupK->checkState(0) == Qt::Checked &&
+            m_groupL->checkState(0) == Qt::Checked &&
+            m_groupM->checkState(0) == Qt::Checked &&
+            m_groupN->checkState(0) == Qt::Checked &&
+            m_groupO->checkState(0) == Qt::Checked &&
+            m_groupP->checkState(0) == Qt::Checked &&
+            m_groupQ->checkState(0) == Qt::Checked)
         {
             return Qt::Unchecked;
         }

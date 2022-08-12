@@ -39,6 +39,7 @@
 #include <QtGlobal>
 
 #include "delaunay.h"
+#include "../vmisc/defglobal.h"
 
 class QTextStream;
 
@@ -71,7 +72,8 @@ public:
     void setResolution(int value);
 
 private:
-    Q_DISABLE_COPY(VObjEngine)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VObjEngine) // NOLINT
     QSharedPointer<QTextStream> stream;
     quint32     globalPointsCount;
     QSharedPointer<QIODevice> outputDevice;

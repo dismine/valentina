@@ -41,7 +41,7 @@ class QGraphicsScene;
 
 class MoveAbstractLabel : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     MoveAbstractLabel(VAbstractPattern *doc, quint32 pointId, const QPointF &pos, QUndoCommand *parent = nullptr);
     virtual ~MoveAbstractLabel()=default;
@@ -57,7 +57,7 @@ protected:
 
     virtual void Do(const QPointF &pos)=0;
 private:
-    Q_DISABLE_COPY(MoveAbstractLabel)
+    Q_DISABLE_COPY_MOVE(MoveAbstractLabel) // NOLINT
 };
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -48,7 +48,7 @@ public:
 
     VPatternLabelData &operator=(const VPatternLabelData &data);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VPatternLabelData(const VPatternLabelData &&data) Q_DECL_NOTHROW;
+    VPatternLabelData(VPatternLabelData &&data) Q_DECL_NOTHROW;
     VPatternLabelData &operator=(VPatternLabelData &&data) Q_DECL_NOTHROW;
 #endif
 

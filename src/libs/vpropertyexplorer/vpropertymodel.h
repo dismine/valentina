@@ -66,7 +66,7 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 //! This might be more convenient in some cases.
 class VPROPERTYEXPLORERSHARED_EXPORT VPropertyModel : public QAbstractItemModel
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VPropertyModel(QObject * parent = nullptr);
     virtual ~VPropertyModel() override;
@@ -170,7 +170,7 @@ protected:
     VPropertyModelPrivate* d_ptr;
 
 private:
-    Q_DISABLE_COPY(VPropertyModel)
+    Q_DISABLE_COPY_MOVE(VPropertyModel) // NOLINT
 };
 
 QT_WARNING_POP

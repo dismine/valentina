@@ -43,7 +43,7 @@ public:
     void redo() override;
 private:
     // cppcheck-suppress unknownMacro
-    Q_DISABLE_COPY_MOVE(OpaqueBackgroundImage)
+    Q_DISABLE_COPY_MOVE(OpaqueBackgroundImage) // NOLINT
     QUuid m_id;
     qreal m_opacity;
     qreal m_oldOpacity{1.0};

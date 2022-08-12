@@ -32,7 +32,7 @@
 
 class TST_TSLocaleTranslation : public TST_AbstractTranslation
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_TSLocaleTranslation(const QString &locale, QObject *parent = nullptr);
 
@@ -45,7 +45,7 @@ private slots:
     void TestHTMLTags();
 
 private:
-    Q_DISABLE_COPY(TST_TSLocaleTranslation)
+    Q_DISABLE_COPY_MOVE(TST_TSLocaleTranslation) // NOLINT
 
     QString m_locale;
 };

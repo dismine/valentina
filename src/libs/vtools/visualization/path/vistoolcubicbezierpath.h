@@ -43,7 +43,7 @@
 
 class VisToolCubicBezierPath : public VisPath
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolCubicBezierPath(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolCubicBezierPath();
@@ -56,7 +56,7 @@ public:
     virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolCubicBezierPath)};
 protected:
-    Q_DISABLE_COPY(VisToolCubicBezierPath)
+    Q_DISABLE_COPY_MOVE(VisToolCubicBezierPath) // NOLINT
     QVector<VScaledEllipse *> mainPoints;
     QVector<VScaledEllipse *> ctrlPoints;
     QVector<VScaledLine *>    lines;

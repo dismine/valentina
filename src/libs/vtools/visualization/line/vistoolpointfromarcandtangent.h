@@ -45,7 +45,7 @@ class VArc;
 
 class VisToolPointFromArcAndTangent : public VisLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolPointFromArcAndTangent(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolPointFromArcAndTangent() = default;
@@ -58,7 +58,8 @@ public:
     virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPointFromArcAndTangent)};
 private:
-    Q_DISABLE_COPY(VisToolPointFromArcAndTangent)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolPointFromArcAndTangent) // NOLINT
     quint32           arcId;
     CrossCirclesPoint crossPoint;
     VScaledEllipse   *point;

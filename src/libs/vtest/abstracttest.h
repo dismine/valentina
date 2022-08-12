@@ -65,7 +65,7 @@ class VRawSAPoint;
 
 class AbstractTest : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit AbstractTest(QObject *parent = nullptr);
 

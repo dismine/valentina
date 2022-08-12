@@ -42,7 +42,7 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 //! This property can be used to handle key shortcuts
 class VPROPERTYEXPLORERSHARED_EXPORT VShortcutProperty : public VProperty
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VShortcutProperty(const QString &name);
 
@@ -81,7 +81,7 @@ public:
     virtual void setValue(const QVariant& value) override;
 
 private:
-    Q_DISABLE_COPY(VShortcutProperty)
+    Q_DISABLE_COPY_MOVE(VShortcutProperty) // NOLINT
 };
 
 QT_WARNING_POP

@@ -57,7 +57,7 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 
 class Visualization : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit Visualization(const VContainer *data);
     virtual ~Visualization() Q_DECL_EQ_DEFAULT;
@@ -123,7 +123,7 @@ protected:
     static VCurvePathItem *GetCurveItem(QVector<VCurvePathItem *> &curves, quint32 i, const QColor &color,
                                         QGraphicsItem *parent);
 private:
-    Q_DISABLE_COPY(Visualization)
+    Q_DISABLE_COPY_MOVE(Visualization) // NOLINT
 };
 
 // cppcheck-suppress unknownMacro

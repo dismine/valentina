@@ -28,7 +28,7 @@
 
 #include "dialoglayoutprogress.h"
 #include "ui_dialoglayoutprogress.h"
-#include "../core/vapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vvalentinasettings.h"
 
 #include <QMessageBox>
@@ -36,6 +36,10 @@
 #include <QMovie>
 #include <QtDebug>
 #include <QTime>
+#include <QShowEvent>
+#include <chrono>
+
+using namespace std::chrono_literals;
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogLayoutProgress::DialogLayoutProgress(QElapsedTimer timer, qint64 timeout, QWidget *parent)
@@ -44,7 +48,7 @@ DialogLayoutProgress::DialogLayoutProgress(QElapsedTimer timer, qint64 timeout, 
       m_movie(new QMovie(QStringLiteral("://icon/16x16/progress.gif"))),
       m_timer(timer),
       m_timeout(timeout),
-      progressTimer(new QTimer(this))
+      m_progressTimer(new QTimer(this))
 {
     ui->setupUi(this);
 
@@ -64,7 +68,7 @@ DialogLayoutProgress::DialogLayoutProgress(QElapsedTimer timer, qint64 timeout, 
 
     this->setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
 
-    connect(progressTimer, &QTimer::timeout, this, [this]()
+    connect(m_progressTimer, &QTimer::timeout, this, [this]()
     {
         const qint64 elapsed = m_timer.elapsed();
         const int timeout = static_cast<int>(m_timeout - elapsed);
@@ -76,10 +80,10 @@ DialogLayoutProgress::DialogLayoutProgress(QElapsedTimer timer, qint64 timeout, 
         if (timeout <= 1000)
         {
             emit Timeout();
-            progressTimer->stop();
+            m_progressTimer->stop();
         }
     });
-    progressTimer->start(1000);
+    m_progressTimer->start(1s);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -98,7 +102,7 @@ void DialogLayoutProgress::Start()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutProgress::Finished()
 {
-    progressTimer->stop();
+    m_progressTimer->stop();
     done(QDialog::Accepted);
 }
 
@@ -117,7 +121,7 @@ void DialogLayoutProgress::showEvent(QShowEvent *event)
         return;
     }
 
-    if (isInitialized)
+    if (m_isInitialized)
     {
         return;
     }
@@ -126,5 +130,5 @@ void DialogLayoutProgress::showEvent(QShowEvent *event)
     setMaximumSize(size());
     setMinimumSize(size());
 
-    isInitialized = true;//first show windows are held
+    m_isInitialized = true;//first show windows are held
 }

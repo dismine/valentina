@@ -40,6 +40,8 @@
 #include <QtGlobal>
 #include <QPointer>
 
+#include "../vmisc/defglobal.h"
+
 /*!
  * This class adds ability to zoom QGraphicsView using mouse wheel. The point under cursor
  * remains motionless while it's possible.
@@ -72,7 +74,7 @@ class QPinchGesture;
 
 class GraphicsViewZoom : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit GraphicsViewZoom(QGraphicsView* view);
     void gentle_zoom(double factor);
@@ -88,7 +90,8 @@ public slots:
 protected:
     virtual bool eventFilter(QObject* object, QEvent* event) override;
 private:
-    Q_DISABLE_COPY(GraphicsViewZoom)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(GraphicsViewZoom) // NOLINT
     QGraphicsView        *_view;
     Qt::KeyboardModifiers _modifiers;
     double                _zoom_factor_base;
@@ -115,7 +118,7 @@ private:
  */
 class VMainGraphicsView : public QGraphicsView
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VMainGraphicsView(QWidget *parent = nullptr);
     void setShowToolOptions(bool value);
@@ -166,7 +169,7 @@ protected:
     void dragMoveEvent(QDragMoveEvent *event) override;
     void dropEvent(QDropEvent *event) override;
 private:
-    Q_DISABLE_COPY(VMainGraphicsView)
+    Q_DISABLE_COPY_MOVE(VMainGraphicsView) // NOLINT
     GraphicsViewZoom* zoom;
     bool              showToolOptions;
     bool              isAllowRubberBand;

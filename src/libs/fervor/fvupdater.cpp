@@ -55,9 +55,9 @@
 
 namespace
 {
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, defaultFeedURL,
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, defaultFeedURL, // NOLINT
                           (QLatin1String("https://valentinaproject.bitbucket.io/Appcast.xml")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, testFeedURL,
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, testFeedURL, // NOLINT
                           (QLatin1String("https://valentinaproject.bitbucket.io/Appcast_testing.xml")))
 }
 

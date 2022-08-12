@@ -57,9 +57,9 @@ VGrainlineData &VGrainlineData::operator=(const VGrainlineData &data)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VGrainlineData::VGrainlineData(const VGrainlineData &&data) Q_DECL_NOTHROW
-    : VAbstractFloatItemData(data),
-      d (data.d)
+VGrainlineData::VGrainlineData(VGrainlineData &&data) Q_DECL_NOTHROW
+    : VAbstractFloatItemData(std::move(data)),
+      d (std::move(data.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

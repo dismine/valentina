@@ -63,7 +63,7 @@ public:
 
     VPointF &operator=(const VPointF &point);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VPointF(const VPointF &&point) Q_DECL_NOTHROW;
+    VPointF(VPointF &&point) Q_DECL_NOTHROW;
     VPointF &operator=(VPointF &&point) Q_DECL_NOTHROW;
 #endif
 
@@ -97,7 +97,7 @@ private:
 };
 
 Q_DECLARE_METATYPE(VPointF)
-Q_DECLARE_TYPEINFO(VPointF, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VPointF, Q_MOVABLE_TYPE); // NOLINT
 
 QT_WARNING_POP
 

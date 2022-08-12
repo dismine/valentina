@@ -41,7 +41,7 @@
 VWidgetGroups::VWidgetGroups(VAbstractPattern *doc, QWidget *parent)
     : QWidget(parent),
       ui(new Ui::VWidgetGroups),
-      doc(doc)
+      m_doc(doc)
 {
     ui->setupUi(this);
 
@@ -65,7 +65,7 @@ VWidgetGroups::~VWidgetGroups()
 //----------------------------------------------------------------------------------------------------------------------
 void VWidgetGroups::SetGroupVisibility(vidtype id, bool visible) const
 {
-    ChangeGroupVisibility *changeGroup = new ChangeGroupVisibility(doc, id, visible);
+    auto *changeGroup = new ChangeGroupVisibility(m_doc, id, visible);
     connect(changeGroup, &ChangeGroupVisibility::UpdateGroup, this, [this](vidtype id, bool visible)
     {
         int row = GroupRow(id);
@@ -87,7 +87,7 @@ void VWidgetGroups::SetGroupVisibility(vidtype id, bool visible) const
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetGroups::SetMultipleGroupsVisibility(const QVector<vidtype> &groups, bool visible) const
 {
-    auto *changeGroups = new ChangeMultipleGroupsVisibility(doc, groups, visible);
+    auto *changeGroups = new ChangeMultipleGroupsVisibility(m_doc, groups, visible);
     connect(changeGroups, &ChangeMultipleGroupsVisibility::UpdateMultipleGroups, this,
             [this](const QMap<vidtype, bool> &groups)
     {
@@ -115,7 +115,7 @@ void VWidgetGroups::SetMultipleGroupsVisibility(const QVector<vidtype> &groups, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMap<quint32, VGroupData> VWidgetGroups::FilterGroups(const QMap<quint32, VGroupData> &groups)
+auto VWidgetGroups::FilterGroups(const QMap<quint32, VGroupData> &groups) -> QMap<quint32, VGroupData>
 {
     QMap<quint32, VGroupData> filtered;
     QSet<QString> filterCategories = ConvertToSet<QString>(VAbstractPattern::FilterGroupTags(ui->lineEditTags->text()));
@@ -141,7 +141,7 @@ QMap<quint32, VGroupData> VWidgetGroups::FilterGroups(const QMap<quint32, VGroup
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VWidgetGroups::GroupRow(vidtype id) const
+auto VWidgetGroups::GroupRow(vidtype id) const -> int
 {
     for (int r = 0; r < ui->tableWidget->rowCount(); ++r)
     {
@@ -158,6 +158,78 @@ int VWidgetGroups::GroupRow(vidtype id) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VWidgetGroups::ActionPreferences(quint32 id)
+{
+    QScopedPointer<VContainer> fackeContainer(new VContainer(VAbstractApplication::VApp()->TrVars(),
+                                                             VAbstractValApplication::VApp()->patternUnitsP(),
+                                                             VContainer::UniqueNamespace()));
+    QScopedPointer<DialogGroup> dialog(new DialogGroup(fackeContainer.data(), NULL_ID, this));
+    dialog->SetName(m_doc->GetGroupName(id));
+    dialog->SetTags(m_doc->GetGroupTags(id));
+    dialog->SetGroupCategories(m_doc->GetGroupCategories());
+    const int result = dialog->exec();
+
+    if (result == QDialog::Accepted)
+    {
+        auto *changeGroupOptions = new ChangeGroupOptions(m_doc, id, dialog->GetName(), dialog->GetTags());
+        connect(changeGroupOptions, &ChangeGroupOptions::UpdateGroups, this, &VWidgetGroups::UpdateGroups);
+        VAbstractApplication::VApp()->getUndoStack()->push(changeGroupOptions);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VWidgetGroups::ActionHideAll()
+{
+    if (ui->tableWidget->rowCount() < 1)
+    {
+        return;
+    }
+
+    QVector<vidtype> groups;
+    groups.reserve(ui->tableWidget->rowCount());
+    for (int r = 0; r < ui->tableWidget->rowCount(); ++r)
+    {
+        QTableWidgetItem *rowItem = ui->tableWidget->item(r, 0);
+        quint32 i = rowItem->data(Qt::UserRole).toUInt();
+        if (m_doc->GetGroupVisibility(i))
+        {
+            groups.append(i);
+        }
+    }
+
+    if (not groups.isEmpty())
+    {
+        SetMultipleGroupsVisibility(groups, false);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VWidgetGroups::ActionShowAll()
+{
+    if (ui->tableWidget->rowCount() < 1)
+    {
+        return;
+    }
+
+    QVector<vidtype> groups;
+    groups.reserve(ui->tableWidget->rowCount());
+    for (int r = 0; r < ui->tableWidget->rowCount(); ++r)
+    {
+        QTableWidgetItem *rowItem = ui->tableWidget->item(r, 0);
+        quint32 i = rowItem->data(Qt::UserRole).toUInt();
+        if (not m_doc->GetGroupVisibility(i))
+        {
+            groups.append(i);
+        }
+    }
+
+    if (not groups.isEmpty())
+    {
+        SetMultipleGroupsVisibility(groups, true);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VWidgetGroups::GroupVisibilityChanged(int row, int column)
 {
     if (column != 0)
@@ -166,7 +238,7 @@ void VWidgetGroups::GroupVisibilityChanged(int row, int column)
     }
     QTableWidgetItem *item = ui->tableWidget->item(row, column);
     const quint32 id = item->data(Qt::UserRole).toUInt();
-    SetGroupVisibility(id, not doc->GetGroupVisibility(id));
+    SetGroupVisibility(id, not m_doc->GetGroupVisibility(id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -178,7 +250,7 @@ void VWidgetGroups::RenameGroup(int row, int column)
     }
 
     const quint32 id = ui->tableWidget->item(row, 0)->data(Qt::UserRole).toUInt();
-    ::RenameGroup *renameGroup = new ::RenameGroup(doc, id, ui->tableWidget->item(row, column)->text());
+    auto *renameGroup = new ::RenameGroup(m_doc, id, ui->tableWidget->item(row, column)->text());
     connect(renameGroup, &RenameGroup::UpdateGroups, this, &VWidgetGroups::UpdateGroups);
     VAbstractApplication::VApp()->getUndoStack()->push(renameGroup);
 }
@@ -201,7 +273,7 @@ void VWidgetGroups::CtxMenu(const QPoint &pos)
         for (int r = 0; r < ui->tableWidget->rowCount(); ++r)
         {
             QTableWidgetItem *rowItem = ui->tableWidget->item(r, 0);
-            if (rowItem and visibility != doc->GetGroupVisibility(rowItem->data(Qt::UserRole).toUInt()))
+            if (rowItem and visibility != m_doc->GetGroupVisibility(rowItem->data(Qt::UserRole).toUInt()))
             {
                 return true;
             }
@@ -211,7 +283,7 @@ void VWidgetGroups::CtxMenu(const QPoint &pos)
     };
 
     QScopedPointer<QMenu> menu(new QMenu());
-    QAction *triggerVisibilityMenu = doc->GetGroupVisibility(id) ?
+    QAction *triggerVisibilityMenu = m_doc->GetGroupVisibility(id) ?
                 menu->addAction(QIcon(QStringLiteral("://icon/16x16/closed_eye.png")), tr("Hide")) :
                 menu->addAction(QIcon(QStringLiteral("://icon/16x16/open_eye.png")), tr("Show"));
 
@@ -227,93 +299,38 @@ void VWidgetGroups::CtxMenu(const QPoint &pos)
 
     if (selectedAction == triggerVisibilityMenu)
     {
-        SetGroupVisibility(id, not doc->GetGroupVisibility(id));
+        SetGroupVisibility(id, not m_doc->GetGroupVisibility(id));
     }
     else if (selectedAction == actionPreferences)
     {
-        QScopedPointer<VContainer> fackeContainer(new VContainer(VAbstractApplication::VApp()->TrVars(),
-                                                                 VAbstractValApplication::VApp()->patternUnitsP(),
-                                                                 VContainer::UniqueNamespace()));
-        QScopedPointer<DialogGroup> dialog(new DialogGroup(fackeContainer.data(), NULL_ID, this));
-        dialog->SetName(doc->GetGroupName(id));
-        dialog->SetTags(doc->GetGroupTags(id));
-        dialog->SetGroupCategories(doc->GetGroupCategories());
-        const int result = dialog->exec();
-
-        if (result == QDialog::Accepted)
-        {
-            ChangeGroupOptions *changeGroupOptions = new ChangeGroupOptions(doc, id, dialog->GetName(),
-                                                                            dialog->GetTags());
-            connect(changeGroupOptions, &ChangeGroupOptions::UpdateGroups, this, &VWidgetGroups::UpdateGroups);
-            VAbstractApplication::VApp()->getUndoStack()->push(changeGroupOptions);
-        }
+        ActionPreferences(id);
     }
     else if (selectedAction == actionDelete)
     {
-        DelGroup *delGroup = new DelGroup(doc, id);
+        auto *delGroup = new DelGroup(m_doc, id);
         connect(delGroup, &DelGroup::UpdateGroups, this, &VWidgetGroups::UpdateGroups);
         VAbstractApplication::VApp()->getUndoStack()->push(delGroup);
     }
     else if (selectedAction == actionHideAll)
     {//all groups in "group" make unvisible
-        if (ui->tableWidget->rowCount() < 1)
-        {
-            return;
-        }
-
-        QVector<vidtype> groups;
-        groups.reserve(ui->tableWidget->rowCount());
-        for (int r = 0; r < ui->tableWidget->rowCount(); ++r)
-        {
-            QTableWidgetItem *rowItem = ui->tableWidget->item(r, 0);
-            quint32 i = rowItem->data(Qt::UserRole).toUInt();
-            if (doc->GetGroupVisibility(i))
-            {
-                groups.append(i);
-            }
-        }
-
-        if (not groups.isEmpty())
-        {
-            SetMultipleGroupsVisibility(groups, false);
-        }
+        ActionHideAll();
     }
     else if (selectedAction == actionShowAll)
     {//all groups in "group" make visible
-        if (ui->tableWidget->rowCount() < 1)
-        {
-            return;
-        }
-
-        QVector<vidtype> groups;
-        groups.reserve(ui->tableWidget->rowCount());
-        for (int r = 0; r < ui->tableWidget->rowCount(); ++r)
-        {
-            QTableWidgetItem *rowItem = ui->tableWidget->item(r, 0);
-            quint32 i = rowItem->data(Qt::UserRole).toUInt();
-            if (not doc->GetGroupVisibility(i))
-            {
-                groups.append(i);
-            }
-        }
-
-        if (not groups.isEmpty())
-        {
-            SetMultipleGroupsVisibility(groups, true);
-        }
+        ActionShowAll();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetGroups::UpdateGroups()
 {
-    FillTable(doc->GetGroups());
+    FillTable(m_doc->GetGroups());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetGroups::FillTable(QMap<quint32, VGroupData> groups)
 {
-    ui->lineEditTags->SetCompletion(doc->GetGroupCategories());
+    ui->lineEditTags->SetCompletion(m_doc->GetGroupCategories());
 
     groups = FilterGroups(groups);
 
@@ -347,7 +364,7 @@ void VWidgetGroups::FillTable(QMap<quint32, VGroupData> groups)
         item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
         if (not data.tags.isEmpty())
         {
-            item->setToolTip(tr("Categories: %1.").arg(data.tags.join(", ")));
+            item->setToolTip(tr("Categories: %1.").arg(data.tags.join(QStringLiteral(", "))));
         }
 
         if(data.items.isEmpty())

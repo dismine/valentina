@@ -45,7 +45,7 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
  */
 class VException : public QException
 {
-    Q_DECLARE_TR_FUNCTIONS(VException)
+    Q_DECLARE_TR_FUNCTIONS(VException) // NOLINT
 public:
     explicit VException(const QString &error) V_NOEXCEPT_EXPR (true);
     VException(const VException &e) V_NOEXCEPT_EXPR (true);
@@ -98,7 +98,7 @@ inline QString VException::MoreInformation() const
 // Want have special exception for catching unhadled deleting a tool
 class VExceptionToolWasDeleted : public VException
 {
-    Q_DECLARE_TR_FUNCTIONS(VExceptionToolDeleted)
+    Q_DECLARE_TR_FUNCTIONS(VExceptionToolDeleted) // NOLINT
 public:
     explicit VExceptionToolWasDeleted(const QString &error) V_NOEXCEPT_EXPR (true);
     VExceptionToolWasDeleted(const VExceptionToolWasDeleted &e) V_NOEXCEPT_EXPR (true);

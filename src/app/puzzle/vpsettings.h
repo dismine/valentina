@@ -34,7 +34,7 @@
 
 class VPSettings : public VCommonSettings
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VPSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
                     QObject *parent = nullptr);
@@ -104,7 +104,7 @@ public:
     void SetLayoutLineWidth(int width);
 
 private:
-    Q_DISABLE_COPY(VPSettings)
+    Q_DISABLE_COPY_MOVE(VPSettings) // NOLINT
 };
 
 #endif // VPSETTINGS_H

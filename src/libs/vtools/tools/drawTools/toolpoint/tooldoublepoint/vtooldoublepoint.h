@@ -46,7 +46,7 @@ class VSimplePoint;
 
 class VToolDoublePoint: public VAbstractPoint, public QGraphicsPathItem
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VToolDoublePoint(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 p1id, quint32 p2id,
                      const QString &notes, QGraphicsItem * parent = nullptr);
@@ -102,7 +102,7 @@ protected:
     QString ComplexToolTip(quint32 itemId) const;
 
 private:
-    Q_DISABLE_COPY(VToolDoublePoint)
+    Q_DISABLE_COPY_MOVE(VToolDoublePoint) // NOLINT
 };
 
 #endif // VTOOLDOUBLEPOINT_H

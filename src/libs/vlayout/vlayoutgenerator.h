@@ -49,7 +49,7 @@ class QElapsedTimer;
 
 class VLayoutGenerator :public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VLayoutGenerator(QObject *parent = nullptr);
     virtual ~VLayoutGenerator() override;
@@ -141,7 +141,7 @@ public slots:
     void Timeout();
 
 private:
-    Q_DISABLE_COPY(VLayoutGenerator)
+    Q_DISABLE_COPY_MOVE(VLayoutGenerator) // NOLINT
     QVector<VLayoutPaper> papers;
     VBank *bank;
     qreal paperHeight;

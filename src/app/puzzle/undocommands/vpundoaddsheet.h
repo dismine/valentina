@@ -34,17 +34,17 @@
 
 class VPUndoAddSheet : public VPUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VPUndoAddSheet(const VPSheetPtr &sheet, QUndoCommand *parent = nullptr);
-    virtual ~VPUndoAddSheet()=default;
+    ~VPUndoAddSheet() override =default;
 
-    virtual void undo() override;
-    virtual void redo() override;
-    virtual auto id() const -> int override;
+    void undo() override;
+    void redo() override;
+    auto id() const -> int override;
 
 private:
-    Q_DISABLE_COPY(VPUndoAddSheet)
+    Q_DISABLE_COPY_MOVE(VPUndoAddSheet) // NOLINT
 
     VPSheetWeakPtr m_sheet;
 };

@@ -41,7 +41,7 @@ class VAbstractPattern;
 
 class VBackgroundImageItem : public QGraphicsObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VBackgroundImageItem(const VBackgroundPatternImage &image, VAbstractPattern *doc, QGraphicsItem *parent = nullptr);
     ~VBackgroundImageItem() override = default;
@@ -112,7 +112,7 @@ private slots:
 
 private:
     // cppcheck-suppress unknownMacro
-    Q_DISABLE_COPY_MOVE(VBackgroundImageItem)
+    Q_DISABLE_COPY_MOVE(VBackgroundImageItem) // NOLINT
 
     VBackgroundPatternImage m_image;
     VAbstractPattern *m_doc;

@@ -79,8 +79,8 @@ VLineAngle &VLineAngle::operator=(const VLineAngle &var)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLineAngle::VLineAngle(const VLineAngle &&var) Q_DECL_NOTHROW
-    :VInternalVariable(var), d(var.d)
+VLineAngle::VLineAngle(VLineAngle &&var) Q_DECL_NOTHROW
+    :VInternalVariable(std::move(var)), d(std::move(var.d))
 {}
 
 #ifdef Q_COMPILER_RVALUE_REFS

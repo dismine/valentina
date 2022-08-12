@@ -70,7 +70,7 @@ class VPattern;
 
 class VUndoCommand : public QObject, public QUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VUndoCommand(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
     virtual ~VUndoCommand() =default;
@@ -98,7 +98,7 @@ protected:
 
     QDomElement  GetDestinationObject(quint32 idTool, quint32 idPoint) const;
 private:
-    Q_DISABLE_COPY(VUndoCommand)
+    Q_DISABLE_COPY_MOVE(VUndoCommand) // NOLINT
 };
 
 #endif // VUNDOCOMMAND_H

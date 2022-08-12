@@ -29,41 +29,41 @@
 
 #include <QStringList>
 
-const QString LONG_OPTION_EXPORT_FILE   = QStringLiteral("exportFile");
-const QString SINGLE_OPTION_EXPORT_FILE = QStringLiteral("e");
+const QString LONG_OPTION_EXPORT_FILE   = QStringLiteral("exportFile"); // NOLINT
+const QString SINGLE_OPTION_EXPORT_FILE = QStringLiteral("e"); // NOLINT
 
-const QString LONG_OPTION_TEST          = QStringLiteral("test");
-const QString SINGLE_OPTION_TEST        = QStringLiteral("t");
+const QString LONG_OPTION_TEST          = QStringLiteral("test"); // NOLINT
+const QString SINGLE_OPTION_TEST        = QStringLiteral("t"); // NOLINT
 
-const QString LONG_OPTION_RAW_LAYOUT    = QStringLiteral("rawLayout");
-const QString SINGLE_OPTION_RAW_LAYOUT  = QStringLiteral("r");
+const QString LONG_OPTION_RAW_LAYOUT    = QStringLiteral("rawLayout"); // NOLINT
+const QString SINGLE_OPTION_RAW_LAYOUT  = QStringLiteral("r"); // NOLINT
 
-const QString LONG_OPTION_EXP2FORMAT    = QStringLiteral("format");
-const QString SINGLE_OPTION_EXP2FORMAT  = QStringLiteral("f");
+const QString LONG_OPTION_EXP2FORMAT    = QStringLiteral("format"); // NOLINT
+const QString SINGLE_OPTION_EXP2FORMAT  = QStringLiteral("f"); // NOLINT
 
-const QString LONG_OPTION_BINARYDXF     = QStringLiteral("bdxf");
-const QString LONG_OPTION_TEXT2PATHS    = QStringLiteral("text2paths");
+const QString LONG_OPTION_BINARYDXF     = QStringLiteral("bdxf"); // NOLINT
+const QString LONG_OPTION_TEXT2PATHS    = QStringLiteral("text2paths"); // NOLINT
 
-const QString LONG_OPTION_CROP_LENGTH   = QStringLiteral("crop");
-const QString SINGLE_OPTION_CROP_LENGTH = QStringLiteral("c");
+const QString LONG_OPTION_CROP_LENGTH   = QStringLiteral("crop"); // NOLINT
+const QString SINGLE_OPTION_CROP_LENGTH = QStringLiteral("c"); // NOLINT
 
-const QString LONG_OPTION_CROP_WIDTH    = QStringLiteral("cropWidth");
+const QString LONG_OPTION_CROP_WIDTH    = QStringLiteral("cropWidth"); // NOLINT
 
-const QString LONG_OPTION_TILED_PDF_PAGE_TEMPLATE = QStringLiteral("tiledPageformat");
-const QString LONG_OPTION_TILED_PDF_LEFT_MARGIN   = QStringLiteral("tiledlmargin");
-const QString LONG_OPTION_TILED_PDF_RIGHT_MARGIN  = QStringLiteral("tiledrmargin");
-const QString LONG_OPTION_TILED_PDF_TOP_MARGIN    = QStringLiteral("tiledtmargin");
-const QString LONG_OPTION_TILED_PDF_BOTTOM_MARGIN = QStringLiteral("tiledbmargin");
-const QString LONG_OPTION_TILED_PDF_LANDSCAPE     = QStringLiteral("tiledLandscape");
+const QString LONG_OPTION_TILED_PDF_PAGE_TEMPLATE = QStringLiteral("tiledPageformat"); // NOLINT
+const QString LONG_OPTION_TILED_PDF_LEFT_MARGIN   = QStringLiteral("tiledlmargin"); // NOLINT
+const QString LONG_OPTION_TILED_PDF_RIGHT_MARGIN  = QStringLiteral("tiledrmargin"); // NOLINT
+const QString LONG_OPTION_TILED_PDF_TOP_MARGIN    = QStringLiteral("tiledtmargin"); // NOLINT
+const QString LONG_OPTION_TILED_PDF_BOTTOM_MARGIN = QStringLiteral("tiledbmargin"); // NOLINT
+const QString LONG_OPTION_TILED_PDF_LANDSCAPE     = QStringLiteral("tiledLandscape"); // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AllKeys return list with all command line keys (short and long forms). Used for testing on conflicts.
  * @return list with all command line keys
  */
-QStringList AllKeys()
+auto AllKeys() -> QStringList
 {
-    return QStringList
+    return
     {
         LONG_OPTION_EXPORT_FILE,
         SINGLE_OPTION_EXPORT_FILE,

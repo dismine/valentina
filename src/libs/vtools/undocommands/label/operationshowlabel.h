@@ -35,7 +35,7 @@ class QGraphicsScene;
 
 class OperationShowLabel : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     OperationShowLabel(VAbstractPattern *doc, quint32 idTool, quint32 idPoint, bool visible,
                        QUndoCommand *parent = nullptr);
@@ -45,7 +45,8 @@ public:
     virtual void redo() override;
 
 private:
-    Q_DISABLE_COPY(OperationShowLabel)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(OperationShowLabel) // NOLINT
     bool m_visible;
     bool m_oldVisible;
     //Need for resizing scene rect

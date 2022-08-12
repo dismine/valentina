@@ -122,7 +122,7 @@ auto VArc::operator =(const VArc &arc) -> VArc &
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VArc::VArc(VArc &&arc) Q_DECL_NOTHROW
-    : VAbstractArc(arc), d (arc.d)
+    : VAbstractArc(std::move(arc)), d (std::move(arc.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

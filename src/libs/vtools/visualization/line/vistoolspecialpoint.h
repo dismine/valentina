@@ -35,7 +35,7 @@ class VSimplePoint;
 
 class VisToolSpecialPoint : public VisLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolSpecialPoint(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolSpecialPoint();
@@ -44,7 +44,8 @@ public:
     virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolSpecialPoint)};
 private:
-    Q_DISABLE_COPY(VisToolSpecialPoint)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolSpecialPoint) // NOLINT
     QPointer<VSimplePoint> m_point;
 };
 

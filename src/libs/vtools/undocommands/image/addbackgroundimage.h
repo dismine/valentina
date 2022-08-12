@@ -37,7 +37,7 @@
 
 class AddBackgroundImage : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     AddBackgroundImage(const VBackgroundPatternImage& image, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
     ~AddBackgroundImage() override =default;
@@ -48,7 +48,7 @@ signals:
     void DeleteItem(const QUuid &id);
 private:
     // cppcheck-suppress unknownMacro
-    Q_DISABLE_COPY_MOVE(AddBackgroundImage)
+    Q_DISABLE_COPY_MOVE(AddBackgroundImage) // NOLINT
     VBackgroundPatternImage m_image;
 };
 

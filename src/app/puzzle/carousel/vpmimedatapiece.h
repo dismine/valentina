@@ -34,16 +34,17 @@
 #include <QUuid>
 
 #include "../layout/layoutdef.h"
+#include "../vmisc/defglobal.h"
 
 class VPMimeDataPiece : public QMimeData
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit VPMimeDataPiece(const QUuid &layoutUuid);
-    virtual ~VPMimeDataPiece() = default;
+    ~VPMimeDataPiece() override = default;
 
-    virtual auto formats() const -> QStringList override;
+    auto formats() const -> QStringList override;
 
     /**
      * @brief GetPiecePtr Returns the piece pointer of the mime data
@@ -61,10 +62,11 @@ public:
 
     static const QString mineFormatPiecePtr;
 
-    const QUuid &LayoutUuid() const;
+    auto LayoutUuid() const -> const QUuid &;
 
 private:
-    Q_DISABLE_COPY(VPMimeDataPiece)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VPMimeDataPiece) // NOLINT
 
     VPPieceWeakPtr m_piece{};
 

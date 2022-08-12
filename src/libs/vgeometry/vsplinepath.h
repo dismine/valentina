@@ -52,7 +52,7 @@ class VSplinePathData;
  */
 class VSplinePath final :public VAbstractCubicBezierPath
 {
-    Q_DECLARE_TR_FUNCTIONS(VSplinePath)
+    Q_DECLARE_TR_FUNCTIONS(VSplinePath) // NOLINT
 public:
     explicit VSplinePath(quint32 idObject = 0, Draw mode = Draw::Calculation);
     VSplinePath(const QVector<VFSplinePoint> &points, qreal kCurve = 1, quint32 idObject = 0,
@@ -67,7 +67,7 @@ public:
     VSplinePoint &operator[](int indx);
     VSplinePath  &operator=(const VSplinePath &path);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VSplinePath(const VSplinePath&& splPath) Q_DECL_NOTHROW;
+    VSplinePath(VSplinePath&& splPath) Q_DECL_NOTHROW;
     VSplinePath &operator=(VSplinePath &&path) Q_DECL_NOTHROW;
 #endif
 
@@ -101,6 +101,6 @@ private:
     QSharedDataPointer<VSplinePathData> d;
 };
 
-Q_DECLARE_TYPEINFO(VSplinePath, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VSplinePath, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VSPLINEPATH_H

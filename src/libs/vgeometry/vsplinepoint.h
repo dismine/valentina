@@ -53,7 +53,7 @@ public:
 
     VFSplinePoint &operator=(const VFSplinePoint &point);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VFSplinePoint(const VFSplinePoint &&point) Q_DECL_NOTHROW;
+    VFSplinePoint(VFSplinePoint &&point) Q_DECL_NOTHROW;
     VFSplinePoint &operator=(VFSplinePoint &&point) Q_DECL_NOTHROW;
 #endif
 
@@ -72,7 +72,7 @@ protected:
 };
 
 Q_DECLARE_METATYPE(VFSplinePoint)
-Q_DECLARE_TYPEINFO(VFSplinePoint, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VFSplinePoint, Q_MOVABLE_TYPE); // NOLINT
 
 class VSplinePointData;
 
@@ -91,7 +91,7 @@ public:
 
     VSplinePoint &operator=(const VSplinePoint &point);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VSplinePoint(const VSplinePoint &&point) Q_DECL_NOTHROW;
+    VSplinePoint(VSplinePoint &&point) Q_DECL_NOTHROW;
     VSplinePoint &operator=(VSplinePoint &&point) Q_DECL_NOTHROW;
 #endif
 
@@ -122,6 +122,6 @@ protected:
 };
 
 Q_DECLARE_METATYPE(VSplinePoint)
-Q_DECLARE_TYPEINFO(VSplinePoint, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VSplinePoint, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VSPLINEPOINT_H

@@ -568,8 +568,8 @@ VLayoutPiece &VLayoutPiece::operator=(const VLayoutPiece &detail)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutPiece::VLayoutPiece(const VLayoutPiece &&detail) Q_DECL_NOTHROW
-    :VAbstractPiece(detail), d(detail.d)
+VLayoutPiece::VLayoutPiece(VLayoutPiece &&detail) Q_DECL_NOTHROW
+    :VAbstractPiece(std::move(detail)), d(std::move(detail.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -33,7 +33,7 @@
 
 class TST_VAbstractCurve : public AbstractTest
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_VAbstractCurve(QObject *parent = nullptr);
 

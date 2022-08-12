@@ -44,7 +44,7 @@
 
 class VisToolLine : public VisLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolLine(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolLine() = default;
@@ -57,7 +57,8 @@ protected:
     virtual void DrawLine(VScaledLine *lineItem, const QLineF &line, const QColor &color,
                           Qt::PenStyle style = Qt::SolidLine) override;
 private:
-    Q_DISABLE_COPY(VisToolLine)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolLine) // NOLINT
     quint32      point2Id;
 };
 

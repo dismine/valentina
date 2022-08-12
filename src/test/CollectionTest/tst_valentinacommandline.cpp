@@ -34,8 +34,8 @@
 
 namespace
 {
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, tmpTestFolder, (QLatin1String("tst_valentina_tmp")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, tmpTestCollectionFolder, (QLatin1String("tst_valentina_collection_tmp")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, tmpTestFolder, (QLatin1String("tst_valentina_tmp"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, tmpTestCollectionFolder, (QLatin1String("tst_valentina_collection_tmp"))) // NOLINT
 }
 
 TST_ValentinaCommandLine::TST_ValentinaCommandLine(QObject *parent)

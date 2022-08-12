@@ -65,7 +65,7 @@ public:
     virtual ~VPropertyFormViewPrivate() override {}
 
 private:
-    Q_DISABLE_COPY(VPropertyFormViewPrivate)
+    Q_DISABLE_COPY_MOVE(VPropertyFormViewPrivate) // NOLINT
 };
 
 QT_WARNING_POP

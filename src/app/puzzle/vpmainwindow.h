@@ -37,11 +37,8 @@
 #include "carousel/vpcarrousel.h"
 #include "scene/vpmaingraphicsview.h"
 #include "layout/vplayout.h"
-#include "layout/vppiece.h"
 #include "../vlayout/vlayoutpiece.h"
-#include "vptilefactory.h"
 #include "vpcommandline.h"
-#include "../vlayout/vlayoutdef.h"
 #include "../vwidgets/vabstractmainwindow.h"
 #include "../vmisc/vlockguard.h"
 #include "../vlayout/dialogs/vabstractlayoutdialog.h"
@@ -59,13 +56,13 @@ class WatermarkWindow;
 
 class VPMainWindow : public VAbstractMainWindow
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent = nullptr);
-    virtual ~VPMainWindow();
+    ~VPMainWindow() override;
 
-    QString CurrentFile() const;
+    auto CurrentFile() const -> QString;
 
     /**
      * @brief LoadFile Loads the layout file of given path in m_layout.
@@ -73,7 +70,7 @@ public:
      * @param path path to layout
      * @return true if success
      */
-    bool LoadFile(QString path);
+    auto LoadFile(const QString& path) -> bool;
 
     void LayoutWasSaved(bool saved);
     void SetCurrentFile(const QString &fileName);
@@ -83,7 +80,7 @@ public:
      * @param path path to layout file
      * @return true if success
      */
-    bool SaveLayout(const QString &path, QString &error);
+    auto SaveLayout(const QString &path, QString &error) -> bool;
 
     /**
      * @brief ImportRawLayouts The function imports the raw layouts of given paths
@@ -105,12 +102,12 @@ public slots:
      */
     void on_actionNew_triggered();
 
-    virtual void ShowToolTip(const QString &toolTip) override;
+    void ShowToolTip(const QString &toolTip) override;
 
 protected:
-    virtual void closeEvent(QCloseEvent *event) override;
-    virtual void changeEvent(QEvent* event) override;
-    virtual QStringList RecentFileList() const override;
+    void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent* event) override;
+    auto RecentFileList() const -> QStringList override;
 
 private slots:
     /**
@@ -125,14 +122,14 @@ private slots:
      * triggered.
      * The slot is automatically connected through name convention.
      */
-    bool on_actionSave_triggered();
+    bool on_actionSave_triggered(); //NOLINT(modernize-use-trailing-return-type)
 
     /**
      * @brief on_actionSaveAs_triggered When the menu action File > Save As
      * is triggered.
      * The slot is automatically connected through name convention.
      */
-    bool on_actionSaveAs_triggered();
+    bool on_actionSaveAs_triggered(); //NOLINT(modernize-use-trailing-return-type)
 
     /**
      * @brief on_actionImportRawLayout_triggered When the menu action
@@ -291,8 +288,14 @@ private slots:
 
     void SetDefaultGUILanguage();
 
+    void HorizontalScaleChanged(double value);
+    void VerticalScaleChanged(double value);
+
+    void LayoutWarningPiecesSuperposition_toggled(bool checked);
+    void LayoutWarningPiecesOutOfBound_toggled(bool checked);
+
 private:
-    Q_DISABLE_COPY(VPMainWindow)
+    Q_DISABLE_COPY_MOVE(VPMainWindow) // NOLINT
     Ui::VPMainWindow *ui;
 
     VPCarrousel *m_carrousel{nullptr};
@@ -336,6 +339,14 @@ private:
 
     QFileSystemWatcher *m_watermarkWatcher{nullptr};
 
+    struct VPLayoutPrinterPage
+    {
+        VPSheetPtr sheet{};
+        bool       tilesScheme{false};
+        int        tileRow{-1};
+        int        tileCol{-1};
+    };
+
     /**
      * @brief InitMenuBar Inits the menu bar (File, Edit, Help ...)
      */
@@ -355,6 +366,9 @@ private:
      * @brief InitPropertyTabCurrentSheet Inits the current sheet tab in the properties;
      */
     void InitPropertyTabCurrentSheet();
+
+    void InitPaperSizeData(const QString &suffix);
+    void InitMarginsData(const QString &suffix);
 
     /**
      * @brief InitPropertyTabLayout Inits the layout tab in the properties
@@ -432,9 +446,9 @@ private:
     auto TranslateUnit() const -> Unit;
     auto LayoutUnit() const -> Unit;
 
-    QSizeF Template(VAbstractLayoutDialog::PaperSizeTemplate t) const;
-    QSizeF SheetTemplate() const;
-    QSizeF TileTemplate() const;
+    auto Template(VAbstractLayoutDialog::PaperSizeTemplate t) const -> QSizeF;
+    auto SheetTemplate() const -> QSizeF;
+    auto TileTemplate() const -> QSizeF;
 
     void SheetSize(const QSizeF &size);
     void TileSize(const QSizeF &size);
@@ -458,12 +472,12 @@ private:
     void RotatePiecesToGrainline();
 
     void ExportData(const VPExportData &data);
-    void ExportApparelLayout(const VPExportData &data, const QVector<VLayoutPiece> &details, const QString &name,
-                             const QSize &size) const;
+    static void ExportApparelLayout(const VPExportData &data, const QVector<VLayoutPiece> &details, const QString &name,
+                             const QSize &size) ;
     void ExportFlatLayout(const VPExportData &data);
     void ExportScene(const VPExportData &data);
-    void ExportUnifiedPdfFile(const VPExportData &data);
-    void GenerateUnifiedPdfFile(const VPExportData &data, const QString &name);
+    static void ExportUnifiedPdfFile(const VPExportData &data);
+    static void GenerateUnifiedPdfFile(const VPExportData &data, const QString &name);
     void ExportPdfTiledFile(const VPExportData &data);
     void GeneratePdfTiledFile(const VPSheetPtr &sheet, bool showTilesScheme, QPainter *painter,
                               const QSharedPointer<QPrinter> &printer, bool &firstPage);
@@ -473,14 +487,28 @@ private:
     void OpenWatermark(const QString &path = QString());
     void CleanWaterkmarkEditors();
 
-    void DrawTilesScheme(QPrinter *printer, QPainter *painter, const VPSheetPtr &sheet, bool &firstPage);
+    auto DrawTilesScheme(QPrinter *printer, QPainter *painter, const VPSheetPtr &sheet, bool firstPage) -> bool;
 
     auto AskLayoutIsInvalid(const QList<VPSheetPtr> &sheets) -> bool;
+    auto CheckPiecesOutOfBound(const VPPiecePtr &piece, bool &outOfBoundChecked) -> bool;
+    auto CheckSuperpositionOfPieces(const VPPiecePtr &piece, bool &pieceSuperpositionChecked) -> bool;
 
     void PrintLayoutSheets(QPrinter *printer, const QList<VPSheetPtr> &sheets);
+    static auto PrintLayoutSheetPage(QPrinter *printer, QPainter &painter, const VPSheetPtr& sheet) -> bool;
     void PrintLayoutTiledSheets(QPrinter *printer, const QList<VPSheetPtr> &sheets);
+    auto PrepareLayoutTilePages(const QList<VPSheetPtr> &sheets) -> QVector<VPLayoutPrinterPage>;
+    auto PrintLayoutTiledSheetPage(QPrinter *printer, QPainter &painter, const VPLayoutPrinterPage &page,
+                                   bool firstPage) -> bool;
 
     void ZValueMove(int move);
+
+    auto ImportRawLayout(const QString &rawLayout) -> bool;
+    auto AddLayoutPieces(const QVector<VLayoutPiece> &pieces) -> bool;
+
+    void TranslatePieces();
+    void TranslatePieceRelatively(const VPPiecePtr &piece, const QRectF &rect, int selectedPiecesCount, qreal dx,
+                                  qreal dy);
+    void RotatePieces();
 };
 
 #endif // VPMAINWINDOW_H

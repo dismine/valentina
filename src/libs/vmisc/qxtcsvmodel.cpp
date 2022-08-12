@@ -57,7 +57,7 @@ public:
     QxtCsvModel::QuoteMode quoteMode;
 
 private:
-    Q_DISABLE_COPY(QxtCsvModelPrivate)
+    Q_DISABLE_COPY_MOVE(QxtCsvModelPrivate) // NOLINT
 };
 
 QT_WARNING_PUSH

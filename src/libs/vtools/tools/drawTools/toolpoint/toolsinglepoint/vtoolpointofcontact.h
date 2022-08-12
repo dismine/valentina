@@ -66,7 +66,7 @@ struct VToolPointOfContactInitData : VToolSinglePointInitData
  */
 class VToolPointOfContact : public VToolSinglePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     virtual void   setDialog() override;
     static bool FindPoint(qreal radius, const QPointF &center, const QPointF &firstPoint,
@@ -97,7 +97,7 @@ protected:
     virtual void    SetVisualization() override;
     virtual QString MakeToolTip() const override;
 private:
-    Q_DISABLE_COPY(VToolPointOfContact)
+    Q_DISABLE_COPY_MOVE(VToolPointOfContact) // NOLINT
 
     /** @brief radius string with formula radius arc. */
     QString        arcRadius;

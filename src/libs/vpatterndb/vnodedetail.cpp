@@ -124,8 +124,8 @@ VNodeDetail &VNodeDetail::operator =(const VNodeDetail &node)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VNodeDetail::VNodeDetail(const VNodeDetail &&node) Q_DECL_NOTHROW
-    :d (node.d)
+VNodeDetail::VNodeDetail(VNodeDetail &&node) Q_DECL_NOTHROW
+    :d (std::move(node.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

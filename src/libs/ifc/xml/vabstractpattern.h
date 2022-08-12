@@ -97,7 +97,7 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 
 class VAbstractPattern : public VDomDocument
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VAbstractPattern(QObject *parent = nullptr);
     virtual ~VAbstractPattern();
@@ -485,7 +485,7 @@ protected:
     auto ReadCompanyName() const -> QString;
 
 private:
-    Q_DISABLE_COPY(VAbstractPattern)
+    Q_DISABLE_COPY_MOVE(VAbstractPattern) // NOLINT
 
     QStringList ListIncrements() const;
     QVector<VFormulaField> ListPointExpressions() const;

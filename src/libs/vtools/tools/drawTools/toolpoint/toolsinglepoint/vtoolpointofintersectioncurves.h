@@ -61,7 +61,7 @@ struct VToolPointOfIntersectionCurvesInitData : VToolSinglePointInitData
 
 class VToolPointOfIntersectionCurves : public VToolSinglePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     virtual void setDialog() override;
     static VToolPointOfIntersectionCurves *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
@@ -97,7 +97,7 @@ protected:
     void SetCurve1Segments(const QPair<QString, QString> &segments);
     void SetCurve2Segments(const QPair<QString, QString> &segments);
 private:
-    Q_DISABLE_COPY(VToolPointOfIntersectionCurves)
+    Q_DISABLE_COPY_MOVE(VToolPointOfIntersectionCurves) // NOLINT
 
     quint32 firstCurveId;
     quint32 secondCurveId;

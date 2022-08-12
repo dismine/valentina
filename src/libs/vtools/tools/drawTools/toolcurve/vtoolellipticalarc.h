@@ -68,7 +68,7 @@ struct VToolEllipticalArcInitData : VAbstractSplineInitData
  */
 class VToolEllipticalArc : public VToolAbstractArc
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     virtual void     setDialog() override;
     static VToolEllipticalArc* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
@@ -106,7 +106,7 @@ protected:
     virtual QString MakeToolTip() const override;
 
 private:
-    Q_DISABLE_COPY(VToolEllipticalArc)
+    Q_DISABLE_COPY_MOVE(VToolEllipticalArc) // NOLINT
     VToolEllipticalArc(const VToolEllipticalArcInitData &initData, QGraphicsItem *parent = nullptr);
     virtual ~VToolEllipticalArc()=default;
 };

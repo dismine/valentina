@@ -42,7 +42,7 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 
 class VPROPERTYEXPLORERSHARED_EXPORT VColorProperty : public VProperty
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VColorProperty(const QString &name);
 
@@ -74,7 +74,7 @@ public:
     virtual VProperty* clone(bool include_children = true, VProperty* container = NULL) const override;
 
 private:
-    Q_DISABLE_COPY(VColorProperty)
+    Q_DISABLE_COPY_MOVE(VColorProperty) // NOLINT
 };
 
 QT_WARNING_POP

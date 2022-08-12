@@ -47,8 +47,6 @@
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../qmuparser/qmuparsererror.h"
-#include "../tools/drawTools/vdrawtool.h"
-#include "../ifc/ifcdef.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
@@ -57,7 +55,13 @@
 
 template <class K, class V> class QHash;
 
-Q_LOGGING_CATEGORY(vVis, "v.visualization")
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
+QT_WARNING_DISABLE_INTEL(1418)
+
+Q_LOGGING_CATEGORY(vVis, "v.visualization") // NOLINT
+
+QT_WARNING_POP
 
 namespace
 {

@@ -32,6 +32,8 @@
 #include <QComboBox>
 #include <QDialog>
 
+#include "../vmisc/defglobal.h"
+
 enum class Unit : qint8;
 
 class VAbstractLayoutDialog : public QDialog
@@ -73,7 +75,7 @@ protected:
 
 
 private:
-    Q_DISABLE_COPY(VAbstractLayoutDialog)
+    Q_DISABLE_COPY_MOVE(VAbstractLayoutDialog) // NOLINT
 };
 
 #endif // VABSTRACTDIALOG_H

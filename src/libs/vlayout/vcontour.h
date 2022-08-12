@@ -55,7 +55,7 @@ public:
 
     VContour &operator=(const VContour &contour);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VContour(const VContour &&contour) Q_DECL_NOTHROW;
+    VContour(VContour &&contour) Q_DECL_NOTHROW;
     VContour &operator=(VContour &&contour) Q_DECL_NOTHROW;
 #endif
 
@@ -98,6 +98,6 @@ private:
     int EmptySheetEdgesCount() const;
 };
 
-Q_DECLARE_TYPEINFO(VContour, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VContour, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VCONTOUR_H

@@ -36,24 +36,24 @@
 
 class VPUndoPieceMove : public VPUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VPUndoPieceMove(const VPPiecePtr &piece, qreal dx, qreal dy, bool allowMerge = false,
                              QUndoCommand *parent = nullptr);
-    virtual ~VPUndoPieceMove()=default;
+    ~VPUndoPieceMove() override =default;
 
-    virtual void undo() override;
-    virtual void redo() override;
+    void undo() override;
+    void redo() override;
     // cppcheck-suppress unusedFunction
-    virtual auto mergeWith(const QUndoCommand *command) -> bool override;
-    virtual auto id() const -> int override ;
+    auto mergeWith(const QUndoCommand *command) -> bool override;
+    auto id() const -> int override;
 
     auto Piece() const -> VPPiecePtr;
     auto Dx() const -> qreal;
     auto Dy() const -> qreal;
 
 private:
-    Q_DISABLE_COPY(VPUndoPieceMove)
+    Q_DISABLE_COPY_MOVE(VPUndoPieceMove) // NOLINT
 
     VPPieceWeakPtr m_piece;
     QTransform     m_oldTransform{};
@@ -82,24 +82,24 @@ inline auto VPUndoPieceMove::Dy() const -> qreal
 // Move pieces
 class VPUndoPiecesMove : public VPUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VPUndoPiecesMove(const QList<VPPiecePtr> &pieces, qreal dx, qreal dy, bool allowMerge = false,
                               QUndoCommand *parent = nullptr);
-    virtual ~VPUndoPiecesMove()=default;
+    ~VPUndoPiecesMove() override =default;
 
-    virtual void undo() override;
-    virtual void redo() override;
+    void undo() override;
+    void redo() override;
     // cppcheck-suppress unusedFunction
-    virtual auto mergeWith(const QUndoCommand *command) -> bool override;
-    virtual auto id() const -> int override ;
+    auto mergeWith(const QUndoCommand *command) -> bool override;
+    auto id() const -> int override ;
 
     auto PieceIds() const -> QSet<QString>;
     auto Dx() const -> qreal;
     auto Dy() const -> qreal;
 
 private:
-    Q_DISABLE_COPY(VPUndoPiecesMove)
+    Q_DISABLE_COPY_MOVE(VPUndoPiecesMove) // NOLINT
 
     QVector<VPPieceWeakPtr>   m_pieces{};
     QMap<QString, QTransform> m_oldTransforms{};

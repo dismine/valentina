@@ -47,7 +47,7 @@
  */
 class VMainGraphicsScene : public QGraphicsScene
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VMainGraphicsScene(QObject *parent = nullptr);
     explicit VMainGraphicsScene(const QRectF & sceneRect, QObject * parent = nullptr);
@@ -156,7 +156,7 @@ signals:
     void          LanguageChanged();
 
 private:
-    Q_DISABLE_COPY(VMainGraphicsScene)
+    Q_DISABLE_COPY_MOVE(VMainGraphicsScene) // NOLINT
     /** @brief horScrollBar value horizontal scroll bar. */
     qint32        horScrollBar;
 

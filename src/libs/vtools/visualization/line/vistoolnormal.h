@@ -41,7 +41,7 @@
 
 class VisToolNormal : public VisLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolNormal(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolNormal() = default;
@@ -56,7 +56,8 @@ public:
     enum { Type = UserType + static_cast<int>(Vis::ToolNormal)};
 
 private:
-    Q_DISABLE_COPY(VisToolNormal)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolNormal) // NOLINT
     quint32              object2Id;
     VScaledEllipse *point;
     VScaledEllipse *lineP1;

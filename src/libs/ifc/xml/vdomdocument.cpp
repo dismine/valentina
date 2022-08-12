@@ -234,7 +234,13 @@ bool LessThen(const QDomNode &element1, const QDomNode &element2)
 }
 }  // namespace
 
-Q_LOGGING_CATEGORY(vXML, "v.xml")
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
+QT_WARNING_DISABLE_INTEL(1418)
+
+Q_LOGGING_CATEGORY(vXML, "v.xml") // NOLINT
+
+QT_WARNING_POP
 
 const QString VDomDocument::AttrId          = QStringLiteral("id");
 const QString VDomDocument::AttrText        = QStringLiteral("text");

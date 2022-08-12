@@ -49,7 +49,7 @@ protected:
     static qreal Warning(const QString &warningMsg, qreal value);
 
 private:
-    Q_DISABLE_COPY(QmuTokenParser)
+    Q_DISABLE_COPY_MOVE(QmuTokenParser) // NOLINT
     QmuTokenParser();
 };
 

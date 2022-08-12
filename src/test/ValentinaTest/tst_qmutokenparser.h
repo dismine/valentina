@@ -32,9 +32,11 @@
 #include <QLocale>
 #include <QObject>
 
+#include "../vmisc/defglobal.h"
+
 class TST_QmuTokenParser : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_QmuTokenParser(QObject *parent = nullptr);
 private slots:
@@ -44,7 +46,8 @@ private slots:
     void TokenFromUser();
     void cleanupTestCase();
 private:
-    Q_DISABLE_COPY(TST_QmuTokenParser)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(TST_QmuTokenParser) // NOLINT
     QLocale m_systemLocale;
 
     void PrepareVal(qreal val, const QLocale &locale);

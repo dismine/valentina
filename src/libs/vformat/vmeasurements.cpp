@@ -111,7 +111,7 @@ const QString VMeasurements::DimensionZ    = QStringLiteral("z");
 
 namespace
 {
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, defBirthDate, (QLatin1String("1800-01-01")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, defBirthDate, (QLatin1String("1800-01-01"))) // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
 QString FileComment()

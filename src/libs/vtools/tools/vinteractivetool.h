@@ -36,7 +36,7 @@
 
 class VInteractiveTool : public VAbstractTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VInteractiveTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent = nullptr);
     virtual ~VInteractiveTool() Q_DECL_EQ_DEFAULT;
@@ -56,7 +56,7 @@ protected:
     virtual void SaveDialogChange(const QString &undoText = QString())=0;
 
 private:
-    Q_DISABLE_COPY(VInteractiveTool)
+    Q_DISABLE_COPY_MOVE(VInteractiveTool) // NOLINT
 };
 
 #endif // VINTERACTIVETOOL_H

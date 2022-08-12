@@ -213,7 +213,7 @@ void VPUndoPiecesRotate::undo()
         layout->SetFocusedSheet(sheet);
     }
 
-    for (const auto& piece : m_pieces)
+    for (const auto& piece : qAsConst(m_pieces))
     {
         VPPiecePtr p = piece.toStrongRef();
         if (not p.isNull())
@@ -247,7 +247,7 @@ void VPUndoPiecesRotate::redo()
         layout->SetFocusedSheet(sheet);
     }
 
-    for (const auto& piece : m_pieces)
+    for (const auto& piece : qAsConst(m_pieces))
     {
         VPPiecePtr p = piece.toStrongRef();
         if (not p.isNull())

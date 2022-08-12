@@ -42,7 +42,7 @@ class VPropertySet;
 //! Class that displays the sub properties of a property using a form layout
 class VPROPERTYEXPLORERSHARED_EXPORT VPropertyFormWidget : public QGroupBox
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     //! Constructor
     VPropertyFormWidget(const QString& title, const QString& description, const QList<VProperty*>& properties,
@@ -100,7 +100,7 @@ protected:
     void commitData(const QWidget* editor);
 
 private:
-    Q_DISABLE_COPY(VPropertyFormWidget)
+    Q_DISABLE_COPY_MOVE(VPropertyFormWidget) // NOLINT
 };
 
 }   // Namespace VPE

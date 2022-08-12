@@ -52,8 +52,8 @@ VAbstractFloatItemData &VAbstractFloatItemData::operator=(const VAbstractFloatIt
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractFloatItemData::VAbstractFloatItemData(const VAbstractFloatItemData &&data) Q_DECL_NOTHROW
-    : d (data.d)
+VAbstractFloatItemData::VAbstractFloatItemData(VAbstractFloatItemData &&data) Q_DECL_NOTHROW
+    : d (std::move(data.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -41,7 +41,7 @@
 
 class VisToolShoulderPoint : public VisLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolShoulderPoint(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolShoulderPoint() = default;
@@ -53,7 +53,8 @@ public:
     virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolShoulderPoint)};
 private:
-    Q_DISABLE_COPY(VisToolShoulderPoint)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolShoulderPoint) // NOLINT
     quint32         lineP1Id;
     quint32         lineP2Id;
     VScaledEllipse *point;

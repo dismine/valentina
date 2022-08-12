@@ -48,7 +48,7 @@ namespace Ui
  */
 class DialogEndLine : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     DialogEndLine(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogEndLine() override;
@@ -96,7 +96,7 @@ protected:
     virtual void     closeEvent(QCloseEvent *event) override;
     virtual bool     IsValid() const final;
 private:
-    Q_DISABLE_COPY(DialogEndLine)
+    Q_DISABLE_COPY_MOVE(DialogEndLine) // NOLINT
 
     /** @brief ui keeps information about user interface */
     Ui::DialogEndLine *ui;

@@ -28,20 +28,20 @@
 
 #include "dialogpreferences.h"
 #include "ui_dialogpreferences.h"
-#include "../core/vapplication.h"
 #include "configpages/preferencesconfigurationpage.h"
 #include "configpages/preferencespatternpage.h"
 #include "configpages/preferencespathpage.h"
 #include "../vmisc/vvalentinasettings.h"
+#include "../vmisc/vabstractvalapplication.h"
 
 #include <QMessageBox>
 #include <QPushButton>
+#include <QShowEvent>
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPreferences::DialogPreferences(QWidget *parent)
     : QDialog(parent),
       ui(new Ui::DialogPreferences),
-      m_isInitialized(false),
       m_configurePage(new PreferencesConfigurationPage),
       m_patternPage(new PreferencesPatternPage),
       m_pathPage(new PreferencesPathPage)
@@ -92,7 +92,7 @@ void DialogPreferences::showEvent(QShowEvent *event)
     // do your init stuff here
 
     QSize sz = VAbstractApplication::VApp()->Settings()->GetPreferenceDialogSize();
-    if (sz.isEmpty() == false)
+    if (not sz.isEmpty())
     {
         resize(sz);
     }

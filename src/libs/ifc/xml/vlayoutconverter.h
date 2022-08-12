@@ -64,7 +64,7 @@ protected:
     void ToV0_1_2();
 
 private:
-    Q_DISABLE_COPY(VLayoutConverter)
+    Q_DISABLE_COPY_MOVE(VLayoutConverter) // NOLINT
     static const QString LayoutMinVerStr;
 };
 

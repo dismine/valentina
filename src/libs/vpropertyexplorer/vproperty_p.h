@@ -87,7 +87,7 @@ public:
 
     virtual ~VPropertyPrivate();
 private:
-    Q_DISABLE_COPY(VPropertyPrivate)
+    Q_DISABLE_COPY_MOVE(VPropertyPrivate) // NOLINT
 };
 
 QT_WARNING_POP

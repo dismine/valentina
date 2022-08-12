@@ -36,7 +36,7 @@
 
 class VisToolFlippingByAxis : public VisOperation
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolFlippingByAxis(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolFlippingByAxis() = default;
@@ -49,7 +49,8 @@ public:
     virtual int type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolFlippingByAxis)};
 private:
-    Q_DISABLE_COPY(VisToolFlippingByAxis)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolFlippingByAxis) // NOLINT
 
     AxisType m_axisType;
 

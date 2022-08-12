@@ -35,8 +35,6 @@
 #include <QDebug>
 #include <QCoreApplication>
 
-#include "../vmisc/diagnostic.h"
-#include "../vmisc/def.h"
 #include "../vmisc/compatibility.h"
 #include "../vgeometry/vgobject.h"
 #include "vsapoint.h"
@@ -50,101 +48,101 @@ class VRawSAPoint;
 
 class VAbstractPiece
 {
-    Q_DECLARE_TR_FUNCTIONS(VAbstractPiece)
+    Q_DECLARE_TR_FUNCTIONS(VAbstractPiece) // NOLINT
 public:
     VAbstractPiece();
     VAbstractPiece(const VAbstractPiece &piece);
     virtual ~VAbstractPiece();
 
-    VAbstractPiece &operator=(const VAbstractPiece &piece);
+    auto operator=(const VAbstractPiece &piece) -> VAbstractPiece &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VAbstractPiece(const VAbstractPiece &&piece) Q_DECL_NOTHROW;
-    VAbstractPiece &operator=(VAbstractPiece &&piece) Q_DECL_NOTHROW;
+    VAbstractPiece(VAbstractPiece &&piece) Q_DECL_NOTHROW;
+    auto operator=(VAbstractPiece &&piece) Q_DECL_NOTHROW -> VAbstractPiece &;
 #endif
 
-    QString GetName() const;
-    void    SetName(const QString &value);
+    auto GetName() const -> QString;
+    void SetName(const QString &value);
 
-    bool IsForbidFlipping() const;
+    auto IsForbidFlipping() const -> bool;
     void SetForbidFlipping(bool value);
 
-    bool IsForceFlipping() const;
+    auto IsForceFlipping() const -> bool;
     void SetForceFlipping(bool value);
 
-    bool IsSeamAllowance() const;
+    auto IsSeamAllowance() const -> bool;
     void SetSeamAllowance(bool value);
 
-    bool IsSeamAllowanceBuiltIn() const;
+    auto IsSeamAllowanceBuiltIn() const -> bool;
     void SetSeamAllowanceBuiltIn(bool value);
 
-    bool IsHideMainPath() const;
+    auto IsHideMainPath() const -> bool;
     void SetHideMainPath(bool value);
 
-    qreal GetSAWidth() const;
-    void  SetSAWidth(qreal value);
+    auto GetSAWidth() const -> qreal;
+    void SetSAWidth(qreal value);
 
-    qreal GetMx() const;
-    void  SetMx(qreal value);
+    auto GetMx() const -> qreal;
+    void SetMx(qreal value);
 
-    qreal GetMy() const;
-    void  SetMy(qreal value);
+    auto GetMy() const -> qreal;
+    void SetMy(qreal value);
 
-    uint GetPriority() const;
+    auto GetPriority() const -> uint;
     void SetPriority(uint value);
 
-    QUuid GetUUID() const;
-    void  SetUUID(const QUuid &uuid);
-    void  SetUUID(const QString &uuid);
+    auto GetUUID() const -> QUuid;
+    void SetUUID(const QUuid &uuid);
+    void SetUUID(const QString &uuid);
 
     /**
      * @brief GetUniqueID returns unique piece id. Combines UUID and gradation label.
      * @return unique piece id.
      */
-    virtual QString GetUniqueID() const;
+    virtual auto GetUniqueID() const -> QString;
 
-    static QVector<QPointF> Equidistant(QVector<VSAPoint> points, qreal width, const QString &name);
-    static qreal            SumTrapezoids(const QVector<QPointF> &points);
-    static QVector<QPointF> CheckLoops(const QVector<QPointF> &points);
-    static QVector<QPointF> CheckLoops(const QVector<VRawSAPoint> &points);
-    static QVector<VRawSAPoint> EkvPoint(QVector<VRawSAPoint> points, const VSAPoint &p1Line1, const VSAPoint &p2Line1,
-                                         const VSAPoint &p1Line2, const VSAPoint &p2Line2, qreal width,
-                                         bool *needRollback = nullptr);
-    static QLineF           ParallelLine(const VSAPoint &p1, const VSAPoint &p2, qreal width);
-    static bool             IsAllowanceValid(const QVector<QPointF> &base, const QVector<QPointF> &allowance);
+    static auto Equidistant(QVector<VSAPoint> points, qreal width, const QString &name) -> QVector<QPointF>;
+    static auto SumTrapezoids(const QVector<QPointF> &points) -> qreal;
+    static auto CheckLoops(const QVector<QPointF> &points) -> QVector<QPointF>;
+    static auto CheckLoops(const QVector<VRawSAPoint> &points) -> QVector<QPointF>;
+    static auto EkvPoint(QVector<VRawSAPoint> points, const VSAPoint &p1Line1, const VSAPoint &p2Line1,
+                         const VSAPoint &p1Line2, const VSAPoint &p2Line2, qreal width,
+                         bool *needRollback = nullptr) -> QVector<VRawSAPoint>;
+    static auto ParallelLine(const VSAPoint &p1, const VSAPoint &p2, qreal width) -> QLineF;
+    static auto IsAllowanceValid(const QVector<QPointF> &base, const QVector<QPointF> &allowance) -> bool;
     template <class T>
-    static bool             IsInsidePolygon(const QVector<T> &path, const QVector<T> &polygon,
-                                            qreal accuracy = accuracyPointOnLine);
+    static auto IsInsidePolygon(const QVector<T> &path, const QVector<T> &polygon,
+                                qreal accuracy = accuracyPointOnLine) -> bool;
 
     template <class T>
-    static QVector<T> CorrectEquidistantPoints(const QVector<T> &points, bool removeFirstAndLast = true);
+    static auto CorrectEquidistantPoints(const QVector<T> &points, bool removeFirstAndLast = true) -> QVector<T>;
 
-    static QVector<VRawSAPoint> RollbackSeamAllowance(QVector<VRawSAPoint> points, const QLineF &cuttingEdge,
-                                                      bool *success);
+    static auto RollbackSeamAllowance(QVector<VRawSAPoint> points, const QLineF &cuttingEdge,
+                                      bool *success) -> QVector<VRawSAPoint>;
 
-    static QVector<QPointF> GrainlinePoints(const VGrainlineData &geom, const VContainer *pattern,
-                                            const QRectF &boundingRect, qreal &dAng);
+    static auto GrainlinePoints(const VGrainlineData &geom, const VContainer *pattern,
+                                const QRectF &boundingRect, qreal &dAng) -> QVector<QPointF>;
 
-    static QPainterPath PainterPath(const QVector<QPointF> &points);
+    static auto PainterPath(const QVector<QPointF> &points) -> QPainterPath;
 
-    friend QDataStream& operator<< (QDataStream& dataStream, const VAbstractPiece& piece);
-    friend QDataStream& operator>> (QDataStream& dataStream, VAbstractPiece& piece);
+    friend auto operator<< (QDataStream& dataStream, const VAbstractPiece& piece) -> QDataStream&;
+    friend auto operator>> (QDataStream& dataStream, VAbstractPiece& piece) -> QDataStream&;
 
 protected:
     template <class T>
-    static QVector<T> RemoveDublicates(const QVector<T> &points, bool removeFirstAndLast = true);
-    static bool       IsEkvPointOnLine(const QPointF &iPoint, const QPointF &prevPoint, const QPointF &nextPoint);
-    static bool       IsEkvPointOnLine(const VSAPoint &iPoint, const VSAPoint &prevPoint, const VSAPoint &nextPoint);
+    static auto RemoveDublicates(const QVector<T> &points, bool removeFirstAndLast = true) -> QVector<T>;
+    static auto IsEkvPointOnLine(const QPointF &iPoint, const QPointF &prevPoint, const QPointF &nextPoint) -> bool;
+    static auto IsEkvPointOnLine(const VSAPoint &iPoint, const VSAPoint &prevPoint, const VSAPoint &nextPoint) -> bool;
 
-    static bool             IsItemContained(const QRectF &parentBoundingRect, const QVector<QPointF> &shape, qreal &dX,
-                                        qreal &dY);
-    static QVector<QPointF> CorrectPosition(const QRectF &parentBoundingRect, QVector<QPointF> points);
-    static bool             FindGrainlineGeometry(const VGrainlineData& geom, const VContainer *pattern, qreal &length,
-                                                  qreal &rotationAngle, QPointF &pos);
+    static auto IsItemContained(const QRectF &parentBoundingRect, const QVector<QPointF> &shape, qreal &dX,
+                                qreal &dY) -> bool;
+    static auto CorrectPosition(const QRectF &parentBoundingRect, QVector<QPointF> points) -> QVector<QPointF>;
+    static auto FindGrainlineGeometry(const VGrainlineData& geom, const VContainer *pattern, qreal &length,
+                                      qreal &rotationAngle, QPointF &pos) -> bool;
 private:
     QSharedDataPointer<VAbstractPieceData> d;
 };
 
-Q_DECLARE_TYPEINFO(VAbstractPiece, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VAbstractPiece, Q_MOVABLE_TYPE); // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -153,7 +151,7 @@ Q_DECLARE_TYPEINFO(VAbstractPiece, Q_MOVABLE_TYPE);
  * @return corrected list.
  */
 template <class T>
-QVector<T> VAbstractPiece::CorrectEquidistantPoints(const QVector<T> &points, bool removeFirstAndLast)
+auto VAbstractPiece::CorrectEquidistantPoints(const QVector<T> &points, bool removeFirstAndLast) -> QVector<T>
 {
 //    DumpVector(points, QStringLiteral("input.json.XXXXXX")); // Uncomment for dumping test data
     if (points.size()<4)//Better don't check if only three points. We can destroy equidistant.
@@ -235,7 +233,7 @@ QVector<T> VAbstractPiece::CorrectEquidistantPoints(const QVector<T> &points, bo
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class T>
-QVector<T> VAbstractPiece::RemoveDublicates(const QVector<T> &points, bool removeFirstAndLast)
+auto VAbstractPiece::RemoveDublicates(const QVector<T> &points, bool removeFirstAndLast) -> QVector<T>
 {
     if (points.size() < 4)
     {
@@ -281,7 +279,7 @@ QVector<T> VAbstractPiece::RemoveDublicates(const QVector<T> &points, bool remov
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class T>
-bool VAbstractPiece::IsInsidePolygon(const QVector<T> &path, const QVector<T> &polygon, qreal accuracy)
+auto VAbstractPiece::IsInsidePolygon(const QVector<T> &path, const QVector<T> &polygon, qreal accuracy) -> bool
 {
     // Edges must not intersect
     for (auto i = 0; i < path.count(); ++i)
@@ -338,16 +336,8 @@ bool VAbstractPiece::IsInsidePolygon(const QVector<T> &path, const QVector<T> &p
 
     // Just instersection edges is not enough. The base must be inside of the allowance.
     QPolygonF allowancePolygon(polygon);
-
-    for (auto &point : path)
-    {
-        if (not allowancePolygon.containsPoint(point, Qt::WindingFill))
-        {
-            return false;
-        }
-    }
-
-    return true;
+    return std::all_of(path.begin(), path.end(), [allowancePolygon](const T &point)
+                       { return allowancePolygon.containsPoint(point, Qt::WindingFill); });
 }
 
 #endif // VABSTRACTPIECE_H

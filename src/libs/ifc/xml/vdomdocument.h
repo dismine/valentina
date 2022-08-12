@@ -83,7 +83,7 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
  */
 class VDomDocument : public QObject, public QDomDocument
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     static const QString AttrId;
     static const QString AttrText;
@@ -161,7 +161,8 @@ private slots:
     void CacheRefreshed();
 
 private:
-    Q_DISABLE_COPY(VDomDocument)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VDomDocument) // NOLINT
     /** @brief Map used for finding element by id. */
     QHash<quint32, QDomElement>  m_elementIdCache;
     QFutureWatcher<QHash<quint32, QDomElement>> *m_watcher;

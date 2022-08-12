@@ -51,7 +51,7 @@ public:
 
     VGrainlineData &operator=(const VGrainlineData &data);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VGrainlineData(const VGrainlineData &&data) Q_DECL_NOTHROW;
+    VGrainlineData(VGrainlineData &&data) Q_DECL_NOTHROW;
     VGrainlineData &operator=(VGrainlineData &&data) Q_DECL_NOTHROW;
 #endif
 

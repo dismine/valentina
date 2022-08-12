@@ -40,7 +40,7 @@
 
 class ScaleBackgroundImage : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     ScaleBackgroundImage(QUuid id, const QTransform &matrix, VAbstractPattern *doc, bool allowMerge = false,
                          QUndoCommand *parent = nullptr);
@@ -58,7 +58,7 @@ public:
 
 private:
     // cppcheck-suppress unknownMacro
-    Q_DISABLE_COPY_MOVE(ScaleBackgroundImage)
+    Q_DISABLE_COPY_MOVE(ScaleBackgroundImage) // NOLINT
 
     QUuid m_id;
     QTransform m_matrix;

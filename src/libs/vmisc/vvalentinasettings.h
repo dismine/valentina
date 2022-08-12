@@ -41,7 +41,7 @@
 
 class VValentinaSettings : public VCommonSettings
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VValentinaSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
               QObject *parent = nullptr);
@@ -238,7 +238,7 @@ public:
     void SetBackgroundImageDefOpacity(int value);
 
 private:
-    Q_DISABLE_COPY(VValentinaSettings)
+    Q_DISABLE_COPY_MOVE(VValentinaSettings) // NOLINT
 
     template <typename T>
     T GetCachedValue(T &cache, const QString &setting, T defValue, T valueMin, T valueMax) const;  

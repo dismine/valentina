@@ -45,7 +45,7 @@ class QGraphicsSceneContextMenuEvent;
 
 class VAbstractSimple : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VAbstractSimple(quint32 id, QObject *parent = nullptr);
     virtual ~VAbstractSimple() = default;
@@ -68,7 +68,7 @@ protected:
     GOType  type;
 
 private:
-    Q_DISABLE_COPY(VAbstractSimple)
+    Q_DISABLE_COPY_MOVE(VAbstractSimple) // NOLINT
 };
 
 #endif // VABSTRACTSIMPLE_H

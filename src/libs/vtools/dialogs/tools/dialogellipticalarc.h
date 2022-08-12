@@ -45,7 +45,7 @@ namespace Ui
 
 class DialogEllipticalArc : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     DialogEllipticalArc(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogEllipticalArc() override;
@@ -110,7 +110,7 @@ private slots:
     void ValidateAlias();
 
 private:
-    Q_DISABLE_COPY(DialogEllipticalArc)
+    Q_DISABLE_COPY_MOVE(DialogEllipticalArc) // NOLINT
 
     /** @brief ui keeps information about user interface */
     Ui::DialogEllipticalArc *ui;

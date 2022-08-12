@@ -62,29 +62,30 @@ class DialogMeasurementsCSVColumns;
 
 class DialogMeasurementsCSVColumns : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     DialogMeasurementsCSVColumns(const QString &filename, MeasurementsType type, QWidget *parent = nullptr);
     DialogMeasurementsCSVColumns(const QString &filename, MeasurementsType type,
                                  const QList<MeasurementDimension_p> &dimensions, QWidget *parent = nullptr);
-    virtual ~DialogMeasurementsCSVColumns();
+    ~DialogMeasurementsCSVColumns() override;
 
-    QVector<int> ColumnsMap() const;
+    auto ColumnsMap() const -> QVector<int>;
 
     void SetWithHeader(bool withHeader);
     void SetSeparator(const QChar &separator);
     void SetCodec(QTextCodec *codec);
 
 protected:
-    virtual void changeEvent(QEvent* event) override;
-    virtual void showEvent(QShowEvent *event) override;
+    void changeEvent(QEvent* event) override;
+    void showEvent(QShowEvent *event) override;
 
 private slots:
     void ColumnChanged();
 
 private:
-    Q_DISABLE_COPY(DialogMeasurementsCSVColumns)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogMeasurementsCSVColumns) // NOLINT
     Ui::DialogMeasurementsCSVColumns *ui;
     bool m_isInitialized{false};
     QString m_fileName;
@@ -96,17 +97,18 @@ private:
     QList<MeasurementDimension_p> m_dimensions{};
     QVector<QObject *> m_hackedWidgets{};
 
-    bool    ColumnMandatory(int column) const;
-    QString ColumnHeader(int column) const;
-    int     ImportColumnCount() const;
-    int     MinimumColumns() const;
-    bool    ColumnsValid();
+    auto ColumnMandatory(int column) const -> bool;
+    auto ColumnHeader(int column) const -> QString;
+    auto ImportColumnCount() const -> int;
+    auto MinimumColumns() const -> int;
+    auto ColumnsValid() -> bool;
+    void ClearColumnCollor();
 
     void InitColumnsMap();
     void InitColumnsControls();
     void InitImportHeaders();
 
-    QSharedPointer<QxtCsvModel> CSVModel() const;
+    auto CSVModel() const -> QSharedPointer<QxtCsvModel>;
 
     void ShowInputPreview();
     void ShowImportPreview();
@@ -129,7 +131,7 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QVector<int> DialogMeasurementsCSVColumns::ColumnsMap() const
+inline auto DialogMeasurementsCSVColumns::ColumnsMap() const -> QVector<int>
 {
     return m_columnsMap;
 }

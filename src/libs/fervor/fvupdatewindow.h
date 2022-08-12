@@ -28,6 +28,8 @@
 #include <QString>
 #include <QtGlobal>
 
+#include "../vmisc/defglobal.h"
+
 class QGraphicsScene;
 
 namespace Ui
@@ -37,7 +39,7 @@ namespace Ui
 
 class FvUpdateWindow : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit FvUpdateWindow(QWidget *parent = nullptr);
@@ -47,7 +49,8 @@ public:
     bool UpdateWindowWithCurrentProposedUpdate();
 
 private:
-    Q_DISABLE_COPY(FvUpdateWindow)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(FvUpdateWindow) // NOLINT
 
     Ui::FvUpdateWindow*	m_ui;
 };

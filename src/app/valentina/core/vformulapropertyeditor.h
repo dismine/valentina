@@ -35,23 +35,24 @@
 #include <QLabel>
 
 #include "../vpatterndb/vformula.h"
+#include "../vmisc/defglobal.h"
 
 class VFormulaPropertyEditor : public QWidget
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     //! Constructor taking a widget as parent
     explicit VFormulaPropertyEditor(QWidget *parent);
 
     //! Destructor
-    virtual ~VFormulaPropertyEditor() Q_DECL_EQ_DEFAULT;
+    ~VFormulaPropertyEditor() override Q_DECL_EQ_DEFAULT;
 
     //! Returns the formula currently set
-    VFormula GetFormula() const;
+    auto GetFormula() const -> VFormula;
 
     //! Needed for proper event handling
-    virtual bool eventFilter(QObject *obj, QEvent *ev) override;
+    auto eventFilter(QObject *obj, QEvent *ev) -> bool override;
 
 signals:
     //! This is emitted, when the user changes the color
@@ -67,10 +68,11 @@ private slots:
     void onToolButtonClicked();
 
 private:
-    Q_DISABLE_COPY(VFormulaPropertyEditor)
-    VFormula formula;
-    QToolButton* ToolButton;
-    QLabel* TextLabel;
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VFormulaPropertyEditor) // NOLINT
+    VFormula m_formula{};
+    QToolButton* m_ToolButton{nullptr};
+    QLabel* m_TextLabel{nullptr};
 };
 
 

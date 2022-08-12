@@ -44,7 +44,7 @@
 
 class VisToolTriangle : public VisLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolTriangle(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolTriangle() = default;
@@ -58,7 +58,8 @@ public:
     virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolTriangle)};
 private:
-    Q_DISABLE_COPY(VisToolTriangle)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolTriangle) // NOLINT
     quint32            object2Id;//axis second point
     quint32            hypotenuseP1Id;
     quint32            hypotenuseP2Id;

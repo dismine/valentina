@@ -41,7 +41,7 @@
 
 class VisToolLineIntersect :public VisLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolLineIntersect(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolLineIntersect() = default;
@@ -54,7 +54,8 @@ public:
     virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolLineIntersect)};
 private:
-    Q_DISABLE_COPY(VisToolLineIntersect)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolLineIntersect) // NOLINT
     quint32              line1P2Id;
     quint32              line2P1Id;
     quint32              line2P2Id;

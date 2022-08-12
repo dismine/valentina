@@ -31,9 +31,11 @@
 
 #include <QObject>
 
+#include "../vmisc/defglobal.h"
+
 class TST_VSplinePath : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_VSplinePath(QObject *parent = nullptr);
 private slots:
@@ -42,7 +44,7 @@ private slots:
     void TestFlip_data();
     void TestFlip();
 private:
-    Q_DISABLE_COPY(TST_VSplinePath)
+    Q_DISABLE_COPY_MOVE(TST_VSplinePath) // NOLINT
 };
 
 #endif // TST_VSPLINEPATH_H

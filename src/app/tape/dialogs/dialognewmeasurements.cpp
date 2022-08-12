@@ -29,17 +29,13 @@
 #include "dialognewmeasurements.h"
 #include "ui_dialognewmeasurements.h"
 
-#include "../vpatterndb/variables/vmeasurement.h"
-#include "../vtapesettings.h"
-#include "../mapplication.h"
-
 #include <QShowEvent>
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogNewMeasurements::DialogNewMeasurements(QWidget *parent)
     :QDialog(parent),
       ui(new Ui::DialogNewMeasurements),
-      isInitialized(false)
+      m_isInitialized(false)
 {
     ui->setupUi(this);
 
@@ -54,13 +50,13 @@ DialogNewMeasurements::~DialogNewMeasurements()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-MeasurementsType DialogNewMeasurements::Type() const
+auto DialogNewMeasurements::Type() const -> MeasurementsType
 {
     return static_cast<MeasurementsType>(ui->comboBoxMType->currentData().toInt());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Unit DialogNewMeasurements::MUnit() const
+auto DialogNewMeasurements::MUnit() const -> Unit
 {
     return static_cast<Unit>(ui->comboBoxUnit->currentData().toInt());
 }
@@ -89,7 +85,7 @@ void DialogNewMeasurements::showEvent(QShowEvent *event)
         return;
     }
 
-    if (isInitialized)
+    if (m_isInitialized)
     {
         return;
     }
@@ -98,7 +94,7 @@ void DialogNewMeasurements::showEvent(QShowEvent *event)
     setMaximumSize(size());
     setMinimumSize(size());
 
-    isInitialized = true;//first show windows are held
+    m_isInitialized = true;//first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------

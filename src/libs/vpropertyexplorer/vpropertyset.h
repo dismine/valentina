@@ -139,11 +139,11 @@ protected:
     //! The data
     VPropertySetPrivate* d_ptr;
 private:
-    Q_DISABLE_COPY(VPropertySet)
+    Q_DISABLE_COPY_MOVE(VPropertySet) // NOLINT
 };
 
 QT_WARNING_POP
 
-}
+}  // namespace VPE
 
 #endif // VPROPERTYMODEL_H

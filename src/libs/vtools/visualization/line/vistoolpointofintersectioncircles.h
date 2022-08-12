@@ -42,7 +42,7 @@
 
 class VisToolPointOfIntersectionCircles : public VisLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolPointOfIntersectionCircles(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolPointOfIntersectionCircles() = default;
@@ -58,7 +58,8 @@ public:
     virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPointOfIntersectionCircles)};
 private:
-    Q_DISABLE_COPY(VisToolPointOfIntersectionCircles)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolPointOfIntersectionCircles) // NOLINT
     quint32               object2Id;
     qreal                 c1Radius;
     qreal                 c2Radius;

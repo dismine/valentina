@@ -113,12 +113,12 @@ auto PuzzlePreferencesConfigurationPage::Apply() -> QStringList
 
     if (m_langChanged)
     {
-        const QString locale = qvariant_cast<QString>(ui->langCombo->currentData());
+        const auto locale = qvariant_cast<QString>(ui->langCombo->currentData());
         settings->SetLocale(locale);
         m_langChanged = false;
 
         VAbstractApplication::VApp()->LoadTranslation(locale);
-        qApp->processEvents();// force to call changeEvent
+        QCoreApplication::processEvents();// force to call changeEvent
     }
 
     /* Maximum number of commands in undo stack may only be set when the undo stack is empty, since setting it on a

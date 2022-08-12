@@ -41,7 +41,7 @@
 
 class VisToolBisector :public VisLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolBisector(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolBisector() = default;
@@ -53,7 +53,8 @@ public:
     virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolBisector)};
 private:
-    Q_DISABLE_COPY(VisToolBisector)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolBisector) // NOLINT
     quint32         object2Id;
     quint32         object3Id;
     VScaledEllipse *point;

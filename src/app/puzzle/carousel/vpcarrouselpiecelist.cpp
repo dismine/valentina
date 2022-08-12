@@ -35,15 +35,24 @@
 
 #include "vpcarrousel.h"
 #include "vpcarrouselpiece.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "vpmimedatapiece.h"
 #include "../layout/vpsheet.h"
 #include "../layout/vplayout.h"
 #include "../undocommands/vpundomovepieceonsheet.h"
+#include "../layout/vppiece.h"
 
 #include <QLoggingCategory>
 
-Q_LOGGING_CATEGORY(pCarrouselPieceList, "p.carrouselPieceList")
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
+QT_WARNING_DISABLE_INTEL(1418)
+
+Q_LOGGING_CATEGORY(pCarrouselPieceList, "p.carrouselPieceList") // NOLINT
+
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 VPCarrouselPieceList::VPCarrouselPieceList(QWidget* parent) :
@@ -70,7 +79,7 @@ void VPCarrouselPieceList::Refresh()
     if(not m_pieceList.isEmpty())
     {
         // create the corresponding carrousel pieces
-        for (auto piece : m_pieceList)
+        for (const auto &piece : qAsConst(m_pieceList)) // NOLINT(clang-analyzer-cplusplus.NewDeleteLeaks)
         {
             if (not piece.isNull())
             {
@@ -102,7 +111,8 @@ void VPCarrouselPieceList::mousePressEvent(QMouseEvent *event)
     if (!(event->modifiers() & Qt::ControlModifier))
     {
         // clearSelection doesn't work properly here so we go through the elements.
-        for(auto *item: selectedItems())
+        const QList<QListWidgetItem*> items = selectedItems();
+        for(auto *item: items)
         {
             item->setSelected(false);
         }
@@ -135,7 +145,8 @@ void VPCarrouselPieceList::startDrag(Qt::DropActions supportedActions)
     QListWidgetItem* _item = currentItem();
     if(_item->type() == VPCarrouselPiece::Type)
     {
-        auto *pieceItem = static_cast<VPCarrouselPiece *> (_item);
+        auto *pieceItem = dynamic_cast<VPCarrouselPiece *> (_item);
+        SCASSERT(pieceItem != nullptr)
 
         if (m_carrousel == nullptr)
         {
@@ -183,93 +194,96 @@ void VPCarrouselPieceList::dragMoveEvent(QDragMoveEvent* e)
 void VPCarrouselPieceList::contextMenuEvent(QContextMenuEvent *event)
 {
     QListWidgetItem* _item = currentItem();
-    if(_item != nullptr && _item->type() == VPCarrouselPiece::Type)
+    if(_item == nullptr || _item->type() != VPCarrouselPiece::Type)
     {
-        auto *pieceItem = static_cast<VPCarrouselPiece *> (_item);
+        return;
+    }
 
-        VPPiecePtr piece = pieceItem->GetPiece();
-        VPLayoutPtr layout = piece->Layout();
+    auto *pieceItem = dynamic_cast<VPCarrouselPiece *> (_item);
+    SCASSERT(pieceItem != nullptr)
 
-        if (piece.isNull() || layout.isNull())
+    VPPiecePtr piece = pieceItem->GetPiece();
+    VPLayoutPtr layout = piece->Layout();
+
+    if (piece.isNull() || layout.isNull())
+    {
+        return;
+    }
+
+    QMenu menu;
+
+    QVector<QAction*> moveToActions;
+
+    if (not piece->Sheet().isNull())
+    {
+        QList<VPSheetPtr> sheets = layout->GetSheets();
+        sheets.removeAll(piece->Sheet());
+
+        if (not sheets.isEmpty())
         {
-            return;
-        }
+            QMenu *moveMenu = menu.addMenu(tr("Move to"));
 
-        QMenu menu;
-
-        QVector<QAction*> moveToActions;
-
-        if (not piece->Sheet().isNull())
-        {
-            QList<VPSheetPtr> sheets = layout->GetSheets();
-            sheets.removeAll(piece->Sheet());
-
-            if (not sheets.isEmpty())
+            for (const auto &sheet : sheets)
             {
-                QMenu *moveMenu = menu.addMenu(tr("Move to"));
-
-                for (const auto &sheet : sheets)
+                if (not sheet.isNull())
                 {
-                    if (not sheet.isNull())
-                    {
-                        QAction* moveToSheet = moveMenu->addAction(sheet->GetName());
-                        moveToSheet->setData(QVariant::fromValue(sheet));
-                        moveToActions.append(moveToSheet);
-                    }
+                    QAction* moveToSheet = moveMenu->addAction(sheet->GetName());
+                    moveToSheet->setData(QVariant::fromValue(sheet));
+                    moveToActions.append(moveToSheet);
                 }
             }
         }
+    }
 
-        QAction *moveAction = menu.addAction(tr("Move to Sheet"));
-        moveAction->setVisible(false);
+    QAction *moveAction = menu.addAction(tr("Move to Sheet"));
+    moveAction->setVisible(false);
 
-        QAction *deleteAction = menu.addAction(tr("Delete"));
-        deleteAction->setVisible(false);
+    QAction *deleteAction = menu.addAction(tr("Delete"));
+    deleteAction->setVisible(false);
 
-        QAction *removeAction = menu.addAction(tr("Remove from Sheet"));
-        removeAction->setVisible(false);
+    QAction *removeAction = menu.addAction(tr("Remove from Sheet"));
+    removeAction->setVisible(false);
 
-        if(not m_pieceList.isEmpty() && ConstFirst(m_pieceList)->Sheet() == nullptr)
+    if(not m_pieceList.isEmpty() && ConstFirst(m_pieceList)->Sheet() == nullptr)
+    {
+        moveAction->setVisible(true);
+        deleteAction->setVisible(true);
+    }
+
+    if(not m_pieceList.isEmpty() && ConstFirst(m_pieceList)->Sheet() != nullptr)
+    {
+        removeAction->setVisible(true);
+    }
+
+    QAction *selectedAction = menu.exec(event->globalPos());
+
+    if (selectedAction == moveAction)
+    {
+        VPSheetPtr sheet = layout->GetFocusedSheet();
+        if (not sheet.isNull())
         {
-            moveAction->setVisible(true);
-            deleteAction->setVisible(true);
-        }
-
-        if(not m_pieceList.isEmpty() && ConstFirst(m_pieceList)->Sheet() != nullptr)
-        {
-            removeAction->setVisible(true);
-        }
-
-        QAction *selectedAction = menu.exec(event->globalPos());
-
-        if (selectedAction == moveAction)
-        {
-            VPSheetPtr sheet = layout->GetFocusedSheet();
-            if (not sheet.isNull())
-            {
-                piece->ClearTransformations();
-                QRectF rect = sheet->GetMarginsRect();
-                piece->SetPosition(QPointF(rect.topLeft().x() + 1, rect.topLeft().y() + 1));
-                piece->SetZValue(1.0);
-                auto *command = new VPUndoMovePieceOnSheet(layout->GetFocusedSheet(), piece);
-                layout->UndoStack()->push(command);
-            }
-        }
-        else if (selectedAction == deleteAction)
-        {
-            auto *command = new VPUndoMovePieceOnSheet(layout->GetTrashSheet(), piece);
+            piece->ClearTransformations();
+            QRectF rect = sheet->GetMarginsRect();
+            piece->SetPosition(QPointF(rect.topLeft().x() + 1, rect.topLeft().y() + 1));
+            piece->SetZValue(1.0);
+            auto *command = new VPUndoMovePieceOnSheet(layout->GetFocusedSheet(), piece);
             layout->UndoStack()->push(command);
         }
-        else if (selectedAction == removeAction)
-        {
-            auto *command = new VPUndoMovePieceOnSheet(VPSheetPtr(), piece);
-            layout->UndoStack()->push(command);
-        }
-        else if (moveToActions.contains(selectedAction))
-        {
-            auto *command = new VPUndoMovePieceOnSheet(qvariant_cast<VPSheetPtr>(selectedAction->data()), piece);
-            layout->UndoStack()->push(command);
-        }
+    }
+    else if (selectedAction == deleteAction)
+    {
+        auto *command = new VPUndoMovePieceOnSheet(layout->GetTrashSheet(), piece);
+        layout->UndoStack()->push(command);
+    }
+    else if (selectedAction == removeAction)
+    {
+        auto *command = new VPUndoMovePieceOnSheet(VPSheetPtr(), piece);
+        layout->UndoStack()->push(command);
+    }
+    else if (moveToActions.contains(selectedAction))
+    {
+        auto *command = new VPUndoMovePieceOnSheet(qvariant_cast<VPSheetPtr>(selectedAction->data()), piece);
+        layout->UndoStack()->push(command);
     }
 }
 
@@ -282,7 +296,8 @@ void VPCarrouselPieceList::on_SelectionChangedExternal()
         QListWidgetItem* _item = item(i);
         if(_item->type() == VPCarrouselPiece::Type)
         {
-            auto *itemPiece = static_cast<VPCarrouselPiece *> (_item);
+            auto *itemPiece = dynamic_cast<VPCarrouselPiece *> (_item);
+            SCASSERT(itemPiece != nullptr)
             itemPiece->RefreshSelection();
         }
     }

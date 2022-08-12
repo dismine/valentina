@@ -39,6 +39,7 @@
 #include <stdint.h>
 
 #include "../vmisc/diagnostic.h"
+#include "../vmisc/defglobal.h"
 
 #include <QFileInfo>
 #include <QLockFile>
@@ -70,7 +71,8 @@ public:
     QString         GetLockFile() const;
 
 private:
-    Q_DISABLE_COPY(VLockGuard<Guarded>)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VLockGuard<Guarded>) // NOLINT
 
     QSharedPointer<Guarded>   holder;
     int                       lockError;

@@ -38,7 +38,7 @@
 
 class VisToolPiece : public VisPath
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VisToolPiece(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolPiece() Q_DECL_EQ_DEFAULT;
@@ -48,7 +48,7 @@ public:
     virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPiece)};
 private:
-    Q_DISABLE_COPY(VisToolPiece)
+    Q_DISABLE_COPY_MOVE(VisToolPiece) // NOLINT
     QVector<VScaledEllipse *> m_points;
     QVector<VCurvePathItem *> m_curves;
 

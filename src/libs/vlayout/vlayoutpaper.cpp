@@ -83,8 +83,8 @@ VLayoutPaper &VLayoutPaper::operator=(const VLayoutPaper &paper)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutPaper::VLayoutPaper(const VLayoutPaper &&paper) Q_DECL_NOTHROW
-    :d (paper.d)
+VLayoutPaper::VLayoutPaper(VLayoutPaper &&paper) Q_DECL_NOTHROW
+    :d (std::move(paper.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

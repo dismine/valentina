@@ -42,7 +42,7 @@ class VLayoutPiece;
 
 class VLayoutExporter
 {
-    Q_DECLARE_TR_FUNCTIONS(VLayoutExporter)
+    Q_DECLARE_TR_FUNCTIONS(VLayoutExporter) // NOLINT
 public:
     VLayoutExporter() = default;
 

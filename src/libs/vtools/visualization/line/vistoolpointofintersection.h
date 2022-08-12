@@ -43,7 +43,7 @@
 
 class VisToolPointOfIntersection : public VisLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolPointOfIntersection(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolPointOfIntersection() = default;
@@ -54,7 +54,8 @@ public:
     virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolPointOfIntersection)};
 private:
-    Q_DISABLE_COPY(VisToolPointOfIntersection)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolPointOfIntersection) // NOLINT
     quint32              point2Id;
     VScaledEllipse *point;
     VScaledEllipse *axisP1;//axis1 is class themself

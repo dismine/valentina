@@ -39,7 +39,13 @@
 #include <QUndoStack>
 #include <QPixmapCache>
 
-Q_LOGGING_CATEGORY(pLayout, "p.layout")
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
+QT_WARNING_DISABLE_INTEL(1418)
+
+Q_LOGGING_CATEGORY(pLayout, "p.layout") // NOLINT
+
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 VPLayout::VPLayout(QUndoStack *undoStack) :
@@ -118,13 +124,13 @@ void VPLayout::AddPiece(const VPPiecePtr &piece)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QUuid &VPLayout::Uuid() const
+auto VPLayout::Uuid() const -> const QUuid &
 {
     return m_uuid;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPTileFactory *VPLayout::TileFactory() const
+auto VPLayout::TileFactory() const -> VPTileFactory *
 {
     return m_tileFactory;
 }
@@ -166,7 +172,7 @@ auto VPLayout::WatermarkData() const -> VWatermarkData
             data.invalidFile = true;
             data.opacity = 20;
             data.showImage = true;
-            data.path = "fake.png";
+            data.path = QStringLiteral("fake.png");
             data.showText = false;
             return data;
         }
@@ -254,7 +260,7 @@ auto VPLayout::AddSheet(const VPSheetPtr &sheet) -> VPSheetPtr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<VPSheetPtr> VPLayout::GetAllSheets() const
+auto VPLayout::GetAllSheets() const -> QList<VPSheetPtr>
 {
     return m_sheets;
 }

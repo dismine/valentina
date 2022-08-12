@@ -42,7 +42,7 @@
 
 class AddPiece : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     AddPiece(const QDomElement &xml, VAbstractPattern *doc, VContainer data, VMainGraphicsScene *scene,
              const QString &drawName = QString(), QUndoCommand *parent = nullptr);
@@ -53,7 +53,7 @@ public:
     // cppcheck-suppress unusedFunction
     virtual void redo() override;
 private:
-    Q_DISABLE_COPY(AddPiece)
+    Q_DISABLE_COPY_MOVE(AddPiece) // NOLINT
 
     VPiece m_detail;
     QString m_drawName;

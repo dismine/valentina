@@ -48,7 +48,7 @@ public:
 
 private:
     // cppcheck-suppress unknownMacro
-    Q_DISABLE_COPY_MOVE(ResetBackgroundImage)
+    Q_DISABLE_COPY_MOVE(ResetBackgroundImage) // NOLINT
 
     QUuid m_id;
     QTransform m_oldMatrix{};

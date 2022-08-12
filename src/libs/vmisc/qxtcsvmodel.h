@@ -52,7 +52,7 @@ class QxtCsvModelPrivate;
 
 class QxtCsvModel final : public QAbstractTableModel
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit QxtCsvModel(QObject *parent = nullptr);
     explicit QxtCsvModel(QIODevice *file, QObject *parent = nullptr, bool withHeader = false, QChar separator = ',',
@@ -116,7 +116,7 @@ public:
     virtual Qt::ItemFlags flags(const QModelIndex& index) const override;
 
 private:
-    Q_DISABLE_COPY(QxtCsvModel)
+    Q_DISABLE_COPY_MOVE(QxtCsvModel) // NOLINT
     QXT_DECLARE_PRIVATE(QxtCsvModel)
 };
 Q_DECLARE_OPERATORS_FOR_FLAGS(QxtCsvModel::QuoteMode)

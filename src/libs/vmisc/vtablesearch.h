@@ -35,9 +35,11 @@
 #include <QTableWidget>
 #include <QtGlobal>
 
+#include "../vmisc/defglobal.h"
+
 class VTableSearch: public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VTableSearch(QTableWidget *table, QObject *parent = nullptr);
 
@@ -71,7 +73,8 @@ signals:
     void HasResult(bool state);
 
 private:
-    Q_DISABLE_COPY(VTableSearch)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VTableSearch) // NOLINT
 
     QTableWidget *table;
     int           searchIndex{-1};

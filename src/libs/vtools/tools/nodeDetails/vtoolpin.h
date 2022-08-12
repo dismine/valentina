@@ -47,7 +47,7 @@ struct VToolPinInitData : VAbstractNodeInitData
 
 class VToolPin : public VAbstractNode
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     static VToolPin* Create(const QPointer<DialogTool> &dialog, VAbstractPattern *doc, VContainer *data);
     static VToolPin *Create(VToolPinInitData initData);
@@ -63,7 +63,8 @@ protected:
     virtual void ShowNode() override {}
     virtual void HideNode() override {}
 private:
-    Q_DISABLE_COPY(VToolPin)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VToolPin) // NOLINT
 
     quint32 m_pieceId;
 

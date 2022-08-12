@@ -44,10 +44,10 @@ class VPPiece;
 
 class VPMainGraphicsView : public VMainGraphicsView
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VPMainGraphicsView(const VPLayoutPtr &layout, QWidget *parent);
-    ~VPMainGraphicsView() = default;
+    ~VPMainGraphicsView() override = default;
 
     /**
      * @brief RefreshLayout Refreshes the rectangles for the layout border and the margin
@@ -91,7 +91,8 @@ private slots:
     void on_SceneMouseMove(const QPointF &scenePos);
 
 private:
-    Q_DISABLE_COPY(VPMainGraphicsView)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VPMainGraphicsView) // NOLINT
 
     VPLayoutWeakPtr m_layout;
 
@@ -110,6 +111,9 @@ private:
     void ClearSelection();
 
     void ZValueMove(int move);
+
+    void RemovePiece() const;
+    void MovePiece(QKeyEvent *event);
 };
 
 #endif // VPMAINGRAPHICSVIEW_H

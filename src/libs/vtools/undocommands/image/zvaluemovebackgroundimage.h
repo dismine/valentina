@@ -51,7 +51,7 @@ public:
     void redo() override;
 private:
     // cppcheck-suppress unknownMacro
-    Q_DISABLE_COPY_MOVE(ZValueMoveBackgroundImage)
+    Q_DISABLE_COPY_MOVE(ZValueMoveBackgroundImage) // NOLINT
     QUuid m_id;
     ZValueMove m_move;
     QHash<QUuid, qreal> m_oldValues{};

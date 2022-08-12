@@ -29,9 +29,9 @@
 #ifndef DIALOGSAVELAYOUT_H
 #define DIALOGSAVELAYOUT_H
 
-#include "../vgeometry/vgeometrydef.h"
 #include "../vlayout/dialogs/vabstractlayoutdialog.h"
 #include "../vlayout/vlayoutdef.h"
+#include "../vmisc/def.h"
 
 namespace Ui
 {
@@ -40,49 +40,49 @@ namespace Ui
 
 class DialogSaveLayout : public  VAbstractLayoutDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogSaveLayout(int count, Draw mode = Draw::Layout, const QString &fileName = QString(),
                               QWidget *parent = nullptr);
-    virtual ~DialogSaveLayout();
+    ~DialogSaveLayout() override;
 
-    QString Path() const;
-    QString FileName() const;
+    auto Path() const -> QString;
+    auto FileName() const -> QString;
 
-    LayoutExportFormats Format() const;
-    void                SelectFormat(LayoutExportFormats format);
+    auto Format() const -> LayoutExportFormats;
+    void SelectFormat(LayoutExportFormats format);
 
     void SetBinaryDXFFormat(bool binary);
-    bool IsBinaryDXFFormat() const;
+    auto IsBinaryDXFFormat() const -> bool;
 
-    static QString MakeHelpFormatList();
-    void   SetDestinationPath(const QString& cmdDestinationPath);
+    static auto MakeHelpFormatList() -> QString;
+    void SetDestinationPath(const QString& cmdDestinationPath);
 
-    Draw Mode() const;
+    auto Mode() const -> Draw;
 
-    bool IsTextAsPaths() const;
+    auto IsTextAsPaths() const -> bool;
     void SetTextAsPaths(bool textAsPaths);
 
     void SetTiledExportMode(bool tiledExportMode);
 
-    void      SetTiledMargins(QMarginsF margins);
-    QMarginsF GetTiledMargins() const;
+    void SetTiledMargins(QMarginsF margins);
+    auto GetTiledMargins() const -> QMarginsF;
 
-    void              SetTiledPageFormat(PaperSizeTemplate format);
-    PaperSizeTemplate GetTiledPageFormat() const;
+    void SetTiledPageFormat(PaperSizeTemplate format);
+    auto GetTiledPageFormat() const -> PaperSizeTemplate;
 
-    void            SetTiledPageOrientation(PageOrientation orientation);
-    PageOrientation GetTiledPageOrientation() const;
+    void SetTiledPageOrientation(PageOrientation orientation);
+    auto GetTiledPageOrientation() const -> PageOrientation;
 
-    void  SetXScale(qreal scale);
-    qreal GetXScale() const;
+    void SetXScale(qreal scale);
+    auto GetXScale() const -> qreal;
 
-    void  SetYScale(qreal scale);
-    qreal GetYScale() const;
+    void SetYScale(qreal scale);
+    auto GetYScale() const -> qreal;
 
 protected:
-    virtual void showEvent(QShowEvent *event) override;
+    void showEvent(QShowEvent *event) override;
 
 private slots:
     void Save();
@@ -92,18 +92,19 @@ private slots:
     void HorizontalScaleChanged(double d);
     void VerticalScaleChanged(double d);
 private:
-    Q_DISABLE_COPY(DialogSaveLayout)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogSaveLayout) // NOLINT
     Ui::DialogSaveLAyout *ui;
-    int count;
-    bool isInitialized;
+    int m_count;
+    bool m_isInitialized{false};
     Draw m_mode;
-    bool m_tiledExportMode;
+    bool m_tiledExportMode{false};
     bool m_scaleConnected{true};
 
-    static bool havePdf;
-    static bool tested;
-    static bool SupportPSTest();
-    static QVector<std::pair<QString, LayoutExportFormats> > InitFormats();
+    static bool havePdf; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+    static bool tested; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+    static auto SupportPSTest() -> bool;
+    static auto InitFormats() -> QVector<std::pair<QString, LayoutExportFormats> >;
 
     void RemoveFormatFromList(LayoutExportFormats format);
 

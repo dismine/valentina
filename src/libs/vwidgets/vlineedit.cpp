@@ -48,7 +48,7 @@ public:
     virtual QStringList splitPath(const QString& path) const override;
 
 private:
-    Q_DISABLE_COPY(MultiSelectCompleter)
+    Q_DISABLE_COPY_MOVE(MultiSelectCompleter) // NOLINT
 };
 }
 

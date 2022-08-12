@@ -47,7 +47,7 @@ struct VToolFlippingByAxisInitData : VAbstractOperationInitData
 
 class VToolFlippingByAxis : public VAbstractFlipping
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     virtual ~VToolFlippingByAxis() Q_DECL_EQ_DEFAULT;
     virtual void setDialog() override;
@@ -76,7 +76,7 @@ protected:
     virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     virtual QString MakeToolTip() const override;
 private:
-    Q_DISABLE_COPY(VToolFlippingByAxis)
+    Q_DISABLE_COPY_MOVE(VToolFlippingByAxis) // NOLINT
 
     quint32  m_originPointId;
     AxisType m_axisType;

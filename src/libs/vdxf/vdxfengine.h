@@ -101,7 +101,7 @@ public:
     QString ErrorString() const;
 
 private:
-    Q_DISABLE_COPY(VDxfEngine)
+    Q_DISABLE_COPY_MOVE(VDxfEngine) // NOLINT
     QSize            size;
     double           resolution;
     QString          fileName;

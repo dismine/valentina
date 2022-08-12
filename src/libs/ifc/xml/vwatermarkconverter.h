@@ -55,7 +55,7 @@ protected:
     virtual bool IsReadOnly() const override {return false;}
 
 private:
-    Q_DISABLE_COPY(VWatermarkConverter)
+    Q_DISABLE_COPY_MOVE(VWatermarkConverter) // NOLINT
     static const QString WatermarkMinVerStr;
 
     void ToV1_1_0();

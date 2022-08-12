@@ -41,30 +41,31 @@ class QComboBox;
 
 class PreferencesPatternPage : public QWidget
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit PreferencesPatternPage(QWidget *parent = nullptr);
-    virtual ~PreferencesPatternPage();
+    ~PreferencesPatternPage() override;
 
-    QStringList Apply();
+    auto Apply() -> QStringList;
     void InitDefaultSeamAllowance();
 
 protected:
-    virtual void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent* event) override;
 
 private slots:
     void EditDateTimeFormats();
     void ManageKnownMaterials();
 
 private:
-    Q_DISABLE_COPY(PreferencesPatternPage)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(PreferencesPatternPage) // NOLINT
     Ui::PreferencesPatternPage *ui;
-    QStringList m_knownMaterials;
-    Unit m_oldLineUnit;
+    QStringList m_knownMaterials{};
+    Unit m_oldLineUnit{Unit::Mm};
 
     void InitLabelDateTimeFormats();
-    void InitComboBoxFormats(QComboBox *box, const QStringList &items, const QString &currentFormat);
+    static void InitComboBoxFormats(QComboBox *box, const QStringList &items, const QString &currentFormat);
     void InitUnits();
     void RetranslateUi();
 

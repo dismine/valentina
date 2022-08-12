@@ -40,7 +40,7 @@
 
 class AddPatternPiece : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     AddPatternPiece(const QDomElement &xml, VAbstractPattern *doc, const QString &namePP,
                     QUndoCommand *parent = nullptr);
@@ -48,7 +48,8 @@ public:
     virtual void undo() override;
     virtual void redo() override;
 private:
-    Q_DISABLE_COPY(AddPatternPiece)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(AddPatternPiece) // NOLINT
     QString    namePP;
 };
 

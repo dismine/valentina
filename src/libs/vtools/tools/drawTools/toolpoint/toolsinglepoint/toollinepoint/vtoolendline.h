@@ -63,7 +63,7 @@ struct VToolEndLineInitData : VToolLinePointInitData
  */
 class VToolEndLine : public VToolLinePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     virtual ~VToolEndLine() Q_DECL_EQ_DEFAULT;
     virtual void setDialog() override;
@@ -86,7 +86,7 @@ protected:
     virtual void ReadToolAttributes(const QDomElement &domElement) override;
     virtual void SetVisualization() override;
 private:
-    Q_DISABLE_COPY(VToolEndLine)
+    Q_DISABLE_COPY_MOVE(VToolEndLine) // NOLINT
 
     QString formulaAngle;
 

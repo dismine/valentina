@@ -33,7 +33,7 @@
 
 class TST_VLockGuard : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_VLockGuard(QObject *parent = nullptr);
 

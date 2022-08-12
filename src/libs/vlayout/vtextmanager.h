@@ -70,7 +70,7 @@ private:
  */
 class VTextManager
 {
-    Q_DECLARE_TR_FUNCTIONS(VTextManager)
+    Q_DECLARE_TR_FUNCTIONS(VTextManager) // NOLINT
 public:
     VTextManager();
     virtual ~VTextManager() = default;

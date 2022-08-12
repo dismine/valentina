@@ -43,7 +43,6 @@ class VApplication : public VAbstractValApplication
 {
     Q_OBJECT // NOLINT
 public:
-
     VApplication(int &argc, char ** argv);
     ~VApplication() override;
 

@@ -31,18 +31,22 @@
 
 #include <QXmlStreamReader>
 #include "../ifc/xml/vabstractconverter.h"
-#include "../layout/vplayout.h"
-#include "../layout/vppiece.h"
+#include "../layout/layoutdef.h"
+#include "../vmisc/defglobal.h"
 
 #include <QLoggingCategory>
 
-Q_DECLARE_LOGGING_CATEGORY(MLReader)
+Q_DECLARE_LOGGING_CATEGORY(MLReader) // NOLINT
 
 struct TextLine;
+struct VLayoutPassmark;
+struct VLayoutPlaceLabel;
+class VLayoutPiecePath;
+class VTextManager;
 
 class VPLayoutFileReader : public QXmlStreamReader
 {
-    Q_DECLARE_TR_FUNCTIONS(VPLayoutFileReader)
+    Q_DECLARE_TR_FUNCTIONS(VPLayoutFileReader) // NOLINT
 public:
     VPLayoutFileReader()=default;
     ~VPLayoutFileReader()=default;
@@ -50,7 +54,8 @@ public:
     auto ReadFile(const VPLayoutPtr &layout, QFile *file) -> bool;
 
 private:
-    Q_DISABLE_COPY(VPLayoutFileReader)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VPLayoutFileReader) // NOLINT
 
     void ReadLayout(const VPLayoutPtr &layout);
     void ReadProperties(const VPLayoutPtr &layout);

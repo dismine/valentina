@@ -32,6 +32,8 @@
 #include <QDialog>
 #include <QMap>
 
+#include "../vmisc/defglobal.h"
+
 namespace Ui
 {
     class DialogEditLabel;
@@ -46,7 +48,7 @@ class VContainer;
 
 class DialogEditLabel : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogEditLabel(const VAbstractPattern *doc, const VContainer *data, QWidget *parent = nullptr);
@@ -72,7 +74,8 @@ private slots:
     void SaveAdditionalFontSize(int i);
 
 private:
-    Q_DISABLE_COPY(DialogEditLabel)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(DialogEditLabel) // NOLINT
     Ui::DialogEditLabel *ui;
     QMenu               *m_placeholdersMenu;
     const VAbstractPattern *m_doc;

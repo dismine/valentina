@@ -36,27 +36,27 @@
 
 class VPUndoPieceRotate : public VPUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VPUndoPieceRotate(const VPPiecePtr &piece, const VPTransformationOrigon &origin, qreal angle, qreal angleSum,
                       bool allowMerge = false, QUndoCommand *parent = nullptr);
 
-    virtual ~VPUndoPieceRotate()=default;
+    ~VPUndoPieceRotate() override =default;
 
-    virtual void undo() override;
-    virtual void redo() override;
+    void undo() override;
+    void redo() override;
     // cppcheck-suppress unusedFunction
-    virtual auto mergeWith(const QUndoCommand *command) -> bool override;
-    virtual auto id() const -> int override ;
+    auto mergeWith(const QUndoCommand *command) -> bool override;
+    auto id() const -> int override;
 
     auto Piece() const -> VPPiecePtr;
     auto Origin() const -> VPTransformationOrigon;
     auto Angle() const -> qreal;
 
-    bool FollowGrainline() const;
+    auto FollowGrainline() const -> bool;
 
 private:
-    Q_DISABLE_COPY(VPUndoPieceRotate)
+    Q_DISABLE_COPY_MOVE(VPUndoPieceRotate) // NOLINT
 
     bool           m_firstCall{true};
     VPPieceWeakPtr m_piece;
@@ -94,17 +94,17 @@ inline auto VPUndoPieceRotate::FollowGrainline() const -> bool
 // Rotate pieces
 class VPUndoPiecesRotate : public VPUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VPUndoPiecesRotate(const QList<VPPiecePtr> &pieces, const VPTransformationOrigon &origin, qreal angle,
                                 qreal angleSum, bool allowMerge = false, QUndoCommand *parent = nullptr);
-    virtual ~VPUndoPiecesRotate()=default;
+    ~VPUndoPiecesRotate() override =default;
 
-    virtual void undo() override;
-    virtual void redo() override;
+    void undo() override;
+    void redo() override;
     // cppcheck-suppress unusedFunction
-    virtual auto mergeWith(const QUndoCommand *command) -> bool override;
-    virtual auto id() const -> int override ;
+    auto mergeWith(const QUndoCommand *command) -> bool override;
+    auto id() const -> int override;
 
     auto PieceIds() const -> QSet<QString>;
     auto Origin() const -> VPTransformationOrigon;
@@ -112,7 +112,7 @@ public:
     auto FollowGrainline() const -> bool;
 
 private:
-    Q_DISABLE_COPY(VPUndoPiecesRotate)
+    Q_DISABLE_COPY_MOVE(VPUndoPiecesRotate) // NOLINT
 
     bool                      m_firstCall{true};
     QVector<VPPieceWeakPtr>   m_pieces{};

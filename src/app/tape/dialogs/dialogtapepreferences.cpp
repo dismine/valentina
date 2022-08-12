@@ -40,7 +40,6 @@
 DialogTapePreferences::DialogTapePreferences(QWidget *parent)
     :QDialog(parent),
      ui(new Ui::DialogTapePreferences),
-     m_isInitialized(false),
      m_configurationPage(new TapePreferencesConfigurationPage),
      m_pathPage(new TapePreferencesPathPage)
 {

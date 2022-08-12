@@ -48,7 +48,7 @@
  */
 class VControlPointSpline : public QObject, public VScenePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position, QGraphicsItem * parent = nullptr);
     VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position, const QPointF &controlPoint,
@@ -90,7 +90,7 @@ protected:
     virtual void      mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
     virtual void      contextMenuEvent ( QGraphicsSceneContextMenuEvent *event ) override;
 private:
-    Q_DISABLE_COPY(VControlPointSpline)
+    Q_DISABLE_COPY_MOVE(VControlPointSpline) // NOLINT
     /** @brief indexSpline index spline in list.. */
     qint32            indexSpline;
 

@@ -49,7 +49,7 @@ namespace Ui
 
 class DialogFlippingByLine : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogFlippingByLine(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
@@ -106,7 +106,7 @@ private slots:
     void PointChanged();
 
 private:
-    Q_DISABLE_COPY(DialogFlippingByLine)
+    Q_DISABLE_COPY_MOVE(DialogFlippingByLine) // NOLINT
 
     Ui::DialogFlippingByLine *ui;
 

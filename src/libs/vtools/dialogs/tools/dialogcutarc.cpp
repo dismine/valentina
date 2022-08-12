@@ -309,8 +309,7 @@ void DialogCutArc::SetPointName(const QString &value)
  */
 QString DialogCutArc::GetFormula() const
 {
-    return VAbstractApplication::VApp()->TrVars()
-            ->TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

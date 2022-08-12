@@ -36,10 +36,10 @@
 
 class VPCarrouselPieceList : public QListWidget
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VPCarrouselPieceList(QWidget* parent);
-    virtual ~VPCarrouselPieceList() = default;
+    ~VPCarrouselPieceList() override = default;
 
     /**
      * @brief Refresh refreshes the items of the carrousel piece list
@@ -74,7 +74,7 @@ protected:
     void contextMenuEvent(QContextMenuEvent *event) override;
 
 private:
-    Q_DISABLE_COPY(VPCarrouselPieceList)
+    Q_DISABLE_COPY_MOVE(VPCarrouselPieceList) // NOLINT
 
     QList<VPPiecePtr> m_pieceList{};
     QPoint m_dragStart{};

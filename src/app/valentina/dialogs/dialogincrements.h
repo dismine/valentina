@@ -90,10 +90,10 @@ private:
     Ui::DialogIncrements *ui;
 
     /** @brief data container with data */
-    VContainer *data; // need because we must change data //-V703
+    VContainer *m_data; // need because we must change data //-V703
 
     /** @brief doc dom document container */
-    VPattern *doc;
+    VPattern *m_doc;
 
     /** @brief m_completeData need to show all internal variables */
     VContainer m_completeData;

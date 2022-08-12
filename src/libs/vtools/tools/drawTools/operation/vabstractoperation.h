@@ -70,7 +70,7 @@ struct VAbstractOperationInitData : VDrawToolInitData
 // And i don't know how to fix it.
 class VAbstractOperation : public VDrawTool, public QGraphicsLineItem
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
     // Fix warning "Class implements the interface QGraphicsItem but does not list it
     // in Q_INTERFACES. qobject_cast to QGraphicsItem will not work!"
     Q_INTERFACES(QGraphicsItem)
@@ -179,7 +179,7 @@ protected:
 
     static void CreateVisibilityGroup(const VAbstractOperationInitData & initData);
 private:
-    Q_DISABLE_COPY(VAbstractOperation)
+    Q_DISABLE_COPY_MOVE(VAbstractOperation) // NOLINT
 
     void AllowCurveHover(bool enabled, GOType type);
     void AllowCurveSelecting(bool enabled, GOType type);

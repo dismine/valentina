@@ -59,7 +59,7 @@ struct VToolCutInitData : VToolSinglePointInitData
 
 class VToolCut : public VToolSinglePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VToolCut(const VToolCutInitData &initData, QGraphicsItem * parent = nullptr);
     virtual int   type() const override {return Type;}
@@ -99,7 +99,7 @@ protected:
     void ShowToolVisualization(bool show);
 
 private:
-    Q_DISABLE_COPY(VToolCut)
+    Q_DISABLE_COPY_MOVE(VToolCut) // NOLINT
 };
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -43,7 +43,7 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 
 class VPROPERTYEXPLORERSHARED_EXPORT VEnumProperty : public VProperty
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     //! Constructor
     explicit VEnumProperty(const QString& name);
@@ -105,7 +105,7 @@ protected:
     // No use of d-pointer in this case, because it is unlikely this will change. If it does, we can still add other
     //members by reimplementing the VPropertyPrivate class without touching this header file.
 private:
-    Q_DISABLE_COPY(VEnumProperty)
+    Q_DISABLE_COPY_MOVE(VEnumProperty) // NOLINT
 };
 
 QT_WARNING_POP

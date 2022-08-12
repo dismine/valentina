@@ -52,7 +52,7 @@ public:
 
     VLengthLine &operator=(const VLengthLine &var);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VLengthLine(const VLengthLine &&var) Q_DECL_NOTHROW;
+    VLengthLine(VLengthLine &&var) Q_DECL_NOTHROW;
     VLengthLine &operator=(VLengthLine &&var) Q_DECL_NOTHROW;
 #endif
 
@@ -64,6 +64,6 @@ private:
     QSharedDataPointer<VLengthLineData> d;
 };
 
-Q_DECLARE_TYPEINFO(VLengthLine, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VLengthLine, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VLINELENGTH_H

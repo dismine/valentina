@@ -30,10 +30,11 @@
 #define TST_VELLIPTICALARC_H
 
 #include "../vtest/abstracttest.h"
+#include "../vmisc/defglobal.h"
 
 class TST_VEllipticalArc : public AbstractTest
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_VEllipticalArc(QObject *parent = nullptr);
 
@@ -59,7 +60,8 @@ private slots:
     void EmptyArc();
 
 private:
-    Q_DISABLE_COPY(TST_VEllipticalArc)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(TST_VEllipticalArc) // NOLINT
     void TestData();
 };
 

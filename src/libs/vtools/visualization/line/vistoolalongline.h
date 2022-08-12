@@ -41,7 +41,7 @@
 
 class VisToolAlongLine final :public VisLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolAlongLine(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolAlongLine() = default;
@@ -53,7 +53,8 @@ public:
     virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolAlongLine)};
 private:
-    Q_DISABLE_COPY(VisToolAlongLine)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolAlongLine) // NOLINT
     quint32         object2Id;
     VScaledEllipse *point;
     VScaledEllipse *lineP1;

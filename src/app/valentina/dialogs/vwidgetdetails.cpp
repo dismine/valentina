@@ -37,18 +37,21 @@
 #include <QMenu>
 #include <QTimer>
 #include <QUndoStack>
+#include <chrono>
+
+using namespace std::chrono_literals;
 
 namespace
 {
-    enum PieceColumn
-    {
-        InLayout = 0,
-        PieceName = 1
-    };
+enum PieceColumn
+{
+    InLayout = 0,
+    PieceName = 1
+};
 
-    Q_GLOBAL_STATIC_WITH_ARGS(const QString, allowDetailIcon, (QLatin1String("://icon/16x16/allow_detail.png")))
-    Q_GLOBAL_STATIC_WITH_ARGS(const QString, forbidDetailIcon, (QLatin1String("://icon/16x16/forbid_detail.png")))
-}
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, allowDetailIcon, (QLatin1String("://icon/16x16/allow_detail.png"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, forbidDetailIcon, (QLatin1String("://icon/16x16/forbid_detail.png"))) // NOLINT
+}  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VWidgetDetails::VWidgetDetails(VContainer *data, VAbstractPattern *doc, QWidget *parent)
@@ -88,7 +91,7 @@ void VWidgetDetails::UpdateList()
     // The filling table is a very expensive operation. This optimization will postpone it.
     // Each time a new request happen we will wait 800 ms before calling it. If at this time a new request will arrive
     // we will wait 800 ms more. And so on, until nothing happens within 800ms.
-    m_updateListTimer->start(800);
+    m_updateListTimer->start(800ms);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -149,7 +152,7 @@ void VWidgetDetails::InLayoutStateChanged(int row, int column)
     const QHash<quint32, VPiece> *allDetails = m_data->DataPieces();
     const bool inLayout = not allDetails->value(id).IsInLayout();
 
-    TogglePieceInLayout *togglePrint = new TogglePieceInLayout(id, inLayout, m_data, m_doc);
+    auto *togglePrint = new TogglePieceInLayout(id, inLayout, m_data, m_doc);
     connect(togglePrint, &TogglePieceInLayout::Toggled, this, &VWidgetDetails::ToggledPiece);
     VAbstractApplication::VApp()->getUndoStack()->push(togglePrint);
 }
@@ -198,7 +201,7 @@ void VWidgetDetails::ToggleSectionDetails(bool select)
         {
             if (not (select == allDetails->value(id).IsInLayout()))
             {
-                TogglePieceInLayout *togglePrint = new TogglePieceInLayout(id, select, m_data, m_doc);
+                auto *togglePrint = new TogglePieceInLayout(id, select, m_data, m_doc);
                 connect(togglePrint, &TogglePieceInLayout::Toggled, this, &VWidgetDetails::ToggledPiece);
                 VAbstractApplication::VApp()->getUndoStack()->push(togglePrint);
             }
@@ -234,9 +237,9 @@ void VWidgetDetails::ToggledPieceItem(QTableWidgetItem *item)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QTableWidgetItem *VWidgetDetails::PrepareInLayoutColumnCell(const VPiece &det, quint32 id) const
+auto VWidgetDetails::PrepareInLayoutColumnCell(const VPiece &det, quint32 id) -> QTableWidgetItem *
 {
-    QTableWidgetItem *item = new QTableWidgetItem();
+    auto *item = new QTableWidgetItem();
     item->setTextAlignment(Qt::AlignHCenter);
     item->setIcon(det.IsInLayout() ? QIcon(*allowDetailIcon) : QIcon(*forbidDetailIcon));
     item->setData(Qt::UserRole, id);
@@ -249,7 +252,7 @@ QTableWidgetItem *VWidgetDetails::PrepareInLayoutColumnCell(const VPiece &det, q
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QTableWidgetItem *VWidgetDetails::PreparePieceNameColumnCell(const VPiece &det) const
+auto VWidgetDetails::PreparePieceNameColumnCell(const VPiece &det) -> QTableWidgetItem *
 {
     QString name = det.GetName();
     if (name.isEmpty())
@@ -257,7 +260,7 @@ QTableWidgetItem *VWidgetDetails::PreparePieceNameColumnCell(const VPiece &det) 
         name = tr("Unnamed");
     }
 
-    QTableWidgetItem *item = new QTableWidgetItem(name);
+    auto *item = new QTableWidgetItem(name);
     item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
     // set the item non-editable (view only), and non-selectable
@@ -368,7 +371,7 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
             {
                 select = not allDetails->value(id).IsInLayout();
 
-                TogglePieceInLayout *togglePrint = new TogglePieceInLayout(id, select, m_data, m_doc);
+                auto *togglePrint = new TogglePieceInLayout(id, select, m_data, m_doc);
                 connect(togglePrint, &TogglePieceInLayout::Toggled, this, &VWidgetDetails::ToggledPiece);
                 VAbstractApplication::VApp()->getUndoStack()->push(togglePrint);
             }

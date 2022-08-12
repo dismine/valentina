@@ -75,7 +75,7 @@ protected:
     void SetOnlyPoint(bool value);
     bool IsOnlyPoint() const;
 private:
-    Q_DISABLE_COPY(VScenePoint)
+    Q_DISABLE_COPY_MOVE(VScenePoint) // NOLINT
 
     void ScaleMainPenWidth(qreal scale);
 };

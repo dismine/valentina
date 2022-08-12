@@ -198,8 +198,7 @@ void DialogEllipticalArc::SetCenter(const quint32 &value)
  */
 QString DialogEllipticalArc::GetRadius1() const
 {
-    return VAbstractApplication::VApp()->TrVars()
-            ->TryFormulaFromUser(radius1, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(radius1, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -232,8 +231,7 @@ void DialogEllipticalArc::SetRadius1(const QString &value)
  */
 QString DialogEllipticalArc::GetRadius2() const
 {
-    return VAbstractApplication::VApp()->TrVars()
-            ->TryFormulaFromUser(radius2, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(radius2, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -266,8 +264,7 @@ void DialogEllipticalArc::SetRadius2(const QString &value)
  */
 QString DialogEllipticalArc::GetF1() const
 {
-    return VAbstractApplication::VApp()->TrVars()
-            ->TryFormulaFromUser(f1, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(f1, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -300,8 +297,7 @@ void DialogEllipticalArc::SetF1(const QString &value)
  */
 QString DialogEllipticalArc::GetF2() const
 {
-    return VAbstractApplication::VApp()->TrVars()
-            ->TryFormulaFromUser(f2, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(f2, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -334,8 +330,7 @@ void DialogEllipticalArc::SetF2(const QString &value)
  */
 QString DialogEllipticalArc::GetRotationAngle() const
 {
-    return VAbstractApplication::VApp()->TrVars()
-            ->TryFormulaFromUser(rotationAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(rotationAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

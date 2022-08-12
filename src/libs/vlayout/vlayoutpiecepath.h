@@ -47,7 +47,7 @@ public:
 
     VLayoutPiecePath &operator=(const VLayoutPiecePath &path);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VLayoutPiecePath(const VLayoutPiecePath &&path) Q_DECL_NOTHROW;
+    VLayoutPiecePath(VLayoutPiecePath &&path) Q_DECL_NOTHROW;
     VLayoutPiecePath &operator=(VLayoutPiecePath &&path) Q_DECL_NOTHROW;
 #endif
 
@@ -70,6 +70,6 @@ private:
 };
 
 Q_DECLARE_METATYPE(VLayoutPiecePath)
-Q_DECLARE_TYPEINFO(VLayoutPiecePath, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VLayoutPiecePath, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VLAYOUTPIECEPATH_H

@@ -31,6 +31,8 @@
 
 #include <QDialog>
 
+#include "../vmisc/defglobal.h"
+
 namespace Ui
 {
     class DialogAboutApp;
@@ -38,21 +40,21 @@ namespace Ui
 
 class DialogAboutApp : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogAboutApp(QWidget *parent = nullptr);
-    virtual ~DialogAboutApp();
+    ~DialogAboutApp() override;
 
 protected:
-    virtual void showEvent(QShowEvent *event) override;
+    void showEvent(QShowEvent *event) override;
 
 private:
     Ui::DialogAboutApp *ui;
-    bool isInitialized;
-    Q_DISABLE_COPY(DialogAboutApp)
+    bool m_isInitialized{false};
+    Q_DISABLE_COPY_MOVE(DialogAboutApp) // NOLINT
 
-    void FontPointSize(QWidget *w, int pointSize);
+    static void FontPointSize(QWidget *w, int pointSize);
 };
 
 #endif // DIALOGABOUTAPP_H

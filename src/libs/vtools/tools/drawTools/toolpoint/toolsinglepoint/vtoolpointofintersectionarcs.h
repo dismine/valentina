@@ -60,7 +60,7 @@ struct VToolPointOfIntersectionArcsInitData : VToolSinglePointInitData
 
 class VToolPointOfIntersectionArcs : public VToolSinglePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     virtual void setDialog() override;
@@ -90,7 +90,7 @@ protected:
     virtual void ReadToolAttributes(const QDomElement &domElement) override;
     virtual void SetVisualization() override;
 private:
-    Q_DISABLE_COPY(VToolPointOfIntersectionArcs)
+    Q_DISABLE_COPY_MOVE(VToolPointOfIntersectionArcs) // NOLINT
 
     /** @brief firstArcId id first arc. */
     quint32       firstArcId;

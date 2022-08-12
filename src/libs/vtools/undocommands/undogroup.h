@@ -40,7 +40,7 @@
 
 class AddGroup : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     AddGroup(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
     virtual ~AddGroup()=default;
@@ -49,13 +49,14 @@ public:
 signals:
     void UpdateGroups();
 private:
-    Q_DISABLE_COPY(AddGroup)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(AddGroup) // NOLINT
     const QString nameActivDraw;
 };
 
 class RenameGroup : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     RenameGroup(VAbstractPattern *doc, quint32 id, const QString &name, QUndoCommand *parent = nullptr);
     virtual ~RenameGroup()=default;
@@ -64,14 +65,14 @@ public:
 signals:
     void UpdateGroups();
 private:
-    Q_DISABLE_COPY(RenameGroup)
+    Q_DISABLE_COPY_MOVE(RenameGroup) // NOLINT
     QString newName;
     QString oldName{};
 };
 
 class ChangeGroupOptions : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     ChangeGroupOptions(VAbstractPattern *doc, quint32 id, const QString &name, const QStringList &tags,
                        QUndoCommand *parent = nullptr);
@@ -81,7 +82,7 @@ public:
 signals:
     void UpdateGroups();
 private:
-    Q_DISABLE_COPY(ChangeGroupOptions)
+    Q_DISABLE_COPY_MOVE(ChangeGroupOptions) // NOLINT
     QString newName;
     QString oldName{};
     QStringList newTags;
@@ -90,7 +91,7 @@ private:
 
 class AddItemToGroup : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     AddItemToGroup(const QDomElement &xml, VAbstractPattern *doc, quint32 groupId, QUndoCommand *parent = nullptr);
     virtual ~AddItemToGroup()=default;
@@ -101,13 +102,13 @@ signals:
 protected:
     void performUndoRedo(bool isUndo);
 private:
-    Q_DISABLE_COPY(AddItemToGroup)
+    Q_DISABLE_COPY_MOVE(AddItemToGroup) // NOLINT
     const QString nameActivDraw;
 };
 
 class RemoveItemFromGroup : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     RemoveItemFromGroup(const QDomElement &xml, VAbstractPattern *doc, quint32 groupId, QUndoCommand *parent = nullptr);
     virtual ~RemoveItemFromGroup()=default;
@@ -118,13 +119,13 @@ signals:
 protected:
     void performUndoRedo(bool isUndo);
 private:
-    Q_DISABLE_COPY(RemoveItemFromGroup)
+    Q_DISABLE_COPY_MOVE(RemoveItemFromGroup) // NOLINT
     const QString nameActivDraw;
 };
 
 class ChangeGroupVisibility  : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     ChangeGroupVisibility(VAbstractPattern *doc, vidtype id, bool visible, QUndoCommand *parent = nullptr);
     virtual ~ChangeGroupVisibility()=default;
@@ -135,7 +136,7 @@ signals:
     void UpdateGroup(vidtype id, bool visible);
 
 private:
-    Q_DISABLE_COPY(ChangeGroupVisibility)
+    Q_DISABLE_COPY_MOVE(ChangeGroupVisibility) // NOLINT
 
     bool m_oldVisibility{true};
     bool m_newVisibility{true};
@@ -146,7 +147,7 @@ private:
 
 class ChangeMultipleGroupsVisibility  : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     ChangeMultipleGroupsVisibility(VAbstractPattern *doc, const QVector<vidtype> &groups, bool visible,
                                    QUndoCommand *parent = nullptr);
@@ -158,7 +159,7 @@ signals:
     void UpdateMultipleGroups(const QMap<vidtype, bool> &groups);
 
 private:
-    Q_DISABLE_COPY(ChangeMultipleGroupsVisibility)
+    Q_DISABLE_COPY_MOVE(ChangeMultipleGroupsVisibility) // NOLINT
 
     QVector<vidtype> m_groups;
     bool m_newVisibility{true};
@@ -168,7 +169,7 @@ private:
 
 class DelGroup : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     DelGroup(VAbstractPattern *doc, quint32 id, QUndoCommand *parent = nullptr);
     virtual ~DelGroup()=default;
@@ -177,7 +178,7 @@ public:
 signals:
     void UpdateGroups();
 private:
-    Q_DISABLE_COPY(DelGroup)
+    Q_DISABLE_COPY_MOVE(DelGroup) // NOLINT
     const QString nameActivDraw;
 };
 

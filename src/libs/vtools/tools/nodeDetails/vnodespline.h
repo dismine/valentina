@@ -45,7 +45,7 @@
  */
 class VNodeSpline:public VAbstractNode
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     static VNodeSpline *Create(const VAbstractNodeInitData &initData);
 
@@ -60,7 +60,8 @@ protected:
     virtual void ShowNode() override {}
     virtual void HideNode() override {}
 private:
-    Q_DISABLE_COPY(VNodeSpline)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VNodeSpline) // NOLINT
 
     explicit VNodeSpline(const VAbstractNodeInitData &initData, QObject *qoParent = nullptr);
 };

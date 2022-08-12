@@ -43,9 +43,10 @@ class VFormula;
 
 class VToolOptionsPropertyBrowser : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VToolOptionsPropertyBrowser(QDockWidget *parent);
+    ~VToolOptionsPropertyBrowser() override =default;
     void ClearPropertyBrowser();
 public slots:
     void itemClicked(QGraphicsItem *item);
@@ -54,14 +55,15 @@ public slots:
 private slots:
     void userChangedData(VPE::VProperty* property);
 private:
-    Q_DISABLE_COPY(VToolOptionsPropertyBrowser)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VToolOptionsPropertyBrowser) // NOLINT
 
-    VPE::VPropertyModel* PropertyModel;
-    VPE::VPropertyFormView* formView;
+    VPE::VPropertyModel* m_PropertyModel{nullptr};
+    VPE::VPropertyFormView* m_formView{nullptr};
 
-    QGraphicsItem *currentItem;
-    QMap<VPE::VProperty *, QString> propertyToId;
-    QMap<QString, VPE::VProperty *> idToProperty;
+    QGraphicsItem *m_currentItem{nullptr};
+    QMap<VPE::VProperty *, QString> m_propertyToId{};
+    QMap<QString, VPE::VProperty *> m_idToProperty{};
 
     void AddProperty(VPE::VProperty *property, const QString &id);
     void ShowItemOptions(QGraphicsItem *item);
@@ -91,7 +93,7 @@ private:
     void SetOperationSuffix(VPE::VProperty *property);
 
     template<class Type>
-    Type GetCrossPoint(const QVariant &value);
+    auto GetCrossPoint(const QVariant &value) -> Type;
 
     template<class Tool>
     void SetCrossCirclesPoint(VPE::VProperty *property);
@@ -198,7 +200,7 @@ private:
     void AddPropertyText(const QString &propertyName, const QString &text, const QString &attrName);
     void AddPropertyBool(const QString &propertyName, bool value, const QString &attrName);
 
-    QStringList PropertiesList() const;
+    static auto PropertiesList() -> QStringList;
 
     void ChangeDataToolSinglePoint(VPE::VProperty *property);
     void ChangeDataToolEndLine(VPE::VProperty *property);

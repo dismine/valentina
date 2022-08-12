@@ -41,7 +41,7 @@
 
 class VisToolCubicBezier : public VisPath
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolCubicBezier(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolCubicBezier() Q_DECL_EQ_DEFAULT;
@@ -55,7 +55,7 @@ public:
     virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolCubicBezier)};
 protected:
-    Q_DISABLE_COPY(VisToolCubicBezier)
+    Q_DISABLE_COPY_MOVE(VisToolCubicBezier) // NOLINT
     quint32         object2Id;
     quint32         object3Id;
     quint32         object4Id;

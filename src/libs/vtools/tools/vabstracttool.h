@@ -83,7 +83,7 @@ QT_WARNING_POP
  */
 class VAbstractTool: public VDataTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VAbstractTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent = nullptr);
     virtual ~VAbstractTool() override;
@@ -181,7 +181,7 @@ protected:
     static quint32 PrepareNode(const VPieceNode &node, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                VContainer *data);
 private:
-    Q_DISABLE_COPY(VAbstractTool)
+    Q_DISABLE_COPY_MOVE(VAbstractTool) // NOLINT
 };
 
 //---------------------------------------------------------------------------------------------------------------------

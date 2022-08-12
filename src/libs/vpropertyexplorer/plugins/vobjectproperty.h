@@ -42,7 +42,7 @@ namespace VPE
 
 class VPROPERTYEXPLORERSHARED_EXPORT VObjectProperty : public VProperty
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     //! Constructor
     explicit VObjectProperty(const QString& name);
@@ -99,7 +99,7 @@ protected:
     //members by reimplementing the VPropertyPrivate class without touching this header file.
 
 private:
-    Q_DISABLE_COPY(VObjectProperty)
+    Q_DISABLE_COPY_MOVE(VObjectProperty) // NOLINT
 };
 
 }

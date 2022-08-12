@@ -30,6 +30,8 @@
 
 #include <QWidget>
 
+#include "../vmisc/defglobal.h"
+
 namespace Ui
 {
     class PuzzlePreferencesPathPage;
@@ -37,23 +39,24 @@ namespace Ui
 
 class PuzzlePreferencesPathPage : public QWidget
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit PuzzlePreferencesPathPage(QWidget *parent = nullptr);
-    virtual ~PuzzlePreferencesPathPage();
+    ~PuzzlePreferencesPathPage() override;
 
     void Apply();
 
 protected:
-    virtual void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent* event) override;
 
 private slots:
     void DefaultPath();
     void EditPath();
 
 private:
-    Q_DISABLE_COPY(PuzzlePreferencesPathPage)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(PuzzlePreferencesPathPage) // NOLINT
     Ui::PuzzlePreferencesPathPage *ui;
 
     void InitTable();

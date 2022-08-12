@@ -52,7 +52,7 @@ public:
 
     VInternalVariable &operator=(const VInternalVariable &var);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VInternalVariable(const VInternalVariable &&var) Q_DECL_NOTHROW;
+    VInternalVariable(VInternalVariable &&var) Q_DECL_NOTHROW;
     VInternalVariable &operator=(VInternalVariable &&var) Q_DECL_NOTHROW;
 #endif
 
@@ -79,6 +79,6 @@ private:
 
 QT_WARNING_POP
 
-Q_DECLARE_TYPEINFO(VInternalVariable, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VInternalVariable, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VINTERNALVARIABLE_H

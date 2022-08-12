@@ -62,7 +62,7 @@ struct VToolAlongLineInitData : VToolLinePointInitData
  */
 class VToolAlongLine : public VToolLinePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     virtual void setDialog() override;
     static VToolAlongLine* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
@@ -86,7 +86,7 @@ protected:
     virtual void    SetVisualization() override;
     virtual QString MakeToolTip() const override;
 private:
-    Q_DISABLE_COPY(VToolAlongLine)
+    Q_DISABLE_COPY_MOVE(VToolAlongLine) // NOLINT
 
     /** @brief secondPointId id second point of line. */
     quint32       secondPointId;

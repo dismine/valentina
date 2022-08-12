@@ -19,7 +19,7 @@ typedef std::function<void()> voidBlock;
 
 class WorkerClass : public QObject
 {
-  Q_OBJECT
+  Q_OBJECT // NOLINT
 
 public:
     explicit WorkerClass(QThread *thread)
@@ -55,7 +55,7 @@ typedef std::function<void(QtMsgType, const QMessageLogContext &, const QString 
 
 class MsgHandlerWorkerClass : public QObject
 {
-  Q_OBJECT
+  Q_OBJECT // NOLINT
 
 public:
     MsgHandlerWorkerClass(QThread *thread, QtMsgType type, const QMessageLogContext &context, const QString &msg)

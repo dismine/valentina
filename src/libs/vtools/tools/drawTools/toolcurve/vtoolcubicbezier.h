@@ -60,7 +60,7 @@ QT_WARNING_POP
 
 class VToolCubicBezier : public VAbstractSpline
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     virtual ~VToolCubicBezier() Q_DECL_EQ_DEFAULT;
     virtual void setDialog() override;
@@ -90,7 +90,7 @@ protected:
     virtual void SetVisualization() override;
     virtual void RefreshGeometry() override;
 private:
-    Q_DISABLE_COPY(VToolCubicBezier)
+    Q_DISABLE_COPY_MOVE(VToolCubicBezier) // NOLINT
 
     VToolCubicBezier(const VToolCubicBezierInitData &initData, QGraphicsItem *parent = nullptr);
 

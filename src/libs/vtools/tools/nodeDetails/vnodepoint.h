@@ -48,7 +48,7 @@
  */
 class VNodePoint: public VAbstractNode, public VScenePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     static void Create(const VAbstractNodeInitData &initData);
 
@@ -88,7 +88,8 @@ protected:
     virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
     virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
 private:
-    Q_DISABLE_COPY(VNodePoint)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VNodePoint) // NOLINT
 
     VNodePoint(const VAbstractNodeInitData &initData, QObject *qoParent = nullptr, QGraphicsItem *parent = nullptr);
 

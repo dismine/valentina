@@ -61,7 +61,7 @@ struct VToolArcWithLengthInitData : VAbstractSplineInitData
 
 class VToolArcWithLength : public VToolAbstractArc
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     virtual void     setDialog() override;
     static VToolArcWithLength* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
@@ -96,7 +96,7 @@ protected:
     virtual void    SetVisualization() override;
     virtual QString MakeToolTip() const override;
 private:
-    Q_DISABLE_COPY(VToolArcWithLength)
+    Q_DISABLE_COPY_MOVE(VToolArcWithLength) // NOLINT
 
     VToolArcWithLength(const VToolArcWithLengthInitData &initData, QGraphicsItem *parent = nullptr);
     virtual ~VToolArcWithLength()=default;

@@ -33,7 +33,7 @@
 
 #include "../layout/vppiece.h"
 
-const QString VPMimeDataPiece::mineFormatPiecePtr = QStringLiteral("application/vnd.puzzle.piece.ptr");
+const QString VPMimeDataPiece::mineFormatPiecePtr = QStringLiteral("application/vnd.puzzle.piece.ptr"); // NOLINT(cert-err58-cpp)
 
 //---------------------------------------------------------------------------------------------------------------------
 VPMimeDataPiece::VPMimeDataPiece(const QUuid &layoutUuid)
@@ -65,14 +65,14 @@ auto VPMimeDataPiece::DragCursor(const QPixmap &piecePixmap) -> QPixmap
     dragCursor.fill(Qt::transparent);
     QPainter painter(&dragCursor);
     painter.drawPixmap(dragCursor.width()/2, dragCursor.height()/2, piecePixmap);
-    QPixmap cursor = QPixmap("://cursor/collect.png");
+    QPixmap cursor(QStringLiteral("://cursor/collect.png"));
     painter.drawPixmap(dragCursor.width()/2 - cursor.width()/2, dragCursor.height()/2 - cursor.height()/2, cursor);
     painter.end();
     return dragCursor;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QUuid &VPMimeDataPiece::LayoutUuid() const
+auto VPMimeDataPiece::LayoutUuid() const -> const QUuid &
 {
     return m_layoutUuid;
 }

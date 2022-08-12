@@ -100,7 +100,7 @@ private:
     QPointF m_moveStartPoint{};
     QPointF m_rotationStartPoint{};
 
-    bool allowChangeMerge{false};
+    bool m_allowChangeMerge{false};
 
     QVector<QPointF> m_stickyPoints{};
     QPainterPath m_stickyPath{};
@@ -119,10 +119,19 @@ private:
     void InitLabels();
     void InitPieceLabel(const QVector<QPointF> &labelShape, const VTextManager &tm);
     void PaintPiece(QPainter *painter=nullptr);
+    void PaintSeamLine(QPainter *painter, const VPPiecePtr &piece);
+    void PaintCuttingLine(QPainter *painter, const VPPiecePtr &piece);
+    void PaintGrainline(QPainter *painter, const VPPiecePtr &piece);
+    void PaintInternalPaths(QPainter *painter, const VPPiecePtr &piece);
+    void PaintPassmarks(QPainter *painter, const VPPiecePtr &piece);
+    void PaintPlaceLabels(QPainter *painter, const VPPiecePtr &piece);
+    void PaintStickyPath(QPainter *painter);
 
     void GroupMove(const QPointF &pos);
 
     auto PieceColor() const -> QColor;
+
+    auto NoBrush() const -> QBrush;
 };
 
 #endif // VPGRAPHICSPIECE_H

@@ -69,7 +69,7 @@ struct VDrawToolInitData : VAbstractToolInitData
  */
 class VDrawTool : public VInteractiveTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
 
     VDrawTool(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes, QObject *parent = nullptr);
@@ -146,7 +146,7 @@ protected:
     template <class T>
     static void InitDrawToolConnections(VMainGraphicsScene *scene, T *tool);
 private:
-    Q_DISABLE_COPY(VDrawTool)
+    Q_DISABLE_COPY_MOVE(VDrawTool) // NOLINT
 };
 
 //---------------------------------------------------------------------------------------------------------------------

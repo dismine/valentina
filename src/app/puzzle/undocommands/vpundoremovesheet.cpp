@@ -39,7 +39,8 @@ VPUndoRemoveSheet::VPUndoRemoveSheet(const VPSheetPtr &sheet, QUndoCommand *pare
     SCASSERT(not sheet.isNull())
 
     QList<VPPiecePtr> pieces = sheet->GetPieces();
-    for (auto piece : pieces)
+    m_pieces.reserve(pieces.size());
+    for (const auto &piece : pieces)
     {
         m_pieces.append(piece);
     }
@@ -60,7 +61,7 @@ void VPUndoRemoveSheet::undo()
     {
         sheet->SetVisible(true);
 
-        for (const auto &piece : m_pieces)
+        for (const auto &piece : qAsConst(m_pieces))
         {
             VPPiecePtr p = piece.toStrongRef();
             if (not p.isNull())
@@ -93,7 +94,7 @@ void VPUndoRemoveSheet::redo()
     {
         sheet->SetVisible(false);
 
-        for (const auto &piece : m_pieces)
+        for (const auto &piece : qAsConst(m_pieces))
         {
             VPPiecePtr p = piece.toStrongRef();
             if (not p.isNull())

@@ -29,6 +29,8 @@
 
 
 VPE::VPropertySet::VPropertySet()
+    // cppcheck-suppress noCopyConstructor
+    // cppcheck-suppress noOperatorEq
     : d_ptr(new VPropertySetPrivate())
 {
 }

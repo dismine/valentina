@@ -66,8 +66,8 @@ VCubicBezier &VCubicBezier::operator=(const VCubicBezier &curve)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VCubicBezier::VCubicBezier(const VCubicBezier &&curve) Q_DECL_NOTHROW
-    : VAbstractCubicBezier(curve), d(curve.d)
+VCubicBezier::VCubicBezier(VCubicBezier &&curve) Q_DECL_NOTHROW
+    : VAbstractCubicBezier(std::move(curve)), d(std::move(curve.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

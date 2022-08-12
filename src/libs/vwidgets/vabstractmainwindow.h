@@ -35,6 +35,8 @@
 #include <QObject>
 #include <QString>
 
+#include "../vmisc/defglobal.h"
+
 struct VFinalMeasurement;
 
 QT_WARNING_PUSH
@@ -43,7 +45,7 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 
 class VAbstractMainWindow : public QMainWindow
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VAbstractMainWindow(QWidget *parent = nullptr);
     virtual ~VAbstractMainWindow() Q_DECL_EQ_DEFAULT;
@@ -80,7 +82,7 @@ protected:
     bool IgnoreLocking(int error, const QString &path, bool guiMode);
 
 private:
-    Q_DISABLE_COPY(VAbstractMainWindow)
+    Q_DISABLE_COPY_MOVE(VAbstractMainWindow) // NOLINT
 };
 
 QT_WARNING_POP

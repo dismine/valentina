@@ -65,7 +65,7 @@ struct VToolPointOfIntersectionCirclesInitData : VToolSinglePointInitData
 
 class VToolPointOfIntersectionCircles : public VToolSinglePoint
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     virtual void setDialog() override;
     static VToolPointOfIntersectionCircles *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
@@ -100,7 +100,7 @@ protected:
     virtual void ReadToolAttributes(const QDomElement &domElement) override;
     virtual void SetVisualization() override;
 private:
-    Q_DISABLE_COPY(VToolPointOfIntersectionCircles)
+    Q_DISABLE_COPY_MOVE(VToolPointOfIntersectionCircles) // NOLINT
 
     quint32 firstCircleCenterId;
     quint32 secondCircleCenterId;

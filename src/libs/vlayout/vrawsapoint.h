@@ -55,7 +55,7 @@ private:
 };
 
 Q_DECLARE_METATYPE(VRawSAPoint)
-Q_DECLARE_TYPEINFO(VRawSAPoint, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VRawSAPoint, Q_MOVABLE_TYPE); // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_CONSTEXPR inline VRawSAPoint::VRawSAPoint()

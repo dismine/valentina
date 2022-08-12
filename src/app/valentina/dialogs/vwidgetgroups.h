@@ -31,6 +31,7 @@
 
 #include <QWidget>
 #include "../vmisc/typedef.h"
+#include "../vmisc/defglobal.h"
 
 class QTableWidgetItem;
 class VAbstractPattern;
@@ -43,11 +44,11 @@ namespace Ui
 
 class VWidgetGroups : public QWidget
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit VWidgetGroups(VAbstractPattern *doc, QWidget *parent = nullptr);
-    virtual ~VWidgetGroups();
+    ~VWidgetGroups() override;
 
 public slots:
     void UpdateGroups();
@@ -58,17 +59,22 @@ private slots:
     void CtxMenu(const QPoint &pos);
 
 private:
-    Q_DISABLE_COPY(VWidgetGroups)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VWidgetGroups) // NOLINT
     Ui::VWidgetGroups *ui;
-    VAbstractPattern *doc;
+    VAbstractPattern *m_doc;
 
     void FillTable(QMap<quint32, VGroupData> groups);
     void SetGroupVisibility(vidtype id, bool visible) const;
     void SetMultipleGroupsVisibility(const QVector<vidtype> &groups, bool visible) const;
 
-    QMap<quint32, VGroupData> FilterGroups(const QMap<quint32, VGroupData> &groups);
+    auto FilterGroups(const QMap<quint32, VGroupData> &groups) -> QMap<quint32, VGroupData>;
 
-    int  GroupRow(vidtype id) const;
+    auto GroupRow(vidtype id) const -> int;
+
+    void ActionPreferences(quint32 id);
+    void ActionHideAll();
+    void ActionShowAll();
 };
 
 #endif // VWIDGETGROUPS_H

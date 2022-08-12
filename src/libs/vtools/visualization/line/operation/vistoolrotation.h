@@ -45,7 +45,7 @@
 
 class VisToolRotation : public VisOperation
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolRotation(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolRotation();
@@ -60,7 +60,8 @@ public:
     virtual int type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolRotation)};
 private:
-    Q_DISABLE_COPY(VisToolRotation)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolRotation) // NOLINT
     qreal           angle;
     VScaledEllipse *point;
     VCurvePathItem *angleArc;

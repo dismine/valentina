@@ -41,7 +41,7 @@
 
 class VisToolEndLine final : public VisLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolEndLine(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolEndLine() = default;
@@ -57,7 +57,8 @@ public:
     virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolEndLine)};
 private:
-    Q_DISABLE_COPY(VisToolEndLine)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolEndLine) // NOLINT
     qreal           length;
     qreal           angle;
     VScaledEllipse *point;

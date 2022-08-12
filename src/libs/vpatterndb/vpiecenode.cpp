@@ -67,8 +67,8 @@ VPieceNode &VPieceNode::operator=(const VPieceNode &node)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VPieceNode::VPieceNode(const VPieceNode &&node) Q_DECL_NOTHROW
-    : d (node.d)
+VPieceNode::VPieceNode(VPieceNode &&node) Q_DECL_NOTHROW
+    : d (std::move(node.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

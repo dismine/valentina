@@ -40,7 +40,7 @@
 
 class AddToCalc : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     AddToCalc(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
     virtual ~AddToCalc() =default;
@@ -49,7 +49,8 @@ public:
 protected:
     virtual void RedoFullParsing() override;
 private:
-    Q_DISABLE_COPY(AddToCalc)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(AddToCalc) // NOLINT
     const QString     nameActivDraw;
     quint32           cursor;
 };

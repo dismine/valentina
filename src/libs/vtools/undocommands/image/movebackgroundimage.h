@@ -39,7 +39,7 @@
 
 class MoveBackgroundImage : public VUndoCommand
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     MoveBackgroundImage(QUuid id, qreal dx, qreal dy, VAbstractPattern *doc, bool allowMerge = false,
                         QUndoCommand *parent = nullptr);
@@ -58,7 +58,7 @@ public:
 
 private:
     // cppcheck-suppress unknownMacro
-    Q_DISABLE_COPY_MOVE(MoveBackgroundImage)
+    Q_DISABLE_COPY_MOVE(MoveBackgroundImage) // NOLINT
 
     QUuid m_id;
     qreal m_dx;

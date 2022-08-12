@@ -37,7 +37,7 @@ namespace Ui
 
 class DialogDuplicateDetail : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogDuplicateDetail(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
@@ -53,7 +53,7 @@ public slots:
 protected:
     virtual bool IsValid() const final {return true;}
 private:
-    Q_DISABLE_COPY(DialogDuplicateDetail)
+    Q_DISABLE_COPY_MOVE(DialogDuplicateDetail) // NOLINT
     Ui::DialogDuplicateDetail *ui;
     quint32 m_idDetail;
     qreal m_mx;

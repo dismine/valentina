@@ -56,7 +56,7 @@ protected:
     virtual bool IsReadOnly() const override {return false;}
 
 private:
-    Q_DISABLE_COPY(VLabelTemplateConverter)
+    Q_DISABLE_COPY_MOVE(VLabelTemplateConverter) // NOLINT
     static const QString LabelTemplateMinVerStr;
 };
 

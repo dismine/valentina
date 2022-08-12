@@ -49,7 +49,7 @@ public:
 
     VPieceNode &operator=(const VPieceNode &node);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VPieceNode(const VPieceNode &&node) Q_DECL_NOTHROW;
+    VPieceNode(VPieceNode &&node) Q_DECL_NOTHROW;
     VPieceNode &operator=(VPieceNode &&node) Q_DECL_NOTHROW;
 #endif
 
@@ -113,6 +113,6 @@ private:
 };
 
 Q_DECLARE_METATYPE(VPieceNode)
-Q_DECLARE_TYPEINFO(VPieceNode, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VPieceNode, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VPIECENODE_H

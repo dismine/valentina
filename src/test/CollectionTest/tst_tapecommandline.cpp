@@ -34,7 +34,7 @@
 
 namespace
 {
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, tmpTestFolder, (QLatin1String("tst_tape_tmp")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, tmpTestFolder, (QLatin1String("tst_tape_tmp"))) // NOLINT
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -35,7 +35,7 @@
 
 class VTestSettings : public VCommonSettings
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VTestSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
                   QObject *parent = nullptr)
@@ -47,7 +47,7 @@ public:
 
 class TestVApplication final : public VAbstractValApplication
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     TestVApplication(int &argc, char ** argv)
         : VAbstractValApplication(argc, argv),
@@ -95,7 +95,7 @@ protected slots:
     {}
 
 private:
-    Q_DISABLE_COPY(TestVApplication)
+    Q_DISABLE_COPY_MOVE(TestVApplication) // NOLINT
     VTranslateVars *m_trVars;
 };
 

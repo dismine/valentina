@@ -53,7 +53,7 @@ class VUndoCommand;
 
 class DialogSeamAllowance : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     DialogSeamAllowance(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
@@ -167,7 +167,7 @@ private slots:
     void InsertGradationPlaceholder();
 
 private:
-    Q_DISABLE_COPY(DialogSeamAllowance)
+    Q_DISABLE_COPY_MOVE(DialogSeamAllowance) // NOLINT
 
     Ui::DialogSeamAllowance *ui;
     Ui::TabPaths            *uiTabPaths;

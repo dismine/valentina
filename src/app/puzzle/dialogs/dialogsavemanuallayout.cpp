@@ -36,13 +36,10 @@
 #include <QtDebug>
 
 #ifndef Q_OS_WIN
-    Q_GLOBAL_STATIC_WITH_ARGS(const QString, baseFilenameRegExp, (QLatin1String("^[^\\/]+$")))
+    Q_GLOBAL_STATIC_WITH_ARGS(const QString, baseFilenameRegExp, (QLatin1String("^[^\\/]+$"))) // NOLINT
 #else
-    Q_GLOBAL_STATIC_WITH_ARGS(const QString, baseFilenameRegExp, (QLatin1String("^[^\\:?\"*|\\/<>]+$")))
+    Q_GLOBAL_STATIC_WITH_ARGS(const QString, baseFilenameRegExp, (QLatin1String("^[^\\:?\"*|\\/<>]+$"))) // NOLINT
 #endif
-
-bool DialogSaveManualLayout::havePdf = false;
-bool DialogSaveManualLayout::tested  = false;
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogSaveManualLayout::DialogSaveManualLayout(int count, bool consoleExport, const QString &fileName, QWidget *parent)
@@ -334,7 +331,7 @@ void DialogSaveManualLayout::SetTilesScheme(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogSaveManualLayout::IsTilesScheme() const
+auto DialogSaveManualLayout::IsTilesScheme() const -> bool
 {
     switch(Format())
     {
@@ -500,6 +497,8 @@ void DialogSaveManualLayout::ShowExample()
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogSaveManualLayout::SupportPSTest() -> bool
 {
+    static bool havePdf = false;
+    static bool tested  = false;
     if (!tested)
     {
         havePdf = VLayoutExporter::SupportPDFConversion();

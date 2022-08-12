@@ -185,35 +185,35 @@ void TapePreferencesPathPage::InitTable()
 
     {
         ui->pathTable->setItem(0, 0, new QTableWidgetItem(tr("My Individual Measurements")));
-        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathIndividualMeasurements());
+        auto *item = new QTableWidgetItem(settings->GetPathIndividualMeasurements());
         item->setToolTip(settings->GetPathIndividualMeasurements());
         ui->pathTable->setItem(0, 1, item);
     }
 
     {
         ui->pathTable->setItem(1, 0, new QTableWidgetItem(tr("My Multisize Measurements")));
-        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathMultisizeMeasurements());
+        auto *item = new QTableWidgetItem(settings->GetPathMultisizeMeasurements());
         item->setToolTip(settings->GetPathMultisizeMeasurements());
         ui->pathTable->setItem(1, 1, item);
     }
 
     {
         ui->pathTable->setItem(2, 0, new QTableWidgetItem(tr("My Patterns")));
-        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathPattern());
+        auto *item = new QTableWidgetItem(settings->GetPathPattern());
         item->setToolTip(settings->GetPathPattern());
         ui->pathTable->setItem(2, 1, item);
     }
 
     {
         ui->pathTable->setItem(3, 0, new QTableWidgetItem(tr("My Templates")));
-        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathTemplate());
+        auto *item = new QTableWidgetItem(settings->GetPathTemplate());
         item->setToolTip(settings->GetPathTemplate());
         ui->pathTable->setItem(3, 1, item);
     }
 
     {
         ui->pathTable->setItem(4, 0, new QTableWidgetItem(tr("My Layouts")));
-        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathManualLayouts());
+        auto *item = new QTableWidgetItem(settings->GetPathManualLayouts());
         item->setToolTip(settings->GetPathManualLayouts());
         ui->pathTable->setItem(4, 1, item);
     }

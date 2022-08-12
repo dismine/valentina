@@ -41,7 +41,7 @@ namespace VPE
 
 class VPROPERTYEXPLORERSHARED_EXPORT VColorPropertyEditor : public QWidget
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     //! Constructor taking a widget as parent
@@ -82,7 +82,8 @@ private slots:
     void onToolButtonClicked();
 
 private:
-    Q_DISABLE_COPY(VColorPropertyEditor)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VColorPropertyEditor) // NOLINT
     QColor Color;
     QToolButton* ToolButton;
     QLabel* TextLabel;

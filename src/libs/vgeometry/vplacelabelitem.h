@@ -48,7 +48,7 @@ public:
 
     VPlaceLabelItem &operator=(const VPlaceLabelItem &item);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VPlaceLabelItem(const VPlaceLabelItem &&item) Q_DECL_NOTHROW;
+    VPlaceLabelItem(VPlaceLabelItem &&item) Q_DECL_NOTHROW;
     VPlaceLabelItem &operator=(VPlaceLabelItem &&item) Q_DECL_NOTHROW;
 #endif
 
@@ -94,6 +94,6 @@ private:
 };
 
 Q_DECLARE_METATYPE(VPlaceLabelItem)
-Q_DECLARE_TYPEINFO(VPlaceLabelItem, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VPlaceLabelItem, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VPLACELABELITEM_H

@@ -45,7 +45,7 @@ struct SourceItem
 };
 
 Q_DECLARE_METATYPE(SourceItem)
-Q_DECLARE_TYPEINFO(SourceItem, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(SourceItem, Q_MOVABLE_TYPE); // NOLINT
 
 // Default label position
 const int labelMX = 10;

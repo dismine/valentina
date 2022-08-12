@@ -30,10 +30,11 @@
 
 #include <QObject>
 
+#include "../vmisc/defglobal.h"
 
 class TST_DXF :public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_DXF(QObject *parent = nullptr);
 
@@ -43,7 +44,7 @@ private slots:
     void TestCodecPage();
 
 private:
-    Q_DISABLE_COPY(TST_DXF)
+    Q_DISABLE_COPY_MOVE(TST_DXF) // NOLINT
 };
 
 #endif // TST_DXF_H

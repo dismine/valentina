@@ -48,7 +48,7 @@ namespace Ui
  */
 class DialogCutArc final : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
 
     DialogCutArc(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
@@ -93,7 +93,7 @@ private slots:
     void ArcChanged();
     void ValidateAlias();
 private:
-    Q_DISABLE_COPY(DialogCutArc)
+    Q_DISABLE_COPY_MOVE(DialogCutArc) // NOLINT
     /** @brief ui keeps information about user interface */
     Ui::DialogCutArc  *ui;
 

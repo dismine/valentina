@@ -50,7 +50,7 @@ struct VToolPlaceLabelInitData : VAbstractNodeInitData
 
 class VToolPlaceLabel : public VAbstractNode
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     static VToolPlaceLabel* Create(const QPointer<DialogTool> &dialog, VAbstractPattern *doc, VContainer *data);
     static VToolPlaceLabel* Create(VToolPlaceLabelInitData &initData);
@@ -68,7 +68,8 @@ protected:
     virtual void ShowNode() override {}
     virtual void HideNode() override {}
 private:
-    Q_DISABLE_COPY(VToolPlaceLabel)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VToolPlaceLabel) // NOLINT
 
     quint32 m_pieceId;
 

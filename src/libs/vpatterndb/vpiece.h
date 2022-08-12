@@ -48,7 +48,7 @@ class VPassmark;
 
 class VPiece : public VAbstractPiece
 {
-    Q_DECLARE_TR_FUNCTIONS(VPiece)
+    Q_DECLARE_TR_FUNCTIONS(VPiece) // NOLINT
 public:
     VPiece();
     VPiece(const VPiece &piece);
@@ -57,7 +57,7 @@ public:
 
     VPiece &operator=(const VPiece &piece);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VPiece(const VPiece &&piece) Q_DECL_NOTHROW;
+    VPiece(VPiece &&piece) Q_DECL_NOTHROW;
     VPiece &operator=(VPiece &&piece) Q_DECL_NOTHROW;
 #endif
 
@@ -165,6 +165,6 @@ private:
     qreal GlobalPassmarkLength(const VContainer *data) const;
 };
 
-Q_DECLARE_TYPEINFO(VPiece, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VPiece, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VPIECE_H

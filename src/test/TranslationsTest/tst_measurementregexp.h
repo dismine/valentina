@@ -30,6 +30,7 @@
 #define TST_MEASUREMENTREGEXP_H
 
 #include "tst_abstractregexp.h"
+#include "../vmisc/defglobal.h"
 
 #include <QPointer>
 
@@ -38,7 +39,7 @@ class VTranslateVars;
 
 class TST_MeasurementRegExp : public TST_AbstractRegExp
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     TST_MeasurementRegExp(quint32 systemCode, const QString &locale, QObject *parent = nullptr);
     virtual ~TST_MeasurementRegExp();
@@ -64,7 +65,8 @@ private slots:
     void cleanupTestCase();
 
 private:
-    Q_DISABLE_COPY(TST_MeasurementRegExp)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(TST_MeasurementRegExp) // NOLINT
 
     quint32               m_systemCode;
     QString               m_system;

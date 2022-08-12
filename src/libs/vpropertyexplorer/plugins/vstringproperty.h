@@ -41,7 +41,7 @@ namespace VPE
 //! Class for holding a string property
 class VPROPERTYEXPLORERSHARED_EXPORT VStringProperty : public VProperty
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VStringProperty(const QString& name, const QMap<QString, QVariant>& settings);
 
@@ -99,7 +99,7 @@ protected:
     virtual bool eventFilter(QObject *object, QEvent *event) override;
 
 private:
-    Q_DISABLE_COPY(VStringProperty)
+    Q_DISABLE_COPY_MOVE(VStringProperty) // NOLINT
 };
 
 }

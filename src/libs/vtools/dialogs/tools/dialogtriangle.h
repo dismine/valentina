@@ -48,7 +48,7 @@ namespace Ui
  */
 class DialogTriangle : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     DialogTriangle(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogTriangle() override;
@@ -81,7 +81,7 @@ protected:
     virtual void   SaveData() override;
     virtual bool   IsValid() const final;
 private:
-    Q_DISABLE_COPY(DialogTriangle)
+    Q_DISABLE_COPY_MOVE(DialogTriangle) // NOLINT
 
     /** @brief ui keeps information about user interface */
     Ui::DialogTriangle *ui;

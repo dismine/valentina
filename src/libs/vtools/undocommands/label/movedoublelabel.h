@@ -41,7 +41,7 @@ enum class MoveDoublePoint: qint8 { FirstPoint, SecondPoint };
 
 class MoveDoubleLabel : public MoveAbstractLabel
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     MoveDoubleLabel(VAbstractPattern *doc, const QPointF &pos, MoveDoublePoint type,
                     quint32 toolId, quint32 pointId, QUndoCommand *parent = nullptr);
@@ -55,7 +55,8 @@ public:
 protected:
     virtual void Do(const QPointF &pos) override;
 private:
-    Q_DISABLE_COPY(MoveDoubleLabel)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(MoveDoubleLabel) // NOLINT
     MoveDoublePoint m_type;
     quint32 m_idTool;
     //Need for resizing scene rect

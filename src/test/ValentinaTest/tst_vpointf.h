@@ -32,16 +32,18 @@
 #include <QtCore/QObject>
 #include <QtCore/qglobal.h>
 
+#include "../vmisc/defglobal.h"
+
 class TST_VPointF : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_VPointF(QObject *parent = nullptr);
 private slots:
     void TestFlip_data();
     void TestFlip();
 private:
-    Q_DISABLE_COPY(TST_VPointF)
+    Q_DISABLE_COPY_MOVE(TST_VPointF) // NOLINT
 };
 
 #endif // TST_VPOINTF_H

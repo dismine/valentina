@@ -33,56 +33,59 @@
 #include <QCommandLineParser>
 #include <ciso646>
 
+#include "../vmisc/defglobal.h"
+
 class VPCommandLine;
 using VPCommandLinePtr = std::shared_ptr<VPCommandLine>;
 
 class VPCommandLine: public QObject
 {
-    Q_OBJECT
-public:   
-    virtual ~VPCommandLine() = default;
+    Q_OBJECT // NOLINT
+public:
+    ~VPCommandLine() override = default;
 
     /** @brief if user enabled export from cmd */
-    bool IsExportEnabled() const;
+    auto IsExportEnabled() const -> bool;
 
     /** @brief path to export file or empty string if not */
-    QString OptionExportFile() const;
+    auto OptionExportFile() const -> QString;
 
     /** @brief list with paths to the raw layout data files */
-    QStringList OptionRawLayouts() const;
+    auto OptionRawLayouts() const -> QStringList;
 
     /** @brief if user enabled test mode from cmd */
-    bool IsTestModeEnabled() const;
+    auto IsTestModeEnabled() const -> bool;
 
     /** @brief if gui enabled or not */
-    bool IsGuiEnabled() const;
+    auto IsGuiEnabled() const -> bool;
 
     /** @brief the file name which should be loaded */
-    QStringList OptionFileNames() const;
+    auto OptionFileNames() const -> QStringList;
 
     /** @brief if high dpi scaling is enabled */
-    bool IsNoScalingEnabled() const;
+    auto IsNoScalingEnabled() const -> bool;
 
     Q_NORETURN void ShowHelp(int exitCode = 0);
 protected:
     VPCommandLine();
 
     /** @brief create the single instance of the class inside vpapplication */
-    static VPCommandLinePtr Instance();
+    static auto Instance() -> VPCommandLinePtr;
     static void ProcessInstance(VPCommandLinePtr &instance, const QStringList &arguments);
 private:
-    Q_DISABLE_COPY(VPCommandLine)
-    static VPCommandLinePtr instance;
-    QCommandLineParser parser;
-    bool isGuiEnabled;
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VPCommandLine) // NOLINT
+    static VPCommandLinePtr instance; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+    QCommandLineParser parser{};
+    bool isGuiEnabled{false};
     friend class VPApplication;
 
     /** @brief add options to the QCommandLineParser that there are in the cmd can be */
     void InitCommandLineOptions();
 
-    bool IsOptionSet(const QString &option)const;
-    QString OptionValue(const QString &option) const;
-    QStringList OptionValues(const QString &option) const;
+    auto IsOptionSet(const QString &option)const -> bool;
+    auto OptionValue(const QString &option) const -> QString;
+    auto OptionValues(const QString &option) const -> QStringList;
 };
 
 #endif // VPCOMMANDLINE_H

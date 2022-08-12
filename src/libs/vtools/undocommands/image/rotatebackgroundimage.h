@@ -57,7 +57,7 @@ public:
 
 private:
     // cppcheck-suppress unknownMacro
-    Q_DISABLE_COPY_MOVE(RotateBackgroundImage)
+    Q_DISABLE_COPY_MOVE(RotateBackgroundImage) // NOLINT
 
     QUuid m_id;
     QTransform m_matrix;

@@ -42,7 +42,7 @@
 
 class VisToolHeight final : public VisLine
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit VisToolHeight(const VContainer *data, QGraphicsItem *parent = nullptr);
     virtual ~VisToolHeight() = default;
@@ -54,7 +54,8 @@ public:
     virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolHeight)};
 private:
-    Q_DISABLE_COPY(VisToolHeight)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VisToolHeight) // NOLINT
     //base point in parent class
     quint32              lineP1Id{NULL_ID};//first point of line
     quint32              lineP2Id{NULL_ID};//second point of line

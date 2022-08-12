@@ -59,7 +59,7 @@ void DialogKnownMaterials::SetList(const QStringList &list)
 
     int row = -1;
 
-    for (auto &m : list)
+    for (const auto &m : list)
     {
         if (not m.isEmpty())
         {
@@ -76,7 +76,7 @@ void DialogKnownMaterials::SetList(const QStringList &list)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList DialogKnownMaterials::GetList() const
+auto DialogKnownMaterials::GetList() const -> QStringList
 {
     QStringList list;
 
@@ -124,10 +124,7 @@ void DialogKnownMaterials::Remove()
 {
     ui->listWidget->blockSignals(true);
     QListWidgetItem *curLine = ui->listWidget->takeItem(ui->listWidget->currentRow());
-    if (curLine)
-    {
-        delete curLine;
-    }
+    delete curLine;
     ui->listWidget->blockSignals(false);
     ShowDetails();
 }

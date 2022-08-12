@@ -317,9 +317,9 @@ VSplinePath &VSplinePath::operator =(const VSplinePath &path)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VSplinePath::VSplinePath(const VSplinePath &&splPath) Q_DECL_NOTHROW
-    : VAbstractCubicBezierPath(splPath),
-      d(splPath.d)
+VSplinePath::VSplinePath(VSplinePath &&splPath) Q_DECL_NOTHROW
+    : VAbstractCubicBezierPath(std::move(splPath)),
+      d(std::move(splPath.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

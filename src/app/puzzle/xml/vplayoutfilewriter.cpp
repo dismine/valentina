@@ -74,6 +74,7 @@ auto PointToString(const QPointF &p) -> QString
 auto PathToString(const QVector<QPointF> &pathPoints) -> QString
 {
     QStringList path;
+    path.reserve(pathPoints.size());
 
     for (auto point : pathPoints)
     {
@@ -96,6 +97,7 @@ auto RectToString(const QRectF &r) -> QString
 auto MarkerShapeToString(const PlaceLabelImg &shape) -> QString
 {
     QStringList s;
+    s.reserve(shape.size());
     for (const auto& path : shape)
     {
         s.append(PathToString(path));
@@ -113,6 +115,7 @@ auto LineToString(const QLineF &line) -> QString
 auto LinesToString(const QVector<QLineF> &lines) -> QString
 {
     QStringList l;
+    l.reserve(lines.size());
     for (auto line : lines)
     {
         l.append(LineToString(line));

@@ -34,9 +34,11 @@
 #include <QDomDocument>
 #include <ciso646>
 
+#include "../vmisc/defglobal.h"
+
 class TST_AbstractTranslation : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_AbstractTranslation(QObject *parent = nullptr);
 
@@ -54,7 +56,8 @@ protected:
     static const QString AttrValObsolete;
 
 private:
-    Q_DISABLE_COPY(TST_AbstractTranslation)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(TST_AbstractTranslation) // NOLINT
 
     QSharedPointer<QFile> tsFile;
     QSharedPointer<QDomDocument> tsXML;

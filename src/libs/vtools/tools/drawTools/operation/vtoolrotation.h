@@ -59,7 +59,7 @@ struct VToolRotationInitData : VAbstractOperationInitData
 
 class VToolRotation : public VAbstractOperation
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     virtual ~VToolRotation() Q_DECL_EQ_DEFAULT;
     virtual void setDialog() override;
@@ -89,7 +89,7 @@ protected:
     virtual QString MakeToolTip() const override;
 
 private:
-    Q_DISABLE_COPY(VToolRotation)
+    Q_DISABLE_COPY_MOVE(VToolRotation) // NOLINT
     quint32 origPointId;
     QString formulaAngle;
 

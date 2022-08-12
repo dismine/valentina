@@ -33,10 +33,12 @@
 #include <QIcon>
 #include <QPropertyAnimation>
 
+#include "../vmisc/defglobal.h"
+
 class FancyTab final : public QObject
 {
     friend class FancyTabBar;
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
     Q_PROPERTY(double fader READ fader WRITE setFader)
 public:
@@ -49,7 +51,8 @@ public:
     void fadeOut();
 
 private:
-    Q_DISABLE_COPY(FancyTab)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(FancyTab) // NOLINT
     QIcon              m_icon;
     QString            m_text;
     QString            m_toolTip;

@@ -31,8 +31,6 @@
 #include "../vtools/tools/vdatatool.h"
 #include "../vtools/tools/vtoolseamallowance.h"
 #include "../vtools/tools/vtooluniondetails.h"
-#include "../vtools/tools/drawTools/drawtools.h"
-#include "../vtools/tools/nodeDetails/nodedetails.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/exception/vexceptionwrongid.h"
 #include "../ifc/exception/vexceptionconversionerror.h"
@@ -41,9 +39,9 @@
 #include "../ifc/xml/vpatternconverter.h"
 #include "../vmisc/customevents.h"
 #include "../vmisc/vvalentinasettings.h"
-#include "../vmisc/vmath.h"
 #include "../vmisc/projectversion.h"
 #include "../vmisc/compatibility.h"
+#include "../vmisc/vsysexits.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "../qmuparser/qmutokenparser.h"
 #include "../vgeometry/varc.h"
@@ -59,6 +57,50 @@
 #include "../vpatterndb/floatItemData/vgrainlinedata.h"
 #include "../vpatterndb/vpiecepath.h"
 #include "../vpatterndb/vnodedetail.h"
+
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolalongline.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolbisector.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolendline.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolnormal.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolshoulderpoint.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolheight.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollineintersectaxis.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolarc.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolellipticalarc.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolarcwithlength.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolspline.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolcubicbezier.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolsplinepath.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolcubicbezierpath.h"
+#include "../vtools/tools/drawTools/vtoolline.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutspline.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutsplinepath.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoollineintersect.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofcontact.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolbasepoint.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtooltriangle.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersection.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectionarcs.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncircles.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointfromcircleandtangent.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointfromarcandtangent.h"
+#include "../vtools/tools/drawTools/toolpoint/tooldoublepoint/vtooltruedarts.h"
+#include "../vtools/tools/drawTools/operation/vtoolrotation.h"
+#include "../vtools/tools/drawTools/operation/flipping/vtoolflippingbyline.h"
+#include "../vtools/tools/drawTools/operation/flipping/vtoolflippingbyaxis.h"
+#include "../vtools/tools/drawTools/operation/vtoolmove.h"
+
+#include "../vtools/tools/nodeDetails/vnodearc.h"
+#include "../vtools/tools/nodeDetails/vnodeellipticalarc.h"
+#include "../vtools/tools/nodeDetails/vnodepoint.h"
+#include "../vtools/tools/nodeDetails/vnodespline.h"
+#include "../vtools/tools/nodeDetails/vnodesplinepath.h"
+#include "../vtools/tools/nodeDetails/vtoolpiecepath.h"
+#include "../vtools/tools/nodeDetails/vtoolpin.h"
+#include "../vtools/tools/nodeDetails/vtoolplacelabel.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
 #include "../vmisc/backport/qscopeguard.h"
@@ -608,7 +650,7 @@ void VPattern::LiteParseTree(const Document &parse)
         emit SetEnabledGUI(false);
         if (not VApplication::IsGUIMode())
         {
-            qApp->exit(V_EX_NOINPUT);
+            QCoreApplication::exit(V_EX_NOINPUT);
         }
         return;
     }
@@ -619,7 +661,7 @@ void VPattern::LiteParseTree(const Document &parse)
         emit SetEnabledGUI(false);
         if (not VApplication::IsGUIMode())
         {
-            qApp->exit(V_EX_NOINPUT);
+            QCoreApplication::exit(V_EX_NOINPUT);
         }
         return;
     }
@@ -630,7 +672,7 @@ void VPattern::LiteParseTree(const Document &parse)
         emit SetEnabledGUI(false);
         if (not VApplication::IsGUIMode())
         {
-            qApp->exit(V_EX_NOINPUT);
+            QCoreApplication::exit(V_EX_NOINPUT);
         }
         return;
     }
@@ -641,7 +683,7 @@ void VPattern::LiteParseTree(const Document &parse)
         emit SetEnabledGUI(false);
         if (not VApplication::IsGUIMode())
         {
-            qApp->exit(V_EX_NOINPUT);
+            QCoreApplication::exit(V_EX_NOINPUT);
         }
         return;
     }
@@ -652,7 +694,7 @@ void VPattern::LiteParseTree(const Document &parse)
         emit SetEnabledGUI(false);
         if (not VApplication::IsGUIMode())
         {
-            qApp->exit(V_EX_NOINPUT);
+            QCoreApplication::exit(V_EX_NOINPUT);
         }
         return;
     }
@@ -662,7 +704,7 @@ void VPattern::LiteParseTree(const Document &parse)
         emit SetEnabledGUI(false);
         if (not VApplication::IsGUIMode())
         {
-            qApp->exit(V_EX_NOINPUT);
+            QCoreApplication::exit(V_EX_NOINPUT);
         }
         return;
     }

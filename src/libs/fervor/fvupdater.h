@@ -35,9 +35,11 @@
 #include "fvavailableupdate.h"
 #include "fvupdatewindow.h"
 
+#include "../vmisc/defglobal.h"
+
 class FvUpdater final : public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     // Singleton
@@ -82,7 +84,7 @@ private:
     //
     // Singleton business
     //
-    Q_DISABLE_COPY(FvUpdater)
+    Q_DISABLE_COPY_MOVE(FvUpdater) // NOLINT
     FvUpdater();		  // Hide main constructor
     virtual ~FvUpdater(); // Hide main destructor
 

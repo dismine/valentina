@@ -50,7 +50,7 @@ namespace Ui
  */
 class DialogSpline : public DialogTool
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     DialogSpline(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogSpline() override;
@@ -91,7 +91,7 @@ private slots:
 
     void ValidateAlias();
 private:
-    Q_DISABLE_COPY(DialogSpline)
+    Q_DISABLE_COPY_MOVE(DialogSpline) // NOLINT
 
     /** @brief ui keeps information about user interface */
     Ui::DialogSpline *ui;

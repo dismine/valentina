@@ -30,9 +30,11 @@
 
 #include <QObject>
 
+#include "../vmisc/defglobal.h"
+
 class TST_VDomDocument :public QObject
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     explicit TST_VDomDocument(QObject *parent = nullptr);
 
@@ -40,7 +42,7 @@ private slots:
     void TestCompareDomElements_data();
     void TestCompareDomElements();
 private:
-    Q_DISABLE_COPY(TST_VDomDocument)
+    Q_DISABLE_COPY_MOVE(TST_VDomDocument) // NOLINT
 };
 
 #endif // TST_VDOMDOCUMENT_H

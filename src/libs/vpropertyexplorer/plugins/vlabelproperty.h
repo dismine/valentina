@@ -49,7 +49,7 @@ namespace VPE
 //! Class for holding a string property
 class VPROPERTYEXPLORERSHARED_EXPORT VLabelProperty : public VProperty
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VLabelProperty(const QString& name, const QMap<QString, QVariant>& settings);
 
@@ -98,7 +98,7 @@ protected:
     int typeForParent;
 
 private:
-    Q_DISABLE_COPY(VLabelProperty)
+    Q_DISABLE_COPY_MOVE(VLabelProperty) // NOLINT
 };
 
 }

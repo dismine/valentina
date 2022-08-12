@@ -43,8 +43,6 @@
 #include "../vgeometry/vspline.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vellipticalarc.h"
-#include "../vmisc/diagnostic.h"
-#include "../vmisc/vabstractapplication.h"
 #include "../vmisc/literals.h"
 #include "variables/varcradius.h"
 #include "variables/vcurveangle.h"
@@ -54,14 +52,13 @@
 #include "variables/vlineangle.h"
 #include "variables/vlinelength.h"
 #include "variables/vmeasurement.h"
-#include "variables/vvariable.h"
 #include "vtranslatevars.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
 QT_WARNING_DISABLE_INTEL(1418)
 
-Q_LOGGING_CATEGORY(vCon, "v.container")
+Q_LOGGING_CATEGORY(vCon, "v.container") // NOLINT
 
 QT_WARNING_POP
 
@@ -121,8 +118,8 @@ VContainer &VContainer::operator =(const VContainer &data)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VContainer::VContainer(const VContainer &&data) Q_DECL_NOTHROW
-    :d(data.d)
+VContainer::VContainer(VContainer &&data) Q_DECL_NOTHROW
+    :d(std::move(data.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

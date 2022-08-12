@@ -41,7 +41,7 @@ namespace Ui
 
 class DialogAddBackgroundImage : public QDialog
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit DialogAddBackgroundImage(const QString &fileName, QWidget *parent = nullptr);
@@ -52,7 +52,7 @@ public:
 
 private:
     // cppcheck-suppress unknownMacro
-    Q_DISABLE_COPY_MOVE(DialogAddBackgroundImage)
+    Q_DISABLE_COPY_MOVE(DialogAddBackgroundImage) // NOLINT
     Ui::DialogAddBackgroundImage *ui;
 };
 

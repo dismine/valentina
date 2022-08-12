@@ -41,12 +41,13 @@
 
 class VTapeSettings : public VCommonSettings
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 public:
     VTapeSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
                   QObject *parent = nullptr);
+    ~VTapeSettings() override = default;
 
-    QByteArray GetDataBaseGeometry() const;
+    auto GetDataBaseGeometry() const -> QByteArray;
     void SetDataBaseGeometry(const QByteArray &value);
 
     auto GetTapeSearchHistory() const -> QStringList;
@@ -65,7 +66,7 @@ public:
     void SetTapeSearchOptionMatchCase(bool value);
 
 private:
-    Q_DISABLE_COPY(VTapeSettings)
+    Q_DISABLE_COPY_MOVE(VTapeSettings) // NOLINT
 };
 
 #endif // VTAPESETTINGS_H

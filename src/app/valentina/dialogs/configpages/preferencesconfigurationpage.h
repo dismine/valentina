@@ -31,6 +31,8 @@
 
 #include <QWidget>
 
+#include "../vmisc/defglobal.h"
+
 namespace Ui
 {
     class PreferencesConfigurationPage;
@@ -38,22 +40,23 @@ namespace Ui
 
 class PreferencesConfigurationPage : public QWidget
 {
-    Q_OBJECT
+    Q_OBJECT // NOLINT
 
 public:
     explicit PreferencesConfigurationPage(QWidget *parent = nullptr);
-    virtual ~PreferencesConfigurationPage();
+    ~PreferencesConfigurationPage() override;
 
-    QStringList Apply();
+    auto Apply() -> QStringList;
 protected:
-    virtual void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent* event) override;
 private:
-    Q_DISABLE_COPY(PreferencesConfigurationPage)
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(PreferencesConfigurationPage) // NOLINT
     Ui::PreferencesConfigurationPage *ui;
-    bool m_langChanged;
-    bool m_systemChanged;
-    bool m_unitChanged;
-    bool m_labelLangChanged;
+    bool m_langChanged{false};
+    bool m_systemChanged{false};
+    bool m_unitChanged{false};
+    bool m_labelLangChanged{false};
 
     void SetLabelComboBox(const QStringList &list);
     void InitUnits();

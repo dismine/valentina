@@ -48,6 +48,7 @@ enum class ZValueMove
 
 class VPUndoPieceZValueMove : public VPUndoCommand
 {
+    Q_OBJECT // NOLINT
 public:
     VPUndoPieceZValueMove(const VPPiecePtr &piece, ML::ZValueMove move, QUndoCommand *parent = nullptr);
     ~VPUndoPieceZValueMove() override =default;
@@ -72,6 +73,7 @@ private:
 
 class VPUndoPiecesZValueMove : public VPUndoCommand
 {
+    Q_OBJECT // NOLINT
 public:
     VPUndoPiecesZValueMove(const QList<VPPiecePtr> &pieces, ML::ZValueMove move, QUndoCommand *parent = nullptr);
     ~VPUndoPiecesZValueMove() override =default;
@@ -93,7 +95,7 @@ private:
     auto PieceIds() const -> QVector<QString>;
     static auto Levels(const QList<VPPiecePtr> &allPieces, const QVector<QString> &skipPieces,
                        bool skip) -> QList<QVector<QString>>;
-    auto LevelStep(const QList<VPPiecePtr> &pieces) const -> qreal;
+    static auto LevelStep(const QList<VPPiecePtr> &pieces) -> qreal;
 };
 
 #endif // VPUNDOPIECEZVALUEMOVE_H
