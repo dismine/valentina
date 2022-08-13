@@ -56,6 +56,7 @@ private slots:
     void TestLengthByPoint();
     void TestFlip_data();
     void TestFlip();
+    void TestCutSpline();
 
 private:
     // cppcheck-suppress unknownMacro

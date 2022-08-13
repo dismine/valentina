@@ -152,6 +152,9 @@ VToolCutSpline* VToolCutSpline::Create(VToolCutInitData &initData)
     auto spline1 = QSharedPointer<VAbstractBezier>(new VSpline(spl->GetP1(), spl1p2, spl1p3, *p));
     auto spline2 = QSharedPointer<VAbstractBezier>(new VSpline(*p, spl2p2, spl2p3, spl->GetP4()));
 
+    spline1->SetApproximationScale(spl->GetApproximationScale());
+    spline2->SetApproximationScale(spl->GetApproximationScale());
+
     spline1->SetAliasSuffix(initData.aliasSuffix1);
     spline2->SetAliasSuffix(initData.aliasSuffix2);
 

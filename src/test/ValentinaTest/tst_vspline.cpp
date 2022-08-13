@@ -850,6 +850,33 @@ void TST_VSpline::TestFlip()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// See file valentina_private_collection/bugs/men_jacket/issue_cut_spline.val (private collection)
+void TST_VSpline::TestCutSpline()
+{
+    VPointF p1(187.31716535433043, 51.31464566929152, QStringLiteral("p1"), 140.42872440944885, -22.62372283464567);
+    VPointF p4(-991.8954330708666, 9.739842519685212, QStringLiteral("p4"), 9.999987401574804, 15.0);
+
+    VSpline spl(p1, p4, 181.0, QStringLiteral("181"), 356.0, QStringLiteral("356"), 548.7874015748031,
+                QStringLiteral("Line_Г3_Г6*1.1"), 226.7716535433071, QStringLiteral("6"));
+    spl.SetApproximationScale(0.5);
+
+    const QString name(QStringLiteral("з"));
+    const qreal result = 1.35; // Correct distance in cm.
+    QPointF spl1p2, spl1p3, spl2p2, spl2p3;
+    QPointF point = spl.CutSpline(UnitConvertor(result, Unit::Cm, Unit::Px), spl1p2, spl1p3, spl2p2, spl2p3, name);
+
+    VPointF p(point, name, -16.590651968503941, 37.574173228346453);
+
+    VSpline spline1(spl.GetP1(), spl1p2, spl1p3, p);
+    spline1.SetApproximationScale(0.5);
+
+    // Size 54 produces incorrect spline segment distance
+
+    Q_DECL_RELAXED_CONSTEXPR qreal eps = ToPixel(0.0001, Unit::Mm);
+    QVERIFY(UnitConvertor(spline1.GetLength(), Unit::Px, Unit::Cm) - result < eps);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TST_VSpline::CompareSplines(const VSpline &spl1, const VSpline &spl2) const
 {
     QCOMPARE(spl1.GetP1().toQPointF().toPoint(), spl2.GetP1().toQPointF().toPoint());
