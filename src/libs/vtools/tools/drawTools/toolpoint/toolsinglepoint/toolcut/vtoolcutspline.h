@@ -50,24 +50,24 @@ class VToolCutSpline : public VToolCut
 {
     Q_OBJECT // NOLINT
 public:
-    virtual void setDialog() override;
-    static VToolCutSpline *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                  VContainer *data);
-    static VToolCutSpline *Create(VToolCutInitData &initData);
+    ~VToolCutSpline() override =default;
+    void setDialog() override;
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolCutSpline *;
+    static auto Create(VToolCutInitData &initData) -> VToolCutSpline *;
     static const QString ToolType;
     static const QString AttrSpline;
-    virtual int  type() const override {return Type;}
+    auto type() const -> int override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::CutSpline)};
-    virtual void  ShowVisualization(bool show) override;
+    void  ShowVisualization(bool show) override;
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
 protected:
-    virtual void    SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                               QList<quint32> &newDependencies) override;
-    virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void    ReadToolAttributes(const QDomElement &domElement) override;
-    virtual void    SetVisualization() override;
-    virtual QString MakeToolTip() const override;
+    void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void ReadToolAttributes(const QDomElement &domElement) override;
+    void SetVisualization() override;
+    auto MakeToolTip() const -> QString override;
 private:
     Q_DISABLE_COPY_MOVE(VToolCutSpline) // NOLINT
 

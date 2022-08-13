@@ -50,7 +50,12 @@ public:
                                   const Draw &mode = Draw::Calculation);
     VAbstractCubicBezier(const VAbstractCubicBezier &curve) = default;
     auto operator= (const VAbstractCubicBezier &curve) -> VAbstractCubicBezier&;
-    ~VAbstractCubicBezier() override;
+    ~VAbstractCubicBezier() override = default;
+
+#ifdef Q_COMPILER_RVALUE_REFS
+    VAbstractCubicBezier(VAbstractCubicBezier &&curve) Q_DECL_NOTHROW =default;
+    auto operator=(VAbstractCubicBezier &&curve) Q_DECL_NOTHROW -> VAbstractCubicBezier & =default;
+#endif
 
     virtual auto GetP1 () const -> VPointF =0;
     virtual auto GetP2 () const -> VPointF =0;

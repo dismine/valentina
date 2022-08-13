@@ -40,7 +40,6 @@
 #include <QtGlobal>
 
 #include "vabstractcubicbezier.h"
-#include "vgeometrydef.h"
 #include "vpointf.h"
 
 class VSplineData;
@@ -52,7 +51,7 @@ class VSpline final :public VAbstractCubicBezier
 {
 public:
     VSpline();
-    VSpline(const VSpline &spline );
+    VSpline(const VSpline &spline);
     VSpline(const VPointF &p1, const VPointF &p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve,
             quint32 idObject = 0, Draw mode = Draw::Calculation);
     VSpline(const VPointF &p1, const QPointF &p2, const QPointF &p3, const VPointF &p4, quint32 idObject = 0,

@@ -37,9 +37,9 @@
 #include <QTypeInfo>
 #include <QVector>
 #include <QtGlobal>
+#include <QtMath>
 
 #include "vabstractarc.h"
-#include "vgeometrydef.h"
 #include "vpointf.h"
 
 class VEllipticalArcData;

@@ -49,7 +49,7 @@ VSpline::VSpline()
  * @brief VSpline constructor.
  * @param spline spline from which the copy.
  */
-VSpline::VSpline(const VSpline &spline)
+VSpline::VSpline(const VSpline &spline) // NOLINT(modernize-use-equals-default)
     : VAbstractCubicBezier(spline),
       d(spline.d)
 {}

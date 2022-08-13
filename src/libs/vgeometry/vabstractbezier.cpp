@@ -35,13 +35,7 @@ VAbstractBezier::VAbstractBezier(const GOType &type, const quint32 &idObject, co
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractBezier::VAbstractBezier(const VAbstractBezier &curve)
-    : VAbstractCurve(curve)
-{
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VAbstractBezier &VAbstractBezier::operator=(const VAbstractBezier &curve)
+auto VAbstractBezier::operator=(const VAbstractBezier &curve) -> VAbstractBezier &
 {
     if ( &curve == this )
     {
@@ -49,9 +43,4 @@ VAbstractBezier &VAbstractBezier::operator=(const VAbstractBezier &curve)
     }
     VAbstractCurve::operator=(curve);
     return *this;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VAbstractBezier::~VAbstractBezier()
-{
 }

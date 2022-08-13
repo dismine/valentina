@@ -37,12 +37,10 @@
 #include <QVector>
 #include <QtGlobal>
 
-#include "../ifc/ifcdef.h"
-#include "../vmisc/vmath.h"
 #include "vgeometrydef.h"
 #include "vgobject.h"
 
-typedef QPair<QLineF, QLineF> DirectionArrow;
+using DirectionArrow = QPair<QLineF, QLineF>;
 
 class QPainterPath;
 class VAbstractCurveData;
@@ -56,69 +54,69 @@ class VAbstractCurve :public VGObject
 public:
     explicit VAbstractCurve(const GOType &type, const quint32 &idObject = NULL_ID,
                             const Draw &mode = Draw::Calculation);
-    explicit VAbstractCurve(const VAbstractCurve &curve);
-    virtual ~VAbstractCurve() override;
+    VAbstractCurve(const VAbstractCurve &curve);
+    ~VAbstractCurve() override;
 
-    VAbstractCurve& operator= (const VAbstractCurve &curve);
+    auto operator= (const VAbstractCurve &curve) -> VAbstractCurve&;
 #ifdef Q_COMPILER_RVALUE_REFS
     VAbstractCurve(VAbstractCurve &&curve) Q_DECL_NOTHROW;
-    VAbstractCurve &operator=(VAbstractCurve &&curve) Q_DECL_NOTHROW;
+    auto operator=(VAbstractCurve &&curve) Q_DECL_NOTHROW -> VAbstractCurve &;
 #endif
 
-    virtual QVector<QPointF> GetPoints() const =0;
-    static QVector<QPointF>  GetSegmentPoints(const QVector<QPointF> &points, const QPointF &begin, const QPointF &end,
-                                              bool reverse, QString &error);
-    QVector<QPointF>         GetSegmentPoints(const QPointF &begin, const QPointF &end, bool reverse,
-                                      const QString &piece = QString()) const;
+    virtual auto GetPoints() const -> QVector<QPointF> =0;
+    static auto GetSegmentPoints(const QVector<QPointF> &points, const QPointF &begin, const QPointF &end,
+                                  bool reverse, QString &error) -> QVector<QPointF>;
+    auto GetSegmentPoints(const QPointF &begin, const QPointF &end, bool reverse,
+                          const QString &piece = QString()) const -> QVector<QPointF>;
 
-    virtual QPainterPath     GetPath() const;
-    virtual qreal            GetLength() const =0;
-    qreal                    GetLengthByPoint(const QPointF &point) const;
-    virtual QVector<QPointF> IntersectLine(const QLineF &line) const;
-    virtual bool             IsIntersectLine(const QLineF &line) const;
+    virtual auto GetPath() const -> QPainterPath;
+    virtual auto GetLength() const -> qreal =0;
+    auto GetLengthByPoint(const QPointF &point) const -> qreal;
+    virtual auto IntersectLine(const QLineF &line) const -> QVector<QPointF>;
+    virtual auto IsIntersectLine(const QLineF &line) const -> bool;
 
-    static bool              IsPointOnCurve(const QVector<QPointF> &points, const QPointF &p);
-    bool                     IsPointOnCurve(const QPointF &p) const;
+    static auto IsPointOnCurve(const QVector<QPointF> &points, const QPointF &p) -> bool;
+    auto IsPointOnCurve(const QPointF &p) const -> bool;
 
-    static bool              SubdividePath(const QVector<QPointF> &points, QPointF p, QVector<QPointF> &sub1,
-                                           QVector<QPointF> &sub2);
+    static auto SubdividePath(const QVector<QPointF> &points, QPointF p, QVector<QPointF> &sub1,
+                              QVector<QPointF> &sub2) -> bool;
 
-    virtual qreal            GetStartAngle () const=0;
-    virtual qreal            GetEndAngle () const=0;
+    virtual auto GetStartAngle () const -> qreal=0;
+    virtual auto GetEndAngle () const -> qreal=0;
 
-    quint32                  GetDuplicate() const;
-    void                     SetDuplicate(quint32 number);
+    auto GetDuplicate() const -> quint32;
+    void SetDuplicate(quint32 number);
 
-    QString                  GetColor() const;
-    void                     SetColor(const QString &color);
+    auto GetColor() const -> QString;
+    void SetColor(const QString &color);
 
-    QString                  GetPenStyle() const;
-    void                     SetPenStyle(const QString &penStyle);
+    auto GetPenStyle() const -> QString;
+    void SetPenStyle(const QString &penStyle);
 
-    qreal                    GetApproximationScale() const;
-    void                     SetApproximationScale(qreal value);
+    auto GetApproximationScale() const -> qreal;
+    void SetApproximationScale(qreal value);
 
-    static qreal             PathLength(const QVector<QPointF> &path);
+    static auto PathLength(const QVector<QPointF> &path) -> qreal;
 
-    static QVector<QPointF>  CurveIntersectLine(const QVector<QPointF> &points, const QLineF &line);
-    static bool              CurveIntersectAxis(const QPointF &point, qreal angle, const QVector<QPointF> &curvePoints,
-                                                QPointF *intersectionPoint);
+    static auto CurveIntersectLine(const QVector<QPointF> &points, const QLineF &line) -> QVector<QPointF>;
+    static auto CurveIntersectAxis(const QPointF &point, qreal angle, const QVector<QPointF> &curvePoints,
+                                   QPointF *intersectionPoint) -> bool;
 
-    virtual QString          NameForHistory(const QString &toolName) const=0;
-    virtual QVector<DirectionArrow> DirectionArrows() const;
-    static QPainterPath      ShowDirection(const QVector<DirectionArrow> &arrows, qreal width);
+    virtual auto NameForHistory(const QString &toolName) const -> QString=0;
+    virtual auto DirectionArrows() const -> QVector<DirectionArrow>;
+    static auto ShowDirection(const QVector<DirectionArrow> &arrows, qreal width) -> QPainterPath;
 
-    static qreal LengthCurveDirectionArrow();
+    static auto LengthCurveDirectionArrow() -> qreal;
 
-    virtual void SetAliasSuffix(const QString &aliasSuffix) override;
+    void SetAliasSuffix(const QString &aliasSuffix) override;
 protected:
     virtual void CreateName() =0;
     virtual void CreateAlias() =0;
 private:
     QSharedDataPointer<VAbstractCurveData> d;
 
-    static QVector<QPointF>  FromBegin(const QVector<QPointF> &points, const QPointF &begin, bool *ok = nullptr);
-    static QVector<QPointF>  ToEnd(const QVector<QPointF> &points, const QPointF &end, bool *ok = nullptr);
+    static auto FromBegin(const QVector<QPointF> &points, const QPointF &begin, bool *ok = nullptr) -> QVector<QPointF>;
+    static auto ToEnd(const QVector<QPointF> &points, const QPointF &end, bool *ok = nullptr) -> QVector<QPointF>;
 };
 
 QT_WARNING_POP

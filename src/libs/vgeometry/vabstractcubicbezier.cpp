@@ -387,10 +387,6 @@ auto VAbstractCubicBezier::operator=(const VAbstractCubicBezier &curve) -> VAbst
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractCubicBezier::~VAbstractCubicBezier()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief CutSpline cut spline.
  * @param length length first spline
@@ -494,20 +490,20 @@ auto VAbstractCubicBezier::CutSpline(qreal length, QPointF &spl1p2, QPointF &spl
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractCubicBezier::NameForHistory(const QString &toolName) const -> QString
 {
-    QString name = toolName + QString(" %1_%2").arg(GetP1().name(), GetP4().name());
+    QString name = toolName + QStringLiteral(" %1_%2").arg(GetP1().name(), GetP4().name());
     if (GetDuplicate() > 0)
     {
-        name += QString("_%1").arg(GetDuplicate());
+        name += QStringLiteral("_%1").arg(GetDuplicate());
     }
 
     QString alias;
 
     if (not GetAliasSuffix().isEmpty())
     {
-        alias = QString("%1 %2").arg(toolName, GetAliasSuffix());
+        alias = QStringLiteral("%1 %2").arg(toolName, GetAliasSuffix());
     }
 
-    return not alias.isEmpty() ? QString("%1 (%2)").arg(alias, name) : name;
+    return not alias.isEmpty() ? QStringLiteral("%1 (%2)").arg(alias, name) : name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -549,10 +545,10 @@ auto VAbstractCubicBezier::GetParmT(qreal length) const -> qreal
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractCubicBezier::CreateName()
 {
-    QString name = SPL_ + QString("%1_%2").arg(GetP1().name(), GetP4().name());
+    QString name = SPL_ + QStringLiteral("%1_%2").arg(GetP1().name(), GetP4().name());
     if (GetDuplicate() > 0)
     {
-        name += QString("_%1").arg(GetDuplicate());
+        name += QStringLiteral("_%1").arg(GetDuplicate());
     }
 
     setName(name);

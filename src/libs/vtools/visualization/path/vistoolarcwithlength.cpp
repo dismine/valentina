@@ -33,8 +33,8 @@
 #include <QSharedPointer>
 #include <Qt>
 #include <new>
+#include <QtMath>
 
-#include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vpointf.h"
