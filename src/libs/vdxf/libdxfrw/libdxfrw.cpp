@@ -2494,7 +2494,6 @@ bool dxfRW::processViewport() {
         if (!vp.parseCode(code, reader)) {
             return setError( DRW::BAD_CODE_PARSED);
         }
-        break;
     }
 
     return setError(DRW::BAD_READ_ENTITIES);
@@ -2684,11 +2683,10 @@ bool dxfRW::processPolyline() {
             nextentity = reader->getString();
             DRW_DBG(nextentity); DRW_DBG("\n");
             if (nextentity != "VERTEX") {
-            iface->addPolyline(pl);
-            return true;  //found new entity or ENDSEC, terminate
-            } else {
-                processVertex(&pl);
+                iface->addPolyline(pl);
+                return true;  //found new entity or ENDSEC, terminate
             }
+            processVertex(&pl);
         }
 
         if (!pl.parseCode(code, reader)) { //parseCode just initialize the members of pl
@@ -2710,8 +2708,9 @@ bool dxfRW::processVertex(DRW_Polyline *pl) {
             nextentity = reader->getString();
             DRW_DBG(nextentity); DRW_DBG("\n");
             if (nextentity == "SEQEND") {
-            return true;  //found SEQEND no more vertex, terminate
-            } else if (nextentity == "VERTEX"){
+                return true;  //found SEQEND no more vertex, terminate
+            }
+            if (nextentity == "VERTEX"){
                 v.reset(new DRW_Vertex()); //another vertex
             }
         }
