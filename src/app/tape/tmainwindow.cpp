@@ -3437,7 +3437,7 @@ void TMainWindow::UpdateWindowTitle()
     static QIcon fileIcon = QIcon(QCoreApplication::applicationDirPath() +
                                   QLatin1String("/../Resources/measurements.icns"));
     QIcon icon;
-    if (not curFile.isEmpty())
+    if (not m_curFile.isEmpty())
     {
         if (not isWindowModified())
         {
