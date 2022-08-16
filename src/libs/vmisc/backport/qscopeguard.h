@@ -68,7 +68,7 @@ private:
         : m_func(std::move(f))
     {
     }
-    Q_DISABLE_COPY_MOVE(QScopeGuard) // NOLINT
+    Q_DISABLE_COPY(QScopeGuard) // NOLINT
     F m_func;
     bool m_invoke = true;
     friend QScopeGuard qScopeGuard<F>(F);
