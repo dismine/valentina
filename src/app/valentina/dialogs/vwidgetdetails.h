@@ -80,8 +80,8 @@ private:
     void ToggleSectionDetails(bool select);
     void ToggledPieceItem(QTableWidgetItem *item);
 
-    static Q_REQUIRED_RESULT auto PrepareInLayoutColumnCell(const VPiece &det, quint32 id) -> QTableWidgetItem *;
-    static Q_REQUIRED_RESULT auto PreparePieceNameColumnCell(const VPiece &det) -> QTableWidgetItem *;
+    Q_REQUIRED_RESULT static auto PrepareInLayoutColumnCell(const VPiece &det, quint32 id) -> QTableWidgetItem *;
+    Q_REQUIRED_RESULT static auto PreparePieceNameColumnCell(const VPiece &det) -> QTableWidgetItem *;
 };
 
 #endif // VWIDGETDETAILS_H
