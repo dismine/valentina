@@ -1127,8 +1127,8 @@ void TMainWindow::AboutToShowDockMenu()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::OpenAt(QAction *where)
 {
-    const QString path = curFile.left(curFile.indexOf(where->text())) + where->text();
-    if (path == curFile)
+    const QString path = m_curFile.left(m_curFile.indexOf(where->text())) + where->text();
+    if (path == m_curFile)
     {
         return;
     }
