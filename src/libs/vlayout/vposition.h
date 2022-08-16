@@ -67,18 +67,21 @@ QT_WARNING_DISABLE_GCC("-Weffc++")
 class VPosition
 {
 public:
-    VPosition();
+    VPosition() = default;
     VPosition(const VPositionData &data, std::atomic_bool *stop, bool saveLength);
     VPosition(const VPosition&) = default;
-    VPosition& operator=(const VPosition&) = default;
-    VPosition& operator=(VPosition&&) = default;
+    auto operator=(const VPosition&) -> VPosition& = default;
+#ifdef Q_COMPILER_RVALUE_REFS
+    VPosition(VPosition&&) = default;
+    auto operator=(VPosition&&) -> VPosition& = default;
+#endif
     ~VPosition()= default;
 
     void run();
 
-    VBestSquare getBestResult() const;
+    auto getBestResult() const -> VBestSquare;
 
-    static VBestSquare ArrangeDetail(const VPositionData &data, std::atomic_bool *stop, bool saveLength);
+    static auto ArrangeDetail(const VPositionData &data, std::atomic_bool *stop, bool saveLength) -> VBestSquare;
 
 #ifdef LAYOUT_DEBUG
     static void DumpFrame(const VContour &contour, const VLayoutPiece &detail, QMutex *mutex,
@@ -111,13 +114,13 @@ private:
 
     void SaveCandidate(VBestSquare &bestResult, const VLayoutPiece &detail, int globalI, int detJ, BestFrom type);
 
-    bool CheckCombineEdges(VLayoutPiece &detail, int j, int &dEdge);
-    bool CheckRotationEdges(VLayoutPiece &detail, int j, int dEdge, qreal angle) const;
+    auto CheckCombineEdges(VLayoutPiece &detail, int j, int &dEdge) -> bool;
+    auto CheckRotationEdges(VLayoutPiece &detail, int j, int dEdge, qreal angle) const -> bool;
 
     void RotateOnAngle(qreal angle);
 
-    CrossingType Crossing(const VLayoutPiece &detail) const;
-    bool         SheetContains(const QRectF &rect) const;
+    auto Crossing(const VLayoutPiece &detail) const -> CrossingType;
+    auto SheetContains(const QRectF &rect) const -> bool;
 
     void CombineEdges(VLayoutPiece &detail, const QLineF &globalEdge, int dEdge);
     static void RotateEdges(VLayoutPiece &detail, const QLineF &globalEdge, int dEdge, qreal angle);
@@ -125,7 +128,7 @@ private:
     void Rotate(int number);
     void FollowGrainline();
 
-    QLineF FabricGrainline() const;
+    auto FabricGrainline() const -> QLineF;
 
     void FindBestPosition();
 };
@@ -137,7 +140,7 @@ QT_WARNING_POP
  * @brief VPosition::FabricGrainline return fabric gainline accoding to paper orientation
  * @return fabric gainline line
  */
-inline QLineF VPosition::FabricGrainline() const
+inline auto VPosition::FabricGrainline() const -> QLineF
 {
     return m_data.isOriginPaperOrientationPortrait ? QLineF(10, 10, 10, 100) : QLineF(10, 10, 100, 10);
 }

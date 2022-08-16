@@ -51,15 +51,8 @@
 #include <functional>
 
 #include "../vmisc/def.h"
-#include "../vmisc/vmath.h"
 #include "../ifc/exception/vexception.h"
 #include "../vpatterndb/floatItemData/floatitemdef.h"
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
-#include "../vmisc/backport/qscopeguard.h"
-#else
-#include <QScopeGuard>
-#endif
 
 namespace
 {
@@ -141,16 +134,11 @@ QPainterPath DumpDetails(const QVector<VLayoutPiece> &details)
 } //anonymous namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-VPosition::VPosition()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 VPosition::VPosition(const VPositionData &data, std::atomic_bool *stop, bool saveLength)
     : m_isValid(true),
       m_bestResult(VBestSquare(data.gContour.GetSize(), saveLength, data.isOriginPaperOrientationPortrait)),
       m_data(data),
-      stop(stop),
-      angle_between(0)
+      stop(stop)
 {
     if (m_data.rotationNumber > 360 || m_data.rotationNumber < 1)
     {
@@ -202,13 +190,13 @@ void VPosition::run()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VBestSquare VPosition::getBestResult() const
+auto VPosition::getBestResult() const -> VBestSquare
 {
     return m_bestResult;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VBestSquare VPosition::ArrangeDetail(const VPositionData &data, std::atomic_bool *stop, bool saveLength)
+auto VPosition::ArrangeDetail(const VPositionData &data, std::atomic_bool *stop, bool saveLength) -> VBestSquare
 {
     VBestSquare bestResult(data.gContour.GetSize(), saveLength, data.isOriginPaperOrientationPortrait);
 
@@ -317,7 +305,7 @@ void VPosition::SaveCandidate(VBestSquare &bestResult, const VLayoutPiece &detai
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPosition::CheckCombineEdges(VLayoutPiece &detail, int j, int &dEdge)
+auto VPosition::CheckCombineEdges(VLayoutPiece &detail, int j, int &dEdge) -> bool
 {
     const QLineF globalEdge = m_data.gContour.GlobalEdge(j);
     bool flagMirror = false;
@@ -398,7 +386,7 @@ bool VPosition::CheckCombineEdges(VLayoutPiece &detail, int j, int &dEdge)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPosition::CheckRotationEdges(VLayoutPiece &detail, int j, int dEdge, qreal angle) const
+auto VPosition::CheckRotationEdges(VLayoutPiece &detail, int j, int dEdge, qreal angle) const -> bool
 {
     const QLineF globalEdge = m_data.gContour.GlobalEdge(j);
     bool flagSquare = false;
@@ -462,7 +450,7 @@ void VPosition::RotateOnAngle(qreal angle)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPosition::CrossingType VPosition::Crossing(const VLayoutPiece &detail) const
+auto VPosition::Crossing(const VLayoutPiece &detail) const -> VPosition::CrossingType
 {
     if (m_data.positionsCache.isEmpty())
     {
@@ -478,7 +466,7 @@ VPosition::CrossingType VPosition::Crossing(const VLayoutPiece &detail) const
     const QRectF detailBoundingRect = VLayoutPiece::BoundingRect(contourPoints);
     const QPainterPath contourPath = VAbstractPiece::PainterPath(contourPoints);
 
-    for(auto &position : m_data.positionsCache)
+    for(const auto &position : m_data.positionsCache)
     {
         if (position.boundingRect.intersects(layoutBoundingRect) || position.boundingRect.contains(detailBoundingRect)
             || detailBoundingRect.contains(position.boundingRect))
@@ -495,7 +483,7 @@ VPosition::CrossingType VPosition::Crossing(const VLayoutPiece &detail) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPosition::SheetContains(const QRectF &rect) const
+auto VPosition::SheetContains(const QRectF &rect) const -> bool
 {
     const QRectF bRect(-accuracyPointOnLine, -accuracyPointOnLine, m_data.gContour.GetWidth()+accuracyPointOnLine,
                        m_data.gContour.GetHeight()+accuracyPointOnLine);
@@ -535,13 +523,15 @@ void VPosition::RotateEdges(VLayoutPiece &detail, const QLineF &globalEdge, int 
 //---------------------------------------------------------------------------------------------------------------------
 void VPosition::Rotate(int number)
 {
-    const qreal step = 360/number;
+    const qreal step = 360.0/number;
     qreal startAngle = 0;
     if (VFuzzyComparePossibleNulls(angle_between, 360))
     {
         startAngle = step;
     }
-    for (qreal angle = startAngle; angle < 360; angle = angle+step)
+
+    qreal angle = startAngle;
+    while(angle < 360)
     {
         if (stop->load())
         {
@@ -549,6 +539,8 @@ void VPosition::Rotate(int number)
         }
 
         RotateOnAngle(angle);
+
+        angle = angle+step;
     }
 }
 
