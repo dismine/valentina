@@ -137,7 +137,7 @@ void TST_MeasurementRegExp::TestCheckIsNamesUnique_data()
     for (const auto &key : keys)
     {
         const QString tag = QString("System: '%1', locale: '%2'. Name '%3'").arg(m_system, m_locale, key);
-        QTest::newRow(qUtf8Printable(tag)) << key << names.values(key);
+        QTest::newRow(qUtf8Printable(tag)) << key << QStringList(names.values(key));
     }
 }
 

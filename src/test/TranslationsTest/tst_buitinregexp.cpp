@@ -108,7 +108,7 @@ void TST_BuitInRegExp::TestCheckIsNamesUnique_data()
     for (const auto &key : keys)
     {
         const QString tag = QString("Locale: '%1'. Name '%2'").arg(m_locale, key);
-        QTest::newRow(qUtf8Printable(tag)) << key << names.values(key);
+        QTest::newRow(qUtf8Printable(tag)) << key << QStringList(names.values(key));
     }
 }
 
