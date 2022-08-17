@@ -31,7 +31,6 @@
 #include <QMainWindow>
 
 #include "../ifc/ifcdef.h"
-#include "../vformat/vwatermark.h"
 #include "../vmisc/vlockguard.h"
 
 namespace Ui

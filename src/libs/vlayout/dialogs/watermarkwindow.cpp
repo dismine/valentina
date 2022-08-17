@@ -37,12 +37,16 @@
 #include <QStyle>
 #include <QtConcurrent>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../vmisc/backport/qoverload.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+
 #include "../vmisc/def.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpropertyexplorer/checkablemessagebox.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/xml/vwatermarkconverter.h"
-#include "../vmisc/vvalentinasettings.h"
+#include "../vformat/vwatermark.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 WatermarkWindow::WatermarkWindow(const QString &patternPath, QWidget *parent) :
