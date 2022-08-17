@@ -247,7 +247,7 @@ QString PrepareGroupTags(QStringList tags)
         tag = tag.simplified();
     }
 
-    return ConvertToList(ConvertToSet<QString>(tags)).join(',');
+    return ConvertToStringList(ConvertToSet<QString>(tags)).join(',');
 }
 
 //---------------------------------------------------------------------------------------------------------------------

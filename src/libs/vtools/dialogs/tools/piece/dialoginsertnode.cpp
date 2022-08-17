@@ -29,6 +29,9 @@
 #include "dialoginsertnode.h"
 #include "ui_dialoginsertnode.h"
 #include "../vpatterndb/vcontainer.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../vmisc/backport/qoverload.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 
 #include <QMenu>
 

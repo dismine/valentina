@@ -29,6 +29,9 @@
 #include "puzzlepreferencesconfigurationpage.h"
 #include "ui_puzzlepreferencesconfigurationpage.h"
 #include "../../vpapplication.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../vmisc/backport/qoverload.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 
 //---------------------------------------------------------------------------------------------------------------------
 PuzzlePreferencesConfigurationPage::PuzzlePreferencesConfigurationPage(QWidget *parent) :

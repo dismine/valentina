@@ -36,6 +36,9 @@
 #include <QString>
 
 #include "../vmisc/defglobal.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+#include "../vmisc/diagnostic.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
 struct VFinalMeasurement;
 

@@ -29,6 +29,9 @@
 #include "dialogincrements.h"
 #include "ui_dialogincrements.h"
 #include "../vmisc/vvalentinasettings.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../vmisc/backport/qoverload.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../qmuparser/qmudef.h"
 #include "../qmuparser/qmutokenparser.h"
 #include "../vpatterndb/vtranslatevars.h"

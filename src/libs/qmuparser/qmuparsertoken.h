@@ -31,6 +31,7 @@
 
 #include "qmuparsererror.h"
 #include "qmuparsercallback.h"
+#include "make_unique.h"
 
 /** @file
     @brief This file contains the parser token definition.

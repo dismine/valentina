@@ -34,6 +34,10 @@
 #include <QVector>
 #include <QFontMetrics>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+#include "diagnostic.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+
 class QPointF;
 
 // Contains helpful methods to hide version dependent code. It can be deprecation of method or change in API
@@ -102,6 +106,13 @@ inline auto ConvertToList(const C<T> &container) -> QList<T>
 #else
     return container.toList();
 #endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T, template <typename> class C>
+inline auto ConvertToStringList(const C<T> &container) -> QStringList
+{
+    return {ConvertToList(container)};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

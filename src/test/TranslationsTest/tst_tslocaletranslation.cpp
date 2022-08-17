@@ -30,6 +30,10 @@
 
 #include <QtTest>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+Q_DECLARE_METATYPE(Qt::LayoutDirection)
+#endif
+
 //---------------------------------------------------------------------------------------------------------------------
 TST_TSLocaleTranslation::TST_TSLocaleTranslation(const QString &locale, QObject *parent)
     : TST_AbstractTranslation(parent),

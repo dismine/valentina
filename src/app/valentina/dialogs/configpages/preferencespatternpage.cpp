@@ -32,6 +32,9 @@
 #include "../dialogknownmaterials.h"
 #include "../vmisc/vvalentinasettings.h"
 #include "../vmisc/vabstractvalapplication.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../vmisc/backport/qoverload.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../ifc/xml/vabstractpattern.h"
 

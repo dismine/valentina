@@ -29,6 +29,9 @@
 #include "dialogeditlabel.h"
 #include "ui_dialogeditlabel.h"
 #include "../vmisc/vabstractapplication.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../vmisc/backport/qoverload.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vformat/vlabeltemplate.h"
 #include "../ifc/xml/vlabeltemplateconverter.h"
 #include "../ifc/xml/vabstractpattern.h"

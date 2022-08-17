@@ -30,6 +30,9 @@
 #include "../vpapplication.h"
 #include "../ifc/exception/vexception.h"
 #include "../vlayout/vlayoutexporter.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../vmisc/backport/qoverload.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 
 #include <QMessageBox>
 #include <QShowEvent>

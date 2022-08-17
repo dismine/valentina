@@ -39,7 +39,9 @@
 #include <QShowEvent>
 #include <chrono>
 
+#if __cplusplus >= 201402L
 using namespace std::chrono_literals;
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogLayoutProgress::DialogLayoutProgress(QElapsedTimer timer, qint64 timeout, QWidget *parent)
@@ -83,7 +85,11 @@ DialogLayoutProgress::DialogLayoutProgress(QElapsedTimer timer, qint64 timeout, 
             m_progressTimer->stop();
         }
     });
+#if __cplusplus >= 201402L
     m_progressTimer->start(1s);
+#else
+    m_progressTimer->start(1000);
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------

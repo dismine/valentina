@@ -29,6 +29,9 @@
 #include "ui_dialogmeasurementscsvcolumns.h"
 
 #include "../vmisc/qxtcsvmodel.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../vmisc/backport/qoverload.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vtools/dialogs/dialogtoolbox.h"
 
 #include <QPushButton>

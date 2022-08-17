@@ -131,7 +131,7 @@ void TST_MeasurementRegExp::TestCheckIsNamesUnique_data()
     }
 
     QTest::addColumn<QString>("translatedName");
-    QTest::addColumn<QList<QString>>("originalNames");
+    QTest::addColumn<QStringList>("originalNames");
 
     QList<QString> keys = names.uniqueKeys();
     for (const auto &key : keys)
@@ -145,7 +145,7 @@ void TST_MeasurementRegExp::TestCheckIsNamesUnique_data()
 void TST_MeasurementRegExp::TestCheckIsNamesUnique()
 {
     QFETCH(QString, translatedName);
-    QFETCH(QList<QString>, originalNames);
+    QFETCH(QStringList, originalNames);
 
     if (QLocale() == QLocale(QStringLiteral("zh_CN")) || QLocale() == QLocale(QStringLiteral("he_IL")))
     {

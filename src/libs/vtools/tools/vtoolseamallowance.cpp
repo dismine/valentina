@@ -56,6 +56,9 @@
 #include "../qmuparser/qmutokenparser.h"
 #include "../vlayout/vlayoutdef.h"
 #include "toolsdef.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../vmisc/backport/qoverload.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 
 #include <QFuture>
 #include <QtConcurrent/QtConcurrentRun>

@@ -45,6 +45,9 @@
 
 #include "debugbreak.h"
 #include "defglobal.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+#include "diagnostic.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
 template <class T> class QSharedPointer;
 

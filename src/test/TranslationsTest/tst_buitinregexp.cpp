@@ -102,7 +102,7 @@ void TST_BuitInRegExp::TestCheckIsNamesUnique_data()
     }
 
     QTest::addColumn<QString>("translatedName");
-    QTest::addColumn<QList<QString>>("originalNames");
+    QTest::addColumn<QStringList>("originalNames");
 
     QList<QString> keys = names.uniqueKeys();
     for (const auto &key : keys)
@@ -116,7 +116,7 @@ void TST_BuitInRegExp::TestCheckIsNamesUnique_data()
 void TST_BuitInRegExp::TestCheckIsNamesUnique()
 {
     QFETCH(QString, translatedName);
-    QFETCH(QList<QString>, originalNames);
+    QFETCH(QStringList, originalNames);
 
     if (originalNames.size() > 1)
     {

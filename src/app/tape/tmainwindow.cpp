@@ -49,6 +49,9 @@
 #include "../vmisc/qxtcsvmodel.h"
 #include "../vmisc/dialogs/dialogexporttocsv.h"
 #include "../vmisc/compatibility.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../vmisc/backport/qoverload.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "vlitepattern.h"
 #include "../qmuparser/qmudef.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
@@ -71,7 +74,9 @@
 #include <QTimer>
 #include <chrono>
 
+#if __cplusplus >= 201402L
 using namespace std::chrono_literals;
+#endif
 
 #if defined(Q_OS_MAC)
 #include <QMimeData>
@@ -160,7 +165,7 @@ void InitDimensionYWZItems(const QVector<qreal> &bases, const DimesionLabels &la
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto ConverToDouble(QString text, const QString &error)
+auto ConverToDouble(QString text, const QString &error) -> qreal
 {
     text.replace(QStringLiteral(" "), QString());
     text = VTranslateVars::TryFormulaFromUser(text, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
@@ -237,7 +242,11 @@ TMainWindow::TMainWindow(QWidget *parent)
 
     if (MApplication::VApp()->IsAppInGUIMode())
     {
+#if __cplusplus >= 201402L
         QTimer::singleShot(1s, this, &TMainWindow::SetDefaultGUILanguage);
+#else
+        QTimer::singleShot(1000, this, &TMainWindow::SetDefaultGUILanguage);
+#endif
     }
 }
 

@@ -46,6 +46,9 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../core/vapplication.h"
 #include "../vmisc/vvalentinasettings.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../vmisc/backport/qoverload.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../qmuparser/qmudef.h"
 #include "../ifc/xml/vpatternimage.h"
 #include "../ifc/xml/utils.h"

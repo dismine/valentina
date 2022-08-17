@@ -30,6 +30,9 @@
 #include "ui_dialogpin.h"
 #include "visualization/line/vistoolspecialpoint.h"
 #include "../../../tools/vabstracttool.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../vmisc/backport/qoverload.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPin::DialogPin(const VContainer *data, quint32 toolId, QWidget *parent)

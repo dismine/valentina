@@ -39,7 +39,9 @@
 #include <QUndoStack>
 #include <chrono>
 
+#if __cplusplus >= 201402L
 using namespace std::chrono_literals;
+#endif
 
 namespace
 {
@@ -91,7 +93,11 @@ void VWidgetDetails::UpdateList()
     // The filling table is a very expensive operation. This optimization will postpone it.
     // Each time a new request happen we will wait 800 ms before calling it. If at this time a new request will arrive
     // we will wait 800 ms more. And so on, until nothing happens within 800ms.
+#if __cplusplus >= 201402L
     m_updateListTimer->start(800ms);
+#else
+    m_updateListTimer->start(800);
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------

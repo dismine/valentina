@@ -45,8 +45,10 @@
 #include "../../visualization/line/vistoollineintersect.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vgeometry/vpointf.h"
-#include "../vmisc/vabstractapplication.h"
 #include "../vmisc/compatibility.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../vmisc/backport/qoverload.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vpatterndb/vcontainer.h"
 #include "dialogtool.h"
 #include "ui_dialoglineintersect.h"

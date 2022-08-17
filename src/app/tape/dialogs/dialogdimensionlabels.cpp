@@ -27,6 +27,9 @@
  *************************************************************************/
 #include "dialogdimensionlabels.h"
 #include "ui_dialogdimensionlabels.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../vmisc/backport/qoverload.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogDimensionLabels::DialogDimensionLabels(const QMap<MeasurementDimension, MeasurementDimension_p> &dimensions,

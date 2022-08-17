@@ -64,6 +64,9 @@
 #include "../vdxf/libdxfrw/drw_base.h"
 #include "../vmisc/dialogs/dialogselectlanguage.h"
 #include "../vmisc/lambdaconstants.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../vmisc/backport/qoverload.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "vptilefactory.h"
 #include "layout/vppiece.h"
 
@@ -85,7 +88,9 @@ Q_LOGGING_CATEGORY(pWindow, "p.window") // NOLINT
 
 QT_WARNING_POP
 
+#if __cplusplus >= 201402L
 using namespace std::chrono_literals;
+#endif
 
 namespace
 {
@@ -383,7 +388,11 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
 
     if (m_cmd->IsGuiEnabled())
     {
+#if __cplusplus >= 201402L
         QTimer::singleShot(1s, this, &VPMainWindow::SetDefaultGUILanguage);
+#else
+        QTimer::singleShot(1000, this, &VPMainWindow::SetDefaultGUILanguage);
+#endif
     }
 }
 

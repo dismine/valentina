@@ -50,6 +50,9 @@
 #include "../ifc/ifcdef.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vmath.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../vmisc/backport/qoverload.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vabstractmainwindow.h"
 #include "dialogtool.h"
