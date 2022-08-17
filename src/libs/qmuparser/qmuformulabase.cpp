@@ -30,6 +30,8 @@
 #include <QStringDataPtr>
 #include <QStringList>
 
+#include "qmudef.h"
+
 namespace qmu
 {
 

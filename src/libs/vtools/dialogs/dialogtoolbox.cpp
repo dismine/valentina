@@ -42,6 +42,7 @@
 #include "../vgeometry/vcubicbezierpath.h"
 #include "../vgeometry/vspline.h"
 #include "../vgeometry/vsplinepath.h"
+#include "../qmuparser/qmudef.h"
 
 #include <QDialog>
 #include <QLabel>

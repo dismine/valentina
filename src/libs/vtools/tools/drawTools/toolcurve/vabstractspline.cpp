@@ -41,9 +41,9 @@
 #include <new>
 
 #include "../ifc/exception/vexception.h"
-#include "../ifc/exception/vexceptionbadid.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../qmuparser/qmutokenparser.h"
+#include "../qmuparser/qmudef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"

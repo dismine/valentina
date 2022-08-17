@@ -25,7 +25,6 @@
 #include <QVector>
 #include <QtGlobal>
 
-#include "qmudef.h"
 #include "qmuparserdef.h"
 #include "qmuparsertoken.h"
 

@@ -34,6 +34,10 @@
 #include <QPushButton>
 #include <QShowEvent>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../vmisc/backport/qoverload.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+
 //---------------------------------------------------------------------------------------------------------------------
 DialogLayoutScale::DialogLayoutScale(bool printTiled, QWidget *parent)
     :QDialog(parent),

@@ -100,11 +100,11 @@ void QmuParserByteCode::AddVar(qreal *a_pVar)
     m_iMaxStackSize = qMax(m_iMaxStackSize, m_iStackPos);
 
     // optimization does not apply
-    SToken tok{};
+    SToken tok; // NOLINT
     tok.Cmd       = cmVAR;
-    tok.Val.ptr   = a_pVar; // NOLINT(cppcoreguidelines-pro-type-union-access)
-    tok.Val.data  = 1; // NOLINT(cppcoreguidelines-pro-type-union-access)
-    tok.Val.data2 = 0; // NOLINT(cppcoreguidelines-pro-type-union-access)
+    tok.Val.ptr   = a_pVar;
+    tok.Val.data  = 1;
+    tok.Val.data2 = 0;
     m_vRPN.push_back(tok);
 }
 
@@ -128,11 +128,11 @@ void QmuParserByteCode::AddVal(qreal a_fVal)
     m_iMaxStackSize = qMax(m_iMaxStackSize, m_iStackPos);
 
     // If optimization does not apply
-    SToken tok{};
+    SToken tok; // NOLINT
     tok.Cmd = cmVAL;
-    tok.Val.ptr   = nullptr; // NOLINT(cppcoreguidelines-pro-type-union-access)
-    tok.Val.data  = 0; // NOLINT(cppcoreguidelines-pro-type-union-access)
-    tok.Val.data2 = a_fVal; // NOLINT(cppcoreguidelines-pro-type-union-access)
+    tok.Val.ptr   = nullptr;
+    tok.Val.data  = 0;
+    tok.Val.data2 = a_fVal;
     m_vRPN.push_back(tok);
 }
 
@@ -140,8 +140,8 @@ void QmuParserByteCode::AddVal(qreal a_fVal)
 void QmuParserByteCode::ConstantFolding(ECmdCode a_Oprt)
 {
     int sz = m_vRPN.size();
-    qreal &x = m_vRPN[sz-2].Val.data2, // NOLINT(cppcoreguidelines-pro-type-union-access)
-          &y = m_vRPN[sz-1].Val.data2; // NOLINT(cppcoreguidelines-pro-type-union-access)
+    qreal &x = m_vRPN[sz-2].Val.data2,
+          &y = m_vRPN[sz-1].Val.data2;
     switch (a_Oprt)
     {
         case cmLAND:
@@ -355,7 +355,7 @@ void QmuParserByteCode::AddOp(ECmdCode a_Oprt)
         if (not bOptimized)
         {
             --m_iStackPos;
-            SToken tok{};
+            SToken tok; // NOLINT
             tok.Cmd = a_Oprt;
             m_vRPN.push_back(tok);
         }
@@ -416,7 +416,7 @@ QT_WARNING_POP
 //---------------------------------------------------------------------------------------------------------------------
 void QmuParserByteCode::AddIfElse(ECmdCode a_Oprt)
 {
-    SToken tok{};
+    SToken tok; // NOLINT
     tok.Cmd = a_Oprt;
     m_vRPN.push_back(tok);
 }
@@ -437,7 +437,7 @@ void QmuParserByteCode::AddAssignOp(qreal *a_pVar)
 {
     --m_iStackPos;
 
-    SToken tok{};
+    SToken tok; // NOLINT
     tok.Cmd = cmASSIGN;
     tok.Oprt.ptr = a_pVar;
     m_vRPN.push_back(tok);
@@ -463,7 +463,7 @@ void QmuParserByteCode::AddFun(generic_fun_type a_pFun, int a_iArgc)
     }
     m_iMaxStackSize = qMax(m_iMaxStackSize, m_iStackPos);
 
-    SToken tok{};
+    SToken tok; // NOLINT
     tok.Cmd = cmFUNC;
     tok.Fun.argc = a_iArgc;
     tok.Fun.ptr = a_pFun;
@@ -482,7 +482,7 @@ void QmuParserByteCode::AddBulkFun(generic_fun_type a_pFun, int a_iArgc)
     m_iStackPos = static_cast<quint32>(static_cast<int>(m_iStackPos) - a_iArgc + 1);
     m_iMaxStackSize = qMax(m_iMaxStackSize, m_iStackPos);
 
-    SToken tok{};
+    SToken tok; // NOLINT
     tok.Cmd = cmFUNC_BULK;
     tok.Fun.argc = a_iArgc;
     tok.Fun.ptr = a_pFun;
@@ -501,7 +501,7 @@ void QmuParserByteCode::AddStrFun(generic_fun_type a_pFun, int a_iArgc, int a_iI
 {
     m_iStackPos = static_cast<quint32>(static_cast<int>(m_iStackPos) - a_iArgc + 1);
 
-    SToken tok{};
+    SToken tok; // NOLINT
     tok.Cmd = cmFUNC_STR;
     tok.Fun.argc = a_iArgc;
     tok.Fun.idx = a_iIdx;
@@ -519,7 +519,7 @@ void QmuParserByteCode::AddStrFun(generic_fun_type a_pFun, int a_iArgc, int a_iI
  */
 void QmuParserByteCode::Finalize()
 {
-    SToken tok{};
+    SToken tok; // NOLINT
     tok.Cmd = cmEND;
     m_vRPN.push_back(tok);
     rpn_type(m_vRPN).swap(m_vRPN);     // shrink bytecode vector to fit

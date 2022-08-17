@@ -30,11 +30,11 @@
 #include <sstream>
 #include <string>
 #include <QtDebug>
+#include <QtMath>
 
-#include "qmuparserdef.h"
 #include "qmuparsererror.h"
-#include "../vmisc/vmath.h"
 #include "../vmisc/defglobal.h"
+#include "qmudef.h"
 
 /**
  * @file
