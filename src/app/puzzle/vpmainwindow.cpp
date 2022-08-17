@@ -2632,7 +2632,11 @@ void VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet, bool showTilesS
 
     if (showTilesScheme)
     {
-        DrawTilesScheme(printer.data(), painter, sheet, firstPage);
+        if (not DrawTilesScheme(printer.data(), painter, sheet, firstPage))
+        {
+            return;
+        }
+        firstPage = false;
     }
 
     for(int row=0; row < m_layout->TileFactory()->RowNb(sheet); row++)  // for each row of the tiling grid
@@ -3099,7 +3103,12 @@ auto VPMainWindow::PrintLayoutTiledSheetPage(QPrinter *printer, QPainter &painte
 
     if (page.tilesScheme)
     {
-        return DrawTilesScheme(printer, &painter, page.sheet, firstPage);
+        if (not DrawTilesScheme(printer, &painter, page.sheet, firstPage))
+        {
+            return false;
+        }
+
+        firstPage = false;
     }
 
     if(not firstPage)
