@@ -122,6 +122,7 @@ public:
 
     static auto ContinueIfLayoutStale(QWidget *parent) -> int;
     static auto SceneTargetRect(QPrinter *printer, const QRectF &source) -> QRectF;
+    static auto PrinterScaleDiff(QPrinter *printer) -> QPair<qreal, qreal>;
 
 private slots:
     void PrintPages (QPrinter *printer);

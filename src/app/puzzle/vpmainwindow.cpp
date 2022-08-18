@@ -2778,8 +2778,9 @@ auto VPMainWindow::DrawTilesScheme(QPrinter *printer, QPainter *painter, const V
         target = QRectF(0, 0, width, height);
     }
 
-    sheet->SceneData()->Scene()->render(painter, VPrintLayout::SceneTargetRect(printer, target), source,
-                                        Qt::KeepAspectRatio);
+    target = VPrintLayout::SceneTargetRect(printer, target);
+
+    sheet->SceneData()->Scene()->render(painter, target, source, Qt::KeepAspectRatio);
 
     VWatermarkData watermarkData = m_layout->TileFactory()->WatermarkData();
     if (watermarkData.opacity > 0)

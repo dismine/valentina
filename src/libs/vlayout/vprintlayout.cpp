@@ -750,7 +750,7 @@ auto VPrintLayout::ContinueIfLayoutStale(QWidget *parent) -> int
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VPrintLayout::SceneTargetRect(QPrinter *printer, const QRectF &source)
+auto VPrintLayout::SceneTargetRect(QPrinter *printer, const QRectF &source) -> QRectF
 {
     SCASSERT(printer != nullptr)
 
@@ -769,6 +769,18 @@ QRectF VPrintLayout::SceneTargetRect(QPrinter *printer, const QRectF &source)
         x = 0; y = 0;
     }
 
+    QPair<qreal, qreal> scaleDiff = PrinterScaleDiff(printer);
+    const double xscale = scaleDiff.first;
+    const double yscale = scaleDiff.second;
+
+    return {x * xscale, y * yscale, source.width() * xscale, source.height() * yscale};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPrintLayout::PrinterScaleDiff(QPrinter *printer) -> QPair<qreal, qreal>
+{
+    SCASSERT(printer != nullptr)
+
     // Here we try understand difference between printer's dpi and our.
     // Get printer rect according to our dpi.
     const QRectF printerPageRect(0, 0, ToPixel(printer->pageRect(QPrinter::Millimeter).width(), Unit::Mm),
@@ -777,5 +789,5 @@ QRectF VPrintLayout::SceneTargetRect(QPrinter *printer, const QRectF &source)
     const double xscale = pageRect.width() / printerPageRect.width();
     const double yscale = pageRect.height() / printerPageRect.height();
 
-    return QRectF(x * xscale, y * yscale, source.width() * xscale, source.height() * yscale);
+    return qMakePair(xscale, yscale);
 }

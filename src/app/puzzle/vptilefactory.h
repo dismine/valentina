@@ -123,7 +123,7 @@ private:
 
     VWatermarkData m_watermarkData{};
 
-    void DrawRuler(QPainter *painter) const;
+    void DrawRuler(QPainter *painter, qreal scale) const;
     void DrawWatermark(QPainter *painter) const;
 
     auto PenTileInfos() const -> QPen;

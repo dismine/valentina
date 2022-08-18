@@ -174,6 +174,11 @@ void VPTileFactory::drawTile(QPainter *painter, QPrinter *printer, const VPSheet
     // add the tiles decorations (cutting and gluing lines, scissors, infos etc.)
     painter->setPen(PenTileInfos());
 
+    painter->save();
+
+    const QPair<qreal, qreal> scale = VPrintLayout::PrinterScaleDiff(printer);
+    painter->scale(scale.first, scale.second);
+
     if(row > 0)
     {
         // add top triangle
@@ -217,7 +222,7 @@ void VPTileFactory::drawTile(QPainter *painter, QPrinter *printer, const VPSheet
         DrawSolidBottomLine(painter, col, nbCol);
     }
 
-    DrawRuler(painter);
+    DrawRuler(painter, scale.first);
     DrawWatermark(painter);
 
     if(col < nbCol-1)
@@ -235,6 +240,8 @@ void VPTileFactory::drawTile(QPainter *painter, QPrinter *printer, const VPSheet
 
     // prepare the painting for the text information
     DrawTextInformation(painter, row, col, nbRow, nbCol, sheet->GetName());
+
+    painter->restore();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -294,7 +301,7 @@ auto VPTileFactory::WatermarkData() const -> const VWatermarkData &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPTileFactory::DrawRuler(QPainter *painter) const
+void VPTileFactory::DrawRuler(QPainter *painter, qreal scale) const
 {
     VPLayoutPtr layout = m_layout.toStrongRef();
     if(layout.isNull())
@@ -330,15 +337,21 @@ void VPTileFactory::DrawRuler(QPainter *painter) const
         }
         else
         {
-            QString units = rulerUnits != Unit::Inch ? tr("cm", "unit") : tr("in", "unit");
+            painter->save();
+
             QFont fnt = painter->font();
-            fnt.setPointSize(10);
+            const int size = qRound(10/scale);
+            size > 0 ? fnt.setPointSize(size) : fnt.setPointSize(10);
+            painter->setFont(fnt);
 
             qreal unitsWidth = 0;
             QFontMetrics fm(fnt);
+            QString units = rulerUnits != Unit::Inch ? tr("cm", "unit") : tr("in", "unit");
             unitsWidth = TextWidth(fm, units);
             painter->drawText(QPointF(step*0.5-unitsWidth*0.6,
                                       m_drawingAreaHeight - tileStripeWidth + notchHeight+shortNotchHeight), units);
+
+            painter->restore();
         }
         ++i;
     }

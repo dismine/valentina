@@ -18,6 +18,7 @@
 - Support for options Force Flipping and Forbid Flipping in Puzzle.
 - Remember selected dimension values.
 - Fix segmenting a simple curve.
+- Fix export tiled pdf on Mac OS.
 
 # Valentina 0.7.51 April 18, 2022
 - Z value change for a layout piece.
