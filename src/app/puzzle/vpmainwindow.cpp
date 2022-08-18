@@ -2574,7 +2574,10 @@ void VPMainWindow::ExportPdfTiledFile(const VPExportData &data)
         bool firstPage = true;
         for (const auto& sheet : data.sheets)
         {
-            GeneratePdfTiledFile(sheet, data.showTilesScheme, &painter, printer, firstPage);
+            if (not GeneratePdfTiledFile(sheet, data.showTilesScheme, &painter, printer, firstPage))
+            {
+                break;
+            }
         }
     }
     else
@@ -2589,14 +2592,17 @@ void VPMainWindow::ExportPdfTiledFile(const VPExportData &data)
 
             QPainter painter;
             bool firstPage = true;
-            GeneratePdfTiledFile(data.sheets.at(i), data.showTilesScheme, &painter, printer, firstPage);
+            if (not GeneratePdfTiledFile(data.sheets.at(i), data.showTilesScheme, &painter, printer, firstPage))
+            {
+                break;
+            }
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet, bool showTilesScheme, QPainter *painter,
-                                        const QSharedPointer<QPrinter> &printer, bool &firstPage)
+auto VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet, bool showTilesScheme, QPainter *painter,
+                                        const QSharedPointer<QPrinter> &printer, bool &firstPage) -> bool
 {
     SCASSERT(not sheet.isNull())
     SCASSERT(painter != nullptr)
@@ -2621,7 +2627,7 @@ void VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet, bool showTilesS
         if (not painter->begin(printer.data()))
         { // failed to open file
             qCritical() << tr("Failed to open file, is it writable?");
-            return;
+            return false;
         }
 
         painter->setPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthMainLine(), Qt::SolidLine,
@@ -2634,7 +2640,7 @@ void VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet, bool showTilesS
     {
         if (not DrawTilesScheme(printer.data(), painter, sheet, firstPage))
         {
-            return;
+            return false;
         }
         firstPage = false;
     }
@@ -2651,7 +2657,7 @@ void VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet, bool showTilesS
                 if (not printer->newPage())
                 {
                     qWarning("failed in flushing page to disk, disk full?");
-                    return;
+                    return false;
                 }
             }
 
@@ -2662,6 +2668,8 @@ void VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet, bool showTilesS
     }
 
     sheet->SceneData()->CleanAfterExport();
+
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
