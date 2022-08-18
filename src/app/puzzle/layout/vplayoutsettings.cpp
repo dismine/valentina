@@ -134,12 +134,8 @@ auto VPLayoutSettings::GetTilesSize() const -> QSizeF
 //---------------------------------------------------------------------------------------------------------------------
 auto VPLayoutSettings::GetTilesSize(Unit unit) const -> QSizeF
 {
-    QSizeF convertedSize = QSizeF(
-                UnitConvertor(m_tilesSize.width(), Unit::Px, unit),
-                UnitConvertor(m_tilesSize.height(), Unit::Px, unit)
-                );
-
-    return convertedSize;
+    return {UnitConvertor(m_tilesSize.width(), Unit::Px, unit),
+            UnitConvertor(m_tilesSize.height(), Unit::Px, unit)};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
