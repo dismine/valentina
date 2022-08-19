@@ -51,48 +51,48 @@ class DialogShoulderPoint : public DialogTool
     Q_OBJECT // NOLINT
 public:
     DialogShoulderPoint(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogShoulderPoint() override;
+    ~DialogShoulderPoint() override;
 
-    QString        GetPointName() const;
-    void           SetPointName(const QString &value);
+    auto GetPointName() const -> QString;
+    void SetPointName(const QString &value);
 
-    QString        GetTypeLine() const;
-    void           SetTypeLine(const QString &value);
+    auto GetTypeLine() const -> QString;
+    void SetTypeLine(const QString &value);
 
-    QString        GetFormula() const;
-    void           SetFormula(const QString &value);
+    auto GetFormula() const -> QString;
+    void SetFormula(const QString &value);
 
-    quint32        GetP1Line() const;
-    void           SetP1Line(const quint32 &value);
+    auto GetP1Line() const -> quint32;
+    void SetP1Line(const quint32 &value);
 
-    quint32        GetP2Line() const;
-    void           SetP2Line(const quint32 &value);
+    auto GetP2Line() const -> quint32;
+    void SetP2Line(const quint32 &value);
 
-    quint32        GetP3() const;
-    void           SetP3(const quint32 &value);
+    auto GetP3() const -> quint32;
+    void SetP3(const quint32 &value);
 
-    QString        GetLineColor() const;
-    void           SetLineColor(const QString &value);
+    auto GetLineColor() const -> QString;
+    void SetLineColor(const QString &value);
 
-    void    SetNotes(const QString &notes);
-    QString GetNotes() const;
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
 public slots:
-    virtual void   ChosenObject(quint32 id, const SceneObject &type) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
     /**
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
-    void           DeployFormulaTextEdit();
-    virtual void   PointNameChanged() override;
-    void           FXLength();
-    void           EvalFormula();
+    void DeployFormulaTextEdit();
+    void PointNameChanged() override;
+    void FXLength();
+    void EvalFormula();
 protected:
-    virtual void   ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void   SaveData() override;
-    virtual void   closeEvent(QCloseEvent *event) override;
-    virtual bool   IsValid() const final;
+    void SaveData() override;
+    void closeEvent(QCloseEvent *event) override;
+    auto IsValid() const -> bool final;
 private:
     Q_DISABLE_COPY_MOVE(DialogShoulderPoint) // NOLINT
 
@@ -100,24 +100,24 @@ private:
     Ui::DialogShoulderPoint *ui;
 
     /** @brief formula formula */
-    QString formula;
+    QString m_formula{};
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int formulaBaseHeight;
+    int m_formulaBaseHeight{0};
 
-    QTimer *timerFormula;
+    QTimer *m_timerFormula;
 
-    QString pointName;
+    QString m_pointName{};
 
-    bool flagFormula;
-    bool flagName;
-    bool flagError;
+    bool m_flagFormula{false};
+    bool m_flagName{true};
+    bool m_flagError{true};
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogShoulderPoint::IsValid() const
+inline auto DialogShoulderPoint::IsValid() const -> bool
 {
-    return flagFormula && flagName && flagError;
+    return m_flagFormula && m_flagName && m_flagError;
 }
 
 #endif // DIALOGSHOULDERPOINT_H

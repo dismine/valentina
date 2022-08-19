@@ -44,27 +44,27 @@ class VisToolShoulderPoint : public VisLine
     Q_OBJECT // NOLINT
 public:
     explicit VisToolShoulderPoint(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolShoulderPoint() = default;
+    ~VisToolShoulderPoint() override = default;
 
-    virtual void RefreshGeometry() override;
-    void         setLineP1Id(const quint32 &value);
-    void         setLineP2Id(const quint32 &value);
-    void         setLength(const QString &expression);
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolShoulderPoint)};
+    void RefreshGeometry() override;
+    void setLineP1Id(const quint32 &value);
+    void setLineP2Id(const quint32 &value);
+    void setLength(const QString &expression);
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolShoulderPoint)};
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VisToolShoulderPoint) // NOLINT
-    quint32         lineP1Id;
-    quint32         lineP2Id;
-    VScaledEllipse *point;
-    VScaledEllipse *line1P1;
-    VScaledEllipse *line1P2;
-    VScaledLine    *line1;
-    VScaledEllipse *line2P2;
-    VScaledLine    *line2;
-    VScaledLine    *line3;
-    qreal           length;
+    quint32         m_lineP1Id{NULL_ID};
+    quint32         m_lineP2Id{NULL_ID};
+    VScaledEllipse *m_point{nullptr};
+    VScaledEllipse *m_line1P1{nullptr};
+    VScaledEllipse *m_line1P2{nullptr};
+    VScaledLine    *m_line1{nullptr};
+    VScaledEllipse *m_line2P2{nullptr};
+    VScaledLine    *m_line2{nullptr};
+    VScaledLine    *m_line3{nullptr};
+    qreal           m_length{0};
 };
 
 #endif // VISTOOLSHOULDERPOINT_H
