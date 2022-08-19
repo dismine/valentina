@@ -44,24 +44,25 @@ class VisToolAlongLine final :public VisLine
     Q_OBJECT // NOLINT
 public:
     explicit VisToolAlongLine(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolAlongLine() = default;
+    ~VisToolAlongLine() override = default;
 
-    virtual void RefreshGeometry() override;
-    void         setObject2Id(const quint32 &value);
-    void         setLength(const QString &expression);
-    void         setMidPointMode(bool midPointMode);
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolAlongLine)};
+    void RefreshGeometry() override;
+    void setObject2Id(const quint32 &value);
+    void setLength(const QString &expression);
+    void setMidPointMode(bool midPointMode);
+
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolAlongLine)};
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VisToolAlongLine) // NOLINT
-    quint32         object2Id;
-    VScaledEllipse *point;
-    VScaledEllipse *lineP1;
-    VScaledEllipse *lineP2;
-    VScaledLine    *line;
-    qreal           length;
-    bool            m_midPointMode;
+    quint32         m_object2Id{NULL_ID};
+    VScaledEllipse *m_point{nullptr};
+    VScaledEllipse *m_lineP1{nullptr};
+    VScaledEllipse *m_lineP2{nullptr};
+    VScaledLine    *m_line{nullptr};
+    qreal           m_length{0};
+    bool            m_midPointMode{false};
 };
 
 #endif // VISTOOLALONGLINE_H

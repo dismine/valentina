@@ -51,48 +51,48 @@ class DialogNormal : public DialogTool
     Q_OBJECT // NOLINT
 public:
     DialogNormal(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogNormal() override;
+    ~DialogNormal() override;
 
-    QString          GetPointName() const;
-    void             SetPointName(const QString &value);
+    auto GetPointName() const -> QString;
+    void SetPointName(const QString &value);
 
-    QString          GetTypeLine() const;
-    void             SetTypeLine(const QString &value);
+    auto GetTypeLine() const -> QString;
+    void SetTypeLine(const QString &value);
 
-    QString          GetFormula() const;
-    void             SetFormula(const QString &value);
+    auto GetFormula() const -> QString;
+    void SetFormula(const QString &value);
 
-    qreal            GetAngle() const;
-    void             SetAngle(qreal value);
+    auto GetAngle() const -> qreal;
+    void SetAngle(qreal value);
 
-    quint32          GetFirstPointId() const;
-    void             SetFirstPointId(quint32 value);
+    auto GetFirstPointId() const -> quint32;
+    void SetFirstPointId(quint32 value);
 
-    quint32          GetSecondPointId() const;
-    void             SetSecondPointId(quint32 value);
+    auto GetSecondPointId() const -> quint32;
+    void SetSecondPointId(quint32 value);
 
-    QString          GetLineColor() const;
-    void             SetLineColor(const QString &value);
+    auto GetLineColor() const -> QString;
+    void SetLineColor(const QString &value);
 
-    void    SetNotes(const QString &notes);
-    QString GetNotes() const;
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
 public slots:
-    virtual void     ChosenObject(quint32 id, const SceneObject &type) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
     /**
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
-    void             DeployFormulaTextEdit();
-    virtual void     PointNameChanged() override;
-    void             FXLength();
-    void             EvalFormula();
+    void DeployFormulaTextEdit();
+    void PointNameChanged() override;
+    void FXLength();
+    void EvalFormula();
 protected:
-    virtual void     ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void     SaveData() override;
-    virtual void     closeEvent(QCloseEvent *event) override;
-    virtual bool     IsValid() const final;
+    void SaveData() override;
+    void closeEvent(QCloseEvent *event) override;
+    auto IsValid() const -> bool final;
 private:
     Q_DISABLE_COPY_MOVE(DialogNormal) // NOLINT
 
@@ -100,27 +100,29 @@ private:
     Ui::DialogNormal *ui;
 
     /** @brief formula formula */
-    QString formula;
+    QString m_formula{};
 
     /** @brief angle aditional angle of normal */
-    qreal angle;
+    qreal m_angle{0};
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int formulaBaseHeight;
+    int m_formulaBaseHeight{0};
 
-    QString pointName;
+    QString m_pointName{};
 
-    QTimer *timerFormula;
+    QTimer *m_timerFormula;
 
-    bool flagFormula;
-    bool flagName;
-    bool flagError;
+    bool m_flagFormula{false};
+    bool m_flagName{true};
+    bool m_flagError{true};
+
+    bool m_firstRelease{false};
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogNormal::IsValid() const
+inline auto DialogNormal::IsValid() const -> bool
 {
-    return flagFormula && flagName && flagError;
+    return m_flagFormula && m_flagName && m_flagError;
 }
 
 #endif // DIALOGNORMAL_H

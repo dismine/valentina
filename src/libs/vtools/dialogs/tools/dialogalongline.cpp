@@ -265,7 +265,7 @@ void DialogAlongLine::SetCurrentLength()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogAlongLine::ChosenSecondPoint(quint32 id, const QString toolTip)
+void DialogAlongLine::ChosenSecondPoint(quint32 id, const QString &toolTip)
 {
     if (SetObject(id, ui->comboBoxSecondPoint, QString()))
     {

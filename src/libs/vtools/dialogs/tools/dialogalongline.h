@@ -120,7 +120,7 @@ private:
 
     void SetCurrentLength();
 
-    void ChosenSecondPoint(quint32 id, const QString toolTip);
+    void ChosenSecondPoint(quint32 id, const QString &toolTip);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
