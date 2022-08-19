@@ -850,9 +850,13 @@ void TST_VSpline::TestFlip()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-// See file valentina_private_collection/bugs/men_jacket/issue_cut_spline.val (private collection)
-void TST_VSpline::TestCutSpline()
+void TST_VSpline::TestCutSpline_data()
 {
+    QTest::addColumn<VSpline>("spl");
+    QTest::addColumn<qreal>("result");
+    QTest::addColumn<QString>("name");
+
+    {
     VPointF p1(187.31716535433043, 51.31464566929152, QStringLiteral("p1"), 140.42872440944885, -22.62372283464567);
     VPointF p4(-991.8954330708666, 9.739842519685212, QStringLiteral("p4"), 9.999987401574804, 15.0);
 
@@ -860,8 +864,36 @@ void TST_VSpline::TestCutSpline()
                 QStringLiteral("Line_Г3_Г6*1.1"), 226.7716535433071, QStringLiteral("6"));
     spl.SetApproximationScale(0.5);
 
-    const QString name(QStringLiteral("з"));
-    const qreal result = 1.35; // Correct distance in cm.
+    QString name(QStringLiteral("з"));
+    qreal result = 1.35; // Correct distance in cm.
+
+    // See file valentina_private_collection/bugs/men_jacket/issue_cut_spline.val (private collection)
+    // Size 54 produces incorrect spline segment distance
+    QTest::newRow("Size 54") << spl << result << name;
+    }
+
+    {
+    VPointF p1(1898.0384322000489, -143.17624447113994, QStringLiteral("p1"), 9.999987401574804, -105.35848818897638);
+    VPointF p4(1557.8809518850883, -143.17624447113994, QStringLiteral("p4"), 9.999987401574804, 15.0);
+
+    VSpline spl(p1, p4, 175.0, QStringLiteral("175"), 5.0, QStringLiteral("5"), 151.18110236220474,
+                QStringLiteral("4"), 151.18110236220474, QStringLiteral("4"));
+
+
+    QString name(QStringLiteral("А193"));
+    const qreal result = 4.5090698038574057; // Correct distance in cm.
+    // See file valentina_private_collection/bugs/coat/coat.val (private collection)
+    QTest::newRow("Half of a curve") << spl << result << name;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VSpline::TestCutSpline()
+{
+    QFETCH(VSpline, spl);
+    QFETCH(qreal, result);
+    QFETCH(QString, name);
+
     QPointF spl1p2, spl1p3, spl2p2, spl2p3;
     QPointF point = spl.CutSpline(UnitConvertor(result, Unit::Cm, Unit::Px), spl1p2, spl1p3, spl2p2, spl2p3, name);
 
@@ -869,8 +901,6 @@ void TST_VSpline::TestCutSpline()
 
     VSpline spline1(spl.GetP1(), spl1p2, spl1p3, p);
     spline1.SetApproximationScale(0.5);
-
-    // Size 54 produces incorrect spline segment distance
 
     Q_DECL_RELAXED_CONSTEXPR qreal eps = ToPixel(0.0001, Unit::Mm);
     QVERIFY(UnitConvertor(spline1.GetLength(), Unit::Px, Unit::Cm) - result < eps);
