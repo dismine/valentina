@@ -52,49 +52,49 @@ class DialogBisector final : public DialogTool
 public:
 
     DialogBisector(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogBisector() override;
+    ~DialogBisector() override;
 
-    QString            GetPointName() const;
-    void               SetPointName(const QString &value);
+    auto GetPointName() const -> QString;
+    void SetPointName(const QString &value);
 
-    QString            GetTypeLine() const;
-    void               SetTypeLine(const QString &value);
+    auto GetTypeLine() const -> QString;
+    void SetTypeLine(const QString &value);
 
-    QString            GetFormula() const;
-    void               SetFormula(const QString &value);
+    auto GetFormula() const -> QString;
+    void SetFormula(const QString &value);
 
-    quint32            GetFirstPointId() const;
-    void               SetFirstPointId(const quint32 &value);
+    auto GetFirstPointId() const -> quint32;
+    void SetFirstPointId(const quint32 &value);
 
-    quint32            GetSecondPointId() const;
-    void               SetSecondPointId(const quint32 &value);
+    auto GetSecondPointId() const -> quint32;
+    void SetSecondPointId(const quint32 &value);
 
-    quint32            GetThirdPointId() const;
-    void               SetThirdPointId(const quint32 &value);
+    auto GetThirdPointId() const -> quint32;
+    void SetThirdPointId(const quint32 &value);
 
-    QString            GetLineColor() const;
-    void               SetLineColor(const QString &value);
+    auto GetLineColor() const -> QString;
+    void SetLineColor(const QString &value);
 
-    void    SetNotes(const QString &notes);
-    QString GetNotes() const;
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
 public slots:
-    virtual void       ChosenObject(quint32 id, const SceneObject &type) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
     /**
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
-    void               DeployFormulaTextEdit();
+    void DeployFormulaTextEdit();
 
-    virtual void       PointNameChanged() override;
-    void               FXLength();
-    void               EvalFormula();
+    void PointNameChanged() override;
+    void FXLength();
+    void EvalFormula();
 protected:
-    virtual void       ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void       SaveData() override;
-    virtual void       closeEvent(QCloseEvent *event) override;
-    virtual bool       IsValid() const final;
+    void SaveData() override;
+    void closeEvent(QCloseEvent *event) override;
+    auto IsValid() const -> bool final;
 private:
     Q_DISABLE_COPY_MOVE(DialogBisector) // NOLINT
 
@@ -102,23 +102,27 @@ private:
     Ui::DialogBisector *ui;
 
     /** @brief formula formula */
-    QString formula;
-    QString pointName;
+    QString m_formula{};
+    QString m_pointName{};
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int                formulaBaseHeight;
+    int m_formulaBaseHeight{0};
 
-    QTimer *timerFormula;
+    QTimer *m_timerFormula;
 
-    bool flagFormula;
-    bool flagError;
-    bool flagName;
+    bool m_flagFormula{false};
+    bool m_flagError{true};
+    bool m_flagName{true};
+
+    bool m_firstRelease{false};
+
+    void ChosenThirdPoint(quint32 id);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogBisector::IsValid() const
+inline auto DialogBisector::IsValid() const -> bool
 {
-    return flagFormula && flagError && flagName;
+    return m_flagFormula && m_flagError && m_flagName;
 }
 
 #endif // DIALOGBISECTOR_H

@@ -35,7 +35,6 @@
 #include <new>
 
 #include "../../tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolbisector.h"
-#include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
@@ -44,35 +43,34 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolBisector::VisToolBisector(const VContainer *data, QGraphicsItem *parent)
-    :VisLine(data, parent), object2Id(NULL_ID), object3Id(NULL_ID), point(nullptr), line1P1(nullptr), line1P2(nullptr),
-      line1(nullptr), line2P2(nullptr), line2(nullptr), length(0)
+    :VisLine(data, parent)
 {
-    line1P1 = InitPoint(supportColor, this);
-    line1P2 = InitPoint(supportColor, this); //-V656
-    line1 = InitItem<VScaledLine>(supportColor, this);
+    m_line1P1 = InitPoint(supportColor, this);
+    m_line1P2 = InitPoint(supportColor, this); //-V656
+    m_line1 = InitItem<VScaledLine>(supportColor, this);
 
-    line2P2 = InitPoint(supportColor, this);
-    line2 = InitItem<VScaledLine>(supportColor, this);
+    m_line2P2 = InitPoint(supportColor, this);
+    m_line2 = InitItem<VScaledLine>(supportColor, this);
 
-    point = InitPoint(mainColor, this);
+    m_point = InitPoint(mainColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolBisector::setObject2Id(const quint32 &value)
 {
-    object2Id = value;
+    m_object2Id = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolBisector::setObject3Id(const quint32 &value)
 {
-    object3Id = value;
+    m_object3Id = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolBisector::setLength(const QString &expression)
 {
-    length = FindLengthFromUser(expression, Visualization::data->DataVariables());
+    m_length = FindLengthFromUser(expression, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -81,39 +79,39 @@ void VisToolBisector::RefreshGeometry()
     if (object1Id > NULL_ID)
     {
         const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(line1P1, static_cast<QPointF>(*first), supportColor);
+        DrawPoint(m_line1P1, static_cast<QPointF>(*first), supportColor);
 
-        if (object2Id <= NULL_ID)
+        if (m_object2Id <= NULL_ID)
         {
-            DrawLine(line1, QLineF(static_cast<QPointF>(*first), Visualization::scenePos), supportColor);
+            DrawLine(m_line1, QLineF(static_cast<QPointF>(*first), Visualization::scenePos), supportColor);
         }
         else
         {
-            const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(object2Id);
-            DrawPoint(line1P2, static_cast<QPointF>(*second), supportColor);
+            const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(m_object2Id);
+            DrawPoint(m_line1P2, static_cast<QPointF>(*second), supportColor);
 
-            DrawLine(line1, QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)), supportColor);
+            DrawLine(m_line1, QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)), supportColor);
 
-            if (object3Id <= NULL_ID)
+            if (m_object3Id <= NULL_ID)
             {
-                DrawLine(line2, QLineF(static_cast<QPointF>(*second), Visualization::scenePos), supportColor);
+                DrawLine(m_line2, QLineF(static_cast<QPointF>(*second), Visualization::scenePos), supportColor);
             }
             else
             {
-                const QSharedPointer<VPointF> third = Visualization::data->GeometricObject<VPointF>(object3Id);
-                DrawPoint(line2P2, static_cast<QPointF>(*third), supportColor);
+                const QSharedPointer<VPointF> third = Visualization::data->GeometricObject<VPointF>(m_object3Id);
+                DrawPoint(m_line2P2, static_cast<QPointF>(*third), supportColor);
 
-                DrawLine(line2, QLineF(static_cast<QPointF>(*second), static_cast<QPointF>(*third)), supportColor);
+                DrawLine(m_line2, QLineF(static_cast<QPointF>(*second), static_cast<QPointF>(*third)), supportColor);
 
-                if (not qFuzzyIsNull(length))
+                if (not qFuzzyIsNull(m_length))
                 {
                     qreal angle = VToolBisector::BisectorAngle(static_cast<QPointF>(*first),
                                                                static_cast<QPointF>(*second),
                                                                static_cast<QPointF>(*third));
-                    QLineF mainLine = VGObject::BuildLine(static_cast<QPointF>(*second), length, angle);
+                    QLineF mainLine = VGObject::BuildLine(static_cast<QPointF>(*second), m_length, angle);
                     DrawLine(this, mainLine, mainColor, lineStyle);
 
-                    DrawPoint(point, mainLine.p2(), mainColor);
+                    DrawPoint(m_point, mainLine.p2(), mainColor);
                 }
                 else
                 {

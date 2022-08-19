@@ -44,26 +44,26 @@ class VisToolBisector :public VisLine
     Q_OBJECT // NOLINT
 public:
     explicit VisToolBisector(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolBisector() = default;
+    ~VisToolBisector() override = default;
 
-    virtual void RefreshGeometry() override;
-    void         setObject2Id(const quint32 &value);
-    void         setObject3Id(const quint32 &value);
-    void         setLength(const QString &expression);
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolBisector)};
+    void RefreshGeometry() override;
+    void setObject2Id(const quint32 &value);
+    void setObject3Id(const quint32 &value);
+    void setLength(const QString &expression);
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolBisector)};
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VisToolBisector) // NOLINT
-    quint32         object2Id;
-    quint32         object3Id;
-    VScaledEllipse *point;
-    VScaledEllipse *line1P1;
-    VScaledEllipse *line1P2;
-    VScaledLine    *line1;
-    VScaledEllipse *line2P2;
-    VScaledLine    *line2;
-    qreal           length;
+    quint32         m_object2Id{NULL_ID};
+    quint32         m_object3Id{NULL_ID};
+    VScaledEllipse *m_point{nullptr};
+    VScaledEllipse *m_line1P1{nullptr};
+    VScaledEllipse *m_line1P2{nullptr};
+    VScaledLine    *m_line1{nullptr};
+    VScaledEllipse *m_line2P2{nullptr};
+    VScaledLine    *m_line2{nullptr};
+    qreal           m_length{0};
 };
 
 #endif // VISTOOLBISECTOR_H
