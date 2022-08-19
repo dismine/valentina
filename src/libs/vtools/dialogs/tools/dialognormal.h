@@ -76,6 +76,8 @@ public:
 
     void SetNotes(const QString &notes);
     auto GetNotes() const -> QString;
+
+    void ShowDialog(bool click) override;
 public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
     /**

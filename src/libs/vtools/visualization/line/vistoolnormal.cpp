@@ -37,11 +37,11 @@
 #include <new>
 
 #include "../../tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolnormal.h"
-#include "../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
 #include "visline.h"
+#include "../vmisc/vmodifierkey.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolNormal::VisToolNormal(const VContainer *data, QGraphicsItem *parent)
@@ -82,13 +82,7 @@ void VisToolNormal::RefreshGeometry()
             QLineF line_mouse(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
             DrawLine(line, line_mouse, supportColor);
 
-            if (qFuzzyIsNull(length))
-            {
-                QLineF normal = line_mouse.normalVector();
-                QPointF endRay = Ray(normal.p1(), normal.angle());
-                DrawLine(this, QLineF(normal.p1(), endRay), mainColor);
-            }
-            else
+            if (not qFuzzyIsNull(length))
             {
                 QPointF fPoint = VToolNormal::FindPoint(static_cast<QPointF>(*first), static_cast<QPointF>(*second),
                                                         length, angle);
@@ -96,6 +90,37 @@ void VisToolNormal::RefreshGeometry()
                 DrawLine(this, mainLine, mainColor, lineStyle);
 
                 DrawPoint(point, mainLine.p2(), mainColor);
+            }
+            else if (mode == Mode::Creation)
+            {
+                QLineF cursorLine (static_cast<QPointF>(*first), Visualization::scenePos);
+                QLineF normal = line_mouse.normalVector();
+
+                qreal len = cursorLine.length();
+                qreal angleTo = normal.angleTo(cursorLine);
+                if (angleTo > 90 && angleTo < 270)
+                {
+                    len *= -1;
+                }
+
+                QPointF fPoint = VToolNormal::FindPoint(static_cast<QPointF>(*first), static_cast<QPointF>(*second),
+                                                        len, angle);
+                QLineF mainLine = QLineF(static_cast<QPointF>(*first), fPoint);
+                DrawLine(this, mainLine, mainColor, lineStyle);
+
+                DrawPoint(point, mainLine.p2(), mainColor);
+
+                const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+                Visualization::toolTip = tr("Length = %1%2; "
+                                            "<b>Mouse click</b> - finish selecting the length, "
+                                            "<b>%3</b> - skip")
+                                             .arg(NumberToUser(len), prefix, VModifierKey::EnterKey());
+            }
+            else
+            {
+                QLineF normal = line_mouse.normalVector();
+                QPointF endRay = Ray(normal.p1(), normal.angle());
+                DrawLine(this, QLineF(normal.p1(), endRay), mainColor);
             }
         }
     }
