@@ -344,6 +344,69 @@ auto DialogBisector::GetNotes() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogBisector::ShowDialog(bool click)
+{
+    if (not prepare)
+    {
+        return;
+    }
+
+    auto *lineVis = qobject_cast<VisToolBisector *>(vis);
+    SCASSERT(lineVis != nullptr)
+
+    auto FinishCreating = [this, lineVis]()
+    {
+        lineVis->SetMode(Mode::Show);
+        lineVis->RefreshGeometry();
+
+        emit ToolTip(QString());
+
+        setModal(true);
+        show();
+    };
+
+    if (click)
+    {
+        // The check need to ignore first release of mouse button.
+        // User can select point by clicking on a label.
+        if (not m_firstRelease)
+        {
+            m_firstRelease = true;
+            return;
+        }
+
+        auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
+        SCASSERT(scene != nullptr)
+
+        const QSharedPointer<VPointF> p1 = data->GeometricObject<VPointF>(GetFirstPointId());
+        const QSharedPointer<VPointF> p2 = data->GeometricObject<VPointF>(GetSecondPointId());
+        const QSharedPointer<VPointF> p3 = data->GeometricObject<VPointF>(GetThirdPointId());
+
+        qreal angle = VToolBisector::BisectorAngle(static_cast<QPointF>(*p1),
+                                                   static_cast<QPointF>(*p2),
+                                                   static_cast<QPointF>(*p3));
+
+        QLineF baseLine(static_cast<QPointF>(*p2), static_cast<QPointF>(*p3));
+        baseLine.setAngle(angle);
+
+        QLineF line(static_cast<QPointF>(*p2), scene->getScenePos());
+
+        qreal len = line.length();
+        qreal angleTo = baseLine.angleTo(line);
+        if (angleTo > 90 && angleTo < 270)
+        {
+            len *= -1;
+        }
+
+        SetFormula(QString::number(FromPixel(len, *data->GetPatternUnit())));
+
+        FinishCreating();
+    }
+
+    FinishCreating();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogBisector::SaveData()
 {
     m_pointName = ui->lineEditNamePoint->text();
@@ -379,11 +442,17 @@ void DialogBisector::ChosenThirdPoint(quint32 id)
     {
         if (SetObject(id, ui->comboBoxThirdPoint, QString()))
         {
+            auto *window = qobject_cast<VAbstractMainWindow *>(
+                VAbstractValApplication::VApp()->getMainWindow());
+            SCASSERT(window != nullptr)
+
+            auto *line = qobject_cast<VisToolBisector *>(vis);
+            SCASSERT(line != nullptr)
+            connect(line, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
+
             line->setObject3Id(id);
             line->RefreshGeometry();
             prepare = true;
-            this->setModal(true);
-            this->show();
         }
     }
 }

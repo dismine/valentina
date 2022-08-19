@@ -40,6 +40,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
 #include "visline.h"
+#include "../vmisc/vmodifierkey.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolBisector::VisToolBisector(const VContainer *data, QGraphicsItem *parent)
@@ -112,6 +113,36 @@ void VisToolBisector::RefreshGeometry()
                     DrawLine(this, mainLine, mainColor, lineStyle);
 
                     DrawPoint(m_point, mainLine.p2(), mainColor);
+                }
+                else if (mode == Mode::Creation)
+                {
+                    QLineF cursorLine (static_cast<QPointF>(*second), Visualization::scenePos);
+                    QLineF baseLine(static_cast<QPointF>(*second), static_cast<QPointF>(*third));
+
+                    qreal angle = VToolBisector::BisectorAngle(static_cast<QPointF>(*first),
+                                                               static_cast<QPointF>(*second),
+                                                               static_cast<QPointF>(*third));
+
+                    baseLine.setAngle(angle);
+
+                    qreal len = cursorLine.length();
+                    qreal angleTo = baseLine.angleTo(cursorLine);
+                    if (angleTo > 90 && angleTo < 270)
+                    {
+                        len *= -1;
+                    }
+
+                    QLineF mainLine = VGObject::BuildLine(static_cast<QPointF>(*second), len, angle);
+
+                    DrawLine(this, mainLine, mainColor, lineStyle);
+
+                    DrawPoint(m_point, mainLine.p2(), mainColor);
+
+                    const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+                    Visualization::toolTip = tr("Length = %1%2; "
+                                                "<b>Mouse click</b> - finish selecting the length, "
+                                                "<b>%3</b> - skip")
+                                                 .arg(NumberToUser(len), prefix, VModifierKey::EnterKey());
                 }
                 else
                 {
