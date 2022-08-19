@@ -49,6 +49,8 @@
 #include "../vmisc/vcommonsettings.h"
 #include "ui_dialogshoulderpoint.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vabstractmainwindow.h"
+#include "../vgeometry/vpointf.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -220,24 +222,7 @@ void DialogShoulderPoint::ChosenObject(quint32 id, const SceneObject &type)
                 }
                 break;
             case 2:
-            {
-                QSet<quint32> set;
-                set.insert(getCurrentObjectId(ui->comboBoxP3));
-                set.insert(getCurrentObjectId(ui->comboBoxP1Line));
-                set.insert(id);
-
-                if (set.size() == 3)
-                {
-                    if (SetObject(id, ui->comboBoxP2Line, QString()))
-                    {
-                        line->setLineP2Id(id);
-                        line->RefreshGeometry();
-                        prepare = true;
-                        this->setModal(true);
-                        this->show();
-                    }
-                }
-            }
+                ChosenThirdPoint(id);
                 break;
             default:
                 break;
@@ -267,6 +252,33 @@ void DialogShoulderPoint::closeEvent(QCloseEvent *event)
 {
     ui->plainTextEditFormula->blockSignals(true);
     DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogShoulderPoint::ChosenThirdPoint(quint32 id)
+{
+    QSet<quint32> set;
+    set.insert(getCurrentObjectId(ui->comboBoxP3));
+    set.insert(getCurrentObjectId(ui->comboBoxP1Line));
+    set.insert(id);
+
+    if (set.size() == 3)
+    {
+        if (SetObject(id, ui->comboBoxP2Line, QString()))
+        {
+            auto *window = qobject_cast<VAbstractMainWindow *>(
+                VAbstractValApplication::VApp()->getMainWindow());
+            SCASSERT(window != nullptr)
+
+            auto *line = qobject_cast<VisToolShoulderPoint *>(vis);
+            SCASSERT(line != nullptr)
+            connect(line, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
+
+            line->setLineP2Id(id);
+            line->RefreshGeometry();
+            prepare = true;
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -427,4 +439,49 @@ void DialogShoulderPoint::SetNotes(const QString &notes)
 auto DialogShoulderPoint::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogShoulderPoint::ShowDialog(bool click)
+{
+    if (not prepare)
+    {
+        return;
+    }
+
+    auto *lineVis = qobject_cast<VisToolShoulderPoint *>(vis);
+    SCASSERT(lineVis != nullptr)
+
+    auto FinishCreating = [this, lineVis]()
+    {
+        lineVis->SetMode(Mode::Show);
+        lineVis->RefreshGeometry();
+
+        emit ToolTip(QString());
+
+        setModal(true);
+        show();
+    };
+
+    if (click)
+    {
+        // The check need to ignore first release of mouse button.
+        // User can select point by clicking on a label.
+        if (not m_firstRelease)
+        {
+            m_firstRelease = true;
+            return;
+        }
+
+        auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
+        SCASSERT(scene != nullptr)
+
+        const QSharedPointer<VPointF> p3 = data->GeometricObject<VPointF>(GetP3());
+        QLineF line(static_cast<QPointF>(*p3), scene->getScenePos());
+        SetFormula(QString::number(FromPixel(line.length(), *data->GetPatternUnit())));
+
+        FinishCreating();
+    }
+
+    FinishCreating();
 }

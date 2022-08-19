@@ -41,6 +41,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
 #include "visline.h"
+#include "../vmisc/vmodifierkey.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolShoulderPoint::VisToolShoulderPoint(const VContainer *data, QGraphicsItem *parent)
@@ -97,6 +98,26 @@ void VisToolShoulderPoint::RefreshGeometry()
 
                     DrawPoint(m_point, mainLine.p2(), mainColor);
                     DrawLine(m_line3, QLineF(static_cast<QPointF>(*first), mainLine.p2()), supportColor, Qt::DashLine);
+                }
+                else if (mode == Mode::Creation)
+                {
+                    QLineF cursorLine (static_cast<QPointF>(*first), Visualization::scenePos);
+
+                    qreal len = cursorLine.length();
+                    QPointF fPoint = VToolShoulderPoint::FindPoint(static_cast<QPointF>(*second),
+                                                                   static_cast<QPointF>(*third),
+                                                                   static_cast<QPointF>(*first), len);
+                    QLineF mainLine = QLineF(static_cast<QPointF>(*second), fPoint);
+                    DrawLine(this, mainLine, mainColor, lineStyle);
+
+                    DrawPoint(m_point, mainLine.p2(), mainColor);
+                    DrawLine(m_line3, QLineF(static_cast<QPointF>(*first), mainLine.p2()), supportColor, Qt::DashLine);
+
+                    const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+                    Visualization::toolTip = tr("Length = %1%2; "
+                                                "<b>Mouse click</b> - finish selecting the length, "
+                                                "<b>%3</b> - skip")
+                                                 .arg(NumberToUser(len), prefix, VModifierKey::EnterKey());
                 }
                 else
                 {

@@ -76,6 +76,8 @@ public:
 
     void SetNotes(const QString &notes);
     auto GetNotes() const -> QString;
+
+    void ShowDialog(bool click) override;
 public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
     /**
@@ -112,6 +114,10 @@ private:
     bool m_flagFormula{false};
     bool m_flagName{true};
     bool m_flagError{true};
+
+    bool m_firstRelease{false};
+
+    void ChosenThirdPoint(quint32 id);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
