@@ -81,13 +81,6 @@ void VisToolArc::RefreshGeometry()
                 return r.angle();
             };
 
-            auto NumberToUser = [](qreal value)
-            {
-                return VAbstractApplication::VApp()->TrVars()
-                        ->FormulaToUser(QString::number(VAbstractValApplication::VApp()->fromPixel(value)),
-                                        VAbstractApplication::VApp()->Settings()->GetOsSeparator());
-            };
-
             static const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
 
             if (qFuzzyIsNull(radius))

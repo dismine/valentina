@@ -106,9 +106,6 @@ DialogCutSpline::DialogCutSpline(const VContainer *data, quint32 toolId, QWidget
 //---------------------------------------------------------------------------------------------------------------------
 DialogCutSpline::~DialogCutSpline()
 {
-    auto *locData = const_cast<VContainer *> (data);
-    locData->RemoveVariable(currentLength);
-
     delete ui;
 }
 

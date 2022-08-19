@@ -54,6 +54,7 @@
 #include "../vpatterndb/variables/vlinelength.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "ui_dialogalongline.h"
+#include "../vwidgets/vabstractmainwindow.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -174,9 +175,6 @@ void DialogAlongLine::DeployFormulaTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 DialogAlongLine::~DialogAlongLine()
 {
-    auto *locData = const_cast<VContainer *> (data);
-    locData->RemoveVariable(currentLength);
-
     delete ui;
 }
 
@@ -209,25 +207,7 @@ void DialogAlongLine::ChosenObject(quint32 id, const SceneObject &type)
                 }
                 break;
             case 1:
-                if (SetObject(id, ui->comboBoxSecondPoint, QString()))
-                {
-                    if (m_flagError)
-                    {
-                        line->setObject2Id(id);
-                        if (m_buildMidpoint)
-                        {
-                            SetFormula(currentLength + QStringLiteral("/2"));
-                        }
-                        line->RefreshGeometry();
-                        prepare = true;
-                        this->setModal(true);
-                        this->show();
-                    }
-                    else
-                    {
-                        emit ToolTip(toolTip);
-                    }
-                }
+                ChosenSecondPoint(id, toolTip);
                 break;
             default:
                 break;
@@ -285,6 +265,47 @@ void DialogAlongLine::SetCurrentLength()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogAlongLine::ChosenSecondPoint(quint32 id, const QString toolTip)
+{
+    if (SetObject(id, ui->comboBoxSecondPoint, QString()))
+    {
+        auto *line = qobject_cast<VisToolAlongLine *>(vis);
+        SCASSERT(line != nullptr)
+
+        if (m_flagError)
+        {
+            line->setObject2Id(id);
+            if (m_buildMidpoint)
+            {
+                SetFormula(currentLength + QStringLiteral("/2"));
+                line->SetMode(Mode::Show);
+            }
+            else
+            {
+                auto *window = qobject_cast<VAbstractMainWindow *>(
+                    VAbstractValApplication::VApp()->getMainWindow());
+                SCASSERT(window != nullptr)
+                connect(line, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
+            }
+
+            line->RefreshGeometry();
+
+            prepare = true;
+
+            if (m_buildMidpoint)
+            {
+                setModal(true);
+                show();
+            }
+        }
+        else
+        {
+            emit ToolTip(toolTip);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SetSecondPointId set id second point of line
  * @param value id
@@ -320,6 +341,62 @@ void DialogAlongLine::Build(const Tool &type)
         SCASSERT(line != nullptr)
         line->setMidPointMode(m_buildMidpoint);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogAlongLine::ShowDialog(bool click)
+{
+    if (not prepare || m_buildMidpoint)
+    {
+        return;
+    }
+
+    auto *lineVis = qobject_cast<VisToolAlongLine *>(vis);
+    SCASSERT(lineVis != nullptr)
+
+    auto FinishCreating = [this, lineVis]()
+    {
+        lineVis->SetMode(Mode::Show);
+        lineVis->RefreshGeometry();
+
+        emit ToolTip(QString());
+
+        setModal(true);
+        show();
+    };
+
+    if (click)
+    {
+        // The check need to ignore first release of mouse button.
+        // User can select point by clicking on a label.
+        if (not m_firstRelease)
+        {
+            m_firstRelease = true;
+            return;
+        }
+
+        auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
+        SCASSERT(scene != nullptr)
+
+        const QSharedPointer<VPointF> p1 = data->GeometricObject<VPointF>(GetFirstPointId());
+        const QSharedPointer<VPointF> p2 = data->GeometricObject<VPointF>(GetSecondPointId());
+        QLineF baseLine(static_cast<QPointF>(*p1), static_cast<QPointF>(*p2));
+
+        QLineF line(static_cast<QPointF>(*p1), scene->getScenePos());
+
+        qreal len = line.length();
+        qreal angleTo = baseLine.angleTo(line);
+        if (angleTo > 90 && angleTo < 270)
+        {
+            len *= -1;
+        }
+
+        SetFormula(QString::number(FromPixel(len, *data->GetPatternUnit())));
+
+        FinishCreating();
+    }
+
+    FinishCreating();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

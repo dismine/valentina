@@ -36,12 +36,12 @@
 #include <Qt>
 #include <new>
 
-#include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
 #include "visline.h"
+#include "../vmisc/vmodifierkey.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolAlongLine::VisToolAlongLine(const VContainer *data, QGraphicsItem *parent)
@@ -97,7 +97,7 @@ void VisToolAlongLine::RefreshGeometry()
             if (m_midPointMode)
             {
                 cursorLine.setLength(cursorLine.length()/2.0);
-                DrawPoint(lineP2,  cursorLine.p2(), supportColor);
+                DrawPoint(point,  cursorLine.p2(), mainColor);
             }
         }
         else
@@ -105,7 +105,8 @@ void VisToolAlongLine::RefreshGeometry()
             const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(object2Id);
             DrawPoint(lineP2, static_cast<QPointF>(*second), supportColor);
 
-            DrawLine(line, QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)), supportColor);
+            QLineF baseLine(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
+            DrawLine(line, baseLine, supportColor);
 
             if (not qFuzzyIsNull(length))
             {
@@ -113,6 +114,28 @@ void VisToolAlongLine::RefreshGeometry()
                 DrawLine(this, mainLine, mainColor, lineStyle);
 
                 DrawPoint(point, mainLine.p2(), mainColor);
+            }
+            else if (mode == Mode::Creation)
+            {
+                QLineF cursorLine (static_cast<QPointF>(*first), Visualization::scenePos);
+
+                qreal len = cursorLine.length();
+                qreal angleTo = baseLine.angleTo(cursorLine);
+                if (angleTo > 90 && angleTo < 270)
+                {
+                    len *= -1;
+                }
+
+                QLineF mainLine = VGObject::BuildLine(static_cast<QPointF>(*first), len, line->line().angle());
+                DrawLine(this, mainLine, mainColor, lineStyle);
+
+                DrawPoint(point, mainLine.p2(), mainColor);
+
+                const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+                Visualization::toolTip = tr("Length = %1%2; "
+                                            "<b>Mouse click</b> - finish selecting the length, "
+                                            "<b>%3</b> - skip")
+                                             .arg(NumberToUser(len), prefix, VModifierKey::EnterKey());
             }
         }
     }

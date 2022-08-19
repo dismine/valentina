@@ -75,6 +75,7 @@ public:
     auto GetNotes() const -> QString;
 
     void Build(const Tool &type) override;
+    void ShowDialog(bool click) override;
 public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
     /**
@@ -115,7 +116,11 @@ private:
     bool m_flagError{true};
     bool m_flagName{true};
 
+    bool m_firstRelease{false};
+
     void SetCurrentLength();
+
+    void ChosenSecondPoint(quint32 id, const QString toolTip);
 };
 
 //---------------------------------------------------------------------------------------------------------------------

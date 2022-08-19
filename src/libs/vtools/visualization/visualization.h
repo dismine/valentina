@@ -122,6 +122,8 @@ protected:
                                         QGraphicsItem *parent);
     static VCurvePathItem *GetCurveItem(QVector<VCurvePathItem *> &curves, quint32 i, const QColor &color,
                                         QGraphicsItem *parent);
+
+    static auto NumberToUser(qreal value) -> QString;
 private:
     Q_DISABLE_COPY_MOVE(Visualization) // NOLINT
 };

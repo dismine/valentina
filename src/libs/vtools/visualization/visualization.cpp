@@ -330,6 +330,14 @@ VCurvePathItem *Visualization::GetCurveItem(QVector<VCurvePathItem *> &curves, q
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString Visualization::NumberToUser(qreal value)
+{
+    return VAbstractApplication::VApp()->TrVars()
+        ->FormulaToUser(QString::number(VAbstractValApplication::VApp()->fromPixel(value)),
+                        VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 Mode Visualization::GetMode() const
 {
     return mode;
