@@ -51,8 +51,8 @@
 VisToolArc::VisToolArc(const VContainer *data, QGraphicsItem *parent)
     :VisPath(data, parent)
 {
-    arcCenter = InitPoint(mainColor, this);
-    f1Point = InitPoint(supportColor, this);
+    m_arcCenter = InitPoint(mainColor, this);
+    m_f1Point = InitPoint(supportColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -60,10 +60,10 @@ void VisToolArc::RefreshGeometry()
 {
     if (object1Id > NULL_ID)
     {
-        f1Point->setVisible(false);
+        m_f1Point->setVisible(false);
 
         const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(arcCenter, static_cast<QPointF>(*first), supportColor);
+        DrawPoint(m_arcCenter, static_cast<QPointF>(*first), supportColor);
 
         if (mode == Mode::Creation)
         {
@@ -83,7 +83,7 @@ void VisToolArc::RefreshGeometry()
 
             static const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
 
-            if (qFuzzyIsNull(radius))
+            if (qFuzzyIsNull(m_radius))
             {
                 VArc arc = VArc (*first, r.length(), r.angle(), r.angle());
                 arc.SetApproximationScale(m_approximationScale);
@@ -94,31 +94,31 @@ void VisToolArc::RefreshGeometry()
                                             "<b>%3</b> - skip")
                         .arg(NumberToUser(r.length()), prefix, VModifierKey::EnterKey());
             }
-            else if (f1 < 0)
+            else if (m_f1 < 0)
             {
                 qreal f1Angle = Angle();
-                VArc arc = VArc (*first, radius, f1Angle, f1Angle);
+                VArc arc = VArc (*first, m_radius, f1Angle, f1Angle);
                 arc.SetApproximationScale(m_approximationScale);
                 DrawPath(this, arc.GetPath(), QVector<DirectionArrow>(), supportColor, Qt::DashLine, Qt::RoundCap);
 
                 QLineF f1Line = r;
-                f1Line.setLength(radius);
+                f1Line.setLength(m_radius);
                 f1Line.setAngle(f1Angle);
 
-                DrawPoint(f1Point, f1Line.p2(), supportColor);
+                DrawPoint(m_f1Point, f1Line.p2(), supportColor);
 
                 Visualization::toolTip = tr("<b>Arc</b>: radius = %1%2, first angle = %3°; "
                                             "<b>Mouse click</b> - finish selecting the first angle, "
                                             "<b>%4</b> - sticking angle, "
                                             "<b>%5</b> - skip")
-                        .arg(NumberToUser(radius), prefix)
+                        .arg(NumberToUser(m_radius), prefix)
                         .arg(f1Angle)
                         .arg(VModifierKey::Shift(), VModifierKey::EnterKey());
             }
-            else if (f1 >= 0)
+            else if (m_f1 >= 0)
             {
                 qreal f2Angle = StickyEnd(Angle());
-                VArc arc = VArc (*first, radius, f1, f2Angle);
+                VArc arc = VArc (*first, m_radius, m_f1, f2Angle);
                 arc.SetApproximationScale(m_approximationScale);
                 DrawPath(this, arc.GetPath(), arc.DirectionArrows(), mainColor, lineStyle, Qt::RoundCap);
 
@@ -127,17 +127,17 @@ void VisToolArc::RefreshGeometry()
                                             "<b>%5</b> - sticking angle, "
                                             "<b>%6</b> - sticking end, "
                                             "<b>%7</b> - skip")
-                        .arg(NumberToUser(radius), prefix)
-                        .arg(f1)
+                        .arg(NumberToUser(m_radius), prefix)
+                        .arg(m_f1)
                         .arg(f2Angle)
                         .arg(VModifierKey::Shift(), VModifierKey::Control(), VModifierKey::EnterKey());
             }
         }
         else
         {
-            if (not qFuzzyIsNull(radius) && f1 >= 0 && f2 >= 0)
+            if (not qFuzzyIsNull(m_radius) && m_f1 >= 0 && m_f2 >= 0)
             {
-                VArc arc = VArc (*first, radius, f1, f2);
+                VArc arc = VArc (*first, m_radius, m_f1, m_f2);
                 arc.SetApproximationScale(m_approximationScale);
                 DrawPath(this, arc.GetPath(), arc.DirectionArrows(), mainColor, lineStyle, Qt::RoundCap);
             }
@@ -152,19 +152,19 @@ void VisToolArc::RefreshGeometry()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolArc::setRadius(const QString &expression)
 {
-    radius = FindLengthFromUser(expression, Visualization::data->DataVariables());
+    m_radius = FindLengthFromUser(expression, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolArc::setF1(const QString &expression)
 {
-    f1 = FindValFromUser(expression, Visualization::data->DataVariables());
+    m_f1 = FindValFromUser(expression, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolArc::setF2(const QString &expression)
 {
-    f2 = FindValFromUser(expression, Visualization::data->DataVariables());
+    m_f2 = FindValFromUser(expression, Visualization::data->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -185,16 +185,16 @@ auto VisToolArc::StickyEnd(qreal angle) const -> qreal
     if (QGuiApplication::keyboardModifiers() == Qt::ControlModifier)
     {
         QLineF line(10, 10, 100, 10);
-        line.setLength(radius);
+        line.setLength(m_radius);
 
         QLineF line2 = line;
 
-        line.setAngle(f1);
+        line.setAngle(m_f1);
         line2.setAngle(angle);
 
         if (VFuzzyComparePoints(line.p2(), line2.p2(), UnitConvertor(5, Unit::Mm, Unit::Px)))
         {
-            return f1;
+            return m_f1;
         }
     }
 

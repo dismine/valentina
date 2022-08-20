@@ -52,17 +52,17 @@ public:
     void setF1(const QString &expression);
     void setF2(const QString &expression);
     auto type() const -> int override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolArc)};
+    enum {Type = UserType + static_cast<int>(Vis::ToolArc)};
 
     static auto CorrectAngle(qreal angle) -> qreal;
     auto StickyEnd(qreal angle) const -> qreal;
 private:
     Q_DISABLE_COPY_MOVE(VisToolArc) // NOLINT
-    VScaledEllipse *arcCenter{nullptr};
-    VScaledEllipse *f1Point{nullptr};
-    qreal           radius{0};
-    qreal           f1{-1};
-    qreal           f2{-1};
+    VScaledEllipse *m_arcCenter{nullptr};
+    VScaledEllipse *m_f1Point{nullptr};
+    qreal           m_radius{0};
+    qreal           m_f1{-1};
+    qreal           m_f2{-1};
 };
 
 #endif // VISTOOLARC_H

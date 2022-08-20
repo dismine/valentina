@@ -36,7 +36,6 @@
 #include <Qt>
 #include <new>
 
-#include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
 #include "../vpatterndb/vcontainer.h"
@@ -46,16 +45,16 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCutArc::VisToolCutArc(const VContainer *data, QGraphicsItem *parent)
-    :VisPath(data, parent), point(nullptr), arc1(nullptr), arc2(nullptr), length(0)
+    :VisPath(data, parent)
 {
-    arc1 = InitItem<VCurvePathItem>(Qt::darkGreen, this);
-    arc1->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
-    arc2 = InitItem<VCurvePathItem>(Qt::darkRed, this);
-    arc2->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
+    m_arc1 = InitItem<VCurvePathItem>(Qt::darkGreen, this);
+    m_arc1->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
+    m_arc2 = InitItem<VCurvePathItem>(Qt::darkRed, this);
+    m_arc2->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
 
-    point = InitPoint(mainColor, this);
-    point->setZValue(2);
-    point->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
+    m_point = InitPoint(mainColor, this);
+    m_point->setZValue(2);
+    m_point->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -66,15 +65,15 @@ void VisToolCutArc::RefreshGeometry()
         const QSharedPointer<VArc> arc = Visualization::data->GeometricObject<VArc>(object1Id);
         DrawPath(this, arc->GetPath(), arc->DirectionArrows(), supportColor, lineStyle, Qt::RoundCap);
 
-        if (not qFuzzyIsNull(length))
+        if (not qFuzzyIsNull(m_length))
         {
             VArc ar1;
             VArc ar2;
-            QPointF p = arc->CutArc(length, ar1, ar2, QString());
-            DrawPoint(point, p, mainColor);
+            QPointF p = arc->CutArc(m_length, ar1, ar2, QString());
+            DrawPoint(m_point, p, mainColor);
 
-            DrawPath(arc1, ar1.GetPath(), ar1.DirectionArrows(), Qt::darkGreen, lineStyle, Qt::RoundCap);
-            DrawPath(arc2, ar2.GetPath(), ar2.DirectionArrows(), Qt::darkRed, lineStyle, Qt::RoundCap);
+            DrawPath(m_arc1, ar1.GetPath(), ar1.DirectionArrows(), Qt::darkGreen, lineStyle, Qt::RoundCap);
+            DrawPath(m_arc2, ar2.GetPath(), ar2.DirectionArrows(), Qt::darkRed, lineStyle, Qt::RoundCap);
         }
     }
 }
@@ -82,5 +81,5 @@ void VisToolCutArc::RefreshGeometry()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolCutArc::setLength(const QString &expression)
 {
-    length = FindLengthFromUser(expression, Visualization::data->DataVariables());
+    m_length = FindLengthFromUser(expression, Visualization::data->DataVariables());
 }

@@ -112,46 +112,46 @@ private:
     Ui::DialogArc *ui;
 
     /** @brief flagRadius true if value of radius is correct */
-    bool          flagRadius{false};
+    bool m_flagRadius{false};
 
     /** @brief flagF1 true if value of first angle is correct */
-    bool          flagF1{false};
+    bool m_flagF1{false};
 
     /** @brief flagF2 true if value of second angle is correct */
-    bool          flagF2{false};
+    bool m_flagF2{false};
 
-    bool          flagAlias{true};
+    bool m_flagAlias{true};
 
     /** @brief timerRadius timer of check formula of radius */
-    QTimer        *timerRadius;
+    QTimer *m_timerRadius;
 
     /** @brief timerF1 timer of check formula of first angle */
-    QTimer        *timerF1;
+    QTimer *m_timerF1;
 
     /** @brief timerF2 timer of check formula of second angle */
-    QTimer        *timerF2;
+    QTimer *m_timerF2;
 
     /** @brief radius formula of radius */
-    QString       radius{};
+    QString m_radius{};
 
     /** @brief f1 formula of first angle */
-    QString       f1{};
+    QString m_f1{};
 
     /** @brief f2 formula of second angle */
-    QString       f2{};
+    QString m_f2{};
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int           formulaBaseHeight{0};
-    int           formulaBaseHeightF1{0};
-    int           formulaBaseHeightF2{0};
+    int m_formulaBaseHeight{0};
+    int m_formulaBaseHeightF1{0};
+    int m_formulaBaseHeightF2{0};
 
-    qreal         angleF1{INT_MIN};
-    qreal         angleF2{INT_MIN};
+    qreal m_angleF1{INT_MIN};
+    qreal m_angleF2{INT_MIN};
 
-    QString       originAliasSuffix{};
+    QString m_originAliasSuffix{};
 
-    bool stageRadius{true};
-    bool stageF1{false};
+    bool m_stageRadius{true};
+    bool m_stageF1{false};
 
     bool m_firstRelease{false};
 
@@ -162,7 +162,7 @@ private:
 //---------------------------------------------------------------------------------------------------------------------
 inline auto DialogArc::IsValid() const -> bool
 {
-    return flagRadius && flagF1 && flagF2 && flagAlias;
+    return m_flagRadius && m_flagF1 && m_flagF2 && m_flagAlias;
 }
 
 #endif // DIALOGARC_H

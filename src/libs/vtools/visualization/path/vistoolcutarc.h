@@ -44,18 +44,18 @@ class VisToolCutArc final : public VisPath
     Q_OBJECT // NOLINT
 public:
     explicit VisToolCutArc(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolCutArc() Q_DECL_EQ_DEFAULT;
+    ~VisToolCutArc() override = default;
 
-    virtual void RefreshGeometry() override;
-    void         setLength(const QString &expression);
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolCutArc)};
-protected:
+    void RefreshGeometry() override;
+    void setLength(const QString &expression);
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolCutArc)};
+private:
     Q_DISABLE_COPY_MOVE(VisToolCutArc) // NOLINT
-    VScaledEllipse *point;
-    VCurvePathItem *arc1;
-    VCurvePathItem *arc2;
-    qreal           length;
+    VScaledEllipse *m_point{nullptr};
+    VCurvePathItem *m_arc1{nullptr};
+    VCurvePathItem *m_arc2{nullptr};
+    qreal           m_length{0};
 };
 
 #endif // VISTOOLCUTARC_H
