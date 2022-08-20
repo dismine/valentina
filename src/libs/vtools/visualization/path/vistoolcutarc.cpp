@@ -42,6 +42,7 @@
 #include "../visualization.h"
 #include "vispath.h"
 #include "../vwidgets/scalesceneitems.h"
+#include "../vmisc/vmodifierkey.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCutArc::VisToolCutArc(const VContainer *data, QGraphicsItem *parent)
@@ -74,6 +75,19 @@ void VisToolCutArc::RefreshGeometry()
 
             DrawPath(m_arc1, ar1.GetPath(), ar1.DirectionArrows(), Qt::darkGreen, lineStyle, Qt::RoundCap);
             DrawPath(m_arc2, ar2.GetPath(), ar2.DirectionArrows(), Qt::darkRed, lineStyle, Qt::RoundCap);
+        }
+        else if (mode == Mode::Creation)
+        {
+            QPointF p = arc->ClosestPoint(Visualization::scenePos);
+            qreal length = arc->GetLengthByPoint(p);
+
+            DrawPoint(m_point, p, mainColor);
+
+            const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+            Visualization::toolTip = tr("Length = %1%2; "
+                                        "<b>Mouse click</b> - finish selecting the length, "
+                                        "<b>%3</b> - skip")
+                                         .arg(NumberToUser(length), prefix, VModifierKey::EnterKey());
         }
     }
 }
