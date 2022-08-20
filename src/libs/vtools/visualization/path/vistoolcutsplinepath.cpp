@@ -43,6 +43,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
 #include "vispath.h"
+#include "../vmisc/vmodifierkey.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCutSplinePath::VisToolCutSplinePath(const VContainer *data, QGraphicsItem *parent)
@@ -84,6 +85,19 @@ void VisToolCutSplinePath::RefreshGeometry()
 
             delete spPath1;
             delete spPath2;
+        }
+        else if (mode == Mode::Creation)
+        {
+            QPointF p = splPath->ClosestPoint(Visualization::scenePos);
+            qreal length = splPath->GetLengthByPoint(p);
+
+            DrawPoint(m_point, p, mainColor);
+
+            const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+            Visualization::toolTip = tr("Length = %1%2; "
+                                        "<b>Mouse click</b> - finish selecting the length, "
+                                        "<b>%3</b> - skip")
+                                         .arg(NumberToUser(length), prefix, VModifierKey::EnterKey());
         }
     }
 }

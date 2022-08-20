@@ -70,6 +70,8 @@ public:
 
     void SetAliasSuffix2(const QString &alias);
     auto GetAliasSuffix2() const -> QString;
+
+    void ShowDialog(bool click) override;
 public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
     /**
@@ -111,6 +113,8 @@ private:
 
     QString m_originAliasSuffix1{};
     QString m_originAliasSuffix2{};
+
+    bool m_firstRelease{false};
 };
 
 //---------------------------------------------------------------------------------------------------------------------

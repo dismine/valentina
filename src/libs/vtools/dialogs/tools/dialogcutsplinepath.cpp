@@ -47,6 +47,7 @@
 #include "ui_dialogcutsplinepath.h"
 #include "../vgeometry/vsplinepath.h"
 #include "../qmuparser/qmudef.h"
+#include "../vwidgets/vabstractmainwindow.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -180,8 +181,10 @@ void DialogCutSplinePath::ChosenObject(quint32 id, const SceneObject &type)
                 vis->VisualMode(id);
             }
             prepare = true;
-            this->setModal(true);
-            this->show();
+
+            auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+            SCASSERT(window != nullptr)
+            connect(vis, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
         }
     }
 }
@@ -353,4 +356,51 @@ void DialogCutSplinePath::SetAliasSuffix2(const QString &alias)
 auto DialogCutSplinePath::GetAliasSuffix2() const -> QString
 {
     return ui->lineEditAlias2->text();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutSplinePath::ShowDialog(bool click)
+{
+    if (not prepare)
+    {
+        return;
+    }
+
+    auto FinishCreating = [this]()
+    {
+        vis->SetMode(Mode::Show);
+        vis->RefreshGeometry();
+
+        emit ToolTip(QString());
+
+        setModal(true);
+        show();
+    };
+
+    if (click)
+    {
+        // The check need to ignore first release of mouse button.
+        // User can select point by clicking on a label.
+        if (not m_firstRelease)
+        {
+            m_firstRelease = true;
+            return;
+        }
+
+        auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
+        SCASSERT(scene != nullptr)
+
+        const QSharedPointer<VAbstractCubicBezierPath> curve =
+            data->GeometricObject<VAbstractCubicBezierPath>(getSplinePathId());
+        QPointF p = curve->ClosestPoint(scene->getScenePos());
+        qreal len = curve->GetLengthByPoint(p);
+        if (len > 0)
+        {
+            SetFormula(QString::number(FromPixel(len, *data->GetPatternUnit())));
+        }
+
+        FinishCreating();
+    }
+
+    FinishCreating();
 }
