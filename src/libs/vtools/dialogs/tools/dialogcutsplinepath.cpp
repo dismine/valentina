@@ -41,7 +41,6 @@
 #include "../../visualization/path/vistoolcutsplinepath.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../ifc/xml/vdomdocument.h"
 #include "../support/dialogeditwrongformula.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
@@ -58,23 +57,18 @@
 DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, quint32 toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),
       ui(new Ui::DialogCutSplinePath),
-      formula(),
-      pointName(),
-      formulaBaseHeight(0),
-      timerFormula(new QTimer(this)),
-      flagFormula(false),
-      flagName(true)
+      m_timerFormula(new QTimer(this))
 {
     ui->setupUi(this);
 
-    timerFormula->setSingleShot(true);
-    connect(timerFormula, &QTimer::timeout, this, &DialogCutSplinePath::EvalFormula);
+    m_timerFormula->setSingleShot(true);
+    connect(m_timerFormula, &QTimer::timeout, this, &DialogCutSplinePath::EvalFormula);
 
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
     ui->lineEditNamePoint->setText(
                 VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
-    this->formulaBaseHeight = ui->plainTextEditFormula->height();
+    this->m_formulaBaseHeight = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
 
     InitOkCancelApply(ui);
@@ -84,12 +78,12 @@ DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, quint32 toolId,
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogCutSplinePath::FXLength);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
     {
-        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, m_pointName, this->data, m_flagName);
         CheckState();
     });
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, [this]()
     {
-        timerFormula->start(formulaTimerTimeout);
+        m_timerFormula->start(formulaTimerTimeout);
     });
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogCutSplinePath::DeployFormulaTextEdit);
     connect(ui->comboBoxSplinePath, &QComboBox::currentTextChanged, this, &DialogCutSplinePath::SplinePathChanged);
@@ -110,9 +104,9 @@ DialogCutSplinePath::~DialogCutSplinePath()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogCutSplinePath::GetPointName() const
+auto DialogCutSplinePath::GetPointName() const -> QString
 {
-    return pointName;
+    return m_pointName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -122,8 +116,8 @@ QString DialogCutSplinePath::GetPointName() const
  */
 void DialogCutSplinePath::SetPointName(const QString &value)
 {
-    pointName = value;
-    ui->lineEditNamePoint->setText(pointName);
+    m_pointName = value;
+    ui->lineEditNamePoint->setText(m_pointName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -133,19 +127,19 @@ void DialogCutSplinePath::SetPointName(const QString &value)
  */
 void DialogCutSplinePath::SetFormula(const QString &value)
 {
-    formula = VAbstractApplication::VApp()->TrVars()
+    m_formula = VAbstractApplication::VApp()->TrVars()
             ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed. TODO : see if I can get the max number of caracters in one line
     // of this PlainTextEdit to change 80 to this value
-    if (formula.length() > 80)
+    if (m_formula.length() > 80)
     {
         this->DeployFormulaTextEdit();
     }
-    ui->plainTextEditFormula->setPlainText(formula);
+    ui->plainTextEditFormula->setPlainText(m_formula);
 
-    VisToolCutSplinePath *path = qobject_cast<VisToolCutSplinePath *>(vis);
+    auto *path = qobject_cast<VisToolCutSplinePath *>(vis);
     SCASSERT(path != nullptr)
-    path->setLength(formula);
+    path->setLength(m_formula);
 
     MoveCursorToEnd(ui->plainTextEditFormula);
 }
@@ -159,7 +153,7 @@ void DialogCutSplinePath::setSplinePathId(quint32 value)
 {
     setCurrentSplinePathId(ui->comboBoxSplinePath, value);
 
-    VisToolCutSplinePath *path = qobject_cast<VisToolCutSplinePath *>(vis);
+    auto *path = qobject_cast<VisToolCutSplinePath *>(vis);
     SCASSERT(path != nullptr)
     path->setObject1Id(value);
 }
@@ -172,20 +166,22 @@ void DialogCutSplinePath::setSplinePathId(quint32 value)
  */
 void DialogCutSplinePath::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare == false)// After first choose we ignore all objects
+    if (prepare)// After first choose we ignore all objects
     {
-        if (type == SceneObject::SplinePath)
+        return;
+    }
+
+    if (type == SceneObject::SplinePath)
+    {
+        if (SetObject(id, ui->comboBoxSplinePath, QString()))
         {
-            if (SetObject(id, ui->comboBoxSplinePath, QString()))
+            if (vis != nullptr)
             {
-                if (vis != nullptr)
-                {
-                    vis->VisualMode(id);
-                }
-                prepare = true;
-                this->setModal(true);
-                this->show();
+                vis->VisualMode(id);
             }
+            prepare = true;
+            this->setModal(true);
+            this->show();
         }
     }
 }
@@ -193,14 +189,14 @@ void DialogCutSplinePath::ChosenObject(quint32 id, const SceneObject &type)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutSplinePath::SaveData()
 {
-    pointName = ui->lineEditNamePoint->text();
-    formula = ui->plainTextEditFormula->toPlainText();
+    m_pointName = ui->lineEditNamePoint->text();
+    m_formula = ui->plainTextEditFormula->toPlainText();
 
-    VisToolCutSplinePath *path = qobject_cast<VisToolCutSplinePath *>(vis);
+    auto *path = qobject_cast<VisToolCutSplinePath *>(vis);
     SCASSERT(path != nullptr)
 
     path->setObject1Id(getSplinePathId());
-    path->setLength(formula);
+    path->setLength(m_formula);
     path->RefreshGeometry();
 }
 
@@ -230,29 +226,29 @@ void DialogCutSplinePath::ValidateAlias()
 
     if (not GetAliasSuffix1().isEmpty() &&
         (not rx.match(path1.GetAlias()).hasMatch() ||
-         (originAliasSuffix1 != GetAliasSuffix1() && not data->IsUnique(path1.GetAlias())) ||
+         (m_originAliasSuffix1 != GetAliasSuffix1() && not data->IsUnique(path1.GetAlias())) ||
          path1.GetAlias() == path2.GetAlias()))
     {
-        flagAlias1 = false;
+        m_flagAlias1 = false;
         ChangeColor(ui->labelAlias1, errorColor);
     }
     else
     {
-        flagAlias1 = true;
+        m_flagAlias1 = true;
         ChangeColor(ui->labelAlias1, OkColor(this));
     }
 
     if (not GetAliasSuffix2().isEmpty() &&
         (not rx.match(path2.GetAlias()).hasMatch() ||
-         (originAliasSuffix2 != GetAliasSuffix2() && not data->IsUnique(path2.GetAlias())) ||
+         (m_originAliasSuffix2 != GetAliasSuffix2() && not data->IsUnique(path2.GetAlias())) ||
          path1.GetAlias() == path2.GetAlias()))
     {
-        flagAlias2 = false;
+        m_flagAlias2 = false;
         ChangeColor(ui->labelAlias2, errorColor);
     }
     else
     {
-        flagAlias2 = true;
+        m_flagAlias2 = true;
         ChangeColor(ui->labelAlias2, OkColor(this));
     }
 
@@ -262,13 +258,13 @@ void DialogCutSplinePath::ValidateAlias()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutSplinePath::DeployFormulaTextEdit()
 {
-    DeployFormula(this, ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
+    DeployFormula(this, ui->plainTextEditFormula, ui->pushButtonGrowLength, m_formulaBaseHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutSplinePath::FXLength()
 {
-    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit length"));
     dialog->SetFormula(GetFormula());
     dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
@@ -290,7 +286,7 @@ void DialogCutSplinePath::EvalFormula()
     formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
     formulaData.checkZero = false;
 
-    Eval(formulaData, flagFormula);
+    Eval(formulaData, m_flagFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -304,9 +300,9 @@ void DialogCutSplinePath::ShowVisualization()
  * @brief GetFormula return string of formula
  * @return formula
  */
-QString DialogCutSplinePath::GetFormula() const
+auto DialogCutSplinePath::GetFormula() const -> QString
 {
-    return VTranslateVars::TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(m_formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -314,7 +310,7 @@ QString DialogCutSplinePath::GetFormula() const
  * @brief getSplineId return id base point of line
  * @return id
  */
-quint32 DialogCutSplinePath::getSplinePathId() const
+auto DialogCutSplinePath::getSplinePathId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxSplinePath);
 }
@@ -326,7 +322,7 @@ void DialogCutSplinePath::SetNotes(const QString &notes)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogCutSplinePath::GetNotes() const
+auto DialogCutSplinePath::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }
@@ -334,13 +330,13 @@ QString DialogCutSplinePath::GetNotes() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutSplinePath::SetAliasSuffix1(const QString &alias)
 {
-    originAliasSuffix1 = alias;
-    ui->lineEditAlias1->setText(originAliasSuffix1);
+    m_originAliasSuffix1 = alias;
+    ui->lineEditAlias1->setText(m_originAliasSuffix1);
     ValidateAlias();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogCutSplinePath::GetAliasSuffix1() const
+auto DialogCutSplinePath::GetAliasSuffix1() const -> QString
 {
     return ui->lineEditAlias1->text();
 }
@@ -348,13 +344,13 @@ QString DialogCutSplinePath::GetAliasSuffix1() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutSplinePath::SetAliasSuffix2(const QString &alias)
 {
-    originAliasSuffix2 = alias;
-    ui->lineEditAlias2->setText(originAliasSuffix2);
+    m_originAliasSuffix2 = alias;
+    ui->lineEditAlias2->setText(m_originAliasSuffix2);
     ValidateAlias();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogCutSplinePath::GetAliasSuffix2() const
+auto DialogCutSplinePath::GetAliasSuffix2() const -> QString
 {
     return ui->lineEditAlias2->text();
 }

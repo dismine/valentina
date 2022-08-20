@@ -449,13 +449,10 @@ void DialogShoulderPoint::ShowDialog(bool click)
         return;
     }
 
-    auto *lineVis = qobject_cast<VisToolShoulderPoint *>(vis);
-    SCASSERT(lineVis != nullptr)
-
-    auto FinishCreating = [this, lineVis]()
+    auto FinishCreating = [this]()
     {
-        lineVis->SetMode(Mode::Show);
-        lineVis->RefreshGeometry();
+        vis->SetMode(Mode::Show);
+        vis->RefreshGeometry();
 
         emit ToolTip(QString());
 

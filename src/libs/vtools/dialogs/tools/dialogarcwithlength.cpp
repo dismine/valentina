@@ -282,13 +282,10 @@ void DialogArcWithLength::ShowDialog(bool click)
 {
     if (prepare)
     {
-        auto *arcVis = qobject_cast<VisToolArcWithLength *>(vis);
-        SCASSERT(arcVis != nullptr)
-
-        auto FinishCreating = [this, arcVis]()
+        auto FinishCreating = [this]()
         {
-            arcVis->SetMode(Mode::Show);
-            arcVis->RefreshGeometry();
+            vis->SetMode(Mode::Show);
+            vis->RefreshGeometry();
 
             emit ToolTip(QString());
 
@@ -333,7 +330,7 @@ void DialogArcWithLength::ShowDialog(bool click)
                 }
 
                 SetRadius(QString::number(VAbstractValApplication::VApp()->fromPixel(line.length())));
-                arcVis->RefreshGeometry();
+                vis->RefreshGeometry();
 
                 stageRadius = false;
                 stageF1 = true;
@@ -342,7 +339,7 @@ void DialogArcWithLength::ShowDialog(bool click)
             {
 
                 SetF1(QString::number(Angle()));
-                arcVis->RefreshGeometry();
+                vis->RefreshGeometry();
 
                 stageF1 = false;
             }

@@ -51,41 +51,41 @@ class DialogCutSplinePath final : public DialogTool
     Q_OBJECT // NOLINT
 public:
     DialogCutSplinePath(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogCutSplinePath() override;
+    ~DialogCutSplinePath() override;
 
-    QString      GetPointName() const;
-    void         SetPointName(const QString &value);
+    auto GetPointName() const -> QString;
+    void SetPointName(const QString &value);
 
-    QString      GetFormula() const;
-    void         SetFormula(const QString &value);
+    auto GetFormula() const -> QString;
+    void SetFormula(const QString &value);
 
-    quint32      getSplinePathId() const;
-    void         setSplinePathId(quint32 value);
+    auto getSplinePathId() const -> quint32;
+    void setSplinePathId(quint32 value);
 
-    void    SetNotes(const QString &notes);
-    QString GetNotes() const;
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
 
-    void    SetAliasSuffix1(const QString &alias);
-    QString GetAliasSuffix1() const;
+    void SetAliasSuffix1(const QString &alias);
+    auto GetAliasSuffix1() const -> QString;
 
-    void    SetAliasSuffix2(const QString &alias);
-    QString GetAliasSuffix2() const;
+    void SetAliasSuffix2(const QString &alias);
+    auto GetAliasSuffix2() const -> QString;
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
     /**
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
-    void         DeployFormulaTextEdit();
-    void         FXLength();
-    void         EvalFormula();
+    void DeployFormulaTextEdit();
+    void FXLength();
+    void EvalFormula();
 protected:
-    virtual void ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void SaveData() override;
-    virtual void closeEvent(QCloseEvent *event) override;
-    virtual bool IsValid() const final;
+    void SaveData() override;
+    void closeEvent(QCloseEvent *event) override;
+    auto IsValid() const -> bool final;
 private slots:
     void SplinePathChanged();
     void ValidateAlias();
@@ -96,27 +96,27 @@ private:
     Ui::DialogCutSplinePath *ui;
 
     /** @brief formula string with formula */
-    QString formula;
-    QString pointName;
+    QString m_formula{};
+    QString m_pointName{};
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int formulaBaseHeight;
+    int m_formulaBaseHeight{0};
 
-    QTimer *timerFormula;
+    QTimer *m_timerFormula;
 
-    bool flagFormula;
-    bool flagName;
-    bool flagAlias1{true};
-    bool flagAlias2{true};
+    bool m_flagFormula{false};
+    bool m_flagName{true};
+    bool m_flagAlias1{true};
+    bool m_flagAlias2{true};
 
-    QString originAliasSuffix1{};
-    QString originAliasSuffix2{};
+    QString m_originAliasSuffix1{};
+    QString m_originAliasSuffix2{};
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogCutSplinePath::IsValid() const
+inline auto DialogCutSplinePath::IsValid() const -> bool
 {
-    return flagFormula && flagAlias1 && flagAlias2 && flagName;
+    return m_flagFormula && m_flagAlias1 && m_flagAlias2 && m_flagName;
 }
 
 #endif // DIALOGCUTSPLINEPATH_H

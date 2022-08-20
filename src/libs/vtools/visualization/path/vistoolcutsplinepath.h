@@ -44,18 +44,18 @@ class VisToolCutSplinePath final : public VisPath
     Q_OBJECT // NOLINT
 public:
     explicit VisToolCutSplinePath(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolCutSplinePath() Q_DECL_EQ_DEFAULT;
+    ~VisToolCutSplinePath() override = default;
 
-    virtual void RefreshGeometry() override;
-    void         setLength(const QString &expression);
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolCutSpline)};
-protected:
+    void RefreshGeometry() override;
+    void setLength(const QString &expression);
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolCutSpline)};
+private:
     Q_DISABLE_COPY_MOVE(VisToolCutSplinePath) // NOLINT
-    VScaledEllipse *point;
-    VCurvePathItem *splPath1;
-    VCurvePathItem *splPath2;
-    qreal           length;
+    VScaledEllipse *m_point{nullptr};
+    VCurvePathItem *m_splPath1{nullptr};
+    VCurvePathItem *m_splPath2{nullptr};
+    qreal           m_length{0};
 };
 
 #endif // VISTOOLCUTSPLINEPATH_H
