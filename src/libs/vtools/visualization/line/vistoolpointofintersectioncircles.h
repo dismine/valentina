@@ -45,30 +45,30 @@ class VisToolPointOfIntersectionCircles : public VisLine
     Q_OBJECT // NOLINT
 public:
     explicit VisToolPointOfIntersectionCircles(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolPointOfIntersectionCircles() = default;
+    ~VisToolPointOfIntersectionCircles() override = default;
 
-    virtual void RefreshGeometry() override;
-    virtual void VisualMode(const quint32 &id) override;
+    void RefreshGeometry() override;
+    void VisualMode(const quint32 &id) override;
 
-    void         setObject2Id(const quint32 &value);
-    void         setC1Radius(const QString &value);
-    void         setC2Radius(const QString &value);
-    void         setCrossPoint(const CrossCirclesPoint &value);
+    void setObject2Id(const quint32 &value);
+    void setC1Radius(const QString &value);
+    void setC2Radius(const QString &value);
+    void setCrossPoint(const CrossCirclesPoint &value);
 
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolPointOfIntersectionCircles)};
+    auto  type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolPointOfIntersectionCircles)};
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VisToolPointOfIntersectionCircles) // NOLINT
-    quint32               object2Id;
-    qreal                 c1Radius;
-    qreal                 c2Radius;
-    CrossCirclesPoint     crossPoint;
-    VScaledEllipse       *point;
-    VScaledEllipse       *c1Center;
-    VScaledEllipse       *c2Center;
-    QGraphicsEllipseItem *c1Path;
-    QGraphicsEllipseItem *c2Path;
+    quint32               m_object2Id{NULL_ID};
+    qreal                 m_c1Radius{0};
+    qreal                 m_c2Radius{0};
+    CrossCirclesPoint     m_crossPoint{CrossCirclesPoint::FirstPoint};
+    VScaledEllipse       *m_point{nullptr};
+    VScaledEllipse       *m_c1Center{nullptr};
+    VScaledEllipse       *m_c2Center{nullptr};
+    QGraphicsEllipseItem *m_c1Path{nullptr};
+    QGraphicsEllipseItem *m_c2Path{nullptr};
 };
 
 #endif // VISTOOLPOINTOFINTERSECTIONCIRCLES_H

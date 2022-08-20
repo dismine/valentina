@@ -50,77 +50,77 @@ class DialogPointOfIntersectionCircles : public DialogTool
 
 public:
     DialogPointOfIntersectionCircles(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogPointOfIntersectionCircles() override;
+    ~DialogPointOfIntersectionCircles() override;
 
-    QString        GetPointName() const;
-    void           SetPointName(const QString &value);
+    auto GetPointName() const -> QString;
+    void SetPointName(const QString &value);
 
-    quint32        GetFirstCircleCenterId() const;
-    void           SetFirstCircleCenterId(const quint32 &value);
+    auto GetFirstCircleCenterId() const -> quint32;
+    void SetFirstCircleCenterId(const quint32 &value);
 
-    quint32        GetSecondCircleCenterId() const;
-    void           SetSecondCircleCenterId(const quint32 &value);
+    auto GetSecondCircleCenterId() const -> quint32;
+    void SetSecondCircleCenterId(const quint32 &value);
 
-    QString        GetFirstCircleRadius() const;
-    void           SetFirstCircleRadius(const QString &value);
+    auto GetFirstCircleRadius() const -> QString;
+    void SetFirstCircleRadius(const QString &value);
 
-    QString        GetSecondCircleRadius() const;
-    void           SetSecondCircleRadius(const QString &value);
+    auto GetSecondCircleRadius() const -> QString;
+    void SetSecondCircleRadius(const QString &value);
 
-    CrossCirclesPoint GetCrossCirclesPoint() const;
-    void              SetCrossCirclesPoint(const CrossCirclesPoint &p);
+    auto GetCrossCirclesPoint() const -> CrossCirclesPoint;
+    void SetCrossCirclesPoint(const CrossCirclesPoint &p);
 
-    void    SetNotes(const QString &notes);
-    QString GetNotes() const;
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
 
 public slots:
-    virtual void   ChosenObject(quint32 id, const SceneObject &type) override;
-    void           PointChanged();
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void PointChanged();
 
-    void           DeployCircle1RadiusTextEdit();
-    void           DeployCircle2RadiusTextEdit();
+    void DeployCircle1RadiusTextEdit();
+    void DeployCircle2RadiusTextEdit();
 
-    void           FXCircle1Radius();
-    void           FXCircle2Radius();
+    void FXCircle1Radius();
+    void FXCircle2Radius();
 
-    void           EvalCircle1Radius();
-    void           EvalCircle2Radius();
+    void EvalCircle1Radius();
+    void EvalCircle2Radius();
 
 protected:
-    virtual void   ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void   SaveData() override;
-    virtual void   closeEvent(QCloseEvent *event) override;
-    virtual bool   IsValid() const final;
+    void SaveData() override;
+    void closeEvent(QCloseEvent *event) override;
+    auto IsValid() const -> bool final;
 
 private:
     Q_DISABLE_COPY_MOVE(DialogPointOfIntersectionCircles) // NOLINT
 
     Ui::DialogPointOfIntersectionCircles *ui;
 
-    QTimer *timerCircle1Radius;
-    QTimer *timerCircle2Radius;
+    QTimer *m_timerCircle1Radius;
+    QTimer *m_timerCircle2Radius;
 
-    QString circle1Radius;
-    QString circle2Radius;
+    QString m_circle1Radius{};
+    QString m_circle2Radius{};
 
-    int formulaBaseHeightCircle1Radius;
-    int formulaBaseHeightCircle2Radius;
+    int m_formulaBaseHeightCircle1Radius{0};
+    int m_formulaBaseHeightCircle2Radius{0};
 
-    QString pointName;
+    QString m_pointName{};
 
-    bool flagCircle1Radius;
-    bool flagCircle2Radius;
-    bool flagName;
-    bool flagError;
+    bool m_flagCircle1Radius{false};
+    bool m_flagCircle2Radius{false};
+    bool m_flagName{true};
+    bool m_flagError{true};
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogPointOfIntersectionCircles::IsValid() const
+inline auto DialogPointOfIntersectionCircles::IsValid() const -> bool
 {
-    return flagCircle1Radius && flagCircle2Radius && flagName && flagError;
+    return m_flagCircle1Radius && m_flagCircle2Radius && m_flagName && m_flagError;
 }
 
 #endif // DIALOGPOINTOFINTERSECTIONCIRCLES_H
