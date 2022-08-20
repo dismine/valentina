@@ -81,6 +81,8 @@ public:
     static auto SubdividePath(const QVector<QPointF> &points, QPointF p, QVector<QPointF> &sub1,
                               QVector<QPointF> &sub2) -> bool;
 
+    auto ClosestPoint(QPointF scenePoint) const -> QPointF;
+
     virtual auto GetStartAngle () const -> qreal=0;
     virtual auto GetEndAngle () const -> qreal=0;
 
@@ -109,6 +111,8 @@ public:
     static auto LengthCurveDirectionArrow() -> qreal;
 
     void SetAliasSuffix(const QString &aliasSuffix) override;
+
+    static constexpr qreal minLength = ToPixel(1, Unit::Mm);
 protected:
     virtual void CreateName() =0;
     virtual void CreateAlias() =0;

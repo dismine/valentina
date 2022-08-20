@@ -353,7 +353,6 @@ auto VEllipticalArc::CutArc(const qreal &length, VEllipticalArc &arc1, VElliptic
 {
     //Always need return two arcs, so we must correct wrong length.
     qreal len = 0;
-    const qreal minLength = ToPixel(1, Unit::Mm);
     const qreal fullLength = GetLength();
 
     if (fullLength <= minLength)

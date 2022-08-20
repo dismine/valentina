@@ -171,7 +171,6 @@ auto VAbstractCubicBezierPath::CutSplinePath(qreal length, qint32 &p1, qint32 &p
     }
 
     //Always need return two spline paths, so we must correct wrong length.
-    const qreal minLength = ToPixel(1, Unit::Mm);
     qreal fullLength = GetLength();
 
     if (fullLength <= minLength)

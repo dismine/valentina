@@ -460,8 +460,7 @@ auto VArc::CutPoint(qreal length, qreal fullLength, const QString &pointName) co
         length = fullLength + length;
     }
 
-    const qreal minLength = ToPixel(1, Unit::Mm);
-    const qreal maxLength = fullLength - ToPixel(1, Unit::Mm);
+    const qreal maxLength = fullLength - minLength;
 
     if (length < minLength)
     {
@@ -512,10 +511,10 @@ auto VArc::CutPointFlipped(qreal length, qreal fullLength, const QString &pointN
         length = fullLength + length;
     }
 
-    const qreal minLength = fullLength + ToPixel(1, Unit::Mm);
-    const qreal maxLength = ToPixel(-1, Unit::Mm);
+    const qreal minLengthFlipped = fullLength + minLength;
+    const qreal maxLengthFlipped = -minLength;
 
-    if (length < minLength)
+    if (length < minLengthFlipped)
     {
         QString errorMsg;
         if (not pointName.isEmpty())
@@ -531,7 +530,7 @@ auto VArc::CutPointFlipped(qreal length, qreal fullLength, const QString &pointN
         VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
                                           qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
-    else if (length > maxLength)
+    else if (length > maxLengthFlipped)
     {
         QString errorMsg;
         if (not pointName.isEmpty())
@@ -548,7 +547,7 @@ auto VArc::CutPointFlipped(qreal length, qreal fullLength, const QString &pointN
                                           qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
 
-    length = qBound(minLength, length, maxLength);
+    length = qBound(minLengthFlipped, length, maxLengthFlipped);
 
     QLineF line(static_cast<QPointF>(GetCenter()), GetP1());
     line.setAngle(line.angle() - qRadiansToDegrees(qAbs(length)/d->radius));

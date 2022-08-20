@@ -401,7 +401,6 @@ auto VAbstractCubicBezier::CutSpline(qreal length, QPointF &spl1p2, QPointF &spl
                                      QPointF &spl2p3, const QString &pointName) const -> QPointF
 {
     //Always need return two splines, so we must correct wrong length.
-    const qreal minLength = ToPixel(1, Unit::Mm);
     const qreal fullLength = GetLength();
 
     if (fullLength <= minLength)

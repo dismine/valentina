@@ -229,6 +229,50 @@ auto VAbstractCurve::ToEnd(const QVector<QPointF> &points, const QPointF &end, b
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VAbstractCurve::ClosestPoint(QPointF scenePoint) const -> QPointF
+{
+    const QVector<QPointF> points = GetPoints();
+    if (points.count() < 2)
+    {
+        return {};
+    }
+
+    if (VFuzzyComparePoints(ConstFirst(points), scenePoint))
+    {
+        return ConstFirst(points);
+    }
+
+    QPointF candidatePoint;
+    qreal bestDistance = INT_MAX;
+    bool found = false;
+
+    for (qint32 i = 0; i < points.count()-1; ++i)
+    {
+        const QPointF cPoint = VGObject::ClosestPoint(QLineF(points.at(i), points.at(i+1)), scenePoint);
+
+        if (IsPointOnLineSegment(cPoint, points.at(i), points.at(i+1)))
+        {
+            const qreal length = QLineF(scenePoint, cPoint).length();
+            if (length < bestDistance)
+            {
+                candidatePoint = cPoint;
+                bestDistance = length;
+                found = true;
+            }
+        }
+    }
+
+    if (found)
+    {
+        return candidatePoint;
+    }
+    else
+    {
+        return {};
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VAbstractCurve::GetPath() const -> QPainterPath
 {
     QPainterPath path;

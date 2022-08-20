@@ -47,6 +47,7 @@
 #include "ui_dialogcutspline.h"
 #include "../vgeometry/vspline.h"
 #include "../qmuparser/qmudef.h"
+#include "../vwidgets/vabstractmainwindow.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -180,8 +181,10 @@ void DialogCutSpline::ChosenObject(quint32 id, const SceneObject &type)
                 vis->VisualMode(id);
             }
             prepare = true;
-            this->setModal(true);
-            this->show();
+
+            auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+            SCASSERT(window != nullptr)
+            connect(vis, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
         }
     }
 }
@@ -310,7 +313,7 @@ auto DialogCutSpline::GetFormula() const -> QString
  * @brief getSplineId return id base point of line
  * @return id
  */
-quint32 DialogCutSpline::getSplineId() const
+auto DialogCutSpline::getSplineId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxSpline);
 }
@@ -353,4 +356,50 @@ void DialogCutSpline::SetAliasSuffix2(const QString &alias)
 auto DialogCutSpline::GetAliasSuffix2() const -> QString
 {
     return ui->lineEditAlias2->text();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutSpline::ShowDialog(bool click)
+{
+    if (not prepare)
+    {
+        return;
+    }
+
+    auto FinishCreating = [this]()
+    {
+        vis->SetMode(Mode::Show);
+        vis->RefreshGeometry();
+
+        emit ToolTip(QString());
+
+        setModal(true);
+        show();
+    };
+
+    if (click)
+    {
+        // The check need to ignore first release of mouse button.
+        // User can select point by clicking on a label.
+        if (not m_firstRelease)
+        {
+            m_firstRelease = true;
+            return;
+        }
+
+        auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
+        SCASSERT(scene != nullptr)
+
+        const QSharedPointer<VAbstractCubicBezier> spl = data->GeometricObject<VAbstractCubicBezier>(getSplineId());
+        QPointF p = spl->ClosestPoint(scene->getScenePos());
+        qreal len = spl->GetLengthByPoint(p);
+        if (len > 0)
+        {
+            SetFormula(QString::number(FromPixel(len, *data->GetPatternUnit())));
+        }
+
+        FinishCreating();
+    }
+
+    FinishCreating();
 }

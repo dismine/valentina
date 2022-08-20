@@ -44,6 +44,7 @@
 #include "../visualization.h"
 #include "vispath.h"
 #include "../vwidgets/scalesceneitems.h"
+#include "../vmisc/vmodifierkey.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCutSpline::VisToolCutSpline(const VContainer *data, QGraphicsItem *parent)
@@ -84,6 +85,19 @@ void VisToolCutSpline::RefreshGeometry()
 
             DrawPath(m_spl1, sp1.GetPath(), sp1.DirectionArrows(), Qt::darkGreen, lineStyle, Qt::RoundCap);
             DrawPath(m_spl2, sp2.GetPath(), sp2.DirectionArrows(), Qt::darkRed, lineStyle, Qt::RoundCap);
+        }
+        else if (mode == Mode::Creation)
+        {
+            QPointF p = spl->ClosestPoint(Visualization::scenePos);
+            qreal length = spl->GetLengthByPoint(p);
+
+            DrawPoint(m_point, p, mainColor);
+
+            const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+            Visualization::toolTip = tr("Length = %1%2; "
+                                        "<b>Mouse click</b> - finish selecting the length, "
+                                        "<b>%3</b> - skip")
+                                         .arg(NumberToUser(length), prefix, VModifierKey::EnterKey());
         }
     }
 }
