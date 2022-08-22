@@ -40,7 +40,9 @@
 #include <new>
 
 #include "../ifc/xml/vdomdocument.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/vmodifierkey.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
@@ -55,8 +57,8 @@
 #include "../vgeometry/varc.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
-#include "../vwidgets/vmaingraphicsscene.h"
 #include "visoperation.h"
+#include "../vwidgets/global.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolMove::VisToolMove(const VContainer *data, QGraphicsItem *parent)

@@ -37,7 +37,9 @@
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "../vpatterndb/floatItemData/vpatternlabeldata.h"
 #include "../vpatterndb/floatItemData/vgrainlinedata.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
 #   include "../vmisc/vdatastreamenum.h"
 #endif

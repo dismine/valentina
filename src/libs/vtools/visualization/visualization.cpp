@@ -52,6 +52,7 @@
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vcurvepathitem.h"
 #include "../vwidgets/scalesceneitems.h"
+#include "../vwidgets/global.h"
 
 template <class K, class V> class QHash;
 

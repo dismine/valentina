@@ -28,7 +28,9 @@
 #ifndef VFORMULA_P_H
 #define VFORMULA_P_H
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/typedef.h"
 #include "../vmisc/vmath.h"
 #include "../vmisc/defglobal.h"

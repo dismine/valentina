@@ -49,6 +49,7 @@
 #include "../vgeometry/varc.h"
 #include "../qmuparser/qmudef.h"
 #include "../vwidgets/vabstractmainwindow.h"
+#include "../vwidgets/global.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

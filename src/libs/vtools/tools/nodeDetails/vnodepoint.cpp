@@ -55,6 +55,7 @@
 #include "../vpatterndb/vpiecenode.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
+#include "../vwidgets/global.h"
 #include "../vabstracttool.h"
 #include "../vdatatool.h"
 #include "vabstractnode.h"

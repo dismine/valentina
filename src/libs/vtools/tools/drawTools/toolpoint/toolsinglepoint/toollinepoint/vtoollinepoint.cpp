@@ -43,12 +43,12 @@
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
-#include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../../../../vabstracttool.h"
 #include "../../../vdrawtool.h"
 #include "../vtoolsinglepoint.h"
 #include "../vwidgets/scalesceneitems.h"
+#include "../vwidgets/global.h"
 
 template <class T> class QSharedPointer;
 

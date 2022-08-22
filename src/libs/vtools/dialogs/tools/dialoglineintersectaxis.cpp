@@ -49,7 +49,7 @@
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vabstractmainwindow.h"
-#include "../../tools/vabstracttool.h"
+#include "../vwidgets/global.h"
 #include "../../visualization/line/vistoollineintersectaxis.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"

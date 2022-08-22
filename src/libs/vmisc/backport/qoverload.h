@@ -33,7 +33,9 @@
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #if defined(Q_COMPILER_VARIADIC_TEMPLATES)
 
-#include "../diagnostic.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+#include "../vmisc/diagnostic.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")

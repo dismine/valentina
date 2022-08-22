@@ -45,15 +45,14 @@
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vabstractmainwindow.h"
-#include "../../tools/vabstracttool.h"
 #include "../../visualization/line/vistoolendline.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../ifc/xml/vdomdocument.h"
 #include "../support/dialogeditwrongformula.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "ui_dialogendline.h"
+#include "../vwidgets/global.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

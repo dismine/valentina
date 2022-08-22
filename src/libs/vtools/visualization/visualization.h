@@ -39,7 +39,6 @@
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vcurvepathitem.h"
-#include "../vwidgets/global.h"
 #include "../vgeometry/vabstractcurve.h"
 
 Q_DECLARE_LOGGING_CATEGORY(vVis)

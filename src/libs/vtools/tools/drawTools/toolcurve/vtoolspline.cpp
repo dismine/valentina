@@ -46,6 +46,7 @@
 #include <QVector>
 #include <Qt>
 #include <new>
+#include <QtMath>
 
 #include "../../../dialogs/tools/dialogspline.h"
 #include "../../../dialogs/tools/dialogtool.h"
@@ -59,10 +60,10 @@
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
-#include "../vmisc/vmath.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vcontrolpointspline.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/global.h"
 #include "../../vabstracttool.h"
 #include "../vdrawtool.h"
 #include "vabstractspline.h"

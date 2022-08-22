@@ -36,11 +36,11 @@
 #include <new>
 
 #include "../../tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofcontact.h"
-#include "../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
 #include "visline.h"
+#include "../vwidgets/global.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointOfContact::VisToolPointOfContact(const VContainer *data, QGraphicsItem *parent)

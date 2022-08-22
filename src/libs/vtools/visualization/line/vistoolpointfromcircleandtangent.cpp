@@ -35,12 +35,12 @@
 #include <new>
 
 #include "../../tools/drawTools/toolpoint/toolsinglepoint/vtoolpointfromcircleandtangent.h"
-#include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
 #include "visline.h"
+#include "../vwidgets/global.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointFromCircleAndTangent::VisToolPointFromCircleAndTangent(const VContainer *data, QGraphicsItem *parent)

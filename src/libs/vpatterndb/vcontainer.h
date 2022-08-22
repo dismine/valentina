@@ -50,7 +50,9 @@
 #include "../vgeometry/vabstractcubicbezierpath.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vgobject.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "variables.h"
 #include "variables/vinternalvariable.h"
 #include "vpiece.h"

@@ -33,6 +33,7 @@
 #include "../../undocommands/savepieceoptions.h"
 #include "../vtoolseamallowance.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../vwidgets/global.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolPiecePath *VToolPiecePath::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,

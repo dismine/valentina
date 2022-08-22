@@ -39,7 +39,9 @@
 #include <QtAlgorithms>
 #include <new>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/vmodifierkey.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
@@ -51,9 +53,8 @@
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
 #include "../vgeometry/vsplinepath.h"
-#include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
-#include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/global.h"
 #include "visoperation.h"
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -34,15 +34,10 @@
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/floatItemData/vpatternlabeldata.h"
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
-#include "nodeDetails/nodedetails.h"
 #include "../vgeometry/varc.h"
-#include "../vgeometry/vellipticalarc.h"
-#include "../vgeometry/vcubicbezier.h"
-#include "../vgeometry/vcubicbezierpath.h"
 #include "../vgeometry/vpointf.h"
-#include "../vgeometry/vspline.h"
-#include "../vgeometry/vsplinepath.h"
 #include "../vgeometry/vplacelabelitem.h"
+#include "../vgeometry/vellipticalarc.h"
 #include "../ifc/xml/vpatternconverter.h"
 #include "../ifc/exception/vexceptionwrongid.h"
 #include "../undocommands/addpiece.h"
@@ -53,12 +48,20 @@
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../vwidgets/vnobrushscalepathitem.h"
 #include "../vwidgets/vabstractmainwindow.h"
+#include "../vwidgets/global.h"
 #include "../qmuparser/qmutokenparser.h"
-#include "../vlayout/vlayoutdef.h"
 #include "toolsdef.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "tools/nodeDetails/vtoolpin.h"
+#include "tools/nodeDetails/vnodepoint.h"
+#include "tools/nodeDetails/vtoolpiecepath.h"
+#include "tools/nodeDetails/vnodearc.h"
+#include "tools/nodeDetails/vnodeellipticalarc.h"
+#include "tools/nodeDetails/vnodespline.h"
+#include "tools/nodeDetails/vnodesplinepath.h"
+#include "tools/nodeDetails/vtoolplacelabel.h"
 
 #include <QFuture>
 #include <QtConcurrent/QtConcurrentRun>
@@ -69,6 +72,7 @@
 #include <QMessageBox>
 #include <QTimer>
 #include <QUuid>
+#include <QtMath>
 
 // Current version of seam allowance tag need for backward compatibility
 const quint8 VToolSeamAllowance::pieceVersion = 2;

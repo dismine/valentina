@@ -44,7 +44,9 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/def.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "vdatatool.h"
 
 class VGraphicsSimpleTextItem;

@@ -39,6 +39,7 @@
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/global.h"
 #include "../visualization.h"
 #include "visline.h"
 #include "../vmisc/vmodifierkey.h"

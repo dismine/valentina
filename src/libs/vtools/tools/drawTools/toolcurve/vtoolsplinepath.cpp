@@ -46,6 +46,7 @@
 #include <QUndoStack>
 #include <Qt>
 #include <new>
+#include <QtMath>
 
 #include "../../../dialogs/tools/dialogtool.h"
 #include "../../../dialogs/tools/dialogsplinepath.h"
@@ -64,11 +65,11 @@
 #include "../vgeometry/vspline.h"
 #include "../vgeometry/vsplinepoint.h"
 #include "../vmisc/vabstractapplication.h"
-#include "../vmisc/vmath.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/../vgeometry/vsplinepath.h"
 #include "../vwidgets/vcontrolpointspline.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/global.h"
 #include "../../vabstracttool.h"
 #include "../vdrawtool.h"
 #include "vabstractspline.h"

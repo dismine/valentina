@@ -64,15 +64,18 @@
 #include "../vgeometry/vsplinepath.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vellipticalarc.h"
-#include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/calculator.h"
-#include "../vwidgets/vgraphicssimpletextitem.h"
-#include "nodeDetails/nodedetails.h"
 #include "../dialogs/support/dialogundo.h"
 #include "../dialogs/support/dialogeditwrongformula.h"
 #include "toolsdef.h"
+#include "nodeDetails/vabstractnode.h"
+#include "nodeDetails/vnodepoint.h"
+#include "nodeDetails/vnodearc.h"
+#include "nodeDetails/vnodeellipticalarc.h"
+#include "nodeDetails/vnodespline.h"
+#include "nodeDetails/vnodesplinepath.h"
 
 template <class T> class QSharedPointer;
 

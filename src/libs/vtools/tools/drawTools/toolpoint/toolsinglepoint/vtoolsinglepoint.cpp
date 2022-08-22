@@ -60,6 +60,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vgraphicssimpletextitem.h"
 #include "../vwidgets/scalesceneitems.h"
+#include "../vwidgets/global.h"
 #include "../../../vabstracttool.h"
 #include "../../vdrawtool.h"
 #include "../vabstractpoint.h"

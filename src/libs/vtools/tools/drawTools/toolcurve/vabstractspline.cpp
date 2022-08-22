@@ -50,6 +50,7 @@
 #include "../vgeometry/vabstractarc.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vcontrolpointspline.h"
+#include "../vwidgets/global.h"
 #include "../../../visualization/line/visline.h"
 #include "../../vabstracttool.h"
 #include "../vdrawtool.h"

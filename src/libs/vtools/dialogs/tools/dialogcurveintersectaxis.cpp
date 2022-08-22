@@ -54,6 +54,7 @@
 #include "../qmuparser/qmudef.h"
 #include "../dialogtoolbox.h"
 #include "ui_dialogcurveintersectaxis.h"
+#include "../vwidgets/global.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, quint32 toolId, QWidget *parent)

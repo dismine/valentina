@@ -34,7 +34,6 @@
 #include <Qt>
 #include <new>
 
-#include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vgeometrydef.h"
 #include "../vgeometry/vpointf.h"
@@ -42,6 +41,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vcontrolpointspline.h"
 #include "../vwidgets/scalesceneitems.h"
+#include "../vwidgets/global.h"
 #include "../visualization.h"
 #include "vispath.h"
 #include "../vmisc/vmodifierkey.h"

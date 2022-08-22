@@ -9,7 +9,6 @@ HEADERS += \
     $$PWD/backgroundimage/vbackgroundimageitem.h \
     $$PWD/vdatatool.h \
     $$PWD/vabstracttool.h \
-    $$PWD/tools.h \
     $$PWD/drawTools/toolpoint/toolsinglepoint/vtooltriangle.h \
     $$PWD/drawTools/toolcurve/vtoolsplinepath.h \
     $$PWD/drawTools/toolcurve/vtoolspline.h \
@@ -28,13 +27,11 @@ HEADERS += \
     $$PWD/drawTools/toolcurve/vtoolarc.h \
     $$PWD/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolalongline.h \
     $$PWD/drawTools/vdrawtool.h \
-    $$PWD/drawTools/drawtools.h \
     $$PWD/nodeDetails/vnodesplinepath.h \
     $$PWD/nodeDetails/vnodespline.h \
     $$PWD/nodeDetails/vnodepoint.h \
     $$PWD/nodeDetails/vnodearc.h \
     $$PWD/nodeDetails/vabstractnode.h \
-    $$PWD/nodeDetails/nodedetails.h \
     $$PWD/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutspline.h \
     $$PWD/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutsplinepath.h \
     $$PWD/vtooluniondetails.h \

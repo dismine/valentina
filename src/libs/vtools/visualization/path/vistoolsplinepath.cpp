@@ -43,6 +43,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vcontrolpointspline.h"
 #include "../vwidgets/scalesceneitems.h"
+#include "../vwidgets/global.h"
 #include "../visualization.h"
 #include "vispath.h"
 #include "../vmisc/vmodifierkey.h"

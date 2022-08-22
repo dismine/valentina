@@ -46,9 +46,9 @@
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
-#include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/global.h"
 #include "../vabstracttool.h"
 #include "vdrawtool.h"
 
@@ -68,7 +68,7 @@ VToolLine::VToolLine(const VToolLineInitData &initData, QGraphicsItem *parent)
       lineColor(initData.lineColor),
       m_acceptHoverEvents(true)
 {
-    m_isBoldLine = false;
+    SetBoldLine(false);
     this->m_lineType = initData.typeLine;
     //Line
     RefreshGeometry();
@@ -292,7 +292,7 @@ void VToolLine::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     if (m_acceptHoverEvents)
     {
-        m_isBoldLine = true;
+        SetBoldLine(true);
         setToolTip(MakeToolTip());
         VScaledLine::hoverEnterEvent(event);
     }
@@ -311,7 +311,7 @@ void VToolLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     if (m_acceptHoverEvents && vis.isNull())
     {
-        m_isBoldLine = false;
+        SetBoldLine(false);
         VScaledLine::hoverLeaveEvent(event);
     }
 }

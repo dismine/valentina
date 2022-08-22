@@ -38,7 +38,6 @@
 #include <QToolButton>
 #include <Qt>
 
-#include "../ifc/xml/vdomdocument.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../../visualization/path/vistoolarcwithlength.h"
@@ -50,6 +49,7 @@
 #include "../vgeometry/varc.h"
 #include "../qmuparser/qmudef.h"
 #include "../vwidgets/vabstractmainwindow.h"
+#include "../vwidgets/global.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogArcWithLength::DialogArcWithLength(const VContainer *data, quint32 toolId, QWidget *parent)
