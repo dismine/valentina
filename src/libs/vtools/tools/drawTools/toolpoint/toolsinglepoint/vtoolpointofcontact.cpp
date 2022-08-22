@@ -348,7 +348,7 @@ void VToolPointOfContact::SetVisualization()
 {
     if (not vis.isNull())
     {
-        VisToolPointOfContact *visual = qobject_cast<VisToolPointOfContact *>(vis);
+        auto *visual = qobject_cast<VisToolPointOfContact *>(vis);
         SCASSERT(visual != nullptr)
 
         visual->setObject1Id(firstPointId);

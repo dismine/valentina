@@ -268,7 +268,7 @@ void VToolNormal::SetVisualization()
 {
     if (not vis.isNull())
     {
-        VisToolNormal *visual = qobject_cast<VisToolNormal *>(vis);
+        auto *visual = qobject_cast<VisToolNormal *>(vis);
         SCASSERT(visual != nullptr)
 
         visual->setObject1Id(basePointId);

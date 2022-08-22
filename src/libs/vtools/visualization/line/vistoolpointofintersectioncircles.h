@@ -55,7 +55,7 @@ public:
     void setC2Radius(const QString &value);
     void setCrossPoint(const CrossCirclesPoint &value);
 
-    auto  type() const -> int override {return Type;}
+    auto type() const -> int override {return Type;}
     enum {Type = UserType + static_cast<int>(Vis::ToolPointOfIntersectionCircles)};
 private:
     // cppcheck-suppress unknownMacro

@@ -189,7 +189,7 @@ void VToolFlippingByLine::SetVisualization()
 {
     if (not vis.isNull())
     {
-        VisToolFlippingByLine *visual = qobject_cast<VisToolFlippingByLine *>(vis);
+        auto *visual = qobject_cast<VisToolFlippingByLine *>(vis);
         SCASSERT(visual != nullptr)
 
         visual->SetObjects(SourceToObjects(source));

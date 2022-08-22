@@ -423,7 +423,7 @@ void VToolLine::SetVisualization()
 {
     if (not vis.isNull())
     {
-        VisToolLine *visual = qobject_cast<VisToolLine *>(vis);
+        auto *visual = qobject_cast<VisToolLine *>(vis);
         SCASSERT(visual != nullptr)
 
         visual->setObject1Id(firstPoint);

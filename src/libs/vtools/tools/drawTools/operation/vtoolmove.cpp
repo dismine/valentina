@@ -457,17 +457,16 @@ void VToolMove::SetVisualization()
 {
     if (not vis.isNull())
     {
-        VisToolMove *visual = qobject_cast<VisToolMove *>(vis);
+        auto *visual = qobject_cast<VisToolMove *>(vis);
         SCASSERT(visual != nullptr)
 
+        const bool osSeparator = VAbstractApplication::VApp()->Settings()->GetOsSeparator();
+        const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
+
         visual->SetObjects(SourceToObjects(source));
-        visual->SetAngle(VAbstractApplication::VApp()->TrVars()
-                         ->FormulaToUser(formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
-        visual->SetRotationAngle(VAbstractApplication::VApp()->TrVars()
-                                 ->FormulaToUser(formulaRotationAngle,
-                                                 VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
-        visual->SetLength(VAbstractApplication::VApp()->TrVars()
-                          ->FormulaToUser(formulaLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+        visual->SetAngle(trVars->FormulaToUser(formulaAngle, osSeparator));
+        visual->SetRotationAngle(trVars->FormulaToUser(formulaRotationAngle, osSeparator));
+        visual->SetLength(trVars->FormulaToUser(formulaLength, osSeparator));
         visual->SetRotationOriginPointId(origPointId);
         visual->RefreshGeometry();
     }

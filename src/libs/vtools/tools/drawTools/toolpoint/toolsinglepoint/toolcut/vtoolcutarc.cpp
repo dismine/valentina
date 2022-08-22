@@ -267,7 +267,7 @@ void VToolCutArc::SetVisualization()
 {
     if (not vis.isNull())
     {
-        VisToolCutArc *visual = qobject_cast<VisToolCutArc *>(vis);
+        auto *visual = qobject_cast<VisToolCutArc *>(vis);
         SCASSERT(visual != nullptr)
 
         visual->setObject1Id(baseCurveId);

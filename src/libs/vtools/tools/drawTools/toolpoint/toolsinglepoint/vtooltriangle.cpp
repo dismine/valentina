@@ -338,7 +338,7 @@ void VToolTriangle::SetVisualization()
 {
     if (not vis.isNull())
     {
-        VisToolTriangle * visual = qobject_cast<VisToolTriangle *>(vis);
+        auto * visual = qobject_cast<VisToolTriangle *>(vis);
         SCASSERT(visual != nullptr)
 
         visual->setObject1Id(axisP1Id);

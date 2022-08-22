@@ -204,7 +204,7 @@ void VToolFlippingByAxis::SetVisualization()
 {
     if (not vis.isNull())
     {
-        VisToolFlippingByAxis *visual = qobject_cast<VisToolFlippingByAxis *>(vis);
+        auto *visual = qobject_cast<VisToolFlippingByAxis *>(vis);
         SCASSERT(visual != nullptr)
 
         visual->SetObjects(SourceToObjects(source));

@@ -298,7 +298,7 @@ void VToolBisector::SetVisualization()
 {
     if (not vis.isNull())
     {
-        VisToolBisector *visual = qobject_cast<VisToolBisector *>(vis);
+        auto *visual = qobject_cast<VisToolBisector *>(vis);
         SCASSERT(visual != nullptr)
 
         visual->setObject1Id(firstPointId);

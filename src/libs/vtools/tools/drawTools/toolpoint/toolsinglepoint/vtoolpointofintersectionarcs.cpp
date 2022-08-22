@@ -351,7 +351,7 @@ void VToolPointOfIntersectionArcs::SetVisualization()
 {
     if (not vis.isNull())
     {
-        VisToolPointOfIntersectionArcs *visual = qobject_cast<VisToolPointOfIntersectionArcs *>(vis);
+        auto *visual = qobject_cast<VisToolPointOfIntersectionArcs *>(vis);
         SCASSERT(visual != nullptr)
 
         visual->setArc1Id(firstArcId);

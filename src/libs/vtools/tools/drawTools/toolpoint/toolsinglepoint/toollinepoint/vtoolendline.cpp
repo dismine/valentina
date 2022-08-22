@@ -225,14 +225,15 @@ void VToolEndLine::SetVisualization()
 {
     if (not vis.isNull())
     {
-        VisToolEndLine *visual = qobject_cast<VisToolEndLine *>(vis);
+        auto *visual = qobject_cast<VisToolEndLine *>(vis);
         SCASSERT(visual != nullptr)
 
+        const bool osSeparator = VAbstractApplication::VApp()->Settings()->GetOsSeparator();
+        const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
+
         visual->setObject1Id(basePointId);
-        visual->setLength(VAbstractApplication::VApp()->TrVars()
-                          ->FormulaToUser(formulaLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
-        visual->SetAngle(VAbstractApplication::VApp()->TrVars()
-                         ->FormulaToUser(formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+        visual->setLength(trVars->FormulaToUser(formulaLength, osSeparator));
+        visual->SetAngle(trVars->FormulaToUser(formulaAngle, osSeparator));
         visual->setLineStyle(LineStyleToPenStyle(m_lineType));
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();

@@ -257,7 +257,7 @@ void VToolHeight::SetVisualization()
 {
     if (not vis.isNull())
     {
-        VisToolHeight *visual = qobject_cast<VisToolHeight *>(vis);
+        auto *visual = qobject_cast<VisToolHeight *>(vis);
         SCASSERT(visual != nullptr)
 
         visual->setObject1Id(basePointId);

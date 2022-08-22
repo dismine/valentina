@@ -339,7 +339,7 @@ void VToolRotation::SetVisualization()
 {
     if (not vis.isNull())
     {
-        VisToolRotation *visual = qobject_cast<VisToolRotation *>(vis);
+        auto *visual = qobject_cast<VisToolRotation *>(vis);
         SCASSERT(visual != nullptr)
 
         visual->SetObjects(SourceToObjects(source));

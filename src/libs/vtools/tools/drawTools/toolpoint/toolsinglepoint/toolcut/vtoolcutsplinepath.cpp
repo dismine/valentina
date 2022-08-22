@@ -360,7 +360,7 @@ void VToolCutSplinePath::SetVisualization()
 {
     if (not vis.isNull())
     {
-        VisToolCutSplinePath *visual = qobject_cast<VisToolCutSplinePath *>(vis);
+        auto *visual = qobject_cast<VisToolCutSplinePath *>(vis);
         SCASSERT(visual != nullptr)
 
         visual->setObject1Id(baseCurveId);

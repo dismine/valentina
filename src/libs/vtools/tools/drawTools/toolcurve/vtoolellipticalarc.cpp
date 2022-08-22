@@ -417,21 +417,18 @@ void VToolEllipticalArc::SetVisualization()
     if (not vis.isNull())
     {
         const QSharedPointer<VEllipticalArc> elArc = VAbstractTool::data.GeometricObject<VEllipticalArc>(m_id);
-        VisToolEllipticalArc *visual = qobject_cast<VisToolEllipticalArc *>(vis);
+        auto *visual = qobject_cast<VisToolEllipticalArc *>(vis);
         SCASSERT(visual != nullptr)
 
+        const bool osSeparator = VAbstractApplication::VApp()->Settings()->GetOsSeparator();
         const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
+
         visual->setObject1Id(elArc->GetCenter().id());
-        visual->setRadius1(trVars->FormulaToUser(elArc->GetFormulaRadius1(),
-                                                 VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
-        visual->setRadius2(trVars->FormulaToUser(elArc->GetFormulaRadius2(),
-                                                 VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
-        visual->setF1(trVars->FormulaToUser(elArc->GetFormulaF1(),
-                                            VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
-        visual->setF2(trVars->FormulaToUser(elArc->GetFormulaF2(),
-                                            VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
-        visual->setRotationAngle(trVars->FormulaToUser(elArc->GetFormulaRotationAngle(),
-                                                       VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+        visual->setRadius1(trVars->FormulaToUser(elArc->GetFormulaRadius1(), osSeparator));
+        visual->setRadius2(trVars->FormulaToUser(elArc->GetFormulaRadius2(), osSeparator));
+        visual->setF1(trVars->FormulaToUser(elArc->GetFormulaF1(), osSeparator));
+        visual->setF2(trVars->FormulaToUser(elArc->GetFormulaF2(), osSeparator));
+        visual->setRotationAngle(trVars->FormulaToUser(elArc->GetFormulaRotationAngle(), osSeparator));
         visual->setLineStyle(LineStyleToPenStyle(elArc->GetPenStyle()));
         visual->RefreshGeometry();
     }

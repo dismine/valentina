@@ -325,7 +325,7 @@ void VToolPointFromCircleAndTangent::SetVisualization()
 {
     if (not vis.isNull())
     {
-        VisToolPointFromCircleAndTangent *visual = qobject_cast<VisToolPointFromCircleAndTangent *>(vis);
+        auto *visual = qobject_cast<VisToolPointFromCircleAndTangent *>(vis);
         SCASSERT(visual != nullptr)
 
         visual->setObject1Id(tangentPointId);

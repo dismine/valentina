@@ -315,7 +315,7 @@ void VToolLineIntersectAxis::SetVisualization()
 {
     if (not vis.isNull())
     {
-        VisToolLineIntersectAxis *visual = qobject_cast<VisToolLineIntersectAxis *>(vis);
+        auto *visual = qobject_cast<VisToolLineIntersectAxis *>(vis);
         SCASSERT(visual != nullptr)
 
         visual->setObject1Id(firstPointId);

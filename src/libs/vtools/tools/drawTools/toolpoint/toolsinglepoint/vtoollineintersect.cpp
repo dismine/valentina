@@ -293,7 +293,7 @@ void VToolLineIntersect::SetVisualization()
 {
     if (not vis.isNull())
     {
-        VisToolLineIntersect *visual = qobject_cast<VisToolLineIntersect *>(vis);
+        auto *visual = qobject_cast<VisToolLineIntersect *>(vis);
         SCASSERT(visual != nullptr)
 
         visual->setObject1Id(p1Line1);

@@ -324,7 +324,7 @@ void VToolTrueDarts::SetVisualization()
 {
     if (not vis.isNull())
     {
-        VisToolTrueDarts *visual = qobject_cast<VisToolTrueDarts *>(vis);
+        auto *visual = qobject_cast<VisToolTrueDarts *>(vis);
         SCASSERT(visual != nullptr)
 
         visual->setObject1Id(baseLineP1Id);

@@ -371,14 +371,13 @@ void VToolArc::SetVisualization()
         auto *visual = qobject_cast<VisToolArc *>(vis);
         SCASSERT(visual != nullptr)
 
+        const bool osSeparator = VAbstractApplication::VApp()->Settings()->GetOsSeparator();
         const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
+
         visual->setObject1Id(arc->GetCenter().id());
-        visual->setRadius(trVars->FormulaToUser(
-                              arc->GetFormulaRadius(), VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
-        visual->setF1(trVars->FormulaToUser(
-                          arc->GetFormulaF1(), VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
-        visual->setF2(trVars->FormulaToUser(
-                          arc->GetFormulaF2(), VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+        visual->setRadius(trVars->FormulaToUser(arc->GetFormulaRadius(), osSeparator));
+        visual->setF1(trVars->FormulaToUser(arc->GetFormulaF1(), osSeparator));
+        visual->setF2(trVars->FormulaToUser(arc->GetFormulaF2(), osSeparator));
         visual->setLineStyle(LineStyleToPenStyle(arc->GetPenStyle()));
         visual->setApproximationScale(arc->GetApproximationScale());
         visual->SetMode(Mode::Show);

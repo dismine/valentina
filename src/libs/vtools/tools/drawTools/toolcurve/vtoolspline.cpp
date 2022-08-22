@@ -539,7 +539,7 @@ void VToolSpline::SetVisualization()
 {
     if (not vis.isNull())
     {
-        VisToolSpline *visual = qobject_cast<VisToolSpline *>(vis);
+        auto *visual = qobject_cast<VisToolSpline *>(vis);
         SCASSERT(visual != nullptr)
 
         const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(m_id);

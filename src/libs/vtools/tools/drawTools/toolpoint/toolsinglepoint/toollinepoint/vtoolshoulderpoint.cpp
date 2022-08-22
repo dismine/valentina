@@ -318,7 +318,7 @@ void VToolShoulderPoint::SetVisualization()
 {
     if (not vis.isNull())
     {
-        VisToolShoulderPoint *visual = qobject_cast<VisToolShoulderPoint *>(vis);
+        auto *visual = qobject_cast<VisToolShoulderPoint *>(vis);
         SCASSERT(visual != nullptr)
 
         visual->setObject1Id(pShoulder);
