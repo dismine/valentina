@@ -67,7 +67,7 @@ public:
           m_bottomRightPin(data.m_bottomRightPin)
     {}
 
-    ~VPatternLabelDataPrivate() Q_DECL_EQ_DEFAULT;
+    ~VPatternLabelDataPrivate() = default;
 
     /** @brief m_dLabelWidth formula to calculate the width of label */
     QString m_dLabelWidth;

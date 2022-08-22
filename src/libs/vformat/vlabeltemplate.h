@@ -35,7 +35,7 @@ class VLabelTemplate : public VDomDocument
 {
 public:
     VLabelTemplate();
-    virtual ~VLabelTemplate() Q_DECL_EQ_DEFAULT;
+    virtual ~VLabelTemplate() = default;
 
     static const QString TagTemplate;
     static const QString TagLines;

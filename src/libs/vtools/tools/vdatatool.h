@@ -49,7 +49,7 @@ class VDataTool : public QObject
     Q_OBJECT // NOLINT
 public:
     explicit VDataTool(VContainer *data, QObject *parent = nullptr);
-    virtual ~VDataTool() Q_DECL_EQ_DEFAULT;
+    virtual ~VDataTool() = default;
     VContainer      getData() const;
     void            setData(const VContainer *value);
     virtual quint32 referens() const;

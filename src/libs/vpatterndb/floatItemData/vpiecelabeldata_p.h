@@ -68,7 +68,7 @@ public:
           m_lines(data.m_lines)
     {}
 
-    ~VPieceLabelDataPrivate() Q_DECL_EQ_DEFAULT;
+    ~VPieceLabelDataPrivate() = default;
 
     /** @brief m_qsLetter Detail letter (should be no more than 3 characters) */
     QString m_qsLetter;

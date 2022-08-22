@@ -36,7 +36,7 @@ class VWatermark : public VDomDocument
     Q_DECLARE_TR_FUNCTIONS(VWatermark) // NOLINT
 public:
     VWatermark();
-    virtual ~VWatermark() Q_DECL_EQ_DEFAULT;
+    virtual ~VWatermark() = default;
 
     void CreateEmptyWatermark();
 

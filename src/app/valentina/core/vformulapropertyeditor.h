@@ -46,7 +46,7 @@ public:
     explicit VFormulaPropertyEditor(QWidget *parent);
 
     //! Destructor
-    ~VFormulaPropertyEditor() override Q_DECL_EQ_DEFAULT;
+    ~VFormulaPropertyEditor() override = default;
 
     //! Returns the formula currently set
     auto GetFormula() const -> VFormula;

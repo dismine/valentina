@@ -45,7 +45,7 @@ public:
     bool operator==(const VToolRecord &record) const;
     VToolRecord &operator=(const VToolRecord &record);
     VToolRecord(const VToolRecord &record);
-    ~VToolRecord() Q_DECL_EQ_DEFAULT;
+    ~VToolRecord() = default;
 
     quint32 getId() const;
     void    setId(const quint32 &value);

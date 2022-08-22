@@ -73,7 +73,7 @@ class VDrawTool : public VInteractiveTool
 public:
 
     VDrawTool(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes, QObject *parent = nullptr);
-    virtual ~VDrawTool() Q_DECL_EQ_DEFAULT;
+    virtual ~VDrawTool() = default;
 
     QString      getLineType() const;
     virtual void SetLineType(const QString &value);

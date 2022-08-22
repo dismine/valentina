@@ -75,7 +75,7 @@ class VAbstractOperation : public VDrawTool, public QGraphicsLineItem
     // in Q_INTERFACES. qobject_cast to QGraphicsItem will not work!"
     Q_INTERFACES(QGraphicsItem)
 public:
-    virtual ~VAbstractOperation() Q_DECL_EQ_DEFAULT;
+    virtual ~VAbstractOperation() = default;
 
     static const QString TagItem;
     static const QString TagSource;

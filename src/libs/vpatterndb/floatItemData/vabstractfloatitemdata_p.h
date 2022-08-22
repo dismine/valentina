@@ -55,7 +55,7 @@ public:
           m_bVisible(data.m_bVisible)
     {}
 
-    ~VAbstractFloatItemDataPrivate() Q_DECL_EQ_DEFAULT;
+    ~VAbstractFloatItemDataPrivate() = default;
 
     /** @brief m_ptPos position of label's top left corner */
     QPointF m_ptPos;

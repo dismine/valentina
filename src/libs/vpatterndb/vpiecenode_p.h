@@ -82,7 +82,7 @@ public:
           m_manualPassmarkLength(node.m_manualPassmarkLength)
     {}
 
-    ~VPieceNodeData() Q_DECL_EQ_DEFAULT;
+    ~VPieceNodeData() = default;
 
     friend QDataStream& operator<<(QDataStream& out, const VPieceNodeData& p);
     friend QDataStream& operator>>(QDataStream& in, VPieceNodeData& p);

@@ -59,7 +59,7 @@ public:
                          QTextCodec *codec = nullptr);
     explicit QxtCsvModel(const QString &filename, QObject *parent = nullptr, bool withHeader = false,
                          QChar separator = ',', QTextCodec *codec = nullptr);
-    virtual ~QxtCsvModel() Q_DECL_EQ_DEFAULT;
+    virtual ~QxtCsvModel() = default;
 
     virtual int      rowCount(const QModelIndex& parent = QModelIndex()) const override;
     virtual int      columnCount(const QModelIndex& parent = QModelIndex()) const override;

@@ -59,7 +59,7 @@ class VToolSeamAllowance : public VInteractiveTool, public QGraphicsPathItem
 {
     Q_OBJECT // NOLINT
 public:
-    virtual ~VToolSeamAllowance() Q_DECL_EQ_DEFAULT;
+    virtual ~VToolSeamAllowance() = default;
 
     static VToolSeamAllowance* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                       VAbstractPattern *doc, VContainer *data);

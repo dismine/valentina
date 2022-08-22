@@ -34,7 +34,7 @@ class VWatermarkConverter final : public VAbstractConverter
 {
 public:
     explicit VWatermarkConverter(const QString &fileName);
-    virtual ~VWatermarkConverter() Q_DECL_EQ_DEFAULT;
+    virtual ~VWatermarkConverter() = default;
 
     static const QString WatermarkMaxVerStr;
     static const QString CurrentSchema;

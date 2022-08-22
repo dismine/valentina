@@ -48,7 +48,7 @@ class VPatternConverter final : public VAbstractConverter
     Q_DECLARE_TR_FUNCTIONS(VPatternConverter) // NOLINT
 public:
     explicit VPatternConverter(const QString &fileName);
-    virtual ~VPatternConverter() Q_DECL_EQ_DEFAULT;
+    virtual ~VPatternConverter() = default;
 
     static const QString PatternMaxVerStr;
     static const QString CurrentSchema;

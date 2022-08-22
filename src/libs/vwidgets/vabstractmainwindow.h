@@ -51,7 +51,7 @@ class VAbstractMainWindow : public QMainWindow
     Q_OBJECT // NOLINT
 public:
     explicit VAbstractMainWindow(QWidget *parent = nullptr);
-    virtual ~VAbstractMainWindow() Q_DECL_EQ_DEFAULT;
+    virtual ~VAbstractMainWindow() = default;
 
 public slots:
     virtual void ShowToolTip(const QString &toolTip);

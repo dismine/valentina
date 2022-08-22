@@ -69,7 +69,7 @@ public:
           m_uuid(piece.m_uuid)
     {}
 
-    ~VAbstractPieceData() Q_DECL_EQ_DEFAULT;
+    ~VAbstractPieceData() = default;
 
     friend QDataStream& operator<<(QDataStream& dataStream, const VAbstractPieceData& piece);
     friend QDataStream& operator>>(QDataStream& dataStream, VAbstractPieceData& piece);

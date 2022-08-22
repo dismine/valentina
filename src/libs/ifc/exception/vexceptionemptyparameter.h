@@ -48,7 +48,7 @@ public:
                              const QDomElement &domElement) V_NOEXCEPT_EXPR (true);
     VExceptionEmptyParameter(const VExceptionEmptyParameter &e) V_NOEXCEPT_EXPR (true);
     VExceptionEmptyParameter &operator=(const VExceptionEmptyParameter &e) V_NOEXCEPT_EXPR (true);
-    virtual         ~VExceptionEmptyParameter() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
+    virtual         ~VExceptionEmptyParameter() V_NOEXCEPT_EXPR (true) = default;
 
     Q_NORETURN virtual void raise() const override { throw *this; }
 

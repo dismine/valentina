@@ -60,7 +60,7 @@ class VToolCurveIntersectAxis : public VToolLinePoint
 {
     Q_OBJECT // NOLINT
 public:
-    virtual ~VToolCurveIntersectAxis() Q_DECL_EQ_DEFAULT;
+    virtual ~VToolCurveIntersectAxis() = default;
     virtual void setDialog() override;
 
     static VToolCurveIntersectAxis *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,

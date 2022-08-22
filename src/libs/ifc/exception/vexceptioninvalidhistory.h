@@ -36,7 +36,7 @@ public:
     explicit VExceptionInvalidHistory(const QString &error) V_NOEXCEPT_EXPR (true);
     VExceptionInvalidHistory(const VExceptionInvalidHistory &e) V_NOEXCEPT_EXPR (true);
     VExceptionInvalidHistory &operator=(const VExceptionInvalidHistory &e) V_NOEXCEPT_EXPR (true);
-    virtual ~VExceptionInvalidHistory() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
+    virtual ~VExceptionInvalidHistory() V_NOEXCEPT_EXPR (true) = default;
 
     Q_NORETURN virtual void raise() const override { throw *this; }
 

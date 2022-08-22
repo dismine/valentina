@@ -54,7 +54,7 @@ public:
     VMeasurements(Unit unit, VContainer *data);
     VMeasurements(Unit unit, const QVector<MeasurementDimension_p > &dimensions,
                   VContainer *data);
-    virtual ~VMeasurements() Q_DECL_EQ_DEFAULT;
+    virtual ~VMeasurements() = default;
 
     virtual void setXMLContent(const QString &fileName) override;
     virtual bool SaveDocument(const QString &fileName, QString &error) override;

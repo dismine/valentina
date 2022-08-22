@@ -51,7 +51,7 @@ public:
     QxtCsvModelPrivate() : csvData(), header(), maxColumn(0), quoteMode(QxtCsvModel::DefaultQuoteMode)
     {}
     QXT_DECLARE_PUBLIC(QxtCsvModel)
-    virtual ~QxtCsvModelPrivate() Q_DECL_EQ_DEFAULT;
+    virtual ~QxtCsvModelPrivate() = default;
 
     QList<QStringList> csvData;
     QStringList header;

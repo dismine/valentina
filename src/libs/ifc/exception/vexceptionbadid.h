@@ -46,7 +46,7 @@ public:
     VExceptionBadId(const QString &error, const QString &key) V_NOEXCEPT_EXPR (true);
     VExceptionBadId(const VExceptionBadId &e) V_NOEXCEPT_EXPR (true);
     VExceptionBadId &operator=(const VExceptionBadId &e) V_NOEXCEPT_EXPR (true);
-    virtual         ~VExceptionBadId() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
+    virtual         ~VExceptionBadId() V_NOEXCEPT_EXPR (true) = default;
 
     Q_NORETURN virtual void raise() const override { throw *this; }
 

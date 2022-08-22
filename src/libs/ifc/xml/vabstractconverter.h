@@ -46,7 +46,7 @@ class VAbstractConverter :public VDomDocument
 {
 public:
     explicit VAbstractConverter(const QString &fileName);
-    virtual ~VAbstractConverter() Q_DECL_EQ_DEFAULT;
+    virtual ~VAbstractConverter() = default;
 
     QString Convert();
 

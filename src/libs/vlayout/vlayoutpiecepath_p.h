@@ -63,7 +63,7 @@ public:
           m_cut(path.m_cut)
     {}
 
-    ~VLayoutPiecePathData() Q_DECL_EQ_DEFAULT;
+    ~VLayoutPiecePathData() = default;
 
     friend QDataStream& operator<<(QDataStream& dataStream, const VLayoutPiecePathData& path);
     friend QDataStream& operator>>(QDataStream& dataStream, VLayoutPiecePathData& path);

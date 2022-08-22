@@ -59,7 +59,7 @@ public:
         TestVApplication::OpenSettings();
     }
 
-    virtual ~TestVApplication() Q_DECL_EQ_DEFAULT;
+    virtual ~TestVApplication() = default;
 
     virtual const VTranslateVars *TrVars() override
     {

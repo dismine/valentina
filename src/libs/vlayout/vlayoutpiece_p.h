@@ -85,7 +85,7 @@ public:
           m_yScale(detail.m_yScale)
     {}
 
-    ~VLayoutPieceData() Q_DECL_EQ_DEFAULT;
+    ~VLayoutPieceData() = default;
 
     friend QDataStream& operator<<(QDataStream& dataStream, const VLayoutPieceData& piece);
     friend QDataStream& operator>>(QDataStream& dataStream, VLayoutPieceData& piece);

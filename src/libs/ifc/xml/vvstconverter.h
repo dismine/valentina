@@ -44,7 +44,7 @@ class VVSTConverter final : public VAbstractMConverter
     Q_DECLARE_TR_FUNCTIONS(VVSTConverter) // NOLINT
 public:
     explicit VVSTConverter(const QString &fileName);
-    virtual ~VVSTConverter() Q_DECL_EQ_DEFAULT;
+    virtual ~VVSTConverter() = default;
 
     static const QString MeasurementMaxVerStr;
     static const QString CurrentSchema;

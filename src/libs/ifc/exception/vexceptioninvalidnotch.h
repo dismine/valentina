@@ -36,7 +36,7 @@ public:
     explicit VExceptionInvalidNotch(const QString &error) V_NOEXCEPT_EXPR (true);
     VExceptionInvalidNotch(const VExceptionInvalidNotch &e) V_NOEXCEPT_EXPR (true);
     VExceptionInvalidNotch &operator=(const VExceptionInvalidNotch &e) V_NOEXCEPT_EXPR (true);
-    virtual ~VExceptionInvalidNotch() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
+    virtual ~VExceptionInvalidNotch() V_NOEXCEPT_EXPR (true) = default;
 
     Q_NORETURN virtual void raise() const override { throw *this; }
 

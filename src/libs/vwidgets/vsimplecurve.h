@@ -51,7 +51,7 @@ class VSimpleCurve : public VAbstractSimple, public VCurvePathItem
     Q_OBJECT // NOLINT
 public:
     VSimpleCurve(quint32 id, const QSharedPointer<VAbstractCurve> &curve, QObject *parent = nullptr);
-    virtual ~VSimpleCurve() Q_DECL_EQ_DEFAULT;
+    virtual ~VSimpleCurve() = default;
 
     virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::SimpleCurve)};

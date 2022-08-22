@@ -69,7 +69,7 @@ class VToolSinglePoint: public VAbstractPoint, public VScenePoint
 public:
     VToolSinglePoint(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes,
                      QGraphicsItem * parent = nullptr);
-    virtual ~VToolSinglePoint() Q_DECL_EQ_DEFAULT;
+    virtual ~VToolSinglePoint() = default;
 
     virtual int type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::SinglePoint)};
