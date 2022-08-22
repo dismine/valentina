@@ -49,6 +49,8 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "ui_dialogpointofintersectioncircles.h"
+#include "../vwidgets/vabstractmainwindow.h"
+#include "../vgeometry/vpointf.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointOfIntersectionCircles::DialogPointOfIntersectionCircles(const VContainer *data, quint32 toolId,
@@ -243,6 +245,67 @@ void DialogPointOfIntersectionCircles::SetCrossCirclesPoint(const CrossCirclesPo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfIntersectionCircles::ShowDialog(bool click)
+{
+    if (m_stage == 0 || m_stage == 2)
+    {
+        return;
+    }
+
+    auto FinishCreating = [this]()
+    {
+        vis->SetMode(Mode::Show);
+        vis->RefreshGeometry();
+
+        emit ToolTip(QString());
+
+        setModal(true);
+        show();
+    };
+
+    if (click)
+    {
+        // The check need to ignore first release of mouse button.
+        // User can select point by clicking on a label.
+        if (not m_firstRelease)
+        {
+            m_firstRelease = true;
+            return;
+        }
+
+        auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
+        SCASSERT(scene != nullptr)
+
+        QSharedPointer<VPointF> center = data->GeometricObject<VPointF>(m_stage == 1 ? GetFirstCircleCenterId()
+                                                                                     : GetSecondCircleCenterId());
+
+        QLineF line(static_cast<QPointF>(*center), scene->getScenePos());
+
+        if (m_stage == 1)
+        {
+            SetFirstCircleRadius(QString::number(FromPixel(line.length(), *data->GetPatternUnit())));
+            emit ToolTip(tr("Select second circle center"));
+            ++m_stage;
+            m_firstRelease = false;
+        }
+        else
+        {
+            SetSecondCircleRadius(QString::number(FromPixel(line.length(), *data->GetPatternUnit())));
+            ++m_stage;
+        }
+
+        if (m_stage > 2)
+        {
+            FinishCreating();
+        }
+
+        return;
+    }
+
+    FinishCreating();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionCircles::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (prepare)// After first choose we ignore all objects
@@ -255,26 +318,29 @@ void DialogPointOfIntersectionCircles::ChosenObject(quint32 id, const SceneObjec
         auto *point = qobject_cast<VisToolPointOfIntersectionCircles *>(vis);
         SCASSERT(point != nullptr)
 
-        switch (m_number)
+        switch (m_stage)
         {
             case 0:
-                if (SetObject(id, ui->comboBoxCircle1Center, tr("Select second circle center")))
+                if (SetObject(id, ui->comboBoxCircle1Center, QString()))
                 {
-                    m_number++;
+                    ++m_stage;
                     point->VisualMode(id);
+
+                    auto *window = qobject_cast<VAbstractMainWindow *>(
+                        VAbstractValApplication::VApp()->getMainWindow());
+                    SCASSERT(window != nullptr)
+                    connect(vis, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
                 }
                 break;
-            case 1:
+            case 2:
                 if (getCurrentObjectId(ui->comboBoxCircle1Center) != id)
                 {
                     if (SetObject(id, ui->comboBoxCircle2Center, QString()))
                     {
-                        m_number = 0;
                         point->setObject2Id(id);
                         point->RefreshGeometry();
+                        ++m_stage;
                         prepare = true;
-                        this->setModal(true);
-                        this->show();
                     }
                 }
                 break;

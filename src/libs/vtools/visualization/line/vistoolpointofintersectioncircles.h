@@ -60,15 +60,15 @@ public:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VisToolPointOfIntersectionCircles) // NOLINT
-    quint32               m_object2Id{NULL_ID};
-    qreal                 m_c1Radius{0};
-    qreal                 m_c2Radius{0};
-    CrossCirclesPoint     m_crossPoint{CrossCirclesPoint::FirstPoint};
-    VScaledEllipse       *m_point{nullptr};
-    VScaledEllipse       *m_c1Center{nullptr};
-    VScaledEllipse       *m_c2Center{nullptr};
-    QGraphicsEllipseItem *m_c1Path{nullptr};
-    QGraphicsEllipseItem *m_c2Path{nullptr};
+    quint32            m_object2Id{NULL_ID};
+    qreal              m_c1Radius{0};
+    qreal              m_c2Radius{0};
+    CrossCirclesPoint  m_crossPoint{CrossCirclesPoint::FirstPoint};
+    VScaledEllipse    *m_point{nullptr};
+    VScaledEllipse    *m_c1Center{nullptr};
+    VScaledEllipse    *m_c2Center{nullptr};
+    VScaledEllipse    *m_c1Path{nullptr};
+    VScaledEllipse    *m_c2Path{nullptr};
 };
 
 #endif // VISTOOLPOINTOFINTERSECTIONCIRCLES_H

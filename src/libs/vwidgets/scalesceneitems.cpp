@@ -84,7 +84,22 @@ void VScaledEllipse::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     visPen.setWidthF(width);
 
     setPen(visPen);
-    ScaleCircleSize(this, scale);
+    if (m_pointMode)
+    {
+        ScaleCircleSize(this, scale);
+    }
 
     PaintWithFixItemHighlightSelected<QGraphicsEllipseItem>(this, painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VScaledEllipse::PointMode() const
+{
+    return m_pointMode;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VScaledEllipse::SetPointMode(bool newHoldSize)
+{
+    m_pointMode = newHoldSize;
 }

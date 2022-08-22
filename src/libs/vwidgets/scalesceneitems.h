@@ -67,8 +67,13 @@ public:
 
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                        QWidget *widget = nullptr) override;
+    bool PointMode() const;
+    void SetPointMode(bool newPointMode);
+
 private:
     Q_DISABLE_COPY_MOVE(VScaledEllipse) // NOLINT
+
+    bool m_pointMode{true};
 };
 
 #endif // SCALESCENEITEMS_H
