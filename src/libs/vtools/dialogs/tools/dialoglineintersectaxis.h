@@ -106,6 +106,9 @@ private:
     bool flagFormula;
     bool flagError;
     bool flagName;
+
+    /** @brief number number of handled objects */
+    qint32 number{0};
 };
 
 //---------------------------------------------------------------------------------------------------------------------

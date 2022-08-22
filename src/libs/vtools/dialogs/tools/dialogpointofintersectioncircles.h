@@ -115,6 +115,9 @@ private:
     bool m_flagCircle2Radius{false};
     bool m_flagName{true};
     bool m_flagError{true};
+
+    /** @brief number number of handled objects */
+    qint32 m_number{0};
 };
 
 //---------------------------------------------------------------------------------------------------------------------

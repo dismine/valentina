@@ -255,12 +255,12 @@ void DialogPointOfIntersectionCircles::ChosenObject(quint32 id, const SceneObjec
         auto *point = qobject_cast<VisToolPointOfIntersectionCircles *>(vis);
         SCASSERT(point != nullptr)
 
-        switch (number)
+        switch (m_number)
         {
             case 0:
                 if (SetObject(id, ui->comboBoxCircle1Center, tr("Select second circle center")))
                 {
-                    number++;
+                    m_number++;
                     point->VisualMode(id);
                 }
                 break;
@@ -269,7 +269,7 @@ void DialogPointOfIntersectionCircles::ChosenObject(quint32 id, const SceneObjec
                 {
                     if (SetObject(id, ui->comboBoxCircle2Center, QString()))
                     {
-                        number = 0;
+                        m_number = 0;
                         point->setObject2Id(id);
                         point->RefreshGeometry();
                         prepare = true;

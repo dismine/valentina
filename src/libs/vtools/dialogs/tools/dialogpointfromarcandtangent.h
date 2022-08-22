@@ -86,6 +86,9 @@ private:
     QString pointName;
 
     bool flagName;
+
+    /** @brief number number of handled objects */
+    qint32  number{0};
 };
 
 //---------------------------------------------------------------------------------------------------------------------

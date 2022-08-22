@@ -201,12 +201,12 @@ void DialogShoulderPoint::ChosenObject(quint32 id, const SceneObject &type)
         auto *line = qobject_cast<VisToolShoulderPoint *>(vis);
         SCASSERT(line != nullptr)
 
-        switch (number)
+        switch (m_number)
         {
             case 0:
                 if (SetObject(id, ui->comboBoxP3, tr("Select first point of line")))
                 {
-                    number++;
+                    m_number++;
                     line->VisualMode(id);
                 }
                 break;
@@ -215,7 +215,7 @@ void DialogShoulderPoint::ChosenObject(quint32 id, const SceneObject &type)
                 {
                     if (SetObject(id, ui->comboBoxP1Line, tr("Select second point of line")))
                     {
-                        number++;
+                        m_number++;
                         line->setLineP1Id(id);
                         line->RefreshGeometry();
                     }

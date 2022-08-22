@@ -94,7 +94,6 @@ DialogTool::DialogTool(const VContainer *data, quint32 toolId, QWidget *parent)
       associatedTool(nullptr),
       toolId(toolId),
       prepare(false),
-      number(0),
       vis(nullptr)
 {
     SCASSERT(data != nullptr)      

@@ -123,6 +123,9 @@ private:
 
     QStringList m_groupTags{};
 
+    /** @brief number number of handled objects */
+    qint32 number{0};
+
     void FillSourceList();
 
     void ValidateSourceAliases();

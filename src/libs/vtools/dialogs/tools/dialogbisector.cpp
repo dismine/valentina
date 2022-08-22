@@ -203,12 +203,12 @@ void DialogBisector::ChosenObject(quint32 id, const SceneObject &type)
         auto *line = qobject_cast<VisToolBisector *>(vis);
         SCASSERT(line != nullptr)
 
-        switch (number)
+        switch (m_number)
         {
             case 0:
                 if (SetObject(id, ui->comboBoxFirstPoint, tr("Select second point of angle")))
                 {
-                    number++;
+                    m_number++;
                     line->VisualMode(id);
                 }
                 break;
@@ -217,7 +217,7 @@ void DialogBisector::ChosenObject(quint32 id, const SceneObject &type)
                 {
                     if (SetObject(id, ui->comboBoxSecondPoint, tr("Select third point of angle")))
                     {
-                        number++;
+                        m_number++;
                         line->setObject2Id(id);
                         line->RefreshGeometry();
                     }

@@ -101,6 +101,9 @@ private:
     bool flagName2;
     bool flagError;
 
+    /** @brief number number of handled objects */
+    qint32 number{0};
+
     void NameChanged(QLabel *labelEditNamePoint, const QString &pointD1Name, const QString &pointD2Name,
                      QLineEdit *secondPointName, bool &flagName);
 

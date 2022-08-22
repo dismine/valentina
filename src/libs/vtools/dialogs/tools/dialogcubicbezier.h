@@ -85,6 +85,9 @@ private:
 
     QString originAliasSuffix{};
 
+    /** @brief number number of handled objects */
+    qint32 number{0};
+
     const QSharedPointer<VPointF> GetP1() const;
     const QSharedPointer<VPointF> GetP2() const;
     const QSharedPointer<VPointF> GetP3() const;

@@ -197,12 +197,12 @@ void DialogAlongLine::ChosenObject(quint32 id, const SceneObject &type)
         SCASSERT(line != nullptr)
 
         const QString toolTip = tr("Select second point of line");
-        switch (number)
+        switch (m_number)
         {
             case 0:
                 if (SetObject(id, ui->comboBoxFirstPoint, toolTip))
                 {
-                    number++;
+                    m_number++;
                     line->VisualMode(id);
                 }
                 break;

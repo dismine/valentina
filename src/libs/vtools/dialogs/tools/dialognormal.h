@@ -119,6 +119,9 @@ private:
     bool m_flagError{true};
 
     bool m_firstRelease{false};
+
+    /** @brief number number of handled objects */
+    qint32 m_number{0};
 };
 
 //---------------------------------------------------------------------------------------------------------------------

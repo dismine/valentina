@@ -114,6 +114,9 @@ private:
 
     QString originAliasSuffix1{};
     QString originAliasSuffix2{};
+
+    /** @brief number number of handled objects */
+    qint32  number{0};
 };
 
 //---------------------------------------------------------------------------------------------------------------------

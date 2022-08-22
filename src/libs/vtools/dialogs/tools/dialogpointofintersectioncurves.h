@@ -115,6 +115,9 @@ private:
     QString originCurve1AliasSuffix2{};
     QString originCurve2AliasSuffix1{};
     QString originCurve2AliasSuffix2{};
+
+    /** @brief number number of handled objects */
+    qint32 number{0};
 };
 
 //---------------------------------------------------------------------------------------------------------------------

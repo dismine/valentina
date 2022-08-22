@@ -118,6 +118,9 @@ private:
 
     bool m_firstRelease{false};
 
+    /** @brief number number of handled objects */
+    qint32 m_number{0};
+
     void SetCurrentLength();
 
     void ChosenSecondPoint(quint32 id, const QString &toolTip);

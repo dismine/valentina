@@ -198,12 +198,12 @@ void DialogHeight::ChosenObject(quint32 id, const SceneObject &type)
         auto *line = qobject_cast<VisToolHeight *>(vis);
         SCASSERT(line != nullptr)
 
-        switch (number)
+        switch (m_number)
         {
             case (0):
                 if (SetObject(id, ui->comboBoxBasePoint, tr("Select first point of line")))
                 {
-                    number++;
+                    m_number++;
                     line->VisualMode(id);
                 }
                 break;
@@ -212,7 +212,7 @@ void DialogHeight::ChosenObject(quint32 id, const SceneObject &type)
                 {
                     if (SetObject(id, ui->comboBoxP1Line, tr("Select second point of line")))
                     {
-                        number++;
+                        m_number++;
                         line->setLineP1Id(id);
                         line->RefreshGeometry();
                     }

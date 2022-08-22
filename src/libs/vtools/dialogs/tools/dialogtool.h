@@ -148,9 +148,6 @@ protected:
     /** @brief prepare show if we prepare. Show dialog after finish working with visual part of tool*/
     bool             prepare;
 
-    /** @brief number number of handled objects */
-    qint32           number;
-
     QPointer<Visualization> vis;
 
     virtual void     closeEvent ( QCloseEvent * event ) override;
