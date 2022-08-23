@@ -37,37 +37,46 @@ class VScaledLine : public QGraphicsLineItem
 {
 public:
     explicit VScaledLine(QGraphicsItem * parent = nullptr);
-    VScaledLine(const QLineF &line, QGraphicsItem * parent = nullptr);
-    virtual ~VScaledLine() = default;
+    explicit VScaledLine(const QLineF &line, QGraphicsItem * parent = nullptr);
+    ~VScaledLine() override = default;
 
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ScaledLine)};
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ScaledLine)};
 
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                       QWidget *widget = nullptr) override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 
-    bool IsBoldLine() const;
+    auto IsBoldLine() const -> bool;
     void SetBoldLine(bool bold);
-
-protected:
-    bool m_isBoldLine;
 
 private:
     Q_DISABLE_COPY_MOVE(VScaledLine) // NOLINT
+
+    bool m_isBoldLine{true};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VScaledLine::IsBoldLine() const -> bool
+{
+    return m_isBoldLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VScaledLine::SetBoldLine(bool bold)
+{
+    m_isBoldLine = bold;
+}
 
 class VScaledEllipse : public QGraphicsEllipseItem
 {
 public:
     explicit VScaledEllipse(QGraphicsItem * parent = nullptr);
-    virtual ~VScaledEllipse() = default;
+    ~VScaledEllipse() override = default;
 
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ScaledEllipse)};
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ScaledEllipse)};
 
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                       QWidget *widget = nullptr) override;
-    bool PointMode() const;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+    auto PointMode() const -> bool;
     void SetPointMode(bool newPointMode);
 
 private:
@@ -75,5 +84,17 @@ private:
 
     bool m_pointMode{true};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VScaledEllipse::PointMode() const -> bool
+{
+    return m_pointMode;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VScaledEllipse::SetPointMode(bool newPointMode)
+{
+    m_pointMode = newPointMode;
+}
 
 #endif // SCALESCENEITEMS_H

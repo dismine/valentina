@@ -27,7 +27,6 @@
  *************************************************************************/
 #include "dialogduplicatedetail.h"
 #include "ui_dialogduplicatedetail.h"
-#include "../vwidgets/vabstractmainwindow.h"
 #include "../../../visualization/path/vistoolduplicatedetail.h"
 #include "../../../tools/vabstracttool.h"
 

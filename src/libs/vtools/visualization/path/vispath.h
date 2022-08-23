@@ -47,21 +47,29 @@ class VisPath : public Visualization, public VCurvePathItem
     Q_OBJECT // NOLINT
 public:
     explicit VisPath(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisPath() = default;
+    ~VisPath() override = default;
 
-    void setApproximationScale(qreal approximationScale);
+    void SetApproximationScale(qreal approximationScale);
 
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::Path)};
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::Path)};
 protected:
-    qreal m_approximationScale;
+    void InitPen() override;
+    void AddOnScene() override;
 
-    virtual void InitPen() override;
-    virtual void AddOnScene() override;
+    auto GetPoint(QVector<VSimplePoint *> &points, quint32 i, const QColor &color) -> VSimplePoint *;
 
-    VSimplePoint *GetPoint(QVector<VSimplePoint *> &points, quint32 i, const QColor &color);
+    auto ApproximationScale() const -> qreal;
 private:
     Q_DISABLE_COPY_MOVE(VisPath) // NOLINT
+
+    qreal m_approximationScale{0};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VisPath::ApproximationScale() const -> qreal
+{
+    return m_approximationScale;
+}
 
 #endif // VISPATH_H

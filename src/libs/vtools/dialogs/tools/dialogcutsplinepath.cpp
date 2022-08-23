@@ -140,7 +140,7 @@ void DialogCutSplinePath::SetFormula(const QString &value)
 
     auto *path = qobject_cast<VisToolCutSplinePath *>(vis);
     SCASSERT(path != nullptr)
-    path->setLength(m_formula);
+    path->SetLength(m_formula);
 
     MoveCursorToEnd(ui->plainTextEditFormula);
 }
@@ -156,7 +156,7 @@ void DialogCutSplinePath::setSplinePathId(quint32 value)
 
     auto *path = qobject_cast<VisToolCutSplinePath *>(vis);
     SCASSERT(path != nullptr)
-    path->setObject1Id(value);
+    path->SetSplinePathId(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -198,8 +198,8 @@ void DialogCutSplinePath::SaveData()
     auto *path = qobject_cast<VisToolCutSplinePath *>(vis);
     SCASSERT(path != nullptr)
 
-    path->setObject1Id(getSplinePathId());
-    path->setLength(m_formula);
+    path->SetSplinePathId(getSplinePathId());
+    path->SetLength(m_formula);
     path->RefreshGeometry();
 }
 

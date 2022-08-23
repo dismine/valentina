@@ -48,19 +48,21 @@ public:
     ~VisToolPointOfIntersectionCircles() override = default;
 
     void RefreshGeometry() override;
-    void VisualMode(const quint32 &id) override;
+    void VisualMode(quint32 id) override;
 
-    void setObject2Id(const quint32 &value);
-    void setC1Radius(const QString &value);
-    void setC2Radius(const QString &value);
-    void setCrossPoint(const CrossCirclesPoint &value);
+    void SetCircle1Id(quint32 value);
+    void SetCircle2Id(quint32 value);
+    void SetC1Radius(const QString &value);
+    void SetC2Radius(const QString &value);
+    void SetCrossPoint(CrossCirclesPoint value);
 
     auto type() const -> int override {return Type;}
     enum {Type = UserType + static_cast<int>(Vis::ToolPointOfIntersectionCircles)};
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VisToolPointOfIntersectionCircles) // NOLINT
-    quint32            m_object2Id{NULL_ID};
+    quint32            m_circle1Id{NULL_ID};
+    quint32            m_circle2Id{NULL_ID};
     qreal              m_c1Radius{0};
     qreal              m_c2Radius{0};
     CrossCirclesPoint  m_crossPoint{CrossCirclesPoint::FirstPoint};
@@ -70,5 +72,23 @@ private:
     VScaledEllipse    *m_c1Path{nullptr};
     VScaledEllipse    *m_c2Path{nullptr};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolPointOfIntersectionCircles::SetCircle1Id(quint32 value)
+{
+    m_circle1Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolPointOfIntersectionCircles::SetCircle2Id(quint32 value)
+{
+    m_circle2Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolPointOfIntersectionCircles::SetCrossPoint(CrossCirclesPoint value)
+{
+    m_crossPoint = value;
+}
 
 #endif // VISTOOLPOINTOFINTERSECTIONCIRCLES_H

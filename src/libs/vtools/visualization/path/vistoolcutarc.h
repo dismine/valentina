@@ -47,15 +47,27 @@ public:
     ~VisToolCutArc() override = default;
 
     void RefreshGeometry() override;
-    void setLength(const QString &expression);
+    void VisualMode(quint32 id) override;
+
+    void SetArcId(quint32 newArcId);
+    void SetLength(const QString &expression);
+
     auto type() const -> int override {return Type;}
     enum {Type = UserType + static_cast<int>(Vis::ToolCutArc)};
+
 private:
     Q_DISABLE_COPY_MOVE(VisToolCutArc) // NOLINT
     VScaledEllipse *m_point{nullptr};
     VCurvePathItem *m_arc1{nullptr};
     VCurvePathItem *m_arc2{nullptr};
     qreal           m_length{0};
+    quint32         m_arcId{NULL_ID};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolCutArc::SetArcId(quint32 newArcId)
+{
+    m_arcId = newArcId;
+}
 
 #endif // VISTOOLCUTARC_H

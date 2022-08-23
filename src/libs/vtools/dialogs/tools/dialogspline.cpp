@@ -202,7 +202,7 @@ void DialogSpline::ChosenObject(quint32 id, const SceneObject &type)
                         {
                             ++number;
 
-                            path->SetObject4Id(id);
+                            path->SetPoint4Id(id);
                             path->RefreshGeometry();
                             prepare = true;
                         }
@@ -227,14 +227,14 @@ void DialogSpline::SaveData()
     auto path = qobject_cast<VisToolSpline *>(vis);
     SCASSERT(path != nullptr)
 
-    path->setObject1Id(GetP1()->id());
-    path->SetObject4Id(GetP4()->id());
+    path->SetPoint1Id(GetP1()->id());
+    path->SetPoint4Id(GetP4()->id());
     path->SetAngle1(spl.GetStartAngle());
     path->SetAngle2(spl.GetEndAngle());
     path->SetKAsm1(spl.GetKasm1());
     path->SetKAsm2(spl.GetKasm2());
     path->SetKCurve(spl.GetKcurve());
-    path->setApproximationScale(spl.GetApproximationScale());
+    path->SetApproximationScale(spl.GetApproximationScale());
     path->SetMode(Mode::Show);
     path->RefreshGeometry();
 }
@@ -631,14 +631,14 @@ void DialogSpline::SetSpline(const VSpline &spline)
     auto path = qobject_cast<VisToolSpline *>(vis);
     SCASSERT(path != nullptr)
 
-    path->setObject1Id(spl.GetP1().id());
-    path->SetObject4Id(spl.GetP4().id());
+    path->SetPoint1Id(spl.GetP1().id());
+    path->SetPoint4Id(spl.GetP4().id());
     path->SetAngle1(spl.GetStartAngle());
     path->SetAngle2(spl.GetEndAngle());
     path->SetKAsm1(spl.GetKasm1());
     path->SetKAsm2(spl.GetKasm2());
     path->SetKCurve(spl.GetKcurve());
-    path->setApproximationScale(spl.GetApproximationScale());
+    path->SetApproximationScale(spl.GetApproximationScale());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

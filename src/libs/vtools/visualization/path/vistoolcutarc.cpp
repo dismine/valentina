@@ -53,7 +53,7 @@ VisToolCutArc::VisToolCutArc(const VContainer *data, QGraphicsItem *parent)
     m_arc2 = InitItem<VCurvePathItem>(Qt::darkRed, this);
     m_arc2->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
 
-    m_point = InitPoint(mainColor, this);
+    m_point = InitPoint(Color(VColor::MainColor), this);
     m_point->setZValue(2);
     m_point->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
 }
@@ -61,39 +61,45 @@ VisToolCutArc::VisToolCutArc(const VContainer *data, QGraphicsItem *parent)
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolCutArc::RefreshGeometry()
 {
-    if (object1Id > NULL_ID)
+    if (m_arcId > NULL_ID)
     {
-        const QSharedPointer<VArc> arc = Visualization::data->GeometricObject<VArc>(object1Id);
-        DrawPath(this, arc->GetPath(), arc->DirectionArrows(), supportColor, lineStyle, Qt::RoundCap);
+        const QSharedPointer<VArc> arc = GetData()->GeometricObject<VArc>(m_arcId);
+        DrawPath(this, arc->GetPath(), arc->DirectionArrows(), Color(VColor::SupportColor), LineStyle(), Qt::RoundCap);
 
         if (not qFuzzyIsNull(m_length))
         {
             VArc ar1;
             VArc ar2;
             QPointF p = arc->CutArc(m_length, ar1, ar2, QString());
-            DrawPoint(m_point, p, mainColor);
+            DrawPoint(m_point, p, Color(VColor::MainColor));
 
-            DrawPath(m_arc1, ar1.GetPath(), ar1.DirectionArrows(), Qt::darkGreen, lineStyle, Qt::RoundCap);
-            DrawPath(m_arc2, ar2.GetPath(), ar2.DirectionArrows(), Qt::darkRed, lineStyle, Qt::RoundCap);
+            DrawPath(m_arc1, ar1.GetPath(), ar1.DirectionArrows(), Qt::darkGreen, LineStyle(), Qt::RoundCap);
+            DrawPath(m_arc2, ar2.GetPath(), ar2.DirectionArrows(), Qt::darkRed, LineStyle(), Qt::RoundCap);
         }
-        else if (mode == Mode::Creation)
+        else if (GetMode() == Mode::Creation)
         {
-            QPointF p = arc->ClosestPoint(Visualization::scenePos);
+            QPointF p = arc->ClosestPoint(ScenePos());
             qreal length = arc->GetLengthByPoint(p);
 
-            DrawPoint(m_point, p, mainColor);
+            DrawPoint(m_point, p, Color(VColor::MainColor));
 
             const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-            Visualization::toolTip = tr("Length = %1%2; "
-                                        "<b>Mouse click</b> - finish selecting the length, "
-                                        "<b>%3</b> - skip")
-                                         .arg(NumberToUser(length), prefix, VModifierKey::EnterKey());
+            SetToolTip(tr("Length = %1%2; "
+                          "<b>Mouse click</b> - finish selecting the length, "
+                          "<b>%3</b> - skip").arg(NumberToUser(length), prefix, VModifierKey::EnterKey()));
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolCutArc::setLength(const QString &expression)
+void VisToolCutArc::SetLength(const QString &expression)
 {
-    m_length = FindLengthFromUser(expression, Visualization::data->DataVariables());
+    m_length = FindLengthFromUser(expression, GetData()->DataVariables());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolCutArc::VisualMode(quint32 id)
+{
+    m_arcId = id;
+    StartVisualMode();
 }

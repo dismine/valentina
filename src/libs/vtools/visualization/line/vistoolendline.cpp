@@ -36,7 +36,6 @@
 #include <Qt>
 #include <new>
 
-#include "../ifc/xml/vdomdocument.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
@@ -49,55 +48,63 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolEndLine::VisToolEndLine(const VContainer *data, QGraphicsItem *parent)
-    : VisLine(data, parent), length(0), angle(0), point(nullptr)
+    : VisLine(data, parent)
 {
-    this->mainColor = Qt::red;
+    SetMainColor(Qt::red);
 
-    point = InitPoint(mainColor, this);
+    m_point = InitPoint(Color(VColor::MainColor), this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolEndLine::RefreshGeometry()
 {
-    const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
+    const QSharedPointer<VPointF> first = GetData()->GeometricObject<VPointF>(m_basePointId);
     QLineF line;
-    if (qFuzzyIsNull(length))
+    if (qFuzzyIsNull(m_length))
     {
-        if (mode == Mode::Creation)
+        if (GetMode() == Mode::Creation)
         {
             if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
             {
-                line = QLineF(static_cast<QPointF>(*first), Visualization::scenePos);
+                line = QLineF(static_cast<QPointF>(*first), ScenePos());
                 line.setAngle(CorrectAngle(line.angle()));
             }
             else
             {
-                line = QLineF(static_cast<QPointF>(*first), Visualization::scenePos);
+                line = QLineF(static_cast<QPointF>(*first), ScenePos());
             }
         }
         else
         {
-            DrawPoint(point, static_cast<QPointF>(*first), mainColor);
+            DrawPoint(m_point, static_cast<QPointF>(*first), Color(VColor::MainColor));
         }
     }
     else
     {
-        line = VGObject::BuildLine(static_cast<QPointF>(*first), length, angle);
-        DrawPoint(point, line.p2(), mainColor);
+        line = VGObject::BuildLine(static_cast<QPointF>(*first), m_length, m_angle);
+        DrawPoint(m_point, line.p2(), Color(VColor::MainColor));
     }
-    DrawLine(this, line, mainColor, lineStyle);
+    DrawLine(this, line, Color(VColor::MainColor), LineStyle());
     static const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-    Visualization::toolTip = tr("<b>Point at distance and angle</b>: angle = %1°, length = %2%3; "
-                                "<b>%4</b> - sticking angle, <b>%5</b> - finish creation")
-            .arg(this->line().angle())
-            .arg(VAbstractApplication::VApp()->TrVars()
-                 ->FormulaToUser(QString::number(VAbstractValApplication::VApp()->fromPixel(this->line().length())),
-                                 VAbstractApplication::VApp()->Settings()->GetOsSeparator()),
-                 prefix, VModifierKey::Shift(), VModifierKey::EnterKey());
+    SetToolTip(tr("<b>Point at distance and angle</b>: angle = %1°, length = %2%3; "
+                  "<b>%4</b> - sticking angle, <b>%5</b> - finish creation")
+                   .arg(this->line().angle())
+                   .arg(VAbstractApplication::VApp()->TrVars()
+                            ->FormulaToUser(
+                                QString::number(VAbstractValApplication::VApp()->fromPixel(this->line().length())),
+                                VAbstractApplication::VApp()->Settings()->GetOsSeparator()),
+                        prefix, VModifierKey::Shift(), VModifierKey::EnterKey()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VisToolEndLine::Angle() const
+void VisToolEndLine::VisualMode(quint32 id)
+{
+    m_basePointId = id;
+    StartVisualMode();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VisToolEndLine::Angle() const -> QString
 {
     return QString::number(this->line().angle());
 }
@@ -105,17 +112,17 @@ QString VisToolEndLine::Angle() const
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolEndLine::SetAngle(const QString &expression)
 {
-    angle = FindValFromUser(expression, Visualization::data->DataVariables());
+    m_angle = FindValFromUser(expression, GetData()->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VisToolEndLine::Length() const
+auto VisToolEndLine::Length() const -> QString
 {
     return QString::number(VAbstractValApplication::VApp()->fromPixel(this->line().length()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolEndLine::setLength(const QString &expression)
+void VisToolEndLine::SetLength(const QString &expression)
 {
-    length = FindLengthFromUser(expression, Visualization::data->DataVariables());
+    m_length = FindLengthFromUser(expression, GetData()->DataVariables());
 }

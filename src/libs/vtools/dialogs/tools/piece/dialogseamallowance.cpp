@@ -3750,7 +3750,7 @@ void DialogSeamAllowance::ShowPieceSpecialPointsWithRect(const QListWidget *list
 
     if (not VAbstractValApplication::VApp()->getCurrentScene()->items().contains(m_visSpecialPoints))
     {
-        m_visSpecialPoints->VisualMode(NULL_ID);
+        m_visSpecialPoints->VisualMode();
         m_visSpecialPoints->setZValue(10); // pins should be on top
         VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(toolId));
         SCASSERT(tool != nullptr);

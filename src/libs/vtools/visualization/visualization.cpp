@@ -67,9 +67,9 @@ QT_WARNING_POP
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-VScaledEllipse *InitPointItem(const QColor &color, QGraphicsItem *parent, qreal z = 0)
+auto InitPointItem(const QColor &color, QGraphicsItem *parent, qreal z = 0) -> VScaledEllipse *
 {
-    VScaledEllipse *point = new VScaledEllipse(parent);
+    auto *point = new VScaledEllipse(parent);
     point->setZValue(1);
     point->setBrush(QBrush(Qt::NoBrush));
 
@@ -86,9 +86,9 @@ VScaledEllipse *InitPointItem(const QColor &color, QGraphicsItem *parent, qreal 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCurvePathItem *InitCurveItem(const QColor &color, QGraphicsItem *parent, qreal z = 0)
+auto InitCurveItem(const QColor &color, QGraphicsItem *parent, qreal z = 0) -> VCurvePathItem *
 {
-    VCurvePathItem *curve = new VCurvePathItem(parent);
+    auto *curve = new VCurvePathItem(parent);
     curve->setBrush(QBrush(Qt::NoBrush));
 
     QPen visPen = curve->pen();
@@ -100,98 +100,66 @@ VCurvePathItem *InitCurveItem(const QColor &color, QGraphicsItem *parent, qreal 
     curve->setVisible(false);
     return curve;
 }
-}
+}  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 Visualization::Visualization(const VContainer *data)
-    :QObject(),
-      data(data),
-      scenePos(QPointF()),
-      mainColor(Qt::red),
-      supportColor(Qt::magenta),
-      lineStyle(Qt::SolidLine),
-      object1Id(NULL_ID),
-      toolTip(QString()),
-      mode(Mode::Creation)
+    :m_data(data)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void Visualization::setObject1Id(const quint32 &value)
+void Visualization::SetLineStyle(const Qt::PenStyle &value)
 {
-    object1Id = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void Visualization::setLineStyle(const Qt::PenStyle &value)
-{
-    lineStyle = value;
+    m_lineStyle = value;
     InitPen();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-void Visualization::setScenePos(const QPointF &value)
+void Visualization::SetMainColor(const QColor &value)
 {
-    scenePos = value;
+    SetColor(VColor::MainColor, value);
+    InitPen();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void Visualization::VisualMode(const quint32 &pointId)
+void Visualization::StartVisualMode()
 {
-    VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
+    auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
     SCASSERT(scene != nullptr)
 
-    this->object1Id = pointId;
-    this->scenePos = scene->getScenePos();
+    this->m_scenePos = scene->getScenePos();
     RefreshGeometry();
 
     AddOnScene();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-void Visualization::setMainColor(const QColor &value)
-{
-    mainColor = value;
-    InitPen();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-const VContainer *Visualization::GetData() const
-{
-    return data;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void Visualization::SetData(const VContainer *data)
-{
-    this->data = data;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void Visualization::MousePos(const QPointF &scenePos)
 {
-    this->scenePos = scenePos;
+    this->m_scenePos = scenePos;
     RefreshGeometry();
     RefreshToolTip();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VScaledEllipse *Visualization::InitPoint(const QColor &color, QGraphicsItem *parent, qreal z) const
+auto Visualization::InitPoint(const QColor &color, QGraphicsItem *parent, qreal z) -> VScaledEllipse *
 {
     return InitPointItem(color, parent, z);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal Visualization::FindLengthFromUser(const QString &expression,
-                                        const QHash<QString, QSharedPointer<VInternalVariable> > *vars, bool fromUser)
+auto Visualization::FindLengthFromUser(const QString &expression,
+                                       const QHash<QString, QSharedPointer<VInternalVariable> > *vars,
+                                       bool fromUser) -> qreal
 {
     return VAbstractValApplication::VApp()->toPixel(FindValFromUser(expression, vars, fromUser));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal Visualization::FindValFromUser(const QString &expression,
-                                     const QHash<QString, QSharedPointer<VInternalVariable> > *vars, bool fromUser)
+auto Visualization::FindValFromUser(const QString &expression,
+                                    const QHash<QString, QSharedPointer<VInternalVariable> > *vars,
+                                    bool fromUser) -> qreal
 {
     qreal val = 0;
     if (expression.isEmpty())
@@ -234,9 +202,9 @@ qreal Visualization::FindValFromUser(const QString &expression,
 //---------------------------------------------------------------------------------------------------------------------
 void Visualization::RefreshToolTip() const
 {
-    if (!toolTip.isEmpty())
+    if (!m_toolTip.isEmpty())
     {
-        emit ToolTip(toolTip);
+        emit ToolTip(m_toolTip);
     }
 }
 
@@ -299,39 +267,35 @@ void Visualization::DrawPath(VCurvePathItem *pathItem, const QPainterPath &path,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VScaledEllipse *Visualization::GetPointItem(QVector<VScaledEllipse *> &points, quint32 i,
-                                            const QColor &color, QGraphicsItem *parent)
+auto Visualization::GetPointItem(QVector<VScaledEllipse *> &points, quint32 i, const QColor &color,
+                                 QGraphicsItem *parent) -> VScaledEllipse *
 {
     if (not points.isEmpty() && static_cast<quint32>(points.size() - 1) >= i)
     {
         return points.at(static_cast<int>(i));
     }
-    else
-    {
-        auto point = InitPointItem(color, parent);
-        points.append(point);
-        return point;
-    }
+
+    auto *point = InitPointItem(color, parent);
+    points.append(point);
+    return point;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCurvePathItem *Visualization::GetCurveItem(QVector<VCurvePathItem *> &curves, quint32 i, const QColor &color,
-                                            QGraphicsItem *parent)
+auto Visualization::GetCurveItem(QVector<VCurvePathItem *> &curves, quint32 i, const QColor &color,
+                                 QGraphicsItem *parent) -> VCurvePathItem *
 {
     if (not curves.isEmpty() && static_cast<quint32>(curves.size() - 1) >= i)
     {
         return curves.at(static_cast<int>(i));
     }
-    else
-    {
-        auto point = InitCurveItem(color, parent);
-        curves.append(point);
-        return point;
-    }
+
+    auto *point = InitCurveItem(color, parent);
+    curves.append(point);
+    return point;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString Visualization::NumberToUser(qreal value)
+auto Visualization::NumberToUser(qreal value) -> QString
 {
     return VAbstractApplication::VApp()->TrVars()
         ->FormulaToUser(QString::number(VAbstractValApplication::VApp()->fromPixel(value)),
@@ -339,13 +303,13 @@ QString Visualization::NumberToUser(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Mode Visualization::GetMode() const
+void Visualization::SetColor(VColor type, const QColor& color)
 {
-    return mode;
+    m_colorShema.insert(type, color);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void Visualization::SetMode(const Mode &value)
+auto Visualization::Color(VColor type) const -> QColor
 {
-    mode = value;
+    return m_colorShema.value(type, Qt::black);
 }

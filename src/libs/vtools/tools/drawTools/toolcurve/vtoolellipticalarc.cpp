@@ -423,13 +423,13 @@ void VToolEllipticalArc::SetVisualization()
         const bool osSeparator = VAbstractApplication::VApp()->Settings()->GetOsSeparator();
         const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
 
-        visual->setObject1Id(elArc->GetCenter().id());
-        visual->setRadius1(trVars->FormulaToUser(elArc->GetFormulaRadius1(), osSeparator));
-        visual->setRadius2(trVars->FormulaToUser(elArc->GetFormulaRadius2(), osSeparator));
-        visual->setF1(trVars->FormulaToUser(elArc->GetFormulaF1(), osSeparator));
-        visual->setF2(trVars->FormulaToUser(elArc->GetFormulaF2(), osSeparator));
-        visual->setRotationAngle(trVars->FormulaToUser(elArc->GetFormulaRotationAngle(), osSeparator));
-        visual->setLineStyle(LineStyleToPenStyle(elArc->GetPenStyle()));
+        visual->SetCenterId(elArc->GetCenter().id());
+        visual->SetRadius1(trVars->FormulaToUser(elArc->GetFormulaRadius1(), osSeparator));
+        visual->SetRadius2(trVars->FormulaToUser(elArc->GetFormulaRadius2(), osSeparator));
+        visual->SetF1(trVars->FormulaToUser(elArc->GetFormulaF1(), osSeparator));
+        visual->SetF2(trVars->FormulaToUser(elArc->GetFormulaF2(), osSeparator));
+        visual->SetRotationAngle(trVars->FormulaToUser(elArc->GetFormulaRotationAngle(), osSeparator));
+        visual->SetLineStyle(LineStyleToPenStyle(elArc->GetPenStyle()));
         visual->RefreshGeometry();
     }
 }

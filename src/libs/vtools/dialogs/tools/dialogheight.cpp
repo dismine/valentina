@@ -123,7 +123,7 @@ void DialogHeight::SetPointName(const QString &value)
 void DialogHeight::SetTypeLine(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineType, value);
-    vis->setLineStyle(LineStyleToPenStyle(value));
+    vis->SetLineStyle(LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -137,7 +137,7 @@ void DialogHeight::SetBasePointId(const quint32 &value)
 
     auto *line = qobject_cast<VisToolHeight *>(vis);
     SCASSERT(line != nullptr)
-    line->setObject1Id(value);
+    line->SetBasePointId(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -151,7 +151,7 @@ void DialogHeight::SetP1LineId(const quint32 &value)
 
     auto *line = qobject_cast<VisToolHeight *>(vis);
     SCASSERT(line != nullptr)
-    line->setLineP1Id(value);
+    line->SetLineP1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -165,7 +165,7 @@ void DialogHeight::SetP2LineId(const quint32 &value)
 
     auto *line = qobject_cast<VisToolHeight *>(vis);
     SCASSERT(line != nullptr)
-    line->setLineP2Id(value);
+    line->SetLineP2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -213,7 +213,7 @@ void DialogHeight::ChosenObject(quint32 id, const SceneObject &type)
                     if (SetObject(id, ui->comboBoxP1Line, tr("Select second point of line")))
                     {
                         m_number++;
-                        line->setLineP1Id(id);
+                        line->SetLineP1Id(id);
                         line->RefreshGeometry();
                     }
                 }
@@ -229,7 +229,7 @@ void DialogHeight::ChosenObject(quint32 id, const SceneObject &type)
                 {
                     if (SetObject(id, ui->comboBoxP2Line, QString()))
                     {
-                        line->setLineP2Id(id);
+                        line->SetLineP2Id(id);
                         line->RefreshGeometry();
                         prepare = true;
                         DialogAccepted();
@@ -251,10 +251,10 @@ void DialogHeight::SaveData()
     auto *line = qobject_cast<VisToolHeight *>(vis);
     SCASSERT(line != nullptr)
 
-    line->setObject1Id(GetBasePointId());
-    line->setLineP1Id(GetP1LineId());
-    line->setLineP2Id(GetP2LineId());
-    line->setLineStyle(LineStyleToPenStyle(GetTypeLine()));
+    line->SetBasePointId(GetBasePointId());
+    line->SetLineP1Id(GetP1LineId());
+    line->SetLineP2Id(GetP2LineId());
+    line->SetLineStyle(LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();
 }
 

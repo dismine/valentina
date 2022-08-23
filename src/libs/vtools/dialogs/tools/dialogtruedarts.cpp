@@ -43,8 +43,6 @@
 #include "../../visualization/line/vistooltruedarts.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../qmuparser/qmudef.h"
-#include "../vgeometry/../ifc/ifcdef.h"
-#include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "dialogtool.h"
 #include "ui_dialogtruedarts.h"
@@ -147,7 +145,7 @@ void DialogTrueDarts::SetFirstBasePointId(const quint32 &value)
 
     VisToolTrueDarts *points = qobject_cast<VisToolTrueDarts *>(vis);
     SCASSERT(points != nullptr)
-    points->setObject1Id(value);
+    points->SetBaseLineP1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -163,7 +161,7 @@ void DialogTrueDarts::SetSecondBasePointId(const quint32 &value)
 
     VisToolTrueDarts *points = qobject_cast<VisToolTrueDarts *>(vis);
     SCASSERT(points != nullptr)
-    points->setObject2Id(value);
+    points->SetBaseLineP2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -179,7 +177,7 @@ void DialogTrueDarts::SetFirstDartPointId(const quint32 &value)
 
     VisToolTrueDarts *points = qobject_cast<VisToolTrueDarts *>(vis);
     SCASSERT(points != nullptr)
-    points->setD1PointId(value);
+    points->SetD1PointId(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -195,7 +193,7 @@ void DialogTrueDarts::SetSecondDartPointId(const quint32 &value)
 
     VisToolTrueDarts *points = qobject_cast<VisToolTrueDarts *>(vis);
     SCASSERT(points != nullptr)
-    points->setD2PointId(value);
+    points->SetD2PointId(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -211,7 +209,7 @@ void DialogTrueDarts::SetThirdDartPointId(const quint32 &value)
 
     VisToolTrueDarts *points = qobject_cast<VisToolTrueDarts *>(vis);
     SCASSERT(points != nullptr)
-    points->setD3PointId(value);
+    points->SetD3PointId(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -247,7 +245,7 @@ void DialogTrueDarts::ChosenObject(quint32 id, const SceneObject &type)
                         if (SetObject(id, ui->comboBoxSecondBasePoint, tr("Select the first dart point")))
                         {
                             number++;
-                            points->setObject2Id(id);
+                            points->SetBaseLineP2Id(id);
                             points->RefreshGeometry();
                         }
                     }
@@ -264,7 +262,7 @@ void DialogTrueDarts::ChosenObject(quint32 id, const SceneObject &type)
                         if (SetObject(id, ui->comboBoxFirstDartPoint, tr("Select the second dart point")))
                         {
                             number++;
-                            points->setD1PointId(id);
+                            points->SetD1PointId(id);
                             points->RefreshGeometry();
                         }
                     }
@@ -283,7 +281,7 @@ void DialogTrueDarts::ChosenObject(quint32 id, const SceneObject &type)
                         if (SetObject(id, ui->comboBoxSecondDartPoint, tr("Select the third dart point")))
                         {
                             number++;
-                            points->setD2PointId(id);
+                            points->SetD2PointId(id);
                             points->RefreshGeometry();
                         }
                     }
@@ -302,7 +300,7 @@ void DialogTrueDarts::ChosenObject(quint32 id, const SceneObject &type)
                     {
                         if (SetObject(id, ui->comboBoxThirdDartPoint, QString()))
                         {
-                            points->setD3PointId(id);
+                            points->SetD3PointId(id);
                             points->RefreshGeometry();
                             prepare = true;
                             DialogAccepted();
@@ -373,11 +371,11 @@ void DialogTrueDarts::SaveData()
     VisToolTrueDarts *points = qobject_cast<VisToolTrueDarts *>(vis);
     SCASSERT(points != nullptr)
 
-    points->setObject1Id(GetFirstBasePointId());
-    points->setObject2Id(GetSecondBasePointId());
-    points->setD1PointId(GetFirstDartPointId());
-    points->setD2PointId(GetSecondDartPointId());
-    points->setD3PointId(GetThirdDartPointId());
+    points->SetBaseLineP1Id(GetFirstBasePointId());
+    points->SetBaseLineP2Id(GetSecondBasePointId());
+    points->SetD1PointId(GetFirstDartPointId());
+    points->SetD2PointId(GetSecondDartPointId());
+    points->SetD3PointId(GetThirdDartPointId());
     points->RefreshGeometry();
 }
 

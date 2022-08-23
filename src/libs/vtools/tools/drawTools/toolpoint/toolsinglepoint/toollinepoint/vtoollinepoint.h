@@ -45,13 +45,11 @@ template <class T> class QSharedPointer;
 struct VToolLinePointInitData : VToolSinglePointInitData
 {
     VToolLinePointInitData()
-        : VToolSinglePointInitData(),
-          typeLine(TypeLineLine),
-          lineColor(ColorBlack)
+        : VToolSinglePointInitData()
     {}
 
-    QString typeLine;
-    QString lineColor;
+    QString typeLine{TypeLineLine};
+    QString lineColor{ColorBlack};
 };
 
 /**
@@ -68,8 +66,8 @@ public:
     virtual int       type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::LinePoint)};
 
-    virtual void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                         QWidget *widget = nullptr) override;
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                       QWidget *widget = nullptr) override;
 
     VFormula GetFormulaLength() const;
     void     SetFormulaLength(const VFormula &value);

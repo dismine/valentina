@@ -354,9 +354,9 @@ void VToolPointOfIntersectionArcs::SetVisualization()
         auto *visual = qobject_cast<VisToolPointOfIntersectionArcs *>(vis);
         SCASSERT(visual != nullptr)
 
-        visual->setArc1Id(firstArcId);
-        visual->setArc2Id(secondArcId);
-        visual->setCrossPoint(crossPoint);
+        visual->SetArc1Id(firstArcId);
+        visual->SetArc2Id(secondArcId);
+        visual->SetCrossPoint(crossPoint);
         visual->RefreshGeometry();
     }
 }

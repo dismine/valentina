@@ -56,12 +56,13 @@ public:
     ~VisToolSplinePath() override;
 
     void RefreshGeometry() override;
+    void VisualMode(quint32 id) override;
 
     void SetPath(const VSplinePath &value);
     auto GetPath() -> VSplinePath;
 
     auto type() const -> int override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolSplinePath)};
+    enum {Type = UserType + static_cast<int>(Vis::ToolSplinePath)};
 signals:
     void PathChanged(const VSplinePath &path);
 
@@ -86,5 +87,17 @@ private:
     void NewCurveSegment(const VSpline &spline, const QPointF &pSpl, int size);
     void Creating(const QPointF &pSpl, int size);
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolSplinePath::SetPath(const VSplinePath &value)
+{
+    m_path = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VisToolSplinePath::GetPath() -> VSplinePath
+{
+    return m_path;
+}
 
 #endif // VISTOOLSPLINEPATH_H

@@ -301,12 +301,12 @@ void VToolBisector::SetVisualization()
         auto *visual = qobject_cast<VisToolBisector *>(vis);
         SCASSERT(visual != nullptr)
 
-        visual->setObject1Id(firstPointId);
-        visual->setObject2Id(basePointId);
-        visual->setObject3Id(thirdPointId);
-        visual->setLength(VAbstractApplication::VApp()->TrVars()
+        visual->SetPoint1Id(firstPointId);
+        visual->SetPoint2Id(basePointId);
+        visual->SetPoint3Id(thirdPointId);
+        visual->SetLength(VAbstractApplication::VApp()->TrVars()
                           ->FormulaToUser(formulaLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
-        visual->setLineStyle(LineStyleToPenStyle(m_lineType));
+        visual->SetLineStyle(LineStyleToPenStyle(m_lineType));
         visual->RefreshGeometry();
     }
 }

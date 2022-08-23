@@ -296,10 +296,10 @@ void VToolLineIntersect::SetVisualization()
         auto *visual = qobject_cast<VisToolLineIntersect *>(vis);
         SCASSERT(visual != nullptr)
 
-        visual->setObject1Id(p1Line1);
-        visual->setLine1P2Id(p2Line1);
-        visual->setLine2P1Id(p1Line2);
-        visual->setLine2P2Id(p2Line2);
+        visual->SetLine1P1Id(p1Line1);
+        visual->SetLine1P2Id(p2Line1);
+        visual->SetLine2P1Id(p1Line2);
+        visual->SetLine2P2Id(p2Line2);
         visual->RefreshGeometry();
     }
 }

@@ -426,9 +426,9 @@ void VToolLine::SetVisualization()
         auto *visual = qobject_cast<VisToolLine *>(vis);
         SCASSERT(visual != nullptr)
 
-        visual->setObject1Id(firstPoint);
-        visual->setPoint2Id(secondPoint);
-        visual->setLineStyle(LineStyleToPenStyle(m_lineType));
+        visual->SetPoint1Id(firstPoint);
+        visual->SetPoint2Id(secondPoint);
+        visual->SetLineStyle(LineStyleToPenStyle(m_lineType));
         visual->RefreshGeometry();
     }
 }

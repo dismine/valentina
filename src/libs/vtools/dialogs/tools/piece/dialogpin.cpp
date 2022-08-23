@@ -29,10 +29,10 @@
 #include "dialogpin.h"
 #include "ui_dialogpin.h"
 #include "visualization/line/vistoolspecialpoint.h"
-#include "../../../tools/vabstracttool.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../vpatterndb/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPin::DialogPin(const VContainer *data, quint32 toolId, QWidget *parent)
@@ -108,7 +108,7 @@ void DialogPin::SetPointId(quint32 id)
 
     VisToolSpecialPoint *point = qobject_cast<VisToolSpecialPoint *>(vis);
     SCASSERT(point != nullptr)
-    point->setObject1Id(id);
+    point->SetPointId(id);
 
     CheckPoint();
 }

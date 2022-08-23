@@ -44,12 +44,10 @@
 #include <Qt>
 #include <new>
 
-#include "../../tools/vabstracttool.h"
 #include "../../visualization/path/vistoolcubicbezierpath.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/ifcdef.h"
 #include "../vmisc/vabstractapplication.h"
-#include "../vmisc/vmath.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
@@ -127,7 +125,7 @@ void DialogCubicBezierPath::SetPath(const VCubicBezierPath &value)
 
     auto visPath = qobject_cast<VisToolCubicBezierPath *>(vis);
     SCASSERT(visPath != nullptr)
-    visPath->setPath(path);
+    visPath->SetPath(path);
     ui->listWidget->blockSignals(false);
 
     if (ui->listWidget->count() > 0)
@@ -155,7 +153,7 @@ void DialogCubicBezierPath::ChosenObject(quint32 id, const SceneObject &type)
 
         auto visPath = qobject_cast<VisToolCubicBezierPath *>(vis);
         SCASSERT(visPath != nullptr)
-        visPath->setPath(path);
+        visPath->SetPath(path);
 
         if (path.CountPoints() == 1)
         {
@@ -215,7 +213,7 @@ void DialogCubicBezierPath::SaveData()
 
     auto visPath = qobject_cast<VisToolCubicBezierPath *>(vis);
     SCASSERT(visPath != nullptr)
-    visPath->setPath(path);
+    visPath->SetPath(path);
     visPath->SetMode(Mode::Show);
     visPath->RefreshGeometry();
 }

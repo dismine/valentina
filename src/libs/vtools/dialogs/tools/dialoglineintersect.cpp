@@ -137,7 +137,7 @@ void DialogLineIntersect::ChosenObject(quint32 id, const SceneObject &type)
                         if (SetObject(id, ui->comboBoxP2Line1, tr("Select first point of second line")))
                         {
                             number++;
-                            line->setLine1P2Id(id);
+                            line->SetLine1P2Id(id);
                             line->RefreshGeometry();
                         }
                     }
@@ -146,7 +146,7 @@ void DialogLineIntersect::ChosenObject(quint32 id, const SceneObject &type)
                     if (SetObject(id, ui->comboBoxP1Line2, tr("Select second point of second line")))
                     {
                         number++;
-                        line->setLine2P1Id(id);
+                        line->SetLine2P1Id(id);
                         line->RefreshGeometry();
                     }
                     break;
@@ -162,7 +162,7 @@ void DialogLineIntersect::ChosenObject(quint32 id, const SceneObject &type)
                     {
                         if (SetObject(id, ui->comboBoxP2Line2, QString()))
                         {
-                            line->setLine2P2Id(id);
+                            line->SetLine2P2Id(id);
                             line->RefreshGeometry();
                             prepare = true;
                             flagPoint = CheckIntersecion();
@@ -203,10 +203,10 @@ void DialogLineIntersect::SaveData()
     VisToolLineIntersect *line = qobject_cast<VisToolLineIntersect *>(vis);
     SCASSERT(line != nullptr)
 
-    line->setObject1Id(GetP1Line1());
-    line->setLine1P2Id(GetP2Line1());
-    line->setLine2P1Id(GetP1Line2());
-    line->setLine2P2Id(GetP2Line2());
+    line->SetLine1P1Id(GetP1Line1());
+    line->SetLine1P2Id(GetP2Line1());
+    line->SetLine2P1Id(GetP1Line2());
+    line->SetLine2P2Id(GetP2Line2());
     line->RefreshGeometry();
 }
 
@@ -308,7 +308,7 @@ void DialogLineIntersect::SetP2Line2(quint32 value)
 
     VisToolLineIntersect *line = qobject_cast<VisToolLineIntersect *>(vis);
     SCASSERT(line != nullptr)
-            line->setLine2P2Id(value);
+            line->SetLine2P2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -328,7 +328,7 @@ void DialogLineIntersect::SetP1Line2(quint32 value)
 
     VisToolLineIntersect *line = qobject_cast<VisToolLineIntersect *>(vis);
     SCASSERT(line != nullptr)
-    line->setLine2P1Id(value);
+    line->SetLine2P1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -342,7 +342,7 @@ void DialogLineIntersect::SetP2Line1(quint32 value)
 
     VisToolLineIntersect *line = qobject_cast<VisToolLineIntersect *>(vis);
     SCASSERT(line != nullptr)
-    line->setLine1P2Id(value);
+    line->SetLine1P2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -356,7 +356,7 @@ void DialogLineIntersect::SetP1Line1(quint32 value)
 
     VisToolLineIntersect *line = qobject_cast<VisToolLineIntersect *>(vis);
     SCASSERT(line != nullptr)
-    line->setObject1Id(value);
+    line->SetLine1P1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

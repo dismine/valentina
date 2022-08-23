@@ -48,14 +48,19 @@ public:
     ~VisToolArc() override =default;
 
     void RefreshGeometry() override;
-    void setRadius(const QString &expression);
-    void setF1(const QString &expression);
-    void setF2(const QString &expression);
+    void VisualMode(quint32 id) override;
+
+    void SetCenterId(quint32 newCenterId);
+    void SetRadius(const QString &expression);
+    void SetF1(const QString &expression);
+    void SetF2(const QString &expression);
+
     auto type() const -> int override {return Type;}
     enum {Type = UserType + static_cast<int>(Vis::ToolArc)};
 
     static auto CorrectAngle(qreal angle) -> qreal;
     auto StickyEnd(qreal angle) const -> qreal;
+
 private:
     Q_DISABLE_COPY_MOVE(VisToolArc) // NOLINT
     VScaledEllipse *m_arcCenter{nullptr};
@@ -63,6 +68,13 @@ private:
     qreal           m_radius{0};
     qreal           m_f1{-1};
     qreal           m_f2{-1};
+    quint32         m_centerId{NULL_ID};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolArc::SetCenterId(quint32 newCenterId)
+{
+    m_centerId = newCenterId;
+}
 
 #endif // VISTOOLARC_H

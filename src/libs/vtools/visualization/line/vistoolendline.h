@@ -44,24 +44,34 @@ class VisToolEndLine final : public VisLine
     Q_OBJECT // NOLINT
 public:
     explicit VisToolEndLine(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolEndLine() = default;
+    ~VisToolEndLine() override = default;
 
-    virtual void RefreshGeometry() override;
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id) override;
 
-    QString      Angle() const;
-    void         SetAngle(const QString &expression);
+    auto Angle() const -> QString;
+    void SetAngle(const QString &expression);
 
-    QString      Length() const;
-    void         setLength(const QString &expression);
+    auto Length() const -> QString;
+    void SetLength(const QString &expression);
 
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolEndLine)};
+    void SetBasePointId(quint32 id);
+
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolEndLine)};
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VisToolEndLine) // NOLINT
-    qreal           length;
-    qreal           angle;
-    VScaledEllipse *point;
+    qreal           m_length{0};
+    qreal           m_angle{0};
+    VScaledEllipse *m_point{nullptr};
+    quint32         m_basePointId{NULL_ID};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolEndLine::SetBasePointId(quint32 id)
+{
+    m_basePointId = id;
+}
 
 #endif // VISTOOLENDLINE_H

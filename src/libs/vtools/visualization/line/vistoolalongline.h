@@ -47,16 +47,20 @@ public:
     ~VisToolAlongLine() override = default;
 
     void RefreshGeometry() override;
-    void setObject2Id(const quint32 &value);
-    void setLength(const QString &expression);
-    void setMidPointMode(bool midPointMode);
+    void VisualMode(quint32 id) override;
+
+    void SetPoint1Id(quint32 value);
+    void SetPoint2Id(quint32 value);
+    void SetLength(const QString &expression);
+    void SetMidPointMode(bool midPointMode);
 
     auto type() const -> int override {return Type;}
     enum {Type = UserType + static_cast<int>(Vis::ToolAlongLine)};
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VisToolAlongLine) // NOLINT
-    quint32         m_object2Id{NULL_ID};
+    quint32         m_point1Id{NULL_ID};
+    quint32         m_point2Id{NULL_ID};
     VScaledEllipse *m_point{nullptr};
     VScaledEllipse *m_lineP1{nullptr};
     VScaledEllipse *m_lineP2{nullptr};
@@ -64,5 +68,23 @@ private:
     qreal           m_length{0};
     bool            m_midPointMode{false};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolAlongLine::SetPoint1Id(quint32 value)
+{
+    m_point1Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolAlongLine::SetPoint2Id(quint32 value)
+{
+    m_point2Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolAlongLine::SetMidPointMode(bool midPointMode)
+{
+    m_midPointMode = midPointMode;
+}
 
 #endif // VISTOOLALONGLINE_H

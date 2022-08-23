@@ -46,23 +46,39 @@ class VisToolPointOfIntersection : public VisLine
     Q_OBJECT // NOLINT
 public:
     explicit VisToolPointOfIntersection(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolPointOfIntersection() = default;
+    ~VisToolPointOfIntersection() override = default;
 
-    virtual void RefreshGeometry() override;
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id) override;
 
-    void         setPoint2Id(const quint32 &value);
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolPointOfIntersection)};
+    void SetPoint1Id(quint32 value);
+    void SetPoint2Id(quint32 value);
+
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolPointOfIntersection)};
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VisToolPointOfIntersection) // NOLINT
-    quint32              point2Id;
-    VScaledEllipse *point;
-    VScaledEllipse *axisP1;//axis1 is class themself
-    VScaledEllipse *axisP2;
-    VScaledLine    *axis2;//axis1 is class themself
+    quint32         m_point1Id{NULL_ID};
+    quint32         m_point2Id{NULL_ID};
+    VScaledEllipse *m_point{nullptr};
+    VScaledEllipse *m_axisP1{nullptr};//axis1 is class themself
+    VScaledEllipse *m_axisP2{nullptr};
+    VScaledLine    *m_axis2{nullptr};//axis1 is class themself
 
-    void         ShowIntersection(const QLineF &axis1, const QLineF &axis2, const QColor &color);
+    void ShowIntersection(const QLineF &axis1, const QLineF &axis2, const QColor &color);
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolPointOfIntersection::SetPoint1Id(quint32 value)
+{
+    m_point1Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolPointOfIntersection::SetPoint2Id(quint32 value)
+{
+    m_point2Id = value;
+}
 
 #endif // VISTOOLPOINTOFINTERSECTION_H

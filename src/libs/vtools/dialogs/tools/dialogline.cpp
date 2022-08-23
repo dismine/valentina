@@ -94,7 +94,7 @@ void DialogLine::SetSecondPoint(quint32 value)
 
     VisToolLine *line = qobject_cast<VisToolLine *>(vis);
     SCASSERT(line != nullptr)
-    line->setPoint2Id(value);
+    line->SetPoint2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -105,7 +105,7 @@ void DialogLine::SetSecondPoint(quint32 value)
 void DialogLine::SetTypeLine(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineType, value);
-    vis->setLineStyle(LineStyleToPenStyle(value));
+    vis->SetLineStyle(LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -131,7 +131,7 @@ void DialogLine::SetFirstPoint(quint32 value)
 
     VisToolLine *line = qobject_cast<VisToolLine *>(vis);
     SCASSERT(line != nullptr)
-    line->setObject1Id(value);
+    line->SetPoint1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -165,9 +165,9 @@ void DialogLine::SaveData()
     VisToolLine *line = qobject_cast<VisToolLine *>(vis);
     SCASSERT(line != nullptr)
 
-    line->setObject1Id(GetFirstPoint());
-    line->setPoint2Id(GetSecondPoint());
-    line->setLineStyle(LineStyleToPenStyle(GetTypeLine()));
+    line->SetPoint1Id(GetFirstPoint());
+    line->SetPoint2Id(GetSecondPoint());
+    line->SetLineStyle(LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();
 }
 

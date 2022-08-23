@@ -754,7 +754,7 @@ void VToolSplinePath::SetVisualization()
 
         QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
         visual->SetPath(*splPath.data());
-        visual->setLineStyle(LineStyleToPenStyle(splPath->GetPenStyle()));
+        visual->SetLineStyle(LineStyleToPenStyle(splPath->GetPenStyle()));
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }

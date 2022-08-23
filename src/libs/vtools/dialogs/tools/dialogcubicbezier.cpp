@@ -35,7 +35,6 @@
 #include <QPointer>
 #include <new>
 
-#include "../../tools/vabstracttool.h"
 #include "../../visualization/path/vistoolcubicbezier.h"
 #include "../../visualization/visualization.h"
 #include "../vgeometry/vpointf.h"
@@ -115,11 +114,11 @@ void DialogCubicBezier::SetSpline(const VCubicBezier &spline)
 
     auto path = qobject_cast<VisToolCubicBezier *>(vis);
     SCASSERT(path != nullptr)
-    path->setApproximationScale(spl.GetApproximationScale());
-    path->setObject1Id(spl.GetP1().id());
-    path->setObject2Id(spl.GetP2().id());
-    path->setObject3Id(spl.GetP3().id());
-    path->setObject4Id(spl.GetP4().id());
+    path->SetApproximationScale(spl.GetApproximationScale());
+    path->SetPoint1Id(spl.GetP1().id());
+    path->SetPoint2Id(spl.GetP2().id());
+    path->SetPoint3Id(spl.GetP3().id());
+    path->SetPoint4Id(spl.GetP4().id());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -146,7 +145,7 @@ void DialogCubicBezier::ChosenObject(quint32 id, const SceneObject &type)
                     {
                         ++number;
 
-                        path->setObject2Id(id);
+                        path->SetPoint2Id(id);
                         path->RefreshGeometry();
                     }
                     break;
@@ -155,7 +154,7 @@ void DialogCubicBezier::ChosenObject(quint32 id, const SceneObject &type)
                     {
                         ++number;
 
-                        path->setObject3Id(id);
+                        path->SetPoint3Id(id);
                         path->RefreshGeometry();
                     }
                     break;
@@ -166,7 +165,7 @@ void DialogCubicBezier::ChosenObject(quint32 id, const SceneObject &type)
                         {
                             ++number;
 
-                            path->setObject4Id(id);
+                            path->SetPoint4Id(id);
                             path->RefreshGeometry();
                             prepare = true;
                             DialogAccepted();
@@ -255,11 +254,11 @@ void DialogCubicBezier::SaveData()
 
     auto path = qobject_cast<VisToolCubicBezier *>(vis);
     SCASSERT(path != nullptr)
-    path->setApproximationScale(ui->doubleSpinBoxApproximationScale->value());
-    path->setObject1Id(p1->id());
-    path->setObject2Id(p2->id());
-    path->setObject3Id(p3->id());
-    path->setObject4Id(p4->id());
+    path->SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
+    path->SetPoint1Id(p1->id());
+    path->SetPoint2Id(p2->id());
+    path->SetPoint3Id(p3->id());
+    path->SetPoint4Id(p4->id());
     path->SetMode(Mode::Show);
     path->RefreshGeometry();
 }

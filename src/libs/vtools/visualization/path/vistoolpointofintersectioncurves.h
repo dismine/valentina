@@ -45,25 +45,50 @@ class VisToolPointOfIntersectionCurves : public VisPath
     Q_OBJECT // NOLINT
 public:
     explicit VisToolPointOfIntersectionCurves(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolPointOfIntersectionCurves() Q_DECL_EQ_DEFAULT;
+    ~VisToolPointOfIntersectionCurves() override = default;
 
-    virtual void RefreshGeometry() override;
-    virtual void VisualMode(const quint32 &id) override;
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id) override;
 
-    void setObject2Id(const quint32 &value);
-    void setVCrossPoint(const VCrossCurvesPoint &value);
-    void setHCrossPoint(const HCrossCurvesPoint &value);
+    void SetCurve1Id(quint32 value);
+    void SetCurve2Id(quint32 value);
+    void SetVCrossPoint(VCrossCurvesPoint value);
+    void SetHCrossPoint(HCrossCurvesPoint value);
 
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolPointOfIntersectionCurves)};
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolPointOfIntersectionCurves)};
 private:
     Q_DISABLE_COPY_MOVE(VisToolPointOfIntersectionCurves) // NOLINT
-    quint32            object2Id;
-    VCrossCurvesPoint  vCrossPoint;
-    HCrossCurvesPoint  hCrossPoint;
-    VScaledEllipse    *point;
-    VCurvePathItem    *visCurve2;
-
+    quint32            m_curve1Id{NULL_ID};
+    quint32            m_curve2Id{NULL_ID};
+    VCrossCurvesPoint  m_vCrossPoint{VCrossCurvesPoint::HighestPoint};
+    HCrossCurvesPoint  m_hCrossPoint{HCrossCurvesPoint::LeftmostPoint};
+    VScaledEllipse    *m_point{nullptr};
+    VCurvePathItem    *m_visCurve2{nullptr};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolPointOfIntersectionCurves::SetCurve1Id(quint32 value)
+{
+    m_curve1Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolPointOfIntersectionCurves::SetCurve2Id(quint32 value)
+{
+    m_curve2Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolPointOfIntersectionCurves::SetVCrossPoint(VCrossCurvesPoint value)
+{
+    m_vCrossPoint = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolPointOfIntersectionCurves::SetHCrossPoint(HCrossCurvesPoint value)
+{
+    m_hCrossPoint = value;
+}
 
 #endif // VISTOOLPOINTOFINTERSECTIONCURVES_H

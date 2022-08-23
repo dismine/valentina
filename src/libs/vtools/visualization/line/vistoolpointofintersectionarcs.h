@@ -45,26 +45,44 @@ class VisToolPointOfIntersectionArcs : public VisLine
     Q_OBJECT // NOLINT
 public:
     explicit VisToolPointOfIntersectionArcs(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolPointOfIntersectionArcs() = default;
+    ~VisToolPointOfIntersectionArcs() override = default;
 
-    virtual void RefreshGeometry() override;
-    virtual void VisualMode(const quint32 &id) override;
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id) override;
 
-    void         setArc1Id(const quint32 &value);
-    void         setArc2Id(const quint32 &value);
-    void         setCrossPoint(const CrossCirclesPoint &value);
+    void SetArc1Id(quint32 value);
+    void SetArc2Id(quint32 value);
+    void SetCrossPoint(CrossCirclesPoint value);
 
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolPointOfIntersectionArcs)};
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolPointOfIntersectionArcs)};
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VisToolPointOfIntersectionArcs) // NOLINT
-    quint32            arc1Id;
-    quint32            arc2Id;
-    CrossCirclesPoint  crossPoint;
-    VScaledEllipse    *point;
-    VCurvePathItem    *arc1Path;
-    VCurvePathItem    *arc2Path;
+    quint32            m_arc1Id{NULL_ID};
+    quint32            m_arc2Id{NULL_ID};
+    CrossCirclesPoint  m_crossPoint{CrossCirclesPoint::FirstPoint};
+    VScaledEllipse    *m_point{nullptr};
+    VCurvePathItem    *m_arc1Path{nullptr};
+    VCurvePathItem    *m_arc2Path{nullptr};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolPointOfIntersectionArcs::SetArc1Id(quint32 value)
+{
+    m_arc1Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolPointOfIntersectionArcs::SetArc2Id(quint32 value)
+{
+    m_arc2Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolPointOfIntersectionArcs::SetCrossPoint(CrossCirclesPoint value)
+{
+    m_crossPoint = value;
+}
 
 #endif // VISTOOLPOINTOFINTERSECTIONARCS_H

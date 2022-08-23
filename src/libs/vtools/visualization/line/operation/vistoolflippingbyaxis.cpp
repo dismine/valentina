@@ -31,17 +31,15 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolFlippingByAxis::VisToolFlippingByAxis(const VContainer *data, QGraphicsItem *parent)
-    : VisOperation(data, parent),
-      m_axisType(AxisType::VerticalAxis),
-      point1(nullptr)
+    : VisOperation(data, parent)
 {
-    point1 = InitPoint(supportColor2, this);
+    m_point1 = InitPoint(Color(VColor::SupportColor2), this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolFlippingByAxis::RefreshGeometry()
 {
-    if (objects.isEmpty())
+    if (Objects().isEmpty())
     {
         return;
     }
@@ -49,10 +47,10 @@ void VisToolFlippingByAxis::RefreshGeometry()
     QPointF firstPoint;
     QPointF secondPoint;
 
-    if (object1Id != NULL_ID)
+    if (m_originPointId != NULL_ID)
     {
-        firstPoint = static_cast<QPointF>(*Visualization::data->GeometricObject<VPointF>(object1Id));
-        DrawPoint(point1, firstPoint, supportColor2);
+        firstPoint = static_cast<QPointF>(*GetData()->GeometricObject<VPointF>(m_originPointId));
+        DrawPoint(m_point1, firstPoint, Color(VColor::SupportColor2));
 
         if (m_axisType == AxisType::VerticalAxis)
         {
@@ -63,20 +61,8 @@ void VisToolFlippingByAxis::RefreshGeometry()
             secondPoint = QPointF(firstPoint.x() + 100, firstPoint.y());
         }
 
-        DrawLine(this, Axis(firstPoint, secondPoint), supportColor2, Qt::DashLine);
+        DrawLine(this, Axis(firstPoint, secondPoint), Color(VColor::SupportColor2), Qt::DashLine);
     }
 
-    RefreshFlippedObjects(firstPoint, secondPoint);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolFlippingByAxis::SetOriginPointId(quint32 value)
-{
-    object1Id = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolFlippingByAxis::SetAxisType(AxisType value)
-{
-    m_axisType = value;
+    RefreshFlippedObjects(m_originPointId, firstPoint, secondPoint);
 }

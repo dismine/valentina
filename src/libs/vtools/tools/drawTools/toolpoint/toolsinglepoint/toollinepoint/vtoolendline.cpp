@@ -231,10 +231,10 @@ void VToolEndLine::SetVisualization()
         const bool osSeparator = VAbstractApplication::VApp()->Settings()->GetOsSeparator();
         const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
 
-        visual->setObject1Id(basePointId);
-        visual->setLength(trVars->FormulaToUser(formulaLength, osSeparator));
+        visual->SetBasePointId(basePointId);
+        visual->SetLength(trVars->FormulaToUser(formulaLength, osSeparator));
         visual->SetAngle(trVars->FormulaToUser(formulaAngle, osSeparator));
-        visual->setLineStyle(LineStyleToPenStyle(m_lineType));
+        visual->SetLineStyle(LineStyleToPenStyle(m_lineType));
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }

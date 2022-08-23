@@ -62,29 +62,20 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolMove::VisToolMove(const VContainer *data, QGraphicsItem *parent)
-    : VisOperation(data, parent),
-      angle(0),
-      rotationAngle(INT_MIN),
-      length(0),
-      pointOrigin(nullptr),
-      pointRotationOrigin(nullptr),
-      pointFinish(nullptr),
-      angleArc(nullptr),
-      rotationLine(nullptr),
-      xAxis(nullptr)
+    : VisOperation(data, parent)
 {
-    pointOrigin = InitPoint(supportColor2, this);
-    pointRotationOrigin = InitPoint(supportColor2, this);
-    pointFinish = InitPoint(supportColor, this);
-    angleArc = InitItem<VCurvePathItem>(supportColor3, this);
-    rotationLine = InitItem<VScaledLine>(supportColor3, this);
-    xAxis = InitItem<VScaledLine>(supportColor3, this);
+    m_pointOrigin = InitPoint(Color(VColor::SupportColor2), this);
+    m_pointRotationOrigin = InitPoint(Color(VColor::SupportColor2), this);
+    m_pointFinish = InitPoint(Color(VColor::SupportColor), this);
+    m_angleArc = InitItem<VCurvePathItem>(Color(VColor::SupportColor3), this);
+    m_rotationLine = InitItem<VScaledLine>(Color(VColor::SupportColor3), this);
+    m_xAxis = InitItem<VScaledLine>(Color(VColor::SupportColor3), this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolMove::RefreshGeometry()
 {
-    if (objects.isEmpty())
+    if (Objects().isEmpty())
     {
         return;
     }
@@ -95,23 +86,23 @@ void VisToolMove::RefreshGeometry()
     const QVector<QGraphicsItem *> originObjects = CreateOriginObjects(iPoint, iCurve);
 
     QPointF origin = GetOriginPoint(originObjects);
-    DrawPoint(pointOrigin, origin, supportColor2);
+    DrawPoint(m_pointOrigin, origin, Color(VColor::SupportColor2));
 
     qreal tempAngle = 0;
     qreal tempLength = 0;
     qreal tempRoationAngle = 0;
 
     QLineF line;
-    if (qFuzzyIsNull(length))
+    if (qFuzzyIsNull(m_length))
     {
         if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
         {
-            line = QLineF(origin, Visualization::scenePos);
+            line = QLineF(origin, ScenePos());
             line.setAngle(CorrectAngle(line.angle()));
         }
         else
         {
-            line = QLineF(origin, Visualization::scenePos);
+            line = QLineF(origin, ScenePos());
         }
 
         tempAngle = line.angle();
@@ -119,25 +110,25 @@ void VisToolMove::RefreshGeometry()
     }
     else
     {
-        line = VGObject::BuildLine(origin, length, angle);
-        tempAngle = angle;
-        tempLength = length;
+        line = VGObject::BuildLine(origin, m_length, m_angle);
+        tempAngle = m_angle;
+        tempLength = m_length;
 
-        if (object1Id != NULL_ID)
+        if (m_rotationOriginId != NULL_ID)
         {
-            origin = Visualization::data->GeometricObject<VPointF>(object1Id)->toQPointF();
-            DrawPoint(pointRotationOrigin, origin, supportColor2);
+            origin = GetData()->GeometricObject<VPointF>(m_rotationOriginId)->toQPointF();
+            DrawPoint(m_pointRotationOrigin, origin, Color(VColor::SupportColor2));
         }
         else
         {
             origin = line.p2();
-            pointRotationOrigin->setVisible(false);
+            m_pointRotationOrigin->setVisible(false);
         }
 
         QLineF rLine;
-        if (VFuzzyComparePossibleNulls(rotationAngle, INT_MIN))
+        if (VFuzzyComparePossibleNulls(m_rotationAngle, INT_MIN))
         {
-            rLine = QLineF(origin, Visualization::scenePos);
+            rLine = QLineF(origin, ScenePos());
 
             if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
             {
@@ -159,48 +150,48 @@ void VisToolMove::RefreshGeometry()
         }
         else
         {
-            rLine = QLineF(origin, Ray(origin, rotationAngle));
-            tempRoationAngle = rotationAngle;
+            rLine = QLineF(origin, Ray(origin, m_rotationAngle));
+            tempRoationAngle = m_rotationAngle;
         }
 
-        DrawLine(rotationLine, rLine, supportColor3, Qt::DashLine);
-        DrawLine(xAxis, QLineF(origin, Ray(origin, 0)), supportColor3, Qt::DashLine);
+        DrawLine(m_rotationLine, rLine, Color(VColor::SupportColor3), Qt::DashLine);
+        DrawLine(m_xAxis, QLineF(origin, Ray(origin, 0)), Color(VColor::SupportColor3), Qt::DashLine);
 
         VArc arc(VPointF(origin),
                  ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene()))*2, 0, tempRoationAngle);
-        DrawPath(angleArc, arc.GetPath(), supportColor3, Qt::SolidLine, Qt::RoundCap);
+        DrawPath(m_angleArc, arc.GetPath(), Color(VColor::SupportColor3), Qt::SolidLine, Qt::RoundCap);
     }
-    DrawLine(this, line, supportColor2, Qt::DashLine);
-    DrawPoint(pointFinish, line.p2(), supportColor);
+    DrawLine(this, line, Color(VColor::SupportColor2), Qt::DashLine);
+    DrawPoint(m_pointFinish, line.p2(), Color(VColor::SupportColor));
 
     static const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-    if (qFuzzyIsNull(length))
+    if (qFuzzyIsNull(m_length))
     {
-        Visualization::toolTip = tr("Length = %1%2, angle = %3°, <b>%4</b> - sticking angle, "
-                                    "<b>Mouse click</b> - finish selecting a position")
-                .arg(VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-                         QString::number(VAbstractValApplication::VApp()->fromPixel(tempLength)),
-                         VAbstractApplication::VApp()->Settings()->GetOsSeparator()), prefix)
-                .arg(tempAngle)
-                .arg(VModifierKey::Shift());
+        SetToolTip(tr("Length = %1%2, angle = %3°, <b>%4</b> - sticking angle, "
+                      "<b>Mouse click</b> - finish selecting a position")
+                       .arg(VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+                                QString::number(VAbstractValApplication::VApp()->fromPixel(tempLength)),
+                                VAbstractApplication::VApp()->Settings()->GetOsSeparator()), prefix)
+                       .arg(tempAngle)
+                       .arg(VModifierKey::Shift()));
     }
     else
     {
-        Visualization::toolTip = tr("Length = %1%2, angle = %3°, rotation angle = %4°, <b>%5</b> - sticking angle, "
-                                    "<b>%6</b> - change rotation origin point, <b>Mouse click</b> - finish creating")
-                .arg(VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-                         QString::number(VAbstractValApplication::VApp()->fromPixel(tempLength)),
-                         VAbstractApplication::VApp()->Settings()->GetOsSeparator()), prefix)
-                .arg(tempAngle)
-                .arg(tempRoationAngle)
-                .arg(VModifierKey::Shift(), VModifierKey::Control());
+        SetToolTip(tr("Length = %1%2, angle = %3°, rotation angle = %4°, <b>%5</b> - sticking angle, "
+                      "<b>%6</b> - change rotation origin point, <b>Mouse click</b> - finish creating")
+                       .arg(VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+                                QString::number(VAbstractValApplication::VApp()->fromPixel(tempLength)),
+                                VAbstractApplication::VApp()->Settings()->GetOsSeparator()), prefix)
+                       .arg(tempAngle)
+                       .arg(tempRoationAngle)
+                       .arg(VModifierKey::Shift(), VModifierKey::Control()));
     }
 
     CreateMovedRotatedObjects(iPoint, iCurve, tempLength, tempAngle, tempRoationAngle, origin);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VisToolMove::Angle() const
+auto VisToolMove::Angle() const -> QString
 {
     return QString::number(line().angle());
 }
@@ -208,29 +199,29 @@ QString VisToolMove::Angle() const
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolMove::SetAngle(const QString &expression)
 {
-    angle = FindValFromUser(expression, Visualization::data->DataVariables());
+    m_angle = FindValFromUser(expression, GetData()->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VisToolMove::RotationAngle() const
+auto VisToolMove::RotationAngle() const -> QString
 {
-    return QString::number(rotationLine->line().angle());
+    return QString::number(m_rotationLine->line().angle());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolMove::SetRotationAngle(const QString &expression)
 {
-    rotationAngle = FindValFromUser(expression, Visualization::data->DataVariables());
+    m_rotationAngle = FindValFromUser(expression, GetData()->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VisToolMove::Length() const
+auto VisToolMove::Length() const -> QString
 {
     return QString::number(LengthValue());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VisToolMove::LengthValue() const
+auto VisToolMove::LengthValue() const -> qreal
 {
     return VAbstractValApplication::VApp()->fromPixel(line().length());
 }
@@ -238,48 +229,43 @@ qreal VisToolMove::LengthValue() const
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolMove::SetLength(const QString &expression)
 {
-    length = FindLengthFromUser(expression, Visualization::data->DataVariables());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolMove::SetRotationOriginPointId(quint32 value)
-{
-    object1Id = value;
+    m_length = FindLengthFromUser(expression, GetData()->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Item>
-QGraphicsPathItem *VisToolMove::AddOriginCurve(quint32 id, int &i)
+auto VisToolMove::AddOriginCurve(quint32 id, int &i) -> QGraphicsPathItem *
 {
-    const QSharedPointer<Item> curve = Visualization::data->template GeometricObject<Item>(id);
+    const QSharedPointer<Item> curve = GetData()->template GeometricObject<Item>(id);
 
     ++i;
-    VCurvePathItem *path = GetCurve(static_cast<quint32>(i), supportColor2);
-    DrawPath(path, curve->GetPath(), curve->DirectionArrows(), supportColor2, Qt::SolidLine, Qt::RoundCap);
+    VCurvePathItem *path = GetCurve(static_cast<quint32>(i), Color(VColor::SupportColor2));
+    DrawPath(path, curve->GetPath(), curve->DirectionArrows(), Color(VColor::SupportColor2), Qt::SolidLine,
+             Qt::RoundCap);
 
     return path;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Item>
-int VisToolMove::AddMovedRotatedCurve(qreal angle, qreal length, quint32 id, int i, qreal rotationAngle,
-                                      const QPointF &rotationOrigin)
+auto VisToolMove::AddMovedRotatedCurve(qreal angle, qreal length, quint32 id, int i, qreal rotationAngle,
+                                       const QPointF &rotationOrigin) -> int
 {
-    const QSharedPointer<Item> curve = Visualization::data->template GeometricObject<Item>(id);
+    const QSharedPointer<Item> curve = GetData()->template GeometricObject<Item>(id);
 
     ++i;
-    VCurvePathItem *path = GetCurve(static_cast<quint32>(i), supportColor);
+    VCurvePathItem *path = GetCurve(static_cast<quint32>(i), Color(VColor::SupportColor));
     const Item moved = curve->Move(length, angle).Rotate(rotationOrigin, rotationAngle);
-    DrawPath(path, moved.GetPath(), moved.DirectionArrows(), supportColor, Qt::SolidLine, Qt::RoundCap);
+    DrawPath(path, moved.GetPath(), moved.DirectionArrows(), Color(VColor::SupportColor), Qt::SolidLine, Qt::RoundCap);
 
     return i;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VisToolMove::GetOriginPoint(const QVector<QGraphicsItem *> &objects)
+auto VisToolMove::GetOriginPoint(const QVector<QGraphicsItem *> &objects) -> QPointF
 {
     QRectF boundingRect;
-    for (auto object : qAsConst(objects))
+    for (auto *object : qAsConst(objects))
     {
         if (object)
         {
@@ -303,13 +289,14 @@ QPointF VisToolMove::GetOriginPoint(const QVector<QGraphicsItem *> &objects)
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
 
-QVector<QGraphicsItem *> VisToolMove::CreateOriginObjects(int &iPoint, int &iCurve)
+auto VisToolMove::CreateOriginObjects(int &iPoint, int &iCurve) -> QVector<QGraphicsItem *>
 {
     QVector<QGraphicsItem *> originObjects;
+    originObjects.reserve(Objects().size());
 
-    for (auto id : qAsConst(objects))
+    for (auto id : Objects())
     {
-        const QSharedPointer<VGObject> obj = Visualization::data->GetGObject(id);
+        const QSharedPointer<VGObject> obj = GetData()->GetGObject(id);
 
         // This check helps to find missed objects in the switch
         Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects were handled.");
@@ -318,11 +305,11 @@ QVector<QGraphicsItem *> VisToolMove::CreateOriginObjects(int &iPoint, int &iCur
         {
             case GOType::Point:
             {
-                const QSharedPointer<VPointF> p = Visualization::data->GeometricObject<VPointF>(id);
+                const QSharedPointer<VPointF> p = GetData()->GeometricObject<VPointF>(id);
 
                 ++iPoint;
-                VScaledEllipse *point = GetPoint(static_cast<quint32>(iPoint), supportColor2);
-                DrawPoint(point, static_cast<QPointF>(*p), supportColor2);
+                VScaledEllipse *point = GetPoint(static_cast<quint32>(iPoint), Color(VColor::SupportColor2));
+                DrawPoint(point, static_cast<QPointF>(*p), Color(VColor::SupportColor2));
                 originObjects.append(point);
 
                 break;
@@ -364,9 +351,9 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void VisToolMove::CreateMovedRotatedObjects(int &iPoint, int &iCurve, qreal length, qreal angle, qreal rotationAngle,
                                             const QPointF &rotationOrigin)
 {
-    for (auto id : qAsConst(objects))
+    for (auto id : Objects())
     {
-        const QSharedPointer<VGObject> obj = Visualization::data->GetGObject(id);
+        const QSharedPointer<VGObject> obj = GetData()->GetGObject(id);
 
         // This check helps to find missed objects in the switch
         Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects was handled.");
@@ -375,12 +362,12 @@ void VisToolMove::CreateMovedRotatedObjects(int &iPoint, int &iCurve, qreal leng
         {
             case GOType::Point:
             {
-                const QSharedPointer<VPointF> p = Visualization::data->GeometricObject<VPointF>(id);
+                const QSharedPointer<VPointF> p = GetData()->GeometricObject<VPointF>(id);
 
                 ++iPoint;
-                VScaledEllipse *point = GetPoint(static_cast<quint32>(iPoint), supportColor);
+                VScaledEllipse *point = GetPoint(static_cast<quint32>(iPoint), Color(VColor::SupportColor));
                 DrawPoint(point, static_cast<QPointF>(p->Move(length, angle).Rotate(rotationOrigin, rotationAngle)),
-                          supportColor);
+                          Color(VColor::SupportColor));
                 break;
             }
             case GOType::Arc:

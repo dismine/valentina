@@ -322,11 +322,11 @@ void VToolCurveIntersectAxis::SetVisualization()
         auto *visual = qobject_cast<VisToolCurveIntersectAxis *>(vis);
         SCASSERT(visual != nullptr)
 
-        visual->setObject1Id(curveId);
+        visual->SetCurveId(curveId);
         visual->setAxisPointId(basePointId);
         visual->SetAngle(VAbstractApplication::VApp()->TrVars()
                          ->FormulaToUser(formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
-        visual->setLineStyle(LineStyleToPenStyle(m_lineType));
+        visual->SetLineStyle(LineStyleToPenStyle(m_lineType));
         visual->RefreshGeometry();
     }
 }

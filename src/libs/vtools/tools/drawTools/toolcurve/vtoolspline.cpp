@@ -544,15 +544,15 @@ void VToolSpline::SetVisualization()
         SCASSERT(visual != nullptr)
 
         const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(m_id);
-        visual->setObject1Id(spl->GetP1().id());
-        visual->SetObject4Id(spl->GetP4().id());
+        visual->SetPoint1Id(spl->GetP1().id());
+        visual->SetPoint4Id(spl->GetP4().id());
         visual->SetAngle1(spl->GetStartAngle());
         visual->SetAngle2(spl->GetEndAngle());
         visual->SetKAsm1(spl->GetKasm1());
         visual->SetKAsm2(spl->GetKasm2());
         visual->SetKCurve(spl->GetKcurve());
-        visual->setLineStyle(LineStyleToPenStyle(spl->GetPenStyle()));
-        visual->setApproximationScale(spl->GetApproximationScale());
+        visual->SetLineStyle(LineStyleToPenStyle(spl->GetPenStyle()));
+        visual->SetApproximationScale(spl->GetApproximationScale());
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }

@@ -318,12 +318,12 @@ void VToolLineIntersectAxis::SetVisualization()
         auto *visual = qobject_cast<VisToolLineIntersectAxis *>(vis);
         SCASSERT(visual != nullptr)
 
-        visual->setObject1Id(firstPointId);
-        visual->setPoint2Id(secondPointId);
-        visual->setAxisPointId(basePointId);
+        visual->SetPoint1Id(firstPointId);
+        visual->SetPoint2Id(secondPointId);
+        visual->SetAxisPointId(basePointId);
         visual->SetAngle(VAbstractApplication::VApp()->TrVars()
                          ->FormulaToUser(formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
-        visual->setLineStyle(LineStyleToPenStyle(m_lineType));
+        visual->SetLineStyle(LineStyleToPenStyle(m_lineType));
         visual->RefreshGeometry();
     }
 }

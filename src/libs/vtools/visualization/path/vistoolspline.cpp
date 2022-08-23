@@ -62,8 +62,8 @@ VisToolSpline::VisToolSpline(const VContainer *data, QGraphicsItem *parent)
       m_angle1(EMPTY_ANGLE),
       m_angle2(EMPTY_ANGLE)
 {
-    m_point1 = InitPoint(supportColor, this);
-    m_point4 = InitPoint(supportColor, this); //-V656
+    m_point1 = InitPoint(Color(VColor::SupportColor), this);
+    m_point4 = InitPoint(Color(VColor::SupportColor), this); //-V656
 
     auto *controlPoint1 = new VControlPointSpline(1, SplinePointPosition::FirstPoint, this);
     controlPoint1->hide();
@@ -83,28 +83,28 @@ VisToolSpline::~VisToolSpline()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolSpline::RefreshGeometry()
 {
-    if (object1Id > NULL_ID)
+    if (m_point1Id > NULL_ID)
     {
-        const auto first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(m_point1, static_cast<QPointF>(*first), supportColor);
+        const auto first = GetData()->GeometricObject<VPointF>(m_point1Id);
+        DrawPoint(m_point1, static_cast<QPointF>(*first), Color(VColor::SupportColor));
 
-        if (mode == Mode::Creation)
+        if (GetMode() == Mode::Creation)
         {
             DragFirstControlPoint(static_cast<QPointF>(*first));
         }
 
-        if (m_object4Id <= NULL_ID)
+        if (m_point4Id <= NULL_ID)
         {
-            VSpline spline(*first, m_p2, Visualization::scenePos, VPointF(Visualization::scenePos));
-            spline.SetApproximationScale(m_approximationScale);
-            DrawPath(this, spline.GetPath(), mainColor, lineStyle, Qt::RoundCap);
+            VSpline spline(*first, m_p2, ScenePos(), VPointF(ScenePos()));
+            spline.SetApproximationScale(ApproximationScale());
+            DrawPath(this, spline.GetPath(), Color(VColor::MainColor), LineStyle(), Qt::RoundCap);
         }
         else
         {
-            const auto second = Visualization::data->GeometricObject<VPointF>(m_object4Id);
-            DrawPoint(m_point4, static_cast<QPointF>(*second), supportColor);
+            const auto second = GetData()->GeometricObject<VPointF>(m_point4Id);
+            DrawPoint(m_point4, static_cast<QPointF>(*second), Color(VColor::SupportColor));
 
-            if (mode == Mode::Creation)
+            if (GetMode() == Mode::Creation)
             {
                 DragLastControlPoint(static_cast<QPointF>(*second));
             }
@@ -112,74 +112,33 @@ void VisToolSpline::RefreshGeometry()
             if (VFuzzyComparePossibleNulls(m_angle1, EMPTY_ANGLE) || VFuzzyComparePossibleNulls(m_angle2, EMPTY_ANGLE))
             {
                 VSpline spline(*first, m_p2, m_p3, *second);
-                spline.SetApproximationScale(m_approximationScale);
-                DrawPath(this, spline.GetPath(), mainColor, lineStyle, Qt::RoundCap);
+                spline.SetApproximationScale(ApproximationScale());
+                DrawPath(this, spline.GetPath(), Color(VColor::MainColor), LineStyle(), Qt::RoundCap);
             }
             else
             {
                 VSpline spline(*first, *second, m_angle1, m_angle2, m_kAsm1, m_kAsm2, m_kCurve);
-                spline.SetApproximationScale(m_approximationScale);
-                DrawPath(this, spline.GetPath(), spline.DirectionArrows(), mainColor, lineStyle, Qt::RoundCap);
-                Visualization::toolTip = tr("Use <b>%1</b> for sticking angle!")
-                        .arg(VModifierKey::Shift());
-                emit ToolTip(Visualization::toolTip);
+                spline.SetApproximationScale(ApproximationScale());
+                DrawPath(this, spline.GetPath(), spline.DirectionArrows(), Color(VColor::MainColor), LineStyle(),
+                         Qt::RoundCap);
+                SetToolTip(tr("Use <b>%1</b> for sticking angle!").arg(VModifierKey::Shift()));
+                emit ToolTip(CurrentToolTip());
             }
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolSpline::SetObject4Id(quint32 value)
+void VisToolSpline::VisualMode(quint32 id)
 {
-    m_object4Id = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolSpline::SetAngle1(qreal value)
-{
-    m_angle1 = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolSpline::SetAngle2(qreal value)
-{
-    m_angle2 = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolSpline::SetKAsm1(qreal value)
-{
-    m_kAsm1 = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolSpline::SetKAsm2(qreal value)
-{
-    m_kAsm2 = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolSpline::SetKCurve(qreal value)
-{
-    m_kCurve = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VisToolSpline::GetP2() const -> QPointF
-{
-    return m_p2;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VisToolSpline::GetP3() const -> QPointF
-{
-    return m_p3;
+    m_point1Id = id;
+    StartVisualMode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolSpline::MouseLeftPressed()
 {
-    if (mode == Mode::Creation)
+    if (GetMode() == Mode::Creation)
     {
         m_isLeftMousePressed = true;
     }
@@ -188,7 +147,7 @@ void VisToolSpline::MouseLeftPressed()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolSpline::MouseLeftReleased()
 {
-    if (mode == Mode::Creation)
+    if (GetMode() == Mode::Creation)
     {
         m_isLeftMousePressed = false;
         RefreshGeometry();
@@ -200,7 +159,7 @@ void VisToolSpline::DragFirstControlPoint(const QPointF &point)
 {
     if (m_isLeftMousePressed && not m_p2Selected)
     {
-        m_p2 = Visualization::scenePos;
+        m_p2 = ScenePos();
         m_controlPoints.at(0)->RefreshCtrlPoint(1, SplinePointPosition::FirstPoint, m_p2, point);
 
         if (not m_controlPoints.at(0)->isVisible())
@@ -226,7 +185,7 @@ void VisToolSpline::DragLastControlPoint(const QPointF &point)
 {
     if (m_isLeftMousePressed && not m_p3Selected)
     {
-        m_p3 = Visualization::scenePos;
+        m_p3 = ScenePos();
         m_controlPoints.at(1)->RefreshCtrlPoint(1, SplinePointPosition::LastPoint, m_p3, point);
 
         if (not m_controlPoints.at(1)->isVisible())

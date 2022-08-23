@@ -33,14 +33,13 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolSpecialPoint::VisToolSpecialPoint(const VContainer *data, QGraphicsItem *parent)
-    : VisLine(data, parent),
-      m_point()
+    : VisLine(data, parent)
 {
-    this->mainColor = Qt::red;
+    SetMainColor(Qt::red);
     this->setZValue(2);// Show on top real tool
     this->setPen(QPen(Qt::NoPen));
 
-    m_point = new VSimplePoint(NULL_ID, mainColor);
+    m_point = new VSimplePoint(NULL_ID, Color(VColor::MainColor));
     m_point->SetPointHighlight(true);
     m_point->setParentItem(this);
     m_point->SetVisualizationMode(true);
@@ -50,21 +49,25 @@ VisToolSpecialPoint::VisToolSpecialPoint(const VContainer *data, QGraphicsItem *
 //---------------------------------------------------------------------------------------------------------------------
 VisToolSpecialPoint::~VisToolSpecialPoint()
 {
-    if (not m_point.isNull())
-    {
-        delete m_point;
-    }
+    delete m_point;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolSpecialPoint::RefreshGeometry()
 {
-    if (object1Id > NULL_ID)
+    if (m_pointId > NULL_ID)
     {
-        // Keep first, you can hide only objects those have shape
-        m_point->RefreshPointGeometry(*Visualization::data->GeometricObject<VPointF>(object1Id));
-        m_point->SetOnlyPoint(mode == Mode::Creation);
+        // Keep first, you can hide only objects which have shape
+        m_point->RefreshPointGeometry(*GetData()->GeometricObject<VPointF>(m_pointId));
+        m_point->SetOnlyPoint(GetMode() == Mode::Creation);
         m_point->setVisible(true);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolSpecialPoint::VisualMode(quint32 id)
+{
+    m_pointId = id;
+    StartVisualMode();
 }
 

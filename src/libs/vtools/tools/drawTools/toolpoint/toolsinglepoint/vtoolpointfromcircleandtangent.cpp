@@ -328,10 +328,10 @@ void VToolPointFromCircleAndTangent::SetVisualization()
         auto *visual = qobject_cast<VisToolPointFromCircleAndTangent *>(vis);
         SCASSERT(visual != nullptr)
 
-        visual->setObject1Id(tangentPointId);
-        visual->setObject2Id(circleCenterId);
-        visual->setCRadius(circleRadius);
-        visual->setCrossPoint(crossPoint);
+        visual->SetPointId(tangentPointId);
+        visual->SetCenterId(circleCenterId);
+        visual->SetCRadius(circleRadius);
+        visual->SetCrossPoint(crossPoint);
         visual->RefreshGeometry();
     }
 }

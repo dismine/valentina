@@ -47,11 +47,9 @@
 #include <Qt>
 #include <new>
 
-#include "../../tools/vabstracttool.h"
 #include "../../visualization/visualization.h"
 #include "../../visualization/path/vistoolsplinepath.h"
 #include "../ifc/xml/vdomdocument.h"
-#include "../qmuparser/qmuparsererror.h"
 #include "../support/dialogeditwrongformula.h"
 #include "../vgeometry/../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"

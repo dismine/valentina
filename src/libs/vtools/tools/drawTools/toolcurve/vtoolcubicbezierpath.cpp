@@ -245,8 +245,8 @@ void VToolCubicBezierPath::SetVisualization()
         SCASSERT(visual != nullptr)
 
         QSharedPointer<VCubicBezierPath> splPath = VAbstractTool::data.GeometricObject<VCubicBezierPath>(m_id);
-        visual->setPath(*splPath.data());
-        visual->setLineStyle(LineStyleToPenStyle(splPath->GetPenStyle()));
+        visual->SetPath(*splPath.data());
+        visual->SetLineStyle(LineStyleToPenStyle(splPath->GetPenStyle()));
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }

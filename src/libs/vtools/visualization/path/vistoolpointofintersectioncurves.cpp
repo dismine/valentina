@@ -36,77 +36,46 @@
 #include <new>
 
 #include "../../tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.h"
-#include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcurve.h"
-#include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
-#include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/scalesceneitems.h"
 #include "../visualization.h"
 #include "visualization/path/vispath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointOfIntersectionCurves::VisToolPointOfIntersectionCurves(const VContainer *data, QGraphicsItem *parent)
-    :VisPath(data, parent),
-      object2Id(NULL_ID),
-      vCrossPoint(VCrossCurvesPoint::HighestPoint),
-      hCrossPoint(HCrossCurvesPoint::LeftmostPoint),
-      point(nullptr),
-      visCurve2(nullptr)
+    :VisPath(data, parent)
 {
-    visCurve2 = InitItem<VCurvePathItem>(supportColor, this);
-    point = InitPoint(mainColor, this);
+    m_visCurve2 = InitItem<VCurvePathItem>(Color(VColor::SupportColor), this);
+    m_point = InitPoint(Color(VColor::MainColor), this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolPointOfIntersectionCurves::RefreshGeometry()
 {
-    if (object1Id > NULL_ID)
+    if (m_curve1Id > NULL_ID)
     {
-        auto curve1 = Visualization::data->GeometricObject<VAbstractCurve>(object1Id);
-        DrawPath(this, curve1->GetPath(), curve1->DirectionArrows(), supportColor, Qt::SolidLine, Qt::RoundCap);
+        auto curve1 = GetData()->GeometricObject<VAbstractCurve>(m_curve1Id);
+        DrawPath(this, curve1->GetPath(), curve1->DirectionArrows(), Color(VColor::SupportColor), Qt::SolidLine,
+                 Qt::RoundCap);
 
-        if (object2Id > NULL_ID)
+        if (m_curve2Id > NULL_ID)
         {
-            auto curve2 = Visualization::data->GeometricObject<VAbstractCurve>(object2Id);
-            DrawPath(visCurve2, curve2->GetPath(), curve2->DirectionArrows(), supportColor, Qt::SolidLine,
-                     Qt::RoundCap);
+            auto curve2 = GetData()->GeometricObject<VAbstractCurve>(m_curve2Id);
+            DrawPath(m_visCurve2, curve2->GetPath(), curve2->DirectionArrows(), Color(VColor::SupportColor),
+                     Qt::SolidLine, Qt::RoundCap);
 
             QPointF p;
-            VToolPointOfIntersectionCurves::FindPoint(curve1->GetPoints(), curve2->GetPoints(), vCrossPoint,
-                                                      hCrossPoint, &p);
-            DrawPoint(point, p, mainColor);
+            VToolPointOfIntersectionCurves::FindPoint(curve1->GetPoints(), curve2->GetPoints(), m_vCrossPoint,
+                                                      m_hCrossPoint, &p);
+            DrawPoint(m_point, p, Color(VColor::MainColor));
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfIntersectionCurves::VisualMode(const quint32 &id)
+void VisToolPointOfIntersectionCurves::VisualMode(quint32 id)
 {
-    auto scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
-    SCASSERT(scene != nullptr)
-
-    this->object1Id = id;
-    Visualization::scenePos = scene->getScenePos();
-    RefreshGeometry();
-
-    AddOnScene();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfIntersectionCurves::setObject2Id(const quint32 &value)
-{
-    object2Id = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfIntersectionCurves::setVCrossPoint(const VCrossCurvesPoint &value)
-{
-    vCrossPoint = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfIntersectionCurves::setHCrossPoint(const HCrossCurvesPoint &value)
-{
-    hCrossPoint = value;
+    m_curve1Id = id;
+    StartVisualMode();
 }

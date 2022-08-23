@@ -43,25 +43,35 @@ class VisToolEllipticalArc : public VisPath
     Q_OBJECT // NOLINT
 public:
     explicit VisToolEllipticalArc(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolEllipticalArc() Q_DECL_EQ_DEFAULT;
+    ~VisToolEllipticalArc() override = default;
 
-    virtual void RefreshGeometry() override;
-    void setRadius1(const QString &expression);
-    void setRadius2(const QString &expression);
-    void setF1(const QString &expression);
-    void setF2(const QString &expression);
-    void setRotationAngle(const QString &expression);
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id) override;
 
-    virtual int type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolEllipticalArc)};
+    void SetCenterId(quint32 newCenterId);
+    void SetRadius1(const QString &expression);
+    void SetRadius2(const QString &expression);
+    void SetF1(const QString &expression);
+    void SetF2(const QString &expression);
+    void SetRotationAngle(const QString &expression);
+
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolEllipticalArc)};
 private:
     Q_DISABLE_COPY_MOVE(VisToolEllipticalArc) // NOLINT
-    VScaledEllipse *arcCenter;
-    qreal           radius1;
-    qreal           radius2;
-    qreal           f1;
-    qreal           f2;
-    qreal           rotationAngle;
+    VScaledEllipse *m_arcCenter{nullptr};
+    qreal           m_radius1{0};
+    qreal           m_radius2{0};
+    qreal           m_f1{0};
+    qreal           m_f2{0};
+    qreal           m_rotationAngle{0};
+    quint32         m_centerId{NULL_ID};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolEllipticalArc::SetCenterId(quint32 newCenterId)
+{
+    m_centerId = newCenterId;
+}
 
 #endif // VISTOOLELLIPTICALARC_H

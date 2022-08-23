@@ -50,21 +50,23 @@ class VisLine: public Visualization, public VScaledLine
     Q_OBJECT // NOLINT
 public:
     explicit VisLine(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisLine() = default;
+    ~VisLine() override = default;
 
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::Line)};
-    static qreal CorrectAngle(const qreal &angle);
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::Line)};
+
+    static auto CorrectAngle(const qreal &angle) -> qreal;
 protected:
-    QPointF      Ray(const QPointF &firstPoint, const qreal &angle) const;
-    QPointF      Ray(const QPointF &firstPoint) const;
-    QLineF       Axis(const QPointF &p, const qreal &angle) const;
-    QLineF       Axis(const QPointF &p1, const QPointF &p2) const;
-    virtual void InitPen() override;
-    virtual void AddOnScene() override;
+    auto Ray(const QPointF &firstPoint, const qreal &angle) const -> QPointF;
+    auto Ray(const QPointF &firstPoint) const -> QPointF;
+    auto Axis(const QPointF &p, const qreal &angle) const -> QLineF;
+    auto Axis(const QPointF &p1, const QPointF &p2) const -> QLineF;
 
-    void         DrawRay(VScaledLine *lineItem, const QPointF &p, const QPointF &pTangent,
-                         const QColor &color, Qt::PenStyle style);
+    void InitPen() override;
+    void AddOnScene() override;
+
+    void DrawRay(VScaledLine *lineItem, const QPointF &p, const QPointF &pTangent, const QColor &color,
+                 Qt::PenStyle style);
 private:
     Q_DISABLE_COPY_MOVE(VisLine) // NOLINT
 };

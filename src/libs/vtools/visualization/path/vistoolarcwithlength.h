@@ -48,20 +48,31 @@ public:
     ~VisToolArcWithLength() override =default;
 
     void RefreshGeometry() override;
-    void setRadius(const QString &expression);
-    void setF1(const QString &expression);
-    void setLength(const QString &expression);
+    void VisualMode(quint32 id) override;
+
+    void SetCenterId(quint32 newCenterId);
+    void SetRadius(const QString &expression);
+    void SetF1(const QString &expression);
+    void SetLength(const QString &expression);
+
     auto type() const -> int override {return Type;}
     enum {Type = UserType + static_cast<int>(Vis::ToolArcWithLength)};
 
     static auto CorrectAngle(qreal angle) -> qreal;
 private:
     Q_DISABLE_COPY_MOVE(VisToolArcWithLength) // NOLINT
-    VScaledEllipse *arcCenter{nullptr};
-    VScaledEllipse *f1Point{nullptr};
-    qreal           radius{0};
-    qreal           f1{-1};
-    qreal           length{0};
+    VScaledEllipse *m_arcCenter{nullptr};
+    VScaledEllipse *m_f1Point{nullptr};
+    qreal           m_radius{0};
+    qreal           m_f1{-1};
+    qreal           m_length{0};
+    quint32         m_centerId{NULL_ID};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolArcWithLength::SetCenterId(quint32 newCenterId)
+{
+    m_centerId = newCenterId;
+}
 
 #endif // VISTOOLARCWITHLENGTH_H

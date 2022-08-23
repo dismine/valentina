@@ -38,8 +38,6 @@
 #include <QToolButton>
 #include <Qt>
 
-#include "../../tools/vabstracttool.h"
-#include "../ifc/xml/vdomdocument.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../../visualization/path/vistoolellipticalarc.h"
 #include "../../visualization/visualization.h"
@@ -49,6 +47,7 @@
 #include "ui_dialogellipticalarc.h"
 #include "../vgeometry/vellipticalarc.h"
 #include "../qmuparser/qmudef.h"
+#include "../vpatterndb/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -188,7 +187,10 @@ quint32 DialogEllipticalArc::GetCenter() const
 void DialogEllipticalArc::SetCenter(const quint32 &value)
 {
     ChangeCurrentData(ui->comboBoxBasePoint, value);
-    vis->setObject1Id(value);
+
+    auto *path = qobject_cast<VisToolEllipticalArc *>(vis);
+    SCASSERT(path != nullptr)
+    path->SetCenterId(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -219,7 +221,7 @@ void DialogEllipticalArc::SetRadius1(const QString &value)
 
     VisToolEllipticalArc *path = qobject_cast<VisToolEllipticalArc *>(vis);
     SCASSERT(path != nullptr)
-    path->setRadius1(radius1);
+    path->SetRadius1(radius1);
 
     MoveCursorToEnd(ui->plainTextEditRadius1);
 }
@@ -252,7 +254,7 @@ void DialogEllipticalArc::SetRadius2(const QString &value)
 
     VisToolEllipticalArc *path = qobject_cast<VisToolEllipticalArc *>(vis);
     SCASSERT(path != nullptr)
-    path->setRadius2(radius2);
+    path->SetRadius2(radius2);
 
     MoveCursorToEnd(ui->plainTextEditRadius2);
 }
@@ -285,7 +287,7 @@ void DialogEllipticalArc::SetF1(const QString &value)
 
     VisToolEllipticalArc *path = qobject_cast<VisToolEllipticalArc *>(vis);
     SCASSERT(path != nullptr)
-    path->setF1(f1);
+    path->SetF1(f1);
 
     MoveCursorToEnd(ui->plainTextEditF1);
 }
@@ -318,7 +320,7 @@ void DialogEllipticalArc::SetF2(const QString &value)
 
     VisToolEllipticalArc *path = qobject_cast<VisToolEllipticalArc *>(vis);
     SCASSERT(path != nullptr)
-    path->setF2(f2);
+    path->SetF2(f2);
 
     MoveCursorToEnd(ui->plainTextEditF2);
 }
@@ -351,7 +353,7 @@ void DialogEllipticalArc::SetRotationAngle(const QString &value)
 
     VisToolEllipticalArc *path = qobject_cast<VisToolEllipticalArc *>(vis);
     SCASSERT(path != nullptr)
-    path->setRotationAngle(rotationAngle);
+    path->SetRotationAngle(rotationAngle);
 
     MoveCursorToEnd(ui->plainTextEditRotationAngle);
 }
@@ -584,12 +586,12 @@ void DialogEllipticalArc::SaveData()
     VisToolEllipticalArc *path = qobject_cast<VisToolEllipticalArc *>(vis);
     SCASSERT(path != nullptr)
 
-    path->setObject1Id(GetCenter());
-    path->setRadius1(radius1);
-    path->setRadius2(radius2);
-    path->setF1(f1);
-    path->setF2(f2);
-    path->setRotationAngle(rotationAngle);
+    path->SetCenterId(GetCenter());
+    path->SetRadius1(radius1);
+    path->SetRadius2(radius2);
+    path->SetF1(f1);
+    path->SetF2(f2);
+    path->SetRotationAngle(rotationAngle);
     path->RefreshGeometry();
 }
 

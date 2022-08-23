@@ -48,25 +48,47 @@ class VisToolPointFromArcAndTangent : public VisLine
     Q_OBJECT // NOLINT
 public:
     explicit VisToolPointFromArcAndTangent(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolPointFromArcAndTangent() = default;
+    ~VisToolPointFromArcAndTangent() override = default;
 
-    virtual void RefreshGeometry() override;
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id) override;
 
-    void         setArcId(const quint32 &value);
-    void         setCrossPoint(const CrossCirclesPoint &value);
+    void SetPointId(quint32 newPointId);
+    void SetArcId(const quint32 &value);
+    void SetCrossPoint(const CrossCirclesPoint &value);
 
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolPointFromArcAndTangent)};
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolPointFromArcAndTangent)};
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VisToolPointFromArcAndTangent) // NOLINT
-    quint32           arcId;
-    CrossCirclesPoint crossPoint;
-    VScaledEllipse   *point;
-    VScaledEllipse   *tangent;
-    VCurvePathItem   *arcPath;
+    quint32            m_arcId{NULL_ID};
+    CrossCirclesPoint  m_crossPoint{CrossCirclesPoint::FirstPoint};
+    VScaledEllipse    *m_point{nullptr};
+    VScaledEllipse    *m_tangent{nullptr};
+    VCurvePathItem    *m_arcPath{nullptr};
+    quint32            m_pointId{NULL_ID};
 
     void FindRays(const QPointF &p, const VArc *arc);
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolPointFromArcAndTangent::SetPointId(quint32 newPointId)
+{
+    m_pointId = newPointId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolPointFromArcAndTangent::SetArcId(const quint32 &value)
+{
+    m_arcId = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolPointFromArcAndTangent::SetCrossPoint(const CrossCirclesPoint &value)
+{
+    m_crossPoint = value;
+}
 
 #endif // VISTOOLPOINTFROMARCANDTANGENT_H

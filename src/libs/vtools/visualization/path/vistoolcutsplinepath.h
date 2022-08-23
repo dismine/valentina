@@ -47,7 +47,11 @@ public:
     ~VisToolCutSplinePath() override = default;
 
     void RefreshGeometry() override;
-    void setLength(const QString &expression);
+    void VisualMode(quint32 id) override;
+
+    void SetSplinePathId(quint32 newSplineId);
+    void SetLength(const QString &expression);
+
     auto type() const -> int override {return Type;}
     enum {Type = UserType + static_cast<int>(Vis::ToolCutSpline)};
 private:
@@ -56,6 +60,13 @@ private:
     VCurvePathItem *m_splPath1{nullptr};
     VCurvePathItem *m_splPath2{nullptr};
     qreal           m_length{0};
+    quint32         m_splinePathId{NULL_ID};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolCutSplinePath::SetSplinePathId(quint32 newSplineId)
+{
+    m_splinePathId = newSplineId;
+}
 
 #endif // VISTOOLCUTSPLINEPATH_H

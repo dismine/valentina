@@ -47,34 +47,61 @@ class VisToolTriangle : public VisLine
     Q_OBJECT // NOLINT
 public:
     explicit VisToolTriangle(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolTriangle() = default;
+    ~VisToolTriangle() override = default;
 
-    virtual void RefreshGeometry() override;
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id) override;
 
-    void         setObject2Id(const quint32 &value);
-    void         setHypotenuseP1Id(const quint32 &value);
-    void         setHypotenuseP2Id(const quint32 &value);
+    void SetObject1Id(quint32 value);
+    void SetObject2Id(quint32 value);
+    void SetHypotenuseP1Id(quint32 value);
+    void SetHypotenuseP2Id(quint32 value);
 
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolTriangle)};
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolTriangle)};
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VisToolTriangle) // NOLINT
-    quint32            object2Id;//axis second point
-    quint32            hypotenuseP1Id;
-    quint32            hypotenuseP2Id;
-    VScaledEllipse    *point;
-    VScaledEllipse    *axisP1;
-    VScaledEllipse    *axisP2;
-    VCurvePathItem    *axis;
-    VScaledEllipse    *hypotenuseP1;
-    VScaledEllipse    *hypotenuseP2;
-    VScaledLine       *foot1;
-    VScaledLine       *foot2;
+    quint32         m_object1Id{NULL_ID};//axis first point
+    quint32         m_object2Id{NULL_ID};//axis second point
+    quint32         m_hypotenuseP1Id{NULL_ID};
+    quint32         m_hypotenuseP2Id{NULL_ID};
+    VScaledEllipse *m_point{nullptr};
+    VScaledEllipse *m_axisP1{nullptr};
+    VScaledEllipse *m_axisP2{nullptr};
+    VCurvePathItem *m_axis{nullptr};
+    VScaledEllipse *m_hypotenuseP1{nullptr};
+    VScaledEllipse *m_hypotenuseP2{nullptr};
+    VScaledLine    *m_foot1{nullptr};
+    VScaledLine    *m_foot2{nullptr};
 
-    void         DrawAimedAxis(VCurvePathItem *item, const QLineF &line, const QColor &color,
-                               Qt::PenStyle style = Qt::SolidLine);
-    void         DrawArrow(const QLineF &axis, QPainterPath &path, const qreal &arrow_size);
+    static void DrawAimedAxis(VCurvePathItem *item, const QLineF &line, const QColor &color,
+                              Qt::PenStyle style = Qt::SolidLine);
+    static void DrawArrow(const QLineF &axis, QPainterPath &path, const qreal &arrow_size);
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolTriangle::SetObject1Id(quint32 value)
+{
+    m_object1Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolTriangle::SetObject2Id(quint32 value)
+{
+    m_object2Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolTriangle::SetHypotenuseP1Id(quint32 value)
+{
+    m_hypotenuseP1Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolTriangle::SetHypotenuseP2Id(quint32 value)
+{
+    m_hypotenuseP2Id = value;
+}
 
 #endif // VISTOOLTRIANGLE_H

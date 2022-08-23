@@ -136,7 +136,7 @@ QString DialogCurveIntersectAxis::GetTypeLine() const
 void DialogCurveIntersectAxis::SetTypeLine(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineType, value);
-    vis->setLineStyle(LineStyleToPenStyle(value));
+    vis->SetLineStyle(LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -194,7 +194,7 @@ void DialogCurveIntersectAxis::setCurveId(quint32 value)
 
     VisToolCurveIntersectAxis *line = qobject_cast<VisToolCurveIntersectAxis *>(vis);
     SCASSERT(line != nullptr)
-    line->setObject1Id(value);
+    line->SetCurveId(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -342,10 +342,10 @@ void DialogCurveIntersectAxis::SaveData()
     VisToolCurveIntersectAxis *line = qobject_cast<VisToolCurveIntersectAxis *>(vis);
     SCASSERT(line != nullptr)
 
-    line->setObject1Id(getCurveId());
+    line->SetCurveId(getCurveId());
     line->setAxisPointId(GetBasePointId());
     line->SetAngle(formulaAngle);
-    line->setLineStyle(LineStyleToPenStyle(GetTypeLine()));
+    line->SetLineStyle(LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();
 }
 

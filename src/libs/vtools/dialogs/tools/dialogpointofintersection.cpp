@@ -37,8 +37,6 @@
 #include "../../visualization/visualization.h"
 #include "../../visualization/line/vistoolpointofintersection.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../ifc/ifcdef.h"
-#include "../vmisc/vabstractapplication.h"
 #include "dialogtool.h"
 #include "ui_dialogpointofintersection.h"
 
@@ -107,7 +105,7 @@ void DialogPointOfIntersection::SetSecondPointId(quint32 value)
 
     VisToolPointOfIntersection *line = qobject_cast<VisToolPointOfIntersection *>(vis);
     SCASSERT(line != nullptr)
-    line->setPoint2Id(value);
+    line->SetPoint2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -131,7 +129,7 @@ void DialogPointOfIntersection::ChosenObject(quint32 id, const SceneObject &type
                     if (SetObject(id, ui->comboBoxFirstPoint, tr("Select point for Y value (horizontal)")))
                     {
                         number++;
-                        line->setObject1Id(id);
+                        line->SetPoint1Id(id);
                         line->RefreshGeometry();
                     }
                     break;
@@ -140,7 +138,7 @@ void DialogPointOfIntersection::ChosenObject(quint32 id, const SceneObject &type
                     {
                         if (SetObject(id, ui->comboBoxSecondPoint, QString()))
                         {
-                            line->setPoint2Id(id);
+                            line->SetPoint2Id(id);
                             line->RefreshGeometry();
                             prepare = true;
                             DialogAccepted();
@@ -162,8 +160,8 @@ void DialogPointOfIntersection::SaveData()
     VisToolPointOfIntersection *line = qobject_cast<VisToolPointOfIntersection *>(vis);
     SCASSERT(line != nullptr)
 
-    line->setObject1Id(GetFirstPointId());
-    line->setPoint2Id(GetSecondPointId());
+    line->SetPoint1Id(GetFirstPointId());
+    line->SetPoint2Id(GetSecondPointId());
     line->RefreshGeometry();
 }
 
@@ -203,7 +201,7 @@ void DialogPointOfIntersection::SetFirstPointId(quint32 value)
 
     VisToolPointOfIntersection *line = qobject_cast<VisToolPointOfIntersection *>(vis);
     SCASSERT(line != nullptr)
-    line->setObject1Id(value);
+    line->SetPoint1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

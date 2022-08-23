@@ -36,7 +36,6 @@
 #include <Qt>
 #include <new>
 
-#include "../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
@@ -45,53 +44,54 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointOfIntersection::VisToolPointOfIntersection(const VContainer *data, QGraphicsItem *parent)
-    : VisLine(data, parent), point2Id(NULL_ID), point(nullptr), axisP1(nullptr), axisP2(nullptr), axis2(nullptr)
+    : VisLine(data, parent)
 {
-    axisP1 = InitPoint(supportColor, this);
-    axisP2 = InitPoint(supportColor, this); //-V656
-    axis2 = InitItem<VScaledLine>(supportColor, this);
+    m_axisP1 = InitPoint(Color(VColor::SupportColor), this);
+    m_axisP2 = InitPoint(Color(VColor::SupportColor), this); //-V656
+    m_axis2 = InitItem<VScaledLine>(Color(VColor::SupportColor), this);
 
-    point = InitPoint(mainColor, this);
+    m_point = InitPoint(Color(VColor::MainColor), this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolPointOfIntersection::RefreshGeometry()
 {
     QLineF axisL1;
-    if (object1Id <= NULL_ID)
+    if (m_point1Id <= NULL_ID)
     {
-        axisL1 = Axis(Visualization::scenePos, 90);
-        DrawLine(this, axisL1, supportColor, Qt::DashLine);
+        axisL1 = Axis(ScenePos(), 90);
+        DrawLine(this, axisL1, Color(VColor::SupportColor), Qt::DashLine);
     }
     else
     {
-        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(axisP1, static_cast<QPointF>(*first), supportColor);
+        const QSharedPointer<VPointF> first = GetData()->GeometricObject<VPointF>(m_point1Id);
+        DrawPoint(m_axisP1, static_cast<QPointF>(*first), Color(VColor::SupportColor));
 
         axisL1 = Axis(static_cast<QPointF>(*first), 90);
-        DrawLine(this, axisL1, supportColor, Qt::DashLine);
+        DrawLine(this, axisL1, Color(VColor::SupportColor), Qt::DashLine);
 
         QLineF axisL2;
-        if (point2Id <= NULL_ID)
+        if (m_point2Id <= NULL_ID)
         {
-            axisL2 = Axis(Visualization::scenePos, 180);
-            ShowIntersection(axisL1, axisL2, supportColor);
+            axisL2 = Axis(ScenePos(), 180);
+            ShowIntersection(axisL1, axisL2, Color(VColor::SupportColor));
         }
         else
         {
-            const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(point2Id);
-            DrawPoint(axisP2, static_cast<QPointF>(*second), supportColor);
+            const QSharedPointer<VPointF> second = GetData()->GeometricObject<VPointF>(m_point2Id);
+            DrawPoint(m_axisP2, static_cast<QPointF>(*second), Color(VColor::SupportColor));
             axisL2 = Axis(static_cast<QPointF>(*second), 180);
-            ShowIntersection(axisL1, axisL2, mainColor);
+            ShowIntersection(axisL1, axisL2, Color(VColor::MainColor));
         }
-        DrawLine(axis2, axisL2, supportColor, Qt::DashLine);
+        DrawLine(m_axis2, axisL2, Color(VColor::SupportColor), Qt::DashLine);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfIntersection::setPoint2Id(const quint32 &value)
+void VisToolPointOfIntersection::VisualMode(quint32 id)
 {
-    point2Id = value;
+    m_point1Id = id;
+    StartVisualMode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -102,11 +102,11 @@ void VisToolPointOfIntersection::ShowIntersection(const QLineF &axis1, const QLi
 
     if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
     {
-        point->setVisible(true);
-        DrawPoint(point, p, color);
+        m_point->setVisible(true);
+        DrawPoint(m_point, p, color);
     }
     else
     {
-        point->setVisible(false);
+        m_point->setVisible(false);
     }
 }

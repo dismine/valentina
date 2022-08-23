@@ -47,16 +47,21 @@ public:
     ~VisToolBisector() override = default;
 
     void RefreshGeometry() override;
-    void setObject2Id(const quint32 &value);
-    void setObject3Id(const quint32 &value);
-    void setLength(const QString &expression);
+    void VisualMode(quint32 id) override;
+
+    void SetPoint1Id(quint32 value);
+    void SetPoint2Id(quint32 value);
+    void SetPoint3Id(quint32 value);
+    void SetLength(const QString &expression);
+
     auto type() const -> int override {return Type;}
     enum {Type = UserType + static_cast<int>(Vis::ToolBisector)};
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VisToolBisector) // NOLINT
-    quint32         m_object2Id{NULL_ID};
-    quint32         m_object3Id{NULL_ID};
+    quint32         m_point1Id{NULL_ID};
+    quint32         m_point2Id{NULL_ID};
+    quint32         m_point3Id{NULL_ID};
     VScaledEllipse *m_point{nullptr};
     VScaledEllipse *m_line1P1{nullptr};
     VScaledEllipse *m_line1P2{nullptr};
@@ -65,5 +70,23 @@ private:
     VScaledLine    *m_line2{nullptr};
     qreal           m_length{0};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolBisector::SetPoint1Id(quint32 value)
+{
+    m_point1Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolBisector::SetPoint2Id(quint32 value)
+{
+    m_point2Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolBisector::SetPoint3Id(quint32 value)
+{
+    m_point3Id = value;
+}
 
 #endif // VISTOOLBISECTOR_H

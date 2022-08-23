@@ -190,8 +190,8 @@ void DialogCutArc::SaveData()
     auto *path = qobject_cast<VisToolCutArc *>(vis);
     SCASSERT(path != nullptr)
 
-    path->setObject1Id(getArcId());
-    path->setLength(m_formula);
+    path->SetArcId(getArcId());
+    path->SetLength(m_formula);
     path->RefreshGeometry();
 }
 
@@ -261,7 +261,7 @@ void DialogCutArc::setArcId(quint32 value)
 
     auto *path = qobject_cast<VisToolCutArc *>(vis);
     SCASSERT(path != nullptr)
-    path->setObject1Id(value);
+    path->SetArcId(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -282,7 +282,7 @@ void DialogCutArc::SetFormula(const QString &value)
 
     auto *path = qobject_cast<VisToolCutArc *>(vis);
     SCASSERT(path != nullptr)
-    path->setLength(m_formula);
+    path->SetLength(m_formula);
 
     MoveCursorToEnd(ui->plainTextEditFormula);
 }

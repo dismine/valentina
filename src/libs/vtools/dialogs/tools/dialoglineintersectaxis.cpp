@@ -144,7 +144,7 @@ QString DialogLineIntersectAxis::GetTypeLine() const
 void DialogLineIntersectAxis::SetTypeLine(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineType, value);
-    vis->setLineStyle(LineStyleToPenStyle(value));
+    vis->SetLineStyle(LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -186,7 +186,7 @@ void DialogLineIntersectAxis::SetBasePointId(quint32 value)
 
     VisToolLineIntersectAxis *line = qobject_cast<VisToolLineIntersectAxis *>(vis);
     SCASSERT(line != nullptr)
-    line->setAxisPointId(value);
+    line->SetAxisPointId(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -202,7 +202,7 @@ void DialogLineIntersectAxis::SetFirstPointId(quint32 value)
 
     VisToolLineIntersectAxis *line = qobject_cast<VisToolLineIntersectAxis *>(vis);
     SCASSERT(line != nullptr)
-    line->setObject1Id(value);
+    line->SetPoint1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -218,7 +218,7 @@ void DialogLineIntersectAxis::SetSecondPointId(quint32 value)
 
     VisToolLineIntersectAxis *line = qobject_cast<VisToolLineIntersectAxis *>(vis);
     SCASSERT(line != nullptr)
-    line->setPoint2Id(value);
+    line->SetPoint2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -301,7 +301,7 @@ void DialogLineIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
                         if (SetObject(id, ui->comboBoxSecondLinePoint, tr("Select axis point")))
                         {
                             number++;
-                            line->setPoint2Id(id);
+                            line->SetPoint2Id(id);
                             line->RefreshGeometry();
                         }
                     }
@@ -317,7 +317,7 @@ void DialogLineIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
                     {
                         if (SetObject(id, ui->comboBoxAxisPoint, QString()))
                         {
-                            line->setAxisPointId(id);
+                            line->SetAxisPointId(id);
                             line->RefreshGeometry();
                             prepare = true;
                         }
@@ -405,11 +405,11 @@ void DialogLineIntersectAxis::SaveData()
     VisToolLineIntersectAxis *line = qobject_cast<VisToolLineIntersectAxis *>(vis);
     SCASSERT(line != nullptr)
 
-    line->setObject1Id(GetFirstPointId());
-    line->setPoint2Id(GetSecondPointId());
-    line->setAxisPointId(GetBasePointId());
+    line->SetPoint1Id(GetFirstPointId());
+    line->SetPoint2Id(GetSecondPointId());
+    line->SetAxisPointId(GetBasePointId());
     line->SetAngle(formulaAngle);
-    line->setLineStyle(LineStyleToPenStyle(GetTypeLine()));
+    line->SetLineStyle(LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();
 }
 

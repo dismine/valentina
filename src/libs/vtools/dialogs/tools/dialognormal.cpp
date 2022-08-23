@@ -217,7 +217,7 @@ void DialogNormal::ChosenObject(quint32 id, const SceneObject &type)
                 {
                     if (SetObject(id, ui->comboBoxSecondPoint, QString()))
                     {
-                        line->setObject2Id(id);
+                        line->SetPoint2Id(id);
                         line->RefreshGeometry();
                         prepare = true;
 
@@ -244,11 +244,11 @@ void DialogNormal::SaveData()
     auto *line = qobject_cast<VisToolNormal *>(vis);
     SCASSERT(line != nullptr)
 
-    line->setObject1Id(GetFirstPointId());
-    line->setObject2Id(GetSecondPointId());
-    line->setLength(m_formula);
+    line->SetPoint1Id(GetFirstPointId());
+    line->SetPoint2Id(GetSecondPointId());
+    line->SetLength(m_formula);
     line->SetAngle(m_angle);
-    line->setLineStyle(LineStyleToPenStyle(GetTypeLine()));
+    line->SetLineStyle(LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();
 }
 
@@ -270,7 +270,7 @@ void DialogNormal::SetSecondPointId(quint32 value)
 
     auto *line = qobject_cast<VisToolNormal *>(vis);
     SCASSERT(line != nullptr)
-    line->setObject2Id(value);
+    line->SetPoint2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -296,7 +296,7 @@ void DialogNormal::SetFirstPointId(quint32 value)
 
     auto *line = qobject_cast<VisToolNormal *>(vis);
     SCASSERT(line != nullptr)
-    line->setObject1Id(value);
+    line->SetPoint1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -332,7 +332,7 @@ void DialogNormal::SetFormula(const QString &value)
 
     auto *line = qobject_cast<VisToolNormal *>(vis);
     SCASSERT(line != nullptr)
-    line->setLength(m_formula);
+    line->SetLength(m_formula);
 
     MoveCursorToEnd(ui->plainTextEditFormula);
 }
@@ -345,7 +345,7 @@ void DialogNormal::SetFormula(const QString &value)
 void DialogNormal::SetTypeLine(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineType, value);
-    vis->setLineStyle(LineStyleToPenStyle(value));
+    vis->SetLineStyle(LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

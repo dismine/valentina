@@ -47,17 +47,21 @@ public:
     ~VisToolNormal() override = default;
 
     void RefreshGeometry() override;
+    void VisualMode(quint32 id) override;
 
-    void setObject2Id(const quint32 &value);
-    void setLength(const QString &expression);
+    void SetPoint1Id(quint32 value);
+    void SetPoint2Id(quint32 value);
+    void SetLength(const QString &expression);
     auto GetAngle() const -> qreal;
     void SetAngle(const qreal &value);
+
     auto type() const -> int override {return Type;}
     enum {Type = UserType + static_cast<int>(Vis::ToolNormal)};
 
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VisToolNormal) // NOLINT
+    quint32         m_object1Id{NULL_ID};
     quint32         m_object2Id{NULL_ID};
     VScaledEllipse *m_point{nullptr};
     VScaledEllipse *m_lineP1{nullptr};
@@ -65,7 +69,18 @@ private:
     VScaledLine    *m_line{nullptr};
     qreal           m_length{0};
     qreal           m_angle{0};
-
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolNormal::SetPoint1Id(quint32 value)
+{
+    m_object1Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolNormal::SetPoint2Id(quint32 value)
+{
+    m_object2Id = value;
+}
 
 #endif // VISTOOLNORMAL_H

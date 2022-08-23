@@ -38,15 +38,26 @@ class VisToolSpecialPoint : public VisLine
     Q_OBJECT // NOLINT
 public:
     explicit VisToolSpecialPoint(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolSpecialPoint();
+    ~VisToolSpecialPoint() override;
 
-    virtual void RefreshGeometry() override;
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolSpecialPoint)};
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id) override;
+
+    void SetPointId(quint32 newPointId);
+
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolSpecialPoint)};
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VisToolSpecialPoint) // NOLINT
-    QPointer<VSimplePoint> m_point;
+    QPointer<VSimplePoint> m_point{};
+    quint32                m_pointId{NULL_ID};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolSpecialPoint::SetPointId(quint32 newPointId)
+{
+    m_pointId = newPointId;
+}
 
 #endif // VISTOOLSPECIALPOINT_H

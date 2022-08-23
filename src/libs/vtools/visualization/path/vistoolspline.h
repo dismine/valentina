@@ -55,8 +55,10 @@ public:
     ~VisToolSpline() override;
 
     void RefreshGeometry() override;
+    void VisualMode(quint32 id) override;
 
-    void SetObject4Id(quint32 value);
+    void SetPoint1Id(quint32 value);
+    void SetPoint4Id(quint32 value);
     void SetAngle1(qreal value);
     void SetAngle2(qreal value);
     void SetKAsm1(qreal value);
@@ -67,14 +69,15 @@ public:
     auto GetP3() const -> QPointF;
 
     auto type() const  -> int override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolSpline)};
+    enum {Type = UserType + static_cast<int>(Vis::ToolSpline)};
 public slots:
     void MouseLeftPressed();
     void MouseLeftReleased();
 
 private:
     Q_DISABLE_COPY_MOVE(VisToolSpline) // NOLINT
-    quint32         m_object4Id{NULL_ID};
+    quint32         m_point1Id{NULL_ID};
+    quint32         m_point4Id{NULL_ID};
     VScaledEllipse *m_point1{nullptr};
     VScaledEllipse *m_point4{nullptr};
     qreal           m_angle1;
@@ -95,5 +98,59 @@ private:
     void DragFirstControlPoint(const QPointF &point);
     void DragLastControlPoint(const QPointF &point);
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolSpline::SetPoint1Id(quint32 value)
+{
+    m_point1Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolSpline::SetPoint4Id(quint32 value)
+{
+    m_point4Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolSpline::SetAngle1(qreal value)
+{
+    m_angle1 = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolSpline::SetAngle2(qreal value)
+{
+    m_angle2 = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolSpline::SetKAsm1(qreal value)
+{
+    m_kAsm1 = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolSpline::SetKAsm2(qreal value)
+{
+    m_kAsm2 = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolSpline::SetKCurve(qreal value)
+{
+    m_kCurve = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VisToolSpline::GetP2() const -> QPointF
+{
+    return m_p2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VisToolSpline::GetP3() const -> QPointF
+{
+    return m_p3;
+}
 
 #endif // VISTOOLSPLINE_H

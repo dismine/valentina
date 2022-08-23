@@ -133,7 +133,9 @@ auto DialogArcWithLength::GetCenter() const -> quint32
 void DialogArcWithLength::SetCenter(const quint32 &value)
 {
     ChangeCurrentData(ui->comboBoxCenter, value);
-    vis->setObject1Id(value);
+    auto *path = qobject_cast<VisToolArcWithLength *>(vis);
+    SCASSERT(path != nullptr)
+    path->SetCenterId(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -156,7 +158,7 @@ void DialogArcWithLength::SetRadius(const QString &value)
 
     auto *path = qobject_cast<VisToolArcWithLength *>(vis);
     SCASSERT(path != nullptr)
-    path->setRadius(radius);
+    path->SetRadius(radius);
 
     MoveCursorToEnd(ui->plainTextEditRadius);
 }
@@ -181,7 +183,7 @@ void DialogArcWithLength::SetF1(const QString &value)
 
     auto *path = qobject_cast<VisToolArcWithLength *>(vis);
     SCASSERT(path != nullptr)
-    path->setF1(f1);
+    path->SetF1(f1);
 
     MoveCursorToEnd(ui->plainTextEditF1);
 }
@@ -206,7 +208,7 @@ void DialogArcWithLength::SetLength(const QString &value)
 
     auto *path = qobject_cast<VisToolArcWithLength *>(vis);
     SCASSERT(path != nullptr)
-    path->setLength(length);
+    path->SetLength(length);
 
     MoveCursorToEnd(ui->plainTextEditLength);
 }
@@ -248,7 +250,7 @@ void DialogArcWithLength::SetApproximationScale(qreal value)
 
     auto *path = qobject_cast<VisToolArcWithLength *>(vis);
     SCASSERT(path != nullptr)
-            path->setApproximationScale(value);
+            path->SetApproximationScale(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -462,11 +464,11 @@ void DialogArcWithLength::SaveData()
     auto *path = qobject_cast<VisToolArcWithLength *>(vis);
     SCASSERT(path != nullptr)
 
-    path->setObject1Id(GetCenter());
-    path->setRadius(radius);
-    path->setF1(f1);
-    path->setLength(length);
-    path->setApproximationScale(ui->doubleSpinBoxApproximationScale->value());
+    path->SetCenterId(GetCenter());
+    path->SetRadius(radius);
+    path->SetF1(f1);
+    path->SetLength(length);
+    path->SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
     path->RefreshGeometry();
 }
 

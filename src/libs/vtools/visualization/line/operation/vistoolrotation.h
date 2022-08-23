@@ -39,7 +39,6 @@
 #include <QVector>
 #include <QtGlobal>
 
-#include "../ifc/ifcdef.h"
 #include "../vmisc/def.h"
 #include "visoperation.h"
 
@@ -48,27 +47,34 @@ class VisToolRotation : public VisOperation
     Q_OBJECT // NOLINT
 public:
     explicit VisToolRotation(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolRotation();
+    ~VisToolRotation() override = default;
 
-    virtual void   RefreshGeometry() override;
+    void RefreshGeometry() override;
 
     void SetOriginPointId(quint32 value);
 
-    QString Angle() const;
-    void    SetAngle(const QString &expression);
+    auto Angle() const -> QString;
+    void SetAngle(const QString &expression);
 
-    virtual int type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolRotation)};
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolRotation)};
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VisToolRotation) // NOLINT
-    qreal           angle;
-    VScaledEllipse *point;
-    VCurvePathItem *angleArc;
-    VScaledLine    *xAxis;
+    qreal           m_angle{INT_MIN};
+    VScaledEllipse *m_point{nullptr};
+    VCurvePathItem *m_angleArc{nullptr};
+    VScaledLine    *m_xAxis{nullptr};
+    quint32         m_originPointId{NULL_ID};
 
     template <class Item>
-    int AddCurve(qreal angle, const QPointF &origin, quint32 id, int i);
+    auto AddCurve(qreal angle, const QPointF &origin, quint32 id, int i) -> int;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolRotation::SetOriginPointId(quint32 value)
+{
+    m_originPointId = value;
+}
 
 #endif // VISTOOLROTATION_H

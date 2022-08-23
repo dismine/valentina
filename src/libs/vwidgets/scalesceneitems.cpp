@@ -34,14 +34,12 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VScaledLine::VScaledLine(QGraphicsItem *parent)
-    : QGraphicsLineItem(parent),
-      m_isBoldLine(true)
+    : QGraphicsLineItem(parent)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VScaledLine::VScaledLine(const QLineF &line, QGraphicsItem *parent)
-    : QGraphicsLineItem(line, parent),
-      m_isBoldLine(true)
+    : QGraphicsLineItem(line, parent)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -55,18 +53,6 @@ void VScaledLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     setPen(lPen);
 
     PaintWithFixItemHighlightSelected<QGraphicsLineItem>(this, painter, option, widget);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VScaledLine::IsBoldLine() const
-{
-    return m_isBoldLine;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VScaledLine::SetBoldLine(bool bold)
-{
-    m_isBoldLine = bold;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -90,16 +76,4 @@ void VScaledEllipse::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     }
 
     PaintWithFixItemHighlightSelected<QGraphicsEllipseItem>(this, painter, option, widget);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VScaledEllipse::PointMode() const
-{
-    return m_pointMode;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VScaledEllipse::SetPointMode(bool newHoldSize)
-{
-    m_pointMode = newHoldSize;
 }

@@ -327,11 +327,11 @@ void VToolTrueDarts::SetVisualization()
         auto *visual = qobject_cast<VisToolTrueDarts *>(vis);
         SCASSERT(visual != nullptr)
 
-        visual->setObject1Id(baseLineP1Id);
-        visual->setObject2Id(baseLineP2Id);
-        visual->setD1PointId(dartP1Id);
-        visual->setD2PointId(dartP2Id);
-        visual->setD3PointId(dartP3Id);
+        visual->SetBaseLineP1Id(baseLineP1Id);
+        visual->SetBaseLineP2Id(baseLineP2Id);
+        visual->SetD1PointId(dartP1Id);
+        visual->SetD2PointId(dartP2Id);
+        visual->SetD3PointId(dartP3Id);
         visual->RefreshGeometry();
     }
 }

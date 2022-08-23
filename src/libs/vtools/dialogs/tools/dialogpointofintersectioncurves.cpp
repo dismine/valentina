@@ -117,7 +117,7 @@ void DialogPointOfIntersectionCurves::SetFirstCurveId(quint32 value)
 
     auto point = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
     SCASSERT(point != nullptr)
-    point->setObject1Id(value);
+    point->SetCurve1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -133,7 +133,7 @@ void DialogPointOfIntersectionCurves::SetSecondCurveId(quint32 value)
 
     auto point = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
     SCASSERT(point != nullptr)
-    point->setObject2Id(value);
+    point->SetCurve2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -152,7 +152,7 @@ void DialogPointOfIntersectionCurves::SetVCrossPoint(VCrossCurvesPoint vP)
 
         auto point = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
         SCASSERT(point != nullptr)
-        point->setVCrossPoint(vP);
+        point->SetVCrossPoint(vP);
     }
 }
 
@@ -172,7 +172,7 @@ void DialogPointOfIntersectionCurves::SetHCrossPoint(HCrossCurvesPoint hP)
 
         auto point = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
         SCASSERT(point != nullptr)
-        point->setHCrossPoint(hP);
+        point->SetHCrossPoint(hP);
     }
 }
 
@@ -204,7 +204,7 @@ void DialogPointOfIntersectionCurves::ChosenObject(quint32 id, const SceneObject
                         if (SetObject(id, ui->comboBoxCurve2, QString()))
                         {
                             number = 0;
-                            point->setObject2Id(id);
+                            point->SetCurve2Id(id);
                             point->RefreshGeometry();
                             prepare = true;
                             DialogAccepted();
@@ -232,10 +232,10 @@ void DialogPointOfIntersectionCurves::SaveData()
     auto point = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
     SCASSERT(point != nullptr)
 
-    point->setObject1Id(GetFirstCurveId());
-    point->setObject2Id(GetSecondCurveId());
-    point->setVCrossPoint(GetVCrossPoint());
-    point->setHCrossPoint(GetHCrossPoint());
+    point->SetCurve1Id(GetFirstCurveId());
+    point->SetCurve2Id(GetSecondCurveId());
+    point->SetVCrossPoint(GetVCrossPoint());
+    point->SetHCrossPoint(GetHCrossPoint());
     point->RefreshGeometry();
 }
 

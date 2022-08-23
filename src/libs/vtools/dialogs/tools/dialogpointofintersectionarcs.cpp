@@ -109,7 +109,7 @@ void DialogPointOfIntersectionArcs::SetFirstArcId(quint32 value)
 
     VisToolPointOfIntersectionArcs *point = qobject_cast<VisToolPointOfIntersectionArcs *>(vis);
     SCASSERT(point != nullptr)
-    point->setArc1Id(value);
+    point->SetArc1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -125,7 +125,7 @@ void DialogPointOfIntersectionArcs::SetSecondArcId(quint32 value)
 
     VisToolPointOfIntersectionArcs *point = qobject_cast<VisToolPointOfIntersectionArcs *>(vis);
     SCASSERT(point != nullptr)
-    point->setArc2Id(value);
+    point->SetArc2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -144,7 +144,7 @@ void DialogPointOfIntersectionArcs::SetCrossArcPoint(CrossCirclesPoint p)
 
         VisToolPointOfIntersectionArcs *point = qobject_cast<VisToolPointOfIntersectionArcs *>(vis);
         SCASSERT(point != nullptr)
-        point->setCrossPoint(p);
+        point->SetCrossPoint(p);
     }
 }
 
@@ -173,7 +173,7 @@ void DialogPointOfIntersectionArcs::ChosenObject(quint32 id, const SceneObject &
                         if (SetObject(id, ui->comboBoxArc2, QString()))
                         {
                             number = 0;
-                            point->setArc2Id(id);
+                            point->SetArc2Id(id);
                             point->RefreshGeometry();
                             prepare = true;
                             DialogAccepted();
@@ -220,9 +220,9 @@ void DialogPointOfIntersectionArcs::SaveData()
     VisToolPointOfIntersectionArcs *point = qobject_cast<VisToolPointOfIntersectionArcs *>(vis);
     SCASSERT(point != nullptr)
 
-    point->setArc1Id(GetFirstArcId());
-    point->setArc2Id(GetSecondArcId());
-    point->setCrossPoint(GetCrossArcPoint());
+    point->SetArc1Id(GetFirstArcId());
+    point->SetArc2Id(GetSecondArcId());
+    point->SetCrossPoint(GetCrossArcPoint());
     point->RefreshGeometry();
 }
 

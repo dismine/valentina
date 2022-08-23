@@ -47,9 +47,13 @@ public:
     ~VisToolShoulderPoint() override = default;
 
     void RefreshGeometry() override;
-    void setLineP1Id(const quint32 &value);
-    void setLineP2Id(const quint32 &value);
-    void setLength(const QString &expression);
+    void VisualMode(quint32 id) override;
+
+    void SetPoint3Id(quint32 newPoint3Id);
+    void SetLineP1Id(quint32 value);
+    void SetLineP2Id(quint32 value);
+    void SetLength(const QString &expression);
+
     auto type() const -> int override {return Type;}
     enum {Type = UserType + static_cast<int>(Vis::ToolShoulderPoint)};
 private:
@@ -65,6 +69,25 @@ private:
     VScaledLine    *m_line2{nullptr};
     VScaledLine    *m_line3{nullptr};
     qreal           m_length{0};
+    quint32         m_point3Id{NULL_ID};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolShoulderPoint::SetPoint3Id(quint32 newPoint3Id)
+{
+    m_point3Id = newPoint3Id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolShoulderPoint::SetLineP1Id(quint32 value)
+{
+    m_lineP1Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolShoulderPoint::SetLineP2Id(quint32 value)
+{
+    m_lineP2Id = value;
+}
 
 #endif // VISTOOLSHOULDERPOINT_H

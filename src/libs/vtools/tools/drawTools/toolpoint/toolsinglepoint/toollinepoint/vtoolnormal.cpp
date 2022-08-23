@@ -271,12 +271,12 @@ void VToolNormal::SetVisualization()
         auto *visual = qobject_cast<VisToolNormal *>(vis);
         SCASSERT(visual != nullptr)
 
-        visual->setObject1Id(basePointId);
-        visual->setObject2Id(secondPointId);
-        visual->setLength(VAbstractApplication::VApp()->TrVars()
+        visual->SetPoint1Id(basePointId);
+        visual->SetPoint2Id(secondPointId);
+        visual->SetLength(VAbstractApplication::VApp()->TrVars()
                           ->FormulaToUser(formulaLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
         visual->SetAngle(angle);
-        visual->setLineStyle(LineStyleToPenStyle(m_lineType));
+        visual->SetLineStyle(LineStyleToPenStyle(m_lineType));
         visual->RefreshGeometry();
     }
 }

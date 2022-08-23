@@ -35,85 +35,85 @@
 #include <QPointF>
 #include <QSharedPointer>
 #include <new>
+#include <QtMath>
 
 #include "../../tools/drawTools/toolpoint/toolsinglepoint/vtooltriangle.h"
-#include "../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vmisc/vmath.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
 #include "visline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolTriangle::VisToolTriangle(const VContainer *data, QGraphicsItem *parent)
-    :VisLine(data, parent), object2Id(NULL_ID), hypotenuseP1Id(NULL_ID), hypotenuseP2Id(NULL_ID), point(nullptr),
-      axisP1(nullptr), axisP2(nullptr), axis(nullptr), hypotenuseP1(nullptr), hypotenuseP2(nullptr), foot1(nullptr),
-      foot2(nullptr)
+    :VisLine(data, parent)
 {
-    axisP1 = InitPoint(supportColor, this);
-    axisP2 = InitPoint(supportColor, this);
-    axis = InitItem<VCurvePathItem>(supportColor, this);
-    hypotenuseP1 = InitPoint(supportColor, this);
-    hypotenuseP2 = InitPoint(supportColor, this);
-    foot1 = InitItem<VScaledLine>(supportColor, this);
-    foot2 = InitItem<VScaledLine>(supportColor, this); //-V656
+    m_axisP1 = InitPoint(Color(VColor::SupportColor), this);
+    m_axisP2 = InitPoint(Color(VColor::SupportColor), this);
+    m_axis = InitItem<VCurvePathItem>(Color(VColor::SupportColor), this);
+    m_hypotenuseP1 = InitPoint(Color(VColor::SupportColor), this);
+    m_hypotenuseP2 = InitPoint(Color(VColor::SupportColor), this);
+    m_foot1 = InitItem<VScaledLine>(Color(VColor::SupportColor), this);
+    m_foot2 = InitItem<VScaledLine>(Color(VColor::SupportColor), this); //-V656
 
-    point = InitPoint(mainColor, this);
+    m_point = InitPoint(Color(VColor::MainColor), this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolTriangle::RefreshGeometry()
 {
-    if (object1Id > NULL_ID)
+    if (m_object1Id > NULL_ID)
     {
-        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(axisP1, static_cast<QPointF>(*first), supportColor);
+        const QSharedPointer<VPointF> first = GetData()->GeometricObject<VPointF>(m_object1Id);
+        DrawPoint(m_axisP1, static_cast<QPointF>(*first), Color(VColor::SupportColor));
 
-        if (object2Id <= NULL_ID)
+        if (m_object2Id <= NULL_ID)
         {
-            DrawAimedAxis(axis, QLineF(static_cast<QPointF>(*first), Visualization::scenePos), supportColor);
+            DrawAimedAxis(m_axis, QLineF(static_cast<QPointF>(*first), ScenePos()), Color(VColor::SupportColor));
         }
         else
         {
-            const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(object2Id);
-            DrawPoint(axisP2, static_cast<QPointF>(*second), supportColor);
+            const QSharedPointer<VPointF> second = GetData()->GeometricObject<VPointF>(m_object2Id);
+            DrawPoint(m_axisP2, static_cast<QPointF>(*second), Color(VColor::SupportColor));
 
-            DrawAimedAxis(axis, QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)), supportColor);
+            DrawAimedAxis(m_axis, QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)),
+                          Color(VColor::SupportColor));
 
-            if (hypotenuseP1Id > NULL_ID)
+            if (m_hypotenuseP1Id > NULL_ID)
             {
-                const QSharedPointer<VPointF> third = Visualization::data->GeometricObject<VPointF>(hypotenuseP1Id);
-                DrawPoint(hypotenuseP1, static_cast<QPointF>(*third), supportColor);
+                const QSharedPointer<VPointF> third = GetData()->GeometricObject<VPointF>(m_hypotenuseP1Id);
+                DrawPoint(m_hypotenuseP1, static_cast<QPointF>(*third), Color(VColor::SupportColor));
 
-                if (hypotenuseP2Id <= NULL_ID)
+                if (m_hypotenuseP2Id <= NULL_ID)
                 {
-                    DrawLine(this, QLineF(static_cast<QPointF>(*third), Visualization::scenePos), supportColor,
+                    DrawLine(this, QLineF(static_cast<QPointF>(*third), ScenePos()), Color(VColor::SupportColor),
                              Qt::DashLine);
 
                     QPointF trPoint;
                     VToolTriangle::FindPoint(static_cast<QPointF>(*first), static_cast<QPointF>(*second),
-                                             static_cast<QPointF>(*third), Visualization::scenePos, &trPoint);
-                    DrawPoint(point, trPoint, mainColor);
+                                             static_cast<QPointF>(*third), ScenePos(), &trPoint);
+                    DrawPoint(m_point, trPoint, Color(VColor::MainColor));
 
-                    DrawLine(foot1, QLineF(static_cast<QPointF>(*third), trPoint), supportColor, Qt::DashLine);
-                    DrawLine(foot2, QLineF(Visualization::scenePos, trPoint), supportColor, Qt::DashLine);
+                    DrawLine(m_foot1, QLineF(static_cast<QPointF>(*third), trPoint), Color(VColor::SupportColor),
+                             Qt::DashLine);
+                    DrawLine(m_foot2, QLineF(ScenePos(), trPoint), Color(VColor::SupportColor), Qt::DashLine);
                 }
                 else
                 {
-                    const QSharedPointer<VPointF> forth = Visualization::data->GeometricObject<VPointF>(hypotenuseP2Id);
-                    DrawPoint(hypotenuseP2, static_cast<QPointF>(*forth), supportColor);
+                    const QSharedPointer<VPointF> forth = GetData()->GeometricObject<VPointF>(m_hypotenuseP2Id);
+                    DrawPoint(m_hypotenuseP2, static_cast<QPointF>(*forth), Color(VColor::SupportColor));
 
-                    DrawLine(this, QLineF(static_cast<QPointF>(*third), static_cast<QPointF>(*forth)), supportColor,
-                                          Qt::DashLine);
+                    DrawLine(this, QLineF(static_cast<QPointF>(*third), static_cast<QPointF>(*forth)),
+                             Color(VColor::SupportColor), Qt::DashLine);
 
                     QPointF trPoint;
                     VToolTriangle::FindPoint(static_cast<QPointF>(*first), static_cast<QPointF>(*second),
                                              static_cast<QPointF>(*third), static_cast<QPointF>(*forth), &trPoint);
-                    DrawPoint(point, trPoint, mainColor);
+                    DrawPoint(m_point, trPoint, Color(VColor::MainColor));
 
-                    DrawLine(foot1, QLineF(static_cast<QPointF>(*third), trPoint), supportColor, Qt::DashLine);
-                    DrawLine(foot2, QLineF(static_cast<QPointF>(*forth), trPoint), supportColor, Qt::DashLine);
+                    DrawLine(m_foot1, QLineF(static_cast<QPointF>(*third), trPoint), Color(VColor::SupportColor),
+                             Qt::DashLine);
+                    DrawLine(m_foot2, QLineF(static_cast<QPointF>(*forth), trPoint), Color(VColor::SupportColor),
+                             Qt::DashLine);
                 }
             }
         }
@@ -121,21 +121,10 @@ void VisToolTriangle::RefreshGeometry()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolTriangle::setObject2Id(const quint32 &value)
+void VisToolTriangle::VisualMode(quint32 id)
 {
-    object2Id = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolTriangle::setHypotenuseP1Id(const quint32 &value)
-{
-    hypotenuseP1Id = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolTriangle::setHypotenuseP2Id(const quint32 &value)
-{
-    hypotenuseP2Id = value;
+    m_object1Id = id;
+    StartVisualMode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

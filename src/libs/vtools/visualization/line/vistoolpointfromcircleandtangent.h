@@ -46,29 +46,50 @@ class VisToolPointFromCircleAndTangent : public VisLine
     Q_OBJECT // NOLINT
 public:
     explicit VisToolPointFromCircleAndTangent(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolPointFromCircleAndTangent() = default;
+    ~VisToolPointFromCircleAndTangent() override = default;
 
-    virtual void RefreshGeometry() override;
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id) override;
 
-    void         setObject2Id(const quint32 &value);
-    void         setCRadius(const QString &value);
-    void         setCrossPoint(const CrossCirclesPoint &value);
+    void SetPointId(quint32 value);
+    void SetCenterId(quint32 value);
+    void SetCRadius(const QString &value);
+    void SetCrossPoint(CrossCirclesPoint value);
 
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolPointFromCircleAndTangent)};
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolPointFromCircleAndTangent)};
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VisToolPointFromCircleAndTangent) // NOLINT
-    quint32               object2Id;
-    qreal                 cRadius;
-    CrossCirclesPoint     crossPoint;
-    VScaledEllipse       *point;
-    VScaledEllipse       *tangent;
-    VScaledEllipse       *cCenter;
-    QGraphicsEllipseItem *cPath;
-    VScaledLine          *tangent2;
+    quint32               m_centerId{NULL_ID};
+    qreal                 m_cRadius{0};
+    CrossCirclesPoint     m_crossPoint{CrossCirclesPoint::FirstPoint};
+    VScaledEllipse       *m_point{nullptr};
+    VScaledEllipse       *m_tangent{nullptr};
+    VScaledEllipse       *m_cCenter{nullptr};
+    QGraphicsEllipseItem *m_cPath{nullptr};
+    VScaledLine          *m_tangent2{nullptr};
+    quint32               m_pointId{NULL_ID};
 
     void FindRays(const QPointF &p, const QPointF &center, qreal radius);
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolPointFromCircleAndTangent::SetPointId(quint32 value)
+{
+    m_pointId = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolPointFromCircleAndTangent::SetCenterId(quint32 value)
+{
+    m_centerId = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolPointFromCircleAndTangent::SetCrossPoint(CrossCirclesPoint value)
+{
+    m_crossPoint = value;
+}
 
 #endif // VISTOOLPOINTFROMCIRCLEANDTANGENT_H

@@ -34,7 +34,6 @@
 
 #include "../../visualization/visualization.h"
 #include "../../visualization/line/vistoolpointfromarcandtangent.h"
-#include "../vmisc/vabstractapplication.h"
 #include "dialogs/tools/dialogtool.h"
 #include "ui_dialogpointfromarcandtangent.h"
 
@@ -102,7 +101,7 @@ void DialogPointFromArcAndTangent::SetArcId(quint32 value)
 
     VisToolPointFromArcAndTangent *point = qobject_cast<VisToolPointFromArcAndTangent *>(vis);
     SCASSERT(point != nullptr)
-    point->setArcId(value);
+    point->SetArcId(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -116,9 +115,9 @@ void DialogPointFromArcAndTangent::SetTangentPointId(quint32 value)
 {
     setCurrentPointId(ui->comboBoxTangentPoint, value);
 
-    VisToolPointFromArcAndTangent *point = qobject_cast<VisToolPointFromArcAndTangent *>(vis);
+    auto *point = qobject_cast<VisToolPointFromArcAndTangent *>(vis);
     SCASSERT(point != nullptr)
-    point->setObject1Id(value);
+    point->SetPointId(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -137,7 +136,7 @@ void DialogPointFromArcAndTangent::SetCrossCirclesPoint(CrossCirclesPoint p)
 
         VisToolPointFromArcAndTangent *point = qobject_cast<VisToolPointFromArcAndTangent *>(vis);
         SCASSERT(point != nullptr)
-        point->setCrossPoint(p);
+        point->SetCrossPoint(p);
     }
 }
 
@@ -169,7 +168,7 @@ void DialogPointFromArcAndTangent::ChosenObject(quint32 id, const SceneObject &t
                         if (SetObject(id, ui->comboBoxArc, QString()))
                         {
                             number = 0;
-                            point->setArcId(id);
+                            point->SetArcId(id);
                             point->RefreshGeometry();
                             prepare = true;
                             DialogAccepted();
@@ -194,12 +193,12 @@ void DialogPointFromArcAndTangent::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
 
-    VisToolPointFromArcAndTangent *point = qobject_cast<VisToolPointFromArcAndTangent *>(vis);
+    auto *point = qobject_cast<VisToolPointFromArcAndTangent *>(vis);
     SCASSERT(point != nullptr)
 
-    point->setObject1Id(GetTangentPointId());
-    point->setArcId(GetArcId());
-    point->setCrossPoint(GetCrossCirclesPoint());
+    point->SetPointId(GetTangentPointId());
+    point->SetArcId(GetArcId());
+    point->SetCrossPoint(GetCrossCirclesPoint());
     point->RefreshGeometry();
 }
 

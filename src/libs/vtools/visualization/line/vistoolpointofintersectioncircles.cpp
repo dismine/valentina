@@ -38,7 +38,6 @@
 #include "../../tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncircles.h"
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
-#include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/global.h"
 #include "../visualization.h"
 #include "visline.h"
@@ -56,30 +55,30 @@ VisToolPointOfIntersectionCircles::VisToolPointOfIntersectionCircles(const VCont
     m_c2Path = InitItem<VScaledEllipse>(Qt::darkRed, this);
     m_c2Path->SetPointMode(false);
 
-    m_point = InitPoint(mainColor, this);
+    m_point = InitPoint(Color(VColor::MainColor), this);
     m_point->setZValue(1);
 
-    m_c1Center = InitPoint(supportColor, this);
-    m_c2Center = InitPoint(supportColor, this);  //-V656
+    m_c1Center = InitPoint(Color(VColor::SupportColor), this);
+    m_c2Center = InitPoint(Color(VColor::SupportColor), this);  //-V656
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolPointOfIntersectionCircles::RefreshGeometry()
 {
-    if (object1Id > NULL_ID)
+    if (m_circle1Id > NULL_ID)
     {
-        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(m_c1Center, static_cast<QPointF>(*first), supportColor);
+        const QSharedPointer<VPointF> first = GetData()->GeometricObject<VPointF>(m_circle1Id);
+        DrawPoint(m_c1Center, static_cast<QPointF>(*first), Color(VColor::SupportColor));
 
         if (m_c1Radius > 0)
         {
             m_c1Path->setRect(PointRect(m_c1Radius));
             DrawPoint(m_c1Path, static_cast<QPointF>(*first), Qt::darkGreen, Qt::DashLine);
 
-            if (m_object2Id > NULL_ID)
+            if (m_circle2Id > NULL_ID)
             {
-                const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(m_object2Id);
-                DrawPoint(m_c2Center, static_cast<QPointF>(*second), supportColor);
+                const QSharedPointer<VPointF> second = GetData()->GeometricObject<VPointF>(m_circle2Id);
+                DrawPoint(m_c2Center, static_cast<QPointF>(*second), Color(VColor::SupportColor));
 
                 if (m_c2Radius > 0)
                 {
@@ -90,11 +89,11 @@ void VisToolPointOfIntersectionCircles::RefreshGeometry()
                     VToolPointOfIntersectionCircles::FindPoint(static_cast<QPointF>(*first),
                                                                static_cast<QPointF>(*second),
                                                                m_c1Radius, m_c2Radius, m_crossPoint, &fPoint);
-                    DrawPoint(m_point, fPoint, mainColor);
+                    DrawPoint(m_point, fPoint, Color(VColor::MainColor));
                 }
-                else if (mode == Mode::Creation)
+                else if (GetMode() == Mode::Creation)
                 {
-                    QLineF radiusLine (static_cast<QPointF>(*second), Visualization::scenePos);
+                    QLineF radiusLine (static_cast<QPointF>(*second), ScenePos());
                     const qreal length = radiusLine.length();
 
                     m_c2Path->setRect(PointRect(length));
@@ -104,66 +103,48 @@ void VisToolPointOfIntersectionCircles::RefreshGeometry()
                     VToolPointOfIntersectionCircles::FindPoint(static_cast<QPointF>(*first),
                                                                static_cast<QPointF>(*second),
                                                                m_c1Radius, length, m_crossPoint, &fPoint);
-                    DrawPoint(m_point, fPoint, mainColor);
+                    DrawPoint(m_point, fPoint, Color(VColor::MainColor));
 
                     const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-                    Visualization::toolTip = tr("Radius = %1%2; "
-                                                "<b>Mouse click</b> - finish selecting the second radius, "
-                                                "<b>%3</b> - skip")
-                                                 .arg(NumberToUser(length), prefix, VModifierKey::EnterKey());
+                    SetToolTip(tr("Radius = %1%2; "
+                                  "<b>Mouse click</b> - finish selecting the second radius, "
+                                  "<b>%3</b> - skip")
+                                   .arg(NumberToUser(length), prefix, VModifierKey::EnterKey()));
                 }
             }
         }
-        else if (mode == Mode::Creation)
+        else if (GetMode() == Mode::Creation)
         {
-            QLineF radiusLine (static_cast<QPointF>(*first), Visualization::scenePos);
+            QLineF radiusLine (static_cast<QPointF>(*first), ScenePos());
             const qreal length = radiusLine.length();
 
             m_c1Path->setRect(PointRect(length));
             DrawPoint(m_c1Path, static_cast<QPointF>(*first), Qt::darkGreen, Qt::DashLine);
 
             const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-            Visualization::toolTip = tr("Radius = %1%2; "
-                                        "<b>Mouse click</b> - finish selecting the first radius, "
-                                        "<b>%3</b> - skip")
-                                         .arg(NumberToUser(length), prefix, VModifierKey::EnterKey());
+            SetToolTip(tr("Radius = %1%2; "
+                          "<b>Mouse click</b> - finish selecting the first radius, "
+                          "<b>%3</b> - skip")
+                           .arg(NumberToUser(length), prefix, VModifierKey::EnterKey()));
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfIntersectionCircles::VisualMode(const quint32 &id)
+void VisToolPointOfIntersectionCircles::VisualMode(quint32 id)
 {
-    auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
-    SCASSERT(scene != nullptr)
-
-    this->object1Id = id;
-    Visualization::scenePos = scene->getScenePos();
-    RefreshGeometry();
-
-    AddOnScene();
+    m_circle1Id = id;
+    StartVisualMode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfIntersectionCircles::setObject2Id(const quint32 &value)
+void VisToolPointOfIntersectionCircles::SetC1Radius(const QString &value)
 {
-    m_object2Id = value;
+    m_c1Radius = FindLengthFromUser(value, GetData()->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfIntersectionCircles::setC1Radius(const QString &value)
+void VisToolPointOfIntersectionCircles::SetC2Radius(const QString &value)
 {
-    m_c1Radius = FindLengthFromUser(value, Visualization::data->DataVariables());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfIntersectionCircles::setC2Radius(const QString &value)
-{
-    m_c2Radius = FindLengthFromUser(value, Visualization::data->DataVariables());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfIntersectionCircles::setCrossPoint(const CrossCirclesPoint &value)
-{
-    m_crossPoint = value;
+    m_c2Radius = FindLengthFromUser(value, GetData()->DataVariables());
 }

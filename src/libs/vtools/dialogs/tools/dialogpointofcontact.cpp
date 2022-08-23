@@ -216,7 +216,7 @@ void DialogPointOfContact::ChosenObject(quint32 id, const SceneObject &type)
                         if (SetObject(id, ui->comboBoxSecondPoint, tr("Select point of center of arc")))
                         {
                             number++;
-                            line->setLineP2Id(id);
+                            line->SetLineP2Id(id);
                             line->RefreshGeometry();
                         }
                     }
@@ -232,7 +232,7 @@ void DialogPointOfContact::ChosenObject(quint32 id, const SceneObject &type)
                     {
                         if (SetObject(id, ui->comboBoxCenter, QString()))
                         {
-                            line->setRadiusId(id);
+                            line->SetRadiusId(id);
                             line->RefreshGeometry();
                             prepare = true;
                             this->setModal(true);
@@ -257,10 +257,10 @@ void DialogPointOfContact::SaveData()
     VisToolPointOfContact *line = qobject_cast<VisToolPointOfContact *>(vis);
     SCASSERT(line != nullptr)
 
-    line->setObject1Id(GetFirstPoint());
-    line->setLineP2Id(GetSecondPoint());
-    line->setRadiusId(getCenter());
-    line->setRadius(radius);
+    line->SetLineP1Id(GetFirstPoint());
+    line->SetLineP2Id(GetSecondPoint());
+    line->SetRadiusId(getCenter());
+    line->SetRadius(radius);
     line->RefreshGeometry();
 }
 
@@ -282,7 +282,7 @@ void DialogPointOfContact::SetSecondPoint(quint32 value)
 
     VisToolPointOfContact *line = qobject_cast<VisToolPointOfContact *>(vis);
     SCASSERT(line != nullptr)
-    line->setLineP2Id(value);
+    line->SetLineP2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -296,7 +296,7 @@ void DialogPointOfContact::SetFirstPoint(quint32 value)
 
     VisToolPointOfContact *line = qobject_cast<VisToolPointOfContact *>(vis);
     SCASSERT(line != nullptr)
-    line->setObject1Id(value);
+    line->SetLineP1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -310,7 +310,7 @@ void DialogPointOfContact::setCenter(quint32 value)
 
     VisToolPointOfContact *line = qobject_cast<VisToolPointOfContact *>(vis);
     SCASSERT(line != nullptr)
-    line->setRadiusId(value);
+    line->SetRadiusId(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -331,7 +331,7 @@ void DialogPointOfContact::setRadius(const QString &value)
 
     VisToolPointOfContact *line = qobject_cast<VisToolPointOfContact *>(vis);
     SCASSERT(line != nullptr)
-    line->setRadius(radius);
+    line->SetRadius(radius);
 
     MoveCursorToEnd(ui->plainTextEditFormula);
 }

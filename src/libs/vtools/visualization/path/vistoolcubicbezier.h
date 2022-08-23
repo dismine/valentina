@@ -44,27 +44,53 @@ class VisToolCubicBezier : public VisPath
     Q_OBJECT // NOLINT
 public:
     explicit VisToolCubicBezier(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolCubicBezier() Q_DECL_EQ_DEFAULT;
+    ~VisToolCubicBezier() override = default;
 
-    virtual void RefreshGeometry() override;
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id) override;
 
-    void         setObject2Id(const quint32 &value);
-    void         setObject3Id(const quint32 &value);
-    void         setObject4Id(const quint32 &value);
+    void SetPoint1Id(quint32 value);
+    void SetPoint2Id(quint32 value);
+    void SetPoint3Id(quint32 value);
+    void SetPoint4Id(quint32 value);
 
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolCubicBezier)};
-protected:
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolCubicBezier)};
+private:
     Q_DISABLE_COPY_MOVE(VisToolCubicBezier) // NOLINT
-    quint32         object2Id;
-    quint32         object3Id;
-    quint32         object4Id;
-    VScaledEllipse *point1;
-    VScaledEllipse *point2;
-    VScaledEllipse *point3;
-    VScaledEllipse *point4;
-    VScaledLine    *helpLine1;
-    VScaledLine    *helpLine2;
+    quint32         m_point1Id{NULL_ID};
+    quint32         m_point2Id{NULL_ID};
+    quint32         m_point3Id{NULL_ID};
+    quint32         m_point4Id{NULL_ID};
+    VScaledEllipse *m_point1{nullptr};
+    VScaledEllipse *m_point2{nullptr};
+    VScaledEllipse *m_point3{nullptr};
+    VScaledEllipse *m_point4{nullptr};
+    VScaledLine    *m_helpLine1{nullptr};
+    VScaledLine    *m_helpLine2{nullptr};
 };
 
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolCubicBezier::SetPoint1Id(quint32 value)
+{
+    m_point1Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolCubicBezier::SetPoint2Id(quint32 value)
+{
+    m_point2Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolCubicBezier::SetPoint3Id(quint32 value)
+{
+    m_point3Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolCubicBezier::SetPoint4Id(quint32 value)
+{
+    m_point4Id = value;
+}
 #endif // VISTOOLCUBICBEZIER_H

@@ -33,20 +33,10 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPiece::VisToolPiece(const VContainer *data, QGraphicsItem *parent)
-    : VisPath(data, parent),
-      m_points(),
-      m_curves(),
-      m_line1(nullptr),
-      m_line2(nullptr),
-      m_piece(),
-      m_pieceCached(false),
-      m_cachedMainPath(),
-      m_cachedNodes(),
-      m_cachedMainPathPoints(),
-      m_cachedCurvesPath()
+    : VisPath(data, parent)
 {
-    m_line1 = InitItem<VScaledLine>(supportColor, this);
-    m_line2 = InitItem<VScaledLine>(supportColor, this);
+    m_line1 = InitItem<VScaledLine>(Color(VColor::SupportColor), this);
+    m_line2 = InitItem<VScaledLine>(Color(VColor::SupportColor), this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -58,46 +48,53 @@ void VisToolPiece::RefreshGeometry()
     {
         if (not m_pieceCached)
         {
-            m_cachedNodes = m_piece.MainPathNodePoints(Visualization::data);
-            if (mode == Mode::Creation)
+            m_cachedNodes = m_piece.MainPathNodePoints(GetData());
+            if (GetMode() == Mode::Creation)
             {
-                m_cachedCurvesPath = m_piece.CurvesPainterPath(Visualization::data);
-                m_cachedMainPathPoints = m_piece.MainPathPoints(Visualization::data);
+                m_cachedCurvesPath = m_piece.CurvesPainterPath(GetData());
+                m_cachedMainPathPoints = m_piece.MainPathPoints(GetData());
                 m_cachedMainPath = VPiece::MainPathPath(m_cachedMainPathPoints);
             }
             else
             {
-                m_cachedMainPath = m_piece.MainPathPath(Visualization::data);
+                m_cachedMainPath = m_piece.MainPathPath(GetData());
             }
             m_pieceCached = true;
         }
 
-        DrawPath(this, m_cachedMainPath, mainColor, Qt::SolidLine, Qt::RoundCap);
+        DrawPath(this, m_cachedMainPath, Color(VColor::MainColor), Qt::SolidLine, Qt::RoundCap);
 
         for (int i = 0; i < m_cachedNodes.size(); ++i)
         {
-            VScaledEllipse *point = GetPoint(static_cast<quint32>(i), supportColor);
-            DrawPoint(point, m_cachedNodes.at(i).toQPointF(), supportColor);
+            VScaledEllipse *point = GetPoint(static_cast<quint32>(i), Color(VColor::SupportColor));
+            DrawPoint(point, m_cachedNodes.at(i).toQPointF(), Color(VColor::SupportColor));
         }
 
-        if (mode == Mode::Creation)
+        if (GetMode() == Mode::Creation)
         {
             for (int i = 0; i < m_cachedCurvesPath.size(); ++i)
             {
-                VCurvePathItem *path = GetCurve(static_cast<quint32>(i), supportColor);
-                DrawPath(path, m_cachedCurvesPath.at(i), supportColor);
+                VCurvePathItem *path = GetCurve(static_cast<quint32>(i), Color(VColor::SupportColor));
+                DrawPath(path, m_cachedCurvesPath.at(i), Color(VColor::SupportColor));
             }
 
-            DrawLine(m_line1, QLineF(ConstFirst(m_cachedMainPathPoints), Visualization::scenePos), supportColor,
+            DrawLine(m_line1, QLineF(ConstFirst(m_cachedMainPathPoints), ScenePos()), Color(VColor::SupportColor),
                      Qt::DashLine);
 
             if (m_cachedMainPathPoints.size() > 1)
             {
-                DrawLine(m_line2, QLineF(ConstLast(m_cachedMainPathPoints), Visualization::scenePos), supportColor,
+                DrawLine(m_line2, QLineF(ConstLast(m_cachedMainPathPoints), ScenePos()), Color(VColor::SupportColor),
                          Qt::DashLine);
             }
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolPiece::VisualMode(quint32 id)
+{
+    Q_UNUSED(id)
+    StartVisualMode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -108,13 +105,13 @@ void VisToolPiece::SetPiece(const VPiece &piece)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VScaledEllipse *VisToolPiece::GetPoint(quint32 i, const QColor &color)
+auto VisToolPiece::GetPoint(quint32 i, const QColor &color) -> VScaledEllipse *
 {
     return GetPointItem(m_points, i, color, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCurvePathItem *VisToolPiece::GetCurve(quint32 i, const QColor &color)
+auto VisToolPiece::GetCurve(quint32 i, const QColor &color) -> VCurvePathItem *
 {
     return GetCurveItem(m_curves, i, color, this);
 }

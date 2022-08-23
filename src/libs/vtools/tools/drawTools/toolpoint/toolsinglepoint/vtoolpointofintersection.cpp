@@ -240,8 +240,8 @@ void VToolPointOfIntersection::SetVisualization()
         auto *visual = qobject_cast<VisToolPointOfIntersection *>(vis);
         SCASSERT(visual != nullptr)
 
-        visual->setObject1Id(firstPointId);
-        visual->setPoint2Id(secondPointId);
+        visual->SetPoint1Id(firstPointId);
+        visual->SetPoint2Id(secondPointId);
         visual->RefreshGeometry();
     }
 }

@@ -50,15 +50,10 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vdomdocument.h"
 #include "../qmuparser/qmudef.h"
-#include "../vgeometry/vpointf.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vmisc/vcommonsettings.h"
-#include "../vmisc/compatibility.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vpatterndb/vcontainer.h"
-#include "../vwidgets/vabstractmainwindow.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "ui_dialogflippingbyaxis.h"

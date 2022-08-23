@@ -38,21 +38,34 @@ class VisToolFlippingByLine : public VisOperation
     Q_OBJECT // NOLINT
 public:
     explicit VisToolFlippingByLine(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolFlippingByLine() = default;
+    ~VisToolFlippingByLine() override = default;
 
-    virtual void   RefreshGeometry() override;
+    void RefreshGeometry() override;
 
     void SetFirstLinePointId(quint32 value);
     void SetSecondLinePointId(quint32 value);
 
-    virtual int type() const override {return Type;}
+    auto type() const -> int override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolFlippingByLine)};
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VisToolFlippingByLine) // NOLINT
-    quint32         object2Id;
-    VScaledEllipse *point1;
-    VScaledEllipse *point2;
+    quint32         m_lineP1Id{NULL_ID};
+    quint32         m_lineP2Id{NULL_ID};
+    VScaledEllipse *m_point1{nullptr};
+    VScaledEllipse *m_point2{nullptr};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolFlippingByLine::SetFirstLinePointId(quint32 value)
+{
+    m_lineP1Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolFlippingByLine::SetSecondLinePointId(quint32 value)
+{
+    m_lineP2Id = value;
+}
 
 #endif // VISTOOLFLIPPINGBYLINE_H

@@ -29,13 +29,11 @@
 #include "ui_dialogplacelabel.h"
 
 #include "visualization/line/vistoolspecialpoint.h"
-#include "../../../tools/vabstracttool.h"
-#include "../../../tools/vtoolseamallowance.h"
 #include "../../support/dialogeditwrongformula.h"
-#include "../vgeometry/vplacelabelitem.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../vpatterndb/vcontainer.h"
 
 #include <QTimer>
 
@@ -104,7 +102,7 @@ void DialogPlaceLabel::SetCenterPoint(quint32 id)
     {
         VisToolSpecialPoint *point = qobject_cast<VisToolSpecialPoint *>(vis);
         SCASSERT(point != nullptr)
-        point->setObject1Id(id);
+        point->SetPointId(id);
     }
 
     CheckPoint();
@@ -148,7 +146,7 @@ void DialogPlaceLabel::SetWidth(const QString &value)
 
 //    VisToolPlaceLabel *point = qobject_cast<VisToolPlaceLabel *>(vis);
 //    SCASSERT(point != nullptr)
-//    point->setObject1Id(id);
+//    point->SetPointId(id);
 
     MoveCursorToEnd(ui->plainTextEditFormulaWidth);
 }
@@ -175,7 +173,7 @@ void DialogPlaceLabel::SetHeight(const QString &value)
 
 //    VisToolPlaceLabel *point = qobject_cast<VisToolPlaceLabel *>(vis);
 //    SCASSERT(point != nullptr)
-//    point->setObject1Id(id);
+//    point->SetPointId(id);
 
     MoveCursorToEnd(ui->plainTextEditFormulaHeight);
 }
@@ -202,7 +200,7 @@ void DialogPlaceLabel::SetAngle(const QString &value)
 
 //    VisToolPlaceLabel *point = qobject_cast<VisToolPlaceLabel *>(vis);
 //    SCASSERT(point != nullptr)
-//    point->setObject1Id(id);
+//    point->SetPointId(id);
 
     MoveCursorToEnd(ui->plainTextEditFormulaAngle);
 }

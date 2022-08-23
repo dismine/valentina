@@ -39,22 +39,36 @@ class VisToolFlippingByAxis : public VisOperation
     Q_OBJECT // NOLINT
 public:
     explicit VisToolFlippingByAxis(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolFlippingByAxis() = default;
+    ~VisToolFlippingByAxis() override = default;
 
-    virtual void RefreshGeometry() override;
+    void RefreshGeometry() override;
 
     void SetOriginPointId(quint32 value);
     void SetAxisType(AxisType value);
 
-    virtual int type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolFlippingByAxis)};
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolFlippingByAxis)};
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VisToolFlippingByAxis) // NOLINT
 
-    AxisType m_axisType;
+    AxisType m_axisType{AxisType::VerticalAxis};
 
-    VScaledEllipse *point1;
+    VScaledEllipse *m_point1{nullptr};
+
+    quint32 m_originPointId{NULL_ID};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolFlippingByAxis::SetOriginPointId(quint32 value)
+{
+    m_originPointId = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolFlippingByAxis::SetAxisType(AxisType value)
+{
+    m_axisType = value;
+}
 
 #endif // VISTOOLFLIPPINGBYAXIS_H

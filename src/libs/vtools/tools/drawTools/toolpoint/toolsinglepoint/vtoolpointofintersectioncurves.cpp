@@ -469,10 +469,10 @@ void VToolPointOfIntersectionCurves::SetVisualization()
         auto visual = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
         SCASSERT(visual != nullptr)
 
-        visual->setObject1Id(firstCurveId);
-        visual->setObject2Id(secondCurveId);
-        visual->setVCrossPoint(vCrossPoint);
-        visual->setHCrossPoint(hCrossPoint);
+        visual->SetCurve1Id(firstCurveId);
+        visual->SetCurve2Id(secondCurveId);
+        visual->SetVCrossPoint(vCrossPoint);
+        visual->SetHCrossPoint(hCrossPoint);
         visual->RefreshGeometry();
     }
 }

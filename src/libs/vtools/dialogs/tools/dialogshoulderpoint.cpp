@@ -216,7 +216,7 @@ void DialogShoulderPoint::ChosenObject(quint32 id, const SceneObject &type)
                     if (SetObject(id, ui->comboBoxP1Line, tr("Select second point of line")))
                     {
                         m_number++;
-                        line->setLineP1Id(id);
+                        line->SetLineP1Id(id);
                         line->RefreshGeometry();
                     }
                 }
@@ -239,11 +239,11 @@ void DialogShoulderPoint::SaveData()
     auto *line = qobject_cast<VisToolShoulderPoint *>(vis);
     SCASSERT(line != nullptr)
 
-    line->setObject1Id(GetP3());
-    line->setLineP1Id(GetP1Line());
-    line->setLineP2Id(GetP2Line());
-    line->setLength(m_formula);
-    line->setLineStyle(LineStyleToPenStyle(GetTypeLine()));
+    line->SetPoint3Id(GetP3());
+    line->SetLineP1Id(GetP1Line());
+    line->SetLineP2Id(GetP2Line());
+    line->SetLength(m_formula);
+    line->SetLineStyle(LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();
 }
 
@@ -274,7 +274,7 @@ void DialogShoulderPoint::ChosenThirdPoint(quint32 id)
             SCASSERT(line != nullptr)
             connect(line, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
 
-            line->setLineP2Id(id);
+            line->SetLineP2Id(id);
             line->RefreshGeometry();
             prepare = true;
         }
@@ -292,7 +292,7 @@ void DialogShoulderPoint::SetP3(const quint32 &value)
 
     auto *line = qobject_cast<VisToolShoulderPoint *>(vis);
     SCASSERT(line != nullptr)
-    line->setObject1Id(value);
+    line->SetPoint3Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -318,7 +318,7 @@ void DialogShoulderPoint::SetP2Line(const quint32 &value)
 
     auto *line = qobject_cast<VisToolShoulderPoint *>(vis);
     SCASSERT(line != nullptr)
-    line->setLineP2Id(value);
+    line->SetLineP2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -332,7 +332,7 @@ void DialogShoulderPoint::SetP1Line(const quint32 &value)
 
     auto *line = qobject_cast<VisToolShoulderPoint *>(vis);
     SCASSERT(line != nullptr)
-    line->setLineP1Id(value);
+    line->SetLineP1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -353,7 +353,7 @@ void DialogShoulderPoint::SetFormula(const QString &value)
 
     auto *line = qobject_cast<VisToolShoulderPoint *>(vis);
     SCASSERT(line != nullptr)
-    line->setLength(m_formula);
+    line->SetLength(m_formula);
     MoveCursorToEnd(ui->plainTextEditFormula);
 }
 
@@ -365,7 +365,7 @@ void DialogShoulderPoint::SetFormula(const QString &value)
 void DialogShoulderPoint::SetTypeLine(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineType, value);
-    vis->setLineStyle(LineStyleToPenStyle(value));
+    vis->SetLineStyle(LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -47,7 +47,6 @@
 #include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
-#include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../../vabstracttool.h"
@@ -257,12 +256,12 @@ void VToolCubicBezier::SetVisualization()
         SCASSERT(visual != nullptr)
 
         const QSharedPointer<VCubicBezier> spl = VAbstractTool::data.GeometricObject<VCubicBezier>(m_id);
-        visual->setObject1Id(spl->GetP1().id());
-        visual->setObject2Id(spl->GetP2().id());
-        visual->setObject3Id(spl->GetP3().id());
-        visual->setObject4Id(spl->GetP4().id());
-        visual->setLineStyle(LineStyleToPenStyle(spl->GetPenStyle()));
-        visual->setApproximationScale(spl->GetApproximationScale());
+        visual->SetPoint1Id(spl->GetP1().id());
+        visual->SetPoint2Id(spl->GetP2().id());
+        visual->SetPoint3Id(spl->GetP3().id());
+        visual->SetPoint4Id(spl->GetP4().id());
+        visual->SetLineStyle(LineStyleToPenStyle(spl->GetPenStyle()));
+        visual->SetApproximationScale(spl->GetApproximationScale());
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }

@@ -353,12 +353,12 @@ void VToolArcWithLength::SetVisualization()
         const bool osSeparator = VAbstractApplication::VApp()->Settings()->GetOsSeparator();
         const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
 
-        visual->setObject1Id(arc->GetCenter().id());
-        visual->setRadius(trVars->FormulaToUser(arc->GetFormulaRadius(), osSeparator));
-        visual->setF1(trVars->FormulaToUser(arc->GetFormulaF1(), osSeparator));
-        visual->setLength(trVars->FormulaToUser(arc->GetFormulaLength(), osSeparator));
-        visual->setLineStyle(LineStyleToPenStyle(arc->GetPenStyle()));
-        visual->setApproximationScale(arc->GetApproximationScale());
+        visual->SetCenterId(arc->GetCenter().id());
+        visual->SetRadius(trVars->FormulaToUser(arc->GetFormulaRadius(), osSeparator));
+        visual->SetF1(trVars->FormulaToUser(arc->GetFormulaF1(), osSeparator));
+        visual->SetLength(trVars->FormulaToUser(arc->GetFormulaLength(), osSeparator));
+        visual->SetLineStyle(LineStyleToPenStyle(arc->GetPenStyle()));
+        visual->SetApproximationScale(arc->GetApproximationScale());
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }

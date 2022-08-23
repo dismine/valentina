@@ -31,19 +31,16 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolFlippingByLine::VisToolFlippingByLine(const VContainer *data, QGraphicsItem *parent)
-    : VisOperation(data, parent),
-      object2Id(NULL_ID),
-      point1(nullptr),
-      point2(nullptr)
+    : VisOperation(data, parent)
 {
-    point1 = InitPoint(supportColor2, this);
-    point2 = InitPoint(supportColor2, this);
+    m_point1 = InitPoint(Color(VColor::SupportColor2), this);
+    m_point2 = InitPoint(Color(VColor::SupportColor2), this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolFlippingByLine::RefreshGeometry()
 {
-    if (objects.isEmpty())
+    if (Objects().isEmpty())
     {
         return;
     }
@@ -51,35 +48,23 @@ void VisToolFlippingByLine::RefreshGeometry()
     QPointF firstPoint;
     QPointF secondPoint;
 
-    if (object1Id != NULL_ID)
+    if (m_lineP1Id != NULL_ID)
     {
-        firstPoint = static_cast<QPointF>(*Visualization::data->GeometricObject<VPointF>(object1Id));
-        DrawPoint(point1, firstPoint, supportColor2);
+        firstPoint = static_cast<QPointF>(*GetData()->GeometricObject<VPointF>(m_lineP1Id));
+        DrawPoint(m_point1, firstPoint, Color(VColor::SupportColor2));
 
-        if (object2Id == NULL_ID)
+        if (m_lineP2Id == NULL_ID)
         {
-            secondPoint = Visualization::scenePos;
+            secondPoint = ScenePos();
         }
         else
         {
-            secondPoint = static_cast<QPointF>(*Visualization::data->GeometricObject<VPointF>(object2Id));
-            DrawPoint(point2, secondPoint, supportColor2);
+            secondPoint = static_cast<QPointF>(*GetData()->GeometricObject<VPointF>(m_lineP2Id));
+            DrawPoint(m_point2, secondPoint, Color(VColor::SupportColor2));
         }
 
-        DrawLine(this, QLineF(firstPoint, secondPoint), supportColor2, Qt::DashLine);
+        DrawLine(this, QLineF(firstPoint, secondPoint), Color(VColor::SupportColor2), Qt::DashLine);
     }
 
-    RefreshFlippedObjects(firstPoint, secondPoint);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolFlippingByLine::SetFirstLinePointId(quint32 value)
-{
-    object1Id = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolFlippingByLine::SetSecondLinePointId(quint32 value)
-{
-    object2Id = value;
+    RefreshFlippedObjects(m_lineP1Id, firstPoint, secondPoint);
 }

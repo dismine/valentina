@@ -38,7 +38,6 @@
 #include "../../visualization/visualization.h"
 #include "../../visualization/line/vistooltriangle.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vmisc/vabstractapplication.h"
 #include "dialogtool.h"
 #include "ui_dialogtriangle.h"
 
@@ -125,7 +124,7 @@ void DialogTriangle::ChosenObject(quint32 id, const SceneObject &type)
                         if (SetObject(id, ui->comboBoxAxisP2, tr("Select first point")))
                         {
                             number++;
-                            line->setObject2Id(id);
+                            line->SetObject2Id(id);
                             line->RefreshGeometry();
                         }
                     }
@@ -142,7 +141,7 @@ void DialogTriangle::ChosenObject(quint32 id, const SceneObject &type)
                         if (SetObject(id, ui->comboBoxFirstPoint, tr("Select second point")))
                         {
                             number++;
-                            line->setHypotenuseP1Id(id);
+                            line->SetHypotenuseP1Id(id);
                             line->RefreshGeometry();
                         }
                     }
@@ -160,7 +159,7 @@ void DialogTriangle::ChosenObject(quint32 id, const SceneObject &type)
                     {
                         if (SetObject(id, ui->comboBoxSecondPoint, QString()))
                         {
-                            line->setHypotenuseP2Id(id);
+                            line->SetHypotenuseP2Id(id);
                             line->RefreshGeometry();
                             prepare = true;
                             DialogAccepted();
@@ -183,10 +182,10 @@ void DialogTriangle::SaveData()
     VisToolTriangle *line = qobject_cast<VisToolTriangle *>(vis);
     SCASSERT(line != nullptr)
 
-    line->setObject1Id(GetAxisP1Id());
-    line->setObject2Id(GetAxisP2Id());
-    line->setHypotenuseP1Id(GetFirstPointId());
-    line->setHypotenuseP2Id(GetSecondPointId());
+    line->SetObject1Id(GetAxisP1Id());
+    line->SetObject2Id(GetAxisP2Id());
+    line->SetHypotenuseP1Id(GetFirstPointId());
+    line->SetHypotenuseP2Id(GetSecondPointId());
     line->RefreshGeometry();
 }
 
@@ -245,7 +244,7 @@ void DialogTriangle::SetSecondPointId(const quint32 &value)
 
     VisToolTriangle *line = qobject_cast<VisToolTriangle *>(vis);
     SCASSERT(line != nullptr)
-            line->setHypotenuseP2Id(value);
+    line->SetHypotenuseP2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -265,7 +264,7 @@ void DialogTriangle::SetFirstPointId(const quint32 &value)
 
     VisToolTriangle *line = qobject_cast<VisToolTriangle *>(vis);
     SCASSERT(line != nullptr)
-    line->setHypotenuseP1Id(value);
+    line->SetHypotenuseP1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -279,7 +278,7 @@ void DialogTriangle::SetAxisP2Id(const quint32 &value)
 
     VisToolTriangle *line = qobject_cast<VisToolTriangle *>(vis);
     SCASSERT(line != nullptr)
-    line->setObject2Id(value);
+    line->SetObject2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -293,7 +292,7 @@ void DialogTriangle::SetAxisP1Id(const quint32 &value)
 
     VisToolTriangle *line = qobject_cast<VisToolTriangle *>(vis);
     SCASSERT(line != nullptr)
-    line->setObject1Id(value);
+    line->SetObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

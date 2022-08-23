@@ -245,7 +245,7 @@ void DialogEndLine::SetPointName(const QString &value)
 void DialogEndLine::SetTypeLine(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineType, value);
-    vis->setLineStyle(LineStyleToPenStyle(value));
+    vis->SetLineStyle(LineStyleToPenStyle(value));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -267,7 +267,7 @@ void DialogEndLine::SetFormula(const QString &value)
 
     auto *line = qobject_cast<VisToolEndLine *>(vis);
     SCASSERT(line != nullptr)
-    line->setLength(formulaLength);
+    line->SetLength(formulaLength);
 
     MoveCursorToEnd(ui->plainTextEditFormula);
 }
@@ -307,7 +307,7 @@ void DialogEndLine::SetBasePointId(const quint32 &value)
 
     auto *line = qobject_cast<VisToolEndLine *>(vis);
     SCASSERT(line != nullptr)
-    line->setObject1Id(value);
+    line->SetBasePointId(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -382,10 +382,10 @@ void DialogEndLine::SaveData()
     VisToolEndLine *line = qobject_cast<VisToolEndLine *>(vis);
     SCASSERT(line != nullptr)
 
-    line->setObject1Id(GetBasePointId());
-    line->setLength(formulaLength);
+    line->SetBasePointId(GetBasePointId());
+    line->SetLength(formulaLength);
     line->SetAngle(formulaAngle);
-    line->setLineStyle(LineStyleToPenStyle(GetTypeLine()));
+    line->SetLineStyle(LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();
 }
 

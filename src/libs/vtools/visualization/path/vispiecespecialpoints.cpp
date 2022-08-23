@@ -33,7 +33,7 @@
 
 namespace
 {
-QPainterPath RectPath(const QRectF &rect)
+auto RectPath(const QRectF &rect) -> QPainterPath
 {
     QPainterPath path;
     if (not rect.isNull())
@@ -42,19 +42,15 @@ QPainterPath RectPath(const QRectF &rect)
     }
     return path;
 }
-}
+}  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VisPieceSpecialPoints::VisPieceSpecialPoints(const VContainer *data, QGraphicsItem *parent)
-    : VisPath(data, parent),
-      m_points(),
-      m_spoints(),
-      m_showRect(false),
-      m_placeLabelRect(),
-      m_rectItem(nullptr),
-      supportColor2(Qt::darkGreen)
+    : VisPath(data, parent)
 {
-    m_rectItem = InitItem<VCurvePathItem>(supportColor2, this);
+    SetColor(VColor::SupportColor2, Qt::darkGreen);
+
+    m_rectItem = InitItem<VCurvePathItem>(Color(VColor::SupportColor2), this);
     m_rectItem->SetWidth(VAbstractApplication::VApp()->Settings()->WidthHairLine());
 }
 
@@ -65,21 +61,28 @@ void VisPieceSpecialPoints::RefreshGeometry()
 
     for (int i = 0; i < m_spoints.size(); ++i)
     {
-        VSimplePoint *point = GetPoint(static_cast<quint32>(i), supportColor);
+        VSimplePoint *point = GetPoint(static_cast<quint32>(i), Color(VColor::SupportColor));
         // Keep first, you can hide only objects those have shape
-        point->RefreshPointGeometry(*Visualization::data->GeometricObject<VPointF>(m_spoints.at(i)));
+        point->RefreshPointGeometry(*GetData()->GeometricObject<VPointF>(m_spoints.at(i)));
         point->SetOnlyPoint(false);
         point->setVisible(true);
 
         if (m_showRect)
         {
-            DrawPath(m_rectItem, RectPath(m_placeLabelRect), supportColor2, Qt::SolidLine, Qt::RoundCap);
+            DrawPath(m_rectItem, RectPath(m_placeLabelRect), Color(VColor::SupportColor2), Qt::SolidLine, Qt::RoundCap);
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSimplePoint *VisPieceSpecialPoints::GetPoint(quint32 i, const QColor &color)
+void VisPieceSpecialPoints::VisualMode(quint32 id)
+{
+    Q_UNUSED(id)
+    StartVisualMode();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VisPieceSpecialPoints::GetPoint(quint32 i, const QColor &color) -> VSimplePoint *
 {
     return VisPath::GetPoint(m_points, i, color);
 }
@@ -87,7 +90,7 @@ VSimplePoint *VisPieceSpecialPoints::GetPoint(quint32 i, const QColor &color)
 //---------------------------------------------------------------------------------------------------------------------
 void VisPieceSpecialPoints::HideAllItems()
 {
-    for (auto item : qAsConst(m_points))
+    for (auto *item : qAsConst(m_points))
     {
         if (item)
         {

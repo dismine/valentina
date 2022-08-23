@@ -370,15 +370,15 @@ void VToolPointOfIntersectionCircles::SetVisualization()
         auto *visual = qobject_cast<VisToolPointOfIntersectionCircles *>(vis);
         SCASSERT(visual != nullptr)
 
-        visual->setObject1Id(firstCircleCenterId);
-        visual->setObject2Id(secondCircleCenterId);
+        visual->SetCircle1Id(firstCircleCenterId);
+        visual->SetCircle2Id(secondCircleCenterId);
 
         const bool osSeparator = VAbstractApplication::VApp()->Settings()->GetOsSeparator();
         const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
 
-        visual->setC1Radius(trVars->FormulaToUser(firstCircleRadius, osSeparator));
-        visual->setC2Radius(trVars->FormulaToUser(secondCircleRadius, osSeparator));
-        visual->setCrossPoint(crossPoint);
+        visual->SetC1Radius(trVars->FormulaToUser(firstCircleRadius, osSeparator));
+        visual->SetC2Radius(trVars->FormulaToUser(secondCircleRadius, osSeparator));
+        visual->SetCrossPoint(crossPoint);
         visual->RefreshGeometry();
     }
 }

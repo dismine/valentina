@@ -39,7 +39,6 @@
 #include <QVector>
 #include <QtGlobal>
 
-#include "../ifc/ifcdef.h"
 #include "../vmisc/def.h"
 #include "visoperation.h"
 
@@ -48,49 +47,56 @@ class VisToolMove : public VisOperation
     Q_OBJECT // NOLINT
 public:
     explicit VisToolMove(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolMove() = default;
+    ~VisToolMove() override = default;
 
-    virtual void   RefreshGeometry() override;
+    void RefreshGeometry() override;
 
-    QString Angle() const;
-    void    SetAngle(const QString &expression);
+    auto Angle() const -> QString;
+    void SetAngle(const QString &expression);
 
-    QString RotationAngle() const;
-    void    SetRotationAngle(const QString &expression);
+    auto RotationAngle() const -> QString;
+    void SetRotationAngle(const QString &expression);
 
-    QString Length() const;
-    qreal   LengthValue() const;
-    void    SetLength(const QString &expression);
+    auto Length() const -> QString;
+    auto LengthValue() const -> qreal;
+    void SetLength(const QString &expression);
 
     void SetRotationOriginPointId(quint32 value);
 
-    virtual int type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolMove)};
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolMove)};
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VisToolMove) // NOLINT
-    qreal           angle;
-    qreal           rotationAngle;
-    qreal           length;
-    VScaledEllipse *pointOrigin;
-    VScaledEllipse *pointRotationOrigin;
-    VScaledEllipse *pointFinish;
-    VCurvePathItem *angleArc;
-    VScaledLine    *rotationLine;
-    VScaledLine    *xAxis;
+    qreal           m_angle{0};
+    qreal           m_rotationAngle{INT_MIN};
+    qreal           m_length{0};
+    VScaledEllipse *m_pointOrigin{nullptr};
+    VScaledEllipse *m_pointRotationOrigin{nullptr};
+    VScaledEllipse *m_pointFinish{nullptr};
+    VCurvePathItem *m_angleArc{nullptr};
+    VScaledLine    *m_rotationLine{nullptr};
+    VScaledLine    *m_xAxis{nullptr};
+    quint32         m_rotationOriginId{NULL_ID};
 
     template <class Item>
-    QGraphicsPathItem *AddOriginCurve(quint32 id, int &i);
+    auto AddOriginCurve(quint32 id, int &i) -> QGraphicsPathItem *;
 
     template <class Item>
-    int AddMovedRotatedCurve(qreal angle, qreal length, quint32 id, int i, qreal rotationAngle,
-                             const QPointF &rotationOrigin);
+    auto AddMovedRotatedCurve(qreal angle, qreal length, quint32 id, int i, qreal rotationAngle,
+                              const QPointF &rotationOrigin) -> int;
 
-    static QPointF GetOriginPoint(const QVector<QGraphicsItem *> &objects);
+    static auto GetOriginPoint(const QVector<QGraphicsItem *> &objects) -> QPointF;
 
-    QVector<QGraphicsItem *> CreateOriginObjects(int &iPoint, int &iCurve);
+    auto CreateOriginObjects(int &iPoint, int &iCurve) -> QVector<QGraphicsItem *>;
     void CreateMovedRotatedObjects(int &iPoint, int &iCurve, qreal length, qreal angle, qreal rotationAngle,
                                    const QPointF &rotationOrigin);
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolMove::SetRotationOriginPointId(quint32 value)
+{
+    m_rotationOriginId = value;
+}
 
 #endif // VISTOOLMOVE_H

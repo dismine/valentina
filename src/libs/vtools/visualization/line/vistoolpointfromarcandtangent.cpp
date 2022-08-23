@@ -37,7 +37,6 @@
 #include <new>
 
 #include "../../tools/drawTools/toolpoint/toolsinglepoint/vtoolpointfromarcandtangent.h"
-#include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vgobject.h"
@@ -48,46 +47,40 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointFromArcAndTangent::VisToolPointFromArcAndTangent(const VContainer *data, QGraphicsItem *parent)
-    : VisLine(data, parent), arcId(NULL_ID), crossPoint(CrossCirclesPoint::FirstPoint),
-      point(nullptr), tangent(nullptr), arcPath(nullptr)
+    : VisLine(data, parent)
 {
-    arcPath = InitItem<VCurvePathItem>(Qt::darkGreen, this);
-    point = InitPoint(mainColor, this);
-    tangent = InitPoint(supportColor, this);
+    m_arcPath = InitItem<VCurvePathItem>(Qt::darkGreen, this);
+    m_point = InitPoint(Color(VColor::MainColor), this);
+    m_tangent = InitPoint(Color(VColor::SupportColor), this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolPointFromArcAndTangent::RefreshGeometry()
 {
-    if (object1Id > NULL_ID)// tangent point
+    if (m_pointId > NULL_ID)// tangent point
     {
-        const QSharedPointer<VPointF> tan = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(tangent, static_cast<QPointF>(*tan), supportColor);
+        const QSharedPointer<VPointF> tan = GetData()->GeometricObject<VPointF>(m_pointId);
+        DrawPoint(m_tangent, static_cast<QPointF>(*tan), Color(VColor::SupportColor));
 
-        if (arcId > NULL_ID)// circle center
+        if (m_arcId > NULL_ID)// circle center
         {
-            const QSharedPointer<VArc> arc = Visualization::data->GeometricObject<VArc>(arcId);
-            DrawPath(arcPath, arc->GetPath(), arc->DirectionArrows(), Qt::darkGreen, Qt::SolidLine, Qt::RoundCap);
+            const QSharedPointer<VArc> arc = GetData()->GeometricObject<VArc>(m_arcId);
+            DrawPath(m_arcPath, arc->GetPath(), arc->DirectionArrows(), Qt::darkGreen, Qt::SolidLine, Qt::RoundCap);
 
             FindRays(static_cast<QPointF>(*tan), arc.data());
 
             QPointF fPoint;
-            VToolPointFromArcAndTangent::FindPoint(static_cast<QPointF>(*tan), arc.data(), crossPoint, &fPoint);
-            DrawPoint(point, fPoint, mainColor);
+            VToolPointFromArcAndTangent::FindPoint(static_cast<QPointF>(*tan), arc.data(), m_crossPoint, &fPoint);
+            DrawPoint(m_point, fPoint, Color(VColor::MainColor));
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolPointFromArcAndTangent::setArcId(const quint32 &value)
+void VisToolPointFromArcAndTangent::VisualMode(quint32 id)
 {
-    arcId = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolPointFromArcAndTangent::setCrossPoint(const CrossCirclesPoint &value)
-{
-    crossPoint = value;
+    m_pointId = id;
+    StartVisualMode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -125,10 +118,11 @@ void VisToolPointFromArcAndTangent::FindRays(const QPointF &p, const VArc *arc)
             switch(localRes)
             {
                 case 2:
-                    DrawRay(this, p, crossPoint == CrossCirclesPoint::FirstPoint ? p1 : p2, supportColor, Qt::DashLine);
+                    DrawRay(this, p, m_crossPoint == CrossCirclesPoint::FirstPoint ? p1 : p2,
+                            Color(VColor::SupportColor), Qt::DashLine);
                     break;
                 case 1:
-                    DrawRay(this, p, flagP1 ? p1 : p2, supportColor, Qt::DashLine);
+                    DrawRay(this, p, flagP1 ? p1 : p2, Color(VColor::SupportColor), Qt::DashLine);
                     break;
                 case 0:
                 default:
@@ -139,7 +133,7 @@ void VisToolPointFromArcAndTangent::FindRays(const QPointF &p, const VArc *arc)
             break;
         }
         case 1:
-            DrawRay(this, p, p1, supportColor, Qt::DashLine);
+            DrawRay(this, p, p1, Color(VColor::SupportColor), Qt::DashLine);
             break;
         case 3:
         case 0:

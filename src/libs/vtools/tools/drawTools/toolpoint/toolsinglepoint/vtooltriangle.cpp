@@ -35,6 +35,7 @@
 #include <QStringData>
 #include <QStringDataPtr>
 #include <new>
+#include <QtMath>
 
 #include "../../../../dialogs/tools/dialogtriangle.h"
 #include "../../../../dialogs/tools/dialogtool.h"
@@ -50,7 +51,6 @@
 #include "../../../vabstracttool.h"
 #include "../../vdrawtool.h"
 #include "vtoolsinglepoint.h"
-#include "../vmisc/vmath.h"
 #include "../vmisc/compatibility.h"
 
 template <class T> class QSharedPointer;
@@ -341,10 +341,10 @@ void VToolTriangle::SetVisualization()
         auto * visual = qobject_cast<VisToolTriangle *>(vis);
         SCASSERT(visual != nullptr)
 
-        visual->setObject1Id(axisP1Id);
-        visual->setObject2Id(axisP2Id);
-        visual->setHypotenuseP1Id(firstPointId);
-        visual->setHypotenuseP2Id(secondPointId);
+        visual->SetObject1Id(axisP1Id);
+        visual->SetObject2Id(axisP2Id);
+        visual->SetHypotenuseP1Id(firstPointId);
+        visual->SetHypotenuseP2Id(secondPointId);
         visual->RefreshGeometry();
     }
 }

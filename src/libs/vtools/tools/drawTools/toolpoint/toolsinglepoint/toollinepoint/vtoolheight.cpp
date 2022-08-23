@@ -260,10 +260,10 @@ void VToolHeight::SetVisualization()
         auto *visual = qobject_cast<VisToolHeight *>(vis);
         SCASSERT(visual != nullptr)
 
-        visual->setObject1Id(basePointId);
-        visual->setLineP1Id(p1LineId);
-        visual->setLineP2Id(p2LineId);
-        visual->setLineStyle(LineStyleToPenStyle(m_lineType));
+        visual->SetBasePointId(basePointId);
+        visual->SetLineP1Id(p1LineId);
+        visual->SetLineP2Id(p2LineId);
+        visual->SetLineStyle(LineStyleToPenStyle(m_lineType));
         visual->RefreshGeometry();
     }
 }

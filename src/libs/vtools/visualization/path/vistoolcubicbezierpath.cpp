@@ -47,19 +47,12 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCubicBezierPath::VisToolCubicBezierPath(const VContainer *data, QGraphicsItem *parent)
-    : VisPath(data, parent),
-      mainPoints(),
-      ctrlPoints(),
-      lines(),
-      newCurveSegment(nullptr),
-      path(),
-      helpLine1(nullptr),
-      helpLine2(nullptr)
+    : VisPath(data, parent)
 {
-    helpLine1 = InitItem<VScaledLine>(mainColor, this);
-    helpLine2 = InitItem<VScaledLine>(mainColor, this);
+    helpLine1 = InitItem<VScaledLine>(Color(VColor::MainColor), this);
+    helpLine2 = InitItem<VScaledLine>(Color(VColor::MainColor), this);
 
-    newCurveSegment = InitItem<VCurvePathItem>(mainColor, this);
+    newCurveSegment = InitItem<VCurvePathItem>(Color(VColor::MainColor), this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -80,11 +73,11 @@ void VisToolCubicBezierPath::RefreshGeometry()
 
         for (int i = 0; i < size; ++i)
         {
-            VScaledEllipse *point = this->getPoint(mainPoints, static_cast<unsigned>(i), 1/*zValue*/);
-            DrawPoint(point, static_cast<QPointF>(pathPoints.at(i)), supportColor);
+            VScaledEllipse *point = this->GetPoint(mainPoints, static_cast<unsigned>(i), 1/*zValue*/);
+            DrawPoint(point, static_cast<QPointF>(pathPoints.at(i)), Color(VColor::SupportColor));
         }
 
-        if (mode == Mode::Creation)
+        if (GetMode() == Mode::Creation)
         {
             if (countSubSpl < 1)
             {
@@ -99,7 +92,7 @@ void VisToolCubicBezierPath::RefreshGeometry()
 
         if (countSubSpl >= 1)
         {
-            DrawPath(this, path.GetPath(), path.DirectionArrows(), mainColor, lineStyle, Qt::RoundCap);
+            DrawPath(this, path.GetPath(), path.DirectionArrows(), Color(VColor::MainColor), LineStyle(), Qt::RoundCap);
 
             for (qint32 i = 1; i<=countSubSpl; ++i)
             {
@@ -108,18 +101,18 @@ void VisToolCubicBezierPath::RefreshGeometry()
 
                 const VSpline spl = path.GetSpline(i);
 
-                VScaledLine *ctrlLine1 = this->getLine(static_cast<unsigned>(preLastPoint));
+                VScaledLine *ctrlLine1 = this->GetLine(static_cast<unsigned>(preLastPoint));
                 DrawLine(ctrlLine1, QLineF(static_cast<QPointF>(spl.GetP1()), static_cast<QPointF>(spl.GetP2())),
-                         mainColor, Qt::DashLine);
+                         Color(VColor::MainColor), Qt::DashLine);
 
-                VScaledEllipse *p2 = this->getPoint(ctrlPoints, static_cast<unsigned>(preLastPoint));
+                VScaledEllipse *p2 = this->GetPoint(ctrlPoints, static_cast<unsigned>(preLastPoint));
                 DrawPoint(p2, static_cast<QPointF>(spl.GetP2()), Qt::green);
 
-                VScaledLine *ctrlLine2 = this->getLine(static_cast<unsigned>(lastPoint));
+                VScaledLine *ctrlLine2 = this->GetLine(static_cast<unsigned>(lastPoint));
                 DrawLine(ctrlLine2, QLineF(static_cast<QPointF>(spl.GetP4()), static_cast<QPointF>(spl.GetP3())),
-                         mainColor, Qt::DashLine);
+                         Color(VColor::MainColor), Qt::DashLine);
 
-                VScaledEllipse *p3 = this->getPoint(ctrlPoints, static_cast<unsigned>(lastPoint));
+                VScaledEllipse *p3 = this->GetPoint(ctrlPoints, static_cast<unsigned>(lastPoint));
                 DrawPoint(p3, static_cast<QPointF>(spl.GetP3()), Qt::green);
             }
         }
@@ -129,7 +122,14 @@ void VisToolCubicBezierPath::RefreshGeometry()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolCubicBezierPath::setPath(const VCubicBezierPath &value)
+void VisToolCubicBezierPath::VisualMode(quint32 id)
+{
+    Q_UNUSED(id)
+    StartVisualMode();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolCubicBezierPath::SetPath(const VCubicBezierPath &value)
 {
     path = value;
 
@@ -137,41 +137,29 @@ void VisToolCubicBezierPath::setPath(const VCubicBezierPath &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-VCubicBezierPath VisToolCubicBezierPath::getPath()
-{
-    return path;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VScaledEllipse *VisToolCubicBezierPath::getPoint(QVector<VScaledEllipse *> &points, quint32 i, qreal z)
+auto VisToolCubicBezierPath::GetPoint(QVector<VScaledEllipse *> &points, quint32 i, qreal z) -> VScaledEllipse *
 {
     if (not points.isEmpty() && static_cast<quint32>(points.size() - 1) >= i)
     {
         return points.at(static_cast<int>(i));
     }
-    else
-    {
-        auto point = InitPoint(supportColor, this, z);
-        points.append(point);
-        return point;
-    }
+
+    auto *point = InitPoint(Color(VColor::SupportColor), this, z);
+    points.append(point);
+    return point;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VScaledLine *VisToolCubicBezierPath::getLine(quint32 i)
+auto VisToolCubicBezierPath::GetLine(quint32 i) -> VScaledLine *
 {
-    if (static_cast<quint32>(lines.size() - 1) >= i && lines.isEmpty() == false)
+    if (static_cast<quint32>(lines.size() - 1) >= i && not lines.isEmpty())
     {
         return lines.at(static_cast<int>(i));
     }
-    else
-    {
-        auto line = InitItem<VScaledLine>(mainColor, this);
-        lines.append(line);
-        return line;
-    }
-    return nullptr;
+
+    auto *line = InitItem<VScaledLine>(Color(VColor::MainColor), this);
+    lines.append(line);
+    return line;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -197,31 +185,32 @@ void VisToolCubicBezierPath::Creating(const QVector<VPointF> &pathPoints, int po
             const VPointF &p1 = ConstLast(pathPoints);
             if (pathPoints.size() >= 4)
             {
-                QLineF p1p2(static_cast<QPointF>(p1), Visualization::scenePos);
+                QLineF p1p2(static_cast<QPointF>(p1), ScenePos());
                 QLineF prP3p1(static_cast<QPointF>(pathPoints.at(size-2)), static_cast<QPointF>(p1));
                 p1p2.setAngle(prP3p1.angle());
 
                 const QPointF p2 = p1p2.p2();
 
-                VSpline spline(p1, p2, Visualization::scenePos, VPointF(Visualization::scenePos));
-                DrawPath(newCurveSegment, spline.GetPath(), mainColor, Qt::SolidLine, Qt::RoundCap);
+                VSpline spline(p1, p2, ScenePos(), VPointF(ScenePos()));
+                DrawPath(newCurveSegment, spline.GetPath(), Color(VColor::MainColor), Qt::SolidLine, Qt::RoundCap);
 
-                DrawLine(helpLine1, p1p2, mainColor, Qt::DashLine);
+                DrawLine(helpLine1, p1p2, Color(VColor::MainColor), Qt::DashLine);
 
                 const int preLastPoint = subSplCount * 2;
-                VScaledEllipse *p2Ctrl = this->getPoint(ctrlPoints, static_cast<unsigned>(preLastPoint));
+                VScaledEllipse *p2Ctrl = this->GetPoint(ctrlPoints, static_cast<unsigned>(preLastPoint));
                 DrawPoint(p2Ctrl, p2, Qt::green);
             }
             else
             {
-                DrawLine(helpLine1, QLineF(static_cast<QPointF>(p1), Visualization::scenePos), mainColor, Qt::DashLine);
+                DrawLine(helpLine1, QLineF(static_cast<QPointF>(p1), ScenePos()), Color(VColor::MainColor),
+                         Qt::DashLine);
             }
             break;
         }
         case 1:
         {
-            const VPointF p1 = pathPoints.at(subSplPoints + pointsLeft-1);
-            QPointF p2 = static_cast<QPointF>(pathPoints.at(subSplPoints + pointsLeft));
+            const VPointF& p1 = pathPoints.at(subSplPoints + pointsLeft-1);
+            auto p2 = static_cast<QPointF>(pathPoints.at(subSplPoints + pointsLeft));
 
             if (subSplCount >= 1)
             {
@@ -232,20 +221,20 @@ void VisToolCubicBezierPath::Creating(const QVector<VPointF> &pathPoints, int po
                 p2 = p1p2.p2();
             }
 
-            DrawLine(helpLine1, QLineF(static_cast<QPointF>(p1), p2), mainColor, Qt::DashLine);
+            DrawLine(helpLine1, QLineF(static_cast<QPointF>(p1), p2), Color(VColor::MainColor), Qt::DashLine);
 
-            VSpline spline(p1, p2, Visualization::scenePos, VPointF(Visualization::scenePos));
-            DrawPath(newCurveSegment, spline.GetPath(), mainColor, Qt::SolidLine, Qt::RoundCap);
+            VSpline spline(p1, p2, ScenePos(), VPointF(ScenePos()));
+            DrawPath(newCurveSegment, spline.GetPath(), Color(VColor::MainColor), Qt::SolidLine, Qt::RoundCap);
 
             const int preLastPoint = subSplCount * 2;
-            VScaledEllipse *p2Ctrl = this->getPoint(ctrlPoints, static_cast<unsigned>(preLastPoint));
+            VScaledEllipse *p2Ctrl = this->GetPoint(ctrlPoints, static_cast<unsigned>(preLastPoint));
             DrawPoint(p2Ctrl, p2, Qt::green);
             break;
         }
         case 2:
         {
-            const VPointF p1 = pathPoints.at(subSplPoints + pointsLeft-2);
-            QPointF p2 = static_cast<QPointF>(pathPoints.at(subSplPoints + pointsLeft-1));
+            const VPointF& p1 = pathPoints.at(subSplPoints + pointsLeft-2);
+            auto p2 = static_cast<QPointF>(pathPoints.at(subSplPoints + pointsLeft-1));
             const QPointF p3 = static_cast<QPointF>(pathPoints.at(subSplPoints + pointsLeft));
 
             if (subSplCount >= 1)
@@ -257,14 +246,14 @@ void VisToolCubicBezierPath::Creating(const QVector<VPointF> &pathPoints, int po
                 p2 = p1p2.p2();
             }
 
-            DrawLine(helpLine1, QLineF(static_cast<QPointF>(p1), p2), mainColor, Qt::DashLine);
-            DrawLine(helpLine2, QLineF(p3, Visualization::scenePos), mainColor, Qt::DashLine);
+            DrawLine(helpLine1, QLineF(static_cast<QPointF>(p1), p2), Color(VColor::MainColor), Qt::DashLine);
+            DrawLine(helpLine2, QLineF(p3, ScenePos()), Color(VColor::MainColor), Qt::DashLine);
 
-            VSpline spline(p1, p2, p3, VPointF(Visualization::scenePos));
-            DrawPath(newCurveSegment, spline.GetPath(), mainColor, Qt::SolidLine, Qt::RoundCap);
+            VSpline spline(p1, p2, p3, VPointF(ScenePos()));
+            DrawPath(newCurveSegment, spline.GetPath(), Color(VColor::MainColor), Qt::SolidLine, Qt::RoundCap);
 
             const int preLastPoint = subSplCount * 2;
-            VScaledEllipse *p2Ctrl = this->getPoint(ctrlPoints, static_cast<unsigned>(preLastPoint));
+            VScaledEllipse *p2Ctrl = this->GetPoint(ctrlPoints, static_cast<unsigned>(preLastPoint));
             DrawPoint(p2Ctrl, p2, Qt::green);
             break;
         }
@@ -283,23 +272,22 @@ void VisToolCubicBezierPath::RefreshToolTip()
 
         if (size < 7)
         {
-            Visualization::toolTip = tr("<b>Curved path</b>: select seven or more points");
+            SetToolTip(tr("<b>Curved path</b>: select seven or more points"));
         }
         else if (size - VCubicBezierPath::SubSplPointsCount(countSubSpl) == 0)
         {
-            Visualization::toolTip = tr("<b>Curved path</b>: select seven or more points, "
-                                        "<b>%1</b> - finish creation")
-                    .arg(VModifierKey::EnterKey());
+            SetToolTip(tr("<b>Curved path</b>: select seven or more points, "
+                          "<b>%1</b> - finish creation").arg(VModifierKey::EnterKey()));
         }
         else
         {
-            Visualization::toolTip = tr("<b>Curved path</b>: select more points for complete segment");
+            SetToolTip(tr("<b>Curved path</b>: select more points for complete segment"));
         }
 
-        if (mode == Mode::Show)
+        if (GetMode() == Mode::Show)
         {
-            Visualization::toolTip = QString();
+            SetToolTip(QString());
         }
-        emit ToolTip(Visualization::toolTip);
+        emit ToolTip(CurrentToolTip());
     }
 }

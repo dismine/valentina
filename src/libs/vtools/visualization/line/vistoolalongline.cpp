@@ -47,70 +47,58 @@
 VisToolAlongLine::VisToolAlongLine(const VContainer *data, QGraphicsItem *parent)
     : VisLine(data, parent)
 {
-    this->mainColor = Qt::red;
+    SetMainColor(Qt::red);
     this->setZValue(2);// Show on top real tool
 
-    m_lineP1 = InitPoint(supportColor, this);
-    m_lineP2 = InitPoint(supportColor, this); //-V656
-    m_line = InitItem<VScaledLine>(supportColor, this);
-    m_point = InitPoint(mainColor, this);
+    m_lineP1 = InitPoint(Color(VColor::SupportColor), this);
+    m_lineP2 = InitPoint(Color(VColor::SupportColor), this); //-V656
+    m_line = InitItem<VScaledLine>(Color(VColor::SupportColor), this);
+    m_point = InitPoint(Color(VColor::MainColor), this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolAlongLine::setObject2Id(const quint32 &value)
+void VisToolAlongLine::SetLength(const QString &expression)
 {
-    m_object2Id = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolAlongLine::setLength(const QString &expression)
-{
-    m_length = FindLengthFromUser(expression, Visualization::data->DataVariables());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolAlongLine::setMidPointMode(bool midPointMode)
-{
-    m_midPointMode = midPointMode;
+    m_length = FindLengthFromUser(expression, GetData()->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolAlongLine::RefreshGeometry()
 {
-    if (object1Id > NULL_ID)
+    if (m_point1Id > NULL_ID)
     {
-        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(m_lineP1, static_cast<QPointF>(*first), supportColor);
+        const QSharedPointer<VPointF> first = GetData()->GeometricObject<VPointF>(m_point1Id);
+        DrawPoint(m_lineP1, static_cast<QPointF>(*first), Color(VColor::SupportColor));
 
-        if (m_object2Id <= NULL_ID)
+        if (m_point2Id <= NULL_ID)
         {
-            QLineF cursorLine (static_cast<QPointF>(*first), Visualization::scenePos);
-            DrawLine(m_line, cursorLine, supportColor);
+            QLineF cursorLine (static_cast<QPointF>(*first), ScenePos());
+            DrawLine(m_line, cursorLine, Color(VColor::SupportColor));
 
             if (m_midPointMode)
             {
                 cursorLine.setLength(cursorLine.length()/2.0);
-                DrawPoint(m_point,  cursorLine.p2(), mainColor);
+                DrawPoint(m_point,  cursorLine.p2(), Color(VColor::MainColor));
             }
         }
         else
         {
-            const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(m_object2Id);
-            DrawPoint(m_lineP2, static_cast<QPointF>(*second), supportColor);
+            const QSharedPointer<VPointF> second = GetData()->GeometricObject<VPointF>(m_point2Id);
+            DrawPoint(m_lineP2, static_cast<QPointF>(*second), Color(VColor::SupportColor));
 
             QLineF baseLine(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
-            DrawLine(m_line, baseLine, supportColor);
+            DrawLine(m_line, baseLine, Color(VColor::SupportColor));
 
             if (not qFuzzyIsNull(m_length))
             {
                 QLineF mainLine = VGObject::BuildLine(static_cast<QPointF>(*first), m_length, m_line->line().angle());
-                DrawLine(this, mainLine, mainColor, lineStyle);
+                DrawLine(this, mainLine, Color(VColor::MainColor), LineStyle());
 
-                DrawPoint(m_point, mainLine.p2(), mainColor);
+                DrawPoint(m_point, mainLine.p2(), Color(VColor::MainColor));
             }
-            else if (mode == Mode::Creation)
+            else if (GetMode() == Mode::Creation)
             {
-                QLineF cursorLine (static_cast<QPointF>(*first), Visualization::scenePos);
+                QLineF cursorLine (static_cast<QPointF>(*first), ScenePos());
 
                 qreal len = cursorLine.length();
                 qreal angleTo = baseLine.angleTo(cursorLine);
@@ -120,16 +108,23 @@ void VisToolAlongLine::RefreshGeometry()
                 }
 
                 QLineF mainLine = VGObject::BuildLine(static_cast<QPointF>(*first), len, m_line->line().angle());
-                DrawLine(this, mainLine, mainColor, lineStyle);
+                DrawLine(this, mainLine, Color(VColor::MainColor), LineStyle());
 
-                DrawPoint(m_point, mainLine.p2(), mainColor);
+                DrawPoint(m_point, mainLine.p2(), Color(VColor::MainColor));
 
                 const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-                Visualization::toolTip = tr("Length = %1%2; "
-                                            "<b>Mouse click</b> - finish selecting the length, "
-                                            "<b>%3</b> - skip")
-                                             .arg(NumberToUser(len), prefix, VModifierKey::EnterKey());
+                SetToolTip(tr("Length = %1%2; "
+                              "<b>Mouse click</b> - finish selecting the length, "
+                              "<b>%3</b> - skip")
+                               .arg(NumberToUser(len), prefix, VModifierKey::EnterKey()));
             }
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolAlongLine::VisualMode(quint32 id)
+{
+    m_point1Id = id;
+    StartVisualMode();
 }

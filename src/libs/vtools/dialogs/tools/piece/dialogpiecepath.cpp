@@ -30,7 +30,6 @@
 #include "ui_dialogpiecepath.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "visualization/path/vistoolpiecepath.h"
-#include "../../../tools/vabstracttool.h"
 #include "../../../tools/vtoolseamallowance.h"
 #include "../../support/dialogeditwrongformula.h"
 #include "../vmisc/vmodifierkey.h"
@@ -1394,7 +1393,7 @@ Qt::PenStyle DialogPiecePath::GetPenType() const
 void DialogPiecePath::SetPenType(const Qt::PenStyle &type)
 {
     ChangeCurrentData(ui->comboBoxPenType, PenStyleToLineStyle(type));
-    vis->setLineStyle(type);
+    vis->SetLineStyle(type);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

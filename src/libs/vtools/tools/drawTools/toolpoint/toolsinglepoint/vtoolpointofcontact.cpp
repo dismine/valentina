@@ -351,10 +351,10 @@ void VToolPointOfContact::SetVisualization()
         auto *visual = qobject_cast<VisToolPointOfContact *>(vis);
         SCASSERT(visual != nullptr)
 
-        visual->setObject1Id(firstPointId);
-        visual->setLineP2Id(secondPointId);
-        visual->setRadiusId(center);
-        visual->setRadius(VAbstractApplication::VApp()->TrVars()
+        visual->SetLineP1Id(firstPointId);
+        visual->SetLineP2Id(secondPointId);
+        visual->SetRadiusId(center);
+        visual->SetRadius(VAbstractApplication::VApp()->TrVars()
                           ->FormulaToUser(arcRadius, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
         visual->RefreshGeometry();
     }

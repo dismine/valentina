@@ -44,26 +44,43 @@ class VisToolCurveIntersectAxis final : public VisLine
     Q_OBJECT // NOLINT
 public:
     explicit VisToolCurveIntersectAxis(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolCurveIntersectAxis() = default;
+    ~VisToolCurveIntersectAxis() override = default;
 
-    virtual void RefreshGeometry() override;
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id) override;
 
-    QString      Angle() const;
-    void         SetAngle(const QString &expression);
-    void         setAxisPointId(const quint32 &value);
+    auto Angle() const -> QString;
+    void SetAngle(const QString &expression);
 
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolLineIntersectAxis)};
+    void SetCurveId(quint32 newCurveId);
+    void setAxisPointId(const quint32 &value);
+
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolLineIntersectAxis)};
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VisToolCurveIntersectAxis) // NOLINT
-    quint32         axisPointId;
-    qreal           angle;
-    VScaledEllipse *point;
-    VScaledEllipse *basePoint;
-    VScaledLine    *baseLine;
-    VScaledLine    *axisLine;
-    VCurvePathItem *visCurve;
+    quint32         m_axisPointId{NULL_ID};
+    qreal           m_angle{-1};
+    VScaledEllipse *m_point{nullptr};
+    VScaledEllipse *m_basePoint{nullptr};
+    VScaledLine    *m_baseLine{nullptr};
+    VScaledLine    *m_axisLine{nullptr};
+    VCurvePathItem *m_visCurve{nullptr};
+    quint32         m_curveId{NULL_ID};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolCurveIntersectAxis::SetCurveId(quint32 newCurveId)
+{
+    m_curveId = newCurveId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolCurveIntersectAxis::setAxisPointId(const quint32 &value)
+{
+    m_axisPointId = value;
+}
 
 #endif // VISTOOLCURVEINTERSECTAXIS_H

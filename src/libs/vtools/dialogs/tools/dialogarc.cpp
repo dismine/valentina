@@ -154,7 +154,10 @@ DialogArc::~DialogArc()
 void DialogArc::SetCenter(const quint32 &value)
 {
     ChangeCurrentData(ui->comboBoxBasePoint, value);
-    vis->setObject1Id(value);
+
+    auto *path = qobject_cast<VisToolArc *>(vis);
+    SCASSERT(path != nullptr)
+    path->SetCenterId(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -175,7 +178,7 @@ void DialogArc::SetF2(const QString &value)
 
     auto *path = qobject_cast<VisToolArc *>(vis);
     SCASSERT(path != nullptr)
-    path->setF2(m_f2);
+    path->SetF2(m_f2);
 
     MoveCursorToEnd(ui->plainTextEditF2);
 }
@@ -217,7 +220,7 @@ void DialogArc::SetApproximationScale(qreal value)
 
     auto *path = qobject_cast<VisToolArc *>(vis);
     SCASSERT(path != nullptr)
-            path->setApproximationScale(value);
+    path->SetApproximationScale(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -343,7 +346,7 @@ void DialogArc::SetF1(const QString &value)
 
     auto *path = qobject_cast<VisToolArc *>(vis);
     SCASSERT(path != nullptr)
-    path->setF1(m_f1);
+    path->SetF1(m_f1);
 
     MoveCursorToEnd(ui->plainTextEditF1);
 }
@@ -366,7 +369,7 @@ void DialogArc::SetRadius(const QString &value)
 
     auto *path = qobject_cast<VisToolArc *>(vis);
     SCASSERT(path != nullptr)
-    path->setRadius(m_radius);
+    path->SetRadius(m_radius);
 
     MoveCursorToEnd(ui->plainTextEditFormula);
 }
@@ -418,11 +421,11 @@ void DialogArc::SaveData()
     auto *path = qobject_cast<VisToolArc *>(vis);
     SCASSERT(path != nullptr)
 
-    path->setObject1Id(GetCenter());
-    path->setRadius(m_radius);
-    path->setF1(m_f1);
-    path->setF2(m_f2);
-    path->setApproximationScale(ui->doubleSpinBoxApproximationScale->value());
+    path->SetCenterId(GetCenter());
+    path->SetRadius(m_radius);
+    path->SetF1(m_f1);
+    path->SetF2(m_f2);
+    path->SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
     path->RefreshGeometry();
 }
 

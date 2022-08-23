@@ -321,12 +321,12 @@ void VToolShoulderPoint::SetVisualization()
         auto *visual = qobject_cast<VisToolShoulderPoint *>(vis);
         SCASSERT(visual != nullptr)
 
-        visual->setObject1Id(pShoulder);
-        visual->setLineP1Id(basePointId);
-        visual->setLineP2Id(p2Line);
-        visual->setLength(VAbstractApplication::VApp()->TrVars()
+        visual->SetLineP1Id(pShoulder);
+        visual->SetLineP1Id(basePointId);
+        visual->SetLineP2Id(p2Line);
+        visual->SetLength(VAbstractApplication::VApp()->TrVars()
                           ->FormulaToUser(formulaLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
-        visual->setLineStyle(LineStyleToPenStyle(m_lineType));
+        visual->SetLineStyle(LineStyleToPenStyle(m_lineType));
         visual->RefreshGeometry();
     }
 }

@@ -40,29 +40,32 @@ class VisToolPiece : public VisPath
 {
     Q_OBJECT // NOLINT
 public:
-    VisToolPiece(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolPiece() Q_DECL_EQ_DEFAULT;
+    explicit VisToolPiece(const VContainer *data, QGraphicsItem *parent = nullptr);
+    ~VisToolPiece() override = default;
 
-    virtual void RefreshGeometry() override;
-    void         SetPiece(const VPiece &piece);
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolPiece)};
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id = NULL_ID) override;
+
+    void SetPiece(const VPiece &piece);
+
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolPiece)};
 private:
     Q_DISABLE_COPY_MOVE(VisToolPiece) // NOLINT
-    QVector<VScaledEllipse *> m_points;
-    QVector<VCurvePathItem *> m_curves;
+    QVector<VScaledEllipse *> m_points{};
+    QVector<VCurvePathItem *> m_curves{};
 
-    VScaledLine *m_line1;
-    VScaledLine *m_line2;
-    VPiece m_piece;
-    bool m_pieceCached;
-    QPainterPath m_cachedMainPath;
-    QVector<VPointF> m_cachedNodes;
-    QVector<QPointF> m_cachedMainPathPoints;
-    QVector<QPainterPath> m_cachedCurvesPath;
+    VScaledLine *m_line1{nullptr};
+    VScaledLine *m_line2{nullptr};
+    VPiece m_piece{};
+    bool m_pieceCached{false};
+    QPainterPath m_cachedMainPath{};
+    QVector<VPointF> m_cachedNodes{};
+    QVector<QPointF> m_cachedMainPathPoints{};
+    QVector<QPainterPath> m_cachedCurvesPath{};
 
-    VScaledEllipse* GetPoint(quint32 i, const QColor &color);
-    VCurvePathItem *GetCurve(quint32 i, const QColor &color);
+    auto GetPoint(quint32 i, const QColor &color) -> VScaledEllipse *;
+    auto GetCurve(quint32 i, const QColor &color) -> VCurvePathItem *;
 
     void HideAllItems();
 };

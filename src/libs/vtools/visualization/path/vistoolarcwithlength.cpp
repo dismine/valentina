@@ -48,23 +48,23 @@
 VisToolArcWithLength::VisToolArcWithLength(const VContainer *data, QGraphicsItem *parent)
     :VisPath(data, parent)
 {
-    arcCenter = InitPoint(mainColor, this);
-    f1Point = InitPoint(supportColor, this);
+    m_arcCenter = InitPoint(Color(VColor::MainColor), this);
+    m_f1Point = InitPoint(Color(VColor::SupportColor), this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolArcWithLength::RefreshGeometry()
 {
-    if (object1Id > NULL_ID)
+    if (m_centerId > NULL_ID)
     {
-        f1Point->setVisible(false);
+        m_f1Point->setVisible(false);
 
-        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(arcCenter, static_cast<QPointF>(*first), supportColor);
+        const QSharedPointer<VPointF> first = GetData()->GeometricObject<VPointF>(m_centerId);
+        DrawPoint(m_arcCenter, static_cast<QPointF>(*first), Color(VColor::SupportColor));
 
-        if (mode == Mode::Creation)
+        if (GetMode() == Mode::Creation)
         {
-            QLineF r = QLineF(static_cast<QPointF>(*first), Visualization::scenePos);
+            QLineF r = QLineF(static_cast<QPointF>(*first), ScenePos());
 
             auto Angle = [r]()
             {
@@ -80,84 +80,95 @@ void VisToolArcWithLength::RefreshGeometry()
 
             static const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
 
-            if (qFuzzyIsNull(radius))
+            if (qFuzzyIsNull(m_radius))
             {
                 VArc arc = VArc (*first, r.length(), r.angle(), r.angle());
-                arc.SetApproximationScale(m_approximationScale);
-                DrawPath(this, arc.GetPath(), QVector<DirectionArrow>(), supportColor, Qt::DashLine, Qt::RoundCap);
+                arc.SetApproximationScale(ApproximationScale());
+                DrawPath(this, arc.GetPath(), QVector<DirectionArrow>(), Color(VColor::SupportColor), Qt::DashLine,
+                         Qt::RoundCap);
 
-                Visualization::toolTip = tr("<b>Arc</b>: radius = %1%2; "
-                                            "<b>Mouse click</b> - finish selecting the radius, "
-                                            "<b>%3</b> - skip")
-                        .arg(NumberToUser(r.length()), prefix, VModifierKey::EnterKey());
+                SetToolTip(tr("<b>Arc</b>: radius = %1%2; "
+                              "<b>Mouse click</b> - finish selecting the radius, "
+                              "<b>%3</b> - skip").arg(NumberToUser(r.length()), prefix, VModifierKey::EnterKey()));
             }
-            else if (f1 < 0)
+            else if (m_f1 < 0)
             {
                 qreal f1Angle = Angle();
-                VArc arc = VArc (*first, radius, f1Angle, f1Angle);
-                arc.SetApproximationScale(m_approximationScale);
-                DrawPath(this, arc.GetPath(), QVector<DirectionArrow>(), supportColor, Qt::DashLine, Qt::RoundCap);
+                VArc arc = VArc (*first, m_radius, f1Angle, f1Angle);
+                arc.SetApproximationScale(ApproximationScale());
+                DrawPath(this, arc.GetPath(), QVector<DirectionArrow>(), Color(VColor::SupportColor), Qt::DashLine,
+                         Qt::RoundCap);
 
                 QLineF f1Line = r;
-                f1Line.setLength(radius);
+                f1Line.setLength(m_radius);
                 f1Line.setAngle(f1Angle);
 
-                DrawPoint(f1Point, f1Line.p2(), supportColor);
+                DrawPoint(m_f1Point, f1Line.p2(), Color(VColor::SupportColor));
 
-                Visualization::toolTip = tr("<b>Arc</b>: radius = %1%2, first angle = %3°; "
-                                            "<b>Mouse click</b> - finish selecting the first angle, "
-                                            "<b>%4</b> - sticking angle, "
-                                            "<b>%5</b> - skip")
-                        .arg(NumberToUser(radius), prefix)
-                        .arg(f1Angle)
-                        .arg(VModifierKey::Shift(), VModifierKey::EnterKey());
+                SetToolTip(tr("<b>Arc</b>: radius = %1%2, first angle = %3°; "
+                              "<b>Mouse click</b> - finish selecting the first angle, "
+                              "<b>%4</b> - sticking angle, "
+                              "<b>%5</b> - skip")
+                               .arg(NumberToUser(m_radius), prefix)
+                               .arg(f1Angle)
+                               .arg(VModifierKey::Shift(), VModifierKey::EnterKey()));
             }
-            else if (f1 >= 0)
+            else if (m_f1 >= 0)
             {
-                VArc arc = VArc (*first, radius, f1, r.angle());
-                arc.SetApproximationScale(m_approximationScale);
-                DrawPath(this, arc.GetPath(), arc.DirectionArrows(), mainColor, lineStyle, Qt::RoundCap);
+                VArc arc = VArc (*first, m_radius, m_f1, r.angle());
+                arc.SetApproximationScale(ApproximationScale());
+                DrawPath(this, arc.GetPath(), arc.DirectionArrows(), Color(VColor::MainColor), LineStyle(),
+                         Qt::RoundCap);
 
-                Visualization::toolTip = tr("<b>Arc</b>: radius = %1%2, first angle = %3°, arc length = %4%2; "
-                                            "<b>Mouse click</b> - finish creating, "
-                                            "<b>%5</b> - skip")
-                        .arg(NumberToUser(radius), prefix)
-                        .arg(f1)
-                        .arg(NumberToUser(arc.GetLength()), VModifierKey::EnterKey());
+                SetToolTip(tr("<b>Arc</b>: radius = %1%2, first angle = %3°, arc length = %4%2; "
+                              "<b>Mouse click</b> - finish creating, "
+                              "<b>%5</b> - skip")
+                               .arg(NumberToUser(m_radius), prefix)
+                               .arg(m_f1)
+                               .arg(NumberToUser(arc.GetLength()), VModifierKey::EnterKey()));
             }
         }
         else
         {
-            if (not qFuzzyIsNull(radius) && f1 >= 0 && not qFuzzyIsNull(length))
+            if (not qFuzzyIsNull(m_radius) && m_f1 >= 0 && not qFuzzyIsNull(m_length))
             {
-                VArc arc = VArc (length, *first, radius, f1);
-                arc.SetApproximationScale(m_approximationScale);
-                DrawPath(this, arc.GetPath(), arc.DirectionArrows(), mainColor, lineStyle, Qt::RoundCap);
+                VArc arc = VArc (m_length, *first, m_radius, m_f1);
+                arc.SetApproximationScale(ApproximationScale());
+                DrawPath(this, arc.GetPath(), arc.DirectionArrows(), Color(VColor::MainColor), LineStyle(),
+                         Qt::RoundCap);
             }
             else
             {
-                DrawPath(this, QPainterPath(), QVector<DirectionArrow>(), mainColor, lineStyle, Qt::RoundCap);
+                DrawPath(this, QPainterPath(), QVector<DirectionArrow>(), Color(VColor::MainColor), LineStyle(),
+                         Qt::RoundCap);
             }
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolArcWithLength::setRadius(const QString &expression)
+void VisToolArcWithLength::VisualMode(quint32 id)
 {
-    radius = FindLengthFromUser(expression, Visualization::data->DataVariables());
+    m_centerId = id;
+    StartVisualMode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolArcWithLength::setF1(const QString &expression)
+void VisToolArcWithLength::SetRadius(const QString &expression)
 {
-    f1 = FindValFromUser(expression, Visualization::data->DataVariables());
+    m_radius = FindLengthFromUser(expression, GetData()->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolArcWithLength::setLength(const QString &expression)
+void VisToolArcWithLength::SetF1(const QString &expression)
 {
-    length = FindLengthFromUser(expression, Visualization::data->DataVariables());
+    m_f1 = FindValFromUser(expression, GetData()->DataVariables());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolArcWithLength::SetLength(const QString &expression)
+{
+    m_length = FindLengthFromUser(expression, GetData()->DataVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

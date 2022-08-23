@@ -45,27 +45,49 @@ class VisToolHeight final : public VisLine
     Q_OBJECT // NOLINT
 public:
     explicit VisToolHeight(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolHeight() = default;
+    ~VisToolHeight() override = default;
 
-    virtual void RefreshGeometry() override;
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id) override;
 
-    void         setLineP1Id(const quint32 &value);
-    void         setLineP2Id(const quint32 &value);
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolHeight)};
+    void SetBasePointId(quint32 value);
+    void SetLineP1Id(quint32 value);
+    void SetLineP2Id(quint32 value);
+
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolHeight)};
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VisToolHeight) // NOLINT
-    //base point in parent class
-    quint32              lineP1Id{NULL_ID};//first point of line
-    quint32              lineP2Id{NULL_ID};//second point of line
-    VScaledEllipse *point{nullptr};
-    VScaledEllipse *base_point{nullptr};
-    VScaledEllipse *lineP1{nullptr};
-    VScaledEllipse *lineP2{nullptr};
-    VScaledLine    *line{nullptr};
-    VScaledLine    *line_intersection{nullptr};
-    void         ShowIntersection(const QLineF &height_line, const QLineF &base_line);
+    quint32         m_basePointId{NULL_ID};
+    quint32         m_lineP1Id{NULL_ID};//first point of line
+    quint32         m_lineP2Id{NULL_ID};//second point of line
+    VScaledEllipse *m_point{nullptr};
+    VScaledEllipse *m_basePoint{nullptr};
+    VScaledEllipse *m_lineP1{nullptr};
+    VScaledEllipse *m_lineP2{nullptr};
+    VScaledLine    *m_line{nullptr};
+    VScaledLine    *m_lineIntersection{nullptr};
+
+    void ShowIntersection(const QLineF &height_line, const QLineF &base_line);
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolHeight::SetBasePointId(quint32 value)
+{
+    m_basePointId = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolHeight::SetLineP1Id(quint32 value)
+{
+    m_lineP1Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolHeight::SetLineP2Id(quint32 value)
+{
+    m_lineP2Id = value;
+}
 
 #endif // VISTOOLHEIGHT_H

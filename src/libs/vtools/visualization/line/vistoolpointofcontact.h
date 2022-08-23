@@ -44,26 +44,48 @@ class VisToolPointOfContact : public VisLine
     Q_OBJECT // NOLINT
 public:
     explicit VisToolPointOfContact(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolPointOfContact() = default;
+    ~VisToolPointOfContact() override = default;
 
-    virtual void RefreshGeometry() override;
-    void         setLineP2Id(const quint32 &value);
-    void         setRadiusId(const quint32 &value);
-    void         setRadius(const QString &expression);
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolPointOfContact)};
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id) override;
+
+    void SetLineP1Id(quint32 value);
+    void SetLineP2Id(quint32 value);
+    void SetRadiusId(quint32 value);
+    void SetRadius(const QString &expression);
+
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::ToolPointOfContact)};
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VisToolPointOfContact) // NOLINT
-    quint32               lineP2Id;
-    quint32               radiusId;
-    VScaledEllipse       *point;
-    VScaledEllipse       *lineP1;
-    VScaledEllipse       *lineP2;
-    VScaledEllipse       *arc_point;
-    QGraphicsEllipseItem *circle;
-    qreal                 radius;
-
+    quint32               m_lineP1Id{NULL_ID};
+    quint32               m_lineP2Id{NULL_ID};
+    quint32               m_radiusId{NULL_ID};
+    VScaledEllipse       *m_point{nullptr};
+    VScaledEllipse       *m_lineP1{nullptr};
+    VScaledEllipse       *m_lineP2{nullptr};
+    VScaledEllipse       *m_arcPoint{nullptr};
+    QGraphicsEllipseItem *m_circle{nullptr};
+    qreal                 m_radius{0};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolPointOfContact::SetLineP1Id(quint32 value)
+{
+    m_lineP1Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolPointOfContact::SetLineP2Id(quint32 value)
+{
+    m_lineP2Id = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VisToolPointOfContact::SetRadiusId(quint32 value)
+{
+    m_radiusId = value;
+}
 
 #endif // VISTOOLPOINTOFCONTACT_H

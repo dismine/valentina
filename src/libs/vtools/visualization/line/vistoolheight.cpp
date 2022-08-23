@@ -36,7 +36,6 @@
 #include <new>
 
 #include "../../tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolheight.h"
-#include "../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
@@ -47,53 +46,53 @@
 VisToolHeight::VisToolHeight(const VContainer *data, QGraphicsItem *parent)
     : VisLine(data, parent)
 {
-    base_point = InitPoint(supportColor, this);
-    lineP1 = InitPoint(supportColor, this);
-    lineP2 = InitPoint(supportColor, this);
-    line = InitItem<VScaledLine>(supportColor, this);
-    line_intersection = InitItem<VScaledLine>(supportColor, this); //-V656
+    m_basePoint = InitPoint(Color(VColor::SupportColor), this);
+    m_lineP1 = InitPoint(Color(VColor::SupportColor), this);
+    m_lineP2 = InitPoint(Color(VColor::SupportColor), this);
+    m_line = InitItem<VScaledLine>(Color(VColor::SupportColor), this);
+    m_lineIntersection = InitItem<VScaledLine>(Color(VColor::SupportColor), this); //-V656
 
-    point = InitPoint(mainColor, this);
+    m_point = InitPoint(Color(VColor::MainColor), this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolHeight::RefreshGeometry()
 {
-    if (object1Id > NULL_ID)
+    if (m_basePointId > NULL_ID)
     {
-        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(base_point, static_cast<QPointF>(*first), supportColor);
+        const QSharedPointer<VPointF> first = GetData()->GeometricObject<VPointF>(m_basePointId);
+        DrawPoint(m_basePoint, static_cast<QPointF>(*first), Color(VColor::SupportColor));
 
-        if (lineP1Id <= NULL_ID)
+        if (m_lineP1Id <= NULL_ID)
         {
-            DrawLine(this, QLineF(static_cast<QPointF>(*first), Visualization::scenePos), mainColor);
+            DrawLine(this, QLineF(static_cast<QPointF>(*first), ScenePos()), Color(VColor::MainColor));
         }
         else
         {
-            const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(lineP1Id);
-            DrawPoint(lineP1, static_cast<QPointF>(*second), supportColor);
+            const QSharedPointer<VPointF> second = GetData()->GeometricObject<VPointF>(m_lineP1Id);
+            DrawPoint(m_lineP1, static_cast<QPointF>(*second), Color(VColor::SupportColor));
 
             QLineF base_line;
-            if (lineP2Id <= NULL_ID)
+            if (m_lineP2Id <= NULL_ID)
             {
-                base_line = QLineF(static_cast<QPointF>(*second), Visualization::scenePos);
-                DrawLine(line, base_line, supportColor);
+                base_line = QLineF(static_cast<QPointF>(*second), ScenePos());
+                DrawLine(m_line, base_line, Color(VColor::SupportColor));
             }
             else
             {
-                const QSharedPointer<VPointF> third = Visualization::data->GeometricObject<VPointF>(lineP2Id);
-                DrawPoint(lineP2, static_cast<QPointF>(*third), supportColor);
+                const QSharedPointer<VPointF> third = GetData()->GeometricObject<VPointF>(m_lineP2Id);
+                DrawPoint(m_lineP2, static_cast<QPointF>(*third), Color(VColor::SupportColor));
 
                 base_line = QLineF(static_cast<QPointF>(*second), static_cast<QPointF>(*third));
             }
 
-            DrawLine(line, base_line, supportColor);
+            DrawLine(m_line, base_line, Color(VColor::SupportColor));
 
             QPointF height = VToolHeight::FindPoint(base_line, static_cast<QPointF>(*first));
-            DrawPoint(point, height, mainColor);
+            DrawPoint(m_point, height, Color(VColor::MainColor));
 
             QLineF height_line(static_cast<QPointF>(*first), height);
-            DrawLine(this, height_line, mainColor, lineStyle);
+            DrawLine(this, height_line, Color(VColor::MainColor), LineStyle());
 
             ShowIntersection(height_line, base_line);
         }
@@ -101,15 +100,10 @@ void VisToolHeight::RefreshGeometry()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolHeight::setLineP1Id(const quint32 &value)
+void VisToolHeight::VisualMode(quint32 id)
 {
-    lineP1Id = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolHeight::setLineP2Id(const quint32 &value)
-{
-    lineP2Id = value;
+    m_basePointId = id;
+    StartVisualMode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -120,11 +114,12 @@ void VisToolHeight::ShowIntersection(const QLineF &height_line, const QLineF &ba
 
     if (intersect == QLineF::UnboundedIntersection)
     {
-        line_intersection->setVisible(true);
-        DrawLine(line_intersection, QLineF(base_line.p1(), height_line.p2()), supportColor, Qt::DashLine);
+        m_lineIntersection->setVisible(true);
+        DrawLine(m_lineIntersection, QLineF(base_line.p1(), height_line.p2()), Color(VColor::SupportColor),
+                 Qt::DashLine);
     }
     else if (intersect == QLineF::BoundedIntersection)
     {
-        line_intersection->setVisible(false);
+        m_lineIntersection->setVisible(false);
     }
 }

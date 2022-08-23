@@ -37,27 +37,27 @@ class VisPieceSpecialPoints : public VisPath
 {
     Q_OBJECT // NOLINT
 public:
-    VisPieceSpecialPoints(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisPieceSpecialPoints() Q_DECL_EQ_DEFAULT;
+    explicit VisPieceSpecialPoints(const VContainer *data, QGraphicsItem *parent = nullptr);
+    ~VisPieceSpecialPoints() override = default;
 
-    virtual void RefreshGeometry() override;
+    void RefreshGeometry() override;
+    void VisualMode(quint32 id = NULL_ID) override;
 
     void SetPoints(const QVector<quint32> &pins);
     void SetShowRect(bool show);
     void SetRect(const QRectF &rect);
 
-    virtual int  type() const override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::PieceSpecialPoints)};
+    auto type() const -> int override {return Type;}
+    enum {Type = UserType + static_cast<int>(Vis::PieceSpecialPoints)};
 private:
     Q_DISABLE_COPY_MOVE(VisPieceSpecialPoints) // NOLINT
-    QVector<VSimplePoint *> m_points;
-    QVector<quint32>        m_spoints;
-    bool                    m_showRect;
-    QRectF                  m_placeLabelRect;
-    VCurvePathItem         *m_rectItem;
-    QColor                 supportColor2;
+    QVector<VSimplePoint *>  m_points{};
+    QVector<quint32>         m_spoints{};
+    bool                     m_showRect{false};
+    QRectF                   m_placeLabelRect{};
+    VCurvePathItem          *m_rectItem{nullptr};
 
-    VSimplePoint *GetPoint(quint32 i, const QColor &color);
+    auto GetPoint(quint32 i, const QColor &color) -> VSimplePoint *;
 
     void HideAllItems();
 };
