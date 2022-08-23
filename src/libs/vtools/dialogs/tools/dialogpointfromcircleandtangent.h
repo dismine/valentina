@@ -50,65 +50,65 @@ class DialogPointFromCircleAndTangent : public DialogTool
 
 public:
     DialogPointFromCircleAndTangent(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    ~DialogPointFromCircleAndTangent();
+    ~DialogPointFromCircleAndTangent() override;
 
-    QString        GetPointName() const;
-    void           SetPointName(const QString &value);
+    auto GetPointName() const -> QString;
+    void SetPointName(const QString &value);
 
-    quint32        GetCircleCenterId() const;
-    void           SetCircleCenterId(const quint32 &value);
+    auto GetCircleCenterId() const -> quint32;
+    void SetCircleCenterId(const quint32 &value);
 
-    QString        GetCircleRadius() const;
-    void           SetCircleRadius(const QString &value);
+    auto GetCircleRadius() const -> QString;
+    void SetCircleRadius(const QString &value);
 
-    quint32        GetTangentPointId() const;
-    void           SetTangentPointId(const quint32 &value);
+    auto GetTangentPointId() const -> quint32;
+    void SetTangentPointId(quint32 value);
 
-    CrossCirclesPoint GetCrossCirclesPoint() const;
-    void              SetCrossCirclesPoint(const CrossCirclesPoint &p);
+    auto GetCrossCirclesPoint() const -> CrossCirclesPoint;
+    void SetCrossCirclesPoint(CrossCirclesPoint p);
 
-    void    SetNotes(const QString &notes);
-    QString GetNotes() const;
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
 
     void ShowDialog(bool click) override;
 public slots:
-    virtual void   ChosenObject(quint32 id, const SceneObject &type) override;
-    void           PointChanged();
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void PointChanged();
 
-    void           DeployCircleRadiusTextEdit();
-    void           FXCircleRadius();
-    void           EvalCircleRadius();
+    void DeployCircleRadiusTextEdit();
+    void FXCircleRadius();
+    void EvalCircleRadius();
 
 protected:
-    virtual void   ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void   SaveData() override;
-    virtual void   closeEvent(QCloseEvent *event) override;
-    virtual bool   IsValid() const final;
+    void SaveData() override;
+    void closeEvent(QCloseEvent *event) override;
+    auto IsValid() const -> bool final;
 
 private:
     Q_DISABLE_COPY_MOVE(DialogPointFromCircleAndTangent) // NOLINT
 
     Ui::DialogPointFromCircleAndTangent *ui;
 
-    QTimer* timerCircleRadius;
-    QString circleRadius;
-    int     formulaBaseHeightCircleRadius;
-    QString pointName;
-    bool    flagCircleRadius;
-    bool    flagName;
-    bool    flagError;
+    QTimer* m_timerCircleRadius{nullptr};
+    QString m_circleRadius{};
+    int     m_formulaBaseHeightCircleRadius{0};
+    QString m_pointName{};
+    bool    m_flagCircleRadius{false};
+    bool    m_flagName{true};
+    bool    m_flagError{true};
     /** @brief number number of handled objects */
-    qint32  number{0};
-    bool m_firstRelease{false};
+    qint32  m_number{0};
+    bool    m_firstRelease{false};
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogPointFromCircleAndTangent::IsValid() const
+inline auto DialogPointFromCircleAndTangent::IsValid() const -> bool
 {
-    return flagCircleRadius && flagName && flagError;
+    return m_flagCircleRadius && m_flagName && m_flagError;
 }
 
 #endif // DIALOGPOINTFROMCIRCLEANDTANGENT_H
