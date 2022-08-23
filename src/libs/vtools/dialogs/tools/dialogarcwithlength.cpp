@@ -347,8 +347,9 @@ void DialogArcWithLength::ShowDialog(bool click)
             }
             else
             {
-                VArc arc(*point, VAbstractValApplication::VApp()->toPixel(radius.toDouble()), f1.toDouble(),
-                         line.angle());
+                const qreal r = Visualization::FindLengthFromUser(radius, data->DataVariables());
+                const qreal angle1 = Visualization::FindValFromUser(f1, data->DataVariables());
+                VArc arc(*point, r, angle1, line.angle());
 
                 SetLength(QString::number(VAbstractValApplication::VApp()->fromPixel(arc.GetLength())));
 
