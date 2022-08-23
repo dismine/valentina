@@ -94,7 +94,7 @@ public slots:
     void FXLength();
 
 protected:
-    void  ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
@@ -110,40 +110,40 @@ private:
     Ui::DialogArcWithLength *ui;
 
     /** @brief flagRadius true if value of radius is correct */
-    bool flagRadius{false};
+    bool m_flagRadius{false};
 
     /** @brief flagF1 true if value of first angle is correct */
-    bool flagF1{false};
+    bool m_flagF1{false};
 
-    bool flagLength{false};
+    bool m_flagLength{false};
 
-    bool flagAlias{true};
+    bool m_flagAlias{true};
 
     /** @brief timerRadius timer of check formula of radius */
-    QTimer *timerRadius;
+    QTimer *m_timerRadius;
 
     /** @brief timerF1 timer of check formula of first angle */
-    QTimer *timerF1;
+    QTimer *m_timerF1;
 
-    QTimer *timerLength;
+    QTimer *m_timerLength;
 
     /** @brief radius formula of radius */
-    QString radius{};
+    QString m_radius{};
 
     /** @brief f1 formula of first angle */
-    QString f1{};
+    QString m_f1{};
 
-    QString length{};
+    QString m_length{};
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int formulaBaseHeightRadius{0};
-    int formulaBaseHeightF1{0};
-    int formulaBaseHeightLength{0};
+    int m_formulaBaseHeightRadius{0};
+    int m_formulaBaseHeightF1{0};
+    int m_formulaBaseHeightLength{0};
 
-    QString originAliasSuffix{};
+    QString m_originAliasSuffix{};
 
-    bool stageRadius{true};
-    bool stageF1{false};
+    bool m_stageRadius{true};
+    bool m_stageF1{false};
 
     bool m_firstRelease{false};
 
@@ -155,7 +155,7 @@ private:
 //---------------------------------------------------------------------------------------------------------------------
 inline auto DialogArcWithLength::IsValid() const -> bool
 {
-    return flagRadius && flagF1 && flagLength && flagAlias;
+    return m_flagRadius && m_flagF1 && m_flagLength && m_flagAlias;
 }
 
 #endif // DIALOGARCWITHLENGTH_H
