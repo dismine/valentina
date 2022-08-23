@@ -328,9 +328,12 @@ void VToolPointFromCircleAndTangent::SetVisualization()
         auto *visual = qobject_cast<VisToolPointFromCircleAndTangent *>(vis);
         SCASSERT(visual != nullptr)
 
+        const bool osSeparator = VAbstractApplication::VApp()->Settings()->GetOsSeparator();
+        const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
+
         visual->SetPointId(tangentPointId);
         visual->SetCenterId(circleCenterId);
-        visual->SetCRadius(circleRadius);
+        visual->SetCRadius(trVars->FormulaToUser(circleRadius, osSeparator));
         visual->SetCrossPoint(crossPoint);
         visual->RefreshGeometry();
     }

@@ -49,6 +49,8 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "ui_dialogpointfromcircleandtangent.h"
+#include "../vwidgets/vabstractmainwindow.h"
+#include "../vgeometry/vpointf.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointFromCircleAndTangent::DialogPointFromCircleAndTangent(const VContainer *data, quint32 toolId,
@@ -206,41 +208,89 @@ void DialogPointFromCircleAndTangent::SetCrossCirclesPoint(const CrossCirclesPoi
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPointFromCircleAndTangent::ShowDialog(bool click)
+{
+    if (not prepare)
+    {
+        return;
+    }
+
+    auto FinishCreating = [this]()
+    {
+        vis->SetMode(Mode::Show);
+        vis->RefreshGeometry();
+
+        emit ToolTip(QString());
+
+        setModal(true);
+        show();
+    };
+
+    if (click)
+    {
+        // The check need to ignore first release of mouse button.
+        // User can select point by clicking on a label.
+        if (not m_firstRelease)
+        {
+            m_firstRelease = true;
+            return;
+        }
+
+        /*We will ignore click if pointer is in point circle*/
+        auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
+        SCASSERT(scene != nullptr)
+        const QSharedPointer<VPointF> center = data->GeometricObject<VPointF>(GetCircleCenterId());
+        QLineF line = QLineF(static_cast<QPointF>(*center), scene->getScenePos());
+
+        SetCircleRadius(QString::number(FromPixel(line.length(), *data->GetPatternUnit())));
+
+        FinishCreating();
+    }
+
+    FinishCreating();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPointFromCircleAndTangent::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare == false)// After first choose we ignore all objects
+    if (prepare)// After first choose we ignore all objects
     {
-        if (type == SceneObject::Point)
-        {
-            VisToolPointFromCircleAndTangent *point = qobject_cast<VisToolPointFromCircleAndTangent *>(vis);
-            SCASSERT(point != nullptr)
+        return;
+    }
 
-            switch (number)
-            {
-                case 0:
-                    if (SetObject(id, ui->comboBoxTangentPoint, tr("Select a circle center")))
+    if (type == SceneObject::Point)
+    {
+        auto *point = qobject_cast<VisToolPointFromCircleAndTangent *>(vis);
+        SCASSERT(point != nullptr)
+
+        switch (number)
+        {
+            case 0:
+                if (SetObject(id, ui->comboBoxTangentPoint, tr("Select a circle center")))
+                {
+                    number++;
+                    point->VisualMode(id);
+                }
+                break;
+            case 1:
+                if (getCurrentObjectId(ui->comboBoxTangentPoint) != id)
+                {
+                    if (SetObject(id, ui->comboBoxCircleCenter, QString()))
                     {
-                        number++;
-                        point->VisualMode(id);
+                        auto *window = qobject_cast<VAbstractMainWindow *>(
+                            VAbstractValApplication::VApp()->getMainWindow());
+                        SCASSERT(window != nullptr)
+                        connect(vis.data(), &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
+
+                        number = 0;
+                        point->SetCenterId(id);
+                        point->RefreshGeometry();
+                        prepare = true;
                     }
-                    break;
-                case 1:
-                    if (getCurrentObjectId(ui->comboBoxTangentPoint) != id)
-                    {
-                        if (SetObject(id, ui->comboBoxCircleCenter, QString()))
-                        {
-                            number = 0;
-                            point->SetCenterId(id);
-                            point->RefreshGeometry();
-                            prepare = true;
-                            this->setModal(true);
-                            this->show();
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }
+                }
+                break;
+            default:
+                break;
         }
     }
 }

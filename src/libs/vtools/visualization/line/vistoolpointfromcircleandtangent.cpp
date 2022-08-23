@@ -41,6 +41,7 @@
 #include "../visualization.h"
 #include "visline.h"
 #include "../vwidgets/global.h"
+#include "../vmisc/vmodifierkey.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointFromCircleAndTangent::VisToolPointFromCircleAndTangent(const VContainer *data, QGraphicsItem *parent)
@@ -77,6 +78,27 @@ void VisToolPointFromCircleAndTangent::RefreshGeometry()
                 VToolPointFromCircleAndTangent::FindPoint(static_cast<QPointF>(*tan), static_cast<QPointF>(*center),
                                                           m_cRadius, m_crossPoint, &fPoint);
                 DrawPoint(m_point, fPoint, Color(VColor::MainColor));
+            }
+            else if (GetMode() == Mode::Creation)
+            {
+                QLineF cursorLine (static_cast<QPointF>(*center), ScenePos());
+                qreal len = cursorLine.length();
+
+                m_cPath->setRect(PointRect(len));
+                DrawPoint(m_cPath, static_cast<QPointF>(*center), Qt::darkGreen, Qt::DashLine);
+
+                FindRays(static_cast<QPointF>(*tan), static_cast<QPointF>(*center), len);
+
+                QPointF fPoint;
+                VToolPointFromCircleAndTangent::FindPoint(static_cast<QPointF>(*tan), static_cast<QPointF>(*center),
+                                                          len, m_crossPoint, &fPoint);
+                DrawPoint(m_point, fPoint, Color(VColor::MainColor));
+
+                const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+                SetToolTip(tr("Radius = %1%2; "
+                              "<b>Mouse click</b> - finish selecting the radius, "
+                              "<b>%3</b> - skip")
+                               .arg(NumberToUser(len), prefix, VModifierKey::EnterKey()));
             }
         }
     }
