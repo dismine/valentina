@@ -337,6 +337,7 @@ void VToolPointFromArcAndTangent::SetVisualization()
         visual->SetPointId(tangentPointId);
         visual->SetArcId(arcId);
         visual->SetCrossPoint(crossPoint);
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }

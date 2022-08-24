@@ -357,6 +357,7 @@ void VToolPointOfIntersectionArcs::SetVisualization()
         visual->SetArc1Id(firstArcId);
         visual->SetArc2Id(secondArcId);
         visual->SetCrossPoint(crossPoint);
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }

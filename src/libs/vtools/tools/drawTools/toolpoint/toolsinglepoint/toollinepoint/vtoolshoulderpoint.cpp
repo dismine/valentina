@@ -327,6 +327,7 @@ void VToolShoulderPoint::SetVisualization()
         visual->SetLength(VAbstractApplication::VApp()->TrVars()
                           ->FormulaToUser(formulaLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
         visual->SetLineStyle(LineStyleToPenStyle(m_lineType));
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }

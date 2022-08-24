@@ -264,6 +264,7 @@ void VToolHeight::SetVisualization()
         visual->SetLineP1Id(p1LineId);
         visual->SetLineP2Id(p2LineId);
         visual->SetLineStyle(LineStyleToPenStyle(m_lineType));
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }

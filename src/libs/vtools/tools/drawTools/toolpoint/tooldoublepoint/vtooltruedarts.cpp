@@ -332,6 +332,7 @@ void VToolTrueDarts::SetVisualization()
         visual->SetD1PointId(dartP1Id);
         visual->SetD2PointId(dartP2Id);
         visual->SetD3PointId(dartP3Id);
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }

@@ -276,7 +276,7 @@ void VToolCutArc::SetVisualization()
 
         const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
         visual->SetLineStyle(LineStyleToPenStyle(curve->GetPenStyle()));
-
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }

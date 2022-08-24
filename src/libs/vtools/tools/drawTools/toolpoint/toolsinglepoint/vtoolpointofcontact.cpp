@@ -356,6 +356,7 @@ void VToolPointOfContact::SetVisualization()
         visual->SetRadiusId(center);
         visual->SetRadius(VAbstractApplication::VApp()->TrVars()
                           ->FormulaToUser(arcRadius, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }

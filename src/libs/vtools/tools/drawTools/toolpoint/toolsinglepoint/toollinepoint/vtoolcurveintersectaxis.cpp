@@ -327,6 +327,7 @@ void VToolCurveIntersectAxis::SetVisualization()
         visual->SetAngle(VAbstractApplication::VApp()->TrVars()
                          ->FormulaToUser(formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
         visual->SetLineStyle(LineStyleToPenStyle(m_lineType));
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }

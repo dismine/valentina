@@ -300,6 +300,7 @@ void VToolLineIntersect::SetVisualization()
         visual->SetLine1P2Id(p2Line1);
         visual->SetLine2P1Id(p1Line2);
         visual->SetLine2P2Id(p2Line2);
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }

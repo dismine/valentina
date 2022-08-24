@@ -197,6 +197,7 @@ void VToolFlippingByLine::SetVisualization()
         visual->SetObjects(SourceToObjects(source));
         visual->SetFirstLinePointId(m_firstLinePointId);
         visual->SetSecondLinePointId(m_secondLinePointId);
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }

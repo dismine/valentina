@@ -345,6 +345,7 @@ void VToolTriangle::SetVisualization()
         visual->SetObject2Id(axisP2Id);
         visual->SetHypotenuseP1Id(firstPointId);
         visual->SetHypotenuseP2Id(secondPointId);
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }

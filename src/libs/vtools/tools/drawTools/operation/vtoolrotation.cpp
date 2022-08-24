@@ -348,6 +348,7 @@ void VToolRotation::SetVisualization()
         visual->SetOriginPointId(origPointId);
         visual->SetAngle(VAbstractApplication::VApp()->TrVars()
                          ->FormulaToUser(formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }

@@ -470,6 +470,7 @@ void VToolMove::SetVisualization()
         visual->SetRotationAngle(trVars->FormulaToUser(formulaRotationAngle, osSeparator));
         visual->SetLength(trVars->FormulaToUser(formulaLength, osSeparator));
         visual->SetRotationOriginPointId(origPointId);
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }

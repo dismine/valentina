@@ -212,6 +212,7 @@ void VToolFlippingByAxis::SetVisualization()
         visual->SetObjects(SourceToObjects(source));
         visual->SetOriginPointId(m_originPointId);
         visual->SetAxisType(m_axisType);
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }

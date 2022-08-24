@@ -335,6 +335,7 @@ void VToolPointFromCircleAndTangent::SetVisualization()
         visual->SetCenterId(circleCenterId);
         visual->SetCRadius(trVars->FormulaToUser(circleRadius, osSeparator));
         visual->SetCrossPoint(crossPoint);
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }

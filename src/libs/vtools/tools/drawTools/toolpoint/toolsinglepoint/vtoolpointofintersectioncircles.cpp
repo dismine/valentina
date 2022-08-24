@@ -379,6 +379,7 @@ void VToolPointOfIntersectionCircles::SetVisualization()
         visual->SetC1Radius(trVars->FormulaToUser(firstCircleRadius, osSeparator));
         visual->SetC2Radius(trVars->FormulaToUser(secondCircleRadius, osSeparator));
         visual->SetCrossPoint(crossPoint);
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }

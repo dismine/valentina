@@ -429,6 +429,7 @@ void VToolLine::SetVisualization()
         visual->SetPoint1Id(firstPoint);
         visual->SetPoint2Id(secondPoint);
         visual->SetLineStyle(LineStyleToPenStyle(m_lineType));
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }

@@ -473,6 +473,7 @@ void VToolPointOfIntersectionCurves::SetVisualization()
         visual->SetCurve2Id(secondCurveId);
         visual->SetVCrossPoint(vCrossPoint);
         visual->SetHCrossPoint(hCrossPoint);
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }

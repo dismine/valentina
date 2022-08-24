@@ -242,6 +242,7 @@ void VToolPointOfIntersection::SetVisualization()
 
         visual->SetPoint1Id(firstPointId);
         visual->SetPoint2Id(secondPointId);
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }
