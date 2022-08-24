@@ -449,17 +449,6 @@ void DialogShoulderPoint::ShowDialog(bool click)
         return;
     }
 
-    auto FinishCreating = [this]()
-    {
-        vis->SetMode(Mode::Show);
-        vis->RefreshGeometry();
-
-        emit ToolTip(QString());
-
-        setModal(true);
-        show();
-    };
-
     if (click)
     {
         // The check need to ignore first release of mouse button.
@@ -476,9 +465,13 @@ void DialogShoulderPoint::ShowDialog(bool click)
         const QSharedPointer<VPointF> p3 = data->GeometricObject<VPointF>(GetP3());
         QLineF line(static_cast<QPointF>(*p3), scene->getScenePos());
         SetFormula(QString::number(FromPixel(line.length(), *data->GetPatternUnit())));
-
-        FinishCreating();
     }
 
-    FinishCreating();
+    vis->SetMode(Mode::Show);
+    vis->RefreshGeometry();
+
+    emit ToolTip(QString());
+
+    setModal(true);
+    show();
 }

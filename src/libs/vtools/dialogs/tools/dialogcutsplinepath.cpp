@@ -366,17 +366,6 @@ void DialogCutSplinePath::ShowDialog(bool click)
         return;
     }
 
-    auto FinishCreating = [this]()
-    {
-        vis->SetMode(Mode::Show);
-        vis->RefreshGeometry();
-
-        emit ToolTip(QString());
-
-        setModal(true);
-        show();
-    };
-
     if (click)
     {
         // The check need to ignore first release of mouse button.
@@ -398,9 +387,13 @@ void DialogCutSplinePath::ShowDialog(bool click)
         {
             SetFormula(QString::number(FromPixel(len, *data->GetPatternUnit())));
         }
-
-        FinishCreating();
     }
 
-    FinishCreating();
+    vis->SetMode(Mode::Show);
+    vis->RefreshGeometry();
+
+    emit ToolTip(QString());
+
+    setModal(true);
+    show();
 }

@@ -189,17 +189,6 @@ void DialogPointOfContact::ShowDialog(bool click)
         return;
     }
 
-    auto FinishCreating = [this]()
-    {
-        vis->SetMode(Mode::Show);
-        vis->RefreshGeometry();
-
-        emit ToolTip(QString());
-
-        setModal(true);
-        show();
-    };
-
     if (click)
     {
         // The check need to ignore first release of mouse button.
@@ -218,11 +207,15 @@ void DialogPointOfContact::ShowDialog(bool click)
         QLineF line(static_cast<QPointF>(*center), scene->getScenePos());
 
         SetRadius(QString::number(FromPixel(line.length(), *data->GetPatternUnit())));
-
-        FinishCreating();
     }
 
-    FinishCreating();
+    vis->SetMode(Mode::Show);
+    vis->RefreshGeometry();
+
+    emit ToolTip(QString());
+
+    setModal(true);
+    show();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
