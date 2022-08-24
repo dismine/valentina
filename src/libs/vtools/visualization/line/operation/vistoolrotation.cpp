@@ -114,8 +114,7 @@ void VisToolRotation::RefreshGeometry()
 
         SetToolTip(tr("Rotating angle = %1°, <b>%2</b> - sticking angle, "
                       "<b>Mouse click</b> - finish creation")
-                       .arg(tempAngle)
-                       .arg(VModifierKey::Shift()));
+                       .arg(AngleToUser(tempAngle), VModifierKey::Shift()));
     }
 
     int iPoint = -1;

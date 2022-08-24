@@ -88,12 +88,8 @@ void VisToolEndLine::RefreshGeometry()
     static const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
     SetToolTip(tr("<b>Point at distance and angle</b>: angle = %1°, length = %2%3; "
                   "<b>%4</b> - sticking angle, <b>%5</b> - finish creation")
-                   .arg(this->line().angle())
-                   .arg(VAbstractApplication::VApp()->TrVars()
-                            ->FormulaToUser(
-                                QString::number(VAbstractValApplication::VApp()->fromPixel(this->line().length())),
-                                VAbstractApplication::VApp()->Settings()->GetOsSeparator()),
-                        prefix, VModifierKey::Shift(), VModifierKey::EnterKey()));
+                   .arg(AngleToUser(this->line().angle()), LengthToUser(this->line().length()), prefix,
+                        VModifierKey::Shift(), VModifierKey::EnterKey()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

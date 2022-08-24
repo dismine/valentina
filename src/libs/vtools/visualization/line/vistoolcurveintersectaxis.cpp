@@ -92,8 +92,7 @@ void VisToolCurveIntersectAxis::RefreshGeometry()
 
             SetToolTip(tr("<b>Intersection curve and axis</b>: angle = %1°; <b>%2</b> - "
                           "sticking angle, <b>%3</b> - finish creation")
-                           .arg(this->line().angle())
-                           .arg(VModifierKey::Shift(), VModifierKey::EnterKey()));
+                           .arg(AngleToUser(this->line().angle()), VModifierKey::Shift(), VModifierKey::EnterKey()));
         }
     }
 }

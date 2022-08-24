@@ -169,22 +169,14 @@ void VisToolMove::RefreshGeometry()
     {
         SetToolTip(tr("Length = %1%2, angle = %3°, <b>%4</b> - sticking angle, "
                       "<b>Mouse click</b> - finish selecting a position")
-                       .arg(VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-                                QString::number(VAbstractValApplication::VApp()->fromPixel(tempLength)),
-                                VAbstractApplication::VApp()->Settings()->GetOsSeparator()), prefix)
-                       .arg(tempAngle)
-                       .arg(VModifierKey::Shift()));
+                       .arg(LengthToUser(tempLength), prefix, AngleToUser(tempAngle), VModifierKey::Shift()));
     }
     else
     {
         SetToolTip(tr("Length = %1%2, angle = %3°, rotation angle = %4°, <b>%5</b> - sticking angle, "
                       "<b>%6</b> - change rotation origin point, <b>Mouse click</b> - finish creating")
-                       .arg(VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-                                QString::number(VAbstractValApplication::VApp()->fromPixel(tempLength)),
-                                VAbstractApplication::VApp()->Settings()->GetOsSeparator()), prefix)
-                       .arg(tempAngle)
-                       .arg(tempRoationAngle)
-                       .arg(VModifierKey::Shift(), VModifierKey::Control()));
+                       .arg(LengthToUser(tempLength), prefix, AngleToUser(tempAngle), AngleToUser(tempRoationAngle),
+                            VModifierKey::Shift(), VModifierKey::Control()));
     }
 
     CreateMovedRotatedObjects(iPoint, iCurve, tempLength, tempAngle, tempRoationAngle, origin);

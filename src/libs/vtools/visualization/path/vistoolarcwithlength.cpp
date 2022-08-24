@@ -109,9 +109,8 @@ void VisToolArcWithLength::RefreshGeometry()
                               "<b>Mouse click</b> - finish selecting the first angle, "
                               "<b>%4</b> - sticking angle, "
                               "<b>%5</b> - skip")
-                               .arg(LengthToUser(m_radius), prefix)
-                               .arg(f1Angle)
-                               .arg(VModifierKey::Shift(), VModifierKey::EnterKey()));
+                               .arg(LengthToUser(m_radius), prefix, AngleToUser(f1Angle), VModifierKey::Shift(),
+                                    VModifierKey::EnterKey()));
             }
             else if (m_f1 >= 0)
             {
@@ -123,9 +122,8 @@ void VisToolArcWithLength::RefreshGeometry()
                 SetToolTip(tr("<b>Arc</b>: radius = %1%2, first angle = %3°, arc length = %4%2; "
                               "<b>Mouse click</b> - finish creating, "
                               "<b>%5</b> - skip")
-                               .arg(LengthToUser(m_radius), prefix)
-                               .arg(m_f1)
-                               .arg(LengthToUser(arc.GetLength()), VModifierKey::EnterKey()));
+                               .arg(LengthToUser(m_radius), prefix, AngleToUser(m_f1), LengthToUser(arc.GetLength()),
+                                    VModifierKey::EnterKey()));
             }
         }
         else
