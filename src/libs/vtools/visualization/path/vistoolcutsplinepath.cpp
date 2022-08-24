@@ -99,7 +99,7 @@ void VisToolCutSplinePath::RefreshGeometry()
             SetToolTip(tr("Length = %1%2; "
                           "<b>Mouse click</b> - finish selecting the length, "
                           "<b>%3</b> - skip")
-                           .arg(NumberToUser(length), prefix, VModifierKey::EnterKey()));
+                           .arg(LengthToUser(length), prefix, VModifierKey::EnterKey()));
         }
     }
 }

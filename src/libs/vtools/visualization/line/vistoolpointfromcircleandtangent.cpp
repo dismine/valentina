@@ -98,7 +98,7 @@ void VisToolPointFromCircleAndTangent::RefreshGeometry()
                 SetToolTip(tr("Radius = %1%2; "
                               "<b>Mouse click</b> - finish selecting the radius, "
                               "<b>%3</b> - skip")
-                               .arg(NumberToUser(len), prefix, VModifierKey::EnterKey()));
+                               .arg(LengthToUser(len), prefix, VModifierKey::EnterKey()));
             }
         }
     }

@@ -34,14 +34,12 @@
 #include <QtDebug>
 
 #include "../vmisc/def.h"
-#include "../vmisc/vmath.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/compatibility.h"
 #include "vabstractcurve.h"
 #include "vellipticalarc_p.h"
-#include "vspline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

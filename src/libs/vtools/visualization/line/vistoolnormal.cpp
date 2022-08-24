@@ -113,7 +113,7 @@ void VisToolNormal::RefreshGeometry()
                 SetToolTip(tr("Length = %1%2; "
                               "<b>Mouse click</b> - finish selecting the length, "
                               "<b>%3</b> - skip")
-                               .arg(NumberToUser(len), prefix, VModifierKey::EnterKey()));
+                               .arg(LengthToUser(len), prefix, VModifierKey::EnterKey()));
             }
             else
             {

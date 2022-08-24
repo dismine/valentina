@@ -92,7 +92,7 @@ void VisToolArc::RefreshGeometry()
 
                 SetToolTip(tr("<b>Arc</b>: radius = %1%2; "
                               "<b>Mouse click</b> - finish selecting the radius, "
-                              "<b>%3</b> - skip").arg(NumberToUser(r.length()), prefix, VModifierKey::EnterKey()));
+                              "<b>%3</b> - skip").arg(LengthToUser(r.length()), prefix, VModifierKey::EnterKey()));
             }
             else if (m_f1 < 0)
             {
@@ -112,7 +112,7 @@ void VisToolArc::RefreshGeometry()
                               "<b>Mouse click</b> - finish selecting the first angle, "
                               "<b>%4</b> - sticking angle, "
                               "<b>%5</b> - skip")
-                               .arg(NumberToUser(m_radius), prefix)
+                               .arg(LengthToUser(m_radius), prefix)
                                .arg(f1Angle)
                                .arg(VModifierKey::Shift(), VModifierKey::EnterKey()));
             }
@@ -129,7 +129,7 @@ void VisToolArc::RefreshGeometry()
                               "<b>%5</b> - sticking angle, "
                               "<b>%6</b> - sticking end, "
                               "<b>%7</b> - skip")
-                               .arg(NumberToUser(m_radius), prefix)
+                               .arg(LengthToUser(m_radius), prefix)
                                .arg(m_f1)
                                .arg(f2Angle)
                                .arg(VModifierKey::Shift(), VModifierKey::Control(), VModifierKey::EnterKey()));

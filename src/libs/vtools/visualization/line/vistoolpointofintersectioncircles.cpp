@@ -109,7 +109,7 @@ void VisToolPointOfIntersectionCircles::RefreshGeometry()
                     SetToolTip(tr("Radius = %1%2; "
                                   "<b>Mouse click</b> - finish selecting the second radius, "
                                   "<b>%3</b> - skip")
-                                   .arg(NumberToUser(length), prefix, VModifierKey::EnterKey()));
+                                   .arg(LengthToUser(length), prefix, VModifierKey::EnterKey()));
                 }
             }
         }
@@ -125,7 +125,7 @@ void VisToolPointOfIntersectionCircles::RefreshGeometry()
             SetToolTip(tr("Radius = %1%2; "
                           "<b>Mouse click</b> - finish selecting the first radius, "
                           "<b>%3</b> - skip")
-                           .arg(NumberToUser(length), prefix, VModifierKey::EnterKey()));
+                           .arg(LengthToUser(length), prefix, VModifierKey::EnterKey()));
         }
     }
 }

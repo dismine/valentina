@@ -119,7 +119,8 @@ protected:
     static auto GetCurveItem(QVector<VCurvePathItem *> &curves, quint32 i, const QColor &color,
                              QGraphicsItem *parent) -> VCurvePathItem *;
 
-    static auto NumberToUser(qreal value) -> QString;
+    static auto LengthToUser(qreal value) -> QString;
+    static auto AngleToUser(qreal value) -> QString;
 
     void SetColor(VColor type, const QColor& color);
 
