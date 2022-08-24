@@ -48,6 +48,8 @@
 #include "../vgeometry/vellipticalarc.h"
 #include "../qmuparser/qmudef.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/global.h"
+#include "../vwidgets/vabstractmainwindow.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -543,6 +545,105 @@ void DialogEllipticalArc::DeployRotationAngleTextEdit()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogEllipticalArc::ShowDialog(bool click)
+{
+    if (not prepare)
+    {
+        return;
+    }
+
+    if (click)
+    {
+        // The check need to ignore first release of mouse button.
+        // User can select point by clicking on a label.
+        if (not m_firstRelease)
+        {
+            m_firstRelease = true;
+            return;
+        }
+
+        auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
+        SCASSERT(scene != nullptr)
+
+        const QSharedPointer<VPointF> center = data->GeometricObject<VPointF>(GetCenter());
+        QLineF line = QLineF(static_cast<QPointF>(*center), scene->getScenePos());
+
+        auto Angle = [line]()
+        {
+            if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
+            {
+                QLineF correction = line;
+                correction.setAngle(Visualization::CorrectAngle(correction.angle()));
+                return correction.angle();
+            }
+
+            return line.angle();
+        };
+
+        if (m_stage == 0) // radius 1
+        {
+            //Radius of point circle, but little bigger. Need to handle with hover sizes.
+            if (line.length() <= ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene()))*1.5)
+            {
+                return;
+            }
+
+            SetRadius1(QString::number(FromPixel(line.length(), *data->GetPatternUnit())));
+            vis->RefreshGeometry();
+            ++m_stage;
+            return;
+        }
+
+        if (m_stage == 1) // radius 2
+        {
+            QLineF radius2Line(center->x(), center->y(), center->x(), center->y() - 100);
+            QPointF p = VGObject::ClosestPoint(radius2Line, scene->getScenePos());
+            line = QLineF(static_cast<QPointF>(*center), p);
+
+            //Radius of point circle, but little bigger. Need to handle with hover sizes.
+            if (line.length() <= ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene()))*1.5)
+            {
+                return;
+            }
+
+            SetRadius2(QString::number(FromPixel(line.length(), *data->GetPatternUnit())));
+            vis->RefreshGeometry();
+            ++m_stage;
+            return;
+        }
+
+        if (m_stage == 2) // f1
+        {
+            SetF1(QString::number(Angle()));
+            vis->RefreshGeometry();
+            ++m_stage;
+            return;
+        }
+
+        if (m_stage == 3) // f2
+        {
+            SetF2(QString::number(Angle()));
+            vis->RefreshGeometry();
+            ++m_stage;
+            return;
+        }
+
+        auto *path = qobject_cast<VisToolEllipticalArc *>(vis);
+        SCASSERT(path != nullptr)
+
+        SetRotationAngle(QString::number(Angle() - path->StartingRotationAngle()));
+    }
+
+    vis->SetMode(Mode::Show);
+    vis->RefreshGeometry();
+
+    emit ToolTip(QString());
+
+    setModal(true);
+    show();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
  * @param id id of point or detail
@@ -550,21 +651,27 @@ void DialogEllipticalArc::DeployRotationAngleTextEdit()
  */
 void DialogEllipticalArc::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare == false)// After first choose we ignore all objects
+    if (prepare)// After first choose we ignore all objects
     {
-        if (type == SceneObject::Point)
+        return;
+    }
+
+    if (type != SceneObject::Point)
+    {
+        return;
+    }
+
+    if (SetObject(id, ui->comboBoxBasePoint, QString()))
+    {
+        if (vis != nullptr)
         {
-            if (SetObject(id, ui->comboBoxBasePoint, QString()))
-            {
-                if (vis != nullptr)
-                {
-                    vis->VisualMode(id);
-                }
-                prepare = true;
-                this->setModal(true);
-                this->show();
-            }
+            auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+            SCASSERT(window != nullptr)
+            connect(vis, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
+
+            vis->VisualMode(id);
         }
+        prepare = true;
     }
 }
 

@@ -58,7 +58,6 @@ public:
     auto type() const -> int override {return Type;}
     enum {Type = UserType + static_cast<int>(Vis::ToolArc)};
 
-    static auto CorrectAngle(qreal angle) -> qreal;
     auto StickyEnd(qreal angle) const -> qreal;
 
 private:

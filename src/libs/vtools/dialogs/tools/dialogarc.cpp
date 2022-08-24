@@ -289,7 +289,7 @@ void DialogArc::ShowDialog(bool click)
                 if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
                 {
                     QLineF correction = line;
-                    correction.setAngle(VisToolArc::CorrectAngle(correction.angle()));
+                    correction.setAngle(Visualization::CorrectAngle(correction.angle()));
                     return correction.angle();
                 }
 

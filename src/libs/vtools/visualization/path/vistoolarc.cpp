@@ -179,18 +179,6 @@ void VisToolArc::VisualMode(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VisToolArc::CorrectAngle(qreal angle) -> qreal
-{
-    qreal ang = angle;
-    if (angle > 360)
-    {
-        ang = angle - 360.0 * qFloor(angle/360);
-    }
-
-    return (qFloor(qAbs(ang)/5.)) * 5;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto VisToolArc::StickyEnd(qreal angle) const -> qreal
 {
     if (QGuiApplication::keyboardModifiers() == Qt::ControlModifier)

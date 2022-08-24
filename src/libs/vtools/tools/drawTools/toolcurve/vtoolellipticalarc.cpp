@@ -430,6 +430,7 @@ void VToolEllipticalArc::SetVisualization()
         visual->SetF2(trVars->FormulaToUser(elArc->GetFormulaF2(), osSeparator));
         visual->SetRotationAngle(trVars->FormulaToUser(elArc->GetFormulaRotationAngle(), osSeparator));
         visual->SetLineStyle(LineStyleToPenStyle(elArc->GetPenStyle()));
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }

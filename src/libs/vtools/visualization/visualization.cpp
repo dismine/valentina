@@ -43,6 +43,7 @@
 #include <QString>
 #include <Qt>
 #include <QtDebug>
+#include <QtMath>
 
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/vtranslatevars.h"
@@ -197,6 +198,18 @@ auto Visualization::FindValFromUser(const QString &expression,
         }
     }
     return val;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal Visualization::CorrectAngle(qreal angle)
+{
+    qreal ang = angle;
+    if (angle > 360)
+    {
+        ang = angle - 360.0 * qFloor(angle/360);
+    }
+
+    return (qFloor(qAbs(ang)/5.)) * 5;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -84,6 +84,7 @@ public:
                                    QSharedPointer<VInternalVariable> > *vars, bool fromUser = true) -> qreal;
     static auto FindValFromUser(const QString &expression, const QHash<QString,
                                 QSharedPointer<VInternalVariable> > *vars, bool fromUser = true) -> qreal;
+    static auto CorrectAngle(qreal angle) -> qreal;
 
     auto CurrentToolTip() const -> QString;
 

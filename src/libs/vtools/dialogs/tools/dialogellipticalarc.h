@@ -80,6 +80,8 @@ public:
     void    SetAliasSuffix(const QString &alias);
     QString GetAliasSuffix() const;
 
+    void ShowDialog(bool click) override;
+
 public slots:
     virtual void  ChosenObject(quint32 id, const SceneObject &type) override;
     /**
@@ -174,6 +176,10 @@ private:
     qreal         angleRotation;
 
     QString       originAliasSuffix{};
+
+    bool m_firstRelease{false};
+
+    int m_stage{0};
 
     void          EvalRadiuses();
     void          EvalAngles();
