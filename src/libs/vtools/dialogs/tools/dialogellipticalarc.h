@@ -48,42 +48,42 @@ class DialogEllipticalArc : public DialogTool
     Q_OBJECT // NOLINT
 public:
     DialogEllipticalArc(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogEllipticalArc() override;
+    ~DialogEllipticalArc() override;
 
-    quint32       GetCenter() const;
-    void          SetCenter(const quint32 &value);
+    auto GetCenter() const -> quint32;
+    void SetCenter(quint32 value);
 
-    QString       GetRadius1() const;
-    void          SetRadius1(const QString &value);
+    auto GetRadius1() const -> QString;
+    void SetRadius1(const QString &value);
 
-    QString       GetRadius2() const;
-    void          SetRadius2(const QString &value);
+    auto GetRadius2() const -> QString;
+    void SetRadius2(const QString &value);
 
-    QString       GetF1() const;
-    void          SetF1(const QString &value);
+    auto GetF1() const -> QString;
+    void SetF1(const QString &value);
 
-    QString       GetF2() const;
-    void          SetF2(const QString &value);
+    auto GetF2() const -> QString;
+    void SetF2(const QString &value);
 
-    QString       GetRotationAngle() const;
-    void          SetRotationAngle(const QString &value);
+    auto GetRotationAngle() const -> QString;
+    void SetRotationAngle(const QString &value);
 
-    QString       GetPenStyle() const;
-    void          SetPenStyle(const QString &value);
+    auto GetPenStyle() const -> QString;
+    void SetPenStyle(const QString &value);
 
-    QString       GetColor() const;
-    void          SetColor(const QString &value);
+    auto GetColor() const -> QString;
+    void SetColor(const QString &value);
 
-    void    SetNotes(const QString &notes);
-    QString GetNotes() const;
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
 
-    void    SetAliasSuffix(const QString &alias);
-    QString GetAliasSuffix() const;
+    void SetAliasSuffix(const QString &alias);
+    auto GetAliasSuffix() const -> QString;
 
     void ShowDialog(bool click) override;
 
 public slots:
-    virtual void  ChosenObject(quint32 id, const SceneObject &type) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
     /**
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
@@ -93,20 +93,20 @@ public slots:
     void DeployF2TextEdit();
     void DeployRotationAngleTextEdit();
 
-    void          FXRadius1();
-    void          FXRadius2();
-    void          FXF1();
-    void          FXF2();
-    void          FXRotationAngle();
+    void FXRadius1();
+    void FXRadius2();
+    void FXF1();
+    void FXF2();
+    void FXRotationAngle();
 
 protected:
-    virtual void  ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void  SaveData() override;
-    virtual void  closeEvent(QCloseEvent *event) override;
-    virtual bool  IsValid() const final;
+    void SaveData() override;
+    void closeEvent(QCloseEvent *event) override;
+    auto IsValid() const -> bool final;
 
 private slots:
     void ValidateAlias();
@@ -118,77 +118,77 @@ private:
     Ui::DialogEllipticalArc *ui;
 
     /** @brief flagRadius1 true if value of radius1 is correct */
-    bool          flagRadius1;
+    bool m_flagRadius1{false};
 
     /** @brief flagRadius2 true if value of radius2 is correct */
-    bool          flagRadius2;
+    bool m_flagRadius2{false};
 
     /** @brief flagF1 true if value of first angle is correct */
-    bool          flagF1;
+    bool m_flagF1{false};
 
     /** @brief flagF2 true if value of second angle is correct */
-    bool          flagF2;
+    bool m_flagF2{false};
 
     /** @brief flagRotationAngle true if value of rotation angle is correct */
-    bool          flagRotationAngle;
+    bool m_flagRotationAngle{false};
 
-    bool          flagAlias{true};
+    bool m_flagAlias{true};
 
     /** @brief timerRadius1 timer of check formula of radius1 */
-    QTimer        *timerRadius1;
+    QTimer *m_timerRadius1;
 
     /** @brief timerRadius2 timer of check formula of radius2 */
-    QTimer        *timerRadius2;
+    QTimer *m_timerRadius2;
 
     /** @brief timerF1 timer of check formula of first angle */
-    QTimer        *timerF1;
+    QTimer *m_timerF1;
 
     /** @brief timerF2 timer of check formula of second angle */
-    QTimer        *timerF2;
+    QTimer *m_timerF2;
 
     /** @brief timerRotationAngle timer of check formula of rotation angle */
-    QTimer        *timerRotationAngle;
+    QTimer *m_timerRotationAngle;
 
     /** @brief radius1 formula of radius1 */
-    QString       radius1;
+    QString m_radius1{};
 
     /** @brief radius2 formula of radius2 */
-    QString       radius2;
+    QString m_radius2{};
 
     /** @brief f1 formula of first angle */
-    QString       f1;
+    QString m_f1{};
 
     /** @brief f2 formula of second angle */
-    QString       f2;
+    QString m_f2{};
 
     /** @brief rotationAngle formula of rotation angle */
-    QString       rotationAngle;
+    QString m_rotationAngle{};
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int           formulaBaseHeightRadius1;
-    int           formulaBaseHeightRadius2;
-    int           formulaBaseHeightF1;
-    int           formulaBaseHeightF2;
-    int           formulaBaseHeightRotationAngle;
+    int m_formulaBaseHeightRadius1{0};
+    int m_formulaBaseHeightRadius2{0};
+    int m_formulaBaseHeightF1{0};
+    int m_formulaBaseHeightF2{0};
+    int m_formulaBaseHeightRotationAngle{0};
 
-    qreal         angleF1;
-    qreal         angleF2;
-    qreal         angleRotation;
+    qreal m_angleF1{INT_MIN};
+    qreal m_angleF2{INT_MIN};
+    qreal m_angleRotation{INT_MIN};
 
-    QString       originAliasSuffix{};
+    QString m_originAliasSuffix{};
 
     bool m_firstRelease{false};
 
     int m_stage{0};
 
-    void          EvalRadiuses();
-    void          EvalAngles();
+    void EvalRadiuses();
+    void EvalAngles();
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogEllipticalArc::IsValid() const
+inline auto DialogEllipticalArc::IsValid() const -> bool
 {
-    return flagRadius1 && flagRadius2 && flagF1 && flagF2 && flagRotationAngle && flagAlias;
+    return m_flagRadius1 && m_flagRadius2 && m_flagF1 && m_flagF2 && m_flagRotationAngle && m_flagAlias;
 }
 
 #endif // DIALOGELLIPTICALARC_H
