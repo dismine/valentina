@@ -52,44 +52,44 @@ class DialogPointOfContact : public DialogTool
     Q_OBJECT // NOLINT
 public:
     DialogPointOfContact(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogPointOfContact() override;
+    ~DialogPointOfContact() override;
 
-    QString        GetPointName() const;
-    void           SetPointName(const QString &value);
+    auto GetPointName() const -> QString;
+    void SetPointName(const QString &value);
 
-    QString        getRadius() const;
-    void           setRadius(const QString &value);
+    auto GetRadius() const -> QString;
+    void SetRadius(const QString &value);
 
-    quint32        getCenter() const;
-    void           setCenter(quint32 value);
+    auto GetCenter() const -> quint32;
+    void SetCenter(quint32 value);
 
-    quint32        GetFirstPoint() const;
-    void           SetFirstPoint(quint32 value);
+    auto GetFirstPoint() const -> quint32;
+    void SetFirstPoint(quint32 value);
 
-    quint32        GetSecondPoint() const;
-    void           SetSecondPoint(quint32 value);
+    auto GetSecondPoint() const -> quint32;
+    void SetSecondPoint(quint32 value);
 
-    void    SetNotes(const QString &notes);
-    QString GetNotes() const;
+    void SetNotes(const QString &notes);
+    auto GetNotes() const -> QString;
 
     void ShowDialog(bool click) override;
 public slots:
-    virtual void   ChosenObject(quint32 id, const SceneObject &type) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
     /**
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
-    void           DeployFormulaTextEdit();
-    virtual void   PointNameChanged() override;
-    void           FXRadius();
-    void           EvalFormula();
+    void DeployFormulaTextEdit();
+    void PointNameChanged() override;
+    void FXRadius();
+    void EvalFormula();
 protected:
-    virtual void   ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void   SaveData() override;
-    virtual void   closeEvent(QCloseEvent *event) override;
-    virtual bool   IsValid() const final;
+    void SaveData() override;
+    void closeEvent(QCloseEvent *event) override;
+    auto IsValid() const -> bool final;
 private:
     Q_DISABLE_COPY_MOVE(DialogPointOfContact) // NOLINT
 
@@ -97,29 +97,29 @@ private:
     Ui::DialogPointOfContact *ui;
 
     /** @brief radius radius of arc */
-    QString radius;
+    QString m_radius{};
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int formulaBaseHeight;
+    int m_formulaBaseHeight{0};
 
-    QString pointName;
+    QString m_pointName{};
 
-    QTimer *timerFormula;
+    QTimer *m_timerFormula;
 
-    bool flagFormula;
-    bool flagName;
-    bool flagError;
+    bool m_flagFormula{false};
+    bool m_flagName{true};
+    bool m_flagError{true};
 
     /** @brief number number of handled objects */
-    qint32 number{0};
+    qint32 m_number{0};
 
     bool m_firstRelease{false};
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogPointOfContact::IsValid() const
+inline auto DialogPointOfContact::IsValid() const -> bool
 {
-    return flagFormula && flagName && flagError;
+    return m_flagFormula && m_flagName && m_flagError;
 }
 
 #endif // DIALOGPOINTOFCONTACT_H

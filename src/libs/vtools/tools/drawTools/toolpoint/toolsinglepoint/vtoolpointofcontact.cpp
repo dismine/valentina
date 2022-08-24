@@ -87,8 +87,8 @@ void VToolPointOfContact::setDialog()
     const QPointer<DialogPointOfContact> dialogTool = qobject_cast<DialogPointOfContact *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
-    dialogTool->setRadius(arcRadius);
-    dialogTool->setCenter(center);
+    dialogTool->SetRadius(arcRadius);
+    dialogTool->SetCenter(center);
     dialogTool->SetFirstPoint(firstPointId);
     dialogTool->SetSecondPoint(secondPointId);
     dialogTool->SetPointName(p->name());
@@ -175,8 +175,8 @@ VToolPointOfContact* VToolPointOfContact::Create(const QPointer<DialogTool> &dia
     SCASSERT(not dialogTool.isNull())
 
     VToolPointOfContactInitData initData;
-    initData.radius = dialogTool->getRadius();
-    initData.center = dialogTool->getCenter();
+    initData.radius = dialogTool->GetRadius();
+    initData.center = dialogTool->GetCenter();
     initData.firstPointId = dialogTool->GetFirstPoint();
     initData.secondPointId = dialogTool->GetSecondPoint();
     initData.name = dialogTool->GetPointName();
@@ -307,13 +307,13 @@ void VToolPointOfContact::SaveDialog(QDomElement &domElement, QList<quint32> &ol
     AddDependence(oldDependencies, center);
     AddDependence(oldDependencies, firstPointId);
     AddDependence(oldDependencies, secondPointId);
-    AddDependence(newDependencies, dialogTool->getCenter());
+    AddDependence(newDependencies, dialogTool->GetCenter());
     AddDependence(newDependencies, dialogTool->GetFirstPoint());
     AddDependence(newDependencies, dialogTool->GetSecondPoint());
 
     doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
-    doc->SetAttribute(domElement, AttrRadius, dialogTool->getRadius());
-    doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->getCenter()));
+    doc->SetAttribute(domElement, AttrRadius, dialogTool->GetRadius());
+    doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetCenter()));
     doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->GetFirstPoint()));
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPoint()));
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
