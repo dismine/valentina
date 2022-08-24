@@ -41,6 +41,7 @@
 #include "../visualization.h"
 #include "visline.h"
 #include "../vwidgets/global.h"
+#include "../vmisc/vmodifierkey.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointOfContact::VisToolPointOfContact(const VContainer *data, QGraphicsItem *parent)
@@ -87,6 +88,25 @@ void VisToolPointOfContact::RefreshGeometry()
 
                     m_circle->setRect(PointRect(m_radius));
                     DrawPoint(m_circle, static_cast<QPointF>(*third), Color(VColor::SupportColor), Qt::DashLine);
+                }
+                else if (GetMode() == Mode::Creation)
+                {
+                    QLineF cursorLine (static_cast<QPointF>(*third), ScenePos());
+                    qreal radius = cursorLine.length();
+
+                    QPointF fPoint;
+                    VToolPointOfContact::FindPoint(radius, static_cast<QPointF>(*third), static_cast<QPointF>(*first),
+                                                   static_cast<QPointF>(*second), &fPoint);
+                    DrawPoint(m_point, fPoint, Color(VColor::MainColor));
+
+                    m_circle->setRect(PointRect(radius));
+                    DrawPoint(m_circle, static_cast<QPointF>(*third), Color(VColor::SupportColor), Qt::DashLine);
+
+                    const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+                    SetToolTip(tr("Radius = %1%2; "
+                                  "<b>Mouse click</b> - finish selecting the radius, "
+                                  "<b>%3</b> - skip")
+                                   .arg(LengthToUser(radius), prefix, VModifierKey::EnterKey()));
                 }
             }
         }

@@ -71,6 +71,8 @@ public:
 
     void    SetNotes(const QString &notes);
     QString GetNotes() const;
+
+    void ShowDialog(bool click) override;
 public slots:
     virtual void   ChosenObject(quint32 id, const SceneObject &type) override;
     /**
@@ -110,6 +112,8 @@ private:
 
     /** @brief number number of handled objects */
     qint32 number{0};
+
+    bool m_firstRelease{false};
 };
 
 //---------------------------------------------------------------------------------------------------------------------

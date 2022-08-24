@@ -45,11 +45,12 @@
 #include "../../visualization/visualization.h"
 #include "../../visualization/line/vistoolpointofcontact.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../ifc/xml/vdomdocument.h"
 #include "../support/dialogeditwrongformula.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "ui_dialogpointofcontact.h"
+#include "../vwidgets/vabstractmainwindow.h"
+#include "../vgeometry/vpointf.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -187,6 +188,50 @@ void DialogPointOfContact::DeployFormulaTextEdit()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfContact::ShowDialog(bool click)
+{
+    if (not prepare)
+    {
+        return;
+    }
+
+    auto FinishCreating = [this]()
+    {
+        vis->SetMode(Mode::Show);
+        vis->RefreshGeometry();
+
+        emit ToolTip(QString());
+
+        setModal(true);
+        show();
+    };
+
+    if (click)
+    {
+        // The check need to ignore first release of mouse button.
+        // User can select point by clicking on a label.
+        if (not m_firstRelease)
+        {
+            m_firstRelease = true;
+            return;
+        }
+
+        auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
+        SCASSERT(scene != nullptr)
+
+        const QSharedPointer<VPointF> center = data->GeometricObject<VPointF>(getCenter());
+
+        QLineF line(static_cast<QPointF>(*center), scene->getScenePos());
+
+        setRadius(QString::number(FromPixel(line.length(), *data->GetPatternUnit())));
+
+        FinishCreating();
+    }
+
+    FinishCreating();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ChoosedObject gets id and type of selected object. Save right data and ignore wrong.
  * @param id id of point or detail
@@ -194,56 +239,61 @@ void DialogPointOfContact::DeployFormulaTextEdit()
  */
 void DialogPointOfContact::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare == false)// After first choose we ignore all objects
+    if (prepare)// After first choose we ignore all objects
     {
-        if (type == SceneObject::Point)
-        {
-            VisToolPointOfContact *line = qobject_cast<VisToolPointOfContact *>(vis);
-            SCASSERT(line != nullptr)
+        return;
+    }
 
-            switch (number)
-            {
-                case 0:
-                    if (SetObject(id, ui->comboBoxFirstPoint, tr("Select second point of line")))
+    if (type == SceneObject::Point)
+    {
+        VisToolPointOfContact *line = qobject_cast<VisToolPointOfContact *>(vis);
+        SCASSERT(line != nullptr)
+
+        switch (number)
+        {
+            case 0:
+                if (SetObject(id, ui->comboBoxFirstPoint, tr("Select second point of line")))
+                {
+                    number++;
+                    line->VisualMode(id);
+                }
+                break;
+            case 1:
+                if (getCurrentObjectId(ui->comboBoxFirstPoint) != id)
+                {
+                    if (SetObject(id, ui->comboBoxSecondPoint, tr("Select point of center of arc")))
                     {
                         number++;
-                        line->VisualMode(id);
-                    }
-                    break;
-                case 1:
-                    if (getCurrentObjectId(ui->comboBoxFirstPoint) != id)
-                    {
-                        if (SetObject(id, ui->comboBoxSecondPoint, tr("Select point of center of arc")))
-                        {
-                            number++;
-                            line->SetLineP2Id(id);
-                            line->RefreshGeometry();
-                        }
-                    }
-                    break;
-                case 2:
-                {
-                    QSet<quint32> set;
-                    set.insert(getCurrentObjectId(ui->comboBoxFirstPoint));
-                    set.insert(getCurrentObjectId(ui->comboBoxSecondPoint));
-                    set.insert(id);
-
-                    if (set.size() == 3)
-                    {
-                        if (SetObject(id, ui->comboBoxCenter, QString()))
-                        {
-                            line->SetRadiusId(id);
-                            line->RefreshGeometry();
-                            prepare = true;
-                            this->setModal(true);
-                            this->show();
-                        }
+                        line->SetLineP2Id(id);
+                        line->RefreshGeometry();
                     }
                 }
-                    break;
-                default:
-                    break;
+                break;
+            case 2:
+            {
+                QSet<quint32> set;
+                set.insert(getCurrentObjectId(ui->comboBoxFirstPoint));
+                set.insert(getCurrentObjectId(ui->comboBoxSecondPoint));
+                set.insert(id);
+
+                if (set.size() == 3)
+                {
+                    if (SetObject(id, ui->comboBoxCenter, QString()))
+                    {
+                        auto *window = qobject_cast<VAbstractMainWindow *>(
+                            VAbstractValApplication::VApp()->getMainWindow());
+                        SCASSERT(window != nullptr)
+                        connect(line, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
+
+                        line->SetRadiusId(id);
+                        line->RefreshGeometry();
+                        prepare = true;
+                    }
+                }
             }
+                break;
+            default:
+                break;
         }
     }
 }
