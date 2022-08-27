@@ -2668,6 +2668,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolEllipticalArc(VPE::VProperty *pr
         case 59: // AttrPenStyle
             SetPenStyle<VToolEllipticalArc>(property);
             break;
+        case 60: // AttrAScale
+            SetApproximationScale<VToolEllipticalArc>(property);
+            break;
         case 61: // AttrNotes
             SetNotes<VToolEllipticalArc>(property);
             break;
@@ -3301,6 +3304,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolEllipticalArc(QGraphicsItem *it
     AddPropertyFormula(tr("Rotation angle:"), i->GetFormulaRotationAngle(), AttrRotationAngle);
     AddPropertyAlias(i, tr("Alias:"));
     AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
+    AddPropertyApproximationScale(tr("Approximation scale:"), i->GetApproximationScale());
     AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
 }
 
@@ -4266,6 +4270,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolEllipticalArc()
     QVariant valueCenterPoint;
     valueCenterPoint.setValue(i->CenterPointName());
     m_idToProperty[AttrCenter]->setValue(valueCenterPoint);
+
+    QVariant valueApproximationScale;
+    valueApproximationScale.setValue(i->GetApproximationScale());
+    m_idToProperty[AttrAScale]->setValue(valueApproximationScale);
 
     m_idToProperty[AttrNotes]->setValue(i->GetNotes());
 

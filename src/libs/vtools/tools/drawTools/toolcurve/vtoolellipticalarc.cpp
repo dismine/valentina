@@ -125,6 +125,7 @@ VToolEllipticalArc* VToolEllipticalArc::Create(const QPointer<DialogTool> &dialo
     initData.data = data;
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
+    initData.approximationScale = dialogTool->GetApproximationScale();
     initData.notes = dialogTool->GetNotes();
     initData.aliasSuffix = dialogTool->GetAliasSuffix();
     //initData.approximationScale = dialogTool->GetApproximationScale(); // For future use
@@ -334,6 +335,24 @@ void VToolEllipticalArc::SetFormulaRotationAngle(const VFormula &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qreal VToolEllipticalArc::GetApproximationScale() const
+{
+    QSharedPointer<VEllipticalArc> arc = VAbstractTool::data.GeometricObject<VEllipticalArc>(m_id);
+    SCASSERT(arc.isNull() == false)
+
+    return arc->GetApproximationScale();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolEllipticalArc::SetApproximationScale(qreal value)
+{
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
+    QSharedPointer<VEllipticalArc> arc = qSharedPointerDynamicCast<VEllipticalArc>(obj);
+    arc->SetApproximationScale(value);
+    SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolEllipticalArc::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolEllipticalArc>(show);
@@ -388,6 +407,7 @@ void VToolEllipticalArc::SaveDialog(QDomElement &domElement, QList<quint32> &old
     doc->SetAttribute(domElement, AttrRotationAngle, dialogTool->GetRotationAngle());
     doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
     doc->SetAttribute(domElement, AttrPenStyle, dialogTool->GetPenStyle());
+    doc->SetAttribute(domElement, AttrAScale, dialogTool->GetApproximationScale());
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrAlias, dialogTool->GetAliasSuffix(),
                                          [](const QString &suffix) noexcept {return suffix.isEmpty();});
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
@@ -430,6 +450,7 @@ void VToolEllipticalArc::SetVisualization()
         visual->SetF2(trVars->FormulaToUser(elArc->GetFormulaF2(), osSeparator));
         visual->SetRotationAngle(trVars->FormulaToUser(elArc->GetFormulaRotationAngle(), osSeparator));
         visual->SetLineStyle(LineStyleToPenStyle(elArc->GetPenStyle()));
+        visual->SetApproximationScale(elArc->GetApproximationScale());
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }

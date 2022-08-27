@@ -94,6 +94,9 @@ public:
     VFormula         GetFormulaRotationAngle() const;
     void             SetFormulaRotationAngle(const VFormula &value);
 
+    qreal            GetApproximationScale() const;
+    void             SetApproximationScale(qreal value);
+
     virtual void     ShowVisualization(bool show) override;
 protected slots:
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;

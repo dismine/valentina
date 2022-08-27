@@ -375,6 +375,22 @@ void DialogEllipticalArc::SetColor(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qreal DialogEllipticalArc::GetApproximationScale() const
+{
+    return ui->doubleSpinBoxApproximationScale->value();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEllipticalArc::SetApproximationScale(qreal value)
+{
+    ui->doubleSpinBoxApproximationScale->setValue(value);
+
+    auto *path = qobject_cast<VisToolEllipticalArc *>(vis);
+    SCASSERT(path != nullptr)
+    path->SetApproximationScale(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief EvalRadiuses calculate value of radiuses
  */
@@ -682,6 +698,7 @@ void DialogEllipticalArc::SaveData()
     path->SetF1(m_f1);
     path->SetF2(m_f2);
     path->SetRotationAngle(m_rotationAngle);
+    path->SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
     path->RefreshGeometry();
 }
 

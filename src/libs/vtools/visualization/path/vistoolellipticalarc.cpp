@@ -236,6 +236,7 @@ auto VisToolEllipticalArc::DrawElArc(const VPointF &center, qreal radius1, qreal
                                      qreal rotationAngle) -> VEllipticalArc
 {
     VEllipticalArc elArc(center, radius1, radius2, f1, f2, rotationAngle);
+    elArc.SetApproximationScale(ApproximationScale());
     DrawPath(this, elArc.GetPath(), elArc.DirectionArrows(), Color(VColor::MainColor), LineStyle(), Qt::RoundCap);
 
     return elArc;

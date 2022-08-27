@@ -46,7 +46,7 @@
 
 namespace
 {
-constexpr qreal tolerance = accuracyPointOnLine/32;
+constexpr qreal tolerance = accuracyPointOnLine/8;
 //---------------------------------------------------------------------------------------------------------------------
 auto VLen(fpm::fixed_16_16 x, fpm::fixed_16_16 y) -> fpm::fixed_16_16
 {

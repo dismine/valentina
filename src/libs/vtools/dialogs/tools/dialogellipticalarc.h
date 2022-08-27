@@ -74,6 +74,9 @@ public:
     auto GetColor() const -> QString;
     void SetColor(const QString &value);
 
+    auto GetApproximationScale() const -> qreal;
+    void SetApproximationScale(qreal value);
+
     void SetNotes(const QString &notes);
     auto GetNotes() const -> QString;
 
