@@ -53,8 +53,8 @@ DialogSinglePoint::DialogSinglePoint(const VContainer *data, quint32 toolId, QWi
 
     ui->lineEditName->setClearButtonEnabled(true);
 
-    ui->doubleSpinBoxX->setRange(0, VAbstractValApplication::VApp()->fromPixel(SceneSize));
-    ui->doubleSpinBoxY->setRange(0, VAbstractValApplication::VApp()->fromPixel(SceneSize));
+    ui->doubleSpinBoxX->setRange(0, VAbstractValApplication::VApp()->fromPixel(maxSceneSize));
+    ui->doubleSpinBoxY->setRange(0, VAbstractValApplication::VApp()->fromPixel(maxSceneSize));
     InitOkCancel(ui);
 
     connect(ui->lineEditName, &QLineEdit::textChanged, this, [this]()

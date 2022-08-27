@@ -77,7 +77,6 @@ public:
      * @brief Clear Clears the carrousel (removes everything)
      */
     void Clear();
-
     auto Layout() const -> VPLayoutWeakPtr;
 
 public slots:

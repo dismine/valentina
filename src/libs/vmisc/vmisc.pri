@@ -55,7 +55,9 @@ HEADERS += \
     $$PWD/vmodifierkey.h \
     $$PWD/typedef.h \
     $$PWD/backport/qscopeguard.h \
-    $$PWD/dialogs/dialogselectlanguage.h
+    $$PWD/dialogs/dialogselectlanguage.h \
+    $$PWD/fpm/fixed.hpp \
+    $$PWD/fpm/math.hpp
 
 contains(DEFINES, APPIMAGE) {
     SOURCES += \

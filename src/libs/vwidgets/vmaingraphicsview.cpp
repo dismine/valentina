@@ -51,20 +51,17 @@
 #include <QOpenGLWidget>
 #include <QMimeData>
 #include <QMimeDatabase>
+#include <QtMath>
 
 #include "../vmisc/def.h"
-#include "../vmisc/vmath.h"
 #include "vmaingraphicsscene.h"
 #include "vsimplecurve.h"
 #include "vcontrolpointspline.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vmisc/literals.h"
-#include "vabstractmainwindow.h"
 #include "global.h"
 #include "../ifc/xml/utils.h"
-
-const qreal maxSceneSize = ((20.0 * 1000.0) / 25.4) * PrintDPI; // 20 meters in pixels
 
 namespace
 {

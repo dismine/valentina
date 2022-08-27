@@ -74,13 +74,14 @@ class QMarginsF;
 class VTranslateMeasurements;
 class QGraphicsItem;
 
-#define SceneSize 50000  
-extern const qreal   defCurveApproximationScale;
-extern const qreal   minCurveApproximationScale;
-extern const qreal   maxCurveApproximationScale;
+constexpr qreal maxSceneSize = ((20.0 * 1000.0) / 25.4) * PrintDPI; // 20 meters in pixels
 
-extern const int minLabelFontSize;
-extern const int maxLabelFontSize;
+constexpr qreal defCurveApproximationScale = 0.5;
+constexpr qreal minCurveApproximationScale = 0.2;
+constexpr qreal maxCurveApproximationScale = 10.0;
+
+constexpr int minLabelFontSize = 5;
+constexpr int maxLabelFontSize = 100;
 
 enum class NodeDetail : qint8 { Contour, Modeling };
 enum class SceneObject : qint8 { Point, Line, Spline, Arc, ElArc, SplinePath, Detail, Unknown };

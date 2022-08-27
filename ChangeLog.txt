@@ -20,6 +20,7 @@
 - Fix segmenting a simple curve.
 - Fix export tiled pdf on Mac OS.
 - Improve visualization for tools.
+- Fix calculating an elliptical arc.
 
 # Valentina 0.7.51 April 18, 2022
 - Z value change for a layout piece.

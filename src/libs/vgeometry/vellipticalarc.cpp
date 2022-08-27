@@ -37,9 +37,171 @@
 #include "../ifc/ifcdef.h"
 #include "../ifc/exception/vexception.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vmisc/fpm/fixed.hpp"
+#include "../vmisc/fpm/math.hpp"
 #include "../vmisc/compatibility.h"
 #include "vabstractcurve.h"
 #include "vellipticalarc_p.h"
+#include "../vmisc/vmath.h"
+
+namespace
+{
+constexpr qreal tolerance = accuracyPointOnLine/32;
+//---------------------------------------------------------------------------------------------------------------------
+auto VLen(fpm::fixed_16_16 x, fpm::fixed_16_16 y) -> fpm::fixed_16_16
+{
+    x = fpm::abs(x);
+    y = fpm::abs(y);
+    if (x > y)
+    {
+        return x + qMax(y/8, y/2 - x/8);
+    }
+
+    return y + qMax(x/8, x/2 - y/8);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto AuxRadius(fpm::fixed_16_16 xP, fpm::fixed_16_16 yP, fpm::fixed_16_16 xQ, fpm::fixed_16_16 yQ) -> fpm::fixed_16_16
+{
+    fpm::fixed_16_16 dP = VLen(xP, yP);
+    fpm::fixed_16_16 dQ = VLen(xQ, yQ);
+    fpm::fixed_16_16 dJ = VLen(xP + xQ, yP + yQ);
+    fpm::fixed_16_16 dK = VLen(xP - xQ, yP - yQ);
+    fpm::fixed_16_16 r1 = qMax(dP, dQ);
+    fpm::fixed_16_16 r2 = qMax(dJ, dK);
+    return qMax(r1 + r1/16, r2 - r2/4);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto AngularInc(fpm::fixed_16_16 xP, fpm::fixed_16_16 yP, fpm::fixed_16_16 xQ, fpm::fixed_16_16 yQ,
+                fpm::fixed_16_16 flatness) -> int
+{
+
+    fpm::fixed_16_16 r = AuxRadius(xP, yP, xQ, yQ);
+    fpm::fixed_16_16 err2{r >> 3};
+    // 2nd-order term
+    fpm::fixed_16_16 err4{r >> 7};
+    // 4th-order term
+    const int kmax = qRound(0.5 * std::log2(maxSceneSize / (8. * tolerance)));
+    for (int k = 0; k < kmax; ++k)
+    {
+        if (flatness >= err2 + err4)
+        {
+            return k;
+        }
+        err2 >>= 2;
+        err4 >>= 4;
+    }
+    return kmax;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void CircleGen(fpm::fixed_16_16& u, fpm::fixed_16_16& v, uint k)
+{
+    u -= v >> k;
+    v += u >> k;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto InitialValue(fpm::fixed_16_16 u0, fpm::fixed_16_16 v0, uint k) -> fpm::fixed_16_16
+{
+    uint shift = 2*k + 3;
+    fpm::fixed_16_16 w {u0 >> shift};
+
+    fpm::fixed_16_16 U0 = u0 - w + (v0 >> (k + 1));
+    w >>= (shift + 1);
+    U0 -= w;
+    w >>= shift;
+    U0 -= w;
+    return U0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto EllipseCore(fpm::fixed_16_16 xC, fpm::fixed_16_16 yC, fpm::fixed_16_16 xP, fpm::fixed_16_16 yP,
+                 fpm::fixed_16_16 xQ, fpm::fixed_16_16 yQ, fpm::fixed_16_16 sweep,
+                 fpm::fixed_16_16 flatness) -> QVector<QPointF>
+{
+    uint k = qMin(static_cast<uint>(AngularInc(xP, yP, xQ, yQ, flatness)), 16U);
+    const uint count = static_cast<std::uint32_t>(sweep.raw_value()) >> (16 - k);
+
+    QVector<QPointF> arc;
+    arc.reserve(static_cast<int>(count) + 1);
+
+    // Arc start point
+    arc.append({static_cast<qreal>(xP + xC), static_cast<qreal>(yP + yC)});
+
+    xQ = InitialValue(xQ, xP, k);
+    yQ = InitialValue(yQ, yP, k);
+
+    for (uint i = 0; i < count; ++i)
+    {
+        CircleGen(xQ, xP, k);
+        CircleGen(yQ, yP, k);
+        arc.append({static_cast<qreal>(xP + xC), static_cast<qreal>(yP + yC)});
+    }
+
+    return arc;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto EllipticArcPoints(QPointF c, qreal radius1, qreal radius2, qreal astart, qreal asweep,
+                       qreal approximationScale) -> QVector<QPointF>
+{
+    fpm::fixed_16_16 xC{c.x()};
+    fpm::fixed_16_16 yC{c.y()};
+
+    fpm::fixed_16_16 xP{c.x() + radius1};
+    fpm::fixed_16_16 yP{c.y()};
+
+    fpm::fixed_16_16 xQ{c.x()};
+    fpm::fixed_16_16 yQ{c.y() - radius2};
+
+    xP -= xC;
+    yP -= yC;
+    xQ -= xC;
+    yQ -= yC;
+
+    if (not qFuzzyIsNull(astart))
+    {
+        // Set new conjugate diameter end points P’ and Q’
+        fpm::fixed_16_16 cosa {cos(astart)};
+        fpm::fixed_16_16 sina {sin(astart)};
+        fpm::fixed_16_16 x {xP * cosa + xQ * sina};
+        fpm::fixed_16_16 y {yP * cosa + yQ * sina};
+
+        xQ = xQ * cosa - xP * sina;
+        yQ = yQ * cosa - yP * sina;
+        xP = x;
+        yP = y;
+    }
+
+    // If sweep angle is negative, switch direction
+    if (asweep < 0)
+    {
+        xQ = -xQ;
+        yQ = -yQ;
+        asweep = -asweep;
+    }
+
+    if(approximationScale < minCurveApproximationScale || approximationScale > maxCurveApproximationScale)
+    {
+        approximationScale = VAbstractApplication::VApp()->Settings()->GetCurveApproximationScale();
+    }
+
+    fpm::fixed_16_16 flatness {maxCurveApproximationScale / approximationScale * tolerance};
+    fpm::fixed_16_16 swangle{asweep};
+    QVector<QPointF> arc = EllipseCore(xC, yC, xP, yP, xQ, yQ, swangle, flatness);
+
+    // Arc end point
+    fpm::fixed_16_16 cosb {qCos(asweep)};
+    fpm::fixed_16_16 sinb {qSin(asweep)};
+    xP = xP*cosb + xQ*sinb;
+    yP = yP*cosb + yQ*sinb;
+    arc.append({static_cast<qreal>(xP+xC), static_cast<qreal>(yP+yC)});
+
+    return arc;
+}
+}  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -59,11 +221,11 @@ VEllipticalArc::VEllipticalArc()
  * @param f2 end angle (degree).
  */
 VEllipticalArc::VEllipticalArc (const VPointF &center, qreal radius1, qreal radius2, const QString &formulaRadius1,
-                                const QString &formulaRadius2, qreal f1, const QString &formulaF1, qreal f2,
-                                const QString &formulaF2, qreal rotationAngle, const QString &formulaRotationAngle,
-                                quint32 idObject, Draw mode)
+                               const QString &formulaRadius2, qreal f1, const QString &formulaF1, qreal f2,
+                               const QString &formulaF2, qreal rotationAngle, const QString &formulaRotationAngle,
+                               quint32 idObject, Draw mode)
     : VAbstractArc(GOType::EllipticalArc, center, f1, formulaF1, f2, formulaF2, idObject, mode),
-      d (new VEllipticalArcData(radius1, radius2, formulaRadius1, formulaRadius2, rotationAngle, formulaRotationAngle))
+    d (new VEllipticalArcData(radius1, radius2, formulaRadius1, formulaRadius2, rotationAngle, formulaRotationAngle))
 {
     CreateName();
 }
@@ -72,7 +234,7 @@ VEllipticalArc::VEllipticalArc (const VPointF &center, qreal radius1, qreal radi
 VEllipticalArc::VEllipticalArc(const VPointF &center, qreal radius1, qreal radius2, qreal f1, qreal f2,
                                qreal rotationAngle)
     : VAbstractArc(GOType::EllipticalArc, center, f1, f2, NULL_ID, Draw::Calculation),
-      d (new VEllipticalArcData(radius1, radius2, rotationAngle))
+    d (new VEllipticalArcData(radius1, radius2, rotationAngle))
 {
     CreateName();
 }
@@ -83,7 +245,7 @@ VEllipticalArc::VEllipticalArc(qreal length, const QString &formulaLength, const
                                const QString &formulaF1, qreal rotationAngle, const QString &formulaRotationAngle,
                                quint32 idObject, Draw mode)
     : VAbstractArc(GOType::EllipticalArc, formulaLength, center, f1, formulaF1, idObject, mode),
-      d (new VEllipticalArcData(radius1, radius2, formulaRadius1, formulaRadius2, rotationAngle, formulaRotationAngle))
+    d (new VEllipticalArcData(radius1, radius2, formulaRadius1, formulaRadius2, rotationAngle, formulaRotationAngle))
 {
     CreateName();
     FindF2(length);
@@ -93,7 +255,7 @@ VEllipticalArc::VEllipticalArc(qreal length, const QString &formulaLength, const
 VEllipticalArc::VEllipticalArc(qreal length, const VPointF &center, qreal radius1, qreal radius2, qreal f1,
                                qreal rotationAngle)
     : VAbstractArc(GOType::EllipticalArc, center, f1, NULL_ID, Draw::Calculation),
-      d (new VEllipticalArcData(radius1, radius2, rotationAngle))
+    d (new VEllipticalArcData(radius1, radius2, rotationAngle))
 {
     CreateName();
     FindF2(length);
@@ -193,7 +355,7 @@ auto VEllipticalArc::Move(qreal length, qreal angle, const QString &prefix) cons
     const VPointF center = oldCenter.Move(length, angle);
 
     const QPointF position = d->m_transform.inverted().map(center.toQPointF()) -
-            d->m_transform.inverted().map(oldCenter.toQPointF());
+                             d->m_transform.inverted().map(oldCenter.toQPointF());
 
     QTransform t = d->m_transform;
     t.translate(position.x(), position.y());
@@ -285,45 +447,19 @@ auto VEllipticalArc::GetCenter() const -> VPointF
 auto VEllipticalArc::GetPoints() const -> QVector<QPointF>
 {
     const QPointF center = VAbstractArc::GetCenter().toQPointF();
-    QRectF box(center.x() - d->radius1, center.y() - d->radius2, d->radius1*2, d->radius2*2);
 
-    QLineF startLine(center.x(), center.y(), center.x() + d->radius1, center.y());
-    QLineF endLine = startLine;
-
-    startLine.setAngle(VAbstractArc::GetStartAngle());
-    endLine.setAngle(RealEndAngle());
-    qreal sweepAngle = startLine.angleTo(endLine);
-
-    if (qFuzzyIsNull(sweepAngle))
-    {
-        sweepAngle = 360;
-    }
-
-    QPainterPath path;
-    path.moveTo(GetP1());
-    path.arcTo(box, VAbstractArc::GetStartAngle(), sweepAngle);
-    path.moveTo(GetP2());
+    // Generate complete ellipse because angles are not correct and have to be fixed manually
+    QVector<QPointF> points = EllipticArcPoints(center, d->radius1, d->radius2, 0.0, M_2PI, GetApproximationScale());
+    points = ArcPoints(points);
 
     QTransform t = d->m_transform;
     t.translate(center.x(), center.y());
     t.rotate(-GetRotationAngle());
     t.translate(-center.x(), -center.y());
 
-    path = t.map(path);
+    std::transform(points.begin(), points.end(), points.begin(), [t](const QPointF &point) { return t.map(point); });
 
-    QPolygonF polygon;
-    const QList<QPolygonF> sub = path.toSubpathPolygons();
-    if (not sub.isEmpty())
-    {
-        polygon = ConstFirst (path.toSubpathPolygons());
-
-        if (not polygon.isEmpty() && not VFuzzyComparePoints(GetP1(), ConstFirst<QPointF> (polygon)))
-        {
-            polygon.removeFirst(); // remove point (0;0)
-        }
-    }
-
-    return static_cast<QVector<QPointF>>(polygon);
+    return points;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -360,7 +496,7 @@ auto VEllipticalArc::CutArc(const qreal &length, VEllipticalArc &arc1, VElliptic
 
         const QString errorMsg = QObject::tr("Unable to cut curve '%1'. The curve is too short.").arg(name());
         VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                          qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
+            qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
 
         return {};
     }
@@ -380,10 +516,10 @@ auto VEllipticalArc::CutArc(const qreal &length, VEllipticalArc &arc1, VElliptic
         else
         {
             errorMsg = QObject::tr("Curve '%1'. Length of a cut segment is too small. Optimize it to minimal value.")
-                    .arg(name());
+                           .arg(name());
         }
         VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                          qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
+            qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
     else if (length > maxLength)
     {
@@ -393,15 +529,15 @@ auto VEllipticalArc::CutArc(const qreal &length, VEllipticalArc &arc1, VElliptic
         if (not pointName.isEmpty())
         {
             errorMsg = QObject::tr("Curve '%1'. Length of a cut segment (%2) is too big. Optimize it to maximal value.")
-                    .arg(name(), pointName);
+                           .arg(name(), pointName);
         }
         else
         {
             errorMsg = QObject::tr("Curve '%1'. Length of a cut segment is too big. Optimize it to maximal value.")
-                    .arg(name());
+                           .arg(name());
         }
         VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                          qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
+            qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
     else
     {
@@ -410,13 +546,13 @@ auto VEllipticalArc::CutArc(const qreal &length, VEllipticalArc &arc1, VElliptic
 
     // the first arc has given length and startAngle just like in the origin arc
     arc1 = VEllipticalArc (len, QString().setNum(length), GetCenter(), d->radius1, d->radius2,
-                           d->formulaRadius1, d->formulaRadius2, GetStartAngle(), GetFormulaF1(), d->rotationAngle,
-                           GetFormulaRotationAngle(), getIdObject(), getMode());
+                          d->formulaRadius1, d->formulaRadius2, GetStartAngle(), GetFormulaF1(), d->rotationAngle,
+                          GetFormulaRotationAngle(), getIdObject(), getMode());
     // the second arc has startAngle just like endAngle of the first arc
     // and it has endAngle just like endAngle of the origin arc
     arc2 = VEllipticalArc (GetCenter(), d->radius1, d->radius2, d->formulaRadius1, d->formulaRadius2,
-                           arc1.GetEndAngle(), arc1.GetFormulaF2(), GetEndAngle(), GetFormulaF2(), d->rotationAngle,
-                           GetFormulaRotationAngle(), getIdObject(), getMode());
+                          arc1.GetEndAngle(), arc1.GetFormulaF2(), GetEndAngle(), GetFormulaF2(), d->rotationAngle,
+                          GetFormulaRotationAngle(), getIdObject(), getMode());
     return arc1.GetP1();
 }
 
@@ -432,7 +568,7 @@ auto VEllipticalArc::CutArc(const qreal &length, const QString &pointName) const
 //---------------------------------------------------------------------------------------------------------------------
 void VEllipticalArc::CreateName()
 {
-    QString name = ELARC_ + QString("%1").arg(this->GetCenter().name());
+    QString name = ELARC_ + QStringLiteral("%1").arg(this->GetCenter().name());
     const QString nameStr = QStringLiteral("_%1");
 
     if (getMode() == Draw::Modeling && getIdObject() != NULL_ID)
@@ -555,23 +691,101 @@ auto VEllipticalArc::GetP(qreal angle) const -> QPointF
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VEllipticalArc::RealEndAngle() const -> qreal
+auto VEllipticalArc::ArcPoints(QVector<QPointF> points) const -> QVector<QPointF>
 {
-    qreal endAngle = VEllipticalArc::OptimizeAngle(VAbstractArc::GetEndAngle());
-
-    if (qFuzzyIsNull(endAngle) ||
-            VFuzzyComparePossibleNulls(endAngle, 90) ||
-            VFuzzyComparePossibleNulls(endAngle, 180) ||
-            VFuzzyComparePossibleNulls(endAngle, 270) ||
-            VFuzzyComparePossibleNulls(endAngle, 360))
+    if (points.size() < 2 || VFuzzyComparePossibleNulls(VAbstractArc::GetStartAngle(), VAbstractArc::GetEndAngle()))
     {
-        return endAngle;
+        return points;
     }
 
-    endAngle = qRadiansToDegrees(qAtan2(d->radius1 * qSin(qDegreesToRadians(endAngle)),
-                                        d->radius2 * qCos(qDegreesToRadians(endAngle))));
+    QPointF center = static_cast<QPointF>(GetCenter());
+    qreal radius = qMax(d->radius1, d->radius2) * 2;
 
-    return endAngle;
+    QLineF start(center.x(), center.y(), center.x() + radius, center.y());
+    start.setAngle(VAbstractArc::GetStartAngle());
+
+    QLineF end(center.x(), center.y(), center.x() + radius, center.y());
+    end.setAngle(VAbstractArc::GetEndAngle());
+
+    if (VFuzzyComparePossibleNulls(start.angle(), end.angle()))
+    {
+        return points;
+    }
+
+    auto IsBoundedIntersection = [](QLineF::IntersectType type, QPointF p, const QLineF &segment1,
+                                    const QLineF &segment2)
+    {
+        return type == QLineF::BoundedIntersection ||
+               (VGObject::IsPointOnLineSegment (p, segment1.p1(), segment2.p1()) &&
+                VGObject::IsPointOnLineSegment (p, segment2.p1(), segment2.p2()));
+    };
+
+    bool begin = true;
+
+    if (start.angle() > end.angle())
+    {
+        for (int i=0; i < points.size()-1; ++i)
+        {
+            QLineF edge(points.at(i), points.at(i+1));
+
+            QPointF p;
+            QLineF::IntersectType type = Intersects(start, edge, &p);
+
+            // QLineF::intersects not always accurate on edge cases
+            if (IsBoundedIntersection(type, p, edge, start))
+            {
+                QVector<QPointF> head = points.mid(0, i+1);
+                QVector<QPointF> tail = points.mid(i+1, -1);
+                tail.prepend(p);
+                points = tail + head;
+                begin = false;
+                break;
+            }
+        }
+    }
+
+    QVector<QPointF> arc;
+    arc.reserve(points.size());
+
+    for (int i=0; i < points.size()-1; ++i)
+    {
+        QLineF edge(points.at(i), points.at(i+1));
+
+        if (begin)
+        {
+            QPointF p;
+            QLineF::IntersectType type = Intersects(start, edge, &p);
+
+            // QLineF::intersects not always accurate on edge cases
+            if (IsBoundedIntersection(type, p, edge, start))
+            {
+                arc.append(p);
+                begin = false;
+            }
+        }
+        else
+        {
+            QPointF p;
+            QLineF::IntersectType type = Intersects(end, edge, &p);
+
+            // QLineF::intersects not always accurate on edge cases
+            if (IsBoundedIntersection(type, p, edge, end))
+            {
+                arc.append(points.at(i));
+                arc.append(p);
+                break;
+            }
+
+            arc.append(points.at(i));
+        }
+    }
+
+    if (arc.isEmpty())
+    {
+        return points;
+    }
+
+    return arc;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
