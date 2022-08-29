@@ -957,6 +957,18 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data()
                      QStringLiteral("://women_jacket/input.json"),
                      QStringLiteral("://women_jacket/output.json"),
                      37.795275590551185 /*seam allowance width*/);
+
+    // See private test cases in file valentina_private_collection/bugs/hood_1/hood_1.val
+    ASSERT_TEST_CASE("hood_1",
+                     QStringLiteral("://hood_1/input.json"),
+                     QStringLiteral("://hood_1/output.json"),
+                     37.795275590551185 /*seam allowance width*/);
+
+    // See private test cases in file valentina_private_collection/bugs/hood_2/hood_2.val
+    ASSERT_TEST_CASE("hood_2",
+                     QStringLiteral("://hood_2/input.json"),
+                     QStringLiteral("://hood_2/output.json"),
+                     37.795275590551185 /*seam allowance width*/);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -1350,6 +1350,31 @@ auto VAbstractPiece::EkvPoint(QVector<VRawSAPoint> points, const VSAPoint &p1Lin
         return points;
     }
 
+    QLineF edge1(p2Line2, p1Line2);
+    QLineF edge2(p2Line1, p1Line1);
+    qreal a = edge2.angleTo(edge1);
+
+    if (a >= 175 && a <= 185 && not VFuzzyComparePossibleNulls(p2Line1.GetSABefore(width), p2Line1.GetSAAfter(width)))
+    {
+        QLineF ray = edge2;
+        ray.setAngle(ray.angle() - a/2);
+        ray.setLength(width*2);
+
+        QPointF crosPoint;
+        QLineF::IntersectType type = Intersects(ray, bigLine1, &crosPoint );
+        if (type != QLineF::NoIntersection)
+        {
+            points.append(crosPoint);
+        }
+
+        type = Intersects(ray, bigLine2, &crosPoint );
+        if (type != QLineF::NoIntersection)
+        {
+            points.append(crosPoint);
+        }
+        return points;
+    }
+
     QPointF crosPoint;
     const QLineF::IntersectType type = Intersects(bigLine1, bigLine2, &crosPoint );
 

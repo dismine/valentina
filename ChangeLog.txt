@@ -22,6 +22,7 @@
 - Improve visualization for tools.
 - Fix calculating an elliptical arc.
 - Enable Approximation scale option for Elliptical arc.
+- Fix bug in seam allowance.
 
 # Valentina 0.7.51 April 18, 2022
 - Z value change for a layout piece.
