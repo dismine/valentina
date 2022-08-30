@@ -59,6 +59,7 @@ protected:
 
     auto Objects() const -> const QVector<quint32> &;
 private:
+    // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VisOperation) // NOLINT
 
     QVector<quint32> m_objects{};

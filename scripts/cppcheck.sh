@@ -18,4 +18,6 @@ $CPPCHECK \
           --library=posix \
           --inconclusive \
           --suppress=*:*/vdxf/libdxfrw/intern/make_unique.h \
+          --inconclusive \
+          --suppress=*:*/qmuparser/make_unique.h \
           ../src
