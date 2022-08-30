@@ -2503,6 +2503,14 @@
         <source>Notes</source>
         <translation>Notas</translation>
     </message>
+    <message>
+        <source>Approximation scale:</source>
+        <translation type="unfinished">Escala aproximada:</translation>
+    </message>
+    <message>
+        <source>Set approximation scale for this curve, 0 - use global value</source>
+        <translation type="unfinished">Establecer escala aproximada para esta curva, 0 - valor de uso global</translation>
+    </message>
 </context>
 <context>
     <name>DialogEndLine</name>
@@ -3649,23 +3657,23 @@
     </message>
     <message>
         <source>Units:</source>
-        <translation type="unfinished">Unidades:</translation>
+        <translation>Unidades:</translation>
     </message>
     <message>
         <source>Millimeters</source>
-        <translation type="unfinished">Milímetros</translation>
+        <translation>Milímetros</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Pulgadas</translation>
+        <translation>Pulgadas</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Centímetros</translation>
+        <translation>Centímetros</translation>
     </message>
     <message>
         <source>Degrees</source>
-        <translation type="unfinished">Grados</translation>
+        <translation>Grados</translation>
     </message>
 </context>
 <context>
@@ -7255,10 +7263,6 @@ Aplicar características de todos modos?</translation>
         <translation>El valor base para la columna</translation>
     </message>
     <message>
-        <source>Circumference</source>
-        <translation type="vanished">Circunferencia</translation>
-    </message>
-    <message>
         <source>Please, select at least one dimension</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10000,7 +10004,7 @@ el patrón.</translation>
     </message>
     <message>
         <source>Visibility group</source>
-        <translation type="unfinished">Grupo de visibilidad</translation>
+        <translation>Grupo de visibilidad</translation>
     </message>
 </context>
 <context>
@@ -12599,10 +12603,6 @@ Quieres guardar los cambios?</translation>
         <translation>Vacío</translation>
     </message>
     <message>
-        <source>Export from multisize measurements is not supported.</source>
-        <translation type="vanished">La exportación de medidas multitalla no esta soportada.</translation>
-    </message>
-    <message>
         <source>Customer name:</source>
         <translation>Nombre del cliente:</translation>
     </message>
@@ -12914,6 +12914,10 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Error in row %1. The measurement name is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14115,7 +14119,7 @@ Quieres guardar los cambios?</translation>
     <name>VAbstractPiece</name>
     <message>
         <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
-        <translation>Pieza &apos;%1&apos;. No hay suficientes puntos para construir margen de costura.</translation>
+        <translation type="vanished">Pieza &apos;%1&apos;. No hay suficientes puntos para construir margen de costura.</translation>
     </message>
 </context>
 <context>
@@ -19320,11 +19324,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>RotaciónElArco_</translation>
     </message>
     <message>
-        <source>converts degrees to radian</source>
-        <comment>functionm degTorad</comment>
-        <translation type="vanished">convertir grados a radianes</translation>
-    </message>
-    <message>
         <source>converts radian to degrees</source>
         <comment>function radTodeg</comment>
         <translation>convertir radianes a grados</translation>
@@ -19517,7 +19516,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>converts degrees to radian</source>
         <comment>function degTorad</comment>
-        <translation type="unfinished">convertir grados a radianes</translation>
+        <translation>convertir grados a radianes</translation>
     </message>
 </context>
 <context>
@@ -19764,6 +19763,13 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
 </context>
 <context>
+    <name>VisToolAlongLine</name>
+    <message>
+        <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VisToolArc</name>
     <message>
         <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
@@ -19790,6 +19796,13 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°, arc length = %4%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish creating, &lt;b&gt;%5&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VisToolBisector</name>
+    <message>
+        <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -19821,6 +19834,50 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>&lt;b&gt;Intersection curve and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;%2&lt;/b&gt; - sticking angle, &lt;b&gt;%3&lt;/b&gt; - finish creation</source>
         <translation>&lt;b&gt;Intersección entre curva y eje&lt;/b&gt;: angulo= %1°; &lt;b&gt;%2&lt;/b&gt; - ángulo de adherencia, &lt;b&gt;%3&lt;/b&gt; - termina la creación</translation>
+    </message>
+</context>
+<context>
+    <name>VisToolCutArc</name>
+    <message>
+        <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VisToolCutSpline</name>
+    <message>
+        <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VisToolCutSplinePath</name>
+    <message>
+        <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VisToolEllipticalArc</name>
+    <message>
+        <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%4&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°, angle2 = %5°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%6&lt;/b&gt; - sticking angle, &lt;b&gt;%7&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°, angle2 = %5°, rotation = %6°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%7&lt;/b&gt; - sticking angle, &lt;b&gt;%8&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -19865,6 +19922,38 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
 </context>
 <context>
+    <name>VisToolNormal</name>
+    <message>
+        <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VisToolPointFromCircleAndTangent</name>
+    <message>
+        <source>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VisToolPointOfContact</name>
+    <message>
+        <source>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VisToolPointOfIntersectionCircles</name>
+    <message>
+        <source>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VisToolRotation</name>
     <message>
         <source>Rotating angle = %1°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
@@ -19873,6 +19962,13 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>Rotating angle = %1°, &lt;b&gt;%2&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
         <translation>Angulo de rotación = %1°, &lt;b&gt;%2&lt;/b&gt; - angulo de adherencia, &lt;b&gt;Click de raton&lt;/b&gt; - terminar creacion</translation>
+    </message>
+</context>
+<context>
+    <name>VisToolShoulderPoint</name>
+    <message>
+        <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

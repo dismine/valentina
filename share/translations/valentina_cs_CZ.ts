@@ -2503,6 +2503,14 @@
         <source>Notes</source>
         <translation>Poznámky</translation>
     </message>
+    <message>
+        <source>Approximation scale:</source>
+        <translation type="unfinished">Měřítko přibližnosti:</translation>
+    </message>
+    <message>
+        <source>Set approximation scale for this curve, 0 - use global value</source>
+        <translation type="unfinished">Nastavit měřítko přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
+    </message>
 </context>
 <context>
     <name>DialogEndLine</name>
@@ -3649,23 +3657,23 @@
     </message>
     <message>
         <source>Units:</source>
-        <translation type="unfinished">Jednotky:</translation>
+        <translation>Jednotky:</translation>
     </message>
     <message>
         <source>Millimeters</source>
-        <translation type="unfinished">Milimetry</translation>
+        <translation>Milimetry</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Palce</translation>
+        <translation>Palce</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Centimetry</translation>
+        <translation>Centimetry</translation>
     </message>
     <message>
         <source>Degrees</source>
-        <translation type="unfinished">Stupně</translation>
+        <translation>Stupně</translation>
     </message>
 </context>
 <context>
@@ -7258,10 +7266,6 @@ Přesto použít nastavení?</translation>
         <translation>Základní hodnota pro sloupec</translation>
     </message>
     <message>
-        <source>Circumference</source>
-        <translation type="vanished">Obvod</translation>
-    </message>
-    <message>
         <source>Please, select at least one dimension</source>
         <translation>Vyberte, prosím, alespoň jeden rozměr</translation>
     </message>
@@ -10003,7 +10007,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Visibility group</source>
-        <translation type="unfinished">Skupina viditelnosti</translation>
+        <translation>Skupina viditelnosti</translation>
     </message>
 </context>
 <context>
@@ -12602,10 +12606,6 @@ Chcete uložit změny?</translation>
         <translation>Prázdný</translation>
     </message>
     <message>
-        <source>Export from multisize measurements is not supported.</source>
-        <translation type="vanished">Vyvedení měření více velikostí nepodporováno.</translation>
-    </message>
-    <message>
         <source>Customer name:</source>
         <translation>Jméno zákazníka:</translation>
     </message>
@@ -12918,6 +12918,10 @@ Chcete uložit změny?</translation>
     <message>
         <source>Error in row %1. The measurement name is empty.</source>
         <translation>Chyba na řádku %1. Název míry je prázdný.</translation>
+    </message>
+    <message>
+        <source>The measurement name is empty.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13912,7 +13916,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Unable to cut curve &apos;%1&apos;. The curve is too short.</source>
-        <translation type="unfinished">Nelze oříznout křivku &apos;%1&apos;. Křivka je příliš krátká.</translation>
+        <translation>Nelze oříznout křivku &apos;%1&apos;. Křivka je příliš krátká.</translation>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
@@ -13920,7 +13924,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
-        <translation type="unfinished">Křivka &apos;%1&apos;. Délka vyjmuté části je příliš malá. Vylaďte ji na nejmenší hodnotu.</translation>
+        <translation>Křivka &apos;%1&apos;. Délka vyjmuté části je příliš malá. Vylaďte ji na nejmenší hodnotu.</translation>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
@@ -13928,7 +13932,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
-        <translation type="unfinished">Křivka &apos;%1&apos;. Délka vyjmuté části je příliš velká. Vylaďte ji na největší hodnotu.</translation>
+        <translation>Křivka &apos;%1&apos;. Délka vyjmuté části je příliš velká. Vylaďte ji na největší hodnotu.</translation>
     </message>
 </context>
 <context>
@@ -14118,7 +14122,7 @@ Chcete uložit změny?</translation>
     <name>VAbstractPiece</name>
     <message>
         <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
-        <translation>Díl &apos;%1&apos;. Nedostatek bodů pro vytvoření švové záložky.</translation>
+        <translation type="vanished">Díl &apos;%1&apos;. Nedostatek bodů pro vytvoření švové záložky.</translation>
     </message>
 </context>
 <context>
@@ -14273,7 +14277,7 @@ Chcete uložit změny?</translation>
     <name>VArc</name>
     <message>
         <source>Unable to cut curve &apos;%1&apos;. The curve is too short.</source>
-        <translation type="unfinished">Nelze oříznout křivku &apos;%1&apos;. Křivka je příliš krátká.</translation>
+        <translation>Nelze oříznout křivku &apos;%1&apos;. Křivka je příliš krátká.</translation>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
@@ -14281,7 +14285,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
-        <translation type="unfinished">Křivka &apos;%1&apos;. Délka vyjmuté části je příliš malá. Vylaďte ji na nejmenší hodnotu.</translation>
+        <translation>Křivka &apos;%1&apos;. Délka vyjmuté části je příliš malá. Vylaďte ji na nejmenší hodnotu.</translation>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
@@ -14289,7 +14293,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
-        <translation type="unfinished">Křivka &apos;%1&apos;. Délka vyjmuté části je příliš velká. Vylaďte ji na největší hodnotu.</translation>
+        <translation>Křivka &apos;%1&apos;. Délka vyjmuté části je příliš velká. Vylaďte ji na největší hodnotu.</translation>
     </message>
 </context>
 <context>
@@ -16861,13 +16865,6 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     </message>
 </context>
 <context>
-    <name>VSimpleCurve</name>
-    <message>
-        <source>VSimpleCurve::RefreshGeometry: pointer to curve is null.</source>
-        <translation type="vanished">VSimpleCurve::RefreshGeometry: ukazatel na křivku je nulový.</translation>
-    </message>
-</context>
-<context>
     <name>VSplinePath</name>
     <message>
         <source>Not enough points to create the spline.</source>
@@ -19331,11 +19328,6 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <translation>OtočeníElOblouk_</translation>
     </message>
     <message>
-        <source>converts degrees to radian</source>
-        <comment>functionm degTorad</comment>
-        <translation type="vanished">Převádí stupně na radiány</translation>
-    </message>
-    <message>
         <source>converts radian to degrees</source>
         <comment>function radTodeg</comment>
         <translation>Převádí radiány na stupně</translation>
@@ -19528,7 +19520,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <source>converts degrees to radian</source>
         <comment>function degTorad</comment>
-        <translation type="unfinished">Převádí stupně na radiány</translation>
+        <translation>Převádí stupně na radiány</translation>
     </message>
 </context>
 <context>
@@ -19775,6 +19767,13 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     </message>
 </context>
 <context>
+    <name>VisToolAlongLine</name>
+    <message>
+        <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VisToolArc</name>
     <message>
         <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
@@ -19801,6 +19800,13 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     </message>
     <message>
         <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°, arc length = %4%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish creating, &lt;b&gt;%5&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VisToolBisector</name>
+    <message>
+        <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -19832,6 +19838,50 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <source>&lt;b&gt;Intersection curve and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;%2&lt;/b&gt; - sticking angle, &lt;b&gt;%3&lt;/b&gt; - finish creation</source>
         <translation>&lt;b&gt;Průnik křivky a osy&lt;/b&gt;: úhel = %1°; &lt;b&gt;%2&lt;/b&gt; - úhel přilepení, &lt;b&gt;%3&lt;/b&gt; - dokončit vytváření</translation>
+    </message>
+</context>
+<context>
+    <name>VisToolCutArc</name>
+    <message>
+        <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VisToolCutSpline</name>
+    <message>
+        <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VisToolCutSplinePath</name>
+    <message>
+        <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VisToolEllipticalArc</name>
+    <message>
+        <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%4&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°, angle2 = %5°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%6&lt;/b&gt; - sticking angle, &lt;b&gt;%7&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°, angle2 = %5°, rotation = %6°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%7&lt;/b&gt; - sticking angle, &lt;b&gt;%8&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -19876,6 +19926,38 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     </message>
 </context>
 <context>
+    <name>VisToolNormal</name>
+    <message>
+        <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VisToolPointFromCircleAndTangent</name>
+    <message>
+        <source>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VisToolPointOfContact</name>
+    <message>
+        <source>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VisToolPointOfIntersectionCircles</name>
+    <message>
+        <source>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VisToolRotation</name>
     <message>
         <source>Rotating angle = %1°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
@@ -19884,6 +19966,13 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <source>Rotating angle = %1°, &lt;b&gt;%2&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
         <translation>Úhel otočení = %1°, &lt;b&gt;%2&lt;/b&gt; - úhel přilepení, &lt;b&gt;Klepnutí myši&lt;/b&gt; - dokončit vytváření</translation>
+    </message>
+</context>
+<context>
+    <name>VisToolShoulderPoint</name>
+    <message>
+        <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
