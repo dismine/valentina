@@ -47,6 +47,10 @@
 namespace
 {
 constexpr qreal tolerance = accuracyPointOnLine/8;
+
+// Because of overflow we cannot generate arcs more than maxRadius
+constexpr int maxRadius = 10000;
+
 //---------------------------------------------------------------------------------------------------------------------
 auto VLen(fpm::fixed_16_16 x, fpm::fixed_16_16 y) -> fpm::fixed_16_16
 {
@@ -201,6 +205,27 @@ auto EllipticArcPoints(QPointF c, qreal radius1, qreal radius2, qreal astart, qr
 
     return arc;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+auto JoinVectors(const QVector<QPointF> &v1, const QVector<QPointF> &v2) -> QVector<QPointF>
+{
+    QVector<QPointF> v;
+    v.reserve(v1.size() + v2.size());
+
+    v = v1;
+
+    constexpr qreal accuracy = (0.0001/*mm*/ / 25.4) * PrintDPI;
+
+    for (auto p : v2)
+    {
+        if (not VFuzzyComparePoints(ConstLast(v), p, accuracy))
+        {
+            v.append(p);
+        }
+    }
+
+    return v;
+}
 }  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -326,6 +351,7 @@ auto VEllipticalArc::Rotate(QPointF originPoint, qreal degrees, const QString &p
     elArc.SetPenStyle(GetPenStyle());
     elArc.SetFlipped(IsFlipped());
     elArc.SetTransform(t);
+    elArc.SetApproximationScale(GetApproximationScale());
     return elArc;
 }
 
@@ -345,6 +371,7 @@ auto VEllipticalArc::Flip(const QLineF &axis, const QString &prefix) const -> VE
     elArc.SetPenStyle(GetPenStyle());
     elArc.SetFlipped(not IsFlipped());
     elArc.SetTransform(d->m_transform * VGObject::FlippingMatrix(d->m_transform.inverted().map(axis)));
+    elArc.SetApproximationScale(GetApproximationScale());
     return elArc;
 }
 
@@ -373,6 +400,7 @@ auto VEllipticalArc::Move(qreal length, qreal angle, const QString &prefix) cons
     elArc.SetPenStyle(GetPenStyle());
     elArc.SetFlipped(IsFlipped());
     elArc.SetTransform(t);
+    elArc.SetApproximationScale(GetApproximationScale());
     return elArc;
 }
 
@@ -448,12 +476,32 @@ auto VEllipticalArc::GetPoints() const -> QVector<QPointF>
 {
     const QPointF center = VAbstractArc::GetCenter().toQPointF();
 
+    // Don't work with 0 radius. Always make it bigger than 0.
+    constexpr qreal threshold = ToPixel(0.001, Unit::Mm);
+    qreal radius1 = qMax(d->radius1, threshold);
+    qreal radius2 = qMax(d->radius2, threshold);
+    qreal max = qMax(d->radius1, d->radius2);
+    qreal scale = 1;
+
+    if (max > maxRadius)
+    {
+        scale = max / maxRadius;
+        radius1 /= scale;
+        radius2 /= scale;
+    }
+
     // Generate complete ellipse because angles are not correct and have to be fixed manually
-    QVector<QPointF> points = EllipticArcPoints(center, d->radius1, d->radius2, 0.0, M_2PI, GetApproximationScale());
+    QVector<QPointF> points = EllipticArcPoints(center, radius1, radius2, 0.0, M_2PI, GetApproximationScale());
     points = ArcPoints(points);
 
     QTransform t = d->m_transform;
     t.translate(center.x(), center.y());
+    if (not VFuzzyComparePossibleNulls(scale, 1))
+    {
+        // Because fixed 16.16 type has limitations it is very easy to get overflow error.
+        // To avoid this we calculate an arc for scaled radiuses and then scale up to original size.
+        t.scale(scale, scale);
+    }
     t.rotate(-GetRotationAngle());
     t.translate(-center.x(), -center.y());
 
@@ -693,12 +741,12 @@ auto VEllipticalArc::GetP(qreal angle) const -> QPointF
 //---------------------------------------------------------------------------------------------------------------------
 auto VEllipticalArc::ArcPoints(QVector<QPointF> points) const -> QVector<QPointF>
 {
-    if (points.size() < 2 || VFuzzyComparePossibleNulls(VAbstractArc::GetStartAngle(), VAbstractArc::GetEndAngle()))
+    if (points.size() < 2 || (qFuzzyIsNull(d->radius1) && qFuzzyIsNull(d->radius2)))
     {
         return points;
     }
 
-    QPointF center = static_cast<QPointF>(GetCenter());
+    QPointF center = VAbstractArc::GetCenter().toQPointF();
     qreal radius = qMax(d->radius1, d->radius2) * 2;
 
     QLineF start(center.x(), center.y(), center.x() + radius, center.y());
@@ -707,22 +755,18 @@ auto VEllipticalArc::ArcPoints(QVector<QPointF> points) const -> QVector<QPointF
     QLineF end(center.x(), center.y(), center.x() + radius, center.y());
     end.setAngle(VAbstractArc::GetEndAngle());
 
-    if (VFuzzyComparePossibleNulls(start.angle(), end.angle()))
-    {
-        return points;
-    }
-
     auto IsBoundedIntersection = [](QLineF::IntersectType type, QPointF p, const QLineF &segment1,
                                     const QLineF &segment2)
     {
         return type == QLineF::BoundedIntersection ||
-               (VGObject::IsPointOnLineSegment (p, segment1.p1(), segment2.p1()) &&
+               (type == QLineF::UnboundedIntersection &&
+                VGObject::IsPointOnLineSegment (p, segment1.p1(), segment2.p1()) &&
                 VGObject::IsPointOnLineSegment (p, segment2.p1(), segment2.p2()));
     };
 
     bool begin = true;
 
-    if (start.angle() > end.angle())
+    if (start.angle() >= end.angle())
     {
         for (int i=0; i < points.size()-1; ++i)
         {
@@ -736,8 +780,16 @@ auto VEllipticalArc::ArcPoints(QVector<QPointF> points) const -> QVector<QPointF
             {
                 QVector<QPointF> head = points.mid(0, i+1);
                 QVector<QPointF> tail = points.mid(i+1, -1);
-                tail.prepend(p);
-                points = tail + head;
+
+                tail = JoinVectors({p}, tail);
+                points = JoinVectors(tail, head);
+                points = JoinVectors(points, {p});
+
+                if (VFuzzyComparePossibleNulls(start.angle(), end.angle()))
+                {
+                    return points;
+                }
+
                 begin = false;
                 break;
             }
