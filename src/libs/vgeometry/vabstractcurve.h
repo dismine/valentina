@@ -112,8 +112,12 @@ public:
 
     void SetAliasSuffix(const QString &aliasSuffix) override;
 
-#if defined(Q_CC_MSVC) && _MSC_VER > 1900
+#if defined(Q_CC_MSVC)
+#if _MSC_VER > 1900
+    static constexpr qreal minLength = ToPixel(1, Unit::Mm);
+#else
     static const qreal minLength;
+#endif
 #else
     static constexpr qreal minLength = ToPixel(1, Unit::Mm);
 #endif
