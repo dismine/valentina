@@ -2349,11 +2349,11 @@
     </message>
     <message>
         <source>Approximation scale:</source>
-        <translation type="unfinished">Skala przybliżeń:</translation>
+        <translation>Skala przybliżeń:</translation>
     </message>
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation type="unfinished">Ustaw skalę przybliżeń dla tej krzywej, 0 - użyj wartości globalnej</translation>
+        <translation>Ustaw skalę przybliżeń dla tej krzywej, 0 - użyj wartości globalnej</translation>
     </message>
 </context>
 <context>

@@ -2505,11 +2505,11 @@
     </message>
     <message>
         <source>Approximation scale:</source>
-        <translation type="unfinished"></translation>
+        <translation>Масштаб наближення:</translation>
     </message>
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation type="unfinished">Встановити масштаб наближення для цієї кривої, 0 - використовувати глобальне значення</translation>
+        <translation>Встановити масштаб наближення для цієї кривої, 0 - використовувати глобальне значення</translation>
     </message>
 </context>
 <context>
@@ -2934,7 +2934,7 @@
     </message>
     <message>
         <source>Enable to create a visibility group from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Увімкніть для створення групи видимості з вихідних об&apos;єктів</translation>
     </message>
 </context>
 <context>
@@ -3061,7 +3061,7 @@
     </message>
     <message>
         <source>Enable to create a visibility group from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Увімкніть для створення групи видимості з вихідних об&apos;єктів</translation>
     </message>
 </context>
 <context>
@@ -4729,7 +4729,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Enable to create a visibility group from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Увімкніть для створення групи видимості з вихідних об&apos;єктів</translation>
     </message>
 </context>
 <context>
@@ -6593,7 +6593,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Enable to create a visibility group from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Увімкніть для створення групи видимості з вихідних об&apos;єктів</translation>
     </message>
 </context>
 <context>
@@ -7295,15 +7295,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>A body measurement measured in units of length.</source>
-        <translation type="unfinished"></translation>
+        <translation>Мірка тіла, яка вимірюється в одиницях довжини.</translation>
     </message>
     <message>
         <source>Body Measurement</source>
-        <translation type="unfinished"></translation>
+        <translation>Мірка тіла</translation>
     </message>
     <message>
         <source>A body measurement measured in units of length. Circumference.</source>
-        <translation type="unfinished"></translation>
+        <translation>Мірка тіла, яка вимірюється в одиницях довжини. Обхват.</translation>
     </message>
 </context>
 <context>
@@ -8413,7 +8413,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Test mode doesn&apos;t support opening several files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Тестовий режим не підтримує відкриття одночасно декількох файлів.</translation>
     </message>
 </context>
 <context>
@@ -11579,11 +11579,11 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Крива &quot;%1&quot;. Довжина сегмента для вирізання (%2) замала. Оптимізуйте його до мінімального значення.</translation>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Крива &quot;%1&quot;. Довжина сегмента для вирізання (%2) завелика. Оптимізуйте його до мінімального значення.</translation>
     </message>
 </context>
 <context>
@@ -12896,31 +12896,31 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Measurement name is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Назва мірки порожня.</translation>
     </message>
     <message>
         <source>Measurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
-        <translation type="unfinished"></translation>
+        <translation>Мірка &quot;%1&quot; не відповідає шаблону регулярного виразу.</translation>
     </message>
     <message>
         <source>Measurement &apos;%1&apos; already used in the file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Мірка &quot;%1&quot; вже використовується у файлі.</translation>
     </message>
     <message>
         <source>Measurement &apos;%1&apos; is not one of the known measurements.</source>
-        <translation type="unfinished"></translation>
+        <translation>Мірка &quot;%1&quot; не є одною із відомих мірок.</translation>
     </message>
     <message>
         <source>Measurement &apos;%1&apos; already used in file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Мірка &quot;%1&quot; вже використовується у файлі.</translation>
     </message>
     <message>
         <source>Error in row %1. The measurement name is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка в рядку %1. Назва мірки порожнє.</translation>
     </message>
     <message>
         <source>The measurement name is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ім&apos;я мірки порожнє.</translation>
     </message>
 </context>
 <context>
@@ -13903,7 +13903,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error opening a temp file: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка відкриття тимчасового файлу: %1.</translation>
     </message>
 </context>
 <context>
@@ -13918,7 +13918,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Крива &quot;%1&quot;. Довжина сегмента для вирізання (%2) замала. Оптимізуйте його до мінімального значення.</translation>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
@@ -13926,7 +13926,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Крива &quot;%1&quot;. Довжина сегмента для вирізання (%2) завелика. Оптимізуйте його до мінімального значення.</translation>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
@@ -14060,7 +14060,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Do you want to change the permissions?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви хочете змінити дозволи?</translation>
     </message>
 </context>
 <context>
@@ -14114,13 +14114,6 @@ Do you want to save your changes?</source>
     <message>
         <source>measurement</source>
         <translation>мірка</translation>
-    </message>
-</context>
-<context>
-    <name>VAbstractPiece</name>
-    <message>
-        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
-        <translation type="vanished">Деталь &quot;%1&quot;. Недостатньо точок для створення припуску на шви.</translation>
     </message>
 </context>
 <context>
@@ -14279,7 +14272,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Крива &quot;%1&quot;. Довжина сегмента для вирізання (%2) замала. Оптимізуйте його до мінімального значення.</translation>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
@@ -14287,7 +14280,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Крива &quot;%1&quot;. Довжина сегмента для вирізання (%2) завелика. Оптимізуйте його до мінімального значення.</translation>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
@@ -14353,22 +14346,22 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Content type mismatch.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невідповідність типу вмісту.</translation>
     </message>
 </context>
 <context>
     <name>VBank</name>
     <message>
         <source>Error of preparing data for layout: Detail &apos;%1&apos; square &lt;= 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка підготовки даних для розкладки: Деталь &quot;%1&quot; площа &lt;= 0</translation>
     </message>
     <message>
         <source>Error of preparing data for layout: Layout paper sheet &lt;= 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка підготовки даних для розкладки: Аркуш паперу розкладки &lt;= 0</translation>
     </message>
     <message>
         <source>Error of preparing data for layout: List of details is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка підготовки даних для розкладки: список деталей порожній</translation>
     </message>
 </context>
 <context>
@@ -14998,11 +14991,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Load pattern pieces from the raw layout data file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Завантажити деталі з файлу необроблених даних розкладки.</translation>
     </message>
     <message>
         <source>Ignore printer margins (export mode). Use if need full paper space. In case of later printing you must account for the margins themselves.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ігнорувати поля принтера (режим експорту). Використовуйте, якщо потрібен повний простір канви. У разі подальшого друку ви повинні самі врахувати поля.</translation>
     </message>
 </context>
 <context>
@@ -15346,7 +15339,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Can&apos;t create a flat dxf file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдається створити плоский файл dxf.</translation>
     </message>
 </context>
 <context>
@@ -15562,11 +15555,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export mode doesn&apos;t support opening several files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим експорту не підтримує відкриття кількох файлів.</translation>
     </message>
     <message>
         <source>Import raw layout data does not support opening several layout files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Імпорт необроблених даних розкладки не підтримує відкриття кількох файлів розкладки.</translation>
     </message>
 </context>
 <context>
@@ -16653,11 +16646,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating place label</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка створення або оновлення мітки місця</translation>
     </message>
     <message>
         <source>Can&apos;t find increment &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося знайти прибавку &apos;%1&apos;</translation>
     </message>
 </context>
 <context>
@@ -16699,7 +16692,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Content type mismatch.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невідповідність типу вмісту.</translation>
     </message>
 </context>
 <context>
@@ -19767,44 +19760,44 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VisToolAlongLine</name>
     <message>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Довжина = %1%2; &lt;b&gt;Клацання миші&lt;/b&gt; — завершити вибір довжини, &lt;b&gt;%3&lt;/b&gt; — пропустити</translation>
     </message>
 </context>
 <context>
     <name>VisToolArc</name>
     <message>
         <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Дуга&lt;/b&gt;: радіус = %1%2; &lt;b&gt;Клацання миші&lt;/b&gt; — завершити вибір радіуса, &lt;b&gt;%3&lt;/b&gt; - пропустити</translation>
     </message>
     <message>
         <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first angle, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Дуга&lt;/b&gt;: радіус = %1%2, перший кут = %3°; &lt;b&gt;Клацання миші&lt;/b&gt; — завершити виділення першого кута, &lt;b&gt;%4&lt;/b&gt; — липкий кут, &lt;b&gt;%5&lt;/b&gt; — пропустити</translation>
     </message>
     <message>
         <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°, second angle = %4°; &lt;b&gt;Mouse click&lt;/b&gt; - finish creating, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - sticking end, &lt;b&gt;%7&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Дуга&lt;/b&gt;: радіус = %1%2, перший кут = %3°, другий кут = %4°; &lt;b&gt;Клацання миші&lt;/b&gt; — завершити створення, &lt;b&gt;%5&lt;/b&gt; — липкий кут, &lt;b&gt;%6&lt;/b&gt; — липкий кінець, &lt;b&gt;%7&lt;/b&gt; - пропустити</translation>
     </message>
 </context>
 <context>
     <name>VisToolArcWithLength</name>
     <message>
         <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Дуга&lt;/b&gt;: радіус = %1%2; &lt;b&gt;Клацання миші&lt;/b&gt; — завершити вибір радіуса, &lt;b&gt;%3&lt;/b&gt; - пропустити</translation>
     </message>
     <message>
         <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first angle, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Дуга&lt;/b&gt;: радіус = %1%2, перший кут = %3°; &lt;b&gt;Клацання миші&lt;/b&gt; — завершити виділення першого кута, &lt;b&gt;%4&lt;/b&gt; — липкий кут, &lt;b&gt;%5&lt;/b&gt; — пропустити</translation>
     </message>
     <message>
         <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°, arc length = %4%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish creating, &lt;b&gt;%5&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Дуга&lt;/b&gt;: радіус = %1%2, перший кут = %3°, довжина дуги = %4%2; &lt;b&gt;Клацання миші&lt;/b&gt; — завершити створення, &lt;b&gt;%5&lt;/b&gt; — пропустити</translation>
     </message>
 </context>
 <context>
     <name>VisToolBisector</name>
     <message>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Довжина = %1%2; &lt;b&gt;Клацання миші&lt;/b&gt; — завершити вибір довжини, &lt;b&gt;%3&lt;/b&gt; — пропустити</translation>
     </message>
 </context>
 <context>
@@ -19841,44 +19834,44 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VisToolCutArc</name>
     <message>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Довжина = %1%2; &lt;b&gt;Клацання миші&lt;/b&gt; — завершити вибір довжини, &lt;b&gt;%3&lt;/b&gt; — пропустити</translation>
     </message>
 </context>
 <context>
     <name>VisToolCutSpline</name>
     <message>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Довжина = %1%2; &lt;b&gt;Клацання миші&lt;/b&gt; — завершити вибір довжини, &lt;b&gt;%3&lt;/b&gt; — пропустити</translation>
     </message>
 </context>
 <context>
     <name>VisToolCutSplinePath</name>
     <message>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Довжина = %1%2; &lt;b&gt;Клацання миші&lt;/b&gt; — завершити вибір довжини, &lt;b&gt;%3&lt;/b&gt; — пропустити</translation>
     </message>
 </context>
 <context>
     <name>VisToolEllipticalArc</name>
     <message>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Еліптична дуга&lt;/b&gt;: радіус 1 = %1%2; &lt;b&gt;Клацання миші&lt;/b&gt; — завершити виділення першого радіуса, &lt;b&gt;%3&lt;/b&gt; — пропустити</translation>
     </message>
     <message>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%4&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Еліптична дуга&lt;/b&gt;: радіус 1 = %1%2, радіус 2 = %3%2; &lt;b&gt;Клацання миші&lt;/b&gt; — завершити виділення другого радіуса, &lt;b&gt;%4&lt;/b&gt; — пропустити</translation>
     </message>
     <message>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Еліптична дуга&lt;/b&gt;: радіус 1 = %1%2, радіус 2 = %3%2, кут 1 = %4°; &lt;b&gt;Клацання миші&lt;/b&gt; — завершити виділення другого радіуса, &lt;b&gt;%5&lt;/b&gt; — липкий кут, &lt;b&gt;%6&lt;/b&gt; — пропустити</translation>
     </message>
     <message>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°, angle2 = %5°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%6&lt;/b&gt; - sticking angle, &lt;b&gt;%7&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Еліптична дуга&lt;/b&gt;: радіус 1 = %1%2, радіус 2 = %3%2, кут 1 = %4°, кут 2 = %5°; &lt;b&gt;Клацання миші&lt;/b&gt; — завершити виділення другого радіуса, &lt;b&gt;%6&lt;/b&gt; — липкий кут, &lt;b&gt;%7&lt;/b&gt; — пропустити</translation>
     </message>
     <message>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°, angle2 = %5°, rotation = %6°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%7&lt;/b&gt; - sticking angle, &lt;b&gt;%8&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Еліптична дуга&lt;/b&gt;: радіус 1 = %1%2, радіус 2 = %3%2, кут 1 = %4°, кут 2 = %5°, поворот = %6°; &lt;b&gt;Клацання миші&lt;/b&gt; — завершити виділення другого радіуса, &lt;b&gt;%7&lt;/b&gt; — липкий кут, &lt;b&gt;%8&lt;/b&gt; — пропустити</translation>
     </message>
 </context>
 <context>
@@ -19926,32 +19919,32 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VisToolNormal</name>
     <message>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Довжина = %1%2; &lt;b&gt;Клацання миші&lt;/b&gt; — завершити вибір довжини, &lt;b&gt;%3&lt;/b&gt; — пропустити</translation>
     </message>
 </context>
 <context>
     <name>VisToolPointFromCircleAndTangent</name>
     <message>
         <source>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Радіус = %1%2; &lt;b&gt;Клацання миші&lt;/b&gt; — завершити виділення радіуса, &lt;b&gt;%3&lt;/b&gt; — пропустити</translation>
     </message>
 </context>
 <context>
     <name>VisToolPointOfContact</name>
     <message>
         <source>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Радіус = %1%2; &lt;b&gt;Клацання миші&lt;/b&gt; — завершити виділення радіуса, &lt;b&gt;%3&lt;/b&gt; — пропустити</translation>
     </message>
 </context>
 <context>
     <name>VisToolPointOfIntersectionCircles</name>
     <message>
         <source>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Радіус = %1%2; &lt;b&gt;Клацання миші&lt;/b&gt; — завершити виділення другого радіуса, &lt;b&gt;%3&lt;/b&gt; — пропустити</translation>
     </message>
     <message>
         <source>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Радіус = %1%2; &lt;b&gt;Клацання миші&lt;/b&gt; — завершити виділення першого радіуса, &lt;b&gt;%3&lt;/b&gt; — пропустити</translation>
     </message>
 </context>
 <context>
@@ -19969,7 +19962,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VisToolShoulderPoint</name>
     <message>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Довжина = %1%2; &lt;b&gt;Клацання миші&lt;/b&gt; — завершити вибір довжини, &lt;b&gt;%3&lt;/b&gt; — пропустити</translation>
     </message>
 </context>
 <context>
@@ -20289,7 +20282,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Do you want to change the permissions?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви хочете змінити дозволи?</translation>
     </message>
 </context>
 <context>

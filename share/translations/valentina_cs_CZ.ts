@@ -2505,11 +2505,11 @@
     </message>
     <message>
         <source>Approximation scale:</source>
-        <translation type="unfinished">Měřítko přibližnosti:</translation>
+        <translation>Měřítko přibližnosti:</translation>
     </message>
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation type="unfinished">Nastavit měřítko přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
+        <translation>Nastavit měřítko přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
     </message>
 </context>
 <context>
@@ -14116,13 +14116,6 @@ Chcete uložit změny?</translation>
     <message>
         <source>measurement</source>
         <translation>míra</translation>
-    </message>
-</context>
-<context>
-    <name>VAbstractPiece</name>
-    <message>
-        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
-        <translation type="vanished">Díl &apos;%1&apos;. Nedostatek bodů pro vytvoření švové záložky.</translation>
     </message>
 </context>
 <context>

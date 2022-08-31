@@ -2505,11 +2505,11 @@
     </message>
     <message>
         <source>Approximation scale:</source>
-        <translation type="unfinished">Escala de aproximação:</translation>
+        <translation>Escala de aproximação:</translation>
     </message>
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation type="unfinished">Ajuste a escala de aproximação para esta curva, 0 - usar o valor global</translation>
+        <translation>Ajuste a escala de aproximação para esta curva, 0 - usar o valor global</translation>
     </message>
 </context>
 <context>
@@ -14105,13 +14105,6 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>measurement</source>
         <translation>medida</translation>
-    </message>
-</context>
-<context>
-    <name>VAbstractPiece</name>
-    <message>
-        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
-        <translation type="vanished">Peça &apos;%1&apos;. Sem pontos suficientes para criar margem de costura.</translation>
     </message>
 </context>
 <context>

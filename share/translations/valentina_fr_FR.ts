@@ -2505,11 +2505,11 @@
     </message>
     <message>
         <source>Approximation scale:</source>
-        <translation type="unfinished">Approximation d&apos;échelle :</translation>
+        <translation>Approximation d&apos;échelle :</translation>
     </message>
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation type="unfinished">Définir l&apos;approximation d&apos;échelle pour cette courbe, 0 - utiliser une valeur globale</translation>
+        <translation>Définir l&apos;approximation d&apos;échelle pour cette courbe, 0 - utiliser une valeur globale</translation>
     </message>
 </context>
 <context>
@@ -6392,7 +6392,7 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message numerus="yes">
         <source>Followed %n option(s) require restart to take effect: %1.</source>
-        <translation type="unfinished">
+        <translation>
             <numerusform>Followed %n option(s) require restart to take effect: %1.</numerusform>
             <numerusform>Followed %n option(s) require restart to take effect: %1.</numerusform>
         </translation>
@@ -6414,7 +6414,7 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message numerus="yes">
         <source>Followed %n option(s) require restart to take effect: %1.</source>
-        <translation type="unfinished">
+        <translation>
             <numerusform>Followed %n option(s) require restart to take effect: %1.</numerusform>
             <numerusform>Followed %n option(s) require restart to take effect: %1.</numerusform>
         </translation>
@@ -12916,7 +12916,7 @@ Voulez-vous enregistrer vos changements ?</translation>
     </message>
     <message>
         <source>The measurement name is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le champ &apos;nom de la mesure&apos; n&apos;est pas renseigné.</translation>
     </message>
 </context>
 <context>
@@ -14110,13 +14110,6 @@ Voulez-vous enregistrer vos changements ?</translation>
     <message>
         <source>measurement</source>
         <translation>mesures</translation>
-    </message>
-</context>
-<context>
-    <name>VAbstractPiece</name>
-    <message>
-        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
-        <translation type="vanished">Piece &apos;%1&apos;. Il n&apos;y pas assez de points pour établir la marge de couture.</translation>
     </message>
 </context>
 <context>
@@ -16848,12 +16841,13 @@ Voulez-vous enregistrer les modifications ?</translation>
     <name>VRawLayout</name>
     <message>
         <source>VRawLayout::ReadFile() failed. Raw layout format prefix mismatch error.</source>
-        <translation type="unfinished"></translation>
+        <translation>VRawLayout::ReadFile() échec. Préfixe du format .rld erroné.</translation>
     </message>
     <message>
         <source>VRawLayout::ReadFile() failed.
 Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>VRawLayout::ReadFile() échec.
+Erreur de compatibilité du format .rld: actualFileVersion = %1 alors que fileVersion = %2</translation>
     </message>
 </context>
 <context>
@@ -19762,7 +19756,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VisToolAlongLine</name>
     <message>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Longueur = %1%2; &lt;b&gt;Cliquez avec la souris&lt;/b&gt; - achevez la sélection de la longueur, &lt;b&gt;%3&lt;/b&gt; - terminé</translation>
     </message>
 </context>
 <context>
@@ -19799,7 +19793,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VisToolBisector</name>
     <message>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Longueur = %1%2; &lt;b&gt;Cliquez avec la souris&lt;/b&gt; - achevez la sélection de la longueur, &lt;b&gt;%3&lt;/b&gt; - terminé</translation>
     </message>
 </context>
 <context>
@@ -19836,44 +19830,44 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VisToolCutArc</name>
     <message>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Longueur = %1%2; &lt;b&gt;Cliquez avec la souris&lt;/b&gt; - achevez la sélection de la longueur, &lt;b&gt;%3&lt;/b&gt; - terminé</translation>
     </message>
 </context>
 <context>
     <name>VisToolCutSpline</name>
     <message>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Longueur = %1%2; &lt;b&gt;Cliquez avec la souris&lt;/b&gt; - achevez la sélection de la longueur, &lt;b&gt;%3&lt;/b&gt; - terminé</translation>
     </message>
 </context>
 <context>
     <name>VisToolCutSplinePath</name>
     <message>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Longueur = %1%2; &lt;b&gt;Cliquez avec la souris&lt;/b&gt; - achevez la sélection de la longueur, &lt;b&gt;%3&lt;/b&gt; - terminé</translation>
     </message>
 </context>
 <context>
     <name>VisToolEllipticalArc</name>
     <message>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Arc elliptique&lt;/b&gt;: rayon1 = %1%2; &lt;b&gt;Cliquez avec la souris&lt;/b&gt; - achevez la sélection du premier rayon, &lt;b&gt;%3&lt;/b&gt; - terminé</translation>
     </message>
     <message>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%4&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Arc elliptique&lt;/b&gt;: rayon1 = %1%2, rayon2 = %3%2; &lt;b&gt;Cliquez avec la souris&lt;/b&gt; - achevez la sélection du second rayon, &lt;b&gt;%4&lt;/b&gt; - terminé</translation>
     </message>
     <message>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Arc elliptique&lt;/b&gt;: rayon1 = %1%2, rayon2 = %3%2, angle1 = %4°; &lt;b&gt;Cliquez avec la souris&lt;/b&gt; - achevez la sélection du second rayon, &lt;b&gt;%5&lt;/b&gt; - angle magnétique, &lt;b&gt;%6&lt;/b&gt; - terminé</translation>
     </message>
     <message>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°, angle2 = %5°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%6&lt;/b&gt; - sticking angle, &lt;b&gt;%7&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Arc elliptique&lt;/b&gt;: rayon1 = %1%2, rayon2 = %3%2, angle1 = %4°, angle2 = %5°; &lt;b&gt;Cliquez avec la souris&lt;/b&gt; - achevez la sélection du second rayon, &lt;b&gt;%6&lt;/b&gt; - angle magnétique, &lt;b&gt;%7&lt;/b&gt; - terminé</translation>
     </message>
     <message>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°, angle2 = %5°, rotation = %6°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%7&lt;/b&gt; - sticking angle, &lt;b&gt;%8&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Arc elliptique&lt;/b&gt;: rayon1 = %1%2, rayon2 = %3%2, angle1 = %4°, angle2 = %5°, rotation = %6°; &lt;b&gt;Cliquez avec la souris&lt;/b&gt; - achevez la sélection du second rayon, &lt;b&gt;%7&lt;/b&gt; - angle magnétique, &lt;b&gt;%8&lt;/b&gt; - terminé</translation>
     </message>
 </context>
 <context>
@@ -19921,32 +19915,32 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VisToolNormal</name>
     <message>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Longueur = %1%2; &lt;b&gt;Cliquez avec la souris&lt;/b&gt; - achevez la sélection de la longueur, &lt;b&gt;%3&lt;/b&gt; - terminé</translation>
     </message>
 </context>
 <context>
     <name>VisToolPointFromCircleAndTangent</name>
     <message>
         <source>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Rayon = %1%2; &lt;b&gt;Cliquez avec la souris&lt;/b&gt; - achevez la sélection du rayon, &lt;b&gt;%3&lt;/b&gt; - terminé</translation>
     </message>
 </context>
 <context>
     <name>VisToolPointOfContact</name>
     <message>
         <source>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Rayon = %1%2; &lt;b&gt;Cliquez avec la souris&lt;/b&gt; - achevez la sélection du rayon, &lt;b&gt;%3&lt;/b&gt; - terminé</translation>
     </message>
 </context>
 <context>
     <name>VisToolPointOfIntersectionCircles</name>
     <message>
         <source>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Rayon = %1%2; &lt;b&gt;Cliquez avec la souris&lt;/b&gt; - achevez la sélection du second rayon, &lt;b&gt;%3&lt;/b&gt; - terminé</translation>
     </message>
     <message>
         <source>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Rayon = %1%2; &lt;b&gt;Cliquez avec la souris&lt;/b&gt; - achevez la sélection du premier rayon, &lt;b&gt;%3&lt;/b&gt; - terminé</translation>
     </message>
 </context>
 <context>
@@ -19964,7 +19958,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VisToolShoulderPoint</name>
     <message>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Longueur = %1%2; &lt;b&gt;Cliquez avec la souris&lt;/b&gt; - achevez la sélection de la longueur, &lt;b&gt;%3&lt;/b&gt; - terminé</translation>
     </message>
 </context>
 <context>

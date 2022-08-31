@@ -2497,11 +2497,11 @@
     </message>
     <message>
         <source>Approximation scale:</source>
-        <translation type="unfinished">Scala approssimativa:</translation>
+        <translation>Scala approssimativa:</translation>
     </message>
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation type="unfinished">Usa una scala approssimativa per questa curva, 0 è il valore generico</translation>
+        <translation>Usa una scala approssimativa per questa curva, 0 è il valore generico</translation>
     </message>
 </context>
 <context>

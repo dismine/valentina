@@ -2505,11 +2505,11 @@
     </message>
     <message>
         <source>Approximation scale:</source>
-        <translation type="unfinished">Näherungsskala:</translation>
+        <translation>Näherungsskala:</translation>
     </message>
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation type="unfinished">Näherungsskala für diese Kurve einstellen, 0 - verwendet den globalen Wert</translation>
+        <translation>Näherungsskala für diese Kurve einstellen, 0 - verwendet den globalen Wert</translation>
     </message>
 </context>
 <context>
@@ -14110,13 +14110,6 @@ Do you want to save your changes?</source>
     <message>
         <source>measurement</source>
         <translation>Maß</translation>
-    </message>
-</context>
-<context>
-    <name>VAbstractPiece</name>
-    <message>
-        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
-        <translation type="vanished">Schnittteil &apos;%1&apos;. Nicht genügend Punkte vorhanden um Nahtzugabe zu erstellen.</translation>
     </message>
 </context>
 <context>

@@ -2505,11 +2505,11 @@
     </message>
     <message>
         <source>Approximation scale:</source>
-        <translation type="unfinished">Schaal bij benadering:</translation>
+        <translation>Schaal bij benadering:</translation>
     </message>
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation type="unfinished">Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
+        <translation>Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
     </message>
 </context>
 <context>
@@ -14112,13 +14112,6 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>measurement</source>
         <translation>maten</translation>
-    </message>
-</context>
-<context>
-    <name>VAbstractPiece</name>
-    <message>
-        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
-        <translation type="vanished">Patroondeel &apos;%1&apos;. Niet genoeg punten om een naadtoeslag aan te maken..</translation>
     </message>
 </context>
 <context>
