@@ -477,7 +477,7 @@ auto VEllipticalArc::GetPoints() const -> QVector<QPointF>
     const QPointF center = VAbstractArc::GetCenter().toQPointF();
 
     // Don't work with 0 radius. Always make it bigger than 0.
-    constexpr qreal threshold = ToPixel(0.001, Unit::Mm);
+    Q_RELAXED_CONSTEXPR qreal threshold = ToPixel(0.001, Unit::Mm);
     qreal radius1 = qMax(d->radius1, threshold);
     qreal radius2 = qMax(d->radius2, threshold);
     qreal max = qMax(d->radius1, d->radius2);

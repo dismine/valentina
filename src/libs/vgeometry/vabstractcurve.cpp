@@ -40,7 +40,7 @@
 #include "../vmisc/compatibility.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 
-#if defined(Q_CC_MSVC) && _MSC_VER <= 1900
+#if defined(__cpp_constexpr) && __cpp_constexpr-0 < 201304
 const qreal VAbstractCurve::minLength = ToPixel(1, Unit::Mm);
 #endif
 
