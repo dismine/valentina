@@ -375,17 +375,21 @@ const int userMaterialPlaceholdersQuantity = 20;
 QPixmap QPixmapFromCache(const QString &pixmapPath);
 void SetItemOverrideCursor(QGraphicsItem *item, const QString & pixmapPath, int hotX = -1, int hotY = -1);
 
+template<typename T> Q_DECL_CONSTEXPR inline auto MmToPixel(T val) -> T { return (val / 25.4) * PrintDPI; }
+template<typename T> Q_DECL_CONSTEXPR inline auto CmToPixel(T val) -> T { return ((val * 10.0) / 25.4) * PrintDPI; }
+template<typename T> Q_DECL_CONSTEXPR inline auto InchToPixel(T val) -> T { return val * PrintDPI; }
+
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline double ToPixel(double val, const Unit &unit)
+Q_DECL_RELAXED_CONSTEXPR inline auto ToPixel(double val, const Unit &unit) -> double
 {
     switch (unit)
     {
         case Unit::Mm:
-            return (val / 25.4) * PrintDPI;
+            return MmToPixel(val);
         case Unit::Cm:
-            return ((val * 10.0) / 25.4) * PrintDPI;
+            return CmToPixel(val);
         case Unit::Inch:
-            return val * PrintDPI;
+            return InchToPixel(val);
         case Unit::Px:
             return val;
         default:
@@ -394,17 +398,21 @@ Q_DECL_RELAXED_CONSTEXPR inline double ToPixel(double val, const Unit &unit)
     return 0;
 }
 
+template<typename T> Q_DECL_CONSTEXPR inline auto PixelToMm(T pix) -> T { return (pix / PrintDPI) * 25.4; }
+template<typename T> Q_DECL_CONSTEXPR inline auto PixelToCm(T pix) -> T { return ((pix / PrintDPI) * 25.4) / 10.0; }
+template<typename T> Q_DECL_CONSTEXPR inline auto PixelToInch(T pix) -> T { return pix / PrintDPI; }
+
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline double FromPixel(double pix, const Unit &unit)
+Q_DECL_RELAXED_CONSTEXPR inline auto FromPixel(double pix, const Unit &unit) -> double
 {
     switch (unit)
     {
         case Unit::Mm:
-            return (pix / PrintDPI) * 25.4;
+            return PixelToMm(pix);
         case Unit::Cm:
-            return ((pix / PrintDPI) * 25.4) / 10.0;
+            return PixelToCm(pix);
         case Unit::Inch:
-            return pix / PrintDPI;
+            return PixelToInch(pix);
         case Unit::Px:
             return pix;
         default:
@@ -414,7 +422,7 @@ Q_DECL_RELAXED_CONSTEXPR inline double FromPixel(double pix, const Unit &unit)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline qreal UnitConvertor(qreal value, const Unit &from, const Unit &to)
+Q_DECL_RELAXED_CONSTEXPR inline auto UnitConvertor(qreal value, const Unit &from, const Unit &to) -> qreal
 {
     switch (from)
     {
@@ -489,14 +497,15 @@ Q_DECL_RELAXED_CONSTEXPR inline qreal UnitConvertor(qreal value, const Unit &fro
  * @brief UnitConvertor Converts the values of the given margin from given unit to the new unit.
  * returns a new instand of QMarginsF.
  */
-Q_DECL_RELAXED_CONSTEXPR inline QMarginsF UnitConvertor(const QMarginsF &margins, const Unit &from, const Unit &to)
+Q_DECL_RELAXED_CONSTEXPR inline auto UnitConvertor(const QMarginsF &margins, const Unit &from,
+                                                   const Unit &to) -> QMarginsF
 {
     const qreal left = UnitConvertor(margins.left(), from, to);
     const qreal top = UnitConvertor(margins.top(), from, to);
     const qreal right = UnitConvertor(margins.right(), from, to);
     const qreal bottom = UnitConvertor(margins.bottom(), from, to);
 
-    return QMarginsF(left, top, right, bottom);
+    return {left, top, right, bottom};
 }
 
 void InitLanguages(QComboBox *combobox);

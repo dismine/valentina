@@ -45,12 +45,12 @@
 #include "../vmisc/compatibility.h"
 #include "vtextgraphicsitem.h"
 
-const qreal resizeSquare = (3./*mm*/ / 25.4) * PrintDPI;
-const qreal rotateCircle = (2./*mm*/ / 25.4) * PrintDPI;
+const qreal resizeSquare = MmToPixel(3.);
+const qreal rotateCircle = MmToPixel(2.);
 #define ROTATE_RECT                 60
 #define ROTATE_ARC                  50
-const qreal minW = (4./*mm*/ / 25.4) * PrintDPI + resizeSquare;
-const qreal minH = (4./*mm*/ / 25.4) * PrintDPI + resizeSquare;
+const qreal minW = MmToPixel(4.) + resizeSquare;
+const qreal minH = MmToPixel(4.) + resizeSquare;
 #define ACTIVE_Z                    10
 
 namespace

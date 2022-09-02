@@ -246,7 +246,7 @@ auto VAbstractPiece::RemoveDublicates(const QVector<T> &points, bool removeFirst
     p.append(ConstFirst(points));
 
     // Default accuracy is not enough
-    constexpr qreal accuracy = (0.5/*mm*/ / 25.4) * PrintDPI;
+    constexpr qreal accuracy = MmToPixel(0.5);
 
     for (int i = 0; i < points.size(); ++i)
     {

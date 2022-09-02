@@ -120,7 +120,7 @@ QPixmap WatermarkImageFromCache(const VWatermarkData &watermarkData, const QStri
 
 //---------------------------------------------------------------------------------------------------------------------
 VPoster::VPoster(const QPrinter *printer)
-    :printer(printer), allowance(static_cast<quint32>(qRound(10./25.4*PrintDPI)))//1 cm
+    :printer(printer), allowance(static_cast<quint32>(qRound(CmToPixel(1.))))
 {
 }
 

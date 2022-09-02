@@ -40,10 +40,6 @@
 #include "../vmisc/compatibility.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 
-#if defined(__cpp_constexpr) && __cpp_constexpr-0 < 201304
-const qreal VAbstractCurve::minLength = ToPixel(1, Unit::Mm);
-#endif
-
 VAbstractCurve::VAbstractCurve(const GOType &type, const quint32 &idObject, const Draw &mode)
     :VGObject(type, idObject, mode), d (new VAbstractCurveData())
 {}

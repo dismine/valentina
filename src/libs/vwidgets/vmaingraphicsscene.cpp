@@ -155,7 +155,7 @@ void VMainGraphicsScene::InitOrigins()
 {
     origins.clear();
 
-    QPen originsPen(Qt::green, (1.2 / 3.0) /*mm*/ / 25.4 * PrintDPI, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    QPen originsPen(Qt::green, MmToPixel(1.2 / 3.0), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     QBrush axisTextBrush(Qt::green);
     const qreal arrowAngle = 35.0;
     const qreal arrowLength = 12.0;

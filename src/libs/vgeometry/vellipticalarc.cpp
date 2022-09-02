@@ -214,7 +214,7 @@ auto JoinVectors(const QVector<QPointF> &v1, const QVector<QPointF> &v2) -> QVec
 
     v = v1;
 
-    constexpr qreal accuracy = (0.0001/*mm*/ / 25.4) * PrintDPI;
+    constexpr qreal accuracy = MmToPixel(0.0001);
 
     for (auto p : v2)
     {

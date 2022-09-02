@@ -54,7 +54,7 @@ const quint16 VAbstractPieceData::classVersion = 3;
 const qreal maxL = 3.5;
 
 const qreal VSAPoint::passmarkFactor = 0.5;
-const qreal VSAPoint::maxPassmarkLength = (10/*mm*/ / 25.4) * PrintDPI;
+const qreal VSAPoint::maxPassmarkLength = MmToPixel(10.);
 const qreal VSAPoint::minSAWidth = accuracyPointOnLine + accuracyPointOnLine*0.5;
 
 namespace

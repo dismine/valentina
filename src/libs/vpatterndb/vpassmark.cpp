@@ -141,7 +141,7 @@ bool FixNotchPoint(const QVector<QPointF> &seamAllowance, const QPointF &notchBa
 
     return fixed;
 }
-const qreal passmarkGap = (1.5/*mm*/ / 25.4) * PrintDPI;
+const qreal passmarkGap = MmToPixel(1.5);
 
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QLineF> CreateOnePassmarkLines(const QLineF &line)

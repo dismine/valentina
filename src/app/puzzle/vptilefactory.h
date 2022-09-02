@@ -95,7 +95,7 @@ public:
     /**
      * @brief tileStripeWidth the width of the info / glueing stripe in Px
      */
-    static constexpr qreal tileStripeWidth = 10.0 / 25.4 * PrintDPI; // 1 cm to pixels
+    static constexpr qreal tileStripeWidth = CmToPixel(1.0);
 
     auto WatermarkData() const -> const VWatermarkData &;
 

@@ -312,7 +312,7 @@ void AbstractTest::Comparison(const QVector<QPointF> &ekv, const QVector<QPointF
 {
     // Begin comparison
     QCOMPARE(ekv.size(), ekvOrig.size());// First check if sizes equal
-    const qreal testAccuracy = (1.0/*mm*/ / 25.4) * PrintDPI;
+    const qreal testAccuracy = MmToPixel(1.);
 
     for (int i=0; i < ekv.size(); i++)
     {

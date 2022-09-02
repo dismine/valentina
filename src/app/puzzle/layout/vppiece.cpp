@@ -49,9 +49,9 @@ QT_WARNING_POP
 
 namespace
 {
-constexpr qreal minStickyDistance = 3 / 25.4 * PrintDPI; // 3 mm
-constexpr qreal maxStickyDistance = 10 / 25.4 * PrintDPI; // 10 mm
-constexpr qreal stickyShift = 1 / 25.4 * PrintDPI; // 1 mm
+constexpr qreal minStickyDistance = MmToPixel(3.);
+constexpr qreal maxStickyDistance = MmToPixel(10.);
+constexpr qreal stickyShift = MmToPixel(1.);
 
 //---------------------------------------------------------------------------------------------------------------------
 auto CutEdge(const QLineF &edge) -> QVector<QPointF>

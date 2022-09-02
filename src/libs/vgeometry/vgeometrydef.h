@@ -97,7 +97,7 @@ private:
 };
 Q_DECLARE_METATYPE(VLayoutPassmark)
 
-constexpr qreal accuracyPointOnLine = (0.1555/*mm*/ / 25.4) * PrintDPI;
+constexpr qreal accuracyPointOnLine = MmToPixel(0.1555);
 
 Q_REQUIRED_RESULT static inline bool VFuzzyComparePoints(const QPointF &p1, const QPointF &p2,
                                                          qreal accuracy = accuracyPointOnLine);
