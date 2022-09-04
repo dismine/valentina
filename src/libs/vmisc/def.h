@@ -375,9 +375,9 @@ const int userMaterialPlaceholdersQuantity = 20;
 QPixmap QPixmapFromCache(const QString &pixmapPath);
 void SetItemOverrideCursor(QGraphicsItem *item, const QString & pixmapPath, int hotX = -1, int hotY = -1);
 
-template<typename T> Q_DECL_CONSTEXPR inline auto MmToPixel(T val) -> T { return (val / 25.4) * PrintDPI; }
-template<typename T> Q_DECL_CONSTEXPR inline auto CmToPixel(T val) -> T { return ((val * 10.0) / 25.4) * PrintDPI; }
-template<typename T> Q_DECL_CONSTEXPR inline auto InchToPixel(T val) -> T { return val * PrintDPI; }
+template<typename T> constexpr inline auto MmToPixel(T val) -> T { return (val / 25.4) * PrintDPI; }
+template<typename T> constexpr inline auto CmToPixel(T val) -> T { return ((val * 10.0) / 25.4) * PrintDPI; }
+template<typename T> constexpr inline auto InchToPixel(T val) -> T { return val * PrintDPI; }
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_RELAXED_CONSTEXPR inline auto ToPixel(double val, const Unit &unit) -> double
@@ -398,9 +398,9 @@ Q_DECL_RELAXED_CONSTEXPR inline auto ToPixel(double val, const Unit &unit) -> do
     return 0;
 }
 
-template<typename T> Q_DECL_CONSTEXPR inline auto PixelToMm(T pix) -> T { return (pix / PrintDPI) * 25.4; }
-template<typename T> Q_DECL_CONSTEXPR inline auto PixelToCm(T pix) -> T { return ((pix / PrintDPI) * 25.4) / 10.0; }
-template<typename T> Q_DECL_CONSTEXPR inline auto PixelToInch(T pix) -> T { return pix / PrintDPI; }
+template<typename T> constexpr inline auto PixelToMm(T pix) -> T { return (pix / PrintDPI) * 25.4; }
+template<typename T> constexpr inline auto PixelToCm(T pix) -> T { return ((pix / PrintDPI) * 25.4) / 10.0; }
+template<typename T> constexpr inline auto PixelToInch(T pix) -> T { return pix / PrintDPI; }
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_RELAXED_CONSTEXPR inline auto FromPixel(double pix, const Unit &unit) -> double
