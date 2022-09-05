@@ -161,6 +161,9 @@ public:
     auto GetLayoutSettingsDialogSize() const -> QSize;
     void SetLayoutSettingsDialogSize(const QSize& sz);
 
+    auto GetDialogSplinePathSize() const -> QSize;
+    void SetDialogSplinePathSize(const QSize& sz);
+
     auto IsAutomaticallyCheckUpdates() const -> bool;
     void SetAutomaticallyCheckUpdates(bool value);
 

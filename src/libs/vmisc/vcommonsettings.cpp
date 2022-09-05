@@ -121,6 +121,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingIncrementsDialogSize, (QLatin1St
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingFormulaWizardDialogSize, (QLatin1String("formulaWizardDialogSize"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingFinalMeasurementsDialogSize, (QLatin1String("finalMeasurementsDialogSize"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSettingsDialogSize, (QLatin1String("layoutSettingsDialogSize"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDialogSplinePathSize, (QLatin1String("splinePathDialogSize"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingAutomaticallyCheckUpdates, (QLatin1String("automaticallyCheckUpdates"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLatestSkippedVersion, (QLatin1String("lastestSkippedVersion"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDateOfLastRemind, (QLatin1String("dateOfLastRemind"))) // NOLINT
@@ -828,6 +829,18 @@ auto VCommonSettings::GetLayoutSettingsDialogSize() const -> QSize
 void VCommonSettings::SetLayoutSettingsDialogSize(const QSize &sz)
 {
     setValue(*settingLayoutSettingsDialogSize, sz);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QSize VCommonSettings::GetDialogSplinePathSize() const
+{
+    return value(*settingDialogSplinePathSize, QSize(0, 0)).toSize();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetDialogSplinePathSize(const QSize &sz)
+{
+    setValue(*settingDialogSplinePathSize, sz);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

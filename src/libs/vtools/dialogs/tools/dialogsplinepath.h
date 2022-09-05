@@ -70,6 +70,8 @@ protected:
     virtual void SaveData() override;
     virtual void closeEvent(QCloseEvent *event) override;
     virtual bool IsValid() const final;
+    void showEvent( QShowEvent *event ) override;
+    void resizeEvent(QResizeEvent *event) override;
 private slots:
     void PointChanged(int row);
     void currentPointChanged(int index);

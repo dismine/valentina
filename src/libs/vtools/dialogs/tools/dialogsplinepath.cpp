@@ -1005,6 +1005,45 @@ bool DialogSplinePath::IsValid() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSplinePath::showEvent(QShowEvent *event)
+{
+    QDialog::showEvent( event ); // NOLINT(bugprone-parent-virtual-call)
+    if ( event->spontaneous() )
+    {
+        return;
+    }
+    if (isInitialized)
+    {
+        return;
+    }
+    // do your init stuff here
+
+    const QSize sz = VAbstractApplication::VApp()->Settings()->GetDialogSplinePathSize();
+    if (not sz.isEmpty())
+    {
+        resize(sz);
+    }
+
+    isInitialized = true;//first show windows are held
+    ShowVisualization();
+
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSplinePath::resizeEvent(QResizeEvent *event)
+{
+    // remember the size for the next time this dialog is opened, but only
+    // if widget was already initialized, which rules out the resize at
+    // dialog creating, which would
+    if (isInitialized)
+    {
+        VAbstractApplication::VApp()->Settings()->SetDialogSplinePathSize(size());
+    }
+    QDialog::resizeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSplinePath::SetNotes(const QString &notes)
 {
     ui->plainTextEditToolNotes->setPlainText(notes);
