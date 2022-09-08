@@ -11134,75 +11134,75 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>VLayoutPassmark prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur de correspondance de préfixe VLayoutPassmark : actualStreamHeader = 0x%1 et streamHeader = 0x%2</translation>
     </message>
     <message>
         <source>VLayoutPassmark compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur de compatibilité VLayoutPassmark : actualClassVersion = %1 et classVersion = %2</translation>
     </message>
     <message>
         <source>VLayoutPlaceLabel prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur de correspondance de préfixe VLayoutPlaceLabel : actualStreamHeader = 0x%1 et streamHeader = 0x%2</translation>
     </message>
     <message>
         <source>VLayoutPlaceLabel compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur de compatibilité VLayoutPlaceLabel : actualClassVersion = %1 et classVersion = %2</translation>
     </message>
     <message>
         <source>VAbstractPieceData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur de correspondance de préfixe VAbstractPieceData : actualStreamHeader = 0x%1 et streamHeader = 0x%2</translation>
     </message>
     <message>
         <source>VAbstractPieceData compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur de compatibilité VAbstractPieceData : actualClassVersion = %1 et classVersion = %2</translation>
     </message>
     <message>
         <source>VRawLayoutData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur de correspondance de préfixe VRawLayoutData : actualStreamHeader = 0x%1 et streamHeader = 0x%2</translation>
     </message>
     <message>
         <source>VRawLayoutData compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur de compatibilité VRawLayoutData : actualClassVersion = %1 et classVersion = %2</translation>
     </message>
     <message>
         <source>VLayoutPiecePathData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur de correspondance de préfixe VLayoutPiecePathData : actualStreamHeader = 0x%1 et streamHeader = 0x%2</translation>
     </message>
     <message>
         <source>VLayoutPiecePathData compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur de compatibilité VLayoutPiecePathData : actualClassVersion = %1 et classVersion = %2</translation>
     </message>
     <message>
         <source>TextLine prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur de correspondance de préfixe TextLine : actualStreamHeader = 0x%1 et streamHeader = 0x%2</translation>
     </message>
     <message>
         <source>TextLine compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur de compatibilité TextLine : actualClassVersion = %1 et classVersion = %2</translation>
     </message>
     <message>
         <source>VTextManager prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur de correspondance de préfixe VTextManager : actualStreamHeader = 0x%1 et streamHeader = 0x%2</translation>
     </message>
     <message>
         <source>VTextManager compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur de compatibilité VTextManager : actualClassVersion = %1 et classVersion = %2</translation>
     </message>
     <message>
         <source>CustomSARecord prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur de correspondance de préfixe CustomSARecord : actualStreamHeader = 0x%1 et streamHeader = 0x%2</translation>
     </message>
     <message>
         <source>CustomSARecord compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur de compatibilité CustomSARecord : actualClassVersion = %1 et classVersion = %2</translation>
     </message>
     <message>
         <source>VPieceNodeData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur de correspondance de préfixe VPieceNodeData : actualStreamHeader = 0x%1 et streamHeader = 0x%2</translation>
     </message>
     <message>
         <source>VPieceNodeData compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur de compatibilité VPieceNodeData : actualClassVersion = %1 et classVersion = %2</translation>
     </message>
 </context>
 <context>
@@ -12804,7 +12804,7 @@ Voulez-vous enregistrer vos changements ?</translation>
     </message>
     <message>
         <source>Cannot convert base value to double in column 2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de doubler la valeur de base de la colonne 2.</translation>
     </message>
     <message>
         <source>Cannot convert shift value to double in column %1.</source>
@@ -12860,7 +12860,7 @@ Voulez-vous enregistrer vos changements ?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use unicode properties &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;The meaning of the \w, \d, etc., character classes, as well as the meaning of their counterparts (\W, \D, etc.), is changed from matching ASCII characters only to matching any character with the corresponding Unicode property. For instance, \d is changed to match any character with the Unicode Nd (decimal digit) property; \w to match any character with either the Unicode L (letter) or N (digit) property, plus underscore, and so on. This option corresponds to the /u modifier in Perl regular expressions.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use unicode properties &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;The meaning of the \w, \d, etc., character classes, as well as the meaning of their counterparts (\W, \D, etc.), is changed from matching ASCII characters only to matching any character with the corresponding Unicode property. For instance, \d is changed to match any character with the Unicode Nd (decimal digit) property; \w to match any character with either the Unicode L (letter) or N (digit) property, plus underscore, and so on. This option corresponds to the /u modifier in Perl regular expressions.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;utilisent les propriétés unicode &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;La signification de \w, \d, etc., appelés classes de caractères, aussi bien que la signification de leurs équivalents (\W, \D, etc.), est modifiée pour correspondre aux caractères ASCII de n&apos;importe quel caractère ayant la propriété Unicode correspondante. Par exemple, \d est modifié pour correspondre à n&apos;importe quel caractère ayant la propriété Unicode Nd (chiffre decimal ou decimal digit); \w pour correspondre à n&apos;importe quel caractère ayant soit la propriété Unicode L (lettre) ou N (chiffre), plus underscore, etc. Cette option correspond au modificateur /u dans les expressions régulières Perl.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Alt+U</source>
@@ -13436,7 +13436,7 @@ Voulez-vous enregistrer vos changements ?</translation>
     </message>
     <message>
         <source>Controls priority in layout. 0 - no priority.</source>
-        <translation type="unfinished"></translation>
+        <translation>Contrôle la priorité dans le plan de coupe. 0 - pas de priorité.</translation>
     </message>
     <message>
         <source>Automatic</source>
