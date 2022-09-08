@@ -233,8 +233,32 @@ void ShowInGraphicalShell(const QString &filePath)
 #elif defined(Q_OS_WIN)
     QProcess::startDetached(QStringLiteral("explorer"), QStringList{"/select", QDir::toNativeSeparators(filePath)});
 #else
-    // we cannot select a file here, because no file browser really supports it...
-    QDesktopServices::openUrl(QUrl::fromLocalFile(QFileInfo(filePath).path()));
+    const int timeout = 1000; // ms
+    QString command = QStringLiteral("dbus-send --reply-timeout=%1 --session --dest=org.freedesktop.FileManager1 "
+                                     "--type=method_call /org/freedesktop/FileManager1 "
+                                     "org.freedesktop.FileManager1.ShowItems array:string:\"%2\" string:\"\"")
+                          .arg(timeout).arg(QUrl::fromLocalFile(filePath).toString());
+
+    // Sending message through dbus will highlighting file
+    QProcess dbus;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    dbus.start(command); // clazy:exclude=qt6-deprecated-api-fixes
+#else
+    dbus.startCommand(command);
+#endif
+    if (not dbus.waitForStarted(timeout))
+    {
+        // This way will open only window without highlighting file
+        QDesktopServices::openUrl(QUrl::fromLocalFile(QFileInfo(filePath).path()));
+        return;
+    }
+
+    if (not dbus.waitForFinished(timeout))
+    {
+        // This way will open only window without highlighting file
+        QDesktopServices::openUrl(QUrl::fromLocalFile(QFileInfo(filePath).path()));
+        return;
+    }
 #endif
 }
 
