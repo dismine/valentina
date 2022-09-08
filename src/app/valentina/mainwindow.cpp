@@ -474,7 +474,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     if (VApplication::IsGUIMode())
     {
-        QTimer::singleShot(SECONDS(1), this, &MainWindow::SetDefaultGUILanguage);
+        QTimer::singleShot(V_SECONDS(1), this, &MainWindow::SetDefaultGUILanguage);
     }
 }
 
@@ -2139,7 +2139,7 @@ void MainWindow::MeasurementsChanged(const QString &path)
     {
         m_mChanges = true;
         m_mChangesAsked = false;
-        m_measurementsSyncTimer->start(MSECONDS(1500));
+        m_measurementsSyncTimer->start(V_MSECONDS(1500));
     }
     else
     {
@@ -2149,7 +2149,7 @@ void MainWindow::MeasurementsChanged(const QString &path)
             {
                 m_mChanges = true;
                 m_mChangesAsked = false;
-                m_measurementsSyncTimer->start(MSECONDS(1500));
+                m_measurementsSyncTimer->start(V_MSECONDS(1500));
                 break;
             }
 
@@ -6010,7 +6010,7 @@ auto MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
         {
             /* Collect garbage only after successfully parse. This way wrongly accused items have one more time to restore
              * a reference. */
-            QTimer::singleShot(100, Qt::CoarseTimer, this, [this](){doc->GarbageCollector(true);});
+            QTimer::singleShot(V_MSECONDS(100), Qt::CoarseTimer, this, [this](){doc->GarbageCollector(true);});
         }
 
         m_patternReadOnly = doc->IsReadOnly();

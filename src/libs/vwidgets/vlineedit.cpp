@@ -34,7 +34,12 @@
 #include <QTimer>
 #include <QtDebug>
 
-#include "../vmisc/compatibility.h"
+#if __cplusplus >= 201402L
+using namespace std::chrono_literals;
+#else
+#include "../vmisc/bpstd/chrono.hpp"
+using namespace bpstd::literals::chrono_literals;
+#endif
 
 namespace
 {
@@ -172,7 +177,7 @@ void VCompleterLineEdit::ShowCompletion()
     if (text().isEmpty())
     {
         // completion list will be hidden now; we will show it again after a delay
-        QTimer::singleShot(100, this, &VCompleterLineEdit::CompletionPopup);
+        QTimer::singleShot(V_MSECONDS(100), this, &VCompleterLineEdit::CompletionPopup);
     }
 }
 

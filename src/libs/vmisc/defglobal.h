@@ -73,4 +73,20 @@ void qAsConst(const T &&) Q_DECL_EQ_DELETE;
 #define NANOSECONDS(x) SUFFIX_APPEND(x, _ns) // NOLINT(cppcoreguidelines-macro-usage)
 #endif // __cplusplus >= 201402L
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 8, 0)
+#define V_HOURS(x) HOURS(x) // NOLINT(cppcoreguidelines-macro-usage)
+#define V_MINUTES(x) MINUTES(x) // NOLINT(cppcoreguidelines-macro-usage)
+#define V_SECONDS(x) SECONDS(x) // NOLINT(cppcoreguidelines-macro-usage)
+#define V_MSECONDS(x) MSECONDS(x) // NOLINT(cppcoreguidelines-macro-usage)
+#define V_MICSECONDS(x) MICSECONDS(x) // NOLINT(cppcoreguidelines-macro-usage)
+#define V_NANOSECONDS(x) NANOSECONDS(x) // NOLINT(cppcoreguidelines-macro-usage)
+#else
+#define V_HOURS(x) (x * 3600000) // NOLINT(cppcoreguidelines-macro-usage)
+#define V_MINUTES(x) (x * 60000) // NOLINT(cppcoreguidelines-macro-usage)
+#define V_SECONDS(x) (x * 1000) // NOLINT(cppcoreguidelines-macro-usage)
+#define V_MSECONDS(x) (x) // NOLINT(cppcoreguidelines-macro-usage)
+#define V_MICSECONDS(x) (x) // NOLINT(cppcoreguidelines-macro-usage)
+#define V_NANOSECONDS(x) (x) // NOLINT(cppcoreguidelines-macro-usage)
+#endif
+
 #endif // DEFGLOBAL_H

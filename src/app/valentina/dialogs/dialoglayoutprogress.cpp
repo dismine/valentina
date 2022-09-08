@@ -88,7 +88,7 @@ DialogLayoutProgress::DialogLayoutProgress(QElapsedTimer timer, qint64 timeout, 
             m_progressTimer->stop();
         }
     });
-    m_progressTimer->start(SECONDS(1));
+    m_progressTimer->start(V_SECONDS(1));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

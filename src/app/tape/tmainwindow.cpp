@@ -245,7 +245,7 @@ TMainWindow::TMainWindow(QWidget *parent)
 
     if (MApplication::VApp()->IsAppInGUIMode())
     {
-        QTimer::singleShot(SECONDS(1), this, &TMainWindow::SetDefaultGUILanguage);
+        QTimer::singleShot(V_SECONDS(1), this, &TMainWindow::SetDefaultGUILanguage);
     }
 }
 

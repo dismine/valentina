@@ -74,6 +74,13 @@
 #include <QUuid>
 #include <QtMath>
 
+#if __cplusplus >= 201402L
+using namespace std::chrono_literals;
+#else
+#include "../vmisc/bpstd/chrono.hpp"
+using namespace bpstd::literals::chrono_literals;
+#endif
+
 // Current version of seam allowance tag need for backward compatibility
 const quint8 VToolSeamAllowance::pieceVersion = 2;
 
@@ -1435,7 +1442,7 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
 
     if (VAbstractApplication::VApp()->IsAppInGUIMode())
     {
-        QTimer::singleShot(100, Qt::CoarseTimer, this, [this, updateChildren]()
+        QTimer::singleShot(V_MSECONDS(100), Qt::CoarseTimer, this, [this, updateChildren]()
         {
             this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
             UpdateDetailLabel();

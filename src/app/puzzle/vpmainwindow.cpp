@@ -391,7 +391,7 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
 
     if (m_cmd->IsGuiEnabled())
     {
-        QTimer::singleShot(SECONDS(1), this, &VPMainWindow::SetDefaultGUILanguage);
+        QTimer::singleShot(V_SECONDS(1), this, &VPMainWindow::SetDefaultGUILanguage);
     }
 }
 

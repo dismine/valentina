@@ -119,6 +119,13 @@
 #include <QTimer>
 #include <functional>
 
+#if __cplusplus >= 201402L
+using namespace std::chrono_literals;
+#else
+#include "../vmisc/bpstd/chrono.hpp"
+using namespace bpstd::literals::chrono_literals;
+#endif
+
 const QString VPattern::AttrReadOnly    = QStringLiteral("readOnly");
 const QString VPattern::AttrLabelPrefix = QStringLiteral("labelPrefix");
 
@@ -275,7 +282,7 @@ void VPattern::Parse(const Document &parse)
     }
     if (VApplication::IsGUIMode())
     {
-        QTimer::singleShot(1000, Qt::VeryCoarseTimer, this, &VPattern::RefreshPieceGeometry);
+        QTimer::singleShot(V_SECONDS(1), Qt::VeryCoarseTimer, this, &VPattern::RefreshPieceGeometry);
     }
     else if (VApplication::VApp()->CommandLine()->IsTestModeEnabled())
     {
