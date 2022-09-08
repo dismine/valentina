@@ -76,6 +76,9 @@
 
 #if __cplusplus >= 201402L
 using namespace std::chrono_literals;
+#else
+#include "../vmisc/bpstd/chrono.hpp"
+using namespace bpstd::literals::chrono_literals;
 #endif
 
 #if defined(Q_OS_MAC)
@@ -242,11 +245,7 @@ TMainWindow::TMainWindow(QWidget *parent)
 
     if (MApplication::VApp()->IsAppInGUIMode())
     {
-#if __cplusplus >= 201402L
         QTimer::singleShot(1s, this, &TMainWindow::SetDefaultGUILanguage);
-#else
-        QTimer::singleShot(1000, this, &TMainWindow::SetDefaultGUILanguage);
-#endif
     }
 }
 

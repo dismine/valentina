@@ -216,6 +216,9 @@
 
 #if __cplusplus >= 201402L
 using namespace std::chrono_literals;
+#else
+#include "../vmisc/bpstd/chrono.hpp"
+using namespace bpstd::literals::chrono_literals;
 #endif
 
 QT_WARNING_PUSH
@@ -471,11 +474,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     if (VApplication::IsGUIMode())
     {
-#if __cplusplus >= 201402L
         QTimer::singleShot(1s, this, &MainWindow::SetDefaultGUILanguage);
-#else
-        QTimer::singleShot(1000, this, &MainWindow::SetDefaultGUILanguage);
-#endif
     }
 }
 
@@ -2140,11 +2139,7 @@ void MainWindow::MeasurementsChanged(const QString &path)
     {
         m_mChanges = true;
         m_mChangesAsked = false;
-#if __cplusplus >= 201402L
         m_measurementsSyncTimer->start(1500ms);
-#else
-        m_measurementsSyncTimer->start(1500);
-#endif
     }
     else
     {
@@ -2154,11 +2149,7 @@ void MainWindow::MeasurementsChanged(const QString &path)
             {
                 m_mChanges = true;
                 m_mChangesAsked = false;
-#if __cplusplus >= 201402L
                 m_measurementsSyncTimer->start(1500ms);
-#else
-                m_measurementsSyncTimer->start(1500);
-#endif
                 break;
             }
 

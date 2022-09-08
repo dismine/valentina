@@ -90,6 +90,9 @@ QT_WARNING_POP
 
 #if __cplusplus >= 201402L
 using namespace std::chrono_literals;
+#else
+#include "../vmisc/bpstd/chrono.hpp"
+using namespace bpstd::literals::chrono_literals;
 #endif
 
 namespace
@@ -358,7 +361,7 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
                     break;
                 }
 
-                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+                std::this_thread::sleep_for(100ms);
             }
         }
 
@@ -388,11 +391,7 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
 
     if (m_cmd->IsGuiEnabled())
     {
-#if __cplusplus >= 201402L
         QTimer::singleShot(1s, this, &VPMainWindow::SetDefaultGUILanguage);
-#else
-        QTimer::singleShot(1000, this, &VPMainWindow::SetDefaultGUILanguage);
-#endif
     }
 }
 

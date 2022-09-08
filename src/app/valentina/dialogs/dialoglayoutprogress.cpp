@@ -41,6 +41,9 @@
 
 #if __cplusplus >= 201402L
 using namespace std::chrono_literals;
+#else
+#include "../vmisc/bpstd/chrono.hpp"
+using namespace bpstd::literals::chrono_literals;
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -85,11 +88,7 @@ DialogLayoutProgress::DialogLayoutProgress(QElapsedTimer timer, qint64 timeout, 
             m_progressTimer->stop();
         }
     });
-#if __cplusplus >= 201402L
     m_progressTimer->start(1s);
-#else
-    m_progressTimer->start(1000);
-#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
