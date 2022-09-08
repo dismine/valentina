@@ -64,6 +64,10 @@
 #include "../ifc/exception/vexception.h"
 #include "literals.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+#include "../vmisc/diagnostic.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+
 //---------------------------------------------------------------------------------------------------------------------
 QPixmap QPixmapFromCache(const QString &pixmapPath)
 {
@@ -242,7 +246,13 @@ void ShowInGraphicalShell(const QString &filePath)
     // Sending message through dbus will highlighting file
     QProcess dbus;
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_CLANG("-Wdeprecated-declarations")
+    QT_WARNING_DISABLE_GCC("-Wdeprecated-declarations")
+
     dbus.start(command); // clazy:exclude=qt6-deprecated-api-fixes
+
+    QT_WARNING_POP
 #else
     dbus.startCommand(command);
 #endif
