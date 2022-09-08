@@ -35,14 +35,6 @@
 #include <chrono>  // std::chrono::duration, std::chrono::system_clock, etc
 #include <cstdint> // std::int32_t
 
-#if __cplusplus < 201402L
-#include <QtGlobal>
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#endif
-
 BPSTD_COMPILER_DIAGNOSTIC_PREAMBLE
 
 namespace bpstd {
@@ -90,92 +82,20 @@ namespace bpstd {
       constexpr auto operator""_h(unsigned long long x) -> std::chrono::hours;
       constexpr auto operator""_h(long double x) -> std::chrono::duration<double, std::ratio<3600,1>>;
 
-#if __cplusplus < 201402L
-      QT_WARNING_PUSH
-      QT_WARNING_DISABLE_CLANG("-Wuser-defined-literals")
-      QT_WARNING_DISABLE_GCC("-Wliteral-suffix")
-
-      // available only since C++14
-      constexpr auto operator""h(unsigned long long x) -> std::chrono::hours;
-      constexpr auto operator""h(long double x) -> std::chrono::duration<double, std::ratio<3600,1>>;
-
-      QT_WARNING_POP
-#endif
-
       constexpr auto operator""_min(unsigned long long x) -> chrono::minutes;
       constexpr auto operator""_min(long double x) -> chrono::duration<double, std::ratio<60>>;
-
-#if __cplusplus < 201402L
-      QT_WARNING_PUSH
-      QT_WARNING_DISABLE_CLANG("-Wuser-defined-literals")
-      QT_WARNING_DISABLE_GCC("-Wliteral-suffix")
-
-      // available only since C++14
-      constexpr auto operator""min(unsigned long long x) -> chrono::minutes;
-      constexpr auto operator""min(long double x) -> chrono::duration<double, std::ratio<60>>;
-
-      QT_WARNING_POP
-#endif
 
       constexpr auto operator""_s(unsigned long long x) -> chrono::seconds;
       constexpr auto operator""_s(long double x) -> chrono::duration<double>;
 
-#if __cplusplus < 201402L
-      QT_WARNING_PUSH
-      QT_WARNING_DISABLE_CLANG("-Wuser-defined-literals")
-      QT_WARNING_DISABLE_GCC("-Wliteral-suffix")
-
-      // available only since C++14
-      constexpr auto operator""s(unsigned long long x) -> chrono::seconds;
-      constexpr auto operator""s(long double x) -> chrono::duration<double>;
-
-      QT_WARNING_POP
-#endif
-
       constexpr auto operator""_ms(unsigned long long x) -> chrono::milliseconds;
       constexpr auto operator""_ms(long double x) -> chrono::duration<double, std::milli>;
-
-#if __cplusplus < 201402L
-      QT_WARNING_PUSH
-      QT_WARNING_DISABLE_CLANG("-Wuser-defined-literals")
-      QT_WARNING_DISABLE_GCC("-Wliteral-suffix")
-
-      // available only since C++14
-      constexpr auto operator""ms(unsigned long long x) -> chrono::milliseconds;
-      constexpr auto operator""ms(long double x) -> chrono::duration<double, std::milli>;
-
-      QT_WARNING_POP
-#endif
 
       constexpr auto operator""_us(unsigned long long x) -> chrono::microseconds;
       constexpr auto operator""_us(long double x) -> chrono::duration<double, std::micro>;
 
-#if __cplusplus < 201402L
-      QT_WARNING_PUSH
-      QT_WARNING_DISABLE_CLANG("-Wuser-defined-literals")
-      QT_WARNING_DISABLE_GCC("-Wliteral-suffix")
-
-      // available only since C++14
-      constexpr auto operator""us(unsigned long long x) -> chrono::microseconds;
-      constexpr auto operator""us(long double x) -> chrono::duration<double, std::micro>;
-
-      QT_WARNING_POP
-#endif
-
       constexpr auto operator""_ns(unsigned long long x) -> chrono::nanoseconds;
       constexpr auto operator""_ns(long double x) -> chrono::duration<double, std::nano>;
-
-#if __cplusplus < 201402L
-      QT_WARNING_PUSH
-      QT_WARNING_DISABLE_CLANG("-Wuser-defined-literals")
-      QT_WARNING_DISABLE_GCC("-Wliteral-suffix")
-
-      // available only since C++14
-      constexpr auto operator""ns(unsigned long long x) -> chrono::nanoseconds;
-      constexpr auto operator""ns(long double x) -> chrono::duration<double, std::nano>;
-
-      QT_WARNING_POP
-#endif
 
     }  // namespace chrono_literals
   }  // namespace literals
@@ -188,40 +108,11 @@ auto
   return chrono::hours{x};
 }
 
-#if __cplusplus < 201402L
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_CLANG("-Wuser-defined-literals")
-QT_WARNING_DISABLE_GCC("-Wliteral-suffix")
-
-inline BPSTD_INLINE_VISIBILITY constexpr
-auto bpstd::literals::chrono_literals::operator""h(unsigned long long x) -> std::chrono::hours
-{
-    return chrono::hours{x};
-}
-
-QT_WARNING_POP
-#endif
-
 inline BPSTD_INLINE_VISIBILITY constexpr
 auto bpstd::literals::chrono_literals::operator""_h(long double x) -> std::chrono::duration<double, std::ratio<3600,1>>
 {
   return chrono::duration<double, std::ratio<3600,1>>{x};
 }
-
-#if __cplusplus < 201402L
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_CLANG("-Wuser-defined-literals")
-QT_WARNING_DISABLE_GCC("-Wliteral-suffix")
-
-// available only since C++14
-inline BPSTD_INLINE_VISIBILITY constexpr
-auto bpstd::literals::chrono_literals::operator""h(long double x) -> std::chrono::duration<double, std::ratio<3600,1>>
-{
-    return chrono::duration<double, std::ratio<3600,1>>{x};
-}
-
-QT_WARNING_POP
-#endif
 
 inline BPSTD_INLINE_VISIBILITY constexpr
 auto bpstd::literals::chrono_literals::operator""_min(unsigned long long x) -> bpstd::chrono::minutes
@@ -229,41 +120,11 @@ auto bpstd::literals::chrono_literals::operator""_min(unsigned long long x) -> b
   return chrono::minutes{x};
 }
 
-#if __cplusplus < 201402L
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_CLANG("-Wuser-defined-literals")
-QT_WARNING_DISABLE_GCC("-Wliteral-suffix")
-
-// available only since C++14
-inline BPSTD_INLINE_VISIBILITY constexpr
-auto bpstd::literals::chrono_literals::operator""min(unsigned long long x) -> bpstd::chrono::minutes
-{
-    return chrono::minutes{x};
-}
-
-QT_WARNING_POP
-#endif
-
 inline BPSTD_INLINE_VISIBILITY constexpr
 auto bpstd::literals::chrono_literals::operator""_min(long double x) -> bpstd::chrono::duration<double, std::ratio<60>>
 {
   return chrono::duration<double, std::ratio<60>>{x};
 }
-
-#if __cplusplus < 201402L
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_CLANG("-Wuser-defined-literals")
-QT_WARNING_DISABLE_GCC("-Wliteral-suffix")
-
-// available only since C++14
-inline BPSTD_INLINE_VISIBILITY constexpr
-auto bpstd::literals::chrono_literals::operator""min(long double x) -> bpstd::chrono::duration<double, std::ratio<60>>
-{
-    return chrono::duration<double, std::ratio<60>>{x};
-}
-
-QT_WARNING_POP
-#endif
 
 inline BPSTD_INLINE_VISIBILITY constexpr
 auto bpstd::literals::chrono_literals::operator""_s(unsigned long long x) -> bpstd::chrono::seconds
@@ -271,41 +132,11 @@ auto bpstd::literals::chrono_literals::operator""_s(unsigned long long x) -> bps
   return chrono::seconds{x};
 }
 
-#if __cplusplus < 201402L
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_CLANG("-Wuser-defined-literals")
-QT_WARNING_DISABLE_GCC("-Wliteral-suffix")
-
-// available only since C++14
-inline BPSTD_INLINE_VISIBILITY constexpr
-auto bpstd::literals::chrono_literals::operator""s(unsigned long long x) -> bpstd::chrono::seconds
-{
-    return chrono::seconds{x};
-}
-
-QT_WARNING_POP
-#endif
-
 inline BPSTD_INLINE_VISIBILITY constexpr
 auto bpstd::literals::chrono_literals::operator""_s(long double x) -> bpstd::chrono::duration<double>
 {
   return chrono::duration<double>{x};
 }
-
-#if __cplusplus < 201402L
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_CLANG("-Wuser-defined-literals")
-QT_WARNING_DISABLE_GCC("-Wliteral-suffix")
-
-// available only since C++14
-inline BPSTD_INLINE_VISIBILITY constexpr
-auto bpstd::literals::chrono_literals::operator""s(long double x) -> bpstd::chrono::duration<double>
-{
-    return chrono::duration<double>{x};
-}
-
-QT_WARNING_POP
-#endif
 
 inline BPSTD_INLINE_VISIBILITY constexpr
 auto bpstd::literals::chrono_literals::operator""_ms(unsigned long long x) -> bpstd::chrono::milliseconds
@@ -313,41 +144,11 @@ auto bpstd::literals::chrono_literals::operator""_ms(unsigned long long x) -> bp
   return chrono::milliseconds{x};
 }
 
-#if __cplusplus < 201402L
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_CLANG("-Wuser-defined-literals")
-QT_WARNING_DISABLE_GCC("-Wliteral-suffix")
-
-// available only since C++14
-inline BPSTD_INLINE_VISIBILITY constexpr
-auto bpstd::literals::chrono_literals::operator""ms(unsigned long long x) -> bpstd::chrono::milliseconds
-{
-    return chrono::milliseconds{x};
-}
-
-QT_WARNING_POP
-#endif
-
 inline BPSTD_INLINE_VISIBILITY constexpr
 auto bpstd::literals::chrono_literals::operator""_ms(long double x) -> bpstd::chrono::duration<double, std::milli>
 {
   return chrono::duration<double, std::milli>{x};
 }
-
-#if __cplusplus < 201402L
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_CLANG("-Wuser-defined-literals")
-QT_WARNING_DISABLE_GCC("-Wliteral-suffix")
-
-// available only since C++14
-inline BPSTD_INLINE_VISIBILITY constexpr
-auto bpstd::literals::chrono_literals::operator""ms(long double x) -> bpstd::chrono::duration<double, std::milli>
-{
-    return chrono::duration<double, std::milli>{x};
-}
-
-QT_WARNING_POP
-#endif
 
 inline BPSTD_INLINE_VISIBILITY constexpr
 auto bpstd::literals::chrono_literals::operator ""_us(unsigned long long x) -> bpstd::chrono::microseconds
@@ -355,41 +156,11 @@ auto bpstd::literals::chrono_literals::operator ""_us(unsigned long long x) -> b
   return chrono::microseconds{x};
 }
 
-#if __cplusplus < 201402L
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_CLANG("-Wuser-defined-literals")
-QT_WARNING_DISABLE_GCC("-Wliteral-suffix")
-
-// available only since C++14
-inline BPSTD_INLINE_VISIBILITY constexpr
-auto bpstd::literals::chrono_literals::operator ""us(unsigned long long x) -> bpstd::chrono::microseconds
-{
-    return chrono::microseconds{x};
-}
-
-QT_WARNING_POP
-#endif
-
 inline BPSTD_INLINE_VISIBILITY constexpr
 auto bpstd::literals::chrono_literals::operator""_us(long double x) -> bpstd::chrono::duration<double, std::micro>
 {
   return chrono::duration<double, std::micro>{x};
 }
-
-#if __cplusplus < 201402L
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_CLANG("-Wuser-defined-literals")
-QT_WARNING_DISABLE_GCC("-Wliteral-suffix")
-
-// available only since C++14
-inline BPSTD_INLINE_VISIBILITY constexpr
-auto bpstd::literals::chrono_literals::operator""us(long double x) -> bpstd::chrono::duration<double, std::micro>
-{
-    return chrono::duration<double, std::micro>{x};
-}
-
-QT_WARNING_POP
-#endif
 
 inline BPSTD_INLINE_VISIBILITY constexpr
 auto bpstd::literals::chrono_literals::operator""_ns(unsigned long long x) -> bpstd::chrono::nanoseconds
@@ -397,41 +168,11 @@ auto bpstd::literals::chrono_literals::operator""_ns(unsigned long long x) -> bp
   return chrono::nanoseconds{x};
 }
 
-#if __cplusplus < 201402L
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_CLANG("-Wuser-defined-literals")
-QT_WARNING_DISABLE_GCC("-Wliteral-suffix")
-
-// available only since C++14
-inline BPSTD_INLINE_VISIBILITY constexpr
-auto bpstd::literals::chrono_literals::operator""ns(unsigned long long x) -> bpstd::chrono::nanoseconds
-{
-    return chrono::nanoseconds{x};
-}
-
-QT_WARNING_POP
-#endif
-
 inline BPSTD_INLINE_VISIBILITY constexpr
 auto bpstd::literals::chrono_literals::operator""_ns(long double x) -> bpstd::chrono::duration<double, std::nano>
 {
   return chrono::duration<double, std::nano>{x};
 }
-
-#if __cplusplus < 201402L
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_CLANG("-Wuser-defined-literals")
-QT_WARNING_DISABLE_GCC("-Wliteral-suffix")
-
-// available only since C++14
-inline BPSTD_INLINE_VISIBILITY constexpr
-auto bpstd::literals::chrono_literals::operator""ns(long double x) -> bpstd::chrono::duration<double, std::nano>
-{
-    return chrono::duration<double, std::nano>{x};
-}
-
-QT_WARNING_POP
-#endif
 
 BPSTD_COMPILER_DIAGNOSTIC_POSTAMBLE
 

@@ -474,7 +474,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     if (VApplication::IsGUIMode())
     {
-        QTimer::singleShot(1s, this, &MainWindow::SetDefaultGUILanguage);
+        QTimer::singleShot(SECONDS(1), this, &MainWindow::SetDefaultGUILanguage);
     }
 }
 
@@ -2139,7 +2139,7 @@ void MainWindow::MeasurementsChanged(const QString &path)
     {
         m_mChanges = true;
         m_mChangesAsked = false;
-        m_measurementsSyncTimer->start(1500ms);
+        m_measurementsSyncTimer->start(MSECONDS(1500));
     }
     else
     {
@@ -2149,7 +2149,7 @@ void MainWindow::MeasurementsChanged(const QString &path)
             {
                 m_mChanges = true;
                 m_mChangesAsked = false;
-                m_measurementsSyncTimer->start(1500ms);
+                m_measurementsSyncTimer->start(MSECONDS(1500));
                 break;
             }
 

@@ -361,7 +361,7 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
                     break;
                 }
 
-                std::this_thread::sleep_for(100ms);
+                std::this_thread::sleep_for(MSECONDS(100));
             }
         }
 
@@ -391,7 +391,7 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent) :
 
     if (m_cmd->IsGuiEnabled())
     {
-        QTimer::singleShot(1s, this, &VPMainWindow::SetDefaultGUILanguage);
+        QTimer::singleShot(SECONDS(1), this, &VPMainWindow::SetDefaultGUILanguage);
     }
 }
 

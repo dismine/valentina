@@ -55,4 +55,22 @@ void qAsConst(const T &&) Q_DECL_EQ_DELETE;
     Q_DISABLE_MOVE(Class)
 #endif
 
+#define SUFFIX_APPEND(x, y) x ## y // NOLINT(cppcoreguidelines-macro-usage)
+
+#if __cplusplus >= 201402L
+#define HOURS(x) SUFFIX_APPEND(x, h) // NOLINT(cppcoreguidelines-macro-usage)
+#define MINUTES(x) SUFFIX_APPEND(x, min) // NOLINT(cppcoreguidelines-macro-usage)
+#define SECONDS(x) SUFFIX_APPEND(x, s) // NOLINT(cppcoreguidelines-macro-usage)
+#define MSECONDS(x) SUFFIX_APPEND(x, ms) // NOLINT(cppcoreguidelines-macro-usage)
+#define MICSECONDS(x) SUFFIX_APPEND(x, us) // NOLINT(cppcoreguidelines-macro-usage)
+#define NANOSECONDS(x) SUFFIX_APPEND(x, ns) // NOLINT(cppcoreguidelines-macro-usage)
+#else
+#define HOURS(x) SUFFIX_APPEND(x, _h) // NOLINT(cppcoreguidelines-macro-usage)
+#define MINUTES(x) SUFFIX_APPEND(x, _min) // NOLINT(cppcoreguidelines-macro-usage)
+#define SECONDS(x) SUFFIX_APPEND(x, _s) // NOLINT(cppcoreguidelines-macro-usage)
+#define MSECONDS(x) SUFFIX_APPEND(x, _ms) // NOLINT(cppcoreguidelines-macro-usage)
+#define MICSECONDS(x) SUFFIX_APPEND(x, _us) // NOLINT(cppcoreguidelines-macro-usage)
+#define NANOSECONDS(x) SUFFIX_APPEND(x, _ns) // NOLINT(cppcoreguidelines-macro-usage)
+#endif // __cplusplus >= 201402L
+
 #endif // DEFGLOBAL_H
