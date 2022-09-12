@@ -176,7 +176,7 @@ void DialogCutArc::ChosenObject(quint32 id, const SceneObject &type)
 
             auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
             SCASSERT(window != nullptr)
-            connect(vis, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
+            connect(vis.data(), &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
         }
     }
 }
