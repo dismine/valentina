@@ -231,8 +231,8 @@ fi
 %{_bindir}/valentina
 %{_bindir}/tape
 %{_bindir}/puzzle
-%{_libdir}/libvpropertyexplorer.so.*
-%{_libdir}/libqmuparser.so.*
+%{_libdir}/libvpropertyexplorer.so*
+%{_libdir}/libqmuparser.so*
 %dir %{_libdir}/mime/
 %dir %{_libdir}/mime/packages/
 %{_libdir}/mime/packages/%{name}
