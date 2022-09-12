@@ -33,6 +33,7 @@
 #include <QStringListModel>
 #include <QTimer>
 #include <QtDebug>
+#include <chrono>
 
 #if __cplusplus >= 201402L
 using namespace std::chrono_literals;
