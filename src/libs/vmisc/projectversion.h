@@ -33,7 +33,7 @@ class QString;
 
 constexpr unsigned MAJOR_VERSION = 0;
 constexpr unsigned MINOR_VERSION = 7;
-constexpr unsigned DEBUG_VERSION = 51;
+constexpr unsigned DEBUG_VERSION = 52;
 
 extern const QString APP_VERSION_STR;
 
@@ -50,8 +50,8 @@ constexpr inline auto AppVersion() -> unsigned
 // Change version number in projectversion.cpp too.
 // Synchronize valentina.nsi
 
-#define VER_FILEVERSION             0,7,51
-#define VER_FILEVERSION_STR         "0.7.51\0"
+#define VER_FILEVERSION             0,7,52
+#define VER_FILEVERSION_STR         "0.7.52\0"
 
 #define V_PRERELEASE // Mark prerelease builds
 
