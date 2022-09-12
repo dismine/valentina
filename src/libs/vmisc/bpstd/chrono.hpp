@@ -79,23 +79,23 @@ namespace bpstd {
   inline namespace literals {
     inline namespace chrono_literals {
 
-      constexpr auto operator""_h(unsigned long long x) -> std::chrono::hours;
-      constexpr auto operator""_h(long double x) -> std::chrono::duration<double, std::ratio<3600,1>>;
+      constexpr auto operator "" _h(unsigned long long x) -> std::chrono::hours;
+      constexpr auto operator "" _h(long double x) -> std::chrono::duration<double, std::ratio<3600,1>>;
 
-      constexpr auto operator""_min(unsigned long long x) -> chrono::minutes;
-      constexpr auto operator""_min(long double x) -> chrono::duration<double, std::ratio<60>>;
+      constexpr auto operator "" _min(unsigned long long x) -> chrono::minutes;
+      constexpr auto operator "" _min(long double x) -> chrono::duration<double, std::ratio<60>>;
 
-      constexpr auto operator""_s(unsigned long long x) -> chrono::seconds;
-      constexpr auto operator""_s(long double x) -> chrono::duration<double>;
+      constexpr auto operator "" _s(unsigned long long x) -> chrono::seconds;
+      constexpr auto operator "" _s(long double x) -> chrono::duration<double>;
 
-      constexpr auto operator""_ms(unsigned long long x) -> chrono::milliseconds;
-      constexpr auto operator""_ms(long double x) -> chrono::duration<double, std::milli>;
+      constexpr auto operator "" _ms(unsigned long long x) -> chrono::milliseconds;
+      constexpr auto operator "" _ms(long double x) -> chrono::duration<double, std::milli>;
 
-      constexpr auto operator""_us(unsigned long long x) -> chrono::microseconds;
-      constexpr auto operator""_us(long double x) -> chrono::duration<double, std::micro>;
+      constexpr auto operator "" _us(unsigned long long x) -> chrono::microseconds;
+      constexpr auto operator "" _us(long double x) -> chrono::duration<double, std::micro>;
 
-      constexpr auto operator""_ns(unsigned long long x) -> chrono::nanoseconds;
-      constexpr auto operator""_ns(long double x) -> chrono::duration<double, std::nano>;
+      constexpr auto operator "" _ns(unsigned long long x) -> chrono::nanoseconds;
+      constexpr auto operator "" _ns(long double x) -> chrono::duration<double, std::nano>;
 
     }  // namespace chrono_literals
   }  // namespace literals
@@ -103,73 +103,75 @@ namespace bpstd {
 
 inline BPSTD_INLINE_VISIBILITY constexpr
 auto
-  bpstd::literals::chrono_literals::operator""_h(unsigned long long x) -> std::chrono::hours
+  bpstd::literals::chrono_literals::operator "" _h(unsigned long long x) -> std::chrono::hours
 {
   return chrono::hours{x};
 }
 
 inline BPSTD_INLINE_VISIBILITY constexpr
-auto bpstd::literals::chrono_literals::operator""_h(long double x) -> std::chrono::duration<double, std::ratio<3600,1>>
+auto bpstd::literals::chrono_literals::operator "" _h(long double x)
+    -> std::chrono::duration<double, std::ratio<3600,1>>
 {
   return chrono::duration<double, std::ratio<3600,1>>{x};
 }
 
 inline BPSTD_INLINE_VISIBILITY constexpr
-auto bpstd::literals::chrono_literals::operator""_min(unsigned long long x) -> bpstd::chrono::minutes
+auto bpstd::literals::chrono_literals::operator "" _min(unsigned long long x) -> bpstd::chrono::minutes
 {
   return chrono::minutes{x};
 }
 
 inline BPSTD_INLINE_VISIBILITY constexpr
-auto bpstd::literals::chrono_literals::operator""_min(long double x) -> bpstd::chrono::duration<double, std::ratio<60>>
+auto bpstd::literals::chrono_literals::operator "" _min(long double x)
+    -> bpstd::chrono::duration<double, std::ratio<60>>
 {
   return chrono::duration<double, std::ratio<60>>{x};
 }
 
 inline BPSTD_INLINE_VISIBILITY constexpr
-auto bpstd::literals::chrono_literals::operator""_s(unsigned long long x) -> bpstd::chrono::seconds
+auto bpstd::literals::chrono_literals::operator "" _s(unsigned long long x) -> bpstd::chrono::seconds
 {
   return chrono::seconds{x};
 }
 
 inline BPSTD_INLINE_VISIBILITY constexpr
-auto bpstd::literals::chrono_literals::operator""_s(long double x) -> bpstd::chrono::duration<double>
+auto bpstd::literals::chrono_literals::operator "" _s(long double x) -> bpstd::chrono::duration<double>
 {
   return chrono::duration<double>{x};
 }
 
 inline BPSTD_INLINE_VISIBILITY constexpr
-auto bpstd::literals::chrono_literals::operator""_ms(unsigned long long x) -> bpstd::chrono::milliseconds
+auto bpstd::literals::chrono_literals::operator "" _ms(unsigned long long x) -> bpstd::chrono::milliseconds
 {
   return chrono::milliseconds{x};
 }
 
 inline BPSTD_INLINE_VISIBILITY constexpr
-auto bpstd::literals::chrono_literals::operator""_ms(long double x) -> bpstd::chrono::duration<double, std::milli>
+auto bpstd::literals::chrono_literals::operator "" _ms(long double x) -> bpstd::chrono::duration<double, std::milli>
 {
   return chrono::duration<double, std::milli>{x};
 }
 
 inline BPSTD_INLINE_VISIBILITY constexpr
-auto bpstd::literals::chrono_literals::operator ""_us(unsigned long long x) -> bpstd::chrono::microseconds
+auto bpstd::literals::chrono_literals::operator "" _us(unsigned long long x) -> bpstd::chrono::microseconds
 {
   return chrono::microseconds{x};
 }
 
 inline BPSTD_INLINE_VISIBILITY constexpr
-auto bpstd::literals::chrono_literals::operator""_us(long double x) -> bpstd::chrono::duration<double, std::micro>
+auto bpstd::literals::chrono_literals::operator "" _us(long double x) -> bpstd::chrono::duration<double, std::micro>
 {
   return chrono::duration<double, std::micro>{x};
 }
 
 inline BPSTD_INLINE_VISIBILITY constexpr
-auto bpstd::literals::chrono_literals::operator""_ns(unsigned long long x) -> bpstd::chrono::nanoseconds
+auto bpstd::literals::chrono_literals::operator "" _ns(unsigned long long x) -> bpstd::chrono::nanoseconds
 {
   return chrono::nanoseconds{x};
 }
 
 inline BPSTD_INLINE_VISIBILITY constexpr
-auto bpstd::literals::chrono_literals::operator""_ns(long double x) -> bpstd::chrono::duration<double, std::nano>
+auto bpstd::literals::chrono_literals::operator "" _ns(long double x) -> bpstd::chrono::duration<double, std::nano>
 {
   return chrono::duration<double, std::nano>{x};
 }
