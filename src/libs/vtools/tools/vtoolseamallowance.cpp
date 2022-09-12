@@ -73,6 +73,7 @@
 #include <QTimer>
 #include <QUuid>
 #include <QtMath>
+#include <chrono>
 
 #if __cplusplus >= 201402L
 using namespace std::chrono_literals;

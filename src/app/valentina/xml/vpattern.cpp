@@ -118,6 +118,7 @@
 #include <QtConcurrentRun>
 #include <QTimer>
 #include <functional>
+#include <chrono>
 
 #if __cplusplus >= 201402L
 using namespace std::chrono_literals;
