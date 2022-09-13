@@ -695,7 +695,7 @@ void VCommandLine::InitCommandLineOptions()
          translate("VCommandLine", "Nest quantity copies of each piece (export mode).")},
         {{SINGLE_OPTION_CROP_LENGTH, LONG_OPTION_CROP_LENGTH},
          translate("VCommandLine", "Auto crop unused length (export mode).")},
-        {{LONG_OPTION_CROP_WIDTH},
+        {LONG_OPTION_CROP_WIDTH,
          translate("VCommandLine", "Auto crop unused width (export mode).")},
         {{SINGLE_OPTION_UNITE, LONG_OPTION_UNITE},
          translate("VCommandLine", "Unite pages if possible (export mode). Maximum value limited by QImage that "

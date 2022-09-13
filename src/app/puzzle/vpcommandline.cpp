@@ -152,7 +152,7 @@ void VPCommandLine::InitCommandLineOptions()
     //=================================================================================================================
         {{SINGLE_OPTION_CROP_LENGTH, LONG_OPTION_CROP_LENGTH},
          translate("VCommandLine", "Auto crop unused length (export mode).")},
-        {{LONG_OPTION_CROP_WIDTH},
+        {LONG_OPTION_CROP_WIDTH,
          translate("VCommandLine", "Auto crop unused width (export mode).")},
     //=================================================================================================================
         {LONG_OPTION_TILED_PDF_PAGE_TEMPLATE,
