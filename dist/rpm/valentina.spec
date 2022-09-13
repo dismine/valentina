@@ -133,13 +133,7 @@ a unique pattern making tool.
 
 %build
 %if 0%{?suse_version} > 0
-
-%if 0%{?suse_version} >= 1315
-qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} LRELEASE=lrelease-qt5 Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
-%else
 qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
-%endif
-
 %else
 
 %if 0%{?mageia} >= 6
