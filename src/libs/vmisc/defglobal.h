@@ -57,13 +57,20 @@ void qAsConst(const T &&) Q_DECL_EQ_DELETE;
 
 #define SUFFIX_APPEND(x, y) x ## y // NOLINT(cppcoreguidelines-macro-usage)
 
+#define HOURS_INT(x) ((x) * 3600000) // NOLINT(cppcoreguidelines-macro-usage)
+#define MINUTES_INT(x) ((x) * 60000) // NOLINT(cppcoreguidelines-macro-usage)
+#define SECONDS_INT(x) ((x) * 1000) // NOLINT(cppcoreguidelines-macro-usage)
+#define MSECONDS_INT(x) (x) // NOLINT(cppcoreguidelines-macro-usage)
+#define MICSECONDS_INT(x) (x) // NOLINT(cppcoreguidelines-macro-usage)
+#define NANOSECONDS_INT(x) (x) // NOLINT(cppcoreguidelines-macro-usage)
+
 #if (defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
-#define HOURS(x) (x * 3600000) // NOLINT(cppcoreguidelines-macro-usage)
-#define MINUTES(x) (x * 60000) // NOLINT(cppcoreguidelines-macro-usage)
-#define SECONDS(x) (x * 1000) // NOLINT(cppcoreguidelines-macro-usage)
-#define MSECONDS(x) (x) // NOLINT(cppcoreguidelines-macro-usage)
-#define MICSECONDS(x) (x) // NOLINT(cppcoreguidelines-macro-usage)
-#define NANOSECONDS(x) (x) // NOLINT(cppcoreguidelines-macro-usage)
+#define HOURS(x) HOURS_INT(x) // NOLINT(cppcoreguidelines-macro-usage)
+#define MINUTES(x) MINUTES_INT(x) // NOLINT(cppcoreguidelines-macro-usage)
+#define SECONDS(x) SECONDS_INT(x) // NOLINT(cppcoreguidelines-macro-usage)
+#define MSECONDS(x) MSECONDS_INT(x) // NOLINT(cppcoreguidelines-macro-usage)
+#define MICSECONDS(x) MICSECONDS_INT(x) // NOLINT(cppcoreguidelines-macro-usage)
+#define NANOSECONDS(x) NANOSECONDS_INT(x) // NOLINT(cppcoreguidelines-macro-usage)
 #else
 #if __cplusplus >= 201402L
 #define HOURS(x) SUFFIX_APPEND(x, h) // NOLINT(cppcoreguidelines-macro-usage)
@@ -98,12 +105,12 @@ void qAsConst(const T &&) Q_DECL_EQ_DELETE;
 #define V_MICSECONDS(x) MICSECONDS(x) // NOLINT(cppcoreguidelines-macro-usage)
 #define V_NANOSECONDS(x) NANOSECONDS(x) // NOLINT(cppcoreguidelines-macro-usage)
 #else
-#define V_HOURS(x) (x * 3600000) // NOLINT(cppcoreguidelines-macro-usage)
-#define V_MINUTES(x) (x * 60000) // NOLINT(cppcoreguidelines-macro-usage)
-#define V_SECONDS(x) (x * 1000) // NOLINT(cppcoreguidelines-macro-usage)
-#define V_MSECONDS(x) (x) // NOLINT(cppcoreguidelines-macro-usage)
-#define V_MICSECONDS(x) (x) // NOLINT(cppcoreguidelines-macro-usage)
-#define V_NANOSECONDS(x) (x) // NOLINT(cppcoreguidelines-macro-usage)
+#define V_HOURS(x) HOURS_INT(x) // NOLINT(cppcoreguidelines-macro-usage)
+#define V_MINUTES(x) MINUTES_INT(x) // NOLINT(cppcoreguidelines-macro-usage)
+#define V_SECONDS(x) SECONDS_INT(x) // NOLINT(cppcoreguidelines-macro-usage)
+#define V_MSECONDS(x) MSECONDS_INT(x) // NOLINT(cppcoreguidelines-macro-usage)
+#define V_MICSECONDS(x) MICSECONDS_INT(x) // NOLINT(cppcoreguidelines-macro-usage)
+#define V_NANOSECONDS(x) NANOSECONDS_INT(x) // NOLINT(cppcoreguidelines-macro-usage)
 #endif // QT_VERSION >= QT_VERSION_CHECK(5, 8, 0)
 #endif // (defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
 
