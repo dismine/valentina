@@ -51,7 +51,7 @@ BuildRequires: pkgconfig(openssl)
 BuildRequires: openssl-devel
 %endif
 
-%endif # mageia > 0
+%endif
 
 # SUSE Specifics
 %if 0%{?suse_version} > 0
@@ -82,7 +82,7 @@ BuildRequires: libqt5-qtxmlpatterns-devel
 BuildRequires: libQt5XmlPatterns-devel
 %endif
 
-%endif # suse_version > 0
+%endif
 
 # CentOS 7.0 specifics
 %if 0%{?centos_version} >= 700 && 0%{?centos_version} < 800
@@ -142,7 +142,7 @@ qmake PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} Valentina.pro -r "CONFIG +
 qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
 %endif
 
-%endif # suse_version > 0
+%endif
 
 %{__make} %{?jobs:-j %jobs}
 
