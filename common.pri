@@ -234,15 +234,19 @@ defineTest(forceCopyToDestdir) {
 # We use precompiled headers for more fast compilation source code.
 defineReplace(set_PCH){
     no_ccache{
-        CONFIG += precompile_header # Turn on creation precompiled headers (PCH).
-        export(CONFIG) # export value to global variable.
+        no_pch{ # To disable recompiled headers (PCH) run qmake with CONFIG+=no_pch
+            return(true)
+        } else {
+            CONFIG += precompile_header # Turn on creation precompiled headers (PCH).
+            export(CONFIG) # export value to global variable.
 
-        PRECOMPILED_HEADER = stable.h # Header file with all all static headers: libraries, static local headers.
-        export(PRECOMPILED_HEADER) # export value to global variable
+            PRECOMPILED_HEADER = stable.h # Header file with all all static headers: libraries, static local headers.
+            export(PRECOMPILED_HEADER) # export value to global variable
 
-        *msvc* {
-            PRECOMPILED_SOURCE = stable.cpp # MSVC need also cpp file.
-            export(PRECOMPILED_SOURCE) # export value to global variable.
+            *msvc* {
+                PRECOMPILED_SOURCE = stable.cpp # MSVC need also cpp file.
+                export(PRECOMPILED_SOURCE) # export value to global variable.
+            }
         }
     }
     return(true)

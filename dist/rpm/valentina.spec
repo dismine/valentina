@@ -133,13 +133,13 @@ a unique pattern making tool.
 
 %build
 %if 0%{?suse_version} > 0
-qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
+qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols no_pch"
 %else
 
 %if 0%{?mageia} >= 6
-qmake PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
+qmake PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols no_pch"
 %else
-qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
+qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols no_pch"
 %endif
 
 %endif
