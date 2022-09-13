@@ -39,12 +39,16 @@
 #include <QUndoStack>
 #include <chrono>
 
+#if (defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
+// DO NOT WORK WITH GCC 4.8
+#else
 #if __cplusplus >= 201402L
 using namespace std::chrono_literals;
 #else
 #include "../vmisc/bpstd/chrono.hpp"
 using namespace bpstd::literals::chrono_literals;
-#endif
+#endif // __cplusplus >= 201402L
+#endif //(defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
 
 namespace
 {
