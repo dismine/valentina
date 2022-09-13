@@ -91,7 +91,7 @@ BuildRequires: llvm-private
 
 # CentOS 8.0 specifics
 %if 0%{?centos_version} >= 800
-BuildRequires: clang-libs
+BuildRequires: clang-devel
 %endif
 
 %if 0%{?mageia} > 0
