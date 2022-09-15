@@ -402,13 +402,13 @@ void VPApplication::InitOptions()
     qCDebug(pApp, "Command-line arguments: %s", qUtf8Printable(arguments().join(QStringLiteral(", "))));
     qCDebug(pApp, "Process ID: %s", qUtf8Printable(QString().setNum(applicationPid())));
 
-    CheckSystemLocale();
-
     QPixmapCache::setCacheLimit(50 * 1024 /* 50 MB */);
 
     LoadTranslation(QString());// By default the console version uses system locale
 
     VPCommandLine::Instance();
+
+    CheckSystemLocale();
 
     static const char * GENERIC_ICON_TO_CHECK = "document-open";
     if (not QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK))

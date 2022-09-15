@@ -613,12 +613,12 @@ void VApplication::InitOptions()
     qDebug()<<"Command-line arguments:"<<arguments();
     qDebug()<<"Process ID:"<<applicationPid();
 
-    CheckSystemLocale();
-
     LoadTranslation(QString());// By default the console version uses system locale
 
     // Create command line parser after loading translations to show localized version.
     VCommandLine::Get(*this);
+
+    CheckSystemLocale();
 
     if (VApplication::IsGUIMode())// By default console version uses system locale
     {
