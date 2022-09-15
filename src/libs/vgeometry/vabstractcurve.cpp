@@ -40,6 +40,12 @@
 #include "../vmisc/compatibility.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 
+// See https://stackoverflow.com/a/46719572/3045403
+#if __cplusplus < 201703L
+constexpr qreal VAbstractCurve::minLength; // NOLINT(readability-redundant-declaration)
+#endif
+
+//---------------------------------------------------------------------------------------------------------------------
 VAbstractCurve::VAbstractCurve(const GOType &type, const quint32 &idObject, const Draw &mode)
     :VGObject(type, idObject, mode), d (new VAbstractCurveData())
 {}
