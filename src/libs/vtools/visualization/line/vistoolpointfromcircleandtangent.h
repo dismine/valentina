@@ -67,7 +67,7 @@ private:
     VScaledEllipse       *m_point{nullptr};
     VScaledEllipse       *m_tangent{nullptr};
     VScaledEllipse       *m_cCenter{nullptr};
-    QGraphicsEllipseItem *m_cPath{nullptr};
+    VScaledEllipse       *m_cPath{nullptr};
     VScaledLine          *m_tangent2{nullptr};
     quint32               m_pointId{NULL_ID};
 

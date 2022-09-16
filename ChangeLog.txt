@@ -1,5 +1,6 @@
 # Valentina 0.7.53 (unreleased)
 - Fix layout sheet export with empty name.
+- Fix visualization for tool Point from circle and tangent.
 
 # Valentina 0.7.52 September 12, 2022
 - Fix crash when default locale is ru.

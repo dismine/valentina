@@ -47,7 +47,8 @@
 VisToolPointFromCircleAndTangent::VisToolPointFromCircleAndTangent(const VContainer *data, QGraphicsItem *parent)
     : VisLine(data, parent)
 {
-    m_cPath = InitItem<QGraphicsEllipseItem>(Qt::darkGreen, this);
+    m_cPath = InitItem<VScaledEllipse>(Qt::darkGreen, this);
+    m_cPath->SetPointMode(false);
     m_point = InitPoint(Color(VColor::MainColor), this);
     m_tangent = InitPoint(Color(VColor::SupportColor), this);
     m_cCenter = InitPoint(Color(VColor::SupportColor), this); //-V656
