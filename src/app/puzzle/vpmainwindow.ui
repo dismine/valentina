@@ -219,7 +219,7 @@
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>2</number>
+        <number>0</number>
        </property>
        <property name="iconSize">
         <size>
@@ -1546,6 +1546,9 @@
                 </item>
                 <item>
                  <widget class="QCheckBox" name="checkBoxPrintTilesScheme">
+                  <property name="toolTip">
+                   <string>Has effect only when print in application. To export with tiles scheme use separate setting</string>
+                  </property>
                   <property name="text">
                    <string>Print tiles scheme</string>
                   </property>
@@ -2424,8 +2427,8 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupTileOrientation"/>
   <buttongroup name="buttonGroupSheetOrientation"/>
+  <buttongroup name="buttonGroupTileOrientation"/>
   <buttongroup name="buttonGroupRotationDirection"/>
  </buttongroups>
 </ui>
