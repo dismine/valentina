@@ -4140,7 +4140,8 @@ void VPMainWindow::on_ExportSheet()
     }
 
     const QString sheetTitle = sheet->GetName();
-    const QString fileName = sheetTitle.isEmpty() ? QFileInfo(curFile).baseName() : sheetTitle;
+    const QString defaultName = not curFile.isEmpty() ? QFileInfo(curFile).baseName() : tr("sheet");
+    const QString fileName = sheetTitle.isEmpty() ? defaultName : sheetTitle;
 
     DialogSaveManualLayout dialog(1, false, fileName, this);
 
