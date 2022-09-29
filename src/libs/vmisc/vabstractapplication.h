@@ -64,7 +64,7 @@ public:
 
     static QString translationsPath(const QString &locale = QString());
 
-    void LoadTranslation(const QString &locale);
+    void LoadTranslation(QString locale);
 
     virtual void     OpenSettings()=0;
     VCommonSettings *Settings();

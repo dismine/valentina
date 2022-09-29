@@ -238,8 +238,13 @@ void VAbstractApplication::WinAttachConsole()
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractApplication::LoadTranslation(const QString &locale)
+void VAbstractApplication::LoadTranslation(QString locale)
 {
+    if (locale.startsWith(QLatin1String("ru")))
+    {
+        locale = QString();
+    }
+
     if (locale.isEmpty())
     {
         qDebug()<<"Default locale";
