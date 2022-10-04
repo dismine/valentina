@@ -364,4 +364,23 @@ void VAbstractApplication::CheckSystemLocale()
     {
         qFatal("Incompatible locale \"%s\"", qPrintable(defLocale));
     }
+
+    auto CheckLanguage =[](QStandardPaths::StandardLocation type, const QStringList &test)
+    {
+        const QString path = QStandardPaths::locate(type, QString(), QStandardPaths::LocateDirectory);
+        return std::any_of(test.begin(), test.end(), [path](const QString &t) { return path.contains(t); });
+    };
+
+    int match = 0;
+    match += CheckLanguage(QStandardPaths::DesktopLocation, {"Рабочий стол"});
+    match += CheckLanguage(QStandardPaths::DocumentsLocation, {"Мои документы", "Документы"});
+    match += CheckLanguage(QStandardPaths::MusicLocation, {"Моя музыка", "Музыка"});
+    match += CheckLanguage(QStandardPaths::MoviesLocation, {"Мои видео", "Видео"});
+    match += CheckLanguage(QStandardPaths::PicturesLocation, {"Мои рисунки", "Изображения", "Картинки"});
+    match += CheckLanguage(QStandardPaths::DownloadLocation, {"Мои документы", "Загрузки"});
+
+    if (match >= 4)
+    {
+        qFatal("russian language detected");
+    }
 }
