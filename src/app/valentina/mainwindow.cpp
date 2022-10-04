@@ -4338,6 +4338,8 @@ void MainWindow::on_actionNew_triggered()
         m_curFileFormatVersionStr = VPatternConverter::PatternMaxVerStr;
 
         ToolBarOption();
+
+        m_sceneDraw->SetAcceptDrop(true);
     }
     else
     {

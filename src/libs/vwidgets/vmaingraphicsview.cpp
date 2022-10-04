@@ -674,6 +674,7 @@ void VMainGraphicsView::dragEnterEvent(QDragEnterEvent *event)
             }
         }
     }
+    QGraphicsView::dragEnterEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
