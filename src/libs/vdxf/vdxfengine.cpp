@@ -45,12 +45,12 @@
 #include <QTextItem>
 #include <Qt>
 #include <QtDebug>
+#include <QtMath>
 
 #include "../vmisc/def.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/vmath.h"
 #include "dxiface.h"
 #include "../vlayout/vlayoutpiece.h"
 #include "../vgeometry/vgeometrydef.h"
@@ -59,7 +59,35 @@ static const qreal AAMATextHeight = 2.5;
 
 namespace
 {
-QVector<QPointF> PieceOutline(const VLayoutPiece &detail)
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer0, (UTF8STRING("0"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer1, (UTF8STRING("1"))) // NOLINT
+//Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer2, (UTF8STRING("2"))) // NOLINT
+//Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer3, (UTF8STRING("3"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer4, (UTF8STRING("4"))) // NOLINT
+//Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer5, (UTF8STRING("5"))) // NOLINT
+//Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer6, (UTF8STRING("6"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer7, (UTF8STRING("7"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer8, (UTF8STRING("8"))) // NOLINT
+//Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer9, (UTF8STRING("9"))) // NOLINT
+//Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer10, (UTF8STRING("10"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer11, (UTF8STRING("11"))) // NOLINT
+//Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer12, (UTF8STRING("12"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer13, (UTF8STRING("13"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer14, (UTF8STRING("14"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer15, (UTF8STRING("15"))) // NOLINT
+//Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer19, (UTF8STRING("19"))) // NOLINT
+//Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer26, (UTF8STRING("26"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer80, (UTF8STRING("80"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer81, (UTF8STRING("81"))) // NOLINT
+//Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer82, (UTF8STRING("82"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer83, (UTF8STRING("83"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer84, (UTF8STRING("84"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer85, (UTF8STRING("85"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer86, (UTF8STRING("86"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer87, (UTF8STRING("87"))) // NOLINT
+
+//---------------------------------------------------------------------------------------------------------------------
+auto PieceOutline(const VLayoutPiece &detail) -> QVector<QPointF>
 {
     QVector<QPointF> outline;
     if (detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn())
@@ -72,21 +100,20 @@ QVector<QPointF> PieceOutline(const VLayoutPiece &detail)
     }
     return outline;
 }
-}
+}  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-static inline QPaintEngine::PaintEngineFeatures svgEngineFeatures()
+static inline auto svgEngineFeatures() -> QPaintEngine::PaintEngineFeatures
 {
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wsign-conversion")
 QT_WARNING_DISABLE_INTEL(68)
 
-    return QPaintEngine::PaintEngineFeatures(
-        QPaintEngine::AllFeatures
+    return {QPaintEngine::AllFeatures
         & ~QPaintEngine::PatternBrush
         & ~QPaintEngine::PerspectiveTransform
         & ~QPaintEngine::ConicalGradientFill
-        & ~QPaintEngine::PorterDuff);
+        & ~QPaintEngine::PorterDuff};
 
 QT_WARNING_POP
 }
@@ -94,27 +121,18 @@ QT_WARNING_POP
 //---------------------------------------------------------------------------------------------------------------------
 VDxfEngine::VDxfEngine()
     :QPaintEngine(svgEngineFeatures()),
-      size(),
-      resolution(static_cast<int>(PrintDPI)),
-      fileName(),
-      m_version(DRW::AC1014),
-      m_binary(false),
-      matrix(),
-      input(),
-      varMeasurement(VarMeasurement::Metric),
-      varInsunits(VarInsunits::Millimeters),
-      textBuffer(new DRW_Text())
+      m_textBuffer(new DRW_Text())
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VDxfEngine::~VDxfEngine()
 {
-    delete textBuffer;
+    delete m_textBuffer;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VDxfEngine::begin(QPaintDevice *pdev)
+auto VDxfEngine::begin(QPaintDevice *pdev) -> bool
 {
     Q_UNUSED(pdev)
 
@@ -124,23 +142,23 @@ bool VDxfEngine::begin(QPaintDevice *pdev)
         return false;
     }
 
-    if (size.isValid() == false)
+    if (not m_size.isValid())
     {
         qWarning()<<"VDxfEngine::begin(), size is not valid";
         return false;
     }
 
-    input = QSharedPointer<dx_iface>(new dx_iface(getFileNameForLocale(), m_version, varMeasurement,
-                                                  varInsunits));
-    input->AddQtLTypes();
-    input->AddDefLayers();
+    m_input = QSharedPointer<dx_iface>(new dx_iface(GetFileNameForLocale(), m_version, m_varMeasurement,
+                                                    m_varInsunits));
+    m_input->AddQtLTypes();
+    m_input->AddDefLayers();
     return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VDxfEngine::end()
+auto VDxfEngine::end() -> bool
 {
-    return input->fileExport(m_binary);
+    return m_input->fileExport(m_binary);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -155,14 +173,14 @@ void VDxfEngine::updateState(const QPaintEngineState &state)
 
     if (flags & QPaintEngine::DirtyTransform)
     {
-        matrix = state.transform(); // Save new matrix for moving paths
+        m_matrix = state.transform(); // Save new matrix for moving paths
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::drawPath(const QPainterPath &path)
 {
-    const QList<QPolygonF> subpaths = path.toSubpathPolygons(matrix);
+    const QList<QPolygonF> subpaths = path.toSubpathPolygons(m_matrix);
 
     for (const auto& polygon : subpaths)
     {
@@ -174,70 +192,70 @@ void VDxfEngine::drawPath(const QPainterPath &path)
         if (m_version > DRW::AC1009)
         { // Use lwpolyline
             auto *poly = new DRW_LWPolyline();
-            poly->layer = '0';
-            poly->color = getPenColor();
+            poly->layer = *layer0;
+            poly->color = GetPenColor();
             poly->lWeight = DRW_LW_Conv::widthByLayer;
-            poly->lineType = getPenStyle();
+            poly->lineType = GetPenStyle();
 
             if (polygon.size() > 1 && ConstFirst<QPointF>(polygon) == ConstLast<QPointF>(polygon))
             {
-                poly->flags |= 0x1; // closed
+                poly->flags |= 0x1; // closed NOLINT(hicpp-signed-bitwise)
             }
 
-            poly->flags |= 0x80; // plinegen
+            poly->flags |= 0x80; // plinegen NOLINT(hicpp-signed-bitwise)
 
             for (auto p : polygon)
             {
-                poly->addVertex(DRW_Vertex2D(FromPixel(p.x(), varInsunits),
-                                             FromPixel(getSize().height() - p.y(), varInsunits), 0));
+                poly->addVertex(DRW_Vertex2D(FromPixel(p.x(), m_varInsunits),
+                                             FromPixel(GetSize().height() - p.y(), m_varInsunits), 0));
             }
 
-            input->AddEntity(poly);
+            m_input->AddEntity(poly);
         }
         else
         { // Use polyline
             auto *poly = new DRW_Polyline();
-            poly->layer = '0';
-            poly->color = getPenColor();
+            poly->layer = *layer0;
+            poly->color = GetPenColor();
             poly->lWeight = DRW_LW_Conv::widthByLayer;
-            poly->lineType = getPenStyle();
+            poly->lineType = GetPenStyle();
             if (polygon.size() > 1 && ConstFirst<QPointF>(polygon) == ConstLast<QPointF>(polygon))
             {
-                poly->flags |= 0x1; // closed
+                poly->flags |= 0x1; // closed NOLINT(hicpp-signed-bitwise)
             }
 
-            poly->flags |= 0x80; // plinegen
+            poly->flags |= 0x80; // plinegen NOLINT(hicpp-signed-bitwise)
 
             for (auto p : polygon)
             {
-                poly->addVertex(DRW_Vertex(FromPixel(p.x(), varInsunits),
-                                           FromPixel(getSize().height() - p.y(), varInsunits), 0, 0));
+                poly->addVertex(DRW_Vertex(FromPixel(p.x(), m_varInsunits),
+                                           FromPixel(GetSize().height() - p.y(), m_varInsunits), 0, 0));
             }
 
-            input->AddEntity(poly);
+            m_input->AddEntity(poly);
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::drawLines(const QLineF * lines, int lineCount)
+void VDxfEngine::drawLines(const QLineF *lines, int lineCount)
 {
     for (int i = 0; i < lineCount; ++i)
     {
-        const QPointF p1 = matrix.map(lines[i].p1());
-        const QPointF p2 = matrix.map(lines[i].p2());
+        const QPointF p1 = m_matrix.map(lines[i].p1()); // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
+        const QPointF p2 = m_matrix.map(lines[i].p2()); // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
 
-        DRW_Line *line = new DRW_Line();
-        line->basePoint = DRW_Coord(FromPixel(p1.x(), varInsunits),
-                                    FromPixel(getSize().height() - p1.y(), varInsunits), 0);
-        line->secPoint =  DRW_Coord(FromPixel(p2.x(), varInsunits),
-                                    FromPixel(getSize().height() - p2.y(), varInsunits), 0);
-        line->layer = '0';
-        line->color = getPenColor();
+        auto *line = new DRW_Line();
+        line->basePoint = DRW_Coord(FromPixel(p1.x(), m_varInsunits),
+                                    FromPixel(GetSize().height() - p1.y(), m_varInsunits), 0);
+        line->secPoint =  DRW_Coord(FromPixel(p2.x(), m_varInsunits),
+                                    FromPixel(GetSize().height() - p2.y(), m_varInsunits), 0);
+        line->layer = *layer0;
+        line->color = GetPenColor();
         line->lWeight = DRW_LW_Conv::widthByLayer;
-        line->lineType = getPenStyle();
+        line->lineType = GetPenStyle();
 
-        input->AddEntity(line);
+        m_input->AddEntity(line);
     }
 }
 
@@ -259,51 +277,51 @@ void VDxfEngine::drawPolygon(const QPointF *points, int pointCount, PolygonDrawM
 
     if (m_version > DRW::AC1009)
     { // Use lwpolyline
-        DRW_LWPolyline *poly = new DRW_LWPolyline();
-        poly->layer = '0';
-        poly->color = getPenColor();
+        auto *poly = new DRW_LWPolyline();
+        poly->layer = *layer0;
+        poly->color = GetPenColor();
         poly->lWeight = DRW_LW_Conv::widthByLayer;
-        poly->lineType = getPenStyle();
+        poly->lineType = GetPenStyle();
 
-        if (pointCount > 1 && points[0] == points[pointCount])
+        if (pointCount > 1 && points[0] == points[pointCount]) // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
         {
-            poly->flags |= 0x1; // closed
+            poly->flags |= 0x1; // closed NOLINT(hicpp-signed-bitwise)
         }
 
-        poly->flags |= 0x80; // plinegen
+        poly->flags |= 0x80; // plinegen NOLINT(hicpp-signed-bitwise)
 
         for (int i = 0; i < pointCount; ++i)
         {
-            const QPointF p = matrix.map(points[i]);
-            poly->addVertex(DRW_Vertex2D(FromPixel(p.x(), varInsunits),
-                                         FromPixel(getSize().height() - p.y(), varInsunits), 0));
+            const QPointF p = m_matrix.map(points[i]); // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
+            poly->addVertex(DRW_Vertex2D(FromPixel(p.x(), m_varInsunits),
+                                         FromPixel(GetSize().height() - p.y(), m_varInsunits), 0));
         }
 
-        input->AddEntity(poly);
+        m_input->AddEntity(poly);
     }
     else
     { // Use polyline
-        DRW_Polyline *poly = new DRW_Polyline();
-        poly->layer = '0';
-        poly->color = getPenColor();
+        auto *poly = new DRW_Polyline();
+        poly->layer = *layer0;
+        poly->color = GetPenColor();
         poly->lWeight = DRW_LW_Conv::widthByLayer;
-        poly->lineType = getPenStyle();
+        poly->lineType = GetPenStyle();
 
-        if (pointCount > 1 && points[0] == points[pointCount])
+        if (pointCount > 1 && points[0] == points[pointCount]) // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
         {
-            poly->flags |= 0x1; // closed
+            poly->flags |= 0x1; // closed NOLINT(hicpp-signed-bitwise)
         }
 
-        poly->flags |= 0x80; // plinegen
+        poly->flags |= 0x80; // plinegen NOLINT(hicpp-signed-bitwise)
 
         for (int i = 0; i < pointCount; ++i)
         {
-            const QPointF p = matrix.map(points[i]);
-            poly->addVertex(DRW_Vertex(FromPixel(p.x(), varInsunits),
-                                       FromPixel(getSize().height() - p.y(), varInsunits), 0, 0));
+            const QPointF p = m_matrix.map(points[i]); // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
+            poly->addVertex(DRW_Vertex(FromPixel(p.x(), m_varInsunits),
+                                       FromPixel(GetSize().height() - p.y(), m_varInsunits), 0, 0));
         }
 
-        input->AddEntity(poly);
+        m_input->AddEntity(poly);
     }
 }
 
@@ -316,42 +334,42 @@ void VDxfEngine::drawPolygon(const QPoint *points, int pointCount, QPaintEngine:
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::drawEllipse(const QRectF & rect)
 {
-    const QRectF newRect = matrix.mapRect(rect);
-    const double rotationAngle = atan(matrix.m12()/matrix.m11());
+    const QRectF newRect = m_matrix.mapRect(rect);
+    const double rotationAngle = atan(m_matrix.m12()/m_matrix.m11());
 
     double majorX, majorY; // distanse between center and endpoint of the major axis
     double ratio; // ratio of minor axis to major axis
     if(rect.width()<= rect.height())
     {
-        majorX = (rect.top() - rect.center().y())*sin(rotationAngle)*matrix.m11()/cos(rotationAngle);
+        majorX = (rect.top() - rect.center().y())*sin(rotationAngle)*m_matrix.m11()/cos(rotationAngle);
         // major axis * sin(rotation angle) * x-scale-factor
-        majorY = (rect.top() - rect.center().y())*matrix.m22();
+        majorY = (rect.top() - rect.center().y())*m_matrix.m22();
         // major axis * cos(rotation angle) * y-scale-factor, where y-scale-factor = matrix.m22()/cos(rotationAngle)
         ratio  = rect.width()/rect.height();
     }
     else
     {
-        majorX = (rect.right() - rect.center().x())*matrix.m11();
+        majorX = (rect.right() - rect.center().x())*m_matrix.m11();
         // major axis * cos(rotation angle) * x-scale-factor, where y-scale-factor = matrix.m22()/cos(rotationAngle)
-        majorY = (rect.right() - rect.center().x())*sin(rotationAngle)*matrix.m22()/cos(rotationAngle);
+        majorY = (rect.right() - rect.center().x())*sin(rotationAngle)*m_matrix.m22()/cos(rotationAngle);
         // major axis * sin(rotation angle) * y-scale-factor
         ratio  = rect.height()/rect.width();
     }
 
-    DRW_Ellipse *ellipse = new DRW_Ellipse();
-    ellipse->basePoint = DRW_Coord(FromPixel(newRect.center().x(), varInsunits),
-                                   FromPixel(getSize().height() - newRect.center().y(), varInsunits), 0);
-    ellipse->secPoint = DRW_Coord(FromPixel(majorX, varInsunits), FromPixel(majorY, varInsunits), 0);
+    auto *ellipse = new DRW_Ellipse();
+    ellipse->basePoint = DRW_Coord(FromPixel(newRect.center().x(), m_varInsunits),
+                                   FromPixel(GetSize().height() - newRect.center().y(), m_varInsunits), 0);
+    ellipse->secPoint = DRW_Coord(FromPixel(majorX, m_varInsunits), FromPixel(majorY, m_varInsunits), 0);
     ellipse->ratio = ratio;
     ellipse->staparam = 0;
     ellipse->endparam = 2*M_PI;
 
-    ellipse->layer = '0';
-    ellipse->color = getPenColor();
+    ellipse->layer = *layer0;
+    ellipse->color = GetPenColor();
     ellipse->lWeight = DRW_LW_Conv::widthByLayer;
-    ellipse->lineType = getPenStyle();
+    ellipse->lineType = GetPenStyle();
 
-    input->AddEntity(ellipse);
+    m_input->AddEntity(ellipse);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -363,27 +381,27 @@ void VDxfEngine::drawEllipse(const QRect & rect)
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::drawTextItem(const QPointF & p, const QTextItem & textItem)
 {
-    if (textBuffer->text.size() == 0)
+    if (m_textBuffer->text.empty())
     {
-        const QPointF startPoint = matrix.map(p);
-        const double rotationAngle = qRadiansToDegrees(qAtan2(matrix.m12(), matrix.m11()));
+        const QPointF startPoint = m_matrix.map(p);
+        const double rotationAngle = qRadiansToDegrees(qAtan2(m_matrix.m12(), m_matrix.m11()));
 
         const QFont f = textItem.font();
-        const UTF8STRING fontStyle = input->AddFont(f);
+        const UTF8STRING fontStyle = m_input->AddFont(f);
 
-        textBuffer->basePoint = DRW_Coord(FromPixel(startPoint.x(), varInsunits),
-                                    FromPixel(getSize().height() - startPoint.y(), varInsunits), 0);
-        textBuffer->secPoint = DRW_Coord(FromPixel(startPoint.x(), varInsunits),
-                                   FromPixel(getSize().height() - startPoint.y(), varInsunits), 0);
-        textBuffer->height = FromPixel(QFontMetrics(f).height(), varInsunits);
+        m_textBuffer->basePoint = DRW_Coord(FromPixel(startPoint.x(), m_varInsunits),
+                                    FromPixel(GetSize().height() - startPoint.y(), m_varInsunits), 0);
+        m_textBuffer->secPoint = DRW_Coord(FromPixel(startPoint.x(), m_varInsunits),
+                                   FromPixel(GetSize().height() - startPoint.y(), m_varInsunits), 0);
+        m_textBuffer->height = FromPixel(QFontMetrics(f).height(), m_varInsunits);
 
-        textBuffer->style = fontStyle;
-        textBuffer->angle = -rotationAngle;
+        m_textBuffer->style = fontStyle;
+        m_textBuffer->angle = -rotationAngle;
 
-        textBuffer->layer = '0';
-        textBuffer->color = getPenColor();
-        textBuffer->lWeight = DRW_LW_Conv::widthByLayer;
-        textBuffer->lineType = getPenStyle();
+        m_textBuffer->layer = *layer0;
+        m_textBuffer->color = GetPenColor();
+        m_textBuffer->lWeight = DRW_LW_Conv::widthByLayer;
+        m_textBuffer->lineType = GetPenStyle();
     }
 
     /* Because QPaintEngine::drawTextItem doesn't pass whole string per time we mark end of each string by adding
@@ -396,17 +414,17 @@ void VDxfEngine::drawTextItem(const QPointF & p, const QTextItem & textItem)
         t.replace(endStringPlaceholder, QString());
     }
 
-    textBuffer->text += t.toStdString();
+    m_textBuffer->text += t.toStdString();
 
     if (foundEndOfString)
     {
-        input->AddEntity(textBuffer);
-        textBuffer = new DRW_Text();
+        m_input->AddEntity(m_textBuffer);
+        m_textBuffer = new DRW_Text();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPaintEngine::Type VDxfEngine::type() const
+auto VDxfEngine::type() const -> QPaintEngine::Type
 {
     return QPaintEngine::User;
 }
@@ -421,46 +439,46 @@ void VDxfEngine::drawPixmap(const QRectF &r, const QPixmap &pm, const QRectF &sr
 }
 
  //---------------------------------------------------------------------------------------------------------------------
-QSize VDxfEngine::getSize() const
+auto VDxfEngine::GetSize() const -> QSize
 {
-    return size;
+    return m_size;
 }
 
  //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::setSize(const QSize &value)
+void VDxfEngine::SetSize(const QSize &value)
 {
     Q_ASSERT(not isActive());
-    size = value;
+    m_size = value;
 }
 
  //---------------------------------------------------------------------------------------------------------------------
-double VDxfEngine::getResolution() const
+auto VDxfEngine::GetResolution() const -> double
 {
-    return resolution;
+    return m_resolution;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::setResolution(double value)
-{
-    Q_ASSERT(not isActive());
-    resolution = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VDxfEngine::getFileName() const
-{
-    return fileName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::setFileName(const QString &value)
+void VDxfEngine::SetResolution(double value)
 {
     Q_ASSERT(not isActive());
-    fileName = value;
+    m_resolution = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-DRW::Version VDxfEngine::GetVersion() const
+auto VDxfEngine::GetFileName() const -> QString
+{
+    return m_fileName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::SetFileName(const QString &value)
+{
+    Q_ASSERT(not isActive());
+    m_fileName = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VDxfEngine::GetVersion() const -> DRW::Version
 {
     return m_version;
 }
@@ -479,13 +497,13 @@ void VDxfEngine::SetBinaryFormat(bool binary)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VDxfEngine::IsBinaryFormat() const
+auto VDxfEngine::IsBinaryFormat() const -> bool
 {
     return m_binary;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-std::string VDxfEngine::getPenStyle()
+auto VDxfEngine::GetPenStyle() -> std::string
 {
     switch (state->pen().style())
     {
@@ -504,7 +522,7 @@ std::string VDxfEngine::getPenStyle()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VDxfEngine::getPenColor()
+auto VDxfEngine::GetPenColor() -> int
 {
     QColor color = state->pen().color();
 
@@ -512,84 +530,96 @@ int VDxfEngine::getPenColor()
     {
         return DRW::black;
     }
-    else if(color == Qt::white)
+
+    if(color == Qt::white)
     {
         return DRW::white;
     }
-    else if(color == Qt::darkGray)
+
+    if(color == Qt::darkGray)
     {
         return DRW::gray;
     }
-    else if(color == Qt::gray)
+
+    if(color == Qt::gray)
     {
         return DRW::l_gray;
     }
-    else if(color == Qt::darkMagenta)
+
+    if(color == Qt::darkMagenta)
     {
         return DRW::magenta;
     }
-    else if(color == Qt::magenta)
+
+    if(color == Qt::magenta)
     {
         return DRW::l_magenta;
     }
-    else if(color == Qt::cyan)
+
+    if(color == Qt::cyan)
     {
         return DRW::l_cyan;
     }
-    else if(color == Qt::darkCyan)
+
+    if(color == Qt::darkCyan)
     {
         return DRW::cyan;
     }
-    else if(color == Qt::blue)
+
+    if(color == Qt::blue)
     {
         return DRW::l_blue;
     }
-    else if(color == Qt::darkBlue)
+
+    if(color == Qt::darkBlue)
     {
         return DRW::blue;
     }
-    else if(color == Qt::darkGreen)
+
+    if(color == Qt::darkGreen)
     {
         return DRW::green;
     }
-    else if(color == Qt::green)
+
+    if(color == Qt::green)
     {
         return DRW::l_green;
     }
-    else if(color == Qt::darkRed)
+
+    if(color == Qt::darkRed)
     {
         return DRW::red;
     }
-    else if(color == Qt::red)
+
+    if(color == Qt::red)
     {
         return DRW::l_red;
     }
-    else if(color == Qt::yellow)
+
+    if(color == Qt::yellow)
     {
         return DRW::yellow;
     }
-    else
-    {
-        return DRW::ColorByLayer;
-    }
+
+    return DRW::ColorByLayer;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::setMeasurement(const VarMeasurement &var)
+void VDxfEngine::SetMeasurement(const VarMeasurement &var)
 {
     Q_ASSERT(not isActive());
-    varMeasurement = var;
+    m_varMeasurement = var;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::setInsunits(const VarInsunits &var)
+void VDxfEngine::SetInsunits(const VarInsunits &var)
 {
     Q_ASSERT(not isActive());
-    varInsunits = var;
+    m_varInsunits = var;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VDxfEngine::GetXScale() const
+auto VDxfEngine::GetXScale() const -> qreal
 {
     return m_xscale;
 }
@@ -601,7 +631,7 @@ void VDxfEngine::SetXScale(const qreal &xscale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VDxfEngine::GetYScale() const
+auto VDxfEngine::GetYScale() const -> qreal
 {
     return m_yscale;
 }
@@ -613,40 +643,40 @@ void VDxfEngine::SetYScale(const qreal &yscale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VDxfEngine::ErrorString() const
+auto VDxfEngine::ErrorString() const -> QString
 {
-    return QString::fromStdString(input->ErrorString());
+    return QString::fromStdString(m_input->ErrorString());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
 
-double VDxfEngine::FromPixel(double pix, const VarInsunits &unit) const
+auto VDxfEngine::FromPixel(double pix, const VarInsunits &unit) const -> double
 {
     switch (unit)
     {
         case VarInsunits::Millimeters:
-            return pix / resolution * 25.4;
+            return pix / m_resolution * 25.4;
         case VarInsunits::Centimeters:
-            return pix / resolution * 25.4 / 10.0;
+            return pix / m_resolution * 25.4 / 10.0;
         case VarInsunits::Inches:
-            return pix / resolution;
+            return pix / m_resolution;
     }
     return pix;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-double VDxfEngine::ToPixel(double val, const VarInsunits &unit) const
+auto VDxfEngine::ToPixel(double val, const VarInsunits &unit) const -> double
 {
     switch (unit)
     {
         case VarInsunits::Millimeters:
-            return (val / 25.4) * resolution;
+            return (val / 25.4) * m_resolution;
         case VarInsunits::Centimeters:
-            return ((val * 10.0) / 25.4) * resolution;
+            return ((val * 10.0) / 25.4) * m_resolution;
         case VarInsunits::Inches:
-            return val * resolution;
+            return val * m_resolution;
     }
     return val;
 }
@@ -654,24 +684,24 @@ double VDxfEngine::ToPixel(double val, const VarInsunits &unit) const
 QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details)
+auto VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details) -> bool
 {
-    if (size.isValid() == false)
+    if (not m_size.isValid())
     {
         qWarning()<<"VDxfEngine::begin(), size is not valid";
         return false;
     }
 
-    input = QSharedPointer<dx_iface>(new dx_iface(getFileNameForLocale(), m_version, varMeasurement,
-                                                  varInsunits));
-    input->AddAAMAHeaderData();
+    m_input = QSharedPointer<dx_iface>(new dx_iface(GetFileNameForLocale(), m_version, m_varMeasurement,
+                                                  m_varInsunits));
+    m_input->AddAAMAHeaderData();
     if (m_version > DRW::AC1009)
     {
-        input->AddDefLayers();
+        m_input->AddDefLayers();
     }
-    input->AddAAMALayers();
+    m_input->AddAAMALayers();
 
-    ExportStyleSystemText(input, details);
+    ExportStyleSystemText(m_input, details);
 
     for(auto detail : details)
     {
@@ -684,7 +714,7 @@ bool VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details)
         }
 
         detailBlock->name = blockName.toStdString();
-        detailBlock->layer = '1';
+        detailBlock->layer = *layer1;
 
         detail.Scale(m_xscale, m_yscale);
 
@@ -696,22 +726,22 @@ bool VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details)
         ExportPieceText(detailBlock, detail);
         ExportAAMADrill(detailBlock, detail);
 
-        input->AddBlock(detailBlock);
+        m_input->AddBlock(detailBlock);
 
         auto *insert = new DRW_Insert();
         insert->name = blockName.toStdString();
-        insert->layer = '1';
+        insert->layer = *layer1;
 
-        input->AddEntity(insert);
+        m_input->AddEntity(insert);
     }
 
-    return input->fileExport(m_binary);
+    return m_input->fileExport(m_binary);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::ExportAAMAOutline(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
 {
-    DRW_Entity *e = AAMAPolygon(PieceOutline(detail), QChar('1'), true);
+    DRW_Entity *e = AAMAPolygon(PieceOutline(detail), *layer1, true);
     if (e)
     {
         detailBlock->ent.push_back(e);
@@ -723,30 +753,30 @@ void VDxfEngine::ExportAAMADraw(dx_ifaceBlock *detailBlock, const VLayoutPiece &
 {
     if (detail.IsSeamAllowance() && not detail.IsHideMainPath() && not detail.IsSeamAllowanceBuiltIn())
     {
-        if (DRW_Entity *e = AAMAPolygon(detail.GetMappedContourPoints(), QChar('8'), true))
+        if (DRW_Entity *e = AAMAPolygon(detail.GetMappedContourPoints(), *layer8, true))
         {
             detailBlock->ent.push_back(e);
         }
     }
 
     const QVector<QVector<QPointF>> drawIntCut = detail.MappedInternalPathsForCut(false);
-    for(auto &intCut : drawIntCut)
+    for(const auto &intCut : drawIntCut)
     {
-        if (DRW_Entity *e = AAMAPolygon(intCut, QChar('8'), false))
+        if (DRW_Entity *e = AAMAPolygon(intCut, *layer8, false))
         {
             detailBlock->ent.push_back(e);
         }
     }
 
     const QVector<VLayoutPlaceLabel> labels = detail.GetMappedPlaceLabels();
-    for(auto &label : labels)
+    for(const auto &label : labels)
     {
         if (label.type != PlaceLabelType::Doubletree && label.type != PlaceLabelType::Button
                 && label.type != PlaceLabelType::Circle)
         {
-            for(auto &p : qAsConst(label.shape))
+            for(const auto &p : qAsConst(label.shape))
             {
-                if (DRW_Entity *e = AAMAPolygon(p, QChar('8'), false))
+                if (DRW_Entity *e = AAMAPolygon(p, *layer8, false))
                 {
                     detailBlock->ent.push_back(e);
                 }
@@ -761,7 +791,7 @@ void VDxfEngine::ExportAAMAIntcut(dx_ifaceBlock *detailBlock, const VLayoutPiece
     QVector<QVector<QPointF>> drawIntCut = detail.MappedInternalPathsForCut(true);
     for(auto &intCut : drawIntCut)
     {
-        if (DRW_Entity *e = AAMAPolygon(intCut, "11", false))
+        if (DRW_Entity *e = AAMAPolygon(intCut, *layer11, false))
         {
             detailBlock->ent.push_back(e);
         }
@@ -774,11 +804,11 @@ void VDxfEngine::ExportAAMANotch(dx_ifaceBlock *detailBlock, const VLayoutPiece 
     if (detail.IsSeamAllowance())
     {
         const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
-        for(auto &passmark : passmarks)
+        for(const auto &passmark : passmarks)
         {
-            for (auto &line : passmark.lines)
+            for (const auto &line : passmark.lines)
             {
-                if (DRW_Entity *e = AAMALine(line, QChar('4')))
+                if (DRW_Entity *e = AAMALine(line, *layer4))
                 {
                     detailBlock->ent.push_back(e);
                 }
@@ -793,7 +823,7 @@ void VDxfEngine::ExportAAMAGrainline(dx_ifaceBlock *detailBlock, const VLayoutPi
     const QVector<QPointF> grainline = detail.GetMappedGrainline();
     if (grainline.count() > 1)
     {
-        if (DRW_Entity *e = AAMALine(QLineF(ConstFirst(grainline), ConstLast(grainline)), QChar('7')))
+        if (DRW_Entity *e = AAMALine(QLineF(ConstFirst(grainline), ConstLast(grainline)), *layer7))
         {
             detailBlock->ent.push_back(e);
         }
@@ -808,24 +838,24 @@ void VDxfEngine::ExportPieceText(dx_ifaceBlock *detailBlock, const VLayoutPiece 
 
     for (int i = 0; i < list.size(); ++i)
     {
-        QPointF pos(startPos.x(), startPos.y() - ToPixel(AAMATextHeight * m_yscale, varInsunits)*(list.size() - i-1));
-        detailBlock->ent.push_back(AAMAText(pos, list.at(i), QChar('1')));
+        QPointF pos(startPos.x(), startPos.y() - ToPixel(AAMATextHeight * m_yscale, m_varInsunits)*(list.size() - i-1));
+        detailBlock->ent.push_back(AAMAText(pos, list.at(i), *layer1));
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::ExportStyleSystemText(const QSharedPointer<dx_iface> &input, const QVector<VLayoutPiece> &details)
 {
-    for(auto &detail : details)
+    for(const auto &detail : details)
     {
         const QStringList strings = detail.GetPatternText();
         if (not strings.isEmpty())
         {
             for (int j = 0; j < strings.size(); ++j)
             {
-                QPointF pos(0, getSize().height() -
-                                   ToPixel(AAMATextHeight * m_yscale, varInsunits)*(strings.size() - j-1));
-                input->AddEntity(AAMAText(pos, strings.at(j), QChar('1')));
+                QPointF pos(0, GetSize().height() -
+                                   ToPixel(AAMATextHeight * m_yscale, m_varInsunits)*(strings.size() - j-1));
+                input->AddEntity(AAMAText(pos, strings.at(j), *layer1));
             }
             return;
         }
@@ -837,16 +867,16 @@ void VDxfEngine::ExportAAMADrill(dx_ifaceBlock *detailBlock, const VLayoutPiece 
 {
     const QVector<VLayoutPlaceLabel> labels = detail.GetMappedPlaceLabels();
 
-    for(auto &label : labels)
+    for(const auto &label : labels)
     {
         if (label.type == PlaceLabelType::Doubletree || label.type == PlaceLabelType::Button
                 || label.type == PlaceLabelType::Circle)
         {
             const QPointF center = detail.GetMatrix().map(label.center);
-            DRW_Point *point = new DRW_Point();
-            point->basePoint = DRW_Coord(FromPixel(center.x(), varInsunits),
-                                         FromPixel(getSize().height() - center.y(), varInsunits), 0);
-            point->layer = "13";
+            auto *point = new DRW_Point();
+            point->basePoint = DRW_Coord(FromPixel(center.x(), m_varInsunits),
+                                         FromPixel(GetSize().height() - center.y(), m_varInsunits), 0);
+            point->layer = *layer13;
 
             detailBlock->ent.push_back(point);
         }
@@ -854,25 +884,25 @@ void VDxfEngine::ExportAAMADrill(dx_ifaceBlock *detailBlock, const VLayoutPiece 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VDxfEngine::ExportToASTM(const QVector<VLayoutPiece> &details)
+auto VDxfEngine::ExportToASTM(const QVector<VLayoutPiece> &details) -> bool
 {
-    if (size.isValid() == false)
+    if (not m_size.isValid())
     {
         qWarning()<<"VDxfEngine::begin(), size is not valid";
         return false;
     }
 
-    input = QSharedPointer<dx_iface>(new dx_iface(getFileNameForLocale(), m_version, varMeasurement,
-                                                  varInsunits));
+    m_input = QSharedPointer<dx_iface>(new dx_iface(GetFileNameForLocale(), m_version, m_varMeasurement,
+                                                    m_varInsunits));
 
-    input->AddAAMAHeaderData();
+    m_input->AddAAMAHeaderData();
     if (m_version > DRW::AC1009)
     {
-        input->AddDefLayers();
+        m_input->AddDefLayers();
     }
-    input->AddASTMLayers();
+    m_input->AddASTMLayers();
 
-    ExportStyleSystemText(input, details);
+    ExportStyleSystemText(m_input, details);
 
     for(auto detail : details)
     {
@@ -885,7 +915,7 @@ bool VDxfEngine::ExportToASTM(const QVector<VLayoutPiece> &details)
         }
 
         detailBlock->name = blockName.toStdString();
-        detailBlock->layer = '1';
+        detailBlock->layer = *layer1;
 
         detail.Scale(m_xscale, m_yscale);
 
@@ -899,16 +929,16 @@ bool VDxfEngine::ExportToASTM(const QVector<VLayoutPiece> &details)
         ExportASTMDrill(detailBlock, detail);
         ExportASTMAnnotationText(detailBlock, detail);
 
-        input->AddBlock(detailBlock);
+        m_input->AddBlock(detailBlock);
 
         auto *insert = new DRW_Insert();
         insert->name = blockName.toStdString();
-        insert->layer = '1';
+        insert->layer = *layer1;
 
-        input->AddEntity(insert);
+        m_input->AddEntity(insert);
     }
 
-    return input->fileExport(m_binary);
+    return m_input->fileExport(m_binary);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -917,14 +947,14 @@ void VDxfEngine::ExportASTMPieceBoundary(dx_ifaceBlock *detailBlock, const VLayo
     QVector<QPointF> pieceBoundary = PieceOutline(detail);
 
     // Piece boundary
-    DRW_Entity *e = AAMAPolygon(PieceOutline(detail), QChar('1'), true);
+    DRW_Entity *e = AAMAPolygon(pieceBoundary, *layer1, true);
     if (e)
     {
         detailBlock->ent.push_back(e);
     }
 
     // Piece boundary quality validation curves
-    DRW_Entity *q = AAMAPolygon(PieceOutline(detail), "84", true);
+    DRW_Entity *q = AAMAPolygon(pieceBoundary, *layer84, true);
     if (q)
     {
         detailBlock->ent.push_back(q);
@@ -939,13 +969,13 @@ void VDxfEngine::ExportASTMSewLine(dx_ifaceBlock *detailBlock, const VLayoutPiec
         QVector<QPointF> sewLine = detail.GetMappedContourPoints();
 
         // Sew lines
-        if (DRW_Entity *e = AAMAPolygon(sewLine, "14", true))
+        if (DRW_Entity *e = AAMAPolygon(sewLine, *layer14, true))
         {
             detailBlock->ent.push_back(e);
         }
 
         // Sew lines quality validation curves
-        if (DRW_Entity *e = AAMAPolygon(sewLine, "87", true))
+        if (DRW_Entity *e = AAMAPolygon(sewLine, *layer87, true))
         {
             detailBlock->ent.push_back(e);
         }
@@ -956,37 +986,37 @@ void VDxfEngine::ExportASTMSewLine(dx_ifaceBlock *detailBlock, const VLayoutPiec
 void VDxfEngine::ExportASTMInternalLine(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
 {
     const QVector<QVector<QPointF>> drawIntCut = detail.MappedInternalPathsForCut(false);
-    for(auto &intCut : drawIntCut)
+    for(const auto &intCut : drawIntCut)
     {
         // Internal line
-        if (DRW_Entity *e = AAMAPolygon(intCut, QChar('8'), false))
+        if (DRW_Entity *e = AAMAPolygon(intCut, *layer8, false))
         {
             detailBlock->ent.push_back(e);
         }
 
         // Internal lines quality validation curves
-        if (DRW_Entity *e = AAMAPolygon(intCut, "85", false))
+        if (DRW_Entity *e = AAMAPolygon(intCut, *layer85, false))
         {
             detailBlock->ent.push_back(e);
         }
     }
 
     const QVector<VLayoutPlaceLabel> labels = detail.GetMappedPlaceLabels();
-    for(auto &label : labels)
+    for(const auto &label : labels)
     {
         if (label.type != PlaceLabelType::Doubletree && label.type != PlaceLabelType::Button
             && label.type != PlaceLabelType::Circle)
         {
-            for(auto &p : qAsConst(label.shape))
+            for(const auto &p : qAsConst(label.shape))
             {
                 // Internal line (placelabel)
-                if (DRW_Entity *e = AAMAPolygon(p, QChar('8'), false))
+                if (DRW_Entity *e = AAMAPolygon(p, *layer8, false))
                 {
                     detailBlock->ent.push_back(e);
                 }
 
                 // Internal lines quality validation curves
-                if (DRW_Entity *e = AAMAPolygon(p, "85", false))
+                if (DRW_Entity *e = AAMAPolygon(p, *layer85, false))
                 {
                     detailBlock->ent.push_back(e);
                 }
@@ -1002,13 +1032,13 @@ void VDxfEngine::ExportASTMInternalCutout(dx_ifaceBlock *detailBlock, const VLay
     for(auto &intCut : drawIntCut)
     {
         // Internal cutout
-        if (DRW_Entity *e = AAMAPolygon(intCut, "11", false))
+        if (DRW_Entity *e = AAMAPolygon(intCut, *layer11, false))
         {
             detailBlock->ent.push_back(e);
         }
 
         // Internal cutouts quality validation curves
-        if (DRW_Entity *e = AAMAPolygon(intCut, "86", false))
+        if (DRW_Entity *e = AAMAPolygon(intCut, *layer86, false))
         {
             detailBlock->ent.push_back(e);
         }
@@ -1021,8 +1051,8 @@ void VDxfEngine::ExportASTMAnnotationText(dx_ifaceBlock *detailBlock, const VLay
     QString name = detail.GetName();
     QPointF textPos = detail.VLayoutPiece::DetailBoundingRect().center();
 
-    QPointF pos(textPos.x(), textPos.y() - ToPixel(AAMATextHeight, varInsunits));
-    detailBlock->ent.push_back(AAMAText(pos, name, "15"));
+    QPointF pos(textPos.x(), textPos.y() - ToPixel(AAMATextHeight, m_varInsunits));
+    detailBlock->ent.push_back(AAMAText(pos, name, *layer15));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1030,22 +1060,22 @@ void VDxfEngine::ExportASTMDrill(dx_ifaceBlock *detailBlock, const VLayoutPiece 
 {
     const QVector<VLayoutPlaceLabel> labels = detail.GetMappedPlaceLabels();
 
-    for(auto &label : labels)
+    for(const auto &label : labels)
     {
         if (label.type == PlaceLabelType::Doubletree || label.type == PlaceLabelType::Button
             || label.type == PlaceLabelType::Circle)
         {
             const QPointF center = detail.GetMatrix().map(label.center);
-            DRW_Point *point = new DRW_Point();
-            point->basePoint = DRW_Coord(FromPixel(center.x(), varInsunits),
-                                         FromPixel(getSize().height() - center.y(), varInsunits), 0);
-            point->layer = "13";
+            auto *point = new DRW_Point();
+            point->basePoint = DRW_Coord(FromPixel(center.x(), m_varInsunits),
+                                         FromPixel(GetSize().height() - center.y(), m_varInsunits), 0);
+            point->layer = *layer13;
 
             detailBlock->ent.push_back(point);
 
             // TODO. Investigate drill category
 //            QPointF pos(center.x(), center.y() - ToPixel(AAMATextHeight, varInsunits));
-//            detailBlock->ent.push_back(AAMAText(pos, category, "13"));
+//            detailBlock->ent.push_back(AAMAText(pos, category, *layer13));
         }
     }
 }
@@ -1056,53 +1086,53 @@ void VDxfEngine::ExportASTMNotch(dx_ifaceBlock *detailBlock, const VLayoutPiece 
     if (detail.IsSeamAllowance())
     {
         const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
-        for(auto &passmark : passmarks)
+        for(const auto &passmark : passmarks)
         {
-            DRW_ASTMNotch *notch = new DRW_ASTMNotch();
+            auto *notch = new DRW_ASTMNotch();
             const QPointF center = passmark.baseLine.p1();
 
-            notch->basePoint = DRW_Coord(FromPixel(center.x(), varInsunits),
-                                         FromPixel(getSize().height() - center.y(), varInsunits),
-                                         FromPixel(passmark.baseLine.length(), varInsunits));
+            notch->basePoint = DRW_Coord(FromPixel(center.x(), m_varInsunits),
+                                         FromPixel(GetSize().height() - center.y(), m_varInsunits),
+                                         FromPixel(passmark.baseLine.length(), m_varInsunits));
 
             notch->angle = passmark.baseLine.angle();
 
             if (passmark.type == PassmarkLineType::OneLine || passmark.type == PassmarkLineType::TwoLines
                 || passmark.type == PassmarkLineType::ThreeLines)
             { // Slit notch
-                notch->layer = "4";
+                notch->layer = *layer4;
             }
             else if (passmark.type == PassmarkLineType::VMark || passmark.type == PassmarkLineType::VMark2)
             {
                 QLineF boundaryLine(ConstFirst(passmark.lines).p2(), ConstLast(passmark.lines).p2());
-                notch->thickness = FromPixel(boundaryLine.length(), varInsunits); // width
+                notch->thickness = FromPixel(boundaryLine.length(), m_varInsunits); // width
 
-                notch->layer = "4";
+                notch->layer = *layer4;
             }
             else if (passmark.type == PassmarkLineType::TMark)
             {
-                qreal width = FromPixel(ConstLast(passmark.lines).length(), varInsunits);
-                notch->thickness = FromPixel(width, varInsunits);
+                qreal width = FromPixel(ConstLast(passmark.lines).length(), m_varInsunits);
+                notch->thickness = FromPixel(width, m_varInsunits);
 
-                notch->layer = "80";
+                notch->layer = *layer80;
             }
             else if (passmark.type == PassmarkLineType::BoxMark)
             {
                 QPointF start = ConstFirst(passmark.lines).p1();
                 QPointF end = ConstLast(passmark.lines).p2();
 
-                notch->layer = "81";
+                notch->layer = *layer81;
 
-                notch->thickness = FromPixel(QLineF(start, end).length(), varInsunits);
+                notch->thickness = FromPixel(QLineF(start, end).length(), m_varInsunits);
             }
             else if (passmark.type == PassmarkLineType::UMark)
             {
                 QPointF start = ConstFirst(passmark.lines).p1();
                 QPointF end = ConstLast(passmark.lines).p2();
 
-                notch->thickness = FromPixel(QLineF(start, end).length(), varInsunits);
+                notch->thickness = FromPixel(QLineF(start, end).length(), m_varInsunits);
 
-                notch->layer = "83";
+                notch->layer = *layer83;
             }
 
             detailBlock->ent.push_back(notch);
@@ -1111,7 +1141,7 @@ void VDxfEngine::ExportASTMNotch(dx_ifaceBlock *detailBlock, const VLayoutPiece 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-DRW_Entity *VDxfEngine::AAMAPolygon(const QVector<QPointF> &polygon, const QString &layer, bool forceClosed)
+auto VDxfEngine::AAMAPolygon(const QVector<QPointF> &polygon, const UTF8STRING &layer, bool forceClosed) -> DRW_Entity *
 {
     if (polygon.isEmpty())
     {
@@ -1122,80 +1152,79 @@ DRW_Entity *VDxfEngine::AAMAPolygon(const QVector<QPointF> &polygon, const QStri
     { // Use lwpolyline
         return CreateAAMAPolygon<DRW_LWPolyline, DRW_Vertex2D>(polygon, layer, forceClosed);
     }
-    else
-    { // Use polyline
-        return CreateAAMAPolygon<DRW_Polyline, DRW_Vertex>(polygon, layer, forceClosed);
-    }
+
+    // Use polyline
+    return CreateAAMAPolygon<DRW_Polyline, DRW_Vertex>(polygon, layer, forceClosed);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-DRW_Entity *VDxfEngine::AAMALine(const QLineF &line, const QString &layer)
+auto VDxfEngine::AAMALine(const QLineF &line, const UTF8STRING &layer) -> DRW_Entity *
 {
-    DRW_Line *lineEnt = new DRW_Line();
-    lineEnt->basePoint = DRW_Coord(FromPixel(line.p1().x(), varInsunits),
-                                   FromPixel(getSize().height() - line.p1().y(), varInsunits), 0);
-    lineEnt->secPoint =  DRW_Coord(FromPixel(line.p2().x(), varInsunits),
-                                   FromPixel(getSize().height() - line.p2().y(), varInsunits), 0);
-    lineEnt->layer = layer.toStdString();
+    auto *lineEnt = new DRW_Line();
+    lineEnt->basePoint = DRW_Coord(FromPixel(line.p1().x(), m_varInsunits),
+                                   FromPixel(GetSize().height() - line.p1().y(), m_varInsunits), 0);
+    lineEnt->secPoint =  DRW_Coord(FromPixel(line.p2().x(), m_varInsunits),
+                                   FromPixel(GetSize().height() - line.p2().y(), m_varInsunits), 0);
+    lineEnt->layer = layer;
 
     return lineEnt;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-DRW_Entity *VDxfEngine::AAMAText(const QPointF &pos, const QString &text, const QString &layer)
+auto VDxfEngine::AAMAText(const QPointF &pos, const QString &text, const UTF8STRING &layer) -> DRW_Entity *
 {
-    DRW_Text *textLine = new DRW_Text();
+    auto *textLine = new DRW_Text();
 
-    textLine->basePoint = DRW_Coord(FromPixel(pos.x(), varInsunits),
-                                    FromPixel(getSize().height() - pos.y(), varInsunits), 0);
-    textLine->secPoint = DRW_Coord(FromPixel(pos.x(), varInsunits),
-                                   FromPixel(getSize().height() - pos.y(), varInsunits), 0);
+    textLine->basePoint = DRW_Coord(FromPixel(pos.x(), m_varInsunits),
+                                    FromPixel(GetSize().height() - pos.y(), m_varInsunits), 0);
+    textLine->secPoint = DRW_Coord(FromPixel(pos.x(), m_varInsunits),
+                                   FromPixel(GetSize().height() - pos.y(), m_varInsunits), 0);
     textLine->height = AAMATextHeight;
-    textLine->layer = layer.toStdString();
+    textLine->layer = layer;
     textLine->text = text.toStdString();
 
     return textLine;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-std::string VDxfEngine::FromUnicodeToCodec(const QString &str, QTextCodec *codec)
+auto VDxfEngine::FromUnicodeToCodec(const QString &str, QTextCodec *codec) -> std::string
 {
     return codec->fromUnicode(str).toStdString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-std::string VDxfEngine::getFileNameForLocale() const
+auto VDxfEngine::GetFileNameForLocale() const -> std::string
 {
 #if defined(Q_OS_WIN)
     return VDxfEngine::FromUnicodeToCodec(fileName, QTextCodec::codecForLocale());
 #else
-    return fileName.toStdString();
+    return m_fileName.toStdString();
 #endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template<class P, class V>
-P *VDxfEngine::CreateAAMAPolygon(const QVector<QPointF> &polygon, const QString &layer, bool forceClosed)
+auto VDxfEngine::CreateAAMAPolygon(const QVector<QPointF> &polygon, const UTF8STRING &layer, bool forceClosed) -> P *
 {
-    P *poly = new P();
-    poly->layer = layer.toStdString();
+    auto *poly = new P();
+    poly->layer = layer;
 
     if (forceClosed)
     {
-        poly->flags |= 0x1; // closed
+        poly->flags |= 0x1; // closed NOLINT(hicpp-signed-bitwise)
     }
     else
     {
         if (polygon.size() > 1 && ConstFirst<QPointF>(polygon) == ConstLast<QPointF>(polygon))
         {
-            poly->flags |= 0x1; // closed
+            poly->flags |= 0x1; // closed NOLINT(hicpp-signed-bitwise)
         }
     }
 
     for (auto p : polygon)
     {
-        poly->addVertex(V(FromPixel(p.x(), varInsunits),
-                          FromPixel(getSize().height() - p.y(), varInsunits)));
+        poly->addVertex(V(FromPixel(p.x(), m_varInsunits),
+                          FromPixel(GetSize().height() - p.y(), m_varInsunits)));
     }
 
     return poly;

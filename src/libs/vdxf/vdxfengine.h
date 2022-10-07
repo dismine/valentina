@@ -55,70 +55,74 @@ class VDxfEngine final : public QPaintEngine
     friend class VDxfPaintDevice;
 public:
     VDxfEngine();
-    virtual ~VDxfEngine();
+    ~VDxfEngine() override;
 
-    virtual bool begin(QPaintDevice *pdev) override;
-    virtual bool end() override;
-    virtual void updateState(const QPaintEngineState &state) override;
-    virtual void drawPath(const QPainterPath &path) override;
-    virtual void drawLines(const QLineF * lines, int lineCount) override;
-    virtual void drawLines(const QLine * lines, int lineCount) override;
-    virtual void drawPolygon(const QPointF *points, int pointCount, PolygonDrawMode mode) override;
-    virtual void drawPolygon(const QPoint *points, int pointCount, PolygonDrawMode mode) override;
-    virtual void drawEllipse(const QRectF & rect) override;
-    virtual void drawEllipse(const QRect & rect) override;
-    virtual void drawTextItem(const QPointF & p, const QTextItem & textItem) override;
-    virtual Type type() const override;
-    virtual void drawPixmap(const QRectF &r, const QPixmap &pm, const QRectF &sr) override;
+    auto type() const -> Type override;
 
-    QSize getSize() const;
-    void setSize(const QSize &value);
+    auto begin(QPaintDevice *pdev) -> bool override;
+    auto end() -> bool override;
 
-    double getResolution() const;
-    void   setResolution(double value);
+    void updateState(const QPaintEngineState &state) override;
 
-    QString getFileName() const;
-    void setFileName(const QString &value);
+    void drawPath(const QPainterPath &path) override;
+    void drawLines(const QLineF * lines, int lineCount) override;
+    void drawLines(const QLine * lines, int lineCount) override;
+    void drawPolygon(const QPointF *points, int pointCount, PolygonDrawMode mode) override;
+    void drawPolygon(const QPoint *points, int pointCount, PolygonDrawMode mode) override;
+    void drawEllipse(const QRectF & rect) override;
+    void drawEllipse(const QRect & rect) override;
+    void drawTextItem(const QPointF & p, const QTextItem & textItem) override;
+    void drawPixmap(const QRectF &r, const QPixmap &pm, const QRectF &sr) override;
 
-    DRW::Version GetVersion() const;
-    void         SetVersion(DRW::Version version);
+    auto GetSize() const -> QSize;
+    void SetSize(const QSize &value);
+
+    auto GetResolution() const -> double;
+    void SetResolution(double value);
+
+    auto GetFileName() const -> QString;
+    void SetFileName(const QString &value);
+
+    auto GetVersion() const -> DRW::Version;
+    void SetVersion(DRW::Version version);
 
     void SetBinaryFormat(bool binary);
-    bool IsBinaryFormat() const;
+    auto IsBinaryFormat() const -> bool;
 
-    std::string getPenStyle();
-    int getPenColor();
+    auto GetPenStyle() -> std::string;
+    auto GetPenColor() -> int;
 
-    void setMeasurement(const VarMeasurement &var);
-    void setInsunits(const VarInsunits &var);
+    void SetMeasurement(const VarMeasurement &var);
+    void SetInsunits(const VarInsunits &var);
 
-    qreal GetXScale() const;
-    void  SetXScale(const qreal &xscale);
+    auto GetXScale() const -> qreal;
+    void SetXScale(const qreal &xscale);
 
-    qreal GetYScale() const;
-    void  SetYScale(const qreal &yscale);
+    auto GetYScale() const -> qreal;
+    void SetYScale(const qreal &yscale);
 
-    QString ErrorString() const;
+    auto ErrorString() const -> QString;
 
 private:
     Q_DISABLE_COPY_MOVE(VDxfEngine) // NOLINT
-    QSize            size;
-    double           resolution;
-    QString          fileName;
-    DRW::Version     m_version;
-    bool             m_binary;
-    QTransform       matrix;
-    QSharedPointer<dx_iface> input;
-    VarMeasurement varMeasurement;
-    VarInsunits varInsunits;
-    DRW_Text *textBuffer;
+
+    QSize m_size{};
+    double m_resolution{static_cast<int>(PrintDPI)};
+    QString m_fileName{};
+    DRW::Version m_version{DRW::AC1014};
+    bool m_binary{false};
+    QTransform m_matrix{};
+    QSharedPointer<dx_iface> m_input{};
+    VarMeasurement m_varMeasurement{VarMeasurement::Metric};
+    VarInsunits m_varInsunits{VarInsunits::Millimeters};
+    DRW_Text *m_textBuffer{nullptr};
     qreal m_xscale{1};
     qreal m_yscale{1};
 
-    Q_REQUIRED_RESULT double FromPixel(double pix, const VarInsunits &unit) const;
-    Q_REQUIRED_RESULT double ToPixel(double val, const VarInsunits &unit) const;
+    Q_REQUIRED_RESULT auto FromPixel(double pix, const VarInsunits &unit) const -> double;
+    Q_REQUIRED_RESULT auto ToPixel(double val, const VarInsunits &unit) const -> double;
 
-    bool ExportToAAMA(const QVector<VLayoutPiece> &details);
+    auto ExportToAAMA(const QVector<VLayoutPiece> &details) -> bool;
     void ExportAAMAOutline(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
     void ExportAAMADraw(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
     void ExportAAMAIntcut(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
@@ -128,7 +132,7 @@ private:
     void ExportStyleSystemText(const QSharedPointer<dx_iface> &input, const QVector<VLayoutPiece> &details);
     void ExportAAMADrill(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
 
-    bool ExportToASTM(const QVector<VLayoutPiece> &details);
+    auto ExportToASTM(const QVector<VLayoutPiece> &details) -> bool;
     void ExportASTMPieceBoundary(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
     void ExportASTMSewLine(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
     void ExportASTMInternalLine(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
@@ -137,15 +141,17 @@ private:
     void ExportASTMDrill(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
     void ExportASTMNotch(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
 
-    Q_REQUIRED_RESULT DRW_Entity *AAMAPolygon(const QVector<QPointF> &polygon, const QString &layer, bool forceClosed);
-    Q_REQUIRED_RESULT DRW_Entity *AAMALine(const QLineF &line, const QString &layer);
-    Q_REQUIRED_RESULT DRW_Entity *AAMAText(const QPointF &pos, const QString &text, const QString &layer);
+    Q_REQUIRED_RESULT auto AAMAPolygon(const QVector<QPointF> &polygon, const UTF8STRING &layer,
+                                       bool forceClosed) -> DRW_Entity *;
+    Q_REQUIRED_RESULT auto AAMALine(const QLineF &line, const UTF8STRING &layer) -> DRW_Entity *;
+    Q_REQUIRED_RESULT auto AAMAText(const QPointF &pos, const QString &text, const UTF8STRING &layer) -> DRW_Entity *;
 
     template<class P, class V>
-    Q_REQUIRED_RESULT P *CreateAAMAPolygon(const QVector<QPointF> &polygon, const QString &layer, bool forceClosed);
+    Q_REQUIRED_RESULT auto CreateAAMAPolygon(const QVector<QPointF> &polygon, const UTF8STRING &layer,
+                                             bool forceClosed) -> P *;
 
-    static std::string FromUnicodeToCodec(const QString &str, QTextCodec *codec);
-    std::string getFileNameForLocale() const;
+    static auto FromUnicodeToCodec(const QString &str, QTextCodec *codec) -> std::string;
+    auto GetFileNameForLocale() const -> std::string;
 };
 
 #endif // VDXFENGINE_H

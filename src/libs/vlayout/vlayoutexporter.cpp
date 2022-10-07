@@ -251,12 +251,12 @@ void VLayoutExporter::ExportToFlatDXF(QGraphicsScene *scene, const QList<QGraphi
     PrepareTextForDXF(endStringPlaceholder, details);
 
     VDxfPaintDevice generator;
-    generator.setFileName(m_fileName);
-    generator.setSize(QSize(qFloor(m_imageRect.width() * m_xScale), qFloor(m_imageRect.height() * m_yScale)));
-    generator.setResolution(PrintDPI);
+    generator.SetFileName(m_fileName);
+    generator.SetSize(QSize(qFloor(m_imageRect.width() * m_xScale), qFloor(m_imageRect.height() * m_yScale)));
+    generator.SetResolution(PrintDPI);
     generator.SetVersion(static_cast<DRW::Version>(m_dxfVersion));
     generator.SetBinaryFormat(m_binaryDxfFormat);
-    generator.setInsunits(VarInsunits::Millimeters);// Decided to always use mm. See issue #745
+    generator.SetInsunits(VarInsunits::Millimeters);// Decided to always use mm. See issue #745
 
     QPainter painter;
     if (painter.begin(&generator))
@@ -277,12 +277,12 @@ void VLayoutExporter::ExportToFlatDXF(QGraphicsScene *scene, const QList<QGraphi
 void VLayoutExporter::ExportToAAMADXF(const QVector<VLayoutPiece> &details) const
 {
     VDxfPaintDevice generator;
-    generator.setFileName(m_fileName);
-    generator.setSize(QSize(qCeil(m_imageRect.width() * m_xScale), qCeil(m_imageRect.height() * m_yScale)));
-    generator.setResolution(PrintDPI);
+    generator.SetFileName(m_fileName);
+    generator.SetSize(QSize(qCeil(m_imageRect.width() * m_xScale), qCeil(m_imageRect.height() * m_yScale)));
+    generator.SetResolution(PrintDPI);
     generator.SetVersion(static_cast<DRW::Version>(m_dxfVersion));
     generator.SetBinaryFormat(m_binaryDxfFormat);
-    generator.setInsunits(VarInsunits::Millimeters);// Decided to always use mm. See issue #745
+    generator.SetInsunits(VarInsunits::Millimeters);// Decided to always use mm. See issue #745
     generator.SetXScale(m_xScale);
     generator.SetYScale(m_yScale);
     if (not generator.ExportToAAMA(details))
@@ -296,12 +296,12 @@ void VLayoutExporter::ExportToAAMADXF(const QVector<VLayoutPiece> &details) cons
 void VLayoutExporter::ExportToASTMDXF(const QVector<VLayoutPiece> &details) const
 {
     VDxfPaintDevice generator;
-    generator.setFileName(m_fileName);
-    generator.setSize(QSize(qCeil(m_imageRect.width() * m_xScale), qCeil(m_imageRect.height() * m_yScale)));
-    generator.setResolution(PrintDPI);
+    generator.SetFileName(m_fileName);
+    generator.SetSize(QSize(qCeil(m_imageRect.width() * m_xScale), qCeil(m_imageRect.height() * m_yScale)));
+    generator.SetResolution(PrintDPI);
     generator.SetVersion(static_cast<DRW::Version>(m_dxfVersion));
     generator.SetBinaryFormat(m_binaryDxfFormat);
-    generator.setInsunits(VarInsunits::Millimeters);// Decided to always use mm. See issue #745
+    generator.SetInsunits(VarInsunits::Millimeters);// Decided to always use mm. See issue #745
     generator.SetXScale(m_xScale);
     generator.SetYScale(m_yScale);
     if (not generator.ExportToASTM(details))

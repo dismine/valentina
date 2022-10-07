@@ -45,45 +45,46 @@ class VDxfPaintDevice : public QPaintDevice
 {
 public:
     VDxfPaintDevice();
-    virtual ~VDxfPaintDevice() override;
-    virtual QPaintEngine *paintEngine() const override;
+    ~VDxfPaintDevice() override;
 
-    QString getFileName() const;
-    void setFileName(const QString &value);
+    auto paintEngine() const -> QPaintEngine * override;
 
-    QSize getSize();
-    void setSize(const QSize &size);
+    auto GetFileName() const -> QString;
+    void SetFileName(const QString &value);
 
-    double getResolution() const;
-    void   setResolution(double dpi);
+    auto GetSize() -> QSize;
+    void SetSize(const QSize &size);
 
-    DRW::Version GetVersion() const;
-    void         SetVersion(DRW::Version version);
+    auto GetResolution() const -> double;
+    void SetResolution(double dpi);
+
+    auto GetVersion() const -> DRW::Version;
+    void SetVersion(DRW::Version version);
 
     void SetBinaryFormat(bool binary);
-    bool IsBinaryFromat() const;
+    auto IsBinaryFromat() const -> bool;
 
-    void setMeasurement(const VarMeasurement &var);
-    void setInsunits(const VarInsunits &var);
+    void SetMeasurement(const VarMeasurement &var);
+    void SetInsunits(const VarInsunits &var);
 
-    qreal GetXScale() const;
-    void  SetXScale(const qreal &xscale);
+    auto GetXScale() const -> qreal;
+    void SetXScale(const qreal &xscale);
 
-    qreal GetYScale() const;
-    void  SetYScale(const qreal &yscale);
+    auto GetYScale() const -> qreal;
+    void SetYScale(const qreal &yscale);
 
-    bool ExportToAAMA(const QVector<VLayoutPiece> &details) const;
-    bool ExportToASTM(const QVector<VLayoutPiece> &details) const;
+    auto ExportToAAMA(const QVector<VLayoutPiece> &details) const -> bool;
+    auto ExportToASTM(const QVector<VLayoutPiece> &details) const -> bool;
 
-    QString ErrorString() const;
+    auto ErrorString() const -> QString;
 
 protected:
-    virtual int metric(PaintDeviceMetric metric) const override;
+    auto metric(PaintDeviceMetric metric) const -> int override;
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VDxfPaintDevice) // NOLINT
-    VDxfEngine *engine;
-    QString     fileName;
+    VDxfEngine *m_engine;
+    QString     m_fileName{};
 };
 
 #endif // VDXFPAINTDEVICE_H

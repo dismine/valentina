@@ -35,213 +35,212 @@
 
  //---------------------------------------------------------------------------------------------------------------------
 VDxfPaintDevice::VDxfPaintDevice()
-    :QPaintDevice(), engine(new VDxfEngine()), fileName()
-{
-}
+    :m_engine(new VDxfEngine())
+{}
 
  //---------------------------------------------------------------------------------------------------------------------
 VDxfPaintDevice::~VDxfPaintDevice()
 {
-    delete engine;
+    delete m_engine;
 }
 
  //---------------------------------------------------------------------------------------------------------------------
  // cppcheck-suppress unusedFunction
-QPaintEngine *VDxfPaintDevice::paintEngine() const
+auto VDxfPaintDevice::paintEngine() const -> QPaintEngine *
 {
-    return engine;
+    return m_engine;
 }
 
  //---------------------------------------------------------------------------------------------------------------------
  // cppcheck-suppress unusedFunction
-QString VDxfPaintDevice::getFileName() const
+auto VDxfPaintDevice::GetFileName() const -> QString
 {
-    return fileName;
+    return m_fileName;
 }
 
  //---------------------------------------------------------------------------------------------------------------------
-void VDxfPaintDevice::setFileName(const QString &value)
+void VDxfPaintDevice::SetFileName(const QString &value)
 {
-    if (engine->isActive())
+    if (m_engine->isActive())
     {
         qWarning("VDxfPaintDevice::setFileName(), cannot set file name while Dxf is being generated");
         return;
     }
 
-    fileName = value;
-    engine->setFileName(fileName);
+    m_fileName = value;
+    m_engine->SetFileName(m_fileName);
 }
 
  //---------------------------------------------------------------------------------------------------------------------
-QSize VDxfPaintDevice::getSize()
+auto VDxfPaintDevice::GetSize() -> QSize
 {
-    return engine->getSize();
+    return m_engine->GetSize();
 }
 
  //---------------------------------------------------------------------------------------------------------------------
-void VDxfPaintDevice::setSize(const QSize &size)
+void VDxfPaintDevice::SetSize(const QSize &size)
 {
-    if (engine->isActive())
+    if (m_engine->isActive())
     {
         qWarning("VDxfPaintDevice::setSize(), cannot set size while Dxf is being generated");
         return;
     }
-    engine->setSize(size);
+    m_engine->SetSize(size);
 }
 
  //---------------------------------------------------------------------------------------------------------------------
-double VDxfPaintDevice::getResolution() const
+auto VDxfPaintDevice::GetResolution() const -> double
 {
-    return engine->getResolution();
+    return m_engine->GetResolution();
 }
 
  //---------------------------------------------------------------------------------------------------------------------
-void VDxfPaintDevice::setResolution(double dpi)
+void VDxfPaintDevice::SetResolution(double dpi)
 {
-    if (engine->isActive())
+    if (m_engine->isActive())
     {
         qWarning("VDxfPaintDevice::setResolution(), cannot set dpi while Dxf is being generated");
         return;
     }
-    engine->setResolution(dpi);
+    m_engine->SetResolution(dpi);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-DRW::Version VDxfPaintDevice::GetVersion() const
+auto VDxfPaintDevice::GetVersion() const -> DRW::Version
 {
-    return engine->GetVersion();
+    return m_engine->GetVersion();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfPaintDevice::SetVersion(DRW::Version version)
 {
-    if (engine->isActive())
+    if (m_engine->isActive())
     {
         qWarning("VDxfPaintDevice::SetVersion(), cannot set version while Dxf is being generated");
         return;
     }
-    engine->SetVersion(version);
+    m_engine->SetVersion(version);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfPaintDevice::SetBinaryFormat(bool binary)
 {
-    if (engine->isActive())
+    if (m_engine->isActive())
     {
         qWarning("VDxfPaintDevice::SetBinaryFormat(), cannot set binary format while Dxf is being generated");
         return;
     }
-    engine->SetBinaryFormat(binary);
+    m_engine->SetBinaryFormat(binary);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VDxfPaintDevice::IsBinaryFromat() const
+auto VDxfPaintDevice::IsBinaryFromat() const -> bool
 {
-    return engine->IsBinaryFormat();
+    return m_engine->IsBinaryFormat();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfPaintDevice::setMeasurement(const VarMeasurement &var)
+void VDxfPaintDevice::SetMeasurement(const VarMeasurement &var)
 {
-    if (engine->isActive())
+    if (m_engine->isActive())
     {
         qWarning("VDxfPaintDevice::setMeasurement(), cannot set measurements while Dxf is being generated");
         return;
     }
-    engine->setMeasurement(var);
+    m_engine->SetMeasurement(var);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfPaintDevice::setInsunits(const VarInsunits &var)
+void VDxfPaintDevice::SetInsunits(const VarInsunits &var)
 {
-    if (engine->isActive())
+    if (m_engine->isActive())
     {
         qWarning("VDxfPaintDevice::setInsunits(), cannot set units while Dxf is being generated");
         return;
     }
-    engine->setInsunits(var);
+    m_engine->SetInsunits(var);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VDxfPaintDevice::GetXScale() const
+auto VDxfPaintDevice::GetXScale() const -> qreal
 {
-    return engine->GetYScale();
+    return m_engine->GetYScale();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfPaintDevice::SetXScale(const qreal &xscale)
 {
-    if (engine->isActive())
+    if (m_engine->isActive())
     {
         qWarning("VDxfPaintDevice::SetXScale(), cannot set x scale while Dxf is being generated");
         return;
     }
-    engine->SetXScale(xscale);
+    m_engine->SetXScale(xscale);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VDxfPaintDevice::GetYScale() const
+auto VDxfPaintDevice::GetYScale() const -> qreal
 {
-    return engine->GetXScale();
+    return m_engine->GetXScale();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfPaintDevice::SetYScale(const qreal &yscale)
 {
-    if (engine->isActive())
+    if (m_engine->isActive())
     {
         qWarning("VDxfPaintDevice::SetYScale(), cannot set y scale while Dxf is being generated");
         return;
     }
-    engine->SetYScale(yscale);
+    m_engine->SetYScale(yscale);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VDxfPaintDevice::ExportToAAMA(const QVector<VLayoutPiece> &details) const
+auto VDxfPaintDevice::ExportToAAMA(const QVector<VLayoutPiece> &details) const -> bool
 {
-    engine->setActive(true);
-    const bool res = engine->ExportToAAMA(details);
-    engine->setActive(false);
+    m_engine->setActive(true);
+    const bool res = m_engine->ExportToAAMA(details);
+    m_engine->setActive(false);
     return res;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VDxfPaintDevice::ExportToASTM(const QVector<VLayoutPiece> &details) const
+auto VDxfPaintDevice::ExportToASTM(const QVector<VLayoutPiece> &details) const -> bool
 {
-    engine->setActive(true);
-    const bool res = engine->ExportToASTM(details);
-    engine->setActive(false);
+    m_engine->setActive(true);
+    const bool res = m_engine->ExportToASTM(details);
+    m_engine->setActive(false);
     return res;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VDxfPaintDevice::ErrorString() const
+auto VDxfPaintDevice::ErrorString() const -> QString
 {
-    return engine->ErrorString();
+    return m_engine->ErrorString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VDxfPaintDevice::metric(QPaintDevice::PaintDeviceMetric metric) const
+auto VDxfPaintDevice::metric(QPaintDevice::PaintDeviceMetric metric) const -> int
 {
     switch (metric)
     {
         case QPaintDevice::PdmDepth:
             return 32;
         case QPaintDevice::PdmWidth:
-            return engine->getSize().width();
+            return m_engine->GetSize().width();
         case QPaintDevice::PdmHeight:
-            return engine->getSize().height();
+            return m_engine->GetSize().height();
         case QPaintDevice::PdmHeightMM:
-            return qRound(engine->getSize().height() * 25.4 / engine->getResolution());
+            return qRound(m_engine->GetSize().height() * 25.4 / m_engine->GetResolution());
         case QPaintDevice::PdmWidthMM:
-            return qRound(engine->getSize().width() * 25.4 / engine->getResolution());
+            return qRound(m_engine->GetSize().width() * 25.4 / m_engine->GetResolution());
         case QPaintDevice::PdmNumColors:
             return static_cast<int>(0xffffffff);
         case QPaintDevice::PdmPhysicalDpiX:
         case QPaintDevice::PdmPhysicalDpiY:
         case QPaintDevice::PdmDpiX:
         case QPaintDevice::PdmDpiY:
-            return static_cast<int>(engine->getResolution());
+            return static_cast<int>(m_engine->GetResolution());
         case QPaintDevice::PdmDevicePixelRatio:
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
         case QPaintDevice::PdmDevicePixelRatioScaled:
