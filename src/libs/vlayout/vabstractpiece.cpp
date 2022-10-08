@@ -53,10 +53,6 @@ const quint16 VAbstractPieceData::classVersion = 3;
 
 const qreal maxL = 3.5;
 
-const qreal VSAPoint::passmarkFactor = 0.5;
-const qreal VSAPoint::maxPassmarkLength = MmToPixel(10.);
-const qreal VSAPoint::minSAWidth = accuracyPointOnLine + accuracyPointOnLine*0.5;
-
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
@@ -1656,45 +1652,6 @@ void VAbstractPiece::SetUUID(const QString &uuid)
 auto VAbstractPiece::GetUniqueID() const -> QString
 {
     return d->m_uuid.toString();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VSAPoint::GetSABefore(qreal width) const -> qreal
-{
-    if (m_before < 0)
-    {
-        return width;
-    }
-    return qMax(m_before, minSAWidth);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VSAPoint::GetSAAfter(qreal width) const -> qreal
-{
-    if (m_after < 0)
-    {
-        return width;
-    }
-    return qMax(m_after, minSAWidth);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VSAPoint::MaxLocalSA(qreal width) const -> qreal
-{
-    return qMax(GetSAAfter(width), GetSABefore(width));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VSAPoint::PassmarkLength(qreal width) const -> qreal
-{
-    if (not m_manualPassmarkLength)
-    {
-        qreal passmarkLength = MaxLocalSA(width) * passmarkFactor;
-        passmarkLength = qMin(passmarkLength, maxPassmarkLength);
-        return passmarkLength;
-    }
-
-    return m_passmarkLength;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

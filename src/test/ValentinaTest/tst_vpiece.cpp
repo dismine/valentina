@@ -30,9 +30,6 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpiece.h"
 #include "../vpatterndb/vpassmark.h"
-#include "../vpatterndb/vpiecenode.h"
-#include "../vpatterndb/vpiecepath.h"
-#include "../vgeometry/vsplinepath.h"
 #include "../vmisc/vabstractvalapplication.h"
 
 #include <QtTest>
@@ -75,6 +72,9 @@ void TST_VPiece::TestSAPassmark_data()
     auto ASSERT_TEST_CASE = [this](const char *title, const QString &passmarkData, const QString &seamAllowance,
             const QString &shape)
     {
+        QT_WARNING_PUSH
+        QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
         VPiecePassmarkData inputPassmarkData;
         AbstractTest::PassmarkDataFromJson(passmarkData, inputPassmarkData);
 
@@ -85,6 +85,8 @@ void TST_VPiece::TestSAPassmark_data()
         AbstractTest::PassmarkShapeFromJson(shape, inputOutputShape);
 
         QTest::newRow(title) << inputPassmarkData << inputSeamAllowance << inputOutputShape;
+
+        QT_WARNING_POP
     };
 
     // See file src/app/share/collection/bugs/Issue_#924.val

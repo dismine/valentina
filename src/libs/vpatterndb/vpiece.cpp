@@ -1110,6 +1110,9 @@ VPassmark VPiece::CreatePassmark(const QVector<VPieceNode> &path, int previousIn
         return VPassmark();
     }
 
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
     VPiecePassmarkData passmarkData;
     passmarkData.previousSAPoint = previousSAPoint;
     passmarkData.passmarkSAPoint = passmarkSAPoint;
@@ -1124,6 +1127,8 @@ VPassmark VPiece::CreatePassmark(const QVector<VPieceNode> &path, int previousIn
     passmarkData.passmarkIndex = passmarkIndex;
     passmarkData.id = path.at(passmarkIndex).GetId();
     passmarkData.globalPassmarkLength = ToPixel(GlobalPassmarkLength(data), *data->GetPatternUnit());
+
+    QT_WARNING_POP
 
     return VPassmark(passmarkData);
 }
