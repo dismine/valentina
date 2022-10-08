@@ -84,10 +84,16 @@
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #define Q_DISABLE_MOVE(Class) \
-Class(Class &&) = delete; \
+    Class(Class &&) = delete; \
     Class &operator=(Class &&) = delete;
 #define Q_DISABLE_COPY_MOVE(Class) \
-Q_DISABLE_COPY(Class) \
+    Q_DISABLE_COPY(Class) \
+    Q_DISABLE_MOVE(Class)
+#endif
+
+#ifndef Q_DISABLE_ASSIGN_MOVE
+#define Q_DISABLE_ASSIGN_MOVE(Class) \
+    Q_DISABLE_ASSIGN(Class) \
     Q_DISABLE_MOVE(Class)
 #endif
 

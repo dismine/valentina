@@ -43,7 +43,7 @@ void qAsConst(const T &&) Q_DECL_EQ_DELETE;
 
 #ifndef Q_DISABLE_ASSIGN
 #define Q_DISABLE_ASSIGN(Class) \
-    Class &operator=(const Class &) Q_DECL_EQ_DELETE;
+    Class &operator=(const Class &) = delete;
 #endif
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
@@ -52,6 +52,12 @@ void qAsConst(const T &&) Q_DECL_EQ_DELETE;
     Class &operator=(Class &&) = delete;
 #define Q_DISABLE_COPY_MOVE(Class) \
     Q_DISABLE_COPY(Class) \
+    Q_DISABLE_MOVE(Class)
+#endif
+
+#ifndef Q_DISABLE_ASSIGN_MOVE
+#define Q_DISABLE_ASSIGN_MOVE(Class) \
+    Q_DISABLE_ASSIGN(Class) \
     Q_DISABLE_MOVE(Class)
 #endif
 
