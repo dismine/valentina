@@ -2,6 +2,7 @@
 - Fix layout sheet export with empty name.
 - Fix visualization for tool Point from circle and tangent.
 - Fix loading background image.
+- [smart-pattern/valentina#187] Puzzle: message "Invalid version: Max supported version 0.1.2" when opening 0.1.1 file in Val 0.7.52.
 
 # Valentina 0.7.52 September 12, 2022
 - Fix crash when default locale is ru.

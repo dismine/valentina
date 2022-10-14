@@ -109,7 +109,7 @@ void VLayoutConverter::ApplyPatches()
         case (FormatVersion(0, 1, 0)):
         case (FormatVersion(0, 1, 1)):
             ToV0_1_2();
-            ValidateXML(XSDSchema(FormatVersion(0, 1, 12)));
+            ValidateXML(XSDSchema(FormatVersion(0, 1, 2)));
             Q_FALLTHROUGH();
         case (FormatVersion(0, 1, 2)):
             break;
