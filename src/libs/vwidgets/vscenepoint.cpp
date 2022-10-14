@@ -66,6 +66,9 @@ void VScenePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 {
     const qreal scale = SceneScale(scene());
 
+    ScaleMainPenWidth(scale);
+    ScaleCircleSize(this, scale);
+
     if (VAbstractApplication::VApp()->Settings()->GetLabelFontSize()*scale < minVisibleFontSize ||
             VAbstractApplication::VApp()->Settings()->GetHideLabels())
     {
@@ -74,9 +77,6 @@ void VScenePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     }
     else
     {
-        ScaleMainPenWidth(scale);
-        ScaleCircleSize(this, scale);
-
         if (not m_onlyPoint)
         {
             m_namePoint->setVisible(m_showLabel);

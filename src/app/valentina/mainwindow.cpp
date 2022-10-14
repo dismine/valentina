@@ -2973,6 +2973,7 @@ void MainWindow::ToolBarTools()
     });
 
     ui->actionHideLabels->setShortcut(QKeySequence(Qt::AltModifier + Qt::Key_L));
+    ui->actionHideLabels->setChecked(VAbstractValApplication::VApp()->ValentinaSettings()->GetHideLabels());
     connect(ui->actionHideLabels, &QAction::triggered, this, [this](bool checked)
     {
         VAbstractValApplication::VApp()->ValentinaSettings()->SetHideLabels(checked);
