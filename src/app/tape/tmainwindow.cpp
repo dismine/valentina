@@ -816,8 +816,12 @@ void TMainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int 
         {
             if (not ui->tableWidget->isColumnHidden(column))
             {
-                QTableWidgetItem *header = ui->tableWidget->horizontalHeaderItem(column);
-                csv.setHeaderText(colCount, header->text());
+                QString text;
+                if (QTableWidgetItem *header = ui->tableWidget->horizontalHeaderItem(column))
+                {
+                    text = header->text();
+                }
+                csv.setHeaderText(colCount, text);
                 ++colCount;
             }
         }
@@ -832,8 +836,12 @@ void TMainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int 
         {
             if (not ui->tableWidget->isColumnHidden(column))
             {
-                QTableWidgetItem *item = ui->tableWidget->item(row, column);
-                csv.setText(row, colCount, item->text());
+                QString text;
+                if(QTableWidgetItem *item = ui->tableWidget->item(row, column))
+                {
+                    text = item->text();
+                }
+                csv.setText(row, colCount, text);
                 ++colCount;
             }
         }
