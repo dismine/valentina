@@ -113,8 +113,8 @@ public:
 
     VPiecePath RemoveEdge(quint32 index) const;
 
-    VSAPoint StartSegment(const VContainer *data, int i, bool reverse) const;
-    VSAPoint EndSegment(const VContainer *data, int i, bool reverse) const;
+    VSAPoint StartSegment(const VContainer *data, int i) const;
+    VSAPoint EndSegment(const VContainer *data, int i) const;
 
     QPointF NodePreviousPoint(const VContainer *data, int i) const;
     QPointF NodeNextPoint(const VContainer *data, int i) const;
@@ -126,8 +126,8 @@ public:
     static int FindInLoopNotExcludedUp(int start, const QVector<VPieceNode> &nodes);
     static int FindInLoopNotExcludedDown(int start, const QVector<VPieceNode> &nodes);
 
-    static VSAPoint StartSegment(const VContainer *data, const QVector<VPieceNode> &nodes, int i, bool reverse);
-    static VSAPoint EndSegment(const VContainer *data, const QVector<VPieceNode> &nodes, int i, bool reverse);
+    static VSAPoint StartSegment(const VContainer *data, const QVector<VPieceNode> &nodes, int i);
+    static VSAPoint EndSegment(const VContainer *data, const QVector<VPieceNode> &nodes, int i);
 
     static VSAPoint PreparePointEkv(const VPieceNode &node, const VContainer *data);
 

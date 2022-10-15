@@ -67,22 +67,34 @@ VSAPoint CurveStartPoint(VSAPoint candidate, const VContainer *data, const VPiec
     {
         return CurvePoint(candidate, data, node, curvePoints);
     }
-    else
-    {
-        // See issue #620. Detail path not correct. Previous curve also should cut segment.
-        const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
 
-        const QVector<QPointF> points = curve->GetPoints();
-        if (not points.isEmpty())
-        {
-            QPointF end; // Last point for this curve show start of next segment
-            node.GetReverse() ? end = ConstFirst(points) : end = ConstLast(points);
-            if (VAbstractCurve::IsPointOnCurve(curvePoints, end))
-            {
-                candidate = VSAPoint(end);
-            }
-        }
+    // See issue #620. Detail path not correct. Previous curve also should cut segment.
+    const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
+    const QVector<QPointF> points = curve->GetPoints();
+
+    if (points.isEmpty())
+    {
+        return candidate;
     }
+
+    QVector<QPointF> intersections;
+    for (auto i = 0; i < curvePoints.count()-1; ++i)
+    {
+        QLineF segment(curvePoints.at(i), curvePoints.at(i+1));
+        intersections << VAbstractCurve::CurveIntersectLine(points, segment);
+    }
+
+    for(auto &p : intersections)
+    {
+        if (VFuzzyComparePoints(p, ConstFirst(curvePoints)) || VFuzzyComparePoints(p, ConstLast(curvePoints)))
+        {
+            continue;
+        }
+
+        candidate = VSAPoint(p);
+        break;
+    }
+
     return candidate;
 }
 
@@ -94,22 +106,34 @@ VSAPoint CurveEndPoint(VSAPoint candidate, const VContainer *data, const VPieceN
     {
         return CurvePoint(candidate, data, node, curvePoints);
     }
-    else
-    {
-        // See issue #620. Detail path not correct. Previous curve also should cut segment.
-        const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
 
-        const QVector<QPointF> points = curve->GetPoints();
-        if (not points.isEmpty())
-        {
-            QPointF begin;// First point for this curve show finish of previous segment
-            node.GetReverse() ? begin = ConstLast(points) : begin = ConstFirst(points);
-            if (VAbstractCurve::IsPointOnCurve(curvePoints, begin))
-            {
-                candidate = VSAPoint(begin);
-            }
-        }
+    // See issue #620. Detail path not correct. Previous curve also should cut segment.
+    const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
+    const QVector<QPointF> points = curve->GetPoints();
+
+    if (points.isEmpty())
+    {
+        return candidate;
     }
+
+    QVector<QPointF> intersections;
+    for (auto i = 0; i < curvePoints.count()-1; ++i)
+    {
+        QLineF segment(curvePoints.at(i), curvePoints.at(i+1));
+        intersections << VAbstractCurve::CurveIntersectLine(points, segment);
+    }
+
+    for(auto &p : intersections)
+    {
+        if (VFuzzyComparePoints(p, ConstFirst(curvePoints)) || VFuzzyComparePoints(p, ConstLast(curvePoints)))
+        {
+            continue;
+        }
+
+        candidate = VSAPoint(p);
+        break;
+    }
+
     return candidate;
 }
 
@@ -461,8 +485,8 @@ QVector<QVector<QPointF> > VPiecePath::PathCurvePoints(const VContainer *data) c
             {
                 const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(at(i).GetId());
 
-                const QPointF begin = StartSegment(data, i, at(i).GetReverse());
-                const QPointF end = EndSegment(data, i, at(i).GetReverse());
+                const QPointF begin = StartSegment(data, i);
+                const QPointF end = EndSegment(data, i);
 
                 curves.append(curve->GetSegmentPoints(begin, end, at(i).GetReverse(), GetName()));
                 break;
@@ -536,23 +560,27 @@ QVector<QPainterPath> VPiecePath::CurvesPainterPath(const VContainer *data) cons
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSAPoint VPiecePath::StartSegment(const VContainer *data, const QVector<VPieceNode> &nodes, int i, bool reverse)
+VSAPoint VPiecePath::StartSegment(const VContainer *data, const QVector<VPieceNode> &nodes, int i)
 {
     if (i < 0 || i > nodes.size()-1)
     {
-        return VSAPoint();
+        return {};
     }
 
     const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(nodes.at(i).GetId());
 
-    const QVector<QPointF> points = curve->GetPoints();
+    QVector<QPointF> points = curve->GetPoints();
     if (points.isEmpty())
     {
-        return VSAPoint();
+        return {};
     }
 
-    VSAPoint begin;
-    reverse ? begin = VSAPoint(ConstLast(points)) : begin = VSAPoint(ConstFirst(points));
+    if (nodes.at(i).GetReverse())
+    {
+        points = Reverse(points);
+    }
+
+    VSAPoint begin(ConstFirst(points));
 
     if (nodes.size() > 1)
     {
@@ -567,23 +595,27 @@ VSAPoint VPiecePath::StartSegment(const VContainer *data, const QVector<VPieceNo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSAPoint VPiecePath::EndSegment(const VContainer *data, const QVector<VPieceNode> &nodes, int i, bool reverse)
+VSAPoint VPiecePath::EndSegment(const VContainer *data, const QVector<VPieceNode> &nodes, int i)
 {
     if (i < 0 || i > nodes.size()-1)
     {
-        return VSAPoint();
+        return {};
     }
 
     const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(nodes.at(i).GetId());
 
-    const QVector<QPointF> points = curve->GetPoints();
+    QVector<QPointF> points = curve->GetPoints();
     if (points.isEmpty())
     {
-        return VSAPoint();
+        return {};
     }
 
-    VSAPoint end;
-    reverse ? end = VSAPoint(ConstFirst(points)) : end = VSAPoint(ConstLast(points));
+    if (nodes.at(i).GetReverse())
+    {
+        points = Reverse(points);
+    }
+
+    VSAPoint end(ConstLast(points));
 
     if (nodes.size() > 2)
     {
@@ -836,15 +868,15 @@ VPiecePath VPiecePath::RemoveEdge(quint32 index) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSAPoint VPiecePath::StartSegment(const VContainer *data, int i, bool reverse) const
+VSAPoint VPiecePath::StartSegment(const VContainer *data, int i) const
 {
-    return StartSegment(data, d->m_nodes, i, reverse);
+    return StartSegment(data, d->m_nodes, i);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSAPoint VPiecePath::EndSegment(const VContainer *data, int i, bool reverse) const
+VSAPoint VPiecePath::EndSegment(const VContainer *data, int i) const
 {
-    return EndSegment(data, d->m_nodes, i, reverse);
+    return EndSegment(data, d->m_nodes, i);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -879,8 +911,8 @@ QPointF VPiecePath::NodePreviousPoint(const VContainer *data, int i) const
             {
                 const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
 
-                const VSAPoint begin = StartSegment(data, d->m_nodes, index, node.GetReverse());
-                const VSAPoint end = EndSegment(data, d->m_nodes, index, node.GetReverse());
+                const VSAPoint begin = StartSegment(data, d->m_nodes, index);
+                const VSAPoint end = EndSegment(data, d->m_nodes, index);
 
                 const QVector<QPointF> points = curve->GetSegmentPoints(begin, end, node.GetReverse(), GetName());
                 if (points.size() > 1)
@@ -931,8 +963,8 @@ QPointF VPiecePath::NodeNextPoint(const VContainer *data, int i) const
             {
                 const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
 
-                const VSAPoint begin = StartSegment(data, d->m_nodes, index, node.GetReverse());
-                const VSAPoint end = EndSegment(data, d->m_nodes, index, node.GetReverse());
+                const VSAPoint begin = StartSegment(data, d->m_nodes, index);
+                const VSAPoint end = EndSegment(data, d->m_nodes, index);
 
                 const QVector<QPointF> points = curve->GetSegmentPoints(begin, end, node.GetReverse(), GetName());
                 if (points.size() > 1)
@@ -1086,17 +1118,16 @@ QVector<VSAPoint> VPiecePath::CurveSeamAllowanceSegment(const VContainer *data, 
                                                         const QSharedPointer<VAbstractCurve> &curve, int i,
                                                         bool reverse, qreal width, const QString &piece)
 {
-    QVector<VSAPoint> pointsEkv;
-
-    const VSAPoint begin = StartSegment(data, nodes, i, reverse);
-    const VSAPoint end = EndSegment(data, nodes, i, reverse);
+    const VSAPoint begin = StartSegment(data, nodes, i);
+    const VSAPoint end = EndSegment(data, nodes, i);
 
     const QVector<QPointF> points = curve->GetSegmentPoints(begin, end, reverse, piece);
     if (points.isEmpty())
     {
-        return pointsEkv;
+        return {};
     }
 
+    QVector<VSAPoint> pointsEkv;
     pointsEkv.reserve(points.size());
 
     qreal w1 = begin.GetSAAfter();
@@ -1221,8 +1252,8 @@ QVector<QPointF> VPiecePath::NodesToPoints(const VContainer *data, const QVector
                 const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
 
 
-                const QPointF begin = StartSegment(data, nodes, i, node.GetReverse());
-                const QPointF end = EndSegment(data, nodes, i, node.GetReverse());
+                const QPointF begin = StartSegment(data, nodes, i);
+                const QPointF end = EndSegment(data, nodes, i);
 
                 points << curve->GetSegmentPoints(begin, end, node.GetReverse(), piece);
             }
