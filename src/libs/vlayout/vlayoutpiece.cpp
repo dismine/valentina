@@ -67,7 +67,7 @@
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VLayoutPiecePath> ConvertInternalPaths(const VPiece &piece, const VContainer *pattern)
+auto ConvertInternalPaths(const VPiece &piece, const VContainer *pattern) -> QVector<VLayoutPiecePath>
 {
     SCASSERT(pattern != nullptr)
 
@@ -90,8 +90,8 @@ QVector<VLayoutPiecePath> ConvertInternalPaths(const VPiece &piece, const VConta
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FindLabelGeometry(const VPatternLabelData &labelData, const VContainer *pattern, qreal &rotationAngle,
-                       qreal &labelWidth, qreal &labelHeight, QPointF &pos)
+auto FindLabelGeometry(const VPatternLabelData &labelData, const VContainer *pattern, qreal &rotationAngle,
+                       qreal &labelWidth, qreal &labelHeight, QPointF &pos) -> bool
 {
     SCASSERT(pattern != nullptr)
 
@@ -176,7 +176,7 @@ bool FindLabelGeometry(const VPatternLabelData &labelData, const VContainer *pat
  * @param dAng angle of rotation
  * @return position of point pt after rotating it around the center for dAng radians
  */
-QPointF RotatePoint(const QPointF &ptCenter, const QPointF& pt, qreal dAng)
+auto RotatePoint(const QPointF &ptCenter, const QPointF& pt, qreal dAng) -> QPointF
 {
     QPointF ptDest;
     QPointF ptRel = pt - ptCenter;
@@ -187,7 +187,7 @@ QPointF RotatePoint(const QPointF &ptCenter, const QPointF& pt, qreal dAng)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList PieceLabelText(const QVector<QPointF> &labelShape, const VTextManager &tm)
+auto PieceLabelText(const QVector<QPointF> &labelShape, const VTextManager &tm) -> QStringList
 {
     QStringList text;
     if (labelShape.count() > 2)
@@ -203,7 +203,7 @@ QStringList PieceLabelText(const QVector<QPointF> &labelShape, const VTextManage
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VLayoutPlaceLabel> ConvertPlaceLabels(const VPiece &piece, const VContainer *pattern)
+auto ConvertPlaceLabels(const VPiece &piece, const VContainer *pattern) -> QVector<VLayoutPlaceLabel>
 {
     QVector<VLayoutPlaceLabel> labels;
     const auto placeLabels = piece.GetPlaceLabels();
@@ -226,185 +226,211 @@ QVector<VLayoutPlaceLabel> ConvertPlaceLabels(const VPiece &piece, const VContai
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer *pattern)
+auto PrepareSAPassmark(const VPiece &piece, const VContainer *pattern, const VPassmark &passmark,
+                       PassmarkSide side, bool &ok) -> VLayoutPassmark
+{
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wnoexcept")
+    // noexcept-expression evaluates to 'false' because of a call to 'constexpr QPointF::QPointF()'
+
+    VLayoutPassmark layoutPassmark;
+
+    QT_WARNING_POP
+
+    VPiecePassmarkData pData = passmark.Data();
+    const QVector<VPieceNode> path = piece.GetUnitedPath(pattern);
+    const int nodeIndex = VPiecePath::indexOfNode(path, pData.id);
+    if (nodeIndex == -1)
+    {
+        const QString errorMsg =
+            QObject::tr("Passmark '%1' is not part of piece '%2'.")
+                .arg(pData.nodeName, piece.GetName());
+        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+            qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        ok = false;
+        return {};
+    }
+
+    QVector<QLineF> baseLines = passmark.SAPassmarkBaseLine(piece, pattern, static_cast<PassmarkSide>(side));
+    if (baseLines.isEmpty())
+    {
+        const QString errorMsg =
+            QObject::tr("Cannot prepare passmark '%1' for piece '%2'. Passmark base line is empty.")
+                .arg(pData.nodeName, piece.GetName());
+        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+            qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        ok = false;
+        return {};
+    }
+
+    if (side == PassmarkSide::All || side == PassmarkSide::Right)
+    {
+        layoutPassmark.baseLine = ConstFirst(baseLines);
+    }
+    else if (side == PassmarkSide::Right)
+    {
+        layoutPassmark.baseLine = ConstLast(baseLines);
+    }
+
+    const QVector<QLineF> lines = passmark.SAPassmark(piece, pattern, side);
+    if (lines.isEmpty())
+    {
+        const QString errorMsg =
+            QObject::tr("Cannot prepare passmark '%1' for piece '%2'. Passmark is empty.")
+                .arg(pData.nodeName, piece.GetName());
+        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+            qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        ok = false;
+        return {};
+    }
+
+    layoutPassmark.lines = lines;
+    layoutPassmark.type = pData.passmarkLineType;
+    layoutPassmark.isBuiltIn = false;
+
+    ok = true;
+    return layoutPassmark;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto PreapreBuiltInSAPassmark(const VPiece &piece, const VContainer *pattern, const VPassmark &passmark,
+                              bool &ok) -> VLayoutPassmark
+{
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wnoexcept")
+    // noexcept-expression evaluates to 'false' because of a call to 'constexpr QPointF::QPointF()'
+
+    VLayoutPassmark layoutPassmark;
+
+    QT_WARNING_POP
+
+    VPiecePassmarkData pData = passmark.Data();
+    const QVector<VPieceNode> path = piece.GetUnitedPath(pattern);
+    const int nodeIndex = VPiecePath::indexOfNode(path, pData.id);
+    if (nodeIndex == -1)
+    {
+        const QString errorMsg =
+            QObject::tr("Passmark '%1' is not part of piece '%2'.")
+                .arg(pData.nodeName, piece.GetName());
+        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+            qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        ok = false;
+        return {};
+    }
+
+    const QVector<QLineF> lines = passmark.BuiltInSAPassmark(piece, pattern);
+    if (lines.isEmpty())
+    {
+        const QString errorMsg =
+            QObject::tr("Cannot prepare builtin passmark '%1' for piece '%2'. Passmark is empty.")
+                .arg(pData.nodeName, piece.GetName());
+        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+            qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        ok = false;
+        return {};
+    }
+
+    layoutPassmark.lines = lines;
+
+    const QVector<QLineF> baseLines = passmark.BuiltInSAPassmarkBaseLine(piece);
+    if (baseLines.isEmpty())
+    {
+        const QString errorMsg =
+            QObject::tr("Cannot prepare builtin  passmark '%1' for piece '%2'. Passmark base line is "
+                        "empty.")
+                .arg(pData.nodeName, piece.GetName());
+        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+            qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        ok = false;
+        return {};
+    }
+
+    layoutPassmark.baseLine = ConstFirst (baseLines);
+    layoutPassmark.type = pData.passmarkLineType;
+    layoutPassmark.isBuiltIn = true;
+
+    ok = true;
+    return layoutPassmark;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto ConvertPassmarks(const VPiece &piece, const VContainer *pattern) -> QVector<VLayoutPassmark>
 {
     const QVector<VPassmark> passmarks = piece.Passmarks(pattern);
     QVector<VLayoutPassmark> layoutPassmarks;
+    layoutPassmarks.reserve(passmarks.size());
+
     for(const auto &passmark : passmarks)
     {
-        if (not passmark.IsNull())
+        if (passmark.IsNull())
         {
-            VPiecePassmarkData pData = passmark.Data();
+            continue;
+        }
 
-            auto PreapreBuiltInSAPassmark = [pData, passmark, piece, &layoutPassmarks, pattern]()
+        auto AddPassmark = [passmark, piece, pattern, &layoutPassmarks](PassmarkSide side)
+        {
+            bool ok = false;
+            VLayoutPassmark layoutPassmark = PrepareSAPassmark(piece, pattern, passmark, side, ok);
+            if (ok)
             {
-                QT_WARNING_PUSH
-                QT_WARNING_DISABLE_GCC("-Wnoexcept")
-                // noexcept-expression evaluates to 'false' because of a call to 'constexpr QPointF::QPointF()'
-
-                VLayoutPassmark layoutPassmark;
-
-                QT_WARNING_POP
-
-                const QVector<VPieceNode> path = piece.GetUnitedPath(pattern);
-                const int nodeIndex = VPiecePath::indexOfNode(path, pData.id);
-                if (nodeIndex != -1)
-                {
-                    const QVector<QLineF> lines = passmark.BuiltInSAPassmark(piece, pattern);
-                    if (lines.isEmpty())
-                    {
-                        const QString errorMsg =
-                            QObject::tr("Cannot prepare builtin passmark '%1' for piece '%2'. Passmark is empty.")
-                                .arg(pData.nodeName, piece.GetName());
-                        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
-                        return;
-                    }
-
-                    layoutPassmark.lines = lines;
-
-                    const QVector<QLineF> baseLines = passmark.BuiltInSAPassmarkBaseLine(piece);
-                    if (baseLines.isEmpty())
-                    {
-                        const QString errorMsg =
-                            QObject::tr("Cannot prepare builtin  passmark '%1' for piece '%2'. Passmark base line is "
-                                        "empty.")
-                                .arg(pData.nodeName, piece.GetName());
-                        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
-                        return;
-                    }
-                    layoutPassmark.baseLine = ConstFirst (baseLines);
-
-
-                    layoutPassmark.type = pData.passmarkLineType;
-                    layoutPassmark.isBuiltIn = true;
-
-                    layoutPassmarks.append(layoutPassmark);
-                }
-                else
-                {
-                    const QString errorMsg =
-                            QObject::tr("Passmark '%1' is not part of piece '%2'.")
-                            .arg(pData.nodeName, piece.GetName());
-                    VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
-                }
-            };
-
-            auto PrepareSAPassmark = [pData, passmark, piece, &layoutPassmarks, pattern](PassmarkSide side)
-            {
-                QT_WARNING_PUSH
-                QT_WARNING_DISABLE_GCC("-Wnoexcept")
-                // noexcept-expression evaluates to 'false' because of a call to 'constexpr QPointF::QPointF()'
-
-                VLayoutPassmark layoutPassmark;
-
-                QT_WARNING_POP
-
-                const QVector<VPieceNode> path = piece.GetUnitedPath(pattern);
-                const int nodeIndex = VPiecePath::indexOfNode(path, pData.id);
-                if (nodeIndex != -1)
-                {
-                    QVector<QLineF> baseLines =
-                            passmark.SAPassmarkBaseLine(piece, pattern, static_cast<PassmarkSide>(side));
-                    if (baseLines.isEmpty())
-                    {
-                        const QString errorMsg =
-                            QObject::tr("Cannot prepare passmark '%1' for piece '%2'. Passmark base line is empty.")
-                                .arg(pData.nodeName, piece.GetName());
-                        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
-                        return;
-                    }
-
-                    if (side == PassmarkSide::All || side == PassmarkSide::Right)
-                    {
-                        layoutPassmark.baseLine = ConstFirst(baseLines);
-                    }
-                    else if (side == PassmarkSide::Right)
-                    {
-                        layoutPassmark.baseLine = ConstLast(baseLines);
-                    }
-
-                    const QVector<QLineF> lines = passmark.SAPassmark(piece, pattern, side);
-                    if (lines.isEmpty())
-                    {
-                        const QString errorMsg =
-                            QObject::tr("Cannot prepare passmark '%1' for piece '%2'. Passmark is empty.")
-                                .arg(pData.nodeName, piece.GetName());
-                        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
-                        return;
-                    }
-
-                    layoutPassmark.lines = lines;
-                    layoutPassmark.type = pData.passmarkLineType;
-                    layoutPassmark.isBuiltIn = false;
-
-                    layoutPassmarks.append(layoutPassmark);
-                }
-                else
-                {
-                    const QString errorMsg =
-                            QObject::tr("Passmark '%1' is not part of piece '%2'.")
-                            .arg(pData.nodeName, piece.GetName());
-                    VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
-                }
-            };
-
-            if (not piece.IsSeamAllowanceBuiltIn())
-            {
-                if (pData.passmarkAngleType == PassmarkAngleType::Straightforward
-                        || pData.passmarkAngleType == PassmarkAngleType::Bisector)
-                {
-                    PrepareSAPassmark(PassmarkSide::All);
-                }
-                else if (pData.passmarkAngleType == PassmarkAngleType::Intersection
-                         || pData.passmarkAngleType == PassmarkAngleType::IntersectionOnlyLeft
-                         || pData.passmarkAngleType == PassmarkAngleType::IntersectionOnlyRight
-                         || pData.passmarkAngleType == PassmarkAngleType::Intersection2
-                         || pData.passmarkAngleType == PassmarkAngleType::Intersection2OnlyLeft
-                         || pData.passmarkAngleType == PassmarkAngleType::Intersection2OnlyRight)
-                {
-                    if (pData.passmarkAngleType == PassmarkAngleType::Intersection ||
-                            pData.passmarkAngleType == PassmarkAngleType::Intersection2)
-                    {
-                        PrepareSAPassmark(PassmarkSide::Left);
-                        PrepareSAPassmark(PassmarkSide::Right);
-                    }
-                    else if (pData.passmarkAngleType == PassmarkAngleType::IntersectionOnlyLeft ||
-                             pData.passmarkAngleType == PassmarkAngleType::Intersection2OnlyLeft)
-                    {
-                        PrepareSAPassmark(PassmarkSide::Left);
-                    }
-                    else if (pData.passmarkAngleType == PassmarkAngleType::IntersectionOnlyRight ||
-                             pData.passmarkAngleType == PassmarkAngleType::Intersection2OnlyRight)
-                    {
-                        PrepareSAPassmark(PassmarkSide::Right);
-                    }
-                }
-
-                if (VAbstractApplication::VApp()->Settings()->IsDoublePassmark()
-                        && (VAbstractApplication::VApp()->Settings()->IsPieceShowMainPath() ||
-                            not piece.IsHideMainPath())
-                        && pData.isMainPathNode
-                        && pData.passmarkAngleType != PassmarkAngleType::Intersection
-                        && pData.passmarkAngleType != PassmarkAngleType::IntersectionOnlyLeft
-                        && pData.passmarkAngleType != PassmarkAngleType::IntersectionOnlyRight
-                        && pData.passmarkAngleType != PassmarkAngleType::Intersection2
-                        && pData.passmarkAngleType != PassmarkAngleType::Intersection2OnlyLeft
-                        && pData.passmarkAngleType != PassmarkAngleType::Intersection2OnlyRight
-                        && pData.isShowSecondPassmark)
-                {
-                    PreapreBuiltInSAPassmark();
-                }
+                layoutPassmarks.append(layoutPassmark);
             }
-            else
+        };
+
+        auto AddBuiltInPassmark = [passmark, piece, pattern, &layoutPassmarks]()
+        {
+            bool ok = false;
+            VLayoutPassmark layoutPassmark = PreapreBuiltInSAPassmark(piece, pattern, passmark, ok);
+            if (ok)
             {
-                PreapreBuiltInSAPassmark();
+                layoutPassmarks.append(layoutPassmark);
             }
+        };
+
+        if (piece.IsSeamAllowanceBuiltIn())
+        {
+            AddBuiltInPassmark();
+            continue;
+        }
+
+        VPiecePassmarkData pData = passmark.Data();
+
+        switch(pData.passmarkAngleType)
+        {
+            case PassmarkAngleType::Straightforward:
+            case PassmarkAngleType::Bisector:
+                AddPassmark(PassmarkSide::All);
+                break;
+            case PassmarkAngleType::Intersection:
+            case PassmarkAngleType::Intersection2:
+                AddPassmark(PassmarkSide::Left);
+                AddPassmark(PassmarkSide::Right);
+                break;
+            case PassmarkAngleType::IntersectionOnlyLeft:
+            case PassmarkAngleType::Intersection2OnlyLeft:
+                AddPassmark(PassmarkSide::Left);
+                break;
+            case PassmarkAngleType::IntersectionOnlyRight:
+            case PassmarkAngleType::Intersection2OnlyRight:
+                AddPassmark(PassmarkSide::Right);
+                break;
+            default:
+                break;
+        }
+
+        if (VAbstractApplication::VApp()->Settings()->IsDoublePassmark()
+                && (VAbstractApplication::VApp()->Settings()->IsPieceShowMainPath() ||
+                    not piece.IsHideMainPath())
+                && pData.isMainPathNode
+                && pData.passmarkAngleType != PassmarkAngleType::Intersection
+                && pData.passmarkAngleType != PassmarkAngleType::IntersectionOnlyLeft
+                && pData.passmarkAngleType != PassmarkAngleType::IntersectionOnlyRight
+                && pData.passmarkAngleType != PassmarkAngleType::Intersection2
+                && pData.passmarkAngleType != PassmarkAngleType::Intersection2OnlyLeft
+                && pData.passmarkAngleType != PassmarkAngleType::Intersection2OnlyRight
+                && pData.isShowSecondPassmark)
+        {
+            AddBuiltInPassmark();
         }
     }
 
@@ -509,16 +535,16 @@ auto PrepareGradationId(const QString &label, const VContainer *pattern) -> QStr
 
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream &operator<<(QDataStream &dataStream, const VLayoutPoint &p)
+auto operator<<(QDataStream &dataStream, const VLayoutPoint &p) -> QDataStream &
 {
-    dataStream << static_cast<QPointF>(p);
+    dataStream << static_cast<QPointF>(p); // NOLINT(cppcoreguidelines-slicing)
     dataStream << p.TurnPoint();
     dataStream << p.CurvePoint();
     return dataStream;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream &operator>>(QDataStream &dataStream, VLayoutPoint &p)
+auto operator>>(QDataStream &dataStream, VLayoutPoint &p) -> QDataStream &
 {
     QPointF tmp;
     bool turnPointFlag = false;
@@ -535,15 +561,15 @@ QDataStream &operator>>(QDataStream &dataStream, VLayoutPoint &p)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream &operator<<(QDataStream &dataStream, const VLayoutPiece &piece)
+auto operator<<(QDataStream &dataStream, const VLayoutPiece &piece) -> QDataStream &
 {
-    dataStream << static_cast<VAbstractPiece>(piece);
+    dataStream << static_cast<VAbstractPiece>(piece); // NOLINT(cppcoreguidelines-slicing)
     dataStream << *piece.d;
     return dataStream;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream &operator>>(QDataStream &dataStream, VLayoutPiece &piece)
+auto operator>>(QDataStream &dataStream, VLayoutPiece &piece) -> QDataStream &
 {
     dataStream >> static_cast<VAbstractPiece &>(piece);
     dataStream >> *piece.d;
@@ -552,16 +578,16 @@ QDataStream &operator>>(QDataStream &dataStream, VLayoutPiece &piece)
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPiece::VLayoutPiece()
-    :VAbstractPiece(), d(new VLayoutPieceData)
+    :d(new VLayoutPieceData)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutPiece::VLayoutPiece(const VLayoutPiece &detail)
+VLayoutPiece::VLayoutPiece(const VLayoutPiece &detail) // NOLINT(modernize-use-equals-default)
     :VAbstractPiece(detail), d(detail.d)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutPiece &VLayoutPiece::operator=(const VLayoutPiece &detail)
+auto VLayoutPiece::operator=(const VLayoutPiece &detail) -> VLayoutPiece &
 {
     if ( &detail == this )
     {
@@ -579,7 +605,7 @@ VLayoutPiece::VLayoutPiece(VLayoutPiece &&detail) Q_DECL_NOTHROW
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutPiece &VLayoutPiece::operator=(VLayoutPiece &&detail) Q_DECL_NOTHROW
+auto VLayoutPiece::operator=(VLayoutPiece &&detail) Q_DECL_NOTHROW -> VLayoutPiece &
 {
     VAbstractPiece::operator=(detail);
     std::swap(d, detail.d);
@@ -588,11 +614,11 @@ VLayoutPiece &VLayoutPiece::operator=(VLayoutPiece &&detail) Q_DECL_NOTHROW
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutPiece::~VLayoutPiece()
+VLayoutPiece::~VLayoutPiece() //NOLINT(modernize-use-equals-default)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutPiece VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContainer *pattern)
+auto VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContainer *pattern) -> VLayoutPiece
 {
     QFuture<QVector<VLayoutPoint> > futureSeamAllowance = QtConcurrent::run(piece, &VPiece::SeamAllowancePoints,
                                                                            pattern);
@@ -689,13 +715,13 @@ auto VLayoutPiece::Map(QVector<T> points) const -> QVector<T>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <>
-QVector<VLayoutPassmark> VLayoutPiece::Map<VLayoutPassmark>(QVector<VLayoutPassmark> passmarks) const
+template <> // NOLINTNEXTLINE(readability-inconsistent-declaration-parameter-name)
+auto VLayoutPiece::Map<VLayoutPassmark>(QVector<VLayoutPassmark> passmarks) const -> QVector<VLayoutPassmark>
 {
-    for (int i = 0; i < passmarks.size(); ++i)
+    for (auto & passmark : passmarks)
     {
-        passmarks[i].lines = Map(passmarks.at(i).lines);
-        passmarks[i].baseLine = d->m_matrix.map(passmarks.at(i).baseLine);
+        passmark.lines = Map(passmark.lines);
+        passmark.baseLine = d->m_matrix.map(passmark.baseLine);
     }
 
     return passmarks;
@@ -703,16 +729,16 @@ QVector<VLayoutPassmark> VLayoutPiece::Map<VLayoutPassmark>(QVector<VLayoutPassm
 
 //---------------------------------------------------------------------------------------------------------------------
 template <>
-QVector<VLayoutPoint> VLayoutPiece::Map<VLayoutPoint>(QVector<VLayoutPoint> points) const
+auto VLayoutPiece::Map<VLayoutPoint>(QVector<VLayoutPoint> points) const -> QVector<VLayoutPoint>
 {
     std::transform(points.begin(), points.end(), points.begin(), [this](VLayoutPoint point)
-                   {
-                       auto p = static_cast<QPointF>(point);
-                       p = d->m_matrix.map(p);
-                       point.rx() = p.x();
-                       point.ry() = p.y();
-                       return point;
-                   });
+    {
+        auto p = static_cast<QPointF>(point); // NOLINT(cppcoreguidelines-slicing)
+        p = d->m_matrix.map(p);
+        point.rx() = p.x();
+        point.ry() = p.y();
+        return point;
+    });
     if (d->m_mirror)
     {
         std::reverse(points.begin(), points.end());
@@ -722,13 +748,13 @@ QVector<VLayoutPoint> VLayoutPiece::Map<VLayoutPoint>(QVector<VLayoutPoint> poin
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-QVector<VLayoutPoint> VLayoutPiece::GetMappedContourPoints() const
+auto VLayoutPiece::GetMappedContourPoints() const -> QVector<VLayoutPoint>
 {
     return Map(d->m_contour);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VLayoutPoint> VLayoutPiece::GetContourPoints() const
+auto VLayoutPiece::GetContourPoints() const -> QVector<VLayoutPoint>
 {
     return d->m_contour;
 }
@@ -742,13 +768,13 @@ void VLayoutPiece::SetCountourPoints(const QVector<VLayoutPoint> &points, bool h
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-QVector<VLayoutPoint> VLayoutPiece::GetMappedSeamAllowancePoints() const
+auto VLayoutPiece::GetMappedSeamAllowancePoints() const -> QVector<VLayoutPoint>
 {
     return Map(d->m_seamAllowance);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VLayoutPoint> VLayoutPiece::GetSeamAllowancePoints() const
+auto VLayoutPiece::GetSeamAllowancePoints() const -> QVector<VLayoutPoint>
 {
     return d->m_seamAllowance;
 }
@@ -775,32 +801,30 @@ void VLayoutPiece::SetSeamAllowancePoints(const QVector<VLayoutPoint> &points, b
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VLayoutPiece::GetMappedLayoutAllowancePoints() const
+auto VLayoutPiece::GetMappedLayoutAllowancePoints() const -> QVector<QPointF>
 {
     return Map(d->m_layoutAllowance);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VLayoutPiece::GetLayoutAllowancePoints() const
+auto VLayoutPiece::GetLayoutAllowancePoints() const -> QVector<QPointF>
 {
     return d->m_layoutAllowance;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VLayoutPiece::GetPieceTextPosition() const
+auto VLayoutPiece::GetPieceTextPosition() const -> QPointF
 {
     if (d->m_detailLabel.count() > 2)
     {
         return d->m_matrix.map(ConstFirst(d->m_detailLabel));
     }
-    else
-    {
-        return QPointF();
-    }
+
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList VLayoutPiece::GetPieceText() const
+auto VLayoutPiece::GetPieceText() const -> QStringList
 {
     return PieceLabelText(d->m_detailLabel, d->m_tmDetail);
 }
@@ -869,20 +893,18 @@ void VLayoutPiece::SetPieceLabelData(const VTextManager &data)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VLayoutPiece::GetPatternTextPosition() const
+auto VLayoutPiece::GetPatternTextPosition() const -> QPointF
 {
     if (d->m_patternInfo.count() > 2)
     {
         return d->m_matrix.map(ConstFirst(d->m_patternInfo));
     }
-    else
-    {
-        return QPointF();
-    }
+
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList VLayoutPiece::GetPatternText() const
+auto VLayoutPiece::GetPatternText() const -> QStringList
 {
     return PieceLabelText(d->m_patternInfo, d->m_tmPattern);
 }
@@ -970,19 +992,19 @@ void VLayoutPiece::SetGrainline(const VGrainlineData& geom, const VContainer* pa
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VLayoutPiece::GetMappedGrainline() const
+auto VLayoutPiece::GetMappedGrainline() const -> QVector<QPointF>
 {
     return Map(d->m_grainlinePoints);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VLayoutPiece::GetGrainline() const
+auto VLayoutPiece::GetGrainline() const -> QVector<QPointF>
 {
     return d->m_grainlinePoints;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutPiece::IsGrainlineEnabled() const
+auto VLayoutPiece::IsGrainlineEnabled() const -> bool
 {
     return d->m_grainlineEnabled;
 }
@@ -1012,19 +1034,19 @@ void VLayoutPiece::SetGrainlinePoints(const QVector<QPointF> &points)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VLayoutPiece::GrainlineAngle() const
+auto VLayoutPiece::GrainlineAngle() const -> qreal
 {
     return d->m_grainlineAngle;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-GrainlineArrowDirection VLayoutPiece::GrainlineArrowType() const
+auto VLayoutPiece::GrainlineArrowType() const -> GrainlineArrowDirection
 {
     return d->m_grainlineArrowType;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QTransform VLayoutPiece::GetMatrix() const
+auto VLayoutPiece::GetMatrix() const -> QTransform
 {
     return d->m_matrix;
 }
@@ -1036,7 +1058,7 @@ void VLayoutPiece::SetMatrix(const QTransform &matrix)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VLayoutPiece::GetLayoutWidth() const
+auto VLayoutPiece::GetLayoutWidth() const -> qreal
 {
     return d->m_layoutWidth;
 }
@@ -1048,7 +1070,7 @@ void VLayoutPiece::SetLayoutWidth(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint16 VLayoutPiece::GetQuantity() const
+auto VLayoutPiece::GetQuantity() const -> quint16
 {
     return d->m_quantity;
 }
@@ -1060,7 +1082,7 @@ void VLayoutPiece::SetQuantity(quint16 value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-vidtype VLayoutPiece::GetId() const
+auto VLayoutPiece::GetId() const -> vidtype
 {
     return d->m_id;
 }
@@ -1149,77 +1171,67 @@ void VLayoutPiece::Mirror()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VLayoutPiece::DetailEdgesCount() const
+auto VLayoutPiece::DetailEdgesCount() const -> int
 {
     return DetailPath().count();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VLayoutPiece::LayoutEdgesCount() const
+auto VLayoutPiece::LayoutEdgesCount() const -> int
 {
     const int count = d->m_layoutAllowance.count();
     return count > 2 ? count : 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QLineF VLayoutPiece::LayoutEdge(int i) const
+auto VLayoutPiece::LayoutEdge(int i) const -> QLineF
 {
     return Edge(d->m_layoutAllowance, i);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VLayoutPiece::LayoutEdgeByPoint(const QPointF &p1) const
+auto VLayoutPiece::LayoutEdgeByPoint(const QPointF &p1) const -> int
 {
     return EdgeByPoint(d->m_layoutAllowance, p1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VLayoutPiece::MappedDetailBoundingRect() const
+auto VLayoutPiece::MappedDetailBoundingRect() const -> QRectF
 {
     return BoundingRect(CastTo<QPointF>(GetMappedExternalContourPoints()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VLayoutPiece::DetailBoundingRect() const
+auto VLayoutPiece::DetailBoundingRect() const -> QRectF
 {
     return BoundingRect(CastTo<QPointF>(GetExternalContourPoints()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VLayoutPiece::MappedLayoutBoundingRect() const
+auto VLayoutPiece::MappedLayoutBoundingRect() const -> QRectF
 {
     return BoundingRect(GetMappedLayoutAllowancePoints());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VLayoutPiece::Diagonal() const
+auto VLayoutPiece::Diagonal() const -> qreal
 {
     const QRectF rec = MappedLayoutBoundingRect();
     return qSqrt(pow(rec.height(), 2) + pow(rec.width(), 2));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutPiece::isNull() const
+auto VLayoutPiece::isNull() const -> bool
 {
-    if (d->m_contour.isEmpty() == false && d->m_layoutWidth > 0)
+    if (not d->m_contour.isEmpty() && d->m_layoutWidth > 0)
     {
-        if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn() && d->m_seamAllowance.isEmpty() == false)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        return not (IsSeamAllowance() && not IsSeamAllowanceBuiltIn() && not d->m_seamAllowance.isEmpty());
     }
-    else
-    {
-        return true;
-    }
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qint64 VLayoutPiece::Square() const
+auto VLayoutPiece::Square() const -> qint64
 {
     return d->m_square;
 }
@@ -1261,27 +1273,27 @@ void VLayoutPiece::SetLayoutAllowancePoints()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VLayoutPoint> VLayoutPiece::GetMappedExternalContourPoints() const
+auto VLayoutPiece::GetMappedExternalContourPoints() const -> QVector<VLayoutPoint>
 {
     return IsSeamAllowance() && not IsSeamAllowanceBuiltIn() ? GetMappedSeamAllowancePoints() :
                                                                GetMappedContourPoints();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VLayoutPoint> VLayoutPiece::GetExternalContourPoints() const
+auto VLayoutPiece::GetExternalContourPoints() const -> QVector<VLayoutPoint>
 {
     return IsSeamAllowance() && not IsSeamAllowanceBuiltIn() ? GetSeamAllowancePoints() :
                                                                GetContourPoints();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VLayoutPassmark> VLayoutPiece::GetMappedPassmarks() const
+auto VLayoutPiece::GetMappedPassmarks() const -> QVector<VLayoutPassmark>
 {
     return Map(d->m_passmarks);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VLayoutPassmark> VLayoutPiece::GetPassmarks() const
+auto VLayoutPiece::GetPassmarks() const -> QVector<VLayoutPassmark>
 {
     return d->m_passmarks;
 }
@@ -1296,7 +1308,7 @@ void VLayoutPiece::SetPassmarks(const QVector<VLayoutPassmark> &passmarks)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VLayoutPlaceLabel> VLayoutPiece::GetPlaceLabels() const
+auto VLayoutPiece::GetPlaceLabels() const -> QVector<VLayoutPlaceLabel>
 {
     return d->m_placeLabels;
 }
@@ -1308,7 +1320,7 @@ void VLayoutPiece::SetPlaceLabels(const QVector<VLayoutPlaceLabel> &labels)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QVector<VLayoutPoint> > VLayoutPiece::MappedInternalPathsForCut(bool cut) const
+auto VLayoutPiece::MappedInternalPathsForCut(bool cut) const -> QVector<QVector<VLayoutPoint> >
 {
     QVector<QVector<VLayoutPoint> > paths;
     paths.reserve(d->m_internalPaths.size());
@@ -1325,7 +1337,7 @@ QVector<QVector<VLayoutPoint> > VLayoutPiece::MappedInternalPathsForCut(bool cut
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VLayoutPiecePath> VLayoutPiece::GetInternalPaths() const
+auto VLayoutPiece::GetInternalPaths() const -> QVector<VLayoutPiecePath>
 {
     return d->m_internalPaths;
 }
@@ -1337,13 +1349,13 @@ void VLayoutPiece::SetInternalPaths(const QVector<VLayoutPiecePath> &internalPat
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VLayoutPiece::MappedContourPath() const
+auto VLayoutPiece::MappedContourPath() const -> QPainterPath
 {
     return d->m_matrix.map(ContourPath());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VLayoutPiece::ContourPath() const
+auto VLayoutPiece::ContourPath() const -> QPainterPath
 {
     QPainterPath path;
 
@@ -1396,7 +1408,7 @@ QPainterPath VLayoutPiece::ContourPath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VLayoutPiece::MappedLayoutAllowancePath() const
+auto VLayoutPiece::MappedLayoutAllowancePath() const -> QPainterPath
 {
     return PainterPath(GetMappedLayoutAllowancePoints());
 }
@@ -1438,7 +1450,7 @@ void VLayoutPiece::DrawMiniature(QPainter &painter) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsItem *VLayoutPiece::GetItem(bool textAsPaths) const
+auto VLayoutPiece::GetItem(bool textAsPaths) const -> QGraphicsItem *
 {
     QGraphicsPathItem *item = GetMainItem();
 
@@ -1470,7 +1482,7 @@ QGraphicsItem *VLayoutPiece::GetItem(bool textAsPaths) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutPiece::IsLayoutAllowanceValid() const
+auto VLayoutPiece::IsLayoutAllowanceValid() const -> bool
 {
     QVector<VLayoutPoint> base = (IsSeamAllowance() && not IsSeamAllowanceBuiltIn()) ?
                                      d->m_seamAllowance : d->m_contour;
@@ -1478,7 +1490,7 @@ bool VLayoutPiece::IsLayoutAllowanceValid() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VLayoutPiece::BiggestEdge() const
+auto VLayoutPiece::BiggestEdge() const -> qreal
 {
     qreal edge = 0;
 
@@ -1501,18 +1513,18 @@ qreal VLayoutPiece::BiggestEdge() const
 
 
 //---------------------------------------------------------------------------------------------------------------------
-PlaceLabelImg VLayoutPiece::MapPlaceLabelShape(PlaceLabelImg shape) const
+auto VLayoutPiece::MapPlaceLabelShape(PlaceLabelImg shape) const -> PlaceLabelImg
 {
-    for (int i = 0; i < shape.size(); ++i)
+    for (auto & i : shape)
     {
-        shape[i] = Map(shape.at(i));
+        i = Map(i);
     }
 
     return shape;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VLayoutPiece::BoundingRect(QVector<QPointF> points)
+auto VLayoutPiece::BoundingRect(QVector<QPointF> points) -> QRectF
 {
     points.append(ConstFirst(points));
     return QPolygonF(points).boundingRect();
@@ -1524,93 +1536,94 @@ void VLayoutPiece::CreateLabelStrings(QGraphicsItem *parent, const QVector<QPoin
 {
     SCASSERT(parent != nullptr)
 
-    if (labelShape.count() > 2)
+    if (labelShape.count() <= 2)
     {
-        const qreal dW = QLineF(labelShape.at(0), labelShape.at(1)).length();
-        const qreal dH = QLineF(labelShape.at(1), labelShape.at(2)).length();
-        const qreal angle = - QLineF(labelShape.at(0), labelShape.at(1)).angle();
-        qreal dY = 0;
+        return;
+    }
 
-        for (int i = 0; i < tm.GetSourceLinesCount(); ++i)
+    const qreal dW = QLineF(labelShape.at(0), labelShape.at(1)).length();
+    const qreal dH = QLineF(labelShape.at(1), labelShape.at(2)).length();
+    const qreal angle = - QLineF(labelShape.at(0), labelShape.at(1)).angle();
+    qreal dY = 0;
+
+    for (int i = 0; i < tm.GetSourceLinesCount(); ++i)
+    {
+        const TextLine& tl = tm.GetSourceLine(i);
+        QFont fnt = tm.GetFont();
+        fnt.setPixelSize(tm.GetFont().pixelSize() + tl.m_iFontSize);
+        fnt.setBold(tl.m_bold);
+        fnt.setItalic(tl.m_italic);
+
+        QFontMetrics fm(fnt);
+
+        if (textAsPaths)
         {
+            dY += fm.height();
+        }
 
-            const TextLine& tl = tm.GetSourceLine(i);
-            QFont fnt = tm.GetFont();
-            fnt.setPixelSize(tm.GetFont().pixelSize() + tl.m_iFontSize);
-            fnt.setBold(tl.m_bold);
-            fnt.setItalic(tl.m_italic);
+        if (dY > dH)
+        {
+            break;
+        }
 
-            QFontMetrics fm(fnt);
+        QString qsText = tl.m_qsText;
+        if (TextWidth(fm, qsText) > dW)
+        {
+            qsText = fm.elidedText(qsText, Qt::ElideMiddle, static_cast<int>(dW));
+        }
 
-            if (textAsPaths)
-            {
-                dY += fm.height();
-            }
+        qreal dX = 0;
+        if (tl.m_eAlign == 0 || (tl.m_eAlign & Qt::AlignLeft) > 0)
+        {
+            dX = 0;
+        }
+        else if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
+        {
+            dX = (dW - TextWidth(fm, qsText))/2;
+        }
+        else if ((tl.m_eAlign & Qt::AlignRight) > 0)
+        {
+            dX = dW - TextWidth(fm, qsText);
+        }
 
-            if (dY > dH)
-            {
-                break;
-            }
+        // set up the rotation around top-left corner matrix
+        QTransform labelMatrix;
+        labelMatrix.translate(labelShape.at(0).x(), labelShape.at(0).y());
+        if (d->m_mirror)
+        {
+            labelMatrix.scale(-1, 1);
+            labelMatrix.rotate(-angle);
+            labelMatrix.translate(-dW, 0);
+            labelMatrix.translate(dX, dY); // Each string has own position
+        }
+        else
+        {
+            labelMatrix.rotate(angle);
+            labelMatrix.translate(dX, dY); // Each string has own position
+        }
 
-            QString qsText = tl.m_qsText;
-            if (TextWidth(fm, qsText) > dW)
-            {
-                qsText = fm.elidedText(qsText, Qt::ElideMiddle, static_cast<int>(dW));
-            }
+        labelMatrix *= d->m_matrix;
 
-            qreal dX = 0;
-            if (tl.m_eAlign == 0 || (tl.m_eAlign & Qt::AlignLeft) > 0)
-            {
-                dX = 0;
-            }
-            else if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
-            {
-                dX = (dW - TextWidth(fm, qsText))/2;
-            }
-            else if ((tl.m_eAlign & Qt::AlignRight) > 0)
-            {
-                dX = dW - TextWidth(fm, qsText);
-            }
+        if (textAsPaths)
+        {
+            QPainterPath path;
+            path.addText(0, - static_cast<qreal>(fm.ascent())/6., fnt, qsText);
 
-            // set up the rotation around top-left corner matrix
-            QTransform labelMatrix;
-            labelMatrix.translate(labelShape.at(0).x(), labelShape.at(0).y());
-            if (d->m_mirror)
-            {
-                labelMatrix.scale(-1, 1);
-                labelMatrix.rotate(-angle);
-                labelMatrix.translate(-dW, 0);
-                labelMatrix.translate(dX, dY); // Each string has own position
-            }
-            else
-            {
-                labelMatrix.rotate(angle);
-                labelMatrix.translate(dX, dY); // Each string has own position
-            }
+            auto* item = new QGraphicsPathItem(parent);
+            item->setPath(path);
+            item->setBrush(QBrush(Qt::black));
+            item->setTransform(labelMatrix);
 
-            labelMatrix *= d->m_matrix;
+            dY += tm.GetSpacing();
+        }
+        else
+        {
+            auto* item = new QGraphicsSimpleTextItem(parent);
+            item->setFont(fnt);
+            item->setText(qsText);
+            item->setTransform(labelMatrix);
 
-            if (textAsPaths)
-            {
-                QPainterPath path;
-                path.addText(0, - static_cast<qreal>(fm.ascent())/6., fnt, qsText);
-
-                auto* item = new QGraphicsPathItem(parent);
-                item->setPath(path);
-                item->setBrush(QBrush(Qt::black));
-                item->setTransform(labelMatrix);
-
-                dY += tm.GetSpacing();
-            }
-            else
-            {
-                auto* item = new QGraphicsSimpleTextItem(parent);
-                item->setFont(fnt);
-                item->setText(qsText);
-                item->setTransform(labelMatrix);
-
-                dY += (fm.height() + tm.GetSpacing());
-            }
+            dY += (fm.height() + tm.GetSpacing());
         }
     }
 }
@@ -1639,7 +1652,7 @@ void VLayoutPiece::CreateGrainlineItem(QGraphicsItem *parent) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VLayoutPoint> VLayoutPiece::DetailPath() const
+auto VLayoutPiece::DetailPath() const -> QVector<VLayoutPoint>
 {
     if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn())
     {
@@ -1650,9 +1663,9 @@ QVector<VLayoutPoint> VLayoutPiece::DetailPath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsPathItem *VLayoutPiece::GetMainItem() const
+auto VLayoutPiece::GetMainItem() const -> QGraphicsPathItem *
 {
-    QGraphicsPathItem *item = new QGraphicsPathItem();
+    auto *item = new QGraphicsPathItem();
     QPen pen = item->pen();
     pen.setWidthF(VAbstractApplication::VApp()->Settings()->WidthHairLine());
     item->setPen(pen);
@@ -1661,9 +1674,9 @@ QGraphicsPathItem *VLayoutPiece::GetMainItem() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsPathItem *VLayoutPiece::GetMainPathItem() const
+auto VLayoutPiece::GetMainPathItem() const -> QGraphicsPathItem *
 {
-    QGraphicsPathItem *item = new QGraphicsPathItem();
+    auto *item = new QGraphicsPathItem();
     QPen pen = item->pen();
     pen.setWidthF(VAbstractApplication::VApp()->Settings()->WidthHairLine());
     item->setPen(pen);
@@ -1685,7 +1698,7 @@ QGraphicsPathItem *VLayoutPiece::GetMainPathItem() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutPiece::IsMirror() const
+auto VLayoutPiece::IsMirror() const -> bool
 {
     return d->m_mirror;
 }
@@ -1733,11 +1746,11 @@ void VLayoutPiece::SetYScale(qreal ys)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QLineF VLayoutPiece::Edge(const QVector<QPointF> &path, int i) const
+auto VLayoutPiece::Edge(const QVector<QPointF> &path, int i) const -> QLineF
 {
     if (i < 1)
     { // Doesn't exist such edge
-        return QLineF();
+        return {};
     }
 
     int i1, i2;
@@ -1755,17 +1768,14 @@ QLineF VLayoutPiece::Edge(const QVector<QPointF> &path, int i) const
     if (d->m_mirror)
     {
         QVector<QPointF> newPath = Map(path);
-        return QLineF(newPath.at(i1), newPath.at(i2));
+        return {newPath.at(i1), newPath.at(i2)};
     }
-    else
-    {
-        return QLineF(d->m_matrix.map(path.at(i1)), d->m_matrix.map(path.at(i2)));
-    }
+    return {d->m_matrix.map(path.at(i1)), d->m_matrix.map(path.at(i2))};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 // NOTE: Once C++17 is made mandatory, this method can further be refactored with std::optional<int>
-int VLayoutPiece::EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) const
+auto VLayoutPiece::EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) const -> int
 {
     if (p1.isNull() || path.count() < 3)
     {
@@ -1773,8 +1783,8 @@ int VLayoutPiece::EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) c
     }
 
     const auto points = Map(path);
-    const auto posIter = std::find_if(points.cbegin(), points.cend(),
-                                      [&p1](const QPointF &point){ return VFuzzyComparePoints(point, p1); });
+    const auto *const posIter = std::find_if(points.cbegin(), points.cend(),
+                                             [&p1](const QPointF &point){ return VFuzzyComparePoints(point, p1); });
     if (posIter != points.cend())
     {
         return static_cast<int>(posIter - points.cbegin() + 1);

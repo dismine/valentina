@@ -68,74 +68,74 @@ public:
     VLayoutPiece();
     VLayoutPiece(const VLayoutPiece &detail);
 
-    virtual ~VLayoutPiece() override;
+    ~VLayoutPiece() override;
 
-    VLayoutPiece &operator=(const VLayoutPiece &detail);
+    auto operator=(const VLayoutPiece &detail) -> VLayoutPiece &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VLayoutPiece(VLayoutPiece &&detail) Q_DECL_NOTHROW;
-    VLayoutPiece &operator=(VLayoutPiece &&detail) Q_DECL_NOTHROW;
+    auto operator=(VLayoutPiece &&detail) Q_DECL_NOTHROW -> VLayoutPiece &;
 #endif
 
-    static VLayoutPiece Create(const VPiece &piece, vidtype id, const VContainer *pattern);
+    static auto Create(const VPiece &piece, vidtype id, const VContainer *pattern) -> VLayoutPiece;
 
-    virtual auto GetUniqueID() const -> QString override;
+    auto GetUniqueID() const -> QString override;
 
-    QVector<VLayoutPoint> GetMappedContourPoints() const;
-    QVector<VLayoutPoint> GetContourPoints() const;
+    auto GetMappedContourPoints() const -> QVector<VLayoutPoint>;
+    auto GetContourPoints() const -> QVector<VLayoutPoint>;
     void SetCountourPoints(const QVector<VLayoutPoint> &points, bool hideMainPath = false);
 
-    QVector<VLayoutPoint> GetMappedSeamAllowancePoints() const;
-    QVector<VLayoutPoint> GetSeamAllowancePoints() const;
+    auto GetMappedSeamAllowancePoints() const -> QVector<VLayoutPoint>;
+    auto GetSeamAllowancePoints() const -> QVector<VLayoutPoint>;
     void SetSeamAllowancePoints(const QVector<VLayoutPoint> &points, bool seamAllowance = true,
                                 bool seamAllowanceBuiltIn = false);
 
-    QVector<QPointF> GetMappedLayoutAllowancePoints() const;
-    QVector<QPointF> GetLayoutAllowancePoints() const;
+    auto GetMappedLayoutAllowancePoints() const -> QVector<QPointF>;
+    auto GetLayoutAllowancePoints() const -> QVector<QPointF>;
     void SetLayoutAllowancePoints();
 
-    QVector<VLayoutPoint> GetMappedExternalContourPoints() const;
-    QVector<VLayoutPoint> GetExternalContourPoints() const;
+    auto GetMappedExternalContourPoints() const -> QVector<VLayoutPoint>;
+    auto GetExternalContourPoints() const -> QVector<VLayoutPoint>;
 
-    QVector<VLayoutPassmark> GetMappedPassmarks() const;
-    QVector<VLayoutPassmark> GetPassmarks() const;
+    auto GetMappedPassmarks() const -> QVector<VLayoutPassmark>;
+    auto GetPassmarks() const -> QVector<VLayoutPassmark>;
     void SetPassmarks(const QVector<VLayoutPassmark> &passmarks);
 
-    QVector<VLayoutPlaceLabel> GetPlaceLabels() const;
+    auto GetPlaceLabels() const -> QVector<VLayoutPlaceLabel>;
     void SetPlaceLabels(const QVector<VLayoutPlaceLabel> &labels);
 
-    QVector<QVector<VLayoutPoint> > MappedInternalPathsForCut(bool cut) const;
-    QVector<VLayoutPiecePath> GetInternalPaths() const;
+    auto MappedInternalPathsForCut(bool cut) const -> QVector<QVector<VLayoutPoint> >;
+    auto GetInternalPaths() const -> QVector<VLayoutPiecePath>;
     void SetInternalPaths(const QVector<VLayoutPiecePath> &internalPaths);
 
-    QPointF GetPieceTextPosition() const;
-    QStringList GetPieceText() const;
+    auto GetPieceTextPosition() const -> QPointF;
+    auto GetPieceText() const -> QStringList;
     void SetPieceText(const QString &qsName, const VPieceLabelData& data, const QFont& font, const VContainer *pattern);
 
-    QPointF GetPatternTextPosition() const;
-    QStringList GetPatternText() const;
+    auto GetPatternTextPosition() const -> QPointF;
+    auto GetPatternText() const -> QStringList;
     void SetPatternInfo(VAbstractPattern *pDoc, const VPatternLabelData& geom, const QFont& font,
                         const VContainer *pattern);
 
     void SetGrainline(const VGrainlineData& geom, const VContainer *pattern);
-    QVector<QPointF> GetMappedGrainline() const;
-    QVector<QPointF> GetGrainline() const;
-    bool  IsGrainlineEnabled() const;
-    qreal GrainlineAngle() const;
-    GrainlineArrowDirection GrainlineArrowType() const;
+    auto GetMappedGrainline() const -> QVector<QPointF>;
+    auto GetGrainline() const -> QVector<QPointF>;
+    auto IsGrainlineEnabled() const -> bool;
+    auto GrainlineAngle() const -> qreal;
+    auto GrainlineArrowType() const -> GrainlineArrowDirection;
 
-    QTransform GetMatrix() const;
-    void    SetMatrix(const QTransform &matrix);
+    auto GetMatrix() const -> QTransform;
+    void SetMatrix(const QTransform &matrix);
 
-    qreal GetLayoutWidth() const;
-    void  SetLayoutWidth(qreal value);
+    auto GetLayoutWidth() const -> qreal;
+    void SetLayoutWidth(qreal value);
 
-    quint16 GetQuantity() const;
-    void    SetQuantity(quint16 value);
+    auto GetQuantity() const -> quint16;
+    void SetQuantity(quint16 value);
 
-    vidtype GetId() const;
-    void    SetId(vidtype id);
+    auto GetId() const -> vidtype;
+    void SetId(vidtype id);
 
-    bool IsMirror() const;
+    auto IsMirror() const -> bool;
     void SetMirror(bool value);
 
     void SetGradationId(const QString &id);
@@ -154,36 +154,36 @@ public:
     void Mirror(const QLineF &edge);
     void Mirror();
 
-    int    DetailEdgesCount() const;
-    int    LayoutEdgesCount() const;
+    auto DetailEdgesCount() const -> int;
+    auto LayoutEdgesCount() const -> int;
 
-    QLineF LayoutEdge(int i) const;
-    int    LayoutEdgeByPoint(const QPointF &p1) const;
+    auto LayoutEdge(int i) const -> QLineF;
+    auto LayoutEdgeByPoint(const QPointF &p1) const -> int;
 
-    QRectF MappedDetailBoundingRect() const;
-    QRectF DetailBoundingRect() const;
-    QRectF MappedLayoutBoundingRect() const;
-    qreal  Diagonal() const;
+    auto MappedDetailBoundingRect() const -> QRectF;
+    auto DetailBoundingRect() const -> QRectF;
+    auto MappedLayoutBoundingRect() const -> QRectF;
+    auto Diagonal() const -> qreal;
 
-    static QRectF BoundingRect(QVector<QPointF> points);
+    static auto BoundingRect(QVector<QPointF> points) -> QRectF;
 
-    bool isNull() const;
-    qint64 Square() const;
+    auto isNull() const -> bool;
+    auto Square() const -> qint64;
 
-    QPainterPath MappedContourPath() const;
-    QPainterPath ContourPath() const;
-    QPainterPath MappedLayoutAllowancePath() const;
+    auto MappedContourPath() const -> QPainterPath;
+    auto ContourPath() const -> QPainterPath;
+    auto MappedLayoutAllowancePath() const -> QPainterPath;
 
     void DrawMiniature(QPainter &painter) const;
 
-    Q_REQUIRED_RESULT QGraphicsItem *GetItem(bool textAsPaths) const;
+    Q_REQUIRED_RESULT auto GetItem(bool textAsPaths) const -> QGraphicsItem *;
 
-    bool IsLayoutAllowanceValid() const;
+    auto IsLayoutAllowanceValid() const -> bool;
 
-    qreal BiggestEdge() const;
+    auto BiggestEdge() const -> qreal;
 
-    friend QDataStream& operator<< (QDataStream& dataStream, const VLayoutPiece& piece);
-    friend QDataStream& operator>> (QDataStream& dataStream, VLayoutPiece& piece);
+    friend auto operator<< (QDataStream& dataStream, const VLayoutPiece& piece) -> QDataStream&;
+    friend auto operator>> (QDataStream& dataStream, VLayoutPiece& piece) -> QDataStream&;
 
     auto MapPlaceLabelShape(PlaceLabelImg shape) const -> PlaceLabelImg;
 
@@ -208,20 +208,20 @@ protected:
 private:
     QSharedDataPointer<VLayoutPieceData> d;
 
-    QVector<VLayoutPoint> DetailPath() const;
+    auto DetailPath() const -> QVector<VLayoutPoint>;
 
-    Q_REQUIRED_RESULT QGraphicsPathItem *GetMainItem() const;
-    Q_REQUIRED_RESULT QGraphicsPathItem *GetMainPathItem() const;
+    Q_REQUIRED_RESULT auto GetMainItem() const -> QGraphicsPathItem *;
+    Q_REQUIRED_RESULT auto GetMainPathItem() const -> QGraphicsPathItem *;
 
     void CreateLabelStrings(QGraphicsItem *parent, const QVector<QPointF> &labelShape, const VTextManager &tm,
                             bool textAsPaths) const;
     void CreateGrainlineItem(QGraphicsItem *parent) const;
 
     template <class T>
-    QVector<T> Map(QVector<T> points) const;
+    auto Map(QVector<T> points) const -> QVector<T>;
 
-    QLineF Edge(const QVector<QPointF> &path, int i) const;
-    int    EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) const;
+    auto Edge(const QVector<QPointF> &path, int i) const -> QLineF;
+    auto EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) const -> int;
 };
 
 QT_WARNING_POP
