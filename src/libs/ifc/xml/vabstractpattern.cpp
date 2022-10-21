@@ -129,6 +129,7 @@ const QString VAbstractPattern::AttrNodePassmark      = QStringLiteral("passmark
 const QString VAbstractPattern::AttrNodePassmarkLine  = QStringLiteral("passmarkLine");
 const QString VAbstractPattern::AttrNodePassmarkAngle = QStringLiteral("passmarkAngle");
 const QString VAbstractPattern::AttrNodeShowSecondPassmark = QStringLiteral("showSecondPassmark");
+const QString VAbstractPattern::AttrNodeTurnPoint     = QStringLiteral("turnPoint");
 const QString VAbstractPattern::AttrSABefore          = QStringLiteral("before");
 const QString VAbstractPattern::AttrSAAfter           = QStringLiteral("after");
 const QString VAbstractPattern::AttrStart             = QStringLiteral("start");
@@ -811,6 +812,9 @@ VPieceNode VAbstractPattern::ParseSANode(const QDomElement &domElement)
     const QString passmarkLength =
             VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrPassmarkLength);
 
+    const bool turnPoint =
+        VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrNodeTurnPoint, trueStr);
+
     const QString t = VDomDocument::GetParametrString(domElement, AttrType, VAbstractPattern::NodePoint);
     Tool tool;
 
@@ -841,8 +845,7 @@ VPieceNode VAbstractPattern::ParseSANode(const QDomElement &domElement)
             tool = Tool::NodeElArc;
             break;
         default:
-            VException e(QObject::tr("Wrong tag name '%1'.").arg(t));
-            throw e;
+            throw VException(tr("Wrong tag name '%1'.").arg(t));
     }
     VPieceNode node(id, tool, reverse);
     node.SetFormulaSABefore(saBefore);
@@ -856,6 +859,7 @@ VPieceNode VAbstractPattern::ParseSANode(const QDomElement &domElement)
     node.SetPassmarkAngleType(passmarkAngle);
     node.SetManualPassmarkLength(manualPassmarkLength);
     node.SetFormulaPassmarkLength(passmarkLength);
+    node.SetTurnPoint(turnPoint);
 
     return node;
 }

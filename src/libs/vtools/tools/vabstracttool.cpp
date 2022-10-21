@@ -567,6 +567,9 @@ QDomElement VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagNa
             nod.removeAttribute(VAbstractPattern::AttrNodePassmarkLine);
             nod.removeAttribute(VAbstractPattern::AttrNodePassmarkAngle);
         }
+
+        doc->SetAttributeOrRemoveIf<bool>(nod, VAbstractPattern::AttrNodeTurnPoint, node.IsTurnPoint(),
+                                          [](bool value) noexcept {return value;});
     }
     else
     { // Wrong configuration.

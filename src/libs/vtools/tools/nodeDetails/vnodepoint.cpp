@@ -100,6 +100,7 @@ enum class ContextMenuOption : int
     ForbidFlipping,
     ForceFlipping,
     Remove,
+    TurnPoint,
     LAST_ONE_DO_NOT_USE
 };
 }
@@ -140,7 +141,7 @@ void VNodePoint::Create(const VAbstractNodeInitData &initData)
         VAbstractTool::AddRecord(initData.id, Tool::NodePoint, initData.doc);
         //TODO Need create garbage collector and remove all nodes, what we don't use.
         //Better check garbage before each saving file. Check only modeling tags.
-        VNodePoint *point = new VNodePoint(initData);
+        auto *point = new VNodePoint(initData);
 
         connect(initData.scene, &VMainGraphicsScene::EnableToolMove, point, &VNodePoint::EnableToolMove);
         connect(initData.scene, &VMainGraphicsScene::EnablePointItemHover, point, &VNodePoint::AllowHover);
@@ -326,7 +327,7 @@ QHash<int, QAction *> VNodePoint::InitContextMenu(QMenu *menu, vidtype pieceId, 
     InitPassmarkAngleTypeMenu(menu, pieceId, contextMenu);
     InitPassmarkLineTypeMenu(menu, pieceId, contextMenu);
 
-    QAction *separatorAct = new QAction(this);
+    auto *separatorAct = new QAction(this);
     separatorAct->setSeparator(true);
     menu->addAction(separatorAct);
 
@@ -366,11 +367,17 @@ void VNodePoint::InitPassmarkMenu(QMenu *menu, vidtype pieceId, QHash<int, QActi
     const int nodeIndex = detail.GetPath().indexOfNode(m_id);
     if (nodeIndex != -1)
     {
+        const VPieceNode &node = detail.GetPath().at(nodeIndex);
+
         QAction *actionPassmark = menu->addAction(tr("Passmark"));
         actionPassmark->setCheckable(true);
-        actionPassmark->setChecked(detail.GetPath().at(nodeIndex).IsPassmark());
-
+        actionPassmark->setChecked(node.IsPassmark());
         contextMenu.insert(static_cast<int>(ContextMenuOption::Passmark), actionPassmark);
+
+        QAction *actionTurnPoint = menu->addAction(tr("Turn point"));
+        actionTurnPoint->setCheckable(true);
+        actionTurnPoint->setChecked(node.IsTurnPoint());
+        contextMenu.insert(static_cast<int>(ContextMenuOption::TurnPoint), actionTurnPoint);
     }
 }
 
@@ -524,7 +531,7 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         return;
     }
 
-    if (VToolSeamAllowance *piece = qgraphicsitem_cast<VToolSeamAllowance *>(parentItem()))
+    if (auto *piece = qgraphicsitem_cast<VToolSeamAllowance *>(parentItem()))
     {
         QMenu menu;
         QHash<int, QAction *> contextMenu = InitContextMenu(&menu, piece->getId(), piece->referens());
@@ -573,7 +580,7 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         ContextMenuOption selectedOption = static_cast<ContextMenuOption>(
                     contextMenu.key(selectedAction, static_cast<int>(ContextMenuOption::NoSelection)));
 
-        Q_STATIC_ASSERT_X(static_cast<int>(ContextMenuOption::LAST_ONE_DO_NOT_USE) == 31,
+        Q_STATIC_ASSERT_X(static_cast<int>(ContextMenuOption::LAST_ONE_DO_NOT_USE) == 32,
                           "Not all options were handled.");
 
 QT_WARNING_PUSH
@@ -613,6 +620,9 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
                 break;
             case ContextMenuOption::Exclude:
                 emit ToggleExcludeState(m_id);
+                break;
+            case ContextMenuOption::TurnPoint:
+                emit ToggleTurnPointState(m_id);
                 break;
             case ContextMenuOption::ByLength:
                 SelectSeamAllowanceAngle(PieceNodeAngle::ByLength);

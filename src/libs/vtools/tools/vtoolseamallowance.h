@@ -168,6 +168,7 @@ private slots:
     void ToggleForbidFlipping(bool checked);
     void ToggleForceFlipping(bool checked);
     void ToggleExcludeState(quint32 id);
+    void ToggleTurnPointState(quint32 id);
     void ToggleNodePointAngleType(quint32 id, PieceNodeAngle type);
     void ToggleNodePointPassmark(quint32 id, bool toggle);
     void TogglePassmarkAngleType(quint32 id, PassmarkAngleType type);

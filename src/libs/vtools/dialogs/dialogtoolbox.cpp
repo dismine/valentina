@@ -672,6 +672,11 @@ QString GetNodeName(const VContainer *data, const VPieceNode &node, bool showPas
         {
             name = QLatin1Char('[') + name + QLatin1Char(']');
         }
+
+        if (not node.IsTurnPoint())
+        {
+            name += QStringLiteral(" ⦿");
+        }
     }
 
     return name;
