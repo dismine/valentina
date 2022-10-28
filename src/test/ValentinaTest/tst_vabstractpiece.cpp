@@ -49,12 +49,8 @@ void TST_VAbstractPiece::EquidistantRemoveLoop_data()
 
     auto ASSERT_TEST_CASE = [this](const char *title, const QString &input, const QString &output, qreal width)
     {
-        QVector<VSAPoint> inputPoints;
-        AbstractTest::VectorFromJson(input, inputPoints);
-
-        QVector<QPointF> outputPoints;
-        AbstractTest::VectorFromJson(output, outputPoints);
-
+        QVector<VSAPoint> inputPoints = AbstractTest::VectorFromJson<VSAPoint>(input);
+        QVector<QPointF> outputPoints = AbstractTest::VectorFromJson<QPointF>(output);
         QTest::newRow(title) << inputPoints << width << outputPoints;
     };
 
@@ -312,10 +308,10 @@ void TST_VAbstractPiece::EquidistantRemoveLoop() const
     QFETCH(qreal, width);
     QFETCH(QVector<QPointF>, ekvOrig);
 
-    const QVector<QPointF> ekv = VAbstractPiece::Equidistant(points, width, QString());
+    const QVector<QPointF> ekv = CastTo<QPointF>(VAbstractPiece::Equidistant(points, width, QString()));
 
     // Begin comparison
-    Comparison(ekv, ekvOrig);
+    ComparePathsDistance(ekv, ekvOrig);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -327,12 +323,8 @@ void TST_VAbstractPiece::LayoutAllowanceRemoveLoop_data()
 
     auto ASSERT_TEST_CASE = [this](const char *title, const QString &input, const QString &output, qreal width)
     {
-        QVector<VSAPoint> inputPoints;
-        AbstractTest::VectorFromJson(input, inputPoints);
-
-        QVector<QPointF> outputPoints;
-        AbstractTest::VectorFromJson(output, outputPoints);
-
+        QVector<VSAPoint> inputPoints = AbstractTest::VectorFromJson<VSAPoint>(input);
+        QVector<QPointF> outputPoints = AbstractTest::VectorFromJson<QPointF>(output);
         QTest::newRow(title) << inputPoints << width << outputPoints;
     };
 
@@ -368,10 +360,10 @@ void TST_VAbstractPiece::LayoutAllowanceRemoveLoop() const
     QFETCH(qreal, width);
     QFETCH(QVector<QPointF>, ekvOrig);
 
-    const QVector<QPointF> ekv = VAbstractPiece::Equidistant(points, width, QString());
+    const QVector<QPointF> ekv = CastTo<QPointF>(VAbstractPiece::Equidistant(points, width, QString()));
 
     // Begin comparison
-    Comparison(ekv, ekvOrig);
+    ComparePathsDistance(ekv, ekvOrig);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -393,12 +385,8 @@ void TST_VAbstractPiece::RawPathRemoveLoop_data() const
 
     auto ASSERT_TEST_CASE = [this](const char *title, const QString &input, const QString &output)
     {
-        QVector<VRawSAPoint> inputPoints;
-        AbstractTest::VectorFromJson(input, inputPoints);
-
-        QVector<QPointF> outputPoints;
-        AbstractTest::VectorFromJson(output, outputPoints);
-
+        QVector<VRawSAPoint> inputPoints = AbstractTest::VectorFromJson<VRawSAPoint>(input);
+        QVector<QPointF> outputPoints = AbstractTest::VectorFromJson<QPointF>(output);
         QTest::newRow(title) << inputPoints << outputPoints;
     };
 
@@ -414,8 +402,8 @@ void TST_VAbstractPiece::RawPathRemoveLoop() const
     QFETCH(QVector<VRawSAPoint>, path);
     QFETCH(QVector<QPointF>, expect);
 
-    QVector<QPointF> res = VAbstractPiece::CheckLoops(path);
-    Comparison(res, expect);
+    QVector<QPointF> res = CastTo<QPointF>(VAbstractPiece::CheckLoops(path));
+    ComparePathsDistance(res, expect);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -688,7 +676,7 @@ void TST_VAbstractPiece::PathRemoveLoop() const
     QFETCH(QVector<QPointF>, expect);
 
     QVector<QPointF> res = VAbstractPiece::CheckLoops(path);
-    Comparison(res, expect);
+    ComparePathsDistance(res, expect);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -874,7 +862,7 @@ void TST_VAbstractPiece::PathLoopsCase() const
     QFETCH(QVector<QPointF>, expect);
 
     const QVector<QPointF> res = VAbstractPiece::CheckLoops(path);
-    Comparison(res, expect);
+    ComparePathsDistance(res, expect);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -886,12 +874,8 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data()
 
     auto ASSERT_TEST_CASE = [this](const char *title, const QString &input, const QString &output, qreal width)
     {
-        QVector<VSAPoint> inputPoints;
-        AbstractTest::VectorFromJson(input, inputPoints);
-
-        QVector<QPointF> outputPoints;
-        AbstractTest::VectorFromJson(output, outputPoints);
-
+        QVector<VSAPoint> inputPoints = AbstractTest::VectorFromJson<VSAPoint>(input);
+        QVector<QPointF> outputPoints = AbstractTest::VectorFromJson<QPointF>(output);
         QTest::newRow(title) << inputPoints << width << outputPoints;
     };
 
@@ -978,10 +962,10 @@ void TST_VAbstractPiece::BrokenDetailEquidistant() const
     QFETCH(qreal, width);
     QFETCH(QVector<QPointF>, ekvOrig);
 
-    const QVector<QPointF> ekv = VAbstractPiece::Equidistant(points, width, QString());// Take result
+    const QVector<QPointF> ekv = CastTo<QPointF>(VAbstractPiece::Equidistant(points, width, QString()));// Take result
 
     // Begin comparison
-    Comparison(ekv, ekvOrig);
+    ComparePathsDistance(ekv, ekvOrig);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -993,12 +977,8 @@ void TST_VAbstractPiece::EquidistantAngleType_data()
 
     auto ASSERT_TEST_CASE = [this](const char *title, const QString &input, const QString &output, qreal width)
     {
-        QVector<VSAPoint> inputPoints;
-        AbstractTest::VectorFromJson(input, inputPoints);
-
-        QVector<QPointF> outputPoints;
-        AbstractTest::VectorFromJson(output, outputPoints);
-
+        QVector<VSAPoint> inputPoints = AbstractTest::VectorFromJson<VSAPoint>(input);
+        QVector<QPointF> outputPoints = AbstractTest::VectorFromJson<QPointF>(output);
         QTest::newRow(title) << inputPoints << width << outputPoints;
     };
 
@@ -1094,10 +1074,10 @@ void TST_VAbstractPiece::EquidistantAngleType() const
     QFETCH(qreal, width);
     QFETCH(QVector<QPointF>, ekvOrig);
 
-    const QVector<QPointF> ekv = VAbstractPiece::Equidistant(points, width, QString());// Take result
+    const QVector<QPointF> ekv = CastTo<QPointF>(VAbstractPiece::Equidistant(points, width, QString()));// Take result
 
     // Begin comparison
-    Comparison(ekv, ekvOrig);
+    ComparePathsDistance(ekv, ekvOrig);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1134,7 +1114,7 @@ void TST_VAbstractPiece::CorrectEquidistantPoints() const
     const QVector<QPointF> res = VAbstractPiece::CorrectEquidistantPoints(points, removeFirstAndLast);
 
     // Begin comparison
-    Comparison(res, expect);
+    ComparePathsDistance(res, expect);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1145,12 +1125,8 @@ void TST_VAbstractPiece::TestCorrectEquidistantPoints_data()
 
     auto ASSERT_TEST_CASE = [this](const char *title, const QString &input, const QString &output)
     {
-        QVector<QPointF> inputPoints;
-        AbstractTest::VectorFromJson(input, inputPoints);
-
-        QVector<QPointF> outputPoints;
-        AbstractTest::VectorFromJson(output, outputPoints);
-
+        QVector<QPointF> inputPoints = AbstractTest::VectorFromJson<QPointF>(input);
+        QVector<QPointF> outputPoints = AbstractTest::VectorFromJson<QPointF>(output);
         QTest::newRow(title) << inputPoints << outputPoints;
     };
 
@@ -1172,7 +1148,7 @@ void TST_VAbstractPiece::TestCorrectEquidistantPoints() const
     QFETCH(QVector<QPointF>, expect);
 
     QVector<QPointF> after = VAbstractPiece::CorrectEquidistantPoints(before);
-    Comparison(after, expect);
+    ComparePathsDistance(after, expect);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1289,7 +1265,7 @@ void TST_VAbstractPiece::PossibleInfiniteClearLoops() const
     QFETCH(QVector<QPointF>, expect);
 
     QVector<QPointF> res = VAbstractPiece::CheckLoops(path);
-    Comparison(res, expect);
+    ComparePathsDistance(res, expect);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1301,12 +1277,8 @@ void TST_VAbstractPiece::IsAllowanceValid_data() const
 
     auto ASSERT_TEST_CASE = [this](const char *title, const QString &base, const QString &allowance, bool valid)
     {
-        QVector<QPointF> basePoints;
-        AbstractTest::VectorFromJson(base, basePoints);
-
-        QVector<QPointF> allowancePoints;
-        AbstractTest::VectorFromJson(allowance, allowancePoints);
-
+        QVector<QPointF> basePoints = AbstractTest::VectorFromJson<QPointF>(base);
+        QVector<QPointF> allowancePoints = AbstractTest::VectorFromJson<QPointF>(allowance);
         QTest::newRow(title) << basePoints << allowancePoints << valid ;
     };
 

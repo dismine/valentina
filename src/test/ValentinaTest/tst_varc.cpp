@@ -458,7 +458,7 @@ void TST_VArc::TestCurveIntersectAxis()
     const bool found = VAbstractCurve::CurveIntersectAxis(basePoint, angle, curvePoints, &intersectionPoint);
     QCOMPARE(found, result);
 
-    Comparison(intersectionPoint, crosPoint, accuracyPointOnLine);
+    ComparePointsDistance(intersectionPoint, crosPoint, accuracyPointOnLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -466,6 +466,6 @@ void TST_VArc::EmptyArc()
 {
     VArc empty;
 
-    Comparison(empty.GetPoints(), {QPointF()});
+    ComparePathsDistance(empty.GetPoints(), {QPointF()});
     QCOMPARE(empty.GetLength(), 0.);
 }

@@ -57,10 +57,10 @@ void TST_VLayoutDetail::Case1() const
     // https://bitbucket.org/dismine/valentina/issue/304/layout-appears-different-than-my-pattern
 
     VLayoutPiece det = VLayoutPiece();
-    det.SetCountourPoints(InputPointsCase1());
+    det.SetCountourPoints(CastTo<VLayoutPoint>(InputPointsCase1()));
 
     // Begin comparison
-    Comparison(det.GetMappedContourPoints(), OutputPointsCase1());
+    ComparePathsDistance(CastTo<QPointF>(det.GetMappedContourPoints()), OutputPointsCase1());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -119,10 +119,10 @@ QVector<QPointF> TST_VLayoutDetail::OutputPointsCase1() const //-V524
 void TST_VLayoutDetail::Case2() const
 {
     VLayoutPiece det = VLayoutPiece();
-    det.SetCountourPoints(InputPointsCase2());
+    det.SetCountourPoints(CastTo<VLayoutPoint>(InputPointsCase2()));
 
     // Begin comparison
-    Comparison(det.GetMappedContourPoints(), OutputPointsCase2());
+    ComparePathsDistance(CastTo<QPointF>(det.GetMappedContourPoints()), OutputPointsCase2());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -160,10 +160,10 @@ QVector<QPointF> TST_VLayoutDetail::OutputPointsCase2() const
 void TST_VLayoutDetail::Case3() const
 {
     VLayoutPiece det = VLayoutPiece();
-    det.SetCountourPoints(InputPointsCase3());
+    det.SetCountourPoints(CastTo<VLayoutPoint>(InputPointsCase3()));
 
     // Begin comparison
-    Comparison(det.GetMappedContourPoints(), OutputPointsCase3());
+    ComparePathsDistance(CastTo<QPointF>(det.GetMappedContourPoints()), OutputPointsCase3());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

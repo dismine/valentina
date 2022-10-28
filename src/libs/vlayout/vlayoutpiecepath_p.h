@@ -41,6 +41,7 @@
 #   include "../vmisc/vdatastreamenum.h"
 #endif
 #include "../ifc/exception/vexception.h"
+#include "vlayoutpoint.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -52,24 +53,18 @@ public:
     VLayoutPiecePathData()
     {}
 
-    explicit VLayoutPiecePathData(const QVector<QPointF> &points)
+    explicit VLayoutPiecePathData(const QVector<VLayoutPoint> &points)
         : m_points(points)
     {}
 
-    VLayoutPiecePathData(const VLayoutPiecePathData &path)
-        : QSharedData(path),
-          m_points(path.m_points),
-          m_penStyle(path.m_penStyle),
-          m_cut(path.m_cut)
-    {}
-
+    VLayoutPiecePathData(const VLayoutPiecePathData &path) = default;
     ~VLayoutPiecePathData() = default;
 
     friend QDataStream& operator<<(QDataStream& dataStream, const VLayoutPiecePathData& path);
     friend QDataStream& operator>>(QDataStream& dataStream, VLayoutPiecePathData& path);
 
     /** @brief m_points list of path points. */
-    QVector<QPointF> m_points{};
+    QVector<VLayoutPoint> m_points{};
 
     /** @brief m_penStyle path pen style. */
     Qt::PenStyle     m_penStyle{Qt::SolidLine};
@@ -79,8 +74,8 @@ public:
 private:
     Q_DISABLE_ASSIGN(VLayoutPiecePathData)
 
-    static const quint32 streamHeader;
-    static const quint16 classVersion;
+    static constexpr quint32 streamHeader = 0xA53F0225; // CRC-32Q string "VLayoutPiecePathData"
+    static constexpr quint16 classVersion = 2;
 };
 
 QT_WARNING_POP
@@ -127,7 +122,16 @@ QDataStream& operator>>(QDataStream &dataStream, VLayoutPiecePathData &path)
         throw VException(message);
     }
 
-    dataStream >> path.m_points;
+    if (actualClassVersion == 1)
+    {
+        QVector<QPointF> points;
+        dataStream >> points;
+        path.m_points = CastTo<VLayoutPoint>(points);
+    }
+    else
+    {
+        dataStream >> path.m_points;
+    }
     dataStream >> path.m_penStyle;
     dataStream >> path.m_cut;
 

@@ -63,24 +63,7 @@ public:
         }
     }
 
-    VPieceNodeData (const VPieceNodeData& node)
-        : QSharedData(node),
-          m_id(node.m_id),
-          m_typeTool(node.m_typeTool),
-          m_reverse(node.m_reverse),
-          m_excluded(node.m_excluded),
-          m_isPassmark(node.m_isPassmark),
-          m_isMainPathNode(node.m_isMainPathNode),
-          m_formulaWidthBefore(node.m_formulaWidthBefore),
-          m_formulaWidthAfter(node.m_formulaWidthAfter),
-          m_formulaPassmarkLength(node.m_formulaPassmarkLength),
-          m_angleType(node.m_angleType),
-          m_passmarkLineType(node.m_passmarkLineType),
-          m_passmarkAngleType(node.m_passmarkAngleType),
-          m_isShowSecondPassmark(node.m_isShowSecondPassmark),
-          m_checkUniqueness(node.m_checkUniqueness),
-          m_manualPassmarkLength(node.m_manualPassmarkLength)
-    {}
+    VPieceNodeData (const VPieceNodeData& node) = default;
 
     ~VPieceNodeData() = default;
 
@@ -124,11 +107,13 @@ public:
 
     bool m_manualPassmarkLength{false};
 
+    bool m_turnPoint{true};
+
 private:
     Q_DISABLE_ASSIGN(VPieceNodeData)
 
-    static const quint32 streamHeader;
-    static const quint16 classVersion;
+    static constexpr quint32 streamHeader = 0x2198CBC8; // CRC-32Q string "VPieceNodeData"
+    static constexpr quint16 classVersion = 2;
 };
 
 // Friend functions
@@ -154,6 +139,8 @@ QDataStream &operator<<(QDataStream &out, const VPieceNodeData &p)
         << p.m_manualPassmarkLength;
 
     // Added in classVersion = 2
+
+    out << p.m_turnPoint;
 
     return out;
 }
@@ -199,10 +186,10 @@ QDataStream &operator>>(QDataStream &in, VPieceNodeData &p)
        >> p.m_checkUniqueness
        >> p.m_manualPassmarkLength;
 
-//    if (actualClassVersion >= 2)
-//    {
-
-//    }
+    if (actualClassVersion >= 2)
+    {
+        in >> p.m_turnPoint;
+    }
 
     return in;
 }

@@ -36,17 +36,17 @@
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/def.h"
 #include "../vgeometry/vgeometrydef.h"
-
-#include <QPointF>
+#include "vlayoutpoint.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
+QT_WARNING_DISABLE_CLANG("-Wnon-virtual-dtor")
 
 /**
  * @brief The VSAPoint class seam allowance point
  */
-class VSAPoint : public QPointF
+class VSAPoint : public VLayoutPoint
 {
 public:
     QT_WARNING_PUSH
@@ -58,6 +58,7 @@ public:
 
     Q_DECL_CONSTEXPR VSAPoint(qreal xpos, qreal ypos);
     Q_DECL_CONSTEXPR explicit VSAPoint(QPointF p);
+    Q_DECL_CONSTEXPR explicit VSAPoint(const VLayoutPoint &p);
 
     Q_DECL_CONSTEXPR auto GetSABefore() const -> qreal;
     Q_DECL_CONSTEXPR auto GetSAAfter() const -> qreal;
@@ -78,7 +79,7 @@ public:
     Q_DECL_RELAXED_CONSTEXPR auto MaxLocalSA(qreal width) const -> qreal;
     Q_DECL_RELAXED_CONSTEXPR auto PassmarkLength(qreal width) const -> qreal;
 
-    auto toJson() const -> QJsonObject;
+    auto toJson() const -> QJsonObject override;
 
     static constexpr qreal passmarkFactor{0.5};
     static constexpr qreal maxPassmarkLength{MmToPixel(10.)};
@@ -97,12 +98,17 @@ Q_DECLARE_TYPEINFO(VSAPoint, Q_MOVABLE_TYPE); // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint(qreal xpos, qreal ypos)
-    : QPointF(xpos, ypos)
+    : VLayoutPoint(xpos, ypos)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint(QPointF p)
-    : QPointF(p)
+    : VLayoutPoint(p)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint(const VLayoutPoint &p)
+    : VLayoutPoint(p)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

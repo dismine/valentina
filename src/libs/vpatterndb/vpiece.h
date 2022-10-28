@@ -33,7 +33,6 @@
 #include <QSharedDataPointer>
 
 #include "../vlayout/vabstractpiece.h"
-#include "../vgeometry/vgeometrydef.h"
 
 class VPieceData;
 class VPieceNode;
@@ -65,10 +64,10 @@ public:
     VPiecePath &GetPath();
     void       SetPath(const VPiecePath &path);
 
-    QVector<QPointF>       MainPathPoints(const VContainer *data) const;
-    QVector<QPointF>       UniteMainPathPoints(const VContainer *data) const;
+    QVector<VLayoutPoint>  MainPathPoints(const VContainer *data) const;
+    QVector<VLayoutPoint>  UniteMainPathPoints(const VContainer *data) const;
     QVector<VPointF>       MainPathNodePoints(const VContainer *data, bool showExcluded = false) const;
-    QVector<QPointF>       SeamAllowancePoints(const VContainer *data) const;
+    QVector<VLayoutPoint>  SeamAllowancePoints(const VContainer *data) const;
     QVector<QPointF>       CuttingPathPoints(const VContainer *data) const;
     QVector<QLineF>        PassmarksLines(const VContainer *data) const;
 
@@ -80,7 +79,8 @@ public:
     static QPainterPath MainPathPath(const QVector<QPointF> &points);
 
     QPainterPath SeamAllowancePath(const VContainer *data) const;
-    QPainterPath SeamAllowancePath(const QVector<QPointF> &points) const;
+    template <class T>
+    QPainterPath SeamAllowancePath(const QVector<T> &points) const;
     QPainterPath PassmarksPath(const VContainer *data) const;
     QPainterPath PlaceLabelPath(const VContainer *data) const;
 
@@ -132,7 +132,7 @@ public:
 
     QVector<VPieceNode> GetUnitedPath(const VContainer *data) const;
 
-    QVector<QPointF> SeamAllowancePointsWithRotation(const VContainer *data, int makeFirst) const;
+    QVector<VLayoutPoint> SeamAllowancePointsWithRotation(const VContainer *data, int makeFirst) const;
 
     void SetGradationLabel(const QString &label);
     auto GetGradationLabel() const -> QString;
@@ -166,5 +166,42 @@ private:
 };
 
 Q_DECLARE_TYPEINFO(VPiece, Q_MOVABLE_TYPE); // NOLINT
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+inline QPainterPath VPiece::SeamAllowancePath(const QVector<T> &points) const
+{
+    QPainterPath ekv;
+
+    // seam allowence
+    if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn())
+    {
+        if (not points.isEmpty())
+        {
+            ekv.moveTo(points.at(0));
+            for (qint32 i = 1; i < points.count(); ++i)
+            {
+                ekv.lineTo(points.at(i));
+            }
+
+#if !defined(V_NO_ASSERT)
+            // uncomment for debug
+//            QFont font;
+//            font.setPixelSize(1);
+//            for (qint32 i = 0; i < points.count(); ++i)
+//            {
+//                ekv.addEllipse(points.at(i).x()-accuracyPointOnLine, points.at(i).y()-accuracyPointOnLine,
+//                               accuracyPointOnLine*2., accuracyPointOnLine*2.);
+//                ekv.addText(points.at(i).x()-accuracyPointOnLine, points.at(i).y()-accuracyPointOnLine, font,
+//                            QString::number(i+1));
+//            }
+#endif
+
+            ekv.setFillRule(Qt::WindingFill);
+        }
+    }
+
+    return ekv;
+}
 
 #endif // VPIECE_H

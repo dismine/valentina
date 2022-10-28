@@ -46,17 +46,14 @@
 #include <QVector>
 #include <QtGlobal>
 #include <QLineF>
-#include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
 
-#include "vsysexits.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
 #include "../vgeometry/vsplinepath.h"
 #include "../vlayout/vabstractpiece.h"
-#include "../vlayout/vrawsapoint.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpiece.h"
 #include "../vpatterndb/vpiecenode.h"
@@ -66,104 +63,6 @@
 AbstractTest::AbstractTest(QObject *parent) :
     QObject(parent)
 {
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void AbstractTest::VectorFromJson(const QString &json, QVector<QPointF>& vector) const
-{
-    QByteArray saveData;
-    PrepareDocument(json, saveData);
-    QJsonDocument loadDoc(QJsonDocument::fromJson(saveData));
-
-    const QString vectorKey = QStringLiteral("vector");
-    const QString typeKey = QStringLiteral("type");
-
-    QJsonObject vectorObject = loadDoc.object();
-    TestRoot(vectorObject, vectorKey, json);
-
-    QJsonArray vectorArray = vectorObject[vectorKey].toArray();
-    for (int i = 0; i < vectorArray.size(); ++i)
-    {
-        QJsonObject pointObject = vectorArray[i].toObject();
-
-        QString type;
-        AbstractTest::ReadStringValue(pointObject, typeKey, type);
-
-        if (type != QLatin1String("QPointF"))
-        {
-            const QString error = QStringLiteral("Invalid json file '%1'. Unexpected class '%2'.")
-                    .arg(json, pointObject[typeKey].toString());
-            QFAIL(qUtf8Printable(error));
-        }
-
-        QPointF point;
-        QPointFromJson(pointObject, point);
-        vector.append(point);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void AbstractTest::VectorFromJson(const QString &json, QVector<VSAPoint> &vector) const
-{
-    QByteArray saveData;
-    PrepareDocument(json, saveData);
-    QJsonDocument loadDoc(QJsonDocument::fromJson(saveData));
-
-    const QString vectorKey = QStringLiteral("vector");
-
-    QJsonObject vectorObject = loadDoc.object();
-    TestRoot(vectorObject, vectorKey, json);
-
-    QJsonArray vectorArray = vectorObject[vectorKey].toArray();
-    for (int i = 0; i < vectorArray.size(); ++i)
-    {
-        QJsonObject pointObject = vectorArray[i].toObject();
-
-        QString type;
-        AbstractTest::ReadStringValue(pointObject, QStringLiteral("type"), type);
-
-        if (type != QLatin1String("VSAPoint"))
-        {
-            const QString error = QStringLiteral("Invalid json file '%1'. Unexpected class '%2'.").arg(json, type);
-            QFAIL(qUtf8Printable(error));
-        }
-
-        VSAPoint point;
-        SAPointFromJson(pointObject, point);
-        vector.append(point);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void AbstractTest::VectorFromJson(const QString &json, QVector<VRawSAPoint> &vector) const
-{
-    QByteArray saveData;
-    PrepareDocument(json, saveData);
-    QJsonDocument loadDoc(QJsonDocument::fromJson(saveData));
-
-    const QString vectorKey = QStringLiteral("vector");
-
-    QJsonObject vectorObject = loadDoc.object();
-    TestRoot(vectorObject, vectorKey, json);
-
-    QJsonArray vectorArray = vectorObject[vectorKey].toArray();
-    for (int i = 0; i < vectorArray.size(); ++i)
-    {
-        QJsonObject pointObject = vectorArray[i].toObject();
-
-        QString type;
-        AbstractTest::ReadStringValue(pointObject, QStringLiteral("type"), type);
-
-        if (type != QLatin1String("VRawSAPoint"))
-        {
-            const QString error = QStringLiteral("Invalid json file '%1'. Unexpected class '%2'.").arg(json, type);
-            QFAIL(qUtf8Printable(error));
-        }
-
-        VRawSAPoint point;
-        RawSAPointFromJson(pointObject, point);
-        vector.append(point);
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -217,17 +116,22 @@ void AbstractTest::PassmarkDataFromJson(const QString &json, VPiecePassmarkData 
 
     QJsonObject passmarkData = dataObject[dataKey].toObject();
 
-    VSAPoint previousSAPoint;
-    SAPointFromJson(passmarkData[QStringLiteral("previousSAPoint")].toObject(), previousSAPoint);
-    data.previousSAPoint = previousSAPoint;
+    try
+    {
+        auto previousSAPoint = PointFromJson<VSAPoint>(passmarkData[QStringLiteral("previousSAPoint")].toObject());
+        data.previousSAPoint = previousSAPoint;
 
-    VSAPoint passmarkSAPoint;
-    SAPointFromJson(passmarkData[QStringLiteral("passmarkSAPoint")].toObject(), passmarkSAPoint);
-    data.passmarkSAPoint = passmarkSAPoint;
+        auto passmarkSAPoint = PointFromJson<VSAPoint>(passmarkData[QStringLiteral("passmarkSAPoint")].toObject());
+        data.passmarkSAPoint = passmarkSAPoint;
 
-    VSAPoint nextSAPoint;
-    SAPointFromJson(passmarkData[QStringLiteral("nextSAPoint")].toObject(), nextSAPoint);
-    data.nextSAPoint = nextSAPoint;
+        auto nextSAPoint = PointFromJson<VSAPoint>(passmarkData[QStringLiteral("nextSAPoint")].toObject());
+        data.nextSAPoint = nextSAPoint;
+    }
+    catch (const VException &e)
+    {
+        const QString error = QStringLiteral("Invalid json file '%1'. %2").arg(json, e.ErrorMessage());
+        QFAIL(qUtf8Printable(error));
+    }
 
     qreal saWidth = 0;
     AbstractTest::ReadDoubleValue(passmarkData, QStringLiteral("saWidth"), saWidth);
@@ -287,28 +191,26 @@ void AbstractTest::PassmarkShapeFromJson(const QString &json, QVector<QLineF> &s
     TestRoot(shapeObject, shapeKey, json);
 
     QJsonArray vectorArray = shapeObject[shapeKey].toArray();
-    for (int i = 0; i < vectorArray.size(); ++i)
+    for (auto && item : vectorArray)
     {
-        QJsonObject lineObject = vectorArray[i].toObject();
+        QJsonObject lineObject = item.toObject();
 
         QString type;
         AbstractTest::ReadStringValue(lineObject, typeKey, type);
 
-        if (type != QLatin1String("QLineF"))
+        if (type != typeid(QLineF).name())
         {
             const QString error = QStringLiteral("Invalid json file '%1'. Unexpected class '%2'.")
                     .arg(json, lineObject[typeKey].toString());
             QFAIL(qUtf8Printable(error));
         }
 
-        QLineF line;
-        QLineFromJson(lineObject, line);
-        shape.append(line);
+        shape.append(QLineFromJson(lineObject));
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void AbstractTest::Comparison(const QVector<QPointF> &ekv, const QVector<QPointF> &ekvOrig) const
+void AbstractTest::ComparePathsDistance(const QVector<QPointF> &ekv, const QVector<QPointF> &ekvOrig) const
 {
     // Begin comparison
     QCOMPARE(ekv.size(), ekvOrig.size());// First check if sizes equal
@@ -316,12 +218,12 @@ void AbstractTest::Comparison(const QVector<QPointF> &ekv, const QVector<QPointF
 
     for (int i=0; i < ekv.size(); i++)
     {
-        Comparison(ekv.at(i), ekvOrig.at(i), testAccuracy);
+        ComparePointsDistance(ekv.at(i), ekvOrig.at(i), testAccuracy);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void AbstractTest::Comparison(const QPointF &result, const QPointF &expected, qreal testAccuracy) const
+void AbstractTest::ComparePointsDistance(const QPointF &result, const QPointF &expected, qreal testAccuracy) const
 {
     const QString msg = QStringLiteral("Actual '%2;%3', Expected '%4;%5'. Distance between points %6 mm.")
             .arg(result.x()).arg(result.y()).arg(expected.x()).arg(expected.y())
@@ -332,7 +234,7 @@ void AbstractTest::Comparison(const QPointF &result, const QPointF &expected, qr
 
 
 //---------------------------------------------------------------------------------------------------------------------
-void AbstractTest::Comparison(const QVector<QLineF> &result, const QVector<QLineF> &expected) const
+void AbstractTest::CompareLinesDistance(const QVector<QLineF> &result, const QVector<QLineF> &expected) const
 {
     // Begin comparison
     QCOMPARE(result.size(), expected.size());// First check if sizes equal
@@ -525,7 +427,7 @@ bool AbstractTest::CopyRecursively(const QString &srcFilePath, const QString &tg
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void AbstractTest::PrepareDocument(const QString &json, QByteArray &data) const
+void AbstractTest::PrepareDocument(const QString &json, QByteArray &data)
 {
     QFile loadFile(json);
     if (not loadFile.open(QIODevice::ReadOnly))
@@ -538,7 +440,7 @@ void AbstractTest::PrepareDocument(const QString &json, QByteArray &data) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void AbstractTest::TestRoot(const QJsonObject &root, const QString &attribute, const QString &file) const
+void AbstractTest::TestRoot(const QJsonObject &root, const QString &attribute, const QString &file)
 {
     if (not root.contains(attribute))
     {
@@ -549,7 +451,7 @@ void AbstractTest::TestRoot(const QJsonObject &root, const QString &attribute, c
 
 //---------------------------------------------------------------------------------------------------------------------
 void AbstractTest::ReadStringValue(const QJsonObject &itemObject, const QString &attribute, QString &value,
-                                   const QString &defaultValue) const
+                                   const QString &defaultValue)
 {
     if (itemObject.contains(attribute))
     {
@@ -580,7 +482,7 @@ void AbstractTest::ReadStringValue(const QJsonObject &itemObject, const QString 
 
 //---------------------------------------------------------------------------------------------------------------------
 void AbstractTest::ReadBooleanValue(const QJsonObject &itemObject, const QString &attribute, bool &value,
-                                    const QString &defaultValue) const
+                                    const QString &defaultValue)
 {
     if (itemObject.contains(attribute))
     {
@@ -624,8 +526,7 @@ void AbstractTest::ReadPointValue(const QJsonObject &itemObject, const QString &
 {
     if (itemObject.contains(attribute))
     {
-        QJsonObject p1Object = itemObject[attribute].toObject();
-        VPointFromJson(p1Object, value);
+        value = PointFromJson<VPointF>(itemObject[attribute].toObject());
     }
     else
     {
@@ -706,22 +607,11 @@ void AbstractTest::ReadPieceNodeValue(const QJsonObject &itemObject, VPieceNode 
     node = VPieceNode(id, typeTool, reverse);
 }
 
-//---------------------------------------------------------------------------------------------------------------------
-void AbstractTest::QPointFromJson(const QJsonObject &itemObject, QPointF &point) const
-{
-    qreal x = 0;
-    AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("x"), x);
-    point.setX(x);
-
-    qreal y = 0;
-    AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("y"), y);
-    point.setY(y);
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 template<typename T, typename std::enable_if<std::is_floating_point<T>::value>::type*>
 void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString &attribute, T &value,
-                                   const QString &defaultValue) const
+                                   const QString &defaultValue)
 {
     if (itemObject.contains(attribute))
     {
@@ -760,7 +650,7 @@ void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString 
 //---------------------------------------------------------------------------------------------------------------------
 template<typename T, typename std::enable_if<std::is_enum<T>::value>::type*>
 void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString &attribute, T &value,
-                                   const QString &defaultValue) const
+                                   const QString &defaultValue)
 {
     if (itemObject.contains(attribute))
     {
@@ -799,7 +689,7 @@ void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString 
 //---------------------------------------------------------------------------------------------------------------------
 template<typename T, typename std::enable_if<std::is_integral<T>::value>::type*>
 void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString &attribute, T &value,
-                                   const QString &defaultValue) const
+                                   const QString &defaultValue)
 {
     if (itemObject.contains(attribute))
     {
@@ -836,81 +726,10 @@ void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void AbstractTest::VPointFromJson(const QJsonObject &itemObject, VPointF &point)
+auto AbstractTest::QLineFromJson(const QJsonObject &itemObject) -> QLineF
 {
-    vidtype id = NULL_ID;
-    AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("id"), id);
-
-    qreal mx = 0;
-    AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("mx"), mx);
-
-    qreal my = 0;
-    AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("my"), my);
-
-    QString name;
-    AbstractTest::ReadStringValue(itemObject, QStringLiteral("name"), name);
-
-    qreal x = 0;
-    AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("x"), x);
-
-    qreal y = 0;
-    AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("y"), y);
-
-    point = VPointF(x, y, name, mx, my);
-    point.setId(id);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void AbstractTest::QLineFromJson(const QJsonObject &itemObject, QLineF &line)
-{
-    QPointF p1;
-    QPointFromJson(itemObject[QStringLiteral("p1")].toObject(), p1);
-
-    QPointF p2;
-    QPointFromJson(itemObject[QStringLiteral("p2")].toObject(), p2);
-
-    line = QLineF(p1, p2);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void AbstractTest::SAPointFromJson(const QJsonObject &itemObject, VSAPoint &point) const
-{
-    qreal x = 0;
-    AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("x"), x);
-    point.setX(x);
-
-    qreal y = 0;
-    AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("y"), y);
-    point.setY(y);
-
-    qreal saBefore;
-    AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("saBefore"), saBefore, QStringLiteral("-1"));
-    point.SetSABefore(saBefore);
-
-    qreal saAfter;
-    AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("saAfter"), saAfter, QStringLiteral("-1"));
-    point.SetSAAfter(saAfter);
-
-    PieceNodeAngle angleType = PieceNodeAngle::ByLength;
-    AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("angle"), angleType,
-                                  QString::number(static_cast<int>(PieceNodeAngle::ByLength)));
-    point.SetAngleType(angleType);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void AbstractTest::RawSAPointFromJson(const QJsonObject &itemObject, VRawSAPoint &point) const
-{
-    qreal x = 0;
-    AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("x"), x);
-    point.setX(x);
-
-    qreal y = 0;
-    AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("y"), y);
-    point.setY(y);
-
-    bool loopPoint;
-    AbstractTest::ReadBooleanValue(itemObject, QStringLiteral("loopPoint"), loopPoint, QStringLiteral("0"));
-    point.SetLoopPoint(loopPoint);
+    return {PointFromJson<QPointF>(itemObject[QStringLiteral("p1")].toObject()),
+            PointFromJson<QPointF>(itemObject[QStringLiteral("p2")].toObject())};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -999,8 +818,7 @@ void AbstractTest::DBFromJson(const QJsonObject &dbObject, QSharedPointer<VConta
             {
                 case GOType::Point:
                 {
-                    VPointF point;
-                    VPointFromJson(itemObject, point);
+                    VPointF point = PointFromJson<VPointF>(itemObject);
                     data->UpdateGObject(point.id(), new VPointF(point));
                     break;
                 }

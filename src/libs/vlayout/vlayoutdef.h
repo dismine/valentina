@@ -34,8 +34,6 @@
 #include <QPainterPath>
 #include <ciso646>
 
-#include "../vmisc/typedef.h"
-
 enum class LayoutExportFormats : qint8
 {
     SVG = 0,

@@ -43,6 +43,7 @@ struct VLayoutPassmark;
 struct VLayoutPlaceLabel;
 class VLayoutPiecePath;
 class VTextManager;
+class VLayoutPoint;
 
 class VPLayoutFileReader : public QXmlStreamReader
 {
@@ -67,6 +68,9 @@ private:
     void ReadSheet(const VPLayoutPtr &layout);
     void ReadPieces(const VPLayoutPtr &layout, const VPSheetPtr &sheet=VPSheetPtr());
     void ReadPiece(const VPPiecePtr &piece);
+    auto ReadLayoutPoint() -> VLayoutPoint;
+    auto ReadLayoutPoints() -> QVector<VLayoutPoint>;
+    void ReadSeamLine(const VPPiecePtr &piece);
     void ReadSeamAllowance(const VPPiecePtr &piece);
     void ReadGrainline(const VPPiecePtr &piece);
     void ReadNotches(const VPPiecePtr &piece);
@@ -81,6 +85,7 @@ private:
     auto ReadLabelLines() -> VTextManager;
     auto ReadLabelLine() -> TextLine;
     void ReadWatermark(const VPLayoutPtr &layout);
+
 
     void ReadLayoutMargins(const VPLayoutPtr &layout);
     void ReadSheetMargins(const VPSheetPtr &sheet);

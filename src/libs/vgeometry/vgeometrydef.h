@@ -64,24 +64,6 @@ enum class PlaceLabelType :  quint8
     Circle = 9
 };
 
-typedef QVector<QPolygonF> PlaceLabelImg;
-
-struct VLayoutPlaceLabel
-{
-    QPointF        center{};
-    PlaceLabelType type{PlaceLabelType::Button};
-    PlaceLabelImg  shape{};
-    QTransform     rotationMatrix{};
-    QRectF         box{};
-
-    friend QDataStream& operator<<(QDataStream& dataStream, const VLayoutPlaceLabel& data);
-    friend QDataStream& operator>>(QDataStream& dataStream, VLayoutPlaceLabel& data);
-private:
-    static const quint32 streamHeader;
-    static const quint16 classVersion;
-};
-Q_DECLARE_METATYPE(VLayoutPlaceLabel)
-
 struct VLayoutPassmark
 {
     QVector<QLineF>  lines{};

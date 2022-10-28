@@ -33,6 +33,7 @@
 #include "vplayout.h"
 #include "../vlayout/vtextmanager.h"
 #include "../vlayout/vlayoutpiecepath.h"
+#include "../vgeometry/vlayoutplacelabel.h"
 
 #include <QIcon>
 #include <QLoggingCategory>
@@ -408,7 +409,7 @@ auto VPPiece::StickyPosition(qreal &dx, qreal &dy) const -> bool
         return false;
     }
 
-    QVector<QPointF> path = GetMappedExternalContourPoints();
+    QVector<QPointF> path = CastTo<QPointF>(GetMappedExternalContourPoints());
     QRectF boundingRect = VLayoutPiece::BoundingRect(path);
     const qreal stickyDistance = pieceGap+minStickyDistance;
     QRectF stickyZone = QRectF(boundingRect.topLeft().x()-stickyDistance, boundingRect.topLeft().y()-stickyDistance,
@@ -424,7 +425,7 @@ auto VPPiece::StickyPosition(qreal &dx, qreal &dy) const -> bool
             continue;
         }
 
-        QVector<QPointF> piecePath = piece->GetMappedExternalContourPoints();
+        QVector<QPointF> piecePath = CastTo<QPointF>(piece->GetMappedExternalContourPoints());
         QRectF pieceBoundingRect = VLayoutPiece::BoundingRect(piecePath);
 
         if (stickyZone.intersects(pieceBoundingRect) || pieceBoundingRect.contains(stickyZone) ||

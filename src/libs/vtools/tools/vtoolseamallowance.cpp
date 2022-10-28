@@ -1391,7 +1391,7 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
                                                           this->getData());
     QFuture<QPainterPath > futurePassmarks = QtConcurrent::run(detail, &VPiece::PassmarksPath, this->getData());
 
-    QFuture<QVector<QPointF> > futureSeamAllowance;
+    QFuture<QVector<VLayoutPoint> > futureSeamAllowance;
     QFuture<bool> futureSeamAllowanceValid;
 
     if (detail.IsSeamAllowance())
@@ -2071,8 +2071,9 @@ auto VToolSeamAllowance::IsGrainlinePositionValid() const -> bool
 {
     QLineF grainLine = m_grainLine->Grainline();
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
-    const QVector<QPointF> contourPoints = detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn() ?
-                detail.SeamAllowancePoints(getData()) : detail.MainPathPoints(getData());
+    const QVector<QPointF> contourPoints =
+        detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn() ?
+            CastTo<QPointF>(detail.SeamAllowancePoints(getData())) : CastTo<QPointF>(detail.MainPathPoints(getData()));
 
     QVector<QPointF> points = VAbstractCurve::CurveIntersectLine(contourPoints, grainLine);
     if (not points.isEmpty())

@@ -521,7 +521,7 @@ void VPMainGraphicsView::TranslatePiecesOn(qreal dx, qreal dy)
             QVector<QPointF> path;
             if (not p.isNull() && p->StickyPosition(m_stickyTranslateX, m_stickyTranslateY))
             {
-                path = p->GetMappedExternalContourPoints();
+                path = CastTo<QPointF>(p->GetMappedExternalContourPoints());
                 QTransform m;
                 m.translate(m_stickyTranslateX, m_stickyTranslateY);
                 path = m.map(path);

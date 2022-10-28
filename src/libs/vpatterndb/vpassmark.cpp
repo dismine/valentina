@@ -33,7 +33,6 @@
 #include "../ifc/exception/vexceptioninvalidnotch.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
-#include "testpassmark.h"
 #include "../vlayout/vrawsapoint.h"
 
 const qreal VPassmark::passmarkRadiusFactor = 0.45;
@@ -53,7 +52,7 @@ PassmarkStatus GetSeamPassmarkSAPoint(const VPiecePassmarkData &passmarkData, co
     if (needRollback && not seamAllowance.isEmpty())
     {
         ekvPoints.clear();
-        ekvPoints += seamAllowance.at(seamAllowance.size()-2);
+        ekvPoints += VRawSAPoint(seamAllowance.at(seamAllowance.size()-2));
     }
 
     if (ekvPoints.isEmpty())
@@ -726,7 +725,7 @@ QVector<QLineF> VPassmark::SAPassmark(const VPiece &piece, const VContainer *dat
     if (not piece.IsSeamAllowanceBuiltIn())
     {
         // Because rollback cannot be calulated if passmark is not first point in main path we rotate it.
-        return SAPassmark(piece.SeamAllowancePointsWithRotation(data, m_data.passmarkIndex), side);
+        return SAPassmark(CastTo<QPointF>(piece.SeamAllowancePointsWithRotation(data, m_data.passmarkIndex)), side);
     }
 
     return QVector<QLineF>();
@@ -801,8 +800,8 @@ QVector<QLineF> VPassmark::BuiltInSAPassmark(const VPiece &piece, const VContain
         return QVector<QLineF>();
     }
 
-    return CreatePassmarkLines(m_data.passmarkLineType, m_data.passmarkAngleType, lines, piece.MainPathPoints(data),
-                               PassmarkSide::All);
+    return CreatePassmarkLines(m_data.passmarkLineType, m_data.passmarkAngleType, lines,
+                               CastTo<QPointF>(piece.MainPathPoints(data)), PassmarkSide::All);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -868,7 +867,8 @@ QVector<QLineF> VPassmark::SAPassmarkBaseLine(const VPiece &piece, const VContai
     if (not piece.IsSeamAllowanceBuiltIn())
     {
         // Because rollback cannot be calulated if passmark is not first point in main path we rotate it.
-        return SAPassmarkBaseLine(piece.SeamAllowancePointsWithRotation(data, m_data.passmarkIndex), side);
+        return SAPassmarkBaseLine(CastTo<QPointF>(piece.SeamAllowancePointsWithRotation(data, m_data.passmarkIndex)),
+                                  side);
     }
 
     return QVector<QLineF>();

@@ -36,9 +36,6 @@
 #include <QDataStream>
 #include <QtNumeric>
 
-const quint32 VPieceNodeData::streamHeader = 0x2198CBC8; // CRC-32Q string "VPieceNodeData"
-const quint16 VPieceNodeData::classVersion = 1;
-
 //---------------------------------------------------------------------------------------------------------------------
 VPieceNode::VPieceNode()
     : d(new VPieceNodeData)
@@ -452,6 +449,18 @@ bool VPieceNode::IsManualPassmarkLength() const
 void VPieceNode::SetManualPassmarkLength(bool value)
 {
     d->m_manualPassmarkLength = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VPieceNode::IsTurnPoint() const
+{
+    return d->m_typeTool == Tool::NodePoint ? d->m_turnPoint : false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetTurnPoint(bool value)
+{
+    d->m_turnPoint = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

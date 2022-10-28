@@ -52,7 +52,7 @@ void VisToolPiece::RefreshGeometry()
             if (GetMode() == Mode::Creation)
             {
                 m_cachedCurvesPath = m_piece.CurvesPainterPath(GetData());
-                m_cachedMainPathPoints = m_piece.MainPathPoints(GetData());
+                m_cachedMainPathPoints = CastTo<QPointF>(m_piece.MainPathPoints(GetData()));
                 m_cachedMainPath = VPiece::MainPathPath(m_cachedMainPathPoints);
             }
             else

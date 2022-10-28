@@ -28,6 +28,7 @@
 #include "vlayoutconverter.h"
 #include "../exception/vexception.h"
 #include "ifcdef.h"
+#include "../vlayout/vlayoutpoint.h"
 
 /*
  * Version rules:
@@ -38,11 +39,60 @@
  */
 
 const QString VLayoutConverter::LayoutMinVerStr = QStringLiteral("0.1.0");
-const QString VLayoutConverter::LayoutMaxVerStr = QStringLiteral("0.1.2");
-const QString VLayoutConverter::CurrentSchema   = QStringLiteral("://schema/layout/v0.1.2.xsd");
+const QString VLayoutConverter::LayoutMaxVerStr = QStringLiteral("0.1.3");
+const QString VLayoutConverter::CurrentSchema   = QStringLiteral("://schema/layout/v0.1.3.xsd");
 
 //VLayoutConverter::LayoutMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VLayoutConverter::LayoutMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
+
+namespace
+{
+// The list of all string we use for conversion
+// Better to use global variables because repeating QStringLiteral blows up code size
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPieceTag, (QLatin1String("piece"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSeamLineTag, (QLatin1String("seamLine"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSeamAllowanceTag, (QLatin1String("seamAllowance"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strInternalPathsTag, (QLatin1String("internalPaths"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strInternalPathTag, (QLatin1String("internalPath"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMarkersTag, (QLatin1String("markers"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMarkerTag, (QLatin1String("marker"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPointTag, (QLatin1String("point"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrX, (QLatin1String("x"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrY, (QLatin1String("y"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrTurnPoint, (QLatin1String("turnPoint"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrCurvePoint, (QLatin1String("curvePoint"))) // NOLINT
+
+//const QChar groupSep        = QLatin1Char(';');
+const QChar coordintatesSep = QLatin1Char(',');
+const QChar pointsSep       = QLatin1Char(' ');
+//const QChar itemsSep        = QLatin1Char('*');
+
+//---------------------------------------------------------------------------------------------------------------------
+auto StringV0_1_2ToPoint(const QString &point) -> QPointF
+{
+    QStringList coordinates = point.split(coordintatesSep);
+    if (coordinates.count() == 2)
+    {
+        return {coordinates.at(0).toDouble(), coordinates.at(1).toDouble()};
+    }
+
+    return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto StringV0_1_2ToPath(const QString &path) -> QVector<QPointF>
+{
+    QVector<QPointF> p;
+    QStringList points = path.split(pointsSep);
+    p.reserve(points.size());
+    for (const auto& point : points)
+    {
+        p.append(StringV0_1_2ToPoint(point));
+    }
+
+    return p;
+}
+}  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutConverter::VLayoutConverter(const QString &fileName)
@@ -90,7 +140,8 @@ auto VLayoutConverter::XSDSchema(unsigned ver) const -> QString
     {
         std::make_pair(FormatVersion(0, 1, 0), QStringLiteral("://schema/layout/v0.1.0.xsd")),
         std::make_pair(FormatVersion(0, 1, 1), QStringLiteral("://schema/layout/v0.1.1.xsd")),
-        std::make_pair(FormatVersion(0, 1, 2), CurrentSchema),
+        std::make_pair(FormatVersion(0, 1, 2), QStringLiteral("://schema/layout/v0.1.2.xsd")),
+        std::make_pair(FormatVersion(0, 1, 3), CurrentSchema),
     };
 
     if (schemas.contains(ver))
@@ -108,10 +159,11 @@ void VLayoutConverter::ApplyPatches()
     {
         case (FormatVersion(0, 1, 0)):
         case (FormatVersion(0, 1, 1)):
-            ToV0_1_2();
-            ValidateXML(XSDSchema(FormatVersion(0, 1, 2)));
-            Q_FALLTHROUGH();
         case (FormatVersion(0, 1, 2)):
+            ToV0_1_3();
+            ValidateXML(XSDSchema(FormatVersion(0, 1, 3)));
+            Q_FALLTHROUGH();
+        case (FormatVersion(0, 1, 3)):
             break;
         default:
             InvalidVersion(m_ver);
@@ -132,12 +184,77 @@ auto VLayoutConverter::IsReadOnly() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutConverter::ToV0_1_2()
+void VLayoutConverter::ConvertPiecesToV0_1_3()
 {
-    // TODO. Delete if minimal supported version is 0.1.2
-    Q_STATIC_ASSERT_X(VLayoutConverter::LayoutMinVer < FormatVersion(0, 1, 2),
+    // TODO. Delete if minimal supported version is 0.1.3
+    Q_STATIC_ASSERT_X(VLayoutConverter::LayoutMinVer < FormatVersion(0, 1, 3),
                       "Time to refactor the code.");
 
-    SetVersion(QStringLiteral("0.1.2"));
+    const QStringList types
+    {
+        *strSeamLineTag,
+        *strSeamAllowanceTag,
+        *strInternalPathTag
+    };
+
+    for (const auto &tagType : types)
+    {
+        QDomNodeList tags = elementsByTagName(tagType);
+        for (int i=0; i < tags.size(); ++i)
+        {
+            QDomElement node = tags.at(i).toElement();
+            ConvertPathToV0_1_3(node);
+        }
+    }
+
+    QDomNodeList tags = elementsByTagName(*strMarkerTag);
+    for (int i=0; i < tags.size(); ++i)
+    {
+        QDomElement node = tags.at(i).toElement();
+        RemoveAllChildren(node);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutConverter::ConvertPathToV0_1_3(QDomElement &node)
+{
+    QString oldPath = node.text();
+    if (oldPath.isEmpty())
+    {
+        return;
+    }
+
+    RemoveAllChildren(node);
+    QVector<VLayoutPoint> path = CastTo<VLayoutPoint>(StringV0_1_2ToPath(oldPath));
+
+    for (auto &point : path)
+    {
+        QDomElement pointTag = createElement(*strPointTag);
+        SetAttribute(pointTag, *strAttrX, point.x());
+        SetAttribute(pointTag, *strAttrY, point.y());
+
+        if (point.TurnPoint())
+        {
+            SetAttribute(pointTag, *strAttrTurnPoint, point.TurnPoint());
+        }
+
+        if (point.CurvePoint())
+        {
+            SetAttribute(pointTag, *strAttrCurvePoint, point.CurvePoint());
+        }
+
+        node.appendChild(pointTag);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutConverter::ToV0_1_3()
+{
+    // TODO. Delete if minimal supported version is 0.1.3
+    Q_STATIC_ASSERT_X(VLayoutConverter::LayoutMinVer < FormatVersion(0, 1, 3),
+                      "Time to refactor the code.");
+
+    ConvertPiecesToV0_1_3();
+    SetVersion(QStringLiteral("0.1.3"));
     Save();
 }

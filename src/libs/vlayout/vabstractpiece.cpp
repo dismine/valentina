@@ -30,6 +30,8 @@
 #include "vabstractpiece_p.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vgeometry/vpointf.h"
+#include "../vgeometry/vlayoutplacelabel.h"
+#include "../vgeometry/varc.h"
 #include "../ifc/exception/vexception.h"
 #include "../vmisc/compatibility.h"
 #include "../vpatterndb/floatItemData/vgrainlinedata.h"
@@ -111,7 +113,7 @@ auto AngleByLength(QVector<VRawSAPoint> points, QPointF p1, QPointF p2, QPointF 
             {
                 qDebug()<<"Couldn't find intersection with cut line.";
             }
-            points.append(px);
+            points.append(VRawSAPoint(px, p.CurvePoint(), p.TurnPoint()));
 
             cutLine.setAngle(cutLine.angle()-180);
             type = Intersects(QLineF(sp2, sp3), cutLine, &px);
@@ -120,11 +122,11 @@ auto AngleByLength(QVector<VRawSAPoint> points, QPointF p1, QPointF p2, QPointF 
             {
                 qDebug()<<"Couldn't find intersection with cut line.";
             }
-            points.append(px);
+            points.append(VRawSAPoint(px, p.CurvePoint(), p.TurnPoint()));
         }
         else
         {// The point just fine
-            points.append(sp2);
+            points.append(VRawSAPoint(sp2, p.CurvePoint(), p.TurnPoint()));
         }
     }
     else
@@ -139,25 +141,25 @@ auto AngleByLength(QVector<VRawSAPoint> points, QPointF p1, QPointF p2, QPointF 
             {
                 QLineF loop(bigLine1.p2(), sp2);
                 loop.setLength(loop.length() + accuracyPointOnLine*2.);
-                points.append(loop.p2());
-                points.append(sp2);
-                points.append(VRawSAPoint(bigLine1.p2(), true));
+                points.append(VRawSAPoint(loop.p2(), p.CurvePoint(), p.TurnPoint()));
+                points.append(VRawSAPoint(sp2, p.CurvePoint(), p.TurnPoint()));
+                points.append(VRawSAPoint(bigLine1.p2(), p.CurvePoint(), p.TurnPoint(), true));
 
                 loop = QLineF(bigLine2.p2(), sp2);
                 loop.setLength(loop.length() + localWidth);
-                points.append(VRawSAPoint(loop.p2(), true));
+                points.append(VRawSAPoint(loop.p2(), p.CurvePoint(), p.TurnPoint(), true));
             }
             else
             {
                 QLineF loop(sp2, bigLine1.p1());
                 loop.setLength(accuracyPointOnLine*2.);
-                points.append(loop.p2());
-                points.append(sp2);
+                points.append(VRawSAPoint(loop.p2(), p.CurvePoint(), p.TurnPoint()));
+                points.append(VRawSAPoint(sp2, p.CurvePoint(), p.TurnPoint()));
 
                 loop = QLineF(bigLine1.p1(), sp2);
                 loop.setLength(loop.length() + localWidth);
-                points.append(VRawSAPoint(loop.p2(), true));
-                points.append(VRawSAPoint(bigLine2.p1(), true));
+                points.append(VRawSAPoint(loop.p2(), p.CurvePoint(), p.TurnPoint(), true));
+                points.append(VRawSAPoint(bigLine2.p1(), p.CurvePoint(), p.TurnPoint(), true));
             }
         }
         else
@@ -168,7 +170,7 @@ auto AngleByLength(QVector<VRawSAPoint> points, QPointF p1, QPointF p2, QPointF 
                 {
                     bool success = false;
                     QVector<VRawSAPoint> temp = points;
-                    temp.append(bigLine1.p2());
+                    temp.append(VRawSAPoint(bigLine1.p2(), p.CurvePoint(), p.TurnPoint()));
                     temp = VAbstractPiece::RollbackSeamAllowance(temp, bigLine2, &success);
 
                     if (success)
@@ -183,7 +185,7 @@ auto AngleByLength(QVector<VRawSAPoint> points, QPointF p1, QPointF p2, QPointF 
                 }
                 else
                 {
-                    points.append(sp2);
+                    points.append(VRawSAPoint(sp2, p.CurvePoint(), p.TurnPoint()));
                 }
             }
             else
@@ -194,16 +196,17 @@ auto AngleByLength(QVector<VRawSAPoint> points, QPointF p1, QPointF p2, QPointF 
                     QLineF loop1(sp2, sp1);
                     loop1.setLength(loop1.length()*0.2);
 
-                    points.append(loop1.p2()); // Need for the main path rule
+                    // Need for the main path rule
+                    points.append(VRawSAPoint(loop1.p2(), p.CurvePoint(), p.TurnPoint()));
 
                     loop1.setAngle(loop1.angle() + 180);
                     loop1.setLength(localWidth);
-                    points.append(loop1.p2());
-                    points.append(bigLine2.p1());
+                    points.append(VRawSAPoint(loop1.p2(), p.CurvePoint(), p.TurnPoint()));
+                    points.append(VRawSAPoint(bigLine2.p1(), p.CurvePoint(), p.TurnPoint()));
                 }
                 else
                 {
-                    points.append(sp2);
+                    points.append(VRawSAPoint(sp2, p.CurvePoint(), p.TurnPoint()));
                 }
             }
         }
@@ -252,13 +255,13 @@ auto AngleByIntersection(const QVector<VRawSAPoint> &points, QPointF p1, QPointF
         {
             return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
         }
-        pointsIntr.append(px);
+        pointsIntr.append(VRawSAPoint(px, p.CurvePoint(), p.TurnPoint()));
     }
     else
     {// Because artificial loop can lead to wrong clipping we must rollback current seam allowance points
         bool success = false;
         QVector<VRawSAPoint> temp = pointsIntr;
-        temp.append(bigLine1.p2());
+        temp.append(VRawSAPoint(bigLine1.p2(), p.CurvePoint(), p.TurnPoint()));
         temp = VAbstractPiece::RollbackSeamAllowance(temp, edge2, &success);
 
         if (success)
@@ -283,16 +286,16 @@ auto AngleByIntersection(const QVector<VRawSAPoint> &points, QPointF p1, QPointF
 
     if (IsOutsidePoint(bigLine2.p2(), bigLine2.p1(), px))
     {
-        pointsIntr.append(px);
+        pointsIntr.append(VRawSAPoint(px, p.CurvePoint(), p.TurnPoint()));
     }
     else
     {
-        pointsIntr.append(px);
+        pointsIntr.append(VRawSAPoint(px, p.CurvePoint(), p.TurnPoint()));
 
         QLineF allowance(p2, px);
         allowance.setLength(allowance.length() + localWidth * 3.);
-        pointsIntr.append(allowance.p2());
-        pointsIntr.append(bigLine2.p1());
+        pointsIntr.append(VRawSAPoint(allowance.p2(), p.CurvePoint(), p.TurnPoint()));
+        pointsIntr.append(VRawSAPoint(bigLine2.p1(), p.CurvePoint(), p.TurnPoint()));
     }
 
     return pointsIntr;
@@ -343,13 +346,13 @@ auto AngleByFirstSymmetry(const QVector<VRawSAPoint> &points, QPointF p1, QPoint
 
     if (IsOutsidePoint(bigLine1.p1(), bigLine1.p2(), px1))
     {
-        pointsIntr.append(px1);
+        pointsIntr.append(VRawSAPoint(px1, p.CurvePoint(), p.TurnPoint()));
     }
     else
     {// Because artificial loop can lead to wrong clipping we must rollback current seam allowance points
         bool success = false;
         QVector<VRawSAPoint> temp = pointsIntr;
-        temp.append(bigLine1.p2());
+        temp.append(VRawSAPoint(bigLine1.p2(), p.CurvePoint(), p.TurnPoint()));
         temp = VAbstractPiece::RollbackSeamAllowance(temp, sEdge, &success);
 
         if (success)
@@ -365,15 +368,15 @@ auto AngleByFirstSymmetry(const QVector<VRawSAPoint> &points, QPointF p1, QPoint
 
     if (IsOutsidePoint(bigLine2.p2(), bigLine2.p1(), px2))
     {
-        pointsIntr.append(px2);
+        pointsIntr.append(VRawSAPoint(px2, p.CurvePoint(), p.TurnPoint()));
     }
     else
     {
         QLineF allowance(px2, p2);
         allowance.setAngle(allowance.angle() + 90);
-        pointsIntr.append(px2);
-        pointsIntr.append(allowance.p2());
-        pointsIntr.append(bigLine2.p1());
+        pointsIntr.append(VRawSAPoint(px2, p.CurvePoint(), p.TurnPoint()));
+        pointsIntr.append(VRawSAPoint(allowance.p2(), p.CurvePoint(), p.TurnPoint()));
+        pointsIntr.append(VRawSAPoint(bigLine2.p1(), p.CurvePoint(), p.TurnPoint()));
     }
 
     return pointsIntr;
@@ -425,13 +428,13 @@ auto AngleBySecondSymmetry(const QVector<VRawSAPoint> &points, QPointF p1, QPoin
 
     if (IsOutsidePoint(bigLine1.p1(), bigLine1.p2(), px1))
     {
-        pointsIntr.append(px1);
+        pointsIntr.append(VRawSAPoint(px1, p.CurvePoint(), p.TurnPoint()));
     }
     else
     {// Because artificial loop can lead to wrong clipping we must rollback current seam allowance points
         bool success = false;
         QVector<VRawSAPoint> temp = pointsIntr;
-        temp.append(bigLine1.p2());
+        temp.append(VRawSAPoint(bigLine1.p2(), p.CurvePoint(), p.TurnPoint()));
         temp = VAbstractPiece::RollbackSeamAllowance(temp, sEdge, &success);
 
         if (success)
@@ -447,16 +450,16 @@ auto AngleBySecondSymmetry(const QVector<VRawSAPoint> &points, QPointF p1, QPoin
 
     if (IsOutsidePoint(bigLine2.p2(), bigLine2.p1(), px2))
     {
-        pointsIntr.append(px2);
+        pointsIntr.append(VRawSAPoint(px2, p.CurvePoint(), p.TurnPoint()));
     }
     else
     {
         QLineF allowance(p2, px2);
         allowance.setLength(p.GetSAAfter(width)*0.98);
-        pointsIntr.append(allowance.p2());
+        pointsIntr.append(VRawSAPoint(allowance.p2(), p.CurvePoint(), p.TurnPoint()));
         allowance.setLength(allowance.length() + localWidth * 3.);
-        pointsIntr.append(allowance.p2());
-        pointsIntr.append(bigLine2.p1());
+        pointsIntr.append(VRawSAPoint(allowance.p2(), p.CurvePoint(), p.TurnPoint()));
+        pointsIntr.append(VRawSAPoint(bigLine2.p1(), p.CurvePoint(), p.TurnPoint()));
     }
 
     return pointsIntr;
@@ -500,8 +503,8 @@ auto AngleByFirstRightAngle(const QVector<VRawSAPoint> &points, QPointF p1, QPoi
         {
             return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
         }
-        pointsRA.append(seam.p2());
-        pointsRA.append(seam.p1());
+        pointsRA.append(VRawSAPoint(seam.p2(), p.CurvePoint(), p.TurnPoint()));
+        pointsRA.append(VRawSAPoint(seam.p1(), p.CurvePoint(), p.TurnPoint()));
     }
     else
     {
@@ -514,7 +517,7 @@ auto AngleByFirstRightAngle(const QVector<VRawSAPoint> &points, QPointF p1, QPoi
             return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
         }
 
-        pointsRA.append(seam.p2());
+        pointsRA.append(VRawSAPoint(seam.p2(), p.CurvePoint(), p.TurnPoint()));
 
         QLineF loopLine(px, sp2);
         const qreal length = loopLine.length()*0.98;
@@ -523,8 +526,8 @@ auto AngleByFirstRightAngle(const QVector<VRawSAPoint> &points, QPointF p1, QPoi
         QLineF tmp(seam.p2(), seam.p1());
         tmp.setLength(tmp.length()+length);
 
-        pointsRA.append(tmp.p2());
-        pointsRA.append(loopLine.p2());
+        pointsRA.append(VRawSAPoint(tmp.p2(), p.CurvePoint(), p.TurnPoint()));
+        pointsRA.append(VRawSAPoint(loopLine.p2(), p.CurvePoint(), p.TurnPoint()));
     }
 
     return pointsRA;
@@ -568,12 +571,12 @@ auto AngleBySecondRightAngle(QVector<VRawSAPoint> points, QPointF p1, QPointF p2
         {
             return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
         }
-        points.append(px);
+        points.append(VRawSAPoint(px, p.CurvePoint(), p.TurnPoint()));
 
         QLineF seam(px, p3);
         seam.setAngle(seam.angle()+90);
         seam.setLength(p.GetSAAfter(width));
-        points.append(seam.p2());
+        points.append(VRawSAPoint(seam.p2(), p.CurvePoint(), p.TurnPoint()));
 
         if (needRollback != nullptr)
         {
@@ -595,7 +598,7 @@ auto AngleBySecondRightAngle(QVector<VRawSAPoint> points, QPointF p1, QPointF p2
         bool success = false;
         const int countBefore = points.size();
         QVector<VRawSAPoint> temp = points;
-        temp.append(bigLine1.p2());
+        temp.append(VRawSAPoint(bigLine1.p2(), p.CurvePoint(), p.TurnPoint()));
         temp = VAbstractPiece::RollbackSeamAllowance(temp, edge, &success);
 
         if (success)
@@ -609,7 +612,7 @@ auto AngleBySecondRightAngle(QVector<VRawSAPoint> points, QPointF p1, QPointF p2
             QLineF seam(px, p3);
             seam.setAngle(seam.angle()+90);
             seam.setLength(p.GetSAAfter(width));
-            points.append(seam.p2());
+            points.append(VRawSAPoint(seam.p2(), p.CurvePoint(), p.TurnPoint()));
         }
         else
         {
@@ -619,11 +622,11 @@ auto AngleBySecondRightAngle(QVector<VRawSAPoint> points, QPointF p1, QPointF p2
             }
             else if (IsSameDirection(bigLine1.p1(), bigLine1.p2(), px))
             {
-                points.append(px);
+                points.append(VRawSAPoint(px, p.CurvePoint(), p.TurnPoint()));
                 QLineF seam(px, p3);
                 seam.setAngle(seam.angle()+90);
                 seam.setLength(p.GetSAAfter(width));
-                points.append(seam.p2());
+                points.append(VRawSAPoint(seam.p2(), p.CurvePoint(), p.TurnPoint()));
             }
         }
     }
@@ -756,7 +759,7 @@ void RollbackByLength(QVector<VRawSAPoint> &ekvPoints, const QVector<VSAPoint> &
     const QLineF bigLine1 = VAbstractPiece::ParallelLine(points.at(points.size()-2), points.at(0), width);
 
     QVector<VRawSAPoint> temp = ekvPoints;
-    temp.insert(ekvPoints.size()-1, bigLine1.p2());
+    temp.insert(ekvPoints.size()-1, VRawSAPoint(bigLine1.p2(), points.at(0).CurvePoint(), points.at(0).TurnPoint()));
     bool success = Rollback(temp, VAbstractPiece::ParallelLine(points.at(0), points.at(1), width));
 
     if (success)
@@ -773,7 +776,7 @@ void RollbackBySecondEdgeSymmetry(QVector<VRawSAPoint> &ekvPoints, const QVector
     QLineF sEdge(VPointF::FlipPF(axis, bigLine1.p1()), VPointF::FlipPF(axis, bigLine1.p2()));
 
     QVector<VRawSAPoint> temp = ekvPoints;
-    temp.insert(ekvPoints.size()-1, bigLine1.p2());
+    temp.insert(ekvPoints.size()-1, VRawSAPoint(bigLine1.p2(), points.at(0).CurvePoint(), points.at(0).TurnPoint()));
     bool success = Rollback(temp, sEdge);
 
     if (success)
@@ -791,7 +794,7 @@ void RollbackByFirstEdgeSymmetry(QVector<VRawSAPoint> &ekvPoints, const QVector<
     const QLineF bigLine1 = VAbstractPiece::ParallelLine(points.at(points.size()-2), points.at(0), width);
 
     QVector<VRawSAPoint> temp = ekvPoints;
-    temp.insert(ekvPoints.size()-1, bigLine1.p2());
+    temp.insert(ekvPoints.size()-1, VRawSAPoint(bigLine1.p2(), points.at(0).CurvePoint(), points.at(0).TurnPoint()));
     bool success = Rollback(temp, sEdge);
 
     if (success)
@@ -805,7 +808,7 @@ void RollbackByPointsIntersection(QVector<VRawSAPoint> &ekvPoints, const QVector
 {
     const QLineF bigLine1 = VAbstractPiece::ParallelLine(points.at(points.size()-2), points.at(0), width);
     QVector<VRawSAPoint> temp = ekvPoints;
-    temp.insert(ekvPoints.size()-1, bigLine1.p2());
+    temp.insert(ekvPoints.size()-1, VRawSAPoint(bigLine1.p2(), points.at(0).CurvePoint(), points.at(0).TurnPoint()));
     bool success = Rollback(temp, QLineF(ConstLast(points), points.at(1)));
 
     if (success)
@@ -848,7 +851,7 @@ void RollbackBySecondEdgeRightAngle(QVector<VRawSAPoint> &ekvPoints, const QVect
                     ekvPoints.removeFirst();
                     ekvPoints.removeLast();
 
-                    ekvPoints.append(crosPoint);
+                    ekvPoints.append(VRawSAPoint(crosPoint, ekvPoints.at(0).CurvePoint(), ekvPoints.at(0).TurnPoint()));
                 }
             }
         }
@@ -856,7 +859,7 @@ void RollbackBySecondEdgeRightAngle(QVector<VRawSAPoint> &ekvPoints, const QVect
         {
             bool success = false;
             QVector<VRawSAPoint> temp = ekvPoints;
-            temp.append(bigLine1.p2());
+            temp.append(VRawSAPoint(bigLine1.p2(), ekvPoints.at(0).CurvePoint(), ekvPoints.at(0).TurnPoint()));
             temp = VAbstractPiece::RollbackSeamAllowance(temp, edge, &success);
 
             if (success)
@@ -868,7 +871,7 @@ void RollbackBySecondEdgeRightAngle(QVector<VRawSAPoint> &ekvPoints, const QVect
             QLineF seam(px, points.at(1));
             seam.setAngle(seam.angle()+90);
             seam.setLength(points.at(0).GetSAAfter(width));
-            ekvPoints.append(seam.p2());
+            ekvPoints.append(VRawSAPoint(seam.p2(), ekvPoints.at(0).CurvePoint(), ekvPoints.at(0).TurnPoint()));
 
             if (not ekvPoints.isEmpty())
             {
@@ -884,22 +887,6 @@ void RollbackBySecondEdgeRightAngle(QVector<VRawSAPoint> &ekvPoints, const QVect
             }
         }
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto CleanLoopArtifacts(const QVector<VRawSAPoint> &points) -> QVector<QPointF>
-{
-    QVector<QPointF> cleaned;
-    cleaned.reserve(points.size());
-    for (const auto &point : points)
-    {
-        if (not point.LoopPoint())
-        {
-            cleaned.append(point);
-        }
-    }
-
-    return cleaned;
 }
 }  // namespace
 
@@ -1052,7 +1039,7 @@ void VAbstractPiece::SetSAWidth(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal width, const QString &name) -> QVector<QPointF>
+auto VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal width, const QString &name) -> QVector<VLayoutPoint>
 {
     if (width < 0)
     {
@@ -1136,19 +1123,14 @@ auto VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal width, const QS
     }
 
 //    Uncomment for debug
-//    QVector<QPointF> cleaned;
-//    cleaned.reserve(ekvPoints.size());
-//    for (auto &point : ekvPoints)
-//    {
-//        cleaned.append(point);
-//    }
+//    QVector<VLayoutPoint> cleaned = CastTo<VLayoutPoint>(ekvPoints);
 
     const bool removeFirstAndLast = false;
     ekvPoints = RemoveDublicates(ekvPoints, removeFirstAndLast);
-    QVector<QPointF> cleaned = CheckLoops(ekvPoints);//Result path can contain loops
+    QVector<VLayoutPoint> cleaned = CastTo<VLayoutPoint>(CheckLoops(ekvPoints));//Result path can contain loops
     cleaned = CorrectEquidistantPoints(cleaned, removeFirstAndLast);
     cleaned = CorrectPathDistortion(cleaned);
-//    DumpVector(cleaned, QStringLiteral("output.json.XXXXXX")); // Uncomment for dumping test data
+//    DumpVector(CastTo<QPointF>(cleaned), QStringLiteral("output.json.XXXXXX")); // Uncomment for dumping test data
     return cleaned;
 }
 
@@ -1189,131 +1171,6 @@ auto VAbstractPiece::SumTrapezoids(const QVector<QPointF> &points) -> qreal
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractPiece::CheckLoops(const QVector<QPointF> &points) -> QVector<QPointF>
-{
-    QVector<VRawSAPoint> rawPath;
-    rawPath.reserve(points.size());
-    for (const auto &point : points)
-    {
-        rawPath.append(point);
-    }
-
-    return CheckLoops(rawPath);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief CheckLoops seek and delete loops in equidistant.
- * @param points vector of points of equidistant.
- * @return vector of points of equidistant.
- */
-auto VAbstractPiece::CheckLoops(const QVector<VRawSAPoint> &points) -> QVector<QPointF>
-{
-//    DumpVector(points, QStringLiteral("input.json.XXXXXX")); // Uncomment for dumping test data
-
-    /*If we got less than 4 points no need seek loops.*/
-    if (points.size() < 4)
-    {
-        return CleanLoopArtifacts(points);
-    }
-
-    bool loopFound = false;
-
-    auto CheckLoop = [&loopFound](const QVector<VRawSAPoint> &points)
-    {
-        loopFound = false;
-
-        const bool pathClosed = (ConstFirst(points) == ConstLast(points));
-
-        QVector<VRawSAPoint> ekvPoints;
-        ekvPoints.reserve(points.size());
-
-        qint32 i;
-        for (i = 0; i < points.size(); ++i)
-        {
-            /*Last three points no need to check.*/
-            /*Triangle can not contain a loop*/
-            if (loopFound || i > points.size()-4)
-            {
-                ekvPoints.append(points.at(i));
-                continue;
-            }
-
-            enum LoopIntersectType { NoIntersection, BoundedIntersection, ParallelIntersection };
-
-            QPointF crosPoint;
-            LoopIntersectType status = NoIntersection;
-            const QLineF line1(points.at(i), points.at(i+1));
-
-            const int limit = pathClosed && i == 0 ? 2 : 1;
-            qint32 j;
-            for (j = i+2; j < points.size()-limit; ++j)
-            {
-                QLineF line2(points.at(j), points.at(j+1));
-
-                const QLineF::IntersectType intersect = Intersects(line1, line2, &crosPoint);
-                if (intersect == QLineF::NoIntersection)
-                { // According to the documentation QLineF::NoIntersection indicates that the lines do not intersect;
-                  // i.e. they are parallel. But parallel also mean they can be on the same line.
-                  // Method IsLineSegmentOnLineSegment will check it.
-                    if (VGObject::IsLineSegmentOnLineSegment(line1, line2))
-                    {// Now we really sure that segments are on the same line and have real intersections.
-                        status = ParallelIntersection;
-                        break;
-                    }
-                }
-                else if (intersect == QLineF::BoundedIntersection)
-                {
-                    status = BoundedIntersection;
-                    break;
-                }
-            }
-
-            switch (status)
-            {
-                case ParallelIntersection:
-                    /*We have found a loop.*/
-                    ekvPoints.append(points.at(i));
-                    ekvPoints.append(points.at(j+1));
-                    i = j+1; // Skip a loop
-                    loopFound = true;
-                    break;
-                case BoundedIntersection:
-                    ekvPoints.append(points.at(i));
-                    ekvPoints.append(crosPoint);
-                    i = j;
-                    loopFound = true;
-                    break;
-                case NoIntersection:
-                    /*We have not found loop.*/
-                    ekvPoints.append(points.at(i));
-                    break;
-                default:
-                    break;
-            }
-        }
-        return ekvPoints;
-    };
-
-    QVector<VRawSAPoint> ekvPoints = points;
-    qint32 i;
-    const int maxLoops = 10000; // limit number of loops to be removed
-
-    for (i = 0; i < maxLoops; ++i)
-    {
-        ekvPoints = CheckLoop(ekvPoints);
-        if (not loopFound)
-        {
-            break;
-        }
-    }
-
-    const QVector<QPointF> cleaned = CleanLoopArtifacts(ekvPoints);
-//    DumpVector(cleaned, QStringLiteral("output.json.XXXXXX")); // Uncomment for dumping test data
-    return cleaned;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief EkvPoint return seam aloowance points in place of intersection two edges. Last points of two edges should be
  * equal.
@@ -1342,7 +1199,7 @@ auto VAbstractPiece::EkvPoint(QVector<VRawSAPoint> points, const VSAPoint &p1Lin
 
     if (VFuzzyComparePoints(bigLine1.p2(), bigLine2.p1()))
     {
-        points.append(bigLine1.p2());
+        points.append(VRawSAPoint(bigLine1.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
         return points;
     }
 
@@ -1357,16 +1214,16 @@ auto VAbstractPiece::EkvPoint(QVector<VRawSAPoint> points, const VSAPoint &p1Lin
         ray.setLength(width*2);
 
         QPointF crosPoint;
-        QLineF::IntersectType type = Intersects(ray, bigLine1, &crosPoint );
+        QLineF::IntersectType type = Intersects(ray, bigLine1, &crosPoint);
         if (type != QLineF::NoIntersection)
         {
-            points.append(crosPoint);
+            points.append(VRawSAPoint(crosPoint, p2Line1.CurvePoint(), p2Line1.TurnPoint()));
         }
 
         type = Intersects(ray, bigLine2, &crosPoint );
         if (type != QLineF::NoIntersection)
         {
-            points.append(crosPoint);
+            points.append(VRawSAPoint(crosPoint, p2Line1.CurvePoint(), p2Line1.TurnPoint()));
         }
         return points;
     }
@@ -1378,7 +1235,7 @@ auto VAbstractPiece::EkvPoint(QVector<VRawSAPoint> points, const VSAPoint &p1Lin
     {// There are at least three big cases
         case (QLineF::BoundedIntersection):
             // The easiest, real intersection
-            points.append(crosPoint);
+            points.append(VRawSAPoint(crosPoint, p2Line1.CurvePoint(), p2Line1.TurnPoint()));
             return points;
         case (QLineF::UnboundedIntersection):
         { // Most common case
@@ -1400,8 +1257,8 @@ auto VAbstractPiece::EkvPoint(QVector<VRawSAPoint> points, const VSAPoint &p1Lin
             if (VGObject::IsPointOnLineSegment(p2Line1, p1Line1, p1Line2, ToPixel(0.5, Unit::Mm)) &&
                     IsOnLine(p2Line1, bigLine1.p2(), bigLine2.p1(), ToPixel(0.5, Unit::Mm)))
             {
-                points.append(bigLine1.p2());
-                points.append(bigLine2.p1());
+                points.append(VRawSAPoint(bigLine1.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
+                points.append(VRawSAPoint(bigLine2.p1(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
                 return points;
             }
 
@@ -1473,7 +1330,7 @@ QT_WARNING_POP
                         const QLineF::IntersectType type = Intersects(bigEdge, line, &px);
                         if (type != QLineF::BoundedIntersection && line.length() < QLineF(p2Line1, px).length())
                         {
-                            points.append(crosPoint);
+                            points.append(VRawSAPoint(crosPoint, p2Line1.CurvePoint(), p2Line1.TurnPoint()));
                             return points;
                         }
                     }
@@ -1484,12 +1341,12 @@ QT_WARNING_POP
                             QLineF loop(crosPoint, bigLine1.p1());
                             loop.setAngle(loop.angle() + 180);
                             loop.setLength(accuracyPointOnLine*2.);
-                            points.append(loop.p2());
-                            points.append(crosPoint);
+                            points.append(VRawSAPoint(loop.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
+                            points.append(VRawSAPoint(crosPoint, p2Line1.CurvePoint(), p2Line1.TurnPoint()));
 
                             loop = QLineF(crosPoint, bigLine1.p1());
                             loop.setLength(loop.length() + localWidth*2.);
-                            points.append(VRawSAPoint(loop.p2(), true));
+                            points.append(VRawSAPoint(loop.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint(), true));
                         }
 
                         return points;
@@ -1504,20 +1361,20 @@ QT_WARNING_POP
                     {// The cross point is still outside of a piece
                         if (line.length() >= localWidth)
                         {
-                            points.append(crosPoint);
+                            points.append(VRawSAPoint(crosPoint, p2Line1.CurvePoint(), p2Line1.TurnPoint()));
                             return points;
                         }
 
                         // but not enough far, fix it
                         line.setLength(localWidth);
-                        points.append(line.p2());
+                        points.append(VRawSAPoint(line.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
                         return points;
                     }
 
                     // Wrong cross point, probably inside of a piece. Manually creating correct seam allowance
                     const QLineF bigEdge = SimpleParallelLine(bigLine1.p2(), bigLine2.p1(), localWidth );
-                    points.append(bigEdge.p1());
-                    points.append(bigEdge.p2());
+                    points.append(VRawSAPoint(bigEdge.p1(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
+                    points.append(VRawSAPoint(bigEdge.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
                     return points;
                 }
             }
@@ -1525,8 +1382,9 @@ QT_WARNING_POP
         }
         case (QLineF::NoIntersection):
             /*If we have correct lines this means lines lie on a line or parallel.*/
-            points.append(bigLine1.p2());
-            points.append(bigLine2.p1()); // Second point for parallel line
+            points.append(VRawSAPoint(bigLine1.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
+             // Second point for parallel line
+            points.append(VRawSAPoint(bigLine2.p1(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
             return points;
         default:
             break;
@@ -1657,10 +1515,8 @@ auto VAbstractPiece::GetUniqueID() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto VSAPoint::toJson() const -> QJsonObject
 {
-    QJsonObject pointObject;
+    QJsonObject pointObject = VLayoutPoint::toJson();
     pointObject[QLatin1String("type")] = "VSAPoint";
-    pointObject[QLatin1String("x")] = x();
-    pointObject[QLatin1String("y")] = y();
 
     if (not VFuzzyComparePossibleNulls(m_before, -1))
     {
@@ -1698,7 +1554,7 @@ auto VAbstractPiece::RollbackSeamAllowance(QVector<VRawSAPoint> points, const QL
                 && VGObject::IsPointOnLineSegment(crosPoint, segment.p1(), segment.p2())
                 && IsSameDirection(cuttingEdge.p2(), cuttingEdge.p1(), crosPoint))
         {
-            clipped.append(crosPoint);
+            clipped.append(VRawSAPoint(crosPoint, points.at(i).CurvePoint(), points.at(i).TurnPoint()));
             for (int j=i-1; j>=0; --j)
             {
                 clipped.append(points.at(j));
@@ -1717,7 +1573,8 @@ auto VAbstractPiece::RollbackSeamAllowance(QVector<VRawSAPoint> points, const QL
 
         if (type != QLineF::NoIntersection && IsOutsidePoint(secondLast.p1(), secondLast.p2(), crosPoint))
         {
-            points.append(crosPoint);
+            points.append(VRawSAPoint(crosPoint, points.at(points.size()-1).CurvePoint(),
+                                      points.at(points.size()-1).TurnPoint()));
             *success = true;
         }
     }
@@ -1919,20 +1776,341 @@ auto VAbstractPiece::GrainlinePoints(const VGrainlineData &geom, const VContaine
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractPiece::PainterPath(const QVector<QPointF> &points) -> QPainterPath
+auto VAbstractPiece::PlaceLabelShape(const VLayoutPlaceLabel &label) -> PlaceLabelImg
 {
-    QPainterPath path;
-    path.setFillRule(Qt::WindingFill);
-
-    if (not points.isEmpty())
+    auto LayoutPoint = [label](QPointF p, bool turnPoint = false, bool curvePoint = false)
     {
-        path.moveTo(points.at(0));
-        for (qint32 i = 1; i < points.count(); ++i)
+        VLayoutPoint point(label.RotationMatrix().map(p));
+        point.SetTurnPoint(turnPoint);
+        point.SetCurvePoint(curvePoint);
+        return point;
+    };
+
+    const QPointF pos = label.Center();
+    const QRectF box = label.Box();
+
+    auto SegmentShape = [pos, box, LayoutPoint]()
+    {
+        QVector<VLayoutPoint> shape
         {
-            path.lineTo(points.at(i));
+            LayoutPoint(QPointF(pos.x(), pos.y() - box.height()/2.0), true),
+            LayoutPoint(QPointF(pos.x(), pos.y() + box.height()/2.0), true)
+        };
+
+        return PlaceLabelImg{shape};
+    };
+
+    auto RectangleShape = [pos, box, LayoutPoint]()
+    {
+        QRectF rect(QPointF(pos.x() - box.width()/2.0, pos.y() - box.height()/2.0),
+                    QPointF(pos.x() + box.width()/2.0, pos.y() + box.height()/2.0));
+
+        QVector<VLayoutPoint> shape
+        {
+            LayoutPoint(rect.topLeft(), true),
+            LayoutPoint(rect.topRight(), true),
+            LayoutPoint(rect.bottomRight(), true),
+            LayoutPoint(rect.bottomLeft(), true),
+            LayoutPoint(rect.topLeft(), true)
+        };
+
+        return PlaceLabelImg{shape};
+    };
+
+    auto CrossShape = [pos, box, LayoutPoint]()
+    {
+        QVector<VLayoutPoint> shape1
+        {
+            LayoutPoint(QPointF(pos.x(), pos.y() - box.height()/2.0), true),
+            LayoutPoint(QPointF(pos.x(), pos.y() + box.height()/2.0), true)
+        };
+
+        QVector<VLayoutPoint> shape2
+        {
+             LayoutPoint(QPointF(pos.x() - box.width()/2.0, pos.y()), true),
+             LayoutPoint(QPointF(pos.x() + box.width()/2.0, pos.y()), true)
+        };
+
+        return PlaceLabelImg{shape1, shape2};
+    };
+
+    auto TshapedShape = [pos, box, LayoutPoint]()
+    {
+        QPointF center2(pos.x(), pos.y() + box.height()/2.0);
+
+        QVector<VLayoutPoint> shape1
+        {
+            LayoutPoint(QPointF(pos.x(), pos.y()), true),
+            LayoutPoint(center2, true)
+        };
+
+        QVector<VLayoutPoint> shape2
+        {
+            LayoutPoint(QPointF(center2.x() - box.width()/2.0, center2.y()), true),
+            LayoutPoint(QPointF(center2.x() + box.width()/2.0, center2.y()), true)
+        };
+
+        return PlaceLabelImg{shape1, shape2};
+    };
+
+    auto DoubletreeShape = [pos, box, LayoutPoint]()
+    {
+        QRectF rect(QPointF(pos.x() - box.width()/2.0, pos.y() - box.height()/2.0),
+                    QPointF(pos.x() + box.width()/2.0, pos.y() + box.height()/2.0));
+
+        QVector<VLayoutPoint> shape1
+        {
+            LayoutPoint(rect.topLeft(), true),
+            LayoutPoint(rect.bottomRight(), true)
+        };
+
+        QVector<VLayoutPoint> shape2
+        {
+            LayoutPoint(rect.topRight(), true),
+            LayoutPoint(rect.bottomLeft(), true)
+        };
+
+        return PlaceLabelImg{shape1, shape2};
+    };
+
+    auto CornerShape = [pos, box, LayoutPoint]()
+    {
+        QVector<VLayoutPoint> shape1
+        {
+            LayoutPoint(QPointF(pos.x(), pos.y()), true),
+            LayoutPoint(QPointF(pos.x(), pos.y() + box.height()/2.0), true)
+        };
+
+        QVector<VLayoutPoint> shape2
+        {
+            LayoutPoint(QPointF(pos.x() - box.width()/2.0, pos.y()), true),
+            LayoutPoint(QPointF(pos.x(), pos.y()), true)
+        };
+
+        return PlaceLabelImg{shape1, shape2};
+    };
+
+    auto TriangleShape = [pos, box, LayoutPoint]()
+    {
+        QRectF rect(QPointF(pos.x() - box.width()/2.0, pos.y() - box.height()/2.0),
+                    QPointF(pos.x() + box.width()/2.0, pos.y() + box.height()/2.0));
+
+        QVector<VLayoutPoint> shape
+        {
+            LayoutPoint(rect.topLeft(), true),
+            LayoutPoint(rect.topRight(), true),
+            LayoutPoint(rect.bottomRight(), true),
+            LayoutPoint(rect.topLeft(), true)
+        };
+
+        return PlaceLabelImg{shape};
+    };
+
+    auto HshapedShape = [pos, box, LayoutPoint]()
+    {
+        const QPointF center1 (pos.x(), pos.y() - box.height()/2.0);
+        const QPointF center2 (pos.x(), pos.y() + box.height()/2.0);
+
+        QVector<VLayoutPoint> shape1
+        {
+            LayoutPoint(center1, true),
+            LayoutPoint(center2, true)
+        };
+
+        QVector<VLayoutPoint> shape2
+        {
+            LayoutPoint(QPointF(center1.x() - box.width()/2.0, center1.y()), true),
+            LayoutPoint(QPointF(center1.x() + box.width()/2.0, center1.y()), true)
+        };
+
+        QVector<VLayoutPoint> shape3
+        {
+             LayoutPoint(QPointF(center2.x() - box.width()/2.0, center2.y()), true),
+             LayoutPoint(QPointF(center2.x() + box.width()/2.0, center2.y()), true)
+        };
+
+        return PlaceLabelImg{shape1, shape2, shape3};
+    };
+
+    auto ButtonShape = [pos, box, LayoutPoint]()
+    {
+        const qreal radius = qMin(box.width()/2.0, box.height()/2.0);
+        QVector<VLayoutPoint> shape1
+        {
+             LayoutPoint(QPointF(pos.x(), pos.y() - radius), true),
+             LayoutPoint(QPointF(pos.x(), pos.y() + radius), true)
+        };
+
+        QVector<VLayoutPoint> shape2
+        {
+             LayoutPoint(QPointF(pos.x() - radius, pos.y()), true),
+             LayoutPoint(QPointF(pos.x() + radius, pos.y()), true)
+        };
+
+        const qreal circleSize = 0.85;
+        VArc arc(VPointF(pos), radius*circleSize, 0, 360);
+        arc.SetApproximationScale(10);
+
+        QVector<QPointF> points = arc.GetPoints();
+        if (not points.isEmpty() && ConstFirst(points) != ConstLast(points))
+        {
+            points.append(ConstFirst(points));
         }
-        path.lineTo(points.at(0));
+
+        QVector<VLayoutPoint> shape3;
+        for (int i=0; i < points.size(); ++i)
+        {
+            bool turnPoint = false;
+            if (i == 0 || i == points.size() -1)
+            {
+                turnPoint = true;
+            }
+            shape3.append(LayoutPoint(points.at(i), turnPoint, true));
+        }
+
+        return PlaceLabelImg{shape1, shape2, shape3};
+    };
+
+    auto CircleShape = [pos, box, LayoutPoint]()
+    {
+        const qreal radius = qMin(box.width()/2.0, box.height()/2.0);
+        VArc arc(VPointF(pos), radius, 0, 360);
+        arc.SetApproximationScale(10);
+
+        QVector<QPointF> points = arc.GetPoints();
+        if (not points.isEmpty() && ConstFirst(points) != ConstLast(points))
+        {
+            points.append(ConstFirst(points));
+        }
+
+        QVector<VLayoutPoint> circle;
+        for (int i=0; i < points.size(); ++i)
+        {
+            bool turnPoint = false;
+            if (i == 0 || i == points.size() -1)
+            {
+                turnPoint = true;
+            }
+            circle.append(LayoutPoint(points.at(i), turnPoint, true));
+        }
+
+        return PlaceLabelImg{circle};
+    };
+
+    switch(label.Type())
+    {
+        case PlaceLabelType::Segment:
+            return SegmentShape();
+        case PlaceLabelType::Rectangle:
+            return RectangleShape();
+        case PlaceLabelType::Cross:
+            return CrossShape();
+        case PlaceLabelType::Tshaped:
+            return TshapedShape();
+        case PlaceLabelType::Doubletree:
+            return DoubletreeShape();
+        case PlaceLabelType::Corner:
+            return CornerShape();
+        case PlaceLabelType::Triangle:
+            return TriangleShape();
+        case PlaceLabelType::Hshaped:
+            return HshapedShape();
+        case PlaceLabelType::Button:
+            return ButtonShape();
+        case PlaceLabelType::Circle:
+            return CircleShape();
+        default:
+            return {};
     }
 
+        return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPiece::LabelShapePath(const VLayoutPlaceLabel &label) -> QPainterPath
+{
+    return LabelShapePath(PlaceLabelShape(label));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPiece::LabelShapePath(const PlaceLabelImg &shape) -> QPainterPath
+{
+    QPainterPath path;
+    for (const auto &p : shape)
+    {
+        if (not p.isEmpty())
+        {
+            path.moveTo(ConstFirst<QPointF>(p));
+            path.addPolygon(CastTo<QPointF>(p));
+        }
+    }
     return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+auto VAbstractPiece::ComparePoints(QVector<T> &points, const T &p1, const T &p2, qreal accuracy) -> bool
+{
+    if (not VFuzzyComparePoints(p1, p2, accuracy))
+    {
+        points.append(p2);
+        return false;
+    }
+
+    if (not points.isEmpty() && p2.TurnPoint())
+    {
+        points.last().SetTurnPoint(true);
+    }
+
+    if (not points.isEmpty() && p2.CurvePoint())
+    {
+        points.last().SetCurvePoint(true);
+    }
+
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <>
+auto VAbstractPiece::ComparePoints<QPointF>(QVector<QPointF> &points, const QPointF &p1, const QPointF &p2,
+                                                   qreal accuracy) -> bool
+{
+    if (not VFuzzyComparePoints(p1, p2, accuracy))
+    {
+        points.append(p2);
+        return false;
+    }
+
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+auto VAbstractPiece::CompareFirstAndLastPoints(QVector<T> &points, qreal accuracy) -> void
+{
+    if (VFuzzyComparePoints(ConstFirst(points), ConstLast(points), accuracy))
+    {
+        const T& l = ConstLast(points);
+        points.removeLast();
+
+        if (not points.isEmpty() && l.TurnPoint())
+        {
+            points.last().SetTurnPoint(true);
+        }
+
+        if (not points.isEmpty() && l.CurvePoint())
+        {
+            points.last().SetCurvePoint(true);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <>
+auto VAbstractPiece::CompareFirstAndLastPoints<QPointF>(QVector<QPointF> &points, qreal accuracy) -> void
+{
+    if (VFuzzyComparePoints(ConstFirst(points), ConstLast(points), accuracy))
+    {
+        points.removeLast();
+    }
 }

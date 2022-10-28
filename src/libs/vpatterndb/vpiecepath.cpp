@@ -30,7 +30,6 @@
 #include "vpiecepath_p.h"
 #include "vcontainer.h"
 #include "../vgeometry/vpointf.h"
-#include "../vlayout/vabstractpiece.h"
 #include "calculator.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/compatibility.h"
@@ -54,6 +53,7 @@ VSAPoint CurvePoint(VSAPoint candidate, const VContainer *data, const VPieceNode
             candidate.SetSAAfter(node.GetSAAfter(data, *data->GetPatternUnit()));
             candidate.SetSABefore(node.GetSABefore(data, *data->GetPatternUnit()));
             candidate.SetAngleType(node.GetAngleType());
+            candidate.SetTurnPoint(node.IsTurnPoint());
         }
     }
     return candidate;
@@ -92,6 +92,7 @@ VSAPoint CurveStartPoint(VSAPoint candidate, const VContainer *data, const VPiec
         }
 
         candidate = VSAPoint(p);
+        candidate.SetTurnPoint(true);
         break;
     }
 
@@ -131,6 +132,7 @@ VSAPoint CurveEndPoint(VSAPoint candidate, const VContainer *data, const VPieceN
         }
 
         candidate = VSAPoint(p);
+        candidate.SetTurnPoint(true);
         break;
     }
 
@@ -172,14 +174,15 @@ QPainterPath MakePainterPath(const QVector<QPointF> &points)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal FindTipDirection(const QVector<QPointF> &points)
+template <class T>
+qreal FindTipDirection(const QVector<T> &points)
 {
     if (points.size() <= 1)
     {
         return 0;
     }
 
-    const QPointF &first = ConstFirst(points);
+    const T &first = ConstFirst(points);
 
     for(int i = 1; i < points.size(); ++i)
     {
@@ -195,8 +198,8 @@ qreal FindTipDirection(const QVector<QPointF> &points)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool IntersectionWithCuttingCountour(const QVector<QPointF> &cuttingPath, const QVector<QPointF> &points,
-                                     QPointF *firstConnection)
+bool IntersectionWithCuttingCountour(const QVector<QPointF> &cuttingPath, const QVector<VLayoutPoint> &points,
+                                     QPointF *connection)
 {
     if (points.size() <= 1)
     {
@@ -207,12 +210,35 @@ bool IntersectionWithCuttingCountour(const QVector<QPointF> &cuttingPath, const 
 
     if (VAbstractCurve::IsPointOnCurve(cuttingPath, first))
     { // Point is already part of a cutting countour
-        *firstConnection = first;
+        *connection = first;
         return true;
     }
     else
     {
-        return VAbstractCurve::CurveIntersectAxis(first, FindTipDirection(points), cuttingPath, firstConnection);
+        return VAbstractCurve::CurveIntersectAxis(first, FindTipDirection(points), cuttingPath, connection);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+void AppendCurveSegment(QVector<T> &points, QVector<QPointF> &segment, const VSAPoint &begin, const VSAPoint &end)
+{
+    points.reserve(points.size() + segment.size());
+
+    for(int i=0; i < segment.size(); ++i)
+    {
+        VLayoutPoint lp(segment.at(i));
+        if (i == 0)
+        {
+            lp.SetTurnPoint(VFuzzyComparePoints(lp, begin) ? begin.TurnPoint() : true);
+        }
+        else if (i == segment.size() - 1)
+        {
+            lp.SetTurnPoint(VFuzzyComparePoints(lp, end) ? end.TurnPoint() : true);
+        }
+
+        lp.SetCurvePoint(true);
+        points.append(lp);
     }
 }
 }
@@ -388,19 +414,20 @@ bool VPiecePath::IsLastToCuttingCountour() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VPiecePath::PathPoints(const VContainer *data, const QVector<QPointF> &cuttingPath) const
+QVector<VLayoutPoint> VPiecePath::PathPoints(const VContainer *data, const QVector<QPointF> &cuttingPath) const
 {
-    QVector<QPointF> points = NodesToPoints(data, d->m_nodes, GetName());
+    QVector<VLayoutPoint> points = NodesToPoints(data, d->m_nodes, GetName());
 
     if (GetType() == PiecePathType::InternalPath && not cuttingPath.isEmpty() && points.size() > 1)
     {
-        QVector<QPointF> extended = points;
+        QVector<VLayoutPoint> extended = points;
 
         if (IsFirstToCuttingCountour())
         {
-            QPointF firstConnection;
+            VLayoutPoint firstConnection;
             if (IntersectionWithCuttingCountour(cuttingPath, points, &firstConnection))
             {
+                firstConnection.SetTurnPoint(true);
                 extended.prepend(firstConnection);
             }
             else
@@ -415,9 +442,10 @@ QVector<QPointF> VPiecePath::PathPoints(const VContainer *data, const QVector<QP
 
         if (IsLastToCuttingCountour())
         {
-            QPointF lastConnection;
+            VLayoutPoint lastConnection;
             if (IntersectionWithCuttingCountour(cuttingPath, Reverse(points), &lastConnection))
             {
+                lastConnection.SetTurnPoint(true);
                 extended.append(lastConnection);
             }
             else
@@ -542,7 +570,7 @@ QVector<VSAPoint> VPiecePath::SeamAllowancePoints(const VContainer *data, qreal 
 //---------------------------------------------------------------------------------------------------------------------
 QPainterPath VPiecePath::PainterPath(const VContainer *data, const QVector<QPointF> &cuttingPath) const
 {
-    return MakePainterPath(PathPoints(data, cuttingPath));
+    return MakePainterPath(CastTo<QPointF>(PathPoints(data, cuttingPath)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1104,6 +1132,7 @@ VSAPoint VPiecePath::PreparePointEkv(const VPieceNode &node, const VContainer *d
     const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(node.GetId());
     VSAPoint p(point->toQPointF());
 
+    p.SetTurnPoint(node.IsTurnPoint());
     p.SetSAAfter(node.GetSAAfter(data, *data->GetPatternUnit()));
     p.SetSABefore(node.GetSABefore(data, *data->GetPatternUnit()));
     p.SetAngleType(node.GetAngleType());
@@ -1138,18 +1167,23 @@ QVector<VSAPoint> VPiecePath::CurveSeamAllowanceSegment(const VContainer *data, 
         {
             VSAPoint p(points.at(i));
             p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+            p.SetCurvePoint(true);
+
             if (i == 0)
             { // first point
                 p.SetSAAfter(begin.GetSAAfter());
                 p.SetSABefore(begin.GetSABefore());
                 p.SetAngleType(begin.GetAngleType());
+                p.SetTurnPoint(VFuzzyComparePoints(p, begin) ? begin.TurnPoint() : true);
             }
             else if (i == points.size() - 1)
             { // last point
                 p.SetSAAfter(end.GetSAAfter());
                 p.SetSABefore(end.GetSABefore());
                 p.SetAngleType(end.GetAngleType());
+                p.SetTurnPoint(VFuzzyComparePoints(p, end) ? end.TurnPoint() : true);
             }
+
             pointsEkv.append(p);
         }
     }
@@ -1165,13 +1199,15 @@ QVector<VSAPoint> VPiecePath::CurveSeamAllowanceSegment(const VContainer *data, 
             w2 = width;
         }
 
-        const qreal wDiff = w2 - w1;// Difference between to local widths
+        const qreal wDiff = w2 - w1;// Difference between two local widths
         const qreal fullLength = VAbstractCurve::PathLength(points);
 
         VSAPoint p(points.at(0));//First point in the list
         p.SetSAAfter(begin.GetSAAfter());
         p.SetSABefore(begin.GetSABefore());
         p.SetAngleType(begin.GetAngleType());
+        p.SetCurvePoint(true);
+        p.SetTurnPoint(VFuzzyComparePoints(p, begin) ? begin.TurnPoint() : true);
         pointsEkv.append(p);
 
         qreal length = 0; // how much we handle
@@ -1179,12 +1215,14 @@ QVector<VSAPoint> VPiecePath::CurveSeamAllowanceSegment(const VContainer *data, 
         for(int i = 1; i < points.size(); ++i)
         {
             p = VSAPoint(points.at(i));
+            p.SetCurvePoint(true);
 
             if (i == points.size() - 1)
             {// last point
                 p.SetSAAfter(end.GetSAAfter());
                 p.SetSABefore(end.GetSABefore());
                 p.SetAngleType(end.GetAngleType());
+                p.SetTurnPoint(VFuzzyComparePoints(p, end) ? end.TurnPoint() : true);
             }
             else
             {
@@ -1224,10 +1262,10 @@ QString VPiecePath::NodeName(const QVector<VPieceNode> &nodes, int nodeIndex, co
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VPiecePath::NodesToPoints(const VContainer *data, const QVector<VPieceNode> &nodes,
-                                           const QString &piece)
+QVector<VLayoutPoint> VPiecePath::NodesToPoints(const VContainer *data, const QVector<VPieceNode> &nodes,
+                                                const QString &piece)
 {
-    QVector<QPointF> points;
+    QVector<VLayoutPoint> points;
     for (int i = 0; i < nodes.size(); ++i)
     {
         const VPieceNode &node = nodes.at(i);
@@ -1241,7 +1279,9 @@ QVector<QPointF> VPiecePath::NodesToPoints(const VContainer *data, const QVector
             case (Tool::NodePoint):
             {
                 const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(node.GetId());
-                points.append(static_cast<QPointF>(*point));
+                VLayoutPoint layoutPoint(point->toQPointF());
+                layoutPoint.SetTurnPoint(node.IsTurnPoint());
+                points.append(layoutPoint);
             }
             break;
             case (Tool::NodeArc):
@@ -1251,11 +1291,11 @@ QVector<QPointF> VPiecePath::NodesToPoints(const VContainer *data, const QVector
             {
                 const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
 
+                const VSAPoint begin = StartSegment(data, nodes, i);
+                const VSAPoint end = EndSegment(data, nodes, i);
 
-                const QPointF begin = StartSegment(data, nodes, i);
-                const QPointF end = EndSegment(data, nodes, i);
-
-                points << curve->GetSegmentPoints(begin, end, node.GetReverse(), piece);
+                QVector<QPointF> segment = curve->GetSegmentPoints(begin, end, node.GetReverse(), piece);
+                AppendCurveSegment(points, segment, begin, end);
             }
             break;
             default:

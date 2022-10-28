@@ -34,9 +34,7 @@
 #include <QVector>
 #include <QTransform>
 
-#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
-#include "../vpatterndb/floatItemData/vpatternlabeldata.h"
-#include "../vpatterndb/floatItemData/vgrainlinedata.h"
+#include "../vpatterndb/floatItemData/floatitemdef.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
@@ -47,6 +45,8 @@
 #include "../vgeometry/vgeometrydef.h"
 #include "vtextmanager.h"
 #include "../ifc/exception/vexception.h"
+#include "vlayoutpoint.h"
+#include "vlayoutplacelabel.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -55,126 +55,99 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VLayoutPieceData : public QSharedData
 {
 public:
-    VLayoutPieceData()
-    {}
+    VLayoutPieceData(){} // NOLINT(modernize-use-equals-default)
 
-    VLayoutPieceData(const VLayoutPieceData &detail)
-        : QSharedData(detail),
-          contour(detail.contour),
-          seamAllowance(detail.seamAllowance),
-          layoutAllowance(detail.layoutAllowance),
-          passmarks(detail.passmarks),
-          m_internalPaths(detail.m_internalPaths),
-          matrix(detail.matrix),
-          layoutWidth(detail.layoutWidth),
-          mirror(detail.mirror),
-          detailLabel(detail.detailLabel),
-          patternInfo(detail.patternInfo),
-          grainlinePoints(detail.grainlinePoints),
-          grainlineArrowType(detail.grainlineArrowType),
-          grainlineAngle(detail.grainlineAngle),
-          grainlineEnabled(detail.grainlineEnabled),
-          m_tmDetail(detail.m_tmDetail),
-          m_tmPattern(detail.m_tmPattern),
-          m_placeLabels(detail.m_placeLabels),
-          m_square(detail.m_square),
-          m_quantity(detail.m_quantity),
-          m_id(detail.m_id),
-          m_gradationId(detail.m_gradationId),
-          m_xScale(detail.m_xScale),
-          m_yScale(detail.m_yScale)
-    {}
-
+    VLayoutPieceData(const VLayoutPieceData &detail) = default;
     ~VLayoutPieceData() = default;
 
-    friend QDataStream& operator<<(QDataStream& dataStream, const VLayoutPieceData& piece);
-    friend QDataStream& operator>>(QDataStream& dataStream, VLayoutPieceData& piece);
+    friend auto operator<<(QDataStream& dataStream, const VLayoutPieceData& piece) -> QDataStream&;
+    friend auto operator>>(QDataStream& dataStream, VLayoutPieceData& piece) -> QDataStream&;
 
     /** @brief contour list of contour points. */
-    QVector<QPointF>          contour{};
+    QVector<VLayoutPoint>     m_contour{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief seamAllowance list of seam allowance points. */
-    QVector<QPointF>          seamAllowance{};
+    QVector<VLayoutPoint>     m_seamAllowance{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief layoutAllowance list of layout allowance points. */
-    QVector<QPointF>          layoutAllowance{};
+    QVector<QPointF>          m_layoutAllowance{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief passmarks list of passmakrs. */
-    QVector<VLayoutPassmark>  passmarks{};
+    QVector<VLayoutPassmark>  m_passmarks{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief m_internalPaths list of internal paths. */
-    QVector<VLayoutPiecePath> m_internalPaths{};
+    QVector<VLayoutPiecePath> m_internalPaths{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief matrix transformation matrix*/
-    QTransform                matrix{};
+    QTransform                m_matrix{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief layoutWidth value layout allowance width in pixels. */
-    qreal                     layoutWidth{0};
+    qreal                     m_layoutWidth{0}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    bool                      mirror{false};
+    bool                      m_mirror{false}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief detailLabel detail label rectangle */
-    QVector<QPointF>          detailLabel{};
+    QVector<QPointF>          m_detailLabel{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief patternInfo pattern info rectangle */
-    QVector<QPointF>          patternInfo{};
+    QVector<QPointF>          m_patternInfo{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief grainlineInfo line */
-    QVector<QPointF>          grainlinePoints{};
+    QVector<QPointF>          m_grainlinePoints{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    GrainlineArrowDirection   grainlineArrowType{GrainlineArrowDirection::atFront};
-    qreal                     grainlineAngle{0};
-    bool                      grainlineEnabled{false};
+    GrainlineArrowDirection   m_grainlineArrowType{GrainlineArrowDirection::atFront}; // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal                     m_grainlineAngle{0}; // NOLINT(misc-non-private-member-variables-in-classes)
+    bool                      m_grainlineEnabled{false}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief m_tmDetail text manager for laying out detail info */
-    VTextManager              m_tmDetail{};
+    VTextManager              m_tmDetail{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief m_tmPattern text manager for laying out pattern info */
-    VTextManager              m_tmPattern{};
+    VTextManager              m_tmPattern{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief m_placeLabels list of place labels. */
-    QVector<VLayoutPlaceLabel> m_placeLabels{};
+    QVector<VLayoutPlaceLabel> m_placeLabels{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    qint64 m_square{0};
+    qint64 m_square{0}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    quint16 m_quantity{1};
+    quint16 m_quantity{1}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief m_id keep id of original piece. */
-    vidtype                   m_id;
+    vidtype m_id{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    QString m_gradationId{};
+    QString m_gradationId{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    qreal m_xScale{1.0};
-    qreal m_yScale{1.0};
+    qreal m_xScale{1.0}; // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal m_yScale{1.0}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
-    Q_DISABLE_ASSIGN(VLayoutPieceData)
+    Q_DISABLE_ASSIGN_MOVE(VLayoutPieceData) // NOLINT
 
-    static const quint32 streamHeader;
-    static const quint16 classVersion;
+    static constexpr quint32 streamHeader{0x80D7D009}; // CRC-32Q string "VLayoutPieceData"
+    static constexpr quint16 classVersion{4};
 };
 
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------
-inline QDataStream &operator<<(QDataStream &dataStream, const VLayoutPieceData &piece)
+inline auto operator<<(QDataStream &dataStream, const VLayoutPieceData &piece) -> QDataStream &
 {
     dataStream << VLayoutPieceData::streamHeader << VLayoutPieceData::classVersion;
 
     // Added in classVersion = 1
-    dataStream << piece.contour;
-    dataStream << piece.seamAllowance;
-    dataStream << piece.layoutAllowance;
-    dataStream << piece.passmarks;
+    dataStream << piece.m_contour;
+    dataStream << piece.m_seamAllowance;
+    dataStream << piece.m_layoutAllowance;
+    dataStream << piece.m_passmarks;
     dataStream << piece.m_internalPaths;
-    dataStream << piece.matrix;
-    dataStream << piece.layoutWidth;
-    dataStream << piece.mirror;
-    dataStream << piece.detailLabel;
-    dataStream << piece.patternInfo;
-    dataStream << piece.grainlinePoints;
-    dataStream << piece.grainlineArrowType;
-    dataStream << piece.grainlineAngle;
-    dataStream << piece.grainlineEnabled;
+    dataStream << piece.m_matrix;
+    dataStream << piece.m_layoutWidth;
+    dataStream << piece.m_mirror;
+    dataStream << piece.m_detailLabel;
+    dataStream << piece.m_patternInfo;
+    dataStream << piece.m_grainlinePoints;
+    dataStream << piece.m_grainlineArrowType;
+    dataStream << piece.m_grainlineAngle;
+    dataStream << piece.m_grainlineEnabled;
     dataStream << piece.m_placeLabels;
     dataStream << piece.m_square;
 
@@ -193,7 +166,7 @@ inline QDataStream &operator<<(QDataStream &dataStream, const VLayoutPieceData &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QDataStream &operator>>(QDataStream &dataStream, VLayoutPieceData &piece)
+inline auto operator>>(QDataStream &dataStream, VLayoutPieceData &piece) -> QDataStream &
 {
     quint32 actualStreamHeader = 0;
     dataStream >> actualStreamHeader;
@@ -218,20 +191,35 @@ inline QDataStream &operator>>(QDataStream &dataStream, VLayoutPieceData &piece)
         throw VException(message);
     }
 
-    dataStream >> piece.contour;
-    dataStream >> piece.seamAllowance;
-    dataStream >> piece.layoutAllowance;
-    dataStream >> piece.passmarks;
+    if (actualClassVersion < 4)
+    {
+        auto ReadPoints = [&dataStream]()
+        {
+            QVector<QPointF> points;
+            dataStream >> points;
+            return CastTo<VLayoutPoint>(points);
+        };
+
+        piece.m_contour = ReadPoints();
+        piece.m_seamAllowance = ReadPoints();
+    }
+    else
+    {
+        dataStream >> piece.m_contour;
+        dataStream >> piece.m_seamAllowance;
+    }
+    dataStream >> piece.m_layoutAllowance;
+    dataStream >> piece.m_passmarks;
     dataStream >> piece.m_internalPaths;
-    dataStream >> piece.matrix;
-    dataStream >> piece.layoutWidth;
-    dataStream >> piece.mirror;
-    dataStream >> piece.detailLabel;
-    dataStream >> piece.patternInfo;
-    dataStream >> piece.grainlinePoints;
-    dataStream >> piece.grainlineArrowType;
-    dataStream >> piece.grainlineAngle;
-    dataStream >> piece.grainlineEnabled;
+    dataStream >> piece.m_matrix;
+    dataStream >> piece.m_layoutWidth;
+    dataStream >> piece.m_mirror;
+    dataStream >> piece.m_detailLabel;
+    dataStream >> piece.m_patternInfo;
+    dataStream >> piece.m_grainlinePoints;
+    dataStream >> piece.m_grainlineArrowType;
+    dataStream >> piece.m_grainlineAngle;
+    dataStream >> piece.m_grainlineEnabled;
     dataStream >> piece.m_placeLabels;
     dataStream >> piece.m_square;
 

@@ -39,6 +39,7 @@
 #include "../ifc/exception/vexceptionconversionerror.h"
 #include "../vpatterndb/floatItemData/floatitemdef.h"
 #include "../vgeometry/vgeometrydef.h"
+#include "../vgeometry/vlayoutplacelabel.h"
 #include "../layout/vplayout.h"
 #include "../layout/vppiece.h"
 
@@ -168,20 +169,6 @@ auto StringToRect(const QString &string) -> QRectF
     }
 
     return {};
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto StringToMarkerShape(const QString &string) -> PlaceLabelImg
-{
-    PlaceLabelImg shape;
-    QStringList paths = string.split(ML::itemsSep);
-    shape.reserve(paths.size());
-    for (const auto& path : paths)
-    {
-        shape.append(StringToPath(path));
-    }
-
-    return shape;
 }
 }  // namespace
 
@@ -499,7 +486,7 @@ void VPLayoutFileReader::ReadPiece(const VPPiecePtr &piece)
         switch (tags.indexOf(name().toString()))
         {
             case 0: // seam line
-                piece->SetCountourPoints(StringToPath(readElementText()));
+                ReadSeamLine(piece);
                 break;
             case 1: // seam allowance
                 ReadSeamAllowance(piece);
@@ -528,6 +515,50 @@ void VPLayoutFileReader::ReadPiece(const VPPiecePtr &piece)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VLayoutPoint VPLayoutFileReader::ReadLayoutPoint()
+{
+    AssertRootTag(ML::TagPoint);
+
+    VLayoutPoint point;
+
+    QXmlStreamAttributes attribs = attributes();
+    point.setX(ReadAttributeDouble(attribs, ML::AttrX, QChar('0')));
+    point.setY(ReadAttributeDouble(attribs, ML::AttrY, QChar('0')));
+    point.SetTurnPoint(ReadAttributeBool(attribs, ML::AttrTurnPoint, falseStr));
+    point.SetCurvePoint(ReadAttributeBool(attribs, ML::AttrCurvePoint, falseStr));
+
+    return point;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPLayoutFileReader::ReadLayoutPoints() -> QVector<VLayoutPoint>
+{
+    QVector<VLayoutPoint> points;
+
+    while (readNextStartElement())
+    {
+        if (name() == ML::TagPoint)
+        {
+            points.append(ReadLayoutPoint());
+        }
+        else
+        {
+            qCDebug(MLReader, "Ignoring tag %s", qUtf8Printable(name().toString()));
+            skipCurrentElement();
+        }
+    }
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutFileReader::ReadSeamLine(const VPPiecePtr &piece)
+{
+    AssertRootTag(ML::TagSeamLine);
+    piece->SetCountourPoints(ReadLayoutPoints());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPLayoutFileReader::ReadSeamAllowance(const VPPiecePtr &piece)
 {
     AssertRootTag(ML::TagSeamAllowance);
@@ -537,18 +568,15 @@ void VPLayoutFileReader::ReadSeamAllowance(const VPPiecePtr &piece)
     piece->SetSeamAllowance(enabled);
 
     bool builtIn = ReadAttributeBool(attribs, ML::AttrBuiltIn, falseStr);
-    QVector<QPointF> path = StringToPath(readElementText());
 
-    if (enabled)
+    if (enabled && not builtIn)
     {
-        if (not builtIn)
+        QVector<VLayoutPoint> path = ReadLayoutPoints();
+        if (path.isEmpty())
         {
-            if (path.isEmpty())
-            {
-                throw VException(tr("Error in line %1. Seam allowance is empty.").arg(lineNumber()));
-            }
-            piece->SetSeamAllowancePoints(path);
+            throw VException(tr("Error in line %1. Seam allowance is empty.").arg(lineNumber()));
         }
+        piece->SetSeamAllowancePoints(path);
     }
 }
 
@@ -658,7 +686,7 @@ auto VPLayoutFileReader::ReadInternalPath() -> VLayoutPiecePath
     path.SetCutPath(ReadAttributeBool(attribs, ML::AttrCut, falseStr));
     path.SetPenStyle(LineStyleToPenStyle(ReadAttributeString(attribs, ML::AttrPenStyle, TypeLineLine)));
 
-    QVector<QPointF> shape = StringToPath(readElementText());
+    QVector<VLayoutPoint> shape = ReadLayoutPoints();
     if (shape.isEmpty())
     {
         throw VException(tr("Error in line %1. Internal path shape is empty.").arg(lineNumber()));
@@ -705,19 +733,11 @@ auto VPLayoutFileReader::ReadMarker() -> VLayoutPlaceLabel
     QXmlStreamAttributes attribs = attributes();
 
     QString matrix = ReadAttributeEmptyString(attribs, ML::AttrTransform);
-    marker.rotationMatrix = StringToTransfrom(matrix);
+    marker.SetRotationMatrix(StringToTransfrom(matrix));
 
-    marker.type = static_cast<PlaceLabelType>(ReadAttributeUInt(attribs, ML::AttrType, QChar('0')));
-    marker.center = StringToPoint(ReadAttributeEmptyString(attribs, ML::AttrCenter));
-    marker.box = StringToRect(ReadAttributeEmptyString(attribs, ML::AttrBox));
-
-    PlaceLabelImg shape = StringToMarkerShape(readElementText());
-    if (shape.isEmpty())
-    {
-        throw VException(tr("Error in line %1. Marker shape is empty.").arg(lineNumber()));
-    }
-
-    marker.shape = shape;
+    marker.SetType(static_cast<PlaceLabelType>(ReadAttributeUInt(attribs, ML::AttrType, QChar('0'))));
+    marker.SetCenter(StringToPoint(ReadAttributeEmptyString(attribs, ML::AttrCenter)));
+    marker.SetBox(StringToRect(ReadAttributeEmptyString(attribs, ML::AttrBox)));
 
     // cppcheck-suppress unknownMacro
     QT_WARNING_POP

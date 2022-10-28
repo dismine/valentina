@@ -28,59 +28,74 @@
 #ifndef VRAWSAPOINT_H
 #define VRAWSAPOINT_H
 
-#include <QPointF>
+#include <QtGlobal>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/def.h"
+#include "vlayoutpoint.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
+QT_WARNING_DISABLE_CLANG("-Wnon-virtual-dtor")
 
-class VRawSAPoint : public QPointF
+class VRawSAPoint : public VLayoutPoint
 {
 public:
-    Q_DECL_CONSTEXPR VRawSAPoint();
+    Q_DECL_CONSTEXPR VRawSAPoint() = default;
     Q_DECL_CONSTEXPR VRawSAPoint(qreal xpos, qreal ypos);
-    Q_DECL_CONSTEXPR VRawSAPoint(QPointF p);
-    Q_DECL_CONSTEXPR VRawSAPoint(QPointF p, bool loopPoint);
+    Q_DECL_CONSTEXPR explicit VRawSAPoint(QPointF p);
+    Q_DECL_CONSTEXPR explicit VRawSAPoint(const VLayoutPoint &p);
+    Q_DECL_CONSTEXPR VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint);
+    Q_DECL_CONSTEXPR VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint, bool loopPoint);
 
-    Q_DECL_CONSTEXPR bool LoopPoint() const;
+    Q_DECL_CONSTEXPR auto LoopPoint() const -> bool;
     Q_DECL_RELAXED_CONSTEXPR void SetLoopPoint(bool loopPoint);
 
-    QJsonObject toJson() const;
+    auto toJson() const -> QJsonObject override;
 
 private:
     bool m_loopPoint{false};
 };
 
-Q_DECLARE_METATYPE(VRawSAPoint)
+Q_DECLARE_METATYPE(VRawSAPoint) // NOLINT
 Q_DECLARE_TYPEINFO(VRawSAPoint, Q_MOVABLE_TYPE); // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline VRawSAPoint::VRawSAPoint()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 Q_DECL_CONSTEXPR inline VRawSAPoint::VRawSAPoint(qreal xpos, qreal ypos)
-    : QPointF(xpos, ypos)
+    : VLayoutPoint(xpos, ypos)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_CONSTEXPR inline VRawSAPoint::VRawSAPoint(QPointF p)
-    : QPointF(p)
+    : VLayoutPoint(p)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline VRawSAPoint::VRawSAPoint(QPointF p, bool loopPoint)
-    : QPointF(p),
+Q_DECL_CONSTEXPR inline VRawSAPoint::VRawSAPoint(const VLayoutPoint &p)
+    : VLayoutPoint(p)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+Q_DECL_CONSTEXPR inline VRawSAPoint::VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint)
+    : VLayoutPoint(p)
+{
+    SetCurvePoint(curvePoint);
+    SetTurnPoint(turnPoint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+Q_DECL_CONSTEXPR inline VRawSAPoint::VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint, bool loopPoint)
+    : VLayoutPoint(p),
       m_loopPoint(loopPoint)
-{}
+{
+    SetCurvePoint(curvePoint);
+    SetTurnPoint(turnPoint);
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline bool VRawSAPoint::LoopPoint() const
+Q_DECL_CONSTEXPR inline auto VRawSAPoint::LoopPoint() const -> bool
 {
     return m_loopPoint;
 }

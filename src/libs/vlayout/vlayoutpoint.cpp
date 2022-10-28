@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vrawsapoint.cpp
+ **  @file   vlayoutpoint.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   31 10, 2019
+ **  @date   17 10, 2022
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2019 Valentina project
+ **  Copyright (C) 2022 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,17 +26,27 @@
  **
  *************************************************************************/
 
-#include "vrawsapoint.h"
+#include "vlayoutpoint.h"
 
 #include <QJsonObject>
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VRawSAPoint::toJson() const -> QJsonObject
+auto VLayoutPoint::toJson() const -> QJsonObject
 {
-    QJsonObject pointObject = VLayoutPoint::toJson();
+    QJsonObject pointObject;
+    pointObject[QLatin1String("type")] = "VLayoutPoint";
+    pointObject[QLatin1String("x")] = x();
+    pointObject[QLatin1String("y")] = y();
 
-    pointObject[QLatin1String("type")] = "VRawSAPoint";
-    pointObject[QLatin1String("loopPoint")] = m_loopPoint;
+    if (m_turnPoint)
+    {
+        pointObject[QLatin1String("turnPoint")] = m_turnPoint;
+    }
+
+    if (m_curvePoint)
+    {
+        pointObject[QLatin1String("curvePoint")] = m_curvePoint;
+    }
 
     return pointObject;
 }

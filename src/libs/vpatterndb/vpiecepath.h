@@ -42,6 +42,7 @@ class QPainterPath;
 class VPointF;
 class VPieceNode;
 class VInternalVariable;
+class VLayoutPoint;
 
 class VPiecePath
 {
@@ -89,7 +90,7 @@ public:
     void SetLastToCuttingCountour(bool value);
     bool IsLastToCuttingCountour() const;
 
-    QVector<QPointF>          PathPoints(const VContainer *data,
+    QVector<VLayoutPoint>     PathPoints(const VContainer *data,
                                          const QVector<QPointF> &cuttingPath = QVector<QPointF>()) const;
     QVector<VPointF>          PathNodePoints(const VContainer *data, bool showExcluded = true) const;
     QVector<QVector<QPointF> > PathCurvePoints(const VContainer *data) const;
@@ -138,8 +139,8 @@ public:
 
     static QString NodeName(const QVector<VPieceNode> &nodes, int nodeIndex, const VContainer *data);
 
-    static QVector<QPointF> NodesToPoints(const VContainer *data, const QVector<VPieceNode> &nodes,
-                                          const QString &piece = QString());
+    static QVector<VLayoutPoint> NodesToPoints(const VContainer *data, const QVector<VPieceNode> &nodes,
+                                               const QString &piece = QString());
 
 private:
     QSharedDataPointer<VPiecePathData> d;

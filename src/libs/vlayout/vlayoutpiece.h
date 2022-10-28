@@ -55,6 +55,7 @@ class VPiece;
 class VPieceLabelData;
 class VAbstractPattern;
 class VPatternLabelData;
+class VLayoutPoint;
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
@@ -79,31 +80,30 @@ public:
 
     virtual auto GetUniqueID() const -> QString override;
 
-    QVector<QPointF> GetMappedContourPoints() const;
-    QVector<QPointF> GetContourPoints() const;
-    void SetCountourPoints(const QVector<QPointF> &points, bool hideMainPath = false);
+    QVector<VLayoutPoint> GetMappedContourPoints() const;
+    QVector<VLayoutPoint> GetContourPoints() const;
+    void SetCountourPoints(const QVector<VLayoutPoint> &points, bool hideMainPath = false);
 
-    QVector<QPointF> GetMappedSeamAllowancePoints() const;
-    QVector<QPointF> GetSeamAllowancePoints() const;
-    void SetSeamAllowancePoints(const QVector<QPointF> &points, bool seamAllowance = true,
+    QVector<VLayoutPoint> GetMappedSeamAllowancePoints() const;
+    QVector<VLayoutPoint> GetSeamAllowancePoints() const;
+    void SetSeamAllowancePoints(const QVector<VLayoutPoint> &points, bool seamAllowance = true,
                                 bool seamAllowanceBuiltIn = false);
 
     QVector<QPointF> GetMappedLayoutAllowancePoints() const;
     QVector<QPointF> GetLayoutAllowancePoints() const;
     void SetLayoutAllowancePoints();
 
-    QVector<QPointF> GetMappedExternalContourPoints() const;
-    QVector<QPointF> GetExternalContourPoints() const;
+    QVector<VLayoutPoint> GetMappedExternalContourPoints() const;
+    QVector<VLayoutPoint> GetExternalContourPoints() const;
 
     QVector<VLayoutPassmark> GetMappedPassmarks() const;
     QVector<VLayoutPassmark> GetPassmarks() const;
     void SetPassmarks(const QVector<VLayoutPassmark> &passmarks);
 
-    QVector<VLayoutPlaceLabel> GetMappedPlaceLabels() const;
     QVector<VLayoutPlaceLabel> GetPlaceLabels() const;
     void SetPlaceLabels(const QVector<VLayoutPlaceLabel> &labels);
 
-    QVector<QVector<QPointF>> MappedInternalPathsForCut(bool cut) const;
+    QVector<QVector<VLayoutPoint> > MappedInternalPathsForCut(bool cut) const;
     QVector<VLayoutPiecePath> GetInternalPaths() const;
     void SetInternalPaths(const QVector<VLayoutPiecePath> &internalPaths);
 
@@ -185,6 +185,8 @@ public:
     friend QDataStream& operator<< (QDataStream& dataStream, const VLayoutPiece& piece);
     friend QDataStream& operator>> (QDataStream& dataStream, VLayoutPiece& piece);
 
+    auto MapPlaceLabelShape(PlaceLabelImg shape) const -> PlaceLabelImg;
+
 protected:
     void SetGrainlineEnabled(bool enabled);
     void SetGrainlineAngle(qreal angle);
@@ -206,7 +208,7 @@ protected:
 private:
     QSharedDataPointer<VLayoutPieceData> d;
 
-    QVector<QPointF> DetailPath() const;
+    QVector<VLayoutPoint> DetailPath() const;
 
     Q_REQUIRED_RESULT QGraphicsPathItem *GetMainItem() const;
     Q_REQUIRED_RESULT QGraphicsPathItem *GetMainPathItem() const;

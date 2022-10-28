@@ -28,12 +28,8 @@
 
 #include "vlayoutpiecepath.h"
 #include "vlayoutpiecepath_p.h"
-#include "vlayoutdef.h"
 
 #include <QPainterPath>
-
-const quint32 VLayoutPiecePathData::streamHeader = 0xA53F0225; // CRC-32Q string "VLayoutPiecePathData"
-const quint16 VLayoutPiecePathData::classVersion = 1;
 
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------
@@ -57,7 +53,7 @@ VLayoutPiecePath::VLayoutPiecePath()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutPiecePath::VLayoutPiecePath(const QVector<QPointF> &points)
+VLayoutPiecePath::VLayoutPiecePath(const QVector<VLayoutPoint> &points)
     : d(new VLayoutPiecePathData(points))
 {
 }
@@ -104,20 +100,20 @@ QPainterPath VLayoutPiecePath::GetPainterPath() const
     QPainterPath path;
     if (not d->m_points.isEmpty())
     {
-        path.addPolygon(QPolygonF(d->m_points));
+        path.addPolygon(QPolygonF(CastTo<QPointF>(d->m_points)));
         path.setFillRule(Qt::WindingFill);
     }
     return path;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VLayoutPiecePath::Points() const
+QVector<VLayoutPoint> VLayoutPiecePath::Points() const
 {
     return d->m_points;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiecePath::SetPoints(const QVector<QPointF> &points)
+void VLayoutPiecePath::SetPoints(const QVector<VLayoutPoint> &points)
 {
     d->m_points = points;
 }

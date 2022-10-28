@@ -46,6 +46,7 @@ class VPPiece;
 class QFile;
 class QMarginsF;
 class VTextManager;
+class VLayoutPoint;
 
 class VPLayoutFileWriter : public QXmlStreamWriter
 {
@@ -68,6 +69,7 @@ private:
     void WritePiece(const VPPiecePtr &piece);
     void WriteLabel(const QVector<QPointF> &labelShape, const VTextManager &tm, const QString &tagName);
     void WriteLabelLines(const VTextManager &tm);
+    auto WriteLayoutPoint(const VLayoutPoint &point) -> void;
 
     void WriteMargins(const QMarginsF &margins, bool ignore);
     void WriteSize(QSizeF size);

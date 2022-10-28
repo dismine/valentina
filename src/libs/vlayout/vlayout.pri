@@ -15,6 +15,7 @@ HEADERS += \
     $$PWD/vcontour.h \
     $$PWD/vcontour_p.h \
     $$PWD/vbestsquare.h \
+    $$PWD/vlayoutpoint.h \
     $$PWD/vposition.h \
     $$PWD/vrawlayout.h \ 
     $$PWD/vprintlayout.h \
@@ -38,6 +39,7 @@ SOURCES += \
     $$PWD/vbank.cpp \
     $$PWD/vcontour.cpp \
     $$PWD/vbestsquare.cpp \
+    $$PWD/vlayoutpoint.cpp \
     $$PWD/vposition.cpp \
     $$PWD/vrawlayout.cpp \  
     $$PWD/vprintlayout.cpp \

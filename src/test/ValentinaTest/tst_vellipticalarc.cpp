@@ -477,8 +477,8 @@ void TST_VEllipticalArc::TestGetPoints5()
     if (points.size() > 2 && qFuzzyIsNull(rotationAngle))
     {
         const qreal testAccuracy = ToPixel(1.5, Unit::Mm);
-        Comparison(arc.GetP1(), ConstFirst(points), testAccuracy);
-        Comparison(arc.GetP2(), ConstLast(points), testAccuracy);
+        ComparePointsDistance(arc.GetP1(), ConstFirst(points), testAccuracy);
+        ComparePointsDistance(arc.GetP2(), ConstLast(points), testAccuracy);
 
         const qreal eps = 0.15;
 

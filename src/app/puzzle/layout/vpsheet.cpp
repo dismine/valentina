@@ -507,7 +507,7 @@ void VPSheet::ValidateSuperpositionOfPieces() const
         }
 
         const bool oldSuperpositionOfPieces = piece->HasSuperpositionWithPieces();
-        QVector<QPointF> path1 = piece->GetMappedExternalContourPoints();
+        QVector<QPointF> path1 = CastTo<QPointF>(piece->GetMappedExternalContourPoints());
         bool hasSuperposition = false;
 
         for (const auto &p : pieces)
@@ -517,7 +517,7 @@ void VPSheet::ValidateSuperpositionOfPieces() const
                 continue;
             }
 
-            QVector<QPointF> path2 = p->GetMappedExternalContourPoints();
+            QVector<QPointF> path2 = CastTo<QPointF>(p->GetMappedExternalContourPoints());
 
             bool superposition = VPPiece::PathsSuperposition(path1, path2);
             if (superposition)
