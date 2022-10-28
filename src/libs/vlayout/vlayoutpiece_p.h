@@ -197,7 +197,9 @@ inline auto operator>>(QDataStream &dataStream, VLayoutPieceData &piece) -> QDat
         {
             QVector<QPointF> points;
             dataStream >> points;
-            return CastTo<VLayoutPoint>(points);
+            QVector<VLayoutPoint> casted;
+            CastTo(points, casted);
+            return casted;
         };
 
         piece.m_contour = ReadPoints();

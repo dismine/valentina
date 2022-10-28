@@ -67,31 +67,36 @@ Q_DECLARE_TYPEINFO(VLayoutPoint, Q_MOVABLE_TYPE); // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class T>
-inline auto CastTo(const QVector<T> &points) -> QVector<T>
+inline auto CastTo(const QVector<T> &points, QVector<T> &casted) -> void
 {
-    return points;
+    Q_UNUSED(points)
+    Q_UNUSED(casted)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-// upcast
+//upcast
 template <class Derived, class Base, typename std::enable_if<std::is_base_of<Base, Derived>::value>::type* = nullptr>
-inline auto CastTo(const QVector<Base> &points) -> QVector<Derived>
+inline auto CastTo(const QVector<Base> &points, QVector<Derived> &casted) -> void
 {
-    QVector<Derived> castedPoints;
-    castedPoints.reserve(points.size());
-    std::transform(points.begin(), points.end(), castedPoints.begin(), [](const Base &p) { return Derived(p); });
-    return castedPoints;
+    casted.clear();
+    casted.reserve(points.size());
+    for (const auto &p : points)
+    {
+        casted.append(Derived(p));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-// downcast
+//downcast
 template <class Base, class Derived, typename std::enable_if<std::is_base_of<Base, Derived>::value>::type* = nullptr>
-inline auto CastTo(const QVector<Derived> &points) -> QVector<Base>
+inline auto CastTo(const QVector<Derived> &points, QVector<Base> &casted) -> void
 {
-    QVector<Base> castedPoints;
-    castedPoints.reserve(points.size());
-    std::transform(points.begin(), points.end(), castedPoints.begin(), [](const Base &p) { return p; });
-    return castedPoints;
+    casted.clear();
+    casted.reserve(points.size());
+    for (const auto &p : points)
+    {
+        casted.append(p);
+    }
 }
 
 /*****************************************************************************

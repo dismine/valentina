@@ -570,7 +570,10 @@ QVector<VSAPoint> VPiecePath::SeamAllowancePoints(const VContainer *data, qreal 
 //---------------------------------------------------------------------------------------------------------------------
 QPainterPath VPiecePath::PainterPath(const VContainer *data, const QVector<QPointF> &cuttingPath) const
 {
-    return MakePainterPath(CastTo<QPointF>(PathPoints(data, cuttingPath)));
+    QVector<VLayoutPoint> points = PathPoints(data, cuttingPath);
+    QVector<QPointF> casted;
+    CastTo(points, casted);
+    return MakePainterPath(casted);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -580,7 +583,7 @@ QVector<QPainterPath> VPiecePath::CurvesPainterPath(const VContainer *data) cons
     QVector<QPainterPath> paths;
     paths.reserve(curves.size());
 
-    for(auto &curve : curves)
+    for(const auto &curve : curves)
     {
         paths.append(MakePainterPath(curve));
     }
@@ -1258,7 +1261,7 @@ QString VPiecePath::NodeName(const QVector<VPieceNode> &nodes, int nodeIndex, co
     {
         // ignore
     }
-    return QString();
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

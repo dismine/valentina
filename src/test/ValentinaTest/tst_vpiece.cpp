@@ -53,7 +53,8 @@ void TST_VPiece::Issue620()
     VPiece detail;
     AbstractTest::PieceFromJson(QStringLiteral("://Issue_620/input.json"), detail, data);
 
-    const QVector<QPointF> pointsEkv = CastTo<QPointF>(detail.MainPathPoints(data.data()));
+    QVector<QPointF> pointsEkv;
+    CastTo(detail.MainPathPoints(data.data()), pointsEkv);
     QVector<QPointF> origPoints = AbstractTest::VectorFromJson<QPointF>(QStringLiteral("://Issue_620/output.json"));
 
     // Begin comparison

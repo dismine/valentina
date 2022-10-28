@@ -2763,7 +2763,8 @@ void DialogSeamAllowance::ValidObjects(bool value)
 //---------------------------------------------------------------------------------------------------------------------
 bool DialogSeamAllowance::MainPathIsClockwise() const
 {
-    const QVector<QPointF> points = CastTo<QPointF>(CreatePiece().MainPathPoints(data));
+    QVector<QPointF> points;
+    CastTo(CreatePiece().MainPathPoints(data), points);
 
     if(points.count() < 3)
     {

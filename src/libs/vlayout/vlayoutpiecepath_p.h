@@ -126,7 +126,7 @@ QDataStream& operator>>(QDataStream &dataStream, VLayoutPiecePathData &path)
     {
         QVector<QPointF> points;
         dataStream >> points;
-        path.m_points = CastTo<VLayoutPoint>(points);
+        CastTo(points, path.m_points);
     }
     else
     {

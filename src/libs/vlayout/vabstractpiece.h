@@ -330,6 +330,74 @@ inline auto VAbstractPiece::RemoveDublicates(const QVector<T> &points, bool remo
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class T>
+inline auto VAbstractPiece::ComparePoints(QVector<T> &points, const T &p1, const T &p2, qreal accuracy) -> bool
+{
+    if (not VFuzzyComparePoints(p1, p2, accuracy))
+    {
+        points.append(p2);
+        return false;
+    }
+
+    if (not points.isEmpty() && p2.TurnPoint())
+    {
+        points.last().SetTurnPoint(true);
+    }
+
+    if (not points.isEmpty() && p2.CurvePoint())
+    {
+        points.last().SetCurvePoint(true);
+    }
+
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <>
+inline auto VAbstractPiece::ComparePoints<QPointF>(QVector<QPointF> &points, const QPointF &p1, const QPointF &p2,
+                                                   qreal accuracy) -> bool
+{
+    if (not VFuzzyComparePoints(p1, p2, accuracy))
+    {
+        points.append(p2);
+        return false;
+    }
+
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+inline auto VAbstractPiece::CompareFirstAndLastPoints(QVector<T> &points, qreal accuracy) -> void
+{
+    const T& l = ConstLast(points);
+    if (VFuzzyComparePoints(ConstFirst(points), l, accuracy))
+    {
+        points.removeLast();
+
+        if (not points.isEmpty() && l.TurnPoint())
+        {
+            points.last().SetTurnPoint(true);
+        }
+
+        if (not points.isEmpty() && l.CurvePoint())
+        {
+            points.last().SetCurvePoint(true);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <>
+inline auto VAbstractPiece::CompareFirstAndLastPoints<QPointF>(QVector<QPointF> &points, qreal accuracy) -> void
+{
+    if (VFuzzyComparePoints(ConstFirst(points), ConstLast(points), accuracy))
+    {
+        points.removeLast();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
 inline auto VAbstractPiece::IsInsidePolygon(const QVector<T> &path, const QVector<T> &polygon, qreal accuracy) -> bool
 {
     // Edges must not intersect

@@ -1122,15 +1122,20 @@ auto VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal width, const QS
         QT_WARNING_POP
     }
 
+    QVector<VLayoutPoint> cleaned;
 //    Uncomment for debug
-//    QVector<VLayoutPoint> cleaned = CastTo<VLayoutPoint>(ekvPoints);
+//    CastTo(ekvPoints, cleaned);
 
     const bool removeFirstAndLast = false;
     ekvPoints = RemoveDublicates(ekvPoints, removeFirstAndLast);
-    QVector<VLayoutPoint> cleaned = CastTo<VLayoutPoint>(CheckLoops(ekvPoints));//Result path can contain loops
+    ekvPoints = CheckLoops(ekvPoints);
+    CastTo(ekvPoints, cleaned);//Result path can contain loops
     cleaned = CorrectEquidistantPoints(cleaned, removeFirstAndLast);
     cleaned = CorrectPathDistortion(cleaned);
-//    DumpVector(CastTo<QPointF>(cleaned), QStringLiteral("output.json.XXXXXX")); // Uncomment for dumping test data
+
+//    QVector<QPointF> dump;
+//    CastTo(cleaned, dump);
+//    DumpVector(dump, QStringLiteral("output.json.XXXXXX")); // Uncomment for dumping test data
     return cleaned;
 }
 
@@ -2041,76 +2046,10 @@ auto VAbstractPiece::LabelShapePath(const PlaceLabelImg &shape) -> QPainterPath
         if (not p.isEmpty())
         {
             path.moveTo(ConstFirst<QPointF>(p));
-            path.addPolygon(CastTo<QPointF>(p));
+            QVector<QPointF> polygon;
+            CastTo(p, polygon);
+            path.addPolygon(polygon);
         }
     }
     return path;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <class T>
-auto VAbstractPiece::ComparePoints(QVector<T> &points, const T &p1, const T &p2, qreal accuracy) -> bool
-{
-    if (not VFuzzyComparePoints(p1, p2, accuracy))
-    {
-        points.append(p2);
-        return false;
-    }
-
-    if (not points.isEmpty() && p2.TurnPoint())
-    {
-        points.last().SetTurnPoint(true);
-    }
-
-    if (not points.isEmpty() && p2.CurvePoint())
-    {
-        points.last().SetCurvePoint(true);
-    }
-
-    return true;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <>
-auto VAbstractPiece::ComparePoints<QPointF>(QVector<QPointF> &points, const QPointF &p1, const QPointF &p2,
-                                                   qreal accuracy) -> bool
-{
-    if (not VFuzzyComparePoints(p1, p2, accuracy))
-    {
-        points.append(p2);
-        return false;
-    }
-
-    return true;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <class T>
-auto VAbstractPiece::CompareFirstAndLastPoints(QVector<T> &points, qreal accuracy) -> void
-{
-    if (VFuzzyComparePoints(ConstFirst(points), ConstLast(points), accuracy))
-    {
-        const T& l = ConstLast(points);
-        points.removeLast();
-
-        if (not points.isEmpty() && l.TurnPoint())
-        {
-            points.last().SetTurnPoint(true);
-        }
-
-        if (not points.isEmpty() && l.CurvePoint())
-        {
-            points.last().SetCurvePoint(true);
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <>
-auto VAbstractPiece::CompareFirstAndLastPoints<QPointF>(QVector<QPointF> &points, qreal accuracy) -> void
-{
-    if (VFuzzyComparePoints(ConstFirst(points), ConstLast(points), accuracy))
-    {
-        points.removeLast();
-    }
 }

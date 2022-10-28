@@ -409,7 +409,8 @@ auto VPPiece::StickyPosition(qreal &dx, qreal &dy) const -> bool
         return false;
     }
 
-    QVector<QPointF> path = CastTo<QPointF>(GetMappedExternalContourPoints());
+    QVector<QPointF> path;
+    CastTo(GetMappedExternalContourPoints(), path);
     QRectF boundingRect = VLayoutPiece::BoundingRect(path);
     const qreal stickyDistance = pieceGap+minStickyDistance;
     QRectF stickyZone = QRectF(boundingRect.topLeft().x()-stickyDistance, boundingRect.topLeft().y()-stickyDistance,
@@ -425,7 +426,8 @@ auto VPPiece::StickyPosition(qreal &dx, qreal &dy) const -> bool
             continue;
         }
 
-        QVector<QPointF> piecePath = CastTo<QPointF>(piece->GetMappedExternalContourPoints());
+        QVector<QPointF> piecePath;
+        CastTo(piece->GetMappedExternalContourPoints(), piecePath);
         QRectF pieceBoundingRect = VLayoutPiece::BoundingRect(piecePath);
 
         if (stickyZone.intersects(pieceBoundingRect) || pieceBoundingRect.contains(stickyZone) ||

@@ -709,7 +709,7 @@ void VPGraphicsPiece::GroupMove(const QPointF &pos)
             QVector<QPointF> path;
             if (not p.isNull() && p->StickyPosition(m_stickyTranslateX, m_stickyTranslateY))
             {
-                path = CastTo<QPointF>(p->GetMappedExternalContourPoints());
+                CastTo(p->GetMappedExternalContourPoints(), path);
                 QTransform m;
                 m.translate(m_stickyTranslateX, m_stickyTranslateY);
                 path = m.map(path);

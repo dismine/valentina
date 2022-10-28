@@ -308,7 +308,8 @@ void TST_VAbstractPiece::EquidistantRemoveLoop() const
     QFETCH(qreal, width);
     QFETCH(QVector<QPointF>, ekvOrig);
 
-    const QVector<QPointF> ekv = CastTo<QPointF>(VAbstractPiece::Equidistant(points, width, QString()));
+    QVector<QPointF> ekv;
+    CastTo(VAbstractPiece::Equidistant(points, width, QString()), ekv);
 
     // Begin comparison
     ComparePathsDistance(ekv, ekvOrig);
@@ -360,7 +361,8 @@ void TST_VAbstractPiece::LayoutAllowanceRemoveLoop() const
     QFETCH(qreal, width);
     QFETCH(QVector<QPointF>, ekvOrig);
 
-    const QVector<QPointF> ekv = CastTo<QPointF>(VAbstractPiece::Equidistant(points, width, QString()));
+    QVector<QPointF> ekv;
+    CastTo(VAbstractPiece::Equidistant(points, width, QString()), ekv);
 
     // Begin comparison
     ComparePathsDistance(ekv, ekvOrig);
@@ -402,7 +404,8 @@ void TST_VAbstractPiece::RawPathRemoveLoop() const
     QFETCH(QVector<VRawSAPoint>, path);
     QFETCH(QVector<QPointF>, expect);
 
-    QVector<QPointF> res = CastTo<QPointF>(VAbstractPiece::CheckLoops(path));
+    QVector<QPointF> res;
+    CastTo(VAbstractPiece::CheckLoops(path), res);
     ComparePathsDistance(res, expect);
 }
 
@@ -962,7 +965,8 @@ void TST_VAbstractPiece::BrokenDetailEquidistant() const
     QFETCH(qreal, width);
     QFETCH(QVector<QPointF>, ekvOrig);
 
-    const QVector<QPointF> ekv = CastTo<QPointF>(VAbstractPiece::Equidistant(points, width, QString()));// Take result
+    QVector<QPointF> ekv;
+    CastTo(VAbstractPiece::Equidistant(points, width, QString()), ekv);// Take result
 
     // Begin comparison
     ComparePathsDistance(ekv, ekvOrig);
@@ -1074,7 +1078,8 @@ void TST_VAbstractPiece::EquidistantAngleType() const
     QFETCH(qreal, width);
     QFETCH(QVector<QPointF>, ekvOrig);
 
-    const QVector<QPointF> ekv = CastTo<QPointF>(VAbstractPiece::Equidistant(points, width, QString()));// Take result
+    QVector<QPointF> ekv;
+    CastTo(VAbstractPiece::Equidistant(points, width, QString()), ekv);// Take result
 
     // Begin comparison
     ComparePathsDistance(ekv, ekvOrig);

@@ -57,10 +57,14 @@ void TST_VLayoutDetail::Case1() const
     // https://bitbucket.org/dismine/valentina/issue/304/layout-appears-different-than-my-pattern
 
     VLayoutPiece det = VLayoutPiece();
-    det.SetCountourPoints(CastTo<VLayoutPoint>(InputPointsCase1()));
+    QVector<VLayoutPoint> inputPoints;
+    CastTo(InputPointsCase1(), inputPoints);
+    det.SetCountourPoints(inputPoints);
 
     // Begin comparison
-    ComparePathsDistance(CastTo<QPointF>(det.GetMappedContourPoints()), OutputPointsCase1());
+    QVector<QPointF> contourPoints;
+    CastTo(det.GetMappedContourPoints(), contourPoints);
+    ComparePathsDistance(contourPoints, OutputPointsCase1());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -119,10 +123,14 @@ QVector<QPointF> TST_VLayoutDetail::OutputPointsCase1() const //-V524
 void TST_VLayoutDetail::Case2() const
 {
     VLayoutPiece det = VLayoutPiece();
-    det.SetCountourPoints(CastTo<VLayoutPoint>(InputPointsCase2()));
+    QVector<VLayoutPoint> inputPoints;
+    CastTo(InputPointsCase2(), inputPoints);
+    det.SetCountourPoints(inputPoints);
 
     // Begin comparison
-    ComparePathsDistance(CastTo<QPointF>(det.GetMappedContourPoints()), OutputPointsCase2());
+    QVector<QPointF> contourPoints;
+    CastTo(det.GetMappedContourPoints(), contourPoints);
+    ComparePathsDistance(contourPoints, OutputPointsCase2());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -160,10 +168,14 @@ QVector<QPointF> TST_VLayoutDetail::OutputPointsCase2() const
 void TST_VLayoutDetail::Case3() const
 {
     VLayoutPiece det = VLayoutPiece();
-    det.SetCountourPoints(CastTo<VLayoutPoint>(InputPointsCase3()));
+    QVector<VLayoutPoint> inputPoints;
+    CastTo(InputPointsCase3(), inputPoints);
+    det.SetCountourPoints(inputPoints);
 
     // Begin comparison
-    ComparePathsDistance(CastTo<QPointF>(det.GetMappedContourPoints()), OutputPointsCase3());
+    QVector<QPointF> contourPoints;
+    CastTo(det.GetMappedContourPoints(), contourPoints);
+    ComparePathsDistance(contourPoints, OutputPointsCase3());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -100,7 +100,9 @@ QPainterPath VLayoutPiecePath::GetPainterPath() const
     QPainterPath path;
     if (not d->m_points.isEmpty())
     {
-        path.addPolygon(QPolygonF(CastTo<QPointF>(d->m_points)));
+        QVector<QPointF> points;
+        CastTo(d->m_points, points);
+        path.addPolygon(QPolygonF(points));
         path.setFillRule(Qt::WindingFill);
     }
     return path;

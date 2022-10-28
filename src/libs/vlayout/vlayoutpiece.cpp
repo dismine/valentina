@@ -1198,13 +1198,17 @@ auto VLayoutPiece::LayoutEdgeByPoint(const QPointF &p1) const -> int
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutPiece::MappedDetailBoundingRect() const -> QRectF
 {
-    return BoundingRect(CastTo<QPointF>(GetMappedExternalContourPoints()));
+    QVector<QPointF> points;
+    CastTo(GetMappedExternalContourPoints(), points);
+    return BoundingRect(points);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutPiece::DetailBoundingRect() const -> QRectF
 {
-    return BoundingRect(CastTo<QPointF>(GetExternalContourPoints()));
+    QVector<QPointF> points;
+    CastTo(GetExternalContourPoints(), points);
+    return BoundingRect(points);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1245,24 +1249,30 @@ void VLayoutPiece::SetLayoutAllowancePoints()
     {
         if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn())
         {
-            d->m_layoutAllowance = CastTo<QPointF>(Equidistant(CastTo<VSAPoint>(GetMappedSeamAllowancePoints()),
-                                                               d->m_layoutWidth, GetName()));
+            QVector<VSAPoint> seamAllowancePoints;
+            CastTo(GetMappedSeamAllowancePoints(), seamAllowancePoints);
+            CastTo(Equidistant(seamAllowancePoints, d->m_layoutWidth, GetName()), d->m_layoutAllowance);
             if (not d->m_layoutAllowance.isEmpty())
             {
                 d->m_layoutAllowance.removeLast();
 
-                d->m_square = qFloor(qAbs(SumTrapezoids(CastTo<QPointF>(GetSeamAllowancePoints()))/2.0));
+                QVector<QPointF> points;
+                CastTo(GetSeamAllowancePoints(), points);
+                d->m_square = qFloor(qAbs(SumTrapezoids(points)/2.0));
             }
         }
         else
         {
-            d->m_layoutAllowance = CastTo<QPointF>(Equidistant(CastTo<VSAPoint>(GetMappedContourPoints()),
-                                                               d->m_layoutWidth, GetName()));
+            QVector<VSAPoint> seamLinePoints;
+            CastTo(GetMappedContourPoints(), seamLinePoints);
+            CastTo(Equidistant(seamLinePoints, d->m_layoutWidth, GetName()), d->m_layoutAllowance);
             if (not d->m_layoutAllowance.isEmpty())
             {
                 d->m_layoutAllowance.removeLast();
 
-                d->m_square = qFloor(qAbs(SumTrapezoids(CastTo<QPointF>(GetContourPoints()))/2.0));
+                QVector<QPointF> points;
+                CastTo(GetContourPoints(), points);
+                d->m_square = qFloor(qAbs(SumTrapezoids(points)/2.0));
             }
         }
     }
@@ -1486,7 +1496,9 @@ auto VLayoutPiece::IsLayoutAllowanceValid() const -> bool
 {
     QVector<VLayoutPoint> base = (IsSeamAllowance() && not IsSeamAllowanceBuiltIn()) ?
                                      d->m_seamAllowance : d->m_contour;
-    return VAbstractPiece::IsAllowanceValid(CastTo<QPointF>(base), d->m_layoutAllowance);
+    QVector<QPointF> points;
+    CastTo(base, points);
+    return VAbstractPiece::IsAllowanceValid(points, d->m_layoutAllowance);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

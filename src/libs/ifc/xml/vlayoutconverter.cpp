@@ -225,7 +225,8 @@ void VLayoutConverter::ConvertPathToV0_1_3(QDomElement &node)
     }
 
     RemoveAllChildren(node);
-    QVector<VLayoutPoint> path = CastTo<VLayoutPoint>(StringV0_1_2ToPath(oldPath));
+    QVector<VLayoutPoint> path;
+    CastTo(StringV0_1_2ToPath(oldPath), path);
 
     for (auto &point : path)
     {

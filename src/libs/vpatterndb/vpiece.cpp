@@ -208,12 +208,15 @@ QVector<VLayoutPoint> VPiece::SeamAllowancePoints(const VContainer *data) const
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VPiece::CuttingPathPoints(const VContainer *data) const
 {
+    QVector<QPointF> points;
     if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn())
     {
-        return CastTo<QPointF>(SeamAllowancePoints(data));
+        CastTo(SeamAllowancePoints(data), points);
+        return points;
     }
 
-    return CastTo<QPointF>(MainPathPoints(data));
+    CastTo(MainPathPoints(data), points);
+    return points;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -269,7 +272,9 @@ QVector<QPainterPath> VPiece::CurvesPainterPath(const VContainer *data) const
 //---------------------------------------------------------------------------------------------------------------------
 QPainterPath VPiece::MainPathPath(const VContainer *data) const
 {
-    return VPiece::MainPathPath(CastTo<QPointF>(MainPathPoints(data)));
+    QVector<QPointF> points;
+    CastTo(MainPathPoints(data), points);
+    return VPiece::MainPathPath(points);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -349,8 +354,13 @@ bool VPiece::IsSeamAllowanceValid(const VContainer *data) const
 {
     if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn())
     {
-        return VAbstractPiece::IsAllowanceValid(CastTo<QPointF>(UniteMainPathPoints(data)),
-                                                CastTo<QPointF>(SeamAllowancePoints(data)));
+        QVector<QPointF> mainPathPoints;
+        CastTo<QPointF>(UniteMainPathPoints(data), mainPathPoints);
+
+        QVector<QPointF> seamAllowancePoints;
+        CastTo<QPointF>(SeamAllowancePoints(data), seamAllowancePoints);
+
+        return VAbstractPiece::IsAllowanceValid(mainPathPoints, seamAllowancePoints);
     }
 
     return true;

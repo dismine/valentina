@@ -2093,9 +2093,10 @@ auto VToolSeamAllowance::IsGrainlinePositionValid() const -> bool
 {
     QLineF grainLine = m_grainLine->Grainline();
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
-    const QVector<QPointF> contourPoints =
-        detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn() ?
-            CastTo<QPointF>(detail.SeamAllowancePoints(getData())) : CastTo<QPointF>(detail.MainPathPoints(getData()));
+    QVector<QPointF> contourPoints;
+    detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn()
+        ? CastTo(detail.SeamAllowancePoints(getData()), contourPoints)
+        : CastTo(detail.MainPathPoints(getData()), contourPoints);
 
     QVector<QPointF> points = VAbstractCurve::CurveIntersectLine(contourPoints, grainLine);
     if (not points.isEmpty())
