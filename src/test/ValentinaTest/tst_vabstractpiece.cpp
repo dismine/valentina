@@ -252,43 +252,43 @@ void TST_VAbstractPiece::EquidistantRemoveLoop_data()
                      QStringLiteral("://loop_start_point_on_line/output.json"),
                      37.795275590551185 /*seam allowance width (1.0 cm)*/);
 
-    // See file src/app/share/collection/bugs/DP_6_hem.val (private collection)
+    // See file valentina_private_collection/bugs/DP_6_hem/DP_6_hem.val
     ASSERT_TEST_CASE("By length",
                      QStringLiteral("://DP_6_hem_by_length/input.json"),
                      QStringLiteral("://DP_6_hem_by_length/output.json"),
                      37.795275590551185 /*seam allowance width (1.0 cm)*/);
 
-    // See file src/app/share/collection/bugs/DP_6_hem.val (private collection)
+    // See file valentina_private_collection/bugs/DP_6_hem/DP_6_hem.val
     ASSERT_TEST_CASE("By intersection",
                      QStringLiteral("://DP_6_hem_by_intersection/input.json"),
                      QStringLiteral("://DP_6_hem_by_intersection/output.json"),
                      37.795275590551185 /*seam allowance width (1.0 cm)*/);
 
-    // See file src/app/share/collection/bugs/DP_6_hem.val (private collection)
+    // See file valentina_private_collection/bugs/DP_6_hem/DP_6_hem.val
     ASSERT_TEST_CASE("By first edge symmetry",
                      QStringLiteral("://DP_6_hem_by_first_edge_symmetry/input.json"),
                      QStringLiteral("://DP_6_hem_by_first_edge_symmetry/output.json"),
                      37.795275590551185 /*seam allowance width (1.0 cm)*/);
 
-    // See file src/app/share/collection/bugs/DP_6_hem.val (private collection)
+    // See file valentina_private_collection/bugs/DP_6_hem/DP_6_hem.val
     ASSERT_TEST_CASE("By second edge symmetry",
                      QStringLiteral("://DP_6_hem_by_second_edge_symmetry/input.json"),
                      QStringLiteral("://DP_6_hem_by_second_edge_symmetry/output.json"),
                      37.795275590551185 /*seam allowance width (1.0 cm)*/);
 
-    // See file src/app/share/collection/bugs/DP_6_hem.val (private collection)
+    // See file valentina_private_collection/bugs/DP_6_hem/DP_6_hem.val
     ASSERT_TEST_CASE("By first edge right angle",
                      QStringLiteral("://DP_6_hem_by_first_edge_right_angle/input.json"),
                      QStringLiteral("://DP_6_hem_by_first_edge_right_angle/output.json"),
                      37.795275590551185 /*seam allowance width (1.0 cm)*/);
 
-    // See file src/app/share/collection/bugs/DP_6_hem.val (private collection)
+    // See file valentina_private_collection/bugs/DP_6_hem/DP_6_hem.val
     ASSERT_TEST_CASE("By second edge right angle",
                      QStringLiteral("://DP_6_hem_by_second_edge_right_angle/input.json"),
                      QStringLiteral("://DP_6_hem_by_second_edge_right_angle/output.json"),
                      37.795275590551185 /*seam allowance width (1.0 cm)*/);
 
-    // See file src/app/share/collection/bugs/DP_6.val (private collection)
+    // See file valentina_private_collection/bugs/DP_6/DP_6.val
     ASSERT_TEST_CASE("Hem by seam allowance",
                      QStringLiteral("://DP_6/input.json"),
                      QStringLiteral("://DP_6/output.json"),
@@ -341,13 +341,13 @@ void TST_VAbstractPiece::LayoutAllowanceRemoveLoop_data()
                      QStringLiteral("://smart_pattern_#99/output.json"),
                      28.346456692913389 /*seam allowance width*/);
 
-    // See file valentina_private_collection/test/smart_pattern_#120/smart_pattern_#120.val (private collection)
+    // See file valentina_private_collection/test/smart_pattern_#120/smart_pattern_#120.val
     ASSERT_TEST_CASE("Piece 1",
                      QStringLiteral("://smart_pattern_#120_piece_1/input.json"),
                      QStringLiteral("://smart_pattern_#120_piece_1/output.json"),
                      37.795275590551185);
 
-    // See file valentina_private_collection/test/smart_pattern_#120/smart_pattern_#120.val (private collection)
+    // See file valentina_private_collection/test/smart_pattern_#120/smart_pattern_#120.val
     ASSERT_TEST_CASE("Piece 2",
                      QStringLiteral("://smart_pattern_#120_piece_2/input.json"),
                      QStringLiteral("://smart_pattern_#120_piece_2/output.json"),
@@ -926,7 +926,7 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data()
                      QStringLiteral("://Issue_883_prong/output.json"),
                      37.795275590551185 /*seam allowance width*/);
 
-    // See the file "collection/bugs/doll.val" (private collection)
+    // See the file "valentina_private_collection/bugs/doll/doll.val"
     ASSERT_TEST_CASE("Doll.",
                      QStringLiteral("://doll/input.json"),
                      QStringLiteral("://doll/output.json"),
@@ -1046,37 +1046,37 @@ void TST_VAbstractPiece::EquidistantAngleType_data()
                      QStringLiteral("://Issue_937_case_5/output.json"),
                      37.795275590551185 /*seam allowance width*/);
 
-    // See file src/app/share/collection/bugs/busty.val (private collection)
+    // See file valentina_private_collection/bugs/busty/busty.val
     ASSERT_TEST_CASE("Busty",
                      QStringLiteral("://busty/input.json"),
                      QStringLiteral("://busty/output.json"),
                      0 /*seam allowance width*/);
 
-    // See file src/app/share/collection/bugs/panties.val (private collection)
+    // See file valentina_private_collection/bugs/panties/panties.val
     ASSERT_TEST_CASE("Panties. Piece Case 1",
                      QStringLiteral("://panties_case1/input.json"),
                      QStringLiteral("://panties_case1/output.json"),
                      26.45669291338583 /*seam allowance width*/);
 
-    // See file src/app/share/collection/bugs/panties.val (private collection)
+    // See file valentina_private_collection/bugs/panties/panties.val
     ASSERT_TEST_CASE("Panties. Piece Case 2",
                      QStringLiteral("://panties_case2/input.json"),
                      QStringLiteral("://panties_case2/output.json"),
                      26.45669291338583 /*seam allowance width*/);
 
-    // See file valentina_private_collection/bugs/smart_pattern_#113/smart_pattern_#113.val (private collection)
+    // See file valentina_private_collection/bugs/smart_pattern_#113/smart_pattern_#113.val
     ASSERT_TEST_CASE("Эдит 6",
                      QStringLiteral("://smart_pattern_#113/input.json"),
                      QStringLiteral("://smart_pattern_#113/output.json"),
                      0.56692913385826771 /*seam allowance width*/);
 
-    // See file src/app/share/collection/bugs/smart_pattern_#118.val (private collection)
+    // See file valentina_private_collection/bugs/smart_pattern_#118/smart_pattern_#118.val
     ASSERT_TEST_CASE("Ретро стринги 3",
                      QStringLiteral("://smart_pattern_#118/input.json"),
                      QStringLiteral("://smart_pattern_#118/output.json"),
                      26.45669291338583 /*seam allowance width*/);
 
-    // See file src/app/share/collection/bugs/smart_pattern_#133.val (private collection)
+    // See file valentina_private_collection/bugs/smart_pattern_#133/smart_pattern_#133.val
     ASSERT_TEST_CASE("Эдит 1",
                      QStringLiteral("://smart_pattern_#133/input.json"),
                      QStringLiteral("://smart_pattern_#133/output.json"),
