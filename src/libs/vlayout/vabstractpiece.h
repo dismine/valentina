@@ -38,6 +38,7 @@
 #include "../vmisc/compatibility.h"
 #include "../vgeometry/vgobject.h"
 #include "vsapoint.h"
+#include "vrawsapoint.h"
 #include "testpath.h"
 
 class VAbstractPieceData;
@@ -353,6 +354,36 @@ inline auto VAbstractPiece::ComparePoints(QVector<T> &points, const T &p1, const
 
 //---------------------------------------------------------------------------------------------------------------------
 template <>
+inline auto VAbstractPiece::ComparePoints(QVector<VRawSAPoint> &points, const VRawSAPoint &p1, const VRawSAPoint &p2,
+                                          qreal accuracy) -> bool
+{
+    qreal testAccuracy = accuracy;
+    if (p1.Primary() && p2.Primary())
+    {
+        testAccuracy = accuracyPointOnLine;
+    }
+
+    if (not VFuzzyComparePoints(p1, p2, testAccuracy))
+    {
+        points.append(p2);
+        return false;
+    }
+
+    if (not points.isEmpty() && p2.TurnPoint())
+    {
+        points.last().SetTurnPoint(true);
+    }
+
+    if (not points.isEmpty() && p2.CurvePoint())
+    {
+        points.last().SetCurvePoint(true);
+    }
+
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <>
 inline auto VAbstractPiece::ComparePoints<QPointF>(QVector<QPointF> &points, const QPointF &p1, const QPointF &p2,
                                                    qreal accuracy) -> bool
 {
@@ -380,6 +411,35 @@ inline auto VAbstractPiece::CompareFirstAndLastPoints(QVector<T> &points, qreal 
         }
 
         if (not points.isEmpty() && l.CurvePoint())
+        {
+            points.last().SetCurvePoint(true);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <>
+inline auto VAbstractPiece::CompareFirstAndLastPoints(QVector<VRawSAPoint> &points, qreal accuracy) -> void
+{
+    const VRawSAPoint& first = ConstFirst(points);
+    const VRawSAPoint& last = ConstLast(points);
+
+    qreal testAccuracy = accuracy;
+    if (first.Primary() && last.Primary())
+    {
+        testAccuracy = accuracyPointOnLine;
+    }
+
+    if (VFuzzyComparePoints(first, last, testAccuracy))
+    {
+        points.removeLast();
+
+        if (not points.isEmpty() && last.TurnPoint())
+        {
+            points.last().SetTurnPoint(true);
+        }
+
+        if (not points.isEmpty() && last.CurvePoint())
         {
             points.last().SetCurvePoint(true);
         }

@@ -113,7 +113,9 @@ auto AngleByLength(QVector<VRawSAPoint> points, QPointF p1, QPointF p2, QPointF 
             {
                 qDebug()<<"Couldn't find intersection with cut line.";
             }
-            points.append(VRawSAPoint(px, p.CurvePoint(), p.TurnPoint()));
+            VRawSAPoint sp(px, p.CurvePoint(), p.TurnPoint());
+            sp.SetPrimary(true);
+            points.append(sp);
 
             cutLine.setAngle(cutLine.angle()-180);
             type = Intersects(QLineF(sp2, sp3), cutLine, &px);
@@ -122,7 +124,9 @@ auto AngleByLength(QVector<VRawSAPoint> points, QPointF p1, QPointF p2, QPointF 
             {
                 qDebug()<<"Couldn't find intersection with cut line.";
             }
-            points.append(VRawSAPoint(px, p.CurvePoint(), p.TurnPoint()));
+            sp = VRawSAPoint(px, p.CurvePoint(), p.TurnPoint());
+            sp.SetPrimary(true);
+            points.append(sp);
         }
         else
         {// The point just fine
@@ -1129,9 +1133,9 @@ auto VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal width, const QS
     const bool removeFirstAndLast = false;
     ekvPoints = RemoveDublicates(ekvPoints, removeFirstAndLast);
     ekvPoints = CheckLoops(ekvPoints);
-    CastTo(ekvPoints, cleaned);//Result path can contain loops
     cleaned = CorrectEquidistantPoints(cleaned, removeFirstAndLast);
     cleaned = CorrectPathDistortion(cleaned);
+    CastTo(ekvPoints, cleaned);//Result path can contain loops
 
 //    QVector<QPointF> dump;
 //    CastTo(cleaned, dump);

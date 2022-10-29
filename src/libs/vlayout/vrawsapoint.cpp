@@ -37,6 +37,7 @@ auto VRawSAPoint::toJson() const -> QJsonObject
 
     pointObject[QLatin1String("type")] = "VRawSAPoint";
     pointObject[QLatin1String("loopPoint")] = m_loopPoint;
+    pointObject[QLatin1String("primary")] = m_primary;
 
     return pointObject;
 }

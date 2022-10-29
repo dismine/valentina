@@ -53,10 +53,14 @@ public:
     Q_DECL_CONSTEXPR auto LoopPoint() const -> bool;
     Q_DECL_RELAXED_CONSTEXPR void SetLoopPoint(bool loopPoint);
 
+    Q_DECL_CONSTEXPR auto Primary() const -> bool;
+    Q_DECL_RELAXED_CONSTEXPR void SetPrimary(bool primary);
+
     auto toJson() const -> QJsonObject override;
 
 private:
     bool m_loopPoint{false};
+    bool m_primary{false};
 };
 
 Q_DECLARE_METATYPE(VRawSAPoint) // NOLINT
@@ -104,6 +108,18 @@ Q_DECL_CONSTEXPR inline auto VRawSAPoint::LoopPoint() const -> bool
 Q_DECL_RELAXED_CONSTEXPR inline void VRawSAPoint::SetLoopPoint(bool loopPoint)
 {
     m_loopPoint = loopPoint;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+Q_DECL_CONSTEXPR inline auto VRawSAPoint::Primary() const -> bool
+{
+    return m_primary;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+Q_DECL_RELAXED_CONSTEXPR inline void VRawSAPoint::SetPrimary(bool primary)
+{
+    m_primary = primary;
 }
 
 QT_WARNING_POP
