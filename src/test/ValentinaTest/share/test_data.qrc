@@ -157,5 +157,7 @@
         <file>hood_2/output.json</file>
         <file>smart_pattern_#184_case1/input.json</file>
         <file>smart_pattern_#184_case1/output.json</file>
+        <file>smart_pattern_#184_case2/input.json</file>
+        <file>smart_pattern_#184_case2/output.json</file>
     </qresource>
 </RCC>

@@ -1,0 +1,913 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pattern labelPrefix="en" passmarkLength="">
+    <!--Pattern created with Valentina v0.7.52.0 (https://smart-pattern.com.ua/).-->
+    <version>0.9.2</version>
+    <unit>cm</unit>
+    <description>Jeans mit gerader Seitennaht
+Müller u. Sohn Zeitschrift Ausgabe 10.20 , Seite 47-50 vom PDf (bzw. 14 - 17 vom Herrenteil)</description>
+    <notes>17.10.20:
+Anpassugen für die Kurzhose -&gt; enger am Saum (-3.5)
+Hosenschlitzuntertritt gerade an der oberen Kante</notes>
+    <patternName>Jeans Selvedge</patternName>
+    <patternNumber>#4</patternNumber>
+    <company>CrazyRori</company>
+    <customer/>
+    <birthDate>2000-01-01</birthDate>
+    <email/>
+    <patternLabel dateFormat="dd/MM/yyyy" timeFormat="hh:mm:ss">
+        <line alignment="4" bold="true" italic="false" sfIncrement="4" text="%author%"/>
+        <line alignment="4" bold="false" italic="false" sfIncrement="2" text="%patternName%"/>
+        <line alignment="4" bold="false" italic="false" sfIncrement="0" text="%patternNumber%"/>
+        <line alignment="4" bold="false" italic="true" sfIncrement="0" text="%customer%"/>
+        <line alignment="4" bold="false" italic="true" sfIncrement="0" text="%date%"/>
+    </patternLabel>
+    <finalMeasurements>
+        <finalMeasurment formula="Line_A34_A1" name="Fehlbetrag_Bund"/>
+        <finalMeasurment description="Soll möglichst = 0 sein" formula="(SplPath_A1b_A97+Spl_A19_A17)*2-#Bu" name="Kontrolle_Konstruktion_Bundumfang"/>
+        <finalMeasurment description="Muss ca 0.4 - 0.7 sein" formula="(Line_A10_A11+SplPath_A12_A11)-(Line_A22_A24+SplPath_A32_A24)" name="Kontrolle_Konstruktion_Schrittnaht"/>
+        <finalMeasurment description="sollte max ein paar mm sein" formula="Spl_A12_A93 - Spl_A32_A92" name="Kontrolle_Konstruktion_Innennaht_Kurzhose"/>
+        <finalMeasurment description="Mehrweite des kompletten Umfangs" formula="(Line_A4_A5+Line_A4_A29)*2-#Hu" name="Kontrolle_Mehrweite_Hüfte"/>
+        <finalMeasurment description="Mehrweite des kompletten Umfangs" formula="(Line_A109_A110+Line_A109_A111)-leg_thigh_upper_circ" name="Kontrolle_Mehrweite_Oberschenkel"/>
+        <finalMeasurment description="Mehrweite des kompletten Umfangs" formula="(Line_A86_A87+Line_A86_A88)-leg_calf_circ" name="Kontrolle_Mehrweite_Waden"/>
+        <finalMeasurment description="Soll &gt; 0 für Bewebungsfreiheit" formula="#Kw - leg_knee_circ_bent" name="Kontrolle_Knie_gebeugt"/>
+    </finalMeasurements>
+    <measurements path="../../../../../../../../Стільниця/Помилки/Ronan Le Tiec/Masse_Ronan_v3.vit"/>
+    <increments>
+        <increment description="Bundumfang&#10;14.01.2022 von +0.5 zu +1 gewechselt, da bei der letzten Hose etwas zu eng" formula="waist_natural_circ+1" name="#Bu"/>
+        <increment description="Hüftumfang&#10;&#10;am 08.05.2021 -1 entfernt  (vorher 93 cm dann 94)" formula="hip_circ" name="#Hu"/>
+        <increment description="Knieweite&#10;&#10;01.03.2021 von + 3.5 auf + 5.5 angepasst&#10;08.05.2021 von 5.5 auf 6.5 angepasst" formula="leg_knee_circ+ 6.5" name="#Kw"/>
+        <increment description="Fussweite&#10;&#10;am 01.05.2021 -&gt; +2 hinzugefügt" formula="leg_ankle_diag_circ +2" name="#Fw"/>
+        <increment description="Vorderhosenbreite" formula="#Hu/4" name="#Vhbr"/>
+        <increment description="Vorderhosenspaltdurchmesser" formula="#Hu/20+0.5" name="#Vhsd"/>
+        <increment description="Hinterhosenbreite&#10;Zugabe 3.5 - 4.5" formula="#Hu/4+3.5" name="#Hhbr"/>
+        <increment description="Hinterhosenspaltdurchmesser&#10;Zugabe 1.5 - 2.5" formula="#Hu/10+1.5" name="#Hhsd"/>
+        <increment description="Hosenkürzung&#10;14.01.2022 von 3 zu 1" formula="1" name="#Hk"/>
+        <increment description="Seitenlänge" formula="leg_waist_side_to_floor - #Hk" name="#Sl"/>
+        <increment description="Schrittlänge (Vom Boden bis zum Schritt)&#10;" formula="leg_crotch_to_floor  - #Hk" name="#Schrl"/>
+        <increment description="Leibhöhe" formula="#Sl-#Schrl" name="#Lh"/>
+        <increment description="Oberschenkelhöhe (für die Kontrolle)" formula="leg_crotch_to_floor  - 5 - #Hk" name="#Osh"/>
+        <increment description="Knihöhe (von Boden bis zum Knie)" formula="height_knee - #Hk" name="#Knh"/>
+        <increment description="Wadenhöhe" formula="height_calf - #Hk" name="#Wh"/>
+        <increment description="Länge Kurzhose" formula="42" name="#Lkh"/>
+        <increment description="Bundhöhe" formula="4" name="#Bh"/>
+        <increment description="Gürtelschlaufenbreite" formula="1.2" name="#Gsb"/>
+        <increment description="Gürtelschlaufenlänge" formula="11" name="#Gsl"/>
+        <increment description="Vordertaschenhöhe (Vorher 8.5)" formula="7" name="#Vth"/>
+        <increment description="Vordertaschenbreite" formula="11" name="#Vtb"/>
+        <increment description="0 für ohne Umschlag, 1 für mit Umschlag" formula="0" name="#mitUmschlag"/>
+        <increment description="Saumumschlagbreite&#10;&#10;01.05.2021  von 5 auf 4 geändert, so passt die Länge der Hose genau" formula="4" name="#Sasb"/>
+        <increment description="Länge des Reissverschlusses (Länge der Metalteile, nicht des Stoffes)" formula="12" name="#Rvl"/>
+        <increment formula="1" name="#istEinteiligerHosenschlitz"/>
+        <increment description="Hosenschlitzlänge für 2-teiligen Hosenschlitz, mit Reissverschluss&#10;von 1.5 auf 2 geändert, damit die Zugabe für das Schrägband hier bereits enthalten ist." formula="#Rvl+2" name="#HlRv2t"/>
+        <increment description="Hosenschlitzlänge für 1-teiligen Hosenschlitz, mit Knöpfen" formula="14" name="#HlKn1t"/>
+        <increment description="Hosenschlitzlänge" formula="(#istEinteiligerHosenschlitz==0)?#HlRv2t:#HlKn1t" name="#Hl"/>
+        <increment description="Hosenschlitz Unter- und Übertrittbreite" formula="3.75" name="#HUUB"/>
+        <increment description="Breite der kleinen Knöpfe vom Hosenschlitz" formula="1.4" name="#HKKnB"/>
+        <increment description="Breite der Knopflöcher vom Hosenschlitz" formula="#HKKnB+0.3" name="#HKKnLB"/>
+        <increment description="Breite der großen Knöpfe vom Hosenschlitz" formula="1.7" name="#HGKnB"/>
+        <increment description="Breite des grossen Knopfloches vom Hosenschlitz" formula="#HGKnB+0.3" name="#HGKnLB"/>
+        <increment description="Bundfehlbetragabzug&#10;normalerweise 0.5" formula="0.5" name="#Bfa"/>
+        <increment description="1 für Test, 0 für nicht Test -&gt; hat z.B. einen Einfluss auf den Saum" formula="0" name="#istTest"/>
+    </increments>
+    <previewCalculations/>
+    <draw name="Hose">
+        <calculation>
+            <point id="1" mx="-3.6397" my="-0.408989" name="A" showLabel="true" type="single" x="4.44267" y="103.231"/>
+            <point angle="90" basePoint="1" id="2" length="#Sl" lineColor="black" mx="-3.90408" my="-0.609353" name="A1" showLabel="true" type="endLine" typeLine="none"/>
+            <point firstPoint="1" id="3" length="#Knh" lineColor="black" mx="-3.18534" my="-0.753101" name="A2" secondPoint="2" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="1" id="4" length="#Schrl" lineColor="black" mx="-3.76033" my="-0.609354" name="A3" secondPoint="2" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="4" id="5" length="#Hu/20+3" lineColor="black" mx="-4.19157" my="-0.7531" name="A4" secondPoint="2" showLabel="true" type="alongLine" typeLine="none"/>
+            <point angle="0" basePoint="5" id="6" length="#Vhbr" lineColor="black" mx="1.62914" my="-1.48423" name="A5" showLabel="true" type="endLine" typeLine="none"/>
+            <line firstPoint="1" id="7" lineColor="orange" secondPoint="2" typeLine="dotLine"/>
+            <point firstPoint="6" id="9" mx="1.62836" my="-2.38867" name="A6" secondPoint="2" showLabel="true" type="pointOfIntersection"/>
+            <line firstPoint="2" id="10" lineColor="orange" secondPoint="9" typeLine="dotLine"/>
+            <point firstPoint="6" id="11" mx="-2.42561" my="0.689288" name="A7" secondPoint="4" showLabel="true" type="pointOfIntersection"/>
+            <line firstPoint="9" id="12" lineColor="orange" secondPoint="11" typeLine="dotLine"/>
+            <point angle="0" basePoint="6" id="13" length="#Vhsd" lineColor="black" mx="0.515989" my="1.15109" name="A8" showLabel="true" type="endLine" typeLine="none"/>
+            <point angle="0" basePoint="3" id="15" length="#Kw/2-2" lineColor="black" mx="-3.38751" my="-1.36281" name="A9" showLabel="true" type="endLine" typeLine="none"/>
+            <point angle="0" basePoint="1" id="17" length="#Fw/2-2" lineColor="black" mx="0.264583" my="0.396875" name="A10" showLabel="true" type="endLine" typeLine="none"/>
+            <line firstPoint="1" id="18" lineColor="darkBlue" secondPoint="17" typeLine="hair"/>
+            <line firstPoint="17" id="19" lineColor="orange" secondPoint="15" typeLine="dotLine"/>
+            <point angle="90" basePoint="17" id="20" length="(#mitUmschlag==1)?#Sasb:0.5" lineColor="black" mx="-3.41982" my="-0.597328" name="A11" showLabel="true" type="endLine" typeLine="none"/>
+            <line firstPoint="17" id="21" lineColor="darkBlue" secondPoint="20" typeLine="hair"/>
+            <line firstPoint="15" id="22" lineColor="orange" secondPoint="13" typeLine="dotLine"/>
+            <point id="23" mx="0.888233" my="0.806253" name="A12" p1Line1="4" p1Line2="13" p2Line1="11" p2Line2="15" showLabel="true" type="lineIntersect"/>
+            <line firstPoint="4" id="24" lineColor="orange" secondPoint="23" typeLine="dotLine"/>
+            <spline aScale="10" color="darkBlue" id="25" penStyle="hair" type="pathInteractive">
+                <pathPoint angle1="63.439" angle2="243.439" length1="0" length2="9.2951" pSpline="23"/>
+                <pathPoint angle1="81.7129" angle2="261.713" length1="6.53313" length2="6.71593" pSpline="15"/>
+                <pathPoint angle1="90.8626" angle2="270.863" length1="4.3276" length2="2.65454" pSpline="20"/>
+            </spline>
+            <point firstPoint="23" id="26" length="CurrentLength/2" lineColor="black" mx="-1.26966" my="1.59018" name="A13" secondPoint="11" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="11" id="27" length="Line_A13_A7" lineColor="black" mx="-4.37887" my="0.193258" name="A14" secondPoint="6" showLabel="true" type="alongLine" typeLine="none"/>
+            <line firstPoint="27" id="28" lineColor="orange" secondPoint="23" typeLine="dotLine"/>
+            <point firstPoint="9" id="29" length="1" lineColor="black" mx="2.08434" my="-0.245183" name="A15" secondPoint="6" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="9" id="30" length="1.5" lineColor="black" mx="-1.6558" my="-3.52387" name="A16" secondPoint="2" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="30" id="31" mx="-2.07096" my="1.98862" name="A17" secondPoint="29" showLabel="true" type="pointOfIntersection"/>
+            <line firstPoint="31" id="32" lineColor="orange" secondPoint="6" typeLine="dotLine"/>
+            <point id="33" mx="3.08067" my="-1.1132" name="A18" p1Line1="31" p1Line2="27" p2Line1="6" p2Line2="23" showLabel="true" type="lineIntersect"/>
+            <line firstPoint="6" id="34" lineColor="orange" secondPoint="33" typeLine="dotLine"/>
+            <spline aScale="10" color="darkBlue" id="602" penStyle="hair" type="pathInteractive">
+                <pathPoint angle1="96.9529" angle2="AngleLine_A17_A5" length1="0" length2="2.07556" pSpline="31"/>
+                <pathPoint angle1="AngleLine_A17_A5-180" angle2="276.953" length1="2.28656" length2="6.04207" pSpline="6"/>
+                <pathPoint angle1="AngleLine_A14_A12-180" angle2="333.435" length1="1.75929" length2="2.47427" pSpline="23"/>
+            </spline>
+            <point firstPoint="2" id="36" length="1.5" lineColor="black" mx="0.580176" my="1.48237" name="A19" secondPoint="9" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="2" id="37" length="#Vth" lineColor="black" mx="-4.17693" my="-0.608751" name="A20" secondPoint="5" showLabel="true" type="alongLine" typeLine="none"/>
+            <point angle="0" basePoint="37" id="38" length="0.5" lineColor="black" mx="0.767396" my="-1.78198" name="A21" showLabel="true" type="endLine" typeLine="none"/>
+            <spline aScale="10" angle1="85.7839" angle2="257.788" color="darkBlue" id="39" length1="2.61864" length2="1.97671" penStyle="hair" point1="38" point4="36" type="simpleInteractive"/>
+            <line firstPoint="37" id="40" lineColor="darkBlue" secondPoint="38" typeLine="hair"/>
+            <line firstPoint="37" id="41" lineColor="darkBlue" secondPoint="1" typeLine="hair"/>
+            <line firstPoint="36" id="42" lineColor="orange" secondPoint="31" typeLine="dotLine"/>
+            <spline aScale="0" angle1="350.332" angle2="188.903" color="darkBlue" id="43" length1="6.03475" length2="4.60692" penStyle="hair" point1="36" point4="31" type="simpleInteractive"/>
+            <point firstPoint="17" id="46" length="-4" lineColor="black" mx="0.204168" my="0.396875" name="A22" secondPoint="1" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="15" id="47" length="-4" lineColor="black" mx="1.6465" my="-0.462984" name="A23" secondPoint="3" showLabel="true" type="alongLine" typeLine="none"/>
+            <point angle="90" basePoint="46" id="48" length="(#mitUmschlag==1)?#Sasb:0.5" lineColor="black" mx="2.15477" my="-0.723235" name="A24" showLabel="true" type="endLine" typeLine="none"/>
+            <line firstPoint="1" id="49" lineColor="orange" secondPoint="46" typeLine="dotLine"/>
+            <line firstPoint="1" id="50" lineColor="darkRed" secondPoint="46" typeLine="hair"/>
+            <line firstPoint="46" id="52" lineColor="orange" secondPoint="47" typeLine="dotLine"/>
+            <line firstPoint="46" id="53" lineColor="darkRed" secondPoint="48" typeLine="hair"/>
+            <line firstPoint="3" id="54" lineColor="orange" secondPoint="47" typeLine="dotLine"/>
+            <point firstPoint="5" id="55" length="#Hhbr" lineColor="black" mx="0.663644" my="-4.27609" name="A25" secondPoint="13" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="55" id="56" length="#Hhsd" lineColor="black" mx="0.264583" my="0.396875" name="A26" secondPoint="13" showLabel="true" type="alongLine" typeLine="none"/>
+            <line firstPoint="5" id="57" lineColor="orange" secondPoint="56" typeLine="dotLine"/>
+            <line firstPoint="56" id="58" lineColor="orange" secondPoint="47" typeLine="dotLine"/>
+            <line firstPoint="4" id="59" lineColor="orange" secondPoint="55" typeLine="dotLine"/>
+            <point angle="180" firstPoint="55" id="60" length="23" lineColor="black" mx="-2.29592" my="-3.83922" name="A27" secondPoint="4" showLabel="true" type="normal" typeLine="none"/>
+            <line firstPoint="60" id="61" lineColor="orange" secondPoint="55" typeLine="dotLine"/>
+            <point basePoint="2" id="62" lineColor="black" mx="0.264583" my="0.396875" name="A28" p1Line="60" p2Line="55" showLabel="true" type="height" typeLine="none"/>
+            <point basePoint="5" id="63" lineColor="black" mx="1.25879" my="-1.18215" name="A29" p1Line="60" p2Line="55" showLabel="true" type="height" typeLine="none"/>
+            <line firstPoint="5" id="64" lineColor="deeppink" secondPoint="63" typeLine="dashDotLine"/>
+            <line firstPoint="2" id="65" lineColor="darkRed" secondPoint="62" typeLine="hair"/>
+            <line firstPoint="62" id="66" lineColor="darkRed" secondPoint="55" typeLine="hair"/>
+            <point firstPoint="62" id="67" length="7" lineColor="black" mx="3.94898" my="-1.3576" name="A30" secondPoint="55" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="2" id="68" length="3.5" lineColor="black" mx="-3.94616" my="-0.597328" name="A31" secondPoint="5" showLabel="true" type="alongLine" typeLine="none"/>
+            <line firstPoint="2" id="69" lineColor="darkRed" secondPoint="1" typeLine="hair"/>
+            <line firstPoint="68" id="70" lineColor="darkRed" secondPoint="67" typeLine="hair"/>
+            <point firstPoint="47" id="71" length="SplPath_A12_A11_Seg_1-0.7" lineColor="black" mx="0.264583" my="0.338392" name="A32" secondPoint="56" showLabel="true" type="alongLine" typeLine="none"/>
+            <spline aScale="10" color="darkRed" id="72" penStyle="hair" type="pathInteractive">
+                <pathPoint angle1="52.9977" angle2="232.998" length1="0" length2="7.32771" pSpline="71"/>
+                <pathPoint angle1="80.8862" angle2="260.886" length1="6.828" length2="6.71" pSpline="47"/>
+                <pathPoint angle1="90" angle2="270" length1="5" length2="3.2362" pSpline="48"/>
+            </spline>
+            <spline aScale="10" angle1="AngleLine_A25_A28+180" angle2="147.531" color="darkRed" id="73" length1="6.60393" length2="3.55083" penStyle="hair" point1="55" point4="71" type="simpleInteractive"/>
+            <point firstPoint="62" id="74" length="-Spl_A19_A17" lineColor="black" mx="0.264583" my="0.396875" name="A33" secondPoint="2" showLabel="true" type="alongLine" typeLine="none"/>
+            <line firstPoint="2" id="75" lineColor="orange" secondPoint="74" typeLine="dotLine"/>
+            <point firstPoint="74" id="76" length="#Bu/2" lineColor="black" mx="-0.33385" my="1.40137" name="A34" secondPoint="2" showLabel="true" type="alongLine" typeLine="none"/>
+            <line firstPoint="5" id="78" lineColor="deeppink" secondPoint="6" typeLine="dashDotLine"/>
+            <point firstPoint="2" id="79" length="CurrentLength/2" lineColor="black" mx="-1.37583" my="-3.20146" name="A35" secondPoint="62" showLabel="true" type="alongLine" typeLine="none"/>
+            <point angle="AngleLine_A1_A28+270" basePoint="79" id="83" lineColor="cornflowerblue" mx="-0.502709" my="1.32292" name="A39" p1Line="68" p2Line="67" showLabel="true" type="lineIntersectAxis" typeLine="none"/>
+            <point firstPoint="79" id="85" length="((Line_A34_A1&gt;1)?Line_A34_A1-#Bfa:Line_A34_A1)/6" lineColor="black" mx="-4.33917" my="-1.66687" name="A37" secondPoint="2" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="79" id="86" length="((Line_A34_A1&gt;1)?Line_A34_A1-#Bfa:Line_A34_A1)/6" lineColor="black" mx="1.56104" my="-3.175" name="A36" secondPoint="62" showLabel="true" type="alongLine" typeLine="none"/>
+            <line firstPoint="85" id="87" lineColor="goldenrod" secondPoint="83" typeLine="dashDotDotLine"/>
+            <line firstPoint="86" id="88" lineColor="goldenrod" secondPoint="83" typeLine="dashDotDotLine"/>
+            <operation angle="AngleLine_A37_A39-AngleLine_A36_A39" center="83" id="89" suffix="a" type="rotation">
+                <source>
+                    <item idObject="67"/>
+                    <item idObject="62"/>
+                </source>
+                <destination>
+                    <item idObject="90" mx="3.94898" my="-1.3576"/>
+                    <item idObject="91" mx="0.661458" my="-1.93146"/>
+                </destination>
+            </operation>
+            <line firstPoint="85" id="92" lineColor="mediumseagreen" secondPoint="91" typeLine="dashLine"/>
+            <line firstPoint="91" id="93" lineColor="mediumseagreen" secondPoint="90" typeLine="dashLine"/>
+            <line firstPoint="83" id="94" lineColor="mediumseagreen" secondPoint="90" typeLine="dashLine"/>
+            <point firstPoint="2" id="95" length="CurrentLength/2" lineColor="black" mx="-1.77271" my="-2.83104" name="A38" secondPoint="85" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="85" id="96" length="CurrentLength/2" lineColor="black" mx="-1.87854" my="-3.12208" name="A40" secondPoint="91" showLabel="true" type="alongLine" typeLine="none"/>
+            <point angle="AngleLine_A1_A28+270" basePoint="95" id="97" lineColor="cornflowerblue" mx="0.264583" my="0.396875" name="A41" p1Line="68" p2Line="83" showLabel="true" type="lineIntersectAxis" typeLine="none"/>
+            <point angle="AngleLine_A37_A28a+270" basePoint="96" id="98" lineColor="cornflowerblue" mx="0.264583" my="0.396875" name="A42" p1Line="83" p2Line="90" showLabel="true" type="lineIntersectAxis" typeLine="none"/>
+            <point firstPoint="95" id="99" length="((Line_A34_A1&gt;1)?Line_A34_A1-#Bfa:Line_A34_A1)/6" lineColor="black" mx="-1.87854" my="0.873125" name="A43" secondPoint="2" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="95" id="100" length="((Line_A34_A1&gt;1)?Line_A34_A1-#Bfa:Line_A34_A1)/6" lineColor="black" mx="1.53458" my="0.343955" name="A44" secondPoint="85" showLabel="true" type="alongLine" typeLine="none"/>
+            <line firstPoint="99" id="101" lineColor="goldenrod" secondPoint="97" typeLine="dashDotLine"/>
+            <line firstPoint="100" id="102" lineColor="goldenrod" secondPoint="97" typeLine="dashDotLine"/>
+            <point firstPoint="96" id="103" length="((Line_A34_A1&gt;1)?Line_A34_A1-#Bfa:Line_A34_A1)/6" lineColor="black" mx="2.16958" my="0.3175" name="A45" secondPoint="91" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="96" id="104" length="((Line_A34_A1&gt;1)?Line_A34_A1-#Bfa:Line_A34_A1)/6" lineColor="black" mx="-1.80155" my="1.50813" name="A46" secondPoint="85" showLabel="true" type="alongLine" typeLine="none"/>
+            <line firstPoint="104" id="105" lineColor="goldenrod" secondPoint="98" typeLine="dashDotLine"/>
+            <line firstPoint="103" id="106" lineColor="goldenrod" secondPoint="98" typeLine="dashDotLine"/>
+            <operation angle="360-(AngleLine_A43_A41-AngleLine_A44_A41)" center="97" id="107" suffix="b" type="rotation">
+                <source>
+                    <item idObject="2"/>
+                    <item idObject="68"/>
+                </source>
+                <destination>
+                    <item idObject="108" mx="-3.42783" my="-1.61477"/>
+                    <item idObject="109" mx="-2.91251" my="-1.6461"/>
+                </destination>
+            </operation>
+            <line firstPoint="108" id="110" lineColor="deepskyblue" secondPoint="100" typeLine="dashLine"/>
+            <line firstPoint="108" id="111" lineColor="deepskyblue" secondPoint="109" typeLine="dashLine"/>
+            <line firstPoint="109" id="112" lineColor="deepskyblue" secondPoint="97" typeLine="dashLine"/>
+            <operation angle="AngleLine_A46_A42-AngleLine_A45_A42" center="98" id="113" suffix="c" type="rotation">
+                <source>
+                    <item idObject="90"/>
+                    <item idObject="91"/>
+                </source>
+                <destination>
+                    <item idObject="114" mx="-0.843307" my="-2.44795"/>
+                    <item idObject="115" mx="-1.6208" my="-2.46134"/>
+                </destination>
+            </operation>
+            <line firstPoint="104" id="116" lineColor="violet" secondPoint="115" typeLine="dashLine"/>
+            <line firstPoint="115" id="117" lineColor="violet" secondPoint="114" typeLine="dashLine"/>
+            <line firstPoint="114" id="118" lineColor="violet" secondPoint="98" typeLine="dashLine"/>
+            <line firstPoint="108" id="121" lineColor="deepskyblue" secondPoint="100" typeLine="dotLine"/>
+            <line firstPoint="100" id="122" lineColor="deepskyblue" secondPoint="85" typeLine="dotLine"/>
+            <line firstPoint="85" id="123" lineColor="deepskyblue" secondPoint="104" typeLine="dotLine"/>
+            <line firstPoint="104" id="124" lineColor="deepskyblue" secondPoint="115" typeLine="dotLine"/>
+            <line firstPoint="109" id="125" lineColor="deepskyblue" secondPoint="97" typeLine="dotLine"/>
+            <line firstPoint="97" id="126" lineColor="deepskyblue" secondPoint="83" typeLine="dotLine"/>
+            <line firstPoint="83" id="127" lineColor="deepskyblue" secondPoint="98" typeLine="dotLine"/>
+            <line firstPoint="98" id="128" lineColor="deepskyblue" secondPoint="114" typeLine="dotLine"/>
+            <line firstPoint="108" id="129" lineColor="darkviolet" secondPoint="109" typeLine="hair"/>
+            <line firstPoint="115" id="130" lineColor="violet" secondPoint="114" typeLine="dotLine"/>
+            <spline aScale="10" color="darkviolet" id="131" penStyle="hair" type="pathInteractive">
+                <pathPoint angle1="191.994" angle2="AngleLine_A1b_A44" length1="0" length2="0.5" pSpline="108"/>
+                <pathPoint angle1="((AngleLine_A1b_A44) + AngleLine_A44_A37)/2+180" angle2="13.9555" length1="2.5" length2="2.5" pSpline="100"/>
+                <pathPoint angle1="((AngleLine_A46_A37-180) + AngleLine_A44_A37)/2+180" angle2="17.55" length1="2.5" length2="2.5" pSpline="85"/>
+                <pathPoint angle1="((AngleLine_A46_A37-180) + AngleLine_A46_A28ac)/2+180" angle2="20.5807" length1="2.5" length2="2.5" pSpline="104"/>
+                <pathPoint angle1="AngleLine_A46_A28ac+180" angle2="21.9788" length1="1.5" length2="2.72962" pSpline="115"/>
+            </spline>
+            <spline aScale="10" color="darkviolet" id="132" penStyle="hair" type="pathInteractive">
+                <pathPoint angle1="13.105" angle2="AngleLine_A30ac_A42" length1="0" length2="0.5" pSpline="114"/>
+                <pathPoint angle1="((AngleLine_A30ac_A42-180) + AngleLine_A39_A42)/2" angle2="191.707" length1="2.5" length2="2.5" pSpline="98"/>
+                <pathPoint angle1="((AngleLine_A41_A39) + AngleLine_A39_A42)/2" angle2="188.676" length1="2.5" length2="2.5" pSpline="83"/>
+                <pathPoint angle1="((AngleLine_A41_A39) + ((AngleLine_A31b_A41&gt;180)?AngleLine_A31b_A41-360:AngleLine_A31b_A41))/2" angle2="185.082" length1="2.5" length2="2.5" pSpline="97"/>
+                <pathPoint angle1="(AngleLine_A31b_A41 &gt;180)?AngleLine_A31b_A41-360:AngleLine_A31b_A41" angle2="183.12" length1="0.5" length2="2.6214" pSpline="109"/>
+            </spline>
+            <point firstPoint="37" id="142" length="10" lineColor="black" mx="-4.25308" my="-2.55861" name="A47" secondPoint="3" showLabel="true" type="alongLine" typeLine="none"/>
+            <spline aScale="0" angle1="263.302" angle2="90.7258" color="black" id="143" length1="1.60457" length2="1.52726" penStyle="hair" point1="38" point4="142" type="simpleInteractive"/>
+            <point id="144" length="#Vtb" mx="-1.93092" my="-2.30528" name="A48" showLabel="true" spline="43" type="cutSpline"/>
+            <spline aScale="1.1" angle1="357.471" angle2="268.291" color="darkBlue" id="145" length1="7.90828" length2="5" notes="23.09.2022 :&#10;c1length 9,7659 -&gt; 8&#10;c2length 6,25613 -&gt; 5" penStyle="hair" point1="38" point4="144" type="simpleInteractive"/>
+            <point id="146" length="Spl_A19_A48+3.5" mx="-1.50871" my="-4.75411" name="A49" showLabel="true" spline="43" type="cutSpline"/>
+            <point angle="270" basePoint="146" id="147" length="#Lh+3" lineColor="black" mx="0.264583" my="0.396875" name="A50" showLabel="true" type="endLine" typeLine="hair"/>
+            <point id="148" length="Spl_A19_A48+2" mx="-1.32463" my="-2.02319" name="A51" showLabel="true" spline="43" type="cutSpline"/>
+            <point id="149" length="2" mx="-5.43528" my="-0.236443" name="A52" showLabel="true" spline="143" type="cutSpline"/>
+            <spline aScale="0" angle1="270.411" angle2="358.295" color="black" id="150" length1="8.84026" length2="5" penStyle="hair" point1="148" point4="149" type="simpleInteractive"/>
+            <spline aScale="10" angle1="344.394" angle2="179.167" color="black" id="151" length1="5.55752" length2="13.698" penStyle="hair" point1="142" point4="147" type="simpleInteractive"/>
+            <operation axisType="1" center="147" id="152" suffix="a1" type="flippingByAxis">
+                <source>
+                    <item idObject="38"/>
+                    <item idObject="37"/>
+                    <item idObject="145"/>
+                    <item idObject="144"/>
+                    <item idObject="43"/>
+                    <item idObject="151"/>
+                    <item idObject="142"/>
+                </source>
+                <destination>
+                    <item idObject="153" mx="0.640732" my="-3.59749"/>
+                    <item idObject="154" mx="0.80517" my="1.8823"/>
+                    <item idObject="155"/>
+                    <item idObject="156" mx="-1.93092" my="-2.30528"/>
+                    <item idObject="157"/>
+                    <item idObject="158"/>
+                    <item idObject="159" mx="-4.25308" my="-2.55861"/>
+                </destination>
+            </operation>
+            <line firstPoint="154" id="160" lineColor="black" secondPoint="159" typeLine="hair"/>
+            <line firstPoint="153" id="161" lineColor="black" secondPoint="154" typeLine="hair"/>
+            <point id="192" length="6.5" mx="-2.47979" my="-3.69858" name="A53" showLabel="true" spline="43" type="cutSpline"/>
+            <point angle="290" basePoint="192" curve="150" id="193" lineColor="black" mx="0.264583" my="0.396875" name="A54" showLabel="true" type="curveIntersectAxis" typeLine="hair"/>
+            <point firstPoint="192" id="196" length="1.5" lineColor="black" mx="1.21708" my="-1.08479" name="A55" secondPoint="193" showLabel="true" type="alongLine" typeLine="none"/>
+            <point angle="180" firstPoint="196" id="197" length="6" lineColor="black" mx="-2.64583" my="-1.64042" name="A56" secondPoint="193" showLabel="true" type="normal" typeLine="hair"/>
+            <point angle="AngleLine_A53_A54" basePoint="197" curve="150" id="198" lineColor="black" mx="-1.74625" my="2.88396" name="A57" showLabel="true" type="curveIntersectAxis" typeLine="hair"/>
+            <point firstPoint="68" id="253" length="5" lineColor="black" mx="-5.18047" my="-0.934137" name="A58" secondPoint="5" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="67" id="254" length="4.5" lineColor="black" mx="4.07612" my="-0.692135" name="A59" secondPoint="55" showLabel="true" type="alongLine" typeLine="none"/>
+            <line firstPoint="253" id="255" lineColor="black" secondPoint="254" typeLine="dotLine"/>
+            <point firstPoint="253" id="256" length="4" lineColor="black" mx="-1.42943" my="-2.50715" name="A60" secondPoint="254" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="256" id="257" length="14.5" lineColor="black" mx="0.264583" my="0.396875" name="A61" secondPoint="254" showLabel="true" type="alongLine" typeLine="none"/>
+            <point angle="0" firstPoint="257" id="258" length="13" lineColor="black" mx="1.23259" my="-0.450129" name="A62" secondPoint="256" showLabel="true" type="normal" typeLine="none"/>
+            <point angle="180" firstPoint="256" id="259" length="13" lineColor="black" mx="-3.24445" my="0.336373" name="A63" secondPoint="257" showLabel="true" type="normal" typeLine="none"/>
+            <line firstPoint="256" id="260" lineColor="black" secondPoint="259" typeLine="dotLine"/>
+            <line firstPoint="257" id="261" lineColor="black" secondPoint="258" typeLine="dotLine"/>
+            <point firstPoint="256" id="262" length="CurrentLength/2" lineColor="black" mx="0.264583" my="0.396875" name="A64" secondPoint="257" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="259" id="263" length="CurrentLength/2" lineColor="black" mx="-1.27337" my="-2.33711" name="A65" secondPoint="258" showLabel="true" type="alongLine" typeLine="none"/>
+            <point angle="0" firstPoint="263" id="264" length="2" lineColor="black" mx="0.264583" my="0.396875" name="A66" secondPoint="259" showLabel="true" type="normal" typeLine="none"/>
+            <line firstPoint="259" id="265" lineColor="black" secondPoint="258" typeLine="dotLine"/>
+            <line firstPoint="263" id="266" lineColor="black" secondPoint="264" typeLine="dotLine"/>
+            <point firstPoint="259" id="267" length="1" lineColor="black" mx="-0.763926" my="1.72789" name="A67" secondPoint="263" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="258" id="268" length="1" lineColor="black" mx="-1.18743" my="2.15139" name="A68" secondPoint="263" showLabel="true" type="alongLine" typeLine="none"/>
+            <line firstPoint="256" id="269" lineColor="green" secondPoint="267" typeLine="hair"/>
+            <line firstPoint="267" id="270" lineColor="green" secondPoint="264" typeLine="hair"/>
+            <line firstPoint="264" id="271" lineColor="green" secondPoint="268" typeLine="hair"/>
+            <line firstPoint="268" id="272" lineColor="green" secondPoint="257" typeLine="hair"/>
+            <line firstPoint="256" id="273" lineColor="green" secondPoint="257" typeLine="hair"/>
+            <point firstPoint="256" id="274" length="CurrentLength/2+1" lineColor="black" mx="-3.00245" my="0.336374" name="A69" secondPoint="259" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="257" id="275" length="CurrentLength/2+1" lineColor="black" mx="1.47459" my="-0.813136" name="A70" secondPoint="258" showLabel="true" type="alongLine" typeLine="none"/>
+            <line firstPoint="274" id="276" lineColor="black" secondPoint="275" typeLine="dotLine"/>
+            <point id="277" mx="-0.546686" my="3.80069" name="A71" p1Line1="262" p1Line2="274" p2Line1="264" p2Line2="275" showLabel="true" type="lineIntersect"/>
+            <point firstPoint="277" id="278" length="1" lineColor="black" mx="-1.57873" my="-3.98683" name="A72" secondPoint="275" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="277" id="279" length="1" lineColor="black" mx="-2.48688" my="-3.71344" name="A73" secondPoint="274" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="278" id="280" length="0.4" lineColor="black" mx="4.91233" my="-2.75167" name="A74" secondPoint="275" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="279" id="281" length="0.3" lineColor="black" mx="-5.18583" my="0.370407" name="A75" secondPoint="274" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="279" id="282" length="CurrentLength/2" lineColor="black" mx="-2.03729" my="2.93687" name="A76" secondPoint="277" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="277" id="283" length="CurrentLength/2" lineColor="black" mx="-2.19604" my="-5.00063" name="A77" secondPoint="278" showLabel="true" type="alongLine" typeLine="none"/>
+            <point angle="0" firstPoint="283" id="284" length="2" lineColor="black" mx="0.79375" my="2.61937" name="A78" secondPoint="277" showLabel="true" type="normal" typeLine="none"/>
+            <point angle="0" firstPoint="282" id="285" length="2.5" lineColor="black" mx="-3.04271" my="-3.0427" name="A79" secondPoint="277" showLabel="true" type="normal" typeLine="none"/>
+            <line firstPoint="285" id="286" lineColor="green" secondPoint="284" typeLine="hair"/>
+            <point firstPoint="278" id="287" length="CurrentLength/2" lineColor="black" mx="3.09562" my="4.15395" name="A80" secondPoint="280" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="279" id="288" length="CurrentLength/2" lineColor="black" mx="-4.68313" my="-2.67229" name="A81" secondPoint="281" showLabel="true" type="alongLine" typeLine="none"/>
+            <point angle="0" firstPoint="288" id="289" length="0.5" lineColor="black" mx="-4.7625" my="1.93146" name="A82" secondPoint="281" showLabel="true" type="normal" typeLine="none"/>
+            <line firstPoint="285" id="290" lineColor="green" secondPoint="289" typeLine="hair"/>
+            <line firstPoint="289" id="291" lineColor="green" secondPoint="281" typeLine="hair"/>
+            <point angle="0" firstPoint="287" id="292" length="1" lineColor="black" mx="1.61396" my="-2.46063" name="A83" secondPoint="280" showLabel="true" type="normal" typeLine="none"/>
+            <line firstPoint="292" id="293" lineColor="green" secondPoint="284" typeLine="hair"/>
+            <line firstPoint="292" id="294" lineColor="green" secondPoint="280" typeLine="hair"/>
+            <point id="295" mx="0.264583" my="0.396875" name="A84" p1Line1="257" p1Line2="274" p2Line1="268" p2Line2="275" showLabel="true" type="lineIntersect"/>
+            <point id="296" mx="0.264583" my="0.396875" name="A85" p1Line1="256" p1Line2="274" p2Line1="267" p2Line2="275" showLabel="true" type="lineIntersect"/>
+            <line firstPoint="280" id="297" lineColor="green" secondPoint="295" typeLine="hair"/>
+            <line firstPoint="281" id="298" lineColor="green" secondPoint="296" typeLine="hair"/>
+            <point firstPoint="1" id="341" length="#Wh" lineColor="black" mx="-4.16418" my="-0.670473" name="A86" secondPoint="2" showLabel="true" type="alongLine" typeLine="none"/>
+            <point angle="0" basePoint="341" curve="25" id="342" lineColor="black" mx="-4.13602" my="-0.596011" name="A87" showLabel="true" type="curveIntersectAxis" typeLine="none"/>
+            <point angle="0" basePoint="341" curve="72" id="345" lineColor="black" mx="2.20722" my="-0.547102" name="A88" showLabel="true" type="curveIntersectAxis" typeLine="none"/>
+            <point firstPoint="31" id="376" length="#Hl" lineColor="black" mx="2.33207" my="2.69483" name="A89" notes="von 1.5 auf 2 geändert, damit die Zugabe für das Schrägband hier bereits enthalten ist." secondPoint="6" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="31" id="513" length="CurrentLength/2" lineColor="black" mx="4.77782" my="-1.60676" name="A100" secondPoint="376" showLabel="true" type="alongLine" typeLine="none"/>
+            <point angle="0" firstPoint="376" id="377" length="4" lineColor="black" mx="-7.9037" my="-0.659262" name="A90" secondPoint="513" showLabel="true" type="normal" typeLine="none"/>
+            <point angle="AngleLine_A17_A5-180" basePoint="377" curve="43" id="378" lineColor="black" mx="-2.99017" my="1.00241" name="A94" showLabel="true" type="curveIntersectAxis" typeLine="none"/>
+            <point firstPoint="376" id="381" length="-1.5" lineColor="cornflowerblue" mx="-1.02303" my="3.16538" name="A95" secondPoint="31" showLabel="true" type="alongLine" typeLine="none"/>
+            <point angle="0" firstPoint="381" id="382" length="Line_A89_A90" lineColor="black" mx="-3.79668" my="1.39655" name="A96" secondPoint="376" showLabel="true" type="normal" typeLine="none"/>
+            <line firstPoint="382" id="385" lineColor="cornflowerblue" secondPoint="378" typeLine="hair"/>
+            <line firstPoint="377" id="392" lineColor="deepskyblue" secondPoint="376" typeLine="hair"/>
+            <point id="417" length="(Line_A34_A1&gt;1)?(CurrentLength-#Bfa):(CurrentLength)" mx="-6.1178" my="-2.78497" name="A97" showLabel="true" splinePath="131" type="cutSplinePath"/>
+            <line firstPoint="417" id="418" lineColor="darkviolet" secondPoint="114" typeLine="hair"/>
+            <operation id="492" p1Line="378" p2Line="382" suffix="a2" type="flippingByLine">
+                <source>
+                    <item color="cornflowerblue" idObject="43"/>
+                    <item idObject="31"/>
+                    <item idObject="381"/>
+                </source>
+                <destination>
+                    <item idObject="493"/>
+                    <item idObject="494" mx="-4.09247" my="0.702107"/>
+                    <item idObject="495" mx="-4.88743" my="1.19789"/>
+                </destination>
+            </operation>
+            <line firstPoint="494" id="496" lineColor="cornflowerblue" secondPoint="495" typeLine="hair"/>
+            <line firstPoint="495" id="497" lineColor="cornflowerblue" secondPoint="381" typeLine="hair"/>
+            <point firstPoint="256" id="510" length="1.2" lineColor="black" mx="0.264583" my="0.396875" name="A98" secondPoint="267" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="257" id="511" length="1.2" lineColor="black" mx="0.264583" my="0.396875" name="A99" secondPoint="268" showLabel="true" type="alongLine" typeLine="none"/>
+            <line firstPoint="510" id="512" lineColor="goldenrod" secondPoint="511" typeLine="dashLine"/>
+            <point firstPoint="377" id="514" length="0" lineColor="black" mx="-0.40196" my="2.134" name="A101" notes="von 0.5 auf 0 geändert, damit die Zugabe für das Schrägband direkt hier enthalten ist." secondPoint="376" showLabel="true" type="alongLine" typeLine="none"/>
+            <point angle="AngleLine_A17_A5-180" basePoint="514" curve="43" id="515" lineColor="black" mx="0.324256" my="-2.61663" name="A102" showLabel="true" type="curveIntersectAxis" typeLine="none"/>
+            <line firstPoint="515" id="518" lineColor="deepskyblue" secondPoint="514" typeLine="hair"/>
+            <point firstPoint="514" id="519" length="4" lineColor="black" mx="-4.20754" my="-1.15463" name="A103" secondPoint="515" showLabel="true" type="alongLine" typeLine="none"/>
+            <spline aScale="0" angle1="AngleLine_A102_A101" angle2="AngleLine_A89_A90" color="deepskyblue" id="520" length1="2.57336" length2="2.68044" penStyle="hair" point1="519" point4="376" type="simpleInteractive"/>
+            <point firstPoint="382" id="524" length="2" lineColor="black" mx="-4.01162" my="-1.69842" name="A104" secondPoint="378" showLabel="true" type="alongLine" typeLine="none"/>
+            <spline aScale="0" angle1="AngleLine_A90_A94-180+30" angle2="AngleLine_A95a2_A95+180" color="cornflowerblue" id="525" length1="1.79358" length2="1.51786" penStyle="hair" point1="524" point4="381" type="simpleInteractive"/>
+            <operation id="526" p1Line="378" p2Line="382" suffix="a3" type="flippingByLine">
+                <source>
+                    <item idObject="525"/>
+                </source>
+                <destination>
+                    <item idObject="527"/>
+                </destination>
+            </operation>
+            <point firstPoint="2" id="590" length="#Lkh" lineColor="black" mx="-3.2782" my="-0.739327" name="A105" secondPoint="1" showLabel="true" type="alongLine" typeLine="none"/>
+            <point angle="0" basePoint="590" curve="25" id="591" lineColor="black" mx="1.06292" my="-3.54066" name="A106" showLabel="true" type="curveIntersectAxis" typeLine="none"/>
+            <point angle="0" basePoint="590" curve="72" id="594" lineColor="black" mx="4.84107" my="-2.90836" name="A107" showLabel="true" type="curveIntersectAxis" typeLine="none"/>
+            <line firstPoint="31" id="607" lineColor="cornflowerblue" secondPoint="381" typeLine="hair"/>
+            <point angle="AngleLine_A17_A5 - 270" basePoint="377" curve="602" id="608" lineColor="black" mx="5.26555" my="0.865239" name="A108" showLabel="true" type="curveIntersectAxis" typeLine="none"/>
+            <line firstPoint="590" id="617" lineColor="darkRed" secondPoint="594" typeLine="hair"/>
+            <line firstPoint="590" id="618" lineColor="darkBlue" secondPoint="591" typeLine="hair"/>
+            <point id="638" mx="0.714375" my="2.80458" name="A91" p1Line1="494" p1Line2="515" p2Line1="31" p2Line2="377" showLabel="true" type="lineIntersect"/>
+            <line firstPoint="494" id="639" lineColor="cornflowerblue" secondPoint="31" typeLine="hair"/>
+            <point firstPoint="594" id="641" length="2" lineColor="black" mx="-1.51961" my="2.65681" name="A92" secondPoint="590" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="591" id="642" length="2" lineColor="black" mx="-2.07516" my="1.26854" name="A93" secondPoint="590" showLabel="true" type="alongLine" typeLine="none"/>
+            <spline aScale="1" angle1="243.439" angle2="78" color="darkBlue" id="643" length1="6" length2="2.5" notes="Angle 2 vorher : 90 und 2 " penStyle="hair" point1="23" point4="642" type="simpleInteractive"/>
+            <spline aScale="1" angle1="232.998" angle2="78" color="darkRed" id="644" length1="7" length2="3" penStyle="hair" point1="71" point4="641" type="simpleInteractive"/>
+            <point firstPoint="1" id="852" length="#Osh" lineColor="black" mx="-5.1531" my="0.52435" name="A109" secondPoint="2" showLabel="true" type="alongLine" typeLine="none"/>
+            <point angle="0" basePoint="852" curve="25" id="853" lineColor="black" mx="0.264583" my="0.396875" name="A110" showLabel="true" type="curveIntersectAxis" typeLine="none"/>
+            <point angle="0" basePoint="852" curve="72" id="856" lineColor="black" mx="0.264583" my="0.396875" name="A111" showLabel="true" type="curveIntersectAxis" typeLine="none"/>
+            <line firstPoint="852" id="859" lineColor="goldenrod" secondPoint="856" typeLine="dotLine"/>
+            <line firstPoint="852" id="860" lineColor="goldenrod" secondPoint="853" typeLine="dotLine"/>
+            <point firstPoint="590" id="862" length="1.5" lineColor="black" mx="2.32546" my="-5.33774" name="A112" secondPoint="2" showLabel="true" type="alongLine" typeLine="none"/>
+            <spline aScale="0" angle1="0" angle2="168" color="darkBlue" id="865" length1="4" length2="5" penStyle="hair" point1="862" point4="642" type="simpleInteractive"/>
+            <spline aScale="0" angle1="0" angle2="168" color="darkRed" id="868" length1="4" length2="5" penStyle="hair" point1="862" point4="641" type="simpleInteractive"/>
+        </calculation>
+        <modeling>
+            <point id="183" idObject="149" inUse="false" mx="-2.95013" my="1.69646" showLabel="true" type="modeling"/>
+            <spline id="184" idObject="143" inUse="false" type="modelingSpline"/>
+            <point id="185" idObject="38" inUse="false" mx="0.767396" my="-1.78198" showLabel="true" type="modeling"/>
+            <spline id="186" idObject="39" inUse="false" type="modelingSpline"/>
+            <point id="187" idObject="36" inUse="false" mx="0.580176" my="1.48237" showLabel="true" type="modeling"/>
+            <spline id="188" idObject="43" inUse="false" type="modelingSpline"/>
+            <point id="189" idObject="148" inUse="false" mx="0.0680086" my="-3.04089" showLabel="true" type="modeling"/>
+            <spline id="190" idObject="150" inUse="false" type="modelingSpline"/>
+            <point id="207" idObject="192" inUse="false" mx="-1.61018" my="-2.72026" showLabel="true" type="modeling"/>
+            <spline id="208" idObject="43" inUse="false" type="modelingSpline"/>
+            <point id="209" idObject="148" inUse="false" mx="-0.735437" my="-3.46939" showLabel="true" type="modeling"/>
+            <spline id="210" idObject="150" inUse="false" type="modelingSpline"/>
+            <point id="211" idObject="193" inUse="false" mx="-1.87541" my="1.43236" showLabel="true" type="modeling"/>
+        </modeling>
+        <details>
+            <detail forbidFlipping="false" forceFlipping="true" hideMainPath="false" id="191" inLayout="false" mx="39.3374" my="44.9867" name="Piece 1" seamAllowance="true" uuid="{2e36ff14-cefe-4668-b6d4-3ff258b767cf}" version="2" width="1">
+                <data annotation="" foldPosition="" fontSize="10" height="0.879713" letter="" mx="504.575" my="383.907" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="true" width="3.53898">
+                    <line alignment="4" bold="true" italic="false" sfIncrement="6" text="%pLetter%"/>
+                    <line alignment="4" bold="true" italic="false" sfIncrement="2" text="%pName%"/>
+                    <line alignment="4" bold="false" italic="false" sfIncrement="0" text="%wCut% %pQuantity%"/>
+                    <line alignment="4" bold="false" italic="false" sfIncrement="0" text="%userMaterial1%"/>
+                </data>
+                <patternInfo fontSize="10" height="1.92131" mx="274.604" my="360.938" rotation="0" visible="true" width="3.00933"/>
+                <grainline arrows="0" length="3.945" mx="448.516" my="476.644" rotation="90" visible="true"/>
+                <nodes>
+                    <node idObject="188" reverse="0" type="NodeSpline"/>
+                    <node after="0.7" idObject="189" type="NodePoint"/>
+                    <node idObject="190" reverse="0" type="NodeSpline"/>
+                    <node before="0.7" idObject="183" type="NodePoint"/>
+                    <node idObject="184" reverse="1" type="NodeSpline"/>
+                    <node idObject="185" type="NodePoint"/>
+                    <node idObject="186" reverse="0" type="NodeSpline"/>
+                    <node idObject="187" type="NodePoint"/>
+                </nodes>
+            </detail>
+        </details>
+        <groups>
+            <group id="44" name="Vorderhose" visible="false">
+                <item object="1" tool="1"/>
+                <item object="3" tool="3"/>
+                <item object="4" tool="4"/>
+                <item object="5" tool="5"/>
+                <item object="6" tool="6"/>
+                <item object="15" tool="15"/>
+                <item object="17" tool="17"/>
+                <item object="18" tool="18"/>
+                <item object="20" tool="20"/>
+                <item object="21" tool="21"/>
+                <item object="23" tool="23"/>
+                <item object="25" tool="25"/>
+                <item object="31" tool="31"/>
+                <item object="35" tool="35"/>
+                <item object="36" tool="36"/>
+                <item object="37" tool="37"/>
+                <item object="38" tool="38"/>
+                <item object="39" tool="39"/>
+                <item object="40" tool="40"/>
+                <item object="41" tool="41"/>
+                <item object="43" tool="43"/>
+                <item object="145" tool="145"/>
+                <item object="144" tool="144"/>
+                <item object="352" tool="352"/>
+                <item object="351" tool="351"/>
+                <item object="342" tool="342"/>
+                <item object="348" tool="348"/>
+                <item object="358" tool="358"/>
+                <item object="356" tool="356"/>
+                <item object="355" tool="355"/>
+                <item object="602" tool="602"/>
+                <item object="591" tool="591"/>
+                <item object="618" tool="618"/>
+                <item object="341" tool="341"/>
+                <item object="590" tool="590"/>
+                <item object="608" tool="608"/>
+                <item tool="643"/>
+                <item tool="642"/>
+                <item tool="853"/>
+                <item tool="860"/>
+                <item tool="862"/>
+                <item tool="865"/>
+            </group>
+            <group id="45" name="Konstruktion" visible="false">
+                <item object="2" tool="2"/>
+                <item object="7" tool="7"/>
+                <item object="9" tool="9"/>
+                <item object="10" tool="10"/>
+                <item object="11" tool="11"/>
+                <item object="12" tool="12"/>
+                <item object="13" tool="13"/>
+                <item object="14" tool="14"/>
+                <item object="16" tool="16"/>
+                <item object="19" tool="19"/>
+                <item object="22" tool="22"/>
+                <item object="24" tool="24"/>
+                <item object="26" tool="26"/>
+                <item object="27" tool="27"/>
+                <item object="28" tool="28"/>
+                <item object="29" tool="29"/>
+                <item object="30" tool="30"/>
+                <item object="33" tool="33"/>
+                <item object="34" tool="34"/>
+                <item object="42" tool="42"/>
+                <item object="5" tool="5"/>
+                <item object="4" tool="4"/>
+                <item object="15" tool="15"/>
+                <item object="3" tool="3"/>
+                <item object="1" tool="1"/>
+                <item object="17" tool="17"/>
+                <item object="49" tool="49"/>
+                <item object="46" tool="46"/>
+                <item object="52" tool="52"/>
+                <item object="54" tool="54"/>
+                <item object="58" tool="58"/>
+                <item object="56" tool="56"/>
+                <item object="55" tool="55"/>
+                <item object="62" tool="62"/>
+                <item object="68" tool="68"/>
+                <item object="67" tool="67"/>
+                <item object="31" tool="31"/>
+                <item object="23" tool="23"/>
+                <item object="71" tool="71"/>
+                <item object="75" tool="75"/>
+                <item object="74" tool="74"/>
+                <item object="57" tool="57"/>
+                <item object="59" tool="59"/>
+                <item object="61" tool="61"/>
+                <item object="60" tool="60"/>
+                <item object="32" tool="32"/>
+            </group>
+            <group id="51" name="Hinterhose" visible="false">
+                <item object="46" tool="46"/>
+                <item object="48" tool="48"/>
+                <item object="50" tool="50"/>
+                <item object="55" tool="55"/>
+                <item object="65" tool="65"/>
+                <item object="66" tool="66"/>
+                <item object="62" tool="62"/>
+                <item object="68" tool="68"/>
+                <item object="67" tool="67"/>
+                <item object="69" tool="69"/>
+                <item object="53" tool="53"/>
+                <item object="70" tool="70"/>
+                <item object="72" tool="72"/>
+                <item object="71" tool="71"/>
+                <item object="73" tool="73"/>
+                <item object="2" tool="2"/>
+                <item object="3" tool="3"/>
+                <item object="1" tool="1"/>
+                <item object="47" tool="47"/>
+                <item object="359" tool="359"/>
+                <item object="354" tool="354"/>
+                <item object="353" tool="353"/>
+                <item object="349" tool="349"/>
+                <item object="345" tool="345"/>
+                <item object="357" tool="357"/>
+                <item object="355" tool="355"/>
+                <item object="617" tool="617"/>
+                <item object="594" tool="594"/>
+                <item object="341" tool="341"/>
+                <item object="590" tool="590"/>
+                <item tool="644"/>
+                <item tool="641"/>
+                <item tool="856"/>
+                <item tool="859"/>
+                <item tool="868"/>
+                <item tool="862"/>
+            </group>
+            <group id="77" name="Kontrolle" visible="false">
+                <item object="64" tool="64"/>
+                <item object="63" tool="63"/>
+                <item object="78" tool="78"/>
+            </group>
+            <group id="119" name="Passe_Konstruktion" visible="false">
+                <item object="76" tool="76"/>
+                <item object="79" tool="79"/>
+                <item object="83" tool="83"/>
+                <item object="85" tool="85"/>
+                <item object="86" tool="86"/>
+                <item object="87" tool="87"/>
+                <item object="88" tool="88"/>
+                <item object="90" tool="89"/>
+                <item object="91" tool="89"/>
+                <item object="92" tool="92"/>
+                <item object="93" tool="93"/>
+                <item object="94" tool="94"/>
+                <item object="95" tool="95"/>
+                <item object="96" tool="96"/>
+                <item object="97" tool="97"/>
+                <item object="98" tool="98"/>
+                <item object="99" tool="99"/>
+                <item object="100" tool="100"/>
+                <item object="101" tool="101"/>
+                <item object="102" tool="102"/>
+                <item object="103" tool="103"/>
+                <item object="104" tool="104"/>
+                <item object="105" tool="105"/>
+                <item object="106" tool="106"/>
+                <item object="108" tool="107"/>
+                <item object="109" tool="107"/>
+                <item object="110" tool="110"/>
+                <item object="111" tool="111"/>
+                <item object="112" tool="112"/>
+                <item object="114" tool="113"/>
+                <item object="115" tool="113"/>
+                <item object="116" tool="116"/>
+                <item object="117" tool="117"/>
+                <item object="118" tool="118"/>
+            </group>
+            <group id="120" name="Passe" visible="false">
+                <item object="83" tool="83"/>
+                <item object="85" tool="85"/>
+                <item object="97" tool="97"/>
+                <item object="98" tool="98"/>
+                <item object="100" tool="100"/>
+                <item object="104" tool="104"/>
+                <item object="108" tool="107"/>
+                <item object="109" tool="107"/>
+                <item object="114" tool="113"/>
+                <item object="115" tool="113"/>
+                <item object="128" tool="128"/>
+                <item object="127" tool="127"/>
+                <item object="126" tool="126"/>
+                <item object="125" tool="125"/>
+                <item object="124" tool="124"/>
+                <item object="123" tool="123"/>
+                <item object="122" tool="122"/>
+                <item object="121" tool="121"/>
+                <item object="129" tool="129"/>
+                <item object="132" tool="132"/>
+                <item object="130" tool="130"/>
+                <item object="131" tool="131"/>
+                <item object="417" tool="417"/>
+                <item object="418" tool="418"/>
+            </group>
+            <group id="162" name="Vordertasche" visible="true">
+                <item object="142" tool="142"/>
+                <item object="143" tool="143"/>
+                <item object="145" tool="145"/>
+                <item object="147" tool="147"/>
+                <item object="148" tool="148"/>
+                <item object="150" tool="150"/>
+                <item object="151" tool="151"/>
+                <item object="153" tool="152"/>
+                <item object="154" tool="152"/>
+                <item object="155" tool="152"/>
+                <item object="156" tool="152"/>
+                <item object="158" tool="152"/>
+                <item object="159" tool="152"/>
+                <item object="160" tool="160"/>
+                <item object="161" tool="161"/>
+                <item object="157" tool="152"/>
+                <item object="144" tool="144"/>
+                <item object="149" tool="149"/>
+                <item object="192" tool="192"/>
+                <item object="196" tool="196"/>
+                <item object="193" tool="193"/>
+                <item object="197" tool="197"/>
+                <item object="198" tool="198"/>
+                <item object="146" tool="146"/>
+                <item object="39" tool="39"/>
+                <item object="43" tool="43"/>
+                <item object="36" tool="36"/>
+            </group>
+            <group id="330" name="Gesäßtasche_Konstruktion" visible="false">
+                <item object="253" tool="253"/>
+                <item object="254" tool="254"/>
+                <item object="255" tool="255"/>
+                <item object="258" tool="258"/>
+                <item object="259" tool="259"/>
+                <item object="260" tool="260"/>
+                <item object="261" tool="261"/>
+                <item object="263" tool="263"/>
+                <item object="265" tool="265"/>
+                <item object="274" tool="274"/>
+                <item object="275" tool="275"/>
+                <item object="266" tool="266"/>
+                <item object="276" tool="276"/>
+                <item object="283" tool="283"/>
+                <item object="282" tool="282"/>
+                <item object="277" tool="277"/>
+                <item object="287" tool="287"/>
+                <item object="288" tool="288"/>
+                <item object="278" tool="278"/>
+                <item object="279" tool="279"/>
+                <item object="262" tool="262"/>
+                <item object="511" tool="511"/>
+                <item object="512" tool="512"/>
+                <item object="510" tool="510"/>
+            </group>
+            <group id="331" name="Gesäßtasche" visible="false">
+                <item object="256" tool="256"/>
+                <item object="257" tool="257"/>
+                <item object="264" tool="264"/>
+                <item object="267" tool="267"/>
+                <item object="268" tool="268"/>
+                <item object="269" tool="269"/>
+                <item object="270" tool="270"/>
+                <item object="271" tool="271"/>
+                <item object="272" tool="272"/>
+                <item object="273" tool="273"/>
+                <item object="280" tool="280"/>
+                <item object="281" tool="281"/>
+                <item object="284" tool="284"/>
+                <item object="285" tool="285"/>
+                <item object="286" tool="286"/>
+                <item object="289" tool="289"/>
+                <item object="290" tool="290"/>
+                <item object="291" tool="291"/>
+                <item object="292" tool="292"/>
+                <item object="293" tool="293"/>
+                <item object="294" tool="294"/>
+                <item object="295" tool="295"/>
+                <item object="296" tool="296"/>
+                <item object="297" tool="297"/>
+                <item object="298" tool="298"/>
+            </group>
+            <group id="393" name="Hosenschlitz 2-teilig RV" visible="false">
+                <item object="43" tool="43"/>
+                <item object="378" tool="378"/>
+                <item object="382" tool="382"/>
+                <item object="385" tool="385"/>
+                <item object="377" tool="377"/>
+                <item object="376" tool="376"/>
+                <item object="381" tool="381"/>
+                <item object="392" tool="392"/>
+                <item object="398" tool="398"/>
+                <item object="395" tool="394"/>
+                <item object="399" tool="399"/>
+                <item object="396" tool="394"/>
+                <item object="397" tool="394"/>
+                <item object="493" tool="492"/>
+                <item object="494" tool="492"/>
+                <item object="496" tool="496"/>
+                <item object="497" tool="497"/>
+                <item object="495" tool="492"/>
+                <item object="513" tool="513"/>
+                <item object="514" tool="514"/>
+                <item object="527" tool="526"/>
+                <item object="525" tool="525"/>
+                <item object="524" tool="524"/>
+                <item object="515" tool="515"/>
+                <item object="518" tool="518"/>
+                <item object="519" tool="519"/>
+                <item object="520" tool="520"/>
+                <item object="31" tool="31"/>
+                <item object="607" tool="607"/>
+                <item object="639" tool="639"/>
+                <item object="638" tool="638"/>
+            </group>
+        </groups>
+    </draw>
+    <draw name="Bund">
+        <calculation>
+            <point id="420" mx="-0.398396" my="-3.67571" name="B" showLabel="true" type="single" x="41.4269" y="7.73397"/>
+            <point angle="0" basePoint="420" id="421" length="#Bu/2+((#istEinteiligerHosenschlitz==0)?Line_A89_A90:(#HUUB-0.5))" lineColor="black" mx="-0.493107" my="-4.4334" name="B1" showLabel="true" type="endLine" typeLine="hair"/>
+            <point angle="0" firstPoint="421" id="422" length="#Bh" lineColor="black" mx="0.115474" my="2.52168" name="B2" secondPoint="420" showLabel="true" type="normal" typeLine="hair"/>
+            <point firstPoint="420" id="423" mx="0.264583" my="0.396875" name="B3" secondPoint="422" showLabel="true" type="pointOfIntersection"/>
+            <line firstPoint="423" id="424" lineColor="black" secondPoint="422" typeLine="hair"/>
+            <line firstPoint="420" id="425" lineColor="black" secondPoint="423" typeLine="hair"/>
+            <point firstPoint="420" id="426" length="(#istEinteiligerHosenschlitz==0)?Line_A89_A90:(#HUUB-0.5)" lineColor="black" mx="-0.497589" my="-3.68398" name="B4" secondPoint="421" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="421" id="428" length="SplPath_A1b_A97" lineColor="black" mx="-2.30022" my="-3.12509" name="B6" secondPoint="420" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="428" id="427" length="Spl_A19_A48" lineColor="black" mx="0.858871" my="-3.97144" name="B5" secondPoint="420" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="426" id="429" mx="0.264583" my="0.396875" name="B7" secondPoint="423" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="427" id="430" mx="1.447" my="2.1271" name="B8" secondPoint="423" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="428" id="431" mx="-2.26938" my="1.39701" name="B9" secondPoint="423" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="427" id="446" length="2" lineColor="black" mx="-2.52806" my="-5.19056" name="B10" notes="14.01.2022 von 1 zu 2, weil man ja an der Taschen die Doppelnaht hat, man braucht mehr Abstand" secondPoint="420" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="446" id="447" length="#Gsb" lineColor="black" mx="-2.97855" my="-3.2563" name="B11" secondPoint="420" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="446" id="448" mx="-2.30755" my="2.89446" name="B12" secondPoint="423" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="447" id="449" mx="-3.23949" my="2.07436" name="B13" secondPoint="423" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="428" id="450" length="2" lineColor="black" mx="-1.26379" my="-3.5918" name="B14" secondPoint="421" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="450" id="451" length="#Gsb" lineColor="black" mx="1.15924" my="-3.96457" name="B15" secondPoint="421" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="451" id="452" mx="1.27107" my="2.44713" name="B16" secondPoint="422" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="450" id="453" mx="-0.928292" my="2.63352" name="B17" secondPoint="431" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="421" id="454" length="#Gsb/2" lineColor="black" mx="-2.49394" my="-2.73442" name="B18" secondPoint="420" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="454" id="455" mx="-2.27028" my="1.70158" name="B19" secondPoint="423" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="426" id="481" length="CurrentLength/2" lineColor="black" mx="-2.57557" my="0.0828608" name="B20" secondPoint="429" showLabel="true" type="alongLine" typeLine="none"/>
+            <point angle="0" firstPoint="481" id="482" length="#HGKnB/2 + #HGKnLB/2" lineColor="black" mx="0.264583" my="0.396875" name="B21" secondPoint="429" showLabel="true" type="normal" typeLine="none"/>
+            <line firstPoint="426" id="619" lineColor="black" secondPoint="429" typeLine="dotLine"/>
+            <line firstPoint="447" id="620" lineColor="black" secondPoint="449" typeLine="dotLine"/>
+            <line firstPoint="446" id="621" lineColor="black" secondPoint="448" typeLine="dotLine"/>
+            <line firstPoint="450" id="622" lineColor="black" secondPoint="453" typeLine="dotLine"/>
+            <line firstPoint="451" id="623" lineColor="black" secondPoint="452" typeLine="dotLine"/>
+            <line firstPoint="454" id="624" lineColor="black" secondPoint="455" typeLine="dotLine"/>
+            <line firstPoint="426" id="850" lineColor="black" secondPoint="427" typeLine="hair"/>
+        </calculation>
+        <modeling/>
+        <details/>
+        <groups/>
+    </draw>
+    <draw name="Gürtelschlaufen">
+        <calculation>
+            <point id="625" mx="-1.87215" my="-1.40548" name="C" showLabel="true" type="single" x="40.1932" y="18.8101"/>
+            <point angle="270" basePoint="625" id="626" length="#Gsb*2" lineColor="black" mx="-2.09867" my="0.506794" name="C1" showLabel="true" type="endLine" typeLine="hair"/>
+            <point angle="0" firstPoint="625" id="627" length="#Gsl" lineColor="black" mx="0.814176" my="-0.812229" name="C2" secondPoint="626" showLabel="true" type="normal" typeLine="hair"/>
+            <point firstPoint="627" id="628" mx="0.264583" my="0.396875" name="C3" secondPoint="626" showLabel="true" type="pointOfIntersection"/>
+            <line firstPoint="626" id="629" lineColor="black" secondPoint="628" typeLine="hair"/>
+            <line firstPoint="628" id="630" lineColor="black" secondPoint="627" typeLine="hair"/>
+        </calculation>
+        <modeling/>
+        <details/>
+        <groups/>
+    </draw>
+    <draw name="einteiliger Über- und Untertritt">
+        <calculation>
+            <point id="649" mx="-2.237" my="-1.20332" name="D" showLabel="true" type="single" x="60.2053" y="19.523"/>
+            <point angle="270" basePoint="649" id="650" length="#HlKn1t*2" lineColor="black" mx="-0.694508" my="0.893319" name="D1" showLabel="true" type="endLine" typeLine="hair"/>
+            <point firstPoint="649" id="651" length="CurrentLength/2" lineColor="black" mx="0.341752" my="-2.40541" name="D2" secondPoint="650" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="651" id="672" length="3" lineColor="black" mx="-0.862307" my="0.793318" name="D2p" notes="14.01.2022 von 2 zu 3" secondPoint="650" showLabel="true" type="alongLine" typeLine="none"/>
+            <point angle="0" firstPoint="649" id="652" length="3.75" lineColor="black" mx="2.82931" my="-2.40262" name="D3" secondPoint="650" showLabel="true" type="normal" typeLine="none"/>
+            <point angle="180" firstPoint="650" id="653" length="Line_D_D3" lineColor="black" mx="-0.635" my="2.61937" name="D4" secondPoint="651" showLabel="true" type="normal" typeLine="none"/>
+            <point firstPoint="652" id="655" mx="0.702452" my="2.58772" name="D5" secondPoint="672" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="655" id="656" length="6" lineColor="black" mx="2.0392" my="-0.441798" name="D6" notes="14.01.2022 von 4 zu 6" secondPoint="652" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="672" id="657" length="2" lineColor="black" mx="0.146187" my="1.93019" name="D7" notes="14.01.2022 von 1.5 zu 1.75&#10;21.09.2022 von 1.75 zu 2" secondPoint="655" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="657" id="658" mx="-0.202604" my="2.40771" name="D8" secondPoint="650" showLabel="true" type="pointOfIntersection"/>
+            <line firstPoint="658" id="659" lineColor="black" secondPoint="657" typeLine="hair"/>
+            <spline aScale="0" angle1="90" angle2="270" color="black" id="660" length1="1.5" length2="1.5" penStyle="hair" point1="657" point4="656" type="simpleInteractive"/>
+            <point angle="0" basePoint="651" curve="660" id="835" lineColor="black" mx="-0.767297" my="0.476253" name="D26" showLabel="true" type="curveIntersectAxis" typeLine="none"/>
+            <operation axisType="1" center="652" id="661" suffix="d1" type="flippingByAxis">
+                <source>
+                    <item idObject="657"/>
+                    <item idObject="660"/>
+                    <item idObject="651"/>
+                    <item idObject="658"/>
+                    <item idObject="650"/>
+                    <item idObject="649"/>
+                    <item idObject="835"/>
+                </source>
+                <destination>
+                    <item idObject="662" mx="2.74921" my="2.61997"/>
+                    <item idObject="663"/>
+                    <item idObject="664" mx="2.4689" my="-0.642517"/>
+                    <item idObject="665" mx="-0.630139" my="2.83924"/>
+                    <item idObject="666" mx="0.665088" my="1.27398"/>
+                    <item idObject="667" mx="0.264583" my="0.396875"/>
+                    <item idObject="836" mx="-0.332824" my="-1.65877"/>
+                </destination>
+            </operation>
+            <line firstPoint="649" id="668" lineColor="black" secondPoint="667" typeLine="hair"/>
+            <line firstPoint="650" id="669" lineColor="black" secondPoint="666" typeLine="dotLine"/>
+            <line firstPoint="665" id="670" lineColor="black" secondPoint="662" typeLine="hair"/>
+            <line firstPoint="667" id="671" lineColor="black" secondPoint="666" typeLine="hair"/>
+            <line firstPoint="651" id="673" lineColor="black" secondPoint="664" typeLine="dotLine"/>
+            <line firstPoint="650" id="674" lineColor="black" secondPoint="658" typeLine="hair"/>
+            <line firstPoint="665" id="675" lineColor="black" secondPoint="666" typeLine="hair"/>
+            <point firstPoint="652" id="676" length="0.5" lineColor="black" mx="-0.109418" my="-2.90402" name="D9" secondPoint="649" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="676" id="677" mx="-1.47094" my="1.8854" name="D10" secondPoint="651" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="677" id="678" length="4" lineColor="black" mx="1.9435" my="-1.19673" name="D11" secondPoint="676" showLabel="true" type="alongLine" typeLine="none"/>
+            <line firstPoint="676" id="679" lineColor="green" secondPoint="678" typeLine="hair"/>
+            <spline aScale="1" angle1="270" angle2="16" color="green" id="680" length1="3" length2="1.5" penStyle="hair" point1="678" point4="651" type="simpleInteractive"/>
+            <point firstPoint="649" id="681" length="#HKKnLB/2" lineColor="black" mx="-2.79963" my="-2.86594" name="D12" secondPoint="676" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="681" id="682" length="#HKKnLB" lineColor="black" mx="0.0943491" my="-4.1427" name="D13" secondPoint="652" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="681" id="683" length="CurrentLength/2" lineColor="black" mx="-1.21078" my="-3.14967" name="D14" secondPoint="682" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="683" id="684" mx="-1.97665" my="0.787902" name="D15" secondPoint="651" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="684" id="685" length="((CurrentLength+Line_B4_B20)/4)" lineColor="black" mx="0.0158717" my="-1.78424" name="D16" notes="23.09.2022 angepasst, sodass der Bund-Knopf auch berücksichtigt wird" secondPoint="683" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="684" id="686" length="((CurrentLength+Line_B4_B20)/4)*2" lineColor="black" mx="-0.380662" my="-1.76326" name="D17" notes="23.09.2022 angepasst, sodass der Bund-Knopf auch berücksichtigt wird" secondPoint="683" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="684" id="687" length="((CurrentLength+Line_B4_B20)/4)*3" lineColor="black" mx="-0.870311" my="-1.90128" name="D18" notes="23.09.2022 angepasst, sodass der Bund-Knopf auch berücksichtigt wird" secondPoint="683" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="681" id="688" mx="-1.32427" my="0.198269" name="D19" secondPoint="685" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="682" id="689" mx="-0.728449" my="0.198269" name="D20" secondPoint="685" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="681" id="690" mx="-1.32427" my="-0.0570825" name="D21" secondPoint="686" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="682" id="691" mx="-0.12914" my="0.419505" name="D22" secondPoint="686" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="681" id="692" mx="-2.60102" my="-0.113827" name="D23" secondPoint="687" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="682" id="693" mx="2.46559" my="0.754312" name="D24" secondPoint="687" showLabel="true" type="pointOfIntersection"/>
+            <line firstPoint="688" id="694" lineColor="black" secondPoint="689" typeLine="hair"/>
+            <line firstPoint="690" id="695" lineColor="black" secondPoint="691" typeLine="hair"/>
+            <line firstPoint="692" id="696" lineColor="black" secondPoint="693" typeLine="hair"/>
+            <point firstPoint="652" id="704" mx="0.213232" my="1.88604" name="D25" secondPoint="651" showLabel="true" type="pointOfIntersection"/>
+            <operation axisType="1" center="649" id="705" suffix="d2" type="flippingByAxis">
+                <source>
+                    <item idObject="652"/>
+                    <item idObject="656"/>
+                    <item idObject="660"/>
+                    <item idObject="704"/>
+                    <item idObject="657"/>
+                    <item idObject="653"/>
+                    <item idObject="658"/>
+                    <item idObject="835"/>
+                </source>
+                <destination>
+                    <item idObject="706" mx="-2.51115" my="-2.14587"/>
+                    <item idObject="707" mx="-5.48287" my="0.0203572"/>
+                    <item idObject="708"/>
+                    <item idObject="709" mx="-4.30562" my="-0.527435"/>
+                    <item idObject="710" mx="-2.65164" my="0.697775"/>
+                    <item idObject="711" mx="-3.97279" my="1.48966"/>
+                    <item idObject="712" mx="-2.30798" my="2.51041"/>
+                    <item idObject="837" mx="-3.39208" my="1.07938"/>
+                </destination>
+            </operation>
+            <line firstPoint="706" id="713" lineColor="black" secondPoint="707" typeLine="hair"/>
+            <line firstPoint="706" id="714" lineColor="black" secondPoint="649" typeLine="hair"/>
+            <line firstPoint="710" id="715" lineColor="black" secondPoint="712" typeLine="hair"/>
+            <line firstPoint="712" id="716" lineColor="black" secondPoint="650" typeLine="hair"/>
+            <line firstPoint="712" id="717" lineColor="black" secondPoint="711" typeLine="dotLine"/>
+            <line firstPoint="711" id="718" lineColor="black" secondPoint="707" typeLine="dotLine"/>
+            <line firstPoint="709" id="719" lineColor="black" secondPoint="651" typeLine="dotLine"/>
+            <line firstPoint="656" id="720" lineColor="black" secondPoint="653" typeLine="dotLine"/>
+            <line firstPoint="656" id="721" lineColor="black" secondPoint="652" typeLine="hair"/>
+        </calculation>
+        <modeling/>
+        <details/>
+        <groups>
+            <group id="697" name="Konpflochkonstruktion" visible="true">
+                <item object="681" tool="681"/>
+                <item object="682" tool="682"/>
+                <item object="683" tool="683"/>
+                <item object="684" tool="684"/>
+                <item object="685" tool="685"/>
+                <item object="686" tool="686"/>
+                <item object="687" tool="687"/>
+                <item object="688" tool="688"/>
+                <item object="689" tool="689"/>
+                <item object="690" tool="690"/>
+                <item object="691" tool="691"/>
+                <item object="692" tool="692"/>
+                <item object="693" tool="693"/>
+            </group>
+            <group id="698" name="Knopflöcher" visible="true">
+                <item object="694" tool="694"/>
+                <item object="695" tool="695"/>
+                <item object="696" tool="696"/>
+            </group>
+        </groups>
+    </draw>
+</pattern>

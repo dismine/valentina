@@ -333,7 +333,13 @@ inline auto VAbstractPiece::RemoveDublicates(const QVector<T> &points, bool remo
 template <class T>
 inline auto VAbstractPiece::ComparePoints(QVector<T> &points, const T &p1, const T &p2, qreal accuracy) -> bool
 {
-    if (not VFuzzyComparePoints(p1, p2, accuracy))
+    qreal testAccuracy = accuracy;
+    if (p2.TurnPoint())
+    {
+        testAccuracy = accuracyPointOnLine;
+    }
+
+    if (not VFuzzyComparePoints(p1, p2, testAccuracy))
     {
         points.append(p2);
         return false;
@@ -358,7 +364,7 @@ inline auto VAbstractPiece::ComparePoints(QVector<VRawSAPoint> &points, const VR
                                           qreal accuracy) -> bool
 {
     qreal testAccuracy = accuracy;
-    if (p1.Primary() && p2.Primary())
+    if ((p1.Primary() && p2.Primary()) || p2.TurnPoint())
     {
         testAccuracy = accuracyPointOnLine;
     }
@@ -400,17 +406,30 @@ inline auto VAbstractPiece::ComparePoints<QPointF>(QVector<QPointF> &points, con
 template <class T>
 inline auto VAbstractPiece::CompareFirstAndLastPoints(QVector<T> &points, qreal accuracy) -> void
 {
-    const T& l = ConstLast(points);
-    if (VFuzzyComparePoints(ConstFirst(points), l, accuracy))
+    if (points.isEmpty())
+    {
+        return;
+    }
+
+    const T& first = ConstFirst(points);
+    const T& last = ConstLast(points);
+
+    qreal testAccuracy = accuracy;
+    if (last.TurnPoint())
+    {
+        testAccuracy = accuracyPointOnLine;
+    }
+
+    if (VFuzzyComparePoints(first, last, testAccuracy))
     {
         points.removeLast();
 
-        if (not points.isEmpty() && l.TurnPoint())
+        if (last.TurnPoint())
         {
             points.last().SetTurnPoint(true);
         }
 
-        if (not points.isEmpty() && l.CurvePoint())
+        if (last.CurvePoint())
         {
             points.last().SetCurvePoint(true);
         }
@@ -421,11 +440,16 @@ inline auto VAbstractPiece::CompareFirstAndLastPoints(QVector<T> &points, qreal 
 template <>
 inline auto VAbstractPiece::CompareFirstAndLastPoints(QVector<VRawSAPoint> &points, qreal accuracy) -> void
 {
+    if (points.isEmpty())
+    {
+        return;
+    }
+
     const VRawSAPoint& first = ConstFirst(points);
     const VRawSAPoint& last = ConstLast(points);
 
     qreal testAccuracy = accuracy;
-    if (first.Primary() && last.Primary())
+    if ((first.Primary() && last.Primary()) || last.TurnPoint())
     {
         testAccuracy = accuracyPointOnLine;
     }
@@ -434,12 +458,12 @@ inline auto VAbstractPiece::CompareFirstAndLastPoints(QVector<VRawSAPoint> &poin
     {
         points.removeLast();
 
-        if (not points.isEmpty() && last.TurnPoint())
+        if (last.TurnPoint())
         {
             points.last().SetTurnPoint(true);
         }
 
-        if (not points.isEmpty() && last.CurvePoint())
+        if (last.CurvePoint())
         {
             points.last().SetCurvePoint(true);
         }
@@ -450,6 +474,11 @@ inline auto VAbstractPiece::CompareFirstAndLastPoints(QVector<VRawSAPoint> &poin
 template <>
 inline auto VAbstractPiece::CompareFirstAndLastPoints<QPointF>(QVector<QPointF> &points, qreal accuracy) -> void
 {
+    if (points.isEmpty())
+    {
+        return;
+    }
+
     if (VFuzzyComparePoints(ConstFirst(points), ConstLast(points), accuracy))
     {
         points.removeLast();

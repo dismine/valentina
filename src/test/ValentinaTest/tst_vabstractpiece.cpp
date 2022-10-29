@@ -961,6 +961,12 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data()
     ASSERT_TEST_CASE("Issue #184 case 1",
                      QStringLiteral("://smart_pattern_#184_case1/input.json"),
                      QStringLiteral("://smart_pattern_#184_case1/output.json"),
+                     0.88157480314960635 /*seam allowance width*/);
+
+    // See the file "collection/bugs/smart_pattern_#184_case2.val"
+    ASSERT_TEST_CASE("Issue #184 case 2",
+                     QStringLiteral("://smart_pattern_#184_case2/input.json"),
+                     QStringLiteral("://smart_pattern_#184_case2/output.json"),
                      37.795275590551185 /*seam allowance width*/);
 }
 

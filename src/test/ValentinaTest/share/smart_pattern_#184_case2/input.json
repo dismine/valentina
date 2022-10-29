@@ -1,0 +1,532 @@
+{
+    "vector": [
+        {
+            "curvePoint": true,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": 224.6048503937008,
+            "y": 216.60472440944795
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 245.9831330966033,
+            "y": 220.17257958063607
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 291.46679343041006,
+            "y": 227.0461179118596
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 364.52518055401504,
+            "y": 236.70247215334314
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 469.1325076000883,
+            "y": 247.86857553312865
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 577.5743326676327,
+            "y": 256.7058416346813
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 658.7810280868638,
+            "y": 261.4134166599198
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 711.933684463613,
+            "y": 263.6292804346774
+        },
+        {
+            "curvePoint": true,
+            "saAfter": 26.45669291338583,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": 713.3613080810678,
+            "y": 263.64411171143365
+        },
+        {
+            "saAfter": 26.45669291338583,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": 713.3613080810678,
+            "y": 263.64411171143365
+        },
+        {
+            "curvePoint": true,
+            "saAfter": 26.45669291338583,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": 713.3613080810678,
+            "y": 263.64411171143365
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": 713.3035236769979,
+            "y": 279.12505681465785
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": 711.5329324608736,
+            "y": 308.3182431387012
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": 707.8596291446635,
+            "y": 335.45485602052304
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": 702.376185716696,
+            "y": 360.60808570086215
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": 695.1751741652995,
+            "y": 383.85112242045693
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": 686.3491664788025,
+            "y": 405.257156420046
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": 675.9907346455333,
+            "y": 424.8993779403678
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": 664.1924506538203,
+            "y": 442.8509772221611
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": 651.0468864919919,
+            "y": 459.1851445061642
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": 636.6466141483768,
+            "y": 473.97507003311586
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": 621.084205611303,
+            "y": 487.2939440437546
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": 604.452232869099,
+            "y": 499.214956778819
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": 586.8432679100935,
+            "y": 509.8112984790474
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": 568.3498827226143,
+            "y": 519.1561593851786
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": 549.0646492949903,
+            "y": 527.322729737951
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": 529.0801396155499,
+            "y": 534.3841997781034
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": 508.4889256726213,
+            "y": 540.4137597463741
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": 487.383579454533,
+            "y": 545.4845998835017
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": 465.8566729496133,
+            "y": 549.669910430225
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": 444.00077814619067,
+            "y": 553.0428816272822
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": 410.8147788967925,
+            "y": 556.8179762623377
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": 366.2399233588707,
+            "y": 559.5681654473192
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": 322.01541041684857,
+            "y": 560.386421566931
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": 278.88181597735314,
+            "y": 559.8582665470818
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": 217.47911152245808,
+            "y": 557.807668134329
+        },
+        {
+            "curvePoint": true,
+            "saBefore": 26.45669291338583,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": 180.83408330506586,
+            "y": 556.5191060511406
+        },
+        {
+            "saBefore": 26.45669291338583,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": 180.83408330506586,
+            "y": 556.5191060511406
+        },
+        {
+            "curvePoint": true,
+            "saBefore": 26.45669291338583,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": 180.83408330506586,
+            "y": 556.5191060511406
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 182.38398581146782,
+            "y": 532.9852435860578
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 185.44048157061547,
+            "y": 494.0257283032287
+        },
+        {
+            "curvePoint": true,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": 186.8095748031496,
+            "y": 481.1716535433062
+        },
+        {
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": 186.8095748031496,
+            "y": 481.1716535433062
+        },
+        {
+            "curvePoint": true,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": 186.8095748031496,
+            "y": 481.1716535433062
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 187.15428302912747,
+            "y": 476.5477474703052
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 187.87944258838428,
+            "y": 467.3298344951331
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 188.64644719709133,
+            "y": 458.15010131230974
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 189.4541338782364,
+            "y": 449.01110435222677
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 190.30133965480724,
+            "y": 439.91540004527576
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 191.18690154979166,
+            "y": 430.86554482184846
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 192.1096565861774,
+            "y": 421.86409511233677
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 193.0684417869523,
+            "y": 412.9136073471322
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 194.06209417510402,
+            "y": 404.0166379566264
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 195.0894507736204,
+            "y": 395.17574337121135
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 196.14934860548925,
+            "y": 386.3934800212787
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 197.24062469369824,
+            "y": 377.67240433722
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 198.93027019270912,
+            "y": 364.70266253339594
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 201.28713618302152,
+            "y": 347.6583143252233
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 203.74858161247448,
+            "y": 330.9047325275976
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 206.30530266497027,
+            "y": 314.4623685836526
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 208.94799552441106,
+            "y": 298.35167393652205
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 211.66735637469895,
+            "y": 282.5931000293396
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 214.45408139973614,
+            "y": 267.20709830523896
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 217.29886678342484,
+            "y": 252.2141202073538
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 220.19240870966712,
+            "y": 237.63461717881785
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 223.1254033623652,
+            "y": 223.4890406627648
+        },
+        {
+            "curvePoint": true,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": 224.6048503937008,
+            "y": 216.60472440944795
+        },
+        {
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": 224.6048503937008,
+            "y": 216.60472440944795
+        }
+    ]
+}
