@@ -118,13 +118,16 @@ void AbstractTest::PassmarkDataFromJson(const QString &json, VPiecePassmarkData 
 
     try
     {
-        auto previousSAPoint = PointFromJson<VSAPoint>(passmarkData[QStringLiteral("previousSAPoint")].toObject());
+        VSAPoint previousSAPoint;
+        PointFromJson(passmarkData[QStringLiteral("previousSAPoint")].toObject(), previousSAPoint);
         data.previousSAPoint = previousSAPoint;
 
-        auto passmarkSAPoint = PointFromJson<VSAPoint>(passmarkData[QStringLiteral("passmarkSAPoint")].toObject());
+        VSAPoint passmarkSAPoint;
+        PointFromJson(passmarkData[QStringLiteral("passmarkSAPoint")].toObject(), passmarkSAPoint);
         data.passmarkSAPoint = passmarkSAPoint;
 
-        auto nextSAPoint = PointFromJson<VSAPoint>(passmarkData[QStringLiteral("nextSAPoint")].toObject());
+        VSAPoint nextSAPoint;
+        PointFromJson(passmarkData[QStringLiteral("nextSAPoint")].toObject(), nextSAPoint);
         data.nextSAPoint = nextSAPoint;
     }
     catch (const VException &e)
@@ -198,7 +201,7 @@ void AbstractTest::PassmarkShapeFromJson(const QString &json, QVector<QLineF> &s
         QString type;
         AbstractTest::ReadStringValue(lineObject, typeKey, type);
 
-        if (type != typeid(QLineF).name())
+        if (type != QLatin1String("QLineF"))
         {
             const QString error = QStringLiteral("Invalid json file '%1'. Unexpected class '%2'.")
                     .arg(json, lineObject[typeKey].toString());
@@ -213,7 +216,7 @@ void AbstractTest::PassmarkShapeFromJson(const QString &json, QVector<QLineF> &s
 void AbstractTest::ComparePathsDistance(const QVector<QPointF> &ekv, const QVector<QPointF> &ekvOrig) const
 {
     // Begin comparison
-    QCOMPARE(ekv.size(), ekvOrig.size());// First check if sizes equal
+    QCOMPARE(ekv.size(), ekvOrig.size());// First check if sizes are equal
     const qreal testAccuracy = MmToPixel(1.);
 
     for (int i=0; i < ekv.size(); i++)
@@ -526,7 +529,7 @@ void AbstractTest::ReadPointValue(const QJsonObject &itemObject, const QString &
 {
     if (itemObject.contains(attribute))
     {
-        value = PointFromJson<VPointF>(itemObject[attribute].toObject());
+        PointFromJson(itemObject[attribute].toObject(), value);
     }
     else
     {
@@ -728,8 +731,11 @@ void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString 
 //---------------------------------------------------------------------------------------------------------------------
 auto AbstractTest::QLineFromJson(const QJsonObject &itemObject) -> QLineF
 {
-    return {PointFromJson<QPointF>(itemObject[QStringLiteral("p1")].toObject()),
-            PointFromJson<QPointF>(itemObject[QStringLiteral("p2")].toObject())};
+    QPointF p1;
+    QPointF p2;
+    PointFromJson(itemObject[QStringLiteral("p1")].toObject(), p1);
+    PointFromJson(itemObject[QStringLiteral("p2")].toObject(), p2);
+    return {p1, p2};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -808,9 +814,9 @@ void AbstractTest::DBFromJson(const QJsonObject &dbObject, QSharedPointer<VConta
     if (dbObject.contains(itemsKey))
     {
         QJsonArray items = dbObject[itemsKey].toArray();
-        for (int i = 0; i < items.size(); ++i)
+        for (auto && item : items)
         {
-            QJsonObject itemObject = items[i].toObject();
+            QJsonObject itemObject = item.toObject();
             GOType objectType;
             AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("type"), objectType);
 
@@ -818,7 +824,8 @@ void AbstractTest::DBFromJson(const QJsonObject &dbObject, QSharedPointer<VConta
             {
                 case GOType::Point:
                 {
-                    VPointF point = PointFromJson<VPointF>(itemObject);
+                    VPointF point;
+                    PointFromJson(itemObject, point);
                     data->UpdateGObject(point.id(), new VPointF(point));
                     break;
                 }

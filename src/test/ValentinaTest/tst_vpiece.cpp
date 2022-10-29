@@ -44,21 +44,28 @@ TST_VPiece::TST_VPiece(QObject *parent)
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VPiece::Issue620()
 {
-    // See file <root>/src/app/share/collection/bugs/Issue_#620.vit
-    // Check main path
-    const Unit unit = Unit::Cm;
-    QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
-    VAbstractValApplication::VApp()->SetPatternUnits(unit);
+    try
+    {
+        // See file <root>/src/app/share/collection/bugs/Issue_#620.vit
+        // Check main path
+        const Unit unit = Unit::Cm;
+        QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
+        VAbstractValApplication::VApp()->SetPatternUnits(unit);
 
-    VPiece detail;
-    AbstractTest::PieceFromJson(QStringLiteral("://Issue_620/input.json"), detail, data);
+        VPiece detail;
+        AbstractTest::PieceFromJson(QStringLiteral("://Issue_620/input.json"), detail, data);
 
-    QVector<QPointF> pointsEkv;
-    CastTo(detail.MainPathPoints(data.data()), pointsEkv);
-    QVector<QPointF> origPoints = AbstractTest::VectorFromJson<QPointF>(QStringLiteral("://Issue_620/output.json"));
+        QVector<QPointF> pointsEkv;
+        CastTo(detail.MainPathPoints(data.data()), pointsEkv);
+        QVector<QPointF> origPoints = AbstractTest::VectorFromJson<QPointF>(QStringLiteral("://Issue_620/output.json"));
 
-    // Begin comparison
-    ComparePathsDistance(pointsEkv, origPoints);
+        // Begin comparison
+        ComparePathsDistance(pointsEkv, origPoints);
+    }
+    catch (const VException &e)
+    {
+        QFAIL(qUtf8Printable(e.ErrorMessage()));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

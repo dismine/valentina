@@ -127,7 +127,7 @@ protected:
     static auto ReadPointData(const QJsonObject &pointObject) -> T;
 
     template <class T>
-    static auto PointFromJson(const QJsonObject &pointObject) -> T;
+    static auto PointFromJson(const QJsonObject &pointObject, T &point) -> void;
 
     auto QLineFromJson(const QJsonObject &itemObject) -> QLineF;
     void SplineFromJson(const QJsonObject &itemObject, QSharedPointer<VContainer> &data);
@@ -151,13 +151,16 @@ inline auto AbstractTest::VectorFromJson(const QString &json) -> QVector<T>
     TestRoot(vectorObject, vectorKey, json);
 
     QJsonArray vectorArray = vectorObject[vectorKey].toArray();
-    QVector<T> vector(vectorArray.size());
+    QVector<T> vector;
+    vector.reserve(vectorArray.size());
 
     for (auto && item : vectorArray)
     {
         try
         {
-            vector.append(PointFromJson<T>(item.toObject()));
+            T point;
+            PointFromJson(item.toObject(), point);
+            vector.append(point);
         }
         catch (const VException &e)
         {
@@ -177,7 +180,34 @@ inline void AbstractTest::CheckClassType(const QJsonObject &itemObject)
     QString type;
     AbstractTest::ReadStringValue(itemObject, typeKey, type);
 
-    if (type != typeid(T).name())
+    const QStringList types
+    {
+        QStringLiteral("QPointF"),      // 0
+        QStringLiteral("VLayoutPoint"), // 1
+        QStringLiteral("VRawSAPoint"),  // 2
+        QStringLiteral("VSAPoint"),     // 3
+    };
+
+    bool res = false;
+    switch (types.indexOf(type))
+    {
+        case 0:
+            res = (typeid(T) == typeid(QPointF));
+            break;
+        case 1:
+            res = (typeid(T) == typeid(VLayoutPoint));
+            break;
+        case 2:
+            res = (typeid(T) == typeid(VRawSAPoint));
+            break;
+        case 3:
+            res = (typeid(T) == typeid(VSAPoint));
+            break;
+        default:
+            break;
+    }
+
+    if (not res)
     {
         throw VException(QStringLiteral("Unexpected class '%2'.").arg(itemObject[typeKey].toString()));
     }
@@ -201,18 +231,16 @@ inline auto AbstractTest::ReadPointData(const QJsonObject &pointObject) -> T
 
 //---------------------------------------------------------------------------------------------------------------------
 template<class T>
-inline auto AbstractTest::PointFromJson(const QJsonObject &pointObject) -> T
+inline auto AbstractTest::PointFromJson(const QJsonObject &pointObject, T &point) -> void
 {
     CheckClassType<T>(pointObject);
-    return ReadPointData<T>(pointObject);
+    point = ReadPointData<T>(pointObject);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template<>
-inline auto AbstractTest::PointFromJson(const QJsonObject &pointObject) -> VPointF
+inline auto AbstractTest::PointFromJson(const QJsonObject &pointObject, VPointF &point) -> void
 {
-    CheckClassType<VPointF>(pointObject);
-
     vidtype id = NULL_ID;
     AbstractTest::ReadDoubleValue(pointObject, QStringLiteral("id"), id);
 
@@ -231,10 +259,8 @@ inline auto AbstractTest::PointFromJson(const QJsonObject &pointObject) -> VPoin
     qreal y = 0;
     AbstractTest::ReadDoubleValue(pointObject, QChar('y'), y);
 
-    VPointF point(x, y, name, mx, my);
+    point = VPointF(x, y, name, mx, my);
     point.setId(id);
-
-    return point;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -256,19 +282,19 @@ inline auto AbstractTest::ReadPointData(const QJsonObject &pointObject) -> VLayo
 
 //---------------------------------------------------------------------------------------------------------------------
 template<>
-inline auto AbstractTest::PointFromJson(const QJsonObject &pointObject) -> VLayoutPoint
+inline auto AbstractTest::PointFromJson(const QJsonObject &pointObject, VLayoutPoint &point) -> void
 {
     CheckClassType<VLayoutPoint>(pointObject);
-    return ReadPointData<VLayoutPoint>(pointObject);
+    point = ReadPointData<VLayoutPoint>(pointObject);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template<>
-inline auto AbstractTest::PointFromJson(const QJsonObject &pointObject) -> VSAPoint
+inline auto AbstractTest::PointFromJson(const QJsonObject &pointObject, VSAPoint &point) -> void
 {
     CheckClassType<VSAPoint>(pointObject);
 
-    VSAPoint point(ReadPointData<VLayoutPoint>(pointObject));
+    point = VSAPoint(ReadPointData<VLayoutPoint>(pointObject));
 
     qreal saBefore;
     AbstractTest::ReadDoubleValue(pointObject, QStringLiteral("saBefore"), saBefore, QStringLiteral("-1"));
@@ -282,23 +308,19 @@ inline auto AbstractTest::PointFromJson(const QJsonObject &pointObject) -> VSAPo
     AbstractTest::ReadDoubleValue(pointObject, QStringLiteral("angle"), angleType,
                                   QString::number(static_cast<int>(PieceNodeAngle::ByLength)));
     point.SetAngleType(angleType);
-
-    return point;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template<>
-inline auto AbstractTest::PointFromJson(const QJsonObject &pointObject) -> VRawSAPoint
+inline auto AbstractTest::PointFromJson(const QJsonObject &pointObject, VRawSAPoint &point) -> void
 {
     CheckClassType<VRawSAPoint>(pointObject);
 
-    VRawSAPoint point(ReadPointData<VLayoutPoint>(pointObject));
+    point = VRawSAPoint(ReadPointData<VLayoutPoint>(pointObject));
 
     bool loopPoint;
     AbstractTest::ReadBooleanValue(pointObject, QStringLiteral("loopPoint"), loopPoint, QStringLiteral("0"));
     point.SetLoopPoint(loopPoint);
-
-    return point;
 }
 
 #endif // ABSTRACTTEST_H

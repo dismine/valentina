@@ -47,7 +47,7 @@ void TST_VAbstractPiece::EquidistantRemoveLoop_data()
     QTest::addColumn<qreal>("width");
     QTest::addColumn<QVector<QPointF>>("ekvOrig");
 
-    auto ASSERT_TEST_CASE = [this](const char *title, const QString &input, const QString &output, qreal width)
+    auto ASSERT_TEST_CASE = [](const char *title, const QString &input, const QString &output, qreal width)
     {
         QVector<VSAPoint> inputPoints = AbstractTest::VectorFromJson<VSAPoint>(input);
         QVector<QPointF> outputPoints = AbstractTest::VectorFromJson<QPointF>(output);
@@ -322,7 +322,7 @@ void TST_VAbstractPiece::LayoutAllowanceRemoveLoop_data()
     QTest::addColumn<qreal>("width");
     QTest::addColumn<QVector<QPointF>>("ekvOrig");
 
-    auto ASSERT_TEST_CASE = [this](const char *title, const QString &input, const QString &output, qreal width)
+    auto ASSERT_TEST_CASE = [](const char *title, const QString &input, const QString &output, qreal width)
     {
         QVector<VSAPoint> inputPoints = AbstractTest::VectorFromJson<VSAPoint>(input);
         QVector<QPointF> outputPoints = AbstractTest::VectorFromJson<QPointF>(output);
@@ -385,7 +385,7 @@ void TST_VAbstractPiece::RawPathRemoveLoop_data() const
     QTest::addColumn<QVector<VRawSAPoint>>("path");
     QTest::addColumn<QVector<QPointF>>("expect");
 
-    auto ASSERT_TEST_CASE = [this](const char *title, const QString &input, const QString &output)
+    auto ASSERT_TEST_CASE = [](const char *title, const QString &input, const QString &output)
     {
         QVector<VRawSAPoint> inputPoints = AbstractTest::VectorFromJson<VRawSAPoint>(input);
         QVector<QPointF> outputPoints = AbstractTest::VectorFromJson<QPointF>(output);
@@ -875,7 +875,7 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data()
     QTest::addColumn<qreal>("width");
     QTest::addColumn<QVector<QPointF>>("ekvOrig");
 
-    auto ASSERT_TEST_CASE = [this](const char *title, const QString &input, const QString &output, qreal width)
+    auto ASSERT_TEST_CASE = [](const char *title, const QString &input, const QString &output, qreal width)
     {
         QVector<VSAPoint> inputPoints = AbstractTest::VectorFromJson<VSAPoint>(input);
         QVector<QPointF> outputPoints = AbstractTest::VectorFromJson<QPointF>(output);
@@ -979,7 +979,7 @@ void TST_VAbstractPiece::EquidistantAngleType_data()
     QTest::addColumn<qreal>("width");
     QTest::addColumn<QVector<QPointF>>("ekvOrig");
 
-    auto ASSERT_TEST_CASE = [this](const char *title, const QString &input, const QString &output, qreal width)
+    auto ASSERT_TEST_CASE = [](const char *title, const QString &input, const QString &output, qreal width)
     {
         QVector<VSAPoint> inputPoints = AbstractTest::VectorFromJson<VSAPoint>(input);
         QVector<QPointF> outputPoints = AbstractTest::VectorFromJson<QPointF>(output);
@@ -1128,7 +1128,7 @@ void TST_VAbstractPiece::TestCorrectEquidistantPoints_data()
     QTest::addColumn<QVector<QPointF>>("before");
     QTest::addColumn<QVector<QPointF>>("expect");
 
-    auto ASSERT_TEST_CASE = [this](const char *title, const QString &input, const QString &output)
+    auto ASSERT_TEST_CASE = [](const char *title, const QString &input, const QString &output)
     {
         QVector<QPointF> inputPoints = AbstractTest::VectorFromJson<QPointF>(input);
         QVector<QPointF> outputPoints = AbstractTest::VectorFromJson<QPointF>(output);
@@ -1280,7 +1280,7 @@ void TST_VAbstractPiece::IsAllowanceValid_data() const
     QTest::addColumn<QVector<QPointF>>("allowance");
     QTest::addColumn<bool>("valid");
 
-    auto ASSERT_TEST_CASE = [this](const char *title, const QString &base, const QString &allowance, bool valid)
+    auto ASSERT_TEST_CASE = [](const char *title, const QString &base, const QString &allowance, bool valid)
     {
         QVector<QPointF> basePoints = AbstractTest::VectorFromJson<QPointF>(base);
         QVector<QPointF> allowancePoints = AbstractTest::VectorFromJson<QPointF>(allowance);
