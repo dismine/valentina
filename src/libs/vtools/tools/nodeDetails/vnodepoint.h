@@ -38,7 +38,6 @@
 #include <QString>
 #include <QtGlobal>
 
-#include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/def.h"
 #include "vabstractnode.h"
 #include "../vwidgets/vscenepoint.h"
@@ -66,6 +65,7 @@ signals:
     void ToggleForceFlipping(bool checked);
     void Delete();
     void ToggleExcludeState(quint32 id);
+    void ToggleTurnPointState(quint32 id);
     void ToggleSeamAllowanceAngleType(quint32 id, PieceNodeAngle type);
     void TogglePassmark(quint32 id, bool toggle);
     void TogglePassmarkAngleType(quint32 id, PassmarkAngleType type);

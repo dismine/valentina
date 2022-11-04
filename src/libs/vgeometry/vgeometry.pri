@@ -6,6 +6,7 @@ SOURCES += \
         $$PWD/vgobject.cpp \
         $$PWD/vabstractcurve.cpp \
         $$PWD/varc.cpp \
+    $$PWD/vlayoutplacelabel.cpp \
         $$PWD/vpointf.cpp \
         $$PWD/vspline.cpp \
         $$PWD/vsplinepath.cpp \
@@ -28,6 +29,7 @@ HEADERS += \
         $$PWD/vabstractcurve.h \
         $$PWD/varc.h \
         $$PWD/varc_p.h \
+    $$PWD/vlayoutplacelabel.h \
         $$PWD/vpointf.h \
         $$PWD/vpointf_p.h \
         $$PWD/vspline.h \

@@ -53,7 +53,9 @@
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "dxiface.h"
 #include "../vlayout/vlayoutpiece.h"
+#include "../vlayout/vlayoutpoint.h"
 #include "../vgeometry/vgeometrydef.h"
+#include "../vgeometry/vlayoutplacelabel.h"
 
 static const qreal AAMATextHeight = 2.5;
 
@@ -61,8 +63,8 @@ namespace
 {
 Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer0, (UTF8STRING("0"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer1, (UTF8STRING("1"))) // NOLINT
-//Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer2, (UTF8STRING("2"))) // NOLINT
-//Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer3, (UTF8STRING("3"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer2, (UTF8STRING("2"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer3, (UTF8STRING("3"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer4, (UTF8STRING("4"))) // NOLINT
 //Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer5, (UTF8STRING("5"))) // NOLINT
 //Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer6, (UTF8STRING("6"))) // NOLINT
@@ -87,9 +89,9 @@ Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer86, (UTF8STRING("86"))) // NOLI
 Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer87, (UTF8STRING("87"))) // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
-auto PieceOutline(const VLayoutPiece &detail) -> QVector<QPointF>
+auto PieceOutline(const VLayoutPiece &detail) -> QVector<VLayoutPoint>
 {
-    QVector<QPointF> outline;
+    QVector<VLayoutPoint> outline;
     if (detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn())
     {
         outline = detail.GetMappedSeamAllowancePoints();
@@ -692,8 +694,7 @@ auto VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details) -> bool
         return false;
     }
 
-    m_input = QSharedPointer<dx_iface>(new dx_iface(GetFileNameForLocale(), m_version, m_varMeasurement,
-                                                  m_varInsunits));
+    m_input = QSharedPointer<dx_iface>::create(GetFileNameForLocale(), m_version, m_varMeasurement, m_varInsunits);
     m_input->AddAAMAHeaderData();
     if (m_version > DRW::AC1009)
     {
@@ -705,7 +706,8 @@ auto VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details) -> bool
 
     for(auto detail : details)
     {
-        auto *detailBlock = new dx_ifaceBlock();
+
+        auto detailBlock = QSharedPointer<dx_ifaceBlock>::create();
 
         QString blockName = detail.GetName();
         if (m_version <= DRW::AC1009)
@@ -726,80 +728,98 @@ auto VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details) -> bool
         ExportPieceText(detailBlock, detail);
         ExportAAMADrill(detailBlock, detail);
 
-        m_input->AddBlock(detailBlock);
+        m_input->AddBlock(detailBlock.get());
 
-        auto *insert = new DRW_Insert();
+        QScopedPointer<DRW_Insert> insert(new DRW_Insert());
         insert->name = blockName.toStdString();
         insert->layer = *layer1;
 
-        m_input->AddEntity(insert);
+        m_input->AddEntity(insert.take());
     }
 
     return m_input->fileExport(m_binary);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::ExportAAMAOutline(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+void VDxfEngine::ExportAAMAOutline(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
-    DRW_Entity *e = AAMAPolygon(PieceOutline(detail), *layer1, true);
-    if (e)
+    QVector<VLayoutPoint> points = PieceOutline(detail);
+
+    if (DRW_Entity *e = AAMAPolygon(points, *layer1, true))
     {
         detailBlock->ent.push_back(e);
     }
+
+    ExportTurnPoints(detailBlock, points);
+    ExportCurvePoints(detailBlock, points);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::ExportAAMADraw(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+void VDxfEngine::ExportAAMADraw(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
     if (detail.IsSeamAllowance() && not detail.IsHideMainPath() && not detail.IsSeamAllowanceBuiltIn())
     {
+        QVector<VLayoutPoint> points = detail.GetMappedContourPoints();
         if (DRW_Entity *e = AAMAPolygon(detail.GetMappedContourPoints(), *layer8, true))
         {
             detailBlock->ent.push_back(e);
         }
+
+        ExportTurnPoints(detailBlock, points);
+        ExportCurvePoints(detailBlock, points);
     }
 
-    const QVector<QVector<QPointF>> drawIntCut = detail.MappedInternalPathsForCut(false);
-    for(const auto &intCut : drawIntCut)
+    const QVector<QVector<VLayoutPoint>> drawIntLine = detail.MappedInternalPathsForCut(false);
+    for(const auto &intLine : drawIntLine)
     {
-        if (DRW_Entity *e = AAMAPolygon(intCut, *layer8, false))
+        if (DRW_Entity *e = AAMAPolygon(intLine, *layer8, false))
         {
             detailBlock->ent.push_back(e);
         }
+
+        ExportTurnPoints(detailBlock, intLine);
+        ExportCurvePoints(detailBlock, intLine);
     }
 
-    const QVector<VLayoutPlaceLabel> labels = detail.GetMappedPlaceLabels();
+    const QVector<VLayoutPlaceLabel> labels = detail.GetPlaceLabels();
     for(const auto &label : labels)
     {
-        if (label.type != PlaceLabelType::Doubletree && label.type != PlaceLabelType::Button
-                && label.type != PlaceLabelType::Circle)
+        if (label.Type() != PlaceLabelType::Doubletree && label.Type() != PlaceLabelType::Button
+                && label.Type() != PlaceLabelType::Circle)
         {
-            for(const auto &p : qAsConst(label.shape))
+            PlaceLabelImg shape = detail.MapPlaceLabelShape(VAbstractPiece::PlaceLabelShape(label));
+            for(const auto &points : shape)
             {
-                if (DRW_Entity *e = AAMAPolygon(p, *layer8, false))
+                if (DRW_Entity *e = AAMAPolygon(points, *layer8, false))
                 {
                     detailBlock->ent.push_back(e);
                 }
+
+                ExportTurnPoints(detailBlock, points);
+                ExportCurvePoints(detailBlock, points);
             }
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::ExportAAMAIntcut(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+void VDxfEngine::ExportAAMAIntcut(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
-    QVector<QVector<QPointF>> drawIntCut = detail.MappedInternalPathsForCut(true);
+    QVector<QVector<VLayoutPoint>> drawIntCut = detail.MappedInternalPathsForCut(true);
     for(auto &intCut : drawIntCut)
     {
         if (DRW_Entity *e = AAMAPolygon(intCut, *layer11, false))
         {
             detailBlock->ent.push_back(e);
         }
+
+        ExportTurnPoints(detailBlock, intCut);
+        ExportCurvePoints(detailBlock, intCut);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::ExportAAMANotch(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+void VDxfEngine::ExportAAMANotch(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
     if (detail.IsSeamAllowance())
     {
@@ -818,7 +838,7 @@ void VDxfEngine::ExportAAMANotch(dx_ifaceBlock *detailBlock, const VLayoutPiece 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::ExportAAMAGrainline(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+void VDxfEngine::ExportAAMAGrainline(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
     const QVector<QPointF> grainline = detail.GetMappedGrainline();
     if (grainline.count() > 1)
@@ -831,7 +851,7 @@ void VDxfEngine::ExportAAMAGrainline(dx_ifaceBlock *detailBlock, const VLayoutPi
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::ExportPieceText(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+void VDxfEngine::ExportPieceText(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
     const QStringList list = detail.GetPieceText();
     const QPointF startPos = detail.GetPieceTextPosition();
@@ -863,22 +883,17 @@ void VDxfEngine::ExportStyleSystemText(const QSharedPointer<dx_iface> &input, co
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::ExportAAMADrill(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+void VDxfEngine::ExportAAMADrill(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
-    const QVector<VLayoutPlaceLabel> labels = detail.GetMappedPlaceLabels();
+    const QVector<VLayoutPlaceLabel> labels = detail.GetPlaceLabels();
 
     for(const auto &label : labels)
     {
-        if (label.type == PlaceLabelType::Doubletree || label.type == PlaceLabelType::Button
-                || label.type == PlaceLabelType::Circle)
+        if (label.Type() == PlaceLabelType::Doubletree || label.Type() == PlaceLabelType::Button
+                || label.Type() == PlaceLabelType::Circle)
         {
-            const QPointF center = detail.GetMatrix().map(label.center);
-            auto *point = new DRW_Point();
-            point->basePoint = DRW_Coord(FromPixel(center.x(), m_varInsunits),
-                                         FromPixel(GetSize().height() - center.y(), m_varInsunits), 0);
-            point->layer = *layer13;
-
-            detailBlock->ent.push_back(point);
+            const QPointF center = detail.GetMatrix().map(label.Center());
+            detailBlock->ent.push_back(AAMAPoint(center, *layer13));
         }
     }
 }
@@ -906,7 +921,7 @@ auto VDxfEngine::ExportToASTM(const QVector<VLayoutPiece> &details) -> bool
 
     for(auto detail : details)
     {
-        auto *detailBlock = new dx_ifaceBlock();
+        auto detailBlock = QSharedPointer<dx_ifaceBlock>::create();
 
         QString blockName = detail.GetName();
         if (m_version <= DRW::AC1009)
@@ -929,50 +944,54 @@ auto VDxfEngine::ExportToASTM(const QVector<VLayoutPiece> &details) -> bool
         ExportASTMDrill(detailBlock, detail);
         ExportASTMAnnotationText(detailBlock, detail);
 
-        m_input->AddBlock(detailBlock);
+        m_input->AddBlock(detailBlock.get());
 
-        auto *insert = new DRW_Insert();
+        QScopedPointer<DRW_Insert> insert(new DRW_Insert());
         insert->name = blockName.toStdString();
         insert->layer = *layer1;
 
-        m_input->AddEntity(insert);
+        m_input->AddEntity(insert.take());
     }
 
     return m_input->fileExport(m_binary);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::ExportASTMPieceBoundary(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+void VDxfEngine::ExportASTMPieceBoundary(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
-    QVector<QPointF> pieceBoundary = PieceOutline(detail);
+    QVector<VLayoutPoint> pieceBoundary = PieceOutline(detail);
 
     // Piece boundary
-    DRW_Entity *e = AAMAPolygon(pieceBoundary, *layer1, true);
-    if (e)
+    if (DRW_Entity *e = AAMAPolygon(pieceBoundary, *layer1, true))
     {
         detailBlock->ent.push_back(e);
     }
 
+    ExportTurnPoints(detailBlock, pieceBoundary);
+    ExportCurvePoints(detailBlock, pieceBoundary);
+
     // Piece boundary quality validation curves
-    DRW_Entity *q = AAMAPolygon(pieceBoundary, *layer84, true);
-    if (q)
+    if (DRW_Entity *q = AAMAPolygon(pieceBoundary, *layer84, true))
     {
         detailBlock->ent.push_back(q);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::ExportASTMSewLine(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+void VDxfEngine::ExportASTMSewLine(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
     if (detail.IsSeamAllowance() && not detail.IsHideMainPath() && not detail.IsSeamAllowanceBuiltIn())
     {
-        QVector<QPointF> sewLine = detail.GetMappedContourPoints();
+        QVector<VLayoutPoint> sewLine = detail.GetMappedContourPoints();
 
         // Sew lines
         if (DRW_Entity *e = AAMAPolygon(sewLine, *layer14, true))
         {
             detailBlock->ent.push_back(e);
         }
+
+        ExportTurnPoints(detailBlock, sewLine);
+        ExportCurvePoints(detailBlock, sewLine);
 
         // Sew lines quality validation curves
         if (DRW_Entity *e = AAMAPolygon(sewLine, *layer87, true))
@@ -983,37 +1002,44 @@ void VDxfEngine::ExportASTMSewLine(dx_ifaceBlock *detailBlock, const VLayoutPiec
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::ExportASTMInternalLine(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+void VDxfEngine::ExportASTMInternalLine(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
-    const QVector<QVector<QPointF>> drawIntCut = detail.MappedInternalPathsForCut(false);
-    for(const auto &intCut : drawIntCut)
+    const QVector<QVector<VLayoutPoint>> drawIntLine = detail.MappedInternalPathsForCut(false);
+    for(const auto &intLine : drawIntLine)
     {
         // Internal line
-        if (DRW_Entity *e = AAMAPolygon(intCut, *layer8, false))
+        if (DRW_Entity *e = AAMAPolygon(intLine, *layer8, false))
         {
             detailBlock->ent.push_back(e);
         }
 
+        ExportTurnPoints(detailBlock, intLine);
+        ExportCurvePoints(detailBlock, intLine);
+
         // Internal lines quality validation curves
-        if (DRW_Entity *e = AAMAPolygon(intCut, *layer85, false))
+        if (DRW_Entity *e = AAMAPolygon(intLine, *layer85, false))
         {
             detailBlock->ent.push_back(e);
         }
     }
 
-    const QVector<VLayoutPlaceLabel> labels = detail.GetMappedPlaceLabels();
+    const QVector<VLayoutPlaceLabel> labels = detail.GetPlaceLabels();
     for(const auto &label : labels)
     {
-        if (label.type != PlaceLabelType::Doubletree && label.type != PlaceLabelType::Button
-            && label.type != PlaceLabelType::Circle)
+        if (label.Type() != PlaceLabelType::Doubletree && label.Type() != PlaceLabelType::Button
+            && label.Type() != PlaceLabelType::Circle)
         {
-            for(const auto &p : qAsConst(label.shape))
+            PlaceLabelImg shape = detail.MapPlaceLabelShape(VAbstractPiece::PlaceLabelShape(label));
+            for(const auto &p : shape)
             {
                 // Internal line (placelabel)
                 if (DRW_Entity *e = AAMAPolygon(p, *layer8, false))
                 {
                     detailBlock->ent.push_back(e);
                 }
+
+                ExportTurnPoints(detailBlock, p);
+                ExportCurvePoints(detailBlock, p);
 
                 // Internal lines quality validation curves
                 if (DRW_Entity *e = AAMAPolygon(p, *layer85, false))
@@ -1026,9 +1052,9 @@ void VDxfEngine::ExportASTMInternalLine(dx_ifaceBlock *detailBlock, const VLayou
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::ExportASTMInternalCutout(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+void VDxfEngine::ExportASTMInternalCutout(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
-    QVector<QVector<QPointF>> drawIntCut = detail.MappedInternalPathsForCut(true);
+    QVector<QVector<VLayoutPoint>> drawIntCut = detail.MappedInternalPathsForCut(true);
     for(auto &intCut : drawIntCut)
     {
         // Internal cutout
@@ -1036,6 +1062,9 @@ void VDxfEngine::ExportASTMInternalCutout(dx_ifaceBlock *detailBlock, const VLay
         {
             detailBlock->ent.push_back(e);
         }
+
+        ExportTurnPoints(detailBlock, intCut);
+        ExportCurvePoints(detailBlock, intCut);
 
         // Internal cutouts quality validation curves
         if (DRW_Entity *e = AAMAPolygon(intCut, *layer86, false))
@@ -1046,7 +1075,7 @@ void VDxfEngine::ExportASTMInternalCutout(dx_ifaceBlock *detailBlock, const VLay
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::ExportASTMAnnotationText(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+void VDxfEngine::ExportASTMAnnotationText(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
     QString name = detail.GetName();
     QPointF textPos = detail.VLayoutPiece::DetailBoundingRect().center();
@@ -1056,22 +1085,17 @@ void VDxfEngine::ExportASTMAnnotationText(dx_ifaceBlock *detailBlock, const VLay
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::ExportASTMDrill(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+void VDxfEngine::ExportASTMDrill(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
-    const QVector<VLayoutPlaceLabel> labels = detail.GetMappedPlaceLabels();
+    const QVector<VLayoutPlaceLabel> labels = detail.GetPlaceLabels();
 
     for(const auto &label : labels)
     {
-        if (label.type == PlaceLabelType::Doubletree || label.type == PlaceLabelType::Button
-            || label.type == PlaceLabelType::Circle)
+        if (label.Type() == PlaceLabelType::Doubletree || label.Type() == PlaceLabelType::Button
+            || label.Type() == PlaceLabelType::Circle)
         {
-            const QPointF center = detail.GetMatrix().map(label.center);
-            auto *point = new DRW_Point();
-            point->basePoint = DRW_Coord(FromPixel(center.x(), m_varInsunits),
-                                         FromPixel(GetSize().height() - center.y(), m_varInsunits), 0);
-            point->layer = *layer13;
-
-            detailBlock->ent.push_back(point);
+            const QPointF center = detail.GetMatrix().map(label.Center());
+            detailBlock->ent.push_back(AAMAPoint(center, *layer13));
 
             // TODO. Investigate drill category
 //            QPointF pos(center.x(), center.y() - ToPixel(AAMATextHeight, varInsunits));
@@ -1081,7 +1105,7 @@ void VDxfEngine::ExportASTMDrill(dx_ifaceBlock *detailBlock, const VLayoutPiece 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::ExportASTMNotch(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+void VDxfEngine::ExportASTMNotch(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
     if (detail.IsSeamAllowance())
     {
@@ -1141,7 +1165,34 @@ void VDxfEngine::ExportASTMNotch(dx_ifaceBlock *detailBlock, const VLayoutPiece 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VDxfEngine::AAMAPolygon(const QVector<QPointF> &polygon, const UTF8STRING &layer, bool forceClosed) -> DRW_Entity *
+void VDxfEngine::ExportTurnPoints(const QSharedPointer<dx_ifaceBlock> &detailBlock,
+                                  const QVector<VLayoutPoint> &points) const
+{
+    for(const auto &p : qAsConst(points))
+    {
+        if (p.TurnPoint())
+        {
+            detailBlock->ent.push_back(AAMAPoint(p, *layer2));
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::ExportCurvePoints(const QSharedPointer<dx_ifaceBlock> &detailBlock,
+                                   const QVector<VLayoutPoint> &points) const
+{
+    for(const auto &p : qAsConst(points))
+    {
+        if (p.CurvePoint() && not p.TurnPoint())
+        {
+            detailBlock->ent.push_back(AAMAPoint(p, *layer3));
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VDxfEngine::AAMAPolygon(const QVector<VLayoutPoint> &polygon, const UTF8STRING &layer,
+                             bool forceClosed) -> DRW_Entity *
 {
     if (polygon.isEmpty())
     {
@@ -1187,6 +1238,16 @@ auto VDxfEngine::AAMAText(const QPointF &pos, const QString &text, const UTF8STR
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VDxfEngine::AAMAPoint(const QPointF &pos, const UTF8STRING &layer) const -> DRW_Point *
+{
+    auto *point = new DRW_Point();
+    point->basePoint = DRW_Coord(FromPixel(pos.x(), m_varInsunits),
+                                 FromPixel(GetSize().height() - pos.y(), m_varInsunits), 0);
+    point->layer = layer;
+    return point;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VDxfEngine::FromUnicodeToCodec(const QString &str, QTextCodec *codec) -> std::string
 {
     return codec->fromUnicode(str).toStdString();
@@ -1203,8 +1264,9 @@ auto VDxfEngine::GetFileNameForLocale() const -> std::string
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template<class P, class V>
-auto VDxfEngine::CreateAAMAPolygon(const QVector<QPointF> &polygon, const UTF8STRING &layer, bool forceClosed) -> P *
+template<class P, class V, class C>
+auto VDxfEngine::CreateAAMAPolygon(const QVector<C> &polygon, const UTF8STRING &layer,
+                                   bool forceClosed) -> P *
 {
     auto *poly = new P();
     poly->layer = layer;
@@ -1221,7 +1283,7 @@ auto VDxfEngine::CreateAAMAPolygon(const QVector<QPointF> &polygon, const UTF8ST
         }
     }
 
-    for (auto p : polygon)
+    for (const auto &p : polygon)
     {
         poly->addVertex(V(FromPixel(p.x(), m_varInsunits),
                           FromPixel(GetSize().height() - p.y(), m_varInsunits)));

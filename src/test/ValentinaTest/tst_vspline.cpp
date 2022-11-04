@@ -162,7 +162,7 @@ void TST_VSpline::GetSegmentPoints()
     origPoints.append(QPointF(681.3372913240995, 1815.7969526662778));
 
     // Begin comparison
-    Comparison(points, origPoints);
+    ComparePathsDistance(points, origPoints);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -251,7 +251,7 @@ void TST_VSpline::GetSegmentPoints_issue412()
     origPoints.append(QPointF(758.4176810783842, 206.13572832247544));
 
     // Begin comparison
-    Comparison(points, origPoints);
+    ComparePathsDistance(points, origPoints);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -370,7 +370,7 @@ void TST_VSpline::GetSegmentPoints_TestPuzzle()
     origPoints.append(QPointF(957.69883966, 943.844812978));
 
     // Begin comparison
-    Comparison(points, origPoints);
+    ComparePathsDistance(points, origPoints);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -525,7 +525,7 @@ void TST_VSpline::GetSegmentPoints_NullSegment()
     origPoints.append(QPointF(146.3718263928647, 6.419281580065625));
 
     // Begin comparison
-    Comparison(points, origPoints);
+    ComparePathsDistance(points, origPoints);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -627,7 +627,7 @@ void TST_VSpline::GetSegmentPoints_RotateTool()
     origPoints.append(QPointF(46.623829088412336, 167.78988631718659));
 
     // Begin comparison
-    Comparison(points, origPoints);
+    ComparePathsDistance(points, origPoints);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -687,7 +687,7 @@ void TST_VSpline::GetSegmentPoints_issue767()
     origPoints.append(QPointF(4200.083592082314, 2559.5684873884893));
 
     // Begin comparison
-    Comparison(res, origPoints);
+    ComparePathsDistance(res, origPoints);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -928,5 +928,5 @@ void TST_VSpline::CompareSplines(const VSpline &spl1, const VSpline &spl2) const
     QCOMPARE(spl1.GetKcurve(), spl2.GetKcurve());
 
     // Compare points
-    Comparison(spl1.GetPoints(), spl2.GetPoints());
+    ComparePathsDistance(spl1.GetPoints(), spl2.GetPoints());
 }

@@ -47,14 +47,10 @@ void TST_VAbstractPiece::EquidistantRemoveLoop_data()
     QTest::addColumn<qreal>("width");
     QTest::addColumn<QVector<QPointF>>("ekvOrig");
 
-    auto ASSERT_TEST_CASE = [this](const char *title, const QString &input, const QString &output, qreal width)
+    auto ASSERT_TEST_CASE = [](const char *title, const QString &input, const QString &output, qreal width)
     {
-        QVector<VSAPoint> inputPoints;
-        AbstractTest::VectorFromJson(input, inputPoints);
-
-        QVector<QPointF> outputPoints;
-        AbstractTest::VectorFromJson(output, outputPoints);
-
+        QVector<VSAPoint> inputPoints = AbstractTest::VectorFromJson<VSAPoint>(input);
+        QVector<QPointF> outputPoints = AbstractTest::VectorFromJson<QPointF>(output);
         QTest::newRow(title) << inputPoints << width << outputPoints;
     };
 
@@ -256,43 +252,43 @@ void TST_VAbstractPiece::EquidistantRemoveLoop_data()
                      QStringLiteral("://loop_start_point_on_line/output.json"),
                      37.795275590551185 /*seam allowance width (1.0 cm)*/);
 
-    // See file src/app/share/collection/bugs/DP_6_hem.val (private collection)
+    // See file valentina_private_collection/bugs/DP_6_hem/DP_6_hem.val
     ASSERT_TEST_CASE("By length",
                      QStringLiteral("://DP_6_hem_by_length/input.json"),
                      QStringLiteral("://DP_6_hem_by_length/output.json"),
                      37.795275590551185 /*seam allowance width (1.0 cm)*/);
 
-    // See file src/app/share/collection/bugs/DP_6_hem.val (private collection)
+    // See file valentina_private_collection/bugs/DP_6_hem/DP_6_hem.val
     ASSERT_TEST_CASE("By intersection",
                      QStringLiteral("://DP_6_hem_by_intersection/input.json"),
                      QStringLiteral("://DP_6_hem_by_intersection/output.json"),
                      37.795275590551185 /*seam allowance width (1.0 cm)*/);
 
-    // See file src/app/share/collection/bugs/DP_6_hem.val (private collection)
+    // See file valentina_private_collection/bugs/DP_6_hem/DP_6_hem.val
     ASSERT_TEST_CASE("By first edge symmetry",
                      QStringLiteral("://DP_6_hem_by_first_edge_symmetry/input.json"),
                      QStringLiteral("://DP_6_hem_by_first_edge_symmetry/output.json"),
                      37.795275590551185 /*seam allowance width (1.0 cm)*/);
 
-    // See file src/app/share/collection/bugs/DP_6_hem.val (private collection)
+    // See file valentina_private_collection/bugs/DP_6_hem/DP_6_hem.val
     ASSERT_TEST_CASE("By second edge symmetry",
                      QStringLiteral("://DP_6_hem_by_second_edge_symmetry/input.json"),
                      QStringLiteral("://DP_6_hem_by_second_edge_symmetry/output.json"),
                      37.795275590551185 /*seam allowance width (1.0 cm)*/);
 
-    // See file src/app/share/collection/bugs/DP_6_hem.val (private collection)
+    // See file valentina_private_collection/bugs/DP_6_hem/DP_6_hem.val
     ASSERT_TEST_CASE("By first edge right angle",
                      QStringLiteral("://DP_6_hem_by_first_edge_right_angle/input.json"),
                      QStringLiteral("://DP_6_hem_by_first_edge_right_angle/output.json"),
                      37.795275590551185 /*seam allowance width (1.0 cm)*/);
 
-    // See file src/app/share/collection/bugs/DP_6_hem.val (private collection)
+    // See file valentina_private_collection/bugs/DP_6_hem/DP_6_hem.val
     ASSERT_TEST_CASE("By second edge right angle",
                      QStringLiteral("://DP_6_hem_by_second_edge_right_angle/input.json"),
                      QStringLiteral("://DP_6_hem_by_second_edge_right_angle/output.json"),
                      37.795275590551185 /*seam allowance width (1.0 cm)*/);
 
-    // See file src/app/share/collection/bugs/DP_6.val (private collection)
+    // See file valentina_private_collection/bugs/DP_6/DP_6.val
     ASSERT_TEST_CASE("Hem by seam allowance",
                      QStringLiteral("://DP_6/input.json"),
                      QStringLiteral("://DP_6/output.json"),
@@ -312,10 +308,11 @@ void TST_VAbstractPiece::EquidistantRemoveLoop() const
     QFETCH(qreal, width);
     QFETCH(QVector<QPointF>, ekvOrig);
 
-    const QVector<QPointF> ekv = VAbstractPiece::Equidistant(points, width, QString());
+    QVector<QPointF> ekv;
+    CastTo(VAbstractPiece::Equidistant(points, width, QString()), ekv);
 
     // Begin comparison
-    Comparison(ekv, ekvOrig);
+    ComparePathsDistance(ekv, ekvOrig);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -325,14 +322,10 @@ void TST_VAbstractPiece::LayoutAllowanceRemoveLoop_data()
     QTest::addColumn<qreal>("width");
     QTest::addColumn<QVector<QPointF>>("ekvOrig");
 
-    auto ASSERT_TEST_CASE = [this](const char *title, const QString &input, const QString &output, qreal width)
+    auto ASSERT_TEST_CASE = [](const char *title, const QString &input, const QString &output, qreal width)
     {
-        QVector<VSAPoint> inputPoints;
-        AbstractTest::VectorFromJson(input, inputPoints);
-
-        QVector<QPointF> outputPoints;
-        AbstractTest::VectorFromJson(output, outputPoints);
-
+        QVector<VSAPoint> inputPoints = AbstractTest::VectorFromJson<VSAPoint>(input);
+        QVector<QPointF> outputPoints = AbstractTest::VectorFromJson<QPointF>(output);
         QTest::newRow(title) << inputPoints << width << outputPoints;
     };
 
@@ -348,13 +341,13 @@ void TST_VAbstractPiece::LayoutAllowanceRemoveLoop_data()
                      QStringLiteral("://smart_pattern_#99/output.json"),
                      28.346456692913389 /*seam allowance width*/);
 
-    // See file valentina_private_collection/test/smart_pattern_#120/smart_pattern_#120.val (private collection)
+    // See file valentina_private_collection/test/smart_pattern_#120/smart_pattern_#120.val
     ASSERT_TEST_CASE("Piece 1",
                      QStringLiteral("://smart_pattern_#120_piece_1/input.json"),
                      QStringLiteral("://smart_pattern_#120_piece_1/output.json"),
                      37.795275590551185);
 
-    // See file valentina_private_collection/test/smart_pattern_#120/smart_pattern_#120.val (private collection)
+    // See file valentina_private_collection/test/smart_pattern_#120/smart_pattern_#120.val
     ASSERT_TEST_CASE("Piece 2",
                      QStringLiteral("://smart_pattern_#120_piece_2/input.json"),
                      QStringLiteral("://smart_pattern_#120_piece_2/output.json"),
@@ -368,10 +361,11 @@ void TST_VAbstractPiece::LayoutAllowanceRemoveLoop() const
     QFETCH(qreal, width);
     QFETCH(QVector<QPointF>, ekvOrig);
 
-    const QVector<QPointF> ekv = VAbstractPiece::Equidistant(points, width, QString());
+    QVector<QPointF> ekv;
+    CastTo(VAbstractPiece::Equidistant(points, width, QString()), ekv);
 
     // Begin comparison
-    Comparison(ekv, ekvOrig);
+    ComparePathsDistance(ekv, ekvOrig);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -391,14 +385,10 @@ void TST_VAbstractPiece::RawPathRemoveLoop_data() const
     QTest::addColumn<QVector<VRawSAPoint>>("path");
     QTest::addColumn<QVector<QPointF>>("expect");
 
-    auto ASSERT_TEST_CASE = [this](const char *title, const QString &input, const QString &output)
+    auto ASSERT_TEST_CASE = [](const char *title, const QString &input, const QString &output)
     {
-        QVector<VRawSAPoint> inputPoints;
-        AbstractTest::VectorFromJson(input, inputPoints);
-
-        QVector<QPointF> outputPoints;
-        AbstractTest::VectorFromJson(output, outputPoints);
-
+        QVector<VRawSAPoint> inputPoints = AbstractTest::VectorFromJson<VRawSAPoint>(input);
+        QVector<QPointF> outputPoints = AbstractTest::VectorFromJson<QPointF>(output);
         QTest::newRow(title) << inputPoints << outputPoints;
     };
 
@@ -414,8 +404,9 @@ void TST_VAbstractPiece::RawPathRemoveLoop() const
     QFETCH(QVector<VRawSAPoint>, path);
     QFETCH(QVector<QPointF>, expect);
 
-    QVector<QPointF> res = VAbstractPiece::CheckLoops(path);
-    Comparison(res, expect);
+    QVector<QPointF> res;
+    CastTo(VAbstractPiece::CheckLoops(path), res);
+    ComparePathsDistance(res, expect);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -688,7 +679,7 @@ void TST_VAbstractPiece::PathRemoveLoop() const
     QFETCH(QVector<QPointF>, expect);
 
     QVector<QPointF> res = VAbstractPiece::CheckLoops(path);
-    Comparison(res, expect);
+    ComparePathsDistance(res, expect);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -874,7 +865,7 @@ void TST_VAbstractPiece::PathLoopsCase() const
     QFETCH(QVector<QPointF>, expect);
 
     const QVector<QPointF> res = VAbstractPiece::CheckLoops(path);
-    Comparison(res, expect);
+    ComparePathsDistance(res, expect);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -884,14 +875,10 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data()
     QTest::addColumn<qreal>("width");
     QTest::addColumn<QVector<QPointF>>("ekvOrig");
 
-    auto ASSERT_TEST_CASE = [this](const char *title, const QString &input, const QString &output, qreal width)
+    auto ASSERT_TEST_CASE = [](const char *title, const QString &input, const QString &output, qreal width)
     {
-        QVector<VSAPoint> inputPoints;
-        AbstractTest::VectorFromJson(input, inputPoints);
-
-        QVector<QPointF> outputPoints;
-        AbstractTest::VectorFromJson(output, outputPoints);
-
+        QVector<VSAPoint> inputPoints = AbstractTest::VectorFromJson<VSAPoint>(input);
+        QVector<QPointF> outputPoints = AbstractTest::VectorFromJson<QPointF>(output);
         QTest::newRow(title) << inputPoints << width << outputPoints;
     };
 
@@ -939,7 +926,7 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data()
                      QStringLiteral("://Issue_883_prong/output.json"),
                      37.795275590551185 /*seam allowance width*/);
 
-    // See the file "collection/bugs/doll.val" (private collection)
+    // See the file "valentina_private_collection/bugs/doll/doll.val"
     ASSERT_TEST_CASE("Doll.",
                      QStringLiteral("://doll/input.json"),
                      QStringLiteral("://doll/output.json"),
@@ -969,6 +956,18 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data()
                      QStringLiteral("://hood_2/input.json"),
                      QStringLiteral("://hood_2/output.json"),
                      37.795275590551185 /*seam allowance width*/);
+
+    // See the file "collection/bugs/smart_pattern_#184_case1.val"
+    ASSERT_TEST_CASE("Issue #184 case 1",
+                     QStringLiteral("://smart_pattern_#184_case1/input.json"),
+                     QStringLiteral("://smart_pattern_#184_case1/output.json"),
+                     0.88157480314960635 /*seam allowance width*/);
+
+    // See the file "collection/bugs/smart_pattern_#184_case2.val"
+    ASSERT_TEST_CASE("Issue #184 case 2",
+                     QStringLiteral("://smart_pattern_#184_case2/input.json"),
+                     QStringLiteral("://smart_pattern_#184_case2/output.json"),
+                     37.795275590551185 /*seam allowance width*/);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -978,10 +977,11 @@ void TST_VAbstractPiece::BrokenDetailEquidistant() const
     QFETCH(qreal, width);
     QFETCH(QVector<QPointF>, ekvOrig);
 
-    const QVector<QPointF> ekv = VAbstractPiece::Equidistant(points, width, QString());// Take result
+    QVector<QPointF> ekv;
+    CastTo(VAbstractPiece::Equidistant(points, width, QString()), ekv);// Take result
 
     // Begin comparison
-    Comparison(ekv, ekvOrig);
+    ComparePathsDistance(ekv, ekvOrig);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -991,14 +991,10 @@ void TST_VAbstractPiece::EquidistantAngleType_data()
     QTest::addColumn<qreal>("width");
     QTest::addColumn<QVector<QPointF>>("ekvOrig");
 
-    auto ASSERT_TEST_CASE = [this](const char *title, const QString &input, const QString &output, qreal width)
+    auto ASSERT_TEST_CASE = [](const char *title, const QString &input, const QString &output, qreal width)
     {
-        QVector<VSAPoint> inputPoints;
-        AbstractTest::VectorFromJson(input, inputPoints);
-
-        QVector<QPointF> outputPoints;
-        AbstractTest::VectorFromJson(output, outputPoints);
-
+        QVector<VSAPoint> inputPoints = AbstractTest::VectorFromJson<VSAPoint>(input);
+        QVector<QPointF> outputPoints = AbstractTest::VectorFromJson<QPointF>(output);
         QTest::newRow(title) << inputPoints << width << outputPoints;
     };
 
@@ -1050,37 +1046,37 @@ void TST_VAbstractPiece::EquidistantAngleType_data()
                      QStringLiteral("://Issue_937_case_5/output.json"),
                      37.795275590551185 /*seam allowance width*/);
 
-    // See file src/app/share/collection/bugs/busty.val (private collection)
+    // See file valentina_private_collection/bugs/busty/busty.val
     ASSERT_TEST_CASE("Busty",
                      QStringLiteral("://busty/input.json"),
                      QStringLiteral("://busty/output.json"),
                      0 /*seam allowance width*/);
 
-    // See file src/app/share/collection/bugs/panties.val (private collection)
+    // See file valentina_private_collection/bugs/panties/panties.val
     ASSERT_TEST_CASE("Panties. Piece Case 1",
                      QStringLiteral("://panties_case1/input.json"),
                      QStringLiteral("://panties_case1/output.json"),
                      26.45669291338583 /*seam allowance width*/);
 
-    // See file src/app/share/collection/bugs/panties.val (private collection)
+    // See file valentina_private_collection/bugs/panties/panties.val
     ASSERT_TEST_CASE("Panties. Piece Case 2",
                      QStringLiteral("://panties_case2/input.json"),
                      QStringLiteral("://panties_case2/output.json"),
                      26.45669291338583 /*seam allowance width*/);
 
-    // See file valentina_private_collection/bugs/smart_pattern_#113/smart_pattern_#113.val (private collection)
+    // See file valentina_private_collection/bugs/smart_pattern_#113/smart_pattern_#113.val
     ASSERT_TEST_CASE("Эдит 6",
                      QStringLiteral("://smart_pattern_#113/input.json"),
                      QStringLiteral("://smart_pattern_#113/output.json"),
                      0.56692913385826771 /*seam allowance width*/);
 
-    // See file src/app/share/collection/bugs/smart_pattern_#118.val (private collection)
+    // See file valentina_private_collection/bugs/smart_pattern_#118/smart_pattern_#118.val
     ASSERT_TEST_CASE("Ретро стринги 3",
                      QStringLiteral("://smart_pattern_#118/input.json"),
                      QStringLiteral("://smart_pattern_#118/output.json"),
                      26.45669291338583 /*seam allowance width*/);
 
-    // See file src/app/share/collection/bugs/smart_pattern_#133.val (private collection)
+    // See file valentina_private_collection/bugs/smart_pattern_#133/smart_pattern_#133.val
     ASSERT_TEST_CASE("Эдит 1",
                      QStringLiteral("://smart_pattern_#133/input.json"),
                      QStringLiteral("://smart_pattern_#133/output.json"),
@@ -1094,10 +1090,11 @@ void TST_VAbstractPiece::EquidistantAngleType() const
     QFETCH(qreal, width);
     QFETCH(QVector<QPointF>, ekvOrig);
 
-    const QVector<QPointF> ekv = VAbstractPiece::Equidistant(points, width, QString());// Take result
+    QVector<QPointF> ekv;
+    CastTo(VAbstractPiece::Equidistant(points, width, QString()), ekv);// Take result
 
     // Begin comparison
-    Comparison(ekv, ekvOrig);
+    ComparePathsDistance(ekv, ekvOrig);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1134,7 +1131,7 @@ void TST_VAbstractPiece::CorrectEquidistantPoints() const
     const QVector<QPointF> res = VAbstractPiece::CorrectEquidistantPoints(points, removeFirstAndLast);
 
     // Begin comparison
-    Comparison(res, expect);
+    ComparePathsDistance(res, expect);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1143,14 +1140,10 @@ void TST_VAbstractPiece::TestCorrectEquidistantPoints_data()
     QTest::addColumn<QVector<QPointF>>("before");
     QTest::addColumn<QVector<QPointF>>("expect");
 
-    auto ASSERT_TEST_CASE = [this](const char *title, const QString &input, const QString &output)
+    auto ASSERT_TEST_CASE = [](const char *title, const QString &input, const QString &output)
     {
-        QVector<QPointF> inputPoints;
-        AbstractTest::VectorFromJson(input, inputPoints);
-
-        QVector<QPointF> outputPoints;
-        AbstractTest::VectorFromJson(output, outputPoints);
-
+        QVector<QPointF> inputPoints = AbstractTest::VectorFromJson<QPointF>(input);
+        QVector<QPointF> outputPoints = AbstractTest::VectorFromJson<QPointF>(output);
         QTest::newRow(title) << inputPoints << outputPoints;
     };
 
@@ -1172,7 +1165,7 @@ void TST_VAbstractPiece::TestCorrectEquidistantPoints() const
     QFETCH(QVector<QPointF>, expect);
 
     QVector<QPointF> after = VAbstractPiece::CorrectEquidistantPoints(before);
-    Comparison(after, expect);
+    ComparePathsDistance(after, expect);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1289,7 +1282,7 @@ void TST_VAbstractPiece::PossibleInfiniteClearLoops() const
     QFETCH(QVector<QPointF>, expect);
 
     QVector<QPointF> res = VAbstractPiece::CheckLoops(path);
-    Comparison(res, expect);
+    ComparePathsDistance(res, expect);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1299,14 +1292,10 @@ void TST_VAbstractPiece::IsAllowanceValid_data() const
     QTest::addColumn<QVector<QPointF>>("allowance");
     QTest::addColumn<bool>("valid");
 
-    auto ASSERT_TEST_CASE = [this](const char *title, const QString &base, const QString &allowance, bool valid)
+    auto ASSERT_TEST_CASE = [](const char *title, const QString &base, const QString &allowance, bool valid)
     {
-        QVector<QPointF> basePoints;
-        AbstractTest::VectorFromJson(base, basePoints);
-
-        QVector<QPointF> allowancePoints;
-        AbstractTest::VectorFromJson(allowance, allowancePoints);
-
+        QVector<QPointF> basePoints = AbstractTest::VectorFromJson<QPointF>(base);
+        QVector<QPointF> allowancePoints = AbstractTest::VectorFromJson<QPointF>(allowance);
         QTest::newRow(title) << basePoints << allowancePoints << valid ;
     };
 

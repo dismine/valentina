@@ -33,7 +33,6 @@
 #include "../ifc/exception/vexceptioninvalidnotch.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
-#include "testpassmark.h"
 #include "../vlayout/vrawsapoint.h"
 
 const qreal VPassmark::passmarkRadiusFactor = 0.45;
@@ -53,7 +52,7 @@ PassmarkStatus GetSeamPassmarkSAPoint(const VPiecePassmarkData &passmarkData, co
     if (needRollback && not seamAllowance.isEmpty())
     {
         ekvPoints.clear();
-        ekvPoints += seamAllowance.at(seamAllowance.size()-2);
+        ekvPoints += VRawSAPoint(seamAllowance.at(seamAllowance.size()-2));
     }
 
     if (ekvPoints.isEmpty())
@@ -689,7 +688,7 @@ QVector<QLineF> VPassmark::FullPassmark(const VPiece &piece, const VContainer *d
 {
     if (m_null)
     {
-        return QVector<QLineF>();
+        return {};
     }
 
     if (not piece.IsSeamAllowanceBuiltIn())
@@ -720,16 +719,18 @@ QVector<QLineF> VPassmark::SAPassmark(const VPiece &piece, const VContainer *dat
 {
     if (m_null)
     {
-        return QVector<QLineF>();
+        return {};
     }
 
     if (not piece.IsSeamAllowanceBuiltIn())
     {
         // Because rollback cannot be calulated if passmark is not first point in main path we rotate it.
-        return SAPassmark(piece.SeamAllowancePointsWithRotation(data, m_data.passmarkIndex), side);
+        QVector<QPointF> points;
+        CastTo(piece.SeamAllowancePointsWithRotation(data, m_data.passmarkIndex), points);
+        return SAPassmark(points, side);
     }
 
-    return QVector<QLineF>();
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -737,7 +738,7 @@ QVector<QLineF> VPassmark::SAPassmark(const QVector<QPointF> &seamAllowance, Pas
 {
     if (m_null)
     {
-        return QVector<QLineF>();
+        return {};
     }
 
     // Because rollback @seamAllowance must be rotated here.
@@ -801,8 +802,9 @@ QVector<QLineF> VPassmark::BuiltInSAPassmark(const VPiece &piece, const VContain
         return QVector<QLineF>();
     }
 
-    return CreatePassmarkLines(m_data.passmarkLineType, m_data.passmarkAngleType, lines, piece.MainPathPoints(data),
-                               PassmarkSide::All);
+    QVector<QPointF> points;
+    CastTo(piece.MainPathPoints(data), points);
+    return CreatePassmarkLines(m_data.passmarkLineType, m_data.passmarkAngleType, lines, points, PassmarkSide::All);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -854,7 +856,7 @@ QVector<QLineF> VPassmark::BuiltInSAPassmarkBaseLine(const VPiece &piece) const
     edge1.setAngle(edge1.angle() + edge1.angleTo(edge2)/2.);
     edge1.setLength(length);
 
-    return QVector<QLineF>({edge1});
+    return {edge1};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -862,16 +864,18 @@ QVector<QLineF> VPassmark::SAPassmarkBaseLine(const VPiece &piece, const VContai
 {
     if (m_null)
     {
-        return QVector<QLineF>();
+        return {};
     }
 
     if (not piece.IsSeamAllowanceBuiltIn())
     {
         // Because rollback cannot be calulated if passmark is not first point in main path we rotate it.
-        return SAPassmarkBaseLine(piece.SeamAllowancePointsWithRotation(data, m_data.passmarkIndex), side);
+        QVector<QPointF> points;
+        CastTo(piece.SeamAllowancePointsWithRotation(data, m_data.passmarkIndex), points);
+        return SAPassmarkBaseLine(points, side);
     }
 
-    return QVector<QLineF>();
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -879,7 +883,7 @@ QVector<QLineF> VPassmark::SAPassmarkBaseLine(const QVector<QPointF> &seamAllowa
 {
     if (m_null)
     {
-        return QVector<QLineF>();
+        return {};
     }
 
     if (seamAllowance.size() < 2)

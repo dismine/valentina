@@ -198,7 +198,7 @@ inline void Move(T &vector, int from, int to)
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
-auto Reverse(const QVector<T> &container) -> QVector<T>
+inline auto Reverse(const QVector<T> &container) -> QVector<T>
 {
     if (container.isEmpty())
     {
@@ -216,14 +216,14 @@ auto Reverse(const QVector<T> &container) -> QVector<T>
 
 template <typename T, template <typename> class C>
 //---------------------------------------------------------------------------------------------------------------------
-auto Reverse(const C<T> &container) -> C<T>
+inline auto Reverse(const C<T> &container) -> C<T>
 {
     return ConvertToList(Reverse(ConvertToVector(container)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T, typename std::enable_if<std::is_same<T, QStringList>::value, T>::type* = nullptr>
-auto Reverse(const T &container) -> T
+inline auto Reverse(const T &container) -> T
 {
     return Reverse<QString, QList>(container);
 }

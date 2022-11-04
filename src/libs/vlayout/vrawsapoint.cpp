@@ -31,14 +31,13 @@
 #include <QJsonObject>
 
 //---------------------------------------------------------------------------------------------------------------------
-QJsonObject VRawSAPoint::toJson() const
+auto VRawSAPoint::toJson() const -> QJsonObject
 {
-    QJsonObject pointObject;
-    pointObject[QLatin1String("type")] = "VRawSAPoint";
-    pointObject[QLatin1String("x")] = x();
-    pointObject[QLatin1String("y")] = y();
+    QJsonObject pointObject = VLayoutPoint::toJson();
 
+    pointObject[QLatin1String("type")] = "VRawSAPoint";
     pointObject[QLatin1String("loopPoint")] = m_loopPoint;
+    pointObject[QLatin1String("primary")] = m_primary;
 
     return pointObject;
 }

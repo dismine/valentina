@@ -29,6 +29,7 @@
 #ifndef VLAYOUTPIECEPATH_H
 #define VLAYOUTPIECEPATH_H
 
+#include "vlayoutpoint.h"
 #include <QPointF>
 #include <QSharedDataPointer>
 #include <QMetaType>
@@ -40,7 +41,7 @@ class VLayoutPiecePath
 {
 public:
     VLayoutPiecePath();
-    explicit VLayoutPiecePath(const QVector<QPointF> &points);
+    explicit VLayoutPiecePath(const QVector<VLayoutPoint> &points);
     VLayoutPiecePath(const VLayoutPiecePath &path);
 
     virtual ~VLayoutPiecePath();
@@ -53,8 +54,8 @@ public:
 
     QPainterPath GetPainterPath() const;
 
-    QVector<QPointF> Points() const;
-    void             SetPoints(const QVector<QPointF> &points);
+    QVector<VLayoutPoint> Points() const;
+    void                  SetPoints(const QVector<VLayoutPoint> &points);
 
     Qt::PenStyle PenStyle() const;
     void         SetPenStyle(const Qt::PenStyle &penStyle);

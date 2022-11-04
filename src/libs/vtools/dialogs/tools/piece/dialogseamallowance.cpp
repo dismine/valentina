@@ -745,11 +745,13 @@ void DialogSeamAllowance::ShowMainPathContextMenu(const QPoint &pos)
 
     QListWidgetItem *rowItem = uiTabPaths->listWidgetMainPath->item(row);
     SCASSERT(rowItem != nullptr);
-    VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+    auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 
     QAction *actionPassmark = nullptr;
     QAction *actionUniqueness = nullptr;
     QAction *actionReverse = nullptr;
+    QAction *actionTurnPoint = nullptr;
+
     if (rowNode.GetTypeTool() != Tool::NodePoint)
     {
         actionReverse = menu->addAction(tr("Reverse"));
@@ -768,6 +770,10 @@ void DialogSeamAllowance::ShowMainPathContextMenu(const QPoint &pos)
         actionUniqueness = menu->addAction(tr("Check uniqueness"));
         actionUniqueness->setCheckable(true);
         actionUniqueness->setChecked(rowNode.IsCheckUniqueness());
+
+        actionTurnPoint = menu->addAction(tr("Turn point"));
+        actionTurnPoint->setCheckable(true);
+        actionTurnPoint->setChecked(rowNode.IsTurnPoint());
     }
 
     QAction *actionExcluded = menu->addAction(tr("Excluded"));
@@ -803,6 +809,13 @@ void DialogSeamAllowance::ShowMainPathContextMenu(const QPoint &pos)
     else if (selectedAction == actionUniqueness)
     {
         rowNode.SetCheckUniqueness(not rowNode.IsCheckUniqueness());
+        rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+        rowItem->setText(GetNodeName(data, rowNode, true));
+    }
+
+    else if (selectedAction == actionTurnPoint)
+    {
+        rowNode.SetTurnPoint(not rowNode.IsTurnPoint());
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
         rowItem->setText(GetNodeName(data, rowNode, true));
     }
@@ -2750,7 +2763,8 @@ void DialogSeamAllowance::ValidObjects(bool value)
 //---------------------------------------------------------------------------------------------------------------------
 bool DialogSeamAllowance::MainPathIsClockwise() const
 {
-    const QVector<QPointF> points = CreatePiece().MainPathPoints(data);
+    QVector<QPointF> points;
+    CastTo(CreatePiece().MainPathPoints(data), points);
 
     if(points.count() < 3)
     {

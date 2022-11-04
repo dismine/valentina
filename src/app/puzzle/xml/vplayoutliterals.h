@@ -65,6 +65,7 @@ extern const QString TagLines;
 extern const QString TagLine;
 extern const QString TagScale;
 extern const QString TagWatermark;
+extern const QString TagPoint;
 
 extern const QString AttrWarningSuperposition;
 extern const QString AttrWarningOutOfBound;
@@ -113,6 +114,10 @@ extern const QString AttrShowPreview;
 extern const QString AttrPrintScheme;
 extern const QString AttrTileNumber;
 extern const QString AttrZValue;
+extern const QString AttrX;
+extern const QString AttrY;
+extern const QString AttrTurnPoint;
+extern const QString AttrCurvePoint;
 
 extern const QString atFrontStr;
 extern const QString atRearStr;

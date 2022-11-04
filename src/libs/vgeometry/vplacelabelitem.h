@@ -83,12 +83,6 @@ public:
 
     QTransform RotationMatrix() const;
     QRectF     Box() const;
-
-    PlaceLabelImg LabelShape() const;
-    QPainterPath  LabelShapePath() const;
-
-    static QPainterPath LabelShapePath(const PlaceLabelImg &shape);
-
 private:
     QSharedDataPointer<VPlaceLabelItemData> d;
 };

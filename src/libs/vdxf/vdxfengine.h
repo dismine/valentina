@@ -49,6 +49,8 @@ class DRW_Text;
 class VLayoutPiece;
 class DRW_Entity;
 class dx_ifaceBlock;
+class VLayoutPoint;
+class DRW_Point;
 
 class VDxfEngine final : public QPaintEngine
 {
@@ -123,31 +125,37 @@ private:
     Q_REQUIRED_RESULT auto ToPixel(double val, const VarInsunits &unit) const -> double;
 
     auto ExportToAAMA(const QVector<VLayoutPiece> &details) -> bool;
-    void ExportAAMAOutline(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
-    void ExportAAMADraw(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
-    void ExportAAMAIntcut(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
-    void ExportAAMANotch(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
-    void ExportAAMAGrainline(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
-    void ExportPieceText(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
+    void ExportAAMAOutline(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
+    void ExportAAMADraw(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
+    void ExportAAMAIntcut(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
+    void ExportAAMANotch(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
+    void ExportAAMAGrainline(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
+    void ExportPieceText(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
     void ExportStyleSystemText(const QSharedPointer<dx_iface> &input, const QVector<VLayoutPiece> &details);
-    void ExportAAMADrill(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
+    void ExportAAMADrill(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
 
     auto ExportToASTM(const QVector<VLayoutPiece> &details) -> bool;
-    void ExportASTMPieceBoundary(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
-    void ExportASTMSewLine(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
-    void ExportASTMInternalLine(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
-    void ExportASTMInternalCutout(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
-    void ExportASTMAnnotationText(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
-    void ExportASTMDrill(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
-    void ExportASTMNotch(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail);
+    void ExportASTMPieceBoundary(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
+    void ExportASTMSewLine(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
+    void ExportASTMInternalLine(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
+    void ExportASTMInternalCutout(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
+    void ExportASTMAnnotationText(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
+    void ExportASTMDrill(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
+    void ExportASTMNotch(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
 
-    Q_REQUIRED_RESULT auto AAMAPolygon(const QVector<QPointF> &polygon, const UTF8STRING &layer,
+    void ExportTurnPoints(const QSharedPointer<dx_ifaceBlock> &detailBlock,
+                          const QVector<VLayoutPoint> &points) const;
+    void ExportCurvePoints(const QSharedPointer<dx_ifaceBlock> &detailBlock,
+                           const QVector<VLayoutPoint> &points) const;
+
+    Q_REQUIRED_RESULT auto AAMAPolygon(const QVector<VLayoutPoint> &polygon, const UTF8STRING &layer,
                                        bool forceClosed) -> DRW_Entity *;
     Q_REQUIRED_RESULT auto AAMALine(const QLineF &line, const UTF8STRING &layer) -> DRW_Entity *;
     Q_REQUIRED_RESULT auto AAMAText(const QPointF &pos, const QString &text, const UTF8STRING &layer) -> DRW_Entity *;
+    Q_REQUIRED_RESULT auto AAMAPoint(const QPointF &pos, const UTF8STRING &layer) const -> DRW_Point *;
 
-    template<class P, class V>
-    Q_REQUIRED_RESULT auto CreateAAMAPolygon(const QVector<QPointF> &polygon, const UTF8STRING &layer,
+    template<class P, class V, class C>
+    Q_REQUIRED_RESULT auto CreateAAMAPolygon(const QVector<C> &polygon, const UTF8STRING &layer,
                                              bool forceClosed) -> P *;
 
     static auto FromUnicodeToCodec(const QString &str, QTextCodec *codec) -> std::string;

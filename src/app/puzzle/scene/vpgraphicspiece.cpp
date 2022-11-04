@@ -42,14 +42,14 @@
 #include "../layout/vppiece.h"
 #include "../layout/vplayout.h"
 #include "../layout/vpsheet.h"
-
 #include "../vlayout/vtextmanager.h"
 
 #include "../vpapplication.h"
 
 #include "compatibility.h"
 #include "vlayoutpiecepath.h"
-#include "vplacelabelitem.h"
+
+#include "../vgeometry/vlayoutplacelabel.h"
 
 #include "undocommands/vpundopiecemove.h"
 #include "undocommands/vpundomovepieceonsheet.h"
@@ -494,7 +494,7 @@ void VPGraphicsPiece::PaintSeamLine(QPainter *painter, const VPPiecePtr &piece)
 {
     if (not piece->IsHideMainPath() || not piece->IsSeamAllowance())
     {
-        QVector<QPointF> seamLinePoints = piece->GetMappedContourPoints();
+        QVector<VLayoutPoint> seamLinePoints = piece->GetMappedContourPoints();
         if(!seamLinePoints.isEmpty())
         {
             m_seamLine.moveTo(ConstFirst(seamLinePoints));
@@ -519,7 +519,7 @@ void VPGraphicsPiece::PaintCuttingLine(QPainter *painter, const VPPiecePtr &piec
 {
     if (piece->IsSeamAllowance() && not piece->IsSeamAllowanceBuiltIn())
     {
-        QVector<QPointF> cuttingLinepoints = piece->GetMappedSeamAllowancePoints();
+        QVector<VLayoutPoint> cuttingLinepoints = piece->GetMappedSeamAllowancePoints();
         if(!cuttingLinepoints.isEmpty())
         {
             m_cuttingLine.moveTo(ConstFirst(cuttingLinepoints));
@@ -617,10 +617,11 @@ void VPGraphicsPiece::PaintPassmarks(QPainter *painter, const VPPiecePtr &piece)
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::PaintPlaceLabels(QPainter *painter, const VPPiecePtr &piece)
 {
-    QVector<VLayoutPlaceLabel> placeLabels = piece->GetMappedPlaceLabels();
+    QVector<VLayoutPlaceLabel> placeLabels = piece->GetPlaceLabels();
     for(auto &placeLabel : placeLabels)
     {
-        QPainterPath path = VPlaceLabelItem::LabelShapePath(placeLabel.shape);
+        QPainterPath path =
+            VAbstractPiece::LabelShapePath(piece->MapPlaceLabelShape(VAbstractPiece::PlaceLabelShape(placeLabel)));
 
         if (painter != nullptr)
         {
@@ -708,7 +709,7 @@ void VPGraphicsPiece::GroupMove(const QPointF &pos)
             QVector<QPointF> path;
             if (not p.isNull() && p->StickyPosition(m_stickyTranslateX, m_stickyTranslateY))
             {
-                path = p->GetMappedExternalContourPoints();
+                CastTo(p->GetMappedExternalContourPoints(), path);
                 QTransform m;
                 m.translate(m_stickyTranslateX, m_stickyTranslateY);
                 path = m.map(path);

@@ -38,6 +38,7 @@
 #include "../vmisc/compatibility.h"
 #include "../vgeometry/vgobject.h"
 #include "vsapoint.h"
+#include "vrawsapoint.h"
 #include "testpath.h"
 
 class VAbstractPieceData;
@@ -45,6 +46,9 @@ class QPainterPath;
 class VGrainlineData;
 class VContainer;
 class VRawSAPoint;
+class VLayoutPlaceLabel;
+
+using PlaceLabelImg = QVector<QVector<VLayoutPoint> >;
 
 class VAbstractPiece
 {
@@ -100,10 +104,10 @@ public:
      */
     virtual auto GetUniqueID() const -> QString;
 
-    static auto Equidistant(QVector<VSAPoint> points, qreal width, const QString &name) -> QVector<QPointF>;
+    static auto Equidistant(QVector<VSAPoint> points, qreal width, const QString &name) -> QVector<VLayoutPoint>;
     static auto SumTrapezoids(const QVector<QPointF> &points) -> qreal;
-    static auto CheckLoops(const QVector<QPointF> &points) -> QVector<QPointF>;
-    static auto CheckLoops(const QVector<VRawSAPoint> &points) -> QVector<QPointF>;
+    template <class T>
+    static auto CheckLoops(QVector<T> points) -> QVector<T>;
     static auto EkvPoint(QVector<VRawSAPoint> points, const VSAPoint &p1Line1, const VSAPoint &p2Line1,
                          const VSAPoint &p1Line2, const VSAPoint &p2Line2, qreal width,
                          bool *needRollback = nullptr) -> QVector<VRawSAPoint>;
@@ -122,27 +126,80 @@ public:
     static auto GrainlinePoints(const VGrainlineData &geom, const VContainer *pattern,
                                 const QRectF &boundingRect, qreal &dAng) -> QVector<QPointF>;
 
-    static auto PainterPath(const QVector<QPointF> &points) -> QPainterPath;
+    template <class T>
+    static auto PainterPath(const QVector<T> &points) -> QPainterPath;
 
     friend auto operator<< (QDataStream& dataStream, const VAbstractPiece& piece) -> QDataStream&;
     friend auto operator>> (QDataStream& dataStream, VAbstractPiece& piece) -> QDataStream&;
+
+    static auto PlaceLabelShape(const VLayoutPlaceLabel &label) -> PlaceLabelImg;
+    static auto LabelShapePath(const VLayoutPlaceLabel &label) -> QPainterPath;
+    static auto LabelShapePath(const PlaceLabelImg &shape) -> QPainterPath;
 
 protected:
     template <class T>
     static auto RemoveDublicates(const QVector<T> &points, bool removeFirstAndLast = true) -> QVector<T>;
     static auto IsEkvPointOnLine(const QPointF &iPoint, const QPointF &prevPoint, const QPointF &nextPoint) -> bool;
     static auto IsEkvPointOnLine(const VSAPoint &iPoint, const VSAPoint &prevPoint, const VSAPoint &nextPoint) -> bool;
+    template <class T>
+    static auto CheckPointOnLine(QVector<T> &points, const T &iPoint, const T &prevPoint, const T &nextPoint) -> bool;
 
     static auto IsItemContained(const QRectF &parentBoundingRect, const QVector<QPointF> &shape, qreal &dX,
                                 qreal &dY) -> bool;
     static auto CorrectPosition(const QRectF &parentBoundingRect, QVector<QPointF> points) -> QVector<QPointF>;
     static auto FindGrainlineGeometry(const VGrainlineData& geom, const VContainer *pattern, qreal &length,
                                       qreal &rotationAngle, QPointF &pos) -> bool;
+    template <class T>
+    static auto ComparePoints(QVector<T> &points, const T &p1, const T &p2, qreal accuracy) -> bool;
+    template <class T>
+    static auto CompareFirstAndLastPoints(QVector<T> &points, qreal accuracy) -> void;
+    template <class T>
+    static auto CheckLoop(const QVector<T> &points, bool &loopFound) -> QVector<T>;
+    template <class T>
+    static auto IntersectionPoint(QPointF crosPoint, const T &l1p1, const T &l1p2, const T &l2p1, const T &l2p2) -> T;
 private:
     QSharedDataPointer<VAbstractPieceData> d;
 };
 
 Q_DECLARE_TYPEINFO(VAbstractPiece, Q_MOVABLE_TYPE); // NOLINT
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+inline auto VAbstractPiece::CheckPointOnLine(QVector<T> &points, const T &iPoint, const T &prevPoint,
+                                             const T &nextPoint) -> bool
+{
+    if (not IsEkvPointOnLine(iPoint, prevPoint, nextPoint))
+    {
+        points.append(iPoint);
+        return false;
+    }
+
+    if (not points.isEmpty() && iPoint.TurnPoint())
+    {
+        points.last().SetTurnPoint(true);
+    }
+
+    if (not points.isEmpty() && iPoint.CurvePoint())
+    {
+        points.last().SetCurvePoint(true);
+    }
+
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <>
+inline auto VAbstractPiece::CheckPointOnLine<QPointF>(QVector<QPointF> &points, const QPointF &iPoint,
+                                                      const QPointF &prevPoint, const QPointF &nextPoint) -> bool
+{
+    if (not IsEkvPointOnLine(iPoint, prevPoint, nextPoint))
+    {
+        points.append(iPoint);
+        return false;
+    }
+
+    return true;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -151,7 +208,7 @@ Q_DECLARE_TYPEINFO(VAbstractPiece, Q_MOVABLE_TYPE); // NOLINT
  * @return corrected list.
  */
 template <class T>
-auto VAbstractPiece::CorrectEquidistantPoints(const QVector<T> &points, bool removeFirstAndLast) -> QVector<T>
+inline auto VAbstractPiece::CorrectEquidistantPoints(const QVector<T> &points, bool removeFirstAndLast) -> QVector<T>
 {
 //    DumpVector(points, QStringLiteral("input.json.XXXXXX")); // Uncomment for dumping test data
     if (points.size()<4)//Better don't check if only three points. We can destroy equidistant.
@@ -174,7 +231,7 @@ auto VAbstractPiece::CorrectEquidistantPoints(const QVector<T> &points, bool rem
     QVector<T> buf2;
     //Remove point on line
     for (qint32 i = 0; i < buf1.size(); ++i)
-    {// In this case we alwayse will have bounded intersection, so all is need is to check if point i is on line.
+    {// In this case we alwayse will have bounded intersection, so all is need is to check if point is on line.
      // Unfortunatelly QLineF::intersect can't be used in this case because of the floating-point accuraccy problem.
         if (prev == -1)
         {
@@ -213,9 +270,8 @@ auto VAbstractPiece::CorrectEquidistantPoints(const QVector<T> &points, bool rem
         const T &prevPoint = buf1.at(prev);
         const T &nextPoint = buf1.at(next);
 
-        if (not IsEkvPointOnLine(iPoint, prevPoint, nextPoint))
+        if (not CheckPointOnLine(buf2, iPoint, prevPoint, nextPoint))
         {
-            buf2.append(iPoint);
             prev = -1;
         }
     }
@@ -233,7 +289,7 @@ auto VAbstractPiece::CorrectEquidistantPoints(const QVector<T> &points, bool rem
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class T>
-auto VAbstractPiece::RemoveDublicates(const QVector<T> &points, bool removeFirstAndLast) -> QVector<T>
+inline auto VAbstractPiece::RemoveDublicates(const QVector<T> &points, bool removeFirstAndLast) -> QVector<T>
 {
     if (points.size() < 4)
     {
@@ -252,9 +308,8 @@ auto VAbstractPiece::RemoveDublicates(const QVector<T> &points, bool removeFirst
     {
         for (int j = i+1; j < points.size(); ++j)
         {
-            if (not VFuzzyComparePoints(points.at(i), points.at(j), accuracy))
+            if (not ComparePoints(p, points.at(i), points.at(j), accuracy))
             {
-                p.append(points.at(j));
                 i = j-1;
                 break;
             }
@@ -267,10 +322,7 @@ auto VAbstractPiece::RemoveDublicates(const QVector<T> &points, bool removeFirst
         {
             // Path can't be closed
             // See issue #686
-            if (VFuzzyComparePoints(ConstFirst(p), ConstLast(p), accuracy))
-            {
-                p.removeLast();
-            }
+            CompareFirstAndLastPoints(p, accuracy);
         }
     }
 
@@ -279,7 +331,163 @@ auto VAbstractPiece::RemoveDublicates(const QVector<T> &points, bool removeFirst
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class T>
-auto VAbstractPiece::IsInsidePolygon(const QVector<T> &path, const QVector<T> &polygon, qreal accuracy) -> bool
+inline auto VAbstractPiece::ComparePoints(QVector<T> &points, const T &p1, const T &p2, qreal accuracy) -> bool
+{
+    qreal testAccuracy = accuracy;
+    if (p2.TurnPoint())
+    {
+        testAccuracy = accuracyPointOnLine;
+    }
+
+    if (not VFuzzyComparePoints(p1, p2, testAccuracy))
+    {
+        points.append(p2);
+        return false;
+    }
+
+    if (not points.isEmpty() && p2.TurnPoint())
+    {
+        points.last().SetTurnPoint(true);
+    }
+
+    if (not points.isEmpty() && p2.CurvePoint())
+    {
+        points.last().SetCurvePoint(true);
+    }
+
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <>
+inline auto VAbstractPiece::ComparePoints(QVector<VRawSAPoint> &points, const VRawSAPoint &p1, const VRawSAPoint &p2,
+                                          qreal accuracy) -> bool
+{
+    qreal testAccuracy = accuracy;
+    if ((p1.Primary() && p2.Primary()) || p2.TurnPoint())
+    {
+        testAccuracy = accuracyPointOnLine;
+    }
+
+    if (not VFuzzyComparePoints(p1, p2, testAccuracy))
+    {
+        points.append(p2);
+        return false;
+    }
+
+    if (not points.isEmpty() && p2.TurnPoint())
+    {
+        points.last().SetTurnPoint(true);
+    }
+
+    if (not points.isEmpty() && p2.CurvePoint())
+    {
+        points.last().SetCurvePoint(true);
+    }
+
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <>
+inline auto VAbstractPiece::ComparePoints<QPointF>(QVector<QPointF> &points, const QPointF &p1, const QPointF &p2,
+                                                   qreal accuracy) -> bool
+{
+    if (not VFuzzyComparePoints(p1, p2, accuracy))
+    {
+        points.append(p2);
+        return false;
+    }
+
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+inline auto VAbstractPiece::CompareFirstAndLastPoints(QVector<T> &points, qreal accuracy) -> void
+{
+    if (points.isEmpty())
+    {
+        return;
+    }
+
+    const T& first = ConstFirst(points);
+    const T& last = ConstLast(points);
+
+    qreal testAccuracy = accuracy;
+    if (last.TurnPoint())
+    {
+        testAccuracy = accuracyPointOnLine;
+    }
+
+    if (VFuzzyComparePoints(first, last, testAccuracy))
+    {
+        points.removeLast();
+
+        if (last.TurnPoint())
+        {
+            points.last().SetTurnPoint(true);
+        }
+
+        if (last.CurvePoint())
+        {
+            points.last().SetCurvePoint(true);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <>
+inline auto VAbstractPiece::CompareFirstAndLastPoints(QVector<VRawSAPoint> &points, qreal accuracy) -> void
+{
+    if (points.isEmpty())
+    {
+        return;
+    }
+
+    const VRawSAPoint& first = ConstFirst(points);
+    const VRawSAPoint& last = ConstLast(points);
+
+    qreal testAccuracy = accuracy;
+    if ((first.Primary() && last.Primary()) || last.TurnPoint())
+    {
+        testAccuracy = accuracyPointOnLine;
+    }
+
+    if (VFuzzyComparePoints(first, last, testAccuracy))
+    {
+        points.removeLast();
+
+        if (last.TurnPoint())
+        {
+            points.last().SetTurnPoint(true);
+        }
+
+        if (last.CurvePoint())
+        {
+            points.last().SetCurvePoint(true);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <>
+inline auto VAbstractPiece::CompareFirstAndLastPoints<QPointF>(QVector<QPointF> &points, qreal accuracy) -> void
+{
+    if (points.isEmpty())
+    {
+        return;
+    }
+
+    if (VFuzzyComparePoints(ConstFirst(points), ConstLast(points), accuracy))
+    {
+        points.removeLast();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+inline auto VAbstractPiece::IsInsidePolygon(const QVector<T> &path, const QVector<T> &polygon, qreal accuracy) -> bool
 {
     // Edges must not intersect
     for (auto i = 0; i < path.count(); ++i)
@@ -338,6 +546,169 @@ auto VAbstractPiece::IsInsidePolygon(const QVector<T> &path, const QVector<T> &p
     QPolygonF allowancePolygon(polygon);
     return std::all_of(path.begin(), path.end(), [allowancePolygon](const T &point)
                        { return allowancePolygon.containsPoint(point, Qt::WindingFill); });
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+inline auto VAbstractPiece::PainterPath(const QVector<T> &points) -> QPainterPath
+{
+    QPainterPath path;
+    path.setFillRule(Qt::WindingFill);
+
+    if (not points.isEmpty())
+    {
+        path.moveTo(points.at(0));
+        for (qint32 i = 1; i < points.count(); ++i)
+        {
+            path.lineTo(points.at(i));
+        }
+        path.lineTo(points.at(0));
+    }
+
+    return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief CheckLoops seek and delete loops in equidistant.
+ * @param points vector of points of equidistant.
+ * @return vector of points of equidistant.
+ */
+template <class T>
+inline auto VAbstractPiece::CheckLoops(QVector<T> points) -> QVector<T>
+{
+//    DumpVector(points, QStringLiteral("input.json.XXXXXX")); // Uncomment for dumping test data
+
+    /*If we got less than 4 points no need seek loops.*/
+    if (points.size() < 4)
+    {
+        return points;
+    }
+
+    bool loopFound = false;
+    qint32 i;
+    const int maxLoops = 10000; // limit number of loops to be removed
+
+    for (i = 0; i < maxLoops; ++i)
+    {
+        points = CheckLoop(points, loopFound);
+        if (not loopFound)
+        {
+            break;
+        }
+    }
+
+//    DumpVector(ekvPoints, QStringLiteral("output.json.XXXXXX")); // Uncomment for dumping test data
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class T>
+inline auto VAbstractPiece::CheckLoop(const QVector<T> &points, bool &loopFound) -> QVector<T>
+{
+    loopFound = false;
+
+    const bool pathClosed = (ConstFirst(points) == ConstLast(points));
+
+    QVector<T> ekvPoints;
+    ekvPoints.reserve(points.size());
+
+    qint32 i;
+    for (i = 0; i < points.size(); ++i)
+    {
+        /*Last three points no need to check.*/
+        /*Triangle can not contain a loop*/
+        if (loopFound || i > points.size()-4)
+        {
+            ekvPoints.append(points.at(i));
+            continue;
+        }
+
+        enum LoopIntersectType { NoIntersection, BoundedIntersection, ParallelIntersection };
+
+        QPointF crosPoint;
+        LoopIntersectType status = NoIntersection;
+        const QLineF line1(points.at(i), points.at(i+1));
+
+        const int limit = pathClosed && i == 0 ? 2 : 1;
+        qint32 j;
+        for (j = i+2; j < points.size()-limit; ++j)
+        {
+            QLineF line2(points.at(j), points.at(j+1));
+
+            const QLineF::IntersectType intersect = Intersects(line1, line2, &crosPoint);
+            if (intersect == QLineF::NoIntersection)
+            { // According to the documentation QLineF::NoIntersection indicates that the lines do not intersect;
+                // i.e. they are parallel. But parallel also mean they can be on the same line.
+                // Method IsLineSegmentOnLineSegment will check it.
+                if (VGObject::IsLineSegmentOnLineSegment(line1, line2))
+                {// Now we really sure that segments are on the same line and have real intersections.
+                    status = ParallelIntersection;
+                    break;
+                }
+            }
+            else if (intersect == QLineF::BoundedIntersection)
+            {
+                status = BoundedIntersection;
+                break;
+            }
+        }
+
+        switch (status)
+        {
+        case ParallelIntersection:
+            /*We have found a loop.*/
+            ekvPoints.append(points.at(i));
+            ekvPoints.append(points.at(j+1));
+            i = j+1; // Skip a loop
+            loopFound = true;
+            break;
+        case BoundedIntersection:
+            ekvPoints.append(points.at(i));
+            ekvPoints.append(IntersectionPoint(crosPoint, points.at(i), points.at(i+1), points.at(j), points.at(j+1)));
+            i = j;
+            loopFound = true;
+            break;
+        case NoIntersection:
+            /*We have not found loop.*/
+            ekvPoints.append(points.at(i));
+            break;
+        default:
+            break;
+        }
+    }
+    return ekvPoints;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class T>
+inline auto VAbstractPiece::IntersectionPoint(QPointF crosPoint, const T &l1p1, const T &l1p2, const T &l2p1,
+                                              const T &l2p2) -> T
+{
+    T point(crosPoint);
+
+    if ((l1p1.CurvePoint() && l1p2.CurvePoint()) || (l2p1.CurvePoint() && l2p2.CurvePoint()) ||
+        (l1p1.CurvePoint() && l2p2.CurvePoint()))
+    {
+        point.SetCurvePoint(true);
+    }
+
+    if ((l1p1.TurnPoint() && l1p2.TurnPoint()) || (l2p1.TurnPoint() && l2p2.TurnPoint()) ||
+        (l1p1.TurnPoint() && l2p2.TurnPoint()))
+    {
+        point.SetTurnPoint(true);
+    }
+
+    return point;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<>
+inline auto VAbstractPiece::IntersectionPoint<QPointF>(QPointF crosPoint, const QPointF & /*unused*/,
+                                                       const QPointF & /*unused*/, const QPointF & /*unused*/,
+                                                       const QPointF & /*unused*/) -> QPointF
+{
+    return crosPoint;
 }
 
 #endif // VABSTRACTPIECE_H

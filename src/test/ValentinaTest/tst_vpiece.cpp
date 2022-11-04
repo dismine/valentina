@@ -44,22 +44,28 @@ TST_VPiece::TST_VPiece(QObject *parent)
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VPiece::Issue620()
 {
-    // See file <root>/src/app/share/collection/bugs/Issue_#620.vit
-    // Check main path
-    const Unit unit = Unit::Cm;
-    QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
-    VAbstractValApplication::VApp()->SetPatternUnits(unit);
+    try
+    {
+        // See file <root>/src/app/share/collection/bugs/Issue_#620.vit
+        // Check main path
+        const Unit unit = Unit::Cm;
+        QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
+        VAbstractValApplication::VApp()->SetPatternUnits(unit);
 
-    VPiece detail;
-    AbstractTest::PieceFromJson(QStringLiteral("://Issue_620/input.json"), detail, data);
+        VPiece detail;
+        AbstractTest::PieceFromJson(QStringLiteral("://Issue_620/input.json"), detail, data);
 
-    const QVector<QPointF> pointsEkv = detail.MainPathPoints(data.data());
+        QVector<QPointF> pointsEkv;
+        CastTo(detail.MainPathPoints(data.data()), pointsEkv);
+        QVector<QPointF> origPoints = AbstractTest::VectorFromJson<QPointF>(QStringLiteral("://Issue_620/output.json"));
 
-    QVector<QPointF> origPoints;
-    AbstractTest::VectorFromJson(QStringLiteral("://Issue_620/output.json"), origPoints);
-
-    // Begin comparison
-    Comparison(pointsEkv, origPoints);
+        // Begin comparison
+        ComparePathsDistance(pointsEkv, origPoints);
+    }
+    catch (const VException &e)
+    {
+        QFAIL(qUtf8Printable(e.ErrorMessage()));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -78,8 +84,7 @@ void TST_VPiece::TestSAPassmark_data()
         VPiecePassmarkData inputPassmarkData;
         AbstractTest::PassmarkDataFromJson(passmarkData, inputPassmarkData);
 
-        QVector<QPointF> inputSeamAllowance;
-        AbstractTest::VectorFromJson(seamAllowance, inputSeamAllowance);
+        QVector<QPointF> inputSeamAllowance = AbstractTest::VectorFromJson<QPointF>(seamAllowance);
 
         QVector<QLineF> inputOutputShape;
         AbstractTest::PassmarkShapeFromJson(shape, inputOutputShape);
@@ -105,5 +110,5 @@ void TST_VPiece::TestSAPassmark()
 
     VPassmark passmark(passmarkData);
 
-    Comparison(passmark.SAPassmark(seamAllowance, PassmarkSide::All), expectedResult);
+    CompareLinesDistance(passmark.SAPassmark(seamAllowance, PassmarkSide::All), expectedResult);
 }

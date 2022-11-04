@@ -32,7 +32,7 @@
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vplacelabelitem.h"
-#include "../vgeometry/varc.h"
+#include "../vgeometry/vlayoutplacelabel.h"
 #include "vcontainer.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/compatibility.h"
@@ -171,14 +171,14 @@ void VPiece::SetPath(const VPiecePath &path)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VPiece::MainPathPoints(const VContainer *data) const
+QVector<VLayoutPoint> VPiece::MainPathPoints(const VContainer *data) const
 {
 //    DumpPiece(*this, data, QStringLiteral("input.json.XXXXXX"));  // Uncomment for dumping test data
 
     VPiecePath mainPath = GetPath();
     mainPath.SetName(tr("Main path of piece %1").arg(GetName()));
 
-    QVector<QPointF> points = mainPath.PathPoints(data);
+    QVector<VLayoutPoint> points = mainPath.PathPoints(data);
     points = CheckLoops(CorrectEquidistantPoints(points));//A path can contains loops
 
 //    DumpVector(points, QStringLiteral("output.json.XXXXXX")); // Uncomment for dumping test data
@@ -186,9 +186,9 @@ QVector<QPointF> VPiece::MainPathPoints(const VContainer *data) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VPiece::UniteMainPathPoints(const VContainer *data) const
+QVector<VLayoutPoint> VPiece::UniteMainPathPoints(const VContainer *data) const
 {
-    QVector<QPointF> points = VPiecePath::NodesToPoints(data, GetUnitedPath(data), GetName());
+    QVector<VLayoutPoint> points = VPiecePath::NodesToPoints(data, GetUnitedPath(data), GetName());
     points = CheckLoops(CorrectEquidistantPoints(points));//A path can contains loops
     return points;
 }
@@ -200,7 +200,7 @@ QVector<VPointF> VPiece::MainPathNodePoints(const VContainer *data, bool showExc
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VPiece::SeamAllowancePoints(const VContainer *data) const
+QVector<VLayoutPoint> VPiece::SeamAllowancePoints(const VContainer *data) const
 {
     return SeamAllowancePointsWithRotation(data, -1);
 }
@@ -208,14 +208,15 @@ QVector<QPointF> VPiece::SeamAllowancePoints(const VContainer *data) const
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VPiece::CuttingPathPoints(const VContainer *data) const
 {
-    if (IsSeamAllowance() and not IsSeamAllowanceBuiltIn())
+    QVector<QPointF> points;
+    if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn())
     {
-        return SeamAllowancePoints(data);
+        CastTo(SeamAllowancePoints(data), points);
+        return points;
     }
-    else
-    {
-        return MainPathPoints(data);
-    }
+
+    CastTo(MainPathPoints(data), points);
+    return points;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -271,7 +272,9 @@ QVector<QPainterPath> VPiece::CurvesPainterPath(const VContainer *data) const
 //---------------------------------------------------------------------------------------------------------------------
 QPainterPath VPiece::MainPathPath(const VContainer *data) const
 {
-    return VPiece::MainPathPath(MainPathPoints(data));
+    QVector<QPointF> points;
+    CastTo(MainPathPoints(data), points);
+    return VPiece::MainPathPath(points);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -297,42 +300,6 @@ QPainterPath VPiece::MainPathPath(const QVector<QPointF> &points)
 QPainterPath VPiece::SeamAllowancePath(const VContainer *data) const
 {
     return SeamAllowancePath(SeamAllowancePoints(data));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QPainterPath VPiece::SeamAllowancePath(const QVector<QPointF> &points) const
-{
-    QPainterPath ekv;
-
-    // seam allowence
-    if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn())
-    {
-        if (not points.isEmpty())
-        {
-            ekv.moveTo(points.at(0));
-            for (qint32 i = 1; i < points.count(); ++i)
-            {
-                ekv.lineTo(points.at(i));
-            }
-
-#if !defined(V_NO_ASSERT)
-            // uncomment for debug
-//            QFont font;
-//            font.setPixelSize(1);
-//            for (qint32 i = 0; i < points.count(); ++i)
-//            {
-//                ekv.addEllipse(points.at(i).x()-accuracyPointOnLine, points.at(i).y()-accuracyPointOnLine,
-//                               accuracyPointOnLine*2., accuracyPointOnLine*2.);
-//                ekv.addText(points.at(i).x()-accuracyPointOnLine, points.at(i).y()-accuracyPointOnLine, font,
-//                            QString::number(i+1));
-//            }
-#endif
-
-            ekv.setFillRule(Qt::WindingFill);
-        }
-    }
-
-    return ekv;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -370,7 +337,7 @@ QPainterPath VPiece::PlaceLabelPath(const VContainer *data) const
             const auto label = data->GeometricObject<VPlaceLabelItem>(placeLabel);
             if (label->IsVisible())
             {
-                path.addPath(label->LabelShapePath());
+                path.addPath(LabelShapePath(VLayoutPlaceLabel(*label)));
             }
         }
         catch (const VExceptionBadId &e)
@@ -387,12 +354,16 @@ bool VPiece::IsSeamAllowanceValid(const VContainer *data) const
 {
     if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn())
     {
-        return VAbstractPiece::IsAllowanceValid(UniteMainPathPoints(data), SeamAllowancePoints(data));
+        QVector<QPointF> mainPathPoints;
+        CastTo<QPointF>(UniteMainPathPoints(data), mainPathPoints);
+
+        QVector<QPointF> seamAllowancePoints;
+        CastTo<QPointF>(SeamAllowancePoints(data), seamAllowancePoints);
+
+        return VAbstractPiece::IsAllowanceValid(mainPathPoints, seamAllowancePoints);
     }
-    else
-    {
-        return true;
-    }
+
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -662,13 +633,13 @@ const VGrainlineData &VPiece::GetGrainlineGeometry() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VPiece::SeamAllowancePointsWithRotation(const VContainer *data, int makeFirst) const
+QVector<VLayoutPoint> VPiece::SeamAllowancePointsWithRotation(const VContainer *data, int makeFirst) const
 {
     SCASSERT(data != nullptr);
 
     if (not IsSeamAllowance() || IsSeamAllowanceBuiltIn())
     {
-        return QVector<QPointF>();
+        return {};
     }
 
     const QVector<CustomSARecord> records = FilterRecords(GetValidRecords());

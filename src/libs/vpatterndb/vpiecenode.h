@@ -108,6 +108,9 @@ public:
 
     bool IsManualPassmarkLength() const;
     void SetManualPassmarkLength(bool value);
+
+    bool IsTurnPoint() const;
+    void SetTurnPoint(bool value);
 private:
     QSharedDataPointer<VPieceNodeData> d;
 };

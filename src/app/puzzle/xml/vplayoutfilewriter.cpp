@@ -35,6 +35,7 @@
 #include "../vmisc/projectversion.h"
 #include "../vlayout/vlayoutpiecepath.h"
 #include "../vlayout/vtextmanager.h"
+#include "../vgeometry/vlayoutplacelabel.h"
 
 namespace
 {
@@ -91,18 +92,6 @@ auto RectToString(const QRectF &r) -> QString
             NumberToString(r.y()) + ML::groupSep +
             NumberToString(r.width()) + ML::groupSep +
             NumberToString(r.height());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto MarkerShapeToString(const PlaceLabelImg &shape) -> QString
-{
-    QStringList s;
-    s.reserve(shape.size());
-    for (const auto& path : shape)
-    {
-        s.append(PathToString(path));
-    }
-    return s.join(ML::itemsSep);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -284,7 +273,11 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
                                   [](qreal z) noexcept {return VFuzzyComparePossibleNulls(z, 1.0);});
 
     writeStartElement(ML::TagSeamLine);
-    writeCharacters(PathToString(piece->GetContourPoints()));
+    QVector<VLayoutPoint> contourPoints = piece->GetContourPoints();
+    for (auto &point : contourPoints)
+    {
+        WriteLayoutPoint(point);
+    }
     writeEndElement();
 
     writeStartElement(ML::TagSeamAllowance);
@@ -294,7 +287,11 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
                                  [](bool builtin) noexcept {return not builtin;});
     if (piece->IsSeamAllowance() && not piece->IsSeamAllowanceBuiltIn())
     {
-        writeCharacters(PathToString(piece->GetSeamAllowancePoints()));
+        QVector<VLayoutPoint> seamAllowancePoints = piece->GetSeamAllowancePoints();
+        for (auto &point : seamAllowancePoints)
+        {
+            WriteLayoutPoint(point);
+        }
     }
     writeEndElement();
 
@@ -329,7 +326,13 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
         writeStartElement(ML::TagInternalPath);
         SetAttribute(ML::AttrCut, path.IsCutPath());
         SetAttribute(ML::AttrPenStyle, PenStyleToLineStyle(path.PenStyle()));
-        writeCharacters(PathToString(path.Points()));
+
+        QVector<VLayoutPoint> points = path.Points();
+        for (auto &point : points)
+        {
+            WriteLayoutPoint(point);
+        }
+
         writeEndElement();
     }
     writeEndElement();
@@ -339,12 +342,10 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
     for (const auto& label : placelabels)
     {
         writeStartElement(ML::TagMarker);
-        SetAttribute(ML::AttrTransform, TransformToString(label.rotationMatrix));
-        SetAttribute(ML::AttrType, static_cast<int>(label.type));
-        SetAttribute(ML::AttrCenter, PointToString(label.center));
-        SetAttribute(ML::AttrBox, RectToString(label.box));
-        writeCharacters(MarkerShapeToString(label.shape));
-
+        SetAttribute(ML::AttrTransform, TransformToString(label.RotationMatrix()));
+        SetAttribute(ML::AttrType, static_cast<int>(label.Type()));
+        SetAttribute(ML::AttrCenter, PointToString(label.Center()));
+        SetAttribute(ML::AttrBox, RectToString(label.Box()));
         writeEndElement();
     }
     writeEndElement();
@@ -424,4 +425,15 @@ void VPLayoutFileWriter::WriteSize(QSizeF size)
     SetAttribute(ML::AttrWidth, width);
     SetAttribute(ML::AttrLength, length);
     writeEndElement(); // size
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPLayoutFileWriter::WriteLayoutPoint(const VLayoutPoint &point) -> void
+{
+    writeStartElement(ML::TagPoint);
+    SetAttribute(ML::AttrX, point.x());
+    SetAttribute(ML::AttrY, point.y());
+    SetAttributeOrRemoveIf<bool>(ML::AttrTurnPoint, point.TurnPoint(), [](bool val) noexcept {return val;});
+    SetAttributeOrRemoveIf<bool>(ML::AttrCurvePoint, point.CurvePoint(), [](bool val) noexcept {return val;});
+    writeEndElement();
 }

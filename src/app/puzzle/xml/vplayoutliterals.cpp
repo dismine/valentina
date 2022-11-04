@@ -60,6 +60,7 @@ const QString TagLines               = QStringLiteral("lines"); // NOLINT(cert-e
 const QString TagLine                = QStringLiteral("line"); // NOLINT(cert-err58-cpp)
 const QString TagScale               = QStringLiteral("scale"); // NOLINT(cert-err58-cpp)
 const QString TagWatermark           = QStringLiteral("watermark"); // NOLINT(cert-err58-cpp)
+const QString TagPoint               = QStringLiteral("point"); // NOLINT(cert-err58-cpp)
 
 const QString AttrWarningSuperposition = QStringLiteral("warningSuperposition"); // NOLINT(cert-err58-cpp)
 const QString AttrWarningOutOfBound    = QStringLiteral("warningOutOfBound"); // NOLINT(cert-err58-cpp)
@@ -108,6 +109,10 @@ const QString AttrShowPreview          = QStringLiteral("showPreview"); // NOLIN
 const QString AttrPrintScheme          = QStringLiteral("printScheme"); // NOLINT(cert-err58-cpp)
 const QString AttrTileNumber           = QStringLiteral("tileNumber"); // NOLINT(cert-err58-cpp)
 const QString AttrZValue               = QStringLiteral("zValue"); // NOLINT(cert-err58-cpp)
+const QString AttrX                    = QStringLiteral("x"); // NOLINT(cert-err58-cpp)
+const QString AttrY                    = QStringLiteral("y"); // NOLINT(cert-err58-cpp)
+const QString AttrTurnPoint            = QStringLiteral("turnPoint"); // NOLINT(cert-err58-cpp)
+const QString AttrCurvePoint           = QStringLiteral("curvePoint"); // NOLINT(cert-err58-cpp)
 
 const QString atFrontStr               = QStringLiteral("atFront"); // NOLINT(cert-err58-cpp)
 const QString atRearStr                = QStringLiteral("atRear"); // NOLINT(cert-err58-cpp)

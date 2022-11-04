@@ -170,7 +170,7 @@ void TST_FindPoint::TestPointOfIntersectionCurves()
                                               static_cast<VCrossCurvesPoint>(vCross),
                                               static_cast<HCrossCurvesPoint>(hCross), &result);
 
-    Comparison(result, expect, accuracyPointOnLine);
+    ComparePointsDistance(result, expect, accuracyPointOnLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -211,8 +211,8 @@ void TST_FindPoint::TestTrueDarts()
 
     VToolTrueDarts::FindPoint(baseLineP1, baseLineP2, dartP1, dartP2, dartP3, p1, p2);
 
-    Comparison(p1, expectP1, accuracyPointOnLine);
-    Comparison(p2, expectP2, accuracyPointOnLine);
+    ComparePointsDistance(p1, expectP1, accuracyPointOnLine);
+    ComparePointsDistance(p2, expectP2, accuracyPointOnLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -239,7 +239,7 @@ void TST_FindPoint::TestLineIntersectAxis()
     QPointF resultPoint;
     VToolLineIntersectAxis::FindPoint(axis, line, &resultPoint);
 
-    Comparison(resultPoint, point, accuracyPointOnLine);
+    ComparePointsDistance(resultPoint, point, accuracyPointOnLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -272,7 +272,7 @@ void TST_FindPoint::TestTriangle()
     QPointF resultPoint;
     VToolTriangle::FindPoint(axisP1, axisP2, firstPoint, secondPoint, &resultPoint);
 
-    Comparison(point, resultPoint, accuracyPointOnLine);
+    ComparePointsDistance(point, resultPoint, accuracyPointOnLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -312,7 +312,7 @@ void TST_FindPoint::TestShoulderPoint()
 
     QPointF resultPoint = VToolShoulderPoint::FindPoint(p1, p2, pShoulder, length);
 
-    Comparison(point, resultPoint, accuracyPointOnLine);
+    ComparePointsDistance(point, resultPoint, accuracyPointOnLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -745,5 +745,5 @@ void TST_FindPoint::TestCurveIntersectAxis()
     QPointF resultPoint;
     VToolCurveIntersectAxis::FindPoint(basePoint, angle, curvePoints, &resultPoint);
 
-    Comparison(resultPoint, result, accuracyPointOnLine);
+    ComparePointsDistance(resultPoint, result, accuracyPointOnLine);
 }

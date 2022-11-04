@@ -329,11 +329,13 @@ void DialogPiecePath::ShowContextMenu(const QPoint &pos)
 
     QListWidgetItem *rowItem = ui->listWidget->item(row);
     SCASSERT(rowItem != nullptr);
-    VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+    auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 
     QAction *actionPassmark = nullptr;
     QAction *actionUniqueness = nullptr;
     QAction *actionReverse = nullptr;
+    QAction *actionTurnPoint = nullptr;
+
     if (rowNode.GetTypeTool() != Tool::NodePoint)
     {
         actionReverse = menu->addAction(tr("Reverse"));
@@ -353,6 +355,10 @@ void DialogPiecePath::ShowContextMenu(const QPoint &pos)
         actionUniqueness = menu->addAction(tr("Check uniqueness"));
         actionUniqueness->setCheckable(true);
         actionUniqueness->setChecked(rowNode.IsCheckUniqueness());
+
+        actionTurnPoint = menu->addAction(tr("Turn point"));
+        actionTurnPoint->setCheckable(true);
+        actionTurnPoint->setChecked(rowNode.IsTurnPoint());
     }
 
     QAction *actionExcluded = menu->addAction(tr("Excluded"));
@@ -390,6 +396,12 @@ void DialogPiecePath::ShowContextMenu(const QPoint &pos)
     else if (rowNode.GetTypeTool() == Tool::NodePoint && selectedAction == actionUniqueness)
     {
         rowNode.SetCheckUniqueness(not rowNode.IsCheckUniqueness());
+        rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+        rowItem->setText(GetNodeName(data, rowNode, IsShowNotch()));
+    }
+    else if (rowNode.GetTypeTool() == Tool::NodePoint && selectedAction == actionTurnPoint)
+    {
+        rowNode.SetTurnPoint(not rowNode.IsTurnPoint());
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
         rowItem->setText(GetNodeName(data, rowNode, IsShowNotch()));
     }

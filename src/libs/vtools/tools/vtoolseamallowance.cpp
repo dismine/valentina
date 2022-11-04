@@ -1391,7 +1391,7 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
                                                           this->getData());
     QFuture<QPainterPath > futurePassmarks = QtConcurrent::run(detail, &VPiece::PassmarksPath, this->getData());
 
-    QFuture<QVector<QPointF> > futureSeamAllowance;
+    QFuture<QVector<VLayoutPoint> > futureSeamAllowance;
     QFuture<bool> futureSeamAllowanceValid;
 
     if (detail.IsSeamAllowance())
@@ -1576,6 +1576,26 @@ void VToolSeamAllowance::ToggleExcludeState(quint32 id)
         if (node.GetId() == id && node.GetTypeTool() == Tool::NodePoint)
         {
             node.SetExcluded(not node.IsExcluded());
+            newDet.GetPath()[i] = node;
+
+            VAbstractApplication::VApp()->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_id));
+            return;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::ToggleTurnPointState(quint32 id)
+{
+    const VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
+    VPiece newDet = oldDet;
+
+    for (int i = 0; i< oldDet.GetPath().CountNodes(); ++i)
+    {
+        VPieceNode node = oldDet.GetPath().at(i);
+        if (node.GetId() == id && node.GetTypeTool() == Tool::NodePoint)
+        {
+            node.SetTurnPoint(not node.IsTurnPoint());
             newDet.GetPath()[i] = node;
 
             VAbstractApplication::VApp()->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_id));
@@ -1876,7 +1896,7 @@ void VToolSeamAllowance::InitNode(const VPieceNode &node, VMainGraphicsScene *sc
     {
         case (Tool::NodePoint):
         {
-            VNodePoint *tool = qobject_cast<VNodePoint*>(VAbstractPattern::getTool(node.GetId()));
+            auto *tool = qobject_cast<VNodePoint*>(VAbstractPattern::getTool(node.GetId()));
             SCASSERT(tool != nullptr);
 
             if (tool->parent() != parent)
@@ -1890,6 +1910,8 @@ void VToolSeamAllowance::InitNode(const VPieceNode &node, VMainGraphicsScene *sc
                         Qt::UniqueConnection);
                 connect(tool, &VNodePoint::Delete, parent, &VToolSeamAllowance::DeleteFromMenu, Qt::UniqueConnection);
                 connect(tool, &VNodePoint::ToggleExcludeState, parent, &VToolSeamAllowance::ToggleExcludeState,
+                        Qt::UniqueConnection);
+                connect(tool, &VNodePoint::ToggleTurnPointState, parent, &VToolSeamAllowance::ToggleTurnPointState,
                         Qt::UniqueConnection);
                 connect(tool, &VNodePoint::ToggleSeamAllowanceAngleType, parent,
                         &VToolSeamAllowance::ToggleNodePointAngleType, Qt::UniqueConnection);
@@ -2071,8 +2093,10 @@ auto VToolSeamAllowance::IsGrainlinePositionValid() const -> bool
 {
     QLineF grainLine = m_grainLine->Grainline();
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
-    const QVector<QPointF> contourPoints = detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn() ?
-                detail.SeamAllowancePoints(getData()) : detail.MainPathPoints(getData());
+    QVector<QPointF> contourPoints;
+    detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn()
+        ? CastTo(detail.SeamAllowancePoints(getData()), contourPoints)
+        : CastTo(detail.MainPathPoints(getData()), contourPoints);
 
     QVector<QPointF> points = VAbstractCurve::CurveIntersectLine(contourPoints, grainLine);
     if (not points.isEmpty())
