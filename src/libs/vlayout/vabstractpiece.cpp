@@ -50,9 +50,6 @@
 #include <QJsonDocument>
 #include <QtMath>
 
-const quint32 VAbstractPieceData::streamHeader = 0x05CDD73A; // CRC-32Q string "VAbstractPieceData"
-const quint16 VAbstractPieceData::classVersion = 3;
-
 const qreal maxL = 3.5;
 
 namespace

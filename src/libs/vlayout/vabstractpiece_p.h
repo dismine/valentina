@@ -51,54 +51,40 @@ class VAbstractPieceData : public QSharedData
 {
     Q_DECLARE_TR_FUNCTIONS(VAbstractPieceData) // NOLINT
 public:
-    VAbstractPieceData()
-    {}
+    VAbstractPieceData() = default;
 
-    VAbstractPieceData(const VAbstractPieceData &piece)
-        : QSharedData(piece),
-          m_name(piece.m_name),
-          m_forbidFlipping(piece.m_forbidFlipping),
-          m_forceFlipping(piece.m_forceFlipping),
-          m_seamAllowance(piece.m_seamAllowance),
-          m_seamAllowanceBuiltIn(piece.m_seamAllowanceBuiltIn),
-          m_hideMainPath(piece.m_hideMainPath),
-          m_width(piece.m_width),
-          m_mx(piece.m_mx),
-          m_my(piece.m_my),
-          m_priority(piece.m_priority),
-          m_uuid(piece.m_uuid)
-    {}
+    VAbstractPieceData(const VAbstractPieceData &piece) = default;
 
     ~VAbstractPieceData() = default;
 
-    friend QDataStream& operator<<(QDataStream& dataStream, const VAbstractPieceData& piece);
-    friend QDataStream& operator>>(QDataStream& dataStream, VAbstractPieceData& piece);
+    friend auto operator<<(QDataStream& dataStream, const VAbstractPieceData& piece) -> QDataStream&;
+    friend auto operator>>(QDataStream& dataStream, VAbstractPieceData& piece) -> QDataStream&;
 
-    QString m_name{tr("Detail")};
+    QString m_name{tr("Detail")}; // NOLINT (misc-non-private-member-variables-in-classes)
     /** @brief forbidFlipping forbid piece be mirrored in a layout. */
-    bool    m_forbidFlipping{false};
-    bool    m_forceFlipping{false};
-    bool    m_seamAllowance{false};
-    bool    m_seamAllowanceBuiltIn{false};
-    bool    m_hideMainPath{false};
-    qreal   m_width{0};
-    qreal   m_mx{0};
-    qreal   m_my{0};
-    uint    m_priority{0};
-    QUuid   m_uuid{QUuid::createUuid()};
+    bool    m_forbidFlipping{false}; // NOLINT (misc-non-private-member-variables-in-classes)
+    bool    m_forceFlipping{false}; // NOLINT (misc-non-private-member-variables-in-classes)
+    bool    m_seamAllowance{false}; // NOLINT (misc-non-private-member-variables-in-classes)
+    bool    m_seamAllowanceBuiltIn{false}; // NOLINT (misc-non-private-member-variables-in-classes)
+    bool    m_hideMainPath{false}; // NOLINT (misc-non-private-member-variables-in-classes)
+    qreal   m_width{0}; // NOLINT (misc-non-private-member-variables-in-classes)
+    qreal   m_mx{0}; // NOLINT (misc-non-private-member-variables-in-classes)
+    qreal   m_my{0}; // NOLINT (misc-non-private-member-variables-in-classes)
+    uint    m_priority{0}; // NOLINT (misc-non-private-member-variables-in-classes)
+    QUuid   m_uuid{QUuid::createUuid()}; // NOLINT (misc-non-private-member-variables-in-classes)
 
 private:
-    Q_DISABLE_ASSIGN(VAbstractPieceData)
+    Q_DISABLE_ASSIGN_MOVE(VAbstractPieceData) // NOLINT
 
-    static const quint32 streamHeader;
-    static const quint16 classVersion;
+    static constexpr quint32 streamHeader = 0x05CDD73A; // CRC-32Q string "VAbstractPieceData"
+    static constexpr quint16 classVersion = 3;
 };
 
 QT_WARNING_POP
 
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------
-inline QDataStream &operator<<(QDataStream &dataStream, const VAbstractPieceData &piece)
+inline auto operator<<(QDataStream &dataStream, const VAbstractPieceData &piece) -> QDataStream &
 {
     dataStream << VAbstractPieceData::streamHeader << VAbstractPieceData::classVersion;
 
@@ -123,7 +109,7 @@ inline QDataStream &operator<<(QDataStream &dataStream, const VAbstractPieceData
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QDataStream &operator>>(QDataStream &dataStream, VAbstractPieceData &piece)
+inline auto operator>>(QDataStream &dataStream, VAbstractPieceData &piece) -> QDataStream &
 {
     quint32 actualStreamHeader = 0;
     dataStream >> actualStreamHeader;
