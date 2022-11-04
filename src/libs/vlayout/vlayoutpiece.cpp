@@ -640,6 +640,7 @@ auto VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContainer *pat
     det.SetSAWidth(VAbstractValApplication::VApp()->toPixel(piece.GetSAWidth()));
     det.SetForbidFlipping(piece.IsForbidFlipping());
     det.SetForceFlipping(piece.IsForceFlipping());
+    det.SetSewLineOnDrawing(piece.IsSewLineOnDrawing());
     det.SetId(id);
 
     if (not futureSeamAllowanceValid.result())

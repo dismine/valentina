@@ -80,6 +80,7 @@ const QString AttrID                   = QStringLiteral("id"); // NOLINT(cert-er
 const QString AttrMirrored             = QStringLiteral("mirrored"); // NOLINT(cert-err58-cpp)
 const QString AttrForbidFlipping       = QStringLiteral("forbidFlipping"); // NOLINT(cert-err58-cpp)
 const QString AttrForceFlipping        = QStringLiteral("forceFlipping"); // NOLINT(cert-err58-cpp)
+const QString AttrSewLineOnDrawing     = QStringLiteral("sewLineOnDrawing"); // NOLINT(cert-err58-cpp)
 const QString AttrTransform            = QStringLiteral("transform"); // NOLINT(cert-err58-cpp)
 const QString AttrShowSeamline         = QStringLiteral("showSeamline"); // NOLINT(cert-err58-cpp)
 const QString AttrEnabled              = QStringLiteral("enabled"); // NOLINT(cert-err58-cpp)

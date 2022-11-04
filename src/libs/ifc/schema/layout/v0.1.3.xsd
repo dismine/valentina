@@ -220,6 +220,7 @@
                   <xs:attribute type="xs:boolean" name="mirrored"/>
                   <xs:attribute type="xs:boolean" name="forbidFlipping"/>
                   <xs:attribute type="xs:boolean" name="forceFlipping"/>
+                  <xs:attribute type="xs:boolean" name="sewLineOnDrawing"/>
                   <xs:attribute type="Transformation" name="transform"/>
                   <xs:attribute type="xs:string" name="gradationLabel"/>
                   <xs:attribute type="xs:unsignedInt" name="copyNumber"/>
@@ -413,6 +414,7 @@
                               <xs:attribute type="xs:boolean" name="mirrored"/>
                               <xs:attribute type="xs:boolean" name="forbidFlipping"/>
                               <xs:attribute type="xs:boolean" name="forceFlipping"/>
+                              <xs:attribute type="xs:boolean" name="sewLineOnDrawing"/>
                               <xs:attribute type="Transformation" name="transform"/>
                               <xs:attribute type="xs:string" name="gradationLabel"/>
                               <xs:attribute type="xs:unsignedInt" name="copyNumber"/>

@@ -72,12 +72,13 @@ public:
     qreal   m_my{0}; // NOLINT (misc-non-private-member-variables-in-classes)
     uint    m_priority{0}; // NOLINT (misc-non-private-member-variables-in-classes)
     QUuid   m_uuid{QUuid::createUuid()}; // NOLINT (misc-non-private-member-variables-in-classes)
+    bool    m_onDrawing{false}; // NOLINT (misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VAbstractPieceData) // NOLINT
 
     static constexpr quint32 streamHeader = 0x05CDD73A; // CRC-32Q string "VAbstractPieceData"
-    static constexpr quint16 classVersion = 3;
+    static constexpr quint16 classVersion = 4;
 };
 
 QT_WARNING_POP
@@ -104,6 +105,9 @@ inline auto operator<<(QDataStream &dataStream, const VAbstractPieceData &piece)
 
     // Added in classVersion = 3
     dataStream << piece.m_uuid;
+
+    // Added in classVersion = 4
+    dataStream << piece.m_onDrawing;
 
     return dataStream;
 }
@@ -152,6 +156,11 @@ inline auto operator>>(QDataStream &dataStream, VAbstractPieceData &piece) -> QD
     if (actualClassVersion >= 3)
     {
         dataStream >> piece.m_uuid;
+    }
+
+    if (actualClassVersion >= 4)
+    {
+        dataStream >> piece.m_onDrawing;
     }
 
     return dataStream;

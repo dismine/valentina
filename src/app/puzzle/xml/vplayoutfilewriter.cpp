@@ -259,6 +259,8 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
                                  [](bool forbid) noexcept {return not forbid;});
     SetAttributeOrRemoveIf<bool>(ML::AttrForceFlipping, piece->IsForceFlipping(),
                                  [](bool force) noexcept {return not force;});
+    SetAttributeOrRemoveIf<bool>(ML::AttrSewLineOnDrawing, piece->IsSewLineOnDrawing(),
+                                 [](bool value) noexcept {return not value;});
     SetAttribute(ML::AttrTransform, TransformToString(piece->GetMatrix()));
     SetAttributeOrRemoveIf<QString>(ML::AttrGradationLabel, piece->GetGradationId(),
                                     [](const QString &label) noexcept {return label.isEmpty();});

@@ -96,6 +96,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationDontUseNativeDialog
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternUndo, (QLatin1String("pattern/undo"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternForbidFlipping, (QLatin1String("pattern/forbidFlipping"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternForceFlipping, (QLatin1String("pattern/forceFlipping"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternSewLineOnDrawing, (QLatin1String("pattern/sewLineOnDrawing"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternHideMainPath, (QLatin1String("pattern/hideMainPath"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDoublePassmark, (QLatin1String("pattern/doublePassmark"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternDefaultSeamAllowance, (QLatin1String("pattern/defaultSeamAllowance"))) // NOLINT
@@ -920,6 +921,18 @@ void VCommonSettings::SetForceWorkpieceFlipping(bool value)
     {
         SetForbidWorkpieceFlipping(not value);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::GetSewLineOnDrawing() const -> bool
+{
+    return value(*settingPatternSewLineOnDrawing, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetSewLineOnDrawing(bool value)
+{
+    setValue(*settingPatternSewLineOnDrawing, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

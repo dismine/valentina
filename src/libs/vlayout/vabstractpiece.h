@@ -82,6 +82,9 @@ public:
     auto IsHideMainPath() const -> bool;
     void SetHideMainPath(bool value);
 
+    auto IsSewLineOnDrawing() const -> bool;
+    void SetSewLineOnDrawing(bool value);
+
     auto GetSAWidth() const -> qreal;
     void SetSAWidth(qreal value);
 

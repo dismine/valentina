@@ -85,6 +85,7 @@ extern const QString AttrID;
 extern const QString AttrMirrored;
 extern const QString AttrForbidFlipping;
 extern const QString AttrForceFlipping;
+extern const QString AttrSewLineOnDrawing;
 extern const QString AttrTransform;
 extern const QString AttrShowSeamline;
 extern const QString AttrEnabled;

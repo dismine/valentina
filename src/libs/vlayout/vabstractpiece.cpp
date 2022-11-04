@@ -1028,6 +1028,18 @@ void VAbstractPiece::SetHideMainPath(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VAbstractPiece::IsSewLineOnDrawing() const
+{
+    return d->m_onDrawing;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPiece::SetSewLineOnDrawing(bool value)
+{
+    d->m_onDrawing = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VAbstractPiece::GetSAWidth() const -> qreal
 {
     return d->m_width;

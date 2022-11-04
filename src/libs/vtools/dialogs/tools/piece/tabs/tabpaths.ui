@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>422</width>
-    <height>624</height>
+    <width>427</width>
+    <height>651</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -28,8 +28,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>394</width>
-        <height>612</height>
+        <width>407</width>
+        <height>631</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
@@ -80,6 +80,16 @@
              </property>
              <property name="text">
               <string>Hide main path</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBoxOnDrawing">
+             <property name="toolTip">
+              <string>Export to DXF-AAMA sew line on Draw layer </string>
+             </property>
+             <property name="text">
+              <string>On drawing</string>
              </property>
             </widget>
            </item>
@@ -1128,14 +1138,14 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>VPlainTextEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header location="global">vplaintextedit.h</header>
+  </customwidget>
+  <customwidget>
    <class>VLineEdit</class>
    <extends>QLineEdit</extends>
    <header>vlineedit.h</header>
-  </customwidget>
-  <customwidget>
-   <class>VPlainTextEdit</class>
-   <extends>QPlainTextEdit</extends>
-   <header>vplaintextedit.h</header>
   </customwidget>
  </customwidgets>
  <resources>

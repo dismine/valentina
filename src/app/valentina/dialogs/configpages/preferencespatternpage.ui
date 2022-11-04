@@ -197,6 +197,16 @@ This option will take an affect after restart.</string>
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="checkBoxSewLineOnDrawing">
+            <property name="toolTip">
+             <string>By default export to DXF-AAMA sew line on Draw layer for all new created workpieces</string>
+            </property>
+            <property name="text">
+             <string>Sew line on drawing</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="doublePassmarkCheck">
             <property name="toolTip">
              <string>Show a passmark both in the seam allowance and on the seam line.</string>

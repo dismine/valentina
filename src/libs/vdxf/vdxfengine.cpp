@@ -760,7 +760,9 @@ void VDxfEngine::ExportAAMADraw(const QSharedPointer<dx_ifaceBlock> &detailBlock
     if (detail.IsSeamAllowance() && not detail.IsHideMainPath() && not detail.IsSeamAllowanceBuiltIn())
     {
         QVector<VLayoutPoint> points = detail.GetMappedContourPoints();
-        if (DRW_Entity *e = AAMAPolygon(detail.GetMappedContourPoints(), *layer8, true))
+        const UTF8STRING &layer = not detail.IsSewLineOnDrawing() ? *layer14 : *layer8;
+
+        if (DRW_Entity *e = AAMAPolygon(points, layer, true))
         {
             detailBlock->ent.push_back(e);
         }

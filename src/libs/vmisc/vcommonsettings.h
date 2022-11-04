@@ -179,6 +179,9 @@ public:
     auto GetForceWorkpieceFlipping() const -> bool;
     void SetForceWorkpieceFlipping(bool value);
 
+    auto GetSewLineOnDrawing() const -> bool;
+    void SetSewLineOnDrawing(bool value);
+
     auto IsHideMainPath() const -> bool;
     void SetHideMainPath(bool value);
 

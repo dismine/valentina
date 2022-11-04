@@ -751,6 +751,7 @@
                         <xs:attribute name="bufferInLayout" type="xs:boolean"/>
                         <xs:attribute name="forbidFlipping" type="xs:boolean"/>
                         <xs:attribute name="forceFlipping" type="xs:boolean"/>
+                        <xs:attribute name="sewLineOnDrawing" type="xs:boolean"/>
                         <xs:attribute name="width" type="xs:string"/>
                         <xs:attribute name="bufferVisible" type="xs:string"/>
                         <xs:attribute name="bufferWidth" type="xs:string"/>

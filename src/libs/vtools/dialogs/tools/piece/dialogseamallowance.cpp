@@ -350,6 +350,7 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
 
     uiTabPaths->checkBoxForbidFlipping->setChecked(piece.IsForbidFlipping());
     uiTabPaths->checkBoxForceFlipping->setChecked(piece.IsForceFlipping());
+    uiTabPaths->checkBoxOnDrawing->setChecked(piece.IsSewLineOnDrawing());
     uiTabPaths->checkBoxSeams->setChecked(piece.IsSeamAllowance());
     uiTabPaths->checkBoxBuiltIn->setChecked(piece.IsSeamAllowanceBuiltIn());
     uiTabPaths->lineEditName->setText(piece.GetName());
@@ -2591,6 +2592,7 @@ VPiece DialogSeamAllowance::CreatePiece() const
     piece.SetPlaceLabels(GetListInternals<quint32>(uiTabPlaceLabels->listWidgetPlaceLabels));
     piece.SetForbidFlipping(uiTabPaths->checkBoxForbidFlipping->isChecked());
     piece.SetForceFlipping(uiTabPaths->checkBoxForceFlipping->isChecked());
+    piece.SetSewLineOnDrawing(uiTabPaths->checkBoxOnDrawing->isChecked());
     piece.SetSeamAllowance(uiTabPaths->checkBoxSeams->isChecked());
     piece.SetSeamAllowanceBuiltIn(uiTabPaths->checkBoxBuiltIn->isChecked());
     piece.SetHideMainPath(uiTabPaths->checkBoxHideMainPath->isChecked());
@@ -3045,10 +3047,10 @@ void DialogSeamAllowance::InitPieceTab()
         }
     });
 
-    uiTabPaths->checkBoxForbidFlipping->setChecked(
-                VAbstractApplication::VApp()->Settings()->GetForbidWorkpieceFlipping());
-    uiTabPaths->checkBoxForceFlipping->setChecked(
-                VAbstractApplication::VApp()->Settings()->GetForceWorkpieceFlipping());
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    uiTabPaths->checkBoxForbidFlipping->setChecked(settings->GetForbidWorkpieceFlipping());
+    uiTabPaths->checkBoxForceFlipping->setChecked(settings->GetForceWorkpieceFlipping());
+    uiTabPaths->checkBoxOnDrawing->setChecked(settings->GetSewLineOnDrawing());
 
     connect(uiTabPaths->lineEditUUID, &QLineEdit::textChanged, this, &DialogSeamAllowance::DetailUUIDChanged);
 

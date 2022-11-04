@@ -108,6 +108,7 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
     InitLabelDateTimeFormats();
 
     ui->forbidFlippingCheck->setChecked(settings->GetForbidWorkpieceFlipping());
+    ui->checkBoxSewLineOnDrawing->setChecked(settings->GetSewLineOnDrawing());
     ui->doublePassmarkCheck->setChecked(settings->IsDoublePassmark());
     ui->checkBoxHideMainPath->setChecked(settings->IsHideMainPath());
     ui->fontComboBoxLabelFont->setCurrentFont(settings->GetLabelFont());
@@ -162,6 +163,7 @@ auto PreferencesPatternPage::Apply() -> QStringList
     settings->SetDefaultSeamAllowance(ui->defaultSeamAllowance->value());
 
     settings->SetForbidWorkpieceFlipping(ui->forbidFlippingCheck->isChecked());
+    settings->SetSewLineOnDrawing(ui->checkBoxSewLineOnDrawing->isChecked());
     settings->SetHideMainPath(ui->checkBoxHideMainPath->isChecked());
     settings->SetLabelFont(ui->fontComboBoxLabelFont->currentFont());
 

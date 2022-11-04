@@ -946,6 +946,9 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
         initData.detail.SetForceFlipping(GetParametrBool(domElement, AttrForceFlipping,
                                          QString().setNum(VAbstractValApplication::VApp()
                                                           ->ValentinaSettings()->GetForceWorkpieceFlipping())));
+        initData.detail.SetSewLineOnDrawing(GetParametrBool(domElement, AttrSewLineOnDrawing,
+                                                         QString().setNum(VAbstractValApplication::VApp()
+                                                          ->ValentinaSettings()->GetSewLineOnDrawing())));
         initData.detail.SetInLayout(GetParametrBool(domElement, AttrInLayout, trueStr));
         initData.detail.SetUnited(GetParametrBool(domElement, VToolSeamAllowance::AttrUnited, falseStr));
         initData.detail.SetPriority(GetParametrUInt(domElement, VToolSeamAllowance::AttrPiecePriority, QChar('0')));
