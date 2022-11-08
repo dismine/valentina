@@ -1352,7 +1352,7 @@ void VToolSeamAllowance::UpdateExcludeState()
         const VPieceNode &node = detail.GetPath().at(i);
         if (node.GetTypeTool() == Tool::NodePoint)
         {
-            VNodePoint *tool = qobject_cast<VNodePoint*>(VAbstractPattern::getTool(node.GetId()));
+            auto *tool = qobject_cast<VNodePoint*>(VAbstractPattern::getTool(node.GetId()));
             SCASSERT(tool != nullptr);
 
             tool->SetExluded(node.IsExcluded());
@@ -1486,7 +1486,7 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
 void VToolSeamAllowance::SaveDialogChange(const QString &undoText)
 {
     SCASSERT(not m_dialog.isNull());
-    DialogSeamAllowance *dialogTool = qobject_cast<DialogSeamAllowance*>(m_dialog.data());
+    auto *dialogTool = qobject_cast<DialogSeamAllowance*>(m_dialog.data());
     SCASSERT(dialogTool != nullptr);
     const VPiece newDet = dialogTool->GetPiece();
     const VPiece oldDet = VAbstractTool::data.GetPiece(m_id);

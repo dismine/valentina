@@ -294,7 +294,7 @@ QString NameRegExp()
         QString decimalPoints;
         QString groupSeparators;
 
-        for(auto &locale : allLocales)
+        for(const auto &locale : allLocales)
         {
             if (not positiveSigns.contains(locale.positiveSign()))
             {

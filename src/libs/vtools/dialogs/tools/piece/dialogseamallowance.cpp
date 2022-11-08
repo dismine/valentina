@@ -2774,11 +2774,7 @@ bool DialogSeamAllowance::MainPathIsClockwise() const
     }
 
     const qreal res = VPiece::SumTrapezoids(points);
-    if (res < 0)
-    {
-        return true;
-    }
-    return false;
+    return res < 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
