@@ -728,7 +728,7 @@ auto VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details) -> bool
         ExportPieceText(detailBlock, detail);
         ExportAAMADrill(detailBlock, detail);
 
-        m_input->AddBlock(detailBlock.get());
+        m_input->AddBlock(detailBlock.data());
 
         QScopedPointer<DRW_Insert> insert(new DRW_Insert());
         insert->name = blockName.toStdString();
@@ -946,7 +946,7 @@ auto VDxfEngine::ExportToASTM(const QVector<VLayoutPiece> &details) -> bool
         ExportASTMDrill(detailBlock, detail);
         ExportASTMAnnotationText(detailBlock, detail);
 
-        m_input->AddBlock(detailBlock.get());
+        m_input->AddBlock(detailBlock.data());
 
         QScopedPointer<DRW_Insert> insert(new DRW_Insert());
         insert->name = blockName.toStdString();
