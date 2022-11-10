@@ -194,7 +194,7 @@ void AbstractTest::PassmarkShapeFromJson(const QString &json, QVector<QLineF> &s
     TestRoot(shapeObject, shapeKey, json);
 
     QJsonArray vectorArray = shapeObject[shapeKey].toArray();
-    for (auto && item : vectorArray)
+    for (auto item : vectorArray)
     {
         QJsonObject lineObject = item.toObject();
 

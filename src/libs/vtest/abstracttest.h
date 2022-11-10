@@ -154,7 +154,7 @@ inline auto AbstractTest::VectorFromJson(const QString &json) -> QVector<T>
     QVector<T> vector;
     vector.reserve(vectorArray.size());
 
-    for (auto && item : vectorArray)
+    for (auto item : vectorArray)
     {
         try
         {
