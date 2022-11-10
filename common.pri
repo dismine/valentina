@@ -525,7 +525,8 @@ CLANG_DEBUG_CXXFLAGS += \
     -Wdeclaration-after-statement \
     -Wdelegating-ctor-cycles \
     -Wdelete-incomplete \
-    -Wdelete-non-virtual-dtor \
+#   -Wdelete-non-virtual-dtor \ Disabled
+    -Wno-delete-non-abstract-non-virtual-dtor \
     -Wdeprecated \
     -Wdeprecated-declarations \
     -Wdeprecated-implementations \
