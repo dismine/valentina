@@ -93,7 +93,7 @@
     </message>
     <message>
         <source>Server name/IP</source>
-        <translation type="vanished">Імя / IP сервера</translation>
+        <translation type="vanished">Ім&apos;я / IP сервера</translation>
     </message>
     <message>
         <source>Secure connection</source>
@@ -109,7 +109,7 @@
     </message>
     <message>
         <source>Proxy address</source>
-        <translation type="vanished">Адресса проксі</translation>
+        <translation type="vanished">Адреса проксі</translation>
     </message>
     <message>
         <source>Proxy port</source>
@@ -129,7 +129,7 @@
     </message>
     <message>
         <source>User Name</source>
-        <translation type="vanished">Імя користувача</translation>
+        <translation type="vanished">Ім&apos;я користувача</translation>
     </message>
     <message>
         <source>Save password</source>
@@ -247,7 +247,7 @@
     </message>
     <message>
         <source>Default unit</source>
-        <translation type="vanished">Одиниця виміру по замовчуванню</translation>
+        <translation type="vanished">Одиниця виміру за замовчуванням</translation>
     </message>
     <message>
         <source>Centimeters</source>
@@ -327,7 +327,7 @@
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation type="vanished">Одиниці вимірювання по замовчуванню були оновлені і будуть використанні як основні наступного разу при створенні нової викрійки.</translation>
+        <translation type="vanished">Одиниці вимірювання за замовчуванням були оновлені і будуть використанні як основні наступного разу при створенні нової викрійки.</translation>
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
@@ -427,7 +427,7 @@
     </message>
     <message>
         <source>Cannot open your default browser</source>
-        <translation>Не можу відкрити браузер по замовчуванню</translation>
+        <translation>Не можу відкрити браузер за замовчуванням</translation>
     </message>
     <message>
         <source>Build revision:</source>
@@ -474,7 +474,7 @@
     </message>
     <message>
         <source>Cannot open your default browser</source>
-        <translation>Не можу відкрити браузер по замовчуванню</translation>
+        <translation>Не можу відкрити браузер за замовчуванням</translation>
     </message>
     <message>
         <source>Built on %1 at %2</source>
@@ -493,11 +493,11 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation>Імя:</translation>
+        <translation>Ім&apos;я:</translation>
     </message>
     <message>
         <source>Determine should an image built in or added as path to the file.</source>
-        <translation>Визначте, чи має зображення бути вбудованим або доданим як шлях до файлу.</translation>
+        <translation>Визначте, чи має зображення бути вбудованим, або доданим як шлях до файлу.</translation>
     </message>
     <message>
         <source>Built in</source>
@@ -699,7 +699,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Мастер формул</translation>
+        <translation>Майстер формул</translation>
     </message>
     <message>
         <source>Value</source>
@@ -834,7 +834,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Мастер формул</translation>
+        <translation>Майстер формул</translation>
     </message>
     <message>
         <source>Value</source>
@@ -961,7 +961,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Мастер формул</translation>
+        <translation>Майстер формул</translation>
     </message>
     <message>
         <source>Value</source>
@@ -2407,6 +2407,18 @@
     <message>
         <source>Preview calculations</source>
         <translation>Попередні розрахунки</translation>
+    </message>
+    <message>
+        <source>Pieces areas</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length to control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Area of piece</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5664,6 +5676,10 @@ Apply settings anyway?</source>
         <source>Invalid segment!</source>
         <translation>Недійсний сегмент!</translation>
     </message>
+    <message>
+        <source>Turn point</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -7206,6 +7222,10 @@ Apply settings anyway?</source>
         <source>Dimension W label</source>
         <comment>dimension</comment>
         <translation>Мітка виміру W</translation>
+    </message>
+    <message>
+        <source>Turn point</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10754,6 +10774,14 @@ This option will take an affect after restart.</source>
         <source>Opacity value by default</source>
         <translation>Значення непрозорості за замовчуванням</translation>
     </message>
+    <message>
+        <source>By default export to DXF-AAMA sew line on Draw layer for all new created workpieces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sew line on drawing</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Puzzle</name>
@@ -11255,7 +11283,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Wrong tag name &apos;%1&apos;.</source>
-        <translation>Не правильне ім&apos;я тегу &apos;%1&apos;.</translation>
+        <translation type="vanished">Не правильне ім&apos;я тегу &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Can&apos;t convert toUInt parameter</source>
@@ -11585,6 +11613,22 @@ This option will take an affect after restart.</source>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
         <translation>Крива &quot;%1&quot;. Довжина сегмента для вирізання (%2) завелика. Оптимізуйте його до мінімального значення.</translation>
     </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with cutting countour.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; not inside of cutting countour.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with internal path &apos;%3&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -11813,7 +11857,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Dark red</source>
-        <translation>Темно червоний</translation>
+        <translation>Темно-червоний</translation>
     </message>
     <message>
         <source>Green</source>
@@ -13468,6 +13512,22 @@ Do you want to save your changes?</source>
         <source>Insert…</source>
         <translation>Вставити…</translation>
     </message>
+    <message>
+        <source>Export to DXF-AAMA sew line on Draw layer </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On drawing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Short name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name used to generate a variable</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabPlaceLabels</name>
@@ -14115,6 +14175,10 @@ Do you want to save your changes?</source>
         <source>measurement</source>
         <translation>мірка</translation>
     </message>
+    <message>
+        <source>Wrong tag name &apos;%1&apos;.</source>
+        <translation type="unfinished">Не правильне ім&apos;я тегу &apos;%1&apos;.</translation>
+    </message>
 </context>
 <context>
     <name>VAbstractPieceData</name>
@@ -14150,7 +14214,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>dark red</source>
-        <translation>темно червоний</translation>
+        <translation>темно-червоний</translation>
     </message>
     <message>
         <source>dark green</source>
@@ -14158,7 +14222,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>dark blue</source>
-        <translation>темно синій</translation>
+        <translation>темно-синій</translation>
     </message>
     <message>
         <source>yellow</source>
@@ -14210,7 +14274,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>corn flower blue</source>
-        <translation>васельково-синій</translation>
+        <translation>волошковий</translation>
     </message>
     <message>
         <source>Edit wrong formula</source>
@@ -15514,6 +15578,10 @@ Do you want to save your changes?</source>
         <source>Box mark</source>
         <translation>Квадратна позначка</translation>
     </message>
+    <message>
+        <source>Turn point</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPApplication</name>
@@ -15699,7 +15767,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error in line %1. Marker shape is empty.</source>
-        <translation>Помилка в рядку %1. Маркер порожній.</translation>
+        <translation type="vanished">Помилка в рядку %1. Маркер порожній.</translation>
     </message>
     <message>
         <source>Unexpected tag %1 in line %2</source>
@@ -16330,6 +16398,14 @@ Do you want to save your changes?</source>
         <source>Top</source>
         <translation>На передній план</translation>
     </message>
+    <message>
+        <source>Has effect only when print in application. To export with tiles scheme use separate setting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPTileFactory</name>
@@ -16858,7 +16934,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VSplinePath</name>
     <message>
         <source>Not enough points to create the spline.</source>
-        <translation>Не достатньо точок для створення кривої.</translation>
+        <translation>Недостатньо точок для створення кривої.</translation>
     </message>
     <message>
         <source>This spline does not exist.</source>
@@ -16904,11 +16980,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source> on Fold</source>
-        <translation type="vanished">на згиб</translation>
+        <translation type="vanished">на згин</translation>
     </message>
     <message>
         <source>on Fold</source>
-        <translation type="vanished">на згиб</translation>
+        <translation type="vanished">на згин</translation>
     </message>
     <message>
         <source>Cut</source>
@@ -16920,7 +16996,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>on fold</source>
-        <translation type="vanished">на згиб</translation>
+        <translation type="vanished">на згин</translation>
     </message>
 </context>
 <context>
@@ -17376,7 +17452,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Tool to make point from x &amp; y of two other points</source>
-        <translation>Інструменд для створення точки з двух х и у координат двух інших точок</translation>
+        <translation>Інструмент для створення точки з двох х и у координат двох інших точок</translation>
     </message>
     <message>
         <source>Special point on shoulder</source>
@@ -17440,7 +17516,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Tool to make point from intersection two arcs</source>
-        <translation>Інструменд для створення точки перетину двух дуг</translation>
+        <translation>Інструмент для створення точки перетину двух дуг</translation>
     </message>
     <message>
         <source>Take</source>
@@ -17448,7 +17524,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Tool to make point from intersection two circles</source>
-        <translation>Інструменд для створення точки перетину двух кіл</translation>
+        <translation>Інструмент для створення точки перетину двух кіл</translation>
     </message>
     <message>
         <source>First circle radius</source>
@@ -19512,6 +19588,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <comment>function degTorad</comment>
         <translation>перетворює градуси в радіани</translation>
     </message>
+    <message>
+        <source>PieceArea_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VVITConverter</name>
@@ -20213,7 +20294,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Dark red</source>
         <comment>color</comment>
-        <translation>Темно червоний</translation>
+        <translation>Темно-червоний</translation>
     </message>
     <message>
         <source>Green</source>

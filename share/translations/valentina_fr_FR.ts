@@ -2408,6 +2408,18 @@
         <source>Preview calculations</source>
         <translation>Calculs préliminaires</translation>
     </message>
+    <message>
+        <source>Pieces areas</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length to control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Area of piece</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEllipticalArc</name>
@@ -5664,6 +5676,10 @@ Appliquer quand même les réglages ?</translation>
         <source>Invalid segment!</source>
         <translation>Segment invalide !</translation>
     </message>
+    <message>
+        <source>Turn point</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -7204,6 +7220,10 @@ Appliquer quand même les réglages ?</translation>
         <source>Dimension W label</source>
         <comment>dimension</comment>
         <translation>Etiquette de dimension W</translation>
+    </message>
+    <message>
+        <source>Turn point</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10751,6 +10771,14 @@ This option will take an affect after restart.</source>
         <source>Opacity value by default</source>
         <translation>Opacité par défaut</translation>
     </message>
+    <message>
+        <source>By default export to DXF-AAMA sew line on Draw layer for all new created workpieces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sew line on drawing</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Puzzle</name>
@@ -11251,7 +11279,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Wrong tag name &apos;%1&apos;.</source>
-        <translation>Mauvais nom de tag &apos;%1&apos;.</translation>
+        <translation type="vanished">Mauvais nom de tag &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Can&apos;t convert toUInt parameter</source>
@@ -11580,6 +11608,22 @@ This option will take an affect after restart.</source>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
         <translation>Courbe &apos;%1&apos;. La partie segmentée (%2) est de longueur trop élevée. Paramétrez une valeur au plus égale au maximum possible.</translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with cutting countour.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; not inside of cutting countour.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with internal path &apos;%3&apos;.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13464,6 +13508,22 @@ Voulez-vous enregistrer vos changements ?</translation>
         <source>Insert…</source>
         <translation>Insérer…</translation>
     </message>
+    <message>
+        <source>Export to DXF-AAMA sew line on Draw layer </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On drawing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Short name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name used to generate a variable</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabPlaceLabels</name>
@@ -14110,6 +14170,10 @@ Voulez-vous enregistrer vos changements ?</translation>
     <message>
         <source>measurement</source>
         <translation>mesures</translation>
+    </message>
+    <message>
+        <source>Wrong tag name &apos;%1&apos;.</source>
+        <translation type="unfinished">Mauvais nom de tag &apos;%1&apos;.</translation>
     </message>
 </context>
 <context>
@@ -15510,6 +15574,10 @@ Voulez-vous enregistrer vos changements ?</translation>
         <source>Box mark</source>
         <translation>Rectangle</translation>
     </message>
+    <message>
+        <source>Turn point</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPApplication</name>
@@ -15695,7 +15763,7 @@ Voulez-vous enregistrer vos changements ?</translation>
     </message>
     <message>
         <source>Error in line %1. Marker shape is empty.</source>
-        <translation>Erreur ligne %1. La forme du repère est manquante.</translation>
+        <translation type="vanished">Erreur ligne %1. La forme du repère est manquante.</translation>
     </message>
     <message>
         <source>Unexpected tag %1 in line %2</source>
@@ -16325,6 +16393,14 @@ Voulez-vous enregistrer les modifications ?</translation>
     <message>
         <source>Top</source>
         <translation>En avant-plan</translation>
+    </message>
+    <message>
+        <source>Has effect only when print in application. To export with tiles scheme use separate setting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sheet</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -19507,6 +19583,11 @@ Erreur de compatibilité du format .rld: actualFileVersion = %1 alors que fileVe
         <source>converts degrees to radian</source>
         <comment>function degTorad</comment>
         <translation>convertit les degrés en radians</translation>
+    </message>
+    <message>
+        <source>PieceArea_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

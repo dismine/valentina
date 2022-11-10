@@ -2400,6 +2400,18 @@
         <source>Preview calculations</source>
         <translation>Anteprima dei calcoli</translation>
     </message>
+    <message>
+        <source>Pieces areas</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length to control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Area of piece</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEllipticalArc</name>
@@ -5656,6 +5668,10 @@ Applicare la configurazione comunque?</translation>
         <source>Invalid segment!</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Turn point</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -7195,6 +7211,10 @@ Applicare la configurazione comunque?</translation>
     <message>
         <source>Dimension W label</source>
         <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Turn point</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10740,6 +10760,14 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
         <source>Opacity value by default</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>By default export to DXF-AAMA sew line on Draw layer for all new created workpieces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sew line on drawing</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Puzzle</name>
@@ -11241,7 +11269,7 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
     </message>
     <message>
         <source>Wrong tag name &apos;%1&apos;.</source>
-        <translation>Nome di etichetta errato &apos;%1&apos;.</translation>
+        <translation type="vanished">Nome di etichetta errato &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Can&apos;t convert toUInt parameter</source>
@@ -11569,6 +11597,22 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with cutting countour.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; not inside of cutting countour.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with internal path &apos;%3&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13454,6 +13498,22 @@ Vuoi salvare le tue modifiche?</translation>
         <source>Insert…</source>
         <translation>Inserisci…</translation>
     </message>
+    <message>
+        <source>Export to DXF-AAMA sew line on Draw layer </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On drawing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Short name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name used to generate a variable</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabPlaceLabels</name>
@@ -14096,6 +14156,10 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>measurement</source>
         <translation>Misure</translation>
+    </message>
+    <message>
+        <source>Wrong tag name &apos;%1&apos;.</source>
+        <translation type="unfinished">Nome di etichetta errato &apos;%1&apos;.</translation>
     </message>
 </context>
 <context>
@@ -15427,6 +15491,10 @@ Vuoi salvare le tue modifiche?</translation>
         <source>Box mark</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Turn point</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPApplication</name>
@@ -15608,10 +15676,6 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Error in line %1. Internal path shape is empty.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error in line %1. Marker shape is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -16240,6 +16304,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Has effect only when print in application. To export with tiles scheme use separate setting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sheet</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -19355,6 +19427,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>converts degrees to radian</source>
         <comment>function degTorad</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PieceArea_</source>
+        <comment>Left symbol _ in the name</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>

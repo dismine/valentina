@@ -2201,6 +2201,18 @@
         <source>Preview calculations</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Pieces areas</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length to control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Area of piece</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEllipticalArc</name>
@@ -5140,6 +5152,10 @@ Apply settings anyway?</source>
         <source>Invalid segment!</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Turn point</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPin</name>
@@ -6549,6 +6565,10 @@ Apply settings anyway?</source>
     <message>
         <source>Dimension W label</source>
         <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Turn point</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9565,6 +9585,14 @@ This option will take an affect after restart.</source>
         <source>Opacity value by default</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>By default export to DXF-AAMA sew line on Draw layer for all new created workpieces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sew line on drawing</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Puzzle</name>
@@ -9998,10 +10026,6 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Wrong tag name &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Can&apos;t convert toUInt parameter</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10327,6 +10351,22 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with cutting countour.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; not inside of cutting countour.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with internal path &apos;%3&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11990,6 +12030,22 @@ Do you want to save your changes?</source>
         <source>Insert…</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Export to DXF-AAMA sew line on Draw layer </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On drawing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Short name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name used to generate a variable</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabPlaceLabels</name>
@@ -12547,6 +12603,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>measurement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wrong tag name &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13742,6 +13802,10 @@ Do you want to save your changes?</source>
         <source>Box mark</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Turn point</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPApplication</name>
@@ -13912,10 +13976,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error in line %1. Internal path shape is empty.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error in line %1. Marker shape is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -14544,6 +14604,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Has effect only when print in application. To export with tiles scheme use separate setting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sheet</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -17474,6 +17542,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>converts degrees to radian</source>
         <comment>function degTorad</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PieceArea_</source>
+        <comment>Left symbol _ in the name</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
