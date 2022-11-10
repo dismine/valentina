@@ -814,7 +814,7 @@ void AbstractTest::DBFromJson(const QJsonObject &dbObject, QSharedPointer<VConta
     if (dbObject.contains(itemsKey))
     {
         QJsonArray items = dbObject[itemsKey].toArray();
-        for (auto && item : items)
+        for (auto item : items)
         {
             QJsonObject itemObject = item.toObject();
             GOType objectType;
