@@ -40,9 +40,9 @@ QT_WARNING_DISABLE_GCC("-Weffc++")
 // cppcheck-suppress unknownMacro
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 QT_WARNING_DISABLE_CLANG("-Wnon-virtual-dtor")
-QT_WARNING_DISABLE_CLANG("-Wdelete-non-abstract-non-virtual-dtor")
+QT_WARNING_DISABLE_CLANG("-Wdelete-non-virtual-dtor")
 
-class VRawSAPoint : public VLayoutPoint
+class VRawSAPoint final : public VLayoutPoint
 {
 public:
     Q_DECL_CONSTEXPR VRawSAPoint() = default;

@@ -42,12 +42,12 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 QT_WARNING_DISABLE_CLANG("-Wnon-virtual-dtor")
-QT_WARNING_DISABLE_CLANG("-Wdelete-non-abstract-non-virtual-dtor")
+QT_WARNING_DISABLE_CLANG("-Wdelete-non-virtual-dtor")
 
 /**
  * @brief The VSAPoint class seam allowance point
  */
-class VSAPoint : public VLayoutPoint
+class VSAPoint final : public VLayoutPoint
 {
 public:
     QT_WARNING_PUSH
