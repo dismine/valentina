@@ -37,6 +37,7 @@
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
+// cppcheck-suppress unknownMacro
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 QT_WARNING_DISABLE_CLANG("-Wnon-virtual-dtor")
 

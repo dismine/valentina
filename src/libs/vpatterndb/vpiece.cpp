@@ -1113,6 +1113,7 @@ VPassmark VPiece::CreatePassmark(const QVector<VPieceNode> &path, int previousIn
     passmarkData.id = path.at(passmarkIndex).GetId();
     passmarkData.globalPassmarkLength = ToPixel(GlobalPassmarkLength(data), *data->GetPatternUnit());
 
+    // cppcheck-suppress unknownMacro
     QT_WARNING_POP
 
     return VPassmark(passmarkData);
