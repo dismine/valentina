@@ -61,6 +61,9 @@
 #include "../vlayout/dialogs/dialoglayoutscale.h"
 #include "../vmisc/dialogs/dialogselectlanguage.h"
 
+#include "../vpatterndb/variables/vincrement.h"
+#include "../vpatterndb/variables/vmeasurement.h"
+
 #include "../vtools/undocommands/image/addbackgroundimage.h"
 #include "../vtools/undocommands/image/deletebackgroundimage.h"
 #include "../ifc/xml/utils.h"

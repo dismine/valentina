@@ -34,6 +34,7 @@
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/floatItemData/vpatternlabeldata.h"
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
+#include "../vpatterndb/variables/vincrement.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vplacelabelitem.h"

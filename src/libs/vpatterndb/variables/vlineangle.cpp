@@ -32,9 +32,9 @@
 #include <QMessageLogger>
 #include <QPointF>
 #include <QString>
+#include <QtMath>
 
 #include "../vmisc/def.h"
-#include "../vmisc/vmath.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
 #include "vinternalvariable.h"

@@ -40,6 +40,7 @@
 #include "../vpatterndb/vpiece.h"
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "../vpatterndb/calculator.h"
+#include "../vpatterndb/variables/vmeasurement.h"
 #include "../tools/dialogtool.h"
 
 #include <QDir>

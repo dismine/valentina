@@ -38,6 +38,8 @@
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpiecepath.h"
 #include "../vpatterndb/calculator.h"
+#include "../vpatterndb/variables/vincrement.h"
+#include "../vpatterndb/variables/vmeasurement.h"
 #include "visualization/path/vistoolpiece.h"
 #include "visualization/path/vispiecespecialpoints.h"
 #include "dialogpiecepath.h"

@@ -41,6 +41,7 @@
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/pmsystems.h"
 #include "../vpatterndb/measurements.h"
+#include "../vpatterndb/variables/vmeasurement.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vvitconverter.h"
 #include "../ifc/xml/vvstconverter.h"

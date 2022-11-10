@@ -37,7 +37,6 @@ HEADERS += \
     $$PWD/vcontainer.h \
     $$PWD/stable.h \
     $$PWD/calculator.h \
-    $$PWD/variables.h \
     $$PWD/vnodedetail.h \
     $$PWD/vnodedetail_p.h \
     $$PWD/vtranslatevars.h \

@@ -36,6 +36,13 @@
 #include "../qmuparser/qmutokenparser.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vpatterndb/calculator.h"
+#include "../vpatterndb/variables/vincrement.h"
+#include "../vpatterndb/variables/vlinelength.h"
+#include "../vpatterndb/variables/vlineangle.h"
+#include "../vpatterndb/variables/vcurveangle.h"
+#include "../vpatterndb/variables/vcurvelength.h"
+#include "../vpatterndb/variables/vcurveclength.h"
+#include "../vpatterndb/variables/varcradius.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
 
 #include <QFileDialog>

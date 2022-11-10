@@ -58,6 +58,7 @@
 #include "../vpatterndb/variables/varcradius.h"
 #include "../vpatterndb/variables/vcurveangle.h"
 #include "../vpatterndb/variables/vcurvelength.h"
+#include "../vpatterndb/variables/vcurveclength.h"
 #include "../vpatterndb/variables/vincrement.h"
 #include "../vpatterndb/variables/vlineangle.h"
 #include "../vpatterndb/variables/vlinelength.h"

@@ -29,6 +29,7 @@
 #include "dialogpiecepath.h"
 #include "ui_dialogpiecepath.h"
 #include "../vpatterndb/vpiecenode.h"
+#include "../vpatterndb/variables/vincrement.h"
 #include "visualization/path/vistoolpiecepath.h"
 #include "../../../tools/vtoolseamallowance.h"
 #include "../../support/dialogeditwrongformula.h"

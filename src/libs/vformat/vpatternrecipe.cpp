@@ -37,6 +37,8 @@
 #include "../vgeometry/vsplinepath.h"
 #include "../vgeometry/vcubicbezierpath.h"
 #include "../vpatterndb/calculator.h"
+#include "../vpatterndb/variables/vincrement.h"
+#include "../vpatterndb/variables/vmeasurement.h"
 
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolalongline.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolbisector.h"

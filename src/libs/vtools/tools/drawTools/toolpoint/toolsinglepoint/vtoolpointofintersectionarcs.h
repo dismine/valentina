@@ -43,6 +43,7 @@
 #include "vtoolsinglepoint.h"
 
 template <class T> class QSharedPointer;
+class VArc;
 
 struct VToolPointOfIntersectionArcsInitData : VToolSinglePointInitData
 {
