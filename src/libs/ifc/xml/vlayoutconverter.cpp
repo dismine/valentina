@@ -49,12 +49,9 @@ namespace
 {
 // The list of all string we use for conversion
 // Better to use global variables because repeating QStringLiteral blows up code size
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPieceTag, (QLatin1String("piece"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSeamLineTag, (QLatin1String("seamLine"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSeamAllowanceTag, (QLatin1String("seamAllowance"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strInternalPathsTag, (QLatin1String("internalPaths"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strInternalPathTag, (QLatin1String("internalPath"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMarkersTag, (QLatin1String("markers"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMarkerTag, (QLatin1String("marker"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPointTag, (QLatin1String("point"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrX, (QLatin1String("x"))) // NOLINT
