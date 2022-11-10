@@ -34,6 +34,7 @@
 #include <QPointF>
 #include <QDebug>
 #include <QCoreApplication>
+#include <QPainterPath>
 
 #include "../vmisc/compatibility.h"
 #include "../vgeometry/vgobject.h"
