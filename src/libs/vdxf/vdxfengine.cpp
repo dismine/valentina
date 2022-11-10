@@ -1259,7 +1259,7 @@ auto VDxfEngine::FromUnicodeToCodec(const QString &str, QTextCodec *codec) -> st
 auto VDxfEngine::GetFileNameForLocale() const -> std::string
 {
 #if defined(Q_OS_WIN)
-    return VDxfEngine::FromUnicodeToCodec(fileName, QTextCodec::codecForLocale());
+    return VDxfEngine::FromUnicodeToCodec(m_fileName, QTextCodec::codecForLocale());
 #else
     return m_fileName.toStdString();
 #endif
