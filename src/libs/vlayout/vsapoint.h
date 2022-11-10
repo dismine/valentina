@@ -42,7 +42,6 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 QT_WARNING_DISABLE_CLANG("-Wnon-virtual-dtor")
-QT_WARNING_DISABLE_CLANG("-Wdelete-non-virtual-dtor")
 
 /**
  * @brief The VSAPoint class seam allowance point
@@ -80,7 +79,7 @@ public:
     Q_DECL_RELAXED_CONSTEXPR auto MaxLocalSA(qreal width) const -> qreal;
     Q_DECL_RELAXED_CONSTEXPR auto PassmarkLength(qreal width) const -> qreal;
 
-    auto toJson() const -> QJsonObject override;
+    auto toJson() const -> QJsonObject;
 
     static constexpr qreal passmarkFactor{0.5};
     static constexpr qreal maxPassmarkLength{MmToPixel(10.)};

@@ -40,7 +40,6 @@ QT_WARNING_DISABLE_GCC("-Weffc++")
 // cppcheck-suppress unknownMacro
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 QT_WARNING_DISABLE_CLANG("-Wnon-virtual-dtor")
-QT_WARNING_DISABLE_CLANG("-Wdelete-non-virtual-dtor")
 
 class VRawSAPoint final : public VLayoutPoint
 {
@@ -58,7 +57,7 @@ public:
     Q_DECL_CONSTEXPR auto Primary() const -> bool;
     Q_DECL_RELAXED_CONSTEXPR void SetPrimary(bool primary);
 
-    auto toJson() const -> QJsonObject override;
+    auto toJson() const -> QJsonObject;
 
 private:
     bool m_loopPoint{false};

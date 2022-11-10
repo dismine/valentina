@@ -41,7 +41,6 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 QT_WARNING_DISABLE_CLANG("-Wnon-virtual-dtor")
-QT_WARNING_DISABLE_CLANG("-Wdelete-non-virtual-dtor")
 
 class VLayoutPoint : public QPointF
 {
@@ -56,7 +55,7 @@ public:
     Q_DECL_RELAXED_CONSTEXPR void SetTurnPoint(bool newTurnPoint);
     Q_DECL_RELAXED_CONSTEXPR void SetCurvePoint(bool newCurvePoint);
 
-    virtual auto toJson() const -> QJsonObject;
+    auto toJson() const -> QJsonObject;
 
 private:
     bool m_turnPoint{false};
