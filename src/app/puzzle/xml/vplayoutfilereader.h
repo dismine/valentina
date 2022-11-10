@@ -40,7 +40,7 @@ Q_DECLARE_LOGGING_CATEGORY(MLReader) // NOLINT
 
 struct TextLine;
 struct VLayoutPassmark;
-struct VLayoutPlaceLabel;
+class VLayoutPlaceLabel;
 class VLayoutPiecePath;
 class VTextManager;
 class VLayoutPoint;
