@@ -54,6 +54,8 @@ DialogFinalMeasurements::DialogFinalMeasurements(VPattern *doc, QWidget *parent)
     setWindowFlags(Qt::Window);
 #endif
 
+    m_data.FillPiecesAreas(VAbstractValApplication::VApp()->patternUnits());
+
     ui->lineEditName->setClearButtonEnabled(true);
 
     ui->lineEditFind->installEventFilter(this);
@@ -449,6 +451,7 @@ void DialogFinalMeasurements::Fx()
     dialog->setWindowTitle(tr("Edit measurement"));
     dialog->SetFormula(VTranslateVars::TryFormulaFromUser(ui->plainTextEditFormula->toPlainText(),
                                                           VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+    dialog->ShowPieceArea(true);
     const QString postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
     dialog->setPostfix(postfix);//Show unit in dialog lable (cm, mm or inch)
 
@@ -466,6 +469,7 @@ void DialogFinalMeasurements::Fx()
 void DialogFinalMeasurements::FullUpdateFromFile()
 {
     m_data = m_doc->GetCompleteData();
+    m_data.FillPiecesAreas(VAbstractValApplication::VApp()->patternUnits());
     m_measurements = m_doc->GetFinalMeasurements();
 
     FillFinalMeasurements();

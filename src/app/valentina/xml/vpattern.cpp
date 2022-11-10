@@ -532,7 +532,7 @@ void VPattern::LiteParseIncrements()
 
         data->ClearUniqueIncrementNames();
 
-        Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 10, "Check that you used all types");
+        Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 11, "Check that you used all types");
         data->ClearVariables(VarType::Increment);
         data->ClearVariables(VarType::IncrementSeparator);
 
@@ -929,6 +929,7 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
         initData.id = GetParametrId(domElement);
         initData.detail.SetName(GetParametrString(domElement, AttrName, tr("Detail")));
         initData.detail.SetUUID(GetParametrEmptyString(domElement, AttrUUID));
+        initData.detail.SetShortName(GetParametrEmptyString(domElement, AttrShortName).left(25));
         initData.detail.SetGradationLabel(GetParametrEmptyString(domElement, AttrGradationLabel));
         initData.detail.SetMx(VAbstractValApplication::VApp()
                               ->toPixel(GetParametrDouble(domElement, AttrMx, QStringLiteral("0.0"))));
@@ -4446,13 +4447,14 @@ void VPattern::PrepareForParse(const Document &parse)
     }
     else if (parse == Document::LiteParse || parse == Document::FullLiteParse)
     {
-        Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 10, "Check that you used all types");
-        QVector<VarType> types({VarType::LineAngle,
-                                VarType::LineLength,
-                                VarType::CurveLength,
-                                VarType::CurveCLength,
-                                VarType::ArcRadius,
-                                VarType::CurveAngle});
+        Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 11, "Check that you used all types");
+        QVector<VarType> types{VarType::LineAngle,
+                               VarType::LineLength,
+                               VarType::CurveLength,
+                               VarType::CurveCLength,
+                               VarType::ArcRadius,
+                               VarType::CurveAngle,
+                               VarType::PieceArea};
         if (parse == Document::FullLiteParse)
         {
             types.append(VarType::Increment);

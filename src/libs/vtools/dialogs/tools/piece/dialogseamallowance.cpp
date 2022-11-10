@@ -357,6 +357,7 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     uiTabPaths->checkBoxBuiltIn->setChecked(piece.IsSeamAllowanceBuiltIn());
     uiTabPaths->lineEditName->setText(piece.GetName());
     uiTabPaths->lineEditUUID->setText(piece.GetUUID().toString());
+    uiTabPaths->lineEditShortName->setText(piece.GetShortName());
     uiTabPaths->lineEditGradationLabel->setText(piece.GetGradationLabel());
     uiTabPaths->spinBoxPriority->setValue(static_cast<int>(piece.GetPriority()));
 
@@ -2600,6 +2601,7 @@ VPiece DialogSeamAllowance::CreatePiece() const
     piece.SetHideMainPath(uiTabPaths->checkBoxHideMainPath->isChecked());
     piece.SetName(uiTabPaths->lineEditName->text());
     piece.SetUUID(uiTabPaths->lineEditUUID->text());
+    piece.SetShortName(uiTabPaths->lineEditShortName->text());
     piece.SetGradationLabel(uiTabPaths->lineEditGradationLabel->text());
     piece.SetPriority(static_cast<uint>(uiTabPaths->spinBoxPriority->value()));
     piece.SetFormulaSAWidth(GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidth), m_saWidth);
@@ -3025,6 +3027,9 @@ void DialogSeamAllowance::InitMainPathTab()
 void DialogSeamAllowance::InitPieceTab()
 {
     connect(uiTabPaths->lineEditName, &QLineEdit::textChanged, this, &DialogSeamAllowance::NameDetailChanged);
+
+    uiTabPaths->lineEditShortName->setValidator(
+        new QRegularExpressionValidator(QRegularExpression(VPiece::ShortNameRegExp()), this));
 
     uiTabPaths->lineEditName->setClearButtonEnabled(true);
     uiTabPaths->lineEditName->setText(GetDefaultPieceName());

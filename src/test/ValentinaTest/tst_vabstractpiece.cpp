@@ -29,6 +29,8 @@
 #include "tst_vabstractpiece.h"
 #include "../vlayout/vabstractpiece.h"
 #include "../vlayout/vrawsapoint.h"
+#include "../vgeometry/varc.h"
+#include "../vgeometry/vpointf.h"
 
 #include <QPointF>
 #include <QVector>
@@ -377,6 +379,57 @@ void TST_VAbstractPiece::SumTrapezoids() const
     Case3();
     Case4();
     Case5();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractPiece::TestAreaCalculation_data()
+{
+    QTest::addColumn<QVector<QPointF>>("path");
+    QTest::addColumn<qreal>("excpectedArea");
+
+    {
+    QVector<QPointF> rect
+    {
+         QPointF(),
+         QPointF(100, 0),
+         QPointF(100, 50),
+         QPointF(0, 50),
+         QPointF()
+    };
+
+    QTest::newRow("Rectangle 100 x 50") << rect << 100.0 * 50.0;
+    }
+
+    {
+    VArc circle(VPointF(100, 100, QChar('C'), 0, 0), 100, 35, 35);
+    circle.SetApproximationScale(maxCurveApproximationScale);
+    QVector<QPointF> circlePath = circle.GetPoints();
+    if (not circlePath.isEmpty() && not VFuzzyComparePoints(ConstFirst(circlePath), ConstLast(circlePath)))
+    {
+        circlePath.append(ConstFirst(circlePath));
+    }
+    QTest::newRow("Circle radis 100") << circlePath << M_PI * pow(100, 2);
+    }
+
+    {
+    VPointF sectorCenter(100, 100, QChar('C'), 0, 0);
+    VArc sector(sectorCenter, 100, 15, 45);
+    sector.SetApproximationScale(maxCurveApproximationScale);
+    QVector<QPointF> sectorPath = sector.GetPoints();
+    sectorPath.append(sectorCenter.toQPointF());
+    sectorPath.append(ConstFirst(sectorPath));
+    QTest::newRow("Sector radius 100, 30 degree") << sectorPath << (M_PI * pow(100, 2) * 30.0) / 360.0;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractPiece::TestAreaCalculation() const
+{
+    QFETCH(QVector<QPointF>, path);
+    QFETCH(qreal, excpectedArea);
+
+    const qreal result = qAbs(VAbstractPiece::SumTrapezoids(path)/2.0);
+    QVERIFY(qAbs(result - excpectedArea) < MmToPixel(1.0));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

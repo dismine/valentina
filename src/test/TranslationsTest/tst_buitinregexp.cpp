@@ -170,6 +170,7 @@ void TST_BuitInRegExp::TestCheckUnderlineExists_data()
     data.insert(c1LengthSplPath, false);
     data.insert(c2LengthSplPath, false);
     data.insert(rotationElArc_, true);
+    data.insert(pieceArea_, true);
 
     //Catch case when new internal variable appears.
     QCOMPARE(data.size(), builInVariables.size());

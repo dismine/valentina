@@ -72,6 +72,7 @@ public:
     void SetMeasurementsMode();
     void SetIncrementsMode();
     void SetPreviewCalculationsMode();
+    void ShowPieceArea(bool show) const;
 public slots:
     virtual void DialogAccepted();
     virtual void DialogRejected();
@@ -90,6 +91,7 @@ public slots:
     void AngleLines();
     void Increments();
     void PreviewCalculations();
+    void PieceArea();
     void Functions();
 signals:
     /**
@@ -144,7 +146,8 @@ private:
     void ShowFunctions();
     void ShowIncrementsInPreviewCalculation(bool show);
 
-    void SetDescription(const QString &name, qreal value, bool specialUnits, const QString &description);
+    void SetDescription(const QString &name, qreal value, bool specialUnits, const QString &description,
+                        bool square = false);
 
     auto Eval(const FormulaData &formulaData, bool &flag) -> qreal;
 };

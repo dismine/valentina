@@ -49,6 +49,7 @@ const QString AttrType        = QStringLiteral("type");
 const QString AttrMx          = QStringLiteral("mx");
 const QString AttrMy          = QStringLiteral("my");
 const QString AttrName        = QStringLiteral("name");
+const QString AttrShortName   = QStringLiteral("shortName");
 const QString AttrUUID        = QStringLiteral("uuid");
 const QString AttrGradationLabel = QStringLiteral("gradationLabel");
 const QString AttrMx1         = QStringLiteral("mx1");
@@ -316,31 +317,36 @@ const QString currentLength        = QStringLiteral("CurrentLength");
 const QString currentSeamAllowance = QStringLiteral("CurrentSeamAllowance");
 const QString rotation_V           = QStringLiteral("Rotation");
 const QString rotationElArc_       = rotation_V + elarc_;
+const QString pieceArea_           = QStringLiteral("PieceArea_");
 
-const QStringList builInVariables = QStringList() << measurement_
-                                                  << increment_
-                                                  << line_
-                                                  << angleLine_
-                                                  << arc_
-                                                  << elarc_
-                                                  << spl_
-                                                  << splPath
-                                                  << radiusArc_
-                                                  << radius1ElArc_
-                                                  << radius2ElArc_
-                                                  << angle1Arc_
-                                                  << angle2Arc_
-                                                  << angle1ElArc_
-                                                  << angle2ElArc_
-                                                  << angle1Spl_
-                                                  << angle2Spl_
-                                                  << angle1SplPath
-                                                  << angle2SplPath
-                                                  << seg_
-                                                  << currentLength
-                                                  << currentSeamAllowance
-                                                  << c1LengthSpl_
-                                                  << c2LengthSpl_
-                                                  << c1LengthSplPath
-                                                  << c2LengthSplPath
-                                                  << rotationElArc_;
+const QStringList builInVariables
+{
+    measurement_,
+    increment_,
+    line_,
+    angleLine_,
+    arc_,
+    elarc_,
+    spl_,
+    splPath,
+    radiusArc_,
+    radius1ElArc_,
+    radius2ElArc_,
+    angle1Arc_,
+    angle2Arc_,
+    angle1ElArc_,
+    angle2ElArc_,
+    angle1Spl_,
+    angle2Spl_,
+    angle1SplPath,
+    angle2SplPath,
+    seg_,
+    currentLength,
+    currentSeamAllowance,
+    c1LengthSpl_,
+    c2LengthSpl_,
+    c1LengthSplPath,
+    c2LengthSplPath,
+    rotationElArc_,
+    pieceArea_
+};

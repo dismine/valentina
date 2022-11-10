@@ -63,6 +63,7 @@
 #include "../vpatterndb/variables/vlineangle.h"
 #include "../vpatterndb/variables/vlinelength.h"
 #include "../vpatterndb/variables/vmeasurement.h"
+#include "../vpatterndb/variables/vpiecearea.h"
 #include "../vmisc/def.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
@@ -84,6 +85,8 @@ DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, quint32 t
     SCASSERT(data != nullptr)
 
     ui->setupUi(this);
+
+    ui->radioButtonPieceArea->setVisible(false);
 
     timerFormula->setSingleShot(true);
     connect(timerFormula, &QTimer::timeout, this, &DialogEditWrongFormula::EvalFormula);
@@ -233,6 +236,34 @@ void DialogEditWrongFormula::ValChanged(int row)
             SetDescription(item->text(), *m_data->GetVariable<VCurveAngle>(name)->GetValue(), specialUnits,
                            tr("Curve angle"));
         }
+        else if (ui->radioButtonCLength->isChecked())
+        {
+            const bool specialUnits = false;
+            SetDescription(item->text(), *m_data->GetVariable<VCurveCLength>(name)->GetValue(), specialUnits,
+                           tr("Length to control point"));
+        }
+        else if (ui->radioButtonPieceArea->isChecked())
+        {
+            const bool specialUnits = false;
+            const QSharedPointer<VPieceArea> var = m_data->GetVariable<VPieceArea>(name);
+            QString description = tr("Area of piece");
+
+            try
+            {
+                VPiece piece = m_data->GetPiece(var->GetPieceId());
+                QString name = piece.GetName();
+                if (not name.isEmpty())
+                {
+                    description += QStringLiteral(" '%1'").arg(piece.GetName());
+                }
+            }
+            catch (const VExceptionBadId &)
+            {
+                // do nothing
+            }
+
+            SetDescription(item->text(), *var->GetValue(), specialUnits, description, true);
+        }
         else if (ui->radioButtonFunctions->isChecked())
         {
             ui->labelDescription->setText(item->toolTip());
@@ -354,6 +385,13 @@ void DialogEditWrongFormula::Increments()
 void DialogEditWrongFormula::PreviewCalculations()
 {
     ShowIncrementsInPreviewCalculation(true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::PieceArea()
+{
+    ui->checkBoxHideEmpty->setEnabled(false);
+    ShowVariable(m_data->DataPieceArea());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -480,6 +518,12 @@ void DialogEditWrongFormula::SetPreviewCalculationsMode()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::ShowPieceArea(bool show) const
+{
+    ui->radioButtonPieceArea->setVisible(show);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto DialogEditWrongFormula::GetFormula() const -> QString
 {
     return VTranslateVars::TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
@@ -523,6 +567,9 @@ void DialogEditWrongFormula::InitVariables()
     connect(ui->radioButtonCLength, &QRadioButton::clicked, this, &DialogEditWrongFormula::CurvesCLength);
     connect(ui->radioButtonCLength, &QRadioButton::clicked, this, ClearFilterFormulaInputs);
 
+    connect(ui->radioButtonPieceArea, &QRadioButton::clicked, this, &DialogEditWrongFormula::PieceArea);
+    connect(ui->radioButtonPieceArea, &QRadioButton::clicked, this, ClearFilterFormulaInputs);
+
     connect(ui->radioButtonFunctions, &QRadioButton::clicked, this, &DialogEditWrongFormula::Functions);
     connect(ui->radioButtonFunctions, &QRadioButton::clicked, this, ClearFilterFormulaInputs);
 
@@ -531,9 +578,15 @@ void DialogEditWrongFormula::InitVariables()
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::SetDescription(const QString &name, qreal value, bool specialUnits,
-                                            const QString &description)
+                                            const QString &description, bool square)
 {
-    const QString unit = specialUnits ? degreeSymbol : ' ' + postfix;
+    QString unitName = postfix;
+    if (not specialUnits && square)
+    {
+        unitName += QStringLiteral("²");
+    }
+
+    const QString unit = specialUnits ? degreeSymbol : ' ' + unitName;
     const QString desc = QStringLiteral("%1(%2%3) - %4").arg(name).arg(value).arg(unit, description);
     ui->labelDescription->setText(desc);
 }

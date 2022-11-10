@@ -37,8 +37,10 @@
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/compatibility.h"
 #include "../ifc/exception/vexceptioninvalidnotch.h"
+#include "../ifc/exception/vexceptionobjecterror.h"
 #include "../vmisc/testpath.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../vpatterndb/vpiecenode.h"
 
 #include <QSharedPointer>
 #include <QDebug>
@@ -388,6 +390,18 @@ bool VPiece::IsUnited() const
 void VPiece::SetUnited(bool united)
 {
     d->m_united = united;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::GetShortName() const -> QString
+{
+    return d->m_shortName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetShortName(const QString &value)
+{
+    d->m_shortName = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1198,6 +1212,126 @@ auto VPiece::GlobalPassmarkLength(const VContainer *data) const -> qreal
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPiece::TestInternalPathCuttingPathIntersection(const VContainer *data) const
+{
+    SCASSERT(data != nullptr)
+
+    const QVector<QPointF> cuttingPoints = CuttingPathPoints(data);
+    const QPainterPath contourPath = VAbstractPiece::PainterPath(cuttingPoints);
+
+    // Internal path for cutting must not intersect cutting contour and be inside of it.
+    const QVector<quint32> pathsId = GetInternalPaths();
+    for (auto id : pathsId)
+    {
+        const VPiecePath path = data->GetPiecePath(id);
+        if (path.GetType() != PiecePathType::InternalPath || not path.IsVisible(data->DataVariables()) ||
+            not path.IsCutPath())
+        {
+            continue;
+        }
+
+        QVector<QPointF> points;
+        CastTo(path.PathPoints(data, cuttingPoints), points);
+        if (points.isEmpty() || not VFuzzyComparePoints(ConstFirst(points), ConstLast(points)))
+        {
+            continue;
+        }
+
+        const QPainterPath internalPath = VAbstractPiece::PainterPath(points);
+
+        if (internalPath.intersects(contourPath))
+        {
+            const QString errorMsg = QObject::tr("Piece '%1'. Internal path '%2' intersects with cutting "
+                                                 "countour.").arg(GetName(), path.GetName());
+            VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
+                qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+            continue;
+        }
+
+        if (not contourPath.contains(internalPath))
+        {
+            const QString errorMsg = QObject::tr("Piece '%1'. Internal path '%2' not inside of cutting "
+                                                 "countour.").arg(GetName(), path.GetName());
+            VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
+                qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::TestInternalPathsIntersections(const VContainer *data) const
+{
+    SCASSERT(data != nullptr)
+
+    const QVector<quint32> pathsId = GetInternalPaths();
+
+    if (pathsId.isEmpty())
+    {
+        return;
+    }
+
+    const QVector<QPointF> cuttingPoints = CuttingPathPoints(data);
+
+    // Internal pieces for cutting must not intersect
+    QSet<QPair<int, int>> pairs;
+    for (int k=0; k < pathsId.size(); ++k)
+    {
+        const VPiecePath path1 = data->GetPiecePath(pathsId.at(k));
+
+        if (path1.GetType() != PiecePathType::InternalPath || not path1.IsVisible(data->DataVariables()) ||
+            not path1.IsCutPath())
+        {
+            continue;
+        }
+
+        QVector<QPointF> pointsPath1;
+        CastTo(path1.PathPoints(data, cuttingPoints), pointsPath1);
+        if (pointsPath1.isEmpty() || not VFuzzyComparePoints(ConstFirst(pointsPath1), ConstLast(pointsPath1)))
+        {
+            continue;
+        }
+
+        const QPainterPath painterPath1 = VAbstractPiece::PainterPath(pointsPath1);
+
+        for (int i=0; i < pathsId.size(); ++i)
+        {
+            if (k == i || pairs.contains(qMakePair(k, i)) || pairs.contains(qMakePair(i, k)))
+            {
+                continue;
+            }
+
+            const VPiecePath path2 = data->GetPiecePath(pathsId.at(i));
+
+            if (path2.GetType() != PiecePathType::InternalPath || not path2.IsVisible(data->DataVariables()) ||
+                not path2.IsCutPath())
+            {
+                continue;
+            }
+
+            QVector<QPointF> pointsPath2;
+            CastTo(path2.PathPoints(data, cuttingPoints), pointsPath2);
+            if (pointsPath2.isEmpty() || not VFuzzyComparePoints(ConstFirst(pointsPath2), ConstLast(pointsPath2)))
+            {
+                continue;
+            }
+
+            const QPainterPath painterPath2 = VAbstractPiece::PainterPath(pointsPath2);
+
+            pairs.insert(qMakePair(k, i));
+            pairs.insert(qMakePair(i, k));
+
+            if (painterPath1.intersects(painterPath2))
+            {
+                const QString errorMsg = QObject::tr("Piece '%1'. Internal path '%2' intersects with internal path "
+                                                     "'%3'.").arg(GetName(), path1.GetName(), path2.GetName());
+                VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
+                    qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPiece::DumpPiece(const VPiece &piece, const VContainer *data, const QString &templateName)
 {
     SCASSERT(data != nullptr)
@@ -1238,5 +1372,97 @@ void VPiece::DumpPiece(const VPiece &piece, const VContainer *data, const QStrin
         out << document.toJson();
         out.flush();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::TestInternalPaths(const VContainer *data) const
+{
+    TestInternalPathCuttingPathIntersection(data);
+    TestInternalPathsIntersections(data);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::Area(const VContainer *data) const -> qreal
+{
+    SCASSERT(data != nullptr)
+
+    const QVector<QPointF> mainContour = CuttingPathPoints(data);
+    const qreal mainArea = qAbs(VAbstractPiece::SumTrapezoids(mainContour))/2.0;
+
+    qreal internalPathArea = 0;
+    const QVector<quint32> pathsId = GetInternalPaths();
+    for (auto id : pathsId)
+    {
+        const VPiecePath path = data->GetPiecePath(id);
+        if (path.GetType() != PiecePathType::InternalPath || not path.IsVisible(data->DataVariables()) ||
+            not path.IsCutPath())
+        {
+            continue;
+        }
+
+        QVector<QPointF> points;
+        CastTo(path.PathPoints(data, mainContour), points);
+        if (points.isEmpty() || not VFuzzyComparePoints(ConstFirst(points), ConstLast(points)))
+        {
+            continue;
+        }
+
+        internalPathArea += qAbs(VAbstractPiece::SumTrapezoids(points))/2.0;
+    }
+
+    return mainArea - internalPathArea;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::ShortNameRegExp() -> QString
+{
+    static QString regex;
+
+    if (regex.isEmpty())
+    {
+        const QList<QLocale> allLocales =
+            QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
+
+        QString positiveSigns;
+        QString negativeSigns;
+        QString decimalPoints;
+        QString groupSeparators;
+
+        for(const auto &locale : allLocales)
+        {
+            if (not positiveSigns.contains(locale.positiveSign()))
+            {
+                positiveSigns.append(locale.positiveSign());
+            }
+
+            if (not negativeSigns.contains(locale.negativeSign()))
+            {
+                negativeSigns.append(locale.negativeSign());
+            }
+
+            if (not decimalPoints.contains(locale.decimalPoint()))
+            {
+                decimalPoints.append(locale.decimalPoint());
+            }
+
+            if (not groupSeparators.contains(locale.groupSeparator()))
+            {
+                groupSeparators.append(locale.groupSeparator());
+            }
+        }
+
+        negativeSigns.replace('-', QLatin1String("\\-"));
+        groupSeparators.remove('\'');
+
+        //Same regexp in pattern.xsd shema file. Don't forget to synchronize.
+        // \p{Zs} - \p{Space_Separator}
+        // Here we use permanent start of string and end of string anchors \A and \z to match whole pattern as one
+        // string. In some cases, a user may pass multiline or line that ends with a new line. To cover case with a new
+        // line at the end of string use /z anchor.
+        regex = QStringLiteral("\\A([^\\p{Zs}*\\/&|!<>^\\n\\()%1%2%3%4=?:;\"]){0,}\\z")
+                    .arg(negativeSigns, positiveSigns, decimalPoints, groupSeparators);
+    }
+
+    return regex;
 }
 #endif // !defined(V_NO_ASSERT)

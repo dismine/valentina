@@ -52,6 +52,7 @@
 #include "variables/vlineangle.h"
 #include "variables/vlinelength.h"
 #include "variables/vmeasurement.h"
+#include "variables/vpiecearea.h"
 #include "vtranslatevars.h"
 
 QT_WARNING_PUSH
@@ -391,15 +392,16 @@ void VContainer::ClearForFullParse()
 
     d->pieces->clear();
     d->piecePaths->clear();
-    Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 10, "Check that you used all types");
-    ClearVariables(QVector<VarType>({VarType::Increment,
-                                     VarType::IncrementSeparator,
-                                     VarType::LineAngle,
-                                     VarType::LineLength,
-                                     VarType::CurveLength,
-                                     VarType::CurveCLength,
-                                     VarType::ArcRadius,
-                                     VarType::CurveAngle}));
+    Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 11, "Check that you used all types");
+    ClearVariables(QVector<VarType>{VarType::Increment,
+                                    VarType::IncrementSeparator,
+                                    VarType::LineAngle,
+                                    VarType::LineLength,
+                                    VarType::CurveLength,
+                                    VarType::CurveCLength,
+                                    VarType::ArcRadius,
+                                    VarType::CurveAngle,
+                                    VarType::PieceArea});
     ClearGObjects();
     ClearUniqueNames();
 }
@@ -571,6 +573,19 @@ void VContainer::RemoveIncrement(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VContainer::FillPiecesAreas(Unit unit)
+{
+    QHash<quint32, VPiece> *pieces = d->pieces.data();
+
+    auto i = pieces->constBegin();
+    while (i != pieces->constEnd())
+    {
+        AddVariable(QSharedPointer<VPieceArea>::create(i.key(), i.value(), this, unit));
+        ++i;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 const QMap<QString, QSharedPointer<VMeasurement> > VContainer::DataMeasurements() const
 {
     return DataVar<VMeasurement>(VarType::Measurement);
@@ -648,6 +663,12 @@ const QMap<QString, QSharedPointer<VArcRadius> > VContainer::DataRadiusesArcs() 
 const QMap<QString, QSharedPointer<VCurveAngle> > VContainer::DataAnglesCurves() const
 {
     return DataVar<VCurveAngle>(VarType::CurveAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+const QMap<QString, QSharedPointer<VPieceArea> > VContainer::DataPieceArea() const
+{
+    return DataVar<VPieceArea>(VarType::PieceArea);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

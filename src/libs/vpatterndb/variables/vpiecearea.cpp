@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vlineangle.cpp
+ **  @file   vpiecearea.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   28 7, 2014
+ **  @date   8 11, 2022
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2022 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,49 +25,44 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
+#include "vpiecearea.h"
+#include "vpiecearea_p.h"
+#include "../vpatterndb/vpiece.h"
+#include "../vpatterndb/vcontainer.h"
 
-#include "vlineangle.h"
-
-#include <QLineF>
-#include <QMessageLogger>
-#include <QPointF>
-#include <QString>
-#include <QtMath>
-
-#include "../vmisc/def.h"
-#include "../ifc/ifcdef.h"
-#include "../vgeometry/vpointf.h"
-#include "vinternalvariable.h"
-#include "vlineangle_p.h"
+#include <QRegularExpression>
 
 //---------------------------------------------------------------------------------------------------------------------
-VLineAngle::VLineAngle()
-    :VInternalVariable(), d(new VLineAngleData)
+VPieceArea::VPieceArea()
+    :d(new VPieceAreaData)
 {
-    SetType(VarType::LineAngle);
+    SetType(VarType::PieceArea);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLineAngle::VLineAngle(const VPointF *p1, const quint32 &p1Id, const VPointF *p2, const quint32 &p2Id)
-    :VInternalVariable(), d(new VLineAngleData(p1Id, p2Id))
+VPieceArea::VPieceArea(quint32 pieceId, const VPiece &piece, const VContainer *data, Unit unit)
+    :d(new VPieceAreaData(pieceId))
 {
-    SetType(VarType::LineAngle);
-
     // cppcheck-suppress unknownMacro
-    SCASSERT(p1 != nullptr)
-    SCASSERT(p2 != nullptr)
+    SCASSERT(data != nullptr)
 
-    SetName(QString(angleLine_+"%1_%2").arg(p1->name(), p2->name()));
-    SetValue(p1, p2);
+    SetType(VarType::PieceArea);
+
+    QString shortName = piece.GetShortName();
+    if (shortName.isEmpty())
+    {
+        shortName = piece.GetName().replace(QChar(QChar::Space), '_').left(25);
+        if (shortName.isEmpty() || not QRegularExpression(VPiece::ShortNameRegExp()).match(shortName).hasMatch())
+        {
+            shortName = QObject::tr("Unknown");
+        }
+    }
+    SetName(pieceArea_ + shortName);
+    VInternalVariable::SetValue(FromPixel2(piece.Area(data), unit));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLineAngle::VLineAngle(const VLineAngle &var)
-    :VInternalVariable(var), d(var.d)
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VLineAngle &VLineAngle::operator=(const VLineAngle &var)
+auto VPieceArea::operator=(const VPieceArea &var) -> VPieceArea &
 {
     if ( &var == this )
     {
@@ -80,12 +75,16 @@ VLineAngle &VLineAngle::operator=(const VLineAngle &var)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VLineAngle::VLineAngle(VLineAngle &&var) Q_DECL_NOTHROW
+VPieceArea::VPieceArea(VPieceArea &&var) Q_DECL_NOTHROW
     :VInternalVariable(std::move(var)), d(std::move(var.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VLineAngle &VLineAngle::operator=(VLineAngle &&var) Q_DECL_NOTHROW
+VPieceArea::~VPieceArea() // NOLINT(modernize-use-equals-default)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPieceArea::operator=(VPieceArea &&var) Q_DECL_NOTHROW -> VPieceArea &
 {
     VInternalVariable::operator=(var);
     std::swap(d, var.d);
@@ -94,36 +93,15 @@ VLineAngle &VLineAngle::operator=(VLineAngle &&var) Q_DECL_NOTHROW
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VLineAngle::~VLineAngle()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VLineAngle::Filter(quint32 id)
+void VPieceArea::SetValue(quint32 pieceId, const VPiece &piece, const VContainer *data, Unit unit)
 {
-    return id == d->p1Id || id == d->p2Id;
+    SCASSERT(data != nullptr)
+    d->m_pieceId = pieceId;
+    VInternalVariable::SetValue(FromPixel(piece.Area(data), unit));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLineAngle::SetValue(const VPointF *p1, const VPointF *p2)
+auto VPieceArea::GetPieceId() const -> quint32
 {
-    SCASSERT(p1 != nullptr)
-    SCASSERT(p2 != nullptr)
-    //Correct angle. Try avoid results like 6,7563e-15.
-    const qreal angle = qFloor(QLineF(static_cast<QPointF>(*p1),
-                                      static_cast<QPointF>(*p2)).angle() * 100000.) / 100000.;
-    VInternalVariable::SetValue(angle);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-quint32 VLineAngle::GetP1Id() const
-{
-    return d->p1Id;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-quint32 VLineAngle::GetP2Id() const
-{
-    return d->p2Id;
+    return d->m_pieceId;
 }

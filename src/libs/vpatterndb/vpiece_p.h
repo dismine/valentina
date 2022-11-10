@@ -80,6 +80,8 @@ public:
 
     QString m_gradationLabel{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
+    QString m_shortName{}; // NOLINT(misc-non-private-member-variables-in-classes)
+
 private:
     Q_DISABLE_ASSIGN_MOVE(VPieceData) // NOLINT
 };

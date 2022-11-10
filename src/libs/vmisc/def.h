@@ -275,7 +275,7 @@ enum class Vis : ToolVisHolderType
 };
 
 enum class VarType : qint8 { Measurement, MeasurementSeparator, Increment, IncrementSeparator, LineLength, CurveLength,
-                             CurveCLength, LineAngle, CurveAngle, ArcRadius, Unknown };
+                             CurveCLength, LineAngle, CurveAngle, ArcRadius, PieceArea, Unknown };
 
 enum class IncrementType : qint8 { Increment, Separator };
 
@@ -398,9 +398,9 @@ Q_DECL_RELAXED_CONSTEXPR inline auto ToPixel(double val, const Unit &unit) -> do
     return 0;
 }
 
-template<typename T> constexpr inline auto PixelToMm(T pix) -> T { return (pix / PrintDPI) * 25.4; }
-template<typename T> constexpr inline auto PixelToCm(T pix) -> T { return ((pix / PrintDPI) * 25.4) / 10.0; }
-template<typename T> constexpr inline auto PixelToInch(T pix) -> T { return pix / PrintDPI; }
+template<typename T> constexpr inline auto PixelToInch(T pix) -> T {return pix / PrintDPI;}
+template<typename T> constexpr inline auto PixelToMm(T pix) -> T {return PixelToInch(pix) * 25.4;}
+template<typename T> constexpr inline auto PixelToCm(T pix) -> T {return PixelToInch(pix) * 2.54;}
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_RELAXED_CONSTEXPR inline auto FromPixel(double pix, const Unit &unit) -> double
@@ -417,6 +417,52 @@ Q_DECL_RELAXED_CONSTEXPR inline auto FromPixel(double pix, const Unit &unit) -> 
             return pix;
         default:
             break;
+    }
+    return 0;
+}
+
+template<typename T> constexpr inline auto Inch2ToPixel2(T val) -> T {return val * (PrintDPI * PrintDPI);}
+template<typename T> constexpr inline auto Mm2ToPixel2(T val) -> T {return Inch2ToPixel2(val * 0.001550031);}
+template<typename T> constexpr inline auto Cm2ToPixel2(T val) -> T {return Inch2ToPixel2(val * 0.15500031);}
+
+//---------------------------------------------------------------------------------------------------------------------
+Q_DECL_RELAXED_CONSTEXPR inline auto ToPixel2(double val, const Unit &unit) -> double
+{
+    switch (unit)
+    {
+    case Unit::Mm:
+        return Mm2ToPixel2(val);
+    case Unit::Cm:
+        return Cm2ToPixel2(val);
+    case Unit::Inch:
+        return Inch2ToPixel2(val);
+    case Unit::Px:
+        return val;
+    default:
+        break;
+    }
+    return 0;
+}
+
+template<typename T> constexpr inline auto Pixel2ToInch2(T pix) -> T { return pix / (PrintDPI * PrintDPI);}
+template<typename T> constexpr inline auto Pixel2ToMm2(T pix) -> T { return Pixel2ToInch2(pix) / 0.001550031;}
+template<typename T> constexpr inline auto Pixel2ToCm2(T pix) -> T { return Pixel2ToInch2(pix) / 0.15500031;}
+
+//---------------------------------------------------------------------------------------------------------------------
+Q_DECL_RELAXED_CONSTEXPR inline auto FromPixel2(double pix, const Unit &unit) -> double
+{
+    switch (unit)
+    {
+    case Unit::Mm:
+        return Pixel2ToMm2(pix);
+    case Unit::Cm:
+        return Pixel2ToCm2(pix);
+    case Unit::Inch:
+        return Pixel2ToInch2(pix);
+    case Unit::Px:
+        return pix;
+    default:
+        break;
     }
     return 0;
 }

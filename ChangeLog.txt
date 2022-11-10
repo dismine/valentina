@@ -7,6 +7,7 @@
 - Fix option Hide labels.
 - Improve segmenting a curve for calculating a piece path. 
 - [smart-pattern/valentina#184] Fix incorrect seam allowance.
+- Export area of piece in Final measurements.
 
 # Valentina 0.7.52 September 12, 2022
 - Fix crash when default locale is ru.

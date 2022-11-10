@@ -58,6 +58,15 @@
 #include "vtranslatevars.h"
 
 class VEllipticalArc;
+class VMeasurement;
+class VIncrement;
+class VLengthLine;
+class VCurveLength;
+class VCurveCLength;
+class VLineAngle;
+class VArcRadius;
+class VCurveAngle;
+class VPieceArea;
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -195,6 +204,8 @@ public:
 
     void               RemoveIncrement(const QString& name);
 
+    void FillPiecesAreas(Unit unit);
+
     const QHash<quint32, QSharedPointer<VGObject> >         *CalculationGObjects() const;
     const QHash<quint32, VPiece>                            *DataPieces() const;
     const QHash<QString, QSharedPointer<VInternalVariable>> *DataVariables() const;
@@ -209,6 +220,7 @@ public:
     const QMap<QString, QSharedPointer<VLineAngle> >    DataAngleLines() const;
     const QMap<QString, QSharedPointer<VArcRadius> >    DataRadiusesArcs() const;
     const QMap<QString, QSharedPointer<VCurveAngle> >   DataAnglesCurves() const;
+    const QMap<QString, QSharedPointer<VPieceArea> >    DataPieceArea() const;
 
     bool        IsUnique(const QString &name) const;
     static bool IsUnique(const QString &name, const QString &nspace);

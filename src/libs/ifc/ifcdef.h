@@ -68,6 +68,7 @@ extern const QString AttrType;
 extern const QString AttrMx;
 extern const QString AttrMy;
 extern const QString AttrName;
+extern const QString AttrShortName;
 extern const QString AttrUUID;
 extern const QString AttrGradationLabel;
 extern const QString AttrMx1;
@@ -241,6 +242,7 @@ extern const QString currentLength;
 extern const QString currentSeamAllowance;
 extern const QString rotation_V;
 extern const QString rotationElArc_;
+extern const QString pieceArea_;
 
 extern const QStringList builInVariables;
 

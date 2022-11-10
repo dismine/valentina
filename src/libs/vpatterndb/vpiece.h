@@ -92,6 +92,9 @@ public:
     bool IsUnited() const;
     void SetUnited(bool united);
 
+    auto GetShortName() const -> QString;
+    void SetShortName(const QString &value);
+
     QString GetFormulaSAWidth() const;
     void    SetFormulaSAWidth(const QString &formula, qreal value);
 
@@ -138,6 +141,11 @@ public:
     auto GetGradationLabel() const -> QString;
 
     static void DumpPiece(const VPiece &piece, const VContainer *data, const QString &templateName=QString());
+
+    void TestInternalPaths(const VContainer *data) const;
+
+    static auto ShortNameRegExp() -> QString;
+    auto Area(const VContainer *data) const -> qreal;
 private:
     QSharedDataPointer<VPieceData> d;
 
@@ -163,6 +171,9 @@ private:
     QJsonObject DBToJson(const VContainer *data) const;
 
     qreal GlobalPassmarkLength(const VContainer *data) const;
+
+    void TestInternalPathCuttingPathIntersection(const VContainer *data) const;
+    void TestInternalPathsIntersections(const VContainer *data) const;
 };
 
 Q_DECLARE_TYPEINFO(VPiece, Q_MOVABLE_TYPE); // NOLINT

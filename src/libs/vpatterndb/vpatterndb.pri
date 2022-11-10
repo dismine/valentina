@@ -3,6 +3,7 @@
 
 SOURCES += \
     $$PWD/testpassmark.cpp \
+    $$PWD/variables/vpiecearea.cpp \
     $$PWD/vcontainer.cpp \
     $$PWD/calculator.cpp \
     $$PWD/vnodedetail.cpp \
@@ -34,6 +35,8 @@ SOURCES += \
 
 HEADERS += \
     $$PWD/testpassmark.h \
+    $$PWD/variables/vpiecearea.h \
+    $$PWD/variables/vpiecearea_p.h \
     $$PWD/vcontainer.h \
     $$PWD/stable.h \
     $$PWD/calculator.h \

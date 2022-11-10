@@ -72,6 +72,8 @@ auto ConvertInternalPaths(const VPiece &piece, const VContainer *pattern) -> QVe
 {
     SCASSERT(pattern != nullptr)
 
+    piece.TestInternalPaths(pattern);
+
     QVector<VLayoutPiecePath> paths;
     const QVector<quint32> pathsId = piece.GetInternalPaths();
     const QVector<QPointF> cuttingPath = piece.CuttingPathPoints(pattern);

@@ -335,7 +335,7 @@ void VToolSeamAllowance::InsertNodes(const QVector<VPieceNode> &nodes, quint32 p
             newDet.GetPath().Append(node);
 
             // Seam allowance tool already initializated and can't init the node
-            VToolSeamAllowance *saTool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(pieceId));
+            auto *saTool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(pieceId));
             SCASSERT(saTool != nullptr);
 
             InitNode(node, scene, saTool);
@@ -352,6 +352,8 @@ void VToolSeamAllowance::AddAttributes(VAbstractPattern *doc, QDomElement &domEl
 
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
     doc->SetAttribute(domElement, AttrName, piece.GetName());
+    doc->SetAttributeOrRemoveIf<QString>(domElement, AttrShortName, piece.GetShortName(),
+                                         [](const QString &name) noexcept {return name.isEmpty();});
     doc->SetAttribute(domElement, AttrUUID, piece.GetUUID().toString());
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrGradationLabel, piece.GetGradationLabel(),
                                          [](const QString &label) noexcept {return label.isEmpty();});
@@ -1365,7 +1367,9 @@ void VToolSeamAllowance::UpdateExcludeState()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::UpdateInternalPaths()
 {
-    const QVector<quint32> paths = VAbstractTool::data.GetPiece(m_id).GetInternalPaths();
+    VPiece piece = VAbstractTool::data.GetPiece(m_id);
+    piece.TestInternalPaths(&(VAbstractTool::data));
+    const QVector<quint32> paths = piece.GetInternalPaths();
     for (auto path : paths)
     {
         try

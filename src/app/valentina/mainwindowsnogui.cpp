@@ -1260,7 +1260,8 @@ bool MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, boo
     }
 
     const QVector<VFinalMeasurement> measurements = doc->GetFinalMeasurements();
-    const VContainer completeData = doc->GetCompleteData();
+    VContainer completeData = doc->GetCompleteData();
+    completeData.FillPiecesAreas(VAbstractValApplication::VApp()->patternUnits());
 
     for (int i=0; i < measurements.size(); ++i)
     {

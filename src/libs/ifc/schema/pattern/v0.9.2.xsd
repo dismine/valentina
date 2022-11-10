@@ -744,6 +744,7 @@
                         <xs:attribute name="mx" type="xs:double"/>
                         <xs:attribute name="my" type="xs:double"/>
                         <xs:attribute name="name" type="xs:string"/>
+                        <xs:attribute name="shortName" type="pieceShortName"/>
                         <xs:attribute name="uuid" type="uuid"/>
                         <xs:attribute name="gradationLabel" type="xs:string"/>
                         <xs:attribute name="bufferName" type="xs:string"/>
@@ -820,7 +821,12 @@
   </xs:element>
   <xs:simpleType name="shortName">
     <xs:restriction base="xs:string">
-      <xs:pattern value="([^\p{Nd}\p{Zs}*/&amp;|!&lt;&gt;^&#10;\()\-−+.,٫, ٬.’=?:;'\&quot;]){1,1}([^\p{Zs}*/&amp;|!&lt;&gt;^&#10;\()\-−+.,٫, ٬.’=?:;\&quot;]){0,}"/>
+      <xs:pattern value="([^\p{Nd}\p{Zs}*\/&amp;|!&lt;&gt;^&#10;\()\-−+.,٫, ٬.’=?:;'\&quot;]){1,1}([^\p{Zs}*\/&amp;|!&lt;&gt;^&#10;\()\-−+.,٫, ٬.’=?:;\&quot;]){0,}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="pieceShortName">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([^\p{Zs}*\/&amp;|!&lt;&gt;^&#10;\()\-−+.,٫, ٬.’=?:;\&quot;]){0,}"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="uuid">

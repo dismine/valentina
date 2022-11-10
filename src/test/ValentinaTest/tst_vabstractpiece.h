@@ -45,6 +45,8 @@ private slots:
     void LayoutAllowanceRemoveLoop_data();
     void LayoutAllowanceRemoveLoop() const;
     void SumTrapezoids() const;
+    void TestAreaCalculation_data();
+    void TestAreaCalculation() const;
     void RawPathRemoveLoop_data() const;
     void RawPathRemoveLoop() const;
     void PathRemoveLoop_data() const;
