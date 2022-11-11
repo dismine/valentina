@@ -314,7 +314,7 @@ void TST_VAbstractPiece::EquidistantRemoveLoop() const
     CastTo(VAbstractPiece::Equidistant(points, width, QString()), ekv);
 
     // Begin comparison
-    ComparePathsDistance(ekv, ekvOrig);
+    ComparePaths(ekv, ekvOrig);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -331,7 +331,7 @@ void TST_VAbstractPiece::LayoutAllowanceRemoveLoop_data()
         QTest::newRow(title) << inputPoints << width << outputPoints;
     };
 
-    // See file src/app/share/collection/test/smart_pattern_#58.val (private collection)
+    // See file valentina_private_collection/bugs/smart_pattern_#58/smart_pattern_#58.val
     ASSERT_TEST_CASE("Loop in layout allowance",
                      QStringLiteral("://smart_pattern_#58/input.json"),
                      QStringLiteral("://smart_pattern_#58/output.json"),
@@ -367,7 +367,7 @@ void TST_VAbstractPiece::LayoutAllowanceRemoveLoop() const
     CastTo(VAbstractPiece::Equidistant(points, width, QString()), ekv);
 
     // Begin comparison
-    ComparePathsDistance(ekv, ekvOrig);
+    ComparePaths(ekv, ekvOrig);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -459,7 +459,7 @@ void TST_VAbstractPiece::RawPathRemoveLoop() const
 
     QVector<QPointF> res;
     CastTo(VAbstractPiece::CheckLoops(path), res);
-    ComparePathsDistance(res, expect);
+    ComparePaths(res, expect);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -732,7 +732,7 @@ void TST_VAbstractPiece::PathRemoveLoop() const
     QFETCH(QVector<QPointF>, expect);
 
     QVector<QPointF> res = VAbstractPiece::CheckLoops(path);
-    ComparePathsDistance(res, expect);
+    ComparePaths(res, expect);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -918,7 +918,7 @@ void TST_VAbstractPiece::PathLoopsCase() const
     QFETCH(QVector<QPointF>, expect);
 
     const QVector<QPointF> res = VAbstractPiece::CheckLoops(path);
-    ComparePathsDistance(res, expect);
+    ComparePaths(res, expect);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1034,7 +1034,7 @@ void TST_VAbstractPiece::BrokenDetailEquidistant() const
     CastTo(VAbstractPiece::Equidistant(points, width, QString()), ekv);// Take result
 
     // Begin comparison
-    ComparePathsDistance(ekv, ekvOrig);
+    ComparePaths(ekv, ekvOrig);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1147,7 +1147,7 @@ void TST_VAbstractPiece::EquidistantAngleType() const
     CastTo(VAbstractPiece::Equidistant(points, width, QString()), ekv);// Take result
 
     // Begin comparison
-    ComparePathsDistance(ekv, ekvOrig);
+    ComparePaths(ekv, ekvOrig);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1184,7 +1184,7 @@ void TST_VAbstractPiece::CorrectEquidistantPoints() const
     const QVector<QPointF> res = VAbstractPiece::CorrectEquidistantPoints(points, removeFirstAndLast);
 
     // Begin comparison
-    ComparePathsDistance(res, expect);
+    ComparePaths(res, expect);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1218,7 +1218,7 @@ void TST_VAbstractPiece::TestCorrectEquidistantPoints() const
     QFETCH(QVector<QPointF>, expect);
 
     QVector<QPointF> after = VAbstractPiece::CorrectEquidistantPoints(before);
-    ComparePathsDistance(after, expect);
+    ComparePaths(after, expect);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1335,7 +1335,7 @@ void TST_VAbstractPiece::PossibleInfiniteClearLoops() const
     QFETCH(QVector<QPointF>, expect);
 
     QVector<QPointF> res = VAbstractPiece::CheckLoops(path);
-    ComparePathsDistance(res, expect);
+    ComparePaths(res, expect);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

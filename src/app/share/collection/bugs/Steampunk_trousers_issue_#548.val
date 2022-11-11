@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pattern>
-    <!--Pattern created with Valentina v0.6.2.0 (https://valentinaproject.bitbucket.io/).-->
-    <version>0.7.12</version>
+    <!--Pattern created with Valentina v0.7.52.0 (https://smart-pattern.com.ua/).-->
+    <version>0.9.2</version>
     <unit>cm</unit>
     <description>Men's Trousers circa 1830-1870</description>
     <notes/>
@@ -15,7 +15,7 @@
         <line alignment="0" bold="false" italic="false" sfIncrement="0" text="%mFileName%.%mExt%"/>
         <line alignment="0" bold="false" italic="true" sfIncrement="0" text="%date%"/>
     </patternLabel>
-    <measurements>marie_issue_#548.vit</measurements>
+    <measurements path="marie_issue_#548.vit"/>
     <increments>
         <increment description="Original pattern outseam is 112. &#10;Use CM_HEIGHT for height formulas&#10;" formula="leg_waist_side_to_floor/112" name="#CM_HEIGHT"/>
         <increment description="Original pattern's hip circumference is 102.&#10;Use CM_WIDTH for circumference, arc, or width formulas." formula="hip_circ/102" name="#CM_WIDTH"/>
@@ -207,21 +207,21 @@
             <point id="201" idObject="95" inUse="false" mx="0.987301" my="-2.53475" type="modeling"/>
             <point id="202" idObject="81" inUse="false" mx="0.655497" my="-0.983501" type="modeling"/>
             <point id="212" idObject="3" inUse="false" mx="-1.64399" my="-1.11279" type="modeling"/>
-            <point id="214" idObject="80" inUse="true" mx="-1.57043" my="-1.46574" showLabel="true" type="modeling"/>
-            <point id="215" idObject="94" inUse="true" mx="-0.954275" my="-0.880717" showLabel="true" type="modeling"/>
-            <point id="216" idObject="90" inUse="true" mx="-0.675292" my="0.147116" showLabel="true" type="modeling"/>
-            <point id="217" idObject="95" inUse="true" mx="0.279125" my="-0.543001" showLabel="true" type="modeling"/>
-            <point id="218" idObject="81" inUse="true" mx="0.655497" my="-0.983501" showLabel="true" type="modeling"/>
-            <point id="219" idObject="3" inUse="true" mx="-1.64399" my="-1.11279" showLabel="true" type="modeling"/>
-            <point id="221" idObject="80" inUse="true" mx="-1.57043" my="-1.46574" showLabel="true" type="modeling"/>
-            <point id="222" idObject="94" inUse="true" mx="-0.954275" my="-0.880717" showLabel="true" type="modeling"/>
-            <point id="223" idObject="90" inUse="true" mx="-0.675292" my="0.147116" showLabel="true" type="modeling"/>
-            <point id="224" idObject="95" inUse="true" mx="0.279125" my="-0.543001" showLabel="true" type="modeling"/>
-            <point id="225" idObject="81" inUse="true" mx="0.655497" my="-0.983501" showLabel="true" type="modeling"/>
-            <point id="226" idObject="3" inUse="true" mx="-1.64399" my="-1.11279" showLabel="true" type="modeling"/>
+            <point id="214" idObject="80" inUse="false" mx="-1.57043" my="-1.46574" showLabel="true" type="modeling"/>
+            <point id="215" idObject="94" inUse="false" mx="-0.954275" my="-0.880717" showLabel="true" type="modeling"/>
+            <point id="216" idObject="90" inUse="false" mx="-0.675292" my="0.147116" showLabel="true" type="modeling"/>
+            <point id="217" idObject="95" inUse="false" mx="0.279125" my="-0.543001" showLabel="true" type="modeling"/>
+            <point id="218" idObject="81" inUse="false" mx="0.655497" my="-0.983501" showLabel="true" type="modeling"/>
+            <point id="219" idObject="3" inUse="false" mx="-1.64399" my="-1.11279" showLabel="true" type="modeling"/>
+            <point id="221" idObject="80" inUse="false" mx="-1.57043" my="-1.46574" showLabel="true" type="modeling"/>
+            <point id="222" idObject="94" inUse="false" mx="-0.954275" my="-0.880717" showLabel="true" type="modeling"/>
+            <point id="223" idObject="90" inUse="false" mx="-0.675292" my="0.147116" showLabel="true" type="modeling"/>
+            <point id="224" idObject="95" inUse="false" mx="0.279125" my="-0.543001" showLabel="true" type="modeling"/>
+            <point id="225" idObject="81" inUse="false" mx="0.655497" my="-0.983501" showLabel="true" type="modeling"/>
+            <point id="226" idObject="3" inUse="false" mx="-1.64399" my="-1.11279" showLabel="true" type="modeling"/>
         </modeling>
         <details>
-            <detail closed="1" forbidFlipping="true" forceFlipping="false" hideMainPath="false" id="213" inLayout="true" mx="0" my="0" name="Back" seamAllowance="true" united="false" version="2" width="0.3">
+            <detail closed="1" forbidFlipping="true" forceFlipping="false" hideMainPath="false" id="213" mx="0" my="0" name="Back case 1" seamAllowance="true" sewLineOnDrawing="false" uuid="{b9876b4f-4064-4583-8d9e-510d3be19f51}" version="2" width="0.3">
                 <data annotation="" foldPosition="" fontSize="102" height="3.66776" letter="" mx="-20.0743" my="468.066" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="false" width="7.55684">
                     <line alignment="4" bold="true" italic="false" sfIncrement="2" text="%pName%"/>
                 </data>
@@ -236,7 +236,7 @@
                     <node idObject="212" type="NodePoint"/>
                 </nodes>
             </detail>
-            <detail forbidFlipping="true" forceFlipping="false" hideMainPath="false" id="220" inLayout="true" mx="21.7242" my="0.323277" name="Back" seamAllowance="true" united="false" version="2" width="1">
+            <detail forbidFlipping="true" forceFlipping="false" hideMainPath="false" id="220" mx="21.7242" my="0.323277" name="Back case 2" seamAllowance="true" sewLineOnDrawing="false" uuid="{55c8aff5-3bdc-4885-aeaf-b402f122e8b3}" version="2" width="1">
                 <data annotation="" foldPosition="" fontSize="102" height="3.66776" letter="" mx="-20.0743" my="468.066" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="false" width="7.55684">
                     <line alignment="4" bold="true" italic="false" sfIncrement="2" text="%pName%"/>
                 </data>
@@ -251,7 +251,7 @@
                     <node idObject="219" type="NodePoint"/>
                 </nodes>
             </detail>
-            <detail forbidFlipping="true" forceFlipping="false" hideMainPath="false" id="227" inLayout="true" mx="7.69399" my="15.0001" name="Back" seamAllowance="true" united="false" version="2" width="2">
+            <detail forbidFlipping="true" forceFlipping="false" hideMainPath="false" id="227" mx="7.69399" my="15.0001" name="Back case 3" seamAllowance="true" sewLineOnDrawing="false" uuid="{29977cac-1198-46e5-b723-72b060c9ce35}" version="2" width="2">
                 <data annotation="" foldPosition="" fontSize="102" height="3.66776" letter="" mx="-20.0743" my="468.066" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="false" width="7.55684">
                     <line alignment="4" bold="true" italic="false" sfIncrement="2" text="%pName%"/>
                 </data>

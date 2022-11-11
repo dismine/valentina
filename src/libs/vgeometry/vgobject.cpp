@@ -565,13 +565,13 @@ auto VGObject::IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const Q
     // Here we deal with more like cigar shape.
 
     // Front and rear easy to check
-    if (VFuzzyComparePoints(p1, t) || VFuzzyComparePoints(p2, t))
+    if (VFuzzyComparePoints(p1, t, accuracy) || VFuzzyComparePoints(p2, t, accuracy))
     {
         return true;
     }
 
     // Check if we have a segment. On previous step we already confirmed that we don't have intersection
-    if (VFuzzyComparePoints(p1, p2))
+    if (VFuzzyComparePoints(p1, p2, accuracy))
     {
         return false;
     }

@@ -59,6 +59,42 @@
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpassmark.h"
 
+namespace
+{
+auto FillPath(const QVector<QPointF> &path, qreal accuracy) -> QVector<QPointF>
+{
+    QVector<QPointF> pathFilled;
+    pathFilled.reserve(path.size());
+
+    for (int i=0; i < path.size()-1; ++i)
+    {
+        pathFilled.append(path.at(i));
+
+        QLineF line(path.at(i), path.at(i+1));
+        if (line.length() > accuracy)
+        {
+            qreal len = accuracy;
+            do
+            {
+                QLineF l = line;
+                l.setLength(len);
+                pathFilled.append(l.p2());
+                len += accuracy;
+            }
+            while(line.length() > len);
+        }
+        else
+        {
+            int a = 1;
+        }
+    }
+
+    pathFilled.append(ConstLast(path));
+
+    return pathFilled;
+}
+}  // namespace
+
 //---------------------------------------------------------------------------------------------------------------------
 AbstractTest::AbstractTest(QObject *parent) :
     QObject(parent)
@@ -210,6 +246,38 @@ void AbstractTest::PassmarkShapeFromJson(const QString &json, QVector<QLineF> &s
 
         shape.append(QLineFromJson(lineObject));
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void AbstractTest::ComparePaths(const QVector<QPointF> &actual, const QVector<QPointF> &expected)
+{
+    QVERIFY2(actual.size() >= 2, "Not enough points");
+    QVERIFY2(expected.size() >= 2, "Not enough points");
+
+    const qreal accuracy = accuracyPointOnLine*2;
+    QVector<QPointF> actualFilled = FillPath(actual, accuracy);
+
+    bool onLine = false;
+    QSet<int> usedEdges;
+    for (auto p : actualFilled)
+    {
+        for(int i = 0; i < expected.size()-1; ++i)
+        {
+            if (VGObject::IsPointOnLineSegment(p, expected.at(i), expected.at(i+1)))
+            {
+                usedEdges.insert(i+1);
+                onLine = true;
+            }
+        }
+
+        if (not onLine)
+        {
+            QFAIL("Paths are not the same. Point is not on edge.");
+        }
+        onLine = false;
+    }
+
+    QVERIFY2(expected.size() - 1 == usedEdges.size(), "Paths are not the same. Not all edges were used.");
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -86,6 +86,7 @@ public:
     void PassmarkShapeFromJson(const QString &json, QVector<QLineF> &shape);
 
 protected:
+    static void ComparePaths(const QVector<QPointF> &actual, const QVector<QPointF> &expected);
     void ComparePathsDistance(const QVector<QPointF> &ekv, const QVector<QPointF> &ekvOrig) const;
     void ComparePointsDistance(const QPointF &result, const QPointF &expected, qreal testAccuracy) const;
     void CompareLinesDistance(const QVector<QLineF> &result, const QVector<QLineF> &expected) const;

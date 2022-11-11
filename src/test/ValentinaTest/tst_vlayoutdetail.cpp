@@ -64,7 +64,7 @@ void TST_VLayoutDetail::Case1() const
     // Begin comparison
     QVector<QPointF> contourPoints;
     CastTo(det.GetMappedContourPoints(), contourPoints);
-    ComparePathsDistance(contourPoints, OutputPointsCase1());
+    ComparePaths(contourPoints, OutputPointsCase1());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -130,7 +130,7 @@ void TST_VLayoutDetail::Case2() const
     // Begin comparison
     QVector<QPointF> contourPoints;
     CastTo(det.GetMappedContourPoints(), contourPoints);
-    ComparePathsDistance(contourPoints, OutputPointsCase2());
+    ComparePaths(contourPoints, OutputPointsCase2());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

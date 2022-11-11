@@ -60,7 +60,7 @@ void TST_VPiece::Issue620()
         QVector<QPointF> origPoints = AbstractTest::VectorFromJson<QPointF>(QStringLiteral("://Issue_620/output.json"));
 
         // Begin comparison
-        ComparePathsDistance(pointsEkv, origPoints);
+        ComparePaths(pointsEkv, origPoints);
     }
     catch (const VException &e)
     {
