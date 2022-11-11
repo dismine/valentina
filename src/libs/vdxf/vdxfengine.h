@@ -109,7 +109,7 @@ private:
     Q_DISABLE_COPY_MOVE(VDxfEngine) // NOLINT
 
     QSize m_size{};
-    double m_resolution{static_cast<int>(PrintDPI)};
+    double m_resolution{PrintDPI};
     QString m_fileName{};
     DRW::Version m_version{DRW::AC1014};
     bool m_binary{false};
