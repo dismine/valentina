@@ -48,8 +48,8 @@ public:
     Q_DECL_CONSTEXPR VRawSAPoint(qreal xpos, qreal ypos);
     Q_DECL_CONSTEXPR explicit VRawSAPoint(QPointF p);
     Q_DECL_CONSTEXPR explicit VRawSAPoint(const VLayoutPoint &p);
-    Q_DECL_CONSTEXPR VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint);
-    Q_DECL_CONSTEXPR VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint, bool loopPoint);
+    Q_DECL_RELAXED_CONSTEXPR VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint);
+    Q_DECL_RELAXED_CONSTEXPR VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint, bool loopPoint);
 
     Q_DECL_CONSTEXPR auto LoopPoint() const -> bool;
     Q_DECL_RELAXED_CONSTEXPR void SetLoopPoint(bool loopPoint);
@@ -83,7 +83,7 @@ Q_DECL_CONSTEXPR inline VRawSAPoint::VRawSAPoint(const VLayoutPoint &p)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline VRawSAPoint::VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint)
+Q_DECL_RELAXED_CONSTEXPR inline VRawSAPoint::VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint)
     : VLayoutPoint(p)
 {
     SetCurvePoint(curvePoint);
@@ -91,7 +91,7 @@ Q_DECL_CONSTEXPR inline VRawSAPoint::VRawSAPoint(QPointF p, bool curvePoint, boo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline VRawSAPoint::VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint, bool loopPoint)
+Q_DECL_RELAXED_CONSTEXPR inline VRawSAPoint::VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint, bool loopPoint)
     : VLayoutPoint(p),
       m_loopPoint(loopPoint)
 {
