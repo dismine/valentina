@@ -250,7 +250,7 @@ void AbstractTest::ComparePaths(const QVector<QPointF> &actual, const QVector<QP
     QVERIFY2(actual.size() >= 2, "Not enough points");
     QVERIFY2(expected.size() >= 2, "Not enough points");
 
-    const qreal accuracy = accuracyPointOnLine*2;
+    const qreal accuracy = accuracyPointOnLine*4.;
     QVector<QPointF> actualFilled = FillPath(actual, accuracy);
 
     bool onLine = false;
@@ -259,7 +259,7 @@ void AbstractTest::ComparePaths(const QVector<QPointF> &actual, const QVector<QP
     {
         for(int i = 0; i < expected.size()-1; ++i)
         {
-            if (VGObject::IsPointOnLineSegment(p, expected.at(i), expected.at(i+1)))
+            if (VGObject::IsPointOnLineSegment(p, expected.at(i), expected.at(i+1), accuracyPointOnLine*2.))
             {
                 usedEdges.insert(i+1);
                 onLine = true;
