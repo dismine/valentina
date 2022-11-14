@@ -654,7 +654,7 @@ auto VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContainer *pat
                                               qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
-    det.SetCountourPoints(futureMainPath.result(),
+    det.SetContourPoints(futureMainPath.result(),
                           VAbstractApplication::VApp()->Settings()->IsPieceShowMainPath() ? false
                                                                                           : piece.IsHideMainPath());
     det.SetSeamAllowancePoints(futureSeamAllowance.result(), piece.IsSeamAllowance(), piece.IsSeamAllowanceBuiltIn());
@@ -764,7 +764,7 @@ auto VLayoutPiece::GetContourPoints() const -> QVector<VLayoutPoint>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiece::SetCountourPoints(const QVector<VLayoutPoint> &points, bool hideMainPath)
+void VLayoutPiece::SetContourPoints(const QVector<VLayoutPoint> &points, bool hideMainPath)
 {
     d->m_contour = RemoveDublicates(points, false);
     SetHideMainPath(hideMainPath);

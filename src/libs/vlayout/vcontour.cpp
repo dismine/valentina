@@ -295,7 +295,7 @@ QLineF VContour::GlobalEdge(int i) const
             edge = QLineF(d->globalContour.at(i-1), d->globalContour.at(i));
         }
         else
-        { // Closed countour
+        { // Closed contour
             edge = QLineF(d->globalContour.at(GlobalEdgesCount()-1), d->globalContour.at(0));
         }
     }

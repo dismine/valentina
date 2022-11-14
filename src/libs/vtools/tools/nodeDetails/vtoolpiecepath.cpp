@@ -194,8 +194,8 @@ void VToolPiecePath::AddAttributes(VAbstractPattern *doc, QDomElement &domElemen
     {
         doc->SetAttribute(domElement, VAbstractPattern::AttrVisible, path.GetVisibilityTrigger());
         doc->SetAttribute(domElement, AttrCut, path.IsCutPath());
-        doc->SetAttribute(domElement, AttrFirstToCountour, path.IsFirstToCuttingCountour());
-        doc->SetAttribute(domElement, AttrLastToCountour, path.IsLastToCuttingCountour());
+        doc->SetAttribute(domElement, AttrFirstToContour, path.IsFirstToCuttingContour());
+        doc->SetAttribute(domElement, AttrLastToContour, path.IsLastToCuttingContour());
     }
 }
 

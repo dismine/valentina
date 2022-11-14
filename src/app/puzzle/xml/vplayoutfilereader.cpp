@@ -556,7 +556,7 @@ auto VPLayoutFileReader::ReadLayoutPoints() -> QVector<VLayoutPoint>
 void VPLayoutFileReader::ReadSeamLine(const VPPiecePtr &piece)
 {
     AssertRootTag(ML::TagSeamLine);
-    piece->SetCountourPoints(ReadLayoutPoints());
+    piece->SetContourPoints(ReadLayoutPoints());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

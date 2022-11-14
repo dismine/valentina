@@ -1358,8 +1358,8 @@ void DialogPiecePath::SetPiecePath(const VPiecePath &path)
 
     SetPenType(path.GetPenType());
     SetCutPath(path.IsCutPath());
-    ui->checkBoxFirstPointToCuttingContour->setChecked(path.IsFirstToCuttingCountour());
-    ui->checkBoxLastPointToCuttingContour->setChecked(path.IsLastToCuttingCountour());
+    ui->checkBoxFirstPointToCuttingContour->setChecked(path.IsFirstToCuttingContour());
+    ui->checkBoxLastPointToCuttingContour->setChecked(path.IsLastToCuttingContour());
 
     if (path.GetType() == PiecePathType::InternalPath)
     {
@@ -1628,8 +1628,8 @@ VPiecePath DialogPiecePath::CreatePath() const
     path.SetName(ui->lineEditName->text());
     path.SetPenType(isInternalPath ? GetPenType() : Qt::SolidLine);
     path.SetCutPath(isInternalPath ? IsCutPath() : false);
-    path.SetFirstToCuttingCountour(isInternalPath ? ui->checkBoxFirstPointToCuttingContour->isChecked() : false);
-    path.SetLastToCuttingCountour(isInternalPath ? ui->checkBoxLastPointToCuttingContour->isChecked() : false);
+    path.SetFirstToCuttingContour(isInternalPath ? ui->checkBoxFirstPointToCuttingContour->isChecked() : false);
+    path.SetLastToCuttingContour(isInternalPath ? ui->checkBoxLastPointToCuttingContour->isChecked() : false);
     path.SetVisibilityTrigger(isInternalPath ? GetFormulaVisible() : QChar('1'));
 
     return path;

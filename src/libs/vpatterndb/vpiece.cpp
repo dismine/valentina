@@ -1243,7 +1243,7 @@ void VPiece::TestInternalPathCuttingPathIntersection(const VContainer *data) con
         if (internalPath.intersects(contourPath))
         {
             const QString errorMsg = QObject::tr("Piece '%1'. Internal path '%2' intersects with cutting "
-                                                 "countour.").arg(GetName(), path.GetName());
+                                                 "contour.").arg(GetName(), path.GetName());
             VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
                 qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
             continue;
@@ -1252,7 +1252,7 @@ void VPiece::TestInternalPathCuttingPathIntersection(const VContainer *data) con
         if (not contourPath.contains(internalPath))
         {
             const QString errorMsg = QObject::tr("Piece '%1'. Internal path '%2' not inside of cutting "
-                                                 "countour.").arg(GetName(), path.GetName());
+                                                 "contour.").arg(GetName(), path.GetName());
             VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
                 qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         }

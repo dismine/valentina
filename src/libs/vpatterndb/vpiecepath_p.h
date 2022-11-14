@@ -59,8 +59,8 @@ public:
           m_penType(path.m_penType),
           m_cut(path.m_cut),
           m_visibilityTrigger(path.m_visibilityTrigger),
-          m_firstToCuttingCountour(path.m_firstToCuttingCountour),
-          m_lastToCuttingCountour(path.m_lastToCuttingCountour)
+          m_firstToCuttingContour(path.m_firstToCuttingContour),
+          m_lastToCuttingContour(path.m_lastToCuttingContour)
     {}
 
     ~VPiecePathData();
@@ -71,8 +71,8 @@ public:
     Qt::PenStyle m_penType{Qt::SolidLine};
     bool m_cut{false};
     QString m_visibilityTrigger{'1'};
-    bool m_firstToCuttingCountour{false};
-    bool m_lastToCuttingCountour{false};
+    bool m_firstToCuttingContour{false};
+    bool m_lastToCuttingContour{false};
 
 private:
     Q_DISABLE_ASSIGN(VPiecePathData)

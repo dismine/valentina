@@ -59,7 +59,7 @@ void TST_VLayoutDetail::Case1() const
     VLayoutPiece det = VLayoutPiece();
     QVector<VLayoutPoint> inputPoints;
     CastTo(InputPointsCase1(), inputPoints);
-    det.SetCountourPoints(inputPoints);
+    det.SetContourPoints(inputPoints);
 
     // Begin comparison
     QVector<QPointF> contourPoints;
@@ -125,7 +125,7 @@ void TST_VLayoutDetail::Case2() const
     VLayoutPiece det = VLayoutPiece();
     QVector<VLayoutPoint> inputPoints;
     CastTo(InputPointsCase2(), inputPoints);
-    det.SetCountourPoints(inputPoints);
+    det.SetContourPoints(inputPoints);
 
     // Begin comparison
     QVector<QPointF> contourPoints;
@@ -170,7 +170,7 @@ void TST_VLayoutDetail::Case3() const
     VLayoutPiece det = VLayoutPiece();
     QVector<VLayoutPoint> inputPoints;
     CastTo(InputPointsCase3(), inputPoints);
-    det.SetCountourPoints(inputPoints);
+    det.SetContourPoints(inputPoints);
 
     // Begin comparison
     QVector<QPointF> contourPoints;

@@ -84,11 +84,11 @@ public:
     QString GetVisibilityTrigger() const;
     void    SetVisibilityTrigger(const QString &formula);
 
-    void SetFirstToCuttingCountour(bool value);
-    bool IsFirstToCuttingCountour() const;
+    void SetFirstToCuttingContour(bool value);
+    bool IsFirstToCuttingContour() const;
 
-    void SetLastToCuttingCountour(bool value);
-    bool IsLastToCuttingCountour() const;
+    void SetLastToCuttingContour(bool value);
+    bool IsLastToCuttingContour() const;
 
     QVector<VLayoutPoint>     PathPoints(const VContainer *data,
                                          const QVector<QPointF> &cuttingPath = QVector<QPointF>()) const;

@@ -4057,8 +4057,8 @@ void VPattern::ParsePathElement(VMainGraphicsScene *scene, QDomElement &domEleme
         if (initData.path.GetType() == PiecePathType::InternalPath)
         {
             initData.path.SetCutPath(GetParametrBool(domElement, AttrCut, falseStr));
-            initData.path.SetFirstToCuttingCountour(GetParametrBool(domElement, AttrFirstToCountour, falseStr));
-            initData.path.SetLastToCuttingCountour(GetParametrBool(domElement, AttrLastToCountour, falseStr));
+            initData.path.SetFirstToCuttingContour(GetParametrBool(domElement, AttrFirstToContour, falseStr));
+            initData.path.SetLastToCuttingContour(GetParametrBool(domElement, AttrLastToContour, falseStr));
             initData.path.SetVisibilityTrigger(GetParametrString(domElement, AttrVisible, QChar('1')));
         }
 

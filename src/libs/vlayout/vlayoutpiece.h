@@ -82,7 +82,7 @@ public:
 
     auto GetMappedContourPoints() const -> QVector<VLayoutPoint>;
     auto GetContourPoints() const -> QVector<VLayoutPoint>;
-    void SetCountourPoints(const QVector<VLayoutPoint> &points, bool hideMainPath = false);
+    void SetContourPoints(const QVector<VLayoutPoint> &points, bool hideMainPath = false);
 
     auto GetMappedSeamAllowancePoints() const -> QVector<VLayoutPoint>;
     auto GetSeamAllowancePoints() const -> QVector<VLayoutPoint>;

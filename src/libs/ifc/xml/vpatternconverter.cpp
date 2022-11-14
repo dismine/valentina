@@ -169,6 +169,10 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCutNumber, (QLatin1String("cutNumber
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strQuantity, (QLatin1String("quantity"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strExtension, (QLatin1String("extension"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strContentType, (QLatin1String("contentType"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strFirstToCountour, (QLatin1String("firstToCountour"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strFirstToContour, (QLatin1String("firstToContour"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strLastToCountour, (QLatin1String("lastToCountour"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strLastToContour, (QLatin1String("lastToContour"))) // NOLINT
 } // anonymous namespace
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -574,6 +578,7 @@ void VPatternConverter::ToV0_9_2()
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 9, 2),
                       "Time to refactor the code.");
 
+    ConvertPathAttributesToV0_9_2();
     SetVersion(QStringLiteral("0.9.2"));
     Save();
 }
@@ -2214,6 +2219,37 @@ void VPatternConverter::ConvertMeasurementsPathToV0_9_1()
             RemoveAllChildren(domElement);
 
             domElement.setAttribute(*strPath, path);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ConvertPathAttributesToV0_9_2()
+{
+    // TODO. Delete if minimal supported version is 0.9.2
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 9, 2),
+                      "Time to refactor the code.");
+
+    const QDomNodeList paths = this->elementsByTagName(*strPath);
+    for (int i=0; i < paths.size(); ++i)
+    {
+        QDomElement domElement = paths.at(i).toElement();
+
+        if (domElement.isNull())
+        {
+            continue;
+        }
+
+        if (domElement.hasAttribute(*strFirstToCountour))
+        {
+            domElement.setAttribute(*strFirstToContour, domElement.attribute(*strFirstToCountour));
+            domElement.removeAttribute(*strFirstToCountour);
+        }
+
+        if (domElement.hasAttribute(*strLastToCountour))
+        {
+            domElement.setAttribute(*strLastToContour, domElement.attribute(*strLastToCountour));
+            domElement.removeAttribute(*strLastToCountour);
         }
     }
 }

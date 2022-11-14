@@ -441,8 +441,8 @@
                           <xs:attribute name="typeLine" type="curvePenStyle"/>
                           <xs:attribute name="cut" type="xs:boolean"/>
                           <xs:attribute name="visible" type="xs:string"/>
-                          <xs:attribute name="firstToCountour" type="xs:boolean"/>
-                          <xs:attribute name="lastToCountour" type="xs:boolean"/>
+                          <xs:attribute name="firstToContour" type="xs:boolean"/>
+                          <xs:attribute name="lastToContour" type="xs:boolean"/>
                           <xs:attribute name="cuttingNumber" type="xs:unsignedInt"/>
                           <xs:attribute name="cuttingVelocityReduction" type="velocityReduction"/>   
                         </xs:complexType>

@@ -149,7 +149,7 @@ void VPPiece::Update(const VPPiecePtr &piece)
     }
 
     SetName(piece->GetName());
-    SetCountourPoints(piece->GetContourPoints(), piece->IsHideMainPath());
+    SetContourPoints(piece->GetContourPoints(), piece->IsHideMainPath());
     SetSeamAllowancePoints(piece->GetSeamAllowancePoints(), piece->IsSeamAllowance(), piece->IsSeamAllowanceBuiltIn());
     SetInternalPaths(piece->GetInternalPaths());
     SetPassmarks(piece->GetPassmarks());
