@@ -107,6 +107,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternShowCurveDetails, (QLatin
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternPieceShowMainPath, (QLatin1String("pattern/pieceShowMainPath"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternLabelFontSize, (QLatin1String("pattern/labelFontSize"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternHideLabels, (QLatin1String("pattern/hideLabels"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternShowAccuracyRadius, (QLatin1String("pattern/showAccuracyRadius"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternUseOpenGLRender, (QLatin1String("pattern/useOpenGLRender"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternGraphicalOutput, (QLatin1String("pattern/graphicalOutput"))) // NOLINT
 
@@ -1149,6 +1150,18 @@ auto VCommonSettings::GetHideLabels() const -> bool
 void VCommonSettings::SetHideLabels(bool value)
 {
     setValue(*settingPatternHideLabels, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::GetShowAccuracyRadius() const -> bool
+{
+    return value(*settingPatternShowAccuracyRadius, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetShowAccuracyRadius(bool value)
+{
+    setValue(*settingPatternShowAccuracyRadius, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

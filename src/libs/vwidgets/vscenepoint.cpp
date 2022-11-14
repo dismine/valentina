@@ -69,8 +69,21 @@ void VScenePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     ScaleMainPenWidth(scale);
     ScaleCircleSize(this, scale);
 
-    if (VAbstractApplication::VApp()->Settings()->GetLabelFontSize()*scale < minVisibleFontSize ||
-            VAbstractApplication::VApp()->Settings()->GetHideLabels())
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+
+    if (settings->GetShowAccuracyRadius())
+    {
+        painter->save();
+        QPen pen = painter->pen();
+        pen.setWidthF(accuracyPointOnLine/15);
+        pen.setStyle(Qt::DashLine);
+        pen.setColor(Qt::black);
+        painter->setPen(pen);
+        painter->drawEllipse(PointRect(accuracyPointOnLine));
+        painter->restore();
+    }
+
+    if (settings->GetLabelFontSize()*scale < minVisibleFontSize || settings->GetHideLabels())
     {
         m_namePoint->setVisible(false);
         m_lineName->setVisible(false);

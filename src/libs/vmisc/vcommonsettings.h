@@ -213,6 +213,9 @@ public:
     auto GetHideLabels() const -> bool;
     void SetHideLabels(bool value);
 
+    auto GetShowAccuracyRadius() const -> bool;
+    void SetShowAccuracyRadius(bool value);
+
 #if !defined(Q_OS_WIN)
     static const QString unixStandardSharePath;
 #endif

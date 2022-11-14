@@ -4021,6 +4021,7 @@ void MainWindow::Clear()
     ui->actionFinalMeasurements->setEnabled(false);
     ui->actionLast_tool->setEnabled(false);
     ui->actionShowCurveDetails->setEnabled(false);
+    ui->actionShowAccuracyRadius->setEnabled(false);
     ui->actionShowMainPath->setEnabled(false);
     ui->actionLoadIndividual->setEnabled(false);
     ui->actionLoadMultisize->setEnabled(false);
@@ -4272,6 +4273,7 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionZoomFitBestCurrent->setEnabled(enableOnDrawStage);
     ui->actionZoomOriginal->setEnabled(enable);
     ui->actionShowCurveDetails->setEnabled(enableOnDrawStage);
+    ui->actionShowAccuracyRadius->setEnabled(enableOnDesignStage);
     ui->actionShowMainPath->setEnabled(enableOnDetailsStage);
     ui->actionLoadIndividual->setEnabled(enableOnDesignStage);
     ui->actionLoadMultisize->setEnabled(enableOnDesignStage);
@@ -5654,6 +5656,15 @@ void MainWindow::CreateActions()
         emit ui->view->itemClicked(nullptr);
         m_sceneDraw->EnableDetailsMode(checked);
         VAbstractValApplication::VApp()->ValentinaSettings()->SetShowCurveDetails(checked);
+    });
+
+    ui->actionShowAccuracyRadius->setChecked(
+        VAbstractValApplication::VApp()->ValentinaSettings()->GetShowAccuracyRadius());
+    connect(ui->actionShowAccuracyRadius, &QAction::triggered, this, [this](bool checked)
+    {
+        VAbstractValApplication::VApp()->ValentinaSettings()->SetShowAccuracyRadius(checked);
+        m_sceneDetails->update();
+        m_sceneDraw->update();
     });
 
     ui->actionShowMainPath->setChecked(VAbstractValApplication::VApp()->ValentinaSettings()->IsPieceShowMainPath());

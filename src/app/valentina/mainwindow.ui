@@ -1778,6 +1778,7 @@
     <addaction name="actionLast_tool"/>
     <addaction name="actionShowCurveDetails"/>
     <addaction name="actionShowMainPath"/>
+    <addaction name="actionShowAccuracyRadius"/>
     <addaction name="separator"/>
     <addaction name="actionAddBackgroundImage"/>
    </widget>
@@ -3180,6 +3181,17 @@
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionShowAccuracyRadius">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Show accuracy radius</string>
    </property>
   </action>
  </widget>
