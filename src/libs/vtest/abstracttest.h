@@ -36,6 +36,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <qtestcase.h>
+#include <typeinfo>
 
 #include "../vgeometry/vpointf.h"
 #include "../vlayout/vsapoint.h"
