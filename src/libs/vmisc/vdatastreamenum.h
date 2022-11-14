@@ -39,19 +39,16 @@
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
 template <typename T>
-typename std::enable_if<std::is_enum<T>::value, QDataStream &>::type&
-operator<<(QDataStream &s, const T &t)
+auto operator<<(QDataStream &s, const T &t) -> typename std::enable_if<std::is_enum<T>::value, QDataStream &>::type&
 {
     return s << static_cast<typename std::underlying_type<T>::type>(t);
 }
 
 template <typename T>
-typename std::enable_if<std::is_enum<T>::value, QDataStream &>::type&
-operator>>(QDataStream &s, T &t)
+auto operator>>(QDataStream &s, T &t) -> typename std::enable_if<std::is_enum<T>::value, QDataStream &>::type&
 {
-    return s >> reinterpret_cast<typename std::underlying_type<T>::type &>(t);
+    return s >> reinterpret_cast<typename std::underlying_type<T>::type &>(t); // NOLINT(cppcoreguidelines-pro-type-reinterpret-cast)
 }
-#endif
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 9, 0)
 template <typename Enum>
@@ -68,6 +65,7 @@ inline QDataStream &operator>>(QDataStream &s, QFlags<Enum> &e)
     e = static_cast<QFlags<Enum>>(v);
     return s;
 }
-#endif
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 9, 0)
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
 
 #endif // DATASTREAM_ENUM_H

@@ -39,7 +39,6 @@
 #endif
 
 #include "../vmisc/def.h"
-#include "../vmisc/vdatastreamenum.h"
 #include "../ifc/exception/vexception.h"
 
 const QByteArray VRawLayout::fileHeaderByteArray = QByteArray("RLD!...");
