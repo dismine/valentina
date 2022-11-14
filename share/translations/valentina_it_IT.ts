@@ -10014,6 +10014,10 @@ Vuoi salvare i cambiamenti?</translation>
         <source>Visibility group</source>
         <translation>Gruppo di Visibilità</translation>
     </message>
+    <message>
+        <source>Show accuracy radius</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -11268,10 +11272,6 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
         <translation type="vanished">Modifiche applicate.</translation>
     </message>
     <message>
-        <source>Wrong tag name &apos;%1&apos;.</source>
-        <translation type="vanished">Nome di etichetta errato &apos;%1&apos;.</translation>
-    </message>
-    <message>
         <source>Can&apos;t convert toUInt parameter</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11329,11 +11329,11 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
     </message>
     <message>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of first point with cutting countour</source>
-        <translation>Errore nel tracciato interno &apos;%1&apos;. Non c&apos;è intersezione tra il primo punto e il contorno di ritaglio</translation>
+        <translation type="vanished">Errore nel tracciato interno &apos;%1&apos;. Non c&apos;è intersezione tra il primo punto e il contorno di ritaglio</translation>
     </message>
     <message>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting countour</source>
-        <translation>Errore nel tracciato interno &apos;%1&apos;. Non c&apos;è intersezione tra l&apos;ultimo punto e il contorno di ritaglio</translation>
+        <translation type="vanished">Errore nel tracciato interno &apos;%1&apos;. Non c&apos;è intersezione tra l&apos;ultimo punto e il contorno di ritaglio</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
@@ -11604,15 +11604,23 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with cutting countour.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; not inside of cutting countour.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with internal path &apos;%3&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with cutting contour.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; not inside of cutting contour.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in internal path &apos;%1&apos;. There is no intersection of first point with cutting contour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting contour</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14159,7 +14167,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Wrong tag name &apos;%1&apos;.</source>
-        <translation type="unfinished">Nome di etichetta errato &apos;%1&apos;.</translation>
+        <translation>Nome di etichetta errato &apos;%1&apos;.</translation>
     </message>
 </context>
 <context>

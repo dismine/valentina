@@ -10022,6 +10022,10 @@ Você quer salvar suas mudanças?</translation>
         <source>Visibility group</source>
         <translation>Grupo de Visibilidade</translation>
     </message>
+    <message>
+        <source>Show accuracy radius</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -11276,10 +11280,6 @@ Esta opção terá um efeito após o reinício.</translation>
         <translation type="vanished">Mudanças aplicadas.</translation>
     </message>
     <message>
-        <source>Wrong tag name &apos;%1&apos;.</source>
-        <translation type="vanished">Nome da etiqueta errada &apos;%1&apos;.</translation>
-    </message>
-    <message>
         <source>Can&apos;t convert toUInt parameter</source>
         <translation>Impossível converter o parâmetro toUInt</translation>
     </message>
@@ -11333,14 +11333,6 @@ Esta opção terá um efeito após o reinício.</translation>
     </message>
     <message>
         <source>User material number %1 was not defined in this pattern.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error in internal path &apos;%1&apos;. There is no intersection of first point with cutting countour</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting countour</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -11612,15 +11604,23 @@ Esta opção terá um efeito após o reinício.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with cutting countour.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; not inside of cutting countour.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with internal path &apos;%3&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with cutting contour.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; not inside of cutting contour.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in internal path &apos;%1&apos;. There is no intersection of first point with cutting contour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting contour</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14168,7 +14168,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Wrong tag name &apos;%1&apos;.</source>
-        <translation type="unfinished">Nome da etiqueta errada &apos;%1&apos;.</translation>
+        <translation>Nome da etiqueta errada &apos;%1&apos;.</translation>
     </message>
 </context>
 <context>

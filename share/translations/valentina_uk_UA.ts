@@ -2410,15 +2410,15 @@
     </message>
     <message>
         <source>Pieces areas</source>
-        <translation type="unfinished"></translation>
+        <translation>Площі деталей</translation>
     </message>
     <message>
         <source>Length to control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Довжина до контрольної точки</translation>
     </message>
     <message>
         <source>Area of piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Площа деталі</translation>
     </message>
 </context>
 <context>
@@ -5678,7 +5678,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Turn point</source>
-        <translation type="unfinished"></translation>
+        <translation>Точка повороту</translation>
     </message>
 </context>
 <context>
@@ -7225,7 +7225,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Turn point</source>
-        <translation type="unfinished"></translation>
+        <translation>Точка повороту</translation>
     </message>
 </context>
 <context>
@@ -10028,6 +10028,10 @@ Do you want to save your changes?</source>
         <source>Visibility group</source>
         <translation>Група видимості</translation>
     </message>
+    <message>
+        <source>Show accuracy radius</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -10776,11 +10780,11 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>By default export to DXF-AAMA sew line on Draw layer for all new created workpieces</source>
-        <translation type="unfinished"></translation>
+        <translation>За замовчуванням експорт в DXF-AAMA лінії швів на шарі Draw для всіх новостворених деталей</translation>
     </message>
     <message>
         <source>Sew line on drawing</source>
-        <translation type="unfinished"></translation>
+        <translation>Лінія шва на малювання</translation>
     </message>
 </context>
 <context>
@@ -11282,10 +11286,6 @@ This option will take an affect after restart.</source>
         <translation type="vanished">Зміни застосовано.</translation>
     </message>
     <message>
-        <source>Wrong tag name &apos;%1&apos;.</source>
-        <translation type="vanished">Не правильне ім&apos;я тегу &apos;%1&apos;.</translation>
-    </message>
-    <message>
         <source>Can&apos;t convert toUInt parameter</source>
         <translation>Не можу конвертувати toUInt параметр</translation>
     </message>
@@ -11343,11 +11343,11 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of first point with cutting countour</source>
-        <translation>Помилка у внутрішньому шляху &quot;%1&quot;. Немає перетину першої точки з контуром розрізу</translation>
+        <translation type="vanished">Помилка у внутрішньому шляху &quot;%1&quot;. Немає перетину першої точки з контуром розрізу</translation>
     </message>
     <message>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting countour</source>
-        <translation>Помилка у внутрішньому шляху &quot;%1&quot;. Немає перетину останньої точки з контуром розрізу</translation>
+        <translation type="vanished">Помилка у внутрішньому шляху &quot;%1&quot;. Немає перетину останньої точки з контуром розрізу</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
@@ -11615,18 +11615,34 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Невідома</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with cutting countour.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Деталь &apos;%1&apos;. Внутрішній контур &apos;%2&apos; перетинається з контуром розкрою.</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; not inside of cutting countour.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Деталь &apos;%1&apos;. Внутрішній контур &apos;%2&apos; не всередині контуру розкрою.</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with internal path &apos;%3&apos;.</source>
+        <translation>Деталь &apos;%1&apos;. Внутрішній шлях &apos;%2&apos; перетинається з внутрішнім шляхом &apos;%3&apos;.</translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with cutting contour.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; not inside of cutting contour.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in internal path &apos;%1&apos;. There is no intersection of first point with cutting contour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting contour</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13514,19 +13530,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export to DXF-AAMA sew line on Draw layer </source>
-        <translation type="unfinished"></translation>
+        <translation>Експорт в DXF-AAMA лінії шва на шар Draw </translation>
     </message>
     <message>
         <source>On drawing</source>
-        <translation type="unfinished"></translation>
+        <translation>На малювання</translation>
     </message>
     <message>
         <source>Short name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Коротке ім&apos;я:</translation>
     </message>
     <message>
         <source>Name used to generate a variable</source>
-        <translation type="unfinished"></translation>
+        <translation>Ім&apos;я, що використовується для генерації змінної</translation>
     </message>
 </context>
 <context>
@@ -14177,7 +14193,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Wrong tag name &apos;%1&apos;.</source>
-        <translation type="unfinished">Не правильне ім&apos;я тегу &apos;%1&apos;.</translation>
+        <translation>Не правильне ім&apos;я тегу &apos;%1&apos;.</translation>
     </message>
 </context>
 <context>
@@ -15580,7 +15596,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Turn point</source>
-        <translation type="unfinished"></translation>
+        <translation>Точка повороту</translation>
     </message>
 </context>
 <context>
@@ -15764,10 +15780,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Error in line %1. Internal path shape is empty.</source>
         <translation>Помилка в рядку %1. Внутрішній контур порожній.</translation>
-    </message>
-    <message>
-        <source>Error in line %1. Marker shape is empty.</source>
-        <translation type="vanished">Помилка в рядку %1. Маркер порожній.</translation>
     </message>
     <message>
         <source>Unexpected tag %1 in line %2</source>
@@ -16400,11 +16412,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Has effect only when print in application. To export with tiles scheme use separate setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Впливає тільки при друку в додатку. Для експорту зі схемою плитки використовуйте окреме налаштування</translation>
     </message>
     <message>
         <source>sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>аркуш</translation>
     </message>
 </context>
 <context>
@@ -19591,7 +19603,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <source>PieceArea_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>ПлощаДеталі_</translation>
     </message>
 </context>
 <context>

@@ -10025,6 +10025,10 @@ Do you want to save your changes?</source>
         <source>Visibility group</source>
         <translation>Zichtbaarheid groep</translation>
     </message>
+    <message>
+        <source>Show accuracy radius</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -11279,10 +11283,6 @@ Deze optie wordt actief na een herstart..</translation>
         <translation type="vanished">Wijzigingen zijn toegepast.</translation>
     </message>
     <message>
-        <source>Wrong tag name &apos;%1&apos;.</source>
-        <translation type="vanished">Verkeerde etiket naam &apos;%1&apos;.</translation>
-    </message>
-    <message>
         <source>Can&apos;t convert toUInt parameter</source>
         <translation>Kan parameter toUlnt niet converteren</translation>
     </message>
@@ -11340,11 +11340,11 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of first point with cutting countour</source>
-        <translation>Fout in binnelijn &apos;%1&apos;. Er is geen snijpunt tussen het beginpunt en de rand van de snijlijn</translation>
+        <translation type="vanished">Fout in binnelijn &apos;%1&apos;. Er is geen snijpunt tussen het beginpunt en de rand van de snijlijn</translation>
     </message>
     <message>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting countour</source>
-        <translation>Fout in binnenlijn &apos;%1&apos;. Er is geen snijpunt tussen het laatste punt en de rand van de snijlijn</translation>
+        <translation type="vanished">Fout in binnenlijn &apos;%1&apos;. Er is geen snijpunt tussen het laatste punt en de rand van de snijlijn</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
@@ -11615,15 +11615,23 @@ Deze optie wordt actief na een herstart..</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with cutting countour.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; not inside of cutting countour.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with internal path &apos;%3&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with cutting contour.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; not inside of cutting contour.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in internal path &apos;%1&apos;. There is no intersection of first point with cutting contour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting contour</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14175,7 +14183,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Wrong tag name &apos;%1&apos;.</source>
-        <translation type="unfinished">Verkeerde etiket naam &apos;%1&apos;.</translation>
+        <translation>Verkeerde etiket naam &apos;%1&apos;.</translation>
     </message>
 </context>
 <context>
