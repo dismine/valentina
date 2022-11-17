@@ -252,17 +252,6 @@ void DialogPointOfIntersectionCircles::ShowDialog(bool click)
         return;
     }
 
-    auto FinishCreating = [this]()
-    {
-        vis->SetMode(Mode::Show);
-        vis->RefreshGeometry();
-
-        emit ToolTip(QString());
-
-        setModal(true);
-        show();
-    };
-
     if (click)
     {
         // The check need to ignore first release of mouse button.
@@ -323,13 +312,21 @@ void DialogPointOfIntersectionCircles::ChosenObject(quint32 id, const SceneObjec
             case 0:
                 if (SetObject(id, ui->comboBoxCircle1Center, QString()))
                 {
-                    ++m_stage;
                     point->VisualMode(id);
 
-                    auto *window = qobject_cast<VAbstractMainWindow *>(
-                        VAbstractValApplication::VApp()->getMainWindow());
-                    SCASSERT(window != nullptr)
-                    connect(vis.data(), &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
+                    if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
+                    {
+                        m_stage = 2;
+                        emit ToolTip(tr("Select second circle center"));
+                    }
+                    else
+                    {
+                        ++m_stage;
+                        auto *window = qobject_cast<VAbstractMainWindow *>(
+                            VAbstractValApplication::VApp()->getMainWindow());
+                        SCASSERT(window != nullptr)
+                        connect(vis.data(), &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
+                    }
                 }
                 break;
             case 2:
@@ -341,6 +338,12 @@ void DialogPointOfIntersectionCircles::ChosenObject(quint32 id, const SceneObjec
                         point->RefreshGeometry();
                         ++m_stage;
                         prepare = true;
+
+                        if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
+                        {
+                            FinishCreating();
+                            return;
+                        }
                     }
                 }
                 break;
@@ -483,6 +486,18 @@ void DialogPointOfIntersectionCircles::closeEvent(QCloseEvent *event)
     ui->plainTextEditCircle1Radius->blockSignals(true);
     ui->plainTextEditCircle2Radius->blockSignals(true);
     DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfIntersectionCircles::FinishCreating()
+{
+    vis->SetMode(Mode::Show);
+    vis->RefreshGeometry();
+
+    emit ToolTip(QString());
+
+    setModal(true);
+    show();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

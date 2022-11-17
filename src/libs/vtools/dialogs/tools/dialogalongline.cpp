@@ -292,10 +292,9 @@ void DialogAlongLine::ChosenSecondPoint(quint32 id, const QString &toolTip)
 
             prepare = true;
 
-            if (m_buildMidpoint)
+            if (m_buildMidpoint || not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
             {
-                setModal(true);
-                show();
+                FinishCreating();
             }
         }
         else
@@ -303,6 +302,16 @@ void DialogAlongLine::ChosenSecondPoint(quint32 id, const QString &toolTip)
             emit ToolTip(toolTip);
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogAlongLine::FinishCreating()
+{
+    vis->SetMode(Mode::Show);
+    vis->RefreshGeometry();
+    emit ToolTip(QString());
+    setModal(true);
+    show();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -380,13 +389,7 @@ void DialogAlongLine::ShowDialog(bool click)
         SetFormula(QString::number(FromPixel(len, *data->GetPatternUnit())));
     }
 
-    vis->SetMode(Mode::Show);
-    vis->RefreshGeometry();
-
-    emit ToolTip(QString());
-
-    setModal(true);
-    show();
+    FinishCreating();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

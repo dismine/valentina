@@ -116,6 +116,8 @@ private:
     QString m_originAliasSuffix2{};
 
     bool m_firstRelease{false};
+
+    void FinishCreating();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

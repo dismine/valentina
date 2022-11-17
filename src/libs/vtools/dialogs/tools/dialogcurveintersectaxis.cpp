@@ -225,8 +225,7 @@ void DialogCurveIntersectAxis::ShowDialog(bool click)
             }
 
             /*We will ignore click if poinet is in point circle*/
-            VMainGraphicsScene *scene =
-                    qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
+            auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
             SCASSERT(scene != nullptr)
             const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(GetBasePointId());
             QLineF line = QLineF(static_cast<QPointF>(*point), scene->getScenePos());
@@ -238,12 +237,11 @@ void DialogCurveIntersectAxis::ShowDialog(bool click)
             }
         }
 
-        VisToolCurveIntersectAxis *line = qobject_cast<VisToolCurveIntersectAxis *>(vis);
+        auto *line = qobject_cast<VisToolCurveIntersectAxis *>(vis);
         SCASSERT(line != nullptr)
+        SetAngle(line->Angle());//Show in dialog angle what user choose
 
-        this->SetAngle(line->Angle());//Show in dialog angle what user choose
         emit ToolTip(QString());
-
         DialogAccepted();// Just set default values and don't show dialog
     }
 }
@@ -253,7 +251,7 @@ void DialogCurveIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (prepare == false)// After first choose we ignore all objects
     {
-        VisToolCurveIntersectAxis *line = qobject_cast<VisToolCurveIntersectAxis *>(vis);
+        auto *line = qobject_cast<VisToolCurveIntersectAxis *>(vis);
         SCASSERT(line != nullptr)
 
         switch (number)
@@ -284,6 +282,14 @@ void DialogCurveIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
                         line->setAxisPointId(id);
                         line->RefreshGeometry();
                         prepare = true;
+
+                        if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
+                        {
+                            emit ToolTip(QString());
+
+                            setModal(true);
+                            show();
+                        }
                     }
                 }
                 break;

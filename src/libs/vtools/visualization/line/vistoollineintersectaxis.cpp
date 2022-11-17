@@ -83,15 +83,21 @@ void VisToolLineIntersectAxis::RefreshGeometry()
             {
                 QLineF axis;
                 const QSharedPointer<VPointF> third = GetData()->GeometricObject<VPointF>(m_axisPointId);
+                DrawPoint(m_basePoint, static_cast<QPointF>(*third), Color(VColor::MainColor));
+
                 if (VFuzzyComparePossibleNulls(m_angle, -1))
                 {
+                    if (GetMode() == Mode::Show)
+                    {
+                        return;
+                    }
                     axis = Axis(static_cast<QPointF>(*third), ScenePos());
                 }
                 else
                 {
                     axis = Axis(static_cast<QPointF>(*third), m_angle);
                 }
-                DrawPoint(m_basePoint, static_cast<QPointF>(*third), Color(VColor::MainColor));
+
                 DrawLine(m_axisLine, axis, Color(VColor::SupportColor), Qt::DashLine);
 
                 QPointF p;
@@ -105,10 +111,13 @@ void VisToolLineIntersectAxis::RefreshGeometry()
                 DrawPoint(m_point, p, Color(VColor::MainColor));
                 ShowIntersection(axis_line, base_line);
 
-                SetToolTip(tr("<b>Intersection line and axis</b>: angle = %1°; <b>%2</b> - "
-                              "sticking angle, <b>%3</b> - finish creation")
-                               .arg(AngleToUser(this->line().angle()), VModifierKey::Shift(),
-                                    VModifierKey::EnterKey()));
+                if (GetMode() == Mode::Creation)
+                {
+                    SetToolTip(tr("<b>Intersection line and axis</b>: angle = %1°; <b>%2</b> - "
+                                  "sticking angle, <b>%3</b> - finish creation")
+                                   .arg(AngleToUser(this->line().angle()), VModifierKey::Shift(),
+                                        VModifierKey::EnterKey()));
+                }
             }
         }
     }

@@ -277,8 +277,23 @@ void DialogShoulderPoint::ChosenThirdPoint(quint32 id)
             line->SetLineP2Id(id);
             line->RefreshGeometry();
             prepare = true;
+
+            if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
+            {
+                FinishCreating();
+            }
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogShoulderPoint::FinishCreating()
+{
+    vis->SetMode(Mode::Show);
+    vis->RefreshGeometry();
+    emit ToolTip(QString());
+    setModal(true);
+    show();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -467,11 +482,5 @@ void DialogShoulderPoint::ShowDialog(bool click)
         SetFormula(QString::number(FromPixel(line.length(), *data->GetPatternUnit())));
     }
 
-    vis->SetMode(Mode::Show);
-    vis->RefreshGeometry();
-
-    emit ToolTip(QString());
-
-    setModal(true);
-    show();
+    FinishCreating();
 }

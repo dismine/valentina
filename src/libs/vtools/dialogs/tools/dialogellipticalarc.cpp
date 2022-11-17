@@ -443,6 +443,18 @@ void DialogEllipticalArc::EvalAngles()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogEllipticalArc::FinishCreating()
+{
+    vis->SetMode(Mode::Show);
+    vis->RefreshGeometry();
+
+    emit ToolTip(QString());
+
+    setModal(true);
+    show();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogEllipticalArc::FXRadius1()
 {
     auto *dialog = new DialogEditWrongFormula(data, toolId, this);
@@ -633,13 +645,7 @@ void DialogEllipticalArc::ShowDialog(bool click)
         SetRotationAngle(QString::number(Angle() - path->StartingRotationAngle()));
     }
 
-    vis->SetMode(Mode::Show);
-    vis->RefreshGeometry();
-
-    emit ToolTip(QString());
-
-    setModal(true);
-    show();
+    FinishCreating();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -671,6 +677,11 @@ void DialogEllipticalArc::ChosenObject(quint32 id, const SceneObject &type)
             vis->VisualMode(id);
         }
         prepare = true;
+
+        if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
+        {
+            FinishCreating();
+        }
     }
 }
 

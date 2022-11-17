@@ -227,13 +227,7 @@ void DialogPointFromCircleAndTangent::ShowDialog(bool click)
         SetCircleRadius(QString::number(FromPixel(line.length(), *data->GetPatternUnit())));
     }
 
-    vis->SetMode(Mode::Show);
-    vis->RefreshGeometry();
-
-    emit ToolTip(QString());
-
-    setModal(true);
-    show();
+    FinishCreating();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -272,6 +266,11 @@ void DialogPointFromCircleAndTangent::ChosenObject(quint32 id, const SceneObject
                         point->SetCenterId(id);
                         point->RefreshGeometry();
                         prepare = true;
+
+                        if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
+                        {
+                            FinishCreating();
+                        }
                     }
                 }
                 break;
@@ -369,6 +368,18 @@ void DialogPointFromCircleAndTangent::closeEvent(QCloseEvent *event)
 {
     ui->plainTextEditRadius->blockSignals(true);
     DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointFromCircleAndTangent::FinishCreating()
+{
+    vis->SetMode(Mode::Show);
+    vis->RefreshGeometry();
+
+    emit ToolTip(QString());
+
+    setModal(true);
+    show();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

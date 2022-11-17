@@ -221,6 +221,11 @@ void DialogEndLine::ChosenObject(quint32 id, const SceneObject &type)
                 SCASSERT(window != nullptr)
                 connect(vis.data(), &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
                 prepare = true;
+
+                if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
+                {
+                    FinishCreating();
+                }
             }
         }
     }
@@ -353,16 +358,12 @@ void DialogEndLine::ShowDialog(bool click)
                 return;
             }
         }
-        this->setModal(true);
-
         auto *line = qobject_cast<VisToolEndLine *>(vis);
         SCASSERT(line != nullptr)
+        SetAngle(line->Angle());//Show in dialog angle what user choose
+        SetFormula(line->Length());
 
-        this->SetAngle(line->Angle());//Show in dialog angle what user choose
-        this->SetFormula(line->Length());
-        emit ToolTip(QString());
-        timerFormulaLength->start();
-        this->show();
+        FinishCreating();
     }
 }
 
@@ -395,6 +396,15 @@ void DialogEndLine::closeEvent(QCloseEvent *event)
     ui->plainTextEditFormula->blockSignals(true);
     ui->plainTextEditAngle->blockSignals(true);
     DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEndLine::FinishCreating()
+{
+    setModal(true);
+    emit ToolTip(QString());
+    timerFormulaLength->start();
+    show();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

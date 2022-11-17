@@ -257,17 +257,6 @@ void DialogArc::ShowDialog(bool click)
         auto *arcVis = qobject_cast<VisToolArc *>(vis);
         SCASSERT(arcVis != nullptr)
 
-        auto FinishCreating = [this, arcVis]()
-        {
-            arcVis->SetMode(Mode::Show);
-            arcVis->RefreshGeometry();
-
-            emit ToolTip(QString());
-
-            setModal(true);
-            show();
-        };
-
         if (click)
         {
             // The check need to ignore first release of mouse button.
@@ -400,6 +389,11 @@ void DialogArc::ChosenObject(quint32 id, const SceneObject &type)
                 }
 
                 prepare = true;
+
+                if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
+                {
+                    FinishCreating();
+                }
             }
         }
     }
@@ -549,6 +543,18 @@ void DialogArc::EvalF()
     formulaData.labelResult = ui->labelResultF2;
 
     m_angleF2 = Eval(formulaData, m_flagF2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArc::FinishCreating()
+{
+    vis->SetMode(Mode::Show);
+    vis->RefreshGeometry();
+
+    emit ToolTip(QString());
+
+    setModal(true);
+    show();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

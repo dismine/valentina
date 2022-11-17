@@ -103,6 +103,8 @@ private:
     /** @brief number number of handled objects */
     qint32  m_number{0};
     bool    m_firstRelease{false};
+
+    void FinishCreating();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

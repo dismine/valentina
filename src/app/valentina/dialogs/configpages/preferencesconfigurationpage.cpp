@@ -123,6 +123,7 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
 
     ui->checkBoxFreeCurve->setChecked(settings->IsFreeCurveMode());
     ui->checkBoxZoomFitBestCurrentPP->setChecked(settings->IsDoubleClickZoomFitBestCurrentPP());
+    ui->checkBoxInteractiveTools->setChecked(settings->IsInteractiveTools());
 
     //----------------------- Toolbar
     ui->toolBarStyleCheck->setChecked(settings->GetToolBarStyle());
@@ -202,6 +203,7 @@ auto PreferencesConfigurationPage::Apply() -> QStringList
 
     settings->SetFreeCurveMode(ui->checkBoxFreeCurve->isChecked());
     settings->SetDoubleClickZoomFitBestCurrentPP(ui->checkBoxZoomFitBestCurrentPP->isChecked());
+    settings->SetInteractiveTools(ui->checkBoxInteractiveTools->isChecked());
 
     if (m_langChanged || m_systemChanged)
     {

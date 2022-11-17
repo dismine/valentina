@@ -113,7 +113,7 @@ void VisToolPointOfIntersectionCircles::RefreshGeometry()
                 }
             }
         }
-        else if (GetMode() == Mode::Creation)
+        else if (GetMode() == Mode::Creation && VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
         {
             QLineF radiusLine (static_cast<QPointF>(*first), ScenePos());
             const qreal length = radiusLine.length();

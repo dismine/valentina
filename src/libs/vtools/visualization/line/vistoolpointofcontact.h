@@ -66,7 +66,7 @@ private:
     VScaledEllipse       *m_lineP1{nullptr};
     VScaledEllipse       *m_lineP2{nullptr};
     VScaledEllipse       *m_arcPoint{nullptr};
-    QGraphicsEllipseItem *m_circle{nullptr};
+    VScaledEllipse       *m_circle{nullptr};
     qreal                 m_radius{0};
 };
 

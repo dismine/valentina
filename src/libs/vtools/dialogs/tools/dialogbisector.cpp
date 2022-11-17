@@ -387,13 +387,7 @@ void DialogBisector::ShowDialog(bool click)
         SetFormula(QString::number(FromPixel(len, *data->GetPatternUnit())));
     }
 
-    vis->SetMode(Mode::Show);
-    vis->RefreshGeometry();
-
-    emit ToolTip(QString());
-
-    setModal(true);
-    show();
+    FinishCreating();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -443,8 +437,23 @@ void DialogBisector::ChosenThirdPoint(quint32 id)
             line->SetPoint3Id(id);
             line->RefreshGeometry();
             prepare = true;
+
+            if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
+            {
+                FinishCreating();
+            }
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogBisector::FinishCreating()
+{
+    vis->SetMode(Mode::Show);
+    vis->RefreshGeometry();
+    emit ToolTip(QString());
+    setModal(true);
+    show();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

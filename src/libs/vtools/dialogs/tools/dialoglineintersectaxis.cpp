@@ -249,8 +249,7 @@ void DialogLineIntersectAxis::ShowDialog(bool click)
             }
 
             /*We will ignore click if poinet is in point circle*/
-            VMainGraphicsScene *scene =
-                    qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
+            auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
             SCASSERT(scene != nullptr)
             const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(GetBasePointId());
             QLineF line = QLineF(static_cast<QPointF>(*point), scene->getScenePos());
@@ -262,12 +261,12 @@ void DialogLineIntersectAxis::ShowDialog(bool click)
             }
         }
 
-        VisToolLineIntersectAxis *line = qobject_cast<VisToolLineIntersectAxis *>(vis);
+        auto *line = qobject_cast<VisToolLineIntersectAxis *>(vis);
         SCASSERT(line != nullptr)
+        SetAngle(line->Angle());//Show in dialog angle what user choose
 
-        this->SetAngle(line->Angle());//Show in dialog angle what user choose
+        line->SetMode(Mode::Show);
         emit ToolTip(QString());
-
         DialogAccepted();// Just set default values and don't show dialog
     }
 }
@@ -279,7 +278,7 @@ void DialogLineIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
     {
         if (type == SceneObject::Point)
         {
-            VisToolLineIntersectAxis *line = qobject_cast<VisToolLineIntersectAxis *>(vis);
+            auto *line = qobject_cast<VisToolLineIntersectAxis *>(vis);
             SCASSERT(line != nullptr)
 
             switch (number)
@@ -289,8 +288,8 @@ void DialogLineIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
                     {
                         number++;
                         line->VisualMode(id);
-                        VAbstractMainWindow *window =
-                                qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+                        auto *window =
+                            qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
                         SCASSERT(window != nullptr)
                         connect(line, &VisToolLineIntersectAxis::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
                     }
@@ -320,6 +319,13 @@ void DialogLineIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
                             line->SetAxisPointId(id);
                             line->RefreshGeometry();
                             prepare = true;
+
+                            if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
+                            {
+                                vis->SetMode(Mode::Show);
+                                emit ToolTip(QString());
+                                show();
+                            }
                         }
                     }
                 }

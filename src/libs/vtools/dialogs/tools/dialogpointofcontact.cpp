@@ -209,13 +209,7 @@ void DialogPointOfContact::ShowDialog(bool click)
         SetRadius(QString::number(FromPixel(line.length(), *data->GetPatternUnit())));
     }
 
-    vis->SetMode(Mode::Show);
-    vis->RefreshGeometry();
-
-    emit ToolTip(QString());
-
-    setModal(true);
-    show();
+    FinishCreating();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -278,6 +272,11 @@ void DialogPointOfContact::ChosenObject(quint32 id, const SceneObject &type)
                     line->SetRadiusId(id);
                     line->RefreshGeometry();
                     prepare = true;
+
+                    if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
+                    {
+                        FinishCreating();
+                    }
                 }
             }
         }
@@ -308,6 +307,18 @@ void DialogPointOfContact::closeEvent(QCloseEvent *event)
 {
     ui->plainTextEditFormula->blockSignals(true);
     DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfContact::FinishCreating()
+{
+    vis->SetMode(Mode::Show);
+    vis->RefreshGeometry();
+
+    emit ToolTip(QString());
+
+    setModal(true);
+    show();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

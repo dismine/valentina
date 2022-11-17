@@ -185,6 +185,11 @@ void DialogCutSplinePath::ChosenObject(quint32 id, const SceneObject &type)
             auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
             SCASSERT(window != nullptr)
             connect(vis.data(), &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
+
+            if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
+            {
+                FinishCreating();
+            }
         }
     }
 }
@@ -256,6 +261,16 @@ void DialogCutSplinePath::ValidateAlias()
     }
 
     CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutSplinePath::FinishCreating()
+{
+    vis->SetMode(Mode::Show);
+    vis->RefreshGeometry();
+    emit ToolTip(QString());
+    setModal(true);
+    show();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -389,11 +404,5 @@ void DialogCutSplinePath::ShowDialog(bool click)
         }
     }
 
-    vis->SetMode(Mode::Show);
-    vis->RefreshGeometry();
-
-    emit ToolTip(QString());
-
-    setModal(true);
-    show();
+    FinishCreating();
 }

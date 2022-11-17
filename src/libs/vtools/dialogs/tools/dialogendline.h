@@ -121,6 +121,8 @@ private:
     bool flagFormula;
     bool flagError;
     bool flagName;
+
+    void FinishCreating();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

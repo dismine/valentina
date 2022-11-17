@@ -225,6 +225,11 @@ void DialogNormal::ChosenObject(quint32 id, const SceneObject &type)
                             VAbstractValApplication::VApp()->getMainWindow());
                         SCASSERT(window != nullptr)
                         connect(line, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
+
+                        if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
+                        {
+                            FinishCreating();
+                        }
                     }
                 }
                 break;
@@ -257,6 +262,16 @@ void DialogNormal::closeEvent(QCloseEvent *event)
 {
     ui->plainTextEditFormula->blockSignals(true);
     DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogNormal::FinishCreating()
+{
+    vis->SetMode(Mode::Show);
+    vis->RefreshGeometry();
+    emit ToolTip(QString());
+    setModal(true);
+    show();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -459,11 +474,5 @@ void DialogNormal::ShowDialog(bool click)
         SetFormula(QString::number(FromPixel(len, *data->GetPatternUnit())));
     }
 
-    vis->SetMode(Mode::Show);
-    vis->RefreshGeometry();
-
-    emit ToolTip(QString());
-
-    setModal(true);
-    show();
+    FinishCreating();
 }

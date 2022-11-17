@@ -125,6 +125,9 @@ public:
     auto IsDoubleClickZoomFitBestCurrentPP() const -> bool;
     void SetDoubleClickZoomFitBestCurrentPP(bool value);
 
+    auto IsInteractiveTools() const -> bool;
+    void SetInteractiveTools(bool value);
+
     auto GetUndoCount() const -> int;
     void SetUndoCount(const int &value);
 

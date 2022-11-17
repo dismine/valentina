@@ -91,6 +91,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationAskContinueIfLayout
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationToolBarStyle, (QLatin1String("configuration/tool_bar_style"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationFreeCurveMode, (QLatin1String("configuration/freeCurveMode"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationDoubleClickZoomFitBestCurrentPP, (QLatin1String("configuration/doubleClickZoomFitBestCurrentPP"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationInteractiveTools, (QLatin1String("configuration/interactiveTools"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationDontUseNativeDialog, (QLatin1String("configuration/dontUseNativeDialog"))) // NOLINT
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternUndo, (QLatin1String("pattern/undo"))) // NOLINT
@@ -668,6 +669,18 @@ auto VCommonSettings::IsDoubleClickZoomFitBestCurrentPP() const -> bool
 void VCommonSettings::SetDoubleClickZoomFitBestCurrentPP(bool value)
 {
     setValue(*settingConfigurationDoubleClickZoomFitBestCurrentPP, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VCommonSettings::IsInteractiveTools() const
+{
+    return value(*settingConfigurationInteractiveTools, true).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetInteractiveTools(bool value)
+{
+    setValue(*settingConfigurationInteractiveTools, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

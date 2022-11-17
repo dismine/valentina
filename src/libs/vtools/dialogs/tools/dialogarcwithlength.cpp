@@ -284,17 +284,6 @@ void DialogArcWithLength::ShowDialog(bool click)
 {
     if (prepare)
     {
-        auto FinishCreating = [this]()
-        {
-            vis->SetMode(Mode::Show);
-            vis->RefreshGeometry();
-
-            emit ToolTip(QString());
-
-            setModal(true);
-            show();
-        };
-
         if (click)
         {
             // The check need to ignore first release of mouse button.
@@ -384,6 +373,11 @@ void DialogArcWithLength::ChosenObject(quint32 id, const SceneObject &type)
                 }
 
                 prepare = true;
+
+                if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
+                {
+                    FinishCreating();
+                }
             }
         }
     }
@@ -543,4 +537,16 @@ void DialogArcWithLength::EvalF()
     formulaData.checkZero = false;
 
     Eval(formulaData, m_flagF1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArcWithLength::FinishCreating()
+{
+    vis->SetMode(Mode::Show);
+    vis->RefreshGeometry();
+
+    emit ToolTip(QString());
+
+    setModal(true);
+    show();
 }

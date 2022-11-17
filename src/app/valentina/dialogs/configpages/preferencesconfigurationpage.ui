@@ -33,9 +33,9 @@
           <property name="geometry">
            <rect>
             <x>0</x>
-            <y>-27</y>
+            <y>0</y>
             <width>624</width>
-            <height>838</height>
+            <height>867</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -229,6 +229,19 @@
                <widget class="QCheckBox" name="checkBoxZoomFitBestCurrentPP">
                 <property name="text">
                  <string>Double click calls Zoom fit best for current pattern piece</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="checkBoxInteractiveTools">
+                <property name="toolTip">
+                 <string>Disable if you want to skip interactive part of creating tools. And go straight to editing formulas instead.</string>
+                </property>
+                <property name="text">
+                 <string>Interactive tools</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>

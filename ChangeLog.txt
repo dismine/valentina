@@ -9,6 +9,7 @@
 - [smart-pattern/valentina#184] Fix incorrect seam allowance.
 - Export area of piece in Final measurements.
 - New option Show accuracy radius. 
+- New option Interactive tools.
 
 # Valentina 0.7.52 September 12, 2022
 - Fix crash when default locale is ru.

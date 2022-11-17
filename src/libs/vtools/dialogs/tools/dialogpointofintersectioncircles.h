@@ -122,6 +122,8 @@ private:
 
     /** @brief number number of handled objects */
     qint32 m_stage{0};
+
+    void FinishCreating();
 };
 
 //---------------------------------------------------------------------------------------------------------------------
