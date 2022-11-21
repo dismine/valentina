@@ -3203,9 +3203,10 @@ auto VPMainWindow::AddLayoutPieces(const QVector<VLayoutPiece> &pieces) -> bool
             VPPiecePtr piece(new VPPiece(rawPiece));
             piece->SetCopyNumber(i);
 
-            if (not piece->IsValid())
+            QString error;
+            if (not piece->IsValid(error))
             {
-                qCCritical(pWindow) << qPrintable(tr("Piece %1 invalid.").arg(piece->GetName()));
+                qCCritical(pWindow) << qPrintable(tr("Piece %1 invalid. %2").arg(piece->GetName(), error));
 
                 if (m_cmd != nullptr && not m_cmd->IsGuiEnabled())
                 {

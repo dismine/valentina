@@ -123,7 +123,7 @@ public:
 
     static auto PathsSuperposition(const QVector<QPointF> &path1, const QVector<QPointF> &path2) -> bool;
 
-    auto IsValid() const -> bool;
+    auto IsValid(QString &error) const -> bool;
 
     auto CopyNumber() const -> quint16;
     void SetCopyNumber(quint16 newCopyNumber);

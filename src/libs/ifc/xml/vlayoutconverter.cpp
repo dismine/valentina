@@ -54,10 +54,13 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSeamAllowanceTag, (QLatin1String("se
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strInternalPathTag, (QLatin1String("internalPath"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMarkerTag, (QLatin1String("marker"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPointTag, (QLatin1String("point"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPieceTag, (QLatin1String("piece"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrX, (QLatin1String("x"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrY, (QLatin1String("y"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrTurnPoint, (QLatin1String("turnPoint"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrCurvePoint, (QLatin1String("curvePoint"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrId, (QLatin1String("id"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrUId, (QLatin1String("uid"))) // NOLINT
 
 //const QChar groupSep        = QLatin1Char(';');
 const QChar coordintatesSep = QLatin1Char(',');
@@ -209,6 +212,17 @@ void VLayoutConverter::ConvertPiecesToV0_1_3()
     {
         QDomElement node = tags.at(i).toElement();
         RemoveAllChildren(node);
+    }
+
+    QDomNodeList pieceTags = elementsByTagName(*strPieceTag);
+    for (int i=0; i < pieceTags.size(); ++i)
+    {
+        QDomElement node = pieceTags.at(i).toElement();
+        if (node.isElement() && node.hasAttribute(*strAttrId))
+        {
+            node.setAttribute(*strAttrUId, node.attribute(*strAttrId));
+            node.removeAttribute(*strAttrId);
+        }
     }
 }
 

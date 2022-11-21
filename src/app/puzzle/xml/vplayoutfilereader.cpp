@@ -437,9 +437,10 @@ void VPLayoutFileReader::ReadPieces(const VPLayoutPtr &layout, const VPSheetPtr 
             VPPiecePtr piece(new VPPiece());
             ReadPiece(piece);
 
-            if (not piece->IsValid())
+            QString error;
+            if (not piece->IsValid(error))
             {
-                throw VException(tr("Piece %1 invalid.").arg(piece->GetName()));
+                throw VException(tr("Piece %1 invalid. %2").arg(piece->GetName(), error));
             }
 
             piece->SetSheet(sheet);
@@ -461,7 +462,7 @@ void VPLayoutFileReader::ReadPiece(const VPPiecePtr &piece)
     QXmlStreamAttributes attribs = attributes();
     piece->SetName(ReadAttributeString(attribs, ML::AttrName, tr("Piece")));
 
-    QString uuidStr = ReadAttributeString(attribs, ML::AttrID, QUuid::createUuid().toString());
+    QString uuidStr = ReadAttributeString(attribs, ML::AttrUID, QUuid::createUuid().toString());
     piece->SetUUID(QUuid(uuidStr));
 
     piece->SetGradationId(ReadAttributeEmptyString(attribs, ML::AttrGradationLabel));
@@ -576,6 +577,7 @@ void VPLayoutFileReader::ReadSeamAllowance(const VPPiecePtr &piece)
     piece->SetSeamAllowance(enabled);
 
     bool builtIn = ReadAttributeBool(attribs, ML::AttrBuiltIn, falseStr);
+    piece->SetSeamAllowanceBuiltIn(builtIn);
 
     QVector<VLayoutPoint> path = ReadLayoutPoints();
 

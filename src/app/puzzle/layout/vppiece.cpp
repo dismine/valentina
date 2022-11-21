@@ -492,25 +492,29 @@ auto VPPiece::PathsSuperposition(const QVector<QPointF> &path1, const QVector<QP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPPiece::IsValid() const -> bool
+auto VPPiece::IsValid(QString &error) const -> bool
 {
     if (not IsHideMainPath() && GetContourPoints().isEmpty())
     {
+        error = tr("Seam line is empty");
         return false;
     }
 
     if (IsSeamAllowance() && IsSeamAllowanceBuiltIn() && GetContourPoints().isEmpty())
     {
+        error = tr("Seam line is empty");
         return false;
     }
 
     if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn() && GetSeamAllowancePoints().isEmpty())
     {
+        error = tr("Seam allowance line is empty");
         return false;
     }
 
     if (IsGrainlineEnabled() && GetGrainline().isEmpty())
     {
+        error = tr("Grainline is empty");
         return false;
     }
 

@@ -93,6 +93,7 @@
                           </xs:element>
                         </xs:sequence>
                         <xs:attribute type="xs:boolean" name="enabled" use="optional"/>
+                        <xs:attribute type="xs:boolean" name="builtIn" use="optional"/>
                       </xs:complexType>
                     </xs:element>
                     <xs:element name="grainline">
@@ -215,7 +216,7 @@
                       </xs:complexType>
                     </xs:element>
                   </xs:sequence>
-                  <xs:attribute name="id" type="uuid" use="required"/>
+                  <xs:attribute name="uid" type="uuid" use="required"/>
                   <xs:attribute type="xs:string" name="name"/>
                   <xs:attribute type="xs:boolean" name="mirrored"/>
                   <xs:attribute type="xs:boolean" name="forbidFlipping"/>
@@ -287,6 +288,7 @@
                                       </xs:element>
                                     </xs:sequence>
                                     <xs:attribute type="xs:boolean" name="enabled" use="optional"/>
+                                    <xs:attribute type="xs:boolean" name="builtIn" use="optional"/>
                                   </xs:complexType>
                                 </xs:element>
                                 <xs:element name="grainline">
@@ -409,7 +411,7 @@
                                   </xs:complexType>
                                 </xs:element>
                               </xs:sequence>
-                              <xs:attribute name="id" type="uuid" use="required"/>
+                              <xs:attribute name="uid" type="uuid" use="required"/>
                               <xs:attribute type="xs:string" name="name"/>
                               <xs:attribute type="xs:boolean" name="mirrored"/>
                               <xs:attribute type="xs:boolean" name="forbidFlipping"/>

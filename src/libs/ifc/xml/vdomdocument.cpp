@@ -339,21 +339,28 @@ QDomElement VDomDocument::elementById(quint32 id, const QString &tagName, bool u
  * @param id id value
  * @return true if found
  */
-bool VDomDocument::find(QHash<quint32, QDomElement> &cache, const QDomElement &node, quint32 id)
+auto VDomDocument::find(QHash<quint32, QDomElement> &cache, const QDomElement &node, quint32 id) -> bool
 {
     if (node.hasAttribute(AttrId))
     {
-        const quint32 elementId = GetParametrUInt(node, AttrId, NULL_ID_STR);
-
-        if (cache.contains(elementId))
+        try
         {
-            qWarning() << tr("Not unique id (%1)").arg(elementId);
+            const quint32 elementId = GetParametrUInt(node, AttrId, NULL_ID_STR);
+
+            if (cache.contains(elementId))
+            {
+                qWarning() << tr("Not unique id (%1)").arg(elementId);
+            }
+
+            cache.insert(elementId, node);
+            if (elementId == id)
+            {
+                return true;
+            }
         }
-
-        cache.insert(elementId, node);
-        if (elementId == id)
+        catch (const VExceptionConversionError &)
         {
-            return true;
+            // ignore
         }
     }
 

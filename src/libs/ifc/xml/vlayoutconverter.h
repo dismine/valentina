@@ -62,7 +62,6 @@ protected:
     auto IsReadOnly() const -> bool override;
 
     void ConvertPiecesToV0_1_3();
-    void ConvertPieceToV0_1_3(const QDomElement &piece);
     void ConvertPathToV0_1_3(QDomElement &node);
 
     void ToV0_1_3();
