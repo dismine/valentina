@@ -32,6 +32,12 @@
 #endif
 #include "../ifc/exception/vexception.h"
 
+// See https://stackoverflow.com/a/46719572/3045403
+#if __cplusplus < 201703L // C++17
+constexpr quint32 VLayoutPlaceLabel::streamHeader;  // NOLINT(readability-redundant-declaration)
+constexpr quint32 VLayoutPlaceLabel::classVersion;  // NOLINT(readability-redundant-declaration)
+#endif
+
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPlaceLabel::VLayoutPlaceLabel(const VPlaceLabelItem &item)
     : m_center(item.toQPointF()),

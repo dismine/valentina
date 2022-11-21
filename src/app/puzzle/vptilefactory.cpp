@@ -95,6 +95,11 @@ auto TriangleBasic() -> QPainterPath
 }
 }  // namespace
 
+// See https://stackoverflow.com/a/46719572/3045403
+#if __cplusplus < 201703L // C++17
+constexpr qreal VPTileFactory::tileStripeWidth;  // NOLINT(readability-redundant-declaration)
+#endif
+
 //---------------------------------------------------------------------------------------------------------------------
 VPTileFactory::VPTileFactory(const VPLayoutPtr &layout, VCommonSettings *commonSettings, QObject *parent):
     QObject(parent),
