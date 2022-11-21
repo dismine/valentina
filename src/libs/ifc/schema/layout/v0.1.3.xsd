@@ -126,7 +126,7 @@
                           <xs:element name="internalPath" minOccurs="0" maxOccurs="unbounded">
                             <xs:complexType>
                               <xs:sequence>
-                                <xs:element name="point" minOccurs="3" maxOccurs="unbounded">
+                                <xs:element name="point" minOccurs="2" maxOccurs="unbounded">
                                   <xs:complexType>
                                     <xs:attribute type="xs:double" name="x" use="required"/>
                                     <xs:attribute type="xs:double" name="y" use="required"/>
