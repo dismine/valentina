@@ -31,10 +31,9 @@
 
 #include <QSharedData>
 #include <QLineF>
+#include <QtMath>
 
 #include "vpointf.h"
-#include "../vmisc/vabstractvalapplication.h"
-#include "../vmisc/vmath.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -140,12 +139,12 @@ VSplineData::VSplineData(VPointF p1, VPointF p4, qreal angle1, qreal angle2, qre
     QLineF p1p2(p1.x(), p1.y(), p1.x() + L * kAsm1, p1.y());
     p1p2.setAngle(angle1);
     c1Length = p1p2.length();
-    c1LengthF = QString().number(VAbstractValApplication::VApp()->fromPixel(c1Length));
+    c1LengthF = QString().number(c1Length);
 
     QLineF p4p3(p4.x(), p4.y(), p4.x() + L * kAsm2, p4.y());
     p4p3.setAngle(angle2);
     c2Length = p4p3.length();
-    c2LengthF = QString().number(VAbstractValApplication::VApp()->fromPixel(c2Length));
+    c2LengthF = QString().number(c2Length);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -168,7 +167,7 @@ VSplineData::VSplineData(VPointF p1, QPointF p2, QPointF p3, VPointF p4)
     angle1F = QString().number(angle1);
 
     c1Length = p1p2.length();
-    c1LengthF = QString().number(VAbstractValApplication::VApp()->fromPixel(c1Length));
+    c1LengthF = QString().number(c1Length);
 
     QLineF p4p3(static_cast<QPointF>(p4), static_cast<QPointF>(p3));
 
@@ -176,7 +175,7 @@ VSplineData::VSplineData(VPointF p1, QPointF p2, QPointF p3, VPointF p4)
     angle2F = QString().number(angle2);
 
     c2Length = p4p3.length();
-    c2LengthF = QString().number(VAbstractValApplication::VApp()->fromPixel(c2Length));
+    c2LengthF = QString().number(c2Length);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

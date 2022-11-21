@@ -35,6 +35,7 @@
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
 #include "../vmisc/compatibility.h"
+#include "../vmisc/vabstractapplication.h"
 #include "../ifc/ifcdef.h"
 #include "vabstractcurve.h"
 #include "varc_p.h"

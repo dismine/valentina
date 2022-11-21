@@ -2,11 +2,9 @@
 #define VELLIPTICALARC_P
 
 #include <QSharedData>
-#include "../vmisc/vabstractvalapplication.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "vpointf.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -69,10 +67,10 @@ VEllipticalArcData::VEllipticalArcData(qreal radius1, qreal radius2, const QStri
 VEllipticalArcData::VEllipticalArcData(qreal radius1, qreal radius2, qreal rotationAngle)
     : radius1(radius1),
       radius2(radius2),
-      formulaRadius1(QString().number(VAbstractValApplication::VApp()->fromPixel(radius1))),
-      formulaRadius2(QString().number(VAbstractValApplication::VApp()->fromPixel(radius2))),
+      formulaRadius1(QString().number(radius1)),
+      formulaRadius2(QString().number(radius2)),
       rotationAngle(rotationAngle),
-      formulaRotationAngle(QString().number(VAbstractValApplication::VApp()->fromPixel(rotationAngle))),
+      formulaRotationAngle(QString().number(rotationAngle)),
       m_transform()
 {}
 

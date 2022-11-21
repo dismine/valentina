@@ -34,7 +34,6 @@
 #include <QString>
 #include <QtGlobal>
 
-#include "../ifc/ifcdef.h"
 #include "vabstractcurve.h"
 #include "vgeometrydef.h"
 

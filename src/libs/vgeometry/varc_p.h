@@ -30,11 +30,11 @@
 #define VARC_P_H
 
 #include <QSharedData>
-#include "vgeometrydef.h"
-#include "../vmisc/vabstractvalapplication.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+
+#include "../vmisc/defglobal.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -74,7 +74,7 @@ VArcData::VArcData(qreal radius, const QString &formulaRadius)
 //---------------------------------------------------------------------------------------------------------------------
 VArcData::VArcData(qreal radius)
     : radius(radius),
-      formulaRadius(QString().number(VAbstractValApplication::VApp()->fromPixel(radius)))
+      formulaRadius(QString().number(radius))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
