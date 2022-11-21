@@ -46,6 +46,14 @@
 #include "../vmisc/typedef.h"
 #include "../vpatterndb/floatItemData/floatitemdef.h"
 
+#if __cplusplus >= 201703L // C++17
+#include <optional>
+using EdgeIndex = std::optional<int>;
+#else
+#include "../vmisc/bpstd/optional.hpp"
+using EdgeIndex = bpstd::optional<int>;
+#endif
+
 class VLayoutPieceData;
 class VLayoutPiecePath;
 class QGraphicsItem;
@@ -158,7 +166,7 @@ public:
     auto LayoutEdgesCount() const -> int;
 
     auto LayoutEdge(int i) const -> QLineF;
-    auto LayoutEdgeByPoint(const QPointF &p1) const -> int;
+    auto LayoutEdgeByPoint(const QPointF &p1) const -> EdgeIndex;
 
     auto MappedDetailBoundingRect() const -> QRectF;
     auto DetailBoundingRect() const -> QRectF;
@@ -221,7 +229,7 @@ private:
     auto Map(QVector<T> points) const -> QVector<T>;
 
     auto Edge(const QVector<QPointF> &path, int i) const -> QLineF;
-    auto EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) const -> int;
+    auto EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) const -> EdgeIndex;
 };
 
 QT_WARNING_POP

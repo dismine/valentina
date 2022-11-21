@@ -356,13 +356,13 @@ auto VPosition::CheckCombineEdges(VLayoutPiece &detail, int j, int &dEdge) -> bo
 #   endif
 #endif
 
-        dEdge = detail.LayoutEdgeByPoint(globalEdge.p2());
-
-        if (dEdge <= 0)
+        EdgeIndex layoutEdge = detail.LayoutEdgeByPoint(globalEdge.p2());
+        if (not layoutEdge.has_value())
         {
             return false;
         }
 
+        dEdge = layoutEdge.value();
         CrossingType type = CrossingType::Intersection;
         if (SheetContains(detail.MappedDetailBoundingRect()))
         {

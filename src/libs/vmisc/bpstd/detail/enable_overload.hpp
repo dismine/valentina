@@ -31,8 +31,12 @@
 #ifndef BPSTD_DETAIL_ENABLE_OVERLOAD_HPP
 #define BPSTD_DETAIL_ENABLE_OVERLOAD_HPP
 
+#pragma GCC system_header
+#pragma clang system_header
+
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 # pragma once
+#pragma system_header
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 namespace bpstd {
