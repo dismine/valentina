@@ -91,6 +91,11 @@ auto StringToPoint(const QString &point) -> QPointF
 auto StringToPath(const QString &path) -> QVector<QPointF>
 {
     QVector<QPointF> p;
+    if (path.isEmpty())
+    {
+        return p;
+    }
+
     QStringList points = path.split(ML::pointsSep);
     p.reserve(points.size());
     for (const auto& point : points)
@@ -528,6 +533,8 @@ VLayoutPoint VPLayoutFileReader::ReadLayoutPoint()
     point.SetTurnPoint(ReadAttributeBool(attribs, ML::AttrTurnPoint, falseStr));
     point.SetCurvePoint(ReadAttributeBool(attribs, ML::AttrCurvePoint, falseStr));
 
+    readElementText();
+
     return point;
 }
 
@@ -570,9 +577,10 @@ void VPLayoutFileReader::ReadSeamAllowance(const VPPiecePtr &piece)
 
     bool builtIn = ReadAttributeBool(attribs, ML::AttrBuiltIn, falseStr);
 
+    QVector<VLayoutPoint> path = ReadLayoutPoints();
+
     if (enabled && not builtIn)
     {
-        QVector<VLayoutPoint> path = ReadLayoutPoints();
         if (path.isEmpty())
         {
             throw VException(tr("Error in line %1. Seam allowance is empty.").arg(lineNumber()));
@@ -742,6 +750,8 @@ auto VPLayoutFileReader::ReadMarker() -> VLayoutPlaceLabel
 
     // cppcheck-suppress unknownMacro
     QT_WARNING_POP
+
+    readElementText();
 
     return marker;
 }
