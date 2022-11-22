@@ -540,7 +540,6 @@ void VBackgroundImageItem::keyPressEvent(QKeyEvent *event)
             break;
     }
 
-
     QGraphicsObject::keyPressEvent(event);
 }
 
