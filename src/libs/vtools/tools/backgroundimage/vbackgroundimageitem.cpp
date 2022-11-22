@@ -27,7 +27,6 @@
  *************************************************************************/
 
 #include "vbackgroundimageitem.h"
-#include "../vwidgets/global.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../ifc/xml/vabstractpattern.h"
@@ -39,6 +38,7 @@
 #include "../../undocommands/image/hidebackgroundimage.h"
 #include "../../undocommands/image/resetbackgroundimage.h"
 #include "../../undocommands/image/opaquebackgroundimage.h"
+#include "../../undocommands/image/zvaluemovebackgroundimage.h"
 #include "../toolsdef.h"
 
 #include <QUndoStack>
@@ -479,33 +479,6 @@ void VBackgroundImageItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *even
 void VBackgroundImageItem::keyPressEvent(QKeyEvent *event)
 {
     const int move = (event->modifiers() & Qt::ShiftModifier) ? 10 : 1;
-    if (event->key() == Qt::Key_Left)
-    {
-        TranslateImageOn(-move, 0);
-        event->accept();
-        return;
-    }
-
-    if (event->key() == Qt::Key_Right)
-    {
-        TranslateImageOn(move, 0);
-        event->accept();
-        return;
-    }
-
-    if (event->key() == Qt::Key_Up)
-    {
-        TranslateImageOn(0, -move);
-        event->accept();
-        return;
-    }
-
-    if (event->key() == Qt::Key_Down)
-    {
-        TranslateImageOn(0, move);
-        event->accept();
-        return;
-    }
 
     int angle = 15;
     if(event->modifiers() & Qt::ControlModifier)
@@ -517,43 +490,56 @@ void VBackgroundImageItem::keyPressEvent(QKeyEvent *event)
         angle = 1;
     }
 
-    if (event->key() == Qt::Key_BracketLeft)
+    switch(event->key())
     {
-        RotateImageByAngle(angle);
-        event->accept();
-        return;
+        case Qt::Key_Left:
+            TranslateImageOn(-move, 0);
+            event->accept();
+            return;
+        case Qt::Key_Right:
+            TranslateImageOn(move, 0);
+            event->accept();
+            return;
+        case Qt::Key_Up:
+            TranslateImageOn(0, -move);
+            event->accept();
+            return;
+        case Qt::Key_Down:
+            TranslateImageOn(0, move);
+            event->accept();
+            return;
+        case Qt::Key_BracketLeft:
+            RotateImageByAngle(angle);
+            event->accept();
+            return;
+        case Qt::Key_BracketRight:
+            RotateImageByAngle(-angle);
+            event->accept();
+            return;
+        case Qt::Key_Period:
+        case Qt::Key_Greater:
+            (event->modifiers() & Qt::ControlModifier) ? ScaleImageByFactor(2) : ScaleImageByAdjustSize(2);
+            return;
+        case Qt::Key_Comma:
+        case Qt::Key_Less:
+            (event->modifiers() & Qt::ControlModifier) ? ScaleImageByFactor(0.5) : ScaleImageByAdjustSize(-2);
+            return;
+        case Qt::Key_Home:
+            ZValueMove(static_cast<int>(ZValueMove::Top));
+            return;
+        case Qt::Key_PageUp:
+            ZValueMove(static_cast<int>(ZValueMove::Up));
+            return;
+        case Qt::Key_PageDown:
+            ZValueMove(static_cast<int>(ZValueMove::Down));
+            return;
+        case Qt::Key_End:
+            ZValueMove(static_cast<int>(ZValueMove::Bottom));
+            return;
+        default:
+            break;
     }
 
-    if (event->key() == Qt::Key_BracketRight)
-    {
-        RotateImageByAngle(-angle);
-        event->accept();
-        return;
-    }
-
-    if (event->key() == Qt::Key_Period || event->key() == Qt::Key_Greater)
-    {
-        if (event->modifiers() & Qt::ControlModifier)
-        {
-            ScaleImageByFactor(2);
-        }
-        else
-        {
-            ScaleImageByAdjustSize(2);
-        }
-    }
-
-    if (event->key() == Qt::Key_Comma || event->key() == Qt::Key_Less)
-    {
-        if (event->modifiers() & Qt::ControlModifier)
-        {
-            ScaleImageByFactor(0.5);
-        }
-        else
-        {
-            ScaleImageByAdjustSize(-2);
-        }
-    }
 
     QGraphicsObject::keyPressEvent(event);
 }
@@ -725,6 +711,13 @@ void VBackgroundImageItem::ScaleImageByFactor(qreal factor)
     UpdateSceneRect();
 
     m_allowChangeMerge = true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VBackgroundImageItem::ZValueMove(int move)
+{
+    auto zMove = static_cast<enum ZValueMove>(move);
+    VAbstractApplication::VApp()->getUndoStack()->push(new ZValueMoveBackgroundImage(m_image.Id(), zMove, m_doc));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
