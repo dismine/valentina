@@ -362,7 +362,7 @@ auto VPosition::CheckCombineEdges(VLayoutPiece &detail, int j, int &dEdge) -> bo
             return false;
         }
 
-        dEdge = layoutEdge.value();
+        dEdge = *layoutEdge;
         CrossingType type = CrossingType::Intersection;
         if (SheetContains(detail.MappedDetailBoundingRect()))
         {
