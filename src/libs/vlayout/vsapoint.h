@@ -98,9 +98,9 @@ Q_DECLARE_TYPEINFO(VSAPoint, Q_MOVABLE_TYPE); // NOLINT
 
 // See https://stackoverflow.com/a/46719572/3045403
 #if __cplusplus < 201703L
-constexpr qreal VSAPoint::passmarkFactor; // NOLINT(readability-redundant-declaration)
-constexpr qreal VSAPoint::maxPassmarkLength; // NOLINT(readability-redundant-declaration)
-constexpr qreal VSAPoint::minSAWidth; // NOLINT(readability-redundant-declaration)
+inline constexpr qreal VSAPoint::passmarkFactor; // NOLINT(readability-redundant-declaration)
+inline constexpr qreal VSAPoint::maxPassmarkLength; // NOLINT(readability-redundant-declaration)
+inline constexpr qreal VSAPoint::minSAWidth; // NOLINT(readability-redundant-declaration)
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
