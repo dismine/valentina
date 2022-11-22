@@ -86,7 +86,7 @@ QT_WARNING_POP
 // See https://stackoverflow.com/a/46719572/3045403
 #if __cplusplus < 201703L // C++17
 constexpr quint32 VAbstractPieceData::streamHeader;  // NOLINT(readability-redundant-declaration)
-constexpr quint32 VAbstractPieceData::classVersion;  // NOLINT(readability-redundant-declaration)
+constexpr quint16 VAbstractPieceData::classVersion;  // NOLINT(readability-redundant-declaration)
 #endif
 
 // Friend functions

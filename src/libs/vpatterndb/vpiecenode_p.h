@@ -119,7 +119,7 @@ private:
 // See https://stackoverflow.com/a/46719572/3045403
 #if __cplusplus < 201703L // C++17
 constexpr quint32 VPieceNodeData::streamHeader;  // NOLINT(readability-redundant-declaration)
-constexpr quint32 VPieceNodeData::classVersion;  // NOLINT(readability-redundant-declaration)
+constexpr quint16 VPieceNodeData::classVersion;  // NOLINT(readability-redundant-declaration)
 #endif
 
 // Friend functions
