@@ -129,7 +129,7 @@ private:
     void RotateImageByAngle(qreal angle);
     void ScaleImageByAdjustSize(qreal value);
     void ScaleImageByFactor(qreal factor);
-    void ZValueMove(int move);
+    void MoveImageZValue(int move);
 
     void UpdateSceneRect();
 

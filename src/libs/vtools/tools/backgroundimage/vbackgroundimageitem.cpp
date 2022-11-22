@@ -525,16 +525,16 @@ void VBackgroundImageItem::keyPressEvent(QKeyEvent *event)
             (event->modifiers() & Qt::ControlModifier) ? ScaleImageByFactor(0.5) : ScaleImageByAdjustSize(-2);
             return;
         case Qt::Key_Home:
-            ZValueMove(static_cast<int>(ZValueMove::Top));
+            MoveImageZValue(static_cast<int>(ZValueMoveType::Top));
             return;
         case Qt::Key_PageUp:
-            ZValueMove(static_cast<int>(ZValueMove::Up));
+            MoveImageZValue(static_cast<int>(ZValueMoveType::Up));
             return;
         case Qt::Key_PageDown:
-            ZValueMove(static_cast<int>(ZValueMove::Down));
+            MoveImageZValue(static_cast<int>(ZValueMoveType::Down));
             return;
         case Qt::Key_End:
-            ZValueMove(static_cast<int>(ZValueMove::Bottom));
+            MoveImageZValue(static_cast<int>(ZValueMoveType::Bottom));
             return;
         default:
             break;
@@ -713,9 +713,9 @@ void VBackgroundImageItem::ScaleImageByFactor(qreal factor)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VBackgroundImageItem::ZValueMove(int move)
+void VBackgroundImageItem::MoveImageZValue(int move)
 {
-    auto zMove = static_cast<enum ZValueMove>(move);
+    auto zMove = static_cast<ZValueMoveType>(move);
     VAbstractApplication::VApp()->getUndoStack()->push(new ZValueMoveBackgroundImage(m_image.Id(), zMove, m_doc));
 }
 

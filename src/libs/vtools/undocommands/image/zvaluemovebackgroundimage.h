@@ -34,7 +34,7 @@
 #include "../vmisc/defglobal.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 
-enum class ZValueMove
+enum class ZValueMoveType
 {
     Top,
     Up,
@@ -45,7 +45,7 @@ enum class ZValueMove
 class ZValueMoveBackgroundImage : public VUndoCommand
 {
 public:
-    ZValueMoveBackgroundImage(QUuid id, ZValueMove move, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
+    ZValueMoveBackgroundImage(QUuid id, ZValueMoveType move, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
     ~ZValueMoveBackgroundImage() override =default;
     void undo() override;
     void redo() override;
@@ -53,7 +53,7 @@ private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(ZValueMoveBackgroundImage) // NOLINT
     QUuid m_id;
-    ZValueMove m_move;
+    ZValueMoveType m_move;
     QHash<QUuid, qreal> m_oldValues{};
 };
 

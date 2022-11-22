@@ -49,7 +49,7 @@ auto CorrectedZValues(const QList<QVector<QUuid>> &order) -> QHash<QUuid, qreal>
 }  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-ZValueMoveBackgroundImage::ZValueMoveBackgroundImage(QUuid id, ZValueMove move, VAbstractPattern *doc,
+ZValueMoveBackgroundImage::ZValueMoveBackgroundImage(QUuid id, ZValueMoveType move, VAbstractPattern *doc,
                                                      QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent),
       m_id(id),
@@ -112,12 +112,12 @@ void ZValueMoveBackgroundImage::redo()
 
     QList<QVector<QUuid>> order;
 
-    if (m_move == ZValueMove::Top)
+    if (m_move == ZValueMoveType::Top)
     {
         order = Levels(images, true);
         order.prepend({m_id});
     }
-    else if (m_move == ZValueMove::Up)
+    else if (m_move == ZValueMoveType::Up)
     {
         for (auto &image: images)
         {
@@ -129,7 +129,7 @@ void ZValueMoveBackgroundImage::redo()
 
         order = Levels(images, false);
     }
-    else if (m_move == ZValueMove::Down)
+    else if (m_move == ZValueMoveType::Down)
     {
         for (auto &image: images)
         {
@@ -141,7 +141,7 @@ void ZValueMoveBackgroundImage::redo()
 
         order = Levels(images, false);
     }
-    else if (m_move == ZValueMove::Bottom)
+    else if (m_move == ZValueMoveType::Bottom)
     {
         order = Levels(images, true);
         order.append({m_id});

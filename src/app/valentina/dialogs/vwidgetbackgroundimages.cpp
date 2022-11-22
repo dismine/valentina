@@ -428,7 +428,7 @@ void VWidgetBackgroundImages::MoveImageOnTop()
     if (item != nullptr)
     {
         QUuid id = item->data(Qt::UserRole).toUuid();
-        auto *command = new ZValueMoveBackgroundImage(id, ZValueMove::Top, m_doc);
+        auto *command = new ZValueMoveBackgroundImage(id, ZValueMoveType::Top, m_doc);
         VAbstractApplication::VApp()->getUndoStack()->push(command);
     }
 }
@@ -446,7 +446,7 @@ void VWidgetBackgroundImages::MoveImageUp()
     if (item != nullptr)
     {
         QUuid id = item->data(Qt::UserRole).toUuid();
-        auto *command = new ZValueMoveBackgroundImage(id, ZValueMove::Up, m_doc);
+        auto *command = new ZValueMoveBackgroundImage(id, ZValueMoveType::Up, m_doc);
         VAbstractApplication::VApp()->getUndoStack()->push(command);
     }
 }
@@ -464,7 +464,7 @@ void VWidgetBackgroundImages::MoveImageDown()
     if (item != nullptr)
     {
         QUuid id = item->data(Qt::UserRole).toUuid();
-        auto *command = new ZValueMoveBackgroundImage(id, ZValueMove::Down, m_doc);
+        auto *command = new ZValueMoveBackgroundImage(id, ZValueMoveType::Down, m_doc);
         VAbstractApplication::VApp()->getUndoStack()->push(command);
     }
 }
@@ -482,7 +482,7 @@ void VWidgetBackgroundImages::MoveImageBottom()
     if (item != nullptr)
     {
         QUuid id = item->data(Qt::UserRole).toUuid();
-        auto *command = new ZValueMoveBackgroundImage(id, ZValueMove::Bottom, m_doc);
+        auto *command = new ZValueMoveBackgroundImage(id, ZValueMoveType::Bottom, m_doc);
         VAbstractApplication::VApp()->getUndoStack()->push(command);
     }
 }
