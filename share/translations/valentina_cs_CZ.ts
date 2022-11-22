@@ -2410,15 +2410,15 @@
     </message>
     <message>
         <source>Pieces areas</source>
-        <translation type="unfinished"></translation>
+        <translation>Dílové oblasti</translation>
     </message>
     <message>
         <source>Length to control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Délka k ovládacímu bodu</translation>
     </message>
     <message>
         <source>Area of piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Oblast dílu</translation>
     </message>
 </context>
 <context>
@@ -7315,15 +7315,15 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>A body measurement measured in units of length.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tělesná míra měřená v délkových jednotkách.</translation>
     </message>
     <message>
         <source>Body Measurement</source>
-        <translation type="unfinished"></translation>
+        <translation>Tělesná míra</translation>
     </message>
     <message>
         <source>A body measurement measured in units of length. Circumference.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tělesná míra měřená v délkových jednotkách. Obvod těla.</translation>
     </message>
 </context>
 <context>
@@ -10031,7 +10031,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Show accuracy radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat poloměr přesnosti</translation>
     </message>
 </context>
 <context>
@@ -10571,6 +10571,14 @@ Chcete uložit své změny?</translation>
         <source>Automatically check for updates</source>
         <translation>Automaticky kontrolovat aktualizace</translation>
     </message>
+    <message>
+        <source>Disable if you want to skip interactive part of creating tools. And go straight to editing formulas instead.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Interactive tools</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PreferencesPathPage</name>
@@ -10781,7 +10789,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <source>By default export to DXF-AAMA sew line on Draw layer for all new created workpieces</source>
-        <translation type="unfinished"></translation>
+        <translation>Při výchozím vyvedení do formátu DXF-AAMA šít čáru na vrstvě pro kreslení pro všechny nově vytvořené střihové díly</translation>
     </message>
     <message>
         <source>Sew line on drawing</source>
@@ -11343,14 +11351,6 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Uživatelský materiál %1 v tomto střihu nebyl stanoven.</translation>
     </message>
     <message>
-        <source>Error in internal path &apos;%1&apos;. There is no intersection of first point with cutting countour</source>
-        <translation type="vanished">Chyba ve vnitřní cestě &apos;%1&apos;. Není tu žádný průnik prvního bodu s obrysem stříhání</translation>
-    </message>
-    <message>
-        <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting countour</source>
-        <translation type="vanished">Chyba ve vnitřní cestě &apos;%1&apos;. Není tu žádný průnik posledního bodu s obrysem stříhání</translation>
-    </message>
-    <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
         <translation>Nelze spočítat zářez pro bod &apos;%1&apos; v dílu &apos;%2&apos;. Švová záložka je prázdná.</translation>
     </message>
@@ -11608,35 +11608,35 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Křivka &apos;%1&apos;. Délka vyjmuté části (%2) je příliš malá. Vylaďte ji na nejmenší hodnotu.</translation>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Křivka &apos;%1&apos;. Délka vyjmuté části (%2) je příliš velká. Vylaďte ji na největší hodnotu.</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Neznámý</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with internal path &apos;%3&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Díl &apos;%1&apos;. Vnitřní cesta &apos;%2&apos; se protíná s vnitřní cestou &apos;%3&apos;.</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with cutting contour.</source>
-        <translation type="unfinished"></translation>
+        <translation>Díl &apos;%1&apos;. Vnitřní cesta &apos;%2&apos; se protíná s řezným obrysem.</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; not inside of cutting contour.</source>
-        <translation type="unfinished"></translation>
+        <translation>Díl &apos;%1&apos;. Vnitřní cesta &apos;%2&apos; není uvnitř řezného obrysu.</translation>
     </message>
     <message>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of first point with cutting contour</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba ve vnitřní cestě &apos;%1&apos;. Není tu žádný průnik prvního bodu s obrysem stříhání</translation>
     </message>
     <message>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting contour</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba ve vnitřní cestě &apos;%1&apos;. Není tu žádný průnik posledního bodu s obrysem stříhání</translation>
     </message>
 </context>
 <context>
@@ -12973,7 +12973,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>The measurement name is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Název měření je prázdný.</translation>
     </message>
 </context>
 <context>
@@ -13523,18 +13523,22 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Export to DXF-AAMA sew line on Draw layer </source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Vyvést do DXF-AAMA šicí linka na vrstvě pro kreslení</translation>
     </message>
     <message>
         <source>On drawing</source>
-        <translation type="unfinished"></translation>
+        <translation>Na výkresu</translation>
     </message>
     <message>
         <source>Short name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Krátký název:</translation>
     </message>
     <message>
         <source>Name used to generate a variable</source>
+        <translation>Název použitý k vytvoření proměnné</translation>
+    </message>
+    <message>
+        <source>Export to DXF-AAMA sew line on Draw layer</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13988,7 +13992,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Křivka &apos;%1&apos;. Délka vyjmuté části (%2) je příliš malá. Vylaďte ji na nejmenší hodnotu.</translation>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
@@ -13996,7 +14000,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Křivka &apos;%1&apos;. Délka vyjmuté části (%2) je příliš velká. Vylaďte ji na největší hodnotu.</translation>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
@@ -14346,7 +14350,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Křivka &apos;%1&apos;. Délka vyjmuté části (%2) je příliš malá. Vylaďte ji na nejmenší hodnotu.</translation>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
@@ -14354,7 +14358,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Křivka &apos;%1&apos;. Délka vyjmuté části (%2) je příliš velká. Vylaďte ji na největší hodnotu.</translation>
     </message>
     <message>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
@@ -15762,7 +15766,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Piece %1 invalid.</source>
-        <translation>Díl %1 je neplatný.</translation>
+        <translation type="vanished">Díl %1 je neplatný.</translation>
     </message>
     <message>
         <source>Error in line %1. Seam allowance is empty.</source>
@@ -15779,6 +15783,10 @@ Chcete uložit změny?</translation>
     <message>
         <source>Unexpected tag %1 in line %2</source>
         <translation>Neočekávaná značka %1 v řádku %2</translation>
+    </message>
+    <message>
+        <source>Piece %1 invalid. %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -16289,7 +16297,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Piece %1 invalid.</source>
-        <translation>Díl %1 je neplatný.</translation>
+        <translation type="vanished">Díl %1 je neplatný.</translation>
     </message>
     <message>
         <source>&amp;Undo</source>
@@ -16407,10 +16415,29 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Has effect only when print in application. To export with tiles scheme use separate setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Působí pouze při tisku v aplikaci. Pro vyvedení se schématem dlaždic použijte samostatné nastavení</translation>
     </message>
     <message>
         <source>sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece %1 invalid. %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPPiece</name>
+    <message>
+        <source>Seam line is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seam allowance line is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grainline is empty</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -18203,7 +18230,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <source>Sewing Lingerie that Fits</source>
         <comment>Book name</comment>
-        <translation>Sewing Lingerie that Fits</translation>
+        <translation>Šití spodního prádla, které padne</translation>
     </message>
     <message>
         <source>Castro</source>
@@ -18473,7 +18500,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <source>Design and Sew Jeans</source>
         <comment>Book name</comment>
-        <translation>Design and Sew Jeans</translation>
+        <translation>Navrhování a šití džínů</translation>
     </message>
     <message>
         <source>Lady Boutique</source>
@@ -18623,7 +18650,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <source>How to Make Your Own Sewing Patterns</source>
         <comment>Book name</comment>
-        <translation>How to Make Your Own Sewing Patterns</translation>
+        <translation>Jak si vytvořit vlastní šicí vzory</translation>
     </message>
     <message>
         <source>Zarapkar</source>

@@ -10030,7 +10030,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Show accuracy radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати радіус точності</translation>
     </message>
 </context>
 <context>
@@ -10569,6 +10569,14 @@ Do you want to save your changes?</source>
     <message>
         <source>Automatically check for updates</source>
         <translation>Автоматично перевіряти наявність оновлень</translation>
+    </message>
+    <message>
+        <source>Disable if you want to skip interactive part of creating tools. And go straight to editing formulas instead.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Interactive tools</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11342,14 +11350,6 @@ This option will take an affect after restart.</source>
         <translation>Матеріалу користувача номер %1 не визначено в цій викрійці.</translation>
     </message>
     <message>
-        <source>Error in internal path &apos;%1&apos;. There is no intersection of first point with cutting countour</source>
-        <translation type="vanished">Помилка у внутрішньому шляху &quot;%1&quot;. Немає перетину першої точки з контуром розрізу</translation>
-    </message>
-    <message>
-        <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting countour</source>
-        <translation type="vanished">Помилка у внутрішньому шляху &quot;%1&quot;. Немає перетину останньої точки з контуром розрізу</translation>
-    </message>
-    <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
         <translation>Неможливо розрахувати надсічку для точки &apos;%1&apos; у деталі &apos;%2&apos;. Припуск на шви порожній.</translation>
     </message>
@@ -11618,32 +11618,24 @@ This option will take an affect after restart.</source>
         <translation>Невідома</translation>
     </message>
     <message>
-        <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with cutting countour.</source>
-        <translation type="vanished">Деталь &apos;%1&apos;. Внутрішній контур &apos;%2&apos; перетинається з контуром розкрою.</translation>
-    </message>
-    <message>
-        <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; not inside of cutting countour.</source>
-        <translation type="vanished">Деталь &apos;%1&apos;. Внутрішній контур &apos;%2&apos; не всередині контуру розкрою.</translation>
-    </message>
-    <message>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with internal path &apos;%3&apos;.</source>
         <translation>Деталь &apos;%1&apos;. Внутрішній шлях &apos;%2&apos; перетинається з внутрішнім шляхом &apos;%3&apos;.</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with cutting contour.</source>
-        <translation type="unfinished"></translation>
+        <translation>Деталь &apos;%1&apos;. Внутрішній контур &apos;%2&apos; перетинається з контуром розкрою.</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; not inside of cutting contour.</source>
-        <translation type="unfinished"></translation>
+        <translation>Деталь &apos;%1&apos;. Внутрішній контур &apos;%2&apos; не всередині контуру розкрою.</translation>
     </message>
     <message>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of first point with cutting contour</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка у внутрішньому шляху &quot;%1&quot;. Немає перетину першої точки з контуром розрізу</translation>
     </message>
     <message>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting contour</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка у внутрішньому шляху &quot;%1&quot;. Немає перетину останньої точки з контуром розрізу</translation>
     </message>
 </context>
 <context>
@@ -13530,7 +13522,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export to DXF-AAMA sew line on Draw layer </source>
-        <translation>Експорт в DXF-AAMA лінії шва на шар Draw </translation>
+        <translation type="vanished">Експорт в DXF-AAMA лінії шва на шар Draw </translation>
     </message>
     <message>
         <source>On drawing</source>
@@ -13543,6 +13535,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Name used to generate a variable</source>
         <translation>Ім&apos;я, що використовується для генерації змінної</translation>
+    </message>
+    <message>
+        <source>Export to DXF-AAMA sew line on Draw layer</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -15767,7 +15763,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Piece %1 invalid.</source>
-        <translation>Деталь %1 недійсна.</translation>
+        <translation type="vanished">Деталь %1 недійсна.</translation>
     </message>
     <message>
         <source>Error in line %1. Seam allowance is empty.</source>
@@ -15784,6 +15780,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Unexpected tag %1 in line %2</source>
         <translation>Неочікуваний тег %1 у рядку %2</translation>
+    </message>
+    <message>
+        <source>Piece %1 invalid. %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -16294,7 +16294,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Piece %1 invalid.</source>
-        <translation>Деталь %1 недійсна.</translation>
+        <translation type="vanished">Деталь %1 недійсна.</translation>
     </message>
     <message>
         <source>&amp;Undo</source>
@@ -16417,6 +16417,25 @@ Do you want to save your changes?</source>
     <message>
         <source>sheet</source>
         <translation>аркуш</translation>
+    </message>
+    <message>
+        <source>Piece %1 invalid. %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPPiece</name>
+    <message>
+        <source>Seam line is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seam allowance line is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grainline is empty</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

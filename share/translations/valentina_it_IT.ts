@@ -5,7 +5,7 @@
     <name>AddBackgroundImage</name>
     <message>
         <source>add background image</source>
-        <translation type="unfinished"></translation>
+        <translation>aggiungi sfondo</translation>
     </message>
 </context>
 <context>
@@ -61,7 +61,7 @@
     <name>ChangeGroupOptions</name>
     <message>
         <source>rename group</source>
-        <translation type="unfinished"></translation>
+        <translation>cambia il nome del gruppo</translation>
     </message>
 </context>
 <context>
@@ -620,7 +620,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
 </context>
 <context>
@@ -751,11 +751,11 @@
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>sopranome:</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
 </context>
 <context>
@@ -878,11 +878,11 @@
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>sopranome:</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
 </context>
 <context>
@@ -1009,7 +1009,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
 </context>
 <context>
@@ -1080,11 +1080,11 @@
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>sopranome:</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
 </context>
 <context>
@@ -1135,11 +1135,11 @@
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>sopranome:</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
 </context>
 <context>
@@ -1246,15 +1246,15 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>soprannome 1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>soprannome 2:</translation>
     </message>
 </context>
 <context>
@@ -1337,15 +1337,15 @@
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>soprannome 1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>soprannome 2:</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
 </context>
 <context>
@@ -1428,15 +1428,15 @@
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>soprannome 1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>soprannome 2:</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
 </context>
 <context>
@@ -1519,15 +1519,15 @@
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>soprannome 1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>soprannome 2:</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
 </context>
 <context>
@@ -2501,11 +2501,11 @@
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>sopranome:</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
     <message>
         <source>Approximation scale:</source>
@@ -2624,7 +2624,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
 </context>
 <context>
@@ -2890,7 +2890,7 @@
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>sopranome:</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -2906,7 +2906,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
     <message>
         <source>Invalid suffix</source>
@@ -3009,7 +3009,7 @@
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>sopranome:</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -3025,7 +3025,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
     <message>
         <source>Invalid suffix</source>
@@ -3187,7 +3187,7 @@
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
 </context>
 <context>
@@ -4163,7 +4163,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
 </context>
 <context>
@@ -4230,7 +4230,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
 </context>
 <context>
@@ -4357,7 +4357,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
 </context>
 <context>
@@ -4677,7 +4677,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>sopranome:</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -4693,7 +4693,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
     <message>
         <source>Invalid suffix</source>
@@ -4942,7 +4942,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
 </context>
 <context>
@@ -5879,7 +5879,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
 </context>
 <context>
@@ -5978,7 +5978,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
 </context>
 <context>
@@ -6073,7 +6073,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
 </context>
 <context>
@@ -6132,7 +6132,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
 </context>
 <context>
@@ -6199,7 +6199,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
 </context>
 <context>
@@ -6314,7 +6314,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
 </context>
 <context>
@@ -6361,7 +6361,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
     <message>
         <source>Curve 1</source>
@@ -6369,11 +6369,11 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>soprannome 1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>soprannome 2:</translation>
     </message>
     <message>
         <source>Curve 2</source>
@@ -6559,7 +6559,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
     <message>
         <source>Invalid suffix</source>
@@ -6591,7 +6591,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>sopranome:</translation>
     </message>
     <message>
         <source>Default</source>
@@ -7428,7 +7428,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
 </context>
 <context>
@@ -7471,7 +7471,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
 </context>
 <context>
@@ -7618,11 +7618,11 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>sopranome:</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
 </context>
 <context>
@@ -7777,11 +7777,11 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>sopranome:</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
 </context>
 <context>
@@ -7969,7 +7969,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
 </context>
 <context>
@@ -8080,7 +8080,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
 </context>
 <context>
@@ -10556,6 +10556,14 @@ Vuoi salvare i cambiamenti?</translation>
         <source>Automatically check for updates</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Disable if you want to skip interactive part of creating tools. And go straight to editing formulas instead.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Interactive tools</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PreferencesPathPage</name>
@@ -11328,14 +11336,6 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error in internal path &apos;%1&apos;. There is no intersection of first point with cutting countour</source>
-        <translation type="vanished">Errore nel tracciato interno &apos;%1&apos;. Non c&apos;è intersezione tra il primo punto e il contorno di ritaglio</translation>
-    </message>
-    <message>
-        <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting countour</source>
-        <translation type="vanished">Errore nel tracciato interno &apos;%1&apos;. Non c&apos;è intersezione tra l&apos;ultimo punto e il contorno di ritaglio</translation>
-    </message>
-    <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
         <translation>Impossibile calcolare una tacca per il punto &apos;%1&apos; nel pezzo &apos;%2&apos;. Il margine di cucitura non è ancora stato stabilito.</translation>
     </message>
@@ -11928,7 +11928,7 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
     <name>RenameGroup</name>
     <message>
         <source>rename group</source>
-        <translation type="unfinished"></translation>
+        <translation>cambia il nome del gruppo</translation>
     </message>
 </context>
 <context>
@@ -13507,10 +13507,6 @@ Vuoi salvare le tue modifiche?</translation>
         <translation>Inserisci…</translation>
     </message>
     <message>
-        <source>Export to DXF-AAMA sew line on Draw layer </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>On drawing</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13520,6 +13516,10 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Name used to generate a variable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export to DXF-AAMA sew line on Draw layer</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -15671,10 +15671,6 @@ Vuoi salvare le tue modifiche?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Piece %1 invalid.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Error in line %1. Seam allowance is empty.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15688,6 +15684,10 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Unexpected tag %1 in line %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece %1 invalid. %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -16198,10 +16198,6 @@ Vuoi salvare le tue modifiche?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Piece %1 invalid.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Undo</source>
         <translation>&amp;Undo</translation>
     </message>
@@ -16320,6 +16316,25 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece %1 invalid. %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPPiece</name>
+    <message>
+        <source>Seam line is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seam allowance line is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grainline is empty</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -17799,15 +17814,15 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>sopranome:</translation>
     </message>
     <message>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>soprannome 1:</translation>
     </message>
     <message>
         <source>Alias2:</source>
-        <translation type="unfinished"></translation>
+        <translation>soprannome 2:</translation>
     </message>
     <message>
         <source>Point of intersection circle and segment</source>

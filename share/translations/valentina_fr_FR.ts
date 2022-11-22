@@ -10568,6 +10568,14 @@ Voulez-vous sauvegarder vos modifications ?</translation>
         <source>Automatically check for updates</source>
         <translation>Vérification automatique des mises à jour</translation>
     </message>
+    <message>
+        <source>Disable if you want to skip interactive part of creating tools. And go straight to editing formulas instead.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Interactive tools</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PreferencesPathPage</name>
@@ -11336,14 +11344,6 @@ This option will take an affect after restart.</source>
     <message>
         <source>User material number %1 was not defined in this pattern.</source>
         <translation>La matière numéro %1 n&apos;a pas été définie dans ce patron.</translation>
-    </message>
-    <message>
-        <source>Error in internal path &apos;%1&apos;. There is no intersection of first point with cutting countour</source>
-        <translation type="vanished">Erreur dans le chemin interne &apos;%1&apos;. Il n&apos;y a pas d&apos;intersection entre le premier point et le contour de coupe</translation>
-    </message>
-    <message>
-        <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting countour</source>
-        <translation type="vanished">Erreur dans le chemin interne &apos;%1&apos;. Il n&apos;y a pas d&apos;intersection entre le dernier point et le contour de coupe</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
@@ -13517,10 +13517,6 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation>Insérer…</translation>
     </message>
     <message>
-        <source>Export to DXF-AAMA sew line on Draw layer </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>On drawing</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13530,6 +13526,10 @@ Voulez-vous enregistrer vos changements ?</translation>
     </message>
     <message>
         <source>Name used to generate a variable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export to DXF-AAMA sew line on Draw layer</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -15755,7 +15755,7 @@ Voulez-vous enregistrer vos changements ?</translation>
     </message>
     <message>
         <source>Piece %1 invalid.</source>
-        <translation>Pièce %1 non valide.</translation>
+        <translation type="vanished">Pièce %1 non valide.</translation>
     </message>
     <message>
         <source>Error in line %1. Seam allowance is empty.</source>
@@ -15772,6 +15772,10 @@ Voulez-vous enregistrer vos changements ?</translation>
     <message>
         <source>Unexpected tag %1 in line %2</source>
         <translation>Tag %1 inattendu à ligne %2</translation>
+    </message>
+    <message>
+        <source>Piece %1 invalid. %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -16282,7 +16286,7 @@ Voulez-vous enregistrer vos changements ?</translation>
     </message>
     <message>
         <source>Piece %1 invalid.</source>
-        <translation>Pièce %1 non valide.</translation>
+        <translation type="vanished">Pièce %1 non valide.</translation>
     </message>
     <message>
         <source>&amp;Undo</source>
@@ -16404,6 +16408,25 @@ Voulez-vous enregistrer les modifications ?</translation>
     </message>
     <message>
         <source>sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece %1 invalid. %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPPiece</name>
+    <message>
+        <source>Seam line is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seam allowance line is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grainline is empty</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -86,7 +86,7 @@
            <item>
             <widget class="QCheckBox" name="checkBoxOnDrawing">
              <property name="toolTip">
-              <string>Export to DXF-AAMA sew line on Draw layer </string>
+              <string>Export to DXF-AAMA sew line on Draw layer</string>
              </property>
              <property name="text">
               <string>On drawing</string>

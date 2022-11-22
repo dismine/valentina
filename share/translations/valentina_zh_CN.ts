@@ -8510,6 +8510,14 @@ Do you want to save your changes?</source>
         <source>Automatically check for updates</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Disable if you want to skip interactive part of creating tools. And go straight to editing formulas instead.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Interactive tools</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PreferencesPathPage</name>
@@ -11127,10 +11135,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Export to DXF-AAMA sew line on Draw layer </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>On drawing</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11140,6 +11144,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Name used to generate a variable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export to DXF-AAMA sew line on Draw layer</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13035,10 +13043,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Piece %1 invalid.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Error in line %1. Seam allowance is empty.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13052,6 +13056,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unexpected tag %1 in line %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece %1 invalid. %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13570,10 +13578,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Piece %1 invalid.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Undo</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13692,6 +13696,25 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece %1 invalid. %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPPiece</name>
+    <message>
+        <source>Seam line is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seam allowance line is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grainline is empty</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
