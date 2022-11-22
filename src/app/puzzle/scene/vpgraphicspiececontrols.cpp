@@ -57,6 +57,7 @@ const qreal centerRadius2 = 10;
 Q_GLOBAL_STATIC_WITH_ARGS(const QColor, defaultColor, (Qt::black)) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QColor, hoverColor, (Qt::green)) // NOLINT
 
+//---------------------------------------------------------------------------------------------------------------------
 auto TransformationOrigin(const VPLayoutPtr &layout, const QRectF &boundingRect) -> VPTransformationOrigon
 {
     SCASSERT(layout != nullptr)
@@ -88,7 +89,7 @@ VPGraphicsTransformationOrigin::VPGraphicsTransformationOrigin(const VPLayoutPtr
 {
     SCASSERT(m_layout != nullptr)
     setCursor(Qt::OpenHandCursor);
-    setZValue(1);
+    setZValue(1000);
     setAcceptHoverEvents(true);
 
     connect(layout.data(), &VPLayout::TransformationOriginChanged, this,
