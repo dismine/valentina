@@ -178,7 +178,10 @@ void VBackgroundImageControls::UpdateControls()
 
     prepareGeometryChange();
     m_image = m_doc->GetBackgroundImage(m_id);
-    m_originPos = m_image.BoundingRect().center();
+    if(not m_customOrigin)
+    {
+        m_originPos = m_image.BoundingRect().center();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -394,6 +397,8 @@ void VBackgroundImageControls::mousePressEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VBackgroundImageControls::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
+    m_customOrigin = true;
+
     if (m_tranformationType == BITransformationType::Scale)
     {
         ScaleImage(event);
@@ -426,8 +431,10 @@ void VBackgroundImageControls::mouseReleaseEvent(QGraphicsSceneMouseEvent *event
             setCursor(VAbstractValApplication::VApp()->getSceneView()->viewport()->cursor());
         }
 
+        m_customOrigin = false;
         m_controlsVisible = true;
         m_allowChangeMerge = false;
+        m_originSaved = false;
 
         if (m_tranformationType == BITransformationType::Scale)
         {

@@ -131,6 +131,8 @@ private:
 
     bool m_showOrigin{false};
     QPointF m_originPos{};
+    bool m_originSaved{false};
+    bool m_customOrigin{false};
 
     void InitPixmaps();
 
