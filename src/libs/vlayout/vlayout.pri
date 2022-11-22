@@ -41,7 +41,8 @@ SOURCES += \
     $$PWD/vbestsquare.cpp \
     $$PWD/vlayoutpoint.cpp \
     $$PWD/vposition.cpp \
-    $$PWD/vrawlayout.cpp \  
+    $$PWD/vrawlayout.cpp \
+    $$PWD/vsapoint.cpp \
     $$PWD/vprintlayout.cpp \
     $$PWD/vtextmanager.cpp \
     $$PWD/vposter.cpp \
