@@ -518,11 +518,11 @@ void VBackgroundImageItem::keyPressEvent(QKeyEvent *event)
             return;
         case Qt::Key_Period:
         case Qt::Key_Greater:
-            (event->modifiers() & Qt::ControlModifier) ? ScaleImageByFactor(2) : ScaleImageByAdjustSize(2);
+            (event->modifiers() & Qt::AltModifier) ? ScaleImageByFactor(2) : ScaleImageByAdjustSize(2);
             return;
         case Qt::Key_Comma:
         case Qt::Key_Less:
-            (event->modifiers() & Qt::ControlModifier) ? ScaleImageByFactor(0.5) : ScaleImageByAdjustSize(-2);
+            (event->modifiers() & Qt::AltModifier) ? ScaleImageByFactor(0.5) : ScaleImageByAdjustSize(-2);
             return;
         case Qt::Key_Home:
             MoveImageZValue(static_cast<int>(ZValueMoveType::Top));
