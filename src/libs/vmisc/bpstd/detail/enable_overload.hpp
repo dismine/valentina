@@ -31,8 +31,10 @@
 #ifndef BPSTD_DETAIL_ENABLE_OVERLOAD_HPP
 #define BPSTD_DETAIL_ENABLE_OVERLOAD_HPP
 
+#if !defined(_MSC_VER)
 #pragma GCC system_header
 #pragma clang system_header
+#endif
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 # pragma once
