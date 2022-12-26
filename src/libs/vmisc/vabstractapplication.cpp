@@ -118,6 +118,7 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
     // See issue #992: QXcbConnection: XCB Error.
     rules += QLatin1String("qt.qpa*=false\n");
     rules += QLatin1String("kf5.kio.core*=false\n");
+    rules += QLatin1String("qt.gui.icc.warning=false\n");
 #endif
 
     if (not rules.isEmpty())
