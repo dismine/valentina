@@ -1112,11 +1112,11 @@ void TMainWindow::ImportDataFromCSV()
 
             if (m_m->Type() == MeasurementsType::Individual)
             {
-                ImportIndividualMeasurements(csv, map);
+                ImportIndividualMeasurements(csv, map, dialog.IsWithHeader());
             }
             else
             {
-                ImportMultisizeMeasurements(csv, map);
+                ImportMultisizeMeasurements(csv, map, dialog.IsWithHeader());
             }
         }
     }
@@ -3930,7 +3930,7 @@ void TMainWindow::RefreshDataAfterImport()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv, const QVector<int> &map)
+void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv, const QVector<int> &map, bool withHeader)
 {
     const int columns = csv.columnCount();
     const int rows = csv.rowCount();
@@ -3999,7 +3999,12 @@ void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv, const QVe
         }
         catch (VException &e)
         {
-            ShowError(tr("Error in row %1.").arg(i) + QLatin1Char(' ') + e.ErrorMessage());
+            int rowIndex = i+1;
+            if (withHeader)
+            {
+                ++rowIndex;
+            }
+            ShowError(tr("Error in row %1. %2").arg(rowIndex).arg(e.ErrorMessage()));
             return;
         }
     }
@@ -4023,7 +4028,7 @@ void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv, const QVe
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv, const QVector<int> &map)
+void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv, const QVector<int> &map, bool withHeader)
 {
     const int columns = csv.columnCount();
 
@@ -4047,7 +4052,12 @@ void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv, const QVec
         }
         catch (VException &e)
         {
-            ShowError(tr("Error in row %1.").arg(i) + QLatin1Char(' ') + e.ErrorMessage());
+            int rowIndex = i+1;
+            if (withHeader)
+            {
+                ++rowIndex;
+            }
+            ShowError(tr("Error in row %1. %2").arg(rowIndex).arg(e.ErrorMessage()));
             return;
         }
     }

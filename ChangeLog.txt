@@ -10,6 +10,7 @@
 - Export area of piece in Final measurements.
 - New option Show accuracy radius. 
 - New option Interactive tools.
+- Improve error messages while import CSV data.
 
 # Valentina 0.7.52 September 12, 2022
 - Fix crash when default locale is ru.

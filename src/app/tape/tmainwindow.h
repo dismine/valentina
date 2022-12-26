@@ -263,8 +263,8 @@ private:
     void ShowError(const QString &text);
     void RefreshDataAfterImport();
 
-    void ImportIndividualMeasurements(const QxtCsvModel &csv, const QVector<int> &map);
-    void ImportMultisizeMeasurements(const QxtCsvModel &csv, const QVector<int> &map);
+    void ImportIndividualMeasurements(const QxtCsvModel &csv, const QVector<int> &map, bool withHeader);
+    void ImportMultisizeMeasurements(const QxtCsvModel &csv, const QVector<int> &map, bool withHeader);
     auto ImportMultisizeMeasurement(const QxtCsvModel &csv, int i, const QVector<int> &map,
                                     int dimensionsCount, QSet<QString> &importedNames) -> MultisizeMeasurement;
 
