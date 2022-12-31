@@ -622,7 +622,8 @@ void DialogEditLabel::InitPlaceholders()
 
     {
         const QVector<VFinalMeasurement> measurements = m_doc->GetFinalMeasurements();
-        const VContainer completeData = m_doc->GetCompleteData();
+        VContainer completeData = m_doc->GetCompleteData();
+        completeData.FillPiecesAreas(VAbstractValApplication::VApp()->patternUnits());
 
         for (int i=0; i < measurements.size(); ++i)
         {
