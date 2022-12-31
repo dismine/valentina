@@ -11616,7 +11616,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation>Neznámý</translation>
+        <translation type="vanished">Neznámý</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with internal path &apos;%3&apos;.</source>
@@ -11637,6 +11637,11 @@ Tato volba se projeví po opětovném spuštění.</translation>
     <message>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting contour</source>
         <translation>Chyba ve vnitřní cestě &apos;%1&apos;. Není tu žádný průnik posledního bodu s obrysem stříhání</translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <comment>piece area</comment>
+        <translation type="unfinished">Neznámý</translation>
     </message>
 </context>
 <context>
@@ -12683,7 +12688,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Error in row %1.</source>
-        <translation>Chyba na řádku %1.</translation>
+        <translation type="vanished">Chyba na řádku %1.</translation>
     </message>
     <message>
         <source>Multisize measurements require at least 4 columns.</source>
@@ -12974,6 +12979,10 @@ Chcete uložit změny?</translation>
     <message>
         <source>The measurement name is empty.</source>
         <translation>Název měření je prázdný.</translation>
+    </message>
+    <message>
+        <source>Error in row %1. %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13520,10 +13529,6 @@ Chcete uložit změny?</translation>
     <message>
         <source>Insert…</source>
         <translation>Vložit…</translation>
-    </message>
-    <message>
-        <source>Export to DXF-AAMA sew line on Draw layer </source>
-        <translation type="vanished">Vyvést do DXF-AAMA šicí linka na vrstvě pro kreslení</translation>
     </message>
     <message>
         <source>On drawing</source>
@@ -15765,10 +15770,6 @@ Chcete uložit změny?</translation>
         <translation>Obdržena prázdná vlastnost &apos;%1&apos;</translation>
     </message>
     <message>
-        <source>Piece %1 invalid.</source>
-        <translation type="vanished">Díl %1 je neplatný.</translation>
-    </message>
-    <message>
         <source>Error in line %1. Seam allowance is empty.</source>
         <translation>Chyba na řádku %1. Švová záložka je prázdná.</translation>
     </message>
@@ -16294,10 +16295,6 @@ Chcete uložit změny?</translation>
     <message>
         <source>Unable to read a layout file. %1</source>
         <translation>Nelze číst soubor rozvržení. %1</translation>
-    </message>
-    <message>
-        <source>Piece %1 invalid.</source>
-        <translation type="vanished">Díl %1 je neplatný.</translation>
     </message>
     <message>
         <source>&amp;Undo</source>
@@ -19624,6 +19621,11 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     </message>
     <message>
         <source>PieceArea_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PieceSeamLineArea_</source>
         <comment>Left symbol _ in the name</comment>
         <translation type="unfinished"></translation>
     </message>

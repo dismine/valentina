@@ -11612,10 +11612,6 @@ Esta opción surtirá efecto después de reiniciar.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unknown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with internal path &apos;%3&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11633,6 +11629,11 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting contour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <comment>piece area</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12680,7 +12681,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Error in row %1.</source>
-        <translation>Error en línea %1.</translation>
+        <translation type="vanished">Error en línea %1.</translation>
     </message>
     <message>
         <source>Multisize measurements require at least 4 columns.</source>
@@ -12970,6 +12971,10 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>The measurement name is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error in row %1. %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -19608,6 +19613,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>PieceArea_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PieceSeamLineArea_</source>
         <comment>Left symbol _ in the name</comment>
         <translation type="unfinished"></translation>
     </message>

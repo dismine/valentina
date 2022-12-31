@@ -11610,10 +11610,6 @@ This option will take an affect after restart.</source>
         <translation>Courbe &apos;%1&apos;. La partie segmentée (%2) est de longueur trop élevée. Paramétrez une valeur au plus égale au maximum possible.</translation>
     </message>
     <message>
-        <source>Unknown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with internal path &apos;%3&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11631,6 +11627,11 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting contour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <comment>piece area</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12678,7 +12679,7 @@ Voulez-vous enregistrer vos changements ?</translation>
     </message>
     <message>
         <source>Error in row %1.</source>
-        <translation>Erreur dans la ligne %1.</translation>
+        <translation type="vanished">Erreur dans la ligne %1.</translation>
     </message>
     <message>
         <source>Multisize measurements require at least 4 columns.</source>
@@ -12969,6 +12970,10 @@ Voulez-vous enregistrer vos changements ?</translation>
     <message>
         <source>The measurement name is empty.</source>
         <translation>Le champ &apos;nom de la mesure&apos; n&apos;est pas renseigné.</translation>
+    </message>
+    <message>
+        <source>Error in row %1. %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -15754,10 +15759,6 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation>Attribut &apos;%1&apos; manquant</translation>
     </message>
     <message>
-        <source>Piece %1 invalid.</source>
-        <translation type="vanished">Pièce %1 non valide.</translation>
-    </message>
-    <message>
         <source>Error in line %1. Seam allowance is empty.</source>
         <translation>Erreur ligne %1. La marge de couture est manquante.</translation>
     </message>
@@ -16283,10 +16284,6 @@ Voulez-vous enregistrer vos changements ?</translation>
     <message>
         <source>Unable to read a layout file. %1</source>
         <translation>Impossible de lire le fichier %1</translation>
-    </message>
-    <message>
-        <source>Piece %1 invalid.</source>
-        <translation type="vanished">Pièce %1 non valide.</translation>
     </message>
     <message>
         <source>&amp;Undo</source>
@@ -19613,6 +19610,11 @@ Erreur de compatibilité du format .rld: actualFileVersion = %1 alors que fileVe
     </message>
     <message>
         <source>PieceArea_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PieceSeamLineArea_</source>
         <comment>Left symbol _ in the name</comment>
         <translation type="unfinished"></translation>
     </message>

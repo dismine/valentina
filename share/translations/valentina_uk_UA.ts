@@ -2667,7 +2667,7 @@
     </message>
     <message>
         <source>Semicolon</source>
-        <translation>Двокрапка</translation>
+        <translation>Крапка з комою</translation>
     </message>
     <message>
         <source>Space</source>
@@ -10572,11 +10572,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Disable if you want to skip interactive part of creating tools. And go straight to editing formulas instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вимкніть, якщо хочете пропустити інтерактивну частину створення інструментів. І перейти відразу до редагування формул.</translation>
     </message>
     <message>
         <source>Interactive tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Інтерактивні інструменти</translation>
     </message>
 </context>
 <context>
@@ -11615,7 +11615,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Unknown</source>
-        <translation>Невідома</translation>
+        <translation type="vanished">Невідома</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with internal path &apos;%3&apos;.</source>
@@ -11636,6 +11636,11 @@ This option will take an affect after restart.</source>
     <message>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting contour</source>
         <translation>Помилка у внутрішньому шляху &quot;%1&quot;. Немає перетину останньої точки з контуром розрізу</translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <comment>piece area</comment>
+        <translation type="unfinished">Невідома</translation>
     </message>
 </context>
 <context>
@@ -12682,7 +12687,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error in row %1.</source>
-        <translation>Помилка в рядку %1.</translation>
+        <translation type="vanished">Помилка в рядку %1.</translation>
     </message>
     <message>
         <source>Multisize measurements require at least 4 columns.</source>
@@ -12973,6 +12978,10 @@ Do you want to save your changes?</source>
     <message>
         <source>The measurement name is empty.</source>
         <translation>Ім&apos;я мірки порожнє.</translation>
+    </message>
+    <message>
+        <source>Error in row %1. %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13521,10 +13530,6 @@ Do you want to save your changes?</source>
         <translation>Вставити…</translation>
     </message>
     <message>
-        <source>Export to DXF-AAMA sew line on Draw layer </source>
-        <translation type="vanished">Експорт в DXF-AAMA лінії шва на шар Draw </translation>
-    </message>
-    <message>
         <source>On drawing</source>
         <translation>На малювання</translation>
     </message>
@@ -13538,7 +13543,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export to DXF-AAMA sew line on Draw layer</source>
-        <translation type="unfinished"></translation>
+        <translation>Експорт в DXF-AAMA лінії шва на шарі Draw</translation>
     </message>
 </context>
 <context>
@@ -15762,10 +15767,6 @@ Do you want to save your changes?</source>
         <translation>Отримано порожній атрибут &quot;%1&quot;</translation>
     </message>
     <message>
-        <source>Piece %1 invalid.</source>
-        <translation type="vanished">Деталь %1 недійсна.</translation>
-    </message>
-    <message>
         <source>Error in line %1. Seam allowance is empty.</source>
         <translation>Помилка в рядку %1. Припуск на шви порожній.</translation>
     </message>
@@ -15783,7 +15784,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Piece %1 invalid. %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Деталь %1 невірна. %2</translation>
     </message>
 </context>
 <context>
@@ -16293,10 +16294,6 @@ Do you want to save your changes?</source>
         <translation>Не вдається прочитати файл розкладки. %1</translation>
     </message>
     <message>
-        <source>Piece %1 invalid.</source>
-        <translation type="vanished">Деталь %1 недійсна.</translation>
-    </message>
-    <message>
         <source>&amp;Undo</source>
         <translation>&amp;Відмінити</translation>
     </message>
@@ -16420,22 +16417,22 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Piece %1 invalid. %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Деталь %1 невірна. %2</translation>
     </message>
 </context>
 <context>
     <name>VPPiece</name>
     <message>
         <source>Seam line is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Лінія шва порожня</translation>
     </message>
     <message>
         <source>Seam allowance line is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Припуск на шов порожній</translation>
     </message>
     <message>
         <source>Grainline is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Нитка основи порожня</translation>
     </message>
 </context>
 <context>
@@ -19623,6 +19620,11 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <source>PieceArea_</source>
         <comment>Left symbol _ in the name</comment>
         <translation>ПлощаДеталі_</translation>
+    </message>
+    <message>
+        <source>PieceSeamLineArea_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
