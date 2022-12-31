@@ -286,4 +286,20 @@ inline auto TextWidthF(const QFontMetricsF &fm, const QString &text) -> qreal
 #endif
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+template <typename Key, typename T>
+inline auto Insert(QMap<Key, T> &map1, const QMap<Key, T> &map2) -> void
+{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+    map1.insert(map2);
+#else
+    auto i = map2.constBegin();
+    while (i != map2.constEnd())
+    {
+        map1.insert(i.key(), i.value());
+        ++i;
+    }
+#endif
+}
+
 #endif // COMPATIBILITY_H

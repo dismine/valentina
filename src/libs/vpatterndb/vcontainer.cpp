@@ -597,12 +597,7 @@ const QMap<QString, QSharedPointer<VMeasurement> > VContainer::DataMeasurementsW
     QMap<QString, QSharedPointer<VMeasurement> > measurements = DataVar<VMeasurement>(VarType::Measurement);
     QMap<QString, QSharedPointer<VMeasurement> > separators = DataVar<VMeasurement>(VarType::MeasurementSeparator);
 
-    QMap<QString, QSharedPointer<VMeasurement>>::const_iterator i = separators.constBegin();
-    while (i != separators.constEnd())
-    {
-        measurements.insert(i.key(), i.value());
-        ++i;
-    }
+    Insert(measurements, separators);
 
     return measurements;
 }
@@ -619,12 +614,7 @@ const QMap<QString, QSharedPointer<VIncrement> > VContainer::DataIncrementsWithS
     QMap<QString, QSharedPointer<VIncrement> > increments = DataVar<VIncrement>(VarType::Increment);
     QMap<QString, QSharedPointer<VIncrement> > separators = DataVar<VIncrement>(VarType::IncrementSeparator);
 
-    QMap<QString, QSharedPointer<VIncrement>>::const_iterator i = separators.constBegin();
-    while (i != separators.constEnd())
-    {
-        increments.insert(i.key(), i.value());
-        ++i;
-    }
+    Insert(increments, separators);
 
     return increments;
 }
