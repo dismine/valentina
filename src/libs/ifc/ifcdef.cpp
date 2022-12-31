@@ -318,6 +318,7 @@ const QString currentSeamAllowance = QStringLiteral("CurrentSeamAllowance");
 const QString rotation_V           = QStringLiteral("Rotation");
 const QString rotationElArc_       = rotation_V + elarc_;
 const QString pieceArea_           = QStringLiteral("PieceArea_");
+const QString pieceSeamLineArea_   = QStringLiteral("PieceSeamLineArea_");
 
 const QStringList builInVariables
 {
@@ -348,5 +349,6 @@ const QStringList builInVariables
     c1LengthSplPath,
     c2LengthSplPath,
     rotationElArc_,
-    pieceArea_
+    pieceArea_,
+    pieceSeamLineArea_
 };

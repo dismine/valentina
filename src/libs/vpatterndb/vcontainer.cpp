@@ -392,7 +392,7 @@ void VContainer::ClearForFullParse()
 
     d->pieces->clear();
     d->piecePaths->clear();
-    Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 11, "Check that you used all types");
+    Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 12, "Check that you used all types");
     ClearVariables(QVector<VarType>{VarType::Increment,
                                     VarType::IncrementSeparator,
                                     VarType::LineAngle,
@@ -401,7 +401,8 @@ void VContainer::ClearForFullParse()
                                     VarType::CurveCLength,
                                     VarType::ArcRadius,
                                     VarType::CurveAngle,
-                                    VarType::PieceArea});
+                                    VarType::PieceExternalArea,
+                                    VarType::PieceSeamLineArea});
     ClearGObjects();
     ClearUniqueNames();
 }
@@ -580,7 +581,8 @@ void VContainer::FillPiecesAreas(Unit unit)
     auto i = pieces->constBegin();
     while (i != pieces->constEnd())
     {
-        AddVariable(QSharedPointer<VPieceArea>::create(i.key(), i.value(), this, unit));
+        AddVariable(QSharedPointer<VPieceArea>::create(PieceAreaType::External, i.key(), i.value(), this, unit));
+        AddVariable(QSharedPointer<VPieceArea>::create(PieceAreaType::SeamLine, i.key(), i.value(), this, unit));
         ++i;
     }
 }
@@ -658,7 +660,12 @@ const QMap<QString, QSharedPointer<VCurveAngle> > VContainer::DataAnglesCurves()
 //---------------------------------------------------------------------------------------------------------------------
 const QMap<QString, QSharedPointer<VPieceArea> > VContainer::DataPieceArea() const
 {
-    return DataVar<VPieceArea>(VarType::PieceArea);
+    QMap<QString, QSharedPointer<VPieceArea> > externalAreas = DataVar<VPieceArea>(VarType::PieceExternalArea);
+    QMap<QString, QSharedPointer<VPieceArea> > seamLineAreas = DataVar<VPieceArea>(VarType::PieceSeamLineArea);
+
+    Insert(externalAreas, seamLineAreas);
+
+    return externalAreas;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

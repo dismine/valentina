@@ -275,7 +275,8 @@ enum class Vis : ToolVisHolderType
 };
 
 enum class VarType : qint8 { Measurement, MeasurementSeparator, Increment, IncrementSeparator, LineLength, CurveLength,
-                             CurveCLength, LineAngle, CurveAngle, ArcRadius, PieceArea, Unknown };
+                             CurveCLength, LineAngle, CurveAngle, ArcRadius, PieceExternalArea, PieceSeamLineArea,
+                             Unknown };
 
 enum class IncrementType : qint8 { Increment, Separator };
 

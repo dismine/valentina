@@ -36,17 +36,15 @@
 VPieceArea::VPieceArea()
     :d(new VPieceAreaData)
 {
-    SetType(VarType::PieceArea);
+    SetType(VarType::PieceExternalArea);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceArea::VPieceArea(quint32 pieceId, const VPiece &piece, const VContainer *data, Unit unit)
+VPieceArea::VPieceArea(PieceAreaType type, quint32 pieceId, const VPiece &piece, const VContainer *data, Unit unit)
     :d(new VPieceAreaData(pieceId))
 {
     // cppcheck-suppress unknownMacro
     SCASSERT(data != nullptr)
-
-    SetType(VarType::PieceArea);
 
     QString shortName = piece.GetShortName();
     if (shortName.isEmpty())
@@ -54,11 +52,22 @@ VPieceArea::VPieceArea(quint32 pieceId, const VPiece &piece, const VContainer *d
         shortName = piece.GetName().replace(QChar(QChar::Space), '_').left(25);
         if (shortName.isEmpty() || not QRegularExpression(VPiece::ShortNameRegExp()).match(shortName).hasMatch())
         {
-            shortName = QObject::tr("Unknown");
+            shortName = QObject::tr("Unknown", "piece area");
         }
     }
-    SetName(pieceArea_ + shortName);
-    VInternalVariable::SetValue(FromPixel2(piece.Area(data), unit));
+
+    if (type == PieceAreaType::External)
+    {
+        SetType(VarType::PieceExternalArea);
+        SetName(pieceArea_ + shortName);
+        VInternalVariable::SetValue(FromPixel2(piece.ExternalArea(data), unit));
+    }
+    else
+    {
+        SetType(VarType::PieceSeamLineArea);
+        SetName(pieceSeamLineArea_ + shortName);
+        VInternalVariable::SetValue(FromPixel2(piece.SeamLineArea(data), unit));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -95,9 +104,11 @@ auto VPieceArea::operator=(VPieceArea &&var) Q_DECL_NOTHROW -> VPieceArea &
 //---------------------------------------------------------------------------------------------------------------------
 void VPieceArea::SetValue(quint32 pieceId, const VPiece &piece, const VContainer *data, Unit unit)
 {
+    // cppcheck-suppress unknownMacro
     SCASSERT(data != nullptr)
     d->m_pieceId = pieceId;
-    VInternalVariable::SetValue(FromPixel(piece.Area(data), unit));
+    VInternalVariable::SetValue(FromPixel2(GetType() == VarType::PieceExternalArea ? piece.ExternalArea(data)
+                                                                                   : piece.SeamLineArea(data), unit));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

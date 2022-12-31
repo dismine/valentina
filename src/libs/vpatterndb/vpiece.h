@@ -145,7 +145,8 @@ public:
     void TestInternalPaths(const VContainer *data) const;
 
     static auto ShortNameRegExp() -> QString;
-    auto Area(const VContainer *data) const -> qreal;
+    auto ExternalArea(const VContainer *data) const -> qreal;
+    auto SeamLineArea(const VContainer *data) const -> qreal;
 private:
     QSharedDataPointer<VPieceData> d;
 
@@ -174,6 +175,8 @@ private:
 
     void TestInternalPathCuttingPathIntersection(const VContainer *data) const;
     void TestInternalPathsIntersections(const VContainer *data) const;
+
+    auto Area(const QVector<QPointF> &shape, const VContainer *data) const -> qreal;
 };
 
 Q_DECLARE_TYPEINFO(VPiece, Q_MOVABLE_TYPE); // NOLINT

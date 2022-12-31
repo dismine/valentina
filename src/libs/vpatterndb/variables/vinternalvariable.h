@@ -63,7 +63,6 @@ public:
     void         SetName(const QString &name);
 
     VarType      GetType() const;
-    void         SetType(const VarType &type);
 
     void    SetAlias(const QString &alias);
     QString GetAlias() const;
@@ -73,6 +72,7 @@ public:
     virtual bool IsNotUsed() const;
 protected:
     void SetValue(const qreal &value);
+    void SetType(const VarType &type);
 private:
     QSharedDataPointer<VInternalVariableData> d;
 };

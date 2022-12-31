@@ -1333,6 +1333,37 @@ void VPiece::TestInternalPathsIntersections(const VContainer *data) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qreal VPiece::Area(const QVector<QPointF> &shape, const VContainer *data) const
+{
+    SCASSERT(data != nullptr)
+
+    const qreal mainArea = qAbs(VAbstractPiece::SumTrapezoids(shape))/2.0;
+
+    qreal internalPathArea = 0;
+    const QVector<quint32> pathsId = GetInternalPaths();
+    for (auto id : pathsId)
+    {
+        const VPiecePath path = data->GetPiecePath(id);
+        if (path.GetType() != PiecePathType::InternalPath || not path.IsVisible(data->DataVariables()) ||
+            not path.IsCutPath())
+        {
+            continue;
+        }
+
+        QVector<QPointF> points;
+        CastTo(path.PathPoints(data, shape), points);
+        if (points.isEmpty() || not VFuzzyComparePoints(ConstFirst(points), ConstLast(points)))
+        {
+            continue;
+        }
+
+        internalPathArea += qAbs(VAbstractPiece::SumTrapezoids(points))/2.0;
+    }
+
+    return mainArea - internalPathArea;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPiece::DumpPiece(const VPiece &piece, const VContainer *data, const QString &templateName)
 {
     SCASSERT(data != nullptr)
@@ -1383,35 +1414,17 @@ void VPiece::TestInternalPaths(const VContainer *data) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPiece::Area(const VContainer *data) const -> qreal
+auto VPiece::ExternalArea(const VContainer *data) const -> qreal
 {
-    SCASSERT(data != nullptr)
+    return Area(CuttingPathPoints(data), data);
+}
 
-    const QVector<QPointF> mainContour = CuttingPathPoints(data);
-    const qreal mainArea = qAbs(VAbstractPiece::SumTrapezoids(mainContour))/2.0;
-
-    qreal internalPathArea = 0;
-    const QVector<quint32> pathsId = GetInternalPaths();
-    for (auto id : pathsId)
-    {
-        const VPiecePath path = data->GetPiecePath(id);
-        if (path.GetType() != PiecePathType::InternalPath || not path.IsVisible(data->DataVariables()) ||
-            not path.IsCutPath())
-        {
-            continue;
-        }
-
-        QVector<QPointF> points;
-        CastTo(path.PathPoints(data, mainContour), points);
-        if (points.isEmpty() || not VFuzzyComparePoints(ConstFirst(points), ConstLast(points)))
-        {
-            continue;
-        }
-
-        internalPathArea += qAbs(VAbstractPiece::SumTrapezoids(points))/2.0;
-    }
-
-    return mainArea - internalPathArea;
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::SeamLineArea(const VContainer *data) const -> qreal
+{
+    QVector<QPointF> shape;
+    CastTo(MainPathPoints(data), shape);
+    return Area(shape, data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

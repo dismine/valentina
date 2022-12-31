@@ -31,7 +31,6 @@
 
 #include <QSharedData>
 
-#include "../ifc/ifcdef.h"
 #include "../vcontainer.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
@@ -54,7 +53,7 @@ public:
     {
         // When we create an increment in the dialog it will get neccesary data. Such data must be removed because will
         // confuse a user. Increment should not know nothing about internal variables.
-        Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 11, "Check that you used all types");
+        Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 12, "Check that you used all types");
         this->data->ClearVariables(QVector<VarType>{VarType::LineAngle,
                                                     VarType::LineLength,
                                                     VarType::CurveLength,
@@ -62,7 +61,8 @@ public:
                                                     VarType::ArcRadius,
                                                     VarType::CurveAngle,
                                                     VarType::IncrementSeparator,
-                                                    VarType::PieceArea});
+                                                    VarType::PieceExternalArea,
+                                                    VarType::PieceSeamLineArea});
     }
 
     VIncrementData(const VIncrementData &incr)

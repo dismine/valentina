@@ -34,11 +34,13 @@ class VPiece;
 class VContainer;
 class VPieceAreaData;
 
+enum class PieceAreaType : qint8 { External, SeamLine };
+
 class VPieceArea final :public VInternalVariable
 {
 public:
     VPieceArea();
-    explicit VPieceArea(quint32 pieceId, const VPiece &piece, const VContainer *data, Unit unit);
+    explicit VPieceArea(PieceAreaType type, quint32 pieceId, const VPiece &piece, const VContainer *data, Unit unit);
     VPieceArea(const VPieceArea &var) = default;
     ~VPieceArea() override;
 

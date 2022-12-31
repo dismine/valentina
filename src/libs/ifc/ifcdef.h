@@ -243,6 +243,7 @@ extern const QString currentSeamAllowance;
 extern const QString rotation_V;
 extern const QString rotationElArc_;
 extern const QString pieceArea_;
+extern const QString pieceSeamLineArea_;
 
 extern const QStringList builInVariables;
 

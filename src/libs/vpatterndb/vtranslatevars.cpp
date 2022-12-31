@@ -394,6 +394,8 @@ void VTranslateVars::InitVariables()
                                                 "Do not add symbol _ to the end of the name"));
     variables.insert(rotationElArc_, translate("VTranslateVars", "RotationElArc_", "Left symbol _ in the name"));
     variables.insert(pieceArea_, translate("VTranslateVars", "PieceArea_", "Left symbol _ in the name"));
+    variables.insert(pieceSeamLineArea_, translate("VTranslateVars", "PieceSeamLineArea_",
+                                                   "Left symbol _ in the name"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
