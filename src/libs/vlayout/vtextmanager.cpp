@@ -409,7 +409,7 @@ auto PrepareLines(const QVector<VLabelTemplateLine> &lines) -> QVector<TextLine>
 {
     QVector<TextLine> textLines;
 
-    for (auto &line : lines)
+    for (const auto &line : lines)
     {
         if (not line.line.isEmpty())
         {
@@ -631,9 +631,9 @@ void VTextManager::Update(const QString& qsName, const VPieceLabelData& data, co
 
     QVector<VLabelTemplateLine> lines = data.GetLabelTemplate();
 
-    for (int i=0; i<lines.size(); ++i)
+    for (auto & line : lines)
     {
-        lines[i].line = ReplacePlaceholders(placeholders, lines.at(i).line);
+        line.line = ReplacePlaceholders(placeholders, line.line);
     }
 
     m_liLines = PrepareLines(lines);
@@ -658,9 +658,9 @@ void VTextManager::Update(VAbstractPattern *pDoc, const VContainer *pattern)
 
         const QMap<QString, QString> placeholders = PreparePlaceholders(pDoc, pattern);
 
-        for (int i=0; i<lines.size(); ++i)
+        for (auto & line : lines)
         {
-            lines[i].line = ReplacePlaceholders(placeholders, lines.at(i).line);
+            line.line = ReplacePlaceholders(placeholders, line.line);
         }
 
         pDoc->SetPatternWasChanged(false);
