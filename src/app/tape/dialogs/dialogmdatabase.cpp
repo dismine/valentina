@@ -41,7 +41,8 @@
 DialogMDataBase::DialogMDataBase(const QStringList &list, QWidget *parent)
     :QDialog(parent),
       ui(new Ui::DialogMDataBase),
-      m_selectMode(true)
+      m_selectMode(true),
+      m_list(list)
 {
     ui->setupUi(this);
 
@@ -49,7 +50,7 @@ DialogMDataBase::DialogMDataBase(const QStringList &list, QWidget *parent)
     setWindowFlags(Qt::Window);
 #endif
 
-    InitDataBase(list);
+    InitDataBase(m_list);
 
     ui->treeWidget->installEventFilter(this);
 
