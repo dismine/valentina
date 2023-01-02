@@ -84,6 +84,7 @@ private:
     QMap<QString, QPair<QString, QString>> m_placeholders;
 
     void SetupControls();
+    auto SortedActions() const -> QMap<QString, QString>;
     void InitPlaceholdersMenu();
     void InitPlaceholders();
 

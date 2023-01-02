@@ -89,6 +89,7 @@ DialogEditLabel::DialogEditLabel(const VAbstractPattern *doc, const VContainer *
     InitPlaceholdersMenu();
 
     m_placeholdersMenu->setStyleSheet(QStringLiteral("QMenu { menu-scrollable: 1; }"));
+    m_placeholdersMenu->setToolTipsVisible(true);
     ui->pushButtonInsert->setMenu(m_placeholdersMenu);
 }
 
@@ -472,15 +473,29 @@ void DialogEditLabel::SetupControls()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogEditLabel::InitPlaceholdersMenu()
+auto DialogEditLabel::SortedActions() const -> QMap<QString, QString>
 {
+    QMap<QString, QString> sortedActions;
     QChar per('%');
     auto i = m_placeholders.constBegin();
     while (i != m_placeholders.constEnd())
     {
-        auto value = i.value();
-        QAction *action = m_placeholdersMenu->addAction(value.first);
-        action->setData(per + i.key() + per);
+        sortedActions.insert(i.value().first, per + i.key() + per);
+        ++i;
+    }
+    return sortedActions;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEditLabel::InitPlaceholdersMenu()
+{
+    QMap<QString, QString> sortedActions = SortedActions();
+    auto i = sortedActions.constBegin();
+    while (i != sortedActions.constEnd())
+    {
+        QAction *action = m_placeholdersMenu->addAction(i.key());
+        action->setData(i.value());
+        action->setToolTip(i.value());
         connect(action, &QAction::triggered, this, &DialogEditLabel::InsertPlaceholder);
         ++i;
     }
