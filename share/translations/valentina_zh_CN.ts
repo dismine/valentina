@@ -1718,6 +1718,18 @@
         <source>No data for the W dimension.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Area units</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece full area</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece seam line area</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -9508,6 +9520,14 @@ This option will take an affect after restart.</source>
     <message>
         <source>Unknown</source>
         <comment>piece area</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to prepare full piece area placeholder. %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to prepare piece seam line area placeholder. %2.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

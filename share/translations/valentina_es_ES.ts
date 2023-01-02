@@ -2261,6 +2261,18 @@
         <source>No data for the W dimension.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Area units</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece full area</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece seam line area</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -11636,6 +11648,14 @@ Esta opción surtirá efecto después de reiniciar.</translation>
         <comment>piece area</comment>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Failed to prepare full piece area placeholder. %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to prepare piece seam line area placeholder. %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -12678,10 +12698,6 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>Individual measurements require at least 2 columns.</source>
         <translation>Las medidas individuales requiere al menos 2 columnas.</translation>
-    </message>
-    <message>
-        <source>Error in row %1.</source>
-        <translation type="vanished">Error en línea %1.</translation>
     </message>
     <message>
         <source>Multisize measurements require at least 4 columns.</source>

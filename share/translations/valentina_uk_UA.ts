@@ -2261,6 +2261,18 @@
         <source>No data for the W dimension.</source>
         <translation>Немає даних для виміру W.</translation>
     </message>
+    <message>
+        <source>Area units</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece full area</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece seam line area</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -11614,10 +11626,6 @@ This option will take an affect after restart.</source>
         <translation>Крива &quot;%1&quot;. Довжина сегмента для вирізання (%2) завелика. Оптимізуйте його до мінімального значення.</translation>
     </message>
     <message>
-        <source>Unknown</source>
-        <translation type="vanished">Невідома</translation>
-    </message>
-    <message>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with internal path &apos;%3&apos;.</source>
         <translation>Деталь &apos;%1&apos;. Внутрішній шлях &apos;%2&apos; перетинається з внутрішнім шляхом &apos;%3&apos;.</translation>
     </message>
@@ -11640,7 +11648,15 @@ This option will take an affect after restart.</source>
     <message>
         <source>Unknown</source>
         <comment>piece area</comment>
-        <translation type="unfinished">Невідома</translation>
+        <translation>Невідома</translation>
+    </message>
+    <message>
+        <source>Failed to prepare full piece area placeholder. %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to prepare piece seam line area placeholder. %2.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12684,10 +12700,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Individual measurements require at least 2 columns.</source>
         <translation>Для окремих вимірювань потрібно щонайменше 2 колонки.</translation>
-    </message>
-    <message>
-        <source>Error in row %1.</source>
-        <translation type="vanished">Помилка в рядку %1.</translation>
     </message>
     <message>
         <source>Multisize measurements require at least 4 columns.</source>

@@ -2261,6 +2261,18 @@
         <source>No data for the W dimension.</source>
         <translation>Žádná data pro rozměr W.</translation>
     </message>
+    <message>
+        <source>Area units</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece full area</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece seam line area</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -11615,10 +11627,6 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Křivka &apos;%1&apos;. Délka vyjmuté části (%2) je příliš velká. Vylaďte ji na největší hodnotu.</translation>
     </message>
     <message>
-        <source>Unknown</source>
-        <translation type="vanished">Neznámý</translation>
-    </message>
-    <message>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with internal path &apos;%3&apos;.</source>
         <translation>Díl &apos;%1&apos;. Vnitřní cesta &apos;%2&apos; se protíná s vnitřní cestou &apos;%3&apos;.</translation>
     </message>
@@ -11641,7 +11649,15 @@ Tato volba se projeví po opětovném spuštění.</translation>
     <message>
         <source>Unknown</source>
         <comment>piece area</comment>
-        <translation type="unfinished">Neznámý</translation>
+        <translation>Neznámý</translation>
+    </message>
+    <message>
+        <source>Failed to prepare full piece area placeholder. %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to prepare piece seam line area placeholder. %2.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12685,10 +12701,6 @@ Chcete uložit změny?</translation>
     <message>
         <source>Individual measurements require at least 2 columns.</source>
         <translation>Individuální míry vyžadují alespoň 2 sloupce.</translation>
-    </message>
-    <message>
-        <source>Error in row %1.</source>
-        <translation type="vanished">Chyba na řádku %1.</translation>
     </message>
     <message>
         <source>Multisize measurements require at least 4 columns.</source>
