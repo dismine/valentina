@@ -56,8 +56,7 @@ DialogEditLabel::DialogEditLabel(const VAbstractPattern *doc, const VContainer *
       ui(new Ui::DialogEditLabel),
       m_placeholdersMenu(new QMenu(this)),
       m_doc(doc),
-      m_data(data),
-      m_placeholders()
+      m_data(data)
 {
     ui->setupUi(this);
 
@@ -172,10 +171,7 @@ void DialogEditLabel::RemoveLine()
 {
     ui->listWidgetEdit->blockSignals(true);
     QListWidgetItem *curLine = ui->listWidgetEdit->takeItem(ui->listWidgetEdit->currentRow());
-    if (curLine)
-    {
-        delete curLine;
-    }
+    delete curLine;
     ui->listWidgetEdit->blockSignals(false);
     ShowLineDetails();
 }
@@ -198,7 +194,7 @@ void DialogEditLabel::SaveFontStyle(bool checked)
     {
         QFont lineFont = curLine->font();
 
-        QToolButton *button = qobject_cast<QToolButton *>(sender());
+        auto *button = qobject_cast<QToolButton *>(sender());
         if (button)
         {
             if (button == ui->toolButtonBold)
@@ -221,7 +217,7 @@ void DialogEditLabel::SaveTextFormating(bool checked)
     QListWidgetItem *curLine = ui->listWidgetEdit->currentItem();
     if (curLine)
     {
-        QToolButton *button = qobject_cast<QToolButton *>(sender());
+        auto *button = qobject_cast<QToolButton *>(sender());
         if (button)
         {
             ui->toolButtonTextLeft->blockSignals(true);
@@ -327,7 +323,7 @@ void DialogEditLabel::ExportTemplate()
 
     QString error;
     const bool result = ltemplate.SaveDocument(fileName, error);
-    if (result == false)
+    if (not result)
     {
         QMessageBox messageBox(this);
         messageBox.setIcon(QMessageBox::Warning);
@@ -381,7 +377,7 @@ void DialogEditLabel::ImportTemplate()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditLabel::InsertPlaceholder()
 {
-    QAction *action = qobject_cast<QAction *>(sender());
+    auto *action = qobject_cast<QAction *>(sender());
     if (action)
     {
         ui->lineEditLine->insert(action->data().toString());
@@ -549,7 +545,7 @@ void DialogEditLabel::InitPlaceholders()
         m_placeholders.insert(pl_email, qMakePair(tr("Customer email"), m_doc->GetCustomerEmail()));
     }
 
-    m_placeholders.insert(pl_pExt, qMakePair(tr("Pattern extension"), QString("val")));
+    m_placeholders.insert(pl_pExt, qMakePair(tr("Pattern extension"), QStringLiteral("val")));
 
     const QString patternFilePath = QFileInfo(VAbstractValApplication::VApp()->GetPatternPath()).baseName();
     m_placeholders.insert(pl_pFileName, qMakePair(tr("Pattern file name"), patternFilePath));
@@ -686,7 +682,7 @@ void DialogEditLabel::InitPlaceholders()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogEditLabel::ReplacePlaceholders(QString line) const
+auto DialogEditLabel::ReplacePlaceholders(QString line) const -> QString
 {
     QChar per('%');
 
@@ -719,9 +715,10 @@ QString DialogEditLabel::ReplacePlaceholders(QString line) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VLabelTemplateLine> DialogEditLabel::GetTemplate() const
+auto DialogEditLabel::GetTemplate() const -> QVector<VLabelTemplateLine>
 {
     QVector<VLabelTemplateLine> lines;
+    lines.reserve(ui->listWidgetEdit->count());
 
     for (int i=0; i<ui->listWidgetEdit->count(); ++i)
     {
@@ -752,9 +749,9 @@ void DialogEditLabel::SetTemplate(const QVector<VLabelTemplateLine> &lines)
 
     int row = -1;
 
-    for (auto &line : lines)
+    for (const auto &line : lines)
     {
-        QListWidgetItem *item = new QListWidgetItem(line.line);
+        auto *item = new QListWidgetItem(line.line);
         item->setTextAlignment(line.alignment);
         item->setData(Qt::UserRole, line.fontSizeIncrement);
 
@@ -831,9 +828,9 @@ void DialogEditLabel::InitPreviewLines(const QVector<VLabelTemplateLine> &lines)
 
     int row = -1;
 
-    for (auto &line : lines)
+    for (const auto &line : lines)
     {
-        QListWidgetItem *item = new QListWidgetItem(ReplacePlaceholders(line.line));
+        auto *item = new QListWidgetItem(ReplacePlaceholders(line.line));
         item->setTextAlignment(line.alignment);
         item->setData(Qt::UserRole, line.fontSizeIncrement);
 

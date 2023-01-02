@@ -52,9 +52,9 @@ class DialogEditLabel : public QDialog
 
 public:
     explicit DialogEditLabel(const VAbstractPattern *doc, const VContainer *data, QWidget *parent = nullptr);
-    virtual ~DialogEditLabel();
+    ~DialogEditLabel() override;
 
-    QVector<VLabelTemplateLine> GetTemplate() const;
+    auto GetTemplate() const -> QVector<VLabelTemplateLine>;
     void SetTemplate(const QVector<VLabelTemplateLine> &lines);
 
     void SetPiece(const VPiece &piece);
@@ -81,14 +81,14 @@ private:
     const VAbstractPattern *m_doc;
     const VContainer    *m_data;
 
-    QMap<QString, QPair<QString, QString>> m_placeholders;
+    QMap<QString, QPair<QString, QString>> m_placeholders{};
 
     void SetupControls();
     auto SortedActions() const -> QMap<QString, QString>;
     void InitPlaceholdersMenu();
     void InitPlaceholders();
 
-    QString ReplacePlaceholders(QString line) const;
+    auto ReplacePlaceholders(QString line) const -> QString;
 
     void InitPreviewLines(const QVector<VLabelTemplateLine> &lines);
 };
