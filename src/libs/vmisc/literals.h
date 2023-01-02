@@ -137,6 +137,8 @@ extern const QString pl_wCut;
 extern const QString pl_wOnFold;
 extern const QString pl_measurement;
 extern const QString pl_finalMeasurement;
+extern const QString pl_currentArea;
+extern const QString pl_currentSeamLineArea;
 
 extern const QString cursorArrowOpenHand;
 extern const QString cursorArrowCloseHand;

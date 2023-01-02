@@ -53,6 +53,8 @@ public:
     void SetValue(quint32 pieceId, const VPiece &piece, const VContainer *data, Unit unit);
 
     auto GetPieceId() const -> quint32;
+
+    static auto PieceShortName(const VPiece &piece) -> QString;
 private:
     QSharedDataPointer<VPieceAreaData> d;
 };

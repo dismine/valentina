@@ -41,6 +41,7 @@
 #include "../vmisc/testpath.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vpatterndb/vpiecenode.h"
+#include "../vpatterndb/variables/vpiecearea.h"
 
 #include <QSharedPointer>
 #include <QDebug>
@@ -572,6 +573,7 @@ QVector<quint32> VPiece::MissingPlaceLabels(const VPiece &det) const
 void VPiece::SetPatternPieceData(const VPieceLabelData &data)
 {
     d->m_ppData = data;
+    d->m_ppData.SetAreaShartName(VPieceArea::PieceShortName(*this));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

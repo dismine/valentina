@@ -178,6 +178,18 @@ void VPieceLabelData::SetOnFold(bool onFold)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VPieceLabelData::GetAreaShartName() const
+{
+    return d->m_areaShortName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceLabelData::SetAreaShartName(const QString &val)
+{
+    d->m_areaShortName = val;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<VLabelTemplateLine> VPieceLabelData::GetLabelTemplate() const
 {
     return d->m_lines;

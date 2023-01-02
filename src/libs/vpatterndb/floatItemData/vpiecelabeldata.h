@@ -82,6 +82,9 @@ public:
     bool IsOnFold() const;
     void SetOnFold(bool onFold);
 
+    QString GetAreaShartName() const;
+    void    SetAreaShartName(const QString &val);
+
     QVector<VLabelTemplateLine> GetLabelTemplate() const;
     void                        SetLabelTemplate(const QVector<VLabelTemplateLine> &lines);
 

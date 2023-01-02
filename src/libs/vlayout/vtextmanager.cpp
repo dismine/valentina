@@ -278,6 +278,9 @@ auto PreparePlaceholders(const VAbstractPattern *doc, const VContainer *data) ->
         VContainer completeData = doc->GetCompleteData();
         completeData.FillPiecesAreas(VAbstractValApplication::VApp()->patternUnits());
 
+        placeholders.insert(pl_currentArea, QString());
+        placeholders.insert(pl_currentSeamLineArea, QString());
+
         for (int i=0; i < measurements.size(); ++i)
         {
             const VFinalMeasurement &m = measurements.at(i);
@@ -319,7 +322,8 @@ auto PreparePlaceholders(const VAbstractPattern *doc, const VContainer *data) ->
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void InitPiecePlaceholders(QMap<QString, QString> &placeholders, const QString &name, const VPieceLabelData& data)
+void InitPiecePlaceholders(QMap<QString, QString> &placeholders, const QString &name, const VPieceLabelData& data,
+                           const VContainer *pattern)
 {
     placeholders[pl_pLetter] = data.GetLetter();
     placeholders[pl_pAnnotation] = data.GetAnnotation();
@@ -333,6 +337,37 @@ void InitPiecePlaceholders(QMap<QString, QString> &placeholders, const QString &
     if (data.IsOnFold())
     {
         placeholders[pl_wOnFold] = QObject::tr("on fold");
+    }
+
+    VContainer completeData = *pattern;
+    completeData.FillPiecesAreas(VAbstractValApplication::VApp()->patternUnits());
+
+    QScopedPointer<Calculator> cal(new Calculator());
+
+    try
+    {
+        const QString formula = pieceArea_ + data.GetAreaShartName();
+        const qreal result = cal->EvalFormula(completeData.DataVariables(), formula);
+        placeholders[pl_currentArea] = QString::number(result);
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        const QString errorMsg = QObject::tr("Failed to prepare full piece area placeholder. %2.").arg(e.GetMsg());
+        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+            qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+    }
+
+    try
+    {
+        const QString formula = pieceSeamLineArea_ + data.GetAreaShartName();
+        const qreal result = cal->EvalFormula(completeData.DataVariables(), formula);
+        placeholders[pl_currentSeamLineArea] = QString::number(result);
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        const QString errorMsg = QObject::tr("Failed to prepare piece seam line area placeholder. %2.").arg(e.GetMsg());
+        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+            qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 }
 
@@ -592,7 +627,7 @@ void VTextManager::Update(const QString& qsName, const VPieceLabelData& data, co
 
     QMap<QString, QString> placeholders =
             PreparePlaceholders(VAbstractValApplication::VApp()->getCurrentDocument(), pattern);
-    InitPiecePlaceholders(placeholders, qsName, data);
+    InitPiecePlaceholders(placeholders, qsName, data, pattern);
 
     QVector<VLabelTemplateLine> lines = data.GetLabelTemplate();
 

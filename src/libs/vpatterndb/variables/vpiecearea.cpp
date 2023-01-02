@@ -46,15 +46,7 @@ VPieceArea::VPieceArea(PieceAreaType type, quint32 pieceId, const VPiece &piece,
     // cppcheck-suppress unknownMacro
     SCASSERT(data != nullptr)
 
-    QString shortName = piece.GetShortName();
-    if (shortName.isEmpty())
-    {
-        shortName = piece.GetName().replace(QChar(QChar::Space), '_').left(25);
-        if (shortName.isEmpty() || not QRegularExpression(VPiece::ShortNameRegExp()).match(shortName).hasMatch())
-        {
-            shortName = QObject::tr("Unknown", "piece area");
-        }
-    }
+    QString shortName = PieceShortName(piece);
 
     if (type == PieceAreaType::External)
     {
@@ -115,4 +107,20 @@ void VPieceArea::SetValue(quint32 pieceId, const VPiece &piece, const VContainer
 auto VPieceArea::GetPieceId() const -> quint32
 {
     return d->m_pieceId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPieceArea::PieceShortName(const VPiece &piece) -> QString
+{
+    QString shortName = piece.GetShortName();
+    if (shortName.isEmpty())
+    {
+        shortName = piece.GetName().replace(QChar(QChar::Space), '_').left(25);
+        if (shortName.isEmpty() || not QRegularExpression(VPiece::ShortNameRegExp()).match(shortName).hasMatch())
+        {
+            shortName = QObject::tr("Unknown", "piece area");
+        }
+    }
+
+    return shortName;
 }

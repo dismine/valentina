@@ -41,6 +41,7 @@
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/variables/vmeasurement.h"
+#include "../vpatterndb/variables/vpiecearea.h"
 #include "../tools/dialogtool.h"
 
 #include <QDir>
@@ -625,6 +626,9 @@ void DialogEditLabel::InitPlaceholders()
         VContainer completeData = m_doc->GetCompleteData();
         completeData.FillPiecesAreas(VAbstractValApplication::VApp()->patternUnits());
 
+        m_placeholders.insert(pl_currentArea, qMakePair(tr("Piece full area"), QString()));
+        m_placeholders.insert(pl_currentSeamLineArea, qMakePair(tr("Piece seam line area"), QString()));
+
         for (int i=0; i < measurements.size(); ++i)
         {
             const VFinalMeasurement &m = measurements.at(i);
@@ -769,6 +773,37 @@ void DialogEditLabel::SetPiece(const VPiece &piece)
     if (pieceData.IsOnFold())
     {
         m_placeholders[pl_wOnFold].second = tr("on fold");
+    }
+
+    VContainer completeData = m_doc->GetCompleteData();
+    completeData.FillPiecesAreas(VAbstractValApplication::VApp()->patternUnits());
+
+    QScopedPointer<Calculator> cal(new Calculator());
+
+    try
+    {
+        const QString formula = pieceArea_ + VPieceArea::PieceShortName(piece);
+        const qreal result = cal->EvalFormula(completeData.DataVariables(), formula);
+        m_placeholders[pl_currentArea].second = QString::number(result);
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        const QString errorMsg = QObject::tr("Failed to prepare full piece area placeholder. %2.").arg(e.GetMsg());
+        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+            qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+    }
+
+    try
+    {
+        const QString formula = pieceSeamLineArea_ + VPieceArea::PieceShortName(piece);
+        const qreal result = cal->EvalFormula(completeData.DataVariables(), formula);
+        m_placeholders[pl_currentSeamLineArea].second = QString::number(result);
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        const QString errorMsg = QObject::tr("Failed to prepare piece seam line area placeholder. %2.").arg(e.GetMsg());
+        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+            qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 }
 
