@@ -189,8 +189,10 @@ auto PreparePlaceholders(const VAbstractPattern *doc, const VContainer *data) ->
     placeholders.insert(pl_author, doc->GetCompanyName());
 
     placeholders.insert(pl_mUnits, UnitsToStr(VAbstractValApplication::VApp()->MeasurementsUnits(), true));
-    placeholders.insert(pl_pUnits, UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
+    const QString pUnits = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+    placeholders.insert(pl_pUnits, pUnits);
     placeholders.insert(pl_mSizeUnits, UnitsToStr(VAbstractValApplication::VApp()->DimensionSizeUnits(), true));
+    placeholders.insert(pl_areaUnits, pUnits + QStringLiteral("²"));
 
     if (VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Individual)
     {

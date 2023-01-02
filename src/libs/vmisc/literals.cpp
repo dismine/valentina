@@ -138,6 +138,7 @@ const QString pl_mFileName           = QStringLiteral("mFileName");
 const QString pl_mExt                = QStringLiteral("mExt");
 const QString pl_mUnits              = QStringLiteral("mUnits");
 const QString pl_mSizeUnits          = QStringLiteral("mSizeUnits");
+const QString pl_areaUnits           = QStringLiteral("areaUnits");
 const QString pl_pLetter             = QStringLiteral("pLetter");
 const QString pl_pAnnotation         = QStringLiteral("pAnnotation");
 const QString pl_pOrientation        = QStringLiteral("pOrientation");

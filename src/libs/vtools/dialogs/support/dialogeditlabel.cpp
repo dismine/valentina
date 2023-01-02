@@ -519,11 +519,13 @@ void DialogEditLabel::InitPlaceholders()
 
     m_placeholders.insert(pl_mUnits, qMakePair(tr("Measurements units"),
                                                UnitsToStr(VAbstractValApplication::VApp()->MeasurementsUnits(), true)));
-    m_placeholders.insert(pl_pUnits, qMakePair(tr("Pattern units"),
-                                               UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true)));
+
+    const QString pUnits = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+    m_placeholders.insert(pl_pUnits, qMakePair(tr("Pattern units"), pUnits));
     m_placeholders.insert(pl_mSizeUnits, qMakePair(tr("Size units"),
                                                    UnitsToStr(VAbstractValApplication::VApp()->DimensionSizeUnits(),
                                                               true)));
+    m_placeholders.insert(pl_areaUnits, qMakePair(tr("Area units"), pUnits + QStringLiteral("²")));
 
     if (VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Individual)
     {

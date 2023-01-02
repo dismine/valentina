@@ -121,6 +121,7 @@ extern const QString pl_mFileName;
 extern const QString pl_mExt;
 extern const QString pl_mUnits;
 extern const QString pl_mSizeUnits;
+extern const QString pl_areaUnits;
 extern const QString pl_pLetter;
 extern const QString pl_pAnnotation;
 extern const QString pl_pOrientation;
