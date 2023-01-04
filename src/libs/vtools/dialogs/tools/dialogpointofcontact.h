@@ -37,7 +37,6 @@
 
 #include "../vmisc/def.h"
 #include "dialogtool.h"
-#include "ui_dialogpointofcontact.h"
 
 namespace Ui
 {

@@ -27,7 +27,7 @@
  *************************************************************************/
 #include "puzzlepreferenceslayoutpage.h"
 #include "ui_puzzlepreferenceslayoutpage.h"
-#include "vpapplication.h"
+#include "../../vpapplication.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)

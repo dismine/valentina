@@ -37,7 +37,7 @@
 #include <QtGlobal>
 
 #include "../tools/vtoolseamallowance.h"
-#include "vpiece.h"
+#include "../vpatterndb/vpiece.h"
 #include "vundocommand.h"
 
 class AddPiece : public VUndoCommand

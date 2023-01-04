@@ -32,7 +32,7 @@
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "vcmdexport.h"
-#include "vlockguard.h"
+#include "../vmisc/vlockguard.h"
 
 class VApplication;// use in define
 

@@ -1608,7 +1608,7 @@
   <customwidget>
    <class>VPlainTextEdit</class>
    <extends>QPlainTextEdit</extends>
-   <header>vplaintextedit.h</header>
+   <header>../vwidgets/vplaintextedit.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

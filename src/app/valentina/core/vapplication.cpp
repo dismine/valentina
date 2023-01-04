@@ -38,7 +38,7 @@
 #include "../mainwindow.h"
 #include "../vmisc/qt_dispatch/qt_dispatch.h"
 #include "../vmisc/vsysexits.h"
-#include "vvalentinasettings.h"
+#include "../vmisc/vvalentinasettings.h"
 
 #include <QtDebug>
 #include <QDir>
@@ -52,6 +52,11 @@
 #include <QtXmlPatterns>
 #include <QIcon>
 #include <Qt>
+
+#if !defined(BUILD_REVISION) && defined(QBS_BUILD)
+#include <vcsRepoState.h>
+#define BUILD_REVISION VCS_REPO_STATE_REVISION
+#endif
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
 #include "../vmisc/backport/qscopeguard.h"

@@ -33,7 +33,7 @@
 #include "../vwidgets/vcontrolpointspline.h"
 #include "../vwidgets/vsimplepoint.h"
 #include "../vwidgets/vsimplecurve.h"
-#include "def.h"
+#include "../vmisc/def.h"
 #include "vformulaproperty.h"
 #include "../vpatterndb/vformula.h"
 #include "../vgeometry/vcubicbezier.h"

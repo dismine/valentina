@@ -63,7 +63,7 @@
 #include "../vwidgets/vabstractmainwindow.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "ui_dialogsplinepath.h"
-#include "vtranslatevars.h"
+#include "../vpatterndb/vtranslatevars.h"
 #include "../qmuparser/qmudef.h"
 
 //---------------------------------------------------------------------------------------------------------------------

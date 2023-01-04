@@ -40,7 +40,7 @@
 #include "../vgeometry/vgobject.h"
 #include "vsapoint.h"
 #include "vrawsapoint.h"
-#include "testpath.h"
+#include "../vmisc/testpath.h"
 
 class VAbstractPieceData;
 class QPainterPath;

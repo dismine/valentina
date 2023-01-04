@@ -415,12 +415,12 @@
   <customwidget>
    <class>VPlainTextEdit</class>
    <extends>QPlainTextEdit</extends>
-   <header location="global">vplaintextedit.h</header>
+   <header>../vwidgets/vplaintextedit.h</header>
   </customwidget>
   <customwidget>
    <class>VElidedLabel</class>
    <extends>QFrame</extends>
-   <header location="global">velidedlabel.h</header>
+   <header>../vwidgets/velidedlabel.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

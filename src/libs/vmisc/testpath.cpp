@@ -34,8 +34,6 @@
 #include <QJsonDocument>
 #include <QPointF>
 
-#include "vsapoint.h"
-
 //---------------------------------------------------------------------------------------------------------------------
 #if !defined(V_NO_ASSERT)
 // Use for writing tests

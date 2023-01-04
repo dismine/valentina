@@ -3200,17 +3200,17 @@
   <customwidget>
    <class>VMainGraphicsView</class>
    <extends>QGraphicsView</extends>
-   <header>vmaingraphicsview.h</header>
+   <header>../vwidgets/vmaingraphicsview.h</header>
   </customwidget>
   <customwidget>
    <class>VLineEdit</class>
    <extends>QLineEdit</extends>
-   <header>vlineedit.h</header>
+   <header>../vwidgets/vlineedit.h</header>
   </customwidget>
   <customwidget>
    <class>VPlainTextEdit</class>
    <extends>QPlainTextEdit</extends>
-   <header>vplaintextedit.h</header>
+   <header>../vwidgets/vplaintextedit.h</header>
   </customwidget>
  </customwidgets>
  <resources>

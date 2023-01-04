@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>294</width>
-    <height>104</height>
+    <height>107</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -78,7 +78,7 @@
   <customwidget>
    <class>VCompleterLineEdit</class>
    <extends>QLineEdit</extends>
-   <header>vlineedit.h</header>
+   <header>../vwidgets/vlineedit.h</header>
   </customwidget>
  </customwidgets>
  <resources>

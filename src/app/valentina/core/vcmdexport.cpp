@@ -32,7 +32,7 @@
 #include "../ifc/xml/vdomdocument.h"
 #include "../vmisc/commandoptions.h"
 #include "../vmisc/vsysexits.h"
-#include "vvalentinasettings.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../vmisc/dialogs/dialogexporttocsv.h"
 #include "../vlayout/vlayoutgenerator.h"
 #include <QDebug>

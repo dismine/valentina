@@ -29,7 +29,8 @@ SOURCES += \
     $$PWD/floatItemData/vabstractfloatitemdata.cpp \
     $$PWD/measurements.cpp \
     $$PWD/pmsystems.cpp \
-    $$PWD/vpassmark.cpp
+    $$PWD/vpassmark.cpp \
+    $$PWD/vtranslatemeasurements.cpp
 
 *msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -81,4 +82,5 @@ HEADERS += \
     $$PWD/measurements.h \
     $$PWD/pmsystems.h \
     $$PWD/vformula_p.h \
-    $$PWD/vpassmark.h
+    $$PWD/vpassmark.h \
+    $$PWD/vtranslatemeasurements.h

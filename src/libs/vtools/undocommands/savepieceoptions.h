@@ -31,7 +31,7 @@
 
 #include <QtGlobal>
 
-#include "vpiece.h"
+#include "../vpatterndb/vpiece.h"
 #include "vundocommand.h"
 
 class SavePieceOptions : public VUndoCommand

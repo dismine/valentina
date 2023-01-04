@@ -46,7 +46,7 @@
 #include "vtextmanager.h"
 #include "../ifc/exception/vexception.h"
 #include "vlayoutpoint.h"
-#include "vlayoutplacelabel.h"
+#include "../vgeometry/vlayoutplacelabel.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")

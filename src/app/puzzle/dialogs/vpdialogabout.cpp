@@ -39,6 +39,11 @@
 #include <QUrl>
 #include <QtDebug>
 
+#if !defined(BUILD_REVISION) && defined(QBS_BUILD)
+#include <vcsRepoState.h>
+#define BUILD_REVISION VCS_REPO_STATE_REVISION
+#endif
+
 //---------------------------------------------------------------------------------------------------------------------
 VPDialogAbout::VPDialogAbout(QWidget *parent)
     :QDialog(parent),

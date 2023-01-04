@@ -27,7 +27,7 @@
  *************************************************************************/
 #include "vlayoutconverter.h"
 #include "../exception/vexception.h"
-#include "ifcdef.h"
+#include "../ifcdef.h"
 #include "../vlayout/vlayoutpoint.h"
 
 /*

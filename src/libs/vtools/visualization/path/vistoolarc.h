@@ -37,7 +37,7 @@
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
-#include "defglobal.h"
+#include "../vmisc/defglobal.h"
 #include "vispath.h"
 
 class VisToolArc final : public VisPath

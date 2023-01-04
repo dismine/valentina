@@ -38,7 +38,7 @@
 
 #include "../vmisc/def.h"
 #include "vispath.h"
-#include "defglobal.h"
+#include "../vmisc/defglobal.h"
 
 class VisToolArcWithLength final : public VisPath
 {

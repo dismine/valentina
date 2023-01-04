@@ -31,7 +31,7 @@
 
 #include <QDialog>
 
-#include "../vmisc/defglobal.h"
+#include "../defglobal.h"
 
 namespace Ui
 {

@@ -59,6 +59,11 @@
 #include <QThread>
 #include <QGlobalStatic>
 
+#if !defined(BUILD_REVISION) && defined(QBS_BUILD)
+#include <vcsRepoState.h>
+#define BUILD_REVISION VCS_REPO_STATE_REVISION
+#endif
+
 #if defined(APPIMAGE) && defined(Q_OS_LINUX)
 #   include "../vmisc/appimage.h"
 #endif // defined(APPIMAGE) && defined(Q_OS_LINUX)

@@ -40,7 +40,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/scalesceneitems.h"
 #include "../visualization.h"
-#include "visualization/path/vispath.h"
+#include "../../visualization/path/vispath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointOfIntersectionCurves::VisToolPointOfIntersectionCurves(const VContainer *data, QGraphicsItem *parent)

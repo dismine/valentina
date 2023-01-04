@@ -41,7 +41,7 @@
 #include "../vmisc/qxtcsvmodel.h"
 #include "../vmisc/vmodifierkey.h"
 #include "../vmisc/vsysexits.h"
-#include "undocommands/renamepp.h"
+#include "../vtools/undocommands/renamepp.h"
 #include "core/vtooloptionspropertybrowser.h"
 #include "../ifc/xml/vpatternconverter.h"
 #include "../vformat/vmeasurements.h"

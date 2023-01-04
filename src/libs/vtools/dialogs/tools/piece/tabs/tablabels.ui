@@ -1769,12 +1769,12 @@
   <customwidget>
    <class>VPlainTextEdit</class>
    <extends>QPlainTextEdit</extends>
-   <header location="global">vplaintextedit.h</header>
+   <header>../vwidgets/vplaintextedit.h</header>
   </customwidget>
   <customwidget>
    <class>VLineEdit</class>
    <extends>QLineEdit</extends>
-   <header>vlineedit.h</header>
+   <header>../vwidgets/vlineedit.h</header>
   </customwidget>
  </customwidgets>
  <resources>

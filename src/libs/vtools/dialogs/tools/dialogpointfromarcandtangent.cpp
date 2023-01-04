@@ -34,7 +34,7 @@
 
 #include "../../visualization/visualization.h"
 #include "../../visualization/line/vistoolpointfromarcandtangent.h"
-#include "dialogs/tools/dialogtool.h"
+#include "dialogtool.h"
 #include "ui_dialogpointfromarcandtangent.h"
 
 //---------------------------------------------------------------------------------------------------------------------
