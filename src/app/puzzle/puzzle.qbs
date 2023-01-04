@@ -10,6 +10,11 @@ VApp {
     Depends { name: "VWidgetsLib" }
     Depends { name: "FervorLib" }
 
+    Properties {
+        condition: cpp.defines.contains("APPIMAGE")
+        cpp.dynamicLibraries: ["icudata", "icui18n", "icuuc"]
+    }
+
     name: "Puzzle"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "Puzzle" : "puzzle"
     targetName: buildconfig.appTarget
@@ -163,8 +168,5 @@ VApp {
         fileTags: ["cpp_pch_src"]
     }
 
-    cpp.includePaths: {
-        console.info(product.sourceDirectory)
-        return product.sourceDirectory
-    }
+    cpp.includePaths: [product.sourceDirectory]
 }

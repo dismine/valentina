@@ -19,6 +19,11 @@ VApp {
         required: false
     }
 
+    Properties {
+        condition: cpp.defines.contains("APPIMAGE")
+        cpp.dynamicLibraries: ["icudata", "icui18n", "icuuc"]
+    }
+
     name: "Valentina"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "Valentina" : "valentina"
     targetName: buildconfig.appTarget
@@ -160,7 +165,7 @@ VApp {
         name: "Precompiled headers"
         files: {
             var files = ["stable.h"];
-            if (qbs.targetOS.contains("windows"))
+            if (qbs.toolchain.contains("msvc"))
                 files.push("stable.cpp")
             return files;
         }

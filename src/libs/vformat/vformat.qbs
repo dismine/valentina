@@ -20,7 +20,7 @@ VLib {
         name: "Precompiled headers"
         files: {
             var files = ["stable.h"];
-            if (qbs.targetOS.contains("windows"))
+            if (qbs.toolchain.contains("msvc"))
                 files.push("stable.cpp")
             return files;
         }
