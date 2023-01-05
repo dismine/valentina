@@ -32,7 +32,7 @@
 #include "../qmuparser/qmuparsertest.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-void testMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+inline void testMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
     QByteArray localMsg = msg.toLocal8Bit();
     switch (type)
