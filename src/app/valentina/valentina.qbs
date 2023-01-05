@@ -2,8 +2,7 @@ VApp {
     Depends { name: "buildconfig" }
     Depends { name: "ib"; condition: qbs.targetOS.contains("macos") }
     Depends { name: "freedesktop" }
-    Depends { name: "Qt"; submodules: ["gui", "widgets", "xml", "svg", "printsupport", "xmlpatterns", "concurrent"] }
-    Depends { name: "VPropertyExplorerLib" }
+    Depends { name: "Qt"; submodules: ["widgets", "svg", "xmlpatterns", "concurrent"] }
     Depends { name: "VPatternDBLib"; }
     Depends { name: "VWidgetsLib"; }
     Depends { name: "FervorLib"; }
@@ -11,6 +10,7 @@ VApp {
     Depends { name: "VLayoutLib"; }
     Depends { name: "VToolsLib"; }
     Depends { name: "VFormatLib"; }
+    Depends { name: "VMiscLib"; }
 
     Depends {
         name: "Qt.winextras"

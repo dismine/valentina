@@ -30,7 +30,7 @@
 
 #include <QByteArray>
 
-#include "vcommonsettings.h"
+#include "../vmisc/vcommonsettings.h"
 
 class VPSettings : public VCommonSettings
 {

@@ -1,6 +1,5 @@
 VLib {
-    Depends { name: "Qt"; submodules: ["widgets", "printsupport"] }
-    Depends { name: "qbs"; }
+    Depends { name: "Qt"; submodules: ["printsupport"] }
 
     name: "VMiscLib"
     files: [
@@ -143,9 +142,7 @@ VLib {
 
     Export {
         Depends { name: "cpp" }
-        cpp.includePaths: {
-            console.info(exportingProduct.sourceDirectory)
-            return exportingProduct.sourceDirectory
-        }
+        Depends { name: "Qt"; submodules: ["printsupport"] }
+        cpp.includePaths: [exportingProduct.sourceDirectory]
     }
 }

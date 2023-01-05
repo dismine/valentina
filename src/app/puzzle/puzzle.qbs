@@ -2,7 +2,7 @@ VApp {
     Depends { name: "buildconfig" }
     Depends { name: "ib"; condition: qbs.targetOS.contains("macos") }
     Depends { name: "freedesktop" }
-    Depends { name: "Qt"; submodules: ["gui", "widgets", "network", "xml", "svg", "xmlpatterns", "printsupport", "concurrent"] }
+    Depends { name: "Qt"; submodules: ["widgets", "svg"] }
     Depends { name: "VMiscLib" }
     Depends { name: "VLayoutLib" }
     Depends { name: "IFCLib" }

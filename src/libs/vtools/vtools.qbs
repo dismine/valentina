@@ -1,8 +1,9 @@
 VLib {
-    Depends { name: "Qt"; submodules: ["widgets", "xml", "printsupport", "svg"] }
+    Depends { name: "Qt"; submodules: ["widgets", "xml", "svg"] }
     Depends { name: "IFCLib"; }
     Depends { name: "VLayoutLib"; }
     Depends { name: "VFormatLib"; }
+    Depends { name: "VWidgetsLib"; }
 
     name: "VToolsLib"
 

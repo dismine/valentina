@@ -1,5 +1,5 @@
 VLib {
-    Depends { name: "Qt"; submodules: ["widgets"] }
+    Depends { name: "Qt"; submodules: ["gui", "widgets"] }
     Depends { name: "VMiscLib" }
 
     name: "VPropertyExplorerLib"

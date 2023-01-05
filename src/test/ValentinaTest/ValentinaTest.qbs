@@ -1,9 +1,12 @@
 VApp {
     Depends { name: "buildconfig" }
     Depends { name: "VTestLib" }
-    Depends { name: "Qt"; submodules: ["testlib", "xml", "gui", "printsupport"] }
-    Depends { name: "VMiscLib" }
+    Depends { name: "Qt"; submodules: ["testlib"] }
     Depends { name: "VToolsLib" }
+    Depends { name: "VGeometryLib" }
+    Depends { name: "IFCLib" }
+    Depends { name: "VDXFLib" }
+    Depends { name: "VFormatLib" }
 
     name: "ValentinaTest"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "ValentinaTest" : "valentinaTest"

@@ -1,6 +1,6 @@
 VLib {
-    Depends { name: "Qt"; submodules: ["widgets", "network", "printsupport", "xml"] }
-    Depends { name: "VMiscLib" }
+    Depends { name: "Qt"; submodules: ["widgets", "network"] }
+    Depends { name: "IFCLib" }
 
     name: "FervorLib"
     files: [
@@ -26,6 +26,7 @@ VLib {
 
     Export {
         Depends { name: "cpp" }
+        Depends { name: "Qt"; submodules: ["network"] }
         cpp.includePaths: [exportingProduct.sourceDirectory]
     }
 }

@@ -44,7 +44,6 @@
 #include "../vmisc/def.h"
 #include "vdomdocument.h"
 #include "vtoolrecord.h"
-#include "../vlayout/vtextmanager.h"
 
 class QDomElement;
 class VPiecePath;

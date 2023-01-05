@@ -1,6 +1,7 @@
 VLib {
-    Depends { name: "Qt"; submodules: ["gui", "printsupport", "concurrent"] }
+    Depends { name: "Qt"; submodules: ["gui", "concurrent"] }
     Depends { name: "VMiscLib"}
+    Depends { name: "IFCLib"}
 
     name: "VGeometryLib"
     files: [
@@ -65,6 +66,8 @@ VLib {
 
     Export {
         Depends { name: "cpp" }
+        Depends { name: "Qt"; submodules: ["gui"] }
+        Depends { name: "VMiscLib"}
         cpp.includePaths: [exportingProduct.sourceDirectory]
     }
 }

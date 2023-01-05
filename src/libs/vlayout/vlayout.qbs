@@ -1,5 +1,5 @@
 VLib {
-    Depends { name: "Qt"; submodules: ["gui", "widgets", "printsupport", "concurrent", "svg", "xml"] }
+    Depends { name: "Qt"; submodules: ["concurrent", "svg"] }
     Depends { name: "VMiscLib" }
     Depends { name: "VGeometryLib" }
     Depends { name: "VPatternDBLib" }

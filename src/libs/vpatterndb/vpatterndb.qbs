@@ -1,6 +1,5 @@
 VLib {
     Depends { name: "VMiscLib" }
-    Depends { name: "Qt"; submodules: ["printsupport", "xml"] }
     Depends { name: "IFCLib" }
     Depends { name: "VGeometryLib" }
 

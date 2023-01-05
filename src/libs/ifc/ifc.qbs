@@ -1,5 +1,5 @@
 VLib {
-    Depends { name: "Qt"; submodules: ["gui", "xml", "printsupport", "svg", "xmlpatterns", "concurrent"] }
+    Depends { name: "Qt"; submodules: ["gui", "xml", "svg", "xmlpatterns", "concurrent"] }
     Depends { name: "VMiscLib" }
 
     name: "IFCLib"
@@ -90,6 +90,8 @@ VLib {
 
     Export {
         Depends { name: "cpp" }
+        Depends { name: "Qt"; submodules: ["xml"] }
+        Depends { name: "VMiscLib" }
         cpp.includePaths: [exportingProduct.sourceDirectory]
     }
 }
