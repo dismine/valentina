@@ -18,7 +18,7 @@ CppApplication {
     install: true
     installDir: buildconfig.installAppPath
     installDebugInformation: true
-    type: base.concat("openssl_binFolder")
+    type: base.concat("testSuit")
 
     Properties {
         condition: Qt.core.versionMajor >= 5 &&  Qt.core.versionMinor < 12
@@ -28,6 +28,16 @@ CppApplication {
     Properties {
         condition: Qt.core.versionMajor >= 5 &&  Qt.core.versionMinor >= 12
         cpp.cxxLanguageVersion: "c++17"
+    }
+
+    Group {
+        condition: qbs.targetOS.contains("windows") && (qbs.architecture.contains("x86_64") || qbs.architecture.contains("x86"))
+        name: "pdftops"
+        prefix: FileInfo.joinPaths(project.sourceDirectory, "dist", "win", FileInfo.pathSeparator())
+        files: ["pdftops.exe"]
+        fileTags: ["pdftops_dist"]
+        qbs.install: true
+        qbs.installDir: buildconfig.installBinaryPath
     }
 
     Group {
@@ -72,17 +82,22 @@ CppApplication {
 
     Rule {
         multiplex: true
+        alwaysRun: true
         condition: qbs.targetOS.contains("windows") && (qbs.architecture.contains("x86_64") || qbs.architecture.contains("x86"))
-        inputs: ["openssl_dist"]
-        outputFileTags: ["openssl_binFolder"]
+        inputs: ["openssl_dist", "pdftops_dist"]
+        outputFileTags: ["testSuit"]
         outputArtifacts: {
             var artifactNames = inputs["openssl_dist"].map(function(file){
                 return FileInfo.joinPaths(product.buildDirectory, file.fileName);
             });
+
+            artifactNames = artifactNames.concat(inputs["pdftops_dist"].map(function(file){
+                return FileInfo.joinPaths(product.buildDirectory, file.fileName);
+            }));
             var artifacts = artifactNames.map(function(art){
                 var a = {
                     filePath: art,
-                    fileTags: ["openssl_binFolder"]
+                    fileTags: ["testSuit"]
                 }
                 return a;
             });
@@ -90,13 +105,21 @@ CppApplication {
         }
         prepare: {
             var cmd = new JavaScriptCommand();
-            cmd.description = "Copy OpenSSL's dlls for test runs";
-            cmd.sources = (inputs["openssl_dist"] || [])
-                .map(function(artifact) { return artifact.filePath; });
-            cmd.destination = (outputs["openssl_binFolder"] || [])
-                .map(function(artifact) { return artifact.filePath; });
+            cmd.description = "Preparing test suit";
+
+            var sources = inputs["openssl_dist"].map(function(artifact) {
+                return artifact.filePath;
+            });
+
+            sources = sources.concat(inputs["pdftops_dist"].map(function(artifact) {
+                return artifact.filePath;
+            }));
+
+            cmd.sources = sources;
+            cmd.destination = outputs["testSuit"].map(function(artifact) {
+                return artifact.filePath;
+            });
             cmd.sourceCode = function() {
-                var i;
                 for (var i in sources) {
                     File.copy(sources[i], destination[i]);
                 }
