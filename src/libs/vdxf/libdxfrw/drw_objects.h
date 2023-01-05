@@ -104,7 +104,7 @@ protected:
     }
 
 public:
-    enum DRW::TTYPE tType {DRW::UNKNOWNT};  /*!< enum: entity type, code 0 */
+    DRW::TTYPE tType {DRW::UNKNOWNT};  /*!< enum: entity type, code 0 */
     duint32 handle {0};                     /*!< entity identifier, code 5 */
     int parentHandle {0};                   /*!< Soft-pointer ID/handle to owner object, code 330 */
     UTF8STRING name{};                      /*!< entry name, code 2 */
@@ -381,7 +381,7 @@ public:
     int color;                      /*!< layer color, code 62 */
     int color24;                    /*!< 24-bit color, code 420 */
     bool plotF;                     /*!< Plot flag, code 290 */
-    enum DRW_LW_Conv::lineWidth lWeight; /*!< layer lineweight, code 370 */
+    DRW_LW_Conv::lineWidth lWeight; /*!< layer lineweight, code 370 */
     std::string handlePlotS;        /*!< Hard-pointer ID/handle of plotstyle, code 390 */
     std::string handleMaterialS;        /*!< Hard-pointer ID/handle of materialstyle, code 347 */
 };

@@ -194,7 +194,7 @@ protected:
     bool parseDxfGroups(int code, dxfReader *reader);
 
 public:
-    enum DRW::ETYPE eType;     /*!< enum: entity type, code 0 */
+    DRW::ETYPE eType;          /*!< enum: entity type, code 0 */
     duint32 handle;            /*!< entity identifier, code 5 */
     std::list<std::list<DRW_Variant> > appData; /*!< list of application data, code 102 */
     duint32 parentHandle;      /*!< Soft-pointer ID/handle to owner BLOCK_RECORD object, code 330 */
@@ -203,7 +203,7 @@ public:
     UTF8STRING lineType;       /*!< line type, code 6 */
     duint32 material;          /*!< hard pointer id to material object, code 347 */
     int color;                 /*!< entity color, code 62 */
-    enum DRW_LW_Conv::lineWidth lWeight; /*!< entity lineweight, code 370 */
+    DRW_LW_Conv::lineWidth lWeight; /*!< entity lineweight, code 370 */
     double ltypeScale;         /*!< linetype scale, code 48 */
     bool visible;              /*!< entity visibility, code 60 */
     int numProxyGraph;         /*!< Number of bytes in proxy graphics, code 92 */
@@ -709,8 +709,8 @@ public:
     double oblique;            /*!< oblique angle, code 51 */
     UTF8STRING style;          /*!< style name, code 7 */
     int textgen;               /*!< text generation, code 71 */
-    enum HAlign alignH;        /*!< horizontal align, code 72 */
-    enum VAlign alignV;        /*!< vertical align, code 73 */
+    HAlign alignH;             /*!< horizontal align, code 72 */
+    VAlign alignV;             /*!< vertical align, code 73 */
 };
 
 //! Class to handle insert entries

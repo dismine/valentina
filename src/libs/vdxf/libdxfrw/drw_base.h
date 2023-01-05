@@ -466,7 +466,7 @@ public:
     void addDouble(double d) {setType(DOUBLE); content.d = d;}
     void addCoord() {setType(COORD); vdata.x=0.0; vdata.y=0.0; vdata.z=0.0; content.v = &vdata;}
     void addCoord(const DRW_Coord &v) {setType(COORD); vdata = v; content.v = &vdata;}
-    void setType(enum TYPE t) { type = t;}
+    void setType(TYPE t) { type = t;}
     void setCoordX(double d) { if (type == COORD) vdata.x = d;}
     void setCoordY(double d) { if (type == COORD) vdata.y = d;}
     void setCoordZ(double d) { if (type == COORD) vdata.z = d;}
@@ -481,7 +481,7 @@ private:
 
 public:
     DRW_VarContent content;
-    enum TYPE type;
+    TYPE type;
     int code;            /*!< dxf code of this value*/
 
 private:
@@ -529,7 +529,7 @@ public:
         widthDefault = 31  /*!< by default (dxf -3) */
     };
 
-    static int lineWidth2dxfInt(enum lineWidth lw){
+    static int lineWidth2dxfInt(lineWidth lw){
         switch (lw){
         case widthByLayer:
             return -1;
@@ -591,7 +591,7 @@ public:
         return -3;
     }
 
-    static enum lineWidth dxfInt2lineWidth(int i){
+    static lineWidth dxfInt2lineWidth(int i){
         if (i<0) {
             if (i==-1)
                 return widthByLayer;
