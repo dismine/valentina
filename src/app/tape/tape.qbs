@@ -1,3 +1,5 @@
+import qbs.FileInfo
+
 VApp {
     Depends { name: "buildconfig" }
     Depends { name: "ib"; condition: qbs.targetOS.contains("macos") }
@@ -90,5 +92,16 @@ VApp {
             return files;
         }
         fileTags: ["cpp_pch_src"]
+    }
+
+    Export {
+        Depends { name: "cpp" }
+        cpp.defines: {
+            var defines = [];
+            var extension = qbs.targetOS.contains("windows") ? ".exe" : "";
+            defines.push('TAPE_BUILDDIR="' + exportingProduct.buildDirectory + FileInfo.pathSeparator() +
+                         exportingProduct.targetName + extension +'"');
+            return defines;
+        }
     }
 }

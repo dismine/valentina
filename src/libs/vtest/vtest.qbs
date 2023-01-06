@@ -3,6 +3,9 @@ VLib {
     Depends { name: "VGeometryLib" }
     Depends { name: "VPatternDBLib" }
     Depends { name: "VLayoutLib" }
+    Depends { name: "Tape" }
+    Depends { name: "Valentina" }
+    Depends { name: "Puzzle" }
 
     name: "VTestLib"
     files: [

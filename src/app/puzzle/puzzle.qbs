@@ -1,3 +1,5 @@
+import qbs.FileInfo
+
 VApp {
     Depends { name: "buildconfig" }
     Depends { name: "ib"; condition: qbs.targetOS.contains("macos") }
@@ -169,4 +171,15 @@ VApp {
     }
 
     cpp.includePaths: [product.sourceDirectory]
+
+    Export {
+        Depends { name: "cpp" }
+        cpp.defines: {
+            var defines = [];
+            var extension = qbs.targetOS.contains("windows") ? ".exe" : "";
+            defines.push('PUZZLE_BUILDDIR="' + exportingProduct.buildDirectory + FileInfo.pathSeparator() +
+                         exportingProduct.targetName + extension +'"');
+            return defines;
+        }
+    }
 }

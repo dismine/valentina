@@ -329,31 +329,58 @@ void AbstractTest::CompareLinesDistance(const QVector<QLineF> &result, const QVe
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString AbstractTest::PuzzlePath() const
+{
+#ifdef QBS_BUILD
+    return QStringLiteral(PUZZLE_BUILDDIR);
+#else
+    const QString path = QStringLiteral("/../../../app/puzzle/bin/puzzle");
+#ifdef Q_OS_WIN
+    return QCoreApplication::applicationDirPath() + path + QLatin1String(".exe");
+#else
+    return QCoreApplication::applicationDirPath() + path;
+#endif
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString AbstractTest::ValentinaPath() const
 {
+#ifdef QBS_BUILD
+    return QStringLiteral(VALENTINA_BUILDDIR);
+#else
     const QString path = QStringLiteral("/../../../app/valentina/bin/valentina");
 #ifdef Q_OS_WIN
     return QCoreApplication::applicationDirPath() + path + QLatin1String(".exe");
 #else
     return QCoreApplication::applicationDirPath() + path;
 #endif
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString AbstractTest::TapePath() const
 {
+#ifdef QBS_BUILD
+    return QStringLiteral(TAPE_BUILDDIR);
+#else
     const QString path = QStringLiteral("/../../../app/tape/bin/tape");
 #ifdef Q_OS_WIN
     return QCoreApplication::applicationDirPath() + path + QLatin1String(".exe");
 #else
     return QCoreApplication::applicationDirPath() + path;
 #endif
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString AbstractTest::TranslationsPath() const
 {
+#ifdef QBS_BUILD
+    return QStringLiteral(TRANSLATIONS_DIR);
+#else
     return QCoreApplication::applicationDirPath() + QStringLiteral("/../../../app/valentina/bin/translations");
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------

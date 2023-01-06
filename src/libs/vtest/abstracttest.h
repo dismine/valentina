@@ -92,6 +92,7 @@ protected:
     void ComparePointsDistance(const QPointF &result, const QPointF &expected, qreal testAccuracy) const;
     void CompareLinesDistance(const QVector<QLineF> &result, const QVector<QLineF> &expected) const;
 
+    auto PuzzlePath() const -> QString;
     auto ValentinaPath() const -> QString;
     auto TapePath() const -> QString;
     auto TranslationsPath() const -> QString;
