@@ -39,9 +39,9 @@
 #include <csignal>
 
 /*In all cases we need include core header for getting defined values*/
-//#ifdef QT_CORE_LIB
-//#   include <QtCore>
-//#endif
+#ifdef QT_CORE_LIB
+#   include <QtCore>
+#endif
 
 #ifdef QT_GUI_LIB
 #   include <QtGui>
@@ -72,6 +72,10 @@
 
 #   ifdef QT_NETWORK_LIB
 #       include <QtNetwork>
+#   endif
+
+#   ifdef QT_CONCURRENT_LIB
+#       include <QtConcurrent>
 #   endif
 #endif/*Q_OS_WIN*/
 

@@ -35,9 +35,44 @@
 /* Add C++ includes here */
 
 #ifdef QT_CORE_LIB
-#include <QtCore>
+#   include <QtCore>
 #endif
 
+#ifdef QT_GUI_LIB
+#   include <QtGui>
+#endif
+
+#ifdef QT_XML_LIB
+#   include <QtXml>
+#endif
+
+//In Windows you can't use same header in all modes.
+#if !defined(Q_OS_WIN)
+#   ifdef QT_WIDGETS_LIB
+#       include <QtWidgets>
+#   endif
+
+#   ifdef QT_SVG_LIB
+#       include <QtSvg/QtSvg>
+#   endif
+
+#   ifdef QT_PRINTSUPPORT_LIB
+#       include <QtPrintSupport>
+#   endif
+
+//Build doesn't work, if include this headers on Windows.
+#   ifdef QT_XMLPATTERNS_LIB
+#       include <QtXmlPatterns>
+#   endif
+
+#   ifdef QT_NETWORK_LIB
+#       include <QtNetwork>
+#   endif
+#endif/*Q_OS_WIN*/
+
+#   ifdef QT_CONCURRENT_LIB
+#       include <QtConcurrent>
+#   endif
 #endif
 
 #endif // STABLE_H

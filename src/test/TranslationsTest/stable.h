@@ -51,6 +51,10 @@
 #   include <QtXml>
 #endif
 
+#ifdef QT_TESTLIB_LIB
+#   include <QtTest>
+#endif
+
 //In Windows you can't use same header in all modes.
 #if !defined(Q_OS_WIN)
 #   ifdef QT_WIDGETS_LIB
@@ -72,6 +76,10 @@
 
 #   ifdef QT_NETWORK_LIB
 #       include <QtNetwork>
+#   endif
+
+#   ifdef QT_CONCURRENT_LIB
+#       include <QtConcurrent>
 #   endif
 #endif/*Q_OS_WIN*/
 

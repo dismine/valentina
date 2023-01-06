@@ -57,13 +57,25 @@
 #       include <QtWidgets>
 #   endif
 
-    //Build doesn't work, if include this headers on Windows.
+#   ifdef QT_SVG_LIB
+#       include <QtSvg/QtSvg>
+#   endif
+
+#   ifdef QT_PRINTSUPPORT_LIB
+#       include <QtPrintSupport>
+#   endif
+
+//Build doesn't work, if include this headers on Windows.
 #   ifdef QT_XMLPATTERNS_LIB
 #       include <QtXmlPatterns>
 #   endif
 
 #   ifdef QT_NETWORK_LIB
 #       include <QtNetwork>
+#   endif
+
+#   ifdef QT_CONCURRENT_LIB
+#       include <QtConcurrent>
 #   endif
 #endif/*Q_OS_WIN*/
 

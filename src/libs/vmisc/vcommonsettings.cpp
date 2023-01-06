@@ -68,8 +68,6 @@ const qreal VCommonSettings::defaultScrollingAcceleration = 1.3;
 const qreal VCommonSettings::scrollingAccelerationMin = 1.0;
 const qreal VCommonSettings::scrollingAccelerationMax = 10.0;
 
-Q_DECLARE_METATYPE(QMarginsF) // NOLINT
-
 namespace
 {
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsIndividualMeasurements, (QLatin1String("paths/individual_measurements"))) // NOLINT
