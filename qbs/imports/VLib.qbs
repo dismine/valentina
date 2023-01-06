@@ -7,6 +7,7 @@ Library {
 
     type: buildconfig.staticBuild ? "staticlibrary" : "dynamiclibrary"
 
+    buildconfig.appTarget: "valentina"
     bundle.isBundle: buildconfig.frameworksBuild
     cpp.includePaths: [".."]
     cpp.sonamePrefix: qbs.targetOS.contains("macos") ? "@rpath" : undefined
