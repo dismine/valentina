@@ -95,6 +95,10 @@ Module {
             var proc = new Process();
             try {
                 proc.setWorkingDirectory(theRepoDir);
+                // tag is formatted as TAG-N-gSHA:
+                // 1. latest stable version is TAG, or vX.Y.Z
+                // 2. number of commits since latest stable version is N
+                // 3. latest commit is gSHA
                 proc.exec(tool, ["describe", "--always", "HEAD"], true);
                 repoState = proc.readStdOut().trim();
                 if (repoState)

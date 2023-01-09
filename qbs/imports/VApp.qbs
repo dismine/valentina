@@ -51,6 +51,15 @@ CppApplication {
     }
 
     Group {
+        // See question on StackOwerflow "QSslSocket error when SSL is NOT used" (http://stackoverflow.com/a/31277055/3045403)
+        // Copy of answer:
+        // We occasionally had customers getting very similar warning messages but the software was also crashing.
+        // We determined it was because, although we weren't using SSL either, the program found a copy of OpenSSL on the
+        // customer's computer and tried interfacing with it. The version it found was too old though (from Qt 5.2 onwards v1.0.0
+        // or later is required).
+        //
+        // Our solution was to distribute the OpenSSL DLLs along with our application (~1.65 MB). The alternative is to compile
+        // Qt from scratch without OpenSSL support.
         condition: qbs.targetOS.contains("windows") && (qbs.architecture.contains("x86_64") || qbs.architecture.contains("x86"))
         name: "openssl"
         prefix: FileInfo.joinPaths(project.sourceDirectory, "dist", "win", "openssl", FileInfo.pathSeparator())
