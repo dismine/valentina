@@ -16,6 +16,10 @@ Module {
     // do not permit the use of rpath, such as Fedora.
     property bool enableRPath: true
 
+    // Use this property to disable the use of precompiled headers. This can be used when packaging Valentina for
+    // distributions which provides not enough space on build servers.
+    property bool enablePCH: true
+
     property string libDirName: "lib"
 
     property string appTarget

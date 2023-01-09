@@ -74,6 +74,7 @@ VLib {
 
     Group {
         name: "Precompiled headers"
+        condition: buildconfig.enablePCH
         files: {
             var files = ["stable.h"];
             if (qbs.toolchain.contains("msvc"))
