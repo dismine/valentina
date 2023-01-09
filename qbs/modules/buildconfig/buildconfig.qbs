@@ -20,6 +20,14 @@ Module {
     // distributions which provides not enough space on build servers.
     property bool enablePCH: true
 
+    Depends { name: "ccache"; }
+
+    // Use this property to disable the use of ccache.
+    property bool enableCcache: true
+    readonly property bool ccachePresent: ccache.ccachePresent
+    readonly property bool ccachePCHSupport: ccache.pchSupport
+    readonly property bool buildWithCcache: enableCcache && (enablePCH && ccachePresent && ccachePCHSupport || (!enablePCH && ccachePresent))
+
     property string libDirName: "lib"
 
     property string appTarget

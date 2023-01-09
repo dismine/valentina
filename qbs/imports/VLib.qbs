@@ -19,6 +19,11 @@ Library {
         cpp.rpaths: cpp.rpathOrigin
     }
 
+    Properties {
+        condition: qbs.targetOS.contains("unix") && buildconfig.buildWithCcache
+        cpp.compilerWrapper: "ccache"
+    }
+
     install: !buildconfig.staticBuild
     installDir: buildconfig.installLibraryPath
     installDebugInformation: !buildconfig.staticBuild
