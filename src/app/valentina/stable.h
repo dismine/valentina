@@ -51,6 +51,10 @@
 #   include <QtXml>
 #endif
 
+#ifdef QT_WINEXTRAS_LIB
+#   include <QtWinExtras>
+#endif
+
 //In Windows you can't use same header in all modes.
 #if !defined(Q_OS_WIN)
 #   ifdef QT_WIDGETS_LIB
