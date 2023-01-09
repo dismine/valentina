@@ -12,6 +12,10 @@ Module {
     // Use this property to disable building unit tests.
     property bool enableUnitTests: true
 
+    // Use this property to disable the use of rpath. This can be used when packaging Valentina for distributions which
+    // do not permit the use of rpath, such as Fedora.
+    property bool enableRPath: true
+
     property string libDirName: "lib"
 
     property string appTarget

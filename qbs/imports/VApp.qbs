@@ -10,11 +10,15 @@ CppApplication {
         cpp.minimumMacosVersion: buildconfig.minimumMacosVersion
     }
 
-    cpp.rpaths: FileInfo.joinPaths(cpp.rpathOrigin,
-                                  "..",
-                                  qbs.targetOS.contains("macos")
-                                  ? "Frameworks"
-                                  : buildconfig.installLibraryPath)
+    Properties {
+        condition: buildconfig.enableRPath
+        cpp.rpaths: FileInfo.joinPaths(cpp.rpathOrigin,
+                                      "..",
+                                      qbs.targetOS.contains("macos")
+                                      ? "Frameworks"
+                                      : buildconfig.installLibraryPath)
+    }
+
     install: true
     installDir: buildconfig.installAppPath
     installDebugInformation: true

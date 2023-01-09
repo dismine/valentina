@@ -10,8 +10,14 @@ Library {
     buildconfig.appTarget: "valentina"
     bundle.isBundle: buildconfig.frameworksBuild
     cpp.includePaths: [".."]
-    cpp.sonamePrefix: qbs.targetOS.contains("macos") ? "@rpath" : undefined
-    cpp.rpaths: cpp.rpathOrigin
+
+    // Allow MAC OS X to find library inside a bundle
+    cpp.sonamePrefix: (!buildconfig.staticBuild && qbs.targetOS.contains("macos")) ? "@rpath" : undefined
+
+    Properties {
+        condition: (!buildconfig.staticBuild && buildconfig.enableRPath)
+        cpp.rpaths: cpp.rpathOrigin
+    }
 
     install: !buildconfig.staticBuild
     installDir: buildconfig.installLibraryPath
