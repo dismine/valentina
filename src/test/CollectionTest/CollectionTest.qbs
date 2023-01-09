@@ -12,6 +12,7 @@ VApp {
     type: base.concat("autotest", "tst_files")
     bundle.isBundle: false
     install: false
+    condition: buildconfig.enableUnitTests
 
     files: [
       "qttestmainlambda.cpp",

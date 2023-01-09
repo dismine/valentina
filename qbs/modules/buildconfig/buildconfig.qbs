@@ -9,6 +9,9 @@ Module {
     property bool enableUbSanitizer: false
     property bool enableThreadSanitizer: false
 
+    // Use this property to disable building unit tests.
+    property bool enableUnitTests: true
+
     property string libDirName: "lib"
 
     property string appTarget

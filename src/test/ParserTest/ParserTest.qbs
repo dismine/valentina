@@ -9,6 +9,7 @@ VApp {
     consoleApplication: true
     bundle.isBundle: false
     install: false
+    condition: buildconfig.enableUnitTests
 
     files: [
       "main.cpp"
