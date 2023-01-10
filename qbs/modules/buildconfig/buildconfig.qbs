@@ -106,6 +106,9 @@ Module {
             defines.push('PKGDATADIR="' + FileInfo.joinPaths(dataDir, "valentina") + '"');
         }
 
+        if (qbs.buildVariant !== "debug")
+            defines.push('V_NO_ASSERT');
+
         return defines;
     }
 
