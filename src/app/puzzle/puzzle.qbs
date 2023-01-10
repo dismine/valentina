@@ -1,6 +1,6 @@
 import qbs.FileInfo
 
-VApp {
+VToolApp {
     Depends { name: "buildconfig" }
     Depends { name: "ib"; condition: qbs.targetOS.contains("macos") }
     Depends { name: "freedesktop" }

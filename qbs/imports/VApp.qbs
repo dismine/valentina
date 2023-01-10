@@ -19,11 +19,6 @@ CppApplication {
                                       : buildconfig.installLibraryPath)
     }
 
-    install: true
-    installDir: buildconfig.installAppPath
-    installDebugInformation: true
-    type: base.concat("testSuit")
-
     Properties {
         condition: qbs.targetOS.contains("unix") && buildconfig.buildWithCcache
         cpp.compilerWrapper: "ccache"
