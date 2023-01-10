@@ -20,6 +20,8 @@ Module {
     // distributions which provides not enough space on build servers.
     property bool enablePCH: true
 
+    property bool enableAppImage: false
+
     Depends { name: "ccache"; }
 
     // Use this property to disable the use of ccache.
@@ -108,6 +110,9 @@ Module {
 
         if (qbs.buildVariant !== "debug")
             defines.push('V_NO_ASSERT');
+
+        if (enableAppImage && qbs.targetOS.contains("unix") && !qbs.targetOS.contains("macos"))
+            defines.push('APPIMAGE');
 
         return defines;
     }

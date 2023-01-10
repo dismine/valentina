@@ -11,11 +11,6 @@ VToolApp {
     Depends { name: "VWidgetsLib" }
     Depends { name: "FervorLib" }
 
-    Properties {
-        condition: cpp.defines.contains("APPIMAGE")
-        cpp.dynamicLibraries: ["icudata", "icui18n", "icuuc"]
-    }
-
     name: "Puzzle"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "Puzzle" : "puzzle"
     targetName: buildconfig.appTarget

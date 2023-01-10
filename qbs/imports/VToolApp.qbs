@@ -9,6 +9,11 @@ VApp {
     installDir: buildconfig.installAppPath
     installDebugInformation: true
 
+    Properties {
+        condition: buildconfig.enableAppImage && qbs.targetOS.contains("unix") && !qbs.targetOS.contains("macos")
+        cpp.dynamicLibraries: ["icudata", "icui18n", "icuuc"]
+    }
+
     Group {
         name: "freedesktop"
         prefix: FileInfo.joinPaths(project.sourceDirectory, "dist", FileInfo.pathSeparator())

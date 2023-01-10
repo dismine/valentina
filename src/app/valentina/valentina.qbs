@@ -21,11 +21,6 @@ VToolApp {
         required: false
     }
 
-    Properties {
-        condition: cpp.defines.contains("APPIMAGE")
-        cpp.dynamicLibraries: ["icudata", "icui18n", "icuuc"]
-    }
-
     name: "Valentina"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "Valentina" : "valentina"
     targetName: buildconfig.appTarget

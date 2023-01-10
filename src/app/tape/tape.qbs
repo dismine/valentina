@@ -13,11 +13,6 @@ VToolApp {
     Depends { name: "VWidgetsLib"; }
     Depends { name: "VToolsLib"; }
 
-    Properties {
-        condition: cpp.defines.contains("APPIMAGE")
-        cpp.dynamicLibraries: ["icudata", "icui18n", "icuuc"]
-    }
-
     name: "Tape"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "Tape" : "tape"
     targetName: buildconfig.appTarget
