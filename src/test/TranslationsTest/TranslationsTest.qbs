@@ -1,6 +1,6 @@
 import qbs.FileInfo
 
-VApp {
+VTestApp {
     Depends { name: "buildconfig" }
     Depends { name: "VTestLib" }
     Depends { name: "Qt"; submodules: ["testlib", "xml", "gui", "printsupport"] }
@@ -8,10 +8,6 @@ VApp {
     name: "TranslationsTest"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "TranslationsTest" : "translationsTest"
     targetName: buildconfig.appTarget
-    type: base.concat("autotest")
-    bundle.isBundle: false
-    install: false
-    condition: buildconfig.enableUnitTests
 
     files: [
       "qttestmainlambda.cpp",

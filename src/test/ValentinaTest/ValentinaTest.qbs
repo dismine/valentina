@@ -1,4 +1,4 @@
-VApp {
+VTestApp {
     Depends { name: "buildconfig" }
     Depends { name: "VTestLib" }
     Depends { name: "Qt"; submodules: ["testlib"] }
@@ -11,10 +11,6 @@ VApp {
     name: "ValentinaTest"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "ValentinaTest" : "valentinaTest"
     targetName: buildconfig.appTarget
-    type: base.concat("autotest")
-    bundle.isBundle: false
-    install: false
-    condition: buildconfig.enableUnitTests
 
     files: [
       "qttestmainlambda.cpp",
