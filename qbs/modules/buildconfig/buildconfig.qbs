@@ -28,6 +28,8 @@ Module {
     readonly property bool ccachePCHSupport: ccache.pchSupport
     readonly property bool buildWithCcache: enableCcache && (enablePCH && ccachePresent && ccachePCHSupport || (!enablePCH && ccachePresent))
 
+    property bool treatWarningsAsErrors: true
+
     property string libDirName: "lib"
 
     property string appTarget
@@ -164,7 +166,7 @@ Module {
     Properties {
         condition: qbs.buildVariant === "debug"
         cpp.warningLevel: "all"
-        cpp.treatWarningsAsErrors: true
+        cpp.treatWarningsAsErrors: treatWarningsAsErrors
     }
 
     property stringList debugFlags: {
