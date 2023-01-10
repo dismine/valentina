@@ -33,7 +33,9 @@
     @brief This file contains standard definitions used by the parser.
 */
 
-#define QMUP_VERSION "2.7.0"
+#ifndef QMUP_VERSION
+#define QMUP_VERSION "2.7.0" // Leave while we still use qmake
+#endif
 #define QMUP_VERSION_DATE "20191030; GC"
 
 // Detect whether the compiler supports C++11 noexcept exception specifications.

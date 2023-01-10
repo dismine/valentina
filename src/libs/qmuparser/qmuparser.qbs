@@ -1,5 +1,6 @@
 VLib {
     name: "QMUParserLib"
+    version: "2.7.0"
     files: [
         "qmuparser.cpp",
         "qmuparsertokenreader.cpp",
@@ -30,6 +31,8 @@ VLib {
         "qmuparsercallback_p.h",
         "make_unique.h",
     ]
+
+    cpp.defines: 'QMUP_VERSION="' + product.version + '"'
 
     buildconfig.staticBuild: false
 

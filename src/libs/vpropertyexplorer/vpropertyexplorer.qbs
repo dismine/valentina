@@ -3,6 +3,7 @@ VLib {
     Depends { name: "VMiscLib" }
 
     name: "VPropertyExplorerLib"
+    version: "1.0.0"
     files: [
         "vproperty.cpp",
         "vpropertydelegate.cpp",
