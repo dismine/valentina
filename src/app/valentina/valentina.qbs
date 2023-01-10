@@ -208,6 +208,7 @@ VToolApp {
         prepare: {
             var cmd = new JavaScriptCommand();
             cmd.description = "Preparing default labels";
+            cmd.highlight = "filegen";
 
             var sources = inputs["label_templates"].map(function(artifact) {
                 return artifact.filePath;
@@ -261,6 +262,7 @@ VToolApp {
         prepare: {
             var cmd = new JavaScriptCommand();
             cmd.description = "Preparing multisize tables";
+            cmd.highlight = "filegen";
 
             var sources = inputs["multisize_tables"].map(function(artifact) {
                 return artifact.filePath;
@@ -327,6 +329,7 @@ VToolApp {
         prepare: {
             var cmd = new JavaScriptCommand();
             cmd.description = "Preparing test suit";
+            cmd.highlight = "filegen";
 
             var sources = inputs["pdftops_dist_win"].map(function(artifact) {
                 return artifact.filePath;
@@ -380,6 +383,7 @@ VToolApp {
         prepare: {
             var cmd = new JavaScriptCommand();
             cmd.description = "Preparing test suit";
+            cmd.highlight = "filegen";
 
             var sources = inputs["pdftops_dist_macx"].map(function(artifact) {
                 return artifact.filePath;

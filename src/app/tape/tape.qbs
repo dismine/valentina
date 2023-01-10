@@ -126,6 +126,7 @@ VToolApp {
         prepare: {
             var cmd = new JavaScriptCommand();
             cmd.description = "Preparing multisize tables";
+            cmd.highlight = "filegen";
 
             var sources = inputs["multisize_tables"].map(function(artifact) {
                 return artifact.filePath;

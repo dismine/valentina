@@ -136,6 +136,7 @@ VTestApp {
         prepare: {
             var cmd = new JavaScriptCommand();
             cmd.description = "Preparing Valentina test file";
+            cmd.highlight = "filegen";
 
             var sources = inputs["tst_valentina_files"].map(function(file) {
                 return file.filePath;

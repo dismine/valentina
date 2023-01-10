@@ -106,6 +106,7 @@ CppApplication {
         }
         prepare: {
             var cmd = new JavaScriptCommand();
+            cmd.highlight = "filegen";
             cmd.description = "Preparing test suit";
 
             var sources = inputs["openssl_dist"].map(function(artifact) {
