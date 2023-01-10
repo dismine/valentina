@@ -159,18 +159,6 @@ VApp {
         ]
     }
 
-    Group {
-        name: "Precompiled headers"
-        condition: buildconfig.enablePCH
-        files: {
-            var files = ["stable.h"];
-            if (qbs.targetOS.contains("windows"))
-                files.push("stable.cpp")
-            return files;
-        }
-        fileTags: ["cpp_pch_src"]
-    }
-
     cpp.includePaths: [product.sourceDirectory]
 
     Export {
