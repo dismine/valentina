@@ -69,6 +69,8 @@ Module {
     readonly property string installDataPath: {
         if (qbs.targetOS.contains("macos"))
             return installAppPath + "/" + appTarget + ".app/Contents/Resources"
+        else if (qbs.targetOS.contains("windows"))
+            return installAppPath
         else
             return "share/" + appTarget
     }

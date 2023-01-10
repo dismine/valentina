@@ -1,4 +1,5 @@
 import qbs.FileInfo
+import qbs.File
 
 VApp {
     Depends { name: "buildconfig" }
@@ -185,5 +186,124 @@ VApp {
             defines.push('TRANSLATIONS_DIR="' + exportingProduct.buildDirectory + FileInfo.pathSeparator() + 'translations"');
             return defines;
         }
+    }
+
+    Group {
+        name: "Label templates"
+        prefix: FileInfo.joinPaths(project.sourceDirectory, "src", "app", "share", "labels", FileInfo.pathSeparator())
+        files: [
+            "def_pattern_label.xml",
+            "def_piece_label.xml"
+        ]
+        fileTags: ["label_templates"]
+        qbs.install: true
+        qbs.installDir: buildconfig.installDataPath + FileInfo.pathSeparator() + "labels"
+    }
+
+    Rule {
+        multiplex: true
+        alwaysRun: true
+        inputs: ["label_templates"]
+        outputFileTags: ["testSuit"]
+        outputArtifacts: {
+            var artifactNames = inputs["label_templates"].map(function(file){
+                return FileInfo.joinPaths(product.buildDirectory, "labels", file.fileName);
+            });
+            var artifacts = artifactNames.map(function(art){
+                var a = {
+                    filePath: art,
+                    fileTags: ["testSuit"]
+                }
+                return a;
+            });
+            return artifacts;
+        }
+        prepare: {
+            var cmd = new JavaScriptCommand();
+            cmd.description = "Preparing default labels";
+
+            var sources = inputs["label_templates"].map(function(artifact) {
+                return artifact.filePath;
+            });
+
+            cmd.sources = sources;
+
+            var destination = inputs["label_templates"].map(function(file) {
+                return FileInfo.joinPaths(product.buildDirectory, "labels", file.fileName);
+            });
+
+            cmd.destination = destination;
+            cmd.sourceCode = function() {
+                for (var i in sources) {
+                    File.copy(sources[i], destination[i]);
+                }
+            };
+            return [cmd];
+        }
+    }
+
+    Group {
+        name: "Multisize tables"
+        prefix: FileInfo.joinPaths(project.sourceDirectory, "src", "app", "share", "tables", "multisize", FileInfo.pathSeparator())
+        files: [
+            "GOST_man_ru.vst"
+        ]
+        fileTags: ["multisize_tables"]
+        qbs.install: true
+        qbs.installDir: buildconfig.installDataPath + FileInfo.pathSeparator() + "tables" + FileInfo.pathSeparator() + "multisize"
+    }
+
+    Rule {
+        multiplex: true
+        alwaysRun: true
+        inputs: ["multisize_tables"]
+        outputFileTags: ["testSuit"]
+        outputArtifacts: {
+            var artifactNames = inputs["multisize_tables"].map(function(file){
+                return FileInfo.joinPaths(product.buildDirectory, "tables", "multisize", file.fileName);
+            });
+            var artifacts = artifactNames.map(function(art){
+                var a = {
+                    filePath: art,
+                    fileTags: ["testSuit"]
+                }
+                return a;
+            });
+            return artifacts;
+        }
+        prepare: {
+            var cmd = new JavaScriptCommand();
+            cmd.description = "Preparing multisize tables";
+
+            var sources = inputs["multisize_tables"].map(function(artifact) {
+                return artifact.filePath;
+            });
+
+            cmd.sources = sources;
+
+            var destination = inputs["multisize_tables"].map(function(file) {
+                return FileInfo.joinPaths(product.buildDirectory, "tables", "multisize", file.fileName);
+            });
+
+            cmd.destination = destination;
+            cmd.sourceCode = function() {
+                for (var i in sources) {
+                    File.copy(sources[i], destination[i]);
+                }
+            };
+            return [cmd];
+        }
+    }
+
+    Group {
+        name: "Measurements templates"
+        prefix: FileInfo.joinPaths(project.sourceDirectory, "src", "app", "share", "tables", "templates", FileInfo.pathSeparator())
+        files: [
+            "template_all_measurements.vit",
+            "t_Aldrich_Women.vit"
+        ]
+        fileTags: ["measurements_templates"]
+        qbs.install: true
+        qbs.installDir: buildconfig.installDataPath + FileInfo.pathSeparator() + "tables" + FileInfo.pathSeparator() + "templates"
     }
 }
