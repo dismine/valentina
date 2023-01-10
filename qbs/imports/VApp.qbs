@@ -41,16 +41,6 @@ CppApplication {
     }
 
     Group {
-        condition: qbs.targetOS.contains("windows") && (qbs.architecture.contains("x86_64") || qbs.architecture.contains("x86"))
-        name: "pdftops"
-        prefix: FileInfo.joinPaths(project.sourceDirectory, "dist", "win", FileInfo.pathSeparator())
-        files: ["pdftops.exe"]
-        fileTags: ["pdftops_dist"]
-        qbs.install: true
-        qbs.installDir: buildconfig.installBinaryPath
-    }
-
-    Group {
         // See question on StackOwerflow "QSslSocket error when SSL is NOT used" (http://stackoverflow.com/a/31277055/3045403)
         // Copy of answer:
         // We occasionally had customers getting very similar warning messages but the software was also crashing.
@@ -103,16 +93,13 @@ CppApplication {
         multiplex: true
         alwaysRun: true
         condition: qbs.targetOS.contains("windows") && (qbs.architecture.contains("x86_64") || qbs.architecture.contains("x86"))
-        inputs: ["openssl_dist", "pdftops_dist"]
+        inputs: ["openssl_dist"]
         outputFileTags: ["testSuit"]
         outputArtifacts: {
             var artifactNames = inputs["openssl_dist"].map(function(file){
                 return FileInfo.joinPaths(product.buildDirectory, file.fileName);
             });
 
-            artifactNames = artifactNames.concat(inputs["pdftops_dist"].map(function(file){
-                return FileInfo.joinPaths(product.buildDirectory, file.fileName);
-            }));
             var artifacts = artifactNames.map(function(art){
                 var a = {
                     filePath: art,
@@ -129,10 +116,6 @@ CppApplication {
             var sources = inputs["openssl_dist"].map(function(artifact) {
                 return artifact.filePath;
             });
-
-            sources = sources.concat(inputs["pdftops_dist"].map(function(artifact) {
-                return artifact.filePath;
-            }));
 
             cmd.sources = sources;
             cmd.destination = outputs["testSuit"].map(function(artifact) {
