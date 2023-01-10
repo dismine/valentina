@@ -108,6 +108,76 @@ Module {
         qbs.installDir: "share/icons/hicolor/scalable/apps"
     }
 
+    Group {
+        condition: product.freedesktop2._fdoSupported
+        fileTagsFilter: [ "freedesktop.48x48AppsIcons" ]
+        qbs.install: true
+        qbs.installDir: "share/icons/hicolor/48x48/apps"
+    }
+
+    Group {
+        condition: product.freedesktop2._fdoSupported
+        fileTagsFilter: [ "freedesktop.64x64AppsIcons" ]
+        qbs.install: true
+        qbs.installDir: "share/icons/hicolor/64x64/apps"
+    }
+
+    Group {
+        condition: product.freedesktop2._fdoSupported
+        fileTagsFilter: [ "freedesktop.128x128AppsIcons" ]
+        qbs.install: true
+        qbs.installDir: "share/icons/hicolor/128x128/apps"
+    }
+
+    Group {
+        condition: product.freedesktop2._fdoSupported
+        fileTagsFilter: [ "freedesktop.256x256AppsIcons" ]
+        qbs.install: true
+        qbs.installDir: "share/icons/hicolor/256x256/apps"
+    }
+
+    Group {
+        condition: product.freedesktop2._fdoSupported
+        fileTagsFilter: [ "freedesktop.512x512AppsIcons" ]
+        qbs.install: true
+        qbs.installDir: "share/icons/hicolor/512x512/apps"
+    }
+
+    Group {
+        condition: product.freedesktop2._fdoSupported
+        fileTagsFilter: [ "freedesktop.48x48MimetypesIcons" ]
+        qbs.install: true
+        qbs.installDir: "share/icons/hicolor/48x48/mimetypes"
+    }
+
+    Group {
+        condition: product.freedesktop2._fdoSupported
+        fileTagsFilter: [ "freedesktop.64x64MimetypesIcons" ]
+        qbs.install: true
+        qbs.installDir: "share/icons/hicolor/64x64/mimetypes"
+    }
+
+    Group {
+        condition: product.freedesktop2._fdoSupported
+        fileTagsFilter: [ "freedesktop.128x128MimetypesIcons" ]
+        qbs.install: true
+        qbs.installDir: "share/icons/hicolor/128x128/mimetypes"
+    }
+
+    Group {
+        condition: product.freedesktop2._fdoSupported
+        fileTagsFilter: [ "freedesktop.256x256MimetypesIcons" ]
+        qbs.install: true
+        qbs.installDir: "share/icons/hicolor/256x256/mimetypes"
+    }
+
+    Group {
+        condition: product.freedesktop2._fdoSupported
+        fileTagsFilter: [ "freedesktop.512x512MimetypesIcons" ]
+        qbs.install: true
+        qbs.installDir: "share/icons/hicolor/512x512/mimetypes"
+    }
+
     FileTagger {
         patterns: [ "*.metainfo.xml", "*.appdata.xml" ]
         fileTags: [ "freedesktop.appstream" ]

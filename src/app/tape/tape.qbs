@@ -159,4 +159,74 @@ VToolApp {
         qbs.install: true
         qbs.installDir: buildconfig.installDataPath + FileInfo.pathSeparator() + "tables" + FileInfo.pathSeparator() + "templates"
     }
+
+    Group {
+        name: "48x48/apps"
+        prefix: FileInfo.joinPaths(project.sourceDirectory, "share", "icons", "48x48", "apps", FileInfo.pathSeparator())
+        files: "tape.png"
+        fileTags: "freedesktop.48x48AppsIcons"
+    }
+
+    Group {
+        name: "64x64/apps"
+        prefix: FileInfo.joinPaths(project.sourceDirectory, "share", "icons", "64x64", "apps", FileInfo.pathSeparator())
+        files: "tape.png"
+        fileTags: "freedesktop.64x64AppsIcons"
+    }
+
+    Group {
+        name: "128x128/apps"
+        prefix: FileInfo.joinPaths(project.sourceDirectory, "share", "icons", "128x128", "apps", FileInfo.pathSeparator())
+        files: "tape.png"
+        fileTags: "freedesktop.128x128AppsIcons"
+    }
+
+    Group {
+        name: "256x256/apps"
+        prefix: FileInfo.joinPaths(project.sourceDirectory, "share", "icons", "256x256", "apps", FileInfo.pathSeparator())
+        files: "tape.png"
+        fileTags: "freedesktop.256x256AppsIcons"
+    }
+
+    Group {
+        name: "512x512/apps"
+        prefix: FileInfo.joinPaths(project.sourceDirectory, "share", "icons", "512x512", "apps", FileInfo.pathSeparator())
+        files: "tape.png"
+        fileTags: "freedesktop.512x512AppsIcons"
+    }
+
+    Group {
+        name: "apps48x48/mimetypes"
+        prefix: FileInfo.joinPaths(project.sourceDirectory, "share", "icons", "48x48", "mimetypes", FileInfo.pathSeparator())
+        files: ["application-x-valentina-i-measurements.png", "application-x-valentina-s-measurements.png"]
+        fileTags: "freedesktop.48x48MimetypesIcons"
+    }
+
+    Group {
+        name: "apps64x64/mimetypes"
+        prefix: FileInfo.joinPaths(project.sourceDirectory, "share", "icons", "64x64", "mimetypes", FileInfo.pathSeparator())
+        files: ["application-x-valentina-i-measurements.png", "application-x-valentina-s-measurements.png"]
+        fileTags: "freedesktop.64x64MimetypesIcons"
+    }
+
+    Group {
+        name: "apps128x128/mimetypes"
+        prefix: FileInfo.joinPaths(project.sourceDirectory, "share", "icons", "128x128", "mimetypes", FileInfo.pathSeparator())
+        files: ["application-x-valentina-i-measurements.png", "application-x-valentina-s-measurements.png"]
+        fileTags: "freedesktop.128x128MimetypesIcons"
+    }
+
+    Group {
+        name: "apps256x256/mimetypes"
+        prefix: FileInfo.joinPaths(project.sourceDirectory, "share", "icons", "256x256", "mimetypes", FileInfo.pathSeparator())
+        files: ["application-x-valentina-i-measurements.png", "application-x-valentina-s-measurements.png"]
+        fileTags: "freedesktop.256x256MimetypesIcons"
+    }
+
+    Group {
+        name: "apps512x512/mimetypes"
+        prefix: FileInfo.joinPaths(project.sourceDirectory, "share", "icons", "512x512", "mimetypes", FileInfo.pathSeparator())
+        files: ["application-x-valentina-i-measurements.png", "application-x-valentina-s-measurements.png"]
+        fileTags: "freedesktop.512x512MimetypesIcons"
+    }
 }
