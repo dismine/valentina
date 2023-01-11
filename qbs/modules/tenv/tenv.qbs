@@ -12,7 +12,7 @@ Module {
         multiplex: true
 //        alwaysRun: true
         condition: enableTestEnvironment
-        inputs: ["pdftops_dist_macx", "pdftops_dist_win", "openssl_dist", "multisize_tables", "label_templates"]
+        inputs: ["pdftops_dist_macx", "pdftops_dist_win", "openssl_dist", "multisize_tables", "label_templates", "qm"]
         outputFileTags: ["tenv.deps"]
         outputArtifacts: {
             var artifactNames = (inputs["pdftops_dist_macx"] || []).map(function(file){
@@ -33,6 +33,10 @@ Module {
 
             artifactNames = artifactNames.concat((inputs["label_templates"] || []).map(function(file){
                 return FileInfo.joinPaths(product.buildDirectory, "labels",file.fileName);
+            }));
+
+            artifactNames = artifactNames.concat((inputs["qm"] || []).map(function(file){
+                return FileInfo.joinPaths(product.buildDirectory, "translations", file.fileName);
             }));
 
             var artifacts = artifactNames.map(function(art){
@@ -69,6 +73,10 @@ Module {
                 return artifact.filePath;
             }));
 
+            sources = sources.concat((inputs["qm"] || []).map(function(artifact) {
+                return artifact.filePath;
+            }));
+
             cmd.sources = sources;
 
             var destination = (inputs["pdftops_dist_macx"] || []).map(function(artifact) {
@@ -89,6 +97,10 @@ Module {
 
             destination = destination.concat((inputs["label_templates"] || []).map(function(artifact) {
                 return FileInfo.joinPaths(product.buildDirectory, "labels", artifact.fileName);
+            }));
+
+            destination = destination.concat((inputs["qm"] || []).map(function(artifact) {
+                return FileInfo.joinPaths(product.buildDirectory, "translations", artifact.fileName);
             }));
 
             cmd.destination = destination;
