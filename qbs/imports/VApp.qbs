@@ -1,5 +1,4 @@
 import qbs.FileInfo
-import qbs.File
 
 CppApplication {
     Depends { name: "buildconfig" }
@@ -82,47 +81,5 @@ CppApplication {
         fileTags: ["openssl_dist"]
         qbs.install: true
         qbs.installDir: buildconfig.installBinaryPath
-    }
-
-    Rule {
-        multiplex: true
-        alwaysRun: true
-        condition: qbs.targetOS.contains("windows") && (qbs.architecture.contains("x86_64") || qbs.architecture.contains("x86"))
-        inputs: ["openssl_dist"]
-        outputFileTags: ["testSuit"]
-        outputArtifacts: {
-            var artifactNames = inputs["openssl_dist"].map(function(file){
-                return FileInfo.joinPaths(product.buildDirectory, file.fileName);
-            });
-
-            var artifacts = artifactNames.map(function(art){
-                var a = {
-                    filePath: art,
-                    fileTags: ["testSuit"]
-                }
-                return a;
-            });
-            return artifacts;
-        }
-        prepare: {
-            var cmd = new JavaScriptCommand();
-            cmd.highlight = "filegen";
-            cmd.description = "Preparing test suit";
-
-            var sources = inputs["openssl_dist"].map(function(artifact) {
-                return artifact.filePath;
-            });
-
-            cmd.sources = sources;
-            cmd.destination = outputs["testSuit"].map(function(artifact) {
-                return artifact.filePath;
-            });
-            cmd.sourceCode = function() {
-                for (var i in sources) {
-                    File.copy(sources[i], destination[i]);
-                }
-            };
-            return [cmd];
-        }
     }
 }

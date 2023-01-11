@@ -2,12 +2,19 @@ import qbs.FileInfo
 
 VApp {
     Depends { name: "freedesktop2" }
+    Depends { name: "tenv" }
 
     version: "0.7.52"
-    type: base.concat("testSuit")
     install: true
     installDir: buildconfig.installAppPath
     installDebugInformation: true
+
+    Properties {
+        // Breakpoints do not work if debug the app inside of bundle. In debug mode we turn off creating a bundle.
+        // Probably it will breake some dependencies. Version for Mac designed to work inside an app bundle.
+        condition: qbs.targetOS.contains("macos") && qbs.buildVariant == "debug"
+        bundle.isBundle: false
+    }
 
     Properties {
         condition: buildconfig.enableAppImage && qbs.targetOS.contains("unix") && !qbs.targetOS.contains("macos")

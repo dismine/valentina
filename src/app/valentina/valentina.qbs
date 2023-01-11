@@ -1,5 +1,4 @@
 import qbs.FileInfo
-import qbs.File
 
 VToolApp {
     Depends { name: "buildconfig" }
@@ -143,13 +142,6 @@ VToolApp {
         ib.appIconName: "Valentina"
     }
 
-    Properties {
-        // Breakpoints do not work if debug the app inside of bundle. In debug mode we turn off creating a bundle.
-        // Probably it will breake some dependencies. Version for Mac designed to work inside an app bundle.
-        condition: qbs.targetOS.contains("macos") && qbs.buildVariant == "debug"
-        bundle.isBundle: false
-    }
-
     Export {
         Depends { name: "cpp" }
         cpp.defines: {
@@ -174,49 +166,6 @@ VToolApp {
         qbs.installDir: buildconfig.installDataPath + FileInfo.pathSeparator() + "labels"
     }
 
-    Rule {
-        multiplex: true
-        alwaysRun: true
-        inputs: ["label_templates"]
-        outputFileTags: ["testSuit"]
-        outputArtifacts: {
-            var artifactNames = inputs["label_templates"].map(function(file){
-                return FileInfo.joinPaths(product.buildDirectory, "labels", file.fileName);
-            });
-            var artifacts = artifactNames.map(function(art){
-                var a = {
-                    filePath: art,
-                    fileTags: ["testSuit"]
-                }
-                return a;
-            });
-            return artifacts;
-        }
-        prepare: {
-            var cmd = new JavaScriptCommand();
-            cmd.description = "Preparing default labels";
-            cmd.highlight = "filegen";
-
-            var sources = inputs["label_templates"].map(function(artifact) {
-                return artifact.filePath;
-            });
-
-            cmd.sources = sources;
-
-            var destination = inputs["label_templates"].map(function(file) {
-                return FileInfo.joinPaths(product.buildDirectory, "labels", file.fileName);
-            });
-
-            cmd.destination = destination;
-            cmd.sourceCode = function() {
-                for (var i in sources) {
-                    File.copy(sources[i], destination[i]);
-                }
-            };
-            return [cmd];
-        }
-    }
-
     Group {
         name: "Multisize tables"
         prefix: FileInfo.joinPaths(project.sourceDirectory, "src", "app", "share", "tables", "multisize", FileInfo.pathSeparator())
@@ -226,49 +175,6 @@ VToolApp {
         fileTags: ["multisize_tables"]
         qbs.install: true
         qbs.installDir: buildconfig.installDataPath + FileInfo.pathSeparator() + "tables" + FileInfo.pathSeparator() + "multisize"
-    }
-
-    Rule {
-        multiplex: true
-        alwaysRun: true
-        inputs: ["multisize_tables"]
-        outputFileTags: ["testSuit"]
-        outputArtifacts: {
-            var artifactNames = inputs["multisize_tables"].map(function(file){
-                return FileInfo.joinPaths(product.buildDirectory, "tables", "multisize", file.fileName);
-            });
-            var artifacts = artifactNames.map(function(art){
-                var a = {
-                    filePath: art,
-                    fileTags: ["testSuit"]
-                }
-                return a;
-            });
-            return artifacts;
-        }
-        prepare: {
-            var cmd = new JavaScriptCommand();
-            cmd.description = "Preparing multisize tables";
-            cmd.highlight = "filegen";
-
-            var sources = inputs["multisize_tables"].map(function(artifact) {
-                return artifact.filePath;
-            });
-
-            cmd.sources = sources;
-
-            var destination = inputs["multisize_tables"].map(function(file) {
-                return FileInfo.joinPaths(product.buildDirectory, "tables", "multisize", file.fileName);
-            });
-
-            cmd.destination = destination;
-            cmd.sourceCode = function() {
-                for (var i in sources) {
-                    File.copy(sources[i], destination[i]);
-                }
-            };
-            return [cmd];
-        }
     }
 
     Group {
@@ -293,50 +199,6 @@ VToolApp {
         qbs.installDir: buildconfig.installBinaryPath
     }
 
-    Rule {
-        multiplex: true
-        alwaysRun: true
-        condition: qbs.targetOS.contains("windows") && (qbs.architecture.contains("x86_64") || qbs.architecture.contains("x86"))
-        inputs: ["pdftops_dist_win"]
-        outputFileTags: ["testSuit"]
-        outputArtifacts: {
-            var artifactNames = inputs["pdftops_dist_win"].map(function(file){
-                return FileInfo.joinPaths(product.buildDirectory, file.fileName);
-            });
-
-            var artifacts = artifactNames.map(function(art){
-                var a = {
-                    filePath: art,
-                    fileTags: ["testSuit"]
-                }
-                return a;
-            });
-            return artifacts;
-        }
-        prepare: {
-            var cmd = new JavaScriptCommand();
-            cmd.description = "Preparing test suit";
-            cmd.highlight = "filegen";
-
-            var sources = inputs["pdftops_dist_win"].map(function(artifact) {
-                return artifact.filePath;
-            });
-
-            cmd.sources = sources;
-
-            var destination = inputs["pdftops_dist_win"].map(function(artifact) {
-                return FileInfo.joinPaths(product.buildDirectory, file.fileName);
-            });
-            cmd.destination = destination;
-            cmd.sourceCode = function() {
-                for (var i in sources) {
-                    File.copy(sources[i], destination[i]);
-                }
-            };
-            return [cmd];
-        }
-    }
-
     Group {
         condition: qbs.targetOS.contains("macos") && qbs.architecture.contains("x86_64")
         name: "pdftops MacOS"
@@ -345,50 +207,6 @@ VToolApp {
         fileTags: ["pdftops_dist_macx"]
         qbs.install: true
         qbs.installDir: buildconfig.installBinaryPath
-    }
-
-    Rule {
-        multiplex: true
-        alwaysRun: true
-        condition: qbs.targetOS.contains("windows") && qbs.architecture.contains("x86_64") && qbs.buildVariant === "debug"
-        inputs: ["pdftops_dist_macx"]
-        outputFileTags: ["testSuit"]
-        outputArtifacts: {
-            var artifactNames = inputs["pdftops_dist_macx"].map(function(file){
-                return FileInfo.joinPaths(product.buildDirectory, file.fileName);
-            });
-
-            var artifacts = artifactNames.map(function(art){
-                var a = {
-                    filePath: art,
-                    fileTags: ["testSuit"]
-                }
-                return a;
-            });
-            return artifacts;
-        }
-        prepare: {
-            var cmd = new JavaScriptCommand();
-            cmd.description = "Preparing test suit";
-            cmd.highlight = "filegen";
-
-            var sources = inputs["pdftops_dist_macx"].map(function(artifact) {
-                return artifact.filePath;
-            });
-
-            cmd.sources = sources;
-
-            var destination = inputs["pdftops_dist_macx"].map(function(artifact) {
-                return FileInfo.joinPaths(product.buildDirectory, file.fileName);
-            });
-            cmd.destination = destination;
-            cmd.sourceCode = function() {
-                for (var i in sources) {
-                    File.copy(sources[i], destination[i]);
-                }
-            };
-            return [cmd];
-        }
     }
 
     Group {

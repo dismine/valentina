@@ -176,50 +176,6 @@ VToolApp {
         qbs.installDir: buildconfig.installBinaryPath
     }
 
-    Rule {
-        multiplex: true
-        alwaysRun: true
-        condition: qbs.targetOS.contains("windows") && (qbs.architecture.contains("x86_64") || qbs.architecture.contains("x86"))
-        inputs: ["pdftops_dist_win"]
-        outputFileTags: ["testSuit"]
-        outputArtifacts: {
-            var artifactNames = inputs["pdftops_dist_win"].map(function(file){
-                return FileInfo.joinPaths(product.buildDirectory, file.fileName);
-            });
-
-            var artifacts = artifactNames.map(function(art){
-                var a = {
-                    filePath: art,
-                    fileTags: ["testSuit"]
-                }
-                return a;
-            });
-            return artifacts;
-        }
-        prepare: {
-            var cmd = new JavaScriptCommand();
-            cmd.highlight = "filegen";
-            cmd.description = "Preparing test suit";
-
-            var sources = inputs["pdftops_dist_win"].map(function(artifact) {
-                return artifact.filePath;
-            });
-
-            cmd.sources = sources;
-
-            var destination = inputs["pdftops_dist_win"].map(function(artifact) {
-                return FileInfo.joinPaths(product.buildDirectory, file.fileName);
-            });
-            cmd.destination = destination;
-            cmd.sourceCode = function() {
-                for (var i in sources) {
-                    File.copy(sources[i], destination[i]);
-                }
-            };
-            return [cmd];
-        }
-    }
-
     Group {
         condition: qbs.targetOS.contains("macos") && qbs.architecture.contains("x86_64")
         name: "pdftops MacOS"
@@ -228,50 +184,6 @@ VToolApp {
         fileTags: ["pdftops_dist_macx"]
         qbs.install: true
         qbs.installDir: buildconfig.installBinaryPath
-    }
-
-    Rule {
-        multiplex: true
-        alwaysRun: true
-        condition: qbs.targetOS.contains("windows") && qbs.architecture.contains("x86_64") && qbs.buildVariant === "debug"
-        inputs: ["pdftops_dist_macx"]
-        outputFileTags: ["testSuit"]
-        outputArtifacts: {
-            var artifactNames = inputs["pdftops_dist_macx"].map(function(file){
-                return FileInfo.joinPaths(product.buildDirectory, file.fileName);
-            });
-
-            var artifacts = artifactNames.map(function(art){
-                var a = {
-                    filePath: art,
-                    fileTags: ["testSuit"]
-                }
-                return a;
-            });
-            return artifacts;
-        }
-        prepare: {
-            var cmd = new JavaScriptCommand();
-            cmd.description = "Preparing test suit";
-            cmd.highlight = "filegen";
-
-            var sources = inputs["pdftops_dist_macx"].map(function(artifact) {
-                return artifact.filePath;
-            });
-
-            cmd.sources = sources;
-
-            var destination = inputs["pdftops_dist_macx"].map(function(artifact) {
-                return FileInfo.joinPaths(product.buildDirectory, file.fileName);
-            });
-            cmd.destination = destination;
-            cmd.sourceCode = function() {
-                for (var i in sources) {
-                    File.copy(sources[i], destination[i]);
-                }
-            };
-            return [cmd];
-        }
     }
 
     Group {
