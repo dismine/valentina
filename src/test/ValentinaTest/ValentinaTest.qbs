@@ -7,6 +7,7 @@ VTestApp {
     Depends { name: "IFCLib" }
     Depends { name: "VDXFLib" }
     Depends { name: "VFormatLib" }
+    Depends { name: "ebr" }
 
     name: "ValentinaTest"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "ValentinaTest" : "valentinaTest"
@@ -63,4 +64,10 @@ VTestApp {
       "tst_vabstractpiece.h",
       "tst_vtooluniondetails.h", 
     ]
+
+    Group {
+        name: "Test data"
+        files: "share/test_data.qrc"
+        fileTags: "ebr.external_qrc"
+    }
 }
