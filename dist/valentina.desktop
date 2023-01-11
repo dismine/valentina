@@ -2,8 +2,9 @@
 Type=Application
 Name=Valentina
 Exec=valentina %F
-Version=1.0
+Version=1.1
 GenericName=Pattern making program
+GenericName[uk]=Програма створення викрійок
 Comment=Creating pattern of clothes
 Comment[uk]=Створеня викрійок одягу
 Icon=valentina
@@ -11,3 +12,5 @@ Terminal=false
 MimeType=application/x-valentina-pattern;
 Categories=Graphics;VectorGraphics;2DGraphics;Qt;Engineering;
 TryExec=valentina
+Keywords=pattern
+StartupWMClass=valentina

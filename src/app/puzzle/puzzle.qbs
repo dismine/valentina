@@ -3,7 +3,6 @@ import qbs.FileInfo
 VToolApp {
     Depends { name: "buildconfig" }
     Depends { name: "ib"; condition: qbs.targetOS.contains("macos") }
-    Depends { name: "freedesktop" }
     Depends { name: "Qt"; submodules: ["widgets", "svg"] }
     Depends { name: "VMiscLib" }
     Depends { name: "VLayoutLib" }

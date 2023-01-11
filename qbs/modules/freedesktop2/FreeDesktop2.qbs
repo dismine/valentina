@@ -73,7 +73,6 @@ Module {
             cmd.highlight = "codegen";
             cmd.sourceCode = function() {
                 var aggregateDesktopKeys = Fdo.parseDesktopFile(input.filePath);
-                console.info(JSON.stringify(aggregateDesktopKeys));
                 var desktopKeys = ModUtils.moduleProperty(product, "desktopKeys") || {}
                 var mainSection = aggregateDesktopKeys['Desktop Entry'];
                 for (key in desktopKeys) {

@@ -4,7 +4,6 @@ import qbs.File
 VToolApp {
     Depends { name: "buildconfig" }
     Depends { name: "ib"; condition: qbs.targetOS.contains("macos") }
-    Depends { name: "freedesktop" }
     Depends { name: "Qt"; submodules: ["widgets", "svg", "xmlpatterns", "concurrent"] }
     Depends { name: "VPatternDBLib"; }
     Depends { name: "VWidgetsLib"; }

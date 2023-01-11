@@ -40,8 +40,6 @@ function parseDesktopFile(filePath) {
         if (line.length == 0) continue;
         if (line[0] == '#') continue;
         var match = sectionRex.exec(line);
-        console.info(line)
-        console.info(match)
         if (match) {
             var currentSectionName = match[1];
             fileValues[currentSectionName] = {};

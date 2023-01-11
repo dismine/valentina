@@ -71,6 +71,10 @@ auto main(int argc, char *argv[]) -> int
     VPApplication app(argc, argv);
     app.InitOptions();
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+    app.setDesktopFileName("puzzle.desktop");
+#endif
+
     QTimer::singleShot(0, &app, &VPApplication::ProcessCMD);
 
 #if defined(APPIMAGE) && defined(Q_OS_LINUX)
