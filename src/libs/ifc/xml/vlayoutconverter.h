@@ -35,6 +35,7 @@ class QString;
 
 class VLayoutConverter : public VAbstractConverter
 {
+    Q_OBJECT // NOLINT
 public:
     explicit VLayoutConverter(const QString &fileName);
     ~VLayoutConverter() override =default;

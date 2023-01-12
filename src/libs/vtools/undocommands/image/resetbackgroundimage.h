@@ -39,6 +39,7 @@
 
 class ResetBackgroundImage : public VUndoCommand
 {
+    Q_OBJECT // NOLINT
 public:
     ResetBackgroundImage(QUuid id, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
     ~ResetBackgroundImage() override = default;

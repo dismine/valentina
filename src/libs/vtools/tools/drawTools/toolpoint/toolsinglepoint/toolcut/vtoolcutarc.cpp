@@ -291,11 +291,11 @@ QString VToolCutArc::MakeToolTip() const
             ->FormulaToUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     const qreal length = Visualization::FindValFromUser(expression, VAbstractTool::data.DataVariables());
 
-    const QString arcStr = tr("Arc");
-    const QString lengthStr = tr("length");
-    const QString startAngleStr = tr("start angle");
-    const QString endAngleStr = tr("end angle");
-    const QString radiusStr = tr("radius");
+    const QString arcStr = QCoreApplication::translate("VToolCutArc", "Arc");
+    const QString lengthStr = QCoreApplication::translate("VToolCutArc", "length");
+    const QString startAngleStr = QCoreApplication::translate("VToolCutArc", "start angle");
+    const QString endAngleStr = QCoreApplication::translate("VToolCutArc", "end angle");
+    const QString radiusStr = QCoreApplication::translate("VToolCutArc", "radius");
 
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(m_id);
 
@@ -326,7 +326,9 @@ QString VToolCutArc::MakeToolTip() const
                     .arg(arc.GetStartAngle())
                     .arg(arcStr + arcNumber + QChar(QChar::Space) + endAngleStr)
                     .arg(arc.GetEndAngle())
-                    .arg(arcStr + arcNumber + QChar(QChar::Space) + tr("label"), arc.ObjectName());
+                    .arg(arcStr + arcNumber +
+                                QChar(QChar::Space) + QCoreApplication::translate("VToolCutArc", "label"),
+                            arc.ObjectName());
         return toolTip;
     };
 

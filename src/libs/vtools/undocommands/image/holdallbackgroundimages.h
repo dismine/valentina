@@ -36,6 +36,7 @@
 
 class HoldAllBackgroundImages : public VUndoCommand
 {
+    Q_OBJECT // NOLINT
 public:
     HoldAllBackgroundImages(bool hold, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
     ~HoldAllBackgroundImages() override =default;

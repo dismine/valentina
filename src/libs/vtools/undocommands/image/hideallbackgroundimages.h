@@ -37,6 +37,7 @@
 
 class HideAllBackgroundImages : public VUndoCommand
 {
+    Q_OBJECT // NOLINT
 public:
     HideAllBackgroundImages(bool hide, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
     ~HideAllBackgroundImages() override =default;

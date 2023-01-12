@@ -2554,7 +2554,9 @@ auto VAbstractPattern::GetGroups(const QString &patternPieceName) -> QMap<quint3
                             VGroupData groupData;
                             const quint32 id = GetParametrUInt(group, AttrId, QChar('0'));
                             groupData.visible = GetParametrBool(group, AttrVisible, trueStr);
-                            groupData.name = GetParametrString(group, AttrName, tr("New group"));
+                            groupData.name =
+                                GetParametrString(group, AttrName,
+                                                  QCoreApplication::translate("VAbstractPattern", "New group"));
                             groupData.tags = FilterGroupTags(GetParametrEmptyString(group, AttrTags));
                             groupData.tool = GetParametrUInt(group, AttrTool, NULL_ID_STR);
 

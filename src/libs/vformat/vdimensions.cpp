@@ -211,7 +211,7 @@ auto VAbstartMeasurementDimension::IsRangeValid() -> bool
 
     if (not valid)
     {
-        m_error = tr("Invalid min/max range");
+        m_error = QCoreApplication::translate("VAbstartMeasurementDimension", "Invalid min/max range");
     }
 
     return valid;
@@ -223,7 +223,7 @@ auto VAbstartMeasurementDimension::IsStepValid() -> bool
     bool valid = ValidSteps().indexOf(m_step) != -1;
     if (not valid)
     {
-        m_error = tr("Invalid step");
+        m_error = QCoreApplication::translate("VAbstartMeasurementDimension", "Invalid step");
     }
 
     return valid;
@@ -235,7 +235,7 @@ auto VAbstartMeasurementDimension::IsBaseValid() -> bool
     bool valid = ValidBases().indexOf(m_baseValue) != -1;
     if (not valid)
     {
-        m_error = tr("Base value invalid");
+        m_error = QCoreApplication::translate("VAbstartMeasurementDimension", "Base value invalid");
     }
 
     return valid;
@@ -253,13 +253,13 @@ auto VAbstartMeasurementDimension::DimensionName(MeasurementDimension type) -> Q
     switch(type)
     {
         case MeasurementDimension::X:
-            return tr("Height", "dimension");
+            return QCoreApplication::translate("VAbstartMeasurementDimension", "Height", "dimension");
         case MeasurementDimension::Y:
-            return tr("Size", "dimension");
+            return QCoreApplication::translate("VAbstartMeasurementDimension", "Size", "dimension");
         case MeasurementDimension::W:
-            return tr("Waist", "dimension");
+            return QCoreApplication::translate("VAbstartMeasurementDimension", "Waist", "dimension");
         case MeasurementDimension::Z:
-            return tr("Hip", "dimension");
+            return QCoreApplication::translate("VAbstartMeasurementDimension", "Hip", "dimension");
         default:
             return {};
     }
@@ -278,19 +278,28 @@ auto VAbstartMeasurementDimension::DimensionToolTip(const MeasurementDimension_p
         case MeasurementDimension::Y:
             if (dimension->CustomName().isEmpty() && dimension->IsBodyMeasurement())
             {
-                return fc ? tr("Chest full circumference", "dimension") : tr("Chest half circumference", "dimension");
+                return fc ? QCoreApplication::translate("VAbstartMeasurementDimension", "Chest full circumference",
+                                                        "dimension")
+                          : QCoreApplication::translate("VAbstartMeasurementDimension", "Chest half circumference",
+                                                        "dimension");
             }
             return {};
         case MeasurementDimension::W:
             if (dimension->CustomName().isEmpty() && dimension->IsBodyMeasurement())
             {
-                return fc ? tr("Waist full circumference", "dimension") : tr("Waist half circumference", "dimension");
+                return fc ? QCoreApplication::translate("VAbstartMeasurementDimension", "Waist full circumference",
+                                                        "dimension")
+                          : QCoreApplication::translate("VAbstartMeasurementDimension", "Waist half circumference",
+                                                        "dimension");
             }
             return {};
         case MeasurementDimension::Z:
             if (dimension->CustomName().isEmpty() && dimension->IsBodyMeasurement())
             {
-                return fc ? tr("Hip full circumference", "dimension") : tr("Hip half circumference", "dimension");
+                return fc ? QCoreApplication::translate("VAbstartMeasurementDimension", "Hip full circumference",
+                                                        "dimension")
+                          : QCoreApplication::translate("VAbstartMeasurementDimension", "Hip half circumference",
+                                                        "dimension");
             }
             return {};
         case MeasurementDimension::X:

@@ -40,6 +40,7 @@
 
 class RotateBackgroundImage : public VUndoCommand
 {
+    Q_OBJECT // NOLINT
 public:
     RotateBackgroundImage(QUuid id, const QTransform &matrix, VAbstractPattern *doc, bool allowMerge = false,
                           QUndoCommand *parent = nullptr);

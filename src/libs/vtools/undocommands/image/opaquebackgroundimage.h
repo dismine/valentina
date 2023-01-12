@@ -36,6 +36,7 @@
 
 class OpaqueBackgroundImage : public VUndoCommand
 {
+    Q_OBJECT // NOLINT
 public:
     OpaqueBackgroundImage(QUuid id, qreal opacity, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
     ~OpaqueBackgroundImage() override =default;
