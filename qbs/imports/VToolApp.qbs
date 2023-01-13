@@ -25,7 +25,7 @@ VApp {
         name: "freedesktop"
         prefix: FileInfo.joinPaths(project.sourceDirectory, "dist", FileInfo.pathSeparator())
         files: [
-            product.targetName + ".desktop"
+            "ua.com.smart-pattern." + product.targetName + ".desktop"
         ]
     }
 

@@ -81,7 +81,7 @@ auto main(int argc, char *argv[]) -> int
     app.InitOptions();
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
-    app.setDesktopFileName("valentina.desktop");
+    VApplication::setDesktopFileName(QStringLiteral("ua.com.smart-pattern.valentina.desktop"));
 #endif
 
     if (VApplication::IsGUIMode() && VAbstractApplication::VApp()->Settings()->IsAutomaticallyCheckUpdates())

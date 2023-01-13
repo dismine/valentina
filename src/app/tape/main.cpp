@@ -69,7 +69,7 @@ auto main(int argc, char *argv[]) -> int
     app.InitOptions();
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
-    app.setDesktopFileName("tape.desktop");
+    MApplication::setDesktopFileName(QStringLiteral("ua.com.smart-pattern.tape.desktop"));
 #endif
 
     QTimer::singleShot(0, &app, &MApplication::ProcessCMD);

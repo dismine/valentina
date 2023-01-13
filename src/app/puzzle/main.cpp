@@ -72,7 +72,7 @@ auto main(int argc, char *argv[]) -> int
     app.InitOptions();
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
-    app.setDesktopFileName("puzzle.desktop");
+    VPApplication::setDesktopFileName(QStringLiteral("ua.com.smart-pattern.puzzle.desktop"));
 #endif
 
     QTimer::singleShot(0, &app, &VPApplication::ProcessCMD);

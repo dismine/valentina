@@ -216,9 +216,9 @@ fi
 %dir %{_datadir}/mime/
 %dir %{_datadir}/mime/packages/
 %{_datadir}/mime/packages/%{name}.xml
-%{_datadir}/applications/%{name}.desktop
-%{_datadir}/applications/tape.desktop
-%{_datadir}/applications/puzzle.desktop
+%{_datadir}/applications/ua.com.smart-pattern.valentina.desktop
+%{_datadir}/applications/ua.com.smart-pattern.tape.desktop
+%{_datadir}/applications/ua.com.smart-pattern.puzzle.desktop
 
 %{_datadir}/icons/hicolor
 

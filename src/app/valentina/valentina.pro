@@ -154,9 +154,9 @@ unix{
 
         # .desktop file
         desktop.path = $$DATADIR/applications/
-        desktop.files += ../../../dist/$${TARGET}.desktop \
-        desktop.files += ../../../dist/tape.desktop \
-        desktop.files += ../../../dist/puzzle.desktop
+        desktop.files += ../../../dist/ua.com.smart-pattern.$${TARGET}.desktop \
+        desktop.files += ../../../dist/ua.com.smart-pattern.tape.desktop \
+        desktop.files += ../../../dist/ua.com.smart-pattern.puzzle.desktop
 
         # logo
         hicolor_48_apps.path = $$DATADIR/icons/hicolor/48x48/apps/

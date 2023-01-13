@@ -66,6 +66,6 @@ script:
 # bundle icu's data
   - mkdir -p $BUILD_APPDIR/usr/share/icu
   - cp /usr/share/icu/*/icudt*.dat $BUILD_APPDIR/usr/share/icu/
-  - linuxdeployqt $BUILD_APPDIR/usr/share/applications/valentina.desktop -bundle-non-qt-libs -verbose=2 -no-strip
+  - linuxdeployqt $BUILD_APPDIR/usr/share/applications/ua.com.smart-pattern.valentina.desktop -bundle-non-qt-libs -verbose=2 -no-strip
 # Show what we have done
   - find $BUILD_APPDIR/
