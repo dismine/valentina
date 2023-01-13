@@ -11,6 +11,7 @@ VToolApp {
     Depends { name: "VFormatLib"; }
     Depends { name: "VWidgetsLib"; }
     Depends { name: "VToolsLib"; }
+    Depends { name: "ebr" }
 
     name: "Tape"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "Tape" : "tape"
@@ -186,5 +187,23 @@ VToolApp {
         fileTagsFilter: "qm"
         qbs.install: true
         qbs.installDir: buildconfig.installDataPath + FileInfo.pathSeparator() + "translations"
+    }
+
+    Group {
+        name: "Diagrams"
+        prefix: FileInfo.joinPaths(product.sourceDirectory, "share", "resources", FileInfo.pathSeparator())
+        files: "diagrams.qrc"
+        fileTags: "ebr.external_qrc"
+    }
+
+    Group {
+        fileTagsFilter: "ebr.rcc"
+        qbs.install: true
+        qbs.installDir: {
+            if (qbs.targetOS.contains("unix") && !qbs.targetOS.contains("macos"))
+                return FileInfo.joinPaths("share", "valentina", FileInfo.pathSeparator());
+            else
+                return buildconfig.installDataPath + FileInfo.pathSeparator();
+        }
     }
 }
