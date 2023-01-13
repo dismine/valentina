@@ -278,4 +278,10 @@ VToolApp {
         files: "application-x-valentina-pattern.png"
         fileTags: "freedesktop.512x512MimetypesIcons"
     }
+
+    Group {
+        fileTagsFilter: "qm"
+        qbs.install: true
+        qbs.installDir: buildconfig.installDataPath + FileInfo.pathSeparator() + "translations"
+    }
 }

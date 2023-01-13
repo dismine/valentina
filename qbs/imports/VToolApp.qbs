@@ -25,7 +25,8 @@ VApp {
         name: "freedesktop"
         prefix: FileInfo.joinPaths(project.sourceDirectory, "dist", FileInfo.pathSeparator())
         files: [
-            "ua.com.smart-pattern." + product.targetName + ".desktop"
+            "ua.com.smart-pattern." + product.targetName + ".desktop",
+            "ua.com.smart-pattern." + product.targetName + ".metainfo.xml"
         ]
     }
 
@@ -83,11 +84,5 @@ VApp {
 
             return files;
         }
-    }
-
-    Group {
-        fileTagsFilter: "qm"
-        qbs.install: true
-        qbs.installDir: buildconfig.installDataPath + FileInfo.pathSeparator() + "translations"
     }
 }

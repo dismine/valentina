@@ -180,4 +180,11 @@ VToolApp {
         files: ["application-x-valentina-i-measurements.png", "application-x-valentina-s-measurements.png"]
         fileTags: "freedesktop.512x512MimetypesIcons"
     }
+
+    Group {
+        condition: qbs.targetOS.contains("macos")
+        fileTagsFilter: "qm"
+        qbs.install: true
+        qbs.installDir: buildconfig.installDataPath + FileInfo.pathSeparator() + "translations"
+    }
 }
