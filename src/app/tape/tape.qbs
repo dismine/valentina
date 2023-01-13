@@ -206,4 +206,10 @@ VToolApp {
                 return buildconfig.installDataPath + FileInfo.pathSeparator();
         }
     }
+
+    Group {
+        name: "Tape RC"
+        prefix: FileInfo.joinPaths(product.sourceDirectory, "share", "resources", FileInfo.pathSeparator())
+        files: "tape.rc"
+    }
 }

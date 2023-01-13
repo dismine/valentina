@@ -262,4 +262,10 @@ VToolApp {
         qbs.install: true
         qbs.installDir: buildconfig.installDataPath + FileInfo.pathSeparator() + "translations"
     }
+
+    Group {
+        name: "Puzzle RC"
+        prefix: FileInfo.joinPaths(product.sourceDirectory, "share", "resources", FileInfo.pathSeparator())
+        files: "puzzle.rc"
+    }
 }

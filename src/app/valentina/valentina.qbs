@@ -292,4 +292,10 @@ VToolApp {
         qbs.install: true
         qbs.installDir: buildconfig.installDataPath + FileInfo.pathSeparator() + "translations"
     }
+
+    Group {
+        name: "Valentina RC"
+        prefix: FileInfo.joinPaths(product.sourceDirectory, "share", "resources", FileInfo.pathSeparator())
+        files: "valentina.rc"
+    }
 }
