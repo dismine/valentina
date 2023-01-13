@@ -23,6 +23,9 @@ BuildRequires: qt5-qtxmlpatterns-devel  >= 5.4.0
 BuildRequires: qt5-qtsvg-devel >= 5.4.0
 BuildRequires: qt5-qttools-devel >= 5.4.0
 
+BuildRequires: desktop-file-utils
+BuildRequires: libappstream-glib
+
 Requires:      qt5-qtsvg >= 5.4.0
 Requires:      qt5-qtbase-gui >= 5.4.0
 Requires:      qt5-qtxmlpatterns >= 5.4.0
@@ -172,6 +175,12 @@ cp dist/debian/valentina.mime dist/debian/%{name} &&
 %suse_update_desktop_file -r puzzle Utility Applet
 %endif
 
+%check
+appstream-util validate-relax --nonet "%{buildroot}%{_datadir}/metainfo/ua.com.smart-pattern.valentina.metainfo.xml"
+desktop-file-validate %{buildroot}%{_datadir}/applications/ua.com.smart-pattern.valentina.desktop
+desktop-file-validate %{buildroot}%{_datadir}/applications/ua.com.smart-pattern.tape.desktop
+desktop-file-validate %{buildroot}%{_datadir}/applications/ua.com.smart-pattern.puzzle.desktop
+
 %post 
 /sbin/ldconfig
 update-desktop-database &> /dev/null ||:
@@ -219,6 +228,7 @@ fi
 %{_datadir}/applications/ua.com.smart-pattern.valentina.desktop
 %{_datadir}/applications/ua.com.smart-pattern.tape.desktop
 %{_datadir}/applications/ua.com.smart-pattern.puzzle.desktop
+%{_datadir}/metainfo/ua.com.smart-pattern.valentina.metainfo.xml
 
 %{_datadir}/icons/hicolor
 

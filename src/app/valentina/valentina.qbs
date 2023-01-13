@@ -210,6 +210,14 @@ VToolApp {
     }
 
     Group {
+        name: "freedesktop"
+        prefix: FileInfo.joinPaths(project.sourceDirectory, "dist", FileInfo.pathSeparator())
+        files: [
+            "ua.com.smart-pattern." + product.targetName + ".metainfo.xml"
+        ]
+    }
+
+    Group {
         name: "48x48/apps"
         prefix: FileInfo.joinPaths(project.sourceDirectory, "share", "icons", "48x48", "apps", FileInfo.pathSeparator())
         files: "valentina.png"

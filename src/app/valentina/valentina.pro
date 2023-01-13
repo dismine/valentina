@@ -158,6 +158,10 @@ unix{
         desktop.files += ../../../dist/ua.com.smart-pattern.tape.desktop \
         desktop.files += ../../../dist/ua.com.smart-pattern.puzzle.desktop
 
+        # .metainfo.xml file
+        metainfo.path = $$DATADIR/metainfo/
+        metainfo.files += ../../../dist/ua.com.smart-pattern.$${TARGET}.metainfo.xml
+
         # logo
         hicolor_48_apps.path = $$DATADIR/icons/hicolor/48x48/apps/
         hicolor_48_apps.files += \
@@ -245,6 +249,7 @@ unix{
             tape \
             puzzle \
             desktop \
+            metainfo \
             hicolor_48_apps \
             hicolor_48_mimetypes \
             hicolor_64_apps \
