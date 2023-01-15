@@ -271,7 +271,7 @@ qreal VPieceNode::GetSAAfter(const VContainer *data, Unit unit) const
         catch (const VExceptionBadId &)
         {}
 
-        const QString errorMsg = QObject::tr("Cannot calculate seam allowance after for point '%1'. Reason: ")
+        const QString errorMsg = QObject::tr("Cannot calculate seam allowance after for point '%1'. Reason: %2.")
                 .arg(nodeName, formula.Reason());
         VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
                                               qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
