@@ -79,8 +79,8 @@ public:
     auto operator=(const VTextManager &text) -> VTextManager & = default;
 
 #ifdef Q_COMPILER_RVALUE_REFS
-    VTextManager(VTextManager &&text) Q_DECL_NOTHROW = default;
-    auto operator=(VTextManager &&text) Q_DECL_NOTHROW -> VTextManager & = default;
+    VTextManager(VTextManager &&text) = default;
+    auto operator=(VTextManager &&text) -> VTextManager & = default;
 #endif
 
     virtual auto GetSpacing() const -> int;
