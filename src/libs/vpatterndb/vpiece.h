@@ -121,13 +121,13 @@ public:
     QVector<quint32> MissingPins(const VPiece &det) const;
     QVector<quint32> MissingPlaceLabels(const VPiece &det) const;
 
-    void                   SetPatternPieceData(const VPieceLabelData &data);
-    VPieceLabelData&       GetPatternPieceData();
-    const VPieceLabelData& GetPatternPieceData() const;
+    void                   SetPieceLabelData(const VPieceLabelData &data);
+    VPieceLabelData&       GetPieceLabelData();
+    const VPieceLabelData& GetPieceLabelData() const;
 
-    void                     SetPatternInfo(const VPatternLabelData &info);
-    VPatternLabelData&       GetPatternInfo();
-    const VPatternLabelData& GetPatternInfo() const;
+    void                     SetPatternLabelData(const VPatternLabelData &info);
+    VPatternLabelData&       GetPatternLabelData();
+    const VPatternLabelData& GetPatternLabelData() const;
 
     void                    SetGrainlineGeometry(const VGrainlineData &data);
     VGrainlineData&         GetGrainlineGeometry();
