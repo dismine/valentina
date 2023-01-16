@@ -433,32 +433,7 @@ auto PrepareLines(const QVector<VLabelTemplateLine> &lines) -> QVector<TextLine>
 
     return textLines;
 }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VTextManager::VTextManager constructor
- */
-VTextManager::VTextManager()
-     : m_font(), m_liLines()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VTextManager::VTextManager(const VTextManager &text)
-    : m_font(text.GetFont()), m_liLines(text.GetAllSourceLines())
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VTextManager &VTextManager::operator=(const VTextManager &text)
-{
-    if ( &text == this )
-    {
-        return *this;
-    }
-    m_font = text.GetFont();
-    m_liLines = text.GetAllSourceLines();
-    return *this;
-}
+}  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
