@@ -102,7 +102,6 @@ private:
     QFont             m_font;
     QVector<TextLine> m_liLines;
 
-    static QVector<TextLine> m_patternLabelLines;
     static const quint32 streamHeader;
     static const quint16 classVersion;
 };

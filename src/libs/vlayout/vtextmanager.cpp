@@ -35,6 +35,7 @@
 #include <QDebug>
 #include <QFlags> // QFlags<Qt::Alignment>
 #include <QtMath>
+#include <QGlobalStatic>
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
@@ -108,9 +109,13 @@ auto operator>>(QDataStream &dataStream, TextLine &data) -> QDataStream&
     return dataStream;
 }
 
-QVector<TextLine> VTextManager::m_patternLabelLines = QVector<TextLine>();
 const quint32 VTextManager::streamHeader = 0x47E6A9EE; // CRC-32Q string "VTextManager"
 const quint16 VTextManager::classVersion = 1;
+
+namespace
+{
+Q_GLOBAL_STATIC(QVector<TextLine>, m_patternLabelLines) // NOLINT
+}
 
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------
@@ -650,10 +655,10 @@ void VTextManager::Update(VAbstractPattern *pDoc, const VContainer *pattern)
 {
     m_liLines.clear();
 
-    if (m_patternLabelLines.isEmpty() || pDoc->GetPatternWasChanged())
+    if (m_patternLabelLines->isEmpty() || pDoc->GetPatternWasChanged())
     {
         QVector<VLabelTemplateLine> lines = pDoc->GetPatternLabelTemplate();
-        if (lines.isEmpty() && m_patternLabelLines.isEmpty())
+        if (lines.isEmpty() && m_patternLabelLines->isEmpty())
         {
             return; // Nothing to parse
         }
@@ -666,8 +671,8 @@ void VTextManager::Update(VAbstractPattern *pDoc, const VContainer *pattern)
         }
 
         pDoc->SetPatternWasChanged(false);
-        m_patternLabelLines = PrepareLines(lines);
+        *m_patternLabelLines = PrepareLines(lines);
     }
 
-    m_liLines = m_patternLabelLines;
+    m_liLines = *m_patternLabelLines;
 }
