@@ -106,6 +106,7 @@ const QString VAbstractPattern::TagNodes            = QStringLiteral("nodes");
 const QString VAbstractPattern::TagNode             = QStringLiteral("node");
 const QString VAbstractPattern::TagBackgroundImages = QStringLiteral("backgroudImages");
 const QString VAbstractPattern::TagBackgroundImage  = QStringLiteral("backgroudImage");
+const QString VAbstractPattern::TagPieceLabel       = QStringLiteral("pieceLabel");
 
 const QString VAbstractPattern::AttrName              = QStringLiteral("name");
 const QString VAbstractPattern::AttrVisible           = QStringLiteral("visible");
@@ -1274,6 +1275,21 @@ void VAbstractPattern::SetFinalMeasurements(const QVector<VFinalMeasurement> &me
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VAbstractPattern::GetDefaultPieceLabelPath() const
+{
+    return UniqueTagText(TagPieceLabel);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetDefaultPieceLabelPath(const QString &path)
+{
+    CheckTagExists(TagPieceLabel);
+    setTagText(TagPieceLabel, path);
+    modified = true;
+    emit patternChanged(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::SetPatternWasChanged(bool changed)
 {
     patternLabelWasChanged = changed;
@@ -1577,10 +1593,11 @@ auto VAbstractPattern::CheckTagExists(const QString &tag) -> QDomElement
             TagCustomerBirthDate, // 8
             TagCustomerEmail, // 9
             TagPatternLabel, // 10
-            TagWatermark, // 11
-            TagPatternMaterials, // 12
-            TagFinalMeasurements, // 13
-            TagBackgroundImages // 14
+            TagPieceLabel, // 11
+            TagWatermark, // 12
+            TagPatternMaterials, // 13
+            TagFinalMeasurements, // 14
+            TagBackgroundImages // 15
         };
 
         switch (tags.indexOf(tag))
@@ -1615,16 +1632,19 @@ auto VAbstractPattern::CheckTagExists(const QString &tag) -> QDomElement
             case 10: // TagPatternLabel
                 element = createElement(TagPatternLabel);
                 break;
-            case 11: // TagWatermark
+            case 11: // TagPieceLabel
+                element = createElement(TagPieceLabel);
+                break;
+            case 12: // TagWatermark
                 element = createElement(TagWatermark);
                 break;
-            case 12: // TagPatternMaterials
+            case 13: // TagPatternMaterials
                 element = createElement(TagPatternMaterials);
                 break;
-            case 13: // TagFinalMeasurements
+            case 14: // TagFinalMeasurements
                 element = createElement(TagFinalMeasurements);
                 break;
-            case 14: // TagBackgroundImages
+            case 15: // TagBackgroundImages
                 element = createElement(TagBackgroundImages);
                 break;
             case 0: //TagUnit (Mandatory tag)

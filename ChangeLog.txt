@@ -12,6 +12,7 @@
 - New option Interactive tools.
 - Improve error messages while import CSV data.
 - [smart-pattern/valentina#189] Fix regression in dialog Known measurements.
+- New option. Default piece label template for new pieces.
 
 # Valentina 0.7.52 September 12, 2022
 - Fix crash when default locale is ru.

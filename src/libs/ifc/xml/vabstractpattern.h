@@ -44,7 +44,6 @@
 #include "../vmisc/def.h"
 #include "vdomdocument.h"
 #include "vtoolrecord.h"
-#include "../vlayout/vtextmanager.h"
 
 class QDomElement;
 class VPiecePath;
@@ -197,6 +196,9 @@ public:
     QVector<VFinalMeasurement> GetFinalMeasurements() const;
     void                       SetFinalMeasurements(const QVector<VFinalMeasurement> &measurements);
 
+    QString GetDefaultPieceLabelPath() const;
+    void    SetDefaultPieceLabelPath(const QString &path);
+
     void SetPatternWasChanged(bool changed);
     bool GetPatternWasChanged() const;
 
@@ -301,6 +303,7 @@ public:
     static const QString TagNode;
     static const QString TagBackgroundImages;
     static const QString TagBackgroundImage;
+    static const QString TagPieceLabel;
 
     static const QString AttrName;
     static const QString AttrVisible;

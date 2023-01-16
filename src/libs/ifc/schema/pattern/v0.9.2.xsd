@@ -33,6 +33,7 @@
             <xs:attribute name="timeFormat" type="xs:string"/>
           </xs:complexType>
         </xs:element>
+        <xs:element name="pieceLabel" type="xs:string" minOccurs="0" maxOccurs="1"/>
         <xs:element name="watermark" type="xs:string" minOccurs="0" maxOccurs="1"/>
         <xs:element name="patternMaterials" minOccurs="0" maxOccurs="1">
           <xs:complexType>
@@ -81,7 +82,7 @@
               </xs:element>
             </xs:sequence>
           </xs:complexType>
-        </xs:element> 
+        </xs:element>
         <xs:element name="measurements">
           <xs:complexType>
             <xs:attribute name="path" type="xs:string"/>
