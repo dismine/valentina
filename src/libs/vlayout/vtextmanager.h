@@ -72,11 +72,16 @@ class VTextManager
 {
     Q_DECLARE_TR_FUNCTIONS(VTextManager) // NOLINT
 public:
-    VTextManager();
+    VTextManager() = default;
     virtual ~VTextManager() = default;
 
-    VTextManager(const VTextManager &text);
-    VTextManager &operator=(const VTextManager &text);
+    VTextManager(const VTextManager &text) = default;
+    auto operator=(const VTextManager &text) -> VTextManager & = default;
+
+#ifdef Q_COMPILER_RVALUE_REFS
+    VTextManager(VTextManager &&text) Q_DECL_NOTHROW = default;
+    auto operator=(VTextManager &&text) Q_DECL_NOTHROW -> VTextManager & = default;
+#endif
 
     virtual auto GetSpacing() const -> int;
 
@@ -99,8 +104,8 @@ public:
     friend auto operator>>(QDataStream& dataStream, VTextManager& data) -> QDataStream&;
 
 private:
-    QFont             m_font;
-    QVector<TextLine> m_liLines;
+    QFont             m_font{};
+    QVector<TextLine> m_liLines{};
 
     static const quint32 streamHeader;
     static const quint16 classVersion;
