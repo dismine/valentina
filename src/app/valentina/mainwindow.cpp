@@ -5633,7 +5633,7 @@ void MainWindow::CreateActions()
     connect(ui->actionLast_tool, &QAction::triggered, this, &MainWindow::LastUsedTool);
 
     ui->actionInteractiveTools->setChecked(VAbstractValApplication::VApp()->ValentinaSettings()->IsInteractiveTools());
-    connect(ui->actionInteractiveTools, &QAction::triggered, this, [this](bool checked)
+    connect(ui->actionInteractiveTools, &QAction::triggered, this, [](bool checked)
     {
         VAbstractValApplication::VApp()->ValentinaSettings()->SetInteractiveTools(checked);
     });
