@@ -1776,6 +1776,7 @@
     <addaction name="actionHideLabels"/>
     <addaction name="separator"/>
     <addaction name="actionLast_tool"/>
+    <addaction name="actionInteractiveTools"/>
     <addaction name="actionShowCurveDetails"/>
     <addaction name="actionShowMainPath"/>
     <addaction name="actionShowAccuracyRadius"/>
@@ -3192,6 +3193,20 @@
    </property>
    <property name="text">
     <string>Show accuracy radius</string>
+   </property>
+  </action>
+  <action name="actionInteractiveTools">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Interactive tools</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+D</string>
    </property>
   </action>
  </widget>
