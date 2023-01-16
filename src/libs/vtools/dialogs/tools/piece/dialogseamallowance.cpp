@@ -366,7 +366,7 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
                 ->FormulaToUser(piece.GetFormulaSAWidth(), VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
     m_saWidth = piece.GetSAWidth();
 
-    const VPieceLabelData &ppData = piece.GetPatternPieceData();
+    const VPieceLabelData &ppData = piece.GetPieceLabelData();
     uiTabLabels->lineEditLetter->setText(ppData.GetLetter());
     uiTabLabels->lineEditAnnotation->setText(ppData.GetAnnotation());
     uiTabLabels->lineEditOrientation->setText(ppData.GetOrientation());
@@ -389,7 +389,7 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     SetDLHeight(ppData.GetLabelHeight());
     SetDLAngle(ppData.GetRotation());
 
-    const VPatternLabelData &patternInfo = piece.GetPatternInfo();
+    const VPatternLabelData &patternInfo = piece.GetPatternLabelData();
     uiTabLabels->groupBoxPatternLabel->setEnabled(not m_doc->GetPatternLabelTemplate().isEmpty());
     uiTabLabels->groupBoxPatternLabel->setChecked(patternInfo.IsVisible());
     ChangeCurrentData(uiTabLabels->comboBoxPLCenterPin, patternInfo.CenterPin());
@@ -2605,53 +2605,53 @@ VPiece DialogSeamAllowance::CreatePiece() const
     piece.SetGradationLabel(uiTabPaths->lineEditGradationLabel->text());
     piece.SetPriority(static_cast<uint>(uiTabPaths->spinBoxPriority->value()));
     piece.SetFormulaSAWidth(GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidth), m_saWidth);
-    piece.GetPatternPieceData().SetLetter(uiTabLabels->lineEditLetter->text());
-    piece.GetPatternPieceData().SetAnnotation(uiTabLabels->lineEditAnnotation->text());
-    piece.GetPatternPieceData().SetOrientation(uiTabLabels->lineEditOrientation->text());
-    piece.GetPatternPieceData().SetRotationWay(uiTabLabels->lineEditRotation->text());
-    piece.GetPatternPieceData().SetTilt(uiTabLabels->lineEditTilt->text());
-    piece.GetPatternPieceData().SetFoldPosition(uiTabLabels->lineEditFoldPosition->text());
-    piece.GetPatternPieceData().SetQuantity(static_cast<quint16>(uiTabLabels->spinBoxQuantity->value()));
-    piece.GetPatternPieceData().SetOnFold(uiTabLabels->checkBoxFold->isChecked());
-    piece.GetPatternPieceData().SetLabelTemplate(m_templateLines);
-    piece.GetPatternPieceData().SetRotation(GetFormulaFromUser(uiTabLabels->lineEditDLAngleFormula));
-    piece.GetPatternPieceData().SetVisible(uiTabLabels->groupBoxDetailLabel->isChecked());
+    piece.GetPieceLabelData().SetLetter(uiTabLabels->lineEditLetter->text());
+    piece.GetPieceLabelData().SetAnnotation(uiTabLabels->lineEditAnnotation->text());
+    piece.GetPieceLabelData().SetOrientation(uiTabLabels->lineEditOrientation->text());
+    piece.GetPieceLabelData().SetRotationWay(uiTabLabels->lineEditRotation->text());
+    piece.GetPieceLabelData().SetTilt(uiTabLabels->lineEditTilt->text());
+    piece.GetPieceLabelData().SetFoldPosition(uiTabLabels->lineEditFoldPosition->text());
+    piece.GetPieceLabelData().SetQuantity(static_cast<quint16>(uiTabLabels->spinBoxQuantity->value()));
+    piece.GetPieceLabelData().SetOnFold(uiTabLabels->checkBoxFold->isChecked());
+    piece.GetPieceLabelData().SetLabelTemplate(m_templateLines);
+    piece.GetPieceLabelData().SetRotation(GetFormulaFromUser(uiTabLabels->lineEditDLAngleFormula));
+    piece.GetPieceLabelData().SetVisible(uiTabLabels->groupBoxDetailLabel->isChecked());
 
     if (not flagDPin)
     {
-        piece.GetPatternPieceData().SetLabelWidth(GetFormulaFromUser(uiTabLabels->lineEditDLWidthFormula));
-        piece.GetPatternPieceData().SetLabelHeight(GetFormulaFromUser(uiTabLabels->lineEditDLHeightFormula));
-        piece.GetPatternPieceData().SetCenterPin(getCurrentObjectId(uiTabLabels->comboBoxDLCenterPin));
-        piece.GetPatternPieceData().SetTopLeftPin(NULL_ID);
-        piece.GetPatternPieceData().SetBottomRightPin(NULL_ID);
+        piece.GetPieceLabelData().SetLabelWidth(GetFormulaFromUser(uiTabLabels->lineEditDLWidthFormula));
+        piece.GetPieceLabelData().SetLabelHeight(GetFormulaFromUser(uiTabLabels->lineEditDLHeightFormula));
+        piece.GetPieceLabelData().SetCenterPin(getCurrentObjectId(uiTabLabels->comboBoxDLCenterPin));
+        piece.GetPieceLabelData().SetTopLeftPin(NULL_ID);
+        piece.GetPieceLabelData().SetBottomRightPin(NULL_ID);
     }
     else
     {
-        piece.GetPatternPieceData().SetLabelWidth(m_defLabelValue);
-        piece.GetPatternPieceData().SetLabelHeight(m_defLabelValue);
-        piece.GetPatternPieceData().SetCenterPin(NULL_ID);
-        piece.GetPatternPieceData().SetTopLeftPin(getCurrentObjectId(uiTabLabels->comboBoxDLTopLeftPin));
-        piece.GetPatternPieceData().SetBottomRightPin(getCurrentObjectId(uiTabLabels->comboBoxDLBottomRightPin));
+        piece.GetPieceLabelData().SetLabelWidth(m_defLabelValue);
+        piece.GetPieceLabelData().SetLabelHeight(m_defLabelValue);
+        piece.GetPieceLabelData().SetCenterPin(NULL_ID);
+        piece.GetPieceLabelData().SetTopLeftPin(getCurrentObjectId(uiTabLabels->comboBoxDLTopLeftPin));
+        piece.GetPieceLabelData().SetBottomRightPin(getCurrentObjectId(uiTabLabels->comboBoxDLBottomRightPin));
     }
 
-    piece.GetPatternInfo().SetVisible(uiTabLabels->groupBoxPatternLabel->isChecked());
-    piece.GetPatternInfo().SetRotation(GetFormulaFromUser(uiTabLabels->lineEditPLAngleFormula));
+    piece.GetPatternLabelData().SetVisible(uiTabLabels->groupBoxPatternLabel->isChecked());
+    piece.GetPatternLabelData().SetRotation(GetFormulaFromUser(uiTabLabels->lineEditPLAngleFormula));
 
     if (not flagPPin)
     {
-        piece.GetPatternInfo().SetCenterPin(getCurrentObjectId(uiTabLabels->comboBoxPLCenterPin));
-        piece.GetPatternInfo().SetTopLeftPin(NULL_ID);
-        piece.GetPatternInfo().SetBottomRightPin(NULL_ID);
-        piece.GetPatternInfo().SetLabelWidth(GetFormulaFromUser(uiTabLabels->lineEditPLWidthFormula));
-        piece.GetPatternInfo().SetLabelHeight(GetFormulaFromUser(uiTabLabels->lineEditPLHeightFormula));
+        piece.GetPatternLabelData().SetCenterPin(getCurrentObjectId(uiTabLabels->comboBoxPLCenterPin));
+        piece.GetPatternLabelData().SetTopLeftPin(NULL_ID);
+        piece.GetPatternLabelData().SetBottomRightPin(NULL_ID);
+        piece.GetPatternLabelData().SetLabelWidth(GetFormulaFromUser(uiTabLabels->lineEditPLWidthFormula));
+        piece.GetPatternLabelData().SetLabelHeight(GetFormulaFromUser(uiTabLabels->lineEditPLHeightFormula));
     }
     else
     {
-        piece.GetPatternInfo().SetCenterPin(NULL_ID);
-        piece.GetPatternInfo().SetTopLeftPin(getCurrentObjectId(uiTabLabels->comboBoxPLTopLeftPin));
-        piece.GetPatternInfo().SetBottomRightPin(getCurrentObjectId(uiTabLabels->comboBoxPLBottomRightPin));
-        piece.GetPatternInfo().SetLabelWidth(m_defLabelValue);
-        piece.GetPatternInfo().SetLabelHeight(m_defLabelValue);
+        piece.GetPatternLabelData().SetCenterPin(NULL_ID);
+        piece.GetPatternLabelData().SetTopLeftPin(getCurrentObjectId(uiTabLabels->comboBoxPLTopLeftPin));
+        piece.GetPatternLabelData().SetBottomRightPin(getCurrentObjectId(uiTabLabels->comboBoxPLBottomRightPin));
+        piece.GetPatternLabelData().SetLabelWidth(m_defLabelValue);
+        piece.GetPatternLabelData().SetLabelHeight(m_defLabelValue);
     }
 
     piece.GetGrainlineGeometry().SetVisible(uiTabGrainline->groupBoxGrainline->isChecked());

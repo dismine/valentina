@@ -1036,11 +1036,11 @@ void VPattern::ParseDetailInternals(const QDomElement &domElement, VPiece &detai
                     break;
                 case 1:// TagData
                     futurePPData = QtConcurrent::run(this, &VPattern::ParsePieceDataTag, element,
-                                                     detail.GetPatternPieceData());
+                                                     detail.GetPieceLabelData());
                     break;
                 case 2:// TagPatternInfo
                     futurePatternInfo = QtConcurrent::run(this, &VPattern::ParsePiecePatternInfo, element,
-                                                          detail.GetPatternInfo());
+                                                          detail.GetPatternLabelData());
                     break;
                 case 3:// TagGrainline
                     futureGGeometry = QtConcurrent::run(this, &VPattern::ParsePieceGrainline, element,
@@ -1075,12 +1075,12 @@ void VPattern::ParseDetailInternals(const QDomElement &domElement, VPiece &detai
 
     if (not futurePPData.isCanceled())
     {
-        detail.SetPatternPieceData(futurePPData.result());
+        detail.SetPieceLabelData(futurePPData.result());
     }
 
     if (not futurePatternInfo.isCanceled())
     {
-        detail.SetPatternInfo(futurePatternInfo.result());
+        detail.SetPatternLabelData(futurePatternInfo.result());
     }
 
     if (not futureGGeometry.isCanceled())

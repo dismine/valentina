@@ -669,14 +669,14 @@ auto VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContainer *pat
         throw VException (tr("Piece %1 doesn't have shape.").arg(piece.GetName()));
     }
 
-    const VPieceLabelData& data = piece.GetPatternPieceData();
+    const VPieceLabelData& data = piece.GetPieceLabelData();
     det.SetQuantity(data.GetQuantity());
     if (data.IsVisible())
     {
         det.SetPieceText(piece.GetName(), data, VAbstractApplication::VApp()->Settings()->GetLabelFont(), pattern);
     }
 
-    const VPatternLabelData& geom = piece.GetPatternInfo();
+    const VPatternLabelData& geom = piece.GetPatternLabelData();
     if (geom.IsVisible())
     {
         VAbstractPattern* pDoc = VAbstractValApplication::VApp()->getCurrentDocument();

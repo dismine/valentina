@@ -279,8 +279,8 @@ auto VToolSeamAllowance::Duplicate(VToolSeamAllowanceInitData &initData) -> VToo
 
     const QMap<quint32, quint32> mappedPins = DuplicatePins(initData.detail.GetPins(), initData);
     dupDetail.SetPins(ConvertToVector(mappedPins.values()));
-    dupDetail.SetPatternPieceData(FixLabelPins(initData.detail.GetPatternPieceData(), mappedPins));
-    dupDetail.SetPatternInfo(FixLabelPins(initData.detail.GetPatternInfo(), mappedPins));
+    dupDetail.SetPieceLabelData(FixLabelPins(initData.detail.GetPieceLabelData(), mappedPins));
+    dupDetail.SetPatternLabelData(FixLabelPins(initData.detail.GetPatternLabelData(), mappedPins));
     dupDetail.SetGrainlineGeometry(FixGrainlinePins(initData.detail.GetGrainlineGeometry(), mappedPins));
 
     initData.detail = dupDetail;
@@ -439,7 +439,7 @@ void VToolSeamAllowance::AddPlaceLabels(VAbstractPattern *doc, QDomElement &domE
 void VToolSeamAllowance::AddPatternPieceData(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece)
 {
     QDomElement domData = doc->createElement(VAbstractPattern::TagData);
-    const VPieceLabelData& data = piece.GetPatternPieceData();
+    const VPieceLabelData& data = piece.GetPieceLabelData();
     doc->SetAttribute(domData, VAbstractPattern::AttrLetter, data.GetLetter());
     doc->SetAttribute(domData, VAbstractPattern::AttrAnnotation, data.GetAnnotation());
     doc->SetAttribute(domData, VAbstractPattern::AttrOrientation, data.GetOrientation());
@@ -470,7 +470,7 @@ void VToolSeamAllowance::AddPatternPieceData(VAbstractPattern *doc, QDomElement 
 void VToolSeamAllowance::AddPatternInfo(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece)
 {
     QDomElement domData = doc->createElement(VAbstractPattern::TagPatternInfo);
-    const VPatternLabelData& geom = piece.GetPatternInfo();
+    const VPatternLabelData& geom = piece.GetPatternLabelData();
     doc->SetAttribute(domData, VAbstractPattern::AttrVisible, geom.IsVisible());
     doc->SetAttribute(domData, AttrMx, geom.GetPos().x());
     doc->SetAttribute(domData, AttrMy, geom.GetPos().y());
@@ -652,14 +652,14 @@ void VToolSeamAllowance::ResetChildren(QGraphicsItem *pItem)
     VTextGraphicsItem* pVGI = qgraphicsitem_cast<VTextGraphicsItem*>(pItem);
     if (pVGI != m_dataLabel)
     {
-        if (detail.GetPatternPieceData().IsVisible())
+        if (detail.GetPieceLabelData().IsVisible())
         {
             m_dataLabel->Reset();
         }
     }
     if (pVGI != m_patternInfo)
     {
-        if (detail.GetPatternInfo().IsVisible())
+        if (detail.GetPatternLabelData().IsVisible())
         {
             m_patternInfo->Reset();
         }
@@ -704,7 +704,7 @@ void VToolSeamAllowance::Highlight(quint32 id)
 void VToolSeamAllowance::UpdateDetailLabel()
 {
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
-    const VPieceLabelData& labelData = detail.GetPatternPieceData();
+    const VPieceLabelData& labelData = detail.GetPieceLabelData();
     const QVector<quint32> &pins = detail.GetPins();
 
     if (labelData.IsVisible() == true)
@@ -731,7 +731,7 @@ void VToolSeamAllowance::UpdateDetailLabel()
 void VToolSeamAllowance::UpdatePatternInfo()
 {
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
-    const VPatternLabelData& geom = detail.GetPatternInfo();
+    const VPatternLabelData& geom = detail.GetPatternLabelData();
     const QVector<quint32> &pins = detail.GetPins();
 
     if (geom.IsVisible() == true)
@@ -808,7 +808,7 @@ void VToolSeamAllowance::SaveMoveDetail(const QPointF& ptPos)
 {
     VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
     VPiece newDet = oldDet;
-    newDet.GetPatternPieceData().SetPos(ptPos);
+    newDet.GetPieceLabelData().SetPos(ptPos);
 
     SavePieceOptions* moveCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
     moveCommand->setText(tr("move pattern piece label"));
@@ -825,10 +825,10 @@ void VToolSeamAllowance::SaveResizeDetail(qreal dLabelW, int iFontSize)
     VPiece newDet = oldDet;
 
     dLabelW = FromPixel(dLabelW, *VDataTool::data.GetPatternUnit());
-    newDet.GetPatternPieceData().SetLabelWidth(QString().setNum(dLabelW));
+    newDet.GetPieceLabelData().SetLabelWidth(QString().setNum(dLabelW));
     const qreal height = FromPixel(m_dataLabel->boundingRect().height(), *VDataTool::data.GetPatternUnit());
-    newDet.GetPatternPieceData().SetLabelHeight(QString().setNum(height));
-    newDet.GetPatternPieceData().SetFontSize(iFontSize);
+    newDet.GetPieceLabelData().SetLabelHeight(QString().setNum(height));
+    newDet.GetPieceLabelData().SetFontSize(iFontSize);
 
     SavePieceOptions* resizeCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
     resizeCommand->setText(tr("resize pattern piece label"));
@@ -843,13 +843,13 @@ void VToolSeamAllowance::SaveRotationDetail(qreal dRot)
 {
     VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
     VPiece newDet = oldDet;
-    newDet.GetPatternPieceData().SetPos(m_dataLabel->pos());
-    newDet.GetPatternPieceData().SetFontSize(m_dataLabel->GetFontSize());
+    newDet.GetPieceLabelData().SetPos(m_dataLabel->pos());
+    newDet.GetPieceLabelData().SetFontSize(m_dataLabel->GetFontSize());
 
     // Tranform angle to anticlockwise
     QLineF line(0, 0, 100, 0);
     line.setAngle(-dRot);
-    newDet.GetPatternPieceData().SetRotation(QString().setNum(line.angle()));
+    newDet.GetPieceLabelData().SetRotation(QString().setNum(line.angle()));
 
     SavePieceOptions* rotateCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
     rotateCommand->setText(tr("rotate pattern piece label"));
@@ -865,7 +865,7 @@ void VToolSeamAllowance::SaveMovePattern(const QPointF &ptPos)
 {
     VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
     VPiece newDet = oldDet;
-    newDet.GetPatternInfo().SetPos(ptPos);
+    newDet.GetPatternLabelData().SetPos(ptPos);
 
     SavePieceOptions* moveCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
     moveCommand->setText(tr("move pattern info label"));
@@ -882,10 +882,10 @@ void VToolSeamAllowance::SaveResizePattern(qreal dLabelW, int iFontSize)
     VPiece newDet = oldDet;
 
     dLabelW = FromPixel(dLabelW, *VDataTool::data.GetPatternUnit());
-    newDet.GetPatternInfo().SetLabelWidth(QString().setNum(dLabelW));
+    newDet.GetPatternLabelData().SetLabelWidth(QString().setNum(dLabelW));
     qreal height = FromPixel(m_patternInfo->boundingRect().height(), *VDataTool::data.GetPatternUnit());
-    newDet.GetPatternInfo().SetLabelHeight(QString().setNum(height));
-    newDet.GetPatternInfo().SetFontSize(iFontSize);
+    newDet.GetPatternLabelData().SetLabelHeight(QString().setNum(height));
+    newDet.GetPatternLabelData().SetFontSize(iFontSize);
 
     SavePieceOptions* resizeCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
     resizeCommand->setText(tr("resize pattern info label"));
@@ -898,13 +898,13 @@ void VToolSeamAllowance::SaveRotationPattern(qreal dRot)
     VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
     VPiece newDet = oldDet;
 
-    newDet.GetPatternInfo().SetPos(m_patternInfo->pos());
-    newDet.GetPatternInfo().SetFontSize(m_patternInfo->GetFontSize());
+    newDet.GetPatternLabelData().SetPos(m_patternInfo->pos());
+    newDet.GetPatternLabelData().SetFontSize(m_patternInfo->GetFontSize());
 
     // Tranform angle to anticlockwise
     QLineF line(0, 0, 100, 0);
     line.setAngle(-dRot);
-    newDet.GetPatternInfo().SetRotation(QString().setNum(line.angle()));
+    newDet.GetPatternLabelData().SetRotation(QString().setNum(line.angle()));
 
     SavePieceOptions* rotateCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
     rotateCommand->setText(tr("rotate pattern info label"));

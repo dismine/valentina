@@ -775,7 +775,7 @@ void DialogEditLabel::SetTemplate(const QVector<VLabelTemplateLine> &lines)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditLabel::SetPiece(const VPiece &piece)
 {
-    const VPieceLabelData& pieceData = piece.GetPatternPieceData();
+    const VPieceLabelData& pieceData = piece.GetPieceLabelData();
     m_placeholders[pl_pLetter].second = pieceData.GetLetter();
     m_placeholders[pl_pAnnotation].second = pieceData.GetAnnotation();
     m_placeholders[pl_pOrientation].second = pieceData.GetOrientation();

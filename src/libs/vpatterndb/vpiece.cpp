@@ -570,7 +570,7 @@ QVector<quint32> VPiece::MissingPlaceLabels(const VPiece &det) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPiece::SetPatternPieceData(const VPieceLabelData &data)
+void VPiece::SetPieceLabelData(const VPieceLabelData &data)
 {
     d->m_ppData = data;
     d->m_ppData.SetAreaShartName(VPieceArea::PieceShortName(*this));
@@ -581,7 +581,7 @@ void VPiece::SetPatternPieceData(const VPieceLabelData &data)
  * @brief Returns full access to the pattern piece data object
  * @return pattern piece data object
  */
-VPieceLabelData &VPiece::GetPatternPieceData()
+VPieceLabelData &VPiece::GetPieceLabelData()
 {
     return d->m_ppData;
 }
@@ -591,13 +591,13 @@ VPieceLabelData &VPiece::GetPatternPieceData()
  * @brief Returns the read only reference to the pattern piece data object
  * @return pattern piece data object
  */
-const VPieceLabelData &VPiece::GetPatternPieceData() const
+const VPieceLabelData &VPiece::GetPieceLabelData() const
 {
     return d->m_ppData;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPiece::SetPatternInfo(const VPatternLabelData &info)
+void VPiece::SetPatternLabelData(const VPatternLabelData &info)
 {
     d->m_piPatternInfo = info;
 }
@@ -607,7 +607,7 @@ void VPiece::SetPatternInfo(const VPatternLabelData &info)
  * @brief Returns full access to the pattern info geometry object
  * @return pattern info geometry object
  */
-VPatternLabelData &VPiece::GetPatternInfo()
+VPatternLabelData &VPiece::GetPatternLabelData()
 {
     return d->m_piPatternInfo;
 }
@@ -617,7 +617,7 @@ VPatternLabelData &VPiece::GetPatternInfo()
  * @brief Returns the read only reference to the pattern info geometry object
  * @return pattern info geometry object
  */
-const VPatternLabelData &VPiece::GetPatternInfo() const
+const VPatternLabelData &VPiece::GetPatternLabelData() const
 {
     return d->m_piPatternInfo;
 }
