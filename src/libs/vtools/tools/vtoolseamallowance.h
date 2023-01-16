@@ -173,6 +173,7 @@ private slots:
     void ToggleNodePointPassmark(quint32 id, bool toggle);
     void TogglePassmarkAngleType(quint32 id, PassmarkAngleType type);
     void TogglePassmarkLineType(quint32 id, PassmarkLineType type);
+    void ResetPieceLabelTemplate();
 
 private:
     Q_DISABLE_COPY_MOVE(VToolSeamAllowance) // NOLINT

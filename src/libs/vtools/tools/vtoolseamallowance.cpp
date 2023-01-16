@@ -41,6 +41,7 @@
 #include "../vgeometry/vellipticalarc.h"
 #include "../ifc/xml/vpatternconverter.h"
 #include "../ifc/exception/vexceptionwrongid.h"
+#include "../ifc/xml/vlabeltemplateconverter.h"
 #include "../undocommands/addpiece.h"
 #include "../undocommands/deletepiece.h"
 #include "../undocommands/movepiece.h"
@@ -63,6 +64,7 @@
 #include "nodeDetails/vnodespline.h"
 #include "nodeDetails/vnodesplinepath.h"
 #include "nodeDetails/vtoolplacelabel.h"
+#include "../vformat/vlabeltemplate.h"
 
 #include <QFuture>
 #include <QtConcurrent/QtConcurrentRun>
@@ -176,6 +178,29 @@ VToolSeamAllowance *VToolSeamAllowance::Create(const QPointer<DialogTool> &dialo
     initData.parse = Document::FullParse;
     initData.typeCreation = Source::FromGui;
 
+    auto LoadLabelTemplate = [&initData](const QString &path)
+    {
+        if (not path.isEmpty())
+        {
+            try
+            {
+                VLabelTemplate ltemplate;
+                ltemplate.setXMLContent(VLabelTemplateConverter(path).Convert());
+                return ltemplate.ReadLines();
+            }
+            catch (VException &e)
+            {
+                const QString errorMsg = QObject::tr("Piece '%1'. Unable to load default piece label template.\n%2\n%3")
+                                             .arg(initData.detail.GetName(), e.ErrorMessage(), e.DetailedInformation());
+                VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                    qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+            }
+        }
+
+        return QVector<VLabelTemplateLine>();
+    };
+
+    initData.detail.GetPieceLabelData().SetLabelTemplate(LoadLabelTemplate(doc->GetDefaultPieceLabelPath()));
     initData.detail.GetPath().SetNodes(PrepareNodes(initData.detail.GetPath(), scene, doc, data));
 
     VToolSeamAllowance *piece = Create(initData);
@@ -1225,6 +1250,9 @@ void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     forceFlippingOption->setCheckable(true);
     forceFlippingOption->setChecked(detail.IsForceFlipping());
 
+    QAction *reseteLabelTemplateOption = menu.addAction(tr("Reset piece label template"));
+    reseteLabelTemplateOption->setEnabled(not doc->GetDefaultPieceLabelPath().isEmpty());
+
     QAction *actionRemove = menu.addAction(QIcon::fromTheme(QStringLiteral("edit-delete")), tr("Delete"));
     actionRemove->setDisabled(_referens > 0);
 
@@ -1244,6 +1272,10 @@ void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     else if (selectedAction == forceFlippingOption)
     {
         ToggleForceFlipping(selectedAction->isChecked());
+    }
+    else if (selectedAction == reseteLabelTemplateOption)
+    {
+        ResetPieceLabelTemplate();
     }
     else if (selectedAction == actionRemove)
     {
@@ -1691,6 +1723,34 @@ void VToolSeamAllowance::TogglePassmarkLineType(quint32 id, PassmarkLineType typ
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::ResetPieceLabelTemplate()
+{
+    const VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
+    VPiece newDet = oldDet;
+
+    const QString path = doc->GetDefaultPieceLabelPath();
+    if (not path.isEmpty())
+    {
+        QVector<VLabelTemplateLine> lines;
+        try
+        {
+            VLabelTemplate ltemplate;
+            ltemplate.setXMLContent(VLabelTemplateConverter(path).Convert());
+            lines = ltemplate.ReadLines();
+            newDet.GetPieceLabelData().SetLabelTemplate(lines);
+            VAbstractApplication::VApp()->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_id));
+        }
+        catch (VException &e)
+        {
+            const QString errorMsg = QObject::tr("Piece '%1'. Unable to load default piece label template.\n%2\n%3")
+                                         .arg(newDet.GetName(), e.ErrorMessage(), e.DetailedInformation());
+            VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
+                qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VPieceItem::MoveTypes VToolSeamAllowance::FindLabelGeometry(const VPatternLabelData& labelData,
                                                             const QVector<quint32> &pins, qreal &rotationAngle,
                                                             qreal &labelWidth, qreal &labelHeight, QPointF &pos)
@@ -1928,6 +1988,8 @@ void VToolSeamAllowance::InitNode(const VPieceNode &node, VMainGraphicsScene *sc
                         &VToolSeamAllowance::TogglePassmarkAngleType, Qt::UniqueConnection);
                 connect(tool, &VNodePoint::TogglePassmarkLineType, parent,
                         &VToolSeamAllowance::TogglePassmarkLineType, Qt::UniqueConnection);
+                connect(tool, &VNodePoint::ResetPieceLabelTemplate, parent,
+                        &VToolSeamAllowance::ResetPieceLabelTemplate, Qt::UniqueConnection);
                 tool->setParentItem(parent);
                 tool->SetParentType(ParentType::Item);
                 tool->SetExluded(node.IsExcluded());

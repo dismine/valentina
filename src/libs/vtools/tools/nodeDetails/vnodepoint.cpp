@@ -99,6 +99,7 @@ enum class ContextMenuOption : int
     InLayout,
     ForbidFlipping,
     ForceFlipping,
+    ResetLabelTemplate,
     Remove,
     TurnPoint,
     LAST_ONE_DO_NOT_USE
@@ -351,6 +352,10 @@ QHash<int, QAction *> VNodePoint::InitContextMenu(QMenu *menu, vidtype pieceId, 
     forceFlippingOption->setChecked(detail.IsForceFlipping());
     contextMenu.insert(static_cast<int>(ContextMenuOption::ForceFlipping), forceFlippingOption);
 
+    QAction *reseteLabelTemplateOption = menu->addAction(tr("Reset piece label template"));
+    reseteLabelTemplateOption->setEnabled(not doc->GetDefaultPieceLabelPath().isEmpty());
+    contextMenu.insert(static_cast<int>(ContextMenuOption::ResetLabelTemplate), reseteLabelTemplateOption);
+
     QAction *actionRemove = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-delete")), tr("Delete"));
     referens > 1 ? actionRemove->setEnabled(false) : actionRemove->setEnabled(true);
     contextMenu.insert(static_cast<int>(ContextMenuOption::Remove), actionRemove);
@@ -580,7 +585,7 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         ContextMenuOption selectedOption = static_cast<ContextMenuOption>(
                     contextMenu.key(selectedAction, static_cast<int>(ContextMenuOption::NoSelection)));
 
-        Q_STATIC_ASSERT_X(static_cast<int>(ContextMenuOption::LAST_ONE_DO_NOT_USE) == 32,
+        Q_STATIC_ASSERT_X(static_cast<int>(ContextMenuOption::LAST_ONE_DO_NOT_USE) == 33,
                           "Not all options were handled.");
 
 QT_WARNING_PUSH
@@ -602,6 +607,9 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
                 break;
             case ContextMenuOption::ForceFlipping:
                 emit ToggleForceFlipping(selectedAction->isChecked());
+                break;
+            case ContextMenuOption::ResetLabelTemplate:
+                emit ResetPieceLabelTemplate();
                 break;
             case ContextMenuOption::Remove:
                 try

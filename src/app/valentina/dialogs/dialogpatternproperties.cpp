@@ -166,6 +166,11 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     //Initialization change value. Set to default value after initialization
     m_defaultChanged = false;
     m_securityChanged = false;
+
+    connect(ui->pushButtonBrowsePieceLabelPath, &QPushButton::clicked, this,
+            &DialogPatternProperties::BrowseLabelPath);
+    ui->lineEditPieceLabelPath->setText(m_doc->GetDefaultPieceLabelPath());
+    connect(ui->lineEditPieceLabelPath, &QLineEdit::textChanged, this, &DialogPatternProperties::LabelPathChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -235,6 +240,7 @@ void DialogPatternProperties::SaveDescription()
         m_doc->SetDescription(ui->plainTextEditDescription->document()->toPlainText());
         m_doc->SetLabelPrefix(qvariant_cast<QString>(ui->comboBoxLabelLanguage->currentData()));
         m_doc->SetPassmarkLengthVariable(ui->lineEditPassmarkLength->text());
+        m_doc->SetDefaultPieceLabelPath(ui->lineEditPieceLabelPath->text());
 
         if (m_oldPassmarkLength != ui->lineEditPassmarkLength->text())
         {
@@ -420,4 +426,32 @@ void DialogPatternProperties::ShowImage()
     {
         qCritical() << tr("Unable to open temp file");
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::BrowseLabelPath()
+{
+    QString path = ui->lineEditPieceLabelPath->text();
+    if (path.isEmpty())
+    {
+        path = VCommonSettings::PrepareLabelTemplates(
+            VAbstractApplication::VApp()->Settings()->GetPathLabelTemplate());
+    }
+
+    QString filters(tr("Label template") + QLatin1String("(*.xml)"));
+
+    const QString filePath = QFileDialog::getOpenFileName(this, tr("Label template"), path, filters, nullptr,
+                                                          VAbstractApplication::VApp()->NativeFileDialog());
+
+    ui->lineEditPieceLabelPath->setText(filePath);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::LabelPathChanged(const QString &text)
+{
+    QPalette palette = ui->lineEditPieceLabelPath->palette();
+    palette.setColor(ui->lineEditPieceLabelPath->foregroundRole(),
+                     text.isEmpty() || QFileInfo::exists(text) ? Qt::black : Qt::red);
+    ui->lineEditPieceLabelPath->setPalette(palette);
+    m_descriptionChanged = true;
 }
