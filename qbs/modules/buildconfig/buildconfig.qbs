@@ -783,6 +783,44 @@ Module {
     }
 
     Properties {
+        condition: Utilities.versionCompare(qbs.version, "1.22") < 0
+        cpp.systemIncludePaths: {
+            var qtLibs = [
+                "QtCore",
+                "QtSvg",
+                "QtXml",
+                "QtPrintSupport",
+                "QtXmlPatterns",
+                "QtWidgets",
+                "QtGui",
+                "QtNetwork",
+                "QtTest",
+                "QtConcurrent"
+            ];
+
+            var paths = [];
+
+            if (!qbs.targetOS.contains("macos"))
+            {
+                paths.push(Qt.core.incPath);
+
+                for (var i = 0; i < qtLibs.length; i++) {
+                    paths.push(FileInfo.joinPaths(Qt.core.incPath, qtLibs[i]));
+                }
+
+            } else {
+                for (var i = 0; i < qtLibs.length; i++) {
+                    paths.push(FileInfo.joinPaths(Qt.core.incPath, qtLibs[i] + ".framework/Versions/" + Qt.core.versionMajor +
+                                                                   "/Headers"));
+                    paths.push(FileInfo.joinPaths(Qt.core.incPath, qtLibs[i] + ".framework/Headers"));
+                }
+            }
+
+            return paths;
+        }
+    }
+
+    Properties {
         condition: qbs.toolchain.contains("gcc")
         cpp.driverFlags: {
             var flags = [];
