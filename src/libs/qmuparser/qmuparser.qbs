@@ -32,7 +32,7 @@ VLib {
         "make_unique.h",
     ]
 
-    cpp.defines: 'QMUP_VERSION="' + product.version + '"'
+    cpp.defines: ["QMUPARSER_LIBRARY", 'QMUP_VERSION="' + product.version + '"']
 
     buildconfig.staticBuild: false
 

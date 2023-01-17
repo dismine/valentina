@@ -92,4 +92,6 @@ VLib {
         Depends { name: "cpp" }
         cpp.includePaths: [exportingProduct.sourceDirectory]
     }
+
+    cpp.defines: "VPROPERTYEXPLORER_LIBRARY"
 }
