@@ -68,7 +68,7 @@ VFormulaPropertyEditor::VFormulaPropertyEditor(QWidget *parent)
     // The layout (a horizontal layout)
     auto* layout = new QHBoxLayout(this);
     layout->setSpacing(3);
-    layout->setMargin(0);
+    layout->setContentsMargins(0, 0, 0, 0);
     layout->addWidget(m_TextLabel);
     // Spacer (this is needed for proper display of the label and button)
     layout->addSpacerItem(new QSpacerItem(1000000000, 0, QSizePolicy::Expanding, QSizePolicy::Preferred));
