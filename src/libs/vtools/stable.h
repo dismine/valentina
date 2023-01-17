@@ -51,33 +51,33 @@
 #   include <QtXml>
 #endif
 
-//In Windows you can't use same header in all modes.
-#if !defined(Q_OS_WIN)
-#   ifdef QT_WIDGETS_LIB
-#       include <QtWidgets>
-#   endif
+#ifdef QT_WINEXTRAS_LIB
+#   include <QtWinExtras>
+#endif
 
-#   ifdef QT_SVG_LIB
-#       include <QtSvg/QtSvg>
-#   endif
+#ifdef QT_WIDGETS_LIB
+#   include <QtWidgets>
+#endif
 
-#   ifdef QT_PRINTSUPPORT_LIB
-#       include <QtPrintSupport>
-#   endif
+#ifdef QT_SVG_LIB
+#   include <QtSvg/QtSvg>
+#endif
 
-    //Build doesn't work, if include this headers on Windows.
-#   ifdef QT_XMLPATTERNS_LIB
-#       include <QtXmlPatterns>
-#   endif
+#ifdef QT_PRINTSUPPORT_LIB
+#   include <QtPrintSupport>
+#endif
 
-#   ifdef QT_NETWORK_LIB
-#       include <QtNetwork>
-#   endif
+#ifdef QT_XMLPATTERNS_LIB
+#   include <QtXmlPatterns>
+#endif
 
-#   ifdef QT_CONCURRENT_LIB
-#       include <QtConcurrent>
-#   endif
-#endif/*Q_OS_WIN*/
+#ifdef QT_NETWORK_LIB
+#   include <QtNetwork>
+#endif
+
+#ifdef QT_CONCURRENT_LIB
+#   include <QtConcurrent>
+#endif
 
 #endif /*__cplusplus*/
 
