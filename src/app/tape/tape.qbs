@@ -83,101 +83,100 @@ VToolApp {
         cpp.defines: {
             var defines = [];
             var extension = qbs.targetOS.contains("windows") ? ".exe" : "";
-            defines.push('TAPE_BUILDDIR="' + exportingProduct.buildDirectory + FileInfo.pathSeparator() +
-                         exportingProduct.targetName + extension +'"');
+            defines.push('TAPE_BUILDDIR="' + FileInfo.joinPaths(exportingProduct.buildDirectory, exportingProduct.targetName + extension) +'"');
             return defines;
         }
     }
 
     Group {
         name: "Multisize tables"
-        prefix: FileInfo.joinPaths(project.sourceDirectory, "src", "app", "share", "tables", "multisize", FileInfo.pathSeparator())
+        prefix: project.sourceDirectory + "/src/app/share/tables/multisize/"
         files: [
             "GOST_man_ru.vst"
         ]
         fileTags: ["multisize_tables"]
         qbs.install: true
-        qbs.installDir: buildconfig.installDataPath + FileInfo.pathSeparator() + "tables" + FileInfo.pathSeparator() + "multisize"
+        qbs.installDir: buildconfig.installDataPath + "/tables/multisize"
     }
 
     Group {
         name: "Measurements templates"
-        prefix: FileInfo.joinPaths(project.sourceDirectory, "src", "app", "share", "tables", "templates", FileInfo.pathSeparator())
+        prefix: project.sourceDirectory + "/src/app/share/tables/templates/"
         files: [
             "template_all_measurements.vit",
             "t_Aldrich_Women.vit"
         ]
         fileTags: ["measurements_templates"]
         qbs.install: true
-        qbs.installDir: buildconfig.installDataPath + FileInfo.pathSeparator() + "tables" + FileInfo.pathSeparator() + "templates"
+        qbs.installDir: buildconfig.installDataPath + "/tables/templates"
     }
 
     Group {
         name: "48x48/apps"
-        prefix: FileInfo.joinPaths(project.sourceDirectory, "share", "icons", "48x48", "apps", FileInfo.pathSeparator())
+        prefix: project.sourceDirectory + "/share/icons/48x48/apps/"
         files: "tape.png"
         fileTags: "freedesktop.48x48AppsIcons"
     }
 
     Group {
         name: "64x64/apps"
-        prefix: FileInfo.joinPaths(project.sourceDirectory, "share", "icons", "64x64", "apps", FileInfo.pathSeparator())
+        prefix: project.sourceDirectory + "/share/icons/64x64/apps/"
         files: "tape.png"
         fileTags: "freedesktop.64x64AppsIcons"
     }
 
     Group {
         name: "128x128/apps"
-        prefix: FileInfo.joinPaths(project.sourceDirectory, "share", "icons", "128x128", "apps", FileInfo.pathSeparator())
+        prefix: project.sourceDirectory + "/share/icons/128x128/apps/"
         files: "tape.png"
         fileTags: "freedesktop.128x128AppsIcons"
     }
 
     Group {
         name: "256x256/apps"
-        prefix: FileInfo.joinPaths(project.sourceDirectory, "share", "icons", "256x256", "apps", FileInfo.pathSeparator())
+        prefix: project.sourceDirectory + "/share/icons/256x256/apps/"
         files: "tape.png"
         fileTags: "freedesktop.256x256AppsIcons"
     }
 
     Group {
         name: "512x512/apps"
-        prefix: FileInfo.joinPaths(project.sourceDirectory, "share", "icons", "512x512", "apps", FileInfo.pathSeparator())
+        prefix: project.sourceDirectory + "/share/icons/512x512/apps/"
         files: "tape.png"
         fileTags: "freedesktop.512x512AppsIcons"
     }
 
     Group {
         name: "apps48x48/mimetypes"
-        prefix: FileInfo.joinPaths(project.sourceDirectory, "share", "icons", "48x48", "mimetypes", FileInfo.pathSeparator())
+        prefix: project.sourceDirectory + "/share/icons/48x48/mimetypes/"
         files: ["application-x-valentina-i-measurements.png", "application-x-valentina-s-measurements.png"]
         fileTags: "freedesktop.48x48MimetypesIcons"
     }
 
     Group {
         name: "apps64x64/mimetypes"
-        prefix: FileInfo.joinPaths(project.sourceDirectory, "share", "icons", "64x64", "mimetypes", FileInfo.pathSeparator())
+        prefix: project.sourceDirectory + "/share/icons/64x64/mimetypes/"
         files: ["application-x-valentina-i-measurements.png", "application-x-valentina-s-measurements.png"]
         fileTags: "freedesktop.64x64MimetypesIcons"
     }
 
     Group {
         name: "apps128x128/mimetypes"
-        prefix: FileInfo.joinPaths(project.sourceDirectory, "share", "icons", "128x128", "mimetypes", FileInfo.pathSeparator())
+        prefix: project.sourceDirectory + "/share/icons/128x128/mimetypes/"
         files: ["application-x-valentina-i-measurements.png", "application-x-valentina-s-measurements.png"]
         fileTags: "freedesktop.128x128MimetypesIcons"
     }
 
     Group {
         name: "apps256x256/mimetypes"
-        prefix: FileInfo.joinPaths(project.sourceDirectory, "share", "icons", "256x256", "mimetypes", FileInfo.pathSeparator())
+        prefix: project.sourceDirectory + "/share/icons/256x256/mimetypes/"
         files: ["application-x-valentina-i-measurements.png", "application-x-valentina-s-measurements.png"]
         fileTags: "freedesktop.256x256MimetypesIcons"
     }
 
     Group {
         name: "apps512x512/mimetypes"
-        prefix: FileInfo.joinPaths(project.sourceDirectory, "share", "icons", "512x512", "mimetypes", FileInfo.pathSeparator())
+        prefix: project.sourceDirectory + "/share/icons/512x512/mimetypes/"
         files: ["application-x-valentina-i-measurements.png", "application-x-valentina-s-measurements.png"]
         fileTags: "freedesktop.512x512MimetypesIcons"
     }
@@ -186,12 +185,12 @@ VToolApp {
         condition: qbs.targetOS.contains("macos")
         fileTagsFilter: "qm"
         qbs.install: true
-        qbs.installDir: buildconfig.installDataPath + FileInfo.pathSeparator() + "translations"
+        qbs.installDir: buildconfig.installDataPath + "/translations"
     }
 
     Group {
         name: "Diagrams"
-        prefix: FileInfo.joinPaths(product.sourceDirectory, "share", "resources", FileInfo.pathSeparator())
+        prefix: product.sourceDirectory + "/share/resources/"
         files: "diagrams.qrc"
         fileTags: "ebr.external_qrc"
     }
@@ -201,15 +200,15 @@ VToolApp {
         qbs.install: true
         qbs.installDir: {
             if (qbs.targetOS.contains("unix") && !qbs.targetOS.contains("macos"))
-                return FileInfo.joinPaths("share", "valentina", FileInfo.pathSeparator());
+                return "share/valentina/";
             else
-                return buildconfig.installDataPath + FileInfo.pathSeparator();
+                return buildconfig.installDataPath + "/";
         }
     }
 
     Group {
         name: "Tape RC"
-        prefix: FileInfo.joinPaths(product.sourceDirectory, "share", "resources", FileInfo.pathSeparator())
+        prefix: product.sourceDirectory + "/share/resources/"
         files: "tape.rc"
     }
 }

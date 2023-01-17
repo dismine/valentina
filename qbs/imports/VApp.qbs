@@ -46,33 +46,33 @@ CppApplication {
         // Qt from scratch without OpenSSL support.
         condition: qbs.targetOS.contains("windows") && (qbs.architecture.contains("x86_64") || qbs.architecture.contains("x86"))
         name: "openssl"
-        prefix: FileInfo.joinPaths(project.sourceDirectory, "dist", "win", "openssl", FileInfo.pathSeparator())
+        prefix: project.sourceDirectory + "/dist/win/"
         files: {
             var files = [];
             // Minimal supported OpenSSL version since Qt 5.12.4 is 1.1.1.
             if (Qt.core.versionMajor >= 5  &&  Qt.core.versionMinor >= 12 && Qt.core.versionPatch >= 4) {
                 if (qbs.architecture.contains("x86_64")) {
                     files.push(
-                        FileInfo.joinPaths("win64", "libcrypto-1_1-x64.dll"),
-                        FileInfo.joinPaths("win64", "libssl-1_1-x64.dll")
+                        "openssl/win64/libcrypto-1_1-x64.dll",
+                        "openssl/win64/libssl-1_1-x64.dll"
                     );
                 } else {
                     files.push(
-                        FileInfo.joinPaths("win32", "libcrypto-1_1.dll"),
-                        FileInfo.joinPaths("win32", "libssl-1_1.dll")
+                        "openssl/win32/libcrypto-1_1.dll",
+                        "openssl/win32/libssl-1_1.dll"
                     );
                 }
             } else {
                 files.push("msvcr120.dll");
                 if (qbs.architecture.contains("x86_64")) {
                     files.push(
-                        FileInfo.joinPaths("win64", "libeay32.dll"),
-                        FileInfo.joinPaths("win64", "ssleay32.dll")
+                        "openssl/win64/libeay32.dll",
+                        "openssl/win64/ssleay32.dll"
                     );
                 } else {
                     files.push(
-                        FileInfo.joinPaths("win32", "libeay32.dll"),
-                        FileInfo.joinPaths("win32", "ssleay32.dll")
+                        "openssl/win32/libeay32.dll",
+                        "openssl/win32/ssleay32.dll"
                     );
                 }
             }

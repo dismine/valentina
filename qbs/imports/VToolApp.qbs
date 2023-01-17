@@ -23,7 +23,7 @@ VApp {
 
     Group {
         name: "freedesktop"
-        prefix: FileInfo.joinPaths(project.sourceDirectory, "dist", FileInfo.pathSeparator())
+        prefix: project.sourceDirectory + "/dist/"
         files: [
             "ua.com.smart-pattern." + product.targetName + ".desktop"
         ]
@@ -38,7 +38,7 @@ VApp {
 
     Group {
         name: "Translations"
-        prefix: FileInfo.joinPaths(project.sourceDirectory, "share", "translations", FileInfo.pathSeparator())
+        prefix: project.sourceDirectory + "/share/translations/"
         files: {
             var files = [];
 

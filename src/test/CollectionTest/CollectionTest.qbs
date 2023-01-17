@@ -21,7 +21,7 @@ VTestApp {
 
     Group {
         name: "Tape test files"
-        prefix: "tst_tape" + FileInfo.pathSeparator()
+        prefix: "tst_tape/"
         files: [
             "keiko.vit",
             "empty.vit",
@@ -43,7 +43,7 @@ VTestApp {
 
     Group {
         name: "Valentina test files"
-        prefix: "tst_valentina" + FileInfo.pathSeparator()
+        prefix: "tst_valentina/"
         files: [
             "empty.val",
             "issue_372.val",
@@ -62,46 +62,45 @@ VTestApp {
 
     Group {
         name: "Collection files"
-        prefix: FileInfo.joinPaths(project.sourceDirectory, "src", "app", "share",
-                FileInfo.pathSeparator())
+        prefix: project.sourceDirectory + "/src/app/share/"
         files: [
-            FileInfo.joinPaths("collection", "bra.val"),
-            FileInfo.joinPaths("collection", "bra.vit"),
-            FileInfo.joinPaths("collection", "jacketM1_52-176.val"),
-            FileInfo.joinPaths("collection", "jacketM2_40-146.val"),
-            FileInfo.joinPaths("collection", "jacketM3_40-146.val"),
-            FileInfo.joinPaths("collection", "jacketM4_40-146.val"),
-            FileInfo.joinPaths("collection", "jacketM5_30-110.val"),
-            FileInfo.joinPaths("collection", "jacketM6_30-110.val"),
-            FileInfo.joinPaths("collection", "pantsM1_52-176.val"),
-            FileInfo.joinPaths("collection", "pantsM2_40-146.val"),
-            FileInfo.joinPaths("collection", "pantsM7.val"),
-            FileInfo.joinPaths("collection", "TShirt_test.val"),
-            FileInfo.joinPaths("collection", "TestDart.val"),
-            FileInfo.joinPaths("collection", "pattern_blusa.val"),
-            FileInfo.joinPaths("collection", "blusa.vit"),
-            FileInfo.joinPaths("collection", "PajamaTopWrap2.val"),
-            FileInfo.joinPaths("collection", "Susan.vit"),
-            FileInfo.joinPaths("collection", "Moulage_0.5_armhole_neckline.val"),
-            FileInfo.joinPaths("collection", "0.7_Armhole_adjustment_0.10.val"),
-            FileInfo.joinPaths("collection", "my_calculated_measurements_for_val.vit"),
-            FileInfo.joinPaths("collection", "Keiko_skirt.val"),
-            FileInfo.joinPaths("collection", "keiko.vit"),
-            FileInfo.joinPaths("collection", "medidas_eli2015.vit"),
-            FileInfo.joinPaths("collection", "pantalon_base_Eli.val"),
-            FileInfo.joinPaths("collection", "Razmernye_priznaki_dlya_zhenskogo_zhaketa.vit"),
-            FileInfo.joinPaths("collection", "IMK_Zhaketa_poluprilegayuschego_silueta.val"),
-            FileInfo.joinPaths("collection", "Lara_Jil.vit"),
-            FileInfo.joinPaths("collection", "modell_2.val"),
-            FileInfo.joinPaths("collection", "MaleShirt", "MaleShirt.val"),
-            FileInfo.joinPaths("collection", "MaleShirt", "MaleShirt.vit"),
-            FileInfo.joinPaths("collection", "Trousers", "Trousers.val"),
-            FileInfo.joinPaths("collection", "Trousers", "trousers.vit"),
-            FileInfo.joinPaths("collection", "Steampunk_trousers.val"),
-            FileInfo.joinPaths("collection", "Steampunk_trousers.vit"),
-            FileInfo.joinPaths("collection", "Basic_block_women-2016.val"),
-            FileInfo.joinPaths("collection", "Gent_Jacket_with_tummy.val"),
-            FileInfo.joinPaths("tables", "multisize", "GOST_man_ru.vst")
+            "collection/bra.val",
+            "collection/bra.vit",
+            "collection/jacketM1_52-176.val",
+            "collection/jacketM2_40-146.val",
+            "collection/jacketM3_40-146.val",
+            "collection/jacketM4_40-146.val",
+            "collection/jacketM5_30-110.val",
+            "collection/jacketM6_30-110.val",
+            "collection/pantsM1_52-176.val",
+            "collection/pantsM2_40-146.val",
+            "collection/pantsM7.val",
+            "collection/TShirt_test.val",
+            "collection/TestDart.val",
+            "collection/pattern_blusa.val",
+            "collection/blusa.vit",
+            "collection/PajamaTopWrap2.val",
+            "collection/Susan.vit",
+            "collection/Moulage_0.5_armhole_neckline.val",
+            "collection/0.7_Armhole_adjustment_0.10.val",
+            "collection/my_calculated_measurements_for_val.vit",
+            "collection/Keiko_skirt.val",
+            "collection/keiko.vit",
+            "collection/medidas_eli2015.vit",
+            "collection/pantalon_base_Eli.val",
+            "collection/Razmernye_priznaki_dlya_zhenskogo_zhaketa.vit",
+            "collection/IMK_Zhaketa_poluprilegayuschego_silueta.val",
+            "collection/Lara_Jil.vit",
+            "collection/modell_2.val",
+            "collection/MaleShirt/MaleShirt.val",
+            "collection/MaleShirt/MaleShirt.vit",
+            "collection/Trousers/Trousers.val",
+            "collection/Trousers/trousers.vit",
+            "collection/Steampunk_trousers.val",
+            "collection/Steampunk_trousers.vit",
+            "collection/Basic_block_women-2016.val",
+            "collection/Gent_Jacket_with_tummy.val",
+            "tables/multisize/GOST_man_ru.vst"
         ]
         fileTags: ["tst_collection_files"]
     }

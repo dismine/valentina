@@ -801,7 +801,7 @@ Module {
     Group {
         name: "Precompiled headers"
         condition: buildconfig.enablePCH
-        prefix: FileInfo.joinPaths(product.sourceDirectory, FileInfo.pathSeparator())
+        prefix: product.sourceDirectory + "/"
         files: {
             var files = ["stable.h"];
             if (qbs.toolchain.contains("msvc"))

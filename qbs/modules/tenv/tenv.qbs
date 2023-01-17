@@ -28,7 +28,7 @@ Module {
             }));
 
             artifactNames = artifactNames.concat((inputs["multisize_tables"] || []).map(function(file){
-                return FileInfo.joinPaths(product.buildDirectory, "tables", "multisize",file.fileName);
+                return FileInfo.joinPaths(product.buildDirectory, "tables/multisize",file.fileName);
             }));
 
             artifactNames = artifactNames.concat((inputs["label_templates"] || []).map(function(file){
@@ -92,7 +92,7 @@ Module {
             }));
 
             destination = destination.concat((inputs["multisize_tables"] || []).map(function(artifact) {
-                return FileInfo.joinPaths(product.buildDirectory, "tables", "multisize", artifact.fileName);
+                return FileInfo.joinPaths(product.buildDirectory, "tables/multisize", artifact.fileName);
             }));
 
             destination = destination.concat((inputs["label_templates"] || []).map(function(artifact) {

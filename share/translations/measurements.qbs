@@ -9,7 +9,7 @@ Product {
 
     Group {
         name: "Headers"
-        prefix: FileInfo.joinPaths(project.sourceDirectory, "src", FileInfo.pathSeparator())
+        prefix: project.sourceDirectory + "/src/"
         files: [
             "libs/vpatterndb/vtranslatemeasurements.h"
         ]
@@ -18,7 +18,7 @@ Product {
 
     Group {
         name: "Sources"
-        prefix: FileInfo.joinPaths(project.sourceDirectory, "src", FileInfo.pathSeparator())
+        prefix: project.sourceDirectory + "/src/"
         files: [
             "libs/vpatterndb/vtranslatemeasurements.cpp"
         ]

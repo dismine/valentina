@@ -9,7 +9,7 @@ Product {
 
     Group {
         name: "Headers"
-        prefix: FileInfo.joinPaths(project.sourceDirectory, "src", FileInfo.pathSeparator())
+        prefix: project.sourceDirectory + "/src/"
         files: [
             "app/**/*.h",
             "app/**/*.hpp",
@@ -24,7 +24,7 @@ Product {
 
     Group {
         name: "Sources"
-        prefix: FileInfo.joinPaths(project.sourceDirectory, "src", FileInfo.pathSeparator())
+        prefix: project.sourceDirectory + "/src/"
         files: [
             "app/**/*.cpp",
             "app/**/*.js",
@@ -41,7 +41,7 @@ Product {
 
     Group {
         name: "Forms"
-        prefix: FileInfo.joinPaths(project.sourceDirectory, "src", FileInfo.pathSeparator())
+        prefix: project.sourceDirectory + "/src/"
         files: [
             "app/**/*.ui",
             "libs/**/*.ui"
