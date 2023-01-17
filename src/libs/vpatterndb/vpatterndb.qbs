@@ -2,6 +2,7 @@ VLib {
     Depends { name: "VMiscLib" }
     Depends { name: "IFCLib" }
     Depends { name: "VGeometryLib" }
+    Depends { name: "QMUParserLib" }
 
     name: "VPatternDBLib"
     files: [

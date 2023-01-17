@@ -2,6 +2,7 @@ VLib {
     Depends { name: "Qt"; submodules: ["gui", "concurrent"] }
     Depends { name: "VMiscLib"}
     Depends { name: "IFCLib"}
+    Depends { name: "QMUParserLib" }
 
     name: "VGeometryLib"
     files: [
