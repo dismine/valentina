@@ -57,6 +57,10 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutLineWidth, (QLatin1String(
 int cachedLineWidth = -1;
 }  // namespace
 
+#ifndef QBS_BUILD
+Q_DECLARE_METATYPE(QMarginsF) // NOLINT
+#endif
+
 //---------------------------------------------------------------------------------------------------------------------
 VPSettings::VPSettings(Format format, Scope scope, const QString &organization, const QString &application,
                                  QObject *parent)

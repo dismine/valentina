@@ -46,6 +46,10 @@
 #include "../vlayout/vbank.h"
 #include "qglobal.h"
 
+#ifndef QBS_BUILD
+Q_DECLARE_METATYPE(QMarginsF) // NOLINT
+#endif
+
 namespace
 {
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationLabelLanguage, // NOLINT
