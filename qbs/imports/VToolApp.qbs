@@ -9,6 +9,7 @@ VApp {
     install: true
     installDir: buildconfig.installAppPath
     installDebugInformation: true
+    consoleApplication: false
 
     Properties {
         // Breakpoints do not work if debug the app inside of bundle. In debug mode we turn off creating a bundle.
