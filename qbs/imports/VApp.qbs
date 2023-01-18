@@ -1,4 +1,5 @@
 import qbs.FileInfo
+import qbs.Utilities
 
 CppApplication {
     Depends { name: "buildconfig" }
@@ -24,13 +25,13 @@ CppApplication {
     }
 
     Properties {
-        condition: Qt.core.versionMajor >= 5 &&  Qt.core.versionMinor < 12
+        condition: Qt.core.versionMajor >= 5 && Qt.core.versionMinor < 12
         cpp.cxxLanguageVersion: "c++11"
     }
 
     // Since Qt 5.12 available support for C++17
     Properties {
-        condition: Qt.core.versionMajor >= 5 &&  Qt.core.versionMinor >= 12
+        condition: Qt.core.versionMajor >= 5 && Qt.core.versionMinor >= 12
         cpp.cxxLanguageVersion: "c++17"
     }
 
@@ -49,8 +50,12 @@ CppApplication {
         prefix: project.sourceDirectory + "/dist/win/"
         files: {
             var files = [];
+
+            if (qbs.toolchainType.contains("mingw"))
+                files.push("msvcr120.dll");
+
             // Minimal supported OpenSSL version since Qt 5.12.4 is 1.1.1.
-            if (Qt.core.versionMajor >= 5  &&  Qt.core.versionMinor >= 12 && Qt.core.versionPatch >= 4) {
+            if (Utilities.versionCompare(Qt.core.version, "5.12.4") >= 0) {
                 if (qbs.architecture.contains("x86_64")) {
                     files.push(
                         "openssl/win64/libcrypto-1_1-x64.dll",
@@ -63,7 +68,6 @@ CppApplication {
                     );
                 }
             } else {
-                files.push("msvcr120.dll");
                 if (qbs.architecture.contains("x86_64")) {
                     files.push(
                         "openssl/win64/libeay32.dll",

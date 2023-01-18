@@ -3,6 +3,7 @@ import qbs.FileInfo
 VApp {
     Depends { name: "freedesktop2" }
     Depends { name: "tenv" }
+    Depends { name: "windeployqt"; }
     Depends { name: "i18nconfig"; }
 
     version: "0.7.52"
@@ -61,5 +62,12 @@ VApp {
 
             return files;
         }
+    }
+
+    windeployqt.noVirtualkeyboard: true
+
+    Properties {
+        condition: i18nconfig.limitDeploymentOfQtTranslations
+        windeployqt.languages: i18nconfig.qtTranslationLocales.join(',')
     }
 }

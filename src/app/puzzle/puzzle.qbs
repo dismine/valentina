@@ -267,4 +267,15 @@ VToolApp {
         prefix: product.sourceDirectory + "/share/resources/"
         files: "puzzle.rc"
     }
+
+    Group {
+        name: "win deploy"
+        condition: qbs.targetOS.contains("windows")
+        prefix: project.sourceDirectory + "/dist/win/"
+        files: [
+            "layout.ico",
+        ]
+        qbs.install: true
+        qbs.installDir: buildconfig.installAppPath
+    }
 }

@@ -1,4 +1,4 @@
-VLib {
+VDynamicLib {
     name: "QMUParserLib"
     version: "2.7.0"
     files: [
@@ -34,10 +34,19 @@ VLib {
 
     cpp.defines: ["QMUPARSER_LIBRARY", 'QMUP_VERSION="' + product.version + '"']
 
-    buildconfig.staticBuild: false
-
     Export {
         Depends { name: "cpp" }
         cpp.includePaths: [exportingProduct.sourceDirectory]
+    }
+
+    Group {
+        name: "win deploy"
+        condition: qbs.targetOS.contains("windows")
+        prefix: product.sourceDirectory + "/"
+        files: [
+            "LICENSE_BSD.txt"
+        ]
+        qbs.install: true
+        qbs.installDir: buildconfig.installAppPath
     }
 }

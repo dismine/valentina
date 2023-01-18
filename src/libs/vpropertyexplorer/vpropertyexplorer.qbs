@@ -1,4 +1,4 @@
-VLib {
+VDynamicLib {
     Depends { name: "Qt"; submodules: ["gui", "widgets"] }
     Depends { name: "VMiscLib" }
 
@@ -40,8 +40,6 @@ VLib {
         "vproperties.h",
         "checkablemessagebox.h",
     ]
-
-    buildconfig.staticBuild: false
 
     Group {
         name: "plugins"

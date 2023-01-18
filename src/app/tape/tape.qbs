@@ -211,4 +211,16 @@ VToolApp {
         prefix: product.sourceDirectory + "/share/resources/"
         files: "tape.rc"
     }
+
+    Group {
+        name: "win deploy"
+        condition: qbs.targetOS.contains("windows")
+        prefix: project.sourceDirectory + "/dist/win/"
+        files: [
+            "i-measurements.ico",
+            "s-measurements.ico",
+        ]
+        qbs.install: true
+        qbs.installDir: buildconfig.installAppPath
+    }
 }

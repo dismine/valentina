@@ -287,6 +287,24 @@ VToolApp {
     }
 
     Group {
+        name: "win deploy"
+        condition: qbs.targetOS.contains("windows")
+        prefix: project.sourceDirectory + "/"
+        files: [
+            "dist/win/valentina.ico",
+            "dist/win/pattern.ico",
+            "dist/win/EUDC.TTE",
+            "AUTHORS.txt",
+            "LICENSE_GPL.txt",
+            "README.txt",
+            "ChangeLog.txt",
+            "share/qtlogging.ini"
+        ]
+        qbs.install: true
+        qbs.installDir: buildconfig.installAppPath
+    }
+
+    Group {
         fileTagsFilter: "qm"
         qbs.install: true
         qbs.installDir: buildconfig.installDataPath + "/translations"
