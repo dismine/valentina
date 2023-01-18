@@ -2,6 +2,7 @@ import qbs.FileInfo
 
 Product {
     Depends { name: "i18n" }
+    Depends { name: "i18nconfig" }
 
     name: "Translations"
     type: "ts"
@@ -54,26 +55,7 @@ Product {
         files: {
             var files = [];
 
-            var locales = [
-                "uk_UA",
-                "de_DE",
-                "cs_CZ",
-                "he_IL",
-                "fr_FR",
-                "it_IT",
-                "nl_NL",
-                "id_ID",
-                "es_ES",
-                "fi_FI",
-                "en_US",
-                "en_CA",
-                "en_IN",
-                "ro_RO",
-                "zh_CN",
-                "pt_BR",
-                "el_GR",
-                "pl_PL"
-            ];
+            var locales = i18nconfig.translationLocales;
 
             files.push("valentina.ts");
 
