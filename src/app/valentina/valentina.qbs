@@ -312,6 +312,7 @@ VToolApp {
 
     Group {
         name: "Valentina RC"
+        condition: qbs.targetOS.contains("windows")
         prefix: product.sourceDirectory + "/share/resources/"
         files: "valentina.rc"
     }

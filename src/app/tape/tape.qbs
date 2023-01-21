@@ -208,6 +208,7 @@ VToolApp {
 
     Group {
         name: "Tape RC"
+        condition: qbs.targetOS.contains("windows")
         prefix: product.sourceDirectory + "/share/resources/"
         files: "tape.rc"
     }

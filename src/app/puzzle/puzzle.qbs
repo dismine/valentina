@@ -264,6 +264,7 @@ VToolApp {
 
     Group {
         name: "Puzzle RC"
+        condition: qbs.targetOS.contains("windows")
         prefix: product.sourceDirectory + "/share/resources/"
         files: "puzzle.rc"
     }
