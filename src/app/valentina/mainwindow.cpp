@@ -2894,7 +2894,9 @@ void MainWindow::ToolBarTools()
     Also for me don't work Qt:CTRL and work Qt::ControlModifier.*/
 
     QT_WARNING_PUSH
+#if !defined(Q_OS_MACOS) && defined(Q_CC_CLANG)
     QT_WARNING_DISABLE_CLANG("-Wenum-enum-conversion")
+#endif
 
     QList<QKeySequence> zoomInShortcuts;
     zoomInShortcuts.append(QKeySequence(QKeySequence::ZoomIn));
