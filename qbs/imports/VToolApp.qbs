@@ -194,4 +194,12 @@ VApp {
         condition: i18nconfig.limitDeploymentOfQtTranslations
         windeployqt.languages: i18nconfig.qtTranslationLocales.join(',')
     }
+
+    Group {
+        condition: qbs.targetOS.contains("macos") && bundle.isBundle
+        fileTagsFilter: "bundle.content"
+        qbs.install: true
+        qbs.installDir: buildconfig.installAppPath
+        qbs.installSourceBase: destinationDirectory
+    }
 }
