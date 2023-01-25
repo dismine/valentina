@@ -11,8 +11,8 @@ VApp {
 
     version: "0.7.52"
     install: true
-    installDir: buildconfig.installAppPath
-    installDebugInformation: true
+    installDir: buildconfig.installBinaryPath
+    installDebugInformation: qbs.buildVariant !== "release"
     consoleApplication: false
     bundle.isBundle: qbs.buildVariant === "release"
     bundle.identifierPrefix: 'ua.com.smart-pattern'
