@@ -305,12 +305,6 @@ VToolApp {
     }
 
     Group {
-        fileTagsFilter: "qm"
-        qbs.install: true
-        qbs.installDir: buildconfig.installDataPath + "/translations"
-    }
-
-    Group {
         name: "Valentina RC"
         condition: qbs.targetOS.contains("windows")
         prefix: product.sourceDirectory + "/share/resources/"

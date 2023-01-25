@@ -1,6 +1,7 @@
 import qbs.File
 import qbs.FileInfo
 import qbs.TextFile
+import qbs.Process
 
 /**
   This module generates 'i18n.pro' artifact, which then acts as an input for 'lupdate' program, which in turn produces
@@ -25,6 +26,8 @@ Module {
     property bool buildWithPro: true
 
     property string lupdateName: "lupdate"
+
+    readonly property string qtTranslationsPath: qtTranslationsProbe.qtTranslationsPath
 
     Rule {
         condition: update && buildWithPro
@@ -201,5 +204,40 @@ Module {
         }
 
         outputFileTags: ["i18n"]
+    }
+
+    Probe {
+        id: qtTranslationsProbe
+
+        readonly property string binPath: product.Qt.core.binPath
+
+        property string qtTranslationsPath
+
+        configure: {
+            var qmakeProcess = new Process();
+            try {
+                var suffix = FileInfo.executableSuffix();
+                var qmakePath = FileInfo.joinPaths(binPath, "qmake" + suffix);
+                qmakeProcess.exec(qmakePath, ["-query"]);
+                if (qmakeProcess.exitCode() !== 0) {
+                    throw "The qmake executable '" + FileInfo.toNativeSeparators(qmakePath) + "' failed with exit code " +
+                            qmakeProcess.exitCode() + ".";
+                }
+                while (!qmakeProcess.atEnd()) {
+                    var line = qmakeProcess.readLine();
+                    var index = (line || "").indexOf(":");
+                    if (index !== -1) {
+                        if (line.slice(0, index) === "QT_INSTALL_TRANSLATIONS") {
+                            var path = line.slice(index + 1).trim();
+                            if (path)
+                                qtTranslationsPath = FileInfo.fromNativeSeparators(path);
+                            break;
+                        }
+                    }
+                }
+            } finally {
+                qmakeProcess.close();
+            }
+        }
     }
 }
