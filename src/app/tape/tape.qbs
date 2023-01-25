@@ -223,7 +223,18 @@ VToolApp {
         condition: qbs.targetOS.contains("macos")
         prefix: project.sourceDirectory + "/dist/macx/tape/"
         files: [
-            "Info.plist"
+            "Info.plist",
+            "tape.xcassets"
+        ]
+    }
+
+    Group {
+        name: "ICNS"
+        condition: qbs.targetOS.contains("macos")
+        prefix: project.sourceDirectory + "/dist/macx/valentina-project.xcassets/"
+        files: [
+            "i-measurements.iconset",
+            "s-measurements.iconset"
         ]
     }
 }
