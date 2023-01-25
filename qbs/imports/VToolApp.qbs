@@ -14,13 +14,11 @@ VApp {
     installDebugInformation: true
     consoleApplication: false
     bundle.isBundle: qbs.buildVariant === "release"
+    bundle.identifierPrefix: 'ua.com.smart-pattern'
 
-    Properties {
-        // Breakpoints do not work if debug the app inside of bundle. In debug mode we turn off creating a bundle.
-        // Probably it will breake some dependencies. Version for Mac designed to work inside an app bundle.
-        condition: qbs.targetOS.contains("macos") && qbs.buildVariant == "debug"
-        bundle.isBundle: false
-    }
+    bundle.infoPlist:({
+        "NSHumanReadableCopyright": buildconfig.valentina_copyright_string
+    })
 
     Properties {
         condition: buildconfig.enableAppImage && qbs.targetOS.contains("unix") && !qbs.targetOS.contains("macos")

@@ -28,6 +28,8 @@ macx{
     TARGET = valentina
 }
 
+VERSION = 0.7.52
+
 # Use out-of-source builds (shadow builds)
 CONFIG -= debug_and_release debug_and_release_target
 

@@ -217,4 +217,13 @@ VToolApp {
         qbs.install: true
         qbs.installDir: buildconfig.installAppPath
     }
+
+    Group {
+        name: "MacOS assets"
+        condition: qbs.targetOS.contains("macos")
+        prefix: project.sourceDirectory + "/dist/macx/tape/"
+        files: [
+            "Info.plist"
+        ]
+    }
 }

@@ -310,4 +310,13 @@ VToolApp {
         prefix: product.sourceDirectory + "/share/resources/"
         files: "valentina.rc"
     }
+
+    Group {
+        name: "MacOS assets"
+        condition: qbs.targetOS.contains("macos")
+        prefix: project.sourceDirectory + "/dist/macx/valentina/"
+        files: [
+            "Info.plist"
+        ]
+    }
 }

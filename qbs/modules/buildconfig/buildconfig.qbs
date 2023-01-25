@@ -22,6 +22,9 @@ Module {
 
     property bool enableAppImage: false
 
+    property string valentina_copyright_year: { return new Date().getFullYear().toString(); }
+    property string valentina_copyright_string: "(C) 2013-" + valentina_copyright_year + ", Valentina project"
+
     Depends { name: "ccache"; }
 
     // Use this property to disable the use of ccache.

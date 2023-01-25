@@ -12,6 +12,8 @@ QT       += core gui widgets network xml xmlpatterns printsupport svg concurrent
 # Name of binary file
 TARGET = tape
 
+VERSION = 0.7.52
+
 # We want create executable file
 TEMPLATE = app
 

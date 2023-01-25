@@ -272,4 +272,13 @@ VToolApp {
         qbs.install: true
         qbs.installDir: buildconfig.installAppPath
     }
+
+    Group {
+        name: "MacOS assets"
+        condition: qbs.targetOS.contains("macos")
+        prefix: project.sourceDirectory + "/dist/macx/puzzle/"
+        files: [
+            "Info.plist"
+        ]
+    }
 }
