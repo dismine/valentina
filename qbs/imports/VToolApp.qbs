@@ -17,6 +17,8 @@ VApp {
     bundle.isBundle: qbs.buildVariant === "release"
     bundle.identifierPrefix: 'ua.com.smart-pattern'
 
+    property bool primaryApp: false
+
     bundle.infoPlist:({
         "NSHumanReadableCopyright": buildconfig.valentina_copyright_string
     })
@@ -74,7 +76,7 @@ VApp {
 
     Rule {
         multiplex: true
-        condition: qbs.targetOS.contains("macos") && bundle.isBundle
+        condition: qbs.targetOS.contains("macos") && bundle.isBundle && (buildconfig.enableMultiBundle || primaryApp)
         inputs: ["qm"]
         outputFileTags: ["bundle.qm", "bundle.content"]
         outputArtifacts: {

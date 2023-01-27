@@ -12,10 +12,12 @@ VToolApp {
     Depends { name: "VWidgetsLib"; }
     Depends { name: "VToolsLib"; }
     Depends { name: "ebr" }
+    Depends { name: "multibundle"; }
 
     name: "Tape"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "Tape" : "tape"
     targetName: buildconfig.appTarget
+    multibundle.targetApps: ["Valentina"]
 
     files: [
         "main.cpp",
@@ -220,7 +222,7 @@ VToolApp {
 
     Group {
         name: "MacOS assets"
-        condition: qbs.targetOS.contains("macos")
+        condition: qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle
         prefix: project.sourceDirectory + "/dist/macx/tape/"
         files: [
             "Info.plist",
@@ -230,7 +232,7 @@ VToolApp {
 
     Group {
         name: "ICNS"
-        condition: qbs.targetOS.contains("macos")
+        condition: qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle
         prefix: project.sourceDirectory + "/dist/macx/valentina-project.xcassets/"
         files: [
             "i-measurements.iconset",

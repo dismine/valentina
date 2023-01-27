@@ -22,6 +22,8 @@ Module {
 
     property bool enableAppImage: false
 
+    property bool enableMultiBundle: false
+
     property string valentina_copyright_year: { return new Date().getFullYear().toString(); }
     property string valentina_copyright_string: "(C) 2013-" + valentina_copyright_year + ", Valentina project"
 
@@ -116,6 +118,9 @@ Module {
 
         if (enableAppImage && qbs.targetOS.contains("unix") && !qbs.targetOS.contains("macos"))
             defines.push('APPIMAGE');
+
+        if (enableMultiBundle)
+            defines.push('MULTI_BUNDLE');
 
         return defines;
     }

@@ -51,6 +51,8 @@ public:
 
     void InitOptions();
 
+    static void StartDetachedProcess(const QString &program, const QStringList &arguments);
+
     static auto TapeFilePath() -> QString;
     static auto PuzzleFilePath() -> QString;
 

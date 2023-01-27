@@ -1,6 +1,7 @@
 VDynamicLib {
     Depends { name: "Qt"; submodules: ["gui", "widgets"] }
     Depends { name: "VMiscLib" }
+    Depends { name: "multibundle"; }
 
     name: "VPropertyExplorerLib"
     version: "1.0.0"
@@ -92,4 +93,5 @@ VDynamicLib {
     }
 
     cpp.defines: "VPROPERTYEXPLORER_LIBRARY"
+    multibundle.targetApps: ["Valentina", "Tape", "Puzzle"]
 }

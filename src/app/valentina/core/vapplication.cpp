@@ -78,19 +78,42 @@ namespace
 {
 auto AppFilePath(const QString &appName) -> QString
 {
-    QString appNameExe = appName; // NOLINT(performance-unnecessary-copy-initialization)
 #ifdef Q_OS_WIN
-    appNameExe += ".exe";
+    const QString executableSuffix = QStringLiteral(".exe");
+#else
+    const QString executableSuffix;
 #endif
-    QFileInfo canonicalFile(QStringLiteral("%1/%2").arg(QCoreApplication::applicationDirPath(), appNameExe));
+
+    QFileInfo canonicalFile(QStringLiteral("%1/%2").arg(QCoreApplication::applicationDirPath(),
+                                                        appName + executableSuffix));
     if (canonicalFile.exists())
     {
         return canonicalFile.absoluteFilePath();
     }
 
+#if defined(Q_OS_MACOS) && defined(QBS_BUILD) && defined(MULTI_BUNDLE)
+    QFileInfo multiBundleFile(QStringLiteral("%1/../../../%2.app/Contents/MacOS/%2")
+                              .arg(QCoreApplication::applicationDirPath(), appName));
+    if (multiBundleFile.exists())
+    {
+        return multiBundleFile.absoluteFilePath();
+    }
+#endif
+
+#if !defined(QBS_BUILD)
     QFileInfo debugFile(QStringLiteral("%1/../../%2/bin/%3")
-                            .arg(QCoreApplication::applicationDirPath(), appName, appNameExe));
-    return debugFile.exists() ? debugFile.absoluteFilePath() : appNameExe;
+                            .arg(QCoreApplication::applicationDirPath(), appName, appName + executableSuffix));
+    if (debugFile.exists())
+    {
+        return debugFile.absoluteFilePath();
+    }
+#endif
+
+#if !defined(Q_OS_MACOS)
+    return appName + executableSuffix;
+#else
+    return appName + QStringLiteral(".app");
+#endif
 }
 }  // namespace
 
@@ -489,13 +512,23 @@ void VApplication::ActivateDarkMode()
 //---------------------------------------------------------------------------------------------------------------------
 auto VApplication::TapeFilePath() -> QString
 {
-    return AppFilePath(QStringLiteral("tape"));
+#ifdef Q_OS_MACOS
+    const QString appName = QStringLiteral("Tape");
+#else
+    const QString appName = QStringLiteral("tape");
+#endif
+    return AppFilePath(appName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VApplication::PuzzleFilePath() -> QString
 {
-    return AppFilePath(QStringLiteral("puzzle"));
+#ifdef Q_OS_MACOS
+    const QString appName = QStringLiteral("Puzzle");
+#else
+    const QString appName = QStringLiteral("puzzle");
+#endif
+    return AppFilePath(appName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -640,6 +673,32 @@ void VApplication::InitOptions()
         QIcon::setThemeName(QStringLiteral("win.icon.theme"));
     }
     ActivateDarkMode();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VApplication::StartDetachedProcess(const QString &program, const QStringList &arguments)
+{
+#if !defined(Q_OS_MACOS)
+        const QString workingDirectory = QFileInfo(program).absoluteDir().absolutePath();
+        QProcess::startDetached(program, arguments, workingDirectory);
+#else
+        if (not program.endsWith(".app"))
+        {
+            const QString workingDirectory = QFileInfo(program).absoluteDir().absolutePath();
+            QProcess::startDetached(program, arguments, workingDirectory);
+        }
+        else
+        {
+            QStringList openArguments {"-n", QStringLiteral("/Applications/%1").arg(program)};
+            if (not arguments.isEmpty())
+            {
+                openArguments.append("--args");
+                openArguments += arguments;
+            }
+
+            QProcess::startDetached("open", openArguments);
+        }
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------

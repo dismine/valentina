@@ -10,10 +10,12 @@ VToolApp {
     Depends { name: "VFormatLib" }
     Depends { name: "VWidgetsLib" }
     Depends { name: "FervorLib" }
+    Depends { name: "multibundle"; }
 
     name: "Puzzle"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "Puzzle" : "puzzle"
     targetName: buildconfig.appTarget
+    multibundle.targetApps: ["Valentina"]
 
     files: [
         "main.cpp",
@@ -176,7 +178,7 @@ VToolApp {
     }
 
     Group {
-        condition: qbs.targetOS.contains("macos") && qbs.architecture.contains("x86_64")
+        condition: qbs.targetOS.contains("macos") && qbs.architecture.contains("x86_64") && buildconfig.enableMultiBundle
         name: "pdftops MacOS"
         prefix: project.sourceDirectory + "/dist/macx/bin64/"
         files: ["pdftops"]
@@ -275,7 +277,7 @@ VToolApp {
 
     Group {
         name: "MacOS assets"
-        condition: qbs.targetOS.contains("macos")
+        condition: qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle
         prefix: project.sourceDirectory + "/dist/macx/puzzle/"
         files: [
             "Info.plist",
@@ -285,7 +287,7 @@ VToolApp {
 
     Group {
         name: "ICNS"
-        condition: qbs.targetOS.contains("macos")
+        condition: qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle
         prefix: project.sourceDirectory + "/dist/macx/valentina-project.xcassets/"
         files: "layout.iconset"
     }

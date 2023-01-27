@@ -7,7 +7,7 @@ Library {
 
     type: buildconfig.staticBuild ? "staticlibrary" : "dynamiclibrary"
 
-    buildconfig.appTarget: "valentina"
+    buildconfig.appTarget: qbs.targetOS.contains("macos") ? "Valentina" : "valentina"
     bundle.isBundle: buildconfig.frameworksBuild
     cpp.includePaths: [".."]
 
@@ -24,9 +24,8 @@ Library {
         cpp.compilerWrapper: "ccache"
     }
 
-    install: !buildconfig.staticBuild
-    installDir: buildconfig.installLibraryPath
-    installDebugInformation: !buildconfig.staticBuild
+    install: false
+    installDebugInformation: false
 
     Properties {
         condition: qbs.targetOS.contains("macos")

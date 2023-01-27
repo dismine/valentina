@@ -10,4 +10,12 @@ VLib {
         condition: i18nconfig.limitDeploymentOfQtTranslations
         windeployqt.languages: i18nconfig.qtTranslationLocales.join(',')
     }
+
+    installDebugInformation: qbs.buildVariant !== "release"
+
+    Properties {
+        condition: !qbs.targetOS.contains("macos") || (qbs.targetOS.contains("macos") && !buildconfig.enableMultiBundle)
+        install: true
+        installDir: buildconfig.installLibraryPath
+    }
 }

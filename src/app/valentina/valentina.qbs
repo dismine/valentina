@@ -13,6 +13,8 @@ VToolApp {
     Depends { name: "VFormatLib"; }
     Depends { name: "VMiscLib"; }
 
+    primaryApp: true
+
     Depends {
         name: "Qt.winextras"
         condition: qbs.targetOS.contains("windows")

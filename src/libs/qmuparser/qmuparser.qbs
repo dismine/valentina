@@ -1,4 +1,6 @@
 VDynamicLib {
+    Depends { name: "multibundle"; }
+
     name: "QMUParserLib"
     version: "2.7.0"
     files: [
@@ -49,4 +51,6 @@ VDynamicLib {
         qbs.install: true
         qbs.installDir: buildconfig.installAppPath
     }
+
+    multibundle.targetApps: ["Valentina", "Tape", "Puzzle"]
 }
