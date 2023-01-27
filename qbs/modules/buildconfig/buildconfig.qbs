@@ -125,6 +125,8 @@ Module {
         return defines;
     }
 
+    cpp.visibility: "minimal"
+
     Properties {
         condition: Qt.core.versionMajor >= 5 &&  Qt.core.versionMinor < 12
         cpp.cxxLanguageVersion: "c++11"
