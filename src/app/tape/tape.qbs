@@ -98,7 +98,12 @@ VToolApp {
         ]
         fileTags: ["multisize_tables"]
         qbs.install: true
-        qbs.installDir: buildconfig.installDataPath + "/tables/multisize"
+        qbs.installDir: {
+            if (qbs.targetOS.contains("macos") && !buildconfig.enableMultiBundle)
+                return buildconfig.installAppPath + "/Valentina.app/Contents/Resources/tables/multisize"
+
+            return buildconfig.installDataPath + "/tables/multisize"
+        }
     }
 
     Group {
@@ -110,7 +115,12 @@ VToolApp {
         ]
         fileTags: ["measurements_templates"]
         qbs.install: true
-        qbs.installDir: buildconfig.installDataPath + "/tables/templates"
+        qbs.installDir: {
+            if (qbs.targetOS.contains("macos") && !buildconfig.enableMultiBundle)
+                return buildconfig.installAppPath + "/Valentina.app/Contents/Resources/tables/templates"
+
+            return buildconfig.installDataPath + "/tables/templates"
+        }
     }
 
     Group {
@@ -196,8 +206,11 @@ VToolApp {
         qbs.installDir: {
             if (qbs.targetOS.contains("unix") && !qbs.targetOS.contains("macos"))
                 return "share/valentina/";
-            else
-                return buildconfig.installDataPath + "/";
+
+            if (qbs.targetOS.contains("macos") && !buildconfig.enableMultiBundle)
+                return buildconfig.installAppPath + "/Valentina.app/Contents/Resources"
+
+            return buildconfig.installDataPath + "/";
         }
     }
 

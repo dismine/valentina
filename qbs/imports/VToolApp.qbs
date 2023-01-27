@@ -4,10 +4,11 @@ import qbs.File
 VApp {
     Depends { name: "freedesktop2" }
     Depends { name: "tenv" }
-    Depends { name: "windeployqt"; }
+    Depends { name: "windeployqt"; condition: qbs.targetOS.contains("windows") }
     Depends { name: "i18nconfig"; }
     Depends { name: "i18n"; }
     Depends { name: "ib"; condition: qbs.targetOS.contains("macos") }
+    Depends { name: "macdeployqt"; condition: qbs.targetOS.contains("macos") }
 
     version: "0.7.52"
     install: true
@@ -189,11 +190,15 @@ VApp {
         }
     }
 
-    windeployqt.noVirtualkeyboard: true
+    Properties {
+        condition: qbs.targetOS.contains("windows")
+        windeployqt.noVirtualkeyboard: true
+    }
 
     Properties {
         condition: qbs.targetOS.contains("macos")
         ib.appIconName: targetName
+        macdeployqt.targetApps: ["Tape", "Puzzle"]
     }
 
     Properties {
