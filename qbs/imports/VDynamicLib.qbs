@@ -6,6 +6,8 @@ VLib {
 
     windeployqt.noVirtualkeyboard: true
 
+    bundle.identifierPrefix: 'ua.com.smart-pattern'
+
     Properties {
         condition: i18nconfig.limitDeploymentOfQtTranslations
         windeployqt.languages: i18nconfig.qtTranslationLocales.join(',')
