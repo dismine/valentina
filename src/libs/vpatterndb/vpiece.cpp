@@ -1136,6 +1136,70 @@ int VPiece::IsCSAStart(const QVector<CustomSARecord> &records, quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qreal VPiece::Area(const QVector<QPointF> &shape, const VContainer *data) const
+{
+    SCASSERT(data != nullptr)
+
+    const qreal mainArea = qAbs(VAbstractPiece::SumTrapezoids(shape))/2.0;
+
+    qreal internalPathArea = 0;
+    const QVector<quint32> pathsId = GetInternalPaths();
+    for (auto id : pathsId)
+    {
+        const VPiecePath path = data->GetPiecePath(id);
+        if (path.GetType() != PiecePathType::InternalPath || not path.IsVisible(data->DataVariables()) ||
+            not path.IsCutPath())
+        {
+            continue;
+        }
+
+        QVector<QPointF> points;
+        CastTo(path.PathPoints(data, shape), points);
+        if (points.isEmpty() || not VFuzzyComparePoints(ConstFirst(points), ConstLast(points)))
+        {
+            continue;
+        }
+
+        internalPathArea += qAbs(VAbstractPiece::SumTrapezoids(points))/2.0;
+    }
+
+    return mainArea - internalPathArea;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::GlobalPassmarkLength(const VContainer *data) const -> qreal
+{
+    qreal length = 0;
+    QString passmarkLengthVariable = VAbstractValApplication::VApp()->getCurrentDocument()->GetPassmarkLengthVariable();
+    if (passmarkLengthVariable.isEmpty())
+    {
+        return 0;
+    }
+
+    try
+    {
+        QSharedPointer<VInternalVariable> var = data->GetVariable<VInternalVariable>(passmarkLengthVariable);
+        length = *var->GetValue();
+
+        if (VAbstractValApplication::VApp()->toPixel(length) <= accuracyPointOnLine)
+        {
+            const QString errorMsg = QObject::tr("Invalid global value for a passmark length. Piece '%1'. Length is "
+                                                 "less than minimal allowed.")
+                                         .arg(GetName());
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(errorMsg)
+                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        }
+    }
+    catch (const VExceptionBadId &)
+    {
+        length = 0;
+    }
+
+    return length;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 #if !defined(V_NO_ASSERT)
 // Use for writing tests
 //---------------------------------------------------------------------------------------------------------------------
@@ -1182,37 +1246,48 @@ QJsonObject VPiece::DBToJson(const VContainer *data) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPiece::GlobalPassmarkLength(const VContainer *data) const -> qreal
+void VPiece::DumpPiece(const VPiece &piece, const VContainer *data, const QString &templateName)
 {
-    qreal length = 0;
-    QString passmarkLengthVariable = VAbstractValApplication::VApp()->getCurrentDocument()->GetPassmarkLengthVariable();
-    if (passmarkLengthVariable.isEmpty())
+    SCASSERT(data != nullptr)
+    QTemporaryFile temp; // Go to tmp folder to find dump
+    temp.setAutoRemove(false); // Remove dump manually
+
+    if (not templateName.isEmpty())
     {
-        return 0;
+        temp.setFileTemplate(QDir::tempPath() + QDir::separator() + templateName);
     }
 
-    try
+    if (temp.open())
     {
-        QSharedPointer<VInternalVariable> var = data->GetVariable<VInternalVariable>(passmarkLengthVariable);
-        length = *var->GetValue();
-
-        if (VAbstractValApplication::VApp()->toPixel(length) <= accuracyPointOnLine)
+#if defined(Q_OS_LINUX)
+    #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+//        On Linux, QTemporaryFile will attempt to create unnamed temporary
+//        files. If that succeeds, open() will return true but exists() will be
+//        false. If you call fileName() or any function that calls it,
+//        QTemporaryFile will give the file a name, so most applications will
+//        not see a difference.
+        temp.fileName(); // call to create a file on disk
+    #endif
+#endif
+        QJsonObject testCase
         {
-            const QString errorMsg = QObject::tr("Invalid global value for a passmark length. Piece '%1'. Length is "
-                                                 "less than minimal allowed.")
-                    .arg(GetName());
-            VAbstractApplication::VApp()->IsPedantic()
-                    ? throw VException(errorMsg)
-                    : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
-        }
-    }
-    catch (const VExceptionBadId &)
-    {
-        length = 0;
-    }
+            {"bd", piece.DBToJson(data)},
+            {"piece", piece.MainPathToJson()},
+        };
 
-    return length;
+        QJsonObject json
+        {
+            {"testCase", testCase},
+        };
+
+        QJsonDocument document(json);
+
+        QTextStream out(&temp);
+        out << document.toJson();
+        out.flush();
+    }
 }
+#endif // !defined(V_NO_ASSERT)
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPiece::TestInternalPathCuttingPathIntersection(const VContainer *data) const
@@ -1335,80 +1410,6 @@ void VPiece::TestInternalPathsIntersections(const VContainer *data) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPiece::Area(const QVector<QPointF> &shape, const VContainer *data) const
-{
-    SCASSERT(data != nullptr)
-
-    const qreal mainArea = qAbs(VAbstractPiece::SumTrapezoids(shape))/2.0;
-
-    qreal internalPathArea = 0;
-    const QVector<quint32> pathsId = GetInternalPaths();
-    for (auto id : pathsId)
-    {
-        const VPiecePath path = data->GetPiecePath(id);
-        if (path.GetType() != PiecePathType::InternalPath || not path.IsVisible(data->DataVariables()) ||
-            not path.IsCutPath())
-        {
-            continue;
-        }
-
-        QVector<QPointF> points;
-        CastTo(path.PathPoints(data, shape), points);
-        if (points.isEmpty() || not VFuzzyComparePoints(ConstFirst(points), ConstLast(points)))
-        {
-            continue;
-        }
-
-        internalPathArea += qAbs(VAbstractPiece::SumTrapezoids(points))/2.0;
-    }
-
-    return mainArea - internalPathArea;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPiece::DumpPiece(const VPiece &piece, const VContainer *data, const QString &templateName)
-{
-    SCASSERT(data != nullptr)
-    QTemporaryFile temp; // Go to tmp folder to find dump
-    temp.setAutoRemove(false); // Remove dump manually
-
-    if (not templateName.isEmpty())
-    {
-        temp.setFileTemplate(QDir::tempPath() + QDir::separator() + templateName);
-    }
-
-    if (temp.open())
-    {
-#if defined(Q_OS_LINUX)
-    #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
-//        On Linux, QTemporaryFile will attempt to create unnamed temporary
-//        files. If that succeeds, open() will return true but exists() will be
-//        false. If you call fileName() or any function that calls it,
-//        QTemporaryFile will give the file a name, so most applications will
-//        not see a difference.
-        temp.fileName(); // call to create a file on disk
-    #endif
-#endif
-        QJsonObject testCase
-        {
-            {"bd", piece.DBToJson(data)},
-            {"piece", piece.MainPathToJson()},
-        };
-
-        QJsonObject json
-        {
-            {"testCase", testCase},
-        };
-
-        QJsonDocument document(json);
-
-        QTextStream out(&temp);
-        out << document.toJson();
-        out.flush();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VPiece::TestInternalPaths(const VContainer *data) const
 {
     TestInternalPathCuttingPathIntersection(data);
@@ -1481,4 +1482,3 @@ auto VPiece::ShortNameRegExp() -> QString
 
     return regex;
 }
-#endif // !defined(V_NO_ASSERT)

@@ -28,7 +28,7 @@
 
 #include "dialogpin.h"
 #include "ui_dialogpin.h"
-#include "visualization/line/vistoolspecialpoint.h"
+#include "../../../visualization/line/vistoolspecialpoint.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)

@@ -21,7 +21,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="tabPath">
       <attribute name="title">
@@ -1040,7 +1040,6 @@
               <property name="font">
                <font>
                 <pointsize>36</pointsize>
-                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -1658,7 +1657,7 @@
   <customwidget>
    <class>VPlainTextEdit</class>
    <extends>QPlainTextEdit</extends>
-   <header location="global">vplaintextedit.h</header>
+   <header>../vwidgets/vplaintextedit.h</header>
   </customwidget>
  </customwidgets>
  <resources>

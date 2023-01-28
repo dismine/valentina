@@ -343,6 +343,13 @@
     </message>
 </context>
 <context>
+    <name>DRW_TextCodec</name>
+    <message>
+        <source>No available codec for code page &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DelGroup</name>
     <message>
         <source>delete group</source>
@@ -14198,6 +14205,13 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>Wrong tag name &apos;%1&apos;.</source>
         <translation>Nome da etiqueta errada &apos;%1&apos;.</translation>
+    </message>
+</context>
+<context>
+    <name>VAbstractPiece</name>
+    <message>
+        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

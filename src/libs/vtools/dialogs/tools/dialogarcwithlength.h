@@ -36,7 +36,7 @@
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
-#include "defglobal.h"
+#include "../vmisc/defglobal.h"
 #include "dialogtool.h"
 
 namespace Ui

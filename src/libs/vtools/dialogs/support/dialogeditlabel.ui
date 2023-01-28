@@ -450,7 +450,7 @@
   <customwidget>
    <class>VLineEdit</class>
    <extends>QLineEdit</extends>
-   <header>vlineedit.h</header>
+   <header>../vwidgets/vlineedit.h</header>
   </customwidget>
  </customwidgets>
  <resources>

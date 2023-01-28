@@ -44,7 +44,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
 #include "visline.h"
-#include "vtranslatevars.h"
+#include "../vpatterndb/vtranslatevars.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolEndLine::VisToolEndLine(const VContainer *data, QGraphicsItem *parent)

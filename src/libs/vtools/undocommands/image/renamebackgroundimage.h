@@ -37,6 +37,7 @@
 
 class RenameBackgroundImage : public VUndoCommand
 {
+    Q_OBJECT // NOLINT
 public:
     RenameBackgroundImage(QUuid id, const QString &name, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
     ~RenameBackgroundImage() override =default;

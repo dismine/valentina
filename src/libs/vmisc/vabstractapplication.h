@@ -99,8 +99,10 @@ protected:
     VCommonSettings *settings{nullptr};
 
     QPointer<QTranslator> qtTranslator{nullptr};
+#if defined(Q_OS_WIN) && !defined(QBS_BUILD)
     QPointer<QTranslator> qtxmlTranslator{nullptr};
     QPointer<QTranslator> qtBaseTranslator{nullptr};
+#endif // defined(Q_OS_WIN) && !defined(QBS_BUILD)
     QPointer<QTranslator> appTranslator{nullptr};
     QPointer<QTranslator> pmsTranslator{nullptr};
 

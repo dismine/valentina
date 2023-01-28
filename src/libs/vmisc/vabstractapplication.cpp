@@ -268,6 +268,7 @@ void VAbstractApplication::LoadTranslation(QString locale)
     LoadQM(qtTranslator, QStringLiteral("qt_"), locale, qtQmDir);
     installTranslator(qtTranslator);
 
+#if defined(Q_OS_WIN) && !defined(QBS_BUILD)
     qtxmlTranslator = new QTranslator(this);
     LoadQM(qtxmlTranslator, QStringLiteral("qtxmlpatterns_"), locale, qtQmDir);
     installTranslator(qtxmlTranslator);
@@ -275,6 +276,7 @@ void VAbstractApplication::LoadTranslation(QString locale)
     qtBaseTranslator = new QTranslator(this);
     LoadQM(qtBaseTranslator, QStringLiteral("qtbase_"), locale, qtQmDir);
     installTranslator(qtBaseTranslator);
+#endif // defined(Q_OS_WIN) && !defined(QBS_BUILD)
 
     appTranslator = new QTranslator(this);
     LoadQM(appTranslator, QStringLiteral("valentina_"), locale, appQmDir);
@@ -296,6 +298,7 @@ void VAbstractApplication::ClearTranslation()
         delete qtTranslator;
     }
 
+#if defined(Q_OS_WIN) && !defined(QBS_BUILD)
     if (not qtxmlTranslator.isNull())
     {
         removeTranslator(qtxmlTranslator);
@@ -307,6 +310,7 @@ void VAbstractApplication::ClearTranslation()
         removeTranslator(qtBaseTranslator);
         delete qtBaseTranslator;
     }
+#endif // defined(Q_OS_WIN) && !defined(QBS_BUILD)
 
     if (not appTranslator.isNull())
     {

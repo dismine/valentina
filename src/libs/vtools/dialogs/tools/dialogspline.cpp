@@ -55,7 +55,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "ui_dialogspline.h"
-#include "vtranslatevars.h"
+#include "../vpatterndb/vtranslatevars.h"
 #include "../qmuparser/qmudef.h"
 
 //---------------------------------------------------------------------------------------------------------------------

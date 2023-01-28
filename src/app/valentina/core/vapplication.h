@@ -32,7 +32,7 @@
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "vcmdexport.h"
-#include "vlockguard.h"
+#include "../vmisc/vlockguard.h"
 
 class VApplication;// use in define
 
@@ -50,6 +50,8 @@ public:
     auto notify(QObject * receiver, QEvent * event) -> bool override;
 
     void InitOptions();
+
+    static void StartDetachedProcess(const QString &program, const QStringList &arguments);
 
     static auto TapeFilePath() -> QString;
     static auto PuzzleFilePath() -> QString;

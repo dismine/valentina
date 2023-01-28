@@ -33,7 +33,7 @@
 #include <QString>
 #include <QCoreApplication>
 
-#include "def.h"
+#include "../vmisc/def.h"
 
 class VPLayoutSettings
 {

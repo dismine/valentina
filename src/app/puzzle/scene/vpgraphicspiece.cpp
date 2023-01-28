@@ -47,7 +47,7 @@
 #include "../vpapplication.h"
 
 #include "compatibility.h"
-#include "vlayoutpiecepath.h"
+#include "../vlayout/vlayoutpiecepath.h"
 
 #include "../vgeometry/vlayoutplacelabel.h"
 

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>405</width>
-    <height>358</height>
+    <height>363</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -374,7 +374,7 @@
   <customwidget>
    <class>VPlainTextEdit</class>
    <extends>QPlainTextEdit</extends>
-   <header location="global">vplaintextedit.h</header>
+   <header>../vwidgets/vplaintextedit.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

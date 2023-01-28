@@ -27,7 +27,7 @@
  *************************************************************************/
 #include "dialogselectlanguage.h"
 #include "ui_dialogselectlanguage.h"
-#include "../vmisc/def.h"
+#include "../def.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogSelectLanguage::DialogSelectLanguage(QWidget *parent) :

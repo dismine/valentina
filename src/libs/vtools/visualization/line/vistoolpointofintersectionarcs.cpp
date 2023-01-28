@@ -42,7 +42,7 @@
 #include "../vgeometry/varc.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
-#include "visualization/line/visline.h"
+#include "../line/visline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointOfIntersectionArcs::VisToolPointOfIntersectionArcs(const VContainer *data, QGraphicsItem *parent)

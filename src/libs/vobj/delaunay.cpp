@@ -71,10 +71,10 @@ struct	point2d_s;
 
 #define EPSILON		(REAL_ONE / TOLERANCE)
 
-typedef struct point2d_s	point2d_t;
-typedef struct face_s		face_t;
-typedef struct halfedge_s	halfedge_t;
-typedef struct delaunay_s	delaunay_t;
+typedef point2d_s	point2d_t;
+typedef face_s		face_t;
+typedef halfedge_s	halfedge_t;
+typedef delaunay_s	delaunay_t;
 typedef real mat3_t[3][3];
 
 struct point2d_s

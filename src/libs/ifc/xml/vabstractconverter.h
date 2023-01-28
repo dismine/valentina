@@ -44,6 +44,7 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 
 class VAbstractConverter :public VDomDocument
 {
+    Q_OBJECT // NOLINT
 public:
     explicit VAbstractConverter(const QString &fileName);
     virtual ~VAbstractConverter() = default;

@@ -26,7 +26,7 @@ public:
         BOOL,
         INVALID
     };
-    enum TYPE type;
+    TYPE type;
 public:
     explicit dxfReader(std::istream *stream)
         : type(INVALID),

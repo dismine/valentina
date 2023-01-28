@@ -1527,7 +1527,9 @@ void VPMainWindow::InitZoomToolBar()
     delete m_mouseCoordinate;
 
     QT_WARNING_PUSH
+#if !defined(Q_OS_MACOS) && defined(Q_CC_CLANG)
     QT_WARNING_DISABLE_CLANG("-Wenum-enum-conversion")
+#endif
 
     // connect the zoom buttons and shortcuts to the slots
     QList<QKeySequence> zoomInShortcuts;

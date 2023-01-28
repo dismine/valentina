@@ -66,7 +66,11 @@ auto main(int argc, char *argv[]) -> int
 #endif //Q_OS_MAC
 
     MApplication app(argc, argv);
-    app.InitOptions(); 
+    app.InitOptions();
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+    MApplication::setDesktopFileName(QStringLiteral("ua.com.smart-pattern.tape.desktop"));
+#endif
 
     QTimer::singleShot(0, &app, &MApplication::ProcessCMD);
 

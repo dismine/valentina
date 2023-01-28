@@ -393,8 +393,8 @@ QString VToolCutSplinePath::MakeToolTip() const
     splPath1->SetAliasSuffix(m_aliasSuffix1);
     splPath2->SetAliasSuffix(m_aliasSuffix2);
 
-    const QString curveStr = tr("Curve");
-    const QString lengthStr = tr("length");
+    const QString curveStr = QCoreApplication::translate("VToolCutSplinePath", "Curve");
+    const QString lengthStr = QCoreApplication::translate("VToolCutSplinePath", "length");
 
     const QString toolTip = QString("<table>"
                                     "<tr> <td><b>%6:</b> %7</td> </tr>"
@@ -407,8 +407,10 @@ QString VToolCutSplinePath::MakeToolTip() const
             .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
                  curveStr + QLatin1String("2 ") + lengthStr)
             .arg(VAbstractValApplication::VApp()->fromPixel(splPath2->GetLength()))
-            .arg(curveStr + QLatin1String(" 1") + tr("label"), splPath1->ObjectName(),
-                 curveStr + QLatin1String(" 2") + tr("label"), splPath2->ObjectName());
+            .arg(curveStr + QLatin1String(" 1") + QCoreApplication::translate("VToolCutSplinePath", "label"),
+                                     splPath1->ObjectName(),
+                 curveStr + QLatin1String(" 2") + QCoreApplication::translate("VToolCutSplinePath", "label"),
+                                     splPath2->ObjectName());
 
     delete splPath1;
     delete splPath2;

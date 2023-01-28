@@ -68,7 +68,9 @@ const qreal VCommonSettings::defaultScrollingAcceleration = 1.3;
 const qreal VCommonSettings::scrollingAccelerationMin = 1.0;
 const qreal VCommonSettings::scrollingAccelerationMax = 10.0;
 
+#ifndef QBS_BUILD
 Q_DECLARE_METATYPE(QMarginsF) // NOLINT
+#endif
 
 namespace
 {

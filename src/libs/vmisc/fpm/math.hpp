@@ -25,6 +25,7 @@ namespace detail
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wsign-conversion")
+QT_WARNING_DISABLE_GCC("-Wconversion")
 
 // Returns the index of the most-signifcant set bit
 inline auto find_highest_bit(unsigned long long value) noexcept -> long

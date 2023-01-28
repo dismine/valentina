@@ -88,7 +88,6 @@
        <property name="font">
         <font>
          <pointsize>14</pointsize>
-         <weight>75</weight>
          <italic>false</italic>
          <bold>true</bold>
         </font>
@@ -121,7 +120,6 @@
        <property name="font">
         <font>
          <pointsize>14</pointsize>
-         <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
@@ -156,7 +154,6 @@
        <property name="font">
         <font>
          <pointsize>14</pointsize>
-         <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
@@ -188,7 +185,6 @@
        <property name="font">
         <font>
          <pointsize>14</pointsize>
-         <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
@@ -639,7 +635,7 @@
   <customwidget>
    <class>VPlainTextEdit</class>
    <extends>QPlainTextEdit</extends>
-   <header location="global">vplaintextedit.h</header>
+   <header>../vwidgets/vplaintextedit.h</header>
   </customwidget>
  </customwidgets>
  <resources>

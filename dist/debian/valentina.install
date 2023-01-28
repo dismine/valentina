@@ -16,3 +16,4 @@ usr/share/icons/hicolor/256x256/mimetypes/*
 usr/share/icons/hicolor/512x512/apps/*
 usr/share/icons/hicolor/512x512/mimetypes/*
 usr/share/applications/*
+usr/share/metainfo/*

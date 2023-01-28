@@ -45,6 +45,7 @@ class VPSheet;
 
 class VPPiece : public VLayoutPiece
 {
+    Q_DECLARE_TR_FUNCTIONS(VPPiece) // NOLINT
 public:
     VPPiece() = default;
     explicit VPPiece(const VLayoutPiece &layoutPiece);

@@ -62,7 +62,7 @@ VPE::VColorPropertyEditor::VColorPropertyEditor(QWidget *parent)
     // The layout (a horizontal layout)
     QHBoxLayout* layout = new QHBoxLayout(this);
     layout->setSpacing(3);
-    layout->setMargin(0);
+    layout->setContentsMargins(0, 0, 0, 0);
     layout->addWidget(ColorLabel);
     layout->addWidget(TextLabel);
     layout->addItem(Spacer);

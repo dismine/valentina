@@ -46,7 +46,9 @@
 #include "../vlayout/vbank.h"
 #include "qglobal.h"
 
-Q_DECLARE_METATYPE(QMarginsF)
+#ifndef QBS_BUILD
+Q_DECLARE_METATYPE(QMarginsF) // NOLINT
+#endif
 
 namespace
 {

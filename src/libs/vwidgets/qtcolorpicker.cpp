@@ -682,7 +682,7 @@ auto ColorPickerPopup::CustomItems() const ->QVector<ColorPickerItem *>
 
     for (auto *item : items)
     {
-        if (item!= nullptr && item->text() == tr("Custom"))
+        if (item!= nullptr && item->text() == QCoreApplication::translate("ColorPickerPopup", "Custom"))
         {
             customItems.append(item);
         }

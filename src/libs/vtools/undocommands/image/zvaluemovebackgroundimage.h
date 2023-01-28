@@ -44,6 +44,7 @@ enum class ZValueMoveType
 
 class ZValueMoveBackgroundImage : public VUndoCommand
 {
+    Q_OBJECT // NOLINT
 public:
     ZValueMoveBackgroundImage(QUuid id, ZValueMoveType move, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
     ~ZValueMoveBackgroundImage() override =default;

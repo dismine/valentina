@@ -39,7 +39,7 @@
 #include "../../visualization/visualization.h"
 #include "../../visualization/line/vistoolline.h"
 #include "../ifc/ifcdef.h"
-#include "dialogs/tools/dialogtool.h"
+#include "dialogtool.h"
 #include "ui_dialogline.h"
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -5,7 +5,7 @@ Valentina Web page: https://smart-pattern.com.ua/
 Wiki: https://wiki.valentinaproject.org    
 Valentina main repository: https://gitlab.com/smart-pattern/valentina   
 PPA for Ubuntu (develop): https://launchpad.net/~dismine/+archive/valentina-dev    
-Help translate https://www.transifex.com/organization/valentina    
+Help translate https://explore.transifex.com/valentina/valentina-project/    
 
 Valentina
 ==========

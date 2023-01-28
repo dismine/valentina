@@ -12,6 +12,8 @@ QT       += core gui widgets network xml svg xmlpatterns printsupport concurrent
 # Name of binary file
 TARGET = puzzle
 
+VERSION = 0.7.52
+
 # We want create executable file
 TEMPLATE = app
 

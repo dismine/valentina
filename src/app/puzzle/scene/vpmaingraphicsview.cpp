@@ -62,7 +62,9 @@ QT_WARNING_POP
 namespace
 {
 QT_WARNING_PUSH
+#if !defined(Q_OS_MACOS) && defined(Q_CC_CLANG)
 QT_WARNING_DISABLE_CLANG("-Wenum-enum-conversion")
+#endif
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QKeySequence, restoreOriginShortcut, // NOLINT
                           (QKeySequence(Qt::ControlModifier + Qt::Key_Asterisk)))

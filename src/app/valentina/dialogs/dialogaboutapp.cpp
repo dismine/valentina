@@ -37,6 +37,11 @@
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vvalentinasettings.h"
 
+#if !defined(BUILD_REVISION) && defined(QBS_BUILD)
+#include <vcsRepoState.h>
+#define BUILD_REVISION VCS_REPO_STATE_REVISION
+#endif
+
 //---------------------------------------------------------------------------------------------------------------------
 DialogAboutApp::DialogAboutApp(QWidget *parent) :
     QDialog(parent),

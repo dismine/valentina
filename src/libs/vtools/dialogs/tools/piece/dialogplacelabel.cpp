@@ -28,7 +28,7 @@
 #include "dialogplacelabel.h"
 #include "ui_dialogplacelabel.h"
 
-#include "visualization/line/vistoolspecialpoint.h"
+#include "../../../visualization/line/vistoolspecialpoint.h"
 #include "../../support/dialogeditwrongformula.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"

@@ -37,7 +37,7 @@
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
-#include "visualization/line/visline.h"
+#include "visline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolLine::VisToolLine(const VContainer *data, QGraphicsItem *parent)

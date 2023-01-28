@@ -28,6 +28,8 @@ macx{
     TARGET = valentina
 }
 
+VERSION = 0.7.52
+
 # Use out-of-source builds (shadow builds)
 CONFIG -= debug_and_release debug_and_release_target
 
@@ -154,9 +156,13 @@ unix{
 
         # .desktop file
         desktop.path = $$DATADIR/applications/
-        desktop.files += ../../../dist/$${TARGET}.desktop \
-        desktop.files += ../../../dist/tape.desktop \
-        desktop.files += ../../../dist/puzzle.desktop
+        desktop.files += ../../../dist/ua.com.smart-pattern.$${TARGET}.desktop \
+        desktop.files += ../../../dist/ua.com.smart-pattern.tape.desktop \
+        desktop.files += ../../../dist/ua.com.smart-pattern.puzzle.desktop
+
+        # .metainfo.xml file
+        metainfo.path = $$DATADIR/metainfo/
+        metainfo.files += ../../../dist/ua.com.smart-pattern.$${TARGET}.metainfo.xml
 
         # logo
         hicolor_48_apps.path = $$DATADIR/icons/hicolor/48x48/apps/
@@ -245,6 +251,7 @@ unix{
             tape \
             puzzle \
             desktop \
+            metainfo \
             hicolor_48_apps \
             hicolor_48_mimetypes \
             hicolor_64_apps \

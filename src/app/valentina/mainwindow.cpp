@@ -41,7 +41,7 @@
 #include "../vmisc/qxtcsvmodel.h"
 #include "../vmisc/vmodifierkey.h"
 #include "../vmisc/vsysexits.h"
-#include "undocommands/renamepp.h"
+#include "../vtools/undocommands/renamepp.h"
 #include "core/vtooloptionspropertybrowser.h"
 #include "../ifc/xml/vpatternconverter.h"
 #include "../vformat/vmeasurements.h"
@@ -2127,9 +2127,7 @@ void MainWindow::ShowMeasurements()
             arguments.append(QStringLiteral("--") + LONG_OPTION_NO_HDPI_SCALING);
         }
 
-        const QString tape = VApplication::TapeFilePath();
-        const QString workingDirectory = QFileInfo(tape).absoluteDir().absolutePath();
-        QProcess::startDetached(tape, arguments, workingDirectory);
+        VApplication::StartDetachedProcess(VApplication::TapeFilePath(), arguments);
     }
     else
     {
@@ -2894,7 +2892,9 @@ void MainWindow::ToolBarTools()
     Also for me don't work Qt:CTRL and work Qt::ControlModifier.*/
 
     QT_WARNING_PUSH
+#if !defined(Q_OS_MACOS) && defined(Q_CC_CLANG)
     QT_WARNING_DISABLE_CLANG("-Wenum-enum-conversion")
+#endif
 
     QList<QKeySequence> zoomInShortcuts;
     zoomInShortcuts.append(QKeySequence(QKeySequence::ZoomIn));
@@ -3801,16 +3801,13 @@ void MainWindow::on_actionOpen_triggered()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::on_actionOpenPuzzle_triggered()
 {
-    const QString puzzle = VApplication::PuzzleFilePath();
-    const QString workingDirectory = QFileInfo(puzzle).absoluteDir().absolutePath();
-
     QStringList arguments;
     if (isNoScaling)
     {
         arguments.append(QStringLiteral("--") + LONG_OPTION_NO_HDPI_SCALING);
     }
 
-    QProcess::startDetached(puzzle, arguments, workingDirectory);
+    VApplication::StartDetachedProcess(VApplication::PuzzleFilePath(), arguments);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3861,9 +3858,7 @@ void MainWindow::on_actionCreateManualLayout_triggered()
 
         rldFile.setAutoRemove(false);
 
-        const QString puzzle = VApplication::PuzzleFilePath();
-        const QString workingDirectory = QFileInfo(puzzle).absoluteDir().absolutePath();
-        QProcess::startDetached(puzzle, arguments, workingDirectory);
+        VApplication::StartDetachedProcess(VApplication::PuzzleFilePath(), arguments);
     }
     else
     {
@@ -3948,9 +3943,7 @@ void MainWindow::on_actionUpdateManualLayout_triggered()
 
         rldFile.setAutoRemove(false);
 
-        const QString puzzle = VApplication::PuzzleFilePath();
-        const QString workingDirectory = QFileInfo(puzzle).absoluteDir().absolutePath();
-        QProcess::startDetached(puzzle, arguments, workingDirectory);
+        VApplication::StartDetachedProcess(VApplication::PuzzleFilePath(), arguments);
     }
     else
     {
@@ -4740,16 +4733,13 @@ void MainWindow::ActionShowMainPath_triggered(bool checked)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ActionOpenTape_triggered()
 {
-    const QString tape = VApplication::TapeFilePath();
-    const QString workingDirectory = QFileInfo(tape).absoluteDir().absolutePath();
-
     QStringList arguments;
     if (isNoScaling)
     {
         arguments.append(QStringLiteral("--") + LONG_OPTION_NO_HDPI_SCALING);
     }
 
-    QProcess::startDetached(tape, arguments, workingDirectory);
+    VApplication::StartDetachedProcess(VApplication::TapeFilePath(), arguments);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -5831,16 +5821,13 @@ auto MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
 
             if (m.Type() == MeasurementsType::Multisize || m.Type() == MeasurementsType::Individual)
             {
-                const QString tape = VApplication::TapeFilePath();
-                const QString workingDirectory = QFileInfo(tape).absoluteDir().absolutePath();
-
-                QStringList arguments = QStringList() << fileName;
+                QStringList arguments {fileName};
                 if (isNoScaling)
                 {
                     arguments.append(QStringLiteral("--") + LONG_OPTION_NO_HDPI_SCALING);
                 }
 
-                QProcess::startDetached(tape, arguments, workingDirectory);
+                VApplication::StartDetachedProcess(VApplication::TapeFilePath(), arguments);
                 QCoreApplication::exit(V_EX_OK);
                 return false; // stop continue processing
             }
@@ -5862,16 +5849,13 @@ auto MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
     {
         // Here comes undocumented Valentina's feature.
         // Because app bundle in Mac OS X doesn't allow setup assosiation for Puzzle we must do this through Valentina
-        const QString puzzle = VApplication::PuzzleFilePath();
-        const QString workingDirectory = QFileInfo(puzzle).absoluteDir().absolutePath();
-
-        QStringList arguments = QStringList() << fileName;
+        QStringList arguments {fileName};
         if (isNoScaling)
         {
             arguments.append(QStringLiteral("--") + LONG_OPTION_NO_HDPI_SCALING);
         }
 
-        QProcess::startDetached(puzzle, arguments, workingDirectory);
+        VApplication::StartDetachedProcess(VApplication::PuzzleFilePath(), arguments);
         QCoreApplication::exit(V_EX_OK);
         return false; // stop continue processing
     }

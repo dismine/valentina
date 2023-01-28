@@ -302,8 +302,8 @@ auto VToolCutSpline::MakeToolTip() const -> QString
     VSpline spline2 = VSpline(VPointF(point), spl2p2, spl2p3, spl->GetP4());
     spline2.SetAliasSuffix(m_aliasSuffix2);
 
-    const QString curveStr = tr("Curve");
-    const QString lengthStr = tr("length");
+    const QString curveStr = QCoreApplication::translate("VToolCutSpline", "Curve");
+    const QString lengthStr = QCoreApplication::translate("VToolCutSpline", "length");
 
     const QString toolTip = QString("<table>"
                                     "<tr> <td><b>%6:</b> %7</td> </tr>"
@@ -316,8 +316,10 @@ auto VToolCutSpline::MakeToolTip() const -> QString
             .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
                  curveStr + QStringLiteral("2 ") + lengthStr)
             .arg(VAbstractValApplication::VApp()->fromPixel(spline2.GetLength()))
-            .arg(curveStr + QStringLiteral(" 1") + tr("label"), spline1.ObjectName(),
-                 curveStr + QStringLiteral(" 2") + tr("label"), spline2.ObjectName());
+            .arg(curveStr + QStringLiteral(" 1") + QCoreApplication::translate("VToolCutSpline", "label"),
+                                     spline1.ObjectName(),
+                 curveStr + QStringLiteral(" 2") + QCoreApplication::translate("VToolCutSpline", "label"),
+                                     spline2.ObjectName());
 
     return toolTip;
 }
