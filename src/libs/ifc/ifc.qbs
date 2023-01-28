@@ -1,6 +1,18 @@
+import qbs.Utilities
+
 VLib {
-    Depends { name: "Qt"; submodules: ["gui", "xml", "svg", "xmlpatterns", "concurrent"] }
+    Depends { name: "Qt"; submodules: ["core", "gui", "xml", "svg", "concurrent"] }
     Depends { name: "VMiscLib" }
+
+    Depends {
+        name: "Qt.xmlpatterns"
+        condition: Utilities.versionCompare(Qt.core.version, "6") < 0
+    }
+
+    Depends {
+        name: "Qt.core5compat";
+        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0
+    }
 
     name: "IFCLib"
     files: [

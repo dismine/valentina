@@ -1,9 +1,10 @@
 import qbs.FileInfo
+import qbs.Utilities
 
 VToolApp {
     Depends { name: "buildconfig" }
     Depends { name: "ib"; condition: qbs.targetOS.contains("macos") }
-    Depends { name: "Qt"; submodules: ["widgets", "svg", "xmlpatterns", "concurrent"] }
+    Depends { name: "Qt"; submodules: ["core", "widgets", "svg", "concurrent"] }
     Depends { name: "VPatternDBLib"; }
     Depends { name: "VWidgetsLib"; }
     Depends { name: "FervorLib"; }
@@ -13,7 +14,15 @@ VToolApp {
     Depends { name: "VFormatLib"; }
     Depends { name: "VMiscLib"; }
 
-    primaryApp: true
+    Depends {
+        name: "Qt.xmlpatterns"
+        condition: Utilities.versionCompare(Qt.core.version, "6") < 0
+    }
+
+    Depends {
+        name: "Qt.core5compat";
+        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0
+    }
 
     Depends {
         name: "Qt.winextras"
@@ -21,6 +30,8 @@ VToolApp {
         versionAtLeast: "5.6"
         required: false
     }
+
+    primaryApp: true
 
     name: "Valentina"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "Valentina" : "valentina"
