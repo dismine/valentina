@@ -16,19 +16,17 @@ VApp {
     installDebugInformation: qbs.buildVariant !== "release"
     consoleApplication: false
 
-    bundle.identifierPrefix: 'ua.com.smart-pattern'
-
     property bool primaryApp: false
 
-    bundle.infoPlist:({
-        "NSHumanReadableCopyright": buildconfig.valentina_copyright_string
-    })
-
     Properties {
+        condition: qbs.targetOS.contains("macos")
         // Breakpoints do not work if debug the app inside of bundle. In debug mode we turn off creating a bundle.
         // Probably it will breake some dependencies. Version for Mac designed to work inside an app bundle.
-        condition: qbs.targetOS.contains("macos")
         bundle.isBundle: qbs.buildVariant === "release"
+        bundle.identifierPrefix: 'ua.com.smart-pattern'
+        bundle.infoPlist:({
+            "NSHumanReadableCopyright": buildconfig.valentina_copyright_string
+        })
     }
 
     Properties {
@@ -76,7 +74,7 @@ VApp {
     }
 
     Group {
-        condition: !qbs.targetOS.contains("macos") || (qbs.targetOS.contains("macos") && !bundle.isBundle)
+        condition: product.primaryApp || (qbs.targetOS.contains("macos") && (!bundle.isBundle || (bundle.isBundle && buildconfig.enableMultiBundle)))
         fileTagsFilter: "qm"
         qbs.install: true
         qbs.installDir: buildconfig.installDataPath + "/translations"

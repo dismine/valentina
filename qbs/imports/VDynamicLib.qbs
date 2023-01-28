@@ -6,7 +6,10 @@ VLib {
 
     windeployqt.noVirtualkeyboard: true
 
-    bundle.identifierPrefix: 'ua.com.smart-pattern'
+    Properties {
+        condition: qbs.targetOS.contains("macos")
+        bundle.identifierPrefix: 'ua.com.smart-pattern'
+    }
 
     Properties {
         condition: i18nconfig.limitDeploymentOfQtTranslations
