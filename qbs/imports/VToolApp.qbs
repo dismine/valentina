@@ -15,7 +15,7 @@ VApp {
     installDir: buildconfig.installBinaryPath
     installDebugInformation: qbs.buildVariant !== "release"
     consoleApplication: false
-    bundle.isBundle: qbs.buildVariant === "release"
+
     bundle.identifierPrefix: 'ua.com.smart-pattern'
 
     property bool primaryApp: false
@@ -23,6 +23,13 @@ VApp {
     bundle.infoPlist:({
         "NSHumanReadableCopyright": buildconfig.valentina_copyright_string
     })
+
+    Properties {
+        // Breakpoints do not work if debug the app inside of bundle. In debug mode we turn off creating a bundle.
+        // Probably it will breake some dependencies. Version for Mac designed to work inside an app bundle.
+        condition: qbs.targetOS.contains("macos")
+        bundle.isBundle: qbs.buildVariant === "release"
+    }
 
     Properties {
         condition: buildconfig.enableAppImage && qbs.targetOS.contains("unix") && !qbs.targetOS.contains("macos")
@@ -202,7 +209,7 @@ VApp {
     }
 
     Properties {
-        condition: i18nconfig.limitDeploymentOfQtTranslations
+        condition: qbs.targetOS.contains("windows") && i18nconfig.limitDeploymentOfQtTranslations
         windeployqt.languages: i18nconfig.qtTranslationLocales.join(',')
     }
 

@@ -3,7 +3,7 @@ import qbs.Utilities
 
 CppApplication {
     Depends { name: "buildconfig" }
-    Depends { name: "bundle" }
+    Depends { name: "bundle"; condition: qbs.targetOS.contains("macos") }
 
     Properties {
         condition: qbs.targetOS.contains("macos")
