@@ -221,7 +221,11 @@ void QxtCsvModel::setSource(QIODevice *file, bool withHeader, QChar separator, Q
     QChar ch, buffer(0);
     bool readCR = false;
     QTextStream stream(file);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     codec ? stream.setCodec(codec) : stream.setAutoDetectUnicode(true);
+#else
+    stream.setAutoDetectUnicode(true);
+#endif
     while (not stream.atEnd())
     {
         if (buffer != QChar(0))
@@ -606,10 +610,12 @@ bool QxtCsvModel::toCSV(QIODevice* dest, QString &error, bool withHeader, QChar 
         }
     }
     QTextStream stream(dest);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     if (codec)
     {
         stream.setCodec(codec);
     }
+#endif
     if (withHeader)
     {
         data = QString();
