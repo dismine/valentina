@@ -64,8 +64,8 @@ const QStringList QmuParserBase::c_DefaultOprt = QStringList()<< "<=" << ">=" <<
  */
 QmuParserBase::QmuParserBase()
     : m_locale(QLocale::c()),
-      m_decimalPoint(QLocale::c().decimalPoint()),
-      m_thousandsSeparator(QLocale::c().groupSeparator()),
+      m_decimalPoint(LocaleDecimalPoint(QLocale::c())),
+      m_thousandsSeparator(LocaleGroupSeparator(QLocale::c())),
       m_FunDef(),
       m_pTokenReader(),
       m_pParseFormula(&QmuParserBase::ParseString),
@@ -204,8 +204,8 @@ void QmuParserBase::Assign(const QmuParserBase &a_Parser)
 void QmuParserBase::ResetLocale()
 {
     setLocale(QLocale::c());
-    m_decimalPoint = m_locale.decimalPoint();
-    m_thousandsSeparator = m_locale.groupSeparator();
+    m_decimalPoint = LocaleDecimalPoint(m_locale);
+    m_thousandsSeparator = LocaleGroupSeparator(m_locale);
     m_cNumbers = false;
     SetArgSep(';');
 }

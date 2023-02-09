@@ -1449,24 +1449,24 @@ auto VPiece::ShortNameRegExp() -> QString
 
         for(const auto &locale : allLocales)
         {
-            if (not positiveSigns.contains(locale.positiveSign()))
+            if (not positiveSigns.contains(LocalePositiveSign(locale)))
             {
-                positiveSigns.append(locale.positiveSign());
+                positiveSigns.append(LocalePositiveSign(locale));
             }
 
-            if (not negativeSigns.contains(locale.negativeSign()))
+            if (not negativeSigns.contains(LocaleNegativeSign(locale)))
             {
-                negativeSigns.append(locale.negativeSign());
+                negativeSigns.append(LocaleNegativeSign(locale));
             }
 
-            if (not decimalPoints.contains(locale.decimalPoint()))
+            if (not decimalPoints.contains(LocaleDecimalPoint(locale)))
             {
-                decimalPoints.append(locale.decimalPoint());
+                decimalPoints.append(LocaleDecimalPoint(locale));
             }
 
-            if (not groupSeparators.contains(locale.groupSeparator()))
+            if (not groupSeparators.contains(LocaleGroupSeparator(locale)))
             {
-                groupSeparators.append(locale.groupSeparator());
+                groupSeparators.append(LocaleGroupSeparator(locale));
             }
         }
 

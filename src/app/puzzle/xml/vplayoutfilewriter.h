@@ -36,8 +36,8 @@
 #include <ciso646>
 
 #include "../vmisc/literals.h"
-#include "../vmisc/defglobal.h"
 #include "../layout/layoutdef.h"
+#include "../qmuparser/qmudef.h"
 
 class VPLayout;
 class VPSheet;
@@ -91,7 +91,7 @@ void VPLayoutFileWriter::SetAttribute(const QString &name, const T &value)
 {
     // See specification for xs:decimal
     const QLocale locale = QLocale::c();
-    writeAttribute(name, locale.toString(value).remove(locale.groupSeparator()));
+    writeAttribute(name, locale.toString(value).remove(LocaleGroupSeparator(locale)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

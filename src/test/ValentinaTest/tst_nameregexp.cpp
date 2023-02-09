@@ -48,7 +48,7 @@ void TST_NameRegExp::TestNameRegExp_data()
     const QList<QLocale> allLocales =
             QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
 
-    for(auto &locale : allLocales)
+    for(const auto &locale : allLocales)
     {
         INIT_LOCALE_VARIABLES(locale);
         Q_UNUSED(positiveSign)
@@ -56,6 +56,7 @@ void TST_NameRegExp::TestNameRegExp_data()
         Q_UNUSED(expLower)
 
         const QString localeName = locale.name();
+
         QString tag = localeName+QLatin1String(". First character can't be ")+sign0;
         QTest::newRow(qUtf8Printable(tag)) << sign0+QLatin1String("a") << false;
 

@@ -39,10 +39,12 @@
 #include "../qmuparser/qmuparsererror.h"
 #include "../qmuparser/qmutokenparser.h"
 #include "../qmuparser/qmutranslation.h"
+#include "../qmuparser/qmudef.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vmisc/def.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/literals.h"
+#include "../vmisc/compatibility.h"
 #include "vtranslatemeasurements.h"
 #include "pmsystems.h"
 
@@ -677,7 +679,7 @@ void VTranslateVars::TranslateVarsFromUser(QString &newFormula, QMap<vsizetype, 
             continue;
         }
 
-        if (tValues.at(i) == QLocale().negativeSign())
+        if (tValues.at(i) == LocaleNegativeSign(QLocale()))
         {// unary minus
             newFormula.replace(tKeys.at(i), 1, '-');
         }
@@ -774,7 +776,7 @@ void VTranslateVars::TranslateVarsToUser(QString &newFormula, QMap<vsizetype, QS
 
         if (tValues.at(i) == QChar('-'))
         {// unary minus
-            newFormula.replace(tKeys.at(i), 1, QLocale().negativeSign());
+            newFormula.replace(tKeys.at(i), 1, LocaleNegativeSign(QLocale()));
         }
     }
 }
@@ -801,9 +803,9 @@ void VTranslateVars::TranslateNumbersToUser(QString &newFormula, QMap<vsizetype,
 
             loc = QLocale();// To user locale
             QString dStr = loc.toString(d);// Number string in user locale
-            if (loc.groupSeparator().isSpace())
+            if (VLocaleCharacter(LocaleGroupSeparator(loc)).isSpace())
             {
-                dStr.replace(loc.groupSeparator(), QString());
+                dStr.replace(LocaleGroupSeparator(loc), QString());
             }
             newFormula.replace(nKeys.at(i), nValues.at(i).length(), dStr);
             const auto bias = nValues.at(i).length() - dStr.length();

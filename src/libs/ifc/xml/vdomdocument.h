@@ -47,6 +47,7 @@
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/literals.h"
+#include "../qmuparser/qmudef.h"
 
 class QDomElement;
 class QDomNode;
@@ -186,7 +187,7 @@ inline void VDomDocument::SetAttribute(QDomElement &domElement, const QString &n
 {
     // See specification for xs:decimal
     const QLocale locale = QLocale::c();
-    domElement.setAttribute(name, locale.toString(value).remove(locale.groupSeparator()));
+    domElement.setAttribute(name, locale.toString(value).remove(LocaleGroupSeparator(locale)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

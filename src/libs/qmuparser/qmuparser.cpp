@@ -507,7 +507,7 @@ void QmuParser::InitConst()
  */
 void QmuParser::InitOprt()
 {
-    DefineInfixOprt(m_locale.negativeSign(), UnaryMinus);
+    DefineInfixOprt(LocaleNegativeSign(m_locale), UnaryMinus);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

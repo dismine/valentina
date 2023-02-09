@@ -250,11 +250,11 @@ bool FilterObject(QObject *object, QEvent *event)
             {
                 if (VAbstractApplication::VApp()->Settings()->GetOsSeparator())
                 {
-                    plainTextEdit->insertPlainText(QLocale().decimalPoint());
+                    plainTextEdit->insertPlainText(LocaleDecimalPoint(QLocale()));
                 }
                 else
                 {
-                    plainTextEdit->insertPlainText(QLocale::c().decimalPoint());
+                    plainTextEdit->insertPlainText(LocaleDecimalPoint(QLocale::c()));
                 }
                 return true;
             }

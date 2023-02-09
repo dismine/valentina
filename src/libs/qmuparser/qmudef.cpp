@@ -241,8 +241,8 @@ qmusizetype ReadVal(const QString &formula, qreal &val, const QLocale &locale, c
         {
             // Convert to C locale
             QLocale cLocale(QLocale::C);
-            const QChar cDecimal = cLocale.decimalPoint();
-            const QChar cThousand = cLocale.groupSeparator();
+            const QChar cDecimal = LocaleDecimalPoint(cLocale);
+            const QChar cThousand = LocaleGroupSeparator(cLocale);
             if (locale != cLocale && (cDecimal != decimal || cThousand != thousand))
             {
                 if (decimal == cThousand)
@@ -297,24 +297,24 @@ QString NameRegExp()
 
         for(const auto &locale : allLocales)
         {
-            if (not positiveSigns.contains(locale.positiveSign()))
+            if (not positiveSigns.contains(LocalePositiveSign(locale)))
             {
-                positiveSigns.append(locale.positiveSign());
+                positiveSigns.append(LocalePositiveSign(locale));
             }
 
-            if (not negativeSigns.contains(locale.negativeSign()))
+            if (not negativeSigns.contains(LocaleNegativeSign(locale)))
             {
-                negativeSigns.append(locale.negativeSign());
+                negativeSigns.append(LocaleNegativeSign(locale));
             }
 
-            if (not decimalPoints.contains(locale.decimalPoint()))
+            if (not decimalPoints.contains(LocaleDecimalPoint(locale)))
             {
-                decimalPoints.append(locale.decimalPoint());
+                decimalPoints.append(LocaleDecimalPoint(locale));
             }
 
-            if (not groupSeparators.contains(locale.groupSeparator()))
+            if (not groupSeparators.contains(LocaleGroupSeparator(locale)))
             {
-                groupSeparators.append(locale.groupSeparator());
+                groupSeparators.append(LocaleGroupSeparator(locale));
             }
         }
 
@@ -352,4 +352,244 @@ qmusizetype FindFirstNotOf(const QString &string, const QString &chars, qmusizet
     }
 
     return -1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool SupportedLocale(const QLocale &locale)
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    return locale.positiveSign().size() == 1 &&
+                locale.negativeSign().size() == 1 &&
+                locale.toString(0).size() == 1 &&
+                locale.toString(1).size() == 1 &&
+                locale.toString(2).size() == 1 &&
+                locale.toString(3).size() == 1 &&
+                locale.toString(4).size() == 1 &&
+                locale.toString(5).size() == 1 &&
+                locale.toString(6).size() == 1 &&
+                locale.toString(7).size() == 1 &&
+                locale.toString(8).size() == 1 &&
+                locale.toString(9).size() == 1 &&
+                locale.exponential().size() == 1 &&
+                locale.decimalPoint().size() == 1 &&
+                locale.groupSeparator().size() == 1;
+#else
+    return true;
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QChar LocalePositiveSign(const QLocale &locale)
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    const QString sign = locale.positiveSign();
+    if (sign.size() == 1)
+    {
+        return sign.front();
+    }
+
+    return QLocale::c().positiveSign().front();
+#else
+    return locale.positiveSign();
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QChar LocaleNegativeSign(const QLocale &locale)
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    const QString sign = locale.negativeSign();
+    if (sign.size() == 1)
+    {
+        return sign.front();
+    }
+
+    return QLocale::c().negativeSign().front();
+#else
+    return locale.negativeSign();
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QChar LocaleSign0(const QLocale &locale)
+{
+    const QString sign = locale.toString(0);
+    if (sign.size() == 1)
+    {
+        return sign.front();
+    }
+
+    return {'0'};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QChar LocaleSign1(const QLocale &locale)
+{
+    const QString sign = locale.toString(1);
+    if (sign.size() == 1)
+    {
+        return sign.front();
+    }
+
+    return {'1'};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QChar LocaleSign2(const QLocale &locale)
+{
+    const QString sign = locale.toString(2);
+    if (sign.size() == 1)
+    {
+        return sign.front();
+    }
+
+    return {'2'};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QChar LocaleSign3(const QLocale &locale)
+{
+    const QString sign = locale.toString(3);
+    if (sign.size() == 1)
+    {
+        return sign.front();
+    }
+
+    return {'3'};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QChar LocaleSign4(const QLocale &locale)
+{
+    const QString sign = locale.toString(4);
+    if (sign.size() == 1)
+    {
+        return sign.front();
+    }
+
+    return {'4'};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QChar LocaleSign5(const QLocale &locale)
+{
+    const QString sign = locale.toString(5);
+    if (sign.size() == 1)
+    {
+        return sign.front();
+    }
+
+    return {'5'};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QChar LocaleSign6(const QLocale &locale)
+{
+    const QString sign = locale.toString(6);
+    if (sign.size() == 1)
+    {
+        return sign.front();
+    }
+
+    return {'6'};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QChar LocaleSign7(const QLocale &locale)
+{
+    const QString sign = locale.toString(7);
+    if (sign.size() == 1)
+    {
+        return sign.front();
+    }
+
+    return {'7'};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QChar LocaleSign8(const QLocale &locale)
+{
+    const QString sign = locale.toString(8);
+    if (sign.size() == 1)
+    {
+        return sign.front();
+    }
+
+    return {'8'};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QChar LocaleSign9(const QLocale &locale)
+{
+    const QString sign = locale.toString(9);
+    if (sign.size() == 1)
+    {
+        return sign.front();
+    }
+
+    return {'9'};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QChar LocaleExpUpper(const QLocale &locale)
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    const QString sign = locale.exponential();
+    if (sign.size() == 1)
+    {
+        return sign.front().toUpper();
+    }
+
+    return QLocale::c().exponential().front().toUpper();
+#else
+    return locale.exponential().toUpper();
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QChar LocaleExpLower(const QLocale &locale)
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    const QString sign = locale.exponential();
+    if (sign.size() == 1)
+    {
+        return sign.front().toLower();
+    }
+
+    return QLocale::c().exponential().front().toLower();
+#else
+    return locale.exponential().toLower();
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QChar LocaleDecimalPoint(const QLocale &locale)
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    const QString sign = locale.decimalPoint();
+    if (sign.size() == 1)
+    {
+        return sign.front();
+    }
+
+    return QLocale::c().decimalPoint().front();
+#else
+    return locale.decimalPoint();
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QChar LocaleGroupSeparator(const QLocale &locale)
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    const QString sign = locale.groupSeparator();
+    if (sign.size() == 1)
+    {
+        return sign.front();
+    }
+
+    return QLocale::c().groupSeparator().front();
+#else
+    return locale.groupSeparator();
+#endif
 }

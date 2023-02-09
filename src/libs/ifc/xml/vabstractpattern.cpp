@@ -275,7 +275,7 @@ template <class T>
 auto NumberToString(T number) -> QString
 {
     const QLocale locale = QLocale::c();
-    return locale.toString(number, 'g', 12).remove(locale.groupSeparator());
+    return locale.toString(number, 'g', 12).remove(LocaleGroupSeparator(locale));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

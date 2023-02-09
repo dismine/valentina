@@ -54,7 +54,6 @@ QmuTokenParser::QmuTokenParser()
  */
 QmuTokenParser::QmuTokenParser(const QString &formula, bool osSeparator,
                                bool fromUser, const QMap<QString, QString> &translatedFunctions)
-    :QmuFormulaBase()
 {
     InitCharSets();
     SetVarFactory(AddVariable, this);

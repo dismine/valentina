@@ -4,6 +4,7 @@
 SOURCES += \
     $$PWD/plugins/vtextproperty.cpp \
     $$PWD/vproperty.cpp \
+    $$PWD/vpropertydef.cpp \
     $$PWD/vpropertydelegate.cpp \
     $$PWD/vpropertyfactorymanager.cpp \
     $$PWD/vpropertyformview.cpp \
@@ -56,6 +57,7 @@ HEADERS +=\
     $$PWD/vpropertyset.h \
     $$PWD/vpropertymodel.h \
     $$PWD/vproperty.h \
+    $$PWD/vpropertydef.h \
     $$PWD/plugins/vwidgetproperty.h \
     $$PWD/plugins/vcolorproperty.h \
     $$PWD/plugins/vboolproperty.h \

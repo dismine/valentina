@@ -28,11 +28,30 @@
 #ifndef VPROPERTYDEF_H
 #define VPROPERTYDEF_H
 
+#include "vpropertyexplorer_global.h"
+
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QtGlobal>
 using vpesizetype = qsizetype;
 #else
 using vpesizetype = int;
 #endif
+
+VPROPERTYEXPLORERSHARED_EXPORT auto VPELocalePositiveSign(const QLocale &locale) -> QChar;
+VPROPERTYEXPLORERSHARED_EXPORT auto VPELocaleNegativeSign(const QLocale &locale) -> QChar;
+VPROPERTYEXPLORERSHARED_EXPORT auto VPELocaleSign0(const QLocale &locale) -> QChar;
+VPROPERTYEXPLORERSHARED_EXPORT auto VPELocaleSign1(const QLocale &locale) -> QChar;
+VPROPERTYEXPLORERSHARED_EXPORT auto VPELocaleSign2(const QLocale &locale) -> QChar;
+VPROPERTYEXPLORERSHARED_EXPORT auto VPELocaleSign3(const QLocale &locale) -> QChar;
+VPROPERTYEXPLORERSHARED_EXPORT auto VPELocaleSign4(const QLocale &locale) -> QChar;
+VPROPERTYEXPLORERSHARED_EXPORT auto VPELocaleSign5(const QLocale &locale) -> QChar;
+VPROPERTYEXPLORERSHARED_EXPORT auto VPELocaleSign6(const QLocale &locale) -> QChar;
+VPROPERTYEXPLORERSHARED_EXPORT auto VPELocaleSign7(const QLocale &locale) -> QChar;
+VPROPERTYEXPLORERSHARED_EXPORT auto VPELocaleSign8(const QLocale &locale) -> QChar;
+VPROPERTYEXPLORERSHARED_EXPORT auto VPELocaleSign9(const QLocale &locale) -> QChar;
+VPROPERTYEXPLORERSHARED_EXPORT auto VPELocaleExpUpper(const QLocale &locale) -> QChar;
+VPROPERTYEXPLORERSHARED_EXPORT auto VPELocaleExpLower(const QLocale &locale) -> QChar;
+VPROPERTYEXPLORERSHARED_EXPORT auto VPELocaleDecimalPoint(const QLocale &locale) -> QChar;
+VPROPERTYEXPLORERSHARED_EXPORT auto VPELocaleGroupSeparator(const QLocale &locale) -> QChar;
 
 #endif // VPROPERTYDEF_H

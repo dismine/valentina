@@ -28,8 +28,9 @@
 
 #include "tst_vtranslatevars.h"
 #include "../vpatterndb/vtranslatevars.h"
-#include "../qmuparser/qmuparsererror.h"
+#include "../qmuparser/qmudef.h"
 #include "testvapplication.h"
+#include "../vmisc/compatibility.h"
 
 #include <QtTest>
 
@@ -59,6 +60,11 @@ void TST_VTranslateVars::TestFormulaFromUser_data()
             QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
     for(auto &locale : allLocales)
     {
+        if (not SupportedLocale(locale))
+        {
+            continue;
+        }
+
         PrepareValFromUser(1000.5, locale);
         PrepareValFromUser(-1000.5, locale);
     }
@@ -89,6 +95,11 @@ void TST_VTranslateVars::TestFormulaToUser_data()
             QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
     for(auto &locale : allLocales)
     {
+        if (not SupportedLocale(locale))
+        {
+            continue;
+        }
+
         PrepareValToUser(1000.5, locale);
         PrepareValToUser(-1000.5, locale);
     }
@@ -129,9 +140,9 @@ void TST_VTranslateVars::PrepareValToUser(double d, const QLocale &locale)
 {
     const QString formulaFromSystem = QLocale::c().toString(d);
     QString formulaToUser = locale.toString(d);
-    if (locale.groupSeparator().isSpace())
+    if (VLocaleCharacter(LocaleGroupSeparator(locale)).isSpace())
     {
-        formulaToUser.replace(locale.groupSeparator(), QString());
+        formulaToUser.replace(LocaleGroupSeparator(locale), QString());
     }
 
     PrepareVal(formulaFromSystem, formulaToUser, locale);

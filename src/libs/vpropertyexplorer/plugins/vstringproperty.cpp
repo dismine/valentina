@@ -172,11 +172,11 @@ bool VPE::VStringProperty::eventFilter(QObject *object, QEvent *event)
             {
                 if (m_osSeparator)
                 {
-                    textEdit->insert(QLocale().decimalPoint());
+                    textEdit->insert(VPELocaleDecimalPoint(QLocale()));
                 }
                 else
                 {
-                    textEdit->insert(QLocale::c().decimalPoint());
+                    textEdit->insert(VPELocaleDecimalPoint(QLocale::c()));
                 }
                 return true;
             }

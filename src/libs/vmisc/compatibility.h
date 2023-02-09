@@ -302,4 +302,20 @@ inline auto Insert(QMap<Key, T> &map1, const QMap<Key, T> &map2) -> void
 #endif
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VLocaleCharacter(const QString &character) -> QChar
+{
+    Q_ASSERT(character.size() == 1);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+    return character.front();
+#else
+    return character.at(0);
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VLocaleCharacter(const QChar &character) -> QChar
+{
+    return character;
+}
 #endif // COMPATIBILITY_H

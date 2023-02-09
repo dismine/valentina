@@ -760,11 +760,11 @@ auto TMainWindow::eventFilter(QObject *object, QEvent *event) -> bool
             {
                 if (VAbstractApplication::VApp()->Settings()->GetOsSeparator())
                 {
-                    plainTextEdit->insertPlainText(QLocale().decimalPoint());
+                    plainTextEdit->insertPlainText(LocaleDecimalPoint(QLocale()));
                 }
                 else
                 {
-                    plainTextEdit->insertPlainText(QLocale::c().decimalPoint());
+                    plainTextEdit->insertPlainText(LocaleDecimalPoint(QLocale::c()));
                 }
                 return true;
             }
@@ -779,11 +779,11 @@ auto TMainWindow::eventFilter(QObject *object, QEvent *event) -> bool
             {
                 if (VAbstractApplication::VApp()->Settings()->GetOsSeparator())
                 {
-                    textEdit->insert(QLocale().decimalPoint());
+                    textEdit->insert(LocaleDecimalPoint(QLocale()));
                 }
                 else
                 {
-                    textEdit->insert(QLocale::c().decimalPoint());
+                    textEdit->insert(LocaleDecimalPoint(QLocale::c()));
                 }
                 return true;
             }

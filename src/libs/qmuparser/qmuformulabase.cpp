@@ -147,8 +147,8 @@ void QmuFormulaBase::SetSepForTr(bool osSeparator, bool fromUser)
         setCNumbers(not osSeparator);
         if (osSeparator)
         {
-            setDecimalPoint(loc.decimalPoint());
-            setThousandsSeparator(loc.groupSeparator());
+            setDecimalPoint(LocaleDecimalPoint(loc));
+            setThousandsSeparator(LocaleGroupSeparator(loc));
             return;
         }
     }
