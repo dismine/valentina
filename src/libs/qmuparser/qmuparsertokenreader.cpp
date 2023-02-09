@@ -1012,7 +1012,7 @@ auto QmuParserTokenReader::IsString ( token_type &a_Tok ) -> bool
  * @param a_sTok [in] The token string representation associated with the error.
  * @throw ParserException always throws thats the only purpose of this function.
  */
-void Q_NORETURN QmuParserTokenReader::Error ( EErrorCodes a_iErrc, qmusizetype a_iPos, const QString &a_sTok ) const
+Q_NORETURN void QmuParserTokenReader::Error (EErrorCodes a_iErrc, qmusizetype a_iPos, const QString &a_sTok ) const
 {
     m_pParser->Error ( a_iErrc, a_iPos, a_sTok );
 }

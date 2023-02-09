@@ -142,7 +142,7 @@ private:
     auto IsStrVarTok(token_type &a_Tok) -> bool;
     auto IsUndefVarTok(token_type &a_Tok) -> bool;
     auto IsString(token_type &a_Tok) -> bool;
-    void Q_NORETURN Error(EErrorCodes a_iErrc, qmusizetype a_iPos = -1, const QString &a_sTok = QString() ) const;
+    Q_NORETURN void Error(EErrorCodes a_iErrc, qmusizetype a_iPos = -1, const QString &a_sTok = QString() ) const;
 
     auto SaveBeforeReturn(const token_type &tok) -> token_type&;
 };
