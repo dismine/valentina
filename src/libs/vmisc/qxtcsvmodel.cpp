@@ -55,7 +55,7 @@ public:
 
     QList<QStringList> csvData;
     QStringList header;
-    int maxColumn;
+    vsizetype maxColumn;
     QxtCsvModel::QuoteMode quoteMode;
 
 private:
@@ -117,7 +117,7 @@ int QxtCsvModel::rowCount(const QModelIndex& parent) const
     {
         return 0;
     }
-    return qxt_d().csvData.count();
+    return static_cast<int>(qxt_d().csvData.count());
 }
 
 /*!
@@ -129,7 +129,7 @@ int QxtCsvModel::columnCount(const QModelIndex& parent) const
     {
         return 0;
     }
-    return qxt_d().maxColumn;
+    return static_cast<int>(qxt_d().maxColumn);
 }
 
 /*!
@@ -325,7 +325,7 @@ void QxtCsvModel::setSource(QIODevice *file, bool withHeader, QChar separator, Q
 void QxtCsvModel::setHeaderData(const QStringList& data)
 {
     qxt_d().header = data;
-    emit headerDataChanged(Qt::Horizontal, 0, data.count());
+    emit headerDataChanged(Qt::Horizontal, 0, static_cast<int>(data.count()));
 }
 
 /*!

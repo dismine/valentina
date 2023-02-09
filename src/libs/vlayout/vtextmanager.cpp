@@ -492,7 +492,7 @@ void VTextManager::SetAllSourceLines(const QVector<TextLine> &lines)
  * @brief VTextManager::GetSourceLinesCount returns the number of input text lines
  * @return number of text lines that were added to the list by calling AddLine
  */
-auto VTextManager::GetSourceLinesCount() const -> int
+auto VTextManager::GetSourceLinesCount() const -> vsizetype
 {
     return m_liLines.count();
 }
@@ -503,7 +503,7 @@ auto VTextManager::GetSourceLinesCount() const -> int
  * @param i index of the requested line
  * @return reference to the requested TextLine object
  */
-auto VTextManager::GetSourceLine(int i) const -> const TextLine&
+auto VTextManager::GetSourceLine(vsizetype i) const -> const TextLine&
 {
     Q_ASSERT(i >= 0);
     Q_ASSERT(i < m_liLines.count());
@@ -550,7 +550,7 @@ void VTextManager::FitFontSize(qreal fW, qreal fH)
     int iFS = 0;
     if (GetSourceLinesCount() > 0)
     {//division by zero
-        iFS = 3*qFloor(fH/GetSourceLinesCount())/4;
+        iFS = 3*qFloor(fH/static_cast<int>(GetSourceLinesCount()))/4;
     }
 
     if (iFS < MIN_FONT_SIZE)
@@ -563,7 +563,7 @@ void VTextManager::FitFontSize(qreal fW, qreal fH)
     int iMaxLen = 0;
     TextLine maxLine;
     QFont fnt;
-    for (int i = 0; i < GetSourceLinesCount(); ++i)
+    for (vsizetype i = 0; i < GetSourceLinesCount(); ++i)
     {
         const TextLine& tl = GetSourceLine(i);
         fnt = m_font;

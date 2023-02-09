@@ -203,7 +203,7 @@ QmuParserError::QmuParserError ( const QString &sMsg )
  * @param [in] sExpr The expression related to the error.
  * @param [in] iPos the position in the expression where the error occured.
  */
-QmuParserError::QmuParserError ( EErrorCodes iErrc, const QString &sTok, const QString &sExpr, int iPos )
+QmuParserError::QmuParserError (EErrorCodes iErrc, const QString &sTok, const QString &sExpr, qmusizetype iPos )
     : QException(), m_sMsg(), m_sExpr ( sExpr ), m_sTok ( sTok ), m_iPos ( iPos ), m_iErrc ( iErrc ),
       m_ErrMsg ( QmuParserErrorMsg::Instance() )
 {

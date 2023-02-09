@@ -162,7 +162,7 @@ VPE::VProperty *VPE::VLineColorProperty::clone(bool include_children, VProperty 
     return VProperty::clone(include_children, container ? container : new VLineColorProperty(getName()));
 }
 
-int VPE::VLineColorProperty::IndexOfColor(const QMap<QString, QString> &colors, const QString &color)
+vpesizetype VPE::VLineColorProperty::IndexOfColor(const QMap<QString, QString> &colors, const QString &color)
 {
     QVector<QString> indexList;
     QMap<QString, QString>::const_iterator i = colors.constBegin();

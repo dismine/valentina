@@ -114,7 +114,7 @@ bool VRawLayout::WriteFile(QIODevice *ioDevice, const VRawLayoutData &data)
         dataStream.setVersion(QDataStream::Qt_5_4);
 
         // Don't use the << operator for QByteArray. See the note in ReadFile() below.
-        dataStream.writeRawData(fileHeaderByteArray.constData(), fileHeaderByteArray.size());
+        dataStream.writeRawData(fileHeaderByteArray.constData(), static_cast<int>(fileHeaderByteArray.size()));
         dataStream << fileVersion;
         dataStream << data;
 
@@ -158,7 +158,7 @@ bool VRawLayout::ReadFile(QIODevice *ioDevice, VRawLayoutData &data)
         // bytes of the stream will be the size of the array, we might end up attempting to allocate
         // a large amount of memory if the wrong file type was read. Instead, we'll just read the
         // same number of bytes that are in the array we are comparing it to. No size was written.
-        const int len  = fileHeaderByteArray.size();
+        const int len = static_cast<int>(fileHeaderByteArray.size());
         QByteArray actualFileHeaderByteArray( len, '\0' );
         dataStream.readRawData( actualFileHeaderByteArray.data(), len );
 

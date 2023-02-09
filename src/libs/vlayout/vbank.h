@@ -77,9 +77,9 @@ public:
     void Reset();
     void SetCaseType(Cases caseType);
 
-    int AllDetailsCount() const;
-    int LeftToArrange() const;
-    int FailedToArrange() const;
+    vsizetype AllDetailsCount() const;
+    vsizetype LeftToArrange() const;
+    vsizetype FailedToArrange() const;
 
     qreal GetBiggestDiagonal() const;
 

@@ -177,9 +177,9 @@ void QmuFormulaBase::SetSepForEval()
  * @param map map with tokens
  * @param val token that need delete
  */
-void QmuFormulaBase::RemoveAll(QMap<int, QString> &map, const QString &val)
+void QmuFormulaBase::RemoveAll(QMap<vsizetype, QString> &map, const QString &val)
 {
-    const QList<int> listKeys = map.keys(val);//Take all keys that contain token.
+    const QList<vsizetype> listKeys = map.keys(val);//Take all keys that contain token.
     for (auto key : listKeys)
     {
         map.remove(key);

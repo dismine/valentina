@@ -63,7 +63,7 @@ void VHighlighter::highlightBlock(const QString &text)
 {
     QScopedPointer<VTextBlockData> data(new VTextBlockData);
 
-    int leftPos = text.indexOf('(');
+    vsizetype leftPos = text.indexOf('(');
     while (leftPos != -1)
     {
         QScopedPointer<ParenthesisInfo> info(new ParenthesisInfo);
@@ -74,7 +74,7 @@ void VHighlighter::highlightBlock(const QString &text)
         leftPos = text.indexOf('(', leftPos + 1);
     }
 
-    int rightPos = text.indexOf(')');
+    vsizetype rightPos = text.indexOf(')');
     while (rightPos != -1)
     {
         QScopedPointer<ParenthesisInfo> info(new ParenthesisInfo);

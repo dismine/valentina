@@ -161,8 +161,8 @@ public:
     void Mirror(const QLineF &edge);
     void Mirror();
 
-    auto DetailEdgesCount() const -> int;
-    auto LayoutEdgesCount() const -> int;
+    auto DetailEdgesCount() const -> vsizetype;
+    auto LayoutEdgesCount() const -> vsizetype;
 
     auto LayoutEdge(int i) const -> QLineF;
     auto LayoutEdgeByPoint(const QPointF &p1) const -> EdgeIndex;

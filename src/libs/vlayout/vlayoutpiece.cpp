@@ -194,7 +194,7 @@ auto PieceLabelText(const QVector<QPointF> &labelShape, const VTextManager &tm) 
     QStringList text;
     if (labelShape.count() > 2)
     {
-        int sourceCount = tm.GetSourceLinesCount();
+        auto sourceCount = tm.GetSourceLinesCount();
         text.reserve(sourceCount);
         for (int i = 0; i < sourceCount; ++i)
         {
@@ -1174,15 +1174,15 @@ void VLayoutPiece::Mirror()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPiece::DetailEdgesCount() const -> int
+auto VLayoutPiece::DetailEdgesCount() const -> vsizetype
 {
     return DetailPath().count();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPiece::LayoutEdgesCount() const -> int
+auto VLayoutPiece::LayoutEdgesCount() const -> vsizetype
 {
-    const int count = d->m_layoutAllowance.count();
+    const auto count = d->m_layoutAllowance.count();
     return count > 2 ? count : 0;
 }
 
@@ -1768,7 +1768,7 @@ auto VLayoutPiece::Edge(const QVector<QPointF> &path, int i) const -> QLineF
         return {};
     }
 
-    int i1, i2;
+    vsizetype i1, i2;
     if (i < path.count())
     {
         i1 = i-1;

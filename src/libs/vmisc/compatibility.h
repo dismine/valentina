@@ -205,8 +205,8 @@ inline auto Reverse(const QVector<T> &container) -> QVector<T>
         return container;
     }
     QVector<T> reversed(container.size());
-    qint32 j = 0;
-    for (qint32 i = container.size() - 1; i >= 0; --i)
+    vsizetype j = 0;
+    for (vsizetype i = container.size() - 1; i >= 0; --i)
     {
         reversed.replace(j, container.at(i));
         ++j;

@@ -135,7 +135,7 @@ void VPE::VPropertySet::removeProperty(VProperty* prop, bool delete_property)
     }
 }
 
-int VPE::VPropertySet::count() const
+vpesizetype VPE::VPropertySet::count() const
 {
     return d_ptr->Properties.count();
 }
@@ -197,7 +197,7 @@ VPE::VProperty *VPE::VPropertySet::getRootProperty(int row) const
     return d_ptr->RootProperties.value(row, nullptr);
 }
 
-int VPE::VPropertySet::getRootPropertyCount() const
+vpesizetype VPE::VPropertySet::getRootPropertyCount() const
 {
     return d_ptr->RootProperties.count();
 }

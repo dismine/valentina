@@ -175,15 +175,16 @@ void VAbstractConverter::ReserveFile() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractConverter::Replace(QString &formula, const QString &newName, int position, const QString &token,
-                                 int &bias) const
+void VAbstractConverter::Replace(QString &formula, const QString &newName, vsizetype position, const QString &token,
+                                 vsizetype &bias) const
 {
     formula.replace(position, token.length(), newName);
     bias = token.length() - newName.length();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractConverter::CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens) const
+void VAbstractConverter::CorrectionsPositions(vsizetype position, vsizetype bias,
+                                              QMap<vsizetype, QString> &tokens) const
 {
     if (bias == 0)
     {
@@ -194,10 +195,10 @@ void VAbstractConverter::CorrectionsPositions(int position, int bias, QMap<int, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractConverter::BiasTokens(int position, int bias, QMap<int, QString> &tokens)
+void VAbstractConverter::BiasTokens(vsizetype position, vsizetype bias, QMap<vsizetype, QString> &tokens)
 {
-    QMap<int, QString> newTokens;
-    QMap<int, QString>::const_iterator i = tokens.constBegin();
+    QMap<vsizetype, QString> newTokens;
+    QMap<vsizetype, QString>::const_iterator i = tokens.constBegin();
     while (i != tokens.constEnd())
     {
         if (i.key()<= position)

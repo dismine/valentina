@@ -75,9 +75,10 @@ protected:
 
     virtual bool IsReadOnly() const =0;
 
-    void Replace(QString &formula, const QString &newName, int position, const QString &token, int &bias) const;
-    void CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens) const;
-    static void BiasTokens(int position, int bias, QMap<int, QString> &tokens);
+    void Replace(QString &formula, const QString &newName, vsizetype position, const QString &token,
+                 vsizetype &bias) const;
+    void CorrectionsPositions(vsizetype position, vsizetype bias, QMap<vsizetype, QString> &tokens) const;
+    static void BiasTokens(vsizetype position, vsizetype bias, QMap<vsizetype, QString> &tokens);
 
     void ValidateXML(const QString &schema) const;
 

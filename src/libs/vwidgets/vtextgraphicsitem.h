@@ -67,7 +67,7 @@ public:
     bool IsContained(QRectF rectBB, qreal dRot, qreal& dX, qreal& dY) const;
     void UpdateData(const QString& qsName, const VPieceLabelData& data, const VContainer *pattern);
     void UpdateData(VAbstractPattern* pDoc, const VContainer *pattern);
-    int  GetTextLines() const;
+    vsizetype GetTextLines() const;
 
 protected:
     virtual void mousePressEvent(QGraphicsSceneMouseEvent* pME) override;

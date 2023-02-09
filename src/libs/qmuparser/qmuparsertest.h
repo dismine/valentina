@@ -201,7 +201,7 @@ private:
         return static_cast<int>( v1 ) & static_cast<int>( v2 );
     }
 
-    static qreal FirstArg ( const qreal* a_afArg, int a_iArgc )
+    static qreal FirstArg ( const qreal* a_afArg, qmusizetype a_iArgc )
     {
         if ( a_iArgc == 0)
         {
@@ -211,7 +211,7 @@ private:
         return a_afArg[0];
     }
 
-    static qreal LastArg ( const qreal* a_afArg, int a_iArgc )
+    static qreal LastArg ( const qreal* a_afArg, qmusizetype a_iArgc )
     {
         if ( a_iArgc == 0)
         {
@@ -221,7 +221,7 @@ private:
         return a_afArg[a_iArgc - 1];
     }
 
-    static qreal Sum ( const qreal* a_afArg, int a_iArgc )
+    static qreal Sum ( const qreal* a_afArg, qmusizetype a_iArgc )
     {
         if ( a_iArgc == 0)
         {
@@ -307,8 +307,8 @@ private:
     }
 
     // Custom value recognition
-    static int IsHexVal (const QString &a_szExpr, int *a_iPos, qreal *a_fVal, const QLocale &locale, bool cNumbers,
-                         const QChar &decimal, const QChar &thousand);
+    static int IsHexVal (const QString &a_szExpr, qmusizetype *a_iPos, qreal *a_fVal, const QLocale &locale,
+                         bool cNumbers, const QChar &decimal, const QChar &thousand);
 
     int TestNames();
     int TestSyntax();

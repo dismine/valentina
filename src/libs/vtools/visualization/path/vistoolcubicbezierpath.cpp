@@ -66,12 +66,12 @@ VisToolCubicBezierPath::~VisToolCubicBezierPath()
 void VisToolCubicBezierPath::RefreshGeometry()
 {
     const QVector<VPointF> pathPoints = path.GetCubicPath();
-    const int size = pathPoints.size();
+    const vsizetype size = pathPoints.size();
     if (size > 0)
     {
-        const int countSubSpl = VCubicBezierPath::CountSubSpl(size);
+        const vsizetype countSubSpl = VCubicBezierPath::CountSubSpl(size);
 
-        for (int i = 0; i < size; ++i)
+        for (vsizetype i = 0; i < size; ++i)
         {
             VScaledEllipse *point = this->GetPoint(mainPoints, static_cast<unsigned>(i), 1/*zValue*/);
             DrawPoint(point, static_cast<QPointF>(pathPoints.at(i)), Color(VColor::SupportColor));
@@ -85,7 +85,7 @@ void VisToolCubicBezierPath::RefreshGeometry()
             }
             else
             {
-                const qint32 last = VCubicBezierPath::SubSplOffset(countSubSpl) + 3;
+                const vsizetype last = VCubicBezierPath::SubSplOffset(countSubSpl) + 3;
                 Creating(pathPoints, size-1-last);
             }
         }
@@ -94,10 +94,10 @@ void VisToolCubicBezierPath::RefreshGeometry()
         {
             DrawPath(this, path.GetPath(), path.DirectionArrows(), Color(VColor::MainColor), LineStyle(), Qt::RoundCap);
 
-            for (qint32 i = 1; i<=countSubSpl; ++i)
+            for (vsizetype i = 1; i<=countSubSpl; ++i)
             {
-                const int preLastPoint = (countSubSpl - 1) * 2;
-                const int lastPoint = preLastPoint + 1;
+                const vsizetype preLastPoint = (countSubSpl - 1) * 2;
+                const vsizetype lastPoint = preLastPoint + 1;
 
                 const VSpline spl = path.GetSpline(i);
 
@@ -163,16 +163,16 @@ auto VisToolCubicBezierPath::GetLine(quint32 i) -> VScaledLine *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolCubicBezierPath::Creating(const QVector<VPointF> &pathPoints, int pointsLeft)
+void VisToolCubicBezierPath::Creating(const QVector<VPointF> &pathPoints, vsizetype pointsLeft)
 {
-    const int size = pathPoints.size();
+    const vsizetype size = pathPoints.size();
     if (pathPoints.isEmpty() || size+1 < pointsLeft)
     {
         return;
     }
 
-    int subSplPoints = 0;
-    const int subSplCount = VCubicBezierPath::CountSubSpl(size);
+    vsizetype subSplPoints = 0;
+    const vsizetype subSplCount = VCubicBezierPath::CountSubSpl(size);
     if (subSplCount >= 1)
     {
         subSplPoints = VCubicBezierPath::SubSplPointsCount(subSplCount)-1;
@@ -196,7 +196,7 @@ void VisToolCubicBezierPath::Creating(const QVector<VPointF> &pathPoints, int po
 
                 DrawLine(helpLine1, p1p2, Color(VColor::MainColor), Qt::DashLine);
 
-                const int preLastPoint = subSplCount * 2;
+                const vsizetype preLastPoint = subSplCount * 2;
                 VScaledEllipse *p2Ctrl = this->GetPoint(ctrlPoints, static_cast<unsigned>(preLastPoint));
                 DrawPoint(p2Ctrl, p2, Qt::green);
             }
@@ -226,7 +226,7 @@ void VisToolCubicBezierPath::Creating(const QVector<VPointF> &pathPoints, int po
             VSpline spline(p1, p2, ScenePos(), VPointF(ScenePos()));
             DrawPath(newCurveSegment, spline.GetPath(), Color(VColor::MainColor), Qt::SolidLine, Qt::RoundCap);
 
-            const int preLastPoint = subSplCount * 2;
+            const vsizetype preLastPoint = subSplCount * 2;
             VScaledEllipse *p2Ctrl = this->GetPoint(ctrlPoints, static_cast<unsigned>(preLastPoint));
             DrawPoint(p2Ctrl, p2, Qt::green);
             break;
@@ -252,7 +252,7 @@ void VisToolCubicBezierPath::Creating(const QVector<VPointF> &pathPoints, int po
             VSpline spline(p1, p2, p3, VPointF(ScenePos()));
             DrawPath(newCurveSegment, spline.GetPath(), Color(VColor::MainColor), Qt::SolidLine, Qt::RoundCap);
 
-            const int preLastPoint = subSplCount * 2;
+            const vsizetype preLastPoint = subSplCount * 2;
             VScaledEllipse *p2Ctrl = this->GetPoint(ctrlPoints, static_cast<unsigned>(preLastPoint));
             DrawPoint(p2Ctrl, p2, Qt::green);
             break;
@@ -265,10 +265,10 @@ void VisToolCubicBezierPath::Creating(const QVector<VPointF> &pathPoints, int po
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolCubicBezierPath::RefreshToolTip()
 {
-    const int size = path.CountPoints();
+    const vsizetype size = path.CountPoints();
     if (size > 0)
     {
-        const int countSubSpl = VCubicBezierPath::CountSubSpl(size);
+        const vsizetype countSubSpl = VCubicBezierPath::CountSubSpl(size);
 
         if (size < 7)
         {

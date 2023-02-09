@@ -155,7 +155,7 @@ VPE::VProperty *VPE::VLineTypeProperty::clone(bool include_children, VProperty *
     return VProperty::clone(include_children, container ? container : new VLineTypeProperty(getName()));
 }
 
-int VPE::VLineTypeProperty::IndexOfStyle(const QMap<QString, QIcon> &styles, const QString &style)
+vpesizetype VPE::VLineTypeProperty::IndexOfStyle(const QMap<QString, QIcon> &styles, const QString &style)
 {
     QVector<QString> indexList;
     QMap<QString, QIcon>::const_iterator i = styles.constBegin();

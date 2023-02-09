@@ -269,7 +269,7 @@ bool VLayoutPaper::ArrangeDetail(const VLayoutPiece &detail, std::atomic_bool &s
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VLayoutPaper::Count() const
+vsizetype VLayoutPaper::Count() const
 {
     return d->details.count();
 }

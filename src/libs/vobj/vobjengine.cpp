@@ -368,7 +368,7 @@ qint64 VObjEngine::Square(const QPolygonF &poly) const
     QVector<qreal> x;
     QVector<qreal> y;
 
-    int n = poly.count();
+    vsizetype n = poly.count();
     qreal s, res = 0;
     qint64 sq = 0;
 

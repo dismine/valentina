@@ -152,7 +152,7 @@ public:
     virtual QString getDescription() const;
 
     //! Adds a child to this property
-    virtual int addChild(VProperty* child);
+    virtual vpesizetype addChild(VProperty* child);
 
     //! Returns a reference to the list of children
     virtual QList<VProperty*>& getChildren();
@@ -164,7 +164,7 @@ public:
     virtual VProperty* getChild(int row) const;
 
     //! Gets the number of children
-    virtual int getRowCount() const;
+    virtual vpesizetype getRowCount() const;
 
     //! Gets the parent of this property
     virtual VProperty* getParent() const;
@@ -176,7 +176,7 @@ public:
     virtual void removeChild(VProperty* child);
 
     //! Returns the row the child has
-    virtual int getChildRow(VProperty* child) const;
+    virtual vpesizetype getChildRow(VProperty* child) const;
 
     //! Returns whether the views have to update the parent of this property if it changes
     virtual bool getUpdateParent() const;

@@ -74,7 +74,7 @@ QmuParserTester::QmuParserTester(QObject *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int QmuParserTester::IsHexVal ( const QString &a_szExpr, int *a_iPos, qreal *a_fVal, const QLocale &locale,
+int QmuParserTester::IsHexVal ( const QString &a_szExpr, qmusizetype *a_iPos, qreal *a_fVal, const QLocale &locale,
                                 bool cNumbers, const QChar &decimal, const QChar &thousand )
 {
     Q_UNUSED(locale)
@@ -102,7 +102,7 @@ int QmuParserTester::IsHexVal ( const QString &a_szExpr, int *a_iPos, qreal *a_f
         return 1;
     }
 
-    *a_iPos += static_cast<int>(2 + nPos);
+    *a_iPos += static_cast<qmusizetype>(2 + nPos);
     *a_fVal = static_cast<qreal>(iVal);
     return 1;
 }

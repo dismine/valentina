@@ -167,7 +167,8 @@ static int CheckChar(QChar &c, const QLocale &locale, const QChar &decimal, cons
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int ReadVal(const QString &formula, qreal &val, const QLocale &locale, const QChar &decimal, const QChar &thousand)
+qmusizetype ReadVal(const QString &formula, qreal &val, const QLocale &locale, const QChar &decimal,
+                    const QChar &thousand)
 {
     // Must not be equal
     if (decimal == thousand || formula.isEmpty())
@@ -335,9 +336,9 @@ QString NameRegExp()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int FindFirstNotOf(const QString &string, const QString &chars, int pos)
+qmusizetype FindFirstNotOf(const QString &string, const QString &chars, qmusizetype pos)
 {
-    int chPos = pos;
+    qmusizetype chPos = pos;
     QString::const_iterator it = string.constBegin() + pos;
     QString::const_iterator end = string.constEnd();
     while (it != end)

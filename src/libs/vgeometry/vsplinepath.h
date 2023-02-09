@@ -64,7 +64,7 @@ public:
     VSplinePath Move(qreal length, qreal angle, const QString &prefix = QString()) const;
     virtual ~VSplinePath() override;
 
-    VSplinePoint &operator[](int indx);
+    VSplinePoint &operator[](vsizetype indx);
     VSplinePath  &operator=(const VSplinePath &path);
 #ifdef Q_COMPILER_RVALUE_REFS
     VSplinePath(VSplinePath&& splPath) Q_DECL_NOTHROW;
@@ -73,10 +73,10 @@ public:
 
     void   append(const VSplinePoint &point);
 
-    virtual qint32  CountSubSpl() const override;
-    virtual qint32  CountPoints() const override;
+    virtual vsizetype CountSubSpl() const override;
+    virtual vsizetype CountPoints() const override;
     virtual void    Clear() override;
-    virtual VSpline GetSpline(qint32 index) const override;
+    virtual VSpline GetSpline(vsizetype index) const override;
 
     virtual QVector<VSplinePoint> GetSplinePath() const override;
     QVector<VFSplinePoint> GetFSplinePath() const;
@@ -90,7 +90,7 @@ public:
     void         UpdatePoint(qint32 indexSpline, const SplinePointPosition &pos, const VSplinePoint &point);
     VSplinePoint GetSplinePoint(qint32 indexSpline, SplinePointPosition pos) const;
 
-    const VSplinePoint &at(int indx) const;
+    const VSplinePoint &at(vsizetype indx) const;
 
     virtual QJsonObject ToJson() const override;
 

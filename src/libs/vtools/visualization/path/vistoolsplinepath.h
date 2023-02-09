@@ -83,9 +83,9 @@ private:
     QPointF m_ctrlPoint{};
 
     auto GetPoint(quint32 i) -> VScaledEllipse*;
-    void DragControlPoint(int lastPoint, int preLastPoint, const QPointF &pSpl, int size);
-    void NewCurveSegment(const VSpline &spline, const QPointF &pSpl, int size);
-    void Creating(const QPointF &pSpl, int size);
+    void DragControlPoint(vsizetype lastPoint, vsizetype preLastPoint, const QPointF &pSpl, vsizetype size);
+    void NewCurveSegment(const VSpline &spline, const QPointF &pSpl, vsizetype size);
+    void Creating(const QPointF &pSpl, vsizetype size);
 };
 
 //---------------------------------------------------------------------------------------------------------------------

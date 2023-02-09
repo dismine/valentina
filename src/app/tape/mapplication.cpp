@@ -743,7 +743,7 @@ void MApplication::NewLocalSocketConnection()
 void MApplication::Clean()
 {
     // cleanup any deleted main windows first
-    for (int i = m_mainWindows.count() - 1; i >= 0; --i)
+    for (vsizetype i = m_mainWindows.count() - 1; i >= 0; --i)
     {
         if (m_mainWindows.at(i).isNull())
         {

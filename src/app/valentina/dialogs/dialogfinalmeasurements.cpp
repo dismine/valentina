@@ -483,7 +483,7 @@ void DialogFinalMeasurements::FillFinalMeasurements(bool freshCall)
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->clearContents();
 
-    ui->tableWidget->setRowCount(m_measurements.size());
+    ui->tableWidget->setRowCount(static_cast<int>(m_measurements.size()));
     for (int i=0; i < m_measurements.size(); ++i)
     {
         const VFinalMeasurement &m = m_measurements.at(i);

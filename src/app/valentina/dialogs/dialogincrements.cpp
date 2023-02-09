@@ -203,7 +203,7 @@ void DialogIncrements::FillTable(const QMap<QString, T> &varTable, QTableWidget 
         i.next();
         qreal length = *i.value()->GetValue();
         currentRow++;
-        table->setRowCount ( varTable.size() );
+        table->setRowCount ( static_cast<int>(varTable.size()) );
 
         auto *item = new QTableWidgetItem(i.key());
         item->setTextAlignment(Qt::AlignLeft);
@@ -349,7 +349,7 @@ auto DialogIncrements::GetCustomName() const -> QString
 auto DialogIncrements::ClearIncrementName(const QString &name) -> QString
 {
     QString clear = name;
-    const int index = clear.indexOf(CustomIncrSign);
+    const auto index = clear.indexOf(CustomIncrSign);
     if (index == 0)
     {
         clear.remove(0, 1);
@@ -1315,7 +1315,7 @@ void DialogIncrements::FillIncrementsTable(QTableWidget *table,
 
     qint32 currentRow = -1;
     QMapIterator<quint32, QString> iMap(map);
-    table->setRowCount ( map.size() );
+    table->setRowCount ( static_cast<int>(map.size()) );
     while (iMap.hasNext())
     {
         iMap.next();

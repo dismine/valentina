@@ -119,4 +119,10 @@ void qAsConst(const T &&) Q_DECL_EQ_DELETE;
 #endif // QT_VERSION >= QT_VERSION_CHECK(5, 8, 0)
 #endif // (defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+using vsizetype = qsizetype;
+#else
+using vsizetype = int;
+#endif
+
 #endif // DEFGLOBAL_H

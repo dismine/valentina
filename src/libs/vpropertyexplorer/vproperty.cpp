@@ -249,7 +249,7 @@ VPE::VProperty* VPE::VProperty::getChild(int row) const
 }
 
 //! Gets the number of children
-int VPE::VProperty::getRowCount() const
+vpesizetype VPE::VProperty::getRowCount() const
 {
    return d_ptr->Children.count();
 }
@@ -282,7 +282,7 @@ void VPE::VProperty::setParent(VProperty* parent)
     }
 }
 
-int VPE::VProperty::addChild(VProperty *child)
+vpesizetype VPE::VProperty::addChild(VProperty *child)
 {
     if (child && child->getParent() != this)
     {
@@ -312,7 +312,7 @@ void VPE::VProperty::removeChild(VProperty* child)
 }
 
 //! Returns the row the child has
-int VPE::VProperty::getChildRow(VProperty* child) const
+vpesizetype VPE::VProperty::getChildRow(VProperty* child) const
 {
     return d_ptr->Children.indexOf(child);
 }

@@ -92,8 +92,8 @@ public:
 
     auto GetAllSourceLines() const -> QVector<TextLine>;
     void SetAllSourceLines(const QVector<TextLine> &lines);
-    auto GetSourceLinesCount() const -> int;
-    auto GetSourceLine(int i) const -> const TextLine&;
+    auto GetSourceLinesCount() const -> vsizetype;
+    auto GetSourceLine(vsizetype i) const -> const TextLine&;
 
     auto MaxLineWidth(int width) const -> int;
 

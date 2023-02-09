@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file
+ **  @file   vpropertydef.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   30 12, 2016
+ **  @date   1 2, 2023
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2016 Valentina project
+ **  Copyright (C) 2023 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,37 +25,14 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
+#ifndef VPROPERTYDEF_H
+#define VPROPERTYDEF_H
 
-#ifndef TST_READVAL_H
-#define TST_READVAL_H
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <QtGlobal>
+using vpesizetype = qsizetype;
+#else
+using vpesizetype = int;
+#endif
 
-#include <QtCore/qglobal.h>
-
-#include <QObject>
-#include <QLocale>
-
-#include "../vmisc/defglobal.h"
-
-class TST_ReadVal : public QObject
-{
-    Q_OBJECT // NOLINT
-public:
-    explicit TST_ReadVal(QObject *parent = nullptr);
-private slots:
-    void TestReadVal_data();
-    void TestReadVal();
-    void TestInvalidData_data();
-    void TestInvalidData();
-    void cleanupTestCase();
-private:
-    // cppcheck-suppress unknownMacro
-    Q_DISABLE_COPY_MOVE(TST_ReadVal) // NOLINT
-    QLocale m_systemLocale;
-
-    void PrepareVal(qreal val, const QLocale &locale);
-    void PrepareString(const QString &str, const QLocale &locale, qreal val=0, vsizetype count=-1);
-
-    void TestVal();
-};
-
-#endif // TST_READVAL_H
+#endif // VPROPERTYDEF_H

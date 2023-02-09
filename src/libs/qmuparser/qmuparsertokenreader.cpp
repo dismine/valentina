@@ -283,7 +283,7 @@ auto QmuParserTokenReader::ReadNextToken(const QLocale &locale, bool cNumbers, c
     // !!! From this point on there is no exit without an exception possible...
     //
     QString strTok;
-    int iEnd = ExtractToken ( m_pParser->ValidNameChars(), strTok, m_iPos );
+    qmusizetype iEnd = ExtractToken ( m_pParser->ValidNameChars(), strTok, m_iPos );
     if ( iEnd != m_iPos )
     {
         Error ( ecUNASSIGNABLE_TOKEN, m_iPos, strTok );
@@ -318,9 +318,10 @@ void QmuParserTokenReader::SetParent ( QmuParserBase *a_pParent )
  */
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_MSVC(4309)
-auto QmuParserTokenReader::ExtractToken ( const QString &a_szCharSet, QString &a_sTok, int a_iPos ) const -> int
+auto QmuParserTokenReader::ExtractToken ( const QString &a_szCharSet, QString &a_sTok,
+                                          qmusizetype a_iPos ) const -> qmusizetype
 {
-    int iEnd = FindFirstNotOf(m_strFormula, a_szCharSet, a_iPos);
+    qmusizetype iEnd = FindFirstNotOf(m_strFormula, a_szCharSet, a_iPos);
 
     if (iEnd == -1)
     {
@@ -344,9 +345,9 @@ auto QmuParserTokenReader::ExtractToken ( const QString &a_szCharSet, QString &a
  * alphabetic characters are allowed in operator tokens. To avoid this this function checks specifically
  * for operator tokens.
  */
-auto QmuParserTokenReader::ExtractOperatorToken ( QString &a_sTok, int a_iPos ) const -> int
+auto QmuParserTokenReader::ExtractOperatorToken ( QString &a_sTok, qmusizetype a_iPos ) const -> qmusizetype
 {
-    int iEnd = FindFirstNotOf(m_strFormula, m_pParser->ValidOprtChars(), a_iPos);
+    qmusizetype iEnd = FindFirstNotOf(m_strFormula, m_pParser->ValidOprtChars(), a_iPos);
 
     if ( iEnd == -1 )
     {
@@ -380,7 +381,7 @@ auto QmuParserTokenReader::IsBuiltIn ( token_type &a_Tok ) -> bool
     // check string for operator/function
     for ( int i = 0; i < pOprtDef.size(); ++i )
     {
-        int len = pOprtDef.at ( i ).length();
+        qmusizetype len = pOprtDef.at ( i ).length();
         if ( pOprtDef.at ( i ) == m_strFormula.mid ( m_iPos, len ) )
         {
             if (i >= cmLE && i <= cmASSIGN)
@@ -549,7 +550,7 @@ auto QmuParserTokenReader::IsEOF ( token_type &a_Tok ) -> bool
 auto QmuParserTokenReader::IsInfixOpTok ( token_type &a_Tok ) -> bool
 {
     QString sTok;
-    int iEnd = ExtractToken ( m_pParser->ValidInfixOprtChars(), sTok, m_iPos );
+    qmusizetype iEnd = ExtractToken ( m_pParser->ValidInfixOprtChars(), sTok, m_iPos );
     if ( iEnd == m_iPos )
     {
         return false;
@@ -588,7 +589,7 @@ auto QmuParserTokenReader::IsInfixOpTok ( token_type &a_Tok ) -> bool
 auto QmuParserTokenReader::IsFunTok ( token_type &a_Tok ) -> bool
 {
     QString strTok;
-    int iEnd = ExtractToken ( m_pParser->ValidNameChars(), strTok, m_iPos );
+    qmusizetype iEnd = ExtractToken ( m_pParser->ValidNameChars(), strTok, m_iPos );
     if ( iEnd == m_iPos )
     {
         return false;
@@ -628,7 +629,7 @@ auto QmuParserTokenReader::IsOprt ( token_type &a_Tok ) -> bool
 {
     QString strTok;
 
-    int iEnd = ExtractOperatorToken ( strTok, m_iPos );
+    qmusizetype iEnd = ExtractOperatorToken ( strTok, m_iPos );
     if ( iEnd == m_iPos )
     {
         return false;
@@ -718,7 +719,7 @@ auto QmuParserTokenReader::IsPostOpTok ( token_type &a_Tok ) -> bool
 
     // Test if there could be a postfix operator
     QString sTok;
-    int iEnd = ExtractToken ( m_pParser->ValidOprtChars(), sTok, m_iPos );
+    qmusizetype iEnd = ExtractToken ( m_pParser->ValidOprtChars(), sTok, m_iPos );
     if ( iEnd == m_iPos )
     {
         return false;
@@ -758,7 +759,7 @@ auto QmuParserTokenReader::IsValTok ( token_type &a_Tok, const QLocale &locale, 
 
     QString strTok;
     qreal fVal ( 0 );
-    int iEnd ( 0 );
+    qmusizetype iEnd ( 0 );
 
     // 2.) Check for user defined constant
     // Read everything that could be a constant name
@@ -786,7 +787,7 @@ auto QmuParserTokenReader::IsValTok ( token_type &a_Tok, const QLocale &locale, 
     auto item = m_vIdentFun.begin();
     for ( item = m_vIdentFun.begin(); item != m_vIdentFun.end(); ++item )
     {
-        int iStart = m_iPos;
+        qmusizetype iStart = m_iPos;
         if ( ( *item ) ( m_strFormula.mid ( m_iPos ), &m_iPos, &fVal, locale, cNumbers, decimal, thousand ) == 1 )
         {
             // 2013-11-27 Issue 2:  https://code.google.com/p/muparser/issues/detail?id=2
@@ -819,7 +820,7 @@ auto QmuParserTokenReader::IsVarTok ( token_type &a_Tok ) -> bool
     }
 
     QString strTok;
-    int iEnd = ExtractToken ( m_pParser->ValidNameChars(), strTok, m_iPos );
+    qmusizetype iEnd = ExtractToken ( m_pParser->ValidNameChars(), strTok, m_iPos );
     if ( iEnd == m_iPos )
     {
         return false;
@@ -858,7 +859,7 @@ auto QmuParserTokenReader::IsStrVarTok ( token_type &a_Tok ) -> bool
     }
 
     QString strTok;
-    int iEnd = ExtractToken ( m_pParser->ValidNameChars(), strTok, m_iPos );
+    qmusizetype iEnd = ExtractToken ( m_pParser->ValidNameChars(), strTok, m_iPos );
     if ( iEnd == m_iPos )
     {
         return false;
@@ -899,7 +900,7 @@ auto QmuParserTokenReader::IsStrVarTok ( token_type &a_Tok ) -> bool
 auto QmuParserTokenReader::IsUndefVarTok ( token_type &a_Tok ) -> bool
 {
     QString strTok;
-    int iEnd ( ExtractToken ( m_pParser->ValidNameChars(), strTok, m_iPos ) );
+    qmusizetype iEnd ( ExtractToken ( m_pParser->ValidNameChars(), strTok, m_iPos ) );
     if ( iEnd == m_iPos )
     {
         return false;
@@ -966,7 +967,7 @@ auto QmuParserTokenReader::IsString ( token_type &a_Tok ) -> bool
     }
 
     QString strBuf (m_strFormula.mid(m_iPos + 1));
-    int iEnd ( 0 ), iSkip ( 0 );
+    qmusizetype iEnd ( 0 ), iSkip ( 0 );
 
     // parser over escaped '\"' end replace them with '"'
     for ( iEnd = strBuf.indexOf ( "\"" ); iEnd != 0 && iEnd != -1; iEnd = strBuf.indexOf ( "\"", iEnd ) )
@@ -1011,7 +1012,7 @@ auto QmuParserTokenReader::IsString ( token_type &a_Tok ) -> bool
  * @param a_sTok [in] The token string representation associated with the error.
  * @throw ParserException always throws thats the only purpose of this function.
  */
-void Q_NORETURN QmuParserTokenReader::Error ( EErrorCodes a_iErrc, int a_iPos, const QString &a_sTok ) const
+void Q_NORETURN QmuParserTokenReader::Error ( EErrorCodes a_iErrc, qmusizetype a_iPos, const QString &a_sTok ) const
 {
     m_pParser->Error ( a_iErrc, a_iPos, a_sTok );
 }

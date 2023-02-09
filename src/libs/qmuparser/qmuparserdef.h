@@ -26,6 +26,7 @@
 #include <QString>
 #include <locale>
 #include <ciso646>
+#include <QtGlobal>
 
 #include "qmuparserfixes.h"
 
@@ -98,6 +99,12 @@
 #define QMUP_STRING_TYPE std::wstring
 
 class QLocale;
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+using qmusizetype = qsizetype;
+#else
+using qmusizetype = int;
+#endif
 
 namespace qmu
 {
@@ -224,7 +231,7 @@ typedef std::map<QString, qreal*> varmap_type;
 typedef std::map<QString, qreal> valmap_type;
 
 /** @brief Type for assigning a string name to an index in the internal string table. */
-typedef std::map<QString, int> strmap_type;
+typedef std::map<QString, qmusizetype> strmap_type;
 
 // Parser callbacks
 
@@ -298,7 +305,7 @@ typedef qreal ( *bulkfun_type9 ) ( int, int, qreal, qreal, qreal, qreal, qreal, 
 typedef qreal ( *bulkfun_type10 ) ( int, int, qreal, qreal, qreal, qreal, qreal, qreal, qreal, qreal, qreal, qreal );
 
 /** @brief Callback type used for functions with a variable argument list. */
-typedef qreal ( *multfun_type ) ( const qreal*, int );
+typedef qreal ( *multfun_type ) ( const qreal*, qmusizetype );
 
 /** @brief Callback type used for functions taking a string as an argument. */
 typedef qreal ( *strfun_type1 ) ( const QString & );
@@ -310,8 +317,8 @@ typedef qreal ( *strfun_type2 ) ( const QString &, qreal );
 typedef qreal ( *strfun_type3 ) ( const QString &, qreal, qreal );
 
 /** @brief Callback used for functions that identify values in a string. */
-typedef int ( *identfun_type ) ( const QString &sExpr, int *nPos, qreal *fVal, const QLocale &locale, bool cNumbers,
-                                 const QChar &decimal, const QChar &thousand );
+typedef int ( *identfun_type ) ( const QString &sExpr, qmusizetype *nPos, qreal *fVal, const QLocale &locale,
+                                 bool cNumbers, const QChar &decimal, const QChar &thousand );
 
 /** @brief Callback used for variable creation factory functions. */
 typedef qreal* ( *facfun_type ) ( const QString &, void* );

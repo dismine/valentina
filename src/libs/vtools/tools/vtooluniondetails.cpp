@@ -1325,8 +1325,8 @@ void UpdateUnitedNodes(const VToolUnionDetailsInitData &initData, qreal dx, qrea
     const VPiecePath d1REPath = GetPiece1MainPath(initData.doc, initData.id).RemoveEdge(initData.indexD1);
     const VPiecePath d2REPath = GetPiece2MainPath(initData.doc, initData.id).RemoveEdge(initData.indexD2);
 
-    const qint32 countNodeD1 = d1REPath.CountNodes();
-    const qint32 countNodeD2 = d2REPath.CountNodes();
+    const vsizetype countNodeD1 = d1REPath.CountNodes();
+    const vsizetype countNodeD2 = d2REPath.CountNodes();
 
     QVector<quint32> children = GetNodesChildren(initData.doc, initData.id);
     if (not children.isEmpty())
@@ -1361,7 +1361,7 @@ void UpdateUnitedNodes(const VToolUnionDetailsInitData &initData, qreal dx, qrea
                 ++i;
                 if (i > indexOfNode)
                 {
-                    const int childrenCount = children.size();
+                    const vsizetype childrenCount = children.size();
                     qint32 j = 0;
                     FindIndexJ(pointsD2, d2REPath, initData.indexD2, j);
                     do
@@ -1402,7 +1402,7 @@ QVector<quint32> FixChildren(QVector<quint32> records, QVector<quint32> children
     QVector<quint32> fixedChildren;
     while(not records.isEmpty())
     {
-        const qint32 childrenIndex = records.size()-1;
+        const vsizetype childrenIndex = records.size()-1;
         if (children.size() > childrenIndex)
         {
             fixedChildren.append(children.takeAt(childrenIndex));
@@ -1959,8 +1959,8 @@ QVector<QPair<bool, VPieceNode> > VToolUnionDetails::CalcUnitedPath(const VPiece
 {
     QVector<QPair<bool, VPieceNode> > path;
 
-    const qint32 countNodeD1 = d1Path.CountNodes();
-    const qint32 countNodeD2 = d2Path.CountNodes();
+    const vsizetype countNodeD1 = d1Path.CountNodes();
+    const vsizetype countNodeD2 = d2Path.CountNodes();
 
     qint32 pointsD2 = 0; //Keeps number points the second detail, that we have already added.
     qint32 i = 0;

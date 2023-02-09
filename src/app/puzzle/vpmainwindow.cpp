@@ -1592,7 +1592,7 @@ void VPMainWindow::UpdateWindowTitle()
     }
     else
     {
-        int index = VPApplication::VApp()->MainWindows().indexOf(this);
+        vsizetype index = VPApplication::VApp()->MainWindows().indexOf(this);
         if (index != -1)
         {
             showName = tr("untitled %1.vlt").arg(index+1);
@@ -1745,7 +1745,7 @@ void VPMainWindow::CreateWindowMenu(QMenu *menu)
         VPMainWindow *window = windows.at(i);
 
         QString title = QStringLiteral("%1. %2").arg(i+1).arg(window->windowTitle());
-        const int index = title.lastIndexOf(QLatin1String("[*]"));
+        const vsizetype index = title.lastIndexOf(QLatin1String("[*]"));
         if (index != -1)
         {
             window->isWindowModified() ? title.replace(index, 3, QChar('*')) : title.replace(index, 3, QString());
@@ -2915,13 +2915,13 @@ void VPMainWindow::PrintLayoutSheets(QPrinter *printer, const QList<VPSheetPtr> 
         firstPageNumber = 0;
     }
 
-    int lastPageNumber = printer->toPage() - 1;
+    vsizetype lastPageNumber = printer->toPage() - 1;
     if (lastPageNumber == -1 || lastPageNumber >= sheets.count())
     {
         lastPageNumber = sheets.count() - 1;
     }
 
-    const int numPages = lastPageNumber - firstPageNumber + 1;
+    const vsizetype numPages = lastPageNumber - firstPageNumber + 1;
     int copyCount = 1;
     if (not printer->supportsMultipleCopies())
     {
@@ -2946,7 +2946,8 @@ void VPMainWindow::PrintLayoutSheets(QPrinter *printer, const QList<VPSheetPtr> 
     {
         for (int j = 0; j < numPages; ++j)
         {
-            int index = printer->pageOrder() == QPrinter::FirstPageFirst ? firstPageNumber + j : lastPageNumber - j;
+            vsizetype index = printer->pageOrder() == QPrinter::FirstPageFirst ? firstPageNumber + j
+                                                                               : lastPageNumber - j;
 
             const VPSheetPtr& sheet = sheets.at(index);
             if (sheet.isNull())
@@ -3013,13 +3014,13 @@ void VPMainWindow::PrintLayoutTiledSheets(QPrinter *printer, const QList<VPSheet
         firstPageNumber = 0;
     }
 
-    int lastPageNumber = printer->toPage() - 1;
+    vsizetype lastPageNumber = printer->toPage() - 1;
     if (lastPageNumber == -1 || lastPageNumber >= pages.count())
     {
         lastPageNumber = pages.count() - 1;
     }
 
-    const int numPages = lastPageNumber - firstPageNumber + 1;
+    const vsizetype numPages = lastPageNumber - firstPageNumber + 1;
     int copyCount = 1;
     if (not printer->supportsMultipleCopies())
     {
@@ -3036,7 +3037,8 @@ void VPMainWindow::PrintLayoutTiledSheets(QPrinter *printer, const QList<VPSheet
     {
         for (int j = 0; j < numPages; ++j)
         {
-            int index = printer->pageOrder() == QPrinter::FirstPageFirst ? firstPageNumber + j : lastPageNumber - j;
+            vsizetype index = printer->pageOrder() == QPrinter::FirstPageFirst ? firstPageNumber + j
+                                                                               : lastPageNumber - j;
             const VPLayoutPrinterPage &page = pages.at(index);
 
             if (not PrintLayoutTiledSheetPage(printer, painter, page, firstPage))
@@ -3287,7 +3289,7 @@ void VPMainWindow::TranslatePieces()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::TranslatePieceRelatively(const VPPiecePtr &piece, const QRectF &rect, int selectedPiecesCount,
+void VPMainWindow::TranslatePieceRelatively(const VPPiecePtr &piece, const QRectF &rect, vsizetype selectedPiecesCount,
                                             qreal dx, qreal dy)
 {
     if (not piece.isNull())

@@ -36,7 +36,7 @@
 #include <atomic>
 #include <QGraphicsPathItem>
 
-#include "vlayoutdef.h"
+#include "../vmisc/defglobal.h"
 
 class VBestSquare;
 class VLayoutPaperData;
@@ -93,7 +93,7 @@ public:
     void SetOriginPaperPortrait(bool portrait);
 
     bool ArrangeDetail(const VLayoutPiece &detail, std::atomic_bool &stop);
-    int  Count() const;
+    vsizetype  Count() const;
     Q_REQUIRED_RESULT QGraphicsRectItem *GetPaperItem(bool autoCropLength, bool autoCropWidth, bool textAsPaths) const;
     Q_REQUIRED_RESULT QGraphicsPathItem *GetGlobalContour() const;
     Q_REQUIRED_RESULT QList<QGraphicsItem *> GetItemDetails(bool textAsPaths) const;

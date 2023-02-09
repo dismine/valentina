@@ -1537,7 +1537,7 @@ QString VPattern::GetLabelBase(quint32 index) const
 
     QString base;
     const int count = qFloor(index/static_cast<quint32>(alphabet.size()));
-    const int number = static_cast<int>(index) - alphabet.size() * count;
+    const int number = static_cast<int>(index) - static_cast<int>(alphabet.size()) * count;
     int i = 0;
     do
     {
@@ -4229,13 +4229,13 @@ void VPattern::SetIncrementSpecialUnits(const QString &name, bool special)
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::ReplaceNameInFormula(QVector<VFormulaField> &expressions, const QString &name, const QString &newName)
 {
-    const int bias = name.length() - newName.length();
+    const auto bias = name.length() - newName.length();
 
     for(int i = 0; i < expressions.size(); ++i)
     {
         if (expressions.at(i).expression.indexOf(name) != -1)
         {
-            QMap<int, QString> tokens;
+            QMap<vsizetype, QString> tokens;
 
             // Eval formula
             try
@@ -4256,7 +4256,7 @@ void VPattern::ReplaceNameInFormula(QVector<VFormulaField> &expressions, const Q
                 continue;
             }
 
-            QList<int> tKeys = tokens.keys();// Take all tokens positions
+            QList<vsizetype> tKeys = tokens.keys();// Take all tokens positions
             QString newFormula = expressions.at(i).expression;
 
             for (int i = 0; i < tKeys.size(); ++i)

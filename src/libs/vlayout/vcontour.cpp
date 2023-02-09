@@ -71,9 +71,9 @@ QVector<QPointF> OptimizeCombining(const QVector<QPointF> &contour, const QPoint
     QPointF withdrawFirst = ConstLast(contour);
     bool optimize = false;
     int count = 0;
-    int cutIndex = -1;
+    vsizetype cutIndex = -1;
 
-    for (int i = contour.size() - 2; i >= 0; --i)
+    for (auto i = contour.size() - 2; i >= 0; --i)
     {
         if (not VGObject::IsPointOnLineSegment(contour.at(i), withdrawFirst, withdrawEnd, accuracyPointOnLine*2))
         {
@@ -259,7 +259,7 @@ QVector<QPointF> VContour::UniteWithContour(const VLayoutPiece &detail, int glob
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VContour::GlobalEdgesCount() const
+vsizetype VContour::GlobalEdgesCount() const
 {
     return d->m_emptySheetEdgesCount;
 }
@@ -277,7 +277,7 @@ QLineF VContour::GlobalEdge(int i) const
         }
 
         const QLineF emptyEdge = EmptySheetEdge();
-        const qreal nShift = emptyEdge.length()/GlobalEdgesCount();
+        const qreal nShift = emptyEdge.length() / static_cast<int>(GlobalEdgesCount());
         edge = IsPortrait() ? QLineF(nShift*(i-1) + emptyEdge.x1(), emptyEdge.y1(),
                                      nShift*i + emptyEdge.x1(), emptyEdge.y2()) :
                               QLineF(emptyEdge.x1(), nShift*(i-1) + emptyEdge.y1(),
@@ -339,7 +339,7 @@ QVector<QPointF> VContour::CutEdge(const QLineF &edge) const
 QVector<QPointF> VContour::CutEmptySheetEdge() const
 {
     QVector<QPointF> points;
-    const qreal nShift = EmptySheetEdge().length()/GlobalEdgesCount();
+    const qreal nShift = EmptySheetEdge().length() / static_cast<int>(GlobalEdgesCount());
     for (int i = 1; i <= GlobalEdgesCount()+1; ++i)
     {
         QLineF l1 = EmptySheetEdge();
@@ -359,7 +359,7 @@ const QPointF &VContour::at(int i) const
 void VContour::AppendWhole(QVector<QPointF> &contour, const VLayoutPiece &detail, int detJ) const
 {
     int processedEdges = 0;
-    const int nD = detail.LayoutEdgesCount();
+    const auto nD = detail.LayoutEdgesCount();
     int j = detJ;
 
     contour = OptimizeCombining(contour, detail.LayoutEdge(j).p2());
@@ -385,7 +385,7 @@ void VContour::AppendWhole(QVector<QPointF> &contour, const VLayoutPiece &detail
 void VContour::InsertDetail(QVector<QPointF> &contour, const VLayoutPiece &detail, int detJ) const
 {
     int processedEdges = 0;
-    const int nD = detail.LayoutEdgesCount();
+    const auto nD = detail.LayoutEdgesCount();
     int j = detJ;
 
     contour = OptimizeCombining(contour, detail.LayoutEdge(j).p2());

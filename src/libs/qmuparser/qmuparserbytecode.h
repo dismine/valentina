@@ -58,8 +58,8 @@ struct SToken
             //       pointer due to constraints in the ANSI standard which allows
             //       data pointers and function pointers to differ in size.
             generic_fun_type ptr;
-            int   argc;
-            int   idx;
+            qmusizetype argc;
+            qmusizetype idx;
         } Fun;
 
         struct //SOprtData
@@ -98,13 +98,13 @@ public:
     void AddIfElse(ECmdCode a_Oprt);
     void AddAssignOp(qreal *a_pVar);
     void AddFun(generic_fun_type a_pFun, int a_iArgc);
-    void AddBulkFun(generic_fun_type a_pFun, int a_iArgc);
-    void AddStrFun(generic_fun_type a_pFun, int a_iArgc, int a_iIdx);
+    void AddBulkFun(generic_fun_type a_pFun, qmusizetype a_iArgc);
+    void AddStrFun(generic_fun_type a_pFun, int a_iArgc, qmusizetype a_iIdx);
     void EnableOptimizer(bool bStat);
     void Finalize();
     void clear();
     auto GetMaxStackSize() const -> int;
-    auto GetSize() const -> int;
+    auto GetSize() const -> qmusizetype;
     auto GetBase() const -> const SToken*;
     void AsciiDump();
 private:
@@ -127,10 +127,10 @@ private:
 
     void ConstantFolding(ECmdCode a_Oprt);
 
-    void OpPOW(int sz, bool &bOptimized);
-    void OpSUBADD(ECmdCode a_Oprt, int sz, bool &bOptimized);
-    void OpMUL(int sz, bool &bOptimized);
-    void OpDIV(int sz, bool &bOptimized);
+    void OpPOW(qmusizetype sz, bool &bOptimized);
+    void OpSUBADD(ECmdCode a_Oprt, qmusizetype sz, bool &bOptimized);
+    void OpMUL(qmusizetype sz, bool &bOptimized);
+    void OpDIV(qmusizetype sz, bool &bOptimized);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -150,7 +150,7 @@ inline auto QmuParserByteCode::GetMaxStackSize() const -> int
  * @brief Returns the number of entries in the bytecode.
  */
 // cppcheck-suppress unusedFunction
-inline auto QmuParserByteCode::GetSize() const -> int
+inline auto QmuParserByteCode::GetSize() const -> qmusizetype
 {
     return m_vRPN.size();
 }

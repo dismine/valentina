@@ -506,7 +506,7 @@ private:
     auto AddLayoutPieces(const QVector<VLayoutPiece> &pieces) -> bool;
 
     void TranslatePieces();
-    void TranslatePieceRelatively(const VPPiecePtr &piece, const QRectF &rect, int selectedPiecesCount, qreal dx,
+    void TranslatePieceRelatively(const VPPiecePtr &piece, const QRectF &rect, vsizetype selectedPiecesCount, qreal dx,
                                   qreal dy);
     void RotatePieces();
 };

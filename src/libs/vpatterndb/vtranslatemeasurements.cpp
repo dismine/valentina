@@ -56,8 +56,8 @@ VTranslateMeasurements::~VTranslateMeasurements()
  * @param bias hold change of length between translated and origin token string
  * @return true if was found measurement with same name.
  */
-bool VTranslateMeasurements::MeasurementsFromUser(QString &newFormula, int position, const QString &token,
-                                                  int &bias) const
+bool VTranslateMeasurements::MeasurementsFromUser(QString &newFormula, vsizetype position, const QString &token,
+                                                  vsizetype &bias) const
 {
     QMap<QString, qmu::QmuTranslation>::const_iterator i = measurements.constBegin();
     while (i != measurements.constEnd())

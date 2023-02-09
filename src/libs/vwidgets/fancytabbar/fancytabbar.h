@@ -77,7 +77,7 @@ public:
     QString TabText(int index) const;
     void    SetTabText(int index, const QString &text);
 
-    int   Count() const;
+    vsizetype Count() const;
     QRect TabRect(int index) const;
 
 signals:

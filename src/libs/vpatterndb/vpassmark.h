@@ -59,7 +59,7 @@ struct VPiecePassmarkData
     PassmarkAngleType passmarkAngleType{PassmarkAngleType::Straightforward};
     bool isMainPathNode{true};
     bool isShowSecondPassmark{true};
-    int passmarkIndex{-1};
+    vsizetype passmarkIndex{-1};
     vidtype id{NULL_ID};
     qreal globalPassmarkLength{0};
 

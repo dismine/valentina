@@ -144,9 +144,9 @@ static inline bool QmuFuzzyComparePossibleNulls(double p1, double p2)
     }
 }
 
-QMUPARSERSHARED_EXPORT int ReadVal(const QString &formula, qreal &val, const QLocale &locale, const QChar &decimal,
-                                   const QChar &thousand);
+QMUPARSERSHARED_EXPORT qmusizetype ReadVal(const QString &formula, qreal &val, const QLocale &locale,
+                                         const QChar &decimal, const QChar &thousand);
 
-QMUPARSERSHARED_EXPORT int FindFirstNotOf(const QString &string, const QString &chars, int pos = 0);
+QMUPARSERSHARED_EXPORT qmusizetype FindFirstNotOf(const QString &string, const QString &chars, qmusizetype pos = 0);
 
 #endif // QMUDEF_H

@@ -85,8 +85,8 @@ QmuParserBase::QmuParserBase()
       m_nIfElseCounter(0),
       m_vStackBuffer(),
       m_nFinalResultIdx(0),
-      m_Tokens(QMap<int, QString>()),
-      m_Numbers(QMap<int, QString>()),
+      m_Tokens(QMap<qmusizetype, QString>()),
+      m_Numbers(QMap<qmusizetype, QString>()),
       allowSubexpressions(true)
 {
     InitTokenReader();
@@ -121,8 +121,8 @@ QmuParserBase::QmuParserBase(const QmuParserBase &a_Parser)
       m_nIfElseCounter(0),
       m_vStackBuffer(),
       m_nFinalResultIdx(0),
-      m_Tokens(QMap<int, QString>()),
-      m_Numbers(QMap<int, QString>()),
+      m_Tokens(QMap<qmusizetype, QString>()),
+      m_Numbers(QMap<qmusizetype, QString>()),
       allowSubexpressions(true)
 {
     m_pTokenReader.reset(new token_reader_type(this));
@@ -229,7 +229,7 @@ void QmuParserBase::ReInit() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void QmuParserBase::OnDetectVar(const QString &pExpr, int &nStart, int &nEnd)
+void QmuParserBase::OnDetectVar(const QString &pExpr, qmusizetype &nStart, qmusizetype &nEnd)
 {
     Q_UNUSED(pExpr)
     Q_UNUSED(nStart)
@@ -1023,7 +1023,7 @@ qreal QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const
     qreal *Stack = ((nOffset==0) && (nThreadID==0)) ? &m_vStackBuffer[0] : &m_vStackBuffer[nThreadID *
             (m_vStackBuffer.size() / s_MaxNumOpenMPThreads)];
     qreal buf;
-    int sidx(0);
+    qmusizetype sidx(0);
     for (const SToken *pTok = m_vRPN.GetBase(); pTok->Cmd!=cmEND ; ++pTok)
     {
         switch (pTok->Cmd)
@@ -1143,7 +1143,7 @@ QT_WARNING_POP
             // Next is treatment of numeric functions
             case cmFUNC:
             {
-                int iArgCount = pTok->Fun.argc;
+                qmusizetype iArgCount = pTok->Fun.argc;
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wcast-function-type")
@@ -1224,7 +1224,7 @@ QT_WARNING_DISABLE_MSVC(4191)
                 sidx -= pTok->Fun.argc -1;
 
                 // The index of the string argument in the string table
-                int iIdxStack = pTok->Fun.idx;
+                qmusizetype iIdxStack = pTok->Fun.idx;
                 Q_ASSERT( iIdxStack>=0 && iIdxStack<m_vStringBuf.size() );
 
                 switch (pTok->Fun.argc)  // switch according to argument count
@@ -1248,7 +1248,7 @@ QT_WARNING_DISABLE_MSVC(4191)
             }
             case cmFUNC_BULK:
             {
-                int iArgCount = pTok->Fun.argc;
+                qmusizetype iArgCount = pTok->Fun.argc;
 
                 // switch according to argument count
                 switch (iArgCount)
@@ -1648,7 +1648,7 @@ qreal QmuParserBase::ParseString() const
 * @param a_sTok [in] The token string representation associated with the error.
 * @throw ParserException always throws thats the only purpose of this function.
 */
-void Q_NORETURN QmuParserBase::Error(EErrorCodes a_iErrc, int a_iPos, const QString &a_sTok) const
+void Q_NORETURN QmuParserBase::Error(EErrorCodes a_iErrc, qmusizetype a_iPos, const QString &a_sTok) const
 {
     throw qmu::QmuParserError (a_iErrc, a_sTok, m_pTokenReader->GetExpr(), a_iPos);
 }

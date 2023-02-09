@@ -236,7 +236,7 @@ void VAbstractMainWindow::UpdateRecentFileActions()
 {
     const QStringList files = RecentFileList();
     const QStringList recentFiles = RecentFiles(files);
-    const int numRecentFiles = qMin(files.size(), static_cast<int>(MaxRecentFiles));
+    const int numRecentFiles = qMin(static_cast<int>(files.size()), static_cast<int>(MaxRecentFiles));
 
     for (int i = 0; i < numRecentFiles; ++i)
     {

@@ -137,8 +137,8 @@ bool TST_QmuTokenParser::IsSingleFromUser(const QString &formula)
         return false;// if don't know say no
     }
 
-    QMap<int, QString> tokens;
-    QMap<int, QString> numbers;
+    QMap<vsizetype, QString> tokens;
+    QMap<vsizetype, QString> numbers;
 
     try
     {

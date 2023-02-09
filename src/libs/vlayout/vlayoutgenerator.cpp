@@ -96,7 +96,7 @@ void VLayoutGenerator::SetCaseType(Cases caseType)
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-int VLayoutGenerator::DetailsCount()
+vsizetype VLayoutGenerator::DetailsCount()
 {
     return bank->AllDetailsCount();
 }
@@ -294,6 +294,12 @@ qreal VLayoutGenerator::LayoutEfficiency() const
 LayoutErrors VLayoutGenerator::State() const
 {
     return state;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+vsizetype VLayoutGenerator::PapersCount() const
+{
+    return papers.size();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

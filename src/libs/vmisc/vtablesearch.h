@@ -47,7 +47,7 @@ public:
     void FindPrevious();
     void FindNext();
     void RemoveRow(int row);
-    void AddRow(int row);
+    void AddRow(vsizetype row);
     void RefreshList(const QString &term);
 
     void SetMatchCase(bool value);
@@ -62,8 +62,8 @@ public:
     void SetUseUnicodePreperties(bool value);
     auto IsUseUnicodePreperties() const -> bool;
 
-    auto MatchIndex() const -> int;
-    auto MatchCount() const -> int;
+    auto MatchIndex() const -> vsizetype;
+    auto MatchCount() const -> vsizetype;
 
     auto SearchPlaceholder() const -> QString;
 
@@ -77,7 +77,7 @@ private:
     Q_DISABLE_COPY_MOVE(VTableSearch) // NOLINT
 
     QTableWidget *table;
-    int           searchIndex{-1};
+    vsizetype searchIndex{-1};
     QList<QTableWidgetItem *> searchList{};
 
     bool m_matchCase{false};
@@ -86,7 +86,7 @@ private:
     bool m_useUnicodePreperties{false};
 
     void Clear();
-    void ShowNext(int newIndex);
+    void ShowNext(vsizetype newIndex);
     auto FindTableItems(QString term) -> QList<QTableWidgetItem *>;
     auto FindCurrentMatchIndex() const -> int;
 };

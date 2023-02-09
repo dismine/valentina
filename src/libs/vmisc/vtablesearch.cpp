@@ -76,7 +76,7 @@ void VTableSearch::Clear()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VTableSearch::ShowNext(int newIndex)
+void VTableSearch::ShowNext(vsizetype newIndex)
 {
     if (not searchList.isEmpty())
     {
@@ -210,7 +210,7 @@ void VTableSearch::Find(const QString &term)
 //---------------------------------------------------------------------------------------------------------------------
 void VTableSearch::FindPrevious()
 {
-    int newIndex = searchIndex - 1;
+    vsizetype newIndex = searchIndex - 1;
 
     if (newIndex < 0)
     {
@@ -223,7 +223,7 @@ void VTableSearch::FindPrevious()
 //---------------------------------------------------------------------------------------------------------------------
 void VTableSearch::FindNext()
 {
-    int newIndex = searchIndex + 1;
+    vsizetype newIndex = searchIndex + 1;
 
     if (newIndex >= searchList.size())
     {
@@ -256,7 +256,7 @@ void VTableSearch::RemoveRow(int row)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VTableSearch::AddRow(int row)
+void VTableSearch::AddRow(vsizetype row)
 {
     if (searchIndex < 0 || searchIndex >= searchList.size())
     {
@@ -367,13 +367,13 @@ auto VTableSearch::IsUseUnicodePreperties() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VTableSearch::MatchIndex() const -> int
+auto VTableSearch::MatchIndex() const -> vsizetype
 {
     return searchIndex;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VTableSearch::MatchCount() const -> int
+auto VTableSearch::MatchCount() const -> vsizetype
 {
     return searchList.size();
 }

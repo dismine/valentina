@@ -134,7 +134,7 @@ bool DialogUnionDetails::CheckDetail(const quint32 &idDetail) const
  * @param index index of edge
  */
 void DialogUnionDetails::ChoosedDetail(const quint32 &id, const SceneObject &type, quint32 &idDetail,
-                                       int &index)
+                                       vsizetype &index)
 {
     if (idDetail == NULL_ID)
     {

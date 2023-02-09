@@ -210,7 +210,7 @@ auto VPosition::ArrangeDetail(const VPositionData &data, std::atomic_bool *stop,
     }
 
     const VLayoutPiece detail = data.detail;
-    const int detailEdgesCount = detail.LayoutEdgesCount();
+    const auto detailEdgesCount = detail.LayoutEdgesCount();
     if (detailEdgesCount < 3 || detail.DetailEdgesCount() < 3)
     {
         return bestResult;//Not enough edges

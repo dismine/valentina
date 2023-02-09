@@ -57,10 +57,10 @@ public:
     auto operator= (const VAbstractCubicBezierPath &curve) -> VAbstractCubicBezierPath&;
     ~VAbstractCubicBezierPath() override;
 
-    virtual auto CountSubSpl() const -> qint32 =0;
-    virtual auto CountPoints() const -> qint32 =0;
+    virtual auto CountSubSpl() const -> vsizetype =0;
+    virtual auto CountPoints() const -> vsizetype =0;
     virtual void Clear() =0;
-    virtual auto GetSpline(qint32 index) const -> VSpline =0;
+    virtual auto GetSpline(vsizetype index) const -> VSpline =0;
     virtual auto GetSplinePath() const -> QVector<VSplinePoint> =0;
 
     auto GetPath() const -> QPainterPath override;

@@ -249,7 +249,7 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
     int rotatate = 1;
     lGenerator.SetShift(-1); // Trigger first shift calulation
     lGenerator.SetRotate(false);
-    int papersCount = INT_MAX;
+    vsizetype papersCount = INT_MAX;
     qreal efficiency = 0;
     bool hasResult = false;
 
@@ -913,7 +913,7 @@ QVector<VLayoutPiece> MainWindowsNoGUI::PrepareDetailsForLayout(const QVector<De
         return VLayoutPiece::Create(data.piece, data.id, tool->getData());
     };
 
-    QProgressDialog progress(tr("Preparing details for layout"), QString(), 0, details.size());
+    QProgressDialog progress(tr("Preparing details for layout"), QString(), 0, static_cast<int>(details.size()));
     progress.setWindowModality(Qt::ApplicationModal);
 
     QFutureWatcher<VLayoutPiece> futureWatcher;

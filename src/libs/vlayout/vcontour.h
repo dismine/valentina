@@ -36,6 +36,7 @@
 #include <QtGlobal>
 
 #include "vlayoutdef.h"
+#include "../vmisc/defglobal.h"
 
 class VContourData;
 class QPointF;
@@ -80,7 +81,7 @@ public:
     QVector<QPointF> UniteWithContour(const VLayoutPiece &detail, int globalI, int detJ, BestFrom type) const;
 
     QLineF EmptySheetEdge() const;
-    int    GlobalEdgesCount() const;
+    vsizetype GlobalEdgesCount() const;
     QLineF GlobalEdge(int i) const;
     QVector<QPointF> CutEdge(const QLineF &edge) const;
     QVector<QPointF> CutEmptySheetEdge() const;

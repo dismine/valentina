@@ -199,7 +199,7 @@ void TST_AbstractRegExp::CallTestForValidCharacters()
     }
 
     const QString translated = m_trMs->VarToUser(originalName);
-    const int pos = FindFirstNotOf(translated, validNameChars);
+    const vsizetype pos = FindFirstNotOf(translated, validNameChars);
     if (pos != -1)
     {
         const QString message = QStringLiteral("Translated string '%1' contains invalid character '%2' at "

@@ -62,7 +62,7 @@ public:
     void SetVarCreator(facfun_type a_pFactory, void *pUserData);
     void SetFormula(const QString &a_strFormula);
     void SetArgSep(char_type cArgSep);
-    auto GetPos() const -> int;
+    auto GetPos() const -> qmusizetype;
     auto GetExpr() const -> const QString&;
     auto GetUsedVar() -> varmap_type&;
     auto GetArgSep() const -> QChar;
@@ -100,7 +100,7 @@ private:
 
     QmuParserBase     *m_pParser;
     QString            m_strFormula{};
-    int                m_iPos{0};
+    qmusizetype        m_iPos{0};
     int                m_iSynFlags{0};
     bool               m_bIgnoreUndefVar{false};
 
@@ -126,8 +126,8 @@ private:
     void Assign(const QmuParserTokenReader &a_Reader);
 
     void SetParent(QmuParserBase *a_pParent);
-    auto ExtractToken(const QString &a_szCharSet, QString &a_strTok, int a_iPos) const -> int;
-    auto ExtractOperatorToken(QString &a_sTok, int a_iPos) const -> int;
+    auto ExtractToken(const QString &a_szCharSet, QString &a_strTok, qmusizetype a_iPos) const -> qmusizetype;
+    auto ExtractOperatorToken(QString &a_sTok, qmusizetype a_iPos) const -> qmusizetype;
 
     auto IsBuiltIn(token_type &a_Tok) -> bool;
     auto IsArgSep(token_type &a_Tok) -> bool;
@@ -142,7 +142,7 @@ private:
     auto IsStrVarTok(token_type &a_Tok) -> bool;
     auto IsUndefVarTok(token_type &a_Tok) -> bool;
     auto IsString(token_type &a_Tok) -> bool;
-    void Q_NORETURN Error(EErrorCodes a_iErrc, int a_iPos = -1, const QString &a_sTok = QString() ) const;
+    void Q_NORETURN Error(EErrorCodes a_iErrc, qmusizetype a_iPos = -1, const QString &a_sTok = QString() ) const;
 
     auto SaveBeforeReturn(const token_type &tok) -> token_type&;
 };
@@ -154,7 +154,7 @@ private:
  * @return #m_iPos
  * @throw nothrow
  */
-inline auto QmuParserTokenReader::GetPos() const -> int
+inline auto QmuParserTokenReader::GetPos() const -> qmusizetype
 {
     return m_iPos;
 }

@@ -1658,7 +1658,7 @@ auto VAbstractPattern::CheckTagExists(const QString &tag) -> QDomElement
 void VAbstractPattern::InsertTag(const QStringList &tags, const QDomElement &element)
 {
     QDomElement pattern = documentElement();
-    for (int i = tags.indexOf(element.tagName())-1; i >= 0; --i)
+    for (vsizetype i = tags.indexOf(element.tagName())-1; i >= 0; --i)
     {
         const QDomNodeList list = elementsByTagName(tags.at(i));
         if (not list.isEmpty())

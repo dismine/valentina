@@ -326,7 +326,7 @@ void VPrintLayout::PrintPages(QPrinter *printer)
                         Qt::RoundCap, Qt::RoundJoin));
     painter.setBrush ( QBrush ( Qt::NoBrush ) );
 
-    int count = 0;
+    vsizetype count = 0;
     QSharedPointer<QVector<PosterData>> poster;
     QSharedPointer<VPoster> posterazor;
 
@@ -363,7 +363,7 @@ void VPrintLayout::PrintPages(QPrinter *printer)
     }
 
     // Handle the fromPage(), toPage(), supportsMultipleCopies(), and numCopies() values from QPrinter.
-    int firstPage = printer->fromPage() - 1;
+    vsizetype firstPage = printer->fromPage() - 1;
     if (firstPage >= count)
     {
         return;
@@ -373,13 +373,13 @@ void VPrintLayout::PrintPages(QPrinter *printer)
         firstPage = 0;
     }
 
-    int lastPage = printer->toPage() - 1;
+    vsizetype lastPage = printer->toPage() - 1;
     if (lastPage == -1 || lastPage >= count)
     {
         lastPage = count - 1;
     }
 
-    const int numPages = lastPage - firstPage + 1;
+    const vsizetype numPages = lastPage - firstPage + 1;
     int copyCount = 1;
     if (not printer->supportsMultipleCopies())
     {
@@ -400,7 +400,7 @@ void VPrintLayout::PrintPages(QPrinter *printer)
                     return;
                 }
             }
-            int index;
+            vsizetype index;
             if (printer->pageOrder() == QPrinter::FirstPageFirst)
             {
                 index = firstPage + j;
@@ -410,7 +410,7 @@ void VPrintLayout::PrintPages(QPrinter *printer)
                 index = lastPage - j;
             }
 
-            int paperIndex = -1;
+            vsizetype paperIndex = -1;
             m_isTiled ? paperIndex = static_cast<int>(poster->at(index).index) : paperIndex = index;
 
             auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(m_layoutPapers.at(paperIndex));
@@ -610,7 +610,7 @@ auto VPrintLayout::DocName() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPrintLayout::PreparePaper(int index) const
+void VPrintLayout::PreparePaper(vsizetype index) const
 {
     auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(m_layoutPapers.at(index));
     if (paper != nullptr)
@@ -635,7 +635,7 @@ void VPrintLayout::PreparePaper(int index) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPrintLayout::RestorePaper(int index) const
+void VPrintLayout::RestorePaper(vsizetype index) const
 {
     auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(m_layoutPapers.at(index));
     if (paper != nullptr)

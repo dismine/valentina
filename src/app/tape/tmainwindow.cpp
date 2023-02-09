@@ -1471,7 +1471,7 @@ void TMainWindow::AddKnown()
     QScopedPointer<DialogMDataBase> dialog (new DialogMDataBase(m_m->ListKnown(), this));
     if (dialog->exec() == QDialog::Accepted)
     {
-        qint32 currentRow;
+        vsizetype currentRow;
 
         const QStringList list = dialog->GetNewNames();
         if (ui->tableWidget->currentRow() == -1)
@@ -1514,7 +1514,7 @@ void TMainWindow::AddKnown()
         RefreshData();
         m_search->RefreshList(ui->lineEditFind->text());
 
-        ui->tableWidget->selectRow(currentRow);
+        ui->tableWidget->selectRow(static_cast<int>(currentRow));
 
         ui->actionExportToCSV->setEnabled(true);
 
@@ -1596,7 +1596,7 @@ void TMainWindow::ImportFromPattern()
 
     measurements = FilterMeasurements(measurements, m_m->ListAll());
 
-    qint32 currentRow;
+    vsizetype currentRow;
 
     if (ui->tableWidget->currentRow() == -1)
     {
@@ -1622,7 +1622,7 @@ void TMainWindow::ImportFromPattern()
 
     m_search->RefreshList(ui->lineEditFind->text());
 
-    ui->tableWidget->selectRow(currentRow);
+    ui->tableWidget->selectRow(static_cast<int>(currentRow));
 
     MeasurementsWereSaved(false);
 }
@@ -3020,7 +3020,7 @@ void TMainWindow::ShowHeaderUnits(QTableWidget *table, int column, const QString
     SCASSERT(table != nullptr)
 
     QString header = table->horizontalHeaderItem(column)->text();
-    const int index = header.indexOf(QLatin1String("("));
+    const auto index = header.indexOf(QLatin1String("("));
     if (index != -1)
     {
         header.remove(index-1, 100);
@@ -3187,7 +3187,7 @@ void TMainWindow::RefreshTable(bool freshCall)
 
     const QMap<int, QSharedPointer<VMeasurement> > orderedTable = OrderedMeasurments();
     qint32 currentRow = -1;
-    ui->tableWidget->setRowCount ( orderedTable.size() );
+    ui->tableWidget->setRowCount ( static_cast<int>(orderedTable.size()) );
     for (auto iMap = orderedTable.constBegin(); iMap != orderedTable.constEnd(); ++iMap)
     {
         const QSharedPointer<VMeasurement> &meash = iMap.value();
@@ -3432,7 +3432,7 @@ void TMainWindow::UpdateWindowTitle()
     }
     else
     {
-        int index = MApplication::VApp()->MainWindows().indexOf(this);
+        auto index = MApplication::VApp()->MainWindows().indexOf(this);
         if (index != -1)
         {
             showName = tr("untitled %1").arg(index+1);
@@ -3483,7 +3483,7 @@ void TMainWindow::UpdateWindowTitle()
 auto TMainWindow::ClearCustomName(const QString &name) -> QString
 {
     QString clear = name;
-    const int index = clear.indexOf(CustomMSign);
+    const auto index = clear.indexOf(CustomMSign);
     if (index == 0)
     {
         clear.remove(0, 1);
@@ -3798,7 +3798,7 @@ void TMainWindow::CreateWindowMenu(QMenu *menu)
         TMainWindow *window = windows.at(i);
 
         QString title = QStringLiteral("%1. %2").arg(i+1).arg(window->windowTitle());
-        const int index = title.lastIndexOf(QLatin1String("[*]"));
+        const auto index = title.lastIndexOf(QLatin1String("[*]"));
         if (index != -1)
         {
             window->isWindowModified() ? title.replace(index, 3, QChar('*')) : title.replace(index, 3, QString());
@@ -4093,11 +4093,11 @@ void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv, const QVec
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto TMainWindow::ImportMultisizeMeasurement(
-    const QxtCsvModel &csv, int i, const QVector<int> &map,int dimensionsCount,
-    QSet<QString> &importedNames) -> TMainWindow::MultisizeMeasurement
+auto TMainWindow::ImportMultisizeMeasurement(const QxtCsvModel &csv, int i, const QVector<int> &map,
+                                             vsizetype dimensionsCount,
+                                             QSet<QString> &importedNames) -> TMainWindow::MultisizeMeasurement
 {
-    const int nameColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::Name));
+    const auto nameColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::Name));
     const QString name = csv.text(i, nameColumn).simplified();
     if (name.isEmpty())
     {
@@ -4110,18 +4110,18 @@ auto TMainWindow::ImportMultisizeMeasurement(
     importedNames.insert(mName);
     measurement.name = mName;
 
-    const int baseValueColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::BaseValue));
+    const auto baseValueColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::BaseValue));
     measurement.base = ConverToDouble(csv.text(i, baseValueColumn),
                                       tr("Cannot convert base value to double in column 2."));
 
-    const int shiftAColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::ShiftA));
+    const auto shiftAColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::ShiftA));
     measurement.shiftA = ConverToDouble(csv.text(i, shiftAColumn),
                                         tr("Cannot convert shift value to double in column %1.")
                                             .arg(shiftAColumn));
 
     if (dimensionsCount > 1)
     {
-        const int shiftBColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::ShiftB));
+        const auto shiftBColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::ShiftB));
         measurement.shiftB = ConverToDouble(csv.text(i, shiftBColumn),
                                             tr("Cannot convert shift value to double in column %1.")
                                                 .arg(shiftBColumn));
@@ -4129,7 +4129,7 @@ auto TMainWindow::ImportMultisizeMeasurement(
 
     if (dimensionsCount > 2)
     {
-        const int shiftCColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::ShiftC));
+        const auto shiftCColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::ShiftC));
         measurement.shiftC = ConverToDouble(csv.text(i, shiftCColumn),
                                             tr("Cannot convert shift value to double in column %1.")
                                                 .arg(shiftCColumn));
@@ -4139,7 +4139,7 @@ auto TMainWindow::ImportMultisizeMeasurement(
     const bool custom = name.startsWith(CustomMSign);
     if (columns > 4 && custom)
     {
-        const int fullNameColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::FullName));
+        const auto fullNameColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::FullName));
         if (fullNameColumn >= 0)
         {
             measurement.fullName = csv.text(i, fullNameColumn).simplified();
@@ -4148,7 +4148,7 @@ auto TMainWindow::ImportMultisizeMeasurement(
 
     if (columns > 5 && custom)
     {
-        const int descriptionColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::Description));
+        const auto descriptionColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::Description));
         if (descriptionColumn >= 0)
         {
             measurement.description = csv.text(i, descriptionColumn).simplified();

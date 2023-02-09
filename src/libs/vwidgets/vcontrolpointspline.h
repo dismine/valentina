@@ -50,8 +50,8 @@ class VControlPointSpline : public QObject, public VScenePoint
 {
     Q_OBJECT // NOLINT
 public:
-    VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position, QGraphicsItem * parent = nullptr);
-    VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position, const QPointF &controlPoint,
+    VControlPointSpline(const vsizetype &indexSpline, SplinePointPosition position, QGraphicsItem * parent = nullptr);
+    VControlPointSpline(const vsizetype &indexSpline, SplinePointPosition position, const QPointF &controlPoint,
                         bool freeAngle, bool freeLength, QGraphicsItem * parent = nullptr);
     virtual ~VControlPointSpline() =default;
 
@@ -67,7 +67,7 @@ signals:
      * @param position position point in spline.
      * @param pos new posotion.
      */
-    void              ControlPointChangePosition(const qint32 &indexSpline, SplinePointPosition position,
+    void              ControlPointChangePosition(const vsizetype &indexSpline, SplinePointPosition position,
                                                  const QPointF &pos);
     /**
      * @brief ShowContextMenu emit when need show tool's context menu.
@@ -77,7 +77,7 @@ signals:
     void              Released();
     void              Selected(bool selected);
 public slots:
-    void              RefreshCtrlPoint(const qint32 &indexSpline, SplinePointPosition pos, const QPointF &controlPoint,
+    void              RefreshCtrlPoint(const vsizetype &indexSpline, SplinePointPosition pos, const QPointF &controlPoint,
                                        const QPointF &splinePoint, bool freeAngle = true, bool freeLength = true);
     void              setEnabledPoint(bool enable);
 protected:
@@ -92,7 +92,7 @@ protected:
 private:
     Q_DISABLE_COPY_MOVE(VControlPointSpline) // NOLINT
     /** @brief indexSpline index spline in list.. */
-    qint32            indexSpline;
+    vsizetype           indexSpline;
 
     /** @brief position position point in spline. */
     SplinePointPosition position;

@@ -153,7 +153,7 @@ QVector<PosterData> VPoster::Calc(const QSize &imageRect, int page, PageOrientat
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QGraphicsItem *> VPoster::Tile(QGraphicsItem *parent, const PosterData &img, int sheets,
+QVector<QGraphicsItem *> VPoster::Tile(QGraphicsItem *parent, const PosterData &img, vsizetype sheets,
                                        const VWatermarkData &watermarkData, const QString &watermarkPath) const
 {
     QVector<QGraphicsItem *> data;
@@ -180,7 +180,7 @@ QVector<QGraphicsItem *> VPoster::Tile(QGraphicsItem *parent, const PosterData &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QGraphicsItem *> VPoster::Borders(QGraphicsItem *parent, const PosterData &img, int sheets) const
+QVector<QGraphicsItem *> VPoster::Borders(QGraphicsItem *parent, const PosterData &img, vsizetype sheets) const
 {
     SCASSERT(parent != nullptr)
 

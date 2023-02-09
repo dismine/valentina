@@ -31,13 +31,15 @@
 #include <QSyntaxHighlighter>
 #include <QVector>
 
+#include "../vmisc/defglobal.h"
+
 class QString;
 class QTextDocument;
 
 struct ParenthesisInfo
 {
     char character;
-    int position;
+    vsizetype position;
 };
 
 class VTextBlockData final : public QTextBlockUserData

@@ -1464,7 +1464,7 @@ qreal VMeasurements::EvalFormula(VContainer *data, const QString &formula, bool 
 QString VMeasurements::ClearPMCode(const QString &code) const
 {
     QString clear = code;
-    const int index = clear.indexOf(QLatin1Char('p'));
+    const vsizetype index = clear.indexOf(QLatin1Char('p'));
     if (index == 0)
     {
         clear.remove(0, 1);

@@ -170,7 +170,7 @@ public:
     QmuParserError();
     explicit QmuParserError ( EErrorCodes a_iErrc );
     explicit QmuParserError ( const QString &sMsg );
-    QmuParserError ( EErrorCodes a_iErrc, const QString &sTok, const QString &sFormula = QString(), int a_iPos = -1 );
+    QmuParserError ( EErrorCodes a_iErrc, const QString &sTok, const QString &sFormula = QString(), qmusizetype a_iPos = -1 );
     QmuParserError ( EErrorCodes a_iErrc, int a_iPos, const QString &sTok );
     QmuParserError ( const QString &szMsg, int iPos, const QString &sTok = QString() );
     QmuParserError ( const QmuParserError &a_Obj );
@@ -180,7 +180,7 @@ public:
     void           SetFormula ( const QString &a_strFormula );
     const QString& GetExpr() const;
     const QString& GetMsg() const;
-    int            GetPos() const;
+    qmusizetype    GetPos() const;
     const QString& GetToken() const;
     EErrorCodes    GetCode() const;
     Q_NORETURN virtual void   raise() const override;
@@ -189,7 +189,7 @@ private:
     QString m_sMsg;      ///< The message string
     QString m_sExpr;     ///< Formula string
     QString m_sTok;      ///< Token related with the error
-    int     m_iPos;      ///< Formula position related to the error
+    qmusizetype m_iPos;    ///< Formula position related to the error
     EErrorCodes m_iErrc; ///< Error code
     const QmuParserErrorMsg &m_ErrMsg;
     void Reset();
@@ -228,7 +228,7 @@ inline const QString& QmuParserError::GetMsg() const
  *
  * If the error is not related to a distinct position this will return -1
  */
-inline int QmuParserError::GetPos() const
+inline qmusizetype QmuParserError::GetPos() const
 {
     return m_iPos;
 }

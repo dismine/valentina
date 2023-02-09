@@ -6202,7 +6202,8 @@ void MainWindow::ExportLayoutAs()
     try
     {
         m_dialogSaveLayout = QSharedPointer<DialogSaveLayout>(
-                    new DialogSaveLayout(m_layoutSettings->LayoutScenes().size(), Draw::Layout, FileName(), this));
+            new DialogSaveLayout(static_cast<int>(m_layoutSettings->LayoutScenes().size()), Draw::Layout, FileName(),
+                                 this));
 
         if (m_dialogSaveLayout->exec() == QDialog::Rejected)
         {
@@ -6615,8 +6616,8 @@ auto MainWindow::DoExport(const VCommandLinePtr &expParams) -> bool
             try
             {
                 m_dialogSaveLayout = QSharedPointer<DialogSaveLayout>(
-                            new DialogSaveLayout(m_layoutSettings->LayoutScenes().size(),
-                                                 Draw::Layout, expParams->OptBaseName(), this));
+                    new DialogSaveLayout(static_cast<int>(m_layoutSettings->LayoutScenes().size()),
+                                         Draw::Layout, expParams->OptBaseName(), this));
                 m_dialogSaveLayout->SetDestinationPath(expParams->OptDestinationPath());
                 m_dialogSaveLayout->SelectFormat(static_cast<LayoutExportFormats>(expParams->OptExportType()));
                 m_dialogSaveLayout->SetBinaryDXFFormat(expParams->IsBinaryDXF());

@@ -266,7 +266,7 @@ private:
     void ImportIndividualMeasurements(const QxtCsvModel &csv, const QVector<int> &map, bool withHeader);
     void ImportMultisizeMeasurements(const QxtCsvModel &csv, const QVector<int> &map, bool withHeader);
     auto ImportMultisizeMeasurement(const QxtCsvModel &csv, int i, const QVector<int> &map,
-                                    int dimensionsCount, QSet<QString> &importedNames) -> MultisizeMeasurement;
+                                    vsizetype dimensionsCount, QSet<QString> &importedNames) -> MultisizeMeasurement;
 
     void SetCurrentPatternUnit();
 

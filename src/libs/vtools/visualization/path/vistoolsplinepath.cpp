@@ -78,7 +78,7 @@ void VisToolSplinePath::RefreshGeometry()
     }
 
     const QVector<VSplinePoint> pathPoints = m_path.GetSplinePath();
-    const int size = pathPoints.size();
+    const auto size = pathPoints.size();
 
     for (int i = 0; i < size; ++i)
     {
@@ -90,10 +90,10 @@ void VisToolSplinePath::RefreshGeometry()
     {
         if (size > 1)
         {
-            for (qint32 i = 1; i<=m_path.CountSubSpl(); ++i)
+            for (vsizetype i = 1; i<=m_path.CountSubSpl(); ++i)
             {
-                const int preLastPoint = (m_path.CountSubSpl() - 1) * 2;
-                const int lastPoint = preLastPoint + 1;
+                const auto preLastPoint = (m_path.CountSubSpl() - 1) * 2;
+                const auto lastPoint = preLastPoint + 1;
 
                 VSpline spl = m_path.GetSpline(i);
 
@@ -196,7 +196,8 @@ auto VisToolSplinePath::GetPoint(quint32 i) -> VScaledEllipse *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolSplinePath::DragControlPoint(int lastPoint, int preLastPoint, const QPointF &pSpl, int size)
+void VisToolSplinePath::DragControlPoint(vsizetype lastPoint, vsizetype preLastPoint, const QPointF &pSpl,
+                                         vsizetype size)
 {
     if (not m_ctrlPoints.at(lastPoint)->isVisible())
     {
@@ -261,7 +262,7 @@ void VisToolSplinePath::DragControlPoint(int lastPoint, int preLastPoint, const 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolSplinePath::NewCurveSegment(const VSpline &spline, const QPointF &pSpl, int size)
+void VisToolSplinePath::NewCurveSegment(const VSpline &spline, const QPointF &pSpl, vsizetype size)
 {
     m_path[size-1].SetAngle2(spline.GetStartAngle(), spline.GetStartAngleFormula());
 
@@ -277,10 +278,10 @@ void VisToolSplinePath::NewCurveSegment(const VSpline &spline, const QPointF &pS
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolSplinePath::Creating(const QPointF &pSpl, int size)
+void VisToolSplinePath::Creating(const QPointF &pSpl, vsizetype size)
 {
-    int lastPoint = 0;
-    int preLastPoint = 0;
+    vsizetype lastPoint = 0;
+    vsizetype preLastPoint = 0;
 
     if (size > 1)
     {

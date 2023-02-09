@@ -299,7 +299,7 @@ qreal QmuParser::FMod(qreal number, qreal denom)
  * @param [in] a_afArg Vector with the function arguments
  * @param [in] a_iArgc The size of a_afArg
  */
-qreal QmuParser::Sum(const qreal *a_afArg, int a_iArgc)
+qreal QmuParser::Sum(const qreal *a_afArg, qmusizetype a_iArgc)
 {
     if (a_iArgc == 0)
     {
@@ -320,7 +320,7 @@ qreal QmuParser::Sum(const qreal *a_afArg, int a_iArgc)
  * @param [in] a_afArg Vector with the function arguments
  * @param [in] a_iArgc The size of a_afArg
  */
-qreal QmuParser::Avg(const qreal *a_afArg, int a_iArgc)
+qreal QmuParser::Avg(const qreal *a_afArg, qmusizetype a_iArgc)
 {
     if (a_iArgc == 0)
     {
@@ -341,7 +341,7 @@ qreal QmuParser::Avg(const qreal *a_afArg, int a_iArgc)
  * @param [in] a_afArg Vector with the function arguments
  * @param [in] a_iArgc The size of a_afArg
  */
-qreal QmuParser::Min(const qreal *a_afArg, int a_iArgc)
+qreal QmuParser::Min(const qreal *a_afArg, qmusizetype a_iArgc)
 {
     if (a_iArgc == 0)
     {
@@ -362,7 +362,7 @@ qreal QmuParser::Min(const qreal *a_afArg, int a_iArgc)
  * @param [in] a_afArg Vector with the function arguments
  * @param [in] a_iArgc The size of a_afArg
  */
-qreal QmuParser::Max(const qreal *a_afArg, int a_iArgc)
+qreal QmuParser::Max(const qreal *a_afArg, qmusizetype a_iArgc)
 {
     if (a_iArgc == 0)
     {
@@ -385,12 +385,13 @@ qreal QmuParser::Max(const qreal *a_afArg, int a_iArgc)
 * @param [out] a_fVal Pointer where the value should be stored in case one is found.
 * @return 1 if a value was found 0 otherwise.
 */
-int QmuParser::IsVal(const QString &a_szExpr, int *a_iPos, qreal *a_fVal, const QLocale &locale, bool cNumbers,
+int QmuParser::IsVal(const QString &a_szExpr, qmusizetype *a_iPos, qreal *a_fVal, const QLocale &locale, bool cNumbers,
                      const QChar &decimal, const QChar &thousand)
 {
     qreal fVal(0);
 
-    int pos = ReadVal(a_szExpr, fVal, locale != QLocale::c() && cNumbers ? QLocale::c() : locale, decimal, thousand);
+    qmusizetype pos = ReadVal(a_szExpr, fVal, locale != QLocale::c() && cNumbers ? QLocale::c() : locale, decimal,
+                            thousand);
 
     if (pos == -1)
     {
@@ -510,7 +511,7 @@ void QmuParser::InitOprt()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void QmuParser::OnDetectVar(const QString &pExpr, int &nStart, int &nEnd)
+void QmuParser::OnDetectVar(const QString &pExpr, qmusizetype &nStart, qmusizetype &nEnd)
 {
     Q_UNUSED(pExpr)
     Q_UNUSED(nStart)

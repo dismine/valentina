@@ -41,7 +41,7 @@ auto CorrectedZValues(const QList<QVector<QString>> &order) -> QHash<QString, qr
     qreal step = 0;
     if (not order.isEmpty())
     {
-        step = 1.0/order.size();
+        step = 1.0 / static_cast<int>(order.size());
     }
 
     for (int i = 0; i < order.size(); ++i)
@@ -266,7 +266,7 @@ auto VPUndoPieceZValueMove::LevelStep(const QList<VPPiecePtr> &pieces) const -> 
         return 0;
     }
 
-    return 1.0/levels.size();
+    return 1.0 / static_cast<int>(levels.size());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -509,5 +509,5 @@ auto VPUndoPiecesZValueMove::LevelStep(const QList<VPPiecePtr> &pieces) -> qreal
         return 0;
     }
 
-    return 1.0/levels.size();
+    return 1.0 / static_cast<int>(levels.size());
 }
