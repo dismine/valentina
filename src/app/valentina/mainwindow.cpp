@@ -2692,7 +2692,7 @@ auto MainWindow::FullParsePattern() -> bool
     {
         if (VAbstractValApplication::VApp()->getOpeningPattern())
         {
-            futureTestUniqueId = QtConcurrent::run(static_cast<VDomDocument *>(doc), &VDomDocument::TestUniqueId); // clazy:exclude=unneeded-cast
+            futureTestUniqueId = QtConcurrent::run([this](){doc->TestUniqueId();});
         }
 
         SetEnabledGUI(true);

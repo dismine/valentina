@@ -622,10 +622,12 @@ VLayoutPiece::~VLayoutPiece() //NOLINT(modernize-use-equals-default)
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContainer *pattern) -> VLayoutPiece
 {
-    QFuture<QVector<VLayoutPoint> > futureSeamAllowance = QtConcurrent::run(piece, &VPiece::SeamAllowancePoints,
-                                                                           pattern);
-    QFuture<bool> futureSeamAllowanceValid = QtConcurrent::run(piece, &VPiece::IsSeamAllowanceValid, pattern);
-    QFuture<QVector<VLayoutPoint> > futureMainPath = QtConcurrent::run(piece, &VPiece::MainPathPoints, pattern);
+    QFuture<QVector<VLayoutPoint> > futureSeamAllowance =
+        QtConcurrent::run([piece, pattern](){return piece.SeamAllowancePoints(pattern);});
+    QFuture<bool> futureSeamAllowanceValid =
+        QtConcurrent::run([piece, pattern](){return piece.IsSeamAllowanceValid(pattern);});
+    QFuture<QVector<VLayoutPoint> > futureMainPath =
+        QtConcurrent::run([piece, pattern](){return piece.MainPathPoints(pattern);});
     QFuture<QVector<VLayoutPiecePath> > futureInternalPaths = QtConcurrent::run(ConvertInternalPaths, piece, pattern);
     QFuture<QVector<VLayoutPassmark> > futurePassmarks = QtConcurrent::run(ConvertPassmarks, piece, pattern);
     QFuture<QVector<VLayoutPlaceLabel> > futurePlaceLabels = QtConcurrent::run(ConvertPlaceLabels, piece, pattern);

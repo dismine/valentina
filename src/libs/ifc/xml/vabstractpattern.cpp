@@ -324,7 +324,7 @@ bool VAbstractPattern::RequiresMeasurements() const
 //---------------------------------------------------------------------------------------------------------------------
 QStringList VAbstractPattern::ListMeasurements() const
 {
-    const QFuture<QStringList> futureIncrements = QtConcurrent::run(this, &VAbstractPattern::ListIncrements);
+    const QFuture<QStringList> futureIncrements = QtConcurrent::run([this](){return ListIncrements();});
     const QList<QString> tokens = ConvertToList(QtConcurrent::blockingMappedReduced(ListExpressions(), GetTokens,
                                                                                     GatherTokens));
 
@@ -1722,16 +1722,15 @@ QVector<VFormulaField> VAbstractPattern::ListExpressions() const
     // If new tool bring absolutely new type and has formula(s) create new method to cover it.
     // Note. Tool Union Details also contains formulas, but we don't use them for union and keep only to simplifying
     // working with nodes. Same code for saving reading.
-    auto futurePointExpressions = QtConcurrent::run(this, &VAbstractPattern::ListPointExpressions);
-    auto futureArcExpressions = QtConcurrent::run(this, &VAbstractPattern::ListArcExpressions);
-    auto futureElArcExpressions = QtConcurrent::run(this, &VAbstractPattern::ListElArcExpressions);
-    auto futureSplineExpressions = QtConcurrent::run(this, &VAbstractPattern::ListSplineExpressions);
-    auto futureIncrementExpressions = QtConcurrent::run(this, &VAbstractPattern::ListIncrementExpressions);
-    auto futureOperationExpressions = QtConcurrent::run(this, &VAbstractPattern::ListOperationExpressions);
-    auto futurePathExpressions = QtConcurrent::run(this, &VAbstractPattern::ListPathExpressions);
-    auto futurePieceExpressions = QtConcurrent::run(this, &VAbstractPattern::ListPieceExpressions);
-    auto futureFinalMeasurementsExpressions = QtConcurrent::run(this,
-                                                                &VAbstractPattern::ListFinalMeasurementsExpressions);
+    auto futurePointExpressions = QtConcurrent::run([this](){return ListPointExpressions();});
+    auto futureArcExpressions = QtConcurrent::run([this](){return ListArcExpressions();});
+    auto futureElArcExpressions = QtConcurrent::run([this](){return ListElArcExpressions();});
+    auto futureSplineExpressions = QtConcurrent::run([this](){return ListSplineExpressions();});
+    auto futureIncrementExpressions = QtConcurrent::run([this](){return ListIncrementExpressions();});
+    auto futureOperationExpressions = QtConcurrent::run([this](){return ListOperationExpressions();});
+    auto futurePathExpressions = QtConcurrent::run([this](){return ListPathExpressions();});
+    auto futurePieceExpressions = QtConcurrent::run([this](){return ListPieceExpressions();});
+    auto futureFinalMeasurementsExpressions = QtConcurrent::run([this](){return ListFinalMeasurementsExpressions();});
 
     QVector<VFormulaField> list;
     list << futurePointExpressions.result();

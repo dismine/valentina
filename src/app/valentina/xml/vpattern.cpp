@@ -1025,9 +1025,12 @@ void VPattern::ParseDetailInternals(const QDomElement &domElement, VPiece &detai
                         // TODO. Delete if minimal supported version is 0.4.0
                         Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 4, 0),
                                           "Time to refactor the code.");
-                        const bool closed = GetParametrUInt(domElement, AttrClosed, QChar('1'));
-                        const qreal width = GetParametrDouble(domElement, AttrWidth, QStringLiteral("0.0"));
-                        futurePathV1 = QtConcurrent::run(this, &VPattern::ParseDetailNodes, element, width, closed);
+                        futurePathV1 = QtConcurrent::run([this, domElement, element]()
+                        {
+                            const bool closed = GetParametrUInt(domElement, AttrClosed, QChar('1'));
+                            const qreal width = GetParametrDouble(domElement, AttrWidth, QStringLiteral("0.0"));
+                            return ParseDetailNodes(element, width, closed);
+                        });
                     }
                     else
                     {
@@ -1035,16 +1038,22 @@ void VPattern::ParseDetailInternals(const QDomElement &domElement, VPiece &detai
                     }
                     break;
                 case 1:// TagData
-                    futurePPData = QtConcurrent::run(this, &VPattern::ParsePieceDataTag, element,
-                                                     detail.GetPieceLabelData());
+                    futurePPData = QtConcurrent::run([this, element, detail]()
+                    {
+                        return ParsePieceDataTag(element, detail.GetPieceLabelData());
+                    });
                     break;
                 case 2:// TagPatternInfo
-                    futurePatternInfo = QtConcurrent::run(this, &VPattern::ParsePiecePatternInfo, element,
-                                                          detail.GetPatternLabelData());
+                    futurePatternInfo = QtConcurrent::run([this, element, detail]()
+                    {
+                        return ParsePiecePatternInfo(element, detail.GetPatternLabelData());
+                    });
                     break;
                 case 3:// TagGrainline
-                    futureGGeometry = QtConcurrent::run(this, &VPattern::ParsePieceGrainline, element,
-                                                        detail.GetGrainlineGeometry());
+                    futureGGeometry = QtConcurrent::run([this, element, detail]()
+                    {
+                        return ParsePieceGrainline(element, detail.GetGrainlineGeometry());
+                    });
                     break;
                 case 4:// VToolSeamAllowance::TagCSA
                     futureRecords = QtConcurrent::run(&VPattern::ParsePieceCSARecords, element);

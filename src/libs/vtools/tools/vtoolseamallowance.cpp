@@ -1424,18 +1424,18 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
 
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
-    QFuture<QPainterPath > futurePath = QtConcurrent::run(detail,
-                                                          QOverload<const VContainer *>::of(&VPiece::MainPathPath),
-                                                          this->getData());
-    QFuture<QPainterPath > futurePassmarks = QtConcurrent::run(detail, &VPiece::PassmarksPath, this->getData());
+
+    QFuture<QPainterPath > futurePath = QtConcurrent::run([this, detail](){return detail.MainPathPath(getData());});
+    QFuture<QPainterPath > futurePassmarks =
+        QtConcurrent::run([this, detail](){return detail.PassmarksPath(getData());});
 
     QFuture<QVector<VLayoutPoint> > futureSeamAllowance;
     QFuture<bool> futureSeamAllowanceValid;
 
     if (detail.IsSeamAllowance())
     {
-        futureSeamAllowance = QtConcurrent::run(detail, &VPiece::SeamAllowancePoints, this->getData());
-        futureSeamAllowanceValid = QtConcurrent::run(detail, &VPiece::IsSeamAllowanceValid, this->getData());
+        futureSeamAllowance = QtConcurrent::run([this, detail](){return detail.SeamAllowancePoints(getData());});
+        futureSeamAllowanceValid = QtConcurrent::run([this, detail](){return detail.IsSeamAllowanceValid(getData());});
     }
 
     this->setPos(detail.GetMx(), detail.GetMy());

@@ -703,7 +703,7 @@ void VDomDocument::RefreshElementIdCache()
 {
     if (m_watcher->isFinished())
     {
-        m_watcher->setFuture(QtConcurrent::run(this, &VDomDocument::RefreshCache, documentElement()));
+        m_watcher->setFuture(QtConcurrent::run([this](){return RefreshCache(documentElement());}));
     }
 }
 
