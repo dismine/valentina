@@ -45,6 +45,10 @@
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
+#include "backport/text.h"
+#endif
+
 class QxtCsvModelPrivate : public QxtPrivate<QxtCsvModel>
 {
 public:
@@ -617,11 +621,7 @@ bool QxtCsvModel::toCSV(QIODevice* dest, QString &error, bool withHeader, QChar 
             }
             data += qxt_addCsvQuotes(d_ptr.quoteMode, d_ptr.header.at(col));
         }
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-        stream << data << endl;
-#else
         stream << data << Qt::endl;
-#endif
     }
     for (row = 0; row < rows; ++row)
     {
@@ -642,17 +642,9 @@ bool QxtCsvModel::toCSV(QIODevice* dest, QString &error, bool withHeader, QChar 
                 data += qxt_addCsvQuotes(d_ptr.quoteMode, QString());
             }
         }
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-        stream << data << endl;
-#else
         stream << data << Qt::endl;
-#endif
     }
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-    stream << flush;
-#else
     stream << Qt::flush;
-#endif
     dest->close();
     return true;
 }

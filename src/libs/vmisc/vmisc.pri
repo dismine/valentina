@@ -82,6 +82,7 @@ HEADERS += \
     $$PWD/vmodifierkey.h \
     $$PWD/typedef.h \
     $$PWD/backport/qscopeguard.h \
+    $$PWD/backport/text.h \
     $$PWD/dialogs/dialogselectlanguage.h \
     $$PWD/fpm/fixed.hpp \
     $$PWD/fpm/math.hpp

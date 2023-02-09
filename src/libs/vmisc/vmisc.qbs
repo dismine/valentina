@@ -106,6 +106,7 @@ VLib {
         files: [
             "qoverload.h",
             "qscopeguard.h",
+            "text.h",
         ]
     }
 

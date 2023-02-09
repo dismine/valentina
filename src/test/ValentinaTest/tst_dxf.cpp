@@ -27,12 +27,17 @@
  *************************************************************************/
 #include "tst_dxf.h"
 
+#include <QTextCodec>
 #include <QtTest>
 
 #include "../vmisc/def.h"
 #include "../vmisc/compatibility.h"
 #include "../vdxf/dxfdef.h"
 #include "../vdxf/libdxfrw/intern/drw_textcodec.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
+#include "../vmisc/backport/text.h"
+#endif
 
 namespace
 {
@@ -59,11 +64,7 @@ TST_DXF::TST_DXF(QObject *parent)
 void TST_DXF::initTestCase()
 {
     QTextStream ts(stdout);
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-    ts << QStringLiteral("Available codecs:\n%2.").arg(AvailableCodecs().join(", "))<< endl;
-#else
     ts << QStringLiteral("Available codecs:\n%2.").arg(AvailableCodecs().join(", "))<< Qt::endl;
-#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------

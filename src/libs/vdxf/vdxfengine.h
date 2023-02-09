@@ -50,6 +50,7 @@ class DRW_Entity;
 class dx_ifaceBlock;
 class VLayoutPoint;
 class DRW_Point;
+class QTextCodec;
 
 class VDxfEngine final : public QPaintEngine
 {

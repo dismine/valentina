@@ -265,11 +265,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         vStdOut().flush();
         vStdErr().flush();
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-        (*VApplication::VApp()->LogFile()) << debugdate <<  endl;
-#else
         (*VApplication::VApp()->LogFile()) << debugdate <<  Qt::endl;
-#endif
     }
 
     if (isGuiThread)
