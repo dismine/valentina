@@ -109,7 +109,14 @@ private:
 
     QUuid m_id{};
     VAbstractPattern *m_doc;
+
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
     VBackgroundPatternImage m_image{};
+
+    QT_WARNING_POP
+
     BITransformationType m_tranformationType{BITransformationType::Unknown};
 
     QMap<BIHandleCornerType, QPixmap> m_handlePixmaps{};

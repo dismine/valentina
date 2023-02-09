@@ -1647,7 +1647,13 @@ void VPattern::ParseToolAlongLine(VMainGraphicsScene *scene, QDomElement &domEle
 
     try
     {
+        QT_WARNING_PUSH
+        QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
         VToolAlongLineInitData initData;
+
+        QT_WARNING_POP
+
         initData.scene = scene;
         initData.doc = this;
         initData.data = data;
@@ -2337,7 +2343,13 @@ void VPattern::ParseToolCurveIntersectAxis(VMainGraphicsScene *scene, QDomElemen
 
     try
     {
+        QT_WARNING_PUSH
+        QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
         VToolCurveIntersectAxisInitData initData;
+
+        QT_WARNING_POP
+
         initData.scene = scene;
         initData.doc = this;
         initData.data = data;
@@ -2461,7 +2473,13 @@ void VPattern::ParseToolPointOfIntersectionCurves(VMainGraphicsScene *scene, QDo
 
     try
     {
+        QT_WARNING_PUSH
+        QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
         VToolPointOfIntersectionCurvesInitData initData;
+
+        QT_WARNING_POP
+
         initData.scene = scene;
         initData.doc = this;
         initData.data = data;

@@ -1415,7 +1415,12 @@ auto VAbstractPattern::GetBackgroundImage(const QUuid &id) const -> VBackgroundP
         return GetBackgroundPatternImage(imageElement);
     }
 
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
     return {};
+
+    QT_WARNING_POP
 }
 
 //---------------------------------------------------------------------------------------------------------------------

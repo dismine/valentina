@@ -289,7 +289,13 @@ void VPosition::SaveCandidate(VBestSquare &bestResult, const VLayoutPiece &detai
     const qreal depthPosition = m_data.isOriginPaperOrientationPortrait ? boundingRect.y() : boundingRect.x();
     const qreal sidePosition = m_data.isOriginPaperOrientationPortrait ? boundingRect.x() : boundingRect.y();
 
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
     VBestSquareResData data;
+
+    QT_WARNING_POP
+
     data.bestSize = size;
     data.globalI = globalI; // Edge of global contour
     data.detJ = detJ; // Edge of detail

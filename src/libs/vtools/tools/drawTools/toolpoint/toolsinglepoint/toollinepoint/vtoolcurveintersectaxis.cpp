@@ -109,7 +109,13 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(const QPointer<DialogTo
     const QPointer<DialogCurveIntersectAxis> dialogTool = qobject_cast<DialogCurveIntersectAxis *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
     VToolCurveIntersectAxisInitData initData;
+
+    QT_WARNING_POP
+
     initData.formulaAngle = dialogTool->GetAngle();
     initData.basePointId = dialogTool->GetBasePointId();
     initData.curveId = dialogTool->getCurveId();

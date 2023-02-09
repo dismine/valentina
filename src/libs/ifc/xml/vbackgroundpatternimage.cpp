@@ -72,7 +72,13 @@ auto ScaleVectorImage(const QSvgRenderer &renderer) -> QSize
 //---------------------------------------------------------------------------------------------------------------------
 auto VBackgroundPatternImage::FromFile(const QString &fileName, bool builtIn) -> VBackgroundPatternImage
 {
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
     VBackgroundPatternImage image;
+
+    QT_WARNING_POP
+
     QMimeType mime = QMimeDatabase().mimeTypeForFile(fileName);
 
     if (not IsMimeTypeImage(mime))

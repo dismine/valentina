@@ -230,7 +230,13 @@ auto VToolAlongLine::Create(const QPointer<DialogTool> &dialog, VMainGraphicsSce
     const QPointer<DialogAlongLine> dialogTool = qobject_cast<DialogAlongLine *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
     VToolAlongLineInitData initData;
+
+    QT_WARNING_POP
+
     initData.formula = dialogTool->GetFormula();
     initData.firstPointId = dialogTool->GetFirstPointId();
     initData.secondPointId = dialogTool->GetSecondPointId();
