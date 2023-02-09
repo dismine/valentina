@@ -40,9 +40,7 @@ class VSplinePathData final : public QSharedData
 {
 public:
 
-    VSplinePathData()
-        : path(QVector<VSplinePoint>())
-    {}
+    VSplinePathData() = default;
 
     VSplinePathData(const VSplinePathData &splPath)
         : QSharedData(splPath),
@@ -54,7 +52,7 @@ public:
     /**
      * @brief path list spline point.
      */
-    QVector<VSplinePoint> path;
+    QVector<VSplinePoint> path{};
 
 private:
     Q_DISABLE_ASSIGN(VSplinePathData)

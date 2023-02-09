@@ -188,10 +188,8 @@ bool VPlainTextEdit::MatchRightParenthesis(QTextBlock currentBlock, int i, int n
             CreateParenthesisSelection(docPos + static_cast<int>(info->position));
             return true;
         }
-        else
-        {
-            --numRightParentheses;
-        }
+
+        --numRightParentheses;
     }
 
     currentBlock = currentBlock.previous();

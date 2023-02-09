@@ -380,10 +380,8 @@ QSize FancyTabBar::sizeHint() const
     {
         return QSize(sh.width() * static_cast<int>(m_attachedTabs.count()), sh.height());
     }
-    else
-    {
-        return QSize(sh.width(), sh.height() * static_cast<int>(m_attachedTabs.count()));
-    }
+
+    return QSize(sh.width(), sh.height() * static_cast<int>(m_attachedTabs.count()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -396,10 +394,8 @@ QSize FancyTabBar::minimumSizeHint() const
     {
         return QSize(sh.width() * static_cast<int>(m_attachedTabs.count()), sh.height());
     }
-    else
-    {
-        return QSize(sh.width(), sh.height() * static_cast<int>(m_attachedTabs.count()));
-    }
+
+    return QSize(sh.width(), sh.height() * static_cast<int>(m_attachedTabs.count()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -368,10 +368,7 @@ VPointF VCubicBezierPath::FirstPoint() const
     {
         return ConstFirst(d->path);
     }
-    else
-    {
-        return VPointF();
-    }
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -382,8 +379,6 @@ VPointF VCubicBezierPath::LastPoint() const
     {
         return d->path.at(SubSplOffset(count) + 3);// Take last point of the last real spline
     }
-    else
-    {
-        return VPointF();
-    }
+
+    return {};
 }

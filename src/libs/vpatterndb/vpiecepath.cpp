@@ -829,10 +829,8 @@ vsizetype VPiecePath::Edge(quint32 p1, quint32 p2) const
     {
         return list.size() - 1;
     }
-    else
-    {
-        return min;
-    }
+
+    return min;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -915,7 +913,7 @@ QPointF VPiecePath::NodePreviousPoint(const VContainer *data, int i) const
 {
     if (i < 0 || i > d->m_nodes.size()-1)
     {
-        return QPointF();
+        return {};
     }
 
     if (d->m_nodes.size() > 1)
@@ -1249,7 +1247,7 @@ QString VPiecePath::NodeName(const QVector<VPieceNode> &nodes, vsizetype nodeInd
 {
     if (not nodes.isEmpty() && (nodeIndex < 0 || nodeIndex >= nodes.size()))
     {
-        return QString();
+        return {};
     }
 
     try

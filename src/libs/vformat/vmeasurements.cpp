@@ -1477,13 +1477,13 @@ QMap<QString, qreal> VMeasurements::ReadCorrections(const QDomElement &mElement)
 {
     if (mElement.isNull())
     {
-        return QMap<QString, qreal>();
+        return {};
     }
 
     QDomElement correctionsTag = mElement.firstChildElement(TagCorrections);
     if (correctionsTag.isNull())
     {
-        return QMap<QString, qreal>();
+        return {};
     }
 
     QMap<QString, qreal> corrections;

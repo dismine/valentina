@@ -132,7 +132,7 @@ QModelIndex VPE::VPropertyModel::parent ( const QModelIndex & index ) const
 {
     if (!index.isValid())
     {
-        return QModelIndex();
+        return {};
     }
 
     VProperty* childItem = getProperty(index);
@@ -153,7 +153,7 @@ QModelIndex VPE::VPropertyModel::parent ( const QModelIndex & index ) const
         }
     }
 
-    return QModelIndex();
+    return {};
 }
 
 //! Returns the item flags for the given index
@@ -282,7 +282,7 @@ QModelIndex VPE::VPropertyModel::getIndexFromProperty(VProperty* property, int c
 {
     if (!property || column > columnCount() || column < 0)
     {
-        return QModelIndex();
+        return {};
     }
 
     VProperty* parentItem = property->getParent();

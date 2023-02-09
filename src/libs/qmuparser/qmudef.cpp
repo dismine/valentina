@@ -266,11 +266,9 @@ qmusizetype ReadVal(const QString &formula, qreal &val, const QLocale &locale, c
                 val = d;
                 return buf.size();
             }
-            else
-            {
-                val = 0;
-                return -1;
-            }
+
+            val = 0;
+            return -1;
         }
 
         buf.append(c);

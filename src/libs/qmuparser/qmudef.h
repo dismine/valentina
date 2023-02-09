@@ -153,14 +153,13 @@ static inline bool QmuFuzzyComparePossibleNulls(double p1, double p2)
     {
         return qFuzzyIsNull(p2);
     }
-    else if(qFuzzyIsNull(p2))
+
+    if(qFuzzyIsNull(p2))
     {
         return false;
     }
-    else
-    {
-        return qFuzzyCompare(p1, p2);
-    }
+
+    return qFuzzyCompare(p1, p2);
 }
 
 QMUPARSERSHARED_EXPORT qmusizetype ReadVal(const QString &formula, qreal &val, const QLocale &locale,
