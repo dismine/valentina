@@ -39,7 +39,11 @@
 #include "../exception/vexception.h"
 #include "../ifcdef.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <QAbstractMessageHandler>
+#include <QSourceLocation>
+#endif
+
 #include <QByteArray>
 #include <QDomNodeList>
 #include <QDomText>
@@ -47,7 +51,6 @@
 #include <QIODevice>
 #include <QMessageLogger>
 #include <QObject>
-#include <QSourceLocation>
 #include <QStringList>
 #include <QTemporaryFile>
 #include <QTextDocument>

@@ -27,8 +27,15 @@
  *************************************************************************/
 
 #include "vabstractconverter.h"
+#include "vparsererrorhandler.h"
 
-#include <QAbstractMessageHandler>
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <xercesc/parsers/XercesDOMParser.hpp>
+#else
+#include <QXmlSchema>
+#include <QXmlSchemaValidator>
+#endif // QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+
 #include <QDir>
 #include <QDomElement>
 #include <QDomNode>
@@ -39,72 +46,12 @@
 #include <QMap>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
-#include <QSourceLocation>
 #include <QStringList>
 #include <QTextDocument>
 #include <QUrl>
-#include <QXmlSchema>
-#include <QXmlSchemaValidator>
 
 #include "../exception/vexception.h"
 #include "vdomdocument.h"
-
-//This class need for validation pattern file using XSD shema
-class MessageHandler : public QAbstractMessageHandler
-{
-public:
-    MessageHandler()
-        : QAbstractMessageHandler(),
-          m_messageType(QtMsgType()),
-          m_description(),
-          m_sourceLocation(QSourceLocation())
-    {}
-
-    QString statusMessage() const;
-    qint64  line() const;
-    qint64  column() const;
-protected:
-    // cppcheck-suppress unusedFunction
-    virtual void handleMessage(QtMsgType type, const QString &description,
-                               const QUrl &identifier, const QSourceLocation &sourceLocation) override;
-private:
-    QtMsgType       m_messageType;
-    QString         m_description;
-    QSourceLocation m_sourceLocation;
-};
-
-//---------------------------------------------------------------------------------------------------------------------
-QString MessageHandler::statusMessage() const
-{
-    QTextDocument doc;
-    doc.setHtml(m_description);
-    return doc.toPlainText();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline qint64  MessageHandler::line() const
-{
-    return m_sourceLocation.line();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline qint64  MessageHandler::column() const
-{
-    return m_sourceLocation.column();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-void MessageHandler::handleMessage(QtMsgType type, const QString &description, const QUrl &identifier,
-                                   const QSourceLocation &sourceLocation)
-{
-    Q_UNUSED(type)
-    Q_UNUSED(identifier)
-
-    m_messageType = type;
-    m_description = description;
-    m_sourceLocation = sourceLocation;
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractConverter::VAbstractConverter(const QString &fileName)
@@ -222,6 +169,70 @@ void VAbstractConverter::BiasTokens(vsizetype position, vsizetype bias, QMap<vsi
 void VAbstractConverter::ValidateXML(const QString &schema) const
 {
     qCDebug(vXML, "Validation xml file %s.", qUtf8Printable(m_convertedFileName));
+
+    QFile fileSchema(schema);
+    if (not fileSchema.open(QIODevice::ReadOnly))
+    {
+        const QString errorMsg(tr("Can't open schema file %1:\n%2.").arg(schema, fileSchema.errorString()));
+        throw VException(errorMsg);
+    }
+
+    VParserErrorHandler parserErrorHandler;
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    QScopedPointer<QTemporaryFile> tempSchema(QTemporaryFile::createNativeFile(fileSchema));
+    if (tempSchema == nullptr)
+    {
+        const QString errorMsg(tr("Can't create native file for schema file %1:\n%2.")
+                                   .arg(schema, fileSchema.errorString()));
+        throw VException(errorMsg);
+    }
+
+    if (tempSchema->open())
+    {
+        XercesDOMParser domParser;
+        domParser.setErrorHandler(&parserErrorHandler);
+
+        if (domParser.loadGrammar(
+                tempSchema->fileName().toUtf8().constData(), Grammar::SchemaGrammarType, true) == nullptr)
+        {
+            VException e(parserErrorHandler.StatusMessage());
+            e.AddMoreInformation(tr("Could not load schema file '%1'.").arg(fileSchema.fileName()));
+            throw e;
+        }
+
+        qCDebug(vXML, "Schema loaded.");
+
+        if (parserErrorHandler.HasError())
+        {
+            VException e(parserErrorHandler.StatusMessage());
+            e.AddMoreInformation(tr("Schema file %3 invalid in line %1 column %2").arg(parserErrorHandler.Line())
+                                     .arg(parserErrorHandler.Column()).arg(fileSchema.fileName()));
+            throw e;
+        }
+
+        domParser.setValidationScheme(XercesDOMParser::Val_Always);
+        domParser.setDoNamespaces(true);
+        domParser.setDoSchema(true);
+        domParser.setValidationConstraintFatal(true);
+        domParser.setValidationSchemaFullChecking(true);
+        domParser.useCachedGrammarInParse(true);
+
+        domParser.parse(m_convertedFileName.toUtf8().constData());
+
+        if (domParser.getErrorCount() > 0)
+        {
+            VException e(parserErrorHandler.StatusMessage());
+            e.AddMoreInformation(tr("Validation error file %3 in line %1 column %2").arg(parserErrorHandler.Line())
+                                     .arg(parserErrorHandler.Column()).arg(m_originalFileName));
+            throw e;
+        }
+    }
+    else
+    {
+        qCritical() << tr("Unable to open native file for schema");
+    }
+#else
     QFile pattern(m_convertedFileName);
     if (not pattern.open(QIODevice::ReadOnly))
     {
@@ -229,22 +240,12 @@ void VAbstractConverter::ValidateXML(const QString &schema) const
         throw VException(errorMsg);
     }
 
-    QFile fileSchema(schema);
-    if (not fileSchema.open(QIODevice::ReadOnly))
-    {
-        pattern.close();
-        const QString errorMsg(tr("Can't open schema file %1:\n%2.").arg(schema, fileSchema.errorString()));
-        throw VException(errorMsg);
-    }
-
-    MessageHandler messageHandler;
+    VParserErrorHandler messageHandler;
     QXmlSchema sch;
     sch.setMessageHandler(&messageHandler);
     if (sch.load(&fileSchema, QUrl::fromLocalFile(fileSchema.fileName()))==false)
     {
-        pattern.close();
-        fileSchema.close();
-        VException e(messageHandler.statusMessage());
+        VException e(messageHandler.StatusMessage());
         e.AddMoreInformation(tr("Could not load schema file '%1'.").arg(fileSchema.fileName()));
         throw e;
     }
@@ -266,15 +267,12 @@ void VAbstractConverter::ValidateXML(const QString &schema) const
 
     if (errorOccurred)
     {
-        pattern.close();
-        fileSchema.close();
-        VException e(messageHandler.statusMessage());
-        e.AddMoreInformation(tr("Validation error file %3 in line %1 column %2").arg(messageHandler.line())
-                             .arg(messageHandler.column()).arg(m_originalFileName));
+        VException e(messageHandler.StatusMessage());
+        e.AddMoreInformation(tr("Validation error file %3 in line %1 column %2").arg(messageHandler.Line())
+                             .arg(messageHandler.Column()).arg(m_originalFileName));
         throw e;
     }
-    pattern.close();
-    fileSchema.close();
+#endif // QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 }
 
 //---------------------------------------------------------------------------------------------------------------------

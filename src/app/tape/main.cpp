@@ -40,6 +40,10 @@
 #   include "../vmisc/appimage.h"
 #endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <xercesc/util/PlatformUtils.hpp>
+#endif
+
 auto main(int argc, char *argv[]) -> int
 {
 #if defined(APPIMAGE) && defined(Q_OS_LINUX)
@@ -59,6 +63,12 @@ auto main(int argc, char *argv[]) -> int
 
 #if defined(Q_OS_WIN)
     VAbstractApplication::WinAttachConsole();
+#endif
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    XERCES_CPP_NAMESPACE::XMLPlatformUtils::Initialize();
+
+    auto Terminate = qScopeGuard([](){ XERCES_CPP_NAMESPACE::XMLPlatformUtils::Terminate(); });
 #endif
 
 #ifndef Q_OS_MAC // supports natively

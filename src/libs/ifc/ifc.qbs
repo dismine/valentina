@@ -14,6 +14,12 @@ VLib {
         condition: Utilities.versionCompare(Qt.core.version, "6") >= 0
     }
 
+    Depends {
+        name: "xerces-c"
+        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 && qbs.targetOS.contains("unix")
+                   && !qbs.targetOS.contains("macos")
+    }
+
     name: "IFCLib"
     files: [
         "ifcdef.h",
@@ -43,7 +49,7 @@ VLib {
             "vexceptionwrongid.cpp",
             "vexceptionundo.cpp",
             "vexceptioninvalidnotch.cpp",
-            "vexceptioninvalidhistory.cpp", 
+            "vexceptioninvalidhistory.cpp"
         ]
     }
 
@@ -56,6 +62,8 @@ VLib {
             "vbackgroundpatternimage.h",
             "vdomdocument.h",
             "vlayoutconverter.h",
+            "vparsererrorhandler.cpp",
+            "vparsererrorhandler.h",
             "vpatternconverter.h",
             "vpatternimage.h",
             "vtoolrecord.h",
