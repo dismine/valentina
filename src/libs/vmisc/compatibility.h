@@ -34,6 +34,24 @@
 #include <QVector>
 #include <QFontMetrics>
 
+#include "defglobal.h"
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+// WARNING:QVariant::load: unknown user type with name QMarginsF.
+// QVariant::value<T>() fails to convert unless QVariant::fromValue<T>() has been called previously.
+// https://stackoverflow.com/questions/70974383/qvariantvaluet-fails-to-convert-unless-qvariantfromvaluet-has-been-c
+#if QT_VERSION >= QT_VERSION_CHECK(6, 1, 0)
+#define REGISTER_META_TYPE_STREAM_OPERATORS(TYPE)                             \
+QMetaType::fromType<TYPE>().hasRegisteredDataStreamOperators(); // Dummy call
+#else
+#define REGISTER_META_TYPE_STREAM_OPERATORS(TYPE) \
+QVariant::fromValue<TYPE>(TYPE{}); // Dummy call
+#endif // QT_VERSION >= QT_VERSION_CHECK(6, 1, 0)
+#else
+#define REGISTER_META_TYPE_STREAM_OPERATORS(TYPE) \
+qRegisterMetaTypeStreamOperators<TYPE>(#TYPE);
+#endif // QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)

@@ -32,6 +32,7 @@
 #include "vabstractvalapplication.h"
 #include "projectversion.h"
 #include "../vmisc/vcommonsettings.h"
+#include "../vmisc/compatibility.h"
 
 class VTestSettings : public VCommonSettings
 {
@@ -41,7 +42,7 @@ public:
                   QObject *parent = nullptr)
         : VCommonSettings(format, scope, organization, application, parent)
     {
-        qRegisterMetaTypeStreamOperators<QMarginsF>("QMarginsF");
+        REGISTER_META_TYPE_STREAM_OPERATORS(QMarginsF);
     }
 };
 

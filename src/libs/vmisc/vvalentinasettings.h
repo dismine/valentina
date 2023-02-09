@@ -34,10 +34,8 @@
 #include <QSettings>
 #include <QString>
 #include <QtGlobal>
-#include <QMargins>
 
 #include "vcommonsettings.h"
-#include "../vlayout/vbank.h"
 
 class VValentinaSettings : public VCommonSettings
 {

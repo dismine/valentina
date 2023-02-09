@@ -37,10 +37,11 @@
 #include <QPrinterInfo>
 #include <QtDebug>
 #include <QGlobalStatic>
+#include <QMargins>
+#include <QMetaType>
 
 #include "../vmisc/def.h"
-#include "../vmisc/vmath.h"
-#include "../vlayout/vbank.h"
+#include "../vmisc/compatibility.h"
 #include "qglobal.h"
 
 #ifndef QBS_BUILD
@@ -147,14 +148,14 @@ VValentinaSettings::VValentinaSettings(Format format, Scope scope, const QString
                      QObject *parent)
     :VCommonSettings(format, scope, organization, application, parent)
 {
-    qRegisterMetaTypeStreamOperators<QMarginsF>("QMarginsF");
+    REGISTER_META_TYPE_STREAM_OPERATORS(QMarginsF);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VValentinaSettings::VValentinaSettings(const QString &fileName, QSettings::Format format, QObject *parent)
     :VCommonSettings(fileName, format, parent)
 {
-    qRegisterMetaTypeStreamOperators<QMarginsF>("QMarginsF");
+    REGISTER_META_TYPE_STREAM_OPERATORS(QMarginsF);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
