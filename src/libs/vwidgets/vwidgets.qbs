@@ -1,7 +1,14 @@
+import qbs.Utilities
+
 VLib {
-    Depends { name: "Qt"; submodules: ["widgets"] }
+    Depends { name: "Qt"; submodules: ["core", "widgets"] }
     Depends { name: "VMiscLib" }
     Depends { name: "VPropertyExplorerLib" }
+
+    Depends {
+        name: "Qt.openglwidgets";
+        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0
+    }
 
     name: "VWidgetsLib"
     files: [

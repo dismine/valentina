@@ -33,6 +33,7 @@
 #include "../vformat/vdimensions.h"
 
 class QxtCsvModel;
+class QTextCodec;
 
 enum class IndividualMeasurementsColumns: qint8
 {

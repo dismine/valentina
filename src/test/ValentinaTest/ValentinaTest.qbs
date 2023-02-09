@@ -1,13 +1,20 @@
+import qbs.Utilities
+
 VTestApp {
     Depends { name: "buildconfig" }
     Depends { name: "VTestLib" }
-    Depends { name: "Qt"; submodules: ["testlib"] }
+    Depends { name: "Qt"; submodules: ["core", "testlib"] }
     Depends { name: "VToolsLib" }
     Depends { name: "VGeometryLib" }
     Depends { name: "IFCLib" }
     Depends { name: "VDXFLib" }
     Depends { name: "VFormatLib" }
     Depends { name: "ebr" }
+
+    Depends {
+        name: "Qt.core5compat";
+        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0
+    }
 
     name: "ValentinaTest"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "ValentinaTest" : "valentinaTest"
