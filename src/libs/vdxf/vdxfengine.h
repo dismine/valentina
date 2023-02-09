@@ -30,7 +30,6 @@
 #define VDXFENGINE_H
 
 #include <qcompilerdetection.h>
-#include <QMatrix>
 #include <QPaintEngine>
 #include <QPointF>
 #include <QRectF>

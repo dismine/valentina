@@ -36,9 +36,6 @@
 #include <QFileInfo>
 #include <QLatin1String>
 #include <QList>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <algorithm>
 #include <QGlobalStatic>
 #include <QUuid>

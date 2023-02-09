@@ -33,9 +33,6 @@
 #include <QMap>
 #include <QRectF>
 #include <QSharedPointer>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QVector>
 #include <new>
 

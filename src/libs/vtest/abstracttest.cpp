@@ -39,9 +39,6 @@
 #include <QPointF>
 #include <QProcess>
 #include <QScopedPointer>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QStringList>
 #include <QVector>
 #include <QtGlobal>

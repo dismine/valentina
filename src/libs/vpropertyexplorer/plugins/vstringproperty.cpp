@@ -25,9 +25,6 @@
 #include <QLineEdit>
 #include <QLocale>
 #include <QSizePolicy>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QWidget>
 
 #include "../vproperty_p.h"

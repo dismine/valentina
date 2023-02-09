@@ -28,9 +28,6 @@
 
 #include "calculator.h"
 
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QStringList>
 #include <QSharedPointer>
 #include <QtDebug>

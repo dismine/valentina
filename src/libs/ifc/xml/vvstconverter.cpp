@@ -36,9 +36,6 @@
 #include <QList>
 #include <QMap>
 #include <QMultiMap>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QGlobalStatic>
 
 #include "../exception/vexception.h"

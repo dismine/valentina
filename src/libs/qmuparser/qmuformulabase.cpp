@@ -25,9 +25,6 @@
 #include <QList>
 #include <QLocale>
 #include <QMap>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QStringList>
 
 #include "qmudef.h"

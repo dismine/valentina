@@ -42,9 +42,6 @@
 #include <QPolygonF>
 #include <QRectF>
 #include <QSharedPointer>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QUndoStack>
 #include <new>
 

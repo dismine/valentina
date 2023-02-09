@@ -36,7 +36,6 @@
 #include <QtConcurrent/QtConcurrentRun>
 #include <QGraphicsPathItem>
 #include <QList>
-#include <QMatrix>
 #include <QMessageLogger>
 #include <QPainterPath>
 #include <QPoint>

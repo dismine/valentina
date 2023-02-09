@@ -33,9 +33,6 @@
 #include <QDir>
 #include <QLocale>
 #include <QMessageLogger>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QVariant>
 #include <QtDebug>
 #include <QTextCodec>

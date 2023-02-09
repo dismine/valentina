@@ -190,7 +190,6 @@
 #include <QSettings>
 #include <QTimer>
 #include <QtGlobal>
-#include <QDesktopWidget>
 #include <QDesktopServices>
 #include <chrono>
 #include <thread>

@@ -35,9 +35,6 @@
 #include <QLocale>
 #include <QPixmap>
 #include <QSize>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QWidget>
 
 #include "../vproperty_p.h"

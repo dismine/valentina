@@ -33,9 +33,6 @@
 #include <QMetaType>
 #include <QPrinter>
 #include <QSharedPointer>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QVariant>
 #include <QPrinterInfo>
 #include <QtDebug>

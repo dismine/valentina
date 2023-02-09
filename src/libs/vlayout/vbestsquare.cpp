@@ -30,8 +30,6 @@
 #include "vbestsquare_p.h"
 #include "../vgeometry/vgeometrydef.h"
 
-#include <QMatrix>
-
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------

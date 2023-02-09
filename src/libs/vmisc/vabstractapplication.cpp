@@ -32,9 +32,6 @@
 #include <QLibraryInfo>
 #include <QLoggingCategory>
 #include <QMessageLogger>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QTranslator>
 #include <QUndoStack>
 #include <Qt>

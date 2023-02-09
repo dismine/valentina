@@ -33,10 +33,7 @@
 #include <QLatin1Char>
 #include <QLatin1String>
 #include <QObject>
-#include <QStaticStringData>
 #include <QString>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QSysInfo>
 #include <QtGlobal>
 

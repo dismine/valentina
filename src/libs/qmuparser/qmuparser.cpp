@@ -23,9 +23,6 @@
 
 #include <QCoreApplication>
 #include <QLineF>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QtGlobal>
 #include <sstream>
 #include <string>

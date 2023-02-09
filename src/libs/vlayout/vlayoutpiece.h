@@ -32,7 +32,6 @@
 #include <qcompilerdetection.h>
 #include <QDate>
 #include <QLineF>
-#include <QMatrix>
 #include <QPointF>
 #include <QRectF>
 #include <QSharedDataPointer>

@@ -33,11 +33,7 @@
 #include <QMutex>
 #include <QNetworkReply>
 #include <QNetworkRequest>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QStringList>
-#include <QStringRef>
 #include <QVariant>
 #include <QXmlStreamAttributes>
 #include <QtDebug>

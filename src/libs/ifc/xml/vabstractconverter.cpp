@@ -40,9 +40,6 @@
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 #include <QSourceLocation>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QStringList>
 #include <QTextDocument>
 #include <QUrl>
