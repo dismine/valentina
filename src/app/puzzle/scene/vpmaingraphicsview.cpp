@@ -66,8 +66,13 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wenum-enum-conversion")
 #endif
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+Q_GLOBAL_STATIC_WITH_ARGS(const QKeySequence, restoreOriginShortcut, // NOLINT
+                          (QKeySequence(Qt::ControlModifier | Qt::Key_Asterisk)))
+#else
 Q_GLOBAL_STATIC_WITH_ARGS(const QKeySequence, restoreOriginShortcut, // NOLINT
                           (QKeySequence(Qt::ControlModifier + Qt::Key_Asterisk)))
+#endif
 
 QT_WARNING_POP
 }

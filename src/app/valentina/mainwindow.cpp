@@ -2899,36 +2899,71 @@ void MainWindow::ToolBarTools()
 
     QList<QKeySequence> zoomInShortcuts;
     zoomInShortcuts.append(QKeySequence(QKeySequence::ZoomIn));
-    zoomInShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_Plus + Qt::KeypadModifier));
+    zoomInShortcuts.append(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(QKeyCombination(Qt::ControlModifier), Qt::Key_Plus | Qt::KeypadModifier));
+#else
+        QKeySequence(Qt::ControlModifier + Qt::Key_Plus + Qt::KeypadModifier));
+#endif
     ui->actionZoomIn->setShortcuts(zoomInShortcuts);
     connect(ui->actionZoomIn, &QAction::triggered, ui->view, &VMainGraphicsView::ZoomIn);
 
     QList<QKeySequence> zoomOutShortcuts;
     zoomOutShortcuts.append(QKeySequence(QKeySequence::ZoomOut));
-    zoomOutShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_Minus + Qt::KeypadModifier));
+    zoomOutShortcuts.append(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(QKeyCombination(Qt::ControlModifier), Qt::Key_Minus | Qt::KeypadModifier));
+#else
+        QKeySequence(Qt::ControlModifier + Qt::Key_Minus + Qt::KeypadModifier));
+#endif
     ui->actionZoomOut->setShortcuts(zoomOutShortcuts);
     connect(ui->actionZoomOut, &QAction::triggered, ui->view, &VMainGraphicsView::ZoomOut);
 
     QList<QKeySequence> zoomOriginalShortcuts;
-    zoomOriginalShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_0));
-    zoomOriginalShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_0 + Qt::KeypadModifier));
+    zoomOriginalShortcuts.append(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(Qt::ControlModifier | Qt::Key_0));
+#else
+        QKeySequence(Qt::ControlModifier + Qt::Key_0));
+#endif
+    zoomOriginalShortcuts.append(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(QKeyCombination(Qt::ControlModifier), Qt::Key_0 | Qt::KeypadModifier));
+#else
+        QKeySequence(Qt::ControlModifier + Qt::Key_0 + Qt::KeypadModifier));
+#endif
     ui->actionZoomOriginal->setShortcuts(zoomOriginalShortcuts);
     connect(ui->actionZoomOriginal, &QAction::triggered, ui->view, &VMainGraphicsView::ZoomOriginal);
 
     QList<QKeySequence> zoomFitBestShortcuts;
-    zoomFitBestShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_Equal));
+    zoomFitBestShortcuts.append(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(Qt::ControlModifier | Qt::Key_Equal));
+#else
+        QKeySequence(Qt::ControlModifier + Qt::Key_Equal));
+#endif
     ui->actionZoomFitBest->setShortcuts(zoomFitBestShortcuts);
     connect(ui->actionZoomFitBest, &QAction::triggered, ui->view, &VMainGraphicsView::ZoomFitBest);
 
     QList<QKeySequence> zoomFitBestCurrentShortcuts;
-    zoomFitBestCurrentShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_M));
+    zoomFitBestCurrentShortcuts.append(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(Qt::ControlModifier | Qt::Key_M));
+#else
+        QKeySequence(Qt::ControlModifier + Qt::Key_M));
+#endif
     ui->actionZoomFitBestCurrent->setShortcuts(zoomFitBestCurrentShortcuts);
     connect(ui->actionZoomFitBestCurrent, &QAction::triggered, this, &MainWindow::ZoomFitBestCurrent);
 
     connect(ui->actionPreviousPatternPiece, &QAction::triggered, this, &MainWindow::PreviousPatternPiece);
     connect(ui->actionNextPatternPiece, &QAction::triggered, this, &MainWindow::NextPatternPiece);
 
-    ui->actionIncreaseLabelFont->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_Plus));
+    ui->actionIncreaseLabelFont->setShortcut(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(Qt::ShiftModifier | Qt::Key_Plus));
+#else
+        QKeySequence(Qt::ShiftModifier + Qt::Key_Plus));
+#endif
     connect(ui->actionIncreaseLabelFont, &QAction::triggered, this, [this]()
     {
         VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
@@ -2944,7 +2979,12 @@ void MainWindow::ToolBarTools()
         }
     });
 
-    ui->actionDecreaseLabelFont->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_Minus));
+    ui->actionDecreaseLabelFont->setShortcut(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(Qt::ShiftModifier | Qt::Key_Minus));
+#else
+        QKeySequence(Qt::ShiftModifier + Qt::Key_Minus));
+#endif
     connect(ui->actionDecreaseLabelFont, &QAction::triggered, this, [this]()
     {
         VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
@@ -2960,7 +3000,12 @@ void MainWindow::ToolBarTools()
         }
     });
 
-    ui->actionOriginalLabelFont->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_0));
+    ui->actionOriginalLabelFont->setShortcut(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(Qt::ShiftModifier | Qt::Key_0));
+#else
+        QKeySequence(Qt::ShiftModifier + Qt::Key_0));
+#endif
     connect(ui->actionOriginalLabelFont, &QAction::triggered, this, [this]()
     {
         VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
@@ -2976,7 +3021,12 @@ void MainWindow::ToolBarTools()
         }
     });
 
-    ui->actionHideLabels->setShortcut(QKeySequence(Qt::AltModifier + Qt::Key_L));
+    ui->actionHideLabels->setShortcut(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(Qt::AltModifier | Qt::Key_L));
+#else
+        QKeySequence(Qt::AltModifier + Qt::Key_L));
+#endif
     ui->actionHideLabels->setChecked(VAbstractValApplication::VApp()->ValentinaSettings()->GetHideLabels());
     connect(ui->actionHideLabels, &QAction::triggered, this, [this](bool checked)
     {

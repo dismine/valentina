@@ -1534,24 +1534,49 @@ void VPMainWindow::InitZoomToolBar()
     // connect the zoom buttons and shortcuts to the slots
     QList<QKeySequence> zoomInShortcuts;
     zoomInShortcuts.append(QKeySequence(QKeySequence::ZoomIn));
-    zoomInShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_Plus + Qt::KeypadModifier));
+    zoomInShortcuts.append(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(QKeyCombination(Qt::ControlModifier), Qt::Key_Plus | Qt::KeypadModifier));
+#else
+        QKeySequence(Qt::ControlModifier + Qt::Key_Plus + Qt::KeypadModifier));
+#endif
     ui->actionZoomIn->setShortcuts(zoomInShortcuts);
     connect(ui->actionZoomIn, &QAction::triggered, m_graphicsView, &VPMainGraphicsView::ZoomIn);
 
     QList<QKeySequence> zoomOutShortcuts;
     zoomOutShortcuts.append(QKeySequence(QKeySequence::ZoomOut));
-    zoomOutShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_Minus + Qt::KeypadModifier));
+    zoomOutShortcuts.append(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(QKeyCombination(Qt::ControlModifier), Qt::Key_Minus | Qt::KeypadModifier));
+#else
+        QKeySequence(Qt::ControlModifier + Qt::Key_Minus + Qt::KeypadModifier));
+#endif
     ui->actionZoomOut->setShortcuts(zoomOutShortcuts);
     connect(ui->actionZoomOut, &QAction::triggered, m_graphicsView, &VPMainGraphicsView::ZoomOut);
 
     QList<QKeySequence> zoomOriginalShortcuts;
-    zoomOriginalShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_0));
-    zoomOriginalShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_0 + Qt::KeypadModifier));
+    zoomOriginalShortcuts.append(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(Qt::ControlModifier | Qt::Key_0));
+#else
+        QKeySequence(Qt::ControlModifier + Qt::Key_0));
+#endif
+    zoomOriginalShortcuts.append(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(QKeyCombination(Qt::ControlModifier), Qt::Key_0 | Qt::KeypadModifier));
+#else
+        QKeySequence(Qt::ControlModifier + Qt::Key_0 + Qt::KeypadModifier));
+#endif
     ui->actionZoomOriginal->setShortcuts(zoomOriginalShortcuts);
     connect(ui->actionZoomOriginal, &QAction::triggered, m_graphicsView, &VPMainGraphicsView::ZoomOriginal);
 
     QList<QKeySequence> zoomFitBestShortcuts;
-    zoomFitBestShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_Equal));
+    zoomFitBestShortcuts.append(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(Qt::ControlModifier | Qt::Key_Equal));
+#else
+        QKeySequence(Qt::ControlModifier + Qt::Key_Equal));
+#endif
     ui->actionZoomFitBest->setShortcuts(zoomFitBestShortcuts);
     connect(ui->actionZoomFitBest, &QAction::triggered, m_graphicsView, &VPMainGraphicsView::ZoomFitBest);
 
