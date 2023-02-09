@@ -580,7 +580,11 @@ int VBank::GetNextTwoGroups(uint priority) const
 int VBank::GetNextDescGroup(uint priority) const
 {
     auto descGroup = desc.value(priority);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    QMultiMapIterator<qint64, int> i(descGroup);
+#else
     QMapIterator<qint64, int> i(descGroup);
+#endif
     i.toBack();
     if (i.hasPrevious())
     {
