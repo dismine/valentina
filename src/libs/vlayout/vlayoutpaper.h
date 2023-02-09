@@ -46,7 +46,10 @@ class QRectF;
 class QGraphicsItem;
 class QMutex;
 template <typename T> class QList;
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 template <typename T> class QVector;
+#endif
 
 class VLayoutPaper
 {
@@ -100,7 +103,9 @@ public:
 
     QVector<VLayoutPiece> GetDetails() const;
     void                  SetDetails(const QVector<VLayoutPiece>& details);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     void                  SetDetails(const QList<VLayoutPiece>& details);
+#endif
 
     QRectF DetailsBoundingRect() const;
 

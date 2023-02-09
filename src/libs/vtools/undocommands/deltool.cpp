@@ -67,7 +67,7 @@ DelTool::DelTool(VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
     while (i != groups.constEnd())
     {
         VGroupData groupData = i.value();
-        auto *itemRecord = std::find_if(groupData.items.begin(), groupData.items.end(),
+        auto itemRecord = std::find_if(groupData.items.begin(), groupData.items.end(),
                                   [id](const QPair<vidtype, vidtype> &item) { return item.second == id; });
 
         if (itemRecord != groupData.items.end())

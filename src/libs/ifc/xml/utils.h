@@ -30,9 +30,12 @@
 
 class QMimeType;
 class QString;
-class QStringList;
 class QMimeType;
 class QByteArray;
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+class QStringList;
+#endif
 
 auto IsMimeTypeImage(const QMimeType &mime) -> bool;
 auto SplitString(QString str) -> QStringList;

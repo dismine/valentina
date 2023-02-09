@@ -38,8 +38,12 @@
 
 class QGraphicsItem;
 class QPrinter;
-template <class T> class QVector;
 struct VWatermarkData;
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+template <class T> class QVector;
+#endif
+
 
 struct PosterData
 {

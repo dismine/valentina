@@ -330,8 +330,8 @@ void DialogRotation::ChosenObject(quint32 id, const SceneObject &type)
             auto *operation = qobject_cast<VisToolRotation *>(vis);
             SCASSERT(operation != nullptr)
 
-            auto *obj = std::find_if(sourceObjects.begin(), sourceObjects.end(),
-                                     [id](const SourceItem &sItem) { return sItem.id == id; });
+            auto obj = std::find_if(sourceObjects.begin(), sourceObjects.end(),
+                                    [id](const SourceItem &sItem) { return sItem.id == id; });
 
             if (obj != sourceObjects.cend())
             {
@@ -370,8 +370,8 @@ void DialogRotation::SelectedObject(bool selected, quint32 object, quint32 tool)
     Q_UNUSED(tool)
     if (stage1)
     {
-        auto *obj = std::find_if(sourceObjects.begin(), sourceObjects.end(),
-                                 [object](const SourceItem &sItem) { return sItem.id == object; });
+        auto obj = std::find_if(sourceObjects.begin(), sourceObjects.end(),
+                                [object](const SourceItem &sItem) { return sItem.id == object; });
         if (selected)
         {
             if (obj == sourceObjects.cend())
@@ -532,8 +532,8 @@ void DialogRotation::PointChanged()
 {
     quint32 id = getCurrentObjectId(ui->comboBoxOriginPoint);
 
-    auto *obj = std::find_if(sourceObjects.begin(), sourceObjects.end(),
-                             [id](const SourceItem &sItem) { return sItem.id == id; });
+    auto obj = std::find_if(sourceObjects.begin(), sourceObjects.end(),
+                            [id](const SourceItem &sItem) { return sItem.id == id; });
 
     QColor color;
     if (obj != sourceObjects.cend())

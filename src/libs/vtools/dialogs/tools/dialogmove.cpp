@@ -430,8 +430,8 @@ void DialogMove::SelectedObject(bool selected, quint32 object, quint32 tool)
     Q_UNUSED(tool)
     if (stage1)
     {
-        auto *obj = std::find_if(sourceObjects.begin(), sourceObjects.end(),
-                                 [object](const SourceItem &sItem) { return sItem.id == object; });
+        auto obj = std::find_if(sourceObjects.begin(), sourceObjects.end(),
+                                [object](const SourceItem &sItem) { return sItem.id == object; });
         if (selected)
         {
             if (obj == sourceObjects.cend())

@@ -29,7 +29,9 @@
 #define LITERALS_H
 
 class QString;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 class QStringList;
+#endif
 
 // From documantation: If you use QStringLiteral you should avoid declaring the same literal in multiple places: This
 // furthermore blows up the binary sizes.
