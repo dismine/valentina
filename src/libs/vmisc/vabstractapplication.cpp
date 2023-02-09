@@ -123,7 +123,7 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
         QLoggingCategory::setFilterRules(rules);
     }
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     // Enable support for HiDPI bitmap resources
     // The attribute is available since Qt 5.1, but by default disabled.
     // Because on Windows and Mac OS X we always use last version

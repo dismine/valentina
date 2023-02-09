@@ -290,7 +290,9 @@ void InitHighDpiScaling(int argc, char *argv[])
     if (IsOptionSet(argc, argv, qPrintable(QLatin1String("--") + LONG_OPTION_NO_HDPI_SCALING)))
     {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         QCoreApplication::setAttribute(Qt::AA_DisableHighDpiScaling);
+#endif
 #else
         qputenv("QT_DEVICE_PIXEL_RATIO", QByteArray("1"));
 #endif
@@ -298,7 +300,9 @@ void InitHighDpiScaling(int argc, char *argv[])
     else
     {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         QApplication::setAttribute(Qt::AA_EnableHighDpiScaling); // DPI support
+#endif
 #else
         qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", QByteArray("1"));
 #endif
