@@ -83,7 +83,9 @@ static const auto V_UNUSED V_EX_CONFIG = 78;      /*Something was found in an un
 inline QTextStream& vStdErr()
 {
     static QTextStream ts(stderr, QIODevice::Unbuffered | QIODevice::WriteOnly);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     ts.setCodec("UTF-8");
+#endif
     return ts;
 }
 
@@ -91,7 +93,9 @@ inline QTextStream& vStdErr()
 inline QTextStream& vStdOut()
 {
     static QTextStream ts(stdout, QIODevice::Unbuffered | QIODevice::WriteOnly);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     ts.setCodec("UTF-8");
+#endif
     return ts;
 }
 
