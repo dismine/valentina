@@ -205,7 +205,7 @@ void VPMainGraphicsView::dropEvent(QDropEvent *event)
             event->acceptProposedAction();
 
             piece->ClearTransformations();
-            piece->SetPosition(mapToScene(event->pos()));
+            piece->SetPosition(mapToScene(DropEventPos(event)));
             piece->SetZValue(1.0);
 
             auto *command = new VPUndoMovePieceOnSheet(layout->GetFocusedSheet(), piece);

@@ -318,4 +318,15 @@ inline auto VLocaleCharacter(const QChar &character) -> QChar
 {
     return character;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto DropEventPos(const QDropEvent *event) -> QPoint
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    return event->position().toPoint();
+#else
+    return event->pos();
+#endif
+}
+
 #endif // COMPATIBILITY_H
