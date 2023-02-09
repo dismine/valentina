@@ -487,7 +487,7 @@ auto QmuParserTokenReader::IsArgSep ( token_type &a_Tok ) -> bool
         // copy the separator into null terminated string
         QString szSep;
         szSep[0] = m_cArgSep;
-        szSep[1] = 0;
+        szSep[1] = QChar::Null;
 
         if ( m_iSynFlags & noARG_SEP )
         {
