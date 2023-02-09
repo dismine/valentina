@@ -30,18 +30,32 @@
 #include "../vproperty_p.h"
 
 VPE::VStringProperty::VStringProperty(const QString &name, const QMap<QString, QVariant> &settings)
-    : VProperty(name, QVariant::String), readOnly(false), typeForParent(0), clearButton(false), m_osSeparator(false)
+    : VProperty(name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                QMetaType::QString),
+#else
+                QVariant::String),
+#endif
+      readOnly(false), typeForParent(0), clearButton(false), m_osSeparator(false)
 {
     VProperty::setSettings(settings);
     d_ptr->VariantValue.setValue(QString());
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    d_ptr->VariantValue.convert(QMetaType(QMetaType::QString));
+#else
     d_ptr->VariantValue.convert(QVariant::String);
+#endif
 }
 
 VPE::VStringProperty::VStringProperty(const QString &name)
     : VProperty(name), readOnly(false), typeForParent(0), clearButton(false), m_osSeparator(false)
 {
     d_ptr->VariantValue.setValue(QString());
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    d_ptr->VariantValue.convert(QMetaType(QMetaType::QString));
+#else
     d_ptr->VariantValue.convert(QVariant::String);
+#endif
 }
 
 QWidget *VPE::VStringProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,

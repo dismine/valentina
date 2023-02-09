@@ -36,12 +36,21 @@
 #include "../vproperty_p.h"
 
 VPE::VLabelProperty::VLabelProperty(const QString &name, const QMap<QString, QVariant> &settings)
-    : VProperty(name, QVariant::String),
+    : VProperty(name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                QMetaType::QString),
+#else
+                QVariant::String),
+#endif
       typeForParent(0)
 {
     VProperty::setSettings(settings);
     d_ptr->VariantValue.setValue(QString());
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    d_ptr->VariantValue.convert(QMetaType(QMetaType::QString));
+#else
     d_ptr->VariantValue.convert(QVariant::String);
+#endif
 }
 
 VPE::VLabelProperty::VLabelProperty(const QString &name)
@@ -49,7 +58,11 @@ VPE::VLabelProperty::VLabelProperty(const QString &name)
       typeForParent(0)
 {
     d_ptr->VariantValue.setValue(QString());
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    d_ptr->VariantValue.convert(QMetaType(QMetaType::QString));
+#else
     d_ptr->VariantValue.convert(QVariant::String);
+#endif
 }
 
 QWidget *VPE::VLabelProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,

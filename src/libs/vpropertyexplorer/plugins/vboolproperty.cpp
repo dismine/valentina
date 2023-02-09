@@ -28,10 +28,19 @@
 #include "../vproperty_p.h"
 
 VPE::VBoolProperty::VBoolProperty(const QString& name) :
-    VProperty(name, QVariant::Bool)
+    VProperty(name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+              QMetaType::Bool)
+#else
+              QVariant::Bool)
+#endif
 {
     d_ptr->VariantValue.setValue(false);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    d_ptr->VariantValue.convert(QMetaType(QMetaType::Bool));
+#else
     d_ptr->VariantValue.convert(QVariant::Bool);
+#endif
 }
 
 
@@ -99,7 +108,11 @@ auto VPE::VBoolProperty::getEditorData(const QWidget *editor) const -> QVariant
 void VPE::VBoolProperty::setValue(const QVariant &value)
 {
     VProperty::d_ptr->VariantValue = value;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    VProperty::d_ptr->VariantValue.convert(QMetaType(QMetaType::Bool));
+#else
     VProperty::d_ptr->VariantValue.convert(QVariant::Bool);
+#endif
 
     if (VProperty::d_ptr->editor != nullptr)
     {

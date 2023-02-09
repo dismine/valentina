@@ -42,6 +42,8 @@
 
 #include <ciso646>
 
+#include "vpropertydef.h"
+
 template <typename T> class QList;
 
 namespace VPE
@@ -75,7 +77,12 @@ public:
     };
 
     //! Standard constructor, takes a name and a parent property as argument
-    explicit VProperty(const QString& name, QVariant::Type type = QVariant::String);
+    explicit VProperty(const QString& name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                       QMetaType::Type type = QMetaType::QString);
+#else
+                       QVariant::Type type = QVariant::String);
+#endif
 
     //! Destructor
     virtual ~VProperty() override;

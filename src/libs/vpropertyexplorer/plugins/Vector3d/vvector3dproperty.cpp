@@ -28,9 +28,19 @@
 #include "../vnumberproperty.h"
 
 VPE::QVector3DProperty::QVector3DProperty(const QString& name)
-    : VProperty(name, QVariant::String) // todo: QVariant::Vector3D??
+    : VProperty(name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                QMetaType::QString) // todo: QVariant::Vector3D??
+#else
+                QVariant::String) // todo: QVariant::Vector3D??
+#endif
 {
-    QVariant tmpFloat(0); tmpFloat.convert(QVariant::Double);
+    QVariant tmpFloat(0);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    tmpFloat.convert(QMetaType(QMetaType::Double));
+#else
+    tmpFloat.convert(QVariant::Double);
+#endif
     auto* tmpX = new VDoubleProperty("X"); addChild(tmpX); tmpX->setUpdateBehaviour(true, false);
     auto* tmpY = new VDoubleProperty("Y"); addChild(tmpY); tmpY->setUpdateBehaviour(true, false);
     auto* tmpZ = new VDoubleProperty("Z"); addChild(tmpZ); tmpZ->setUpdateBehaviour(true, false);
@@ -94,9 +104,19 @@ void VPE::QVector3DProperty::setVector(double x, double y, double z)
         return;
     }
 
-    QVariant tmpX(x); tmpX.convert(QVariant::Double);
-    QVariant tmpY(y); tmpY.convert(QVariant::Double);
-    QVariant tmpZ(z); tmpZ.convert(QVariant::Double);
+    QVariant tmpX(x);
+    QVariant tmpY(y);
+    QVariant tmpZ(z);
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    tmpX.convert(QMetaType(QMetaType::Double));
+    tmpY.convert(QMetaType(QMetaType::Double));
+    tmpZ.convert(QMetaType(QMetaType::Double));
+#else
+    tmpX.convert(QVariant::Double);
+    tmpY.convert(QVariant::Double);
+    tmpZ.convert(QVariant::Double);
+#endif
     d_ptr->Children.at(0)->setValue(tmpX);
     d_ptr->Children.at(1)->setValue(tmpY);
     d_ptr->Children.at(2)->setValue(tmpZ);

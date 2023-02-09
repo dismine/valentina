@@ -33,7 +33,12 @@
 #include "vproperty_p.h"
 
 //! Standard constructor, takes a name and a parent property as argument
-VPE::VProperty::VProperty(const QString& name, QVariant::Type type)
+VPE::VProperty::VProperty(const QString& name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                          QMetaType::Type type)
+#else
+                          QVariant::Type type)
+#endif
     : QObject(), d_ptr(new VPropertyPrivate(name, type))
 {
 
@@ -114,7 +119,11 @@ QWidget* VPE::VProperty::createEditor(QWidget * parent, const QStyleOptionViewIt
 
     QItemEditorFactory *factory = new QItemEditorFactory;
     QItemEditorCreatorBase *lineCreator = new QStandardItemEditorCreator<QLineEdit>();
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    factory->registerEditor(QMetaType::QString, lineCreator);
+#else
     factory->registerEditor(QVariant::String, lineCreator);
+#endif
     QItemEditorFactory::setDefaultFactory(factory);
 
     d_ptr->editor = factory->createEditor(static_cast<int>(d_ptr->PropertyVariantType), parent);
@@ -178,7 +187,11 @@ Qt::ItemFlags VPE::VProperty::flags(int column) const
 void VPE::VProperty::setValue(const QVariant &value)
 {
     d_ptr->VariantValue = value;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    d_ptr->VariantValue.convert(QMetaType(d_ptr->PropertyVariantType));
+#else
     d_ptr->VariantValue.convert(static_cast<int>(d_ptr->PropertyVariantType));
+#endif
     if (d_ptr->editor != nullptr)
     {
         setEditorData(d_ptr->editor);

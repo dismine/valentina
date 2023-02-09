@@ -50,12 +50,21 @@ void SetTabStopDistance(QPlainTextEdit *edit, int tabWidthChar)
 
 
 VPE::VTextProperty::VTextProperty(const QString &name, const QMap<QString, QVariant> &settings)
-    : VProperty(name, QVariant::String),
+    : VProperty(name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                QMetaType::QString),
+#else
+                QVariant::String),
+#endif
     readOnly(false)
 {
     VProperty::setSettings(settings);
     d_ptr->VariantValue.setValue(QString());
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    d_ptr->VariantValue.convert(QMetaType(QMetaType::QString));
+#else
     d_ptr->VariantValue.convert(QVariant::String);
+#endif
 }
 
 VPE::VTextProperty::VTextProperty(const QString &name)
@@ -63,7 +72,11 @@ VPE::VTextProperty::VTextProperty(const QString &name)
     readOnly(false)
 {
     d_ptr->VariantValue.setValue(QString());
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    d_ptr->VariantValue.convert(QMetaType(QMetaType::QString));
+#else
     d_ptr->VariantValue.convert(QVariant::String);
+#endif
 }
 
 QWidget *VPE::VTextProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,

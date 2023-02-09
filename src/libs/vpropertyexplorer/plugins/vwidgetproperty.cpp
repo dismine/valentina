@@ -29,7 +29,14 @@
 #include "../vproperty.h"
 
 VPE::VWidgetProperty::VWidgetProperty(const QString& name, QWidget* widget)
-    : VEmptyProperty(new VWidgetPropertyPrivate(name, QVariant::Invalid, widget))
+    : VEmptyProperty(
+        new VWidgetPropertyPrivate(name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                                   QMetaType::UnknownType,
+#else
+                                   QVariant::Invalid,
+#endif
+                                   widget))
 {
 }
 

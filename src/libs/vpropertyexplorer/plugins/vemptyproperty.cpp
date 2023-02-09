@@ -33,7 +33,12 @@ class VPropertyPrivate;
 }  // namespace VPE
 
 VPE::VEmptyProperty::VEmptyProperty(const QString& name)
-    : VProperty(name, QVariant::Invalid)
+    : VProperty(name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                QMetaType::UnknownType)
+#else
+                QVariant::Invalid)
+#endif
 {
 }
 
