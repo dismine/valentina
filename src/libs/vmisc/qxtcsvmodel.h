@@ -49,6 +49,7 @@
 #include "def.h"
 
 class QxtCsvModelPrivate;
+class QTextCodec;
 
 class QxtCsvModel final : public QAbstractTableModel
 {

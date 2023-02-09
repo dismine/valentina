@@ -28,7 +28,9 @@
 #include <ciso646>
 #include <QtGlobal>
 
+#ifdef __INTEL_COMPILER
 #include "qmuparserfixes.h"
+#endif
 
 /** @file
     @brief This file contains standard definitions used by the parser.

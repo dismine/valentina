@@ -33,8 +33,6 @@
 #include <QUuid>
 #include <QTransform>
 
-#include "../vmisc/typedef.h"
-
 class QPixmap;
 class QMimeType;
 

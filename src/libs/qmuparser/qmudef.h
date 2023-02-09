@@ -23,6 +23,7 @@
 #define QMUDEF_H
 
 #include "qmuparser_global.h"
+#include "qmuparserdef.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
