@@ -347,4 +347,15 @@ inline auto DropEventPos(const QDropEvent *event) -> QPoint
 #endif
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+inline auto QLibraryPath(T loc) -> QString
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    return QLibraryInfo::path(loc);
+#else
+    return QLibraryInfo::location(loc);
+#endif
+}
+
 #endif // COMPATIBILITY_H

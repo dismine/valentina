@@ -39,6 +39,8 @@
 #include <QWidget>
 #include <QStandardPaths>
 
+#include "../vmisc/compatibility.h"
+
 #ifdef Q_OS_UNIX
 #  include <unistd.h>
 #endif
@@ -260,7 +262,7 @@ void VAbstractApplication::LoadTranslation(QString locale)
 #if defined(Q_OS_WIN) || defined(Q_OS_MAC)
     const QString qtQmDir = appQmDir;
 #else
-    const QString qtQmDir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+    const QString qtQmDir = QLibraryPath(QLibraryInfo::TranslationsPath);
 #endif
     LoadQM(qtTranslator, QStringLiteral("qt_"), locale, qtQmDir);
     installTranslator(qtTranslator);
