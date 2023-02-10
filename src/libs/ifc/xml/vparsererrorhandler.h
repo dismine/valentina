@@ -38,17 +38,20 @@ class VParserErrorHandler : public QAbstractMessageHandler
 public:
     VParserErrorHandler() =default;
 
-    QString StatusMessage() const;
-    qint64  Line() const;
-    qint64  Column() const;
+    auto StatusMessage() const -> QString;
+    auto Line() const -> qint64;
+    auto Column() const -> qint64;
+
+    auto HasError() const -> bool;
 protected:
     // cppcheck-suppress unusedFunction
-    virtual void handleMessage(QtMsgType type, const QString &description,
-                               const QUrl &identifier, const QSourceLocation &sourceLocation) override;
+    void handleMessage(QtMsgType type, const QString &description,
+                       const QUrl &identifier, const QSourceLocation &sourceLocation) override;
 private:
     QtMsgType       m_messageType{};
     QString         m_description{};
     QSourceLocation m_sourceLocation{};
+    bool            m_hasError{false};
 };
 
 #else
@@ -61,16 +64,16 @@ XERCES_CPP_NAMESPACE_USE
 class VParserErrorHandler : public ErrorHandler
 {
 public:
-    QString StatusMessage() const;
-    XMLFileLoc Line() const;
-    XMLFileLoc Column() const;
+    auto StatusMessage() const -> QString;
+    auto Line() const -> XMLFileLoc;
+    auto Column() const -> XMLFileLoc;
 
     void warning(const SAXParseException& ex) override;
     void error(const SAXParseException& ex) override;
     void fatalError(const SAXParseException& ex) override;
     void resetErrors() override;
 
-    bool HasError() const;
+    auto HasError() const -> bool;
 
 private:
     XMLFileLoc m_line{0};

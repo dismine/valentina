@@ -118,6 +118,20 @@ auto VLayoutConverter::GetFormatVersionStr() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VLayoutConverter::XSDSchemas() -> QHash<unsigned int, QString>
+{
+    static auto schemas = QHash <unsigned, QString>
+    {
+        std::make_pair(FormatVersion(0, 1, 0), QStringLiteral("://schema/layout/v0.1.0.xsd")),
+        std::make_pair(FormatVersion(0, 1, 1), QStringLiteral("://schema/layout/v0.1.1.xsd")),
+        std::make_pair(FormatVersion(0, 1, 2), QStringLiteral("://schema/layout/v0.1.2.xsd")),
+        std::make_pair(FormatVersion(0, 1, 3), CurrentSchema),
+    };
+
+    return schemas;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VLayoutConverter::SetVersion(const QString &version)
 {
     ValidateVersion(version);
@@ -131,25 +145,6 @@ void VLayoutConverter::SetVersion(const QString &version)
     {
         throw VException(tr("Could not change version."));
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VLayoutConverter::XSDSchema(unsigned ver) const -> QString
-{
-    QHash <unsigned, QString> schemas =
-    {
-        std::make_pair(FormatVersion(0, 1, 0), QStringLiteral("://schema/layout/v0.1.0.xsd")),
-        std::make_pair(FormatVersion(0, 1, 1), QStringLiteral("://schema/layout/v0.1.1.xsd")),
-        std::make_pair(FormatVersion(0, 1, 2), QStringLiteral("://schema/layout/v0.1.2.xsd")),
-        std::make_pair(FormatVersion(0, 1, 3), CurrentSchema),
-    };
-
-    if (schemas.contains(ver))
-    {
-        return schemas.value(ver);
-    }
-
-    InvalidVersion(ver);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -181,6 +176,12 @@ void VLayoutConverter::DowngradeToCurrentMaxVersion()
 auto VLayoutConverter::IsReadOnly() const -> bool
 {
     return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutConverter::Schemas() const -> QHash<unsigned int, QString>
+{
+    return XSDSchemas();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -181,25 +181,9 @@ VPatternConverter::VPatternConverter(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPatternConverter::Save()
+auto VPatternConverter::XSDSchemas() -> QHash<unsigned int, QString>
 {
-    try
-    {
-        TestUniqueId();
-    }
-    catch (const VExceptionWrongId &e)
-    {
-        Q_UNUSED(e)
-        throw VException(tr("Error no unique id."));
-    }
-
-    VAbstractConverter::Save();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VPatternConverter::XSDSchema(unsigned ver) const -> QString
-{
-    QHash <unsigned, QString> schemas =
+    static const auto schemas = QHash <unsigned, QString>
     {
         std::make_pair(FormatVersion(0, 1, 4), QStringLiteral("://schema/pattern/v0.1.4.xsd")),
         std::make_pair(FormatVersion(0, 2, 0), QStringLiteral("://schema/pattern/v0.2.0.xsd")),
@@ -271,12 +255,23 @@ auto VPatternConverter::XSDSchema(unsigned ver) const -> QString
         std::make_pair(FormatVersion(0, 9, 2), CurrentSchema)
     };
 
-    if (schemas.contains(ver))
+    return schemas;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::Save()
+{
+    try
     {
-        return schemas.value(ver);
+        TestUniqueId();
+    }
+    catch (const VExceptionWrongId &e)
+    {
+        Q_UNUSED(e)
+        throw VException(tr("Error no unique id."));
     }
 
-    InvalidVersion(ver);
+    VAbstractConverter::Save();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -412,6 +407,12 @@ bool VPatternConverter::IsReadOnly() const
     }
 
     return GetParametrBool(pattern, *strReadOnly, falseStr);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPatternConverter::Schemas() const -> QHash<unsigned int, QString>
+{
+    return XSDSchemas();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

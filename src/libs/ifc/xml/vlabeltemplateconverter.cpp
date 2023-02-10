@@ -52,6 +52,17 @@ VLabelTemplateConverter::VLabelTemplateConverter(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VLabelTemplateConverter::XSDSchemas() -> QHash<unsigned int, QString>
+{
+    static const auto schemas = QHash <unsigned, QString>
+    {
+        std::make_pair(FormatVersion(1, 0, 0), CurrentSchema)
+    };
+
+    return schemas;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 unsigned VLabelTemplateConverter::MinVer() const
 {
     return LabelTemplateMinVer;
@@ -76,20 +87,6 @@ QString VLabelTemplateConverter::MaxVerStr() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VLabelTemplateConverter::XSDSchema(unsigned ver) const
-{
-    switch (ver)
-    {
-        case (FormatVersion(1, 0, 0)):
-            return CurrentSchema;
-        default:
-            InvalidVersion(ver);
-            break;
-    }
-    return QString();//unreachable code
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VLabelTemplateConverter::ApplyPatches()
 {
     switch (m_ver)
@@ -107,4 +104,10 @@ void VLabelTemplateConverter::DowngradeToCurrentMaxVersion()
 {
     SetVersion(LabelTemplateMaxVerStr);
     Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLabelTemplateConverter::Schemas() const -> QHash<unsigned int, QString>
+{
+    return XSDSchemas();
 }

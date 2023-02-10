@@ -29,6 +29,7 @@
 #define VLAYOUTCONVERTER_H
 
 #include "vabstractconverter.h"
+#include "../vmisc/projectversion.h"
 
 class QDomElement;
 class QString;
@@ -47,6 +48,8 @@ public:
     static Q_DECL_CONSTEXPR const unsigned LayoutMinVer = FormatVersion(0, 1, 0);
     static Q_DECL_CONSTEXPR const unsigned LayoutMaxVer = FormatVersion(0, 1, 3);
 
+    static auto XSDSchemas() -> QHash <unsigned, QString>;
+
 protected:
     void SetVersion(const QString &version) override;
 
@@ -56,11 +59,12 @@ protected:
     auto MinVerStr() const -> QString override;
     auto MaxVerStr() const -> QString override;
 
-    auto XSDSchema(unsigned ver) const -> QString override;
     void ApplyPatches() override;
     void DowngradeToCurrentMaxVersion() override;
 
     auto IsReadOnly() const -> bool override;
+
+    auto Schemas() const -> QHash <unsigned, QString> override;
 
     void ConvertPiecesToV0_1_3();
     void ConvertPathToV0_1_3(QDomElement &node);

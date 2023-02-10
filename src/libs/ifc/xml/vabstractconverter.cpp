@@ -240,12 +240,11 @@ void VAbstractConverter::ValidateXML(const QString &schema) const
         throw VException(errorMsg);
     }
 
-    VParserErrorHandler messageHandler;
     QXmlSchema sch;
-    sch.setMessageHandler(&messageHandler);
+    sch.setMessageHandler(&parserErrorHandler);
     if (sch.load(&fileSchema, QUrl::fromLocalFile(fileSchema.fileName()))==false)
     {
-        VException e(messageHandler.StatusMessage());
+        VException e(parserErrorHandler.StatusMessage());
         e.AddMoreInformation(tr("Could not load schema file '%1'.").arg(fileSchema.fileName()));
         throw e;
     }
@@ -267,9 +266,9 @@ void VAbstractConverter::ValidateXML(const QString &schema) const
 
     if (errorOccurred)
     {
-        VException e(messageHandler.StatusMessage());
-        e.AddMoreInformation(tr("Validation error file %3 in line %1 column %2").arg(messageHandler.Line())
-                             .arg(messageHandler.Column()).arg(m_originalFileName));
+        VException e(parserErrorHandler.StatusMessage());
+        e.AddMoreInformation(tr("Validation error file %3 in line %1 column %2").arg(parserErrorHandler.Line())
+                             .arg(parserErrorHandler.Column()).arg(m_originalFileName));
         throw e;
     }
 #endif // QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -359,4 +358,16 @@ void VAbstractConverter::SetVersion(const QString &version)
         VException e(tr("Could not change version."));
         throw e;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VAbstractConverter::XSDSchema(unsigned int ver) const
+{
+    const QHash <unsigned, QString> schemas = Schemas();
+    if (schemas.contains(ver))
+    {
+        return schemas.value(ver);
+    }
+
+    InvalidVersion(ver);
 }

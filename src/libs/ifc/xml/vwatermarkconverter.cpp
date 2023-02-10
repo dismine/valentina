@@ -53,6 +53,18 @@ VWatermarkConverter::VWatermarkConverter(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VWatermarkConverter::XSDSchemas() -> QHash<unsigned int, QString>
+{
+    static auto schemas = QHash <unsigned, QString>
+    {
+        std::make_pair(FormatVersion(1, 0, 0), QStringLiteral("://schema/watermark/v1.0.0.xsd")),
+        std::make_pair(FormatVersion(1, 1, 0), CurrentSchema)
+    };
+
+    return schemas;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 unsigned VWatermarkConverter::MinVer() const
 {
     return WatermarkMinVer;
@@ -77,23 +89,6 @@ QString VWatermarkConverter::MaxVerStr() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VWatermarkConverter::XSDSchema(unsigned ver) const
-{
-    QHash <unsigned, QString> schemas =
-    {
-        std::make_pair(FormatVersion(1, 0, 0), QStringLiteral("://schema/watermark/v1.0.0.xsd")),
-        std::make_pair(FormatVersion(1, 1, 0), CurrentSchema)
-    };
-
-    if (schemas.contains(ver))
-    {
-        return schemas.value(ver);
-    }
-
-    InvalidVersion(ver);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VWatermarkConverter::ApplyPatches()
 {
     switch (m_ver)
@@ -114,6 +109,12 @@ void VWatermarkConverter::DowngradeToCurrentMaxVersion()
 {
     SetVersion(WatermarkMaxVerStr);
     Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VWatermarkConverter::Schemas() const -> QHash<unsigned int, QString>
+{
+    return XSDSchemas();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

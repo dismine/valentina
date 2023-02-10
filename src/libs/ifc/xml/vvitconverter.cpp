@@ -76,9 +76,9 @@ VVITConverter::VVITConverter(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VVITConverter::XSDSchema(unsigned ver) const
+auto VVITConverter::XSDSchemas() -> QHash<unsigned int, QString>
 {
-    QHash <unsigned, QString> schemas =
+    static auto schemas = QHash <unsigned, QString>
     {
         std::make_pair(FormatVersion(0, 2, 0), QStringLiteral("://schema/individual_measurements/v0.2.0.xsd")),
         std::make_pair(FormatVersion(0, 3, 0), QStringLiteral("://schema/individual_measurements/v0.3.0.xsd")),
@@ -91,14 +91,7 @@ QString VVITConverter::XSDSchema(unsigned ver) const
         std::make_pair(FormatVersion(0, 5, 2), CurrentSchema),
     };
 
-    if (schemas.contains(ver))
-    {
-        return schemas.value(ver);
-    }
-    else
-    {
-        InvalidVersion(ver);
-    }
+    return schemas;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -154,6 +147,12 @@ bool VVITConverter::IsReadOnly() const
     // But don't forget to keep all versions of attribute until we support that format versions
 
     return UniqueTagText(*strTagRead_Only, falseStr) == trueStr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VVITConverter::Schemas() const -> QHash<unsigned int, QString>
+{
+    return XSDSchemas();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

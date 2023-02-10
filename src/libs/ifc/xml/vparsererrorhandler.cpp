@@ -29,7 +29,7 @@
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 //---------------------------------------------------------------------------------------------------------------------
-QString VParserErrorHandler::StatusMessage() const
+auto VParserErrorHandler::StatusMessage() const -> QString
 {
     QTextDocument doc;
     doc.setHtml(m_description);
@@ -37,15 +37,21 @@ QString VParserErrorHandler::StatusMessage() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qint64 VParserErrorHandler::Line() const
+auto VParserErrorHandler::Line() const -> qint64
 {
     return m_sourceLocation.line();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qint64 VParserErrorHandler::Column() const
+auto VParserErrorHandler::Column() const -> qint64
 {
     return m_sourceLocation.column();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VParserErrorHandler::HasError() const -> bool
+{
+    return m_hasError;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -59,6 +65,7 @@ void VParserErrorHandler::handleMessage(QtMsgType type, const QString &descripti
     m_messageType = type;
     m_description = description;
     m_sourceLocation = sourceLocation;
+    m_hasError = true;
 }
 
 #else

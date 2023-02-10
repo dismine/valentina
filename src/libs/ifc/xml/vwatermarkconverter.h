@@ -29,6 +29,7 @@
 #define VWATERMARKCONVERTER_H
 
 #include "vabstractconverter.h"
+#include "../vmisc/projectversion.h"
 
 class VWatermarkConverter final : public VAbstractConverter
 {
@@ -41,6 +42,8 @@ public:
     static Q_DECL_CONSTEXPR const unsigned WatermarkMinVer = FormatVersion(1, 0, 0);
     static Q_DECL_CONSTEXPR const unsigned WatermarkMaxVer = FormatVersion(1, 1, 0);
 
+    static auto XSDSchemas() -> QHash <unsigned, QString>;
+
 protected:
     virtual unsigned MinVer() const override;
     virtual unsigned MaxVer() const override;
@@ -48,11 +51,12 @@ protected:
     virtual QString MinVerStr() const override;
     virtual QString MaxVerStr() const override;
 
-    virtual QString XSDSchema(unsigned ver) const override;
-    virtual void    ApplyPatches() override;
-    virtual void    DowngradeToCurrentMaxVersion() override;
+    virtual void ApplyPatches() override;
+    virtual void DowngradeToCurrentMaxVersion() override;
 
     virtual bool IsReadOnly() const override {return false;}
+
+    auto Schemas() const -> QHash <unsigned, QString> override;
 
 private:
     Q_DISABLE_COPY_MOVE(VWatermarkConverter) // NOLINT
