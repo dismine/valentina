@@ -125,4 +125,9 @@ using vsizetype = qsizetype;
 using vsizetype = int;
 #endif
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+class QTextCodec;
+using VTextCodec = QTextCodec;
+#endif
+
 #endif // DEFGLOBAL_H

@@ -69,7 +69,11 @@ QChar VPELocaleSign0(const QLocale &locale)
         return sign.front();
     }
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     return {'0'};
+#else
+    return QChar('0');
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -81,7 +85,11 @@ QChar VPELocaleSign1(const QLocale &locale)
         return sign.front();
     }
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     return {'1'};
+#else
+    return QChar('1');
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -93,7 +101,11 @@ QChar VPELocaleSign2(const QLocale &locale)
         return sign.front();
     }
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     return {'2'};
+#else
+    return QChar('2');
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -105,7 +117,11 @@ QChar VPELocaleSign3(const QLocale &locale)
         return sign.front();
     }
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     return {'3'};
+#else
+    return QChar('3');
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -117,7 +133,11 @@ QChar VPELocaleSign4(const QLocale &locale)
         return sign.front();
     }
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     return {'4'};
+#else
+    return QChar('4');
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -129,7 +149,11 @@ QChar VPELocaleSign5(const QLocale &locale)
         return sign.front();
     }
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     return {'5'};
+#else
+    return QChar('5');
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -141,7 +165,11 @@ QChar VPELocaleSign6(const QLocale &locale)
         return sign.front();
     }
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     return {'6'};
+#else
+    return QChar('6');
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -153,7 +181,11 @@ QChar VPELocaleSign7(const QLocale &locale)
         return sign.front();
     }
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     return {'7'};
+#else
+    return QChar('7');
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -165,7 +197,11 @@ QChar VPELocaleSign8(const QLocale &locale)
         return sign.front();
     }
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     return {'8'};
+#else
+    return QChar('8');
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -177,7 +213,11 @@ QChar VPELocaleSign9(const QLocale &locale)
         return sign.front();
     }
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     return {'9'};
+#else
+    return QChar('9');
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------

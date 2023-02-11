@@ -39,7 +39,13 @@
 #include <QWidget>
 #include <QStandardPaths>
 
-#include "../vmisc/compatibility.h"
+#include "compatibility.h"
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include "../vmisc/vtextcodec.h"
+#else
+#include <QTextCodec>
+#endif
 
 #ifdef Q_OS_UNIX
 #  include <unistd.h>
@@ -143,6 +149,19 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
 #endif
 
     connect(this, &QApplication::aboutToQuit, this, &VAbstractApplication::AboutToQuit);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VAbstractApplication::~VAbstractApplication()
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    QHashIterator<QStringConverter::Encoding, VTextCodec *> i(m_codecs);
+    while (i.hasNext())
+    {
+        i.next();
+        delete i.value();
+    }
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -359,6 +378,28 @@ QFileDialog::Options VAbstractApplication::NativeFileDialog(QFileDialog::Options
 
     return options;
 }
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+//---------------------------------------------------------------------------------------------------------------------
+VTextCodec *VAbstractApplication::TextCodecCache(QStringConverter::Encoding encoding) const
+{
+    if (m_codecs.contains(encoding))
+    {
+        return m_codecs.value(encoding);
+    }
+
+    return nullptr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractApplication::CacheTextCodec(QStringConverter::Encoding encoding, VTextCodec *codec)
+{
+    if (not m_codecs.contains(encoding))
+    {
+        m_codecs.insert(encoding, codec);
+    }
+}
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractApplication::CheckSystemLocale()

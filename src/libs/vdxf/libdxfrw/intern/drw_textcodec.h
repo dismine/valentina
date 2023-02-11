@@ -4,9 +4,13 @@
 #include <string>
 #include <QtGlobal>
 #include "../drw_base.h"
-#include "../vmisc/defglobal.h"
 
-class QTextCodec;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include "../vmisc/vtextcodec.h"
+#else
+#include "../vmisc/defglobal.h"
+#include <QTextCodec>
+#endif
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 class QStringList;
@@ -27,7 +31,7 @@ public:
     std::string getCodePage() const {return cp;}
 
     static QMap<QString, QStringList> DXFCodePageMap();
-    static QTextCodec* CodecForName(const QString &name);
+    static VTextCodec* CodecForName(const QString &name);
 
 private:
     static auto correctCodePage(const std::string& s) -> std::string;
@@ -37,7 +41,7 @@ private:
     Q_DISABLE_COPY_MOVE(DRW_TextCodec) // NOLINT
     DRW::Version version{DRW::UNKNOWNV};
     std::string cp{};
-    QTextCodec *conv{nullptr};
+    VTextCodec *conv{nullptr};
 };
 
 #endif // DRW_TEXTCODEC_H

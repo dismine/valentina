@@ -59,6 +59,12 @@
 #include "../vmisc/dialogs/dialogselectlanguage.h"
 #include "mapplication.h" // Should be last because of definning qApp
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include "../vmisc/vtextcodec.h"
+#else
+#include <QTextCodec>
+#endif
+
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
 #include "../vmisc/backport/qscopeguard.h"
 #else
@@ -71,7 +77,6 @@
 #include <QComboBox>
 #include <QProcess>
 #include <QtNumeric>
-#include <QTextCodec>
 #include <QTimer>
 #include <chrono>
 
@@ -849,7 +854,7 @@ void TMainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int 
     }
 
     QString error;
-    csv.toCSV(fileName, error, withHeader, separator, QTextCodec::codecForMib(mib));
+    csv.toCSV(fileName, error, withHeader, separator, VTextCodec::codecForMib(mib));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1102,12 +1107,12 @@ void TMainWindow::ImportDataFromCSV()
         }
         columns->SetWithHeader(dialog.IsWithHeader());
         columns->SetSeparator(dialog.GetSeparator());
-        columns->SetCodec(QTextCodec::codecForMib(dialog.GetSelectedMib()));
+        columns->SetCodec(VTextCodec::codecForMib(dialog.GetSelectedMib()));
 
         if (columns->exec() == QDialog::Accepted)
         {
             QxtCsvModel csv(fileName, nullptr, dialog.IsWithHeader(), dialog.GetSeparator(),
-                            QTextCodec::codecForMib(dialog.GetSelectedMib()));
+                            VTextCodec::codecForMib(dialog.GetSelectedMib()));
             const QVector<int> map = columns->ColumnsMap();
 
             if (m_m->Type() == MeasurementsType::Individual)

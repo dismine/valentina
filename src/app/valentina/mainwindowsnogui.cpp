@@ -48,6 +48,12 @@
 #include "../vmisc/vvalentinasettings.h"
 #include "../vdxf/libdxfrw/drw_base.h"
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include "../vmisc/vtextcodec.h"
+#else
+#include <QTextCodec>
+#endif
+
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QGraphicsScene>
@@ -62,7 +68,6 @@
 #include <functional>
 #include <QPageSize>
 #include <QDebug>
-#include <QTextCodec>
 
 #if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
 #include <QWinTaskbarButton>
@@ -1308,7 +1313,7 @@ bool MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, boo
     }
 
     QString error;
-    const bool success = csv.toCSV(fileName, error, withHeader, separator, QTextCodec::codecForMib(mib));
+    const bool success = csv.toCSV(fileName, error, withHeader, separator, VTextCodec::codecForMib(mib));
 
     if (not success)
     {

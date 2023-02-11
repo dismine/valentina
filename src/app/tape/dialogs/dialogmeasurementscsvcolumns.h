@@ -33,7 +33,10 @@
 #include "../vformat/vdimensions.h"
 
 class QxtCsvModel;
-class QTextCodec;
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+class VTextCodec;
+#endif
 
 enum class IndividualMeasurementsColumns: qint8
 {
@@ -75,7 +78,7 @@ public:
 
     void SetWithHeader(bool withHeader);
     void SetSeparator(const QChar &separator);
-    void SetCodec(QTextCodec *codec);
+    void SetCodec(VTextCodec *codec);
 
 protected:
     void changeEvent(QEvent* event) override;
@@ -92,7 +95,7 @@ private:
     QString m_fileName;
     bool m_withHeader{false};
     QChar m_separator{','};
-    QTextCodec *m_codec{nullptr};
+    VTextCodec *m_codec{nullptr};
     QVector<int> m_columnsMap{};
     MeasurementsType m_type;
     QList<MeasurementDimension_p> m_dimensions{};
@@ -150,7 +153,7 @@ inline void DialogMeasurementsCSVColumns::SetSeparator(const QChar &separator)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline void DialogMeasurementsCSVColumns::SetCodec(QTextCodec *codec)
+inline void DialogMeasurementsCSVColumns::SetCodec(VTextCodec *codec)
 {
     m_codec = codec;
 }

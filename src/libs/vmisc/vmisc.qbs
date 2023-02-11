@@ -9,45 +9,53 @@ VLib {
     }
 
     name: "VMiscLib"
-    files: [
-        "def.cpp",
-        "testpath.cpp",
-        "vabstractvalapplication.cpp",
-        "vabstractapplication.cpp",
-        "projectversion.cpp",
-        "vcommonsettings.cpp",
-        "vvalentinasettings.cpp",
-        "commandoptions.cpp",
-        "qxtcsvmodel.cpp",
-        "vtablesearch.cpp",
-        "literals.cpp",
-        "vmodifierkey.cpp",
-        "compatibility.h",
-        "lambdaconstants.h",
-        "def.h",
-        "testpath.h",
-        "vabstractvalapplication.h",
-        "vmath.h",
-        "vabstractapplication.h",
-        "projectversion.h",
-        "vcommonsettings.h",
-        "vvalentinasettings.h",
-        "debugbreak.h",
-        "vlockguard.h",
-        "vsysexits.h",
-        "commandoptions.h",
-        "qxtcsvmodel.h",
-        "vtablesearch.h",
-        "diagnostic.h",
-        "customevents.h",
-        "defglobal.h",
-        "testvapplication.h",
-        "literals.h",
-        "qt_dispatch/qt_dispatch.h",
-        "vdatastreamenum.h",
-        "vmodifierkey.h",
-        "typedef.h",
-    ]
+    files: {
+        var files = [
+            "def.cpp",
+            "testpath.cpp",
+            "vabstractvalapplication.cpp",
+            "vabstractapplication.cpp",
+            "projectversion.cpp",
+            "vcommonsettings.cpp",
+            "vvalentinasettings.cpp",
+            "commandoptions.cpp",
+            "qxtcsvmodel.cpp",
+            "vtablesearch.cpp",
+            "literals.cpp",
+            "vmodifierkey.cpp",
+            "compatibility.h",
+            "lambdaconstants.h",
+            "def.h",
+            "testpath.h",
+            "vabstractvalapplication.h",
+            "vmath.h",
+            "vabstractapplication.h",
+            "projectversion.h",
+            "vcommonsettings.h",
+            "vvalentinasettings.h",
+            "debugbreak.h",
+            "vlockguard.h",
+            "vsysexits.h",
+            "commandoptions.h",
+            "qxtcsvmodel.h",
+            "vtablesearch.h",
+            "diagnostic.h",
+            "customevents.h",
+            "defglobal.h",
+            "testvapplication.h",
+            "literals.h",
+            "qt_dispatch/qt_dispatch.h",
+            "vdatastreamenum.h",
+            "vmodifierkey.h",
+            "typedef.h",
+        ]
+
+        if (Utilities.versionCompare(Qt.core.version, "6") >= 0) {
+            files.push("vtextcodec.cpp", "vtextcodec.h");
+        }
+
+        return files;
+    }
 
     Group {
         name: "AppImage"

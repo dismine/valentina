@@ -110,7 +110,6 @@ typedef float dfloat32;                 /* 32 bit floating point */
 typedef double ddouble64;               /* 64 bit floating point */
 typedef long double ddouble80;          /* 80 bit floating point */
 
-
 namespace DRW {
 
 //! Version numbers for the DXF Format.

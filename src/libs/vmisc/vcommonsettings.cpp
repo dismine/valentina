@@ -35,13 +35,19 @@
 #include <QMessageLogger>
 #include <QVariant>
 #include <QtDebug>
-#include <QTextCodec>
 #include <QFont>
 #include <QGlobalStatic>
 #include <QMarginsF>
 #include <QColor>
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include "vtextcodec.h"
+#else
+#include <QTextCodec>
+#endif
+
 #include "../vmisc/def.h"
+#include "../vmisc/defglobal.h"
 #include "../vmisc/compatibility.h"
 #include "../vmisc/literals.h"
 
@@ -1009,7 +1015,7 @@ auto VCommonSettings::GetCSVCodec() const -> int
 //---------------------------------------------------------------------------------------------------------------------
 auto VCommonSettings::GetDefCSVCodec() -> int
 {
-    return QTextCodec::codecForLocale()->mibEnum();
+    return VTextCodec::codecForLocale()->mibEnum();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

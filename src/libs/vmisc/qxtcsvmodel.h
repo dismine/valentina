@@ -49,7 +49,10 @@
 #include "def.h"
 
 class QxtCsvModelPrivate;
-class QTextCodec;
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+class VTextCodec;
+#endif
 
 class QxtCsvModel final : public QAbstractTableModel
 {
@@ -57,9 +60,9 @@ class QxtCsvModel final : public QAbstractTableModel
 public:
     explicit QxtCsvModel(QObject *parent = nullptr);
     explicit QxtCsvModel(QIODevice *file, QObject *parent = nullptr, bool withHeader = false, QChar separator = ',',
-                         QTextCodec *codec = nullptr);
+                         VTextCodec *codec = nullptr);
     explicit QxtCsvModel(const QString &filename, QObject *parent = nullptr, bool withHeader = false,
-                         QChar separator = ',', QTextCodec *codec = nullptr);
+                         QChar separator = ',', VTextCodec *codec = nullptr);
     virtual ~QxtCsvModel() = default;
 
     virtual int      rowCount(const QModelIndex& parent = QModelIndex()) const override;
@@ -91,14 +94,14 @@ public:
     bool removeColumn(int col, const QModelIndex& parent = QModelIndex());
     virtual bool removeColumns(int col, int count, const QModelIndex& parent = QModelIndex()) override;
 
-    void setSource(QIODevice *file, bool withHeader = false, QChar separator = ',', QTextCodec* codec = nullptr);
+    void setSource(QIODevice *file, bool withHeader = false, QChar separator = ',', VTextCodec* codec = nullptr);
     void setSource(const QString &filename, bool withHeader = false, QChar separator = ',',
-                   QTextCodec* codec = nullptr);
+                   VTextCodec* codec = nullptr);
 
     bool toCSV(QIODevice *file, QString &error, bool withHeader = false, QChar separator = ',',
-               QTextCodec* codec = nullptr) const;
+               VTextCodec* codec = nullptr) const;
     bool toCSV(const QString &filename, QString &error, bool withHeader = false, QChar separator = ',',
-               QTextCodec* codec = nullptr) const;
+               VTextCodec* codec = nullptr) const;
 
     enum QuoteOption { NoQuotes = 0,
                        SingleQuote = 1,

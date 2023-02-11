@@ -49,10 +49,15 @@
 #include "../ifc/xml/vvitconverter.h"
 #include "../vwidgets/vwidgetpopup.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-
 #include "../vtools/undocommands/undogroup.h"
 #include "../vformat/vpatternrecipe.h"
 #include "../vlayout/dialogs/watermarkwindow.h"
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include "../vmisc/vtextcodec.h"
+#else
+#include <QTextCodec>
+#endif
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
@@ -201,7 +206,6 @@
 #include <thread>
 #include <QFileSystemWatcher>
 #include <QComboBox>
-#include <QTextCodec>
 #include <QDoubleSpinBox>
 #include <QProgressBar>
 #include <QGlobalStatic>
@@ -1924,7 +1928,7 @@ void MainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int m
     SavePreviewCalculation(true);
 
     QString error;
-    csv.toCSV(fileName, error, withHeader, separator, QTextCodec::codecForMib(mib));
+    csv.toCSV(fileName, error, withHeader, separator, VTextCodec::codecForMib(mib));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -6735,10 +6739,10 @@ auto MainWindow::DoFMExport(const VCommandLinePtr &expParams) -> bool
     }
 
     const QString codecName = expParams->OptCSVCodecName();
-    int mib = QTextCodec::codecForLocale()->mibEnum();
+    int mib = VTextCodec::codecForLocale()->mibEnum();
     if (not codecName.isEmpty())
     {
-        if (QTextCodec *codec = QTextCodec::codecForName(codecName.toLatin1()))
+        if (VTextCodec *codec = VTextCodec::codecForName(codecName.toLatin1()))
         {
             mib = codec->mibEnum();
         }

@@ -4,46 +4,16 @@
 #include <algorithm>
 #include <cstring>
 #include <QString>
-#include <QTextCodec>
 #include <QDebug>
 #include "../drw_base.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../ifc/exception/vexception.h"
 
-namespace
-{
-QMap<QString, QStringList> QtCodecs()
-{
-    return QMap<QString, QStringList>
-    {
-        {"ANSI_874", {"ANSI_874", "CP874", "windows-874", "MS874", "x-windows-874", "TIS-620", "IBM1162",
-                "x-IBM874"}}, // Latin/Thai
-        {"ANSI_932", {"ANSI_932", "CP932", "SHIFT-JIS", "SHIFT_JIS", "CSSHIFTJIS", "CSWINDOWS31J", "MS_KANJI",
-                "X-MS-CP932", "X-SJIS", "EUCJP", "EUC-JP", "CSEUCPKDFMTJAPANESE", "X-EUC", "X-EUC-JP", "IBM-943",
-                "JIS7"}}, // Japanese
-        {"ANSI_936", {"ANSI_936", "GBK", "CP936", "MS936", "Windows-936", "GB2312",
-                "CHINESE"}}, // Chinese PRC GBK (XGB) simplified
-        {"ANSI_949", {"ANSI_949", "Windows-949", "MS949", "CP949"}}, // Korean
-        {"ANSI_950", {"ANSI_950", "BIG5", "windows-950-2000", "csBig5", "windows-950", "x-windows-950", "x-big5",
-                "ms950"}}, // Chinese Big5 (Taiwan, Hong Kong SAR)
-        {"ANSI_1250", {"ANSI_1250", "CP1250", "windows-1250", "ibm-1250_P100-1995",
-                "ibm-1250"}}, //Central Europe and Eastern Europe
-        {"ANSI_1251", {"ANSI_1251", "CP1251", "windows-1251", "ANSI1251", "ibm-5347_P100-1998",
-                "ibm-5347"}}, // Cyrillic script
-        {"ANSI_1252", {"ANSI_1252", "CP1252", "windows-1252", "LATIN1", "ISO-8859-1", "CP819", "CSISO", "IBM819",
-                "ISO_8859-1", "APPLE ROMAN", "ISO8859-1", "ISO8859-15", "ISO-IR-100", "L1",
-                "IBM 850", "850"}}, // Western Europe
-        {"ANSI_1253", {"ANSI_1253", "CP1253", "windows-1253"}}, // Greek
-        {"ANSI_1254", {"ANSI_1254", "CP1254", "windows-1254"}}, // Turkish
-        {"ANSI_1255", {"ANSI_1255", "CP1255", "windows-1255"}}, // Hebrew
-        {"ANSI_1256", {"ANSI_1256", "CP1256", "windows-1256", "x-windows-1256S"}}, // Arabic
-        {"ANSI_1257", {"ANSI_1257", "CP1257", "windows-1257"}}, // Baltic
-        {"ANSI_1258", {"ANSI_1258", "CP1258", "windows-1258"}}, // Vietnamese
-        {"UTF-8", {"UTF-8", "UTF8", "UTF8-BIT"}},
-        {"UTF-16", {"UTF-16", "UTF16", "UTF16-BIT"}},
-    };
-}
-}  // namespace
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include "../vmisc/vtextcodec.h"
+#else
+#include <QTextCodec>
+#endif
 
 DRW_TextCodec::DRW_TextCodec()
     : version(DRW::AC1021)
@@ -123,29 +93,22 @@ void DRW_TextCodec::setCodePage(const std::string &c, bool dxfFormat){
     if (version < DRW::AC1021)
     {
         if (cp == "UTF-8")
-        { //DXF older than 2007 are write in win codepages
+        { // DXF older than 2007 are write in win codepages
             cp = "ANSI_1252";
         }
         conv = DRW_TextCodec::CodecForName(QString::fromStdString(cp));
     }
     else
     {
-        if (dxfFormat)
-        {
-            conv = DRW_TextCodec::CodecForName(QString::fromStdString("UTF-8"));
-        }
-        else
-        {
-            conv = DRW_TextCodec::CodecForName(QString::fromStdString("UTF-16"));
-        }
+        conv = DRW_TextCodec::CodecForName(dxfFormat ? QStringLiteral("UTF-8") : QStringLiteral("UTF-16"));
     }
 
     if (conv == nullptr)
     {
         const QString errorMsg = QCoreApplication::translate("DRW_TextCodec", "No available codec for code page '%1'.")
                 .arg(cp.c_str());
-        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg) : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
 
         if (version < DRW::AC1021 && cp == "UTF-8")
         {
@@ -157,7 +120,7 @@ void DRW_TextCodec::setCodePage(const std::string &c, bool dxfFormat){
 
 QMap<QString, QStringList> DRW_TextCodec::DXFCodePageMap()
 {
-    return QMap<QString, QStringList>
+    static auto map = QMap<QString, QStringList>
     {
         {"ANSI_874", {"ANSI_874", "CP874", "ISO8859-11", "TIS-620"}}, // Latin/Thai
         {"ANSI_932", {"ANSI_932", "SHIFT-JIS", "SHIFT_JIS", "CSSHIFTJIS", "CSWINDOWS31J", "MS_KANJI", "X-MS-CP932",
@@ -170,8 +133,8 @@ QMap<QString, QStringList> DRW_TextCodec::DXFCodePageMap()
                 "BIG5-HKSCS"}}, // Chinese Big5 (Taiwan, Hong Kong SAR)
         {"ANSI_1250", {"ANSI_1250", "CP1250", "ISO8859-2"}}, //Central Europe and Eastern Europe
         {"ANSI_1251", {"ANSI_1251", "CP1251", "ISO8859-5", "KOI8-R", "KOI8-U", "IBM 866"}}, // Cyrillic script
-        {"ANSI_1252", {"ANSI_1252", "CP1252", "LATIN1", "ISO-8859-1", "CP819", "CSISO", "IBM819", "ISO_8859-1",
-                "APPLE ROMAN", "ISO8859-1", "ISO8859-15", "ISO-IR-100", "L1", "IBM 850"}}, // Western Europe
+        {"ANSI_1252", {"ANSI_1252", "CP1252", "LATIN1", "ISO-8859-1", "CP819", "CSISO", "IBM819", "L1",
+                "ISO_8859-1", "APPLE ROMAN", "ISO8859-1", "ISO8859-15", "ISO-IR-100", "IBM 850"}}, // Western Europe
         {"ANSI_1253", {"ANSI_1253", "CP1253", "ISO8859-7"}}, // Greek
         {"ANSI_1254", {"ANSI_1254", "CP1254", "ISO8859-9", "iso8859-3"}}, // Turkish
         {"ANSI_1255", {"ANSI_1255", "CP1255", "ISO8859-8"}}, // Hebrew
@@ -181,17 +144,19 @@ QMap<QString, QStringList> DRW_TextCodec::DXFCodePageMap()
         {"UTF-8", {"UTF-8", "UTF8", "UTF8-BIT"}},
         {"UTF-16", {"UTF-16", "UTF16", "UTF16-BIT"}},
     };
+
+    return map;
 }
 
-QTextCodec *DRW_TextCodec::CodecForName(const QString &name)
+VTextCodec *DRW_TextCodec::CodecForName(const QString &name)
 {
-    QMap<QString, QStringList> knownCodecs = QtCodecs();
+    QMap<QString, QStringList> knownCodecs = DXFCodePageMap();
     if (knownCodecs.contains(name))
     {
         QStringList aliases = knownCodecs.value(name);
         for (auto &alias : aliases)
         {
-            if (QTextCodec *codec = QTextCodec::codecForName(alias.toLatin1()))
+            if (VTextCodec *codec = VTextCodec::codecForName(alias.toLatin1()))
             {
                 return codec;
             }

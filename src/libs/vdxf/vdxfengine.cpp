@@ -41,11 +41,16 @@
 #include <QPainterPath>
 #include <QPen>
 #include <QPolygonF>
-#include <QTextCodec>
 #include <QTextItem>
 #include <Qt>
 #include <QtDebug>
 #include <QtMath>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include "../vmisc/vtextcodec.h"
+#else
+#include <QTextCodec>
+#endif
 
 #include "../vmisc/def.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
@@ -1251,7 +1256,7 @@ auto VDxfEngine::AAMAPoint(const QPointF &pos, const UTF8STRING &layer) const ->
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VDxfEngine::FromUnicodeToCodec(const QString &str, QTextCodec *codec) -> std::string
+auto VDxfEngine::FromUnicodeToCodec(const QString &str, VTextCodec *codec) -> std::string
 {
     return codec->fromUnicode(str).toStdString();
 }

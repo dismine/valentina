@@ -27,13 +27,18 @@
  *************************************************************************/
 #include "tst_dxf.h"
 
-#include <QTextCodec>
 #include <QtTest>
 
 #include "../vmisc/def.h"
 #include "../vmisc/compatibility.h"
 #include "../vdxf/dxfdef.h"
 #include "../vdxf/libdxfrw/intern/drw_textcodec.h"
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include "../vmisc/vtextcodec.h"
+#else
+#include <QTextCodec>
+#endif
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
 #include "../vmisc/backport/text.h"
@@ -44,7 +49,7 @@ namespace
 //---------------------------------------------------------------------------------------------------------------------
 QStringList AvailableCodecs()
 {
-    QList<QByteArray> codecs = QTextCodec::availableCodecs();
+    QList<QByteArray> codecs = VTextCodec::availableCodecs();
     QSet<QString> uniqueNames;
     for(auto &codec: codecs)
     {
@@ -53,7 +58,7 @@ QStringList AvailableCodecs()
 
     return ConvertToList(uniqueNames);
 }
-}
+}  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_DXF::TST_DXF(QObject *parent)
@@ -113,7 +118,7 @@ void TST_DXF::TestCodecPage()
 
     QVERIFY (not dxfCodePage.isEmpty());
 
-    QTextCodec *codec = DRW_TextCodec::CodecForName(dxfCodePage);
+    VTextCodec *codec = DRW_TextCodec::CodecForName(dxfCodePage);
 
     QVERIFY2(codec != nullptr, qUtf8Printable(QStringLiteral("No codec for dxf codepage %1 found.")
                                               .arg(dxfCodePage)));
