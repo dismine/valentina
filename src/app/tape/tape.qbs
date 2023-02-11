@@ -15,11 +15,6 @@ VToolApp {
     Depends { name: "ebr" }
     Depends { name: "multibundle"; }
 
-    Depends {
-        name: "Qt.core5compat";
-        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0
-    }
-
     name: "Tape"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "Tape" : "tape"
     targetName: buildconfig.appTarget

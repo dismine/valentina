@@ -10,11 +10,6 @@ VLib {
     }
 
     Depends {
-        name: "Qt.core5compat";
-        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0
-    }
-
-    Depends {
         name: "xerces-c"
         condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 && qbs.targetOS.contains("unix")
                    && !qbs.targetOS.contains("macos")

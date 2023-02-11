@@ -12,11 +12,6 @@ VTestApp {
     Depends { name: "ebr" }
 
     Depends {
-        name: "Qt.core5compat";
-        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0
-    }
-
-    Depends {
         name: "Qt.xmlpatterns"
         condition: Utilities.versionCompare(Qt.core.version, "6") < 0
     }

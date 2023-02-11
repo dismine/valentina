@@ -20,11 +20,6 @@ VToolApp {
     }
 
     Depends {
-        name: "Qt.core5compat";
-        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0
-    }
-
-    Depends {
         name: "Qt.winextras"
         condition: qbs.targetOS.contains("windows")
         versionAtLeast: "5.6"

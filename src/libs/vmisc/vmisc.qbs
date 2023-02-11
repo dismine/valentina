@@ -3,11 +3,6 @@ import qbs.Utilities
 VLib {
     Depends { name: "Qt"; submodules: ["core", "printsupport"] }
 
-    Depends {
-        name: "Qt.core5compat";
-        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0
-    }
-
     name: "VMiscLib"
     files: {
         var files = [
