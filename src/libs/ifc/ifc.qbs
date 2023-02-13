@@ -11,8 +11,17 @@ VLib {
 
     Depends {
         name: "xerces-c"
-        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 && qbs.targetOS.contains("unix")
-                   && !qbs.targetOS.contains("macos")
+        condition: !buildconfig.useConanPackages
+    }
+
+    Depends {
+        name: "conan.XercesC"
+        condition: buildconfig.useConanPackages
+    }
+
+    Properties {
+        condition: buildconfig.useConan && (qbs.targetOS.contains("macos") || qbs.targetOS.contains("windows"))
+        conan.XercesC.installLib: true
     }
 
     name: "IFCLib"
@@ -96,6 +105,7 @@ VLib {
         Depends { name: "cpp" }
         Depends { name: "Qt"; submodules: ["xml"] }
         Depends { name: "VMiscLib" }
+        Depends { name: "conan.XercesC"; condition: buildconfig.useConanPackages }
         cpp.includePaths: [exportingProduct.sourceDirectory]
     }
 }
