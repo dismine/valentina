@@ -1672,7 +1672,6 @@ void VPMainWindow::ReadSettings()
     if (settings->status() == QSettings::NoError)
     {
         restoreGeometry(settings->GetGeometry());
-        restoreState(settings->GetWindowState());
         restoreState(settings->GetToolbarsState(), AppVersion());
 
         // Text under tool buton icon
@@ -1698,7 +1697,6 @@ void VPMainWindow::WriteSettings()
 {
     VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
     settings->SetGeometry(saveGeometry());
-    settings->SetWindowState(saveState());
     settings->SetToolbarsState(saveState(AppVersion()));
 
     settings->SetDockWidgetPropertiesActive(ui->dockWidgetProperties->isEnabled());

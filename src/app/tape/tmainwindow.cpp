@@ -3611,7 +3611,6 @@ void TMainWindow::ReadSettings()
     if (settings->status() == QSettings::NoError)
     {
         restoreGeometry(settings->GetGeometry());
-        restoreState(settings->GetWindowState());
         restoreState(settings->GetToolbarsState(), AppVersion());
 
         // Text under tool buton icon
@@ -3631,7 +3630,6 @@ void TMainWindow::WriteSettings()
 {
     VTapeSettings *settings = MApplication::VApp()->TapeSettings();
     settings->SetGeometry(saveGeometry());
-    settings->SetWindowState(saveState());
     settings->SetToolbarsState(saveState(AppVersion()));
 
     settings->SetTapeSearchOptionMatchCase(m_search->IsMatchCase());

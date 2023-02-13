@@ -46,10 +46,10 @@
 #include <QTextCodec>
 #endif
 
-#include "../vmisc/def.h"
-#include "../vmisc/defglobal.h"
-#include "../vmisc/compatibility.h"
-#include "../vmisc/literals.h"
+#include "def.h"
+#include "defglobal.h"
+#include "compatibility.h"
+#include "literals.h"
 
 const int VCommonSettings::defaultScrollingDuration = 300;
 const int VCommonSettings::scrollingDurationMin = 100;
@@ -120,7 +120,6 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternGraphicalOutput, (QLatin1
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralRecentFileList, (QLatin1String("recentFileList"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralRestoreFileList, (QLatin1String("restoreFileList"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralGeometry, (QLatin1String("geometry"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralWindowState, (QLatin1String("windowState"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralToolbarsState, (QLatin1String("toolbarsState"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationDarkMode, (QLatin1String("configuration/dark_mode"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPreferenceDialogSize, (QLatin1String("preferenceDialogSize"))) // NOLINT
@@ -753,18 +752,6 @@ auto VCommonSettings::GetGeometry() const -> QByteArray
 void VCommonSettings::SetGeometry(const QByteArray &value)
 {
     setValue(*settingGeneralGeometry, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VCommonSettings::GetWindowState() const -> QByteArray
-{
-    return value(*settingGeneralWindowState).toByteArray();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetWindowState(const QByteArray &value)
-{
-    setValue(*settingGeneralWindowState, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
