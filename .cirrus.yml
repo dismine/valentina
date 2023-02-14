@@ -57,9 +57,9 @@ linux_qt5_qmake_task_template: &LINUX_QT5_QMAKE_TASK_TEMPLATE
     - mkdir build
     - cd build
     - pwd
+    - ${COMPILER} --version
     - qmake --version
     - qmake ../Valentina.pro -r -spec linux-${COMPILER} CONFIG+=noDebugSymbols CONFIG+=checkWarnings
-    - ${COMPILER} --version
     - make -j$(nproc)
     - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"$CIRRUS_WORKING_DIR/build/src/libs/vpropertyexplorer/bin:$CIRRUS_WORKING_DIR/build/src/libs/qmuparser/bin"
     - xvfb-run -a make --silent check TESTARGS="-silent"
