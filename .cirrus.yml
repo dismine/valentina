@@ -61,6 +61,7 @@ linux_qt5_qmake_task_template: &LINUX_QT5_QMAKE_TASK_TEMPLATE
     - cd build
     - pwd
     #- ${COMPILER} --version
+    - ls -l /usr/bin/
     - qmake --version
     - qmake ../Valentina.pro -r -spec linux-${COMPILER} CONFIG+=noDebugSymbols CONFIG+=checkWarnings
     - make -j$(nproc)
@@ -80,6 +81,7 @@ linux_qt5_qbs_task_template: &LINUX_QT5_QBS_TASK_TEMPLATE
     - which qbs
     - pwd
     #- ${COMPILER} --version
+    - ls -l /usr/bin/
     - qmake --version
     - qbs --version
     - qbs setup-toolchains --detect
