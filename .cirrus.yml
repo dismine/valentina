@@ -36,6 +36,7 @@ linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
     - which qbs
     - pwd
     #- ${COMPILER} --version
+    - qmake --version
     - qbs --version
     - qbs setup-toolchains --detect
     - qbs setup-qt /usr/bin/qmake qt6
@@ -75,6 +76,7 @@ linux_qt5_qbs_task_template: &LINUX_QT5_QBS_TASK_TEMPLATE
     - which qbs
     - pwd
     #- ${COMPILER} --version
+    - qmake --version
     - qbs --version
     - qbs setup-toolchains --detect
     - qbs setup-qt /usr/bin/qmake qt5
