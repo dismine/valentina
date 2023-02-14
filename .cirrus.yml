@@ -21,20 +21,14 @@ regular_linux_task_template: &REGULER_LINUX_TASK_TEMPLATE
   << : *REGULER_TASK_TEMPLATE
   env:
     DEBIAN_FRONTEND: "noninteractive"
+    PACKAGE_MANAGER_INSTALL: "apt-get -qq update && apt-get install -y"
   container:
     cpu: 4
-  install_script:
-    - bash -c "apt-get -qq update && apt-get install -y poppler-utils xvfb ccache"
-
-linux_qt5_task_template: &LINUX_QT5_TASK_TEMPLATE
-  << : *REGULER_LINUX_TASK_TEMPLATE
-  install_script:
-    - bash -c "apt-get install -y qtbase5-dev libqt5svg5-dev qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5"
 
 linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
   << : *REGULER_LINUX_TASK_TEMPLATE
   install_script:
-    - bash -c "apt-get install -y qt6-base-dev qt6-l10n-tools libqt6svg6-dev qt6-base-dev-tools qbs xerces-c"
+    - bash -c "$PACKAGE_MANAGER_INSTALL -y qbs qt6-base-dev qt6-l10n-tools libqt6svg6-dev qt6-base-dev-tools qbs xerces-c poppler-utils xvfb ccache"
   build_script:
     - uname -a
     - echo $PATH
@@ -49,9 +43,11 @@ linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
     - xvfb-run -a qbs -p autotest-runner
     
 linux_qt5_qmake_task_template: &LINUX_QT5_QMAKE_TASK_TEMPLATE
-  << : *LINUX_QT5_TASK_TEMPLATE
+  << : *REGULER_LINUX_TASK_TEMPLATE
   env:
     QT_SELECT: "qt5"
+  install_script:
+    - bash -c "$PACKAGE_MANAGER_INSTALL qtbase5-dev libqt5svg5-dev qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 poppler-utils xvfb ccache"
   build_script:
     - uname -a
     - echo $PATH
@@ -67,9 +63,9 @@ linux_qt5_qmake_task_template: &LINUX_QT5_QMAKE_TASK_TEMPLATE
     - xvfb-run -a make --silent check TESTARGS="-silent"
 
 linux_qt5_qbs_task_template: &LINUX_QT5_QBS_TASK_TEMPLATE
-  << : *LINUX_QT5_TASK_TEMPLATE
+  << : *REGULER_LINUX_TASK_TEMPLATE
   install_script:
-    - bash -c "apt-get install -y qbs"
+    - bash -c "$PACKAGE_MANAGER_INSTALL qbs qtbase5-dev libqt5svg5-dev qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 poppler-utils xvfb ccache"
   build_script:
     - uname -a
     - echo $PATH
