@@ -35,13 +35,13 @@ linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
     - which qmake
     - which qbs
     - pwd
-    - ${COMPILER} --version
+    #- ${COMPILER} --version
     - qbs --version
     - qbs setup-toolchains --detect
-    #- qbs setup-qt /usr/bin/qmake qt6
-    #- qbs config profiles.qt6.baseProfile ${COMPILER}
-    #- qbs-config defaultProfile qt6
-    - qbs build -f valentina.qbs -d build --command-echo-mode command-line config:release
+    - qbs setup-qt /usr/bin/qmake qt6
+    - qbs config profiles.qt6.baseProfile ${TOOLCHAIN}
+    - qbs-config defaultProfile qt6
+    - qbs build -f valentina.qbs -d build --command-echo-mode command-line profile:qt5 config:release
     - xvfb-run -a qbs -p autotest-runner
     
 linux_qt5_qmake_task_template: &LINUX_QT5_QMAKE_TASK_TEMPLATE
@@ -79,7 +79,7 @@ linux_qt5_qbs_task_template: &LINUX_QT5_QBS_TASK_TEMPLATE
     - qbs setup-toolchains --detect
     - qbs setup-qt /usr/bin/qmake qt5
     - qbs-config defaultProfile qt5
-    - qbs config profiles.qt5.baseProfile ${COMPILER}
+    - qbs config profiles.qt5.baseProfile ${TOOLCHAIN}
     - qbs build -f valentina.qbs -d build --command-echo-mode command-line profile:qt5 config:release
     - xvfb-run -a qbs -p autotest-runner
 
@@ -149,6 +149,7 @@ task:
   env:
     COMPILER: g++
     GCC_COLORS: 'error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+    TOOLCHAIN: x86_64-pc-linux-gnu-gcc-12_2
 
 task:
   name: 'latest GCC [Qt5 QBS]'
@@ -159,6 +160,7 @@ task:
   env:
     COMPILER: gcc
     GCC_COLORS: 'error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+    TOOLCHAIN: x86_64-pc-linux-gnu-gcc-12_2
 
 task:
   name: 'latest GCC [Qt6]'
@@ -169,6 +171,7 @@ task:
   env:
     COMPILER: gcc
     GCC_COLORS: 'error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+    TOOLCHAIN: x86_64-pc-linux-gnu-gcc-12_2
 
 task:
   name: 'latest Clang [Qt5 QMake]'
@@ -178,6 +181,7 @@ task:
   << : *LINUX_QT5_QMAKE_TASK_TEMPLATE
   env:
     COMPILER: clang
+    TOOLCHAIN: clang
 
 task:
   name: 'latest Clang [Qt5 QBS]'
@@ -187,6 +191,7 @@ task:
   << : *LINUX_QT5_QBS_TASK_TEMPLATE
   env:
     COMPILER: clang
+    TOOLCHAIN: clang
 
 task:
   name: 'latest Clang [Qt6]'
@@ -196,3 +201,4 @@ task:
   << : *LINUX_QT6_TASK_TEMPLATE
   env:
     COMPILER: clang
+    TOOLCHAIN: clang 
