@@ -32,14 +32,16 @@ linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
   build_script:
     - uname -a
     - echo $PATH
+    - which qmake
     - which qbs
     - pwd
     - ${COMPILER} --version
     - qbs --version
     - qbs setup-toolchains --detect
     - qbs config --list
-    - qbs config defaultProfile ${COMPILER}
-    - qbs build -f valentina.qbs -d build --command-echo-mode command-line config:release
+    - qbs setup-qt /usr/bin/qmake qt6
+    - qbs config profiles.qt6.baseProfile ${COMPILER}
+    - qbs build -f valentina.qbs -d build --command-echo-mode command-line profile:qt6 config:release
     - xvfb-run -a qbs -p autotest-runner
     
 linux_qt5_qmake_task_template: &LINUX_QT5_QMAKE_TASK_TEMPLATE
@@ -69,14 +71,16 @@ linux_qt5_qbs_task_template: &LINUX_QT5_QBS_TASK_TEMPLATE
   build_script:
     - uname -a
     - echo $PATH
+    - which qmake
     - which qbs
     - pwd
     - ${COMPILER} --version
     - qbs --version
     - qbs setup-toolchains --detect
     - qbs config --list
-    - qbs config defaultProfile ${COMPILER}
-    - qbs build -f valentina.qbs -d build --command-echo-mode command-line config:release
+    - qbs setup-qt /usr/bin/qmake qt5
+    - qbs config profiles.qt5.baseProfile ${COMPILER}
+    - qbs build -f valentina.qbs -d build --command-echo-mode command-line profile:qt5 config:release
     - xvfb-run -a qbs -p autotest-runner
 
 #macos_task_template: &MACOS_TASK_TEMPLATE
