@@ -184,7 +184,7 @@ task:
   container:
     image: silkeh/clang:latest
     memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
-  << : *LINUX_QT5_QBS_QMAKE_TASK_TEMPLATE
+  << : *LINUX_QT5_QBS_TASK_TEMPLATE
   env:
     COMPILER: clang
 
