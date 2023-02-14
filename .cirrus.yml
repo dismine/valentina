@@ -28,7 +28,7 @@ regular_linux_task_template: &REGULER_LINUX_TASK_TEMPLATE
 linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
   << : *REGULER_LINUX_TASK_TEMPLATE
   install_script:
-    - bash -c "$PACKAGE_MANAGER_INSTALL -y qbs qt6-base-dev qt6-l10n-tools libqt6svg6-dev qt6-base-dev-tools qbs xerces-c poppler-utils xvfb ccache"
+    - bash -c "$PACKAGE_MANAGER_INSTALL -y qbs qt6-base-dev qt6-l10n-tools libqt6svg6-dev qt6-base-dev-tools qbs libxerces-c-dev poppler-utils xvfb ccache"
   build_script:
     - uname -a
     - echo $PATH
