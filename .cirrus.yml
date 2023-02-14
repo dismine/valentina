@@ -27,8 +27,10 @@ regular_linux_task_template: &REGULER_LINUX_TASK_TEMPLATE
 
 linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
   << : *REGULER_LINUX_TASK_TEMPLATE
+  env:
+    QT_SELECT: "qt6"
   install_script:
-    - bash -c "$PACKAGE_MANAGER_INSTALL -y qbs qt6-base-dev qt6-l10n-tools libqt6svg6-dev qt6-base-dev-tools qbs libxerces-c-dev poppler-utils xvfb ccache"
+    - bash -c "$PACKAGE_MANAGER_INSTALL -y qbs qt6-base-dev qt6-l10n-tools libqt6svg6-dev qt6-base-dev-tools qmake6 qbs libxerces-c-dev poppler-utils xvfb ccache"
   build_script:
     - uname -a
     - echo $PATH
@@ -39,7 +41,7 @@ linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
     - qmake --version
     - qbs --version
     - qbs setup-toolchains --detect
-    - qbs setup-qt /usr/bin/qmake qt6
+    - qbs setup-qt /usr/bin/qmake6 qt6
     - qbs config profiles.qt6.baseProfile ${TOOLCHAIN}
     - qbs-config defaultProfile qt6
     - qbs build -f valentina.qbs -d build --command-echo-mode command-line profile:qt6 config:release
@@ -67,6 +69,8 @@ linux_qt5_qmake_task_template: &LINUX_QT5_QMAKE_TASK_TEMPLATE
 
 linux_qt5_qbs_task_template: &LINUX_QT5_QBS_TASK_TEMPLATE
   << : *REGULER_LINUX_TASK_TEMPLATE
+  env:
+    QT_SELECT: "qt5"
   install_script:
     - bash -c "$PACKAGE_MANAGER_INSTALL qbs qtbase5-dev libqt5svg5-dev qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 poppler-utils xvfb ccache"
   build_script:
