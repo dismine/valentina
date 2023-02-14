@@ -34,6 +34,7 @@
 #include <memory>
 #include <string>
 #include <QLocale>
+#include <QtCore/qcontainerfwd.h>
 
 #include "qmuparser_global.h"
 #include "qmuparserbytecode.h"
@@ -42,8 +43,6 @@
 #include "qmuparsererror.h"
 #include "qmuparsertoken.h"
 #include "qmuparsertokenreader.h"
-
-template <class T> class QStack;
 
 namespace qmu
 {

@@ -25,12 +25,10 @@
 #include <QMap>
 #include <QString>
 #include <QtGlobal>
+#include <QtCore/qcontainerfwd.h>
 
 #include "vproperty.h"
 #include "vpropertyexplorer_global.h"
-
-template <class Key, class T> class QMap;
-template <typename T> class QList;
 
 namespace VPE
 {

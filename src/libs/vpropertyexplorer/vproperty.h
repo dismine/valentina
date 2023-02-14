@@ -34,6 +34,7 @@
 #include <QVariant>
 #include <Qt>
 #include <QtGlobal>
+#include <QtCore/qcontainerfwd.h>
 
 #include "vpropertyexplorer_global.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
@@ -43,8 +44,6 @@
 #include <ciso646>
 
 #include "vpropertydef.h"
-
-template <typename T> class QList;
 
 namespace VPE
 {

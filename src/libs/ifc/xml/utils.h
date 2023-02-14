@@ -28,6 +28,9 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#include <QtGlobal>
+#include <QtCore/qcontainerfwd.h>
+
 class QMimeType;
 class QString;
 class QMimeType;

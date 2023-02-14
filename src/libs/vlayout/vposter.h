@@ -32,6 +32,7 @@
 #include <QCoreApplication>
 #include <QRect>
 #include <QtGlobal>
+#include <QtCore/qcontainerfwd.h>
 
 #include "../vmisc/def.h"
 #include "../vlayout/vtextmanager.h"
@@ -39,11 +40,6 @@
 class QGraphicsItem;
 class QPrinter;
 struct VWatermarkData;
-
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-template <class T> class QVector;
-#endif
-
 
 struct PosterData
 {

@@ -40,6 +40,7 @@
 #include <QLocale>
 #include <QLoggingCategory>
 #include <functional>
+#include <QtCore/qcontainerfwd.h>
 
 #include "../ifcdef.h"
 #include "../vmisc/def.h"
@@ -51,9 +52,6 @@
 
 class QDomElement;
 class QDomNode;
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-template <typename T> class QVector;
-#endif
 template <typename T> class QFutureWatcher;
 
 Q_DECLARE_LOGGING_CATEGORY(vXML)

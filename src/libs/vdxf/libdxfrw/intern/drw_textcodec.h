@@ -4,6 +4,7 @@
 #include <string>
 #include <QtGlobal>
 #include "../drw_base.h"
+#include <QtCore/qcontainerfwd.h>
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include "../vmisc/vtextcodec.h"
@@ -15,8 +16,6 @@
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 class QStringList;
 #endif
-
-template <class Key, class T> class QMap;
 
 class DRW_TextCodec
 {

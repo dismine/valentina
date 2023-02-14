@@ -44,6 +44,7 @@
 #include <Qt>
 #include <QtDebug>
 #include <QtMath>
+#include <QtCore/qcontainerfwd.h>
 
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/vtranslatevars.h"
@@ -54,8 +55,6 @@
 #include "../vwidgets/vcurvepathitem.h"
 #include "../vwidgets/scalesceneitems.h"
 #include "../vwidgets/global.h"
-
-template <class K, class V> class QHash;
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")

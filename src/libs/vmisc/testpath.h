@@ -35,11 +35,9 @@
 #include <QString>
 #include <QTemporaryFile>
 #include <QTextStream>
+#include <QtCore/qcontainerfwd.h>
 
 class QPointF;
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-template <class T> class QVector;
-#endif
 class VSAPoint;
 class VRawSAPoint;
 

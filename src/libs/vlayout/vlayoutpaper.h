@@ -35,6 +35,7 @@
 #include <QtGlobal>
 #include <atomic>
 #include <QGraphicsPathItem>
+#include <QtCore/qcontainerfwd.h>
 
 #include "../vmisc/defglobal.h"
 
@@ -45,11 +46,6 @@ class QGraphicsRectItem;
 class QRectF;
 class QGraphicsItem;
 class QMutex;
-template <typename T> class QList;
-
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-template <typename T> class QVector;
-#endif
 
 class VLayoutPaper
 {
