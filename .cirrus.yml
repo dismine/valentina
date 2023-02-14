@@ -5,28 +5,53 @@ env:
   CCACHE_DIR: "/tmp/ccache_dir"
   CCACHE_NOHASHDIR: "1"  # Debug info might contain a stale path if the build dir changes, but this is fine
   CCACHE_CPP2: "yes"
-  QT_SELECT: "qt5"
 
 ### Task templates
 
 # https://cirrus-ci.org/guide/tips-and-tricks/#sharing-configuration-between-tasks
 filter_template: &FILTER_TEMPLATE
-  skip: "!changesInclude('.cirrus.yml', '**.{h,cpp,c,pro,pri,ts,ui,png}')"
+  skip: "!changesInclude('.cirrus.yml', '**.{h,hpp,cpp,c,pro,pri,ts,ui,png,qbs,js}')"
 
 regular_task_template: &REGULER_TASK_TEMPLATE
   << : *FILTER_TEMPLATE
   ccache_cache:
     folder: "/tmp/ccache_dir"
 
-linux_task_template: &LINUX_TASK_TEMPLATE
+regular_linux_task_template: &REGULER_LINUX_TASK_TEMPLATE
   << : *REGULER_TASK_TEMPLATE
   env:
     DEBIAN_FRONTEND: "noninteractive"
-    PACKAGE_MANAGER_INSTALL: "apt-get -qq update && apt-get install -y"
   container:
     cpu: 4
   install_script:
-    - bash -c "$PACKAGE_MANAGER_INSTALL qtbase5-dev libqt5svg5-dev qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 poppler-utils xvfb ccache"
+    - bash -c "apt-get -qq update && apt-get install -y poppler-utils xvfb ccache"
+
+linux_qt5_task_template: &LINUX_QT5_TASK_TEMPLATE
+  << : *REGULER_LINUX_TASK_TEMPLATE
+  install_script:
+    - bash -c "apt-get install -y qtbase5-dev libqt5svg5-dev qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5"
+
+linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
+  << : *REGULER_LINUX_TASK_TEMPLATE
+  install_script:
+    - bash -c "apt-get install -y qt6-base-dev qt6-l10n-tools libqt6svg6-dev qt6-base-dev-tools qbs xerces-c"
+  build_script:
+    - uname -a
+    - echo $PATH
+    - which qbs
+    - pwd
+    - ${COMPILER} --version
+    - qbs --version
+    - qbs setup-toolchains --detect
+    - qbs config --list
+    - qbs config defaultProfile ${COMPILER}
+    - qbs build -f valentina.qbs -d build --command-echo-mode command-line config:release
+    - xvfb-run -a qbs -p autotest-runner
+    
+linux_qt5_qmake_task_template: &LINUX_QT5_QMAKE_TASK_TEMPLATE
+  << : *LINUX_QT5_TASK_TEMPLATE
+  env:
+    QT_SELECT: "qt5"
   build_script:
     - uname -a
     - echo $PATH
@@ -41,78 +66,133 @@ linux_task_template: &LINUX_TASK_TEMPLATE
     - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"$CIRRUS_WORKING_DIR/build/src/libs/vpropertyexplorer/bin:$CIRRUS_WORKING_DIR/build/src/libs/qmuparser/bin"
     - xvfb-run -a make --silent check TESTARGS="-silent"
 
-macos_task_template: &MACOS_TASK_TEMPLATE
-  << : *REGULER_TASK_TEMPLATE
-  timeout_in: 120m
-  env:
-    ACCESS_TOKEN: ENCRYPTED[81e0b2381ffb628b73f5c94f834010e6631191e0ad03cdd0850d440fb2737a74b68131d842030f010c1bf73ab4cdc1ae]
-    QTDIR: "/usr/local/opt/qt5"
-    PATH: ${HOME}/.local/bin:$QTDIR/bin:${PATH}
-    # ^  add user paths
-    PIP_CACHE_DIR: ${HOME}/.cache/pip
-    DEPLOY: "true"
-    LDFLAGS: "-L$QTDIR/lib"
-    CPPFLAGS: "-I$QTDIR/include"
-    PKG_CONFIG_PATH: "/usr/local/opt/qt5/lib/pkgconfig"
-  global_homebrew_cache:
-    folder: "/usr/local/Homebrew"
-  local_homebrew_cache:
-    folder: "$HOME/Library/Caches/Homebrew"
-  pip_cache:
-    folder: ${PIP_CACHE_DIR}
+linux_qt5_qbs_task_template: &LINUX_QT5_QBS_TASK_TEMPLATE
+  << : *LINUX_QT5_TASK_TEMPLATE
   install_script:
-    - brew update > /dev/null
-    - brew install qt5 coreutils ccache
-    - chmod -R 755 /usr/local/opt/qt5/*
-    - python3 --version
-    - pip3 install --user --upgrade pip dropbox
+    - bash -c "apt-get install -y qbs"
   build_script:
-    - mkdir build
-    - cd build
+    - uname -a
+    - echo $PATH
+    - which qbs
     - pwd
-    - qmake --version
-    - qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=checkWarnings CONFIG+=noTests
     - ${COMPILER} --version
-    - make -j$(nproc)
-  deploy_script:
-    - pwd
-    - $CIRRUS_WORKING_DIR/scripts/cirrus-deploy.sh
-  before_cache_script:
-    - brew cleanup
-  env:
-    COMPILER: clang
+    - qbs --version
+    - qbs setup-toolchains --detect
+    - qbs config --list
+    - qbs config defaultProfile ${COMPILER}
+    - qbs build -f valentina.qbs -d build --command-echo-mode command-line config:release
+    - xvfb-run -a qbs -p autotest-runner
+
+#macos_task_template: &MACOS_TASK_TEMPLATE
+#  << : *REGULER_TASK_TEMPLATE
+#  timeout_in: 120m
+#  env:
+#    ACCESS_TOKEN: ENCRYPTED[81e0b2381ffb628b73f5c94f834010e6631191e0ad03cdd0850d440fb2737a74b68131d842030f010c1bf73ab4cdc1ae]
+#    QTDIR: "/usr/local/opt/qt5"
+#    PATH: ${HOME}/.local/bin:$QTDIR/bin:${PATH}
+#    # ^  add user paths
+#    PIP_CACHE_DIR: ${HOME}/.cache/pip
+#    DEPLOY: "true"
+#    LDFLAGS: "-L$QTDIR/lib"
+#    CPPFLAGS: "-I$QTDIR/include"
+#    PKG_CONFIG_PATH: "/usr/local/opt/qt5/lib/pkgconfig"
+#  global_homebrew_cache:
+#    folder: "/usr/local/Homebrew"
+#  local_homebrew_cache:
+#    folder: "$HOME/Library/Caches/Homebrew"
+#  pip_cache:
+#    folder: ${PIP_CACHE_DIR}
+#  install_script:
+#    - brew update > /dev/null
+#    - brew install qt5 coreutils ccache
+#    - chmod -R 755 /usr/local/opt/qt5/*
+#    - python3 --version
+#    - pip3 install --user --upgrade pip dropbox
+#  build_script:
+#    - mkdir build
+#    - cd build
+#    - pwd
+#    - qmake --version
+#    - qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=checkWarnings CONFIG+=noTests
+#    - ${COMPILER} --version
+#    - make -j$(nproc)
+#  deploy_script:
+#    - pwd
+#    - $CIRRUS_WORKING_DIR/scripts/cirrus-deploy.sh
+#  before_cache_script:
+#    - brew cleanup
+#  env:
+#    COMPILER: clang
+
+#task:
+#  name: 'macOS Catalina 10.15 [no tests]'
+#  macos_instance:
+#    image: catalina-xcode-11.3.1
+#  << : *MACOS_TASK_TEMPLATE
+#  env:
+#    PLATFORM: "macOS_10.14+"
+
+#task:
+#  name: 'macOS Big Sur 11 [no tests]'
+#  macos_instance:
+#    image: big-sur-xcode-12.4
+#  << : *MACOS_TASK_TEMPLATE
+#  env:
+#    PLATFORM: "macOS_10.15+"
 
 task:
-  name: 'macOS Catalina 10.15 [no tests]'
-  macos_instance:
-    image: catalina-xcode-11.3.1
-  << : *MACOS_TASK_TEMPLATE
-  env:
-    PLATFORM: "macOS_10.14+"
-
-task:
-  name: 'macOS Big Sur 11 [no tests]'
-  macos_instance:
-    image: big-sur-xcode-12.4
-  << : *MACOS_TASK_TEMPLATE
-  env:
-    PLATFORM: "macOS_10.15+"
-
-task:
-  name: 'latest GCC'
+  name: 'latest GCC [Qt5 QMake]'
   container:
     image: teeks99/gcc-ubuntu:latest
     memory: 16G   # Set to 16GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
-  << : *LINUX_TASK_TEMPLATE
+  << : *LINUX_QT5_QMAKE_TASK_TEMPLATE
   env:
     COMPILER: g++
     GCC_COLORS: 'error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 task:
-  name: 'latest Clang'
+  name: 'latest GCC [Qt5 QBS]'
+  container:
+    image: teeks99/gcc-ubuntu:latest
+    memory: 16G   # Set to 16GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
+  << : *LINUX_QT5_QBS_TASK_TEMPLATE
+  env:
+    COMPILER: gcc
+    GCC_COLORS: 'error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+task:
+  name: 'latest GCC [Qt6]'
+  container:
+    image: teeks99/gcc-ubuntu:latest
+    memory: 16G   # Set to 16GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
+  << : *LINUX_QT6_TASK_TEMPLATE
+  env:
+    COMPILER: gcc
+    GCC_COLORS: 'error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+task:
+  name: 'latest Clang [Qt5 QMake]'
   container:
     image: silkeh/clang:latest
     memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
-  << : *LINUX_TASK_TEMPLATE
+  << : *LINUX_QT5_QMAKE_TASK_TEMPLATE
+  env:
+    COMPILER: clang
+
+task:
+  name: 'latest Clang [Qt5 QBS]'
+  container:
+    image: silkeh/clang:latest
+    memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
+  << : *LINUX_QT5_QBS_QMAKE_TASK_TEMPLATE
+  env:
+    COMPILER: clang
+
+task:
+  name: 'latest Clang [Qt6]'
+  container:
+    image: silkeh/clang:latest
+    memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
+  << : *LINUX_QT6_TASK_TEMPLATE
   env:
     COMPILER: clang
