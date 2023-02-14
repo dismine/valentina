@@ -34,11 +34,11 @@ linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
   build_script:
     - uname -a
     - echo $PATH
-    - which qmake
+    - which qmake6
     - which qbs
     - pwd
     #- ${COMPILER} --version
-    - qmake --version
+    - qmake6 --version
     - qbs --version
     - qbs setup-toolchains --detect
     - qbs setup-qt /usr/bin/qmake6 qt6
