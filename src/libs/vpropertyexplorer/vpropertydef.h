@@ -37,6 +37,9 @@ using vpesizetype = qsizetype;
 using vpesizetype = int;
 #endif
 
+class QLocale;
+class QChar;
+
 VPROPERTYEXPLORERSHARED_EXPORT auto VPELocalePositiveSign(const QLocale &locale) -> QChar;
 VPROPERTYEXPLORERSHARED_EXPORT auto VPELocaleNegativeSign(const QLocale &locale) -> QChar;
 VPROPERTYEXPLORERSHARED_EXPORT auto VPELocaleSign0(const QLocale &locale) -> QChar;

@@ -28,6 +28,8 @@
 #ifndef VPARSERERRORHANDLER_H
 #define VPARSERERRORHANDLER_H
 
+#include <QtGlobal>
+
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <QAbstractMessageHandler>
 #include <QSourceLocation>

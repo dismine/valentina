@@ -35,6 +35,8 @@
 #include "../ifc/xml/vwatermarkconverter.h"
 #include "../ifc/xml/vparsererrorhandler.h"
 
+#include <QTest>
+
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <xercesc/parsers/XercesDOMParser.hpp>
 

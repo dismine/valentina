@@ -33,6 +33,7 @@
 #include <QSet>
 #include <QVector>
 #include <QFontMetrics>
+#include <QLibraryInfo>
 
 #include "defglobal.h"
 
@@ -338,7 +339,8 @@ inline auto VLocaleCharacter(const QChar &character) -> QChar
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline auto DropEventPos(const QDropEvent *event) -> QPoint
+template <typename T>
+inline auto DropEventPos(const T *event) -> QPoint
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     return event->position().toPoint();

@@ -109,6 +109,7 @@ using qmusizetype = int;
 #endif
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
+#include <QTextStream>
 namespace Qt
 {
 static auto endl = ::endl;

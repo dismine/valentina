@@ -28,8 +28,11 @@
 
 #include "vpropertydef.h"
 
+#include <QChar>
+#include <QLocale>
+
 //---------------------------------------------------------------------------------------------------------------------
-QChar VPELocalePositiveSign(const QLocale &locale)
+auto VPELocalePositiveSign(const QLocale &locale) -> QChar
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     const QString sign = locale.positiveSign();
@@ -45,7 +48,7 @@ QChar VPELocalePositiveSign(const QLocale &locale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QChar VPELocaleNegativeSign(const QLocale &locale)
+auto VPELocaleNegativeSign(const QLocale &locale) -> QChar
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     const QString sign = locale.negativeSign();
@@ -61,7 +64,7 @@ QChar VPELocaleNegativeSign(const QLocale &locale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QChar VPELocaleSign0(const QLocale &locale)
+auto VPELocaleSign0(const QLocale &locale) -> QChar
 {
     const QString sign = locale.toString(0);
     if (sign.size() == 1)
@@ -77,7 +80,7 @@ QChar VPELocaleSign0(const QLocale &locale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QChar VPELocaleSign1(const QLocale &locale)
+auto VPELocaleSign1(const QLocale &locale) -> QChar
 {
     const QString sign = locale.toString(1);
     if (sign.size() == 1)
@@ -93,7 +96,7 @@ QChar VPELocaleSign1(const QLocale &locale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QChar VPELocaleSign2(const QLocale &locale)
+auto VPELocaleSign2(const QLocale &locale) -> QChar
 {
     const QString sign = locale.toString(2);
     if (sign.size() == 1)
@@ -109,7 +112,7 @@ QChar VPELocaleSign2(const QLocale &locale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QChar VPELocaleSign3(const QLocale &locale)
+auto VPELocaleSign3(const QLocale &locale) -> QChar
 {
     const QString sign = locale.toString(3);
     if (sign.size() == 1)
@@ -125,7 +128,7 @@ QChar VPELocaleSign3(const QLocale &locale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QChar VPELocaleSign4(const QLocale &locale)
+auto VPELocaleSign4(const QLocale &locale) -> QChar
 {
     const QString sign = locale.toString(4);
     if (sign.size() == 1)
@@ -141,7 +144,7 @@ QChar VPELocaleSign4(const QLocale &locale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QChar VPELocaleSign5(const QLocale &locale)
+auto VPELocaleSign5(const QLocale &locale) -> QChar
 {
     const QString sign = locale.toString(5);
     if (sign.size() == 1)
@@ -157,7 +160,7 @@ QChar VPELocaleSign5(const QLocale &locale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QChar VPELocaleSign6(const QLocale &locale)
+auto VPELocaleSign6(const QLocale &locale) -> QChar
 {
     const QString sign = locale.toString(6);
     if (sign.size() == 1)
@@ -173,7 +176,7 @@ QChar VPELocaleSign6(const QLocale &locale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QChar VPELocaleSign7(const QLocale &locale)
+auto VPELocaleSign7(const QLocale &locale) -> QChar
 {
     const QString sign = locale.toString(7);
     if (sign.size() == 1)
@@ -189,7 +192,7 @@ QChar VPELocaleSign7(const QLocale &locale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QChar VPELocaleSign8(const QLocale &locale)
+auto VPELocaleSign8(const QLocale &locale) -> QChar
 {
     const QString sign = locale.toString(8);
     if (sign.size() == 1)
@@ -205,7 +208,7 @@ QChar VPELocaleSign8(const QLocale &locale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QChar VPELocaleSign9(const QLocale &locale)
+auto VPELocaleSign9(const QLocale &locale) -> QChar
 {
     const QString sign = locale.toString(9);
     if (sign.size() == 1)
@@ -221,7 +224,7 @@ QChar VPELocaleSign9(const QLocale &locale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QChar VPELocaleExpUpper(const QLocale &locale)
+auto VPELocaleExpUpper(const QLocale &locale) -> QChar
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     const QString sign = locale.exponential();
@@ -237,7 +240,7 @@ QChar VPELocaleExpUpper(const QLocale &locale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QChar VPELocaleExpLower(const QLocale &locale)
+auto VPELocaleExpLower(const QLocale &locale) -> QChar
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     const QString sign = locale.exponential();
@@ -253,7 +256,7 @@ QChar VPELocaleExpLower(const QLocale &locale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QChar VPELocaleDecimalPoint(const QLocale &locale)
+auto VPELocaleDecimalPoint(const QLocale &locale) -> QChar
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     const QString sign = locale.decimalPoint();
@@ -269,7 +272,7 @@ QChar VPELocaleDecimalPoint(const QLocale &locale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QChar VPELocaleGroupSeparator(const QLocale &locale)
+auto VPELocaleGroupSeparator(const QLocale &locale) -> QChar
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     const QString sign = locale.groupSeparator();

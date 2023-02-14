@@ -35,7 +35,6 @@
 #include <QtCore/qcontainerfwd.h>
 
 #include "../vmisc/def.h"
-#include "../vlayout/vtextmanager.h"
 
 class QGraphicsItem;
 class QPrinter;
