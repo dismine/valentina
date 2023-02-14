@@ -30,9 +30,6 @@
 #include "def.h"
 #include "literals.h"
 
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QStringList>
 
 const QString LONG_OPTION_BASENAME          = QStringLiteral("basename");

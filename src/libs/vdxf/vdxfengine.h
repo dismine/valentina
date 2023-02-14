@@ -30,7 +30,6 @@
 #define VDXFENGINE_H
 
 #include <qcompilerdetection.h>
-#include <QMatrix>
 #include <QPaintEngine>
 #include <QPointF>
 #include <QRectF>
@@ -40,6 +39,7 @@
 #include <string>
 
 #include "../vmisc/def.h"
+#include "../vmisc/defglobal.h"
 #include "dxfdef.h"
 #include "libdxfrw/drw_base.h"
 
@@ -51,6 +51,10 @@ class DRW_Entity;
 class dx_ifaceBlock;
 class VLayoutPoint;
 class DRW_Point;
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+class VTextCodec;
+#endif
 
 class VDxfEngine final : public QPaintEngine
 {
@@ -158,7 +162,7 @@ private:
     Q_REQUIRED_RESULT auto CreateAAMAPolygon(const QVector<C> &polygon, const UTF8STRING &layer,
                                              bool forceClosed) -> P *;
 
-    static auto FromUnicodeToCodec(const QString &str, QTextCodec *codec) -> std::string;
+    static auto FromUnicodeToCodec(const QString &str, VTextCodec *codec) -> std::string;
     auto GetFileNameForLocale() const -> std::string;
 };
 

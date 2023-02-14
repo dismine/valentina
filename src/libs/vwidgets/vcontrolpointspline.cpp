@@ -53,7 +53,8 @@
 #include "scalesceneitems.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position, QGraphicsItem *parent)
+VControlPointSpline::VControlPointSpline(const vsizetype &indexSpline, SplinePointPosition position,
+                                         QGraphicsItem *parent)
     : VScenePoint(parent),
       controlLine(nullptr),
       indexSpline(indexSpline),
@@ -72,7 +73,7 @@ VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointP
  * @param controlPoint control point.
  * @param parent parent object.
  */
-VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position,
+VControlPointSpline::VControlPointSpline(const vsizetype &indexSpline, SplinePointPosition position,
                                          const QPointF &controlPoint, bool freeAngle,
                                          bool freeLength, QGraphicsItem *parent)
     : VScenePoint(parent),
@@ -276,7 +277,7 @@ void VControlPointSpline::SetCtrlLine(const QPointF &controlPoint, const QPointF
  * @param controlPoint control point.
  * @param splinePoint spline point.
  */
-void VControlPointSpline::RefreshCtrlPoint(const qint32 &indexSpline, SplinePointPosition pos,
+void VControlPointSpline::RefreshCtrlPoint(const vsizetype &indexSpline, SplinePointPosition pos,
                                            const QPointF &controlPoint, const QPointF &splinePoint, bool freeAngle,
                                            bool freeLength)
 {

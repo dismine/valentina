@@ -36,9 +36,6 @@
 #include <QList>
 #include <QMap>
 #include <QMultiMap>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QGlobalStatic>
 
 #include "../exception/vexception.h"
@@ -76,9 +73,9 @@ VVSTConverter::VVSTConverter(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VVSTConverter::XSDSchema(unsigned ver) const -> QString
+auto VVSTConverter::XSDSchemas() -> QHash<unsigned int, QString>
 {
-    QHash <unsigned, QString> schemas =
+    static auto schemas = QHash <unsigned, QString>
     {
         std::make_pair(FormatVersion(0, 3, 0), QStringLiteral("://schema/multisize_measurements/v0.3.0.xsd")),
         std::make_pair(FormatVersion(0, 4, 0), QStringLiteral("://schema/multisize_measurements/v0.4.0.xsd")),
@@ -93,12 +90,7 @@ auto VVSTConverter::XSDSchema(unsigned ver) const -> QString
         std::make_pair(FormatVersion(0, 5, 4), CurrentSchema),
     };
 
-    if (schemas.contains(ver))
-    {
-        return schemas.value(ver);
-    }
-
-    InvalidVersion(ver);
+    return schemas;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -154,6 +146,12 @@ auto VVSTConverter::IsReadOnly() const -> bool
     // But don't forget to keep all versions of attribute until we support that format versions
 
     return UniqueTagText(*strTagRead_Only, falseStr) == trueStr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VVSTConverter::Schemas() const -> QHash<unsigned int, QString>
+{
+    return XSDSchemas();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

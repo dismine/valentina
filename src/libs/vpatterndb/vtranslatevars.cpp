@@ -39,10 +39,12 @@
 #include "../qmuparser/qmuparsererror.h"
 #include "../qmuparser/qmutokenparser.h"
 #include "../qmuparser/qmutranslation.h"
+#include "../qmuparser/qmudef.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vmisc/def.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/literals.h"
+#include "../vmisc/compatibility.h"
 #include "vtranslatemeasurements.h"
 #include "pmsystems.h"
 
@@ -623,8 +625,8 @@ void VTranslateVars::InitSystem(const QString &code, const qmu::QmuTranslation &
  * @param tokens all tokens
  * @param numbers all numbers
  */
-void VTranslateVars::CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens,
-                                          QMap<int, QString> &numbers)
+void VTranslateVars::CorrectionsPositions(vsizetype position, vsizetype bias, QMap<vsizetype, QString> &tokens,
+                                          QMap<vsizetype, QString> &numbers)
 {
     if (bias == 0)
     {
@@ -636,14 +638,14 @@ void VTranslateVars::CorrectionsPositions(int position, int bias, QMap<int, QStr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VTranslateVars::TranslateVarsFromUser(QString &newFormula, QMap<int, QString> &tokens,
-                                           QMap<int, QString> &numbers) const
+void VTranslateVars::TranslateVarsFromUser(QString &newFormula, QMap<vsizetype, QString> &tokens,
+                                           QMap<vsizetype, QString> &numbers) const
 {
-    QList<int> tKeys = tokens.keys();// Take all tokens positions
+    QList<vsizetype> tKeys = tokens.keys();// Take all tokens positions
     QList<QString> tValues = tokens.values();
-    for (int i = 0; i < tKeys.size(); ++i)
+    for (vsizetype i = 0; i < tKeys.size(); ++i)
     {
-        int bias = 0;
+        vsizetype bias = 0;
         if (MeasurementsFromUser(newFormula, tKeys.at(i), tValues.at(i), bias))
         {
             if (bias != 0)
@@ -677,7 +679,7 @@ void VTranslateVars::TranslateVarsFromUser(QString &newFormula, QMap<int, QStrin
             continue;
         }
 
-        if (tValues.at(i) == QLocale().negativeSign())
+        if (tValues.at(i) == LocaleNegativeSign(QLocale()))
         {// unary minus
             newFormula.replace(tKeys.at(i), 1, '-');
         }
@@ -685,13 +687,13 @@ void VTranslateVars::TranslateVarsFromUser(QString &newFormula, QMap<int, QStrin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VTranslateVars::TranslateNumbersFromUser(QString &newFormula, QMap<int, QString> &tokens,
-                                              QMap<int, QString> &numbers, bool osSeparator)
+void VTranslateVars::TranslateNumbersFromUser(QString &newFormula, QMap<vsizetype, QString> &tokens,
+                                              QMap<vsizetype, QString> &numbers, bool osSeparator)
 {
     QLocale loc = QLocale(); // User locale
     if (loc != QLocale::c() && osSeparator)
     {// User want use Os separator
-        QList<int> nKeys = numbers.keys();// Positions for all numbers in expression
+        QList<vsizetype> nKeys = numbers.keys();// Positions for all numbers in expression
         QList<QString> nValues = numbers.values();
         for (int i = 0; i < nKeys.size(); ++i)
         {
@@ -707,7 +709,7 @@ void VTranslateVars::TranslateNumbersFromUser(QString &newFormula, QMap<int, QSt
             loc = QLocale::c();// To internal locale
             const QString dStr = loc.toString(d);// Internal look for number
             newFormula.replace(nKeys.at(i), nValues.at(i).length(), dStr);
-            const int bias = nValues.at(i).length() - dStr.length();
+            const auto bias = nValues.at(i).length() - dStr.length();
             if (bias != 0)
             {// Translated number has different length than original. Position next tokens need to be corrected.
                 CorrectionsPositions(nKeys.at(i), bias, tokens, numbers);
@@ -719,19 +721,19 @@ void VTranslateVars::TranslateNumbersFromUser(QString &newFormula, QMap<int, QSt
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VTranslateVars::TranslateVarsToUser(QString &newFormula, QMap<int, QString> &tokens,
-                                         QMap<int, QString> &numbers) const
+void VTranslateVars::TranslateVarsToUser(QString &newFormula, QMap<vsizetype, QString> &tokens,
+                                         QMap<vsizetype, QString> &numbers) const
 {
-    QList<int> tKeys = tokens.keys();
+    QList<vsizetype> tKeys = tokens.keys();
     QList<QString> tValues = tokens.values();
-    for (int i = 0; i < tKeys.size(); ++i)
+    for (vsizetype i = 0; i < tKeys.size(); ++i)
     {
         if (measurements.contains(tValues.at(i)))
         {
             newFormula.replace(tKeys.at(i), tValues.at(i).length(),
                                measurements.value(tValues.at(i))
                                    .translate(VAbstractApplication::VApp()->Settings()->GetLocale()));
-            int bias = tValues.at(i).length() -
+            auto bias = tValues.at(i).length() -
                        measurements.value(tValues.at(i))
                            .translate(VAbstractApplication::VApp()->Settings()->GetLocale()).length();
             if (bias != 0)
@@ -748,7 +750,7 @@ void VTranslateVars::TranslateVarsToUser(QString &newFormula, QMap<int, QString>
             newFormula.replace(tKeys.at(i), tValues.at(i).length(),
                                functions.value(tValues.at(i))
                                    .translate(VAbstractApplication::VApp()->Settings()->GetLocale()));
-            int bias = tValues.at(i).length() -
+            auto bias = tValues.at(i).length() -
                        functions.value(tValues.at(i))
                            .translate(VAbstractApplication::VApp()->Settings()->GetLocale()).length();
             if (bias != 0)
@@ -760,7 +762,7 @@ void VTranslateVars::TranslateVarsToUser(QString &newFormula, QMap<int, QString>
             continue;
         }
 
-        int bias = 0;
+        vsizetype bias = 0;
         if (VariablesToUser(newFormula, tKeys.at(i), tValues.at(i), bias))
         {
             if (bias != 0)
@@ -774,19 +776,19 @@ void VTranslateVars::TranslateVarsToUser(QString &newFormula, QMap<int, QString>
 
         if (tValues.at(i) == QChar('-'))
         {// unary minus
-            newFormula.replace(tKeys.at(i), 1, QLocale().negativeSign());
+            newFormula.replace(tKeys.at(i), 1, LocaleNegativeSign(QLocale()));
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VTranslateVars::TranslateNumbersToUser(QString &newFormula, QMap<int, QString> &tokens,
-                                            QMap<int, QString> &numbers, bool osSeparator)
+void VTranslateVars::TranslateNumbersToUser(QString &newFormula, QMap<vsizetype, QString> &tokens,
+                                            QMap<vsizetype, QString> &numbers, bool osSeparator)
 {
     QLocale loc = QLocale();// User locale
     if (loc != QLocale::C && osSeparator)
     {// User want use Os separator
-        QList<int> nKeys = numbers.keys();// Positions for all numbers in expression
+        QList<vsizetype> nKeys = numbers.keys();// Positions for all numbers in expression
         QList<QString> nValues = numbers.values();
         for (int i = 0; i < nKeys.size(); ++i)
         {
@@ -801,12 +803,12 @@ void VTranslateVars::TranslateNumbersToUser(QString &newFormula, QMap<int, QStri
 
             loc = QLocale();// To user locale
             QString dStr = loc.toString(d);// Number string in user locale
-            if (loc.groupSeparator().isSpace())
+            if (VLocaleCharacter(LocaleGroupSeparator(loc)).isSpace())
             {
-                dStr.replace(loc.groupSeparator(), QString());
+                dStr.replace(LocaleGroupSeparator(loc), QString());
             }
             newFormula.replace(nKeys.at(i), nValues.at(i).length(), dStr);
-            const int bias = nValues.at(i).length() - dStr.length();
+            const auto bias = nValues.at(i).length() - dStr.length();
             if (bias != 0)
             {// Translated number has different length than original. Position next tokens need to be corrected.
                 CorrectionsPositions(nKeys.at(i), bias, tokens, numbers);
@@ -824,10 +826,10 @@ void VTranslateVars::TranslateNumbersToUser(QString &newFormula, QMap<int, QStri
  * @param bias difference between original token length and translated
  * @param tokens all tokens
  */
-void VTranslateVars::BiasTokens(int position, int bias, QMap<int, QString> &tokens)
+void VTranslateVars::BiasTokens(vsizetype position, vsizetype bias, QMap<vsizetype, QString> &tokens)
 {
-    QMap<int, QString> newTokens;
-    QMap<int, QString>::const_iterator i = tokens.constBegin();
+    QMap<vsizetype, QString> newTokens;
+    QMap<vsizetype, QString>::const_iterator i = tokens.constBegin();
     while (i != tokens.constEnd())
     {
         if (i.key()<= position)
@@ -854,7 +856,8 @@ void VTranslateVars::BiasTokens(int position, int bias, QMap<int, QString> &toke
  * @param bias hold change of length between translated and origin token string
  * @return true if was found variable with same name.
  */
-auto VTranslateVars::VariablesFromUser(QString &newFormula, int position, const QString &token, int &bias) const -> bool
+auto VTranslateVars::VariablesFromUser(QString &newFormula, vsizetype position, const QString &token,
+                                       vsizetype &bias) const -> bool
 {
     const QString currentLengthTr =
             variables.value(currentLength).translate(VAbstractApplication::VApp()->Settings()->GetLocale());
@@ -895,7 +898,8 @@ auto VTranslateVars::VariablesFromUser(QString &newFormula, int position, const 
  * @param bias hold change of length between translated and origin token string
  * @return true if was found function with same name.
  */
-auto VTranslateVars::FunctionsFromUser(QString &newFormula, int position, const QString &token, int &bias) const -> bool
+auto VTranslateVars::FunctionsFromUser(QString &newFormula, vsizetype position, const QString &token,
+                                       vsizetype &bias) const -> bool
 {
     QMap<QString, qmu::QmuTranslation>::const_iterator i = functions.constBegin();
     while (i != functions.constEnd())
@@ -920,7 +924,8 @@ auto VTranslateVars::FunctionsFromUser(QString &newFormula, int position, const 
  * @param bias hold change of length between translated and origin token string
  * @return true if was found variable with same name.
  */
-auto VTranslateVars::VariablesToUser(QString &newFormula, int position, const QString &token, int &bias) const -> bool
+auto VTranslateVars::VariablesToUser(QString &newFormula, vsizetype position, const QString &token,
+                                     vsizetype &bias) const -> bool
 {
     QMap<QString, qmu::QmuTranslation>::const_iterator i = variables.constBegin();
     while (i != variables.constEnd())
@@ -951,7 +956,7 @@ auto VTranslateVars::VariablesToUser(QString &newFormula, int position, const QS
 auto VTranslateVars::InternalVarToUser(const QString &var) const -> QString
 {
     QString newVar = var;
-    int bias = 0;
+    vsizetype bias = 0;
     if (VariablesToUser(newVar, 0, var, bias))
     {
         return newVar;
@@ -990,7 +995,7 @@ auto VTranslateVars::VarFromUser(const QString &var) const -> QString
     }
 
     QString newVar = var;
-    int bias = 0;
+    vsizetype bias = 0;
     if (MeasurementsFromUser(newVar, 0, var, bias))
     {
         return newVar;
@@ -1044,8 +1049,8 @@ auto VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator) c
     // Eval formula
     QScopedPointer<qmu::QmuTokenParser> cal(
         new qmu::QmuTokenParser(formula, osSeparator, true, GetTranslatedFunctions()));
-    QMap<int, QString> tokens = cal->GetTokens();// Tokens (variables, measurements)
-    QMap<int, QString> numbers = cal->GetNumbers();// All numbers in expression for changing decimal separator
+    QMap<vsizetype, QString> tokens = cal->GetTokens();// Tokens (variables, measurements)
+    QMap<vsizetype, QString> numbers = cal->GetNumbers();// All numbers in expression for changing decimal separator
     delete cal.take();
 
     QString newFormula = formula;// Local copy for making changes
@@ -1087,8 +1092,8 @@ auto VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) con
 
     QString newFormula = formula;// Local copy for making changes
 
-    QMap<int, QString> tokens;
-    QMap<int, QString> numbers;
+    QMap<vsizetype, QString> tokens;
+    QMap<vsizetype, QString> numbers;
     try
     {
         QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(formula, false, false));// Eval formula

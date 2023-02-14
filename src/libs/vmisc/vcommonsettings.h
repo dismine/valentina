@@ -140,9 +140,6 @@ public:
     auto GetGeometry() const -> QByteArray;
     void SetGeometry(const QByteArray &value);
 
-    auto GetWindowState() const -> QByteArray;
-    void SetWindowState(const QByteArray &value);
-
     auto GetToolbarsState() const -> QByteArray;
     void SetToolbarsState(const QByteArray &value);
 

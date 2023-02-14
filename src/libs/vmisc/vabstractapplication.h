@@ -49,6 +49,10 @@ class QUndoStack;
 class VAbstractApplication;// use in define
 class VCommonSettings;
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+class VTextCodec;
+#endif
+
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
@@ -58,7 +62,7 @@ class VAbstractApplication : public QApplication
     Q_OBJECT // NOLINT
 public:
     VAbstractApplication(int &argc, char ** argv);
-    virtual ~VAbstractApplication() =default;
+    virtual ~VAbstractApplication();
 
     virtual const VTranslateVars *TrVars()=0;
 
@@ -83,6 +87,11 @@ public:
     bool IsWarningMessage(const QString &message) const;
 
     QFileDialog::Options NativeFileDialog(QFileDialog::Options options = QFileDialog::Options()) const;
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    VTextCodec * TextCodecCache(QStringConverter::Encoding encoding) const;
+    void CacheTextCodec(QStringConverter::Encoding encoding, VTextCodec *codec);
+#endif
 
 #if defined(Q_OS_WIN)
     static void WinAttachConsole();
@@ -115,6 +124,10 @@ protected slots:
 
 private:
     Q_DISABLE_COPY_MOVE(VAbstractApplication) // NOLINT
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    QHash<QStringConverter::Encoding, VTextCodec *> m_codecs{};
+#endif
 
     void ClearTranslation();
 };

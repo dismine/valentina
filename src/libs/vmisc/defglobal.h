@@ -47,18 +47,17 @@ void qAsConst(const T &&) Q_DECL_EQ_DELETE;
 #endif
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#define Q_DISABLE_MOVE(Class) \
-    Class(Class &&) = delete; \
-    Class &operator=(Class &&) = delete;
 #define Q_DISABLE_COPY_MOVE(Class) \
     Q_DISABLE_COPY(Class) \
-    Q_DISABLE_MOVE(Class)
+    Class(Class &&) = delete; \
+    Class &operator=(Class &&) = delete;
 #endif
 
 #ifndef Q_DISABLE_ASSIGN_MOVE
 #define Q_DISABLE_ASSIGN_MOVE(Class) \
     Q_DISABLE_ASSIGN(Class) \
-    Q_DISABLE_MOVE(Class)
+    Class(Class &&) = delete; \
+    Class &operator=(Class &&) = delete;
 #endif
 
 #define SUFFIX_APPEND(x, y) x ## y // NOLINT(cppcoreguidelines-macro-usage)
@@ -119,5 +118,16 @@ void qAsConst(const T &&) Q_DECL_EQ_DELETE;
 #define V_NANOSECONDS(x) NANOSECONDS_INT(x) // NOLINT(cppcoreguidelines-macro-usage)
 #endif // QT_VERSION >= QT_VERSION_CHECK(5, 8, 0)
 #endif // (defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+using vsizetype = qsizetype;
+#else
+using vsizetype = int;
+#endif
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+class QTextCodec;
+using VTextCodec = QTextCodec;
+#endif
 
 #endif // DEFGLOBAL_H

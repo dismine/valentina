@@ -28,6 +28,10 @@
 
 #include <QtTest>
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <xercesc/util/PlatformUtils.hpp>
+#endif
+
 #include "tst_vposter.h"
 #include "tst_vabstractpiece.h"
 #include "tst_vspline.h"
@@ -52,6 +56,7 @@
 #include "tst_vtooluniondetails.h"
 #include "tst_vdomdocument.h"
 #include "tst_dxf.h"
+#include "tst_xsdschema.h"
 
 #include "../vmisc/def.h"
 #include "../qmuparser/qmudef.h"
@@ -61,6 +66,12 @@
 int main(int argc, char** argv)
 {
     Q_INIT_RESOURCE(schema);
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    XERCES_CPP_NAMESPACE::XMLPlatformUtils::Initialize();
+
+    auto Terminate = qScopeGuard([](){ XERCES_CPP_NAMESPACE::XMLPlatformUtils::Terminate(); });
+#endif
 
     TestVApplication app( argc, argv );// For QPrinter
 
@@ -96,6 +107,7 @@ int main(int argc, char** argv)
     ASSERT_TEST(new TST_VTranslateVars());
     ASSERT_TEST(new TST_VToolUnionDetails());
     ASSERT_TEST(new TST_DXF());
+    ASSERT_TEST(new TST_XSDShema());
 
     return status;
 }

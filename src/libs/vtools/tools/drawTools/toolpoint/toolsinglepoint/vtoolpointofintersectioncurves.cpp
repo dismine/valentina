@@ -30,9 +30,6 @@
 
 #include <QLineF>
 #include <QSharedPointer>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <new>
 
 #include "../../../../dialogs/tools/dialogpointofintersectioncurves.h"
@@ -102,7 +99,13 @@ VToolPointOfIntersectionCurves *VToolPointOfIntersectionCurves::Create(const QPo
             qobject_cast<DialogPointOfIntersectionCurves *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
     VToolPointOfIntersectionCurvesInitData initData;
+
+    QT_WARNING_POP
+
     initData.firstCurveId = dialogTool->GetFirstCurveId();
     initData.secondCurveId = dialogTool->GetSecondCurveId();
     initData.vCrossPoint = dialogTool->GetVCrossPoint();

@@ -35,18 +35,25 @@
 #include <QLocale>
 #include <QPixmap>
 #include <QSize>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QWidget>
 
 #include "../vproperty_p.h"
 
 VPE::VLineColorProperty::VLineColorProperty(const QString &name)
-    : VProperty(name, QVariant::Int), colors(), indexList()
+    : VProperty(name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                QMetaType::Int),
+#else
+                QVariant::Int),
+#endif
+      colors(), indexList()
 {
     VProperty::d_ptr->VariantValue = 0;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    VProperty::d_ptr->VariantValue.convert(QMetaType(QMetaType::Int));
+#else
     VProperty::d_ptr->VariantValue.convert(QVariant::Int);
+#endif
 }
 
 QVariant VPE::VLineColorProperty::data(int column, int role) const
@@ -147,7 +154,11 @@ void VPE::VLineColorProperty::setValue(const QVariant &value)
     }
 
     VProperty::d_ptr->VariantValue = tmpIndex;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    VProperty::d_ptr->VariantValue.convert(QMetaType(QMetaType::Int));
+#else
     VProperty::d_ptr->VariantValue.convert(QVariant::Int);
+#endif
 
     if (VProperty::d_ptr->editor != nullptr)
     {
@@ -165,7 +176,7 @@ VPE::VProperty *VPE::VLineColorProperty::clone(bool include_children, VProperty 
     return VProperty::clone(include_children, container ? container : new VLineColorProperty(getName()));
 }
 
-int VPE::VLineColorProperty::IndexOfColor(const QMap<QString, QString> &colors, const QString &color)
+vpesizetype VPE::VLineColorProperty::IndexOfColor(const QMap<QString, QString> &colors, const QString &color)
 {
     QVector<QString> indexList;
     QMap<QString, QString>::const_iterator i = colors.constBegin();

@@ -300,19 +300,19 @@ void VPiecePath::Clear()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qint32 VPiecePath::CountNodes() const
+vsizetype VPiecePath::CountNodes() const
 {
     return d->m_nodes.size();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceNode &VPiecePath::operator[](int indx)
+VPieceNode &VPiecePath::operator[](vsizetype indx)
 {
     return d->m_nodes[indx];
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const VPieceNode &VPiecePath::at(int indx) const
+const VPieceNode &VPiecePath::at(vsizetype indx) const
 {
     return d->m_nodes.at(indx);
 }
@@ -591,7 +591,7 @@ QVector<QPainterPath> VPiecePath::CurvesPainterPath(const VContainer *data) cons
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSAPoint VPiecePath::StartSegment(const VContainer *data, const QVector<VPieceNode> &nodes, int i)
+VSAPoint VPiecePath::StartSegment(const VContainer *data, const QVector<VPieceNode> &nodes, vsizetype i)
 {
     if (i < 0 || i > nodes.size()-1)
     {
@@ -615,7 +615,7 @@ VSAPoint VPiecePath::StartSegment(const VContainer *data, const QVector<VPieceNo
 
     if (nodes.size() > 1)
     {
-        const int index = FindInLoopNotExcludedUp(i, nodes);
+        const vsizetype index = FindInLoopNotExcludedUp(i, nodes);
 
         if (index != i && index != -1)
         {
@@ -626,7 +626,7 @@ VSAPoint VPiecePath::StartSegment(const VContainer *data, const QVector<VPieceNo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSAPoint VPiecePath::EndSegment(const VContainer *data, const QVector<VPieceNode> &nodes, int i)
+VSAPoint VPiecePath::EndSegment(const VContainer *data, const QVector<VPieceNode> &nodes, vsizetype i)
 {
     if (i < 0 || i > nodes.size()-1)
     {
@@ -650,7 +650,7 @@ VSAPoint VPiecePath::EndSegment(const VContainer *data, const QVector<VPieceNode
 
     if (nodes.size() > 2)
     {
-        const int index = FindInLoopNotExcludedDown(i, nodes);
+        const vsizetype index = FindInLoopNotExcludedDown(i, nodes);
 
         if (index != i && index != -1)
         {
@@ -775,7 +775,7 @@ bool VPiecePath::OnEdge(quint32 p1, quint32 p2) const
         return false;
     }
     int i = IndexOfNode(list, p1);
-    int j1 = 0, j2 = 0;
+    vsizetype j1 = 0, j2 = 0;
 
     if (i == list.size() - 1)
     {
@@ -811,7 +811,7 @@ bool VPiecePath::OnEdge(quint32 p1, quint32 p2) const
  * @param p2 id second point.
  * @return edge index or -1 if points don't located on edge
  */
-int VPiecePath::Edge(quint32 p1, quint32 p2) const
+vsizetype VPiecePath::Edge(quint32 p1, quint32 p2) const
 {
     if (OnEdge(p1, p2) == false)
     {
@@ -829,10 +829,8 @@ int VPiecePath::Edge(quint32 p1, quint32 p2) const
     {
         return list.size() - 1;
     }
-    else
-    {
-        return min;
-    }
+
+    return min;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -915,12 +913,12 @@ QPointF VPiecePath::NodePreviousPoint(const VContainer *data, int i) const
 {
     if (i < 0 || i > d->m_nodes.size()-1)
     {
-        return QPointF();
+        return {};
     }
 
     if (d->m_nodes.size() > 1)
     {
-        int index = 0;
+        vsizetype index = 0;
         if (i == 0)
         {
             index = d->m_nodes.size()-1;
@@ -1056,14 +1054,14 @@ int VPiecePath::indexOfNode(const QVector<VPieceNode> &nodes, quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VPiecePath::FindInLoopNotExcludedUp(int start, const QVector<VPieceNode> &nodes)
+vsizetype VPiecePath::FindInLoopNotExcludedUp(vsizetype start, const QVector<VPieceNode> &nodes)
 {
     if (start < 0 || start >= nodes.size())
     {
         return -1;
     }
 
-    int i = (start == 0) ? nodes.size()-1 : start-1;
+    vsizetype i = (start == 0) ? nodes.size()-1 : start-1;
 
     if (i < 0 || i >= nodes.size())
     {
@@ -1092,14 +1090,14 @@ int VPiecePath::FindInLoopNotExcludedUp(int start, const QVector<VPieceNode> &no
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VPiecePath::FindInLoopNotExcludedDown(int start, const QVector<VPieceNode> &nodes)
+vsizetype VPiecePath::FindInLoopNotExcludedDown(vsizetype start, const QVector<VPieceNode> &nodes)
 {
     if (start < 0 || start >= nodes.size())
     {
         return -1;
     }
 
-    int i = (start == nodes.size()-1) ? 0 : start+1;
+    vsizetype i = (start == nodes.size()-1) ? 0 : start+1;
 
     if (i < 0 || i >= nodes.size())
     {
@@ -1147,7 +1145,7 @@ VSAPoint VPiecePath::PreparePointEkv(const VPieceNode &node, const VContainer *d
 
 //---------------------------------------------------------------------------------------------------------------------
 QVector<VSAPoint> VPiecePath::CurveSeamAllowanceSegment(const VContainer *data, const QVector<VPieceNode> &nodes,
-                                                        const QSharedPointer<VAbstractCurve> &curve, int i,
+                                                        const QSharedPointer<VAbstractCurve> &curve, vsizetype i,
                                                         bool reverse, qreal width, const QString &piece)
 {
     const VSAPoint begin = StartSegment(data, nodes, i);
@@ -1245,11 +1243,11 @@ QVector<VSAPoint> VPiecePath::CurveSeamAllowanceSegment(const VContainer *data, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPiecePath::NodeName(const QVector<VPieceNode> &nodes, int nodeIndex, const VContainer *data)
+QString VPiecePath::NodeName(const QVector<VPieceNode> &nodes, vsizetype nodeIndex, const VContainer *data)
 {
     if (not nodes.isEmpty() && (nodeIndex < 0 || nodeIndex >= nodes.size()))
     {
-        return QString();
+        return {};
     }
 
     try

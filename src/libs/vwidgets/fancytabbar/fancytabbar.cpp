@@ -338,7 +338,11 @@ bool FancyTabBar::event(QEvent *event)
 
 //---------------------------------------------------------------------------------------------------------------------
 // Resets hover animation on mouse enter
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+void FancyTabBar::enterEvent(QEnterEvent *e)
+#else
 void FancyTabBar::enterEvent(QEvent *e)
+#endif
 {
     Q_UNUSED(e)
     m_hoverRect = QRect();
@@ -378,12 +382,10 @@ QSize FancyTabBar::sizeHint() const
 
     if (m_position == Above || m_position == Below)
     {
-        return QSize(sh.width() * m_attachedTabs.count(), sh.height());
+        return QSize(sh.width() * static_cast<int>(m_attachedTabs.count()), sh.height());
     }
-    else
-    {
-        return QSize(sh.width(), sh.height() * m_attachedTabs.count());
-    }
+
+    return QSize(sh.width(), sh.height() * static_cast<int>(m_attachedTabs.count()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -394,12 +396,10 @@ QSize FancyTabBar::minimumSizeHint() const
 
     if(m_position == Above || m_position == Below)
     {
-        return QSize(sh.width() * m_attachedTabs.count(), sh.height());
+        return QSize(sh.width() * static_cast<int>(m_attachedTabs.count()), sh.height());
     }
-    else
-    {
-        return QSize(sh.width(), sh.height() * m_attachedTabs.count());
-    }
+
+    return QSize(sh.width(), sh.height() * static_cast<int>(m_attachedTabs.count()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -411,7 +411,7 @@ QRect FancyTabBar::TabRect(int index) const
     {
         if (sh.width() * m_attachedTabs.count() > width())
         {
-            sh.setWidth(width() / m_attachedTabs.count());
+            sh.setWidth(width() / static_cast<int>(m_attachedTabs.count()));
         }
 
         return QRect(index * sh.width(), 0, sh.width(), sh.height());
@@ -420,7 +420,7 @@ QRect FancyTabBar::TabRect(int index) const
     {
         if (sh.height() * m_attachedTabs.count() > height())
         {
-            sh.setHeight(height() / m_attachedTabs.count());
+            sh.setHeight(height() / static_cast<int>(m_attachedTabs.count()));
         }
 
         return QRect(0, index * sh.height(), sh.width(), sh.height());
@@ -629,7 +629,7 @@ void FancyTabBar::SetTabText(int index, const QString &text)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int FancyTabBar::Count() const
+vsizetype FancyTabBar::Count() const
 {
     return m_attachedTabs.count();
 }

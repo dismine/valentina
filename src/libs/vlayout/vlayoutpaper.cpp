@@ -269,7 +269,7 @@ bool VLayoutPaper::ArrangeDetail(const VLayoutPiece &detail, std::atomic_bool &s
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VLayoutPaper::Count() const
+vsizetype VLayoutPaper::Count() const
 {
     return d->details.count();
 }
@@ -442,10 +442,12 @@ void VLayoutPaper::SetDetails(const QVector<VLayoutPiece> &details)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 void VLayoutPaper::SetDetails(const QList<VLayoutPiece> &details)
 {
     d->details = ConvertToVector(details);
 }
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 QRectF VLayoutPaper::DetailsBoundingRect() const

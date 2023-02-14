@@ -175,7 +175,7 @@ void DialogCubicBezierPath::ShowDialog(bool click)
 {
     if (click == false)
     {
-        const int size = path.CountPoints();
+        const auto size = path.CountPoints();
         if (size >= 7)
         {
             if (size - VCubicBezierPath::SubSplPointsCount(path.CountSubSpl()) == 0)
@@ -320,10 +320,10 @@ QSet<quint32> DialogCubicBezierPath::AllPathBackboneIds() const
     }
 
     QSet<quint32> ids;
-    const qint32 count = VCubicBezierPath::CountSubSpl(points.size());// Count subpaths
+    const auto count = VCubicBezierPath::CountSubSpl(points.size());// Count subpaths
     for (qint32 i = 1; i <= count; ++i)
     {
-        const qint32 base = VCubicBezierPath::SubSplOffset(i);
+        const auto base = VCubicBezierPath::SubSplOffset(i);
         ids.insert(points.at(base));// The first subpath's point
         ids.insert(points.at(base + 3));// The last subpath's point
     }

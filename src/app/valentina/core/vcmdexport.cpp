@@ -36,7 +36,12 @@
 #include "../vmisc/dialogs/dialogexporttocsv.h"
 #include "../vlayout/vlayoutgenerator.h"
 #include <QDebug>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include "../vmisc/vtextcodec.h"
+#else
 #include <QTextCodec>
+#endif
 
 VCommandLinePtr VCommandLine::instance = nullptr; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 
@@ -736,7 +741,7 @@ void VCommandLine::InitCommandLineOptions()
          "Qt. Default value depend from system. On Windows, the codec will be based on a system locale. On Unix "
          "systems, the codec will might fall back to using the iconv library if no builtin codec for the locale can be "
          "found. Valid values for this installation:") + DialogExportToCSV::MakeHelpCodecsList(),
-         translate("VCommandLine", "Codec name"), QString(QTextCodec::codecForLocale()->name())},
+         translate("VCommandLine", "Codec name"), QString(VTextCodec::codecForLocale()->name())},
         {LONG_OPTION_CSVSEPARATOR,
          translate("VCommandLine", "Specify csv separator character. Default value is '%1'. Valid characters:")
          .arg(VCommonSettings::GetDefCSVSeparator()) + DialogExportToCSV::MakeHelpSeparatorList(),

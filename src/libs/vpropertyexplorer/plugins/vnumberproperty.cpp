@@ -45,21 +45,34 @@ const int VPE::VIntegerProperty::StandardMin = -1000000;
 const int VPE::VIntegerProperty::StandardMax = 1000000;
 
 VPE::VIntegerProperty::VIntegerProperty(const QString& name, const QMap<QString, QVariant>& settings)
-    : VProperty(name, QVariant::Int),
+    : VProperty(name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                QMetaType::Int),
+#else
+                QVariant::Int),
+#endif
       m_minValue(StandardMin),
       m_maxValue(StandardMax),
       m_singleStep(1.0)
 {
     VProperty::setSettings(settings);
     VProperty::d_ptr->VariantValue.setValue(0);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    VProperty::d_ptr->VariantValue.convert(QMetaType(QMetaType::Int));
+#else
     VProperty::d_ptr->VariantValue.convert(QVariant::Int);
+#endif
 }
 
 VPE::VIntegerProperty::VIntegerProperty(const QString &name)
     : VProperty(name), m_minValue(StandardMin), m_maxValue(StandardMax), m_singleStep(1.0)
 {
     VProperty::d_ptr->VariantValue.setValue(0);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    VProperty::d_ptr->VariantValue.convert(QMetaType(QMetaType::Int));
+#else
     VProperty::d_ptr->VariantValue.convert(QVariant::Int);
+#endif
 }
 
 //! Returns an editor widget, or NULL if it doesn't supply one
@@ -166,7 +179,13 @@ const int VPE::VDoubleProperty::StandardMax = 1000000;
 const double VPE::VDoubleProperty::StandardPrecision = 5;
 
 VPE::VDoubleProperty::VDoubleProperty(const QString& name, const QMap<QString, QVariant>& settings)
-    : VProperty(name, QVariant::Double),
+    : VProperty(name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                QMetaType::Double),
+#else
+                QVariant::Double),
+#endif
+
       m_minValue(StandardMin),
       m_maxValue(StandardMax),
       m_singleStep(1.0),
@@ -174,7 +193,11 @@ VPE::VDoubleProperty::VDoubleProperty(const QString& name, const QMap<QString, Q
 {
     VProperty::setSettings(settings);
     VProperty::d_ptr->VariantValue.setValue(0);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    VProperty::d_ptr->VariantValue.convert(QMetaType(QMetaType::Double));
+#else
     VProperty::d_ptr->VariantValue.convert(QVariant::Double);
+#endif
 }
 
 VPE::VDoubleProperty::VDoubleProperty(const QString &name)
@@ -185,8 +208,13 @@ VPE::VDoubleProperty::VDoubleProperty(const QString &name)
       m_precision(static_cast<int>(StandardPrecision))
 {
     VProperty::d_ptr->VariantValue.setValue(0);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    VProperty::d_ptr->VariantValue.convert(QMetaType(QMetaType::Double));
+    VProperty::d_ptr->PropertyVariantType = QMetaType::Double;
+#else
     VProperty::d_ptr->VariantValue.convert(QVariant::Double);
     VProperty::d_ptr->PropertyVariantType = QVariant::Double;
+#endif
 }
 
 //! Returns an editor widget, or NULL if it doesn't supply one

@@ -1,6 +1,28 @@
+import qbs.Utilities
+
 VLib {
-    Depends { name: "Qt"; submodules: ["gui", "xml", "svg", "xmlpatterns", "concurrent"] }
+    Depends { name: "Qt"; submodules: ["core", "gui", "xml", "svg", "concurrent"] }
     Depends { name: "VMiscLib" }
+
+    Depends {
+        name: "Qt.xmlpatterns"
+        condition: Utilities.versionCompare(Qt.core.version, "6") < 0
+    }
+
+    Depends {
+        name: "xerces-c"
+        condition: !buildconfig.useConanPackages
+    }
+
+    Depends {
+        name: "conan.XercesC"
+        condition: buildconfig.useConanPackages
+    }
+
+    Properties {
+        condition: buildconfig.useConan && (qbs.targetOS.contains("macos") || qbs.targetOS.contains("windows"))
+        conan.XercesC.installLib: true
+    }
 
     name: "IFCLib"
     files: [
@@ -31,7 +53,7 @@ VLib {
             "vexceptionwrongid.cpp",
             "vexceptionundo.cpp",
             "vexceptioninvalidnotch.cpp",
-            "vexceptioninvalidhistory.cpp", 
+            "vexceptioninvalidhistory.cpp"
         ]
     }
 
@@ -44,6 +66,8 @@ VLib {
             "vbackgroundpatternimage.h",
             "vdomdocument.h",
             "vlayoutconverter.h",
+            "vparsererrorhandler.cpp",
+            "vparsererrorhandler.h",
             "vpatternconverter.h",
             "vpatternimage.h",
             "vtoolrecord.h",
@@ -81,6 +105,7 @@ VLib {
         Depends { name: "cpp" }
         Depends { name: "Qt"; submodules: ["xml"] }
         Depends { name: "VMiscLib" }
+        Depends { name: "conan.XercesC"; condition: buildconfig.useConanPackages }
         cpp.includePaths: [exportingProduct.sourceDirectory]
     }
 }

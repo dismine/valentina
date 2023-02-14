@@ -49,13 +49,20 @@
 #include "../ifc/xml/vvitconverter.h"
 #include "../vwidgets/vwidgetpopup.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-
 #include "../vtools/undocommands/undogroup.h"
 #include "../vformat/vpatternrecipe.h"
 #include "../vlayout/dialogs/watermarkwindow.h"
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include "../vmisc/vtextcodec.h"
+#else
+#include <QTextCodec>
+#endif
+
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+
 #include "../vlayout/vlayoutexporter.h"
 #include "../vwidgets/vgraphicssimpletextitem.h"
 #include "../vlayout/dialogs/dialoglayoutscale.h"
@@ -183,20 +190,22 @@
 #include <QShowEvent>
 #include <QScrollBar>
 #include <QFileDialog>
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <QSourceLocation>
+#endif
+
 #include <QUndoStack>
 #include <QAction>
 #include <QProcess>
 #include <QSettings>
 #include <QTimer>
 #include <QtGlobal>
-#include <QDesktopWidget>
 #include <QDesktopServices>
 #include <chrono>
 #include <thread>
 #include <QFileSystemWatcher>
 #include <QComboBox>
-#include <QTextCodec>
 #include <QDoubleSpinBox>
 #include <QProgressBar>
 #include <QGlobalStatic>
@@ -1919,7 +1928,7 @@ void MainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int m
     SavePreviewCalculation(true);
 
     QString error;
-    csv.toCSV(fileName, error, withHeader, separator, QTextCodec::codecForMib(mib));
+    csv.toCSV(fileName, error, withHeader, separator, VTextCodec::codecForMib(mib));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2693,7 +2702,7 @@ auto MainWindow::FullParsePattern() -> bool
     {
         if (VAbstractValApplication::VApp()->getOpeningPattern())
         {
-            futureTestUniqueId = QtConcurrent::run(static_cast<VDomDocument *>(doc), &VDomDocument::TestUniqueId); // clazy:exclude=unneeded-cast
+            futureTestUniqueId = QtConcurrent::run([this](){doc->TestUniqueId();});
         }
 
         SetEnabledGUI(true);
@@ -2898,36 +2907,71 @@ void MainWindow::ToolBarTools()
 
     QList<QKeySequence> zoomInShortcuts;
     zoomInShortcuts.append(QKeySequence(QKeySequence::ZoomIn));
-    zoomInShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_Plus + Qt::KeypadModifier));
+    zoomInShortcuts.append(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(QKeyCombination(Qt::ControlModifier), Qt::Key_Plus | Qt::KeypadModifier));
+#else
+        QKeySequence(Qt::ControlModifier + Qt::Key_Plus + Qt::KeypadModifier));
+#endif
     ui->actionZoomIn->setShortcuts(zoomInShortcuts);
     connect(ui->actionZoomIn, &QAction::triggered, ui->view, &VMainGraphicsView::ZoomIn);
 
     QList<QKeySequence> zoomOutShortcuts;
     zoomOutShortcuts.append(QKeySequence(QKeySequence::ZoomOut));
-    zoomOutShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_Minus + Qt::KeypadModifier));
+    zoomOutShortcuts.append(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(QKeyCombination(Qt::ControlModifier), Qt::Key_Minus | Qt::KeypadModifier));
+#else
+        QKeySequence(Qt::ControlModifier + Qt::Key_Minus + Qt::KeypadModifier));
+#endif
     ui->actionZoomOut->setShortcuts(zoomOutShortcuts);
     connect(ui->actionZoomOut, &QAction::triggered, ui->view, &VMainGraphicsView::ZoomOut);
 
     QList<QKeySequence> zoomOriginalShortcuts;
-    zoomOriginalShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_0));
-    zoomOriginalShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_0 + Qt::KeypadModifier));
+    zoomOriginalShortcuts.append(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(Qt::ControlModifier | Qt::Key_0));
+#else
+        QKeySequence(Qt::ControlModifier + Qt::Key_0));
+#endif
+    zoomOriginalShortcuts.append(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(QKeyCombination(Qt::ControlModifier), Qt::Key_0 | Qt::KeypadModifier));
+#else
+        QKeySequence(Qt::ControlModifier + Qt::Key_0 + Qt::KeypadModifier));
+#endif
     ui->actionZoomOriginal->setShortcuts(zoomOriginalShortcuts);
     connect(ui->actionZoomOriginal, &QAction::triggered, ui->view, &VMainGraphicsView::ZoomOriginal);
 
     QList<QKeySequence> zoomFitBestShortcuts;
-    zoomFitBestShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_Equal));
+    zoomFitBestShortcuts.append(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(Qt::ControlModifier | Qt::Key_Equal));
+#else
+        QKeySequence(Qt::ControlModifier + Qt::Key_Equal));
+#endif
     ui->actionZoomFitBest->setShortcuts(zoomFitBestShortcuts);
     connect(ui->actionZoomFitBest, &QAction::triggered, ui->view, &VMainGraphicsView::ZoomFitBest);
 
     QList<QKeySequence> zoomFitBestCurrentShortcuts;
-    zoomFitBestCurrentShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_M));
+    zoomFitBestCurrentShortcuts.append(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(Qt::ControlModifier | Qt::Key_M));
+#else
+        QKeySequence(Qt::ControlModifier + Qt::Key_M));
+#endif
     ui->actionZoomFitBestCurrent->setShortcuts(zoomFitBestCurrentShortcuts);
     connect(ui->actionZoomFitBestCurrent, &QAction::triggered, this, &MainWindow::ZoomFitBestCurrent);
 
     connect(ui->actionPreviousPatternPiece, &QAction::triggered, this, &MainWindow::PreviousPatternPiece);
     connect(ui->actionNextPatternPiece, &QAction::triggered, this, &MainWindow::NextPatternPiece);
 
-    ui->actionIncreaseLabelFont->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_Plus));
+    ui->actionIncreaseLabelFont->setShortcut(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(Qt::ShiftModifier | Qt::Key_Plus));
+#else
+        QKeySequence(Qt::ShiftModifier + Qt::Key_Plus));
+#endif
     connect(ui->actionIncreaseLabelFont, &QAction::triggered, this, [this]()
     {
         VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
@@ -2943,7 +2987,12 @@ void MainWindow::ToolBarTools()
         }
     });
 
-    ui->actionDecreaseLabelFont->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_Minus));
+    ui->actionDecreaseLabelFont->setShortcut(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(Qt::ShiftModifier | Qt::Key_Minus));
+#else
+        QKeySequence(Qt::ShiftModifier + Qt::Key_Minus));
+#endif
     connect(ui->actionDecreaseLabelFont, &QAction::triggered, this, [this]()
     {
         VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
@@ -2959,7 +3008,12 @@ void MainWindow::ToolBarTools()
         }
     });
 
-    ui->actionOriginalLabelFont->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_0));
+    ui->actionOriginalLabelFont->setShortcut(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(Qt::ShiftModifier | Qt::Key_0));
+#else
+        QKeySequence(Qt::ShiftModifier + Qt::Key_0));
+#endif
     connect(ui->actionOriginalLabelFont, &QAction::triggered, this, [this]()
     {
         VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
@@ -2975,7 +3029,12 @@ void MainWindow::ToolBarTools()
         }
     });
 
-    ui->actionHideLabels->setShortcut(QKeySequence(Qt::AltModifier + Qt::Key_L));
+    ui->actionHideLabels->setShortcut(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(Qt::AltModifier | Qt::Key_L));
+#else
+        QKeySequence(Qt::AltModifier + Qt::Key_L));
+#endif
     ui->actionHideLabels->setChecked(VAbstractValApplication::VApp()->ValentinaSettings()->GetHideLabels());
     connect(ui->actionHideLabels, &QAction::triggered, this, [this](bool checked)
     {
@@ -5145,7 +5204,6 @@ void MainWindow::ReadSettings()
     if (settings->status() == QSettings::NoError)
     {
         restoreGeometry(settings->GetGeometry());
-        restoreState(settings->GetWindowState());
         restoreState(settings->GetToolbarsState(), AppVersion());
 
         m_groupsActive = settings->IsDockWidgetGroupsActive();
@@ -5190,7 +5248,6 @@ void MainWindow::WriteSettings()
 
     VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
     settings->SetGeometry(saveGeometry());
-    settings->SetWindowState(saveState());
     settings->SetToolbarsState(saveState(AppVersion()));
 
     settings->SetDockWidgetGroupsActive(ui->dockWidgetGroups->isVisible());
@@ -6203,7 +6260,8 @@ void MainWindow::ExportLayoutAs()
     try
     {
         m_dialogSaveLayout = QSharedPointer<DialogSaveLayout>(
-                    new DialogSaveLayout(m_layoutSettings->LayoutScenes().size(), Draw::Layout, FileName(), this));
+            new DialogSaveLayout(static_cast<int>(m_layoutSettings->LayoutScenes().size()), Draw::Layout, FileName(),
+                                 this));
 
         if (m_dialogSaveLayout->exec() == QDialog::Rejected)
         {
@@ -6616,8 +6674,8 @@ auto MainWindow::DoExport(const VCommandLinePtr &expParams) -> bool
             try
             {
                 m_dialogSaveLayout = QSharedPointer<DialogSaveLayout>(
-                            new DialogSaveLayout(m_layoutSettings->LayoutScenes().size(),
-                                                 Draw::Layout, expParams->OptBaseName(), this));
+                    new DialogSaveLayout(static_cast<int>(m_layoutSettings->LayoutScenes().size()),
+                                         Draw::Layout, expParams->OptBaseName(), this));
                 m_dialogSaveLayout->SetDestinationPath(expParams->OptDestinationPath());
                 m_dialogSaveLayout->SelectFormat(static_cast<LayoutExportFormats>(expParams->OptExportType()));
                 m_dialogSaveLayout->SetBinaryDXFFormat(expParams->IsBinaryDXF());
@@ -6679,10 +6737,10 @@ auto MainWindow::DoFMExport(const VCommandLinePtr &expParams) -> bool
     }
 
     const QString codecName = expParams->OptCSVCodecName();
-    int mib = QTextCodec::codecForLocale()->mibEnum();
+    int mib = VTextCodec::codecForLocale()->mibEnum();
     if (not codecName.isEmpty())
     {
-        if (QTextCodec *codec = QTextCodec::codecForName(codecName.toLatin1()))
+        if (VTextCodec *codec = VTextCodec::codecForName(codecName.toLatin1()))
         {
             mib = codec->mibEnum();
         }

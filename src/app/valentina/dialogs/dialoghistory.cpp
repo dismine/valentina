@@ -177,7 +177,7 @@ void DialogHistory::FillTable()
     QVector<VToolRecord> history = m_doc->getLocalHistory();
     qint32 currentRow = -1;
     qint32 count = 0;
-    ui->tableWidget->setRowCount(history.size());//Make row count max possible number
+    ui->tableWidget->setRowCount(static_cast<int>(history.size()));//Make row count max possible number
 
     std::function<HistoryRecord (const VToolRecord &tool)> CreateRecord = [this](const VToolRecord &tool)
     {

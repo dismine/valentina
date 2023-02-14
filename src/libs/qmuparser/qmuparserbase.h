@@ -111,8 +111,8 @@ public:
     const funmap_type& GetFunDef() const;
     static QString     GetVersion(EParserVersionInfo eInfo = pviFULL);
     static const QStringList& GetOprtDef();
-    QMap<int, QString> GetTokens() const;
-    QMap<int, QString> GetNumbers() const;
+    QMap<qmusizetype, QString> GetTokens() const;
+    QMap<qmusizetype, QString> GetNumbers() const;
     void               DefineNameChars(const QString &a_szCharset);
     void               DefineOprtChars(const QString &a_szCharset);
     void               DefineInfixOprtChars(const QString &a_szCharset);
@@ -121,7 +121,7 @@ public:
     const QString&     ValidInfixOprtChars() const;
     void               SetArgSep(char_type cArgSep);
     QChar              GetArgSep() const;
-    void Q_NORETURN    Error(EErrorCodes a_iErrc, int a_iPos = -1, const QString &a_sTok = QString() ) const;
+    Q_NORETURN void Error(EErrorCodes a_iErrc, qmusizetype a_iPos = -1, const QString &a_sTok = QString() ) const;
 
     template<typename T>
     void DefineFun(const QString &a_strName, T a_pFun, bool a_bAllowOpt = true);
@@ -162,7 +162,7 @@ protected:
     virtual void InitFun() = 0;
     virtual void InitConst() = 0;
     virtual void InitOprt() = 0;
-    virtual void OnDetectVar(const QString &pExpr, int &nStart, int &nEnd);
+    virtual void OnDetectVar(const QString &pExpr, qmusizetype &nStart, qmusizetype &nEnd);
     /**
      * @brief A facet class used to change decimal and thousands separator.
      */
@@ -256,8 +256,8 @@ private:
     // items merely used for caching state information
     mutable valbuf_type m_vStackBuffer; ///< This is merely a buffer used for the stack in the cmd parsing routine
     mutable int m_nFinalResultIdx;
-    mutable QMap<int, QString> m_Tokens;///< Keep all tokens that we can translate
-    mutable QMap<int, QString> m_Numbers;///< Keep all numbers what exist in formula
+    mutable QMap<qmusizetype, QString> m_Tokens;///< Keep all tokens that we can translate
+    mutable QMap<qmusizetype, QString> m_Numbers;///< Keep all numbers what exist in formula
 
     bool allowSubexpressions;
 
@@ -337,13 +337,13 @@ inline const QStringList &QmuParserBase::GetOprtDef()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QMap<int, QString> QmuParserBase::GetTokens() const
+inline QMap<qmusizetype, QString> QmuParserBase::GetTokens() const
 {
     return m_Tokens;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QMap<int, QString> QmuParserBase::GetNumbers() const
+inline QMap<qmusizetype, QString> QmuParserBase::GetNumbers() const
 {
     return m_Numbers;
 }

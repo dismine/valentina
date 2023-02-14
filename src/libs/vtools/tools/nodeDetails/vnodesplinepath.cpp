@@ -29,9 +29,6 @@
 #include "vnodesplinepath.h"
 
 #include <QDomElement>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 
 #include "../ifc/xml/vdomdocument.h"
 #include "../ifc/ifcdef.h"

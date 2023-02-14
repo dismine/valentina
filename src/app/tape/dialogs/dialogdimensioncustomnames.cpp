@@ -69,7 +69,7 @@ void DialogDimensionCustomNames::InitTable(const QMap<MeasurementDimension, Meas
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->clearContents();
 
-    ui->tableWidget->setRowCount(dimensions.size());
+    ui->tableWidget->setRowCount(static_cast<int>(dimensions.size()));
 
     int row = 0;
     QMap<MeasurementDimension, MeasurementDimension_p>::const_iterator i = dimensions.constBegin();

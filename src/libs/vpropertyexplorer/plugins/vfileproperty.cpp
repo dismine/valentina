@@ -30,7 +30,13 @@
 #include "../vproperty_p.h"
 
 VPE::VFileProperty::VFileProperty(const QString& name)
-    : VProperty(new VFilePropertyPrivate(name, QVariant::String))
+    : VProperty(
+        new VFilePropertyPrivate(name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                                 QMetaType::QString))
+#else
+                                 QVariant::String))
+#endif
 {
 
 }

@@ -32,7 +32,6 @@
 #include "vpapplication.h"
 #include "../vmisc/def.h"
 
-
 #if defined(APPIMAGE) && defined(Q_OS_LINUX)
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
 #   include "../vmisc/backport/qscopeguard.h"
@@ -41,6 +40,10 @@
 #endif
 #   include "../vmisc/appimage.h"
 #endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <xercesc/util/PlatformUtils.hpp>
+#endif
 
 auto main(int argc, char *argv[]) -> int
 {
@@ -67,6 +70,12 @@ auto main(int argc, char *argv[]) -> int
 #ifndef Q_OS_MAC // supports natively
     InitHighDpiScaling(argc, argv);
 #endif //Q_OS_MAC
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    XERCES_CPP_NAMESPACE::XMLPlatformUtils::Initialize();
+
+    auto Terminate = qScopeGuard([](){ XERCES_CPP_NAMESPACE::XMLPlatformUtils::Terminate(); });
+#endif
 
     VPApplication app(argc, argv);
     app.InitOptions();

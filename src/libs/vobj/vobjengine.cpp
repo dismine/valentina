@@ -46,7 +46,12 @@
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+
 #include "../vmisc/vmath.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
+#include "../vmisc/backport/text.h"
+#endif
 
 class QPaintDevice;
 class QPixmap;
@@ -129,13 +134,8 @@ bool VObjEngine::begin(QPaintDevice *pdev)
     }
 
     stream = QSharedPointer<QTextStream>(new QTextStream(outputDevice.data()));
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-    *stream << "# Valentina OBJ File" <<  endl;
-    *stream << "# smart-pattern.com.ua/" <<  endl;
-#else
     *stream << "# Valentina OBJ File" <<  Qt::endl;
     *stream << "# smart-pattern.com.ua/" <<  Qt::endl;
-#endif
     return true;
 }
 
@@ -175,11 +175,7 @@ void VObjEngine::drawPath(const QPainterPath &path)
     qint64 sq = Square(polygon);
 
     ++planeCount;
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-    *stream << "o Plane." << QString("%1").arg(planeCount, 3, 10, QLatin1Char('0')) << endl;
-#else
     *stream << "o Plane." << QString("%1").arg(planeCount, 3, 10, QLatin1Char('0')) << Qt::endl;
-#endif
 
     quint32 num_points = 0;
 
@@ -235,11 +231,7 @@ void VObjEngine::drawPath(const QPainterPath &path)
     }
 
     delaunay2d_release(res);//Don't forget release data
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-    *stream << "s off" << endl;
-#else
     *stream << "s off" << Qt::endl;
-#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -254,11 +246,7 @@ void VObjEngine::drawPolygon(const QPointF *points, int pointCount, PolygonDrawM
     {
         *stream << QString(" %1").arg(static_cast<int>(globalPointsCount) - pointCount + i + 1);
     }
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-    *stream << endl;
-#else
     *stream << Qt::endl;
-#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -281,13 +269,8 @@ void VObjEngine::drawPoints(const QPointF *points, int pointCount)
         qreal x = ((points[i].x() - 0)/qFloor(size.width()/2.0)) - 1.0;
         qreal y = (((points[i].y() - 0)/qFloor(size.width()/2.0)) - 1.0)*-1;
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-        *stream << "v" << " " << QString::number(x, 'f', 6 ) << " " << QString::number(y, 'f', 6 ) << " "
-             << "0.000000" << endl;
-#else
         *stream << "v" << " " << QString::number(x, 'f', 6 ) << " " << QString::number(y, 'f', 6 ) << " "
                 << "0.000000" << Qt::endl;
-#endif
         ++globalPointsCount;
     }
 }
@@ -368,7 +351,7 @@ qint64 VObjEngine::Square(const QPolygonF &poly) const
     QVector<qreal> x;
     QVector<qreal> y;
 
-    int n = poly.count();
+    vsizetype n = poly.count();
     qreal s, res = 0;
     qint64 sq = 0;
 

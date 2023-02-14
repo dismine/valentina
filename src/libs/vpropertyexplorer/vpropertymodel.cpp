@@ -24,6 +24,7 @@
 
 #include "vproperty.h"
 #include "vpropertyset.h"
+#include "vpropertydef.h"
 
 #include "vpropertymodel_p.h"
 
@@ -60,8 +61,10 @@ bool VPE::VPropertyModel::addProperty(VProperty* property, const QString& id, co
     if (emitsignals)
     {
         VProperty* tmpParent = getProperty(parentid);
-        int tmpRow = tmpParent != nullptr ? tmpParent->getRowCount() : d_ptr->Properties->getRootPropertyCount();
-        beginInsertRows((tmpParent != nullptr ? getIndexFromProperty(tmpParent) : QModelIndex()), tmpRow, tmpRow);
+        vpesizetype tmpRow = tmpParent != nullptr ? tmpParent->getRowCount()
+                                                  : d_ptr->Properties->getRootPropertyCount();
+        beginInsertRows((tmpParent != nullptr ? getIndexFromProperty(tmpParent) : QModelIndex()),
+                        static_cast<int>(tmpRow), static_cast<int>(tmpRow));
     }
 
     d_ptr->Properties->addProperty(property, id, parentid);
@@ -129,7 +132,7 @@ QModelIndex VPE::VPropertyModel::parent ( const QModelIndex & index ) const
 {
     if (!index.isValid())
     {
-        return QModelIndex();
+        return {};
     }
 
     VProperty* childItem = getProperty(index);
@@ -139,17 +142,18 @@ QModelIndex VPE::VPropertyModel::parent ( const QModelIndex & index ) const
         if (parentItem)
         {
             VProperty* grandParentItem = parentItem->getParent();
-            int parents_row = grandParentItem != nullptr ? grandParentItem->getChildRow(parentItem)
-                                                         : d_ptr->Properties->getRootProperties().indexOf(parentItem);
+            vpesizetype parents_row =
+                grandParentItem != nullptr ? grandParentItem->getChildRow(parentItem)
+                                           : d_ptr->Properties->getRootProperties().indexOf(parentItem);
 
             if (parents_row >= 0)
             {
-                return createIndex(parents_row, 0, parentItem);
+                return createIndex(static_cast<int>(parents_row), 0, parentItem);
             }
         }
     }
 
-    return QModelIndex();
+    return {};
 }
 
 //! Returns the item flags for the given index
@@ -225,21 +229,21 @@ QVariant VPE::VPropertyModel::headerData (int section, Qt::Orientation orientati
 
 
 //! Returns the number of rows
-int VPE::VPropertyModel::rowCount ( const QModelIndex & parent ) const
+int VPE::VPropertyModel::rowCount( const QModelIndex & parent ) const
 {
     if (parent.isValid())
     {
         VProperty* tmpParent = getProperty(parent);
         if (tmpParent)
         {
-            return tmpParent->getRowCount();
+            return static_cast<int>(tmpParent->getRowCount());
         }
     }
 
     // Return the root property count
     if (d_ptr->Properties)
     {
-        return d_ptr->Properties->getRootPropertyCount();
+        return static_cast<int>(d_ptr->Properties->getRootPropertyCount());
     }
 
     return 0;
@@ -278,18 +282,18 @@ QModelIndex VPE::VPropertyModel::getIndexFromProperty(VProperty* property, int c
 {
     if (!property || column > columnCount() || column < 0)
     {
-        return QModelIndex();
+        return {};
     }
 
     VProperty* parentItem = property->getParent();
-    int row = 0;
+    vpesizetype row = 0;
 
     if (parentItem)
     {
         row = parentItem->getChildRow(property);
     }
 
-    return createIndex(row, column, property);
+    return createIndex(static_cast<int>(row), column, property);
 }
 
 

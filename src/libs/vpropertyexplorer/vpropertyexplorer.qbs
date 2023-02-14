@@ -7,6 +7,8 @@ VDynamicLib {
     version: "1.0.0"
     files: [
         "vproperty.cpp",
+        "vpropertydef.cpp",
+        "vpropertydef.h",
         "vpropertydelegate.cpp",
         "vpropertyfactorymanager.cpp",
         "vpropertyformview.cpp",

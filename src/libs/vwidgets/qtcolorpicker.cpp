@@ -207,7 +207,7 @@ public:
                QWidget *parent = nullptr);
     ~ColorPickerPopup();
 
-    void insertColor(const QColor &col, const QString &text, int index);
+    void insertColor(const QColor &col, const QString &text, vsizetype index);
     void exec();
 
     void setExecFlag();
@@ -618,7 +618,7 @@ auto ColorPickerPopup::find(const QColor &col) const -> ColorPickerItem *
     Adds \a item to the grid. The items are added from top-left to
     bottom-right.
 */
-void ColorPickerPopup::insertColor(const QColor &col, const QString &text, int index)
+void ColorPickerPopup::insertColor(const QColor &col, const QString &text, vsizetype index)
 {
     // Don't add colors that we have already.
     ColorPickerItem *existingItem = find(col);

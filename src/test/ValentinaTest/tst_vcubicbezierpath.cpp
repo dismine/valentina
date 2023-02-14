@@ -65,7 +65,7 @@ void TST_VCubicBezierPath::TestCountSubSpl() const
     QFETCH(qint32, points);
     QFETCH(qint32, countSubSpl);
 
-    const qint32 res = VCubicBezierPath::CountSubSpl(points);
+    const auto res = VCubicBezierPath::CountSubSpl(points);
     QCOMPARE(res, countSubSpl);
 }
 
@@ -91,7 +91,7 @@ void TST_VCubicBezierPath::TestSubSplOffset() const
     QFETCH(qint32, subSplIndex);
     QFETCH(qint32, offset);
 
-    const qint32 res = VCubicBezierPath::SubSplOffset(subSplIndex);
+    const auto res = VCubicBezierPath::SubSplOffset(subSplIndex);
     QCOMPARE(res, offset);
 }
 
@@ -117,6 +117,6 @@ void TST_VCubicBezierPath::TestSubSplPointsCount() const
     QFETCH(qint32, countSubSpl);
     QFETCH(qint32, points);
 
-    const qint32 res = VCubicBezierPath::SubSplPointsCount(countSubSpl);
+    const auto res = VCubicBezierPath::SubSplPointsCount(countSubSpl);
     QCOMPARE(res, points);
 }

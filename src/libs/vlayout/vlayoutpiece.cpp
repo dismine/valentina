@@ -36,7 +36,6 @@
 #include <QtConcurrent/QtConcurrentRun>
 #include <QGraphicsPathItem>
 #include <QList>
-#include <QMatrix>
 #include <QMessageLogger>
 #include <QPainterPath>
 #include <QPoint>
@@ -195,7 +194,7 @@ auto PieceLabelText(const QVector<QPointF> &labelShape, const VTextManager &tm) 
     QStringList text;
     if (labelShape.count() > 2)
     {
-        int sourceCount = tm.GetSourceLinesCount();
+        auto sourceCount = tm.GetSourceLinesCount();
         text.reserve(sourceCount);
         for (int i = 0; i < sourceCount; ++i)
         {
@@ -623,10 +622,12 @@ VLayoutPiece::~VLayoutPiece() //NOLINT(modernize-use-equals-default)
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContainer *pattern) -> VLayoutPiece
 {
-    QFuture<QVector<VLayoutPoint> > futureSeamAllowance = QtConcurrent::run(piece, &VPiece::SeamAllowancePoints,
-                                                                           pattern);
-    QFuture<bool> futureSeamAllowanceValid = QtConcurrent::run(piece, &VPiece::IsSeamAllowanceValid, pattern);
-    QFuture<QVector<VLayoutPoint> > futureMainPath = QtConcurrent::run(piece, &VPiece::MainPathPoints, pattern);
+    QFuture<QVector<VLayoutPoint> > futureSeamAllowance =
+        QtConcurrent::run([piece, pattern](){return piece.SeamAllowancePoints(pattern);});
+    QFuture<bool> futureSeamAllowanceValid =
+        QtConcurrent::run([piece, pattern](){return piece.IsSeamAllowanceValid(pattern);});
+    QFuture<QVector<VLayoutPoint> > futureMainPath =
+        QtConcurrent::run([piece, pattern](){return piece.MainPathPoints(pattern);});
     QFuture<QVector<VLayoutPiecePath> > futureInternalPaths = QtConcurrent::run(ConvertInternalPaths, piece, pattern);
     QFuture<QVector<VLayoutPassmark> > futurePassmarks = QtConcurrent::run(ConvertPassmarks, piece, pattern);
     QFuture<QVector<VLayoutPlaceLabel> > futurePlaceLabels = QtConcurrent::run(ConvertPlaceLabels, piece, pattern);
@@ -1175,15 +1176,15 @@ void VLayoutPiece::Mirror()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPiece::DetailEdgesCount() const -> int
+auto VLayoutPiece::DetailEdgesCount() const -> vsizetype
 {
     return DetailPath().count();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPiece::LayoutEdgesCount() const -> int
+auto VLayoutPiece::LayoutEdgesCount() const -> vsizetype
 {
-    const int count = d->m_layoutAllowance.count();
+    const auto count = d->m_layoutAllowance.count();
     return count > 2 ? count : 0;
 }
 
@@ -1769,7 +1770,7 @@ auto VLayoutPiece::Edge(const QVector<QPointF> &path, int i) const -> QLineF
         return {};
     }
 
-    int i1, i2;
+    vsizetype i1, i2;
     if (i < path.count())
     {
         i1 = i-1;
@@ -1798,8 +1799,8 @@ auto VLayoutPiece::EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) 
     }
 
     const QVector<QPointF> points = Map(path);
-    const auto *const posIter = std::find_if(points.cbegin(), points.cend(),
-                                             [&p1](const QPointF &point){ return VFuzzyComparePoints(point, p1); });
+    auto posIter = std::find_if(points.cbegin(), points.cend(),
+                                [&p1](const QPointF &point){ return VFuzzyComparePoints(point, p1); });
     if (posIter != points.cend())
     {
         return static_cast<int>(posIter - points.cbegin() + 1);

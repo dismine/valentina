@@ -29,7 +29,12 @@
 #include "vcolorpropertyeditor.h"
 
 VPE::VColorProperty::VColorProperty(const QString &name) :
-    VProperty(name, QVariant::Color)
+    VProperty(name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+              QMetaType::QColor)
+#else
+              QVariant::Color)
+#endif
 {
 }
 

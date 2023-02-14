@@ -167,13 +167,13 @@ VCubicBezierPath::~VCubicBezierPath()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPointF &VCubicBezierPath::operator[](int indx)
+VPointF &VCubicBezierPath::operator[](vsizetype indx)
 {
     return d->path[indx];
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const VPointF &VCubicBezierPath::at(int indx) const
+const VPointF &VCubicBezierPath::at(vsizetype indx) const
 {
     return d->path[indx];
 }
@@ -186,13 +186,13 @@ void VCubicBezierPath::append(const VPointF &point)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qint32 VCubicBezierPath::CountSubSpl() const
+vsizetype VCubicBezierPath::CountSubSpl() const
 {
     return CountSubSpl(d->path.size());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qint32 VCubicBezierPath::CountPoints() const
+vsizetype VCubicBezierPath::CountPoints() const
 {
     return d->path.size();
 }
@@ -205,7 +205,7 @@ void VCubicBezierPath::Clear()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSpline VCubicBezierPath::GetSpline(qint32 index) const
+VSpline VCubicBezierPath::GetSpline(vsizetype index) const
 {
     if (CountPoints() < 4)
     {
@@ -217,7 +217,7 @@ VSpline VCubicBezierPath::GetSpline(qint32 index) const
         throw VException(tr("This spline does not exist."));
     }
 
-    const qint32 base = SubSplOffset(index);
+    const vsizetype base = SubSplOffset(index);
 
     // Correction the first control point of each next spline curve except for the first.
     QPointF p2 = static_cast<QPointF>(d->path.at(base + 1));
@@ -252,7 +252,7 @@ qreal VCubicBezierPath::GetStartAngle() const
 //---------------------------------------------------------------------------------------------------------------------
 qreal VCubicBezierPath::GetEndAngle() const
 {
-    const qint32 count = CountSubSpl();
+    const vsizetype count = CountSubSpl();
     if (count > 0)
     {
         return GetSpline(count).GetEndAngle();
@@ -279,7 +279,7 @@ qreal VCubicBezierPath::GetC1Length() const
 //---------------------------------------------------------------------------------------------------------------------
 qreal VCubicBezierPath::GetC2Length() const
 {
-    const qint32 count = CountSubSpl();
+    const vsizetype count = CountSubSpl();
     if (count > 0)
     {
         return GetSpline(count).GetC2Length();
@@ -293,7 +293,7 @@ qreal VCubicBezierPath::GetC2Length() const
 //---------------------------------------------------------------------------------------------------------------------
 QVector<VSplinePoint> VCubicBezierPath::GetSplinePath() const
 {
-    const int size = CountSubSpl();
+    const vsizetype size = CountSubSpl();
     QVector<VSplinePoint> splPoints(size+1);
 
     for (qint32 i = 1; i <= size; ++i)
@@ -326,17 +326,21 @@ QVector<VPointF> VCubicBezierPath::GetCubicPath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qint32 VCubicBezierPath::CountSubSpl(qint32 size)
+vsizetype VCubicBezierPath::CountSubSpl(vsizetype size)
 {
     if (size <= 0)
     {
         return 0;
     }
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    return qFloor(qAbs((size - 4) / 3.0L + 1));
+#else
     return qFloor(qAbs((size - 4) / 3.0 + 1));
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qint32 VCubicBezierPath::SubSplOffset(qint32 subSplIndex)
+vsizetype VCubicBezierPath::SubSplOffset(vsizetype subSplIndex)
 {
     if (subSplIndex <= 0)
     {
@@ -347,7 +351,7 @@ qint32 VCubicBezierPath::SubSplOffset(qint32 subSplIndex)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qint32 VCubicBezierPath::SubSplPointsCount(qint32 countSubSpl)
+vsizetype VCubicBezierPath::SubSplPointsCount(vsizetype countSubSpl)
 {
     if (countSubSpl <= 0)
     {
@@ -364,22 +368,17 @@ VPointF VCubicBezierPath::FirstPoint() const
     {
         return ConstFirst(d->path);
     }
-    else
-    {
-        return VPointF();
-    }
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VPointF VCubicBezierPath::LastPoint() const
 {
-    const qint32 count = CountSubSpl();
+    const vsizetype count = CountSubSpl();
     if (count >= 1)
     {
         return d->path.at(SubSplOffset(count) + 3);// Take last point of the last real spline
     }
-    else
-    {
-        return VPointF();
-    }
+
+    return {};
 }

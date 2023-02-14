@@ -39,7 +39,7 @@ std::shared_ptr<VPCommandLine> VPCommandLine::instance = nullptr; // NOLINT(cppc
 auto VPCommandLine::IsExportEnabled() const -> bool
 {
     const bool result = IsOptionSet(LONG_OPTION_EXPORT_FILE);
-    int argSize = parser.positionalArguments().size();
+    auto argSize = parser.positionalArguments().size();
     if (result && argSize != 1)
     {
         qCritical() << translate("Puzzle", "Export options can be used with single input file only.") << "/n";

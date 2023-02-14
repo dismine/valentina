@@ -64,8 +64,8 @@ const QStringList QmuParserBase::c_DefaultOprt = QStringList()<< "<=" << ">=" <<
  */
 QmuParserBase::QmuParserBase()
     : m_locale(QLocale::c()),
-      m_decimalPoint(QLocale::c().decimalPoint()),
-      m_thousandsSeparator(QLocale::c().groupSeparator()),
+      m_decimalPoint(LocaleDecimalPoint(QLocale::c())),
+      m_thousandsSeparator(LocaleGroupSeparator(QLocale::c())),
       m_FunDef(),
       m_pTokenReader(),
       m_pParseFormula(&QmuParserBase::ParseString),
@@ -85,8 +85,8 @@ QmuParserBase::QmuParserBase()
       m_nIfElseCounter(0),
       m_vStackBuffer(),
       m_nFinalResultIdx(0),
-      m_Tokens(QMap<int, QString>()),
-      m_Numbers(QMap<int, QString>()),
+      m_Tokens(QMap<qmusizetype, QString>()),
+      m_Numbers(QMap<qmusizetype, QString>()),
       allowSubexpressions(true)
 {
     InitTokenReader();
@@ -121,8 +121,8 @@ QmuParserBase::QmuParserBase(const QmuParserBase &a_Parser)
       m_nIfElseCounter(0),
       m_vStackBuffer(),
       m_nFinalResultIdx(0),
-      m_Tokens(QMap<int, QString>()),
-      m_Numbers(QMap<int, QString>()),
+      m_Tokens(QMap<qmusizetype, QString>()),
+      m_Numbers(QMap<qmusizetype, QString>()),
       allowSubexpressions(true)
 {
     m_pTokenReader.reset(new token_reader_type(this));
@@ -204,8 +204,8 @@ void QmuParserBase::Assign(const QmuParserBase &a_Parser)
 void QmuParserBase::ResetLocale()
 {
     setLocale(QLocale::c());
-    m_decimalPoint = m_locale.decimalPoint();
-    m_thousandsSeparator = m_locale.groupSeparator();
+    m_decimalPoint = LocaleDecimalPoint(m_locale);
+    m_thousandsSeparator = LocaleGroupSeparator(m_locale);
     m_cNumbers = false;
     SetArgSep(';');
 }
@@ -229,7 +229,7 @@ void QmuParserBase::ReInit() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void QmuParserBase::OnDetectVar(const QString &pExpr, int &nStart, int &nEnd)
+void QmuParserBase::OnDetectVar(const QString &pExpr, qmusizetype &nStart, qmusizetype &nEnd)
 {
     Q_UNUSED(pExpr)
     Q_UNUSED(nStart)
@@ -440,7 +440,7 @@ void QmuParserBase::SetExpr(const QString &a_sExpr)
 {
     // Check locale compatibility
     std::locale loc;
-    if (m_pTokenReader->GetArgSep()==std::use_facet<std::numpunct<char_type> >(loc).decimal_point())
+    if (m_pTokenReader->GetArgSep() == QChar(std::use_facet<std::numpunct<char_type> >(loc).decimal_point()))
     {
         Error(ecLOCALE);
     }
@@ -1023,7 +1023,7 @@ qreal QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const
     qreal *Stack = ((nOffset==0) && (nThreadID==0)) ? &m_vStackBuffer[0] : &m_vStackBuffer[nThreadID *
             (m_vStackBuffer.size() / s_MaxNumOpenMPThreads)];
     qreal buf;
-    int sidx(0);
+    qmusizetype sidx(0);
     for (const SToken *pTok = m_vRPN.GetBase(); pTok->Cmd!=cmEND ; ++pTok)
     {
         switch (pTok->Cmd)
@@ -1143,7 +1143,7 @@ QT_WARNING_POP
             // Next is treatment of numeric functions
             case cmFUNC:
             {
-                int iArgCount = pTok->Fun.argc;
+                qmusizetype iArgCount = pTok->Fun.argc;
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wcast-function-type")
@@ -1224,7 +1224,7 @@ QT_WARNING_DISABLE_MSVC(4191)
                 sidx -= pTok->Fun.argc -1;
 
                 // The index of the string argument in the string table
-                int iIdxStack = pTok->Fun.idx;
+                qmusizetype iIdxStack = pTok->Fun.idx;
                 Q_ASSERT( iIdxStack>=0 && iIdxStack<m_vStringBuf.size() );
 
                 switch (pTok->Fun.argc)  // switch according to argument count
@@ -1248,7 +1248,7 @@ QT_WARNING_DISABLE_MSVC(4191)
             }
             case cmFUNC_BULK:
             {
-                int iArgCount = pTok->Fun.argc;
+                qmusizetype iArgCount = pTok->Fun.argc;
 
                 // switch according to argument count
                 switch (iArgCount)
@@ -1648,7 +1648,7 @@ qreal QmuParserBase::ParseString() const
 * @param a_sTok [in] The token string representation associated with the error.
 * @throw ParserException always throws thats the only purpose of this function.
 */
-void Q_NORETURN QmuParserBase::Error(EErrorCodes a_iErrc, int a_iPos, const QString &a_sTok) const
+Q_NORETURN void QmuParserBase::Error(EErrorCodes a_iErrc, qmusizetype a_iPos, const QString &a_sTok) const
 {
     throw qmu::QmuParserError (a_iErrc, a_sTok, m_pTokenReader->GetExpr(), a_iPos);
 }
@@ -1898,11 +1898,7 @@ void QmuParserBase::StackDump(const QStack<token_type> &a_stVal, const QStack<to
         }
         stOprt.pop();
     }
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-    qDebug() << dec;
-#else
     qDebug() << Qt::dec;
-#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------

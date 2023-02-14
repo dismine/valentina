@@ -732,7 +732,7 @@ void VWidgetBackgroundImages::FillTable(const QVector<VBackgroundPatternImage> &
     ui->tableWidget->clear();
 
     ui->tableWidget->setColumnCount(3);
-    ui->tableWidget->setRowCount(images.size());
+    ui->tableWidget->setRowCount(static_cast<int>(images.size()));
     qint32 currentRow = -1;
 
     auto ReadOnly = [](QTableWidgetItem *item)

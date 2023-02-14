@@ -66,8 +66,13 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wenum-enum-conversion")
 #endif
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+Q_GLOBAL_STATIC_WITH_ARGS(const QKeySequence, restoreOriginShortcut, // NOLINT
+                          (QKeySequence(Qt::ControlModifier | Qt::Key_Asterisk)))
+#else
 Q_GLOBAL_STATIC_WITH_ARGS(const QKeySequence, restoreOriginShortcut, // NOLINT
                           (QKeySequence(Qt::ControlModifier + Qt::Key_Asterisk)))
+#endif
 
 QT_WARNING_POP
 }
@@ -200,7 +205,7 @@ void VPMainGraphicsView::dropEvent(QDropEvent *event)
             event->acceptProposedAction();
 
             piece->ClearTransformations();
-            piece->SetPosition(mapToScene(event->pos()));
+            piece->SetPosition(mapToScene(DropEventPos(event)));
             piece->SetZValue(1.0);
 
             auto *command = new VPUndoMovePieceOnSheet(layout->GetFocusedSheet(), piece);

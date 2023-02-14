@@ -196,7 +196,7 @@ void TST_MeasurementRegExp::cleanupTestCase()
 //---------------------------------------------------------------------------------------------------------------------
 void TST_MeasurementRegExp::TestCombinations(int systemCounts, const QStringList &locales) const
 {
-    const int combinations = systemCounts * locales.size();
+    const vsizetype combinations = systemCounts * locales.size();
 
     QDir dir(TranslationsPath());
     const QStringList fileNames = dir.entryList(QStringList("measurements_p*_*.qm"));

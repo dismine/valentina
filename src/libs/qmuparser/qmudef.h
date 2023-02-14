@@ -23,6 +23,7 @@
 #define QMUDEF_H
 
 #include "qmuparser_global.h"
+#include "qmuparserdef.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
@@ -83,18 +84,17 @@
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#define Q_DISABLE_MOVE(Class) \
-    Class(Class &&) = delete; \
-    Class &operator=(Class &&) = delete;
 #define Q_DISABLE_COPY_MOVE(Class) \
     Q_DISABLE_COPY(Class) \
-    Q_DISABLE_MOVE(Class)
+    Class(Class &&) = delete; \
+    Class &operator=(Class &&) = delete;
 #endif
 
 #ifndef Q_DISABLE_ASSIGN_MOVE
 #define Q_DISABLE_ASSIGN_MOVE(Class) \
     Q_DISABLE_ASSIGN(Class) \
-    Q_DISABLE_MOVE(Class)
+    Class(Class &&) = delete; \
+    Class &operator=(Class &&) = delete;
 #endif
 
 QT_WARNING_PUSH
@@ -106,23 +106,42 @@ class QLocale;
 class QChar;
 class QString;
 
-#define INIT_LOCALE_VARIABLES(locale)                          \
-const QChar positiveSign   = (locale).positiveSign();          \
-const QChar negativeSign   = (locale).negativeSign();          \
-const QChar sign0          = (locale).toString(0).at(0);       \
-const QChar sign1          = (locale).toString(1).at(0);       \
-const QChar sign2          = (locale).toString(2).at(0);       \
-const QChar sign3          = (locale).toString(3).at(0);       \
-const QChar sign4          = (locale).toString(4).at(0);       \
-const QChar sign5          = (locale).toString(5).at(0);       \
-const QChar sign6          = (locale).toString(6).at(0);       \
-const QChar sign7          = (locale).toString(7).at(0);       \
-const QChar sign8          = (locale).toString(8).at(0);       \
-const QChar sign9          = (locale).toString(9).at(0);       \
-const QChar expUpper       = (locale).exponential().toUpper(); \
-const QChar expLower       = (locale).exponential().toLower(); \
-const QChar decimalPoint   = (locale).decimalPoint();          \
-const QChar groupSeparator = (locale).groupSeparator()         \
+QMUPARSERSHARED_EXPORT auto SupportedLocale(const QLocale &locale) -> bool;
+
+QMUPARSERSHARED_EXPORT auto LocalePositiveSign(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleNegativeSign(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleSign0(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleSign1(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleSign2(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleSign3(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleSign4(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleSign5(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleSign6(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleSign7(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleSign8(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleSign9(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleExpUpper(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleExpLower(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleDecimalPoint(const QLocale &locale) -> QChar;
+QMUPARSERSHARED_EXPORT auto LocaleGroupSeparator(const QLocale &locale) -> QChar;
+
+#define INIT_LOCALE_VARIABLES(locale)                        \
+const QChar positiveSign   = LocalePositiveSign((locale));   \
+const QChar negativeSign   = LocaleNegativeSign((locale));   \
+const QChar sign0          = LocaleSign0((locale));          \
+const QChar sign1          = LocaleSign1((locale));          \
+const QChar sign2          = LocaleSign2((locale));          \
+const QChar sign3          = LocaleSign3((locale));          \
+const QChar sign4          = LocaleSign4((locale));          \
+const QChar sign5          = LocaleSign5((locale));          \
+const QChar sign6          = LocaleSign6((locale));          \
+const QChar sign7          = LocaleSign7((locale));          \
+const QChar sign8          = LocaleSign8((locale));          \
+const QChar sign9          = LocaleSign9((locale));          \
+const QChar expUpper       = LocaleExpUpper((locale));       \
+const QChar expLower       = LocaleExpLower((locale));       \
+const QChar decimalPoint   = LocaleDecimalPoint((locale));   \
+const QChar groupSeparator = LocaleGroupSeparator((locale));
 
 QMUPARSERSHARED_EXPORT QString NameRegExp();
 
@@ -135,19 +154,18 @@ static inline bool QmuFuzzyComparePossibleNulls(double p1, double p2)
     {
         return qFuzzyIsNull(p2);
     }
-    else if(qFuzzyIsNull(p2))
+
+    if(qFuzzyIsNull(p2))
     {
         return false;
     }
-    else
-    {
-        return qFuzzyCompare(p1, p2);
-    }
+
+    return qFuzzyCompare(p1, p2);
 }
 
-QMUPARSERSHARED_EXPORT int ReadVal(const QString &formula, qreal &val, const QLocale &locale, const QChar &decimal,
-                                   const QChar &thousand);
+QMUPARSERSHARED_EXPORT qmusizetype ReadVal(const QString &formula, qreal &val, const QLocale &locale,
+                                         const QChar &decimal, const QChar &thousand);
 
-QMUPARSERSHARED_EXPORT int FindFirstNotOf(const QString &string, const QString &chars, int pos = 0);
+QMUPARSERSHARED_EXPORT qmusizetype FindFirstNotOf(const QString &string, const QString &chars, qmusizetype pos = 0);
 
 #endif // QMUDEF_H

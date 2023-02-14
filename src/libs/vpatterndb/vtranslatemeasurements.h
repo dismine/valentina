@@ -42,7 +42,7 @@ public:
     VTranslateMeasurements();
     virtual ~VTranslateMeasurements();
 
-    bool MeasurementsFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
+    bool MeasurementsFromUser(QString &newFormula, vsizetype position, const QString &token, vsizetype &bias) const;
 
     QString MFromUser(const QString &measurement) const;
     QString MToUser(const QString &measurement) const;

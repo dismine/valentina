@@ -42,6 +42,8 @@
 
 #include <ciso646>
 
+#include "vpropertydef.h"
+
 template <typename T> class QList;
 
 namespace VPE
@@ -75,7 +77,12 @@ public:
     };
 
     //! Standard constructor, takes a name and a parent property as argument
-    explicit VProperty(const QString& name, QVariant::Type type = QVariant::String);
+    explicit VProperty(const QString& name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                       QMetaType::Type type = QMetaType::QString);
+#else
+                       QVariant::Type type = QVariant::String);
+#endif
 
     //! Destructor
     virtual ~VProperty() override;
@@ -152,7 +159,7 @@ public:
     virtual QString getDescription() const;
 
     //! Adds a child to this property
-    virtual int addChild(VProperty* child);
+    virtual vpesizetype addChild(VProperty* child);
 
     //! Returns a reference to the list of children
     virtual QList<VProperty*>& getChildren();
@@ -164,7 +171,7 @@ public:
     virtual VProperty* getChild(int row) const;
 
     //! Gets the number of children
-    virtual int getRowCount() const;
+    virtual vpesizetype getRowCount() const;
 
     //! Gets the parent of this property
     virtual VProperty* getParent() const;
@@ -176,7 +183,7 @@ public:
     virtual void removeChild(VProperty* child);
 
     //! Returns the row the child has
-    virtual int getChildRow(VProperty* child) const;
+    virtual vpesizetype getChildRow(VProperty* child) const;
 
     //! Returns whether the views have to update the parent of this property if it changes
     virtual bool getUpdateParent() const;

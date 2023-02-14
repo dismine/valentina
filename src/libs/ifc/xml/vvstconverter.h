@@ -35,7 +35,7 @@
 #include <QtGlobal>
 
 #include "vabstractmconverter.h"
-#include "vabstractconverter.h"
+#include "../vmisc/projectversion.h"
 
 class QDomElement;
 
@@ -51,6 +51,8 @@ public:
     static Q_DECL_CONSTEXPR const unsigned MeasurementMinVer = FormatVersion(0, 3, 0);
     static Q_DECL_CONSTEXPR const unsigned MeasurementMaxVer = FormatVersion(0, 5, 4);
 
+    static auto XSDSchemas() -> QHash <unsigned, QString>;
+
 protected:
     virtual unsigned MinVer() const override;
     virtual unsigned MaxVer() const override;
@@ -58,10 +60,11 @@ protected:
     virtual QString MinVerStr() const override;
     virtual QString MaxVerStr() const override;
 
-    virtual QString XSDSchema(unsigned ver) const override;
-    virtual void    ApplyPatches() override;
-    virtual void    DowngradeToCurrentMaxVersion() override;
-    virtual bool    IsReadOnly() const override;
+    virtual void ApplyPatches() override;
+    virtual void DowngradeToCurrentMaxVersion() override;
+    virtual bool IsReadOnly() const override;
+
+    auto Schemas() const -> QHash <unsigned, QString> override;
 
 private:
     Q_DISABLE_COPY_MOVE(VVSTConverter) // NOLINT

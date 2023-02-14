@@ -79,6 +79,12 @@
 #   include <QtConcurrent>
 #endif
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#ifdef QT_OPENGLWIDGETS_LIB
+#   include <QOpenGLWidget>
+#endif
+#endif
+
 #endif/*__cplusplus*/
 
 #endif // STABLE_H

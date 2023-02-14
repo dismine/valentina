@@ -28,6 +28,7 @@
 
 #include "tst_qmutokenparser.h"
 #include "../qmuparser/qmutokenparser.h"
+#include "../qmuparser/qmudef.h"
 
 #include <QtTest>
 
@@ -83,8 +84,12 @@ void TST_QmuTokenParser::TokenFromUser_data()
 
     const QList<QLocale> allLocales =
             QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
-    for(auto &locale : allLocales)
+    for(const auto &locale : allLocales)
     {
+        if (not SupportedLocale(locale))
+        {
+            continue;
+        }
         PrepareVal(1000.5, locale);
         PrepareVal(-1000.5, locale);
     }
@@ -137,8 +142,8 @@ bool TST_QmuTokenParser::IsSingleFromUser(const QString &formula)
         return false;// if don't know say no
     }
 
-    QMap<int, QString> tokens;
-    QMap<int, QString> numbers;
+    QMap<vsizetype, QString> tokens;
+    QMap<vsizetype, QString> numbers;
 
     try
     {
@@ -153,14 +158,7 @@ bool TST_QmuTokenParser::IsSingleFromUser(const QString &formula)
     }
 
     // Remove "-" from tokens list if exist. If don't do that unary minus operation will broken.
-    qmu::QmuFormulaBase::RemoveAll(tokens, QLocale().negativeSign());
+    qmu::QmuFormulaBase::RemoveAll(tokens, LocaleNegativeSign(QLocale()));
 
-    if (tokens.isEmpty() && numbers.size() == 1)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return tokens.isEmpty() && numbers.size() == 1;
 }

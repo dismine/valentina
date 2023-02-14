@@ -83,18 +83,17 @@
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 8, 0)
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#define Q_DISABLE_MOVE(Class) \
-    Class(Class &&) = delete; \
-    Class &operator=(Class &&) = delete;
 #define Q_DISABLE_COPY_MOVE(Class) \
     Q_DISABLE_COPY(Class) \
-    Q_DISABLE_MOVE(Class)
+    Class(Class &&) = delete; \
+    Class &operator=(Class &&) = delete;
 #endif
 
 #ifndef Q_DISABLE_ASSIGN_MOVE
 #define Q_DISABLE_ASSIGN_MOVE(Class) \
     Q_DISABLE_ASSIGN(Class) \
-    Q_DISABLE_MOVE(Class)
+    Class(Class &&) = delete; \
+    Class &operator=(Class &&) = delete;
 #endif
 
 typedef signed char dint8;              /* 8 bit signed */
@@ -110,7 +109,6 @@ typedef unsigned long long int duint64; /* 64 bit unsigned */
 typedef float dfloat32;                 /* 32 bit floating point */
 typedef double ddouble64;               /* 64 bit floating point */
 typedef long double ddouble80;          /* 80 bit floating point */
-
 
 namespace DRW {
 

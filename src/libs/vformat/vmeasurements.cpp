@@ -37,9 +37,6 @@
 #include <QMessageLogger>
 #include <QScopedPointer>
 #include <QSet>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QtDebug>
 #include <QGlobalStatic>
 
@@ -1467,7 +1464,7 @@ qreal VMeasurements::EvalFormula(VContainer *data, const QString &formula, bool 
 QString VMeasurements::ClearPMCode(const QString &code) const
 {
     QString clear = code;
-    const int index = clear.indexOf(QLatin1Char('p'));
+    const vsizetype index = clear.indexOf(QLatin1Char('p'));
     if (index == 0)
     {
         clear.remove(0, 1);
@@ -1480,13 +1477,13 @@ QMap<QString, qreal> VMeasurements::ReadCorrections(const QDomElement &mElement)
 {
     if (mElement.isNull())
     {
-        return QMap<QString, qreal>();
+        return {};
     }
 
     QDomElement correctionsTag = mElement.firstChildElement(TagCorrections);
     if (correctionsTag.isNull())
     {
-        return QMap<QString, qreal>();
+        return {};
     }
 
     QMap<QString, qreal> corrections;

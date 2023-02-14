@@ -338,7 +338,7 @@ void VWidgetGroups::FillTable(QMap<quint32, VGroupData> groups)
     ui->tableWidget->clear();
 
     ui->tableWidget->setColumnCount(2);
-    ui->tableWidget->setRowCount(groups.size());
+    ui->tableWidget->setRowCount(static_cast<int>(groups.size()));
     qint32 currentRow = -1;
     auto i = groups.constBegin();
     while (i != groups.constEnd())

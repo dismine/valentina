@@ -335,7 +335,7 @@ void VTextGraphicsItem::UpdateData(VAbstractPattern* pDoc, const VContainer *pat
  * @brief VTextGraphicsItem::GetTextLines returns the number of lines of text to show
  * @return number of lines of text
  */
-int VTextGraphicsItem::GetTextLines() const
+vsizetype VTextGraphicsItem::GetTextLines() const
 {
     return m_tm.GetSourceLinesCount();
 }

@@ -77,7 +77,7 @@ public:
     QString TabText(int index) const;
     void    SetTabText(int index, const QString &text);
 
-    int   Count() const;
+    vsizetype Count() const;
     QRect TabRect(int index) const;
 
 signals:
@@ -88,7 +88,11 @@ protected:
     virtual void paintEvent(QPaintEvent *event) override;
     virtual void mousePressEvent(QMouseEvent *) override;
     virtual void mouseMoveEvent(QMouseEvent *) override;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    virtual void enterEvent(QEnterEvent *) override;
+#else
     virtual void enterEvent(QEvent *) override;
+#endif
     virtual void leaveEvent(QEvent *) override;
 
 private slots:

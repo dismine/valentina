@@ -35,6 +35,7 @@
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../qmuparser/qmudef.h"
 
 #include <QDir>
 #include <QDirIterator>
@@ -281,7 +282,7 @@ void PreferencesConfigurationPage::InitUnits()
 //---------------------------------------------------------------------------------------------------------------------
 void PreferencesConfigurationPage::RetranslateUi()
 {
-    ui->osOptionCheck->setText(tr("With OS options") + QStringLiteral(" (%1)").arg(QLocale().decimalPoint()));
+    ui->osOptionCheck->setText(tr("With OS options") + QStringLiteral(" (%1)").arg(LocaleDecimalPoint(QLocale())));
 
     {
     ui->unitCombo->blockSignals(true);

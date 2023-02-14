@@ -36,9 +36,6 @@
 #include <QMapIterator>
 #include <QPoint>
 #include <QSharedPointer>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QUndoStack>
 #include <new>
 

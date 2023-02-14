@@ -32,18 +32,25 @@
 #include <QCoreApplication>
 #include <QLocale>
 #include <QSize>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QWidget>
 
 #include "../vproperty_p.h"
 
 VPE::VLineTypeProperty::VLineTypeProperty(const QString &name)
-    : VProperty(name, QVariant::Int), styles(), indexList()
+    : VProperty(name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                QMetaType::Int),
+#else
+                QVariant::Int),
+#endif
+      styles(), indexList()
 {
     VProperty::d_ptr->VariantValue = 0;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    VProperty::d_ptr->VariantValue.convert(QMetaType(QMetaType::Int));
+#else
     VProperty::d_ptr->VariantValue.convert(QVariant::Int);
+#endif
 }
 
 QVariant VPE::VLineTypeProperty::data(int column, int role) const
@@ -140,7 +147,11 @@ void VPE::VLineTypeProperty::setValue(const QVariant &value)
     }
 
     VProperty::d_ptr->VariantValue = tmpIndex;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    VProperty::d_ptr->VariantValue.convert(QMetaType(QMetaType::Int));
+#else
     VProperty::d_ptr->VariantValue.convert(QVariant::Int);
+#endif
 
     if (VProperty::d_ptr->editor != nullptr)
     {
@@ -158,7 +169,7 @@ VPE::VProperty *VPE::VLineTypeProperty::clone(bool include_children, VProperty *
     return VProperty::clone(include_children, container ? container : new VLineTypeProperty(getName()));
 }
 
-int VPE::VLineTypeProperty::IndexOfStyle(const QMap<QString, QIcon> &styles, const QString &style)
+vpesizetype VPE::VLineTypeProperty::IndexOfStyle(const QMap<QString, QIcon> &styles, const QString &style)
 {
     QVector<QString> indexList;
     QMap<QString, QIcon>::const_iterator i = styles.constBegin();

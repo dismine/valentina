@@ -166,8 +166,8 @@ private:
 
     QString DocName() const;
 
-    void PreparePaper(int index) const;
-    void RestorePaper(int index) const;
+    void PreparePaper(vsizetype index) const;
+    void RestorePaper(vsizetype index) const;
 
     bool IsPagesUniform() const;
     bool IsPagesFit(QSizeF printPaper) const;

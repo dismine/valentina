@@ -28,10 +28,20 @@
 #include "../vproperty_p.h"
 
 VPE::VEnumProperty::VEnumProperty(const QString& name)
-    : VProperty(name, QVariant::Int), EnumerationLiterals()
+    : VProperty(name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                QMetaType::Int),
+#else
+                QVariant::Int),
+#endif
+      EnumerationLiterals()
 {
     VProperty::d_ptr->VariantValue = 0;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    VProperty::d_ptr->VariantValue.convert(QMetaType(QMetaType::Int));
+#else
     VProperty::d_ptr->VariantValue.convert(QVariant::Int);
+#endif
 }
 
 
@@ -115,7 +125,11 @@ void VPE::VEnumProperty::setValue(const QVariant& value)
     }
 
     VProperty::d_ptr->VariantValue = tmpIndex;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    VProperty::d_ptr->VariantValue.convert(QMetaType(QMetaType::Int));
+#else
     VProperty::d_ptr->VariantValue.convert(QVariant::Int);
+#endif
 
     if (VProperty::d_ptr->editor != nullptr)
     {

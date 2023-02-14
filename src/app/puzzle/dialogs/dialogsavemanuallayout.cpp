@@ -45,7 +45,8 @@
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogSaveManualLayout::DialogSaveManualLayout(int count, bool consoleExport, const QString &fileName, QWidget *parent)
+DialogSaveManualLayout::DialogSaveManualLayout(vsizetype count, bool consoleExport, const QString &fileName,
+                                               QWidget *parent)
     : VAbstractLayoutDialog(parent),
       ui(new Ui::DialogSaveManualLayout),
       m_count(count),

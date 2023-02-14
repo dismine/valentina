@@ -61,10 +61,10 @@ public:
 
     void   Append(const VPieceNode &node);
     void   Clear();
-    qint32 CountNodes() const;
+    vsizetype CountNodes() const;
 
-    VPieceNode & operator[](int indx);
-    const VPieceNode & at ( int indx ) const;
+    VPieceNode & operator[](vsizetype indx);
+    const VPieceNode & at (vsizetype indx ) const;
 
     QVector<VPieceNode> GetNodes() const;
     void                SetNodes(const QVector<VPieceNode> &nodes);
@@ -108,7 +108,7 @@ public:
     void NodeOnEdge(quint32 index, VPieceNode &p1, VPieceNode &p2) const;
     bool Contains(quint32 id) const;
     bool OnEdge(quint32 p1, quint32 p2) const;
-    int  Edge(quint32 p1, quint32 p2) const;
+    vsizetype Edge(quint32 p1, quint32 p2) const;
 
     QVector<VPieceNode> ListNodePoint() const;
 
@@ -124,20 +124,20 @@ public:
 
     static int indexOfNode(const QVector<VPieceNode> &nodes, quint32 id);
 
-    static int FindInLoopNotExcludedUp(int start, const QVector<VPieceNode> &nodes);
-    static int FindInLoopNotExcludedDown(int start, const QVector<VPieceNode> &nodes);
+    static vsizetype FindInLoopNotExcludedUp(vsizetype start, const QVector<VPieceNode> &nodes);
+    static vsizetype FindInLoopNotExcludedDown(vsizetype start, const QVector<VPieceNode> &nodes);
 
-    static VSAPoint StartSegment(const VContainer *data, const QVector<VPieceNode> &nodes, int i);
-    static VSAPoint EndSegment(const VContainer *data, const QVector<VPieceNode> &nodes, int i);
+    static VSAPoint StartSegment(const VContainer *data, const QVector<VPieceNode> &nodes, vsizetype i);
+    static VSAPoint EndSegment(const VContainer *data, const QVector<VPieceNode> &nodes, vsizetype i);
 
     static VSAPoint PreparePointEkv(const VPieceNode &node, const VContainer *data);
 
     static QVector<VSAPoint> CurveSeamAllowanceSegment(const VContainer *data, const QVector<VPieceNode> &nodes,
                                                        const QSharedPointer<VAbstractCurve> &curve,
-                                                       int i, bool reverse, qreal width,
+                                                       vsizetype i, bool reverse, qreal width,
                                                        const QString &piece = QString());
 
-    static QString NodeName(const QVector<VPieceNode> &nodes, int nodeIndex, const VContainer *data);
+    static QString NodeName(const QVector<VPieceNode> &nodes, vsizetype nodeIndex, const VContainer *data);
 
     static QVector<VLayoutPoint> NodesToPoints(const VContainer *data, const QVector<VPieceNode> &nodes,
                                                const QString &piece = QString());

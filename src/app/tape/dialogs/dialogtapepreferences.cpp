@@ -132,7 +132,7 @@ void DialogTapePreferences::Apply()
     if (not preferences.isEmpty())
     {
         const QString text = tr("Followed %n option(s) require restart to take effect: %1.", "",
-                                preferences.size()).arg(preferences.join(QStringLiteral(", ")));
+                                static_cast<int>(preferences.size())).arg(preferences.join(QStringLiteral(", ")));
         QMessageBox::information(this, QCoreApplication::applicationName(), text);
     }
 

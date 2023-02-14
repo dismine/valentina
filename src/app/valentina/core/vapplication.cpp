@@ -49,9 +49,12 @@
 #include <QMessageBox>
 #include <QThread>
 #include <QDateTime>
-#include <QtXmlPatterns>
 #include <QIcon>
 #include <Qt>
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include <QtXmlPatterns>
+#endif
 
 #if !defined(BUILD_REVISION) && defined(QBS_BUILD)
 #include <vcsRepoState.h>
@@ -265,11 +268,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         vStdOut().flush();
         vStdErr().flush();
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-        (*VApplication::VApp()->LogFile()) << debugdate <<  endl;
-#else
         (*VApplication::VApp()->LogFile()) << debugdate <<  Qt::endl;
-#endif
     }
 
     if (isGuiThread)

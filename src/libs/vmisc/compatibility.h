@@ -34,6 +34,24 @@
 #include <QVector>
 #include <QFontMetrics>
 
+#include "defglobal.h"
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+// WARNING:QVariant::load: unknown user type with name QMarginsF.
+// QVariant::value<T>() fails to convert unless QVariant::fromValue<T>() has been called previously.
+// https://stackoverflow.com/questions/70974383/qvariantvaluet-fails-to-convert-unless-qvariantfromvaluet-has-been-c
+#if QT_VERSION >= QT_VERSION_CHECK(6, 1, 0)
+#define REGISTER_META_TYPE_STREAM_OPERATORS(TYPE)                             \
+QMetaType::fromType<TYPE>().hasRegisteredDataStreamOperators(); // Dummy call
+#else
+#define REGISTER_META_TYPE_STREAM_OPERATORS(TYPE) \
+QVariant::fromValue<TYPE>(TYPE{}); // Dummy call
+#endif // QT_VERSION >= QT_VERSION_CHECK(6, 1, 0)
+#else
+#define REGISTER_META_TYPE_STREAM_OPERATORS(TYPE) \
+qRegisterMetaTypeStreamOperators<TYPE>(#TYPE);
+#endif // QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
@@ -205,8 +223,8 @@ inline auto Reverse(const QVector<T> &container) -> QVector<T>
         return container;
     }
     QVector<T> reversed(container.size());
-    qint32 j = 0;
-    for (qint32 i = container.size() - 1; i >= 0; --i)
+    vsizetype j = 0;
+    for (vsizetype i = container.size() - 1; i >= 0; --i)
     {
         reversed.replace(j, container.at(i));
         ++j;
@@ -299,6 +317,44 @@ inline auto Insert(QMap<Key, T> &map1, const QMap<Key, T> &map2) -> void
         map1.insert(i.key(), i.value());
         ++i;
     }
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VLocaleCharacter(const QString &character) -> QChar
+{
+    Q_ASSERT(character.size() == 1);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+    return character.front();
+#else
+    return character.at(0);
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VLocaleCharacter(const QChar &character) -> QChar
+{
+    return character;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto DropEventPos(const QDropEvent *event) -> QPoint
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    return event->position().toPoint();
+#else
+    return event->pos();
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+inline auto QLibraryPath(T loc) -> QString
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    return QLibraryInfo::path(loc);
+#else
+    return QLibraryInfo::location(loc);
 #endif
 }
 

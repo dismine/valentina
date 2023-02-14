@@ -1025,9 +1025,12 @@ void VPattern::ParseDetailInternals(const QDomElement &domElement, VPiece &detai
                         // TODO. Delete if minimal supported version is 0.4.0
                         Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 4, 0),
                                           "Time to refactor the code.");
-                        const bool closed = GetParametrUInt(domElement, AttrClosed, QChar('1'));
-                        const qreal width = GetParametrDouble(domElement, AttrWidth, QStringLiteral("0.0"));
-                        futurePathV1 = QtConcurrent::run(this, &VPattern::ParseDetailNodes, element, width, closed);
+                        futurePathV1 = QtConcurrent::run([this, domElement, element]()
+                        {
+                            const bool closed = GetParametrUInt(domElement, AttrClosed, QChar('1'));
+                            const qreal width = GetParametrDouble(domElement, AttrWidth, QStringLiteral("0.0"));
+                            return ParseDetailNodes(element, width, closed);
+                        });
                     }
                     else
                     {
@@ -1035,16 +1038,22 @@ void VPattern::ParseDetailInternals(const QDomElement &domElement, VPiece &detai
                     }
                     break;
                 case 1:// TagData
-                    futurePPData = QtConcurrent::run(this, &VPattern::ParsePieceDataTag, element,
-                                                     detail.GetPieceLabelData());
+                    futurePPData = QtConcurrent::run([this, element, detail]()
+                    {
+                        return ParsePieceDataTag(element, detail.GetPieceLabelData());
+                    });
                     break;
                 case 2:// TagPatternInfo
-                    futurePatternInfo = QtConcurrent::run(this, &VPattern::ParsePiecePatternInfo, element,
-                                                          detail.GetPatternLabelData());
+                    futurePatternInfo = QtConcurrent::run([this, element, detail]()
+                    {
+                        return ParsePiecePatternInfo(element, detail.GetPatternLabelData());
+                    });
                     break;
                 case 3:// TagGrainline
-                    futureGGeometry = QtConcurrent::run(this, &VPattern::ParsePieceGrainline, element,
-                                                        detail.GetGrainlineGeometry());
+                    futureGGeometry = QtConcurrent::run([this, element, detail]()
+                    {
+                        return ParsePieceGrainline(element, detail.GetGrainlineGeometry());
+                    });
                     break;
                 case 4:// VToolSeamAllowance::TagCSA
                     futureRecords = QtConcurrent::run(&VPattern::ParsePieceCSARecords, element);
@@ -1537,7 +1546,7 @@ QString VPattern::GetLabelBase(quint32 index) const
 
     QString base;
     const int count = qFloor(index/static_cast<quint32>(alphabet.size()));
-    const int number = static_cast<int>(index) - alphabet.size() * count;
+    const int number = static_cast<int>(index) - static_cast<int>(alphabet.size()) * count;
     int i = 0;
     do
     {
@@ -1638,7 +1647,13 @@ void VPattern::ParseToolAlongLine(VMainGraphicsScene *scene, QDomElement &domEle
 
     try
     {
+        QT_WARNING_PUSH
+        QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
         VToolAlongLineInitData initData;
+
+        QT_WARNING_POP
+
         initData.scene = scene;
         initData.doc = this;
         initData.data = data;
@@ -2328,7 +2343,13 @@ void VPattern::ParseToolCurveIntersectAxis(VMainGraphicsScene *scene, QDomElemen
 
     try
     {
+        QT_WARNING_PUSH
+        QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
         VToolCurveIntersectAxisInitData initData;
+
+        QT_WARNING_POP
+
         initData.scene = scene;
         initData.doc = this;
         initData.data = data;
@@ -2452,7 +2473,13 @@ void VPattern::ParseToolPointOfIntersectionCurves(VMainGraphicsScene *scene, QDo
 
     try
     {
+        QT_WARNING_PUSH
+        QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
         VToolPointOfIntersectionCurvesInitData initData;
+
+        QT_WARNING_POP
+
         initData.scene = scene;
         initData.doc = this;
         initData.data = data;
@@ -4229,13 +4256,13 @@ void VPattern::SetIncrementSpecialUnits(const QString &name, bool special)
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::ReplaceNameInFormula(QVector<VFormulaField> &expressions, const QString &name, const QString &newName)
 {
-    const int bias = name.length() - newName.length();
+    const auto bias = name.length() - newName.length();
 
     for(int i = 0; i < expressions.size(); ++i)
     {
         if (expressions.at(i).expression.indexOf(name) != -1)
         {
-            QMap<int, QString> tokens;
+            QMap<vsizetype, QString> tokens;
 
             // Eval formula
             try
@@ -4256,7 +4283,7 @@ void VPattern::ReplaceNameInFormula(QVector<VFormulaField> &expressions, const Q
                 continue;
             }
 
-            QList<int> tKeys = tokens.keys();// Take all tokens positions
+            QList<vsizetype> tKeys = tokens.keys();// Take all tokens positions
             QString newFormula = expressions.at(i).expression;
 
             for (int i = 0; i < tKeys.size(); ++i)

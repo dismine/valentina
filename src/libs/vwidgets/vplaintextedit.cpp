@@ -86,7 +86,7 @@ void VPlainTextEdit::appendPlainText(const QString &text)
     else
     {
         m_allLines.append(text);
-        const int diff = m_allLines.size() - maximumBlockCount();
+        const vsizetype diff = m_allLines.size() - maximumBlockCount();
         if (diff > 0)
         {
             m_allLines = m_allLines.mid(diff);
@@ -115,12 +115,15 @@ void VPlainTextEdit::MatchParentheses()
             int curPos = textCursor().position() - textCursor().block().position();
             if ((info->position == curPos - 1 || info->position == curPos) && info->character == '(')
             {
-                CreateParenthesisSelection(pos + info->position, MatchLeftParenthesis(textCursor().block(), i + 1, 0));
+                CreateParenthesisSelection(pos + static_cast<int>(info->position),
+                                           MatchLeftParenthesis(textCursor().block(), i + 1, 0));
                 return;
             }
-            else if ((info->position == curPos - 1 || info->position == curPos) && info->character == ')')
+
+            if ((info->position == curPos - 1 || info->position == curPos) && info->character == ')')
             {
-                CreateParenthesisSelection(pos + info->position, MatchRightParenthesis(textCursor().block(), i - 1, 0));
+                CreateParenthesisSelection(pos + static_cast<int>(info->position),
+                                           MatchRightParenthesis(textCursor().block(), i - 1, 0));
                 return;
             }
         }
@@ -146,7 +149,7 @@ bool VPlainTextEdit::MatchLeftParenthesis(QTextBlock currentBlock, int i, int nu
 
         if (info->character == ')' && numLeftParentheses == 0)
         {
-            CreateParenthesisSelection(docPos + info->position);
+            CreateParenthesisSelection(docPos + static_cast<int>(info->position));
             return true;
         }
         else
@@ -182,13 +185,11 @@ bool VPlainTextEdit::MatchRightParenthesis(QTextBlock currentBlock, int i, int n
 
         if (info->character == '(' && numRightParentheses == 0)
         {
-            CreateParenthesisSelection(docPos + info->position);
+            CreateParenthesisSelection(docPos + static_cast<int>(info->position));
             return true;
         }
-        else
-        {
-            --numRightParentheses;
-        }
+
+        --numRightParentheses;
     }
 
     currentBlock = currentBlock.previous();

@@ -48,6 +48,12 @@
 #include "../vmisc/vvalentinasettings.h"
 #include "../vdxf/libdxfrw/drw_base.h"
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include "../vmisc/vtextcodec.h"
+#else
+#include <QTextCodec>
+#endif
+
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QGraphicsScene>
@@ -249,7 +255,7 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
     int rotatate = 1;
     lGenerator.SetShift(-1); // Trigger first shift calulation
     lGenerator.SetRotate(false);
-    int papersCount = INT_MAX;
+    vsizetype papersCount = INT_MAX;
     qreal efficiency = 0;
     bool hasResult = false;
 
@@ -913,7 +919,7 @@ QVector<VLayoutPiece> MainWindowsNoGUI::PrepareDetailsForLayout(const QVector<De
         return VLayoutPiece::Create(data.piece, data.id, tool->getData());
     };
 
-    QProgressDialog progress(tr("Preparing details for layout"), QString(), 0, details.size());
+    QProgressDialog progress(tr("Preparing details for layout"), QString(), 0, static_cast<int>(details.size()));
     progress.setWindowModality(Qt::ApplicationModal);
 
     QFutureWatcher<VLayoutPiece> futureWatcher;
@@ -1307,7 +1313,7 @@ bool MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, boo
     }
 
     QString error;
-    const bool success = csv.toCSV(fileName, error, withHeader, separator, QTextCodec::codecForMib(mib));
+    const bool success = csv.toCSV(fileName, error, withHeader, separator, VTextCodec::codecForMib(mib));
 
     if (not success)
     {

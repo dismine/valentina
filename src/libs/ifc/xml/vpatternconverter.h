@@ -40,6 +40,7 @@
 #include <QtGlobal>
 
 #include "vabstractconverter.h"
+#include "../vmisc/projectversion.h"
 
 class QDomElement;
 
@@ -55,6 +56,8 @@ public:
     static Q_DECL_CONSTEXPR const unsigned PatternMinVer = FormatVersion(0, 1, 4);
     static Q_DECL_CONSTEXPR const unsigned PatternMaxVer = FormatVersion(0, 9, 2);
 
+    static auto XSDSchemas() -> QHash <unsigned, QString>;
+
 protected:
     void Save() override;
 
@@ -64,11 +67,12 @@ protected:
     virtual QString MinVerStr() const override;
     virtual QString MaxVerStr() const override;
 
-    virtual QString XSDSchema(unsigned ver) const override;
-    virtual void    ApplyPatches() override;
-    virtual void    DowngradeToCurrentMaxVersion() override;
+    virtual void ApplyPatches() override;
+    virtual void DowngradeToCurrentMaxVersion() override;
 
     virtual bool IsReadOnly() const override;
+
+    auto Schemas() const -> QHash <unsigned, QString> override;
 
 private:
     Q_DISABLE_COPY_MOVE(VPatternConverter) // NOLINT

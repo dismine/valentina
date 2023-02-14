@@ -57,7 +57,7 @@ public:
     void SetDetails(const QVector<VLayoutPiece> &details);
     void SetLayoutWidth(qreal width);
     void SetCaseType(Cases caseType);
-    int DetailsCount();
+    vsizetype DetailsCount();
 
     qreal GetPaperHeight() const;
     void SetPaperHeight(qreal value);
@@ -85,7 +85,7 @@ public:
 
     LayoutErrors State() const;
 
-    int PapersCount() const {return papers.size();}
+    vsizetype PapersCount() const;
 
     Q_REQUIRED_RESULT QList<QGraphicsItem *> GetPapersItems() const;
     Q_REQUIRED_RESULT QList<QGraphicsItem *> GetGlobalContours() const;

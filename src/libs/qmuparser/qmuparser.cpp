@@ -23,9 +23,6 @@
 
 #include <QCoreApplication>
 #include <QLineF>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QtGlobal>
 #include <sstream>
 #include <string>
@@ -302,7 +299,7 @@ qreal QmuParser::FMod(qreal number, qreal denom)
  * @param [in] a_afArg Vector with the function arguments
  * @param [in] a_iArgc The size of a_afArg
  */
-qreal QmuParser::Sum(const qreal *a_afArg, int a_iArgc)
+qreal QmuParser::Sum(const qreal *a_afArg, qmusizetype a_iArgc)
 {
     if (a_iArgc == 0)
     {
@@ -323,7 +320,7 @@ qreal QmuParser::Sum(const qreal *a_afArg, int a_iArgc)
  * @param [in] a_afArg Vector with the function arguments
  * @param [in] a_iArgc The size of a_afArg
  */
-qreal QmuParser::Avg(const qreal *a_afArg, int a_iArgc)
+qreal QmuParser::Avg(const qreal *a_afArg, qmusizetype a_iArgc)
 {
     if (a_iArgc == 0)
     {
@@ -344,7 +341,7 @@ qreal QmuParser::Avg(const qreal *a_afArg, int a_iArgc)
  * @param [in] a_afArg Vector with the function arguments
  * @param [in] a_iArgc The size of a_afArg
  */
-qreal QmuParser::Min(const qreal *a_afArg, int a_iArgc)
+qreal QmuParser::Min(const qreal *a_afArg, qmusizetype a_iArgc)
 {
     if (a_iArgc == 0)
     {
@@ -365,7 +362,7 @@ qreal QmuParser::Min(const qreal *a_afArg, int a_iArgc)
  * @param [in] a_afArg Vector with the function arguments
  * @param [in] a_iArgc The size of a_afArg
  */
-qreal QmuParser::Max(const qreal *a_afArg, int a_iArgc)
+qreal QmuParser::Max(const qreal *a_afArg, qmusizetype a_iArgc)
 {
     if (a_iArgc == 0)
     {
@@ -388,12 +385,13 @@ qreal QmuParser::Max(const qreal *a_afArg, int a_iArgc)
 * @param [out] a_fVal Pointer where the value should be stored in case one is found.
 * @return 1 if a value was found 0 otherwise.
 */
-int QmuParser::IsVal(const QString &a_szExpr, int *a_iPos, qreal *a_fVal, const QLocale &locale, bool cNumbers,
+int QmuParser::IsVal(const QString &a_szExpr, qmusizetype *a_iPos, qreal *a_fVal, const QLocale &locale, bool cNumbers,
                      const QChar &decimal, const QChar &thousand)
 {
     qreal fVal(0);
 
-    int pos = ReadVal(a_szExpr, fVal, locale != QLocale::c() && cNumbers ? QLocale::c() : locale, decimal, thousand);
+    qmusizetype pos = ReadVal(a_szExpr, fVal, locale != QLocale::c() && cNumbers ? QLocale::c() : locale, decimal,
+                            thousand);
 
     if (pos == -1)
     {
@@ -443,21 +441,45 @@ void QmuParser::InitFun()
     DefineFun(QStringLiteral("degTorad"),   DegreeToRadian);
     DefineFun(QStringLiteral("radTodeg"),   RadianToDegree);
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    #define QSIN_FUN qSin<qreal>
+    #define QCOS_FUN qCos<qreal>
+    #define QTAN_FUN qTan<qreal>
+    #define QASIN_FUN qAsin<qreal>
+    #define QACOS_FUN qAcos<qreal>
+    #define QATAN_FUN qAtan<qreal>
+    #define QATAN2_FUN qAtan2<qreal, qreal>
+    #define QLN_FUN qLn<qreal>
+    #define QEXP_FUN qExp<qreal>
+    #define QSQRT_FUN qSqrt<qreal>
+#else
+    #define QSIN_FUN qSin
+    #define QCOS_FUN qCos
+    #define QTAN_FUN qTan
+    #define QASIN_FUN qAsin
+    #define QACOS_FUN qAcos
+    #define QATAN_FUN qAtan
+    #define QATAN2_FUN qAtan2
+    #define QLN_FUN qLn
+    #define QEXP_FUN qExp
+    #define QSQRT_FUN qSqrt
+#endif
+
     // trigonometric functions
-    DefineFun(QStringLiteral("sin"),   qSin);
-    DefineFun(QStringLiteral("cos"),   qCos);
-    DefineFun(QStringLiteral("tan"),   qTan);
-    DefineFun(QStringLiteral("sinD"),   SinD);
-    DefineFun(QStringLiteral("cosD"),   CosD);
-    DefineFun(QStringLiteral("tanD"),   TanD);
+    DefineFun(QStringLiteral("sin"),  QSIN_FUN);
+    DefineFun(QStringLiteral("cos"),  QCOS_FUN);
+    DefineFun(QStringLiteral("tan"),  QTAN_FUN);
+    DefineFun(QStringLiteral("sinD"), SinD);
+    DefineFun(QStringLiteral("cosD"), CosD);
+    DefineFun(QStringLiteral("tanD"), TanD);
     // arcus functions
-    DefineFun(QStringLiteral("asin"),  qAsin);
-    DefineFun(QStringLiteral("acos"),  qAcos);
-    DefineFun(QStringLiteral("atan"),  qAtan);
-    DefineFun(QStringLiteral("atan2"), qAtan2);
-    DefineFun(QStringLiteral("asinD"),  ASinD);
-    DefineFun(QStringLiteral("acosD"),  ACosD);
-    DefineFun(QStringLiteral("atanD"),  ATanD);
+    DefineFun(QStringLiteral("asin"),  QASIN_FUN);
+    DefineFun(QStringLiteral("acos"),  QACOS_FUN);
+    DefineFun(QStringLiteral("atan"),  QATAN_FUN);
+    DefineFun(QStringLiteral("atan2"), QATAN2_FUN);
+    DefineFun(QStringLiteral("asinD"), ASinD);
+    DefineFun(QStringLiteral("acosD"), ACosD);
+    DefineFun(QStringLiteral("atanD"), ATanD);
     // hyperbolic functions
     DefineFun(QStringLiteral("sinh"),  Sinh);
     DefineFun(QStringLiteral("cosh"),  Cosh);
@@ -470,10 +492,10 @@ void QmuParser::InitFun()
     DefineFun(QStringLiteral("log2"),  Log2);
     DefineFun(QStringLiteral("log10"), Log10);
     DefineFun(QStringLiteral("log"),   Log10);
-    DefineFun(QStringLiteral("ln"),    qLn);
+    DefineFun(QStringLiteral("ln"),    QLN_FUN);
     // misc
-    DefineFun(QStringLiteral("exp"),   qExp);
-    DefineFun(QStringLiteral("sqrt"),  qSqrt);
+    DefineFun(QStringLiteral("exp"),   QEXP_FUN);
+    DefineFun(QStringLiteral("sqrt"),  QSQRT_FUN);
     DefineFun(QStringLiteral("sign"),  Sign);
     DefineFun(QStringLiteral("rint"),  Rint);
     DefineFun(QStringLiteral("r2cm"),  R2CM);
@@ -509,11 +531,11 @@ void QmuParser::InitConst()
  */
 void QmuParser::InitOprt()
 {
-    DefineInfixOprt(m_locale.negativeSign(), UnaryMinus);
+    DefineInfixOprt(LocaleNegativeSign(m_locale), UnaryMinus);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void QmuParser::OnDetectVar(const QString &pExpr, int &nStart, int &nEnd)
+void QmuParser::OnDetectVar(const QString &pExpr, qmusizetype &nStart, qmusizetype &nEnd)
 {
     Q_UNUSED(pExpr)
     Q_UNUSED(nStart)

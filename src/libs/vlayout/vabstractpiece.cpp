@@ -597,7 +597,7 @@ auto AngleBySecondRightAngle(QVector<VRawSAPoint> points, QPointF p1, QPointF p2
 
         // Because artificial loop can lead to wrong clipping we must rollback current seam allowance points
         bool success = false;
-        const int countBefore = points.size();
+        const auto countBefore = points.size();
         QVector<VRawSAPoint> temp = points;
         temp.append(VRawSAPoint(bigLine1.p2(), p.CurvePoint(), p.TurnPoint()));
         temp = VAbstractPiece::RollbackSeamAllowance(temp, edge, &success);
@@ -705,7 +705,7 @@ auto CorrectPathDistortion(QVector<T> path) -> QVector<T>
         return path;
     }
 
-    int prev = -1;
+    vsizetype prev = -1;
     for (qint32 i = 0; i < path.size(); ++i)
     {
         if (prev == -1)
@@ -1159,7 +1159,7 @@ auto VAbstractPiece::SumTrapezoids(const QVector<QPointF> &points) -> qreal
 {
     // Calculation a polygon area through the sum of the areas of trapezoids
     qreal s, res = 0;
-    const int n = points.size();
+    const auto n = points.size();
 
     if(n > 2)
     {
@@ -1564,7 +1564,7 @@ auto VAbstractPiece::RollbackSeamAllowance(QVector<VRawSAPoint> points, const QL
     *success = false;
     QVector<VRawSAPoint> clipped;
     clipped.reserve(points.count()+1);
-    for (int i = points.count()-1; i > 0; --i)
+    for (auto i = points.count()-1; i > 0; --i)
     {
         QLineF segment(points.at(i), points.at(i-1));
         QPointF crosPoint;
@@ -1575,7 +1575,7 @@ auto VAbstractPiece::RollbackSeamAllowance(QVector<VRawSAPoint> points, const QL
                 && IsSameDirection(cuttingEdge.p2(), cuttingEdge.p1(), crosPoint))
         {
             clipped.append(VRawSAPoint(crosPoint, points.at(i).CurvePoint(), points.at(i).TurnPoint()));
-            for (int j=i-1; j>=0; --j)
+            for (auto j=i-1; j>=0; --j)
             {
                 clipped.append(points.at(j));
             }

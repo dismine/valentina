@@ -93,7 +93,7 @@ public:
     virtual void removeProperty(VProperty* prop, bool delete_property = true);
 
     //! Returns the number of properties with in ID that are directly accessable by getProperty()
-    virtual int count() const;
+    virtual vpesizetype count() const;
 
     //! Clears the set and (optionally) deletes all properties
     //! \param delete_properties Set this to false, if you don't want the properties to get deleted.
@@ -118,7 +118,7 @@ public:
     VProperty* getRootProperty(int row) const;
 
     //! Returns the number of independent properties
-    int getRootPropertyCount() const;
+    vpesizetype getRootPropertyCount() const;
 
     //! Clones the property set
     Q_REQUIRED_RESULT VPropertySet* clone() const;

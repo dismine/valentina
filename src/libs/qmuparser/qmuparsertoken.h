@@ -215,7 +215,7 @@ public:
      * Member variables not necessary for variable tokens will be invalidated.
      * @throw nothrow
      */
-    auto SetString ( const TString &a_strTok, int a_iSize ) -> QmuParserToken&
+    auto SetString ( const TString &a_strTok, qmusizetype a_iSize ) -> QmuParserToken&
     {
         m_iCode = cmSTRING;
         m_iType = tpSTR;
@@ -235,7 +235,7 @@ public:
      * @param a_iIdx The index the string function result will take in the bytecode parser.
      * @throw QmuParserError if #a_iIdx<0 or #m_iType!=cmSTRING
      */
-    void SetIdx ( int a_iIdx )
+    void SetIdx ( qmusizetype a_iIdx )
     {
         if ( m_iCode != cmSTRING || a_iIdx < 0 )
         {
@@ -254,7 +254,7 @@ public:
      * @throw QmuParserError if #m_iIdx<0 or #m_iType!=cmSTRING
      * @return The index the result will take in the Bytecode calculatin array (#m_iIdx).
      */
-    auto GetIdx() const -> int
+    auto GetIdx() const -> qmusizetype
     {
         if ( m_iIdx < 0 || m_iCode != cmSTRING )
         {
@@ -465,7 +465,7 @@ private:
     ECmdCode  m_iCode{cmUNKNOWN}; ///< Type of the token; The token type is a constant of type #ECmdCode.
     ETypeCode m_iType{tpVOID};
     void *m_pTok{nullptr};        ///< Stores Token pointer; not applicable for all tokens
-    int m_iIdx{-1};               ///< An otional index to an external buffer storing the token data
+    qmusizetype m_iIdx{-1};         ///< An otional index to an external buffer storing the token data
     TString m_strTok{};           ///< Token string
     TString m_strVal{};           ///< Value for string variables
     qreal m_fVal{};               ///< the value

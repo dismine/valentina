@@ -41,48 +41,60 @@ public:
     //! This does not have to be used by subclasses, but it makes sense in cases where QVariant supports
     //! the data type. Also, this can be used as cache, so that when the data() function gets called by
     //! the model, the data does not have to be converted in a QVariant every time.
-    QVariant VariantValue;
+    QVariant VariantValue{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     //! Property name
-    QString Name;
+    QString Name{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     //! Description
-    QString Description;
+    QString Description{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     //! Specifies whether the property is empty or not
-    bool IsEmpty;
+    bool IsEmpty{false}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     //! Stores the property type
-    QVariant::Type PropertyVariantType;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    QMetaType::Type PropertyVariantType; // NOLINT(misc-non-private-member-variables-in-classes)
+#else
+    QVariant::Type PropertyVariantType; // NOLINT(misc-non-private-member-variables-in-classes)
+#endif
 
     //! Stores whether the views have to update the parent of this property if it changes
-    bool UpdateParent;
+    bool UpdateParent{false}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     //! Stores whether the views have to update the children of this property if it changes
-    bool UpdateChildren;
+    bool UpdateChildren{false}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     //! The parent property
-    VProperty* Parent;
+    VProperty* Parent{nullptr}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    QWidget* editor;
+    QWidget* editor{nullptr}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    Property type;
+    Property type{Property::Simple}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     //! List of child properties
-    QList<VProperty*> Children;
+    QList<VProperty*> Children{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     //! Constructor passing name and type
-    VPropertyPrivate(const QString& name, QVariant::Type type)
-        : VariantValue(type), Name(name), Description(QString()), IsEmpty(false), PropertyVariantType(type),
-          UpdateParent(false), UpdateChildren(false), Parent(nullptr), editor(nullptr), type(Property::Simple),
-          Children(QList<VProperty*>())
+    VPropertyPrivate(const QString& name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                     QMetaType::Type type)
+        : VariantValue(QMetaType(type)),
+#else
+                     QVariant::Type type)
+        : VariantValue(type),
+#endif
+          Name(name),
+          PropertyVariantType(type)
     {}
 
     //! Constructor
-    VPropertyPrivate()
-        : VariantValue(), Name(), Description(QString()), IsEmpty(false), PropertyVariantType(QVariant::Invalid),
-          UpdateParent(false), UpdateChildren(false), Parent(nullptr), editor(nullptr), type(Property::Simple),
-          Children(QList<VProperty*>())
+    VPropertyPrivate() 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        : PropertyVariantType(QMetaType::UnknownType)
+#else
+        : PropertyVariantType(QVariant::Invalid)
+#endif
     {}
 
     virtual ~VPropertyPrivate();
@@ -92,6 +104,6 @@ private:
 
 QT_WARNING_POP
 
-}
+}  // namespace VPE
 
 #endif // VPROPERTY_P_H

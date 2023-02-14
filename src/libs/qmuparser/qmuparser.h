@@ -58,11 +58,11 @@ namespace qmu
         virtual void InitFun() override;
         virtual void InitConst() override;
         virtual void InitOprt() override;
-        virtual void OnDetectVar(const QString &pExpr, int &nStart, int &nEnd) override;
+        virtual void OnDetectVar(const QString &pExpr, qmusizetype &nStart, qmusizetype &nEnd) override;
         qreal        Diff(qreal *a_Var, qreal a_fPos, qreal a_fEpsilon = 0) const;
     protected:
-        static int   IsVal(const QString &a_szExpr, int *a_iPos, qreal *a_fVal, const QLocale &locale, bool cNumbers,
-                           const QChar &decimal, const QChar &thousand);
+        static int   IsVal(const QString &a_szExpr, qmusizetype *a_iPos, qreal *a_fVal, const QLocale &locale,
+                           bool cNumbers, const QChar &decimal, const QChar &thousand);
         // hyperbolic functions
         static qreal Sinh(qreal);
         static qreal Cosh(qreal);
@@ -96,10 +96,10 @@ namespace qmu
         // !!! Unary Minus is a MUST if you want to use negative signs !!!
         static qreal UnaryMinus(qreal v);
         // Functions with variable number of arguments
-        static qreal Sum(const qreal*, int);  // sum
-        static qreal Avg(const qreal*, int);  // mean value
-        static qreal Min(const qreal*, int);  // minimum
-        static qreal Max(const qreal*, int);  // maximum
+        static qreal Sum(const qreal*, qmusizetype);  // sum
+        static qreal Avg(const qreal*, qmusizetype);  // mean value
+        static qreal Min(const qreal*, qmusizetype);  // minimum
+        static qreal Max(const qreal*, qmusizetype);  // maximum
     };
 
     QT_WARNING_POP

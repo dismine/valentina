@@ -90,7 +90,7 @@ public:
     Q_REQUIRED_RESULT virtual VProperty* clone(bool include_children = true,
                                                VProperty* container = nullptr) const override;
 
-    static int IndexOfColor(const QMap<QString, QString> &colors, const QString &color);
+    static vpesizetype IndexOfColor(const QMap<QString, QString> &colors, const QString &color);
 
 public slots:
     void currentIndexChanged(int index);

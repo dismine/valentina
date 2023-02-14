@@ -737,7 +737,7 @@ void VToolOptionsPropertyBrowser::AddPropertyLineType(Tool *i, const QString &pr
 {
     auto *lineTypeProperty = new VPE::VLineTypeProperty(propertyName);
     lineTypeProperty->setStyles(styles);
-    const qint32 index = VPE::VLineTypeProperty::IndexOfStyle(styles, i->getLineType());
+    const auto index = VPE::VLineTypeProperty::IndexOfStyle(styles, i->getLineType());
     if (index == -1)
     {
         qWarning()<<"Can't find line style" << i->getLineType()<<"in list";
@@ -753,7 +753,7 @@ void VToolOptionsPropertyBrowser::AddPropertyCurvePenStyle(Tool *i, const QStrin
 {
     auto *penStyleProperty = new VPE::VLineTypeProperty(propertyName);
     penStyleProperty->setStyles(styles);
-    const qint32 index = VPE::VLineTypeProperty::IndexOfStyle(styles, i->GetPenStyle());
+    const auto index = VPE::VLineTypeProperty::IndexOfStyle(styles, i->GetPenStyle());
     if (index == -1)
     {
         qWarning()<<"Can't find pen style" << i->getLineType()<<"in list";
@@ -769,7 +769,7 @@ void VToolOptionsPropertyBrowser::AddPropertyLineColor(Tool *i, const QString &p
 {
     auto *lineColorProperty = new VPE::VLineColorProperty(propertyName);
     lineColorProperty->setColors(colors);
-    const qint32 index = VPE::VLineColorProperty::IndexOfColor(colors, i->GetLineColor());
+    const auto index = VPE::VLineColorProperty::IndexOfColor(colors, i->GetLineColor());
     if (index == -1)
     {
         qWarning()<<"Can't find line style" << i->GetLineColor()<<"in list";
@@ -3348,12 +3348,12 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolEndLine()
     m_idToProperty[AttrName]->setValue(i->name());
 
     {
-    const qint32 index = VPE::VLineTypeProperty::IndexOfStyle(LineStylesPics(), i->getLineType());
+    const auto index = VPE::VLineTypeProperty::IndexOfStyle(LineStylesPics(), i->getLineType());
     m_idToProperty[AttrTypeLine]->setValue(index);
     }
 
     {
-    const qint32 index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
+    const auto index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
     m_idToProperty[AttrLineColor]->setValue(index);
     }
 
@@ -3379,12 +3379,12 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolAlongLine()
     m_idToProperty[AttrName]->setValue(i->name());
 
     {
-    const qint32 index = VPE::VLineTypeProperty::IndexOfStyle(LineStylesPics(), i->getLineType());
+    const auto index = VPE::VLineTypeProperty::IndexOfStyle(LineStylesPics(), i->getLineType());
     m_idToProperty[AttrTypeLine]->setValue(index);
     }
 
     {
-    const qint32 index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
+    const auto index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
     m_idToProperty[AttrLineColor]->setValue(index);
     }
 
@@ -3423,12 +3423,12 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolArc()
     m_idToProperty[AttrAngle2]->setValue(valueSecondAngle);
 
     {
-        const qint32 index = VPE::VLineTypeProperty::IndexOfStyle(CurvePenStylesPics(), i->GetPenStyle());
+        const auto index = VPE::VLineTypeProperty::IndexOfStyle(CurvePenStylesPics(), i->GetPenStyle());
         m_idToProperty[AttrPenStyle]->setValue(index);
     }
 
     {
-        const qint32 index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
+        const auto index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
         m_idToProperty[AttrColor]->setValue(index);
     }
 
@@ -3465,12 +3465,12 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolArcWithLength()
     m_idToProperty[AttrLength]->setValue(valueLength);
 
     {
-        const qint32 index = VPE::VLineTypeProperty::IndexOfStyle(CurvePenStylesPics(), i->GetPenStyle());
+        const auto index = VPE::VLineTypeProperty::IndexOfStyle(CurvePenStylesPics(), i->GetPenStyle());
         m_idToProperty[AttrPenStyle]->setValue(index);
     }
 
     {
-        const qint32 index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
+        const auto index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
         m_idToProperty[AttrColor]->setValue(index);
     }
 
@@ -3499,12 +3499,12 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolBisector()
     m_idToProperty[AttrLength]->setValue(valueFormula);
 
     {
-    const qint32 index = VPE::VLineTypeProperty::IndexOfStyle(LineStylesPics(), i->getLineType());
+    const auto index = VPE::VLineTypeProperty::IndexOfStyle(LineStylesPics(), i->getLineType());
     m_idToProperty[AttrTypeLine]->setValue(index);
     }
 
     {
-    const qint32 index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
+    const auto index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
     m_idToProperty[AttrLineColor]->setValue(index);
     }
 
@@ -3625,12 +3625,12 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolHeight()
     m_idToProperty[AttrName]->setValue(i->name());
 
     {
-    const qint32 index = VPE::VLineTypeProperty::IndexOfStyle(LineStylesPics(), i->getLineType());
+    const auto index = VPE::VLineTypeProperty::IndexOfStyle(LineStylesPics(), i->getLineType());
     m_idToProperty[AttrTypeLine]->setValue(index);
     }
 
     {
-    const qint32 index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
+    const auto index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
     m_idToProperty[AttrLineColor]->setValue(index);
     }
 
@@ -3655,12 +3655,12 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolLine()
     auto *i = qgraphicsitem_cast<VToolLine *>(m_currentItem);
 
     {
-    const qint32 index = VPE::VLineTypeProperty::IndexOfStyle(LineStylesPics(), i->getLineType());
+    const auto index = VPE::VLineTypeProperty::IndexOfStyle(LineStylesPics(), i->getLineType());
     m_idToProperty[AttrTypeLine]->setValue(index);
     }
 
     {
-    const qint32 index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
+    const auto index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
     m_idToProperty[AttrLineColor]->setValue(index);
     }
 
@@ -3715,12 +3715,12 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolNormal()
     m_idToProperty[AttrAngle]->setValue( i->GetAngle());
 
     {
-    const qint32 index = VPE::VLineTypeProperty::IndexOfStyle(LineStylesPics(), i->getLineType());
+    const auto index = VPE::VLineTypeProperty::IndexOfStyle(LineStylesPics(), i->getLineType());
     m_idToProperty[AttrTypeLine]->setValue(index);
     }
 
     {
-    const qint32 index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
+    const auto index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
     m_idToProperty[AttrLineColor]->setValue(index);
     }
 
@@ -3899,12 +3899,12 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolShoulderPoint()
     m_idToProperty[AttrName]->setValue(i->name());
 
     {
-    const qint32 index = VPE::VLineTypeProperty::IndexOfStyle(LineStylesPics(), i->getLineType());
+    const auto index = VPE::VLineTypeProperty::IndexOfStyle(LineStylesPics(), i->getLineType());
     m_idToProperty[AttrTypeLine]->setValue(index);
     }
 
     {
-    const qint32 index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
+    const auto index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
     m_idToProperty[AttrLineColor]->setValue(index);
     }
 
@@ -3968,7 +3968,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSpline()
     m_idToProperty[AttrLength2]->setValue(length2);
 
     {
-        const qint32 index = VPE::VLineTypeProperty::IndexOfStyle(CurvePenStylesPics(), i->GetPenStyle());
+        const auto index = VPE::VLineTypeProperty::IndexOfStyle(CurvePenStylesPics(), i->GetPenStyle());
         m_idToProperty[AttrPenStyle]->setValue(index);
     }
 
@@ -3992,7 +3992,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCubicBezier()
     m_idToProperty[AttrName]->setValue(i->name());
 
     {
-        const qint32 index = VPE::VLineTypeProperty::IndexOfStyle(CurvePenStylesPics(), i->GetPenStyle());
+        const auto index = VPE::VLineTypeProperty::IndexOfStyle(CurvePenStylesPics(), i->GetPenStyle());
         m_idToProperty[AttrPenStyle]->setValue(index);
     }
 
@@ -4032,7 +4032,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSplinePath()
     m_idToProperty[AttrName]->setValue(i->name());
 
     {
-        const qint32 index = VPE::VLineTypeProperty::IndexOfStyle(CurvePenStylesPics(), i->GetPenStyle());
+        const auto index = VPE::VLineTypeProperty::IndexOfStyle(CurvePenStylesPics(), i->GetPenStyle());
         m_idToProperty[AttrPenStyle]->setValue(index);
     }
 
@@ -4056,7 +4056,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCubicBezierPath()
     m_idToProperty[AttrName]->setValue(i->name());
 
     {
-        const qint32 index = VPE::VLineTypeProperty::IndexOfStyle(CurvePenStylesPics(), i->GetPenStyle());
+        const auto index = VPE::VLineTypeProperty::IndexOfStyle(CurvePenStylesPics(), i->GetPenStyle());
         m_idToProperty[AttrPenStyle]->setValue(index);
     }
 
@@ -4105,12 +4105,12 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolLineIntersectAxis()
     m_idToProperty[AttrName]->setValue(i->name());
 
     {
-    const qint32 index = VPE::VLineTypeProperty::IndexOfStyle(LineStylesPics(), i->getLineType());
+    const auto index = VPE::VLineTypeProperty::IndexOfStyle(LineStylesPics(), i->getLineType());
     m_idToProperty[AttrTypeLine]->setValue(index);
     }
 
     {
-    const qint32 index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
+    const auto index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
     m_idToProperty[AttrLineColor]->setValue(index);
     }
 
@@ -4140,12 +4140,12 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCurveIntersectAxis()
     m_idToProperty[AttrName]->setValue(i->name());
 
     {
-    const qint32 index = VPE::VLineTypeProperty::IndexOfStyle(LineStylesPics(), i->getLineType());
+    const auto index = VPE::VLineTypeProperty::IndexOfStyle(LineStylesPics(), i->getLineType());
     m_idToProperty[AttrTypeLine]->setValue(index);
     }
 
     {
-    const qint32 index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
+    const auto index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
     m_idToProperty[AttrLineColor]->setValue(index);
     }
 
@@ -4264,7 +4264,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolEllipticalArc()
     valueFormulaRotationAngle.setValue(i->GetFormulaRotationAngle());
     m_idToProperty[AttrRotationAngle]->setValue(valueFormulaRotationAngle);
 
-    const qint32 index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
+    const auto index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
     m_idToProperty[AttrColor]->setValue(index);
 
     QVariant valueCenterPoint;

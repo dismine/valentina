@@ -4,6 +4,7 @@ VTestApp {
     Depends { name: "buildconfig" }
     Depends { name: "VTestLib" }
     Depends { name: "Qt"; submodules: ["testlib", "xml", "gui", "printsupport"] }
+    Depends { name: "conan.XercesC"; condition: buildconfig.useConanPackages }
 
     name: "TranslationsTest"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "TranslationsTest" : "translationsTest"

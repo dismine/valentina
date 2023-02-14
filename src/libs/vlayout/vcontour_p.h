@@ -81,7 +81,7 @@ public:
 
     qreal layoutWidth{0};
 
-    int  m_emptySheetEdgesCount{0};
+    vsizetype m_emptySheetEdgesCount{0};
 
 private:
     Q_DISABLE_ASSIGN(VContourData)

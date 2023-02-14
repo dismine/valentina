@@ -62,16 +62,16 @@ public:
     VCubicBezierPath &operator=(VCubicBezierPath &&curve) Q_DECL_NOTHROW;
 #endif
 
-    VPointF &operator[](int indx);
+    VPointF &operator[](vsizetype indx);
 
-    const VPointF &at(int indx) const;
+    const VPointF &at(vsizetype indx) const;
 
     void   append(const VPointF &point);
 
-    virtual qint32  CountSubSpl() const override;
-    virtual qint32  CountPoints() const override;
+    virtual vsizetype CountSubSpl() const override;
+    virtual vsizetype CountPoints() const override;
     virtual void    Clear() override;
-    virtual VSpline GetSpline(qint32 index) const override;
+    virtual VSpline GetSpline(vsizetype index) const override;
     virtual qreal   GetStartAngle () const override;
     virtual qreal   GetEndAngle () const override;
 
@@ -81,9 +81,9 @@ public:
     virtual QVector<VSplinePoint> GetSplinePath() const override;
     QVector<VPointF> GetCubicPath() const;
 
-    static qint32 CountSubSpl(qint32 size);
-    static qint32 SubSplOffset(qint32 subSplIndex);
-    static qint32 SubSplPointsCount(qint32 countSubSpl);
+    static vsizetype CountSubSpl(vsizetype size);
+    static vsizetype SubSplOffset(vsizetype subSplIndex);
+    static vsizetype SubSplPointsCount(vsizetype countSubSpl);
 protected:
     virtual VPointF FirstPoint() const  override;
     virtual VPointF LastPoint() const  override;

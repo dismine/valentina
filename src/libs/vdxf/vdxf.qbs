@@ -1,6 +1,8 @@
+import qbs.Utilities
+
 VLib {
     Depends { name: "VMiscLib" }
-    Depends { name: "Qt"; submodules: ["gui"] }
+    Depends { name: "Qt"; submodules: ["core", "gui"] }
 
     name: "VDXFLib"
     files: [

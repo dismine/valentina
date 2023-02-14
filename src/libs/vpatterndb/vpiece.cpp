@@ -103,7 +103,7 @@ bool IsPassmarksPossible(const QVector<VPieceNode> &path)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VPieceNode> RotatePath(const QVector<VPieceNode> &path, int index)
+QVector<VPieceNode> RotatePath(const QVector<VPieceNode> &path, vsizetype index)
 {
     if (index < 0 || index >= path.size())
     {
@@ -257,8 +257,8 @@ QVector<VPassmark> VPiece::Passmarks(const VContainer *data) const
             continue;// skip node
         }
 
-        const int previousIndex = VPiecePath::FindInLoopNotExcludedUp(i, unitedPath);
-        const int nextIndex = VPiecePath::FindInLoopNotExcludedDown(i, unitedPath);
+        const vsizetype previousIndex = VPiecePath::FindInLoopNotExcludedUp(i, unitedPath);
+        const vsizetype nextIndex = VPiecePath::FindInLoopNotExcludedDown(i, unitedPath);
 
         passmarks += CreatePassmark(unitedPath, previousIndex, i, nextIndex, data);
     }
@@ -649,7 +649,7 @@ const VGrainlineData &VPiece::GetGrainlineGeometry() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VLayoutPoint> VPiece::SeamAllowancePointsWithRotation(const VContainer *data, int makeFirst) const
+QVector<VLayoutPoint> VPiece::SeamAllowancePointsWithRotation(const VContainer *data, vsizetype makeFirst) const
 {
     SCASSERT(data != nullptr);
 
@@ -881,7 +881,8 @@ QVector<CustomSARecord> VPiece::FilterRecords(QVector<CustomSARecord> records) c
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VSAPoint> VPiece::GetNodeSAPoints(const QVector<VPieceNode> &path, int index, const VContainer *data) const
+QVector<VSAPoint> VPiece::GetNodeSAPoints(const QVector<VPieceNode> &path, vsizetype index,
+                                          const VContainer *data) const
 {
     SCASSERT(data != nullptr)
 
@@ -908,7 +909,7 @@ QVector<VSAPoint> VPiece::GetNodeSAPoints(const QVector<VPieceNode> &path, int i
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPiece::GetPassmarkSAPoint(const QVector<VPieceNode> &path, int index, const VContainer *data,
+bool VPiece::GetPassmarkSAPoint(const QVector<VPieceNode> &path, vsizetype index, const VContainer *data,
                                 VSAPoint &point) const
 {
     SCASSERT(data != nullptr)
@@ -925,8 +926,9 @@ bool VPiece::GetPassmarkSAPoint(const QVector<VPieceNode> &path, int index, cons
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPiece::GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path, int index, const VSAPoint &passmarkSAPoint,
-                                         const VContainer *data, VSAPoint &point, int passmarkIndex) const
+bool VPiece::GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path, vsizetype index,
+                                         const VSAPoint &passmarkSAPoint, const VContainer *data, VSAPoint &point,
+                                         vsizetype passmarkIndex) const
 {
     SCASSERT(data != nullptr)
 
@@ -942,7 +944,7 @@ bool VPiece::GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path, int in
     }
 
     bool found = false;
-    int nodeIndex = points.size()-1;
+    auto nodeIndex = points.size()-1;
     do
     {
         const VSAPoint previous = points.at(nodeIndex);
@@ -964,8 +966,8 @@ bool VPiece::GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path, int in
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPiece::GetPassmarkNextSAPoints(const QVector<VPieceNode> &path, int index, const VSAPoint &passmarkSAPoint,
-                                    const VContainer *data, VSAPoint &point, int passmarkIndex) const
+bool VPiece::GetPassmarkNextSAPoints(const QVector<VPieceNode> &path, vsizetype index, const VSAPoint &passmarkSAPoint,
+                                    const VContainer *data, VSAPoint &point, vsizetype passmarkIndex) const
 {
     SCASSERT(data != nullptr)
 
@@ -1004,7 +1006,7 @@ bool VPiece::GetPassmarkNextSAPoints(const QVector<VPieceNode> &path, int index,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPiece::IsPassmarkVisible(const QVector<VPieceNode> &path, int passmarkIndex) const
+bool VPiece::IsPassmarkVisible(const QVector<VPieceNode> &path, vsizetype passmarkIndex) const
 {
     if (passmarkIndex < 0 || passmarkIndex >= path.size())
     {
@@ -1044,8 +1046,8 @@ bool VPiece::IsPassmarkVisible(const QVector<VPieceNode> &path, int passmarkInde
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPassmark VPiece::CreatePassmark(const QVector<VPieceNode> &path, int previousIndex, int passmarkIndex, int nextIndex,
-                                 const VContainer *data) const
+VPassmark VPiece::CreatePassmark(const QVector<VPieceNode> &path, vsizetype previousIndex, vsizetype passmarkIndex,
+                                 vsizetype nextIndex, const VContainer *data) const
 {
     SCASSERT(data != nullptr);
 
@@ -1447,24 +1449,24 @@ auto VPiece::ShortNameRegExp() -> QString
 
         for(const auto &locale : allLocales)
         {
-            if (not positiveSigns.contains(locale.positiveSign()))
+            if (not positiveSigns.contains(LocalePositiveSign(locale)))
             {
-                positiveSigns.append(locale.positiveSign());
+                positiveSigns.append(LocalePositiveSign(locale));
             }
 
-            if (not negativeSigns.contains(locale.negativeSign()))
+            if (not negativeSigns.contains(LocaleNegativeSign(locale)))
             {
-                negativeSigns.append(locale.negativeSign());
+                negativeSigns.append(LocaleNegativeSign(locale));
             }
 
-            if (not decimalPoints.contains(locale.decimalPoint()))
+            if (not decimalPoints.contains(LocaleDecimalPoint(locale)))
             {
-                decimalPoints.append(locale.decimalPoint());
+                decimalPoints.append(LocaleDecimalPoint(locale));
             }
 
-            if (not groupSeparators.contains(locale.groupSeparator()))
+            if (not groupSeparators.contains(LocaleGroupSeparator(locale)))
             {
-                groupSeparators.append(locale.groupSeparator());
+                groupSeparators.append(LocaleGroupSeparator(locale));
             }
         }
 

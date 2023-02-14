@@ -35,10 +35,7 @@
 #include <QDomNode>
 #include <QHash>
 #include <QLatin1String>
-#include <QStaticStringData>
 #include <QString>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QtGlobal>
 #include <QLocale>
 #include <QLoggingCategory>
@@ -50,10 +47,13 @@
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/literals.h"
+#include "../qmuparser/qmudef.h"
 
 class QDomElement;
 class QDomNode;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 template <typename T> class QVector;
+#endif
 template <typename T> class QFutureWatcher;
 
 Q_DECLARE_LOGGING_CATEGORY(vXML)
@@ -187,7 +187,7 @@ inline void VDomDocument::SetAttribute(QDomElement &domElement, const QString &n
 {
     // See specification for xs:decimal
     const QLocale locale = QLocale::c();
-    domElement.setAttribute(name, locale.toString(value).remove(locale.groupSeparator()));
+    domElement.setAttribute(name, locale.toString(value).remove(LocaleGroupSeparator(locale)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

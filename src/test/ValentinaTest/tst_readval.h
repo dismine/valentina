@@ -53,7 +53,7 @@ private:
     QLocale m_systemLocale;
 
     void PrepareVal(qreal val, const QLocale &locale);
-    void PrepareString(const QString &str, const QLocale &locale, qreal val=0, int count=-1);
+    void PrepareString(const QString &str, const QLocale &locale, qreal val=0, vsizetype count=-1);
 
     void TestVal();
 };

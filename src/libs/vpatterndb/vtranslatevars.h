@@ -41,9 +41,11 @@ public:
     explicit VTranslateVars();
     ~VTranslateVars() override = default;
 
-    auto VariablesFromUser(QString &newFormula, int position, const QString &token, int &bias) const -> bool;
-    auto FunctionsFromUser(QString &newFormula, int position, const QString &token, int &bias) const -> bool;
-    auto VariablesToUser(QString &newFormula, int position, const QString &token, int &bias) const -> bool;
+    auto VariablesFromUser(QString &newFormula, vsizetype position, const QString &token,
+                           vsizetype &bias) const -> bool;
+    auto FunctionsFromUser(QString &newFormula, vsizetype position, const QString &token,
+                           vsizetype &bias) const -> bool;
+    auto VariablesToUser(QString &newFormula, vsizetype position, const QString &token, vsizetype &bias) const -> bool;
 
     auto InternalVarToUser(const QString &var) const -> QString;
 
@@ -67,7 +69,7 @@ public:
     auto GetFunctionsDescriptions() const -> QMap<QString, qmu::QmuTranslation>;
     auto GetFunctionsArguments() const -> QMap<QString, QString>;
 
-    static void BiasTokens(int position, int bias, QMap<int, QString> &tokens);
+    static void BiasTokens(vsizetype position, vsizetype bias, QMap<vsizetype, QString> &tokens);
 
 private:
     // cppcheck-suppress unknownMacro
@@ -91,15 +93,18 @@ private:
     void InitSystem(const QString &code, const qmu::QmuTranslation &name, const qmu::QmuTranslation &author,
                     const qmu::QmuTranslation &book);
 
-    static void CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens, QMap<int, QString> &numbers);
+    static void CorrectionsPositions(vsizetype position, vsizetype bias, QMap<vsizetype, QString> &tokens,
+                                     QMap<vsizetype, QString> &numbers);
 
-    void TranslateVarsFromUser(QString &newFormula, QMap<int, QString> &tokens, QMap<int, QString> &numbers) const;
-    static void TranslateNumbersFromUser(QString &newFormula, QMap<int, QString> &tokens, QMap<int, QString> &numbers,
-                                         bool osSeparator);
+    void TranslateVarsFromUser(QString &newFormula, QMap<vsizetype, QString> &tokens,
+                               QMap<vsizetype, QString> &numbers) const;
+    static void TranslateNumbersFromUser(QString &newFormula, QMap<vsizetype, QString> &tokens,
+                                         QMap<vsizetype, QString> &numbers, bool osSeparator);
 
-    void TranslateVarsToUser(QString &newFormula, QMap<int, QString> &tokens, QMap<int, QString> &numbers) const;
-    static void TranslateNumbersToUser(QString &newFormula, QMap<int, QString> &tokens, QMap<int, QString> &numbers,
-                                       bool osSeparator);
+    void TranslateVarsToUser(QString &newFormula, QMap<vsizetype, QString> &tokens,
+                             QMap<vsizetype, QString> &numbers) const;
+    static void TranslateNumbersToUser(QString &newFormula, QMap<vsizetype, QString> &tokens,
+                                       QMap<vsizetype, QString> &numbers, bool osSeparator);
 };
 
 #endif // VTRANSLATEVARS_H

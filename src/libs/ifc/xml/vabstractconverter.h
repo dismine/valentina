@@ -36,7 +36,6 @@
 #include <QtGlobal>
 
 #include "vdomdocument.h"
-#include "../vmisc/projectversion.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
@@ -69,15 +68,18 @@ protected:
     virtual QString MinVerStr() const =0;
     virtual QString MaxVerStr() const =0;
 
-    virtual QString XSDSchema(unsigned ver) const =0;
+    virtual QString XSDSchema(unsigned ver) const;
     virtual void    ApplyPatches() =0;
     virtual void    DowngradeToCurrentMaxVersion() =0;
 
     virtual bool IsReadOnly() const =0;
 
-    void Replace(QString &formula, const QString &newName, int position, const QString &token, int &bias) const;
-    void CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens) const;
-    static void BiasTokens(int position, int bias, QMap<int, QString> &tokens);
+    virtual auto Schemas() const -> QHash <unsigned, QString> =0;
+
+    void Replace(QString &formula, const QString &newName, vsizetype position, const QString &token,
+                 vsizetype &bias) const;
+    void CorrectionsPositions(vsizetype position, vsizetype bias, QMap<vsizetype, QString> &tokens) const;
+    static void BiasTokens(vsizetype position, vsizetype bias, QMap<vsizetype, QString> &tokens);
 
     void ValidateXML(const QString &schema) const;
 

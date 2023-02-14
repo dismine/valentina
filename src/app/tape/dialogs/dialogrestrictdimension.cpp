@@ -523,7 +523,7 @@ void DialogRestrictDimension::InitTable()
         {
             MeasurementDimension_p dimension = m_dimensions.at(index);
             const QVector<qreal> bases = dimension->ValidBases();
-            ui->tableWidget->setRowCount(bases.size());
+            ui->tableWidget->setRowCount(static_cast<int>(bases.size()));
             ui->tableWidget->setVerticalHeaderLabels(DimensionLabels(bases, dimension));
         }
     };
@@ -534,7 +534,7 @@ void DialogRestrictDimension::InitTable()
         {
             MeasurementDimension_p dimension = m_dimensions.at(index);
             const QVector<qreal> bases = dimension->ValidBases();
-            ui->tableWidget->setColumnCount(bases.size());
+            ui->tableWidget->setColumnCount(static_cast<int>(bases.size()));
             ui->tableWidget->setHorizontalHeaderLabels(DimensionLabels(bases, dimension));
         }
     };

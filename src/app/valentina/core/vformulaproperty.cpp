@@ -37,7 +37,12 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VFormulaProperty::VFormulaProperty(const QString &name)
-    : VProperty(name, static_cast<QVariant::Type>(VFormula::FormulaTypeId()))
+    : VProperty(name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                static_cast<QMetaType::Type>(VFormula::FormulaTypeId()))
+#else
+                static_cast<QVariant::Type>(VFormula::FormulaTypeId()))
+#endif
 {
     d_ptr->type = VPE::Property::Complex;
 
@@ -183,11 +188,19 @@ void VFormulaProperty::SetFormula(const VFormula &formula)
 
     QVariant value;
     value.setValue(formula);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    value.convert(QMetaType(VFormula::FormulaTypeId()));
+#else
     value.convert(VFormula::FormulaTypeId());
+#endif
     VProperty::d_ptr->VariantValue = value;
 
     QVariant tmpFormula(formula.GetFormula());
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    tmpFormula.convert(QMetaType(QMetaType::QString));
+#else
     tmpFormula.convert(QVariant::String);
+#endif
 
     VProperty::d_ptr->Children.at(0)->setValue(tmpFormula);
 

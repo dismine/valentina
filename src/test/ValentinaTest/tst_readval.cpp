@@ -28,6 +28,7 @@
 
 #include "tst_readval.h"
 #include "../qmuparser/qmudef.h"
+#include "../vmisc/compatibility.h"
 
 #include <QtTest>
 #include <limits>
@@ -49,8 +50,13 @@ void TST_ReadVal::TestReadVal_data()
 
     const QList<QLocale> allLocales =
             QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
-    for(auto &locale : allLocales)
+    for(const auto &locale : allLocales)
     {
+        if (not SupportedLocale(locale))
+        {
+            continue;
+        }
+
         PrepareVal(1., locale);
         PrepareVal(1.0, locale);
         PrepareVal(-1.0, locale);
@@ -121,7 +127,7 @@ void TST_ReadVal::PrepareVal(qreal val, const QLocale &locale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TST_ReadVal::PrepareString(const QString &str, const QLocale &locale, qreal val,  int count)
+void TST_ReadVal::PrepareString(const QString &str, const QLocale &locale, qreal val, vsizetype count)
 {
     const QString tag = QStringLiteral("%1. String '%2'").arg(locale.name(), str);
     QTest::newRow(qUtf8Printable(tag)) << str << count << val << locale;
@@ -138,7 +144,8 @@ void TST_ReadVal::TestVal()
     qreal resVal = 0;
     QLocale::setDefault(locale);
 
-    const int resCount = ReadVal(formula, resVal, locale, locale.decimalPoint(), locale.groupSeparator());
+    const vsizetype resCount = ReadVal(formula, resVal, locale, VLocaleCharacter(LocaleDecimalPoint(locale)),
+                                       VLocaleCharacter(LocaleGroupSeparator(locale)));
 
     // cppcheck-suppress unreadVariable
     QString errorMsg = QStringLiteral("Conversion failed. Locale: '%1'.").arg(locale.name());

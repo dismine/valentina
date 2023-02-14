@@ -26,6 +26,7 @@
  **
  *************************************************************************/
 #include "vpsettings.h"
+#include "../vmisc/compatibility.h"
 
 #include <QMarginsF>
 
@@ -66,14 +67,14 @@ VPSettings::VPSettings(Format format, Scope scope, const QString &organization, 
                                  QObject *parent)
     : VCommonSettings(format, scope, organization, application, parent)
 {
-    qRegisterMetaTypeStreamOperators<QMarginsF>("QMarginsF");
+    REGISTER_META_TYPE_STREAM_OPERATORS(QMarginsF)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VPSettings::VPSettings(const QString &fileName, QSettings::Format format, QObject *parent)
     : VCommonSettings(fileName, format, parent)
 {
-    qRegisterMetaTypeStreamOperators<QMarginsF>("QMarginsF");
+    REGISTER_META_TYPE_STREAM_OPERATORS(QMarginsF)
 }
 
 //---------------------------------------------------------------------------------------------------------------------

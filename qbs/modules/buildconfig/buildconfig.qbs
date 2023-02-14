@@ -37,6 +37,17 @@ Module {
 
     property bool treatWarningsAsErrors: true
 
+    readonly property bool useConanPackages : {
+        if (Utilities.versionCompare(Qt.core.version, "6") < 0)
+            return false;
+
+        if (qbs.targetOS.contains("unix") && !qbs.targetOS.contains("macos"))
+        {
+            return project.enableConan;
+        }
+        return true;
+    }
+
     property string libDirName: "lib"
 
     property string appTarget

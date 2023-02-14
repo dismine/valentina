@@ -134,7 +134,7 @@ bool DialogUnionDetails::CheckDetail(const quint32 &idDetail) const
  * @param index index of edge
  */
 void DialogUnionDetails::ChoosedDetail(const quint32 &id, const SceneObject &type, quint32 &idDetail,
-                                       int &index)
+                                       vsizetype &index)
 {
     if (idDetail == NULL_ID)
     {
@@ -146,17 +146,17 @@ void DialogUnionDetails::ChoosedDetail(const quint32 &id, const SceneObject &typ
                 emit ToolTip(tr("Select a first point"));
                 return;
             }
-            else
-            {
-                emit ToolTip(tr("Workpiece should have at least two points and three objects"));
-                return;
-            }
+
+            emit ToolTip(tr("Workpiece should have at least two points and three objects"));
+            return;
         }
     }
-    if (CheckObject(id, idDetail) == false)
+
+    if (not CheckObject(id, idDetail))
     {
         return;
     }
+
     if (type == SceneObject::Point)
     {
         if (numberP == 0)
@@ -166,6 +166,7 @@ void DialogUnionDetails::ChoosedDetail(const quint32 &id, const SceneObject &typ
             emit ToolTip(tr("Select a second point"));
             return;
         }
+
         if (numberP == 1)
         {
             if (id == p1)
@@ -173,6 +174,7 @@ void DialogUnionDetails::ChoosedDetail(const quint32 &id, const SceneObject &typ
                 emit ToolTip(tr("Select a unique point"));
                 return;
             }
+
             VPiece d = data->GetPiece(idDetail);
             if (d.GetPath().OnEdge(p1, id))
             {

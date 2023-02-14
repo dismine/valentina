@@ -822,12 +822,12 @@
   </xs:element>
   <xs:simpleType name="shortName">
     <xs:restriction base="xs:string">
-      <xs:pattern value="([^\p{Nd}\p{Zs}*\/&amp;|!&lt;&gt;^&#10;\()\-−+.,٫, ٬.’=?:;'\&quot;]){1,1}([^\p{Zs}*\/&amp;|!&lt;&gt;^&#10;\()\-−+.,٫, ٬.’=?:;\&quot;]){0,}"/>
+      <xs:pattern value="([^\p{Nd}\p{Zs}*\\/&amp;|!&lt;&gt;^&#10;\()\-−+.,٫, ٬.’=?:;'\\&quot;]){1,1}([^\p{Zs}*\\/&amp;|!&lt;&gt;^&#10;\()\-−+.,٫, ٬.’=?:;\\&quot;]){0,}"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="pieceShortName">
     <xs:restriction base="xs:string">
-      <xs:pattern value="([^\p{Zs}*\/&amp;|!&lt;&gt;^&#10;\()\-−+.,٫, ٬.’=?:;\&quot;]){0,}"/>
+      <xs:pattern value="([^\p{Zs}*\\/&amp;|!&lt;&gt;^&#10;\()\-−+.,٫, ٬.’=?:;\\&quot;]){0,}"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="uuid">
@@ -855,7 +855,7 @@
   </xs:simpleType>
   <xs:simpleType name="contentType">
     <xs:restriction base="xs:string">
-      <xs:pattern value="image\/[-\w]+(\.[-\w]+)*([+][-\w]+)?"/>
+      <xs:pattern value="image\\/[-\w]+(\.[-\w]+)*([+][-\w]+)?"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="colors">

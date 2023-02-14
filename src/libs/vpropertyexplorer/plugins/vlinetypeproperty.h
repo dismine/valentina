@@ -91,7 +91,7 @@ public:
     Q_REQUIRED_RESULT virtual VProperty* clone(bool include_children = true,
                                                VProperty* container = nullptr) const override;
 
-    static int IndexOfStyle(const QMap<QString, QIcon> &styles, const QString &style);
+    static vpesizetype IndexOfStyle(const QMap<QString, QIcon> &styles, const QString &style);
 
 public slots:
     void currentIndexChanged(int index);

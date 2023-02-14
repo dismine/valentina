@@ -43,6 +43,10 @@
 #   include "../vmisc/appimage.h"
 #endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <xercesc/util/PlatformUtils.hpp>
+#endif
+
 //---------------------------------------------------------------------------------------------------------------------
 
 auto main(int argc, char *argv[]) -> int
@@ -69,13 +73,19 @@ auto main(int argc, char *argv[]) -> int
 #endif
 
     // Need to internally move a node inside a piece main path
-    qRegisterMetaTypeStreamOperators<VPieceNode>("VPieceNode");
+    REGISTER_META_TYPE_STREAM_OPERATORS(VPieceNode);
     // Need to internally move a node inside a custom seam allowance path
-    qRegisterMetaTypeStreamOperators<CustomSARecord>("CustomSARecord");
+    REGISTER_META_TYPE_STREAM_OPERATORS(CustomSARecord);
 
 #ifndef Q_OS_MAC // supports natively
     InitHighDpiScaling(argc, argv);
 #endif //Q_OS_MAC
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    XERCES_CPP_NAMESPACE::XMLPlatformUtils::Initialize();
+
+    auto Terminate = qScopeGuard([](){ XERCES_CPP_NAMESPACE::XMLPlatformUtils::Terminate(); });
+#endif
 
     VApplication app(argc, argv);
     app.InitOptions();

@@ -162,7 +162,7 @@ void DialogDimensionLabels::InitTable()
 
     const QVector<qreal> bases = dimension->ValidBases();
 
-    ui->tableWidget->setRowCount(bases.size());
+    ui->tableWidget->setRowCount(static_cast<int>(bases.size()));
 
     const DimesionLabels labels = m_labels.value(type);
 

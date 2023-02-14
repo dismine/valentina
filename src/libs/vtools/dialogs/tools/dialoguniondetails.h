@@ -55,8 +55,8 @@ public:
 
     quint32          getD1() const;
     quint32          getD2() const;
-    int        getIndexD1() const;
-    int        getIndexD2() const;
+    vsizetype getIndexD1() const;
+    vsizetype getIndexD2() const;
 
     bool RetainPieces() const;
 public slots:
@@ -70,10 +70,10 @@ private:
     Ui::DialogUnionDetails *ui;
 
     /** @brief indexD1 index edge first detail */
-    int        indexD1;
+    vsizetype indexD1;
 
     /** @brief indexD2 index edge second detail */
-    int        indexD2;
+    vsizetype indexD2;
 
     /** @brief d1 id first detail */
     quint32           d1;
@@ -97,7 +97,7 @@ private:
     bool             CheckDetail(const quint32 &idDetail) const;
 
     void             ChoosedDetail(const quint32 &id, const SceneObject &type, quint32 &idDetail,
-                                   int &index);
+                                   vsizetype &index);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -125,7 +125,7 @@ inline quint32 DialogUnionDetails::getD2() const
  * @brief getIndexD1 return index edge first detail
  * @return index
  */
-inline int DialogUnionDetails::getIndexD1() const
+inline vsizetype DialogUnionDetails::getIndexD1() const
 {
     return indexD1;
 }
@@ -135,7 +135,7 @@ inline int DialogUnionDetails::getIndexD1() const
  * @brief getIndexD2 return index edge second detail
  * @return index
  */
-inline int DialogUnionDetails::getIndexD2() const
+inline vsizetype DialogUnionDetails::getIndexD2() const
 {
     return indexD2;
 }

@@ -229,8 +229,8 @@ inline auto VAbstractPiece::CorrectEquidistantPoints(const QVector<T> &points, b
         return buf1;
     }
 
-    int prev = -1;
-    int next = -1;
+    vsizetype prev = -1;
+    vsizetype next = -1;
 
     QVector<T> buf2;
     //Remove point on line

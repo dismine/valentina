@@ -43,7 +43,9 @@
 #include "../vlayout/vrawsapoint.h"
 #include "../ifc/exception/vexception.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 template <class T> class QVector;
+#endif
 
 #include <ciso646>
 

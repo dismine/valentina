@@ -28,10 +28,20 @@
 #include "../vproperty_p.h"
 
 VPE::VObjectProperty::VObjectProperty(const QString& name)
-    : VProperty(name, QVariant::Int), objects()
+    : VProperty(name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                QMetaType::UInt),
+#else
+                QVariant::UInt),
+#endif
+      objects()
 {
     VProperty::d_ptr->VariantValue = 0;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    VProperty::d_ptr->VariantValue.convert(QMetaType(QMetaType::UInt));
+#else
     VProperty::d_ptr->VariantValue.convert(QVariant::UInt);
+#endif
 }
 
 //! Get the data how it should be displayed
@@ -130,7 +140,11 @@ QMap<QString, quint32> VPE::VObjectProperty::getObjects() const
 void VPE::VObjectProperty::setValue(const QVariant& value)
 {
     VProperty::d_ptr->VariantValue = value;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    VProperty::d_ptr->VariantValue.convert(QMetaType(QMetaType::UInt));
+#else
     VProperty::d_ptr->VariantValue.convert(QVariant::UInt);
+#endif
 
     if (VProperty::d_ptr->editor != nullptr)
     {

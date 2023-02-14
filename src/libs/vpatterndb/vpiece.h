@@ -135,7 +135,7 @@ public:
 
     QVector<VPieceNode> GetUnitedPath(const VContainer *data) const;
 
-    QVector<VLayoutPoint> SeamAllowancePointsWithRotation(const VContainer *data, int makeFirst) const;
+    QVector<VLayoutPoint> SeamAllowancePointsWithRotation(const VContainer *data, vsizetype makeFirst) const;
 
     void SetGradationLabel(const QString &label);
     auto GetGradationLabel() const -> QString;
@@ -153,18 +153,19 @@ private:
     QVector<CustomSARecord> GetValidRecords() const;
     QVector<CustomSARecord> FilterRecords(QVector<CustomSARecord> records) const;
 
-    QVector<VSAPoint> GetNodeSAPoints(const QVector<VPieceNode> &path, int index, const VContainer *data) const;
+    QVector<VSAPoint> GetNodeSAPoints(const QVector<VPieceNode> &path, vsizetype index, const VContainer *data) const;
 
-    bool GetPassmarkSAPoint(const QVector<VPieceNode> &path, int index, const VContainer *data, VSAPoint &point) const;
-    bool GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path, int index, const VSAPoint &passmarkSAPoint,
-                                     const VContainer *data, VSAPoint &point, int passmarkIndex) const;
-    bool GetPassmarkNextSAPoints(const QVector<VPieceNode> &path, int index, const VSAPoint &passmarkSAPoint,
-                                 const VContainer *data, VSAPoint &point, int passmarkIndex) const;
+    bool GetPassmarkSAPoint(const QVector<VPieceNode> &path, vsizetype index, const VContainer *data,
+                            VSAPoint &point) const;
+    bool GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path, vsizetype index, const VSAPoint &passmarkSAPoint,
+                                     const VContainer *data, VSAPoint &point, vsizetype passmarkIndex) const;
+    bool GetPassmarkNextSAPoints(const QVector<VPieceNode> &path, vsizetype index, const VSAPoint &passmarkSAPoint,
+                                 const VContainer *data, VSAPoint &point, vsizetype passmarkIndex) const;
 
-    bool IsPassmarkVisible(const QVector<VPieceNode> &path, int passmarkIndex) const;
+    bool IsPassmarkVisible(const QVector<VPieceNode> &path, vsizetype passmarkIndex) const;
 
-    VPassmark CreatePassmark(const QVector<VPieceNode> &path, int previousIndex, int passmarkIndex, int nextIndex,
-                             const VContainer *data) const;
+    VPassmark CreatePassmark(const QVector<VPieceNode> &path, vsizetype previousIndex, vsizetype passmarkIndex,
+                             vsizetype nextIndex, const VContainer *data) const;
 
     static int IsCSAStart(const QVector<CustomSARecord> &records, quint32 id);
 

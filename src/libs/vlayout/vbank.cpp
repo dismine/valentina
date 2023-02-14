@@ -80,9 +80,9 @@ void Insert(QMap<uint, QHash<int, qint64>> &container, uint key, int valKey, qin
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
-int CountDetails(const T &container)
+vsizetype CountDetails(const T &container)
 {
-    int count = 0;
+    vsizetype count = 0;
     auto i = container.constBegin();
     while (i != container.constEnd())
     {
@@ -424,19 +424,19 @@ void VBank::SetCaseType(Cases caseType)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VBank::AllDetailsCount() const
+vsizetype VBank::AllDetailsCount() const
 {
     return CountDetails(unsorted) + CountDetails(big) + CountDetails(middle) + CountDetails(small) + CountDetails(desc);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VBank::LeftToArrange() const
+vsizetype VBank::LeftToArrange() const
 {
     return CountDetails(big) + CountDetails(middle) + CountDetails(small) + CountDetails(desc);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VBank::FailedToArrange() const
+vsizetype VBank::FailedToArrange() const
 {
     return CountDetails(unsorted);
 }
@@ -580,7 +580,11 @@ int VBank::GetNextTwoGroups(uint priority) const
 int VBank::GetNextDescGroup(uint priority) const
 {
     auto descGroup = desc.value(priority);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    QMultiMapIterator<qint64, int> i(descGroup);
+#else
     QMapIterator<qint64, int> i(descGroup);
+#endif
     i.toBack();
     if (i.hasPrevious())
     {

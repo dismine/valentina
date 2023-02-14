@@ -334,10 +334,10 @@ void TST_TSLocaleTranslation::TestHTMLTags()
                                            QRegularExpression::DotMatchesEverythingOption);
         if (source.contains(openRegex))
         {
-            const int countOpenTag = source.count(openRegex);
+            const auto countOpenTag = source.count(openRegex);
             const QRegularExpression closeRegex(QLatin1String("</") + tag + pattern,
                                                 QRegularExpression::DotMatchesEverythingOption);
-            const int countCloseTag = translation.count(closeRegex);
+            const auto countCloseTag = translation.count(closeRegex);
             if (not translation.contains(closeRegex) || countCloseTag != countOpenTag)
             {
                 const QString message = QString("Tag mismatch. Tag: '<%1>'. ").arg(tag) +

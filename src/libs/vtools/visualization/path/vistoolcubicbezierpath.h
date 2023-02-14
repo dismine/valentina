@@ -68,7 +68,7 @@ private:
 
     auto GetPoint(QVector<VScaledEllipse *> &points, quint32 i, qreal z = 0) -> VScaledEllipse *;
     auto GetLine(quint32 i) -> VScaledLine *;
-    void Creating(const QVector<VPointF> &pathPoints , int pointsLeft);
+    void Creating(const QVector<VPointF> &pathPoints , vsizetype pointsLeft);
     void RefreshToolTip();
 };
 

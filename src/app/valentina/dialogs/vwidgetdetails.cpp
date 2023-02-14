@@ -173,7 +173,7 @@ void VWidgetDetails::FillTable(const QHash<quint32, VPiece> *details)
     ui->tableWidget->clearContents();
 
     ui->tableWidget->setColumnCount(2);
-    ui->tableWidget->setRowCount(details->size());
+    ui->tableWidget->setRowCount(static_cast<int>(details->size()));
     qint32 currentRow = -1;
     auto i = details->constBegin();
     while (i != details->constEnd())

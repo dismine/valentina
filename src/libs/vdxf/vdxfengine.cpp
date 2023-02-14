@@ -41,11 +41,16 @@
 #include <QPainterPath>
 #include <QPen>
 #include <QPolygonF>
-#include <QTextCodec>
 #include <QTextItem>
 #include <Qt>
 #include <QtDebug>
 #include <QtMath>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include "../vmisc/vtextcodec.h"
+#else
+#include <QTextCodec>
+#endif
 
 #include "../vmisc/def.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
@@ -860,7 +865,8 @@ void VDxfEngine::ExportPieceText(const QSharedPointer<dx_ifaceBlock> &detailBloc
 
     for (int i = 0; i < list.size(); ++i)
     {
-        QPointF pos(startPos.x(), startPos.y() - ToPixel(AAMATextHeight * m_yscale, m_varInsunits)*(list.size() - i-1));
+        const qreal height = ToPixel(AAMATextHeight * m_yscale, m_varInsunits);
+        QPointF pos(startPos.x(), startPos.y() - height * (static_cast<int>(list.size()) - i-1));
         detailBlock->ent.push_back(AAMAText(pos, list.at(i), *layer1));
     }
 }
@@ -875,8 +881,8 @@ void VDxfEngine::ExportStyleSystemText(const QSharedPointer<dx_iface> &input, co
         {
             for (int j = 0; j < strings.size(); ++j)
             {
-                QPointF pos(0, GetSize().height() -
-                                   ToPixel(AAMATextHeight * m_yscale, m_varInsunits)*(strings.size() - j-1));
+                const qreal height = ToPixel(AAMATextHeight * m_yscale, m_varInsunits);
+                QPointF pos(0, GetSize().height() - height * (static_cast<int>(strings.size()) - j-1));
                 input->AddEntity(AAMAText(pos, strings.at(j), *layer1));
             }
             return;
@@ -1250,7 +1256,7 @@ auto VDxfEngine::AAMAPoint(const QPointF &pos, const UTF8STRING &layer) const ->
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VDxfEngine::FromUnicodeToCodec(const QString &str, QTextCodec *codec) -> std::string
+auto VDxfEngine::FromUnicodeToCodec(const QString &str, VTextCodec *codec) -> std::string
 {
     return codec->fromUnicode(str).toStdString();
 }

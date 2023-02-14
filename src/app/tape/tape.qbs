@@ -1,9 +1,10 @@
 import qbs.FileInfo
+import qbs.Utilities
 
 VToolApp {
     Depends { name: "buildconfig" }
     Depends { name: "ib"; condition: qbs.targetOS.contains("macos") }
-    Depends { name: "Qt"; submodules: ["widgets", "svg"] }
+    Depends { name: "Qt"; submodules: ["core", "widgets", "svg"] }
     Depends { name: "VMiscLib"; }
     Depends { name: "VPatternDBLib"; }
     Depends { name: "FervorLib"; }
@@ -13,6 +14,7 @@ VToolApp {
     Depends { name: "VToolsLib"; }
     Depends { name: "ebr" }
     Depends { name: "multibundle"; }
+    Depends { name: "conan.XercesC"; condition: buildconfig.useConanPackages }
 
     name: "Tape"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "Tape" : "tape"

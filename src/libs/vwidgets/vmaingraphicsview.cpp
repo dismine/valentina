@@ -60,6 +60,7 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vmisc/literals.h"
+#include "../vmisc/compatibility.h"
 #include "global.h"
 #include "../ifc/xml/utils.h"
 
@@ -711,7 +712,7 @@ void VMainGraphicsView::dropEvent(QDropEvent *event)
             QFileInfo f(fileName);
             if (f.exists() && IsMimeTypeImage(QMimeDatabase().mimeTypeForFile(fileName)))
             {
-                emit currentScene->AddBackgroundImage(mapToScene(event->pos()), fileName);
+                emit currentScene->AddBackgroundImage(mapToScene(DropEventPos(event)), fileName);
                 event->acceptProposedAction();
             }
         }

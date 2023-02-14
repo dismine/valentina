@@ -75,7 +75,7 @@ QString MultiSelectCompleter::pathFromIndex(const QModelIndex& index) const
 
     QString text = static_cast<QLineEdit*>(widget())->text();
 
-    int pos = text.lastIndexOf(',');
+    vsizetype pos = text.lastIndexOf(',');
     if (pos >= 0)
     {
         path = text.left(pos) + ", " + path;
@@ -87,7 +87,7 @@ QString MultiSelectCompleter::pathFromIndex(const QModelIndex& index) const
 //---------------------------------------------------------------------------------------------------------------------
 QStringList MultiSelectCompleter::splitPath( const QString& path ) const
 {
-    int pos = path.lastIndexOf(',') + 1;
+    vsizetype pos = path.lastIndexOf(',') + 1;
 
     while (pos < path.length() && path.at(pos) == QLatin1Char(' '))
     {
@@ -122,7 +122,7 @@ void VLineEdit::focusInEvent(QFocusEvent *e)
 void VLineEdit::focusOutEvent(QFocusEvent *e)
 {
     const int start = selectionStart();
-    const int selectionLength = selectedText().length();
+    const int selectionLength = static_cast<int>(selectedText().length());
     const bool wasTextSelected = hasSelectedText();
 
     QLineEdit::focusOutEvent(e);

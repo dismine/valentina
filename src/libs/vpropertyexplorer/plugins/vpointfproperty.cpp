@@ -28,10 +28,19 @@
 #include "vnumberproperty.h"
 
 VPE::VPointFProperty::VPointFProperty(const QString &name)
-    : VProperty(name, QVariant::PointF)
+    : VProperty(name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                QMetaType::QPointF)
+#else
+                QVariant::PointF)
+#endif
 {
     d_ptr->VariantValue.setValue(0);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    d_ptr->VariantValue.convert(QMetaType(QMetaType::QPointF));
+#else
     d_ptr->VariantValue.convert(QVariant::PointF);
+#endif
 
     VDoubleProperty* tmpX = new VDoubleProperty("X");
     addChild(tmpX);
@@ -92,10 +101,18 @@ void VPE::VPointFProperty::setPointF(qreal x, qreal y)
     }
 
     QVariant tmpX(x);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    tmpX.convert(QMetaType(QMetaType::Double));
+#else
     tmpX.convert(QVariant::Double);
+#endif
 
     QVariant tmpY(y);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    tmpY.convert(QMetaType(QMetaType::Double));
+#else
     tmpY.convert(QVariant::Double);
+#endif
 
     d_ptr->Children.at(0)->setValue(tmpX);
     d_ptr->Children.at(1)->setValue(tmpY);

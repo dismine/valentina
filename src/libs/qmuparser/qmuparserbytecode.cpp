@@ -139,7 +139,7 @@ void QmuParserByteCode::AddVal(qreal a_fVal)
 //---------------------------------------------------------------------------------------------------------------------
 void QmuParserByteCode::ConstantFolding(ECmdCode a_Oprt)
 {
-    int sz = m_vRPN.size();
+    qmusizetype sz = m_vRPN.size();
     qreal &x = m_vRPN[sz-2].Val.data2,
           &y = m_vRPN[sz-1].Val.data2;
     switch (a_Oprt)
@@ -216,7 +216,7 @@ void QmuParserByteCode::ConstantFolding(ECmdCode a_Oprt)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void QmuParserByteCode::OpPOW(int sz, bool &bOptimized)
+void QmuParserByteCode::OpPOW(qmusizetype sz, bool &bOptimized)
 {
     if (m_vRPN.at(sz-2).Cmd == cmVAR && m_vRPN.at(sz-1).Cmd == cmVAL) //-V807
     {
@@ -242,7 +242,7 @@ void QmuParserByteCode::OpPOW(int sz, bool &bOptimized)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void QmuParserByteCode::OpSUBADD(ECmdCode a_Oprt, int sz, bool &bOptimized)
+void QmuParserByteCode::OpSUBADD(ECmdCode a_Oprt, qmusizetype sz, bool &bOptimized)
 {
     if ( (m_vRPN.at(sz-1).Cmd == cmVAR    && m_vRPN.at(sz-2).Cmd == cmVAL)   ||
         (m_vRPN.at(sz-1).Cmd == cmVAL    && m_vRPN.at(sz-2).Cmd == cmVAR)    ||
@@ -273,7 +273,7 @@ void QmuParserByteCode::OpSUBADD(ECmdCode a_Oprt, int sz, bool &bOptimized)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void QmuParserByteCode::OpMUL(int sz, bool &bOptimized)
+void QmuParserByteCode::OpMUL(qmusizetype sz, bool &bOptimized)
 {
     if ( (m_vRPN.at(sz-1).Cmd == cmVAR && m_vRPN.at(sz-2).Cmd == cmVAL) ||
         (m_vRPN.at(sz-1).Cmd == cmVAL && m_vRPN.at(sz-2).Cmd == cmVAR) )
@@ -319,7 +319,7 @@ void QmuParserByteCode::OpMUL(int sz, bool &bOptimized)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void QmuParserByteCode::OpDIV(int sz, bool &bOptimized)
+void QmuParserByteCode::OpDIV(qmusizetype sz, bool &bOptimized)
 {
     if (m_vRPN.at(sz-1).Cmd == cmVAL && m_vRPN.at(sz-2).Cmd == cmVARMUL &&
         not qFuzzyIsNull(m_vRPN.at(sz-1).Val.data2))
@@ -370,7 +370,7 @@ void QmuParserByteCode::AddOp(ECmdCode a_Oprt)
         return;
     }
 
-    int sz = m_vRPN.size();
+    qmusizetype sz = m_vRPN.size();
 
     // Check for foldable constants like:
     //   cmVAL cmVAL cmADD
@@ -477,7 +477,7 @@ void QmuParserByteCode::AddFun(generic_fun_type a_pFun, int a_iArgc)
  * @param a_iArgc Number of arguments, negative numbers indicate multiarg functions.
  * @param a_pFun Pointer to function callback.
  */
-void QmuParserByteCode::AddBulkFun(generic_fun_type a_pFun, int a_iArgc)
+void QmuParserByteCode::AddBulkFun(generic_fun_type a_pFun, qmusizetype a_iArgc)
 {
     m_iStackPos = static_cast<quint32>(static_cast<int>(m_iStackPos) - a_iArgc + 1);
     m_iMaxStackSize = qMax(m_iMaxStackSize, m_iStackPos);
@@ -497,7 +497,7 @@ void QmuParserByteCode::AddBulkFun(generic_fun_type a_pFun, int a_iArgc)
  * A string function entry consists of the stack position of the return value, followed by a cmSTRFUNC code, the
  * function pointer and an index into the string buffer maintained by the parser.
  */
-void QmuParserByteCode::AddStrFun(generic_fun_type a_pFun, int a_iArgc, int a_iIdx)
+void QmuParserByteCode::AddStrFun(generic_fun_type a_pFun, int a_iArgc, qmusizetype a_iIdx)
 {
     m_iStackPos = static_cast<quint32>(static_cast<int>(m_iStackPos) - a_iArgc + 1);
 

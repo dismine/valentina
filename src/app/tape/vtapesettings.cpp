@@ -28,9 +28,6 @@
 
 #include "vtapesettings.h"
 
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <QVariant>
 #include <QGlobalStatic>
 

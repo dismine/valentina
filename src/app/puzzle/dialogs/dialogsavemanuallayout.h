@@ -41,7 +41,7 @@ class DialogSaveManualLayout : public VAbstractLayoutDialog
     Q_OBJECT // NOLINT
 
 public:
-    explicit DialogSaveManualLayout(int count, bool consoleExport, const QString &fileName = QString(),
+    explicit DialogSaveManualLayout(vsizetype count, bool consoleExport, const QString &fileName = QString(),
                                     QWidget *parent = nullptr);
     ~DialogSaveManualLayout() override;
 
@@ -77,7 +77,7 @@ private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DialogSaveManualLayout) // NOLINT
     Ui::DialogSaveManualLayout *ui;
-    int  m_count;
+    vsizetype m_count;
     bool m_isInitialized{false};
     bool m_scaleConnected{true};
     bool m_consoleExport;

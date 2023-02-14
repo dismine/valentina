@@ -36,9 +36,6 @@
 #include <QGraphicsSimpleTextItem>
 #include <QLineF>
 #include <QPen>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <Qt>
 #include <QGraphicsView>
 

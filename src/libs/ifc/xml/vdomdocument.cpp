@@ -39,7 +39,11 @@
 #include "../exception/vexception.h"
 #include "../ifcdef.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <QAbstractMessageHandler>
+#include <QSourceLocation>
+#endif
+
 #include <QByteArray>
 #include <QDomNodeList>
 #include <QDomText>
@@ -47,7 +51,6 @@
 #include <QIODevice>
 #include <QMessageLogger>
 #include <QObject>
-#include <QSourceLocation>
 #include <QStringList>
 #include <QTemporaryFile>
 #include <QTextDocument>
@@ -703,7 +706,7 @@ void VDomDocument::RefreshElementIdCache()
 {
     if (m_watcher->isFinished())
     {
-        m_watcher->setFuture(QtConcurrent::run(this, &VDomDocument::RefreshCache, documentElement()));
+        m_watcher->setFuture(QtConcurrent::run([this](){return RefreshCache(documentElement());}));
     }
 }
 
@@ -788,7 +791,9 @@ bool VDomDocument::SaveDocument(const QString &fileName, QString &error)
         }
         // Left these strings in case we will need them for testing purposes
         // QTextStream out(&file);
+//#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         // out.setCodec("UTF-8");
+//#endif
         // save(out, indent);
 
         success = file.commit();

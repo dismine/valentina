@@ -216,7 +216,7 @@ void VSplinePath::append(const VSplinePoint &point)
  * @brief CountSubSpl return count of simple splines.
  * @return count.
  */
-qint32 VSplinePath::CountSubSpl() const
+vsizetype VSplinePath::CountSubSpl() const
 {
     if (d->path.isEmpty())
     {
@@ -232,7 +232,7 @@ qint32 VSplinePath::CountSubSpl() const
  * @param index index spline in spline path.
  * @return spline
  */
-VSpline VSplinePath::GetSpline(qint32 index) const
+VSpline VSplinePath::GetSpline(vsizetype index) const
 {
     if (CountPoints()<1)
     {
@@ -337,7 +337,7 @@ VSplinePath &VSplinePath::operator=(VSplinePath &&path) Q_DECL_NOTHROW
  * @param indx index in list.
  * @return spline point.
  */
-VSplinePoint & VSplinePath::operator[](int indx)
+VSplinePoint & VSplinePath::operator[](vsizetype indx)
 {
     return d->path[indx];
 }
@@ -348,7 +348,7 @@ VSplinePoint & VSplinePath::operator[](int indx)
  * @param indx index in list.
  * @return spline point.
  */
-const VSplinePoint &VSplinePath::at(int indx) const
+const VSplinePoint &VSplinePath::at(vsizetype indx) const
 {
     return d->path[indx];
 }
@@ -409,7 +409,7 @@ VPointF VSplinePath::FirstPoint() const
 //---------------------------------------------------------------------------------------------------------------------
 VPointF VSplinePath::LastPoint() const
 {
-    const qint32 count = CountSubSpl();
+    const vsizetype count = CountSubSpl();
     return count >= 1 ? d->path.at(count).P() :// Take last point of the last real spline
                         VPointF();
 }
@@ -419,7 +419,7 @@ VPointF VSplinePath::LastPoint() const
  * @brief CountPoints return count of points.
  * @return count.
  */
-qint32 VSplinePath::CountPoints() const
+vsizetype VSplinePath::CountPoints() const
 {
     return d->path.size();
 }

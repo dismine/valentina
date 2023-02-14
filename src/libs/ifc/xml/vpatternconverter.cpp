@@ -36,9 +36,6 @@
 #include <QFileInfo>
 #include <QLatin1String>
 #include <QList>
-#include <QStaticStringData>
-#include <QStringData>
-#include <QStringDataPtr>
 #include <algorithm>
 #include <QGlobalStatic>
 #include <QUuid>
@@ -184,25 +181,9 @@ VPatternConverter::VPatternConverter(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPatternConverter::Save()
+auto VPatternConverter::XSDSchemas() -> QHash<unsigned int, QString>
 {
-    try
-    {
-        TestUniqueId();
-    }
-    catch (const VExceptionWrongId &e)
-    {
-        Q_UNUSED(e)
-        throw VException(tr("Error no unique id."));
-    }
-
-    VAbstractConverter::Save();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VPatternConverter::XSDSchema(unsigned ver) const -> QString
-{
-    QHash <unsigned, QString> schemas =
+    static const auto schemas = QHash <unsigned, QString>
     {
         std::make_pair(FormatVersion(0, 1, 4), QStringLiteral("://schema/pattern/v0.1.4.xsd")),
         std::make_pair(FormatVersion(0, 2, 0), QStringLiteral("://schema/pattern/v0.2.0.xsd")),
@@ -274,12 +255,23 @@ auto VPatternConverter::XSDSchema(unsigned ver) const -> QString
         std::make_pair(FormatVersion(0, 9, 2), CurrentSchema)
     };
 
-    if (schemas.contains(ver))
+    return schemas;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::Save()
+{
+    try
     {
-        return schemas.value(ver);
+        TestUniqueId();
+    }
+    catch (const VExceptionWrongId &e)
+    {
+        Q_UNUSED(e)
+        throw VException(tr("Error no unique id."));
     }
 
-    InvalidVersion(ver);
+    VAbstractConverter::Save();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -415,6 +407,12 @@ bool VPatternConverter::IsReadOnly() const
     }
 
     return GetParametrBool(pattern, *strReadOnly, falseStr);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPatternConverter::Schemas() const -> QHash<unsigned int, QString>
+{
+    return XSDSchemas();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1004,10 +1002,10 @@ QString VPatternConverter::FixMeasurementInFormulaToV0_2_0(const QString &formul
                       "Time to refactor the code.");
 
     QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(formula, false, false));// Eval formula
-    QMap<int, QString> tokens = cal->GetTokens();// Tokens (variables, measurements)
+    QMap<vsizetype, QString> tokens = cal->GetTokens();// Tokens (variables, measurements)
     delete cal.take();
 
-    QList<int> tKeys = tokens.keys();// Take all tokens positions
+    QList<vsizetype> tKeys = tokens.keys();// Take all tokens positions
     QList<QString> tValues = tokens.values();
 
     QString newFormula = formula;// Local copy for making changes
@@ -1018,7 +1016,7 @@ QString VPatternConverter::FixMeasurementInFormulaToV0_2_0(const QString &formul
             continue;
         }
 
-        int bias = 0;
+        vsizetype bias = 0;
         Replace(newFormula, names.value(tValues.at(i)), tKeys.at(i), tValues.at(i), bias);
         if (bias != 0)
         {// Translated token has different length than original. Position next tokens need to be corrected.
@@ -1038,21 +1036,21 @@ QString VPatternConverter::FixIncrementInFormulaToV0_2_0(const QString &formula,
                       "Time to refactor the code.");
 
     qmu::QmuTokenParser *cal = new qmu::QmuTokenParser(formula, false, false);// Eval formula
-    QMap<int, QString> tokens = cal->GetTokens();// Tokens (variables, measurements)
+    QMap<vsizetype, QString> tokens = cal->GetTokens();// Tokens (variables, measurements)
     delete cal;
 
-    QList<int> tKeys = tokens.keys();// Take all tokens positions
+    QList<vsizetype> tKeys = tokens.keys();// Take all tokens positions
     QList<QString> tValues = tokens.values();
 
     QString newFormula = formula;// Local copy for making changes
-    for (int i = 0; i < tValues.size(); ++i)
+    for (vsizetype i = 0; i < tValues.size(); ++i)
     {
         if (not names.contains(tValues.at(i)))
         {
             continue;
         }
 
-        int bias = 0;
+        vsizetype bias = 0;
         Replace(newFormula, "#"+tValues.at(i), tKeys.at(i), tValues.at(i), bias);
         if (bias != 0)
         {// Translated token has different length than original. Position next tokens need to be corrected.
@@ -1873,7 +1871,7 @@ QDomElement VPatternConverter::AddTagPatternLabelV0_5_1()
 
         QDomElement element = createElement(*strPatternLabel);
         QDomElement pattern = documentElement();
-        for (int i = tags.indexOf(element.tagName())-1; i >= 0; --i)
+        for (vsizetype i = tags.indexOf(element.tagName())-1; i >= 0; --i)
         {
             const QDomNodeList list = elementsByTagName(tags.at(i));
             if (not list.isEmpty())

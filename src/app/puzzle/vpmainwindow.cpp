@@ -1534,24 +1534,49 @@ void VPMainWindow::InitZoomToolBar()
     // connect the zoom buttons and shortcuts to the slots
     QList<QKeySequence> zoomInShortcuts;
     zoomInShortcuts.append(QKeySequence(QKeySequence::ZoomIn));
-    zoomInShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_Plus + Qt::KeypadModifier));
+    zoomInShortcuts.append(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(QKeyCombination(Qt::ControlModifier), Qt::Key_Plus | Qt::KeypadModifier));
+#else
+        QKeySequence(Qt::ControlModifier + Qt::Key_Plus + Qt::KeypadModifier));
+#endif
     ui->actionZoomIn->setShortcuts(zoomInShortcuts);
     connect(ui->actionZoomIn, &QAction::triggered, m_graphicsView, &VPMainGraphicsView::ZoomIn);
 
     QList<QKeySequence> zoomOutShortcuts;
     zoomOutShortcuts.append(QKeySequence(QKeySequence::ZoomOut));
-    zoomOutShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_Minus + Qt::KeypadModifier));
+    zoomOutShortcuts.append(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(QKeyCombination(Qt::ControlModifier), Qt::Key_Minus | Qt::KeypadModifier));
+#else
+        QKeySequence(Qt::ControlModifier + Qt::Key_Minus + Qt::KeypadModifier));
+#endif
     ui->actionZoomOut->setShortcuts(zoomOutShortcuts);
     connect(ui->actionZoomOut, &QAction::triggered, m_graphicsView, &VPMainGraphicsView::ZoomOut);
 
     QList<QKeySequence> zoomOriginalShortcuts;
-    zoomOriginalShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_0));
-    zoomOriginalShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_0 + Qt::KeypadModifier));
+    zoomOriginalShortcuts.append(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(Qt::ControlModifier | Qt::Key_0));
+#else
+        QKeySequence(Qt::ControlModifier + Qt::Key_0));
+#endif
+    zoomOriginalShortcuts.append(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(QKeyCombination(Qt::ControlModifier), Qt::Key_0 | Qt::KeypadModifier));
+#else
+        QKeySequence(Qt::ControlModifier + Qt::Key_0 + Qt::KeypadModifier));
+#endif
     ui->actionZoomOriginal->setShortcuts(zoomOriginalShortcuts);
     connect(ui->actionZoomOriginal, &QAction::triggered, m_graphicsView, &VPMainGraphicsView::ZoomOriginal);
 
     QList<QKeySequence> zoomFitBestShortcuts;
-    zoomFitBestShortcuts.append(QKeySequence(Qt::ControlModifier + Qt::Key_Equal));
+    zoomFitBestShortcuts.append(
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QKeySequence(Qt::ControlModifier | Qt::Key_Equal));
+#else
+        QKeySequence(Qt::ControlModifier + Qt::Key_Equal));
+#endif
     ui->actionZoomFitBest->setShortcuts(zoomFitBestShortcuts);
     connect(ui->actionZoomFitBest, &QAction::triggered, m_graphicsView, &VPMainGraphicsView::ZoomFitBest);
 
@@ -1592,7 +1617,7 @@ void VPMainWindow::UpdateWindowTitle()
     }
     else
     {
-        int index = VPApplication::VApp()->MainWindows().indexOf(this);
+        vsizetype index = VPApplication::VApp()->MainWindows().indexOf(this);
         if (index != -1)
         {
             showName = tr("untitled %1.vlt").arg(index+1);
@@ -1647,7 +1672,6 @@ void VPMainWindow::ReadSettings()
     if (settings->status() == QSettings::NoError)
     {
         restoreGeometry(settings->GetGeometry());
-        restoreState(settings->GetWindowState());
         restoreState(settings->GetToolbarsState(), AppVersion());
 
         // Text under tool buton icon
@@ -1673,7 +1697,6 @@ void VPMainWindow::WriteSettings()
 {
     VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
     settings->SetGeometry(saveGeometry());
-    settings->SetWindowState(saveState());
     settings->SetToolbarsState(saveState(AppVersion()));
 
     settings->SetDockWidgetPropertiesActive(ui->dockWidgetProperties->isEnabled());
@@ -1745,7 +1768,7 @@ void VPMainWindow::CreateWindowMenu(QMenu *menu)
         VPMainWindow *window = windows.at(i);
 
         QString title = QStringLiteral("%1. %2").arg(i+1).arg(window->windowTitle());
-        const int index = title.lastIndexOf(QLatin1String("[*]"));
+        const vsizetype index = title.lastIndexOf(QLatin1String("[*]"));
         if (index != -1)
         {
             window->isWindowModified() ? title.replace(index, 3, QChar('*')) : title.replace(index, 3, QString());
@@ -2915,13 +2938,13 @@ void VPMainWindow::PrintLayoutSheets(QPrinter *printer, const QList<VPSheetPtr> 
         firstPageNumber = 0;
     }
 
-    int lastPageNumber = printer->toPage() - 1;
+    vsizetype lastPageNumber = printer->toPage() - 1;
     if (lastPageNumber == -1 || lastPageNumber >= sheets.count())
     {
         lastPageNumber = sheets.count() - 1;
     }
 
-    const int numPages = lastPageNumber - firstPageNumber + 1;
+    const vsizetype numPages = lastPageNumber - firstPageNumber + 1;
     int copyCount = 1;
     if (not printer->supportsMultipleCopies())
     {
@@ -2946,7 +2969,8 @@ void VPMainWindow::PrintLayoutSheets(QPrinter *printer, const QList<VPSheetPtr> 
     {
         for (int j = 0; j < numPages; ++j)
         {
-            int index = printer->pageOrder() == QPrinter::FirstPageFirst ? firstPageNumber + j : lastPageNumber - j;
+            vsizetype index = printer->pageOrder() == QPrinter::FirstPageFirst ? firstPageNumber + j
+                                                                               : lastPageNumber - j;
 
             const VPSheetPtr& sheet = sheets.at(index);
             if (sheet.isNull())
@@ -3013,13 +3037,13 @@ void VPMainWindow::PrintLayoutTiledSheets(QPrinter *printer, const QList<VPSheet
         firstPageNumber = 0;
     }
 
-    int lastPageNumber = printer->toPage() - 1;
+    vsizetype lastPageNumber = printer->toPage() - 1;
     if (lastPageNumber == -1 || lastPageNumber >= pages.count())
     {
         lastPageNumber = pages.count() - 1;
     }
 
-    const int numPages = lastPageNumber - firstPageNumber + 1;
+    const vsizetype numPages = lastPageNumber - firstPageNumber + 1;
     int copyCount = 1;
     if (not printer->supportsMultipleCopies())
     {
@@ -3036,7 +3060,8 @@ void VPMainWindow::PrintLayoutTiledSheets(QPrinter *printer, const QList<VPSheet
     {
         for (int j = 0; j < numPages; ++j)
         {
-            int index = printer->pageOrder() == QPrinter::FirstPageFirst ? firstPageNumber + j : lastPageNumber - j;
+            vsizetype index = printer->pageOrder() == QPrinter::FirstPageFirst ? firstPageNumber + j
+                                                                               : lastPageNumber - j;
             const VPLayoutPrinterPage &page = pages.at(index);
 
             if (not PrintLayoutTiledSheetPage(printer, painter, page, firstPage))
@@ -3287,7 +3312,7 @@ void VPMainWindow::TranslatePieces()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::TranslatePieceRelatively(const VPPiecePtr &piece, const QRectF &rect, int selectedPiecesCount,
+void VPMainWindow::TranslatePieceRelatively(const VPPiecePtr &piece, const QRectF &rect, vsizetype selectedPiecesCount,
                                             qreal dx, qreal dy)
 {
     if (not piece.isNull())

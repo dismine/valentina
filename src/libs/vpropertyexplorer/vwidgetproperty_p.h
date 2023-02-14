@@ -44,7 +44,13 @@ public:
     QPointer<QWidget> Widget;
 
     //! Constructor passing name and type
-    VWidgetPropertyPrivate(const QString& name, QVariant::Type type, QWidget* widget = nullptr)
+    VWidgetPropertyPrivate(const QString& name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                           QMetaType::Type type,
+#else
+                           QVariant::Type type,
+#endif
+                           QWidget* widget = nullptr)
         : VPropertyPrivate(name, type), Widget(widget) {}
 
     //! Constructor
@@ -63,6 +69,6 @@ public:
 
 QT_WARNING_POP
 
-}
+}  // namespace VPE
 
 #endif // VWIDGETPROPERTY_P_H

@@ -36,7 +36,7 @@
 #include <atomic>
 #include <QGraphicsPathItem>
 
-#include "vlayoutdef.h"
+#include "../vmisc/defglobal.h"
 
 class VBestSquare;
 class VLayoutPaperData;
@@ -46,7 +46,10 @@ class QRectF;
 class QGraphicsItem;
 class QMutex;
 template <typename T> class QList;
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 template <typename T> class QVector;
+#endif
 
 class VLayoutPaper
 {
@@ -93,14 +96,16 @@ public:
     void SetOriginPaperPortrait(bool portrait);
 
     bool ArrangeDetail(const VLayoutPiece &detail, std::atomic_bool &stop);
-    int  Count() const;
+    vsizetype  Count() const;
     Q_REQUIRED_RESULT QGraphicsRectItem *GetPaperItem(bool autoCropLength, bool autoCropWidth, bool textAsPaths) const;
     Q_REQUIRED_RESULT QGraphicsPathItem *GetGlobalContour() const;
     Q_REQUIRED_RESULT QList<QGraphicsItem *> GetItemDetails(bool textAsPaths) const;
 
     QVector<VLayoutPiece> GetDetails() const;
     void                  SetDetails(const QVector<VLayoutPiece>& details);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     void                  SetDetails(const QList<VLayoutPiece>& details);
+#endif
 
     QRectF DetailsBoundingRect() const;
 
