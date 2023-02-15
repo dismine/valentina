@@ -243,6 +243,7 @@ void ShowInGraphicalShell(const QString &filePath)
     // Sending message through dbus will highlighting file
     QProcess dbus;
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#if !defined(QT_NO_PROCESS_COMBINED_ARGUMENT_START)
     QT_WARNING_PUSH
     QT_WARNING_DISABLE_CLANG("-Wdeprecated-declarations")
     QT_WARNING_DISABLE_GCC("-Wdeprecated-declarations")
@@ -250,6 +251,11 @@ void ShowInGraphicalShell(const QString &filePath)
     dbus.start(command); // clazy:exclude=qt6-deprecated-api-fixes
 
     QT_WARNING_POP
+#else
+    // This approach works too. Use it when we don't have access to
+    // void QProcess::start(const QString &command, QIODevice::OpenMode mode = ReadWrite)
+    dbus.start(command, QStringList()); // clazy:exclude=qt6-deprecated-api-fixes
+#endif //!defined(QT_NO_PROCESS_COMBINED_ARGUMENT_START)
 #else
     dbus.startCommand(command);
 #endif
