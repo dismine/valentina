@@ -38,7 +38,7 @@ linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
     - which qbs
     - pwd
     #- ${COMPILER} --version
-    - ls -l /usr/bin/ | grep ${COMPILER}
+    - ls -l /usr/bin/ | grep -E "${COMPILER_BIN}"
     - qmake6 --version
     - qbs --version
     - qbs setup-toolchains --detect
@@ -62,7 +62,7 @@ linux_qt5_qmake_task_template: &LINUX_QT5_QMAKE_TASK_TEMPLATE
     - cd build
     - pwd
     #- ${COMPILER} --version
-    - ls -l /usr/bin/ | grep ${COMPILER}
+    - ls -l /usr/bin/ | grep -E "${COMPILER_BIN}"
     - qmake --version
     - qmake ../Valentina.pro -r -spec linux-${COMPILER} CONFIG+=noDebugSymbols CONFIG+=checkWarnings
     - make -j$(nproc)
@@ -82,7 +82,7 @@ linux_qt5_qbs_task_template: &LINUX_QT5_QBS_TASK_TEMPLATE
     - which qbs
     - pwd
     #- ${COMPILER} --version
-    - ls -l /usr/bin/ | grep ${COMPILER}
+    - ls -l /usr/bin/ | grep -E "${COMPILER_BIN}"
     - qmake --version
     - qbs --version
     - qbs setup-toolchains --detect
@@ -159,6 +159,7 @@ task:
     COMPILER: g++
     GCC_COLORS: 'error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
     TOOLCHAIN: x86_64-pc-linux-gnu-gcc-12_2
+    COMPILER_BIN: "gcc|g\+\+"
 
 task:
   name: 'latest GCC [Qt5 QBS]'
@@ -170,6 +171,7 @@ task:
     COMPILER: gcc
     GCC_COLORS: 'error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
     TOOLCHAIN: x86_64-pc-linux-gnu-gcc-12_2
+    COMPILER_BIN: "gcc|g\+\+"
 
 task:
   name: 'latest GCC [Qt6]'
@@ -181,33 +183,29 @@ task:
     COMPILER: gcc
     GCC_COLORS: 'error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
     TOOLCHAIN: x86_64-pc-linux-gnu-gcc-12_2
+    COMPILER_BIN: "gcc|g\+\+"
+
+linux_clang_task_template: &LINUX_CLANG_TASK_TEMPLATE
+  container:
+    image: dismine/clang-ubuntu:latest
+    memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
+  env:
+    COMPILER: clang
+    COMPILER_BIN: clang
+    TOOLCHAIN: clang-16
 
 task:
   name: 'latest Clang [Qt5 QMake]'
-  container:
-    image: dismine/clang-ubuntu:latest
-    memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
+  << : *LINUX_CLANG_TASK_TEMPLATE
   << : *LINUX_QT5_QMAKE_TASK_TEMPLATE
-  env:
-    COMPILER: clang
-    TOOLCHAIN: clang-16
 
 task:
   name: 'latest Clang [Qt5 QBS]'
-  container:
-    image: dismine/clang-ubuntu:latest
-    memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
+  << : *LINUX_CLANG_TASK_TEMPLATE
   << : *LINUX_QT5_QBS_TASK_TEMPLATE
-  env:
-    COMPILER: clang
-    TOOLCHAIN: clang-16
 
 task:
   name: 'latest Clang [Qt6]'
-  container:
-    image: dismine/clang-ubuntu:latest
-    memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
+  << : *LINUX_CLANG_TASK_TEMPLATE
   << : *LINUX_QT6_TASK_TEMPLATE
-  env:
-    COMPILER: clang
-    TOOLCHAIN: clang-16
+
