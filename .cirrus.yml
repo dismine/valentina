@@ -33,6 +33,7 @@ linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
     - qbs --version
     - qbs setup-toolchains /usr/bin/${COMPILER} ${COMPILER}
     - qbs setup-qt /usr/bin/qmake6 qt6
+    - qbs config profiles.qt6.qbs.targetPlatform linux
     - qbs config profiles.qt6.baseProfile ${COMPILER}
     - qbs-config defaultProfile qt6
     - qbs build -f valentina.qbs -d build --command-echo-mode command-line profile:qt6 config:release
