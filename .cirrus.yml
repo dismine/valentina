@@ -26,14 +26,12 @@ linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
     - which qmake6
     - which qbs
     - pwd
-    #- ${COMPILER} --version
+    - ${COMPILER} --version
     - ls -l /usr/bin/ | grep -E "${COMPILER_REGEX}"
     - qmake6 --version
-    - qmake6 -query
     - qbs --version
     - qbs setup-toolchains /usr/bin/${COMPILER} ${COMPILER}
     - qbs setup-qt /usr/bin/qmake6 qt6
-    - qbs config profiles.qt6.qbs.targetPlatform linux
     - qbs config profiles.qt6.baseProfile ${COMPILER}
     - qbs-config defaultProfile qt6
     - qbs config --list profiles
@@ -50,7 +48,7 @@ linux_qt5_qmake_task_template: &LINUX_QT5_QMAKE_TASK_TEMPLATE
     - mkdir build
     - cd build
     - pwd
-    #- ${COMPILER} --version
+    - ${COMPILER} --version
     - ls -l /usr/bin/ | grep -E "${COMPILER_REGEX}"
     - qmake --version
     - qmake -query
@@ -68,15 +66,15 @@ linux_qt5_qbs_task_template: &LINUX_QT5_QBS_TASK_TEMPLATE
     - which qmake
     - which qbs
     - pwd
-    #- ${COMPILER} --version
+    - ${COMPILER} --version
     - ls -l /usr/bin/ | grep -E "${COMPILER_REGEX}"
     - qmake --version
     - qbs --version
     - qmake -query
-    - qbs setup-toolchains --detect
+    - qbs setup-toolchains /usr/bin/${COMPILER} ${COMPILER}
     - qbs setup-qt /usr/bin/qmake qt5
     - qbs-config defaultProfile qt5
-    - qbs config profiles.qt5.baseProfile ${TOOLCHAIN}
+    - qbs config profiles.qt5.baseProfile ${COMPILER}
     - qbs build -f valentina.qbs -d build --command-echo-mode command-line profile:qt5 config:release
     - xvfb-run -a qbs -p autotest-runner
 
@@ -149,9 +147,8 @@ task:
         image: dismine/clang-ubuntu:latest
         memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
       env:
-        COMPILER: clang++
+        COMPILER: clang
         COMPILER_REGEX: clang
-        TOOLCHAIN: clang-16
       matrix:
         - name: 'latest Clang [Qt5 QMake]'
           << :  *LINUX_QT5_QMAKE_TASK_TEMPLATE
@@ -171,7 +168,6 @@ task:
       env:
         COMPILER: gcc
         GCC_COLORS: 'error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-        TOOLCHAIN: x86_64-pc-linux-gnu-gcc-12_2
         COMPILER_REGEX: "gcc|g\\+\\+"
       matrix:
         - name: 'latest GCC [Qt5 QMake]'
