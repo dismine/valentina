@@ -211,14 +211,15 @@ Module {
 
         readonly property string binPath: product.Qt.core.binPath
 
+        // TODO: If minimal qbs version is 1.23 replace with FileInfo.executableSuffix()
+        readonly property string executableSuffix: product.qbs.targetOS.contains("windows") ? ".exe" : ""
+
         property string qtTranslationsPath
 
         configure: {
             var qmakeProcess = new Process();
             try {
-                // TODO: If minimal qbs version is 1.23 replace with FileInfo.executableSuffix()
-                var suffix = qbs.targetOS.contains("windows") ? ".exe" : "";
-                var qmakePath = FileInfo.joinPaths(binPath, "qmake" + suffix);
+                var qmakePath = FileInfo.joinPaths(binPath, "qmake" + executableSuffix);
                 qmakeProcess.exec(qmakePath, ["-query"]);
                 if (qmakeProcess.exitCode() !== 0) {
                     throw "The qmake executable '" + FileInfo.toNativeSeparators(qmakePath) + "' failed with exit code " +
