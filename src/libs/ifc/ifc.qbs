@@ -11,12 +11,12 @@ VLib {
 
     Depends {
         name: "xerces-c"
-        condition: !buildconfig.useConanPackages
+        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 && !buildconfig.useConanPackages
     }
 
     Depends {
         name: "conan.XercesC"
-        condition: buildconfig.useConanPackages
+        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 && buildconfig.useConanPackages
     }
 
     Properties {
