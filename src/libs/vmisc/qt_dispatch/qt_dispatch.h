@@ -35,7 +35,7 @@ public slots:
     }
 };
 
-static inline Q_DECL_UNUSED void q_dispatch_async(QThread* thread, voidBlock block);
+Q_DECL_UNUSED static inline void q_dispatch_async(QThread* thread, voidBlock block);
 static inline void q_dispatch_async(QThread* thread, voidBlock block)
 {
   qRegisterMetaType<voidBlock>("voidBlock");
@@ -44,7 +44,7 @@ static inline void q_dispatch_async(QThread* thread, voidBlock block)
   QMetaObject::invokeMethod(worker, "DoWork", Qt::QueuedConnection, Q_ARG(voidBlock, block));
 }
 
-static inline Q_DECL_UNUSED void q_dispatch_async_main(voidBlock block);
+Q_DECL_UNUSED static inline void q_dispatch_async_main(voidBlock block);
 static inline void q_dispatch_async_main(voidBlock block)
 {
   QThread *mainThread = QCoreApplication::instance()->thread();
@@ -90,7 +90,7 @@ private:
     QString m_category;
 };
 
-static inline Q_DECL_UNUSED void q_dispatch_async(QThread* thread, msgHandlerBlock block, QtMsgType type,
+Q_DECL_UNUSED static inline void q_dispatch_async(QThread* thread, msgHandlerBlock block, QtMsgType type,
                                                   const QMessageLogContext &context, const QString &msg);
 static inline void q_dispatch_async(QThread* thread, msgHandlerBlock block, QtMsgType type,
                                     const QMessageLogContext &context, const QString &msg)
@@ -101,7 +101,7 @@ static inline void q_dispatch_async(QThread* thread, msgHandlerBlock block, QtMs
   QMetaObject::invokeMethod(worker, "DoWork", Qt::QueuedConnection, Q_ARG(msgHandlerBlock, block));
 }
 
-static inline Q_DECL_UNUSED void q_dispatch_async_main(msgHandlerBlock block, QtMsgType type,
+Q_DECL_UNUSED static inline void q_dispatch_async_main(msgHandlerBlock block, QtMsgType type,
                                                        const QMessageLogContext &context, const QString &msg);
 static inline void q_dispatch_async_main(msgHandlerBlock block, QtMsgType type, const QMessageLogContext &context,
                                          const QString &msg)
