@@ -161,6 +161,7 @@ VToolApp {
         Depends { name: "cpp" }
         cpp.defines: {
             var defines = [];
+            // TODO: If minimal qbs version is 1.23 replace with FileInfo.executableSuffix()
             var extension = qbs.targetOS.contains("windows") ? ".exe" : "";
             defines.push('PUZZLE_BUILDDIR="' + FileInfo.joinPaths(exportingProduct.buildDirectory, exportingProduct.targetName + extension) +'"');
             return defines;

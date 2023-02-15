@@ -216,7 +216,8 @@ Module {
         configure: {
             var qmakeProcess = new Process();
             try {
-                var suffix = FileInfo.executableSuffix();
+                // TODO: If minimal qbs version is 1.23 replace with FileInfo.executableSuffix()
+                var suffix = qbs.targetOS.contains("windows") ? ".exe" : "";
                 var qmakePath = FileInfo.joinPaths(binPath, "qmake" + suffix);
                 qmakeProcess.exec(qmakePath, ["-query"]);
                 if (qmakeProcess.exitCode() !== 0) {
