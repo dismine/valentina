@@ -1,7 +1,7 @@
 ### Global defaults
 
 env:  
-  CCACHE_SIZE: "200M"
+  CCACHE_SIZE: "800M"
   CCACHE_DIR: "/tmp/ccache_dir"
   CCACHE_NOHASHDIR: "1"  # Debug info might contain a stale path if the build dir changes, but this is fine
   CCACHE_CPP2: "yes"
@@ -38,6 +38,7 @@ linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
     - which qbs
     - pwd
     #- ${COMPILER} --version
+    - ls -l /usr/bin/ | grep ${COMPILER}
     - qmake6 --version
     - qbs --version
     - qbs setup-toolchains --detect
@@ -61,7 +62,7 @@ linux_qt5_qmake_task_template: &LINUX_QT5_QMAKE_TASK_TEMPLATE
     - cd build
     - pwd
     #- ${COMPILER} --version
-    - ls -l /usr/bin/
+    - ls -l /usr/bin/ | grep ${COMPILER}
     - qmake --version
     - qmake ../Valentina.pro -r -spec linux-${COMPILER} CONFIG+=noDebugSymbols CONFIG+=checkWarnings
     - make -j$(nproc)
@@ -81,7 +82,7 @@ linux_qt5_qbs_task_template: &LINUX_QT5_QBS_TASK_TEMPLATE
     - which qbs
     - pwd
     #- ${COMPILER} --version
-    - ls -l /usr/bin/
+    - ls -l /usr/bin/ | grep ${COMPILER}
     - qmake --version
     - qbs --version
     - qbs setup-toolchains --detect
@@ -184,7 +185,7 @@ task:
 task:
   name: 'latest Clang [Qt5 QMake]'
   container:
-    image: teeks99/clang-ubuntu:latest
+    image: dismine/clang-ubuntu:latest
     memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
   << : *LINUX_QT5_QMAKE_TASK_TEMPLATE
   env:
@@ -194,7 +195,7 @@ task:
 task:
   name: 'latest Clang [Qt5 QBS]'
   container:
-    image: teeks99/clang-ubuntu:latest
+    image: dismine/clang-ubuntu:latest
     memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
   << : *LINUX_QT5_QBS_TASK_TEMPLATE
   env:
@@ -204,9 +205,9 @@ task:
 task:
   name: 'latest Clang [Qt6]'
   container:
-    image: teeks99/clang-ubuntu:latest
+    image: dismine/clang-ubuntu:latest
     memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
   << : *LINUX_QT6_TASK_TEMPLATE
   env:
     COMPILER: clang
-    TOOLCHAIN: clang-16 
+    TOOLCHAIN: clang-16
