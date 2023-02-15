@@ -168,17 +168,17 @@ task:
         GCC_COLORS: 'error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
         TOOLCHAIN: x86_64-pc-linux-gnu-gcc-12_2
         COMPILER_BIN: "gcc|g\\+\\+"
-        matrix:
-          - name: 'latest GCC [Qt5 QMake]'
-            << :  *LINUX_QT5_QMAKE_TASK_TEMPLATE
-            env:
-              QT_SELECT: "qt5"
-          - name: 'latest GCC [Qt5 QBS]'
-            << : *LINUX_QT5_QBS_TASK_TEMPLATE
-            env:
-              QT_SELECT: "qt5"
-          - name: 'latest Clang [Qt6]'
-            << : *LINUX_QT6_TASK_TEMPLATE
-            env:
-              QT_SELECT: "qt6"
+      matrix:
+        - name: 'latest GCC [Qt5 QMake]'
+          << :  *LINUX_QT5_QMAKE_TASK_TEMPLATE
+          env:
+            QT_SELECT: "qt5"
+        - name: 'latest GCC [Qt5 QBS]'
+          << : *LINUX_QT5_QBS_TASK_TEMPLATE
+          env:
+            QT_SELECT: "qt5"
+        - name: 'latest Clang [Qt6]'
+          << : *LINUX_QT6_TASK_TEMPLATE
+          env:
+            QT_SELECT: "qt6"
 
