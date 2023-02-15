@@ -36,6 +36,7 @@ linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
     - qbs config profiles.qt6.qbs.targetPlatform linux
     - qbs config profiles.qt6.baseProfile ${COMPILER}
     - qbs-config defaultProfile qt6
+    - qbs config --list profiles
     - qbs build -f valentina.qbs -d build --command-echo-mode command-line profile:qt6 config:release
     - xvfb-run -a qbs -p autotest-runner
     
