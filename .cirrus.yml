@@ -17,18 +17,7 @@ regular_task_template: &REGULER_TASK_TEMPLATE
   ccache_cache:
     folder: "/tmp/ccache_dir"
 
-regular_linux_task_template: &REGULER_LINUX_TASK_TEMPLATE
-  << : *REGULER_TASK_TEMPLATE
-  env:
-    DEBIAN_FRONTEND: "noninteractive"
-    PACKAGE_MANAGER_INSTALL: "apt-get -qq update && apt-get install -y"
-  container:
-    cpu: 4
-
 linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
-  << : *REGULER_LINUX_TASK_TEMPLATE
-  env:
-    QT_SELECT: "qt6"
   install_script:
     - bash -c "$PACKAGE_MANAGER_INSTALL -y qbs qt6-base-dev qt6-l10n-tools libqt6svg6-dev qt6-base-dev-tools qmake6 qbs libxerces-c-dev poppler-utils xvfb ccache"
   build_script:
@@ -49,9 +38,6 @@ linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
     - xvfb-run -a qbs -p autotest-runner
     
 linux_qt5_qmake_task_template: &LINUX_QT5_QMAKE_TASK_TEMPLATE
-  << : *REGULER_LINUX_TASK_TEMPLATE
-  env:
-    QT_SELECT: "qt5"
   install_script:
     - bash -c "$PACKAGE_MANAGER_INSTALL qtbase5-dev libqt5svg5-dev qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 poppler-utils xvfb ccache"
   build_script:
@@ -70,9 +56,6 @@ linux_qt5_qmake_task_template: &LINUX_QT5_QMAKE_TASK_TEMPLATE
     - xvfb-run -a make --silent check TESTARGS="-silent"
 
 linux_qt5_qbs_task_template: &LINUX_QT5_QBS_TASK_TEMPLATE
-  << : *REGULER_LINUX_TASK_TEMPLATE
-  env:
-    QT_SELECT: "qt5"
   install_script:
     - bash -c "$PACKAGE_MANAGER_INSTALL qbs qtbase5-dev libqt5svg5-dev qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 poppler-utils xvfb ccache"
   build_script:
@@ -150,62 +133,52 @@ linux_qt5_qbs_task_template: &LINUX_QT5_QBS_TASK_TEMPLATE
 #    PLATFORM: "macOS_10.15+"
 
 task:
-  name: 'latest GCC [Qt5 QMake]'
-  container:
-    image: teeks99/gcc-ubuntu:latest
-    memory: 16G   # Set to 16GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
-  << : *LINUX_QT5_QMAKE_TASK_TEMPLATE
+  << : *REGULER_TASK_TEMPLATE
   env:
-    COMPILER: g++
-    GCC_COLORS: 'error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-    TOOLCHAIN: x86_64-pc-linux-gnu-gcc-12_2
-    COMPILER_BIN: "gcc|g\+\+"
-
-task:
-  name: 'latest GCC [Qt5 QBS]'
+    DEBIAN_FRONTEND: "noninteractive"
+    PACKAGE_MANAGER_INSTALL: "apt-get -qq update && apt-get install -y"
   container:
-    image: teeks99/gcc-ubuntu:latest
-    memory: 16G   # Set to 16GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
-  << : *LINUX_QT5_QBS_TASK_TEMPLATE
-  env:
-    COMPILER: gcc
-    GCC_COLORS: 'error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-    TOOLCHAIN: x86_64-pc-linux-gnu-gcc-12_2
-    COMPILER_BIN: "gcc|g\+\+"
-
-task:
-  name: 'latest GCC [Qt6]'
-  container:
-    image: teeks99/gcc-ubuntu:latest
-    memory: 16G   # Set to 16GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
-  << : *LINUX_QT6_TASK_TEMPLATE
-  env:
-    COMPILER: gcc
-    GCC_COLORS: 'error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-    TOOLCHAIN: x86_64-pc-linux-gnu-gcc-12_2
-    COMPILER_BIN: "gcc|g\+\+"
-
-linux_clang_task_template: &LINUX_CLANG_TASK_TEMPLATE
-  container:
-    image: dismine/clang-ubuntu:latest
-    memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
-  env:
-    COMPILER: clang
-    COMPILER_BIN: clang
-    TOOLCHAIN: clang-16
-
-task:
-  name: 'latest Clang [Qt5 QMake]'
-  << : *LINUX_CLANG_TASK_TEMPLATE
-  << : *LINUX_QT5_QMAKE_TASK_TEMPLATE
-
-task:
-  name: 'latest Clang [Qt5 QBS]'
-  << : *LINUX_CLANG_TASK_TEMPLATE
-  << : *LINUX_QT5_QBS_TASK_TEMPLATE
-
-task:
-  name: 'latest Clang [Qt6]'
-  << : *LINUX_CLANG_TASK_TEMPLATE
-  << : *LINUX_QT6_TASK_TEMPLATE
+    cpu: 4
+  matrix:
+    - container:
+        image: dismine/clang-ubuntu:latest
+        memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
+      env:
+        COMPILER: clang
+        COMPILER_BIN: clang
+        TOOLCHAIN: clang-16
+      matrix:
+        - name: 'latest Clang [Qt5 QMake]'
+          << :  *LINUX_QT5_QMAKE_TASK_TEMPLATE
+          env:
+            QT_SELECT: "qt5"
+        - name: 'latest Clang [Qt5 QBS]'
+          << : *LINUX_QT5_QBS_TASK_TEMPLATE
+          env:
+            QT_SELECT: "qt5"
+        - name: 'latest Clang [Qt6]'
+          << : *LINUX_QT6_TASK_TEMPLATE
+          env:
+            QT_SELECT: "qt6"
+    - container:
+        image: eeks99/gcc-ubuntu:latest
+        memory: 16G   # Set to 16GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
+      env:
+        COMPILER: gcc
+        GCC_COLORS: 'error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+        TOOLCHAIN: x86_64-pc-linux-gnu-gcc-12_2
+        COMPILER_BIN: "gcc|g\\+\\+"
+        matrix:
+          - name: 'latest GCC [Qt5 QMake]'
+            << :  *LINUX_QT5_QMAKE_TASK_TEMPLATE
+            env:
+              QT_SELECT: "qt5"
+          - name: 'latest GCC [Qt5 QBS]'
+            << : *LINUX_QT5_QBS_TASK_TEMPLATE
+            env:
+              QT_SELECT: "qt5"
+          - name: 'latest Clang [Qt6]'
+            << : *LINUX_QT6_TASK_TEMPLATE
+            env:
+              QT_SELECT: "qt6"
 
