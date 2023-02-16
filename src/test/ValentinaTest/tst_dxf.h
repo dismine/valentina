@@ -30,12 +30,16 @@
 
 #include <QObject>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
+#include "../vmisc/defglobal.h"
+#endif
+
 class TST_DXF :public QObject
 {
     Q_OBJECT // NOLINT
 public:
     explicit TST_DXF(QObject *parent = nullptr);
-    ~TST_DXF() = default;
+    ~TST_DXF() override = default;
 
 private slots:
     void initTestCase();
