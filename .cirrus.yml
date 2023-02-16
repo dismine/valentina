@@ -73,7 +73,7 @@ linux_qt5_qbs_task_template: &LINUX_QT5_QBS_TASK_TEMPLATE
     - qbs-config defaultProfile qt5
     - qbs config profiles.qt5.baseProfile ${COMPILER}
     - qbs build -f valentina.qbs -d build --command-echo-mode command-line profile:qt5 config:release
-    - xvfb-run -a qbs -p autotest-runner
+    - xvfb-run -a qbs -p autotest-runner -d build profile:qt5 config:release
 
 #macos_task_template: &MACOS_TASK_TEMPLATE
 #  << : *REGULER_TASK_TEMPLATE
