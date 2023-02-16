@@ -501,6 +501,7 @@ Module {
                     "-Wstrict-overflow=3",
                     "-Wstrict-overflow=4",
                     "-Wstrict-overflow=5",
+                    "-Wno-error=strict-overflow",
                     "-Wstrict-prototypes",
                     "-Wstrict-selector-match",
                     "-Wstring-compare",
