@@ -855,7 +855,7 @@
   </xs:simpleType>
   <xs:simpleType name="contentType">
     <xs:restriction base="xs:string">
-      <xs:pattern value="image\\/[-\w]+(\.[-\w]+)*([+][-\w]+)?"/>
+      <xs:pattern value="image/[-\w]+(\.[-\w]+)*([+][-\w]+)?"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="colors">
