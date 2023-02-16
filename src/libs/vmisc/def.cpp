@@ -526,7 +526,12 @@ void InitLanguages(QComboBox *combobox)
         QLocale loc = QLocale(locale);
         QString lang = loc.nativeLanguageName();
         // Since Qt 5.12 country names have spaces
-        QIcon ico(QString("://flags/%1.png").arg(QLocale::countryToString(loc.country()).remove(' ')));
+        QString country = QLocale::countryToString(loc.country()).remove(' ');
+        if (country == QLatin1String("Czechia"))
+        {
+            country = QLatin1String("CzechRepublic");
+        }
+        QIcon ico(QString("://flags/%1.png").arg(country));
 
         combobox->addItem(ico, lang, locale);
     }
