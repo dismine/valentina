@@ -22,6 +22,9 @@ linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
     - bash -c "$PACKAGE_MANAGER_INSTALL -y qbs qt6-base-dev qt6-l10n-tools libqt6svg6-dev qt6-base-dev-tools qmake6 qbs libxerces-c-dev poppler-utils libgl1-mesa-dev"
   build_script:
     - uname -a
+    - mkdir -pm 0700 $XDG_RUNTIME_DIR
+    - Xvfb $DISPLAY -ac -screen 0 1600x1200x24+32 -nolisten tcp -nolisten unix &
+    - sleep 1
     - echo $PATH
     - which qmake6
     - which qbs
@@ -35,7 +38,7 @@ linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
     - qbs config profiles.qt6.baseProfile ${COMPILER}
     - qbs-config defaultProfile qt6
     - qbs build -f valentina.qbs -d build --command-echo-mode command-line profile:qt6 config:release
-    - xvfb-run -a qbs -p autotest-runner -d build profile:qt5 config:release
+    - qbs -p autotest-runner -d build profile:qt5 config:release
     
 linux_qt5_qmake_task_template: &LINUX_QT5_QMAKE_TASK_TEMPLATE
   install_script:
@@ -60,6 +63,9 @@ linux_qt5_qbs_task_template: &LINUX_QT5_QBS_TASK_TEMPLATE
     - bash -c "$PACKAGE_MANAGER_INSTALL qbs qtbase5-dev libqt5svg5-dev qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 poppler-utils"
   build_script:
     - uname -a
+    - mkdir -pm 0700 $XDG_RUNTIME_DIR
+    - Xvfb $DISPLAY -ac -screen 0 1600x1200x24+32 -nolisten tcp -nolisten unix &
+    - sleep 1
     - echo $PATH
     - which qmake
     - which qbs
@@ -73,7 +79,7 @@ linux_qt5_qbs_task_template: &LINUX_QT5_QBS_TASK_TEMPLATE
     - qbs-config defaultProfile qt5
     - qbs config profiles.qt5.baseProfile ${COMPILER}
     - qbs build -f valentina.qbs -d build --command-echo-mode command-line profile:qt5 config:release
-    - xvfb-run -a qbs -p autotest-runner -d build profile:qt5 config:release
+    - qbs -p autotest-runner -d build profile:qt5 config:release
 
 #macos_task_template: &MACOS_TASK_TEMPLATE
 #  << : *REGULER_TASK_TEMPLATE
@@ -137,6 +143,8 @@ task:
   env:
     DEBIAN_FRONTEND: "noninteractive"
     PACKAGE_MANAGER_INSTALL: "apt-get -qq update && apt-get install -y"
+    DISPLAY: ":90"
+    XDG_RUNTIME_DIR: "/tmp/runtime-kdeci/"
   container:
     cpu: 4
   matrix:
@@ -181,4 +189,3 @@ task:
           << : *LINUX_QT6_TASK_TEMPLATE
           env:
             QT_SELECT: "qt6"
-
