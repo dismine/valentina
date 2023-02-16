@@ -86,4 +86,17 @@ CppApplication {
         qbs.install: true
         qbs.installDir: buildconfig.installBinaryPath
     }
+
+    Group {
+        name: "Precompiled headers"
+        condition: buildconfig.enablePCH
+        prefix: product.sourceDirectory + "/"
+        files: {
+            var files = ["stable.h"];
+            if (qbs.toolchain.contains("msvc"))
+                files.push("stable.cpp")
+            return files;
+        }
+        fileTags: ["cpp_pch_src"]
+    }
 }

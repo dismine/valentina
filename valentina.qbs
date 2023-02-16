@@ -25,5 +25,16 @@ Project {
     ]
     qbsSearchPaths: "qbs"
 
-    AutotestRunner {}
+    AutotestRunner {
+        Depends { name: "buildconfig" }
+
+        environment: {
+            var env = base;
+
+            if (qbs.targetOS.contains("unix") && !qbs.targetOS.contains("macos")) {
+                env.push("LD_LIBRARY_PATH=" + qbs.installRoot + qbs.installPrefix + "/" + buildconfig.libDirName + "/valentina");
+            }
+            return env;
+        }
+    }
 }
