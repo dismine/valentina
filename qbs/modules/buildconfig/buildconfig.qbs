@@ -579,6 +579,7 @@ Module {
                 if (Utilities.versionCompare(cpp.compilerVersion, "13") >= 0) {
                     debugFlags.push(
                         "-Wreserved-identifier",
+                        "-Wno-error=reserved-identifier",
                         "-Wunused-but-set-parameter",
                         "-Wunused-but-set-variable"
                     )
