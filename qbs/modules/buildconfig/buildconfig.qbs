@@ -705,8 +705,14 @@ Module {
 
                 if (Utilities.versionCompare(cpp.compilerVersion, "11") >= 0) {
                     debugFlags.push(
-                        "-Wctad-maybe-unsupported",
-                        "-Wmismatched-tags" // bugged in gcc 10
+                        "-Wctad-maybe-unsupported"
+                    )
+                }
+
+                if (qbs.targetOS.contains("unix") && !qbs.targetOS.contains("macos") &&
+                        Utilities.versionCompare(cpp.compilerVersion, "10") >= 0) {
+                    debugFlags.push(
+                        "-Wno-mismatched-tags" // bugged in gcc
                     )
                 }
 
