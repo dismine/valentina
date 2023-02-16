@@ -30,13 +30,12 @@
 
 #include <QObject>
 
-#include "../vmisc/defglobal.h"
-
 class TST_DXF :public QObject
 {
     Q_OBJECT // NOLINT
 public:
     explicit TST_DXF(QObject *parent = nullptr);
+    ~TST_DXF() = default;
 
 private slots:
     void initTestCase();

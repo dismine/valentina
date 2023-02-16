@@ -75,6 +75,7 @@ void TST_DXF::initTestCase()
 //---------------------------------------------------------------------------------------------------------------------
 void TST_DXF::TestCodecPage_data()
 {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QTest::addColumn<QString>("locale");
 
     QStringList locales = SupportedLocales();
@@ -83,11 +84,13 @@ void TST_DXF::TestCodecPage_data()
     {
         QTest::newRow(locale.toLatin1()) << locale;
     }
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TST_DXF::TestCodecPage()
 {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QFETCH(QString, locale);
 
     static QMap <QString, QString> locMap = LocaleMap();
@@ -122,4 +125,7 @@ void TST_DXF::TestCodecPage()
 
     QVERIFY2(codec != nullptr, qUtf8Printable(QStringLiteral("No codec for dxf codepage %1 found.")
                                               .arg(dxfCodePage)));
+#else
+    QSKIP("No full support for old codecs since Qt6.");
+#endif
 }

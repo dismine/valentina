@@ -142,6 +142,7 @@ auto VTextCodec::availableCodecs() -> QList<QByteArray>
     while (i != codecs.constEnd())
     {
         names.append(ConstFirst(i.value()).toLatin1());
+        ++i;
     }
 
     return names;
