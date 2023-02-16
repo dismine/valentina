@@ -6,11 +6,13 @@ VTestApp {
     Depends { name: "Qt"; submodules: ["testlib", "gui", "printsupport"] }
     Depends { name: "VTestLib" }
     Depends { name: "conan.XercesC"; condition: buildconfig.useConanPackages }
+    Depends { name: "autotest" }
 
     name: "CollectionTest"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "CollectionTest" : "collectionTest"
     targetName: buildconfig.appTarget
     type: base.concat("tst_files")
+    autotest.workingDir: product.buildDirectory
 
     files: [
       "qttestmainlambda.cpp",

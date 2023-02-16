@@ -10,6 +10,7 @@ VTestApp {
     Depends { name: "VDXFLib" }
     Depends { name: "VFormatLib" }
     Depends { name: "ebr" }
+    Depends { name: "autotest" }
 
     Depends {
         name: "Qt.xmlpatterns"
@@ -19,6 +20,8 @@ VTestApp {
     name: "ValentinaTest"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "ValentinaTest" : "valentinaTest"
     targetName: buildconfig.appTarget
+
+    autotest.workingDir: product.buildDirectory
 
     files: [
         "qttestmainlambda.cpp",
