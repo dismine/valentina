@@ -156,7 +156,9 @@ Module {
                 return "11.0";
 
             // See page https://doc.qt.io/qt-6.4/supported-platforms.html
-            return "10.14"; // Qt 6.4 and above
+            // According to the documentation minimal version must be 10.14. But for some reason it requires 10.15 to
+            // build.
+            return "10.15"; // Qt 6.4 and above
         }
 
         if (Qt.core.versionMajor >= 5) {
