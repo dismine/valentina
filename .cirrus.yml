@@ -38,7 +38,7 @@ linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
     - qbs setup-qt /usr/bin/qmake6 qt6
     - qbs config profiles.qt6.baseProfile ${COMPILER}
     - qbs-config defaultProfile qt6
-    - qbs build -f valentina.qbs -d build --command-echo-mode command-line profile:qt6 config:release modules.buildconfig.buildWithCcache:${ENABLE_CCACHE}
+    - qbs build -f valentina.qbs -d build --command-echo-mode command-line profile:qt6 config:release modules.buildconfig.enableCcache:${ENABLE_CCACHE}
     - qbs -p autotest-runner -d build profile:qt6 config:release
     - ccache -s
     
@@ -82,7 +82,7 @@ linux_qt5_qbs_task_template: &LINUX_QT5_QBS_TASK_TEMPLATE
     - qbs setup-qt /usr/bin/qmake qt5
     - qbs-config defaultProfile qt5
     - qbs config profiles.qt5.baseProfile ${COMPILER}
-    - qbs build -f valentina.qbs -d build --command-echo-mode command-line profile:qt5 config:release modules.buildconfig.buildWithCcache:${ENABLE_CCACHE}
+    - qbs build -f valentina.qbs -d build --command-echo-mode command-line profile:qt5 config:release modules.buildconfig.enableCcache:${ENABLE_CCACHE}
     - qbs -p autotest-runner -d build profile:qt5 config:release
     - ccache -s
 
