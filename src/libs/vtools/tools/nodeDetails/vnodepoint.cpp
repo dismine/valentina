@@ -515,9 +515,9 @@ void VNodePoint::InitPassmarkLineTypeMenu(QMenu *menu, vidtype pieceId, QHash<in
     contextMenu.insert(static_cast<int>(ContextMenuOption::TMark),
                        InitPassmarkLineTypeAction(tr("T mark"), PassmarkLineType::TMark));
     contextMenu.insert(static_cast<int>(ContextMenuOption::VMark),
-                       InitPassmarkLineTypeAction(tr("V mark"), PassmarkLineType::VMark));
+                       InitPassmarkLineTypeAction(tr("External V mark"), PassmarkLineType::VMark));
     contextMenu.insert(static_cast<int>(ContextMenuOption::VMark2),
-                       InitPassmarkLineTypeAction(tr("V mark 2"), PassmarkLineType::VMark2));
+                       InitPassmarkLineTypeAction(tr("Internal V mark"), PassmarkLineType::VMark2));
     contextMenu.insert(static_cast<int>(ContextMenuOption::UMark),
                        InitPassmarkLineTypeAction(tr("U mark"), PassmarkLineType::UMark));
     contextMenu.insert(static_cast<int>(ContextMenuOption::BoxMark),

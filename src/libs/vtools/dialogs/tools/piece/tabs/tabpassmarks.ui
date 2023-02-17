@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>394</width>
-    <height>552</height>
+    <width>426</width>
+    <height>556</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,8 +24,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>374</width>
-        <height>532</height>
+        <width>406</width>
+        <height>536</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -167,7 +167,6 @@
               <property name="font">
                <font>
                 <pointsize>36</pointsize>
-                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -348,7 +347,7 @@
                <string>Acute angle that looks inside of piece</string>
               </property>
               <property name="text">
-               <string>V mark</string>
+               <string>External V mark</string>
               </property>
               <attribute name="buttonGroup">
                <string notr="true">buttonGroupLineType</string>
@@ -364,7 +363,7 @@
                <string>Acute angle that looks outside of piece</string>
               </property>
               <property name="text">
-               <string>V mark 2</string>
+               <string>Internal V mark</string>
               </property>
               <attribute name="buttonGroup">
                <string notr="true">buttonGroupLineType</string>
@@ -574,7 +573,7 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupLineType"/>
   <buttongroup name="buttonGroupAngleType"/>
+  <buttongroup name="buttonGroupLineType"/>
  </buttongroups>
 </ui>
