@@ -25,7 +25,7 @@ linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
     - mkdir -pm 0700 $XDG_RUNTIME_DIR
     - Xvfb $DISPLAY -ac -screen 0 1600x1200x24+32 -nolisten tcp -nolisten unix &
     - sleep 1
-    - ccache --set-config=sloppiness=pch_defines,time_macros,include_file_mtime,include_file_ctime
+    - ccache --set-config=sloppiness=pch_defines,time_macros
     - echo $PATH
     - which qmake6
     - which qbs
@@ -69,7 +69,7 @@ linux_qt5_qbs_task_template: &LINUX_QT5_QBS_TASK_TEMPLATE
     - mkdir -pm 0700 $XDG_RUNTIME_DIR
     - Xvfb $DISPLAY -ac -screen 0 1600x1200x24+32 -nolisten tcp -nolisten unix &
     - sleep 1
-    - ccache --set-config=sloppiness=pch_defines,time_macros,include_file_mtime,include_file_ctime
+    - ccache --set-config=sloppiness=pch_defines,time_macros
     - echo $PATH
     - which qmake
     - which qbs
@@ -162,7 +162,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - chmod -R 755 /opt/homebrew/opt/qt6/*
     - python3 --version
     - pip3 install --user --upgrade pip dropbox
-    - ccache --set-config=sloppiness=pch_defines,time_macros,include_file_mtime,include_file_ctime
+    - ccache --set-config=sloppiness=pch_defines,time_macros
     - clang --version
     - qmake --version
     - which qmake
