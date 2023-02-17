@@ -158,7 +158,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     folder: ${PIP_CACHE_DIR}
   install_script:
     - brew update > /dev/null
-    - brew install qt6@${QT_VERSION} coreutils ccache conan qbs
+    - brew install qt@${QT_VERSION} coreutils ccache conan qbs
     - chmod -R 755 /usr/local/opt/qt6/*
     - python3 --version
     - pip3 install --user --upgrade pip dropbox
