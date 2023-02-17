@@ -165,12 +165,12 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - ccache --set-config=sloppiness=pch_defines,time_macros,include_file_mtime,include_file_ctime
     - clang --version
     - qmake --version
+    - which qmake
     - qbs --version
   build_script:
     - pwd
     - qbs setup-toolchains --detect
     - qbs config --list profiles
-    - qbs setup-toolchains /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang clang
     - qbs setup-qt /opt/homebrew/opt/qt6/bin/qmake qt6
     - qbs-config defaultProfile qt6
     - qbs config profiles.qt6.baseProfile clang
