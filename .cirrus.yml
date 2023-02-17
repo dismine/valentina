@@ -38,7 +38,7 @@ linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
     - qbs setup-qt /usr/bin/qmake6 qt6
     - qbs config profiles.qt6.baseProfile ${COMPILER}
     - qbs-config defaultProfile qt6
-    - qbs build -f valentina.qbs -d build --command-echo-mode command-line profile:qt6 config:release
+    - qbs build -f valentina.qbs -d build --command-echo-mode command-line profile:qt6 config:release modules.buildconfig.buildWithCcache:${ENABLE_CCACHE}
     - qbs -p autotest-runner -d build profile:qt6 config:release
     - ccache -s
     
@@ -82,7 +82,7 @@ linux_qt5_qbs_task_template: &LINUX_QT5_QBS_TASK_TEMPLATE
     - qbs setup-qt /usr/bin/qmake qt5
     - qbs-config defaultProfile qt5
     - qbs config profiles.qt5.baseProfile ${COMPILER}
-    - qbs build -f valentina.qbs -d build --command-echo-mode command-line profile:qt5 config:release
+    - qbs build -f valentina.qbs -d build --command-echo-mode command-line profile:qt5 config:release modules.buildconfig.buildWithCcache:${ENABLE_CCACHE}
     - qbs -p autotest-runner -d build profile:qt5 config:release
     - ccache -s
 
@@ -112,10 +112,12 @@ linux_task:
           << : *LINUX_QT5_QBS_TASK_TEMPLATE
           env:
             QT_SELECT: "qt5"
+            ENABLE_CCACHE: false
         - name: 'latest Clang [Qt6]'
           << : *LINUX_QT6_TASK_TEMPLATE
           env:
             QT_SELECT: "qt6"
+            ENABLE_CCACHE: false
     - container:
         image: dismine/gcc-ubuntu:latest
         memory: 16G   # Set to 16GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
@@ -133,10 +135,12 @@ linux_task:
           << : *LINUX_QT5_QBS_TASK_TEMPLATE
           env:
             QT_SELECT: "qt5"
+            ENABLE_CCACHE: true
         - name: 'latest GCC [Qt6]'
           << : *LINUX_QT6_TASK_TEMPLATE
           env:
             QT_SELECT: "qt6"
+            ENABLE_CCACHE: true
 
 macos_task_template: &MACOS_TASK_TEMPLATE
   << : *REGULER_TASK_TEMPLATE
