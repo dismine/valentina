@@ -75,6 +75,12 @@ auto main(int argc, char *argv[]) -> int
     InitHighDpiScaling(argc, argv);
 #endif //Q_OS_MAC
 
+#ifdef Q_OS_MAC
+#if MACOS_LAYER_BACKING_AFFECTED
+    MacosEnableLayerBacking();
+#endif // MACOS_LAYER_BACKING_AFFECTED
+#endif // Q_OS_MAC
+
     MApplication app(argc, argv);
     app.InitOptions();
 

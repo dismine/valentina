@@ -304,6 +304,22 @@ void InitHighDpiScaling(int argc, char *argv[])
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+#ifdef Q_OS_MAC
+#if MACOS_LAYER_BACKING_AFFECTED
+void MacosEnableLayerBacking()
+{
+    QOperatingSystemVersion osVer = QOperatingSystemVersion::current();
+    const int majorVer = osVer.majorVersion();
+    const int minorVer = osVer.minorVersion();
+    if (((majorVer == 10 && minorVer >= 16) || majorVer >= 11) && qEnvironmentVariableIsEmpty("QT_MAC_WANTS_LAYER"))
+    {
+        qputenv("QT_MAC_WANTS_LAYER", "1");
+    }
+}
+#endif // MACOS_LAYER_BACKING_AFFECTED
+#endif // Q_OS_MAC
+
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTMark, (QLatin1String("tMark"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVMark, (QLatin1String("vMark"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVMark2, (QLatin1String("vMark2"))) // NOLINT

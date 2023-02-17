@@ -15,6 +15,7 @@
 - New option. Default piece label template for new pieces.
 - Shortcut to quickly enable/disable Interactive tools mode.
 - Improve labels for V notch.
+- Fix QT issue on MacOS version 11.0 "Big Sur".
 
 # Valentina 0.7.52 September 12, 2022
 - Fix crash when default locale is ru.

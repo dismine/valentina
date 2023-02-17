@@ -370,6 +370,35 @@ if (!(cond))                                            \
 bool IsOptionSet(int argc, char *argv[], const char *option);
 void InitHighDpiScaling(int argc, char *argv[]);
 
+#ifdef Q_OS_MAC
+// Fix QT issue on MacOS version 11.0 "Big Sur"
+//     https://bugreports.qt.io/browse/QTBUG-87014
+// Enables layer backing for Big Sur
+// Prevents 100% CPU & RAM utilization
+//
+// The fix at
+//
+//     https://codereview.qt-project.org/c/qt/qtbase/+/322228/3/src/plugins/platforms/cocoa/qnsview_drawing.mm
+//
+// enables layer backing if we're running on Big Sur OR we're running on
+// Catalina AND we were built with the Catalina SDK. Enable layer backing
+// here by setting QT_MAC_WANTS_LAYER=1, but only if we're running on Big
+// Sur and our version of Qt doesn't have a fix for QTBUG-87014.
+
+// We'll assume that it will be fixed in 5.12.11, 5.15.3, and 6.0.1.
+// Feel free to add other versions if needed.
+#define MACOS_LAYER_BACKING_AFFECTED \
+(QT_VERSION >= QT_VERSION_CHECK(5, 12, 0) && QT_VERSION < QT_VERSION_CHECK(5, 12, 11) \
+ || (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0) &&  QT_VERSION < QT_VERSION_CHECK(5, 15, 3)) \
+ || (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0) &&  QT_VERSION < QT_VERSION_CHECK(6, 0, 1)) \
+ )
+
+#if MACOS_LAYER_BACKING_AFFECTED
+#include <QOperatingSystemVersion>
+void MacosEnableLayerBacking();
+#endif // MACOS_LAYER_BACKING_AFFECTED
+#endif // Q_OS_MAC
+
 // Don't forget to syncronize with XSD schema.
 const int userMaterialPlaceholdersQuantity = 20;
 

@@ -69,7 +69,13 @@ auto main(int argc, char *argv[]) -> int
 
 #ifndef Q_OS_MAC // supports natively
     InitHighDpiScaling(argc, argv);
-#endif //Q_OS_MAC
+#endif //ndef Q_OS_MAC
+
+#ifdef Q_OS_MAC
+#if MACOS_LAYER_BACKING_AFFECTED
+    MacosEnableLayerBacking();
+#endif // MACOS_LAYER_BACKING_AFFECTED
+#endif // Q_OS_MAC
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     XERCES_CPP_NAMESPACE::XMLPlatformUtils::Initialize();
