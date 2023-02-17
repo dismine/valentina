@@ -143,13 +143,13 @@ macos_task_template: &MACOS_TASK_TEMPLATE
   timeout_in: 120m
   env:
     ACCESS_TOKEN: ENCRYPTED[81e0b2381ffb628b73f5c94f834010e6631191e0ad03cdd0850d440fb2737a74b68131d842030f010c1bf73ab4cdc1ae]
-    QTDIR: "/usr/local/opt/qt6"
+    QTDIR: "/opt/homebrew/opt/qt6"
     PATH: ${HOME}/.local/bin:$QTDIR/bin:${PATH}
     # ^  add user paths
     PIP_CACHE_DIR: ${HOME}/.cache/pip
     LDFLAGS: "-L$QTDIR/lib"
     CPPFLAGS: "-I$QTDIR/include"
-    PKG_CONFIG_PATH: "/usr/local/opt/qt6/lib/pkgconfig"
+    PKG_CONFIG_PATH: "/opt/homebrew/opt/qt6/lib/pkgconfig"
   global_homebrew_cache:
     folder: "/usr/local/Homebrew"
   local_homebrew_cache:
@@ -159,7 +159,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
   install_script:
     - brew update > /dev/null
     - brew install qt6 coreutils ccache conan qbs
-    - chmod -R 755 /usr/local/opt/qt6/*
+    - chmod -R 755 /opt/homebrew/opt/qt6/*
     - python3 --version
     - pip3 install --user --upgrade pip dropbox
     - ccache --set-config=sloppiness=pch_defines,time_macros,include_file_mtime,include_file_ctime
@@ -171,7 +171,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - qbs setup-toolchains --detect
     - qbs config --list profiles
     - qbs setup-toolchains /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang clang
-    - qbs setup-qt /usr/local/opt/qt6/qmake qt6
+    - qbs setup-qt /opt/homebrew/opt/qt6/bin/qmake qt6
     - qbs-config defaultProfile qt6
     - qbs config profiles.qt6.baseProfile clang
     - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build --command-echo-mode command-line config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:$CIRRUS_WORKING_DIR/build/install-root profile:qt6 
