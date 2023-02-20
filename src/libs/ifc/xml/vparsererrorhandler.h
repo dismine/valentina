@@ -61,18 +61,16 @@ private:
 #include <xercesc/sax/ErrorHandler.hpp>
 #include <xercesc/sax/SAXParseException.hpp>
 
-XERCES_CPP_NAMESPACE_USE
-
-class VParserErrorHandler : public ErrorHandler
+class VParserErrorHandler : public XERCES_CPP_NAMESPACE::ErrorHandler
 {
 public:
     auto StatusMessage() const -> QString;
     auto Line() const -> XMLFileLoc;
     auto Column() const -> XMLFileLoc;
 
-    void warning(const SAXParseException& ex) override;
-    void error(const SAXParseException& ex) override;
-    void fatalError(const SAXParseException& ex) override;
+    void warning(const XERCES_CPP_NAMESPACE::SAXParseException& ex) override;
+    void error(const XERCES_CPP_NAMESPACE::SAXParseException& ex) override;
+    void fatalError(const XERCES_CPP_NAMESPACE::SAXParseException& ex) override;
     void resetErrors() override;
 
     auto HasError() const -> bool;
@@ -83,7 +81,7 @@ private:
     QString    m_description{};
     bool       m_hasError{false};
 
-    void handleMessage(const SAXParseException& ex);
+    void handleMessage(const XERCES_CPP_NAMESPACE::SAXParseException& ex);
 };
 
 #endif // QT_VERSION < QT_VERSION_CHECK(6, 0, 0)

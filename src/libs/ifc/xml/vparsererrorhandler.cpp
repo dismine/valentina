@@ -91,30 +91,30 @@ auto VParserErrorHandler::Column() const -> XMLFileLoc
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VParserErrorHandler::handleMessage(const SAXParseException &ex)
+void VParserErrorHandler::handleMessage(const XERCES_CPP_NAMESPACE::SAXParseException &ex)
 {
-    char* msg = XMLString::transcode(ex.getMessage());
+    char* msg = XERCES_CPP_NAMESPACE::XMLString::transcode(ex.getMessage());
     m_description = QString(msg);
     m_line = ex.getLineNumber();
     m_column = ex.getColumnNumber();
     m_hasError = true;
-    XMLString::release(&msg);
+    XERCES_CPP_NAMESPACE::XMLString::release(&msg);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VParserErrorHandler::warning(const SAXParseException &ex)
+void VParserErrorHandler::warning(const XERCES_CPP_NAMESPACE::SAXParseException &ex)
 {
     handleMessage(ex);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VParserErrorHandler::error(const SAXParseException &ex)
+void VParserErrorHandler::error(const XERCES_CPP_NAMESPACE::SAXParseException &ex)
 {
     handleMessage(ex);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VParserErrorHandler::fatalError(const SAXParseException &ex)
+void VParserErrorHandler::fatalError(const XERCES_CPP_NAMESPACE::SAXParseException &ex)
 {
     handleMessage(ex);
 }

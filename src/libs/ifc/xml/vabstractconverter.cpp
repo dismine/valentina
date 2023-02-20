@@ -190,11 +190,12 @@ void VAbstractConverter::ValidateXML(const QString &schema) const
 
     if (tempSchema->open())
     {
-        XercesDOMParser domParser;
+        XERCES_CPP_NAMESPACE::XercesDOMParser domParser;
         domParser.setErrorHandler(&parserErrorHandler);
 
         if (domParser.loadGrammar(
-                tempSchema->fileName().toUtf8().constData(), Grammar::SchemaGrammarType, true) == nullptr)
+                tempSchema->fileName().toUtf8().constData(),
+                XERCES_CPP_NAMESPACE::Grammar::SchemaGrammarType, true) == nullptr)
         {
             VException e(parserErrorHandler.StatusMessage());
             e.AddMoreInformation(tr("Could not load schema file '%1'.").arg(fileSchema.fileName()));
@@ -211,7 +212,7 @@ void VAbstractConverter::ValidateXML(const QString &schema) const
             throw e;
         }
 
-        domParser.setValidationScheme(XercesDOMParser::Val_Always);
+        domParser.setValidationScheme(XERCES_CPP_NAMESPACE::XercesDOMParser::Val_Always);
         domParser.setDoNamespaces(true);
         domParser.setDoSchema(true);
         domParser.setValidationConstraintFatal(true);

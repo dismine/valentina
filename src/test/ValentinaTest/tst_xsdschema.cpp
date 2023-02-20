@@ -69,11 +69,12 @@ void ValidateSchema(const QString &schema)
 
     if (tempSchema->open())
     {
-        XercesDOMParser domParser;
+        XERCES_CPP_NAMESPACE::XercesDOMParser domParser;
         domParser.setErrorHandler(&parserErrorHandler);
 
         if (domParser.loadGrammar(
-                tempSchema->fileName().toUtf8().constData(), Grammar::SchemaGrammarType, true) == nullptr)
+                tempSchema->fileName().toUtf8().constData(),
+                XERCES_CPP_NAMESPACE::Grammar::SchemaGrammarType, true) == nullptr)
         {
             QFAIL(qUtf8Printable(QStringLiteral("%1 Could not load schema file '%2'.")
                                      .arg(parserErrorHandler.StatusMessage(), fileSchema.fileName())));
