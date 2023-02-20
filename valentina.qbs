@@ -10,12 +10,6 @@ Project {
         id: thirdPartyConanPackages
         condition: enableConan
         conanfilePath: project.sourceDirectory + "/conanfile.txt"
-        options: {
-            if (qbs.targetOS.contains("unix") && !qbs.targetOS.contains("macos"))
-                return ({"xerces-c:shared": "False"});
-
-            return ({"xerces-c:shared": "True"});
-        }
     }
 
     references: [
