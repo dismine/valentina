@@ -154,10 +154,12 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     LDFLAGS: "-L$QTDIR/lib"
     CPPFLAGS: "-I$QTDIR/include"
     PKG_CONFIG_PATH: "/opt/homebrew/opt/qt6/lib/pkgconfig"
-  global_homebrew_cache:
-    folder: "/usr/local/Homebrew"
   local_homebrew_cache:
     folder: "$HOME/Library/Caches/Homebrew"
+  global_conan_cache:
+    folder: "$HOME/Library/Caches/Conan"
+  local_conan_cache:
+    folder: "~/.conan/data"
   pip_cache:
     folder: ${PIP_CACHE_DIR}
   install_script:
