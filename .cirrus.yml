@@ -204,7 +204,7 @@ macos_task:
   matrix:
     - name: 'macOS Monterey 12 [signle bundle, no tests]'
       env:
-        MULTI_BUNDLE: true
+        MULTI_BUNDLE: false
     - name: 'macOS Monterey 12 [multi bundle, no tests]'
       env:
-        MULTI_BUNDLE: false
+        MULTI_BUNDLE: true
