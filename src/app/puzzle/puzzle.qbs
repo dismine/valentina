@@ -17,6 +17,12 @@ VToolApp {
     targetName: buildconfig.appTarget
     multibundle.targetApps: ["Valentina"]
 
+    Properties {
+        condition: buildconfig.useConanPackages && buildconfig.enableMultiBundle
+        conan.XercesC.libInstallDir: qbs.installPrefix + "/" + buildconfig.installLibraryPath
+        conan.XercesC.installLib: true
+    }
+
     files: [
         "main.cpp",
         "vpapplication.cpp",

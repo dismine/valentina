@@ -32,6 +32,12 @@ VToolApp {
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "Valentina" : "valentina"
     targetName: buildconfig.appTarget
 
+    Properties {
+        condition: buildconfig.useConanPackages
+        conan.XercesC.libInstallDir: qbs.installPrefix + "/" + buildconfig.installLibraryPath
+        conan.XercesC.installLib: true
+    }
+
     files: [
         "main.cpp",
         "mainwindow.cpp",

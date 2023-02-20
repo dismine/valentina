@@ -19,11 +19,6 @@ VLib {
         condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 && buildconfig.useConanPackages
     }
 
-    Properties {
-        condition: buildconfig.useConan && (qbs.targetOS.contains("macos") || qbs.targetOS.contains("windows"))
-        conan.XercesC.installLib: true
-    }
-
     name: "IFCLib"
     files: [
         "ifcdef.h",
