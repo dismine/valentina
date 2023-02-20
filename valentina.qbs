@@ -13,7 +13,7 @@ Project {
         conanfilePath: project.sourceDirectory + "/conanfile.py"
         settings: {
             if (qbs.targetOS.contains("macos") && project.minimumMacosVersion !== undefined)
-                return ({"os.version": project.minimumMacosVersion});
+                return ({"os.version": project.minimumMacosVersion.toString()});
             return undefined;
         }
     }
