@@ -1,3 +1,5 @@
+import os
+
 from conans import ConanFile
 
 class Recipe(ConanFile):
@@ -7,4 +9,7 @@ class Recipe(ConanFile):
 
   def configure(self):
     if self.settings.os == "Linux":
-         self.options["xerces-c"].shared = False
+      self.options["xerces-c"].shared = False
+
+    if self.settings.os == "Macos" and "MACOS_DEPLOYMENT_TARGET" in os.environ:
+      self.settings.os.version = os.environ["MACOS_DEPLOYMENT_TARGET"]

@@ -12,11 +12,6 @@ Project {
         condition: enableConan
         conanfilePath: project.sourceDirectory + "/conanfile.py"
         verbose: true
-        settings: {
-            if (qbs.targetOS.contains("macos") && project.minimumMacosVersion !== undefined)
-                return ({"os.version": project.minimumMacosVersion});
-            return undefined;
-        }
     }
 
     references: [
