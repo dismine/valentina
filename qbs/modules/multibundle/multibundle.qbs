@@ -98,7 +98,7 @@ Module {
             cmd.description = "Copying auxiliary binary into bundle";
             cmd.highlight = "filegen";
 
-            const fileName = product.bundle.isBundle ? product.bundle.bundleName : inputs["dynamiclibrary"][0].fileName;
+            const fileName = product.bundle.isBundle ? product.bundle.bundleName : inputs["application"][0].fileName;
             const installRoot = product.qbs.installRoot + product.qbs.installPrefix + "/" + product.buildconfig.installAppPath;
             var data = [];
             product.multibundle.targetApps.forEach(function(targetApp) {
