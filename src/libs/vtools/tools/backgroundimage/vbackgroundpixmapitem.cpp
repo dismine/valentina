@@ -40,7 +40,7 @@ namespace
 auto InvalidImage() -> QPixmap
 {
     QImageReader imageReader(VBackgroundPatternImage::brokenImage);
-    return std::move(QPixmap::fromImageReader(&imageReader));
+    return QPixmap::fromImageReader(&imageReader);
 }
 }
 
