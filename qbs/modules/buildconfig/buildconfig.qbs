@@ -149,6 +149,9 @@ Module {
     }
 
     readonly property string minimumMacosVersion: {
+        if (project.minimumMacosVersion !== undefined)
+            return project.minimumMacosVersion;
+
         // Check which minimal OSX version supports current Qt version
         if (Qt.core.versionMajor >= 6) {
             // For Qt 6.5 https://doc-snapshots.qt.io/qt6-6.5/supported-platforms.html

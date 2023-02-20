@@ -5,11 +5,17 @@ Project {
     minimumQbsVersion: "1.16"
 
     property bool enableConan: false
+    property string minimumMacosVersion: undefined
 
     Probes.ConanfileProbe {
         id: thirdPartyConanPackages
         condition: enableConan
         conanfilePath: project.sourceDirectory + "/conanfile.txt"
+        settings: {
+            if (qbs.targetOS.contains("macos") && project.minimumMacosVersion !== undefined)
+                return ({"os.version": project.minimumMacosVersion});
+            return undefined;
+        }
     }
 
     references: [
