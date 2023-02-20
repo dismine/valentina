@@ -164,17 +164,19 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     folder: ${PIP_CACHE_DIR}
   install_script:
     - brew update > /dev/null
-    - brew install qt6 coreutils ccache conan qbs
+    - brew install qt6 coreutils ccache conan qbs cmake
     - chmod -R 755 /opt/homebrew/opt/qt6/*
     - python3 --version
     - pip3 install --user --upgrade pip dropbox
     - ccache --set-config=sloppiness=pch_defines,time_macros
+    - conan --version
     - clang --version
     - qmake --version
     - which qmake
     - qbs --version
   build_script:
     - pwd
+    - conan install . -s os=Macos -s os.version=${MACOS_DEPLOYMENT_TARGET} --build=xerces-c
     - qbs setup-toolchains --detect
     - qbs config --list profiles
     - qbs setup-qt /opt/homebrew/opt/qt6/bin/qmake qt6
