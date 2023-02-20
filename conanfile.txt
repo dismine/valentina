@@ -1,8 +1,0 @@
-[requires]
-xerces-c/[>=3.2,<4.0] 
-
-[options]
-xerces-c:shared=True
-
-[options.linux.xerces-c]
-shared=False
