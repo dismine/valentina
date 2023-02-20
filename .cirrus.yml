@@ -199,7 +199,7 @@ macos_task:
     QT_BRANCH: Qt6
     ARCHITECTURE: arm64
     PLATFORM: "macOS_11+"
-    MACOS_DEPLOYMENT_TARGET: "11.0"
+    MACOS_DEPLOYMENT_TARGET: 11.0
   matrix:
     - name: 'macOS Monterey 12 [signle bundle, no tests]'
       env:
