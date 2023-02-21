@@ -108,17 +108,6 @@ using qmusizetype = qsizetype;
 using qmusizetype = int;
 #endif
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-#include <QTextStream>
-namespace Qt
-{
-static auto endl = ::endl;
-static auto flush = ::flush;
-static auto dec = ::dec;
-static auto SkipEmptyParts = QString::SkipEmptyParts;
-}
-#endif
-
 namespace qmu
 {
 //------------------------------------------------------------------------------

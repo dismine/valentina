@@ -40,6 +40,10 @@
 #include "../vmisc/vsysexits.h"
 #include "../vmisc/vvalentinasettings.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
+#include "../vmisc/backport/text.h"
+#endif
+
 #include <QtDebug>
 #include <QDir>
 #include <QProcess>

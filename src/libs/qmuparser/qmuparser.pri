@@ -34,4 +34,5 @@ HEADERS += \
     $$PWD/qmuformulabase.h \
     $$PWD/qmutokenparser.h \
     $$PWD/qmuparsercallback_p.h \
-    $$PWD/make_unique.h
+    $$PWD/make_unique.h \
+    $$PWD/text.h
