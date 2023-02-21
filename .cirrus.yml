@@ -183,7 +183,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - qbs-config defaultProfile qt6
     - qbs config profiles.qt6.baseProfile clang
     - echo qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build --command-echo-mode command-line config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:$CIRRUS_WORKING_DIR/build/install-root profile:qt6 project.enableConan:true project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET}
-    - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build --command-echo-mode command-line config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:$CIRRUS_WORKING_DIR/build/install-root profile:qt6 project.enableConan:true project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET}
+    - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build --command-echo-mode command-line config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:$CIRRUS_WORKING_DIR/build/install-root profile:qt6 project.enableConan:true project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:${ENABLE_CCACHE}
     - ccache -s
   deploy_script:
     - pwd
@@ -201,6 +201,7 @@ macos_task:
     ARCHITECTURE: arm64
     PLATFORM: "macOS_11+"
     MACOS_DEPLOYMENT_TARGET: 11.0
+    ENABLE_CCACHE: false
   matrix:
     - name: 'macOS Monterey 12 [signle bundle, no tests]'
       env:
