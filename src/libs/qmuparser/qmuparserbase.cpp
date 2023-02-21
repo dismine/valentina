@@ -28,14 +28,14 @@
 #include <QTextStream>
 #include <QtDebug>
 #include <Qt>
+#include <QtMath>
 #include <map>
 #ifdef QMUP_USE_OPENMP
     #include <omp.h>
 #endif
-#include <assert.h>
+#include <cassert>
 
 #include "qmudef.h"
-#include "../vmisc/vmath.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
 #include "text.h"
