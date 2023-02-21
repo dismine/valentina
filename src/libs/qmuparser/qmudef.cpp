@@ -415,7 +415,11 @@ QChar LocaleSign0(const QLocale &locale)
     const QString sign = locale.toString(0);
     if (sign.size() == 1)
     {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
         return sign.front();
+#else
+        return sign.at(0);
+#endif
     }
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -431,7 +435,11 @@ QChar LocaleSign1(const QLocale &locale)
     const QString sign = locale.toString(1);
     if (sign.size() == 1)
     {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
         return sign.front();
+#else
+        return sign.at(0);
+#endif
     }
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -447,7 +455,11 @@ QChar LocaleSign2(const QLocale &locale)
     const QString sign = locale.toString(2);
     if (sign.size() == 1)
     {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
         return sign.front();
+#else
+        return sign.at(0);
+#endif
     }
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -463,7 +475,11 @@ QChar LocaleSign3(const QLocale &locale)
     const QString sign = locale.toString(3);
     if (sign.size() == 1)
     {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
         return sign.front();
+#else
+        return sign.at(0);
+#endif
     }
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -479,7 +495,11 @@ QChar LocaleSign4(const QLocale &locale)
     const QString sign = locale.toString(4);
     if (sign.size() == 1)
     {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
         return sign.front();
+#else
+        return sign.at(0);
+#endif
     }
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -495,7 +515,11 @@ QChar LocaleSign5(const QLocale &locale)
     const QString sign = locale.toString(5);
     if (sign.size() == 1)
     {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
         return sign.front();
+#else
+        return sign.at(0);
+#endif
     }
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -511,7 +535,11 @@ QChar LocaleSign6(const QLocale &locale)
     const QString sign = locale.toString(6);
     if (sign.size() == 1)
     {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
         return sign.front();
+#else
+        return sign.at(0);
+#endif
     }
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -527,7 +555,11 @@ QChar LocaleSign7(const QLocale &locale)
     const QString sign = locale.toString(7);
     if (sign.size() == 1)
     {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
         return sign.front();
+#else
+        return sign.at(0);
+#endif
     }
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -543,7 +575,11 @@ QChar LocaleSign8(const QLocale &locale)
     const QString sign = locale.toString(8);
     if (sign.size() == 1)
     {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
         return sign.front();
+#else
+        return sign.at(0);
+#endif
     }
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -559,7 +595,11 @@ QChar LocaleSign9(const QLocale &locale)
     const QString sign = locale.toString(9);
     if (sign.size() == 1)
     {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
         return sign.front();
+#else
+        return sign.at(0);
+#endif
     }
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
