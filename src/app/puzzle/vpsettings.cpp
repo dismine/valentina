@@ -58,7 +58,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutLineWidth, (QLatin1String(
 int cachedLineWidth = -1;
 }  // namespace
 
-#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
+#ifndef QPRINTENGINE_H
 Q_DECLARE_METATYPE(QMarginsF) // NOLINT
 #endif
 
