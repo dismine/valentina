@@ -44,7 +44,7 @@
 #include "../vmisc/compatibility.h"
 #include "qglobal.h"
 
-#ifndef QBS_BUILD
+#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
 Q_DECLARE_METATYPE(QMarginsF) // NOLINT
 #endif
 
