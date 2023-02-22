@@ -31,24 +31,26 @@
 #include <QtGlobal>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-#include <QString>
+#include <QTextStream>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wunused-variable")
-
 namespace Qt
 {
-static auto endl = ::endl;
-static auto flush = ::flush;
-static auto dec = ::dec;
-static auto SkipEmptyParts = QString::SkipEmptyParts;
-}
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wunused-variable")
+QT_WARNING_DISABLE_CLANG("-Wunused-variable")
+
+static auto endl = ::endl; // NOLINT
+static auto flush = ::flush; // NOLINT
+static auto dec = ::dec; // NOLINT
+static auto SkipEmptyParts = QString::SkipEmptyParts; // NOLINT
 
 QT_WARNING_POP
+}  // namespace Qt
+
 #endif
 
 #endif // TEXT_H
