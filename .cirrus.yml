@@ -168,7 +168,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - chmod -R 755 /opt/homebrew/opt/qt6/*
     - python3 --version
     - pip3 install --user --upgrade pip dropbox
-    - ccache --set-config=sloppiness=pch_defines,time_macros
+    - ccache --set-config=sloppiness=pch_defines,time_macros 
     - conan --version
     - clang --version
     - qmake --version
@@ -197,8 +197,8 @@ macos_task:
   << : *MACOS_TASK_TEMPLATE
   env:
     DEPLOY: "true"
-    QT_BRANCH: Qt6
-    ARCHITECTURE: arm64
+    QT_VERSION: Qt6
+    ARCH: arm64
     PLATFORM: "macOS_11+"
     MACOS_DEPLOYMENT_TARGET: 11.0
     ENABLE_CCACHE: false

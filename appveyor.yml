@@ -17,14 +17,17 @@ branches:
   # whitelist
   only:
     - develop
-    - release
-    - default
+    - master
 
 # Do not build on tags (GitHub and BitBucket)
 skip_tags: true
 
+platform:
+  - x86
+  - x64
+
 #---------------------------------#
-#    environment configuration    #
+#        environment setup        #
 #---------------------------------#
 
 # clone directory
@@ -38,103 +41,477 @@ shallow_clone: false                 # default is "false"
 
 environment:
   ACCESS_TOKEN:
-    secure: RUhnEHqaR8KhalOMWwZZOoO342Ja50QV4KpEWdm9g3pG+jG7i6aJqUmeKF1l5VN6dzksk1u+yN6pOLnU8oGcaVQ6v+1dpKK1oZvF0tyHhNE=  
+    secure: RUhnEHqaR8KhalOMWwZZOoO342Ja50QV4KpEWdm9g3pG+jG7i6aJqUmeKF1l5VN6dzksk1u+yN6pOLnU8oGcaVQ6v+1dpKK1oZvF0tyHhNE=
+
   matrix:
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-    QT5: Qt\5.15\mingw81_32
-    QT_VERSION: Qt5_15
-    QMAKE_GENERATOR: "MinGW Makefiles"
-    MINGW_PATH: C:\Qt\Tools\mingw810_32\bin
-    PYTHON: "C:\\Python38-x64"
-    PLATFORM: x86
-    DEPLOY: true
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-    QT5: Qt\5.6\mingw49_32
-    QT_VERSION: Qt5_6
-    QMAKE_GENERATOR: "MinGW Makefiles"
-    MINGW_PATH: C:\Qt\Tools\mingw492_32\bin
-    PYTHON: "C:\\Python38-x64"
-    PLATFORM: x86
-    DEPLOY: true
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-    QT5: Qt\5.15\mingw81_64
-    QT_VERSION: Qt5_15
-    QMAKE_GENERATOR: "MinGW Makefiles"
-    MINGW_PATH: C:\Qt\Tools\mingw810_64\bin
-    PLATFORM: x64
-    DEPLOY: false
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-    QT5: Qt\5.15\msvc2019_64
-    QMAKE_GENERATOR: "NMake Makefiles JOM"
-    VSVER: 16
-    PLATFORM: x64
-    DEPLOY: false 
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-    QT5: Qt\5.6\msvc2015_64
-    QT_VERSION: Qt5_6
-    QMAKE_GENERATOR: "NMake Makefiles JOM"
-    VSVER: 14
-    PLATFORM: x64
-    DEPLOY: false
+    - job_name: Windows_Qt_6_4_(GCC_x64)
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+      COMPILER: mingw
+      QT: Qt\6.4.0\mingw_64
+      QT_VERSION: Qt6_4
+      BUILD_SYSTEM: "qbs"
+      ARCH: x64
+      PYTHON: "C:\\Python311-x64"
+      PLATFORM: "Windows10+"
+      DEPLOY: true
 
-# scripts that are called at very beginning, before repo cloning
-init:
-# Uncomment if need access through RDP
-#  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
-  # Path before
-  - path
-  - set QTDIR=C:\%QT5%
-  - set PATH=%QTDIR%\bin;%QTDIR%\include;C:\Tools\PsTools;C:\Program Files\Git\cmd;C:\Program Files\Git\usr\bin;C:\Program Files\Git LFS;C:\Tools\GitVersion;C:\Windows\system32;C:\Windows;C:\Windows\System32\WindowsPowerShell\v1.0\
-  - if NOT "%QMAKE_GENERATOR%" == "MinGW Makefiles" echo "Using Visual Studio %VSVER%.0"
-  - if "%QMAKE_GENERATOR%" == "MinGW Makefiles" echo "Using MinGW"
-  # Set VC variables for the platform
-  - IF "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2019" IF "%QMAKE_GENERATOR%"=="NMake Makefiles JOM" IF "%PLATFORM%"=="x86" call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars32.bat"
-  - if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2019" IF "%QMAKE_GENERATOR%"=="NMake Makefiles JOM" IF "%PLATFORM%"=="x64" call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
-  - IF "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2017" IF "%QMAKE_GENERATOR%"=="NMake Makefiles JOM" IF "%PLATFORM%"=="x86" call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat"
-  - if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2017" if "%QMAKE_GENERATOR%"=="NMake Makefiles JOM" if "%PLATFORM%"=="x64" call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
-  - if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2015" if "%QMAKE_GENERATOR%"=="NMake Makefiles JOM" if "%PLATFORM%"=="x86" call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86
-  - if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2015" if "%QMAKE_GENERATOR%"=="NMake Makefiles JOM" if "%PLATFORM%"=="x64" call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
-  - if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2015" if "%QMAKE_GENERATOR%"=="NMake Makefiles JOM" if "%PLATFORM%"=="x64" call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
-  - if "%QMAKE_GENERATOR%" == "MinGW Makefiles" set PATH=%MINGW_PATH%;%PATH%
-  - if "%QMAKE_GENERATOR%" == "NMake Makefiles JOM" set PATH=C:\Qt\Tools\QtCreator\bin;%PATH%
-  - if "%DEPLOY%" == "true" set PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
-  # Set paths to libraries
-  - set PATH=C:\projects\valentina\build\src\libs\vpropertyexplorer\bin;C:\projects\valentina\build\src\libs\qmuparser\bin;%PATH%
-  # Path after
-  - path
-  # Check that we have the expected version for Python
-  - if "%DEPLOY%" == "true" (python --version)
-  # Install the build dependencies of the project.
-  - if "%DEPLOY%" == "true" (python -m pip install --upgrade pip)
-  - if "%DEPLOY%" == "true" (python -m pip install dropbox)
-    # Trick qmake to not work through MSYS
-  - del /F "C:\Program Files\Git\usr\bin\sh.exe"
-  - del /F "C:\Program Files\Git\bin\sh.exe"
-  - qmake -v
+    - job_name: Windows_Qt_5_15_(qbs_GCC_x86)
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+      COMPILER: mingw
+      QT: Qt\5.15\mingw81_32
+      QT_VERSION: Qt5_15
+      BUILD_SYSTEM: "qbs"
+      MINGW_PATH: C:\Qt\Tools\mingw810_32\bin
+      ARCH: x86
+      PYTHON: "C:\\Python311"
+      PLATFORM: "Windows7+"
+      DEPLOY: true
+    
+    - job_name: Windows_Qt_5_6_(GCC_x86)
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+      COMPILER: mingw
+      QT: Qt\5.6\mingw49_32
+      QT_VERSION: Qt5_6
+      BUILD_SYSTEM: "make"
+      MINGW_PATH: C:\Qt\Tools\mingw492_32\bin
+      ARCH: x86
+      PYTHON: "C:\\Python311"
+      PLATFORM: "WindowsXP+"
+      DEPLOY: true
 
-#---------------------------------#
-#       build configuration       #
-#---------------------------------#
+    - job_name: MacOS_12_Qt_6_4 (multibundle)
+      APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
+      COMPILER: clang
+      QT: $HOME/Qt/6.4.0/macos/bin
+      QT_VERSION: Qt6_4
+      BUILD_SYSTEM: "qbs"
+      ARCH: x64
+      XCODE_VERSION: 12.5
+      PLATFORM: "macOS11+"
+      MACOS_DEPLOYMENT_TARGET: 11.0
+      MULTI_BUNDLE: true
+      ENABLE_CONAN: true
+      DEPLOY: true
 
-before_build:
-  - cd c:\projects\valentina
-  - md build
+    - job_name: MacOS_12_Qt_6_4 (singlebundle)
+      APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
+      COMPILER: clang
+      QT: $HOME/Qt/6.4.0/macos/bin
+      QT_VERSION: Qt6_4
+      BUILD_SYSTEM: "qbs"
+      ARCH: x64
+      XCODE_VERSION: 12.5
+      PLATFORM: "macOS11+"
+      MACOS_DEPLOYMENT_TARGET: 11.0
+      MULTI_BUNDLE: false
+      ENABLE_CONAN: true
+      DEPLOY: true
 
-# to run your custom scripts instead of automatic MSBuild
-build_script:
-  - cd build
-  - if "%DEPLOY%" == "true" (qmake ..\Valentina.pro -r CONFIG+=no_ccache CONFIG+=checkWarnings CONFIG+=noDebugSymbols CONFIG+=noWindowsInstaller) else (qmake ..\Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings)
-  - if not "%QMAKE_GENERATOR%" == "MinGW Makefiles" (nmake -s) else (mingw32-make -j%NUMBER_OF_PROCESSORS%)
+    - job_name: MacOS_10_15_Qt_5_15 (qbs, multibundle)
+      APPVEYOR_BUILD_WORKER_IMAGE: macos-catalina
+      COMPILER: clang
+      QT: $HOME/Qt/5.15.2/clang_64/bin
+      QT_VERSION: Qt5_15
+      BUILD_SYSTEM: "qbs"
+      ARCH: x64
+      XCODE_VERSION: 12.5
+      PLATFORM: "macOS10.13+"
+      MACOS_DEPLOYMENT_TARGET: 10.13
+      MULTI_BUNDLE: true
+      ENABLE_CONAN: false
+      DEPLOY: true
 
-# to run your custom scripts instead of automatic tests
-test_script:
-  - if "%QMAKE_GENERATOR%" == "MinGW Makefiles" (mingw32-make -s check TESTARGS="-silent")
+    - job_name: MacOS_10_15_Qt_5_15 (qbs, singlebundle)
+      APPVEYOR_BUILD_WORKER_IMAGE: macos-catalina
+      COMPILER: clang
+      QT: $HOME/Qt/5.15.2/clang_64/bin
+      QT_VERSION: Qt5_15
+      BUILD_SYSTEM: "qbs"
+      ARCH: x64
+      XCODE_VERSION: 12.5
+      PLATFORM: "macOS10.13+"
+      MACOS_DEPLOYMENT_TARGET: 10.13
+      MULTI_BUNDLE: false
+      ENABLE_CONAN: false
+      DEPLOY: true
 
-# to disable automatic tests 
-#test: off
+    - job_name: Windows_Qt_5_15_(make_GCC_x86)
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+      COMPILER: mingw
+      QT: Qt\5.15\mingw81_32
+      QT_VERSION: Qt5_15
+      BUILD_SYSTEM: "make"
+      MINGW_PATH: C:\Qt\Tools\mingw810_32\bin
+      ARCH: x86
+      PYTHON: "C:\\Python311"
+      PLATFORM: "Windows7+"
+      DEPLOY: false
+
+    - job_name: Windows_Qt_6_4_(MSVC_x64)
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+      COMPILER: msvc
+      QT: Qt\6.4.0\msvc2019_64
+      QT_VERSION: Qt6_4
+      BUILD_SYSTEM: "qbs"
+      ARCH: x64
+      PYTHON: "C:\\Python311-x64"
+      PLATFORM: "Windows10+"
+      DEPLOY: false
+
+    - job_name: Windows_Qt_6_4_(MSVC_arm64)
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+      COMPILER: msvc
+      QT: Qt\6.4.0\msvc2019_arm64
+      QT_VERSION: Qt6_4
+      BUILD_SYSTEM: "qbs"
+      ARCH: arm64
+      PYTHON: "C:\\Python311-x64"
+      PLATFORM: "Windows10+"
+      DEPLOY: false
+
+    - job_name: Windows_Qt_5_15_(qbs_GCC_x64)
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+      COMPILER: mingw
+      QT: Qt\5.15\mingw81_64
+      QT_VERSION: Qt5_15
+      BUILD_SYSTEM: "qbs"
+      MINGW_PATH: C:\Qt\Tools\mingw810_64\bin
+      ARCH: x64
+      PYTHON: "C:\\Python311-x64"
+      PLATFORM: "Windows7+"
+      DEPLOY: false
+
+    - job_name: Windows_Qt_5_15_(qbs_MSVC_x64)
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+      COMPILER: msvc
+      QT: Qt\5.15\msvc2019_64
+      BUILD_SYSTEM: "qbs"
+      VSVER: 16
+      ARCH: x64
+      PYTHON: "C:\\Python311-x64"
+      PLATFORM: "Windows7+"
+      DEPLOY: false 
+
+    - job_name: Windows_Qt_5_15_(make_GCC_x64)
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+      COMPILER: mingw
+      QT: Qt\5.15\mingw81_64
+      QT_VERSION: Qt5_15
+      BUILD_SYSTEM: "make"
+      MINGW_PATH: C:\Qt\Tools\mingw810_64\bin
+      ARCH: x64
+      PYTHON: "C:\\Python311-x64"
+      PLATFORM: "Windows7+"
+      DEPLOY: false
+
+    - job_name: Windows_Qt_5_15_(nmake_MSVC_x64)
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+      COMPILER: msvc
+      QT: Qt\5.15\msvc2019_64
+      BUILD_SYSTEM: "nmake"
+      VSVER: 16
+      ARCH: x64
+      PYTHON: "C:\\Python311-x64"
+      PLATFORM: "Windows7+"
+      DEPLOY: false
+
+    - job_name: MacOS_10_15_Qt_5_15 (make)
+      APPVEYOR_BUILD_WORKER_IMAGE: macos-catalina
+      COMPILER: clang
+      QT: $HOME/Qt/5.15.2/clang_64/bin
+      QT_VERSION: Qt5_15
+      BUILD_SYSTEM: "make"
+      ARCH: x64
+      XCODE_VERSION: 12.5
+      PLATFORM: "macOS10.13+"
+      DEPLOY: false 
+
+    - job_name: Windows_Qt_5_6_(MSVC_x64)
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+      COMPILER: msvc
+      QT: Qt\5.6\msvc2015_64
+      QT_VERSION: Qt5_6
+      BUILD_SYSTEM: "nmake"
+      VSVER: 14
+      ARCH: x64
+      PYTHON: "C:\\Python311-x64"
+      PLATFORM: "WindowsXP+"
+      DEPLOY: false
 
 matrix:
   fast_finish: false
+  exclude:
+    - platform: x86
+      job_name: Windows_Qt_6_4_(GCC_x64)
+    - platform: x86
+      job_name: Windows_Qt_6_4_(MSVC_x64)
+    - platform: x86
+      job_name: Windows_Qt_6_4_(MSVC_arm64)
+    - platform: x86
+      job_name: Windows_Qt_5_15_(make_GCC_x64)
+    - platform: x86
+      job_name: Windows_Qt_5_15_(nmake_MSVC_x64)
+    - platform: x86
+      job_name: Windows_Qt_5_15_(qbs_GCC_x64)
+    - platform: x86
+      job_name: Windows_Qt_5_15_(qbs_MSVC_x64)
+    - platform: x86
+      job_name: Windows_Qt_5_6_(MSVC_x64)
+    - platform: x64
+      job_name: Windows_Qt_5_15_(make_GCC_x86)
+    - platform: x64
+      job_name: Windows_Qt_5_15_(qbs_GCC_x86)   
+    - platform: x64
+      job_name: Windows_Qt_5_6_(GCC_x86)
+
+for:
+
+#---------------------------------#
+#            Windows              #
+#---------------------------------#
+
+-
+  matrix:
+    only:
+      - job_name: Windows_Qt_6_4_(GCC_x64)
+      - job_name: Windows_Qt_6_4_(MSVC_x64)
+      - job_name: Windows_Qt_6_4_(MSVC_arm64)
+      - job_name: Windows_Qt_5_15_(qbs_GCC_x64)
+      - job_name: Windows_Qt_5_15_(qbs_MSVC_x64)
+      - job_name: Windows_Qt_5_15_(qbs_GCC_x86)
+
+  # clone directory
+  clone_folder: c:\projects\valentina
+  
+  # scripts that are called at very beginning, before repo cloning
+  init:
+    # Uncomment if need access through RDP
+    #  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+    # Path before 
+    - path
+    - set QTDIR=C:\%QT%
+    - set PATH=%QTDIR%\bin;%QTDIR%\include;C:\Tools\PsTools;C:\Program Files\Git\cmd;C:\Program Files\Git\usr\bin;C:\Program Files\Git LFS;C:\Tools\GitVersion;C:\Windows\system32;C:\Windows;C:\Windows\System32\WindowsPowerShell\v1.0\
+    # Set VC variables for the platform
+    - ps: |
+        if ($env:COMPILER -eq "msvc") {
+          if ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2022") {
+            if ($env:ARCH -eq "x64") {
+              & "C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
+            } else {
+              & "C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars32.bat"
+            }
+          } elseif ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2019") {
+            if ($env:ARCH -eq "x64") {
+              & "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
+            } else {
+              & "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars32.bat"
+            }
+          }   
+        }
+    - set PATH=C:\Qt\Tools\QtCreator\bin;%PATH%
+    - set PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
+    # Path after
+    - path
+    # Check that we have the expected version for Python
+    - (python --version)
+    # Install the build dependencies of the project.
+    - (python -m pip install --upgrade pip)
+    - if "%DEPLOY%" == "true" (python -m pip install dropbox)
+    - python -m pip install conan
+    # Trick qmake to not work through MSYS
+    - del /F "C:\Program Files\Git\usr\bin\sh.exe"
+    - del /F "C:\Program Files\Git\bin\sh.exe"
+    - qmake -v
+    - qbs--version
+
+  before_build:
+    - cd %APPVEYOR_BUILD_FOLDER%
+    - qbs setup-toolchains --detect
+    - qbs config --list profiles
+    - qbs setup-qt %QTDIR%\lib\qmake qt6
+    - qbs-config defaultProfile qt6
+    - ps: |
+        if ($env:COMPILER -eq "msvc")
+        {
+          & "qbs config profiles.qt6.baseProfile msvc"
+        }
+        else
+        {
+          & "qbs config profiles.qt6.baseProfile mingw"
+        } 
+
+  build_script:
+    - qbs build -f valentina.qbs -d %APPVEYOR_BUILD_FOLDER%\build --command-echo-mode command-line config:release qbs.installRoot:%APPVEYOR_BUILD_FOLDER%\build\install-root\valentina profile:qt6 project.enableConan:true modules.buildconfig.enableCcache:false
+  
+  test_script:
+    - qbs -p autotest-runner -d %APPVEYOR_BUILD_FOLDER%\build profile:qt6 config:release
+
+  deploy_script:
+    - ps: scripts/appveyor-deploy.ps1
+
+# Legacy
+-
+  matrix:
+    only:
+      - job_name: Windows_Qt_5_15_(make_GCC_x86)
+      - job_name: Windows_Qt_5_15_(make_GCC_x64)
+      - job_name: Windows_Qt_5_15_(nmake_MSVC_x64)
+      - job_name: Windows_Qt_5_6_(GCC_x86)
+      - job_name: Windows_Qt_5_6_(MSVC_x64)
+
+  # clone directory
+  clone_folder: c:\projects\valentina
+
+  # scripts that are called at very beginning, before repo cloning
+  init:
+    # Uncomment if need access through RDP
+    #  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+    # Path before 
+    - path
+    - set QTDIR=C:\%QT%
+    - set PATH=%QTDIR%\bin;%QTDIR%\include;C:\Tools\PsTools;C:\Program Files\Git\cmd;C:\Program Files\Git\usr\bin;C:\Program Files\Git LFS;C:\Tools\GitVersion;C:\Windows\system32;C:\Windows;C:\Windows\System32\WindowsPowerShell\v1.0\
+    - if NOT "%BUILD_SYSTEM%" == "make" echo "Using Visual Studio %VSVER%.0"
+    - if "%BUILD_SYSTEM%" == "make" echo "Using MinGW"
+    # Set VC variables for the platform
+    - ps: |
+        if ($env:COMPILER -eq "msvc") {
+          if ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2022") {
+            if ($env:ARCH -eq "x64") {
+              & "C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
+            } else {
+              & "C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars32.bat"
+            }
+          } elseif ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2019") {
+            if ($env:ARCH -eq "x64") {
+              & "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
+            } else {
+              & "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars32.bat"
+            }
+          } elseif ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2017") {
+            if ($env:ARCH -eq "x64") {
+              & "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
+            } else {
+              & "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat"
+            }
+          } elseif ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2015") {
+            if ($env:ARCH -eq "x64") {
+              & "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64"
+              & "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64"
+            } else {
+              & "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86"
+            }
+          }  
+        }
+    - if "%BUILD_SYSTEM%" == "make" set PATH=%MINGW_PATH%;%PATH%
+    - if "%BUILD_SYSTEM%" == "nmake" set PATH=C:\Qt\Tools\QtCreator\bin;%PATH%
+    - if "%DEPLOY%" == "true" set PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
+    # Set paths to libraries
+    - set PATH=C:\projects\valentina\build\src\libs\vpropertyexplorer\bin;C:\projects\valentina\build\src\libs\qmuparser\bin;%PATH%
+    # Path after
+    - path
+    # Check that we have the expected version for Python
+    - if "%DEPLOY%" == "true" (python --version)
+    # Install the build dependencies of the project.
+    - if "%DEPLOY%" == "true" (python -m pip install --upgrade pip)
+    - if "%DEPLOY%" == "true" (python -m pip install dropbox)
+    # Trick qmake to not work through MSYS
+    - del /F "C:\Program Files\Git\usr\bin\sh.exe"
+    - del /F "C:\Program Files\Git\bin\sh.exe"
+    - qmake -v
+
+  before_build:
+  - cd %APPVEYOR_BUILD_FOLDER%
+  - md build
+
+  # to run your custom scripts instead of automatic MSBuild
+  build_script:
+    - cd build
+    - if "%DEPLOY%" == "true" (qmake ..\Valentina.pro -r CONFIG+=no_ccache CONFIG+=checkWarnings CONFIG+=noDebugSymbols CONFIG+=noWindowsInstaller) else (qmake ..\Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings)
+    - if not "%BUILD_SYSTEM%" == "make" (nmake -s) else (mingw32-make -j%NUMBER_OF_PROCESSORS%)
+
+  # to run your custom scripts instead of automatic tests
+  test_script:
+    - if "%BUILD_SYSTEM%" == "make" (mingw32-make -s check TESTARGS="-silent")
+  
+  # prepare to deploy
+  after_test:
+    - if "%DEPLOY%" == "true" (mingw32-make install)
+
+  # to run your custom scripts instead of provider deployments
+  deploy_script:
+    - ps: ../scripts/appveyor-deploy.ps1
+
+#---------------------------------#
+#             MacOS               #
+#---------------------------------#
+
+-
+  matrix:
+    only:
+      - job_name: MacOS_12_Qt_6_4 (multibundle)
+      - job_name: MacOS_12_Qt_6_4 (singlebundle)
+      - job_name: MacOS_10_15_Qt_5_15 (qbs, multibundle)
+      - job_name: MacOS_10_15_Qt_5_15 (qbs, singlebundle)
+
+  init:
+    - xcode-select --install
+    - sudo xcode-select -p
+    - sudo xcode-select -s /Applications/Xcode_$XCODE_VERSION.app/Contents/Developer
+    - brew update > /dev/null
+    - brew install coreutils qbs cmake
+    - |
+      if [[ "$ENABLE_CONAN" == "true" ]]; then
+        brew install conan;
+        conan --version
+      fi
+    - python3 --version
+    - pip3 install --user --upgrade pip dropbox
+    - clang --version
+    - qmake --version
+    - which qmake
+    - qbs --version
+
+  before_build:
+    - cd ${APPVEYOR_BUILD_FOLDER}
+
+  build_script:
+    - pwd
+    - |
+      if [[ "$ENABLE_CONAN" == "true" ]]; then
+        conan install . -s os=Macos -s os.version=${MACOS_DEPLOYMENT_TARGET} --build=xerces-c
+      fi
+    - qbs setup-toolchains --detect
+    - qbs config --list profiles
+    - qbs setup-qt ${QT}/qmake qt6
+    - qbs-config defaultProfile qt6
+    - qbs config profiles.qt6.baseProfile clang
+    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build --command-echo-mode command-line config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt6 project.enableConan:true project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:false
+
+  deploy_script:
+    - CIRRUS_WORKING_DIR=${APPVEYOR_BUILD_FOLDER CIRRUS_CHANGE_IN_REPO=${APPVEYOR_REPO_COMMIT} CIRRUS_BRANCH=${APPVEYOR_REPO_BRANCH} ${APPVEYOR_BUILD_FOLDER}/scripts/cirrus-deploy.sh
+
+-
+  matrix:
+    only:
+      - job_name: MacOS_10_15_Qt_5_15 (make)
+
+  init:
+    - xcode-select --install
+    - sudo xcode-select -p
+    - sudo xcode-select -s /Applications/Xcode_$XCODE_VERSION.app/Contents/Developer
+    - clang --version
+    - ${QT}/qmake --version
+    - which ${QT}/qmake
+
+  before_build:
+    - cd ${APPVEYOR_BUILD_FOLDER}
+    - mkdir build
+    - cd build
+
+  build_script:
+    - pwd
+    - ${QT}/qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=checkWarnings CONFIG+=noTests CONFIG+=no_ccache
+    - make -j$(nproc)
 
 #---------------------------------#
 #         notifications           #
@@ -148,16 +525,4 @@ notifications:
     on_build_success: false
     on_build_failure: true
     on_build_status_changed: true
-
-#---------------------------------#
-#         deployment              #
-#---------------------------------#
-
-# prepare to deploy
-after_test:
-  - if "%DEPLOY%" == "true" (mingw32-make install)
-
-# to run your custom scripts instead of provider deployments
-deploy_script:
-  - ps: ../scripts/appveyor-deploy.ps1
 
