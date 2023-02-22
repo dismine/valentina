@@ -322,7 +322,7 @@ for:
     - del /F "C:\Program Files\Git\usr\bin\sh.exe"
     - del /F "C:\Program Files\Git\bin\sh.exe"
     - qmake -v
-    - qbs--version
+    - qbs --version
 
   before_build:
     - cd %APPVEYOR_BUILD_FOLDER%
