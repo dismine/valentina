@@ -29,9 +29,17 @@
 #define TEXT_H
 
 #include <QtGlobal>
-#include <QString>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
+#include <QString>
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+#include "../vmisc/diagnostic.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wunused-variable")
+
 namespace Qt
 {
 static auto endl = ::endl;
@@ -39,6 +47,8 @@ static auto flush = ::flush;
 static auto dec = ::dec;
 static auto SkipEmptyParts = QString::SkipEmptyParts;
 }
+
+QT_WARNING_POP
 #endif
 
 #endif // TEXT_H

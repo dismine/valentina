@@ -32,6 +32,14 @@
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
 #include <QTextStream>
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+#include "qmudef.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wunused-variable")
+
 namespace Qt
 {
 //static auto endl = ::endl;
@@ -39,6 +47,9 @@ namespace Qt
 static auto dec = ::dec;
 //static auto SkipEmptyParts = QString::SkipEmptyParts;
 }
+
+QT_WARNING_POP
+
 #endif
 
 #endif // TEXT_H
