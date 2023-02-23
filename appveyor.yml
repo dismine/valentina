@@ -151,7 +151,7 @@ environment:
       QT: Qt\6.4.0\msvc2019_64
       QT_VERSION: Qt6_4
       BUILD_SYSTEM: "qbs"
-      MSVC_PATH: "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\bin\Hostx64\x64"
+      MSVC_PATH: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\x64"
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows10+"
@@ -163,7 +163,7 @@ environment:
       QT: Qt\6.4.0\msvc2019_arm64
       QT_VERSION: Qt6_4
       BUILD_SYSTEM: "qbs"
-      MSVC_PATH: "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\bin\Hostx64\arm64"
+      MSVC_PATH: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\arm64"
       ARCH: arm64
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows10+"
@@ -186,7 +186,7 @@ environment:
       COMPILER: msvc
       QT: Qt\5.15\msvc2019_64
       BUILD_SYSTEM: "qbs"
-      MSVC_PATH: "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\bin\Hostx64\x64"
+      MSVC_PATH: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\x64"
       VSVER: 16
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
