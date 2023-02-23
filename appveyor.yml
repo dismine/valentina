@@ -331,16 +331,15 @@ for:
     - qbs setup-qt %QTDIR%\bin\qmake.exe qt6
     - qbs-config defaultProfile qt6
     - dir "C:\Qt\Tools"
-    - dir "C:\Qt\Tools\mingw1120_64\bin"
     - ps: |
         if ($env:COMPILER -eq "msvc")
         {
-          & qbs.exe setup-toolchains $env:MSVC_PATH\cl.exe $env:COMPILER
+          & qbs.exe setup-toolchains $env:MSVC_PATH\cl.exe --type msvc $env:COMPILER
           & qbs.exe config profiles.qt6.baseProfile $env:COMPILER
         }
         else
         {
-          & qbs.exe setup-toolchains $env:MINGW_PATH\g++.exe $env:COMPILER
+          & qbs.exe setup-toolchains $env:MINGW_PATH\g++.exe --type mingw $env:COMPILER
           & qbs.exe config profiles.qt6.baseProfile $env:COMPILER
         }
     - qbs config --list profiles 
@@ -459,6 +458,7 @@ for:
       - job_name: MacOS_10_15_Qt_5_15 (qbs, singlebundle)
 
   init:
+    - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
     - sudo xcode-select -p
     - sudo xcode-select -s /Applications/Xcode_$XCODE_VERSION.app
     - brew update > /dev/null
@@ -500,6 +500,7 @@ for:
       - job_name: MacOS_10_15_Qt_5_15 (make)
 
   init:
+    - find /Applications -maxdepth 1 -type d -name 'Xcode*.ap
     - sudo xcode-select -p
     - sudo xcode-select -s /Applications/Xcode_$XCODE_VERSION.app
     - clang --version
