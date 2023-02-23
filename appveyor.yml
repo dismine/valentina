@@ -333,13 +333,13 @@ for:
     - ps: |
         if ($env:COMPILER -eq "msvc")
         {
-          & "qbs setup-toolchains $env:MSVC_PATH\cl.exe $env:COMPILER"
-          & "qbs config profiles.qt6.baseProfile $env:COMPILER"
+          & "qbs.exe setup-toolchains $env:MSVC_PATH\cl.exe $env:COMPILER"
+          & "qbs.exe config profiles.qt6.baseProfile $env:COMPILER"
         }
         else
         {
-          & "qbs setup-toolchains $env:MINGW_PATH\g++.exe $env:COMPILER"
-          & "qbs config profiles.qt6.baseProfile $env:COMPILER"
+          & "qbs.exe setup-toolchains $env:MINGW_PATH\g++.exe $env:COMPILER"
+          & "qbs.exe config profiles.qt6.baseProfile $env:COMPILER"
         }
     - qbs config --list profiles 
 
@@ -409,7 +409,7 @@ for:
     - if "%BUILD_SYSTEM%" == "nmake" set PATH=C:\Qt\Tools\QtCreator\bin;%PATH%
     - if "%DEPLOY%" == "true" set PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
     # Set paths to libraries
-    - set PATH=%APPVEYOR_BUILD_WORKER_IMAGE%\build\src\libs\vpropertyexplorer\bin;%APPVEYOR_BUILD_WORKER_IMAGE%\build\src\libs\qmuparser\bin;%PATH%
+    - set PATH=%APPVEYOR_BUILD_FOLDER%\build\src\libs\vpropertyexplorer\bin;%APPVEYOR_BUILD_FOLDER%\build\src\libs\qmuparser\bin;%PATH%
     # Path after
     - path
     # Check that we have the expected version for Python
@@ -499,7 +499,6 @@ for:
       - job_name: MacOS_10_15_Qt_5_15 (make)
 
   init:
-    - xcode-select --install
     - sudo xcode-select -p
     - sudo xcode-select -s /Applications/Xcode_$XCODE_VERSION.app/Contents/Developer
     - clang --version
