@@ -84,7 +84,7 @@ environment:
       QT_VERSION: Qt6_4
       BUILD_SYSTEM: "qbs"
       ARCH: x64
-      XCODE_VERSION: 12.5.1
+      XCODE_VERSION: 13.4.1
       PLATFORM: "macOS11+"
       MACOS_DEPLOYMENT_TARGET: 11.0
       MULTI_BUNDLE: true
@@ -98,7 +98,7 @@ environment:
       QT_VERSION: Qt6_4
       BUILD_SYSTEM: "qbs"
       ARCH: x64
-      XCODE_VERSION: 12.5.1
+      XCODE_VERSION: 13.4.1
       PLATFORM: "macOS11+"
       MACOS_DEPLOYMENT_TARGET: 11.0
       MULTI_BUNDLE: false
@@ -327,22 +327,22 @@ for:
 
   before_build:
     - cd %APPVEYOR_BUILD_FOLDER%
-    - qbs setup-toolchains --detect
-    - qbs setup-qt %QTDIR%\bin\qmake.exe qt6
+    - qbs-setup-toolchains --detect
+    - qbs-setup-qt %QTDIR%\bin\qmake.exe qt6
     - qbs-config defaultProfile qt6
     - dir "C:\Qt\Tools"
     - ps: |
         if ($env:COMPILER -eq "msvc")
         {
-          & qbs.exe setup-toolchains $env:MSVC_PATH\cl.exe --type msvc $env:COMPILER
-          & qbs.exe config profiles.qt6.baseProfile $env:COMPILER
+          & qbs-setup-toolchains.exe --type msvc $env:MSVC_PATH\cl.exe $env:COMPILER
+          & qbs-config.exe profiles.qt6.baseProfile $env:COMPILER
         }
         else
         {
-          & qbs.exe setup-toolchains $env:MINGW_PATH\g++.exe --type mingw $env:COMPILER
-          & qbs.exe config profiles.qt6.baseProfile $env:COMPILER
+          & qbs-setup-toolchains.exe --type mingw $env:MINGW_PATH\g++.exe $env:COMPILER
+          & qbs-config.exe  profiles.qt6.baseProfile $env:COMPILER
         }
-    - qbs config --list profiles 
+    - qbs-config --list profiles 
 
   build_script:
     - qbs build -f valentina.qbs -d %APPVEYOR_BUILD_FOLDER%\build --command-echo-mode command-line config:release qbs.installRoot:%APPVEYOR_BUILD_FOLDER%\build\install-root\valentina profile:qt6 project.enableConan:true modules.buildconfig.enableCcache:false
@@ -461,6 +461,7 @@ for:
     - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
     - sudo xcode-select -p
     - sudo xcode-select -s /Applications/Xcode_$XCODE_VERSION.app
+    - sudo xcode-select -p
     - brew update > /dev/null
     - brew install coreutils qbs cmake
     - |
@@ -487,7 +488,7 @@ for:
     - qbs setup-toolchains --detect
     - qbs config --list profiles
     - qbs setup-qt ${QT}/qmake qt6
-    - qbs-config defaultProfile qt6
+    - qbs config defaultProfile qt6
     - qbs config profiles.qt6.baseProfile clang
     - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build --command-echo-mode command-line config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt6 project.enableConan:true project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:false
 
@@ -503,6 +504,7 @@ for:
     - find /Applications -maxdepth 1 -type d -name 'Xcode*.ap
     - sudo xcode-select -p
     - sudo xcode-select -s /Applications/Xcode_$XCODE_VERSION.app
+    - sudo xcode-select -p
     - clang --version
     - ${QT}/qmake --version
     - which ${QT}/qmake
