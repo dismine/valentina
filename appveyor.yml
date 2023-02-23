@@ -333,13 +333,13 @@ for:
     - ps: |
         if ($env:COMPILER -eq "msvc")
         {
-          & "qbs.exe setup-toolchains $env:MSVC_PATH\cl.exe $env:COMPILER"
-          & "qbs.exe config profiles.qt6.baseProfile $env:COMPILER"
+          & qbs.exe setup-toolchains $env:MSVC_PATH\cl.exe $env:COMPILER
+          & qbs.exe config profiles.qt6.baseProfile $env:COMPILER
         }
         else
         {
-          & "qbs.exe setup-toolchains $env:MINGW_PATH\g++.exe $env:COMPILER"
-          & "qbs.exe config profiles.qt6.baseProfile $env:COMPILER"
+          & qbs.exe setup-toolchains $env:MINGW_PATH\g++.exe $env:COMPILER
+          & qbs.exe config profiles.qt6.baseProfile $env:COMPILER
         }
     - qbs config --list profiles 
 
@@ -457,7 +457,6 @@ for:
       - job_name: MacOS_10_15_Qt_5_15 (qbs, singlebundle)
 
   init:
-    - xcode-select --install
     - sudo xcode-select -p
     - sudo xcode-select -s /Applications/Xcode_$XCODE_VERSION.app/Contents/Developer
     - brew update > /dev/null
