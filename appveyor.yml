@@ -84,7 +84,7 @@ environment:
       QT_VERSION: Qt6_4
       BUILD_SYSTEM: "qbs"
       ARCH: x64
-      XCODE_VERSION: 12.5
+      XCODE_VERSION: 12.5.1
       PLATFORM: "macOS11+"
       MACOS_DEPLOYMENT_TARGET: 11.0
       MULTI_BUNDLE: true
@@ -98,7 +98,7 @@ environment:
       QT_VERSION: Qt6_4
       BUILD_SYSTEM: "qbs"
       ARCH: x64
-      XCODE_VERSION: 12.5
+      XCODE_VERSION: 12.5.1
       PLATFORM: "macOS11+"
       MACOS_DEPLOYMENT_TARGET: 11.0
       MULTI_BUNDLE: false
@@ -112,7 +112,7 @@ environment:
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "qbs"
       ARCH: x64
-      XCODE_VERSION: 12.5
+      XCODE_VERSION: 12.5.1
       PLATFORM: "macOS10.13+"
       MACOS_DEPLOYMENT_TARGET: 10.13
       MULTI_BUNDLE: true
@@ -126,7 +126,7 @@ environment:
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "qbs"
       ARCH: x64
-      XCODE_VERSION: 12.5
+      XCODE_VERSION: 12.5.1
       PLATFORM: "macOS10.13+"
       MACOS_DEPLOYMENT_TARGET: 10.13
       MULTI_BUNDLE: false
@@ -223,7 +223,7 @@ environment:
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "make"
       ARCH: x64
-      XCODE_VERSION: 12.5
+      XCODE_VERSION: 12.5.1
       PLATFORM: "macOS10.13+"
       DEPLOY: false 
 
@@ -330,6 +330,8 @@ for:
     - qbs setup-toolchains --detect
     - qbs setup-qt %QTDIR%\bin\qmake.exe qt6
     - qbs-config defaultProfile qt6
+    - dir "C:\Qt\Tools"
+    - dir "C:\Qt\Tools\mingw900_64"
     - ps: |
         if ($env:COMPILER -eq "msvc")
         {
