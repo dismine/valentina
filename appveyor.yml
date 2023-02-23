@@ -30,9 +30,6 @@ platform:
 #        environment setup        #
 #---------------------------------#
 
-# clone directory
-clone_folder: c:\projects\valentina
-
 # set clone depth
 clone_depth: 1                       # clone entire repository history if not defined
 
@@ -50,6 +47,7 @@ environment:
       QT: Qt\6.4.0\mingw_64
       QT_VERSION: Qt6_4
       BUILD_SYSTEM: "qbs"
+      MINGW_PATH: C:\Qt\Tools\mingw900_64\bin
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows10+"
@@ -153,6 +151,7 @@ environment:
       QT: Qt\6.4.0\msvc2019_64
       QT_VERSION: Qt6_4
       BUILD_SYSTEM: "qbs"
+      MSVC_PATH: "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\bin\Hostx64\x64"
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows10+"
@@ -164,6 +163,7 @@ environment:
       QT: Qt\6.4.0\msvc2019_arm64
       QT_VERSION: Qt6_4
       BUILD_SYSTEM: "qbs"
+      MSVC_PATH: "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\bin\Hostx64\arm64"
       ARCH: arm64
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows10+"
@@ -186,6 +186,7 @@ environment:
       COMPILER: msvc
       QT: Qt\5.15\msvc2019_64
       BUILD_SYSTEM: "qbs"
+      MSVC_PATH: "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\bin\Hostx64\x64"
       VSVER: 16
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
@@ -327,18 +328,20 @@ for:
   before_build:
     - cd %APPVEYOR_BUILD_FOLDER%
     - qbs setup-toolchains --detect
-    - qbs config --list profiles
-    - qbs setup-qt %QTDIR%\lib\qmake qt6
+    - qbs setup-qt %QTDIR%\bin\qmake.exe qt6
     - qbs-config defaultProfile qt6
     - ps: |
         if ($env:COMPILER -eq "msvc")
         {
-          & "qbs config profiles.qt6.baseProfile msvc"
+          & "qbs setup-toolchains $env:MSVC_PATH\cl.exe $env:COMPILER"
+          & "qbs config profiles.qt6.baseProfile $env:COMPILER"
         }
         else
         {
-          & "qbs config profiles.qt6.baseProfile mingw"
-        } 
+          & "qbs setup-toolchains $env:MINGW_PATH\g++.exe $env:COMPILER"
+          & "qbs config profiles.qt6.baseProfile $env:COMPILER"
+        }
+    - qbs config --list profiles 
 
   build_script:
     - qbs build -f valentina.qbs -d %APPVEYOR_BUILD_FOLDER%\build --command-echo-mode command-line config:release qbs.installRoot:%APPVEYOR_BUILD_FOLDER%\build\install-root\valentina profile:qt6 project.enableConan:true modules.buildconfig.enableCcache:false
@@ -395,10 +398,10 @@ for:
             }
           } elseif ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2015") {
             if ($env:ARCH -eq "x64") {
-              & "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64"
-              & "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64"
+              & "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd /x64"
+              & "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat x86_amd64"
             } else {
-              & "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86"
+              & "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat x86"
             }
           }  
         }
@@ -406,7 +409,7 @@ for:
     - if "%BUILD_SYSTEM%" == "nmake" set PATH=C:\Qt\Tools\QtCreator\bin;%PATH%
     - if "%DEPLOY%" == "true" set PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
     # Set paths to libraries
-    - set PATH=C:\projects\valentina\build\src\libs\vpropertyexplorer\bin;C:\projects\valentina\build\src\libs\qmuparser\bin;%PATH%
+    - set PATH=%APPVEYOR_BUILD_WORKER_IMAGE%\build\src\libs\vpropertyexplorer\bin;%APPVEYOR_BUILD_WORKER_IMAGE%\build\src\libs\qmuparser\bin;%PATH%
     # Path after
     - path
     # Check that we have the expected version for Python
