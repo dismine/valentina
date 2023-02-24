@@ -28,6 +28,7 @@
 **
 ****************************************************************************/
 
+import qbs
 import qbs.Process
 import qbs.File
 import qbs.FileInfo
@@ -39,7 +40,7 @@ Probe {
     property stringList additionalArguments: []
     property path conanfilePath
     property path packageReference
-    property path executable: "conan" + FileInfo.executableSuffix()
+    property path executable: "conan"
     property stringList generators: []
     property var options
     property var settings
@@ -56,7 +57,13 @@ Probe {
     property int _conanfileLastModified: conanfilePath ? File.lastModified(conanfilePath) : 0
     property path _projectBuildDirectory: project.buildDirectory
 
+    // TODO: If minimal qbs version is 1.23 replace with FileInfo.executableSuffix()
+    readonly property string executableSuffix: project.qbs.targetOS.contains("windows") ? ".exe" : ""
+
     configure: {
+        if (executable === "conan")
+            executable = executable + executableSuffix;
+
         if (conanfilePath && packageReference)
             throw("conanfilePath and packageReference must not be defined at the same time.");
 
