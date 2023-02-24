@@ -47,6 +47,7 @@ environment:
       QT: Qt\6.4.0\mingw_64
       QT_VERSION: Qt6_4
       BUILD_SYSTEM: "qbs"
+      GCC_VERSION: 11.2
       MINGW_PATH: C:\Qt\Tools\mingw1120_64\bin
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
@@ -59,6 +60,7 @@ environment:
       QT: Qt\5.15\mingw81_32
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "qbs"
+      GCC_VERSION: 8.1
       MINGW_PATH: C:\Qt\Tools\mingw810_32\bin
       ARCH: x86
       PYTHON: "C:\\Python311"
@@ -73,7 +75,7 @@ environment:
       BUILD_SYSTEM: "make"
       MINGW_PATH: C:\Qt\Tools\mingw492_32\bin
       ARCH: x86
-      PYTHON: "C:\\Python311"
+      PYTHON: "C:\\Python38"
       PLATFORM: "WindowsXP+"
       DEPLOY: true
 
@@ -112,7 +114,7 @@ environment:
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "qbs"
       ARCH: x64
-      XCODE_VERSION: 12.5.1
+      XCODE_VERSION: 12.3
       PLATFORM: "macOS10.13+"
       MACOS_DEPLOYMENT_TARGET: 10.13
       MULTI_BUNDLE: true
@@ -126,7 +128,7 @@ environment:
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "qbs"
       ARCH: x64
-      XCODE_VERSION: 12.5.1
+      XCODE_VERSION: 12.3
       PLATFORM: "macOS10.13+"
       MACOS_DEPLOYMENT_TARGET: 10.13
       MULTI_BUNDLE: false
@@ -175,6 +177,7 @@ environment:
       QT: Qt\5.15\mingw81_64
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "qbs"
+      GCC_VERSION: 8.1
       MINGW_PATH: C:\Qt\Tools\mingw810_64\bin
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
@@ -223,7 +226,7 @@ environment:
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "make"
       ARCH: x64
-      XCODE_VERSION: 12.5.1
+      XCODE_VERSION: 12.3
       PLATFORM: "macOS10.13+"
       DEPLOY: false 
 
@@ -235,7 +238,7 @@ environment:
       BUILD_SYSTEM: "nmake"
       VSVER: 14
       ARCH: x64
-      PYTHON: "C:\\Python311-x64"
+      PYTHON: "C:\\Python38-x64"
       PLATFORM: "WindowsXP+"
       DEPLOY: false
 
@@ -341,21 +344,39 @@ for:
     - qbs-setup-qt %QTDIR%\bin\qmake.exe qt6
     - qbs-config defaultProfile qt6
     - dir "C:\Qt\Tools"
+    - type %HOMEPATH%\.conan2\settings.yml
+    - conan profile new valentina
     - ps: |
         if ($env:COMPILER -eq "msvc")
         {
           & qbs-setup-toolchains.exe --type msvc $env:MSVC_PATH\cl.exe $env:COMPILER
           & qbs-config.exe profiles.qt6.baseProfile $env:COMPILER
+          & conan profile update settings.compiler=msvc valentina
+          & conan profile update settings.compiler.cppstd=17 valentina
+          & conan profile update settings.compiler.version=192 valentina
+          & conan profile update settings.compiler.runtime=static valentina
+          & conan profile update settings.compiler.runtime_type=Release valentina
         }
         else
         {
           & qbs-setup-toolchains.exe --type mingw $env:MINGW_PATH\g++.exe $env:COMPILER
           & qbs-config.exe  profiles.qt6.baseProfile $env:COMPILER
+          & conan profile update settings.compiler=gcc valentina
+          & conan profile update settings.compiler.cppstd=gnu17 valentina
+          & conan profile update settings.compiler.libcxx=libstdc++11 valentina
+          & conan profile update settings.compiler.version=$env:GCC_VERSION valentina
         }
+        if ($env:ARCH -eq "x64") {
+          & conan profile update settings.arch=x86_64 valentina
+        } else {
+          & conan profile update settings.arch=x86 valentina
+        }
+    - conan profile update settings.os=Windows valentina
+    - conan profile update settings.build_type=Release valentina
     - qbs-config --list profiles
-    - conan profile detect 
 
   build_script:
+    - conan install . -s os=Windows --build=xerces-c/3.2.4
     - qbs build -f valentina.qbs -d %APPVEYOR_BUILD_FOLDER%\build --command-echo-mode command-line config:release qbs.installRoot:%APPVEYOR_BUILD_FOLDER%\build\install-root\valentina profile:qt6 project.enableConan:true modules.buildconfig.enableCcache:false
   
   test_script:
@@ -474,10 +495,10 @@ for:
     - sudo xcode-select -s /Applications/Xcode-$XCODE_VERSION.app
     - sudo xcode-select -p
     - brew update > /dev/null
-    - brew install coreutils qbs cmake
+    - brew install --force coreutils qbs cmake
     - |
       if [[ "$ENABLE_CONAN" == "true" ]]; then
-        brew install conan;
+        brew install --force conan;
         conan --version
       fi
     - python3 --version
@@ -512,7 +533,7 @@ for:
       - job_name: MacOS_10_15_Qt_5_15 (make)
 
   init:
-    - find /Applications -maxdepth 1 -type d -name 'Xcode*.ap
+    - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
     - sudo xcode-select -p
     - sudo xcode-select -s /Applications/Xcode-$XCODE_VERSION.app
     - sudo xcode-select -p
