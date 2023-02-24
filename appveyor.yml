@@ -344,6 +344,7 @@ for:
     - qbs-setup-qt %QTDIR%\bin\qmake.exe qt6
     - qbs-config defaultProfile qt6
     - dir "C:\Qt\Tools"
+    - conan config home
     - type %HOMEPATH%\.conan2\settings.yml
     - conan profile new valentina
     - ps: |
@@ -495,6 +496,7 @@ for:
     - sudo xcode-select -s /Applications/Xcode-$XCODE_VERSION.app
     - sudo xcode-select -p
     - brew update > /dev/null
+    - rm '/usr/local/bin/ccmake'
     - brew install --force coreutils qbs cmake
     - |
       if [[ "$ENABLE_CONAN" == "true" ]]; then
