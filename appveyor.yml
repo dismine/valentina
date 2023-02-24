@@ -494,7 +494,7 @@ for:
     - pwd
     - |
       if [[ "$ENABLE_CONAN" == "true" ]]; then
-        conan install . -s os=Macos -s os.version=${MACOS_DEPLOYMENT_TARGET} --build=xerces-c
+        conan install . -s os=Macos -s os.version=${MACOS_DEPLOYMENT_TARGET} --build=xerces-c/3.2.4
       fi
     - qbs setup-toolchains --detect
     - qbs config --list profiles
