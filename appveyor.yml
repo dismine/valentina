@@ -258,6 +258,16 @@ matrix:
       job_name: Windows_Qt_5_15_(qbs_MSVC_x64)
     - platform: x86
       job_name: Windows_Qt_5_6_(MSVC_x64)
+    - platform: x86
+      job_name: MacOS_12_Qt_6_4 (multibundle)
+    - platform: x86
+      job_name: MacOS_12_Qt_6_4 (singlebundle)
+    - platform: x86
+      job_name: MacOS_10_15_Qt_5_15 (qbs, multibundle)
+    - platform: x86
+      job_name: MacOS_10_15_Qt_5_15 (qbs, singlebundle)
+    - platform: x86
+      job_name: MacOS_10_15_Qt_5_15 (make)
     - platform: x64
       job_name: Windows_Qt_5_15_(make_GCC_x86)
     - platform: x64
@@ -342,7 +352,8 @@ for:
           & qbs-setup-toolchains.exe --type mingw $env:MINGW_PATH\g++.exe $env:COMPILER
           & qbs-config.exe  profiles.qt6.baseProfile $env:COMPILER
         }
-    - qbs-config --list profiles 
+    - qbs-config --list profiles
+    - conan profile detect 
 
   build_script:
     - qbs build -f valentina.qbs -d %APPVEYOR_BUILD_FOLDER%\build --command-echo-mode command-line config:release qbs.installRoot:%APPVEYOR_BUILD_FOLDER%\build\install-root\valentina profile:qt6 project.enableConan:true modules.buildconfig.enableCcache:false

@@ -111,7 +111,6 @@ Probe {
 
         args = args.concat(["-of", generatedFilesPath]);
         var p = new Process();
-        console.info(args);
         p.start(executable, args);
         while (!p.waitForFinished(500)) {
             const output = p.readStdOut();

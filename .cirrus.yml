@@ -176,6 +176,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - qbs --version
   build_script:
     - pwd
+    - conan profile detect
     - conan install . -s os=Macos -s os.version=${MACOS_DEPLOYMENT_TARGET} --build=xerces-c
     - qbs setup-toolchains --detect
     - qbs config --list profiles
