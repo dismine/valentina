@@ -1,4 +1,4 @@
-import qbs.Probes
+import "qbs/imports/conan/ConanfileProbe.qbs" as ConanfileProbe
 
 Project {
     name: "Valentina"
@@ -7,7 +7,8 @@ Project {
     property bool enableConan: false
     property string minimumMacosVersion: undefined
 
-    Probes.ConanfileProbe {
+    // Temporary probe until qbs doesn't support conan 2.0
+    ConanfileProbe {
         id: thirdPartyConanPackages
         condition: enableConan
         conanfilePath: project.sourceDirectory + "/conanfile.py"
