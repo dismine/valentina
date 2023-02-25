@@ -82,7 +82,7 @@ environment:
     - job_name: MacOS_12_Qt_6_4 (multibundle)
       APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
       COMPILER: clang
-      QT: $HOME/Qt/6.4/macos
+      QT: ${HOME}/Qt/6.4/macos
       QT_VERSION: Qt6_4
       BUILD_SYSTEM: "qbs"
       ARCH: x64
@@ -96,7 +96,7 @@ environment:
     - job_name: MacOS_12_Qt_6_4 (singlebundle)
       APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
       COMPILER: clang
-      QT: $HOME/Qt/6.4/macos
+      QT: ${HOME}/Qt/6.4/macos
       QT_VERSION: Qt6_4
       BUILD_SYSTEM: "qbs"
       ARCH: x64
@@ -110,7 +110,7 @@ environment:
     - job_name: MacOS_10_15_Qt_5_15 (qbs, multibundle)
       APPVEYOR_BUILD_WORKER_IMAGE: macos-catalina
       COMPILER: clang
-      QT: $HOME/Qt/5.15/clang_64
+      QT: ${HOME}/Qt/5.15/clang_64
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "qbs"
       ARCH: x64
@@ -124,7 +124,7 @@ environment:
     - job_name: MacOS_10_15_Qt_5_15 (qbs, singlebundle)
       APPVEYOR_BUILD_WORKER_IMAGE: macos-catalina
       COMPILER: clang
-      QT: $HOME/Qt/5.15/clang_64
+      QT: ${HOME}/Qt/5.15/clang_64
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "qbs"
       ARCH: x64
@@ -222,7 +222,7 @@ environment:
     - job_name: MacOS_10_15_Qt_5_15 (make)
       APPVEYOR_BUILD_WORKER_IMAGE: macos-catalina
       COMPILER: clang
-      QT: $HOME/Qt/5.15/clang_64
+      QT: ${HOME}/Qt/5.15/clang_64
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "make"
       ARCH: x64
@@ -378,7 +378,7 @@ for:
 
   build_script:
     - conan install . -s os=Windows --build=xerces-c/3.2.4 -pr valentina
-    - qbs build -f valentina.qbs -d %APPVEYOR_BUILD_FOLDER%\build --command-echo-mode command-line config:release qbs.installRoot:%APPVEYOR_BUILD_FOLDER%\build\install-root\valentina profile:qt6 project.enableConan:true modules.buildconfig.enableCcache:false project.conanProfiles:[valentina]
+    - qbs build -f valentina.qbs -d %APPVEYOR_BUILD_FOLDER%\build --command-echo-mode command-line config:release qbs.installRoot:%APPVEYOR_BUILD_FOLDER%\build\install-root\valentina profile:qt6 project.enableConan:true modules.buildconfig.enableCcache:false project.conanProfiles:valentina
   
   test_script:
     - qbs -p autotest-runner -d %APPVEYOR_BUILD_FOLDER%\build profile:qt6 config:release
@@ -492,7 +492,7 @@ for:
 
   init:
     - export QTDIR="$QT"
-    - export PATH="$QTDIR/bin:$HOME/.local/bin:$PATH"
+    - export PATH="$QTDIR/bin:$HOME/.local/bin:`python3 -m site --user-base`/bin:$PATH"
     - echo $PATH
     - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
     - sudo xcode-select -p
