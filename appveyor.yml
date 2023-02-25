@@ -357,31 +357,31 @@ for:
           & qbs-setup-toolchains.exe --type msvc $env:MSVC_PATH\cl.exe $env:COMPILER
           & qbs-config.exe profiles.qt6.baseProfile $env:COMPILER
           $profile = @"
-          [settings]
-          build_type=Release
-          compiler=msvc
-          compiler.cppstd=17
-          compiler.runtime=dynamic
-          compiler.runtime_type=Release
-          compiler.version=192
-          os=Windows
-          $arch
-          "@
+        [settings]
+        build_type=Release
+        compiler=msvc
+        compiler.cppstd=17
+        compiler.runtime=dynamic
+        compiler.runtime_type=Release
+        compiler.version=192
+        os=Windows
+        $arch
+        "@
         }
         else
         {
           & qbs-setup-toolchains.exe --type mingw $env:MINGW_PATH\g++.exe $env:COMPILER
           & qbs-config.exe  profiles.qt6.baseProfile $env:COMPILER
           $profile = @"
-          [settings]
-          build_type=Release
-          compiler=gcc
-          compiler.cppstd=gnu17
-          compiler.libcxx=libstdc++11
-          compiler.version=$env:GCC_VERSION
-          os=Windows
-          $arch
-          "@
+        [settings]
+        build_type=Release
+        compiler=gcc
+        compiler.cppstd=gnu17
+        compiler.libcxx=libstdc++11
+        compiler.version=$env:GCC_VERSION
+        os=Windows
+        $arch
+        "@
         }
         $profile | Out-File -FilePath "$env:HOMEPATH\.conan2\profiles\valentina"
     - qbs-config --list profiles
