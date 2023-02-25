@@ -346,23 +346,22 @@ for:
     - dir "C:\Qt\Tools"
     - conan config home
     - type %HOMEPATH%\.conan2\settings.yml
-    - conan profile detect --name valentina
     - ps: |
         if ($env:ARCH -eq "x64") {
           $arch="arch=x86_64"
         } else {
           $arch="arch=x86"
         }
-
         if ($env:COMPILER -eq "msvc")
         {
           & qbs-setup-toolchains.exe --type msvc $env:MSVC_PATH\cl.exe $env:COMPILER
           & qbs-config.exe profiles.qt6.baseProfile $env:COMPILER
-
           $profile = @"
           [settings]
           build_type=Release
           compiler=msvc
+          compiler.cppstd=17
+          compiler.runtime=dynamic
           compiler.runtime_type=Release
           compiler.version=192
           os=Windows
@@ -373,7 +372,6 @@ for:
         {
           & qbs-setup-toolchains.exe --type mingw $env:MINGW_PATH\g++.exe $env:COMPILER
           & qbs-config.exe  profiles.qt6.baseProfile $env:COMPILER
-
           $profile = @"
           [settings]
           build_type=Release
@@ -385,9 +383,7 @@ for:
           $arch
           "@
         }
-
         $profile | Out-File -FilePath "$env:HOMEPATH\.conan2\profiles\valentina"
-        
     - qbs-config --list profiles
 
   build_script:
@@ -512,6 +508,8 @@ for:
     - brew update > /dev/null
     - rm '/usr/local/bin/ccmake'
     - rm '/usr/local/bin/cmake'
+    - rm '/usr/local/bin/cpack'
+    - rm '/usr/local/bin/ctest'
     - brew install --force coreutils qbs cmake
     - |
       if [[ "$ENABLE_CONAN" == "true" ]]; then
