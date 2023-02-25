@@ -163,14 +163,14 @@ macos_task_template: &MACOS_TASK_TEMPLATE
   pip_cache:
     folder: ${PIP_CACHE_DIR}
   install_script:
-    - echo $PATH
-    - export PATH="${HOME}/.local/bin:`python3 -m site --user-base`/bin:$PATH"
-    - echo $PATH
     - clang --version
     - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
     - sudo xcode-select -p
     - brew update > /dev/null
     - brew install --force qt6 coreutils ccache qbs cmake
+    - echo $PATH
+    - export PATH="${HOME}/.local/bin:`python3 -m site --user-base`/bin:$PATH"
+    - echo $PATH
     - chmod -R 755 /opt/homebrew/opt/qt6/*
     - python3 --version
     - pip3 install --user --upgrade pip dropbox conan==1.59

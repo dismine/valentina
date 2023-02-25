@@ -501,9 +501,6 @@ for:
       - job_name: MacOS_10_15_Qt_5_15 (qbs, singlebundle)
 
   init:
-    - export QTDIR="$QT"
-    - export PATH="$QTDIR/bin:$HOME/.local/bin:`python3 -m site --user-base`/bin:$PATH"
-    - echo $PATH
     - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
     - sudo xcode-select -p
     - sudo xcode-select -s /Applications/Xcode-$XCODE_VERSION.app
@@ -514,6 +511,9 @@ for:
     - rm '/usr/local/bin/cpack'
     - rm '/usr/local/bin/ctest'
     - brew install --force coreutils qbs cmake
+    - export QTDIR="$QT"
+    - export PATH="$QTDIR/bin:$HOME/.local/bin:`python3 -m site --user-base`/bin:$PATH"
+    - echo $PATH
     - python3 --version
     - |
       if [[ "$ENABLE_CONAN" == "true" ]]; then
