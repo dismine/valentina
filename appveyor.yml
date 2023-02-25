@@ -346,39 +346,53 @@ for:
     - dir "C:\Qt\Tools"
     - conan config home
     - type %HOMEPATH%\.conan2\settings.yml
-    - conan profile new valentina
+    - conan profile detect --name valentina
     - ps: |
+        if ($env:ARCH -eq "x64") {
+          $arch="arch=x86_64"
+        } else {
+          $arch="arch=x86"
+        }
+
         if ($env:COMPILER -eq "msvc")
         {
           & qbs-setup-toolchains.exe --type msvc $env:MSVC_PATH\cl.exe $env:COMPILER
           & qbs-config.exe profiles.qt6.baseProfile $env:COMPILER
-          & conan profile update settings.compiler=msvc valentina
-          & conan profile update settings.compiler.cppstd=17 valentina
-          & conan profile update settings.compiler.version=192 valentina
-          & conan profile update settings.compiler.runtime=static valentina
-          & conan profile update settings.compiler.runtime_type=Release valentina
+
+          $profile = @"
+          [settings]
+          build_type=Release
+          compiler=msvc
+          compiler.runtime_type=Release
+          compiler.version=192
+          os=Windows
+          $arch
+          "@
         }
         else
         {
           & qbs-setup-toolchains.exe --type mingw $env:MINGW_PATH\g++.exe $env:COMPILER
           & qbs-config.exe  profiles.qt6.baseProfile $env:COMPILER
-          & conan profile update settings.compiler=gcc valentina
-          & conan profile update settings.compiler.cppstd=gnu17 valentina
-          & conan profile update settings.compiler.libcxx=libstdc++11 valentina
-          & conan profile update settings.compiler.version=$env:GCC_VERSION valentina
+
+          $profile = @"
+          [settings]
+          build_type=Release
+          compiler=gcc
+          compiler.cppstd=gnu17
+          compiler.libcxx=libstdc++11
+          compiler.version=$env:GCC_VERSION
+          os=Windows
+          $arch
+          "@
         }
-        if ($env:ARCH -eq "x64") {
-          & conan profile update settings.arch=x86_64 valentina
-        } else {
-          & conan profile update settings.arch=x86 valentina
-        }
-    - conan profile update settings.os=Windows valentina
-    - conan profile update settings.build_type=Release valentina
+
+        $profile | Out-File -FilePath "$env:HOMEPATH\.conan2\profiles\valentina"
+        
     - qbs-config --list profiles
 
   build_script:
     - conan install . -s os=Windows --build=xerces-c/3.2.4
-    - qbs build -f valentina.qbs -d %APPVEYOR_BUILD_FOLDER%\build --command-echo-mode command-line config:release qbs.installRoot:%APPVEYOR_BUILD_FOLDER%\build\install-root\valentina profile:qt6 project.enableConan:true modules.buildconfig.enableCcache:false
+    - qbs build -f valentina.qbs -d %APPVEYOR_BUILD_FOLDER%\build --command-echo-mode command-line config:release qbs.installRoot:%APPVEYOR_BUILD_FOLDER%\build\install-root\valentina profile:qt6 project.enableConan:true modules.buildconfig.enableCcache:false project.conanProfiles:[valentina]
   
   test_script:
     - qbs -p autotest-runner -d %APPVEYOR_BUILD_FOLDER%\build profile:qt6 config:release
@@ -497,6 +511,7 @@ for:
     - sudo xcode-select -p
     - brew update > /dev/null
     - rm '/usr/local/bin/ccmake'
+    - rm '/usr/local/bin/cmake'
     - brew install --force coreutils qbs cmake
     - |
       if [[ "$ENABLE_CONAN" == "true" ]]; then

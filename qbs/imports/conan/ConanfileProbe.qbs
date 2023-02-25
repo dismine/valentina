@@ -45,6 +45,7 @@ Probe {
     property var options
     property var settings
     property bool verbose: false
+    property stringList profiles: []
 
     // Output
     property var dependencies
@@ -104,6 +105,10 @@ Probe {
 
         for (var i = 0; i < additionalArguments.length; i++)
             args.push(additionalArguments[i]);
+
+        for (var i = 0; i < profiles.length; i++) {
+            args = args.concat(["-pr", profiles[i]]);
+        }
 
         generatedFilesPath = FileInfo.cleanPath(_projectBuildDirectory +
                                                   "/genconan/" +

@@ -6,6 +6,7 @@ Project {
 
     property bool enableConan: false
     property string minimumMacosVersion: undefined
+    property stringList conanProfiles: []
 
     // Temporary probe until qbs doesn't support conan 2.0
     ConanfileProbe {
@@ -13,6 +14,7 @@ Project {
         condition: enableConan
         conanfilePath: project.sourceDirectory + "/conanfile.py"
         verbose: true
+        profiles: conanProfiles
     }
 
     references: [
