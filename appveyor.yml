@@ -344,6 +344,7 @@ for:
     - dir "C:\Qt\Tools"
     - conan config home
     - type %HOMEPATH%\.conan2\settings.yml
+    - conan profile detect
     - conan profile detect --name valentina
     - ps: |
         if ($env:ARCH -eq "x64") {
