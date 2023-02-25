@@ -164,7 +164,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     folder: ${PIP_CACHE_DIR}
   install_script:
     - echo $PATH
-    - export PATH="$HOME/.local/bin:`python3 -m site --user-base`/bin:$PATH"
+    - export PATH="${HOME}/.local/bin:`python3 -m site --user-base`/bin:$PATH"
     - echo $PATH
     - clang --version
     - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
@@ -180,6 +180,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - which qmake
     - qbs --version
   build_script:
+    - echo $PATH
     - pwd
     - conan install . -s os=Macos -s os.version=${MACOS_DEPLOYMENT_TARGET} --build=xerces-c/3.2.4
     - qbs setup-toolchains --detect
