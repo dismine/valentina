@@ -28,6 +28,11 @@
 #ifndef VTEXTCODEC_H
 #define VTEXTCODEC_H
 
+#include <QStringConverter>
+#include <QtCore/qcontainerfwd.h>
+
+class QByteArray;
+
 class VTextCodec
 {
 public:
