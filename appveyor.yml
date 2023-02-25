@@ -44,7 +44,7 @@ environment:
     - job_name: Windows_Qt_6_4_(GCC_x64)
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       COMPILER: mingw
-      QT: Qt\6.4.0\mingw_64
+      QT: Qt\6.4\mingw_64
       QT_VERSION: Qt6_4
       BUILD_SYSTEM: "qbs"
       GCC_VERSION: 11.2
@@ -82,7 +82,7 @@ environment:
     - job_name: MacOS_12_Qt_6_4 (multibundle)
       APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
       COMPILER: clang
-      QT: $HOME/Qt/6.4.0/macos/bin
+      QT: $HOME/Qt/6.4/macos
       QT_VERSION: Qt6_4
       BUILD_SYSTEM: "qbs"
       ARCH: x64
@@ -96,7 +96,7 @@ environment:
     - job_name: MacOS_12_Qt_6_4 (singlebundle)
       APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
       COMPILER: clang
-      QT: $HOME/Qt/6.4.0/macos
+      QT: $HOME/Qt/6.4/macos
       QT_VERSION: Qt6_4
       BUILD_SYSTEM: "qbs"
       ARCH: x64
@@ -110,7 +110,7 @@ environment:
     - job_name: MacOS_10_15_Qt_5_15 (qbs, multibundle)
       APPVEYOR_BUILD_WORKER_IMAGE: macos-catalina
       COMPILER: clang
-      QT: $HOME/Qt/5.15.2/clang_64
+      QT: $HOME/Qt/5.15/clang_64
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "qbs"
       ARCH: x64
@@ -124,7 +124,7 @@ environment:
     - job_name: MacOS_10_15_Qt_5_15 (qbs, singlebundle)
       APPVEYOR_BUILD_WORKER_IMAGE: macos-catalina
       COMPILER: clang
-      QT: $HOME/Qt/5.15.2/clang_64
+      QT: $HOME/Qt/5.15/clang_64
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "qbs"
       ARCH: x64
@@ -150,7 +150,7 @@ environment:
     - job_name: Windows_Qt_6_4_(MSVC_x64)
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       COMPILER: msvc
-      QT: Qt\6.4.0\msvc2019_64
+      QT: Qt\6.4\msvc2019_64
       QT_VERSION: Qt6_4
       BUILD_SYSTEM: "qbs"
       MSVC_PATH: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\x64"
@@ -162,7 +162,7 @@ environment:
     - job_name: Windows_Qt_6_4_(MSVC_arm64)
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       COMPILER: msvc
-      QT: Qt\6.4.0\msvc2019_arm64
+      QT: Qt\6.4\msvc2019_arm64
       QT_VERSION: Qt6_4
       BUILD_SYSTEM: "qbs"
       MSVC_PATH: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\arm64"
@@ -222,7 +222,7 @@ environment:
     - job_name: MacOS_10_15_Qt_5_15 (make)
       APPVEYOR_BUILD_WORKER_IMAGE: macos-catalina
       COMPILER: clang
-      QT: $HOME/Qt/5.15.2/clang_64
+      QT: $HOME/Qt/5.15/clang_64
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "make"
       ARCH: x64
@@ -344,6 +344,7 @@ for:
     - dir "C:\Qt\Tools"
     - conan config home
     - type %HOMEPATH%\.conan2\settings.yml
+    - conan profile detect --name valentina
     - ps: |
         if ($env:ARCH -eq "x64") {
           $arch="arch=x86_64"
