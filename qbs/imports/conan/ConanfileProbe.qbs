@@ -28,7 +28,6 @@
 **
 ****************************************************************************/
 
-import qbs
 import qbs.Process
 import qbs.File
 import qbs.FileInfo
@@ -41,7 +40,7 @@ Probe {
     property path conanfilePath
     property path packageReference
     property path executable: "conan"
-    property stringList generators: []
+    property stringList generators: ["json"]
     property var options
     property var settings
     property bool verbose: false
@@ -98,7 +97,8 @@ Probe {
             });
         }
 
-        args = args.concat(["-f", "json"]);
+        if (!generators.contains("json"))
+            generators.push("json");
 
         for (var i = 0; i < generators.length; i++)
             args = args.concat(["-g", generators[i]]);
@@ -114,7 +114,7 @@ Probe {
                                                   "/genconan/" +
                                                   Utilities.getHash(args.join()));
 
-        args = args.concat(["-of", generatedFilesPath]);
+        args = args.concat(["-if", generatedFilesPath]);
         var p = new Process();
         p.start(executable, args);
         while (!p.waitForFinished(500)) {

@@ -329,7 +329,7 @@ for:
     # Install the build dependencies of the project.
     - (python -m pip install --upgrade pip)
     - if "%DEPLOY%" == "true" (python -m pip install dropbox)
-    - python -m pip install conan
+    - python -m pip install conan==1.59
     # Trick qmake to not work through MSYS
     - del /F "C:\Program Files\Git\usr\bin\sh.exe"
     - del /F "C:\Program Files\Git\bin\sh.exe"
@@ -342,53 +342,38 @@ for:
     - qbs-setup-qt %QTDIR%\bin\qmake.exe qt6
     - qbs-config defaultProfile qt6
     - dir "C:\Qt\Tools"
-    - conan config home
-    - type %HOMEPATH%\.conan2\settings.yml
-    - conan profile detect
-    - conan profile detect --name valentina
+    - conan profile new valentina
+    - conan profile update settings.build_type=Release valentina
+    - conan profile update settings.os=Windows valentina
     - ps: |
         if ($env:ARCH -eq "x64") {
-          $arch="arch=x86_64"
+          & conan profile update settings.arch=x86_64 valentina
         } else {
-          $arch="arch=x86"
+          & conan profile update settings.arch=x86 valentina
         }
         if ($env:COMPILER -eq "msvc")
         {
           & qbs-setup-toolchains.exe --type msvc $env:MSVC_PATH\cl.exe $env:COMPILER
           & qbs-config.exe profiles.qt6.baseProfile $env:COMPILER
-          $profile = @"
-        [settings]
-        build_type=Release
-        compiler=msvc
-        compiler.cppstd=17
-        compiler.runtime=dynamic
-        compiler.runtime_type=Release
-        compiler.version=192
-        os=Windows
-        $arch
-        "@
+          & conan profile update settings.compiler=msvc valentina
+          & conan profile update settings.compiler.cppstd=17 valentina
+          & conan profile update settings.compiler.runtime=dynamic valentina
+          & conan profile update settings.compiler.runtime_type=Release valentina
+          & conan profile update settings.compiler.version=192 valentina
         }
         else
         {
           & qbs-setup-toolchains.exe --type mingw $env:MINGW_PATH\g++.exe $env:COMPILER
           & qbs-config.exe  profiles.qt6.baseProfile $env:COMPILER
-          $profile = @"
-        [settings]
-        build_type=Release
-        compiler=gcc
-        compiler.cppstd=gnu17
-        compiler.libcxx=libstdc++11
-        compiler.version=$env:GCC_VERSION
-        os=Windows
-        $arch
-        "@
+          & conan profile update settings.compiler=gcc valentina
+          & conan profile update settings.compiler.cppstd=gnu17 valentina
+          & conan profile update settings.compiler.libcxx=libstdc++11 valentina
+          & conan profile update settings.compiler.version=$env:GCC_VERSION valentina
         }
-        $profile | Out-File -FilePath "$env:HOMEPATH\.conan2\profiles\valentina"
-    - conan profile show -pr valentina
     - qbs-config --list profiles
 
   build_script:
-    - conan install . -s os=Windows --build=xerces-c/[~3.2] -pr valentina
+    - conan install . -s os=Windows --build=xerces-c/3.2.4 -pr valentina
     - qbs build -f valentina.qbs -d %APPVEYOR_BUILD_FOLDER%\build --command-echo-mode command-line config:release qbs.installRoot:%APPVEYOR_BUILD_FOLDER%\build\install-root\valentina profile:qt6 project.enableConan:true modules.buildconfig.enableCcache:false project.conanProfiles:[valentina]
   
   test_script:
@@ -502,8 +487,8 @@ for:
       - job_name: MacOS_10_15_Qt_5_15 (qbs, singlebundle)
 
   init:
-    - QTDIR=$QT
-    - PATH="$QTDIR/bin:$PATH"
+    - export QTDIR=$QT
+    - export PATH="$QTDIR/bin:$PATH"
     - echo $PATH
     - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
     - sudo xcode-select -p
@@ -515,12 +500,12 @@ for:
     - rm '/usr/local/bin/cpack'
     - rm '/usr/local/bin/ctest'
     - brew install --force coreutils qbs cmake
+    - python3 --version
     - |
       if [[ "$ENABLE_CONAN" == "true" ]]; then
-        brew install --force conan;
+        pip3 install --user --upgrade conan==1.59;
         conan --version
       fi
-    - python3 --version
     - pip3 install --user --upgrade pip dropbox
     - clang --version
     - qmake --version
@@ -534,7 +519,7 @@ for:
     - pwd
     - |
       if [[ "$ENABLE_CONAN" == "true" ]]; then
-        conan install . -s os=Macos -s os.version=${MACOS_DEPLOYMENT_TARGET} --build=xerces-c/[~3.2]
+        conan install . -s os=Macos -s os.version=${MACOS_DEPLOYMENT_TARGET} --build=xerces-c/3.2.4
       fi
     - qbs setup-toolchains --detect
     - qbs config --list profiles
