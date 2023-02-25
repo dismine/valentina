@@ -96,7 +96,7 @@ environment:
     - job_name: MacOS_12_Qt_6_4 (singlebundle)
       APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
       COMPILER: clang
-      QT: $HOME/Qt/6.4.0/macos/bin
+      QT: $HOME/Qt/6.4.0/macos
       QT_VERSION: Qt6_4
       BUILD_SYSTEM: "qbs"
       ARCH: x64
@@ -110,7 +110,7 @@ environment:
     - job_name: MacOS_10_15_Qt_5_15 (qbs, multibundle)
       APPVEYOR_BUILD_WORKER_IMAGE: macos-catalina
       COMPILER: clang
-      QT: $HOME/Qt/5.15.2/clang_64/bin
+      QT: $HOME/Qt/5.15.2/clang_64
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "qbs"
       ARCH: x64
@@ -124,7 +124,7 @@ environment:
     - job_name: MacOS_10_15_Qt_5_15 (qbs, singlebundle)
       APPVEYOR_BUILD_WORKER_IMAGE: macos-catalina
       COMPILER: clang
-      QT: $HOME/Qt/5.15.2/clang_64/bin
+      QT: $HOME/Qt/5.15.2/clang_64
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "qbs"
       ARCH: x64
@@ -222,7 +222,7 @@ environment:
     - job_name: MacOS_10_15_Qt_5_15 (make)
       APPVEYOR_BUILD_WORKER_IMAGE: macos-catalina
       COMPILER: clang
-      QT: $HOME/Qt/5.15.2/clang_64/bin
+      QT: $HOME/Qt/5.15.2/clang_64
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "make"
       ARCH: x64
@@ -304,7 +304,7 @@ for:
     # Path before 
     - path
     - set QTDIR=C:\%QT%
-    - set PATH=%QTDIR%\bin;%QTDIR%\include;C:\Tools\PsTools;C:\Program Files\Git\cmd;C:\Program Files\Git\usr\bin;C:\Program Files\Git LFS;C:\Tools\GitVersion;C:\Windows\system32;C:\Windows;C:\Windows\System32\WindowsPowerShell\v1.0\
+    - set PATH=%QTDIR%\bin;%QTDIR%\include;C:\Qt\Tools\QtCreator\bin;C:\Tools\PsTools;C:\Program Files\Git\cmd;C:\Program Files\Git\usr\bin;C:\Program Files\Git LFS;C:\Tools\GitVersion;C:\Windows\system32;C:\Windows;C:\Windows\System32\WindowsPowerShell\v1.0\;%PYTHON%;%PYTHON%\Scripts
     # Set VC variables for the platform
     - ps: |
         if ($env:COMPILER -eq "msvc") {
@@ -322,8 +322,6 @@ for:
             }
           }   
         }
-    - set PATH=C:\Qt\Tools\QtCreator\bin;%PATH%
-    - set PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
     # Path after
     - path
     # Check that we have the expected version for Python
@@ -335,7 +333,7 @@ for:
     # Trick qmake to not work through MSYS
     - del /F "C:\Program Files\Git\usr\bin\sh.exe"
     - del /F "C:\Program Files\Git\bin\sh.exe"
-    - qmake -v
+    - qmake.exe -v
     - qbs --version
 
   before_build:
@@ -501,6 +499,9 @@ for:
       - job_name: MacOS_10_15_Qt_5_15 (qbs, singlebundle)
 
   init:
+    - QTDIR=$QT
+    - PATH="$QTDIR/bin:$PATH"
+    - echo $PATH
     - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
     - sudo xcode-select -p
     - sudo xcode-select -s /Applications/Xcode-$XCODE_VERSION.app
@@ -534,7 +535,7 @@ for:
       fi
     - qbs setup-toolchains --detect
     - qbs config --list profiles
-    - qbs setup-qt ${QT}/qmake qt6
+    - qbs setup-qt ${QTDIR}/bin/qmake qt6
     - qbs config defaultProfile qt6
     - qbs config profiles.qt6.baseProfile clang
     - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build --command-echo-mode command-line config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt6 project.enableConan:true project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:false
@@ -548,13 +549,16 @@ for:
       - job_name: MacOS_10_15_Qt_5_15 (make)
 
   init:
+    - QTDIR=$QT
+    - PATH="$QTDIR/bin:$PATH"
+    - echo $PATH
     - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
     - sudo xcode-select -p
     - sudo xcode-select -s /Applications/Xcode-$XCODE_VERSION.app
     - sudo xcode-select -p
     - clang --version
-    - ${QT}/qmake --version
-    - which ${QT}/qmake
+    - qmake --version
+    - which qmake
 
   before_build:
     - cd ${APPVEYOR_BUILD_FOLDER}
@@ -563,7 +567,7 @@ for:
 
   build_script:
     - pwd
-    - ${QT}/qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=checkWarnings CONFIG+=noTests CONFIG+=no_ccache
+    - qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=checkWarnings CONFIG+=noTests CONFIG+=no_ccache
     - make -j$(nproc)
 
 #---------------------------------#
