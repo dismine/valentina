@@ -47,6 +47,7 @@ environment:
       QT: Qt\6.4\mingw_64
       QT_VERSION: Qt6_4
       BUILD_SYSTEM: "qbs"
+      ENABLE_PCH: false
       GCC_VERSION: 11.2
       MINGW_PATH: C:\Qt\Tools\mingw1120_64\bin
       ARCH: x64
@@ -60,6 +61,7 @@ environment:
       QT: Qt\5.15\mingw81_32
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "qbs"
+      ENABLE_PCH: true
       GCC_VERSION: 8.1
       MINGW_PATH: C:\Qt\Tools\mingw810_32\bin
       ARCH: x86
@@ -153,6 +155,7 @@ environment:
       QT: Qt\6.4\msvc2019_64
       QT_VERSION: Qt6_4
       BUILD_SYSTEM: "qbs"
+      ENABLE_PCH: true
       MSVC_PATH: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\x64"
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
@@ -165,6 +168,7 @@ environment:
       QT: Qt\6.4\msvc2019_arm64
       QT_VERSION: Qt6_4
       BUILD_SYSTEM: "qbs"
+      ENABLE_PCH: true
       MSVC_PATH: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\arm64"
       ARCH: arm64
       PYTHON: "C:\\Python311-x64"
@@ -177,6 +181,7 @@ environment:
       QT: Qt\5.15\mingw81_64
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "qbs"
+      ENABLE_PCH: true
       GCC_VERSION: 8.1
       MINGW_PATH: C:\Qt\Tools\mingw810_64\bin
       ARCH: x64
@@ -189,6 +194,7 @@ environment:
       COMPILER: msvc
       QT: Qt\5.15\msvc2019_64
       BUILD_SYSTEM: "qbs"
+      ENABLE_PCH: true
       MSVC_PATH: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\x64"
       VSVER: 16
       ARCH: x64
@@ -311,12 +317,16 @@ for:
           if ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2022") {
             if ($env:ARCH -eq "x64") {
               & "C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
+            } elseif ($env:ARCH -eq "arm64") {
+              & "C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvarsamd64_arm64.bat"
             } else {
               & "C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars32.bat"
             }
           } elseif ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2019") {
             if ($env:ARCH -eq "x64") {
               & "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
+            } elseif ($env:ARCH -eq "arm64") {
+              & "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsamd64_arm64.bat"
             } else {
               & "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars32.bat"
             }
@@ -378,7 +388,7 @@ for:
 
   build_script:
     - conan install . -s os=Windows --build=xerces-c/3.2.4 -pr valentina
-    - qbs build -f valentina.qbs -d %APPVEYOR_BUILD_FOLDER%\build --command-echo-mode command-line config:release qbs.installRoot:%APPVEYOR_BUILD_FOLDER%\build\install-root\valentina profile:qt6 project.enableConan:true modules.buildconfig.enableCcache:false project.conanProfiles:valentina
+    - qbs build -f valentina.qbs -d %APPVEYOR_BUILD_FOLDER%\build --command-echo-mode command-line config:release qbs.installRoot:%APPVEYOR_BUILD_FOLDER%\build\install-root\valentina profile:qt6 project.enableConan:true modules.buildconfig.enableCcache:false project.conanProfiles:valentina modules.buildconfig.enablePCH:${ENABLE_PCH}
   
   test_script:
     - qbs -p autotest-runner -d %APPVEYOR_BUILD_FOLDER%\build profile:qt6 config:release
