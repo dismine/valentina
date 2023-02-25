@@ -164,7 +164,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     folder: ${PIP_CACHE_DIR}
   install_script:
     - echo $PATH
-    - export PATH="/user/local/bin:$PATH"
+    - export PATH="$HOME/.local/bin:$PATH"
     - echo $PATH
     - clang --version
     - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'

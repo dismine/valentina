@@ -321,6 +321,9 @@ for:
               & "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars32.bat"
             }
           }   
+        } else {
+          $env:CC = "gcc.exe"
+          $env:CXX = "g++.exe"
         }
     # Path after
     - path
@@ -488,7 +491,7 @@ for:
 
   init:
     - export QTDIR="$QT"
-    - export PATH="$QTDIR/bin:/user/local/bin:$PATH"
+    - export PATH="$QTDIR/bin:$HOME/.local/bin:$PATH"
     - echo $PATH
     - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
     - sudo xcode-select -p
