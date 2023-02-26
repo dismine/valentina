@@ -49,7 +49,7 @@ environment:
       BUILD_SYSTEM: "qbs"
       ENABLE_PCH: false
       GCC_VERSION: 11.2
-      MINGW_PATH: C:\Qt\Tools\mingw810_32\bin
+      MINGW_PATH: C:\Qt\Tools\mingw810_64\bin
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows10+"
