@@ -543,7 +543,7 @@ for:
     - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build --command-echo-mode command-line config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt6 project.enableConan:true project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:false
 
   deploy_script:
-    - CIRRUS_WORKING_DIR=${APPVEYOR_BUILD_FOLDER CIRRUS_CHANGE_IN_REPO=${APPVEYOR_REPO_COMMIT} CIRRUS_BRANCH=${APPVEYOR_REPO_BRANCH} ${APPVEYOR_BUILD_FOLDER}/scripts/cirrus-deploy.sh
+    - CIRRUS_WORKING_DIR=${APPVEYOR_BUILD_FOLDER} CIRRUS_CHANGE_IN_REPO=${APPVEYOR_REPO_COMMIT} CIRRUS_BRANCH=${APPVEYOR_REPO_BRANCH} ${APPVEYOR_BUILD_FOLDER}/scripts/cirrus-deploy.sh
 
 -
   matrix:
