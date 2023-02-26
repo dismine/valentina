@@ -84,7 +84,7 @@ environment:
     - job_name: MacOS_12_Qt_6_4 (multibundle)
       APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
       COMPILER: clang
-      QT: ${HOME}/Qt/6.4/macos
+      QT: Qt/6.4/macos
       QT_VERSION: Qt6_4
       BUILD_SYSTEM: "qbs"
       ARCH: x64
@@ -98,7 +98,7 @@ environment:
     - job_name: MacOS_12_Qt_6_4 (singlebundle)
       APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
       COMPILER: clang
-      QT: ${HOME}/Qt/6.4/macos
+      QT: Qt/6.4/macos
       QT_VERSION: Qt6_4
       BUILD_SYSTEM: "qbs"
       ARCH: x64
@@ -112,7 +112,7 @@ environment:
     - job_name: MacOS_10_15_Qt_5_15 (qbs, multibundle)
       APPVEYOR_BUILD_WORKER_IMAGE: macos-catalina
       COMPILER: clang
-      QT: ${HOME}/Qt/5.15/clang_64
+      QT: Qt/5.15/clang_64
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "qbs"
       ARCH: x64
@@ -126,7 +126,7 @@ environment:
     - job_name: MacOS_10_15_Qt_5_15 (qbs, singlebundle)
       APPVEYOR_BUILD_WORKER_IMAGE: macos-catalina
       COMPILER: clang
-      QT: ${HOME}/Qt/5.15/clang_64
+      QT: Qt/5.15/clang_64
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "qbs"
       ARCH: x64
@@ -228,7 +228,7 @@ environment:
     - job_name: MacOS_10_15_Qt_5_15 (make)
       APPVEYOR_BUILD_WORKER_IMAGE: macos-catalina
       COMPILER: clang
-      QT: ${HOME}/Qt/5.15/clang_64
+      QT: Qt/5.15/clang_64
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "make"
       ARCH: x64
@@ -511,7 +511,7 @@ for:
     - rm '/usr/local/bin/cpack'
     - rm '/usr/local/bin/ctest'
     - brew install --force coreutils qbs cmake
-    - export QTDIR="$QT"
+    - export QTDIR="${HOME}/${QT}"
     - export PATH="$QTDIR/bin:$HOME/.local/bin:`python3 -m site --user-base`/bin:$PATH"
     - echo $PATH
     - python3 --version
@@ -551,7 +551,7 @@ for:
       - job_name: MacOS_10_15_Qt_5_15 (make)
 
   init:
-    - export QTDIR="$QT"
+    - export QTDIR="${HOME}/${QT}"
     - export PATH="$QTDIR/bin:$PATH"
     - echo $PATH
     - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
