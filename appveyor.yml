@@ -513,11 +513,7 @@ for:
     - sudo xcode-select -s /Applications/Xcode-$XCODE_VERSION.app
     - sudo xcode-select -p
     - brew update > /dev/null
-    - rm '/usr/local/bin/ccmake'
-    - rm '/usr/local/bin/cmake'
-    - rm '/usr/local/bin/cpack'
-    - rm '/usr/local/bin/ctest'
-    - brew install --force coreutils qbs cmake
+    - brew install --force qbs
     - export QTDIR="${HOME}/${QT}"
     - export PATH="$QTDIR/bin:$HOME/.local/bin:`python3 -m site --user-base`/bin:$PATH"
     - echo $PATH
