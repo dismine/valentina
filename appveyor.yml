@@ -44,11 +44,13 @@ environment:
     - job_name: Windows_Qt_6_4_(GCC_x64)
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       COMPILER: mingw
+      COMPILER_CPPSTD: gnu17
+      COMPILER_LIBCXX: libstdc++11
       QT: Qt\6.4\mingw_64
       QT_VERSION: Qt6_4
       BUILD_SYSTEM: "qbs"
       ENABLE_PCH: false
-      GCC_VERSION: 11.2
+      GCC_VERSION: 8.1
       MINGW_PATH: C:\Qt\Tools\mingw810_64\bin
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
@@ -58,6 +60,8 @@ environment:
     - job_name: Windows_Qt_5_15_(qbs_GCC_x86)
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       COMPILER: mingw
+      COMPILER_CPPSTD: gnu17
+      COMPILER_LIBCXX: libstdc++11
       QT: Qt\5.15\mingw81_32
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "qbs"
@@ -178,6 +182,8 @@ environment:
     - job_name: Windows_Qt_5_15_(qbs_GCC_x64)
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       COMPILER: mingw
+      COMPILER_CPPSTD: gnu17
+      COMPILER_LIBCXX: libstdc++11
       QT: Qt\5.15\mingw81_64
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "qbs"
@@ -380,8 +386,8 @@ for:
           & qbs-setup-toolchains.exe --type mingw $env:MINGW_PATH\g++.exe $env:COMPILER
           & qbs-config.exe  profiles.qt6.baseProfile $env:COMPILER
           & conan profile update settings.compiler=gcc valentina
-          & conan profile update settings.compiler.cppstd=gnu17 valentina
-          & conan profile update settings.compiler.libcxx=libstdc++11 valentina
+          & conan profile update settings.compiler.cppstd=$env:COMPILER_CPPSTD valentina
+          & conan profile update settings.compiler.libcxx=$env:COMPILER_LIBCXX valentina
           & conan profile update settings.compiler.version=$env:GCC_VERSION valentina
         }
     - qbs-config --list profiles
