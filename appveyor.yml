@@ -353,6 +353,7 @@ for:
     # Trick qmake to not work through MSYS
     - del /F "C:\Program Files\Git\usr\bin\sh.exe"
     - del /F "C:\Program Files\Git\bin\sh.exe"
+    - dir "%QTDIR%\bin"
     - qmake.exe -v
     - qbs --version
 
@@ -430,9 +431,9 @@ for:
         if ($env:COMPILER -eq "msvc") {
           if ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2022") {
             if ($env:ARCH -eq "x64") {
-              & "C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
+              & "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
             } else {
-              & "C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars32.bat"
+              & "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars32.bat"
             }
           } elseif ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2019") {
             if ($env:ARCH -eq "x64") {
@@ -448,10 +449,10 @@ for:
             }
           } elseif ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2015") {
             if ($env:ARCH -eq "x64") {
-              '& "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64'
-              '& "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64'
+              & "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
+              & "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
             } else {
-              '& "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86'
+              & "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86
             }
           }  
         }
