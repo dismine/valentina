@@ -93,7 +93,7 @@ environment:
       BUILD_SYSTEM: "qbs"
       ARCH: x64
       XCODE_VERSION: 13.4.1
-      PLATFORM: "macOS11+"
+      PLATFORM: "macOS_11+"
       MACOS_DEPLOYMENT_TARGET: 11.0
       MULTI_BUNDLE: true
       ENABLE_CONAN: true
@@ -107,7 +107,7 @@ environment:
       BUILD_SYSTEM: "qbs"
       ARCH: x64
       XCODE_VERSION: 13.4.1
-      PLATFORM: "macOS11+"
+      PLATFORM: "macOS_11+"
       MACOS_DEPLOYMENT_TARGET: 11.0
       MULTI_BUNDLE: false
       ENABLE_CONAN: true
