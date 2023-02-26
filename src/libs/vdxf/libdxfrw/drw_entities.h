@@ -20,6 +20,7 @@
 #include <list>
 #include <QtGlobal>
 #include "drw_base.h"
+#include <algorithm>
 
 class dxfReader;
 class DRW_Polyline;
