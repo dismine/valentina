@@ -33,6 +33,43 @@ Project {
             if (qbs.targetOS.contains("unix") && !qbs.targetOS.contains("macos")) {
                 env.push("LD_LIBRARY_PATH=" + qbs.installRoot + qbs.installPrefix + "/" + buildconfig.libDirName + "/valentina");
             }
+            else if (qbs.targetOS.contains("windows")) {
+                // PATH
+                var path = "";
+                for (var i = 0; i < env.length; ++i) {
+                    if (env[i].startsWith("PATH=")) {
+                        path = env[i].substring(5);
+                        break;
+                    }
+                }
+
+                var fullInstallDir = FileInfo.joinPaths(qbs.installRoot, qbs.installPrefix);
+                if (path.length === 0) {
+                    path = fullInstallDir;
+                } else {
+                    path = fullInstallDir + ";" + path;
+                }
+
+                var arrayElem = "PATH=" + path;
+                if (i < env.length)
+                    env[i] = arrayElem;
+                else
+                    env.push(arrayElem);
+
+                // QT_QPA_PLATFORM_PLUGIN_PATH
+                for (var i = 0; i < env.length; ++i) {
+                    if (env[i].startsWith("QT_QPA_PLATFORM_PLUGIN_PATH=")) {
+                        break;
+                    }
+                }
+
+                if (i >= env.length) {
+                    var pluginsPath = "QT_QPA_PLATFORM_PLUGIN_PATH=" + Qt.core.pluginPath
+                    env.push(pluginsPath);
+                }
+
+                console.info("env_after: " + env);
+            }
             return env;
         }
     }
