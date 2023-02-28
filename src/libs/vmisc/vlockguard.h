@@ -74,7 +74,7 @@ public:
 
 private:
     // cppcheck-suppress unknownMacro
-    Q_DISABLE_COPY_MOVE(VLockGuard<Guarded>) // NOLINT
+    Q_DISABLE_COPY_MOVE(VLockGuard) // NOLINT
 
     QSharedPointer<Guarded>   holder;
     int                       lockError;
