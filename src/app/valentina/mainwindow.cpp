@@ -216,7 +216,7 @@
 #include <QUuid>
 #include <chrono>
 
-#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
 #include <QWinTaskbarButton>
 #include <QWinTaskbarProgress>
 #endif
@@ -361,7 +361,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionAddBackgroundImage, &QAction::triggered, this, &MainWindow::ActionAddBackgroundImage);
 
     m_progressBar->setVisible(false);
-#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
     m_taskbarProgress->setVisible(false);
 #endif
     m_statusLabel->setText(tr("Create new pattern piece to start working."));
@@ -1750,7 +1750,7 @@ void MainWindow::showEvent( QShowEvent *event )
         return;
     }
 
-#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
     m_taskbarButton->setWindow(windowHandle());
 #endif
 
@@ -4095,7 +4095,7 @@ void MainWindow::Clear()
     m_toolOptions->ClearPropertyBrowser();
     m_toolOptions->itemClicked(nullptr);
     m_progressBar->setVisible(false);
-#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
     m_taskbarProgress->setVisible(false);
 #endif
     m_statusLabel->setVisible(true);
@@ -4510,7 +4510,7 @@ void MainWindow::ShowProgress()
     {
         const int newValue = m_progressBar->value() + 1;
         m_progressBar->setValue(newValue);
-#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
         m_taskbarProgress->setValue(newValue);
 #endif
         QCoreApplication::processEvents();
@@ -6059,7 +6059,7 @@ auto MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
     m_progressBar->setValue(0);
     const int elements = doc->ElementsToParse();
     m_progressBar->setMaximum(elements);
-#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
     m_taskbarProgress->setVisible(true);
     m_taskbarProgress->setMaximum(elements);
 #endif
@@ -6067,7 +6067,7 @@ auto MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
     FullParseFile();
 
     m_progressBar->setVisible(false);
-#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
     m_taskbarProgress->setVisible(false);
 #endif
     m_statusLabel->setVisible(true);
