@@ -1,3 +1,5 @@
+import qbs.FileInfo
+
 import "qbs/imports/conan/ConanfileProbe.qbs" as ConanfileProbe
 
 Project {
