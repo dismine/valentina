@@ -49,7 +49,7 @@ environment:
       QT: Qt\6.4\mingw_64
       QT_VERSION: Qt6_4
       BUILD_SYSTEM: "qbs"
-      ENABLE_PCH: false
+      ENABLE_PCH: true
       GCC_VERSION: 12.2
       MINGW_PATH: C:\msys64\mingw64\bin
       ARCH: x64
