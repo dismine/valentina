@@ -69,7 +69,7 @@
 #include <QPageSize>
 #include <QDebug>
 
-#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
 #include <QWinTaskbarButton>
 #include <QWinTaskbarProgress>
 #endif
