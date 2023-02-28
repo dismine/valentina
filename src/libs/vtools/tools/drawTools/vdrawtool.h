@@ -41,6 +41,7 @@
 #include <QObject>
 #include <QString>
 #include <QtGlobal>
+#include <QActionGroup>
 
 #include "../ifc/exception/vexceptionbadid.h"
 #include "../vinteractivetool.h"

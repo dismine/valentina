@@ -30,6 +30,8 @@
 #define VSYSEXITS_H
 
 #include <QTextStream>
+#include <QIODevice>
+#include <cstdio>
 
 #ifdef __GNUC__
 #define V_UNUSED __attribute__ ((unused))

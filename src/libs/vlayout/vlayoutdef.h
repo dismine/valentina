@@ -33,6 +33,7 @@
 #include <QTransform>
 #include <QPainterPath>
 #include <ciso646>
+#include <climits>
 
 enum class LayoutExportFormats : qint8
 {
