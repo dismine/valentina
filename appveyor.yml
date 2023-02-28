@@ -314,6 +314,9 @@ for:
 
   # clone directory
   clone_folder: c:\projects\valentina
+
+  cache:
+    - C:\Users\appveyor\.conan\data -> conan-cache
   
   # scripts that are called at very beginning, before repo cloning
   init:
@@ -516,6 +519,12 @@ for:
       - job_name: MacOS_12_Qt_6_4 (singlebundle)
       - job_name: MacOS_10_15_Qt_5_15 (qbs, multibundle)
       - job_name: MacOS_10_15_Qt_5_15 (qbs, singlebundle)
+
+  environment:
+    CONAN_USER_HOME: /Users/appveyor/.conan
+
+  cache:
+    - /Users/appveyor/.conan/data -> conan-cache
 
   init:
     - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
