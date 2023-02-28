@@ -323,11 +323,6 @@ for:
     - path
     - set QTDIR=C:\%QT%
     - set PATH=%QTDIR%\bin;%QTDIR%\include;C:\Qt\Tools\QtCreator\bin;C:\Tools\PsTools;C:\Program Files\Git\cmd;C:\Program Files\Git\usr\bin;C:\Program Files\Git LFS;C:\Tools\GitVersion;C:\Windows\system32;C:\Windows;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\CMake\bin;%PYTHON%;%PYTHON%\Scripts
-    - |
-      if [[ "$MSYS2_PACKAGES" == "true" ]]; then
-        C:\msys64\usr\bin\bash -lc "pacman --noconfirm -Syuu";
-        C:\msys64\usr\bin\bash -lc "pacman --noconfirm -S mingw-w64-x86_64-gcc mingw-w64-x86_64-make"
-      fi
     # Set VC variables for the platform
     - ps: |
         if ($env:COMPILER -eq "msvc") {
@@ -349,6 +344,10 @@ for:
             }
           }   
         } else {
+          if ($env:MSYS2_PACKAGES -eq "true") {
+              & 'C:\msys64\usr\bin\bash' -lc "pacman --noconfirm -Syuu"
+              & 'C:\msys64\usr\bin\bash' -lc "pacman --noconfirm -S mingw-w64-x86_64-gcc mingw-w64-x86_64-make"
+          }
           $env:Path += ";$env:MINGW_PATH"
           $env:CC = "gcc.exe"
           $env:CXX = "g++.exe"
