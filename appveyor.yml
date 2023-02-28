@@ -51,10 +51,11 @@ environment:
       BUILD_SYSTEM: "qbs"
       ENABLE_PCH: false
       GCC_VERSION: 8.1
-      MINGW_PATH: C:\Qt\Tools\mingw810_64\bin
+      MINGW_PATH: C:\msys64\mingw64\bin
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows10+"
+      MSYS2_PACKAGES: true
       DEPLOY: true
 
     - job_name: Windows_Qt_5_15_(qbs_GCC_x86)
@@ -71,6 +72,7 @@ environment:
       ARCH: x86
       PYTHON: "C:\\Python311"
       PLATFORM: "Windows7+"
+      MSYS2_PACKAGES: false
       DEPLOY: true
     
     - job_name: Windows_Qt_5_6_(GCC_x86)
@@ -164,6 +166,7 @@ environment:
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows10+"
+      MSYS2_PACKAGES: false
       DEPLOY: false
 
     - job_name: Windows_Qt_6_4_(MSVC_arm64)
@@ -177,6 +180,7 @@ environment:
       ARCH: arm64
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows10+"
+      MSYS2_PACKAGES: false
       DEPLOY: false
 
     - job_name: Windows_Qt_5_15_(qbs_GCC_x64)
@@ -193,6 +197,7 @@ environment:
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows7+"
+      MSYS2_PACKAGES: false
       DEPLOY: false
 
     - job_name: Windows_Qt_5_15_(qbs_MSVC_x64)
@@ -206,6 +211,7 @@ environment:
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows7+"
+      MSYS2_PACKAGES: false
       DEPLOY: false 
 
     - job_name: Windows_Qt_5_15_(make_GCC_x64)
@@ -317,6 +323,11 @@ for:
     - path
     - set QTDIR=C:\%QT%
     - set PATH=%QTDIR%\bin;%QTDIR%\include;C:\Qt\Tools\QtCreator\bin;C:\Tools\PsTools;C:\Program Files\Git\cmd;C:\Program Files\Git\usr\bin;C:\Program Files\Git LFS;C:\Tools\GitVersion;C:\Windows\system32;C:\Windows;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\CMake\bin;%PYTHON%;%PYTHON%\Scripts
+    - |
+      if [[ "$MSYS2_PACKAGES" == "true" ]]; then
+        C:\msys64\usr\bin\bash -lc "pacman --noconfirm -Syuu";
+        C:\msys64\usr\bin\bash -lc "pacman --noconfirm -S mingw-w64-x86_64-gcc mingw-w64-x86_64-make"
+      fi
     # Set VC variables for the platform
     - ps: |
         if ($env:COMPILER -eq "msvc") {
