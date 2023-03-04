@@ -33,9 +33,19 @@ VToolApp {
     targetName: buildconfig.appTarget
 
     Properties {
-        condition: buildconfig.useConanPackages
+        condition: buildconfig.useConanPackages && (qbs.targetOS.contains("windows") || qbs.targetOS.contains("macos"))
         conan.XercesC.libInstallDir: qbs.installPrefix + "/" + buildconfig.installLibraryPath
-        conan.XercesC.installLib: true
+        conan.XercesC.binInstallDir: qbs.installPrefix + "/" + buildconfig.installBinaryPath
+        conan.XercesC.installLib: {
+            if (qbs.targetOS.contains("windows"))
+                return false
+            return true
+        }
+        conan.XercesC.installBin: {
+            if (qbs.targetOS.contains("windows"))
+                return true
+            return false
+        }
     }
 
     files: [

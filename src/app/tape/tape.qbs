@@ -22,7 +22,7 @@ VToolApp {
     multibundle.targetApps: ["Valentina"]
 
     Properties {
-        condition: buildconfig.useConanPackages && buildconfig.enableMultiBundle
+        condition: buildconfig.useConanPackages && qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle
         conan.XercesC.libInstallDir: qbs.installPrefix + "/" + buildconfig.installLibraryPath
         conan.XercesC.installLib: true
     }
