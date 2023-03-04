@@ -31,6 +31,7 @@
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <xercesc/parsers/XercesDOMParser.hpp>
+#include <xercesc/framework/MemBufInputSource.hpp>
 #else
 #include <QXmlSchema>
 #include <QXmlSchemaValidator>
@@ -180,58 +181,64 @@ void VAbstractConverter::ValidateXML(const QString &schema) const
     VParserErrorHandler parserErrorHandler;
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    QScopedPointer<QTemporaryFile> tempSchema(QTemporaryFile::createNativeFile(fileSchema));
-    if (tempSchema == nullptr)
+    XERCES_CPP_NAMESPACE::XercesDOMParser domParser;
+    domParser.setErrorHandler(&parserErrorHandler);
+
+    QByteArray data = fileSchema.readAll();
+    const char* schemaData = data.constData();
+
+    QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> grammarSource(
+        new XERCES_CPP_NAMESPACE::MemBufInputSource(reinterpret_cast<const XMLByte*>(schemaData),
+                                                    strlen(schemaData), "schema"));
+
+    if (domParser.loadGrammar(
+            *grammarSource,
+            XERCES_CPP_NAMESPACE::Grammar::SchemaGrammarType, true) == nullptr)
     {
-        const QString errorMsg(tr("Can't create native file for schema file %1:\n%2.")
-                                   .arg(schema, fileSchema.errorString()));
+        VException e(parserErrorHandler.StatusMessage());
+        e.AddMoreInformation(tr("Could not load schema file '%1'.").arg(fileSchema.fileName()));
+        throw e;
+    }
+
+    qCDebug(vXML, "Schema loaded.");
+
+    if (parserErrorHandler.HasError())
+    {
+        VException e(parserErrorHandler.StatusMessage());
+        e.AddMoreInformation(tr("Schema file %3 invalid in line %1 column %2").arg(parserErrorHandler.Line())
+                                 .arg(parserErrorHandler.Column()).arg(fileSchema.fileName()));
+        throw e;
+    }
+
+    domParser.setValidationScheme(XERCES_CPP_NAMESPACE::XercesDOMParser::Val_Always);
+    domParser.setDoNamespaces(true);
+    domParser.setDoSchema(true);
+    domParser.setValidationConstraintFatal(true);
+    domParser.setValidationSchemaFullChecking(true);
+    domParser.useCachedGrammarInParse(true);
+
+    QFile pattern(m_convertedFileName);
+    if (not pattern.open(QIODevice::ReadOnly))
+    {
+        const QString errorMsg(tr("Can't open file %1:\n%2.").arg(m_convertedFileName, pattern.errorString()));
         throw VException(errorMsg);
     }
 
-    if (tempSchema->open())
+    QByteArray patternFileData = pattern.readAll();
+    const char* patternData = patternFileData.constData();
+
+    QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> patternSource(
+        new XERCES_CPP_NAMESPACE::MemBufInputSource(reinterpret_cast<const XMLByte*>(patternData),
+                                                    strlen(patternData), "pattern"));
+
+    domParser.parse(*patternSource);
+
+    if (domParser.getErrorCount() > 0)
     {
-        XERCES_CPP_NAMESPACE::XercesDOMParser domParser;
-        domParser.setErrorHandler(&parserErrorHandler);
-
-        if (domParser.loadGrammar(
-                tempSchema->fileName().toUtf8().constData(),
-                XERCES_CPP_NAMESPACE::Grammar::SchemaGrammarType, true) == nullptr)
-        {
-            VException e(parserErrorHandler.StatusMessage());
-            e.AddMoreInformation(tr("Could not load schema file '%1'.").arg(fileSchema.fileName()));
-            throw e;
-        }
-
-        qCDebug(vXML, "Schema loaded.");
-
-        if (parserErrorHandler.HasError())
-        {
-            VException e(parserErrorHandler.StatusMessage());
-            e.AddMoreInformation(tr("Schema file %3 invalid in line %1 column %2").arg(parserErrorHandler.Line())
-                                     .arg(parserErrorHandler.Column()).arg(fileSchema.fileName()));
-            throw e;
-        }
-
-        domParser.setValidationScheme(XERCES_CPP_NAMESPACE::XercesDOMParser::Val_Always);
-        domParser.setDoNamespaces(true);
-        domParser.setDoSchema(true);
-        domParser.setValidationConstraintFatal(true);
-        domParser.setValidationSchemaFullChecking(true);
-        domParser.useCachedGrammarInParse(true);
-
-        domParser.parse(m_convertedFileName.toUtf8().constData());
-
-        if (domParser.getErrorCount() > 0)
-        {
-            VException e(parserErrorHandler.StatusMessage());
-            e.AddMoreInformation(tr("Validation error file %3 in line %1 column %2").arg(parserErrorHandler.Line())
-                                     .arg(parserErrorHandler.Column()).arg(m_originalFileName));
-            throw e;
-        }
-    }
-    else
-    {
-        qCritical() << tr("Unable to open native file for schema");
+        VException e(parserErrorHandler.StatusMessage());
+        e.AddMoreInformation(tr("Validation error file %3 in line %1 column %2").arg(parserErrorHandler.Line())
+                                 .arg(parserErrorHandler.Column()).arg(m_originalFileName));
+        throw e;
     }
 #else
     QFile pattern(m_convertedFileName);

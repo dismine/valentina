@@ -39,6 +39,7 @@
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <xercesc/parsers/XercesDOMParser.hpp>
+#include <xercesc/framework/MemBufInputSource.hpp>
 
 #include <QMap>
 #else
@@ -48,6 +49,7 @@
 
 namespace
 {
+
 //---------------------------------------------------------------------------------------------------------------------
 void ValidateSchema(const QString &schema)
 {
@@ -60,36 +62,29 @@ void ValidateSchema(const QString &schema)
     VParserErrorHandler parserErrorHandler;
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    QScopedPointer<QTemporaryFile> tempSchema(QTemporaryFile::createNativeFile(fileSchema));
-    if (tempSchema == nullptr)
+    XERCES_CPP_NAMESPACE::XercesDOMParser domParser;
+    domParser.setErrorHandler(&parserErrorHandler);
+
+    QByteArray data = fileSchema.readAll();
+    const char* schemaData = data.constData();
+
+    QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> grammarSource(
+        new XERCES_CPP_NAMESPACE::MemBufInputSource(reinterpret_cast<const XMLByte*>(schemaData),
+                                                    strlen(schemaData), "schema"));
+
+    if (domParser.loadGrammar(
+            *grammarSource,
+            XERCES_CPP_NAMESPACE::Grammar::SchemaGrammarType, true) == nullptr)
     {
-        QFAIL(qUtf8Printable(QStringLiteral("Can't create native file for schema file %1:\n%2.")
-                                 .arg(schema, fileSchema.errorString())));
+        QFAIL(qUtf8Printable(QStringLiteral("%1 Could not load schema file '%2'.")
+                                 .arg(parserErrorHandler.StatusMessage(), fileSchema.fileName())));
     }
 
-    if (tempSchema->open())
-    {
-        XERCES_CPP_NAMESPACE::XercesDOMParser domParser;
-        domParser.setErrorHandler(&parserErrorHandler);
-
-        if (domParser.loadGrammar(
-                tempSchema->fileName().toUtf8().constData(),
-                XERCES_CPP_NAMESPACE::Grammar::SchemaGrammarType, true) == nullptr)
-        {
-            QFAIL(qUtf8Printable(QStringLiteral("%1 Could not load schema file '%2'.")
-                                     .arg(parserErrorHandler.StatusMessage(), fileSchema.fileName())));
-        }
-
-        QVERIFY2(not parserErrorHandler.HasError(),
-                 qUtf8Printable(QStringLiteral("%1 Schema file %2 invalid in line %3 column %4.")
-                                    .arg(parserErrorHandler.StatusMessage(), fileSchema.fileName())
-                                    .arg(parserErrorHandler.Line())
-                                    .arg(parserErrorHandler.Column())));
-    }
-    else
-    {
-        QFAIL("Unable to open native file for schema");
-    }
+    QVERIFY2(not parserErrorHandler.HasError(),
+             qUtf8Printable(QStringLiteral("%1 Schema file %2 invalid in line %3 column %4.")
+                                .arg(parserErrorHandler.StatusMessage(), fileSchema.fileName())
+                                .arg(parserErrorHandler.Line())
+                                .arg(parserErrorHandler.Column())));
 #else
     QXmlSchema sch;
     sch.setMessageHandler(&parserErrorHandler);
