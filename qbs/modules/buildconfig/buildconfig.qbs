@@ -41,11 +41,7 @@ Module {
         if (Utilities.versionCompare(Qt.core.version, "6") < 0)
             return false;
 
-        if (qbs.targetOS.contains("unix") && !qbs.targetOS.contains("macos"))
-        {
-            return project.enableConan;
-        }
-        return true;
+        return project.enableConan;
     }
 
     property string libDirName: "lib"
