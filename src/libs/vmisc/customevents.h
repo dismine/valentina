@@ -43,15 +43,9 @@ enum CustomEventType {
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-QT_WARNING_PUSH
-#if !defined(Q_OS_MACOS) && defined(Q_CC_CLANG)
-QT_WARNING_DISABLE_CLANG("-Wenum-enum-conversion")
-#endif
-
 // Define undo event identifier
-const QEvent::Type UNDO_EVENT = static_cast<QEvent::Type>(QEvent::User + CustomEventType::UndoEventType);
-
-QT_WARNING_POP
+const QEvent::Type UNDO_EVENT =
+    static_cast<QEvent::Type>(QEvent::User + static_cast<int>(CustomEventType::UndoEventType));
 
 class UndoEvent : public QEvent
 {
@@ -64,14 +58,8 @@ public:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-QT_WARNING_PUSH
-#if !defined(Q_OS_MACOS) && defined(Q_CC_CLANG)
-QT_WARNING_DISABLE_CLANG("-Wenum-enum-conversion")
-#endif
-
-const QEvent::Type LITE_PARSE_EVENT = static_cast<QEvent::Type>(QEvent::User + CustomEventType::LiteParseEventType);
-
-QT_WARNING_POP
+const QEvent::Type LITE_PARSE_EVENT =
+    static_cast<QEvent::Type>(QEvent::User + static_cast<int>(CustomEventType::LiteParseEventType));
 
 class LiteParseEvent : public QEvent
 {
@@ -84,15 +72,8 @@ public:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-QT_WARNING_PUSH
-#if !defined(Q_OS_MACOS) && defined(Q_CC_CLANG)
-QT_WARNING_DISABLE_CLANG("-Wenum-enum-conversion")
-#endif
-
-const QEvent::Type FIT_BEST_CURRENT_EVENT = static_cast<QEvent::Type>(QEvent::User +
-                                                                      CustomEventType::FitBestCurrentEventType);
-
-QT_WARNING_POP
+const QEvent::Type FIT_BEST_CURRENT_EVENT =
+    static_cast<QEvent::Type>(QEvent::User + static_cast<int>(CustomEventType::FitBestCurrentEventType));
 
 class FitBestCurrentEvent : public QEvent
 {
@@ -105,15 +86,8 @@ public:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-QT_WARNING_PUSH
-#if !defined(Q_OS_MACOS) && defined(Q_CC_CLANG)
-QT_WARNING_DISABLE_CLANG("-Wenum-enum-conversion")
-#endif
-
-const QEvent::Type WARNING_MESSAGE_EVENT = static_cast<QEvent::Type>(QEvent::User +
-                                                                      CustomEventType::WarningMessageEventType);
-
-QT_WARNING_POP
+const QEvent::Type WARNING_MESSAGE_EVENT =
+    static_cast<QEvent::Type>(QEvent::User + static_cast<int>(CustomEventType::WarningMessageEventType));
 
 class WarningMessageEvent : public QEvent
 {
