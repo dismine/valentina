@@ -159,5 +159,9 @@
         <file>smart_pattern_#184_case1/output.json</file>
         <file>smart_pattern_#184_case2/input.json</file>
         <file>smart_pattern_#184_case2/output.json</file>
+        <file>custom_seam_allwance_exclude_p1/input.json</file>
+        <file>custom_seam_allwance_exclude_p1/output.json</file>
+        <file>custom_seam_allwance_exclude_p2/input.json</file>
+        <file>custom_seam_allwance_exclude_p2/output.json</file>
     </qresource>
 </RCC>

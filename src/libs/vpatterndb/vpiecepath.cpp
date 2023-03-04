@@ -537,6 +537,11 @@ QVector<VSAPoint> VPiecePath::SeamAllowancePoints(const VContainer *data, qreal 
     for (int i = 0; i< d->m_nodes.size(); ++i)
     {
         const VPieceNode &node = d->m_nodes.at(i);
+        if (node.IsExcluded())
+        {
+            continue;// skip excluded node
+        }
+
         switch (node.GetTypeTool())
         {
             case (Tool::NodePoint):

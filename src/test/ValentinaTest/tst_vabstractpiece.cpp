@@ -1023,6 +1023,18 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data()
                      QStringLiteral("://smart_pattern_#184_case2/input.json"),
                      QStringLiteral("://smart_pattern_#184_case2/output.json"),
                      37.795275590551185 /*seam allowance width*/);
+
+    // See the file "valentina_private_collection/bugs/custom_seam_allwance_exclude/custom_seam_allwance_exclude.val"
+    ASSERT_TEST_CASE("Piece 1. CSA Exclude",
+                     QStringLiteral("://custom_seam_allwance_exclude_p1/input.json"),
+                     QStringLiteral("://custom_seam_allwance_exclude_p1/output.json"),
+                     37.795275590551185 /*seam allowance width 1 cm*/);
+
+    // See the file "valentina_private_collection/bugs/custom_seam_allwance_exclude/custom_seam_allwance_exclude.val"
+    ASSERT_TEST_CASE("Piece 2. CSA Exclude",
+                     QStringLiteral("://custom_seam_allwance_exclude_p2/input.json"),
+                     QStringLiteral("://custom_seam_allwance_exclude_p2/output.json"),
+                     37.795275590551185 /*seam allowance width 1 cm*/);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
