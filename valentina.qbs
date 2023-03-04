@@ -68,7 +68,7 @@ Project {
                 }
 
                 if (i >= env.length) {
-                    var pluginsPath = "QT_QPA_PLATFORM_PLUGIN_PATH=" + Qt.core.pluginPath
+                    var pluginsPath = "QT_QPA_PLATFORM_PLUGIN_PATH=" + FileInfo.joinPaths(Qt.core.pluginPath, "platforms")
                     env.push(pluginsPath);
                 }
 
