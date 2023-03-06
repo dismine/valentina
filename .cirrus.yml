@@ -184,7 +184,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - export PATH="${HOME}/.local/bin:`python3 -m site --user-base`/bin:$PATH"
     - echo $PATH
     - pwd
-    - conan install . -s os=Macos -s os.version=${MACOS_DEPLOYMENT_TARGET} --build=xerces-c/3.2.4
+    - conan install . -s os=Macos -s os.version=${MACOS_DEPLOYMENT_TARGET} --build=missing
     - qbs setup-toolchains --detect
     - qbs config --list profiles
     - qbs setup-qt /opt/homebrew/opt/qt6/bin/qmake qt6
