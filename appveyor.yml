@@ -421,7 +421,7 @@ for:
 
   build_script:
     - conan install . -s os=Windows --build=xerces-c/3.2.4 -pr valentina
-    - qbs build -f valentina.qbs -d %APPVEYOR_BUILD_FOLDER%\build --command-echo-mode command-line config:release qbs.installRoot:%APPVEYOR_BUILD_FOLDER%\build\install-root\valentina profile:qt6 project.enableConan:true modules.buildconfig.enableCcache:false project.conanProfiles:valentina modules.buildconfig.enablePCH:%ENABLE_PCH%
+    - qbs build -f valentina.qbs -d %APPVEYOR_BUILD_FOLDER%\build config:release qbs.installRoot:%APPVEYOR_BUILD_FOLDER%\build\install-root\valentina profile:qt6 project.enableConan:true modules.buildconfig.enableCcache:false project.conanProfiles:valentina modules.buildconfig.enablePCH:%ENABLE_PCH%
   
   test_script:
     - qbs -p autotest-runner -d %APPVEYOR_BUILD_FOLDER%\build profile:qt6 config:release
@@ -541,6 +541,7 @@ for:
 
   environment:
     CONAN_USER_HOME: /Users/appveyor/.conan
+    HOMEBREW_NO_INSTALL_CLEANUP: 1
 
   cache:
     - /Users/appveyor/.conan/data -> conan-cache
@@ -550,12 +551,9 @@ for:
     - sudo xcode-select -p
     - sudo xcode-select -s /Applications/Xcode-$XCODE_VERSION.app
     - sudo xcode-select -p
-    - brew update > /dev/null
-    - brew deps -n qbs
-    - brew install --ignore-dependencies libpng freetype pcre2 gettext glib jpeg-turbo giflib lz4 xz zstd libtiff webp qt@5
-    - brew install --ignore-dependencies qbs
+    - ls ${HOME}/Qt
     - export QTDIR="${HOME}/${QT}"
-    - export PATH="$QTDIR/bin:$HOME/.local/bin:`python3 -m site --user-base`/bin:$PATH"
+    - export PATH="$QTDIR/bin:$HOME/.local/bin:`python3 -m site --user-base`/bin:${HOME}/Qt/Qt Creator.app/Contents/MacOS:$PATH"
     - echo $PATH
     - python3 --version
     - |
@@ -583,7 +581,7 @@ for:
     - qbs setup-qt ${QTDIR}/bin/qmake qt6
     - qbs config defaultProfile qt6
     - qbs config profiles.qt6.baseProfile clang
-    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build --command-echo-mode command-line config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt6 project.enableConan:true project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:false
+    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt6 project.enableConan:true project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:false
 
   deploy_script:
     - CIRRUS_WORKING_DIR=${APPVEYOR_BUILD_FOLDER} CIRRUS_CHANGE_IN_REPO=${APPVEYOR_REPO_COMMIT} CIRRUS_BRANCH=${APPVEYOR_REPO_BRANCH} ${APPVEYOR_BUILD_FOLDER}/scripts/cirrus-deploy.sh
