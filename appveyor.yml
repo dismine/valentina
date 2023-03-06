@@ -49,6 +49,7 @@ environment:
       QT: Qt\6.4\mingw_64
       QT_VERSION: Qt6_4
       BUILD_SYSTEM: "qbs"
+      QMAKE: qmake.exe
       ENABLE_PCH: true
       GCC_VERSION: 12.2
       MINGW_PATH: C:\msys64\mingw64\bin
@@ -66,6 +67,7 @@ environment:
       QT: Qt\5.15\mingw81_32
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "qbs"
+      QMAKE: qmake.exe
       ENABLE_PCH: true
       GCC_VERSION: 8.1
       MINGW_PATH: C:\Qt\Tools\mingw810_32\bin
@@ -161,6 +163,7 @@ environment:
       QT: Qt\6.4\msvc2019_64
       QT_VERSION: Qt6_4
       BUILD_SYSTEM: "qbs"
+      QMAKE: qmake.exe
       ENABLE_PCH: true
       MSVC_PATH: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\x64"
       ARCH: x64
@@ -175,6 +178,7 @@ environment:
       QT: Qt\6.4\msvc2019_arm64
       QT_VERSION: Qt6_4
       BUILD_SYSTEM: "qbs"
+      QMAKE: qmake.bat
       ENABLE_PCH: true
       MSVC_PATH: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\arm64"
       ARCH: arm64
@@ -191,6 +195,7 @@ environment:
       QT: Qt\5.15\mingw81_64
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "qbs"
+      QMAKE: qmake.exe
       ENABLE_PCH: true
       GCC_VERSION: 8.1
       MINGW_PATH: C:\Qt\Tools\mingw810_64\bin
@@ -205,6 +210,7 @@ environment:
       COMPILER: msvc
       QT: Qt\5.15\msvc2019_64
       BUILD_SYSTEM: "qbs"
+      QMAKE: qmake.exe
       ENABLE_PCH: true
       MSVC_PATH: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\x64"
       VSVER: 16
@@ -368,13 +374,13 @@ for:
     - del /F "C:\Program Files\Git\usr\bin\sh.exe"
     - del /F "C:\Program Files\Git\bin\sh.exe"
     - dir "%QTDIR%\bin"
-    - qmake.exe -v
+    - %QMAKE% -v
     - qbs --version
 
   before_build:
     - cd %APPVEYOR_BUILD_FOLDER%
     - qbs-setup-toolchains --detect
-    - qbs-setup-qt %QTDIR%\bin\qmake.exe qt6
+    - qbs-setup-qt %QTDIR%\bin\%QMAKE% qt6
     - qbs-config defaultProfile qt6
     - dir "C:\Qt\Tools"
     - conan profile new valentina
