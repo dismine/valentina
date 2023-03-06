@@ -322,6 +322,7 @@ for:
   init:
     # Uncomment if need access through RDP
     #  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+    - ver
     # Path before 
     - path
     - set QTDIR=C:\%QT%
@@ -433,6 +434,7 @@ for:
   init:
     # Uncomment if need access through RDP
     #  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+    - ver
     # Path before 
     - path
     - set QTDIR=C:\%QT%
@@ -533,7 +535,7 @@ for:
     - sudo xcode-select -p
     - brew update > /dev/null
     - brew deps -n qbs
-    - brew install libpng freetype pcre2 gettext glib jpeg-turbo giflib lz4 xz zstd libtiff webp qt@5
+    - brew install --ignore-dependencies libpng freetype pcre2 gettext glib jpeg-turbo giflib lz4 xz zstd libtiff webp qt@5
     - brew install --ignore-dependencies qbs
     - export QTDIR="${HOME}/${QT}"
     - export PATH="$QTDIR/bin:$HOME/.local/bin:`python3 -m site --user-base`/bin:$PATH"
