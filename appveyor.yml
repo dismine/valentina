@@ -377,7 +377,8 @@ for:
     - del /F "C:\Program Files\Git\bin\sh.exe"
     - dir "%QTDIR%\bin"
     - |
-      "%QTDIR%\\bin\\%QMAKE%" -v
+      echo "%QTDIR%\\bin\\%QMAKE%" -v
+      call "%QTDIR%\\bin\\%QMAKE%" -v
     - qbs --version
 
   before_build:
