@@ -100,7 +100,6 @@ environment:
       PLATFORM: "macOS_11+"
       MACOS_DEPLOYMENT_TARGET: 11.0
       MULTI_BUNDLE: true
-      ENABLE_CONAN: true
       DEPLOY: true
 
     - job_name: MacOS_12_Qt_6_4 (singlebundle)
@@ -114,7 +113,6 @@ environment:
       PLATFORM: "macOS_11+"
       MACOS_DEPLOYMENT_TARGET: 11.0
       MULTI_BUNDLE: false
-      ENABLE_CONAN: true
       DEPLOY: true
 
     - job_name: MacOS_10_15_Qt_5_15 (qbs, multibundle)
@@ -128,7 +126,6 @@ environment:
       PLATFORM: "macOS10.13+"
       MACOS_DEPLOYMENT_TARGET: 10.13
       MULTI_BUNDLE: true
-      ENABLE_CONAN: false
       DEPLOY: true
 
     - job_name: MacOS_10_15_Qt_5_15 (qbs, singlebundle)
@@ -142,7 +139,6 @@ environment:
       PLATFORM: "macOS10.13+"
       MACOS_DEPLOYMENT_TARGET: 10.13
       MULTI_BUNDLE: false
-      ENABLE_CONAN: false
       DEPLOY: true
 
     - job_name: Windows_Qt_5_15_(make_GCC_x86)
@@ -556,12 +552,8 @@ for:
     - export PATH="$QTDIR/bin:$HOME/.local/bin:`python3 -m site --user-base`/bin:${HOME}/Qt/Qt Creator.app/Contents/MacOS:$PATH"
     - echo $PATH
     - python3 --version
-    - |
-      if [[ "$ENABLE_CONAN" == "true" ]]; then
-        pip3 install --user --upgrade conan==1.59;
-        conan --version
-      fi
-    - pip3 install --user --upgrade pip dropbox
+    - pip3 install --user --upgrade pip dropbox conan==1.59
+    - conan --version
     - clang --version
     - qmake --version
     - which qmake
@@ -572,10 +564,7 @@ for:
 
   build_script:
     - pwd
-    - |
-      if [[ "$ENABLE_CONAN" == "true" ]]; then
-        conan install . -s os=Macos -s os.version=${MACOS_DEPLOYMENT_TARGET} --build=missing
-      fi
+    - conan install . -s os=Macos -s os.version=${MACOS_DEPLOYMENT_TARGET} --build=missing
     - qbs setup-toolchains --detect
     - qbs config --list profiles
     - qbs setup-qt ${QTDIR}/bin/qmake qt6
