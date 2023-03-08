@@ -591,6 +591,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
         {
             case ContextMenuOption::LAST_ONE_DO_NOT_USE:
                 Q_UNREACHABLE();
+                break;
             case ContextMenuOption::NoSelection:
                 return;
             case ContextMenuOption::Option:

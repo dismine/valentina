@@ -808,8 +808,13 @@ Module {
                 "-wd5204", // class has virtual functions, but its trivial destructor is not virtual; instances of objects derived
                            // from this class may not be destructed correctly
                 "-wd5219", // implicit conversion from '<type>' to '<type>', possible loss of data
-                "-wd5243"  // 'type-name': using incomplete class 'class-name' can cause potential one definition rule violation due
+                "-wd5243", // 'type-name': using incomplete class 'class-name' can cause potential one definition rule violation due
                            // to ABI limitation
+                "-wd4464", // relative include path contains '..'
+                "-wd4458", // declaration of 'X' hides class member
+                "-wd4456", // declaration of 'X' hides previous local declaration
+                "-wd4459", // declaration of 'X' hides global declaration
+                "-wd4457"  // declaration of 'X' hides function parameter
             )
         }
         return debugFlags;

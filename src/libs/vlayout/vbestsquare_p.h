@@ -83,4 +83,6 @@ private:
     Q_DISABLE_ASSIGN(VBestSquareData)
 };
 
+QT_WARNING_POP
+
 #endif // VBESTSQUARE_P_H

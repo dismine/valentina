@@ -31,7 +31,6 @@
 #include <QtGlobal>
 #include <sstream>
 
-#include "../qmuparser/qmuparser_global.h"
 #include "qmuparser_global.h"
 #include "qmuparserdef.h"
 #include "qmutranslation.h"

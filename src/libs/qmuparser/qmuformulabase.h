@@ -26,7 +26,6 @@
 #include <QString>
 #include <QtGlobal>
 
-#include "../qmuparser/qmuparser_global.h"
 #include "qmuparser.h"
 #include "qmuparser_global.h"
 

@@ -22,7 +22,7 @@
 #ifndef QMUTRANSLATION_H
 #define QMUTRANSLATION_H
 
-#include "../qmuparser/qmuparser_global.h"
+#include "qmuparser_global.h"
 #include <QString>
 
 namespace qmu

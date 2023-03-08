@@ -32,12 +32,12 @@
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/defglobal.h"
 
+namespace qmu
+{
+
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
-
-namespace qmu
-{
 
 class QmuParserCallbackData : public QSharedData
 {
@@ -93,6 +93,8 @@ public:
 private:
     Q_DISABLE_ASSIGN(QmuParserCallbackData)
 };
+
+QT_WARNING_POP
 
 }
 #endif // QMUPARSERCALLBACK_P_H

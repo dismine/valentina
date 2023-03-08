@@ -34,7 +34,6 @@
 #   include <QRandomGenerator>
 #endif
 
-#include "../qmuparser/qmuparser_global.h"
 #include "qmuparser.h"
 #include "qmuparser_global.h"
 #include "qmuparserdef.h"
