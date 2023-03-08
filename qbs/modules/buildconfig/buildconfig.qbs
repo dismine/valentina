@@ -184,12 +184,7 @@ Module {
     }
 
     cpp.separateDebugInformation: true
-
-    Properties {
-        condition: qbs.buildVariant === "debug"
-        cpp.warningLevel: "all"
-        cpp.treatWarningsAsErrors: treatWarningsAsErrors
-    }
+    cpp.treatWarningsAsErrors: treatWarningsAsErrors
 
     property stringList debugFlags: {
         var debugFlags = [];
