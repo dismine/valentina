@@ -817,9 +817,11 @@ Module {
 
     cpp.cxxFlags: {
         var flags = debugFlags;
-        if (qbs.toolchain.contains("gcc") && enableAddressSanitizer) {
+        if (qbs.toolchain.contains("gcc") && enableAddressSanitizer)
             flags.push("-fno-omit-frame-pointer");
-        }
+
+        if (qbs.toolchain.contains("msvc"))
+            flags.push("/utf-8");
         return flags;
     }
 
