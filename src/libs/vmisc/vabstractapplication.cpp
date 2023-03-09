@@ -262,9 +262,14 @@ void VAbstractApplication::WinAttachConsole()
     auto stdout_type = GetFileType(GetStdHandle(STD_OUTPUT_HANDLE));
     if (stdout_type == FILE_TYPE_UNKNOWN && AttachConsole(ATTACH_PARENT_PROCESS))
     {
+#ifdef Q_CC_MSVC
         FILE *fp = nullptr;
         freopen_s(&fp, "CONOUT$", "w", stdout);
         freopen_s(&fp, "CONOUT$", "w", stderr);
+#else
+        freopen("CONOUT$", "w", stdout);
+        freopen("CONOUT$", "w", stderr);
+#endif // Q_CC_MSVC
     }
 }
 #endif
