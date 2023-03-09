@@ -178,7 +178,7 @@ environment:
       ENABLE_PCH: true
       MSVC_PATH: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\arm64"
       ARCH: arm64
-      PYTHON: "C:\\Python311-x64"
+      PYTHON: "C:\\Python311"
       PLATFORM: "Windows10+"
       MSYS2_PACKAGES: false
       DEPLOY: false
