@@ -608,7 +608,7 @@ void DialogMove::ShowSourceDetails(int row)
     {
         ui->labelAlias->setText(tr("Alias:"));
 
-        auto SetValue = [sourceItem](QComboBox *box, const QString &value, const QString &def)
+        auto SetValue = [](QComboBox *box, const QString &value, const QString &def)
         {
             box->blockSignals(true);
 
