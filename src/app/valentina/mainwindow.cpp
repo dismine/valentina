@@ -736,8 +736,8 @@ void MainWindow::ReadMeasurements(qreal baseA, qreal baseB, qreal baseC)
     {
         const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
 
-        auto InitDimensionLabel = [this, dimensions](const MeasurementDimension_p& dimension,
-                                                     QPointer<QLabel> &name, QPointer<QComboBox> &control)
+        auto InitDimensionLabel = [this](const MeasurementDimension_p& dimension,
+                                         QPointer<QLabel> &name, QPointer<QComboBox> &control)
         {
             if (dimension.isNull())
             {
@@ -4834,9 +4834,8 @@ void MainWindow::InitDimensionControls()
     if (VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Multisize)
     {
         const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
-        const QString unit = UnitsToStr(VAbstractValApplication::VApp()->MeasurementsUnits(), true);
 
-        auto InitControl = [this, dimensions, unit](int index, QPointer<QLabel> &name, QPointer<QComboBox> &control)
+        auto InitControl = [this, dimensions](int index, QPointer<QLabel> &name, QPointer<QComboBox> &control)
         {
             if (dimensions.size() > index)
             {

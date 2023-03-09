@@ -109,6 +109,7 @@ void RemoveLayoutPath(const QString &path, bool usedNotExistedDir)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+#if !defined(V_NO_ASSERT)
 Q_DECL_UNUSED void InsertGlobalContours(const QList<QGraphicsScene *> &scenes, const QList<QGraphicsItem *> &gcontours);
 void InsertGlobalContours(const QList<QGraphicsScene *> &scenes, const QList<QGraphicsItem *> &gcontours)
 {
@@ -122,6 +123,7 @@ void InsertGlobalContours(const QList<QGraphicsScene *> &scenes, const QList<QGr
         scenes.at(i)->addItem(gcontours.at(i));
     }
 }
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
