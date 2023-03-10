@@ -168,21 +168,6 @@ environment:
       MSYS2_PACKAGES: false
       DEPLOY: false
 
-    - job_name: Windows_Qt_6_4_(MSVC_arm64)
-      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-      COMPILER: msvc
-      QT: Qt\6.4\msvc2019_arm64
-      QT_VERSION: Qt6_4
-      BUILD_SYSTEM: "qbs"
-      QMAKE: qmake.bat
-      ENABLE_PCH: true
-      MSVC_PATH: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\arm64"
-      ARCH: arm64
-      PYTHON: "C:\\Python311"
-      PLATFORM: "Windows10+"
-      MSYS2_PACKAGES: false
-      DEPLOY: false
-
     - job_name: Windows_Qt_5_15_(qbs_GCC_x64)
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       COMPILER: mingw
@@ -270,8 +255,6 @@ matrix:
     - platform: x86
       job_name: Windows_Qt_6_4_(MSVC_x64)
     - platform: x86
-      job_name: Windows_Qt_6_4_(MSVC_arm64)
-    - platform: x86
       job_name: Windows_Qt_5_15_(make_GCC_x64)
     - platform: x86
       job_name: Windows_Qt_5_15_(nmake_MSVC_x64)
@@ -309,7 +292,6 @@ for:
     only:
       - job_name: Windows_Qt_6_4_(GCC_x64)
       - job_name: Windows_Qt_6_4_(MSVC_x64)
-      - job_name: Windows_Qt_6_4_(MSVC_arm64)
       - job_name: Windows_Qt_5_15_(qbs_GCC_x64)
       - job_name: Windows_Qt_5_15_(qbs_MSVC_x64)
       - job_name: Windows_Qt_5_15_(qbs_GCC_x86)
