@@ -442,7 +442,7 @@ void DialogFlippingByLine::ShowSourceDetails(int row)
     {
         ui->labelAlias->setText(tr("Alias:"));
 
-        auto SetValue = [sourceItem](QComboBox *box, const QString &value, const QString &def)
+        auto SetValue = [](QComboBox *box, const QString &value, const QString &def)
         {
             box->blockSignals(true);
 
@@ -463,8 +463,7 @@ void DialogFlippingByLine::ShowSourceDetails(int row)
         SetValue(ui->comboBoxPenStyle, sourceItem.penStyle, TypeLineDefault);
 
         if (sourceItem.penStyle.isEmpty() || sourceItem.penStyle == TypeLineDefault)
-        {
-            const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(sourceItem.id);
+        {;
             int index = ui->comboBoxPenStyle->currentIndex();
             ui->comboBoxPenStyle->setItemText(index, '<' + tr("Default") + '>');
         }
