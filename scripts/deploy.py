@@ -19,7 +19,7 @@ def run_auth():
     auth_flow = DropboxOAuth2FlowNoRedirect(APP_KEY, use_pkce=True, token_access_type='offline')
 
     authorize_url = auth_flow.start()
-    print("1. Go to: " + authorize_url)
+    print(f"1. Go to: {authorize_url}")
     print("2. Click \"Allow\" (you might have to log in first).")
     print("3. Copy the authorization code.")
     auth_code = input("Enter the authorization code here: ").strip()
@@ -27,10 +27,10 @@ def run_auth():
     try:
         oauth_result = auth_flow.finish(auth_code)
     except Exception as e:
-        print('Error: %s' % (e,))
+        print(f'Error: {e}')
         exit(1)
 
-    print("Refresh token: %s" % oauth_result.refresh_token)
+    print(f"Refresh token: {oauth_result.refresh_token}")
 
 
 def run_pack(source, destination):
@@ -48,12 +48,12 @@ def run_pack(source, destination):
         ".tar.xz": "xztar"
     }
     suffix = ''.join(pathlib.Path(base).suffixes)
-    format = formats.get(suffix, None)
+    format = formats.get(suffix)
     archive_from = pathlib.Path(source).parent
     archive_to = os.path.basename(source.strip(os.sep))
     print(source, destination, archive_from)
     shutil.make_archive(name, format, archive_from, archive_to)
-    shutil.move('%s%s' % (name, suffix), destination)
+    shutil.move(f'{name}{suffix}', destination)
 
 
 def run_upload(refresh_token, file, path):
@@ -65,7 +65,7 @@ def run_upload(refresh_token, file, path):
             sys.exit("ERROR: Invalid access token; try re-generating an "
                      "access token from the app console on the web.")
 
-        print("Uploading " + file + " to Dropbox as " + path + "...")
+        print(f"Uploading {file} to Dropbox as {path}...")
         try:
             with open(file, "rb") as f:
                 dbx.files_upload(f.read(), path, mode=WriteMode('overwrite'))
