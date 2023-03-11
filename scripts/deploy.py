@@ -1,6 +1,8 @@
 import argparse
+import datetime
 import os
 import pathlib
+import re
 import shutil
 import sys
 
@@ -83,6 +85,95 @@ def run_upload(refresh_token, file, path):
                 sys.exit()
         print("Successfully uploaded")
 
+def folder_mod_time(dbx, folder):
+    folder_mod_times = []
+    entries = dbx.files_list_folder(folder.path_display)
+    # Loop through each item in the folder list
+    for result in entries.entries:
+        # Check if the item is a file
+        if isinstance(result, dropbox.files.FileMetadata):
+            # Get the parent folder path of the file
+            parent_folder_path = result.path_display.rsplit('/', 1)[0]
+            # Get the modification time of the file
+            file_mod_time = result.client_modified
+            # Add the file modification time to the dictionary for the parent folder
+            folder_mod_times.append(file_mod_time)
+
+    folder_mod_times.append(datetime.datetime(1900, 1, 1, 0, 0, 0))
+    # Compute the maximum modification time across all files in each folder
+    max_mod_time = max(folder_mod_times)
+    return max_mod_time
+
+# Define a function to delete a file or folder recursively
+def delete_file_or_folder(dbx, item):
+    try:
+        # Check if the path is a file
+        if isinstance(item, dropbox.files.FileMetadata):
+            dbx.files_delete_v2(item.path_display)
+            print(f"Deleted file: {item.path_display}")
+        # Check if the path is a folder
+        elif isinstance(item, dropbox.files.FolderMetadata):
+            # Recursively delete all files and subfolders inside the folder
+            for entry in dbx.files_list_folder(item.path_display).entries:
+                delete_file_or_folder(dbx, entry)
+            # Delete the folder itself
+            dbx.files_delete_v2(item.path_display)
+            print(f"Deleted folder: {item.path_display}")
+    except dropbox.exceptions.ApiError as e:
+        print(f"Error deleting {item.path_display}: {e}")
+
+def run_clean(refresh_token):
+    with dropbox.Dropbox(oauth2_refresh_token=refresh_token, app_key=APP_KEY) as dbx:
+        # Check that the access token is valid
+        try:
+            dbx.users_get_current_account()
+        except AuthError:
+            sys.exit("ERROR: Invalid access token; try re-generating an "
+                     "access token from the app console on the web.")
+
+        clean_folders = ["/0.7.x/Mac OS X", "/0.7.x/Windows"]
+        arhive_types = [r'^valentina-Windows7\+-mingw-x86-Qt5_15-develop-[a-f0-9]{40}\.tar\.xz$',
+                        r'^valentina-Windows10\+-mingw-x64-Qt6_4-develop-[a-f0-9]{40}\.tar\.xz$',
+                        r'^valentina-WindowsXP\+-mingw-x86-Qt5_6-develop-[a-f0-9]{40}\.tar\.xz$',
+                        r'^valentina-macOS_11\+-Qt6_4-x64-develop-[a-f0-9]{40}\.tar\.xz$',
+                        r'^valentina-macOS_11\+-Qt6-arm64-[a-f0-9]{7,40}\.tar\.xz$',
+                        r'^valentina-macOS_11\+-Qt6_4-x64-multibundle-[a-f0-9]{40}$',
+                        r'^valentina-macOS_11\+-Qt6-arm64-multibundle-[a-f0-9]{40}$',
+                        r'^valentina-macOS10.13\+-Qt5_15-x64-multibundle-[a-f0-9]{40}$',
+                        r'^valentina-macOS10.13\+-Qt5_15-x64-develop-[a-f0-9]{40}\.tar\.xz$']
+
+        item_types = {}
+
+        for path in clean_folders:
+            result = dbx.files_list_folder(path)
+            for entry in result.entries:
+                for archive_type in arhive_types:
+                    if re.search(archive_type, entry.name):
+                        if archive_type not in item_types:
+                            item_types[archive_type] = []
+                        item_types[archive_type].append(entry)
+                        break
+
+        # Keep only the first two files of each type
+        to_delete = []
+        for items in item_types.values():
+            # Separate files and folders
+            files = [item for item in items if isinstance(item, dropbox.files.FileMetadata)]
+            folders = [item for item in items if isinstance(item, dropbox.files.FolderMetadata)]
+
+            # Sort files by modification time
+            files = sorted(files, key=lambda f: f.client_modified)
+
+            # Sort folders by last modified time on server
+            folders = sorted(folders, key=lambda f: folder_mod_time(dbx, f))
+
+            # Keep only the first two items of each type
+            to_delete += files[:-2] + folders[:-2]
+
+        # Delete the remaining items
+        for item in to_delete:
+            delete_file_or_folder(dbx, item)
+
 
 def parse_args(args=None):
     parser = argparse.ArgumentParser(prog='app')
@@ -118,6 +209,12 @@ def parse_args(args=None):
              run_upload(a.refresh_token, a.file, a.path)
         ))
 
+    cmd('clean', help='Clean stale artifacts') \
+        .arg('refresh_token', type=str, help='Refresh token') \
+        .exe(lambda a: (
+             run_clean(a.refresh_token)
+    ))
+
     args = parser.parse_args(args)
     if not hasattr(args, 'exe'):
         parser.print_usage()
@@ -127,3 +224,4 @@ def parse_args(args=None):
 
 if __name__ == '__main__':
     parse_args()
+

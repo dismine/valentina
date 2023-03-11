@@ -32,6 +32,10 @@ if [[ "$DEPLOY" == "true" ]]; then
       check_failure "Unable to create an archive for Puzzle bundle.";
     fi
 
+    print_info "Start cleaning.";
+    python3 $CIRRUS_WORKING_DIR/scripts/deploy.py clean $ACCESS_TOKEN;
+    check_failure "Unable to clean stale artifacts.";
+
     print_info "Start uploading.";
     if [[ "$MULTI_BUNDLE" == "false" ]]; then
       python3 $CIRRUS_WORKING_DIR/scripts/deploy.py upload $ACCESS_TOKEN $CIRRUS_WORKING_DIR/valentina-${PLATFORM}-${QT_VERSION}-${ARCH}-${CIRRUS_BRANCH}-${CIRRUS_CHANGE_IN_REPO}.tar.xz "/0.7.x/Mac OS X/valentina-${PLATFORM}-${QT_VERSION}-${ARCH}-${CIRRUS_CHANGE_IN_REPO}.tar.xz";

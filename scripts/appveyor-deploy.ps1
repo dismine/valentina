@@ -17,6 +17,15 @@ if($env:DEPLOY -eq "true") {
         Write-Host "[CI] Done." -ForegroundColor Green;
     }
 
+    Write-Host "[CI] Starting cleaning." -ForegroundColor Green;
+    & $env:PYTHON\python.exe "$env:APPVEYOR_BUILD_FOLDER\scripts\deploy.py" clean $env:ACCESS_TOKEN;
+    if ($LastExitCode -ne 0) {
+        Write-Error -Message "[CI] Error cleaning stale artifacts." -Category InvalidResult;
+        exit 1;
+    } else {
+        Write-Host "[CI] Cleaning done." -ForegroundColor Green;
+    }
+
     Write-Host "[CI] Uploading." -ForegroundColor Green;
     & $env:PYTHON\python.exe "$env:APPVEYOR_BUILD_FOLDER\scripts\deploy.py" upload $env:ACCESS_TOKEN "$env:INSTALL_ROOT\$file_name" "/0.7.x/Windows/$file_name";
     if ($LastExitCode -ne 0) {
