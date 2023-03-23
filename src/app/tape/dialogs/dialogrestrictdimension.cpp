@@ -51,7 +51,7 @@ auto FilterByMinimum(const QVector<qreal> &base, qreal restriction) -> QVector<q
     filtered.reserve(base.size());
     for(const auto &b : base)
     {
-        if (b >= restriction)
+        if (b > restriction || VFuzzyComparePossibleNulls(b, restriction))
         {
             filtered.append(b);
         }
@@ -71,7 +71,7 @@ auto FilterByMaximum(const QVector<qreal> &base, qreal restriction) -> QVector<q
     filtered.reserve(base.size());
     for(const auto &b : base)
     {
-        if (b <= restriction)
+        if (b < restriction || VFuzzyComparePossibleNulls(b, restriction))
         {
             filtered.append(b);
         }
@@ -85,8 +85,8 @@ void InitMinMax(qreal &min, qreal &max, const MeasurementDimension_p &dimension,
 {
     if (not dimension.isNull())
     {
-        min = bases.indexOf(restriction.GetMin()) != -1 ? restriction.GetMin() : dimension->MinValue();
-        max = bases.indexOf(restriction.GetMax()) != -1 ? restriction.GetMax() : dimension->MaxValue();
+        min = VFuzzyIndexOf(bases, restriction.GetMin()) != -1 ? restriction.GetMin() : dimension->MinValue();
+        max = VFuzzyIndexOf(bases, restriction.GetMax()) != -1 ? restriction.GetMax() : dimension->MaxValue();
 
         if (max < min)
         {
@@ -100,14 +100,14 @@ void InitMinMax(qreal &min, qreal &max, const MeasurementDimension_p &dimension,
 void SetCellIcon(QTableWidgetItem *item, const QVector<qreal> &validRows, qreal rowValue, qreal columnValue,
                  const VDimensionRestriction &restriction, qreal min, qreal max)
 {
-    if (validRows.contains(rowValue))
+    if (VFuzzyContains(validRows, rowValue))
     {
-        const bool leftRestriction = columnValue >= min;
-        const bool rightRestriction = columnValue <= max;
+        const bool leftRestriction = columnValue > min || VFuzzyComparePossibleNulls(columnValue, min);
+        const bool rightRestriction = columnValue < max || VFuzzyComparePossibleNulls(columnValue, max);
 
         if (leftRestriction && rightRestriction)
         {
-            item->setIcon(QIcon(restriction.GetExcludeValues().contains(columnValue)
+            item->setIcon(QIcon(VFuzzyContains(restriction.GetExcludeValues(), columnValue)
                                     ? QStringLiteral("://icon/24x24/close.png")
                                     : QStringLiteral("://icon/24x24/star.png")));
         }
@@ -246,7 +246,7 @@ void DialogRestrictDimension::RowSelected()
 
         ui->comboBoxMin->blockSignals(true);
         ui->comboBoxMin->clear();
-        QVector<qreal> filtered = FilterByMaximum(bases, restriction.GetMax());
+        QVector<qreal> filtered = FilterByMinimum(FilterByMaximum(bases, restriction.GetMax()), restriction.GetMin());
         FillBases(filtered, dimension, ui->comboBoxMin);
         int index = ui->comboBoxMin->findData(restriction.GetMin());
         ui->comboBoxMin->setCurrentIndex(index != -1 ? index : 0);
@@ -254,8 +254,7 @@ void DialogRestrictDimension::RowSelected()
 
         ui->comboBoxMax->blockSignals(true);
         ui->comboBoxMax->clear();
-        filtered = FilterByMinimum(bases, restriction.GetMin());
-        FillBases(FilterByMinimum(bases, restriction.GetMin()), dimension, ui->comboBoxMax);
+        FillBases(filtered, dimension, ui->comboBoxMax);
         index = ui->comboBoxMax->findData(restriction.GetMax());
         ui->comboBoxMax->setCurrentIndex(index != -1 ? index : ui->comboBoxMax->count() - 1);
         ui->comboBoxMax->blockSignals(false);
@@ -394,7 +393,7 @@ void DialogRestrictDimension::CellContextMenu(QPoint pos)
     }
 
     VDimensionRestriction restriction = m_restrictions.value(coordinates);
-    bool exclude = not restriction.GetExcludeValues().contains(columnValue);
+    bool exclude = not VFuzzyContains(restriction.GetExcludeValues(), columnValue);
     QScopedPointer<QMenu> menu(new QMenu());
     QAction *actionExclude = menu->addAction(exclude ? tr("Exclude") : tr("Include"));
 
@@ -650,7 +649,7 @@ void DialogRestrictDimension::AddCell(int row, int column, qreal rowValue, qreal
     if (m_restrictionType == RestrictDimension::First)
     {
         VDimensionRestriction restriction = m_restrictions.value(QChar('0'));
-        item->setIcon(QIcon(restriction.GetExcludeValues().contains(columnValue)
+        item->setIcon(QIcon(VFuzzyContains(restriction.GetExcludeValues(), columnValue)
                                 ? QStringLiteral("://icon/24x24/close.png")
                                 : QStringLiteral("://icon/24x24/star.png")));
     }
@@ -732,9 +731,9 @@ void DialogRestrictDimension::FillBases(const QVector<qreal> &bases, const Measu
     {
         for(auto base : bases)
         {
-            if (labels.contains(base) && not labels.value(base).isEmpty())
+            if (VFuzzyContains(labels, base) && not VFuzzyValue(labels, base).isEmpty())
             {
-                control->addItem(labels.value(base), base);
+                control->addItem(VFuzzyValue(labels, base), base);
             }
             else
             {
@@ -746,9 +745,9 @@ void DialogRestrictDimension::FillBases(const QVector<qreal> &bases, const Measu
     {
         for(auto base : bases)
         {
-            if (labels.contains(base) && not labels.value(base).isEmpty())
+            if (VFuzzyContains(labels, base) && not VFuzzyValue(labels, base).isEmpty())
             {
-                control->addItem(labels.value(base), base);
+                control->addItem(VFuzzyValue(labels, base), base);
             }
             else
             {
@@ -767,9 +766,9 @@ void DialogRestrictDimension::FillBases(const QVector<qreal> &bases, const Measu
     {
         for(auto base : bases)
         {
-            if (labels.contains(base) && not labels.value(base).isEmpty())
+            if (VFuzzyContains(labels, base) && not VFuzzyValue(labels, base).isEmpty())
             {
-                control->addItem(labels.value(base), base);
+                control->addItem(VFuzzyValue(labels, base), base);
             }
             else
             {
@@ -791,9 +790,9 @@ auto DialogRestrictDimension::FillDimensionXBases(const QVector<qreal> &bases,
 
     for(auto base : bases)
     {
-        if (dimensionLabels.contains(base) && not dimensionLabels.value(base).isEmpty())
+        if (VFuzzyContains(dimensionLabels, base) && not VFuzzyValue(dimensionLabels, base).isEmpty())
         {
-            labels.append(dimensionLabels.value(base));
+            labels.append(VFuzzyValue(dimensionLabels, base));
         }
         else
         {
@@ -816,9 +815,9 @@ auto DialogRestrictDimension::FillDimensionYBases(const QVector<qreal> &bases,
 
     for(auto base : bases)
     {
-        if (dimensionLabels.contains(base) && not dimensionLabels.value(base).isEmpty())
+        if (VFuzzyContains(dimensionLabels, base) && not VFuzzyValue(dimensionLabels, base).isEmpty())
         {
-            labels.append(dimensionLabels.value(base));
+            labels.append(VFuzzyValue(dimensionLabels, base));
         }
         else
         {
@@ -848,9 +847,9 @@ auto DialogRestrictDimension::FillDimensionWZBases(const QVector<qreal> &bases,
 
     for(auto base : bases)
     {
-        if (dimensionLabels.contains(base) && not dimensionLabels.value(base).isEmpty())
+        if (VFuzzyContains(dimensionLabels, base) && not VFuzzyValue(dimensionLabels, base).isEmpty())
         {
-            labels.append(dimensionLabels.value(base));
+            labels.append(VFuzzyValue(dimensionLabels, base));
         }
         else
         {
@@ -904,8 +903,8 @@ auto DialogRestrictDimension::DimensionRestrictedValues(const MeasurementDimensi
 
     const QVector<qreal> bases = dimension->ValidBases();
 
-    qreal min = bases.indexOf(restriction.GetMin()) != -1 ? restriction.GetMin() : dimension->MinValue();
-    qreal max = bases.indexOf(restriction.GetMax()) != -1 ? restriction.GetMax() : dimension->MaxValue();
+    qreal min = VFuzzyIndexOf(bases, restriction.GetMin()) != -1 ? restriction.GetMin() : dimension->MinValue();
+    qreal max = VFuzzyIndexOf(bases, restriction.GetMax()) != -1 ? restriction.GetMax() : dimension->MaxValue();
 
     if (min > max)
     {
@@ -935,7 +934,7 @@ auto DialogRestrictDimension::StartRow() const -> int
 
         for(int i=0; i < basesRow.size(); ++i)
         {
-            if (validRows.contains(basesRow.at(i)))
+            if (VFuzzyContains(validRows, basesRow.at(i)))
             {
                 return i;
             }

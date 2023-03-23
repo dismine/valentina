@@ -184,7 +184,7 @@ void DialogDimensionLabels::InitTable()
         }
 
         {
-            auto *itemLabel = new QTableWidgetItem(labels.value(base));
+            auto *itemLabel = new QTableWidgetItem(VFuzzyValue(labels, base));
             itemLabel->setData(Qt::UserRole, base);
             itemLabel->setTextAlignment(Qt::AlignHCenter | Qt::AlignCenter);
 

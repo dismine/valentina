@@ -53,6 +53,66 @@ template <class T> class QSharedPointer;
 using MeasurementDimension_p = QSharedPointer<VAbstartMeasurementDimension>;
 using DimesionLabels = QMap<qreal, QString>;
 
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+inline bool VFuzzyContains(const QMap<qreal, T> &c, qreal value)
+{
+    auto i = c.constBegin();
+    while (i != c.constEnd())
+    {
+        if (VFuzzyComparePossibleNulls(i.key(), value))
+        {
+            return true;
+        }
+        ++i;
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <template <typename> class Cont>
+inline bool VFuzzyContains(const Cont<qreal> &c, qreal value)
+{
+    for (auto val : c)
+    {
+        if (VFuzzyComparePossibleNulls(val, value))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <template <typename> class Cont>
+inline vsizetype VFuzzyIndexOf(const Cont<qreal> &c, qreal value)
+{
+    for (int i = 0; i < c.size(); ++i)
+    {
+        if (VFuzzyComparePossibleNulls(c.at(i), value))
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+inline T VFuzzyValue(const QMap<qreal, T> &c, qreal value, const T &defaultValue = T())
+{
+    auto i = c.constBegin();
+    while (i != c.constEnd())
+    {
+        if (VFuzzyComparePossibleNulls(i.key(), value))
+        {
+            return i.value();
+        }
+        ++i;
+    }
+    return defaultValue;
+}
+
 class VAbstartMeasurementDimension
 {
     Q_DECLARE_TR_FUNCTIONS(VAbstartMeasurementDimension) // NOLINT

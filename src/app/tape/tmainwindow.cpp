@@ -142,9 +142,9 @@ void InitDimensionXItems(const QVector<qreal> &bases, const DimesionLabels &labe
 
     for(auto base : bases)
     {
-        if (labels.contains(base) && not labels.value(base).isEmpty())
+        if (VFuzzyContains(labels, base) && not VFuzzyValue(labels, base).isEmpty())
         {
-            control->addItem(labels.value(base), base);
+            control->addItem(VFuzzyValue(labels, base), base);
         }
         else
         {
@@ -159,9 +159,9 @@ void InitDimensionYWZItems(const QVector<qreal> &bases, const DimesionLabels &la
 {
     for(auto base : bases)
     {
-        if (labels.contains(base) && not labels.value(base).isEmpty())
+        if (VFuzzyContains(labels, base) && not VFuzzyValue(labels, base).isEmpty())
         {
-            control->addItem(labels.value(base), base);
+            control->addItem(VFuzzyValue(labels, base), base);
         }
         else
         {
@@ -2844,9 +2844,10 @@ void TMainWindow::InitDimensionsBaseValue()
 
             DimesionLabels labels = dimension->Labels();
 
-            if (labels.contains(dimension->BaseValue()) && not labels.value(dimension->BaseValue()).isEmpty())
+            if (VFuzzyContains(labels, dimension->BaseValue())
+                && not VFuzzyValue(labels, dimension->BaseValue()).isEmpty())
             {
-                base->setText(labels.value(dimension->BaseValue()));
+                base->setText(VFuzzyValue(labels, dimension->BaseValue()));
             }
             else
             {
@@ -4300,8 +4301,8 @@ auto TMainWindow::DimensionRestrictedValues(int index, const MeasurementDimensio
 
     const QVector<qreal> bases = dimension->ValidBases();
 
-    qreal min = bases.indexOf(restriction.GetMin()) != -1 ? restriction.GetMin() : dimension->MinValue();
-    qreal max = bases.indexOf(restriction.GetMax()) != -1 ? restriction.GetMax() : dimension->MaxValue();
+    qreal min = VFuzzyIndexOf(bases, restriction.GetMin()) != -1 ? restriction.GetMin() : dimension->MinValue();
+    qreal max = VFuzzyIndexOf(bases, restriction.GetMax()) != -1 ? restriction.GetMax() : dimension->MaxValue();
 
     if (min > max)
     {

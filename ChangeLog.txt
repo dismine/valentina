@@ -17,6 +17,7 @@
 - Improve labels for V notch.
 - Fix QT issue on MacOS version 11.0 "Big Sur".
 - Fix excluding objects in internal path.
+- Fix float-point accuracy issue in multisize measurements dimensions.
 
 # Valentina 0.7.52 September 12, 2022
 - Fix crash when default locale is ru.

@@ -2335,14 +2335,14 @@ void MainWindow::StoreMultisizeMDimension(const QList<MeasurementDimension_p> &d
         case MeasurementDimension::X:
             VAbstractValApplication::VApp()->SetDimensionHeight(currentBase);
             VAbstractValApplication::VApp()->SetDimensionHeightLabel(
-                labels.value(currentBase, QString::number(currentBase)));
+                VFuzzyValue(labels, currentBase, QString::number(currentBase)));
             break;
         case MeasurementDimension::Y:
         {
             const bool fc = m_m->IsFullCircumference();
             VAbstractValApplication::VApp()->SetDimensionSize(fc ? currentBase*2 : currentBase);
             VAbstractValApplication::VApp()->SetDimensionSizeLabel(
-                labels.value(currentBase, QString::number(fc ? currentBase*2 : currentBase)));
+                VFuzzyValue(labels, currentBase, QString::number(fc ? currentBase*2 : currentBase)));
             const bool measurement = dimension->IsBodyMeasurement();
             VAbstractValApplication::VApp()
                 ->SetDimensionSizeUnits(measurement ? m_m->Units() : Unit::LAST_UNIT_DO_NOT_USE);
@@ -2353,7 +2353,7 @@ void MainWindow::StoreMultisizeMDimension(const QList<MeasurementDimension_p> &d
             const bool fc = m_m->IsFullCircumference();
             VAbstractValApplication::VApp()->SetDimensionWaist(fc ? currentBase*2 : currentBase);
             VAbstractValApplication::VApp()->SetDimensionWaistLabel(
-                labels.value(currentBase, QString::number(fc ? currentBase*2 : currentBase)));
+                VFuzzyValue(labels, currentBase, QString::number(fc ? currentBase*2 : currentBase)));
             break;
         }
         case MeasurementDimension::Z:
@@ -2361,7 +2361,7 @@ void MainWindow::StoreMultisizeMDimension(const QList<MeasurementDimension_p> &d
             const bool fc = m_m->IsFullCircumference();
             VAbstractValApplication::VApp()->SetDimensionHip(fc ? currentBase*2 : currentBase);
             VAbstractValApplication::VApp()->SetDimensionHipLabel(
-                labels.value(currentBase, QString::number(fc ? currentBase*2 : currentBase)));
+                VFuzzyValue(labels, currentBase, QString::number(fc ? currentBase*2 : currentBase)));
             break;
         }
         default:
@@ -2419,8 +2419,8 @@ auto MainWindow::DimensionRestrictedValues(int index, const MeasurementDimension
 
     const QVector<qreal> bases = dimension->ValidBases();
 
-    qreal min = bases.indexOf(restriction.GetMin()) != -1 ? restriction.GetMin() : dimension->MinValue();
-    qreal max = bases.indexOf(restriction.GetMax()) != -1 ? restriction.GetMax() : dimension->MaxValue();
+    qreal min = VFuzzyIndexOf(bases, restriction.GetMin()) != -1 ? restriction.GetMin() : dimension->MinValue();
+    qreal max = VFuzzyIndexOf(bases, restriction.GetMax()) != -1 ? restriction.GetMax() : dimension->MaxValue();
 
     if (min > max)
     {
@@ -4943,9 +4943,9 @@ void MainWindow::InitDimensionXGradation(const QVector<qreal> &bases, const Dime
 
     for(auto base : bases)
     {
-        if (labels.contains(base) && not labels.value(base).isEmpty())
+        if (VFuzzyContains(labels, base) && not VFuzzyValue(labels, base).isEmpty())
         {
-            control->addItem(labels.value(base), base);
+            control->addItem(VFuzzyValue(labels, base), base);
         }
         else
         {
@@ -4963,9 +4963,9 @@ void MainWindow::InitDimensionYWZGradation(const QVector<qreal> &bases, const Di
 
     for(auto base : bases)
     {
-        if (labels.contains(base) && not labels.value(base).isEmpty())
+        if (VFuzzyContains(labels, base) && not VFuzzyValue(labels, base).isEmpty())
         {
-            control->addItem(labels.value(base), base);
+            control->addItem(VFuzzyValue(labels, base), base);
         }
         else
         {

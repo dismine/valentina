@@ -110,8 +110,8 @@ auto VAbstartMeasurementDimension::Name() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstartMeasurementDimension::ValidSteps() const -> QVector<qreal>
 {
-    const qreal stepBarrier = 8.5;
-    const qreal s = 0.5;
+    const qreal stepBarrier = 50;
+    const qreal s = 0.1;
 
     QVector<qreal> steps;
     steps.reserve(qRound((stepBarrier - s) * 2 - 1));
@@ -124,6 +124,7 @@ auto VAbstartMeasurementDimension::ValidSteps() const -> QVector<qreal>
     else if (diff > 0)
     {
         qreal candidate = 1;
+        int i = 1;
         do
         {
             const qreal step = (m_units == Unit::Mm ? candidate * 10 : candidate);
@@ -132,7 +133,8 @@ auto VAbstartMeasurementDimension::ValidSteps() const -> QVector<qreal>
             {
                 steps.append(step);
             }
-            candidate += s;
+            candidate = 1 + s * i;
+            ++i;
         }
         while(candidate < stepBarrier);
     }
@@ -179,23 +181,27 @@ auto VAbstartMeasurementDimension::ValidBases(qreal min, qreal max, qreal step,
     validBases.reserve(qRound((max - min) / step));
 
     qreal value = min;
+    int i = 1;
     do
     {
-        if (not exclude.contains(value))
+        if (not VFuzzyContains(exclude, value))
         {
             validBases.append(value);
         }
-        value += step;
+        value = min + step * i;
+        ++i;
     }
     while(value < max + step);
 
     if (validBases.isEmpty())
     {
         value = min;
+        int i = 1;
         do
         {
             validBases.append(value);
-            value += step;
+            value = min + step * i;
+            ++i;
         }
         while(value < max + step);
     }
@@ -222,7 +228,7 @@ auto VAbstartMeasurementDimension::IsRangeValid() const -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstartMeasurementDimension::IsStepValid() const -> bool
 {
-    bool valid = ValidSteps().indexOf(m_step) != -1;
+    bool valid = VFuzzyIndexOf(ValidSteps(), m_step) != -1;
     if (not valid)
     {
         m_error = QCoreApplication::translate("VAbstartMeasurementDimension", "Invalid step");
@@ -234,7 +240,7 @@ auto VAbstartMeasurementDimension::IsStepValid() const -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstartMeasurementDimension::IsBaseValid() const -> bool
 {
-    bool valid = ValidBases().indexOf(m_baseValue) != -1;
+    bool valid = VFuzzyIndexOf(ValidBases(), m_baseValue) != -1;
     if (not valid)
     {
         m_error = QCoreApplication::translate("VAbstartMeasurementDimension", "Base value invalid");
