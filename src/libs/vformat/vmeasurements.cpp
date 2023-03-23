@@ -41,6 +41,7 @@
 #include <QGlobalStatic>
 
 #include "../ifc/exception/vexceptionemptyparameter.h"
+#include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/xml/vvitconverter.h"
 #include "../ifc/xml/vvstconverter.h"
 #include "../ifc/ifcdef.h"
@@ -153,7 +154,12 @@ void VMeasurements::setXMLContent(const QString &fileName)
     VDomDocument::setXMLContent(fileName);
     type = ReadType();
     m_units = ReadUnits();
-    m_dimensions = ReadDimensions();
+
+    if (type == MeasurementsType::Multisize &&
+        VVSTConverter::MeasurementMaxVer == GetFormatVersion(GetFormatVersionStr()))
+    {
+        m_dimensions = ReadDimensions();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1427,6 +1433,14 @@ auto VMeasurements::ReadDimensions() const -> VDimensions
         dimension->SetBodyMeasurement(GetParametrBool(dom, AttrMeasurement, trueStr));
         dimension->SetCustomName(GetParametrEmptyString(dom, AttrCustomName));
         dimension->SetLabels(ReadDimensionLabels(dom));
+
+        if (not dimension->IsValid())
+        {
+            VExceptionObjectError excep(tr("Dimension is not valid"), dom);
+            excep.AddMoreInformation(dimension->Error());
+            throw excep;
+        }
+
         dimensions.insert(type, dimension);
     }
 

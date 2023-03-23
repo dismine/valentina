@@ -204,10 +204,12 @@ auto VAbstartMeasurementDimension::ValidBases(qreal min, qreal max, qreal step,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstartMeasurementDimension::IsRangeValid() -> bool
+auto VAbstartMeasurementDimension::IsRangeValid() const -> bool
 {
-    bool valid = m_minValue > 0 && m_maxValue > 0 && m_minValue >= RangeMin() && m_minValue <= RangeMax()
-                 && m_minValue <= m_maxValue;
+    bool valid = m_minValue > 0 && m_maxValue > 0 &&
+                 (m_minValue > RangeMin() || VFuzzyComparePossibleNulls(m_minValue, RangeMin())) &&
+                 (m_maxValue < RangeMax() || VFuzzyComparePossibleNulls(m_maxValue, RangeMax())) &&
+                 (m_minValue < m_maxValue || VFuzzyComparePossibleNulls(m_minValue, m_maxValue));
 
     if (not valid)
     {
@@ -218,7 +220,7 @@ auto VAbstartMeasurementDimension::IsRangeValid() -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstartMeasurementDimension::IsStepValid() -> bool
+auto VAbstartMeasurementDimension::IsStepValid() const -> bool
 {
     bool valid = ValidSteps().indexOf(m_step) != -1;
     if (not valid)
@@ -230,7 +232,7 @@ auto VAbstartMeasurementDimension::IsStepValid() -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstartMeasurementDimension::IsBaseValid() -> bool
+auto VAbstartMeasurementDimension::IsBaseValid() const -> bool
 {
     bool valid = ValidBases().indexOf(m_baseValue) != -1;
     if (not valid)
@@ -244,7 +246,14 @@ auto VAbstartMeasurementDimension::IsBaseValid() -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstartMeasurementDimension::IsUnitsValid() const -> bool
 {
-    return m_units == Unit::Cm || m_units == Unit::Mm || m_units == Unit::Inch;
+    bool valid = (m_units == Unit::Cm || m_units == Unit::Mm || m_units == Unit::Inch);
+
+    if (not valid)
+    {
+        m_error = QCoreApplication::translate("VAbstartMeasurementDimension", "Units are invalid");
+    }
+
+    return valid;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

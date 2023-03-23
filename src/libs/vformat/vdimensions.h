@@ -107,23 +107,23 @@ public:
     void SetCustomName(const QString &newCustomName);
 
 protected:
-    auto IsRangeValid() -> bool;
-    auto IsStepValid() -> bool;
-    auto IsBaseValid() -> bool;
+    auto IsRangeValid() const -> bool;
+    auto IsStepValid() const -> bool;
+    auto IsBaseValid() const -> bool;
     auto IsUnitsValid() const -> bool;
 
 private:
     Q_DISABLE_COPY_MOVE(VAbstartMeasurementDimension) // NOLINT
 
-    Unit           m_units{Unit::Cm};
-    qreal          m_minValue{0};
-    qreal          m_maxValue{0};
-    qreal          m_step{-1};
-    qreal          m_baseValue{0};
-    QString        m_error{};
-    DimesionLabels m_labels{};
-    bool           m_measurement{true};
-    QString        m_customName{};
+    Unit            m_units{Unit::Cm};
+    qreal           m_minValue{0};
+    qreal           m_maxValue{0};
+    qreal           m_step{-1};
+    qreal           m_baseValue{0};
+    mutable QString m_error{};
+    DimesionLabels  m_labels{};
+    bool            m_measurement{true};
+    QString         m_customName{};
 };
 
 //---------------------------------------------------------------------------------------------------------------------
