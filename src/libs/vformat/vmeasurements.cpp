@@ -1592,13 +1592,13 @@ DimesionLabels VMeasurements::ReadDimensionLabels(const QDomElement &dElement) c
 {
     if (dElement.isNull())
     {
-        return DimesionLabels();
+        return {};
     }
 
     QDomElement labelsTag = dElement.firstChildElement(TagLabels);
     if (labelsTag.isNull())
     {
-        return DimesionLabels();
+        return {};
     }
 
     DimesionLabels labels;
