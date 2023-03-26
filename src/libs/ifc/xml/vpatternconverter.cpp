@@ -368,7 +368,6 @@ void VPatternConverter::ApplyPatches()
             Q_FALLTHROUGH();
         case (FormatVersion(0, 9, 0)):
             ToV0_9_1();
-            ValidateXML(CurrentSchema);
             Q_FALLTHROUGH();
         case (FormatVersion(0, 9, 1)):
             ToV0_9_2();
