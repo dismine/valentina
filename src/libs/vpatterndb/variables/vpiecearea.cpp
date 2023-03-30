@@ -27,8 +27,9 @@
  *************************************************************************/
 #include "vpiecearea.h"
 #include "vpiecearea_p.h"
-#include "../vpatterndb/vpiece.h"
-#include "../vpatterndb/vcontainer.h"
+#include "../vpiece.h"
+#include "../vcontainer.h"
+#include "vincrement.h"
 
 #include <QRegularExpression>
 
@@ -48,17 +49,23 @@ VPieceArea::VPieceArea(PieceAreaType type, quint32 pieceId, const VPiece &piece,
 
     QString shortName = PieceShortName(piece);
 
+    VContainer tempData = *data;
+    auto currentSA = new VIncrement(&tempData, currentSeamAllowance);
+    currentSA->SetFormula(piece.GetSAWidth(), QString().setNum(piece.GetSAWidth()), true);
+
+    tempData.AddVariable(currentSA);
+
     if (type == PieceAreaType::External)
     {
         SetType(VarType::PieceExternalArea);
         SetName(pieceArea_ + shortName);
-        VInternalVariable::SetValue(FromPixel2(piece.ExternalArea(data), unit));
+        VInternalVariable::SetValue(FromPixel2(piece.ExternalArea(&tempData), unit));
     }
     else
     {
         SetType(VarType::PieceSeamLineArea);
         SetName(pieceSeamLineArea_ + shortName);
-        VInternalVariable::SetValue(FromPixel2(piece.SeamLineArea(data), unit));
+        VInternalVariable::SetValue(FromPixel2(piece.SeamLineArea(&tempData), unit));
     }
 }
 
