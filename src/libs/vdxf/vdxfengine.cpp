@@ -711,8 +711,17 @@ auto VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details) -> bool
 
     for(auto detail : details)
     {
+        // Use custom deleter function to lose ownership after adding the block
+        bool deleteBlock = true;
+        auto NoOpDeleter =[&deleteBlock](dx_ifaceBlock* block)
+        {
+            if (deleteBlock)
+            {
+                delete block;
+            }
+        };
 
-        auto detailBlock = QSharedPointer<dx_ifaceBlock>::create();
+        auto detailBlock = QSharedPointer<dx_ifaceBlock>(new dx_ifaceBlock, NoOpDeleter);
 
         QString blockName = detail.GetName();
         if (m_version <= DRW::AC1009)
@@ -740,6 +749,8 @@ auto VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details) -> bool
         insert->layer = *layer1;
 
         m_input->AddEntity(insert.take());
+
+        deleteBlock = false; // lose ownership
     }
 
     return m_input->fileExport(m_binary);
@@ -929,7 +940,16 @@ auto VDxfEngine::ExportToASTM(const QVector<VLayoutPiece> &details) -> bool
 
     for(auto detail : details)
     {
-        auto detailBlock = QSharedPointer<dx_ifaceBlock>::create();
+        // Use custom deleter function to lose ownership after adding the block
+        bool deleteBlock = true;
+        auto NoOpDeleter =[&deleteBlock](dx_ifaceBlock* block)
+        {
+            if (deleteBlock)
+            {
+                delete block;
+            }
+        };
+        auto detailBlock = QSharedPointer<dx_ifaceBlock>(new dx_ifaceBlock, NoOpDeleter);
 
         QString blockName = detail.GetName();
         if (m_version <= DRW::AC1009)
@@ -959,6 +979,8 @@ auto VDxfEngine::ExportToASTM(const QVector<VLayoutPiece> &details) -> bool
         insert->layer = *layer1;
 
         m_input->AddEntity(insert.take());
+
+        deleteBlock = false; // lose ownership
     }
 
     return m_input->fileExport(m_binary);
