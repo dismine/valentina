@@ -39,6 +39,7 @@ public:
      */
     bool read(DRW_Interface *interface_, bool ext);
     void setBinary(bool b) {binFile = b;}
+    void AddXSpaceBlock(bool add) {m_xSpaceBlock = add;}
 
     bool write(DRW_Interface *interface_, DRW::Version ver, bool bin);
     bool writeLineType(DRW_LType *ent);
@@ -138,6 +139,7 @@ private:
     std::string fileName;
     std::string codePage;
     bool binFile;
+    bool m_xSpaceBlock{true};
     dxfReader *reader;
     dxfWriter *writer;
     DRW_Interface *iface;

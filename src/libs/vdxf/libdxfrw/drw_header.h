@@ -117,10 +117,10 @@ public:
 protected:
     bool parseCode(int code, dxfReader *reader);
 private:
-    bool getDouble(const std::string &key, double *varDouble);
-    bool getInt(const std::string &key, int *varInt);
-    bool getStr(const std::string &key, std::string *varStr);
-    bool getCoord(const std::string &key, DRW_Coord *varCoord);
+    bool getDouble(const std::string &key, double *varDouble) const;
+    bool getInt(const std::string &key, int *varInt) const;
+    bool getStr(const std::string &key, std::string *varStr) const;
+    bool getCoord(const std::string &key, DRW_Coord *varCoord) const;
     void clearVars()
     {
         for (auto it=vars.begin(); it!=vars.end(); ++it)

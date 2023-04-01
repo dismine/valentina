@@ -120,31 +120,32 @@ void DRW_Header::write(dxfWriter *writer, DRW::Version ver){
     DRW_Coord varCoord;
     writer->writeString(2, "HEADER");
     writer->writeString(9, "$ACADVER");
-    switch (ver) {
-    case DRW::AC1006: //unsupported version acad 10
-    case DRW::AC1009: //acad 11 & 12
-        varStr = "AC1009";
-        break;
-    case DRW::AC1012: //unsupported version acad 13
-    case DRW::AC1014: //acad 14
-        varStr = "AC1014";
-        break;
-    case DRW::AC1015: //acad 2000
-        varStr = "AC1015";
-        break;
-    case DRW::AC1018: //acad 2004
-        varStr = "AC1018";
-        break;
-    case DRW::AC1024: //acad 2010
-        varStr = "AC1024";
-        break;
-    case DRW::AC1027: //acad 2013
-        varStr = "AC1027";
-        break;
-    case DRW::AC1021: //acad 2007
-    default: //acad 2007 default version
-        varStr = "AC1021";
-        break;
+    switch (ver)
+    {
+        case DRW::AC1006: //unsupported version acad 10
+        case DRW::AC1009: //acad 11 & 12
+            varStr = "AC1009";
+            break;
+        case DRW::AC1012: //unsupported version acad 13
+        case DRW::AC1014: //acad 14
+            varStr = "AC1014";
+            break;
+        case DRW::AC1015: //acad 2000
+            varStr = "AC1015";
+            break;
+        case DRW::AC1018: //acad 2004
+            varStr = "AC1018";
+            break;
+        case DRW::AC1024: //acad 2010
+            varStr = "AC1024";
+            break;
+        case DRW::AC1027: //acad 2013
+            varStr = "AC1027";
+            break;
+        case DRW::AC1021: //acad 2007
+        default: //acad 2007 default version
+            varStr = "AC1021";
+            break;
     }
     writer->writeString(1, varStr);
     writer->setVersion(varStr, true);
@@ -271,14 +272,15 @@ void DRW_Header::write(dxfWriter *writer, DRW::Version ver){
             writer->writeUtf8String(7, varStr);
     else
         writer->writeString(7, "STANDARD");
-    writer->writeString(9, "$CLAYER");
+
     if (getStr("$CLAYER", &varStr))
+    {
+        writer->writeString(9, "$CLAYER");
         if (ver == DRW::AC1009)
             writer->writeUtf8Caps(8, varStr);
         else
             writer->writeUtf8String(8, varStr);
-    else
-        writer->writeString(8, "0");
+    }
     writer->writeString(9, "$CELTYPE");
     if (getStr("$CELTYPE", &varStr))
         if (ver == DRW::AC1009)
@@ -878,7 +880,8 @@ void DRW_Header::write(dxfWriter *writer, DRW::Version ver){
         writer->writeInt16(70, varInt);
     } else
         writer->writeInt16(70, 8);
-    if (ver < DRW::AC1012) {
+    if (ver < DRW::AC1012)
+    {
         writer->writeString(9, "$ATTDIA");
         if (getInt("$ATTDIA", &varInt)) {
             writer->writeInt16(70, varInt);
@@ -889,11 +892,19 @@ void DRW_Header::write(dxfWriter *writer, DRW::Version ver){
             writer->writeInt16(70, varInt);
         } else
             writer->writeInt16(70, 1);
-        writer->writeString(9, "$HANDLING");
-        if (getInt("$HANDLING", &varInt)) {
+
+        // A handle is an arbitrary but in your DXF file unique hex value as string like ‘10FF’. It is common to to use
+        // uppercase letters for hex numbers. Handle can have up to 16 hexadecimal digits (8 bytes).
+        //
+        // For DXF R10 until R12 the usage of handles was optional. The header variable $HANDLING set to 1 indicate the
+        // usage of handles, else $HANDLING is 0 or missing.
+        //
+        // For DXF R13 and later the usage of handles is mandatory and the header variable $HANDLING was removed.
+        if (getInt("$HANDLING", &varInt))
+        {
+            writer->writeString(9, "$HANDLING");
             writer->writeInt16(70, varInt);
-        } else
-            writer->writeInt16(70, 1);
+        }
     }
     writer->writeString(9, "$HANDSEED");
     //RLZ        dxfHex(5, 0xFFFF);
@@ -1694,37 +1705,39 @@ void DRW_Header::addCoord(std::string key, const DRW_Coord &value, int code){
     vars[key] =curr;
 }
 
-bool DRW_Header::getDouble(const std::string &key, double *varDouble){
+bool DRW_Header::getDouble(const std::string &key, double *varDouble) const
+{
     bool result = false;
     auto it=vars.find( key);
-    if (it != vars.end()) {
+    if (it != vars.end())
+    {
         DRW_Variant *var = (*it).second;
-        if (var->type == DRW_Variant::DOUBLE) {
+        if (var->type == DRW_Variant::DOUBLE)
+        {
             *varDouble = var->content.d;
             result = true;
         }
-        delete var;
-        vars.erase (it);
     }
     return result;
 }
 
-bool DRW_Header::getInt(const std::string &key, int *varInt){
+bool DRW_Header::getInt(const std::string &key, int *varInt) const
+{
     bool result = false;
     auto it=vars.find( key);
-    if (it != vars.end()) {
+    if (it != vars.end())
+    {
         DRW_Variant *var = (*it).second;
-        if (var->type == DRW_Variant::INTEGER) {
+        if (var->type == DRW_Variant::INTEGER)
+        {
             *varInt = var->content.i;
             result = true;
         }
-        delete var;
-        vars.erase (it);
     }
     return result;
 }
 
-bool DRW_Header::getStr(const std::string &key, std::string *varStr){
+bool DRW_Header::getStr(const std::string &key, std::string *varStr) const{
     bool result = false;
     auto it=vars.find( key);
     if (it != vars.end()) {
@@ -1733,23 +1746,22 @@ bool DRW_Header::getStr(const std::string &key, std::string *varStr){
             *varStr = *var->content.s;
             result = true;
         }
-        delete var;
-        vars.erase (it);
     }
     return result;
 }
 
-bool DRW_Header::getCoord(const std::string &key, DRW_Coord *varCoord){
+bool DRW_Header::getCoord(const std::string &key, DRW_Coord *varCoord) const
+{
     bool result = false;
     auto it=vars.find( key);
-    if (it != vars.end()) {
+    if (it != vars.end())
+    {
         DRW_Variant *var = (*it).second;
-        if (var->type == DRW_Variant::COORD) {
+        if (var->type == DRW_Variant::COORD)
+        {
             *varCoord = *var->content.v;
             result = true;
         }
-        delete var;
-        vars.erase (it);
     }
     return result;
 }

@@ -157,6 +157,7 @@ auto VDxfEngine::begin(QPaintDevice *pdev) -> bool
 
     m_input = QSharedPointer<dx_iface>(new dx_iface(GetFileNameForLocale(), m_version, m_varMeasurement,
                                                     m_varInsunits));
+    m_input->AddDefHeaderData();
     m_input->AddQtLTypes();
     m_input->AddDefLayers();
     return true;
@@ -700,6 +701,7 @@ auto VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details) -> bool
     }
 
     m_input = QSharedPointer<dx_iface>::create(GetFileNameForLocale(), m_version, m_varMeasurement, m_varInsunits);
+    m_input->AddXSpaceBlock(false);
     m_input->AddAAMAHeaderData();
     if (m_version > DRW::AC1009)
     {
@@ -730,6 +732,7 @@ auto VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details) -> bool
         }
 
         detailBlock->name = blockName.toStdString();
+        detailBlock->flags = 64;
         detailBlock->layer = *layer1;
 
         detail.Scale(m_xscale, m_yscale);
@@ -928,7 +931,7 @@ auto VDxfEngine::ExportToASTM(const QVector<VLayoutPiece> &details) -> bool
 
     m_input = QSharedPointer<dx_iface>(new dx_iface(GetFileNameForLocale(), m_version, m_varMeasurement,
                                                     m_varInsunits));
-
+    m_input->AddXSpaceBlock(false);
     m_input->AddAAMAHeaderData();
     if (m_version > DRW::AC1009)
     {

@@ -142,10 +142,10 @@ bool dxfRW::write(DRW_Interface *interface_, DRW::Version ver, bool bin){
             std::string comm = std::string("dxfrw ") + std::string(DRW_VERSION);
             writer->writeString(999, comm);
         }
-        DRW_Header header;
+        this->header = DRW_Header();
         iface->writeHeader(header);
         writer->writeString(0, "SECTION");
-        entCount =FIRSTHANDLE;
+        entCount = FIRSTHANDLE;
         header.write(writer, version);
         writer->writeString(0, "ENDSEC");
         if (ver > DRW::AC1009) {
@@ -190,9 +190,33 @@ bool dxfRW::write(DRW_Interface *interface_, DRW::Version ver, bool bin){
     return isOk;
 }
 
-bool dxfRW::writeEntity(DRW_Entity *ent) {
-    ent->handle = static_cast<duint32>(++entCount);
-    writer->writeString(5, toHexStr(static_cast<int>(ent->handle)));
+bool dxfRW::writeEntity(DRW_Entity *ent)
+{
+    // A handle is an arbitrary but in your DXF file unique hex value as string like ‘10FF’. It is common to to use
+    // uppercase letters for hex numbers. Handle can have up to 16 hexadecimal digits (8 bytes).
+    //
+    // For DXF R10 until R12 the usage of handles was optional. The header variable $HANDLING set to 1 indicate the
+    // usage of handles, else $HANDLING is 0 or missing.
+    //
+    // For DXF R13 and later the usage of handles is mandatory and the header variable $HANDLING was removed.
+    if (version < DRW::AC1012)
+    {
+        int varInt = 0;
+        if (header.getInt("$HANDLING", &varInt))
+        {
+            if (varInt != 0)
+            {
+                ent->handle = static_cast<duint32>(++entCount);
+                writer->writeString(5, toHexStr(static_cast<int>(ent->handle)));
+            }
+        }
+    }
+    else
+    {
+        ent->handle = static_cast<duint32>(++entCount);
+        writer->writeString(5, toHexStr(static_cast<int>(ent->handle)));
+    }
+
     if (version > DRW::AC1009) {
         writer->writeString(100, "AcDbEntity");
     }
@@ -467,6 +491,7 @@ bool dxfRW::writeDimstyle(DRW_Dimstyle *ent){
         if (name == "STANDARD")
             dimstyleStd = true;
     }
+
     if (version > DRW::AC1009) {
         writer->writeString(105, toHexStr(++entCount));
     }
@@ -1694,92 +1719,129 @@ bool dxfRW::writeTables() {
 return true;
 }
 
-bool dxfRW::writeBlocks() {
-    writer->writeString(0, "BLOCK");
-    if (version > DRW::AC1009) {
-        writer->writeString(5, "20");
-        if (version > DRW::AC1014) {
-            writer->writeString(330, "1F");
+bool dxfRW::writeBlocks()
+{
+    if (version > DRW::AC1009 || m_xSpaceBlock)
+    {
+        writer->writeString(0, "BLOCK");
+        if (version > DRW::AC1009)
+        {
+            writer->writeString(5, "20");
+            if (version > DRW::AC1014)
+            {
+                writer->writeString(330, "1F");
+            }
+            writer->writeString(100, "AcDbEntity");
         }
-        writer->writeString(100, "AcDbEntity");
-    }
-    writer->writeString(8, "0");
-    if (version > DRW::AC1009) {
-        writer->writeString(100, "AcDbBlockBegin");
-        writer->writeString(2, "*Model_Space");
-    } else
-        writer->writeString(2, "$MODEL_SPACE");
-    writer->writeInt16(70, 0);
-    writer->writeDouble(10, 0.0);
-    writer->writeDouble(20, 0.0);
-    writer->writeDouble(30, 0.0);
-    if (version > DRW::AC1009)
-        writer->writeString(3, "*Model_Space");
-    else
-        writer->writeString(3, "$MODEL_SPACE");
-    writer->writeString(1, "");
-    writer->writeString(0, "ENDBLK");
-    if (version > DRW::AC1009) {
-        writer->writeString(5, "21");
-        if (version > DRW::AC1014) {
-            writer->writeString(330, "1F");
+        writer->writeString(8, "0");
+        if (version > DRW::AC1009)
+        {
+            writer->writeString(100, "AcDbBlockBegin");
+            writer->writeString(2, "*Model_Space");
         }
-        writer->writeString(100, "AcDbEntity");
-    }
-    writer->writeString(8, "0");
-    if (version > DRW::AC1009)
-        writer->writeString(100, "AcDbBlockEnd");
+        else
+        {
+            writer->writeString(2, "$MODEL_SPACE");
+        }
+        writer->writeInt16(70, 0);
+        writer->writeDouble(10, 0.0);
+        writer->writeDouble(20, 0.0);
+        writer->writeDouble(30, 0.0);
+        if (version > DRW::AC1009)
+        {
+            writer->writeString(3, "*Model_Space");
+        }
+        else
+        {
+            writer->writeString(3, "$MODEL_SPACE");
+        }
+        writer->writeString(1, "");
+        writer->writeString(0, "ENDBLK");
+        if (version > DRW::AC1009)
+        {
+            writer->writeString(5, "21");
+            if (version > DRW::AC1014)
+            {
+                writer->writeString(330, "1F");
+            }
+            writer->writeString(100, "AcDbEntity");
+        }
+        writer->writeString(8, "0");
+        if (version > DRW::AC1009)
+        {
+            writer->writeString(100, "AcDbBlockEnd");
+        }
 
-    writer->writeString(0, "BLOCK");
-    if (version > DRW::AC1009) {
-        writer->writeString(5, "1C");
-        if (version > DRW::AC1014) {
-            writer->writeString(330, "1B");
+        writer->writeString(0, "BLOCK");
+        if (version > DRW::AC1009)
+        {
+            writer->writeString(5, "1C");
+            if (version > DRW::AC1014)
+            {
+                writer->writeString(330, "1B");
+            }
+            writer->writeString(100, "AcDbEntity");
         }
-        writer->writeString(100, "AcDbEntity");
-    }
-    writer->writeString(8, "0");
-    if (version > DRW::AC1009) {
-        writer->writeString(100, "AcDbBlockBegin");
-        writer->writeString(2, "*Paper_Space");
-    } else
-        writer->writeString(2, "$PAPER_SPACE");
-    writer->writeInt16(70, 0);
-    writer->writeDouble(10, 0.0);
-    writer->writeDouble(20, 0.0);
-    writer->writeDouble(30, 0.0);
-    if (version > DRW::AC1009)
-        writer->writeString(3, "*Paper_Space");
-    else
-        writer->writeString(3, "$PAPER_SPACE");
-    writer->writeString(1, "");
-    writer->writeString(0, "ENDBLK");
-    if (version > DRW::AC1009) {
-        writer->writeString(5, "1D");
-        if (version > DRW::AC1014) {
-            writer->writeString(330, "1F");
+        writer->writeString(8, "0");
+        if (version > DRW::AC1009)
+        {
+            writer->writeString(100, "AcDbBlockBegin");
+            writer->writeString(2, "*Paper_Space");
         }
-        writer->writeString(100, "AcDbEntity");
+        else
+        {
+            writer->writeString(2, "$PAPER_SPACE");
+        }
+        writer->writeInt16(70, 0);
+        writer->writeDouble(10, 0.0);
+        writer->writeDouble(20, 0.0);
+        writer->writeDouble(30, 0.0);
+        if (version > DRW::AC1009)
+        {
+            writer->writeString(3, "*Paper_Space");
+        }
+        else
+        {
+            writer->writeString(3, "$PAPER_SPACE");
+        }
+        writer->writeString(1, "");
+        writer->writeString(0, "ENDBLK");
+        if (version > DRW::AC1009)
+        {
+            writer->writeString(5, "1D");
+            if (version > DRW::AC1014)
+            {
+                writer->writeString(330, "1F");
+            }
+            writer->writeString(100, "AcDbEntity");
+        }
+        writer->writeString(8, "0");
+        if (version > DRW::AC1009)
+        {
+            writer->writeString(100, "AcDbBlockEnd");
+        }
     }
-    writer->writeString(8, "0");
-    if (version > DRW::AC1009)
-        writer->writeString(100, "AcDbBlockEnd");
     writingBlock = false;
     iface->writeBlocks();
-    if (writingBlock) {
+    if (writingBlock)
+    {
         writingBlock = false;
         writer->writeString(0, "ENDBLK");
-        if (version > DRW::AC1009) {
+        if (version > DRW::AC1009)
+        {
             writer->writeString(5, toHexStr(currHandle+2));
 //            writer->writeString(5, "1D");
-            if (version > DRW::AC1014) {
+            if (version > DRW::AC1014)
+            {
                 writer->writeString(330, toHexStr(currHandle));
             }
             writer->writeString(100, "AcDbEntity");
         }
         writer->writeString(8, "0");
         if (version > DRW::AC1009)
+        {
             writer->writeString(100, "AcDbBlockEnd");
+        }
     }
     return true;
 }

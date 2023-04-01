@@ -115,7 +115,7 @@ private:
     QSize m_size{};
     double m_resolution{PrintDPI};
     QString m_fileName{};
-    DRW::Version m_version{DRW::AC1014};
+    DRW::Version m_version{DRW::AC1009};
     bool m_binary{false};
     QTransform m_matrix{};
     QSharedPointer<dx_iface> m_input{};

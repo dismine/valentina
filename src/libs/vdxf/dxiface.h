@@ -101,6 +101,8 @@ public:
     bool fileExport(bool binary);
     void writeEntity(DRW_Entity* e);
 
+    void AddXSpaceBlock(bool add) {dxfW->AddXSpaceBlock(add);}
+
     std::string ErrorString() const;
 
 //reimplement virtual DRW_Interface functions
@@ -126,6 +128,7 @@ public:
     void AddQtLTypes();
     void AddDefLayers();
     void AddAAMALayers();
+    void AddDefHeaderData();
     void AddAAMAHeaderData();
     void AddASTMLayers();
 

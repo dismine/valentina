@@ -287,12 +287,19 @@ void dx_iface::AddAAMALayers()
 
 //    layer.name = "26";// REF
 //    layer.color = DRW::black;
-//    cData.layers.push_back(layer);
+    //    cData.layers.push_back(layer);
+}
+
+void dx_iface::AddDefHeaderData()
+{
+    cData.headerC.addInt("$HANDLING", 1, 70); // Enabled by default for flat version.
 }
 
 void dx_iface::AddAAMAHeaderData()
 {
     cData.headerC.addStr("$CLAYER", "1", 8); // Current layer name
+    // Looks like doesn't work with handling enabled.
+    // Missing or 0 for $HANDLING value disables handling.
 }
 
 void dx_iface::AddASTMLayers()
