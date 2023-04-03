@@ -1051,7 +1051,7 @@ auto VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator) c
         new qmu::QmuTokenParser(formula, osSeparator, true, GetTranslatedFunctions()));
     QMap<vsizetype, QString> tokens = cal->GetTokens();// Tokens (variables, measurements)
     QMap<vsizetype, QString> numbers = cal->GetNumbers();// All numbers in expression for changing decimal separator
-    delete cal.take();
+    cal.reset();
 
     QString newFormula = formula;// Local copy for making changes
 

@@ -747,11 +747,11 @@ auto VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details) -> bool
 
         m_input->AddBlock(detailBlock.data());
 
-        QScopedPointer<DRW_Insert> insert(new DRW_Insert());
+        std::unique_ptr<DRW_Insert> insert(new DRW_Insert());
         insert->name = blockName.toStdString();
         insert->layer = *layer1;
 
-        m_input->AddEntity(insert.take());
+        m_input->AddEntity(insert.release());
 
         deleteBlock = false; // lose ownership
     }
@@ -977,11 +977,11 @@ auto VDxfEngine::ExportToASTM(const QVector<VLayoutPiece> &details) -> bool
 
         m_input->AddBlock(detailBlock.data());
 
-        QScopedPointer<DRW_Insert> insert(new DRW_Insert());
+        std::unique_ptr<DRW_Insert> insert(new DRW_Insert());
         insert->name = blockName.toStdString();
         insert->layer = *layer1;
 
-        m_input->AddEntity(insert.take());
+        m_input->AddEntity(insert.release());
 
         deleteBlock = false; // lose ownership
     }

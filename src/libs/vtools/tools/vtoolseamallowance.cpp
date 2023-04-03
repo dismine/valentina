@@ -2050,7 +2050,7 @@ void VToolSeamAllowance::InitSpecialPoints(const QVector<quint32> &points) const
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::DeleteToolWithConfirm(bool ask)
 {
-    QScopedPointer<DeletePiece> delDet(new DeletePiece(doc, m_id, VAbstractTool::data, m_sceneDetails));
+    std::unique_ptr<DeletePiece> delDet(new DeletePiece(doc, m_id, VAbstractTool::data, m_sceneDetails));
     if (ask)
     {
         if (ConfirmDeletion() == QMessageBox::No)
@@ -2059,7 +2059,7 @@ void VToolSeamAllowance::DeleteToolWithConfirm(bool ask)
         }
     }
 
-    VAbstractApplication::VApp()->getUndoStack()->push(delDet.take());
+    VAbstractApplication::VApp()->getUndoStack()->push(delDet.release());
 
     // Throw exception, this will help prevent case when we forget to immediately quit function.
     VExceptionToolWasDeleted e(tr("Tool was used after deleting."));

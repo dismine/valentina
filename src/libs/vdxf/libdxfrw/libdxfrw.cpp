@@ -2764,11 +2764,11 @@ bool dxfRW::processPolyline() {
 bool dxfRW::processVertex(DRW_Polyline *pl) {
     DRW_DBG("dxfRW::processVertex");
     int code;
-    QScopedPointer<DRW_Vertex> v(new DRW_Vertex());
+    std::unique_ptr<DRW_Vertex> v(new DRW_Vertex());
     while (reader->readRec(&code)) {
         DRW_DBG(code); DRW_DBG("\n");
         if (0 == code) {
-            pl->appendVertex(v.take());
+            pl->appendVertex(v.release());
             nextentity = reader->getString();
             DRW_DBG(nextentity); DRW_DBG("\n");
             if (nextentity == "SEQEND") {

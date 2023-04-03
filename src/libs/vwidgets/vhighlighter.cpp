@@ -61,30 +61,30 @@ VHighlighter::VHighlighter(QTextDocument *document)
 //---------------------------------------------------------------------------------------------------------------------
 void VHighlighter::highlightBlock(const QString &text)
 {
-    QScopedPointer<VTextBlockData> data(new VTextBlockData);
+    std::unique_ptr<VTextBlockData> data(new VTextBlockData);
 
     vsizetype leftPos = text.indexOf('(');
     while (leftPos != -1)
     {
-        QScopedPointer<ParenthesisInfo> info(new ParenthesisInfo);
+        std::unique_ptr<ParenthesisInfo> info(new ParenthesisInfo);
         info->character = '(';
         info->position = leftPos;
 
-        data->insert(info.take());
+        data->insert(info.release());
         leftPos = text.indexOf('(', leftPos + 1);
     }
 
     vsizetype rightPos = text.indexOf(')');
     while (rightPos != -1)
     {
-        QScopedPointer<ParenthesisInfo> info(new ParenthesisInfo);
+        std::unique_ptr<ParenthesisInfo> info(new ParenthesisInfo);
         info->character = ')';
         info->position = rightPos;
 
-        data->insert(info.take());
+        data->insert(info.release());
 
         rightPos = text.indexOf(')', rightPos +1);
     }
 
-    setCurrentBlockUserData(data.take());
+    setCurrentBlockUserData(data.release());
 }

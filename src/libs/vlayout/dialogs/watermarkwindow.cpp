@@ -170,8 +170,8 @@ bool WatermarkWindow::Open(QString path)
 
     QFuture<VWatermarkConverter *> futureConverter = QtConcurrent::run([path]()
     {
-        QScopedPointer<VWatermarkConverter> converter(new VWatermarkConverter(path));
-        return converter.take();
+        std::unique_ptr<VWatermarkConverter> converter(new VWatermarkConverter(path));
+        return converter.release();
     });
 
     //We have unsaved changes or load more then one file per time

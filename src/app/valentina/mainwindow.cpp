@@ -5849,8 +5849,8 @@ auto MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
 
     QFuture<VPatternConverter *> futureConverter = QtConcurrent::run([fileName]()
     {
-        QScopedPointer<VPatternConverter> converter(new VPatternConverter(fileName));
-        return converter.take();
+        std::unique_ptr<VPatternConverter> converter(new VPatternConverter(fileName));
+        return converter.release();
     });
 
     //We have unsaved changes or load more then one file per time

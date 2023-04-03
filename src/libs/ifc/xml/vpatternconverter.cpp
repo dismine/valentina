@@ -1002,7 +1002,7 @@ QString VPatternConverter::FixMeasurementInFormulaToV0_2_0(const QString &formul
 
     QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(formula, false, false));// Eval formula
     QMap<vsizetype, QString> tokens = cal->GetTokens();// Tokens (variables, measurements)
-    delete cal.take();
+    cal.reset();
 
     QList<vsizetype> tKeys = tokens.keys();// Take all tokens positions
     QList<QString> tValues = tokens.values();
