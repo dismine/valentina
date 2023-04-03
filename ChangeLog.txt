@@ -19,6 +19,7 @@
 - Fix excluding objects in internal path.
 - Fix float-point accuracy issue in multisize measurements dimensions.
 - Fix compatibility with Richpeace DXF-AAMA/ASTM R12.
+- Fix seam allowance. Loose requirements to case with prong.
 
 # Valentina 0.7.52 September 12, 2022
 - Fix crash when default locale is ru.

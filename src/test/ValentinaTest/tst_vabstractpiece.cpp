@@ -1140,6 +1140,12 @@ void TST_VAbstractPiece::EquidistantAngleType_data()
                      QStringLiteral("://smart_pattern_#133/input.json"),
                      QStringLiteral("://smart_pattern_#133/output.json"),
                      26.45669291338583 /*seam allowance width*/);
+
+    // See file valentina_private_collection/bugs/hat/hat.val
+    ASSERT_TEST_CASE("hat",
+                     QStringLiteral("://hat/input.json"),
+                     QStringLiteral("://hat/output.json"),
+                     26.45669291338583 /*seam allowance width*/);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
