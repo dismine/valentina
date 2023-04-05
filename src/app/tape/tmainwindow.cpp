@@ -2905,6 +2905,21 @@ void TMainWindow::InitDimensionGradation(int index, const MeasurementDimension_p
         InitDimensionYWZItems(bases, labels, control, unit, dimension->IsBodyMeasurement(), fc);
     }
 
+    // Calculate the width of the largest item using QFontMetrics
+    QFontMetrics fontMetrics(control->font());
+    int maxWidth = 0;
+    for (int i = 0; i < control->count(); ++i)
+    {
+        int itemWidth = TextWidth(fontMetrics, control->itemText(i));
+        if (itemWidth > maxWidth)
+        {
+            maxWidth = itemWidth;
+        }
+    }
+
+    // Set the minimum width of the view to the largest item width
+    control->view()->setMinimumWidth(maxWidth);
+
     // after initialization the current index is 0. The signal for changing the index will not be triggered if not make
     // it invalid first
     control->setCurrentIndex(-1);
