@@ -234,9 +234,6 @@ class DRW_Point : public DRW_Entity {
     SETENTFRIENDS
 public:
     DRW_Point()
-        : basePoint(),
-          thickness(0),
-          extPoint(DRW_Coord(0, 0, 1))
     {
         eType = DRW::POINT;
     }
@@ -247,9 +244,9 @@ protected:
     bool parseCode(int code, dxfReader *reader) override;
 
 public:
-    DRW_Coord basePoint;      /*!<  base point, code 10, 20 & 30 */
-    double thickness;         /*!< thickness, code 39 */
-    DRW_Coord extPoint;       /*!<  Dir extrusion normal vector, code 210, 220 & 230 */
+    DRW_Coord basePoint{};                  /*!<  base point, code 10, 20 & 30 */
+    double thickness{0};                    /*!<  thickness, code 39 */
+    DRW_Coord extPoint{DRW_Coord(0, 0, 1)}; /*!<  Dir extrusion normal vector, code 210, 220 & 230 */
     // TNick: we're not handling code 50 - Angle of the X axis for
     // the UCS in effect when the point was drawn
 };

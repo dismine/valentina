@@ -847,13 +847,16 @@ void VDxfEngine::ExportAAMANotch(const QSharedPointer<dx_ifaceBlock> &detailBloc
         const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
         for(const auto &passmark : passmarks)
         {
-            for (const auto &line : passmark.lines)
-            {
-                if (DRW_Entity *e = AAMALine(line, *layer4))
-                {
-                    detailBlock->ent.push_back(e);
-                }
-            }
+            std::unique_ptr<DRW_ASTMNotch> notch(new DRW_ASTMNotch());
+            const QPointF center = passmark.baseLine.p1();
+
+            notch->basePoint = DRW_Coord(FromPixel(center.x(), m_varInsunits),
+                                         FromPixel(GetSize().height() - center.y(), m_varInsunits),
+                                         FromPixel(passmark.baseLine.length(), m_varInsunits));
+            notch->angle = passmark.baseLine.angle();
+            notch->layer = *layer4;
+
+            detailBlock->ent.push_back(notch.release());
         }
     }
 }
@@ -1128,10 +1131,17 @@ void VDxfEngine::ExportASTMDrill(const QSharedPointer<dx_ifaceBlock> &detailBloc
             || label.Type() == PlaceLabelType::Circle)
         {
             const QPointF center = detail.GetMatrix().map(label.Center());
-            detailBlock->ent.push_back(AAMAPoint(center, *layer13));
+            QLineF diameter = detail.GetMatrix().map(QLineF(label.Box().bottomLeft(), label.Box().topRight()));
+
+            std::unique_ptr<DRW_Point> point(new DRW_Point());
+            point->basePoint = DRW_Coord(FromPixel(center.x(), m_varInsunits),
+                                         FromPixel(GetSize().height() - center.y(), m_varInsunits),
+                                         FromPixel(diameter.length(), m_varInsunits));
+            point->layer = *layer13;
+            detailBlock->ent.push_back(point.release());
 
             // TODO. Investigate drill category
-//            QPointF pos(center.x(), center.y() - ToPixel(AAMATextHeight, varInsunits));
+//            QPointF pos(center.x(), center.y() - ToPixel(AAMATextHeight, m_varInsunits));
 //            detailBlock->ent.push_back(AAMAText(pos, category, *layer13));
         }
     }
@@ -1160,34 +1170,33 @@ void VDxfEngine::ExportASTMNotch(const QSharedPointer<dx_ifaceBlock> &detailBloc
                 notch->layer = *layer4;
             }
             else if (passmark.type == PassmarkLineType::VMark || passmark.type == PassmarkLineType::VMark2)
-            {
+            { // V-Notch
                 QLineF boundaryLine(ConstFirst(passmark.lines).p2(), ConstLast(passmark.lines).p2());
                 notch->thickness = FromPixel(boundaryLine.length(), m_varInsunits); // width
 
                 notch->layer = *layer4;
             }
             else if (passmark.type == PassmarkLineType::TMark)
-            {
-                qreal width = FromPixel(ConstLast(passmark.lines).length(), m_varInsunits);
-                notch->thickness = FromPixel(width, m_varInsunits);
+            { // T-Notch
+                notch->thickness = FromPixel(ConstLast(passmark.lines).length(), m_varInsunits); // width
 
                 notch->layer = *layer80;
             }
             else if (passmark.type == PassmarkLineType::BoxMark)
-            {
+            { // Castle Notch
                 QPointF start = ConstFirst(passmark.lines).p1();
                 QPointF end = ConstLast(passmark.lines).p2();
 
                 notch->layer = *layer81;
 
-                notch->thickness = FromPixel(QLineF(start, end).length(), m_varInsunits);
+                notch->thickness = FromPixel(QLineF(start, end).length(), m_varInsunits);  // width
             }
             else if (passmark.type == PassmarkLineType::UMark)
-            {
+            { // U-Notch
                 QPointF start = ConstFirst(passmark.lines).p1();
                 QPointF end = ConstLast(passmark.lines).p2();
 
-                notch->thickness = FromPixel(QLineF(start, end).length(), m_varInsunits);
+                notch->thickness = FromPixel(QLineF(start, end).length(), m_varInsunits);  // width
 
                 notch->layer = *layer83;
             }

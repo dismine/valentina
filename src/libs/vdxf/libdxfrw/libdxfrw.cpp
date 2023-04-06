@@ -640,7 +640,10 @@ bool dxfRW::writeASTMNotch(DRW_ASTMNotch *ent)
 {
     writePoint(ent);
     writer->writeDouble(50, ent->angle);
-    writer->writeDouble(39, ent->thickness); // Defined, but not used in point
+    if (not qFuzzyIsNull(ent->thickness))
+    {
+        writer->writeDouble(39, ent->thickness); // Defined, but not used in point
+    }
 
     return true;
 }
