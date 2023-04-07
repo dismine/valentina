@@ -953,6 +953,8 @@
       <!--Front-->
       <xs:enumeration value="2"/>
       <!--Rear-->
+      <xs:enumeration value="3"/>
+      <!--For way-->
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="pieceVersion">

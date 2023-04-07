@@ -270,7 +270,7 @@ void VPPiece::RotateToGrainline(const VPTransformationOrigon &origin)
     {
         degrees = DegreesAtRear();
     }
-    else
+    else  if (type == GrainlineArrowDirection::atBoth)
     {
         const qreal atFront = DegreesAtFront();
         if (atFront <= 90 || atFront >= 270)
@@ -280,6 +280,22 @@ void VPPiece::RotateToGrainline(const VPTransformationOrigon &origin)
         else
         {
             degrees = DegreesAtRear();
+        }
+    }
+    else
+    {
+        const qreal atFront = DegreesAtFront();
+        if (atFront <= 45)
+        {
+            degrees = atFront;
+        }
+        else if (atFront > 45 && atFront < 90)
+        {
+            degrees = atFront - 90;
+        }
+        else
+        {
+            degrees = atFront - 90 * qFloor(atFront / 90);
         }
     }
 

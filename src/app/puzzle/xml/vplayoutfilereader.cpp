@@ -111,9 +111,10 @@ auto StringToGrainlineArrowDirrection(const QString &dirrection) -> GrainlineArr
 {
     const QStringList arrows
     {
-        ML::atFrontStr, // 0
-        ML::atRearStr,  // 1
-        ML::atBothStr   // 2
+        ML::atFrontStr,   // 0
+        ML::atRearStr,    // 1
+        ML::atFourWayStr, // 2
+        ML::atBothStr     // 3
     };
 
     GrainlineArrowDirection arrowDirection = GrainlineArrowDirection::atBoth;
@@ -125,7 +126,10 @@ auto StringToGrainlineArrowDirrection(const QString &dirrection) -> GrainlineArr
         case 1:// at rear
             arrowDirection = GrainlineArrowDirection::atRear;
             break;
-        case 2:// at both
+        case 2:// at four way
+            arrowDirection = GrainlineArrowDirection::atFourWay;
+            break;
+        case 3:// at both
         default:
             arrowDirection = GrainlineArrowDirection::atBoth;
             break;

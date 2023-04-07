@@ -1778,13 +1778,43 @@ auto VAbstractPiece::GrainlinePoints(const VGrainlineData &geom, const VContaine
         v << QPointF(pt1.x() + dArrowLen * qCos(rotation - dArrowAng),
                      pt1.y() - dArrowLen * qSin(rotation - dArrowAng));
         v << pt1;
+
+        if (geom.GetArrowType() == GrainlineArrowDirection::atFourWay)
+        { // second double arrow
+            QLineF line(pt2, pt1);
+            line.setLength(line.length() - dArrowLen - dArrowLen*0.5);
+
+            v << line.p2();
+            v << QPointF(line.p2().x() + dArrowLen * qCos(rotation + dArrowAng),
+                         line.p2().y() - dArrowLen * qSin(rotation + dArrowAng));
+            v << QPointF(line.p2().x() + dArrowLen * qCos(rotation - dArrowAng),
+                         line.p2().y() - dArrowLen * qSin(rotation - dArrowAng));
+            v << line.p2();
+        }
     }
 
-    v << pt2;
+    if (geom.GetArrowType() != GrainlineArrowDirection::atFourWay)
+    {
+        v << pt2;
+    }
 
     if (geom.GetArrowType() != GrainlineArrowDirection::atRear)
     {
         rotation += M_PI;
+
+        if (geom.GetArrowType() == GrainlineArrowDirection::atFourWay)
+        { // first double arrow
+            QLineF line(pt1, pt2);
+            line.setLength(line.length() - dArrowLen - dArrowLen*0.5);
+
+            v << line.p2();
+            v << QPointF(line.p2().x() + dArrowLen * qCos(rotation + dArrowAng),
+                         line.p2().y() - dArrowLen * qSin(rotation + dArrowAng));
+            v << QPointF(line.p2().x() + dArrowLen * qCos(rotation - dArrowAng),
+                         line.p2().y() - dArrowLen * qSin(rotation - dArrowAng));
+            v << line.p2();
+            v << pt2;
+        }
 
         v << QPointF(pt2.x() + dArrowLen * qCos(rotation + dArrowAng),
                      pt2.y() - dArrowLen * qSin(rotation + dArrowAng));

@@ -3383,6 +3383,7 @@ void DialogSeamAllowance::InitGrainlineTab()
     uiTabGrainline->comboBoxArrow->addItem(tr("Both"));
     uiTabGrainline->comboBoxArrow->addItem(tr("Just front"));
     uiTabGrainline->comboBoxArrow->addItem(tr("Just rear"));
+    uiTabGrainline->comboBoxArrow->addItem(tr("Four way"));
 
     m_iRotBaseHeight = uiTabGrainline->lineEditRotFormula->height();
     m_iLenBaseHeight = uiTabGrainline->lineEditLenFormula->height();

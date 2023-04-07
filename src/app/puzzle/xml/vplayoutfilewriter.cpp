@@ -121,6 +121,8 @@ auto GrainlineArrowDirrectionToString(GrainlineArrowDirection type) -> QString
             return ML::atFrontStr;
         case GrainlineArrowDirection::atRear:
             return ML::atRearStr;
+        case GrainlineArrowDirection::atFourWay:
+            return ML::atFourWayStr;
         case GrainlineArrowDirection::atBoth:
         default:
             return ML::atBothStr;

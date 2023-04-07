@@ -117,6 +117,7 @@ const QString AttrCurvePoint           = QStringLiteral("curvePoint"); // NOLINT
 
 const QString atFrontStr               = QStringLiteral("atFront"); // NOLINT(cert-err58-cpp)
 const QString atRearStr                = QStringLiteral("atRear"); // NOLINT(cert-err58-cpp)
+const QString atFourWayStr             = QStringLiteral("atFourWay"); // NOLINT(cert-err58-cpp)
 const QString atBothStr                = QStringLiteral("atBoth"); // NOLINT(cert-err58-cpp)
 
 const QChar groupSep                   = QLatin1Char(';');

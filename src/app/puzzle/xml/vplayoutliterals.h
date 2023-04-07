@@ -122,6 +122,7 @@ extern const QString AttrCurvePoint;
 
 extern const QString atFrontStr;
 extern const QString atRearStr;
+extern const QString atFourWayStr;
 extern const QString atBothStr;
 
 extern const QChar groupSep;

@@ -122,12 +122,26 @@ void VGrainlineItem::paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption
     if (m_eArrowType != GrainlineArrowDirection::atRear)
     {
         // first arrow
-        pP->drawPolygon(FirstArrow(dArrLen));
+        pP->drawPolygon(FirstArrow(MainLine().p2(), dArrLen));
+
+        if (m_eArrowType == GrainlineArrowDirection::atFourWay)
+        { // first double arrow
+            QLineF line = MainLine();
+            line.setLength(line.length() - dArrLen - dArrLen*0.5);
+            pP->drawPolygon(FirstArrow(line.p2(), dArrLen));
+        }
     }
     if (m_eArrowType != GrainlineArrowDirection::atFront)
     {
         // second arrow
-        pP->drawPolygon(SecondArrow(dArrLen));
+        pP->drawPolygon(SecondArrow(MainLine().p1(), dArrLen));
+
+        if (m_eArrowType == GrainlineArrowDirection::atFourWay)
+        { // second double arrow
+            QLineF line(MainLine().p2(), MainLine().p1());
+            line.setLength(line.length() - dArrLen - dArrLen*0.5);
+            pP->drawPolygon(SecondArrow(line.p2(), dArrLen));
+        }
     }
 
     if (m_eMode != mNormal)
@@ -636,28 +650,26 @@ QLineF VGrainlineItem::MainLine() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPolygonF VGrainlineItem::FirstArrow(qreal dArrLen) const
+QPolygonF VGrainlineItem::FirstArrow(const QPointF &pt, qreal dArrLen) const
 {
-    const QPointF pt2 = MainLine().p2();
     QPolygonF poly;
-    poly << pt2;
-    poly << QPointF(pt2.x() + dArrLen*cos(M_PI + m_dRotation + ARROW_ANGLE),
-                    pt2.y() - dArrLen*sin(M_PI + m_dRotation + ARROW_ANGLE));
-    poly << QPointF(pt2.x() + dArrLen*cos(M_PI + m_dRotation - ARROW_ANGLE),
-                    pt2.y() - dArrLen*sin(M_PI + m_dRotation - ARROW_ANGLE));
+    poly << pt;
+    poly << QPointF(pt.x() + dArrLen*cos(M_PI + m_dRotation + ARROW_ANGLE),
+                    pt.y() - dArrLen*sin(M_PI + m_dRotation + ARROW_ANGLE));
+    poly << QPointF(pt.x() + dArrLen*cos(M_PI + m_dRotation - ARROW_ANGLE),
+                    pt.y() - dArrLen*sin(M_PI + m_dRotation - ARROW_ANGLE));
     return poly;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPolygonF VGrainlineItem::SecondArrow(qreal dArrLen) const
+QPolygonF VGrainlineItem::SecondArrow(const QPointF &pt, qreal dArrLen) const
 {
-    const QPointF pt1 = MainLine().p1();
     QPolygonF poly;
-    poly << pt1;
-    poly << QPointF(pt1.x() + dArrLen*cos(m_dRotation + ARROW_ANGLE),
-                    pt1.y() - dArrLen*sin(m_dRotation + ARROW_ANGLE));
-    poly << QPointF(pt1.x() + dArrLen*cos(m_dRotation - ARROW_ANGLE),
-                    pt1.y() - dArrLen*sin(m_dRotation - ARROW_ANGLE));
+    poly << pt;
+    poly << QPointF(pt.x() + dArrLen*cos(m_dRotation + ARROW_ANGLE),
+                    pt.y() - dArrLen*sin(m_dRotation + ARROW_ANGLE));
+    poly << QPointF(pt.x() + dArrLen*cos(m_dRotation - ARROW_ANGLE),
+                    pt.y() - dArrLen*sin(m_dRotation - ARROW_ANGLE));
     return poly;
 }
 
@@ -681,7 +693,15 @@ QPainterPath VGrainlineItem::MainShape() const
     {
         // first arrow
         QPainterPath polyPath;
-        polyPath.addPolygon(FirstArrow(dArrLen));
+        polyPath.addPolygon(FirstArrow(MainLine().p2(), dArrLen));
+
+        if (m_eArrowType == GrainlineArrowDirection::atFourWay)
+        { // first double arrow
+            QLineF line = MainLine();
+            line.setLength(line.length() - dArrLen - 0.5);
+            polyPath.addPolygon(FirstArrow(line.p2(), dArrLen));
+        }
+
         path.addPath((stroker.createStroke(polyPath) + polyPath).simplified());
         path.closeSubpath();
     }
@@ -690,7 +710,15 @@ QPainterPath VGrainlineItem::MainShape() const
     {
         // second arrow
         QPainterPath polyPath;
-        polyPath.addPolygon(SecondArrow(dArrLen));
+        polyPath.addPolygon(SecondArrow(MainLine().p1(), dArrLen));
+
+        if (m_eArrowType == GrainlineArrowDirection::atFourWay)
+        { // second double arrow
+            QLineF line(MainLine().p2(), MainLine().p1());
+            line.setLength(line.length() - dArrLen - 0.5);
+            polyPath.addPolygon(SecondArrow(line.p2(), dArrLen));
+        }
+
         path.addPath((stroker.createStroke(polyPath) + polyPath).simplified());
         path.closeSubpath();
     }

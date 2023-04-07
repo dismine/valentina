@@ -588,7 +588,24 @@ void VPosition::FollowGrainline()
     if (m_data.detail.GrainlineArrowType() == GrainlineArrowDirection::atBoth ||
             m_data.detail.GrainlineArrowType() == GrainlineArrowDirection::atRear)
     {
-        RotateOnAngle(angle+180);
+        RotateOnAngle(angle + 180);
+    }
+
+    if (stop->load())
+    {
+        return;
+    }
+
+    if (m_data.detail.GrainlineArrowType() == GrainlineArrowDirection::atFourWay)
+    {
+        RotateOnAngle(angle + 90);
+
+        if (stop->load())
+        {
+            return;
+        }
+
+        RotateOnAngle(angle - 90);
     }
 }
 

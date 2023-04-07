@@ -37,7 +37,8 @@ enum class GrainlineArrowDirection : qint8
 {
     atBoth,
     atFront,
-    atRear
+    atRear,
+    atFourWay
 };
 
 #endif // FLOATITEMDEF_H

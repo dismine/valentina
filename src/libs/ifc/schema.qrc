@@ -95,5 +95,6 @@
         <file>schema/layout/v0.1.1.xsd</file>
         <file>schema/layout/v0.1.2.xsd</file>
         <file>schema/layout/v0.1.3.xsd</file>
+        <file>schema/layout/v0.1.4.xsd</file>
     </qresource>
 </RCC>

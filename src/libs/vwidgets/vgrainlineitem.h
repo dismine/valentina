@@ -84,12 +84,12 @@ private:
     QPointF                       m_ptFinish;
     QPointF                       m_ptCenter;
     qreal                         m_dAngle;
-    GrainlineArrowDirection                     m_eArrowType;
+    GrainlineArrowDirection       m_eArrowType;
     double                        m_penWidth{1};
 
     QLineF    MainLine() const;
-    QPolygonF FirstArrow(qreal dArrLen) const;
-    QPolygonF SecondArrow(qreal dArrLen) const;
+    QPolygonF FirstArrow(const QPointF &pt, qreal dArrLen) const;
+    QPolygonF SecondArrow(const QPointF &pt, qreal dArrLen) const;
 
     QPainterPath MainShape() const;
 

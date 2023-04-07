@@ -21,6 +21,7 @@
 - Fix compatibility with Richpeace DXF-AAMA/ASTM R12.
 - Fix seam allowance. Loose requirements to case with prong.
 - Fix list of dimension popup list. Make sure it will always has enough space for values.
+- New grainline type: Four way.
 
 # Valentina 0.7.52 September 12, 2022
 - Fix crash when default locale is ru.
