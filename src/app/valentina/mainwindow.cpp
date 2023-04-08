@@ -204,6 +204,7 @@
 #include <QDesktopServices>
 #include <chrono>
 #include <thread>
+#include <memory>
 #include <QFileSystemWatcher>
 #include <QComboBox>
 #include <QDoubleSpinBox>
@@ -214,7 +215,6 @@
 #include <QStyleFactory>
 #include <QImageReader>
 #include <QUuid>
-#include <chrono>
 
 #if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
 #include <QWinTaskbarButton>

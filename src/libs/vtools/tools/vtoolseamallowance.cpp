@@ -77,6 +77,7 @@
 #include <QUuid>
 #include <QtMath>
 #include <chrono>
+#include <memory>
 
 #if (defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
 // DO NOT WORK WITH GCC 4.8

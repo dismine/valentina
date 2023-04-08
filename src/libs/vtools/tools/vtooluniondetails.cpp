@@ -37,6 +37,7 @@
 #include <QUndoStack>
 #include <QtDebug>
 #include <new>
+#include <memory>
 
 #include "../dialogs/tools/dialoguniondetails.h"
 #include "../ifc/xml/vdomdocument.h"

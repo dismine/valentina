@@ -16,6 +16,7 @@
 #include <algorithm>
 #include <sstream>
 #include <cassert>
+#include <memory>
 #include <QScopedPointer>
 #include "intern/drw_textcodec.h"
 #include "intern/dxfreader.h"
