@@ -1,6 +1,6 @@
 .\" Manpage for puzzle
 .\" Contact dismine@gmail.com to correct errors.
-.TH puzzle 1 "23 March, 2020" "puzzle man page"
+.TH puzzle 1 "10 April, 2023" "puzzle man page"
 .SH NAME
 Puzzle \- Valentina's manual layout
 .SH SYNOPSIS
@@ -15,34 +15,8 @@ is a part of Valentina. And used for creating and editing manual layouts.
 Displays this help.
 .IP "-v, --version"
 Displays version information.
-.IP "-e, --exportFile <The filename of layout file>"
-The filename of exported layout file. Use it to enable console export mode.
 .IP "-r, --rawLayout <The raw layout data file>"
 Load pattern pieces form the raw layout data file.
-.IP "-f, --format <Format number>"
-Number corresponding to tiled pdf page template (default = 0, export mode with tiled pdf format): <not defined>
-.IP "--bdxf"
-Export dxf in binary form.
-.IP "--text2paths"
-Export text as paths.
-.IP "-c, --crop"
-Auto crop unused length (export mode).
-.IP "--cropWidth"
-Auto crop unused width (export mode).
-.IP "--tiledPageformat <Template number>"
-Number corresponding to tiled pdf page template (default = 0, export mode with tiled pdf format): <not defined>
-.IP "--tiledlmargin <The left margin>"
-Tiled page left margin in current units like 3.0 (export mode). If not set will be used default value 1 cm.
-.IP "--tiledrmargin <The right margin>"
-Tiled page right margin in current units like 3.0 (export mode). If not set will be used default value 1 cm.
-.IP "--tiledtmargin <The top margin>"
-Tiled page top margin in current units like 3.0 (export mode). If not set will be used value default value 1 cm.
-.IP "--tiledbmargin <The bottom margin>"
-Tiled page bottom margin in current units like 3.0 (export mode). If not set will be used value default value 1 cm.
-.IP "--tiledLandscape"
-Set tiled page orienatation to landscape (export mode). Default value if not set portrait.
-.IP "-t, --test"
-Run the program in a test mode. The program in this mode loads a single layout file and silently quit without showing the main window. The key have priority before key 'exportFile'.
 .IP "--no-scaling"
 Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the QT_AUTO_SCREEN_SCALE_FACTOR=0 environment variable.
 .IP Arguments: 
