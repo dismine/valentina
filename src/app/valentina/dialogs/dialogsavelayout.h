@@ -56,6 +56,9 @@ public:
     void SetBinaryDXFFormat(bool binary);
     auto IsBinaryDXFFormat() const -> bool;
 
+    void SetShowGrainline(bool show);
+    auto IsShowGrainline() const -> bool;
+
     static auto MakeHelpFormatList() -> QString;
     void SetDestinationPath(const QString& cmdDestinationPath);
 

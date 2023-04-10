@@ -43,6 +43,7 @@
 #include "../layout/vplayout.h"
 #include "../layout/vpsheet.h"
 #include "../vlayout/vtextmanager.h"
+#include "../vlayout/vgraphicsfillitem.h"
 
 #include "../vpapplication.h"
 
@@ -167,6 +168,7 @@ VPGraphicsPiece::VPGraphicsPiece(const VPPiecePtr &piece, QGraphicsItem *parent)
 
     PaintPiece();
     InitLabels();
+    InitGrainlineItem();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -181,7 +183,6 @@ auto VPGraphicsPiece::boundingRect() const -> QRectF
     QPainterPath shape;
     shape.addPath(m_seamLine);
     shape.addPath(m_cuttingLine);
-    shape.addPath(m_grainline);
     shape.addPath(m_internalPaths);
     shape.addPath(m_passmarks);
     shape.addPath(m_placeLabels);
@@ -452,11 +453,44 @@ void VPGraphicsPiece::InitPieceLabel(const QVector<QPointF> &labelShape, const V
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPiece::InitGrainlineItem()
+{
+    delete m_grainlineItem;
+
+    VPPiecePtr piece = m_piece.toStrongRef();
+    if (piece.isNull())
+    {
+        return;
+    }
+
+    if(piece->IsGrainlineEnabled())
+    {
+        QPainterPath grainline;
+        QVector<QPointF> grainLinepoints = piece->GetMappedGrainline();
+        if(!grainLinepoints.isEmpty())
+        {
+            grainline.moveTo(ConstFirst(grainLinepoints));
+            for (int i = 1; i < grainLinepoints.size(); i++)
+            {
+                grainline.lineTo(grainLinepoints.at(i));
+            }
+        }
+
+        m_grainlineItem = new VGraphicsFillItem(this);
+        m_grainlineItem->setPath(grainline);
+
+        VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+        QPen pen(PieceColor(), settings->GetLayoutLineWidth(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+        m_grainlineItem->SetCustomPen(true);
+        m_grainlineItem->setPen(pen);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::PaintPiece(QPainter *painter)
 {
     m_seamLine = QPainterPath();
     m_cuttingLine = QPainterPath();
-    m_grainline = QPainterPath();
     m_internalPaths = QPainterPath();
     m_passmarks = QPainterPath();
     m_placeLabels = QPainterPath();
@@ -473,9 +507,6 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
 
     // initiliases the cutting line
     PaintCuttingLine(painter, piece);
-
-    // initialises the grainline
-    PaintGrainline(painter, piece);
 
     // initialises the internal paths
     PaintInternalPaths(painter, piece);
@@ -533,35 +564,6 @@ void VPGraphicsPiece::PaintCuttingLine(QPainter *painter, const VPPiecePtr &piec
                 painter->save();
                 painter->setBrush(piece->IsSelected() ? SelectionBrush() : NoBrush());
                 painter->drawPath(m_cuttingLine);
-                painter->restore();
-            }
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPGraphicsPiece::PaintGrainline(QPainter *painter, const VPPiecePtr &piece)
-{
-    if(piece->IsGrainlineEnabled())
-    {
-        QVector<QPointF> grainLinepoints = piece->GetMappedGrainline();
-        if(!grainLinepoints.isEmpty())
-        {
-            m_grainline.moveTo(ConstFirst(grainLinepoints));
-            for (int i = 1; i < grainLinepoints.size(); i++)
-            {
-                m_grainline.lineTo(grainLinepoints.at(i));
-            }
-
-            if (painter != nullptr)
-            {
-                painter->save();
-                // here to fill the grainlines arrow. Not wanted for mvp
-                // later maybe if it's configurable
-                //                painter->setBrush(blackBrush);
-
-                painter->setBrush(NoBrush());
-                painter->drawPath(m_grainline);
                 painter->restore();
             }
         }
@@ -790,6 +792,7 @@ void VPGraphicsPiece::on_RefreshPiece(const VPPiecePtr &piece)
         prepareGeometryChange();
         PaintPiece(); // refresh shapes
         InitLabels();
+        InitGrainlineItem();
         emit PieceTransformationChanged();
     }
 }

@@ -1116,6 +1116,7 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
     exporter.SetDescription(doc->GetDescription().toHtmlEscaped());
     exporter.SetIgnorePrinterMargins(ignorePrinterFields);
     exporter.SetBinaryDxfFormat(m_dialogSaveLayout->IsBinaryDXFFormat());
+    exporter.SetShowGrainline(m_dialogSaveLayout->IsShowGrainline());
 
     for (int i=0; i < scenes.size(); ++i)
     {
@@ -1141,18 +1142,18 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
                     paper->setVisible(false);
                     exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
                                          Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-                    exporter.ExportToSVG(scene);
+                    exporter.ExportToSVG(scene, details.at(i));
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::PDF:
                     exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
                                          Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-                    exporter.ExportToPDF(scene);
+                    exporter.ExportToPDF(scene, details.at(i));
                     break;
                 case LayoutExportFormats::PNG:
                     exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
                                          Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-                    exporter.ExportToPNG(scene);
+                    exporter.ExportToPNG(scene, details.at(i));
                     break;
                 case LayoutExportFormats::OBJ:
                     paper->setVisible(false);
@@ -1162,12 +1163,12 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
                 case LayoutExportFormats::PS:
                     exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
                                          Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-                    exporter.ExportToPS(scene);
+                    exporter.ExportToPS(scene, details.at(i));
                     break;
                 case LayoutExportFormats::EPS:
                     exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
                                          Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-                    exporter.ExportToEPS(scene);
+                    exporter.ExportToEPS(scene, details.at(i));
                     break;
                 case LayoutExportFormats::DXF_AC1006_Flat:
                     paper->setVisible(false);
@@ -1226,7 +1227,7 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
                 case LayoutExportFormats::TIF:
                     exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
                                          Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-                    exporter.ExportToTIF(scene);
+                    exporter.ExportToTIF(scene, details.at(i));
                     break;
                 default:
                     qDebug() << "Can't recognize file type." << Q_FUNC_INFO;

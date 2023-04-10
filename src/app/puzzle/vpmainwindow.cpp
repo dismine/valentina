@@ -293,6 +293,7 @@ struct VPExportData
     bool textAsPaths{false};
     bool exportUnified{true};
     bool showTilesScheme{false};
+    bool showGrainline{true};
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2376,6 +2377,7 @@ void VPMainWindow::ExportScene(const VPExportData &data)
     exporter.SetYScale(data.yScale);
     exporter.SetDescription(m_layout->LayoutSettings().GetDescription());
     exporter.SetBinaryDxfFormat(data.isBinaryDXF);
+    exporter.SetShowGrainline(data.showGrainline);
 
     QList<VPSheetPtr> sheets = data.sheets;
 
@@ -2413,17 +2415,17 @@ void VPMainWindow::ExportScene(const VPExportData &data)
             case LayoutExportFormats::SVG:
                 exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
                                      Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-                exporter.ExportToSVG(sheet->SceneData()->Scene());
+                exporter.ExportToSVG(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
                 break;
             case LayoutExportFormats::PDF:
                 exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
                                      Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-                exporter.ExportToPDF(sheet->SceneData()->Scene());
+                exporter.ExportToPDF(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
                 break;
             case LayoutExportFormats::PNG:
                 exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
                                      Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-                exporter.ExportToPNG(sheet->SceneData()->Scene());
+                exporter.ExportToPNG(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
                 break;
             case LayoutExportFormats::OBJ:
                 exporter.ExportToOBJ(sheet->SceneData()->Scene());
@@ -2431,12 +2433,12 @@ void VPMainWindow::ExportScene(const VPExportData &data)
             case LayoutExportFormats::PS:
                 exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
                                      Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-                exporter.ExportToPS(sheet->SceneData()->Scene());
+                exporter.ExportToPS(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
                 break;
             case LayoutExportFormats::EPS:
                 exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
                                      Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-                exporter.ExportToEPS(sheet->SceneData()->Scene());
+                exporter.ExportToEPS(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
                 break;
             case LayoutExportFormats::DXF_AC1006_Flat:
                 exporter.SetDxfVersion(DRW::AC1006);
@@ -2477,7 +2479,7 @@ void VPMainWindow::ExportScene(const VPExportData &data)
             case LayoutExportFormats::TIF:
                 exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
                                      Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-                exporter.ExportToTIF(sheet->SceneData()->Scene());
+                exporter.ExportToTIF(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
                 break;
             default:
                 qDebug() << "Can't recognize file type." << Q_FUNC_INFO;
@@ -2565,11 +2567,12 @@ void VPMainWindow::GenerateUnifiedPdfFile(const VPExportData &data, const QStrin
             }
         }
 
-        sheet->SceneData()->PrepareForExport();
+        sheet->SceneData()->PrepareForExport(); // Go first because recreates pieces
+        VLayoutExporter::PrepareGrainlineForExport(sheet->SceneData()->GraphicsPiecesAsItems(), data.showGrainline);
         QRectF imageRect = sheet->GetMarginsRect();
         sheet->SceneData()->Scene()->render(&painter, VPrintLayout::SceneTargetRect(printer.data(), imageRect),
                                             imageRect, Qt::IgnoreAspectRatio);
-        sheet->SceneData()->CleanAfterExport();
+        sheet->SceneData()->CleanAfterExport(); // Will restore the grainlines automatically
 
         firstPage = false;
     }
@@ -2602,7 +2605,7 @@ void VPMainWindow::ExportPdfTiledFile(const VPExportData &data)
         bool firstPage = true;
         for (const auto& sheet : data.sheets)
         {
-            if (not GeneratePdfTiledFile(sheet, data.showTilesScheme, &painter, printer, firstPage))
+            if (not GeneratePdfTiledFile(sheet, data.showTilesScheme, data.showGrainline, &painter, printer, firstPage))
             {
                 break;
             }
@@ -2620,7 +2623,8 @@ void VPMainWindow::ExportPdfTiledFile(const VPExportData &data)
 
             QPainter painter;
             bool firstPage = true;
-            if (not GeneratePdfTiledFile(data.sheets.at(i), data.showTilesScheme, &painter, printer, firstPage))
+            if (not GeneratePdfTiledFile(data.sheets.at(i), data.showTilesScheme, data.showGrainline, &painter, printer,
+                                         firstPage))
             {
                 break;
             }
@@ -2629,17 +2633,24 @@ void VPMainWindow::ExportPdfTiledFile(const VPExportData &data)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet, bool showTilesScheme, QPainter *painter,
-                                        const QSharedPointer<QPrinter> &printer, bool &firstPage) -> bool
+auto VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet, bool showTilesScheme, bool showGrainline,
+                                        QPainter *painter, const QSharedPointer<QPrinter> &printer,
+                                        bool &firstPage) -> bool
 {
     SCASSERT(not sheet.isNull())
     SCASSERT(painter != nullptr)
     SCASSERT(not printer.isNull())
 
-    sheet->SceneData()->PrepareForExport();
+    sheet->SceneData()->PrepareForExport(); // Go first because recreates pieces
+    VLayoutExporter::PrepareGrainlineForExport(sheet->SceneData()->GraphicsPiecesAsItems(), showGrainline);
     m_layout->TileFactory()->RefreshTileInfos();
     m_layout->TileFactory()->RefreshWatermarkData();
     sheet->SceneData()->SetTextAsPaths(false);
+
+    auto Clean = qScopeGuard([sheet]()
+    {
+        sheet->SceneData()->CleanAfterExport(); // Will restore the grainlines automatically
+    });
 
     if (showTilesScheme)
     {
@@ -2694,8 +2705,6 @@ auto VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet, bool showTilesS
             firstPage = false;
         }
     }
-
-    sheet->SceneData()->CleanAfterExport();
 
     return true;
 }
@@ -4144,6 +4153,7 @@ void VPMainWindow::on_ExportLayout()
     data.textAsPaths = dialog.IsTextAsPaths();
     data.exportUnified = dialog.IsExportUnified();
     data.showTilesScheme = dialog.IsTilesScheme();
+    data.showGrainline = dialog.IsShowGrainline();
 
     ExportData(data);
 }
@@ -4194,6 +4204,7 @@ void VPMainWindow::on_ExportSheet()
     data.textAsPaths = dialog.IsTextAsPaths();
     data.exportUnified = dialog.IsExportUnified();
     data.showTilesScheme = dialog.IsTilesScheme();
+    data.showGrainline = dialog.IsShowGrainline();
 
     ExportData(data);
 }

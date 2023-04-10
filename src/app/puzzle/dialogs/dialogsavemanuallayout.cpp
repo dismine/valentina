@@ -251,6 +251,62 @@ auto DialogSaveManualLayout::IsBinaryDXFFormat() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSaveManualLayout::SetShowGrainline(bool show)
+{
+    switch(Format())
+    {
+        case LayoutExportFormats::SVG:
+        case LayoutExportFormats::PDF:
+        case LayoutExportFormats::PNG:
+        case LayoutExportFormats::PS:
+        case LayoutExportFormats::EPS:
+        case LayoutExportFormats::PDFTiled:
+        case LayoutExportFormats::TIF:
+        case LayoutExportFormats::DXF_AC1006_Flat:
+        case LayoutExportFormats::DXF_AC1009_Flat:
+        case LayoutExportFormats::DXF_AC1012_Flat:
+        case LayoutExportFormats::DXF_AC1014_Flat:
+        case LayoutExportFormats::DXF_AC1015_Flat:
+        case LayoutExportFormats::DXF_AC1018_Flat:
+        case LayoutExportFormats::DXF_AC1021_Flat:
+        case LayoutExportFormats::DXF_AC1024_Flat:
+        case LayoutExportFormats::DXF_AC1027_Flat:
+            ui->checkBoxShowGrainline->setChecked(show);
+            break;
+        default:
+            ui->checkBoxShowGrainline->setChecked(true);
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogSaveManualLayout::IsShowGrainline() const
+{
+    switch(Format())
+    {
+        case LayoutExportFormats::SVG:
+        case LayoutExportFormats::PDF:
+        case LayoutExportFormats::PNG:
+        case LayoutExportFormats::PS:
+        case LayoutExportFormats::EPS:
+        case LayoutExportFormats::PDFTiled:
+        case LayoutExportFormats::TIF:
+        case LayoutExportFormats::DXF_AC1006_Flat:
+        case LayoutExportFormats::DXF_AC1009_Flat:
+        case LayoutExportFormats::DXF_AC1012_Flat:
+        case LayoutExportFormats::DXF_AC1014_Flat:
+        case LayoutExportFormats::DXF_AC1015_Flat:
+        case LayoutExportFormats::DXF_AC1018_Flat:
+        case LayoutExportFormats::DXF_AC1021_Flat:
+        case LayoutExportFormats::DXF_AC1024_Flat:
+        case LayoutExportFormats::DXF_AC1027_Flat:
+            return ui->checkBoxShowGrainline->isChecked();
+        default:
+            return true;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSaveManualLayout::SetDestinationPath(const QString &cmdDestinationPath)
 {
     QString path;
@@ -444,18 +500,10 @@ void DialogSaveManualLayout::ShowExample()
     ui->checkBoxTextAsPaths->setEnabled(true);
     ui->checkBoxExportUnified->setEnabled(false);
     ui->checkBoxTilesScheme->setEnabled(false);
+    ui->checkBoxShowGrainline->setEnabled(true);
 
     switch(currentFormat)
     {
-        case LayoutExportFormats::DXF_AC1006_Flat:
-        case LayoutExportFormats::DXF_AC1009_Flat:
-        case LayoutExportFormats::DXF_AC1012_Flat:
-        case LayoutExportFormats::DXF_AC1014_Flat:
-        case LayoutExportFormats::DXF_AC1015_Flat:
-        case LayoutExportFormats::DXF_AC1018_Flat:
-        case LayoutExportFormats::DXF_AC1021_Flat:
-        case LayoutExportFormats::DXF_AC1024_Flat:
-        case LayoutExportFormats::DXF_AC1027_Flat:
         case LayoutExportFormats::DXF_AC1006_AAMA:
         case LayoutExportFormats::DXF_AC1009_AAMA:
         case LayoutExportFormats::DXF_AC1012_AAMA:
@@ -475,9 +523,11 @@ void DialogSaveManualLayout::ShowExample()
         case LayoutExportFormats::DXF_AC1024_ASTM:
         case LayoutExportFormats::DXF_AC1027_ASTM:
             ui->checkBoxBinaryDXF->setEnabled(true);
+            ui->checkBoxShowGrainline->setEnabled(false);
             break;
         case LayoutExportFormats::RLD:
             ui->checkBoxTextAsPaths->setEnabled(false);
+            ui->checkBoxShowGrainline->setEnabled(false);
             break;
         case LayoutExportFormats::PDFTiled:
             ui->checkBoxTilesScheme->setEnabled(true);
@@ -488,10 +538,21 @@ void DialogSaveManualLayout::ShowExample()
         case LayoutExportFormats::EPS:
             ui->checkBoxExportUnified->setEnabled(true);
             break;
+        case LayoutExportFormats::NC:
+        case LayoutExportFormats::OBJ:
+            ui->checkBoxShowGrainline->setEnabled(false);
+            break;
+        case LayoutExportFormats::DXF_AC1006_Flat:
+        case LayoutExportFormats::DXF_AC1009_Flat:
+        case LayoutExportFormats::DXF_AC1012_Flat:
+        case LayoutExportFormats::DXF_AC1014_Flat:
+        case LayoutExportFormats::DXF_AC1015_Flat:
+        case LayoutExportFormats::DXF_AC1018_Flat:
+        case LayoutExportFormats::DXF_AC1021_Flat:
+        case LayoutExportFormats::DXF_AC1024_Flat:
+        case LayoutExportFormats::DXF_AC1027_Flat:
         case LayoutExportFormats::SVG:
         case LayoutExportFormats::PNG:
-        case LayoutExportFormats::OBJ:
-        case LayoutExportFormats::NC:
         case LayoutExportFormats::TIF:
         default:
             break;
@@ -580,6 +641,7 @@ void DialogSaveManualLayout::ReadSettings()
 {
     VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
     SelectFormat(static_cast<LayoutExportFormats>(settings->GetLayoutExportFormat()));
+    SetShowGrainline(settings->GetShowGrainline());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -592,4 +654,5 @@ void DialogSaveManualLayout::WriteSettings() const
 
     VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
     settings->SetLayoutExportFormat(static_cast<qint8>(Format()));
+    settings->SetShowGrainline(IsShowGrainline());
 }

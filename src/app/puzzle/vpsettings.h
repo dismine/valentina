@@ -103,6 +103,9 @@ public:
     auto GetLayoutLineWidth() const -> int;
     void SetLayoutLineWidth(int width);
 
+    bool GetShowGrainline() const;
+    void SetShowGrainline(bool value);
+
 private:
     Q_DISABLE_COPY_MOVE(VPSettings) // NOLINT
 };

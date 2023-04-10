@@ -77,6 +77,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSaveLength, (QLatin1String
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutPreferOneSheetSolution, // NOLINT
                           (QLatin1String("layout/preferOneSheetSolution")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutUnitePages, (QLatin1String("layout/unitePages"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutShowGrainline, (QLatin1String("layout/showGrainline"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingFields, (QLatin1String("layout/fields"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingIgnoreFields, (QLatin1String("layout/ignoreFields"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingStripOptimization, (QLatin1String("layout/stripOptimization"))) // NOLINT
@@ -969,6 +970,18 @@ int VValentinaSettings::GetBackgroundImageDefOpacity() const
 void VValentinaSettings::SetBackgroundImageDefOpacity(int value)
 {
     setValue(*settingPatternBackgroundImageDefOpacity, qBound(0, value, 100));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VValentinaSettings::GetShowGrainline() const
+{
+    return value(*settingLayoutShowGrainline, true).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetShowGrainline(bool value)
+{
+    setValue(*settingLayoutShowGrainline, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

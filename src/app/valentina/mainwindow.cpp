@@ -2523,7 +2523,7 @@ void MainWindow::ExportDraw(const QString &fileName)
     exporter.SetImageRect(rect);
     exporter.SetOffset(rect.topLeft()); // Correct positions to fit SVG view rect
 
-    exporter.ExportToSVG(m_sceneDraw);
+    exporter.ExportToSVG(m_sceneDraw, QList<QGraphicsItem *>());
 
     m_sceneDraw->SetOriginsVisible(true);
 

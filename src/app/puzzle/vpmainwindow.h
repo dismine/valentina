@@ -479,7 +479,7 @@ private:
     static void ExportUnifiedPdfFile(const VPExportData &data);
     static void GenerateUnifiedPdfFile(const VPExportData &data, const QString &name);
     void ExportPdfTiledFile(const VPExportData &data);
-    auto GeneratePdfTiledFile(const VPSheetPtr &sheet, bool showTilesScheme, QPainter *painter,
+    auto GeneratePdfTiledFile(const VPSheetPtr &sheet, bool showTilesScheme, bool showGrainline, QPainter *painter,
                               const QSharedPointer<QPrinter> &printer, bool &firstPage) -> bool;
 
     void UpdateScaleConnection() const;

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>413</width>
-    <height>310</height>
+    <height>293</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -111,8 +111,8 @@
        <property name="title">
         <string>Options</string>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout_3">
-        <item>
+       <layout class="QFormLayout" name="formLayout">
+        <item row="0" column="0">
          <widget class="QCheckBox" name="checkBoxBinaryDXF">
           <property name="enabled">
            <bool>false</bool>
@@ -122,17 +122,7 @@
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxTextAsPaths">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
-          <property name="text">
-           <string>Text as paths</string>
-          </property>
-         </widget>
-        </item>
-        <item>
+        <item row="2" column="0">
          <widget class="QCheckBox" name="checkBoxExportUnified">
           <property name="enabled">
            <bool>false</bool>
@@ -145,7 +135,27 @@
           </property>
          </widget>
         </item>
-        <item>
+        <item row="4" column="0">
+         <widget class="QCheckBox" name="checkBoxShowGrainline">
+          <property name="text">
+           <string>Show grainline</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QCheckBox" name="checkBoxTextAsPaths">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="text">
+           <string>Text as paths</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
          <widget class="QCheckBox" name="checkBoxTilesScheme">
           <property name="enabled">
            <bool>false</bool>

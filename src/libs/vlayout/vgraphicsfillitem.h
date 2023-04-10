@@ -32,6 +32,8 @@
 #include <QGraphicsPathItem>
 #include <QPainter>
 
+#include "../vmisc/def.h"
+
 class VGraphicsFillItem : public QGraphicsPathItem
 {
 public:
@@ -51,11 +53,18 @@ public:
      */
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
+    int type() const override {return Type;}
+    enum { Type = UserType + static_cast<int>(Layout::GrainlineItem)};
+
     auto GetWidth() const -> qreal;
     void SetWidth(const qreal &value);
 
+    auto CustomPen() const -> bool;
+    void SetCustomPen(bool newCustomPen);
+
 private:
     qreal width{1};
+    bool m_customPen{false};
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -70,4 +79,15 @@ inline void VGraphicsFillItem::SetWidth(const qreal &value)
     width = value;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VGraphicsFillItem::CustomPen() const -> bool
+{
+    return m_customPen;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VGraphicsFillItem::SetCustomPen(bool newCustomPen)
+{
+    m_customPen = newCustomPen;
+}
 #endif // VGRAPHICSFILLITEM_H

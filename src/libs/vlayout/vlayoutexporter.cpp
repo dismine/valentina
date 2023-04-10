@@ -49,6 +49,7 @@
 #include "../vmisc/vabstractvalapplication.h"
 #include "../ifc/exception/vexception.h"
 #include "vprintlayout.h"
+#include "vgraphicsfillitem.h"
 
 namespace
 {
@@ -67,7 +68,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, PDFTOPS, (QLatin1String("pdftops"))) //
  *
  * @param placeholder placeholder that will be appended to each QGraphicsSimpleTextItem item's text string.
  */
-void PrepareTextForDXF(const QString &placeholder, const QList<QGraphicsItem *> &paperItems)
+void PrepareDetailsForDXF(const QString &placeholder, const QList<QGraphicsItem *> &paperItems)
 {
     for (auto *item : paperItems)
     {
@@ -94,7 +95,7 @@ void PrepareTextForDXF(const QString &placeholder, const QList<QGraphicsItem *> 
  *
  * @param placeholder placeholder that will be removed from each QGraphicsSimpleTextItem item's text string.
  */
-void RestoreTextAfterDXF(const QString &placeholder, const QList<QGraphicsItem *> &paperItems)
+void RestoreDetailsAfterDXF(const QString &placeholder, const QList<QGraphicsItem *> &paperItems)
 {
     for (auto *item : paperItems)
     {
@@ -116,8 +117,22 @@ void RestoreTextAfterDXF(const QString &placeholder, const QList<QGraphicsItem *
 }  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutExporter::ExportToSVG(QGraphicsScene *scene) const
+auto VLayoutExporter::IsShowGrainline() const -> bool
 {
+    return m_showGrainline;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutExporter::SetShowGrainline(bool show)
+{
+    m_showGrainline = show;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutExporter::ExportToSVG(QGraphicsScene *scene, const QList<QGraphicsItem *> &details) const
+{
+    PrepareGrainlineForExport(details, m_showGrainline);
+
     QSvgGenerator generator;
     generator.setFileName(m_fileName);
 
@@ -145,11 +160,15 @@ void VLayoutExporter::ExportToSVG(QGraphicsScene *scene) const
     painter.scale(m_xScale, m_yScale);
     scene->render(&painter, m_imageRect, m_imageRect, Qt::IgnoreAspectRatio);
     painter.end();
+
+    RestoreGrainlineAfterExport(details);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutExporter::ExportToPNG(QGraphicsScene *scene) const
+void VLayoutExporter::ExportToPNG(QGraphicsScene *scene, const QList<QGraphicsItem *> &details) const
 {
+    PrepareGrainlineForExport(details, m_showGrainline);
+
     // Create the image with the exact size of the shrunk scene
     QSize drawingSize;
     drawingSize.setWidth(qFloor(m_imageRect.width() * m_xScale + m_margins.left() + m_margins.right()));
@@ -167,11 +186,15 @@ void VLayoutExporter::ExportToPNG(QGraphicsScene *scene) const
 
     scene->render(&painter, m_imageRect, m_imageRect, Qt::IgnoreAspectRatio);
     image.save(m_fileName);
+
+    RestoreGrainlineAfterExport(details);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutExporter::ExportToTIF(QGraphicsScene *scene) const
+void VLayoutExporter::ExportToTIF(QGraphicsScene *scene, const QList<QGraphicsItem *> &details) const
 {
+    PrepareGrainlineForExport(details, m_showGrainline);
+
     // Create the image with the exact size of the shrunk scene
     QSize drawingSize;
     drawingSize.setWidth(qFloor(m_imageRect.width() * m_xScale + m_margins.left() + m_margins.right()));
@@ -197,14 +220,17 @@ void VLayoutExporter::ExportToTIF(QGraphicsScene *scene) const
     if (not writer.write(image))
     { // failed to save file
         qCritical() << qUtf8Printable(tr("Can't save file '%1'. Error: %2.").arg(m_fileName, writer.errorString()));
+        RestoreGrainlineAfterExport(details);
         return;
     }
+
+    RestoreGrainlineAfterExport(details);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutExporter::ExportToPDF(QGraphicsScene *scene) const
+void VLayoutExporter::ExportToPDF(QGraphicsScene *scene, const QList<QGraphicsItem *> &details) const
 {
-    ExportToPDF(scene, m_fileName);
+    ExportToPDF(scene, details, m_fileName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -222,25 +248,25 @@ void VLayoutExporter::ExportToOBJ(QGraphicsScene *scene) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutExporter::ExportToPS(QGraphicsScene *scene) const
+void VLayoutExporter::ExportToPS(QGraphicsScene *scene, const QList<QGraphicsItem *> &details) const
 {
     QTemporaryFile tmp;
     if (tmp.open())
     {
         const QString fileName = m_fileName;
-        ExportToPDF(scene, tmp.fileName());
+        ExportToPDF(scene, details, tmp.fileName());
         PdfToPs(QStringList{tmp.fileName(), fileName});
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutExporter::ExportToEPS(QGraphicsScene *scene) const
+void VLayoutExporter::ExportToEPS(QGraphicsScene *scene, const QList<QGraphicsItem *> &details) const
 {
     QTemporaryFile tmp;
     if (tmp.open())
     {
         const QString fileName = m_fileName;
-        ExportToPDF(scene, tmp.fileName());
+        ExportToPDF(scene, details, tmp.fileName());
         PdfToPs(QStringList{QStringLiteral("-eps"), tmp.fileName(), fileName});
     }
 }
@@ -248,7 +274,8 @@ void VLayoutExporter::ExportToEPS(QGraphicsScene *scene) const
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutExporter::ExportToFlatDXF(QGraphicsScene *scene, const QList<QGraphicsItem *> &details) const
 {
-    PrepareTextForDXF(endStringPlaceholder, details);
+    PrepareDetailsForDXF(endStringPlaceholder, details);
+    PrepareGrainlineForExport(details, m_showGrainline);
 
     VDxfPaintDevice generator;
     generator.SetFileName(m_fileName);
@@ -270,7 +297,8 @@ void VLayoutExporter::ExportToFlatDXF(QGraphicsScene *scene, const QList<QGraphi
         }
     }
 
-    RestoreTextAfterDXF(endStringPlaceholder, details);
+    RestoreDetailsAfterDXF(endStringPlaceholder, details);
+    RestoreGrainlineAfterExport(details);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -411,8 +439,11 @@ void VLayoutExporter::PdfToPs(const QStringList &params)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutExporter::ExportToPDF(QGraphicsScene *scene, const QString &filename) const
+void VLayoutExporter::ExportToPDF(QGraphicsScene *scene, const QList<QGraphicsItem *> &details,
+                                  const QString &filename) const
 {
+    PrepareGrainlineForExport(details, m_showGrainline);
+
     QPrinter printer;
     printer.setCreator(QGuiApplication::applicationDisplayName() + QChar(QChar::Space) +
                        QCoreApplication::applicationVersion());
@@ -453,6 +484,7 @@ void VLayoutExporter::ExportToPDF(QGraphicsScene *scene, const QString &filename
     if (not painter.begin(&printer))
     { // failed to open file
         qCritical() << qUtf8Printable(tr("Can't open file '%1'").arg(m_fileName));
+        RestoreGrainlineAfterExport(details);
         return;
     }
     painter.setRenderHint(QPainter::Antialiasing, true);
@@ -461,6 +493,8 @@ void VLayoutExporter::ExportToPDF(QGraphicsScene *scene, const QString &filename
     painter.scale(m_xScale, m_yScale);
     scene->render(&painter, VPrintLayout::SceneTargetRect(&printer, m_imageRect), m_imageRect, Qt::IgnoreAspectRatio);
     painter.end();
+
+    RestoreGrainlineAfterExport(details);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -605,5 +639,37 @@ QString VLayoutExporter::ExportFormatSuffix(LayoutExportFormats format)
             return QStringLiteral(".tif");
         default:
             return QString();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutExporter::PrepareGrainlineForExport(const QList<QGraphicsItem *> &items, bool showGrainline)
+{
+    for (auto *item : items)
+    {
+        QList<QGraphicsItem *> pieceChildren = item->childItems();
+        for (auto *child : qAsConst(pieceChildren))
+        {
+            if (child->type() == VGraphicsFillItem::Type)
+            {
+                child->setVisible(showGrainline);
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutExporter::RestoreGrainlineAfterExport(const QList<QGraphicsItem *> &items)
+{
+    for (auto *item : items)
+    {
+        QList<QGraphicsItem *> pieceChildren = item->childItems();
+        for (auto *child : qAsConst(pieceChildren))
+        {
+            if (child->type() == VGraphicsFillItem::Type)
+            {
+                child->setVisible(true);
+            }
+        }
     }
 }

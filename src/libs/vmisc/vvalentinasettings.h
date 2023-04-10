@@ -235,6 +235,9 @@ public:
     auto GetBackgroundImageDefOpacity() const -> int;
     void SetBackgroundImageDefOpacity(int value);
 
+    bool GetShowGrainline() const;
+    void SetShowGrainline(bool value);
+
 private:
     Q_DISABLE_COPY_MOVE(VValentinaSettings) // NOLINT
 

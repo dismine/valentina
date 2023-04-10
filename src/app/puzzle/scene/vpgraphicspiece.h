@@ -40,6 +40,7 @@
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 
 class VTextManager;
+class VGraphicsFillItem;
 
 class VPGraphicsPiece : public QGraphicsObject
 {
@@ -92,7 +93,6 @@ private:
 
     QPainterPath m_cuttingLine{};
     QPainterPath m_seamLine{};
-    QPainterPath m_grainline{};
     QPainterPath m_internalPaths{};
     QPainterPath m_passmarks{};
     QPainterPath m_placeLabels{};
@@ -113,15 +113,16 @@ private:
 
     bool m_hoverMode{false};
 
+    VGraphicsFillItem *m_grainlineItem{nullptr};
     QVector<QGraphicsPathItem *> m_labelPathItems{};
     QVector<QGraphicsSimpleTextItem *> m_labelTextItems{};
 
     void InitLabels();
     void InitPieceLabel(const QVector<QPointF> &labelShape, const VTextManager &tm);
+    void InitGrainlineItem();
     void PaintPiece(QPainter *painter=nullptr);
     void PaintSeamLine(QPainter *painter, const VPPiecePtr &piece);
     void PaintCuttingLine(QPainter *painter, const VPPiecePtr &piece);
-    void PaintGrainline(QPainter *painter, const VPPiecePtr &piece);
     void PaintInternalPaths(QPainter *painter, const VPPiecePtr &piece);
     void PaintPassmarks(QPainter *painter, const VPPiecePtr &piece);
     void PaintPlaceLabels(QPainter *painter, const VPPiecePtr &piece);

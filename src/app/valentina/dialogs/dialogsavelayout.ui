@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>493</width>
-    <height>391</height>
+    <width>544</width>
+    <height>401</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -126,6 +126,19 @@
           </property>
           <property name="text">
            <string>Text as paths</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxShowGrainline">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="text">
+           <string>Show grainline</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
           </property>
          </widget>
         </item>

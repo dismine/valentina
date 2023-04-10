@@ -274,6 +274,12 @@ enum class Vis : ToolVisHolderType
     LAST_ONE_DO_NOT_USE //add new stuffs above this, this constant must be last and never used
 };
 
+enum class Layout : ToolVisHolderType
+{
+    GrainlineItem = static_cast<ToolVisHolderType>(Vis::LAST_ONE_DO_NOT_USE),
+    LAST_ONE_DO_NOT_USE //add new stuffs above this, this constant must be last and never used
+};
+
 enum class VarType : qint8 { Measurement, MeasurementSeparator, Increment, IncrementSeparator, LineLength, CurveLength,
                              CurveCLength, LineAngle, CurveAngle, ArcRadius, PieceExternalArea, PieceSeamLineArea,
                              Unknown };

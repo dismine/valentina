@@ -54,6 +54,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutFollowGrainline, (QLatin1S
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutPieceGap, (QLatin1String("layout/pieceGap"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutExportFormat, (QLatin1String("layout/exportFormat"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutLineWidth, (QLatin1String("layout/lineWidth"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutShowGrainline, (QLatin1String("layout/showGrainline"))) // NOLINT
 
 int cachedLineWidth = -1;
 }  // namespace
@@ -339,4 +340,16 @@ void VPSettings::SetLayoutLineWidth(int width)
 {
     cachedLineWidth = qBound(1, width, 10);
     setValue(*settingLayoutLineWidth, cachedLineWidth);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VPSettings::GetShowGrainline() const
+{
+    return value(*settingLayoutShowGrainline, true).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSettings::SetShowGrainline(bool value)
+{
+    setValue(*settingLayoutShowGrainline, value);
 }

@@ -76,16 +76,19 @@ public:
     auto BinaryDxfFormat() const -> bool;
     void SetBinaryDxfFormat(bool binaryFormat);
 
+    auto IsShowGrainline() const -> bool;
+    void SetShowGrainline(bool show);
+
     auto DxfVersion() const -> int;
     void SetDxfVersion(int dxfVersion);
 
-    void ExportToSVG(QGraphicsScene *scene) const;
-    void ExportToPNG(QGraphicsScene *scene) const;
-    void ExportToTIF(QGraphicsScene *scene) const;
-    void ExportToPDF(QGraphicsScene *scene) const;
+    void ExportToSVG(QGraphicsScene *scene, const QList<QGraphicsItem *> &details) const;
+    void ExportToPNG(QGraphicsScene *scene, const QList<QGraphicsItem *> &details) const;
+    void ExportToTIF(QGraphicsScene *scene, const QList<QGraphicsItem *> &details) const;
+    void ExportToPDF(QGraphicsScene *scene, const QList<QGraphicsItem *> &details) const;
     void ExportToOBJ(QGraphicsScene *scene) const;
-    void ExportToPS(QGraphicsScene *scene) const;
-    void ExportToEPS(QGraphicsScene *scene) const;
+    void ExportToPS(QGraphicsScene *scene, const QList<QGraphicsItem *> &details) const;
+    void ExportToEPS(QGraphicsScene *scene, const QList<QGraphicsItem *> &details) const;
     void ExportToFlatDXF(QGraphicsScene *scene, const QList<QGraphicsItem *> &details) const;
     void ExportToAAMADXF(const QVector<VLayoutPiece> &details) const;
     void ExportToASTMDXF(const QVector<VLayoutPiece> &details) const;
@@ -93,10 +96,11 @@ public:
 
     static auto SupportPDFConversion() -> bool;
 
-
     static QString ExportFormatDescription(LayoutExportFormats format);
     static QString ExportFormatSuffix(LayoutExportFormats format);
     static void PdfToPs(const QStringList &params);
+    static void PrepareGrainlineForExport(const QList<QGraphicsItem *> &items, bool showGrainline);
+    static void RestoreGrainlineAfterExport(const QList<QGraphicsItem *> &items);
 
     auto offset() const -> QPointF;
     void SetOffset(const QPointF &newOffset);
@@ -112,10 +116,11 @@ private:
     QPen      m_pen{};
     bool      m_ignorePrinterMargins{false};
     bool      m_binaryDxfFormat{false};
+    bool      m_showGrainline{true};
     int       m_dxfVersion{0};
     QPointF   m_offset{};
 
-    void ExportToPDF(QGraphicsScene *scene, const QString &filename) const;
+    void ExportToPDF(QGraphicsScene *scene, const QList<QGraphicsItem *> &details, const QString &filename) const;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

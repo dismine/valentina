@@ -22,6 +22,7 @@
 - Fix seam allowance. Loose requirements to case with prong.
 - Fix list of dimension popup list. Make sure it will always has enough space for values.
 - New grainline type: Four way.
+- [smart-pattern/valentina#163] Show/hide grainline when export.
 
 # Valentina 0.7.52 September 12, 2022
 - Fix crash when default locale is ru.
