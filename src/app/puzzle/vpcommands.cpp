@@ -29,32 +29,8 @@
 
 #include <QStringList>
 
-const QString LONG_OPTION_EXPORT_FILE   = QStringLiteral("exportFile"); // NOLINT
-const QString SINGLE_OPTION_EXPORT_FILE = QStringLiteral("e"); // NOLINT
-
-const QString LONG_OPTION_TEST          = QStringLiteral("test"); // NOLINT
-const QString SINGLE_OPTION_TEST        = QStringLiteral("t"); // NOLINT
-
 const QString LONG_OPTION_RAW_LAYOUT    = QStringLiteral("rawLayout"); // NOLINT
 const QString SINGLE_OPTION_RAW_LAYOUT  = QStringLiteral("r"); // NOLINT
-
-const QString LONG_OPTION_EXP2FORMAT    = QStringLiteral("format"); // NOLINT
-const QString SINGLE_OPTION_EXP2FORMAT  = QStringLiteral("f"); // NOLINT
-
-const QString LONG_OPTION_BINARYDXF     = QStringLiteral("bdxf"); // NOLINT
-const QString LONG_OPTION_TEXT2PATHS    = QStringLiteral("text2paths"); // NOLINT
-
-const QString LONG_OPTION_CROP_LENGTH   = QStringLiteral("crop"); // NOLINT
-const QString SINGLE_OPTION_CROP_LENGTH = QStringLiteral("c"); // NOLINT
-
-const QString LONG_OPTION_CROP_WIDTH    = QStringLiteral("cropWidth"); // NOLINT
-
-const QString LONG_OPTION_TILED_PDF_PAGE_TEMPLATE = QStringLiteral("tiledPageformat"); // NOLINT
-const QString LONG_OPTION_TILED_PDF_LEFT_MARGIN   = QStringLiteral("tiledlmargin"); // NOLINT
-const QString LONG_OPTION_TILED_PDF_RIGHT_MARGIN  = QStringLiteral("tiledrmargin"); // NOLINT
-const QString LONG_OPTION_TILED_PDF_TOP_MARGIN    = QStringLiteral("tiledtmargin"); // NOLINT
-const QString LONG_OPTION_TILED_PDF_BOTTOM_MARGIN = QStringLiteral("tiledbmargin"); // NOLINT
-const QString LONG_OPTION_TILED_PDF_LANDSCAPE     = QStringLiteral("tiledLandscape"); // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -65,24 +41,7 @@ auto AllKeys() -> QStringList
 {
     return
     {
-        LONG_OPTION_EXPORT_FILE,
-        SINGLE_OPTION_EXPORT_FILE,
-        LONG_OPTION_TEST,
-        SINGLE_OPTION_TEST,
         LONG_OPTION_RAW_LAYOUT,
-        SINGLE_OPTION_RAW_LAYOUT,
-        LONG_OPTION_EXP2FORMAT,
-        SINGLE_OPTION_EXP2FORMAT,
-        LONG_OPTION_BINARYDXF,
-        LONG_OPTION_TEXT2PATHS,
-        LONG_OPTION_CROP_LENGTH,
-        SINGLE_OPTION_CROP_LENGTH,
-        LONG_OPTION_CROP_WIDTH,
-        LONG_OPTION_TILED_PDF_PAGE_TEMPLATE,
-        LONG_OPTION_TILED_PDF_LEFT_MARGIN,
-        LONG_OPTION_TILED_PDF_RIGHT_MARGIN,
-        LONG_OPTION_TILED_PDF_TOP_MARGIN,
-        LONG_OPTION_TILED_PDF_BOTTOM_MARGIN,
-        LONG_OPTION_TILED_PDF_LANDSCAPE
+        SINGLE_OPTION_RAW_LAYOUT
     };
 }

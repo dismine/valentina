@@ -31,32 +31,8 @@
 
 #include <QString>
 
-extern const QString LONG_OPTION_EXPORT_FILE;
-extern const QString SINGLE_OPTION_EXPORT_FILE;
-
-extern const QString LONG_OPTION_TEST;
-extern const QString SINGLE_OPTION_TEST;
-
 extern const QString LONG_OPTION_RAW_LAYOUT;
 extern const QString SINGLE_OPTION_RAW_LAYOUT;
-
-extern const QString LONG_OPTION_EXP2FORMAT;
-extern const QString SINGLE_OPTION_EXP2FORMAT;
-
-extern const QString LONG_OPTION_BINARYDXF;
-extern const QString LONG_OPTION_TEXT2PATHS;
-
-extern const QString LONG_OPTION_CROP_LENGTH;
-extern const QString SINGLE_OPTION_CROP_LENGTH;
-
-extern const QString LONG_OPTION_CROP_WIDTH;
-
-extern const QString LONG_OPTION_TILED_PDF_PAGE_TEMPLATE;
-extern const QString LONG_OPTION_TILED_PDF_LEFT_MARGIN;
-extern const QString LONG_OPTION_TILED_PDF_RIGHT_MARGIN;
-extern const QString LONG_OPTION_TILED_PDF_TOP_MARGIN;
-extern const QString LONG_OPTION_TILED_PDF_BOTTOM_MARGIN;
-extern const QString LONG_OPTION_TILED_PDF_LANDSCAPE;
 
 auto AllKeys() -> QStringList;
 

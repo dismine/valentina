@@ -44,17 +44,8 @@ class VPCommandLine: public QObject
 public:
     ~VPCommandLine() override = default;
 
-    /** @brief if user enabled export from cmd */
-    auto IsExportEnabled() const -> bool;
-
-    /** @brief path to export file or empty string if not */
-    auto OptionExportFile() const -> QString;
-
     /** @brief list with paths to the raw layout data files */
     auto OptionRawLayouts() const -> QStringList;
-
-    /** @brief if user enabled test mode from cmd */
-    auto IsTestModeEnabled() const -> bool;
 
     /** @brief if gui enabled or not */
     auto IsGuiEnabled() const -> bool;
@@ -77,7 +68,7 @@ private:
     Q_DISABLE_COPY_MOVE(VPCommandLine) // NOLINT
     static VPCommandLinePtr instance; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
     QCommandLineParser parser{};
-    bool isGuiEnabled{false};
+    bool isGuiEnabled{true};
     friend class VPApplication;
 
     /** @brief add options to the QCommandLineParser that there are in the cmd can be */

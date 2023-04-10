@@ -384,11 +384,8 @@ auto VPApplication::NewMainWindow(const VPCommandLinePtr &cmd) -> VPMainWindow *
 {
     auto *puzzle = new VPMainWindow(cmd);
     m_mainWindows.prepend(puzzle);
-    if (not cmd->IsTestModeEnabled())
-    {
-        puzzle->show();
-        puzzle->UpdateWindowTitle();
-    }
+    puzzle->show();
+    puzzle->UpdateWindowTitle();
     puzzle->InitZoom();
     return puzzle;
 }
@@ -700,13 +697,6 @@ auto VPApplication::StartWithFiles(const VPCommandLinePtr &cmd, const QStringLis
 //---------------------------------------------------------------------------------------------------------------------
 auto VPApplication::SingleStart(const VPCommandLinePtr &cmd, const QStringList &rawLayouts) -> bool
 {
-    if (cmd->IsTestModeEnabled())
-    {
-        qCCritical(pApp, "%s\n", qPrintable(tr("Please, provide one input file.")));
-        cmd.get()->parser.showHelp(V_EX_USAGE);
-        return false;
-    }
-
     NewMainWindow(cmd);
     if (not rawLayouts.isEmpty())
     {

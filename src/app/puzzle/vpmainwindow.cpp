@@ -420,10 +420,6 @@ auto VPMainWindow::LoadFile(const QString& path) -> bool
     if (not QFileInfo::exists(path))
     {
         qCCritical(pWindow, "%s", qUtf8Printable(tr("File '%1' doesn't exist!").arg(path)));
-        if (m_cmd->IsTestModeEnabled())
-        {
-            QCoreApplication::exit(V_EX_NOINPUT);
-        }
         return false;
     }
 
@@ -471,11 +467,6 @@ auto VPMainWindow::LoadFile(const QString& path) -> bool
             qCCritical(pWindow, "%s\n\n%s", qUtf8Printable(tr("File error.")),
                        qUtf8Printable(tr("Unable to read a layout file. %1").arg(fileReader.errorString())));
             lock.reset();
-
-            if (m_cmd->IsTestModeEnabled())
-            {
-                QCoreApplication::exit(V_EX_NOINPUT);
-            }
             return false;
         }
     }
