@@ -329,6 +329,12 @@ auto VCommandLine::IsBinaryDXF() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VCommandLine::IsNoGrainline() const -> bool
+{
+    return IsOptionSet(LONG_OPTION_NOGRAINLINE);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VCommandLine::IsTextAsPaths() const -> bool
 {
     return IsOptionSet(LONG_OPTION_TEXT2PATHS);
@@ -621,6 +627,7 @@ void VCommandLine::InitCommandLineOptions()
          DialogSaveLayout::MakeHelpFormatList(),
          translate("VCommandLine", "Format number"), QChar('0')},
         {LONG_OPTION_BINARYDXF, translate("VCommandLine", "Export dxf in binary form.")},
+        {LONG_OPTION_NOGRAINLINE, translate("VCommandLine", "Show/hide grainline when export layout.")},
         {LONG_OPTION_TEXT2PATHS, translate("VCommandLine", "Export text as paths.")},
         {LONG_OPTION_EXPORTONLYDETAILS,
          translate("VCommandLine", "Export only details. Export details as they positioned in the details mode. Any "

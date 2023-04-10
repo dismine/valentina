@@ -48,6 +48,7 @@ const QString LONG_OPTION_EXP2FORMAT        = QStringLiteral("format");
 const QString SINGLE_OPTION_EXP2FORMAT      = QStringLiteral("f");
 
 const QString LONG_OPTION_BINARYDXF         = QStringLiteral("bdxf");
+const QString LONG_OPTION_NOGRAINLINE       = QStringLiteral("noGrainline"); // NOLINT
 const QString LONG_OPTION_TEXT2PATHS        = QStringLiteral("text2paths");
 const QString LONG_OPTION_EXPORTONLYDETAILS = QStringLiteral("exportOnlyDetails");
 const QString LONG_OPTION_EXPORTSUCHDETAILS = QStringLiteral("exportSuchDetails");
@@ -149,6 +150,7 @@ QStringList AllKeys()
         LONG_OPTION_PAGETEMPLATE, SINGLE_OPTION_PAGETEMPLATE,
         LONG_OPTION_EXP2FORMAT, SINGLE_OPTION_EXP2FORMAT,
         LONG_OPTION_BINARYDXF,
+        LONG_OPTION_NOGRAINLINE,
         LONG_OPTION_TEXT2PATHS,
         LONG_OPTION_EXPORTONLYDETAILS,
         LONG_OPTION_EXPORTSUCHDETAILS,

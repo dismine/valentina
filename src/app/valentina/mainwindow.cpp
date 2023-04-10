@@ -6655,6 +6655,7 @@ auto MainWindow::DoExport(const VCommandLinePtr &expParams) -> bool
             m_dialogSaveLayout->SetDestinationPath(expParams->OptDestinationPath());
             m_dialogSaveLayout->SelectFormat(static_cast<LayoutExportFormats>(expParams->OptExportType()));
             m_dialogSaveLayout->SetBinaryDXFFormat(expParams->IsBinaryDXF());
+            m_dialogSaveLayout->SetShowGrainline(!expParams->IsNoGrainline());
             m_dialogSaveLayout->SetTextAsPaths(expParams->IsTextAsPaths());
             m_dialogSaveLayout->SetXScale(expParams->ExportXScale());
             m_dialogSaveLayout->SetYScale(expParams->ExportYScale());
@@ -6693,6 +6694,7 @@ auto MainWindow::DoExport(const VCommandLinePtr &expParams) -> bool
                 m_dialogSaveLayout->SetDestinationPath(expParams->OptDestinationPath());
                 m_dialogSaveLayout->SelectFormat(static_cast<LayoutExportFormats>(expParams->OptExportType()));
                 m_dialogSaveLayout->SetBinaryDXFFormat(expParams->IsBinaryDXF());
+                m_dialogSaveLayout->SetShowGrainline(!expParams->IsNoGrainline());
                 m_dialogSaveLayout->SetXScale(expParams->ExportXScale());
                 m_dialogSaveLayout->SetYScale(expParams->ExportYScale());
 
