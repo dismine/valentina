@@ -51,7 +51,7 @@ public:
      * @param option unused
      * @param widget unused
      */
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
     int type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Layout::GrainlineItem)};
