@@ -1144,9 +1144,9 @@ auto VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal width, const QS
     const bool removeFirstAndLast = false;
     ekvPoints = RemoveDublicates(ekvPoints, removeFirstAndLast);
     ekvPoints = CheckLoops(ekvPoints);
+    CastTo(ekvPoints, cleaned);//Result path can contain loops
     cleaned = CorrectEquidistantPoints(cleaned, removeFirstAndLast);
     cleaned = CorrectPathDistortion(cleaned);
-    CastTo(ekvPoints, cleaned);//Result path can contain loops
 
 //    QVector<QPointF> dump;
 //    CastTo(cleaned, dump);

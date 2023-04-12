@@ -81,12 +81,14 @@ public:
 
     QVector<QLineF> FullPassmark(const VPiece& piece, const VContainer *data) const;
     QVector<QLineF> SAPassmark(const VPiece& piece, const VContainer *data, PassmarkSide side) const;
-    QVector<QLineF> SAPassmark(const QVector<QPointF> &seamAllowance, PassmarkSide side) const;
+    QVector<QLineF> SAPassmark(const QVector<QPointF> &seamAllowance, const QVector<QPointF> &rotatedSeamAllowance,
+                               PassmarkSide side) const;
     QVector<QLineF> BuiltInSAPassmark(const VPiece &piece, const VContainer *data) const;
 
     QVector<QLineF> BuiltInSAPassmarkBaseLine(const VPiece &piece) const;
     QVector<QLineF> SAPassmarkBaseLine(const VPiece &piece, const VContainer *data, PassmarkSide side) const;
-    QVector<QLineF> SAPassmarkBaseLine(const QVector<QPointF> &seamAllowance, PassmarkSide side) const;
+    QVector<QLineF> SAPassmarkBaseLine(const QVector<QPointF> &seamAllowance,
+                                       const QVector<QPointF> &rotatedSeamAllowance, PassmarkSide side) const;
 
     QPainterPath SAPassmarkPath(const VPiece& piece, const VContainer *data, PassmarkSide side) const;
     QPainterPath BuiltInSAPassmarkPath(const VPiece &piece, const VContainer *data) const;
@@ -101,8 +103,6 @@ public:
 private:
     VPiecePassmarkData m_data{};
     bool m_null{true};
-
-    QVector<QLineF> MakeSAPassmark(const QVector<QPointF> &seamAllowance, PassmarkSide side) const;
 };
 
 #endif // VPASSMARK_H

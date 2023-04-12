@@ -99,6 +99,11 @@
         <file>Issue_924_Test_1/passmarkData.json</file>
         <file>Issue_924_Test_1/passmarkShape.json</file>
         <file>Issue_924_Test_1/seamAllowance.json</file>
+        <file>Issue_924_Test_1/rotatedSeamAllowance.json</file>
+        <file>Issue_924_Test_2/passmarkData.json</file>
+        <file>Issue_924_Test_2/passmarkShape.json</file>
+        <file>Issue_924_Test_2/seamAllowance.json</file>
+        <file>Issue_924_Test_2/rotatedSeamAllowance.json</file>
         <file>DP_6/input.json</file>
         <file>DP_6/output.json</file>
         <file>Issue_923_test7_1/input.json</file>
@@ -163,5 +168,9 @@
         <file>custom_seam_allwance_exclude_p2/output.json</file>
         <file>hat/input.json</file>
         <file>hat/output.json</file>
+        <file>incorrect_notch/passmarkData.json</file>
+        <file>incorrect_notch/passmarkShape.json</file>
+        <file>incorrect_notch/rotatedSeamAllowance.json</file>
+        <file>incorrect_notch/seamAllowance.json</file>
     </qresource>
 </RCC>

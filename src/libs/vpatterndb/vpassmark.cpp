@@ -34,6 +34,7 @@
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
 #include "../vlayout/vrawsapoint.h"
+#include "../vpatterndb/testpassmark.h"
 
 const qreal VPassmark::passmarkRadiusFactor = 0.45;
 
@@ -52,7 +53,7 @@ PassmarkStatus GetSeamPassmarkSAPoint(const VPiecePassmarkData &passmarkData, co
     if (needRollback && not seamAllowance.isEmpty())
     {
         ekvPoints.clear();
-        ekvPoints += VRawSAPoint(seamAllowance.at(seamAllowance.size()-2));
+        ekvPoints += VRawSAPoint(seamAllowance.at(seamAllowance.size()-1));
     }
 
     if (ekvPoints.isEmpty())
@@ -60,24 +61,7 @@ PassmarkStatus GetSeamPassmarkSAPoint(const VPiecePassmarkData &passmarkData, co
         return PassmarkStatus::Error; // Something wrong
     }
 
-    if (ekvPoints.size() == 1 || ekvPoints.size() > 2)
-    {
-        point = ConstFirst(ekvPoints);
-    }
-    else if (ekvPoints.size() == 2)
-    {
-        if(passmarkData.passmarkSAPoint.GetAngleType() == PieceNodeAngle::ByFirstEdgeSymmetry ||
-                passmarkData.passmarkSAPoint.GetAngleType() == PieceNodeAngle::ByFirstEdgeRightAngle)
-        {
-            point = ConstFirst(ekvPoints);
-        }
-        else
-        {
-            QLineF line = QLineF(ekvPoints.at(0), ekvPoints.at(1));
-            line.setLength(line.length()/2.);
-            point = line.p2();
-        }
-    }
+    point = ConstFirst(ekvPoints);
     return needRollback ? PassmarkStatus::Rollback : PassmarkStatus::Common;
 }
 
@@ -600,8 +584,8 @@ QVector<QLineF> PassmarkBisectorBaseLine(PassmarkStatus seamPassmarkType, const 
     }
     else if(seamPassmarkType == PassmarkStatus::Rollback)
     {
-        edge1 = QLineF(seamPassmarkSAPoint, seamAllowance.at(seamAllowance.size() - 3));
-        edge2 = QLineF(seamPassmarkSAPoint, seamAllowance.at(0));
+        edge1 = QLineF(seamPassmarkSAPoint, seamAllowance.at(seamAllowance.size() - 2));
+        edge2 = QLineF(seamPassmarkSAPoint, seamAllowance.at(1));
     }
     else
     { // Should never happen
@@ -725,24 +709,40 @@ QVector<QLineF> VPassmark::SAPassmark(const VPiece &piece, const VContainer *dat
     if (not piece.IsSeamAllowanceBuiltIn())
     {
         // Because rollback cannot be calulated if passmark is not first point in main path we rotate it.
-        QVector<QPointF> points;
-        CastTo(piece.SeamAllowancePointsWithRotation(data, m_data.passmarkIndex), points);
-        return SAPassmark(points, side);
+        QVector<QPointF> rotatedSeamAllowance;
+        CastTo(piece.SeamAllowancePointsWithRotation(data, m_data.passmarkIndex), rotatedSeamAllowance);
+
+        QVector<QPointF> seamAllowance;
+        CastTo(piece.SeamAllowancePoints(data), seamAllowance);
+
+        return SAPassmark(seamAllowance, rotatedSeamAllowance, side);
     }
 
     return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QLineF> VPassmark::SAPassmark(const QVector<QPointF> &seamAllowance, PassmarkSide side) const
+QVector<QLineF> VPassmark::SAPassmark(const QVector<QPointF> &seamAllowance,
+                                      const QVector<QPointF> &rotatedSeamAllowance, PassmarkSide side) const
 {
     if (m_null)
     {
         return {};
     }
 
-    // Because rollback @seamAllowance must be rotated here.
-    return MakeSAPassmark(seamAllowance, side);
+//    DumpVector(seamAllowance, QStringLiteral("seamAllowance.json.XXXXXX")); // Uncomment for dumping test data
+//    DumpVector(seamAllowance, QStringLiteral("rotatedSeamAllowance.json.XXXXXX")); // Uncomment for dumping test data
+//    DumpPassmarkData(m_data, QStringLiteral("passmarkData.json.XXXXXX")); // Uncomment for dumping test data
+
+    QVector<QLineF> lines = SAPassmarkBaseLine(seamAllowance, rotatedSeamAllowance, side);
+    if (lines.isEmpty())
+    {
+        return lines;
+    }
+
+    lines = CreatePassmarkLines(m_data.passmarkLineType, m_data.passmarkAngleType, lines, seamAllowance, side);
+//    DumpPassmarkShape(lines, QStringLiteral("passmarkShape.json.XXXXXX")); // Uncomment for dumping test data
+    return lines;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -769,23 +769,6 @@ QLineF VPassmark::FindIntersection(const QLineF &line, const QVector<QPointF> &s
     }
 
     return line;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QVector<QLineF> VPassmark::MakeSAPassmark(const QVector<QPointF> &seamAllowance, PassmarkSide side) const
-{
-//    DumpVector(seamAllowance, QStringLiteral("seamAllowance.json.XXXXXX")); // Uncomment for dumping test data
-//    DumpPassmarkData(m_data, QStringLiteral("passmarkData.json.XXXXXX")); // Uncomment for dumping test data
-
-    QVector<QLineF> lines = SAPassmarkBaseLine(seamAllowance, side);
-    if (lines.isEmpty())
-    {
-        return lines;
-    }
-
-    lines = CreatePassmarkLines(m_data.passmarkLineType, m_data.passmarkAngleType, lines, seamAllowance, side);
-//    DumpPassmarkShape(lines, QStringLiteral("passmarkShape.json.XXXXXX")); // Uncomment for dumping test data
-    return lines;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -870,59 +853,69 @@ QVector<QLineF> VPassmark::SAPassmarkBaseLine(const VPiece &piece, const VContai
     if (not piece.IsSeamAllowanceBuiltIn())
     {
         // Because rollback cannot be calulated if passmark is not first point in main path we rotate it.
-        QVector<QPointF> points;
-        CastTo(piece.SeamAllowancePointsWithRotation(data, m_data.passmarkIndex), points);
-        return SAPassmarkBaseLine(points, side);
+        QVector<QPointF> rotatedSeamAllowance;
+        CastTo(piece.SeamAllowancePointsWithRotation(data, m_data.passmarkIndex), rotatedSeamAllowance);
+
+        QVector<QPointF> seamAllowance;
+        CastTo(piece.SeamAllowancePoints(data), seamAllowance);
+
+        return SAPassmarkBaseLine(seamAllowance, rotatedSeamAllowance, side);
     }
 
     return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QLineF> VPassmark::SAPassmarkBaseLine(const QVector<QPointF> &seamAllowance, PassmarkSide side) const
+QVector<QLineF> VPassmark::SAPassmarkBaseLine(const QVector<QPointF> &seamAllowance,
+                                              const QVector<QPointF> &rotatedSeamAllowance, PassmarkSide side) const
 {
     if (m_null)
     {
         return {};
     }
 
-    if (seamAllowance.size() < 2)
+    if (rotatedSeamAllowance.size() < 2)
     {
         const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'. Seam allowance is "
                                              "empty.").arg(m_data.nodeName, m_data.pieceName);
         VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
-        return QVector<QLineF>(); // Something wrong
+            qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        return {}; // Something wrong
     }
 
     QPointF seamPassmarkSAPoint;
-    const PassmarkStatus seamPassmarkType = GetSeamPassmarkSAPoint(m_data, seamAllowance, seamPassmarkSAPoint);
+    const PassmarkStatus seamPassmarkType = GetSeamPassmarkSAPoint(m_data, rotatedSeamAllowance, seamPassmarkSAPoint);
     if (seamPassmarkType == PassmarkStatus::Error)
     {
         const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'. Cannot find "
                                              "position for a notch.")
-                .arg(m_data.nodeName, m_data.pieceName);
+                                     .arg(m_data.nodeName, m_data.pieceName);
         VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
-        return QVector<QLineF>(); // Something wrong
+            qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        return {}; // Something wrong
     }
 
-    if (not FixNotchPoint(seamAllowance, m_data.passmarkSAPoint, &seamPassmarkSAPoint))
+    const QVector<QPointF>& path = (m_data.passmarkAngleType == PassmarkAngleType::Straightforward ||
+                                    m_data.passmarkAngleType == PassmarkAngleType::Bisector)
+                                       ? rotatedSeamAllowance
+                                       : seamAllowance;
+
+    if (not FixNotchPoint(path, m_data.passmarkSAPoint, &seamPassmarkSAPoint))
     {
         const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'. Unable to fix a "
                                              "notch position.")
-                .arg(m_data.nodeName, m_data.pieceName);
+                                     .arg(m_data.nodeName, m_data.pieceName);
         VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+            qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
-    auto PassmarkIntersection = [this, seamAllowance] (QLineF line, qreal width)
+    auto PassmarkIntersection = [this, path] (QLineF line, qreal width)
     {
         line.setLength(line.length()*100); // Hope 100 is enough
 
-//        DumpVector(seamAllowance, QStringLiteral("points.json.XXXXXX")); // Uncomment for dumping test data
+//        DumpVector(path, QStringLiteral("points.json.XXXXXX")); // Uncomment for dumping test data
 
-        const QVector<QPointF> intersections = VAbstractCurve::CurveIntersectLine(seamAllowance, line);
+        const QVector<QPointF> intersections = VAbstractCurve::CurveIntersectLine(path, line);
 
 //        DumpVector(intersections, QStringLiteral("intersections.json.XXXXXX")); // Uncomment for dumping test data
 
@@ -977,7 +970,7 @@ QVector<QLineF> VPassmark::SAPassmarkBaseLine(const QVector<QPointF> &seamAllowa
     }
     else if (m_data.passmarkAngleType == PassmarkAngleType::Bisector)
     {
-        return PassmarkBisectorBaseLine(seamPassmarkType, m_data, seamPassmarkSAPoint, seamAllowance);
+        return PassmarkBisectorBaseLine(seamPassmarkType, m_data, seamPassmarkSAPoint, path);
     }
     else if (m_data.passmarkAngleType == PassmarkAngleType::Intersection
              || m_data.passmarkAngleType == PassmarkAngleType::IntersectionOnlyLeft
@@ -1032,7 +1025,7 @@ QVector<QLineF> VPassmark::SAPassmarkBaseLine(const QVector<QPointF> &seamAllowa
         return lines;
     }
 
-    return QVector<QLineF>();
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -73,10 +73,11 @@ void TST_VPiece::TestSAPassmark_data()
 {
     QTest::addColumn<VPiecePassmarkData>("passmarkData");
     QTest::addColumn<QVector<QPointF>>("seamAllowance");
+    QTest::addColumn<QVector<QPointF>>("rotatedSeamAllowance");
     QTest::addColumn<QVector<QLineF>>("expectedResult");
 
     auto ASSERT_TEST_CASE = [this](const char *title, const QString &passmarkData, const QString &seamAllowance,
-            const QString &shape)
+                                   const QString &rotatedSeamAllowance, const QString &shape)
     {
         QT_WARNING_PUSH
         QT_WARNING_DISABLE_GCC("-Wnoexcept")
@@ -85,11 +86,13 @@ void TST_VPiece::TestSAPassmark_data()
         AbstractTest::PassmarkDataFromJson(passmarkData, inputPassmarkData);
 
         QVector<QPointF> inputSeamAllowance = AbstractTest::VectorFromJson<QPointF>(seamAllowance);
+        QVector<QPointF> inputRotatedSeamAllowance = AbstractTest::VectorFromJson<QPointF>(rotatedSeamAllowance);
 
         QVector<QLineF> inputOutputShape;
         AbstractTest::PassmarkShapeFromJson(shape, inputOutputShape);
 
-        QTest::newRow(title) << inputPassmarkData << inputSeamAllowance << inputOutputShape;
+        QTest::newRow(title) << inputPassmarkData << inputSeamAllowance << inputRotatedSeamAllowance
+                             << inputOutputShape;
 
         QT_WARNING_POP
     };
@@ -98,7 +101,22 @@ void TST_VPiece::TestSAPassmark_data()
     ASSERT_TEST_CASE("Test 1.",
                      QStringLiteral("://Issue_924_Test_1/passmarkData.json"),
                      QStringLiteral("://Issue_924_Test_1/seamAllowance.json"),
+                     QStringLiteral("://Issue_924_Test_1/rotatedSeamAllowance.json"),
                      QStringLiteral("://Issue_924_Test_1/passmarkShape.json"));
+
+    // See file src/app/share/collection/bugs/Issue_#924.val
+    ASSERT_TEST_CASE("Test 2.",
+                     QStringLiteral("://Issue_924_Test_2/passmarkData.json"),
+                     QStringLiteral("://Issue_924_Test_2/seamAllowance.json"),
+                     QStringLiteral("://Issue_924_Test_2/rotatedSeamAllowance.json"),
+                     QStringLiteral("://Issue_924_Test_2/passmarkShape.json"));
+
+    // See file src/app/share/collection/bugs/incorrect_notch.val
+    ASSERT_TEST_CASE("Piece.",
+                     QStringLiteral("://incorrect_notch/passmarkData.json"),
+                     QStringLiteral("://incorrect_notch/seamAllowance.json"),
+                     QStringLiteral("://incorrect_notch/rotatedSeamAllowance.json"),
+                     QStringLiteral("://incorrect_notch/passmarkShape.json"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -106,9 +124,10 @@ void TST_VPiece::TestSAPassmark()
 {
     QFETCH(VPiecePassmarkData, passmarkData);
     QFETCH(QVector<QPointF>, seamAllowance);
+    QFETCH(QVector<QPointF>, rotatedSeamAllowance);
     QFETCH(QVector<QLineF>, expectedResult);
 
     VPassmark passmark(passmarkData);
 
-    CompareLinesDistance(passmark.SAPassmark(seamAllowance, PassmarkSide::All), expectedResult);
+    CompareLinesDistance(passmark.SAPassmark(seamAllowance, rotatedSeamAllowance, PassmarkSide::All), expectedResult);
 }

@@ -949,7 +949,7 @@ bool VPiece::GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path, vsizet
     {
         const VSAPoint previous = points.at(nodeIndex);
         QLineF line(passmarkSAPoint, previous);
-        if (line.length() >= ToPixel(1, Unit::Mm))
+        if (line.length() > accuracyPointOnLine)
         {
             point = previous;
             found = true;

@@ -209,6 +209,10 @@ inline QPainterPath VPiece::SeamAllowancePath(const QVector<T> &points) const
 //                               accuracyPointOnLine*2., accuracyPointOnLine*2.);
 //                ekv.addText(points.at(i).x()-accuracyPointOnLine, points.at(i).y()-accuracyPointOnLine, font,
 //                            QString::number(i+1));
+//                if (i > 250)
+//                {
+//                    break;
+//                }
 //            }
 #endif
 

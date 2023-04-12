@@ -1,0 +1,33 @@
+{
+    "data": {
+        "globalPassmarkLength": 0,
+        "id": 293,
+        "isMainPathNode": true,
+        "isShowSecondPassmark": false,
+        "nextSAPoint": {
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": 1152.4535433070866,
+            "y": 1662.9921259842522
+        },
+        "nodeName": "П2",
+        "passmarkAngleType": 2,
+        "passmarkIndex": 13,
+        "passmarkLineType": 0,
+        "passmarkSAPoint": {
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": 1141.4149617366281,
+            "y": 1133.7638237958422
+        },
+        "pieceName": "Спинка",
+        "previousSAPoint": {
+            "angle": 6,
+            "curvePoint": true,
+            "type": "VSAPoint",
+            "x": 1139.6438937742528,
+            "y": 1133.618039930699
+        },
+        "saWidth": 37.795275590551185
+    }
+}

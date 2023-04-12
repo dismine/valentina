@@ -1,12 +1,12 @@
 {
     "data": {
         "globalPassmarkLength": 0,
-        "id": 373,
+        "id": 435,
         "isMainPathNode": true,
         "isShowSecondPassmark": true,
         "nextSAPoint": {
             "saAfter": 37.795275590551185,
-            "saBefore": 0,
+            "saBefore": 37.795275590551185,
             "turnPoint": true,
             "type": "VSAPoint",
             "x": -814.7149606299213,
@@ -17,14 +17,14 @@
         "passmarkIndex": 0,
         "passmarkLineType": 3,
         "passmarkSAPoint": {
-            "saAfter": 0,
+            "saAfter": 37.795275590551185,
             "saBefore": 37.795275590551185,
             "turnPoint": true,
             "type": "VSAPoint",
             "x": -814.7149606299213,
             "y": 331.31319685039375
         },
-        "pieceName": "Test 1",
+        "pieceName": "Test 2",
         "previousSAPoint": {
             "angle": 6,
             "curvePoint": true,
