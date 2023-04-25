@@ -34,13 +34,14 @@ import "freedesktop2.js" as Fdo
 
 Module {
     property string name: product.name
+    property string appName: name
 
     property var desktopKeys
 
     readonly property var defaultDesktopKeys: {
         return {
             'Type': 'Application',
-            'Name': product.freedesktop2.name,
+            'Name': product.freedesktop2.appName,
             'Exec': product.targetName,
             'Terminal': 'false',
             'Version': '1.1',
@@ -56,7 +57,6 @@ Module {
     }
 
     Rule {
-        alwaysRun: true
         condition: _fdoSupported
 
         inputs: [ "freedesktop.desktopfile_source" ]
