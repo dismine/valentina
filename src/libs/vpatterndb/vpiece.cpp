@@ -1297,7 +1297,7 @@ void VPiece::TestInternalPathCuttingPathIntersection(const VContainer *data) con
     SCASSERT(data != nullptr)
 
     const QVector<QPointF> cuttingPoints = CuttingPathPoints(data);
-    const QPainterPath contourPath = VAbstractPiece::PainterPath(cuttingPoints);
+    const QPainterPath contourPath = VGObject::PainterPath(cuttingPoints);
 
     // Internal path for cutting must not intersect cutting contour and be inside of it.
     const QVector<quint32> pathsId = GetInternalPaths();
@@ -1317,7 +1317,7 @@ void VPiece::TestInternalPathCuttingPathIntersection(const VContainer *data) con
             continue;
         }
 
-        const QPainterPath internalPath = VAbstractPiece::PainterPath(points);
+        const QPainterPath internalPath = VGObject::PainterPath(points);
 
         if (internalPath.intersects(contourPath))
         {
@@ -1371,7 +1371,7 @@ void VPiece::TestInternalPathsIntersections(const VContainer *data) const
             continue;
         }
 
-        const QPainterPath painterPath1 = VAbstractPiece::PainterPath(pointsPath1);
+        const QPainterPath painterPath1 = VGObject::PainterPath(pointsPath1);
 
         for (int i=0; i < pathsId.size(); ++i)
         {
@@ -1395,7 +1395,7 @@ void VPiece::TestInternalPathsIntersections(const VContainer *data) const
                 continue;
             }
 
-            const QPainterPath painterPath2 = VAbstractPiece::PainterPath(pointsPath2);
+            const QPainterPath painterPath2 = VGObject::PainterPath(pointsPath2);
 
             pairs.insert(qMakePair(k, i));
             pairs.insert(qMakePair(i, k));

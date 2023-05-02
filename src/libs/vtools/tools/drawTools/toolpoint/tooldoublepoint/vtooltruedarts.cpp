@@ -89,7 +89,7 @@ void VToolTrueDarts::FindPoint(const QPointF &baseLineP1, const QPointF &baseLin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolTrueDarts::setDialog()
+void VToolTrueDarts::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogTrueDarts> dialogTool = qobject_cast<DialogTrueDarts *>(m_dialog);

@@ -305,7 +305,7 @@ bool VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutPiece 
         VCachedPositions positionChache;
         QVector<QPointF> layoutPoints = workDetail.GetMappedLayoutAllowancePoints();
         positionChache.boundingRect = VLayoutPiece::BoundingRect(layoutPoints);
-        positionChache.layoutAllowancePath = VAbstractPiece::PainterPath(layoutPoints);
+        positionChache.layoutAllowancePath = VGObject::PainterPath(layoutPoints);
         d->positionsCache.append(positionChache);
 
 #ifdef LAYOUT_DEBUG
@@ -422,6 +422,7 @@ QGraphicsPathItem *VLayoutPaper::GetGlobalContour() const
 QList<QGraphicsItem *> VLayoutPaper::GetItemDetails(bool textAsPaths) const
 {
     QList<QGraphicsItem *> list;
+    list.reserve(d->details.count());
     for (auto &detail : d->details)
     {
         list.append(detail.GetItem(textAsPaths));

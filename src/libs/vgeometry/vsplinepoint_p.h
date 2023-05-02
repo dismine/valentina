@@ -93,7 +93,7 @@ public:
     qreal   kAsm2;
 
 private:
-    Q_DISABLE_ASSIGN(VFSplinePointData)
+    Q_DISABLE_ASSIGN_MOVE(VFSplinePointData) // NOLINT
 };
 
 VFSplinePointData::~VFSplinePointData()
@@ -164,7 +164,7 @@ public:
     QString length2F;
 
 private:
-    Q_DISABLE_ASSIGN(VSplinePointData)
+    Q_DISABLE_ASSIGN_MOVE(VSplinePointData) // NOLINT
 };
 
 //---------------------------------------------------------------------------------------------------------------------

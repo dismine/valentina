@@ -200,7 +200,7 @@ void VToolAlongLine::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quin
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
-void VToolAlongLine::setDialog()
+void VToolAlongLine::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogAlongLine> dialogTool = qobject_cast<DialogAlongLine *>(m_dialog);

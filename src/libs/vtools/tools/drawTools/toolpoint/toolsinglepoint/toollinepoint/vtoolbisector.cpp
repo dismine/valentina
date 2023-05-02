@@ -106,7 +106,7 @@ QPointF VToolBisector::FindPoint(const QPointF &firstPoint, const QPointF &secon
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
-void VToolBisector::setDialog()
+void VToolBisector::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogBisector> dialogTool = qobject_cast<DialogBisector *>(m_dialog);

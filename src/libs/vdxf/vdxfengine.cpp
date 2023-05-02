@@ -28,6 +28,7 @@
 
 #include "vdxfengine.h"
 
+#include <QLineF>
 #include <QByteArray>
 #include <QColor>
 #include <QDateTime>

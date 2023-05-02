@@ -62,7 +62,7 @@ public:
     QString alias{};
 
 private:
-    Q_DISABLE_ASSIGN(VInternalVariableData)
+    Q_DISABLE_ASSIGN_MOVE(VInternalVariableData) // NOLINT
 };
 
 VInternalVariableData::~VInternalVariableData()

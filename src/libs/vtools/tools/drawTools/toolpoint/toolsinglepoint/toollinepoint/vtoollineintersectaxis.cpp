@@ -66,7 +66,7 @@ VToolLineIntersectAxis::VToolLineIntersectAxis(const VToolLineIntersectAxisInitD
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolLineIntersectAxis::setDialog()
+void VToolLineIntersectAxis::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     m_dialog->setModal(true);

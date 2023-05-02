@@ -68,7 +68,7 @@ VToolHeight::VToolHeight(const VToolHeightInitData &initData, QGraphicsItem * pa
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
-void VToolHeight::setDialog()
+void VToolHeight::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogHeight> dialogTool = qobject_cast<DialogHeight *>(m_dialog);

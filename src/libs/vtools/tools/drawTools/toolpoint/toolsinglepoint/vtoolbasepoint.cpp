@@ -87,7 +87,7 @@ VToolBasePoint::VToolBasePoint (const VToolBasePointInitData &initData, QGraphic
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
-void VToolBasePoint::setDialog()
+void VToolBasePoint::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogSinglePoint> dialogTool = qobject_cast<DialogSinglePoint *>(m_dialog);

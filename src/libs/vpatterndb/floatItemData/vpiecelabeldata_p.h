@@ -43,7 +43,7 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VPieceLabelDataPrivate : public QSharedData
 {
 public:
-    VPieceLabelDataPrivate() = default;
+    VPieceLabelDataPrivate(){} // NOLINT(modernize-use-equals-default)
     VPieceLabelDataPrivate(const VPieceLabelDataPrivate &data) = default;
     ~VPieceLabelDataPrivate() = default;
 

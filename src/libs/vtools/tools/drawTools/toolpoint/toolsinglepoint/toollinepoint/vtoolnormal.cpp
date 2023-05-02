@@ -72,7 +72,7 @@ VToolNormal::VToolNormal(const VToolNormalInitData &initData, QGraphicsItem *par
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
-void VToolNormal::setDialog()
+void VToolNormal::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogNormal> dialogTool = qobject_cast<DialogNormal *>(m_dialog);

@@ -64,7 +64,7 @@ VToolPointFromArcAndTangent::VToolPointFromArcAndTangent(const VToolPointFromArc
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointFromArcAndTangent::setDialog()
+void VToolPointFromArcAndTangent::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogPointFromArcAndTangent> dialogTool = qobject_cast<DialogPointFromArcAndTangent *>(m_dialog);

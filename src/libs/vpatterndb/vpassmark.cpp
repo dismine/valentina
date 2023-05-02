@@ -34,7 +34,8 @@
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
 #include "../vlayout/vrawsapoint.h"
-#include "../vpatterndb/testpassmark.h"
+
+#include <QJsonObject>
 
 const qreal VPassmark::passmarkRadiusFactor = 0.45;
 

@@ -80,7 +80,7 @@ public:
     QString exceptionReason{};
 
 private:
-    Q_DISABLE_ASSIGN(VBestSquareData)
+    Q_DISABLE_ASSIGN_MOVE(VBestSquareData) // NOLINT
 };
 
 QT_WARNING_POP

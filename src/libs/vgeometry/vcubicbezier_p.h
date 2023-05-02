@@ -62,7 +62,7 @@ public:
     VPointF p4;
 
 private:
-    Q_DISABLE_ASSIGN(VCubicBezierData)
+    Q_DISABLE_ASSIGN_MOVE(VCubicBezierData) // NOLINT
 };
 
 //---------------------------------------------------------------------------------------------------------------------

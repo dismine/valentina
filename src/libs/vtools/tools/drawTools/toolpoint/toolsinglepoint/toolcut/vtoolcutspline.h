@@ -51,7 +51,7 @@ class VToolCutSpline : public VToolCut
     Q_OBJECT // NOLINT
 public:
     ~VToolCutSpline() override =default;
-    void setDialog() override;
+    void SetDialog() override;
     static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                        VContainer *data) -> VToolCutSpline *;
     static auto Create(VToolCutInitData &initData) -> VToolCutSpline *;

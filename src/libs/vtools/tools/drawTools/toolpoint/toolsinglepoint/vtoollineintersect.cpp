@@ -74,7 +74,7 @@ VToolLineIntersect::VToolLineIntersect(const VToolLineIntersectInitData &initDat
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
-void VToolLineIntersect::setDialog()
+void VToolLineIntersect::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogLineIntersect> dialogTool = qobject_cast<DialogLineIntersect *>(m_dialog);

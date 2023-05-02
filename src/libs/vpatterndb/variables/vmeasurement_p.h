@@ -126,7 +126,7 @@ public:
     MeasurementType varType{MeasurementType::Measurement};
 
 private:
-    Q_DISABLE_ASSIGN(VMeasurementData)
+    Q_DISABLE_ASSIGN_MOVE(VMeasurementData) // NOLINT
 };
 
 VMeasurementData::~VMeasurementData()

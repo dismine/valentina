@@ -67,7 +67,7 @@ VToolCubicBezierPath::VToolCubicBezierPath(const VToolCubicBezierPathInitData &i
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCubicBezierPath::setDialog()
+void VToolCubicBezierPath::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     auto dialogTool = qobject_cast<DialogCubicBezierPath*>(m_dialog);

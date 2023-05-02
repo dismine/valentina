@@ -74,7 +74,7 @@ VToolTriangle::VToolTriangle(const VToolTriangleInitData &initData, QGraphicsIte
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
-void VToolTriangle::setDialog()
+void VToolTriangle::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogTriangle> dialogTool = qobject_cast<DialogTriangle *>(m_dialog);

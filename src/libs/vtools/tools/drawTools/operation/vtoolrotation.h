@@ -62,7 +62,7 @@ class VToolRotation : public VAbstractOperation
     Q_OBJECT // NOLINT
 public:
     virtual ~VToolRotation() = default;
-    virtual void setDialog() override;
+    virtual void SetDialog() override;
     static VToolRotation* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                  VContainer *data);
     static VToolRotation* Create(VToolRotationInitData &initData);

@@ -51,7 +51,7 @@ class VToolFlippingByLine : public VAbstractFlipping
     Q_OBJECT // NOLINT
 public:
     virtual ~VToolFlippingByLine() = default;
-    virtual void setDialog() override;
+    virtual void SetDialog() override;
     static VToolFlippingByLine* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                        VAbstractPattern *doc, VContainer *data);
     static VToolFlippingByLine* Create(VToolFlippingByLineInitData initData);

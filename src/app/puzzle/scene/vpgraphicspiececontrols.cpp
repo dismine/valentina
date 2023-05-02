@@ -35,6 +35,7 @@
 #include <QtDebug>
 #include <QGuiApplication>
 #include <QScreen>
+#include <QFileInfo>
 
 #include "../vmisc/compatibility.h"
 #include "../vwidgets/global.h"

@@ -1377,7 +1377,7 @@ auto VLayoutPiece::ContourPath() const -> QPainterPath
     // contour
     if (not IsHideMainPath() || not IsSeamAllowance() || IsSeamAllowanceBuiltIn())
     {
-        path = PainterPath(GetContourPoints());
+        path = VGObject::PainterPath(GetContourPoints());
     }
 
     // seam allowance
@@ -1425,7 +1425,7 @@ auto VLayoutPiece::ContourPath() const -> QPainterPath
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutPiece::MappedLayoutAllowancePath() const -> QPainterPath
 {
-    return PainterPath(GetMappedLayoutAllowancePoints());
+    return VGObject::PainterPath(GetMappedLayoutAllowancePoints());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

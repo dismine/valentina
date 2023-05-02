@@ -60,7 +60,7 @@ public:
     quint32 p2Id;
 
 private:
-    Q_DISABLE_ASSIGN(VLineAngleData)
+    Q_DISABLE_ASSIGN_MOVE(VLineAngleData) // NOLINT
 };
 
 VLineAngleData::~VLineAngleData()

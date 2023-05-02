@@ -83,7 +83,7 @@ public:
   bool        reverse;
 
 private:
-    Q_DISABLE_ASSIGN(VNodeDetailData)
+    Q_DISABLE_ASSIGN_MOVE(VNodeDetailData) // NOLINT
 };
 
 QT_WARNING_POP

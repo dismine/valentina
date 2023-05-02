@@ -64,7 +64,7 @@ VToolCubicBezier::VToolCubicBezier(const VToolCubicBezierInitData &initData, QGr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCubicBezier::setDialog()
+void VToolCubicBezier::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     auto dialogTool = qobject_cast<DialogCubicBezier*>(m_dialog);

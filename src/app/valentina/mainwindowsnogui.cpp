@@ -584,6 +584,7 @@ void MainWindowsNoGUI::ExportDetailsAsFlatLayout(const QVector<VLayoutPiece> &li
     QScopedPointer<QGraphicsScene> scene(new QGraphicsScene());
 
     QList<QGraphicsItem *> list;
+    list.reserve(listDetails.count());
     for (auto piece : listDetails)
     {
         QGraphicsItem *item = piece.GetItem(m_dialogSaveLayout->IsTextAsPaths());
@@ -607,7 +608,7 @@ void MainWindowsNoGUI::ExportDetailsAsFlatLayout(const QVector<VLayoutPiece> &li
         list.append(item);
     }
 
-    for (auto item : list)
+    for (auto *item : list)
     {
         scene->addItem(item);
     }
@@ -621,7 +622,7 @@ void MainWindowsNoGUI::ExportDetailsAsFlatLayout(const QVector<VLayoutPiece> &li
     QTransform matrix;
     matrix = matrix.translate(-mx, -my);
 
-    for (auto item : list)
+    for (auto *item : list)
     {
         item->setTransform(matrix);
     }
@@ -770,6 +771,7 @@ void MainWindowsNoGUI::ExportDetailsAsApparelLayout(QVector<VLayoutPiece> listDe
     QScopedPointer<QGraphicsScene> scene(new QGraphicsScene());
 
     QList<QGraphicsItem *> list;
+    list.reserve(listDetails.count());
     for (int i=0; i < listDetails.count(); ++i)
     {
         VLayoutPiece piece = listDetails.at(i);
@@ -799,7 +801,7 @@ void MainWindowsNoGUI::ExportDetailsAsApparelLayout(QVector<VLayoutPiece> listDe
         list.append(item);
     }
 
-    for (auto item : list)
+    for (auto *item : list)
     {
         scene->addItem(item);
     }
@@ -812,7 +814,7 @@ void MainWindowsNoGUI::ExportDetailsAsApparelLayout(QVector<VLayoutPiece> listDe
     QTransform matrix;
     matrix = matrix.translate(-mx, -my);
 
-    for (auto item : list)
+    for (auto *item : list)
     {
         item->setTransform(matrix);
     }
@@ -862,7 +864,7 @@ void MainWindowsNoGUI::PrintPreviewTiled()
     else
     {
         VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
-        m_layoutSettings->SetTiledMargins(QMarginsF(settings->GetTiledPDFMargins(Unit::Mm)));
+        m_layoutSettings->SetTiledMargins(settings->GetTiledPDFMargins(Unit::Mm));
         m_layoutSettings->SetTiledPDFOrientation(settings->GetTiledPDFOrientation());
         m_layoutSettings->SetTiledPDFPaperSize(QSizeF(settings->GetTiledPDFPaperWidth(Unit::Mm),
                                                       settings->GetTiledPDFPaperHeight(Unit::Mm)));
@@ -896,7 +898,7 @@ void MainWindowsNoGUI::PrintTiled()
     else
     {
         VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
-        m_layoutSettings->SetTiledMargins(QMarginsF(settings->GetTiledPDFMargins(Unit::Mm)));
+        m_layoutSettings->SetTiledMargins(settings->GetTiledPDFMargins(Unit::Mm));
         m_layoutSettings->SetTiledPDFOrientation(settings->GetTiledPDFOrientation());
         m_layoutSettings->SetTiledPDFPaperSize(QSizeF(settings->GetTiledPDFPaperWidth(Unit::Mm),
                                                       settings->GetTiledPDFPaperHeight(Unit::Mm)));
@@ -912,12 +914,12 @@ QVector<VLayoutPiece> MainWindowsNoGUI::PrepareDetailsForLayout(const QVector<De
 {
     if (details.isEmpty())
     {
-        return QVector<VLayoutPiece>();
+        return {};
     }
 
-    std::function<VLayoutPiece (const DetailForLayout &data)> PrepareDetail = [](const DetailForLayout &data)
+    std::function<VLayoutPiece(const DetailForLayout &data)> PrepareDetail = [](const DetailForLayout &data)
     {
-        VAbstractTool *tool = qobject_cast<VAbstractTool*>(VAbstractPattern::getTool(data.id));
+        auto *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(data.id));
         SCASSERT(tool != nullptr)
         return VLayoutPiece::Create(data.piece, data.id, tool->getData());
     };
@@ -1054,8 +1056,8 @@ QList<QGraphicsScene *> MainWindowsNoGUI::CreateScenes(const QList<QGraphicsItem
         scene->addItem(shadows.at(i));
         scene->addItem(papers.at(i));
 
-        const QList<QGraphicsItem *> paperDetails = details.at(i);
-        for (auto &detail : paperDetails)
+        const QList<QGraphicsItem *> &paperDetails = details.at(i);
+        for (const auto &detail : paperDetails)
         {
             scene->addItem(detail);
         }

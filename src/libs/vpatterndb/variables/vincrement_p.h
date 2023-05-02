@@ -88,7 +88,7 @@ public:
     bool specialUnits{false};
 
 private:
-    Q_DISABLE_ASSIGN(VIncrementData)
+    Q_DISABLE_ASSIGN_MOVE(VIncrementData) // NOLINT
 };
 
 VIncrementData::~VIncrementData()

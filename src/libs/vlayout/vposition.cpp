@@ -463,13 +463,13 @@ auto VPosition::Crossing(const VLayoutPiece &detail) const -> VPosition::Crossin
 
     const QVector<QPointF> layoutPoints = detail.GetMappedLayoutAllowancePoints();
     const QRectF layoutBoundingRect = VLayoutPiece::BoundingRect(layoutPoints);
-    const QPainterPath layoutAllowancePath = VAbstractPiece::PainterPath(layoutPoints);
+    const QPainterPath layoutAllowancePath = VGObject::PainterPath(layoutPoints);
 
     QVector<QPointF> contourPoints;
     CastTo(detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn() ?
                detail.GetMappedSeamAllowancePoints() : detail.GetMappedContourPoints(), contourPoints);
     const QRectF detailBoundingRect = VLayoutPiece::BoundingRect(contourPoints);
-    const QPainterPath contourPath = VAbstractPiece::PainterPath(contourPoints);
+    const QPainterPath contourPath = VGObject::PainterPath(contourPoints);
 
     for(const auto &position : m_data.positionsCache)
     {

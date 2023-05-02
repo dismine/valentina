@@ -60,7 +60,7 @@ public:
     quint32 parentId{NULL_ID};
 
 private:
-    Q_DISABLE_ASSIGN(VCurveVariableData)
+    Q_DISABLE_ASSIGN_MOVE(VCurveVariableData) // NOLINT
 };
 
 VCurveVariableData::~VCurveVariableData()

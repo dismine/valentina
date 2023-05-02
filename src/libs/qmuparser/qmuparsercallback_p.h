@@ -91,7 +91,7 @@ public:
     bool  m_bAllowOpti;             ///< Flag indication optimizeability
 
 private:
-    Q_DISABLE_ASSIGN(QmuParserCallbackData)
+    Q_DISABLE_ASSIGN_MOVE(QmuParserCallbackData) // NOLINT
 };
 
 QT_WARNING_POP

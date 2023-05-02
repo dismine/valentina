@@ -70,7 +70,7 @@ VToolCutArc::VToolCutArc(const VToolCutInitData &initData, QGraphicsItem * paren
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
-void VToolCutArc::setDialog()
+void VToolCutArc::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogCutArc> dialogTool = qobject_cast<DialogCutArc *>(m_dialog);

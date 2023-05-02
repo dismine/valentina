@@ -55,7 +55,7 @@ public:
     QVector<VSplinePoint> path{};
 
 private:
-    Q_DISABLE_ASSIGN(VSplinePathData)
+    Q_DISABLE_ASSIGN_MOVE(VSplinePathData) // NOLINT
 };
 
 VSplinePathData::~VSplinePathData()

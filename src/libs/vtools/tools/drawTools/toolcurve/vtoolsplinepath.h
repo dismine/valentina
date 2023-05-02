@@ -74,7 +74,7 @@ class VToolSplinePath:public VAbstractSpline
     Q_OBJECT // NOLINT
 public:
     virtual ~VToolSplinePath() =default;
-    virtual void setDialog() override;
+    virtual void SetDialog() override;
     static VToolSplinePath *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
                                    VAbstractPattern *doc, VContainer *data);
     static VToolSplinePath *Create(VToolSplinePathInitData &initData, VSplinePath *path);

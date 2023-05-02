@@ -52,7 +52,7 @@ class VToolCutSplinePath : public VToolCut
 {
     Q_OBJECT // NOLINT
 public:
-    virtual void setDialog() override;
+    virtual void SetDialog() override;
     static VToolCutSplinePath *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
                                       VAbstractPattern *doc, VContainer *data);
     static VToolCutSplinePath *Create(VToolCutInitData &initData);

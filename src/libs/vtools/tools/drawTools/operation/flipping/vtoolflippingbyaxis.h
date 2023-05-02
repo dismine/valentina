@@ -50,7 +50,7 @@ class VToolFlippingByAxis : public VAbstractFlipping
     Q_OBJECT // NOLINT
 public:
     virtual ~VToolFlippingByAxis() = default;
-    virtual void setDialog() override;
+    virtual void SetDialog() override;
     static VToolFlippingByAxis* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                                        VAbstractPattern *doc, VContainer *data);
     static VToolFlippingByAxis* Create(VToolFlippingByAxisInitData initData);

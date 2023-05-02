@@ -68,7 +68,7 @@ class VToolBasePoint : public VToolSinglePoint
     Q_OBJECT // NOLINT
 public:
     virtual ~VToolBasePoint() =default;
-    virtual void setDialog() override;
+    virtual void SetDialog() override;
     static VToolBasePoint *Create(VToolBasePointInitData initData);
     static const QString ToolType;
     virtual int  type() const override {return Type;}

@@ -117,7 +117,7 @@ QT_WARNING_POP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolMove::setDialog()
+void VToolMove::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogMove> dialogTool = qobject_cast<DialogMove *>(m_dialog);

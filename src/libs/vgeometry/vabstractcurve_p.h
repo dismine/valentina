@@ -70,7 +70,7 @@ public:
     qreal approximationScale;
 
 private:
-    Q_DISABLE_ASSIGN(VAbstractCurveData)
+    Q_DISABLE_ASSIGN_MOVE(VAbstractCurveData) // NOLINT
 };
 
 VAbstractCurveData::~VAbstractCurveData()

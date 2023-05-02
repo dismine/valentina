@@ -46,42 +46,30 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VGrainlineDataPrivate : public QSharedData
 {
 public:
-    VGrainlineDataPrivate()
-        : m_qsLength(),
-          m_dRotation(),
-          m_eArrowType(GrainlineArrowDirection::atBoth),
-          m_centerPin(NULL_ID),
-          m_topPin(NULL_ID),
-          m_bottomPin(NULL_ID)
-    {}
-
-    VGrainlineDataPrivate(const VGrainlineDataPrivate &data)
-        : QSharedData(data),
-          m_qsLength(data.m_qsLength),
-          m_dRotation(data.m_dRotation),
-          m_eArrowType(data.m_eArrowType),
-          m_centerPin(data.m_centerPin),
-          m_topPin(data.m_topPin),
-          m_bottomPin(data.m_bottomPin)
-    {}
-
+    VGrainlineDataPrivate() {} // NOLINT(modernize-use-equals-default)
+    VGrainlineDataPrivate(const VGrainlineDataPrivate &data) = default;
     ~VGrainlineDataPrivate() = default;
 
     /** @brief m_dLength formula to calculate the length of grainline */
-    QString   m_qsLength;
+    QString   m_qsLength{}; // NOLINT(misc-non-private-member-variables-in-classes)
+
     /** @brief m_dRotation formula to calculate the rotation of grainline in [degrees] */
-    QString   m_dRotation;
+    QString   m_dRotation{}; // NOLINT(misc-non-private-member-variables-in-classes)
+
     /** @brief m_eArrowType type of arrow on the grainline */
-    GrainlineArrowDirection m_eArrowType;
+    GrainlineArrowDirection m_eArrowType{GrainlineArrowDirection::twoWaysUpDown}; // NOLINT(misc-non-private-member-variables-in-classes)
+
     /** @brief m_centerPin center pin id */
-    quint32   m_centerPin;
+    quint32   m_centerPin{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
+
     /** @brief m_topPin top pin id */
-    quint32   m_topPin;
+    quint32   m_topPin{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
+
     /** @brief m_bottomPin bottom pin id */
-    quint32   m_bottomPin;
+    quint32   m_bottomPin{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
-    Q_DISABLE_ASSIGN(VGrainlineDataPrivate)
+    Q_DISABLE_ASSIGN_MOVE(VGrainlineDataPrivate) // NOLINT
 };
 
 QT_WARNING_POP

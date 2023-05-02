@@ -88,7 +88,7 @@ public:
     bool originPaperOrientation{true};
 
 private:
-    Q_DISABLE_ASSIGN(VLayoutPaperData)
+    Q_DISABLE_ASSIGN_MOVE(VLayoutPaperData) // NOLINT
 };
 
 QT_WARNING_POP

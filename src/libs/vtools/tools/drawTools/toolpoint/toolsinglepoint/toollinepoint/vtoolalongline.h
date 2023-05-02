@@ -60,8 +60,8 @@ class VToolAlongLine : public VToolLinePoint
     Q_OBJECT // NOLINT
 public:
     ~VToolAlongLine() override = default;
-
-    void setDialog() override;
+    
+    void SetDialog() override;
     static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
                        VAbstractPattern *doc, VContainer *data) -> VToolAlongLine*;
     static auto Create(VToolAlongLineInitData &initData) -> VToolAlongLine*;

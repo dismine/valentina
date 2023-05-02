@@ -491,10 +491,10 @@ auto VPPiece::StickyPosition(qreal &dx, qreal &dy) const -> bool
 auto VPPiece::PathsSuperposition(const QVector<QPointF> &path1, const QVector<QPointF> &path2) -> bool
 {
     const QRectF path1Rect = VLayoutPiece::BoundingRect(path1);
-    const QPainterPath path1Path = VAbstractPiece::PainterPath(path1);
+    const QPainterPath path1Path = VGObject::PainterPath(path1);
 
     const QRectF path2Rect = VLayoutPiece::BoundingRect(path2);
-    const QPainterPath path2Path = VAbstractPiece::PainterPath(path2);
+    const QPainterPath path2Path = VGObject::PainterPath(path2);
 
     if (path1Rect.intersects(path2Rect) || path2Rect.contains(path1Rect) || path1Rect.contains(path2Rect))
     {

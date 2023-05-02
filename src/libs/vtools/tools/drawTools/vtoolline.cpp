@@ -82,7 +82,7 @@ VToolLine::VToolLine(const VToolLineInitData &initData, QGraphicsItem *parent)
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
-void VToolLine::setDialog()
+void VToolLine::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogLine> dialogTool = qobject_cast<DialogLine *>(m_dialog);

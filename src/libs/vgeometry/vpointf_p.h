@@ -34,6 +34,7 @@
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include <QPointF>
+#include "../vmisc/defglobal.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -81,7 +82,7 @@ public:
     bool m_showLabel;
 
 private:
-    Q_DISABLE_ASSIGN(VPointFData)
+    Q_DISABLE_ASSIGN_MOVE(VPointFData) // NOLINT
 };
 
 VPointFData::~VPointFData()

@@ -75,7 +75,7 @@ public:
     bool m_lastToCuttingContour{false};
 
 private:
-    Q_DISABLE_ASSIGN(VPiecePathData)
+    Q_DISABLE_ASSIGN_MOVE(VPiecePathData) // NOLINT
 };
 
 VPiecePathData::~VPiecePathData()

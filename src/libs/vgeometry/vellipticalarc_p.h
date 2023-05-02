@@ -2,9 +2,11 @@
 #define VELLIPTICALARC_P
 
 #include <QSharedData>
+#include <QTransform>
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+#include "../vmisc/defglobal.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -36,7 +38,7 @@ public:
     QTransform m_transform;
 
 private:
-    Q_DISABLE_ASSIGN(VEllipticalArcData)
+    Q_DISABLE_ASSIGN_MOVE(VEllipticalArcData) // NOLINT
 };
 
 //---------------------------------------------------------------------------------------------------------------------

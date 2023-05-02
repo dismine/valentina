@@ -65,7 +65,7 @@ template <class T> class QSharedPointer;
 const QString VToolFlippingByLine::ToolType = QStringLiteral("flippingByLine");
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolFlippingByLine::setDialog()
+void VToolFlippingByLine::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogFlippingByLine> dialogTool = qobject_cast<DialogFlippingByLine *>(m_dialog);

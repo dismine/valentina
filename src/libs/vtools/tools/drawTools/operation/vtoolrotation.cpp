@@ -88,7 +88,7 @@ VToolRotation::VToolRotation(const VToolRotationInitData &initData, QGraphicsIte
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolRotation::setDialog()
+void VToolRotation::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogRotation> dialogTool = qobject_cast<DialogRotation *>(m_dialog);

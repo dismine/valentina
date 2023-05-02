@@ -65,7 +65,7 @@ class VToolPointFromCircleAndTangent : public VToolSinglePoint
 {
     Q_OBJECT // NOLINT
 public:
-    virtual void setDialog() override;
+    virtual void SetDialog() override;
     static VToolPointFromCircleAndTangent *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
                                                   VAbstractPattern *doc, VContainer *data);
     static VToolPointFromCircleAndTangent *Create(VToolPointFromCircleAndTangentInitData &initData);

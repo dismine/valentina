@@ -64,7 +64,7 @@ VToolPointOfIntersectionArcs::VToolPointOfIntersectionArcs(const VToolPointOfInt
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersectionArcs::setDialog()
+void VToolPointOfIntersectionArcs::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogPointOfIntersectionArcs> dialogTool = qobject_cast<DialogPointOfIntersectionArcs *>(m_dialog);

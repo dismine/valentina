@@ -29,7 +29,13 @@
 #include "testpassmark.h"
 #include "vpassmark.h"
 
+#include <QDir>
 #include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QTemporaryFile>
+
+#include "../vmisc/testpath.h"
 
 #if !defined(V_NO_ASSERT)
 namespace

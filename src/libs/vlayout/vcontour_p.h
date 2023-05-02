@@ -84,7 +84,7 @@ public:
     vsizetype m_emptySheetEdgesCount{0};
 
 private:
-    Q_DISABLE_ASSIGN(VContourData)
+    Q_DISABLE_ASSIGN_MOVE(VContourData) // NOLINT
 };
 
 // cppcheck-suppress unknownMacro

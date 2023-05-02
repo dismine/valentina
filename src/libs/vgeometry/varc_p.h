@@ -56,7 +56,7 @@ public:
     QString            formulaRadius;
 
 private:
-    Q_DISABLE_ASSIGN(VArcData)
+    Q_DISABLE_ASSIGN_MOVE(VArcData) // NOLINT
 };
 
 //---------------------------------------------------------------------------------------------------------------------

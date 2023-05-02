@@ -63,7 +63,7 @@ public:
     bool    m_bVisible;
 
 private:
-    Q_DISABLE_ASSIGN(VAbstractFloatItemDataPrivate)
+    Q_DISABLE_ASSIGN_MOVE(VAbstractFloatItemDataPrivate) // NOLINT
 };
 
 QT_WARNING_POP

@@ -50,8 +50,7 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VLayoutPiecePathData : public QSharedData
 {
 public:
-    VLayoutPiecePathData()
-    {}
+    VLayoutPiecePathData(){}  // NOLINT(modernize-use-equals-default)
 
     explicit VLayoutPiecePathData(const QVector<VLayoutPoint> &points)
         : m_points(points)
@@ -72,7 +71,7 @@ public:
     bool             m_cut{false};
 
 private:
-    Q_DISABLE_ASSIGN(VLayoutPiecePathData)
+    Q_DISABLE_ASSIGN_MOVE(VLayoutPiecePathData) // NOLINT
 
     static constexpr quint32 streamHeader = 0xA53F0225; // CRC-32Q string "VLayoutPiecePathData"
     static constexpr quint16 classVersion = 2;

@@ -71,7 +71,7 @@ VToolPointOfIntersectionCurves::VToolPointOfIntersectionCurves(const VToolPointO
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersectionCurves::setDialog()
+void VToolPointOfIntersectionCurves::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     auto dialogTool = qobject_cast<DialogPointOfIntersectionCurves*>(m_dialog);

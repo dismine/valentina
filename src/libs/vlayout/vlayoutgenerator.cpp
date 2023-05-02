@@ -306,7 +306,8 @@ vsizetype VLayoutGenerator::PapersCount() const
 QList<QGraphicsItem *> VLayoutGenerator::GetPapersItems() const
 {
     QList<QGraphicsItem *> list;
-    for (auto &paper : papers)
+    list.reserve(papers.count());
+    for (const auto &paper : papers)
     {
         list.append(paper.GetPaperItem(autoCropLength, autoCropWidth, IsTestAsPaths()));
     }
@@ -317,7 +318,8 @@ QList<QGraphicsItem *> VLayoutGenerator::GetPapersItems() const
 QList<QGraphicsItem *> VLayoutGenerator::GetGlobalContours() const
 {
     QList<QGraphicsItem *> list;
-    for (auto &paper : papers)
+    list.reserve(papers.count());
+    for (const auto &paper : papers)
     {
         list.append(paper.GetGlobalContour());
     }
@@ -328,7 +330,8 @@ QList<QGraphicsItem *> VLayoutGenerator::GetGlobalContours() const
 QList<QList<QGraphicsItem *> > VLayoutGenerator::GetAllDetailsItems() const
 {
     QList<QList<QGraphicsItem *> > list;
-    for (auto &paper : papers)
+    list.reserve(papers.count());
+    for (const auto &paper : papers)
     {
         list.append(paper.GetItemDetails(IsTestAsPaths()));
     }
@@ -339,7 +342,8 @@ QList<QList<QGraphicsItem *> > VLayoutGenerator::GetAllDetailsItems() const
 QVector<QVector<VLayoutPiece> > VLayoutGenerator::GetAllDetails() const
 {
     QVector<QVector<VLayoutPiece> > list;
-    for (auto &paper : papers)
+    list.reserve(papers.count());
+    for (const auto &paper : papers)
     {
         list.append(paper.GetDetails());
     }

@@ -85,7 +85,7 @@ public:
   QString reason{tr("Formula is empty")};
 
 private:
-    Q_DISABLE_ASSIGN(VFormulaData)
+    Q_DISABLE_ASSIGN_MOVE(VFormulaData) // NOLINT
 };
 
 QT_WARNING_POP

@@ -59,7 +59,7 @@ public:
     quint32 arcId;
 
 private:
-    Q_DISABLE_ASSIGN(VArcRadiusData)
+    Q_DISABLE_ASSIGN_MOVE(VArcRadiusData) // NOLINT
 };
 
 VArcRadiusData::~VArcRadiusData()

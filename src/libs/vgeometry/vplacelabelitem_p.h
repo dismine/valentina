@@ -75,7 +75,7 @@ public:
     qreal isVisible{1};
 
 private:
-    Q_DISABLE_ASSIGN(VPlaceLabelItemData)
+    Q_DISABLE_ASSIGN_MOVE(VPlaceLabelItemData) // NOLINT
 };
 
 VPlaceLabelItemData::~VPlaceLabelItemData()

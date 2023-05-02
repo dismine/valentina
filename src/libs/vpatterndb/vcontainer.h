@@ -120,7 +120,7 @@ public:
     QString nspace;
 
 private:
-    Q_DISABLE_ASSIGN(VContainerData)
+    Q_DISABLE_ASSIGN_MOVE(VContainerData) // NOLINT
 };
 
 QT_WARNING_POP

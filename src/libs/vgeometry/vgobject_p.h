@@ -35,6 +35,8 @@
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
+#include "../vmisc/typedef.h"
+
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
@@ -42,52 +44,37 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VGObjectData final : public QSharedData
 {
 public:
-    VGObjectData()
-    {}
-
+    VGObjectData() = default;
     VGObjectData(const GOType &type, const quint32 &idObject, const Draw &mode)
         :type(type),
          idObject(idObject),
          mode(mode)
     {}
 
-    VGObjectData(const VGObjectData &obj)
-        :QSharedData(obj),
-        _id(obj._id),
-        type(obj.type),
-        idObject(obj.idObject),
-        _name(obj._name),
-        mode(obj.mode),
-        m_alias(obj.m_alias),
-        m_aliasSuffix(obj.m_aliasSuffix)
-    {}
-
-    virtual ~VGObjectData();
+    VGObjectData(const VGObjectData &obj) = default;
+    virtual ~VGObjectData() = default;
 
     /** @brief _id id in container. Ned for arcs, spline and spline paths. */
-    quint32 _id{NULL_ID};
+    quint32 _id{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief type type of graphical object */
-    GOType  type{GOType::Unknown};
+    GOType  type{GOType::Unknown}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief idObject id of parent object. */
-    quint32 idObject{NULL_ID};
+    quint32 idObject{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief _name object name */
-    QString _name{};
+    QString _name{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief mode object created in calculation or drawing mode */
-    Draw    mode{Draw::Calculation};
+    Draw    mode{Draw::Calculation}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    QString m_alias{};
-    QString m_aliasSuffix{};
+    QString m_alias{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_aliasSuffix{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
-    Q_DISABLE_ASSIGN(VGObjectData)
+    Q_DISABLE_ASSIGN_MOVE(VGObjectData) // NOLINT
 };
-
-VGObjectData::~VGObjectData()
-{}
 
 QT_WARNING_POP
 

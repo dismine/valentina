@@ -64,7 +64,7 @@ class VToolPointOfIntersectionArcs : public VToolSinglePoint
     Q_OBJECT // NOLINT
 
 public:
-    virtual void setDialog() override;
+    virtual void SetDialog() override;
     static VToolPointOfIntersectionArcs *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
                                                 VAbstractPattern *doc, VContainer *data);
     static VToolPointOfIntersectionArcs *Create(VToolPointOfIntersectionArcsInitData initData);

@@ -67,7 +67,7 @@ class VToolNormal : public VToolLinePoint
 {
     Q_OBJECT // NOLINT
 public:
-    virtual void   setDialog() override;
+    virtual void   SetDialog() override;
     static VToolNormal* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                VContainer *data);
     static VToolNormal* Create(VToolNormalInitData initData);

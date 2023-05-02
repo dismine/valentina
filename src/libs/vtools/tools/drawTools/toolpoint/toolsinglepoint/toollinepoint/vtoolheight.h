@@ -66,7 +66,7 @@ class VToolHeight: public VToolLinePoint
 {
     Q_OBJECT // NOLINT
 public:
-    virtual void   setDialog() override;
+    virtual void   SetDialog() override;
     static VToolHeight *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                VContainer *data);
     static VToolHeight *Create(VToolHeightInitData initData);

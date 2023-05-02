@@ -67,7 +67,7 @@ VToolArcWithLength::VToolArcWithLength(const VToolArcWithLengthInitData &initDat
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolArcWithLength::setDialog()
+void VToolArcWithLength::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogArcWithLength> dialogTool = qobject_cast<DialogArcWithLength *>(m_dialog);

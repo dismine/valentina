@@ -39,6 +39,7 @@
 
 #include "vgeometrydef.h"
 #include "vgobject.h"
+#include "../vmisc/typedef.h"
 
 using DirectionArrow = QPair<QLineF, QLineF>;
 

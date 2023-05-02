@@ -70,7 +70,7 @@ public:
     QString formulaLength;
 
 private:
-    Q_DISABLE_ASSIGN(VAbstractArcData)
+    Q_DISABLE_ASSIGN_MOVE(VAbstractArcData) // NOLINT
 };
 
 //---------------------------------------------------------------------------------------------------------------------

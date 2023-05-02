@@ -85,7 +85,7 @@ public:
     quint32 m_bottomRightPin;
 
 private:
-    Q_DISABLE_ASSIGN(VPatternLabelDataPrivate)
+    Q_DISABLE_ASSIGN_MOVE(VPatternLabelDataPrivate) // NOLINT
 };
 
 QT_WARNING_POP

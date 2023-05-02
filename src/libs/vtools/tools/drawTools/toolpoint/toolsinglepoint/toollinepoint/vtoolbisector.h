@@ -70,7 +70,7 @@ public:
     static qreal   BisectorAngle(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint);
     static QPointF FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint,
                              const qreal& length);
-    virtual void   setDialog() override;
+    virtual void   SetDialog() override;
     static VToolBisector* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                  VContainer *data);
     static VToolBisector* Create(VToolBisectorInitData &initData);

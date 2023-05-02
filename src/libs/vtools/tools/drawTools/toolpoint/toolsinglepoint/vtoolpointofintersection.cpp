@@ -69,7 +69,7 @@ VToolPointOfIntersection::VToolPointOfIntersection(const VToolPointOfIntersectio
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
-void VToolPointOfIntersection::setDialog()
+void VToolPointOfIntersection::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogPointOfIntersection> dialogTool = qobject_cast<DialogPointOfIntersection *>(m_dialog);

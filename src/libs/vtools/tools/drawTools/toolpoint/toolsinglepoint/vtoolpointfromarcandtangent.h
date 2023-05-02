@@ -63,7 +63,7 @@ class VToolPointFromArcAndTangent : public VToolSinglePoint
 {
     Q_OBJECT // NOLINT
 public:
-    virtual void setDialog() override;
+    virtual void SetDialog() override;
     static VToolPointFromArcAndTangent *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
                                                VAbstractPattern *doc, VContainer *data);
     static VToolPointFromArcAndTangent *Create(VToolPointFromArcAndTangentInitData initData);

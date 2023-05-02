@@ -110,7 +110,7 @@ public:
     bool m_turnPoint{true};
 
 private:
-    Q_DISABLE_ASSIGN(VPieceNodeData)
+    Q_DISABLE_ASSIGN_MOVE(VPieceNodeData) // NOLINT
 
     static constexpr quint32 streamHeader = 0x2198CBC8; // CRC-32Q string "VPieceNodeData"
     static constexpr quint16 classVersion = 2;

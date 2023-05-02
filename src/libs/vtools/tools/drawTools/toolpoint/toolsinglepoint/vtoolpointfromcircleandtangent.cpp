@@ -66,7 +66,7 @@ VToolPointFromCircleAndTangent::VToolPointFromCircleAndTangent(const VToolPointF
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointFromCircleAndTangent::setDialog()
+void VToolPointFromCircleAndTangent::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogPointFromCircleAndTangent> dialogTool =

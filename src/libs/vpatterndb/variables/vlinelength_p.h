@@ -61,7 +61,7 @@ public:
     Unit    patternUnit;
 
 private:
-    Q_DISABLE_ASSIGN(VLengthLineData)
+    Q_DISABLE_ASSIGN_MOVE(VLengthLineData) // NOLINT
 };
 
 VLengthLineData::~VLengthLineData()

@@ -78,7 +78,7 @@ VToolPointOfContact::VToolPointOfContact(const VToolPointOfContactInitData &init
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
-void VToolPointOfContact::setDialog()
+void VToolPointOfContact::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogPointOfContact> dialogTool = qobject_cast<DialogPointOfContact *>(m_dialog);

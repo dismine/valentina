@@ -68,7 +68,7 @@ class VToolShoulderPoint : public VToolLinePoint
 {
     Q_OBJECT // NOLINT
 public:
-    virtual void   setDialog() override;
+    virtual void   SetDialog() override;
     static QPointF FindPoint(const QPointF &p1Line, const QPointF &p2Line, const QPointF &pShoulder,
                              const qreal &length);
     static VToolShoulderPoint* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,

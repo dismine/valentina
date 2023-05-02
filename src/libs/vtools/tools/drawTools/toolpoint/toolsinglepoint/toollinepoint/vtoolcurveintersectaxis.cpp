@@ -82,7 +82,7 @@ VToolCurveIntersectAxis::VToolCurveIntersectAxis(const VToolCurveIntersectAxisIn
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCurveIntersectAxis::setDialog()
+void VToolCurveIntersectAxis::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     m_dialog->setModal(true);

@@ -40,7 +40,6 @@
 #include "../vgeometry/vgobject.h"
 #include "vsapoint.h"
 #include "vrawsapoint.h"
-#include "../vmisc/testpath.h"
 
 class VAbstractPieceData;
 class QPainterPath;
@@ -129,9 +128,6 @@ public:
 
     static auto GrainlinePoints(const VGrainlineData &geom, const VContainer *pattern,
                                 const QRectF &boundingRect, qreal &dAng) -> QVector<QPointF>;
-
-    template <class T>
-    static auto PainterPath(const QVector<T> &points) -> QPainterPath;
 
     friend auto operator<< (QDataStream& dataStream, const VAbstractPiece& piece) -> QDataStream&;
     friend auto operator>> (QDataStream& dataStream, VAbstractPiece& piece) -> QDataStream&;
@@ -550,26 +546,6 @@ inline auto VAbstractPiece::IsInsidePolygon(const QVector<T> &path, const QVecto
     QPolygonF allowancePolygon(polygon);
     return std::all_of(path.begin(), path.end(), [allowancePolygon](const T &point)
                        { return allowancePolygon.containsPoint(point, Qt::WindingFill); });
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <class T>
-inline auto VAbstractPiece::PainterPath(const QVector<T> &points) -> QPainterPath
-{
-    QPainterPath path;
-    path.setFillRule(Qt::WindingFill);
-
-    if (not points.isEmpty())
-    {
-        path.moveTo(points.at(0));
-        for (qint32 i = 1; i < points.count(); ++i)
-        {
-            path.lineTo(points.at(i));
-        }
-        path.lineTo(points.at(0));
-    }
-
-    return path;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

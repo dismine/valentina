@@ -39,7 +39,7 @@ class VInteractiveTool : public VAbstractTool
     Q_OBJECT // NOLINT
 public:
     VInteractiveTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent = nullptr);
-    virtual ~VInteractiveTool() = default;
+    ~VInteractiveTool() override = default;
 
     void DialogLinkDestroy();
 
@@ -49,10 +49,12 @@ public slots:
 
 protected:
     /** @brief m_dialog tool's dialog options.*/
-    QPointer<DialogTool> m_dialog;
+    QPointer<DialogTool> m_dialog; // NOLINT(cppcoreguidelines-non-private-member-variables-in-classes)
 
     /** @brief setDialog set dialog when user want change tool option. */
-    virtual void setDialog() {/*do nothing by default*/}
+    virtual void SetDialog()
+    { /*do nothing by default*/
+    }
     virtual void SaveDialogChange(const QString &undoText = QString())=0;
 
 private:

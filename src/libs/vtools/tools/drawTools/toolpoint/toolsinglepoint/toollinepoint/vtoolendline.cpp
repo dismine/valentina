@@ -71,7 +71,7 @@ VToolEndLine::VToolEndLine(const VToolEndLineInitData &initData, QGraphicsItem *
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
-void VToolEndLine::setDialog()
+void VToolEndLine::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     m_dialog->setModal(true);

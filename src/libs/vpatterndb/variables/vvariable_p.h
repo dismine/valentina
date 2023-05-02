@@ -60,7 +60,7 @@ public:
     QString description;
 
 private:
-    Q_DISABLE_ASSIGN(VVariableData)
+    Q_DISABLE_ASSIGN_MOVE(VVariableData) // NOLINT
 };
 
 VVariableData::~VVariableData()

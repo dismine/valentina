@@ -86,7 +86,7 @@ public:
     qreal   kCurve;
 
 private:
-    Q_DISABLE_ASSIGN(VSplineData)
+    Q_DISABLE_ASSIGN_MOVE(VSplineData) // NOLINT
 };
 
 //---------------------------------------------------------------------------------------------------------------------

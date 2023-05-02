@@ -67,7 +67,7 @@ VToolPointOfIntersectionCircles::VToolPointOfIntersectionCircles(
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersectionCircles::setDialog()
+void VToolPointOfIntersectionCircles::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogPointOfIntersectionCircles> dialogTool =

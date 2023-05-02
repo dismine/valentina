@@ -63,7 +63,7 @@ class VToolArcWithLength : public VToolAbstractArc
 {
     Q_OBJECT // NOLINT
 public:
-    virtual void     setDialog() override;
+    virtual void     SetDialog() override;
     static VToolArcWithLength* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
                                       VAbstractPattern *doc, VContainer *data);
     static VToolArcWithLength* Create(VToolArcWithLengthInitData &initData);

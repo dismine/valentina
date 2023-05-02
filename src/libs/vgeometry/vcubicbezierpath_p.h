@@ -59,7 +59,7 @@ public:
     QVector<VPointF> path;
 
 private:
-    Q_DISABLE_ASSIGN(VCubicBezierPathData)
+    Q_DISABLE_ASSIGN_MOVE(VCubicBezierPathData) // NOLINT
 };
 
 VCubicBezierPathData::~VCubicBezierPathData()

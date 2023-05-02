@@ -75,7 +75,7 @@ VToolEllipticalArc::VToolEllipticalArc(const VToolEllipticalArcInitData &initDat
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
-void VToolEllipticalArc::setDialog()
+void VToolEllipticalArc::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogEllipticalArc> dialogTool = qobject_cast<DialogEllipticalArc *>(m_dialog);

@@ -33,7 +33,7 @@
 #include <QPolygonF>
 #include <QTransform>
 
-#include "../ifc/ifcdef.h"
+#include "../vmisc/def.h"
 
 enum class GOType : qint8
 {
@@ -71,25 +71,25 @@ struct VLayoutPassmark
     QLineF           baseLine{};
     bool             isBuiltIn{false};
 
-    friend QDataStream& operator<<(QDataStream& dataStream, const VLayoutPassmark& data);
-    friend QDataStream& operator>>(QDataStream& dataStream, VLayoutPassmark& data);
+    friend auto operator<<(QDataStream& dataStream, const VLayoutPassmark& data) -> QDataStream&;
+    friend auto operator>>(QDataStream& dataStream, VLayoutPassmark& data) -> QDataStream&;
 private:
     static const quint32 streamHeader;
     static const quint16 classVersion;
 };
-Q_DECLARE_METATYPE(VLayoutPassmark)
+Q_DECLARE_METATYPE(VLayoutPassmark) // NOLINT
 
 constexpr qreal accuracyPointOnLine = MmToPixel(0.1555);
 
-Q_REQUIRED_RESULT static inline bool VFuzzyComparePoints(const QPointF &p1, const QPointF &p2,
-                                                         qreal accuracy = accuracyPointOnLine);
-static inline bool VFuzzyComparePoints(const QPointF &p1, const QPointF &p2, qreal accuracy)
+Q_REQUIRED_RESULT static inline auto VFuzzyComparePoints(const QPointF &p1, const QPointF &p2,
+                                                         qreal accuracy = accuracyPointOnLine) -> bool;
+static inline auto VFuzzyComparePoints(const QPointF &p1, const QPointF &p2, qreal accuracy) -> bool
 {
     return QLineF(p1, p2).length() <= accuracy;
 }
 
-Q_REQUIRED_RESULT static inline bool VFuzzyOnAxis(qreal v1, qreal v2, qreal accuracy = accuracyPointOnLine);
-static inline bool VFuzzyOnAxis(qreal v1, qreal v2, qreal accuracy)
+Q_REQUIRED_RESULT static inline auto VFuzzyOnAxis(qreal v1, qreal v2, qreal accuracy = accuracyPointOnLine) -> bool;
+static inline auto VFuzzyOnAxis(qreal v1, qreal v2, qreal accuracy) -> bool
 {
     return qAbs(v1 - v2) <= accuracy;
 }

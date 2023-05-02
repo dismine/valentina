@@ -68,7 +68,7 @@ class VToolPointOfContact : public VToolSinglePoint
 {
     Q_OBJECT // NOLINT
 public:
-    virtual void   setDialog() override;
+    virtual void   SetDialog() override;
     static bool FindPoint(qreal radius, const QPointF &center, const QPointF &firstPoint,
                           const QPointF &secondPoint, QPointF *intersectionPoint);
     static VToolPointOfContact* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,

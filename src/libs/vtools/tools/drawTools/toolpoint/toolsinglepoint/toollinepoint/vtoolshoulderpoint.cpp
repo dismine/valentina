@@ -74,7 +74,7 @@ VToolShoulderPoint::VToolShoulderPoint(const VToolShoulderPointInitData &initDat
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
-void VToolShoulderPoint::setDialog()
+void VToolShoulderPoint::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogShoulderPoint> dialogTool = qobject_cast<DialogShoulderPoint *>(m_dialog);

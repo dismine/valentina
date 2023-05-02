@@ -159,7 +159,7 @@ VToolSplinePath::VToolSplinePath(const VToolSplinePathInitData &initData, QGraph
 /**
  * @brief setDialog set dialog when user want change tool option.
  */
-void VToolSplinePath::setDialog()
+void VToolSplinePath::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogSplinePath> dialogTool = qobject_cast<DialogSplinePath *>(m_dialog);

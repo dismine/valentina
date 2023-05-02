@@ -37,9 +37,7 @@
 #include <QTransform>
 
 #include "../vmisc/def.h"
-#include "../vmisc/vmath.h"
 #include "../vmisc/compatibility.h"
-#include "../ifc/ifcdef.h"
 #include "vgobject_p.h"
 #include "../vmisc/vabstractapplication.h"
 
@@ -51,7 +49,7 @@ namespace
  * This is actually the same as the area of the triangle defined by the three points, multiplied by 2.
  * @return 2 * triangleArea(a,b,c)
  */
-double PerpDotProduct(const QPointF &p1, const QPointF &p2, const QPointF &t)
+auto PerpDotProduct(const QPointF &p1, const QPointF &p2, const QPointF &t) -> double
 {
     return (p1.x() - t.x()) * (p2.y() - t.y()) - (p1.y() - t.y()) * (p2.x() - t.x());
 }
@@ -66,7 +64,7 @@ double PerpDotProduct(const QPointF &p1, const QPointF &p2, const QPointF &t)
  * line e1=(p1, p2), e.g. the minimal area calucalted with PerpDotProduc() if point still not on the line. This distance
  * is controled by variable accuracyPointOnLine
  */
-double GetEpsilon(const QPointF &t, QPointF p1, QPointF p2, qreal accuracy)
+auto GetEpsilon(const QPointF &t, QPointF p1, QPointF p2, qreal accuracy) -> double
 {
     QLineF edge1(p1, p2);
     QLineF edge2(p1, t);
@@ -83,7 +81,7 @@ double GetEpsilon(const QPointF &t, QPointF p1, QPointF p2, qreal accuracy)
 
     return qAbs(PerpDotProduct(p1, p2, line.p2()));
 }
-}
+}  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -109,7 +107,7 @@ VGObject::VGObject(const GOType &type, const quint32 &idObject, const Draw &mode
  * @brief VGObject copy constructor.
  * @param obj object.
  */
-VGObject::VGObject(const VGObject &obj)
+VGObject::VGObject(const VGObject &obj) // NOLINT(modernize-use-equals-default)
     :d (obj.d)
 {}
 
@@ -119,7 +117,7 @@ VGObject::VGObject(const VGObject &obj)
  * @param obj object
  * @return object
  */
-VGObject &VGObject::operator=(const VGObject &obj)
+auto VGObject::operator=(const VGObject &obj) -> VGObject &
 {
     if ( &obj == this )
     {
@@ -136,7 +134,7 @@ VGObject::VGObject(VGObject &&obj) Q_DECL_NOTHROW
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VGObject &VGObject::operator=(VGObject &&obj) Q_DECL_NOTHROW
+auto VGObject::operator=(VGObject &&obj) Q_DECL_NOTHROW -> VGObject &
 {
     std::swap(d, obj.d);
     return *this;
@@ -144,7 +142,7 @@ VGObject &VGObject::operator=(VGObject &&obj) Q_DECL_NOTHROW
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VGObject::~VGObject()
+VGObject::~VGObject() // NOLINT(modernize-use-equals-default)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -152,7 +150,7 @@ VGObject::~VGObject()
  * @brief getIdObject return parent id.
  * @return parent id or 0 if object don't have parent.
  */
-quint32 VGObject::getIdObject() const
+auto VGObject::getIdObject() const -> quint32
 {
     return d->idObject;
 }
@@ -172,7 +170,7 @@ void VGObject::setIdObject(const quint32 &value)
  * @brief name return name graphical object.
  * @return name
  */
-QString VGObject::name() const
+auto VGObject::name() const -> QString
 {
     return d->_name;
 }
@@ -192,7 +190,7 @@ void VGObject::setName(const QString &name)
  * @brief getMode return mode creation.
  * @return mode.
  */
-Draw VGObject::getMode() const
+auto VGObject::getMode() const -> Draw
 {
     return d->mode;
 }
@@ -212,7 +210,7 @@ void VGObject::setMode(const Draw &value)
  * @brief getType return object type.
  * @return type.
  */
-GOType VGObject::getType() const
+auto VGObject::getType() const -> GOType
 {
     return d->type;
 }
@@ -229,7 +227,7 @@ void VGObject::setType(const GOType &type)
  * @brief id return id object.
  * @return id
  */
-quint32 VGObject::id() const
+auto VGObject::id() const -> quint32
 {
     return d->_id;
 }
@@ -251,7 +249,7 @@ void VGObject::SetAlias(const QString &alias)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VGObject::GetAlias() const
+auto VGObject::GetAlias() const -> QString
 {
     return d->m_alias;
 }
@@ -263,21 +261,21 @@ void VGObject::SetAliasSuffix(const QString &aliasSuffix)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VGObject::GetAliasSuffix() const
+auto VGObject::GetAliasSuffix() const -> QString
 {
     return d->m_aliasSuffix;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VGObject::ObjectName() const
+auto VGObject::ObjectName() const -> QString
 {
     const QString alias = VAbstractApplication::VApp()->TrVars()->VarToUser(d->m_alias);
     const QString name = VAbstractApplication::VApp()->TrVars()->VarToUser(d->_name);
-    return not d->m_alias.isEmpty() ? QString("%1 (%2)").arg(alias, name) : name;
+    return not d->m_alias.isEmpty() ? QStringLiteral("%1 (%2)").arg(alias, name) : name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VGObject::getIdTool() const
+auto VGObject::getIdTool() const -> quint32
 {
     if (d->mode == Draw::Calculation)
     {
@@ -285,19 +283,14 @@ quint32 VGObject::getIdTool() const
         {
             return d->idObject;
         }
-        else
-        {
-            return d->_id;
-        }
-    }
-    else
-    {
         return d->_id;
     }
+
+    return d->_id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QJsonObject VGObject::ToJson() const
+auto VGObject::ToJson() const -> QJsonObject
 {
     QJsonObject object
     {
@@ -309,7 +302,7 @@ QJsonObject VGObject::ToJson() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QLineF VGObject::BuildLine(const QPointF &p1, const qreal &length, const qreal &angle)
+auto VGObject::BuildLine(const QPointF &p1, const qreal &length, const qreal &angle) -> QLineF
 {
     QLineF line = QLineF();
     line.setP1(p1);
@@ -319,14 +312,15 @@ QLineF VGObject::BuildLine(const QPointF &p1, const qreal &length, const qreal &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VGObject::BuildRay(const QPointF &firstPoint, const qreal &angle, const QRectF &scRect)
+auto VGObject::BuildRay(const QPointF &firstPoint, const qreal &angle, const QRectF &scRect) -> QPointF
 {
     QRectF rect = scRect;
-    if (rect.isValid() == false)
+    if (not rect.isValid())
     {
         rect = QRectF(0, 0, 1200, 700);
     }
-    if (rect.contains(firstPoint) == false)
+
+    if (not rect.contains(firstPoint))
     {
         // If point outside of scene rect create one around point and unite two rects.
         QRectF rectangle(firstPoint.x()-rect.width()/2, firstPoint.y()-rect.height()/2, rect.width(), rect.height());
@@ -339,22 +333,21 @@ QPointF VGObject::BuildRay(const QPointF &firstPoint, const qreal &angle, const 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QLineF VGObject::BuildAxis(const QPointF &p, const qreal &angle, const QRectF &scRect)
+auto VGObject::BuildAxis(const QPointF &p, const qreal &angle, const QRectF &scRect) -> QLineF
 {
     const QPointF endP1 = BuildRay(p, angle+180, scRect);
     const QPointF endP2 = BuildRay(p, angle, scRect);
-    return QLineF(endP1, endP2);
+    return {endP1, endP2};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QLineF VGObject::BuildAxis(const QPointF &p1, const QPointF &p2, const QRectF &scRect)
+auto VGObject::BuildAxis(const QPointF &p1, const QPointF &p2, const QRectF &scRect) -> QLineF
 {
-    QLineF line(p1, p2);
-    return BuildAxis(p1, line.angle(), scRect);
+    return BuildAxis(p1, QLineF(p1, p2).angle(), scRect);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VGObject::ContactPoints(const QPointF &p, const QPointF &center, qreal radius, QPointF &p1, QPointF &p2)
+auto VGObject::ContactPoints(const QPointF &p, const QPointF &center, qreal radius, QPointF &p1, QPointF &p2) -> int
 {
     const int flag = PointInCircle(p, center, radius);
 
@@ -381,7 +374,7 @@ int VGObject::ContactPoints(const QPointF &p, const QPointF &center, qreal radiu
  * @param line line.
  * @return point intersection.
  */
-QPointF VGObject::LineIntersectRect(const QRectF &rec, const QLineF &line)
+auto VGObject::LineIntersectRect(const QRectF &rec, const QLineF &line) -> QPointF
 {
     qreal x1, y1, x2, y2;
     rec.getCoords(&x1, &y1, &x2, &y2);
@@ -417,7 +410,7 @@ QPointF VGObject::LineIntersectRect(const QRectF &rec, const QLineF &line)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VGObject::IntersectionCircles(const QPointF &c1, double r1, const QPointF &c2, double r2, QPointF &p1, QPointF &p2)
+auto VGObject::IntersectionCircles(const QPointF &c1, double r1, const QPointF &c2, double r2, QPointF &p1, QPointF &p2) -> int
 {
     if (VFuzzyComparePossibleNulls(c1.x(), c2.x()) && VFuzzyComparePossibleNulls(c1.y(), c2.y())
             && VFuzzyComparePossibleNulls(r1, r2))
@@ -435,25 +428,24 @@ int VGObject::IntersectionCircles(const QPointF &c1, double r1, const QPointF &c
     {
         return 0;
     }
-    else if (VFuzzyComparePossibleNulls(c*c, r1*r1*(a*a+b*b)))
+
+    if (VFuzzyComparePossibleNulls(c*c, r1*r1*(a*a+b*b)))
     {
         p1 = QPointF(x0 + c1.x(), y0  + c1.y());
         return 1;
     }
-    else
-    {
-        const double d = r1*r1 - c*c/(a*a+b*b);
-        const double mult = sqrt (d / (a*a+b*b));
 
-        const double ax = x0 + b * mult;
-        const double bx = x0 - b * mult;
-        const double ay = y0 - a * mult;
-        const double by = y0 + a * mult;
+    const double d = r1*r1 - c*c/(a*a+b*b);
+    const double mult = sqrt (d / (a*a+b*b));
 
-        p1 = QPointF(ax + c1.x(), ay + c1.y());
-        p2 = QPointF(bx + c1.x(), by + c1.y());
-        return 2;
-    }
+    const double ax = x0 + b * mult;
+    const double bx = x0 - b * mult;
+    const double ay = y0 - a * mult;
+    const double by = y0 + a * mult;
+
+    p1 = QPointF(ax + c1.x(), ay + c1.y());
+    p2 = QPointF(bx + c1.x(), by + c1.y());
+    return 2;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -466,7 +458,8 @@ int VGObject::IntersectionCircles(const QPointF &c1, double r1, const QPointF &c
  * @param p2 second intersection point.
  * @return 0 - intersection doesn't exist, 1 - one intersection point, 2 - two intersection points.
  */
-qint32 VGObject::LineIntersectCircle(const QPointF &center, qreal radius, const QLineF &line, QPointF &p1, QPointF &p2)
+auto VGObject::LineIntersectCircle(const QPointF &center, qreal radius, const QLineF &line, QPointF &p1,
+                                   QPointF &p2) -> qint32
 {
     // Fix for issue #485. https://bitbucket.org/dismine/valentina/issues/485/error-when-drawing-a-curved-path
     if (qFuzzyIsNull(line.length()))
@@ -512,7 +505,7 @@ qint32 VGObject::LineIntersectCircle(const QPointF &center, qreal radius, const 
  * @param line line.
  * @return point on line or extended line if origin size too small.
  */
-QPointF VGObject::ClosestPoint(const QLineF &line, const QPointF &point)
+auto VGObject::ClosestPoint(const QLineF &line, const QPointF &point) -> QPointF
 {
     qreal a = 0, b = 0, c = 0;
     LineCoefficients(line, &a, &b, &c);
@@ -526,16 +519,14 @@ QPointF VGObject::ClosestPoint(const QLineF &line, const QPointF &point)
     {
         return p;
     }
-    else
-    {
-        return point;
-    }
+
+    return point;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VGObject::addVector(const QPointF &p, const QPointF &p1, const QPointF &p2, qreal k)
+auto VGObject::addVector(const QPointF &p, const QPointF &p1, const QPointF &p2, qreal k) -> QPointF
 {
-    return QPointF (p.x() + (p2.x() - p1.x()) * k, p.y() + (p2.y() - p1.y()) * k);
+    return {p.x() + (p2.x() - p1.x()) * k, p.y() + (p2.y() - p1.y()) * k};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -617,7 +608,7 @@ auto VGObject::IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const Q
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VGObject::IsLineSegmentOnLineSegment(const QLineF &seg1, const QLineF &seg2, qreal accuracy)
+auto VGObject::IsLineSegmentOnLineSegment(const QLineF &seg1, const QLineF &seg2, qreal accuracy) -> bool
 {
     const bool onLine = IsPointOnLineviaPDP(seg1.p1(), seg2.p1(), seg2.p2(), accuracy) &&
             IsPointOnLineviaPDP(seg1.p2(), seg2.p1(), seg2.p2(), accuracy);
@@ -628,23 +619,19 @@ bool VGObject::IsLineSegmentOnLineSegment(const QLineF &seg1, const QLineF &seg2
                 IsPointOnLineSegment(seg2.p1(), seg1.p1(), seg1.p2(), accuracy) ||
                 IsPointOnLineSegment(seg2.p2(), seg1.p1(), seg1.p2(), accuracy);
     }
-    else
-    {
-        return onLine;
-    }
+
+    return onLine;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VGObject::CorrectDistortion(const QPointF &t, const QPointF &p1, const QPointF &p2)
+auto VGObject::CorrectDistortion(const QPointF &t, const QPointF &p1, const QPointF &p2) -> QPointF
 {
     if (not VFuzzyComparePoints(p1, p2))
     {
         return VGObject::ClosestPoint(QLineF(p1, p2), t);
     }
-    else
-    {
-        return t;
-    }
+
+    return t;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -654,7 +641,7 @@ QPointF VGObject::CorrectDistortion(const QPointF &t, const QPointF &p1, const Q
  *  The pdp is zero only if the t lies on the line e1 = vector from p1 to p2.
  * @return true if point is on line
  */
-bool VGObject::IsPointOnLineviaPDP(const QPointF &t, const QPointF &p1, const QPointF &p2, qreal accuracy)
+auto VGObject::IsPointOnLineviaPDP(const QPointF &t, const QPointF &p1, const QPointF &p2, qreal accuracy) -> bool
 {
     const double p = qAbs(PerpDotProduct(p1, p2, t));
     const double e = GetEpsilon(t, p1, p2, accuracy);
@@ -664,17 +651,19 @@ bool VGObject::IsPointOnLineviaPDP(const QPointF &t, const QPointF &p1, const QP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VGObject::PointInCircle(const QPointF &p, const QPointF &center, qreal radius)
+auto VGObject::PointInCircle(const QPointF &p, const QPointF &center, qreal radius) -> int
 {
     const double d = QLineF (p, center).length();
     if (VFuzzyComparePossibleNulls(radius, d))
     {
         return 1; // on circle
     }
+
     if (radius > d)
     {
         return 0; // outside circle
     }
+
     return 2; // inside circle
 }
 
@@ -686,7 +675,7 @@ int VGObject::PointInCircle(const QPointF &p, const QPointF &center, qreal radiu
  * @return length length of contour.
  */
 // cppcheck-suppress unusedFunction
-int VGObject::GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints)
+auto VGObject::GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints) -> int
 {
     qreal length = 0;
     QVector<QPointF> points;
@@ -700,7 +689,7 @@ int VGObject::GetLengthContour(const QVector<QPointF> &contour, const QVector<QP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QTransform VGObject::FlippingMatrix(const QLineF &axis)
+auto VGObject::FlippingMatrix(const QLineF &axis) -> QTransform
 {
     QTransform matrix;
 
