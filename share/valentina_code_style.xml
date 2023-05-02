@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorCodeStyle>
-<!-- Written by QtCreator 3.0.1, 2014-05-11T15:41:32. -->
+<!-- Written by QtCreator 10.0.0, 2023-05-01T11:45:18. -->
 <qtcreator>
  <data>
   <variable>CodeStyleData</variable>
   <valuemap type="QVariantMap">
    <value type="bool" key="AlignAssignments">false</value>
    <value type="bool" key="AutoSpacesForTabs">false</value>
-   <value type="bool" key="BindStarToIdentifier">true</value>
-   <value type="bool" key="BindStarToLeftSpecifier">false</value>
+   <value type="bool" key="BindStarToIdentifier">false</value>
+   <value type="bool" key="BindStarToLeftSpecifier">true</value>
    <value type="bool" key="BindStarToRightSpecifier">false</value>
-   <value type="bool" key="BindStarToTypeName">false</value>
+   <value type="bool" key="BindStarToTypeName">true</value>
    <value type="bool" key="ExtraPaddingForConditionsIfConfusingAlign">true</value>
    <value type="bool" key="IndentAccessSpecifiers">false</value>
    <value type="bool" key="IndentBlockBody">true</value>
@@ -24,12 +24,13 @@
    <value type="bool" key="IndentFunctionBraces">false</value>
    <value type="bool" key="IndentNamespaceBody">false</value>
    <value type="bool" key="IndentNamespaceBraces">false</value>
-   <value type="int" key="IndentSize">4</value>
+   <value type="int" key="IndentSize">2</value>
    <value type="bool" key="IndentStatementsRelativeToSwitchLabels">true</value>
-   <value type="bool" key="IndentSwitchLabels">true</value>
+   <value type="bool" key="IndentSwitchLabels">false</value>
    <value type="int" key="PaddingMode">2</value>
+   <value type="bool" key="ShortGetterName">true</value>
    <value type="bool" key="SpacesForTabs">true</value>
-   <value type="int" key="TabSize">4</value>
+   <value type="int" key="TabSize">8</value>
   </valuemap>
  </data>
  <data>
