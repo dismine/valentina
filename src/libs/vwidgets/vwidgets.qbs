@@ -4,6 +4,7 @@ VLib {
     Depends { name: "Qt"; submodules: ["core", "widgets"] }
     Depends { name: "VMiscLib" }
     Depends { name: "VPropertyExplorerLib" }
+    Depends { name: "VPatternDBLib" }
 
     Depends {
         name: "Qt.openglwidgets";
@@ -65,7 +66,10 @@ VLib {
         "scalesceneitems.h",
         "vlineedit.h",
         "vplaintextedit.h",
-        "vhighlighter.h"
+        "vhighlighter.h",
+        "vpiecegrainline.h",
+        "vpiecegrainline.cpp",
+        "vpiecegrainline_p.h"
     ]
 
     Export {

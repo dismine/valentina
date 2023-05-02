@@ -946,15 +946,31 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="arrowType">
-    <xs:restriction base="xs:unsignedInt">
+    <xs:restriction base="xs:integer">
       <xs:enumeration value="0"/>
-      <!--Both-->
+      <!-- Represents a two-way arrow pointing up and down -->
       <xs:enumeration value="1"/>
-      <!--Front-->
+      <!-- Represents a one-way arrow pointing up -->
       <xs:enumeration value="2"/>
-      <!--Rear-->
+      <!-- Represents a one-way arrow pointing down -->
       <xs:enumeration value="3"/>
-      <!--For way-->
+      <!-- Represents a four-way arrow pointing in all directions -->
+      <xs:enumeration value="4"/>
+      <!-- Represents a two-way arrow pointing up and left -->
+      <xs:enumeration value="5"/>
+      <!-- Represents a two-way arrow pointing up and right -->
+      <xs:enumeration value="6"/>
+      <!-- Represents a two-way arrow pointing down and left -->
+      <xs:enumeration value="7"/>
+      <!-- Represents a two-way arrow pointing down and right -->
+      <xs:enumeration value="8"/>
+      <!-- Represents a three-way arrow pointing up, down, and left -->
+      <xs:enumeration value="9"/>
+      <!-- Represents a three-way arrow pointing up, down, and right -->
+      <xs:enumeration value="10"/>
+      <!-- Represents a three-way arrow pointing up, left, and right -->
+      <xs:enumeration value="11"/>
+      <!-- Represents a three-way arrow pointing down, left, and right -->
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="pieceVersion">

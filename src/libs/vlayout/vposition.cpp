@@ -47,10 +47,11 @@
 #include <Qt>
 #include <functional>
 
-#include "../vmisc/def.h"
 #include "../ifc/exception/vexception.h"
-#include "../vpatterndb/floatItemData/floatitemdef.h"
 #include "../vlayout/vlayoutpoint.h"
+#include "../vmisc/def.h"
+#include "../vpatterndb/floatItemData/floatitemdef.h"
+#include "vpiecegrainline.h"
 
 namespace
 {
@@ -557,8 +558,9 @@ void VPosition::FollowGrainline()
         return;
     }
 
+    VPieceGrainline pieceGrainline = m_data.detail.GetGrainline();
     QLineF detailGrainline(10, 10, 100, 10);
-    detailGrainline.setAngle(m_data.detail.GrainlineAngle());
+    detailGrainline.setAngle(pieceGrainline.GetMainLine().angle());
 
     if (m_data.detail.IsForceFlipping())
     {
@@ -574,8 +576,7 @@ void VPosition::FollowGrainline()
 
     const qreal angle = detailGrainline.angleTo(FabricGrainline());
 
-    if (m_data.detail.GrainlineArrowType() == GrainlineArrowDirection::atBoth ||
-            m_data.detail.GrainlineArrowType() == GrainlineArrowDirection::atFront)
+    if (pieceGrainline.IsArrowUpEnabled())
     {
         RotateOnAngle(angle);
     }
@@ -585,8 +586,7 @@ void VPosition::FollowGrainline()
         return;
     }
 
-    if (m_data.detail.GrainlineArrowType() == GrainlineArrowDirection::atBoth ||
-            m_data.detail.GrainlineArrowType() == GrainlineArrowDirection::atRear)
+    if (pieceGrainline.IsArrowDownEnabled())
     {
         RotateOnAngle(angle + 180);
     }
@@ -596,15 +596,18 @@ void VPosition::FollowGrainline()
         return;
     }
 
-    if (m_data.detail.GrainlineArrowType() == GrainlineArrowDirection::atFourWay)
+    if (pieceGrainline.IsArrowLeftEnabled())
     {
         RotateOnAngle(angle + 90);
+    }
 
-        if (stop->load())
-        {
-            return;
-        }
+    if (stop->load())
+    {
+        return;
+    }
 
+    if (pieceGrainline.IsArrowRightEnabled())
+    {
         RotateOnAngle(angle - 90);
     }
 }

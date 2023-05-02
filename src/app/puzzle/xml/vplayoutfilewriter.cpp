@@ -115,17 +115,33 @@ auto LinesToString(const QVector<QLineF> &lines) -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto GrainlineArrowDirrectionToString(GrainlineArrowDirection type) -> QString
 {
-    switch(type)
+    switch (type)
     {
-        case GrainlineArrowDirection::atFront:
-            return ML::atFrontStr;
-        case GrainlineArrowDirection::atRear:
-            return ML::atRearStr;
-        case GrainlineArrowDirection::atFourWay:
-            return ML::atFourWayStr;
-        case GrainlineArrowDirection::atBoth:
+        case GrainlineArrowDirection::oneWayUp:
+            return ML::oneWayUpStr;
+        case GrainlineArrowDirection::oneWayDown:
+            return ML::oneWayDownStr;
+        case GrainlineArrowDirection::fourWays:
+            return ML::fourWaysStr;
+        case GrainlineArrowDirection::twoWaysUpLeft:
+            return ML::twoWaysUpLeftStr;
+        case GrainlineArrowDirection::twoWaysUpRight:
+            return ML::twoWaysUpRightStr;
+        case GrainlineArrowDirection::twoWaysDownLeft:
+            return ML::twoWaysDownLeftStr;
+        case GrainlineArrowDirection::twoWaysDownRight:
+            return ML::twoWaysDownRightStr;
+        case GrainlineArrowDirection::threeWaysUpDownLeft:
+            return ML::threeWaysUpDownLeftStr;
+        case GrainlineArrowDirection::threeWaysUpDownRight:
+            return ML::threeWaysUpDownRightStr;
+        case GrainlineArrowDirection::threeWaysUpLeftRight:
+            return ML::threeWaysUpLeftRightStr;
+        case GrainlineArrowDirection::threeWaysDownLeftRight:
+            return ML::threeWaysDownLeftRightStr;
+        case GrainlineArrowDirection::twoWaysUpDown:
         default:
-            return ML::atBothStr;
+            return ML::twoWaysUpDownStr;
     }
 }
 }  // namespace
@@ -304,9 +320,8 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
                                  [](bool enabled) noexcept {return not enabled;});
     if (piece->IsGrainlineEnabled())
     {
-        SetAttribute(ML::AttrAngle, piece->GrainlineAngle());
-        SetAttribute(ML::AttrArrowDirection, GrainlineArrowDirrectionToString(piece->GrainlineArrowType()));
-        writeCharacters(PathToString(piece->GetGrainline()));
+        SetAttribute(ML::AttrArrowDirection, GrainlineArrowDirrectionToString(piece->GetGrainline().GetArrowType()));
+        writeCharacters(LineToString(piece->GetGrainlineMainLine()));
     }
     writeEndElement();
 

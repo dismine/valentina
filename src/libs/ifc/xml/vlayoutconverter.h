@@ -46,7 +46,7 @@ public:
     static const QString LayoutMaxVerStr;
     static const QString CurrentSchema;
     static Q_DECL_CONSTEXPR const unsigned LayoutMinVer = FormatVersion(0, 1, 0);
-    static Q_DECL_CONSTEXPR const unsigned LayoutMaxVer = FormatVersion(0, 1, 4);
+    static Q_DECL_CONSTEXPR const unsigned LayoutMaxVer = FormatVersion(0, 1, 5);
 
     static auto XSDSchemas() -> QHash <unsigned, QString>;
 
@@ -69,8 +69,10 @@ protected:
     void ConvertPiecesToV0_1_3();
     void ConvertPathToV0_1_3(QDomElement &node);
 
+    void ConvertPiecesToV0_1_5();
+
     void ToV0_1_3();
-    void ToV0_1_4();
+    void ToV0_1_5();
 
 private:
     Q_DISABLE_COPY_MOVE(VLayoutConverter) // NOLINT

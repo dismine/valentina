@@ -46,23 +46,27 @@
 #include <QUuid>
 #include <QtMath>
 
-#include "../vpatterndb/floatItemData/vpatternlabeldata.h"
-#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
-#include "../vpatterndb/floatItemData/vgrainlinedata.h"
-#include "../vpatterndb/variables/vmeasurement.h"
-#include "../vmisc/vabstractvalapplication.h"
+#include "../vgeometry/vlayoutplacelabel.h"
+#include "../vgeometry/vplacelabelitem.h"
+#include "../vgeometry/vpointf.h"
 #include "../vmisc/compatibility.h"
 #include "../vmisc/literals.h"
-#include "../vpatterndb/vcontainer.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vpatterndb/calculator.h"
+#include "../vpatterndb/floatItemData/vgrainlinedata.h"
+#include "../vpatterndb/floatItemData/vpatternlabeldata.h"
+#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
+#include "../vpatterndb/variables/vmeasurement.h"
+#include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpassmark.h"
 #include "../vpatterndb/vpiecenode.h"
-#include "../vgeometry/vpointf.h"
-#include "../vgeometry/vplacelabelitem.h"
-#include "vlayoutpiece_p.h"
-#include "vtextmanager.h"
+#include "qline.h"
+#include "qpainterpath.h"
+#include "vgobject.h"
 #include "vgraphicsfillitem.h"
-#include "../vgeometry/vlayoutplacelabel.h"
+#include "vlayoutpiece_p.h"
+#include "vpiecegrainline.h"
+#include "vtextmanager.h"
 
 namespace
 {
@@ -752,6 +756,19 @@ auto VLayoutPiece::Map<VLayoutPoint>(QVector<VLayoutPoint> points) const -> QVec
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::Map(const GrainlineShape &shape) const -> GrainlineShape
+{
+    GrainlineShape mappedShape;
+    mappedShape.reserve(shape.size());
+
+    for (auto subShape : shape)
+    {
+        mappedShape.append(Map(subShape));
+    }
+    return mappedShape;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
 auto VLayoutPiece::GetMappedContourPoints() const -> QVector<VLayoutPoint>
 {
@@ -978,76 +995,58 @@ void VLayoutPiece::SetPatternLabelData(const VTextManager &data)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::SetGrainline(const VPieceGrainline &grainline)
+{
+    d->m_grainline = grainline;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VLayoutPiece::SetGrainline(const VGrainlineData& geom, const VContainer* pattern)
 {
-    qreal dAng = 0;
-
     QScopedPointer<QGraphicsItem> item(GetMainPathItem());
-    const QVector<QPointF> v = GrainlinePoints(geom, pattern, item->boundingRect(), dAng);
 
-    if (v.isEmpty())
+    QLineF mainLine = GrainlineMainLine(geom, pattern, item->boundingRect());
+    if (mainLine.isNull())
     {
         return;
     }
-
-    d->m_grainlineEnabled = true;
-    d->m_grainlineArrowType = geom.GetArrowType();
-    d->m_grainlineAngle = qRadiansToDegrees(dAng);
-    d->m_grainlinePoints = v;
+    d->m_grainline = VPieceGrainline(mainLine, geom.GetArrowType());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPiece::GetMappedGrainline() const -> QVector<QPointF>
+auto VLayoutPiece::GetGrainline() const -> VPieceGrainline
 {
-    return Map(d->m_grainlinePoints);
+    return d->m_grainline;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPiece::GetGrainline() const -> QVector<QPointF>
+auto VLayoutPiece::GetMappedGrainlineShape() const -> GrainlineShape
 {
-    return d->m_grainlinePoints;
+    return Map(d->m_grainline.Shape());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::GetGrainlineShape() const -> GrainlineShape
+{
+    return d->m_grainline.Shape();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::GetMappedGrainlineMainLine() const -> QLineF
+{
+    return d->m_matrix.map(d->m_grainline.GetMainLine());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::GetGrainlineMainLine() const -> QLineF
+{
+    return d->m_grainline.GetMainLine();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutPiece::IsGrainlineEnabled() const -> bool
 {
-    return d->m_grainlineEnabled;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiece::SetGrainlineEnabled(bool enabled)
-{
-    d->m_grainlineEnabled = enabled;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiece::SetGrainlineAngle(qreal angle)
-{
-    d->m_grainlineAngle = angle;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiece::SetGrainlineArrowType(GrainlineArrowDirection type)
-{
-    d->m_grainlineArrowType = type;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiece::SetGrainlinePoints(const QVector<QPointF> &points)
-{
-    d->m_grainlinePoints = points;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPiece::GrainlineAngle() const -> qreal
-{
-    return d->m_grainlineAngle;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPiece::GrainlineArrowType() const -> GrainlineArrowDirection
-{
-    return d->m_grainlineArrowType;
+    return d->m_grainline.IsEnabled();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1451,17 +1450,7 @@ void VLayoutPiece::DrawMiniature(QPainter &painter) const
         painter.drawPath(LabelShapePath(label));
     }
 
-    QVector<QPointF> gPoints = GetGrainline();
-    if (not gPoints.isEmpty())
-    {
-        QPainterPath path;
-        path.moveTo(gPoints.at(0));
-        for (auto p : qAsConst(gPoints))
-        {
-            path.lineTo(p);
-        }
-        painter.drawPath(path);
-    }
+    painter.drawPath(VLayoutPiece::GrainlinePath(GetGrainlineShape()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1545,6 +1534,23 @@ auto VLayoutPiece::BoundingRect(QVector<QPointF> points) -> QRectF
 {
     points.append(ConstFirst(points));
     return QPolygonF(points).boundingRect();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::GrainlinePath(const GrainlineShape &shape) -> QPainterPath
+{
+    QPainterPath shapePath;
+    for (auto subShape : shape)
+    {
+        QPainterPath path;
+        path.moveTo(subShape.at(0));
+        for (auto p : qAsConst(subShape))
+        {
+            path.lineTo(p);
+        }
+        shapePath.addPath(path);
+    }
+    return shapePath;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1650,22 +1656,13 @@ void VLayoutPiece::CreateGrainlineItem(QGraphicsItem *parent) const
 {
     SCASSERT(parent != nullptr)
 
-    if (not d->m_grainlineEnabled || d->m_grainlinePoints.count() < 2)
+    if (not d->m_grainline.IsEnabled())
     {
         return;
     }
-    auto* item = new VGraphicsFillItem(parent);
+
+    auto *item = new VGraphicsFillItem(VLayoutPiece::GrainlinePath(GetMappedGrainlineShape()), parent);
     item->SetWidth(VAbstractApplication::VApp()->Settings()->WidthHairLine());
-
-    QPainterPath path;
-
-    QVector<QPointF> gPoints = GetMappedGrainline();
-    path.moveTo(gPoints.at(0));
-    for (auto p : qAsConst(gPoints))
-    {
-        path.lineTo(p);
-    }
-    item->setPath(path);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

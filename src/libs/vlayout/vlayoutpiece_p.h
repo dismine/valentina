@@ -35,6 +35,8 @@
 #include <QTransform>
 
 #include "../vpatterndb/floatItemData/floatitemdef.h"
+#include "../vwidgets/vpiecegrainline.h"
+#include "compatibility.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
@@ -92,12 +94,7 @@ public:
     /** @brief patternInfo pattern info rectangle */
     QVector<QPointF>          m_patternInfo{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    /** @brief grainlineInfo line */
-    QVector<QPointF>          m_grainlinePoints{}; // NOLINT(misc-non-private-member-variables-in-classes)
-
-    GrainlineArrowDirection   m_grainlineArrowType{GrainlineArrowDirection::atFront}; // NOLINT(misc-non-private-member-variables-in-classes)
-    qreal                     m_grainlineAngle{0}; // NOLINT(misc-non-private-member-variables-in-classes)
-    bool                      m_grainlineEnabled{false}; // NOLINT(misc-non-private-member-variables-in-classes)
+    VPieceGrainline           m_grainline{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief m_tmDetail text manager for laying out detail info */
     VTextManager              m_tmDetail{}; // NOLINT(misc-non-private-member-variables-in-classes)
@@ -124,7 +121,7 @@ private:
     Q_DISABLE_ASSIGN_MOVE(VLayoutPieceData) // NOLINT
 
     static constexpr quint32 streamHeader{0x80D7D009}; // CRC-32Q string "VLayoutPieceData"
-    static constexpr quint16 classVersion{4};
+    static constexpr quint16 classVersion{5};
 };
 
 QT_WARNING_POP
@@ -141,7 +138,6 @@ inline auto operator<<(QDataStream &dataStream, const VLayoutPieceData &piece) -
 {
     dataStream << VLayoutPieceData::streamHeader << VLayoutPieceData::classVersion;
 
-    // Added in classVersion = 1
     dataStream << piece.m_contour;
     dataStream << piece.m_seamAllowance;
     dataStream << piece.m_layoutAllowance;
@@ -152,23 +148,16 @@ inline auto operator<<(QDataStream &dataStream, const VLayoutPieceData &piece) -
     dataStream << piece.m_mirror;
     dataStream << piece.m_detailLabel;
     dataStream << piece.m_patternInfo;
-    dataStream << piece.m_grainlinePoints;
-    dataStream << piece.m_grainlineArrowType;
-    dataStream << piece.m_grainlineAngle;
-    dataStream << piece.m_grainlineEnabled;
     dataStream << piece.m_placeLabels;
     dataStream << piece.m_square;
-
-    // Added in classVersion = 2
     dataStream << piece.m_quantity;
     dataStream << piece.m_id;
-
-    // Added in classVersion = 3
     dataStream << piece.m_tmDetail;
     dataStream << piece.m_tmPattern;
     dataStream << piece.m_gradationId;
     dataStream << piece.m_xScale;
     dataStream << piece.m_yScale;
+    dataStream << piece.m_grainline;
 
     return dataStream;
 }
@@ -181,7 +170,7 @@ inline auto operator>>(QDataStream &dataStream, VLayoutPieceData &piece) -> QDat
 
     if (actualStreamHeader != VLayoutPieceData::streamHeader)
     {
-        QString message = QCoreApplication::tr("VRawLayoutData prefix mismatch error: actualStreamHeader = 0x%1 and "
+        QString message = QCoreApplication::tr("VLayoutPieceData prefix mismatch error: actualStreamHeader = 0x%1 and "
                                                "streamHeader = 0x%2")
                 .arg(actualStreamHeader, 8, 0x10, QChar('0'))
                 .arg(VLayoutPieceData::streamHeader, 8, 0x10, QChar('0'));
@@ -193,7 +182,7 @@ inline auto operator>>(QDataStream &dataStream, VLayoutPieceData &piece) -> QDat
 
     if (actualClassVersion > VLayoutPieceData::classVersion)
     {
-        QString message = QCoreApplication::tr("VRawLayoutData compatibility error: actualClassVersion = %1 and "
+        QString message = QCoreApplication::tr("VLayoutPieceData compatibility error: actualClassVersion = %1 and "
                                                "classVersion = %2")
                 .arg(actualClassVersion).arg(VLayoutPieceData::classVersion);
         throw VException(message);
@@ -218,6 +207,7 @@ inline auto operator>>(QDataStream &dataStream, VLayoutPieceData &piece) -> QDat
         dataStream >> piece.m_contour;
         dataStream >> piece.m_seamAllowance;
     }
+
     dataStream >> piece.m_layoutAllowance;
     dataStream >> piece.m_passmarks;
     dataStream >> piece.m_internalPaths;
@@ -226,10 +216,23 @@ inline auto operator>>(QDataStream &dataStream, VLayoutPieceData &piece) -> QDat
     dataStream >> piece.m_mirror;
     dataStream >> piece.m_detailLabel;
     dataStream >> piece.m_patternInfo;
-    dataStream >> piece.m_grainlinePoints;
-    dataStream >> piece.m_grainlineArrowType;
-    dataStream >> piece.m_grainlineAngle;
-    dataStream >> piece.m_grainlineEnabled;
+
+    QVector<QPointF> shape;
+    GrainlineArrowDirection arrowType = GrainlineArrowDirection::oneWayUp;
+    bool grainlineEnabled = false;
+
+    if (actualClassVersion < 5)
+    {
+        dataStream >> shape;
+
+        dataStream >> arrowType;
+
+        qreal grainlineAngle;
+        dataStream >> grainlineAngle;
+
+        dataStream >> grainlineEnabled;
+    }
+
     dataStream >> piece.m_placeLabels;
     dataStream >> piece.m_square;
 
@@ -246,6 +249,25 @@ inline auto operator>>(QDataStream &dataStream, VLayoutPieceData &piece) -> QDat
         dataStream >> piece.m_gradationId;
         dataStream >> piece.m_xScale;
         dataStream >> piece.m_yScale;
+    }
+
+    if (actualClassVersion >= 5)
+    {
+        dataStream >> piece.m_grainline;
+    }
+    else
+    {
+        if (shape.size() >= 2)
+        {
+            piece.m_grainline = VPieceGrainline(QLineF(ConstFirst(shape), ConstLast(shape)), arrowType);
+            piece.m_grainline.SetEnabled(false);
+        }
+        else
+        {
+            piece.m_grainline = VPieceGrainline();
+            piece.m_grainline.SetArrowType(arrowType);
+            piece.m_grainline.SetEnabled(grainlineEnabled);
+        }
     }
 
     return dataStream;

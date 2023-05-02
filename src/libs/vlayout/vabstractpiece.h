@@ -126,8 +126,8 @@ public:
     static auto RollbackSeamAllowance(QVector<VRawSAPoint> points, const QLineF &cuttingEdge,
                                       bool *success) -> QVector<VRawSAPoint>;
 
-    static auto GrainlinePoints(const VGrainlineData &geom, const VContainer *pattern,
-                                const QRectF &boundingRect, qreal &dAng) -> QVector<QPointF>;
+    static auto GrainlineMainLine(const VGrainlineData &geom, const VContainer *pattern,
+                                  const QRectF &boundingRect) -> QLineF;
 
     friend auto operator<< (QDataStream& dataStream, const VAbstractPiece& piece) -> QDataStream&;
     friend auto operator>> (QDataStream& dataStream, VAbstractPiece& piece) -> QDataStream&;

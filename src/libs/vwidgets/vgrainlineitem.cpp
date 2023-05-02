@@ -26,7 +26,7 @@
  **
  *************************************************************************/
 
-#include <math.h>
+#include <cmath>
 
 #include <QPainter>
 #include <QGraphicsSceneMouseEvent>
@@ -36,20 +36,17 @@
 #include <QGraphicsView>
 
 #include "../vmisc/def.h"
-#include "../vmisc/vmath.h"
-#include "../vmisc/vabstractvalapplication.h"
+#include "../vmisc/vabstractapplication.h"
 #include "../vmisc/literals.h"
 #include "global.h"
+#include "vpiecegrainline.h"
 
 #include "vgrainlineitem.h"
 
-#define ARROW_ANGLE                     M_PI/9
-#define ARROW_LENGTH                    15
-#define RECT_WIDTH                      30
-#define RESIZE_RECT_SIZE                10
-#define ROTATE_CIRC_R                   7
-#define ACTIVE_Z                        10
-#define LINE_PEN_WIDTH                  3
+constexpr int rectWidth = 30;
+constexpr int resizeRectSize = 10;
+constexpr int rotateCircR = 7;
+constexpr int activeZ = 10;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -58,19 +55,6 @@
  */
 VGrainlineItem::VGrainlineItem(QGraphicsItem* pParent)
     : VPieceItem(pParent),
-      m_dRotation(0),
-      m_dStartRotation(0),
-      m_dLength(0),
-      m_polyBound(),
-      m_ptStartPos(),
-      m_ptStartMove(),
-      m_polyResize(),
-      m_dStartLength(0),
-      m_ptStart(),
-      m_ptFinish(),
-      m_ptCenter(),
-      m_dAngle(0),
-      m_eArrowType(GrainlineArrowDirection::atBoth),
       m_penWidth(VAbstractApplication::VApp()->Settings()->WidthMainLine())
 {
     setAcceptHoverEvents(true);
@@ -80,18 +64,16 @@ VGrainlineItem::VGrainlineItem(QGraphicsItem* pParent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VGrainlineItem::shape() const
+auto VGrainlineItem::shape() const -> QPainterPath
 {
     if (m_eMode == mNormal)
     {
         return MainShape();
     }
-    else
-    {
-        QPainterPath path;
-        path.addPolygon(m_polyBound);
-        return path;
-    }
+
+    QPainterPath path;
+    path.addPolygon(m_polyBound);
+    return path;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -110,37 +92,39 @@ void VGrainlineItem::paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption
 
     const qreal width = ScaleWidth(VAbstractApplication::VApp()->Settings()->WidthHairLine(), SceneScale(scene()));
     pP->setPen(QPen(clr, width, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-
     pP->setRenderHints(QPainter::Antialiasing);
-    // line
-    const QLineF mainLine = MainLine();
+
+    VPieceGrainline grainline(QPointF(), m_dLength, m_dRotation, m_eArrowType);
+    // main line
+    const QLineF mainLine = grainline.GetMainLine();
     pP->drawLine(mainLine.p1(), mainLine.p2());
 
     pP->setBrush(clr);
 
-    qreal dArrLen = ARROW_LENGTH;
-    if (m_eArrowType != GrainlineArrowDirection::atRear)
+    if (grainline.IsArrowUpEnabled())
     {
-        // first arrow
-        pP->drawPolygon(FirstArrow(MainLine().p2(), dArrLen));
-
-        if (m_eArrowType == GrainlineArrowDirection::atFourWay)
-        { // first double arrow
-            QLineF line = MainLine();
-            line.setLength(line.length() - dArrLen - dArrLen*0.5);
-            pP->drawPolygon(FirstArrow(line.p2(), dArrLen));
-        }
+        pP->drawPolygon(grainline.ArrowUp());
     }
-    if (m_eArrowType != GrainlineArrowDirection::atFront)
-    {
-        // second arrow
-        pP->drawPolygon(SecondArrow(MainLine().p1(), dArrLen));
 
-        if (m_eArrowType == GrainlineArrowDirection::atFourWay)
-        { // second double arrow
-            QLineF line(MainLine().p2(), MainLine().p1());
-            line.setLength(line.length() - dArrLen - dArrLen*0.5);
-            pP->drawPolygon(SecondArrow(line.p2(), dArrLen));
+    if (grainline.IsArrowDownEnabled())
+    {
+        pP->drawPolygon(grainline.ArrowDown());
+    }
+
+    if (grainline.IsFourWays())
+    {
+        // secondary line
+        const QLineF secondaryLine = grainline.SecondaryLine();
+        pP->drawLine(secondaryLine.p1(), secondaryLine.p2());
+
+        if (grainline.IsArrowLeftEnabled())
+        {
+            pP->drawPolygon(grainline.ArrowLeft());
+        }
+
+        if (grainline.IsArrowRightEnabled())
+        {
+            pP->drawPolygon(grainline.ArrowRight());
         }
     }
 
@@ -170,7 +154,7 @@ void VGrainlineItem::paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption
         if (m_eMode == mRotate)
         {
             QPointF ptC = (m_polyBound.at(0) + m_polyBound.at(2))/2;
-            qreal dRad = ROTATE_CIRC_R;
+            qreal dRad = rotateCircR;
             pP->setBrush(clr);
             pP->drawEllipse(ptC, dRad, dRad);
 
@@ -178,9 +162,9 @@ void VGrainlineItem::paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption
             pP->save();
             pP->translate(ptC);
             pP->rotate(qRadiansToDegrees(-m_dRotation));
-            int iX = int(qRound(m_dLength/2 - 0.5*dRad));
-            int iY = int(qRound(RECT_WIDTH - 0.5*dRad));
-            int iR = int(qRound(dRad*3));
+            int iX = qRound(m_dLength/2 - 0.5*dRad);
+            int iY = grainline.IsFourWays() ? qRound((m_dLength/2) - 0.8*dRad) : qRound(rectWidth - 0.5*dRad);
+            int iR = qRound(dRad*3);
             pP->drawArc(iX - iR, iY - iR, iR, iR, 0*16, -90*16);
             pP->drawArc(-iX, iY - iR, iR, iR, 270*16, -90*16);
             pP->drawArc(-iX, -iY, iR, iR, 180*16, -90*16);
@@ -202,89 +186,27 @@ void VGrainlineItem::UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal
 {
     m_dRotation = qDegreesToRadians(dRotation);
     m_dLength = dLength;
+    m_eArrowType = eAT;
 
+    VPieceGrainline grainline(ptPos, m_dLength, m_dRotation, m_eArrowType);
     qreal dX;
     qreal dY;
     QPointF pt = ptPos;
-    if (not IsContained(pt, m_dRotation, dX, dY))
+    if (not grainline.IsContained(parentItem()->boundingRect(), dX, dY))
     {
         pt.setX(pt.x() + dX);
         pt.setY(pt.y() + dY);
     }
     setPos(pt);
-    m_eArrowType = eAT;
 
     UpdateRectangle();
     Update();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VGrainlineItem::IsContained checks, if both ends of the grainline, starting at pt, are contained in
- * parent widget.
- * @param pt starting point of the grainline.
- * @param dRot rotation of the grainline in [rad]
- * @param dX horizontal translation needed to put the arrow inside parent item
- * @param dY vertical translation needed to put the arrow inside parent item
- * @return true, if both ends of the grainline, starting at pt, are contained in the parent widget and
- * false otherwise.
- */
-bool VGrainlineItem::IsContained(const QPointF& pt, qreal dRot, qreal &dX, qreal &dY) const
+auto VGrainlineItem::Grainline() const -> VPieceGrainline
 {
-    dX = 0;
-    dY = 0;
-    QPointF apt[2];
-    apt[0] = pt;
-    apt[1].setX(pt.x() + m_dLength * cos(dRot));
-    apt[1].setY(pt.y() - m_dLength * sin(dRot));
-    // single point differences
-    qreal dPtX;
-    qreal dPtY;
-    bool bInside = true;
-
-    QRectF rectParent = parentItem()->boundingRect();
-    for (int i = 0; i < 2; ++i)
-    {
-        dPtX = 0;
-        dPtY = 0;
-        if (rectParent.contains(apt[i]) == false)
-        {
-            if (apt[i].x() < rectParent.left())
-            {
-                dPtX = rectParent.left() - apt[i].x();
-            }
-            else if (apt[i].x() > rectParent.right())
-            {
-                dPtX = rectParent.right() - apt[i].x();
-            }
-            if (apt[i].y() < rectParent.top())
-            {
-                dPtY = rectParent.top() - apt[i].y();
-            }
-            else if (apt[i].y() > rectParent.bottom())
-            {
-                dPtY = rectParent.bottom() - apt[i].y();
-            }
-
-            if (fabs(dPtX) > fabs(dX))
-            {
-                dX = dPtX;
-            }
-            if (fabs(dPtY) > fabs(dY))
-            {
-                dY = dPtY;
-            }
-
-            bInside = false;
-        }
-    }
-    return bInside;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QLineF VGrainlineItem::Grainline() const
-{
-    return {m_ptStart, m_ptFinish};
+    return {QLineF(m_ptStart, m_ptFinish), m_eArrowType};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -315,7 +237,7 @@ void VGrainlineItem::mousePressEvent(QGraphicsSceneMouseEvent* pME)
         if ((m_moveType & AllModifications ) == AllModifications)
         {
             AllUserModifications(pME->pos());
-            setZValue(ACTIVE_Z);
+            setZValue(activeZ);
             Update();
         }
         else if (m_moveType & IsRotatable)
@@ -333,7 +255,7 @@ void VGrainlineItem::mousePressEvent(QGraphicsSceneMouseEvent* pME)
                 m_eMode = mRotate;
                 SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
             }
-            setZValue(ACTIVE_Z);
+            setZValue(activeZ);
             Update();
         }
         else if (m_moveType & IsResizable)
@@ -346,7 +268,7 @@ void VGrainlineItem::mousePressEvent(QGraphicsSceneMouseEvent* pME)
             {
                 UserMoveAndResize(pME->pos());
             }
-            setZValue(ACTIVE_Z);
+            setZValue(activeZ);
             Update();
         }
         else if (m_moveType & IsMovable)
@@ -365,7 +287,7 @@ void VGrainlineItem::mousePressEvent(QGraphicsSceneMouseEvent* pME)
                 SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
             }
 
-            setZValue(ACTIVE_Z);
+            setZValue(activeZ);
             Update();
         }
         else
@@ -388,7 +310,8 @@ void VGrainlineItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
     if (m_eMode == mMove && m_moveType & IsMovable)
     {
         QPointF pt = m_ptStartPos + ptDiff;
-        if (IsContained(pt, m_dRotation, dX, dY) == false)
+        VPieceGrainline grainline(pt, m_dLength, m_dRotation, m_eArrowType);
+        if (not grainline.IsContained(parentItem()->boundingRect(), dX, dY))
         {
             pt.setX(pt.x() + dX);
             pt.setY(pt.y() + dY);
@@ -440,7 +363,8 @@ void VGrainlineItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
 
         qreal dX;
         qreal dY;
-        if (IsContained(pos, m_dRotation, dX, dY) == false)
+        VPieceGrainline grainline(pos, m_dLength, m_dRotation, m_eArrowType);
+        if (not grainline.IsContained(parentItem()->boundingRect(), dX, dY))
         {
             m_dLength = dPrevLen;
         }
@@ -469,7 +393,8 @@ void VGrainlineItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
 
         qreal dAng = GetAngle(mapToParent(pME->pos())) - m_dAngle;
         QPointF ptNewPos = Rotate(m_ptStartPos, m_ptRotCenter, dAng);
-        if (IsContained(ptNewPos, m_dStartRotation + dAng, dX, dY) == true)
+        VPieceGrainline grainline(ptNewPos, m_dLength, m_dStartRotation + dAng, m_eArrowType);
+        if (grainline.IsContained(parentItem()->boundingRect(), dX, dY))
         {
             setPos(ptNewPos);
             m_dRotation = m_dStartRotation + dAng;
@@ -487,54 +412,57 @@ void VGrainlineItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
  */
 void VGrainlineItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
 {
-    if (pME->button() == Qt::LeftButton)
+    if (pME->button() != Qt::LeftButton)
     {
-        if ((m_eMode == mMove || m_eMode == mRotate || m_eMode == mResize) && (flags() & QGraphicsItem::ItemIsMovable))
-        {
-            SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
-        }
+        VPieceItem::mouseReleaseEvent(pME);
+        return;
+    }
 
-        QPointF ptDiff = pME->scenePos() - m_ptStartMove;
-        qreal dLen = qSqrt(ptDiff.x()*ptDiff.x() + ptDiff.y()*ptDiff.y());
-        bool bShort = (dLen < 2);
+    if ((m_eMode == mMove || m_eMode == mRotate || m_eMode == mResize) && (flags() & QGraphicsItem::ItemIsMovable))
+    {
+        SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
+    }
 
-        if (m_eMode == mMove || m_eMode == mResize)
+    QPointF ptDiff = pME->scenePos() - m_ptStartMove;
+    qreal dLen = qSqrt(ptDiff.x()*ptDiff.x() + ptDiff.y()*ptDiff.y());
+    bool bShort = (dLen < 2);
+
+    if (m_eMode == mMove || m_eMode == mResize)
+    {
+        if (bShort)
         {
-            if (bShort == true)
+            if (m_bReleased && m_moveType & IsRotatable)
             {
-                if (m_bReleased == true && m_moveType & IsRotatable)
-                {
-                    m_eMode = mRotate;
-                    Update();
-                }
-            }
-            else
-            {
-                if (m_eMode == mMove && m_moveType & IsMovable)
-                {
-                    emit SignalMoved(pos());
-                }
-                else if (m_moveType & IsResizable)
-                {
-                    emit SignalResized(m_dLength);
-                }
+                m_eMode = mRotate;
                 Update();
             }
         }
         else
         {
-            if (bShort == true)
+            if (m_eMode == mMove && m_moveType & IsMovable)
             {
-                m_eMode = mMove;
+                emit SignalMoved(pos());
             }
-            else if (m_moveType & IsRotatable)
+            else if (m_moveType & IsResizable)
             {
-                emit SignalRotated(m_dRotation, m_ptStart);
+                emit SignalResized(m_dLength);
             }
             Update();
         }
-        m_bReleased = true;
     }
+    else
+    {
+        if (bShort)
+        {
+            m_eMode = mMove;
+        }
+        else if (m_moveType & IsRotatable)
+        {
+            emit SignalRotated(m_dRotation, m_ptStart);
+        }
+        Update();
+    }
+    m_bReleased = true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -574,22 +502,41 @@ void VGrainlineItem::Update()
  */
 void VGrainlineItem::UpdateRectangle()
 {
-    QPointF pt1(0, 0);
-    QPointF pt2(pt1.x() + m_dLength * cos(m_dRotation), pt1.y() - m_dLength * sin(m_dRotation));
+    VPieceGrainline grainline(QPointF(), m_dLength, m_dRotation, m_eArrowType);
+    const QLineF mainLine = grainline.GetMainLine();
 
-    m_ptStart = mapToParent(pt1);
-    m_ptFinish = mapToParent(pt2);
+    m_ptStart = mapToParent(mainLine.p1());
+    m_ptFinish = mapToParent(mainLine.p2());
     m_ptCenter = (m_ptStart + m_ptFinish)/2;
 
     m_polyBound.clear();
-    m_polyBound << QPointF(pt1.x() + RECT_WIDTH*cos(m_dRotation + M_PI/2),
-                           pt1.y() - RECT_WIDTH*sin(m_dRotation + M_PI/2));
-    m_polyBound << QPointF(pt1.x() + RECT_WIDTH*cos(m_dRotation - M_PI/2),
-                           pt1.y() - RECT_WIDTH*sin(m_dRotation - M_PI/2));
-    m_polyBound << QPointF(pt2.x() + RECT_WIDTH*cos(m_dRotation - M_PI/2),
-                           pt2.y() - RECT_WIDTH*sin(m_dRotation - M_PI/2));
-    m_polyBound << QPointF(pt2.x() + RECT_WIDTH*cos(m_dRotation + M_PI/2),
-                           pt2.y() - RECT_WIDTH*sin(m_dRotation + M_PI/2));
+
+    if (grainline.IsFourWays())
+    {
+        m_polyBound << QPointF(mainLine.p1().x() + (m_dLength/2)*cos(m_dRotation + M_PI/2),
+                               mainLine.p1().y() - (m_dLength/2)*sin(m_dRotation + M_PI/2));
+        m_polyBound << QPointF(mainLine.p1().x() + (m_dLength/2)*cos(m_dRotation - M_PI/2),
+                               mainLine.p1().y() - (m_dLength/2)*sin(m_dRotation - M_PI/2));
+        m_polyBound << QPointF(mainLine.p2().x() + (m_dLength/2)*cos(m_dRotation - M_PI/2),
+                               mainLine.p2().y() - (m_dLength/2)*sin(m_dRotation - M_PI/2));
+        m_polyBound << QPointF(mainLine.p2().x() + (m_dLength/2)*cos(m_dRotation + M_PI/2),
+                               mainLine.p2().y() - (m_dLength/2)*sin(m_dRotation + M_PI/2));
+
+        const QLineF secondaryLine = grainline.SecondaryLine();
+        m_ptSecondaryStart = mapToParent(secondaryLine.p1());
+        m_ptSecondaryFinish = mapToParent(secondaryLine.p2());
+    }
+    else
+    {
+        m_polyBound << QPointF(mainLine.p1().x() + rectWidth*cos(m_dRotation + M_PI/2),
+                               mainLine.p1().y() - rectWidth*sin(m_dRotation + M_PI/2));
+        m_polyBound << QPointF(mainLine.p1().x() + rectWidth*cos(m_dRotation - M_PI/2),
+                               mainLine.p1().y() - rectWidth*sin(m_dRotation - M_PI/2));
+        m_polyBound << QPointF(mainLine.p2().x() + rectWidth*cos(m_dRotation - M_PI/2),
+                               mainLine.p2().y() - rectWidth*sin(m_dRotation - M_PI/2));
+        m_polyBound << QPointF(mainLine.p2().x() + rectWidth*cos(m_dRotation + M_PI/2),
+                               mainLine.p2().y() - rectWidth*sin(m_dRotation + M_PI/2));
+    }
     m_rectBoundingBox = m_polyBound.boundingRect().adjusted(-2, -2, 2, 2);
     setTransformOriginPoint(m_rectBoundingBox.center());
 
@@ -598,7 +545,7 @@ void VGrainlineItem::UpdateRectangle()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-double VGrainlineItem::GetAngle(const QPointF &pt) const
+auto VGrainlineItem::GetAngle(const QPointF &pt) const -> double
 {
     return -VPieceItem::GetAngle(pt);
 }
@@ -612,7 +559,7 @@ double VGrainlineItem::GetAngle(const QPointF &pt) const
  * @param dAng angle of rotation
  * @return point, which is a result of rotating pt around ptCenter by angle dAng
  */
-QPointF VGrainlineItem::Rotate(const QPointF& pt, const QPointF& ptCenter, qreal dAng) const
+auto VGrainlineItem::Rotate(const QPointF& pt, const QPointF& ptCenter, qreal dAng) -> QPointF
 {
     QPointF ptRel = pt - ptCenter;
     QPointF ptFinal;
@@ -630,7 +577,7 @@ QPointF VGrainlineItem::Rotate(const QPointF& pt, const QPointF& ptCenter, qreal
  * @param dDist distance
  * @return resulting point
  */
-QPointF VGrainlineItem::GetInsideCorner(int i, qreal dDist) const
+auto VGrainlineItem::GetInsideCorner(int i, qreal dDist) const -> QPointF
 {
     QPointF pt1 = m_polyBound.at((i + 1) % m_polyBound.count()) - m_polyBound.at(i);
     QPointF pt2 = m_polyBound.at((i + m_polyBound.count() - 1) % m_polyBound.count()) - m_polyBound.at(i);
@@ -642,42 +589,10 @@ QPointF VGrainlineItem::GetInsideCorner(int i, qreal dDist) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QLineF VGrainlineItem::MainLine() const
+auto VGrainlineItem::MainShape() const -> QPainterPath
 {
-    QPointF pt1;
-    QPointF pt2(pt1.x() + m_dLength * cos(m_dRotation), pt1.y() - m_dLength * sin(m_dRotation));
-    return QLineF(pt1, pt2);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QPolygonF VGrainlineItem::FirstArrow(const QPointF &pt, qreal dArrLen) const
-{
-    QPolygonF poly;
-    poly << pt;
-    poly << QPointF(pt.x() + dArrLen*cos(M_PI + m_dRotation + ARROW_ANGLE),
-                    pt.y() - dArrLen*sin(M_PI + m_dRotation + ARROW_ANGLE));
-    poly << QPointF(pt.x() + dArrLen*cos(M_PI + m_dRotation - ARROW_ANGLE),
-                    pt.y() - dArrLen*sin(M_PI + m_dRotation - ARROW_ANGLE));
-    return poly;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QPolygonF VGrainlineItem::SecondArrow(const QPointF &pt, qreal dArrLen) const
-{
-    QPolygonF poly;
-    poly << pt;
-    poly << QPointF(pt.x() + dArrLen*cos(m_dRotation + ARROW_ANGLE),
-                    pt.y() - dArrLen*sin(m_dRotation + ARROW_ANGLE));
-    poly << QPointF(pt.x() + dArrLen*cos(m_dRotation - ARROW_ANGLE),
-                    pt.y() - dArrLen*sin(m_dRotation - ARROW_ANGLE));
-    return poly;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QPainterPath VGrainlineItem::MainShape() const
-{
-    QPainterPath path;
-    const QLineF mainLine = MainLine();
+    VPieceGrainline grainline(QPointF(), m_dLength, m_dRotation, m_eArrowType);
+    const QLineF mainLine = grainline.GetMainLine();
     QPainterPath linePath;
     linePath.moveTo(mainLine.p1());
     linePath.lineTo(mainLine.p2());
@@ -685,42 +600,56 @@ QPainterPath VGrainlineItem::MainShape() const
 
     QPainterPathStroker stroker;
     stroker.setWidth(m_penWidth);
+    QPainterPath path;
     path.addPath((stroker.createStroke(linePath) + linePath).simplified());
     path.closeSubpath();
 
-    const qreal dArrLen = ARROW_LENGTH;
-    if (m_eArrowType != GrainlineArrowDirection::atRear)
+    if (grainline.IsArrowUpEnabled())
     {
-        // first arrow
         QPainterPath polyPath;
-        polyPath.addPolygon(FirstArrow(MainLine().p2(), dArrLen));
-
-        if (m_eArrowType == GrainlineArrowDirection::atFourWay)
-        { // first double arrow
-            QLineF line = MainLine();
-            line.setLength(line.length() - dArrLen - 0.5);
-            polyPath.addPolygon(FirstArrow(line.p2(), dArrLen));
-        }
+        polyPath.addPolygon(grainline.ArrowUp());
 
         path.addPath((stroker.createStroke(polyPath) + polyPath).simplified());
         path.closeSubpath();
     }
 
-    if (m_eArrowType != GrainlineArrowDirection::atFront)
+    if (grainline.IsArrowDownEnabled())
     {
-        // second arrow
         QPainterPath polyPath;
-        polyPath.addPolygon(SecondArrow(MainLine().p1(), dArrLen));
-
-        if (m_eArrowType == GrainlineArrowDirection::atFourWay)
-        { // second double arrow
-            QLineF line(MainLine().p2(), MainLine().p1());
-            line.setLength(line.length() - dArrLen - 0.5);
-            polyPath.addPolygon(SecondArrow(line.p2(), dArrLen));
-        }
+        polyPath.addPolygon(grainline.ArrowDown());
 
         path.addPath((stroker.createStroke(polyPath) + polyPath).simplified());
         path.closeSubpath();
+    }
+
+    if (grainline.IsFourWays())
+    {
+        const QLineF secondaryLine = grainline.SecondaryLine();
+        QPainterPath secondaryLinePath;
+        secondaryLinePath.moveTo(secondaryLine.p1());
+        secondaryLinePath.lineTo(secondaryLine.p2());
+        secondaryLinePath.closeSubpath();
+
+        path.addPath((stroker.createStroke(secondaryLinePath) + secondaryLinePath).simplified());
+        path.closeSubpath();
+
+        if (grainline.IsArrowLeftEnabled())
+        {
+            QPainterPath polyPath;
+            polyPath.addPolygon(grainline.ArrowLeft());
+
+            path.addPath((stroker.createStroke(polyPath) + polyPath).simplified());
+            path.closeSubpath();
+        }
+
+        if (grainline.IsArrowRightEnabled())
+        {
+            QPainterPath polyPath;
+            polyPath.addPolygon(grainline.ArrowRight());
+
+            path.addPath((stroker.createStroke(polyPath) + polyPath).simplified());
+            path.closeSubpath();
+        }
     }
     return path;
 }
@@ -751,7 +680,7 @@ void VGrainlineItem::UserRotateAndMove()
 //---------------------------------------------------------------------------------------------------------------------
 void VGrainlineItem::UserMoveAndResize(const QPointF &pos)
 {
-    if (m_polyResize.containsPoint(pos, Qt::OddEvenFill) == true)
+    if (m_polyResize.containsPoint(pos, Qt::OddEvenFill))
     {
         m_eMode = mResize;
         setCursor(Qt::SizeFDiagCursor);
@@ -769,7 +698,7 @@ void VGrainlineItem::UpdatePolyResize()
     m_polyResize.clear();
     QPointF ptA = m_polyBound.at(1);
     m_polyResize << ptA;
-    const double dSize = RESIZE_RECT_SIZE;
+    const double dSize = resizeRectSize;
 
     ptA.setX(ptA.x() - dSize*cos(m_dRotation - M_PI/2));
     ptA.setY(ptA.y() + dSize*sin(m_dRotation - M_PI/2));

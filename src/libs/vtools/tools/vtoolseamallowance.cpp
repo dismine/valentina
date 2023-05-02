@@ -27,31 +27,32 @@
  *************************************************************************/
 
 #include "vtoolseamallowance.h"
-#include "../dialogs/tools/piece/dialogseamallowance.h"
 #include "../dialogs/tools/piece/dialogduplicatedetail.h"
-#include "../vpatterndb/vpiecenode.h"
-#include "../vpatterndb/vpiecepath.h"
-#include "../vpatterndb/calculator.h"
-#include "../vpatterndb/floatItemData/vpatternlabeldata.h"
-#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
-#include "../vpatterndb/variables/vincrement.h"
-#include "../vgeometry/varc.h"
-#include "../vgeometry/vpointf.h"
-#include "../vgeometry/vplacelabelitem.h"
-#include "../vgeometry/vellipticalarc.h"
-#include "../ifc/xml/vpatternconverter.h"
+#include "../dialogs/tools/piece/dialogseamallowance.h"
 #include "../ifc/exception/vexceptionwrongid.h"
 #include "../ifc/xml/vlabeltemplateconverter.h"
+#include "../ifc/xml/vpatternconverter.h"
+#include "../qmuparser/qmutokenparser.h"
 #include "../undocommands/addpiece.h"
 #include "../undocommands/deletepiece.h"
 #include "../undocommands/movepiece.h"
 #include "../undocommands/savepieceoptions.h"
 #include "../undocommands/togglepiecestate.h"
+#include "../vgeometry/varc.h"
+#include "../vgeometry/vellipticalarc.h"
+#include "../vgeometry/vplacelabelitem.h"
+#include "../vgeometry/vpointf.h"
+#include "../vpatterndb/calculator.h"
+#include "../vpatterndb/floatItemData/vpatternlabeldata.h"
+#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
+#include "../vpatterndb/variables/vincrement.h"
+#include "../vpatterndb/vpiecenode.h"
+#include "../vpatterndb/vpiecepath.h"
+#include "../vwidgets/global.h"
+#include "../vwidgets/vabstractmainwindow.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../vwidgets/vnobrushscalepathitem.h"
-#include "../vwidgets/vabstractmainwindow.h"
-#include "../vwidgets/global.h"
-#include "../qmuparser/qmutokenparser.h"
+#include "../vwidgets/vpiecegrainline.h"
 #include "toolsdef.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
@@ -2158,32 +2159,14 @@ auto VToolSeamAllowance::SelectedTools() const -> QList<VToolSeamAllowance *>
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolSeamAllowance::IsGrainlinePositionValid() const -> bool
 {
-    QVector<QLineF> grainLine = m_grainLine->Grainline();
+    VPieceGrainline grainLine = m_grainLine->Grainline();
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
     QVector<QPointF> contourPoints;
     detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn()
         ? CastTo(detail.SeamAllowancePoints(getData()), contourPoints)
         : CastTo(detail.MainPathPoints(getData()), contourPoints);
 
-    for (auto line : grainLine)
-    {
-        QVector<QPointF> points = VAbstractCurve::CurveIntersectLine(contourPoints, line);
-        for (auto &point : points)
-        {
-            if (not VFuzzyComparePoints(line.p1(), point) && not VFuzzyComparePoints(line.p2(), point))
-            {
-                return false;
-            }
-        }
-    }
-
-    QPainterPath grainLinePath;
-    for (auto line : grainLine)
-    {
-        grainLinePath.addPath(VGObject::PainterPath(QVector<QPointF>{line.p1(), line.p2()}));
-    }
-    const QPainterPath contourPath = VGObject::PainterPath(contourPoints);
-    return contourPath.contains(grainLinePath);
+    return grainLine.IsPositionValid(contourPoints);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

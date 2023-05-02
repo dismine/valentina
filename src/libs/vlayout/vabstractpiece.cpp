@@ -27,6 +27,8 @@
  *************************************************************************/
 
 #include "vabstractpiece.h"
+#include "qline.h"
+#include "qmath.h"
 #include "vabstractpiece_p.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vgeometry/vpointf.h"
@@ -37,7 +39,7 @@
 #include "../vpatterndb/floatItemData/vgrainlinedata.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/calculator.h"
-#include "testpath.h"
+#include "../vwidgets/vpiecegrainline.h"
 #include "vrawsapoint.h"
 
 #include <QLineF>
@@ -1603,7 +1605,6 @@ auto VAbstractPiece::RollbackSeamAllowance(QVector<VRawSAPoint> points, const QL
     return points;
 }
 
-
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractPiece::IsItemContained(const QRectF &parentBoundingRect, const QVector<QPointF> &shape, qreal &dX,
                                      qreal &dY) -> bool
@@ -1749,81 +1750,48 @@ auto VAbstractPiece::FindGrainlineGeometry(const VGrainlineData& geom, const VCo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractPiece::GrainlinePoints(const VGrainlineData &geom, const VContainer *pattern, const QRectF &boundingRect,
-                                     qreal &dAng) -> QVector<QPointF>
+auto VAbstractPiece::GrainlineMainLine(const VGrainlineData &geom, const VContainer *pattern,
+                                       const QRectF &boundingRect) -> QLineF
 {
     SCASSERT(pattern != nullptr)
 
     QPointF pt1;
     qreal dLen = 0;
-    if ( not FindGrainlineGeometry(geom, pattern, dLen, dAng, pt1))
+    qreal dAng = 0;
+    if (not FindGrainlineGeometry(geom, pattern, dLen, dAng, pt1))
     {
         return {};
     }
 
-    qreal rotation = dAng;
+    QPointF pt2(pt1.x() + dLen * qCos(dAng), pt1.y() - dLen * qSin(dAng));
 
-    QPointF pt2(pt1.x() + dLen * qCos(rotation), pt1.y() - dLen * qSin(rotation));
-
-    const qreal dArrowLen = ToPixel(0.5, *pattern->GetPatternUnit());
-    const qreal dArrowAng = M_PI/9;
+    VPieceGrainline grainline(QLineF(pt1, pt2), geom.GetArrowType());
 
     QVector<QPointF> v;
-    v << pt1;
-
-    if (geom.GetArrowType() != GrainlineArrowDirection::atFront)
+    if (grainline.IsFourWays())
     {
-        v << QPointF(pt1.x() + dArrowLen * qCos(rotation + dArrowAng),
-                     pt1.y() - dArrowLen * qSin(rotation + dArrowAng));
-        v << QPointF(pt1.x() + dArrowLen * qCos(rotation - dArrowAng),
-                     pt1.y() - dArrowLen * qSin(rotation - dArrowAng));
-        v << pt1;
-
-        if (geom.GetArrowType() == GrainlineArrowDirection::atFourWay)
-        { // second double arrow
-            QLineF line(pt2, pt1);
-            line.setLength(line.length() - dArrowLen - dArrowLen*0.5);
-
-            v << line.p2();
-            v << QPointF(line.p2().x() + dArrowLen * qCos(rotation + dArrowAng),
-                         line.p2().y() - dArrowLen * qSin(rotation + dArrowAng));
-            v << QPointF(line.p2().x() + dArrowLen * qCos(rotation - dArrowAng),
-                         line.p2().y() - dArrowLen * qSin(rotation - dArrowAng));
-            v << line.p2();
-        }
+        QLineF mainLine = grainline.GetMainLine();
+        QLineF secondaryLine = grainline.SecondaryLine();
+        v = {mainLine.p1(), mainLine.p2(), secondaryLine.p1(), secondaryLine.p2()};
+    }
+    else
+    {
+        QLineF mainLine = grainline.GetMainLine();
+        v = {mainLine.p1(), mainLine.p2()};
     }
 
-    if (geom.GetArrowType() != GrainlineArrowDirection::atFourWay)
+    qreal dX = 0;
+    qreal dY = 0;
+    if (not IsItemContained(boundingRect, v, dX, dY))
     {
-        v << pt2;
+        pt1.rx() = + dX;
+        pt1.ry() = + dY;
+
+        pt2.rx() = + dX;
+        pt2.ry() = + dY;
     }
 
-    if (geom.GetArrowType() != GrainlineArrowDirection::atRear)
-    {
-        rotation += M_PI;
-
-        if (geom.GetArrowType() == GrainlineArrowDirection::atFourWay)
-        { // first double arrow
-            QLineF line(pt1, pt2);
-            line.setLength(line.length() - dArrowLen - dArrowLen*0.5);
-
-            v << line.p2();
-            v << QPointF(line.p2().x() + dArrowLen * qCos(rotation + dArrowAng),
-                         line.p2().y() - dArrowLen * qSin(rotation + dArrowAng));
-            v << QPointF(line.p2().x() + dArrowLen * qCos(rotation - dArrowAng),
-                         line.p2().y() - dArrowLen * qSin(rotation - dArrowAng));
-            v << line.p2();
-            v << pt2;
-        }
-
-        v << QPointF(pt2.x() + dArrowLen * qCos(rotation + dArrowAng),
-                     pt2.y() - dArrowLen * qSin(rotation + dArrowAng));
-        v << QPointF(pt2.x() + dArrowLen * qCos(rotation - dArrowAng),
-                     pt2.y() - dArrowLen * qSin(rotation - dArrowAng));
-        v << pt2;
-    }
-
-    return CorrectPosition(boundingRect, v);
+    return {pt1, pt2};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

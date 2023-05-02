@@ -34,6 +34,11 @@ VGraphicsFillItem::VGraphicsFillItem(QGraphicsItem *parent)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+VGraphicsFillItem::VGraphicsFillItem(const QPainterPath &path, QGraphicsItem *parent)
+    :QGraphicsPathItem(path, parent)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 VGraphicsFillItem::~VGraphicsFillItem()
 {}
 
@@ -54,6 +59,8 @@ void VGraphicsFillItem::paint(QPainter* painter, const QStyleOptionGraphicsItem*
     {
         pen = painter->pen();
         pen.setWidthF(width);
+        pen.setCapStyle(Qt::RoundCap);
+        pen.setJoinStyle(Qt::RoundJoin);
     }
     painter->setPen(pen);
 

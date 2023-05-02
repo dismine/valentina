@@ -30,6 +30,7 @@
 #include <QFont>
 #include <QXmlStreamAttributes>
 #include <ciso646>
+#include "vpiecegrainline.h"
 #include "vplayoutfilereader.h"
 #include "vplayoutliterals.h"
 #include "../layout/vpsheet.h"
@@ -109,29 +110,60 @@ auto StringToPath(const QString &path) -> QVector<QPointF>
 //---------------------------------------------------------------------------------------------------------------------
 auto StringToGrainlineArrowDirrection(const QString &dirrection) -> GrainlineArrowDirection
 {
-    const QStringList arrows
-    {
-        ML::atFrontStr,   // 0
-        ML::atRearStr,    // 1
-        ML::atFourWayStr, // 2
-        ML::atBothStr     // 3
+    const QStringList arrows{
+        ML::twoWaysUpDownStr,          // 0
+        ML::oneWayUpStr,               // 1
+        ML::oneWayDownStr,             // 2
+        ML::fourWaysStr,               // 3
+        ML::twoWaysUpLeftStr,          // 4
+        ML::twoWaysUpRightStr,         // 5
+        ML::twoWaysDownLeftStr,        // 6
+        ML::twoWaysDownRightStr,       // 7
+        ML::threeWaysUpDownLeftStr,    // 8
+        ML::threeWaysUpDownRightStr,   // 9
+        ML::threeWaysUpLeftRightStr,   // 10
+        ML::threeWaysDownLeftRightStr, // 11
     };
 
-    GrainlineArrowDirection arrowDirection = GrainlineArrowDirection::atBoth;
+    GrainlineArrowDirection arrowDirection = GrainlineArrowDirection::twoWaysUpDown;
     switch (arrows.indexOf(dirrection))
     {
-        case 0:// at front
-            arrowDirection = GrainlineArrowDirection::atFront;
+        case 1: // oneWayUp
+            arrowDirection = GrainlineArrowDirection::oneWayUp;
             break;
-        case 1:// at rear
-            arrowDirection = GrainlineArrowDirection::atRear;
+        case 2: // oneWayDown
+            arrowDirection = GrainlineArrowDirection::oneWayDown;
             break;
-        case 2:// at four way
-            arrowDirection = GrainlineArrowDirection::atFourWay;
+        case 3: // fourWays
+            arrowDirection = GrainlineArrowDirection::fourWays;
             break;
-        case 3:// at both
+        case 4: // twoWaysUpLeft
+            arrowDirection = GrainlineArrowDirection::twoWaysUpLeft;
+            break;
+        case 5: // twoWaysUpRight
+            arrowDirection = GrainlineArrowDirection::twoWaysUpRight;
+            break;
+        case 6: // twoWaysDownLeft
+            arrowDirection = GrainlineArrowDirection::twoWaysDownLeft;
+            break;
+        case 7: // twoWaysDownRight
+            arrowDirection = GrainlineArrowDirection::twoWaysDownRight;
+            break;
+        case 8: // threeWaysUpDownLeft
+            arrowDirection = GrainlineArrowDirection::threeWaysUpDownLeft;
+            break;
+        case 9: // threeWaysUpDownRight
+            arrowDirection = GrainlineArrowDirection::threeWaysUpDownRight;
+            break;
+        case 10: // threeWaysUpLeftRight
+            arrowDirection = GrainlineArrowDirection::threeWaysUpLeftRight;
+            break;
+        case 11: // threeWaysDownLeftRight
+            arrowDirection = GrainlineArrowDirection::threeWaysDownLeftRight;
+            break;
+        case 0: // twoWaysUpDown
         default:
-            arrowDirection = GrainlineArrowDirection::atBoth;
+            arrowDirection = GrainlineArrowDirection::twoWaysUpDown;
             break;
     }
     return arrowDirection;
@@ -600,23 +632,26 @@ void VPLayoutFileReader::ReadGrainline(const VPPiecePtr &piece)
 {
     AssertRootTag(ML::TagGrainline);
 
+    VPieceGrainline grainline;
+
     QXmlStreamAttributes attribs = attributes();
     bool enabled = ReadAttributeBool(attribs, ML::AttrEnabled, falseStr);
-    piece->SetGrainlineEnabled(enabled);
-    QVector<QPointF> path = StringToPath(readElementText());
+    grainline.SetEnabled(enabled);
+    QLineF mainLine = StringToLine(readElementText());
 
     if (enabled)
     {
-        piece->SetGrainlineAngle(ReadAttributeDouble(attribs, ML::AttrAngle, QChar('0')));
         QString arrowDirection = ReadAttributeEmptyString(attribs, ML::AttrArrowDirection);
-        piece->SetGrainlineArrowType(StringToGrainlineArrowDirrection(arrowDirection));
+        grainline.SetArrowType(StringToGrainlineArrowDirrection(arrowDirection));
 
-        if (path.isEmpty())
+        if (mainLine.isNull())
         {
-            throw VException(tr("Error in line %1. Grainline is empty.").arg(lineNumber()));
+            throw VException(tr("Error in line %1. Grainline main line is empty.").arg(lineNumber()));
         }
-        piece->SetGrainlinePoints(path);
+        grainline.SetMainLine(mainLine);
     }
+
+    piece->SetGrainline(grainline);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

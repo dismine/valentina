@@ -27,8 +27,8 @@
  *************************************************************************/
 
 #include "vdxfengine.h"
-
 #include <QLineF>
+
 #include <QByteArray>
 #include <QColor>
 #include <QDateTime>
@@ -866,10 +866,10 @@ void VDxfEngine::ExportAAMANotch(const QSharedPointer<dx_ifaceBlock> &detailBloc
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::ExportAAMAGrainline(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
-    const QVector<QPointF> grainline = detail.GetMappedGrainline();
-    if (grainline.count() > 1)
+    const QLineF grainlineMainLine = detail.GetMappedGrainlineMainLine();
+    if (not grainlineMainLine.isNull())
     {
-        if (DRW_Entity *e = AAMALine(QLineF(ConstFirst(grainline), ConstLast(grainline)), *layer7))
+        if (DRW_Entity *e = AAMALine(grainlineMainLine, *layer7))
         {
             detailBlock->ent.push_back(e);
         }

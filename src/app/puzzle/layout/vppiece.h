@@ -35,6 +35,7 @@
 
 #include "../vlayout/vlayoutpiece.h"
 #include "../layout/layoutdef.h"
+#include "vpiecegrainline.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
@@ -92,10 +93,7 @@ public:
     auto Layout() const -> VPLayoutPtr;
     void SetLayout(const VPLayoutPtr &layout);
 
-    void SetGrainlineEnabled(bool enabled);
-    void SetGrainlineAngle(qreal angle);
-    void SetGrainlineArrowType(GrainlineArrowDirection type);
-    void SetGrainlinePoints(const QVector<QPointF> &points);
+    void SetGrainline(const VPieceGrainline &grainline);
 
     auto GetPieceLabelRect() const -> QVector<QPointF>;
     void SetPieceLabelRect(const QVector<QPointF> &rect);

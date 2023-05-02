@@ -54,6 +54,7 @@
 
 #include "undocommands/vpundopiecemove.h"
 #include "undocommands/vpundomovepieceonsheet.h"
+#include "vpiecegrainline.h"
 
 #include <QLoggingCategory>
 
@@ -465,19 +466,8 @@ void VPGraphicsPiece::InitGrainlineItem()
 
     if(piece->IsGrainlineEnabled())
     {
-        QPainterPath grainline;
-        QVector<QPointF> grainLinepoints = piece->GetMappedGrainline();
-        if(!grainLinepoints.isEmpty())
-        {
-            grainline.moveTo(ConstFirst(grainLinepoints));
-            for (int i = 1; i < grainLinepoints.size(); i++)
-            {
-                grainline.lineTo(grainLinepoints.at(i));
-            }
-        }
-
         m_grainlineItem = new VGraphicsFillItem(this);
-        m_grainlineItem->setPath(grainline);
+        m_grainlineItem->setPath(VLayoutPiece::GrainlinePath(piece->GetMappedGrainlineShape()));
 
         VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
         QPen pen(PieceColor(), settings->GetLayoutLineWidth(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);

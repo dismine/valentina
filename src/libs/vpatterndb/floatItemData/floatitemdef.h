@@ -29,16 +29,23 @@
 #ifndef FLOATITEMDEF_H
 #define FLOATITEMDEF_H
 
-#include <QList>
-#include <QString>
+#include <QtTypes>
 
 // denotes the type of arrow for the grainline
 enum class GrainlineArrowDirection : qint8
 {
-    atBoth,
-    atFront,
-    atRear,
-    atFourWay
+    twoWaysUpDown = 0,
+    oneWayUp = 1,
+    oneWayDown = 2,
+    fourWays = 3,
+    twoWaysUpLeft = 4,
+    twoWaysUpRight = 5,
+    twoWaysDownLeft = 6,
+    twoWaysDownRight = 7,
+    threeWaysUpDownLeft = 8,
+    threeWaysUpDownRight = 9,
+    threeWaysUpLeftRight = 10,
+    threeWaysDownLeftRight = 11
 };
 
 #endif // FLOATITEMDEF_H

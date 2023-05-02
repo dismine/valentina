@@ -30,68 +30,66 @@
 #define VGRAINLINEITEM_H
 
 #include "vpieceitem.h"
-#include "../vpatterndb/floatItemData/vgrainlinedata.h"
+#include "../vpatterndb/floatItemData/floatitemdef.h"
 #include "../vmisc/def.h"
+
+class VPieceGrainline;
 
 class VGrainlineItem final : public VPieceItem
 {
     Q_OBJECT // NOLINT
 public:
     explicit VGrainlineItem(QGraphicsItem* pParent = nullptr);
-    virtual ~VGrainlineItem() = default;
+    ~VGrainlineItem() override = default;
 
-    virtual QPainterPath shape() const override;
+    auto shape() const -> QPainterPath override;
 
-    virtual void paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption, QWidget* pWidget) override;
-    void         UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal dLength, GrainlineArrowDirection eAT);
+    void paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption, QWidget* pWidget) override;
+    void UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal dLength, GrainlineArrowDirection eAT);
 
-    virtual int  type() const override {return Type;}
+    auto type() const -> int override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::GrainlineItem)};
 
-    bool IsContained(const QPointF &pt, qreal dRot, qreal &dX, qreal &dY) const;
-
-    QLineF Grainline() const;
+    auto Grainline() const -> VPieceGrainline;
 
 signals:
     void SignalResized(qreal dLength);
     void SignalRotated(qreal dRot, const QPointF& ptNewPos);
 
 protected:
-    virtual void mousePressEvent(QGraphicsSceneMouseEvent* pME) override;
-    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* pME) override;
-    virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* pME) override;
-    virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* pME) override;
-    virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* pME) override;
-    virtual void Update() override;
-    void         UpdateRectangle();
+    void mousePressEvent(QGraphicsSceneMouseEvent* pME) override;
+    void mouseMoveEvent(QGraphicsSceneMouseEvent* pME) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent* pME) override;
+    void hoverEnterEvent(QGraphicsSceneHoverEvent* pME) override;
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent* pME) override;
+    void Update() override;
+    void UpdateRectangle();
 
-    virtual double GetAngle(const QPointF &pt) const override;
+    auto GetAngle(const QPointF &pt) const -> double override;
 
-    QPointF Rotate(const QPointF& pt, const QPointF& ptCenter, qreal dAng) const;
-    QPointF GetInsideCorner(int i, qreal dDist) const;
+    static auto Rotate(const QPointF& pt, const QPointF& ptCenter, qreal dAng) -> QPointF;
+    auto GetInsideCorner(int i, qreal dDist) const -> QPointF;
 
 private:
     Q_DISABLE_COPY_MOVE(VGrainlineItem) // NOLINT
-    qreal                         m_dRotation;
-    qreal                         m_dStartRotation;
-    qreal                         m_dLength;
-    QPolygonF                     m_polyBound;
-    QPointF                       m_ptStartPos;
-    QPointF                       m_ptStartMove;
-    QPolygonF                     m_polyResize;
-    qreal                         m_dStartLength;
-    QPointF                       m_ptStart;
-    QPointF                       m_ptFinish;
-    QPointF                       m_ptCenter;
-    qreal                         m_dAngle;
-    GrainlineArrowDirection       m_eArrowType;
-    double                        m_penWidth{1};
+    qreal                   m_dRotation{0};
+    qreal                   m_dStartRotation{0};
+    qreal                   m_dLength{0};
+    QPolygonF               m_polyBound{};
+    QPointF                 m_ptStartPos{};
+    QPointF                 m_ptStartMove{};
+    QPolygonF               m_polyResize{};
+    qreal                   m_dStartLength{0};
+    QPointF                 m_ptStart{};
+    QPointF                 m_ptFinish{};
+    QPointF                 m_ptSecondaryStart{};
+    QPointF                 m_ptSecondaryFinish{};
+    QPointF                 m_ptCenter{};
+    qreal                   m_dAngle{0};
+    GrainlineArrowDirection m_eArrowType{GrainlineArrowDirection::twoWaysUpDown};
+    double                  m_penWidth{1};
 
-    QLineF    MainLine() const;
-    QPolygonF FirstArrow(const QPointF &pt, qreal dArrLen) const;
-    QPolygonF SecondArrow(const QPointF &pt, qreal dArrLen) const;
-
-    QPainterPath MainShape() const;
+    auto MainShape() const -> QPainterPath;
 
     void AllUserModifications(const QPointF &pos);
     void UserRotateAndMove();

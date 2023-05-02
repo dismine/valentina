@@ -1138,23 +1138,23 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
             exporter.SetFileName(name);
             exporter.SetImageRect(paper->rect());
 
+            QPen defaultPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(), Qt::SolidLine,
+                            Qt::RoundCap, Qt::RoundJoin);
+
             switch (m_dialogSaveLayout->Format())
             {
                 case LayoutExportFormats::SVG:
                     paper->setVisible(false);
-                    exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
-                                         Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+                    exporter.SetPen(defaultPen);
                     exporter.ExportToSVG(scene, details.at(i));
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::PDF:
-                    exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
-                                         Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+                    exporter.SetPen(defaultPen);
                     exporter.ExportToPDF(scene, details.at(i));
                     break;
                 case LayoutExportFormats::PNG:
-                    exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
-                                         Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+                    exporter.SetPen(defaultPen);
                     exporter.ExportToPNG(scene, details.at(i));
                     break;
                 case LayoutExportFormats::OBJ:
@@ -1163,13 +1163,11 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::PS:
-                    exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
-                                         Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+                    exporter.SetPen(defaultPen);
                     exporter.ExportToPS(scene, details.at(i));
                     break;
                 case LayoutExportFormats::EPS:
-                    exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
-                                         Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+                    exporter.SetPen(defaultPen);
                     exporter.ExportToEPS(scene, details.at(i));
                     break;
                 case LayoutExportFormats::DXF_AC1006_Flat:
@@ -1227,8 +1225,7 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
                     paper->setVisible(true);
                     break;
                 case LayoutExportFormats::TIF:
-                    exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
-                                         Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+                    exporter.SetPen(defaultPen);
                     exporter.ExportToTIF(scene, details.at(i));
                     break;
                 default:

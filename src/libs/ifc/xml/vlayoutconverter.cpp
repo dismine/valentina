@@ -29,6 +29,8 @@
 #include "../exception/vexception.h"
 #include "../ifcdef.h"
 #include "../vlayout/vlayoutpoint.h"
+#include "compatibility.h"
+#include "vpatterndb/floatItemData/floatitemdef.h"
 
 /*
  * Version rules:
@@ -39,8 +41,8 @@
  */
 
 const QString VLayoutConverter::LayoutMinVerStr = QStringLiteral("0.1.0");
-const QString VLayoutConverter::LayoutMaxVerStr = QStringLiteral("0.1.4");
-const QString VLayoutConverter::CurrentSchema   = QStringLiteral("://schema/layout/v0.1.4.xsd");
+const QString VLayoutConverter::LayoutMaxVerStr = QStringLiteral("0.1.5");
+const QString VLayoutConverter::CurrentSchema = QStringLiteral("://schema/layout/v0.1.5.xsd");
 
 //VLayoutConverter::LayoutMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 //VLayoutConverter::LayoutMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -55,14 +57,17 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, strInternalPathTag, (QLatin1String("int
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMarkerTag, (QLatin1String("marker"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPointTag, (QLatin1String("point"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPieceTag, (QLatin1String("piece"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strGrainlineTag, (QLatin1String("grainline"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrX, (QLatin1String("x"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrY, (QLatin1String("y"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrTurnPoint, (QLatin1String("turnPoint"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrCurvePoint, (QLatin1String("curvePoint"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrId, (QLatin1String("id"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrUId, (QLatin1String("uid"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrAngle, (QLatin1String("angle")))                   // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrArrowDirection, (QLatin1String("arrowDirection"))) // NOLINT
 
-//const QChar groupSep        = QLatin1Char(';');
+const QChar groupSep = QLatin1Char(';');
 const QChar coordintatesSep = QLatin1Char(',');
 const QChar pointsSep       = QLatin1Char(' ');
 //const QChar itemsSep        = QLatin1Char('*');
@@ -92,6 +97,13 @@ auto StringV0_1_2ToPath(const QString &path) -> QVector<QPointF>
 
     return p;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T> auto NumberToString(T number) -> QString
+{
+    const QLocale locale = QLocale::c();
+    return locale.toString(number, 'g', 12).remove(LocaleGroupSeparator(locale));
+}
 }  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -120,13 +132,13 @@ auto VLayoutConverter::GetFormatVersionStr() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutConverter::XSDSchemas() -> QHash<unsigned int, QString>
 {
-    static auto schemas = QHash <unsigned, QString>
-    {
+    static auto schemas = QHash<unsigned, QString>{
         std::make_pair(FormatVersion(0, 1, 0), QStringLiteral("://schema/layout/v0.1.0.xsd")),
         std::make_pair(FormatVersion(0, 1, 1), QStringLiteral("://schema/layout/v0.1.1.xsd")),
         std::make_pair(FormatVersion(0, 1, 2), QStringLiteral("://schema/layout/v0.1.2.xsd")),
         std::make_pair(FormatVersion(0, 1, 3), QStringLiteral("://schema/layout/v0.1.3.xsd")),
-        std::make_pair(FormatVersion(0, 1, 4), CurrentSchema),
+        std::make_pair(FormatVersion(0, 1, 4), QStringLiteral("://schema/layout/v0.1.4.xsd")),
+        std::make_pair(FormatVersion(0, 1, 5), CurrentSchema),
     };
 
     return schemas;
@@ -159,10 +171,11 @@ void VLayoutConverter::ApplyPatches()
             ToV0_1_3();
             Q_FALLTHROUGH();
         case (FormatVersion(0, 1, 3)):
-            ToV0_1_4();
+        case (FormatVersion(0, 1, 4)):
+            ToV0_1_5();
             ValidateXML(CurrentSchema);
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 1, 4)):
+        case (FormatVersion(0, 1, 5)):
             break;
         default:
             InvalidVersion(m_ver);
@@ -265,6 +278,100 @@ void VLayoutConverter::ConvertPathToV0_1_3(QDomElement &node)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VLayoutConverter::ConvertPiecesToV0_1_5()
+{
+    // TODO. Delete if minimal supported version is 0.1.5
+    Q_STATIC_ASSERT_X(VLayoutConverter::LayoutMinVer < FormatVersion(0, 1, 5), "Time to refactor the code.");
+
+    QDomNodeList grainlineTags = elementsByTagName(*strGrainlineTag);
+    for (int i = 0; i < grainlineTags.size(); ++i)
+    {
+        QDomElement node = grainlineTags.at(i).toElement();
+        if (node.isElement())
+        {
+            // remove angle attribute
+            if (node.hasAttribute(*strAttrAngle))
+            {
+                node.removeAttribute(*strAttrAngle);
+            }
+
+            // convert arrowDirection
+            if (node.hasAttribute(*strAttrArrowDirection))
+            {
+                QString arrowDirection = node.attribute(*strAttrArrowDirection);
+
+                const QStringList arrows{
+                    "atFront",   // 0
+                    "atRear",    // 1
+                    "atFourWay", // 2
+                    "atBoth"     // 3
+                };
+
+                switch (arrows.indexOf(arrowDirection))
+                {
+                    case 0: // at front
+                        SetAttribute(node, *strAttrArrowDirection, QLatin1String("oneWayUp"));
+                        break;
+                    case 1: // at rear
+                        SetAttribute(node, *strAttrArrowDirection, QLatin1String("oneWayDown"));
+                        break;
+                    case 2: // at four way
+                        SetAttribute(node, *strAttrArrowDirection, QLatin1String("fourWays"));
+                        break;
+                    case 3: // at both
+                    default:
+                        SetAttribute(node, *strAttrArrowDirection, QLatin1String("twoWaysUpDown"));
+                        break;
+                }
+            }
+
+            auto StringToPath = [](const QString &path) -> QVector<QPointF>
+            {
+                auto StringToPoint = [](const QString &point) -> QPointF
+                {
+                    QStringList coordinates = point.split(coordintatesSep);
+                    if (coordinates.count() == 2)
+                    {
+                        return {coordinates.at(0).toDouble(), coordinates.at(1).toDouble()};
+                    }
+
+                    return {};
+                };
+
+                QVector<QPointF> p;
+                if (path.isEmpty())
+                {
+                    return p;
+                }
+
+                QStringList points = path.split(pointsSep);
+                p.reserve(points.size());
+                for (const auto &point : points)
+                {
+                    p.append(StringToPoint(point));
+                }
+
+                return p;
+            };
+
+            const QVector<QPointF> path = StringToPath(node.text());
+            if (not path.isEmpty())
+            {
+                auto LineToString = [](const QLineF &line) -> QString
+                {
+                    auto PointToString = [](const QPointF &p) -> QString
+                    { return NumberToString(p.x()) + coordintatesSep + NumberToString(p.y()); };
+
+                    return PointToString(line.p1()) + groupSep + PointToString(line.p2());
+                };
+
+                node.firstChild().toText().setData(LineToString(QLineF(ConstFirst(path), ConstLast(path))));
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VLayoutConverter::ToV0_1_3()
 {
     // TODO. Delete if minimal supported version is 0.1.3
@@ -277,11 +384,11 @@ void VLayoutConverter::ToV0_1_3()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutConverter::ToV0_1_4()
+void VLayoutConverter::ToV0_1_5()
 {
-    // TODO. Delete if minimal supported version is 0.1.4
-    Q_STATIC_ASSERT_X(VLayoutConverter::LayoutMinVer < FormatVersion(0, 1, 4),
-                      "Time to refactor the code.");
-    SetVersion(QStringLiteral("0.1.4"));
+    // TODO. Delete if minimal supported version is 0.1.5
+    Q_STATIC_ASSERT_X(VLayoutConverter::LayoutMinVer < FormatVersion(0, 1, 5), "Time to refactor the code.");
+    ConvertPiecesToV0_1_5();
+    SetVersion(QStringLiteral("0.1.5"));
     Save();
 }

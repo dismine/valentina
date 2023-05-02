@@ -41,9 +41,11 @@
 #include <QtGlobal>
 #include <QCoreApplication>
 
-#include "vabstractpiece.h"
 #include "../vmisc/typedef.h"
 #include "../vpatterndb/floatItemData/floatitemdef.h"
+#include "../vwidgets/vpiecegrainline.h"
+#include "qpainterpath.h"
+#include "vabstractpiece.h"
 
 #if __cplusplus >= 201703L // C++17
 #include <optional>
@@ -124,11 +126,12 @@ public:
                         const VContainer *pattern);
 
     void SetGrainline(const VGrainlineData& geom, const VContainer *pattern);
-    auto GetMappedGrainline() const -> QVector<QPointF>;
-    auto GetGrainline() const -> QVector<QPointF>;
+    auto GetGrainline() const -> VPieceGrainline;
+    auto GetMappedGrainlineShape() const -> GrainlineShape;
+    auto GetGrainlineShape() const -> GrainlineShape;
+    auto GetMappedGrainlineMainLine() const -> QLineF;
+    auto GetGrainlineMainLine() const -> QLineF;
     auto IsGrainlineEnabled() const -> bool;
-    auto GrainlineAngle() const -> qreal;
-    auto GrainlineArrowType() const -> GrainlineArrowDirection;
 
     auto GetMatrix() const -> QTransform;
     void SetMatrix(const QTransform &matrix);
@@ -174,6 +177,8 @@ public:
 
     static auto BoundingRect(QVector<QPointF> points) -> QRectF;
 
+    static auto GrainlinePath(const GrainlineShape &shape) -> QPainterPath;
+
     auto isNull() const -> bool;
     auto Square() const -> qint64;
 
@@ -195,10 +200,7 @@ public:
     auto MapPlaceLabelShape(PlaceLabelImg shape) const -> PlaceLabelImg;
 
 protected:
-    void SetGrainlineEnabled(bool enabled);
-    void SetGrainlineAngle(qreal angle);
-    void SetGrainlineArrowType(GrainlineArrowDirection type);
-    void SetGrainlinePoints(const QVector<QPointF> &points);
+    void SetGrainline(const VPieceGrainline &grainline);
 
     auto GetPieceLabelRect() const -> QVector<QPointF>;
     void SetPieceLabelRect(const QVector<QPointF> &rect);
@@ -226,6 +228,7 @@ private:
 
     template <class T>
     auto Map(QVector<T> points) const -> QVector<T>;
+    auto Map(const GrainlineShape &shape) const -> GrainlineShape;
 
     auto Edge(const QVector<QPointF> &path, int i) const -> QLineF;
     auto EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) const -> EdgeIndex;

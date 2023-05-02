@@ -51,6 +51,7 @@ class VLayoutPoint;
 class VPLayoutFileWriter : public QXmlStreamWriter
 {
     Q_DECLARE_TR_FUNCTIONS(VPLayoutFileWriter) // NOLINT
+
 public:
     VPLayoutFileWriter()= default;
     ~VPLayoutFileWriter()= default;

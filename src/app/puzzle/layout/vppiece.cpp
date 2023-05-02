@@ -29,11 +29,13 @@
 
 #include <QtMath>
 
-#include "vpsheet.h"
-#include "vplayout.h"
-#include "../vlayout/vtextmanager.h"
-#include "../vlayout/vlayoutpiecepath.h"
 #include "../vgeometry/vlayoutplacelabel.h"
+#include "../vlayout/vlayoutpiecepath.h"
+#include "../vlayout/vtextmanager.h"
+#include "qline.h"
+#include "vpiecegrainline.h"
+#include "vplayout.h"
+#include "vpsheet.h"
 
 #include <QIcon>
 #include <QLoggingCategory>
@@ -154,12 +156,7 @@ void VPPiece::Update(const VPPiecePtr &piece)
     SetInternalPaths(piece->GetInternalPaths());
     SetPassmarks(piece->GetPassmarks());
     SetPlaceLabels(piece->GetPlaceLabels());
-
-    SetGrainlineEnabled(piece->IsGrainlineEnabled());
-    SetGrainlineAngle(piece->GrainlineAngle());
-    SetGrainlineArrowType(piece->GrainlineArrowType());
-    SetGrainlinePoints(piece->GetGrainline());
-
+    SetGrainline(piece->GetGrainline());
     SetPieceLabelRect(piece->GetPieceLabelRect());
     SetPieceLabelData(piece->GetPieceLabelData());
     SetPatternLabelRect(piece->GetPatternLabelRect());
@@ -225,112 +222,62 @@ void VPPiece::RotateToGrainline(const VPTransformationOrigon &origin)
         return;
     }
 
-    const QVector<QPointF> grainlinePoints = GetMappedGrainline();
-    if (grainlinePoints.count() < 2)
+    const QLineF grainline = GetMappedGrainlineMainLine();
+    if (grainline.isNull())
     {
         return;
     }
 
-    QLineF grainline(ConstFirst(grainlinePoints), ConstLast(grainlinePoints));
-
-    QLineF canonical(ConstFirst(grainlinePoints).x(), ConstFirst(grainlinePoints).y(),
-                     ConstFirst(grainlinePoints).x()+100, ConstFirst(grainlinePoints).y());
-
-    GrainlineType grainlineType = sheet->GrainlineOrientation();
-
-    auto DegreesAtFront = [grainline, canonical, grainlineType]()
+    QLineF fabricGrainline(grainline.p1().x(), grainline.p1().y(), grainline.p1().x() + 100, grainline.p1().y());
+    if (sheet->GrainlineOrientation() == GrainlineType::Vertical)
     {
-        QLineF atFront = canonical;
-        if (grainlineType == GrainlineType::Vertical)
-        {
-            atFront.setAngle(90);
-        }
+        fabricGrainline.setAngle(fabricGrainline.angle() - 90);
+    }
 
-        qreal angleTo = grainline.angleTo(atFront);
-        return angleTo;
-    };
+    QVector<qreal> angles;
+    angles.reserve(4);
 
-    auto DegreesAtRear = [grainline, canonical, grainlineType]()
+    const VPieceGrainline pieceGrainline = GetGrainline();
+
+    if (pieceGrainline.IsArrowUpEnabled())
     {
-        QLineF atRear = canonical;
-        atRear.setAngle(grainlineType == GrainlineType::Vertical ? 270 : 180);
+        angles.append(grainline.angleTo(fabricGrainline));
+    }
 
-        qreal angleTo = grainline.angleTo(atRear);
-        return angleTo;
-    };
+    if (pieceGrainline.IsArrowDownEnabled())
+    {
+        QLineF arrow = grainline;
+        arrow.setAngle(arrow.angle() + 180);
+        angles.append(arrow.angleTo(fabricGrainline));
+    }
 
-    GrainlineArrowDirection type = GrainlineArrowType();
+    if (pieceGrainline.IsArrowLeftEnabled())
+    {
+        QLineF arrow = grainline;
+        arrow.setAngle(arrow.angle() + 90);
+        angles.append(arrow.angleTo(fabricGrainline));
+    }
+
+    if (pieceGrainline.IsArrowRightEnabled())
+    {
+        QLineF arrow = grainline;
+        arrow.setAngle(arrow.angle() - 90);
+        angles.append(arrow.angleTo(fabricGrainline));
+    }
+
     qreal degrees = 0;
-
-    if (type == GrainlineArrowDirection::atFront)
+    if (not angles.isEmpty())
     {
-        degrees = DegreesAtFront();
-    }
-    else if (type == GrainlineArrowDirection::atRear)
-    {
-        degrees = DegreesAtRear();
-    }
-    else  if (type == GrainlineArrowDirection::atBoth)
-    {
-        const qreal atFront = DegreesAtFront();
-        if (atFront <= 90 || atFront >= 270)
-        {
-            degrees = atFront;
-        }
-        else
-        {
-            degrees = DegreesAtRear();
-        }
-    }
-    else
-    {
-        const qreal atFront = DegreesAtFront();
-        if (atFront <= 45)
-        {
-            degrees = atFront;
-        }
-        else if (atFront > 45 && atFront < 90)
-        {
-            degrees = atFront - 90;
-        }
-        else
-        {
-            degrees = atFront - 90 * qFloor(atFront / 90);
-        }
+        degrees = *std::min_element(angles.constBegin(), angles.constEnd());
     }
 
-    if (origin.custom)
-    {
-        Rotate(MappedDetailBoundingRect().center(), degrees);
-    }
-    else
-    {
-        Rotate(origin.origin, degrees);
-    }
+    Rotate(origin.custom ? MappedDetailBoundingRect().center() : origin.origin, degrees);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPPiece::SetGrainlineEnabled(bool enabled)
+void VPPiece::SetGrainline(const VPieceGrainline &grainline)
 {
-    VLayoutPiece::SetGrainlineEnabled(enabled);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPPiece::SetGrainlineAngle(qreal angle)
-{
-    VLayoutPiece::SetGrainlineAngle(angle);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPPiece::SetGrainlineArrowType(GrainlineArrowDirection type)
-{
-    VLayoutPiece::SetGrainlineArrowType(type);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPPiece::SetGrainlinePoints(const QVector<QPointF> &points)
-{
-    VLayoutPiece::SetGrainlinePoints(points);
+    VLayoutPiece::SetGrainline(grainline);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -528,7 +475,7 @@ auto VPPiece::IsValid(QString &error) const -> bool
         return false;
     }
 
-    if (IsGrainlineEnabled() && GetGrainline().isEmpty())
+    if (IsGrainlineEnabled() && not GetGrainline().IsShapeValid())
     {
         error = tr("Grainline is empty");
         return false;

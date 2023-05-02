@@ -379,7 +379,12 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
 
     uiTabLabels->groupBoxDetailLabel->setEnabled(not m_templateLines.isEmpty());
 
-    uiTabGrainline->comboBoxArrow->setCurrentIndex(int(piece.GetGrainlineGeometry().GetArrowType()));
+    int index = uiTabGrainline->comboBoxArrow->findData(static_cast<int>(piece.GetGrainlineGeometry().GetArrowType()));
+    if (index == -1)
+    {
+        index = 0;
+    }
+    uiTabGrainline->comboBoxArrow->setCurrentIndex(index);
 
     uiTabLabels->groupBoxDetailLabel->setChecked(ppData.IsVisible());
     ChangeCurrentData(uiTabLabels->comboBoxDLCenterPin, ppData.CenterPin());
@@ -2656,7 +2661,7 @@ VPiece DialogSeamAllowance::CreatePiece() const
 
     piece.GetGrainlineGeometry().SetVisible(uiTabGrainline->groupBoxGrainline->isChecked());
     piece.GetGrainlineGeometry().SetArrowType(
-                static_cast<GrainlineArrowDirection>(uiTabGrainline->comboBoxArrow->currentIndex()));
+                static_cast<GrainlineArrowDirection>(uiTabGrainline->comboBoxArrow->currentData().toInt()));
 
     if (not flagGPin)
     {
@@ -3380,10 +3385,30 @@ void DialogSeamAllowance::InitGrainlineTab()
 
     EnabledGrainline();
 
-    uiTabGrainline->comboBoxArrow->addItem(tr("Both"));
-    uiTabGrainline->comboBoxArrow->addItem(tr("Just front"));
-    uiTabGrainline->comboBoxArrow->addItem(tr("Just rear"));
-    uiTabGrainline->comboBoxArrow->addItem(tr("Four way"));
+    uiTabGrainline->comboBoxArrow->addItem(tr("Two ways (Up/Down)", "grainline direction"),
+                                           static_cast<int>(GrainlineArrowDirection::twoWaysUpDown));
+    uiTabGrainline->comboBoxArrow->addItem(tr("One way (Up)", "grainline direction"),
+                                           static_cast<int>(GrainlineArrowDirection::oneWayUp));
+    uiTabGrainline->comboBoxArrow->addItem(tr("One way (Down)", "grainline direction"),
+                                           static_cast<int>(GrainlineArrowDirection::oneWayDown));
+    uiTabGrainline->comboBoxArrow->addItem(tr("Four ways", "grainline direction"),
+                                           static_cast<int>(GrainlineArrowDirection::fourWays));
+    uiTabGrainline->comboBoxArrow->addItem(tr("Two ways (Up/Left)", "grainline direction"),
+                                           static_cast<int>(GrainlineArrowDirection::twoWaysUpLeft));
+    uiTabGrainline->comboBoxArrow->addItem(tr("Two ways (Up/Right)", "grainline direction"),
+                                           static_cast<int>(GrainlineArrowDirection::twoWaysUpRight));
+    uiTabGrainline->comboBoxArrow->addItem(tr("Two ways (Down/Right)", "grainline direction"),
+                                           static_cast<int>(GrainlineArrowDirection::twoWaysDownLeft));
+    uiTabGrainline->comboBoxArrow->addItem(tr("Two ways (Down/Right)", "grainline direction"),
+                                           static_cast<int>(GrainlineArrowDirection::twoWaysDownRight));
+    uiTabGrainline->comboBoxArrow->addItem(tr("Three ways (Up/Down/Left)", "grainline direction"),
+                                           static_cast<int>(GrainlineArrowDirection::threeWaysUpDownLeft));
+    uiTabGrainline->comboBoxArrow->addItem(tr("Three ways (Up/Down/Right)", "grainline direction"),
+                                           static_cast<int>(GrainlineArrowDirection::threeWaysUpDownRight));
+    uiTabGrainline->comboBoxArrow->addItem(tr("Three ways (Up/Left/Right)", "grainline direction"),
+                                           static_cast<int>(GrainlineArrowDirection::threeWaysUpLeftRight));
+    uiTabGrainline->comboBoxArrow->addItem(tr("Three ways (Down/Left/Right)", "grainline direction"),
+                                           static_cast<int>(GrainlineArrowDirection::threeWaysDownLeftRight));
 
     m_iRotBaseHeight = uiTabGrainline->lineEditRotFormula->height();
     m_iLenBaseHeight = uiTabGrainline->lineEditLenFormula->height();

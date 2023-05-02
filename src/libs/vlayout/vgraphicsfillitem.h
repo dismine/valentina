@@ -41,6 +41,8 @@ public:
      * @brief VGraphicsFillItem Constructor
      */
     explicit VGraphicsFillItem(QGraphicsItem *parent = nullptr);
+
+    VGraphicsFillItem(const QPainterPath &path, QGraphicsItem *parent = nullptr);
     /**
      * @brief ~VGraphicsFillItem Destructor
      */
