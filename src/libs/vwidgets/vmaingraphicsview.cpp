@@ -66,7 +66,7 @@
 
 namespace
 {
-qreal ScrollingSteps(QWheelEvent* wheel_event)
+auto ScrollingSteps(QWheelEvent *wheel_event) -> qreal
 {
     SCASSERT(wheel_event != nullptr)
 
@@ -90,7 +90,7 @@ qreal ScrollingSteps(QWheelEvent* wheel_event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal PrepareScrolling(qreal scheduledScrollings, QWheelEvent *wheel_event)
+auto PrepareScrolling(qreal scheduledScrollings, QWheelEvent *wheel_event) -> qreal
 {
     const qreal numSteps = ScrollingSteps(wheel_event);
 
@@ -122,11 +122,11 @@ qreal PrepareScrolling(qreal scheduledScrollings, QWheelEvent *wheel_event)
  * @param list list of scene items under a mouse pointer
  * @return prioritized list where prioritized items goes first
  */
-QList<QGraphicsItem *> PrioritizeItems(const QList<QGraphicsItem *> &list)
+auto PrioritizeItems(const QList<QGraphicsItem *> &list) -> QList<QGraphicsItem *>
 {
     QList<QGraphicsItem *> prioritized;
     QList<QGraphicsItem *> nonPrioritized;
-    for (auto item : list)
+    for (auto *item : list)
     {
         item && item->type() == VControlPointSpline::Type ? prioritized.append(item) : nonPrioritized.append(item);
     }
@@ -264,7 +264,7 @@ void GraphicsViewZoom::animFinished()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool GraphicsViewZoom::eventFilter(QObject *object, QEvent *event)
+auto GraphicsViewZoom::eventFilter(QObject *object, QEvent *event) -> bool
 {
     if (event->type() == QEvent::MouseMove)
     {
@@ -282,9 +282,9 @@ bool GraphicsViewZoom::eventFilter(QObject *object, QEvent *event)
         }
         return false;
     }
-    else if (event->type() == QEvent::Wheel)
+    if (event->type() == QEvent::Wheel)
     {
-        if (QWheelEvent* wheel_event = static_cast<QWheelEvent*>(event))
+        if (QWheelEvent *wheel_event = static_cast<QWheelEvent *>(event))
         {
             const QPoint numDegrees = wheel_event->angleDelta();
             if (numDegrees.x() == 0)
@@ -309,7 +309,7 @@ bool GraphicsViewZoom::eventFilter(QObject *object, QEvent *event)
             {
                 if (QGuiApplication::keyboardModifiers() == _modifiers)
                 {
-                    return true; //ignore
+                    return true; // ignore
                 }
 
                 StartHorizontalScrollings(wheel_event);
@@ -319,7 +319,7 @@ bool GraphicsViewZoom::eventFilter(QObject *object, QEvent *event)
     }
     else if (event->type() == QEvent::Gesture)
     {
-        return GestureEvent(static_cast<QGestureEvent*>(event));
+        return GestureEvent(static_cast<QGestureEvent *>(event));
     }
 
     return QObject::eventFilter(object, event);
@@ -395,7 +395,7 @@ void GraphicsViewZoom::StartHorizontalScrollings(QWheelEvent *wheel_event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool GraphicsViewZoom::GestureEvent(QGestureEvent *event)
+auto GraphicsViewZoom::GestureEvent(QGestureEvent *event) -> bool
 {
     if (QGesture *pinch = event->gesture(Qt::PinchGesture))
     {
@@ -556,7 +556,7 @@ void VMainGraphicsView::mousePressEvent(QMouseEvent *event)
             {
                 bool success = false;
                 const QList<QGraphicsItem *> list = PrioritizeItems(items(event->pos()));
-                for (auto item : list)
+                for (auto *item : list)
                 {
                     if (item && item->type() > QGraphicsItem::UserType && item->type() <= VSimpleCurve::Type)
                     {
@@ -575,7 +575,7 @@ void VMainGraphicsView::mousePressEvent(QMouseEvent *event)
         }
         case Qt::MiddleButton:
         {
-            auto scene = qobject_cast<VMainGraphicsScene*>(this->scene());
+            auto *scene = qobject_cast<VMainGraphicsScene *>(this->scene());
             const QList<QGraphicsItem *> list = items(event->pos());
             if (list.isEmpty() || (scene && scene->IsNonInteractive()))
             {// Only when the user clicks on the scene background or non interactive scene
@@ -720,7 +720,7 @@ void VMainGraphicsView::dropEvent(QDropEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VMainGraphicsView::MinScale()
+auto VMainGraphicsView::MinScale() -> qreal
 {
     const QRect screenRect = QGuiApplication::primaryScreen()->availableGeometry();
     const qreal screenSize = qMin(screenRect.width(), screenRect.height());
@@ -729,7 +729,7 @@ qreal VMainGraphicsView::MinScale()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VMainGraphicsView::MaxScale()
+auto VMainGraphicsView::MaxScale() -> qreal
 {
     const QRect screenRect = QGuiApplication::primaryScreen()->availableGeometry();
     const qreal screenSize = qMin(screenRect.width(), screenRect.height());
@@ -806,7 +806,7 @@ void VMainGraphicsView::SetAntialiasing(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VMainGraphicsView::IsOpenGLRender() const
+auto VMainGraphicsView::IsOpenGLRender() const -> bool
 {
     QOpenGLWidget *viewport = qobject_cast<QOpenGLWidget *>(this->viewport());
     if (viewport)
@@ -875,7 +875,7 @@ void VMainGraphicsView::NewSceneRect(QGraphicsScene *sc, QGraphicsView *view, QG
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VMainGraphicsView::SceneVisibleArea(QGraphicsView *view)
+auto VMainGraphicsView::SceneVisibleArea(QGraphicsView *view) -> QRectF
 {
     SCASSERT(view != nullptr)
     //to receive the currently visible area, map the widgets bounds to the scene

@@ -46,43 +46,44 @@ public:
     VPlaceLabelItem(const VPlaceLabelItem &item);
     virtual ~VPlaceLabelItem() override;
 
-    VPlaceLabelItem &operator=(const VPlaceLabelItem &item);
+    auto operator=(const VPlaceLabelItem &item) -> VPlaceLabelItem &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VPlaceLabelItem(VPlaceLabelItem &&item) Q_DECL_NOTHROW;
-    VPlaceLabelItem &operator=(VPlaceLabelItem &&item) Q_DECL_NOTHROW;
+    auto operator=(VPlaceLabelItem &&item) Q_DECL_NOTHROW->VPlaceLabelItem &;
 #endif
 
-    QString  GetWidthFormula() const;
-    QString& GetWidthFormula();
-    qreal    GetWidth() const;
+    auto GetWidthFormula() const -> QString;
+    auto GetWidthFormula() -> QString &;
+    auto GetWidth() const -> qreal;
     void     SetWidth(qreal value, const QString &formula);
 
-    QString  GetHeightFormula() const;
-    QString& GetHeightFormula();
-    qreal    GetHeight() const;
+    auto GetHeightFormula() const -> QString;
+    auto GetHeightFormula() -> QString &;
+    auto GetHeight() const -> qreal;
     void     SetHeight(qreal value, const QString &formula);
 
-    QString  GetAngleFormula() const;
-    QString& GetAngleFormula();
-    qreal    GetAngle() const;
+    auto GetAngleFormula() const -> QString;
+    auto GetAngleFormula() -> QString &;
+    auto GetAngle() const -> qreal;
     void     SetAngle(qreal value, const QString &formula);
 
-    QString  GetVisibilityTrigger() const;
-    QString& GetVisibilityTrigger();
-    bool     IsVisible() const;
+    auto GetVisibilityTrigger() const -> QString;
+    auto GetVisibilityTrigger() -> QString &;
+    auto IsVisible() const -> bool;
     void     SetVisibilityTrigger(qreal visible, const QString &formula);
 
-    qreal    GetCorrectionAngle() const;
+    auto GetCorrectionAngle() const -> qreal;
     void     SetCorrectionAngle(qreal value);
 
-    quint32 GetCenterPoint() const;
+    auto GetCenterPoint() const -> quint32;
     void    SetCenterPoint(quint32 id);
 
-    PlaceLabelType GetLabelType() const;
+    auto GetLabelType() const -> PlaceLabelType;
     void           SetLabelType(PlaceLabelType type);
 
-    QTransform RotationMatrix() const;
-    QRectF     Box() const;
+    auto RotationMatrix() const -> QTransform;
+    auto Box() const -> QRectF;
+
 private:
     QSharedDataPointer<VPlaceLabelItemData> d;
 };

@@ -35,7 +35,7 @@ dx_iface::~dx_iface()
     delete dxfW;
 }
 
-bool dx_iface::fileExport(bool binary)
+auto dx_iface::fileExport(bool binary) -> bool
 {
     bool success = dxfW->write(this, version, binary);
     return success;
@@ -110,7 +110,7 @@ void dx_iface::writeEntity(DRW_Entity* e){
     }
 }
 
-std::string dx_iface::ErrorString() const
+auto dx_iface::ErrorString() const -> std::string
 {
     return dxfW->ErrorString();
 }
@@ -442,7 +442,7 @@ void dx_iface::AddEntity(DRW_Entity *e)
     cData.mBlock->ent.push_back(e);
 }
 
-UTF8STRING dx_iface::AddFont(const QFont &f)
+auto dx_iface::AddFont(const QFont &f) -> UTF8STRING
 {
     DRW_Textstyle ts;
     ts.name = f.family().toUpper().toStdString();
@@ -480,7 +480,7 @@ void dx_iface::AddBlock(dx_ifaceBlock *block)
     cData.blocks.push_back(block);
 }
 
-std::string dx_iface::LocaleToISO()
+auto dx_iface::LocaleToISO() -> std::string
 {
     QMap <QString, QString> locMap = LocaleMap();
     return locMap.value(QLocale(VAbstractApplication::VApp()->Settings()->GetLocale()).name(),

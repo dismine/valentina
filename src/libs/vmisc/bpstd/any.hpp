@@ -55,7 +55,7 @@ namespace bpstd {
 
   class bad_any_cast : public std::bad_cast
   {
-    const char* what() const noexcept override;
+      auto what() const noexcept -> const char * override;
   };
 
   //============================================================================
@@ -149,22 +149,21 @@ namespace bpstd {
     ///
     /// \param other the other any to move
     /// \return reference to \c (*this)
-    any& operator=(any&& other) noexcept;
+    auto operator=(any &&other) noexcept -> any &;
 
     /// \brief Assigns the contents of \p other to this any
     ///
     /// \param other the other any to copy
     /// \return reference to \c (*this)
-    any& operator=(const any& other);
+    auto operator=(const any &other) -> any &;
 
     /// \brief Assigns \p value to this any
     ///
     /// \param value the value to assign
     /// \return reference to \c (*this)
-    template<typename ValueType,
-             typename=enable_if_t<!is_same<decay_t<ValueType>,any>::value &&
-                                   is_copy_constructible<decay_t<ValueType>>::value>>
-    any& operator=(ValueType&& value);
+    template <typename ValueType, typename = enable_if_t<!is_same<decay_t<ValueType>, any>::value &&
+                                                         is_copy_constructible<decay_t<ValueType>>::value>>
+    auto operator=(ValueType &&value) -> any &;
 
     //--------------------------------------------------------------------------
     // Modifiers
@@ -178,47 +177,47 @@ namespace bpstd {
     /// \tparam ValueType the type to construct
     /// \param args the arguments to forward to \c ValueType's constructor
     /// \return reference to the constructed value
-    template<typename ValueType, typename...Args,
-              typename=enable_if_t<is_constructible<decay_t<ValueType>,Args...>::value &&
-                                   is_copy_constructible<decay_t<ValueType>>::value>>
-    decay_t<ValueType>& emplace(Args&&...args);
-    template<typename ValueType, typename U, typename...Args,
-              typename=enable_if_t<is_constructible<decay_t<ValueType>,std::initializer_list<U>,Args...>::value &&
-                                   is_copy_constructible<decay_t<ValueType>>::value>>
-    decay_t<ValueType>& emplace(std::initializer_list<U> il, Args&&...args );
-    /// \}
+      template <typename ValueType, typename... Args,
+                typename = enable_if_t<is_constructible<decay_t<ValueType>, Args...>::value &&
+                                       is_copy_constructible<decay_t<ValueType>>::value>>
+      auto emplace(Args &&...args) -> decay_t<ValueType> &;
+      template <typename ValueType, typename U, typename... Args,
+                typename = enable_if_t<is_constructible<decay_t<ValueType>, std::initializer_list<U>, Args...>::value &&
+                                       is_copy_constructible<decay_t<ValueType>>::value>>
+      auto emplace(std::initializer_list<U> il, Args &&...args) -> decay_t<ValueType> &;
+      /// \}
 
-    /// \brief Destroys the underlying stored value, leaving this any
-    ///        empty.
-    void reset() noexcept;
+      /// \brief Destroys the underlying stored value, leaving this any
+      ///        empty.
+      void reset() noexcept;
 
-    /// \brief Swaps the contents of \c this with \p other
-    ///
-    /// \post \p other contains the old contents of \c this, and \c this
-    ///       contains the old contents of \p other
-    ///
-    /// \param other the other any to swap contents with
-    void swap(any& other) noexcept;
+      /// \brief Swaps the contents of \c this with \p other
+      ///
+      /// \post \p other contains the old contents of \c this, and \c this
+      ///       contains the old contents of \p other
+      ///
+      /// \param other the other any to swap contents with
+      void swap(any &other) noexcept;
 
-    //--------------------------------------------------------------------------
-    // Observers
-    //--------------------------------------------------------------------------
+      //--------------------------------------------------------------------------
+      // Observers
+      //--------------------------------------------------------------------------
   public:
 
     /// \brief Checks whether this any contains a value
     ///
     /// \return \c true if this contains a value
-    bool has_value() const noexcept;
+      auto has_value() const noexcept -> bool;
 
-    /// \brief Gets the type_info for the underlying stored type, or
-    ///        \c typeid(void) if \ref has_value() returns \c false
-    ///
-    /// \return the typeid of the stored type
-    const std::type_info& type() const noexcept;
+      /// \brief Gets the type_info for the underlying stored type, or
+      ///        \c typeid(void) if \ref has_value() returns \c false
+      ///
+      /// \return the typeid of the stored type
+      auto type() const noexcept -> const std::type_info &;
 
-    //--------------------------------------------------------------------------
-    // Private Static Members / Types
-    //--------------------------------------------------------------------------
+      //--------------------------------------------------------------------------
+      // Private Static Members / Types
+      //--------------------------------------------------------------------------
   private:
 
     // Internal buffer size + alignment
@@ -274,10 +273,8 @@ namespace bpstd {
 
     using storage_handler_ptr = const void*(*)(operation, const storage*,const storage*);
 
-    template<typename T>
-    friend T* any_cast(any*) noexcept;
-    template<typename T>
-    friend const T* any_cast(const any*) noexcept;
+    template <typename T> friend auto any_cast(any *) noexcept -> T *;
+    template <typename T> friend auto any_cast(const any *) noexcept -> const T *;
 
     //-----------------------------------------------------------------------
     // Private Members
@@ -309,12 +306,9 @@ namespace bpstd {
   /// \throw bad_any_cast if \p any is not exactly of type \p T
   /// \tparam T the type to cast to
   /// \return the object
-  template<typename T>
-  T any_cast(any& operand);
-  template<typename T>
-  T any_cast(any&& operand);
-  template<typename T>
-  T any_cast(const any& operand);
+  template <typename T> auto any_cast(any &operand) -> T;
+  template <typename T> auto any_cast(any &&operand) -> T;
+  template <typename T> auto any_cast(const any &operand) -> T;
   /// \}
 
   /// \{
@@ -334,9 +328,7 @@ namespace bpstd {
 // definitions : class : bad_any_cast
 //=============================================================================
 
-inline
-const char* bpstd::bad_any_cast::what()
-  const noexcept
+inline auto bpstd::bad_any_cast::what() const noexcept -> const char *
 {
   return "bad_any_cast";
 }
@@ -348,37 +340,32 @@ const char* bpstd::bad_any_cast::what()
 template<typename T>
 struct bpstd::any::internal_storage_handler
 {
-  template<typename...Args>
-  static T* construct(storage& s, Args&&...args);
+  template <typename... Args> static auto construct(storage &s, Args &&...args) -> T *;
 
-  template<typename U, typename...Args>
-  static T* construct(storage& s, std::initializer_list<U> il, Args&&...args);
+  template <typename U, typename... Args>
+  static auto construct(storage &s, std::initializer_list<U> il, Args &&...args) -> T *;
 
   static void destroy(storage& s);
 
-  static const void* handle(operation op,
-                            const storage* self,
-                            const storage* other);
+  static auto handle(operation op, const storage *self, const storage *other) -> const void *;
 };
 
 //=============================================================================
 // definition : class : any::internal_storage_handler
 //=============================================================================
 
-template<typename T>
-template<typename...Args>
-inline BPSTD_INLINE_VISIBILITY
-T* bpstd::any::internal_storage_handler<T>
-  ::construct(storage& s, Args&&...args)
+template <typename T>
+template <typename... Args>
+inline BPSTD_INLINE_VISIBILITY auto bpstd::any::internal_storage_handler<T>::construct(storage &s, Args &&...args)
+    -> T *
 {
   return ::new(&s.internal) T(bpstd::forward<Args>(args)...);
 }
 
-template<typename T>
-template<typename U, typename...Args>
-inline BPSTD_INLINE_VISIBILITY
-T* bpstd::any::internal_storage_handler<T>
-  ::construct(storage& s, std::initializer_list<U> il, Args&&...args)
+template <typename T>
+template <typename U, typename... Args>
+inline BPSTD_INLINE_VISIBILITY auto
+bpstd::any::internal_storage_handler<T>::construct(storage &s, std::initializer_list<U> il, Args &&...args) -> T *
 {
   return ::new(&s.internal) T(il, bpstd::forward<Args>(args)...);
 }
@@ -392,12 +379,10 @@ void bpstd::any::internal_storage_handler<T>
   t->~T();
 }
 
-template<typename T>
-inline BPSTD_INLINE_VISIBILITY
-const void* bpstd::any::internal_storage_handler<T>
-  ::handle(operation op,
-           const storage* self,
-           const storage* other)
+template <typename T>
+inline BPSTD_INLINE_VISIBILITY auto bpstd::any::internal_storage_handler<T>::handle(operation op, const storage *self,
+                                                                                    const storage *other) -> const
+    void *
 {
   switch (op)
   {
@@ -464,17 +449,14 @@ const void* bpstd::any::internal_storage_handler<T>
 template<typename T>
 struct bpstd::any::external_storage_handler
 {
-  template<typename...Args>
-  static T* construct(storage& s, Args&&...args);
+  template <typename... Args> static auto construct(storage &s, Args &&...args) -> T *;
 
-  template<typename U, typename...Args>
-  static T* construct(storage& s, std::initializer_list<U> il, Args&&...args);
+  template <typename U, typename... Args>
+  static auto construct(storage &s, std::initializer_list<U> il, Args &&...args) -> T *;
 
   static void destroy(storage& s);
 
-  static const void* handle(operation op,
-                            const storage* self,
-                            const storage* other);
+  static auto handle(operation op, const storage *self, const storage *other) -> const void *;
 };
 
 
@@ -482,21 +464,19 @@ struct bpstd::any::external_storage_handler
 // definition : class : any::external_storage_handler
 //=============================================================================
 
-template<typename T>
-template<typename...Args>
-inline BPSTD_INLINE_VISIBILITY
-T* bpstd::any::external_storage_handler<T>
-  ::construct(storage& s, Args&&...args)
+template <typename T>
+template <typename... Args>
+inline BPSTD_INLINE_VISIBILITY auto bpstd::any::external_storage_handler<T>::construct(storage &s, Args &&...args)
+    -> T *
 {
   s.external = new T(bpstd::forward<Args>(args)...);
   return static_cast<T*>(s.external);
 }
 
-template<typename T>
-template<typename U, typename...Args>
-inline BPSTD_INLINE_VISIBILITY
-T* bpstd::any::external_storage_handler<T>
-  ::construct(storage& s, std::initializer_list<U> il, Args&&...args)
+template <typename T>
+template <typename U, typename... Args>
+inline BPSTD_INLINE_VISIBILITY auto
+bpstd::any::external_storage_handler<T>::construct(storage &s, std::initializer_list<U> il, Args &&...args) -> T *
 {
   s.external = new T(il, bpstd::forward<Args>(args)...);
   return static_cast<T*>(s.external);
@@ -510,12 +490,10 @@ void bpstd::any::external_storage_handler<T>
   delete static_cast<T*>(s.external);
 }
 
-template<typename T>
-inline BPSTD_INLINE_VISIBILITY
-const void* bpstd::any::external_storage_handler<T>
-  ::handle( operation op,
-            const storage* self,
-            const storage* other )
+template <typename T>
+inline BPSTD_INLINE_VISIBILITY auto bpstd::any::external_storage_handler<T>::handle(operation op, const storage *self,
+                                                                                    const storage *other) -> const
+    void *
 {
   switch (op)
   {
@@ -665,9 +643,7 @@ bpstd::any::~any()
 
 //-----------------------------------------------------------------------------
 
-inline BPSTD_INLINE_VISIBILITY
-bpstd::any& bpstd::any::operator=(any&& other)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY auto bpstd::any::operator=(any &&other) noexcept -> bpstd::any &
 {
   reset();
 
@@ -679,8 +655,7 @@ bpstd::any& bpstd::any::operator=(any&& other)
   return (*this);
 }
 
-inline BPSTD_INLINE_VISIBILITY
-bpstd::any& bpstd::any::operator=(const any& other)
+inline BPSTD_INLINE_VISIBILITY auto bpstd::any::operator=(const any &other) -> bpstd::any &
 {
   reset();
 
@@ -695,9 +670,8 @@ bpstd::any& bpstd::any::operator=(const any& other)
   return (*this);
 }
 
-template<typename ValueType, typename>
-inline BPSTD_INLINE_VISIBILITY
-bpstd::any& bpstd::any::operator=(ValueType&& value)
+template <typename ValueType, typename>
+inline BPSTD_INLINE_VISIBILITY auto bpstd::any::operator=(ValueType &&value) -> bpstd::any &
 {
   using handler_type = storage_handler<decay_t<ValueType>>;
 
@@ -713,10 +687,8 @@ bpstd::any& bpstd::any::operator=(ValueType&& value)
 // Modifiers
 //-----------------------------------------------------------------------------
 
-template<typename ValueType, typename...Args, typename>
-inline BPSTD_INLINE_VISIBILITY
-bpstd::decay_t<ValueType>&
-  bpstd::any::emplace(Args&&...args)
+template <typename ValueType, typename... Args, typename>
+inline BPSTD_INLINE_VISIBILITY auto bpstd::any::emplace(Args &&...args) -> bpstd::decay_t<ValueType> &
 {
   using handler_type = storage_handler<decay_t<ValueType>>;
 
@@ -729,11 +701,9 @@ bpstd::decay_t<ValueType>&
   return result;
 }
 
-template<typename ValueType, typename U, typename...Args, typename>
-inline BPSTD_INLINE_VISIBILITY
-bpstd::decay_t<ValueType>&
-  bpstd::any::emplace(std::initializer_list<U> il,
-                      Args&&...args)
+template <typename ValueType, typename U, typename... Args, typename>
+inline BPSTD_INLINE_VISIBILITY auto bpstd::any::emplace(std::initializer_list<U> il, Args &&...args)
+    -> bpstd::decay_t<ValueType> &
 {
   using handler_type = storage_handler<decay_t<ValueType>>;
 
@@ -803,16 +773,12 @@ void bpstd::any::swap(any& other)
 // Observers
 //-----------------------------------------------------------------------------
 
-inline BPSTD_INLINE_VISIBILITY
-bool bpstd::any::has_value()
-  const noexcept
+inline BPSTD_INLINE_VISIBILITY auto bpstd::any::has_value() const noexcept -> bool
 {
   return m_storage_handler != nullptr;
 }
 
-inline BPSTD_INLINE_VISIBILITY
-const std::type_info& bpstd::any::type()
-  const noexcept
+const inline BPSTD_INLINE_VISIBILITY auto bpstd::any::type() const noexcept -> const std::type_info &
 {
   if (has_value()) {
     auto* p = m_storage_handler(operation::type, nullptr, nullptr);
@@ -840,9 +806,7 @@ void bpstd::swap(any& lhs, any& rhs)
 // casts
 //-----------------------------------------------------------------------------
 
-template<typename T>
-inline BPSTD_INLINE_VISIBILITY
-T bpstd::any_cast(any& operand)
+template <typename T> inline BPSTD_INLINE_VISIBILITY auto bpstd::any_cast(any &operand) -> T
 {
   using underlying_type = remove_cvref_t<T>;
 
@@ -858,9 +822,7 @@ T bpstd::any_cast(any& operand)
   return static_cast<T>(*p);
 }
 
-template<typename T>
-inline BPSTD_INLINE_VISIBILITY
-T bpstd::any_cast(any&& operand)
+template <typename T> inline BPSTD_INLINE_VISIBILITY auto bpstd::any_cast(any &&operand) -> T
 {
   using underlying_type = remove_cvref_t<T>;
 
@@ -876,9 +838,7 @@ T bpstd::any_cast(any&& operand)
   return static_cast<T>(bpstd::move(*p));
 }
 
-template<typename T>
-inline BPSTD_INLINE_VISIBILITY
-T bpstd::any_cast(const any& operand)
+template <typename T> inline BPSTD_INLINE_VISIBILITY auto bpstd::any_cast(const any &operand) -> T
 {
   using underlying_type = remove_cvref_t<T>;
 
@@ -894,10 +854,7 @@ T bpstd::any_cast(const any& operand)
   return static_cast<T>(*p);
 }
 
-template<typename T>
-inline BPSTD_INLINE_VISIBILITY
-T* bpstd::any_cast(any* operand)
-  noexcept
+template <typename T> inline BPSTD_INLINE_VISIBILITY auto bpstd::any_cast(any *operand) const auto * cept->T *
 {
   if (!operand) {
     return nullptr;
@@ -912,10 +869,7 @@ T* bpstd::any_cast(any* operand)
   return const_cast<T*>(static_cast<const T*>(p));
 }
 
-template<typename T>
-inline BPSTD_INLINE_VISIBILITY
-const T* bpstd::any_cast(const any* operand)
-  noexcept
+template <typename T> inline BPSTD_INLINE_VISIBILITY auto bpstd::any_cast(const any *operand) noexcept -> const T *
 {
   if (!operand) {
     return nullptr;
@@ -924,9 +878,7 @@ const T* bpstd::any_cast(const any* operand)
     return nullptr;
   }
 
-  auto* p = operand->m_storage_handler(any::operation::value,
-                                       &operand->m_storage,
-                                       nullptr);
+  const auto *p = operand->m_storage_handler(any::operation::value, &operand->m_storage, nullptr);
   return static_cast<const T*>(p);
 }
 

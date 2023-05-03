@@ -63,21 +63,21 @@ public:
     virtual ~VToolCurveIntersectAxis() = default;
     virtual void SetDialog() override;
 
-    static VToolCurveIntersectAxis *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                           VAbstractPattern *doc, VContainer *data);
-    static VToolCurveIntersectAxis *Create(VToolCurveIntersectAxisInitData &initData);
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolCurveIntersectAxis *;
+    static auto Create(VToolCurveIntersectAxisInitData &initData) -> VToolCurveIntersectAxis *;
 
-    static bool FindPoint(const QPointF &point, qreal angle, const QVector<QPointF> &curvePoints,
-                          QPointF *intersectionPoint);
+    static auto FindPoint(const QPointF &point, qreal angle, const QVector<QPointF> &curvePoints,
+                          QPointF *intersectionPoint) -> bool;
 
     static const QString ToolType;
-    virtual int       type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::CurveIntersectAxis)};
 
-    VFormula     GetFormulaAngle() const;
+    auto GetFormulaAngle() const -> VFormula;
     void         SetFormulaAngle(const VFormula &value);
 
-    QString CurveName() const;
+    auto CurveName() const -> QString;
 
     virtual void ShowVisualization(bool show) override;
 protected slots:

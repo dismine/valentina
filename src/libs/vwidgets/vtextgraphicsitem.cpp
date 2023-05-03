@@ -62,7 +62,7 @@ namespace
  * @param dRot rectangle rotation
  * @return bounding box around rectBB rotated by dRot
  */
-QRectF GetBoundingRect(const QRectF &rectBB, qreal dRot)
+auto GetBoundingRect(const QRectF &rectBB, qreal dRot) -> QRectF
 {
     QPointF apt[4] = { rectBB.topLeft(), rectBB.topRight(), rectBB.bottomLeft(), rectBB.bottomRight() };
     QPointF ptCenter = rectBB.center();
@@ -277,7 +277,7 @@ void VTextGraphicsItem::Update()
  * @param dY vertical translation needed to put the box inside parent item
  * @return true, if rectBB is contained in parent item and false otherwise
  */
-bool VTextGraphicsItem::IsContained(QRectF rectBB, qreal dRot, qreal &dX, qreal &dY) const
+auto VTextGraphicsItem::IsContained(QRectF rectBB, qreal dRot, qreal &dX, qreal &dY) const -> bool
 {
     QRectF rectParent = parentItem()->boundingRect();
     rectBB = GetBoundingRect(rectBB, dRot);
@@ -335,7 +335,7 @@ void VTextGraphicsItem::UpdateData(VAbstractPattern* pDoc, const VContainer *pat
  * @brief VTextGraphicsItem::GetTextLines returns the number of lines of text to show
  * @return number of lines of text
  */
-vsizetype VTextGraphicsItem::GetTextLines() const
+auto VTextGraphicsItem::GetTextLines() const -> vsizetype
 {
     return m_tm.GetSourceLinesCount();
 }
@@ -345,7 +345,7 @@ vsizetype VTextGraphicsItem::GetTextLines() const
  * @brief VTextGraphicsItem::GetFontSize returns the currently used text base font size
  * @return current text base font size
  */
-int VTextGraphicsItem::GetFontSize() const
+auto VTextGraphicsItem::GetFontSize() const -> int
 {
     return m_tm.GetFont().pixelSize();
 }

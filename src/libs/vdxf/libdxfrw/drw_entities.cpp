@@ -70,7 +70,8 @@ void DRW_Entity::extrudePoint(DRW_Coord extPoint, DRW_Coord *point) const{
     point->z = pz;
 }
 
-bool DRW_Entity::parseCode(int code, dxfReader *reader){
+auto DRW_Entity::parseCode(int code, dxfReader *reader) -> bool
+{
     switch (code) {
     case 5:
         handle = static_cast<quint32>(reader->getHandleString());
@@ -157,7 +158,8 @@ bool DRW_Entity::parseCode(int code, dxfReader *reader){
 }
 
 //parses dxf 102 groups to read entity
-bool DRW_Entity::parseDxfGroups(int code, dxfReader *reader){
+auto DRW_Entity::parseDxfGroups(int code, dxfReader *reader) -> bool
+{
     std::list<DRW_Variant> ls;
     DRW_Variant c;
     int nc;
@@ -198,7 +200,8 @@ bool DRW_Entity::parseDxfGroups(int code, dxfReader *reader){
     return true;
 }
 
-bool DRW_Point::parseCode(int code, dxfReader *reader){
+auto DRW_Point::parseCode(int code, dxfReader *reader) -> bool
+{
     switch (code) {
     case 10:
         basePoint.x = reader->getDouble();
@@ -229,7 +232,7 @@ bool DRW_Point::parseCode(int code, dxfReader *reader){
     return true;
 }
 
-bool DRW_ASTMNotch::parseCode(int code, dxfReader *reader)
+auto DRW_ASTMNotch::parseCode(int code, dxfReader *reader) -> bool
 {
     switch (code) {
     case 50:
@@ -242,7 +245,8 @@ bool DRW_ASTMNotch::parseCode(int code, dxfReader *reader)
     return true;
 }
 
-bool DRW_Line::parseCode(int code, dxfReader *reader){
+auto DRW_Line::parseCode(int code, dxfReader *reader) -> bool
+{
     switch (code) {
     case 11:
         secPoint.x = reader->getDouble();
@@ -269,7 +273,8 @@ void DRW_Circle::applyExtrusion(){
     }
 }
 
-bool DRW_Circle::parseCode(int code, dxfReader *reader){
+auto DRW_Circle::parseCode(int code, dxfReader *reader) -> bool
+{
     switch (code) {
     case 40:
         radious = reader->getDouble();
@@ -301,7 +306,8 @@ void DRW_Arc::applyExtrusion(){
     }
 }
 
-bool DRW_Arc::parseCode(int code, dxfReader *reader){
+auto DRW_Arc::parseCode(int code, dxfReader *reader) -> bool
+{
     switch (code) {
     case 50:
         staangle = reader->getDouble()/ ARAD;
@@ -316,7 +322,8 @@ bool DRW_Arc::parseCode(int code, dxfReader *reader){
     return true;
 }
 
-bool DRW_Ellipse::parseCode(int code, dxfReader *reader){
+auto DRW_Ellipse::parseCode(int code, dxfReader *reader) -> bool
+{
     switch (code) {
     case 40:
         ratio = reader->getDouble();
@@ -416,7 +423,8 @@ void DRW_Trace::applyExtrusion(){
     }
 }
 
-bool DRW_Trace::parseCode(int code, dxfReader *reader){
+auto DRW_Trace::parseCode(int code, dxfReader *reader) -> bool
+{
     switch (code) {
     case 12:
         thirdPoint.x = reader->getDouble();
@@ -443,7 +451,8 @@ bool DRW_Trace::parseCode(int code, dxfReader *reader){
     return true;
 }
 
-bool DRW_3Dface::parseCode(int code, dxfReader *reader){
+auto DRW_3Dface::parseCode(int code, dxfReader *reader) -> bool
+{
     switch (code) {
     case 70:
         invisibleflag = reader->getInt32();
@@ -455,7 +464,8 @@ bool DRW_3Dface::parseCode(int code, dxfReader *reader){
     return true;
 }
 
-bool DRW_Block::parseCode(int code, dxfReader *reader){
+auto DRW_Block::parseCode(int code, dxfReader *reader) -> bool
+{
     switch (code) {
     case 2:
         name = reader->getUtf8String();
@@ -470,7 +480,8 @@ bool DRW_Block::parseCode(int code, dxfReader *reader){
     return true;
 }
 
-bool DRW_Insert::parseCode(int code, dxfReader *reader){
+auto DRW_Insert::parseCode(int code, dxfReader *reader) -> bool
+{
     switch (code) {
     case 2:
         name = reader->getUtf8String();
@@ -520,7 +531,8 @@ void DRW_LWPolyline::applyExtrusion(){
     }
 }
 
-bool DRW_LWPolyline::parseCode(int code, dxfReader *reader){
+auto DRW_LWPolyline::parseCode(int code, dxfReader *reader) -> bool
+{
     switch (code) {
     case 10: {
         vertex = new DRW_Vertex2D();
@@ -575,7 +587,8 @@ bool DRW_LWPolyline::parseCode(int code, dxfReader *reader){
     return true;
 }
 
-bool DRW_Text::parseCode(int code, dxfReader *reader){
+auto DRW_Text::parseCode(int code, dxfReader *reader) -> bool
+{
     switch (code) {
     case 40:
         height = reader->getDouble();
@@ -611,7 +624,8 @@ bool DRW_Text::parseCode(int code, dxfReader *reader){
     return true;
 }
 
-bool DRW_MText::parseCode(int code, dxfReader *reader){
+auto DRW_MText::parseCode(int code, dxfReader *reader) -> bool
+{
     switch (code) {
     case 1:
         text += reader->getString();
@@ -697,7 +711,8 @@ void DRW_MText::updateAngle(){
     }
 }
 
-bool DRW_Polyline::parseCode(int code, dxfReader *reader){
+auto DRW_Polyline::parseCode(int code, dxfReader *reader) -> bool
+{
     switch (code) {
     case 70:
         flags = reader->getInt32();
@@ -730,7 +745,8 @@ bool DRW_Polyline::parseCode(int code, dxfReader *reader){
     return true;
 }
 
-bool DRW_Vertex::parseCode(int code, dxfReader *reader){
+auto DRW_Vertex::parseCode(int code, dxfReader *reader) -> bool
+{
     switch (code) {
     case 70:
         flags = reader->getInt32();
@@ -769,7 +785,8 @@ bool DRW_Vertex::parseCode(int code, dxfReader *reader){
     return true;
 }
 
-bool DRW_Hatch::parseCode(int code, dxfReader *reader){
+auto DRW_Hatch::parseCode(int code, dxfReader *reader) -> bool
+{
     switch (code) {
     case 2:
         name = reader->getUtf8String();
@@ -876,7 +893,8 @@ bool DRW_Hatch::parseCode(int code, dxfReader *reader){
     return true;
 }
 
-bool DRW_Spline::parseCode(int code, dxfReader *reader){
+auto DRW_Spline::parseCode(int code, dxfReader *reader) -> bool
+{
     switch (code) {
     case 210:
         normalVec.x = reader->getDouble();
@@ -968,7 +986,8 @@ bool DRW_Spline::parseCode(int code, dxfReader *reader){
     return true;
 }
 
-bool DRW_Image::parseCode(int code, dxfReader *reader){
+auto DRW_Image::parseCode(int code, dxfReader *reader) -> bool
+{
     switch (code) {
     case 12:
         vVector.x = reader->getDouble();
@@ -1007,7 +1026,8 @@ bool DRW_Image::parseCode(int code, dxfReader *reader){
     return true;
 }
 
-bool DRW_Dimension::parseCode(int code, dxfReader *reader){
+auto DRW_Dimension::parseCode(int code, dxfReader *reader) -> bool
+{
     switch (code) {
     case 1:
         text = reader->getUtf8String();
@@ -1128,7 +1148,8 @@ bool DRW_Dimension::parseCode(int code, dxfReader *reader){
     return true;
 }
 
-bool DRW_Leader::parseCode(int code, dxfReader *reader){
+auto DRW_Leader::parseCode(int code, dxfReader *reader) -> bool
+{
     switch (code) {
     case 3:
         style = reader->getUtf8String();
@@ -1219,7 +1240,8 @@ bool DRW_Leader::parseCode(int code, dxfReader *reader){
     return true;
 }
 
-bool DRW_Viewport::parseCode(int code, dxfReader *reader){
+auto DRW_Viewport::parseCode(int code, dxfReader *reader) -> bool
+{
     switch (code) {
     case 40:
         pswidth = reader->getDouble();

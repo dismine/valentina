@@ -67,25 +67,25 @@ class VToolArc :public VToolAbstractArc
     Q_OBJECT // NOLINT
 public:
     virtual void     SetDialog() override;
-    static VToolArc* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
-                            VContainer *data);
-    static VToolArc* Create(VToolArcInitData &initData);
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolArc *;
+    static auto Create(VToolArcInitData &initData) -> VToolArc *;
 
     static const QString ToolType;
-    virtual int      type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::Arc)};
-    virtual QString  getTagName() const override;
+    virtual auto getTagName() const -> QString override;
 
-    VFormula         GetFormulaRadius() const;
+    auto GetFormulaRadius() const -> VFormula;
     void             SetFormulaRadius(const VFormula &value);
 
-    VFormula         GetFormulaF1() const;
+    auto GetFormulaF1() const -> VFormula;
     void             SetFormulaF1(const VFormula &value);
 
-    VFormula         GetFormulaF2() const;
+    auto GetFormulaF2() const -> VFormula;
     void             SetFormulaF2(const VFormula &value);
 
-    qreal            GetApproximationScale() const;
+    auto GetApproximationScale() const -> qreal;
     void             SetApproximationScale(qreal value);
 
     virtual void     ShowVisualization(bool show) override;
@@ -97,7 +97,8 @@ protected:
                                 QList<quint32> &newDependencies) override;
     virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     virtual void     SetVisualization() override;
-    virtual QString  MakeToolTip() const override;
+    virtual auto MakeToolTip() const -> QString override;
+
 private:
     Q_DISABLE_COPY_MOVE(VToolArc) // NOLINT
 

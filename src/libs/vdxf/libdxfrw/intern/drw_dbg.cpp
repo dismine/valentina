@@ -35,7 +35,8 @@ private:
 };
 
 /********* debug class *************/
-DRW_dbg *DRW_dbg::getInstance(){
+auto DRW_dbg::getInstance() -> DRW_dbg *
+{
     if (instance == nullptr){
         instance = new DRW_dbg;
     }
@@ -68,7 +69,8 @@ void DRW_dbg::setLevel(Level lvl){
     }
 }
 
-DRW_dbg::Level DRW_dbg::getLevel() const{
+auto DRW_dbg::getLevel() const -> DRW_dbg::Level
+{
     return level;
 }
 

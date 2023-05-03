@@ -97,7 +97,7 @@ DialogCubicBezierPath::~DialogCubicBezierPath()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCubicBezierPath DialogCubicBezierPath::GetPath() const
+auto DialogCubicBezierPath::GetPath() const -> VCubicBezierPath
 {
     return path;
 }
@@ -123,7 +123,7 @@ void DialogCubicBezierPath::SetPath(const VCubicBezierPath &value)
     ChangeCurrentData(ui->comboBoxPenStyle, path.GetPenStyle());
     ChangeCurrentData(ui->comboBoxColor, path.GetColor());
 
-    auto visPath = qobject_cast<VisToolCubicBezierPath *>(vis);
+    auto *visPath = qobject_cast<VisToolCubicBezierPath *>(vis);
     SCASSERT(visPath != nullptr)
     visPath->SetPath(path);
     ui->listWidget->blockSignals(false);
@@ -151,7 +151,7 @@ void DialogCubicBezierPath::ChosenObject(quint32 id, const SceneObject &type)
 
         SavePath();
 
-        auto visPath = qobject_cast<VisToolCubicBezierPath *>(vis);
+        auto *visPath = qobject_cast<VisToolCubicBezierPath *>(vis);
         SCASSERT(visPath != nullptr)
         visPath->SetPath(path);
 
@@ -211,7 +211,7 @@ void DialogCubicBezierPath::SaveData()
     path.SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
     path.SetAliasSuffix(ui->lineEditAlias->text());
 
-    auto visPath = qobject_cast<VisToolCubicBezierPath *>(vis);
+    auto *visPath = qobject_cast<VisToolCubicBezierPath *>(vis);
     SCASSERT(visPath != nullptr)
     visPath->SetPath(path);
     visPath->SetMode(Mode::Show);
@@ -311,7 +311,7 @@ void DialogCubicBezierPath::SavePath()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSet<quint32> DialogCubicBezierPath::AllPathBackboneIds() const
+auto DialogCubicBezierPath::AllPathBackboneIds() const -> QSet<quint32>
 {
     QVector<quint32> points;
     for (qint32 i = 0; i < ui->listWidget->count(); ++i)
@@ -332,7 +332,7 @@ QSet<quint32> DialogCubicBezierPath::AllPathBackboneIds() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogCubicBezierPath::IsPathValid() const
+auto DialogCubicBezierPath::IsPathValid() const -> bool
 {
     if (path.CountPoints() < 7)
     {
@@ -343,7 +343,7 @@ bool DialogCubicBezierPath::IsPathValid() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCubicBezierPath DialogCubicBezierPath::ExtractPath() const
+auto DialogCubicBezierPath::ExtractPath() const -> VCubicBezierPath
 {
     QVector<VPointF> points;
     for (qint32 i = 0; i < ui->listWidget->count(); ++i)
@@ -403,7 +403,7 @@ void DialogCubicBezierPath::SetNotes(const QString &notes)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogCubicBezierPath::GetNotes() const
+auto DialogCubicBezierPath::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }

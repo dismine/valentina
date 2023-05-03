@@ -43,7 +43,7 @@ public:
     explicit TST_AbstractTranslation(QObject *parent = nullptr);
 
 protected:
-    QDomNodeList LoadTSFile(const QString &filename);
+    auto LoadTSFile(const QString &filename) -> QDomNodeList;
 
     static const QString TagName;
     static const QString TagMessage;

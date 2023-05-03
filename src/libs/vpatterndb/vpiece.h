@@ -54,88 +54,87 @@ public:
 
     virtual ~VPiece();
 
-    VPiece &operator=(const VPiece &piece);
+    auto operator=(const VPiece &piece) -> VPiece &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VPiece(VPiece &&piece) Q_DECL_NOTHROW;
-    VPiece &operator=(VPiece &&piece) Q_DECL_NOTHROW;
+    auto operator=(VPiece &&piece) Q_DECL_NOTHROW->VPiece &;
 #endif
 
-    VPiecePath GetPath() const;
-    VPiecePath &GetPath();
+    auto GetPath() const -> VPiecePath;
+    auto GetPath() -> VPiecePath &;
     void       SetPath(const VPiecePath &path);
 
-    QVector<VLayoutPoint>  MainPathPoints(const VContainer *data) const;
-    QVector<VLayoutPoint>  UniteMainPathPoints(const VContainer *data) const;
-    QVector<VPointF>       MainPathNodePoints(const VContainer *data, bool showExcluded = false) const;
-    QVector<VLayoutPoint>  SeamAllowancePoints(const VContainer *data) const;
-    QVector<QPointF>       CuttingPathPoints(const VContainer *data) const;
-    QVector<QLineF>        PassmarksLines(const VContainer *data) const;
+    auto MainPathPoints(const VContainer *data) const -> QVector<VLayoutPoint>;
+    auto UniteMainPathPoints(const VContainer *data) const -> QVector<VLayoutPoint>;
+    auto MainPathNodePoints(const VContainer *data, bool showExcluded = false) const -> QVector<VPointF>;
+    auto SeamAllowancePoints(const VContainer *data) const -> QVector<VLayoutPoint>;
+    auto CuttingPathPoints(const VContainer *data) const -> QVector<QPointF>;
+    auto PassmarksLines(const VContainer *data) const -> QVector<QLineF>;
 
-    QVector<VPassmark>     Passmarks(const VContainer *data) const;
+    auto Passmarks(const VContainer *data) const -> QVector<VPassmark>;
 
-    QVector<QPainterPath> CurvesPainterPath(const VContainer *data) const;
+    auto CurvesPainterPath(const VContainer *data) const -> QVector<QPainterPath>;
 
-    QPainterPath        MainPathPath(const VContainer *data) const;
-    static QPainterPath MainPathPath(const QVector<QPointF> &points);
+    auto MainPathPath(const VContainer *data) const -> QPainterPath;
+    static auto MainPathPath(const QVector<QPointF> &points) -> QPainterPath;
 
-    QPainterPath SeamAllowancePath(const VContainer *data) const;
-    template <class T>
-    QPainterPath SeamAllowancePath(const QVector<T> &points) const;
-    QPainterPath PassmarksPath(const VContainer *data) const;
-    QPainterPath PlaceLabelPath(const VContainer *data) const;
+    auto SeamAllowancePath(const VContainer *data) const -> QPainterPath;
+    template <class T> auto SeamAllowancePath(const QVector<T> &points) const -> QPainterPath;
+    auto PassmarksPath(const VContainer *data) const -> QPainterPath;
+    auto PlaceLabelPath(const VContainer *data) const -> QPainterPath;
 
-    bool IsSeamAllowanceValid(const VContainer *data) const;
+    auto IsSeamAllowanceValid(const VContainer *data) const -> bool;
 
-    bool IsInLayout() const;
+    auto IsInLayout() const -> bool;
     void SetInLayout(bool inLayout);
 
-    bool IsUnited() const;
+    auto IsUnited() const -> bool;
     void SetUnited(bool united);
 
     auto GetShortName() const -> QString;
     void SetShortName(const QString &value);
 
-    QString GetFormulaSAWidth() const;
+    auto GetFormulaSAWidth() const -> QString;
     void    SetFormulaSAWidth(const QString &formula, qreal value);
 
-    QVector<quint32> GetInternalPaths() const;
-    QVector<quint32> &GetInternalPaths();
+    auto GetInternalPaths() const -> QVector<quint32>;
+    auto GetInternalPaths() -> QVector<quint32> &;
     void             SetInternalPaths(const QVector<quint32> &iPaths);
 
-    QVector<CustomSARecord> GetCustomSARecords() const;
-    QVector<CustomSARecord> &GetCustomSARecords();
+    auto GetCustomSARecords() const -> QVector<CustomSARecord>;
+    auto GetCustomSARecords() -> QVector<CustomSARecord> &;
     void                    SetCustomSARecords(const QVector<CustomSARecord> &records);
 
-    QVector<quint32> GetPins() const;
-    QVector<quint32> &GetPins();
+    auto GetPins() const -> QVector<quint32>;
+    auto GetPins() -> QVector<quint32> &;
     void             SetPins(const QVector<quint32> &pins);
 
-    QVector<quint32> GetPlaceLabels() const;
-    QVector<quint32> &GetPlaceLabels();
+    auto GetPlaceLabels() const -> QVector<quint32>;
+    auto GetPlaceLabels() -> QVector<quint32> &;
     void             SetPlaceLabels(const QVector<quint32> &labels);
 
-    QList<quint32> Dependencies() const;
-    QVector<quint32> MissingNodes(const VPiece &det) const;
-    QVector<quint32> MissingCSAPath(const VPiece &det) const;
-    QVector<quint32> MissingInternalPaths(const VPiece &det) const;
-    QVector<quint32> MissingPins(const VPiece &det) const;
-    QVector<quint32> MissingPlaceLabels(const VPiece &det) const;
+    auto Dependencies() const -> QList<quint32>;
+    auto MissingNodes(const VPiece &det) const -> QVector<quint32>;
+    auto MissingCSAPath(const VPiece &det) const -> QVector<quint32>;
+    auto MissingInternalPaths(const VPiece &det) const -> QVector<quint32>;
+    auto MissingPins(const VPiece &det) const -> QVector<quint32>;
+    auto MissingPlaceLabels(const VPiece &det) const -> QVector<quint32>;
 
     void                   SetPieceLabelData(const VPieceLabelData &data);
-    VPieceLabelData&       GetPieceLabelData();
-    const VPieceLabelData& GetPieceLabelData() const;
+    auto GetPieceLabelData() -> VPieceLabelData &;
+    auto GetPieceLabelData() const -> const VPieceLabelData &;
 
     void                     SetPatternLabelData(const VPatternLabelData &info);
-    VPatternLabelData&       GetPatternLabelData();
-    const VPatternLabelData& GetPatternLabelData() const;
+    auto GetPatternLabelData() -> VPatternLabelData &;
+    auto GetPatternLabelData() const -> const VPatternLabelData &;
 
     void                    SetGrainlineGeometry(const VGrainlineData &data);
-    VGrainlineData&         GetGrainlineGeometry();
-    const VGrainlineData&   GetGrainlineGeometry() const;
+    auto GetGrainlineGeometry() -> VGrainlineData &;
+    auto GetGrainlineGeometry() const -> const VGrainlineData &;
 
-    QVector<VPieceNode> GetUnitedPath(const VContainer *data) const;
+    auto GetUnitedPath(const VContainer *data) const -> QVector<VPieceNode>;
 
-    QVector<VLayoutPoint> SeamAllowancePointsWithRotation(const VContainer *data, vsizetype makeFirst) const;
+    auto SeamAllowancePointsWithRotation(const VContainer *data, vsizetype makeFirst) const -> QVector<VLayoutPoint>;
 
     void SetGradationLabel(const QString &label);
     auto GetGradationLabel() const -> QString;
@@ -150,29 +149,30 @@ public:
 private:
     QSharedDataPointer<VPieceData> d;
 
-    QVector<CustomSARecord> GetValidRecords() const;
-    QVector<CustomSARecord> FilterRecords(QVector<CustomSARecord> records) const;
+    auto GetValidRecords() const -> QVector<CustomSARecord>;
+    auto FilterRecords(QVector<CustomSARecord> records) const -> QVector<CustomSARecord>;
 
-    QVector<VSAPoint> GetNodeSAPoints(const QVector<VPieceNode> &path, vsizetype index, const VContainer *data) const;
+    auto GetNodeSAPoints(const QVector<VPieceNode> &path, vsizetype index, const VContainer *data) const
+        -> QVector<VSAPoint>;
 
-    bool GetPassmarkSAPoint(const QVector<VPieceNode> &path, vsizetype index, const VContainer *data,
-                            VSAPoint &point) const;
-    bool GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path, vsizetype index, const VSAPoint &passmarkSAPoint,
-                                     const VContainer *data, VSAPoint &point, vsizetype passmarkIndex) const;
-    bool GetPassmarkNextSAPoints(const QVector<VPieceNode> &path, vsizetype index, const VSAPoint &passmarkSAPoint,
-                                 const VContainer *data, VSAPoint &point, vsizetype passmarkIndex) const;
+    auto GetPassmarkSAPoint(const QVector<VPieceNode> &path, vsizetype index, const VContainer *data,
+                            VSAPoint &point) const -> bool;
+    auto GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path, vsizetype index, const VSAPoint &passmarkSAPoint,
+                                     const VContainer *data, VSAPoint &point, vsizetype passmarkIndex) const -> bool;
+    auto GetPassmarkNextSAPoints(const QVector<VPieceNode> &path, vsizetype index, const VSAPoint &passmarkSAPoint,
+                                 const VContainer *data, VSAPoint &point, vsizetype passmarkIndex) const -> bool;
 
-    bool IsPassmarkVisible(const QVector<VPieceNode> &path, vsizetype passmarkIndex) const;
+    auto IsPassmarkVisible(const QVector<VPieceNode> &path, vsizetype passmarkIndex) const -> bool;
 
-    VPassmark CreatePassmark(const QVector<VPieceNode> &path, vsizetype previousIndex, vsizetype passmarkIndex,
-                             vsizetype nextIndex, const VContainer *data) const;
+    auto CreatePassmark(const QVector<VPieceNode> &path, vsizetype previousIndex, vsizetype passmarkIndex,
+                        vsizetype nextIndex, const VContainer *data) const -> VPassmark;
 
-    static int IsCSAStart(const QVector<CustomSARecord> &records, quint32 id);
+    static auto IsCSAStart(const QVector<CustomSARecord> &records, quint32 id) -> int;
 
-    QJsonObject MainPathToJson() const;
-    QJsonObject DBToJson(const VContainer *data) const;
+    auto MainPathToJson() const -> QJsonObject;
+    auto DBToJson(const VContainer *data) const -> QJsonObject;
 
-    qreal GlobalPassmarkLength(const VContainer *data) const;
+    auto GlobalPassmarkLength(const VContainer *data) const -> qreal;
 
     void TestInternalPathCuttingPathIntersection(const VContainer *data) const;
     void TestInternalPathsIntersections(const VContainer *data) const;
@@ -183,8 +183,7 @@ private:
 Q_DECLARE_TYPEINFO(VPiece, Q_MOVABLE_TYPE); // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class T>
-inline QPainterPath VPiece::SeamAllowancePath(const QVector<T> &points) const
+template <class T> inline auto VPiece::SeamAllowancePath(const QVector<T> &points) const -> QPainterPath
 {
     QPainterPath ekv;
 

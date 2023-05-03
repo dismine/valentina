@@ -46,13 +46,13 @@ public:
     void EnbleShowMode(bool disable);
     void HideVisibilityTrigger();
 
-    VPiecePath GetPiecePath() const;
+    auto GetPiecePath() const -> VPiecePath;
     void       SetPiecePath(const VPiecePath &path);
 
-    quint32 GetPieceId() const;
+    auto GetPieceId() const -> quint32;
     void    SetPieceId(quint32 id);
 
-    QString GetFormulaSAWidth() const;
+    auto GetFormulaSAWidth() const -> QString;
     void    SetFormulaSAWidth(const QString &formula);
 
     virtual void SetPiecesList(const QVector<quint32> &list) override;
@@ -65,7 +65,7 @@ protected:
     virtual void CheckState() final;
     virtual void ShowVisualization() override;
     virtual void closeEvent(QCloseEvent *event) override;
-    virtual bool IsValid() const final;
+    virtual auto IsValid() const -> bool final;
 
 private slots:
     void ShowContextMenu(const QPoint &pos);
@@ -134,24 +134,24 @@ private:
     void InitPassmarksList();
     void NodeAngleChanged(int index);
 
-    VPiecePath CreatePath() const;
+    auto CreatePath() const -> VPiecePath;
 
-    bool PathIsValid() const;
+    auto PathIsValid() const -> bool;
     void ValidObjects(bool value);
     void NewItem(const VPieceNode &node);
 
-    PiecePathType GetType() const;
+    auto GetType() const -> PiecePathType;
     void          SetType(PiecePathType type);
 
-    Qt::PenStyle GetPenType() const;
+    auto GetPenType() const -> Qt::PenStyle;
     void         SetPenType(const Qt::PenStyle &type);
 
-    bool IsCutPath() const;
+    auto IsCutPath() const -> bool;
     void SetCutPath(bool value);
 
-    QListWidgetItem *GetItemById(quint32 id);
+    auto GetItemById(quint32 id) -> QListWidgetItem *;
 
-    quint32 GetLastId() const;
+    auto GetLastId() const -> quint32;
 
     void SetCurrentSABefore(const QString &formula);
     void SetCurrentSAAfter(const QString &formula);
@@ -162,29 +162,29 @@ private:
 
     void EnabledManualPassmarkLength();
 
-    QString GetFormulaSAWidthBefore() const;
-    QString GetFormulaSAWidthAfter() const;
+    auto GetFormulaSAWidthBefore() const -> QString;
+    auto GetFormulaSAWidthAfter() const -> QString;
 
-    QString GetFormulaVisible() const;
+    auto GetFormulaVisible() const -> QString;
     void    SetFormulaVisible(const QString &formula);
 
-    QString GetFormulaPassmarkLength() const;
+    auto GetFormulaPassmarkLength() const -> QString;
     void    SetFormulaPassmarkLength(const QString &formula);
 
-    bool IsShowNotch() const;
+    auto IsShowNotch() const -> bool;
 
     void RefreshPathList(const VPiecePath &path);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogPiecePath::IsValid() const
+inline auto DialogPiecePath::IsValid() const -> bool
 {
     return m_flagName && m_flagError && m_flagFormula && m_flagFormulaBefore && m_flagFormulaAfter
             && m_flagFormulaVisible && m_flagFormulaPassmarkLength;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogPiecePath::IsShowNotch() const
+inline auto DialogPiecePath::IsShowNotch() const -> bool
 {
     return m_showMode && GetType() == PiecePathType::CustomSeamAllowance;
 }

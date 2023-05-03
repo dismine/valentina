@@ -54,70 +54,70 @@ VModifierKey::VModifierKey(Qt::Key key)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const VModifierKey& VModifierKey::Alt()
+auto VModifierKey::Alt() -> const VModifierKey &
 {
     static const VModifierKey key(Qt::AltModifier);
     return key;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const VModifierKey& VModifierKey::Control()
+auto VModifierKey::Control() -> const VModifierKey &
 {
     static const VModifierKey key(Qt::ControlModifier);
     return key;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const VModifierKey& VModifierKey::ControlShift()
+auto VModifierKey::ControlShift() -> const VModifierKey &
 {
     static const VModifierKey key(Qt::ControlModifier | Qt::ShiftModifier);
     return key;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const VModifierKey& VModifierKey::Meta()
+auto VModifierKey::Meta() -> const VModifierKey &
 {
     static const VModifierKey key(Qt::MetaModifier);
     return key;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const VModifierKey& VModifierKey::Shift()
+auto VModifierKey::Shift() -> const VModifierKey &
 {
     static const VModifierKey key(Qt::ShiftModifier);
     return key;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const VModifierKey& VModifierKey::Space()
+auto VModifierKey::Space() -> const VModifierKey &
 {
     static const VModifierKey key(Qt::Key_Space);
     return key;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const VModifierKey& VModifierKey::ReturnKey()
+auto VModifierKey::ReturnKey() -> const VModifierKey &
 {
     static const VModifierKey key(Qt::Key_Return);
     return key;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const VModifierKey &VModifierKey::EnterKey()
+auto VModifierKey::EnterKey() -> const VModifierKey &
 {
     static const VModifierKey key(Qt::Key_Enter);
     return key;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const VModifierKey& VModifierKey::Backspace()
+auto VModifierKey::Backspace() -> const VModifierKey &
 {
     static const VModifierKey key(Qt::Key_Backspace);
     return key;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const VModifierKey& VModifierKey::Escape()
+auto VModifierKey::Escape() -> const VModifierKey &
 {
     static const VModifierKey key(Qt::Key_Escape);
     return key;

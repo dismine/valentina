@@ -90,7 +90,7 @@ QmuTokenParser::QmuTokenParser(const QString &formula, bool osSeparator,
  * @param formula expression for test
  * @return true if fomula has single number
  */
-bool QmuTokenParser::IsSingle(const QString &formula)
+auto QmuTokenParser::IsSingle(const QString &formula) -> bool
 {
     QLocale c(QLocale::C);
     bool ok = false;
@@ -99,7 +99,7 @@ bool QmuTokenParser::IsSingle(const QString &formula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuTokenParser::Warning(const QString &warningMsg, qreal value)
+auto QmuTokenParser::Warning(const QString &warningMsg, qreal value) -> qreal
 {
     Q_UNUSED(warningMsg);
 

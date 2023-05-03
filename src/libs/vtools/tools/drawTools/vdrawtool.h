@@ -76,12 +76,12 @@ public:
     VDrawTool(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes, QObject *parent = nullptr);
     virtual ~VDrawTool() = default;
 
-    QString      getLineType() const;
+    auto getLineType() const -> QString;
     virtual void SetLineType(const QString &value);
 
-    virtual bool IsLabelVisible(quint32 id) const;
+    virtual auto IsLabelVisible(quint32 id) const -> bool;
 
-    QString      GetNotes() const;
+    auto GetNotes() const -> QString;
     virtual void SetNotes(const QString &notes);
 
 signals:
@@ -121,10 +121,10 @@ protected:
     virtual void    AddToFile() override;
     void            SaveOption(QSharedPointer<VGObject> &obj);
     virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
-    virtual QString MakeToolTip() const;
+    virtual auto MakeToolTip() const -> QString;
     virtual void    UpdateNamePosition(quint32 id, const QPointF &pos);
 
-    bool         CorrectDisable(bool disable, const QString &namePP) const;
+    auto CorrectDisable(bool disable, const QString &namePP) const -> bool;
 
     void         ReadAttributes();
     virtual void ReadToolAttributes(const QDomElement &domElement);
@@ -138,11 +138,9 @@ protected:
     template <class Item>
     void ShowItem(Item *item, quint32 id, bool enable);
 
-    template <class T>
-    QString ObjectName(quint32 id) const;
+    template <class T> auto ObjectName(quint32 id) const -> QString;
 
-    template <class T>
-    QString ObjectAliasSuffix(quint32 id) const;
+    template <class T> auto ObjectAliasSuffix(quint32 id) const -> QString;
 
     template <class T>
     static void InitDrawToolConnections(VMainGraphicsScene *scene, T *tool);
@@ -369,7 +367,7 @@ template <class T>
  * @brief ObjectName get object (point, curve, arc) name.
  * @param id object id in container.
  */
-QString VDrawTool::ObjectName(quint32 id) const
+auto VDrawTool::ObjectName(quint32 id) const -> QString
 {
     try
     {
@@ -390,7 +388,7 @@ template <class T>
  * @brief ObjectAlias get object (point, curve, arc) alias.
  * @param id object id in container.
  */
-QString VDrawTool::ObjectAliasSuffix(quint32 id) const
+auto VDrawTool::ObjectAliasSuffix(quint32 id) const -> QString
 {
     try
     {

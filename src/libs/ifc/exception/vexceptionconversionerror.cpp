@@ -54,8 +54,8 @@ VExceptionConversionError::VExceptionConversionError(const VExceptionConversionE
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionConversionError &
-VExceptionConversionError::operator=(const VExceptionConversionError &e) V_NOEXCEPT_EXPR (true)
+auto VExceptionConversionError::operator=(const VExceptionConversionError &e) V_NOEXCEPT_EXPR(true)
+    -> VExceptionConversionError &
 {
     if ( &e == this )
     {
@@ -71,7 +71,7 @@ VExceptionConversionError::operator=(const VExceptionConversionError &e) V_NOEXC
  * @brief ErrorMessage return main error message
  * @return main error message
  */
-QString VExceptionConversionError::ErrorMessage() const
+auto VExceptionConversionError::ErrorMessage() const -> QString
 {
     return QString("ExceptionConversionError: %1 \"%2\"").arg(error, str);
 }

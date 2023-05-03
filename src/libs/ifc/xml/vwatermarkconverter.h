@@ -45,16 +45,16 @@ public:
     static auto XSDSchemas() -> QHash <unsigned, QString>;
 
 protected:
-    virtual unsigned MinVer() const override;
-    virtual unsigned MaxVer() const override;
+    virtual auto MinVer() const -> unsigned override;
+    virtual auto MaxVer() const -> unsigned override;
 
-    virtual QString MinVerStr() const override;
-    virtual QString MaxVerStr() const override;
+    virtual auto MinVerStr() const -> QString override;
+    virtual auto MaxVerStr() const -> QString override;
 
     virtual void ApplyPatches() override;
     virtual void DowngradeToCurrentMaxVersion() override;
 
-    virtual bool IsReadOnly() const override {return false;}
+    virtual auto IsReadOnly() const -> bool override { return false; }
 
     auto Schemas() const -> QHash <unsigned, QString> override;
 

@@ -51,19 +51,19 @@ class VToolFlippingByAxis : public VAbstractFlipping
 public:
     virtual ~VToolFlippingByAxis() = default;
     virtual void SetDialog() override;
-    static VToolFlippingByAxis* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                       VAbstractPattern *doc, VContainer *data);
-    static VToolFlippingByAxis* Create(VToolFlippingByAxisInitData initData);
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolFlippingByAxis *;
+    static auto Create(VToolFlippingByAxisInitData initData) -> VToolFlippingByAxis *;
 
     static const QString ToolType;
 
-    virtual int type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::FlippingByAxis)};
 
-    AxisType GetAxisType() const;
+    auto GetAxisType() const -> AxisType;
     void     SetAxisType(AxisType value);
 
-    QString OriginPointName() const;
+    auto OriginPointName() const -> QString;
 
     virtual void ShowVisualization(bool show) override;
 protected slots:
@@ -74,7 +74,8 @@ protected:
                                QList<quint32> &newDependencies) override;
     virtual void    ReadToolAttributes(const QDomElement &domElement) override;
     virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual QString MakeToolTip() const override;
+    virtual auto MakeToolTip() const -> QString override;
+
 private:
     Q_DISABLE_COPY_MOVE(VToolFlippingByAxis) // NOLINT
 

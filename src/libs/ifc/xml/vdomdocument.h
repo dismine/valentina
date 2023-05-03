@@ -98,7 +98,7 @@ public:
 
     explicit VDomDocument(QObject *parent = nullptr);
     virtual ~VDomDocument();
-    QDomElement elementById(quint32 id, const QString &tagName = QString(), bool updateCache=true);
+    auto elementById(quint32 id, const QString &tagName = QString(), bool updateCache = true) -> QDomElement;
 
     template <typename T>
     void SetAttribute(QDomElement &domElement, const QString &name, const T &value) const;
@@ -107,52 +107,52 @@ public:
     void SetAttributeOrRemoveIf(QDomElement &domElement, const QString &name, const T &value,
                                 const std::function<bool(const T&)> &removeCondition) const;
 
-    static quint32 GetParametrUInt(const QDomElement& domElement, const QString &name, const QString &defValue);
-    static int     GetParametrInt(const QDomElement& domElement, const QString &name, const QString &defValue);
-    static bool    GetParametrBool(const QDomElement& domElement, const QString &name, const QString &defValue);
+    static auto GetParametrUInt(const QDomElement &domElement, const QString &name, const QString &defValue) -> quint32;
+    static auto GetParametrInt(const QDomElement &domElement, const QString &name, const QString &defValue) -> int;
+    static auto GetParametrBool(const QDomElement &domElement, const QString &name, const QString &defValue) -> bool;
 
-    static NodeUsage GetParametrUsage(const QDomElement& domElement, const QString &name);
+    static auto GetParametrUsage(const QDomElement &domElement, const QString &name) -> NodeUsage;
     static void      SetParametrUsage(QDomElement& domElement, const QString &name, const NodeUsage &value);
 
-    static QString GetParametrString(const QDomElement& domElement, const QString &name,
-                                     const QString &defValue = QString());
-    static QString GetParametrEmptyString(const QDomElement& domElement, const QString &name);
-    static qreal   GetParametrDouble(const QDomElement& domElement, const QString &name, const QString &defValue);
-    static quint32 GetParametrId(const QDomElement& domElement);
+    static auto GetParametrString(const QDomElement &domElement, const QString &name,
+                                  const QString &defValue = QString()) -> QString;
+    static auto GetParametrEmptyString(const QDomElement &domElement, const QString &name) -> QString;
+    static auto GetParametrDouble(const QDomElement &domElement, const QString &name, const QString &defValue) -> qreal;
+    static auto GetParametrId(const QDomElement &domElement) -> quint32;
 
     virtual void   setXMLContent(const QString &fileName);
-    static QString UnitsHelpString();
+    static auto UnitsHelpString() -> QString;
 
-    QDomElement CreateElementWithText(const QString& tagName, const QString& text);
+    auto CreateElementWithText(const QString &tagName, const QString &text) -> QDomElement;
 
-    virtual bool   SaveDocument(const QString &fileName, QString &error);
-    QString        Major() const;
-    QString        Minor() const;
-    QString        Patch() const;
-    virtual QString GetFormatVersionStr() const;
-    static unsigned GetFormatVersion(const QString &version);
+    virtual auto SaveDocument(const QString &fileName, QString &error) -> bool;
+    auto Major() const -> QString;
+    auto Minor() const -> QString;
+    auto Patch() const -> QString;
+    virtual auto GetFormatVersionStr() const -> QString;
+    static auto GetFormatVersion(const QString &version) -> unsigned;
     static void    RemoveAllChildren(QDomElement &domElement);
 
-    QDomNode       ParentNodeById(const quint32 &nodeId);
-    QDomElement    CloneNodeById(const quint32 &nodeId);
-    QDomElement    NodeById(const quint32 &nodeId, const QString &tagName = QString());
+    auto ParentNodeById(const quint32 &nodeId) -> QDomNode;
+    auto CloneNodeById(const quint32 &nodeId) -> QDomElement;
+    auto NodeById(const quint32 &nodeId, const QString &tagName = QString()) -> QDomElement;
 
-    static bool    SafeCopy(const QString &source, const QString &destination, QString &error);
+    static auto SafeCopy(const QString &source, const QString &destination, QString &error) -> bool;
 
-    QVector<VLabelTemplateLine> GetLabelTemplate(const QDomElement &element) const;
+    auto GetLabelTemplate(const QDomElement &element) const -> QVector<VLabelTemplateLine>;
     void                        SetLabelTemplate(QDomElement &element, const QVector<VLabelTemplateLine> &lines);
 
     void           TestUniqueId() const;
 
     void RefreshElementIdCache();
 
-    static bool Compare(const QDomElement &element1, const QDomElement &element2);
+    static auto Compare(const QDomElement &element1, const QDomElement &element2) -> bool;
 
 protected:
-    bool           setTagText(const QString &tag, const QString &text);
-    bool           setTagText(QDomElement &domElement, const QString &text);
-    QDomElement    UniqueTag(const QString &tagName) const;
-    QString        UniqueTagText(const QString &tagName, const QString &defVal = QString()) const;
+    auto setTagText(const QString &tag, const QString &text) -> bool;
+    auto setTagText(QDomElement &domElement, const QString &text) -> bool;
+    auto UniqueTag(const QString &tagName) const -> QDomElement;
+    auto UniqueTagText(const QString &tagName, const QString &defVal = QString()) const -> QString;
     void           CollectId(const QDomElement &node, QVector<quint32> &vector)const;
 
     static void ValidateVersion(const QString &version);
@@ -167,10 +167,10 @@ private:
     QHash<quint32, QDomElement>  m_elementIdCache;
     QFutureWatcher<QHash<quint32, QDomElement>> *m_watcher;
 
-    static bool find(QHash<quint32, QDomElement> &cache, const QDomElement &node, quint32 id);
-    QHash<quint32, QDomElement> RefreshCache(const QDomElement &root) const;
+    static auto find(QHash<quint32, QDomElement> &cache, const QDomElement &node, quint32 id) -> bool;
+    auto RefreshCache(const QDomElement &root) const -> QHash<quint32, QDomElement>;
 
-    bool SaveCanonicalXML(QIODevice *file, int indent, QString &error) const;
+    auto SaveCanonicalXML(QIODevice *file, int indent, QString &error) const -> bool;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

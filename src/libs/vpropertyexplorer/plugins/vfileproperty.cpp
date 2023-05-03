@@ -52,8 +52,7 @@ void VPE::VFileProperty::setFileFilters(const QString& filefilters)
     static_cast<VFilePropertyPrivate*>(d_ptr)->FileFilters = filefilters;
 }
 
-
-QString VPE::VFileProperty::getFileFilters() const
+auto VPE::VFileProperty::getFileFilters() const -> QString
 {
     return static_cast<VFilePropertyPrivate*>(d_ptr)->FileFilters;
 }
@@ -64,14 +63,12 @@ void VPE::VFileProperty::setFile(const QString& file)
     d_ptr->VariantValue.setValue(file);
 }
 
-
-QString VPE::VFileProperty::getFile() const
+auto VPE::VFileProperty::getFile() const -> QString
 {
     return d_ptr->VariantValue.toString();
 }
 
-
-QVariant VPE::VFileProperty::data (int column, int role) const
+auto VPE::VFileProperty::data(int column, int role) const -> QVariant
 {
     if (column == DPC_Data && (Qt::DisplayRole == role || Qt::EditRole == role))
     {
@@ -82,9 +79,8 @@ QVariant VPE::VFileProperty::data (int column, int role) const
         return VProperty::data(column, role);
 }
 
-
-QWidget* VPE::VFileProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
-                                     const QAbstractItemDelegate* delegate)
+auto VPE::VFileProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
+                                      const QAbstractItemDelegate *delegate) -> QWidget *
 {
     Q_UNUSED(options)
 
@@ -101,8 +97,7 @@ QWidget* VPE::VFileProperty::createEditor(QWidget * parent, const QStyleOptionVi
     return tmpWidget;
 }
 
-
-bool VPE::VFileProperty::setEditorData(QWidget* editor)
+auto VPE::VFileProperty::setEditorData(QWidget *editor) -> bool
 {
     VFileEditWidget* tmpWidget = qobject_cast<VFileEditWidget*>(editor);
     if (tmpWidget)
@@ -115,8 +110,7 @@ bool VPE::VFileProperty::setEditorData(QWidget* editor)
     return true;
 }
 
-
-QVariant VPE::VFileProperty::getEditorData(const QWidget *editor) const
+auto VPE::VFileProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
     const VFileEditWidget* tmpWidget = qobject_cast<const VFileEditWidget*>(editor);
     if (tmpWidget)
@@ -139,7 +133,7 @@ void VPE::VFileProperty::setSetting(const QString& key, const QVariant& value)
     }
 }
 
-QVariant VPE::VFileProperty::getSetting(const QString& key) const
+auto VPE::VFileProperty::getSetting(const QString &key) const -> QVariant
 {
     if (key == "FileFilters")
     {
@@ -153,22 +147,22 @@ QVariant VPE::VFileProperty::getSetting(const QString& key) const
         return VProperty::getSetting(key);
 }
 
-QStringList VPE::VFileProperty::getSettingKeys() const
+auto VPE::VFileProperty::getSettingKeys() const -> QStringList
 {
     return QStringList("FileFilters") << "Directory";
 }
 
-QString VPE::VFileProperty::type() const
+auto VPE::VFileProperty::type() const -> QString
 {
     return "file";
 }
 
-VPE::VProperty* VPE::VFileProperty::clone(bool include_children, VProperty* container) const
+auto VPE::VFileProperty::clone(bool include_children, VProperty *container) const -> VPE::VProperty *
 {
     return VProperty::clone(include_children, container ? container : new VFileProperty(getName()));
 }
 
-bool VPE::VFileProperty::isDirectory() const
+auto VPE::VFileProperty::isDirectory() const -> bool
 {
     return static_cast<VFilePropertyPrivate*>(d_ptr)->Directory;
 }

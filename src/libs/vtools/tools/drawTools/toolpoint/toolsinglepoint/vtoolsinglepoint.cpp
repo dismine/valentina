@@ -96,7 +96,7 @@ VToolSinglePoint::VToolSinglePoint(VAbstractPattern *doc, VContainer *data, quin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolSinglePoint::name() const
+auto VToolSinglePoint::name() const -> QString
 {
     return ObjectName<VPointF>(m_id);
 }
@@ -122,17 +122,15 @@ void VToolSinglePoint::GroupVisibility(quint32 object, bool visible)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VToolSinglePoint::IsLabelVisible(quint32 id) const
+auto VToolSinglePoint::IsLabelVisible(quint32 id) const -> bool
 {
     if (m_id == id)
     {
         const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
         return point->IsShowLabel();
     }
-    else
-    {
-        return false;
-    }
+
+    return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -268,7 +266,7 @@ void VToolSinglePoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
  * @param value value.
  * @return value.
  */
-QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+auto VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) -> QVariant
 {
     if (change == QGraphicsItem::ItemSelectedHasChanged)
     {

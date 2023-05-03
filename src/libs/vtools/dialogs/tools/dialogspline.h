@@ -55,11 +55,11 @@ public:
     DialogSpline(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogSpline() override;
 
-    VSpline GetSpline() const;
+    auto GetSpline() const -> VSpline;
     void    SetSpline(const VSpline &spline);
 
     void    SetNotes(const QString &notes);
-    QString GetNotes() const;
+    auto GetNotes() const -> QString;
 
 public slots:
     virtual void  ChosenObject(quint32 id, const SceneObject &type) override;
@@ -72,7 +72,7 @@ protected:
      */
     virtual void  SaveData() override;
     virtual void  closeEvent(QCloseEvent *event) override;
-    virtual bool  IsValid() const final;
+    virtual auto IsValid() const -> bool final;
 private slots:
     void DeployAngle1TextEdit();
     void DeployAngle2TextEdit();
@@ -126,14 +126,14 @@ private:
     /** @brief number number of handled objects */
     qint32 number{0};
 
-    const QSharedPointer<VPointF> GetP1() const;
-    const QSharedPointer<VPointF> GetP4() const;
+    auto GetP1() const -> const QSharedPointer<VPointF>;
+    auto GetP4() const -> const QSharedPointer<VPointF>;
 
-    VSpline CurrentSpline() const;
+    auto CurrentSpline() const -> VSpline;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogSpline::IsValid() const
+inline auto DialogSpline::IsValid() const -> bool
 {
     return flagAngle1 && flagAngle2 && flagLength1 && flagLength2 && flagError && flagAlias;
 }

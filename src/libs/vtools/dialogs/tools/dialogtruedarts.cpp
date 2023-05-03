@@ -100,13 +100,13 @@ DialogTrueDarts::~DialogTrueDarts()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogTrueDarts::GetFirstNewDartPointName()
+auto DialogTrueDarts::GetFirstNewDartPointName() -> QString
 {
     return d1PointName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogTrueDarts::GetSecondNewDartPointName()
+auto DialogTrueDarts::GetSecondNewDartPointName() -> QString
 {
     return d2PointName;
 }
@@ -133,7 +133,7 @@ void DialogTrueDarts::SetNewDartPointNames(const QString &firstPoint, const QStr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogTrueDarts::GetFirstBasePointId() const
+auto DialogTrueDarts::GetFirstBasePointId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxFirstBasePoint);
 }
@@ -149,7 +149,7 @@ void DialogTrueDarts::SetFirstBasePointId(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogTrueDarts::GetSecondBasePointId() const
+auto DialogTrueDarts::GetSecondBasePointId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxSecondBasePoint);
 }
@@ -165,7 +165,7 @@ void DialogTrueDarts::SetSecondBasePointId(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogTrueDarts::GetFirstDartPointId() const
+auto DialogTrueDarts::GetFirstDartPointId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxFirstDartPoint);
 }
@@ -181,7 +181,7 @@ void DialogTrueDarts::SetFirstDartPointId(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogTrueDarts::GetSecondDartPointId() const
+auto DialogTrueDarts::GetSecondDartPointId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxSecondDartPoint);
 }
@@ -197,7 +197,7 @@ void DialogTrueDarts::SetSecondDartPointId(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogTrueDarts::GetThirdDartPointId() const
+auto DialogTrueDarts::GetThirdDartPointId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxThirdDartPoint);
 }
@@ -436,7 +436,7 @@ void DialogTrueDarts::SetNotes(const QString &notes)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogTrueDarts::GetNotes() const
+auto DialogTrueDarts::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }

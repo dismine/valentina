@@ -30,8 +30,8 @@ namespace qmu
 {
 
 //---------------------------------------------------------------------------------------------------------------------
-QmuTranslation QmuTranslation::translate(const char *context, const char *sourceText,
-                                         const char *disambiguation, int n)
+auto QmuTranslation::translate(const char *context, const char *sourceText, const char *disambiguation, int n)
+    -> QmuTranslation
 {
     if (n < 0)
     {
@@ -57,7 +57,7 @@ QmuTranslation::QmuTranslation(const QString &context, const QString &sourceText
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QmuTranslation &QmuTranslation::operator=(const QmuTranslation &tr)
+auto QmuTranslation::operator=(const QmuTranslation &tr) -> QmuTranslation &
 {
     if ( &tr == this )
     {
@@ -83,7 +83,7 @@ QmuTranslation::QmuTranslation(const QmuTranslation &tr)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QString QmuTranslation::translate(const QString &locale) const
+auto QmuTranslation::translate(const QString &locale) const -> QString
 {
     if (cachedTranslation.isEmpty() || locale.isEmpty() || localeName != locale)
     {

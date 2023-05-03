@@ -51,15 +51,15 @@ Q_DECLARE_TYPEINFO(SourceItem, Q_MOVABLE_TYPE); // NOLINT
 const int labelMX = 10;
 const int labelMY = 15;
 
-QVector<quint32> SourceToObjects(const QVector<SourceItem> &source);
+auto SourceToObjects(const QVector<SourceItem> &source) -> QVector<quint32>;
 
-QString OriginAlias(quint32 id, const QVector<SourceItem> &source, const QSharedPointer<VGObject> &obj);
+auto OriginAlias(quint32 id, const QVector<SourceItem> &source, const QSharedPointer<VGObject> &obj) -> QString;
 
-bool SourceAliasValid(const SourceItem &item, const QSharedPointer<VGObject> &obj, const VContainer *data,
-                      const QString &originAlias);
+auto SourceAliasValid(const SourceItem &item, const QSharedPointer<VGObject> &obj, const VContainer *data,
+                      const QString &originAlias) -> bool;
 
-QMap<QString, QIcon> OperationLineStylesPics();
+auto OperationLineStylesPics() -> QMap<QString, QIcon>;
 
-int ConfirmDeletion();
+auto ConfirmDeletion() -> int;
 
 #endif // TOOLSDEF_H

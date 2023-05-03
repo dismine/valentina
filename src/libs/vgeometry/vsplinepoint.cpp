@@ -65,7 +65,7 @@ VFSplinePoint::VFSplinePoint(const VFSplinePoint &point)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VFSplinePoint &VFSplinePoint::operator=(const VFSplinePoint &point)
+auto VFSplinePoint::operator=(const VFSplinePoint &point) -> VFSplinePoint &
 {
     if ( &point == this )
     {
@@ -82,7 +82,7 @@ VFSplinePoint::VFSplinePoint(VFSplinePoint &&point) Q_DECL_NOTHROW
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VFSplinePoint &VFSplinePoint::operator=(VFSplinePoint &&point) Q_DECL_NOTHROW
+auto VFSplinePoint::operator=(VFSplinePoint &&point) Q_DECL_NOTHROW->VFSplinePoint &
 {
     std::swap(d, point.d);
     return *this;
@@ -128,7 +128,7 @@ void VFSplinePoint::SetAngle2(const qreal &value)
  * @brief P return point.
  * @return point.
  */
-VPointF VFSplinePoint::P() const
+auto VFSplinePoint::P() const -> VPointF
 {
     return d->pSpline;
 }
@@ -148,7 +148,7 @@ void VFSplinePoint::SetP(const VPointF &value)
  * @brief Angle1 return first angle of spline.
  * @return angle.
  */
-qreal VFSplinePoint::Angle1() const
+auto VFSplinePoint::Angle1() const -> qreal
 {
     return d->angle1;
 }
@@ -158,7 +158,7 @@ qreal VFSplinePoint::Angle1() const
  * @brief Angle2 return second angle of spline.
  * @return angle.
  */
-qreal VFSplinePoint::Angle2() const
+auto VFSplinePoint::Angle2() const -> qreal
 {
     return d->angle2;
 }
@@ -168,7 +168,7 @@ qreal VFSplinePoint::Angle2() const
  * @brief KAsm1 return coefficient of length first control line.
  * @return coefficient.
  */
-qreal VFSplinePoint::KAsm1() const
+auto VFSplinePoint::KAsm1() const -> qreal
 {
     return d->kAsm1;
 }
@@ -188,7 +188,7 @@ void VFSplinePoint::SetKAsm1(const qreal &value)
  * @brief KAsm2 return coefficient of length second control line.
  * @return coefficient.
  */
-qreal VFSplinePoint::KAsm2() const
+auto VFSplinePoint::KAsm2() const -> qreal
 {
     return d->kAsm2;
 }
@@ -224,7 +224,7 @@ VSplinePoint::VSplinePoint(const VSplinePoint &point)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSplinePoint &VSplinePoint::operator=(const VSplinePoint &point)
+auto VSplinePoint::operator=(const VSplinePoint &point) -> VSplinePoint &
 {
     if ( &point == this )
     {
@@ -241,7 +241,7 @@ VSplinePoint::VSplinePoint(VSplinePoint &&point) Q_DECL_NOTHROW
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VSplinePoint &VSplinePoint::operator=(VSplinePoint &&point) Q_DECL_NOTHROW
+auto VSplinePoint::operator=(VSplinePoint &&point) Q_DECL_NOTHROW->VSplinePoint &
 {
     std::swap(d, point.d);
     return *this;
@@ -254,7 +254,7 @@ VSplinePoint::~VSplinePoint()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPointF VSplinePoint::P() const
+auto VSplinePoint::P() const -> VPointF
 {
     return d->pSpline;
 }
@@ -266,13 +266,13 @@ void VSplinePoint::SetP(const VPointF &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VSplinePoint::Angle1() const
+auto VSplinePoint::Angle1() const -> qreal
 {
     return d->angle1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VSplinePoint::Angle1Formula() const
+auto VSplinePoint::Angle1Formula() const -> QString
 {
     return d->angle1F;
 }
@@ -292,13 +292,13 @@ void VSplinePoint::SetAngle1(const qreal &value, const QString &angle1F)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VSplinePoint::Angle2() const
+auto VSplinePoint::Angle2() const -> qreal
 {
     return d->angle2;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VSplinePoint::Angle2Formula() const
+auto VSplinePoint::Angle2Formula() const -> QString
 {
     return d->angle2F;
 }
@@ -318,13 +318,13 @@ void VSplinePoint::SetAngle2(const qreal &value, const QString &angle2F)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VSplinePoint::Length1() const
+auto VSplinePoint::Length1() const -> qreal
 {
     return d->length1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VSplinePoint::Length1Formula() const
+auto VSplinePoint::Length1Formula() const -> QString
 {
     return d->length1F;
 }
@@ -337,13 +337,13 @@ void VSplinePoint::SetLength1(const qreal &value, const QString &length1F)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VSplinePoint::Length2() const
+auto VSplinePoint::Length2() const -> qreal
 {
     return d->length2;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VSplinePoint::Length2Formula() const
+auto VSplinePoint::Length2Formula() const -> QString
 {
     return d->length2F;
 }
@@ -356,14 +356,14 @@ void VSplinePoint::SetLength2(const qreal &value, const QString &length2F)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSplinePoint::IsMovable() const
+auto VSplinePoint::IsMovable() const -> bool
 {
     return qmu::QmuTokenParser::IsSingle(d->angle1F) && qmu::QmuTokenParser::IsSingle(d->angle2F) &&
            qmu::QmuTokenParser::IsSingle(d->length1F) && qmu::QmuTokenParser::IsSingle(d->length2F);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QJsonObject VSplinePoint::ToJson() const
+auto VSplinePoint::ToJson() const -> QJsonObject
 {
     QJsonObject object
     {

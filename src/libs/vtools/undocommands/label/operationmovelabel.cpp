@@ -66,7 +66,7 @@ OperationMoveLabel::OperationMoveLabel(quint32 idTool, VAbstractPattern *doc, co
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool OperationMoveLabel::mergeWith(const QUndoCommand *command)
+auto OperationMoveLabel::mergeWith(const QUndoCommand *command) -> bool
 {
     const OperationMoveLabel *moveCommand = static_cast<const OperationMoveLabel *>(command);
     SCASSERT(moveCommand != nullptr)
@@ -84,7 +84,7 @@ bool OperationMoveLabel::mergeWith(const QUndoCommand *command)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int OperationMoveLabel::id() const
+auto OperationMoveLabel::id() const -> int
 {
     return static_cast<int>(UndoCommand::RotationMoveLabel);
 }

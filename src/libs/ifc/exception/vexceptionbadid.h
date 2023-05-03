@@ -45,16 +45,17 @@ public:
     VExceptionBadId(const QString &error, const quint32 &id) V_NOEXCEPT_EXPR (true);
     VExceptionBadId(const QString &error, const QString &key) V_NOEXCEPT_EXPR (true);
     VExceptionBadId(const VExceptionBadId &e) V_NOEXCEPT_EXPR (true);
-    VExceptionBadId &operator=(const VExceptionBadId &e) V_NOEXCEPT_EXPR (true);
+    auto operator=(const VExceptionBadId &e) V_NOEXCEPT_EXPR(true) -> VExceptionBadId &;
     virtual         ~VExceptionBadId() V_NOEXCEPT_EXPR (true) = default;
 
     Q_NORETURN virtual void raise() const override { throw *this; }
 
-    Q_REQUIRED_RESULT virtual VExceptionBadId *clone() const override { return new VExceptionBadId(*this); }
+    Q_REQUIRED_RESULT virtual auto clone() const -> VExceptionBadId * override { return new VExceptionBadId(*this); }
 
-    virtual QString ErrorMessage() const override;
-    quint32         BadId() const;
-    QString         BadKey() const;
+    virtual auto ErrorMessage() const -> QString override;
+    auto BadId() const -> quint32;
+    auto BadKey() const -> QString;
+
 protected:
     /** @brief id id */
     quint32          id;
@@ -68,7 +69,7 @@ protected:
  * @brief BadId return bad id
  * @return id
  */
-inline quint32 VExceptionBadId::BadId() const
+inline auto VExceptionBadId::BadId() const -> quint32
 {
     return id;
 }
@@ -78,7 +79,7 @@ inline quint32 VExceptionBadId::BadId() const
  * @brief BadKey return bad key
  * @return key
  */
-inline QString VExceptionBadId::BadKey() const
+inline auto VExceptionBadId::BadKey() const -> QString
 {
     return key;
 }

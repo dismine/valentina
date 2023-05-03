@@ -108,7 +108,7 @@ DialogFlippingByAxis::~DialogFlippingByAxis()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogFlippingByAxis::GetOriginPointId() const
+auto DialogFlippingByAxis::GetOriginPointId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxOriginPoint);
 }
@@ -123,7 +123,7 @@ void DialogFlippingByAxis::SetOriginPointId(quint32 value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-AxisType DialogFlippingByAxis::GetAxisType() const
+auto DialogFlippingByAxis::GetAxisType() const -> AxisType
 {
     return getCurrentCrossPoint<AxisType>(ui->comboBoxAxisType);
 }
@@ -136,14 +136,14 @@ void DialogFlippingByAxis::SetAxisType(AxisType type)
     {
         ui->comboBoxAxisType->setCurrentIndex(index);
 
-        auto operation = qobject_cast<VisToolFlippingByAxis *>(vis);
+        auto *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
         SCASSERT(operation != nullptr)
         operation->SetAxisType(type);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogFlippingByAxis::GetSuffix() const
+auto DialogFlippingByAxis::GetSuffix() const -> QString
 {
     return m_suffix;
 }
@@ -156,7 +156,7 @@ void DialogFlippingByAxis::SetSuffix(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogFlippingByAxis::GetVisibilityGroupName() const
+auto DialogFlippingByAxis::GetVisibilityGroupName() const -> QString
 {
     return ui->lineEditVisibilityGroup->text();
 }
@@ -168,7 +168,7 @@ void DialogFlippingByAxis::SetVisibilityGroupName(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogFlippingByAxis::HasLinkedVisibilityGroup() const
+auto DialogFlippingByAxis::HasLinkedVisibilityGroup() const -> bool
 {
     return ui->groupBoxVisibilityGroup->isChecked();
 }
@@ -186,7 +186,7 @@ void DialogFlippingByAxis::SetVisibilityGroupTags(const QStringList &tags)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList DialogFlippingByAxis::GetVisibilityGroupTags() const
+auto DialogFlippingByAxis::GetVisibilityGroupTags() const -> QStringList
 {
     return ui->lineEditGroupTags->text().split(',');
 }
@@ -246,7 +246,7 @@ void DialogFlippingByAxis::ShowDialog(bool click)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<SourceItem> DialogFlippingByAxis::GetSourceObjects() const
+auto DialogFlippingByAxis::GetSourceObjects() const -> QVector<SourceItem>
 {
     return sourceObjects;
 }
@@ -333,23 +333,21 @@ void DialogFlippingByAxis::SuffixChanged()
             CheckState();
             return;
         }
-        else
+
+        if (m_suffix != suffix)
         {
-            if (m_suffix != suffix)
+            QRegularExpression rx(NameRegExp());
+            const QStringList uniqueNames = data->AllUniqueNames();
+            for (auto &uniqueName : uniqueNames)
             {
-                QRegularExpression rx(NameRegExp());
-                const QStringList uniqueNames = data->AllUniqueNames();
-                for (auto &uniqueName : uniqueNames)
+                const QString name = uniqueName + suffix;
+                if (not rx.match(name).hasMatch() || not data->IsUnique(name))
                 {
-                    const QString name = uniqueName + suffix;
-                    if (not rx.match(name).hasMatch() || not data->IsUnique(name))
-                    {
-                        flagName = false;
-                        ChangeColor(ui->labelSuffix, errorColor);
-                        ui->labelStatus->setText(tr("Invalid suffix"));
-                        CheckState();
-                        return;
-                    }
+                    flagName = false;
+                    ChangeColor(ui->labelSuffix, errorColor);
+                    ui->labelStatus->setText(tr("Invalid suffix"));
+                    CheckState();
+                    return;
                 }
             }
         }
@@ -638,10 +636,8 @@ void DialogFlippingByAxis::ValidateSourceAliases()
                 CheckState();
                 return;
             }
-            else
-            {
-                SetAliasValid(sourceItem.id, true);
-            }
+
+            SetAliasValid(sourceItem.id, true);
         }
     }
 
@@ -674,13 +670,13 @@ void DialogFlippingByAxis::SetNotes(const QString &notes)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogFlippingByAxis::GetNotes() const
+auto DialogFlippingByAxis::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogFlippingByAxis::IsValid() const
+auto DialogFlippingByAxis::IsValid() const -> bool
 {
     bool ready = flagError && flagName && flagGroupName && flagAlias;
 

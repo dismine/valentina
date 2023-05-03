@@ -53,20 +53,20 @@ public:
     DialogLine(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogLine() override;
 
-    quint32        GetFirstPoint() const;
+    auto GetFirstPoint() const -> quint32;
     void           SetFirstPoint(quint32 value);
 
-    quint32        GetSecondPoint() const;
+    auto GetSecondPoint() const -> quint32;
     void           SetSecondPoint(quint32 value);
 
-    QString        GetTypeLine() const;
+    auto GetTypeLine() const -> QString;
     void           SetTypeLine(const QString &value);
 
-    QString        GetLineColor() const;
+    auto GetLineColor() const -> QString;
     void           SetLineColor(const QString &value);
 
     void    SetNotes(const QString &notes);
-    QString GetNotes() const;
+    auto GetNotes() const -> QString;
 public slots:
     virtual void   ChosenObject(quint32 id, const SceneObject &type) override;
     virtual void   PointNameChanged() override;
@@ -76,7 +76,8 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     virtual void   SaveData() override;
-    virtual bool   IsValid() const final;
+    virtual auto IsValid() const -> bool final;
+
 private:
     Q_DISABLE_COPY_MOVE(DialogLine) // NOLINT
 
@@ -90,7 +91,7 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogLine::IsValid() const
+inline auto DialogLine::IsValid() const -> bool
 {
     return flagError;
 }

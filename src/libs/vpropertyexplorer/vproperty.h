@@ -87,48 +87,48 @@ public:
     virtual ~VProperty() override;
 
     //! Returns a string containing the type of the property
-    virtual QString type() const;
+    virtual auto type() const -> QString;
 
     //! Get the data how it should be displayed
-    virtual QVariant data (int column = DPC_Name, int role = Qt::DisplayRole) const;
+    virtual auto data(int column = DPC_Name, int role = Qt::DisplayRole) const -> QVariant;
 
     //! This is used by the model to set the data
     //! \param data The data to set
     //! \param role The role. Default is Qt::EditRole
     //! \return Returns true, if the data was changed, false if not.
-    virtual bool setData (const QVariant& data, int role = Qt::EditRole);
+    virtual auto setData(const QVariant &data, int role = Qt::EditRole) -> bool;
 
     //! This is called by the delegate when the property value is being drawn.
     //! The standard implementation doesn't do anything.
     //! If you reimplement this in a sub property, make sure to return true or the delegate will draw the item.
-    virtual bool paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index,
-                       const QAbstractItemDelegate* delegate) const;
+    virtual auto paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index,
+                       const QAbstractItemDelegate *delegate) const -> bool;
 
     //! Returns an editor widget, or NULL if it doesn't supply one
     //! \param parent The widget to which the editor will be added as a child
     //! \options Render options
     //! \delegate A pointer to the QAbstractItemDelegate requesting the editor. This can be used to connect signals and
     //! slots.
-    virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& options,
-                                  const QAbstractItemDelegate* delegate);
+    virtual auto createEditor(QWidget *parent, const QStyleOptionViewItem &options,
+                              const QAbstractItemDelegate *delegate) -> QWidget *;
 
     //! Sets the property's data to the editor (returns false, if the standard delegate should do that)
-    virtual bool setEditorData(QWidget* editor);
+    virtual auto setEditorData(QWidget *editor) -> bool;
 
     //! Gets the data from the widget
-    virtual QVariant getEditorData(const QWidget* editor) const;
+    virtual auto getEditorData(const QWidget *editor) const -> QVariant;
 
     //! Returns item flags
-    virtual Qt::ItemFlags flags(int column = DPC_Name) const;
+    virtual auto flags(int column = DPC_Name) const -> Qt::ItemFlags;
 
     //! Sets the value of the property
     virtual void setValue(const QVariant& value);
 
     //! Returns the value of the property as a QVariant
-    virtual QVariant getValue() const;
+    virtual auto getValue() const -> QVariant;
 
     //! Serializes the value to a string
-    virtual QString serialize() const;
+    virtual auto serialize() const -> QString;
 
     //! Deserializes the value from a string
     virtual void deserialize(const QString& value);
@@ -149,31 +149,31 @@ public:
     virtual void setName(const QString& name);
 
     //! Gets the name of the property
-    virtual QString getName() const;
+    virtual auto getName() const -> QString;
 
     //! Sets the name of the property
     virtual void setDescription(const QString& desc);
 
     //! Gets the name of the property
-    virtual QString getDescription() const;
+    virtual auto getDescription() const -> QString;
 
     //! Adds a child to this property
-    virtual vpesizetype addChild(VProperty* child);
+    virtual auto addChild(VProperty *child) -> vpesizetype;
 
     //! Returns a reference to the list of children
-    virtual QList<VProperty*>& getChildren();
+    virtual auto getChildren() -> QList<VProperty *> &;
 
     //! Returns a reference to the list of children
-    virtual const QList<VProperty*>& getChildren() const;
+    virtual auto getChildren() const -> const QList<VProperty *> &;
 
     //! Returns the child at a certain row
-    virtual VProperty* getChild(int row) const;
+    virtual auto getChild(int row) const -> VProperty *;
 
     //! Gets the number of children
-    virtual vpesizetype getRowCount() const;
+    virtual auto getRowCount() const -> vpesizetype;
 
     //! Gets the parent of this property
-    virtual VProperty* getParent() const;
+    virtual auto getParent() const -> VProperty *;
 
     //! Sets the parent of this property
     virtual void setParent(VProperty* parent);
@@ -182,13 +182,13 @@ public:
     virtual void removeChild(VProperty* child);
 
     //! Returns the row the child has
-    virtual vpesizetype getChildRow(VProperty* child) const;
+    virtual auto getChildRow(VProperty *child) const -> vpesizetype;
 
     //! Returns whether the views have to update the parent of this property if it changes
-    virtual bool getUpdateParent() const;
+    virtual auto getUpdateParent() const -> bool;
 
     //! Returns whether the views have to update the children of this property if it changes
-    virtual bool getUpdateChildren() const;
+    virtual auto getUpdateChildren() const -> bool;
 
     //! Sets whether the views should update Parents or children after this property changes
     virtual void setUpdateBehaviour(bool update_parent, bool update_children);
@@ -198,25 +198,26 @@ public:
     virtual void setSettings(const QMap<QString, QVariant>& settings);
 
     //! Get the settings.
-    virtual QMap<QString, QVariant> getSettings() const;
+    virtual auto getSettings() const -> QMap<QString, QVariant>;
 
     //! Sets the settings. This function has to be implemented in a subclass in order to have an effect
     virtual void setSetting(const QString& key, const QVariant& value);
 
     //! Get the settings. This function has to be implemented in a subclass in order to have an effect
-    virtual QVariant getSetting(const QString& key) const;
+    virtual auto getSetting(const QString &key) const -> QVariant;
 
     //! Returns the list of keys of the property's settings
-    virtual QStringList getSettingKeys() const;
+    virtual auto getSettingKeys() const -> QStringList;
 
     //! Clones this property
     //! \param include_children Indicates whether to also clone the children
     //! \param container If a property is being passed here, no new VProperty is being created but instead it is tried
     //! to fill all the data into container. This can also be used when subclassing this function.
     //! \return Returns the newly created property (or container, if it was not NULL)
-    Q_REQUIRED_RESULT virtual VProperty* clone(bool include_children = true, VProperty* container = nullptr) const;
+    Q_REQUIRED_RESULT virtual auto clone(bool include_children = true, VProperty *container = nullptr) const
+        -> VProperty *;
 
-    Property propertyType() const;
+    auto propertyType() const -> Property;
     void     setPropertyType(const Property &type);
 
     virtual void UpdateParent(const QVariant &value);

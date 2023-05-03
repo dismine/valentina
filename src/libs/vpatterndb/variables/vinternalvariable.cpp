@@ -40,7 +40,7 @@ VInternalVariable::VInternalVariable(const VInternalVariable &var)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VInternalVariable &VInternalVariable::operator=(const VInternalVariable &var)
+auto VInternalVariable::operator=(const VInternalVariable &var) -> VInternalVariable &
 {
     if ( &var == this )
     {
@@ -57,7 +57,7 @@ VInternalVariable::VInternalVariable(VInternalVariable &&var) Q_DECL_NOTHROW
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VInternalVariable &VInternalVariable::operator=(VInternalVariable &&var) Q_DECL_NOTHROW
+auto VInternalVariable::operator=(VInternalVariable &&var) Q_DECL_NOTHROW->VInternalVariable &
 {
     std::swap(d, var.d);
     return *this;
@@ -69,26 +69,26 @@ VInternalVariable::~VInternalVariable()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VInternalVariable::Filter(quint32 id)
+auto VInternalVariable::Filter(quint32 id) -> bool
 {
     Q_UNUSED(id)
     return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VInternalVariable::IsNotUsed() const
+auto VInternalVariable::IsNotUsed() const -> bool
 {
     return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VInternalVariable::GetValue() const
+auto VInternalVariable::GetValue() const -> qreal
 {
     return d->value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal *VInternalVariable::GetValue()
+auto VInternalVariable::GetValue() -> qreal *
 {
     return &d->value;
 }
@@ -100,7 +100,7 @@ void VInternalVariable::SetValue(const qreal &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VInternalVariable::GetName() const
+auto VInternalVariable::GetName() const -> QString
 {
     return d->name;
 }
@@ -112,7 +112,7 @@ void VInternalVariable::SetName(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VarType VInternalVariable::GetType() const
+auto VInternalVariable::GetType() const -> VarType
 {
     return d->type;
 }
@@ -131,7 +131,7 @@ void VInternalVariable::SetAlias(const QString &alias)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VInternalVariable::GetAlias() const
+auto VInternalVariable::GetAlias() const -> QString
 {
     return d->alias;
 }

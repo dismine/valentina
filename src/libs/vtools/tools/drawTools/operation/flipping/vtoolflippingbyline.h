@@ -52,17 +52,17 @@ class VToolFlippingByLine : public VAbstractFlipping
 public:
     virtual ~VToolFlippingByLine() = default;
     virtual void SetDialog() override;
-    static VToolFlippingByLine* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                       VAbstractPattern *doc, VContainer *data);
-    static VToolFlippingByLine* Create(VToolFlippingByLineInitData initData);
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolFlippingByLine *;
+    static auto Create(VToolFlippingByLineInitData initData) -> VToolFlippingByLine *;
 
     static const QString ToolType;
 
-    virtual int type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::FlippingByLine)};
 
-    QString FirstLinePointName() const;
-    QString SecondLinePointName() const;
+    auto FirstLinePointName() const -> QString;
+    auto SecondLinePointName() const -> QString;
 
     virtual void ShowVisualization(bool show) override;
 protected slots:
@@ -73,7 +73,8 @@ protected:
                                QList<quint32> &newDependencies) override;
     virtual void    ReadToolAttributes(const QDomElement &domElement) override;
     virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual QString MakeToolTip() const override;
+    virtual auto MakeToolTip() const -> QString override;
+
 private:
     Q_DISABLE_COPY_MOVE(VToolFlippingByLine) // NOLINT
 

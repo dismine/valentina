@@ -52,7 +52,7 @@ VVariable::VVariable(const VVariable &var)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VVariable &VVariable::operator=(const VVariable &var)
+auto VVariable::operator=(const VVariable &var) -> VVariable &
 {
     if ( &var == this )
     {
@@ -70,7 +70,7 @@ VVariable::VVariable(VVariable &&var) Q_DECL_NOTHROW
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VVariable &VVariable::operator=(VVariable &&var) Q_DECL_NOTHROW
+auto VVariable::operator=(VVariable &&var) Q_DECL_NOTHROW->VVariable &
 {
     VInternalVariable::operator=(var);
     std::swap(d, var.d);
@@ -83,7 +83,7 @@ VVariable::~VVariable()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VVariable::GetDescription() const
+auto VVariable::GetDescription() const -> QString
 {
     return d->description;
 }

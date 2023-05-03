@@ -142,7 +142,7 @@ void VSimpleCurve::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVariant VSimpleCurve::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+auto VSimpleCurve::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) -> QVariant
 {
     if (change == QGraphicsItem::ItemSelectedHasChanged)
     {

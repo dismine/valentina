@@ -56,7 +56,7 @@ VPE::VLineColorProperty::VLineColorProperty(const QString &name)
 #endif
 }
 
-QVariant VPE::VLineColorProperty::data(int column, int role) const
+auto VPE::VLineColorProperty::data(int column, int role) const -> QVariant
 {
     if (colors.empty())
     {
@@ -74,7 +74,7 @@ QVariant VPE::VLineColorProperty::data(int column, int role) const
     {
         return indexList.at(tmpIndex);
     }
-    else if (column == DPC_Data && Qt::EditRole == role)
+    if (column == DPC_Data && Qt::EditRole == role)
     {
         return tmpIndex;
     }
@@ -84,8 +84,8 @@ QVariant VPE::VLineColorProperty::data(int column, int role) const
     }
 }
 
-QWidget *VPE::VLineColorProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
-                                               const QAbstractItemDelegate *delegate)
+auto VPE::VLineColorProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
+                                           const QAbstractItemDelegate *delegate) -> QWidget *
 {
     Q_UNUSED(options)
     Q_UNUSED(delegate)
@@ -115,7 +115,7 @@ QWidget *VPE::VLineColorProperty::createEditor(QWidget *parent, const QStyleOpti
     return VProperty::d_ptr->editor;
 }
 
-QVariant VPE::VLineColorProperty::getEditorData(const QWidget *editor) const
+auto VPE::VLineColorProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
     const QComboBox* tmpEditor = qobject_cast<const QComboBox*>(editor);
     if (tmpEditor)
@@ -139,7 +139,7 @@ void VPE::VLineColorProperty::setColors(const QMap<QString, QString> &colors)
 }
 
 // cppcheck-suppress unusedFunction
-QMap<QString, QString> VPE::VLineColorProperty::getColors() const
+auto VPE::VLineColorProperty::getColors() const -> QMap<QString, QString>
 {
     return colors;
 }
@@ -166,17 +166,17 @@ void VPE::VLineColorProperty::setValue(const QVariant &value)
     }
 }
 
-QString VPE::VLineColorProperty::type() const
+auto VPE::VLineColorProperty::type() const -> QString
 {
     return QStringLiteral("lineColor");
 }
 
-VPE::VProperty *VPE::VLineColorProperty::clone(bool include_children, VProperty *container) const
+auto VPE::VLineColorProperty::clone(bool include_children, VProperty *container) const -> VPE::VProperty *
 {
     return VProperty::clone(include_children, container ? container : new VLineColorProperty(getName()));
 }
 
-vpesizetype VPE::VLineColorProperty::IndexOfColor(const QMap<QString, QString> &colors, const QString &color)
+auto VPE::VLineColorProperty::IndexOfColor(const QMap<QString, QString> &colors, const QString &color) -> vpesizetype
 {
     QVector<QString> indexList;
     QMap<QString, QString>::const_iterator i = colors.constBegin();

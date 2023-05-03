@@ -112,7 +112,7 @@ DialogFlippingByLine::~DialogFlippingByLine()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogFlippingByLine::GetFirstLinePointId() const
+auto DialogFlippingByLine::GetFirstLinePointId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxFirstLinePoint);
 }
@@ -127,7 +127,7 @@ void DialogFlippingByLine::SetFirstLinePointId(quint32 value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogFlippingByLine::GetSecondLinePointId() const
+auto DialogFlippingByLine::GetSecondLinePointId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxSecondLinePoint);
 }
@@ -142,7 +142,7 @@ void DialogFlippingByLine::SetSecondLinePointId(quint32 value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogFlippingByLine::GetSuffix() const
+auto DialogFlippingByLine::GetSuffix() const -> QString
 {
     return m_suffix;
 }
@@ -155,7 +155,7 @@ void DialogFlippingByLine::SetSuffix(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogFlippingByLine::GetVisibilityGroupName() const
+auto DialogFlippingByLine::GetVisibilityGroupName() const -> QString
 {
     return ui->lineEditVisibilityGroup->text();
 }
@@ -167,7 +167,7 @@ void DialogFlippingByLine::SetVisibilityGroupName(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogFlippingByLine::HasLinkedVisibilityGroup() const
+auto DialogFlippingByLine::HasLinkedVisibilityGroup() const -> bool
 {
     return ui->groupBoxVisibilityGroup->isChecked();
 }
@@ -185,7 +185,7 @@ void DialogFlippingByLine::SetVisibilityGroupTags(const QStringList &tags)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList DialogFlippingByLine::GetVisibilityGroupTags() const
+auto DialogFlippingByLine::GetVisibilityGroupTags() const -> QStringList
 {
     return ui->lineEditGroupTags->text().split(',');
 }
@@ -244,7 +244,7 @@ void DialogFlippingByLine::ShowDialog(bool click)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<SourceItem> DialogFlippingByLine::GetSourceObjects() const
+auto DialogFlippingByLine::GetSourceObjects() const -> QVector<SourceItem>
 {
     return sourceObjects;
 }
@@ -360,23 +360,21 @@ void DialogFlippingByLine::SuffixChanged()
             CheckState();
             return;
         }
-        else
+
+        if (m_suffix != suffix)
         {
-            if (m_suffix != suffix)
+            QRegularExpression rx(NameRegExp());
+            const QStringList uniqueNames = data->AllUniqueNames();
+            for (auto &uniqueName : uniqueNames)
             {
-                QRegularExpression rx(NameRegExp());
-                const QStringList uniqueNames = data->AllUniqueNames();
-                for (auto &uniqueName : uniqueNames)
+                const QString name = uniqueName + suffix;
+                if (not rx.match(name).hasMatch() || not data->IsUnique(name))
                 {
-                    const QString name = uniqueName + suffix;
-                    if (not rx.match(name).hasMatch() || not data->IsUnique(name))
-                    {
-                        flagName = false;
-                        ChangeColor(ui->labelSuffix, errorColor);
-                        ui->labelStatus->setText(tr("Invalid suffix"));
-                        CheckState();
-                        return;
-                    }
+                    flagName = false;
+                    ChangeColor(ui->labelSuffix, errorColor);
+                    ui->labelStatus->setText(tr("Invalid suffix"));
+                    CheckState();
+                    return;
                 }
             }
         }
@@ -676,10 +674,8 @@ void DialogFlippingByLine::ValidateSourceAliases()
                 CheckState();
                 return;
             }
-            else
-            {
-                SetAliasValid(sourceItem.id, true);
-            }
+
+            SetAliasValid(sourceItem.id, true);
         }
     }
 
@@ -712,13 +708,13 @@ void DialogFlippingByLine::SetNotes(const QString &notes)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogFlippingByLine::GetNotes() const
+auto DialogFlippingByLine::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogFlippingByLine::IsValid() const
+auto DialogFlippingByLine::IsValid() const -> bool
 {
     bool ready = flagError && flagName && flagGroupName && flagAlias;
 

@@ -63,12 +63,12 @@ public:
                            bool delete_if_unused = true);
 
     //! Returns whether a factory is registered (and thus owned) by this factory manager
-    bool isRegistered(VAbstractPropertyFactory* factory);
+    auto isRegistered(VAbstractPropertyFactory *factory) -> bool;
 
     //! Returns a pointer to a factory registered for a certain type
     //! \param type The type to return the factory for
     //! \return Returns NULL, if there is none registered for this type
-    VAbstractPropertyFactory* getFactory(const QString& type);
+    auto getFactory(const QString &type) -> VAbstractPropertyFactory *;
 
     //! Creates a new property of a certain type and assigns a name and description (otionally)
     //! \param type The type of the property as string
@@ -76,14 +76,14 @@ public:
     //! \param description The property's description. Optional.
     //! \param default_value The properties initial value as string. Optional.
     //! \return Returns the created property or NULL if it couldn't be be created
-    VProperty* createProperty(const QString& type, const QString& name, const QString& description = QString(),
-                              const QString& default_value = QString());
+    auto createProperty(const QString &type, const QString &name, const QString &description = QString(),
+                        const QString &default_value = QString()) -> VProperty *;
 
     //! Returns the default manager.
     //static VPropertyFactoryManager* getDefaultManager();
 
     //! Returns a list of all supported property types
-    QStringList getSupportedTypes();
+    auto getSupportedTypes() -> QStringList;
 
 protected:
     VPropertyFactoryManagerPrivate* d_ptr;

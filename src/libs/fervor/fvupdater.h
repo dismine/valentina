@@ -43,30 +43,30 @@ class FvUpdater final : public QObject
 
 public:
     // Singleton
-    static FvUpdater* sharedUpdater();
+    static auto sharedUpdater() -> FvUpdater *;
     static void drop();
-    static QString CurrentFeedURL();
-    static bool IsTestBuild();
+    static auto CurrentFeedURL() -> QString;
+    static auto IsTestBuild() -> bool;
 
     // Set / get feed URL
     void SetFeedURL(const QUrl &feedURL);
     void SetFeedURL(const QString &feedURL);
-    QString GetFeedURL() const;
+    auto GetFeedURL() const -> QString;
 
-    bool IsDropOnFinnish() const;
+    auto IsDropOnFinnish() const -> bool;
     void SetDropOnFinnish(bool value);
 
 public slots:
     // Check for updates
-    bool CheckForUpdates(bool silentAsMuchAsItCouldGet = true);
+    auto CheckForUpdates(bool silentAsMuchAsItCouldGet = true) -> bool;
 
     // Aliases
-    bool CheckForUpdatesSilent();
-    bool CheckForUpdatesNotSilent();
+    auto CheckForUpdatesSilent() -> bool;
+    auto CheckForUpdatesNotSilent() -> bool;
 
 protected:
     friend class FvUpdateWindow; // Uses GetProposedUpdate() and others
-    QPointer<FvAvailableUpdate> GetProposedUpdate();
+    auto GetProposedUpdate() -> QPointer<FvAvailableUpdate>;
 
 protected slots:
     // Update window button slots
@@ -123,15 +123,13 @@ private:
     // Show an informational message
     void showInformationDialog(const QString &message, bool showEvenInSilentMode = false);
 
+    auto xmlParseFeed() -> bool; // Parse feed in m_xml
+    auto searchDownloadedFeedForUpdates(const QString &xmlEnclosureUrl, const QString &xmlEnclosureVersion,
+                                        const QString &xmlEnclosurePlatform) -> bool;
 
-    bool xmlParseFeed();				// Parse feed in m_xml
-    bool searchDownloadedFeedForUpdates(const QString &xmlEnclosureUrl,
-                                        const QString &xmlEnclosureVersion,
-                                        const QString &xmlEnclosurePlatform);
-
-    static bool VersionIsIgnored(const QString &version);
+    static auto VersionIsIgnored(const QString &version) -> bool;
     static void IgnoreVersion(const QString &version);
-    static bool CurrentlyRunningOnPlatform(const QString &platform);
+    static auto CurrentlyRunningOnPlatform(const QString &platform) -> bool;
 };
 
 #endif // FVUPDATER_H

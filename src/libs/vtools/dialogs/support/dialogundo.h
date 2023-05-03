@@ -50,7 +50,7 @@ class DialogUndo : public QDialog
     Q_OBJECT // NOLINT
 public:
     explicit DialogUndo(QWidget *parent = nullptr);
-    UndoButton Result() const;
+    auto Result() const -> UndoButton;
     virtual ~DialogUndo() override;
 protected:
     virtual void closeEvent ( QCloseEvent *event ) override;
@@ -63,7 +63,7 @@ private:
     UndoButton result;
 };
 
-inline UndoButton DialogUndo::Result() const
+inline auto DialogUndo::Result() const -> UndoButton
 {
     return result;
 }

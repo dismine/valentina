@@ -209,11 +209,11 @@ void TST_BuitInRegExp::TestCheckInternalVaribleRegExp_data()
     QTest::addColumn<QString>("var");
     QTest::addColumn<QString>("originalName");
 
-    for (auto &var : qAsConst(builInVariables))
+    for (const auto &var : qAsConst(builInVariables))
     {
         const QString tag = QString("Locale: '%1'. Var '%2'").arg(m_locale, var);
         const QStringList originalNames = AllNames();
-        for (auto &str : originalNames)
+        for (const auto &str : originalNames)
         {
             QTest::newRow(qUtf8Printable(tag)) << var << str;
         }
@@ -276,7 +276,7 @@ void TST_BuitInRegExp::PrepareData()
 
     QTest::addColumn<QString>("originalName");
 
-    for (auto &str : originalNames)
+    for (const auto &str : originalNames)
     {
         const QString tag = QString("Locale: '%1'. Name '%2'").arg(m_locale, str);
         QTest::newRow(qUtf8Printable(tag)) << str;
@@ -284,7 +284,7 @@ void TST_BuitInRegExp::PrepareData()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList TST_BuitInRegExp::AllNames()
+auto TST_BuitInRegExp::AllNames() -> QStringList
 {
     return builInFunctions + builInVariables;
 }

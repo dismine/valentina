@@ -50,24 +50,24 @@ public:
     VObjEngine();
     virtual ~VObjEngine() override;
 
-    virtual bool begin(QPaintDevice *pdev) override;
-    virtual bool end() override;
+    virtual auto begin(QPaintDevice *pdev) -> bool override;
+    virtual auto end() -> bool override;
     virtual void updateState(const QPaintEngineState &state) override;
     virtual void drawPath(const QPainterPath &path) override;
-    virtual Type type() const override;
+    virtual auto type() const -> Type override;
     virtual void drawPoints(const QPointF *points, int pointCount) override;
     virtual void drawPoints(const QPoint *points, int pointCount) override;
     virtual void drawPixmap(const QRectF &r, const QPixmap &pm, const QRectF &sr) override;
     virtual void drawPolygon(const QPointF *points, int pointCount, PolygonDrawMode mode) override;
     virtual void drawPolygon(const QPoint *points, int pointCount, PolygonDrawMode mode) override;
 
-    QSize getSize() const;
+    auto getSize() const -> QSize;
     void setSize(const QSize &value);
 
-    QIODevice *getOutputDevice() const;
+    auto getOutputDevice() const -> QIODevice *;
     void setOutputDevice(QIODevice *value);
 
-    int getResolution() const;
+    auto getResolution() const -> int;
     void setResolution(int value);
 
 private:
@@ -82,8 +82,8 @@ private:
     int              resolution;
     QTransform       matrix;
 
-    QPolygonF  MakePointsUnique(const QPolygonF &polygon)const;
-    qint64     Square(const QPolygonF &poly)const;
+    auto MakePointsUnique(const QPolygonF &polygon) const -> QPolygonF;
+    auto Square(const QPolygonF &poly) const -> qint64;
 };
 
 #endif // VOBJENGINE_H

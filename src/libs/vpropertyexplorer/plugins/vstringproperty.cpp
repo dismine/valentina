@@ -58,8 +58,8 @@ VPE::VStringProperty::VStringProperty(const QString &name)
 #endif
 }
 
-QWidget *VPE::VStringProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
-                                            const QAbstractItemDelegate *delegate)
+auto VPE::VStringProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
+                                        const QAbstractItemDelegate *delegate) -> QWidget *
 {
     Q_UNUSED(options)
     Q_UNUSED(delegate)
@@ -76,7 +76,7 @@ QWidget *VPE::VStringProperty::createEditor(QWidget *parent, const QStyleOptionV
     return d_ptr->editor;
 }
 
-bool VPE::VStringProperty::setEditorData(QWidget *editor)
+auto VPE::VStringProperty::setEditorData(QWidget *editor) -> bool
 {
     if (QLineEdit* tmpWidget = qobject_cast<QLineEdit*>(editor))
     {
@@ -90,7 +90,7 @@ bool VPE::VStringProperty::setEditorData(QWidget *editor)
     return false;
 }
 
-QVariant VPE::VStringProperty::getEditorData(const QWidget *editor) const
+auto VPE::VStringProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
     const QLineEdit* tmpEditor = qobject_cast<const QLineEdit*>(editor);
     if (tmpEditor)
@@ -128,7 +128,7 @@ void VPE::VStringProperty::setSetting(const QString &key, const QVariant &value)
     }
 }
 
-QVariant VPE::VStringProperty::getSetting(const QString &key) const
+auto VPE::VStringProperty::getSetting(const QString &key) const -> QVariant
 {
     if (key == QLatin1String("ReadOnly"))
     {
@@ -142,19 +142,19 @@ QVariant VPE::VStringProperty::getSetting(const QString &key) const
         return VProperty::getSetting(key);
 }
 
-QStringList VPE::VStringProperty::getSettingKeys() const
+auto VPE::VStringProperty::getSettingKeys() const -> QStringList
 {
     QStringList settings;
     settings << QStringLiteral("ReadOnly") << QStringLiteral("TypeForParent");
     return settings;
 }
 
-QString VPE::VStringProperty::type() const
+auto VPE::VStringProperty::type() const -> QString
 {
     return QStringLiteral("string");
 }
 
-VPE::VProperty *VPE::VStringProperty::clone(bool include_children, VPE::VProperty *container) const
+auto VPE::VStringProperty::clone(bool include_children, VPE::VProperty *container) const -> VPE::VProperty *
 {
     return VProperty::clone(include_children, container ? container : new VStringProperty(getName(), getSettings()));
 }
@@ -165,7 +165,7 @@ void VPE::VStringProperty::UpdateParent(const QVariant &value)
 }
 
 // cppcheck-suppress unusedFunction
-int VPE::VStringProperty::getTypeForParent() const
+auto VPE::VStringProperty::getTypeForParent() const -> int
 {
     return typeForParent;
 }
@@ -175,7 +175,7 @@ void VPE::VStringProperty::setTypeForParent(int value)
     typeForParent = value;
 }
 
-bool VPE::VStringProperty::eventFilter(QObject *object, QEvent *event)
+auto VPE::VStringProperty::eventFilter(QObject *object, QEvent *event) -> bool
 {
     if (QLineEdit *textEdit = qobject_cast<QLineEdit *>(object))
     {

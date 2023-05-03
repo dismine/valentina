@@ -122,7 +122,7 @@ DialogLineIntersectAxis::~DialogLineIntersectAxis()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogLineIntersectAxis::GetPointName() const
+auto DialogLineIntersectAxis::GetPointName() const -> QString
 {
     return pointName;
 }
@@ -135,7 +135,7 @@ void DialogLineIntersectAxis::SetPointName(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogLineIntersectAxis::GetTypeLine() const
+auto DialogLineIntersectAxis::GetTypeLine() const -> QString
 {
     return GetComboBoxCurrentData(ui->comboBoxLineType, TypeLineLine);
 }
@@ -148,7 +148,7 @@ void DialogLineIntersectAxis::SetTypeLine(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogLineIntersectAxis::GetAngle() const
+auto DialogLineIntersectAxis::GetAngle() const -> QString
 {
     return VTranslateVars::TryFormulaFromUser(formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
@@ -174,7 +174,7 @@ void DialogLineIntersectAxis::SetAngle(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogLineIntersectAxis::GetBasePointId() const
+auto DialogLineIntersectAxis::GetBasePointId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxAxisPoint);
 }
@@ -190,7 +190,7 @@ void DialogLineIntersectAxis::SetBasePointId(quint32 value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogLineIntersectAxis::GetFirstPointId() const
+auto DialogLineIntersectAxis::GetFirstPointId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxFirstLinePoint);
 }
@@ -206,7 +206,7 @@ void DialogLineIntersectAxis::SetFirstPointId(quint32 value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogLineIntersectAxis::GetSecondPointId() const
+auto DialogLineIntersectAxis::GetSecondPointId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxSecondLinePoint);
 }
@@ -222,7 +222,7 @@ void DialogLineIntersectAxis::SetSecondPointId(quint32 value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogLineIntersectAxis::GetLineColor() const
+auto DialogLineIntersectAxis::GetLineColor() const -> QString
 {
     return GetComboBoxCurrentData(ui->comboBoxLineColor, ColorBlack);
 }
@@ -433,7 +433,7 @@ void DialogLineIntersectAxis::SetNotes(const QString &notes)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogLineIntersectAxis::GetNotes() const
+auto DialogLineIntersectAxis::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }

@@ -42,16 +42,16 @@ private slots:
 
 private:
     void Case1() const;
-    QVector<QPointF> InputPointsCase1() const;
-    QVector<QPointF> OutputPointsCase1() const;
+    auto InputPointsCase1() const -> QVector<QPointF>;
+    auto OutputPointsCase1() const -> QVector<QPointF>;
 
     void Case2() const;
-    QVector<QPointF> InputPointsCase2() const;
-    QVector<QPointF> OutputPointsCase2() const;
+    auto InputPointsCase2() const -> QVector<QPointF>;
+    auto OutputPointsCase2() const -> QVector<QPointF>;
 
     void Case3() const;
-    QVector<QPointF> InputPointsCase3() const;
-    QVector<QPointF> OutputPointsCase3() const;
+    auto InputPointsCase3() const -> QVector<QPointF>;
+    auto OutputPointsCase3() const -> QVector<QPointF>;
 };
 
 #endif // TST_VLAYOUTDETAIL_H

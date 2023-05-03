@@ -67,17 +67,17 @@ class VToolLineIntersect:public VToolSinglePoint
     Q_OBJECT // NOLINT
 public:
     virtual void SetDialog() override;
-    static VToolLineIntersect *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                      VAbstractPattern *doc, VContainer *data);
-    static VToolLineIntersect *Create(VToolLineIntersectInitData initData);
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolLineIntersect *;
+    static auto Create(VToolLineIntersectInitData initData) -> VToolLineIntersect *;
     static const QString ToolType;
-    virtual int  type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::LineIntersect)};
 
-    QString Line1P1Name() const;
-    QString Line1P2Name() const;
-    QString Line2P1Name() const;
-    QString Line2P2Name() const;
+    auto Line1P1Name() const -> QString;
+    auto Line1P2Name() const -> QString;
+    auto Line2P1Name() const -> QString;
+    auto Line2P2Name() const -> QString;
 
     virtual void ShowVisualization(bool show) override;
 protected slots:
@@ -89,7 +89,8 @@ protected:
     virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     virtual void    ReadToolAttributes(const QDomElement &domElement) override;
     virtual void    SetVisualization() override;
-    virtual QString MakeToolTip() const override;
+    virtual auto MakeToolTip() const -> QString override;
+
 private:
     Q_DISABLE_COPY_MOVE(VToolLineIntersect) // NOLINT
 

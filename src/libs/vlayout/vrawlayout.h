@@ -34,8 +34,8 @@ struct VRawLayoutData
 {
     QVector<VLayoutPiece> pieces{};
 
-    friend QDataStream& operator<< (QDataStream& dataStream, const VRawLayoutData& data);
-    friend QDataStream& operator>> (QDataStream& dataStream, VRawLayoutData& data);
+    friend auto operator<<(QDataStream &dataStream, const VRawLayoutData &data) -> QDataStream &;
+    friend auto operator>>(QDataStream &dataStream, VRawLayoutData &data) -> QDataStream &;
 
 private:
     static const quint32 streamHeader;
@@ -49,13 +49,13 @@ class VRawLayout
 public:
     VRawLayout();
 
-    bool WriteFile(QIODevice* ioDevice, const VRawLayoutData& data);
-    bool ReadFile(QIODevice* ioDevice, VRawLayoutData& data);
+    auto WriteFile(QIODevice *ioDevice, const VRawLayoutData &data) -> bool;
+    auto ReadFile(QIODevice *ioDevice, VRawLayoutData &data) -> bool;
 
-    bool WriteFile(const QString& filePath, const VRawLayoutData& data);
-    bool ReadFile(const QString& filePath, VRawLayoutData& data);
+    auto WriteFile(const QString &filePath, const VRawLayoutData &data) -> bool;
+    auto ReadFile(const QString &filePath, VRawLayoutData &data) -> bool;
 
-    QString ErrorString() const;
+    auto ErrorString() const -> QString;
 
 private:
     QString m_errorString{};
@@ -65,7 +65,7 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString VRawLayout::ErrorString() const
+inline auto VRawLayout::ErrorString() const -> QString
 {
     return m_errorString;
 }

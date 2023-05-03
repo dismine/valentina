@@ -37,7 +37,7 @@
 #include "../vmisc/def.h"
 #include "../vmisc/testvapplication.h"
 
-int main(int argc, char** argv)
+auto main(int argc, char **argv) -> int
 {
     TestVApplication app( argc, argv );// For QPrinter
 

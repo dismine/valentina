@@ -42,21 +42,21 @@ class VToolRecord
 public:
     VToolRecord();
     VToolRecord(const quint32 &id, const Tool &typeTool, const QString &nameDraw);
-    bool operator==(const VToolRecord &record) const;
-    VToolRecord &operator=(const VToolRecord &record);
+    auto operator==(const VToolRecord &record) const -> bool;
+    auto operator=(const VToolRecord &record) -> VToolRecord &;
     VToolRecord(const VToolRecord &record);
     ~VToolRecord() = default;
 
-    quint32 getId() const;
+    auto getId() const -> quint32;
     void    setId(const quint32 &value);
 
-    Tool    getTypeTool() const;
+    auto getTypeTool() const -> Tool;
     void    setTypeTool(const Tool &value);
 
-    QString getNameDraw() const;
+    auto getNameDraw() const -> QString;
     void    setNameDraw(const QString &value);
 
-    bool IsMandatory() const;
+    auto IsMandatory() const -> bool;
 
 private:
     /** @brief id tool id. */
@@ -74,7 +74,7 @@ private:
  * @brief getId return tool id.
  * @return id.
  */
-inline quint32 VToolRecord::getId() const
+inline auto VToolRecord::getId() const -> quint32
 {
     return id;
 }
@@ -94,7 +94,7 @@ inline void VToolRecord::setId(const quint32 &value)
  * @brief getTypeTool return tool type.
  * @return tool type.
  */
-inline Tool VToolRecord::getTypeTool() const
+inline auto VToolRecord::getTypeTool() const -> Tool
 {
     return typeTool;
 }
@@ -114,7 +114,7 @@ inline void VToolRecord::setTypeTool(const Tool &value)
  * @brief getNameDraw return pattern peace name.
  * @return pattern peace name.
  */
-inline QString VToolRecord::getNameDraw() const
+inline auto VToolRecord::getNameDraw() const -> QString
 {
     return nameDraw;
 }
@@ -130,7 +130,7 @@ inline void VToolRecord::setNameDraw(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool VToolRecord::operator==(const VToolRecord &record) const
+inline auto VToolRecord::operator==(const VToolRecord &record) const -> bool
 {
     // Id should be enough
     return id == record.getId()/* && typeTool == record.getTypeTool() && nameDraw == record.getNameDraw()*/;

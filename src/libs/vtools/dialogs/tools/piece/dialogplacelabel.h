@@ -47,25 +47,25 @@ public:
 
     void EnbleShowMode(bool disable);
 
-    quint32 GetCenterPoint() const;
+    auto GetCenterPoint() const -> quint32;
     void    SetCenterPoint(quint32 id);
 
-    PlaceLabelType GetLabelType() const;
+    auto GetLabelType() const -> PlaceLabelType;
     void           SetLabelType(PlaceLabelType type);
 
-    QString GetWidth() const;
+    auto GetWidth() const -> QString;
     void    SetWidth(const QString &value);
 
-    QString GetHeight() const;
+    auto GetHeight() const -> QString;
     void    SetHeight(const QString &value);
 
-    QString GetAngle() const;
+    auto GetAngle() const -> QString;
     void    SetAngle(const QString &value);
 
-    quint32 GetPieceId() const;
+    auto GetPieceId() const -> quint32;
     void    SetPieceId(quint32 id);
 
-    QString GetFormulaVisible() const;
+    auto GetFormulaVisible() const -> QString;
     void    SetFormulaVisible(const QString &formula);
 
     virtual void SetPiecesList(const QVector<quint32> &list) override;
@@ -76,7 +76,7 @@ public slots:
 protected:
     virtual void ShowVisualization() override;
     virtual void closeEvent(QCloseEvent *event) override;
-    virtual bool IsValid() const final;
+    virtual auto IsValid() const -> bool final;
 
 private slots:
     void DeployFormulaWidthEdit();
@@ -127,7 +127,7 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogPlaceLabel::IsValid() const
+inline auto DialogPlaceLabel::IsValid() const -> bool
 {
     return m_flagPoint && m_flagError && m_flagWidth && m_flagHeight && m_flagAngle && m_flagFormulaVisible;
 }

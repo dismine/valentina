@@ -84,22 +84,23 @@ public:
     QmuParserCallback(strfun_type3 a_pFun, bool a_bAllowOpti);
     QmuParserCallback();
     QmuParserCallback(const QmuParserCallback &a_Fun);
-    QmuParserCallback &operator=(const QmuParserCallback &a_Fun);
+    auto operator=(const QmuParserCallback &a_Fun) -> QmuParserCallback &;
 
 #ifdef Q_COMPILER_RVALUE_REFS
     QmuParserCallback(QmuParserCallback &&a_Fun) Q_DECL_NOTHROW;
-    QmuParserCallback &operator=(QmuParserCallback &&a_Fun) Q_DECL_NOTHROW;
+    auto operator=(QmuParserCallback &&a_Fun) Q_DECL_NOTHROW->QmuParserCallback &;
 #endif
 
-    Q_REQUIRED_RESULT QmuParserCallback* Clone() const;
+    Q_REQUIRED_RESULT auto Clone() const -> QmuParserCallback *;
 
-    bool               IsOptimizable() const;
-    void*              GetAddr() const;
-    ECmdCode           GetCode() const;
-    ETypeCode          GetType() const;
-    int                GetPri()  const;
-    EOprtAssociativity GetAssociativity() const;
-    int                GetArgc() const;
+    auto IsOptimizable() const -> bool;
+    auto GetAddr() const -> void *;
+    auto GetCode() const -> ECmdCode;
+    auto GetType() const -> ETypeCode;
+    auto GetPri() const -> int;
+    auto GetAssociativity() const -> EOprtAssociativity;
+    auto GetArgc() const -> int;
+
 private:
     QSharedDataPointer<QmuParserCallbackData> d;
 };
@@ -114,7 +115,7 @@ typedef std::map<QString, QmuParserCallback> funmap_type;
 /**
  * @brief Clone this instance and return a pointer to the new instance.
  */
-inline QmuParserCallback* QmuParserCallback::Clone() const
+inline auto QmuParserCallback::Clone() const -> QmuParserCallback *
 {
     return new QmuParserCallback ( *this );
 }

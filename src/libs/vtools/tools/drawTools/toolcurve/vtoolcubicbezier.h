@@ -64,19 +64,19 @@ class VToolCubicBezier : public VAbstractSpline
 public:
     virtual ~VToolCubicBezier() = default;
     virtual void SetDialog() override;
-    static VToolCubicBezier *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                    VAbstractPattern *doc, VContainer *data);
-    static VToolCubicBezier *Create(VToolCubicBezierInitData initData);
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolCubicBezier *;
+    static auto Create(VToolCubicBezierInitData initData) -> VToolCubicBezier *;
     static const QString ToolType;
-    virtual int  type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::CubicBezier)};
 
-    QString FirstPointName() const;
-    QString SecondPointName() const;
-    QString ThirdPointName() const;
-    QString ForthPointName() const;
+    auto FirstPointName() const -> QString;
+    auto SecondPointName() const -> QString;
+    auto ThirdPointName() const -> QString;
+    auto ForthPointName() const -> QString;
 
-    VCubicBezier getSpline()const;
+    auto getSpline() const -> VCubicBezier;
     void         setSpline(const VCubicBezier &spl);
 
     virtual void ShowVisualization(bool show) override;

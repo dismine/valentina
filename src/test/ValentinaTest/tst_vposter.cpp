@@ -83,7 +83,7 @@ void TST_VPoster::SmallPoster()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRect TST_VPoster::PageRect(const QPrinter &printer) const
+auto TST_VPoster::PageRect(const QPrinter &printer) const -> QRect
 {
     // Because the Point unit is defined to be 1/72th of an inch
     // we can't use method pageRect(QPrinter::Point). Our dpi different can be different.
@@ -95,7 +95,7 @@ QRect TST_VPoster::PageRect(const QPrinter &printer) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal TST_VPoster::ToPixel(qreal val) const
+auto TST_VPoster::ToPixel(qreal val) const -> qreal
 {
     return val / 25.4 * PrintDPI; // Mm to pixels with current dpi.
 }

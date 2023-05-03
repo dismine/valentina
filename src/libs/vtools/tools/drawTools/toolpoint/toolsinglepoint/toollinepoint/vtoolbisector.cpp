@@ -68,7 +68,8 @@ VToolBisector::VToolBisector(const VToolBisectorInitData &initData, QGraphicsIte
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VToolBisector::BisectorAngle(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint)
+auto VToolBisector::BisectorAngle(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint)
+    -> qreal
 {
     QLineF line1(secondPoint, firstPoint);
     QLineF line2(secondPoint, thirdPoint);
@@ -78,10 +79,7 @@ qreal VToolBisector::BisectorAngle(const QPointF &firstPoint, const QPointF &sec
         angle = 360 - angle;
         return line1.angle()-angle/2;
     }
-    else
-    {
-        return line1.angle()+angle/2;
-    }
+    return line1.angle() + angle / 2;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -93,8 +91,8 @@ qreal VToolBisector::BisectorAngle(const QPointF &firstPoint, const QPointF &sec
  * @param length bisector length.
  * @return bisector point.
  */
-QPointF VToolBisector::FindPoint(const QPointF &firstPoint, const QPointF &secondPoint,
-                                 const QPointF &thirdPoint, const qreal &length)
+auto VToolBisector::FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint,
+                              const qreal &length) -> QPointF
 {
     QLineF line1(secondPoint, firstPoint);
     line1.setAngle(BisectorAngle(firstPoint, secondPoint, thirdPoint));
@@ -130,8 +128,8 @@ void VToolBisector::SetDialog()
  * @param doc dom document container.
  * @param data container with variables.
  */
-VToolBisector* VToolBisector::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                     VAbstractPattern *doc, VContainer *data)
+auto VToolBisector::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                           VContainer *data) -> VToolBisector *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogBisector> dialogTool = qobject_cast<DialogBisector *>(dialog);
@@ -165,7 +163,7 @@ VToolBisector* VToolBisector::Create(const QPointer<DialogTool> &dialog, VMainGr
  * @brief Create help create tool.
  * @param initData init data.
  */
-VToolBisector* VToolBisector::Create(VToolBisectorInitData &initData)
+auto VToolBisector::Create(VToolBisectorInitData &initData) -> VToolBisector *
 {
     const QSharedPointer<VPointF> firstPoint = initData.data->GeometricObject<VPointF>(initData.firstPointId);
     const QSharedPointer<VPointF> secondPoint = initData.data->GeometricObject<VPointF>(initData.secondPointId);
@@ -211,13 +209,13 @@ VToolBisector* VToolBisector::Create(VToolBisectorInitData &initData)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolBisector::FirstPointName() const
+auto VToolBisector::FirstPointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(firstPointId)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolBisector::ThirdPointName() const
+auto VToolBisector::ThirdPointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(thirdPointId)->name();
 }

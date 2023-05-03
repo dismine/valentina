@@ -54,15 +54,15 @@ public:
     static auto XSDSchemas() -> QHash <unsigned, QString>;
 
 protected:
-    virtual unsigned MinVer() const override;
-    virtual unsigned MaxVer() const override;
+    virtual auto MinVer() const -> unsigned override;
+    virtual auto MaxVer() const -> unsigned override;
 
-    virtual QString MinVerStr() const override;
-    virtual QString MaxVerStr() const override;
+    virtual auto MinVerStr() const -> QString override;
+    virtual auto MaxVerStr() const -> QString override;
 
     virtual void ApplyPatches() override;
     virtual void DowngradeToCurrentMaxVersion() override;
-    virtual bool IsReadOnly() const override;
+    virtual auto IsReadOnly() const -> bool override;
 
     auto Schemas() const -> QHash <unsigned, QString> override;
 
@@ -71,9 +71,9 @@ private:
     static const QString MeasurementMinVerStr;
 
     void AddNewTagsForV0_3_0();
-    QString MUnitV0_2_0();
+    auto MUnitV0_2_0() -> QString;
     void ConvertMeasurementsToV0_3_0();
-    QDomElement AddMV0_3_0(const QString &name, qreal value);
+    auto AddMV0_3_0(const QString &name, qreal value) -> QDomElement;
     void GenderV0_3_1();
     void PM_SystemV0_3_2();
     void ConvertMeasurementsToV0_3_3();
@@ -88,25 +88,25 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline unsigned VVITConverter::MinVer() const
+inline auto VVITConverter::MinVer() const -> unsigned
 {
     return MeasurementMinVer;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline unsigned VVITConverter::MaxVer() const
+inline auto VVITConverter::MaxVer() const -> unsigned
 {
     return MeasurementMaxVer;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString VVITConverter::MinVerStr() const
+inline auto VVITConverter::MinVerStr() const -> QString
 {
     return MeasurementMinVerStr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString VVITConverter::MaxVerStr() const
+inline auto VVITConverter::MaxVerStr() const -> QString
 {
     return MeasurementMaxVerStr;
 }

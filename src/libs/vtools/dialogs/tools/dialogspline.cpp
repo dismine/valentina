@@ -152,10 +152,10 @@ DialogSpline::DialogSpline(const VContainer *data, quint32 toolId, QWidget *pare
     connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogSpline::ValidateAlias);
 
     vis = new VisToolSpline(data);
-    auto path = qobject_cast<VisToolSpline *>(vis);
+    auto *path = qobject_cast<VisToolSpline *>(vis);
     SCASSERT(path != nullptr)
 
-    auto scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
+    auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
     SCASSERT(scene != nullptr)
     connect(scene, &VMainGraphicsScene::MouseLeftPressed, path, &VisToolSpline::MouseLeftPressed);
     connect(scene, &VMainGraphicsScene::MouseLeftReleased, path, &VisToolSpline::MouseLeftReleased);
@@ -224,7 +224,7 @@ void DialogSpline::SaveData()
 
     newDuplicate <= -1 ? spl.SetDuplicate(d) : spl.SetDuplicate(static_cast<quint32>(newDuplicate));
 
-    auto path = qobject_cast<VisToolSpline *>(vis);
+    auto *path = qobject_cast<VisToolSpline *>(vis);
     SCASSERT(path != nullptr)
 
     path->SetPoint1Id(GetP1()->id());
@@ -370,13 +370,13 @@ void DialogSpline::FXLength2()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QSharedPointer<VPointF> DialogSpline::GetP1() const
+auto DialogSpline::GetP1() const -> const QSharedPointer<VPointF>
 {
     return data->GeometricObject<VPointF>(getCurrentObjectId(ui->comboBoxP1));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QSharedPointer<VPointF> DialogSpline::GetP4() const
+auto DialogSpline::GetP4() const -> const QSharedPointer<VPointF>
 {
     return data->GeometricObject<VPointF>(getCurrentObjectId(ui->comboBoxP4));
 }
@@ -464,7 +464,7 @@ void DialogSpline::ValidateAlias()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSpline DialogSpline::CurrentSpline() const
+auto DialogSpline::CurrentSpline() const -> VSpline
 {
     QString angle1F = ui->plainTextEditAngle1F->toPlainText();
     QString angle2F = ui->plainTextEditAngle2F->toPlainText();
@@ -590,7 +590,7 @@ void DialogSpline::ShowVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSpline DialogSpline::GetSpline() const
+auto DialogSpline::GetSpline() const -> VSpline
 {
     return spl;
 }
@@ -628,7 +628,7 @@ void DialogSpline::SetSpline(const VSpline &spline)
     ui->lineEditAlias->setText(originAliasSuffix);
     ValidateAlias();
 
-    auto path = qobject_cast<VisToolSpline *>(vis);
+    auto *path = qobject_cast<VisToolSpline *>(vis);
     SCASSERT(path != nullptr)
 
     path->SetPoint1Id(spl.GetP1().id());
@@ -648,7 +648,7 @@ void DialogSpline::SetNotes(const QString &notes)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogSpline::GetNotes() const
+auto DialogSpline::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }

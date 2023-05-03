@@ -67,19 +67,20 @@ class VToolBisector : public VToolLinePoint
 {
     Q_OBJECT // NOLINT
 public:
-    static qreal   BisectorAngle(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint);
-    static QPointF FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint,
-                             const qreal& length);
+    static auto BisectorAngle(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint)
+        -> qreal;
+    static auto FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint,
+                          const qreal &length) -> QPointF;
     virtual void   SetDialog() override;
-    static VToolBisector* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
-                                 VContainer *data);
-    static VToolBisector* Create(VToolBisectorInitData &initData);
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolBisector *;
+    static auto Create(VToolBisectorInitData &initData) -> VToolBisector *;
     static const QString ToolType;
-    virtual int    type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::Bisector)};
 
-    QString FirstPointName() const;
-    QString ThirdPointName() const;
+    auto FirstPointName() const -> QString;
+    auto ThirdPointName() const -> QString;
 
     virtual void   ShowVisualization(bool show) override;
 protected slots:

@@ -61,12 +61,12 @@ namespace bpstd {
 
   struct monostate{};
 
-  constexpr bool operator==(monostate, monostate) noexcept;
-  constexpr bool operator!=(monostate, monostate) noexcept;
-  constexpr bool operator<(monostate, monostate) noexcept;
-  constexpr bool operator>(monostate, monostate) noexcept;
-  constexpr bool operator<=(monostate, monostate) noexcept;
-  constexpr bool operator>=(monostate, monostate) noexcept;
+  constexpr auto operator==(monostate, monostate) noexcept -> bool;
+  constexpr auto operator!=(monostate, monostate) noexcept -> bool;
+  constexpr auto operator<(monostate, monostate) noexcept -> bool;
+  constexpr auto operator>(monostate, monostate) noexcept -> bool;
+  constexpr auto operator<=(monostate, monostate) noexcept -> bool;
+  constexpr auto operator>=(monostate, monostate) noexcept -> bool;
 
   //============================================================================
   // forward declaration : variant
@@ -194,7 +194,7 @@ namespace bpstd {
     /// \brief returns an explanatory string of the exception
     ///
     /// \return string explaining the issue
-    const char* what() const noexcept override;
+      auto what() const noexcept -> const char * override;
   };
 
   namespace detail {
@@ -252,7 +252,7 @@ namespace bpstd {
     {
       using variant_f_impl<I+1,Types...>::operator();
 
-      integral_constant<std::size_t,I> operator()(T0);
+      auto operator()(T0) -> integral_constant<std::size_t, I>;
     };
 
     // skip 'bool' overloads from consideration
@@ -288,7 +288,7 @@ namespace bpstd {
     struct variant_f_impl<I>
     {
       // End recursion with a variant_npos
-      integral_constant<std::size_t,variant_npos> operator()(...);
+      auto operator()(...) -> integral_constant<std::size_t, variant_npos>;
     };
 
     template <typename...Types>
@@ -651,8 +651,8 @@ namespace bpstd {
     /// active alternative and performs a copy construction.
     ///
     /// \param other the other variant to copy
-    variant& operator=(detail::enable_overload_if_t<is_copy_assignable,const variant&> other);
-    variant& operator=(detail::disable_overload_if_t<is_copy_assignable,const variant&> other) = delete;
+    auto operator=(detail::enable_overload_if_t<is_copy_assignable, const variant &> other) -> variant &;
+    auto operator=(detail::disable_overload_if_t<is_copy_assignable, const variant &> other) -> variant & = delete;
 
     /// \brief Move assigns the contents of \p other to this
     ///
@@ -661,15 +661,15 @@ namespace bpstd {
     /// active alternative and performs a move construction.
     ///
     /// \param other the other variant to move
-    variant& operator=(detail::enable_overload_if_t<is_move_assignable,variant&&> other)
-      noexcept(conjunction<std::is_nothrow_move_constructible<Types>...,
-                           std::is_nothrow_move_assignable<Types>...>::value);
-    variant& operator=(detail::disable_overload_if_t<is_move_assignable,variant&&> other) = delete;
+    auto operator=(detail::enable_overload_if_t<is_move_assignable, variant &&> other) noexcept(
+        conjunction<std::is_nothrow_move_constructible<Types>..., std::is_nothrow_move_assignable<Types>...>::value)
+        -> variant &;
+    auto operator=(detail::disable_overload_if_t<is_move_assignable, variant &&> other) -> variant & = delete;
 
     template <typename T, typename = enable_if_convert_assignable<T>>
-    variant& operator=(T&& t)
-      noexcept(std::is_nothrow_assignable<typename bpstd::variant<Types...>::template T_j<T>,T>::value &&
-               std::is_nothrow_constructible<typename bpstd::variant<Types...>::template T_j<T>,T>::value);
+    auto operator=(T &&t) noexcept(
+        std::is_nothrow_assignable<typename bpstd::variant<Types...>::template T_j<T>, T>::value
+            &&std::is_nothrow_constructible<typename bpstd::variant<Types...>::template T_j<T>, T>::value) -> variant &;
 
     //--------------------------------------------------------------------------
     // Observers
@@ -682,16 +682,16 @@ namespace bpstd {
     /// If the variant is valueless_by_exception, returns variant_npos.
     ///
     /// \return the zero-based index
-    constexpr std::size_t index() const noexcept;
+      constexpr auto index() const noexcept -> std::size_t;
 
-    /// \brief Returns false if and only if the variant holds a value
-    ///
-    /// \return false if and only if the variant holds a value
-    constexpr bool valueless_by_exception() const noexcept;
+      /// \brief Returns false if and only if the variant holds a value
+      ///
+      /// \return false if and only if the variant holds a value
+      constexpr auto valueless_by_exception() const noexcept -> bool;
 
-    //--------------------------------------------------------------------------
-    // Modifiers
-    //--------------------------------------------------------------------------
+      //--------------------------------------------------------------------------
+      // Modifiers
+      //--------------------------------------------------------------------------
   public:
 
     /// \brief Creates a new value in-place
@@ -706,160 +706,141 @@ namespace bpstd {
     /// \tparam T the type to construct
     /// \param args the arguments to forward to the constructor of \p T
     /// \return reference to constructed element
-    template <typename T, typename...Args,
-              typename=enable_if_t<std::is_constructible<T,Args...>::value>>
-    T& emplace(Args&&... args);
+      template <typename T, typename... Args, typename = enable_if_t<std::is_constructible<T, Args...>::value>>
+      auto emplace(Args &&...args) -> T &;
 
-    /// \brief Creates a new value in-place
-    ///
-    /// Equivalent to emplace<I>(il, std::forward<Args>(args)...), where I is
-    /// the zero-based index of T in Types....
-    ///
-    /// \note This overload only participates in overload resolution if
-    ///       std::is_constructible_v<T, std::initializer_list<U>, Args...>
-    ///       is true, and \p T occurs exactly once in Types...
-    ///
-    /// \tparam T the type to construct
-    /// \param il an initializer list of entries
-    /// \param args the arguments to forward to the constructor of \p T
-    /// \return reference to constructed element
-    template <typename T, typename U, typename...Args,
-              typename=enable_if_t<std::is_constructible<T,std::initializer_list<U>&,Args...>::value>>
-    T& emplace(std::initializer_list<U> il, Args&&... args);
+      /// \brief Creates a new value in-place
+      ///
+      /// Equivalent to emplace<I>(il, std::forward<Args>(args)...), where I is
+      /// the zero-based index of T in Types....
+      ///
+      /// \note This overload only participates in overload resolution if
+      ///       std::is_constructible_v<T, std::initializer_list<U>, Args...>
+      ///       is true, and \p T occurs exactly once in Types...
+      ///
+      /// \tparam T the type to construct
+      /// \param il an initializer list of entries
+      /// \param args the arguments to forward to the constructor of \p T
+      /// \return reference to constructed element
+      template <typename T, typename U, typename... Args,
+                typename = enable_if_t<std::is_constructible<T, std::initializer_list<U> &, Args...>::value>>
+      auto emplace(std::initializer_list<U> il, Args &&...args) -> T &;
 
-    /// \brief Creates a new value in-place
-    ///
-    /// First, destroys the currently contained value (if any).
-    /// Then direct-initializes the contained value as if constructing a
-    /// value of type T_I with the arguments std::forward<Args>(args)...
-    ///
-    /// If an exception is thrown, *this may become
-    /// valueless_by_exception.
-    ///
-    /// \note This overload only participates in overload resolution if
-    ///       std::is_constructible_v<T_I, Args...> is true.
-    ///
-    /// The behavior is undefined if I is not less than sizeof...(Types).
-    ///
-    /// \tparam I the index of the variant alternative to construct
-    /// \param args the arguments to forward to the constructor of \p T
-    /// \return reference to constructed element
-    template <std::size_t I, typename... Args,
-              typename=enable_if_t<std::is_constructible<detail::nth_type_t<I,Types...>,Args...>::value>>
-    variant_alternative_t<I, variant>& emplace(Args&&... args);
+      /// \brief Creates a new value in-place
+      ///
+      /// First, destroys the currently contained value (if any).
+      /// Then direct-initializes the contained value as if constructing a
+      /// value of type T_I with the arguments std::forward<Args>(args)...
+      ///
+      /// If an exception is thrown, *this may become
+      /// valueless_by_exception.
+      ///
+      /// \note This overload only participates in overload resolution if
+      ///       std::is_constructible_v<T_I, Args...> is true.
+      ///
+      /// The behavior is undefined if I is not less than sizeof...(Types).
+      ///
+      /// \tparam I the index of the variant alternative to construct
+      /// \param args the arguments to forward to the constructor of \p T
+      /// \return reference to constructed element
+      template <std::size_t I, typename... Args,
+                typename = enable_if_t<std::is_constructible<detail::nth_type_t<I, Types...>, Args...>::value>>
+      auto emplace(Args &&...args) -> variant_alternative_t<I, variant> &;
 
-    /// \brief Creates a new value in-place
-    ///
-    /// First, destroys the currently contained value (if any).
-    /// Then direct-initializes the contained value as if constructing a
-    /// value of type T_I with the arguments
-    /// il,std::forward<Args>(args)...
-    ///
-    /// If an exception is thrown, *this may become
-    /// valueless_by_exception.
-    ///
-    /// \note This overload only participates in overload resolution if
-    ///       std::is_constructible_v<T_I, std::initializer_list<U> Args...>
-    ///       is true.
-    ///
-    /// The behavior is undefined if I is not less than sizeof...(Types).
-    ///
-    /// \tparam I the index of the variant alternative to construct
-    /// \param args the arguments to forward to the constructor of \p T
-    /// \return reference to constructed element
-    template <std::size_t I, typename U, typename... Args,
-              typename=enable_if_t<std::is_constructible<detail::nth_type_t<I,Types...>,std::initializer_list<U>&,Args...>::value>>
-    variant_alternative_t<I, variant>& emplace(std::initializer_list<U> il, Args&&... args);
+      /// \brief Creates a new value in-place
+      ///
+      /// First, destroys the currently contained value (if any).
+      /// Then direct-initializes the contained value as if constructing a
+      /// value of type T_I with the arguments
+      /// il,std::forward<Args>(args)...
+      ///
+      /// If an exception is thrown, *this may become
+      /// valueless_by_exception.
+      ///
+      /// \note This overload only participates in overload resolution if
+      ///       std::is_constructible_v<T_I, std::initializer_list<U> Args...>
+      ///       is true.
+      ///
+      /// The behavior is undefined if I is not less than sizeof...(Types).
+      ///
+      /// \tparam I the index of the variant alternative to construct
+      /// \param args the arguments to forward to the constructor of \p T
+      /// \return reference to constructed element
+      template <std::size_t I, typename U, typename... Args,
+                typename = enable_if_t<
+                    std::is_constructible<detail::nth_type_t<I, Types...>, std::initializer_list<U> &, Args...>::value>>
+      auto emplace(std::initializer_list<U> il, Args &&...args) -> variant_alternative_t<I, variant> &;
 
-    /// \brief Swaps the contents of this and \p rhs
-    ///
-    /// \param rhs the entry to swap with
-    void swap(variant& rhs)
-       noexcept(bpstd::conjunction<bpstd::is_nothrow_move_constructible<Types>...,
-                                   bpstd::is_nothrow_swappable<Types>...>::value);
+      /// \brief Swaps the contents of this and \p rhs
+      ///
+      /// \param rhs the entry to swap with
+      void swap(variant &rhs) noexcept(bpstd::conjunction<bpstd::is_nothrow_move_constructible<Types>...,
+                                                          bpstd::is_nothrow_swappable<Types>...>::value);
 
-
-    //--------------------------------------------------------------------------
-    // Private Members
-    //--------------------------------------------------------------------------
+      //--------------------------------------------------------------------------
+      // Private Members
+      //--------------------------------------------------------------------------
   private:
+      static auto alternative_is_nothrow_copy_constructible(std::size_t i) noexcept -> bool;
+      static auto alternative_is_nothrow_move_constructible(std::size_t i) noexcept -> bool;
 
-    static bool alternative_is_nothrow_copy_constructible(std::size_t i) noexcept;
-    static bool alternative_is_nothrow_move_constructible(std::size_t i) noexcept;
-
-    //--------------------------------------------------------------------------
-    // Friend Declarations
-    //--------------------------------------------------------------------------
+      //--------------------------------------------------------------------------
+      // Friend Declarations
+      //--------------------------------------------------------------------------
   private:
 
     // 'variant' requires a whole lot of friends, due to most of its API
     // consisting of free-functions that access the underlying data.
 
-    template <typename...UTypes>
-    friend BPSTD_CPP14_CONSTEXPR
-    bool operator==(const variant<UTypes...>&,
-                    const variant<UTypes...>&) noexcept;
+      template <typename... UTypes>
+      friend BPSTD_CPP14_CONSTEXPR auto operator==(const variant<UTypes...> &, const variant<UTypes...> &) noexcept
+          -> bool;
 
-    template <typename...UTypes>
-    friend BPSTD_CPP14_CONSTEXPR
-    bool operator!=(const variant<UTypes...>&,
-                    const variant<UTypes...>&) noexcept;
+      template <typename... UTypes>
+      friend BPSTD_CPP14_CONSTEXPR auto operator!=(const variant<UTypes...> &, const variant<UTypes...> &) noexcept
+          -> bool;
 
-    template <typename...UTypes>
-    friend BPSTD_CPP14_CONSTEXPR
-    bool operator<(const variant<UTypes...>&,
-                   const variant<UTypes...>&) noexcept;
+      template <typename... UTypes>
+      friend BPSTD_CPP14_CONSTEXPR auto operator<(const variant<UTypes...> &, const variant<UTypes...> &) noexcept
+          -> bool;
 
-    template <typename...UTypes>
-    friend BPSTD_CPP14_CONSTEXPR
-    bool operator>(const variant<UTypes...>&,
-                   const variant<UTypes...>&) noexcept;
+      template <typename... UTypes>
+      friend BPSTD_CPP14_CONSTEXPR auto operator>(const variant<UTypes...> &, const variant<UTypes...> &) noexcept
+          -> bool;
 
-    template <typename...UTypes>
-    friend BPSTD_CPP14_CONSTEXPR
-    bool operator<=(const variant<UTypes...>&,
-                    const variant<UTypes...>&) noexcept;
+      template <typename... UTypes>
+      friend BPSTD_CPP14_CONSTEXPR auto operator<=(const variant<UTypes...> &, const variant<UTypes...> &) noexcept
+          -> bool;
 
-    template <typename...UTypes>
-    friend BPSTD_CPP14_CONSTEXPR
-    bool operator>=(const variant<UTypes...>&,
-                    const variant<UTypes...>&) noexcept;
+      template <typename... UTypes>
+      friend BPSTD_CPP14_CONSTEXPR auto operator>=(const variant<UTypes...> &, const variant<UTypes...> &) noexcept
+          -> bool;
 
-    template <typename Visitor, typename Variant>
-    BPSTD_CPP14_CONSTEXPR
-    friend detail::variant_visitor_invoke_result_t<Visitor,Variant>
-      visit(Visitor&&, Variant&&);
+      template <typename Visitor, typename Variant>
+      BPSTD_CPP14_CONSTEXPR friend auto visit(Visitor &&, Variant &&)
+          -> detail::variant_visitor_invoke_result_t<Visitor, Variant>;
 
-    template <std::size_t I, typename...UTypes>
-    friend BPSTD_CPP14_CONSTEXPR
-    variant_alternative_t<I, variant<UTypes...>>&
-      get(variant<UTypes...>&);
+      template <std::size_t I, typename... UTypes>
+      friend BPSTD_CPP14_CONSTEXPR auto get(variant<UTypes...> &) -> variant_alternative_t<I, variant<UTypes...>> &;
 
-    template <std::size_t I, typename...UTypes>
-    friend BPSTD_CPP14_CONSTEXPR
-    variant_alternative_t<I, variant<UTypes...>>&&
-      get(variant<UTypes...>&&);
+      template <std::size_t I, typename... UTypes>
+      friend BPSTD_CPP14_CONSTEXPR auto get(variant<UTypes...> &&) -> variant_alternative_t<I, variant<UTypes...>> &&;
 
-    template <std::size_t I, typename...UTypes>
-    friend BPSTD_CPP14_CONSTEXPR
-    const variant_alternative_t<I, variant<UTypes...>>&
-      get(const variant<UTypes...>&);
+      template <std::size_t I, typename... UTypes>
+      friend BPSTD_CPP14_CONSTEXPR auto get(const variant<UTypes...> &)
+          -> const variant_alternative_t<I, variant<UTypes...>> &;
 
-    template <std::size_t I, typename...UTypes>
-    friend BPSTD_CPP14_CONSTEXPR
-    const variant_alternative_t<I, variant<UTypes...>>&&
-      get(const variant<UTypes...>&&);
+      template <std::size_t I, typename... UTypes>
+      friend BPSTD_CPP14_CONSTEXPR auto get(const variant<UTypes...> &&)
+          -> const variant_alternative_t<I, variant<UTypes...>> &&;
 
-    template <std::size_t I, typename...UTypes>
-    friend constexpr
-    add_pointer_t<variant_alternative_t<I, variant<UTypes...>>>
-      get_if(variant<UTypes...>*) noexcept;
+      template <std::size_t I, typename... UTypes>
+      friend constexpr auto get_if(variant<UTypes...> *) noexcept
+          -> add_pointer_t<variant_alternative_t<I, variant<UTypes...>>>;
 
-    template <std::size_t I, typename...UTypes>
-    friend constexpr
-    add_pointer_t<const variant_alternative_t<I, variant<UTypes...>>>
-      get_if(const variant<UTypes...>*) noexcept;
-
+      template <std::size_t I, typename... UTypes>
+      friend constexpr auto get_if(const variant<UTypes...> *) noexcept
+          -> add_pointer_t<const variant_alternative_t<I, variant<UTypes...>>>;
   };
 
   //============================================================================
@@ -870,30 +851,18 @@ namespace bpstd {
   // Comparison
   //----------------------------------------------------------------------------
 
-  template <typename...Types>
-  BPSTD_CPP14_CONSTEXPR
-  bool operator==(const variant<Types...>& lhs,
-                  const variant<Types...>& rhs) noexcept;
-  template <typename...Types>
-  BPSTD_CPP14_CONSTEXPR
-  bool operator!=(const variant<Types...>& lhs,
-                  const variant<Types...>& rhs) noexcept;
-  template <typename...Types>
-  BPSTD_CPP14_CONSTEXPR
-  bool operator<(const variant<Types...>& lhs,
-                 const variant<Types...>& rhs) noexcept;
-  template <typename...Types>
-  BPSTD_CPP14_CONSTEXPR
-  bool operator>(const variant<Types...>& lhs,
-                 const variant<Types...>& rhs) noexcept;
-  template <typename...Types>
-  BPSTD_CPP14_CONSTEXPR
-  bool operator<=(const variant<Types...>& lhs,
-                  const variant<Types...>& rhs) noexcept;
-  template <typename...Types>
-  BPSTD_CPP14_CONSTEXPR
-  bool operator>=(const variant<Types...>& lhs,
-                  const variant<Types...>& rhs) noexcept;
+  template <typename... Types>
+  BPSTD_CPP14_CONSTEXPR auto operator==(const variant<Types...> &lhs, const variant<Types...> &rhs) noexcept -> bool;
+  template <typename... Types>
+  BPSTD_CPP14_CONSTEXPR auto operator!=(const variant<Types...> &lhs, const variant<Types...> &rhs) noexcept -> bool;
+  template <typename... Types>
+  BPSTD_CPP14_CONSTEXPR auto operator<(const variant<Types...> &lhs, const variant<Types...> &rhs) noexcept -> bool;
+  template <typename... Types>
+  BPSTD_CPP14_CONSTEXPR auto operator>(const variant<Types...> &lhs, const variant<Types...> &rhs) noexcept -> bool;
+  template <typename... Types>
+  BPSTD_CPP14_CONSTEXPR auto operator<=(const variant<Types...> &lhs, const variant<Types...> &rhs) noexcept -> bool;
+  template <typename... Types>
+  BPSTD_CPP14_CONSTEXPR auto operator>=(const variant<Types...> &lhs, const variant<Types...> &rhs) noexcept -> bool;
 
   //----------------------------------------------------------------------------
   // Utilities
@@ -917,8 +886,8 @@ namespace bpstd {
   /// \param v the variant to visit
   /// \return the result of visiting the variant \p v
   template <typename Visitor, typename Variant>
-  BPSTD_CPP14_CONSTEXPR bpstd::detail::variant_visitor_invoke_result_t<Visitor,Variant>
-    visit(Visitor&& visitor, Variant&& v);
+  BPSTD_CPP14_CONSTEXPR auto visit(Visitor &&visitor, Variant &&v)
+      -> bpstd::detail::variant_visitor_invoke_result_t<Visitor, Variant>;
 
   // /// \brief Visits the variants \p variant0 and \p variants
   // ///
@@ -926,9 +895,9 @@ namespace bpstd {
   // /// \param variant0 the first variant to visit
   // /// \param variants the rest of the variant to visit
   // /// \return the result of visiting the variants
-  template <typename Visitor, typename Variant0, typename...Variants>
-  BPSTD_CPP14_CONSTEXPR bpstd::detail::variant_visitor_invoke_result_t<Visitor,Variant0, Variants...>
-    visit(Visitor&& visitor, Variant0&& variant0, Variants&&...variants);
+  template <typename Visitor, typename Variant0, typename... Variants>
+  BPSTD_CPP14_CONSTEXPR auto visit(Visitor &&visitor, Variant0 &&variant0, Variants &&...variants)
+      -> bpstd::detail::variant_visitor_invoke_result_t<Visitor, Variant0, Variants...>;
 
   //----------------------------------------------------------------------------
 
@@ -938,8 +907,8 @@ namespace bpstd {
   ///
   /// \param v variant to examine
   /// \return true if the variant currently holds the alternative T
-  template <typename T, typename...Types>
-  constexpr bool holds_alternative(const variant<Types...>& v) noexcept;
+  template <typename T, typename... Types>
+  constexpr auto holds_alternative(const variant<Types...> &v) noexcept -> bool;
 
   //----------------------------------------------------------------------------
 
@@ -949,18 +918,14 @@ namespace bpstd {
   /// \tparam I the alternative index
   /// \param v the variant
   /// \return the alternative at index \p I
-  template <std::size_t I, typename...Types>
-  BPSTD_CPP14_CONSTEXPR variant_alternative_t<I, variant<Types...>>&
-    get(variant<Types...>& v);
-  template <std::size_t I, typename...Types>
-  BPSTD_CPP14_CONSTEXPR variant_alternative_t<I, variant<Types...>>&&
-    get(variant<Types...>&& v);
-  template <std::size_t I, typename...Types>
-  BPSTD_CPP14_CONSTEXPR const variant_alternative_t<I, variant<Types...>>&
-    get(const variant<Types...>& v);
-  template <std::size_t I, typename...Types>
-  BPSTD_CPP14_CONSTEXPR const variant_alternative_t<I, variant<Types...>>&&
-    get(const variant<Types...>&& v);
+  template <std::size_t I, typename... Types>
+  BPSTD_CPP14_CONSTEXPR auto get(variant<Types...> &v) -> variant_alternative_t<I, variant<Types...>> &;
+  template <std::size_t I, typename... Types>
+  BPSTD_CPP14_CONSTEXPR auto get(variant<Types...> &&v) -> variant_alternative_t<I, variant<Types...>> &&;
+  template <std::size_t I, typename... Types>
+  BPSTD_CPP14_CONSTEXPR auto get(const variant<Types...> &v) -> const variant_alternative_t<I, variant<Types...>> &;
+  template <std::size_t I, typename... Types>
+  BPSTD_CPP14_CONSTEXPR auto get(const variant<Types...> &&v) -> const variant_alternative_t<I, variant<Types...>> &&;
   /// \}
 
   //----------------------------------------------------------------------------
@@ -973,14 +938,10 @@ namespace bpstd {
   /// \tparam T the type of the alternative to retrieve
   /// \param v the variant to extract the entry from
   /// \return the alternative
-  template <typename T, typename...Types>
-  BPSTD_CPP14_CONSTEXPR T& get(variant<Types...>& v);
-  template <typename T, typename...Types>
-  BPSTD_CPP14_CONSTEXPR T&& get(variant<Types...>&& v);
-  template <typename T, typename...Types>
-  BPSTD_CPP14_CONSTEXPR const T& get(const variant<Types...>& v);
-  template <typename T, typename...Types>
-  BPSTD_CPP14_CONSTEXPR const T&& get(const variant<Types...>&& v);
+  template <typename T, typename... Types> BPSTD_CPP14_CONSTEXPR auto get(variant<Types...> &v) -> T &;
+  template <typename T, typename... Types> BPSTD_CPP14_CONSTEXPR auto get(variant<Types...> &&v) -> T &&;
+  template <typename T, typename... Types> BPSTD_CPP14_CONSTEXPR auto get(const variant<Types...> &v) -> const T &;
+  template <typename T, typename... Types> BPSTD_CPP14_CONSTEXPR auto get(const variant<Types...> &&v) -> const T &&;
   /// \}
 
   //----------------------------------------------------------------------------
@@ -997,12 +958,11 @@ namespace bpstd {
   /// \tparam I the index of the alternative to extract
   /// \param pv the pointer to the variant to extract the value from
   /// \return pointer to the variant alternative when successful
-  template <std::size_t I, typename...Types>
-  constexpr add_pointer_t<variant_alternative_t<I, variant<Types...>>>
-    get_if(variant<Types...>* pv) noexcept;
-  template <std::size_t I, typename...Types>
-  constexpr add_pointer_t<const variant_alternative_t<I, variant<Types...>>>
-    get_if(const variant<Types...>* pv) noexcept;
+  template <std::size_t I, typename... Types>
+  constexpr auto get_if(variant<Types...> *pv) noexcept -> add_pointer_t<variant_alternative_t<I, variant<Types...>>>;
+  template <std::size_t I, typename... Types>
+  constexpr auto get_if(const variant<Types...> *pv) noexcept
+      -> add_pointer_t<const variant_alternative_t<I, variant<Types...>>>;
   /// \}
 
   /// \{
@@ -1016,10 +976,9 @@ namespace bpstd {
   /// \tparam T the alternative type to retrieve
   /// \param pv the pointer to the variant to extract the value from
   /// \return pointer to the variant alternative when successful
-  template <typename T, typename...Types>
-  constexpr add_pointer_t<T> get_if(variant<Types...>* pv) noexcept;
-  template <typename T, typename...Types>
-  constexpr add_pointer_t<const T> get_if(const variant<Types...>* pv) noexcept;
+  template <typename T, typename... Types> constexpr auto get_if(variant<Types...> *pv) noexcept -> add_pointer_t<T>;
+  template <typename T, typename... Types>
+  constexpr auto get_if(const variant<Types...> *pv) noexcept -> add_pointer_t<const T>;
   /// \}
 
 } // namespace bpstd
@@ -1028,44 +987,32 @@ namespace bpstd {
 // struct : monostate
 //==============================================================================
 
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator==(monostate, monostate)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator==(monostate, monostate) noexcept -> bool
 {
   return true;
 }
 
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator!=(monostate, monostate)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator!=(monostate, monostate) noexcept -> bool
 {
   return false;
 }
 
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator<(monostate, monostate)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator<(monostate, monostate) noexcept -> bool
 {
   return false;
 }
 
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator>(monostate, monostate)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator>(monostate, monostate) noexcept -> bool
 {
   return false;
 }
 
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator<=(monostate, monostate)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator<=(monostate, monostate) noexcept -> bool
 {
   return true;
 }
 
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator>=(monostate, monostate)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator>=(monostate, monostate) noexcept -> bool
 {
   return true;
 }
@@ -1074,9 +1021,7 @@ bool bpstd::operator>=(monostate, monostate)
 // class : bad_variant_access
 //==============================================================================
 
-inline
-const char* bpstd::bad_variant_access::what()
-  const noexcept
+inline auto bpstd::bad_variant_access::what() const noexcept -> const char *
 {
   return "bad_variant_access";
 }
@@ -1197,10 +1142,10 @@ bpstd::variant<Types...>::variant(in_place_index_t<I>, std::initializer_list<U> 
 
 //------------------------------------------------------------------------------
 
-template <typename...Types>
-inline BPSTD_INLINE_VISIBILITY
-bpstd::variant<Types...>&
-  bpstd::variant<Types...>::operator=(detail::enable_overload_if_t<is_copy_assignable,const variant&> other)
+template <typename... Types>
+inline BPSTD_INLINE_VISIBILITY auto
+bpstd::variant<Types...>::operator=(detail::enable_overload_if_t<is_copy_assignable, const variant &> other)
+    -> bpstd::variant<Types...> &
 {
   if (other.valueless_by_exception()) {
     base_type::destroy_active_object();
@@ -1236,12 +1181,11 @@ bpstd::variant<Types...>&
   return this->operator=(variant(other));
 }
 
-template <typename...Types>
-inline BPSTD_INLINE_VISIBILITY
-bpstd::variant<Types...>&
-  bpstd::variant<Types...>::operator=(detail::enable_overload_if_t<is_move_assignable,variant&&> other)
-  noexcept(conjunction<std::is_nothrow_move_constructible<Types>...,
-                       std::is_nothrow_move_assignable<Types>...>::value)
+template <typename... Types>
+inline BPSTD_INLINE_VISIBILITY auto
+bpstd::variant<Types...>::operator=(detail::enable_overload_if_t<is_move_assignable, variant &&> other) noexcept(
+    conjunction<std::is_nothrow_move_constructible<Types>..., std::is_nothrow_move_assignable<Types>...>::value)
+    -> bpstd::variant<Types...> &
 {
   if (other.valueless_by_exception()) {
     base_type::destroy_active_object();
@@ -1270,12 +1214,12 @@ bpstd::variant<Types...>&
   return (*this);
 }
 
-template <typename...Types>
+template <typename... Types>
 template <typename T, typename>
-inline BPSTD_INLINE_VISIBILITY
-bpstd::variant<Types...>& bpstd::variant<Types...>::operator=(T&& t)
-  noexcept(std::is_nothrow_assignable<typename bpstd::variant<Types...>::template T_j<T>,T>::value &&
-           std::is_nothrow_constructible<typename bpstd::variant<Types...>::template T_j<T>,T>::value)
+inline BPSTD_INLINE_VISIBILITY auto bpstd::variant<Types...>::operator=(T &&t) noexcept(
+    std::is_nothrow_assignable<typename bpstd::variant<Types...>::template T_j<T>, T>::value
+        &&std::is_nothrow_constructible<typename bpstd::variant<Types...>::template T_j<T>, T>::value)
+    -> bpstd::variant<Types...> &
 {
   static constexpr auto index = detail::index_of_constructible_alternative<T,Types...>::value;
 
@@ -1306,18 +1250,14 @@ bpstd::variant<Types...>& bpstd::variant<Types...>::operator=(T&& t)
 // Observers
 //------------------------------------------------------------------------------
 
-template <typename...Types>
-inline BPSTD_INLINE_VISIBILITY constexpr
-std::size_t bpstd::variant<Types...>::index()
-  const noexcept
+template <typename... Types>
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::variant<Types...>::index() const noexcept -> std::size_t
 {
   return base_type::m_index;
 }
 
-template <typename...Types>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::variant<Types...>::valueless_by_exception()
-  const noexcept
+template <typename... Types>
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::variant<Types...>::valueless_by_exception() const noexcept -> bool
 {
   return index() == variant_npos;
 }
@@ -1326,10 +1266,9 @@ bool bpstd::variant<Types...>::valueless_by_exception()
 // Modifiers
 //------------------------------------------------------------------------------
 
-template <typename...Types>
-template <typename T, typename...Args, typename>
-inline BPSTD_INLINE_VISIBILITY
-T& bpstd::variant<Types...>::emplace(Args&&...args)
+template <typename... Types>
+template <typename T, typename... Args, typename>
+inline BPSTD_INLINE_VISIBILITY auto bpstd::variant<Types...>::emplace(Args &&...args) -> T &
 {
   using index_type = detail::index_from<T,Types...>;
 
@@ -1338,10 +1277,10 @@ T& bpstd::variant<Types...>::emplace(Args&&...args)
   return emplace<index_type::value>(bpstd::forward<Args>(args)...);
 }
 
-template <typename...Types>
-template <typename T, typename U, typename...Args, typename>
-inline BPSTD_INLINE_VISIBILITY
-T& bpstd::variant<Types...>::emplace(std::initializer_list<U> il, Args&&...args)
+template <typename... Types>
+template <typename T, typename U, typename... Args, typename>
+inline BPSTD_INLINE_VISIBILITY auto bpstd::variant<Types...>::emplace(std::initializer_list<U> il, Args &&...args)
+    -> T &
 {
   using index_type = detail::index_from<T,Types...>;
 
@@ -1350,11 +1289,10 @@ T& bpstd::variant<Types...>::emplace(std::initializer_list<U> il, Args&&...args)
   return emplace<index_type::value>(il, bpstd::forward<Args>(args)...);
 }
 
-template <typename...Types>
+template <typename... Types>
 template <std::size_t I, typename... Args, typename>
-inline BPSTD_INLINE_VISIBILITY
-bpstd::variant_alternative_t<I, bpstd::variant<Types...>>&
-  bpstd::variant<Types...>::emplace(Args&&...args)
+inline BPSTD_INLINE_VISIBILITY auto bpstd::variant<Types...>::emplace(Args &&...args)
+    -> bpstd::variant_alternative_t<I, bpstd::variant<Types...>> &
 {
   using type = detail::nth_type_t<I,Types...>;
 
@@ -1372,12 +1310,10 @@ bpstd::variant_alternative_t<I, bpstd::variant<Types...>>&
   return detail::union_get<I>(base_type::m_union);
 }
 
-
-template <typename...Types>
+template <typename... Types>
 template <std::size_t I, typename U, typename... Args, typename>
-inline BPSTD_INLINE_VISIBILITY
-bpstd::variant_alternative_t<I, bpstd::variant<Types...>>&
-  bpstd::variant<Types...>::emplace(std::initializer_list<U> il, Args&&... args)
+inline BPSTD_INLINE_VISIBILITY auto bpstd::variant<Types...>::emplace(std::initializer_list<U> il, Args &&...args)
+    -> bpstd::variant_alternative_t<I, bpstd::variant<Types...>> &
 {
   using type = detail::nth_type_t<I,Types...>;
 
@@ -1420,20 +1356,18 @@ void bpstd::variant<Types...>::swap(variant& other)
   }
 }
 
-template <typename...Types>
-inline BPSTD_INLINE_VISIBILITY
-bool bpstd::variant<Types...>::alternative_is_nothrow_copy_constructible(std::size_t i)
-  noexcept
+template <typename... Types>
+inline BPSTD_INLINE_VISIBILITY auto
+bpstd::variant<Types...>::alternative_is_nothrow_copy_constructible(std::size_t i) noexcept -> bool
 {
   const bool alternatives[]{bpstd::is_nothrow_copy_constructible<Types>::value...};
 
   return alternatives[i];
 }
 
-template <typename...Types>
-inline BPSTD_INLINE_VISIBILITY
-bool bpstd::variant<Types...>::alternative_is_nothrow_move_constructible(std::size_t i)
-  noexcept
+template <typename... Types>
+inline BPSTD_INLINE_VISIBILITY auto
+bpstd::variant<Types...>::alternative_is_nothrow_move_constructible(std::size_t i) noexcept -> bool
 {
   const bool alternatives[]{bpstd::is_nothrow_move_constructible<Types>::value...};
 
@@ -1448,11 +1382,10 @@ bool bpstd::variant<Types...>::alternative_is_nothrow_move_constructible(std::si
 // Comparisons
 //------------------------------------------------------------------------------
 
-template <typename...Types>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-bool bpstd::operator==(const variant<Types...>& lhs,
-                       const variant<Types...>& rhs)
-  noexcept
+template <typename... Types>
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::operator==(const variant<Types...> &lhs,
+                                                                            const variant<Types...> &rhs) noexcept
+    -> bool
 {
   if (lhs.index() != rhs.index()) {
     return false;
@@ -1463,11 +1396,10 @@ bool bpstd::operator==(const variant<Types...>& lhs,
   return detail::visit_union(lhs.index(), equal_to<>{}, lhs.m_union, rhs.m_union);
 }
 
-template <typename...Types>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-bool bpstd::operator!=(const variant<Types...>& lhs,
-                       const variant<Types...>& rhs)
-  noexcept
+template <typename... Types>
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::operator!=(const variant<Types...> &lhs,
+                                                                            const variant<Types...> &rhs) noexcept
+    -> bool
 {
   if (lhs.index() != rhs.index()) {
     return true;
@@ -1478,11 +1410,10 @@ bool bpstd::operator!=(const variant<Types...>& lhs,
   return detail::visit_union(lhs.index(), not_equal_to<>{}, lhs.m_union, rhs.m_union);
 }
 
-template <typename...Types>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-bool bpstd::operator<(const variant<Types...>& lhs,
-                      const variant<Types...>& rhs)
-  noexcept
+template <typename... Types>
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::operator<(const variant<Types...> &lhs,
+                                                                           const variant<Types...> &rhs) noexcept
+    -> bool
 {
   if (rhs.valueless_by_exception()) {
     return false;
@@ -1499,11 +1430,10 @@ bool bpstd::operator<(const variant<Types...>& lhs,
   return detail::visit_union(lhs.index(), less<>{}, lhs.m_union, rhs.m_union);
 }
 
-template <typename...Types>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-bool bpstd::operator>(const variant<Types...>& lhs,
-                      const variant<Types...>& rhs)
-  noexcept
+template <typename... Types>
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::operator>(const variant<Types...> &lhs,
+                                                                           const variant<Types...> &rhs) noexcept
+    -> bool
 {
   if (lhs.valueless_by_exception()) {
     return false;
@@ -1520,11 +1450,10 @@ bool bpstd::operator>(const variant<Types...>& lhs,
   return detail::visit_union(lhs.index(), greater<>{}, lhs.m_union, rhs.m_union);
 }
 
-template <typename...Types>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-bool bpstd::operator<=(const variant<Types...>& lhs,
-                       const variant<Types...>& rhs)
-  noexcept
+template <typename... Types>
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::operator<=(const variant<Types...> &lhs,
+                                                                            const variant<Types...> &rhs) noexcept
+    -> bool
 {
   if (lhs.valueless_by_exception()) {
     return true;
@@ -1541,11 +1470,10 @@ bool bpstd::operator<=(const variant<Types...>& lhs,
   return detail::visit_union(lhs.index(), less_equal<>{}, lhs.m_union, rhs.m_union);
 }
 
-template <typename...Types>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-bool bpstd::operator>=(const variant<Types...>& lhs,
-                       const variant<Types...>& rhs)
-  noexcept
+template <typename... Types>
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::operator>=(const variant<Types...> &lhs,
+                                                                            const variant<Types...> &rhs) noexcept
+    -> bool
 {
   if (rhs.valueless_by_exception()) {
     return true;
@@ -1579,9 +1507,8 @@ void bpstd::swap(variant<Types...>& lhs, variant<Types...>& rhs)
 //------------------------------------------------------------------------------
 
 template <typename Visitor, typename Variant>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-bpstd::detail::variant_visitor_invoke_result_t<Visitor,Variant>
-  bpstd::visit(Visitor&& visitor, Variant&& v)
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::visit(Visitor &&visitor, Variant &&v)
+    -> bpstd::detail::variant_visitor_invoke_result_t<Visitor, Variant>
 {
   using union_type = detail::match_cvref_t<Variant, decltype(v.m_union)>;
 
@@ -1598,23 +1525,23 @@ bpstd::detail::variant_visitor_invoke_result_t<Visitor,Variant>
 
 namespace bpstd { namespace detail {
 
-template <typename Variant0, typename...Variants>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool are_any_valueless_by_exception(const Variant0& v0, const Variants&...vs)
+template <typename Variant0, typename... Variants>
+inline BPSTD_INLINE_VISIBILITY constexpr auto are_any_valueless_by_exception(const Variant0 &v0, const Variants &...vs)
+    -> bool
 {
   return v0.valueless_by_exception() || are_any_valueless_by_exception(vs...);
 }
 
 template <typename Variant0>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool are_any_valueless_by_exception(const Variant0& v0)
+inline BPSTD_INLINE_VISIBILITY constexpr auto are_any_valueless_by_exception(const Variant0 &v0) -> bool
 {
   return v0.valueless_by_exception();
 }
 
-template <typename...Args, typename T, std::size_t...Idxs>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-std::tuple<Args&&...,T&&> tuple_push_back_aux(std::tuple<Args...>& args, T&& v, index_sequence<Idxs...>)
+template <typename... Args, typename T, std::size_t... Idxs>
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto tuple_push_back_aux(std::tuple<Args...> &args, T &&v,
+                                                                              index_sequence<Idxs...>)
+    -> std::tuple<Args &&..., T &&>
 {
   (void) args;
   return std::forward_as_tuple(std::get<Idxs>(bpstd::move(args))..., bpstd::forward<T>(v));
@@ -1622,9 +1549,9 @@ std::tuple<Args&&...,T&&> tuple_push_back_aux(std::tuple<Args...>& args, T&& v, 
 
 // Appends an element to a forwarding tuple
 // Returns with '&&' to reference-collapse returned types
-template <typename...Args, typename T>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-std::tuple<Args&&...,T&&> tuple_push_back(std::tuple<Args...>& args, T&& t)
+template <typename... Args, typename T>
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto tuple_push_back(std::tuple<Args...> &args, T &&t)
+    -> std::tuple<Args &&..., T &&>
 {
   static_assert(
     conjunction<is_reference<Args>...,true_type>::value,
@@ -1634,18 +1561,19 @@ std::tuple<Args&&...,T&&> tuple_push_back(std::tuple<Args...>& args, T&& t)
   return tuple_push_back_aux(args, bpstd::forward<T>(t), index_sequence_for<Args...>{});
 }
 
-template <typename Arg0, typename...Args, std::size_t...Idxs>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-std::tuple<Args...> tuple_pop_front_aux(std::tuple<Arg0,Args...>& args, index_sequence<0, Idxs...>)
+template <typename Arg0, typename... Args, std::size_t... Idxs>
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto tuple_pop_front_aux(std::tuple<Arg0, Args...> &args,
+                                                                              index_sequence<0, Idxs...>)
+    -> std::tuple<Args...>
 {
   (void) args;
   return std::forward_as_tuple(std::get<Idxs>(bpstd::move(args))...);
 }
 
 // Removes the front element of a forwarding tuple
-template <typename Arg0, typename...Args>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-std::tuple<Args...> tuple_pop_front(std::tuple<Arg0,Args...>& args)
+template <typename Arg0, typename... Args>
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto tuple_pop_front(std::tuple<Arg0, Args...> &args)
+    -> std::tuple<Args...>
 {
   static_assert(
     conjunction<is_reference<Arg0>,is_reference<Args>...>::value,
@@ -1659,9 +1587,8 @@ template <typename Return, typename Visitor, typename Variants, typename Argumen
 class multi_variant_visitor;
 
 template <typename T, typename Visitor, typename Variants, typename Arguments>
-BPSTD_CPP14_CONSTEXPR
-multi_variant_visitor<T, Visitor, remove_cvref_t<Variants>, remove_cvref_t<Arguments>>
-  make_multi_visitor(Visitor&& vistior, Variants&& variants, Arguments&& args);
+BPSTD_CPP14_CONSTEXPR auto make_multi_visitor(Visitor &&vistior, Variants &&variants, Arguments &&args)
+    -> multi_variant_visitor<T, Visitor, remove_cvref_t<Variants>, remove_cvref_t<Arguments>>;
 
 template <typename Return, typename Visitor, typename Variant0, typename...Variants, typename...Args>
 class multi_variant_visitor<Return, Visitor, std::tuple<Variant0,Variants...>, std::tuple<Args...>>
@@ -1686,9 +1613,7 @@ public:
 
   }
 
-  template <typename T>
-  inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-  Return operator()(T&& v)
+  template <typename T> inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto operator()(T &&v) -> Return
   {
     // static_assert(is_reference<T>::value, "T should always be a reference type");
 
@@ -1727,9 +1652,7 @@ public:
 
   }
 
-  template <typename T>
-  inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-  Return operator()(T&& v)
+  template <typename T> inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto operator()(T &&v) -> Return
   {
     return apply(
       bpstd::forward<Visitor>(m_visitor),
@@ -1744,9 +1667,9 @@ private:
 };
 
 template <typename T, typename Visitor, typename Variants, typename Arguments>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-multi_variant_visitor<T,Visitor, remove_cvref_t<Variants>, remove_cvref_t<Arguments>>
-  make_multi_visitor(Visitor&& visitor, Variants&& variants, Arguments&& args)
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto make_multi_visitor(Visitor &&visitor, Variants &&variants,
+                                                                             Arguments &&args)
+    -> multi_variant_visitor<T, Visitor, remove_cvref_t<Variants>, remove_cvref_t<Arguments>>
 {
   return {
     bpstd::forward<Visitor>(visitor),
@@ -1757,10 +1680,10 @@ multi_variant_visitor<T,Visitor, remove_cvref_t<Variants>, remove_cvref_t<Argume
 
 }} // namespace bpstd::detail
 
-template <typename Visitor, typename Variant0, typename...Variants>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-bpstd::detail::variant_visitor_invoke_result_t<Visitor,Variant0, Variants...>
-  bpstd::visit(Visitor&& visitor, Variant0&& variant0, Variants&&...variants)
+template <typename Visitor, typename Variant0, typename... Variants>
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::visit(Visitor &&visitor, Variant0 &&variant0,
+                                                                       Variants &&...variants)
+    -> bpstd::detail::variant_visitor_invoke_result_t<Visitor, Variant0, Variants...>
 {
   using type = bpstd::detail::variant_visitor_invoke_result_t<Visitor,Variant0, Variants...>;
 
@@ -1779,21 +1702,17 @@ bpstd::detail::variant_visitor_invoke_result_t<Visitor,Variant0, Variants...>
 
 }
 
-
-template <typename T, typename...Types>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::holds_alternative(const variant<Types...>& v)
-  noexcept
+template <typename T, typename... Types>
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::holds_alternative(const variant<Types...> &v) noexcept -> bool
 {
   return detail::index_from<T,Types...>::value == v.index();
 }
 
 //------------------------------------------------------------------------------
 
-template <std::size_t I, typename...Types>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-bpstd::variant_alternative_t<I, bpstd::variant<Types...>>&
-  bpstd::get(variant<Types...>& v)
+template <std::size_t I, typename... Types>
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::get(variant<Types...> &v)
+    -> bpstd::variant_alternative_t<I, bpstd::variant<Types...>> &
 {
   static_assert(
     I < sizeof...(Types),
@@ -1806,10 +1725,9 @@ bpstd::variant_alternative_t<I, bpstd::variant<Types...>>&
   return detail::union_get<I>(v.m_union);
 }
 
-template <std::size_t I, typename...Types>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-bpstd::variant_alternative_t<I, bpstd::variant<Types...>>&&
-  bpstd::get(variant<Types...>&& v)
+template <std::size_t I, typename... Types>
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::get(variant<Types...> &&v)
+    -> bpstd::variant_alternative_t<I, bpstd::variant<Types...>> &&
 {
   static_assert(
     I < sizeof...(Types),
@@ -1822,10 +1740,9 @@ bpstd::variant_alternative_t<I, bpstd::variant<Types...>>&&
   return bpstd::move(detail::union_get<I>(v.m_union));
 }
 
-template <std::size_t I, typename...Types>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-const bpstd::variant_alternative_t<I, bpstd::variant<Types...>>&
-  bpstd::get(const variant<Types...>& v)
+template <std::size_t I, typename... Types>
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::get(const variant<Types...> &v)
+    -> const bpstd::variant_alternative_t<I, bpstd::variant<Types...>> &
 {
   static_assert(
     I < sizeof...(Types),
@@ -1838,10 +1755,9 @@ const bpstd::variant_alternative_t<I, bpstd::variant<Types...>>&
   return detail::union_get<I>(v.m_union);
 }
 
-template <std::size_t I, typename...Types>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-const bpstd::variant_alternative_t<I, bpstd::variant<Types...>>&&
-  bpstd::get(const variant<Types...>&& v)
+template <std::size_t I, typename... Types>
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::get(const variant<Types...> &&v)
+    -> const bpstd::variant_alternative_t<I, bpstd::variant<Types...>> &&
 {
   static_assert(
     I < sizeof...(Types),
@@ -1856,36 +1772,32 @@ const bpstd::variant_alternative_t<I, bpstd::variant<Types...>>&&
 
 //------------------------------------------------------------------------------
 
-template <typename T, typename...Types>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-T& bpstd::get(variant<Types...>& v)
+template <typename T, typename... Types>
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::get(variant<Types...> &v) -> T &
 {
   using index_type = detail::index_from<T,Types...>;
 
   return get<index_type::value>(v);
 }
 
-template <typename T, typename...Types>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-T&& bpstd::get(variant<Types...>&& v)
+template <typename T, typename... Types>
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::get(variant<Types...> &&v) -> T &&
 {
   using index_type = detail::index_from<T,Types...>;
 
   return get<index_type::value>(bpstd::move(v));
 }
 
-template <typename T, typename...Types>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-const T& bpstd::get(const variant<Types...>& v)
+template <typename T, typename... Types>
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::get(const variant<Types...> &v) -> const T &
 {
   using index_type = detail::index_from<T,Types...>;
 
   return get<index_type::value>(v);
 }
 
-template <typename T, typename...Types>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-const T&& bpstd::get(const variant<Types...>&& v)
+template <typename T, typename... Types>
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::get(const variant<Types...> &&v) -> const T &&
 {
   using index_type = detail::index_from<T,Types...>;
 
@@ -1895,11 +1807,9 @@ const T&& bpstd::get(const variant<Types...>&& v)
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
 
-template <std::size_t I, typename...Types>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bpstd::add_pointer_t<bpstd::variant_alternative_t<I, bpstd::variant<Types...>>>
-  bpstd::get_if(variant<Types...>* pv)
-  noexcept
+template <std::size_t I, typename... Types>
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::get_if(variant<Types...> *pv) noexcept
+    -> bpstd::add_pointer_t<bpstd::variant_alternative_t<I, bpstd::variant<Types...>>>
 {
   static_assert(
     I < sizeof...(Types),
@@ -1911,11 +1821,9 @@ bpstd::add_pointer_t<bpstd::variant_alternative_t<I, bpstd::variant<Types...>>>
     : &detail::union_get<I>(pv->m_union);
 }
 
-template <std::size_t I, typename...Types>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bpstd::add_pointer_t<const bpstd::variant_alternative_t<I, bpstd::variant<Types...>>>
-  bpstd::get_if(const variant<Types...>* pv)
-  noexcept
+template <std::size_t I, typename... Types>
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::get_if(const variant<Types...> *pv) noexcept
+    -> bpstd::add_pointer_t<const bpstd::variant_alternative_t<I, bpstd::variant<Types...>>>
 {
   static_assert(
     I < sizeof...(Types),
@@ -1929,22 +1837,17 @@ bpstd::add_pointer_t<const bpstd::variant_alternative_t<I, bpstd::variant<Types.
 
 //------------------------------------------------------------------------------
 
-template <typename T, typename...Types>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bpstd::add_pointer_t<T>
-  bpstd::get_if(variant<Types...>* pv)
-  noexcept
+template <typename T, typename... Types>
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::get_if(variant<Types...> *pv) noexcept -> bpstd::add_pointer_t<T>
 {
   using index_type = detail::index_from<T,Types...>;
 
   return get_if<index_type::value>(pv);
 }
 
-template <typename T, typename...Types>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bpstd::add_pointer_t<const T>
-  bpstd::get_if(const variant<Types...>* pv)
-  noexcept
+template <typename T, typename... Types>
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::get_if(const variant<Types...> *pv) noexcept
+    -> bpstd::add_pointer_t<const T>
 {
   using index_type = detail::index_from<T,Types...>;
 

@@ -173,7 +173,7 @@ void TST_NameRegExp::TestOriginalMeasurementNamesRegExp_data()
     QTest::addColumn<QString>("str");
 
     const QStringList originalNames = AllGroupNames();
-    for (auto &str : originalNames)
+    for (const auto &str : originalNames)
     {
         const QString name = QString("Measurement '%1'").arg(str);
         QTest::newRow(qUtf8Printable(name)) << str;

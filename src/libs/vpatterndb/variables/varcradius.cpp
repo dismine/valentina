@@ -90,7 +90,7 @@ VArcRadius::VArcRadius(const VArcRadius &var)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VArcRadius &VArcRadius::operator=(const VArcRadius &var)
+auto VArcRadius::operator=(const VArcRadius &var) -> VArcRadius &
 {
     if ( &var == this )
     {

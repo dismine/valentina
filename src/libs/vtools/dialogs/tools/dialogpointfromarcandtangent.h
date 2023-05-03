@@ -52,20 +52,20 @@ public:
     DialogPointFromArcAndTangent(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     ~DialogPointFromArcAndTangent();
 
-    QString        GetPointName() const;
+    auto GetPointName() const -> QString;
     void           SetPointName(const QString &value);
 
-    quint32        GetArcId() const;
+    auto GetArcId() const -> quint32;
     void           SetArcId(quint32 value);
 
-    quint32        GetTangentPointId() const;
+    auto GetTangentPointId() const -> quint32;
     void           SetTangentPointId(quint32 value);
 
-    CrossCirclesPoint GetCrossCirclesPoint() const;
+    auto GetCrossCirclesPoint() const -> CrossCirclesPoint;
     void              SetCrossCirclesPoint(CrossCirclesPoint p);
 
     void    SetNotes(const QString &notes);
-    QString GetNotes() const;
+    auto GetNotes() const -> QString;
 
 public slots:
     virtual void   ChosenObject(quint32 id, const SceneObject &type) override;
@@ -76,7 +76,7 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     virtual void   SaveData() override;
-    virtual bool   IsValid() const final;
+    virtual auto IsValid() const -> bool final;
 
 private:
     Q_DISABLE_COPY_MOVE(DialogPointFromArcAndTangent) // NOLINT
@@ -92,7 +92,7 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogPointFromArcAndTangent::IsValid() const
+inline auto DialogPointFromArcAndTangent::IsValid() const -> bool
 {
     return flagName;
 }

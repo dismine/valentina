@@ -56,8 +56,8 @@ VTranslateMeasurements::~VTranslateMeasurements()
  * @param bias hold change of length between translated and origin token string
  * @return true if was found measurement with same name.
  */
-bool VTranslateMeasurements::MeasurementsFromUser(QString &newFormula, vsizetype position, const QString &token,
-                                                  vsizetype &bias) const
+auto VTranslateMeasurements::MeasurementsFromUser(QString &newFormula, vsizetype position, const QString &token,
+                                                  vsizetype &bias) const -> bool
 {
     QMap<QString, qmu::QmuTranslation>::const_iterator i = measurements.constBegin();
     while (i != measurements.constEnd())
@@ -74,7 +74,7 @@ bool VTranslateMeasurements::MeasurementsFromUser(QString &newFormula, vsizetype
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VTranslateMeasurements::MFromUser(const QString &measurement) const
+auto VTranslateMeasurements::MFromUser(const QString &measurement) const -> QString
 {
     QMap<QString, qmu::QmuTranslation>::const_iterator i = measurements.constBegin();
     while (i != measurements.constEnd())
@@ -90,61 +90,53 @@ QString VTranslateMeasurements::MFromUser(const QString &measurement) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VTranslateMeasurements::MToUser(const QString &measurement) const
+auto VTranslateMeasurements::MToUser(const QString &measurement) const -> QString
 {
     if (measurements.contains(measurement))
     {
         return measurements.value(measurement).translate(VAbstractApplication::VApp()->Settings()->GetLocale());
     }
-    else
-    {
-        return measurement;
-    }
+
+    return measurement;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VTranslateMeasurements::MNumber(const QString &measurement) const
+auto VTranslateMeasurements::MNumber(const QString &measurement) const -> QString
 {
     if (numbers.contains(measurement))
     {
         return numbers.value(measurement);
     }
-    else
-    {
-        return QString();
-    }
+
+    return QString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VTranslateMeasurements::MFormula(const QString &measurement) const
+auto VTranslateMeasurements::MFormula(const QString &measurement) const -> QString
 {
     return formulas.value(measurement);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VTranslateMeasurements::GuiText(const QString &measurement) const
+auto VTranslateMeasurements::GuiText(const QString &measurement) const -> QString
 {
     if (guiTexts.contains(measurement))
     {
         return guiTexts.value(measurement).translate(VAbstractApplication::VApp()->Settings()->GetLocale());
     }
-    else
-    {
-        return measurement;
-    }
+
+    return measurement;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VTranslateMeasurements::Description(const QString &measurement) const
+auto VTranslateMeasurements::Description(const QString &measurement) const -> QString
 {
     if (descriptions.contains(measurement))
     {
         return descriptions.value(measurement).translate(VAbstractApplication::VApp()->Settings()->GetLocale());
     }
-    else
-    {
-        return measurement;
-    }
+
+    return measurement;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

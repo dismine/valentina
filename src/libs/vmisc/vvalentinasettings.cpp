@@ -160,7 +160,7 @@ VValentinaSettings::VValentinaSettings(const QString &fileName, QSettings::Forma
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VValentinaSettings::GetLabelLanguage() const
+auto VValentinaSettings::GetLabelLanguage() const -> QString
 {
     return value(*settingConfigurationLabelLanguage, QLocale().bcp47Name()).toString();
 }
@@ -172,13 +172,13 @@ void VValentinaSettings::SetLabelLanguage(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VValentinaSettings::GetDefPathLayout()
+auto VValentinaSettings::GetDefPathLayout() -> QString
 {
     return QDir::homePath() + QStringLiteral("/valentina/") + tr("layouts");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VValentinaSettings::GetPathLayout() const
+auto VValentinaSettings::GetPathLayout() const -> QString
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), this->applicationName());
     return settings.value(*settingPathsLayout, GetDefPathLayout()).toString();
@@ -193,7 +193,7 @@ void VValentinaSettings::SetPathLayout(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VValentinaSettings::GetLayoutPaperHeight() const
+auto VValentinaSettings::GetLayoutPaperHeight() const -> qreal
 {
     return ValueOrDef<qreal>(*this, *settingLayoutPaperHeight, UnitConvertor(1189/*A0*/, Unit::Mm, Unit::Px));
 }
@@ -205,7 +205,7 @@ void VValentinaSettings::SetLayoutPaperHeight(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VValentinaSettings::GetLayoutPaperWidth() const
+auto VValentinaSettings::GetLayoutPaperWidth() const -> qreal
 {
     return ValueOrDef<qreal>(*this, *settingLayoutPaperWidth, UnitConvertor(841/*A0*/, Unit::Mm, Unit::Px));
 }
@@ -217,13 +217,13 @@ void VValentinaSettings::SetLayoutPaperWidth(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VValentinaSettings::GetLayoutWidth() const
+auto VValentinaSettings::GetLayoutWidth() const -> qreal
 {
     return ValueOrDef<qreal>(*this, *settingLayoutWidth, GetDefLayoutWidth());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VValentinaSettings::GetDefLayoutWidth()
+auto VValentinaSettings::GetDefLayoutWidth() -> qreal
 {
     return UnitConvertor(2.5, Unit::Mm, Unit::Px);
 }
@@ -235,7 +235,7 @@ void VValentinaSettings::SetLayoutWidth(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VValentinaSettings::GetNestingTime() const
+auto VValentinaSettings::GetNestingTime() const -> int
 {
     return ValueOrDef<int>(*this, *settingNestingTime, GetDefNestingTime());
 }
@@ -247,7 +247,7 @@ void VValentinaSettings::SetNestingTime(int value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VValentinaSettings::GetEfficiencyCoefficient() const
+auto VValentinaSettings::GetEfficiencyCoefficient() const -> qreal
 {
     return ValueOrDef<qreal>(*this, *settingEfficiencyCoefficient, GetDefEfficiencyCoefficient());
 }
@@ -259,7 +259,7 @@ void VValentinaSettings::SetEfficiencyCoefficient(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMarginsF VValentinaSettings::GetFields(const QMarginsF &def) const
+auto VValentinaSettings::GetFields(const QMarginsF &def) const -> QMarginsF
 {
     return ValueOrDef<QMarginsF>(*this, *settingFields, def);
 }
@@ -271,13 +271,13 @@ void VValentinaSettings::SetFields(const QMarginsF &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Cases VValentinaSettings::GetLayoutGroup() const
+auto VValentinaSettings::GetLayoutGroup() const -> Cases
 {
     return ValueOrDef<Cases>(*this, *settingLayoutSorting, GetDefLayoutGroup());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Cases VValentinaSettings::GetDefLayoutGroup()
+auto VValentinaSettings::GetDefLayoutGroup() -> Cases
 {
     return Cases::CaseDesc;
 }
@@ -289,13 +289,13 @@ void VValentinaSettings::SetLayoutGroup(const Cases &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::GetLayoutFollowGrainline() const
+auto VValentinaSettings::GetLayoutFollowGrainline() const -> bool
 {
     return value(*settingLayoutFollowGrainline, GetDefLayoutFollowGrainline()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::GetDefLayoutFollowGrainline()
+auto VValentinaSettings::GetDefLayoutFollowGrainline() -> bool
 {
     return false;
 }
@@ -307,13 +307,13 @@ void VValentinaSettings::SetLayoutFollowGrainline(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::GetLayoutManualPriority() const
+auto VValentinaSettings::GetLayoutManualPriority() const -> bool
 {
     return value(*settingLayoutManualPriority, GetDefLayoutManualPriority()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::GetDefLayoutManualPriority()
+auto VValentinaSettings::GetDefLayoutManualPriority() -> bool
 {
     return false;
 }
@@ -325,13 +325,13 @@ void VValentinaSettings::SetLayoutManualPriority(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::GetLayoutNestQuantity() const
+auto VValentinaSettings::GetLayoutNestQuantity() const -> bool
 {
     return value(*settingLayoutNestQuantity, GetDefLayoutNestQuantity()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::GetDefLayoutNestQuantity()
+auto VValentinaSettings::GetDefLayoutNestQuantity() -> bool
 {
     return false;
 }
@@ -343,13 +343,13 @@ void VValentinaSettings::SetLayoutNestQuantity(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::GetLayoutAutoCropLength() const
+auto VValentinaSettings::GetLayoutAutoCropLength() const -> bool
 {
     return value(*settingLayoutAutoCropLength, GetDefLayoutAutoCropLength()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::GetDefLayoutAutoCropLength()
+auto VValentinaSettings::GetDefLayoutAutoCropLength() -> bool
 {
     return false;
 }
@@ -359,13 +359,13 @@ void VValentinaSettings::SetLayoutAutoCropLength(bool value)
     setValue(*settingLayoutAutoCropLength, value);
 }
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::GetLayoutAutoCropWidth() const
+auto VValentinaSettings::GetLayoutAutoCropWidth() const -> bool
 {
     return value(*settingLayoutAutoCropWidth, GetDefLayoutAutoCropWidth()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::GetDefLayoutAutoCropWidth()
+auto VValentinaSettings::GetDefLayoutAutoCropWidth() -> bool
 {
     return false;
 }
@@ -376,13 +376,13 @@ void VValentinaSettings::SetLayoutAutoCropWidth(bool value)
     setValue(*settingLayoutAutoCropWidth, value);
 }
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::GetLayoutSaveLength() const
+auto VValentinaSettings::GetLayoutSaveLength() const -> bool
 {
     return value(*settingLayoutSaveLength, GetDefLayoutSaveLength()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::GetDefLayoutSaveLength()
+auto VValentinaSettings::GetDefLayoutSaveLength() -> bool
 {
     return false;
 }
@@ -394,13 +394,13 @@ void VValentinaSettings::SetLayoutSaveLength(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::GetLayoutPreferOneSheetSolution() const
+auto VValentinaSettings::GetLayoutPreferOneSheetSolution() const -> bool
 {
     return value(*settingLayoutPreferOneSheetSolution, GetDefLayoutPreferOneSheetSolution()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::GetDefLayoutPreferOneSheetSolution()
+auto VValentinaSettings::GetDefLayoutPreferOneSheetSolution() -> bool
 {
     return false;
 }
@@ -412,13 +412,13 @@ void VValentinaSettings::SetLayoutPreferOneSheetSolution(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::GetLayoutUnitePages() const
+auto VValentinaSettings::GetLayoutUnitePages() const -> bool
 {
     return value(*settingLayoutUnitePages, GetDefLayoutUnitePages()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::GetDefLayoutUnitePages()
+auto VValentinaSettings::GetDefLayoutUnitePages() -> bool
 {
     return false;
 }
@@ -430,13 +430,13 @@ void VValentinaSettings::SetLayoutUnitePages(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::GetIgnoreAllFields() const
+auto VValentinaSettings::GetIgnoreAllFields() const -> bool
 {
     return value(*settingIgnoreFields, GetDefIgnoreAllFields()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::GetDefIgnoreAllFields()
+auto VValentinaSettings::GetDefIgnoreAllFields() -> bool
 {
     return false;
 }
@@ -448,13 +448,13 @@ void VValentinaSettings::SetIgnoreAllFields(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::GetStripOptimization() const
+auto VValentinaSettings::GetStripOptimization() const -> bool
 {
     return value(*settingStripOptimization, GetDefStripOptimization()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::GetDefStripOptimization()
+auto VValentinaSettings::GetDefStripOptimization() -> bool
 {
     return false;
 }
@@ -466,13 +466,13 @@ void VValentinaSettings::SetStripOptimization(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint8 VValentinaSettings::GetMultiplier() const
+auto VValentinaSettings::GetMultiplier() const -> quint8
 {
     return static_cast<quint8>(value(*settingMultiplier, GetDefMultiplier()).toUInt());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint8 VValentinaSettings::GetDefMultiplier()
+auto VValentinaSettings::GetDefMultiplier() -> quint8
 {
     return 1;
 }
@@ -484,13 +484,13 @@ void VValentinaSettings::SetMultiplier(quint8 value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::GetTextAsPaths() const
+auto VValentinaSettings::GetTextAsPaths() const -> bool
 {
     return value(*settingTextAsPaths, GetDefTextAsPaths()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::GetDefTextAsPaths()
+auto VValentinaSettings::GetDefTextAsPaths() -> bool
 {
     return false;
 }
@@ -502,7 +502,7 @@ void VValentinaSettings::SetTextAsPaths(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList VValentinaSettings::GetKnownMaterials() const
+auto VValentinaSettings::GetKnownMaterials() const -> QStringList
 {
     return value(*settingPatternKnownMaterials, QStringList()).toStringList();
 }
@@ -514,7 +514,7 @@ void VValentinaSettings::SetKnownMaterials(const QStringList &list)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::IsRememberPatternMaterials() const
+auto VValentinaSettings::IsRememberPatternMaterials() const -> bool
 {
     return value(*settingPatternRememberMaterials, true).toBool();
 }
@@ -533,7 +533,7 @@ void VValentinaSettings::SetRememberPatternMaterials(bool value)
  * internaly as mm so there is conversion beeing made.
  * @return tiled pdf paper height
  */
-qreal VValentinaSettings::GetTiledPDFPaperHeight(const Unit &unit) const
+auto VValentinaSettings::GetTiledPDFPaperHeight(const Unit &unit) const -> qreal
 {
     return UnitConvertor(ValueOrDef<qreal>(*this, *settingTiledPDFPaperHeight, 297 /*A4*/), Unit::Mm, unit);
 }
@@ -556,7 +556,7 @@ void VValentinaSettings::SetTiledPDFPaperHeight(qreal value, const Unit &unit)
  * internaly as mm so there is conversion beeing made.
  * @return tiled pdf paper width
  */
-qreal VValentinaSettings::GetTiledPDFPaperWidth(const Unit &unit) const
+auto VValentinaSettings::GetTiledPDFPaperWidth(const Unit &unit) const -> qreal
 {
     return UnitConvertor(ValueOrDef<qreal>(*this, *settingTiledPDFPaperWidth, 210 /*A4*/), Unit::Mm, unit);
 }
@@ -574,13 +574,13 @@ void VValentinaSettings::SetTiledPDFPaperWidth(qreal value, const Unit &unit)
 
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::IsDockWidgetGroupsActive() const
+auto VValentinaSettings::IsDockWidgetGroupsActive() const -> bool
 {
     return value(*settingdockWidgetGroupsActive, GetDefDockWidgetGroupsActive()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::GetDefDockWidgetGroupsActive()
+auto VValentinaSettings::GetDefDockWidgetGroupsActive() -> bool
 {
     return true;
 }
@@ -592,13 +592,13 @@ void VValentinaSettings::SetDockWidgetGroupsActive(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::IsDockWidgetToolOptionsActive() const
+auto VValentinaSettings::IsDockWidgetToolOptionsActive() const -> bool
 {
     return value(*settingDockWidgetToolOptionsActive, GetDefDockWidgetToolOptionsActive()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::GetDefDockWidgetToolOptionsActive()
+auto VValentinaSettings::GetDefDockWidgetToolOptionsActive() -> bool
 {
     return true;
 }
@@ -610,13 +610,13 @@ void VValentinaSettings::SetDockWidgetToolOptionsActive(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::IsDockWidgetPatternMessagesActive() const
+auto VValentinaSettings::IsDockWidgetPatternMessagesActive() const -> bool
 {
     return value(*settingDockWidgetPatternMessagesActive, GetDefDockWidgetPatternMessagesActive()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::GetDefDockWidgetPatternMessagesActive()
+auto VValentinaSettings::GetDefDockWidgetPatternMessagesActive() -> bool
 {
     return true;
 }
@@ -628,13 +628,13 @@ void VValentinaSettings::SetDockWidgetPatternMessagesActive(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::IsDockWidgetBackgroundImagesActive() const
+auto VValentinaSettings::IsDockWidgetBackgroundImagesActive() const -> bool
 {
     return value(*settingDockWidgetBackgroundImagesActive, GetDefDockWidgetBackgroundImagesActive()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::GetDefDockWidgetBackgroundImagesActive()
+auto VValentinaSettings::GetDefDockWidgetBackgroundImagesActive() -> bool
 {
     return false;
 }
@@ -646,7 +646,7 @@ void VValentinaSettings::SetDockWidgetBackgroundImagesActive(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VValentinaSettings::GetPatternMessageFontSize(int fontSizeDef) const
+auto VValentinaSettings::GetPatternMessageFontSize(int fontSizeDef) const -> int
 {
     fontSizeDef = qBound(GetDefMinPatternMessageFontSize(), fontSizeDef, GetDefMaxPatternMessageFontSize());
     const int fontSize = value(*settingPatternMessagesFontSize, fontSizeDef).toInt();
@@ -654,13 +654,13 @@ int VValentinaSettings::GetPatternMessageFontSize(int fontSizeDef) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VValentinaSettings::GetDefMinPatternMessageFontSize()
+auto VValentinaSettings::GetDefMinPatternMessageFontSize() -> int
 {
     return 5;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VValentinaSettings::GetDefMaxPatternMessageFontSize()
+auto VValentinaSettings::GetDefMaxPatternMessageFontSize() -> int
 {
     return 40;
 }
@@ -673,7 +673,7 @@ void VValentinaSettings::SetPatternMessageFontSize(int size)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::GetAutoRefreshPatternMessage() const
+auto VValentinaSettings::GetAutoRefreshPatternMessage() const -> bool
 {
     return value(*settingAutoRefreshPatternMessage, true).toBool();
 }
@@ -685,7 +685,7 @@ void VValentinaSettings::SetAutoRefreshPatternMessage(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::GetToolPanelScaling() const
+auto VValentinaSettings::GetToolPanelScaling() const -> bool
 {
     return value(*settingToolPanelScaling, false).toBool();
 }
@@ -709,7 +709,7 @@ void VValentinaSettings::SetLayoutExportFormat(qint8 format)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qint8 VValentinaSettings::GetDetailExportFormat() const
+auto VValentinaSettings::GetDetailExportFormat() const -> qint8
 {
     return qvariant_cast<qint8>(value(*settingDetailExportFormat, 0));
 }
@@ -733,7 +733,7 @@ void VValentinaSettings::SetHistorySearchHistory(const QStringList &history)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList VValentinaSettings::GetIncrementsSearchHistory() const
+auto VValentinaSettings::GetIncrementsSearchHistory() const -> QStringList
 {
     return value(*settingSearchHistoryIncrements).toStringList();
 }
@@ -745,7 +745,7 @@ void VValentinaSettings::SetIncrementsSearchHistory(const QStringList &history)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList VValentinaSettings::GetPreviewCalculationsSearchHistory() const
+auto VValentinaSettings::GetPreviewCalculationsSearchHistory() const -> QStringList
 {
     return value(*settingSearchHistoryPreviewCalculations).toStringList();
 }
@@ -757,7 +757,7 @@ void VValentinaSettings::SetPreviewCalculationsSearchHistory(const QStringList &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList VValentinaSettings::GetFinalMeasurementsSearchHistory() const
+auto VValentinaSettings::GetFinalMeasurementsSearchHistory() const -> QStringList
 {
     return value(*settingSearchHistoryFinalMeasurements).toStringList();
 }
@@ -961,7 +961,7 @@ void VValentinaSettings::SetFinalMeasurementsSearchOptionMatchCase(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VValentinaSettings::GetBackgroundImageDefOpacity() const
+auto VValentinaSettings::GetBackgroundImageDefOpacity() const -> int
 {
     return value(*settingPatternBackgroundImageDefOpacity, 100).toInt();
 }
@@ -973,7 +973,7 @@ void VValentinaSettings::SetBackgroundImageDefOpacity(int value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VValentinaSettings::GetShowGrainline() const
+auto VValentinaSettings::GetShowGrainline() const -> bool
 {
     return value(*settingLayoutShowGrainline, true).toBool();
 }
@@ -985,8 +985,8 @@ void VValentinaSettings::SetShowGrainline(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template<typename T>
-T VValentinaSettings::GetCachedValue(T &cache, const QString &setting, T defValue, T valueMin, T valueMax) const
+template <typename T>
+auto VValentinaSettings::GetCachedValue(T &cache, const QString &setting, T defValue, T valueMin, T valueMax) const -> T
 {
     if (cache < 0)
     {

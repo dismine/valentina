@@ -68,7 +68,7 @@ void TST_VLayoutDetail::Case1() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> TST_VLayoutDetail::InputPointsCase1() const
+auto TST_VLayoutDetail::InputPointsCase1() const -> QVector<QPointF>
 {
     QVector<QPointF> points;
 
@@ -134,7 +134,7 @@ void TST_VLayoutDetail::Case2() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> TST_VLayoutDetail::InputPointsCase2() const
+auto TST_VLayoutDetail::InputPointsCase2() const -> QVector<QPointF>
 {
     QVector<QPointF> points;
 
@@ -151,7 +151,7 @@ QVector<QPointF> TST_VLayoutDetail::InputPointsCase2() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> TST_VLayoutDetail::OutputPointsCase2() const
+auto TST_VLayoutDetail::OutputPointsCase2() const -> QVector<QPointF>
 {
     QVector<QPointF> points;
 
@@ -179,7 +179,7 @@ void TST_VLayoutDetail::Case3() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> TST_VLayoutDetail::InputPointsCase3() const
+auto TST_VLayoutDetail::InputPointsCase3() const -> QVector<QPointF>
 {
     QVector<QPointF> points;
 

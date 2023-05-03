@@ -80,8 +80,8 @@ void VToolFlippingByAxis::SetDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolFlippingByAxis *VToolFlippingByAxis::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                                 VAbstractPattern *doc, VContainer *data)
+auto VToolFlippingByAxis::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                                 VContainer *data) -> VToolFlippingByAxis *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogFlippingByAxis> dialogTool = qobject_cast<DialogFlippingByAxis *>(dialog);
@@ -111,7 +111,7 @@ VToolFlippingByAxis *VToolFlippingByAxis::Create(const QPointer<DialogTool> &dia
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolFlippingByAxis *VToolFlippingByAxis::Create(VToolFlippingByAxisInitData initData)
+auto VToolFlippingByAxis::Create(VToolFlippingByAxisInitData initData) -> VToolFlippingByAxis *
 {
     const auto originPoint = *initData.data->GeometricObject<VPointF>(initData.originPointId);
     const QPointF fPoint = static_cast<QPointF>(originPoint);
@@ -158,7 +158,7 @@ VToolFlippingByAxis *VToolFlippingByAxis::Create(VToolFlippingByAxisInitData ini
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-AxisType VToolFlippingByAxis::GetAxisType() const
+auto VToolFlippingByAxis::GetAxisType() const -> AxisType
 {
     return m_axisType;
 }
@@ -173,7 +173,7 @@ void VToolFlippingByAxis::SetAxisType(AxisType value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolFlippingByAxis::OriginPointName() const
+auto VToolFlippingByAxis::OriginPointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(m_originPointId)->name();
 }
@@ -258,7 +258,7 @@ void VToolFlippingByAxis::SaveOptions(QDomElement &tag, QSharedPointer<VGObject>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolFlippingByAxis::MakeToolTip() const
+auto VToolFlippingByAxis::MakeToolTip() const -> QString
 {
     return QStringLiteral("<tr> <td><b>%1:</b> %2</td> </tr>"
                           "%3")

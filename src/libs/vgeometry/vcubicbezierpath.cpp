@@ -68,7 +68,7 @@ VCubicBezierPath::VCubicBezierPath(const QVector<VPointF> &points, quint32 idObj
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCubicBezierPath &VCubicBezierPath::operator=(const VCubicBezierPath &curve)
+auto VCubicBezierPath::operator=(const VCubicBezierPath &curve) -> VCubicBezierPath &
 {
     if ( &curve == this )
     {
@@ -87,7 +87,7 @@ VCubicBezierPath::VCubicBezierPath(VCubicBezierPath &&curve) Q_DECL_NOTHROW
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VCubicBezierPath &VCubicBezierPath::operator=(VCubicBezierPath &&curve) Q_DECL_NOTHROW
+auto VCubicBezierPath::operator=(VCubicBezierPath &&curve) Q_DECL_NOTHROW->VCubicBezierPath &
 {
     VAbstractCubicBezierPath::operator=(curve);
     std::swap(d, curve.d);
@@ -96,11 +96,12 @@ VCubicBezierPath &VCubicBezierPath::operator=(VCubicBezierPath &&curve) Q_DECL_N
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VCubicBezierPath VCubicBezierPath::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const
+auto VCubicBezierPath::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const
+    -> VCubicBezierPath
 {
     const QVector<VPointF> points = GetCubicPath();
     VCubicBezierPath curve;
-    for(auto &point : points)
+    for (const auto &point : points)
     {
         curve.append(point.Rotate(originPoint, degrees));
     }
@@ -118,11 +119,11 @@ VCubicBezierPath VCubicBezierPath::Rotate(const QPointF &originPoint, qreal degr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCubicBezierPath VCubicBezierPath::Flip(const QLineF &axis, const QString &prefix) const
+auto VCubicBezierPath::Flip(const QLineF &axis, const QString &prefix) const -> VCubicBezierPath
 {
     const QVector<VPointF> points = GetCubicPath();
     VCubicBezierPath curve;
-    for(auto &point : points)
+    for (const auto &point : points)
     {
         curve.append(point.Flip(axis));
     }
@@ -140,11 +141,11 @@ VCubicBezierPath VCubicBezierPath::Flip(const QLineF &axis, const QString &prefi
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCubicBezierPath VCubicBezierPath::Move(qreal length, qreal angle, const QString &prefix) const
+auto VCubicBezierPath::Move(qreal length, qreal angle, const QString &prefix) const -> VCubicBezierPath
 {
     const QVector<VPointF> points = GetCubicPath();
     VCubicBezierPath curve;
-    for(auto &point : points)
+    for (const auto &point : points)
     {
         curve.append(point.Move(length, angle));
     }
@@ -167,13 +168,13 @@ VCubicBezierPath::~VCubicBezierPath()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPointF &VCubicBezierPath::operator[](vsizetype indx)
+auto VCubicBezierPath::operator[](vsizetype indx) -> VPointF &
 {
     return d->path[indx];
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const VPointF &VCubicBezierPath::at(vsizetype indx) const
+auto VCubicBezierPath::at(vsizetype indx) const -> const VPointF &
 {
     return d->path[indx];
 }
@@ -186,13 +187,13 @@ void VCubicBezierPath::append(const VPointF &point)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-vsizetype VCubicBezierPath::CountSubSpl() const
+auto VCubicBezierPath::CountSubSpl() const -> vsizetype
 {
     return CountSubSpl(d->path.size());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-vsizetype VCubicBezierPath::CountPoints() const
+auto VCubicBezierPath::CountPoints() const -> vsizetype
 {
     return d->path.size();
 }
@@ -205,7 +206,7 @@ void VCubicBezierPath::Clear()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSpline VCubicBezierPath::GetSpline(vsizetype index) const
+auto VCubicBezierPath::GetSpline(vsizetype index) const -> VSpline
 {
     if (CountPoints() < 4)
     {
@@ -237,61 +238,49 @@ VSpline VCubicBezierPath::GetSpline(vsizetype index) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VCubicBezierPath::GetStartAngle() const
+auto VCubicBezierPath::GetStartAngle() const -> qreal
 {
     if (CountSubSpl() > 0)
     {
         return GetSpline(1).GetStartAngle();
     }
-    else
-    {
-        return 0;
-    }
+    return 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VCubicBezierPath::GetEndAngle() const
+auto VCubicBezierPath::GetEndAngle() const -> qreal
 {
     const vsizetype count = CountSubSpl();
     if (count > 0)
     {
         return GetSpline(count).GetEndAngle();
     }
-    else
-    {
-        return 0;
-    }
+    return 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VCubicBezierPath::GetC1Length() const
+auto VCubicBezierPath::GetC1Length() const -> qreal
 {
     if (CountSubSpl() > 0)
     {
         return GetSpline(1).GetC1Length();
     }
-    else
-    {
-        return 0;
-    }
+    return 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VCubicBezierPath::GetC2Length() const
+auto VCubicBezierPath::GetC2Length() const -> qreal
 {
     const vsizetype count = CountSubSpl();
     if (count > 0)
     {
         return GetSpline(count).GetC2Length();
     }
-    else
-    {
-        return 0;
-    }
+    return 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VSplinePoint> VCubicBezierPath::GetSplinePath() const
+auto VCubicBezierPath::GetSplinePath() const -> QVector<VSplinePoint>
 {
     const vsizetype size = CountSubSpl();
     QVector<VSplinePoint> splPoints(size+1);
@@ -320,13 +309,13 @@ QVector<VSplinePoint> VCubicBezierPath::GetSplinePath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VPointF> VCubicBezierPath::GetCubicPath() const
+auto VCubicBezierPath::GetCubicPath() const -> QVector<VPointF>
 {
     return d->path;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-vsizetype VCubicBezierPath::CountSubSpl(vsizetype size)
+auto VCubicBezierPath::CountSubSpl(vsizetype size) -> vsizetype
 {
     if (size <= 0)
     {
@@ -340,7 +329,7 @@ vsizetype VCubicBezierPath::CountSubSpl(vsizetype size)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-vsizetype VCubicBezierPath::SubSplOffset(vsizetype subSplIndex)
+auto VCubicBezierPath::SubSplOffset(vsizetype subSplIndex) -> vsizetype
 {
     if (subSplIndex <= 0)
     {
@@ -351,7 +340,7 @@ vsizetype VCubicBezierPath::SubSplOffset(vsizetype subSplIndex)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-vsizetype VCubicBezierPath::SubSplPointsCount(vsizetype countSubSpl)
+auto VCubicBezierPath::SubSplPointsCount(vsizetype countSubSpl) -> vsizetype
 {
     if (countSubSpl <= 0)
     {
@@ -362,7 +351,7 @@ vsizetype VCubicBezierPath::SubSplPointsCount(vsizetype countSubSpl)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPointF VCubicBezierPath::FirstPoint() const
+auto VCubicBezierPath::FirstPoint() const -> VPointF
 {
     if (not d->path.isEmpty())
     {
@@ -372,7 +361,7 @@ VPointF VCubicBezierPath::FirstPoint() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPointF VCubicBezierPath::LastPoint() const
+auto VCubicBezierPath::LastPoint() const -> VPointF
 {
     const vsizetype count = CountSubSpl();
     if (count >= 1)

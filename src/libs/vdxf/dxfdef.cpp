@@ -34,7 +34,7 @@
 const QString endStringPlaceholder = QStringLiteral("%&?_?&%");
 
 //---------------------------------------------------------------------------------------------------------------------
-QMap<QString, QString> LocaleMap()
+auto LocaleMap() -> QMap<QString, QString>
 {
     QMap <QString, QString> locMap
     {

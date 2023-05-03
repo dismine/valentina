@@ -69,7 +69,7 @@ constexpr inline auto AppVersion() -> unsigned
 
 #define VER_COMPANYDOMAIN_STR       "smart-pattern.com.ua"
 
-QString compilerString();
-QString buildCompatibilityString();
+auto compilerString() -> QString;
+auto buildCompatibilityString() -> QString;
 
 #endif // PROJECTVERSION_H

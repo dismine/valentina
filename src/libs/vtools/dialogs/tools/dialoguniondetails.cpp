@@ -67,7 +67,7 @@ DialogUnionDetails::~DialogUnionDetails()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogUnionDetails::RetainPieces() const
+auto DialogUnionDetails::RetainPieces() const -> bool
 {
     return ui->checkBox->isChecked();
 }
@@ -97,7 +97,7 @@ void DialogUnionDetails::ChosenObject(quint32 id, const SceneObject &type)
  * @param idDetail detail id
  * @return true if contain
  */
-bool DialogUnionDetails::CheckObject(const quint32 &id, const quint32 &idDetail) const
+auto DialogUnionDetails::CheckObject(const quint32 &id, const quint32 &idDetail) const -> bool
 {
     if (idDetail == NULL_ID)
     {
@@ -108,7 +108,7 @@ bool DialogUnionDetails::CheckObject(const quint32 &id, const quint32 &idDetail)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogUnionDetails::CheckDetail(const quint32 &idDetail) const
+auto DialogUnionDetails::CheckDetail(const quint32 &idDetail) const -> bool
 {
     if (idDetail == NULL_ID)
     {

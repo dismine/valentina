@@ -92,13 +92,13 @@ void SaveToolOptions::redo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<quint32> SaveToolOptions::Missing(const QList<quint32> &list1, const QList<quint32> &list2) const
+auto SaveToolOptions::Missing(const QList<quint32> &list1, const QList<quint32> &list2) const -> QVector<quint32>
 {
     return ConvertToVector(ConvertToSet(list1).subtract(ConvertToSet(list2)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool SaveToolOptions::mergeWith(const QUndoCommand *command)
+auto SaveToolOptions::mergeWith(const QUndoCommand *command) -> bool
 {
     const SaveToolOptions *saveCommand = static_cast<const SaveToolOptions *>(command);
 

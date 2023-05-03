@@ -47,7 +47,7 @@ public:
     static void RemoveAll(QMap<vsizetype, QString> &map, const QString &val);
 
 protected:
-    static qreal* AddVariable(const QString &a_szName, void *a_pUserData);
+    static auto AddVariable(const QString &a_szName, void *a_pUserData) -> qreal *;
     void          SetSepForEval();
 private:
     Q_DISABLE_COPY_MOVE(QmuFormulaBase) // NOLINT

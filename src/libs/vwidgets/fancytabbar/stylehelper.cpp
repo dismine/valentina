@@ -41,7 +41,7 @@
 #include "../vmisc/vmath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal StyleHelper::sidebarFontSize()
+auto StyleHelper::sidebarFontSize() -> qreal
 {
 #if defined(Q_OS_MAC)
     return 10;
@@ -51,17 +51,15 @@ qreal StyleHelper::sidebarFontSize()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QColor StyleHelper::panelTextColor(bool lightColored)
+auto StyleHelper::panelTextColor(bool lightColored) -> QColor
 {
     //qApp->palette().highlightedText().color();
     if (!lightColored)
     {
         return Qt::white;
     }
-    else
-    {
-        return Qt::black;
-    }
+
+    return Qt::black;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -70,20 +68,18 @@ QColor StyleHelper::m_baseColor;
 QColor StyleHelper::m_requestedBaseColor;
 
 //---------------------------------------------------------------------------------------------------------------------
-QColor StyleHelper::baseColor(bool lightColored)
+auto StyleHelper::baseColor(bool lightColored) -> QColor
 {
     if (!lightColored)
     {
         return m_baseColor;
     }
-    else
-    {
-        return m_baseColor.lighter(230);
-    }
+
+    return m_baseColor.lighter(230);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QColor StyleHelper::borderColor(bool lightColored)
+auto StyleHelper::borderColor(bool lightColored) -> QColor
 {
     QColor result = baseColor(lightColored);
     result.setHsv(result.hue(),
@@ -93,7 +89,7 @@ QColor StyleHelper::borderColor(bool lightColored)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QColor StyleHelper::sidebarHighlight()
+auto StyleHelper::sidebarHighlight() -> QColor
 {
     return QColor(255, 255, 255, 40);
 }
@@ -115,7 +111,7 @@ void StyleHelper::setBaseColor(const QColor &newcolor)
     {
         m_baseColor = color;
         const QWidgetList widgets = QApplication::topLevelWidgets();
-        for (auto w : widgets)
+        for (auto *w : widgets)
         {
             w->update();
         }

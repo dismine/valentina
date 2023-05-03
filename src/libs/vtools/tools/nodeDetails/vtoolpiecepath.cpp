@@ -36,8 +36,8 @@
 #include "../vwidgets/global.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPiecePath *VToolPiecePath::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                       VAbstractPattern *doc, VContainer *data)
+auto VToolPiecePath::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                            VContainer *data) -> VToolPiecePath *
 {
     SCASSERT(not dialog.isNull());
     const QPointer<DialogPiecePath> dialogTool = qobject_cast<DialogPiecePath *>(dialog);
@@ -59,7 +59,7 @@ VToolPiecePath *VToolPiecePath::Create(const QPointer<DialogTool> &dialog, VMain
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPiecePath *VToolPiecePath::Create(VToolPiecePathInitData initData)
+auto VToolPiecePath::Create(VToolPiecePathInitData initData) -> VToolPiecePath *
 {
     if (initData.typeCreation == Source::FromGui)
     {
@@ -114,7 +114,7 @@ VToolPiecePath *VToolPiecePath::Create(VToolPiecePathInitData initData)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolPiecePath::getTagName() const
+auto VToolPiecePath::getTagName() const -> QString
 {
     return VAbstractPattern::TagPath;
 }

@@ -118,8 +118,8 @@ enum class PassmarkLineType : quint8
     LAST_ONE_DO_NOT_USE
 };
 
-QString          PassmarkLineTypeToString(PassmarkLineType type);
-PassmarkLineType StringToPassmarkLineType(const QString &value);
+auto PassmarkLineTypeToString(PassmarkLineType type) -> QString;
+auto StringToPassmarkLineType(const QString &value) -> PassmarkLineType;
 
 enum class PassmarkAngleType : quint8
 {
@@ -134,13 +134,11 @@ enum class PassmarkAngleType : quint8
     LAST_ONE_DO_NOT_USE
 };
 
-QString           PassmarkAngleTypeToString(PassmarkAngleType type);
-PassmarkAngleType StringToPassmarkAngleType(const QString &value);
+auto PassmarkAngleTypeToString(PassmarkAngleType type) -> QString;
+auto StringToPassmarkAngleType(const QString &value) -> PassmarkAngleType;
 
-
-Unit    StrToUnits(const QString &unit);
-QString UnitsToStr(const Unit &unit, const bool translate = false);
-
+auto StrToUnits(const QString &unit) -> Unit;
+auto UnitsToStr(const Unit &unit, const bool translate = false) -> QString;
 
 enum class PiecePathIncludeType : quint8
 {
@@ -373,7 +371,7 @@ if (!(cond))                                            \
 #endif // defined(__cplusplus)
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 8, 0)
 
-bool IsOptionSet(int argc, char *argv[], const char *option);
+auto IsOptionSet(int argc, char *argv[], const char *option) -> bool;
 void InitHighDpiScaling(int argc, char *argv[]);
 
 #ifdef Q_OS_MAC
@@ -408,7 +406,7 @@ void MacosEnableLayerBacking();
 // Don't forget to syncronize with XSD schema.
 const int userMaterialPlaceholdersQuantity = 20;
 
-QPixmap QPixmapFromCache(const QString &pixmapPath);
+auto QPixmapFromCache(const QString &pixmapPath) -> QPixmap;
 void SetItemOverrideCursor(QGraphicsItem *item, const QString & pixmapPath, int hotX = -1, int hotY = -1);
 
 template<typename T> constexpr inline auto MmToPixel(T val) -> T { return (val / 25.4) * PrintDPI; }
@@ -591,23 +589,23 @@ Q_DECL_RELAXED_CONSTEXPR inline auto UnitConvertor(const QMarginsF &margins, con
 }
 
 void InitLanguages(QComboBox *combobox);
-Q_REQUIRED_RESULT QStringList SupportedLocales();
+Q_REQUIRED_RESULT auto SupportedLocales() -> QStringList;
 
-Q_REQUIRED_RESULT QString StrippedName(const QString &fullFileName);
-Q_REQUIRED_RESULT QString RelativeMPath(const QString &patternPath, const QString &absoluteMPath);
-Q_REQUIRED_RESULT QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath);
+Q_REQUIRED_RESULT auto StrippedName(const QString &fullFileName) -> QString;
+Q_REQUIRED_RESULT auto RelativeMPath(const QString &patternPath, const QString &absoluteMPath) -> QString;
+Q_REQUIRED_RESULT auto AbsoluteMPath(const QString &patternPath, const QString &relativeMPath) -> QString;
 
-QStringList SplitFilePaths(const QString &path);
+auto SplitFilePaths(const QString &path) -> QStringList;
 
-QMarginsF GetMinPrinterFields(const QSharedPointer<QPrinter> &printer);
-QMarginsF GetPrinterFields(const QSharedPointer<QPrinter> &printer);
+auto GetMinPrinterFields(const QSharedPointer<QPrinter> &printer) -> QMarginsF;
+auto GetPrinterFields(const QSharedPointer<QPrinter> &printer) -> QMarginsF;
 
-Q_REQUIRED_RESULT QPixmap darkenPixmap(const QPixmap &pixmap);
+Q_REQUIRED_RESULT auto darkenPixmap(const QPixmap &pixmap) -> QPixmap;
 
 void ShowInGraphicalShell(const QString &filePath);
 
-Q_REQUIRED_RESULT Q_DECL_RELAXED_CONSTEXPR static inline bool VFuzzyComparePossibleNulls(double p1, double p2);
-Q_DECL_RELAXED_CONSTEXPR static inline bool VFuzzyComparePossibleNulls(double p1, double p2)
+Q_REQUIRED_RESULT Q_DECL_RELAXED_CONSTEXPR static inline auto VFuzzyComparePossibleNulls(double p1, double p2) -> bool;
+Q_DECL_RELAXED_CONSTEXPR static inline auto VFuzzyComparePossibleNulls(double p1, double p2) -> bool
 {
     if(qFuzzyIsNull(p1))
     {
@@ -636,8 +634,8 @@ struct CustomSARecord
           includeType(PiecePathIncludeType::AsCustomSA)
     {}
 
-    friend QDataStream& operator<<(QDataStream& out, const CustomSARecord& record);
-    friend QDataStream& operator>>(QDataStream& in, CustomSARecord& record);
+    friend auto operator<<(QDataStream &out, const CustomSARecord &record) -> QDataStream &;
+    friend auto operator>>(QDataStream &in, CustomSARecord &record) -> QDataStream &;
 
     quint32 startPoint{0};
     quint32 path{0};
@@ -688,22 +686,10 @@ public:
     }
 
 protected:
-    inline PUB& qxt_p()
-    {
-        return *qxt_p_ptr;
-    }
-    inline const PUB& qxt_p() const
-    {
-        return *qxt_p_ptr;
-    }
-    inline PUB* qxt_ptr()
-    {
-        return qxt_p_ptr;
-    }
-    inline const PUB* qxt_ptr() const
-    {
-        return qxt_p_ptr;
-    }
+    inline auto qxt_p() -> PUB & { return *qxt_p_ptr; }
+    inline auto qxt_p() const -> const PUB & { return *qxt_p_ptr; }
+    inline auto qxt_ptr() -> PUB * { return qxt_p_ptr; }
+    inline auto qxt_ptr() const -> const PUB * { return qxt_p_ptr; }
 
 private:
     Q_DISABLE_COPY_MOVE(QxtPrivate) // NOLINT
@@ -729,22 +715,11 @@ public:
     {
         pvt->QXT_setPublic(pub);
     }
-    inline PVT& operator()()
-    {
-        return *static_cast<PVT*>(pvt);
-    }
-    inline const PVT& operator()() const
-    {
-        return *static_cast<PVT*>(pvt);
-    }
-    inline PVT * operator->()
-    {
-    return static_cast<PVT*>(pvt);
-    }
-    inline const PVT * operator->() const
-    {
-    return static_cast<PVT*>(pvt);
-    }
+    inline auto operator()() -> PVT & { return *static_cast<PVT *>(pvt); }
+    inline auto operator()() const -> const PVT & { return *static_cast<PVT *>(pvt); }
+    inline auto operator->() -> PVT * { return static_cast<PVT *>(pvt); }
+    inline auto operator->() const -> const PVT * { return static_cast<PVT *>(pvt); }
+
 private:
     Q_DISABLE_COPY_MOVE(QxtPrivateInterface) // NOLINT
     QxtPrivate<PUB>* pvt;

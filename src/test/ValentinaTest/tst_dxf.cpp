@@ -47,7 +47,7 @@
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-QStringList AvailableCodecs()
+auto AvailableCodecs() -> QStringList
 {
     QList<QByteArray> codecs = VTextCodec::availableCodecs();
     QSet<QString> uniqueNames;

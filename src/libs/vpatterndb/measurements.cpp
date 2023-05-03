@@ -303,7 +303,7 @@ const QString dartWidthBust_M     = QStringLiteral("dart_width_bust");     // Q0
 const QString dartWidthWaist_M    = QStringLiteral("dart_width_waist");    // Q03
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList ListGroupA()
+auto ListGroupA() -> QStringList
 {
     const QStringList list = QStringList() << height_M                     // A01
                                            << heightNeckBack_M             // A02
@@ -332,7 +332,7 @@ QStringList ListGroupA()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList ListGroupB()
+auto ListGroupB() -> QStringList
 {
     const QStringList list = QStringList() << widthShoulder_M      // B01
                                            << widthBust_M          // B02
@@ -344,7 +344,7 @@ QStringList ListGroupB()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList ListGroupC()
+auto ListGroupC() -> QStringList
 {
     const QStringList list = QStringList() << indentNeckBack_M   // C01
                                            << indentWaistBack_M  // C02
@@ -354,7 +354,7 @@ QStringList ListGroupC()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList ListGroupD()
+auto ListGroupD() -> QStringList
 {
     const QStringList list = QStringList() << handPalmLength_M // D01
                                            << handLength_M     // D02
@@ -366,7 +366,7 @@ QStringList ListGroupD()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList ListGroupE()
+auto ListGroupE() -> QStringList
 {
     const QStringList list = QStringList() << footWidth_M       // E01
                                            << footLength_M      // E02
@@ -377,7 +377,7 @@ QStringList ListGroupE()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList ListGroupF()
+auto ListGroupF() -> QStringList
 {
     const QStringList list = QStringList() << headCirc_M	        // F01
                                            << headLength_M          // F02
@@ -390,7 +390,7 @@ QStringList ListGroupF()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList ListGroupG()
+auto ListGroupG() -> QStringList
 {
     const QStringList list = QStringList() << neckMidCirc_M         // G01
                                            << neckCirc_M            // G02
@@ -444,7 +444,7 @@ QStringList ListGroupG()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList ListGroupH()
+auto ListGroupH() -> QStringList
 {
     const QStringList list = QStringList() << neckFrontToWaistF_M              // H01
                                            << neckFrontToWaistFlatF_M          // H02
@@ -493,7 +493,7 @@ QStringList ListGroupH()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList ListGroupI()
+auto ListGroupI() -> QStringList
 {
     const QStringList list = QStringList() << shoulderLength_M                // I01
                                            << shoulderTipToShoulderTipF_M     // I02
@@ -514,7 +514,7 @@ QStringList ListGroupI()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList ListGroupJ()
+auto ListGroupJ() -> QStringList
 {
     const QStringList list = QStringList() << bustpointToBustpoint_M        // J01
                                            << bustpointToNeckSide_M         // J02
@@ -531,7 +531,7 @@ QStringList ListGroupJ()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList ListGroupK()
+auto ListGroupK() -> QStringList
 {
     const QStringList list = QStringList() << shoulderTipToWaistFront_M       // K01
                                            << neckFrontToWaistSide_M          // K02
@@ -551,7 +551,7 @@ QStringList ListGroupK()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList ListGroupL()
+auto ListGroupL() -> QStringList
 {
     const QStringList list = QStringList() << armShoulderTipToWristBent_M   // L01
                                            << armShoulderTipToElbowBent_M   // L02
@@ -580,7 +580,7 @@ QStringList ListGroupL()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList ListGroupM()
+auto ListGroupM() -> QStringList
 {
     const QStringList list = QStringList() << legCrotchToFloor_M    // M01
                                            << legWaistSideToFloor_M // M02
@@ -601,7 +601,7 @@ QStringList ListGroupM()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList ListGroupN()
+auto ListGroupN() -> QStringList
 {
     const QStringList list = QStringList() << crotchLength_M          // N01
                                            << crotchLengthB_M         // N02
@@ -616,7 +616,7 @@ QStringList ListGroupN()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList ListGroupO()
+auto ListGroupO() -> QStringList
 {
     const QStringList list = QStringList() << neckBackToWaistFront_M 	         // O01
                                            << waistToWaistHalter_M 	             // O02
@@ -637,7 +637,7 @@ QStringList ListGroupO()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList ListGroupP()
+auto ListGroupP() -> QStringList
 {
     const QStringList list = QStringList() << neckBackToBustFront_M	                             // P01
                                            << neckBackToArmfoldFront_M                           // P02
@@ -656,7 +656,7 @@ QStringList ListGroupP()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList ListGroupQ()
+auto ListGroupQ() -> QStringList
 {
     const QStringList list = QStringList() << dartWidthShoulder_M // Q01
                                            << dartWidthBust_M 	  // Q02
@@ -666,12 +666,12 @@ QStringList ListGroupQ()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList ListNumbers(const VTranslateMeasurements *trM, const QStringList &listMeasurements)
+auto ListNumbers(const VTranslateMeasurements *trM, const QStringList &listMeasurements) -> QStringList
 {
     SCASSERT(trM != nullptr)
 
     QStringList numbers;
-    for (auto &m : listMeasurements)
+    for (const auto &m : listMeasurements)
     {
         numbers.append(trM->MNumber(m));
     }
@@ -679,7 +679,7 @@ QStringList ListNumbers(const VTranslateMeasurements *trM, const QStringList &li
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString MapDiagrams(const VTranslateMeasurements *trM, const QString &number)
+auto MapDiagrams(const VTranslateMeasurements *trM, const QString &number) -> QString
 {
     switch (ListNumbers(trM, ListGroupA()).indexOf(number))
     {
@@ -1153,7 +1153,7 @@ QString MapDiagrams(const VTranslateMeasurements *trM, const QString &number)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList AllGroupNames()
+auto AllGroupNames() -> QStringList
 {
     const QStringList originalNames = QStringList() << ListGroupA()
                                                     << ListGroupB()

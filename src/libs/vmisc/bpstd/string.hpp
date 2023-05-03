@@ -41,40 +41,36 @@ namespace bpstd {
   inline namespace literals {
     inline namespace string_literals {
 
-      std::string operator""_s(const char* s, std::size_t len);
-      std::u16string operator""_s(const char16_t* s, std::size_t len);
-      std::u32string operator""_s(const char32_t* s, std::size_t len);
-      std::wstring operator""_s(const wchar_t* s, std::size_t len);
+    auto operator""_s(const char *s, std::size_t len) -> std::string;
+    auto operator""_s(const char16_t *s, std::size_t len) -> std::u16string;
+    auto operator""_s(const char32_t *s, std::size_t len) -> std::u32string;
+    auto operator""_s(const wchar_t *s, std::size_t len) -> std::wstring;
 
     } // inline namespace string_literals
   } // inline namespace literals
 
 } // namespace bpstd
 
-inline BPSTD_INLINE_VISIBILITY
-std::string
-  bpstd::literals::string_literals::operator""_s(const char* s, std::size_t len)
+inline BPSTD_INLINE_VISIBILITY auto bpstd::literals::string_literals::operator""_s(const char *s, std::size_t len)
+    -> std::string
 {
   return std::string{s, len};
 }
 
-inline BPSTD_INLINE_VISIBILITY
-std::u16string
-  bpstd::literals::string_literals::operator""_s(const char16_t* s, std::size_t len)
+inline BPSTD_INLINE_VISIBILITY auto bpstd::literals::string_literals::operator""_s(const char16_t *s, std::size_t len)
+    -> std::u16string
 {
   return std::u16string{s, len};
 }
 
-inline BPSTD_INLINE_VISIBILITY
-std::u32string
-  bpstd::literals::string_literals::operator""_s(const char32_t* s, std::size_t len)
+inline BPSTD_INLINE_VISIBILITY auto bpstd::literals::string_literals::operator""_s(const char32_t *s, std::size_t len)
+    -> std::u32string
 {
   return std::u32string{s, len};
 }
 
-inline BPSTD_INLINE_VISIBILITY
-std::wstring
-  bpstd::literals::string_literals::operator""_s(const wchar_t* s, std::size_t len)
+inline BPSTD_INLINE_VISIBILITY auto bpstd::literals::string_literals::operator""_s(const wchar_t *s, std::size_t len)
+    -> std::wstring
 {
   return std::wstring{s, len};
 }

@@ -78,9 +78,8 @@ void VToolPointFromArcAndTangent::SetDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(const QPointer<DialogTool> &dialog,
-                                                                 VMainGraphicsScene *scene,
-                                                                 VAbstractPattern *doc, VContainer *data)
+auto VToolPointFromArcAndTangent::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
+                                         VAbstractPattern *doc, VContainer *data) -> VToolPointFromArcAndTangent *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogPointFromArcAndTangent> dialogTool = qobject_cast<DialogPointFromArcAndTangent *>(dialog);
@@ -107,7 +106,7 @@ VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(const QPointer<
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(VToolPointFromArcAndTangentInitData initData)
+auto VToolPointFromArcAndTangent::Create(VToolPointFromArcAndTangentInitData initData) -> VToolPointFromArcAndTangent *
 {
     const VArc arc = *initData.data->GeometricObject<VArc>(initData.arcId);
     const VPointF tPoint = *initData.data->GeometricObject<VPointF>(initData.tangentPointId);
@@ -155,8 +154,8 @@ VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(VToolPointFromA
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VToolPointFromArcAndTangent::FindPoint(const QPointF &p, const VArc *arc, const CrossCirclesPoint pType,
-                                            QPointF *intersectionPoint)
+auto VToolPointFromArcAndTangent::FindPoint(const QPointF &p, const VArc *arc, const CrossCirclesPoint pType,
+                                            QPointF *intersectionPoint) -> bool
 {
     SCASSERT(intersectionPoint != nullptr)
 
@@ -223,19 +222,19 @@ bool VToolPointFromArcAndTangent::FindPoint(const QPointF &p, const VArc *arc, c
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolPointFromArcAndTangent::TangentPointName() const
+auto VToolPointFromArcAndTangent::TangentPointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(tangentPointId)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolPointFromArcAndTangent::ArcName() const
+auto VToolPointFromArcAndTangent::ArcName() const -> QString
 {
     return VAbstractTool::data.GetGObject(arcId)->ObjectName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-CrossCirclesPoint VToolPointFromArcAndTangent::GetCrossCirclesPoint() const
+auto VToolPointFromArcAndTangent::GetCrossCirclesPoint() const -> CrossCirclesPoint
 {
     return crossPoint;
 }

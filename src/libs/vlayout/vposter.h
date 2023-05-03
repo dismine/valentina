@@ -66,10 +66,10 @@ class VPoster
 public:
     explicit VPoster(const QPrinter *printer);
 
-    QVector<PosterData> Calc(const QSize &imageRect, int page, PageOrientation orientation) const;
+    auto Calc(const QSize &imageRect, int page, PageOrientation orientation) const -> QVector<PosterData>;
 
-    QVector<QGraphicsItem *> Tile(QGraphicsItem *parent, const PosterData &img, vsizetype sheets,
-                                  const VWatermarkData &watermarkData, const QString &watermarkPath) const;
+    auto Tile(QGraphicsItem *parent, const PosterData &img, vsizetype sheets, const VWatermarkData &watermarkData,
+              const QString &watermarkPath) const -> QVector<QGraphicsItem *>;
 
 private:
     const QPrinter *printer;
@@ -79,21 +79,21 @@ private:
      */
     quint32 allowance;
 
-    int CountRows(int height, PageOrientation orientation) const;
-    int CountColumns(int width, PageOrientation orientation) const;
+    auto CountRows(int height, PageOrientation orientation) const -> int;
+    auto CountColumns(int width, PageOrientation orientation) const -> int;
 
-    PosterData Cut(int i, int j, const QSize &imageRect, PageOrientation orientation) const;
+    auto Cut(int i, int j, const QSize &imageRect, PageOrientation orientation) const -> PosterData;
 
-    QRect PageRect() const;
+    auto PageRect() const -> QRect;
 
     void Ruler(QVector<QGraphicsItem *> &data, QGraphicsItem *parent, QRect rec) const;
 
-    QVector<QGraphicsItem *> Borders(QGraphicsItem *parent, const PosterData &img, vsizetype sheets) const;
+    auto Borders(QGraphicsItem *parent, const PosterData &img, vsizetype sheets) const -> QVector<QGraphicsItem *>;
 
-    QVector<QGraphicsItem *> TextWatermark(QGraphicsItem *parent, const PosterData &img,
-                                           const VWatermarkData &watermarkData) const;
-    QVector<QGraphicsItem *> ImageWatermark(QGraphicsItem *parent, const PosterData &img,
-                                            const VWatermarkData &watermarkData, const QString &watermarkPath) const;
+    auto TextWatermark(QGraphicsItem *parent, const PosterData &img, const VWatermarkData &watermarkData) const
+        -> QVector<QGraphicsItem *>;
+    auto ImageWatermark(QGraphicsItem *parent, const PosterData &img, const VWatermarkData &watermarkData,
+                        const QString &watermarkPath) const -> QVector<QGraphicsItem *>;
 };
 
 #endif // VPOSTER_H

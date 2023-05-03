@@ -52,9 +52,9 @@ public:
     static void Create(const VAbstractNodeInitData &initData);
 
     static const QString ToolType;
-    virtual int  type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::NodePoint)};
-    virtual QString getTagName() const override;
+    virtual auto getTagName() const -> QString override;
 
     virtual void ChangeLabelPosition(quint32 id, const QPointF &pos) override;
     virtual void SetLabelVisible(quint32 id, bool visible) override;
@@ -94,7 +94,7 @@ private:
 
     VNodePoint(const VAbstractNodeInitData &initData, QObject *qoParent = nullptr, QGraphicsItem *parent = nullptr);
 
-    QHash<int, QAction *> InitContextMenu(QMenu *menu, vidtype pieceId, quint32 referens);
+    auto InitContextMenu(QMenu *menu, vidtype pieceId, quint32 referens) -> QHash<int, QAction *>;
     void InitPassmarkMenu(QMenu *menu, vidtype pieceId, QHash<int, QAction *> &contextMenu);
     void InitAngleTypeMenu(QMenu *menu, vidtype pieceId, QHash<int, QAction *> &contextMenu);
     void InitPassmarkAngleTypeMenu(QMenu *menu, vidtype pieceId, QHash<int, QAction *> &contextMenu);

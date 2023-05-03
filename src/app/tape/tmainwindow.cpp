@@ -27,29 +27,30 @@
  *************************************************************************/
 
 #include "tmainwindow.h"
-#include "ui_tmainwindow.h"
-#include "dialogs/dialogabouttape.h"
-#include "dialogs/dialognewmeasurements.h"
-#include "dialogs/dialogmdatabase.h"
-#include "dialogs/dialogtapepreferences.h"
-#include "dialogs/dialogsetupmultisize.h"
-#include "dialogs/dialogrestrictdimension.h"
-#include "dialogs/dialogdimensionlabels.h"
-#include "dialogs/dialogmeasurementscsvcolumns.h"
-#include "dialogs/dialogdimensioncustomnames.h"
-#include "../vpatterndb/vcontainer.h"
-#include "../vpatterndb/calculator.h"
-#include "../vpatterndb/pmsystems.h"
-#include "../vpatterndb/measurements.h"
-#include "../vpatterndb/variables/vmeasurement.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternconverter.h"
 #include "../ifc/xml/vvitconverter.h"
 #include "../ifc/xml/vvstconverter.h"
-#include "../ifc/xml/vpatternconverter.h"
-#include "../vmisc/vsysexits.h"
-#include "../vmisc/qxtcsvmodel.h"
-#include "../vmisc/dialogs/dialogexporttocsv.h"
 #include "../vmisc/compatibility.h"
+#include "../vmisc/dialogs/dialogexporttocsv.h"
+#include "../vmisc/qxtcsvmodel.h"
+#include "../vmisc/vsysexits.h"
+#include "../vpatterndb/calculator.h"
+#include "../vpatterndb/measurements.h"
+#include "../vpatterndb/pmsystems.h"
+#include "../vpatterndb/variables/vmeasurement.h"
+#include "../vpatterndb/vcontainer.h"
+#include "def.h"
+#include "dialogs/dialogabouttape.h"
+#include "dialogs/dialogdimensioncustomnames.h"
+#include "dialogs/dialogdimensionlabels.h"
+#include "dialogs/dialogmdatabase.h"
+#include "dialogs/dialogmeasurementscsvcolumns.h"
+#include "dialogs/dialognewmeasurements.h"
+#include "dialogs/dialogrestrictdimension.h"
+#include "dialogs/dialogsetupmultisize.h"
+#include "dialogs/dialogtapepreferences.h"
+#include "ui_tmainwindow.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
@@ -109,6 +110,16 @@ QT_WARNING_POP
 namespace
 {
 enum class MUnits : qint8 { Table, Degrees};
+
+struct IndividualMeasurement
+{
+    IndividualMeasurement() = default;
+
+    QString name{};        // NOLINT(misc-non-private-member-variables-in-classes)
+    QString value{'0'};    // NOLINT(misc-non-private-member-variables-in-classes)
+    QString fullName{};    // NOLINT(misc-non-private-member-variables-in-classes)
+    QString description{}; // NOLINT(misc-non-private-member-variables-in-classes)
+};
 
 //---------------------------------------------------------------------------------------------------------------------
 auto SaveDirPath(const QString &curFile, MeasurementsType mType) -> QString
@@ -190,6 +201,38 @@ auto ConverToDouble(QString text, const QString &error) -> qreal
         throw VException(error);
     }
     return value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void SetIndividualMeasurementFullName(int i, const QString &name, const QxtCsvModel &csv, const QVector<int> &map,
+                                      IndividualMeasurement &measurement)
+{
+    const int columns = csv.columnCount();
+    const bool custom = name.startsWith(CustomMSign);
+    if (columns > 2 && custom)
+    {
+        const int fullNameColumn = map.at(static_cast<int>(IndividualMeasurementsColumns::FullName));
+        if (fullNameColumn >= 0)
+        {
+            measurement.fullName = csv.text(i, fullNameColumn).simplified();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void SetIndividualMeasurementDescription(int i, const QString &name, const QxtCsvModel &csv, const QVector<int> &map,
+                                         IndividualMeasurement &measurement)
+{
+    const int columns = csv.columnCount();
+    const bool custom = name.startsWith(CustomMSign);
+    if (columns > 3 && custom)
+    {
+        const int descriptionColumn = map.at(static_cast<int>(IndividualMeasurementsColumns::Description));
+        if (descriptionColumn >= 0)
+        {
+            measurement.description = csv.text(i, descriptionColumn).simplified();
+        }
+    }
 }
 }  // namespace
 
@@ -3960,16 +4003,6 @@ void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv, const QVe
         return;
     }
 
-    struct IndividualMeasurement
-    {
-        IndividualMeasurement() =default;
-
-        QString name{}; // NOLINT(misc-non-private-member-variables-in-classes)
-        QString value{'0'}; // NOLINT(misc-non-private-member-variables-in-classes)
-        QString fullName{}; // NOLINT(misc-non-private-member-variables-in-classes)
-        QString description{}; // NOLINT(misc-non-private-member-variables-in-classes)
-    };
-
     QVector<IndividualMeasurement> measurements;
     QSet<QString> importedNames;
 
@@ -3991,28 +4024,11 @@ void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv, const QVe
             measurement.name = mName;
 
             const int valueColumn = map.at(static_cast<int>(IndividualMeasurementsColumns::Value));
-            measurement.value =
-                    VTranslateVars::TryFormulaFromUser(csv.text(i, valueColumn),
-                                                       VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+            measurement.value = VTranslateVars::TryFormulaFromUser(
+                csv.text(i, valueColumn), VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 
-            const bool custom = name.startsWith(CustomMSign);
-            if (columns > 2 && custom)
-            {
-                const int fullNameColumn = map.at(static_cast<int>(IndividualMeasurementsColumns::FullName));
-                if (fullNameColumn >= 0)
-                {
-                    measurement.fullName = csv.text(i, fullNameColumn).simplified();
-                }
-            }
-
-            if (columns > 3 && custom)
-            {
-                const int descriptionColumn = map.at(static_cast<int>(IndividualMeasurementsColumns::Description));
-                if (descriptionColumn >= 0)
-                {
-                    measurement.description = csv.text(i, descriptionColumn).simplified();
-                }
-            }
+            SetIndividualMeasurementFullName(i, name, csv, map, measurement);
+            SetIndividualMeasurementDescription(i, name, csv, map, measurement);
 
             measurements.append(measurement);
         }

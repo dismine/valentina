@@ -38,7 +38,8 @@ VExceptionInvalidHistory::VExceptionInvalidHistory(const VExceptionInvalidHistor
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionInvalidHistory &VExceptionInvalidHistory::operator=(const VExceptionInvalidHistory &e) V_NOEXCEPT_EXPR (true)
+auto VExceptionInvalidHistory::operator=(const VExceptionInvalidHistory &e) V_NOEXCEPT_EXPR(true)
+    -> VExceptionInvalidHistory &
 {
     if ( &e == this )
     {

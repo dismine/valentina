@@ -122,7 +122,7 @@ VAbstractTool::~VAbstractTool()
  * @throw QmuParserError.
  * @return result of calculation formula.
  */
-qreal VAbstractTool::CheckFormula(const quint32 &toolId, QString &formula, VContainer *data)
+auto VAbstractTool::CheckFormula(const quint32 &toolId, QString &formula, VContainer *data) -> qreal
 {
     SCASSERT(data != nullptr)
     qreal result = 0;
@@ -243,7 +243,7 @@ void VAbstractTool::PerformDelete()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QStringList VAbstractTool::Colors()
+auto VAbstractTool::Colors() -> const QStringList
 {
     return QStringList {
         ColorBlack,
@@ -267,7 +267,7 @@ const QStringList VAbstractTool::Colors()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMap<QString, QString> VAbstractTool::ColorsList()
+auto VAbstractTool::ColorsList() -> QMap<QString, QString>
 {
     QMap<QString, QString> map;
 
@@ -338,7 +338,7 @@ QMap<QString, QString> VAbstractTool::ColorsList()
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-QMap<QString, quint32> VAbstractTool::PointsList() const
+auto VAbstractTool::PointsList() const -> QMap<QString, quint32>
 {
     const QHash<quint32, QSharedPointer<VGObject> > *objs = data.CalculationGObjects();
     QMap<QString, quint32> list;
@@ -398,10 +398,10 @@ void VAbstractTool::ToolCreation(const Source &typeCreation)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolRecord VAbstractTool::GetRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc)
+auto VAbstractTool::GetRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc) -> VToolRecord
 {
     const QVector<VToolRecord> *history = doc->getHistory();
-    for(auto &record : *history)
+    for (const auto &record : *history)
     {
         if (record.getId() == id && record.getTypeTool() == toolType)
         {
@@ -488,7 +488,7 @@ void VAbstractTool::AddNodes(VAbstractPattern *doc, QDomElement &domElement, con
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagName, const VPieceNode &node)
+auto VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagName, const VPieceNode &node) -> QDomElement
 {
     QDomElement nod = doc->createElement(tagName);
 
@@ -593,8 +593,8 @@ void VAbstractTool::AddNode(VAbstractPattern *doc, QDomElement &domElement, cons
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VPieceNode> VAbstractTool::PrepareNodes(const VPiecePath &path, VMainGraphicsScene *scene,
-                                                VAbstractPattern *doc, VContainer *data)
+auto VAbstractTool::PrepareNodes(const VPiecePath &path, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                                 VContainer *data) -> QVector<VPieceNode>
 {
     QVector<VPieceNode> nodes;
     for (int i = 0; i< path.CountNodes(); ++i)
@@ -611,8 +611,8 @@ QVector<VPieceNode> VAbstractTool::PrepareNodes(const VPiecePath &path, VMainGra
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VAbstractTool::PrepareNode(const VPieceNode &node, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                   VContainer *data)
+auto VAbstractTool::PrepareNode(const VPieceNode &node, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                                VContainer *data) -> quint32
 {
     SCASSERT(scene != nullptr)
     SCASSERT(doc != nullptr)
@@ -656,7 +656,7 @@ quint32 VAbstractTool::PrepareNode(const VPieceNode &node, VMainGraphicsScene *s
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VAbstractTool::CreateNodeSpline(VContainer *data, quint32 id)
+auto VAbstractTool::CreateNodeSpline(VContainer *data, quint32 id) -> quint32
 {
     if (data->GetGObject(id)->getType() == GOType::Spline)
     {
@@ -669,7 +669,7 @@ quint32 VAbstractTool::CreateNodeSpline(VContainer *data, quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VAbstractTool::CreateNodeSplinePath(VContainer *data, quint32 id)
+auto VAbstractTool::CreateNodeSplinePath(VContainer *data, quint32 id) -> quint32
 {
     if (data->GetGObject(id)->getType() == GOType::SplinePath)
     {
@@ -682,7 +682,7 @@ quint32 VAbstractTool::CreateNodeSplinePath(VContainer *data, quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VAbstractTool::CreateNodePoint(VContainer *data, quint32 id, const QSharedPointer<VPointF> &point)
+auto VAbstractTool::CreateNodePoint(VContainer *data, quint32 id, const QSharedPointer<VPointF> &point) -> quint32
 {
     const quint32 pointId = CreateNode<VPointF>(data, id);
     QSharedPointer<VPointF> p = data->GeometricObject<VPointF>(pointId);

@@ -65,7 +65,7 @@ void RenamePP::redo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool RenamePP::mergeWith(const QUndoCommand *command)
+auto RenamePP::mergeWith(const QUndoCommand *command) -> bool
 {
     const RenamePP *renameCommand = static_cast<const RenamePP *>(command);
     SCASSERT(renameCommand != nullptr)
@@ -81,7 +81,7 @@ bool RenamePP::mergeWith(const QUndoCommand *command)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int RenamePP::id() const
+auto RenamePP::id() const -> int
 {
     return static_cast<int>(UndoCommand::RenamePP);
 }

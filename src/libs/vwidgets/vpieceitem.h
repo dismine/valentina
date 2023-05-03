@@ -52,17 +52,17 @@ public:
     explicit VPieceItem(QGraphicsItem* pParent = nullptr);
     virtual ~VPieceItem();
 
-    virtual QRectF boundingRect() const override;
+    virtual auto boundingRect() const -> QRectF override;
 
     virtual void Update() =0;
 
     void Reset();
-    bool IsIdle() const;
+    auto IsIdle() const -> bool;
 
-    VPieceItem::MoveTypes GetMoveType() const;
+    auto GetMoveType() const -> VPieceItem::MoveTypes;
     void                  SetMoveType(const VPieceItem::MoveTypes &moveType);
 
-    virtual int  type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Vis::PieceItem)};
 
 signals:
@@ -84,7 +84,7 @@ protected:
 
     qreal m_inactiveZ;
 
-    virtual double GetAngle(const QPointF &pt) const;
+    virtual auto GetAngle(const QPointF &pt) const -> double;
 
 private:
     Q_DISABLE_COPY_MOVE(VPieceItem) // NOLINT

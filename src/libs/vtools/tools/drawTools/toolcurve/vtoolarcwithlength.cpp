@@ -85,8 +85,8 @@ void VToolArcWithLength::SetDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolArcWithLength *VToolArcWithLength::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                               VAbstractPattern *doc, VContainer *data)
+auto VToolArcWithLength::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                                VContainer *data) -> VToolArcWithLength *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogArcWithLength> dialogTool = qobject_cast<DialogArcWithLength *>(dialog);
@@ -117,7 +117,7 @@ VToolArcWithLength *VToolArcWithLength::Create(const QPointer<DialogTool> &dialo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolArcWithLength *VToolArcWithLength::Create(VToolArcWithLengthInitData &initData)
+auto VToolArcWithLength::Create(VToolArcWithLengthInitData &initData) -> VToolArcWithLength *
 {
     qreal calcRadius = 0, calcF1 = 0, calcLength = 0;
 
@@ -161,13 +161,13 @@ VToolArcWithLength *VToolArcWithLength::Create(VToolArcWithLengthInitData &initD
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolArcWithLength::getTagName() const
+auto VToolArcWithLength::getTagName() const -> QString
 {
     return VAbstractPattern::TagArc;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolArcWithLength::GetFormulaRadius() const
+auto VToolArcWithLength::GetFormulaRadius() const -> VFormula
 {
     QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
     SCASSERT(arc.isNull() == false)
@@ -196,7 +196,7 @@ void VToolArcWithLength::SetFormulaRadius(const VFormula &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolArcWithLength::GetFormulaF1() const
+auto VToolArcWithLength::GetFormulaF1() const -> VFormula
 {
     QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
     SCASSERT(arc.isNull() == false)
@@ -226,7 +226,7 @@ void VToolArcWithLength::SetFormulaF1(const VFormula &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolArcWithLength::GetFormulaLength() const
+auto VToolArcWithLength::GetFormulaLength() const -> VFormula
 {
     QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
     SCASSERT(arc.isNull() == false)
@@ -252,7 +252,7 @@ void VToolArcWithLength::SetFormulaLength(const VFormula &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VToolArcWithLength::GetApproximationScale() const
+auto VToolArcWithLength::GetApproximationScale() const -> qreal
 {
     QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
     SCASSERT(arc.isNull() == false)
@@ -362,7 +362,7 @@ void VToolArcWithLength::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolArcWithLength::MakeToolTip() const
+auto VToolArcWithLength::MakeToolTip() const -> QString
 {
     const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
 

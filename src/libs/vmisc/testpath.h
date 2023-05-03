@@ -42,7 +42,7 @@ class VSAPoint;
 class VRawSAPoint;
 
 #if !defined(V_NO_ASSERT)
-QJsonObject PointToJson(const QPointF &point);
+auto PointToJson(const QPointF &point) -> QJsonObject;
 void VectorToJson(const QVector<QPointF> &points, QJsonObject &json);
 
 template <class T>

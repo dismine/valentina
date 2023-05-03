@@ -267,7 +267,7 @@ void VPE::VPropertyFormWidget::setCommitBehaviour(bool auto_commit)
     d_ptr->UpdateEditors = auto_commit;
 
     const QList<VPropertyFormWidget*> tmpChildFormWidgets = getChildPropertyFormWidgets();
-    for (auto tmpChild : tmpChildFormWidgets)
+    for (auto *tmpChild : tmpChildFormWidgets)
     {
         if (tmpChild)
         {
@@ -276,7 +276,7 @@ void VPE::VPropertyFormWidget::setCommitBehaviour(bool auto_commit)
     }
 }
 
-QList<VPE::VPropertyFormWidget *> VPE::VPropertyFormWidget::getChildPropertyFormWidgets() const
+auto VPE::VPropertyFormWidget::getChildPropertyFormWidgets() const -> QList<VPE::VPropertyFormWidget *>
 {
     QList<VPropertyFormWidget *> tmpResult;
     for (auto &tmpEditorWidget : d_ptr->EditorWidgets)
@@ -290,7 +290,7 @@ QList<VPE::VPropertyFormWidget *> VPE::VPropertyFormWidget::getChildPropertyForm
     return tmpResult;
 }
 
-bool VPE::VPropertyFormWidget::eventFilter(QObject *object, QEvent *event)
+auto VPE::VPropertyFormWidget::eventFilter(QObject *object, QEvent *event) -> bool
 {
     if (!d_ptr->UpdateEditors)
     {
@@ -339,14 +339,14 @@ bool VPE::VPropertyFormWidget::eventFilter(QObject *object, QEvent *event)
         }
         return false;
     }
-    else if (event->type() == QEvent::FocusOut || (event->type() == QEvent::Hide && editor->isWindow()))
+    if (event->type() == QEvent::FocusOut || (event->type() == QEvent::Hide && editor->isWindow()))
     {
         commitData(editor);
         return false;
     }
     else if (event->type() == QEvent::ShortcutOverride)
     {
-        if (static_cast<QKeyEvent*>(event)->key() == Qt::Key_Escape)
+        if (static_cast<QKeyEvent *>(event)->key() == Qt::Key_Escape)
         {
             commitData(editor);
             event->accept();

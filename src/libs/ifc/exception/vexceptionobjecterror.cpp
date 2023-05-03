@@ -64,7 +64,7 @@ VExceptionObjectError::VExceptionObjectError(const VExceptionObjectError &e) V_N
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionObjectError &VExceptionObjectError::operator=(const VExceptionObjectError &e) V_NOEXCEPT_EXPR (true)
+auto VExceptionObjectError::operator=(const VExceptionObjectError &e) V_NOEXCEPT_EXPR(true) -> VExceptionObjectError &
 {
     if ( &e == this )
     {
@@ -82,7 +82,7 @@ VExceptionObjectError &VExceptionObjectError::operator=(const VExceptionObjectEr
  * @brief ErrorMessage return main error message
  * @return main error message
  */
-QString VExceptionObjectError::ErrorMessage() const
+auto VExceptionObjectError::ErrorMessage() const -> QString
 {
     return QString("ExceptionObjectError: %1").arg(error);
 }
@@ -92,7 +92,7 @@ QString VExceptionObjectError::ErrorMessage() const
  * @brief DetailedInformation return detailed information about error
  * @return detailed information
  */
-QString VExceptionObjectError::DetailedInformation() const
+auto VExceptionObjectError::DetailedInformation() const -> QString
 {
     return MoreInfo(QString("tag: %1 in line %2\n%3").arg(tagName).arg(lineNumber).arg(tagText));
 }

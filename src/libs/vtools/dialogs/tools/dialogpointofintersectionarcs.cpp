@@ -84,7 +84,7 @@ DialogPointOfIntersectionArcs::~DialogPointOfIntersectionArcs()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogPointOfIntersectionArcs::GetPointName() const
+auto DialogPointOfIntersectionArcs::GetPointName() const -> QString
 {
     return pointName;
 }
@@ -97,7 +97,7 @@ void DialogPointOfIntersectionArcs::SetPointName(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogPointOfIntersectionArcs::GetFirstArcId() const
+auto DialogPointOfIntersectionArcs::GetFirstArcId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxArc1);
 }
@@ -113,7 +113,7 @@ void DialogPointOfIntersectionArcs::SetFirstArcId(quint32 value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogPointOfIntersectionArcs::GetSecondArcId() const
+auto DialogPointOfIntersectionArcs::GetSecondArcId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxArc2);
 }
@@ -129,7 +129,7 @@ void DialogPointOfIntersectionArcs::SetSecondArcId(quint32 value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-CrossCirclesPoint DialogPointOfIntersectionArcs::GetCrossArcPoint() const
+auto DialogPointOfIntersectionArcs::GetCrossArcPoint() const -> CrossCirclesPoint
 {
     return getCurrentCrossPoint<CrossCirclesPoint>(ui->comboBoxResult);
 }
@@ -233,7 +233,7 @@ void DialogPointOfIntersectionArcs::SetNotes(const QString &notes)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogPointOfIntersectionArcs::GetNotes() const
+auto DialogPointOfIntersectionArcs::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }

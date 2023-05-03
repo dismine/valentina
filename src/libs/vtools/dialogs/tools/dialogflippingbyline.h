@@ -55,32 +55,32 @@ public:
     explicit DialogFlippingByLine(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogFlippingByLine();
 
-    quint32 GetFirstLinePointId() const;
+    auto GetFirstLinePointId() const -> quint32;
     void    SetFirstLinePointId(quint32 value);
 
-    quint32 GetSecondLinePointId() const;
+    auto GetSecondLinePointId() const -> quint32;
     void    SetSecondLinePointId(quint32 value);
 
-    QString GetSuffix() const;
+    auto GetSuffix() const -> QString;
     void    SetSuffix(const QString &value);
 
-    QString GetVisibilityGroupName() const;
+    auto GetVisibilityGroupName() const -> QString;
     void    SetVisibilityGroupName(const QString &name);
 
-    bool HasLinkedVisibilityGroup() const;
+    auto HasLinkedVisibilityGroup() const -> bool;
     void SetHasLinkedVisibilityGroup(bool linked);
 
     void        SetVisibilityGroupTags(const QStringList &tags);
-    QStringList GetVisibilityGroupTags() const;
+    auto GetVisibilityGroupTags() const -> QStringList;
 
     void    SetNotes(const QString &notes);
-    QString GetNotes() const;
+    auto GetNotes() const -> QString;
 
     virtual void SetGroupCategories(const QStringList &categories) override;
 
     virtual void ShowDialog(bool click) override;
 
-    QVector<SourceItem> GetSourceObjects() const;
+    auto GetSourceObjects() const -> QVector<SourceItem>;
     void                SetSourceObjects(const QVector<SourceItem> &value);
 
 public slots:
@@ -100,7 +100,7 @@ protected:
 
     /** @brief SaveData Put dialog data in local variables */
     virtual void SaveData() override;
-    virtual bool IsValid() const final;
+    virtual auto IsValid() const -> bool final;
 
 private slots:
     void PointChanged();

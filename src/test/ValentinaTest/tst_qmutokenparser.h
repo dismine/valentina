@@ -51,7 +51,7 @@ private:
     QLocale m_systemLocale;
 
     void PrepareVal(qreal val, const QLocale &locale);
-    bool IsSingleFromUser(const QString &formula);
+    auto IsSingleFromUser(const QString &formula) -> bool;
 };
 
 #endif // TST_QMUTOKENPARSER_H

@@ -18,8 +18,9 @@
 #include "drw_textcodec.h"
 #include "drw_dbg.h"
 
-bool dxfReader::readRec(int *codeData) {
-//    std::string text;
+auto dxfReader::readRec(int *codeData) -> bool
+{
+    //    std::string text;
     int code;
 
     if (!readCode(&code))
@@ -97,7 +98,8 @@ bool dxfReader::readRec(int *codeData) {
 
     return (filestr->good());
 }
-int dxfReader::getHandleString(){
+auto dxfReader::getHandleString() -> int
+{
     int res;
 #if defined(__APPLE__)
     // cppcheck-suppress invalidScanfArgType_int
@@ -112,7 +114,8 @@ int dxfReader::getHandleString(){
     return res;
 }
 
-bool dxfReaderBinary::readCode(int *code) {
+auto dxfReaderBinary::readCode(int *code) -> bool
+{
     unsigned short *int16p;
     char buffer[2];
     filestr->read(buffer,2);
@@ -130,21 +133,24 @@ bool dxfReaderBinary::readCode(int *code) {
     return (filestr->good());
 }
 
-bool dxfReaderBinary::readString() {
+auto dxfReaderBinary::readString() -> bool
+{
     type = STRING;
     std::getline(*filestr, strData, '\0');
     DRW_DBG(strData); DRW_DBG("\n");
     return (filestr->good());
 }
 
-bool dxfReaderBinary::readString(std::string *text) {
+auto dxfReaderBinary::readString(std::string *text) -> bool
+{
     type = STRING;
     std::getline(*filestr, *text, '\0');
     DRW_DBG(*text); DRW_DBG("\n");
     return (filestr->good());
 }
 
-bool dxfReaderBinary::readBinary() {
+auto dxfReaderBinary::readBinary() -> bool
+{
     unsigned char chunklen {0};
 
     filestr->read( reinterpret_cast<char *>(&chunklen), 1);
@@ -154,7 +160,8 @@ bool dxfReaderBinary::readBinary() {
     return (filestr->good());
 }
 
-bool dxfReaderBinary::readInt16() {
+auto dxfReaderBinary::readInt16() -> bool
+{
     type = INT32;
     char buffer[2];
     filestr->read(buffer,2);
@@ -163,7 +170,8 @@ bool dxfReaderBinary::readInt16() {
     return (filestr->good());
 }
 
-bool dxfReaderBinary::readInt32() {
+auto dxfReaderBinary::readInt32() -> bool
+{
     type = INT32;
     unsigned int *int32p;
     char buffer[4];
@@ -175,7 +183,8 @@ bool dxfReaderBinary::readInt32() {
     return (filestr->good());
 }
 
-bool dxfReaderBinary::readInt64() {
+auto dxfReaderBinary::readInt64() -> bool
+{
     type = INT64;
     unsigned long long int *int64p; //64 bits integer pointer
     char buffer[8];
@@ -187,7 +196,8 @@ bool dxfReaderBinary::readInt64() {
     return (filestr->good());
 }
 
-bool dxfReaderBinary::readDouble() {
+auto dxfReaderBinary::readDouble() -> bool
+{
     type = DOUBLE;
     double *result;
     char buffer[8];
@@ -201,7 +211,8 @@ bool dxfReaderBinary::readDouble() {
 }
 
 //saved as int or add a bool member??
-bool dxfReaderBinary::readBool() {
+auto dxfReaderBinary::readBool() -> bool
+{
     char buffer[1];
     filestr->read(buffer,1);
     intData = static_cast<int>(buffer[0]);
@@ -209,14 +220,16 @@ bool dxfReaderBinary::readBool() {
     return (filestr->good());
 }
 
-bool dxfReaderAscii::readCode(int *code) {
+auto dxfReaderAscii::readCode(int *code) -> bool
+{
     std::string text;
     std::getline(*filestr, text);
     *code = atoi(text.c_str());
     DRW_DBG(*code); DRW_DBG("\n");
     return (filestr->good());
 }
-bool dxfReaderAscii::readString(std::string *text) {
+auto dxfReaderAscii::readString(std::string *text) -> bool
+{
     type = STRING;
     std::getline(*filestr, *text);
     if (!text->empty() && text->at(text->size()-1) == '\r')
@@ -224,7 +237,8 @@ bool dxfReaderAscii::readString(std::string *text) {
     return (filestr->good());
 }
 
-bool dxfReaderAscii::readString() {
+auto dxfReaderAscii::readString() -> bool
+{
     type = STRING;
     std::getline(*filestr, strData);
     if (!strData.empty() && strData.at(strData.size()-1) == '\r')
@@ -233,11 +247,13 @@ bool dxfReaderAscii::readString() {
     return (filestr->good());
 }
 
-bool dxfReaderAscii::readBinary() {
+auto dxfReaderAscii::readBinary() -> bool
+{
     return readString();
 }
 
-bool dxfReaderAscii::readInt16() {
+auto dxfReaderAscii::readInt16() -> bool
+{
     type = INT32;
     std::string text;
     if (readString(&text)){
@@ -248,17 +264,20 @@ bool dxfReaderAscii::readInt16() {
         return false;
 }
 
-bool dxfReaderAscii::readInt32() {
+auto dxfReaderAscii::readInt32() -> bool
+{
     type = INT32;
     return readInt16();
 }
 
-bool dxfReaderAscii::readInt64() {
+auto dxfReaderAscii::readInt64() -> bool
+{
     type = INT64;
     return readInt16();
 }
 
-bool dxfReaderAscii::readDouble() {
+auto dxfReaderAscii::readDouble() -> bool
+{
     type = DOUBLE;
     std::string text;
     if (readString(&text)){
@@ -280,7 +299,8 @@ bool dxfReaderAscii::readDouble() {
 }
 
 //saved as int or add a bool member??
-bool dxfReaderAscii::readBool() {
+auto dxfReaderAscii::readBool() -> bool
+{
     type = BOOL;
     std::string text;
     if (readString(&text)){

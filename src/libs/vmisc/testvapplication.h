@@ -62,10 +62,7 @@ public:
 
     virtual ~TestVApplication() = default;
 
-    virtual const VTranslateVars *TrVars() override
-    {
-        return m_trVars;
-    }
+    virtual auto TrVars() -> const VTranslateVars * override { return m_trVars; }
 
     virtual void OpenSettings() override
     {
@@ -73,10 +70,7 @@ public:
                                      QCoreApplication::applicationName(), this);
     }
 
-    virtual bool IsAppInGUIMode() const override
-    {
-        return false;
-    }
+    virtual auto IsAppInGUIMode() const -> bool override { return false; }
 
     virtual void InitTrVars() override
     {}
@@ -86,10 +80,7 @@ public:
         m_trVars = trVars;
     }
 
-    static TestVApplication *VApp()
-    {
-        return static_cast<TestVApplication*>(QCoreApplication::instance());
-    }
+    static auto VApp() -> TestVApplication * { return static_cast<TestVApplication *>(QCoreApplication::instance()); }
 
 protected slots:
     virtual void AboutToQuit() override

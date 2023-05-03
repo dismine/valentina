@@ -84,7 +84,7 @@ VCurveLength::VCurveLength(const VCurveLength &var)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VCurveLength &VCurveLength::operator=(const VCurveLength &var)
+auto VCurveLength::operator=(const VCurveLength &var) -> VCurveLength &
 {
     if ( &var == this )
     {

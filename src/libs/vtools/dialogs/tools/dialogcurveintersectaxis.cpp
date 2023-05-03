@@ -114,7 +114,7 @@ DialogCurveIntersectAxis::~DialogCurveIntersectAxis()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogCurveIntersectAxis::GetPointName() const
+auto DialogCurveIntersectAxis::GetPointName() const -> QString
 {
     return pointName;
 }
@@ -127,7 +127,7 @@ void DialogCurveIntersectAxis::SetPointName(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogCurveIntersectAxis::GetTypeLine() const
+auto DialogCurveIntersectAxis::GetTypeLine() const -> QString
 {
     return GetComboBoxCurrentData(ui->comboBoxLineType, TypeLineLine);
 }
@@ -140,7 +140,7 @@ void DialogCurveIntersectAxis::SetTypeLine(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogCurveIntersectAxis::GetAngle() const
+auto DialogCurveIntersectAxis::GetAngle() const -> QString
 {
     return VTranslateVars::TryFormulaFromUser(formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
@@ -166,7 +166,7 @@ void DialogCurveIntersectAxis::SetAngle(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogCurveIntersectAxis::GetBasePointId() const
+auto DialogCurveIntersectAxis::GetBasePointId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxAxisPoint);
 }
@@ -182,7 +182,7 @@ void DialogCurveIntersectAxis::SetBasePointId(quint32 value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogCurveIntersectAxis::getCurveId() const
+auto DialogCurveIntersectAxis::getCurveId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxCurve);
 }
@@ -198,7 +198,7 @@ void DialogCurveIntersectAxis::setCurveId(quint32 value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogCurveIntersectAxis::GetLineColor() const
+auto DialogCurveIntersectAxis::GetLineColor() const -> QString
 {
     return GetComboBoxCurrentData(ui->comboBoxLineColor, ColorBlack);
 }
@@ -409,7 +409,7 @@ void DialogCurveIntersectAxis::SetNotes(const QString &notes)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogCurveIntersectAxis::GetNotes() const
+auto DialogCurveIntersectAxis::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }
@@ -423,7 +423,7 @@ void DialogCurveIntersectAxis::SetAliasSuffix1(const QString &alias)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogCurveIntersectAxis::GetAliasSuffix1() const
+auto DialogCurveIntersectAxis::GetAliasSuffix1() const -> QString
 {
     return ui->lineEditAlias1->text();
 }
@@ -437,7 +437,7 @@ void DialogCurveIntersectAxis::SetAliasSuffix2(const QString &alias)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogCurveIntersectAxis::GetAliasSuffix2() const
+auto DialogCurveIntersectAxis::GetAliasSuffix2() const -> QString
 {
     return ui->lineEditAlias2->text();
 }

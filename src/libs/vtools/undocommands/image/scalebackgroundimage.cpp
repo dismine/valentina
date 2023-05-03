@@ -70,7 +70,7 @@ void ScaleBackgroundImage::redo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool ScaleBackgroundImage::mergeWith(const QUndoCommand *command)
+auto ScaleBackgroundImage::mergeWith(const QUndoCommand *command) -> bool
 {
     if (command->id() != id())
     {
@@ -90,25 +90,25 @@ bool ScaleBackgroundImage::mergeWith(const QUndoCommand *command)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int ScaleBackgroundImage::id() const
+auto ScaleBackgroundImage::id() const -> int
 {
     return static_cast<int>(UndoCommand::ScaleBackGroundImage);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QUuid ScaleBackgroundImage::ImageId() const
+auto ScaleBackgroundImage::ImageId() const -> QUuid
 {
     return m_id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QTransform ScaleBackgroundImage::Matrix() const
+auto ScaleBackgroundImage::Matrix() const -> QTransform
 {
     return m_matrix;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool ScaleBackgroundImage::AllowMerge() const
+auto ScaleBackgroundImage::AllowMerge() const -> bool
 {
     return m_allowMerge;
 }

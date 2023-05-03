@@ -81,27 +81,27 @@ public:
     static const QString TagSource;
     static const QString TagDestination;
 
-    virtual QString getTagName() const override;
+    virtual auto getTagName() const -> QString override;
 
-    QString Suffix() const;
+    auto Suffix() const -> QString;
     void    SetSuffix(const QString &suffix);
 
     virtual void SetNotes(const QString &notes) override;
 
-    QVector<SourceItem> SourceItems() const;
+    auto SourceItems() const -> QVector<SourceItem>;
 
     virtual void GroupVisibility(quint32 object, bool visible) override;
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
     virtual void ChangeLabelPosition(quint32 id, const QPointF &pos) override;
 
-    virtual bool IsLabelVisible(quint32 id) const override;
+    virtual auto IsLabelVisible(quint32 id) const -> bool override;
     virtual void SetLabelVisible(quint32 id, bool visible) override;
 
     static void ExtractData(const QDomElement &domElement, VAbstractOperationInitData &initData);
-    static QVector<SourceItem> ExtractSourceData(const QDomElement &domElement);
-    static QVector<DestinationItem> ExtractDestinationData(const QDomElement &domElement);
+    static auto ExtractSourceData(const QDomElement &domElement) -> QVector<SourceItem>;
+    static auto ExtractDestinationData(const QDomElement &domElement) -> QVector<DestinationItem>;
 
-    static QMap<QString, QString> OperationColorsList();
+    static auto OperationColorsList() -> QMap<QString, QString>;
 public slots:
     virtual void FullUpdateFromFile() override;
 
@@ -173,9 +173,9 @@ protected:
 
     void InitOperatedObjects();
 
-    QString ComplexPointToolTip(quint32 itemId) const;
-    QString ComplexCurveToolTip(quint32 itemId) const;
-    QString VisibilityGroupToolTip() const;
+    auto ComplexPointToolTip(quint32 itemId) const -> QString;
+    auto ComplexCurveToolTip(quint32 itemId) const -> QString;
+    auto VisibilityGroupToolTip() const -> QString;
 
     static void CreateVisibilityGroup(const VAbstractOperationInitData & initData);
 private:
@@ -184,7 +184,7 @@ private:
     void AllowCurveHover(bool enabled, GOType type);
     void AllowCurveSelecting(bool enabled, GOType type);
 
-    bool NeedUpdateVisibilityGroup() const;
+    auto NeedUpdateVisibilityGroup() const -> bool;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

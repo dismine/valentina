@@ -59,7 +59,7 @@ void DialogGroup::SetName(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogGroup::GetName() const
+auto DialogGroup::GetName() const -> QString
 {
     return ui->lineEditName->text();
 }
@@ -71,7 +71,7 @@ void DialogGroup::SetTags(const QStringList &tags)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList DialogGroup::GetTags() const
+auto DialogGroup::GetTags() const -> QStringList
 {
     return ui->lineEditTags->text().split(",");
 }
@@ -121,7 +121,7 @@ void DialogGroup::NameChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMap<quint32, quint32> DialogGroup::GetGroup() const
+auto DialogGroup::GetGroup() const -> QMap<quint32, quint32>
 {
     return group;
 }

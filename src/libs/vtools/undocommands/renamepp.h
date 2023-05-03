@@ -46,10 +46,11 @@ public:
 
     virtual void undo() override;
     virtual void redo() override;
-    virtual bool mergeWith(const QUndoCommand *command) override;
-    virtual int  id() const override;
-    QString      getNewPPname() const;
-    QString      getOldPPname() const;
+    virtual auto mergeWith(const QUndoCommand *command) -> bool override;
+    virtual auto id() const -> int override;
+    auto getNewPPname() const -> QString;
+    auto getOldPPname() const -> QString;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(RenamePP) // NOLINT
@@ -60,13 +61,13 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString RenamePP::getNewPPname() const
+inline auto RenamePP::getNewPPname() const -> QString
 {
     return newPPname;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString RenamePP::getOldPPname() const
+inline auto RenamePP::getOldPPname() const -> QString
 {
     return oldPPname;
 }

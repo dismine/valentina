@@ -69,22 +69,22 @@ class VToolShoulderPoint : public VToolLinePoint
     Q_OBJECT // NOLINT
 public:
     virtual void   SetDialog() override;
-    static QPointF FindPoint(const QPointF &p1Line, const QPointF &p2Line, const QPointF &pShoulder,
-                             const qreal &length);
-    static VToolShoulderPoint* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
-                                      VAbstractPattern *doc, VContainer *data);
-    static VToolShoulderPoint* Create(VToolShoulderPointInitData &initData);
+    static auto FindPoint(const QPointF &p1Line, const QPointF &p2Line, const QPointF &pShoulder, const qreal &length)
+        -> QPointF;
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolShoulderPoint *;
+    static auto Create(VToolShoulderPointInitData &initData) -> VToolShoulderPoint *;
     static const QString ToolType;
-    virtual int    type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::ShoulderPoint) };
 
-    QString SecondPointName() const;
-    QString ShoulderPointName() const;
+    auto SecondPointName() const -> QString;
+    auto ShoulderPointName() const -> QString;
 
-    quint32 GetP2Line() const;
+    auto GetP2Line() const -> quint32;
     void    SetP2Line(const quint32 &value);
 
-    quint32 getPShoulder() const;
+    auto getPShoulder() const -> quint32;
     void    setPShoulder(const quint32 &value);
 
     virtual void   ShowVisualization(bool show) override;
@@ -95,7 +95,7 @@ protected:
     virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     virtual void    ReadToolAttributes(const QDomElement &domElement) override;
     virtual void    SetVisualization() override;
-    virtual QString MakeToolTip() const override;
+    virtual auto MakeToolTip() const -> QString override;
 private slots:
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
 private:

@@ -130,13 +130,13 @@ void VMainGraphicsScene::SetAcceptDrop(bool newAcceptDrop)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VMainGraphicsScene::AcceptDrop() const
+auto VMainGraphicsScene::AcceptDrop() const -> bool
 {
     return m_acceptDrop;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VMainGraphicsScene::IsNonInteractive() const
+auto VMainGraphicsScene::IsNonInteractive() const -> bool
 {
     return m_nonInteractive;
 }
@@ -253,17 +253,17 @@ void VMainGraphicsScene::SetOriginsVisible(bool visible)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VMainGraphicsScene::getScenePos() const
+auto VMainGraphicsScene::getScenePos() const -> QPointF
 {
     return scenePos;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VMainGraphicsScene::VisibleItemsBoundingRect() const
+auto VMainGraphicsScene::VisibleItemsBoundingRect() const -> QRectF
 {
     QRectF rect;
     const QList<QGraphicsItem *> qItems = items();
-    for (auto item : qItems)
+    for (auto *item : qItems)
     {
         if(not item->isVisible())
         {
@@ -279,7 +279,7 @@ QRectF VMainGraphicsScene::VisibleItemsBoundingRect() const
  * @brief transform return view transformation.
  * @return view transformation.
  */
-QTransform VMainGraphicsScene::transform() const
+auto VMainGraphicsScene::transform() const -> QTransform
 {
     return _transform;
 }

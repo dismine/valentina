@@ -326,7 +326,7 @@ void AbstractTest::CompareLinesDistance(const QVector<QLineF> &result, const QVe
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString AbstractTest::PuzzlePath() const
+auto AbstractTest::PuzzlePath() const -> QString
 {
 #ifdef QBS_BUILD
     return QStringLiteral(PUZZLE_BUILDDIR);
@@ -341,7 +341,7 @@ QString AbstractTest::PuzzlePath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString AbstractTest::ValentinaPath() const
+auto AbstractTest::ValentinaPath() const -> QString
 {
 #ifdef QBS_BUILD
     return QStringLiteral(VALENTINA_BUILDDIR);
@@ -356,7 +356,7 @@ QString AbstractTest::ValentinaPath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString AbstractTest::TapePath() const
+auto AbstractTest::TapePath() const -> QString
 {
 #ifdef QBS_BUILD
     return QStringLiteral(TAPE_BUILDDIR);
@@ -371,7 +371,7 @@ QString AbstractTest::TapePath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString AbstractTest::TranslationsPath() const
+auto AbstractTest::TranslationsPath() const -> QString
 {
 #ifdef QBS_BUILD
     return QStringLiteral(TRANSLATIONS_DIR);
@@ -381,7 +381,7 @@ QString AbstractTest::TranslationsPath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int AbstractTest::RunTimeout(int defMsecs)
+auto AbstractTest::RunTimeout(int defMsecs) -> int
 {
 #if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
     QString timeout = QString::fromLocal8Bit(qgetenv("VTEST_RUN_TIMEOUT"));
@@ -399,7 +399,7 @@ int AbstractTest::RunTimeout(int defMsecs)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int AbstractTest::Run(int exit, const QString &program, const QStringList &arguments, QString &error, int msecs)
+auto AbstractTest::Run(int exit, const QString &program, const QStringList &arguments, QString &error, int msecs) -> int
 {
     msecs = AbstractTest::RunTimeout(msecs);
 
@@ -450,7 +450,7 @@ int AbstractTest::Run(int exit, const QString &program, const QStringList &argum
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool AbstractTest::CopyRecursively(const QString &srcFilePath, const QString &tgtFilePath) const
+auto AbstractTest::CopyRecursively(const QString &srcFilePath, const QString &tgtFilePath) const -> bool
 {
     QFileInfo srcFileInfo(srcFilePath);
     if (srcFileInfo.isDir())

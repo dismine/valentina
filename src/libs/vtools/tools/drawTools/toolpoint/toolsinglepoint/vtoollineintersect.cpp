@@ -97,8 +97,8 @@ void VToolLineIntersect::SetDialog()
  * @param data container with variables.
  * @return the created tool
  */
-VToolLineIntersect* VToolLineIntersect::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                               VAbstractPattern *doc, VContainer *data)
+auto VToolLineIntersect::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                                VContainer *data) -> VToolLineIntersect *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogLineIntersect> dialogTool = qobject_cast<DialogLineIntersect *>(dialog);
@@ -131,7 +131,7 @@ VToolLineIntersect* VToolLineIntersect::Create(const QPointer<DialogTool> &dialo
  * @param initData init data.
  * @return the created tool
  */
-VToolLineIntersect* VToolLineIntersect::Create(VToolLineIntersectInitData initData)
+auto VToolLineIntersect::Create(VToolLineIntersectInitData initData) -> VToolLineIntersect *
 {
     const QSharedPointer<VPointF> p1Line1 = initData.data->GeometricObject<VPointF>(initData.p1Line1Id);
     const QSharedPointer<VPointF> p2Line1 = initData.data->GeometricObject<VPointF>(initData.p2Line1Id);
@@ -193,25 +193,25 @@ VToolLineIntersect* VToolLineIntersect::Create(VToolLineIntersectInitData initDa
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolLineIntersect::Line1P1Name() const
+auto VToolLineIntersect::Line1P1Name() const -> QString
 {
     return VAbstractTool::data.GetGObject(p1Line1)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolLineIntersect::Line1P2Name() const
+auto VToolLineIntersect::Line1P2Name() const -> QString
 {
     return VAbstractTool::data.GetGObject(p2Line1)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolLineIntersect::Line2P1Name() const
+auto VToolLineIntersect::Line2P1Name() const -> QString
 {
     return VAbstractTool::data.GetGObject(p1Line2)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolLineIntersect::Line2P2Name() const
+auto VToolLineIntersect::Line2P2Name() const -> QString
 {
     return VAbstractTool::data.GetGObject(p2Line2)->name();
 }
@@ -303,7 +303,7 @@ void VToolLineIntersect::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolLineIntersect::MakeToolTip() const
+auto VToolLineIntersect::MakeToolTip() const -> QString
 {
     const QSharedPointer<VPointF> p1L1 = VAbstractTool::data.GeometricObject<VPointF>(p1Line1);
     const QSharedPointer<VPointF> p2L1 = VAbstractTool::data.GeometricObject<VPointF>(p2Line1);

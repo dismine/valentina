@@ -46,22 +46,23 @@ class VObjPaintDevice : public QPaintDevice
 public:
     VObjPaintDevice();
     virtual ~VObjPaintDevice() override;
-    virtual QPaintEngine *paintEngine() const override;
+    virtual auto paintEngine() const -> QPaintEngine * override;
 
-    QString getFileName() const;
+    auto getFileName() const -> QString;
     void setFileName(const QString &value);
 
-    QSize getSize();
+    auto getSize() -> QSize;
     void setSize(const QSize &size);
 
-    QIODevice *getOutputDevice();
+    auto getOutputDevice() -> QIODevice *;
     void setOutputDevice(QIODevice *outputDevice);
 
-    int getResolution() const;
+    auto getResolution() const -> int;
     void setResolution(int dpi);
 
 protected:
-    virtual int metric(PaintDeviceMetric metric) const override;
+    virtual auto metric(PaintDeviceMetric metric) const -> int override;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VObjPaintDevice) // NOLINT

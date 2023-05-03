@@ -46,7 +46,7 @@
 #include "../vmisc/vabstractvalapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<quint32> SourceToObjects(const QVector<SourceItem> &source)
+auto SourceToObjects(const QVector<SourceItem> &source) -> QVector<quint32>
 {
     QVector<quint32> ids;
     ids.reserve(source.size());
@@ -60,8 +60,8 @@ QVector<quint32> SourceToObjects(const QVector<SourceItem> &source)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool SourceAliasValid(const SourceItem &item, const QSharedPointer<VGObject> &obj, const VContainer *data,
-                      const QString &originAlias)
+auto SourceAliasValid(const SourceItem &item, const QSharedPointer<VGObject> &obj, const VContainer *data,
+                      const QString &originAlias) -> bool
 {
     SCASSERT(data != nullptr)
 
@@ -91,7 +91,7 @@ bool SourceAliasValid(const SourceItem &item, const QSharedPointer<VGObject> &ob
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString OriginAlias(quint32 id, const QVector<SourceItem> &source, const QSharedPointer<VGObject> &obj)
+auto OriginAlias(quint32 id, const QVector<SourceItem> &source, const QSharedPointer<VGObject> &obj) -> QString
 {
     auto item = std::find_if(source.begin(), source.end(),
                             [id](const SourceItem &sItem) { return sItem.id == id; });
@@ -101,21 +101,19 @@ QString OriginAlias(quint32 id, const QVector<SourceItem> &source, const QShared
         {
             return item->alias;
         }
-        else
-        {
-            const QString oldAlias = obj->GetAliasSuffix();
-            obj->SetAliasSuffix(item->alias);
-            QString alias = obj->GetAlias();
-            obj->SetAliasSuffix(oldAlias);
-            return alias;
-        }
+
+        const QString oldAlias = obj->GetAliasSuffix();
+        obj->SetAliasSuffix(item->alias);
+        QString alias = obj->GetAlias();
+        obj->SetAliasSuffix(oldAlias);
+        return alias;
     }
 
     return QString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMap<QString, QIcon> OperationLineStylesPics()
+auto OperationLineStylesPics() -> QMap<QString, QIcon>
 {
     QMap<QString, QIcon> map = LineStylesPics();
     map.insert(TypeLineDefault, QIcon());

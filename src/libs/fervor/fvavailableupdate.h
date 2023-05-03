@@ -36,14 +36,14 @@ class FvAvailableUpdate final : public QObject
 public:
     explicit FvAvailableUpdate(QObject *parent = nullptr);
 
-    QUrl GetEnclosureUrl() const;
+    auto GetEnclosureUrl() const -> QUrl;
     void SetEnclosureUrl(const QUrl &enclosureUrl);
     void SetEnclosureUrl(const QString &enclosureUrl);
 
-    QString GetEnclosureVersion() const;
+    auto GetEnclosureVersion() const -> QString;
     void SetEnclosureVersion(const QString &enclosureVersion);
 
-    QString GetEnclosurePlatform() const;
+    auto GetEnclosurePlatform() const -> QString;
     void SetEnclosurePlatform(const QString &enclosurePlatform);
 
 private:

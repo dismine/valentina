@@ -62,7 +62,7 @@ VException::VException(const VException &e) V_NOEXCEPT_EXPR (true)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VException &VException::operator=(const VException &e) V_NOEXCEPT_EXPR (true)
+auto VException::operator=(const VException &e) V_NOEXCEPT_EXPR(true) -> VException &
 {
     if ( &e == this )
     {
@@ -78,7 +78,7 @@ VException &VException::operator=(const VException &e) V_NOEXCEPT_EXPR (true)
  * @brief ErrorMessage return main error message
  * @return error message
  */
-QString VException::ErrorMessage() const
+auto VException::ErrorMessage() const -> QString
 {
     return tr("Exception: %1").arg(error);
 }
@@ -99,7 +99,7 @@ void VException::AddMoreInformation(const QString &info)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VException::MoreInfo(const QString &detInfo) const
+auto VException::MoreInfo(const QString &detInfo) const -> QString
 {
     if (not moreInfo.isEmpty())
     {
@@ -114,7 +114,7 @@ QString VException::MoreInfo(const QString &detInfo) const
  * @brief DetailedInformation return detailed information about error
  * @return detailed information
  */
-QString VException::DetailedInformation() const
+auto VException::DetailedInformation() const -> QString
 {
     return moreInfo;
 }
@@ -125,7 +125,7 @@ QString VException::DetailedInformation() const
  * @return new exception
  */
 // cppcheck-suppress unusedFunction
-VException *VException::clone() const
+auto VException::clone() const -> VException *
 {
     return new VException(*this);
 }
@@ -153,7 +153,8 @@ VExceptionToolWasDeleted::VExceptionToolWasDeleted(const VExceptionToolWasDelete
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionToolWasDeleted &VExceptionToolWasDeleted::operator=(const VExceptionToolWasDeleted &e) V_NOEXCEPT_EXPR (true)
+auto VExceptionToolWasDeleted::operator=(const VExceptionToolWasDeleted &e) V_NOEXCEPT_EXPR(true)
+    -> VExceptionToolWasDeleted &
 {
     if ( &e == this )
     {
@@ -174,7 +175,7 @@ Q_NORETURN void VExceptionToolWasDeleted::raise() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionToolWasDeleted *VExceptionToolWasDeleted::clone() const
+auto VExceptionToolWasDeleted::clone() const -> VExceptionToolWasDeleted *
 {
     return new VExceptionToolWasDeleted(*this);
 }

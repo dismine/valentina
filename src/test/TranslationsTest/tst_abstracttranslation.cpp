@@ -47,7 +47,7 @@ TST_AbstractTranslation::TST_AbstractTranslation(QObject *parent)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomNodeList TST_AbstractTranslation::LoadTSFile(const QString &filename)
+auto TST_AbstractTranslation::LoadTSFile(const QString &filename) -> QDomNodeList
 {
     tsFile.reset();
     tsFile = QSharedPointer<QFile>(new QFile(QString("%1/%2").arg(TS_DIR, filename)));

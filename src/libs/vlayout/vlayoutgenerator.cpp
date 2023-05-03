@@ -96,7 +96,7 @@ void VLayoutGenerator::SetCaseType(Cases caseType)
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-vsizetype VLayoutGenerator::DetailsCount()
+auto VLayoutGenerator::DetailsCount() -> vsizetype
 {
     return bank->AllDetailsCount();
 }
@@ -280,7 +280,7 @@ void VLayoutGenerator::Generate(const QElapsedTimer &timer, qint64 timeout, Layo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VLayoutGenerator::LayoutEfficiency() const
+auto VLayoutGenerator::LayoutEfficiency() const -> qreal
 {
     qreal efficiency = 0;
     if (not papers.isEmpty())
@@ -291,19 +291,19 @@ qreal VLayoutGenerator::LayoutEfficiency() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-LayoutErrors VLayoutGenerator::State() const
+auto VLayoutGenerator::State() const -> LayoutErrors
 {
     return state;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-vsizetype VLayoutGenerator::PapersCount() const
+auto VLayoutGenerator::PapersCount() const -> vsizetype
 {
     return papers.size();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<QGraphicsItem *> VLayoutGenerator::GetPapersItems() const
+auto VLayoutGenerator::GetPapersItems() const -> QList<QGraphicsItem *>
 {
     QList<QGraphicsItem *> list;
     list.reserve(papers.count());
@@ -315,7 +315,7 @@ QList<QGraphicsItem *> VLayoutGenerator::GetPapersItems() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<QGraphicsItem *> VLayoutGenerator::GetGlobalContours() const
+auto VLayoutGenerator::GetGlobalContours() const -> QList<QGraphicsItem *>
 {
     QList<QGraphicsItem *> list;
     list.reserve(papers.count());
@@ -327,7 +327,7 @@ QList<QGraphicsItem *> VLayoutGenerator::GetGlobalContours() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<QList<QGraphicsItem *> > VLayoutGenerator::GetAllDetailsItems() const
+auto VLayoutGenerator::GetAllDetailsItems() const -> QList<QList<QGraphicsItem *>>
 {
     QList<QList<QGraphicsItem *> > list;
     list.reserve(papers.count());
@@ -339,7 +339,7 @@ QList<QList<QGraphicsItem *> > VLayoutGenerator::GetAllDetailsItems() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QVector<VLayoutPiece> > VLayoutGenerator::GetAllDetails() const
+auto VLayoutGenerator::GetAllDetails() const -> QVector<QVector<VLayoutPiece>>
 {
     QVector<QVector<VLayoutPiece> > list;
     list.reserve(papers.count());
@@ -368,7 +368,7 @@ void VLayoutGenerator::Timeout()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutGenerator::IsStripOptimization() const
+auto VLayoutGenerator::IsStripOptimization() const -> bool
 {
     return stripOptimization;
 }
@@ -380,7 +380,7 @@ void VLayoutGenerator::SetStripOptimization(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutGenerator::IsTestAsPaths() const
+auto VLayoutGenerator::IsTestAsPaths() const -> bool
 {
     return textAsPaths;
 }
@@ -392,7 +392,7 @@ void VLayoutGenerator::SetTextAsPaths(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutGenerator::IsRotationNeeded() const
+auto VLayoutGenerator::IsRotationNeeded() const -> bool
 {
     if (followGrainline)
     {
@@ -405,7 +405,7 @@ bool VLayoutGenerator::IsRotationNeeded() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint8 VLayoutGenerator::GetMultiplier() const
+auto VLayoutGenerator::GetMultiplier() const -> quint8
 {
     return multiplier;
 }
@@ -428,19 +428,19 @@ void VLayoutGenerator::SetMultiplier(quint8 value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VLayoutGenerator::PageHeight() const
+auto VLayoutGenerator::PageHeight() const -> int
 {
     return static_cast<int>(paperHeight - (margins.top() + margins.bottom()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VLayoutGenerator::PageWidth() const
+auto VLayoutGenerator::PageWidth() const -> int
 {
     return static_cast<int>(paperWidth - (margins.left() + margins.right()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutGenerator::IsPortrait() const
+auto VLayoutGenerator::IsPortrait() const -> bool
 {
     return PageHeight() >= PageWidth();
 }
@@ -675,7 +675,7 @@ void VLayoutGenerator::UnitePapers(int j, QList<qreal> &papersLength, qreal leng
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<VLayoutPiece> VLayoutGenerator::MoveDetails(qreal length, const QVector<VLayoutPiece> &details) const
+auto VLayoutGenerator::MoveDetails(qreal length, const QVector<VLayoutPiece> &details) const -> QList<VLayoutPiece>
 {
     if (qFuzzyIsNull(length))
     {
@@ -701,7 +701,7 @@ QList<VLayoutPiece> VLayoutGenerator::MoveDetails(qreal length, const QVector<VL
  *
  * @return master page
  */
-VLayoutPaper VLayoutGenerator::MasterPage() const
+auto VLayoutGenerator::MasterPage() const -> VLayoutPaper
 {
     if (papers.size() < 2)
     {
@@ -774,7 +774,7 @@ VLayoutPaper VLayoutGenerator::MasterPage() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutGenerator::IsUnitePages() const
+auto VLayoutGenerator::IsUnitePages() const -> bool
 {
     return unitePages;
 }
@@ -786,7 +786,7 @@ void VLayoutGenerator::SetUnitePages(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutGenerator::IsSaveLength() const
+auto VLayoutGenerator::IsSaveLength() const -> bool
 {
     return saveLength;
 }
@@ -798,7 +798,7 @@ void VLayoutGenerator::SetSaveLength(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutGenerator::IsPreferOneSheetSolution() const
+auto VLayoutGenerator::IsPreferOneSheetSolution() const -> bool
 {
     return preferOneSheetSolution;
 }
@@ -810,7 +810,7 @@ void VLayoutGenerator::SetPreferOneSheetSolution(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutGenerator::GetAutoCropLength() const
+auto VLayoutGenerator::GetAutoCropLength() const -> bool
 {
     return autoCropLength;
 }
@@ -822,7 +822,7 @@ void VLayoutGenerator::SetAutoCropLength(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutGenerator::GetAutoCropWidth() const
+auto VLayoutGenerator::GetAutoCropWidth() const -> bool
 {
     return autoCropWidth;
 }
@@ -835,7 +835,7 @@ void VLayoutGenerator::SetAutoCropWidth(bool value)
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-int VLayoutGenerator::GetRotationNumber() const
+auto VLayoutGenerator::GetRotationNumber() const -> int
 {
     return rotationNumber;
 }
@@ -852,7 +852,7 @@ void VLayoutGenerator::SetRotationNumber(int value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutGenerator::GetRotate() const
+auto VLayoutGenerator::GetRotate() const -> bool
 {
     return rotate;
 }
@@ -864,7 +864,7 @@ void VLayoutGenerator::SetRotate(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutGenerator::GetFollowGrainline() const
+auto VLayoutGenerator::GetFollowGrainline() const -> bool
 {
     return followGrainline;
 }
@@ -876,7 +876,7 @@ void VLayoutGenerator::SetFollowGrainline(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutGenerator::GetManualPriority() const
+auto VLayoutGenerator::GetManualPriority() const -> bool
 {
     return bank->GetManualPriority();
 }
@@ -888,7 +888,7 @@ void VLayoutGenerator::SetManualPriority(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutGenerator::IsNestQuantity() const
+auto VLayoutGenerator::IsNestQuantity() const -> bool
 {
     return bank->IsNestQuantity();
 }
@@ -900,7 +900,7 @@ void VLayoutGenerator::SetNestQuantity(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VLayoutGenerator::GetPaperWidth() const
+auto VLayoutGenerator::GetPaperWidth() const -> qreal
 {
     return paperWidth;
 }
@@ -912,13 +912,13 @@ void VLayoutGenerator::SetPaperWidth(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VLayoutGenerator::GetNestingTime() const
+auto VLayoutGenerator::GetNestingTime() const -> int
 {
     return nestingTime;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VLayoutGenerator::GetNestingTimeMSecs() const
+auto VLayoutGenerator::GetNestingTimeMSecs() const -> int
 {
     return nestingTime * 60000;
 }
@@ -930,7 +930,7 @@ void VLayoutGenerator::SetNestingTime(int value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VLayoutGenerator::GetEfficiencyCoefficient() const
+auto VLayoutGenerator::GetEfficiencyCoefficient() const -> qreal
 {
     return efficiencyCoefficient;
 }
@@ -942,13 +942,13 @@ void VLayoutGenerator::SetEfficiencyCoefficient(qreal coefficient)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutGenerator::IsUsePrinterFields() const
+auto VLayoutGenerator::IsUsePrinterFields() const -> bool
 {
     return usePrinterFields;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMarginsF VLayoutGenerator::GetPrinterFields() const
+auto VLayoutGenerator::GetPrinterFields() const -> QMarginsF
 {
     return margins;
 }
@@ -961,7 +961,7 @@ void VLayoutGenerator::SetPrinterFields(bool usePrinterFields, const QMarginsF &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VLayoutGenerator::GetShift() const
+auto VLayoutGenerator::GetShift() const -> qreal
 {
     return shift;
 }
@@ -973,7 +973,7 @@ void VLayoutGenerator::SetShift(qreal shift)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VLayoutGenerator::GetPaperHeight() const
+auto VLayoutGenerator::GetPaperHeight() const -> qreal
 {
     return paperHeight;
 }

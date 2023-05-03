@@ -51,57 +51,57 @@ private:
 
     VAbstractPattern *m_pattern;
 
-    QDomElement Prerequisite();
+    auto Prerequisite() -> QDomElement;
 
-    QDomElement Measurements();
-    QDomElement Measurement(const QSharedPointer<VMeasurement> &m);
+    auto Measurements() -> QDomElement;
+    auto Measurement(const QSharedPointer<VMeasurement> &m) -> QDomElement;
 
-    QDomElement Increments();
-    QDomElement PreviewCalculations();
-    QDomElement Increment(const QSharedPointer<VIncrement> &incr);
+    auto Increments() -> QDomElement;
+    auto PreviewCalculations() -> QDomElement;
+    auto Increment(const QSharedPointer<VIncrement> &incr) -> QDomElement;
 
-    QDomElement Content();
+    auto Content() -> QDomElement;
 
-    QDomElement Draft(const QDomElement &draft);
-    QDomElement Step(const VToolRecord &tool, const VContainer &data);
+    auto Draft(const QDomElement &draft) -> QDomElement;
+    auto Step(const VToolRecord &tool, const VContainer &data) -> QDomElement;
 
-    QDomElement FinalMeasurements();
-    QDomElement FinalMeasurement(const VFinalMeasurement &fm, const VContainer &data);
+    auto FinalMeasurements() -> QDomElement;
+    auto FinalMeasurement(const VFinalMeasurement &fm, const VContainer &data) -> QDomElement;
 
-    QDomElement BasePoint(const VToolRecord &record);
-    QDomElement EndLine(const VToolRecord &record);
-    QDomElement Line(const VToolRecord &record);
-    QDomElement AlongLine(const VToolRecord &record);
-    QDomElement ShoulderPoint(const VToolRecord &record);
-    QDomElement Normal(const VToolRecord &record);
-    QDomElement Bisector(const VToolRecord &record);
-    QDomElement LineIntersect(const VToolRecord &record);
-    QDomElement Spline(const VToolRecord &record);
-    QDomElement CubicBezier(const VToolRecord &record);
-    QDomElement Arc(const VToolRecord &record);
-    QDomElement ArcWithLength(const VToolRecord &record);
-    QDomElement SplinePath(const VToolRecord &record);
-    QDomElement CubicBezierPath(const VToolRecord &record);
-    QDomElement PointOfContact(const VToolRecord &record);
-    QDomElement Height(const VToolRecord &record);
-    QDomElement Triangle(const VToolRecord &record);
-    QDomElement PointOfIntersection(const VToolRecord &record);
-    QDomElement CutArc(const VToolRecord &record);
-    QDomElement CutSpline(const VToolRecord &record);
-    QDomElement CutSplinePath(const VToolRecord &record);
-    QDomElement LineIntersectAxis(const VToolRecord &record);
-    QDomElement CurveIntersectAxis(const VToolRecord &record);
-    QDomElement PointOfIntersectionArcs(const VToolRecord &record);
-    QDomElement PointOfIntersectionCircles(const VToolRecord &record);
-    QDomElement PointOfIntersectionCurves(const VToolRecord &record);
-    QDomElement PointFromCircleAndTangent(const VToolRecord &record);
-    QDomElement PointFromArcAndTangent(const VToolRecord &record);
-    QDomElement TrueDarts(const VToolRecord &record);
-    QDomElement EllipticalArc(const VToolRecord &record);
-    QDomElement Rotation(const VToolRecord &record, const VContainer &data);
-    QDomElement FlippingByLine(const VToolRecord &record, const VContainer &data);
-    QDomElement FlippingByAxis(const VToolRecord &record, const VContainer &data);
-    QDomElement Move(const VToolRecord &record, const VContainer &data);
+    auto BasePoint(const VToolRecord &record) -> QDomElement;
+    auto EndLine(const VToolRecord &record) -> QDomElement;
+    auto Line(const VToolRecord &record) -> QDomElement;
+    auto AlongLine(const VToolRecord &record) -> QDomElement;
+    auto ShoulderPoint(const VToolRecord &record) -> QDomElement;
+    auto Normal(const VToolRecord &record) -> QDomElement;
+    auto Bisector(const VToolRecord &record) -> QDomElement;
+    auto LineIntersect(const VToolRecord &record) -> QDomElement;
+    auto Spline(const VToolRecord &record) -> QDomElement;
+    auto CubicBezier(const VToolRecord &record) -> QDomElement;
+    auto Arc(const VToolRecord &record) -> QDomElement;
+    auto ArcWithLength(const VToolRecord &record) -> QDomElement;
+    auto SplinePath(const VToolRecord &record) -> QDomElement;
+    auto CubicBezierPath(const VToolRecord &record) -> QDomElement;
+    auto PointOfContact(const VToolRecord &record) -> QDomElement;
+    auto Height(const VToolRecord &record) -> QDomElement;
+    auto Triangle(const VToolRecord &record) -> QDomElement;
+    auto PointOfIntersection(const VToolRecord &record) -> QDomElement;
+    auto CutArc(const VToolRecord &record) -> QDomElement;
+    auto CutSpline(const VToolRecord &record) -> QDomElement;
+    auto CutSplinePath(const VToolRecord &record) -> QDomElement;
+    auto LineIntersectAxis(const VToolRecord &record) -> QDomElement;
+    auto CurveIntersectAxis(const VToolRecord &record) -> QDomElement;
+    auto PointOfIntersectionArcs(const VToolRecord &record) -> QDomElement;
+    auto PointOfIntersectionCircles(const VToolRecord &record) -> QDomElement;
+    auto PointOfIntersectionCurves(const VToolRecord &record) -> QDomElement;
+    auto PointFromCircleAndTangent(const VToolRecord &record) -> QDomElement;
+    auto PointFromArcAndTangent(const VToolRecord &record) -> QDomElement;
+    auto TrueDarts(const VToolRecord &record) -> QDomElement;
+    auto EllipticalArc(const VToolRecord &record) -> QDomElement;
+    auto Rotation(const VToolRecord &record, const VContainer &data) -> QDomElement;
+    auto FlippingByLine(const VToolRecord &record, const VContainer &data) -> QDomElement;
+    auto FlippingByAxis(const VToolRecord &record, const VContainer &data) -> QDomElement;
+    auto Move(const VToolRecord &record, const VContainer &data) -> QDomElement;
 
     void Formula(QDomElement &step, const VFormula &formula, const QString &formulaStr, const QString &formulaValue);
 
@@ -117,7 +117,7 @@ private:
     template <typename T>
     void CutCurveAttributes(QDomElement &step, T* tool);
 
-    QDomElement GroupOperationSource(VAbstractOperation *tool, quint32 id, const VContainer &data);
+    auto GroupOperationSource(VAbstractOperation *tool, quint32 id, const VContainer &data) -> QDomElement;
 };
 
 #endif // VPATTERNRECIPE_H

@@ -280,7 +280,7 @@ void DialogSaveManualLayout::SetShowGrainline(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogSaveManualLayout::IsShowGrainline() const
+auto DialogSaveManualLayout::IsShowGrainline() const -> bool
 {
     switch(Format())
     {

@@ -54,13 +54,13 @@
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-qreal ToPixel(qreal val)
+auto ToPixel(qreal val) -> qreal
 {
     return val / 25.4 * PrintDPI; // Mm to pixels with current dpi.
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QImage Grayscale(QImage image)
+auto Grayscale(QImage image) -> QImage
 {
     for (int ii = 0; ii < image.height(); ii++)
     {
@@ -78,7 +78,8 @@ QImage Grayscale(QImage image)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPixmap WatermarkImageFromCache(const VWatermarkData &watermarkData, const QString &watermarkPath, QString &error)
+auto WatermarkImageFromCache(const VWatermarkData &watermarkData, const QString &watermarkPath, QString &error)
+    -> QPixmap
 {
     QPixmap pixmap;
     QString imagePath = AbsoluteMPath(watermarkPath, watermarkData.path);
@@ -125,7 +126,7 @@ VPoster::VPoster(const QPrinter *printer)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<PosterData> VPoster::Calc(const QSize &imageRect, int page, PageOrientation orientation) const
+auto VPoster::Calc(const QSize &imageRect, int page, PageOrientation orientation) const -> QVector<PosterData>
 {
     QVector<PosterData> poster;
 
@@ -153,8 +154,8 @@ QVector<PosterData> VPoster::Calc(const QSize &imageRect, int page, PageOrientat
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QGraphicsItem *> VPoster::Tile(QGraphicsItem *parent, const PosterData &img, vsizetype sheets,
-                                       const VWatermarkData &watermarkData, const QString &watermarkPath) const
+auto VPoster::Tile(QGraphicsItem *parent, const PosterData &img, vsizetype sheets, const VWatermarkData &watermarkData,
+                   const QString &watermarkPath) const -> QVector<QGraphicsItem *>
 {
     QVector<QGraphicsItem *> data;
 #if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
@@ -180,7 +181,7 @@ QVector<QGraphicsItem *> VPoster::Tile(QGraphicsItem *parent, const PosterData &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QGraphicsItem *> VPoster::Borders(QGraphicsItem *parent, const PosterData &img, vsizetype sheets) const
+auto VPoster::Borders(QGraphicsItem *parent, const PosterData &img, vsizetype sheets) const -> QVector<QGraphicsItem *>
 {
     SCASSERT(parent != nullptr)
 
@@ -267,8 +268,8 @@ QVector<QGraphicsItem *> VPoster::Borders(QGraphicsItem *parent, const PosterDat
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QGraphicsItem *> VPoster::TextWatermark(QGraphicsItem *parent, const PosterData &img,
-                                                const VWatermarkData &watermarkData) const
+auto VPoster::TextWatermark(QGraphicsItem *parent, const PosterData &img, const VWatermarkData &watermarkData) const
+    -> QVector<QGraphicsItem *>
 {
     SCASSERT(parent != nullptr)
 
@@ -299,9 +300,8 @@ QVector<QGraphicsItem *> VPoster::TextWatermark(QGraphicsItem *parent, const Pos
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QGraphicsItem *> VPoster::ImageWatermark(QGraphicsItem *parent, const PosterData &img,
-                                                 const VWatermarkData &watermarkData,
-                                                 const QString &watermarkPath) const
+auto VPoster::ImageWatermark(QGraphicsItem *parent, const PosterData &img, const VWatermarkData &watermarkData,
+                             const QString &watermarkPath) const -> QVector<QGraphicsItem *>
 {
     SCASSERT(parent != nullptr)
 
@@ -350,7 +350,7 @@ QVector<QGraphicsItem *> VPoster::ImageWatermark(QGraphicsItem *parent, const Po
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VPoster::CountRows(int height, PageOrientation orientation) const
+auto VPoster::CountRows(int height, PageOrientation orientation) const -> int
 {
     const qreal imgLength = height;
     qreal pageLength = 0;
@@ -375,7 +375,7 @@ int VPoster::CountRows(int height, PageOrientation orientation) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VPoster::CountColumns(int width, PageOrientation orientation) const
+auto VPoster::CountColumns(int width, PageOrientation orientation) const -> int
 {
     const qreal imgLength = width;
     qreal pageLength = 0;
@@ -400,7 +400,7 @@ int VPoster::CountColumns(int width, PageOrientation orientation) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PosterData VPoster::Cut(int i, int j, const QSize &imageRect, PageOrientation orientation) const
+auto VPoster::Cut(int i, int j, const QSize &imageRect, PageOrientation orientation) const -> PosterData
 {
     Q_UNUSED(imageRect)
 
@@ -432,7 +432,7 @@ PosterData VPoster::Cut(int i, int j, const QSize &imageRect, PageOrientation or
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRect VPoster::PageRect() const
+auto VPoster::PageRect() const -> QRect
 {
     // Because the Point unit is defined to be 1/72th of an inch
     // we can't use method pageRect(QPrinter::Point). Our dpi value can be different.

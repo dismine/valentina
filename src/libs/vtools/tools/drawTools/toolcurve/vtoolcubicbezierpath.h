@@ -64,16 +64,16 @@ class VToolCubicBezierPath:public VAbstractSpline
 public:
     virtual ~VToolCubicBezierPath() = default;
     virtual void SetDialog() override;
-    static VToolCubicBezierPath *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
-                                        VAbstractPattern *doc, VContainer *data);
-    static VToolCubicBezierPath *Create(VToolCubicBezierPathInitData initData);
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolCubicBezierPath *;
+    static auto Create(VToolCubicBezierPathInitData initData) -> VToolCubicBezierPath *;
 
     static const QString ToolType;
     static void  UpdatePathPoints(VAbstractPattern *doc, QDomElement &element, const VCubicBezierPath &path);
-    virtual int  type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::CubicBezierPath)};
 
-    VCubicBezierPath getSplinePath()const;
+    auto getSplinePath() const -> VCubicBezierPath;
     void             setSplinePath(const VCubicBezierPath &splPath);
 
     virtual void ShowVisualization(bool show) override;

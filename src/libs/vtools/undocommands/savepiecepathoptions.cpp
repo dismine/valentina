@@ -117,7 +117,7 @@ void SavePiecePathOptions::redo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool SavePiecePathOptions::mergeWith(const QUndoCommand *command)
+auto SavePiecePathOptions::mergeWith(const QUndoCommand *command) -> bool
 {
     const SavePiecePathOptions *saveCommand = static_cast<const SavePiecePathOptions *>(command);
     SCASSERT(saveCommand != nullptr);

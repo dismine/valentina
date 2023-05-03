@@ -60,38 +60,38 @@ public:
     //! \options Render options
     //! \delegate A pointer to the QAbstractItemDelegate requesting the editor. This can be used to connect signals and
     //! slots.
-    virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& options,
-                                  const QAbstractItemDelegate* delegate) override;
+    virtual auto createEditor(QWidget *parent, const QStyleOptionViewItem &options,
+                              const QAbstractItemDelegate *delegate) -> QWidget * override;
 
     //! Sets the property's data to the editor (returns false, if the standard delegate should do that)
-    virtual bool setEditorData(QWidget* editor) override;
+    virtual auto setEditorData(QWidget *editor) -> bool override;
 
     //! Gets the data from the widget
-    virtual QVariant getEditorData(const QWidget* editor) const override;
+    virtual auto getEditorData(const QWidget *editor) const -> QVariant override;
 
     //! Sets the settings.
     virtual void setSetting(const QString& key, const QVariant& value) override;
 
     //! Get the settings. This function has to be implemented in a subclass in order to have an effect
-    virtual QVariant getSetting(const QString& key) const override;
+    virtual auto getSetting(const QString &key) const -> QVariant override;
 
     //! Returns the list of keys of the property's settings
-    virtual QStringList getSettingKeys() const override;
+    virtual auto getSettingKeys() const -> QStringList override;
 
     //! Returns a string containing the type of the property
-    virtual QString type() const override;
+    virtual auto type() const -> QString override;
 
     //! Clones this property
     //! \param include_children Indicates whether to also clone the children
     //! \param container If a property is being passed here, no new VProperty is being created but instead it is tried
     //! to fill all the data into container. This can also be used when subclassing this function.
     //! \return Returns the newly created property (or container, if it was not NULL)
-    Q_REQUIRED_RESULT virtual VProperty* clone(bool include_children = true,
-                                               VProperty* container = nullptr) const override;
+    Q_REQUIRED_RESULT virtual auto clone(bool include_children = true, VProperty *container = nullptr) const
+        -> VProperty * override;
 
     virtual void UpdateParent(const QVariant &value) override;
 
-    int getTypeForParent() const;
+    auto getTypeForParent() const -> int;
     void setTypeForParent(int value);
 
 protected:

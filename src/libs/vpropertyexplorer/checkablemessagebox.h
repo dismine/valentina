@@ -52,77 +52,65 @@ public:
     explicit CheckableMessageBox(QWidget *parent);
     virtual ~CheckableMessageBox() override;
 
-    static QDialogButtonBox::StandardButton
-        question(QWidget *parent,
-                 const QString &title,
-                 const QString &question,
-                 const QString &checkBoxText,
-                 bool *checkBoxSetting,
-                 QDialogButtonBox::StandardButtons buttons = QDialogButtonBox::Yes|QDialogButtonBox::No,
-                 QDialogButtonBox::StandardButton defaultButton = QDialogButtonBox::No);
+    static auto question(QWidget *parent, const QString &title, const QString &question, const QString &checkBoxText,
+                         bool *checkBoxSetting,
+                         QDialogButtonBox::StandardButtons buttons = QDialogButtonBox::Yes | QDialogButtonBox::No,
+                         QDialogButtonBox::StandardButton defaultButton = QDialogButtonBox::No)
+        -> QDialogButtonBox::StandardButton;
 
-    static QDialogButtonBox::StandardButton
-        information(QWidget *parent,
-                 const QString &title,
-                 const QString &text,
-                 const QString &checkBoxText,
-                 bool *checkBoxSetting,
-                 QDialogButtonBox::StandardButtons buttons = QDialogButtonBox::Ok,
-                 QDialogButtonBox::StandardButton defaultButton = QDialogButtonBox::NoButton);
+    static auto information(QWidget *parent, const QString &title, const QString &text, const QString &checkBoxText,
+                            bool *checkBoxSetting, QDialogButtonBox::StandardButtons buttons = QDialogButtonBox::Ok,
+                            QDialogButtonBox::StandardButton defaultButton = QDialogButtonBox::NoButton)
+        -> QDialogButtonBox::StandardButton;
 
-    static QDialogButtonBox::StandardButton
-        doNotAskAgainQuestion(QWidget *parent,
-                              const QString &title,
-                              const QString &text,
-                              QSettings *settings,
-                              const QString &settingsSubKey,
-                              QDialogButtonBox::StandardButtons buttons = QDialogButtonBox::Yes|QDialogButtonBox::No,
-                              QDialogButtonBox::StandardButton defaultButton = QDialogButtonBox::No,
-                              QDialogButtonBox::StandardButton acceptButton = QDialogButtonBox::Yes);
+    static auto doNotAskAgainQuestion(QWidget *parent, const QString &title, const QString &text, QSettings *settings,
+                                      const QString &settingsSubKey,
+                                      QDialogButtonBox::StandardButtons buttons = QDialogButtonBox::Yes |
+                                                                                  QDialogButtonBox::No,
+                                      QDialogButtonBox::StandardButton defaultButton = QDialogButtonBox::No,
+                                      QDialogButtonBox::StandardButton acceptButton = QDialogButtonBox::Yes)
+        -> QDialogButtonBox::StandardButton;
 
-    static QDialogButtonBox::StandardButton
-        doNotShowAgainInformation(QWidget *parent,
-                                  const QString &title,
-                                  const QString &text,
-                                  QSettings *settings,
-                                  const QString &settingsSubKey,
-                                  QDialogButtonBox::StandardButtons buttons = QDialogButtonBox::Ok,
-                                  QDialogButtonBox::StandardButton defaultButton = QDialogButtonBox::NoButton);
+    static auto doNotShowAgainInformation(QWidget *parent, const QString &title, const QString &text,
+                                          QSettings *settings, const QString &settingsSubKey,
+                                          QDialogButtonBox::StandardButtons buttons = QDialogButtonBox::Ok,
+                                          QDialogButtonBox::StandardButton defaultButton = QDialogButtonBox::NoButton)
+        -> QDialogButtonBox::StandardButton;
 
-    QString text() const;
+    auto text() const -> QString;
     void setText(const QString &);
 
-    bool isChecked() const;
+    auto isChecked() const -> bool;
     void setChecked(bool s);
 
-    QString checkBoxText() const;
+    auto checkBoxText() const -> QString;
     void setCheckBoxText(const QString &);
 
-    bool isCheckBoxVisible() const;
+    auto isCheckBoxVisible() const -> bool;
     void setCheckBoxVisible(bool);
 
-    QDialogButtonBox::StandardButtons standardButtons() const;
+    auto standardButtons() const -> QDialogButtonBox::StandardButtons;
     void setStandardButtons(QDialogButtonBox::StandardButtons s);
-    QPushButton *button(QDialogButtonBox::StandardButton b) const;
-    QPushButton *addButton(const QString &text, QDialogButtonBox::ButtonRole role);
+    auto button(QDialogButtonBox::StandardButton b) const -> QPushButton *;
+    auto addButton(const QString &text, QDialogButtonBox::ButtonRole role) -> QPushButton *;
 
-    QDialogButtonBox::StandardButton defaultButton() const;
+    auto defaultButton() const -> QDialogButtonBox::StandardButton;
     void setDefaultButton(QDialogButtonBox::StandardButton s);
 
     // See static QMessageBox::standardPixmap()
-    QPixmap iconPixmap() const;
+    auto iconPixmap() const -> QPixmap;
     void setIconPixmap (const QPixmap &p);
 
     // Query the result
-    QAbstractButton *clickedButton() const;
-    QDialogButtonBox::StandardButton clickedStandardButton() const;
+    auto clickedButton() const -> QAbstractButton *;
+    auto clickedStandardButton() const -> QDialogButtonBox::StandardButton;
 
     // Conversion convenience
-    static QMessageBox::StandardButton dialogButtonBoxToMessageBoxButton(QDialogButtonBox::StandardButton);
+    static auto dialogButtonBoxToMessageBoxButton(QDialogButtonBox::StandardButton) -> QMessageBox::StandardButton;
     static void resetAllDoNotAskAgainQuestions(QSettings *settings);
-    static bool hasSuppressedQuestions(QSettings *settings);
-    static QString msgDoNotAskAgain();
-    static QString msgDoNotShowAgain();
+    static auto hasSuppressedQuestions(QSettings *settings) -> bool;
+    static auto msgDoNotAskAgain() -> QString;
+    static auto msgDoNotShowAgain() -> QString;
 
 private slots:
     void slotClicked(QAbstractButton *b);
@@ -133,7 +121,7 @@ private:
     CheckableMessageBoxPrivate *d;
     enum DoNotAskAgainType{Question, Information};
 
-    static bool askAgain(QSettings *settings, const QString &settingsSubKey);
+    static auto askAgain(QSettings *settings, const QString &settingsSubKey) -> bool;
     static void initDoNotAskAgainMessageBox(CheckableMessageBox &messageBox, const QString &title,
                                             const QString &text, QDialogButtonBox::StandardButtons buttons,
                                             QDialogButtonBox::StandardButton defaultButton,

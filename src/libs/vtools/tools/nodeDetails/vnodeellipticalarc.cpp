@@ -67,7 +67,7 @@ void VNodeEllipticalArc::Create(const VAbstractNodeInitData &initData)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VNodeEllipticalArc::getTagName() const
+auto VNodeEllipticalArc::getTagName() const -> QString
 {
     return VAbstractPattern::TagElArc;
 }

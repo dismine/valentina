@@ -69,20 +69,20 @@ class VToolPointOfContact : public VToolSinglePoint
     Q_OBJECT // NOLINT
 public:
     virtual void   SetDialog() override;
-    static bool FindPoint(qreal radius, const QPointF &center, const QPointF &firstPoint,
-                          const QPointF &secondPoint, QPointF *intersectionPoint);
-    static VToolPointOfContact* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
-                                       VAbstractPattern *doc, VContainer *data);
-    static VToolPointOfContact* Create(VToolPointOfContactInitData &initData);
+    static auto FindPoint(qreal radius, const QPointF &center, const QPointF &firstPoint, const QPointF &secondPoint,
+                          QPointF *intersectionPoint) -> bool;
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolPointOfContact *;
+    static auto Create(VToolPointOfContactInitData &initData) -> VToolPointOfContact *;
     static const QString ToolType;
-    virtual int    type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::PointOfContact) };
 
-    QString ArcCenterPointName() const;
-    QString FirstPointName() const;
-    QString SecondPointName() const;
+    auto ArcCenterPointName() const -> QString;
+    auto FirstPointName() const -> QString;
+    auto SecondPointName() const -> QString;
 
-    VFormula getArcRadius() const;
+    auto getArcRadius() const -> VFormula;
     void     setArcRadius(const VFormula &value);
 
     virtual void   ShowVisualization(bool show) override;
@@ -95,7 +95,8 @@ protected:
     virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     virtual void    ReadToolAttributes(const QDomElement &domElement) override;
     virtual void    SetVisualization() override;
-    virtual QString MakeToolTip() const override;
+    virtual auto MakeToolTip() const -> QString override;
+
 private:
     Q_DISABLE_COPY_MOVE(VToolPointOfContact) // NOLINT
 

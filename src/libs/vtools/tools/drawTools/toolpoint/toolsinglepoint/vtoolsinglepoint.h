@@ -71,10 +71,10 @@ public:
                      QGraphicsItem * parent = nullptr);
     virtual ~VToolSinglePoint() = default;
 
-    virtual int type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::SinglePoint)};
 
-    QString name() const;
+    auto name() const -> QString;
     void    setName(const QString &name);
 
     void SetEnabled(bool enabled);
@@ -82,7 +82,7 @@ public:
     virtual void GroupVisibility(quint32 object, bool visible) override;
     virtual void ChangeLabelPosition(quint32 id, const QPointF &pos) override;
 
-    virtual bool IsLabelVisible(quint32 id) const override;
+    virtual auto IsLabelVisible(quint32 id) const -> bool override;
     virtual void SetLabelVisible(quint32 id, bool visible) override;
 public slots:
     void         NameChangePosition(const QPointF &pos);
@@ -101,17 +101,18 @@ protected:
     virtual void     mousePressEvent(QGraphicsSceneMouseEvent *event) override;
     virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
     virtual void     hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
-    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) override;
+    virtual auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
     virtual void     keyReleaseEvent(QKeyEvent * event) override;
     virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) override;
     virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     virtual void     ChangeLabelVisibility(quint32 id, bool visible) override;
 
     template <class Item>
-    static QPair<QString, QString> InitArc(VContainer *data, qreal segLength, const VPointF *p, quint32 curveId,
-                                           const QString &alias1, const QString &alias2);
-    static QPair<QString, QString> InitSegments(GOType curveType, qreal segLength, const VPointF *p, quint32 curveId,
-                                                VContainer *data, const QString &alias1, const QString &alias2);
+    static auto InitArc(VContainer *data, qreal segLength, const VPointF *p, quint32 curveId, const QString &alias1,
+                        const QString &alias2) -> QPair<QString, QString>;
+    static auto InitSegments(GOType curveType, qreal segLength, const VPointF *p, quint32 curveId, VContainer *data,
+                             const QString &alias1, const QString &alias2) -> QPair<QString, QString>;
+
 private:
     Q_DISABLE_COPY_MOVE(VToolSinglePoint) // NOLINT
 };

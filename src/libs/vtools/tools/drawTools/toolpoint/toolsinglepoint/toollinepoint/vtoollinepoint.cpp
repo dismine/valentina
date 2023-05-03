@@ -148,7 +148,7 @@ void VToolLinePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolLinePoint::MakeToolTip() const
+auto VToolLinePoint::MakeToolTip() const -> QString
 {
     const QSharedPointer<VPointF> first = VAbstractTool::data.GeometricObject<VPointF>(basePointId);
     const QSharedPointer<VPointF> second = VAbstractTool::data.GeometricObject<VPointF>(m_id);
@@ -187,7 +187,7 @@ void VToolLinePoint::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VToolLinePoint::GetAngle() const
+auto VToolLinePoint::GetAngle() const -> qreal
 {
     return angle;
 }
@@ -201,7 +201,7 @@ void VToolLinePoint::SetAngle(const qreal &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolLinePoint::GetLineColor() const
+auto VToolLinePoint::GetLineColor() const -> QString
 {
     return lineColor;
 }
@@ -216,7 +216,7 @@ void VToolLinePoint::SetLineColor(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolLinePoint::GetFormulaLength() const
+auto VToolLinePoint::GetFormulaLength() const -> VFormula
 {
     VFormula fLength(formulaLength, this->getData());
     fLength.setCheckZero(false);
@@ -240,7 +240,7 @@ void VToolLinePoint::SetFormulaLength(const VFormula &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolLinePoint::BasePointName() const
+auto VToolLinePoint::BasePointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(basePointId)->name();
 }

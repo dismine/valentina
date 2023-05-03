@@ -722,59 +722,45 @@ void DialogRestrictDimension::EnableRestrictionControls(bool enable)
 void DialogRestrictDimension::FillBases(const QVector<qreal> &bases, const MeasurementDimension_p &dimension,
                                         QComboBox *control) const
 {
+    for (auto base : bases)
+    {
+        FillBase(base, dimension, control);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogRestrictDimension::FillBase(double base, const MeasurementDimension_p &dimension, QComboBox *control) const
+{
     SCASSERT(control != nullptr)
 
     const DimesionLabels labels = dimension->Labels();
     const QString units = UnitsToStr(dimension->Units(), true);
+    const QString label = VFuzzyValue(labels, base);
+    const bool useLabel = VFuzzyContains(labels, base) && not label.isEmpty();
 
     if (dimension->Type() == MeasurementDimension::X)
     {
-        for(auto base : bases)
-        {
-            if (VFuzzyContains(labels, base) && not VFuzzyValue(labels, base).isEmpty())
-            {
-                control->addItem(VFuzzyValue(labels, base), base);
-            }
-            else
-            {
-                control->addItem(QStringLiteral("%1 %2").arg(base).arg(units), base);
-            }
-        }
+        QString item = useLabel ? label : QStringLiteral("%1 %2").arg(base).arg(units);
+        control->addItem(item, base);
     }
     else if (dimension->Type() == MeasurementDimension::Y)
     {
-        for(auto base : bases)
+        if (useLabel)
         {
-            if (VFuzzyContains(labels, base) && not VFuzzyValue(labels, base).isEmpty())
-            {
-                control->addItem(VFuzzyValue(labels, base), base);
-            }
-            else
-            {
-                if (dimension->IsBodyMeasurement())
-                {
-                    control->addItem(QStringLiteral("%1 %2").arg(m_fullCircumference ? base*2 : base).arg(units), base);
-                }
-                else
-                {
-                    control->addItem(QString::number(base), base);
-                }
-            }
+            control->addItem(label, base);
+        }
+        else
+        {
+            QString item = dimension->IsBodyMeasurement()
+                               ? QStringLiteral("%1 %2").arg(m_fullCircumference ? base * 2 : base).arg(units)
+                               : QString::number(base);
+            control->addItem(item, base);
         }
     }
     else if (dimension->Type() == MeasurementDimension::W || dimension->Type() == MeasurementDimension::Z)
     {
-        for(auto base : bases)
-        {
-            if (VFuzzyContains(labels, base) && not VFuzzyValue(labels, base).isEmpty())
-            {
-                control->addItem(VFuzzyValue(labels, base), base);
-            }
-            else
-            {
-                control->addItem(QStringLiteral("%1 %2").arg(m_fullCircumference ? base*2 : base).arg(units), base);
-            }
-        }
+        QString item = useLabel ? label : QStringLiteral("%1 %2").arg(m_fullCircumference ? base * 2 : base).arg(units);
+        control->addItem(item, base);
     }
 }
 

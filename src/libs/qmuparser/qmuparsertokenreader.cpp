@@ -670,13 +670,10 @@ auto QmuParserTokenReader::IsOprt ( token_type &a_Tok ) -> bool
                 {
                     return true;
                 }
-                else
-                {
-                    // nope, no infix operator
-                    return false;
-                    //Error(ecUNEXPECTED_OPERATOR, m_iPos, a_Tok.GetAsString());
-                }
 
+                // nope, no infix operator
+                return false;
+                // Error(ecUNEXPECTED_OPERATOR, m_iPos, a_Tok.GetAsString());
             }
 
             m_iPos += sID.length();

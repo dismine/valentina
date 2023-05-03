@@ -80,8 +80,8 @@ void VToolFlippingByLine::SetDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolFlippingByLine *VToolFlippingByLine::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                                 VAbstractPattern *doc, VContainer *data)
+auto VToolFlippingByLine::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                                 VContainer *data) -> VToolFlippingByLine *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogFlippingByLine> dialogTool = qobject_cast<DialogFlippingByLine *>(dialog);
@@ -111,7 +111,7 @@ VToolFlippingByLine *VToolFlippingByLine::Create(const QPointer<DialogTool> &dia
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolFlippingByLine *VToolFlippingByLine::Create(VToolFlippingByLineInitData initData)
+auto VToolFlippingByLine::Create(VToolFlippingByLineInitData initData) -> VToolFlippingByLine *
 {
     const auto firstPoint = *initData.data->GeometricObject<VPointF>(initData.firstLinePointId);
     const QPointF fPoint = static_cast<QPointF>(firstPoint);
@@ -152,13 +152,13 @@ VToolFlippingByLine *VToolFlippingByLine::Create(VToolFlippingByLineInitData ini
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolFlippingByLine::FirstLinePointName() const
+auto VToolFlippingByLine::FirstLinePointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(m_firstLinePointId)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolFlippingByLine::SecondLinePointName() const
+auto VToolFlippingByLine::SecondLinePointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(m_secondLinePointId)->name();
 }
@@ -245,7 +245,7 @@ void VToolFlippingByLine::SaveOptions(QDomElement &tag, QSharedPointer<VGObject>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolFlippingByLine::MakeToolTip() const
+auto VToolFlippingByLine::MakeToolTip() const -> QString
 {
     return QStringLiteral("<tr> <td><b>%1:</b> %2</td> </tr>"
                           "<tr> <td><b>%3:</b> %4</td> </tr>"

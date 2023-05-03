@@ -130,7 +130,7 @@ void VControlPointSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
  * @param value value.
  * @return value.
  */
-QVariant VControlPointSpline::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+auto VControlPointSpline::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) -> QVariant
 {
     switch (change)
     {

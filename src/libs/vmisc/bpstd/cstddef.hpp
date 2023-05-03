@@ -126,9 +126,8 @@ namespace bpstd {
   // Utilities
   //----------------------------------------------------------------------------
 
-  template <typename Integer,
-            typename = enable_if_t<std::is_integral<Integer>::value>>
-  constexpr Integer to_integer(byte b) noexcept;
+  template <typename Integer, typename = enable_if_t<std::is_integral<Integer>::value>>
+  constexpr auto to_integer(byte b) noexcept -> Integer;
 
 } // namespace bpstd
 
@@ -246,9 +245,7 @@ bpstd::byte& bpstd::operator^=(byte& lhs, byte rhs)
 //------------------------------------------------------------------------------
 
 template <typename Integer, typename>
-inline BPSTD_INLINE_VISIBILITY constexpr
-Integer bpstd::to_integer(byte b)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::to_integer(byte b) noexcept -> Integer
 {
   return static_cast<Integer>(b);
 }

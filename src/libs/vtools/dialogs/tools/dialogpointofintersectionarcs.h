@@ -52,20 +52,20 @@ public:
     DialogPointOfIntersectionArcs(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogPointOfIntersectionArcs() override;
 
-    QString        GetPointName() const;
+    auto GetPointName() const -> QString;
     void           SetPointName(const QString &value);
 
-    quint32        GetFirstArcId() const;
+    auto GetFirstArcId() const -> quint32;
     void           SetFirstArcId(quint32 value);
 
-    quint32        GetSecondArcId() const;
+    auto GetSecondArcId() const -> quint32;
     void           SetSecondArcId(quint32 value);
 
-    CrossCirclesPoint GetCrossArcPoint() const;
+    auto GetCrossArcPoint() const -> CrossCirclesPoint;
     void              SetCrossArcPoint(CrossCirclesPoint p);
 
     void    SetNotes(const QString &notes);
-    QString GetNotes() const;
+    auto GetNotes() const -> QString;
 
 public slots:
     virtual void   ChosenObject(quint32 id, const SceneObject &type) override;
@@ -77,7 +77,7 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     virtual void   SaveData() override;
-    virtual bool   IsValid() const final;
+    virtual auto IsValid() const -> bool final;
 
 private:
     Q_DISABLE_COPY_MOVE(DialogPointOfIntersectionArcs) // NOLINT
@@ -94,7 +94,7 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogPointOfIntersectionArcs::IsValid() const
+inline auto DialogPointOfIntersectionArcs::IsValid() const -> bool
 {
     return flagName && flagError;
 }

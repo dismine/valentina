@@ -53,14 +53,14 @@ public:
     VSimplePoint(quint32 id, const QColor &currentColor, QObject *parent = nullptr);
     virtual ~VSimplePoint() = default;
 
-    virtual int  type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Vis::SimplePoint)};
 
     using VScenePoint::SetOnlyPoint;
     using VScenePoint::IsOnlyPoint;
 
     void SetVisualizationMode(bool value);
-    bool IsVisualizationMode() const;
+    auto IsVisualizationMode() const -> bool;
 
     void SetPointHighlight(bool value);
 
@@ -90,7 +90,7 @@ protected:
     virtual void     hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
     virtual void     hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
     virtual void     keyReleaseEvent ( QKeyEvent * event ) override;
-    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) override;
+    virtual auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
     virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) override;
 
 private:

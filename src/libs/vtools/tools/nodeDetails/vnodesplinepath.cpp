@@ -84,7 +84,7 @@ void VNodeSplinePath::Create(const VAbstractNodeInitData &initData)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VNodeSplinePath::getTagName() const
+auto VNodeSplinePath::getTagName() const -> QString
 {
     return VAbstractPattern::TagSpline;
 }

@@ -6350,50 +6350,53 @@ void MainWindow::ExportDetailsAs()
 void MainWindow::ReopenFilesAfterCrash(QStringList &args)
 {
     const QStringList files = GetUnlokedRestoreFileList();
-    if (not files.empty())
+    if (files.empty())
     {
-        qCDebug(vMainWindow, "Reopen files after crash.");
+        return;
+    }
 
-        QStringList restoreFiles;
-        restoreFiles.reserve(files.size());
-        for (int i = 0; i < files.size(); ++i)
+    qCDebug(vMainWindow, "Reopen files after crash.");
+
+    QStringList restoreFiles;
+    restoreFiles.reserve(files.size());
+    for (const auto &file : files)
+    {
+        if (QFile::exists(file + *autosavePrefix))
         {
-            QFile file(files.at(i) + *autosavePrefix);
-            if (file.exists())
-            {
-                restoreFiles.append(files.at(i));
-            }
+            restoreFiles.append(file);
         }
+    }
 
-        if (not restoreFiles.empty())
+    if (restoreFiles.empty())
+    {
+        return;
+    }
+
+    QMessageBox::StandardButton reply;
+    const QString mes = tr("Valentina didn't shut down correctly. Do you want reopen files (%1) you had open?")
+                            .arg(restoreFiles.size());
+    reply = QMessageBox::question(this, tr("Reopen files."), mes, QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+    if (reply != QMessageBox::Yes)
+    {
+        return;
+    }
+
+    qCDebug(vMainWindow, "User said Yes.");
+
+    for (auto &file : restoreFiles)
+    {
+        QString error;
+        if (VDomDocument::SafeCopy(file + *autosavePrefix, file, error))
         {
-            QMessageBox::StandardButton reply;
-            const QString mes = tr("Valentina didn't shut down correctly. Do you want reopen files (%1) you had open?")
-                    .arg(restoreFiles.size());
-            reply = QMessageBox::question(this, tr("Reopen files."), mes, QMessageBox::Yes|QMessageBox::No,
-                                          QMessageBox::Yes);
-            if (reply == QMessageBox::Yes)
-            {
-                qCDebug(vMainWindow, "User said Yes.");
-
-                for (auto &file : restoreFiles)
-                {
-                    QString error;
-                    if (VDomDocument::SafeCopy(file + *autosavePrefix, file, error))
-                    {
-                        QFile autoFile(file + *autosavePrefix);
-                        autoFile.remove();
-                        LoadPattern(file);
-                        args.removeAll(file);// Do not open file twice after we restore him.
-                    }
-                    else
-                    {
-                        qCDebug(vMainWindow, "Could not copy %s%s to %s %s",
-                                qUtf8Printable(file), qUtf8Printable(*autosavePrefix),
-                                qUtf8Printable(file), qUtf8Printable(error));
-                    }
-                }
-            }
+            QFile autoFile(file + *autosavePrefix);
+            autoFile.remove();
+            LoadPattern(file);
+            args.removeAll(file); // Do not open file twice after we restore him.
+        }
+        else
+        {
+            qCDebug(vMainWindow, "Could not copy %s%s to %s %s", qUtf8Printable(file), qUtf8Printable(*autosavePrefix),
+                    qUtf8Printable(file), qUtf8Printable(error));
         }
     }
 }
@@ -7368,12 +7371,12 @@ void MainWindow::PrintPatternMessage(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::OpenWatermark(const QString &path)
 {
-    for (auto i = m_watermarkEditors.cbegin(); i != m_watermarkEditors.cend(); ++i)
+    for (const auto &watermarkEditor : m_watermarkEditors)
     {
-        if (not (*i).isNull() && not (*i)->CurrentFile().isEmpty()
-                && (*i)->CurrentFile() == AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), path))
+        if (not watermarkEditor.isNull() && not watermarkEditor->CurrentFile().isEmpty() &&
+            watermarkEditor->CurrentFile() == AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), path))
         {
-            (*i)->show();
+            watermarkEditor->show();
             return;
         }
     }

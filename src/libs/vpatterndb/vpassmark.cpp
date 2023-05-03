@@ -42,8 +42,8 @@ const qreal VPassmark::passmarkRadiusFactor = 0.45;
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-PassmarkStatus GetSeamPassmarkSAPoint(const VPiecePassmarkData &passmarkData, const QVector<QPointF> &seamAllowance,
-                                      QPointF &point)
+auto GetSeamPassmarkSAPoint(const VPiecePassmarkData &passmarkData, const QVector<QPointF> &seamAllowance,
+                            QPointF &point) -> PassmarkStatus
 {
     bool needRollback = false; // no need for rollback
     QVector<VRawSAPoint> ekvPoints;
@@ -67,7 +67,7 @@ PassmarkStatus GetSeamPassmarkSAPoint(const VPiecePassmarkData &passmarkData, co
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FixNotchPoint(const QVector<QPointF> &seamAllowance, const QPointF &notchBase, QPointF *notch)
+auto FixNotchPoint(const QVector<QPointF> &seamAllowance, const QPointF &notchBase, QPointF *notch) -> bool
 {
     bool fixed = true;
     if (not VAbstractCurve::IsPointOnCurve(seamAllowance, *notch))
@@ -128,13 +128,13 @@ bool FixNotchPoint(const QVector<QPointF> &seamAllowance, const QPointF &notchBa
 const qreal passmarkGap = MmToPixel(1.5);
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QLineF> CreateOnePassmarkLines(const QLineF &line)
+auto CreateOnePassmarkLines(const QLineF &line) -> QVector<QLineF>
 {
     return QVector<QLineF>({line});
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QLineF> CreateTwoPassmarkLines(const QLineF &line, const QVector<QPointF> &seamAllowance)
+auto CreateTwoPassmarkLines(const QLineF &line, const QVector<QPointF> &seamAllowance) -> QVector<QLineF>
 {
     QPointF l1p1;
     {
@@ -178,7 +178,7 @@ QVector<QLineF> CreateTwoPassmarkLines(const QLineF &line, const QVector<QPointF
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QLineF> CreateThreePassmarkLines(const QLineF &line, const QVector<QPointF> &seamAllowance)
+auto CreateThreePassmarkLines(const QLineF &line, const QVector<QPointF> &seamAllowance) -> QVector<QLineF>
 {
     QPointF l1p1;
     {
@@ -224,7 +224,7 @@ QVector<QLineF> CreateThreePassmarkLines(const QLineF &line, const QVector<QPoin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QLineF> CreateTMarkPassmark(const QLineF &line)
+auto CreateTMarkPassmark(const QLineF &line) -> QVector<QLineF>
 {
     QPointF p1;
     {
@@ -249,7 +249,7 @@ QVector<QLineF> CreateTMarkPassmark(const QLineF &line)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QLineF> CreateVMarkPassmark(const QLineF &line)
+auto CreateVMarkPassmark(const QLineF &line) -> QVector<QLineF>
 {
     QLineF l1 = line;
     l1.setAngle(l1.angle() - 35);
@@ -264,7 +264,7 @@ QVector<QLineF> CreateVMarkPassmark(const QLineF &line)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QLineF> CreateVMark2Passmark(const QLineF &line, const QVector<QPointF> &seamAllowance)
+auto CreateVMark2Passmark(const QLineF &line, const QVector<QPointF> &seamAllowance) -> QVector<QLineF>
 {
     QLineF l1 = QLineF(line.p2(), line.p1());
     l1.setAngle(l1.angle() + 35);
@@ -279,7 +279,7 @@ QVector<QLineF> CreateVMark2Passmark(const QLineF &line, const QVector<QPointF> 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QLineF> PointsToSegments(const QVector<QPointF> &points)
+auto PointsToSegments(const QVector<QPointF> &points) -> QVector<QLineF>
 {
     QVector<QLineF> lines;
     if (points.size() >= 2)
@@ -297,7 +297,7 @@ QVector<QLineF> PointsToSegments(const QVector<QPointF> &points)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QLineF> CreateUMarkPassmark(const QLineF &line, const QVector<QPointF> &seamAllowance)
+auto CreateUMarkPassmark(const QLineF &line, const QVector<QPointF> &seamAllowance) -> QVector<QLineF>
 {
     const qreal radius = line.length() * VPassmark::passmarkRadiusFactor;
 
@@ -359,7 +359,7 @@ QVector<QLineF> CreateUMarkPassmark(const QLineF &line, const QVector<QPointF> &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QLineF> CreateBoxMarkPassmark(const QLineF &line, const QVector<QPointF> &seamAllowance)
+auto CreateBoxMarkPassmark(const QLineF &line, const QVector<QPointF> &seamAllowance) -> QVector<QLineF>
 {
     const qreal radius = line.length() * VPassmark::passmarkRadiusFactor;
 
@@ -409,9 +409,8 @@ QVector<QLineF> CreateBoxMarkPassmark(const QLineF &line, const QVector<QPointF>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QLineF> CreatePassmarkLines(PassmarkLineType lineType, PassmarkAngleType angleType,
-                                    const QVector<QLineF> &lines, const QVector<QPointF> &seamAllowance,
-                                    PassmarkSide side)
+auto CreatePassmarkLines(PassmarkLineType lineType, PassmarkAngleType angleType, const QVector<QLineF> &lines,
+                         const QVector<QPointF> &seamAllowance, PassmarkSide side) -> QVector<QLineF>
 {
     if (lines.isEmpty())
     {
@@ -559,8 +558,9 @@ auto PassmarkLength(const VPiecePassmarkData &passmarkData, qreal width, bool &o
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QLineF> PassmarkBisectorBaseLine(PassmarkStatus seamPassmarkType, const VPiecePassmarkData &passmarkData,
-                                         const QPointF &seamPassmarkSAPoint, const QVector<QPointF> &seamAllowance)
+auto PassmarkBisectorBaseLine(PassmarkStatus seamPassmarkType, const VPiecePassmarkData &passmarkData,
+                              const QPointF &seamPassmarkSAPoint, const QVector<QPointF> &seamAllowance)
+    -> QVector<QLineF>
 {
     QLineF edge1;
     QLineF edge2;
@@ -608,7 +608,7 @@ QVector<QLineF> PassmarkBisectorBaseLine(PassmarkStatus seamPassmarkType, const 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath PassmarkToPath(const QVector<QLineF> &passmark)
+auto PassmarkToPath(const QVector<QLineF> &passmark) -> QPainterPath
 {
     QPainterPath path;
     if (not passmark.isEmpty())
@@ -626,7 +626,7 @@ QPainterPath PassmarkToPath(const QVector<QLineF> &passmark)
 }
 
 //------------------------------VPiecePassmarkData---------------------------------------------------------------------
-QJsonObject VPiecePassmarkData::toJson() const
+auto VPiecePassmarkData::toJson() const -> QJsonObject
 {
     QJsonObject dataObject
     {
@@ -669,7 +669,7 @@ VPassmark::VPassmark(const VPiecePassmarkData &data)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QLineF> VPassmark::FullPassmark(const VPiece &piece, const VContainer *data) const
+auto VPassmark::FullPassmark(const VPiece &piece, const VContainer *data) const -> QVector<QLineF>
 {
     if (m_null)
     {
@@ -700,7 +700,7 @@ QVector<QLineF> VPassmark::FullPassmark(const VPiece &piece, const VContainer *d
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QLineF> VPassmark::SAPassmark(const VPiece &piece, const VContainer *data, PassmarkSide side) const
+auto VPassmark::SAPassmark(const VPiece &piece, const VContainer *data, PassmarkSide side) const -> QVector<QLineF>
 {
     if (m_null)
     {
@@ -723,8 +723,8 @@ QVector<QLineF> VPassmark::SAPassmark(const VPiece &piece, const VContainer *dat
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QLineF> VPassmark::SAPassmark(const QVector<QPointF> &seamAllowance,
-                                      const QVector<QPointF> &rotatedSeamAllowance, PassmarkSide side) const
+auto VPassmark::SAPassmark(const QVector<QPointF> &seamAllowance, const QVector<QPointF> &rotatedSeamAllowance,
+                           PassmarkSide side) const -> QVector<QLineF>
 {
     if (m_null)
     {
@@ -747,19 +747,19 @@ QVector<QLineF> VPassmark::SAPassmark(const QVector<QPointF> &seamAllowance,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPassmark::IsNull() const
+auto VPassmark::IsNull() const -> bool
 {
     return m_null;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPiecePassmarkData VPassmark::Data() const
+auto VPassmark::Data() const -> VPiecePassmarkData
 {
     return m_data;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QLineF VPassmark::FindIntersection(const QLineF &line, const QVector<QPointF> &seamAllowance)
+auto VPassmark::FindIntersection(const QLineF &line, const QVector<QPointF> &seamAllowance) -> QLineF
 {
     QLineF testLine = line;
     testLine.setLength(testLine.length()*10);
@@ -773,7 +773,7 @@ QLineF VPassmark::FindIntersection(const QLineF &line, const QVector<QPointF> &s
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QLineF> VPassmark::BuiltInSAPassmark(const VPiece &piece, const VContainer *data) const
+auto VPassmark::BuiltInSAPassmark(const VPiece &piece, const VContainer *data) const -> QVector<QLineF>
 {
     if (m_null)
     {
@@ -792,7 +792,7 @@ QVector<QLineF> VPassmark::BuiltInSAPassmark(const VPiece &piece, const VContain
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QLineF> VPassmark::BuiltInSAPassmarkBaseLine(const VPiece &piece) const
+auto VPassmark::BuiltInSAPassmarkBaseLine(const VPiece &piece) const -> QVector<QLineF>
 {
     if (m_null)
     {
@@ -844,7 +844,8 @@ QVector<QLineF> VPassmark::BuiltInSAPassmarkBaseLine(const VPiece &piece) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QLineF> VPassmark::SAPassmarkBaseLine(const VPiece &piece, const VContainer *data, PassmarkSide side) const
+auto VPassmark::SAPassmarkBaseLine(const VPiece &piece, const VContainer *data, PassmarkSide side) const
+    -> QVector<QLineF>
 {
     if (m_null)
     {
@@ -867,8 +868,8 @@ QVector<QLineF> VPassmark::SAPassmarkBaseLine(const VPiece &piece, const VContai
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QLineF> VPassmark::SAPassmarkBaseLine(const QVector<QPointF> &seamAllowance,
-                                              const QVector<QPointF> &rotatedSeamAllowance, PassmarkSide side) const
+auto VPassmark::SAPassmarkBaseLine(const QVector<QPointF> &seamAllowance, const QVector<QPointF> &rotatedSeamAllowance,
+                                   PassmarkSide side) const -> QVector<QLineF>
 {
     if (m_null)
     {
@@ -1030,13 +1031,13 @@ QVector<QLineF> VPassmark::SAPassmarkBaseLine(const QVector<QPointF> &seamAllowa
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VPassmark::SAPassmarkPath(const VPiece &piece, const VContainer *data, PassmarkSide side) const
+auto VPassmark::SAPassmarkPath(const VPiece &piece, const VContainer *data, PassmarkSide side) const -> QPainterPath
 {
     return PassmarkToPath(SAPassmark(piece, data, side));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VPassmark::BuiltInSAPassmarkPath(const VPiece &piece, const VContainer *data) const
+auto VPassmark::BuiltInSAPassmarkPath(const VPiece &piece, const VContainer *data) const -> QPainterPath
 {
     return PassmarkToPath(BuiltInSAPassmark(piece, data));
 }

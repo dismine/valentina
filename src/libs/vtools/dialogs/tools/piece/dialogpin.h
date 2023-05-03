@@ -45,10 +45,10 @@ public:
 
     void EnbleShowMode(bool disable);
 
-    quint32 GetPieceId() const;
+    auto GetPieceId() const -> quint32;
     void    SetPieceId(quint32 id);
 
-    quint32 GetPointId() const;
+    auto GetPointId() const -> quint32;
     void    SetPointId(quint32 id);
 
     virtual void SetPiecesList(const QVector<quint32> &list) override;
@@ -58,7 +58,7 @@ public slots:
 
 protected:
     virtual void ShowVisualization() override;
-    virtual bool IsValid() const final;
+    virtual auto IsValid() const -> bool final;
 
 private:
     Q_DISABLE_COPY_MOVE(DialogPin) // NOLINT
@@ -72,7 +72,7 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogPin::IsValid() const
+inline auto DialogPin::IsValid() const -> bool
 {
     return m_flagPoint && m_flagError;
 }

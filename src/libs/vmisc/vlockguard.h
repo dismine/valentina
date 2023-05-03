@@ -66,11 +66,11 @@ public:
     template <typename Alloc, typename Delete>
     VLockGuard(const QString& lockName, Alloc a, Delete d, int stale = 0, int timeout=0);
 
-    const QSharedPointer<Guarded> &GetProtected() const;
-    int             GetLockError() const;
-    bool            IsLocked() const;
+    auto GetProtected() const -> const QSharedPointer<Guarded> &;
+    auto GetLockError() const -> int;
+    auto IsLocked() const -> bool;
     void            Unlock();
-    QString         GetLockFile() const;
+    auto GetLockFile() const -> QString;
 
 private:
     // cppcheck-suppress unknownMacro
@@ -81,7 +81,7 @@ private:
     QString                   lockFile;
     QSharedPointer<QLockFile> lock;
 
-    bool TryLock(const QString &lockName, int stale, int timeout);
+    auto TryLock(const QString &lockName, int stale, int timeout) -> bool;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -120,22 +120,19 @@ VLockGuard<Guarded>::VLockGuard(const QString& lockName, Alloc a, Delete d, int 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename Guarded>
-inline const QSharedPointer<Guarded> &VLockGuard<Guarded>::GetProtected() const
+template <typename Guarded> inline auto VLockGuard<Guarded>::GetProtected() const -> const QSharedPointer<Guarded> &
 {
     return holder;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename Guarded>
-inline int VLockGuard<Guarded>::GetLockError() const
+template <typename Guarded> inline auto VLockGuard<Guarded>::GetLockError() const -> int
 {
     return lockError;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename Guarded>
-inline bool VLockGuard<Guarded>::IsLocked() const
+template <typename Guarded> inline auto VLockGuard<Guarded>::IsLocked() const -> bool
 {
     return not holder.isNull();
 }
@@ -151,15 +148,13 @@ inline void VLockGuard<Guarded>::Unlock()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename Guarded>
-QString VLockGuard<Guarded>::GetLockFile() const
+template <typename Guarded> auto VLockGuard<Guarded>::GetLockFile() const -> QString
 {
     return lockFile;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename Guarded>
-bool VLockGuard<Guarded>::TryLock(const QString &lockName, int stale, int timeout)
+template <typename Guarded> auto VLockGuard<Guarded>::TryLock(const QString &lockName, int stale, int timeout) -> bool
 {
     bool res = true;
 

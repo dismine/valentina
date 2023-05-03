@@ -654,28 +654,32 @@ auto DialogIncrements::IncrementUsed(const QString &name) const -> bool
 {
     const QVector<VFormulaField> expressions = m_doc->ListExpressions();
 
-    for(const auto &field : expressions)
-    {
-        if (field.expression.indexOf(name) != -1)
-        {
-            // Eval formula
-            try
-            {
-                QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(field.expression, false, false));
+    return std::ranges::any_of(expressions,
+                               [name](const auto &field)
+                               {
+                                   if (field.expression.indexOf(name) == -1)
+                                   {
+                                       return false;
+                                   }
 
-                // Tokens (variables, measurements)
-                if (cal->GetTokens().values().contains(name))
-                {
-                    return true;
-                }
-            }
-            catch (const qmu::QmuParserError &)
-            {
-                // Do nothing. Because we not sure if used. A formula is broken.
-            }
-        }
-    }
-    return false;
+                                   // Eval formula
+                                   try
+                                   {
+                                       QScopedPointer<qmu::QmuTokenParser> cal(
+                                           new qmu::QmuTokenParser(field.expression, false, false));
+
+                                       // Tokens (variables, measurements)
+                                       if (cal->GetTokens().values().contains(name))
+                                       {
+                                           return true;
+                                       }
+                                   }
+                                   catch (const qmu::QmuParserError &)
+                                   {
+                                       // Do nothing. Because we not sure if used. A formula is broken.
+                                   }
+                                   return false;
+                               });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1952,7 +1956,7 @@ auto DialogIncrements::eventFilter(QObject *object, QEvent *event) -> bool
 void DialogIncrements::showEvent(QShowEvent *event)
 {
     // Skip DialogTool implementation
-    QDialog::showEvent(event);
+    QDialog::showEvent(event); // NOLINT(bugprone-parent-virtual-call)
     if ( event->spontaneous() )
     {
         return;

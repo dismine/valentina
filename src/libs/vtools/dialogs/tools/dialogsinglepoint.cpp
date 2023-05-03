@@ -122,13 +122,13 @@ DialogSinglePoint::~DialogSinglePoint()
  * @brief getPoint return point
  * @return point
  */
-QPointF DialogSinglePoint::GetPoint() const
+auto DialogSinglePoint::GetPoint() const -> QPointF
 {
     return point;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogSinglePoint::GetPointName() const
+auto DialogSinglePoint::GetPointName() const -> QString
 {
     return pointName;
 }
@@ -140,7 +140,7 @@ void DialogSinglePoint::SetNotes(const QString &notes)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogSinglePoint::GetNotes() const
+auto DialogSinglePoint::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }

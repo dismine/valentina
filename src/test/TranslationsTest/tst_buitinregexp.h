@@ -45,7 +45,7 @@ public:
 
 protected:
     virtual void        PrepareData() override;
-    virtual QStringList AllNames() override;
+    virtual auto AllNames() -> QStringList override;
 
 private slots:
     void initTestCase();

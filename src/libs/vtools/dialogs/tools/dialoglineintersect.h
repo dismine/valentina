@@ -53,23 +53,23 @@ public:
     DialogLineIntersect(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogLineIntersect() override;
 
-    quint32                 GetP1Line1() const;
+    auto GetP1Line1() const -> quint32;
     void                    SetP1Line1(quint32 value);
 
-    quint32                 GetP2Line1() const;
+    auto GetP2Line1() const -> quint32;
     void                    SetP2Line1(quint32 value);
 
-    quint32                 GetP1Line2() const;
+    auto GetP1Line2() const -> quint32;
     void                    SetP1Line2(quint32 value);
 
-    quint32                 GetP2Line2() const;
+    auto GetP2Line2() const -> quint32;
     void                    SetP2Line2(quint32 value);
 
-    QString                 GetPointName() const;
+    auto GetPointName() const -> QString;
     void                    SetPointName(const QString &value);
 
     void    SetNotes(const QString &notes);
-    QString GetNotes() const;
+    auto GetNotes() const -> QString;
 public slots:
     virtual void            ChosenObject(quint32 id, const SceneObject &type) override;
     void                    PointChanged();
@@ -80,7 +80,8 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     virtual void            SaveData() override;
-    virtual bool            IsValid() const final;
+    virtual auto IsValid() const -> bool final;
+
 private:
     Q_DISABLE_COPY_MOVE(DialogLineIntersect) // NOLINT
 
@@ -99,11 +100,11 @@ private:
     /** @brief number number of handled objects */
     qint32 number{0};
 
-    bool                    CheckIntersecion();
+    auto CheckIntersecion() -> bool;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogLineIntersect::IsValid() const
+inline auto DialogLineIntersect::IsValid() const -> bool
 {
     return flagName && flagError && flagPoint;
 }

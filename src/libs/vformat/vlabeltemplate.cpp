@@ -64,7 +64,7 @@ void VLabelTemplate::AddLines(const QVector<VLabelTemplateLine> &lines)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VLabelTemplateLine> VLabelTemplate::ReadLines() const
+auto VLabelTemplate::ReadLines() const -> QVector<VLabelTemplateLine>
 {
     const QDomNodeList listLines = elementsByTagName(TagLines);
     if (listLines.size() == 0)

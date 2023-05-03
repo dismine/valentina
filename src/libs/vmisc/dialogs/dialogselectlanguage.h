@@ -45,7 +45,7 @@ public:
     explicit DialogSelectLanguage(QWidget *parent = nullptr);
     ~DialogSelectLanguage();
 
-    QString Locale() const;
+    auto Locale() const -> QString;
 
 private:
     // cppcheck-suppress unknownMacro

@@ -43,11 +43,11 @@ public:
    explicit VElidedLabel(const QString &text, QWidget *parent = nullptr);
 
    void           setText(const QString &text);
-   const QString& text() const;
+   auto text() const -> const QString &;
 
-   bool IsElided() const;
+   auto IsElided() const -> bool;
 
-   bool ShowElided() const;
+   auto ShowElided() const -> bool;
    void SetShowElided(bool showElided);
 
 protected:
@@ -63,23 +63,23 @@ private:
    bool    m_showElided{true};
    QString m_content{};
 
-   bool DrawParagraph(QPainter &painter, const QString& paragraph, int &y, bool &didElide);
+   auto DrawParagraph(QPainter &painter, const QString &paragraph, int &y, bool &didElide) -> bool;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline const QString &VElidedLabel::text() const
+inline auto VElidedLabel::text() const -> const QString &
 {
     return m_content;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool VElidedLabel::IsElided() const
+inline auto VElidedLabel::IsElided() const -> bool
 {
     return m_elided;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool VElidedLabel::ShowElided() const
+inline auto VElidedLabel::ShowElided() const -> bool
 {
     return m_showElided;
 }

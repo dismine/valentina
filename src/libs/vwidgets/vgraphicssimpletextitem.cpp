@@ -187,7 +187,7 @@ void VGraphicsSimpleTextItem::CorrectLabelPosition()
  * @param value value.
  * @return value.
  */
-QVariant VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QVariant &value)
+auto VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant
 {
      if (change == ItemPositionChange && scene())
      {
@@ -352,7 +352,7 @@ void VGraphicsSimpleTextItem::SetDestination(const QPointF &destination)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QColor VGraphicsSimpleTextItem::BaseColor() const
+auto VGraphicsSimpleTextItem::BaseColor() const -> QColor
 {
     return m_baseColor;
 }

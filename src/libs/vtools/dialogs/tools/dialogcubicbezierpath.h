@@ -54,18 +54,18 @@ public:
     explicit DialogCubicBezierPath(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogCubicBezierPath();
 
-    VCubicBezierPath GetPath() const;
+    auto GetPath() const -> VCubicBezierPath;
     void             SetPath(const VCubicBezierPath &value);
 
     void    SetNotes(const QString &notes);
-    QString GetNotes() const;
+    auto GetNotes() const -> QString;
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) override;
     virtual void ShowDialog(bool click) override;
 protected:
     virtual void ShowVisualization() override;
     virtual void SaveData() override;
-    virtual bool IsValid() const final;
+    virtual auto IsValid() const -> bool final;
 private slots:
     void PointChanged(int row);
     void currentPointChanged(int index);
@@ -88,14 +88,14 @@ private:
     void             NewItem(const VPointF &point);
     void             DataPoint(const VPointF &p);
     void             SavePath();
-    QSet<quint32>    AllPathBackboneIds() const;
-    bool             IsPathValid() const;
-    VCubicBezierPath ExtractPath() const;
+    auto AllPathBackboneIds() const -> QSet<quint32>;
+    auto IsPathValid() const -> bool;
+    auto ExtractPath() const -> VCubicBezierPath;
     void             ValidatePath();
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogCubicBezierPath::IsValid() const
+inline auto DialogCubicBezierPath::IsValid() const -> bool
 {
     return flagError && flagAlias;
 }

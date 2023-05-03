@@ -103,7 +103,6 @@ private:
     void InitialTable();
     void ShowPoint();
     auto PointName(quint32 pointId) const -> QString;
-    auto AttrUInt(const QDomElement &domElement, const QString &name) const -> quint32;
     void RetranslateUi();
     auto CursorRow() const -> int;
 

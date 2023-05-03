@@ -41,13 +41,13 @@ const qreal minVisibleFontSize = 5;
 
 extern auto qt_regionToPath(const QRegion &region) -> QPainterPath;
 
-inline qreal DefPointRadiusPixel()
+inline auto DefPointRadiusPixel() -> qreal
 {
     return (VAbstractApplication::VApp()->Settings()->GetLineWidth() + 0.8) / 25.4 * PrintDPI;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal SceneScale(QGraphicsScene *scene)
+auto SceneScale(QGraphicsScene *scene) -> qreal
 {
     qreal scale = 1;
 
@@ -64,7 +64,7 @@ qreal SceneScale(QGraphicsScene *scene)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QColor CorrectColor(const QGraphicsItem *item, const QColor &color)
+auto CorrectColor(const QGraphicsItem *item, const QColor &color) -> QColor
 {
     SCASSERT(item != nullptr)
 
@@ -72,14 +72,12 @@ QColor CorrectColor(const QGraphicsItem *item, const QColor &color)
     {
         return color;
     }
-    else
-    {
-        return Qt::gray;
-    }
+
+    return Qt::gray;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF PointRect(qreal radius)
+auto PointRect(qreal radius) -> QRectF
 {
     QRectF rec = QRectF(0, 0, radius*2, radius*2);
     rec.translate(-rec.center().x(), -rec.center().y());
@@ -87,7 +85,7 @@ QRectF PointRect(qreal radius)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal ScaledRadius(qreal scale)
+auto ScaledRadius(qreal scale) -> qreal
 {
     qreal scaledRadius = DefPointRadiusPixel();
     if (scale > 1)
@@ -106,7 +104,7 @@ void ScaleCircleSize(QGraphicsEllipseItem *item, qreal scale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal ScaleWidth(qreal width, qreal scale)
+auto ScaleWidth(qreal width, qreal scale) -> qreal
 {
     if (scale > 1)
     {
@@ -116,7 +114,7 @@ qreal ScaleWidth(qreal width, qreal scale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath ItemShapeFromPath(const QPainterPath &path, const QPen &pen)
+auto ItemShapeFromPath(const QPainterPath &path, const QPen &pen) -> QPainterPath
 {
     // We unfortunately need this hack as QPainterPathStroker will set a width of 1.0
     // if we pass a value of 0.0 to QPainterPathStroker::setWidth()
@@ -194,7 +192,7 @@ void GraphicsItemHighlightSelected(const QRectF &boundingRect, qreal itemPenWidt
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool IsSelectedByReleaseEvent(QGraphicsItem *item, QGraphicsSceneMouseEvent *event)
+auto IsSelectedByReleaseEvent(QGraphicsItem *item, QGraphicsSceneMouseEvent *event) -> bool
 {
     SCASSERT(item != nullptr)
     return event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick

@@ -248,7 +248,7 @@ void DialogTriangle::SetSecondPointId(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogTriangle::GetPointName() const
+auto DialogTriangle::GetPointName() const -> QString
 {
     return pointName;
 }
@@ -300,7 +300,7 @@ void DialogTriangle::SetAxisP1Id(const quint32 &value)
  * @brief GetAxisP1Id return id first point of axis
  * @return id
  */
-quint32 DialogTriangle::GetAxisP1Id() const
+auto DialogTriangle::GetAxisP1Id() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxAxisP1);
 }
@@ -310,7 +310,7 @@ quint32 DialogTriangle::GetAxisP1Id() const
  * @brief GetAxisP2Id return id second point of axis
  * @return id
  */
-quint32 DialogTriangle::GetAxisP2Id() const
+auto DialogTriangle::GetAxisP2Id() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxAxisP2);
 }
@@ -320,7 +320,7 @@ quint32 DialogTriangle::GetAxisP2Id() const
  * @brief GetFirstPointId return id of first point
  * @return id
  */
-quint32 DialogTriangle::GetFirstPointId() const
+auto DialogTriangle::GetFirstPointId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxFirstPoint);
 }
@@ -330,7 +330,7 @@ quint32 DialogTriangle::GetFirstPointId() const
  * @brief GetSecondPointId return id of second point
  * @return id
  */
-quint32 DialogTriangle::GetSecondPointId() const
+auto DialogTriangle::GetSecondPointId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxSecondPoint);
 }
@@ -342,7 +342,7 @@ void DialogTriangle::SetNotes(const QString &notes)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogTriangle::GetNotes() const
+auto DialogTriangle::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }

@@ -102,8 +102,8 @@ void VToolLine::SetDialog()
  * @param doc dom document container.
  * @param data container with variables.
  */
-VToolLine *VToolLine::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                             VContainer *data)
+auto VToolLine::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolLine *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogLine> dialogTool = qobject_cast<DialogLine *>(dialog);
@@ -134,7 +134,7 @@ VToolLine *VToolLine::Create(const QPointer<DialogTool> &dialog, VMainGraphicsSc
  * @brief Create help create tool.
  * @param initData init data.
  */
-VToolLine * VToolLine::Create(VToolLineInitData initData)
+auto VToolLine::Create(VToolLineInitData initData) -> VToolLine *
 {
     SCASSERT(initData.scene != nullptr)
     SCASSERT(initData.doc != nullptr)
@@ -175,7 +175,7 @@ VToolLine * VToolLine::Create(VToolLineInitData initData)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolLine::getTagName() const
+auto VToolLine::getTagName() const -> QString
 {
     return VDomDocument::TagLine;
 }
@@ -193,13 +193,13 @@ void VToolLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolLine::FirstPointName() const
+auto VToolLine::FirstPointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(firstPoint)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolLine::SecondPointName() const
+auto VToolLine::SecondPointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(secondPoint)->name();
 }
@@ -336,7 +336,7 @@ void VToolLine::RemoveReferens()
  * @param value value.
  * @return value.
  */
-QVariant VToolLine::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+auto VToolLine::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) -> QVariant
 {
     if (change == QGraphicsItem::ItemSelectedHasChanged)
     {
@@ -435,7 +435,7 @@ void VToolLine::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolLine::MakeToolTip() const
+auto VToolLine::MakeToolTip() const -> QString
 {
     const QSharedPointer<VPointF> first = VAbstractTool::data.GeometricObject<VPointF>(firstPoint);
     const QSharedPointer<VPointF> second = VAbstractTool::data.GeometricObject<VPointF>(secondPoint);
@@ -488,7 +488,7 @@ void VToolLine::SetLineType(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolLine::GetLineColor() const
+auto VToolLine::GetLineColor() const -> QString
 {
     return lineColor;
 }

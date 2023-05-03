@@ -54,8 +54,7 @@ using MeasurementDimension_p = QSharedPointer<VAbstartMeasurementDimension>;
 using DimesionLabels = QMap<qreal, QString>;
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-inline bool VFuzzyContains(const QMap<qreal, T> &c, qreal value)
+template <typename T> inline auto VFuzzyContains(const QMap<qreal, T> &c, qreal value) -> bool
 {
     auto i = c.constBegin();
     while (i != c.constEnd())
@@ -70,8 +69,7 @@ inline bool VFuzzyContains(const QMap<qreal, T> &c, qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <template <typename> class Cont>
-inline bool VFuzzyContains(const Cont<qreal> &c, qreal value)
+template <template <typename> class Cont> inline auto VFuzzyContains(const Cont<qreal> &c, qreal value) -> bool
 {
     for (auto val : c)
     {
@@ -84,8 +82,7 @@ inline bool VFuzzyContains(const Cont<qreal> &c, qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <template <typename> class Cont>
-inline vsizetype VFuzzyIndexOf(const Cont<qreal> &c, qreal value)
+template <template <typename> class Cont> inline auto VFuzzyIndexOf(const Cont<qreal> &c, qreal value) -> vsizetype
 {
     for (int i = 0; i < c.size(); ++i)
     {
@@ -98,8 +95,7 @@ inline vsizetype VFuzzyIndexOf(const Cont<qreal> &c, qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-inline T VFuzzyValue(const QMap<qreal, T> &c, qreal value, const T &defaultValue = T())
+template <typename T> inline auto VFuzzyValue(const QMap<qreal, T> &c, qreal value, const T &defaultValue = T()) -> T
 {
     auto i = c.constBegin();
     while (i != c.constEnd())

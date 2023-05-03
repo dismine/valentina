@@ -51,21 +51,21 @@ public:
     VFSplinePoint(const VFSplinePoint &point);
     ~VFSplinePoint();
 
-    VFSplinePoint &operator=(const VFSplinePoint &point);
+    auto operator=(const VFSplinePoint &point) -> VFSplinePoint &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VFSplinePoint(VFSplinePoint &&point) Q_DECL_NOTHROW;
-    VFSplinePoint &operator=(VFSplinePoint &&point) Q_DECL_NOTHROW;
+    auto operator=(VFSplinePoint &&point) Q_DECL_NOTHROW->VFSplinePoint &;
 #endif
 
-    VPointF P() const;
+    auto P() const -> VPointF;
     void    SetP(const VPointF &value);
-    qreal   Angle1() const;
+    auto Angle1() const -> qreal;
     void    SetAngle1(const qreal &value);
     void    SetAngle2(const qreal &value);
-    qreal   Angle2() const;
-    qreal   KAsm1() const;
+    auto Angle2() const -> qreal;
+    auto KAsm1() const -> qreal;
     void    SetKAsm1(const qreal &value);
-    qreal   KAsm2() const;
+    auto KAsm2() const -> qreal;
     void    SetKAsm2(const qreal &value);
 protected:
     QSharedDataPointer<VFSplinePointData> d;
@@ -89,34 +89,35 @@ public:
     VSplinePoint(const VSplinePoint &point);
     ~VSplinePoint();
 
-    VSplinePoint &operator=(const VSplinePoint &point);
+    auto operator=(const VSplinePoint &point) -> VSplinePoint &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VSplinePoint(VSplinePoint &&point) Q_DECL_NOTHROW;
-    VSplinePoint &operator=(VSplinePoint &&point) Q_DECL_NOTHROW;
+    auto operator=(VSplinePoint &&point) Q_DECL_NOTHROW->VSplinePoint &;
 #endif
 
-    VPointF P() const;
+    auto P() const -> VPointF;
     void    SetP(const VPointF &value);
 
-    qreal   Angle1() const;
-    QString Angle1Formula() const;
+    auto Angle1() const -> qreal;
+    auto Angle1Formula() const -> QString;
     void    SetAngle1(const qreal &value, const QString &angle1F);
 
-    qreal   Angle2() const;
-    QString Angle2Formula() const;
+    auto Angle2() const -> qreal;
+    auto Angle2Formula() const -> QString;
     void    SetAngle2(const qreal &value, const QString &angle2F);
 
-    qreal   Length1() const;
-    QString Length1Formula() const;
+    auto Length1() const -> qreal;
+    auto Length1Formula() const -> QString;
     void    SetLength1(const qreal &value, const QString &length1F);
 
-    qreal   Length2() const;
-    QString Length2Formula() const;
+    auto Length2() const -> qreal;
+    auto Length2Formula() const -> QString;
     void    SetLength2(const qreal &value, const QString &length2F);
 
-    bool    IsMovable() const;
+    auto IsMovable() const -> bool;
 
-    QJsonObject ToJson() const;
+    auto ToJson() const -> QJsonObject;
+
 protected:
     QSharedDataPointer<VSplinePointData> d;
 };

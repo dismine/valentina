@@ -75,7 +75,7 @@ void DialogInsertNode::SetPiecesList(const QVector<quint32> &list)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogInsertNode::GetPieceId() const
+auto DialogInsertNode::GetPieceId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxPiece);
 }
@@ -102,7 +102,7 @@ void DialogInsertNode::SetPieceId(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VPieceNode> DialogInsertNode::GetNodes() const
+auto DialogInsertNode::GetNodes() const -> QVector<VPieceNode>
 {
     QVector<VPieceNode> nodes;
     for (qint32 i = 0; i < ui->listWidget->count(); ++i)

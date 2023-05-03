@@ -79,8 +79,8 @@ VPE::VTextProperty::VTextProperty(const QString &name)
 #endif
 }
 
-QWidget *VPE::VTextProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
-                                          const QAbstractItemDelegate *delegate)
+auto VPE::VTextProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
+                                      const QAbstractItemDelegate *delegate) -> QWidget *
 {
     Q_UNUSED(options)
     Q_UNUSED(delegate)
@@ -96,7 +96,7 @@ QWidget *VPE::VTextProperty::createEditor(QWidget *parent, const QStyleOptionVie
     return d_ptr->editor;
 }
 
-bool VPE::VTextProperty::setEditorData(QWidget *editor)
+auto VPE::VTextProperty::setEditorData(QWidget *editor) -> bool
 {
     if (QPlainTextEdit* tmpWidget = qobject_cast<QPlainTextEdit*>(editor))
     {
@@ -107,7 +107,7 @@ bool VPE::VTextProperty::setEditorData(QWidget *editor)
     return false;
 }
 
-QVariant VPE::VTextProperty::getEditorData(const QWidget *editor) const
+auto VPE::VTextProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
     const QPlainTextEdit* tmpEditor = qobject_cast<const QPlainTextEdit*>(editor);
     if (tmpEditor)
@@ -131,7 +131,7 @@ void VPE::VTextProperty::setSetting(const QString &key, const QVariant &value)
     }
 }
 
-QVariant VPE::VTextProperty::getSetting(const QString &key) const
+auto VPE::VTextProperty::getSetting(const QString &key) const -> QVariant
 {
     if (key == QLatin1String("ReadOnly"))
     {
@@ -141,19 +141,19 @@ QVariant VPE::VTextProperty::getSetting(const QString &key) const
         return VProperty::getSetting(key);
 }
 
-QStringList VPE::VTextProperty::getSettingKeys() const
+auto VPE::VTextProperty::getSettingKeys() const -> QStringList
 {
     QStringList settings;
     settings << QStringLiteral("ReadOnly");
     return settings;
 }
 
-QString VPE::VTextProperty::type() const
+auto VPE::VTextProperty::type() const -> QString
 {
     return QStringLiteral("string");
 }
 
-VPE::VProperty *VPE::VTextProperty::clone(bool include_children, VPE::VProperty *container) const
+auto VPE::VTextProperty::clone(bool include_children, VPE::VProperty *container) const -> VPE::VProperty *
 {
     return VProperty::clone(include_children, container ? container : new VTextProperty(getName(), getSettings()));
 }

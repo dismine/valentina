@@ -62,7 +62,8 @@ VExceptionEmptyParameter::VExceptionEmptyParameter(const VExceptionEmptyParamete
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionEmptyParameter &VExceptionEmptyParameter::operator=(const VExceptionEmptyParameter &e) V_NOEXCEPT_EXPR (true)
+auto VExceptionEmptyParameter::operator=(const VExceptionEmptyParameter &e) V_NOEXCEPT_EXPR(true)
+    -> VExceptionEmptyParameter &
 {
     if ( &e == this )
     {
@@ -81,7 +82,7 @@ VExceptionEmptyParameter &VExceptionEmptyParameter::operator=(const VExceptionEm
  * @brief ErrorMessage return main error message
  * @return main error message
  */
-QString VExceptionEmptyParameter::ErrorMessage() const
+auto VExceptionEmptyParameter::ErrorMessage() const -> QString
 {
     return QString("ExceptionEmptyParameter: %1 %2").arg(error, name);
 }
@@ -91,7 +92,7 @@ QString VExceptionEmptyParameter::ErrorMessage() const
  * @brief DetailedInformation return detailed information about error
  * @return detailed information
  */
-QString VExceptionEmptyParameter::DetailedInformation() const
+auto VExceptionEmptyParameter::DetailedInformation() const -> QString
 {
     return MoreInfo(QString("tag: %1 in line %2\nFull tag:\n%3").arg(tagName).arg(lineNumber).arg(tagText));
 }

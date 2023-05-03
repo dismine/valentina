@@ -46,7 +46,7 @@ public:
     virtual ~FvUpdateWindow();
 
     // Update the current update proposal from FvUpdater
-    bool UpdateWindowWithCurrentProposedUpdate();
+    auto UpdateWindowWithCurrentProposedUpdate() -> bool;
 
 private:
     // cppcheck-suppress unknownMacro

@@ -72,6 +72,7 @@ public:
     auto IsPedantic() const -> bool override;
 
     static auto VApp() -> VApplication *;
+    static auto CommandLine() -> VCommandLinePtr;
 
 protected:
     void InitTrVars() override;
@@ -94,10 +95,6 @@ private:
     static auto CreateLogDir() -> bool;
     void BeginLogging();
     static void ClearOldLogs();
-
-public:
-    //moved to the end of class so merge should go
-    static auto CommandLine() -> VCommandLinePtr;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

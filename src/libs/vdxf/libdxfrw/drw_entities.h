@@ -185,14 +185,14 @@ public:
     
 protected:
     //parses dxf pair to read entity
-    virtual bool parseCode(int code, dxfReader *reader);
+    virtual auto parseCode(int code, dxfReader *reader) -> bool;
     //calculates extrusion axis (normal vector)
     void calculateAxis(DRW_Coord extPoint);
     //apply extrusion to @extPoint and return data in @point
     void extrudePoint(DRW_Coord extPoint, DRW_Coord *point) const;
 
     //parses dxf 102 groups to read entity
-    bool parseDxfGroups(int code, dxfReader *reader);
+    auto parseDxfGroups(int code, dxfReader *reader) -> bool;
 
 public:
     DRW::ETYPE eType;          /*!< enum: entity type, code 0 */
@@ -218,7 +218,7 @@ public:
     std::vector<DRW_Variant*> extData; /*!< FIFO list of extended data, codes 1000 to 1071*/
 
 private:
-    DRW_Entity &operator=(const DRW_Entity &) Q_DECL_EQ_DELETE;
+    auto operator=(const DRW_Entity &) -> DRW_Entity &Q_DECL_EQ_DELETE;
     DRW_Coord extAxisX;
     DRW_Coord extAxisY;
     DRW_Variant* curr;
@@ -241,7 +241,7 @@ public:
     void applyExtrusion() override {}
 
 protected:
-    bool parseCode(int code, dxfReader *reader) override;
+    auto parseCode(int code, dxfReader *reader) -> bool override;
 
 public:
     DRW_Coord basePoint{};                  /*!<  base point, code 10, 20 & 30 */
@@ -284,7 +284,7 @@ public:
     void applyExtrusion() override{}
 
 protected:
-    bool parseCode(int code, dxfReader *reader) override;
+    auto parseCode(int code, dxfReader *reader) -> bool override;
 
 public:
     DRW_Coord secPoint;        /*!< second point, code 11, 21 & 31 */
@@ -332,7 +332,7 @@ public:
     void applyExtrusion() override;
 
 protected:
-    bool parseCode(int code, dxfReader *reader) override;
+    auto parseCode(int code, dxfReader *reader) -> bool override;
 
 public:
     double radious;                 /*!< radius, code 40 */
@@ -357,21 +357,21 @@ public:
     void applyExtrusion() override;
 
     //! center point in OCS
-    const DRW_Coord & center() const { return basePoint; }
+    auto center() const -> const DRW_Coord & { return basePoint; }
     //! the radius of the circle
-    double radius() const { return radious; }
+    auto radius() const -> double { return radious; }
     //! start angle in radians
-    double startAngle() const { return staangle; }
+    auto startAngle() const -> double { return staangle; }
     //! end angle in radians
-    double endAngle() const { return endangle; }
+    auto endAngle() const -> double { return endangle; }
     //! thickness
-    double thick() const { return thickness; }
+    auto thick() const -> double { return thickness; }
     //! extrusion
-    const DRW_Coord & extrusion() const { return extPoint; }
+    auto extrusion() const -> const DRW_Coord & { return extPoint; }
 
 protected:
     //! interpret code in dxf reading process or dispatch to inherited class
-    bool parseCode(int code, dxfReader *reader) override;
+    auto parseCode(int code, dxfReader *reader) -> bool override;
 
 public:
     double staangle;            /*!< start angle, code 50 in radians*/
@@ -403,7 +403,7 @@ public:
 
 protected:
     //! interpret code in dxf reading process or dispatch to inherited class
-    bool parseCode(int code, dxfReader *reader) override;
+    auto parseCode(int code, dxfReader *reader) -> bool override;
 
 private:
     void correctAxis();
@@ -433,7 +433,7 @@ public:
     void applyExtrusion() override;
 
 protected:
-    bool parseCode(int code, dxfReader *reader) override;
+    auto parseCode(int code, dxfReader *reader) -> bool override;
 
 public:
     DRW_Coord thirdPoint;        /*!< third point, code 12, 22 & 32 */
@@ -454,20 +454,19 @@ public:
 
 public:
     //! first corner (2D)
-    const DRW_Coord & firstCorner() const { return basePoint; }
+    auto firstCorner() const -> const DRW_Coord & { return basePoint; }
     //! second corner (2D)
-    const DRW_Coord & secondCorner() const { return secPoint; }
+    auto secondCorner() const -> const DRW_Coord & { return secPoint; }
     //! third corner (2D)
-    const DRW_Coord & thirdCorner() const { return thirdPoint; }
+    auto thirdCorner() const -> const DRW_Coord & { return thirdPoint; }
     //! fourth corner (2D)
-    const DRW_Coord & fourthCorner() const { return thirdPoint; }
+    auto fourthCorner() const -> const DRW_Coord & { return thirdPoint; }
     //! thickness
-    double thick() const { return thickness; }
+    auto thick() const -> double { return thickness; }
     //! elevation
-    double elevation() const { return basePoint.z; }
+    auto elevation() const -> double { return basePoint.z; }
     //! extrusion
-    const DRW_Coord & extrusion() const { return extPoint; }
-
+    auto extrusion() const -> const DRW_Coord & { return extPoint; }
 };
 
 //! Class to handle 3dface entity
@@ -496,19 +495,19 @@ public:
     void applyExtrusion() override {}
 
     //! first corner in WCS
-    const DRW_Coord & firstCorner() const { return basePoint; }
+    auto firstCorner() const -> const DRW_Coord & { return basePoint; }
     //! second corner in WCS
-    const DRW_Coord & secondCorner() const { return secPoint; }
+    auto secondCorner() const -> const DRW_Coord & { return secPoint; }
     //! third corner in WCS
-    const DRW_Coord & thirdCorner() const { return thirdPoint; }
+    auto thirdCorner() const -> const DRW_Coord & { return thirdPoint; }
     //! fourth corner in WCS
-    const DRW_Coord & fourthCorner() const { return fourPoint; }
+    auto fourthCorner() const -> const DRW_Coord & { return fourPoint; }
     //! edge visibility flags
-    InvisibleEdgeFlags edgeFlags() const { return static_cast<InvisibleEdgeFlags>(invisibleflag); }
+    auto edgeFlags() const -> InvisibleEdgeFlags { return static_cast<InvisibleEdgeFlags>(invisibleflag); }
 
 protected:
     //! interpret code in dxf reading process or dispatch to inherited class
-    bool parseCode(int code, dxfReader *reader) override;
+    auto parseCode(int code, dxfReader *reader) -> bool override;
 
 public:
     int invisibleflag;       /*!< invisible edge flag, code 70 */
@@ -534,7 +533,7 @@ public:
     void applyExtrusion() override {}
 
 protected:
-    bool parseCode(int code, dxfReader *reader) override;
+    auto parseCode(int code, dxfReader *reader) -> bool override;
 
 public:
     UTF8STRING name;             /*!< block name, code 2 */
@@ -565,7 +564,7 @@ public:
     }
 
 protected:
-    bool parseCode(int code, dxfReader *reader) override;
+    auto parseCode(int code, dxfReader *reader) -> bool override;
 
 public:
     UTF8STRING name;         /*!< block name, code 2 */
@@ -629,7 +628,8 @@ public:
         vert->bulge = v.bulge;
         vertlist.push_back(vert);
     }
-    DRW_Vertex2D *addVertex () {
+    auto addVertex() -> DRW_Vertex2D *
+    {
         DRW_Vertex2D *vert = new DRW_Vertex2D();
         vert->stawidth = 0;
         vert->endwidth = 0;
@@ -639,7 +639,7 @@ public:
     }
 
 protected:
-    bool parseCode(int code, dxfReader *reader) override;
+    auto parseCode(int code, dxfReader *reader) -> bool override;
 
 public:
     int vertexnum;            /*!< number of vertex, code 90 */
@@ -651,7 +651,7 @@ public:
     DRW_Vertex2D *vertex;       /*!< current vertex to add data */
     std::vector<DRW_Vertex2D *> vertlist;  /*!< vertex list */
 private:
-    DRW_LWPolyline &operator=(const DRW_LWPolyline &) Q_DECL_EQ_DELETE;
+    auto operator=(const DRW_LWPolyline &) -> DRW_LWPolyline &Q_DECL_EQ_DELETE;
 };
 
 //! Class to handle insert entries
@@ -697,7 +697,7 @@ public:
     void applyExtrusion() override {} //RLZ TODO
 
 protected:
-    bool parseCode(int code, dxfReader *reader) override;
+    auto parseCode(int code, dxfReader *reader) -> bool override;
 
 public:
     double height;             /*!< height text, code 40 */
@@ -742,7 +742,7 @@ public:
     }
 
 protected:
-    bool parseCode(int code, dxfReader *reader) override;
+    auto parseCode(int code, dxfReader *reader) -> bool override;
     void updateAngle();    //recalculate angle if 'haveXAxis' is true
 
 public:
@@ -792,7 +792,7 @@ public:
     }
 
 protected:
-    bool parseCode(int code, dxfReader *reader) override;
+    auto parseCode(int code, dxfReader *reader) -> bool override;
 
 public:
     double stawidth;          /*!< Start width, code 40 */
@@ -871,7 +871,7 @@ public:
     }
 
 protected:
-    bool parseCode(int code, dxfReader *reader) override;
+    auto parseCode(int code, dxfReader *reader) -> bool override;
 
 public:
     int flags;               /*!< polyline flag, code 70, default 0 */
@@ -886,7 +886,7 @@ public:
     std::vector<DRW_Vertex *> vertlist;  /*!< vertex list */
 
 private:
-    DRW_Polyline &operator=(const DRW_Polyline &) Q_DECL_EQ_DELETE;
+    auto operator=(const DRW_Polyline &) -> DRW_Polyline &Q_DECL_EQ_DELETE;
     std::list<duint32>handlesList; //list of handles, only in 2004+
     duint32 firstEH;      //handle of first entity, only in pre-2004
     duint32 lastEH;       //handle of last entity, only in pre-2004
@@ -960,7 +960,7 @@ public:
     void applyExtrusion() override {}
 
 protected:
-    bool parseCode(int code, dxfReader *reader) override;
+    auto parseCode(int code, dxfReader *reader) -> bool override;
 
 public:
 //    double ex;                /*!< normal vector x coordinate, code 210 */
@@ -990,7 +990,7 @@ public:
     std::vector<DRW_Coord *> fitlist;      /*!< fit points list, code 11, 21 & 31 */
 
 private:
-    DRW_Spline &operator=(const DRW_Spline &) Q_DECL_EQ_DELETE;
+    auto operator=(const DRW_Spline &) -> DRW_Spline &Q_DECL_EQ_DELETE;
     DRW_Coord *controlpoint;   /*!< current control point to add data */
     DRW_Coord *fitpoint;       /*!< current fit point to add data */
 };
@@ -1072,7 +1072,7 @@ public:
     void applyExtrusion() override {}
 
 protected:
-    bool parseCode(int code, dxfReader *reader) override;
+    auto parseCode(int code, dxfReader *reader) -> bool override;
 
 public:
     UTF8STRING name;           /*!< hatch pattern name, code 2 */
@@ -1167,7 +1167,7 @@ public:
     }
 
 protected:
-    bool parseCode(int code, dxfReader *reader) override;
+    auto parseCode(int code, dxfReader *reader) -> bool override;
 
 public:
     duint32 ref;               /*!< Hard reference to imagedef object, code 340 */
@@ -1254,56 +1254,68 @@ public:
     void applyExtrusion() override {}
 
 protected:
-    bool parseCode(int code, dxfReader *reader) override;
+    auto parseCode(int code, dxfReader *reader) -> bool override;
 
 public:
-    DRW_Coord getDefPoint() const {return defPoint;}      /*!< Definition point, code 10, 20 & 30 */
+    auto getDefPoint() const -> DRW_Coord { return defPoint; } /*!< Definition point, code 10, 20 & 30 */
     void setDefPoint(const DRW_Coord &p) {defPoint =p;}
-    DRW_Coord getTextPoint() const {return textPoint;}    /*!< Middle point of text, code 11, 21 & 31 */
+    auto getTextPoint() const -> DRW_Coord { return textPoint; } /*!< Middle point of text, code 11, 21 & 31 */
     void setTextPoint(const DRW_Coord &p) {textPoint =p;}
-    std::string getStyle() const {return style;}          /*!< Dimension style, code 3 */
+    auto getStyle() const -> std::string { return style; } /*!< Dimension style, code 3 */
     void setStyle(const std::string &s) {style = s;}
-    int getAlign() const { return align;}                 /*!< attachment point, code 71 */
+    auto getAlign() const -> int { return align; } /*!< attachment point, code 71 */
     void setAlign(const int a) { align = a;}
-    int getTextLineStyle() const { return linesty;}       /*!< Dimension text line spacing style, code 72, default 1 */
+    auto getTextLineStyle() const -> int
+    {
+        return linesty;
+    } /*!< Dimension text line spacing style, code 72, default 1 */
     void setTextLineStyle(const int l) { linesty = l;}
-    std::string getText() const {return text;}            /*!< Dimension text explicitly entered by the user, code 1 */
+    auto getText() const -> std::string { return text; } /*!< Dimension text explicitly entered by the user, code 1 */
     void setText(const std::string &t) {text = t;}
-    double getTextLineFactor() const { return linefactor;} /*!< Dimension text line spacing factor, code 41, default 1? */
+    auto getTextLineFactor() const -> double
+    {
+        return linefactor;
+    } /*!< Dimension text line spacing factor, code 41, default 1? */
     void setTextLineFactor(const double l) { linefactor = l;}
-    double getDir() const { return rot;}                  /*!< rotation angle of the dimension text, code 53 (optional) default 0 */
+    auto getDir() const -> double
+    {
+        return rot;
+    } /*!< rotation angle of the dimension text, code 53 (optional) default 0 */
     void setDir(const double d) { rot = d;}
 
-    DRW_Coord getExtrusion() const {return extPoint;}     /*!< extrusion, code 210, 220 & 230 */
+    auto getExtrusion() const -> DRW_Coord { return extPoint; } /*!< extrusion, code 210, 220 & 230 */
     void setExtrusion(const DRW_Coord &p) {extPoint = p;}
-    std::string getName() const {return name;}            /*!< Name of the block that contains the entities, code 2 */
+    auto getName() const -> std::string { return name; } /*!< Name of the block that contains the entities, code 2 */
     void setName(const std::string &s) {name = s;}
 //    int getType(){ return type;}                      /*!< Dimension type, code 70 */
-    bool hasActualMeasurement() const { return hasActual; }
+    auto hasActualMeasurement() const -> bool { return hasActual; }
     void setActualMeasurement(double value) { hasActual = true; actual = value; }
-    double getActualMeasurement() const { return actual; }
+    auto getActualMeasurement() const -> double { return actual; }
 
 protected:
-    DRW_Coord getPt2() const {return clonePoint;}
+    auto getPt2() const -> DRW_Coord { return clonePoint; }
     void setPt2(const DRW_Coord &p) {clonePoint= p;}
-    DRW_Coord getPt3() const {return def1;}
+    auto getPt3() const -> DRW_Coord { return def1; }
     void setPt3(const DRW_Coord &p) {def1= p;}
-    DRW_Coord getPt4() const {return def2;}
+    auto getPt4() const -> DRW_Coord { return def2; }
     void setPt4(const DRW_Coord &p) {def2= p;}
-    DRW_Coord getPt5() const {return circlePoint;}
+    auto getPt5() const -> DRW_Coord { return circlePoint; }
     void setPt5(const DRW_Coord &p) {circlePoint= p;}
-    DRW_Coord getPt6() const {return arcPoint;}
+    auto getPt6() const -> DRW_Coord { return arcPoint; }
     void setPt6(const DRW_Coord &p) {arcPoint= p;}
-    double getAn50() const {return angle;}      /*!< Angle of rotated, horizontal, or vertical dimensions, code 50 */
+    auto getAn50() const -> double
+    {
+        return angle;
+    } /*!< Angle of rotated, horizontal, or vertical dimensions, code 50 */
     void setAn50(const double d) {angle = d;}
-    double getOb52() const {return oblique;}    /*!< oblique angle, code 52 */
+    auto getOb52() const -> double { return oblique; } /*!< oblique angle, code 52 */
     void setOb52(const double d) {oblique = d;}
-    double getRa40() const {return length;}    /*!< Leader length, code 40 */
+    auto getRa40() const -> double { return length; } /*!< Leader length, code 40 */
     void setRa40(const double d) {length = d;}
 public:
     int type;                  /*!< Dimension type, code 70 */
 private:
-    DRW_Dimension &operator=(const DRW_Dimension &) Q_DECL_EQ_DELETE;
+    auto operator=(const DRW_Dimension &) -> DRW_Dimension &Q_DECL_EQ_DELETE;
     std::string name;          /*!< Name of the block that contains the entities, code 2 */
     DRW_Coord defPoint;        /*!<  definition point, code 10, 20 & 30 (WCS) */
     DRW_Coord textPoint;       /*!< Middle point of text, code 11, 21 & 31 (OCS) */
@@ -1348,14 +1360,17 @@ public:
         eType = DRW::DIMALIGNED;
     }
 
-    DRW_Coord getClonepoint() const {return getPt2();}      /*!< Insertion for clones (Baseline & Continue), 12, 22 & 32 */
+    auto getClonepoint() const -> DRW_Coord
+    {
+        return getPt2();
+    } /*!< Insertion for clones (Baseline & Continue), 12, 22 & 32 */
     void setClonePoint(const DRW_Coord &c){setPt2(c);}
 
-    DRW_Coord getDimPoint() const {return getDefPoint();}   /*!< dim line location point, code 10, 20 & 30 */
+    auto getDimPoint() const -> DRW_Coord { return getDefPoint(); } /*!< dim line location point, code 10, 20 & 30 */
     void setDimPoint(const DRW_Coord &p){setDefPoint(p);}
-    DRW_Coord getDef1Point() const {return getPt3();}       /*!< Definition point 1, code 13, 23 & 33 */
+    auto getDef1Point() const -> DRW_Coord { return getPt3(); } /*!< Definition point 1, code 13, 23 & 33 */
     void setDef1Point(const DRW_Coord &p) {setPt3(p);}
-    DRW_Coord getDef2Point() const {return getPt4();}       /*!< Definition point 2, code 14, 24 & 34 */
+    auto getDef2Point() const -> DRW_Coord { return getPt4(); } /*!< Definition point 2, code 14, 24 & 34 */
     void setDef2Point(const DRW_Coord &p) {setPt4(p);}
 
 };
@@ -1377,9 +1392,12 @@ public:
         eType = DRW::DIMLINEAR;
     }
 
-    double getAngle() const {return getAn50();}          /*!< Angle of rotated, horizontal, or vertical dimensions, code 50 */
+    auto getAngle() const -> double
+    {
+        return getAn50();
+    } /*!< Angle of rotated, horizontal, or vertical dimensions, code 50 */
     void setAngle(const double d) {setAn50(d);}
-    double getOblique() const {return getOb52();}      /*!< oblique angle, code 52 */
+    auto getOblique() const -> double { return getOb52(); } /*!< oblique angle, code 52 */
     void setOblique(const double d) {setOb52(d);}
 };
 
@@ -1401,11 +1419,14 @@ public:
         eType = DRW::DIMRADIAL;
     }
 
-    DRW_Coord getCenterPoint() const {return getDefPoint();}   /*!< center point, code 10, 20 & 30 */
+    auto getCenterPoint() const -> DRW_Coord { return getDefPoint(); } /*!< center point, code 10, 20 & 30 */
     void setCenterPoint(const DRW_Coord &p){setDefPoint(p);}
-    DRW_Coord getDiameterPoint() const {return getPt5();}      /*!< Definition point for radius, code 15, 25 & 35 */
+    auto getDiameterPoint() const -> DRW_Coord
+    {
+        return getPt5();
+    } /*!< Definition point for radius, code 15, 25 & 35 */
     void setDiameterPoint(const DRW_Coord &p){setPt5(p);}
-    double getLeaderLength() const {return getRa40();}         /*!< Leader length, code 40 */
+    auto getLeaderLength() const -> double { return getRa40(); } /*!< Leader length, code 40 */
     void setLeaderLength(const double d) {setRa40(d);}
 
 };
@@ -1428,11 +1449,17 @@ public:
         eType = DRW::DIMDIAMETRIC;
     }
 
-    DRW_Coord getDiameter1Point() const {return getPt5();}      /*!< First definition point for diameter, code 15, 25 & 35 */
+    auto getDiameter1Point() const -> DRW_Coord
+    {
+        return getPt5();
+    } /*!< First definition point for diameter, code 15, 25 & 35 */
     void setDiameter1Point(const DRW_Coord &p){setPt5(p);}
-    DRW_Coord getDiameter2Point() const {return getDefPoint();} /*!< Opposite point for diameter, code 10, 20 & 30 */
+    auto getDiameter2Point() const -> DRW_Coord
+    {
+        return getDefPoint();
+    } /*!< Opposite point for diameter, code 10, 20 & 30 */
     void setDiameter2Point(const DRW_Coord &p){setDefPoint(p);}
-    double getLeaderLength() const {return getRa40();}          /*!< Leader length, code 40 */
+    auto getLeaderLength() const -> double { return getRa40(); } /*!< Leader length, code 40 */
     void setLeaderLength(const double d) {setRa40(d);}
 
 };
@@ -1454,15 +1481,18 @@ public:
         eType = DRW::DIMANGULAR;
     }
 
-    DRW_Coord getFirstLine1() const {return getPt3();}       /*!< Definition point line 1-1, code 13, 23 & 33 */
+    auto getFirstLine1() const -> DRW_Coord { return getPt3(); } /*!< Definition point line 1-1, code 13, 23 & 33 */
     void setFirstLine1(const DRW_Coord &p) {setPt3(p);}
-    DRW_Coord getFirstLine2() const {return getPt4();}       /*!< Definition point line 1-2, code 14, 24 & 34 */
+    auto getFirstLine2() const -> DRW_Coord { return getPt4(); } /*!< Definition point line 1-2, code 14, 24 & 34 */
     void setFirstLine2(const DRW_Coord &p) {setPt4(p);}
-    DRW_Coord getSecondLine1() const {return getPt5();}      /*!< Definition point line 2-1, code 15, 25 & 35 */
+    auto getSecondLine1() const -> DRW_Coord { return getPt5(); } /*!< Definition point line 2-1, code 15, 25 & 35 */
     void setSecondLine1(const DRW_Coord &p) {setPt5(p);}
-    DRW_Coord getSecondLine2() const {return getDefPoint();} /*!< Definition point line 2-2, code 10, 20 & 30 */
+    auto getSecondLine2() const -> DRW_Coord
+    {
+        return getDefPoint();
+    } /*!< Definition point line 2-2, code 10, 20 & 30 */
     void setSecondLine2(const DRW_Coord &p){setDefPoint(p);}
-    DRW_Coord getDimPoint() const {return getPt6();}         /*!< Dimension definition point, code 16, 26 & 36 */
+    auto getDimPoint() const -> DRW_Coord { return getPt6(); } /*!< Dimension definition point, code 16, 26 & 36 */
     void setDimPoint(const DRW_Coord &p) {setPt6(p);}
 
 };
@@ -1485,13 +1515,13 @@ public:
         eType = DRW::DIMANGULAR3P;
     }
 
-    DRW_Coord getFirstLine() const {return getPt3();}       /*!< Definition point line 1, code 13, 23 & 33 */
+    auto getFirstLine() const -> DRW_Coord { return getPt3(); } /*!< Definition point line 1, code 13, 23 & 33 */
     void setFirstLine(const DRW_Coord &p) {setPt3(p);}
-    DRW_Coord getSecondLine() const {return getPt4();}       /*!< Definition point line 2, code 14, 24 & 34 */
+    auto getSecondLine() const -> DRW_Coord { return getPt4(); } /*!< Definition point line 2, code 14, 24 & 34 */
     void setSecondLine(const DRW_Coord &p) {setPt4(p);}
-    DRW_Coord getVertexPoint() const {return getPt5();}      /*!< Vertex point, code 15, 25 & 35 */
+    auto getVertexPoint() const -> DRW_Coord { return getPt5(); } /*!< Vertex point, code 15, 25 & 35 */
     void SetVertexPoint(const DRW_Coord &p) {setPt5(p);}
-    DRW_Coord getDimPoint() const {return getDefPoint();}    /*!< Dimension definition point, code 10, 20 & 30 */
+    auto getDimPoint() const -> DRW_Coord { return getDefPoint(); } /*!< Dimension definition point, code 10, 20 & 30 */
     void setDimPoint(const DRW_Coord &p) {setDefPoint(p);}
 
 };
@@ -1514,11 +1544,11 @@ public:
         eType = DRW::DIMORDINATE;
     }
 
-    DRW_Coord getOriginPoint() const {return getDefPoint();}   /*!< Origin definition point, code 10, 20 & 30 */
+    auto getOriginPoint() const -> DRW_Coord { return getDefPoint(); } /*!< Origin definition point, code 10, 20 & 30 */
     void setOriginPoint(const DRW_Coord &p) {setDefPoint(p);}
-    DRW_Coord getFirstLine() const {return getPt3();}          /*!< Feature location point, code 13, 23 & 33 */
+    auto getFirstLine() const -> DRW_Coord { return getPt3(); } /*!< Feature location point, code 13, 23 & 33 */
     void setFirstLine(const DRW_Coord &p) {setPt3(p);}
-    DRW_Coord getSecondLine() const {return getPt4();}         /*!< Leader end point, code 14, 24 & 34 */
+    auto getSecondLine() const -> DRW_Coord { return getPt4(); } /*!< Leader end point, code 14, 24 & 34 */
     void setSecondLine(const DRW_Coord &p) {setPt4(p);}
 
 };
@@ -1560,7 +1590,7 @@ public:
     void applyExtrusion() override {}
 
 protected:
-    bool parseCode(int code, dxfReader *reader) override;
+    auto parseCode(int code, dxfReader *reader) -> bool override;
 
 public:
     UTF8STRING style;          /*!< Dimension style name, code 3 */
@@ -1621,7 +1651,7 @@ public:
     void applyExtrusion() override {}
 
 protected:
-    bool parseCode(int code, dxfReader *reader) override;
+    auto parseCode(int code, dxfReader *reader) -> bool override;
 
 public:
     double pswidth;           /*!< Width in paper space units, code 40 */

@@ -71,7 +71,7 @@ VAbstractSpline::VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint3
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VAbstractSpline::shape() const
+auto VAbstractSpline::shape() const -> QPainterPath
 {
     const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
     const QVector<QPointF> points = curve->GetPoints();
@@ -129,7 +129,7 @@ void VAbstractSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractSpline::getTagName() const
+auto VAbstractSpline::getTagName() const -> QString
 {
     return VAbstractPattern::TagSpline;
 }
@@ -166,7 +166,7 @@ void VAbstractSpline::AllowHover(bool enabled)
     // Manually handle hover events. Need for setting cursor for not selectable paths.
     m_acceptHoverEvents = enabled;
 
-    for (auto point : qAsConst(controlPoints))
+    for (auto *point : qAsConst(controlPoints))
     {
         point->setAcceptHoverEvents(enabled);
     }
@@ -177,14 +177,14 @@ void VAbstractSpline::AllowSelecting(bool enabled)
 {
     setFlag(QGraphicsItem::ItemIsSelectable, enabled);
 
-    for (auto point : qAsConst(controlPoints))
+    for (auto *point : qAsConst(controlPoints))
     {
         point->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractSpline::MakeToolTip() const
+auto VAbstractSpline::MakeToolTip() const -> QString
 {
     const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
 
@@ -249,7 +249,7 @@ void VAbstractSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
  * @param value value.
  * @return value.
  */
-QVariant VAbstractSpline::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+auto VAbstractSpline::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) -> QVariant
 {
     if (change == QGraphicsItem::ItemSelectedHasChanged)
     {
@@ -340,8 +340,8 @@ void VAbstractSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSpline VAbstractSpline::CorrectedSpline(const VSpline &spline, const SplinePointPosition &position,
-                                         const QPointF &pos) const
+auto VAbstractSpline::CorrectedSpline(const VSpline &spline, const SplinePointPosition &position,
+                                      const QPointF &pos) const -> VSpline
 {
     VSpline spl;
     if (position == SplinePointPosition::FirstPoint)
@@ -412,7 +412,7 @@ void VAbstractSpline::CurveSelected(bool selected)
 {
     setSelected(selected);
 
-    for (auto point : qAsConst(controlPoints))
+    for (auto *point : qAsConst(controlPoints))
     {
         point->blockSignals(true);
         point->setSelected(selected);
@@ -430,7 +430,7 @@ void VAbstractSpline::InitDefShape()
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::ShowHandles(bool show)
 {
-    for (auto point : qAsConst(controlPoints))
+    for (auto *point : qAsConst(controlPoints))
     {
         point->setVisible(show);
     }
@@ -438,7 +438,7 @@ void VAbstractSpline::ShowHandles(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractSpline::GetLineColor() const
+auto VAbstractSpline::GetLineColor() const -> QString
 {
     const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
     return curve->GetColor();
@@ -454,7 +454,7 @@ void VAbstractSpline::SetLineColor(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractSpline::GetPenStyle() const
+auto VAbstractSpline::GetPenStyle() const -> QString
 {
     const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
     return curve->GetPenStyle();
@@ -470,25 +470,25 @@ void VAbstractSpline::SetPenStyle(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractSpline::name() const
+auto VAbstractSpline::name() const -> QString
 {
     return ObjectName<VAbstractCurve>(m_id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VAbstractSpline::GetApproximationScale() const
+auto VAbstractSpline::GetApproximationScale() const -> qreal
 {
     return VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id)->GetApproximationScale();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VAbstractSpline::GetDuplicate() const
+auto VAbstractSpline::GetDuplicate() const -> quint32
 {
     return VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id)->GetDuplicate();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractSpline::GetAliasSuffix() const
+auto VAbstractSpline::GetAliasSuffix() const -> QString
 {
     return ObjectAliasSuffix<VAbstractCurve>(m_id);
 }
@@ -530,7 +530,7 @@ VToolAbstractArc::VToolAbstractArc(VAbstractPattern *doc, VContainer *data, quin
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolAbstractArc::CenterPointName() const
+auto VToolAbstractArc::CenterPointName() const -> QString
 {
     QSharedPointer<VAbstractArc> arc = VAbstractTool::data.GeometricObject<VAbstractArc>(m_id);
     SCASSERT(arc.isNull() == false)

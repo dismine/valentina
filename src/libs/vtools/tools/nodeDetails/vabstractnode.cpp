@@ -123,7 +123,7 @@ void VAbstractNode::decrementReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-ParentType VAbstractNode::GetParentType() const
+auto VAbstractNode::GetParentType() const -> ParentType
 {
     return parentType;
 }
@@ -142,7 +142,7 @@ void VAbstractNode::GroupVisibility(quint32 object, bool visible)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VAbstractNode::IsExluded() const
+auto VAbstractNode::IsExluded() const -> bool
 {
     return m_exluded;
 }

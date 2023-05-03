@@ -58,73 +58,74 @@ public:
 
     virtual ~VMeasurement() override;
 
-    VMeasurement &operator=(const VMeasurement &m);
+    auto operator=(const VMeasurement &m) -> VMeasurement &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VMeasurement(VMeasurement &&m) Q_DECL_NOTHROW;
-    VMeasurement &operator=(VMeasurement &&m) Q_DECL_NOTHROW;
+    auto operator=(VMeasurement &&m) Q_DECL_NOTHROW->VMeasurement &;
 #endif
 
-    QString GetGuiText() const;
+    auto GetGuiText() const -> QString;
     void    SetGuiText(const QString &guiText);
 
-    QString GetFormula() const;
+    auto GetFormula() const -> QString;
 
-    bool    IsCustom() const;
+    auto IsCustom() const -> bool;
 
-    int     Index() const;
-    bool    IsFormulaOk() const;
+    auto Index() const -> int;
+    auto IsFormulaOk() const -> bool;
 
-    MeasurementType GetMeasurementType() const;
+    auto GetMeasurementType() const -> MeasurementType;
 
-    virtual bool IsNotUsed() const override;
+    virtual auto IsNotUsed() const -> bool override;
 
-    virtual qreal  GetValue() const override;
-    virtual qreal* GetValue() override;
+    virtual auto GetValue() const -> qreal override;
+    virtual auto GetValue() -> qreal * override;
 
-    VContainer *GetData();
+    auto GetData() -> VContainer *;
 
     void SetBaseA(qreal base);
     void SetBaseB(qreal base);
     void SetBaseC(qreal base);
 
-    qreal GetBase() const;
+    auto GetBase() const -> qreal;
     void  SetBase(qreal value);
 
-    qreal GetShiftA() const;
+    auto GetShiftA() const -> qreal;
     void  SetShiftA(qreal value);
 
-    qreal GetShiftB() const;
+    auto GetShiftB() const -> qreal;
     void  SetShiftB(qreal value);
 
-    qreal GetShiftC() const;
+    auto GetShiftC() const -> qreal;
     void  SetShiftC(qreal value);
 
-    qreal GetStepA() const;
+    auto GetStepA() const -> qreal;
     void  SetStepA(qreal value);
 
-    qreal GetStepB() const;
+    auto GetStepB() const -> qreal;
     void  SetStepB(qreal value);
 
-    qreal GetStepC() const;
+    auto GetStepC() const -> qreal;
     void  SetStepC(qreal value);
 
-    bool IsSpecialUnits() const;
+    auto IsSpecialUnits() const -> bool;
     void SetSpecialUnits(bool special);
 
-    IMD  GetDimension() const;
+    auto GetDimension() const -> IMD;
     void SetDimension(IMD type);
 
-    qreal GetCorrection(qreal baseA, qreal baseB, qreal baseC) const;
+    auto GetCorrection(qreal baseA, qreal baseB, qreal baseC) const -> qreal;
 
-    QMap<QString, qreal> GetCorrections() const;
+    auto GetCorrections() const -> QMap<QString, qreal>;
     void  SetCorrections(const QMap<QString, qreal> &corrections);
 
-    static QString CorrectionHash(qreal baseA, qreal baseB=0, qreal baseC=0);
+    static auto CorrectionHash(qreal baseA, qreal baseB = 0, qreal baseC = 0) -> QString;
+
 private:
     QSharedDataPointer<VMeasurementData> d;
 
-    qreal CalcValue() const;
-    qreal Correction() const;
+    auto CalcValue() const -> qreal;
+    auto Correction() const -> qreal;
 };
 
 Q_DECLARE_TYPEINFO(VMeasurement, Q_MOVABLE_TYPE); // NOLINT

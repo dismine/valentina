@@ -52,7 +52,7 @@ public:
 
     virtual void ToolSelectionType(const SelectionType &type);
 
-    GOType GetType() const;
+    auto GetType() const -> GOType;
     void   SetType(const GOType &value);
 
 signals:

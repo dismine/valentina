@@ -61,16 +61,16 @@ public:
 protected:
     void Save() override;
 
-    virtual unsigned MinVer() const override;
-    virtual unsigned MaxVer() const override;
+    virtual auto MinVer() const -> unsigned override;
+    virtual auto MaxVer() const -> unsigned override;
 
-    virtual QString MinVerStr() const override;
-    virtual QString MaxVerStr() const override;
+    virtual auto MinVerStr() const -> QString override;
+    virtual auto MaxVerStr() const -> QString override;
 
     virtual void ApplyPatches() override;
     virtual void DowngradeToCurrentMaxVersion() override;
 
-    virtual bool IsReadOnly() const override;
+    virtual auto IsReadOnly() const -> bool override;
 
     auto Schemas() const -> QHash <unsigned, QString> override;
 
@@ -101,8 +101,8 @@ private:
 
     void          RemoveColorToolCutV0_3_1();
 
-    QSet<QString> FixIncrementsToV0_2_0();
-    QString       FixIncrementInFormulaToV0_2_0(const QString &formula, const QSet<QString> &names);
+    auto FixIncrementsToV0_2_0() -> QSet<QString>;
+    auto FixIncrementInFormulaToV0_2_0(const QString &formula, const QSet<QString> &names) -> QString;
     void          FixPointExpressionsToV0_2_0(const QSet<QString> &names);
     void          FixArcExpressionsToV0_2_0(const QSet<QString> &names);
     void          FixPathPointExpressionsToV0_2_0(const QSet<QString> &names);
@@ -110,18 +110,18 @@ private:
     void    ConvertPointExpressionsToV0_2_0(const QMap<QString, QString> &names);
     void    ConvertArcExpressionsToV0_2_0(const QMap<QString, QString> &names);
     void    ConvertPathPointExpressionsToV0_2_0(const QMap<QString, QString> &names);
-    QString FixMeasurementInFormulaToV0_2_0(const QString &formula, const QMap<QString, QString> &names);
+    auto FixMeasurementInFormulaToV0_2_0(const QString &formula, const QMap<QString, QString> &names) -> QString;
 
-    QString MUnitV0_1_4() const;
-    QDomElement TagMeasurementsV0_1_4() const;
-    QDomElement TagIncrementsV0_1_4() const;
+    auto MUnitV0_1_4() const -> QString;
+    auto TagMeasurementsV0_1_4() const -> QDomElement;
+    auto TagIncrementsV0_1_4() const -> QDomElement;
 
     void FixToolUnionToV0_2_4();
     void ParseModelingToV0_2_4(const QDomElement &modeling);
     void SaveChildrenToolUnionToV0_2_4(quint32 id, const QVector<quint32> &children);
 
-    static QMap<QString, QString> OldNamesToNewNames_InV0_2_0();
-    static QMap<QString, QString> OldNamesToNewNames_InV0_2_1();
+    static auto OldNamesToNewNames_InV0_2_0() -> QMap<QString, QString>;
+    static auto OldNamesToNewNames_InV0_2_1() -> QMap<QString, QString>;
 
     void FixCutPoint();
     void FixSubPaths(int i, quint32 id, quint32 baseCurve);
@@ -129,12 +129,12 @@ private:
     void TagRemoveAttributeTypeObjectInV0_4_0();
     void TagDetailToV0_4_0();
     void TagUnionDetailsToV0_4_0();
-    QDomElement GetUnionDetailNodesV0_4_0(const QDomElement &detail);
-    QDomElement GetUnionChildrenNodesV0_4_0(const QDomElement &detail);
+    auto GetUnionDetailNodesV0_4_0(const QDomElement &detail) -> QDomElement;
+    auto GetUnionChildrenNodesV0_4_0(const QDomElement &detail) -> QDomElement;
 
     void LabelTagToV0_4_4(const QString &tagName);
 
-    QDomElement AddTagPatternLabelV0_5_1();
+    auto AddTagPatternLabelV0_5_1() -> QDomElement;
     void PortPatternLabeltoV0_6_0(QDomElement &label);
     void AddLabelTemplateLineV0_6_0(QDomElement &label, const QString &text, bool bold, bool italic, int alignment,
                                     int fontSizeIncrement);
@@ -155,25 +155,25 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline unsigned VPatternConverter::MinVer() const
+inline auto VPatternConverter::MinVer() const -> unsigned
 {
     return PatternMinVer;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline unsigned VPatternConverter::MaxVer() const
+inline auto VPatternConverter::MaxVer() const -> unsigned
 {
     return PatternMaxVer;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString VPatternConverter::MinVerStr() const
+inline auto VPatternConverter::MinVerStr() const -> QString
 {
     return PatternMinVerStr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString VPatternConverter::MaxVerStr() const
+inline auto VPatternConverter::MaxVerStr() const -> QString
 {
     return PatternMaxVerStr;
 }

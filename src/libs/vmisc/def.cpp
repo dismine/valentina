@@ -66,7 +66,7 @@
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
 //---------------------------------------------------------------------------------------------------------------------
-QPixmap QPixmapFromCache(const QString &pixmapPath)
+auto QPixmapFromCache(const QString &pixmapPath) -> QPixmap
 {
     QPixmap pixmap;
 
@@ -93,7 +93,7 @@ void SetItemOverrideCursor(QGraphicsItem *item, const QString &pixmapPath, int h
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList SupportedLocales()
+auto SupportedLocales() -> QStringList
 {
     return QStringList
     {
@@ -124,13 +124,13 @@ QStringList SupportedLocales()
  * @param fullFileName full path to the file.
  * @return file name.
  */
-QString StrippedName(const QString &fullFileName)
+auto StrippedName(const QString &fullFileName) -> QString
 {
     return QFileInfo(fullFileName).fileName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString RelativeMPath(const QString &patternPath, const QString &absoluteMPath)
+auto RelativeMPath(const QString &patternPath, const QString &absoluteMPath) -> QString
 {
     if (patternPath.isEmpty() || absoluteMPath.isEmpty())
     {
@@ -146,7 +146,7 @@ QString RelativeMPath(const QString &patternPath, const QString &absoluteMPath)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath)
+auto AbsoluteMPath(const QString &patternPath, const QString &relativeMPath) -> QString
 {
     if (patternPath.isEmpty() || relativeMPath.isEmpty())
     {
@@ -162,7 +162,7 @@ QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMarginsF GetMinPrinterFields(const QSharedPointer<QPrinter> &printer)
+auto GetMinPrinterFields(const QSharedPointer<QPrinter> &printer) -> QMarginsF
 {
     QPageLayout layout = printer->pageLayout();
     layout.setUnits(QPageLayout::Millimeter);
@@ -196,7 +196,7 @@ auto GetPrinterFields(const QSharedPointer<QPrinter> &printer) -> QMarginsF
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPixmap darkenPixmap(const QPixmap &pixmap)
+auto darkenPixmap(const QPixmap &pixmap) -> QPixmap
 {
     QImage img = pixmap.toImage().convertToFormat(QImage::Format_ARGB32);
     const int imgh = img.height();
@@ -265,7 +265,7 @@ void ShowInGraphicalShell(const QString &filePath)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool IsOptionSet(int argc, char *argv[], const char *option)
+auto IsOptionSet(int argc, char *argv[], const char *option) -> bool
 {
     for (int i = 1; i < argc; ++i)
     {
@@ -327,7 +327,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, strUMark, (QLatin1String("uMark"))) // 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strBoxMark, (QLatin1String("boxMark"))) // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
-QString PassmarkLineTypeToString(PassmarkLineType type)
+auto PassmarkLineTypeToString(PassmarkLineType type) -> QString
 {
     switch(type)
     {
@@ -355,7 +355,7 @@ QString PassmarkLineTypeToString(PassmarkLineType type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PassmarkLineType StringToPassmarkLineType(const QString &value)
+auto StringToPassmarkLineType(const QString &value) -> PassmarkLineType
 {
     const QStringList values{strOne, strTwo, strThree, *strTMark, *strVMark, *strVMark2, *strUMark, *strBoxMark};
 
@@ -384,7 +384,7 @@ PassmarkLineType StringToPassmarkLineType(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString PassmarkAngleTypeToString(PassmarkAngleType type)
+auto PassmarkAngleTypeToString(PassmarkAngleType type) -> QString
 {
     switch(type)
     {
@@ -412,7 +412,7 @@ QString PassmarkAngleTypeToString(PassmarkAngleType type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PassmarkAngleType StringToPassmarkAngleType(const QString &value)
+auto StringToPassmarkAngleType(const QString &value) -> PassmarkAngleType
 {
     const QStringList values = QStringList() << strStraightforward
                                              << strBisector
@@ -449,7 +449,7 @@ PassmarkAngleType StringToPassmarkAngleType(const QString &value)
 
 
 //---------------------------------------------------------------------------------------------------------------------
-Unit StrToUnits(const QString &unit)
+auto StrToUnits(const QString &unit) -> Unit
 {
     const QStringList units = QStringList() << unitMM << unitCM << unitINCH << unitPX;
     Unit result = Unit::Cm;
@@ -481,7 +481,7 @@ Unit StrToUnits(const QString &unit)
  * @param translate true if need show translated name. Default value false.
  * @return string reprezantation for unit.
  */
-QString UnitsToStr(const Unit &unit, const bool translate)
+auto UnitsToStr(const Unit &unit, const bool translate) -> QString
 {
     QString result;
     switch (unit)
@@ -574,7 +574,7 @@ const quint16 CustomSARecord::classVersion = 1;
 
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream &operator<<(QDataStream &out, const CustomSARecord &record)
+auto operator<<(QDataStream &out, const CustomSARecord &record) -> QDataStream &
 {
     out << CustomSARecord::streamHeader << CustomSARecord::classVersion;
 
@@ -591,7 +591,7 @@ QDataStream &operator<<(QDataStream &out, const CustomSARecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream &operator>>(QDataStream &in, CustomSARecord &record)
+auto operator>>(QDataStream &in, CustomSARecord &record) -> QDataStream &
 {
     quint32 actualStreamHeader = 0;
     in >> actualStreamHeader;
@@ -631,7 +631,7 @@ QDataStream &operator>>(QDataStream &in, CustomSARecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString IncrementTypeToString(IncrementType type)
+auto IncrementTypeToString(IncrementType type) -> QString
 {
     switch(type)
     {
@@ -647,7 +647,7 @@ QString IncrementTypeToString(IncrementType type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-IncrementType StringToIncrementType(const QString &value)
+auto StringToIncrementType(const QString &value) -> IncrementType
 {
     const QStringList values { strTypeIncrement, strTypeSeparator };
 
@@ -664,7 +664,7 @@ IncrementType StringToIncrementType(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString MeasurementTypeToString(MeasurementType type)
+auto MeasurementTypeToString(MeasurementType type) -> QString
 {
     switch(type)
     {
@@ -680,7 +680,7 @@ QString MeasurementTypeToString(MeasurementType type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-MeasurementType StringToMeasurementType(const QString &value)
+auto StringToMeasurementType(const QString &value) -> MeasurementType
 {
     const QStringList values { strTypeMeasurement, strTypeSeparator };
 
@@ -697,7 +697,7 @@ MeasurementType StringToMeasurementType(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList SplitFilePaths(const QString &path)
+auto SplitFilePaths(const QString &path) -> QStringList
 {
     QStringList result;
     QString subPath = QDir::cleanPath(path);

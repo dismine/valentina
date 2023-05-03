@@ -96,8 +96,8 @@ void VToolEndLine::SetDialog()
  * @param data container with variables.
  * @return the created tool
  */
-VToolEndLine* VToolEndLine::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                   VContainer *data)
+auto VToolEndLine::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                          VContainer *data) -> VToolEndLine *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogEndLine> dialogTool = qobject_cast<DialogEndLine *>(dialog);
@@ -130,7 +130,7 @@ VToolEndLine* VToolEndLine::Create(const QPointer<DialogTool> &dialog, VMainGrap
  * @brief Create help create tool.
  * @param initData init data.
  */
-VToolEndLine* VToolEndLine::Create(VToolEndLineInitData &initData)
+auto VToolEndLine::Create(VToolEndLineInitData &initData) -> VToolEndLine *
 {
     const QSharedPointer<VPointF> basePoint = initData.data->GeometricObject<VPointF>(initData.basePointId);
     QLineF line = QLineF(static_cast<QPointF>(*basePoint), QPointF(basePoint->x()+100, basePoint->y()));
@@ -238,7 +238,7 @@ void VToolEndLine::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolEndLine::GetFormulaAngle() const
+auto VToolEndLine::GetFormulaAngle() const -> VFormula
 {
     VFormula fAngle(formulaAngle, getData());
     fAngle.setCheckZero(false);

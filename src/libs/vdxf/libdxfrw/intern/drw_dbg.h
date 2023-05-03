@@ -43,8 +43,8 @@ public:
      * is required.
      */
     void setCustomDebugPrinter(std::unique_ptr<DRW::DebugPrinter> printer);
-    Level getLevel() const;
-    static DRW_dbg *getInstance();
+    auto getLevel() const -> Level;
+    static auto getInstance() -> DRW_dbg *;
     void print(const std::string &s);
     void print(signed char i);
     void print(unsigned char i);

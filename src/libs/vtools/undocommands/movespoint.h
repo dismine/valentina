@@ -48,11 +48,11 @@ public:
     virtual ~MoveSPoint() override;
     virtual void undo() override;
     virtual void redo() override;
-    virtual bool mergeWith(const QUndoCommand *command) override;
-    virtual int  id() const override;
-    quint32      getSPointId() const;
-    double       getNewX() const;
-    double       getNewY() const;
+    virtual auto mergeWith(const QUndoCommand *command) -> bool override;
+    virtual auto id() const -> int override;
+    auto getSPointId() const -> quint32;
+    auto getNewX() const -> double;
+    auto getNewY() const -> double;
     void         Do(double x, double y);
 private:
     // cppcheck-suppress unknownMacro
@@ -65,19 +65,19 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline quint32 MoveSPoint::getSPointId() const
+inline auto MoveSPoint::getSPointId() const -> quint32
 {
     return nodeId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline double MoveSPoint::getNewX() const
+inline auto MoveSPoint::getNewX() const -> double
 {
     return newX;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline double MoveSPoint::getNewY() const
+inline auto MoveSPoint::getNewY() const -> double
 {
     return newY;
 }

@@ -47,7 +47,7 @@ class VTextBlockData final : public QTextBlockUserData
 public:
     VTextBlockData();
 
-    QVector<ParenthesisInfo *> Parentheses();
+    auto Parentheses() -> QVector<ParenthesisInfo *>;
     void insert(ParenthesisInfo *info);
 
 private:

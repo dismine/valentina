@@ -63,12 +63,12 @@ public:
 
     void EnableApply(bool enable);
 
-    VPiece GetPiece() const;
+    auto GetPiece() const -> VPiece;
     void   SetPiece(const VPiece &piece);
 
-    QString GetFormulaSAWidth() const;
+    auto GetFormulaSAWidth() const -> QString;
 
-    QVector<QPointer<VUndoCommand> > &UndoStack();
+    auto UndoStack() -> QVector<QPointer<VUndoCommand>> &;
 
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) override;
@@ -81,7 +81,7 @@ protected:
     virtual void closeEvent(QCloseEvent *event) override;
     virtual void showEvent( QShowEvent *event ) override;
     virtual void resizeEvent(QResizeEvent *event) override;
-    virtual bool IsValid() const final;
+    virtual auto IsValid() const -> bool final;
     virtual void SetPatternDoc(VAbstractPattern *doc) final;
 
 private slots:
@@ -248,20 +248,20 @@ private:
 
     QMap<QString, QPair<QString, QString>> m_gradationPlaceholders{};
 
-    VPiece CreatePiece() const;
+    auto CreatePiece() const -> VPiece;
 
     void    NewMainPathItem(const VPieceNode &node);
-    QString GetPathName(quint32 path, bool reverse = false) const;
-    bool    MainPathIsValid() const;
+    auto GetPathName(quint32 path, bool reverse = false) const -> QString;
+    auto MainPathIsValid() const -> bool;
     void    ValidObjects(bool value);
-    bool    MainPathIsClockwise() const;
+    auto MainPathIsClockwise() const -> bool;
     void    UpdateCurrentCustomSARecord();
     void    UpdateCurrentInternalPathRecord();
     void    UpdateCurrentPlaceLabelRecords();
 
-    QListWidgetItem *GetItemById(quint32 id);
+    auto GetItemById(quint32 id) -> QListWidgetItem *;
 
-    quint32 GetLastId() const;
+    auto GetLastId() const -> quint32;
 
     void SetCurrentSABefore(const QString &formula);
     void SetCurrentSAAfter(const QString &formula);
@@ -302,13 +302,13 @@ private:
     void SetPLHeight(QString heightFormula);
     void SetPLAngle(QString angleFormula);
 
-    QRectF CurrentRect() const;
+    auto CurrentRect() const -> QRectF;
     void ShowPieceSpecialPointsWithRect(const QListWidget *list, bool showRect);
 
-    VPiecePath      CurrentPath(quint32 id) const;
-    VPlaceLabelItem CurrentPlaceLabel(quint32 id) const;
+    auto CurrentPath(quint32 id) const -> VPiecePath;
+    auto CurrentPlaceLabel(quint32 id) const -> VPlaceLabelItem;
 
-    QString GetDefaultPieceName() const;
+    auto GetDefaultPieceName() const -> QString;
 
     void EnableGrainlineFormulaControls(bool enable);
     void EnableDetailLabelFormulaControls(bool enable);
@@ -323,7 +323,7 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogSeamAllowance::IsValid() const
+inline auto DialogSeamAllowance::IsValid() const -> bool
 {
     return flagName && flagUUID && flagMainPathIsValid && flagFormula && flagFormulaBefore && flagFormulaAfter
             && (flagGFormulas || flagGPin) && flagDLAngle && (flagDLFormulas || flagDPin) && flagPLAngle

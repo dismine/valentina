@@ -52,25 +52,21 @@ namespace bpstd {
   /// \tparam T the type to forward
   /// \param t the reference
   /// \return the forwarded reference
-  template <typename T>
-  constexpr T&& forward(typename std::remove_reference<T>::type& t) noexcept;
-  template <typename T>
-  constexpr T&& forward(typename std::remove_reference<T>::type&& t) noexcept;
-  /// \}
+template <typename T> constexpr auto forward(typename std::remove_reference<T>::type &t) noexcept -> T &&;
+template <typename T> constexpr auto forward(typename std::remove_reference<T>::type &&t) noexcept -> T &&;
+/// \}
 
-  /// \brief Casts \p x to an rvalue
-  ///
-  /// \param x the parameter to move
-  /// \return rvalue reference to \p x
-  template <typename T>
-  constexpr T&& move(T& x) noexcept;
+/// \brief Casts \p x to an rvalue
+///
+/// \param x the parameter to move
+/// \return rvalue reference to \p x
+template <typename T> constexpr auto move(T &x) noexcept -> T &&;
 
-  /// \brief Casts \p x to an rvalue
-  ///
-  /// \param x the parameter to move
-  /// \return rvalue reference to \p x
-  template <typename T>
-  constexpr typename std::remove_reference<T>::type&& move(T&& x) noexcept;
+/// \brief Casts \p x to an rvalue
+///
+/// \param x the parameter to move
+/// \return rvalue reference to \p x
+template <typename T> constexpr auto move(T &&x) noexcept -> typename std::remove_reference<T>::type &&;
 
 } // namespace bpstd
 
@@ -79,33 +75,26 @@ namespace bpstd {
 //------------------------------------------------------------------------------
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-T&& bpstd::forward(typename std::remove_reference<T>::type& t)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::forward(typename std::remove_reference<T>::type &t) noexcept
+    -> T &&
 {
   return static_cast<T&&>(t);
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-T&& bpstd::forward(typename std::remove_reference<T>::type&& t)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::forward(typename std::remove_reference<T>::type &&t) noexcept
+    -> T &&
 {
   return static_cast<T&&>(t);
 }
 
-template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-T&& bpstd::move(T& x)
-  noexcept
+template <typename T> inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::move(T &x) noexcept -> T &&
 {
   return static_cast<T&&>(x);
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-typename std::remove_reference<T>::type&& bpstd::move(T&& x)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::move(T &&x) noexcept -> typename std::remove_reference<T>::type &&
 {
   return static_cast<T&&>(x);
 }

@@ -40,7 +40,7 @@ VAbstractFloatItemData::VAbstractFloatItemData(const VAbstractFloatItemData &dat
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractFloatItemData &VAbstractFloatItemData::operator=(const VAbstractFloatItemData &data)
+auto VAbstractFloatItemData::operator=(const VAbstractFloatItemData &data) -> VAbstractFloatItemData &
 {
     if ( &data == this )
     {
@@ -57,7 +57,7 @@ VAbstractFloatItemData::VAbstractFloatItemData(VAbstractFloatItemData &&data) Q_
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractFloatItemData &VAbstractFloatItemData::operator=(VAbstractFloatItemData &&data) Q_DECL_NOTHROW
+auto VAbstractFloatItemData::operator=(VAbstractFloatItemData &&data) Q_DECL_NOTHROW->VAbstractFloatItemData &
 {
     std::swap(d, data.d);
     return *this;
@@ -69,7 +69,7 @@ VAbstractFloatItemData::~VAbstractFloatItemData()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VAbstractFloatItemData::GetPos() const
+auto VAbstractFloatItemData::GetPos() const -> QPointF
 {
     return d->m_ptPos;
 }
@@ -81,7 +81,7 @@ void VAbstractFloatItemData::SetPos(const QPointF &ptPos)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VAbstractFloatItemData::IsVisible() const
+auto VAbstractFloatItemData::IsVisible() const -> bool
 {
     return d->m_bVisible;
 }

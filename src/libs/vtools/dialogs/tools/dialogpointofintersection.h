@@ -53,17 +53,17 @@ public:
     DialogPointOfIntersection(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogPointOfIntersection() override;
 
-    QString        GetPointName() const;
+    auto GetPointName() const -> QString;
     void           SetPointName(const QString &value);
 
-    quint32        GetFirstPointId() const;
+    auto GetFirstPointId() const -> quint32;
     void           SetFirstPointId(quint32 value);
 
-    quint32        GetSecondPointId() const;
+    auto GetSecondPointId() const -> quint32;
     void           SetSecondPointId(quint32 value);
 
     void    SetNotes(const QString &notes);
-    QString GetNotes() const;
+    auto GetNotes() const -> QString;
 public slots:
     virtual void   ChosenObject(quint32 id, const SceneObject &type) override;
     virtual void   PointNameChanged() override;
@@ -73,7 +73,8 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     virtual void   SaveData() override;
-    virtual bool   IsValid() const final;
+    virtual auto IsValid() const -> bool final;
+
 private:
     Q_DISABLE_COPY_MOVE(DialogPointOfIntersection) // NOLINT
 
@@ -90,7 +91,7 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogPointOfIntersection::IsValid() const
+inline auto DialogPointOfIntersection::IsValid() const -> bool
 {
     return flagName && flagError;
 }

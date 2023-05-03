@@ -48,7 +48,7 @@ const quint32 VRawLayoutData::streamHeader = 0x8B0E8A27; // CRC-32Q string "VRaw
 const quint16 VRawLayoutData::classVersion = 1;
 
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream &operator<<(QDataStream &dataStream, const VRawLayoutData &data)
+auto operator<<(QDataStream &dataStream, const VRawLayoutData &data) -> QDataStream &
 {
     dataStream << VRawLayoutData::streamHeader << VRawLayoutData::classVersion;
 
@@ -61,7 +61,7 @@ QDataStream &operator<<(QDataStream &dataStream, const VRawLayoutData &data)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream &operator>>(QDataStream &dataStream, VRawLayoutData &data)
+auto operator>>(QDataStream &dataStream, VRawLayoutData &data) -> QDataStream &
 {
     quint32 actualStreamHeader = 0;
     dataStream >> actualStreamHeader;
@@ -101,7 +101,7 @@ VRawLayout::VRawLayout()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VRawLayout::WriteFile(QIODevice *ioDevice, const VRawLayoutData &data)
+auto VRawLayout::WriteFile(QIODevice *ioDevice, const VRawLayoutData &data) -> bool
 {
     SCASSERT(ioDevice != nullptr)
     m_errorString.clear();
@@ -124,17 +124,15 @@ bool VRawLayout::WriteFile(QIODevice *ioDevice, const VRawLayoutData &data)
         }
         return true;
     }
-    else
-    {
-        m_errorString = ioDevice->errorString();
-        return false;
-    }
+
+    m_errorString = ioDevice->errorString();
+    return false;
 
     return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VRawLayout::ReadFile(QIODevice *ioDevice, VRawLayoutData &data)
+auto VRawLayout::ReadFile(QIODevice *ioDevice, VRawLayoutData &data) -> bool
 {
     SCASSERT(ioDevice != nullptr)
     m_errorString.clear();
@@ -197,17 +195,15 @@ bool VRawLayout::ReadFile(QIODevice *ioDevice, VRawLayoutData &data)
 
         return true;
     }
-    else
-    {
-        m_errorString = ioDevice->errorString();
-        return false;
-    }
+
+    m_errorString = ioDevice->errorString();
+    return false;
 
     return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VRawLayout::WriteFile(const QString &filePath, const VRawLayoutData &data)
+auto VRawLayout::WriteFile(const QString &filePath, const VRawLayoutData &data) -> bool
 {
     QFile file(filePath);
     if (file.open(QIODevice::WriteOnly | QIODevice::Truncate))
@@ -219,15 +215,13 @@ bool VRawLayout::WriteFile(const QString &filePath, const VRawLayoutData &data)
                                      });
         return WriteFile(&file, data);
     }
-    else
-    {
-        m_errorString = file.errorString();
-        return false;
-    }
+
+    m_errorString = file.errorString();
+    return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VRawLayout::ReadFile(const QString &filePath, VRawLayoutData &data)
+auto VRawLayout::ReadFile(const QString &filePath, VRawLayoutData &data) -> bool
 {
     QFile file(filePath);
     if (file.open(QIODevice::ReadOnly))
@@ -239,9 +233,8 @@ bool VRawLayout::ReadFile(const QString &filePath, VRawLayoutData &data)
                                      });
         return ReadFile(&file, data);
     }
-    else
-    {
-        m_errorString = file.errorString();
-        return false;
-    }
+
+    m_errorString = file.errorString();
+    return false;
+   
 }

@@ -98,15 +98,15 @@ class dx_iface final : public DRW_Interface
 public:
     dx_iface(const std::string& file, DRW::Version v, VarMeasurement varMeasurement, VarInsunits varInsunits);
     virtual ~dx_iface();
-    bool fileExport(bool binary);
+    auto fileExport(bool binary) -> bool;
     void writeEntity(DRW_Entity* e);
 
     void AddXSpaceBlock(bool add) {dxfW->AddXSpaceBlock(add);}
 
-    std::string ErrorString() const;
+    auto ErrorString() const -> std::string;
 
-//reimplement virtual DRW_Interface functions
-//writer part, send all in class dx_data to writer
+    // reimplement virtual DRW_Interface functions
+    // writer part, send all in class dx_data to writer
     virtual void writeHeader(DRW_Header& data) override;
     virtual void writeBlocks() override;
     //only send the name, needed by the reader to prepare handles of blocks & blockRecords
@@ -122,7 +122,7 @@ public:
     virtual void writeAppId() override;
 
     void AddEntity(DRW_Entity* e);
-    UTF8STRING AddFont(const QFont &f);
+    auto AddFont(const QFont &f) -> UTF8STRING;
     void AddBlock(dx_ifaceBlock* block);
 
     void AddQtLTypes();
@@ -143,7 +143,7 @@ private:
     void InitVPorts();
     void InitAppId();
 
-    static std::string LocaleToISO();
+    static auto LocaleToISO() -> std::string;
 };
 
 #endif // DX_IFACE_H

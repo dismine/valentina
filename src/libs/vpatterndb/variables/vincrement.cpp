@@ -59,7 +59,7 @@ VIncrement::VIncrement(const VIncrement &incr)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VIncrement &VIncrement::operator=(const VIncrement &incr)
+auto VIncrement::operator=(const VIncrement &incr) -> VIncrement &
 {
     if ( &incr == this )
     {
@@ -77,7 +77,7 @@ VIncrement::VIncrement(VIncrement &&incr) Q_DECL_NOTHROW
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VIncrement &VIncrement::operator=(VIncrement &&incr) Q_DECL_NOTHROW
+auto VIncrement::operator=(VIncrement &&incr) Q_DECL_NOTHROW->VIncrement &
 {
     VVariable::operator=(incr);
     std::swap(d, incr.d);
@@ -95,7 +95,7 @@ VIncrement::~VIncrement()
  * using.
  * @return index
  */
-quint32 VIncrement::GetIndex() const
+auto VIncrement::GetIndex() const -> quint32
 {
     return d->index;
 }
@@ -109,13 +109,13 @@ void VIncrement::SetFormula(qreal base, const QString &formula, bool ok)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VIncrement::GetFormula() const
+auto VIncrement::GetFormula() const -> QString
 {
     return d->formula;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VIncrement::IsFormulaOk() const
+auto VIncrement::IsFormulaOk() const -> bool
 {
     return d->formulaOk;
 }
@@ -127,19 +127,19 @@ void VIncrement::SetIndex(quint32 index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VContainer *VIncrement::GetData()
+auto VIncrement::GetData() -> VContainer *
 {
     return d->data.data();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-IncrementType VIncrement::GetIncrementType() const
+auto VIncrement::GetIncrementType() const -> IncrementType
 {
     return d->incrType;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VIncrement::IsPreviewCalculation() const
+auto VIncrement::IsPreviewCalculation() const -> bool
 {
     return d->previewCalculation;
 }
@@ -151,7 +151,7 @@ void VIncrement::SetPreviewCalculation(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VIncrement::IsSpecialUnits() const
+auto VIncrement::IsSpecialUnits() const -> bool
 {
     return d->specialUnits;
 }

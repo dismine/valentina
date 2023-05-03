@@ -21,16 +21,16 @@ class DRW_TextCodec
 {
 public:
     DRW_TextCodec();
-    std::string fromUtf8(const std::string &s);
-    std::string toUtf8(const std::string &s);
-    int getVersion() const {return version;}
+    auto fromUtf8(const std::string &s) -> std::string;
+    auto toUtf8(const std::string &s) -> std::string;
+    auto getVersion() const -> int { return version; }
     void setVersion(const std::string &v, bool dxfFormat);
     void setVersion(DRW::Version v, bool dxfFormat);
     void setCodePage(const std::string &c, bool dxfFormat);
-    std::string getCodePage() const {return cp;}
+    auto getCodePage() const -> std::string { return cp; }
 
-    static QMap<QString, QStringList> DXFCodePageMap();
-    static VTextCodec* CodecForName(const QString &name);
+    static auto DXFCodePageMap() -> QMap<QString, QStringList>;
+    static auto CodecForName(const QString &name) -> VTextCodec *;
 
 private:
     static auto correctCodePage(const std::string& s) -> std::string;

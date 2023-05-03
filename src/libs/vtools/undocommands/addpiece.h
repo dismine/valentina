@@ -62,7 +62,7 @@ private:
     VMainGraphicsScene          *m_scene;
     VContainer                   m_data;
 
-    QDomElement GetDetailsSection() const;
+    auto GetDetailsSection() const -> QDomElement;
 };
 
 #endif // ADDPIECE_H

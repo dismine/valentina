@@ -40,7 +40,7 @@ const quint16 VLayoutPassmark::classVersion = 1;
 
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream &operator<<(QDataStream &dataStream, const VLayoutPassmark &data)
+auto operator<<(QDataStream &dataStream, const VLayoutPassmark &data) -> QDataStream &
 {
     dataStream << VLayoutPassmark::streamHeader << VLayoutPassmark::classVersion;
 
@@ -56,7 +56,7 @@ QDataStream &operator<<(QDataStream &dataStream, const VLayoutPassmark &data)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream &operator>>(QDataStream &dataStream, VLayoutPassmark &data)
+auto operator>>(QDataStream &dataStream, VLayoutPassmark &data) -> QDataStream &
 {
     quint32 actualStreamHeader = 0;
     dataStream >> actualStreamHeader;

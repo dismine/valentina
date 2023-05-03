@@ -48,9 +48,9 @@ public:
     explicit VAbstractConverter(const QString &fileName);
     virtual ~VAbstractConverter() = default;
 
-    QString Convert();
+    auto Convert() -> QString;
 
-    unsigned GetCurrentFormatVersion() const;
+    auto GetCurrentFormatVersion() const -> unsigned;
 
 protected:
     unsigned m_ver;
@@ -62,17 +62,17 @@ protected:
     virtual void Save();
     virtual void SetVersion(const QString &version);
 
-    virtual unsigned MinVer() const =0;
-    virtual unsigned MaxVer() const =0;
+    virtual auto MinVer() const -> unsigned = 0;
+    virtual auto MaxVer() const -> unsigned = 0;
 
-    virtual QString MinVerStr() const =0;
-    virtual QString MaxVerStr() const =0;
+    virtual auto MinVerStr() const -> QString = 0;
+    virtual auto MaxVerStr() const -> QString = 0;
 
-    virtual QString XSDSchema(unsigned ver) const;
+    virtual auto XSDSchema(unsigned ver) const -> QString;
     virtual void    ApplyPatches() =0;
     virtual void    DowngradeToCurrentMaxVersion() =0;
 
-    virtual bool IsReadOnly() const =0;
+    virtual auto IsReadOnly() const -> bool = 0;
 
     virtual auto Schemas() const -> QHash <unsigned, QString> =0;
 

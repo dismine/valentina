@@ -53,19 +53,18 @@ class VToolCutSplinePath : public VToolCut
     Q_OBJECT // NOLINT
 public:
     virtual void SetDialog() override;
-    static VToolCutSplinePath *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
-                                      VAbstractPattern *doc, VContainer *data);
-    static VToolCutSplinePath *Create(VToolCutInitData &initData);
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolCutSplinePath *;
+    static auto Create(VToolCutInitData &initData) -> VToolCutSplinePath *;
     static const QString ToolType;
     static const QString AttrSplinePath;
-    virtual int  type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::CutSplinePath)};
     virtual void  ShowVisualization(bool show) override;
 
-    Q_REQUIRED_RESULT static VPointF *CutSplinePath(qreal length,
-                                                    const QSharedPointer<VAbstractCubicBezierPath> &splPath,
-                                                    const QString &pName, VSplinePath **splPath1,
-                                                    VSplinePath **splPath2);
+    Q_REQUIRED_RESULT static auto CutSplinePath(qreal length, const QSharedPointer<VAbstractCubicBezierPath> &splPath,
+                                                const QString &pName, VSplinePath **splPath1, VSplinePath **splPath2)
+        -> VPointF *;
 protected slots:
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
 protected:
@@ -74,7 +73,8 @@ protected:
     virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     virtual void    ReadToolAttributes(const QDomElement &domElement) override;
     virtual void    SetVisualization() override;
-    virtual QString MakeToolTip() const override;
+    virtual auto MakeToolTip() const -> QString override;
+
 private:
     Q_DISABLE_COPY_MOVE(VToolCutSplinePath) // NOLINT
 

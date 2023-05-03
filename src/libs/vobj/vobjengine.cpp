@@ -63,7 +63,7 @@ class QRectF;
 #include <ciso646>
 
 //---------------------------------------------------------------------------------------------------------------------
-static inline QPaintEngine::PaintEngineFeatures svgEngineFeatures()
+static inline auto svgEngineFeatures() -> QPaintEngine::PaintEngineFeatures
 {
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wsign-conversion")
@@ -103,7 +103,7 @@ VObjEngine::~VObjEngine()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VObjEngine::begin(QPaintDevice *pdev)
+auto VObjEngine::begin(QPaintDevice *pdev) -> bool
 {
     Q_UNUSED(pdev)
     if (outputDevice.isNull())
@@ -140,7 +140,7 @@ bool VObjEngine::begin(QPaintDevice *pdev)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VObjEngine::end()
+auto VObjEngine::end() -> bool
 {
     stream.reset();
     return true;
@@ -256,7 +256,7 @@ void VObjEngine::drawPolygon(const QPoint *points, int pointCount, QPaintEngine:
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPaintEngine::Type VObjEngine::type() const
+auto VObjEngine::type() const -> QPaintEngine::Type
 {
     return QPaintEngine::User;
 }
@@ -291,7 +291,7 @@ void VObjEngine::drawPixmap(const QRectF &r, const QPixmap &pm, const QRectF &sr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSize VObjEngine::getSize() const
+auto VObjEngine::getSize() const -> QSize
 {
     return size;
 }
@@ -304,7 +304,7 @@ void VObjEngine::setSize(const QSize &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QIODevice *VObjEngine::getOutputDevice() const
+auto VObjEngine::getOutputDevice() const -> QIODevice *
 {
     return outputDevice.data();
 }
@@ -317,7 +317,7 @@ void VObjEngine::setOutputDevice(QIODevice *value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VObjEngine::getResolution() const
+auto VObjEngine::getResolution() const -> int
 {
     return resolution;
 }
@@ -330,7 +330,7 @@ void VObjEngine::setResolution(int value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPolygonF VObjEngine::MakePointsUnique(const QPolygonF &polygon) const
+auto VObjEngine::MakePointsUnique(const QPolygonF &polygon) const -> QPolygonF
 {
     QVector<QPointF> set;
     QPolygonF uniquePolygon;
@@ -346,7 +346,7 @@ QPolygonF VObjEngine::MakePointsUnique(const QPolygonF &polygon) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qint64 VObjEngine::Square(const QPolygonF &poly) const
+auto VObjEngine::Square(const QPolygonF &poly) const -> qint64
 {
     QVector<qreal> x;
     QVector<qreal> y;

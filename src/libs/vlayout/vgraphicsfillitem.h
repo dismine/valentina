@@ -55,7 +55,7 @@ public:
      */
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
-    int type() const override {return Type;}
+    auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Layout::GrainlineItem)};
 
     auto GetWidth() const -> qreal;

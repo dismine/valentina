@@ -55,11 +55,11 @@ QT_WARNING_POP
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VLayoutPiece> PrepareQuantity(const QVector<VLayoutPiece> &details)
+auto PrepareQuantity(const QVector<VLayoutPiece> &details) -> QVector<VLayoutPiece>
 {
     QVector<VLayoutPiece> withQuantity;
     withQuantity.reserve(details.size());
-    for(auto &piece : details)
+    for (const auto &piece : details)
     {
         for (int i = 0; i < piece.GetQuantity(); ++i)
         {
@@ -79,8 +79,7 @@ void Insert(QMap<uint, QHash<int, qint64>> &container, uint key, int valKey, qin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-vsizetype CountDetails(const T &container)
+template <typename T> auto CountDetails(const T &container) -> vsizetype
 {
     vsizetype count = 0;
     auto i = container.constBegin();
@@ -94,8 +93,8 @@ vsizetype CountDetails(const T &container)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool NotArrangedDetail(QMap<uint, QHash<int, qint64>> &container, QMap<uint, QHash<int, qint64>> &unsorted,
-                       int i)
+auto NotArrangedDetail(QMap<uint, QHash<int, qint64>> &container, QMap<uint, QHash<int, qint64>> &unsorted, int i)
+    -> bool
 {
     QMutableMapIterator<uint, QHash<int, qint64>> iterator(container);
     while (iterator.hasNext())
@@ -122,8 +121,8 @@ bool NotArrangedDetail(QMap<uint, QHash<int, qint64>> &container, QMap<uint, QHa
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool NotArrangedDetail(QMap<uint, QMultiMap<qint64, int>> &container, QMap<uint, QHash<int, qint64>> &unsorted,
-                       int i)
+auto NotArrangedDetail(QMap<uint, QMultiMap<qint64, int>> &container, QMap<uint, QHash<int, qint64>> &unsorted, int i)
+    -> bool
 {
     QMutableMapIterator<uint, QMultiMap<qint64, int>> iterator(container);
     while (iterator.hasNext())
@@ -151,7 +150,7 @@ bool NotArrangedDetail(QMap<uint, QMultiMap<qint64, int>> &container, QMap<uint,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int TakeFirstForPriority(const QMap<uint, QHash<int, qint64>> &container, uint priority)
+auto TakeFirstForPriority(const QMap<uint, QHash<int, qint64>> &container, uint priority) -> int
 {
     const QHash<int, qint64> priorityGroup = container.value(priority);
     if (not priorityGroup.isEmpty())
@@ -168,7 +167,7 @@ VBank::VBank()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VBank::GetLayoutWidth() const
+auto VBank::GetLayoutWidth() const -> qreal
 {
     return layoutWidth;
 }
@@ -181,7 +180,7 @@ void VBank::SetLayoutWidth(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VBank::GetManualPriority() const
+auto VBank::GetManualPriority() const -> bool
 {
     return m_manualPriority;
 }
@@ -193,7 +192,7 @@ void VBank::SetManualPriority(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VBank::IsNestQuantity() const
+auto VBank::IsNestQuantity() const -> bool
 {
     return m_nestQuantity;
 }
@@ -212,7 +211,7 @@ void VBank::SetDetails(const QVector<VLayoutPiece> &details)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VBank::GetNext()
+auto VBank::GetNext() -> int
 {
     if (not prepare)
     {
@@ -269,7 +268,7 @@ int VBank::GetNext()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutPiece VBank::GetDetail(int i) const
+auto VBank::GetDetail(int i) const -> VLayoutPiece
 {
     if (i >= 0 && i < details.size())
     {
@@ -324,7 +323,7 @@ void VBank::NotArranged(int i)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VBank::PrepareUnsorted()
+auto VBank::PrepareUnsorted() -> bool
 {
     QSet<uint> uniqueGroup;
 
@@ -354,7 +353,7 @@ bool VBank::PrepareUnsorted()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VBank::PrepareDetails()
+auto VBank::PrepareDetails() -> bool
 {
     if (layoutWidth <= 0)
     {
@@ -424,25 +423,25 @@ void VBank::SetCaseType(Cases caseType)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-vsizetype VBank::AllDetailsCount() const
+auto VBank::AllDetailsCount() const -> vsizetype
 {
     return CountDetails(unsorted) + CountDetails(big) + CountDetails(middle) + CountDetails(small) + CountDetails(desc);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-vsizetype VBank::LeftToArrange() const
+auto VBank::LeftToArrange() const -> vsizetype
 {
     return CountDetails(big) + CountDetails(middle) + CountDetails(small) + CountDetails(desc);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-vsizetype VBank::FailedToArrange() const
+auto VBank::FailedToArrange() const -> vsizetype
 {
     return CountDetails(unsorted);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VBank::GetBiggestDiagonal() const
+auto VBank::GetBiggestDiagonal() const -> qreal
 {
     return diagonal;
 }
@@ -545,7 +544,7 @@ void VBank::PrepareDescGroup(uint priority)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VBank::GetNextThreeGroups(uint priority) const
+auto VBank::GetNextThreeGroups(uint priority) const -> int
 {
     int next = TakeFirstForPriority(big, priority);
     if (next != -1)
@@ -564,7 +563,7 @@ int VBank::GetNextThreeGroups(uint priority) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VBank::GetNextTwoGroups(uint priority) const
+auto VBank::GetNextTwoGroups(uint priority) const -> int
 {
     int next = TakeFirstForPriority(big, priority);
     if (next != -1)
@@ -577,7 +576,7 @@ int VBank::GetNextTwoGroups(uint priority) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VBank::GetNextDescGroup(uint priority) const
+auto VBank::GetNextDescGroup(uint priority) const -> int
 {
     auto descGroup = desc.value(priority);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -618,7 +617,7 @@ void VBank::SqMaxMin(qint64 &sMax, qint64 &sMin, uint priority) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VBank::ArrangedDetail(QMap<uint, QHash<int, qint64> > &container, int i)
+auto VBank::ArrangedDetail(QMap<uint, QHash<int, qint64>> &container, int i) -> bool
 {
     QMutableMapIterator<uint, QHash<int, qint64>> iterator(container);
     while (iterator.hasNext())
@@ -644,7 +643,7 @@ bool VBank::ArrangedDetail(QMap<uint, QHash<int, qint64> > &container, int i)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VBank::ArrangedDetail(QMap<uint, QMultiMap<qint64, int>> &container, int i)
+auto VBank::ArrangedDetail(QMap<uint, QMultiMap<qint64, int>> &container, int i) -> bool
 {
     QMutableMapIterator<uint, QMultiMap<qint64, int>> iterator(container);
     while (iterator.hasNext())
@@ -672,9 +671,9 @@ bool VBank::ArrangedDetail(QMap<uint, QMultiMap<qint64, int>> &container, int i)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VBank::IsRotationNeeded() const
+auto VBank::IsRotationNeeded() const -> bool
 {
-    for(auto &piece : details)
+    for (const auto &piece : details)
     {
         if (not piece.IsGrainlineEnabled())
         {

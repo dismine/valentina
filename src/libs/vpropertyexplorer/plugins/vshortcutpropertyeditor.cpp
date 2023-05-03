@@ -51,7 +51,7 @@ VPE::VShortcutEditWidget::~VShortcutEditWidget()
     // nothing needs to be done here
 }
 
-bool VPE::VShortcutEditWidget::eventFilter(QObject *obj, QEvent *event)
+auto VPE::VShortcutEditWidget::eventFilter(QObject *obj, QEvent *event) -> bool
 {
     if (obj == LineEdit)
     {
@@ -77,13 +77,13 @@ bool VPE::VShortcutEditWidget::eventFilter(QObject *obj, QEvent *event)
     return QWidget::eventFilter(obj, event);
 }
 
-QString VPE::VShortcutEditWidget::getShortcutAsString() const
+auto VPE::VShortcutEditWidget::getShortcutAsString() const -> QString
 {
     return CurrentKeySequence.toString();
 }
 
 // cppcheck-suppress unusedFunction
-QKeySequence VPE::VShortcutEditWidget::getShortcut()
+auto VPE::VShortcutEditWidget::getShortcut() -> QKeySequence
 {
     return CurrentKeySequence;
 }

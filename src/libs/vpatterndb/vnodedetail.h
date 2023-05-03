@@ -72,17 +72,17 @@ public:
      * @param node node
      * @return node
      */
-    VNodeDetail &operator=(const VNodeDetail &node);
+    auto operator=(const VNodeDetail &node) -> VNodeDetail &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VNodeDetail(VNodeDetail &&node) Q_DECL_NOTHROW;
-    VNodeDetail &operator=(VNodeDetail &&node) Q_DECL_NOTHROW;
+    auto operator=(VNodeDetail &&node) Q_DECL_NOTHROW->VNodeDetail &;
 #endif
 
     /**
      * @brief getId return object id.
      * @return id.
      */
-    quint32     getId() const;
+    auto getId() const -> quint32;
     /**
      * @brief setId set object id.
      * @param value object id.
@@ -92,7 +92,7 @@ public:
      * @brief getTypeTool return tool type.
      * @return tool type.
      */
-    Tool getTypeTool() const;
+    auto getTypeTool() const -> Tool;
     /**
      * @brief setTypeTool set tool type.
      * @param value tool type.
@@ -102,7 +102,7 @@ public:
      * @brief getTypeNode return node type.
      * @return node type.
      */
-    NodeDetail getTypeNode() const;
+    auto getTypeNode() const -> NodeDetail;
     /**
      * @brief setTypeNode set node type.
      * @param value node type.
@@ -112,7 +112,7 @@ public:
      * @brief getMx return object bias x axis.
      * @return bias x axis.
      */
-    qreal       getMx() const;
+    auto getMx() const -> qreal;
     /**
      * @brief setMx set object bias x axis.
      * @param value bias x axis.
@@ -122,18 +122,19 @@ public:
      * @brief getMy return object bias y axis.
      * @return bias y axis.
      */
-    qreal       getMy() const;
+    auto getMy() const -> qreal;
     /**
      * @brief setMy set object bias y axis.
      * @param value bias y axis.
      */
     void        setMy(const qreal &value);
 
-    bool        getReverse() const;
+    auto getReverse() const -> bool;
     void        setReverse(bool reverse);
 
-    static QVector<VPieceNode> Convert(const VContainer *data, const QVector<VNodeDetail> &nodes, qreal width,
-                                       bool closed);
+    static auto Convert(const VContainer *data, const QVector<VNodeDetail> &nodes, qreal width, bool closed)
+        -> QVector<VPieceNode>;
+
 private:
     QSharedDataPointer<VNodeDetailData> d;
 };

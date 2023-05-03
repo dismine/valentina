@@ -63,7 +63,7 @@ public:
     //! If the property was filed under another ID before, that will no longer be valid.
     //! \param parentid The property's ID to which to add the property as child. Pass empty string to add it to the
     //! root properties.
-    virtual bool addProperty(VProperty* property, const QString& id, const QString& parentid);
+    virtual auto addProperty(VProperty *property, const QString &id, const QString &parentid) -> bool;
 
     //! Adds the property to the model and attaches it to the parent property.
     //! \param property The property to add
@@ -71,18 +71,18 @@ public:
     //! If the property was filed under another ID before, that will no longer be valid.
     //! \param parent_property The property to which to add the property as child. Pass NULL to add it to the root
     //! properties.
-    virtual bool addProperty(VProperty* property, const QString& id, VProperty* parent_property = nullptr);
+    virtual auto addProperty(VProperty *property, const QString &id, VProperty *parent_property = nullptr) -> bool;
 
     //! Checks whether a property belongs to this set and returns the result
     //! \param property The property to check for
     //! \return True, if the property is part of this set, false otherwise
-    virtual bool hasProperty(VProperty* property) const;
+    virtual auto hasProperty(VProperty *property) const -> bool;
 
     //! Gets a property by it's ID
-    virtual VProperty* getProperty(const QString& id) const;
+    virtual auto getProperty(const QString &id) const -> VProperty *;
 
     //! Removes a property from the set and returns it
-    virtual VProperty* takeProperty(const QString& id);
+    virtual auto takeProperty(const QString &id) -> VProperty *;
 
     //! Removes a property from the set and deletes it
     virtual void removeProperty(const QString& id);
@@ -91,7 +91,7 @@ public:
     virtual void removeProperty(VProperty* prop, bool delete_property = true);
 
     //! Returns the number of properties with in ID that are directly accessable by getProperty()
-    virtual vpesizetype count() const;
+    virtual auto count() const -> vpesizetype;
 
     //! Clears the set and (optionally) deletes all properties
     //! \param delete_properties Set this to false, if you don't want the properties to get deleted.
@@ -103,30 +103,30 @@ public:
     //! \param prop The property of which to get the ID.
     //! \param look_for_parent_id If this is TRUE and the property has no ID, all the parent properties are checked.
     //! \return Returns the ID under which the property is stored within the set
-    virtual QString getPropertyID(const VProperty* prop, bool look_for_parent_id = true) const;
+    virtual auto getPropertyID(const VProperty *prop, bool look_for_parent_id = true) const -> QString;
 
     //! Returns a const reference to the map of properties
-    const QMap<QString, VProperty*>& getPropertiesMap() const;
+    auto getPropertiesMap() const -> const QMap<QString, VProperty *> &;
 
     //! Returns a const reference to the list of root properties
-    const QList<VProperty*>& getRootProperties() const;
+    auto getRootProperties() const -> const QList<VProperty *> &;
 
     //! Returns the root property in a certain row
     //! \param row The root row in which to look for the root property
-    VProperty* getRootProperty(int row) const;
+    auto getRootProperty(int row) const -> VProperty *;
 
     //! Returns the number of independent properties
-    vpesizetype getRootPropertyCount() const;
+    auto getRootPropertyCount() const -> vpesizetype;
 
     //! Clones the property set
-    Q_REQUIRED_RESULT VPropertySet* clone() const;
+    Q_REQUIRED_RESULT auto clone() const -> VPropertySet *;
 
 protected:
     //! Checks whether a property belongs to this set and returns the result
     //! \param property The property to check for
     //! \param parent The parent property from which to start checking all the children
     //! \return True, if the property is part of this set, false otherwise
-    virtual bool hasProperty(VProperty* property, VProperty* parent) const;
+    virtual auto hasProperty(VProperty *property, VProperty *parent) const -> bool;
 
     //! Clones a property into another property set
     void cloneProperty(VProperty* property_to_clone, VProperty* parent_property, VPropertySet* output_set) const;

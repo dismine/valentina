@@ -132,63 +132,58 @@ namespace bpstd {
       /// \brief Copy-assigns a proxy_iterator
       ///
       /// \param it the iterator to copy
-      template <typename UIterator>
-      proxy_iterator& operator=(const proxy_iterator<UIterator,U>& it) noexcept;
+      template <typename UIterator> auto operator=(const proxy_iterator<UIterator, U> &it) noexcept -> proxy_iterator &;
 
       /// \brief Copy-assigns a proxy_iterator
       ///
       /// \param other the iterator to copy
-      proxy_iterator& operator=(const proxy_iterator& other) noexcept = default;
+      auto operator=(const proxy_iterator &other) noexcept -> proxy_iterator & = default;
 
       /// \brief Move-assigns a proxy_iterator
       ///
       /// \param other the iterator to move
-      proxy_iterator& operator=(proxy_iterator&& other) noexcept = default;
+      auto operator=(proxy_iterator &&other) noexcept -> proxy_iterator & = default;
 
       //------------------------------------------------------------------------
       // Iteration
       //------------------------------------------------------------------------
     public:
+        BPSTD_CPP14_CONSTEXPR auto operator++() noexcept -> proxy_iterator &;
+        BPSTD_CPP14_CONSTEXPR auto operator++(int) noexcept -> proxy_iterator;
+        BPSTD_CPP14_CONSTEXPR auto operator--() noexcept -> proxy_iterator &;
+        BPSTD_CPP14_CONSTEXPR auto operator--(int) noexcept -> proxy_iterator;
 
-      BPSTD_CPP14_CONSTEXPR proxy_iterator& operator++() noexcept;
-      BPSTD_CPP14_CONSTEXPR proxy_iterator operator++(int) noexcept;
-      BPSTD_CPP14_CONSTEXPR proxy_iterator& operator--() noexcept;
-      BPSTD_CPP14_CONSTEXPR proxy_iterator operator--(int) noexcept;
-
-      //------------------------------------------------------------------------
-      // Random Access
-      //------------------------------------------------------------------------
+        //------------------------------------------------------------------------
+        // Random Access
+        //------------------------------------------------------------------------
     public:
+        BPSTD_CPP14_CONSTEXPR auto operator+=(difference_type n) noexcept -> proxy_iterator &;
+        BPSTD_CPP14_CONSTEXPR auto operator-=(difference_type n) noexcept -> proxy_iterator &;
 
-      BPSTD_CPP14_CONSTEXPR proxy_iterator& operator+=(difference_type n) noexcept;
-      BPSTD_CPP14_CONSTEXPR proxy_iterator& operator-=(difference_type n) noexcept;
+        constexpr auto operator-(const proxy_iterator &rhs) const noexcept -> difference_type;
+        constexpr auto operator[](difference_type index) const noexcept -> reference;
 
-      constexpr difference_type operator-(const proxy_iterator& rhs) const noexcept;
-      constexpr reference operator[](difference_type index) const noexcept;
-
-      //------------------------------------------------------------------------
-      // Observers
-      //------------------------------------------------------------------------
+        //------------------------------------------------------------------------
+        // Observers
+        //------------------------------------------------------------------------
     public:
+        constexpr auto operator->() const noexcept -> pointer;
+        constexpr auto operator*() const noexcept -> reference;
 
-      constexpr pointer operator->() const noexcept;
-      constexpr reference operator*() const noexcept;
-
-      //------------------------------------------------------------------------
-      // Comparison
-      //------------------------------------------------------------------------
+        //------------------------------------------------------------------------
+        // Comparison
+        //------------------------------------------------------------------------
     public:
+        constexpr auto operator==(const proxy_iterator &rhs) const noexcept -> bool;
+        constexpr auto operator!=(const proxy_iterator &rhs) const noexcept -> bool;
+        constexpr auto operator<(const proxy_iterator &rhs) const noexcept -> bool;
+        constexpr auto operator<=(const proxy_iterator &rhs) const noexcept -> bool;
+        constexpr auto operator>(const proxy_iterator &rhs) const noexcept -> bool;
+        constexpr auto operator>=(const proxy_iterator &rhs) const noexcept -> bool;
 
-      constexpr bool operator==(const proxy_iterator& rhs) const noexcept;
-      constexpr bool operator!=(const proxy_iterator& rhs) const noexcept;
-      constexpr bool operator< (const proxy_iterator& rhs) const noexcept;
-      constexpr bool operator<=(const proxy_iterator& rhs) const noexcept;
-      constexpr bool operator> (const proxy_iterator& rhs) const noexcept;
-      constexpr bool operator>=(const proxy_iterator& rhs) const noexcept;
-
-      //------------------------------------------------------------------------
-      // Private Members
-      //------------------------------------------------------------------------
+        //------------------------------------------------------------------------
+        // Private Members
+        //------------------------------------------------------------------------
     private:
 
       Iterator m_iter; ///< The iterator used for iteration
@@ -204,20 +199,20 @@ namespace bpstd {
     // Random Access
     //--------------------------------------------------------------------------
 
-    template<typename Iterator, typename U>
-    BPSTD_CPP14_CONSTEXPR proxy_iterator<Iterator,U>
-      operator+(const proxy_iterator<Iterator,U>& lhs,
-                typename proxy_iterator<Iterator,U>::difference_type rhs) noexcept;
+    template <typename Iterator, typename U>
+    BPSTD_CPP14_CONSTEXPR auto operator+(const proxy_iterator<Iterator, U> &lhs,
+                                         typename proxy_iterator<Iterator, U>::difference_type rhs) noexcept
+        -> proxy_iterator<Iterator, U>;
 
-    template<typename Iterator, typename U>
-    BPSTD_CPP14_CONSTEXPR proxy_iterator<Iterator,U>
-      operator+(typename proxy_iterator<Iterator,U>::difference_type lhs,
-                const proxy_iterator<Iterator,U>& rhs) noexcept;
+    template <typename Iterator, typename U>
+    BPSTD_CPP14_CONSTEXPR auto operator+(typename proxy_iterator<Iterator, U>::difference_type lhs,
+                                         const proxy_iterator<Iterator, U> &rhs) noexcept
+        -> proxy_iterator<Iterator, U>;
 
-    template<typename Iterator, typename U>
-    BPSTD_CPP14_CONSTEXPR proxy_iterator<Iterator,U>
-      operator-(const proxy_iterator<Iterator,U>& lhs,
-                typename proxy_iterator<Iterator,U>::difference_type rhs) noexcept;
+    template <typename Iterator, typename U>
+    BPSTD_CPP14_CONSTEXPR auto operator-(const proxy_iterator<Iterator, U> &lhs,
+                                         typename proxy_iterator<Iterator, U>::difference_type rhs) noexcept
+        -> proxy_iterator<Iterator, U>;
 
   } // namespace detail
 } // namespace bpstd
@@ -249,11 +244,10 @@ inline constexpr bpstd::detail::proxy_iterator<Iterator,U>
 
 }
 
-template<typename Iterator, typename U>
+template <typename Iterator, typename U>
 template <typename UIterator>
-inline bpstd::detail::proxy_iterator<Iterator,U>&
-  bpstd::detail::proxy_iterator<Iterator,U>::operator=(const proxy_iterator<UIterator,U>& it)
-  noexcept
+inline auto bpstd::detail::proxy_iterator<Iterator, U>::operator=(const proxy_iterator<UIterator, U> &it) noexcept
+    -> bpstd::detail::proxy_iterator<Iterator, U> &
 {
   m_iter = it.m_iter;
 
@@ -264,38 +258,34 @@ inline bpstd::detail::proxy_iterator<Iterator,U>&
 // Iteration
 //------------------------------------------------------------------------------
 
-template<typename Iterator, typename U>
-inline BPSTD_CPP14_CONSTEXPR bpstd::detail::proxy_iterator<Iterator,U>&
-  bpstd::detail::proxy_iterator<Iterator,U>::operator++()
-  noexcept
+template <typename Iterator, typename U>
+inline BPSTD_CPP14_CONSTEXPR auto bpstd::detail::proxy_iterator<Iterator, U>::operator++() noexcept
+    -> bpstd::detail::proxy_iterator<Iterator, U> &
 {
   ++m_iter;
   return (*this);
 }
 
-template<typename Iterator, typename U>
-inline BPSTD_CPP14_CONSTEXPR bpstd::detail::proxy_iterator<Iterator,U>
-  bpstd::detail::proxy_iterator<Iterator,U>::operator++(int)
-  noexcept
+template <typename Iterator, typename U>
+inline BPSTD_CPP14_CONSTEXPR auto bpstd::detail::proxy_iterator<Iterator, U>::operator++(int) noexcept
+    -> bpstd::detail::proxy_iterator<Iterator, U>
 {
   return proxy_iterator{m_iter++};
 }
 
 //------------------------------------------------------------------------------
 
-template<typename Iterator, typename U>
-inline BPSTD_CPP14_CONSTEXPR bpstd::detail::proxy_iterator<Iterator,U>&
-  bpstd::detail::proxy_iterator<Iterator,U>::operator--()
-  noexcept
+template <typename Iterator, typename U>
+inline BPSTD_CPP14_CONSTEXPR auto bpstd::detail::proxy_iterator<Iterator, U>::operator--() noexcept
+    -> bpstd::detail::proxy_iterator<Iterator, U> &
 {
   --m_iter;
   return (*this);
 }
 
-template<typename Iterator, typename U>
-inline BPSTD_CPP14_CONSTEXPR bpstd::detail::proxy_iterator<Iterator,U>
-  bpstd::detail::proxy_iterator<Iterator,U>::operator--(int)
-  noexcept
+template <typename Iterator, typename U>
+inline BPSTD_CPP14_CONSTEXPR auto bpstd::detail::proxy_iterator<Iterator, U>::operator--(int) noexcept
+    -> bpstd::detail::proxy_iterator<Iterator, U>
 {
   return proxy_iterator{m_iter--};
 }
@@ -304,36 +294,33 @@ inline BPSTD_CPP14_CONSTEXPR bpstd::detail::proxy_iterator<Iterator,U>
 // Random Access
 //------------------------------------------------------------------------------
 
-template<typename Iterator, typename U>
-inline BPSTD_CPP14_CONSTEXPR bpstd::detail::proxy_iterator<Iterator,U>&
-  bpstd::detail::proxy_iterator<Iterator,U>::operator+=(difference_type n)
-  noexcept
+template <typename Iterator, typename U>
+inline BPSTD_CPP14_CONSTEXPR auto bpstd::detail::proxy_iterator<Iterator, U>::operator+=(difference_type n) noexcept
+    -> bpstd::detail::proxy_iterator<Iterator, U> &
 {
   m_iter += n;
   return (*this);
 }
 
-template<typename Iterator, typename U>
-inline BPSTD_CPP14_CONSTEXPR bpstd::detail::proxy_iterator<Iterator,U>&
-  bpstd::detail::proxy_iterator<Iterator,U>::operator-=(difference_type n)
-  noexcept
+template <typename Iterator, typename U>
+inline BPSTD_CPP14_CONSTEXPR auto bpstd::detail::proxy_iterator<Iterator, U>::operator-=(difference_type n) noexcept
+    -> bpstd::detail::proxy_iterator<Iterator, U> &
 {
   m_iter -= n;
   return (*this);
 }
 
-template<typename Iterator, typename U>
-inline constexpr typename bpstd::detail::proxy_iterator<Iterator,U>::difference_type
-  bpstd::detail::proxy_iterator<Iterator,U>::operator-(const proxy_iterator<Iterator,U>& rhs)
-  const noexcept
+template <typename Iterator, typename U>
+inline constexpr auto
+bpstd::detail::proxy_iterator<Iterator, U>::operator-(const proxy_iterator<Iterator, U> &rhs) const noexcept ->
+    typename bpstd::detail::proxy_iterator<Iterator, U>::difference_type
 {
   return m_iter - rhs.m_iter;
 }
 
-template<typename Iterator, typename U>
-inline constexpr typename bpstd::detail::proxy_iterator<Iterator,U>::reference
-  bpstd::detail::proxy_iterator<Iterator,U>::operator[](difference_type index)
-  const noexcept
+template <typename Iterator, typename U>
+inline constexpr auto bpstd::detail::proxy_iterator<Iterator, U>::operator[](difference_type index) const noexcept ->
+    typename bpstd::detail::proxy_iterator<Iterator, U>::reference
 {
   return m_iter[index];
 }
@@ -342,18 +329,16 @@ inline constexpr typename bpstd::detail::proxy_iterator<Iterator,U>::reference
 // Observers
 //------------------------------------------------------------------------------
 
-template<typename Iterator, typename U>
-inline constexpr typename bpstd::detail::proxy_iterator<Iterator,U>::pointer
-  bpstd::detail::proxy_iterator<Iterator,U>::operator->()
-  const noexcept
+template <typename Iterator, typename U>
+inline constexpr auto bpstd::detail::proxy_iterator<Iterator, U>::operator->() const noexcept ->
+    typename bpstd::detail::proxy_iterator<Iterator, U>::pointer
 {
   return m_iter;
 }
 
-template<typename Iterator, typename U>
-inline constexpr typename bpstd::detail::proxy_iterator<Iterator,U>::reference
-  bpstd::detail::proxy_iterator<Iterator,U>::operator*()
-  const noexcept
+template <typename Iterator, typename U>
+inline constexpr auto bpstd::detail::proxy_iterator<Iterator, U>::operator*() const noexcept ->
+    typename bpstd::detail::proxy_iterator<Iterator, U>::reference
 {
   return *m_iter;
 }
@@ -362,50 +347,44 @@ inline constexpr typename bpstd::detail::proxy_iterator<Iterator,U>::reference
 // Comparisons
 //------------------------------------------------------------------------------
 
-template<typename Iterator, typename U>
-inline constexpr bool
-  bpstd::detail::proxy_iterator<Iterator,U>::operator==(const proxy_iterator& rhs)
-  const noexcept
+template <typename Iterator, typename U>
+inline constexpr auto bpstd::detail::proxy_iterator<Iterator, U>::operator==(const proxy_iterator &rhs) const noexcept
+    -> bool
 {
   return m_iter == rhs.m_iter;
 }
 
-template<typename Iterator, typename U>
-inline constexpr bool
-  bpstd::detail::proxy_iterator<Iterator,U>::operator!=(const proxy_iterator& rhs)
-  const noexcept
+template <typename Iterator, typename U>
+inline constexpr auto bpstd::detail::proxy_iterator<Iterator, U>::operator!=(const proxy_iterator &rhs) const noexcept
+    -> bool
 {
   return m_iter != rhs.m_iter;
 }
 
-template<typename Iterator, typename U>
-inline constexpr bool
-  bpstd::detail::proxy_iterator<Iterator,U>::operator<(const proxy_iterator& rhs)
-  const noexcept
+template <typename Iterator, typename U>
+inline constexpr auto bpstd::detail::proxy_iterator<Iterator, U>::operator<(const proxy_iterator &rhs) const noexcept
+    -> bool
 {
   return m_iter < rhs.m_iter;
 }
 
-template<typename Iterator, typename U>
-inline constexpr bool
-  bpstd::detail::proxy_iterator<Iterator,U>::operator<=(const proxy_iterator& rhs)
-  const noexcept
+template <typename Iterator, typename U>
+inline constexpr auto bpstd::detail::proxy_iterator<Iterator, U>::operator<=(const proxy_iterator &rhs) const noexcept
+    -> bool
 {
   return m_iter <= rhs.m_iter;
 }
 
-template<typename Iterator, typename U>
-inline constexpr bool
-bpstd::detail::proxy_iterator<Iterator,U>::operator>(const proxy_iterator& rhs)
-  const noexcept
+template <typename Iterator, typename U>
+inline constexpr auto bpstd::detail::proxy_iterator<Iterator, U>::operator>(const proxy_iterator &rhs) const noexcept
+    -> bool
 {
   return m_iter > rhs.m_iter;
 }
 
-template<typename Iterator, typename U>
-inline constexpr bool
-bpstd::detail::proxy_iterator<Iterator,U>::operator>=(const proxy_iterator& rhs)
-  const noexcept
+template <typename Iterator, typename U>
+inline constexpr auto bpstd::detail::proxy_iterator<Iterator, U>::operator>=(const proxy_iterator &rhs) const noexcept
+    -> bool
 {
   return m_iter >= rhs.m_iter;
 }
@@ -418,29 +397,28 @@ bpstd::detail::proxy_iterator<Iterator,U>::operator>=(const proxy_iterator& rhs)
 // Random Access (free functions)
 //------------------------------------------------------------------------------
 
-template<typename Iterator, typename U>
-inline BPSTD_CPP14_CONSTEXPR bpstd::detail::proxy_iterator<Iterator,U>
-  bpstd::detail::operator+(const proxy_iterator<Iterator,U>& lhs,
-                           typename proxy_iterator<Iterator,U>::difference_type rhs)
-  noexcept
+template <typename Iterator, typename U>
+inline BPSTD_CPP14_CONSTEXPR auto
+bpstd::detail::operator+(const proxy_iterator<Iterator, U> &lhs,
+                         typename proxy_iterator<Iterator, U>::difference_type rhs) noexcept
+    -> bpstd::detail::proxy_iterator<Iterator, U>
 {
   return proxy_iterator<Iterator,U>{lhs} += rhs;
 }
 
-template<typename Iterator, typename U>
-inline BPSTD_CPP14_CONSTEXPR bpstd::detail::proxy_iterator<Iterator,U>
-  bpstd::detail::operator+(typename proxy_iterator<Iterator,U>::difference_type lhs,
-                           const proxy_iterator<Iterator,U>& rhs)
-  noexcept
+template <typename Iterator, typename U>
+inline BPSTD_CPP14_CONSTEXPR auto bpstd::detail::operator+(typename proxy_iterator<Iterator, U>::difference_type lhs,
+                                                           const proxy_iterator<Iterator, U> &rhs) noexcept
+    -> bpstd::detail::proxy_iterator<Iterator, U>
 {
   return proxy_iterator<Iterator,U>{rhs} += lhs;
 }
 
-template<typename Iterator, typename U>
-inline BPSTD_CPP14_CONSTEXPR bpstd::detail::proxy_iterator<Iterator,U>
-  bpstd::detail::operator-(const proxy_iterator<Iterator,U>& lhs,
-                           typename proxy_iterator<Iterator,U>::difference_type rhs)
-  noexcept
+template <typename Iterator, typename U>
+inline BPSTD_CPP14_CONSTEXPR auto
+bpstd::detail::operator-(const proxy_iterator<Iterator, U> &lhs,
+                         typename proxy_iterator<Iterator, U>::difference_type rhs) noexcept
+    -> bpstd::detail::proxy_iterator<Iterator, U>
 {
   return proxy_iterator<Iterator,U>{lhs} -= rhs;
 }

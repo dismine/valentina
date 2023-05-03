@@ -70,7 +70,7 @@ void VSimplePoint::SetVisualizationMode(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSimplePoint::IsVisualizationMode() const
+auto VSimplePoint::IsVisualizationMode() const -> bool
 {
     return m_visualizationMode;
 }
@@ -216,7 +216,7 @@ void VSimplePoint::keyReleaseEvent(QKeyEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVariant VSimplePoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+auto VSimplePoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) -> QVariant
 {
     if (change == QGraphicsItem::ItemSelectedHasChanged)
     {

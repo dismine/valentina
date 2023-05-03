@@ -35,7 +35,7 @@
 const QString VToolPin::ToolType = QStringLiteral("pin");
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPin *VToolPin::Create(const QPointer<DialogTool> &dialog, VAbstractPattern *doc, VContainer *data)
+auto VToolPin::Create(const QPointer<DialogTool> &dialog, VAbstractPattern *doc, VContainer *data) -> VToolPin *
 {
     SCASSERT(not dialog.isNull());
     const QPointer<DialogPin> dialogTool = qobject_cast<DialogPin *>(dialog);
@@ -53,7 +53,7 @@ VToolPin *VToolPin::Create(const QPointer<DialogTool> &dialog, VAbstractPattern 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPin *VToolPin::Create(VToolPinInitData initData)
+auto VToolPin::Create(VToolPinInitData initData) -> VToolPin *
 {
     if (initData.typeCreation == Source::FromGui)
     {
@@ -109,7 +109,7 @@ VToolPin *VToolPin::Create(VToolPinInitData initData)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolPin::getTagName() const
+auto VToolPin::getTagName() const -> QString
 {
     return VAbstractPattern::TagPoint;
 }

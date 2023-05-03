@@ -84,8 +84,8 @@ void VToolLineIntersectAxis::SetDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolLineIntersectAxis *VToolLineIntersectAxis::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                                       VAbstractPattern *doc, VContainer *data)
+auto VToolLineIntersectAxis::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
+                                    VAbstractPattern *doc, VContainer *data) -> VToolLineIntersectAxis *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogLineIntersectAxis> dialogTool = qobject_cast<DialogLineIntersectAxis *>(dialog);
@@ -115,7 +115,7 @@ VToolLineIntersectAxis *VToolLineIntersectAxis::Create(const QPointer<DialogTool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolLineIntersectAxis *VToolLineIntersectAxis::Create(VToolLineIntersectAxisInitData &initData)
+auto VToolLineIntersectAxis::Create(VToolLineIntersectAxisInitData &initData) -> VToolLineIntersectAxis *
 {
     const QSharedPointer<VPointF> basePoint = initData.data->GeometricObject<VPointF>(initData.basePointId);
     QLineF axis = QLineF(static_cast<QPointF>(*basePoint), QPointF(basePoint->x()+100, basePoint->y()));
@@ -175,7 +175,7 @@ VToolLineIntersectAxis *VToolLineIntersectAxis::Create(VToolLineIntersectAxisIni
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VToolLineIntersectAxis::FindPoint(const QLineF &axis, const QLineF &line, QPointF *intersectionPoint)
+auto VToolLineIntersectAxis::FindPoint(const QLineF &axis, const QLineF &line, QPointF *intersectionPoint) -> bool
 {
     SCASSERT(intersectionPoint != nullptr)
 
@@ -202,19 +202,19 @@ bool VToolLineIntersectAxis::FindPoint(const QLineF &axis, const QLineF &line, Q
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolLineIntersectAxis::FirstLinePoint() const
+auto VToolLineIntersectAxis::FirstLinePoint() const -> QString
 {
     return VAbstractTool::data.GetGObject(firstPointId)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolLineIntersectAxis::SecondLinePoint() const
+auto VToolLineIntersectAxis::SecondLinePoint() const -> QString
 {
     return VAbstractTool::data.GetGObject(secondPointId)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolLineIntersectAxis::GetFormulaAngle() const
+auto VToolLineIntersectAxis::GetFormulaAngle() const -> VFormula
 {
     VFormula fAngle(formulaAngle, getData());
     fAngle.setCheckZero(false);
@@ -327,7 +327,7 @@ void VToolLineIntersectAxis::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolLineIntersectAxis::MakeToolTip() const
+auto VToolLineIntersectAxis::MakeToolTip() const -> QString
 {
     const QSharedPointer<VPointF> basePoint = VAbstractTool::data.GeometricObject<VPointF>(basePointId);
     const QSharedPointer<VPointF> firstPoint = VAbstractTool::data.GeometricObject<VPointF>(firstPointId);

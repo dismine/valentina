@@ -59,7 +59,7 @@ FvUpdateWindow::~FvUpdateWindow()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FvUpdateWindow::UpdateWindowWithCurrentProposedUpdate()
+auto FvUpdateWindow::UpdateWindowWithCurrentProposedUpdate() -> bool
 {
     QPointer<FvAvailableUpdate> proposedUpdate = FvUpdater::sharedUpdater()->GetProposedUpdate();
     if (proposedUpdate.isNull())

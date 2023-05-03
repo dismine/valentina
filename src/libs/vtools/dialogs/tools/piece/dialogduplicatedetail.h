@@ -43,15 +43,16 @@ public:
     explicit DialogDuplicateDetail(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogDuplicateDetail();
 
-    quint32 Duplicate() const;
-    qreal   MoveDuplicateX() const;
-    qreal   MoveDuplicateY() const;
+    auto Duplicate() const -> quint32;
+    auto MoveDuplicateX() const -> qreal;
+    auto MoveDuplicateY() const -> qreal;
 
     virtual void ShowDialog(bool click) override;
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) override;
 protected:
-    virtual bool IsValid() const final {return true;}
+    virtual auto IsValid() const -> bool final { return true; }
+
 private:
     Q_DISABLE_COPY_MOVE(DialogDuplicateDetail) // NOLINT
     Ui::DialogDuplicateDetail *ui;
@@ -62,19 +63,19 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline quint32 DialogDuplicateDetail::Duplicate() const
+inline auto DialogDuplicateDetail::Duplicate() const -> quint32
 {
     return m_idDetail;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline qreal DialogDuplicateDetail::MoveDuplicateX() const
+inline auto DialogDuplicateDetail::MoveDuplicateX() const -> qreal
 {
     return m_mx;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline qreal DialogDuplicateDetail::MoveDuplicateY() const
+inline auto DialogDuplicateDetail::MoveDuplicateY() const -> qreal
 {
     return m_my;
 }

@@ -47,11 +47,12 @@ public:
                     quint32 toolId, quint32 pointId, QUndoCommand *parent = nullptr);
     virtual ~MoveDoubleLabel()=default;
 
-    virtual bool mergeWith(const QUndoCommand *command) override;
-    virtual int  id() const override;
+    virtual auto mergeWith(const QUndoCommand *command) -> bool override;
+    virtual auto id() const -> int override;
 
-    quint32     GetToolId() const;
-    MoveDoublePoint GetPointType() const;
+    auto GetToolId() const -> quint32;
+    auto GetPointType() const -> MoveDoublePoint;
+
 protected:
     virtual void Do(const QPointF &pos) override;
 private:
@@ -64,13 +65,13 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline MoveDoublePoint MoveDoubleLabel::GetPointType() const
+inline auto MoveDoubleLabel::GetPointType() const -> MoveDoublePoint
 {
     return m_type;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline quint32 MoveDoubleLabel::GetToolId() const
+inline auto MoveDoubleLabel::GetToolId() const -> quint32
 {
     return m_idTool;
 }

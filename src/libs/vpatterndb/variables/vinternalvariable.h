@@ -50,26 +50,27 @@ public:
 
     virtual ~VInternalVariable();
 
-    VInternalVariable &operator=(const VInternalVariable &var);
+    auto operator=(const VInternalVariable &var) -> VInternalVariable &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VInternalVariable(VInternalVariable &&var) Q_DECL_NOTHROW;
-    VInternalVariable &operator=(VInternalVariable &&var) Q_DECL_NOTHROW;
+    auto operator=(VInternalVariable &&var) Q_DECL_NOTHROW->VInternalVariable &;
 #endif
 
-    virtual qreal  GetValue() const;
-    virtual qreal* GetValue();
+    virtual auto GetValue() const -> qreal;
+    virtual auto GetValue() -> qreal *;
 
-    QString      GetName() const;
+    auto GetName() const -> QString;
     void         SetName(const QString &name);
 
-    VarType      GetType() const;
+    auto GetType() const -> VarType;
 
     void    SetAlias(const QString &alias);
-    QString GetAlias() const;
+    auto GetAlias() const -> QString;
 
-    virtual bool Filter(quint32 id);
+    virtual auto Filter(quint32 id) -> bool;
 
-    virtual bool IsNotUsed() const;
+    virtual auto IsNotUsed() const -> bool;
+
 protected:
     void SetValue(const qreal &value);
     void SetType(const VarType &type);

@@ -42,10 +42,10 @@ public:
                    const QMap<QString, QString> &translatedFunctions = QMap<QString, QString>());
     virtual ~QmuTokenParser() = default;
 
-    static bool IsSingle(const QString &formula);
+    static auto IsSingle(const QString &formula) -> bool;
 
 protected:
-    static qreal Warning(const QString &warningMsg, qreal value);
+    static auto Warning(const QString &warningMsg, qreal value) -> qreal;
 
 private:
     Q_DISABLE_COPY_MOVE(QmuTokenParser) // NOLINT

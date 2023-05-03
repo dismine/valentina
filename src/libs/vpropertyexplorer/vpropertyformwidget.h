@@ -56,7 +56,7 @@ public:
 
 
     //! Returns a list of all child property form widgets (note that indirect children will not be in the list)
-    QList<VPropertyFormWidget*> getChildPropertyFormWidgets() const;
+    auto getChildPropertyFormWidgets() const -> QList<VPropertyFormWidget *>;
 
 public slots:
     //! Rebuilds the whole form
@@ -94,7 +94,7 @@ protected:
     VPropertyFormWidgetPrivate* d_ptr;
 
     //! Event filter for the editor widgets
-    bool eventFilter(QObject *object, QEvent *event);
+    auto eventFilter(QObject *object, QEvent *event) -> bool;
 
     //! Commits data of an editor
     void commitData(const QWidget* editor);

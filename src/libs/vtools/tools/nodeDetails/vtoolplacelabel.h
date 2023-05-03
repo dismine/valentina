@@ -52,11 +52,12 @@ class VToolPlaceLabel : public VAbstractNode
 {
     Q_OBJECT // NOLINT
 public:
-    static VToolPlaceLabel* Create(const QPointer<DialogTool> &dialog, VAbstractPattern *doc, VContainer *data);
-    static VToolPlaceLabel* Create(VToolPlaceLabelInitData &initData);
+    static auto Create(const QPointer<DialogTool> &dialog, VAbstractPattern *doc, VContainer *data)
+        -> VToolPlaceLabel *;
+    static auto Create(VToolPlaceLabelInitData &initData) -> VToolPlaceLabel *;
 
     static const QString ToolType;
-    virtual QString getTagName() const override;
+    virtual auto getTagName() const -> QString override;
 
     static void AddAttributes(VAbstractPattern *doc, QDomElement &domElement, quint32 id, const VPlaceLabelItem &label);
 public slots:

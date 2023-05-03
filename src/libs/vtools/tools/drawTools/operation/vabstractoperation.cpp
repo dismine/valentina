@@ -46,11 +46,11 @@ namespace
  * @param source list with source objects
  * @return visibility group data
  */
-QMap<quint32, quint32> VisibilityGroupDataFromSource(const VContainer *data, const QVector<SourceItem> &source)
+auto VisibilityGroupDataFromSource(const VContainer *data, const QVector<SourceItem> &source) -> QMap<quint32, quint32>
 {
     QMap<quint32, quint32> groupData;
 
-    for (auto &sItem : source)
+    for (const auto &sItem : source)
     {
         try
         {
@@ -68,13 +68,13 @@ QMap<quint32, quint32> VisibilityGroupDataFromSource(const VContainer *data, con
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractOperation::getTagName() const
+auto VAbstractOperation::getTagName() const -> QString
 {
     return VAbstractPattern::TagOperation;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractOperation::Suffix() const
+auto VAbstractOperation::Suffix() const -> QString
 {
     return suffix;
 }
@@ -98,7 +98,7 @@ void VAbstractOperation::SetNotes(const QString &notes)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<SourceItem> VAbstractOperation::SourceItems() const
+auto VAbstractOperation::SourceItems() const -> QVector<SourceItem>
 {
     return source;
 }
@@ -156,7 +156,7 @@ void VAbstractOperation::ChangeLabelPosition(quint32 id, const QPointF &pos)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VAbstractOperation::IsLabelVisible(quint32 id) const
+auto VAbstractOperation::IsLabelVisible(quint32 id) const -> bool
 {
     if (operatedObjects.contains(id))
     {
@@ -199,7 +199,7 @@ void VAbstractOperation::ExtractData(const QDomElement &domElement, VAbstractOpe
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<SourceItem> VAbstractOperation::ExtractSourceData(const QDomElement &domElement)
+auto VAbstractOperation::ExtractSourceData(const QDomElement &domElement) -> QVector<SourceItem>
 {
     QVector<SourceItem> source;
     const QDomNodeList nodeList = domElement.childNodes();
@@ -230,7 +230,7 @@ QVector<SourceItem> VAbstractOperation::ExtractSourceData(const QDomElement &dom
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<DestinationItem> VAbstractOperation::ExtractDestinationData(const QDomElement &domElement)
+auto VAbstractOperation::ExtractDestinationData(const QDomElement &domElement) -> QVector<DestinationItem>
 {
     QVector<DestinationItem> destination;
     const QDomNodeList nodeList = domElement.childNodes();
@@ -264,7 +264,7 @@ QVector<DestinationItem> VAbstractOperation::ExtractDestinationData(const QDomEl
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMap<QString, QString> VAbstractOperation::OperationColorsList()
+auto VAbstractOperation::OperationColorsList() -> QMap<QString, QString>
 {
     QMap<QString, QString> list = VAbstractTool::ColorsList();
     list.insert(ColorDefault, '<' + tr("default") + '>');
@@ -850,7 +850,7 @@ void VAbstractOperation::AllowCurveSelecting(bool enabled, GOType type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VAbstractOperation::NeedUpdateVisibilityGroup() const
+auto VAbstractOperation::NeedUpdateVisibilityGroup() const -> bool
 {
     vidtype group = doc->GroupLinkedToTool(m_id);
 
@@ -936,7 +936,7 @@ QT_WARNING_POP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractOperation::ComplexPointToolTip(quint32 itemId) const
+auto VAbstractOperation::ComplexPointToolTip(quint32 itemId) const -> QString
 {
     return QStringLiteral("<table>"
                           "<tr> <td><b>%1:</b> %2</td> </tr>"
@@ -946,7 +946,7 @@ QString VAbstractOperation::ComplexPointToolTip(quint32 itemId) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractOperation::ComplexCurveToolTip(quint32 itemId) const
+auto VAbstractOperation::ComplexCurveToolTip(quint32 itemId) const -> QString
 {
     const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(itemId);
 
@@ -962,7 +962,7 @@ QString VAbstractOperation::ComplexCurveToolTip(quint32 itemId) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractOperation::VisibilityGroupToolTip() const
+auto VAbstractOperation::VisibilityGroupToolTip() const -> QString
 {
     vidtype group = doc->GroupLinkedToTool(m_id);
     if (group != null_id)

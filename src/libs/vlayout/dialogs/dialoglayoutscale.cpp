@@ -86,7 +86,7 @@ void DialogLayoutScale::SetTiledMargins(QMarginsF margins)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMarginsF DialogLayoutScale::GetTiledMargins() const
+auto DialogLayoutScale::GetTiledMargins() const -> QMarginsF
 {
     QMarginsF margins = QMarginsF(
         ui->doubleSpinBoxLeftField->value(),
@@ -105,7 +105,7 @@ void DialogLayoutScale::SetXScale(qreal scale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal DialogLayoutScale::GetXScale() const
+auto DialogLayoutScale::GetXScale() const -> qreal
 {
     return ui->doubleSpinBoxHorizontalScale->value() / 100.;
 }
@@ -117,7 +117,7 @@ void DialogLayoutScale::SetYScale(qreal scale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal DialogLayoutScale::GetYScale() const
+auto DialogLayoutScale::GetYScale() const -> qreal
 {
     return ui->doubleSpinBoxVerticalScale->value() / 100.;
 }

@@ -73,9 +73,8 @@ namespace bpstd {
   /// \tparam T the type to construct
   /// \param args the arguments to forward to T's constructor
   /// \return the unique_ptr
-  template <typename T, typename...Args>
-  std::unique_ptr<typename detail::make_unique_result<T>::object>
-    make_unique(Args&&...args);
+  template <typename T, typename... Args>
+  auto make_unique(Args &&...args) -> std::unique_ptr<typename detail::make_unique_result<T>::object>;
 
   /// \brief Constructs an object of type T[] and wraps it in a std::unique_ptr
   ///
@@ -86,13 +85,11 @@ namespace bpstd {
   /// \param size the size of the array
   /// \return the unique_ptr
   template <typename T>
-  std::unique_ptr<typename detail::make_unique_result<T>::unbounded_array>
-    make_unique(std::size_t size);
+  auto make_unique(std::size_t size) -> std::unique_ptr<typename detail::make_unique_result<T>::unbounded_array>;
 
   // Construction of arrays of known bound is disallowed
   template <typename T>
-  std::unique_ptr<typename detail::make_unique_result<T>::bounded_array>
-    make_unique() = delete;
+  auto make_unique() -> std::unique_ptr<typename detail::make_unique_result<T>::bounded_array> = delete;
 
   /// \brief Constructs an object of type T through default-initialization
   ///        and wraps it in a std::unique_ptr
@@ -105,8 +102,7 @@ namespace bpstd {
   /// \tparam T the type to construct
   /// \return the unique_ptr
   template <typename T>
-  std::unique_ptr<typename detail::make_unique_result<T>::object>
-    make_unique_for_overwrite();
+  auto make_unique_for_overwrite() -> std::unique_ptr<typename detail::make_unique_result<T>::object>;
 
   /// \brief Constructs an object of type T[] through default-initialization
   ///        and wraps it in a std::unique_ptr
@@ -119,13 +115,12 @@ namespace bpstd {
   /// \tparam T the type to construct
   /// \return the unique_ptr
   template <typename T>
-  std::unique_ptr<typename detail::make_unique_result<T>::unbounded_array>
-    make_unique_for_overwrite(std::size_t size);
+  auto make_unique_for_overwrite(std::size_t size)
+      -> std::unique_ptr<typename detail::make_unique_result<T>::unbounded_array>;
 
   // Construction of arrays of known bound is disallowed
   template <typename T>
-  std::unique_ptr<typename detail::make_unique_result<T>::bounded_array>
-    make_unique_for_overwrite() = delete;
+  auto make_unique_for_overwrite() -> std::unique_ptr<typename detail::make_unique_result<T>::bounded_array> = delete;
 
   //----------------------------------------------------------------------------
 
@@ -172,42 +167,36 @@ namespace bpstd {
   ///
   /// \param p the pointer-like type
   /// \return the pointer
-  template <typename T>
-  constexpr T* to_address(T* p) noexcept;
-  template <typename T>
-  constexpr detail::to_address_result_t<T> to_address(const T& p) noexcept;
+  template <typename T> constexpr auto to_address(T *p) noexcept -> T *;
+  template <typename T> constexpr auto to_address(const T &p) noexcept -> detail::to_address_result_t<T>;
   /// \}
 
 } // namespace bpstd
 
-template <typename T, typename...Args>
-inline BPSTD_INLINE_VISIBILITY
-std::unique_ptr<typename bpstd::detail::make_unique_result<T>::object>
-  bpstd::make_unique(Args&&...args)
+template <typename T, typename... Args>
+inline BPSTD_INLINE_VISIBILITY auto bpstd::make_unique(Args &&...args)
+    -> std::unique_ptr<typename bpstd::detail::make_unique_result<T>::object>
 {
   return std::unique_ptr<T>{new T(bpstd::forward<Args>(args)...)};
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY
-std::unique_ptr<typename bpstd::detail::make_unique_result<T>::unbounded_array>
-  bpstd::make_unique(std::size_t size)
+inline BPSTD_INLINE_VISIBILITY auto bpstd::make_unique(std::size_t size)
+    -> std::unique_ptr<typename bpstd::detail::make_unique_result<T>::unbounded_array>
 {
   return std::unique_ptr<T>{new remove_extent_t<T>[size]()};
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY
-std::unique_ptr<typename bpstd::detail::make_unique_result<T>::object>
-  bpstd::make_unique_for_overwrite()
+inline BPSTD_INLINE_VISIBILITY auto bpstd::make_unique_for_overwrite()
+    -> std::unique_ptr<typename bpstd::detail::make_unique_result<T>::object>
 {
   return std::unique_ptr<T>{new T};
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY
-std::unique_ptr<typename bpstd::detail::make_unique_result<T>::unbounded_array>
-  bpstd::make_unique_for_overwrite(std::size_t size)
+inline BPSTD_INLINE_VISIBILITY auto bpstd::make_unique_for_overwrite(std::size_t size)
+    -> std::unique_ptr<typename bpstd::detail::make_unique_result<T>::unbounded_array>
 {
   return std::unique_ptr<T>{new remove_extent_t<T>[size]};
 }
@@ -234,10 +223,7 @@ namespace bpstd {
   } // namespace detail
 } // namespace bpstd
 
-template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-T* bpstd::to_address(T* p)
-  noexcept
+template <typename T> inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::to_address(T *p) noexcept -> T *
 {
   static_assert(
     !std::is_function<T>::value,
@@ -248,10 +234,8 @@ T* bpstd::to_address(T* p)
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bpstd::detail::to_address_result_t<T>
-  bpstd::to_address(const T& p)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::to_address(const T &p) noexcept
+    -> bpstd::detail::to_address_result_t<T>
 {
   return detail::to_address_impl(p, detail::has_to_address<T>{});
 }

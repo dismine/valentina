@@ -46,9 +46,9 @@ public:
     explicit WatermarkWindow(const QString &patternPath, QWidget *parent = nullptr);
     ~WatermarkWindow();
 
-    QString CurrentFile() const;
+    auto CurrentFile() const -> QString;
 
-    bool Open(QString path);
+    auto Open(QString path) -> bool;
 
 signals:
     void New();
@@ -62,8 +62,8 @@ protected:
 
 private slots:
     void on_actionNew_triggered();
-    bool on_actionSaveAs_triggered();
-    bool on_actionSave_triggered();
+    auto on_actionSaveAs_triggered() -> bool;
+    auto on_actionSave_triggered() -> bool;
     void on_actionOpen_triggered();
     void on_actionExit_triggered();
 
@@ -84,17 +84,17 @@ private:
 
     QSharedPointer<VLockGuard<char>> lock{};
 
-    bool MaybeSave();
+    auto MaybeSave() -> bool;
     void UpdateWindowTitle();
 
-    QString GetWatermarkFileName();
+    auto GetWatermarkFileName() -> QString;
 
-    bool ContinueFormatRewrite(const QString &currentFormatVersion, const QString &maxFormatVersion);
-    bool SaveWatermark(const QString &fileName, QString &error);
+    auto ContinueFormatRewrite(const QString &currentFormatVersion, const QString &maxFormatVersion) -> bool;
+    auto SaveWatermark(const QString &fileName, QString &error) -> bool;
     void SetCurrentFile(const QString &fileName);
-    bool OpenNewEditor(const QString &fileName = QString()) const;
+    auto OpenNewEditor(const QString &fileName = QString()) const -> bool;
     void Clear();
-    bool IgnoreLocking(int error, const QString &path);
+    auto IgnoreLocking(int error, const QString &path) -> bool;
     void ShowWatermark();
     void ValidatePath();
     void ToolBarStyle(QToolBar *bar);

@@ -58,7 +58,7 @@ void TST_VTranslateVars::TestFormulaFromUser_data()
 
     const QList<QLocale> allLocales =
             QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
-    for(auto &locale : allLocales)
+    for (const auto &locale : allLocales)
     {
         if (not SupportedLocale(locale))
         {
@@ -93,7 +93,7 @@ void TST_VTranslateVars::TestFormulaToUser_data()
 
     const QList<QLocale> allLocales =
             QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
-    for(auto &locale : allLocales)
+    for (const auto &locale : allLocales)
     {
         if (not SupportedLocale(locale))
         {

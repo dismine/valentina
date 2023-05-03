@@ -140,7 +140,7 @@ void AddPiece::redo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement AddPiece::GetDetailsSection() const
+auto AddPiece::GetDetailsSection() const -> QDomElement
 {
     QDomElement details;
     if (m_drawName.isEmpty())

@@ -81,7 +81,7 @@ void VPE::VColorPropertyEditor::SetColor(const QColor& color_)
     }
 }
 
-QPixmap VPE::VColorPropertyEditor::GetColorPixmap(const QColor& color, quint32 size)
+auto VPE::VColorPropertyEditor::GetColorPixmap(const QColor &color, quint32 size) -> QPixmap
 {
     QImage tmpImgage(static_cast<int>(size), static_cast<int>(size), QImage::Format_ARGB32_Premultiplied);
     tmpImgage.fill(static_cast<quint32>(color.rgb()));
@@ -89,7 +89,7 @@ QPixmap VPE::VColorPropertyEditor::GetColorPixmap(const QColor& color, quint32 s
     // todo: support alpha channel
 }
 
-QString VPE::VColorPropertyEditor::GetColorString(const QColor& color)
+auto VPE::VColorPropertyEditor::GetColorString(const QColor &color) -> QString
 {
     return QString("[%1, %2, %3] (%4)").arg(color.red()).arg(color.green()).arg(color.blue()).arg(color.alpha());
 }
@@ -106,7 +106,7 @@ void VPE::VColorPropertyEditor::onToolButtonClicked()
     }
 }
 
-bool VPE::VColorPropertyEditor::eventFilter(QObject *obj, QEvent *ev)
+auto VPE::VColorPropertyEditor::eventFilter(QObject *obj, QEvent *ev) -> bool
 {
     if (obj == ToolButton && ev->type() == QEvent::KeyPress)
     {
@@ -124,7 +124,7 @@ VPE::VColorPropertyEditor::~VColorPropertyEditor()
     //
 }
 
-QColor VPE::VColorPropertyEditor::GetColor() const
+auto VPE::VColorPropertyEditor::GetColor() const -> QColor
 {
     return Color;
 }

@@ -33,7 +33,7 @@
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline qint64 Square(QSizeF size)
+Q_DECL_CONSTEXPR inline auto Square(QSizeF size) -> qint64
 {
     return static_cast<qint64>(size.width()*size.height());
 }
@@ -59,7 +59,7 @@ VBestSquare::~VBestSquare()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VBestSquare &VBestSquare::operator=(const VBestSquare &res)
+auto VBestSquare::operator=(const VBestSquare &res) -> VBestSquare &
 {
     if ( &res == this )
     {
@@ -76,7 +76,7 @@ VBestSquare::VBestSquare(VBestSquare &&res) Q_DECL_NOTHROW
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VBestSquare &VBestSquare::operator=(VBestSquare &&res) Q_DECL_NOTHROW
+auto VBestSquare::operator=(VBestSquare &&res) Q_DECL_NOTHROW->VBestSquare &
 {
     std::swap(d, res.d);
     return *this;
@@ -135,55 +135,55 @@ void VBestSquare::NewResult(const VBestSquare &best)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSizeF VBestSquare::BestSize() const
+auto VBestSquare::BestSize() const -> QSizeF
 {
     return d->data.bestSize;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VBestSquare::GContourEdge() const
+auto VBestSquare::GContourEdge() const -> int
 {
     return d->data.globalI;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VBestSquare::DetailEdge() const
+auto VBestSquare::DetailEdge() const -> int
 {
     return d->data.detJ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QTransform VBestSquare::Matrix() const
+auto VBestSquare::Matrix() const -> QTransform
 {
     return d->data.resMatrix;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VBestSquare::HasValidResult() const
+auto VBestSquare::HasValidResult() const -> bool
 {
     return d->valideResult;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VBestSquare::Mirror() const
+auto VBestSquare::Mirror() const -> bool
 {
     return d->data.resMirror;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-BestFrom VBestSquare::Type() const
+auto VBestSquare::Type() const -> BestFrom
 {
     return d->data.type;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VBestSquare::IsTerminatedByException() const
+auto VBestSquare::IsTerminatedByException() const -> bool
 {
     return d->terminatedByException;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VBestSquare::ReasonTerminatedByException() const
+auto VBestSquare::ReasonTerminatedByException() const -> QString
 {
     return d->exceptionReason;
 }
@@ -197,19 +197,19 @@ void VBestSquare::TerminatedByException(const QString &reason)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VBestSquareResData VBestSquare::BestResultData() const
+auto VBestSquare::BestResultData() const -> VBestSquareResData
 {
     return d->data;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VBestSquare::IsSaveLength() const
+auto VBestSquare::IsSaveLength() const -> bool
 {
     return d->saveLength;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VBestSquare::IsImprovedSidePosition(qreal sidePosition) const
+auto VBestSquare::IsImprovedSidePosition(qreal sidePosition) const -> bool
 {
     const bool lessThan = d->data.sidePosition < sidePosition;
     const bool greaterThan = d->data.sidePosition > sidePosition;
@@ -218,7 +218,7 @@ bool VBestSquare::IsImprovedSidePosition(qreal sidePosition) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VBestSquare::IsPortrait() const
+auto VBestSquare::IsPortrait() const -> bool
 {
     return d->isPortrait;
 }

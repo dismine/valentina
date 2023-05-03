@@ -46,13 +46,13 @@ public:
     ~DialogLayoutScale();
 
     void      SetTiledMargins(QMarginsF margins);
-    QMarginsF GetTiledMargins() const;
+    auto GetTiledMargins() const -> QMarginsF;
 
     void  SetXScale(qreal scale);
-    qreal GetXScale() const;
+    auto GetXScale() const -> qreal;
 
     void  SetYScale(qreal scale);
-    qreal GetYScale() const;
+    auto GetYScale() const -> qreal;
 
 protected:
     virtual void showEvent(QShowEvent *event) override;

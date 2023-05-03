@@ -50,7 +50,7 @@ public:
     static void Create(const VAbstractNodeInitData &initData);
 
     static const QString ToolType;
-    virtual QString getTagName() const override;
+    virtual auto getTagName() const -> QString override;
 public slots:
     virtual void FullUpdateFromFile() override {}
     virtual void AllowHover(bool enabled) override;

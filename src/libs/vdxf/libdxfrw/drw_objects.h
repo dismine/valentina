@@ -91,7 +91,7 @@ public:
     }
 
 protected:
-    virtual bool parseCode(int code, dxfReader *reader);
+    virtual auto parseCode(int code, dxfReader *reader) -> bool;
     void reset()
     {
         flags = 0;
@@ -112,7 +112,7 @@ public:
     std::vector<DRW_Variant*> extData{};    /*!< FIFO list of extended data, codes 1000 to 1071*/
 
 private:
-    DRW_TableEntry &operator=(const DRW_TableEntry &) Q_DECL_EQ_DELETE;
+    auto operator=(const DRW_TableEntry &) -> DRW_TableEntry &Q_DECL_EQ_DELETE;
     DRW_Variant* curr{nullptr};
 };
 
@@ -227,7 +227,7 @@ public:
     }
 
 protected:
-    bool parseCode(int code, dxfReader *reader) override;
+    auto parseCode(int code, dxfReader *reader) -> bool override;
 
 public:
     //V12
@@ -330,7 +330,7 @@ public:
     }
 
 protected:
-    bool parseCode(int code, dxfReader *reader) override;
+    auto parseCode(int code, dxfReader *reader) -> bool override;
     void update();
 
 public:
@@ -374,7 +374,7 @@ public:
     }
 
 protected:
-    bool parseCode(int code, dxfReader *reader) override;
+    auto parseCode(int code, dxfReader *reader) -> bool override;
 
 public:
     UTF8STRING lineType;            /*!< line type, code 6 */
@@ -442,7 +442,7 @@ public:
     }
 
 protected:
-    bool parseCode(int code, dxfReader *reader) override;
+    auto parseCode(int code, dxfReader *reader) -> bool override;
 
 public:
     double height;          /*!< Fixed text height (0 not set), code 40 */
@@ -511,7 +511,7 @@ public:
     }
 
 protected:
-    bool parseCode(int code, dxfReader *reader) override;
+    auto parseCode(int code, dxfReader *reader) -> bool override;
 
 public:
     DRW_Coord lowerLeft;     /*!< Lower left corner, code 10 & 20 */
@@ -576,7 +576,7 @@ public:
     }
 
 protected:
-    bool parseCode(int code, dxfReader *reader) override;
+    auto parseCode(int code, dxfReader *reader) -> bool override;
 
 public:
 //    std::string handle;       /*!< entity identifier, code 5 */
@@ -614,7 +614,7 @@ public:
     }
 
 protected:
-    bool parseCode(int code, dxfReader *reader) override;
+    auto parseCode(int code, dxfReader *reader) -> bool override;
 
 public:
     UTF8STRING plotViewName {}; /*!< Plot view name, code 6 */
@@ -641,7 +641,7 @@ public:
     }
 
 protected:
-    bool parseCode(int code, dxfReader *reader) override {return DRW_TableEntry::parseCode(code, reader);}
+    auto parseCode(int code, dxfReader *reader) -> bool override { return DRW_TableEntry::parseCode(code, reader); }
 };
 
 namespace DRW {

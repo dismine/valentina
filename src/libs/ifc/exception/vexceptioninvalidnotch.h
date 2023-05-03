@@ -35,12 +35,12 @@ class VExceptionInvalidNotch : public VException
 public:
     explicit VExceptionInvalidNotch(const QString &error) V_NOEXCEPT_EXPR (true);
     VExceptionInvalidNotch(const VExceptionInvalidNotch &e) V_NOEXCEPT_EXPR (true);
-    VExceptionInvalidNotch &operator=(const VExceptionInvalidNotch &e) V_NOEXCEPT_EXPR (true);
+    auto operator=(const VExceptionInvalidNotch &e) V_NOEXCEPT_EXPR(true) -> VExceptionInvalidNotch &;
     virtual ~VExceptionInvalidNotch() V_NOEXCEPT_EXPR (true) = default;
 
     Q_NORETURN virtual void raise() const override { throw *this; }
 
-    Q_REQUIRED_RESULT virtual VExceptionInvalidNotch *clone() const override
+    Q_REQUIRED_RESULT virtual auto clone() const -> VExceptionInvalidNotch * override
     { return new VExceptionInvalidNotch(*this); }
 };
 

@@ -1030,7 +1030,7 @@ void VAbstractPiece::SetHideMainPath(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VAbstractPiece::IsSewLineOnDrawing() const
+auto VAbstractPiece::IsSewLineOnDrawing() const -> bool
 {
     return d->m_onDrawing;
 }

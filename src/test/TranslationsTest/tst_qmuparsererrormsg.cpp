@@ -147,7 +147,7 @@ void TST_QmuParserErrorMsg::AddCase(int code, bool tok, bool pos)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int TST_QmuParserErrorMsg::LoadTranslation(const QString &checkedLocale)
+auto TST_QmuParserErrorMsg::LoadTranslation(const QString &checkedLocale) -> int
 {
     const QString path = TranslationsPath();
     const QString file = QString("valentina_%1.qm").arg(checkedLocale);

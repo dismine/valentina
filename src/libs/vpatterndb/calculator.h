@@ -63,10 +63,12 @@ public:
     Calculator();
     virtual ~Calculator() = default;
 
-    qreal EvalFormula(const QHash<QString, QSharedPointer<VInternalVariable> > *vars, const QString &formula);
+    auto EvalFormula(const QHash<QString, QSharedPointer<VInternalVariable>> *vars, const QString &formula) -> qreal;
+
 protected:
-    static qreal* VarFactory(const QString &a_szName, void *a_pUserData);
-    static qreal Warning(const QString &warningMsg, qreal value);
+    static auto VarFactory(const QString &a_szName, void *a_pUserData) -> qreal *;
+    static auto Warning(const QString &warningMsg, qreal value) -> qreal;
+
 private:
     Q_DISABLE_COPY_MOVE(Calculator) // NOLINT
     QVector<QSharedPointer<qreal>> m_varsValues;

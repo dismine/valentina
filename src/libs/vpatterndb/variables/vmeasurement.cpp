@@ -79,7 +79,7 @@ VMeasurement::VMeasurement(const VMeasurement &m)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VMeasurement &VMeasurement::operator=(const VMeasurement &m)
+auto VMeasurement::operator=(const VMeasurement &m) -> VMeasurement &
 {
     if ( &m == this )
     {
@@ -97,7 +97,7 @@ VMeasurement::VMeasurement(VMeasurement &&m) Q_DECL_NOTHROW
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VMeasurement &VMeasurement::operator=(VMeasurement &&m) Q_DECL_NOTHROW
+auto VMeasurement::operator=(VMeasurement &&m) Q_DECL_NOTHROW->VMeasurement &
 {
     VVariable::operator=(m);
     std::swap(d, m.d);
@@ -110,7 +110,7 @@ VMeasurement::~VMeasurement()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VMeasurement::CorrectionHash(qreal baseA, qreal baseB, qreal baseC)
+auto VMeasurement::CorrectionHash(qreal baseA, qreal baseB, qreal baseC) -> QString
 {
     QStringList hashBlocks{QString::number(baseA)};
 
@@ -127,7 +127,7 @@ QString VMeasurement::CorrectionHash(qreal baseA, qreal baseB, qreal baseC)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VMeasurement::CalcValue() const
+auto VMeasurement::CalcValue() const -> qreal
 {
     if (qFuzzyIsNull(d->currentBaseA))
     {
@@ -143,7 +143,7 @@ qreal VMeasurement::CalcValue() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VMeasurement::Correction() const
+auto VMeasurement::Correction() const -> qreal
 {
     const QString hash = CorrectionHash(d->currentBaseA, d->currentBaseB, d->currentBaseC);
     if (d->corrections.contains(hash))
@@ -159,7 +159,7 @@ qreal VMeasurement::Correction() const
  * @brief GetGuiText measurement name for tooltip
  * @return measurement name
  */
-QString VMeasurement::GetGuiText() const
+auto VMeasurement::GetGuiText() const -> QString
 {
     return d->gui_text;
 }
@@ -171,56 +171,56 @@ void VMeasurement::SetGuiText(const QString &guiText)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VMeasurement::GetFormula() const
+auto VMeasurement::GetFormula() const -> QString
 {
     return d->formula;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VMeasurement::IsCustom() const
+auto VMeasurement::IsCustom() const -> bool
 {
     return GetName().indexOf(CustomMSign) == 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VMeasurement::Index() const
+auto VMeasurement::Index() const -> int
 {
     return static_cast<int>(d->index);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VMeasurement::IsFormulaOk() const
+auto VMeasurement::IsFormulaOk() const -> bool
 {
     return d->formulaOk;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-MeasurementType VMeasurement::GetMeasurementType() const
+auto VMeasurement::GetMeasurementType() const -> MeasurementType
 {
     return d->varType;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VMeasurement::IsNotUsed() const
+auto VMeasurement::IsNotUsed() const -> bool
 {
     return qFuzzyIsNull(d->shiftBase) && qFuzzyIsNull(d->shiftB) && qFuzzyIsNull(d->shiftA);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VMeasurement::GetValue() const
+auto VMeasurement::GetValue() const -> qreal
 {
     return CalcValue();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal *VMeasurement::GetValue()
+auto VMeasurement::GetValue() -> qreal *
 {
     VInternalVariable::SetValue(CalcValue());
     return VInternalVariable::GetValue();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VContainer *VMeasurement::GetData()
+auto VMeasurement::GetData() -> VContainer *
 {
     return d->data.data();
 }
@@ -248,7 +248,7 @@ void VMeasurement::SetBaseC(qreal base)
  * @brief GetBase return value in base size and height
  * @return value
  */
-qreal VMeasurement::GetBase() const
+auto VMeasurement::GetBase() const -> qreal
 {
     return d->shiftBase;
 }
@@ -264,7 +264,7 @@ void VMeasurement::SetBase(qreal value)
  * @brief GetKheight return increment in heights
  * @return increment
  */
-qreal VMeasurement::GetShiftA() const
+auto VMeasurement::GetShiftA() const -> qreal
 {
     return d->shiftA;
 }
@@ -281,7 +281,7 @@ void VMeasurement::SetShiftA(qreal value)
  * @brief GetKsize return increment in sizes
  * @return increment
  */
-qreal VMeasurement::GetShiftB() const
+auto VMeasurement::GetShiftB() const -> qreal
 {
     return d->shiftB;
 }
@@ -294,7 +294,7 @@ void VMeasurement::SetShiftB(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VMeasurement::GetShiftC() const
+auto VMeasurement::GetShiftC() const -> qreal
 {
     return d->shiftC;
 }
@@ -306,7 +306,7 @@ void VMeasurement::SetShiftC(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VMeasurement::GetStepA() const
+auto VMeasurement::GetStepA() const -> qreal
 {
     return d->shiftA;
 }
@@ -318,7 +318,7 @@ void VMeasurement::SetStepA(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VMeasurement::GetStepB() const
+auto VMeasurement::GetStepB() const -> qreal
 {
     return d->stepB;
 }
@@ -330,7 +330,7 @@ void VMeasurement::SetStepB(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VMeasurement::GetStepC() const
+auto VMeasurement::GetStepC() const -> qreal
 {
     return d->stepC;
 }
@@ -342,7 +342,7 @@ void VMeasurement::SetStepC(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VMeasurement::IsSpecialUnits() const
+auto VMeasurement::IsSpecialUnits() const -> bool
 {
     return d->specialUnits;
 }
@@ -354,7 +354,7 @@ void VMeasurement::SetSpecialUnits(bool special)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-IMD VMeasurement::GetDimension() const
+auto VMeasurement::GetDimension() const -> IMD
 {
     return d->dimension;
 }
@@ -366,13 +366,13 @@ void VMeasurement::SetDimension(IMD type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VMeasurement::GetCorrection(qreal baseA, qreal baseB, qreal baseC) const
+auto VMeasurement::GetCorrection(qreal baseA, qreal baseB, qreal baseC) const -> qreal
 {
     return d->corrections.value(VMeasurement::CorrectionHash(baseA, baseB, baseC), 0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMap<QString, qreal> VMeasurement::GetCorrections() const
+auto VMeasurement::GetCorrections() const -> QMap<QString, qreal>
 {
     return d->corrections;
 }

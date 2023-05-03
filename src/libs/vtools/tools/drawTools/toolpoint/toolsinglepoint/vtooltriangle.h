@@ -69,30 +69,30 @@ class VToolTriangle : public VToolSinglePoint
     Q_OBJECT // NOLINT
 public:
     virtual void   SetDialog() override;
-    static VToolTriangle *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
-                                 VContainer *data);
-    static VToolTriangle *Create(VToolTriangleInitData initData);
-    static bool FindPoint(const QPointF &axisP1, const QPointF &axisP2, const QPointF &firstPoint,
-                          const QPointF &secondPoint, QPointF *intersectionPoint);
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolTriangle *;
+    static auto Create(VToolTriangleInitData initData) -> VToolTriangle *;
+    static auto FindPoint(const QPointF &axisP1, const QPointF &axisP2, const QPointF &firstPoint,
+                          const QPointF &secondPoint, QPointF *intersectionPoint) -> bool;
     static const QString ToolType;
-    virtual int    type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::Triangle)};
 
-    QString AxisP1Name() const;
-    QString AxisP2Name() const;
-    QString FirstPointName() const;
-    QString SecondPointName() const;
+    auto AxisP1Name() const -> QString;
+    auto AxisP2Name() const -> QString;
+    auto FirstPointName() const -> QString;
+    auto SecondPointName() const -> QString;
 
-    quint32 GetAxisP1Id() const;
+    auto GetAxisP1Id() const -> quint32;
     void    SetAxisP1Id(const quint32 &value);
 
-    quint32 GetAxisP2Id() const;
+    auto GetAxisP2Id() const -> quint32;
     void    SetAxisP2Id(const quint32 &value);
 
-    quint32 GetFirstPointId() const;
+    auto GetFirstPointId() const -> quint32;
     void    SetFirstPointId(const quint32 &value);
 
-    quint32 GetSecondPointId() const;
+    auto GetSecondPointId() const -> quint32;
     void    SetSecondPointId(const quint32 &value);
 
     virtual void   ShowVisualization(bool show) override;

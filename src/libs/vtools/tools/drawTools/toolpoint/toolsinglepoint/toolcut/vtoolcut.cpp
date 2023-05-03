@@ -80,7 +80,7 @@ void VToolCut::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolCut::GetFormulaLength() const
+auto VToolCut::GetFormulaLength() const -> VFormula
 {
     VFormula val(formula, getData());
     val.setCheckZero(true);
@@ -103,7 +103,7 @@ void VToolCut::SetFormulaLength(const VFormula &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolCut::GetAliasSuffix1() const
+auto VToolCut::GetAliasSuffix1() const -> QString
 {
     return m_aliasSuffix1;
 }
@@ -132,7 +132,7 @@ void VToolCut::SetAliasSuffix1(QString alias)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolCut::GetAliasSuffix2() const
+auto VToolCut::GetAliasSuffix2() const -> QString
 {
     return m_aliasSuffix2;
 }
@@ -161,7 +161,7 @@ void VToolCut::SetAliasSuffix2(QString alias)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolCut::CurveName() const
+auto VToolCut::CurveName() const -> QString
 {
     return VAbstractTool::data.GetGObject(baseCurveId)->ObjectName();
 }

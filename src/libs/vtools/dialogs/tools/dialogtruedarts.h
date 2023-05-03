@@ -51,29 +51,29 @@ public:
     DialogTrueDarts(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     ~DialogTrueDarts();
 
-    QString            GetFirstNewDartPointName();
-    QString            GetSecondNewDartPointName();
+    auto GetFirstNewDartPointName() -> QString;
+    auto GetSecondNewDartPointName() -> QString;
     void               SetNewDartPointNames(const QString &firstPoint, const QString &secondPoint);
 
-    quint32            GetFirstBasePointId() const;
+    auto GetFirstBasePointId() const -> quint32;
     void               SetFirstBasePointId(const quint32 &value);
 
-    quint32            GetSecondBasePointId() const;
+    auto GetSecondBasePointId() const -> quint32;
     void               SetSecondBasePointId(const quint32 &value);
 
-    quint32            GetFirstDartPointId() const;
+    auto GetFirstDartPointId() const -> quint32;
     void               SetFirstDartPointId(const quint32 &value);
 
-    quint32            GetSecondDartPointId() const;
+    auto GetSecondDartPointId() const -> quint32;
     void               SetSecondDartPointId(const quint32 &value);
 
-    quint32            GetThirdDartPointId() const;
+    auto GetThirdDartPointId() const -> quint32;
     void               SetThirdDartPointId(const quint32 &value);
 
     void               SetChildrenId(const quint32 &ch1, const quint32 &ch2);
 
     void    SetNotes(const QString &notes);
-    QString GetNotes() const;
+    auto GetNotes() const -> QString;
 public slots:
     virtual void       ChosenObject(quint32 id, const SceneObject &type) override;
     virtual void       PointNameChanged() override;
@@ -85,7 +85,7 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     virtual void       SaveData() override;
-    virtual bool       IsValid() const final;
+    virtual auto IsValid() const -> bool final;
 
 private:
     Q_DISABLE_COPY_MOVE(DialogTrueDarts) // NOLINT
@@ -114,7 +114,7 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogTrueDarts::IsValid() const
+inline auto DialogTrueDarts::IsValid() const -> bool
 {
     return flagName1 && flagName2 && flagError;
 }

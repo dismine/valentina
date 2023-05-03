@@ -47,18 +47,18 @@ public:
 
     virtual ~VCurveVariable() override;
 
-    VCurveVariable &operator=(const VCurveVariable &var);
+    auto operator=(const VCurveVariable &var) -> VCurveVariable &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VCurveVariable(VCurveVariable &&var) Q_DECL_NOTHROW;
-    VCurveVariable &operator=(VCurveVariable &&var) Q_DECL_NOTHROW;
+    auto operator=(VCurveVariable &&var) Q_DECL_NOTHROW->VCurveVariable &;
 #endif
 
-    virtual bool Filter(quint32 id) override;
+    virtual auto Filter(quint32 id) -> bool override;
 
-    quint32      GetId() const;
+    auto GetId() const -> quint32;
     void         SetId(const quint32 &id);
 
-    quint32      GetParentId() const;
+    auto GetParentId() const -> quint32;
     void         SetParentId(const quint32 &value);
 private:
     QSharedDataPointer<VCurveVariableData> d;

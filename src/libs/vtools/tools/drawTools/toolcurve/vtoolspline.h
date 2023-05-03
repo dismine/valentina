@@ -76,16 +76,16 @@ class VToolSpline:public VAbstractSpline
 public:
     virtual ~VToolSpline() =default;
     virtual void SetDialog() override;
-    static VToolSpline *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                               VContainer *data);
-    static VToolSpline *Create(VToolSplineInitData &initData, VSpline *spline);
-    static VToolSpline *Create(VToolSplineInitData &initData);
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolSpline *;
+    static auto Create(VToolSplineInitData &initData, VSpline *spline) -> VToolSpline *;
+    static auto Create(VToolSplineInitData &initData) -> VToolSpline *;
     static const QString ToolType;
     static const QString OldToolType;
-    virtual int  type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::Spline)};
 
-    VSpline getSpline()const;
+    auto getSpline() const -> VSpline;
     void    setSpline(const VSpline &spl);
 
     virtual void ShowVisualization(bool show) override;
@@ -119,7 +119,7 @@ private:
 
     VToolSpline (const VToolSplineInitData &initData, QGraphicsItem *parent = nullptr );
 
-    bool IsMovable() const;
+    auto IsMovable() const -> bool;
     void SetSplineAttributes(QDomElement &domElement, const VSpline &spl);
 
     void UndoCommandMove(const VSpline &oldSpl, const VSpline &newSpl);

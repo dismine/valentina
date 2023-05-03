@@ -143,12 +143,12 @@ const QChar expLower       = LocaleExpLower((locale));       \
 const QChar decimalPoint   = LocaleDecimalPoint((locale));   \
 const QChar groupSeparator = LocaleGroupSeparator((locale));
 
-QMUPARSERSHARED_EXPORT QString NameRegExp();
+QMUPARSERSHARED_EXPORT auto NameRegExp() -> QString;
 
 QT_WARNING_POP
 
-Q_REQUIRED_RESULT static inline bool QmuFuzzyComparePossibleNulls(double p1, double p2);
-static inline bool QmuFuzzyComparePossibleNulls(double p1, double p2)
+Q_REQUIRED_RESULT static inline auto QmuFuzzyComparePossibleNulls(double p1, double p2) -> bool;
+static inline auto QmuFuzzyComparePossibleNulls(double p1, double p2) -> bool
 {
     if(qFuzzyIsNull(p1))
     {
@@ -163,9 +163,10 @@ static inline bool QmuFuzzyComparePossibleNulls(double p1, double p2)
     return qFuzzyCompare(p1, p2);
 }
 
-QMUPARSERSHARED_EXPORT qmusizetype ReadVal(const QString &formula, qreal &val, const QLocale &locale,
-                                         const QChar &decimal, const QChar &thousand);
+QMUPARSERSHARED_EXPORT auto ReadVal(const QString &formula, qreal &val, const QLocale &locale, const QChar &decimal,
+                                    const QChar &thousand) -> qmusizetype;
 
-QMUPARSERSHARED_EXPORT qmusizetype FindFirstNotOf(const QString &string, const QString &chars, qmusizetype pos = 0);
+QMUPARSERSHARED_EXPORT auto FindFirstNotOf(const QString &string, const QString &chars, qmusizetype pos = 0)
+    -> qmusizetype;
 
 #endif // QMUDEF_H

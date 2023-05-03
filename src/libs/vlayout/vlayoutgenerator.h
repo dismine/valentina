@@ -57,84 +57,84 @@ public:
     void SetDetails(const QVector<VLayoutPiece> &details);
     void SetLayoutWidth(qreal width);
     void SetCaseType(Cases caseType);
-    vsizetype DetailsCount();
+    auto DetailsCount() -> vsizetype;
 
-    qreal GetPaperHeight() const;
+    auto GetPaperHeight() const -> qreal;
     void SetPaperHeight(qreal value);
 
-    qreal GetPaperWidth() const;
+    auto GetPaperWidth() const -> qreal;
     void SetPaperWidth(qreal value);
 
-    int  GetNestingTime() const;
-    int  GetNestingTimeMSecs() const;
+    auto GetNestingTime() const -> int;
+    auto GetNestingTimeMSecs() const -> int;
     void SetNestingTime(int value);
 
-    qreal GetEfficiencyCoefficient() const;
+    auto GetEfficiencyCoefficient() const -> qreal;
     void  SetEfficiencyCoefficient(qreal coefficient);
 
-    bool IsUsePrinterFields() const;
-    QMarginsF GetPrinterFields() const;
+    auto IsUsePrinterFields() const -> bool;
+    auto GetPrinterFields() const -> QMarginsF;
     void SetPrinterFields(bool usePrinterFields, const QMarginsF &value);
 
-    qreal GetShift() const;
+    auto GetShift() const -> qreal;
     void  SetShift(qreal shift);
 
     void Generate(const QElapsedTimer &timer, qint64 timeout, LayoutErrors previousState = LayoutErrors::NoError);
 
-    qreal LayoutEfficiency() const;
+    auto LayoutEfficiency() const -> qreal;
 
-    LayoutErrors State() const;
+    auto State() const -> LayoutErrors;
 
-    vsizetype PapersCount() const;
+    auto PapersCount() const -> vsizetype;
 
-    Q_REQUIRED_RESULT QList<QGraphicsItem *> GetPapersItems() const;
-    Q_REQUIRED_RESULT QList<QGraphicsItem *> GetGlobalContours() const;
-    Q_REQUIRED_RESULT QList<QList<QGraphicsItem *>> GetAllDetailsItems() const;
+    Q_REQUIRED_RESULT auto GetPapersItems() const -> QList<QGraphicsItem *>;
+    Q_REQUIRED_RESULT auto GetGlobalContours() const -> QList<QGraphicsItem *>;
+    Q_REQUIRED_RESULT auto GetAllDetailsItems() const -> QList<QList<QGraphicsItem *>>;
 
-    QVector<QVector<VLayoutPiece>> GetAllDetails() const;
+    auto GetAllDetails() const -> QVector<QVector<VLayoutPiece>>;
 
-    bool GetRotate() const;
+    auto GetRotate() const -> bool;
     void SetRotate(bool value);
 
-    bool GetFollowGrainline() const;
+    auto GetFollowGrainline() const -> bool;
     void SetFollowGrainline(bool value);
 
-    bool GetManualPriority() const;
+    auto GetManualPriority() const -> bool;
     void SetManualPriority(bool value);
 
-    bool IsNestQuantity() const;
+    auto IsNestQuantity() const -> bool;
     void SetNestQuantity(bool value);
 
-    int GetRotationNumber() const;
+    auto GetRotationNumber() const -> int;
     void SetRotationNumber(int value);
 
-    bool GetAutoCropLength() const;
+    auto GetAutoCropLength() const -> bool;
     void SetAutoCropLength(bool value);
 
-    bool GetAutoCropWidth() const;
+    auto GetAutoCropWidth() const -> bool;
     void SetAutoCropWidth(bool value);
 
-    bool IsSaveLength() const;
+    auto IsSaveLength() const -> bool;
     void SetSaveLength(bool value);
 
-    bool IsPreferOneSheetSolution() const;
+    auto IsPreferOneSheetSolution() const -> bool;
     void SetPreferOneSheetSolution(bool value);
 
-    bool IsUnitePages() const;
+    auto IsUnitePages() const -> bool;
     void SetUnitePages(bool value);
 
-    quint8 GetMultiplier() const;
+    auto GetMultiplier() const -> quint8;
     void   SetMultiplier(quint8 value);
 
-    bool IsStripOptimization() const;
+    auto IsStripOptimization() const -> bool;
     void SetStripOptimization(bool value);
 
-    bool IsTestAsPaths() const;
+    auto IsTestAsPaths() const -> bool;
     void SetTextAsPaths(bool value);
 
-    bool IsRotationNeeded() const;
+    auto IsRotationNeeded() const -> bool;
 
-    bool IsPortrait() const;
+    auto IsPortrait() const -> bool;
 
 public slots:
     void Abort();
@@ -166,16 +166,16 @@ private:
     int nestingTime{1};
     qreal efficiencyCoefficient{0.0};
 
-    int PageHeight() const;
-    int PageWidth() const;
+    auto PageHeight() const -> int;
+    auto PageWidth() const -> int;
 
     void OptimizeWidth();
     void GatherPages();
     void UnitePages();
     void UniteDetails(int j, QList<QList<VLayoutPiece> > &nDetails, qreal length, int i) const;
     void UnitePapers(int j, QList<qreal> &papersLength, qreal length);
-    QList<VLayoutPiece> MoveDetails(qreal length, const QVector<VLayoutPiece> &details) const;
-    VLayoutPaper MasterPage() const;
+    auto MoveDetails(qreal length, const QVector<VLayoutPiece> &details) const -> QList<VLayoutPiece>;
+    auto MasterPage() const -> VLayoutPaper;
 };
 
 #endif // VLAYOUTGENERATOR_H

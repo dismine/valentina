@@ -85,7 +85,7 @@ VToolDoublePoint::VToolDoublePoint(VAbstractPattern *doc, VContainer *data, quin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolDoublePoint::nameP1() const
+auto VToolDoublePoint::nameP1() const -> QString
 {
     return ObjectName<VPointF>(p1id);
 }
@@ -97,7 +97,7 @@ void VToolDoublePoint::setNameP1(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolDoublePoint::nameP2() const
+auto VToolDoublePoint::nameP2() const -> QString
 {
     return ObjectName<VPointF>(p2id);
 }
@@ -131,13 +131,13 @@ void VToolDoublePoint::GroupVisibility(quint32 object, bool visible)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VToolDoublePoint::IsLabelVisible(quint32 id) const
+auto VToolDoublePoint::IsLabelVisible(quint32 id) const -> bool
 {
     if (p1id == id)
     {
         return VAbstractTool::data.GeometricObject<VPointF>(p1id)->IsShowLabel();
     }
-    else if (p2id == id)
+    if (p2id == id)
     {
         return VAbstractTool::data.GeometricObject<VPointF>(p2id)->IsShowLabel();
     }
@@ -322,7 +322,7 @@ void VToolDoublePoint::UpdateNamePosition(quint32 id, const QPointF &pos)
  * @param value value.
  * @return value.
  */
-QVariant VToolDoublePoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+auto VToolDoublePoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) -> QVariant
 {
     if (change == QGraphicsItem::ItemSelectedHasChanged)
     {
@@ -442,7 +442,7 @@ void VToolDoublePoint::ChangeLabelVisibility(quint32 id, bool visible)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolDoublePoint::ComplexToolTip(quint32 itemId) const
+auto VToolDoublePoint::ComplexToolTip(quint32 itemId) const -> QString
 {
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(itemId);
 

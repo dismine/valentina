@@ -100,21 +100,21 @@ public:
 
     virtual ~WarningMessageEvent() =default;
 
-    QString Message() const;
+    auto Message() const -> QString;
 
-    QtMsgType Severity() const;
+    auto Severity() const -> QtMsgType;
 
 private:
     QString m_message;
     QtMsgType m_severity;
 };
 
-inline QString WarningMessageEvent::Message() const
+inline auto WarningMessageEvent::Message() const -> QString
 {
     return m_message;
 }
 
-inline QtMsgType WarningMessageEvent::Severity() const
+inline auto WarningMessageEvent::Severity() const -> QtMsgType
 {
     return m_severity;
 }

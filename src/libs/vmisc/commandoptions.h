@@ -131,6 +131,6 @@ extern const QString LONG_OPTION_LANDSCAPE_ORIENTATION;
 extern const QString LONG_OPTION_NEST_QUANTITY;
 extern const QString LONG_OPTION_PREFER_ONE_SHEET_SOLUTION;
 
-QStringList AllKeys();
+auto AllKeys() -> QStringList;
 
 #endif // COMMANDOPTIONS_H

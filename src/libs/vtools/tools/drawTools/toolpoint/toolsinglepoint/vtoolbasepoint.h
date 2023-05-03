@@ -69,13 +69,13 @@ class VToolBasePoint : public VToolSinglePoint
 public:
     virtual ~VToolBasePoint() =default;
     virtual void SetDialog() override;
-    static VToolBasePoint *Create(VToolBasePointInitData initData);
+    static auto Create(VToolBasePointInitData initData) -> VToolBasePoint *;
     static const QString ToolType;
-    virtual int  type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::BasePoint)};
     virtual void ShowVisualization(bool show) override;
 
-    QPointF GetBasePointPos() const;
+    auto GetBasePointPos() const -> QPointF;
     void    SetBasePointPos(const QPointF &pos);
 public slots:
     virtual void FullUpdateFromFile() override;
@@ -87,7 +87,7 @@ signals:
     void         LiteUpdateTree();
 protected:
     virtual void AddToFile() override;
-    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) override;
+    virtual auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
     virtual void DeleteToolWithConfirm(bool ask = true) override;
     virtual void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
                             QList<quint32> &newDependencies) override;
@@ -96,7 +96,7 @@ protected:
     virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     virtual void SetVisualization() override {}
-    virtual QString MakeToolTip() const override;
+    virtual auto MakeToolTip() const -> QString override;
 private slots:
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
 private:

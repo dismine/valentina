@@ -103,8 +103,8 @@ void VToolRotation::SetDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolRotation *VToolRotation::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                     VAbstractPattern *doc, VContainer *data)
+auto VToolRotation::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                           VContainer *data) -> VToolRotation *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogRotation> dialogTool = qobject_cast<DialogRotation *>(dialog);
@@ -134,7 +134,7 @@ VToolRotation *VToolRotation::Create(const QPointer<DialogTool> &dialog, VMainGr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolRotation *VToolRotation::Create(VToolRotationInitData &initData)
+auto VToolRotation::Create(VToolRotationInitData &initData) -> VToolRotation *
 {
     qreal calcAngle = 0;
 
@@ -285,13 +285,13 @@ QT_WARNING_POP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolRotation::OriginPointName() const
+auto VToolRotation::OriginPointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(origPointId)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolRotation::GetFormulaAngle() const
+auto VToolRotation::GetFormulaAngle() const -> VFormula
 {
     VFormula fAngle(formulaAngle, getData());
     fAngle.setCheckZero(false);
@@ -394,7 +394,7 @@ void VToolRotation::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolRotation::MakeToolTip() const
+auto VToolRotation::MakeToolTip() const -> QString
 {
     return QStringLiteral("<tr> <td><b>%1:</b> %2</td> </tr>"
                           "<tr> <td><b>%3:</b> %4°</td> </tr>"
@@ -405,8 +405,8 @@ QString VToolRotation::MakeToolTip() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-DestinationItem VToolRotation::CreatePoint(quint32 idTool, const SourceItem &sItem, const QPointF &origin, qreal angle,
-                                          const QString &suffix, VContainer *data)
+auto VToolRotation::CreatePoint(quint32 idTool, const SourceItem &sItem, const QPointF &origin, qreal angle,
+                                const QString &suffix, VContainer *data) -> DestinationItem
 {
     const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(sItem.id);
     VPointF rotated = point->Rotate(origin, angle, suffix);
@@ -427,8 +427,8 @@ DestinationItem VToolRotation::CreatePoint(quint32 idTool, const SourceItem &sIt
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Item>
-DestinationItem VToolRotation::CreateItem(quint32 idTool, const SourceItem &sItem, const QPointF &origin, qreal angle,
-                                           const QString &suffix, VContainer *data)
+auto VToolRotation::CreateItem(quint32 idTool, const SourceItem &sItem, const QPointF &origin, qreal angle,
+                               const QString &suffix, VContainer *data) -> DestinationItem
 {
     const QSharedPointer<Item> i = data->GeometricObject<Item>(sItem.id);
     Item rotated = i->Rotate(origin, angle, suffix);
@@ -456,8 +456,8 @@ DestinationItem VToolRotation::CreateItem(quint32 idTool, const SourceItem &sIte
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Item>
-DestinationItem VToolRotation::CreateArc(quint32 idTool, const SourceItem &sItem, const QPointF &origin, qreal angle,
-                                          const QString &suffix, VContainer *data)
+auto VToolRotation::CreateArc(quint32 idTool, const SourceItem &sItem, const QPointF &origin, qreal angle,
+                              const QString &suffix, VContainer *data) -> DestinationItem
 {
     const DestinationItem item = CreateItem<Item>(idTool, sItem, origin, angle, suffix, data);
     data->AddArc(data->GeometricObject<Item>(item.id), item.id);
@@ -466,8 +466,8 @@ DestinationItem VToolRotation::CreateArc(quint32 idTool, const SourceItem &sItem
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Item>
-DestinationItem VToolRotation::CreateCurve(quint32 idTool, const SourceItem &sItem, const QPointF &origin, qreal angle,
-                                           const QString &suffix, VContainer *data)
+auto VToolRotation::CreateCurve(quint32 idTool, const SourceItem &sItem, const QPointF &origin, qreal angle,
+                                const QString &suffix, VContainer *data) -> DestinationItem
 {
     const DestinationItem item = CreateItem<Item>(idTool, sItem, origin, angle, suffix, data);
     data->AddSpline(data->GeometricObject<Item>(item.id), item.id);
@@ -476,8 +476,8 @@ DestinationItem VToolRotation::CreateCurve(quint32 idTool, const SourceItem &sIt
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Item>
-DestinationItem VToolRotation::CreateCurveWithSegments(quint32 idTool, const SourceItem &sItem, const QPointF &origin,
-                                                       qreal angle, const QString &suffix, VContainer *data)
+auto VToolRotation::CreateCurveWithSegments(quint32 idTool, const SourceItem &sItem, const QPointF &origin, qreal angle,
+                                            const QString &suffix, VContainer *data) -> DestinationItem
 {
     const DestinationItem item = CreateItem<Item>(idTool, sItem, origin, angle, suffix, data);
     data->AddCurveWithSegments(data->GeometricObject<Item>(item.id), item.id);

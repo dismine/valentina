@@ -41,7 +41,7 @@
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-QJsonArray PassmarkShapeToJson(const QVector<QLineF> &shape)
+auto PassmarkShapeToJson(const QVector<QLineF> &shape) -> QJsonArray
 {
     QJsonArray shapeArray;
     for (auto line: shape)

@@ -76,7 +76,8 @@ Calculator::Calculator()
  * @param formula string of formula.
  * @return value of formula.
  */
-qreal Calculator::EvalFormula(const QHash<QString, QSharedPointer<VInternalVariable>> *vars, const QString &formula)
+auto Calculator::EvalFormula(const QHash<QString, QSharedPointer<VInternalVariable>> *vars, const QString &formula)
+    -> qreal
 {
     // Converting with locale is much faster in case of single numerical value.
     QLocale c(QLocale::C);
@@ -96,7 +97,7 @@ qreal Calculator::EvalFormula(const QHash<QString, QSharedPointer<VInternalVaria
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal *Calculator::VarFactory(const QString &a_szName, void *a_pUserData)
+auto Calculator::VarFactory(const QString &a_szName, void *a_pUserData) -> qreal *
 {
     Q_UNUSED(a_szName)
     Calculator *calc = static_cast<Calculator *>(a_pUserData);
@@ -119,7 +120,7 @@ qreal *Calculator::VarFactory(const QString &a_szName, void *a_pUserData)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal Calculator::Warning(const QString &warningMsg, qreal value)
+auto Calculator::Warning(const QString &warningMsg, qreal value) -> qreal
 {
     VAbstractApplication::VApp()->IsPedantic() ? throw qmu::QmuParserWarning(warningMsg) :
                                                qWarning() << VAbstractApplication::warningMessageSignature + warningMsg;

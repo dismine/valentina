@@ -92,7 +92,7 @@ DialogPointOfIntersectionCurves::~DialogPointOfIntersectionCurves()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogPointOfIntersectionCurves::GetPointName() const
+auto DialogPointOfIntersectionCurves::GetPointName() const -> QString
 {
     return pointName;
 }
@@ -105,7 +105,7 @@ void DialogPointOfIntersectionCurves::SetPointName(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogPointOfIntersectionCurves::GetFirstCurveId() const
+auto DialogPointOfIntersectionCurves::GetFirstCurveId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxCurve1);
 }
@@ -115,13 +115,13 @@ void DialogPointOfIntersectionCurves::SetFirstCurveId(quint32 value)
 {
     setCurrentCurveId(ui->comboBoxCurve1, value);
 
-    auto point = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
+    auto *point = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
     SCASSERT(point != nullptr)
     point->SetCurve1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogPointOfIntersectionCurves::GetSecondCurveId() const
+auto DialogPointOfIntersectionCurves::GetSecondCurveId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxCurve2);
 }
@@ -131,13 +131,13 @@ void DialogPointOfIntersectionCurves::SetSecondCurveId(quint32 value)
 {
     setCurrentCurveId(ui->comboBoxCurve2, value);
 
-    auto point = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
+    auto *point = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
     SCASSERT(point != nullptr)
     point->SetCurve2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCrossCurvesPoint DialogPointOfIntersectionCurves::GetVCrossPoint() const
+auto DialogPointOfIntersectionCurves::GetVCrossPoint() const -> VCrossCurvesPoint
 {
     return getCurrentCrossPoint<VCrossCurvesPoint>(ui->comboBoxVCorrection);
 }
@@ -150,14 +150,14 @@ void DialogPointOfIntersectionCurves::SetVCrossPoint(VCrossCurvesPoint vP)
     {
         ui->comboBoxVCorrection->setCurrentIndex(index);
 
-        auto point = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
+        auto *point = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
         SCASSERT(point != nullptr)
         point->SetVCrossPoint(vP);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-HCrossCurvesPoint DialogPointOfIntersectionCurves::GetHCrossPoint() const
+auto DialogPointOfIntersectionCurves::GetHCrossPoint() const -> HCrossCurvesPoint
 {
     return getCurrentCrossPoint<HCrossCurvesPoint>(ui->comboBoxHCorrection);
 }
@@ -170,7 +170,7 @@ void DialogPointOfIntersectionCurves::SetHCrossPoint(HCrossCurvesPoint hP)
     {
         ui->comboBoxHCorrection->setCurrentIndex(index);
 
-        auto point = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
+        auto *point = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
         SCASSERT(point != nullptr)
         point->SetHCrossPoint(hP);
     }
@@ -186,7 +186,7 @@ void DialogPointOfIntersectionCurves::ChosenObject(quint32 id, const SceneObject
                 || type == SceneObject::ElArc
                 || type == SceneObject::SplinePath)
         {
-            auto point = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
+            auto *point = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
             SCASSERT(point != nullptr)
 
             switch (number)
@@ -229,7 +229,7 @@ void DialogPointOfIntersectionCurves::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
 
-    auto point = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
+    auto *point = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
     SCASSERT(point != nullptr)
 
     point->SetCurve1Id(GetFirstCurveId());
@@ -324,7 +324,7 @@ void DialogPointOfIntersectionCurves::SetNotes(const QString &notes)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogPointOfIntersectionCurves::GetNotes() const
+auto DialogPointOfIntersectionCurves::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }
@@ -338,7 +338,7 @@ void DialogPointOfIntersectionCurves::SetCurve1AliasSuffix1(const QString &alias
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogPointOfIntersectionCurves::GetCurve1AliasSuffix1() const
+auto DialogPointOfIntersectionCurves::GetCurve1AliasSuffix1() const -> QString
 {
     return ui->lineEditCurve1Alias1->text();
 }
@@ -352,7 +352,7 @@ void DialogPointOfIntersectionCurves::SetCurve1AliasSuffix2(const QString &alias
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogPointOfIntersectionCurves::GetCurve1AliasSuffix2() const
+auto DialogPointOfIntersectionCurves::GetCurve1AliasSuffix2() const -> QString
 {
     return ui->lineEditCurve1Alias2->text();
 }
@@ -366,7 +366,7 @@ void DialogPointOfIntersectionCurves::SetCurve2AliasSuffix1(const QString &alias
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogPointOfIntersectionCurves::GetCurve2AliasSuffix1() const
+auto DialogPointOfIntersectionCurves::GetCurve2AliasSuffix1() const -> QString
 {
     return ui->lineEditCurve2Alias1->text();
 }
@@ -380,7 +380,7 @@ void DialogPointOfIntersectionCurves::SetCurve2AliasSuffix2(const QString &alias
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogPointOfIntersectionCurves::GetCurve2AliasSuffix2() const
+auto DialogPointOfIntersectionCurves::GetCurve2AliasSuffix2() const -> QString
 {
     return ui->lineEditCurve2Alias2->text();
 }

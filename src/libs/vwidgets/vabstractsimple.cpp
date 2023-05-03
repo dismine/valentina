@@ -44,7 +44,7 @@ void VAbstractSimple::ToolSelectionType(const SelectionType &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-GOType VAbstractSimple::GetType() const
+auto VAbstractSimple::GetType() const -> GOType
 {
     return type;
 }

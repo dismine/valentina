@@ -1410,7 +1410,7 @@ void TST_VAbstractPiece::Case5() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> TST_VAbstractPiece::InputPointsCase3a() const
+auto TST_VAbstractPiece::InputPointsCase3a() const -> QVector<QPointF>
 {
     QVector<QPointF> points;
 
@@ -1422,7 +1422,7 @@ QVector<QPointF> TST_VAbstractPiece::InputPointsCase3a() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> TST_VAbstractPiece::InputPointsCase4a() const
+auto TST_VAbstractPiece::InputPointsCase4a() const -> QVector<QPointF>
 {
     QVector<QPointF> points;
 
@@ -1434,7 +1434,7 @@ QVector<QPointF> TST_VAbstractPiece::InputPointsCase4a() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> TST_VAbstractPiece::InputPointsCase5a() const
+auto TST_VAbstractPiece::InputPointsCase5a() const -> QVector<QPointF>
 {
     QVector<QPointF> points;
 

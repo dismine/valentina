@@ -41,7 +41,7 @@ VAbstractPoint::VAbstractPoint(VAbstractPattern *doc, VContainer *data, quint32 
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractPoint::getTagName() const
+auto VAbstractPoint::getTagName() const -> QString
 {
     return VAbstractPattern::TagPoint;
 }

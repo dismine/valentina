@@ -558,7 +558,7 @@ void VPLayoutFileReader::ReadPiece(const VPPiecePtr &piece)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutPoint VPLayoutFileReader::ReadLayoutPoint()
+auto VPLayoutFileReader::ReadLayoutPoint() -> VLayoutPoint
 {
     AssertRootTag(ML::TagPoint);
 

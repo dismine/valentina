@@ -123,7 +123,7 @@ void QmuFormulaBase::InitCharSets()
 //---------------------------------------------------------------------------------------------------------------------
 // Factory function for creating new parser variables
 // This could as well be a function performing database queries.
-qreal *QmuFormulaBase::AddVariable(const QString &a_szName, void *a_pUserData)
+auto QmuFormulaBase::AddVariable(const QString &a_szName, void *a_pUserData) -> qreal *
 {
     Q_UNUSED(a_szName)
     Q_UNUSED(a_pUserData)

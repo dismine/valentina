@@ -50,7 +50,7 @@ public:
                 qreal c1Length, const QString &c1LengthF, qreal c2Length, const QString &c2LengthF);
     virtual ~VSplineData();
 
-    static qreal GetL(const QPointF &p1, const QPointF &p4, qreal kCurve);
+    static auto GetL(const QPointF &p1, const QPointF &p4, qreal kCurve) -> qreal;
 
     /** @brief p1 first spline point. */
     VPointF p1;
@@ -200,7 +200,7 @@ VSplineData::~VSplineData()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VSplineData::GetL(const QPointF &p1, const QPointF &p4, qreal kCurve)
+auto VSplineData::GetL(const QPointF &p1, const QPointF &p4, qreal kCurve) -> qreal
 {
     static const qreal angle = 90;
     qreal length = VFuzzyComparePoints(p1, p4) ? accuracyPointOnLine*2 : QLineF(p1, p4).length();

@@ -104,7 +104,7 @@ VSplinePath::VSplinePath(const VSplinePath &splPath)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VSplinePath VSplinePath::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const
+auto VSplinePath::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const -> VSplinePath
 {
     QVector<VSplinePoint> newPoints(CountPoints());
     for (qint32 i = 1; i <= CountSubSpl(); ++i)
@@ -135,7 +135,7 @@ VSplinePath VSplinePath::Rotate(const QPointF &originPoint, qreal degrees, const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSplinePath VSplinePath::Flip(const QLineF &axis, const QString &prefix) const
+auto VSplinePath::Flip(const QLineF &axis, const QString &prefix) const -> VSplinePath
 {
     QVector<VSplinePoint> newPoints(CountPoints());
     for (qint32 i = 1; i <= CountSubSpl(); ++i)
@@ -166,7 +166,7 @@ VSplinePath VSplinePath::Flip(const QLineF &axis, const QString &prefix) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSplinePath VSplinePath::Move(qreal length, qreal angle, const QString &prefix) const
+auto VSplinePath::Move(qreal length, qreal angle, const QString &prefix) const -> VSplinePath
 {
     QVector<VSplinePoint> newPoints(CountPoints());
     for (qint32 i = 1; i <= CountSubSpl(); ++i)
@@ -216,7 +216,7 @@ void VSplinePath::append(const VSplinePoint &point)
  * @brief CountSubSpl return count of simple splines.
  * @return count.
  */
-vsizetype VSplinePath::CountSubSpl() const
+auto VSplinePath::CountSubSpl() const -> vsizetype
 {
     if (d->path.isEmpty())
     {
@@ -232,7 +232,7 @@ vsizetype VSplinePath::CountSubSpl() const
  * @param index index spline in spline path.
  * @return spline
  */
-VSpline VSplinePath::GetSpline(vsizetype index) const
+auto VSplinePath::GetSpline(vsizetype index) const -> VSpline
 {
     if (CountPoints()<1)
     {
@@ -282,7 +282,7 @@ void VSplinePath::UpdatePoint(qint32 indexSpline, const SplinePointPosition &pos
  * @param pos position point in spline.
  * @return spline point.
  */
-VSplinePoint VSplinePath::GetSplinePoint(qint32 indexSpline, SplinePointPosition pos) const
+auto VSplinePath::GetSplinePoint(qint32 indexSpline, SplinePointPosition pos) const -> VSplinePoint
 {
     if (indexSpline < 1 || indexSpline > CountSubSpl())
     {
@@ -304,7 +304,7 @@ VSplinePoint VSplinePath::GetSplinePoint(qint32 indexSpline, SplinePointPosition
  * @param path spline path.
  * @return spline path.
  */
-VSplinePath &VSplinePath::operator =(const VSplinePath &path)
+auto VSplinePath::operator=(const VSplinePath &path) -> VSplinePath &
 {
     if ( &path == this )
     {
@@ -323,7 +323,7 @@ VSplinePath::VSplinePath(VSplinePath &&splPath) Q_DECL_NOTHROW
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VSplinePath &VSplinePath::operator=(VSplinePath &&path) Q_DECL_NOTHROW
+auto VSplinePath::operator=(VSplinePath &&path) Q_DECL_NOTHROW->VSplinePath &
 {
     VAbstractCubicBezierPath::operator=(path);
     std::swap(d, path.d);
@@ -337,7 +337,7 @@ VSplinePath &VSplinePath::operator=(VSplinePath &&path) Q_DECL_NOTHROW
  * @param indx index in list.
  * @return spline point.
  */
-VSplinePoint & VSplinePath::operator[](vsizetype indx)
+auto VSplinePath::operator[](vsizetype indx) -> VSplinePoint &
 {
     return d->path[indx];
 }
@@ -348,19 +348,19 @@ VSplinePoint & VSplinePath::operator[](vsizetype indx)
  * @param indx index in list.
  * @return spline point.
  */
-const VSplinePoint &VSplinePath::at(vsizetype indx) const
+auto VSplinePath::at(vsizetype indx) const -> const VSplinePoint &
 {
     return d->path[indx];
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QJsonObject VSplinePath::ToJson() const
+auto VSplinePath::ToJson() const -> QJsonObject
 {
     QJsonObject object = VAbstractCubicBezierPath::ToJson();
     object[QLatin1String("aScale")] = GetApproximationScale();
 
     QJsonArray nodesArray;
-    for (auto &node: d->path)
+    for (const auto &node : d->path)
     {
         nodesArray.append(node.ToJson());
     }
@@ -370,13 +370,13 @@ QJsonObject VSplinePath::ToJson() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VSplinePath::GetStartAngle() const
+auto VSplinePath::GetStartAngle() const -> qreal
 {
     return CountPoints() > 0 ? ConstFirst (GetSplinePath()).Angle2() : 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VSplinePath::GetEndAngle() const
+auto VSplinePath::GetEndAngle() const -> qreal
 {
     if (CountPoints() > 0)
     {
@@ -389,25 +389,25 @@ qreal VSplinePath::GetEndAngle() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VSplinePath::GetC1Length() const
+auto VSplinePath::GetC1Length() const -> qreal
 {
     return CountPoints() > 0 ? ConstFirst (GetSplinePath()).Length2() : 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VSplinePath::GetC2Length() const
+auto VSplinePath::GetC2Length() const -> qreal
 {
     return CountPoints() > 0 ? ConstFirst (GetSplinePath()).Length1() : 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPointF VSplinePath::FirstPoint() const
+auto VSplinePath::FirstPoint() const -> VPointF
 {
     return not d->path.isEmpty() ? ConstFirst (d->path).P() : VPointF();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPointF VSplinePath::LastPoint() const
+auto VSplinePath::LastPoint() const -> VPointF
 {
     const vsizetype count = CountSubSpl();
     return count >= 1 ? d->path.at(count).P() :// Take last point of the last real spline
@@ -419,7 +419,7 @@ VPointF VSplinePath::LastPoint() const
  * @brief CountPoints return count of points.
  * @return count.
  */
-vsizetype VSplinePath::CountPoints() const
+auto VSplinePath::CountPoints() const -> vsizetype
 {
     return d->path.size();
 }
@@ -429,13 +429,13 @@ vsizetype VSplinePath::CountPoints() const
  * @brief GetSplinePath return list with spline points.
  * @return list.
  */
-QVector<VSplinePoint> VSplinePath::GetSplinePath() const
+auto VSplinePath::GetSplinePath() const -> QVector<VSplinePoint>
 {
     return d->path;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VFSplinePoint> VSplinePath::GetFSplinePath() const
+auto VSplinePath::GetFSplinePath() const -> QVector<VFSplinePoint>
 {
     QVector<VFSplinePoint> points;
     points.reserve(d->path.size());

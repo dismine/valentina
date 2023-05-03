@@ -57,7 +57,7 @@ VExceptionBadId::VExceptionBadId(const VExceptionBadId &e) V_NOEXCEPT_EXPR (true
     :VException(e), id(e.BadId()), key(e.BadKey()){}
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionBadId &VExceptionBadId::operator=(const VExceptionBadId &e) V_NOEXCEPT_EXPR (true)
+auto VExceptionBadId::operator=(const VExceptionBadId &e) V_NOEXCEPT_EXPR(true) -> VExceptionBadId &
 {
     if ( &e == this )
     {
@@ -74,7 +74,7 @@ VExceptionBadId &VExceptionBadId::operator=(const VExceptionBadId &e) V_NOEXCEPT
  * @brief ErrorMessage return main error message
  * @return main error message
  */
-QString VExceptionBadId::ErrorMessage() const
+auto VExceptionBadId::ErrorMessage() const -> QString
 {
     QString error;
     if (key.isEmpty())

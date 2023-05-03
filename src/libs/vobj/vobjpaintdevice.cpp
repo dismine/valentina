@@ -53,14 +53,14 @@ VObjPaintDevice::~VObjPaintDevice()
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-QPaintEngine *VObjPaintDevice::paintEngine() const
+auto VObjPaintDevice::paintEngine() const -> QPaintEngine *
 {
     return engine.data();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-QString VObjPaintDevice::getFileName() const
+auto VObjPaintDevice::getFileName() const -> QString
 {
     return fileName;
 }
@@ -87,7 +87,7 @@ void VObjPaintDevice::setFileName(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSize VObjPaintDevice::getSize()
+auto VObjPaintDevice::getSize() -> QSize
 {
     return engine->getSize();
 }
@@ -104,7 +104,7 @@ void VObjPaintDevice::setSize(const QSize &size)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QIODevice *VObjPaintDevice::getOutputDevice()
+auto VObjPaintDevice::getOutputDevice() -> QIODevice *
 {
     return engine->getOutputDevice();
 }
@@ -123,7 +123,7 @@ void VObjPaintDevice::setOutputDevice(QIODevice *outputDevice)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VObjPaintDevice::getResolution() const
+auto VObjPaintDevice::getResolution() const -> int
 {
     return engine->getResolution();
 }
@@ -135,7 +135,7 @@ void VObjPaintDevice::setResolution(int dpi)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VObjPaintDevice::metric(QPaintDevice::PaintDeviceMetric metric) const
+auto VObjPaintDevice::metric(QPaintDevice::PaintDeviceMetric metric) const -> int
 {
     switch (metric)
     {

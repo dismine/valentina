@@ -63,21 +63,21 @@ public:
                    QString &lineColor, const QString &formula, const quint32 &basePointId, const qreal &angle,
                    const QString &notes, QGraphicsItem * parent = nullptr);
     virtual ~VToolLinePoint() override;
-    virtual int       type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::LinePoint)};
 
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                        QWidget *widget = nullptr) override;
 
-    VFormula GetFormulaLength() const;
+    auto GetFormulaLength() const -> VFormula;
     void     SetFormulaLength(const VFormula &value);
 
-    QString BasePointName() const;
+    auto BasePointName() const -> QString;
 
-    qreal   GetAngle() const;
+    auto GetAngle() const -> qreal;
     void    SetAngle(const qreal &value);
 
-    QString GetLineColor() const;
+    auto GetLineColor() const -> QString;
     void    SetLineColor(const QString &value);
 
 public slots:
@@ -104,7 +104,8 @@ protected:
     virtual void      SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     virtual void      hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
     virtual void      hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
-    virtual QString   MakeToolTip() const override;
+    virtual auto MakeToolTip() const -> QString override;
+
 private:
     Q_DISABLE_COPY_MOVE(VToolLinePoint) // NOLINT
 };

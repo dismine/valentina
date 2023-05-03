@@ -71,30 +71,30 @@ class VToolEllipticalArc : public VToolAbstractArc
     Q_OBJECT // NOLINT
 public:
     virtual void     SetDialog() override;
-    static VToolEllipticalArc* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
-                                      VAbstractPattern *doc, VContainer *data);
-    static VToolEllipticalArc* Create(VToolEllipticalArcInitData &initData);
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolEllipticalArc *;
+    static auto Create(VToolEllipticalArcInitData &initData) -> VToolEllipticalArc *;
     static const QString ToolType;
-    virtual int      type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::EllipticalArc)};
-    virtual QString  getTagName() const override;
+    virtual auto getTagName() const -> QString override;
 
-    VFormula         GetFormulaRadius1() const;
+    auto GetFormulaRadius1() const -> VFormula;
     void             SetFormulaRadius1(const VFormula &value);
 
-    VFormula         GetFormulaRadius2() const;
+    auto GetFormulaRadius2() const -> VFormula;
     void             SetFormulaRadius2(const VFormula &value);
 
-    VFormula         GetFormulaF1() const;
+    auto GetFormulaF1() const -> VFormula;
     void             SetFormulaF1(const VFormula &value);
 
-    VFormula         GetFormulaF2() const;
+    auto GetFormulaF2() const -> VFormula;
     void             SetFormulaF2(const VFormula &value);
 
-    VFormula         GetFormulaRotationAngle() const;
+    auto GetFormulaRotationAngle() const -> VFormula;
     void             SetFormulaRotationAngle(const VFormula &value);
 
-    qreal            GetApproximationScale() const;
+    auto GetApproximationScale() const -> qreal;
     void             SetApproximationScale(qreal value);
 
     virtual void     ShowVisualization(bool show) override;
@@ -106,7 +106,7 @@ protected:
                                QList<quint32> &newDependencies) override;
     virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     virtual void    SetVisualization() override;
-    virtual QString MakeToolTip() const override;
+    virtual auto MakeToolTip() const -> QString override;
 
 private:
     Q_DISABLE_COPY_MOVE(VToolEllipticalArc) // NOLINT

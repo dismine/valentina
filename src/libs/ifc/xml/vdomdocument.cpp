@@ -123,7 +123,7 @@ void SaveNodeCanonically(QXmlStreamWriter &stream, const QDomNode &domNode)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<QDomNode> GetChildElements(const QDomNode& e)
+auto GetChildElements(const QDomNode &e) -> QList<QDomNode>
 {
     QDomNodeList children = e.childNodes();
     QList<QDomNode> r;
@@ -136,7 +136,7 @@ QList<QDomNode> GetChildElements(const QDomNode& e)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<QDomNode> GetElementAttributes(const QDomNode& e)
+auto GetElementAttributes(const QDomNode &e) -> QList<QDomNode>
 {
     QDomNamedNodeMap attributes = e.attributes();
     QList<QDomNode> r;
@@ -149,7 +149,7 @@ QList<QDomNode> GetElementAttributes(const QDomNode& e)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool LessThen(const QDomNode &element1, const QDomNode &element2)
+auto LessThen(const QDomNode &element1, const QDomNode &element2) -> bool
 {
     if (element1.nodeType() != element2.nodeType())
     {
@@ -273,7 +273,7 @@ VDomDocument::~VDomDocument()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VDomDocument::elementById(quint32 id, const QString &tagName, bool updateCache)
+auto VDomDocument::elementById(quint32 id, const QString &tagName, bool updateCache) -> QDomElement
 {
     if (id == 0)
     {
@@ -383,7 +383,7 @@ auto VDomDocument::find(QHash<quint32, QDomElement> &cache, const QDomElement &n
 
 
 //---------------------------------------------------------------------------------------------------------------------
-QHash<quint32, QDomElement> VDomDocument::RefreshCache(const QDomElement &root) const
+auto VDomDocument::RefreshCache(const QDomElement &root) const -> QHash<quint32, QDomElement>
 {
     QHash<quint32, QDomElement> cache;
     VDomDocument::find(cache, root, NULL_ID);
@@ -391,7 +391,7 @@ QHash<quint32, QDomElement> VDomDocument::RefreshCache(const QDomElement &root) 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VDomDocument::SaveCanonicalXML(QIODevice *file, int indent, QString &error) const
+auto VDomDocument::SaveCanonicalXML(QIODevice *file, int indent, QString &error) const -> bool
 {
     SCASSERT(file != nullptr)
 
@@ -428,7 +428,8 @@ bool VDomDocument::SaveCanonicalXML(QIODevice *file, int indent, QString &error)
  * @param name attribute name
  * @return long long value
  */
-quint32 VDomDocument::GetParametrUInt(const QDomElement &domElement, const QString &name, const QString &defValue)
+auto VDomDocument::GetParametrUInt(const QDomElement &domElement, const QString &name, const QString &defValue)
+    -> quint32
 {
     Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name of parametr is empty");
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null"); //-V591
@@ -457,7 +458,7 @@ quint32 VDomDocument::GetParametrUInt(const QDomElement &domElement, const QStri
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VDomDocument::GetParametrInt(const QDomElement &domElement, const QString &name, const QString &defValue)
+auto VDomDocument::GetParametrInt(const QDomElement &domElement, const QString &name, const QString &defValue) -> int
 {
     Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name of parametr is empty");
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null"); //-V591
@@ -486,7 +487,7 @@ int VDomDocument::GetParametrInt(const QDomElement &domElement, const QString &n
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VDomDocument::GetParametrBool(const QDomElement &domElement, const QString &name, const QString &defValue)
+auto VDomDocument::GetParametrBool(const QDomElement &domElement, const QString &name, const QString &defValue) -> bool
 {
     Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name of parametr is empty");
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
@@ -525,17 +526,14 @@ bool VDomDocument::GetParametrBool(const QDomElement &domElement, const QString 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-NodeUsage VDomDocument::GetParametrUsage(const QDomElement &domElement, const QString &name)
+auto VDomDocument::GetParametrUsage(const QDomElement &domElement, const QString &name) -> NodeUsage
 {
     const bool value = GetParametrBool(domElement, name, trueStr);
     if (value)
     {
         return NodeUsage::InUse;
     }
-    else
-    {
-        return NodeUsage::NotInUse;
-    }
+    return NodeUsage::NotInUse;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -559,8 +557,8 @@ void VDomDocument::SetParametrUsage(QDomElement &domElement, const QString &name
  * @return attribute value
  * @throw VExceptionEmptyParameter when attribute is empty
  */
-QString VDomDocument::GetParametrString(const QDomElement &domElement, const QString &name,
-                                        const QString &defValue)
+auto VDomDocument::GetParametrString(const QDomElement &domElement, const QString &name, const QString &defValue)
+    -> QString
 {
     Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name of parametr is empty");
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
@@ -571,16 +569,13 @@ QString VDomDocument::GetParametrString(const QDomElement &domElement, const QSt
         {
             throw VExceptionEmptyParameter(QObject::tr("Got empty parameter"), name, domElement);
         }
-        else
-        {
-            return defValue;
-        }
+        return defValue;
     }
     return parameter;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VDomDocument::GetParametrEmptyString(const QDomElement &domElement, const QString &name)
+auto VDomDocument::GetParametrEmptyString(const QDomElement &domElement, const QString &name) -> QString
 {
     Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name of parametr is empty");
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
@@ -594,7 +589,8 @@ QString VDomDocument::GetParametrEmptyString(const QDomElement &domElement, cons
  * @param name attribute name
  * @return double value
  */
-qreal VDomDocument::GetParametrDouble(const QDomElement &domElement, const QString &name, const QString &defValue)
+auto VDomDocument::GetParametrDouble(const QDomElement &domElement, const QString &name, const QString &defValue)
+    -> qreal
 {
     Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name of parametr is empty");
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
@@ -626,7 +622,7 @@ qreal VDomDocument::GetParametrDouble(const QDomElement &domElement, const QStri
  * @param domElement tag in xml tree.
  * @return id value.
  */
-quint32 VDomDocument::GetParametrId(const QDomElement &domElement)
+auto VDomDocument::GetParametrId(const QDomElement &domElement) -> quint32
 {
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
@@ -711,7 +707,7 @@ void VDomDocument::RefreshElementIdCache()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VDomDocument::Compare(const QDomElement &element1, const QDomElement &element2)
+auto VDomDocument::Compare(const QDomElement &element1, const QDomElement &element2) -> bool
 {
     QFuture<bool> lessThen2 = QtConcurrent::run(LessThen, element2, element1);
     return !LessThen(element1, element2) && !lessThen2.result();
@@ -749,7 +745,7 @@ void VDomDocument::setXMLContent(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VDomDocument::UnitsHelpString()
+auto VDomDocument::UnitsHelpString() -> QString
 {
     QString r;
     for (auto i = static_cast<int>(Unit::Mm), last = static_cast<int>(Unit::LAST_UNIT_DO_NOT_USE); i < last;++i)
@@ -764,7 +760,7 @@ QString VDomDocument::UnitsHelpString()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VDomDocument::CreateElementWithText(const QString &tagName, const QString &text)
+auto VDomDocument::CreateElementWithText(const QString &tagName, const QString &text) -> QDomElement
 {
     QDomElement tag = createElement(tagName);
     tag.appendChild(createTextNode(text));
@@ -772,7 +768,7 @@ QDomElement VDomDocument::CreateElementWithText(const QString &tagName, const QS
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VDomDocument::SaveDocument(const QString &fileName, QString &error)
+auto VDomDocument::SaveDocument(const QString &fileName, QString &error) -> bool
 {
     if (fileName.isEmpty())
     {
@@ -809,7 +805,7 @@ bool VDomDocument::SaveDocument(const QString &fileName, QString &error)
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-QString VDomDocument::Major() const
+auto VDomDocument::Major() const -> QString
 {
     QString version = UniqueTagText(TagVersion, "0.0.0");
     QStringList v = version.split(QChar('.'));
@@ -818,7 +814,7 @@ QString VDomDocument::Major() const
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-QString VDomDocument::Minor() const
+auto VDomDocument::Minor() const -> QString
 {
     QString version = UniqueTagText(TagVersion, "0.0.0");
     QStringList v = version.split(QChar('.'));
@@ -827,7 +823,7 @@ QString VDomDocument::Minor() const
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-QString VDomDocument::Patch() const
+auto VDomDocument::Patch() const -> QString
 {
     QString version = UniqueTagText(TagVersion, "0.0.0");
     QStringList v = version.split(QChar('.'));
@@ -835,7 +831,7 @@ QString VDomDocument::Patch() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VDomDocument::GetFormatVersionStr() const
+auto VDomDocument::GetFormatVersionStr() const -> QString
 {
     const QDomNodeList nodeList = this->elementsByTagName(TagVersion);
     if (nodeList.isEmpty())
@@ -944,7 +940,7 @@ auto VDomDocument::setTagText(QDomElement &domElement, const QString &text) -> b
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VDomDocument::UniqueTag(const QString &tagName) const
+auto VDomDocument::UniqueTag(const QString &tagName) const -> QDomElement
 {
     const QDomNodeList nodeList = this->elementsByTagName(tagName);
     if (nodeList.isEmpty())
@@ -981,21 +977,21 @@ void VDomDocument::RemoveAllChildren(QDomElement &domElement)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomNode VDomDocument::ParentNodeById(const quint32 &nodeId)
+auto VDomDocument::ParentNodeById(const quint32 &nodeId) -> QDomNode
 {
     QDomElement domElement = NodeById(nodeId);
     return domElement.parentNode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VDomDocument::CloneNodeById(const quint32 &nodeId)
+auto VDomDocument::CloneNodeById(const quint32 &nodeId) -> QDomElement
 {
     QDomElement domElement = NodeById(nodeId);
     return domElement.cloneNode().toElement();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VDomDocument::NodeById(const quint32 &nodeId, const QString &tagName)
+auto VDomDocument::NodeById(const quint32 &nodeId, const QString &tagName) -> QDomElement
 {
     QDomElement domElement = elementById(nodeId, tagName);
     if (domElement.isNull() || domElement.isElement() == false)
@@ -1006,7 +1002,7 @@ QDomElement VDomDocument::NodeById(const quint32 &nodeId, const QString &tagName
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VDomDocument::SafeCopy(const QString &source, const QString &destination, QString &error)
+auto VDomDocument::SafeCopy(const QString &source, const QString &destination, QString &error) -> bool
 {
     bool result = false;
 
@@ -1072,7 +1068,7 @@ bool VDomDocument::SafeCopy(const QString &source, const QString &destination, Q
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VLabelTemplateLine> VDomDocument::GetLabelTemplate(const QDomElement &element) const
+auto VDomDocument::GetLabelTemplate(const QDomElement &element) const -> QVector<VLabelTemplateLine>
 {
     // We use implicit conversion. That's why check if values are still the same as excpected.
     Q_STATIC_ASSERT(Qt::AlignLeft == 1);
@@ -1108,7 +1104,7 @@ void VDomDocument::SetLabelTemplate(QDomElement &element, const QVector<VLabelTe
 {
     if (not element.isNull())
     {
-        for (auto &line : lines)
+        for (const auto &line : lines)
         {
             QDomElement tagLine = createElement(TagLine);
 

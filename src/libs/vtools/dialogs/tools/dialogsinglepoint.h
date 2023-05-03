@@ -54,12 +54,12 @@ public:
     virtual ~DialogSinglePoint() override;
 
     void           SetData(const QString &name, const QPointF &point);
-    QPointF        GetPoint()const;
+    auto GetPoint() const -> QPointF;
 
-    QString        GetPointName() const;
+    auto GetPointName() const -> QString;
 
     void    SetNotes(const QString &notes);
-    QString GetNotes() const;
+    auto GetNotes() const -> QString;
 
 public slots:
     void           mousePress(const QPointF &scenePos);
@@ -68,7 +68,8 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     virtual void   SaveData() override;
-    virtual bool   IsValid() const final;
+    virtual auto IsValid() const -> bool final;
+
 private:
     Q_DISABLE_COPY_MOVE(DialogSinglePoint) // NOLINT
 
@@ -84,7 +85,7 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogSinglePoint::IsValid() const
+inline auto DialogSinglePoint::IsValid() const -> bool
 {
     return flagName;
 }

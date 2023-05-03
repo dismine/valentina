@@ -264,14 +264,14 @@ enum TransparencyCodes {
 
 } // namespace DRW
 
-Q_REQUIRED_RESULT static inline bool DRW_FuzzyComparePossibleNulls(double p1, double p2);
-static inline bool DRW_FuzzyComparePossibleNulls(double p1, double p2)
+Q_REQUIRED_RESULT static inline auto DRW_FuzzyComparePossibleNulls(double p1, double p2) -> bool;
+static inline auto DRW_FuzzyComparePossibleNulls(double p1, double p2) -> bool
 {
     if(qFuzzyIsNull(p1))
     {
         return qFuzzyIsNull(p2);
     }
-    else if(qFuzzyIsNull(p2))
+    if (qFuzzyIsNull(p2))
     {
         return false;
     }
@@ -283,9 +283,9 @@ static inline bool DRW_FuzzyComparePossibleNulls(double p1, double p2)
 
 //! Class to handle 3D coordinate point
 /*!
-*  Class to handle 3D coordinate point
-*  @author Rallaz
-*/
+ *  Class to handle 3D coordinate point
+ *  @author Rallaz
+ */
 class DRW_Coord {
 public:
     DRW_Coord() = default;
@@ -301,7 +301,7 @@ public:
           z(data.z)
     {}
 
-    DRW_Coord &operator = (const DRW_Coord& data)
+    auto operator=(const DRW_Coord &data) -> DRW_Coord &
     {
         if ( &data == this )
         {
@@ -483,7 +483,7 @@ public:
     int code;            /*!< dxf code of this value*/
 
 private:
-    DRW_Variant &operator=(const DRW_Variant &) Q_DECL_EQ_DELETE;
+    auto operator=(const DRW_Variant &) -> DRW_Variant &Q_DECL_EQ_DELETE;
     std::string sdata;
     DRW_Coord vdata;
 };
@@ -527,7 +527,8 @@ public:
         widthDefault = 31  /*!< by default (dxf -3) */
     };
 
-    static int lineWidth2dxfInt(lineWidth lw){
+    static auto lineWidth2dxfInt(lineWidth lw) -> int
+    {
         switch (lw){
         case widthByLayer:
             return -1;
@@ -589,61 +590,110 @@ public:
         return -3;
     }
 
-    static lineWidth dxfInt2lineWidth(int i){
+    static auto dxfInt2lineWidth(int i) -> lineWidth
+    {
         if (i<0) {
             if (i==-1)
                 return widthByLayer;
-            else if (i==-2)
+            if (i == -2)
                 return widthByBlock;
-            else if (i==-3)
+            else if (i == -3)
                 return widthDefault;
-        } else if (i<3) {
+        }
+        else if (i < 3)
+        {
             return width00;
-        } else if (i<7) {
+        }
+        else if (i < 7)
+        {
             return width01;
-        } else if (i<11) {
+        }
+        else if (i < 11)
+        {
             return width02;
-        } else if (i<14) {
+        }
+        else if (i < 14)
+        {
             return width03;
-        } else if (i<16) {
+        }
+        else if (i < 16)
+        {
             return width04;
-        } else if (i<19) {
+        }
+        else if (i < 19)
+        {
             return width05;
-        } else if (i<22) {
+        }
+        else if (i < 22)
+        {
             return width06;
-        } else if (i<27) {
+        }
+        else if (i < 27)
+        {
             return width07;
-        } else if (i<32) {
+        }
+        else if (i < 32)
+        {
             return width08;
-        } else if (i<37) {
+        }
+        else if (i < 37)
+        {
             return width09;
-        } else if (i<45) {
+        }
+        else if (i < 45)
+        {
             return width10;
-        } else if (i<52) {
+        }
+        else if (i < 52)
+        {
             return width11;
-        } else if (i<57) {
+        }
+        else if (i < 57)
+        {
             return width12;
-        } else if (i<65) {
+        }
+        else if (i < 65)
+        {
             return width13;
-        } else if (i<75) {
+        }
+        else if (i < 75)
+        {
             return width14;
-        } else if (i<85) {
+        }
+        else if (i < 85)
+        {
             return width15;
-        } else if (i<95) {
+        }
+        else if (i < 95)
+        {
             return width16;
-        } else if (i<103) {
+        }
+        else if (i < 103)
+        {
             return width17;
-        } else if (i<112) {
+        }
+        else if (i < 112)
+        {
             return width18;
-        } else if (i<130) {
+        }
+        else if (i < 130)
+        {
             return width19;
-        } else if (i<149) {
+        }
+        else if (i < 149)
+        {
             return width20;
-        } else if (i<180) {
+        }
+        else if (i < 180)
+        {
             return width21;
-        } else if (i<205) {
+        }
+        else if (i < 205)
+        {
             return width22;
-        } else {
+        }
+        else
+        {
             return width23;
         }
         //default by default

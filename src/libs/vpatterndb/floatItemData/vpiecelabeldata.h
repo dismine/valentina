@@ -49,43 +49,43 @@ public:
 
     virtual ~VPieceLabelData();
 
-    VPieceLabelData &operator=(const VPieceLabelData &data);
+    auto operator=(const VPieceLabelData &data) -> VPieceLabelData &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VPieceLabelData(VPieceLabelData &&data) Q_DECL_NOTHROW;
-    VPieceLabelData &operator=(VPieceLabelData &&data) Q_DECL_NOTHROW;
+    auto operator=(VPieceLabelData &&data) Q_DECL_NOTHROW->VPieceLabelData &;
 #endif
 
     void Clear();
 
     // methods, which operate on other members
-    QString GetLetter() const;
+    auto GetLetter() const -> QString;
     void    SetLetter(const QString &qsLetter);
 
-    QString GetAnnotation() const;
+    auto GetAnnotation() const -> QString;
     void    SetAnnotation(const QString &val);
 
-    QString GetOrientation() const;
+    auto GetOrientation() const -> QString;
     void    SetOrientation(const QString &val);
 
-    QString GetRotationWay() const;
+    auto GetRotationWay() const -> QString;
     void    SetRotationWay(const QString &val);
 
-    QString GetTilt() const;
+    auto GetTilt() const -> QString;
     void    SetTilt(const QString &val);
 
-    QString GetFoldPosition() const;
+    auto GetFoldPosition() const -> QString;
     void    SetFoldPosition(const QString &val);
 
-    quint16 GetQuantity() const;
+    auto GetQuantity() const -> quint16;
     void    SetQuantity(quint16 val);
 
-    bool IsOnFold() const;
+    auto IsOnFold() const -> bool;
     void SetOnFold(bool onFold);
 
-    QString GetAreaShartName() const;
+    auto GetAreaShartName() const -> QString;
     void    SetAreaShartName(const QString &val);
 
-    QVector<VLabelTemplateLine> GetLabelTemplate() const;
+    auto GetLabelTemplate() const -> QVector<VLabelTemplateLine>;
     void                        SetLabelTemplate(const QVector<VLabelTemplateLine> &lines);
 
 private:

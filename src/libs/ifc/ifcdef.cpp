@@ -159,7 +159,7 @@ const QString TypeLineDashDotDotLine = QStringLiteral("dashDotDotLine");
  * @brief Styles return list of all line styles.
  * @return list of all line styles.
  */
-QStringList StylesList()
+auto StylesList() -> QStringList
 {
     return QStringList{
         TypeLineNone,
@@ -176,7 +176,7 @@ QStringList StylesList()
  * @brief LineStyle return pen style for current line style.
  * @return pen style.
  */
-Qt::PenStyle LineStyleToPenStyle(const QString &typeLine)
+auto LineStyleToPenStyle(const QString &typeLine) -> Qt::PenStyle
 {
     const QStringList styles = StylesList();
     switch (styles.indexOf(typeLine))
@@ -197,7 +197,7 @@ Qt::PenStyle LineStyleToPenStyle(const QString &typeLine)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString PenStyleToLineStyle(Qt::PenStyle penStyle)
+auto PenStyleToLineStyle(Qt::PenStyle penStyle) -> QString
 {
     QT_WARNING_PUSH
     QT_WARNING_DISABLE_GCC("-Wswitch-default")
@@ -225,7 +225,7 @@ QString PenStyleToLineStyle(Qt::PenStyle penStyle)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QIcon PenStylePic(Qt::PenStyle style)
+auto PenStylePic(Qt::PenStyle style) -> QIcon
 {
     QPixmap pix(80, 14);
     pix.fill(Qt::white);
@@ -241,12 +241,12 @@ QIcon PenStylePic(Qt::PenStyle style)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMap<QString, QIcon> LineStylesPics()
+auto LineStylesPics() -> QMap<QString, QIcon>
 {
     QMap<QString, QIcon> map;
     const QStringList styles = StylesList();
 
-    for (auto &s : styles)
+    for (const auto &s : styles)
     {
         map.insert(s, PenStylePic(LineStyleToPenStyle(s)));
     }
@@ -254,7 +254,7 @@ QMap<QString, QIcon> LineStylesPics()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMap<QString, QIcon> CurvePenStylesPics()
+auto CurvePenStylesPics() -> QMap<QString, QIcon>
 {
     QMap<QString, QIcon> map = LineStylesPics();
     map.remove(TypeLineNone);

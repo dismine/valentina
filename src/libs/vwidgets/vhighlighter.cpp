@@ -36,7 +36,7 @@ VTextBlockData::VTextBlockData()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<ParenthesisInfo *> VTextBlockData::Parentheses()
+auto VTextBlockData::Parentheses() -> QVector<ParenthesisInfo *>
 {
     return m_parentheses;
 }

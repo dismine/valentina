@@ -81,7 +81,7 @@ void EnableDefButton(QPushButton *defButton, const QString &formula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString GetFormulaFromUser(QPlainTextEdit *textEdit)
+auto GetFormulaFromUser(QPlainTextEdit *textEdit) -> QString
 {
     SCASSERT(textEdit != nullptr)
     return VTranslateVars::TryFormulaFromUser(textEdit->toPlainText(),
@@ -249,7 +249,7 @@ void DialogSeamAllowance::EnableApply(bool enable)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPiece DialogSeamAllowance::GetPiece() const
+auto DialogSeamAllowance::GetPiece() const -> VPiece
 {
     return CreatePiece();
 }
@@ -474,7 +474,7 @@ void DialogSeamAllowance::ChosenObject(quint32 id, const SceneObject &type)
 
         if (not applyAllowed)
         {
-            auto visPath = qobject_cast<VisToolPiece *>(vis);
+            auto *visPath = qobject_cast<VisToolPiece *>(vis);
             SCASSERT(visPath != nullptr);
             const VPiece p = CreatePiece();
             visPath->SetPiece(p);
@@ -512,7 +512,7 @@ void DialogSeamAllowance::ShowDialog(bool click)
 
         if (not applyAllowed)
         {
-            auto visPath = qobject_cast<VisToolPiece *>(vis);
+            auto *visPath = qobject_cast<VisToolPiece *>(vis);
             SCASSERT(visPath != nullptr);
             visPath->SetMode(Mode::Show);
             visPath->RefreshGeometry();
@@ -1065,7 +1065,7 @@ void DialogSeamAllowance::ListChanged()
 {
     if (not applyAllowed)
     {
-        auto visPath = qobject_cast<VisToolPiece *>(vis);
+        auto *visPath = qobject_cast<VisToolPiece *>(vis);
         SCASSERT(visPath != nullptr);
         visPath->SetPiece(CreatePiece());
         visPath->RefreshGeometry();
@@ -1759,7 +1759,7 @@ void DialogSeamAllowance::UpdateGrainlineValues()
             {
                 throw qmu::QmuParserError(tr("Infinite/undefined result"));
             }
-            else if (i == 1 && dVal <= 0.0)
+            if (i == 1 && dVal <= 0.0)
             {
                 throw qmu::QmuParserError(tr("Length should be positive"));
             }
@@ -1842,7 +1842,7 @@ void DialogSeamAllowance::UpdateDetailLabelValues()
             {
                 throw qmu::QmuParserError(tr("Infinite/undefined result"));
             }
-            else if ((i == 0 || i == 1) && dVal <= 0.0)
+            if ((i == 0 || i == 1) && dVal <= 0.0)
             {
                 throw qmu::QmuParserError(tr("Length should be positive"));
             }
@@ -1928,7 +1928,7 @@ void DialogSeamAllowance::UpdatePatternLabelValues()
             {
                 throw qmu::QmuParserError(tr("Infinite/undefined result"));
             }
-            else if ((i == 0 || i == 1) && dVal <= 0.0)
+            if ((i == 0 || i == 1) && dVal <= 0.0)
             {
                 throw qmu::QmuParserError(tr("Length should be positive"));
             }
@@ -2293,7 +2293,7 @@ void DialogSeamAllowance::EvalWidth()
     {
         VContainer *locData = const_cast<VContainer *> (data);
 
-        auto currentSA = new VIncrement(locData, currentSeamAllowance);
+        auto *currentSA = new VIncrement(locData, currentSeamAllowance);
         currentSA->SetFormula(m_saWidth, QString().setNum(m_saWidth), true);
         currentSA->SetDescription(tr("Current seam allowance"));
 
@@ -2590,7 +2590,7 @@ void DialogSeamAllowance::EditPieceLabel()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPiece DialogSeamAllowance::CreatePiece() const
+auto DialogSeamAllowance::CreatePiece() const -> VPiece
 {
     VPiece piece = data->DataPieces()->value(toolId); // Get options we do not control with the dialog
     piece.GetPath().SetNodes(GetListInternals<VPieceNode>(uiTabPaths->listWidgetMainPath));
@@ -2690,7 +2690,7 @@ void DialogSeamAllowance::NewMainPathItem(const VPieceNode &node)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogSeamAllowance::GetPathName(quint32 path, bool reverse) const
+auto DialogSeamAllowance::GetPathName(quint32 path, bool reverse) const -> QString
 {
     QString name;
 
@@ -2772,7 +2772,7 @@ void DialogSeamAllowance::ValidObjects(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogSeamAllowance::MainPathIsClockwise() const
+auto DialogSeamAllowance::MainPathIsClockwise() const -> bool
 {
     QVector<QPointF> points;
     CastTo(CreatePiece().MainPathPoints(data), points);
@@ -2796,7 +2796,7 @@ void DialogSeamAllowance::InitNodesList()
 
     const QVector<VPieceNode> nodes = GetListInternals<VPieceNode>(uiTabPaths->listWidgetMainPath);
 
-    for (auto &node : nodes)
+    for (const auto &node : nodes)
     {
         if (node.GetTypeTool() == Tool::NodePoint && not node.IsExcluded())
         {
@@ -2829,7 +2829,7 @@ void DialogSeamAllowance::InitPassmarksList()
 
     const QVector<VPieceNode> nodes = GetListInternals<VPieceNode>(uiTabPaths->listWidgetMainPath);
 
-    for (auto &node : nodes)
+    for (const auto &node : nodes)
     {
         if (node.GetTypeTool() == Tool::NodePoint && node.IsPassmark())
         {
@@ -2853,7 +2853,7 @@ void DialogSeamAllowance::InitPassmarksList()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QListWidgetItem *DialogSeamAllowance::GetItemById(quint32 id)
+auto DialogSeamAllowance::GetItemById(quint32 id) -> QListWidgetItem *
 {
     for (qint32 i = 0; i < uiTabPaths->listWidgetMainPath->count(); ++i)
     {
@@ -2869,7 +2869,7 @@ QListWidgetItem *DialogSeamAllowance::GetItemById(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogSeamAllowance::GetLastId() const
+auto DialogSeamAllowance::GetLastId() const -> quint32
 {
     const int count = uiTabPaths->listWidgetMainPath->count();
     if (count > 0)
@@ -2878,10 +2878,8 @@ quint32 DialogSeamAllowance::GetLastId() const
         const VPieceNode node = qvariant_cast<VPieceNode>(item->data(Qt::UserRole));
         return node.GetId();
     }
-    else
-    {
-        return NULL_ID;
-    }
+
+    return NULL_ID;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3505,14 +3503,14 @@ void DialogSeamAllowance::InitAllPinComboboxes()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogSeamAllowance::GetFormulaSAWidth() const
+auto DialogSeamAllowance::GetFormulaSAWidth() const -> QString
 {
     QString width = uiTabPaths->plainTextEditFormulaWidth->toPlainText();
     return VTranslateVars::TryFormulaFromUser(width, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointer<VUndoCommand>> &DialogSeamAllowance::UndoStack()
+auto DialogSeamAllowance::UndoStack() -> QVector<QPointer<VUndoCommand>> &
 {
     return m_undoStack;
 }
@@ -3768,7 +3766,7 @@ void DialogSeamAllowance::SetPLAngle(QString angleFormula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF DialogSeamAllowance::CurrentRect() const
+auto DialogSeamAllowance::CurrentRect() const -> QRectF
 {
     QRectF rect;
     if (QListWidgetItem *item = uiTabPlaceLabels->listWidgetPlaceLabels->currentItem())
@@ -3808,19 +3806,19 @@ void DialogSeamAllowance::ShowPieceSpecialPointsWithRect(const QListWidget *list
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPiecePath DialogSeamAllowance::CurrentPath(quint32 id) const
+auto DialogSeamAllowance::CurrentPath(quint32 id) const -> VPiecePath
 {
     return m_newPaths.contains(id) ? m_newPaths.value(id) : data->GetPiecePath(id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPlaceLabelItem DialogSeamAllowance::CurrentPlaceLabel(quint32 id) const
+auto DialogSeamAllowance::CurrentPlaceLabel(quint32 id) const -> VPlaceLabelItem
 {
     return m_newPlaceLabels.contains(id) ? m_newPlaceLabels.value(id) : *data->GeometricObject<VPlaceLabelItem>(id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogSeamAllowance::GetDefaultPieceName() const
+auto DialogSeamAllowance::GetDefaultPieceName() const -> QString
 {
     QList<VPiece> pieces = data->DataPieces()->values();
     QSet<QString> names;

@@ -60,7 +60,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, testFeedURL, // NOLINT
 QPointer<FvUpdater> FvUpdater::m_Instance;
 
 //---------------------------------------------------------------------------------------------------------------------
-FvUpdater* FvUpdater::sharedUpdater()
+auto FvUpdater::sharedUpdater() -> FvUpdater *
 {
     static QMutex mutex;
     if (m_Instance.isNull())
@@ -83,13 +83,13 @@ void FvUpdater::drop()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString FvUpdater::CurrentFeedURL()
+auto FvUpdater::CurrentFeedURL() -> QString
 {
     return FvUpdater::IsTestBuild() ? *testFeedURL : *defaultFeedURL;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FvUpdater::IsTestBuild()
+auto FvUpdater::IsTestBuild() -> bool
 {
     return (MAJOR_VERSION * 1000 + MINOR_VERSION) % 2 != 0;
 }
@@ -154,13 +154,13 @@ void FvUpdater::SetFeedURL(const QString &feedURL)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString FvUpdater::GetFeedURL() const
+auto FvUpdater::GetFeedURL() const -> QString
 {
     return m_feedURL.toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FvUpdater::IsDropOnFinnish() const
+auto FvUpdater::IsDropOnFinnish() const -> bool
 {
     return m_dropOnFinnish;
 }
@@ -172,7 +172,7 @@ void FvUpdater::SetDropOnFinnish(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointer<FvAvailableUpdate> FvUpdater::GetProposedUpdate()
+auto FvUpdater::GetProposedUpdate() -> QPointer<FvAvailableUpdate>
 {
     return m_proposedUpdate;
 }
@@ -236,7 +236,7 @@ void FvUpdater::UpdateInstallationConfirmed()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FvUpdater::CheckForUpdates(bool silentAsMuchAsItCouldGet)
+auto FvUpdater::CheckForUpdates(bool silentAsMuchAsItCouldGet) -> bool
 {
     if (m_feedURL.isEmpty())
     {
@@ -396,7 +396,7 @@ void FvUpdater::httpFeedDownloadFinished()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FvUpdater::xmlParseFeed()
+auto FvUpdater::xmlParseFeed() -> bool
 {
     QString xmlEnclosureUrl, xmlEnclosureVersion, xmlEnclosurePlatform;
 
@@ -478,9 +478,8 @@ bool FvUpdater::xmlParseFeed()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FvUpdater::searchDownloadedFeedForUpdates(const QString &xmlEnclosureUrl,
-                                               const QString &xmlEnclosureVersion,
-                                               const QString &xmlEnclosurePlatform)
+auto FvUpdater::searchDownloadedFeedForUpdates(const QString &xmlEnclosureUrl, const QString &xmlEnclosureVersion,
+                                               const QString &xmlEnclosurePlatform) -> bool
 {
     qDebug() << "Enclosure URL:" << xmlEnclosureUrl;
     qDebug() << "Enclosure version:" << xmlEnclosureVersion;
@@ -521,7 +520,7 @@ bool FvUpdater::searchDownloadedFeedForUpdates(const QString &xmlEnclosureUrl,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FvUpdater::VersionIsIgnored(const QString &version)
+auto FvUpdater::VersionIsIgnored(const QString &version) -> bool
 {
     // We assume that variable 'version' contains either:
     //	1) The current version of the application (ignore)
@@ -589,7 +588,7 @@ void FvUpdater::IgnoreVersion(const QString &version)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FvUpdater::CurrentlyRunningOnPlatform(const QString &platform)
+auto FvUpdater::CurrentlyRunningOnPlatform(const QString &platform) -> bool
 {
     const QStringList platforms = QStringList() << "Q_OS_LINUX"
                                                 << "Q_OS_MAC"

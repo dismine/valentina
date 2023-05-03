@@ -51,42 +51,44 @@ public:
     explicit VCubicBezierPath(quint32 idObject = 0, Draw mode = Draw::Calculation);
     VCubicBezierPath(const VCubicBezierPath &curve);
     VCubicBezierPath(const QVector<VPointF> &points, quint32 idObject = 0, Draw mode = Draw::Calculation);
-    VCubicBezierPath Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
-    VCubicBezierPath Flip(const QLineF &axis, const QString &prefix = QString()) const;
-    VCubicBezierPath Move(qreal length, qreal angle, const QString &prefix = QString()) const;
+    auto Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const -> VCubicBezierPath;
+    auto Flip(const QLineF &axis, const QString &prefix = QString()) const -> VCubicBezierPath;
+    auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VCubicBezierPath;
     virtual ~VCubicBezierPath();
 
-    VCubicBezierPath &operator=(const VCubicBezierPath &curve);
+    auto operator=(const VCubicBezierPath &curve) -> VCubicBezierPath &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VCubicBezierPath(VCubicBezierPath &&curve) Q_DECL_NOTHROW;
-    VCubicBezierPath &operator=(VCubicBezierPath &&curve) Q_DECL_NOTHROW;
+    auto operator=(VCubicBezierPath &&curve) Q_DECL_NOTHROW->VCubicBezierPath &;
 #endif
 
-    VPointF &operator[](vsizetype indx);
+    auto operator[](vsizetype indx) -> VPointF &;
 
-    const VPointF &at(vsizetype indx) const;
+    auto at(vsizetype indx) const -> const VPointF &;
 
     void   append(const VPointF &point);
 
-    virtual vsizetype CountSubSpl() const override;
-    virtual vsizetype CountPoints() const override;
+    virtual auto CountSubSpl() const -> vsizetype override;
+    virtual auto CountPoints() const -> vsizetype override;
     virtual void    Clear() override;
-    virtual VSpline GetSpline(vsizetype index) const override;
-    virtual qreal   GetStartAngle () const override;
-    virtual qreal   GetEndAngle () const override;
+    virtual auto GetSpline(vsizetype index) const -> VSpline override;
+    virtual auto GetStartAngle() const -> qreal override;
+    virtual auto GetEndAngle() const -> qreal override;
 
-    virtual qreal GetC1Length() const override;
-    virtual qreal GetC2Length() const override;
+    virtual auto GetC1Length() const -> qreal override;
+    virtual auto GetC2Length() const -> qreal override;
 
-    virtual QVector<VSplinePoint> GetSplinePath() const override;
-    QVector<VPointF> GetCubicPath() const;
+    virtual auto GetSplinePath() const -> QVector<VSplinePoint> override;
+    auto GetCubicPath() const -> QVector<VPointF>;
 
-    static vsizetype CountSubSpl(vsizetype size);
-    static vsizetype SubSplOffset(vsizetype subSplIndex);
-    static vsizetype SubSplPointsCount(vsizetype countSubSpl);
+    static auto CountSubSpl(vsizetype size) -> vsizetype;
+    static auto SubSplOffset(vsizetype subSplIndex) -> vsizetype;
+    static auto SubSplPointsCount(vsizetype countSubSpl) -> vsizetype;
+
 protected:
-    virtual VPointF FirstPoint() const  override;
-    virtual VPointF LastPoint() const  override;
+    virtual auto FirstPoint() const -> VPointF override;
+    virtual auto LastPoint() const -> VPointF override;
+
 private:
     QSharedDataPointer<VCubicBezierPathData> d;
 };

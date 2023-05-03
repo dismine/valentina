@@ -93,6 +93,7 @@ private:
     void EnableRestrictionControls(bool enable);
 
     void FillBases(const QVector<qreal> &bases, const MeasurementDimension_p &dimension, QComboBox *control) const;
+    void FillBase(double base, const MeasurementDimension_p &dimension, QComboBox *control) const;
     static auto FillDimensionXBases(const QVector<qreal> &bases,
                                     const MeasurementDimension_p &dimension) -> QStringList;
     auto FillDimensionYBases(const QVector<qreal> &bases, const MeasurementDimension_p &dimension) const -> QStringList;

@@ -76,9 +76,9 @@ class VToolUnionDetails : public VAbstractTool
 {
     Q_OBJECT // NOLINT
 public:
-    static VToolUnionDetails *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                     VAbstractPattern *doc, VContainer *data);
-    static VToolUnionDetails *Create(VToolUnionDetailsInitData initData);
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolUnionDetails *;
+    static auto Create(VToolUnionDetailsInitData initData) -> VToolUnionDetails *;
 
     static const QString ToolType;
     static const QString TagDetail;
@@ -94,14 +94,14 @@ public:
 
     static const quint8 unionVersion;
 
-    virtual QString getTagName() const override;
+    virtual auto getTagName() const -> QString override;
     virtual void ShowVisualization(bool show) override;
     virtual void incrementReferens() override;
     virtual void decrementReferens() override;
     virtual void GroupVisibility(quint32 object, bool visible) override;
 
-    static QVector<QPair<bool, VPieceNode> > CalcUnitedPath(const VPiecePath &d1Path, const VPiecePath &d2Path,
-                                                            quint32 indexD2, quint32 pRotate);
+    static auto CalcUnitedPath(const VPiecePath &d1Path, const VPiecePath &d2Path, quint32 indexD2, quint32 pRotate)
+        -> QVector<QPair<bool, VPieceNode>>;
 public slots:
     /**
      * @brief FullUpdateFromFile update tool data form file.
@@ -133,8 +133,9 @@ private:
 
     void             AddDetail(QDomElement &domElement, const VPiece &d) const;
     void             AddToModeling(const QDomElement &domElement);
-    QVector<quint32> GetReferenceObjects() const;
-    QVector<quint32> ReferenceObjects(const QDomElement &root, const QString &tag, const QString &attribute) const;
+    auto GetReferenceObjects() const -> QVector<quint32>;
+    auto ReferenceObjects(const QDomElement &root, const QString &tag, const QString &attribute) const
+        -> QVector<quint32>;
 };
 
 #endif // VTOOLUNIONDETAILS_H

@@ -47,7 +47,7 @@ public:
         :X(other.X), Y(other.Y), Z(other.Z)
     {}
 
-    Vector3D &operator=(const Vector3D &other)
+    auto operator=(const Vector3D &other) -> Vector3D &
     {
         if ( &other == this )
         {
@@ -82,13 +82,13 @@ public:
     virtual ~QVector3DProperty() override {}
 
     //! Get the data how it should be displayed
-    virtual QVariant data (int column = DPC_Name, int role = Qt::DisplayRole) const override;
+    virtual auto data(int column = DPC_Name, int role = Qt::DisplayRole) const -> QVariant override;
 
     //! Returns item flags
-    virtual Qt::ItemFlags flags(int column = DPC_Name) const override;
+    virtual auto flags(int column = DPC_Name) const -> Qt::ItemFlags override;
 
     //! Returns the Vector3d
-    virtual Vector3D getVector() const;
+    virtual auto getVector() const -> Vector3D;
 
     //! Sets the Vector3d
     virtual void setVector(const Vector3D& vect);
@@ -97,20 +97,20 @@ public:
     virtual void setVector(double x, double y, double z);
 
     //! Returns a string containing the type of the property
-    virtual QString type() const override;
+    virtual auto type() const -> QString override;
 
     //! Clones this property
     //! \param include_children Indicates whether to also clone the children
     //! \param container If a property is being passed here, no new VProperty is being created but instead it is tried
     //! to fill all the data into container. This can also be used when subclassing this function.
     //! \return Returns the newly created property (or container, if it was not NULL)
-    virtual VProperty* clone(bool include_children = true, VProperty* container = NULL) const override;
+    virtual auto clone(bool include_children = true, VProperty *container = NULL) const -> VProperty * override;
 
     //! Sets the value of the property
     virtual void setValue(const QVariant& value) override;
 
     //! Returns the value of the property as a QVariant
-    virtual QVariant getValue() const override;
+    virtual auto getValue() const -> QVariant override;
 
 private:
     Q_DISABLE_COPY_MOVE(QVector3DProperty) // NOLINT

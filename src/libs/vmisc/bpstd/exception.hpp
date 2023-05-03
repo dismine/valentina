@@ -144,7 +144,7 @@ namespace bpstd {
   ///        frame
   ///
   /// \return the number of exceptions
-  int uncaught_exceptions() noexcept;
+auto uncaught_exceptions() noexcept -> int;
 
 } // namespace bpstd
 
@@ -156,9 +156,7 @@ namespace bpstd {
 // Utilities
 //------------------------------------------------------------------------------
 
-inline BPSTD_INLINE_VISIBILITY
-int bpstd::uncaught_exceptions()
-  noexcept
+inline BPSTD_INLINE_VISIBILITY auto bpstd::uncaught_exceptions() noexcept -> int
 {
 #if defined(BPSTD_HAS_UNCAUGHT_EXCEPTIONS)
   // C++17 implementation

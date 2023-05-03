@@ -65,7 +65,7 @@ VLengthLine::VLengthLine(const VLengthLine &var)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VLengthLine &VLengthLine::operator=(const VLengthLine &var)
+auto VLengthLine::operator=(const VLengthLine &var) -> VLengthLine &
 {
     if ( &var == this )
     {
@@ -83,7 +83,7 @@ VLengthLine::VLengthLine(VLengthLine &&var) Q_DECL_NOTHROW
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VLengthLine &VLengthLine::operator=(VLengthLine &&var) Q_DECL_NOTHROW
+auto VLengthLine::operator=(VLengthLine &&var) Q_DECL_NOTHROW->VLengthLine &
 {
     VInternalVariable::operator=(var);
     std::swap(d, var.d);
@@ -96,7 +96,7 @@ VLengthLine::~VLengthLine()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLengthLine::Filter(quint32 id)
+auto VLengthLine::Filter(quint32 id) -> bool
 {
     return id == d->p1Id || id == d->p2Id;
 }
@@ -112,13 +112,13 @@ void VLengthLine::SetValue(const VPointF *p1, const VPointF *p2)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VLengthLine::GetP1Id() const
+auto VLengthLine::GetP1Id() const -> quint32
 {
     return d->p1Id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VLengthLine::GetP2Id() const
+auto VLengthLine::GetP2Id() const -> quint32
 {
     return d->p2Id;
 }

@@ -44,7 +44,7 @@ class FancyTab final : public QObject
 public:
     explicit FancyTab(QWidget *tabbar);
 
-    double fader();
+    auto fader() -> double;
     void   setFader(double value);
 
     void fadeIn();

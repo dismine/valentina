@@ -51,20 +51,20 @@ class VMainGraphicsScene : public QGraphicsScene
 public:
     explicit VMainGraphicsScene(QObject *parent = nullptr);
     explicit VMainGraphicsScene(const QRectF & sceneRect, QObject * parent = nullptr);
-    qint32        getHorScrollBar() const;
+    auto getHorScrollBar() const -> qint32;
     void          setHorScrollBar(const qint32 &value);
-    qint32        getVerScrollBar() const;
+    auto getVerScrollBar() const -> qint32;
     void          setVerScrollBar(const qint32 &value);
-    QTransform    transform() const;
+    auto transform() const -> QTransform;
     void          setTransform(const QTransform &transform);
     void          SetDisableTools(bool disable, const QString &namePP);
-    QPointF       getScenePos() const;
+    auto getScenePos() const -> QPointF;
 
-    QRectF        VisibleItemsBoundingRect() const;
+    auto VisibleItemsBoundingRect() const -> QRectF;
     void          InitOrigins();
     void          SetOriginsVisible(bool visible);
 
-    bool          IsNonInteractive() const;
+    auto IsNonInteractive() const -> bool;
     void          SetNonInteractive(bool nonInteractive);
 
     void SetAcceptDrop(bool newAcceptDrop);
@@ -179,7 +179,7 @@ private:
  * @brief getHorScrollBar return scene horizontal scrollbar.
  * @return horizontal scrollbar.
  */
-inline qint32 VMainGraphicsScene::getHorScrollBar() const
+inline auto VMainGraphicsScene::getHorScrollBar() const -> qint32
 {
     return horScrollBar;
 }
@@ -199,7 +199,7 @@ inline void VMainGraphicsScene::setHorScrollBar(const qint32 &value)
  * @brief getVerScrollBar return scene vertical scrollbar.
  * @return vertical scrollbar.
  */
-inline qint32 VMainGraphicsScene::getVerScrollBar() const
+inline auto VMainGraphicsScene::getVerScrollBar() const -> qint32
 {
     return verScrollBar;
 }

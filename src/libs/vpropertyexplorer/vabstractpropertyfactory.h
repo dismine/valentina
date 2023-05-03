@@ -45,7 +45,7 @@ public:
     //! \param type The type of the property as string
     //! \param name The property's name
     //! \return Returns the created property or NULL if it couldn't be be created
-    virtual VProperty* createProperty(const QString& type, const QString &name) = 0;
+    virtual auto createProperty(const QString &type, const QString &name) -> VProperty * = 0;
 };
 
 QT_WARNING_POP

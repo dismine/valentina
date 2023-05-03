@@ -59,7 +59,7 @@ VExceptionWrongId::VExceptionWrongId(const VExceptionWrongId &e) V_NOEXCEPT_EXPR
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionWrongId &VExceptionWrongId::operator=(const VExceptionWrongId &e) V_NOEXCEPT_EXPR (true)
+auto VExceptionWrongId::operator=(const VExceptionWrongId &e) V_NOEXCEPT_EXPR(true) -> VExceptionWrongId &
 {
     if ( &e == this )
     {
@@ -77,7 +77,7 @@ VExceptionWrongId &VExceptionWrongId::operator=(const VExceptionWrongId &e) V_NO
  * @brief ErrorMessage return main error message
  * @return main error message
  */
-QString VExceptionWrongId::ErrorMessage() const
+auto VExceptionWrongId::ErrorMessage() const -> QString
 {
     return QString("ExceptionWrongId: %1").arg(error);
 }
@@ -87,7 +87,7 @@ QString VExceptionWrongId::ErrorMessage() const
  * @brief DetailedInformation return detailed information about error
  * @return detailed information
  */
-QString VExceptionWrongId::DetailedInformation() const
+auto VExceptionWrongId::DetailedInformation() const -> QString
 {
     return MoreInfo(QString("tag: %1 in line %2\nFull tag:\n%3").arg(tagName).arg(lineNumber).arg(tagText));
 }

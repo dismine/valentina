@@ -375,7 +375,7 @@ void DialogEllipticalArc::SetColor(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal DialogEllipticalArc::GetApproximationScale() const
+auto DialogEllipticalArc::GetApproximationScale() const -> qreal
 {
     return ui->doubleSpinBoxApproximationScale->value();
 }

@@ -36,7 +36,8 @@
 const QString VToolPlaceLabel::ToolType = QStringLiteral("placeLabel");
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPlaceLabel *VToolPlaceLabel::Create(const QPointer<DialogTool> &dialog, VAbstractPattern *doc, VContainer *data)
+auto VToolPlaceLabel::Create(const QPointer<DialogTool> &dialog, VAbstractPattern *doc, VContainer *data)
+    -> VToolPlaceLabel *
 {
     SCASSERT(not dialog.isNull());
     const QPointer<DialogPlaceLabel> dialogTool = qobject_cast<DialogPlaceLabel *>(dialog);
@@ -59,7 +60,7 @@ VToolPlaceLabel *VToolPlaceLabel::Create(const QPointer<DialogTool> &dialog, VAb
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPlaceLabel *VToolPlaceLabel::Create(VToolPlaceLabelInitData &initData)
+auto VToolPlaceLabel::Create(VToolPlaceLabelInitData &initData) -> VToolPlaceLabel *
 {
     const qreal w =
             qAbs(VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.width, initData.data)));
@@ -150,7 +151,7 @@ VToolPlaceLabel *VToolPlaceLabel::Create(VToolPlaceLabelInitData &initData)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolPlaceLabel::getTagName() const
+auto VToolPlaceLabel::getTagName() const -> QString
 {
     return VAbstractPattern::TagPoint;
 }

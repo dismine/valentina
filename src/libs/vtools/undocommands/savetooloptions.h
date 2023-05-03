@@ -48,12 +48,13 @@ public:
     virtual ~SaveToolOptions() = default;
     virtual void undo() override;
     virtual void redo() override;
-    virtual bool mergeWith(const QUndoCommand *command) override;
-    virtual int  id() const override;
+    virtual auto mergeWith(const QUndoCommand *command) -> bool override;
+    virtual auto id() const -> int override;
 
-    QDomElement    getNewXml() const;
-    quint32        getToolId() const;
-    QList<quint32> NewDependencies() const;
+    auto getNewXml() const -> QDomElement;
+    auto getToolId() const -> quint32;
+    auto NewDependencies() const -> QList<quint32>;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(SaveToolOptions) // NOLINT
@@ -62,29 +63,29 @@ private:
     const QList<quint32> oldDependencies;
     const QList<quint32> newDependencies;
 
-    QVector<quint32> Missing(const QList<quint32> &list1, const QList<quint32> &list2) const;
+    auto Missing(const QList<quint32> &list1, const QList<quint32> &list2) const -> QVector<quint32>;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline int SaveToolOptions::id() const
+inline auto SaveToolOptions::id() const -> int
 {
     return static_cast<int>(UndoCommand::SaveToolOptions);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QDomElement SaveToolOptions::getNewXml() const
+inline auto SaveToolOptions::getNewXml() const -> QDomElement
 {
     return newXml;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline quint32 SaveToolOptions::getToolId() const
+inline auto SaveToolOptions::getToolId() const -> quint32
 {
     return nodeId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QList<quint32> SaveToolOptions::NewDependencies() const
+inline auto SaveToolOptions::NewDependencies() const -> QList<quint32>
 {
     return newDependencies;
 }

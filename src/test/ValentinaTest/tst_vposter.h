@@ -47,8 +47,8 @@ private slots:
     void SmallPoster();
 
 private:
-    qreal ToPixel(qreal val) const;
-    QRect PageRect(const QPrinter &printer) const;
+    auto ToPixel(qreal val) const -> qreal;
+    auto PageRect(const QPrinter &printer) const -> QRect;
 };
 
 #endif // TST_VPOSTER_H

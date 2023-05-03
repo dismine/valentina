@@ -97,8 +97,8 @@ void VToolTriangle::SetDialog()
  * @param data container with variables.
  * @return the created tool
  */
-VToolTriangle* VToolTriangle::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                     VAbstractPattern *doc, VContainer *data)
+auto VToolTriangle::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                           VContainer *data) -> VToolTriangle *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogTriangle> dialogTool = qobject_cast<DialogTriangle *>(dialog);
@@ -131,7 +131,7 @@ VToolTriangle* VToolTriangle::Create(const QPointer<DialogTool> &dialog, VMainGr
  * @param initData init data.
  * @return the created tool
  */
-VToolTriangle* VToolTriangle::Create(VToolTriangleInitData initData)
+auto VToolTriangle::Create(VToolTriangleInitData initData) -> VToolTriangle *
 {
     const QSharedPointer<VPointF> axisP1 = initData.data->GeometricObject<VPointF>(initData.axisP1Id);
     const QSharedPointer<VPointF> axisP2 = initData.data->GeometricObject<VPointF>(initData.axisP2Id);
@@ -192,8 +192,8 @@ VToolTriangle* VToolTriangle::Create(VToolTriangleInitData initData)
  * @param intersectionPoint point intersection two foots right triangle
  * @return true if the intersection exists.
  */
-bool VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, const QPointF &firstPoint,
-                              const QPointF &secondPoint, QPointF *intersectionPoint)
+auto VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, const QPointF &firstPoint,
+                              const QPointF &secondPoint, QPointF *intersectionPoint) -> bool
 {
     SCASSERT(intersectionPoint != nullptr)
 
@@ -236,25 +236,25 @@ bool VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, cons
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolTriangle::AxisP1Name() const
+auto VToolTriangle::AxisP1Name() const -> QString
 {
     return VAbstractTool::data.GetGObject(axisP1Id)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolTriangle::AxisP2Name() const
+auto VToolTriangle::AxisP2Name() const -> QString
 {
     return VAbstractTool::data.GetGObject(axisP2Id)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolTriangle::FirstPointName() const
+auto VToolTriangle::FirstPointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(firstPointId)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolTriangle::SecondPointName() const
+auto VToolTriangle::SecondPointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(secondPointId)->name();
 }

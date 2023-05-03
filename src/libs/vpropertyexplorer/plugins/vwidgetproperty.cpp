@@ -45,7 +45,7 @@ VPE::VWidgetProperty::~VWidgetProperty()
     //
 }
 
-QWidget *VPE::VWidgetProperty::getWidget() const
+auto VPE::VWidgetProperty::getWidget() const -> QWidget *
 {
     return static_cast<VWidgetPropertyPrivate*>(d_ptr)->Widget.data();
 }
@@ -62,13 +62,12 @@ void VPE::VWidgetProperty::setWidget(QWidget* widget)
     tmpDPtr->Widget = widget;
 }
 
-
-QString VPE::VWidgetProperty::type() const
+auto VPE::VWidgetProperty::type() const -> QString
 {
     return "widget";
 }
 
-VPE::VProperty* VPE::VWidgetProperty::clone(bool include_children, VProperty* container) const
+auto VPE::VWidgetProperty::clone(bool include_children, VProperty *container) const -> VPE::VProperty *
 {
     /* todo: This is a tricky one to clone... don't know what would be the best way to do so... Maybe serialize the
      * widget somehow?

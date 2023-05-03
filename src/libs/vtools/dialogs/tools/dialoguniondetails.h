@@ -53,16 +53,17 @@ public:
     DialogUnionDetails(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogUnionDetails() override;
 
-    quint32          getD1() const;
-    quint32          getD2() const;
-    vsizetype getIndexD1() const;
-    vsizetype getIndexD2() const;
+    auto getD1() const -> quint32;
+    auto getD2() const -> quint32;
+    auto getIndexD1() const -> vsizetype;
+    auto getIndexD2() const -> vsizetype;
 
-    bool RetainPieces() const;
+    auto RetainPieces() const -> bool;
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) override;
 protected:
-    virtual bool IsValid() const final {return true;}
+    virtual auto IsValid() const -> bool final { return true; }
+
 private:
     Q_DISABLE_COPY_MOVE(DialogUnionDetails) // NOLINT
 
@@ -93,8 +94,8 @@ private:
     /** @brief p2 id second point of detail */
     quint32           p2;
 
-    bool             CheckObject(const quint32 &id, const quint32 &idDetail) const;
-    bool             CheckDetail(const quint32 &idDetail) const;
+    auto CheckObject(const quint32 &id, const quint32 &idDetail) const -> bool;
+    auto CheckDetail(const quint32 &idDetail) const -> bool;
 
     void             ChoosedDetail(const quint32 &id, const SceneObject &type, quint32 &idDetail,
                                    vsizetype &index);
@@ -105,7 +106,7 @@ private:
  * @brief getD1 return id first detail
  * @return id
  */
-inline quint32 DialogUnionDetails::getD1() const
+inline auto DialogUnionDetails::getD1() const -> quint32
 {
     return d1;
 }
@@ -115,7 +116,7 @@ inline quint32 DialogUnionDetails::getD1() const
  * @brief getD2 return id second detail
  * @return id
  */
-inline quint32 DialogUnionDetails::getD2() const
+inline auto DialogUnionDetails::getD2() const -> quint32
 {
     return d2;
 }
@@ -125,7 +126,7 @@ inline quint32 DialogUnionDetails::getD2() const
  * @brief getIndexD1 return index edge first detail
  * @return index
  */
-inline vsizetype DialogUnionDetails::getIndexD1() const
+inline auto DialogUnionDetails::getIndexD1() const -> vsizetype
 {
     return indexD1;
 }
@@ -135,7 +136,7 @@ inline vsizetype DialogUnionDetails::getIndexD1() const
  * @brief getIndexD2 return index edge second detail
  * @return index
  */
-inline vsizetype DialogUnionDetails::getIndexD2() const
+inline auto DialogUnionDetails::getIndexD2() const -> vsizetype
 {
     return indexD2;
 }

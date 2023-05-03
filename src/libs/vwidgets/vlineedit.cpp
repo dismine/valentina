@@ -54,8 +54,8 @@ public:
     explicit MultiSelectCompleter(QObject* parent=nullptr);
     virtual ~MultiSelectCompleter() =default;
 
-    virtual QString pathFromIndex(const QModelIndex& index) const override;
-    virtual QStringList splitPath(const QString& path) const override;
+    virtual auto pathFromIndex(const QModelIndex &index) const -> QString override;
+    virtual auto splitPath(const QString &path) const -> QStringList override;
 
 private:
     Q_DISABLE_COPY_MOVE(MultiSelectCompleter) // NOLINT
@@ -69,7 +69,7 @@ MultiSelectCompleter::MultiSelectCompleter(QObject *parent)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QString MultiSelectCompleter::pathFromIndex(const QModelIndex& index) const
+auto MultiSelectCompleter::pathFromIndex(const QModelIndex &index) const -> QString
 {
     QString path = QCompleter::pathFromIndex(index);
 
@@ -85,7 +85,7 @@ QString MultiSelectCompleter::pathFromIndex(const QModelIndex& index) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList MultiSelectCompleter::splitPath( const QString& path ) const
+auto MultiSelectCompleter::splitPath(const QString &path) const -> QStringList
 {
     vsizetype pos = path.lastIndexOf(',') + 1;
 

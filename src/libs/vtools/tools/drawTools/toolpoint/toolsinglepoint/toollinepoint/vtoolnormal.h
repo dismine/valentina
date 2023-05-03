@@ -68,16 +68,16 @@ class VToolNormal : public VToolLinePoint
     Q_OBJECT // NOLINT
 public:
     virtual void   SetDialog() override;
-    static VToolNormal* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
-                               VContainer *data);
-    static VToolNormal* Create(VToolNormalInitData initData);
-    static QPointF FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, qreal length,
-                             qreal angle = 0);
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolNormal *;
+    static auto Create(VToolNormalInitData initData) -> VToolNormal *;
+    static auto FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, qreal length, qreal angle = 0)
+        -> QPointF;
     static const QString ToolType;
-    virtual int    type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::Normal)};
 
-    QString SecondPointName() const;
+    auto SecondPointName() const -> QString;
 
     virtual void   ShowVisualization(bool show) override;
 protected slots:

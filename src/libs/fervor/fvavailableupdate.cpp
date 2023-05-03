@@ -32,7 +32,7 @@ FvAvailableUpdate::FvAvailableUpdate(QObject *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QUrl FvAvailableUpdate::GetEnclosureUrl() const
+auto FvAvailableUpdate::GetEnclosureUrl() const -> QUrl
 {
     return m_enclosureUrl;
 }
@@ -50,7 +50,7 @@ void FvAvailableUpdate::SetEnclosureUrl(const QString &enclosureUrl)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString FvAvailableUpdate::GetEnclosureVersion() const
+auto FvAvailableUpdate::GetEnclosureVersion() const -> QString
 {
     return m_enclosureVersion;
 }
@@ -62,7 +62,7 @@ void FvAvailableUpdate::SetEnclosureVersion(const QString &enclosureVersion)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString FvAvailableUpdate::GetEnclosurePlatform() const
+auto FvAvailableUpdate::GetEnclosurePlatform() const -> QString
 {
     return m_enclosurePlatform;
 }

@@ -49,19 +49,19 @@ class VException : public QException
 public:
     explicit VException(const QString &error) V_NOEXCEPT_EXPR (true);
     VException(const VException &e) V_NOEXCEPT_EXPR (true);
-    VException &operator=(const VException &e) V_NOEXCEPT_EXPR (true);
+    auto operator=(const VException &e) V_NOEXCEPT_EXPR(true) -> VException &;
     virtual ~VException() V_NOEXCEPT_EXPR (true) = default;
 
     Q_NORETURN virtual void raise() const override;
 
     // cppcheck-suppress unusedFunction
-    Q_REQUIRED_RESULT virtual VException *clone() const override;
+    Q_REQUIRED_RESULT virtual auto clone() const -> VException * override;
 
-    virtual QString ErrorMessage() const;
-    virtual QString DetailedInformation() const;
-    QString         WhatUtf8() const V_NOEXCEPT_EXPR (true);
+    virtual auto ErrorMessage() const -> QString;
+    virtual auto DetailedInformation() const -> QString;
+    auto WhatUtf8() const V_NOEXCEPT_EXPR(true) -> QString;
     void            AddMoreInformation(const QString &info);
-    QString         MoreInformation() const;
+    auto MoreInformation() const -> QString;
 
 protected:
     /** @brief error string with error */
@@ -70,7 +70,7 @@ protected:
     /** @brief moreInfo more information about error */
     QString         moreInfo {};
 
-    QString         MoreInfo(const QString &detInfo) const;
+    auto MoreInfo(const QString &detInfo) const -> QString;
 };
 
 QT_WARNING_POP
@@ -80,7 +80,7 @@ QT_WARNING_POP
  * @brief What return string with error
  * @return string with error
  */
-inline QString VException::WhatUtf8() const V_NOEXCEPT_EXPR (true)
+inline auto VException::WhatUtf8() const V_NOEXCEPT_EXPR(true) -> QString
 {
     return error;
 }
@@ -90,7 +90,7 @@ inline QString VException::WhatUtf8() const V_NOEXCEPT_EXPR (true)
  * @brief MoreInformation return more information for error
  * @return information
  */
-inline QString VException::MoreInformation() const
+inline auto VException::MoreInformation() const -> QString
 {
     return moreInfo;
 }
@@ -102,12 +102,12 @@ class VExceptionToolWasDeleted : public VException
 public:
     explicit VExceptionToolWasDeleted(const QString &error) V_NOEXCEPT_EXPR (true);
     VExceptionToolWasDeleted(const VExceptionToolWasDeleted &e) V_NOEXCEPT_EXPR (true);
-    VExceptionToolWasDeleted &operator=(const VExceptionToolWasDeleted &e) V_NOEXCEPT_EXPR (true);
+    auto operator=(const VExceptionToolWasDeleted &e) V_NOEXCEPT_EXPR(true) -> VExceptionToolWasDeleted &;
     virtual ~VExceptionToolWasDeleted() V_NOEXCEPT_EXPR (true) = default;
 
     Q_NORETURN virtual void raise() const override;
     // cppcheck-suppress unusedFunction
-    virtual VExceptionToolWasDeleted *clone() const override;
+    virtual auto clone() const -> VExceptionToolWasDeleted * override;
 };
 
 #endif // VEXCEPTION_H

@@ -65,19 +65,19 @@ class VToolPointOfIntersectionArcs : public VToolSinglePoint
 
 public:
     virtual void SetDialog() override;
-    static VToolPointOfIntersectionArcs *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
-                                                VAbstractPattern *doc, VContainer *data);
-    static VToolPointOfIntersectionArcs *Create(VToolPointOfIntersectionArcsInitData initData);
-    static bool FindPoint(const VArc *arc1, const VArc *arc2, const CrossCirclesPoint pType,
-                          QPointF *intersectionPoint);
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolPointOfIntersectionArcs *;
+    static auto Create(VToolPointOfIntersectionArcsInitData initData) -> VToolPointOfIntersectionArcs *;
+    static auto FindPoint(const VArc *arc1, const VArc *arc2, const CrossCirclesPoint pType, QPointF *intersectionPoint)
+        -> bool;
     static const QString ToolType;
-    virtual int  type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::PointOfIntersectionArcs) };
 
-    QString FirstArcName() const;
-    QString SecondArcName() const;
+    auto FirstArcName() const -> QString;
+    auto SecondArcName() const -> QString;
 
-    CrossCirclesPoint GetCrossCirclesPoint() const;
+    auto GetCrossCirclesPoint() const -> CrossCirclesPoint;
     void              SetCrossCirclesPoint(const CrossCirclesPoint &value);
 
     virtual void ShowVisualization(bool show) override;

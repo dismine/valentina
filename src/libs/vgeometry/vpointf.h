@@ -63,37 +63,38 @@ public:
              const Draw &mode = Draw::Calculation);
     virtual ~VPointF() override;
 
-    VPointF &operator=(const VPointF &point);
+    auto operator=(const VPointF &point) -> VPointF &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VPointF(VPointF &&point) Q_DECL_NOTHROW;
-    VPointF &operator=(VPointF &&point) Q_DECL_NOTHROW;
+    auto operator=(VPointF &&point) Q_DECL_NOTHROW->VPointF &;
 #endif
 
     explicit operator QPointF() const;
-    VPointF Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
-    VPointF Flip(const QLineF &axis, const QString &prefix = QString()) const;
-    VPointF Move(qreal length, qreal angle, const QString &prefix = QString()) const;
-    qreal   mx() const;
-    qreal   my() const;
+    auto Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const -> VPointF;
+    auto Flip(const QLineF &axis, const QString &prefix = QString()) const -> VPointF;
+    auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VPointF;
+    auto mx() const -> qreal;
+    auto my() const -> qreal;
     void    setMx(qreal mx);
     void    setMy(qreal my);
-    QPointF toQPointF()const;
-    qreal   x() const;
+    auto toQPointF() const -> QPointF;
+    auto x() const -> qreal;
     void    setX(const qreal &value);
-    qreal   y() const;
+    auto y() const -> qreal;
     void    setY(const qreal &value);
 
-    bool IsShowLabel() const;
+    auto IsShowLabel() const -> bool;
     void SetShowLabel(bool hide);
 
-    virtual QJsonObject ToJson() const override;
+    virtual auto ToJson() const -> QJsonObject override;
 
     virtual void SetAlias(const QString &alias) override;
     virtual void SetAliasSuffix(const QString &aliasSuffix) override;
 
-    static QPointF RotatePF(const QPointF &originPoint, const QPointF &point, qreal degrees);
-    static QPointF FlipPF(const QLineF &axis, const QPointF &point);
-    static QPointF MovePF(const QPointF &originPoint, qreal length, qreal angle);
+    static auto RotatePF(const QPointF &originPoint, const QPointF &point, qreal degrees) -> QPointF;
+    static auto FlipPF(const QLineF &axis, const QPointF &point) -> QPointF;
+    static auto MovePF(const QPointF &originPoint, qreal length, qreal angle) -> QPointF;
+
 private:
     QSharedDataPointer<VPointFData> d;
 };

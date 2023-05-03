@@ -51,35 +51,35 @@ public:
     explicit DialogPointOfIntersectionCurves(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogPointOfIntersectionCurves() override;
 
-    QString GetPointName() const;
+    auto GetPointName() const -> QString;
     void    SetPointName(const QString &value);
 
-    quint32 GetFirstCurveId() const;
+    auto GetFirstCurveId() const -> quint32;
     void    SetFirstCurveId(quint32 value);
 
-    quint32 GetSecondCurveId() const;
+    auto GetSecondCurveId() const -> quint32;
     void    SetSecondCurveId(quint32 value);
 
-    VCrossCurvesPoint GetVCrossPoint() const;
+    auto GetVCrossPoint() const -> VCrossCurvesPoint;
     void              SetVCrossPoint(VCrossCurvesPoint vP);
 
-    HCrossCurvesPoint GetHCrossPoint() const;
+    auto GetHCrossPoint() const -> HCrossCurvesPoint;
     void              SetHCrossPoint(HCrossCurvesPoint hP);
 
     void    SetNotes(const QString &notes);
-    QString GetNotes() const;
+    auto GetNotes() const -> QString;
 
     void    SetCurve1AliasSuffix1(const QString &alias);
-    QString GetCurve1AliasSuffix1() const;
+    auto GetCurve1AliasSuffix1() const -> QString;
 
     void    SetCurve1AliasSuffix2(const QString &alias);
-    QString GetCurve1AliasSuffix2() const;
+    auto GetCurve1AliasSuffix2() const -> QString;
 
     void    SetCurve2AliasSuffix1(const QString &alias);
-    QString GetCurve2AliasSuffix1() const;
+    auto GetCurve2AliasSuffix1() const -> QString;
 
     void    SetCurve2AliasSuffix2(const QString &alias);
-    QString GetCurve2AliasSuffix2() const;
+    auto GetCurve2AliasSuffix2() const -> QString;
 
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) override;
@@ -91,7 +91,7 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     virtual void SaveData() override;
-    virtual bool IsValid() const final;
+    virtual auto IsValid() const -> bool final;
 
 private slots:
     void CurveChanged();
@@ -121,7 +121,7 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogPointOfIntersectionCurves::IsValid() const
+inline auto DialogPointOfIntersectionCurves::IsValid() const -> bool
 {
     return flagName && flagError && flagCurve1Alias1 && flagCurve1Alias2 && flagCurve2Alias1 && flagCurve2Alias2;
 }

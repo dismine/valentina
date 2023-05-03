@@ -676,7 +676,7 @@ void VCommonSettings::SetDoubleClickZoomFitBestCurrentPP(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VCommonSettings::IsInteractiveTools() const
+auto VCommonSettings::IsInteractiveTools() const -> bool
 {
     return value(*settingConfigurationInteractiveTools, true).toBool();
 }
@@ -839,7 +839,7 @@ void VCommonSettings::SetLayoutSettingsDialogSize(const QSize &sz)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSize VCommonSettings::GetDialogSplinePathSize() const
+auto VCommonSettings::GetDialogSplinePathSize() const -> QSize
 {
     return value(*settingDialogSplinePathSize, QSize(0, 0)).toSize();
 }

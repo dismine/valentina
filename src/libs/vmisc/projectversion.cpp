@@ -46,7 +46,7 @@ extern const QString APP_VERSION_STR(QStringLiteral("%1.%2.%3.%4").arg(MAJOR_VER
                                          .arg(DEBUG_VERSION).arg(LATEST_TAG_DISTANCE));
 
 //---------------------------------------------------------------------------------------------------------------------
-QString compilerString()
+auto compilerString() -> QString
 {
 #if defined(Q_CC_INTEL) // must be before GNU, Clang and MSVC because ICC/ICL claim to be them
     QString iccCompact;
@@ -103,7 +103,7 @@ QString compilerString()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString buildCompatibilityString()
+auto buildCompatibilityString() -> QString
 {
     return QCoreApplication::tr("Based on Qt %1 (%2, %3 bit)").arg(QLatin1String(qVersion()), compilerString(),
                                                                    QString::number(QSysInfo::WordSize));

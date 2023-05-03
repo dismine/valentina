@@ -57,7 +57,7 @@ VNodeSpline::VNodeSpline(const VAbstractNodeInitData &initData, QObject *qoParen
  * @param initData init data.
  * @return pointer to node.
  */
-VNodeSpline *VNodeSpline::Create(const VAbstractNodeInitData &initData)
+auto VNodeSpline::Create(const VAbstractNodeInitData &initData) -> VNodeSpline *
 {
     VNodeSpline *spl = nullptr;
     if (initData.parse == Document::FullParse)
@@ -87,7 +87,7 @@ VNodeSpline *VNodeSpline::Create(const VAbstractNodeInitData &initData)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VNodeSpline::getTagName() const
+auto VNodeSpline::getTagName() const -> QString
 {
     return VAbstractPattern::TagSpline;
 }

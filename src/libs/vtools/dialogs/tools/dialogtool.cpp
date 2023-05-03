@@ -198,7 +198,7 @@ void DialogTool::FillComboBoxSplines(QComboBox *box) const
     SCASSERT(box != nullptr)
     box->blockSignals(true);
 
-    const auto objs = data->CalculationGObjects();
+    const auto *const objs = data->CalculationGObjects();
     QHash<quint32, QSharedPointer<VGObject> >::const_iterator i;
     QMap<QString, quint32> list;
     for (i = objs->constBegin(); i != objs->constEnd(); ++i)
@@ -222,7 +222,7 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box) const
     SCASSERT(box != nullptr)
     box->blockSignals(true);
 
-    const auto objs = data->CalculationGObjects();
+    const auto *const objs = data->CalculationGObjects();
     QHash<quint32, QSharedPointer<VGObject> >::const_iterator i;
     QMap<QString, quint32> list;
     for (i = objs->constBegin(); i != objs->constEnd(); ++i)
@@ -244,7 +244,7 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box) const
 void DialogTool::FillComboBoxCurves(QComboBox *box) const
 {
     SCASSERT(box != nullptr)
-    const auto objs = data->CalculationGObjects();
+    const auto *const objs = data->CalculationGObjects();
     QMap<QString, quint32> list;
     QHash<quint32, QSharedPointer<VGObject> >::const_iterator i;
     for (i = objs->constBegin(); i != objs->constEnd(); ++i)
@@ -337,7 +337,7 @@ void DialogTool::FillComboBoxHCrossCurvesPoint(QComboBox *box) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogTool::GetComboBoxCurrentData(const QComboBox *box, const QString &def) const
+auto DialogTool::GetComboBoxCurrentData(const QComboBox *box, const QString &def) const -> QString
 {
     SCASSERT(box != nullptr)
     QString value;
@@ -367,7 +367,7 @@ void DialogTool::ChangeCurrentData(QComboBox *box, const QVariant &value) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogTool::eventFilter(QObject *object, QEvent *event)
+auto DialogTool::eventFilter(QObject *object, QEvent *event) -> bool
 {
     const bool fitered = FilterObject(object, event);
     if (fitered)
@@ -379,7 +379,7 @@ bool DialogTool::eventFilter(QObject *object, QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogTool::DNumber(const QString &baseName) const
+auto DialogTool::DNumber(const QString &baseName) const -> quint32
 {
     quint32 num = 0;
     QString name;
@@ -507,7 +507,7 @@ void DialogTool::MoveListRowBottom(QListWidget *list)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogTool::IsSplinePath(const QSharedPointer<VGObject> &obj) const
+auto DialogTool::IsSplinePath(const QSharedPointer<VGObject> &obj) const -> bool
 {
     return obj->getType() == GOType::SplinePath || obj->getType() == GOType::CubicBezierPath;
 }
@@ -517,7 +517,7 @@ bool DialogTool::IsSplinePath(const QSharedPointer<VGObject> &obj) const
  * @brief Eval evaluate formula and show result
  * @param formulaData options to control parsing
  */
-qreal DialogTool::Eval(const FormulaData &formulaData, bool &flag)
+auto DialogTool::Eval(const FormulaData &formulaData, bool &flag) -> qreal
 {
     const qreal result = EvalToolFormula(this, formulaData, flag);
     CheckState(); // Disable Ok and Apply buttons if something wrong.
@@ -588,7 +588,7 @@ void DialogTool::setCurrentCurveId(QComboBox *box, const quint32 &value) const
  * @param box combobox
  * @return id or 0 if combobox is empty
  */
-quint32 DialogTool::getCurrentObjectId(QComboBox *box) const
+auto DialogTool::getCurrentObjectId(QComboBox *box) const -> quint32
 {
     SCASSERT(box != nullptr)
     qint32 index = box->currentIndex();
@@ -596,14 +596,12 @@ quint32 DialogTool::getCurrentObjectId(QComboBox *box) const
     {
         return qvariant_cast<quint32>(box->itemData(index));
     }
-    else
-    {
-        return 0;
-    }
+
+    return 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogTool::SetObject(const quint32 &id, QComboBox *box, const QString &toolTip)
+auto DialogTool::SetObject(const quint32 &id, QComboBox *box, const QString &toolTip) -> bool
 {
     SCASSERT(box != nullptr)
     const qint32 index = box->findData(id);
@@ -613,10 +611,9 @@ bool DialogTool::SetObject(const quint32 &id, QComboBox *box, const QString &too
         emit ToolTip(toolTip);
         return true;
     }
-    else
-    {
-        qWarning()<<"Can't find object by id"<<id;
-    }
+
+    qWarning() << "Can't find object by id" << id;
+
     return false;
 }
 
@@ -649,7 +646,7 @@ void DialogTool::PrepareList(QMap<QString, quint32> &list, quint32 id) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogTool::IsSpline(const QSharedPointer<VGObject> &obj) const
+auto DialogTool::IsSpline(const QSharedPointer<VGObject> &obj) const -> bool
 {
     return obj->getType() == GOType::Spline || obj->getType() == GOType::CubicBezier;
 }
@@ -717,7 +714,7 @@ void DialogTool::DialogRejected()
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-quint32 DialogTool::GetToolId() const
+auto DialogTool::GetToolId() const -> quint32
 {
     return toolId;
 }

@@ -43,7 +43,7 @@ VPatternLabelData::VPatternLabelData(const VPatternLabelData &data)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VPatternLabelData &VPatternLabelData::operator=(const VPatternLabelData &data)
+auto VPatternLabelData::operator=(const VPatternLabelData &data) -> VPatternLabelData &
 {
     if ( &data == this )
     {
@@ -62,7 +62,7 @@ VPatternLabelData::VPatternLabelData(VPatternLabelData &&data) Q_DECL_NOTHROW
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VPatternLabelData &VPatternLabelData::operator=(VPatternLabelData &&data) Q_DECL_NOTHROW
+auto VPatternLabelData::operator=(VPatternLabelData &&data) Q_DECL_NOTHROW->VPatternLabelData &
 {
     VAbstractFloatItemData::operator=(data);
     std::swap(d, data.d);
@@ -75,7 +75,7 @@ VPatternLabelData::~VPatternLabelData()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPatternLabelData::GetLabelWidth() const
+auto VPatternLabelData::GetLabelWidth() const -> QString
 {
     return d->m_dLabelWidth;
 }
@@ -87,7 +87,7 @@ void VPatternLabelData::SetLabelWidth(const QString &dLabelW)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPatternLabelData::GetLabelHeight() const
+auto VPatternLabelData::GetLabelHeight() const -> QString
 {
     return d->m_dLabelHeight;
 }
@@ -99,7 +99,7 @@ void VPatternLabelData::SetLabelHeight(const QString &dLabelH)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VPatternLabelData::GetFontSize() const
+auto VPatternLabelData::GetFontSize() const -> int
 {
     return d->m_iFontSize;
 }
@@ -111,7 +111,7 @@ void VPatternLabelData::SetFontSize(int iSize)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPatternLabelData::GetRotation() const
+auto VPatternLabelData::GetRotation() const -> QString
 {
     return d->m_dLabelAngle;
 }
@@ -123,7 +123,7 @@ void VPatternLabelData::SetRotation(const QString &dRot)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VPatternLabelData::CenterPin() const
+auto VPatternLabelData::CenterPin() const -> quint32
 {
     return d->m_centerPin;
 }
@@ -135,7 +135,7 @@ void VPatternLabelData::SetCenterPin(const quint32 &centerPin)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VPatternLabelData::TopLeftPin() const
+auto VPatternLabelData::TopLeftPin() const -> quint32
 {
     return d->m_topLeftPin;
 }
@@ -147,7 +147,7 @@ void VPatternLabelData::SetTopLeftPin(const quint32 &topLeftPin)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VPatternLabelData::BottomRightPin() const
+auto VPatternLabelData::BottomRightPin() const -> quint32
 {
     return d->m_bottomRightPin;
 }

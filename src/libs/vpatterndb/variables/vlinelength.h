@@ -50,16 +50,17 @@ public:
 
     virtual ~VLengthLine() override;
 
-    VLengthLine &operator=(const VLengthLine &var);
+    auto operator=(const VLengthLine &var) -> VLengthLine &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VLengthLine(VLengthLine &&var) Q_DECL_NOTHROW;
-    VLengthLine &operator=(VLengthLine &&var) Q_DECL_NOTHROW;
+    auto operator=(VLengthLine &&var) Q_DECL_NOTHROW->VLengthLine &;
 #endif
 
-    virtual bool Filter(quint32 id) override;
+    virtual auto Filter(quint32 id) -> bool override;
     void         SetValue(const VPointF *p1, const VPointF *p2);
-    quint32      GetP1Id() const;
-    quint32      GetP2Id() const;
+    auto GetP1Id() const -> quint32;
+    auto GetP2Id() const -> quint32;
+
 private:
     QSharedDataPointer<VLengthLineData> d;
 };

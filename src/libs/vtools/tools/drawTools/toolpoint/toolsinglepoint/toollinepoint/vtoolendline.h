@@ -67,14 +67,14 @@ class VToolEndLine : public VToolLinePoint
 public:
     virtual ~VToolEndLine() = default;
     virtual void SetDialog() override;
-    static VToolEndLine *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
-                                VContainer *data);
-    static VToolEndLine *Create(VToolEndLineInitData &initData);
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolEndLine *;
+    static auto Create(VToolEndLineInitData &initData) -> VToolEndLine *;
     static const QString ToolType;
-    virtual int  type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::EndLine)};
 
-    VFormula     GetFormulaAngle() const;
+    auto GetFormulaAngle() const -> VFormula;
     void         SetFormulaAngle(const VFormula &value);
     virtual void ShowVisualization(bool show) override;
 protected slots:

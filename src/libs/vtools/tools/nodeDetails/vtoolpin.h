@@ -49,11 +49,11 @@ class VToolPin : public VAbstractNode
 {
     Q_OBJECT // NOLINT
 public:
-    static VToolPin* Create(const QPointer<DialogTool> &dialog, VAbstractPattern *doc, VContainer *data);
-    static VToolPin *Create(VToolPinInitData initData);
+    static auto Create(const QPointer<DialogTool> &dialog, VAbstractPattern *doc, VContainer *data) -> VToolPin *;
+    static auto Create(VToolPinInitData initData) -> VToolPin *;
 
     static const QString ToolType;
-    virtual QString getTagName() const override;
+    virtual auto getTagName() const -> QString override;
 public slots:
     virtual void FullUpdateFromFile () override {}
     virtual void AllowHover(bool enabled) override;

@@ -72,20 +72,20 @@ class QMUPARSERSHARED_EXPORT QmuParserBase
 public:
     QmuParserBase();
     explicit QmuParserBase(const QmuParserBase &a_Parser);
-    QmuParserBase& operator=(const QmuParserBase &a_Parser);
+    auto operator=(const QmuParserBase &a_Parser) -> QmuParserBase &;
     virtual ~QmuParserBase();
 
     static void        EnableDebugDump(bool bDumpCmd, bool bDumpStack);
-    qreal              Eval() const;
-    qreal*             Eval(int &nStackSize) const;
+    auto Eval() const -> qreal;
+    auto Eval(int &nStackSize) const -> qreal *;
     void               Eval(qreal *results, int nBulkSize) const;
-    int                GetNumResults() const;
+    auto GetNumResults() const -> int;
     void               SetExpr(const QString &a_sExpr);
     void               SetVarFactory(facfun_type a_pFactory, void *pUserData = nullptr);
     void               ResetLocale();
     void               EnableOptimizer(bool a_bIsOn=true);
     void               EnableBuiltInOprt(bool a_bIsOn=true);
-    bool               HasBuiltInOprt() const;
+    auto HasBuiltInOprt() const -> bool;
     void               AddValIdent(identfun_type a_pCallback);
     void               DefineOprt(const QString &a_sName, fun_type2 a_pFun, unsigned a_iPrec=0,
                                   EOprtAssociativity a_eAssociativity = oaLEFT, bool a_bAllowOpt = false);
@@ -103,23 +103,23 @@ public:
     void               ClearPostfixOprt();
     void               ClearOprt();
     void               RemoveVar(const QString &a_strVarName);
-    const varmap_type& GetUsedVar() const;
-    const varmap_type& GetVar() const;
-    const valmap_type& GetConst() const;
-    const QString&     GetExpr() const;
-    const funmap_type& GetFunDef() const;
-    static QString     GetVersion(EParserVersionInfo eInfo = pviFULL);
-    static const QStringList& GetOprtDef();
-    QMap<qmusizetype, QString> GetTokens() const;
-    QMap<qmusizetype, QString> GetNumbers() const;
+    auto GetUsedVar() const -> const varmap_type &;
+    auto GetVar() const -> const varmap_type &;
+    auto GetConst() const -> const valmap_type &;
+    auto GetExpr() const -> const QString &;
+    auto GetFunDef() const -> const funmap_type &;
+    static auto GetVersion(EParserVersionInfo eInfo = pviFULL) -> QString;
+    static auto GetOprtDef() -> const QStringList &;
+    auto GetTokens() const -> QMap<qmusizetype, QString>;
+    auto GetNumbers() const -> QMap<qmusizetype, QString>;
     void               DefineNameChars(const QString &a_szCharset);
     void               DefineOprtChars(const QString &a_szCharset);
     void               DefineInfixOprtChars(const QString &a_szCharset);
-    const QString&     ValidNameChars() const;
-    const QString&     ValidOprtChars() const;
-    const QString&     ValidInfixOprtChars() const;
+    auto ValidNameChars() const -> const QString &;
+    auto ValidOprtChars() const -> const QString &;
+    auto ValidInfixOprtChars() const -> const QString &;
     void               SetArgSep(char_type cArgSep);
-    QChar              GetArgSep() const;
+    auto GetArgSep() const -> QChar;
     Q_NORETURN void Error(EErrorCodes a_iErrc, qmusizetype a_iPos = -1, const QString &a_sTok = QString() ) const;
 
     template<typename T>
@@ -127,16 +127,16 @@ public:
 
     void setAllowSubexpressions(bool value);
 
-    QLocale getLocale() const;
+    auto getLocale() const -> QLocale;
     void    setLocale(const QLocale &value);
 
-    QChar getDecimalPoint() const;
+    auto getDecimalPoint() const -> QChar;
     void  setDecimalPoint(const QChar &c);
 
-    QChar getThousandsSeparator() const;
+    auto getThousandsSeparator() const -> QChar;
     void  setThousandsSeparator(const QChar &c);
 
-    bool getCNumbers() const;
+    auto getCNumbers() const -> bool;
     void setCNumbers(bool cNumbers);
 
 protected:
@@ -173,17 +173,11 @@ protected:
             :std::numpunct<TChar>(), m_nGroup(nGroup), m_cDecPoint(cDecSep), m_cThousandsSep(cThousandsSep)
             {}
         protected:
-            virtual char_type do_decimal_point() const override
-            {
-                return m_cDecPoint;
-            }
+            virtual auto do_decimal_point() const -> char_type override { return m_cDecPoint; }
 
-            virtual char_type do_thousands_sep() const override
-            {
-                return m_cThousandsSep;
-            }
+            virtual auto do_thousands_sep() const -> char_type override { return m_cThousandsSep; }
 
-            virtual std::string do_grouping() const override
+            virtual auto do_grouping() const -> std::string override
             {
                 // fix for issue 4: https://code.google.com/p/muparser/issues/detail?id=4
                 // courtesy of Jens Bartsch
@@ -267,13 +261,13 @@ private:
     void               ApplyBinOprt(QStack<token_type> &a_stOpt, QStack<token_type> &a_stVal) const;
     void               ApplyIfElse(QStack<token_type> &a_stOpt, QStack<token_type> &a_stVal) const;
     void               ApplyFunc(QStack<token_type> &a_stOpt, QStack<token_type> &a_stVal, int iArgCount) const;
-    token_type         ApplyStrFunc(const token_type &a_FunTok, const QVector<token_type> &a_vArg) const;
-    int                GetOprtPrecedence(const token_type &a_Tok) const;
-    EOprtAssociativity GetOprtAssociativity(const token_type &a_Tok) const;
+    auto ApplyStrFunc(const token_type &a_FunTok, const QVector<token_type> &a_vArg) const -> token_type;
+    auto GetOprtPrecedence(const token_type &a_Tok) const -> int;
+    auto GetOprtAssociativity(const token_type &a_Tok) const -> EOprtAssociativity;
     void               CreateRPN() const;
-    qreal              ParseString() const;
-    qreal              ParseCmdCode() const;
-    qreal              ParseCmdCodeBulk(int nOffset, int nThreadID) const;
+    auto ParseString() const -> qreal;
+    auto ParseCmdCode() const -> qreal;
+    auto ParseCmdCodeBulk(int nOffset, int nThreadID) const -> qreal;
     // cppcheck-suppress functionStatic
     void               CheckName(const QString &a_sName, const QString &a_szCharSet) const;
     // cppcheck-suppress functionStatic
@@ -330,19 +324,19 @@ inline void QmuParserBase::AddValIdent(identfun_type a_pCallback)
  * @brief Get the default symbols used for the built in operators.
  * @sa c_DefaultOprt
  */
-inline const QStringList &QmuParserBase::GetOprtDef()
+inline auto QmuParserBase::GetOprtDef() -> const QStringList &
 {
     return c_DefaultOprt;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QMap<qmusizetype, QString> QmuParserBase::GetTokens() const
+inline auto QmuParserBase::GetTokens() const -> QMap<qmusizetype, QString>
 {
     return m_Tokens;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QMap<qmusizetype, QString> QmuParserBase::GetNumbers() const
+inline auto QmuParserBase::GetNumbers() const -> QMap<qmusizetype, QString>
 {
     return m_Numbers;
 }
@@ -378,7 +372,7 @@ inline void QmuParserBase::DefineInfixOprtChars(const QString &a_szCharset)
 /**
  * @brief Return a map containing the used variables only.
  */
-inline const varmap_type &QmuParserBase::GetVar() const
+inline auto QmuParserBase::GetVar() const -> const varmap_type &
 {
     return m_VarDef;
 }
@@ -387,7 +381,7 @@ inline const varmap_type &QmuParserBase::GetVar() const
 /**
  * @brief Return a map containing all parser constants.
  */
-inline const valmap_type &QmuParserBase::GetConst() const
+inline auto QmuParserBase::GetConst() const -> const valmap_type &
 {
     return m_ConstDef;
 }
@@ -403,7 +397,7 @@ inline const valmap_type &QmuParserBase::GetConst() const
  * parser functions. String functions are not part of this map. The Prototype definition is encapsulated in objects
  * of the class FunProt one per parser function each associated with function names via a map construct.
  */
-inline const funmap_type &QmuParserBase::GetFunDef() const
+inline auto QmuParserBase::GetFunDef() const -> const funmap_type &
 {
     return m_FunDef;
 }
@@ -412,7 +406,7 @@ inline const funmap_type &QmuParserBase::GetFunDef() const
 /**
  * @brief Retrieve the formula.
  */
-inline const QString& QmuParserBase::GetExpr() const
+inline auto QmuParserBase::GetExpr() const -> const QString &
 {
     return m_pTokenReader->GetExpr();
 }
@@ -423,7 +417,7 @@ inline const QString& QmuParserBase::GetExpr() const
  * @return #m_bBuiltInOp; true if built in operators are enabled.
  * @throw nothrow
  */
-inline bool QmuParserBase::HasBuiltInOprt() const
+inline auto QmuParserBase::HasBuiltInOprt() const -> bool
 {
     return m_bBuiltInOp;
 }
@@ -436,7 +430,7 @@ inline bool QmuParserBase::HasBuiltInOprt() const
  * value. This function returns the number of available results.
  */
 // cppcheck-suppress unusedFunction
-inline int QmuParserBase::GetNumResults() const
+inline auto QmuParserBase::GetNumResults() const -> int
 {
     return m_nFinalResultIdx;
 }
@@ -458,7 +452,7 @@ inline int QmuParserBase::GetNumResults() const
  * @return The evaluation result
  * @throw ParseException if no Formula is set or in case of any other error related to the formula.
  */
-inline qreal QmuParserBase::Eval() const
+inline auto QmuParserBase::Eval() const -> qreal
 {
     return (this->*m_pParseFormula)();
 }

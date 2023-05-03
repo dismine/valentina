@@ -77,7 +77,8 @@ namespace
 {
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
-QPointF GetOriginPoint(const QVector<SourceItem> &objects, const VContainer *data, qreal calcLength, qreal calcAngle)
+auto GetOriginPoint(const QVector<SourceItem> &objects, const VContainer *data, qreal calcLength, qreal calcAngle)
+    -> QPointF
 {
     QPolygonF originObjects;
 
@@ -134,8 +135,8 @@ void VToolMove::SetDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolMove *VToolMove::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                             VContainer *data)
+auto VToolMove::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolMove *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogMove> dialogTool = qobject_cast<DialogMove *>(dialog);
@@ -167,7 +168,7 @@ VToolMove *VToolMove::Create(const QPointer<DialogTool> &dialog, VMainGraphicsSc
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolMove *VToolMove::Create(VToolMoveInitData &initData)
+auto VToolMove::Create(VToolMoveInitData &initData) -> VToolMove *
 {
     qreal calcAngle = 0;
     qreal calcRotationAngle = 0;
@@ -350,7 +351,7 @@ QT_WARNING_POP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolMove::GetFormulaAngle() const
+auto VToolMove::GetFormulaAngle() const -> VFormula
 {
     VFormula fAngle(formulaAngle, getData());
     fAngle.setCheckZero(false);
@@ -373,7 +374,7 @@ void VToolMove::SetFormulaAngle(const VFormula &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolMove::GetFormulaRotationAngle() const
+auto VToolMove::GetFormulaRotationAngle() const -> VFormula
 {
     VFormula fAngle(formulaRotationAngle, getData());
     fAngle.setCheckZero(false);
@@ -396,7 +397,7 @@ void VToolMove::SetFormulaRotationAngle(const VFormula &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolMove::GetFormulaLength() const
+auto VToolMove::GetFormulaLength() const -> VFormula
 {
     VFormula fLength(formulaLength, getData());
     fLength.setCheckZero(true);
@@ -419,7 +420,7 @@ void VToolMove::SetFormulaLength(const VFormula &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolMove::OriginPointName() const
+auto VToolMove::OriginPointName() const -> QString
 {
     try
     {
@@ -521,7 +522,7 @@ void VToolMove::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolMove::MakeToolTip() const
+auto VToolMove::MakeToolTip() const -> QString
 {
     return QStringLiteral("<tr> <td><b>%1:</b> %2°</td> </tr>"
                           "<tr> <td><b>%3:</b> %4 %5</td> </tr>"
@@ -553,9 +554,8 @@ VToolMove::VToolMove(const VToolMoveInitData &initData, QGraphicsItem *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-DestinationItem VToolMove::CreatePoint(quint32 idTool, const SourceItem &sItem, qreal angle,
-                                       qreal length, qreal rotationAngle, const QPointF &rotationOrigin,
-                                       const QString &suffix, VContainer *data)
+auto VToolMove::CreatePoint(quint32 idTool, const SourceItem &sItem, qreal angle, qreal length, qreal rotationAngle,
+                            const QPointF &rotationOrigin, const QString &suffix, VContainer *data) -> DestinationItem
 {
     const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(sItem.id);
     VPointF moved = point->Move(length, angle, suffix).Rotate(rotationOrigin, rotationAngle);
@@ -576,9 +576,8 @@ DestinationItem VToolMove::CreatePoint(quint32 idTool, const SourceItem &sItem, 
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Item>
-DestinationItem VToolMove::CreateArc(quint32 idTool, const SourceItem &sItem, qreal angle, qreal length,
-                                     qreal rotationAngle, const QPointF &rotationOrigin, const QString &suffix,
-                                     VContainer *data)
+auto VToolMove::CreateArc(quint32 idTool, const SourceItem &sItem, qreal angle, qreal length, qreal rotationAngle,
+                          const QPointF &rotationOrigin, const QString &suffix, VContainer *data) -> DestinationItem
 {
     const DestinationItem item = CreateItem<Item>(idTool, sItem, angle, length, rotationAngle, rotationOrigin, suffix,
                                                   data);
@@ -617,9 +616,8 @@ void VToolMove::UpdateArc(quint32 idTool, const SourceItem &sItem, qreal angle, 
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Item>
-DestinationItem VToolMove::CreateItem(quint32 idTool, const SourceItem &sItem, qreal angle, qreal length,
-                                      qreal rotationAngle, const QPointF &rotationOrigin, const QString &suffix,
-                                      VContainer *data)
+auto VToolMove::CreateItem(quint32 idTool, const SourceItem &sItem, qreal angle, qreal length, qreal rotationAngle,
+                           const QPointF &rotationOrigin, const QString &suffix, VContainer *data) -> DestinationItem
 {
     const QSharedPointer<Item> i = data->GeometricObject<Item>(sItem.id);
     Item moved = i->Move(length, angle, suffix).Rotate(rotationOrigin, rotationAngle);
@@ -647,9 +645,8 @@ DestinationItem VToolMove::CreateItem(quint32 idTool, const SourceItem &sItem, q
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Item>
-DestinationItem VToolMove::CreateCurve(quint32 idTool, const SourceItem &sItem, qreal angle, qreal length,
-                                       qreal rotationAngle, const QPointF &rotationOrigin, const QString &suffix,
-                                       VContainer *data)
+auto VToolMove::CreateCurve(quint32 idTool, const SourceItem &sItem, qreal angle, qreal length, qreal rotationAngle,
+                            const QPointF &rotationOrigin, const QString &suffix, VContainer *data) -> DestinationItem
 {
     const DestinationItem item = CreateItem<Item>(idTool, sItem, angle, length, rotationAngle, rotationOrigin, suffix,
                                                   data);
@@ -659,10 +656,9 @@ DestinationItem VToolMove::CreateCurve(quint32 idTool, const SourceItem &sItem, 
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Item>
-DestinationItem VToolMove::CreateCurveWithSegments(quint32 idTool, const SourceItem &sItem, qreal angle,
-                                                   qreal length, qreal rotationAngle,
-                                                   const QPointF &rotationOrigin, const QString &suffix,
-                                                   VContainer *data)
+auto VToolMove::CreateCurveWithSegments(quint32 idTool, const SourceItem &sItem, qreal angle, qreal length,
+                                        qreal rotationAngle, const QPointF &rotationOrigin, const QString &suffix,
+                                        VContainer *data) -> DestinationItem
 {
     const DestinationItem item = CreateItem<Item>(idTool, sItem, angle, length, rotationAngle, rotationOrigin, suffix,
                                                   data);

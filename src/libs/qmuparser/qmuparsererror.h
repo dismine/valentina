@@ -108,8 +108,8 @@ public:
     QmuParserErrorMsg();
     ~QmuParserErrorMsg();
 
-    static const QmuParserErrorMsg& Instance();
-    QString operator[] ( int a_iIdx ) const;
+    static auto Instance() -> const QmuParserErrorMsg &;
+    auto operator[](int a_iIdx) const -> QString;
 
 private:
     // cppcheck-suppress unknownMacro
@@ -120,13 +120,13 @@ private:
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-inline const QmuParserErrorMsg& QmuParserErrorMsg::Instance()
+inline auto QmuParserErrorMsg::Instance() -> const QmuParserErrorMsg &
 {
     return m_Instance;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString QmuParserErrorMsg::operator[] ( int a_iIdx ) const
+inline auto QmuParserErrorMsg::operator[](int a_iIdx) const -> QString
 {
     return m_vErrMsg.value(a_iIdx).translate(QString());
 }
@@ -136,14 +136,15 @@ class QMUPARSERSHARED_EXPORT QmuParserWarning : public QException
 public:
     explicit QmuParserWarning ( const QString &sMsg );
     QmuParserWarning ( const QmuParserWarning &a_Obj );
-    QmuParserWarning& operator= ( const QmuParserWarning &a_Obj );
+    auto operator=(const QmuParserWarning &a_Obj) -> QmuParserWarning &;
     // cppcheck-suppress unknownMacro
     virtual ~QmuParserWarning() QMUP_NOEXCEPT_EXPR (true) override {}
 
-    const QString& GetMsg() const;
+    auto GetMsg() const -> const QString &;
 
     Q_NORETURN virtual void   raise() const override;
-    Q_REQUIRED_RESULT virtual QmuParserWarning *clone() const override;
+    Q_REQUIRED_RESULT virtual auto clone() const -> QmuParserWarning * override;
+
 private:
     QString m_sMsg;      ///< The message string
 };
@@ -152,7 +153,7 @@ private:
 /**
  * @brief Returns the message string for this error.
  */
-inline const QString& QmuParserWarning::GetMsg() const
+inline auto QmuParserWarning::GetMsg() const -> const QString &
 {
     return m_sMsg;
 }
@@ -173,17 +174,18 @@ public:
     QmuParserError ( EErrorCodes a_iErrc, int a_iPos, const QString &sTok );
     QmuParserError ( const QString &szMsg, int iPos, const QString &sTok = QString() );
     QmuParserError ( const QmuParserError &a_Obj );
-    QmuParserError& operator= ( const QmuParserError &a_Obj );
+    auto operator=(const QmuParserError &a_Obj) -> QmuParserError &;
     virtual ~QmuParserError() QMUP_NOEXCEPT_EXPR (true) override {}
 
     void           SetFormula ( const QString &a_strFormula );
-    const QString& GetExpr() const;
-    const QString& GetMsg() const;
-    qmusizetype    GetPos() const;
-    const QString& GetToken() const;
-    EErrorCodes    GetCode() const;
+    auto GetExpr() const -> const QString &;
+    auto GetMsg() const -> const QString &;
+    auto GetPos() const -> qmusizetype;
+    auto GetToken() const -> const QString &;
+    auto GetCode() const -> EErrorCodes;
     Q_NORETURN virtual void   raise() const override;
-    Q_REQUIRED_RESULT virtual QmuParserError *clone() const override;
+    Q_REQUIRED_RESULT virtual auto clone() const -> QmuParserError * override;
+
 private:
     QString m_sMsg;      ///< The message string
     QString m_sExpr;     ///< Formula string
@@ -207,7 +209,7 @@ inline void QmuParserError::SetFormula ( const QString &a_strFormula )
 /**
  * @brief gets the expression related tp this error.
  */
-inline const QString& QmuParserError::GetExpr() const
+inline auto QmuParserError::GetExpr() const -> const QString &
 {
     return m_sExpr;
 }
@@ -216,7 +218,7 @@ inline const QString& QmuParserError::GetExpr() const
 /**
  * @brief Returns the message string for this error.
  */
-inline const QString& QmuParserError::GetMsg() const
+inline auto QmuParserError::GetMsg() const -> const QString &
 {
     return m_sMsg;
 }
@@ -227,7 +229,7 @@ inline const QString& QmuParserError::GetMsg() const
  *
  * If the error is not related to a distinct position this will return -1
  */
-inline qmusizetype QmuParserError::GetPos() const
+inline auto QmuParserError::GetPos() const -> qmusizetype
 {
     return m_iPos;
 }
@@ -236,7 +238,7 @@ inline qmusizetype QmuParserError::GetPos() const
 /**
  * @brief Return string related with this token (if available).
  */
-inline const QString& QmuParserError::GetToken() const
+inline auto QmuParserError::GetToken() const -> const QString &
 {
     return m_sTok;
 }
@@ -245,7 +247,7 @@ inline const QString& QmuParserError::GetToken() const
 /**
  * @brief Return the error code.
  */
-inline EErrorCodes QmuParserError::GetCode() const
+inline auto QmuParserError::GetCode() const -> EErrorCodes
 {
     return m_iErrc;
 }

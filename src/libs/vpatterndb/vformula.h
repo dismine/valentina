@@ -53,38 +53,38 @@ class VFormula
 public:
     VFormula();
     VFormula(const QString &formula, const VContainer *container);
-    VFormula &operator=(const VFormula &formula);
+    auto operator=(const VFormula &formula) -> VFormula &;
     VFormula(const VFormula &formula);
     ~VFormula();
 
-    bool operator==(const VFormula &formula) const;
-    bool operator!=(const VFormula &formula) const;
+    auto operator==(const VFormula &formula) const -> bool;
+    auto operator!=(const VFormula &formula) const -> bool;
 
-    QString GetFormula(FormulaType type = FormulaType::ToUser) const;
+    auto GetFormula(FormulaType type = FormulaType::ToUser) const -> QString;
     void SetFormula(const QString &value, FormulaType type = FormulaType::FromSystem);
 
-    QString getStringValue() const;
-    qreal   getDoubleValue() const;
+    auto getStringValue() const -> QString;
+    auto getDoubleValue() const -> qreal;
 
-    bool getCheckZero() const;
+    auto getCheckZero() const -> bool;
     void setCheckZero(bool value);
 
-    bool getCheckLessThanZero() const;
+    auto getCheckLessThanZero() const -> bool;
     void setCheckLessThanZero(bool value);
 
-    const VContainer *getData() const;
+    auto getData() const -> const VContainer *;
     void setData(const VContainer *value);
 
-    quint32 getToolId() const;
+    auto getToolId() const -> quint32;
     void setToolId(quint32 value);
 
-    QString getPostfix() const;
+    auto getPostfix() const -> QString;
     void setPostfix(const QString &value);
 
-    bool error() const;
-    QString Reason() const;
+    auto error() const -> bool;
+    auto Reason() const -> QString;
 
-    static int FormulaTypeId();
+    static auto FormulaTypeId() -> int;
 
     void Eval();
 private:

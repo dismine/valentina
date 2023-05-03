@@ -49,7 +49,7 @@ VPE::QVector3DProperty::QVector3DProperty(const QString& name)
 
 
 //! Get the data how it should be displayed
-QVariant VPE::QVector3DProperty::data (int column, int role) const
+auto VPE::QVector3DProperty::data(int column, int role) const -> QVariant
 {
     if (column == DPC_Data && Qt::DisplayRole == role)
     {
@@ -58,24 +58,21 @@ QVariant VPE::QVector3DProperty::data (int column, int role) const
                                          QString::number(tmpVect.Y),
                                          QString::number(tmpVect.Z));
     }
-    else
-        return VProperty::data(column, role);
+    return VProperty::data(column, role);
 }
 
 //! Returns item flags
-Qt::ItemFlags VPE::QVector3DProperty::flags(int column) const
+auto VPE::QVector3DProperty::flags(int column) const -> Qt::ItemFlags
 {
     if (column == DPC_Name || column == DPC_Data)
     {
         return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
     }
-    else
-        return Qt::NoItemFlags;
+    return Qt::NoItemFlags;
 }
 
-
 //! Returns the Vector3d
-VPE::Vector3D VPE::QVector3DProperty::getVector() const
+auto VPE::QVector3DProperty::getVector() const -> VPE::Vector3D
 {
     Vector3D tmpVect;
 
@@ -122,12 +119,12 @@ void VPE::QVector3DProperty::setVector(double x, double y, double z)
     d_ptr->Children.at(2)->setValue(tmpZ);
 }
 
-QString VPE::QVector3DProperty::type() const
+auto VPE::QVector3DProperty::type() const -> QString
 {
     return "vector3d";
 }
 
-VPE::VProperty* VPE::QVector3DProperty::clone(bool include_children, VProperty* container) const
+auto VPE::QVector3DProperty::clone(bool include_children, VProperty *container) const -> VPE::VProperty *
 {
     if (!container)
     {
@@ -136,7 +133,7 @@ VPE::VProperty* VPE::QVector3DProperty::clone(bool include_children, VProperty* 
         if (!include_children)
         {
             const QList<VProperty*> &tmpChildren = container->getChildren();
-            for (auto tmpChild : tmpChildren)
+            for (auto *tmpChild : tmpChildren)
             {
                 container->removeChild(tmpChild);
                 delete tmpChild;
@@ -157,7 +154,7 @@ void VPE::QVector3DProperty::setValue(const QVariant &value)
 
 }
 
-QVariant VPE::QVector3DProperty::getValue() const
+auto VPE::QVector3DProperty::getValue() const -> QVariant
 {
     Vector3D tmpVect = getVector();
     return QString("%1,%2,%3").arg(QString::number(tmpVect.X), QString::number(tmpVect.Y), QString::number(tmpVect.Z));

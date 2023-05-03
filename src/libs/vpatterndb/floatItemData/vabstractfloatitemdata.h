@@ -42,17 +42,17 @@ public:
 
     virtual ~VAbstractFloatItemData();
 
-    VAbstractFloatItemData &operator=(const VAbstractFloatItemData &data);
+    auto operator=(const VAbstractFloatItemData &data) -> VAbstractFloatItemData &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VAbstractFloatItemData(VAbstractFloatItemData &&data) Q_DECL_NOTHROW;
-    VAbstractFloatItemData &operator=(VAbstractFloatItemData &&data) Q_DECL_NOTHROW;
+    auto operator=(VAbstractFloatItemData &&data) Q_DECL_NOTHROW->VAbstractFloatItemData &;
 #endif
 
     // methods, which set and return values of different parameters
-    QPointF GetPos() const;
+    auto GetPos() const -> QPointF;
     void    SetPos(const QPointF& ptPos);
 
-    bool IsVisible() const;
+    auto IsVisible() const -> bool;
     void SetVisible(bool bVisible);
 
 private:

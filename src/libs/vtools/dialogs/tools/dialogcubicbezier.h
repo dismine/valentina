@@ -53,11 +53,11 @@ public:
     explicit DialogCubicBezier(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogCubicBezier();
 
-    VCubicBezier GetSpline() const;
+    auto GetSpline() const -> VCubicBezier;
     void         SetSpline(const VCubicBezier &spline);
 
     void    SetNotes(const QString &notes);
-    QString GetNotes() const;
+    auto GetNotes() const -> QString;
 public slots:
     virtual void  ChosenObject(quint32 id, const SceneObject &type) override;
     virtual void  PointNameChanged() override;
@@ -67,7 +67,7 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     virtual void  SaveData() override;
-    virtual bool  IsValid() const final;
+    virtual auto IsValid() const -> bool final;
 
 private slots:
     void ValidateAlias();
@@ -88,14 +88,14 @@ private:
     /** @brief number number of handled objects */
     qint32 number{0};
 
-    const QSharedPointer<VPointF> GetP1() const;
-    const QSharedPointer<VPointF> GetP2() const;
-    const QSharedPointer<VPointF> GetP3() const;
-    const QSharedPointer<VPointF> GetP4() const;
+    auto GetP1() const -> const QSharedPointer<VPointF>;
+    auto GetP2() const -> const QSharedPointer<VPointF>;
+    auto GetP3() const -> const QSharedPointer<VPointF>;
+    auto GetP4() const -> const QSharedPointer<VPointF>;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogCubicBezier::IsValid() const
+inline auto DialogCubicBezier::IsValid() const -> bool
 {
     return flagError && flagAlias;
 }

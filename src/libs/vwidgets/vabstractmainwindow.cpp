@@ -62,7 +62,7 @@ QT_WARNING_POP
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-QStringList SelectNumber(QStringList path, int number)
+auto SelectNumber(QStringList path, int number) -> QStringList
 {
     path = Reverse(path);
     QStringList subPath = path.mid(0, number);
@@ -70,7 +70,7 @@ QStringList SelectNumber(QStringList path, int number)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList RecentFiles(const QStringList &paths)
+auto RecentFiles(const QStringList &paths) -> QStringList
 {
     QVector<QStringList> table;
     table.reserve(paths.size());
@@ -159,8 +159,8 @@ void VAbstractMainWindow::ShowToolTip(const QString &toolTip)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VAbstractMainWindow::ContinueFormatRewrite(const QString &currentFormatVersion,
-                                                const QString &maxFormatVersion)
+auto VAbstractMainWindow::ContinueFormatRewrite(const QString &currentFormatVersion, const QString &maxFormatVersion)
+    -> bool
 {
     if (VAbstractApplication::VApp()->Settings()->GetConfirmFormatRewriting())
     {
@@ -198,7 +198,7 @@ void VAbstractMainWindow::ToolBarStyle(QToolBar *bar) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractMainWindow::CSVFilePath()
+auto VAbstractMainWindow::CSVFilePath() -> QString
 {
     const QString filters = tr("Comma-Separated Values") + QLatin1String(" (*.csv)");
     const QString suffix("csv");
@@ -312,7 +312,7 @@ auto VAbstractMainWindow::CheckFilePermissions(const QString &path, QWidget *mes
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VAbstractMainWindow::IgnoreLocking(int error, const QString &path, bool guiMode)
+auto VAbstractMainWindow::IgnoreLocking(int error, const QString &path, bool guiMode) -> bool
 {
     QMessageBox::StandardButton answer = QMessageBox::Abort;
     if (guiMode)

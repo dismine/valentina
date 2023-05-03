@@ -47,31 +47,31 @@ public:
     VBestSquare(const VBestSquare &res);
     ~VBestSquare();
 
-    VBestSquare &operator=(const VBestSquare &res);
+    auto operator=(const VBestSquare &res) -> VBestSquare &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VBestSquare(VBestSquare &&res) Q_DECL_NOTHROW;
-    VBestSquare &operator=(VBestSquare &&res) Q_DECL_NOTHROW;
+    auto operator=(VBestSquare &&res) Q_DECL_NOTHROW->VBestSquare &;
 #endif
 
     void NewResult(const VBestSquareResData &data);
     void NewResult(const VBestSquare &best);
 
-    QSizeF     BestSize() const;
-    int        GContourEdge() const;
-    int        DetailEdge() const;
-    QTransform Matrix() const;
-    bool       HasValidResult() const;
-    bool       Mirror() const;
-    BestFrom   Type() const;
-    bool       IsTerminatedByException() const;
-    QString    ReasonTerminatedByException() const;
+    auto BestSize() const -> QSizeF;
+    auto GContourEdge() const -> int;
+    auto DetailEdge() const -> int;
+    auto Matrix() const -> QTransform;
+    auto HasValidResult() const -> bool;
+    auto Mirror() const -> bool;
+    auto Type() const -> BestFrom;
+    auto IsTerminatedByException() const -> bool;
+    auto ReasonTerminatedByException() const -> QString;
     void       TerminatedByException(const QString &reason);
 
-    VBestSquareResData BestResultData() const;
+    auto BestResultData() const -> VBestSquareResData;
 
-    bool IsSaveLength() const;
-    bool IsImprovedSidePosition(qreal sidePosition) const;
-    bool IsPortrait() const;
+    auto IsSaveLength() const -> bool;
+    auto IsImprovedSidePosition(qreal sidePosition) const -> bool;
+    auto IsPortrait() const -> bool;
 
 private:
     QSharedDataPointer<VBestSquareData> d;

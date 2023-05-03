@@ -182,22 +182,21 @@ namespace bpstd {
 
       //---------------------------------------------------------------------
 
-      optional_base& operator=(optional_base&& other) = default;
-      optional_base& operator=(const optional_base& other) = default;
+      auto operator=(optional_base &&other) -> optional_base & = default;
+      auto operator=(const optional_base &other) -> optional_base & = default;
 
       //---------------------------------------------------------------------
       // Protected Modifiers
       //---------------------------------------------------------------------
     protected:
+        BPSTD_CPP14_CONSTEXPR auto val() noexcept -> T *;
+        constexpr auto val() const noexcept -> const T *;
 
-      BPSTD_CPP14_CONSTEXPR T* val() noexcept;
-      constexpr const T* val() const noexcept;
+        constexpr auto contains_value() const noexcept -> bool;
 
-      constexpr bool contains_value() const noexcept;
-
-      //---------------------------------------------------------------------
-      // Protected Observers
-      //---------------------------------------------------------------------
+        //---------------------------------------------------------------------
+        // Protected Observers
+        //---------------------------------------------------------------------
     protected:
 
       template <typename...Args>
@@ -254,21 +253,20 @@ namespace bpstd {
 
       //---------------------------------------------------------------------
 
-      optional_base& operator=(optional_base&& other) = default;
-      optional_base& operator=(const optional_base& other) = default;
+      auto operator=(optional_base &&other) -> optional_base & = default;
+      auto operator=(const optional_base &other) -> optional_base & = default;
 
       //---------------------------------------------------------------------
       // Protected Observers
       //---------------------------------------------------------------------
     protected:
+        auto val() noexcept -> T *;
+        auto val() const noexcept -> const T *;
+        auto contains_value() const noexcept -> bool;
 
-      T* val() noexcept;
-      const T* val() const noexcept;
-      bool contains_value() const noexcept;
-
-      //---------------------------------------------------------------------
-      // Protected Modifiers
-      //---------------------------------------------------------------------
+        //---------------------------------------------------------------------
+        // Protected Modifiers
+        //---------------------------------------------------------------------
     protected:
 
       template <typename...Args>
@@ -541,13 +539,19 @@ namespace bpstd {
     ///
     /// If \c (*this) had a value before the call, the contained value is
     /// destroyed.
-    optional& operator=(nullopt_t);
+    auto operator=(nullopt_t) -> optional &;
 
     /// \brief Copy assigns the optional stored in \p other
     ///
     /// \param other the other optional to copy
-    optional& operator=(detail::enable_overload_if_t<std::is_copy_constructible<T>::value && std::is_copy_assignable<T>::value,const optional&> other);
-    optional& operator=(detail::disable_overload_if_t<std::is_copy_constructible<T>::value && std::is_copy_assignable<T>::value,const optional&> other) = delete;
+    auto
+    operator=(detail::enable_overload_if_t<std::is_copy_constructible<T>::value && std::is_copy_assignable<T>::value,
+                                           const optional &>
+                  other) -> optional &;
+    auto
+    operator=(detail::disable_overload_if_t<std::is_copy_constructible<T>::value && std::is_copy_assignable<T>::value,
+                                            const optional &>
+                  other) -> optional & = delete;
 
     /// \brief Move assigns the optional stored in \p other
     ///
@@ -558,8 +562,14 @@ namespace bpstd {
     ///         unless U is
     ///
     /// \param other the other optional to move
-    optional& operator=(detail::enable_overload_if_t<std::is_move_constructible<T>::value && std::is_move_assignable<T>::value,optional&&> other);
-    optional& operator=(detail::disable_overload_if_t<std::is_move_constructible<T>::value && std::is_move_assignable<T>::value,optional&&> other) = delete;
+    auto
+    operator=(detail::enable_overload_if_t<std::is_move_constructible<T>::value && std::is_move_assignable<T>::value,
+                                           optional &&>
+                  other) -> optional &;
+    auto
+    operator=(detail::disable_overload_if_t<std::is_move_constructible<T>::value && std::is_move_assignable<T>::value,
+                                            optional &&>
+                  other) -> optional & = delete;
 
     /// \brief Perfect-forwarded assignment
     ///
@@ -577,9 +587,8 @@ namespace bpstd {
     ///
     /// \param value to assign to the contained value
     /// \return reference to \c (*this)
-    template <typename U=T,
-              typename=enable_if_t<detail::optional_is_value_assignable<T,U>::value>>
-    optional& operator=(U&& value);
+    template <typename U = T, typename = enable_if_t<detail::optional_is_value_assignable<T, U>::value>>
+    auto operator=(U &&value) -> optional &;
 
     /// \brief Assigns the state of \p other
     ///
@@ -617,7 +626,8 @@ namespace bpstd {
     /// \param other another optional object whose contained value to assign
     /// \return reference to (*this)
     template <typename U>
-    optional& operator=(enable_if_t<detail::optional_is_copy_convert_assignable<T,U>::value,const optional<U>&> other);
+    auto operator=(enable_if_t<detail::optional_is_copy_convert_assignable<T, U>::value, const optional<U> &> other)
+        -> optional &;
 
     /// \brief Assigns the state of \p other
     ///
@@ -656,7 +666,8 @@ namespace bpstd {
     /// \param other another optional object whose contained value to assign
     /// \return reference to (*this)
     template <typename U>
-    optional& operator=(enable_if_t<detail::optional_is_move_convert_assignable<T,U>::value,optional<U>&&> other);
+    auto operator=(enable_if_t<detail::optional_is_move_convert_assignable<T, U>::value, optional<U> &&> other)
+        -> optional &;
 
     //-----------------------------------------------------------------------
     // Observers
@@ -668,8 +679,8 @@ namespace bpstd {
     /// \note The behavior is undefined if \c *this does not contain a value.
     ///
     /// \return a pointer to the contained value
-    BPSTD_CPP14_CONSTEXPR value_type* operator->() noexcept;
-    constexpr const value_type* operator->() const noexcept;
+    BPSTD_CPP14_CONSTEXPR auto operator->() noexcept -> value_type *;
+    constexpr auto operator->() const noexcept -> const value_type *;
     /// \}
 
     /// \{
@@ -678,10 +689,10 @@ namespace bpstd {
     /// \note The behaviour is undefined if \c *this does not contain a value
     ///
     /// \return a reference to the contained value
-    BPSTD_CPP14_CONSTEXPR value_type& operator*() & noexcept;
-    BPSTD_CPP14_CONSTEXPR value_type&& operator*() && noexcept;
-    constexpr const value_type& operator*() const& noexcept;
-    constexpr const value_type&& operator*() const&& noexcept;
+    BPSTD_CPP14_CONSTEXPR auto operator*() & noexcept -> value_type &;
+    BPSTD_CPP14_CONSTEXPR auto operator*() && noexcept -> value_type &&;
+    constexpr auto operator*() const & noexcept -> const value_type &;
+    constexpr auto operator*() const && noexcept -> const value_type &&;
     /// \}
 
     /// \brief Checks whether \c *this contains a value
@@ -694,7 +705,7 @@ namespace bpstd {
     ///
     /// \return \c true if \c *this contains a value, \c false if \c *this
     ///         does not contain a value
-    constexpr bool has_value() const noexcept;
+    constexpr auto has_value() const noexcept -> bool;
 
     //-----------------------------------------------------------------------
 
@@ -704,8 +715,8 @@ namespace bpstd {
     /// \throws bad_optional_access if \c *this does not contain a value.
     ///
     /// \return the value of \c *this
-    BPSTD_CPP14_CONSTEXPR value_type& value() &;
-    BPSTD_CPP14_CONSTEXPR value_type&& value() &&;
+    BPSTD_CPP14_CONSTEXPR auto value() & -> value_type &;
+    BPSTD_CPP14_CONSTEXPR auto value() && -> value_type &&;
     /// \}
 
     /// \{
@@ -714,8 +725,8 @@ namespace bpstd {
     /// \throws bad_optional_access if \c *this does not contain a value.
     ///
     /// \return the value of \c *this
-    BPSTD_CPP14_CONSTEXPR const value_type& value() const &;
-    BPSTD_CPP14_CONSTEXPR const value_type&& value() const &&;
+    BPSTD_CPP14_CONSTEXPR auto value() const & -> const value_type &;
+    BPSTD_CPP14_CONSTEXPR auto value() const && -> const value_type &&;
     /// \}
 
     //-----------------------------------------------------------------------
@@ -726,10 +737,8 @@ namespace bpstd {
     ///
     /// \param default_value the value to use in case \c *this is empty
     /// \return the value to use in case \c *this is empty
-    template <typename U>
-    constexpr value_type value_or(U&& default_value) const &;
-    template <typename U>
-    BPSTD_CPP14_CONSTEXPR value_type value_or(U&& default_value) &&;
+    template <typename U> constexpr auto value_or(U &&default_value) const & -> value_type;
+    template <typename U> BPSTD_CPP14_CONSTEXPR auto value_or(U &&default_value) && -> value_type;
     /// \}
 
     //-----------------------------------------------------------------------
@@ -776,72 +785,42 @@ namespace bpstd {
   // Comparison
   //-------------------------------------------------------------------------
 
-  template <typename T>
-  BPSTD_CPP14_CONSTEXPR bool operator==(const optional<T>& lhs, const optional<T>& rhs);
-  template <typename T>
-  BPSTD_CPP14_CONSTEXPR bool operator!=(const optional<T>& lhs, const optional<T>& rhs);
-  template <typename T>
-  BPSTD_CPP14_CONSTEXPR bool operator<(const optional<T>& lhs, const optional<T>& rhs);
-  template <typename T>
-  BPSTD_CPP14_CONSTEXPR bool operator>(const optional<T>& lhs, const optional<T>& rhs);
-  template <typename T>
-  BPSTD_CPP14_CONSTEXPR bool operator<=(const optional<T>& lhs, const optional<T>& rhs);
-  template <typename T>
-  BPSTD_CPP14_CONSTEXPR bool operator>=(const optional<T>& lhs, const optional<T>& rhs);
+  template <typename T> BPSTD_CPP14_CONSTEXPR auto operator==(const optional<T> &lhs, const optional<T> &rhs) -> bool;
+  template <typename T> BPSTD_CPP14_CONSTEXPR auto operator!=(const optional<T> &lhs, const optional<T> &rhs) -> bool;
+  template <typename T> BPSTD_CPP14_CONSTEXPR auto operator<(const optional<T> &lhs, const optional<T> &rhs) -> bool;
+  template <typename T> BPSTD_CPP14_CONSTEXPR auto operator>(const optional<T> &lhs, const optional<T> &rhs) -> bool;
+  template <typename T> BPSTD_CPP14_CONSTEXPR auto operator<=(const optional<T> &lhs, const optional<T> &rhs) -> bool;
+  template <typename T> BPSTD_CPP14_CONSTEXPR auto operator>=(const optional<T> &lhs, const optional<T> &rhs) -> bool;
 
   //-------------------------------------------------------------------------
 
-  template <typename T>
-  constexpr bool operator==(const optional<T>& opt, nullopt_t) noexcept;
-  template <typename T>
-  constexpr bool operator==(nullopt_t, const optional<T>& opt) noexcept;
-  template <typename T>
-  constexpr bool operator!=(const optional<T>& opt, nullopt_t) noexcept;
-  template <typename T>
-  constexpr bool operator!=(nullopt_t, const optional<T>& opt) noexcept;
-  template <typename T>
-  constexpr bool operator<(const optional<T>& opt, nullopt_t) noexcept;
-  template <typename T>
-  constexpr bool operator<(nullopt_t, const optional<T>& opt) noexcept;
-  template <typename T>
-  constexpr bool operator>(const optional<T>& opt, nullopt_t) noexcept;
-  template <typename T>
-  constexpr bool operator>(nullopt_t, const optional<T>& opt) noexcept;
-  template <typename T>
-  constexpr bool operator<=(const optional<T>& opt, nullopt_t) noexcept;
-  template <typename T>
-  constexpr bool operator<=(nullopt_t, const optional<T>& opt) noexcept;
-  template <typename T>
-  constexpr bool operator>=(const optional<T>& opt, nullopt_t) noexcept;
-  template <typename T>
-  constexpr bool operator>=(nullopt_t, const optional<T>& opt) noexcept;
+  template <typename T> constexpr auto operator==(const optional<T> &opt, nullopt_t) noexcept -> bool;
+  template <typename T> constexpr auto operator==(nullopt_t, const optional<T> &opt) noexcept -> bool;
+  template <typename T> constexpr auto operator!=(const optional<T> &opt, nullopt_t) noexcept -> bool;
+  template <typename T> constexpr auto operator!=(nullopt_t, const optional<T> &opt) noexcept -> bool;
+  template <typename T> constexpr auto operator<(const optional<T> &opt, nullopt_t) noexcept -> bool;
+  template <typename T> constexpr auto operator<(nullopt_t, const optional<T> &opt) noexcept -> bool;
+  template <typename T> constexpr auto operator>(const optional<T> &opt, nullopt_t) noexcept -> bool;
+  template <typename T> constexpr auto operator>(nullopt_t, const optional<T> &opt) noexcept -> bool;
+  template <typename T> constexpr auto operator<=(const optional<T> &opt, nullopt_t) noexcept -> bool;
+  template <typename T> constexpr auto operator<=(nullopt_t, const optional<T> &opt) noexcept -> bool;
+  template <typename T> constexpr auto operator>=(const optional<T> &opt, nullopt_t) noexcept -> bool;
+  template <typename T> constexpr auto operator>=(nullopt_t, const optional<T> &opt) noexcept -> bool;
 
   //-------------------------------------------------------------------------
 
-  template <typename T>
-  constexpr bool operator==(const optional<T>& opt, const T& value);
-  template <typename T>
-  constexpr bool operator==(const T& value, const optional<T>& opt);
-  template <typename T>
-  constexpr bool operator!=(const optional<T>& opt, const T& value);
-  template <typename T>
-  constexpr bool operator!=(const T& value, const optional<T>& opt);
-  template <typename T>
-  constexpr bool operator<(const optional<T>& opt, const T& value);
-  template <typename T>
-  constexpr bool operator<(const T& value, const optional<T>& opt);
-  template <typename T>
-  constexpr bool operator>(const optional<T>& opt, const T& value);
-  template <typename T>
-  constexpr bool operator>(const T& value, const optional<T>& opt);
-  template <typename T>
-  constexpr bool operator<=(const optional<T>& opt, const T& value);
-  template <typename T>
-  constexpr bool operator<=(const T& value, const optional<T>& opt);
-  template <typename T>
-  constexpr bool operator>=(const optional<T>& opt, const T& value);
-  template <typename T>
-  constexpr bool operator>=(const T& value, const optional<T>& opt);
+  template <typename T> constexpr auto operator==(const optional<T> &opt, const T &value) -> bool;
+  template <typename T> constexpr auto operator==(const T &value, const optional<T> &opt) -> bool;
+  template <typename T> constexpr auto operator!=(const optional<T> &opt, const T &value) -> bool;
+  template <typename T> constexpr auto operator!=(const T &value, const optional<T> &opt) -> bool;
+  template <typename T> constexpr auto operator<(const optional<T> &opt, const T &value) -> bool;
+  template <typename T> constexpr auto operator<(const T &value, const optional<T> &opt) -> bool;
+  template <typename T> constexpr auto operator>(const optional<T> &opt, const T &value) -> bool;
+  template <typename T> constexpr auto operator>(const T &value, const optional<T> &opt) -> bool;
+  template <typename T> constexpr auto operator<=(const optional<T> &opt, const T &value) -> bool;
+  template <typename T> constexpr auto operator<=(const T &value, const optional<T> &opt) -> bool;
+  template <typename T> constexpr auto operator>=(const optional<T> &opt, const T &value) -> bool;
+  template <typename T> constexpr auto operator>=(const T &value, const optional<T> &opt) -> bool;
 
   //-------------------------------------------------------------------------
   // Utilities
@@ -850,15 +829,13 @@ namespace bpstd {
   /// \brief Creates an optional object from \p value
   ///
   /// \param value the value to construct the optional from
-  template <typename T>
-  constexpr optional<decay_t<T>> make_optional(T&& value);
+  template <typename T> constexpr auto make_optional(T &&value) -> optional<decay_t<T>>;
 
   /// \brief Creates an optional object of type \p T from the given \p args
   ///
   /// \tparam T the type to construct
   /// \param args the arguments to pass to \p T's constructor
-  template <typename T, typename... Args >
-  constexpr optional<T> make_optional(Args&&... args);
+  template <typename T, typename... Args> constexpr auto make_optional(Args &&...args) -> optional<T>;
 
   /// \brief Creates an optional object of type \p T from the given
   ///        \p il \p args
@@ -866,8 +843,8 @@ namespace bpstd {
   /// \tparam T the type to construct
   /// \param il   the initializer list to pass
   /// \param args the arguments to pass to \p T's constructor
-  template <typename T, typename U, typename... Args >
-  constexpr optional<T> make_optional(std::initializer_list<U> il, Args&&... args);
+  template <typename T, typename U, typename... Args>
+  constexpr auto make_optional(std::initializer_list<U> il, Args &&...args) -> optional<T>;
 
   //-------------------------------------------------------------------------
 
@@ -914,25 +891,20 @@ bpstd::detail::optional_base<T,true>::optional_base(in_place_t, Args&&...args)
 //-----------------------------------------------------------------------------
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-T* bpstd::detail::optional_base<T,true>::val()
-  noexcept
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::detail::optional_base<T, true>::val() noexcept -> T *
 {
   return &m_storage.something;
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-const T* bpstd::detail::optional_base<T,true>::val()
-  const noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::detail::optional_base<T, true>::val() const noexcept -> const T *
 {
   return &m_storage.something;
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::detail::optional_base<T,true>::contains_value()
-  const noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::detail::optional_base<T, true>::contains_value() const noexcept
+    -> bool
 {
   return m_engaged;
 }
@@ -1003,26 +975,19 @@ bpstd::detail::optional_base<T,false>::~optional_base()
 // Protected Observers
 //-----------------------------------------------------------------------------
 
-template <typename T>
-inline BPSTD_INLINE_VISIBILITY
-T* bpstd::detail::optional_base<T,false>::val()
-  noexcept
+template <typename T> inline BPSTD_INLINE_VISIBILITY auto bpstd::detail::optional_base<T, false>::val() noexcept -> T *
 {
   return &m_storage.something;
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY
-const T* bpstd::detail::optional_base<T,false>::val()
-  const noexcept
+inline BPSTD_INLINE_VISIBILITY auto bpstd::detail::optional_base<T, false>::val() const noexcept -> const T *
 {
   return &m_storage.something;
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY
-bool bpstd::detail::optional_base<T,false>::contains_value()
-  const noexcept
+inline BPSTD_INLINE_VISIBILITY auto bpstd::detail::optional_base<T, false>::contains_value() const noexcept -> bool
 {
   return m_engaged;
 }
@@ -1201,17 +1166,17 @@ bpstd::optional<T>::optional(U&& value)
 //-----------------------------------------------------------------------------
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY
-bpstd::optional<T>& bpstd::optional<T>::operator=(nullopt_t)
+inline BPSTD_INLINE_VISIBILITY auto bpstd::optional<T>::operator=(nullopt_t) -> bpstd::optional<T> &
 {
   base_type::destruct();
   return (*this);
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY
-bpstd::optional<T>&
-  bpstd::optional<T>::operator=(detail::enable_overload_if_t<std::is_copy_constructible<T>::value && std::is_copy_assignable<T>::value,const optional&> other)
+inline BPSTD_INLINE_VISIBILITY auto bpstd::optional<T>::operator=(
+    detail::enable_overload_if_t<std::is_copy_constructible<T>::value && std::is_copy_assignable<T>::value,
+                                 const optional &>
+        other) -> bpstd::optional<T> &
 {
   if (has_value() && other.has_value()) {
     (*base_type::val()) = (*other);
@@ -1225,9 +1190,9 @@ bpstd::optional<T>&
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY
-bpstd::optional<T>&
-  bpstd::optional<T>::operator=(detail::enable_overload_if_t<std::is_move_constructible<T>::value && std::is_move_assignable<T>::value,optional&&> other)
+inline BPSTD_INLINE_VISIBILITY auto bpstd::optional<T>::operator=(
+    detail::enable_overload_if_t<std::is_move_constructible<T>::value && std::is_move_assignable<T>::value, optional &&>
+        other) -> bpstd::optional<T> &
 {
   if (has_value() && other.has_value()) {
     (*base_type::val()) = bpstd::move(*other);
@@ -1242,8 +1207,7 @@ bpstd::optional<T>&
 
 template <typename T>
 template <typename U, typename>
-inline BPSTD_INLINE_VISIBILITY
-bpstd::optional<T>& bpstd::optional<T>::operator=(U&& value)
+inline BPSTD_INLINE_VISIBILITY auto bpstd::optional<T>::operator=(U &&value) -> bpstd::optional<T> &
 {
   if (has_value()) {
     (*base_type::val()) = bpstd::forward<U>(value);
@@ -1266,9 +1230,7 @@ bpstd::optional<T>::operator bool()
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::optional<T>::has_value()
-  const noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::optional<T>::has_value() const noexcept -> bool
 {
   return base_type::contains_value();
 }
@@ -1276,19 +1238,15 @@ bool bpstd::optional<T>::has_value()
 //-----------------------------------------------------------------------------
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-typename bpstd::optional<T>::value_type*
-  bpstd::optional<T>::operator->()
-  noexcept
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::optional<T>::operator->() noexcept ->
+    typename bpstd::optional<T>::value_type *
 {
   return base_type::val();
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-const typename bpstd::optional<T>::value_type*
-  bpstd::optional<T>::operator->()
-  const noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::optional<T>::operator->() const noexcept -> const
+    typename bpstd::optional<T>::value_type *
 {
   return base_type::val();
 }
@@ -1296,19 +1254,15 @@ const typename bpstd::optional<T>::value_type*
 //-----------------------------------------------------------------------------
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-typename bpstd::optional<T>::value_type&
-  bpstd::optional<T>::operator*()
-  & noexcept
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::optional<T>::operator*() & noexcept ->
+    typename bpstd::optional<T>::value_type &
 {
   return *base_type::val();
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-typename bpstd::optional<T>::value_type&&
-  bpstd::optional<T>::operator*()
-  && noexcept
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::optional<T>::operator*() && noexcept ->
+    typename bpstd::optional<T>::value_type &&
 {
   return bpstd::move(*base_type::val());
 }
@@ -1316,19 +1270,15 @@ typename bpstd::optional<T>::value_type&&
 //-----------------------------------------------------------------------------
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-const typename bpstd::optional<T>::value_type&
-  bpstd::optional<T>::operator*()
-  const & noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::optional<T>::operator*() const & noexcept -> const
+    typename bpstd::optional<T>::value_type &
 {
   return *base_type::val();
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-const typename bpstd::optional<T>::value_type&&
-  bpstd::optional<T>::operator*()
-  const && noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::optional<T>::operator*() const && noexcept -> const
+    typename bpstd::optional<T>::value_type &&
 {
   return bpstd::move(*base_type::val());
 }
@@ -1336,10 +1286,8 @@ const typename bpstd::optional<T>::value_type&&
 //-----------------------------------------------------------------------------
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-typename bpstd::optional<T>::value_type&
-  bpstd::optional<T>::value()
-  &
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::optional<T>::value() & ->
+    typename bpstd::optional<T>::value_type &
 {
   if (static_cast<bool>(*this)) {
     return *base_type::val();
@@ -1348,10 +1296,8 @@ typename bpstd::optional<T>::value_type&
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-typename bpstd::optional<T>::value_type&&
-  bpstd::optional<T>::value()
-  &&
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::optional<T>::value() && ->
+    typename bpstd::optional<T>::value_type &&
 {
   if (static_cast<bool>(*this)) {
     return bpstd::move(*base_type::val());
@@ -1362,10 +1308,8 @@ typename bpstd::optional<T>::value_type&&
 //-----------------------------------------------------------------------------
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-const typename bpstd::optional<T>::value_type&
-  bpstd::optional<T>::value()
-  const &
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::optional<T>::value() const & -> const
+    typename bpstd::optional<T>::value_type &
 {
   if (static_cast<bool>(*this)) {
     return *base_type::val();
@@ -1374,10 +1318,8 @@ const typename bpstd::optional<T>::value_type&
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-const typename bpstd::optional<T>::value_type&&
-  bpstd::optional<T>::value()
-  const &&
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::optional<T>::value() const && -> const
+    typename bpstd::optional<T>::value_type &&
 {
   if (static_cast<bool>(*this)) {
     return bpstd::move(*base_type::val());
@@ -1389,20 +1331,16 @@ const typename bpstd::optional<T>::value_type&&
 
 template <typename T>
 template <typename U>
-inline BPSTD_INLINE_VISIBILITY constexpr
-typename bpstd::optional<T>::value_type
-  bpstd::optional<T>::value_or(U&& default_value)
-  const &
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::optional<T>::value_or(U &&default_value) const & ->
+    typename bpstd::optional<T>::value_type
 {
   return bool(*this) ? (*base_type::val()) : bpstd::forward<U>(default_value);
 }
 
 template <typename T>
 template <typename U>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-typename bpstd::optional<T>::value_type
-  bpstd::optional<T>::value_or(U&& default_value)
-  &&
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::optional<T>::value_or(U &&default_value) && ->
+    typename bpstd::optional<T>::value_type
 {
   return bool(*this) ? (*base_type::val()) : bpstd::forward<U>(default_value);
 }
@@ -1466,9 +1404,8 @@ void bpstd::optional<T>::emplace(std::initializer_list<U> ilist,
 //-----------------------------------------------------------------------------
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-bool
-  bpstd::operator==(const optional<T>& lhs, const optional<T>& rhs)
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::operator==(const optional<T> &lhs,
+                                                                            const optional<T> &rhs) -> bool
 {
   if (static_cast<bool>(lhs) != static_cast<bool>(rhs)) {
     return false;
@@ -1480,9 +1417,8 @@ bool
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-bool
-  bpstd::operator!=(const optional<T>& lhs, const optional<T>& rhs)
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::operator!=(const optional<T> &lhs,
+                                                                            const optional<T> &rhs) -> bool
 {
   if (static_cast<bool>(lhs) != static_cast<bool>(rhs)) {
     return true;
@@ -1494,9 +1430,8 @@ bool
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-bool
-  bpstd::operator<(const optional<T>& lhs, const optional<T>& rhs)
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::operator<(const optional<T> &lhs,
+                                                                           const optional<T> &rhs) -> bool
 {
   if (!static_cast<bool>(rhs)) {
     return false;
@@ -1508,9 +1443,8 @@ bool
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-bool
-  bpstd::operator>(const optional<T>& lhs, const optional<T>& rhs)
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::operator>(const optional<T> &lhs,
+                                                                           const optional<T> &rhs) -> bool
 {
   if (!static_cast<bool>(lhs)) {
     return false;
@@ -1522,9 +1456,8 @@ bool
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-bool
-  bpstd::operator<=(const optional<T>& lhs, const optional<T>& rhs)
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::operator<=(const optional<T> &lhs,
+                                                                            const optional<T> &rhs) -> bool
 {
   if (!static_cast<bool>(lhs)) {
     return true;
@@ -1536,9 +1469,8 @@ bool
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-bool
-  bpstd::operator>=(const optional<T>& lhs, const optional<T>& rhs)
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::operator>=(const optional<T> &lhs,
+                                                                            const optional<T> &rhs) -> bool
 {
   if (!static_cast<bool>(rhs)) {
     return true;
@@ -1552,97 +1484,73 @@ bool
 //-----------------------------------------------------------------------------
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator==(const optional<T>& opt, nullopt_t)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator==(const optional<T> &opt, nullopt_t) noexcept -> bool
 {
   return !opt;
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator==(nullopt_t, const optional<T>& opt)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator==(nullopt_t, const optional<T> &opt) noexcept -> bool
 {
   return !opt;
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator!=(const optional<T>& opt, nullopt_t)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator!=(const optional<T> &opt, nullopt_t) noexcept -> bool
 {
   return static_cast<bool>(opt);
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator!=(nullopt_t, const optional<T>& opt)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator!=(nullopt_t, const optional<T> &opt) noexcept -> bool
 {
   return static_cast<bool>(opt);
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator<(const optional<T>&, nullopt_t)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator<(const optional<T> &, nullopt_t) noexcept -> bool
 {
   return false;
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator<(nullopt_t, const optional<T>& opt)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator<(nullopt_t, const optional<T> &opt) noexcept -> bool
 {
   return static_cast<bool>(opt);
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator>(const optional<T>& opt, nullopt_t)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator>(const optional<T> &opt, nullopt_t) noexcept -> bool
 {
   return static_cast<bool>(opt);
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator>(nullopt_t, const optional<T>&)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator>(nullopt_t, const optional<T> &) noexcept -> bool
 {
   return false;
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator<=(const optional<T>& opt, nullopt_t)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator<=(const optional<T> &opt, nullopt_t) noexcept -> bool
 {
   return !opt;
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator<=(nullopt_t, const optional<T>&)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator<=(nullopt_t, const optional<T> &) noexcept -> bool
 {
   return true;
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator>=(const optional<T>&, nullopt_t)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator>=(const optional<T> &, nullopt_t) noexcept -> bool
 {
   return true;
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator>=(nullopt_t, const optional<T>& opt)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator>=(nullopt_t, const optional<T> &opt) noexcept -> bool
 {
   return !opt;
 }
@@ -1650,85 +1558,73 @@ bool bpstd::operator>=(nullopt_t, const optional<T>& opt)
 //-----------------------------------------------------------------------------
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator==(const optional<T>& opt, const T& value)
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator==(const optional<T> &opt, const T &value) -> bool
 {
   return static_cast<bool>(opt) ? *opt == value : false;
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator==(const T& value, const optional<T>& opt)
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator==(const T &value, const optional<T> &opt) -> bool
 {
   return static_cast<bool>(opt) ? value == *opt : false;
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator!=(const optional<T>& opt, const T& value)
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator!=(const optional<T> &opt, const T &value) -> bool
 {
   return static_cast<bool>(opt) ? *opt != value : true;
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator!=(const T& value, const optional<T>& opt)
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator!=(const T &value, const optional<T> &opt) -> bool
 {
   return static_cast<bool>(opt) ? value != *opt : true;
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator<(const optional<T>& opt, const T& value)
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator<(const optional<T> &opt, const T &value) -> bool
 {
   return static_cast<bool>(opt) ? *opt < value  : true;
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator<(const T& value, const optional<T>& opt)
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator<(const T &value, const optional<T> &opt) -> bool
 {
   return static_cast<bool>(opt) ? value < *opt  : false;
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator>(const optional<T>& opt, const T& value)
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator>(const optional<T> &opt, const T &value) -> bool
 {
   return static_cast<bool>(opt) ? *opt > value  : false;
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator>(const T& value, const optional<T>& opt)
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator>(const T &value, const optional<T> &opt) -> bool
 {
   return static_cast<bool>(opt) ? value > *opt  : true;
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator<=(const optional<T>& opt, const T& value)
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator<=(const optional<T> &opt, const T &value) -> bool
 {
   return static_cast<bool>(opt) ? *opt <= value : true;
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator<=(const T& value, const optional<T>& opt)
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator<=(const T &value, const optional<T> &opt) -> bool
 {
   return static_cast<bool>(opt) ? value <= *opt : false;
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator>=(const optional<T>& opt, const T& value)
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator>=(const optional<T> &opt, const T &value) -> bool
 {
   return static_cast<bool>(opt) ? *opt >= value : false;
 }
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::operator>=(const T& value, const optional<T>& opt)
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::operator>=(const T &value, const optional<T> &opt) -> bool
 {
   return static_cast<bool>(opt) ? value >= *opt : true;
 }
@@ -1738,22 +1634,20 @@ bool bpstd::operator>=(const T& value, const optional<T>& opt)
 //-----------------------------------------------------------------------------
 
 template <typename T>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bpstd::optional<bpstd::decay_t<T>> bpstd::make_optional(T&& value)
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::make_optional(T &&value) -> bpstd::optional<bpstd::decay_t<T>>
 {
   return optional<decay_t<T>>(bpstd::forward<T>(value));
 }
 
-template <typename T, typename... Args >
-inline BPSTD_INLINE_VISIBILITY constexpr
-bpstd::optional<T> bpstd::make_optional(Args&&... args)
+template <typename T, typename... Args>
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::make_optional(Args &&...args) -> bpstd::optional<T>
 {
   return optional<T>(in_place, bpstd::forward<Args>(args)...);
 }
 
-template <typename T, typename U, typename... Args >
-inline BPSTD_INLINE_VISIBILITY constexpr
-bpstd::optional<T> bpstd::make_optional(std::initializer_list<U> il, Args&&... args)
+template <typename T, typename U, typename... Args>
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::make_optional(std::initializer_list<U> il, Args &&...args)
+    -> bpstd::optional<T>
 {
   return optional<T>(
     in_place,

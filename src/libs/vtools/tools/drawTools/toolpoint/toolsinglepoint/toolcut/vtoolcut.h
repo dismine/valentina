@@ -62,19 +62,19 @@ class VToolCut : public VToolSinglePoint
     Q_OBJECT // NOLINT
 public:
     explicit VToolCut(const VToolCutInitData &initData, QGraphicsItem * parent = nullptr);
-    virtual int   type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::Cut)};
 
-    VFormula GetFormulaLength() const;
+    auto GetFormulaLength() const -> VFormula;
     void     SetFormulaLength(const VFormula &value);
 
-    QString GetAliasSuffix1() const;
+    auto GetAliasSuffix1() const -> QString;
     void    SetAliasSuffix1(QString alias);
 
-    QString GetAliasSuffix2() const;
+    auto GetAliasSuffix2() const -> QString;
     void    SetAliasSuffix2(QString alias);
 
-    QString CurveName() const;
+    auto CurveName() const -> QString;
 
 public slots:
     virtual void    Disable(bool disable, const QString &namePP) override;

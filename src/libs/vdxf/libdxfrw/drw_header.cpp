@@ -39,7 +39,8 @@ void DRW_Header::addComment(const std::string &c){
     comments += c;
 }
 
-bool DRW_Header::parseCode(int code, dxfReader *reader){
+auto DRW_Header::parseCode(int code, dxfReader *reader) -> bool
+{
     if (nullptr == curr && 9 != code) {
         DRW_DBG("invalid header code: ");
         DRW_DBG(code);
@@ -1705,7 +1706,7 @@ void DRW_Header::addCoord(std::string key, const DRW_Coord &value, int code){
     vars[key] =curr;
 }
 
-bool DRW_Header::getDouble(const std::string &key, double *varDouble) const
+auto DRW_Header::getDouble(const std::string &key, double *varDouble) const -> bool
 {
     bool result = false;
     auto it=vars.find( key);
@@ -1721,7 +1722,7 @@ bool DRW_Header::getDouble(const std::string &key, double *varDouble) const
     return result;
 }
 
-bool DRW_Header::getInt(const std::string &key, int *varInt) const
+auto DRW_Header::getInt(const std::string &key, int *varInt) const -> bool
 {
     bool result = false;
     auto it=vars.find( key);
@@ -1737,7 +1738,8 @@ bool DRW_Header::getInt(const std::string &key, int *varInt) const
     return result;
 }
 
-bool DRW_Header::getStr(const std::string &key, std::string *varStr) const{
+auto DRW_Header::getStr(const std::string &key, std::string *varStr) const -> bool
+{
     bool result = false;
     auto it=vars.find( key);
     if (it != vars.end()) {
@@ -1750,7 +1752,7 @@ bool DRW_Header::getStr(const std::string &key, std::string *varStr) const{
     return result;
 }
 
-bool DRW_Header::getCoord(const std::string &key, DRW_Coord *varCoord) const
+auto DRW_Header::getCoord(const std::string &key, DRW_Coord *varCoord) const -> bool
 {
     bool result = false;
     auto it=vars.find( key);
@@ -1766,7 +1768,8 @@ bool DRW_Header::getCoord(const std::string &key, DRW_Coord *varCoord) const
     return result;
 }
 
-int DRW_Header::measurement(const int unit) {
+auto DRW_Header::measurement(const int unit) -> int
+{
     switch (unit) {
     case Units::Inch:
     case Units::Foot:

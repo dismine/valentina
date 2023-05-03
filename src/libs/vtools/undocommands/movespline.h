@@ -49,10 +49,11 @@ public:
     virtual ~MoveSpline() override;
     virtual void undo() override;
     virtual void redo() override;
-    virtual bool mergeWith(const QUndoCommand *command) override;
-    virtual int  id() const override;
-    quint32      getSplineId() const;
-    VSpline      getNewSpline() const;
+    virtual auto mergeWith(const QUndoCommand *command) -> bool override;
+    virtual auto id() const -> int override;
+    auto getSplineId() const -> quint32;
+    auto getNewSpline() const -> VSpline;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(MoveSpline) // NOLINT
@@ -63,13 +64,13 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline quint32 MoveSpline::getSplineId() const
+inline auto MoveSpline::getSplineId() const -> quint32
 {
     return nodeId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline VSpline MoveSpline::getNewSpline() const
+inline auto MoveSpline::getNewSpline() const -> VSpline
 {
     return newSpline;
 }

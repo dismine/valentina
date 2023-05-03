@@ -92,8 +92,8 @@ void VToolCutArc::SetDialog()
  * @param doc dom document container.
  * @param data container with variables.
  */
-VToolCutArc* VToolCutArc::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                 VContainer *data)
+auto VToolCutArc::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                         VContainer *data) -> VToolCutArc *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogCutArc> dialogTool = qobject_cast<DialogCutArc *>(dialog);
@@ -280,7 +280,7 @@ void VToolCutArc::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolCutArc::MakeToolTip() const
+auto VToolCutArc::MakeToolTip() const -> QString
 {
     const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(baseCurveId);
 

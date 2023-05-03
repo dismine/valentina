@@ -89,27 +89,27 @@ class VAbstractTool: public VDataTool
 public:
     VAbstractTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent = nullptr);
     virtual ~VAbstractTool() override;
-    quint32                 getId() const;
+    auto getId() const -> quint32;
 
     static bool m_suppressContextMenu;
     static const QString AttrInUse;
 
-    static qreal CheckFormula(const quint32 &toolId, QString &formula, VContainer *data);
+    static auto CheckFormula(const quint32 &toolId, QString &formula, VContainer *data) -> qreal;
 
-    static const QStringList      Colors();
-    static QMap<QString, QString> ColorsList();
+    static auto Colors() -> const QStringList;
+    static auto ColorsList() -> QMap<QString, QString>;
 
-    static VToolRecord GetRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc);
+    static auto GetRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc) -> VToolRecord;
     static void RemoveRecord(const VToolRecord &record, VAbstractPattern *doc);
     static void AddRecord(const VToolRecord &record, VAbstractPattern *doc);
     static void AddRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc);
     static void AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiecePath &path);
     static void AddNodes(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
 
-    const VContainer        *getData() const;
+    auto getData() const -> const VContainer *;
 
-    QMap<QString, quint32>  PointsList() const;
-    virtual QString         getTagName() const =0;
+    auto PointsList() const -> QMap<QString, quint32>;
+    virtual auto getTagName() const -> QString = 0;
     virtual void            ShowVisualization(bool show) =0;
     virtual void            ChangeLabelPosition(quint32 id, const QPointF &pos);
     virtual void            SetLabelVisible(quint32 id, bool visible);
@@ -163,11 +163,10 @@ protected:
     virtual void            DeleteToolWithConfirm(bool ask = true);
     virtual void            PerformDelete();
 
-    template<typename T>
-    static quint32 CreateNode(VContainer *data, quint32 id);
-    static quint32 CreateNodeSpline(VContainer *data, quint32 id);
-    static quint32 CreateNodeSplinePath(VContainer *data, quint32 id);
-    static quint32 CreateNodePoint(VContainer *data, quint32 id, const QSharedPointer<VPointF> &point);
+    template <typename T> static auto CreateNode(VContainer *data, quint32 id) -> quint32;
+    static auto CreateNodeSpline(VContainer *data, quint32 id) -> quint32;
+    static auto CreateNodeSplinePath(VContainer *data, quint32 id) -> quint32;
+    static auto CreateNodePoint(VContainer *data, quint32 id, const QSharedPointer<VPointF> &point) -> quint32;
 
     template <typename T>
     void AddVisualization();
@@ -175,13 +174,14 @@ protected:
     virtual void SetVisualization()=0;
     virtual void ToolCreation(const Source &typeCreation);
 
-    static QDomElement AddSANode(VAbstractPattern *doc, const QString &tagName, const VPieceNode &node);
+    static auto AddSANode(VAbstractPattern *doc, const QString &tagName, const VPieceNode &node) -> QDomElement;
     static void        AddNode(VAbstractPattern *doc, QDomElement &domElement, const VPieceNode &node);
 
-    static QVector<VPieceNode> PrepareNodes(const VPiecePath &path, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                            VContainer *data);
-    static quint32 PrepareNode(const VPieceNode &node, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                               VContainer *data);
+    static auto PrepareNodes(const VPiecePath &path, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data)
+        -> QVector<VPieceNode>;
+    static auto PrepareNode(const VPieceNode &node, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data)
+        -> quint32;
+
 private:
     Q_DISABLE_COPY_MOVE(VAbstractTool) // NOLINT
 };
@@ -191,7 +191,7 @@ private:
  * @brief getId return object id.
  * @return id.
  */
-inline quint32 VAbstractTool::getId() const
+inline auto VAbstractTool::getId() const -> quint32
 {
     return m_id;
 }
@@ -201,7 +201,7 @@ inline quint32 VAbstractTool::getId() const
  * @brief getData return pointer to data container.
  * @return container.
  */
-inline const VContainer *VAbstractTool::getData() const
+inline auto VAbstractTool::getData() const -> const VContainer *
 {
     return &data;
 }
@@ -221,14 +221,14 @@ inline void VAbstractTool::AddVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template<typename T>
+template <typename T>
 /**
  * @brief CreateNode create new node for detail.
  * @param data container.
  * @param id id parent object.
  * @return id for new object.
  */
-quint32 VAbstractTool::CreateNode(VContainer *data, quint32 id)
+auto VAbstractTool::CreateNode(VContainer *data, quint32 id) -> quint32
 {
     //We can't use exist object. Need create new.
     T *node = new T(*data->GeometricObject<T>(id).data());

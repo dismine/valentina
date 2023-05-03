@@ -40,8 +40,8 @@ V_NOEXCEPT_EXPR (true)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionTerminatedPosition &VExceptionTerminatedPosition::operator=(const VExceptionTerminatedPosition &e)
-V_NOEXCEPT_EXPR (true)
+auto VExceptionTerminatedPosition::operator=(const VExceptionTerminatedPosition &e) V_NOEXCEPT_EXPR(true)
+    -> VExceptionTerminatedPosition &
 {
     if ( &e == this )
     {
@@ -62,7 +62,7 @@ void VExceptionTerminatedPosition::raise() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionTerminatedPosition *VExceptionTerminatedPosition::clone() const
+auto VExceptionTerminatedPosition::clone() const -> VExceptionTerminatedPosition *
 {
     return new VExceptionTerminatedPosition(*this);
 }

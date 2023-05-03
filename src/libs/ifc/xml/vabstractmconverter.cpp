@@ -63,7 +63,7 @@ void VAbstractMConverter::AddRootComment()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMultiMap<QString, QString> VAbstractMConverter::OldNamesToNewNames_InV0_3_0()
+auto VAbstractMConverter::OldNamesToNewNames_InV0_3_0() -> QMultiMap<QString, QString>
 {
     // new name, old name
     QMultiMap<QString, QString> names;
@@ -250,7 +250,7 @@ QMultiMap<QString, QString> VAbstractMConverter::OldNamesToNewNames_InV0_3_0()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMap<QString, QString> VAbstractMConverter::OldNamesToNewNames_InV0_3_3()
+auto VAbstractMConverter::OldNamesToNewNames_InV0_3_3() -> QMap<QString, QString>
 {
     // new name, old name
     QMap<QString, QString> names;

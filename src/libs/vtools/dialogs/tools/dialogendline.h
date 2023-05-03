@@ -53,26 +53,26 @@ public:
     DialogEndLine(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogEndLine() override;
 
-    QString           GetPointName() const;
+    auto GetPointName() const -> QString;
     void              SetPointName(const QString &value);
 
-    QString           GetTypeLine() const;
+    auto GetTypeLine() const -> QString;
     void              SetTypeLine(const QString &value);
 
-    QString           GetFormula() const;
+    auto GetFormula() const -> QString;
     void              SetFormula(const QString &value);
 
-    QString           GetAngle() const;
+    auto GetAngle() const -> QString;
     void              SetAngle(const QString &value);
 
-    quint32           GetBasePointId() const;
+    auto GetBasePointId() const -> quint32;
     void              SetBasePointId(const quint32 &value);
 
-    QString           GetLineColor() const;
+    auto GetLineColor() const -> QString;
     void              SetLineColor(const QString &value);
 
     void    SetNotes(const QString &notes);
-    QString GetNotes() const;
+    auto GetNotes() const -> QString;
 
     virtual void      ShowDialog(bool click) override;
 public slots:
@@ -94,7 +94,8 @@ protected:
      */
     virtual void     SaveData() override;
     virtual void     closeEvent(QCloseEvent *event) override;
-    virtual bool     IsValid() const final;
+    virtual auto IsValid() const -> bool final;
+
 private:
     Q_DISABLE_COPY_MOVE(DialogEndLine) // NOLINT
 
@@ -126,7 +127,7 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogEndLine::IsValid() const
+inline auto DialogEndLine::IsValid() const -> bool
 {
     return flagFormula && flagError && flagName;
 }

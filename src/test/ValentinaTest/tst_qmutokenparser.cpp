@@ -135,7 +135,7 @@ void TST_QmuTokenParser::PrepareVal(qreal val, const QLocale &locale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool TST_QmuTokenParser::IsSingleFromUser(const QString &formula)
+auto TST_QmuTokenParser::IsSingleFromUser(const QString &formula) -> bool
 {
     if (formula.isEmpty())
     {

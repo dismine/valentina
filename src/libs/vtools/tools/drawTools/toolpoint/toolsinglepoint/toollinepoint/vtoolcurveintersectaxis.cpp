@@ -101,9 +101,8 @@ void VToolCurveIntersectAxis::SetDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                                         VAbstractPattern *doc,
-                                                         VContainer *data)
+auto VToolCurveIntersectAxis::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
+                                     VAbstractPattern *doc, VContainer *data) -> VToolCurveIntersectAxis *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogCurveIntersectAxis> dialogTool = qobject_cast<DialogCurveIntersectAxis *>(dialog);
@@ -140,7 +139,7 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(const QPointer<DialogTo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(VToolCurveIntersectAxisInitData &initData)
+auto VToolCurveIntersectAxis::Create(VToolCurveIntersectAxisInitData &initData) -> VToolCurveIntersectAxis *
 {
     const QSharedPointer<VPointF> basePoint = initData.data->GeometricObject<VPointF>(initData.basePointId);
     const qreal angle = CheckFormula(initData.id, initData.formulaAngle, initData.data);
@@ -206,14 +205,14 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(VToolCurveIntersectAxis
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VToolCurveIntersectAxis::FindPoint(const QPointF &point, qreal angle, const QVector<QPointF> &curvePoints,
-                                        QPointF *intersectionPoint)
+auto VToolCurveIntersectAxis::FindPoint(const QPointF &point, qreal angle, const QVector<QPointF> &curvePoints,
+                                        QPointF *intersectionPoint) -> bool
 {
     return VAbstractCurve::CurveIntersectAxis(point, angle, curvePoints, intersectionPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolCurveIntersectAxis::GetFormulaAngle() const
+auto VToolCurveIntersectAxis::GetFormulaAngle() const -> VFormula
 {
     VFormula fAngle(formulaAngle, getData());
     fAngle.setCheckZero(false);
@@ -236,7 +235,7 @@ void VToolCurveIntersectAxis::SetFormulaAngle(const VFormula &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolCurveIntersectAxis::CurveName() const
+auto VToolCurveIntersectAxis::CurveName() const -> QString
 {
     return VAbstractTool::data.GetGObject(curveId)->ObjectName();
 }
@@ -336,7 +335,7 @@ void VToolCurveIntersectAxis::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolCurveIntersectAxis::MakeToolTip() const
+auto VToolCurveIntersectAxis::MakeToolTip() const -> QString
 {
     const QSharedPointer<VPointF> first = VAbstractTool::data.GeometricObject<VPointF>(basePointId);
     const QSharedPointer<VPointF> second = VAbstractTool::data.GeometricObject<VPointF>(m_id);

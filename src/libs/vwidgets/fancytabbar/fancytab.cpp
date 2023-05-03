@@ -46,7 +46,7 @@ FancyTab::FancyTab(QWidget *tabbar)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-double FancyTab::fader()
+auto FancyTab::fader() -> double
 {
     return m_Fader;
 }

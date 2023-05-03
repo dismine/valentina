@@ -52,14 +52,14 @@ namespace bpstd {
   inline namespace literals {
     inline namespace complex_literals {
 
-      constexpr complex<long double> operator""_il(long double i) noexcept;
-      constexpr complex<long double> operator""_il(unsigned long long i) noexcept;
+    constexpr auto operator""_il(long double i) noexcept -> complex<long double>;
+    constexpr auto operator""_il(unsigned long long i) noexcept -> complex<long double>;
 
-      constexpr complex<double> operator""_i(long double i) noexcept;
-      constexpr complex<double> operator""_i(unsigned long long i) noexcept;
+    constexpr auto operator""_i(long double i) noexcept -> complex<double>;
+    constexpr auto operator""_i(unsigned long long i) noexcept -> complex<double>;
 
-      constexpr complex<float> operator""_if(long double i) noexcept;
-      constexpr complex<float> operator""_if(unsigned long long i) noexcept;
+    constexpr auto operator""_if(long double i) noexcept -> complex<float>;
+    constexpr auto operator""_if(unsigned long long i) noexcept -> complex<float>;
 
     } // namespace complex_literals
   } // namespace literals
@@ -69,50 +69,38 @@ namespace bpstd {
 // literals : class : complex
 //==============================================================================
 
-inline BPSTD_INLINE_VISIBILITY constexpr
-bpstd::complex<long double>
-  bpstd::literals::complex_literals::operator""_il(long double i)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::literals::complex_literals::operator""_il(long double i) noexcept
+    -> bpstd::complex<long double>
 {
   return complex<long double>{0, i};
 }
 
-inline BPSTD_INLINE_VISIBILITY constexpr
-bpstd::complex<long double>
-  bpstd::literals::complex_literals::operator""_il(unsigned long long i)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto
+bpstd::literals::complex_literals::operator""_il(unsigned long long i) noexcept -> bpstd::complex<long double>
 {
   return complex<long double>{0, static_cast<long double>(i)};
 }
 
-inline BPSTD_INLINE_VISIBILITY constexpr
-bpstd::complex<double>
-  bpstd::literals::complex_literals::operator""_i(long double i)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::literals::complex_literals::operator""_i(long double i) noexcept
+    -> bpstd::complex<double>
 {
   return complex<double>{0, static_cast<double>(i)};
 }
 
-inline BPSTD_INLINE_VISIBILITY constexpr
-bpstd::complex<double>
-  bpstd::literals::complex_literals::operator""_i(unsigned long long i)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto
+bpstd::literals::complex_literals::operator""_i(unsigned long long i) noexcept -> bpstd::complex<double>
 {
   return complex<double>{0, static_cast<double>(i)};
 }
 
-inline BPSTD_INLINE_VISIBILITY constexpr
-bpstd::complex<float>
-  bpstd::literals::complex_literals::operator""_if(long double i)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::literals::complex_literals::operator""_if(long double i) noexcept
+    -> bpstd::complex<float>
 {
   return complex<float>{0, static_cast<float>(i)};
 }
 
-inline BPSTD_INLINE_VISIBILITY constexpr
-bpstd::complex<float>
-  bpstd::literals::complex_literals::operator""_if(unsigned long long i)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto
+bpstd::literals::complex_literals::operator""_if(unsigned long long i) noexcept -> bpstd::complex<float>
 {
   return complex<float>{0, static_cast<float>(i)};
 }

@@ -50,14 +50,15 @@ public:
     virtual void undo() override;
     virtual void redo() override;
     // cppcheck-suppress unusedFunction
-    virtual bool mergeWith(const QUndoCommand *command) override;
-    virtual int  id() const override;
+    virtual auto mergeWith(const QUndoCommand *command) -> bool override;
+    virtual auto id() const -> int override;
 
     void Do(qreal x, qreal y);
 
-    quint32      getDetId() const;
-    double       getNewX() const;
-    double       getNewY() const;
+    auto getDetId() const -> quint32;
+    auto getNewX() const -> double;
+    auto getNewY() const -> double;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(MovePiece) // NOLINT
@@ -72,19 +73,19 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline quint32 MovePiece::getDetId() const
+inline auto MovePiece::getDetId() const -> quint32
 {
     return nodeId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline double MovePiece::getNewX() const
+inline auto MovePiece::getNewX() const -> double
 {
     return m_newX;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline double MovePiece::getNewY() const
+inline auto MovePiece::getNewY() const -> double
 {
     return m_newY;
 }

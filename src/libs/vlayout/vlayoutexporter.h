@@ -96,8 +96,8 @@ public:
 
     static auto SupportPDFConversion() -> bool;
 
-    static QString ExportFormatDescription(LayoutExportFormats format);
-    static QString ExportFormatSuffix(LayoutExportFormats format);
+    static auto ExportFormatDescription(LayoutExportFormats format) -> QString;
+    static auto ExportFormatSuffix(LayoutExportFormats format) -> QString;
     static void PdfToPs(const QStringList &params);
     static void PrepareGrainlineForExport(const QList<QGraphicsItem *> &items, bool showGrainline);
     static void RestoreGrainlineAfterExport(const QList<QGraphicsItem *> &items);

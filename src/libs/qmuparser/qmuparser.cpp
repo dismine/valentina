@@ -50,7 +50,7 @@ namespace
  * @param arcLength length of arc that create two pieces after rotation
  * @return an angle the second piece should be rotated
  */
-qreal CSR(qreal length, qreal split, qreal arcLength)
+auto CSR(qreal length, qreal split, qreal arcLength) -> qreal
 {
     length = qAbs(length);
     arcLength = qAbs(arcLength);
@@ -130,85 +130,85 @@ namespace qmu
 {
 //---------------------------------------------------------------------------------------------------------------------
 // Trigonometric function
-qreal QmuParser::DegreeToRadian(qreal deg)
+auto QmuParser::DegreeToRadian(qreal deg) -> qreal
 {
      return qDegreesToRadians(deg);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::RadianToDegree(qreal rad)
+auto QmuParser::RadianToDegree(qreal rad) -> qreal
 {
      return qRadiansToDegrees(rad);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::Sinh(qreal v)
+auto QmuParser::Sinh(qreal v) -> qreal
 {
     return sinh(v);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::ASinh(qreal v)
+auto QmuParser::ASinh(qreal v) -> qreal
 {
     return log(v + qSqrt(v * v + 1));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::Cosh(qreal v)
+auto QmuParser::Cosh(qreal v) -> qreal
 {
     return cosh(v);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::ACosh(qreal v)
+auto QmuParser::ACosh(qreal v) -> qreal
 {
     return log(v + qSqrt(v * v - 1));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::Tanh(qreal v)
+auto QmuParser::Tanh(qreal v) -> qreal
 {
     return tanh(v);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::ATanh(qreal v)
+auto QmuParser::ATanh(qreal v) -> qreal
 {
     return (0.5 * log((1 + v) / (1 - v)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::SinD(qreal v)
+auto QmuParser::SinD(qreal v) -> qreal
 {
     return qSin(qDegreesToRadians(v));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::ASinD(qreal v)
+auto QmuParser::ASinD(qreal v) -> qreal
 {
     return qRadiansToDegrees(qAsin(v));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::CosD(qreal v)
+auto QmuParser::CosD(qreal v) -> qreal
 {
     return qCos(qDegreesToRadians(v));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::ACosD(qreal v)
+auto QmuParser::ACosD(qreal v) -> qreal
 {
     return qRadiansToDegrees(qAcos(v));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::TanD(qreal v)
+auto QmuParser::TanD(qreal v) -> qreal
 {
     return qTan(qDegreesToRadians(v));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::ATanD(qreal v)
+auto QmuParser::ATanD(qreal v) -> qreal
 {
     return qRadiansToDegrees(qAtan(v));
 }
@@ -218,7 +218,7 @@ qreal QmuParser::ATanD(qreal v)
 
 //---------------------------------------------------------------------------------------------------------------------
 // Logarithm base 2
-qreal QmuParser::Log2(qreal v)
+auto QmuParser::Log2(qreal v) -> qreal
 {
 #ifdef MUP_MATH_EXCEPTIONS
     if (v<=0)
@@ -231,7 +231,7 @@ qreal QmuParser::Log2(qreal v)
 
 //---------------------------------------------------------------------------------------------------------------------
 // Logarithm base 10
-qreal QmuParser::Log10(qreal v)
+auto QmuParser::Log10(qreal v) -> qreal
 {
 #ifdef MUP_MATH_EXCEPTIONS
     if (v<=0)
@@ -244,25 +244,25 @@ qreal QmuParser::Log10(qreal v)
 
 //---------------------------------------------------------------------------------------------------------------------
 //  misc
-qreal QmuParser::Abs(qreal v)
+auto QmuParser::Abs(qreal v) -> qreal
 {
     return qAbs(v);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::Rint(qreal v)
+auto QmuParser::Rint(qreal v) -> qreal
 {
     return qFloor(v + 0.5);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::R2CM(qreal v)
+auto QmuParser::R2CM(qreal v) -> qreal
 {
     return Rint(v*10.0)/10.0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::CSRCm(qreal length, qreal split, qreal arcLength)
+auto QmuParser::CSRCm(qreal length, qreal split, qreal arcLength) -> qreal
 {
     length = ((length * 10.0) / 25.4) * PrintDPI;
     split = ((split * 10.0) / 25.4) * PrintDPI;
@@ -272,7 +272,7 @@ qreal QmuParser::CSRCm(qreal length, qreal split, qreal arcLength)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::CSRInch(qreal length, qreal split, qreal arcLength)
+auto QmuParser::CSRInch(qreal length, qreal split, qreal arcLength) -> qreal
 {
     length = length * PrintDPI;
     split = split * PrintDPI;
@@ -282,13 +282,13 @@ qreal QmuParser::CSRInch(qreal length, qreal split, qreal arcLength)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::Sign(qreal v)
+auto QmuParser::Sign(qreal v) -> qreal
 {
     return ((v<0) ? -1 : (v>0) ? 1 : 0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal QmuParser::FMod(qreal number, qreal denom)
+auto QmuParser::FMod(qreal number, qreal denom) -> qreal
 {
     return fmod(number, denom);
 }
@@ -299,7 +299,7 @@ qreal QmuParser::FMod(qreal number, qreal denom)
  * @param [in] a_afArg Vector with the function arguments
  * @param [in] a_iArgc The size of a_afArg
  */
-qreal QmuParser::Sum(const qreal *a_afArg, qmusizetype a_iArgc)
+auto QmuParser::Sum(const qreal *a_afArg, qmusizetype a_iArgc) -> qreal
 {
     if (a_iArgc == 0)
     {
@@ -320,7 +320,7 @@ qreal QmuParser::Sum(const qreal *a_afArg, qmusizetype a_iArgc)
  * @param [in] a_afArg Vector with the function arguments
  * @param [in] a_iArgc The size of a_afArg
  */
-qreal QmuParser::Avg(const qreal *a_afArg, qmusizetype a_iArgc)
+auto QmuParser::Avg(const qreal *a_afArg, qmusizetype a_iArgc) -> qreal
 {
     if (a_iArgc == 0)
     {
@@ -341,7 +341,7 @@ qreal QmuParser::Avg(const qreal *a_afArg, qmusizetype a_iArgc)
  * @param [in] a_afArg Vector with the function arguments
  * @param [in] a_iArgc The size of a_afArg
  */
-qreal QmuParser::Min(const qreal *a_afArg, qmusizetype a_iArgc)
+auto QmuParser::Min(const qreal *a_afArg, qmusizetype a_iArgc) -> qreal
 {
     if (a_iArgc == 0)
     {
@@ -362,7 +362,7 @@ qreal QmuParser::Min(const qreal *a_afArg, qmusizetype a_iArgc)
  * @param [in] a_afArg Vector with the function arguments
  * @param [in] a_iArgc The size of a_afArg
  */
-qreal QmuParser::Max(const qreal *a_afArg, qmusizetype a_iArgc)
+auto QmuParser::Max(const qreal *a_afArg, qmusizetype a_iArgc) -> qreal
 {
     if (a_iArgc == 0)
     {
@@ -385,8 +385,8 @@ qreal QmuParser::Max(const qreal *a_afArg, qmusizetype a_iArgc)
 * @param [out] a_fVal Pointer where the value should be stored in case one is found.
 * @return 1 if a value was found 0 otherwise.
 */
-int QmuParser::IsVal(const QString &a_szExpr, qmusizetype *a_iPos, qreal *a_fVal, const QLocale &locale, bool cNumbers,
-                     const QChar &decimal, const QChar &thousand)
+auto QmuParser::IsVal(const QString &a_szExpr, qmusizetype *a_iPos, qreal *a_fVal, const QLocale &locale, bool cNumbers,
+                      const QChar &decimal, const QChar &thousand) -> int
 {
     qreal fVal(0);
 
@@ -577,7 +577,7 @@ void QmuParser::OnDetectVar(const QString &pExpr, qmusizetype &nStart, qmusizety
  * http://sourceforge.net/forum/forum.php?thread_id=1994611&forum_id=462843
  */
 // cppcheck-suppress unusedFunction
-qreal QmuParser::Diff(qreal *a_Var, qreal  a_fPos, qreal  a_fEpsilon) const
+auto QmuParser::Diff(qreal *a_Var, qreal a_fPos, qreal a_fEpsilon) const -> qreal
 {
     qreal fRes(0),
           fBuf(*a_Var),

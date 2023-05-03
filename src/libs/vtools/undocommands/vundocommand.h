@@ -96,7 +96,8 @@ protected:
     void         IncrementReferences(const QVector<VPieceNode> &nodes) const;
     void         DecrementReferences(const QVector<VPieceNode> &nodes) const;
 
-    QDomElement  GetDestinationObject(quint32 idTool, quint32 idPoint) const;
+    auto GetDestinationObject(quint32 idTool, quint32 idPoint) const -> QDomElement;
+
 private:
     Q_DISABLE_COPY_MOVE(VUndoCommand) // NOLINT
 };

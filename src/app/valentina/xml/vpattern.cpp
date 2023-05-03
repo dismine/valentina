@@ -132,13 +132,13 @@ using namespace bpstd::literals::chrono_literals;
 #endif // __cplusplus >= 201402L
 #endif //(defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
 
-const QString VPattern::AttrReadOnly    = QStringLiteral("readOnly");
-const QString VPattern::AttrLabelPrefix = QStringLiteral("labelPrefix");
+const QString VPattern::AttrReadOnly = QStringLiteral("readOnly");       // NOLINT(cert-err58-cpp)
+const QString VPattern::AttrLabelPrefix = QStringLiteral("labelPrefix"); // NOLINT(cert-err58-cpp)
 
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-QString FileComment()
+auto FileComment() -> QString
 {
     return QStringLiteral("Pattern created with Valentina v%1 (https://smart-pattern.com.ua/).")
             .arg(APP_VERSION_STR);
@@ -151,7 +151,7 @@ void GatherCount(int &count, const int nodes)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DefLabelLanguage()
+auto DefLabelLanguage() -> QString
 {
     QString def = VAbstractValApplication::VApp()->ValentinaSettings()->GetLabelLanguage();
     if (not ConvertToSet<QString>(VApplication::LabelLanguages()).contains(def))
@@ -231,66 +231,20 @@ void VPattern::Parse(const Document &parse)
     m_parsing = true;
     SCASSERT(sceneDraw != nullptr)
     SCASSERT(sceneDetail != nullptr)
-    static const QStringList tags({TagDraw, TagIncrements, TagPreviewCalculations});
     PrepareForParse(parse);
 
     QDomNode domNode = documentElement().firstChild();
-    while (domNode.isNull() == false)
+    while (not domNode.isNull())
     {
-        if (domNode.isElement())
-        {
-            const QDomElement domElement = domNode.toElement();
-            if (domElement.isNull() == false)
-            {
-                switch (tags.indexOf(domElement.tagName()))
-                {
-                    case 0: // TagDraw
-                        qCDebug(vXML, "Tag draw.");
-                        if (parse == Document::FullParse)
-                        {
-                            if (nameActivPP.isEmpty())
-                            {
-                                SetActivPP(GetParametrString(domElement, AttrName));
-                            }
-                            else
-                            {
-                                ChangeActivPP(GetParametrString(domElement, AttrName));
-                            }
-                            patternPieces << GetParametrString(domElement, AttrName);
-                        }
-                        else
-                        {
-                            ChangeActivPP(GetParametrString(domElement, AttrName), Document::LiteParse);
-                        }
-                        ParseDrawElement(domElement, parse);
-                        break;
-                    case 1: // TagIncrements
-                        if (parse != Document::LiteParse)
-                        {
-                            qCDebug(vXML, "Tag increments.");
-                            ParseIncrementsElement(domElement, parse);
-                        }
-                        break;
-                    case 2: // TagPreviewCalculations
-                        if (parse != Document::LiteParse)
-                        {
-                            qCDebug(vXML, "Tag prewiew calculations.");
-                            ParseIncrementsElement(domElement, parse);
-                        }
-                        break;
-                    default:
-                        qCDebug(vXML, "Ignoring tag %s", qUtf8Printable(domElement.tagName()));
-                        break;
-                }
-            }
-        }
+        ParseRootElement(parse, domNode);
         domNode = domNode.nextSibling();
     }
+
     if (VApplication::IsGUIMode())
     {
         QTimer::singleShot(V_SECONDS(1), Qt::VeryCoarseTimer, this, &VPattern::RefreshPieceGeometry);
     }
-    else if (VApplication::VApp()->CommandLine()->IsTestModeEnabled())
+    else if (VApplication::CommandLine()->IsTestModeEnabled())
     {
         RefreshPieceGeometry();
     }
@@ -307,51 +261,50 @@ void VPattern::Parse(const Document &parse)
  */
 void VPattern::setCurrentData()
 {
-    if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
+    const int countPP = CountPP();
+    // don't need upadate data if we have only one pattern piece
+    if (VAbstractValApplication::VApp()->GetDrawMode() != Draw::Calculation || countPP <= 1)
     {
-        const int countPP = CountPP();
-        if (countPP > 1)//don't need upadate data if we have only one pattern piece
-        {
-            qCDebug(vXML, "Setting current data");
-            qCDebug(vXML, "Current PP name %s", qUtf8Printable(nameActivPP));
-            qCDebug(vXML, "PP count %d", countPP);
-
-            const QVector<VToolRecord> localHistory = getLocalHistory();
-            if (localHistory.size() == 0)
-            {
-                qCDebug(vXML, "History is empty!");
-                return;
-            }
-
-            const quint32 id = ConstLast(localHistory).getId();
-            qCDebug(vXML, "Resoring data from tool with id %u", id);
-
-            if (tools.size() > 0)
-            {
-                try
-                {
-                    ToolExists(id);
-                }
-                catch (VExceptionBadId &e)
-                {
-                    Q_UNUSED(e)
-                    qCDebug(vXML, "List of tools doesn't containe id= %u", id);
-                    return;
-                }
-
-                const VDataTool *vTool = tools.value(id);
-                *data = vTool->getData();
-                //Delete special variables if exist
-                data->RemoveVariable(currentLength);
-                data->RemoveVariable(currentSeamAllowance);
-                qCDebug(vXML, "Data successfully updated.");
-            }
-            else
-            {
-                qCDebug(vXML, "List of tools is empty!");
-            }
-        }
+        return;
     }
+
+    qCDebug(vXML, "Setting current data");
+    qCDebug(vXML, "Current PP name %s", qUtf8Printable(nameActivPP));
+    qCDebug(vXML, "PP count %d", countPP);
+
+    const QVector<VToolRecord> localHistory = getLocalHistory();
+    if (localHistory.isEmpty())
+    {
+        qCDebug(vXML, "History is empty!");
+        return;
+    }
+
+    const quint32 id = ConstLast(localHistory).getId();
+    qCDebug(vXML, "Resoring data from tool with id %u", id);
+
+    if (not tools.isEmpty())
+    {
+        qCDebug(vXML, "List of tools is empty!");
+        return;
+    }
+
+    try
+    {
+        ToolExists(id);
+    }
+    catch (VExceptionBadId &e)
+    {
+        Q_UNUSED(e)
+        qCDebug(vXML, "List of tools doesn't containe id= %u", id);
+        return;
+    }
+
+    const VDataTool *vTool = tools.value(id);
+    *data = vTool->getData();
+    // Delete special variables if exist
+    data->RemoveVariable(currentLength);
+    data->RemoveVariable(currentSeamAllowance);
+    qCDebug(vXML, "Data successfully updated.");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -371,7 +324,7 @@ void VPattern::UpdateToolData(const quint32 &id, VContainer *data)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VContainer VPattern::GetCompleteData() const
+auto VPattern::GetCompleteData() const -> VContainer
 {
     const int countPP = CountPP();
     if (countPP <= 0 || history.isEmpty() || tools.isEmpty())
@@ -406,7 +359,7 @@ VContainer VPattern::GetCompleteData() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VContainer VPattern::GetCompletePPData(const QString &name) const
+auto VPattern::GetCompletePPData(const QString &name) const -> VContainer
 {
     const int countPP = CountPP();
     if (countPP <= 0 || history.isEmpty() || tools.isEmpty())
@@ -446,18 +399,19 @@ VContainer VPattern::GetCompletePPData(const QString &name) const
  * @return id base point.
  */
 // cppcheck-suppress unusedFunction
-quint32 VPattern::SPointActiveDraw()
+auto VPattern::SPointActiveDraw() -> quint32
 {
     QDomElement calcElement;
     if (GetActivNodeElement(TagCalculation, calcElement))
     {
         const QDomNode domNode = calcElement.firstChild();
-        if (domNode.isNull() == false && domNode.isElement())
+        if (not domNode.isNull() && domNode.isElement())
         {
             const QDomElement domElement = domNode.toElement();
-            if (domElement.isNull() == false)
+            if (not domElement.isNull())
             {
-                if (domElement.tagName() == TagPoint && domElement.attribute(AttrType, QString()) == VToolBasePoint::ToolType)
+                if (domElement.tagName() == TagPoint &&
+                    domElement.attribute(AttrType, QString()) == VToolBasePoint::ToolType)
                 {
                     return GetParametrId(domElement);
                 }
@@ -468,7 +422,7 @@ quint32 VPattern::SPointActiveDraw()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<quint32> VPattern::GetActivePPPieces() const
+auto VPattern::GetActivePPPieces() const -> QVector<quint32>
 {
     QVector<quint32> pieces;
     QDomElement drawElement;
@@ -493,7 +447,7 @@ QVector<quint32> VPattern::GetActivePPPieces() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPattern::SaveDocument(const QString &fileName, QString &error)
+auto VPattern::SaveDocument(const QString &fileName, QString &error) -> bool
 {
     try
     {
@@ -608,7 +562,7 @@ void VPattern::LiteParseIncrements()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VPattern::ElementsToParse() const
+auto VPattern::ElementsToParse() const -> int
 {
     QVector<QString> tags{TagCalculation, TagDetails, TagModeling, TagIncrements};
 
@@ -755,7 +709,7 @@ void VPattern::Clear()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VNodeDetail VPattern::ParseDetailNode(const QDomElement &domElement) const
+auto VPattern::ParseDetailNode(const QDomElement &domElement) -> VNodeDetail
 {
     const quint32 id = GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
     const qreal mx = GetParametrDouble(domElement, AttrMx, QStringLiteral("0.0"));
@@ -766,11 +720,8 @@ VNodeDetail VPattern::ParseDetailNode(const QDomElement &domElement) const
     const QString t = GetParametrString(domElement, AttrType, QStringLiteral("NodePoint"));
     Tool tool;
 
-    QStringList types = QStringList() << VAbstractPattern::NodePoint
-                                      << VAbstractPattern::NodeArc
-                                      << VAbstractPattern::NodeSpline
-                                      << VAbstractPattern::NodeSplinePath
-                                      << VAbstractPattern::NodeElArc;
+    QStringList types{VAbstractPattern::NodePoint, VAbstractPattern::NodeArc, VAbstractPattern::NodeSpline,
+                      VAbstractPattern::NodeSplinePath, VAbstractPattern::NodeElArc};
     switch (types.indexOf(t))
     {
         case 0: // NodePoint
@@ -789,10 +740,67 @@ VNodeDetail VPattern::ParseDetailNode(const QDomElement &domElement) const
             tool = Tool::NodeElArc;
             break;
         default:
-            VException e(tr("Wrong tag name '%1'.").arg(t));
-            throw e;
+            throw VException(tr("Wrong tag name '%1'.").arg(t));
     }
-    return VNodeDetail(id, tool, nodeType, mx, my, reverse);
+    return {id, tool, nodeType, mx, my, reverse};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseRootElement(const Document &parse, const QDomNode &node)
+{
+    static const QStringList tags({TagDraw, TagIncrements, TagPreviewCalculations});
+
+    if (not node.isElement())
+    {
+        return;
+    }
+
+    const QDomElement domElement = node.toElement();
+    if (domElement.isNull())
+    {
+        return;
+    }
+
+    switch (tags.indexOf(domElement.tagName()))
+    {
+        case 0: // TagDraw
+            qCDebug(vXML, "Tag draw.");
+            if (parse == Document::FullParse)
+            {
+                if (nameActivPP.isEmpty())
+                {
+                    SetActivPP(GetParametrString(domElement, AttrName));
+                }
+                else
+                {
+                    ChangeActivPP(GetParametrString(domElement, AttrName));
+                }
+                patternPieces << GetParametrString(domElement, AttrName);
+            }
+            else
+            {
+                ChangeActivPP(GetParametrString(domElement, AttrName), Document::LiteParse);
+            }
+            ParseDrawElement(domElement, parse);
+            break;
+        case 1: // TagIncrements
+            if (parse != Document::LiteParse)
+            {
+                qCDebug(vXML, "Tag increments.");
+                ParseIncrementsElement(domElement, parse);
+            }
+            break;
+        case 2: // TagPreviewCalculations
+            if (parse != Document::LiteParse)
+            {
+                qCDebug(vXML, "Tag prewiew calculations.");
+                ParseIncrementsElement(domElement, parse);
+            }
+            break;
+        default:
+            qCDebug(vXML, "Ignoring tag %s", qUtf8Printable(domElement.tagName()));
+            break;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -807,34 +815,40 @@ void VPattern::ParseDrawElement(const QDomNode &node, const Document &parse)
     QDomNode domNode = node.firstChild();
     while (not domNode.isNull())
     {
-        if (domNode.isElement())
+        if (not domNode.isElement())
         {
-            const QDomElement domElement = domNode.toElement();
-            if (not domElement.isNull())
-            {
-                switch (tags.indexOf(domElement.tagName()))
-                {
-                    case 0: // TagCalculation
-                        qCDebug(vXML, "Tag calculation.");
-                        data->ClearCalculationGObjects();
-                        ParseDrawMode(domElement, parse, Draw::Calculation);
-                        break;
-                    case 1: // TagModeling
-                        qCDebug(vXML, "Tag modeling.");
-                        ParseDrawMode(domElement, parse, Draw::Modeling);
-                        break;
-                    case 2: // TagDetails
-                        qCDebug(vXML, "Tag details.");
-                        ParseDetails(domElement, parse);
-                        break;
-                    case 3: // TagGroups
-                        qCDebug(vXML, "Tag groups.");
-                        ParseGroups(domElement);
-                        break;
-                    default:
-                        throw VException(tr("Wrong tag name '%1'.").arg(domElement.tagName()));
-                }
-            }
+            domNode = domNode.nextSibling();
+            continue;
+        }
+
+        const QDomElement domElement = domNode.toElement();
+        if (domElement.isNull())
+        {
+            domNode = domNode.nextSibling();
+            continue;
+        }
+
+        switch (tags.indexOf(domElement.tagName()))
+        {
+            case 0: // TagCalculation
+                qCDebug(vXML, "Tag calculation.");
+                data->ClearCalculationGObjects();
+                ParseDrawMode(domElement, parse, Draw::Calculation);
+                break;
+            case 1: // TagModeling
+                qCDebug(vXML, "Tag modeling.");
+                ParseDrawMode(domElement, parse, Draw::Modeling);
+                break;
+            case 2: // TagDetails
+                qCDebug(vXML, "Tag details.");
+                ParseDetails(domElement, parse);
+                break;
+            case 3: // TagGroups
+                qCDebug(vXML, "Tag groups.");
+                ParseGroups(domElement);
+                break;
+            default:
+                throw VException(tr("Wrong tag name '%1'.").arg(domElement.tagName()));
         }
         domNode = domNode.nextSibling();
     }
@@ -851,66 +865,67 @@ void VPattern::ParseDrawMode(const QDomNode &node, const Document &parse, const 
 {
     SCASSERT(sceneDraw != nullptr)
     SCASSERT(sceneDetail != nullptr)
-    VMainGraphicsScene *scene = mode == Draw::Calculation ? sceneDraw : sceneDetail;
-    static const QStringList tags({TagPoint,
-                                   TagLine,
-                                   TagSpline,
-                                   TagArc,
-                                   TagTools,
-                                   TagOperation,
-                                   TagElArc,
-                                   TagPath});
+
     const QDomNodeList nodeList = node.childNodes();
-    const qint32 num = nodeList.size();
-    for (qint32 i = 0; i < num; ++i)
+    for (qint32 i = 0; i < nodeList.size(); ++i)
     {
         QDomElement domElement = nodeList.at(i).toElement();
-        if (domElement.isNull() == false)
-        {
-            switch (tags.indexOf(domElement.tagName()))
-            {
-                case 0: // TagPoint
-                    qCDebug(vXML, "Tag point.");
-                    ParsePointElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
-                    break;
-                case 1: // TagLine
-                    qCDebug(vXML, "Tag line.");
-                    ParseLineElement(scene, domElement, parse);
-                    break;
-                case 2: // TagSpline
-                    qCDebug(vXML, "Tag spline.");
-                    ParseSplineElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
-                    break;
-                case 3: // TagArc
-                    qCDebug(vXML, "Tag arc.");
-                    ParseArcElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
-                    break;
-                case 4: // TagTools
-                    qCDebug(vXML, "Tag tools.");
-                    ParseToolsElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
-                    break;
-                case 5: // TagOperation
-                    qCDebug(vXML, "Tag operation.");
-                    ParseOperationElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
-                    break;
-                case 6: // TagElArc
-                    qCDebug(vXML, "Tag elliptical arc.");
-                    ParseEllipticalArcElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
-                    break;
-                case 7: // TagPath
-                    qCDebug(vXML, "Tag path.");
-                    ParsePathElement(scene, domElement, parse);
-                    break;
-                default:
-                    VException e(tr("Wrong tag name '%1'.").arg(domElement.tagName()));
-                    throw e;
-            }
-        }
+        ParseDrawModeElement(domElement, parse, mode);
     }
 
     if (parse == Document::FullParse)
     {
         emit MadeProgress();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseDrawModeElement(QDomElement &domElement, const Document &parse, const Draw &mode)
+{
+    VMainGraphicsScene *scene = mode == Draw::Calculation ? sceneDraw : sceneDetail;
+    static const QStringList tags({TagPoint, TagLine, TagSpline, TagArc, TagTools, TagOperation, TagElArc, TagPath});
+
+    if (domElement.isNull())
+    {
+        return;
+    }
+
+    switch (tags.indexOf(domElement.tagName()))
+    {
+        case 0: // TagPoint
+            qCDebug(vXML, "Tag point.");
+            ParsePointElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
+            break;
+        case 1: // TagLine
+            qCDebug(vXML, "Tag line.");
+            ParseLineElement(scene, domElement, parse);
+            break;
+        case 2: // TagSpline
+            qCDebug(vXML, "Tag spline.");
+            ParseSplineElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
+            break;
+        case 3: // TagArc
+            qCDebug(vXML, "Tag arc.");
+            ParseArcElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
+            break;
+        case 4: // TagTools
+            qCDebug(vXML, "Tag tools.");
+            ParseToolsElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
+            break;
+        case 5: // TagOperation
+            qCDebug(vXML, "Tag operation.");
+            ParseOperationElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
+            break;
+        case 6: // TagElArc
+            qCDebug(vXML, "Tag elliptical arc.");
+            ParseEllipticalArcElement(scene, domElement, parse, domElement.attribute(AttrType, QString()));
+            break;
+        case 7: // TagPath
+            qCDebug(vXML, "Tag path.");
+            ParsePathElement(scene, domElement, parse);
+            break;
+        default:
+            throw VException(tr("Wrong tag name '%1'.").arg(domElement.tagName()));
     }
 }
 
@@ -1119,7 +1134,7 @@ void VPattern::ParseDetailInternals(const QDomElement &domElement, VPiece &detai
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VPieceNode> VPattern::ParseDetailNodes(const QDomElement &domElement, qreal width, bool closed) const
+auto VPattern::ParseDetailNodes(const QDomElement &domElement, qreal width, bool closed) const -> QVector<VPieceNode>
 {
     QVector<VNodeDetail> oldNodes;
     const QDomNodeList nodeList = domElement.childNodes();
@@ -1137,7 +1152,7 @@ QVector<VPieceNode> VPattern::ParseDetailNodes(const QDomElement &domElement, qr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceLabelData VPattern::ParsePieceDataTag(const QDomElement &domElement, VPieceLabelData ppData) const
+auto VPattern::ParsePieceDataTag(const QDomElement &domElement, VPieceLabelData ppData) const -> VPieceLabelData
 {
     ppData.SetVisible(GetParametrBool(domElement, AttrVisible, trueStr));
     ppData.SetLetter(GetParametrEmptyString(domElement, AttrLetter));
@@ -1178,7 +1193,8 @@ VPieceLabelData VPattern::ParsePieceDataTag(const QDomElement &domElement, VPiec
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPatternLabelData VPattern::ParsePiecePatternInfo(const QDomElement &domElement, VPatternLabelData patternInfo) const
+auto VPattern::ParsePiecePatternInfo(const QDomElement &domElement, VPatternLabelData patternInfo) const
+    -> VPatternLabelData
 {
     patternInfo.SetVisible(GetParametrBool(domElement, AttrVisible, trueStr));
     patternInfo.SetPos(QPointF(GetParametrDouble(domElement, AttrMx, QChar('0')),
@@ -1210,7 +1226,7 @@ VPatternLabelData VPattern::ParsePiecePatternInfo(const QDomElement &domElement,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VGrainlineData VPattern::ParsePieceGrainline(const QDomElement &domElement, VGrainlineData gGeometry) const
+auto VPattern::ParsePieceGrainline(const QDomElement &domElement, VGrainlineData gGeometry) const -> VGrainlineData
 {
     gGeometry.SetVisible(GetParametrBool(domElement, AttrVisible, falseStr));
     gGeometry.SetPos(QPointF(GetParametrDouble(domElement, AttrMx, QChar('0')),
@@ -1315,8 +1331,8 @@ void VPattern::DrawPointsCommonAttributes(const QDomElement &domElement, quint32
  * @param parse parser file mode.
  * @param type type of point.
  */
-void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElement,
-                                 const Document &parse, const QString &type)
+void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse,
+                                 const QString &type)
 {
     SCASSERT(scene != nullptr)
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
@@ -1486,7 +1502,7 @@ void VPattern::ParseCurrentPP()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPattern::GetLabelBase(quint32 index) const
+auto VPattern::GetLabelBase(quint32 index) const -> QString
 {
     QStringList alphabet;
     switch (VApplication::LabelLanguages().indexOf(GetLabelPrefix()))
@@ -3536,7 +3552,7 @@ void VPattern::ParseToolMove(VMainGraphicsScene *scene, QDomElement &domElement,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPattern::EvalFormula(VContainer *data, const QString &formula, bool *ok) const
+auto VPattern::EvalFormula(VContainer *data, const QString &formula, bool *ok) const -> qreal
 {
     if (formula.isEmpty())
     {
@@ -3563,7 +3579,7 @@ qreal VPattern::EvalFormula(VContainer *data, const QString &formula, bool *ok) 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPattern::MakeEmptyIncrement(const QString &name, IncrementType type)
+auto VPattern::MakeEmptyIncrement(const QString &name, IncrementType type) -> QDomElement
 {
     QDomElement element = createElement(TagIncrement);
     SetAttribute(element, AttrName, name);
@@ -3575,7 +3591,7 @@ QDomElement VPattern::MakeEmptyIncrement(const QString &name, IncrementType type
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPattern::FindIncrement(const QString &name) const
+auto VPattern::FindIncrement(const QString &name) const -> QDomElement
 {
     QDomNodeList list = elementsByTagName(TagIncrement);
 
@@ -3740,7 +3756,7 @@ void VPattern::SetIncrementAttribute(const QString &name, const QString &attr, c
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPattern::LastDrawName() const
+auto VPattern::LastDrawName() const -> QString
 {
     const QDomNodeList elements = this->documentElement().elementsByTagName(TagDraw);
     if (elements.size() == 0)
@@ -3758,7 +3774,7 @@ QString VPattern::LastDrawName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VPattern::LastToolId() const
+auto VPattern::LastToolId() const -> quint32
 {
     const QString name = LastDrawName();
     if (name.isEmpty())
@@ -3770,7 +3786,7 @@ quint32 VPattern::LastToolId() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VPattern::PPLastToolId(const QString &name) const
+auto VPattern::PPLastToolId(const QString &name) const -> quint32
 {
     const QVector<VToolRecord> localHistory = getLocalHistory(name);
 
@@ -4317,7 +4333,7 @@ void VPattern::ReplaceNameInFormula(QVector<VFormulaField> &expressions, const Q
  * @param reservedName reversed point name. Use when need reserve name, but point is not in data base yet.
  * @return unique name for current pattern piece.
  */
-QString VPattern::GenerateLabel(const LabelType &type, const QString &reservedName) const
+auto VPattern::GenerateLabel(const LabelType &type, const QString &reservedName) const -> QString
 {
     if (type == LabelType::NewPatternPiece)
     {
@@ -4363,7 +4379,7 @@ QString VPattern::GenerateLabel(const LabelType &type, const QString &reservedNa
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPattern::GenerateSuffix() const
+auto VPattern::GenerateSuffix() const -> QString
 {
     const QString suffixBase = GetLabelBase(static_cast<quint32>(GetIndexActivPP())).toLower();
     const QStringList uniqueNames = data->AllUniqueNames();
@@ -4397,7 +4413,7 @@ QString VPattern::GenerateSuffix() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPattern::IsReadOnly() const
+auto VPattern::IsReadOnly() const -> bool
 {
     const QDomElement pattern = documentElement();
 
@@ -4422,7 +4438,7 @@ void VPattern::SetReadOnly(bool rOnly)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPattern::GetLabelPrefix() const
+auto VPattern::GetLabelPrefix() const -> QString
 {
     const QDomElement pattern = documentElement();
 
@@ -4511,7 +4527,7 @@ void VPattern::DrawToolsCommonAttributes(const QDomElement &domElement, quint32 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
 
-QRectF VPattern::ActiveDrawBoundingRect() const
+auto VPattern::ActiveDrawBoundingRect() const -> QRectF
 {
     // This check helps to find missed tools in the switch
     Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Not all tools were used.");
@@ -4611,8 +4627,7 @@ QRectF VPattern::ActiveDrawBoundingRect() const
 QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-QRectF VPattern::ToolBoundingRect(const QRectF &rec, quint32 id) const
+template <typename T> auto VPattern::ToolBoundingRect(const QRectF &rec, quint32 id) const -> QRectF
 {
     QRectF recTool = rec;
     if (tools.contains(id))

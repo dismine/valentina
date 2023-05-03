@@ -38,7 +38,7 @@
 
 namespace
 {
-QString PrepareValidNameChars()
+auto PrepareValidNameChars() -> QString
 {
     qmu::QmuFormulaBase parser;
     parser.InitCharSets();
@@ -64,7 +64,7 @@ TST_AbstractRegExp::~TST_AbstractRegExp()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int TST_AbstractRegExp::LoadVariables(const QString &checkedLocale)
+auto TST_AbstractRegExp::LoadVariables(const QString &checkedLocale) -> int
 {
     const QString path = TranslationsPath();
     const QString file = QString("valentina_%1.qm").arg(checkedLocale);

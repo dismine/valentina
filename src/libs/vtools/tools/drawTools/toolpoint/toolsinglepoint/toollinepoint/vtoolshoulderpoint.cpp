@@ -99,8 +99,8 @@ void VToolShoulderPoint::SetDialog()
  * @param length length form shoulder point to our.
  * @return point.
  */
-QPointF VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Line, const QPointF &pShoulder,
-                                      const qreal &length)
+auto VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Line, const QPointF &pShoulder,
+                                   const qreal &length) -> QPointF
 {
     QPointF shoulderPoint = p2Line; // Position if result was not found
     if (length <= 0)
@@ -144,8 +144,8 @@ QPointF VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Li
  * @param data container with variables.
  * @return the created tool
  */
-VToolShoulderPoint* VToolShoulderPoint::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                               VAbstractPattern *doc, VContainer *data)
+auto VToolShoulderPoint::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                                VContainer *data) -> VToolShoulderPoint *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogShoulderPoint> dialogTool = qobject_cast<DialogShoulderPoint *>(dialog);
@@ -180,7 +180,7 @@ VToolShoulderPoint* VToolShoulderPoint::Create(const QPointer<DialogTool> &dialo
  * @param initData init data.
  * @return the created tool
  */
-VToolShoulderPoint* VToolShoulderPoint::Create(VToolShoulderPointInitData &initData)
+auto VToolShoulderPoint::Create(VToolShoulderPointInitData &initData) -> VToolShoulderPoint *
 {
     const QSharedPointer<VPointF> firstPoint = initData.data->GeometricObject<VPointF>(initData.p1Line);
     const QSharedPointer<VPointF> secondPoint = initData.data->GeometricObject<VPointF>(initData.p2Line);
@@ -229,13 +229,13 @@ VToolShoulderPoint* VToolShoulderPoint::Create(VToolShoulderPointInitData &initD
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolShoulderPoint::SecondPointName() const
+auto VToolShoulderPoint::SecondPointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(p2Line)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolShoulderPoint::ShoulderPointName() const
+auto VToolShoulderPoint::ShoulderPointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(pShoulder)->name();
 }
@@ -330,7 +330,7 @@ void VToolShoulderPoint::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolShoulderPoint::MakeToolTip() const
+auto VToolShoulderPoint::MakeToolTip() const -> QString
 {
     const QSharedPointer<VPointF> first = VAbstractTool::data.GeometricObject<VPointF>(basePointId);
     const QSharedPointer<VPointF> second = VAbstractTool::data.GeometricObject<VPointF>(p2Line);

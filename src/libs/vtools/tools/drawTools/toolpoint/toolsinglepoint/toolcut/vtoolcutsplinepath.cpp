@@ -98,8 +98,8 @@ void VToolCutSplinePath::SetDialog()
  * @param doc dom document container.
  * @param data container with variables.
  */
-VToolCutSplinePath* VToolCutSplinePath::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                               VAbstractPattern *doc, VContainer *data)
+auto VToolCutSplinePath::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                                VContainer *data) -> VToolCutSplinePath *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogCutSplinePath> dialogTool = qobject_cast<DialogCutSplinePath *>(dialog);
@@ -131,7 +131,7 @@ VToolCutSplinePath* VToolCutSplinePath::Create(const QPointer<DialogTool> &dialo
  * @brief Create help create tool.
  * @param initData init data.
  */
-VToolCutSplinePath* VToolCutSplinePath::Create(VToolCutInitData &initData)
+auto VToolCutSplinePath::Create(VToolCutInitData &initData) -> VToolCutSplinePath *
 {
     const auto splPath = initData.data->GeometricObject<VAbstractCubicBezierPath>(initData.baseCurveId);
     SCASSERT(splPath != nullptr)
@@ -212,8 +212,9 @@ void VToolCutSplinePath::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPointF *VToolCutSplinePath::CutSplinePath(qreal length, const QSharedPointer<VAbstractCubicBezierPath> &splPath,
-                                           const QString &pName, VSplinePath **splPath1, VSplinePath **splPath2)
+auto VToolCutSplinePath::CutSplinePath(qreal length, const QSharedPointer<VAbstractCubicBezierPath> &splPath,
+                                       const QString &pName, VSplinePath **splPath1, VSplinePath **splPath2)
+    -> VPointF *
 {
     SCASSERT(splPath != nullptr)
 
@@ -373,7 +374,7 @@ void VToolCutSplinePath::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolCutSplinePath::MakeToolTip() const
+auto VToolCutSplinePath::MakeToolTip() const -> QString
 {
     const auto splPath = VAbstractTool::data.GeometricObject<VAbstractCubicBezierPath>(baseCurveId);
 

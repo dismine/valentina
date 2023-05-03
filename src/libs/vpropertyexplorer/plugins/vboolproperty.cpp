@@ -127,8 +127,7 @@ auto VPE::VBoolProperty::flags(int column) const -> Qt::ItemFlags
     {
         return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable;
     }
-    else
-        return VProperty::flags(column);
+    return VProperty::flags(column);
 }
 
 auto VPE::VBoolProperty::type() const -> QString

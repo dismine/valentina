@@ -75,17 +75,17 @@ class VToolSplinePath:public VAbstractSpline
 public:
     virtual ~VToolSplinePath() =default;
     virtual void SetDialog() override;
-    static VToolSplinePath *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
-                                   VAbstractPattern *doc, VContainer *data);
-    static VToolSplinePath *Create(VToolSplinePathInitData &initData, VSplinePath *path);
-    static VToolSplinePath *Create(VToolSplinePathInitData &initData);
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolSplinePath *;
+    static auto Create(VToolSplinePathInitData &initData, VSplinePath *path) -> VToolSplinePath *;
+    static auto Create(VToolSplinePathInitData &initData) -> VToolSplinePath *;
     static const QString ToolType;
     static const QString OldToolType;
     static void  UpdatePathPoints(VAbstractPattern *doc, QDomElement &element, const VSplinePath &path);
-    virtual int  type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::SplinePath)};
 
-    VSplinePath getSplinePath()const;
+    auto getSplinePath() const -> VSplinePath;
     void        setSplinePath(const VSplinePath &splPath);
 
     virtual void ShowVisualization(bool show) override;
@@ -131,7 +131,7 @@ private:
 
     VToolSplinePath(const VToolSplinePathInitData &initData, QGraphicsItem *parent = nullptr);
 
-    bool          IsMovable(int index) const;
+    auto IsMovable(int index) const -> bool;
     static void   AddPathPoint(VAbstractPattern *doc, QDomElement &domElement, const VSplinePoint &splPoint);
     void          UpdateControlPoints(const VSpline &spl, QSharedPointer<VSplinePath> &splPath,
                                       qint32 indexSpline) const;

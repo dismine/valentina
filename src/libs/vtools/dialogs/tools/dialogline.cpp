@@ -109,7 +109,7 @@ void DialogLine::SetTypeLine(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogLine::GetLineColor() const
+auto DialogLine::GetLineColor() const -> QString
 {
     return GetComboBoxCurrentData(ui->comboBoxLineColor, ColorBlack);
 }
@@ -221,7 +221,7 @@ void DialogLine::ChosenObject(quint32 id, const SceneObject &type)
  * @brief GetFirstPoint return id first point
  * @return id
  */
-quint32 DialogLine::GetFirstPoint() const
+auto DialogLine::GetFirstPoint() const -> quint32
 {
     return qvariant_cast<quint32>(ui->comboBoxFirstPoint->currentData());
 }
@@ -231,7 +231,7 @@ quint32 DialogLine::GetFirstPoint() const
  * @brief GetSecondPoint return id second point
  * @return id
  */
-quint32 DialogLine::GetSecondPoint() const
+auto DialogLine::GetSecondPoint() const -> quint32
 {
     return qvariant_cast<quint32>(ui->comboBoxSecondPoint->currentData());
 }
@@ -241,7 +241,7 @@ quint32 DialogLine::GetSecondPoint() const
  * @brief GetTypeLine return type of line
  * @return type
  */
-QString DialogLine::GetTypeLine() const
+auto DialogLine::GetTypeLine() const -> QString
 {
     return GetComboBoxCurrentData(ui->comboBoxLineType, TypeLineLine);
 }
@@ -253,7 +253,7 @@ void DialogLine::SetNotes(const QString &notes)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogLine::GetNotes() const
+auto DialogLine::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }

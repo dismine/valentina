@@ -43,16 +43,17 @@ class VExceptionConversionError final : public VException
 public:
     VExceptionConversionError(const QString &error, const QString &str) V_NOEXCEPT_EXPR (true);
     VExceptionConversionError(const VExceptionConversionError &e) V_NOEXCEPT_EXPR (true);
-    VExceptionConversionError &operator=(const VExceptionConversionError &e) V_NOEXCEPT_EXPR (true);
+    auto operator=(const VExceptionConversionError &e) V_NOEXCEPT_EXPR(true) -> VExceptionConversionError &;
     virtual         ~VExceptionConversionError() V_NOEXCEPT_EXPR (true) = default;
 
     Q_NORETURN virtual void raise() const override { throw *this; }
 
-    Q_REQUIRED_RESULT virtual VExceptionConversionError *clone() const override
+    Q_REQUIRED_RESULT virtual auto clone() const -> VExceptionConversionError * override
     { return new VExceptionConversionError(*this); }
 
-    virtual QString ErrorMessage() const override;
-    QString         String() const;
+    virtual auto ErrorMessage() const -> QString override;
+    auto String() const -> QString;
+
 protected:
     /** @brief str string, where happend error */
     QString         str;
@@ -63,7 +64,7 @@ protected:
  * @brief String return string, where happend error
  * @return string
  */
-inline QString VExceptionConversionError::String() const
+inline auto VExceptionConversionError::String() const -> QString
 {
     return str;
 }

@@ -48,9 +48,8 @@ public:
     explicit DialogPatternMaterials(const QMap<int, QString> &list, bool rememberPM, QWidget *parent = nullptr);
     virtual ~DialogPatternMaterials();
 
-
-    QMap<int, QString> GetPatternMaterials() const;
-    QStringList        GetKnownMaterials() const;
+    auto GetPatternMaterials() const -> QMap<int, QString>;
+    auto GetKnownMaterials() const -> QStringList;
 
 private:
     // cppcheck-suppress unknownMacro

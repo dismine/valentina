@@ -39,7 +39,7 @@ class VDecorationAligningDelegate : public QStyledItemDelegate
 public:
     explicit VDecorationAligningDelegate(Qt::Alignment alignment, QObject *parent = nullptr);
 
-    Qt::Alignment Alignment() const;
+    auto Alignment() const -> Qt::Alignment;
 
     void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
 
@@ -50,7 +50,7 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline Qt::Alignment VDecorationAligningDelegate::Alignment() const
+inline auto VDecorationAligningDelegate::Alignment() const -> Qt::Alignment
 {
     return m_alignment;
 }

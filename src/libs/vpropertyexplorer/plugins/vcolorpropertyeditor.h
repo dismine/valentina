@@ -52,21 +52,21 @@ public:
 
 
     //! Returns the color currently set
-    QColor GetColor() const;
+    auto GetColor() const -> QColor;
 
     //! A little helper function generating an image to represent a color
     //! \param color The color to fill the image with
     //! \size The size of the generated pixmap
     //! \return Returns a QPixmap
-    static QPixmap GetColorPixmap(const QColor& color, quint32 size = 16);
+    static auto GetColorPixmap(const QColor &color, quint32 size = 16) -> QPixmap;
 
     //! A helper function to convert a color into a string.
     //! \param color The color to fill the image with
     //! \return The color as string, usually in the format [RRR, GGG, BBB] (AAA)
-    static QString GetColorString(const QColor& color);
+    static auto GetColorString(const QColor &color) -> QString;
 
     //! Needed for proper event handling
-    virtual bool eventFilter(QObject *obj, QEvent *ev) override;
+    virtual auto eventFilter(QObject *obj, QEvent *ev) -> bool override;
 
 signals:
     //! This is emitted, when the user changes the color

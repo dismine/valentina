@@ -50,7 +50,7 @@ VPieceArea::VPieceArea(PieceAreaType type, quint32 pieceId, const VPiece &piece,
     QString shortName = PieceShortName(piece);
 
     VContainer tempData = *data;
-    auto currentSA = new VIncrement(&tempData, currentSeamAllowance);
+    auto *currentSA = new VIncrement(&tempData, currentSeamAllowance);
     currentSA->SetFormula(piece.GetSAWidth(), QString().setNum(piece.GetSAWidth()), true);
 
     tempData.AddVariable(currentSA);

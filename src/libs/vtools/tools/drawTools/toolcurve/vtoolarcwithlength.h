@@ -64,25 +64,25 @@ class VToolArcWithLength : public VToolAbstractArc
     Q_OBJECT // NOLINT
 public:
     virtual void     SetDialog() override;
-    static VToolArcWithLength* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
-                                      VAbstractPattern *doc, VContainer *data);
-    static VToolArcWithLength* Create(VToolArcWithLengthInitData &initData);
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolArcWithLength *;
+    static auto Create(VToolArcWithLengthInitData &initData) -> VToolArcWithLength *;
 
     static const QString ToolType;
-    virtual int      type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::ArcWithLength)};
-    virtual QString  getTagName() const override;
+    virtual auto getTagName() const -> QString override;
 
-    VFormula         GetFormulaRadius() const;
+    auto GetFormulaRadius() const -> VFormula;
     void             SetFormulaRadius(const VFormula &value);
 
-    VFormula         GetFormulaF1() const;
+    auto GetFormulaF1() const -> VFormula;
     void             SetFormulaF1(const VFormula &value);
 
-    VFormula         GetFormulaLength() const;
+    auto GetFormulaLength() const -> VFormula;
     void             SetFormulaLength(const VFormula &value);
 
-    qreal            GetApproximationScale() const;
+    auto GetApproximationScale() const -> qreal;
     void             SetApproximationScale(qreal value);
 
     virtual void     ShowVisualization(bool show) override;
@@ -94,7 +94,8 @@ protected:
                                QList<quint32> &newDependencies) override;
     virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     virtual void    SetVisualization() override;
-    virtual QString MakeToolTip() const override;
+    virtual auto MakeToolTip() const -> QString override;
+
 private:
     Q_DISABLE_COPY_MOVE(VToolArcWithLength) // NOLINT
 

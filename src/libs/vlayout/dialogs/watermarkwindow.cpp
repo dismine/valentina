@@ -149,13 +149,13 @@ WatermarkWindow::~WatermarkWindow()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString WatermarkWindow::CurrentFile() const
+auto WatermarkWindow::CurrentFile() const -> QString
 {
     return m_curFile;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool WatermarkWindow::Open(QString path)
+auto WatermarkWindow::Open(QString path) -> bool
 {
     qDebug("Loading new watermark file %s.", qUtf8Printable(path));
 
@@ -302,7 +302,7 @@ void WatermarkWindow::on_actionNew_triggered()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool WatermarkWindow::on_actionSaveAs_triggered()
+auto WatermarkWindow::on_actionSaveAs_triggered() -> bool
 {
     QString filters(tr("Watermark files") + QLatin1String("(*.vwm)"));
     QString dir;
@@ -378,7 +378,7 @@ bool WatermarkWindow::on_actionSaveAs_triggered()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool WatermarkWindow::on_actionSave_triggered()
+auto WatermarkWindow::on_actionSave_triggered() -> bool
 {
     if (m_curFile.isEmpty())
     {
@@ -488,7 +488,7 @@ void WatermarkWindow::WatermarkChangesWereSaved(bool saved)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool WatermarkWindow::MaybeSave()
+auto WatermarkWindow::MaybeSave() -> bool
 {
     if (this->isWindowModified())
     {
@@ -573,7 +573,7 @@ void WatermarkWindow::UpdateWindowTitle()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString WatermarkWindow::GetWatermarkFileName()
+auto WatermarkWindow::GetWatermarkFileName() -> QString
 {
     QString shownName = tr("untitled.vwm");
     if(not m_curFile.isEmpty())
@@ -585,7 +585,8 @@ QString WatermarkWindow::GetWatermarkFileName()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool WatermarkWindow::ContinueFormatRewrite(const QString &currentFormatVersion, const QString &maxFormatVersion)
+auto WatermarkWindow::ContinueFormatRewrite(const QString &currentFormatVersion, const QString &maxFormatVersion)
+    -> bool
 {
     if (VAbstractApplication::VApp()->Settings()->GetConfirmFormatRewriting())
     {
@@ -651,7 +652,7 @@ void WatermarkWindow::SetCurrentFile(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool WatermarkWindow::OpenNewEditor(const QString &fileName) const
+auto WatermarkWindow::OpenNewEditor(const QString &fileName) const -> bool
 {
     if (this->isWindowModified() || not m_curFile.isEmpty())
     {
@@ -672,7 +673,7 @@ void WatermarkWindow::Clear()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool WatermarkWindow::IgnoreLocking(int error, const QString &path)
+auto WatermarkWindow::IgnoreLocking(int error, const QString &path) -> bool
 {
     QMessageBox::StandardButton answer = QMessageBox::Abort;
     switch(error)

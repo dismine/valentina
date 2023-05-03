@@ -130,10 +130,10 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, quint32 toolId, QWidg
     connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogSplinePath::ValidateAlias);
 
     vis = new VisToolSplinePath(data);
-    auto path = qobject_cast<VisToolSplinePath *>(vis);
+    auto *path = qobject_cast<VisToolSplinePath *>(vis);
     SCASSERT(path != nullptr)
 
-    auto scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
+    auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
     SCASSERT(scene != nullptr)
     connect(scene, &VMainGraphicsScene::MouseLeftPressed, path, &VisToolSplinePath::MouseLeftPressed);
     connect(scene, &VMainGraphicsScene::MouseLeftReleased, path, &VisToolSplinePath::MouseLeftReleased);
@@ -178,7 +178,7 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
     ChangeCurrentData(ui->comboBoxPenStyle, path.GetPenStyle());
     ChangeCurrentData(ui->comboBoxColor, path.GetColor());
 
-    auto visPath = qobject_cast<VisToolSplinePath *>(vis);
+    auto *visPath = qobject_cast<VisToolSplinePath *>(vis);
     SCASSERT(visPath != nullptr)
     visPath->SetPath(path);
     ui->listWidget->blockSignals(false);
@@ -209,7 +209,7 @@ void DialogSplinePath::ChosenObject(quint32 id, const SceneObject &type)
 
         SavePath();
 
-        auto visPath = qobject_cast<VisToolSplinePath *>(vis);
+        auto *visPath = qobject_cast<VisToolSplinePath *>(vis);
         SCASSERT(visPath != nullptr)
         visPath->SetPath(path);
 
@@ -240,7 +240,7 @@ void DialogSplinePath::SaveData()
     SavePath();
     newDuplicate <= -1 ? path.SetDuplicate(d) : path.SetDuplicate(static_cast<quint32>(newDuplicate));
 
-    auto visPath = qobject_cast<VisToolSplinePath *>(vis);
+    auto *visPath = qobject_cast<VisToolSplinePath *>(vis);
     SCASSERT(visPath != nullptr)
     visPath->SetPath(path);
     visPath->SetMode(Mode::Show);
@@ -933,7 +933,7 @@ void DialogSplinePath::SavePath()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSet<quint32> DialogSplinePath::AllIds() const
+auto DialogSplinePath::AllIds() const -> QSet<quint32>
 {
     QSet<quint32> ids;
     for (qint32 i = 0; i < ui->listWidget->count(); ++i)
@@ -945,7 +945,7 @@ QSet<quint32> DialogSplinePath::AllIds() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogSplinePath::IsPathValid() const
+auto DialogSplinePath::IsPathValid() const -> bool
 {
     if (path.CountPoints() < 3)
     {
@@ -956,7 +956,7 @@ bool DialogSplinePath::IsPathValid() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSplinePath DialogSplinePath::ExtractPath() const
+auto DialogSplinePath::ExtractPath() const -> VSplinePath
 {
     QVector<VSplinePoint> points;
     for (qint32 i = 0; i < ui->listWidget->count(); ++i)
@@ -989,7 +989,7 @@ void DialogSplinePath::ShowPointIssue(const QString &pName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogSplinePath::IsValid() const
+auto DialogSplinePath::IsValid() const -> bool
 {
     bool fAngle1 = true, fAngle2 = true, fLength1 = true, fLength2 = true;
 
@@ -1050,7 +1050,7 @@ void DialogSplinePath::SetNotes(const QString &notes)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogSplinePath::GetNotes() const
+auto DialogSplinePath::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }

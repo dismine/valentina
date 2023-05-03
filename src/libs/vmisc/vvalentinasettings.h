@@ -45,125 +45,125 @@ public:
               QObject *parent = nullptr);
     VValentinaSettings(const QString &fileName, Format format, QObject *parent = nullptr);
 
-    QString GetLabelLanguage() const;
+    auto GetLabelLanguage() const -> QString;
     void SetLabelLanguage(const QString &value);
 
-    static QString GetDefPathLayout();
-    QString GetPathLayout() const;
+    static auto GetDefPathLayout() -> QString;
+    auto GetPathLayout() const -> QString;
     void SetPathLayout(const QString &value);
 
     // Layout settings
-    qreal GetLayoutPaperHeight() const;
+    auto GetLayoutPaperHeight() const -> qreal;
     void SetLayoutPaperHeight(qreal value);
 
-    qreal GetLayoutPaperWidth() const;
+    auto GetLayoutPaperWidth() const -> qreal;
     void SetLayoutPaperWidth(qreal value);
 
-    qreal GetLayoutWidth() const;
-    static qreal GetDefLayoutWidth();
+    auto GetLayoutWidth() const -> qreal;
+    static auto GetDefLayoutWidth() -> qreal;
     void SetLayoutWidth(qreal value);
 
-    int  GetNestingTime() const;
-    static int GetDefNestingTime(){return 1;}
+    auto GetNestingTime() const -> int;
+    static auto GetDefNestingTime() -> int { return 1; }
     void SetNestingTime(int value);
 
-    qreal GetEfficiencyCoefficient() const;
-    static qreal GetDefEfficiencyCoefficient(){return 0.0;}
+    auto GetEfficiencyCoefficient() const -> qreal;
+    static auto GetDefEfficiencyCoefficient() -> qreal { return 0.0; }
     void SetEfficiencyCoefficient(qreal value);
 
-    QMarginsF GetFields(const QMarginsF &def = QMarginsF()) const;
+    auto GetFields(const QMarginsF &def = QMarginsF()) const -> QMarginsF;
     void SetFields(const QMarginsF &value);
 
-    Cases GetLayoutGroup() const;
-    static Cases GetDefLayoutGroup();
+    auto GetLayoutGroup() const -> Cases;
+    static auto GetDefLayoutGroup() -> Cases;
     void SetLayoutGroup(const Cases &value);
 
-    bool GetLayoutFollowGrainline() const;
-    static bool GetDefLayoutFollowGrainline();
+    auto GetLayoutFollowGrainline() const -> bool;
+    static auto GetDefLayoutFollowGrainline() -> bool;
     void SetLayoutFollowGrainline(bool value);
 
-    bool GetLayoutManualPriority() const;
-    static bool GetDefLayoutManualPriority();
+    auto GetLayoutManualPriority() const -> bool;
+    static auto GetDefLayoutManualPriority() -> bool;
     void SetLayoutManualPriority(bool value);
 
-    bool GetLayoutNestQuantity() const;
-    static bool GetDefLayoutNestQuantity();
+    auto GetLayoutNestQuantity() const -> bool;
+    static auto GetDefLayoutNestQuantity() -> bool;
     void SetLayoutNestQuantity(bool value);
 
-    bool GetLayoutAutoCropLength() const;
-    static bool GetDefLayoutAutoCropLength();
+    auto GetLayoutAutoCropLength() const -> bool;
+    static auto GetDefLayoutAutoCropLength() -> bool;
     void SetLayoutAutoCropLength(bool value);
 
-    bool GetLayoutAutoCropWidth() const;
-    static bool GetDefLayoutAutoCropWidth();
+    auto GetLayoutAutoCropWidth() const -> bool;
+    static auto GetDefLayoutAutoCropWidth() -> bool;
     void SetLayoutAutoCropWidth(bool value);
 
-    bool GetLayoutSaveLength() const;
-    static bool GetDefLayoutSaveLength();
+    auto GetLayoutSaveLength() const -> bool;
+    static auto GetDefLayoutSaveLength() -> bool;
     void SetLayoutSaveLength(bool value);
 
-    bool GetLayoutPreferOneSheetSolution() const;
-    static bool GetDefLayoutPreferOneSheetSolution();
+    auto GetLayoutPreferOneSheetSolution() const -> bool;
+    static auto GetDefLayoutPreferOneSheetSolution() -> bool;
     void SetLayoutPreferOneSheetSolution(bool value);
 
-    bool GetLayoutUnitePages() const;
-    static bool GetDefLayoutUnitePages();
+    auto GetLayoutUnitePages() const -> bool;
+    static auto GetDefLayoutUnitePages() -> bool;
     void SetLayoutUnitePages(bool value);
 
-    bool GetIgnoreAllFields() const;
-    static bool GetDefIgnoreAllFields();
+    auto GetIgnoreAllFields() const -> bool;
+    static auto GetDefIgnoreAllFields() -> bool;
     void SetIgnoreAllFields(bool value);
 
-    bool GetStripOptimization() const;
-    static bool GetDefStripOptimization();
+    auto GetStripOptimization() const -> bool;
+    static auto GetDefStripOptimization() -> bool;
     void SetStripOptimization(bool value);
 
-    quint8 GetMultiplier() const;
-    static quint8 GetDefMultiplier();
+    auto GetMultiplier() const -> quint8;
+    static auto GetDefMultiplier() -> quint8;
     void SetMultiplier(quint8 value);
 
-    bool GetTextAsPaths() const;
-    static bool GetDefTextAsPaths();
+    auto GetTextAsPaths() const -> bool;
+    static auto GetDefTextAsPaths() -> bool;
     void SetTextAsPaths(bool value);
 
-    QStringList GetKnownMaterials() const;
+    auto GetKnownMaterials() const -> QStringList;
     void        SetKnownMaterials(const QStringList &list);
 
-    bool IsRememberPatternMaterials() const;
+    auto IsRememberPatternMaterials() const -> bool;
     void SetRememberPatternMaterials(bool value);
 
     // settings for the tiled PDFs
-    qreal GetTiledPDFPaperHeight(const Unit &unit) const;
+    auto GetTiledPDFPaperHeight(const Unit &unit) const -> qreal;
     void  SetTiledPDFPaperHeight(qreal value, const Unit &unit);
 
-    qreal GetTiledPDFPaperWidth(const Unit &unit) const;
+    auto GetTiledPDFPaperWidth(const Unit &unit) const -> qreal;
     void  SetTiledPDFPaperWidth(qreal value, const Unit &unit);
 
-    bool IsDockWidgetGroupsActive() const;
-    static bool GetDefDockWidgetGroupsActive();
+    auto IsDockWidgetGroupsActive() const -> bool;
+    static auto GetDefDockWidgetGroupsActive() -> bool;
     void SetDockWidgetGroupsActive(bool value);
 
-    bool IsDockWidgetToolOptionsActive() const;
-    static bool GetDefDockWidgetToolOptionsActive();
+    auto IsDockWidgetToolOptionsActive() const -> bool;
+    static auto GetDefDockWidgetToolOptionsActive() -> bool;
     void SetDockWidgetToolOptionsActive(bool value);
 
-    bool IsDockWidgetPatternMessagesActive() const;
-    static bool GetDefDockWidgetPatternMessagesActive();
+    auto IsDockWidgetPatternMessagesActive() const -> bool;
+    static auto GetDefDockWidgetPatternMessagesActive() -> bool;
     void SetDockWidgetPatternMessagesActive(bool value);
 
-    bool IsDockWidgetBackgroundImagesActive() const;
-    static bool GetDefDockWidgetBackgroundImagesActive();
+    auto IsDockWidgetBackgroundImagesActive() const -> bool;
+    static auto GetDefDockWidgetBackgroundImagesActive() -> bool;
     void SetDockWidgetBackgroundImagesActive(bool value);
 
-    int GetPatternMessageFontSize(int fontSizeDef) const;
-    static int GetDefMinPatternMessageFontSize();
-    static int GetDefMaxPatternMessageFontSize();
+    auto GetPatternMessageFontSize(int fontSizeDef) const -> int;
+    static auto GetDefMinPatternMessageFontSize() -> int;
+    static auto GetDefMaxPatternMessageFontSize() -> int;
     void SetPatternMessageFontSize(int size);
 
-    bool GetAutoRefreshPatternMessage() const;
+    auto GetAutoRefreshPatternMessage() const -> bool;
     void SetAutoRefreshPatternMessage(bool value);
 
-    bool GetToolPanelScaling() const;
+    auto GetToolPanelScaling() const -> bool;
     void SetToolPanelScaling(const bool &value);
 
     auto GetLayoutExportFormat() const -> qint8;
@@ -235,14 +235,14 @@ public:
     auto GetBackgroundImageDefOpacity() const -> int;
     void SetBackgroundImageDefOpacity(int value);
 
-    bool GetShowGrainline() const;
+    auto GetShowGrainline() const -> bool;
     void SetShowGrainline(bool value);
 
 private:
     Q_DISABLE_COPY_MOVE(VValentinaSettings) // NOLINT
 
     template <typename T>
-    T GetCachedValue(T &cache, const QString &setting, T defValue, T valueMin, T valueMax) const;  
+    auto GetCachedValue(T &cache, const QString &setting, T defValue, T valueMin, T valueMax) const -> T;
 };
 
 #endif // VVALENTINASETTINGS_H

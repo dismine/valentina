@@ -24,7 +24,8 @@
 *  Base class for tables entries
 *  @author Rallaz
 */
-bool DRW_TableEntry::parseCode(int code, dxfReader *reader){
+auto DRW_TableEntry::parseCode(int code, dxfReader *reader) -> bool
+{
     switch (code) {
     case 5:
         handle = static_cast<duint32>(reader->getHandleString());
@@ -112,7 +113,8 @@ bool DRW_TableEntry::parseCode(int code, dxfReader *reader){
 *  Class to handle ldim style symbol table entries
 *  @author Rallaz
 */
-bool DRW_Dimstyle::parseCode(int code, dxfReader *reader){
+auto DRW_Dimstyle::parseCode(int code, dxfReader *reader) -> bool
+{
     switch (code) {
     case 105:
         handle = static_cast<duint32>(reader->getHandleString());
@@ -336,7 +338,8 @@ bool DRW_Dimstyle::parseCode(int code, dxfReader *reader){
 *  Class to handle line type symbol table entries
 *  @author Rallaz
 */
-bool DRW_LType::parseCode(int code, dxfReader *reader){
+auto DRW_LType::parseCode(int code, dxfReader *reader) -> bool
+{
     switch (code) {
     case 3:
         desc = reader->getUtf8String();
@@ -385,7 +388,8 @@ void DRW_LType::update(){
 *  Class to handle layer symbol table entries
 *  @author Rallaz
 */
-bool DRW_Layer::parseCode(int code, dxfReader *reader){
+auto DRW_Layer::parseCode(int code, dxfReader *reader) -> bool
+{
     switch (code) {
     case 6:
         lineType = reader->getUtf8String();
@@ -420,7 +424,8 @@ bool DRW_Layer::parseCode(int code, dxfReader *reader){
 *  Class to handle text style symbol table entries
 *  @author Rallaz
 */
-bool DRW_Textstyle::parseCode(int code, dxfReader *reader){
+auto DRW_Textstyle::parseCode(int code, dxfReader *reader) -> bool
+{
     switch (code) {
     case 3:
         font = reader->getUtf8String();
@@ -458,7 +463,8 @@ bool DRW_Textstyle::parseCode(int code, dxfReader *reader){
 *  Class to handle vport symbol table entries
 *  @author Rallaz
 */
-bool DRW_Vport::parseCode(int code, dxfReader *reader){
+auto DRW_Vport::parseCode(int code, dxfReader *reader) -> bool
+{
     switch (code) {
     case 10:
         lowerLeft.x = reader->getDouble();
@@ -566,7 +572,8 @@ bool DRW_Vport::parseCode(int code, dxfReader *reader){
     return true;
 }
 
-bool DRW_ImageDef::parseCode(int code, dxfReader *reader){
+auto DRW_ImageDef::parseCode(int code, dxfReader *reader) -> bool
+{
     switch (code) {
     case 1:
         fileName = reader->getUtf8String();
@@ -602,7 +609,8 @@ bool DRW_ImageDef::parseCode(int code, dxfReader *reader){
     return true;
 }
 
-bool DRW_PlotSettings::parseCode(int code, dxfReader *reader){
+auto DRW_PlotSettings::parseCode(int code, dxfReader *reader) -> bool
+{
     switch (code) {
     case 5:
         handle = static_cast<duint32>(reader->getHandleString());

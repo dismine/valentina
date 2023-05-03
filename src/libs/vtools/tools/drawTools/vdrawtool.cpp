@@ -181,7 +181,7 @@ void VDrawTool::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VDrawTool::MakeToolTip() const
+auto VDrawTool::MakeToolTip() const -> QString
 {
     return QString();
 }
@@ -194,16 +194,14 @@ void VDrawTool::UpdateNamePosition(quint32 id, const QPointF &pos)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VDrawTool::CorrectDisable(bool disable, const QString &namePP) const
+auto VDrawTool::CorrectDisable(bool disable, const QString &namePP) const -> bool
 {
     if (disable)
     {
         return disable;
     }
-    else
-    {
-        return !(nameActivDraw == namePP);
-    }
+
+    return !(nameActivDraw == namePP);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -276,7 +274,7 @@ void VDrawTool::AddDependence(QList<quint32> &list, quint32 objectId) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VDrawTool::getLineType() const
+auto VDrawTool::getLineType() const -> QString
 {
     return m_lineType;
 }
@@ -291,14 +289,14 @@ void VDrawTool::SetLineType(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VDrawTool::IsLabelVisible(quint32 id) const
+auto VDrawTool::IsLabelVisible(quint32 id) const -> bool
 {
     Q_UNUSED(id)
     return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VDrawTool::GetNotes() const
+auto VDrawTool::GetNotes() const -> QString
 {
     return m_notes;
 }

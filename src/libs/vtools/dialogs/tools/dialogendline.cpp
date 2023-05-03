@@ -414,7 +414,7 @@ DialogEndLine::~DialogEndLine()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogEndLine::GetPointName() const
+auto DialogEndLine::GetPointName() const -> QString
 {
     return pointName;
 }
@@ -424,7 +424,7 @@ QString DialogEndLine::GetPointName() const
  * @brief GetTypeLine return type of line
  * @return type
  */
-QString DialogEndLine::GetTypeLine() const
+auto DialogEndLine::GetTypeLine() const -> QString
 {
     return GetComboBoxCurrentData(ui->comboBoxLineType, TypeLineLine);
 }
@@ -434,7 +434,7 @@ QString DialogEndLine::GetTypeLine() const
  * @brief GetFormula return string of formula
  * @return formula
  */
-QString DialogEndLine::GetFormula() const
+auto DialogEndLine::GetFormula() const -> QString
 {
     return VTranslateVars::TryFormulaFromUser(formulaLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
@@ -444,7 +444,7 @@ QString DialogEndLine::GetFormula() const
  * @brief GetAngle return formula angle of line
  * @return angle formula
  */
-QString DialogEndLine::GetAngle() const
+auto DialogEndLine::GetAngle() const -> QString
 {
     return VTranslateVars::TryFormulaFromUser(formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
@@ -454,7 +454,7 @@ QString DialogEndLine::GetAngle() const
  * @brief GetBasePointId return id base point of line
  * @return id
  */
-quint32 DialogEndLine::GetBasePointId() const
+auto DialogEndLine::GetBasePointId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxBasePoint);
 }
@@ -466,7 +466,7 @@ void DialogEndLine::SetNotes(const QString &notes)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogEndLine::GetNotes() const
+auto DialogEndLine::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }

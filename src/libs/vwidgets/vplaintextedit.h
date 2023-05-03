@@ -53,8 +53,8 @@ private:
     QString m_filter{};
     QStringList m_allLines{};
 
-    bool MatchLeftParenthesis(QTextBlock currentBlock, int i, int numLeftParentheses);
-    bool MatchRightParenthesis(QTextBlock currentBlock, int i, int numRightParentheses);
+    auto MatchLeftParenthesis(QTextBlock currentBlock, int i, int numLeftParentheses) -> bool;
+    auto MatchRightParenthesis(QTextBlock currentBlock, int i, int numRightParentheses) -> bool;
     void CreateParenthesisSelection(int pos, bool match = true);
     void Filter();
 };

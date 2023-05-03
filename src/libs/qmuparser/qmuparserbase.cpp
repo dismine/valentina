@@ -146,7 +146,7 @@ QmuParserBase::~QmuParserBase()
  * @return *this
  * @throw nothrow
  */
-QmuParserBase& QmuParserBase::operator=(const QmuParserBase &a_Parser)
+auto QmuParserBase::operator=(const QmuParserBase &a_Parser) -> QmuParserBase &
 {
     if (this != &a_Parser)
     {
@@ -247,7 +247,7 @@ void QmuParserBase::setAllowSubexpressions(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QLocale QmuParserBase::getLocale() const
+auto QmuParserBase::getLocale() const -> QLocale
 {
     return m_locale;
 }
@@ -261,7 +261,7 @@ void QmuParserBase::setLocale(const QLocale &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QChar QmuParserBase::getDecimalPoint() const
+auto QmuParserBase::getDecimalPoint() const -> QChar
 {
     return m_decimalPoint;
 }
@@ -273,7 +273,7 @@ void QmuParserBase::setDecimalPoint(const QChar &c)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QChar QmuParserBase::getThousandsSeparator() const
+auto QmuParserBase::getThousandsSeparator() const -> QChar
 {
     return m_thousandsSeparator;
 }
@@ -285,7 +285,7 @@ void QmuParserBase::setThousandsSeparator(const QChar &c)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool QmuParserBase::getCNumbers() const
+auto QmuParserBase::getCNumbers() const -> bool
 {
     return m_cNumbers;
 }
@@ -304,7 +304,7 @@ void QmuParserBase::setCNumbers(bool cNumbers)
  * Format is as follows: "MAJOR.MINOR (COMPILER_FLAGS)" The COMPILER_FLAGS are returned only if eInfo==pviFULL.
  */
 // cppcheck-suppress unusedFunction
-QString QmuParserBase::GetVersion(EParserVersionInfo eInfo)
+auto QmuParserBase::GetVersion(EParserVersionInfo eInfo) -> QString
 {
     QString versionInfo;
     QTextStream ss(&versionInfo);
@@ -464,7 +464,7 @@ void QmuParserBase::SetExpr(const QString &a_sExpr)
  * @brief Virtual function that defines the characters allowed in name identifiers.
  * @sa #ValidOprtChars, #ValidPrefixOprtChars
  */
-const QString& QmuParserBase::ValidNameChars() const
+auto QmuParserBase::ValidNameChars() const -> const QString &
 {
     assert(m_sNameChars.size());
     return m_sNameChars;
@@ -475,7 +475,7 @@ const QString& QmuParserBase::ValidNameChars() const
  * @brief Virtual function that defines the characters allowed in operator definitions.
  * @sa #ValidNameChars, #ValidPrefixOprtChars
  */
-const QString &QmuParserBase::ValidOprtChars() const
+auto QmuParserBase::ValidOprtChars() const -> const QString &
 {
     assert(m_sOprtChars.size());
     return m_sOprtChars;
@@ -486,7 +486,7 @@ const QString &QmuParserBase::ValidOprtChars() const
  * @brief Virtual function that defines the characters allowed in infix operator definitions.
  * @sa #ValidNameChars, #ValidOprtChars
  */
-const QString &QmuParserBase::ValidInfixOprtChars() const
+auto QmuParserBase::ValidInfixOprtChars() const -> const QString &
 {
     assert(m_sInfixOprtChars.size());
     return m_sInfixOprtChars;
@@ -630,7 +630,7 @@ void QmuParserBase::DefineConst(const QString &a_sName, qreal a_fVal)
  * @brief Get operator priority.
  * @throw ParserException if a_Oprt is no operator code
  */
-int QmuParserBase::GetOprtPrecedence(const token_type &a_Tok) const
+auto QmuParserBase::GetOprtPrecedence(const token_type &a_Tok) const -> int
 {
     switch (a_Tok.GetCode())
     {
@@ -678,7 +678,7 @@ int QmuParserBase::GetOprtPrecedence(const token_type &a_Tok) const
  * @brief Get operator priority.
  * @throw ParserException if a_Oprt is no operator code
  */
-EOprtAssociativity QmuParserBase::GetOprtAssociativity(const token_type &a_Tok) const
+auto QmuParserBase::GetOprtAssociativity(const token_type &a_Tok) const -> EOprtAssociativity
 {
     switch (a_Tok.GetCode())
     {
@@ -709,7 +709,7 @@ EOprtAssociativity QmuParserBase::GetOprtAssociativity(const token_type &a_Tok) 
 /**
  * @brief Return a map containing the used variables only.
  */
-const varmap_type& QmuParserBase::GetUsedVar() const
+auto QmuParserBase::GetUsedVar() const -> const varmap_type &
 {
     try
     {
@@ -737,8 +737,8 @@ const varmap_type& QmuParserBase::GetUsedVar() const
  * @param a_FunTok Function token.
  * @throw QmuParserError If the function token is not a string function
  */
-QmuParserBase::token_type QmuParserBase::ApplyStrFunc(const token_type &a_FunTok,
-                                                      const QVector<token_type> &a_vArg) const
+auto QmuParserBase::ApplyStrFunc(const token_type &a_FunTok, const QVector<token_type> &a_vArg) const
+    -> QmuParserBase::token_type
 {
     if (a_vArg.back().GetCode()!=cmSTRING)
     {
@@ -1007,7 +1007,7 @@ void QmuParserBase::ApplyRemainingOprt(QStack<token_type> &stOpt, QStack<token_t
  * Command code contains precalculated stack positions of the values and the associated operators. The Stack is
  * filled beginning from index one the value at index zero is not used at all.
  */
-qreal QmuParserBase::ParseCmdCode() const
+auto QmuParserBase::ParseCmdCode() const -> qreal
 {
     return ParseCmdCodeBulk(0, 0);
 }
@@ -1018,7 +1018,7 @@ qreal QmuParserBase::ParseCmdCode() const
  * @param nOffset The offset added to variable addresses (for bulk mode)
  * @param nThreadID OpenMP Thread id of the calling thread
  */
-qreal QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const
+auto QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const -> qreal
 {
     assert(nThreadID<=s_MaxNumOpenMPThreads);
 
@@ -1626,7 +1626,7 @@ void QmuParserBase::CreateRPN() const
  * creating the bytecode the function pointer #m_pParseFormula will be changed to the second parse routine the
  * uses bytecode instead of string parsing.
  */
-qreal QmuParserBase::ParseString() const
+auto QmuParserBase::ParseString() const -> qreal
 {
     try
     {
@@ -1801,7 +1801,7 @@ void QmuParserBase::EnableBuiltInOprt(bool a_bIsOn)
 /**
  * @brief Get the argument separator character.
  */
-QChar QmuParserBase::GetArgSep() const
+auto QmuParserBase::GetArgSep() const -> QChar
 {
     return m_pTokenReader->GetArgSep();
 }
@@ -1913,7 +1913,7 @@ void QmuParserBase::StackDump(const QStack<token_type> &a_stVal, const QStack<to
   * This member function can be used to retriev all results of an expression made up of multiple comma seperated
   * subexpressions (i.e. "x+y,sin(x),cos(y)")
   */
-qreal* QmuParserBase::Eval(int &nStackSize) const
+auto QmuParserBase::Eval(int &nStackSize) const -> qreal *
 {
     (this->*m_pParseFormula)();
     nStackSize = m_nFinalResultIdx;

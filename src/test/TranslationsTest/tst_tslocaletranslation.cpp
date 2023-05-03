@@ -328,7 +328,7 @@ void TST_TSLocaleTranslation::TestHTMLTags()
                                                   << QLatin1String("html")
                                                   << QLatin1String("body");
     static const QString pattern("{1}.*>");
-    for (auto &tag : tags)
+    for (const auto &tag : tags)
     {
         const QRegularExpression openRegex(QLatin1String("<") + tag + pattern,
                                            QRegularExpression::DotMatchesEverythingOption);

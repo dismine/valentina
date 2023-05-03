@@ -77,26 +77,26 @@ public:
                     QGraphicsItem * parent = nullptr);
     virtual ~VAbstractSpline() = default;
 
-    virtual QPainterPath shape() const override;
+    virtual auto shape() const -> QPainterPath override;
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
-    virtual int      type() const  override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::AbstractSpline)};
-    virtual QString  getTagName() const override;
+    virtual auto getTagName() const -> QString override;
     void             ShowHandles(bool show);
 
-    QString GetLineColor() const;
+    auto GetLineColor() const -> QString;
     void    SetLineColor(const QString &value);
 
-    QString GetPenStyle() const;
+    auto GetPenStyle() const -> QString;
     void    SetPenStyle(const QString &value);
 
-    QString name() const;
+    auto name() const -> QString;
 
-    qreal GetApproximationScale() const;
+    auto GetApproximationScale() const -> qreal;
 
-    quint32 GetDuplicate() const;
+    auto GetDuplicate() const -> quint32;
 
-    QString GetAliasSuffix() const;
+    auto GetAliasSuffix() const -> QString;
     void    SetAliasSuffix(QString alias);
 
     virtual void GroupVisibility(quint32 object, bool visible) override;
@@ -130,16 +130,17 @@ protected:
     virtual void     ShowTool(quint32 id, bool enable) override;
     virtual void     hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) override;
     virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) override;
-    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) override;
+    virtual auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
     virtual void     keyReleaseEvent(QKeyEvent * event) override;
     virtual void     mousePressEvent(QGraphicsSceneMouseEvent *event) override;
     virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
     virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     virtual void     RefreshCtrlPoints();
     virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) override;
-    virtual QString  MakeToolTip() const override;
+    virtual auto MakeToolTip() const -> QString override;
 
-    VSpline CorrectedSpline(const VSpline &spline, const SplinePointPosition &position, const QPointF &pos) const;
+    auto CorrectedSpline(const VSpline &spline, const SplinePointPosition &position, const QPointF &pos) const
+        -> VSpline;
 
     template <typename T>
     void ShowToolVisualization(bool show);
@@ -256,7 +257,8 @@ public:
                      QGraphicsItem *parent = nullptr);
     virtual ~VToolAbstractArc() = default;
 
-    QString CenterPointName() const;
+    auto CenterPointName() const -> QString;
+
 private:
     Q_DISABLE_COPY_MOVE(VToolAbstractArc) // NOLINT
 };

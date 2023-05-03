@@ -33,14 +33,14 @@
 
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream &operator<<(QDataStream &dataStream, const VLayoutPiecePath &path)
+auto operator<<(QDataStream &dataStream, const VLayoutPiecePath &path) -> QDataStream &
 {
     dataStream << *path.d;
     return dataStream;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream &operator>>(QDataStream &dataStream, VLayoutPiecePath &path)
+auto operator>>(QDataStream &dataStream, VLayoutPiecePath &path) -> QDataStream &
 {
     dataStream >> *path.d;
     return dataStream;
@@ -65,7 +65,7 @@ VLayoutPiecePath::VLayoutPiecePath(const VLayoutPiecePath &path)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutPiecePath &VLayoutPiecePath::operator=(const VLayoutPiecePath &path)
+auto VLayoutPiecePath::operator=(const VLayoutPiecePath &path) -> VLayoutPiecePath &
 {
     if ( &path == this )
     {
@@ -82,7 +82,7 @@ VLayoutPiecePath::VLayoutPiecePath(VLayoutPiecePath &&path) Q_DECL_NOTHROW
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutPiecePath &VLayoutPiecePath::operator=(VLayoutPiecePath &&path) Q_DECL_NOTHROW
+auto VLayoutPiecePath::operator=(VLayoutPiecePath &&path) Q_DECL_NOTHROW->VLayoutPiecePath &
 {
     std::swap(d, path.d);
     return *this;
@@ -95,7 +95,7 @@ VLayoutPiecePath::~VLayoutPiecePath()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VLayoutPiecePath::GetPainterPath() const
+auto VLayoutPiecePath::GetPainterPath() const -> QPainterPath
 {
     QPainterPath path;
     if (not d->m_points.isEmpty())
@@ -109,7 +109,7 @@ QPainterPath VLayoutPiecePath::GetPainterPath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VLayoutPoint> VLayoutPiecePath::Points() const
+auto VLayoutPiecePath::Points() const -> QVector<VLayoutPoint>
 {
     return d->m_points;
 }
@@ -121,7 +121,7 @@ void VLayoutPiecePath::SetPoints(const QVector<VLayoutPoint> &points)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Qt::PenStyle VLayoutPiecePath::PenStyle() const
+auto VLayoutPiecePath::PenStyle() const -> Qt::PenStyle
 {
     return d->m_penStyle;
 }
@@ -133,7 +133,7 @@ void VLayoutPiecePath::SetPenStyle(const Qt::PenStyle &penStyle)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutPiecePath::IsCutPath() const
+auto VLayoutPiecePath::IsCutPath() const -> bool
 {
     return d->m_cut;
 }

@@ -23,18 +23,19 @@ public:
     {}
 
     virtual ~dxfWriter() = default;
-    virtual bool writeString(int code, std::string text) = 0;
-    bool writeUtf8String(int code, const std::string &text);
-    bool writeUtf8Caps(int code, const std::string &text);
-    std::string fromUtf8String(const std::string &t) {return encoder.fromUtf8(t);}
-    virtual bool writeInt16(int code, int data) = 0;
-    virtual bool writeInt32(int code, int data) = 0;
-    virtual bool writeInt64(int code, unsigned long long int data) = 0;
-    virtual bool writeDouble(int code, double data) = 0;
-    virtual bool writeBool(int code, bool data) = 0;
+    virtual auto writeString(int code, std::string text) -> bool = 0;
+    auto writeUtf8String(int code, const std::string &text) -> bool;
+    auto writeUtf8Caps(int code, const std::string &text) -> bool;
+    auto fromUtf8String(const std::string &t) -> std::string { return encoder.fromUtf8(t); }
+    virtual auto writeInt16(int code, int data) -> bool = 0;
+    virtual auto writeInt32(int code, int data) -> bool = 0;
+    virtual auto writeInt64(int code, unsigned long long int data) -> bool = 0;
+    virtual auto writeDouble(int code, double data) -> bool = 0;
+    virtual auto writeBool(int code, bool data) -> bool = 0;
     void setVersion(const std::string &v, bool dxfFormat){encoder.setVersion(v, dxfFormat);}
     void setCodePage(const std::string &c){encoder.setCodePage(c, true);}
-    std::string getCodePage() const {return encoder.getCodePage();}
+    auto getCodePage() const -> std::string { return encoder.getCodePage(); }
+
 protected:
     std::ofstream *filestr;
 private:
@@ -48,24 +49,24 @@ public:
         : dxfWriter(stream)
     {}
     virtual ~dxfWriterBinary() = default;
-    virtual bool writeString(int code, std::string text) override;
-    virtual bool writeInt16(int code, int data) override;
-    virtual bool writeInt32(int code, int data) override;
-    virtual bool writeInt64(int code, unsigned long long int data) override;
-    virtual bool writeDouble(int code, double data) override;
-    virtual bool writeBool(int code, bool data) override;
+    virtual auto writeString(int code, std::string text) -> bool override;
+    virtual auto writeInt16(int code, int data) -> bool override;
+    virtual auto writeInt32(int code, int data) -> bool override;
+    virtual auto writeInt64(int code, unsigned long long int data) -> bool override;
+    virtual auto writeDouble(int code, double data) -> bool override;
+    virtual auto writeBool(int code, bool data) -> bool override;
 };
 
 class dxfWriterAscii final : public dxfWriter {
 public:
     explicit dxfWriterAscii(std::ofstream *stream);
     virtual ~dxfWriterAscii() = default;
-    virtual bool writeString(int code, std::string text) override;
-    virtual bool writeInt16(int code, int data) override;
-    virtual bool writeInt32(int code, int data) override;
-    virtual bool writeInt64(int code, unsigned long long int data) override;
-    virtual bool writeDouble(int code, double data) override;
-    virtual bool writeBool(int code, bool data) override;
+    virtual auto writeString(int code, std::string text) -> bool override;
+    virtual auto writeInt16(int code, int data) -> bool override;
+    virtual auto writeInt32(int code, int data) -> bool override;
+    virtual auto writeInt64(int code, unsigned long long int data) -> bool override;
+    virtual auto writeDouble(int code, double data) -> bool override;
+    virtual auto writeBool(int code, bool data) -> bool override;
 };
 
 #endif // DXFWRITER_H

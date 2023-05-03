@@ -110,7 +110,7 @@ void VElidedLabel::paintEvent(QPaintEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VElidedLabel::DrawParagraph(QPainter &painter, const QString& paragraph, int &y, bool &didElide)
+auto VElidedLabel::DrawParagraph(QPainter &painter, const QString &paragraph, int &y, bool &didElide) -> bool
 {
     QFontMetrics fontMetrics = painter.fontMetrics();
 

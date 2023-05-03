@@ -70,14 +70,14 @@ public:
     virtual void incrementReferens() override;
     virtual void decrementReferens() override;
 
-    ParentType GetParentType() const;
+    auto GetParentType() const -> ParentType;
     void       SetParentType(const ParentType &value);
 
-    quint32 GetIdTool() const;
+    auto GetIdTool() const -> quint32;
 
     virtual void GroupVisibility(quint32 object, bool visible) override;
 
-    bool IsExluded() const;
+    auto IsExluded() const -> bool;
     void SetExluded(bool exluded);
 
 protected:
@@ -104,7 +104,7 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline quint32 VAbstractNode::GetIdTool() const
+inline auto VAbstractNode::GetIdTool() const -> quint32
 {
     return idTool;
 }

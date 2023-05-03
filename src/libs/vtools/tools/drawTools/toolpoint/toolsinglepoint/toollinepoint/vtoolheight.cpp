@@ -92,8 +92,8 @@ void VToolHeight::SetDialog()
  * @param data container with variables.
  * @return the created tool
  */
-VToolHeight* VToolHeight::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                 VContainer *data)
+auto VToolHeight::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                         VContainer *data) -> VToolHeight *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogHeight> dialogTool = qobject_cast<DialogHeight *>(dialog);
@@ -126,7 +126,7 @@ VToolHeight* VToolHeight::Create(const QPointer<DialogTool> &dialog, VMainGraphi
  * @brief Create help create tool
  * @param initData init data.
  */
-VToolHeight* VToolHeight::Create(VToolHeightInitData initData)
+auto VToolHeight::Create(VToolHeightInitData initData) -> VToolHeight *
 {
     const QSharedPointer<VPointF> basePoint = initData.data->GeometricObject<VPointF>(initData.basePointId);
     const QSharedPointer<VPointF> p1Line = initData.data->GeometricObject<VPointF>(initData.p1LineId);
@@ -179,19 +179,19 @@ VToolHeight* VToolHeight::Create(VToolHeightInitData initData)
  * @param point base point.
  * @return point onto line.
  */
-QPointF VToolHeight::FindPoint(const QLineF &line, const QPointF &point)
+auto VToolHeight::FindPoint(const QLineF &line, const QPointF &point) -> QPointF
 {
     return VGObject::ClosestPoint(line, point);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolHeight::FirstLinePointName() const
+auto VToolHeight::FirstLinePointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(p1LineId)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolHeight::SecondLinePointName() const
+auto VToolHeight::SecondLinePointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(p2LineId)->name();
 }
@@ -267,7 +267,7 @@ void VToolHeight::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolHeight::MakeToolTip() const
+auto VToolHeight::MakeToolTip() const -> QString
 {
     const QSharedPointer<VPointF> basePoint = VAbstractTool::data.GeometricObject<VPointF>(basePointId);
     const QSharedPointer<VPointF> p1Line = VAbstractTool::data.GeometricObject<VPointF>(p1LineId);

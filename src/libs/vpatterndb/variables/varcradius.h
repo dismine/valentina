@@ -47,7 +47,7 @@ public:
     VArcRadius(const quint32 &id, const quint32 &parentId, const VEllipticalArc *elArc, const int numberRadius,
                Unit patternUnit);
     VArcRadius(const VArcRadius &var);
-    VArcRadius &operator=(const VArcRadius &var);
+    auto operator=(const VArcRadius &var) -> VArcRadius &;
     virtual ~VArcRadius() override;
 };
 

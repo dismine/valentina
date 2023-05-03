@@ -136,7 +136,7 @@ void VVITConverter::DowngradeToCurrentMaxVersion()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VVITConverter::IsReadOnly() const
+auto VVITConverter::IsReadOnly() const -> bool
 {
     // Check if attribute read-only was not changed in file format
     Q_STATIC_ASSERT_X(VVITConverter::MeasurementMaxVer == FormatVersion(0, 5, 2),
@@ -172,7 +172,7 @@ void VVITConverter::AddNewTagsForV0_3_0()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VVITConverter::MUnitV0_2_0()
+auto VVITConverter::MUnitV0_2_0() -> QString
 {
     // TODO. Delete if minimal supported version is 0.3.0
     Q_STATIC_ASSERT_X(VVITConverter::MeasurementMinVer < FormatVersion(0, 3, 0),
@@ -194,7 +194,7 @@ void VVITConverter::ConvertMeasurementsToV0_3_0()
 
     const QMultiMap<QString, QString> names = OldNamesToNewNames_InV0_3_0();
     const QList<QString> keys = names.uniqueKeys();
-    for (auto &key : keys)
+    for (const auto &key : keys)
     {
         qreal resValue = 0;
 
@@ -225,7 +225,7 @@ void VVITConverter::ConvertMeasurementsToV0_3_0()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VVITConverter::AddMV0_3_0(const QString &name, qreal value)
+auto VVITConverter::AddMV0_3_0(const QString &name, qreal value) -> QDomElement
 {
     // TODO. Delete if minimal supported version is 0.3.0
     Q_STATIC_ASSERT_X(VVITConverter::MeasurementMinVer < FormatVersion(0, 3, 0),

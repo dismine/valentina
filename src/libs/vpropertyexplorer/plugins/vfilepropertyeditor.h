@@ -54,14 +54,14 @@ public:
 
 
     //! This function returns the file currently set to this editor
-    QString getFile() const;
+    auto getFile() const -> QString;
 
     //! Needed for proper event handling
-    virtual bool eventFilter(QObject* obj, QEvent* ev) override;
+    virtual auto eventFilter(QObject *obj, QEvent *ev) -> bool override;
 
     //! Returns the directory/file setting
     //! \return True, if a directory dialog is being shown, false if a file dialog
-    bool isDirectory();
+    auto isDirectory() -> bool;
 
 signals:
     //! This signal is emitted when the user changed the curret file.
@@ -100,11 +100,10 @@ protected:
     virtual void dropEvent(QDropEvent* event) override;
 
     //! This function checks the mime data, if it is compatible with the filters
-    virtual bool checkMimeData(const QMimeData* data, QString& file) const;
+    virtual auto checkMimeData(const QMimeData *data, QString &file) const -> bool;
 
     //! This checks, if a file is compatible with the filters
-    virtual bool checkFileFilter(const QString& file) const;
-
+    virtual auto checkFileFilter(const QString &file) const -> bool;
 
     QString CurrentFilePath;
     QToolButton* ToolButton;

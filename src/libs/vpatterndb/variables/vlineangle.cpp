@@ -67,7 +67,7 @@ VLineAngle::VLineAngle(const VLineAngle &var)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VLineAngle &VLineAngle::operator=(const VLineAngle &var)
+auto VLineAngle::operator=(const VLineAngle &var) -> VLineAngle &
 {
     if ( &var == this )
     {
@@ -85,7 +85,7 @@ VLineAngle::VLineAngle(VLineAngle &&var) Q_DECL_NOTHROW
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VLineAngle &VLineAngle::operator=(VLineAngle &&var) Q_DECL_NOTHROW
+auto VLineAngle::operator=(VLineAngle &&var) Q_DECL_NOTHROW->VLineAngle &
 {
     VInternalVariable::operator=(var);
     std::swap(d, var.d);
@@ -98,7 +98,7 @@ VLineAngle::~VLineAngle()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLineAngle::Filter(quint32 id)
+auto VLineAngle::Filter(quint32 id) -> bool
 {
     return id == d->p1Id || id == d->p2Id;
 }
@@ -116,14 +116,14 @@ void VLineAngle::SetValue(const VPointF *p1, const VPointF *p2)
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-quint32 VLineAngle::GetP1Id() const
+auto VLineAngle::GetP1Id() const -> quint32
 {
     return d->p1Id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-quint32 VLineAngle::GetP2Id() const
+auto VLineAngle::GetP2Id() const -> quint32
 {
     return d->p2Id;
 }

@@ -111,7 +111,7 @@ VCurveCLength::VCurveCLength(const VCurveCLength &var)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCurveCLength &VCurveCLength::operator=(const VCurveCLength &var)
+auto VCurveCLength::operator=(const VCurveCLength &var) -> VCurveCLength &
 {
     if ( &var == this )
     {

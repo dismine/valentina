@@ -198,7 +198,7 @@ QmuParserCallback::QmuParserCallback (const QmuParserCallback &a_Fun )
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QmuParserCallback &QmuParserCallback::operator=(const QmuParserCallback &a_Fun)
+auto QmuParserCallback::operator=(const QmuParserCallback &a_Fun) -> QmuParserCallback &
 {
     if ( &a_Fun == this )
     {
@@ -215,7 +215,7 @@ QmuParserCallback::QmuParserCallback(QmuParserCallback &&a_Fun) Q_DECL_NOTHROW
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QmuParserCallback &QmuParserCallback::operator=(QmuParserCallback &&a_Fun) Q_DECL_NOTHROW
+auto QmuParserCallback::operator=(QmuParserCallback &&a_Fun) Q_DECL_NOTHROW->QmuParserCallback &
 {
     std::swap(d, a_Fun.d);
     return *this;
@@ -230,7 +230,7 @@ QmuParserCallback &QmuParserCallback::operator=(QmuParserCallback &&a_Fun) Q_DEC
  * @throw nothrow
  */
 // cppcheck-suppress unusedFunction
-bool QmuParserCallback::IsOptimizable() const
+auto QmuParserCallback::IsOptimizable() const -> bool
 {
     return d->m_bAllowOpti;
 }
@@ -244,7 +244,7 @@ bool QmuParserCallback::IsOptimizable() const
  * @throw nothrow
  * @return #pFun
  */
-void* QmuParserCallback::GetAddr() const
+auto QmuParserCallback::GetAddr() const -> void *
 {
     return d->m_pFun;
 }
@@ -253,13 +253,13 @@ void* QmuParserCallback::GetAddr() const
 /**
  * @brief Return the callback code.
 */
-ECmdCode  QmuParserCallback::GetCode() const
+auto QmuParserCallback::GetCode() const -> ECmdCode
 {
     return d->m_iCode;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-ETypeCode QmuParserCallback::GetType() const
+auto QmuParserCallback::GetType() const -> ETypeCode
 {
     return d->m_iType;
 }
@@ -271,7 +271,7 @@ ETypeCode QmuParserCallback::GetType() const
  *
  * Only valid if the callback token is an operator token (binary or infix).
  */
-int QmuParserCallback::GetPri()  const
+auto QmuParserCallback::GetPri() const -> int
 {
     return d->m_iPri;
 }
@@ -283,7 +283,7 @@ int QmuParserCallback::GetPri()  const
  *
  * Only valid if the callback token is a binary operator token.
  */
-EOprtAssociativity QmuParserCallback::GetAssociativity() const
+auto QmuParserCallback::GetAssociativity() const -> EOprtAssociativity
 {
     return d->m_eOprtAsct;
 }
@@ -292,7 +292,7 @@ EOprtAssociativity QmuParserCallback::GetAssociativity() const
 /**
  * @brief Returns the number of function Arguments.
  */
-int QmuParserCallback::GetArgc() const
+auto QmuParserCallback::GetArgc() const -> int
 {
     return d->m_iArgc;
 }

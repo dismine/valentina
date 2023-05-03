@@ -239,13 +239,13 @@ auto VAbstractApplication::translationsPath(const QString &locale) -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QUndoStack *VAbstractApplication::getUndoStack() const
+auto VAbstractApplication::getUndoStack() const -> QUndoStack *
 {
     return undoStack;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VAbstractApplication::IsPedantic() const
+auto VAbstractApplication::IsPedantic() const -> bool
 {
     return false;
 }
@@ -367,7 +367,7 @@ void VAbstractApplication::ClearTranslation()
  * @param msg the message that contains '"' at the start and at the end
  * @return cleared string
  */
-QString VAbstractApplication::ClearMessage(QString msg)
+auto VAbstractApplication::ClearMessage(QString msg) -> QString
 {
     if (msg.startsWith('"') && msg.endsWith('"'))
     {
@@ -381,13 +381,13 @@ QString VAbstractApplication::ClearMessage(QString msg)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VAbstractApplication::IsWarningMessage(const QString &message) const
+auto VAbstractApplication::IsWarningMessage(const QString &message) const -> bool
 {
     return VAbstractApplication::ClearMessage(message).startsWith(warningMessageSignature);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QFileDialog::Options VAbstractApplication::NativeFileDialog(QFileDialog::Options options) const
+auto VAbstractApplication::NativeFileDialog(QFileDialog::Options options) const -> QFileDialog::Options
 {
     if (settings->IsDontUseNativeDialog())
     {
@@ -399,7 +399,7 @@ QFileDialog::Options VAbstractApplication::NativeFileDialog(QFileDialog::Options
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 //---------------------------------------------------------------------------------------------------------------------
-VTextCodec *VAbstractApplication::TextCodecCache(QStringConverter::Encoding encoding) const
+auto VAbstractApplication::TextCodecCache(QStringConverter::Encoding encoding) const -> VTextCodec *
 {
     if (m_codecs.contains(encoding))
     {

@@ -39,8 +39,8 @@ VComboBoxDelegate::VComboBoxDelegate(const QStringList &items, QObject *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QWidget *VComboBoxDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option,
-                                         const QModelIndex &index) const
+auto VComboBoxDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option,
+                                     const QModelIndex &index) const -> QWidget *
 {
     Q_UNUSED(option)
     Q_UNUSED(index)

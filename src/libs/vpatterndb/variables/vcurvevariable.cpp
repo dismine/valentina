@@ -53,7 +53,7 @@ VCurveVariable::VCurveVariable(const VCurveVariable &var)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VCurveVariable &VCurveVariable::operator=(const VCurveVariable &var)
+auto VCurveVariable::operator=(const VCurveVariable &var) -> VCurveVariable &
 {
     if ( &var == this )
     {
@@ -71,7 +71,7 @@ VCurveVariable::VCurveVariable(VCurveVariable &&var) Q_DECL_NOTHROW
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VCurveVariable &VCurveVariable::operator=(VCurveVariable &&var) Q_DECL_NOTHROW
+auto VCurveVariable::operator=(VCurveVariable &&var) Q_DECL_NOTHROW->VCurveVariable &
 {
     VInternalVariable::operator=(var);
     std::swap(d, var.d);
@@ -84,7 +84,7 @@ VCurveVariable::~VCurveVariable()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VCurveVariable::Filter(quint32 id)
+auto VCurveVariable::Filter(quint32 id) -> bool
 {
     if (id == NULL_ID)
     {
@@ -107,7 +107,7 @@ bool VCurveVariable::Filter(quint32 id)
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-quint32 VCurveVariable::GetId() const
+auto VCurveVariable::GetId() const -> quint32
 {
     return d->id;
 }
@@ -120,7 +120,7 @@ void VCurveVariable::SetId(const quint32 &id)
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-quint32 VCurveVariable::GetParentId() const
+auto VCurveVariable::GetParentId() const -> quint32
 {
     return d->parentId;
 }

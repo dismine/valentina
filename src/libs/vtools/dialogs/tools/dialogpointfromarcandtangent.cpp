@@ -76,7 +76,7 @@ DialogPointFromArcAndTangent::~DialogPointFromArcAndTangent()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogPointFromArcAndTangent::GetPointName() const
+auto DialogPointFromArcAndTangent::GetPointName() const -> QString
 {
     return pointName;
 }
@@ -89,7 +89,7 @@ void DialogPointFromArcAndTangent::SetPointName(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogPointFromArcAndTangent::GetArcId() const
+auto DialogPointFromArcAndTangent::GetArcId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxArc);
 }
@@ -105,7 +105,7 @@ void DialogPointFromArcAndTangent::SetArcId(quint32 value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogPointFromArcAndTangent::GetTangentPointId() const
+auto DialogPointFromArcAndTangent::GetTangentPointId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxTangentPoint);
 }
@@ -121,7 +121,7 @@ void DialogPointFromArcAndTangent::SetTangentPointId(quint32 value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-CrossCirclesPoint DialogPointFromArcAndTangent::GetCrossCirclesPoint() const
+auto DialogPointFromArcAndTangent::GetCrossCirclesPoint() const -> CrossCirclesPoint
 {
     return getCurrentCrossPoint<CrossCirclesPoint>(ui->comboBoxResult);
 }
@@ -209,7 +209,7 @@ void DialogPointFromArcAndTangent::SetNotes(const QString &notes)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogPointFromArcAndTangent::GetNotes() const
+auto DialogPointFromArcAndTangent::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }

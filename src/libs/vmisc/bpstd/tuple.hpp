@@ -90,30 +90,27 @@ namespace bpstd {
 
   template <std::size_t N, typename Tuple,
             typename = enable_if_t<detail::is_tuple<remove_cvref_t<Tuple>>::value && is_lvalue_reference<Tuple>::value>>
-  inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-  tuple_element_t<N,remove_reference_t<Tuple>>&
-    get(Tuple&& t) noexcept
+  inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto get(Tuple &&t) noexcept
+      -> tuple_element_t<N, remove_reference_t<Tuple>> &
   {
     return std::get<N>(t);
   }
 
-  template <std::size_t N, typename Tuple,
-            typename = enable_if_t<detail::is_tuple<remove_cvref_t<Tuple>>::value && !is_lvalue_reference<Tuple>::value>>
-  inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-  tuple_element_t<N,remove_reference_t<Tuple>>&&
-    get(Tuple&& t) noexcept
+  template <
+      std::size_t N, typename Tuple,
+      typename = enable_if_t<detail::is_tuple<remove_cvref_t<Tuple>>::value && !is_lvalue_reference<Tuple>::value>>
+  inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto get(Tuple &&t) noexcept
+      -> tuple_element_t<N, remove_reference_t<Tuple>> &&
   {
     return bpstd::move(std::get<N>(t));
   }
 
+  template <typename T, typename... Types> BPSTD_CPP14_CONSTEXPR auto get(tuple<Types...> &t) noexcept -> T &;
+  template <typename T, typename... Types> BPSTD_CPP14_CONSTEXPR auto get(tuple<Types...> &&t) noexcept -> T &&;
   template <typename T, typename... Types>
-  BPSTD_CPP14_CONSTEXPR T& get(tuple<Types...>& t) noexcept;
+  BPSTD_CPP14_CONSTEXPR auto get(const tuple<Types...> &t) noexcept -> const T &;
   template <typename T, typename... Types>
-  BPSTD_CPP14_CONSTEXPR T&& get(tuple<Types...>&& t) noexcept;
-  template <typename T, typename... Types>
-  BPSTD_CPP14_CONSTEXPR const T& get(const tuple<Types...>& t) noexcept;
-  template <typename T, typename... Types>
-  BPSTD_CPP14_CONSTEXPR const T&& get(const tuple<Types...>&& t) noexcept;
+  BPSTD_CPP14_CONSTEXPR auto get(const tuple<Types...> &&t) noexcept -> const T &&;
 
   //----------------------------------------------------------------------------
 
@@ -147,14 +144,13 @@ namespace bpstd {
   /// \param tuple the tuple of arguments to pass to fn
   /// \return the result from \p fn
   template <typename Fn, typename Tuple>
-  constexpr detail::apply_result_t<Fn, Tuple> apply(Fn&& fn, Tuple&& tuple);
+  constexpr auto apply(Fn &&fn, Tuple &&tuple) -> detail::apply_result_t<Fn, Tuple>;
 
   /// \brief Constructs a type \p T using the arguments in \p tuple
   ///
   /// \tparam T the type to construct
   /// \param tuple the tuple of arguments to pass to T's constructor
-  template <typename T, typename Tuple>
-  constexpr T make_from_tuple(Tuple&& tuple);
+  template <typename T, typename Tuple> constexpr auto make_from_tuple(Tuple &&tuple) -> T;
 
 } // namespace bpstd
 
@@ -185,33 +181,25 @@ namespace bpstd { namespace detail {
 }} // namespace bpstd::detail
 
 template <typename T, typename... Types>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-T& bpstd::get(tuple<Types...>& t)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::get(tuple<Types...> &t) noexcept -> T &
 {
   return std::get<detail::index_of<T,Types...>::value>(t);
 }
 
 template <typename T, typename... Types>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-T&& bpstd::get(tuple<Types...>&& t)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::get(tuple<Types...> &&t) noexcept -> T &&
 {
   return move(std::get<detail::index_of<T,Types...>::value>(t));
 }
 
 template <typename T, typename... Types>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-const T& bpstd::get(const tuple<Types...>& t)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::get(const tuple<Types...> &t) noexcept -> const T &
 {
   return std::get<detail::index_of<T,Types...>::value>(t);
 }
 
 template <typename T, typename... Types>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-const T&& bpstd::get(const tuple<Types...>&& t)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::get(const tuple<Types...> &&t) noexcept -> const T &&
 {
   return move(std::get<detail::index_of<T,Types...>::value>(t));
 }
@@ -227,14 +215,11 @@ const T&& bpstd::get(const tuple<Types...>&& t)
 
 namespace bpstd {
   namespace detail {
-    template <typename Fn, typename Tuple, std::size_t... I>
-    inline BPSTD_INLINE_VISIBILITY constexpr
-    apply_result_t<Fn,Tuple> apply_impl(Fn&& fn, Tuple&& tuple, index_sequence<I...>)
-    {
-      return ::bpstd::invoke(
-        bpstd::forward<Fn>(fn),
-        std::get<I>(bpstd::forward<Tuple>(tuple))...
-      );
+  template <typename Fn, typename Tuple, std::size_t... I>
+  inline BPSTD_INLINE_VISIBILITY constexpr auto apply_impl(Fn &&fn, Tuple &&tuple, index_sequence<I...>)
+      -> apply_result_t<Fn, Tuple>
+  {
+  return ::bpstd::invoke(bpstd::forward<Fn>(fn), std::get<I>(bpstd::forward<Tuple>(tuple))...);
     }
   } // namespace detail
 } // namespace bpstd
@@ -244,8 +229,8 @@ namespace bpstd {
 #endif
 
 template <typename Fn, typename Tuple>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bpstd::detail::apply_result_t<Fn, Tuple> bpstd::apply(Fn&& fn, Tuple&& tuple)
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::apply(Fn &&fn, Tuple &&tuple)
+    -> bpstd::detail::apply_result_t<Fn, Tuple>
 {
   return detail::apply_impl(
     bpstd::forward<Fn>(fn),
@@ -265,11 +250,10 @@ bpstd::detail::apply_result_t<Fn, Tuple> bpstd::apply(Fn&& fn, Tuple&& tuple)
 
 namespace bpstd {
   namespace detail {
-    template <typename T, typename Tuple, std::size_t... I>
-    inline BPSTD_INLINE_VISIBILITY constexpr
-    T make_from_tuple_impl(Tuple&& tuple, index_sequence<I...>)
-    {
-      return T(std::get<I>(bpstd::forward<Tuple>(tuple))...);
+  template <typename T, typename Tuple, std::size_t... I>
+  inline BPSTD_INLINE_VISIBILITY constexpr auto make_from_tuple_impl(Tuple &&tuple, index_sequence<I...>) -> T
+  {
+  return T(std::get<I>(bpstd::forward<Tuple>(tuple))...);
     }
   } // namespace detail
 } // namespace bpstd
@@ -279,8 +263,7 @@ namespace bpstd {
 #endif
 
 template <typename T, typename Tuple>
-inline BPSTD_INLINE_VISIBILITY constexpr
-T bpstd::make_from_tuple(Tuple&& tuple)
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::make_from_tuple(Tuple &&tuple) -> T
 {
   return detail::make_from_tuple_impl<T>(
     bpstd::forward<Tuple>(tuple),

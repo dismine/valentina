@@ -96,8 +96,8 @@ void VToolNormal::SetDialog()
  * @param doc dom document container.
  * @param data container with variables.
  */
-VToolNormal* VToolNormal::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                 VContainer *data)
+auto VToolNormal::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                         VContainer *data) -> VToolNormal *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogNormal> dialogTool = qobject_cast<DialogNormal *>(dialog);
@@ -131,7 +131,7 @@ VToolNormal* VToolNormal::Create(const QPointer<DialogTool> &dialog, VMainGraphi
  * @brief Create help create tool.
  * @param initData init data.
  */
-VToolNormal* VToolNormal::Create(VToolNormalInitData initData)
+auto VToolNormal::Create(VToolNormalInitData initData) -> VToolNormal *
 {
     const QSharedPointer<VPointF> firstPoint = initData.data->GeometricObject<VPointF>(initData.firstPointId);
     const QSharedPointer<VPointF> secondPoint = initData.data->GeometricObject<VPointF>(initData.secondPointId);
@@ -182,7 +182,7 @@ VToolNormal* VToolNormal::Create(VToolNormalInitData initData)
  * @param angle additional angle.
  * @return normal point.
  */
-QPointF VToolNormal::FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, qreal length, qreal angle)
+auto VToolNormal::FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, qreal length, qreal angle) -> QPointF
 {
     QLineF line(firstPoint, secondPoint);
     QLineF normal = line.normalVector();
@@ -192,7 +192,7 @@ QPointF VToolNormal::FindPoint(const QPointF &firstPoint, const QPointF &secondP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolNormal::SecondPointName() const
+auto VToolNormal::SecondPointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(secondPointId)->name();
 }

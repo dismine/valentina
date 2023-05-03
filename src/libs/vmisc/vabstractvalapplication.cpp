@@ -37,13 +37,13 @@ VAbstractValApplication::VAbstractValApplication(int &argc, char **argv)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-double VAbstractValApplication::toPixel(double val) const
+auto VAbstractValApplication::toPixel(double val) const -> double
 {
     return ToPixel(val, m_patternUnits);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-double VAbstractValApplication::fromPixel(double pix) const
+auto VAbstractValApplication::fromPixel(double pix) const -> double
 {
     return FromPixel(pix, m_patternUnits);
 }
@@ -68,7 +68,7 @@ void VAbstractValApplication::OpenSettings()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VValentinaSettings *VAbstractValApplication::ValentinaSettings()
+auto VAbstractValApplication::ValentinaSettings() -> VValentinaSettings *
 {
     SCASSERT(settings != nullptr)
             return qobject_cast<VValentinaSettings *>(settings);

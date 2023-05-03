@@ -91,7 +91,7 @@ public:
             this->vars[it->first] = new DRW_Variant( *(it->second) );
         }
     }
-    DRW_Header& operator=(const DRW_Header &h)
+    auto operator=(const DRW_Header &h) -> DRW_Header &
     {
        if(this != &h)
        {
@@ -110,17 +110,18 @@ public:
     void addInt(std::string key, int value, int code);
     void addStr(std::string key, const std::string &value, int code);
     void addCoord(std::string key, const DRW_Coord &value, int code);
-    std::string getComments() const {return comments;}
+    auto getComments() const -> std::string { return comments; }
     void write(dxfWriter *writer, DRW::Version ver);
     void addComment(const std::string &c);
 
 protected:
-    bool parseCode(int code, dxfReader *reader);
+    auto parseCode(int code, dxfReader *reader) -> bool;
+
 private:
-    bool getDouble(const std::string &key, double *varDouble) const;
-    bool getInt(const std::string &key, int *varInt) const;
-    bool getStr(const std::string &key, std::string *varStr) const;
-    bool getCoord(const std::string &key, DRW_Coord *varCoord) const;
+    auto getDouble(const std::string &key, double *varDouble) const -> bool;
+    auto getInt(const std::string &key, int *varInt) const -> bool;
+    auto getStr(const std::string &key, std::string *varStr) const -> bool;
+    auto getCoord(const std::string &key, DRW_Coord *varCoord) const -> bool;
     void clearVars()
     {
         for (auto it=vars.begin(); it!=vars.end(); ++it)
@@ -150,7 +151,7 @@ private:
     duint32 vportCtrl;
     duint32 vpEntHeaderCtrl;
 
-    int measurement(const int unit);
+    auto measurement(const int unit) -> int;
 };
 
 #endif

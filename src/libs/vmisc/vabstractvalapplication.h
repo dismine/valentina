@@ -45,85 +45,85 @@ public:
     VAbstractValApplication(int &argc, char **argv);
     virtual ~VAbstractValApplication() =default;
 
-    QString GetCustomerName() const;
+    auto GetCustomerName() const -> QString;
     void    SetCustomerName(const QString &name);
 
-    QDate   GetCustomerBirthDate() const;
+    auto GetCustomerBirthDate() const -> QDate;
     void    SetCustomerBirthDate(const QDate &date);
 
-    QString CustomerEmail() const;
+    auto CustomerEmail() const -> QString;
     void    SetCustomerEmail(const QString &email);
 
-    Unit        patternUnits() const;
-    const Unit *patternUnitsP() const;
+    auto patternUnits() const -> Unit;
+    auto patternUnitsP() const -> const Unit *;
     void        SetPatternUnits(const Unit &patternUnit);
 
-    MeasurementsType GetMeasurementsType() const;
+    auto GetMeasurementsType() const -> MeasurementsType;
     void             SetMeasurementsType(const MeasurementsType &patternType);
 
-    Unit MeasurementsUnits() const;
+    auto MeasurementsUnits() const -> Unit;
     void SetMeasurementsUnits(const Unit &measurementsUnits);
 
-    Unit DimensionSizeUnits() const;
+    auto DimensionSizeUnits() const -> Unit;
     void SetDimensionSizeUnits(const Unit &sizeUnits);
 
-    double toPixel(double val) const;
-    double fromPixel(double pix) const;
+    auto toPixel(double val) const -> double;
+    auto fromPixel(double pix) const -> double;
 
     void              setCurrentDocument(VAbstractPattern *doc);
-    VAbstractPattern *getCurrentDocument() const;
+    auto getCurrentDocument() const -> VAbstractPattern *;
 
-    VMainGraphicsView *getSceneView() const;
+    auto getSceneView() const -> VMainGraphicsView *;
     void               setSceneView(VMainGraphicsView *value);
 
-    QGraphicsScene *getCurrentScene() const;
+    auto getCurrentScene() const -> QGraphicsScene *;
     void            setCurrentScene(QGraphicsScene **value);
 
-    QWidget *getMainWindow() const;
+    auto getMainWindow() const -> QWidget *;
     void     setMainWindow(QWidget *value);
 
-    QString GetPatternPath() const;
+    auto GetPatternPath() const -> QString;
     void    SetPatternPath(const QString &value);
 
-    QMap<int, QString> GetUserMaterials() const;
+    auto GetUserMaterials() const -> QMap<int, QString>;
     void               SetUserMaterials(const QMap<int, QString> &userMaterials);
 
-    const Draw &GetDrawMode() const;
+    auto GetDrawMode() const -> const Draw &;
     void        SetDrawMode(const Draw &value);
 
-    bool getOpeningPattern() const;
+    auto getOpeningPattern() const -> bool;
     void setOpeningPattern();
 
     void PostWarningMessage(const QString &message, QtMsgType severity) const;
 
-    qreal GetDimensionHeight() const;
+    auto GetDimensionHeight() const -> qreal;
     void  SetDimensionHeight(qreal dimensionHeight);
 
-    qreal GetDimensionSize() const;
+    auto GetDimensionSize() const -> qreal;
     void  SetDimensionSize(qreal dimensionSize);
 
-    qreal GetDimensionHip() const;
+    auto GetDimensionHip() const -> qreal;
     void  SetDimensionHip(qreal dimensionHip);
 
-    qreal GetDimensionWaist() const;
+    auto GetDimensionWaist() const -> qreal;
     void  SetDimensionWaist(qreal dimensionWaist);
 
-    QString GetDimensionHeightLabel() const;
+    auto GetDimensionHeightLabel() const -> QString;
     void    SetDimensionHeightLabel(const QString &label);
 
-    QString GetDimensionSizeLabel() const;
+    auto GetDimensionSizeLabel() const -> QString;
     void    SetDimensionSizeLabel(const QString &label);
 
-    QString GetDimensionHipLabel() const;
+    auto GetDimensionHipLabel() const -> QString;
     void    SetDimensionHipLabel(const QString &label);
 
-    QString GetDimensionWaistLabel() const;
+    auto GetDimensionWaistLabel() const -> QString;
     void    SetDimensionWaistLabel(const QString &label);
 
     virtual void OpenSettings() override;
-    VValentinaSettings *ValentinaSettings();
+    auto ValentinaSettings() -> VValentinaSettings *;
 
-    static VAbstractValApplication *VApp();
+    static auto VApp() -> VAbstractValApplication *;
 
 protected:
     QString m_customerName{};
@@ -171,7 +171,7 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString VAbstractValApplication::GetCustomerName() const
+inline auto VAbstractValApplication::GetCustomerName() const -> QString
 {
     return m_customerName;
 }
@@ -183,13 +183,13 @@ inline void VAbstractValApplication::SetCustomerName(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline Unit VAbstractValApplication::patternUnits() const
+inline auto VAbstractValApplication::patternUnits() const -> Unit
 {
     return m_patternUnits;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline const Unit *VAbstractValApplication::patternUnitsP() const
+inline auto VAbstractValApplication::patternUnitsP() const -> const Unit *
 {
     return &m_patternUnits;
 }
@@ -201,7 +201,7 @@ inline void VAbstractValApplication::SetPatternUnits(const Unit &patternUnit)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline MeasurementsType VAbstractValApplication::GetMeasurementsType() const
+inline auto VAbstractValApplication::GetMeasurementsType() const -> MeasurementsType
 {
     return m_measurementsType;
 }
@@ -213,7 +213,7 @@ inline void VAbstractValApplication::SetMeasurementsType(const MeasurementsType 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline Unit VAbstractValApplication::MeasurementsUnits() const
+inline auto VAbstractValApplication::MeasurementsUnits() const -> Unit
 {
     return m_measurementsUnits;
 }
@@ -225,7 +225,7 @@ inline void VAbstractValApplication::SetMeasurementsUnits(const Unit &measuremen
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline Unit VAbstractValApplication::DimensionSizeUnits() const
+inline auto VAbstractValApplication::DimensionSizeUnits() const -> Unit
 {
     return m_dimensionSizeUnits;
 }
@@ -243,13 +243,13 @@ inline void VAbstractValApplication::setCurrentDocument(VAbstractPattern *doc)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline VAbstractPattern *VAbstractValApplication::getCurrentDocument() const
+inline auto VAbstractValApplication::getCurrentDocument() const -> VAbstractPattern *
 {
     return m_doc;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline VMainGraphicsView *VAbstractValApplication::getSceneView() const
+inline auto VAbstractValApplication::getSceneView() const -> VMainGraphicsView *
 {
     return m_sceneView;
 }
@@ -261,7 +261,7 @@ inline void VAbstractValApplication::setSceneView(VMainGraphicsView *value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QGraphicsScene *VAbstractValApplication::getCurrentScene() const
+inline auto VAbstractValApplication::getCurrentScene() const -> QGraphicsScene *
 {
     return *m_currentScene;
 }
@@ -273,7 +273,7 @@ inline void VAbstractValApplication::setCurrentScene(QGraphicsScene **value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QWidget *VAbstractValApplication::getMainWindow() const
+inline auto VAbstractValApplication::getMainWindow() const -> QWidget *
 {
     return mainWindow;
 }
@@ -285,7 +285,7 @@ inline void VAbstractValApplication::setMainWindow(QWidget *value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString VAbstractValApplication::GetPatternPath() const
+inline auto VAbstractValApplication::GetPatternPath() const -> QString
 {
     return m_patternFilePath;
 }
@@ -297,7 +297,7 @@ inline void VAbstractValApplication::SetPatternPath(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QMap<int, QString> VAbstractValApplication::GetUserMaterials() const
+inline auto VAbstractValApplication::GetUserMaterials() const -> QMap<int, QString>
 {
     return m_userMaterials;
 }
@@ -309,7 +309,7 @@ inline void VAbstractValApplication::SetUserMaterials(const QMap<int, QString> &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline const Draw &VAbstractValApplication::GetDrawMode() const
+inline auto VAbstractValApplication::GetDrawMode() const -> const Draw &
 {
     return m_mode;
 }
@@ -321,7 +321,7 @@ inline void VAbstractValApplication::SetDrawMode(const Draw &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool VAbstractValApplication::getOpeningPattern() const
+inline auto VAbstractValApplication::getOpeningPattern() const -> bool
 {
     return openingPattern;
 }
@@ -333,7 +333,7 @@ inline void VAbstractValApplication::setOpeningPattern()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline qreal VAbstractValApplication::GetDimensionHeight() const
+inline auto VAbstractValApplication::GetDimensionHeight() const -> qreal
 {
     return m_dimensionHeight;
 }
@@ -345,7 +345,7 @@ inline void VAbstractValApplication::SetDimensionHeight(qreal dimensionHeight)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline qreal VAbstractValApplication::GetDimensionSize() const
+inline auto VAbstractValApplication::GetDimensionSize() const -> qreal
 {
     return m_dimensionSize;
 }
@@ -357,7 +357,7 @@ inline void VAbstractValApplication::SetDimensionSize(qreal dimensionSize)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline qreal VAbstractValApplication::GetDimensionHip() const
+inline auto VAbstractValApplication::GetDimensionHip() const -> qreal
 {
     return m_dimensionHip;
 }
@@ -369,7 +369,7 @@ inline void VAbstractValApplication::SetDimensionHip(qreal dimensionHip)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline qreal VAbstractValApplication::GetDimensionWaist() const
+inline auto VAbstractValApplication::GetDimensionWaist() const -> qreal
 {
     return m_dimensionWaist;
 }
@@ -381,7 +381,7 @@ inline void VAbstractValApplication::SetDimensionWaist(qreal dimensionWaist)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString VAbstractValApplication::GetDimensionHeightLabel() const
+inline auto VAbstractValApplication::GetDimensionHeightLabel() const -> QString
 {
     return m_dimensionHeightLabel;
 }
@@ -393,7 +393,7 @@ inline void VAbstractValApplication::SetDimensionHeightLabel(const QString &labe
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString VAbstractValApplication::GetDimensionSizeLabel() const
+inline auto VAbstractValApplication::GetDimensionSizeLabel() const -> QString
 {
     return m_dimensionSizeLabel;
 }
@@ -405,7 +405,7 @@ inline void VAbstractValApplication::SetDimensionSizeLabel(const QString &label)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString VAbstractValApplication::GetDimensionHipLabel() const
+inline auto VAbstractValApplication::GetDimensionHipLabel() const -> QString
 {
     return m_dimensionHipLabel;
 }
@@ -417,7 +417,7 @@ inline void VAbstractValApplication::SetDimensionHipLabel(const QString &label)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString VAbstractValApplication::GetDimensionWaistLabel() const
+inline auto VAbstractValApplication::GetDimensionWaistLabel() const -> QString
 {
     return m_dimensionWaistLabel;
 }
@@ -429,7 +429,7 @@ inline void VAbstractValApplication::SetDimensionWaistLabel(const QString &label
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QDate VAbstractValApplication::GetCustomerBirthDate() const
+inline auto VAbstractValApplication::GetCustomerBirthDate() const -> QDate
 {
     return m_customerBirthDate;
 }
@@ -441,7 +441,7 @@ inline void VAbstractValApplication::SetCustomerBirthDate(const QDate &date)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString VAbstractValApplication::CustomerEmail() const
+inline auto VAbstractValApplication::CustomerEmail() const -> QString
 {
     return m_customerEmail;
 }

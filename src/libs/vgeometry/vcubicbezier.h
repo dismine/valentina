@@ -50,40 +50,40 @@ public:
     VCubicBezier(const VCubicBezier &curve);
     VCubicBezier(const VPointF &p1, const VPointF &p2, const VPointF &p3, const VPointF &p4, quint32 idObject = 0,
                  Draw mode = Draw::Calculation);
-    VCubicBezier Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
-    VCubicBezier Flip(const QLineF &axis, const QString &prefix = QString()) const;
-    VCubicBezier Move(qreal length, qreal angle, const QString &prefix = QString()) const;
+    auto Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const -> VCubicBezier;
+    auto Flip(const QLineF &axis, const QString &prefix = QString()) const -> VCubicBezier;
+    auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VCubicBezier;
     virtual ~VCubicBezier();
 
-    VCubicBezier &operator=(const VCubicBezier &curve);
+    auto operator=(const VCubicBezier &curve) -> VCubicBezier &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VCubicBezier(VCubicBezier &&curve) Q_DECL_NOTHROW;
-    VCubicBezier &operator=(VCubicBezier &&curve) Q_DECL_NOTHROW;
+    auto operator=(VCubicBezier &&curve) Q_DECL_NOTHROW->VCubicBezier &;
 #endif
 
-    virtual VPointF GetP1() const override;
+    virtual auto GetP1() const -> VPointF override;
     void            SetP1(const VPointF &p);
 
-    virtual VPointF GetP2() const override;
+    virtual auto GetP2() const -> VPointF override;
     void    SetP2(const VPointF &p);
 
-    virtual VPointF GetP3() const override;
+    virtual auto GetP3() const -> VPointF override;
     void    SetP3(const VPointF &p);
 
-    virtual VPointF GetP4() const override;
+    virtual auto GetP4() const -> VPointF override;
     void            SetP4(const VPointF &p);
 
-    virtual qreal            GetStartAngle() const override;
-    virtual qreal            GetEndAngle() const override;
-    virtual qreal            GetLength() const override;
-    virtual QVector<QPointF> GetPoints() const override;
+    virtual auto GetStartAngle() const -> qreal override;
+    virtual auto GetEndAngle() const -> qreal override;
+    virtual auto GetLength() const -> qreal override;
+    virtual auto GetPoints() const -> QVector<QPointF> override;
 
-    virtual qreal GetC1Length() const override;
-    virtual qreal GetC2Length() const override;
+    virtual auto GetC1Length() const -> qreal override;
+    virtual auto GetC2Length() const -> qreal override;
 
 protected:
-    virtual QPointF GetControlPoint1() const override;
-    virtual QPointF GetControlPoint2() const override;
+    virtual auto GetControlPoint1() const -> QPointF override;
+    virtual auto GetControlPoint2() const -> QPointF override;
     auto GetRealLength() const -> qreal override;
 
 private:

@@ -56,11 +56,11 @@ public:
     DialogSplinePath(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogSplinePath() override;
 
-    VSplinePath GetPath() const;
+    auto GetPath() const -> VSplinePath;
     void        SetPath(const VSplinePath &value);
 
     void    SetNotes(const QString &notes);
-    QString GetNotes() const;
+    auto GetNotes() const -> QString;
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) override;
     virtual void ShowDialog(bool click) override;
@@ -69,7 +69,7 @@ protected:
     virtual void ShowVisualization() override;
     virtual void SaveData() override;
     virtual void closeEvent(QCloseEvent *event) override;
-    virtual bool IsValid() const final;
+    virtual auto IsValid() const -> bool final;
     void showEvent( QShowEvent *event ) override;
     void resizeEvent(QResizeEvent *event) override;
 private slots:
@@ -127,9 +127,9 @@ private:
     void          NewItem(const VSplinePoint &point);
     void          DataPoint(const VSplinePoint &p);
     void          SavePath();
-    QSet<quint32> AllIds() const;
-    bool          IsPathValid() const;
-    VSplinePath   ExtractPath() const;
+    auto AllIds() const -> QSet<quint32>;
+    auto IsPathValid() const -> bool;
+    auto ExtractPath() const -> VSplinePath;
     void          ShowPointIssue(const QString &pName);
 };
 
@@ -138,7 +138,7 @@ private:
  * @brief GetPath return spline path
  * @return path
  */
-inline VSplinePath DialogSplinePath::GetPath() const
+inline auto DialogSplinePath::GetPath() const -> VSplinePath
 {
     return path;
 }

@@ -90,9 +90,8 @@ void VToolPointOfIntersection::SetDialog()
  * @param data container with variables.
  * @return the created tool
  */
-VToolPointOfIntersection *VToolPointOfIntersection::Create(const QPointer<DialogTool> &dialog,
-                                                           VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                                           VContainer *data)
+auto VToolPointOfIntersection::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
+                                      VAbstractPattern *doc, VContainer *data) -> VToolPointOfIntersection *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogPointOfIntersection> dialogTool = qobject_cast<DialogPointOfIntersection *>(dialog);
@@ -123,7 +122,7 @@ VToolPointOfIntersection *VToolPointOfIntersection::Create(const QPointer<Dialog
  * @param initData init data.
  * @return the created tool
  */
-VToolPointOfIntersection *VToolPointOfIntersection::Create(VToolPointOfIntersectionInitData initData)
+auto VToolPointOfIntersection::Create(VToolPointOfIntersectionInitData initData) -> VToolPointOfIntersection *
 {
     const QSharedPointer<VPointF> firstPoint = initData.data->GeometricObject<VPointF>(initData.firstPointId);
     const QSharedPointer<VPointF> secondPoint = initData.data->GeometricObject<VPointF>(initData.secondPointId);
@@ -161,13 +160,13 @@ VToolPointOfIntersection *VToolPointOfIntersection::Create(VToolPointOfIntersect
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolPointOfIntersection::FirstPointName() const
+auto VToolPointOfIntersection::FirstPointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(firstPointId)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolPointOfIntersection::SecondPointName() const
+auto VToolPointOfIntersection::SecondPointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(secondPointId)->name();
 }

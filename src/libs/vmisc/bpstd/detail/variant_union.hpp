@@ -227,8 +227,8 @@ namespace bpstd {
     /// \param fn the function to invoke on the underlying value
     /// \param v the variant_union
     template <typename Fn, typename VariantUnion>
-    BPSTD_CPP14_CONSTEXPR bpstd::detail::variant_visitor_invoke_result_t<Fn, VariantUnion>
-      visit_union(std::size_t n, Fn&& fn, VariantUnion&& v);
+    BPSTD_CPP14_CONSTEXPR auto visit_union(std::size_t n, Fn &&fn, VariantUnion &&v)
+        -> bpstd::detail::variant_visitor_invoke_result_t<Fn, VariantUnion>;
 
     /// \brief Visits the elements in the variant_union \p v1 and \p v2 at
     ///        index \p n
@@ -241,8 +241,8 @@ namespace bpstd {
     /// \param v1 the first variant_union
     /// \param v2 the second variant_union
     template <typename Fn, typename VariantUnion, typename UVariantUnion>
-    BPSTD_CPP14_CONSTEXPR bpstd::detail::variant_visitor_invoke_result_t<Fn,VariantUnion,UVariantUnion>
-      visit_union(std::size_t n, Fn&& fn, VariantUnion&& v1, UVariantUnion&& v2);
+    BPSTD_CPP14_CONSTEXPR auto visit_union(std::size_t n, Fn &&fn, VariantUnion &&v1, UVariantUnion &&v2)
+        -> bpstd::detail::variant_visitor_invoke_result_t<Fn, VariantUnion, UVariantUnion>;
 
     /// \{
     /// \brief Gets the element at index \p N out of the variant_union
@@ -250,21 +250,19 @@ namespace bpstd {
     /// \tparam N the nth object to retrieve
     /// \param u the union
     /// \return the object at N
-    template <std::size_t N, bool IsTrivial, typename...Types>
-    constexpr bpstd::detail::nth_type_t<N,Types...>&
-      union_get(variant_union<IsTrivial,Types...>& u);
+    template <std::size_t N, bool IsTrivial, typename... Types>
+    constexpr auto union_get(variant_union<IsTrivial, Types...> &u) -> bpstd::detail::nth_type_t<N, Types...> &;
 
-    template <std::size_t N, bool IsTrivial, typename...Types>
-    constexpr const bpstd::detail::nth_type_t<N,Types...>&
-      union_get(const variant_union<IsTrivial,Types...>& u);
+    template <std::size_t N, bool IsTrivial, typename... Types>
+    constexpr auto union_get(const variant_union<IsTrivial, Types...> &u)
+        -> const bpstd::detail::nth_type_t<N, Types...> &;
 
-    template <std::size_t N, bool IsTrivial, typename...Types>
-    constexpr bpstd::detail::nth_type_t<N,Types...>&&
-      union_get(variant_union<IsTrivial,Types...>&& u);
+    template <std::size_t N, bool IsTrivial, typename... Types>
+    constexpr auto union_get(variant_union<IsTrivial, Types...> &&u) -> bpstd::detail::nth_type_t<N, Types...> &&;
 
-    template <std::size_t N, bool IsTrivial, typename...Types>
-    constexpr const bpstd::detail::nth_type_t<N,Types...>&&
-      union_get(const variant_union<IsTrivial,Types...>&& u);
+    template <std::size_t N, bool IsTrivial, typename... Types>
+    constexpr auto union_get(const variant_union<IsTrivial, Types...> &&u)
+        -> const bpstd::detail::nth_type_t<N, Types...> &&;
     /// \}
 
   } // namespace detail
@@ -375,28 +373,20 @@ namespace bpstd { namespace detail {
 
   // Single-case
 
-  template <typename Fn, typename VariantUnion>
-  inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-  bpstd::detail::variant_visitor_invoke_result_t<Fn,VariantUnion>
-    do_visit_union(variant_index_tag<1>,
-                   std::size_t n,
-                   Fn&& fn,
-                   VariantUnion&& v)
-  {
-    BPSTD_UNUSED(n);
+template <typename Fn, typename VariantUnion>
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto do_visit_union(variant_index_tag<1>, std::size_t n, Fn &&fn,
+                                                                         VariantUnion &&v)
+    -> bpstd::detail::variant_visitor_invoke_result_t<Fn, VariantUnion>
+{
+      BPSTD_UNUSED(n);
 
-    return bpstd::forward<Fn>(fn)(
-      union_get<0>(bpstd::forward<VariantUnion>(v))
-    );
+      return bpstd::forward<Fn>(fn)(union_get<0>(bpstd::forward<VariantUnion>(v)));
   }
 
   template <std::size_t N, typename Fn, typename VariantUnion>
-  inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-  bpstd::detail::variant_visitor_invoke_result_t<Fn,VariantUnion>
-    do_visit_union(variant_index_tag<N>,
-                   std::size_t n,
-                   Fn&& fn,
-                   VariantUnion&& v)
+  inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto do_visit_union(variant_index_tag<N>, std::size_t n, Fn &&fn,
+                                                                           VariantUnion &&v)
+      -> bpstd::detail::variant_visitor_invoke_result_t<Fn, VariantUnion>
   {
     using size_type = variant_union_size<VariantUnion>;
 
@@ -417,13 +407,9 @@ namespace bpstd { namespace detail {
   // Double-case
 
   template <typename Fn, typename VariantUnion, typename UVariantUnion>
-  inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-  bpstd::detail::variant_visitor_invoke_result_t<Fn,VariantUnion,UVariantUnion>
-    do_visit_union(variant_index_tag<1>,
-                   std::size_t n,
-                   Fn&& fn,
-                   VariantUnion&& v0,
-                   UVariantUnion&& v1)
+  inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto do_visit_union(variant_index_tag<1>, std::size_t n, Fn &&fn,
+                                                                           VariantUnion &&v0, UVariantUnion &&v1)
+      -> bpstd::detail::variant_visitor_invoke_result_t<Fn, VariantUnion, UVariantUnion>
   {
     BPSTD_UNUSED(n);
 
@@ -434,13 +420,9 @@ namespace bpstd { namespace detail {
   }
 
   template <std::size_t N, typename Fn, typename VariantUnion, typename UVariantUnion>
-  inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-  bpstd::detail::variant_visitor_invoke_result_t<Fn,VariantUnion,UVariantUnion>
-    do_visit_union(variant_index_tag<N>,
-                   std::size_t n,
-                   Fn&& fn,
-                   VariantUnion&& v0,
-                   UVariantUnion&& v1)
+  inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto do_visit_union(variant_index_tag<N>, std::size_t n, Fn &&fn,
+                                                                           VariantUnion &&v0, UVariantUnion &&v1)
+      -> bpstd::detail::variant_visitor_invoke_result_t<Fn, VariantUnion, UVariantUnion>
   {
     using size_type = variant_union_size<VariantUnion>;
 
@@ -464,9 +446,9 @@ namespace bpstd { namespace detail {
 }} // namespace bpstd::detail
 
 template <typename Fn, typename VariantUnion>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-bpstd::detail::variant_visitor_invoke_result_t<Fn,VariantUnion>
-  bpstd::detail::visit_union(std::size_t n, Fn&& fn, VariantUnion&& v)
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto bpstd::detail::visit_union(std::size_t n, Fn &&fn,
+                                                                                     VariantUnion &&v)
+    -> bpstd::detail::variant_visitor_invoke_result_t<Fn, VariantUnion>
 {
   using size_type = variant_union_size<VariantUnion>;
 
@@ -479,12 +461,9 @@ bpstd::detail::variant_visitor_invoke_result_t<Fn,VariantUnion>
 }
 
 template <typename Fn, typename VariantUnion, typename UVariantUnion>
-inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-bpstd::detail::variant_visitor_invoke_result_t<Fn, VariantUnion, UVariantUnion>
-  bpstd::detail::visit_union(std::size_t n,
-                             Fn&& fn,
-                             VariantUnion&& v1,
-                             UVariantUnion&& v2)
+inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto
+bpstd::detail::visit_union(std::size_t n, Fn &&fn, VariantUnion &&v1, UVariantUnion &&v2)
+    -> bpstd::detail::variant_visitor_invoke_result_t<Fn, VariantUnion, UVariantUnion>
 {
   using size_type = variant_union_size<VariantUnion>;
 
@@ -503,72 +482,67 @@ namespace bpstd { namespace detail {
 
   // private implementation: recurse on index
 
-  template <std::size_t N, bool IsTrivial, typename...Types>
-  inline BPSTD_INLINE_VISIBILITY constexpr
-  nth_type_t<N,Types...>&
-    do_union_get(variant_index_tag<N>, variant_union<IsTrivial,Types...>& u)
-  {
-    return do_union_get(variant_index_tag<N-1>{}, u.next);
+template <std::size_t N, bool IsTrivial, typename... Types>
+inline BPSTD_INLINE_VISIBILITY constexpr auto do_union_get(variant_index_tag<N>, variant_union<IsTrivial, Types...> &u)
+    -> nth_type_t<N, Types...> &
+{
+  return do_union_get(variant_index_tag<N - 1>{}, u.next);
   }
-  template <bool IsTrivial, typename...Types>
-  inline BPSTD_INLINE_VISIBILITY constexpr
-  nth_type_t<0,Types...>&
-    do_union_get(variant_index_tag<0>, variant_union<IsTrivial,Types...>& u)
+  template <bool IsTrivial, typename... Types>
+  inline BPSTD_INLINE_VISIBILITY constexpr auto do_union_get(variant_index_tag<0>,
+                                                             variant_union<IsTrivial, Types...> &u)
+      -> nth_type_t<0, Types...> &
   {
     return u.current;
   }
 
-  template <std::size_t N, bool IsTrivial, typename...Types>
-  inline BPSTD_INLINE_VISIBILITY constexpr
-  const nth_type_t<N,Types...>&
-    do_union_get(variant_index_tag<N>, const variant_union<IsTrivial,Types...>& u)
+  template <std::size_t N, bool IsTrivial, typename... Types>
+  inline BPSTD_INLINE_VISIBILITY constexpr auto do_union_get(variant_index_tag<N>,
+                                                             const variant_union<IsTrivial, Types...> &u)
+      -> const nth_type_t<N, Types...> &
   {
     return do_union_get(variant_index_tag<N-1>{}, u.next);
   }
-  template <bool IsTrivial, typename...Types>
-  inline BPSTD_INLINE_VISIBILITY constexpr
-  const nth_type_t<0,Types...>&
-    do_union_get(variant_index_tag<0>, const variant_union<IsTrivial,Types...>& u)
+  template <bool IsTrivial, typename... Types>
+  inline BPSTD_INLINE_VISIBILITY constexpr auto do_union_get(variant_index_tag<0>,
+                                                             const variant_union<IsTrivial, Types...> &u)
+      -> const nth_type_t<0, Types...> &
   {
     return u.current;
   }
 
 }} // namespace bpstd::detail
 
-template <std::size_t N, bool IsTrivial, typename...Types>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bpstd::detail::nth_type_t<N,Types...>&
-  bpstd::detail::union_get(variant_union<IsTrivial,Types...>& u)
+template <std::size_t N, bool IsTrivial, typename... Types>
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::detail::union_get(variant_union<IsTrivial, Types...> &u)
+    -> bpstd::detail::nth_type_t<N, Types...> &
 {
   static_assert(N < sizeof...(Types), "N index out of bounds");
 
   return do_union_get(variant_index_tag<N>{}, u);
 }
 
-template <std::size_t N, bool IsTrivial, typename...Types>
-inline BPSTD_INLINE_VISIBILITY constexpr
-const bpstd::detail::nth_type_t<N,Types...>&
-  bpstd::detail::union_get(const variant_union<IsTrivial,Types...>& u)
+template <std::size_t N, bool IsTrivial, typename... Types>
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::detail::union_get(const variant_union<IsTrivial, Types...> &u)
+    -> const bpstd::detail::nth_type_t<N, Types...> &
 {
   static_assert(N < sizeof...(Types), "N index out of bounds");
 
   return do_union_get(variant_index_tag<N>{}, u);
 }
 
-template <std::size_t N, bool IsTrivial, typename...Types>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bpstd::detail::nth_type_t<N,Types...>&&
-  bpstd::detail::union_get(variant_union<IsTrivial,Types...>&& u)
+template <std::size_t N, bool IsTrivial, typename... Types>
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::detail::union_get(variant_union<IsTrivial, Types...> &&u)
+    -> bpstd::detail::nth_type_t<N, Types...> &&
 {
   static_assert(N < sizeof...(Types), "N index out of bounds");
 
   return bpstd::move(do_union_get(variant_index_tag<N>{}, u));
 }
 
-template <std::size_t N, bool IsTrivial, typename...Types>
-inline BPSTD_INLINE_VISIBILITY constexpr
-const bpstd::detail::nth_type_t<N,Types...>&&
-  bpstd::detail::union_get(const variant_union<IsTrivial,Types...>&& u)
+template <std::size_t N, bool IsTrivial, typename... Types>
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::detail::union_get(const variant_union<IsTrivial, Types...> &&u)
+    -> const bpstd::detail::nth_type_t<N, Types...> &&
 {
   static_assert(N < sizeof...(Types), "N index out of bounds");
 

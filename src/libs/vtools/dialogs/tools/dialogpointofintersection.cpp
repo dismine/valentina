@@ -89,7 +89,7 @@ DialogPointOfIntersection::~DialogPointOfIntersection()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogPointOfIntersection::GetPointName() const
+auto DialogPointOfIntersection::GetPointName() const -> QString
 {
     return pointName;
 }
@@ -220,7 +220,7 @@ void DialogPointOfIntersection::SetPointName(const QString &value)
  * @brief GetFirstPointId return id of first point
  * @return id
  */
-quint32 DialogPointOfIntersection::GetFirstPointId() const
+auto DialogPointOfIntersection::GetFirstPointId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxFirstPoint);
 }
@@ -230,7 +230,7 @@ quint32 DialogPointOfIntersection::GetFirstPointId() const
  * @brief GetSecondPointId return id of second point
  * @return id
  */
-quint32 DialogPointOfIntersection::GetSecondPointId() const
+auto DialogPointOfIntersection::GetSecondPointId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxSecondPoint);
 }
@@ -242,7 +242,7 @@ void DialogPointOfIntersection::SetNotes(const QString &notes)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogPointOfIntersection::GetNotes() const
+auto DialogPointOfIntersection::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }

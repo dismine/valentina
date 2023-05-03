@@ -388,7 +388,7 @@ auto VLayoutExporter::SupportPDFConversion() -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VLayoutExporter::offset() const
+auto VLayoutExporter::offset() const -> QPointF
 {
     return m_offset;
 }
@@ -498,7 +498,7 @@ void VLayoutExporter::ExportToPDF(QGraphicsScene *scene, const QList<QGraphicsIt
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VLayoutExporter::ExportFormatDescription(LayoutExportFormats format)
+auto VLayoutExporter::ExportFormatDescription(LayoutExportFormats format) -> QString
 {
     const QString dxfSuffix = QStringLiteral("(*.dxf)");
     const QString dxfFlatFilesStr = tr("(flat) files");
@@ -586,7 +586,7 @@ QString VLayoutExporter::ExportFormatDescription(LayoutExportFormats format)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VLayoutExporter::ExportFormatSuffix(LayoutExportFormats format)
+auto VLayoutExporter::ExportFormatSuffix(LayoutExportFormats format) -> QString
 {
     switch(format)
     {

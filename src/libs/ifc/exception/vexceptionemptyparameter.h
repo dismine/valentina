@@ -47,20 +47,21 @@ public:
     VExceptionEmptyParameter(const QString &what, const QString &name,
                              const QDomElement &domElement) V_NOEXCEPT_EXPR (true);
     VExceptionEmptyParameter(const VExceptionEmptyParameter &e) V_NOEXCEPT_EXPR (true);
-    VExceptionEmptyParameter &operator=(const VExceptionEmptyParameter &e) V_NOEXCEPT_EXPR (true);
+    auto operator=(const VExceptionEmptyParameter &e) V_NOEXCEPT_EXPR(true) -> VExceptionEmptyParameter &;
     virtual         ~VExceptionEmptyParameter() V_NOEXCEPT_EXPR (true) = default;
 
     Q_NORETURN virtual void raise() const override { throw *this; }
 
-    Q_REQUIRED_RESULT virtual VExceptionEmptyParameter *clone() const override
+    Q_REQUIRED_RESULT virtual auto clone() const -> VExceptionEmptyParameter * override
     { return new VExceptionEmptyParameter(*this); }
 
-    virtual QString ErrorMessage() const override;
-    virtual QString DetailedInformation() const override;
-    QString         Name() const;
-    QString         TagText() const;
-    QString         TagName() const;
-    qint32          LineNumber() const;
+    virtual auto ErrorMessage() const -> QString override;
+    virtual auto DetailedInformation() const -> QString override;
+    auto Name() const -> QString;
+    auto TagText() const -> QString;
+    auto TagName() const -> QString;
+    auto LineNumber() const -> qint32;
+
 protected:
     /** @brief name name attribute */
     QString         name;
@@ -80,7 +81,7 @@ protected:
  * @brief Name return name of attribute where error
  * @return name
  */
-inline QString VExceptionEmptyParameter::Name() const
+inline auto VExceptionEmptyParameter::Name() const -> QString
 {
     return name;
 }
@@ -90,7 +91,7 @@ inline QString VExceptionEmptyParameter::Name() const
  * @brief TagText return tag text
  * @return tag text
  */
-inline QString VExceptionEmptyParameter::TagText() const
+inline auto VExceptionEmptyParameter::TagText() const -> QString
 {
     return tagText;
 }
@@ -100,7 +101,7 @@ inline QString VExceptionEmptyParameter::TagText() const
  * @brief TagName return tag name
  * @return tag name
  */
-inline QString VExceptionEmptyParameter::TagName() const
+inline auto VExceptionEmptyParameter::TagName() const -> QString
 {
     return tagName;
 }
@@ -110,7 +111,7 @@ inline QString VExceptionEmptyParameter::TagName() const
  * @brief LineNumber return line number of tag
  * @return line number
  */
-inline qint32 VExceptionEmptyParameter::LineNumber() const
+inline auto VExceptionEmptyParameter::LineNumber() const -> qint32
 {
     return lineNumber;
 }

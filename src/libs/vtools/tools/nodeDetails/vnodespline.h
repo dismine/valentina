@@ -47,10 +47,10 @@ class VNodeSpline:public VAbstractNode
 {
     Q_OBJECT // NOLINT
 public:
-    static VNodeSpline *Create(const VAbstractNodeInitData &initData);
+    static auto Create(const VAbstractNodeInitData &initData) -> VNodeSpline *;
 
     static const QString ToolType;
-    virtual QString getTagName() const override;
+    virtual auto getTagName() const -> QString override;
 public slots:
     virtual void FullUpdateFromFile () override {}
     virtual void AllowHover(bool enabled) override;

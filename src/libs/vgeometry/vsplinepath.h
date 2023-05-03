@@ -59,44 +59,45 @@ public:
                 Draw mode = Draw::Calculation);
     VSplinePath(const QVector<VSplinePoint> &points, quint32 idObject = 0, Draw mode = Draw::Calculation);
     VSplinePath(const VSplinePath& splPath);
-    VSplinePath Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
-    VSplinePath Flip(const QLineF &axis, const QString &prefix = QString()) const;
-    VSplinePath Move(qreal length, qreal angle, const QString &prefix = QString()) const;
+    auto Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const -> VSplinePath;
+    auto Flip(const QLineF &axis, const QString &prefix = QString()) const -> VSplinePath;
+    auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VSplinePath;
     virtual ~VSplinePath() override;
 
-    VSplinePoint &operator[](vsizetype indx);
-    VSplinePath  &operator=(const VSplinePath &path);
+    auto operator[](vsizetype indx) -> VSplinePoint &;
+    auto operator=(const VSplinePath &path) -> VSplinePath &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VSplinePath(VSplinePath&& splPath) Q_DECL_NOTHROW;
-    VSplinePath &operator=(VSplinePath &&path) Q_DECL_NOTHROW;
+    auto operator=(VSplinePath &&path) Q_DECL_NOTHROW->VSplinePath &;
 #endif
 
     void   append(const VSplinePoint &point);
 
-    virtual vsizetype CountSubSpl() const override;
-    virtual vsizetype CountPoints() const override;
+    virtual auto CountSubSpl() const -> vsizetype override;
+    virtual auto CountPoints() const -> vsizetype override;
     virtual void    Clear() override;
-    virtual VSpline GetSpline(vsizetype index) const override;
+    virtual auto GetSpline(vsizetype index) const -> VSpline override;
 
-    virtual QVector<VSplinePoint> GetSplinePath() const override;
-    QVector<VFSplinePoint> GetFSplinePath() const;
+    virtual auto GetSplinePath() const -> QVector<VSplinePoint> override;
+    auto GetFSplinePath() const -> QVector<VFSplinePoint>;
 
-    virtual qreal GetStartAngle () const override;
-    virtual qreal GetEndAngle () const override;
+    virtual auto GetStartAngle() const -> qreal override;
+    virtual auto GetEndAngle() const -> qreal override;
 
-    virtual qreal GetC1Length() const override;
-    virtual qreal GetC2Length() const override;
+    virtual auto GetC1Length() const -> qreal override;
+    virtual auto GetC2Length() const -> qreal override;
 
     void         UpdatePoint(qint32 indexSpline, const SplinePointPosition &pos, const VSplinePoint &point);
-    VSplinePoint GetSplinePoint(qint32 indexSpline, SplinePointPosition pos) const;
+    auto GetSplinePoint(qint32 indexSpline, SplinePointPosition pos) const -> VSplinePoint;
 
-    const VSplinePoint &at(vsizetype indx) const;
+    auto at(vsizetype indx) const -> const VSplinePoint &;
 
-    virtual QJsonObject ToJson() const override;
+    virtual auto ToJson() const -> QJsonObject override;
 
 protected:
-    virtual VPointF FirstPoint() const  override;
-    virtual VPointF LastPoint() const  override;
+    virtual auto FirstPoint() const -> VPointF override;
+    virtual auto LastPoint() const -> VPointF override;
+
 private:
     QSharedDataPointer<VSplinePathData> d;
 };

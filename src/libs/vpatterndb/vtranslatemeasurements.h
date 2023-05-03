@@ -42,14 +42,15 @@ public:
     VTranslateMeasurements();
     virtual ~VTranslateMeasurements();
 
-    bool MeasurementsFromUser(QString &newFormula, vsizetype position, const QString &token, vsizetype &bias) const;
+    auto MeasurementsFromUser(QString &newFormula, vsizetype position, const QString &token, vsizetype &bias) const
+        -> bool;
 
-    QString MFromUser(const QString &measurement) const;
-    QString MToUser(const QString &measurement) const;
-    QString MNumber(const QString &measurement) const;
-    QString MFormula(const QString &measurement) const;
-    QString GuiText(const QString &measurement) const;
-    QString Description(const QString &measurement) const;
+    auto MFromUser(const QString &measurement) const -> QString;
+    auto MToUser(const QString &measurement) const -> QString;
+    auto MNumber(const QString &measurement) const -> QString;
+    auto MFormula(const QString &measurement) const -> QString;
+    auto GuiText(const QString &measurement) const -> QString;
+    auto Description(const QString &measurement) const -> QString;
 
     virtual void Retranslate();
 

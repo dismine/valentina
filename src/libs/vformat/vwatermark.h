@@ -40,9 +40,9 @@ public:
 
     void CreateEmptyWatermark();
 
-    virtual bool SaveDocument(const QString &fileName, QString &error) override;
+    virtual auto SaveDocument(const QString &fileName, QString &error) -> bool override;
 
-    VWatermarkData GetWatermark() const;
+    auto GetWatermark() const -> VWatermarkData;
     void           SetWatermark(const VWatermarkData &data);
 
     static const QString TagWatermark;

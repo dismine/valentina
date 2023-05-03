@@ -56,7 +56,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutExportFormat, (QLatin1Stri
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutLineWidth, (QLatin1String("layout/lineWidth"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutShowGrainline, (QLatin1String("layout/showGrainline"))) // NOLINT
 
-int cachedLineWidth = -1;
+int cachedLineWidth = -1; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 }  // namespace
 
 #ifndef QPRINTENGINE_H
@@ -295,7 +295,7 @@ auto VPSettings::GetLayoutFollowGrainline() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPSettings::GetMaxLayoutPieceGap()
+auto VPSettings::GetMaxLayoutPieceGap() -> qreal
 {
     return UnitConvertor(50, Unit::Cm, Unit::Px);
 }
@@ -313,7 +313,7 @@ auto VPSettings::GetLayoutPieceGap() const -> qreal
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qint8 VPSettings::GetLayoutExportFormat() const
+auto VPSettings::GetLayoutExportFormat() const -> qint8
 {
     return qvariant_cast<qint8>(value(*settingLayoutExportFormat, 0));
 }
@@ -343,7 +343,7 @@ void VPSettings::SetLayoutLineWidth(int width)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPSettings::GetShowGrainline() const
+auto VPSettings::GetShowGrainline() const -> bool
 {
     return value(*settingLayoutShowGrainline, true).toBool();
 }

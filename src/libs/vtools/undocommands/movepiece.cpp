@@ -80,7 +80,7 @@ void MovePiece::redo()
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-bool MovePiece::mergeWith(const QUndoCommand *command)
+auto MovePiece::mergeWith(const QUndoCommand *command) -> bool
 {
     const MovePiece *moveCommand = static_cast<const MovePiece *>(command);
     SCASSERT(moveCommand != nullptr)
@@ -97,7 +97,7 @@ bool MovePiece::mergeWith(const QUndoCommand *command)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int MovePiece::id() const
+auto MovePiece::id() const -> int
 {
     return static_cast<int>(UndoCommand::MovePiece);
 }

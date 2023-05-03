@@ -46,7 +46,7 @@ VPE::VEnumProperty::VEnumProperty(const QString& name)
 
 
 //! Get the data how it should be displayed
-QVariant VPE::VEnumProperty::data (int column, int role) const
+auto VPE::VEnumProperty::data(int column, int role) const -> QVariant
 {
     if (EnumerationLiterals.empty())
     {
@@ -74,8 +74,8 @@ QVariant VPE::VEnumProperty::data (int column, int role) const
 
 
 //! Returns an editor widget, or NULL if it doesn't supply one
-QWidget* VPE::VEnumProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
-                                          const QAbstractItemDelegate* delegate)
+auto VPE::VEnumProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
+                                      const QAbstractItemDelegate *delegate) -> QWidget *
 {
     Q_UNUSED(options)
     Q_UNUSED(delegate)
@@ -91,7 +91,7 @@ QWidget* VPE::VEnumProperty::createEditor(QWidget * parent, const QStyleOptionVi
 }
 
 //! Gets the data from the widget
-QVariant VPE::VEnumProperty::getEditorData(const QWidget *editor) const
+auto VPE::VEnumProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
     const QComboBox* tmpEditor = qobject_cast<const QComboBox*>(editor);
     if (tmpEditor)
@@ -109,7 +109,7 @@ void VPE::VEnumProperty::setLiterals(const QStringList& literals)
 }
 
 //! Get the settings. This function has to be implemented in a subclass in order to have an effect
-QStringList VPE::VEnumProperty::getLiterals() const
+auto VPE::VEnumProperty::getLiterals() const -> QStringList
 {
     return EnumerationLiterals;
 }
@@ -137,12 +137,12 @@ void VPE::VEnumProperty::setValue(const QVariant& value)
     }
 }
 
-QString VPE::VEnumProperty::type() const
+auto VPE::VEnumProperty::type() const -> QString
 {
     return "enum";
 }
 
-VPE::VProperty* VPE::VEnumProperty::clone(bool include_children, VProperty* container) const
+auto VPE::VEnumProperty::clone(bool include_children, VProperty *container) const -> VPE::VProperty *
 {
     return VProperty::clone(include_children, container ? container : new VEnumProperty(getName()));
 }
@@ -155,7 +155,7 @@ void VPE::VEnumProperty::setSetting(const QString& key, const QVariant& value)
     }
 }
 
-QVariant VPE::VEnumProperty::getSetting(const QString& key) const
+auto VPE::VEnumProperty::getSetting(const QString &key) const -> QVariant
 {
     if (key == "literals")
     {
@@ -165,7 +165,7 @@ QVariant VPE::VEnumProperty::getSetting(const QString& key) const
         return VProperty::getSetting(key);
 }
 
-QStringList VPE::VEnumProperty::getSettingKeys() const
+auto VPE::VEnumProperty::getSettingKeys() const -> QStringList
 {
     return QStringList("literals");
 }

@@ -118,7 +118,7 @@ void DRW_TextCodec::setCodePage(const std::string &c, bool dxfFormat){
     }
 }
 
-QMap<QString, QStringList> DRW_TextCodec::DXFCodePageMap()
+auto DRW_TextCodec::DXFCodePageMap() -> QMap<QString, QStringList>
 {
     static auto map = QMap<QString, QStringList>
     {
@@ -148,7 +148,7 @@ QMap<QString, QStringList> DRW_TextCodec::DXFCodePageMap()
     return map;
 }
 
-VTextCodec *DRW_TextCodec::CodecForName(const QString &name)
+auto DRW_TextCodec::CodecForName(const QString &name) -> VTextCodec *
 {
     QMap<QString, QStringList> knownCodecs = DXFCodePageMap();
     if (knownCodecs.contains(name))
@@ -166,7 +166,8 @@ VTextCodec *DRW_TextCodec::CodecForName(const QString &name)
     return nullptr;
 }
 
-std::string DRW_TextCodec::toUtf8(const std::string &s) {
+auto DRW_TextCodec::toUtf8(const std::string &s) -> std::string
+{
     if (conv == nullptr)
     {
         return s;
@@ -176,7 +177,8 @@ std::string DRW_TextCodec::toUtf8(const std::string &s) {
     return encodedString.toStdString();
 }
 
-std::string DRW_TextCodec::fromUtf8(const std::string &s) {
+auto DRW_TextCodec::fromUtf8(const std::string &s) -> std::string
+{
     if (conv == nullptr)
     {
         return s;

@@ -222,13 +222,13 @@ void TST_MeasurementRegExp::PrepareData()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList TST_MeasurementRegExp::AllNames()
+auto TST_MeasurementRegExp::AllNames() -> QStringList
 {
     return AllGroupNames();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int TST_MeasurementRegExp::LoadMeasurements(const QString &checkedSystem, const QString &checkedLocale)
+auto TST_MeasurementRegExp::LoadMeasurements(const QString &checkedSystem, const QString &checkedLocale) -> int
 {
     const QString path = TranslationsPath();
     const QString file = QString("measurements_%1_%2.qm").arg(checkedSystem, checkedLocale);

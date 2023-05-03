@@ -44,7 +44,7 @@ VPE::VPropertySet::~VPropertySet()
     delete d_ptr;
 }
 
-bool VPE::VPropertySet::addProperty(VProperty *property, const QString &id, const QString &parentid)
+auto VPE::VPropertySet::addProperty(VProperty *property, const QString &id, const QString &parentid) -> bool
 {
     // Check if the property to add is not a null pointer
     if (!property)
@@ -56,7 +56,7 @@ bool VPE::VPropertySet::addProperty(VProperty *property, const QString &id, cons
     return addProperty(property, id, tmpParent);
 }
 
-bool VPE::VPropertySet::addProperty(VProperty *property, const QString &id, VProperty *parent_property)
+auto VPE::VPropertySet::addProperty(VProperty *property, const QString &id, VProperty *parent_property) -> bool
 {
     // Check if the property to add is not a null pointer
     if (!property)
@@ -91,7 +91,7 @@ bool VPE::VPropertySet::addProperty(VProperty *property, const QString &id, VPro
     return true;
 }
 
-bool VPE::VPropertySet::hasProperty(VProperty *property) const
+auto VPE::VPropertySet::hasProperty(VProperty *property) const -> bool
 {
     if (!property)
     {
@@ -101,12 +101,12 @@ bool VPE::VPropertySet::hasProperty(VProperty *property) const
     return hasProperty(property, nullptr);
 }
 
-VPE::VProperty *VPE::VPropertySet::getProperty(const QString &id) const
+auto VPE::VPropertySet::getProperty(const QString &id) const -> VPE::VProperty *
 {
     return d_ptr->Properties.value(id, nullptr);
 }
 
-VPE::VProperty *VPE::VPropertySet::takeProperty(const QString &id)
+auto VPE::VPropertySet::takeProperty(const QString &id) -> VPE::VProperty *
 {
     VProperty* tmpProp = getProperty(id);
     removeProperty(tmpProp, false);
@@ -135,7 +135,7 @@ void VPE::VPropertySet::removeProperty(VProperty* prop, bool delete_property)
     }
 }
 
-vpesizetype VPE::VPropertySet::count() const
+auto VPE::VPropertySet::count() const -> vpesizetype
 {
     return d_ptr->Properties.count();
 }
@@ -153,7 +153,7 @@ void VPE::VPropertySet::clear(bool delete_properties)
     }
 }
 
-QString VPE::VPropertySet::getPropertyID(const VProperty *prop, bool look_for_parent_id) const
+auto VPE::VPropertySet::getPropertyID(const VProperty *prop, bool look_for_parent_id) const -> QString
 {
 //    QString tmpResult;
     const VProperty* tmpCurrentProp = prop;
@@ -182,32 +182,32 @@ QString VPE::VPropertySet::getPropertyID(const VProperty *prop, bool look_for_pa
 }
 
 // cppcheck-suppress unusedFunction
-const QMap<QString, VPE::VProperty *> &VPE::VPropertySet::getPropertiesMap() const
+auto VPE::VPropertySet::getPropertiesMap() const -> const QMap<QString, VPE::VProperty *> &
 {
     return d_ptr->Properties;
 }
 
-const QList<VPE::VProperty *> &VPE::VPropertySet::getRootProperties() const
+auto VPE::VPropertySet::getRootProperties() const -> const QList<VPE::VProperty *> &
 {
     return d_ptr->RootProperties;
 }
 
-VPE::VProperty *VPE::VPropertySet::getRootProperty(int row) const
+auto VPE::VPropertySet::getRootProperty(int row) const -> VPE::VProperty *
 {
     return d_ptr->RootProperties.value(row, nullptr);
 }
 
-vpesizetype VPE::VPropertySet::getRootPropertyCount() const
+auto VPE::VPropertySet::getRootPropertyCount() const -> vpesizetype
 {
     return d_ptr->RootProperties.count();
 }
 
-VPE::VPropertySet* VPE::VPropertySet::clone() const
+auto VPE::VPropertySet::clone() const -> VPE::VPropertySet *
 {
     VPropertySet* tmpResult = new VPropertySet();
 
     const QList<VProperty*> rootProperties = d_ptr->RootProperties;
-    for (auto tmpProperty : rootProperties)
+    for (auto *tmpProperty : rootProperties)
     {
         cloneProperty(tmpProperty, nullptr, tmpResult);
     }
@@ -215,7 +215,7 @@ VPE::VPropertySet* VPE::VPropertySet::clone() const
     return tmpResult;
 }
 
-bool VPE::VPropertySet::hasProperty(VProperty *property, VProperty *parent) const
+auto VPE::VPropertySet::hasProperty(VProperty *property, VProperty *parent) const -> bool
 {
     if (!property)
     {
@@ -251,13 +251,13 @@ void VPE::VPropertySet::removePropertyFromSet(VProperty *prop)
 {
     // Remove all the children
     const QList<VPE::VProperty*>& children = prop->getChildren();
-    for (auto tmpChild : children)
+    for (auto *tmpChild : children)
     {
         removeProperty(tmpChild);
     }
 
     const QList<QString> tmpKeys = d_ptr->Properties.keys(prop);
-    for (auto &tmpID : tmpKeys)
+    for (const auto &tmpID : tmpKeys)
     {
         d_ptr->Properties.remove(tmpID);
     }

@@ -44,7 +44,7 @@ public:
     explicit VScenePoint(QGraphicsItem *parent = nullptr);
     virtual ~VScenePoint() = default;
 
-    virtual int  type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Vis::ScenePoint)};
 
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
@@ -73,7 +73,8 @@ protected:
     virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
 
     void SetOnlyPoint(bool value);
-    bool IsOnlyPoint() const;
+    auto IsOnlyPoint() const -> bool;
+
 private:
     Q_DISABLE_COPY_MOVE(VScenePoint) // NOLINT
 

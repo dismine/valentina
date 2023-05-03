@@ -47,12 +47,12 @@ class StyleHelper
 public:
     static const unsigned int DEFAULT_BASE_COLOR = 0x666666;
 
-    static qreal sidebarFontSize();
+    static auto sidebarFontSize() -> qreal;
     // This is our color table, all colors derive from baseColor
-    static QColor baseColor(bool lightColored = false);
-    static QColor panelTextColor(bool lightColored = false);
-    static QColor borderColor(bool lightColored = false);
-    static QColor sidebarHighlight();
+    static auto baseColor(bool lightColored = false) -> QColor;
+    static auto panelTextColor(bool lightColored = false) -> QColor;
+    static auto borderColor(bool lightColored = false) -> QColor;
+    static auto sidebarHighlight() -> QColor;
 
     // Sets the base color and makes sure all top level widgets are updated
     static void setBaseColor(const QColor &newcolor);

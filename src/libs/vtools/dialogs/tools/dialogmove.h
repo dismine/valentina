@@ -54,38 +54,38 @@ public:
     explicit DialogMove(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogMove();
 
-    QString GetAngle() const;
+    auto GetAngle() const -> QString;
     void    SetAngle(const QString &value);
 
-    QString GetLength() const;
+    auto GetLength() const -> QString;
     void    SetLength(const QString &value);
 
-    QString GetRotationAngle() const;
+    auto GetRotationAngle() const -> QString;
     void    SetRotationAngle(const QString &value);
 
-    QString GetSuffix() const;
+    auto GetSuffix() const -> QString;
     void    SetSuffix(const QString &value);
 
-    quint32 GetRotationOrigPointId() const;
+    auto GetRotationOrigPointId() const -> quint32;
     void    SetRotationOrigPointId(const quint32 &value);
 
-    QString GetVisibilityGroupName() const;
+    auto GetVisibilityGroupName() const -> QString;
     void    SetVisibilityGroupName(const QString &name);
 
-    bool HasLinkedVisibilityGroup() const;
+    auto HasLinkedVisibilityGroup() const -> bool;
     void SetHasLinkedVisibilityGroup(bool linked);
 
     void        SetVisibilityGroupTags(const QStringList &tags);
-    QStringList GetVisibilityGroupTags() const;
+    auto GetVisibilityGroupTags() const -> QStringList;
 
     void    SetNotes(const QString &notes);
-    QString GetNotes() const;
+    auto GetNotes() const -> QString;
 
     virtual void SetGroupCategories(const QStringList &categories) override;
 
     virtual void ShowDialog(bool click) override;
 
-    QVector<SourceItem> GetSourceObjects() const;
+    auto GetSourceObjects() const -> QVector<SourceItem>;
     void                SetSourceObjects(const QVector<SourceItem> &value);
 
 public slots:
@@ -116,7 +116,7 @@ protected:
     /** @brief SaveData Put dialog data in local variables */
     virtual void SaveData() override;
     virtual void closeEvent(QCloseEvent *event) override;
-    virtual bool IsValid() const final;
+    virtual auto IsValid() const -> bool final;
 
 private:
     Q_DISABLE_COPY_MOVE(DialogMove) // NOLINT

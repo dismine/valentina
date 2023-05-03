@@ -169,7 +169,7 @@ DialogMove::~DialogMove()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogMove::GetAngle() const
+auto DialogMove::GetAngle() const -> QString
 {
     return VTranslateVars::TryFormulaFromUser(formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
@@ -194,7 +194,7 @@ void DialogMove::SetAngle(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogMove::GetLength() const
+auto DialogMove::GetLength() const -> QString
 {
     return VTranslateVars::TryFormulaFromUser(formulaLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
@@ -219,7 +219,7 @@ void DialogMove::SetLength(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogMove::GetRotationAngle() const
+auto DialogMove::GetRotationAngle() const -> QString
 {
     return VTranslateVars::TryFormulaFromUser(formulaRotationAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
@@ -244,7 +244,7 @@ void DialogMove::SetRotationAngle(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogMove::GetSuffix() const
+auto DialogMove::GetSuffix() const -> QString
 {
     return m_suffix;
 }
@@ -257,7 +257,7 @@ void DialogMove::SetSuffix(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogMove::GetRotationOrigPointId() const
+auto DialogMove::GetRotationOrigPointId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxRotationOriginPoint);
 }
@@ -272,7 +272,7 @@ void DialogMove::SetRotationOrigPointId(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogMove::GetVisibilityGroupName() const
+auto DialogMove::GetVisibilityGroupName() const -> QString
 {
     return ui->lineEditVisibilityGroup->text();
 }
@@ -284,7 +284,7 @@ void DialogMove::SetVisibilityGroupName(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogMove::HasLinkedVisibilityGroup() const
+auto DialogMove::HasLinkedVisibilityGroup() const -> bool
 {
     return ui->groupBoxVisibilityGroup->isChecked();
 }
@@ -302,7 +302,7 @@ void DialogMove::SetVisibilityGroupTags(const QStringList &tags)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList DialogMove::GetVisibilityGroupTags() const
+auto DialogMove::GetVisibilityGroupTags() const -> QStringList
 {
     return ui->lineEditGroupTags->text().split(',');
 }
@@ -526,23 +526,21 @@ void DialogMove::SuffixChanged()
             CheckState();
             return;
         }
-        else
+
+        if (m_suffix != suffix)
         {
-            if (m_suffix != suffix)
+            QRegularExpression rx(NameRegExp());
+            const QStringList uniqueNames = data->AllUniqueNames();
+            for (auto &uniqueName : uniqueNames)
             {
-                QRegularExpression rx(NameRegExp());
-                const QStringList uniqueNames = data->AllUniqueNames();
-                for (auto &uniqueName : uniqueNames)
+                const QString name = uniqueName + suffix;
+                if (not rx.match(name).hasMatch() || not data->IsUnique(name))
                 {
-                    const QString name = uniqueName + suffix;
-                    if (not rx.match(name).hasMatch() || not data->IsUnique(name))
-                    {
-                        flagName = false;
-                        ChangeColor(ui->labelSuffix, errorColor);
-                        ui->labelStatus->setText(tr("Invalid suffix"));
-                        CheckState();
-                        return;
-                    }
+                    flagName = false;
+                    ChangeColor(ui->labelSuffix, errorColor);
+                    ui->labelStatus->setText(tr("Invalid suffix"));
+                    CheckState();
+                    return;
                 }
             }
         }
@@ -767,7 +765,7 @@ void DialogMove::closeEvent(QCloseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<SourceItem> DialogMove::GetSourceObjects() const
+auto DialogMove::GetSourceObjects() const -> QVector<SourceItem>
 {
     return sourceObjects;
 }
@@ -888,10 +886,8 @@ void DialogMove::ValidateSourceAliases()
                 CheckState();
                 return;
             }
-            else
-            {
-                SetAliasValid(sourceItem.id, true);
-            }
+
+            SetAliasValid(sourceItem.id, true);
         }
     }
 
@@ -924,13 +920,13 @@ void DialogMove::SetNotes(const QString &notes)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogMove::GetNotes() const
+auto DialogMove::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogMove::IsValid() const
+auto DialogMove::IsValid() const -> bool
 {
     bool ready = flagAngle && flagRotationAngle && flagLength && flagName && flagGroupName && flagAlias;
 

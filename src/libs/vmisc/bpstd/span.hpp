@@ -73,10 +73,7 @@ namespace bpstd {
 
       }
 
-      constexpr std::size_t size() const noexcept
-      {
-        return Extent;
-      }
+      constexpr auto size() const noexcept -> std::size_t { return Extent; }
     };
 
     template <>
@@ -96,12 +93,9 @@ namespace bpstd {
 
       }
 
-      constexpr std::size_t size() const noexcept
-      {
-        return m_size;
-      }
+      constexpr auto size() const noexcept -> std::size_t { return m_size; }
 
-    private:
+  private:
 
       std::size_t m_size;
     };
@@ -129,7 +123,7 @@ namespace bpstd {
 
       using extent_storage<Extent>::size;
 
-      constexpr T* data() const noexcept { return m_data; }
+      constexpr auto data() const noexcept -> T * { return m_data; }
 
       //------------------------------------------------------------------------
       // Private Members
@@ -317,7 +311,7 @@ namespace bpstd {
     ///
     /// \param other the other span to copy
     /// \return reference to this
-    BPSTD_CPP14_CONSTEXPR span& operator=(const span& other) noexcept = default;
+    BPSTD_CPP14_CONSTEXPR auto operator=(const span &other) noexcept -> span & = default;
 
     //--------------------------------------------------------------------------
     // Element Access
@@ -328,49 +322,49 @@ namespace bpstd {
     ///
     /// \pre empty() is false
     /// \return reference to front element
-    constexpr reference front() const noexcept;
+      constexpr auto front() const noexcept -> reference;
 
-    /// \brief Gets a reference to the back element of this span
-    ///
-    /// \pre empty() is false
-    /// \return reference to back element
-    constexpr reference back() const noexcept;
+      /// \brief Gets a reference to the back element of this span
+      ///
+      /// \pre empty() is false
+      /// \return reference to back element
+      constexpr auto back() const noexcept -> reference;
 
-    /// \brief Gets a reference to the element at \p idx
-    ///
-    /// \pre \p idx is less than size()
-    /// \param idx the index
-    /// \return reference to the element at \p idx
-    constexpr reference operator[](size_type idx) const noexcept;
+      /// \brief Gets a reference to the element at \p idx
+      ///
+      /// \pre \p idx is less than size()
+      /// \param idx the index
+      /// \return reference to the element at \p idx
+      constexpr auto operator[](size_type idx) const noexcept -> reference;
 
-    /// \brief Gets a pointer to the start of the data
-    ///
-    /// \return pointer to the data
-    constexpr pointer data() const noexcept;
+      /// \brief Gets a pointer to the start of the data
+      ///
+      /// \return pointer to the data
+      constexpr auto data() const noexcept -> pointer;
 
-    //--------------------------------------------------------------------------
-    // Observers
-    //--------------------------------------------------------------------------
+      //--------------------------------------------------------------------------
+      // Observers
+      //--------------------------------------------------------------------------
   public:
 
     /// \brief Gets the number of elements in this span
     ///
     /// \return the number of elements in this span
-    constexpr size_type size() const noexcept;
+      constexpr auto size() const noexcept -> size_type;
 
-    /// \brief Gets the number of bytes in this span
-    ///
-    /// \return the number of bytes in this span
-    constexpr size_type size_bytes() const noexcept;
+      /// \brief Gets the number of bytes in this span
+      ///
+      /// \return the number of bytes in this span
+      constexpr auto size_bytes() const noexcept -> size_type;
 
-    /// \brief Queries whether this span is empty
-    ///
-    /// \return true if this span is empty
-    constexpr bool empty() const noexcept;
+      /// \brief Queries whether this span is empty
+      ///
+      /// \return true if this span is empty
+      constexpr auto empty() const noexcept -> bool;
 
-    //--------------------------------------------------------------------------
-    // Subviews
-    //--------------------------------------------------------------------------
+      //--------------------------------------------------------------------------
+      // Subviews
+      //--------------------------------------------------------------------------
   public:
 
     /// \brief Creates a subspan from the first \p Count elements
@@ -379,70 +373,65 @@ namespace bpstd {
     ///
     /// \tparam Count the number of elements to create in the subspan
     /// \return the first \p Count elements
-    template <std::size_t Count>
-    constexpr span<element_type, Count> first() const;
+      template <std::size_t Count> constexpr auto first() const -> span<element_type, Count>;
 
-    /// \brief Creates a subspan from the first \p count elements
-    ///
-    /// \pre It is undefined behavior if \p count > size()
-    ///
-    /// \param count the number of elements to create in the subspan
-    /// \return the first \p count elements
-    constexpr span<element_type> first(size_t count) const;
+      /// \brief Creates a subspan from the first \p count elements
+      ///
+      /// \pre It is undefined behavior if \p count > size()
+      ///
+      /// \param count the number of elements to create in the subspan
+      /// \return the first \p count elements
+      constexpr auto first(size_t count) const -> span<element_type>;
 
-    //--------------------------------------------------------------------------
+      //--------------------------------------------------------------------------
 
-    /// \brief Creates a subspan from the last \p Count elements
-    ///
-    /// \pre A program is ill-formed if \p Count > Extent
-    ///
-    /// \tparam Count the number of elements to create in the subspan
-    /// \return the last \p Count elements
-    template <std::size_t Count>
-    constexpr span<element_type, Count> last() const;
+      /// \brief Creates a subspan from the last \p Count elements
+      ///
+      /// \pre A program is ill-formed if \p Count > Extent
+      ///
+      /// \tparam Count the number of elements to create in the subspan
+      /// \return the last \p Count elements
+      template <std::size_t Count> constexpr auto last() const -> span<element_type, Count>;
 
-    /// \brief Creates a subspan from the last \p count elements
-    ///
-    /// \pre It is undefined behavior if \p count > size()
-    ///
-    /// \param count the number of elements to create in the subspan
-    /// \return the last \p count elements
-    constexpr span<element_type> last(size_t count) const;
+      /// \brief Creates a subspan from the last \p count elements
+      ///
+      /// \pre It is undefined behavior if \p count > size()
+      ///
+      /// \param count the number of elements to create in the subspan
+      /// \return the last \p count elements
+      constexpr auto last(size_t count) const -> span<element_type>;
 
-    //--------------------------------------------------------------------------
+      //--------------------------------------------------------------------------
 
-    /// \brief Creates a subspan that is \p Count elements long, \p Offset from
-    ///        the start of this span
-    ///
-    /// \tparam Offset the amount to offset the span by
-    /// \tparam Count the number of elements to create in the subspan
-    /// \return the created subspan
-    template <std::size_t Offset, std::size_t Count = dynamic_extent>
-    constexpr span<element_type, detail::compute_subspan_size<Extent,Offset,Count>::value>
-      subspan() const;
+      /// \brief Creates a subspan that is \p Count elements long, \p Offset from
+      ///        the start of this span
+      ///
+      /// \tparam Offset the amount to offset the span by
+      /// \tparam Count the number of elements to create in the subspan
+      /// \return the created subspan
+      template <std::size_t Offset, std::size_t Count = dynamic_extent>
+      constexpr auto subspan() const -> span<element_type, detail::compute_subspan_size<Extent, Offset, Count>::value>;
 
-    /// \brief Creates a subspan that is \p count elements long, \p offset from
-    ///        the start of this span
-    ///
-    /// \param offset the amount to offset the span by
-    /// \param count the number of elements to create in the subspan
-    /// \return the created subspan
-    constexpr span<element_type> subspan(std::size_t offset,
-                                         std::size_t count = dynamic_extent) const;
+      /// \brief Creates a subspan that is \p count elements long, \p offset from
+      ///        the start of this span
+      ///
+      /// \param offset the amount to offset the span by
+      /// \param count the number of elements to create in the subspan
+      /// \return the created subspan
+      constexpr auto subspan(std::size_t offset, std::size_t count = dynamic_extent) const -> span<element_type>;
 
-    //--------------------------------------------------------------------------
-    // Iterators
-    //--------------------------------------------------------------------------
+      //--------------------------------------------------------------------------
+      // Iterators
+      //--------------------------------------------------------------------------
   public:
+      constexpr auto begin() const noexcept -> iterator;
+      constexpr auto end() const noexcept -> iterator;
+      constexpr auto rbegin() const noexcept -> reverse_iterator;
+      constexpr auto rend() const noexcept -> reverse_iterator;
 
-    constexpr iterator begin() const noexcept;
-    constexpr iterator end() const noexcept;
-    constexpr reverse_iterator rbegin() const noexcept;
-    constexpr reverse_iterator rend() const noexcept;
-
-    //--------------------------------------------------------------------------
-    // Private Members
-    //--------------------------------------------------------------------------
+      //--------------------------------------------------------------------------
+      // Private Members
+      //--------------------------------------------------------------------------
   private:
 
     using storage_type = detail::span_storage_type<element_type,Extent>;
@@ -462,15 +451,13 @@ namespace bpstd {
   ///
   /// \param s the span to convert
   /// \return a span of the byte range that \p s covered
-  template <typename T, std::size_t N>
-  span<const byte, sizeof(T) * N> as_bytes(span<T, N> s) noexcept;
+  template <typename T, std::size_t N> auto as_bytes(span<T, N> s) noexcept -> span<const byte, sizeof(T) * N>;
 
   /// \brief Converts a span \p s to a writable byte span
   ///
   /// \param s the span to convert
   /// \return a span of the byte range that \p s covered
-  template <typename T, std::size_t N>
-  span<byte, sizeof(T) * N> as_writable_bytes(span<T, N> s) noexcept;
+  template <typename T, std::size_t N> auto as_writable_bytes(span<T, N> s) noexcept -> span<byte, sizeof(T) * N>;
 
 } // namespace bpstd
 
@@ -588,37 +575,29 @@ bpstd::span<T,Extent>::span(const span<U, N>& s)
 //------------------------------------------------------------------------------
 
 template <typename T, std::size_t Extent>
-inline BPSTD_INLINE_VISIBILITY constexpr
-typename bpstd::span<T,Extent>::reference
-  bpstd::span<T,Extent>::front()
-  const noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::span<T, Extent>::front() const noexcept ->
+    typename bpstd::span<T, Extent>::reference
 {
   return data()[0];
 }
 
 template <typename T, std::size_t Extent>
-inline BPSTD_INLINE_VISIBILITY constexpr
-typename bpstd::span<T,Extent>::reference
-  bpstd::span<T,Extent>::back()
-  const noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::span<T, Extent>::back() const noexcept ->
+    typename bpstd::span<T, Extent>::reference
 {
   return data()[m_storage.size()-1];
 }
 
 template <typename T, std::size_t Extent>
-inline BPSTD_INLINE_VISIBILITY constexpr
-typename bpstd::span<T,Extent>::reference
-  bpstd::span<T,Extent>::operator[](size_type idx)
-  const noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::span<T, Extent>::operator[](size_type idx) const noexcept ->
+    typename bpstd::span<T, Extent>::reference
 {
   return data()[idx];
 }
 
 template <typename T, std::size_t Extent>
-inline BPSTD_INLINE_VISIBILITY constexpr
-typename bpstd::span<T,Extent>::pointer
-  bpstd::span<T,Extent>::data()
-  const noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::span<T, Extent>::data() const noexcept ->
+    typename bpstd::span<T, Extent>::pointer
 {
   return m_storage.data();
 }
@@ -628,27 +607,21 @@ typename bpstd::span<T,Extent>::pointer
 //------------------------------------------------------------------------------
 
 template <typename T, std::size_t Extent>
-inline BPSTD_INLINE_VISIBILITY constexpr
-typename bpstd::span<T,Extent>::size_type
-  bpstd::span<T,Extent>::size()
-  const noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::span<T, Extent>::size() const noexcept ->
+    typename bpstd::span<T, Extent>::size_type
 {
   return m_storage.size();
 }
 
 template <typename T, std::size_t Extent>
-inline BPSTD_INLINE_VISIBILITY constexpr
-typename bpstd::span<T,Extent>::size_type
-  bpstd::span<T,Extent>::size_bytes()
-  const noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::span<T, Extent>::size_bytes() const noexcept ->
+    typename bpstd::span<T, Extent>::size_type
 {
   return size() * sizeof(T);
 }
 
 template <typename T, std::size_t Extent>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bool bpstd::span<T,Extent>::empty()
-  const noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::span<T, Extent>::empty() const noexcept -> bool
 {
   return size() == 0u;
 }
@@ -659,10 +632,8 @@ bool bpstd::span<T,Extent>::empty()
 
 template <typename T, std::size_t Extent>
 template <std::size_t Count>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bpstd::span<typename bpstd::span<T, Extent>::element_type, Count>
-  bpstd::span<T, Extent>::first()
-  const
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::span<T, Extent>::first() const
+    -> bpstd::span<typename bpstd::span<T, Extent>::element_type, Count>
 {
   static_assert(
     Count <= Extent,
@@ -673,10 +644,8 @@ bpstd::span<typename bpstd::span<T, Extent>::element_type, Count>
 }
 
 template <typename T, std::size_t Extent>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bpstd::span<typename bpstd::span<T, Extent>::element_type>
-  bpstd::span<T,Extent>::first(size_t count)
-  const
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::span<T, Extent>::first(size_t count) const
+    -> bpstd::span<typename bpstd::span<T, Extent>::element_type>
 {
   return {data(), count};
 }
@@ -685,10 +654,8 @@ bpstd::span<typename bpstd::span<T, Extent>::element_type>
 
 template <typename T, std::size_t Extent>
 template <std::size_t Count>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bpstd::span<typename bpstd::span<T, Extent>::element_type, Count>
-  bpstd::span<T, Extent>::last()
-  const
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::span<T, Extent>::last() const
+    -> bpstd::span<typename bpstd::span<T, Extent>::element_type, Count>
 {
   static_assert(
     Count <= Extent,
@@ -699,10 +666,8 @@ bpstd::span<typename bpstd::span<T, Extent>::element_type, Count>
 }
 
 template <typename T, std::size_t Extent>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bpstd::span<typename bpstd::span<T, Extent>::element_type>
-  bpstd::span<T,Extent>::last(size_t count)
-  const
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::span<T, Extent>::last(size_t count) const
+    -> bpstd::span<typename bpstd::span<T, Extent>::element_type>
 {
   return {data() + (size() - count), count};
 }
@@ -711,10 +676,9 @@ bpstd::span<typename bpstd::span<T, Extent>::element_type>
 
 template <typename T, std::size_t Extent>
 template <std::size_t Offset, std::size_t Count>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bpstd::span<typename bpstd::span<T, Extent>::element_type, bpstd::detail::compute_subspan_size<Extent,Offset,Count>::value>
-  bpstd::span<T, Extent>::subspan()
-  const
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::span<T, Extent>::subspan() const
+    -> bpstd::span<typename bpstd::span<T, Extent>::element_type,
+                   bpstd::detail::compute_subspan_size<Extent, Offset, Count>::value>
 {
   using result_type = span<
     element_type,
@@ -728,10 +692,9 @@ bpstd::span<typename bpstd::span<T, Extent>::element_type, bpstd::detail::comput
 }
 
 template <typename T, std::size_t Extent>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bpstd::span<typename bpstd::span<T, Extent>::element_type>
-  bpstd::span<T, Extent>::subspan(std::size_t offset, std::size_t count)
-  const
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::span<T, Extent>::subspan(std::size_t offset,
+                                                                              std::size_t count) const
+    -> bpstd::span<typename bpstd::span<T, Extent>::element_type>
 {
   return {
     data() + offset,
@@ -744,37 +707,29 @@ bpstd::span<typename bpstd::span<T, Extent>::element_type>
 //------------------------------------------------------------------------------
 
 template <typename T, std::size_t Extent>
-inline BPSTD_INLINE_VISIBILITY constexpr
-typename bpstd::span<T,Extent>::iterator
-  bpstd::span<T,Extent>::begin()
-  const noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::span<T, Extent>::begin() const noexcept ->
+    typename bpstd::span<T, Extent>::iterator
 {
   return iterator{data()};
 }
 
 template <typename T, std::size_t Extent>
-inline BPSTD_INLINE_VISIBILITY constexpr
-typename bpstd::span<T,Extent>::iterator
-  bpstd::span<T,Extent>::end()
-  const noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::span<T, Extent>::end() const noexcept ->
+    typename bpstd::span<T, Extent>::iterator
 {
   return iterator{data() + size()};
 }
 
 template <typename T, std::size_t Extent>
-inline BPSTD_INLINE_VISIBILITY constexpr
-typename bpstd::span<T,Extent>::reverse_iterator
-  bpstd::span<T,Extent>::rbegin()
-  const noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::span<T, Extent>::rbegin() const noexcept ->
+    typename bpstd::span<T, Extent>::reverse_iterator
 {
   return reverse_iterator(end());
 }
 
 template <typename T, std::size_t Extent>
-inline BPSTD_INLINE_VISIBILITY constexpr
-typename bpstd::span<T,Extent>::reverse_iterator
-  bpstd::span<T,Extent>::rend()
-  const noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::span<T, Extent>::rend() const noexcept ->
+    typename bpstd::span<T, Extent>::reverse_iterator
 {
   return reverse_iterator(begin());
 }
@@ -788,15 +743,13 @@ typename bpstd::span<T,Extent>::reverse_iterator
 //------------------------------------------------------------------------------
 
 template <typename T, std::size_t N>
-inline bpstd::span<const bpstd::byte, sizeof(T) * N> bpstd::as_bytes(span<T, N> s)
-  noexcept
+inline auto bpstd::as_bytes(span<T, N> s) noexcept -> bpstd::span<const bpstd::byte, sizeof(T) * N>
 {
   return {reinterpret_cast<const byte*>(s.data()), s.size_bytes()};
 }
 
 template <typename T, std::size_t N>
-inline bpstd::span<bpstd::byte, sizeof(T) * N> bpstd::as_writable_bytes(span<T, N> s)
-  noexcept
+inline auto bpstd::as_writable_bytes(span<T, N> s) noexcept -> bpstd::span<bpstd::byte, sizeof(T) * N>
 {
   return {reinterpret_cast<byte*>(s.data()), s.size_bytes()};
 }

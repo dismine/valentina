@@ -44,7 +44,7 @@ public:
 
     Q_NORETURN virtual void raise() const override { throw *this; }
 
-    Q_REQUIRED_RESULT virtual VExceptionUndo *clone() const override { return new VExceptionUndo(*this); }
+    Q_REQUIRED_RESULT virtual auto clone() const -> VExceptionUndo * override { return new VExceptionUndo(*this); }
 };
 
 #endif // VEXCEPTIONUNDO_H

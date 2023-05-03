@@ -39,7 +39,7 @@
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-bool IsOX(const QLineF &line)
+auto IsOX(const QLineF &line) -> bool
 {
     return VFuzzyComparePossibleNulls(line.angle(), 0)
             || VFuzzyComparePossibleNulls(line.angle(), 360)
@@ -47,22 +47,20 @@ bool IsOX(const QLineF &line)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool IsOY(const QLineF &line)
+auto IsOY(const QLineF &line) -> bool
 {
     return VFuzzyComparePossibleNulls(line.angle(), 90) || VFuzzyComparePossibleNulls(line.angle(), 270);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString LocalWidth(const QLineF &line, const QLineF &movedLine)
+auto LocalWidth(const QLineF &line, const QLineF &movedLine) -> QString
 {
     if (VFuzzyComparePossibleNulls(line.angle(), movedLine.angle()))
     {
         return QString().setNum(movedLine.length());
     }
-    else
-    {// different direction means value is negative
-        return QChar('0');
-    }
+    // different direction means value is negative
+    return QChar('0');
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -112,7 +110,7 @@ VNodeDetail::VNodeDetail(const VNodeDetail &node)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VNodeDetail &VNodeDetail::operator =(const VNodeDetail &node)
+auto VNodeDetail::operator=(const VNodeDetail &node) -> VNodeDetail &
 {
     if ( &node == this )
     {
@@ -129,7 +127,7 @@ VNodeDetail::VNodeDetail(VNodeDetail &&node) Q_DECL_NOTHROW
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VNodeDetail &VNodeDetail::operator=(VNodeDetail &&node) Q_DECL_NOTHROW
+auto VNodeDetail::operator=(VNodeDetail &&node) Q_DECL_NOTHROW->VNodeDetail &
 {
     std::swap(d, node.d);
     return *this;
@@ -141,7 +139,7 @@ VNodeDetail::~VNodeDetail()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VNodeDetail::getId() const
+auto VNodeDetail::getId() const -> quint32
 {
     return d->id;
 }
@@ -153,7 +151,7 @@ void VNodeDetail::setId(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Tool VNodeDetail::getTypeTool() const
+auto VNodeDetail::getTypeTool() const -> Tool
 {
     return d->typeTool;
 }
@@ -166,7 +164,7 @@ void VNodeDetail::setTypeTool(const Tool &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-NodeDetail VNodeDetail::getTypeNode() const
+auto VNodeDetail::getTypeNode() const -> NodeDetail
 {
     return d->typeNode;
 }
@@ -179,7 +177,7 @@ void VNodeDetail::setTypeNode(const NodeDetail &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VNodeDetail::getMx() const
+auto VNodeDetail::getMx() const -> qreal
 {
     return d->mx;
 }
@@ -191,7 +189,7 @@ void VNodeDetail::setMx(const qreal &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VNodeDetail::getMy() const
+auto VNodeDetail::getMy() const -> qreal
 {
     return d->my;
 }
@@ -203,16 +201,13 @@ void VNodeDetail::setMy(const qreal &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VNodeDetail::getReverse() const
+auto VNodeDetail::getReverse() const -> bool
 {
     if (getTypeTool() == Tool::NodePoint)
     {
         return false;
     }
-    else
-    {
-        return d->reverse;
-    }
+    return d->reverse;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -229,8 +224,8 @@ void VNodeDetail::setReverse(bool reverse)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VPieceNode> VNodeDetail::Convert(const VContainer *data, const QVector<VNodeDetail> &nodes, qreal width,
-                                         bool closed)
+auto VNodeDetail::Convert(const VContainer *data, const QVector<VNodeDetail> &nodes, qreal width, bool closed)
+    -> QVector<VPieceNode>
 {
     if (width < 0)
     {
@@ -238,7 +233,7 @@ QVector<VPieceNode> VNodeDetail::Convert(const VContainer *data, const QVector<V
     }
 
     VPiecePath path;
-    for (auto &node : nodes)
+    for (const auto &node : nodes)
     {
         path.Append(VPieceNode(node.getId(), node.getTypeTool(), node.getReverse()));
     }

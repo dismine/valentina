@@ -38,7 +38,7 @@ QT_WARNING_DISABLE_GCC("-Walloc-zero")
 
 #if PREDICATE == EXACT_PREDICATE
 extern void exactinit();
-extern real incircle(real* pa, real* pb, real* pc, real* pd);
+extern auto incircle(real *pa, real *pb, real *pc, real *pd) -> real;
 #endif
 
 #define ON_RIGHT	1
@@ -132,7 +132,7 @@ struct delaunay_s
 /*
 * allocate a point
 */
-static point2d_t* point_alloc()
+static auto point_alloc() -> point2d_t *
 {
     point2d_t*	p;
 
@@ -156,7 +156,7 @@ static void point_free( point2d_t* p )
 /*
 * allocate a halfedge
 */
-static halfedge_t* halfedge_alloc()
+static auto halfedge_alloc() -> halfedge_t *
 {
     halfedge_t*		d;
 
@@ -229,7 +229,7 @@ void del_free_halfedges( delaunay_t *del )
 /*
 * compare 2 points when sorting
 */
-static int cmp_points( const void *_pt0, const void *_pt1 )
+static auto cmp_points(const void *_pt0, const void *_pt1) -> int
 {
     point2d_t		*pt0, *pt1;
 
@@ -251,7 +251,7 @@ static int cmp_points( const void *_pt0, const void *_pt1 )
 /*
 * classify a point relative to a segment
 */
-static int classify_point_seg( point2d_t *s, point2d_t *e, point2d_t *pt )
+static auto classify_point_seg(point2d_t *s, point2d_t *e, point2d_t *pt) -> int
 {
     point2d_t		se, spt;
     real		res;
@@ -274,7 +274,7 @@ static int classify_point_seg( point2d_t *s, point2d_t *e, point2d_t *pt )
 /*
 * classify a point relative to a halfedge, -1 is left, 0 is on, 1 is right
 */
-static int del_classify_point( halfedge_t *d, point2d_t *pt )
+static auto del_classify_point(halfedge_t *d, point2d_t *pt) -> int
 {
     point2d_t		*s, *e;
 
@@ -362,7 +362,7 @@ static void compute_circle( point2d_t *pt0, point2d_t *pt1, point2d_t *pt2, real
 /*
 * test if a point is inside a circle given by 3 points, 1 if inside, 0 if outside
 */
-static int in_circle( point2d_t *pt0, point2d_t *pt1, point2d_t *pt2, point2d_t *p )
+static auto in_circle(point2d_t *pt0, point2d_t *pt1, point2d_t *pt2, point2d_t *p) -> int
 {
 #if PREDICATE == EXACT_PREDICATE
     real res	= incircle(&(pt0->x), &(pt1->x), &(pt2->x), &(p->x));
@@ -453,7 +453,7 @@ static int in_circle( point2d_t *pt0, point2d_t *pt1, point2d_t *pt2, point2d_t 
 /*
 * initialize delaunay segment
 */
-static int del_init_seg( delaunay_t *del, int start )
+static auto del_init_seg(delaunay_t *del, int start) -> int
 {
     halfedge_t		*d0, *d1;
     point2d_t		*pt0, *pt1;
@@ -492,7 +492,7 @@ static int del_init_seg( delaunay_t *del, int start )
 /*
 * initialize delaunay triangle
 */
-static int del_init_tri( delaunay_t *del, int start )
+static auto del_init_tri(delaunay_t *del, int start) -> int
 {
     halfedge_t		*d0, *d1, *d2, *d3, *d4, *d5;
     point2d_t		*pt0, *pt1, *pt2;
@@ -680,7 +680,7 @@ static void del_remove_edge( halfedge_t *d )
 /*
 * pass through all the halfedges on the left side and validate them
 */
-static halfedge_t* del_valid_left( halfedge_t* b )
+static auto del_valid_left(halfedge_t *b) -> halfedge_t *
 {
     point2d_t		*g, *d, *u, *v;
     halfedge_t		*c, *du, *dg;
@@ -727,7 +727,7 @@ static halfedge_t* del_valid_left( halfedge_t* b )
 /*
 * pass through all the halfedges on the right side and validate them
 */
-static halfedge_t* del_valid_right( halfedge_t *b )
+static auto del_valid_right(halfedge_t *b) -> halfedge_t *
 {
     point2d_t		*rv, *lv, *u, *v;
     halfedge_t		*c, *dd, *du;
@@ -772,7 +772,7 @@ static halfedge_t* del_valid_right( halfedge_t *b )
 /*
 * validate a link
 */
-static halfedge_t* del_valid_link( halfedge_t *b )
+static auto del_valid_link(halfedge_t *b) -> halfedge_t *
 {
     point2d_t	*g, *g_p, *d, *d_p;
     halfedge_t	*gd, *dd, *new_gd, *new_dd;
@@ -834,7 +834,7 @@ static halfedge_t* del_valid_link( halfedge_t *b )
 /*
 * find the lower tangent between the two delaunay, going from left to right (returns the left half edge)
 */
-static halfedge_t* del_get_lower_tangent( delaunay_t *left, delaunay_t *right )
+static auto del_get_lower_tangent(delaunay_t *left, delaunay_t *right) -> halfedge_t *
 {
     halfedge_t	*right_d, *left_d, *new_ld, *new_rd;
     int		sl, sr;
@@ -1012,7 +1012,8 @@ void del_build_faces( delaunay_t *del )
 
 /*
 */
-delaunay2d_t* delaunay2d_from(del_point2d_t *points, quint32 num_points) {
+auto delaunay2d_from(del_point2d_t *points, quint32 num_points) -> delaunay2d_t *
+{
     delaunay2d_t*	res	= nullptr;
     delaunay_t	del;
     quint32	i;

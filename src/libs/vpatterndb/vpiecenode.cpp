@@ -52,7 +52,7 @@ VPieceNode::VPieceNode(const VPieceNode &node)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceNode &VPieceNode::operator=(const VPieceNode &node)
+auto VPieceNode::operator=(const VPieceNode &node) -> VPieceNode &
 {
     if ( &node == this )
     {
@@ -69,7 +69,7 @@ VPieceNode::VPieceNode(VPieceNode &&node) Q_DECL_NOTHROW
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceNode &VPieceNode::operator=(VPieceNode &&node) Q_DECL_NOTHROW
+auto VPieceNode::operator=(VPieceNode &&node) Q_DECL_NOTHROW->VPieceNode &
 {
     std::swap(d, node.d);
     return *this;
@@ -82,21 +82,21 @@ VPieceNode::~VPieceNode()
 
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream &operator<<(QDataStream &out, const VPieceNode &p)
+auto operator<<(QDataStream &out, const VPieceNode &p) -> QDataStream &
 {
     out << *p.d;
     return out;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream &operator>>(QDataStream &in, VPieceNode &p)
+auto operator>>(QDataStream &in, VPieceNode &p) -> QDataStream &
 {
     in >> *p.d;
     return in;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VPieceNode::GetId() const
+auto VPieceNode::GetId() const -> quint32
 {
     return d->m_id;
 }
@@ -108,7 +108,7 @@ void VPieceNode::SetId(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Tool VPieceNode::GetTypeTool() const
+auto VPieceNode::GetTypeTool() const -> Tool
 {
     return d->m_typeTool;
 }
@@ -120,7 +120,7 @@ void VPieceNode::SetTypeTool(Tool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPieceNode::GetReverse() const
+auto VPieceNode::GetReverse() const -> bool
 {
     return d->m_reverse;
 }
@@ -135,7 +135,7 @@ void VPieceNode::SetReverse(bool reverse)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPieceNode::GetSABefore(const VContainer *data) const
+auto VPieceNode::GetSABefore(const VContainer *data) const -> qreal
 {
     if (d->m_formulaWidthBefore == currentSeamAllowance)
     {
@@ -166,7 +166,7 @@ qreal VPieceNode::GetSABefore(const VContainer *data) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPieceNode::GetSABefore(const VContainer *data, Unit unit) const
+auto VPieceNode::GetSABefore(const VContainer *data, Unit unit) const -> qreal
 {
     if (d->m_formulaWidthBefore == currentSeamAllowance)
     {
@@ -203,7 +203,7 @@ qreal VPieceNode::GetSABefore(const VContainer *data, Unit unit) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPieceNode::GetFormulaSABefore() const
+auto VPieceNode::GetFormulaSABefore() const -> QString
 {
     return d->m_formulaWidthBefore;
 }
@@ -218,7 +218,7 @@ void VPieceNode::SetFormulaSABefore(const QString &formula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPieceNode::GetSAAfter(const VContainer *data) const
+auto VPieceNode::GetSAAfter(const VContainer *data) const -> qreal
 {
     if (d->m_formulaWidthAfter == currentSeamAllowance)
     {
@@ -250,7 +250,7 @@ qreal VPieceNode::GetSAAfter(const VContainer *data) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPieceNode::GetSAAfter(const VContainer *data, Unit unit) const
+auto VPieceNode::GetSAAfter(const VContainer *data, Unit unit) const -> qreal
 {
     if (d->m_formulaWidthAfter == currentSeamAllowance)
     {
@@ -288,7 +288,7 @@ qreal VPieceNode::GetSAAfter(const VContainer *data, Unit unit) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPieceNode::GetFormulaSAAfter() const
+auto VPieceNode::GetFormulaSAAfter() const -> QString
 {
     return d->m_formulaWidthAfter;
 }
@@ -303,7 +303,7 @@ void VPieceNode::SetFormulaSAAfter(const QString &formula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPieceNode::GetFormulaPassmarkLength() const
+auto VPieceNode::GetFormulaPassmarkLength() const -> QString
 {
     return d->m_formulaPassmarkLength;
 }
@@ -318,7 +318,7 @@ void VPieceNode::SetFormulaPassmarkLength(const QString &formula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPieceNode::GetPassmarkLength(const VContainer *data, Unit unit) const
+auto VPieceNode::GetPassmarkLength(const VContainer *data, Unit unit) const -> qreal
 {
     if (d->m_manualPassmarkLength)
     {
@@ -350,7 +350,7 @@ qreal VPieceNode::GetPassmarkLength(const VContainer *data, Unit unit) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PieceNodeAngle VPieceNode::GetAngleType() const
+auto VPieceNode::GetAngleType() const -> PieceNodeAngle
 {
     return d->m_angleType;
 }
@@ -365,7 +365,7 @@ void VPieceNode::SetAngleType(PieceNodeAngle type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPieceNode::IsPassmark() const
+auto VPieceNode::IsPassmark() const -> bool
 {
     return d->m_isPassmark;
 }
@@ -380,7 +380,7 @@ void VPieceNode::SetPassmark(bool passmark)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPieceNode::IsMainPathNode() const
+auto VPieceNode::IsMainPathNode() const -> bool
 {
     return d->m_isMainPathNode;
 }
@@ -392,7 +392,7 @@ void VPieceNode::SetMainPathNode(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PassmarkLineType VPieceNode::GetPassmarkLineType() const
+auto VPieceNode::GetPassmarkLineType() const -> PassmarkLineType
 {
     return d->m_passmarkLineType;
 }
@@ -404,7 +404,7 @@ void VPieceNode::SetPassmarkLineType(PassmarkLineType lineType)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PassmarkAngleType VPieceNode::GetPassmarkAngleType() const
+auto VPieceNode::GetPassmarkAngleType() const -> PassmarkAngleType
 {
     return d->m_passmarkAngleType;
 }
@@ -416,7 +416,7 @@ void VPieceNode::SetPassmarkAngleType(PassmarkAngleType angleType)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPieceNode::IsShowSecondPassmark() const
+auto VPieceNode::IsShowSecondPassmark() const -> bool
 {
     return d->m_isShowSecondPassmark;
 }
@@ -428,7 +428,7 @@ void VPieceNode::SetShowSecondPassmark(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPieceNode::IsCheckUniqueness() const
+auto VPieceNode::IsCheckUniqueness() const -> bool
 {
     return d->m_checkUniqueness;
 }
@@ -440,7 +440,7 @@ void VPieceNode::SetCheckUniqueness(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPieceNode::IsManualPassmarkLength() const
+auto VPieceNode::IsManualPassmarkLength() const -> bool
 {
     return d->m_manualPassmarkLength;
 }
@@ -452,7 +452,7 @@ void VPieceNode::SetManualPassmarkLength(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPieceNode::IsTurnPoint() const
+auto VPieceNode::IsTurnPoint() const -> bool
 {
     return d->m_typeTool == Tool::NodePoint ? d->m_turnPoint : false;
 }
@@ -464,7 +464,7 @@ void VPieceNode::SetTurnPoint(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPieceNode::IsExcluded() const
+auto VPieceNode::IsExcluded() const -> bool
 {
     return d->m_excluded;
 }

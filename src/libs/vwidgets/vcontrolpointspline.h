@@ -55,7 +55,7 @@ public:
                         bool freeAngle, bool freeLength, QGraphicsItem * parent = nullptr);
     virtual ~VControlPointSpline() =default;
 
-    virtual int  type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Vis::ControlPointSpline)};
 
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
@@ -85,7 +85,7 @@ protected:
     VScaledLine      *controlLine;
 
     virtual void      hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) override;
-    QVariant          itemChange ( GraphicsItemChange change, const QVariant &value ) override;
+    auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
     virtual void      mousePressEvent( QGraphicsSceneMouseEvent * event ) override;
     virtual void      mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
     virtual void      contextMenuEvent ( QGraphicsSceneContextMenuEvent *event ) override;

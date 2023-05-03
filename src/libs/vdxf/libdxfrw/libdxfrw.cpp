@@ -61,10 +61,8 @@ dxfRW::dxfRW(const char* name)
 }
 
 dxfRW::~dxfRW(){
-    if (reader != nullptr)
-        delete reader;
-    if (writer != nullptr)
-        delete writer;
+    delete reader;
+    delete writer;
     for (std::vector<DRW_ImageDef*>::iterator it=imageDef.begin(); it!=imageDef.end(); ++it)
         delete *it;
 
@@ -81,7 +79,8 @@ void dxfRW::setDebug(DRW::DebugLevel lvl){
     }
 }
 
-bool dxfRW::read(DRW_Interface *interface_, bool ext){
+auto dxfRW::read(DRW_Interface *interface_, bool ext) -> bool
+{
     drw_assert(fileName.empty() == false);
     applyExt = ext;
     std::ifstream filestr;
@@ -122,7 +121,8 @@ bool dxfRW::read(DRW_Interface *interface_, bool ext){
     return isOk;
 }
 
-bool dxfRW::write(DRW_Interface *interface_, DRW::Version ver, bool bin){
+auto dxfRW::write(DRW_Interface *interface_, DRW::Version ver, bool bin) -> bool
+{
     bool isOk = false;
     std::ofstream filestr;
     filestr.exceptions(std::ifstream::failbit | std::ifstream::badbit);
@@ -191,7 +191,7 @@ bool dxfRW::write(DRW_Interface *interface_, DRW::Version ver, bool bin){
     return isOk;
 }
 
-bool dxfRW::writeEntity(DRW_Entity *ent)
+auto dxfRW::writeEntity(DRW_Entity *ent) -> bool
 {
     // A handle is an arbitrary but in your DXF file unique hex value as string like ‘10FF’. It is common to to use
     // uppercase letters for hex numbers. Handle can have up to 16 hexadecimal digits (8 bytes).
@@ -243,7 +243,8 @@ bool dxfRW::writeEntity(DRW_Entity *ent)
     return true;
 }
 
-bool dxfRW::writeAppData(const std::list<std::list<DRW_Variant>>& appData) {
+auto dxfRW::writeAppData(const std::list<std::list<DRW_Variant>> &appData) -> bool
+{
     for(const auto& group : appData) {
         //Search for application name
         bool found = false;
@@ -286,7 +287,8 @@ bool dxfRW::writeAppData(const std::list<std::list<DRW_Variant>>& appData) {
     return true;
 }
 
-bool dxfRW::writeLineType(DRW_LType *ent){
+auto dxfRW::writeLineType(DRW_LType *ent) -> bool
+{
     std::string strname = ent->name;
 
     transform(strname.begin(), strname.end(), strname.begin(),::toupper);
@@ -321,7 +323,8 @@ bool dxfRW::writeLineType(DRW_LType *ent){
     return true;
 }
 
-bool dxfRW::writeLayer(DRW_Layer *ent){
+auto dxfRW::writeLayer(DRW_Layer *ent) -> bool
+{
     writer->writeString(0, "LAYER");
     if (!wlayer0 && ent->name == "0") {
         wlayer0 = true;
@@ -363,7 +366,8 @@ bool dxfRW::writeLayer(DRW_Layer *ent){
     return true;
 }
 
-bool dxfRW::writeTextstyle(DRW_Textstyle *ent){
+auto dxfRW::writeTextstyle(DRW_Textstyle *ent) -> bool
+{
     writer->writeString(0, "STYLE");
     if (!dimstyleStd) {
         //stringstream cause crash in OS/X, bug#3597944
@@ -406,7 +410,8 @@ bool dxfRW::writeTextstyle(DRW_Textstyle *ent){
     return true;
 }
 
-bool dxfRW::writeVport(DRW_Vport *ent){
+auto dxfRW::writeVport(DRW_Vport *ent) -> bool
+{
     if (!dimstyleStd) {
         ent->name = "*ACTIVE";
         dimstyleStd = true;
@@ -484,7 +489,8 @@ bool dxfRW::writeVport(DRW_Vport *ent){
     return true;
 }
 
-bool dxfRW::writeDimstyle(DRW_Dimstyle *ent){
+auto dxfRW::writeDimstyle(DRW_Dimstyle *ent) -> bool
+{
     writer->writeString(0, "DIMSTYLE");
     if (!dimstyleStd) {
         std::string name = ent->name;
@@ -601,7 +607,8 @@ bool dxfRW::writeDimstyle(DRW_Dimstyle *ent){
     return true;
 }
 
-bool dxfRW::writeAppId(DRW_AppId *ent){
+auto dxfRW::writeAppId(DRW_AppId *ent) -> bool
+{
     std::string strname = ent->name;
     transform(strname.begin(), strname.end(), strname.begin(),::toupper);
 //do not write mandatory ACAD appId, handled by library
@@ -623,7 +630,8 @@ bool dxfRW::writeAppId(DRW_AppId *ent){
     return true;
 }
 
-bool dxfRW::writePoint(DRW_Point *ent) {
+auto dxfRW::writePoint(DRW_Point *ent) -> bool
+{
     writer->writeString(0, "POINT");
     writeEntity(ent);
     if (version > DRW::AC1009) {
@@ -637,7 +645,7 @@ bool dxfRW::writePoint(DRW_Point *ent) {
     return true;
 }
 
-bool dxfRW::writeASTMNotch(DRW_ASTMNotch *ent)
+auto dxfRW::writeASTMNotch(DRW_ASTMNotch *ent) -> bool
 {
     writePoint(ent);
     writer->writeDouble(50, ent->angle);
@@ -649,7 +657,8 @@ bool dxfRW::writeASTMNotch(DRW_ASTMNotch *ent)
     return true;
 }
 
-bool dxfRW::writeLine(DRW_Line *ent) {
+auto dxfRW::writeLine(DRW_Line *ent) -> bool
+{
     writer->writeString(0, "LINE");
     writeEntity(ent);
     if (version > DRW::AC1009) {
@@ -669,7 +678,8 @@ bool dxfRW::writeLine(DRW_Line *ent) {
     return true;
 }
 
-bool dxfRW::writeRay(DRW_Ray *ent) {
+auto dxfRW::writeRay(DRW_Ray *ent) -> bool
+{
     writer->writeString(0, "RAY");
     writeEntity(ent);
     if (version > DRW::AC1009) {
@@ -691,7 +701,8 @@ bool dxfRW::writeRay(DRW_Ray *ent) {
     return true;
 }
 
-bool dxfRW::writeXline(DRW_Xline *ent) {
+auto dxfRW::writeXline(DRW_Xline *ent) -> bool
+{
     writer->writeString(0, "XLINE");
     writeEntity(ent);
     if (version > DRW::AC1009) {
@@ -713,7 +724,8 @@ bool dxfRW::writeXline(DRW_Xline *ent) {
     return true;
 }
 
-bool dxfRW::writeCircle(DRW_Circle *ent) {
+auto dxfRW::writeCircle(DRW_Circle *ent) -> bool
+{
     writer->writeString(0, "CIRCLE");
     writeEntity(ent);
     if (version > DRW::AC1009) {
@@ -728,7 +740,8 @@ bool dxfRW::writeCircle(DRW_Circle *ent) {
     return true;
 }
 
-bool dxfRW::writeArc(DRW_Arc *ent) {
+auto dxfRW::writeArc(DRW_Arc *ent) -> bool
+{
     writer->writeString(0, "ARC");
     writeEntity(ent);
     if (version > DRW::AC1009) {
@@ -748,7 +761,8 @@ bool dxfRW::writeArc(DRW_Arc *ent) {
     return true;
 }
 
-bool dxfRW::writeEllipse(DRW_Ellipse *ent){
+auto dxfRW::writeEllipse(DRW_Ellipse *ent) -> bool
+{
     //verify axis/ratio and params for full ellipse
     ent->correctAxis();
     if (version > DRW::AC1009) {
@@ -775,7 +789,8 @@ bool dxfRW::writeEllipse(DRW_Ellipse *ent){
     return true;
 }
 
-bool dxfRW::writeTrace(DRW_Trace *ent){
+auto dxfRW::writeTrace(DRW_Trace *ent) -> bool
+{
     writer->writeString(0, "TRACE");
     writeEntity(ent);
     if (version > DRW::AC1009) {
@@ -796,7 +811,8 @@ bool dxfRW::writeTrace(DRW_Trace *ent){
     return true;
 }
 
-bool dxfRW::writeSolid(DRW_Solid *ent){
+auto dxfRW::writeSolid(DRW_Solid *ent) -> bool
+{
     writer->writeString(0, "SOLID");
     writeEntity(ent);
     if (version > DRW::AC1009) {
@@ -817,7 +833,8 @@ bool dxfRW::writeSolid(DRW_Solid *ent){
     return true;
 }
 
-bool dxfRW::write3dface(DRW_3Dface *ent){
+auto dxfRW::write3dface(DRW_3Dface *ent) -> bool
+{
     writer->writeString(0, "3DFACE");
     writeEntity(ent);
     if (version > DRW::AC1009) {
@@ -839,7 +856,8 @@ bool dxfRW::write3dface(DRW_3Dface *ent){
     return true;
 }
 
-bool dxfRW::writeLWPolyline(DRW_LWPolyline *ent){
+auto dxfRW::writeLWPolyline(DRW_LWPolyline *ent) -> bool
+{
     if (version > DRW::AC1009) {
         writer->writeString(0, "LWPOLYLINE");
         writeEntity(ent);
@@ -871,7 +889,8 @@ bool dxfRW::writeLWPolyline(DRW_LWPolyline *ent){
     return true;
 }
 
-bool dxfRW::writePolyline(DRW_Polyline *ent) {
+auto dxfRW::writePolyline(DRW_Polyline *ent) -> bool
+{
     writer->writeString(0, "POLYLINE");
     writeEntity(ent);
     bool is3d = false;
@@ -975,7 +994,8 @@ bool dxfRW::writePolyline(DRW_Polyline *ent) {
     return true;
 }
 
-bool dxfRW::writeSpline(DRW_Spline *ent){
+auto dxfRW::writeSpline(DRW_Spline *ent) -> bool
+{
     if (version > DRW::AC1009) {
         writer->writeString(0, "SPLINE");
         writeEntity(ent);
@@ -1011,7 +1031,8 @@ bool dxfRW::writeSpline(DRW_Spline *ent){
     return true;
 }
 
-bool dxfRW::writeHatch(DRW_Hatch *ent){
+auto dxfRW::writeHatch(DRW_Hatch *ent) -> bool
+{
     if (version > DRW::AC1009) {
         writer->writeString(0, "HATCH");
         writeEntity(ent);
@@ -1099,7 +1120,8 @@ bool dxfRW::writeHatch(DRW_Hatch *ent){
     return true;
 }
 
-bool dxfRW::writeLeader(DRW_Leader *ent){
+auto dxfRW::writeLeader(DRW_Leader *ent) -> bool
+{
     if (version > DRW::AC1009) {
         writer->writeString(0, "LEADER");
         writeEntity(ent);
@@ -1125,7 +1147,8 @@ bool dxfRW::writeLeader(DRW_Leader *ent){
     }
     return true;
 }
-bool dxfRW::writeDimension(DRW_Dimension *ent) {
+auto dxfRW::writeDimension(DRW_Dimension *ent) -> bool
+{
     if (version > DRW::AC1009) {
         writer->writeString(0, "DIMENSION");
         writeEntity(ent);
@@ -1247,12 +1270,13 @@ bool dxfRW::writeDimension(DRW_Dimension *ent) {
     return true;
 }
 
-std::string dxfRW::ErrorString() const
+auto dxfRW::ErrorString() const -> std::string
 {
     return errorString;
 }
 
-bool dxfRW::writeInsert(DRW_Insert *ent){
+auto dxfRW::writeInsert(DRW_Insert *ent) -> bool
+{
     writer->writeString(0, "INSERT");
     writeEntity(ent);
     if (version > DRW::AC1009) {
@@ -1274,7 +1298,8 @@ bool dxfRW::writeInsert(DRW_Insert *ent){
     return true;
 }
 
-bool dxfRW::writeText(DRW_Text *ent){
+auto dxfRW::writeText(DRW_Text *ent) -> bool
+{
     writer->writeString(0, "TEXT");
     writeEntity(ent);
     if (version > DRW::AC1009) {
@@ -1314,7 +1339,8 @@ bool dxfRW::writeText(DRW_Text *ent){
     return true;
 }
 
-bool dxfRW::writeMText(DRW_MText *ent){
+auto dxfRW::writeMText(DRW_MText *ent) -> bool
+{
     if (version > DRW::AC1009) {
         writer->writeString(0, "MTEXT");
         writeEntity(ent);
@@ -1348,7 +1374,8 @@ bool dxfRW::writeMText(DRW_MText *ent){
     return true;
 }
 
-bool dxfRW::writeViewport(DRW_Viewport *ent) {
+auto dxfRW::writeViewport(DRW_Viewport *ent) -> bool
+{
     writer->writeString(0, "VIEWPORT");
     writeEntity(ent);
     if (version > DRW::AC1009) {
@@ -1367,7 +1394,8 @@ bool dxfRW::writeViewport(DRW_Viewport *ent) {
     return true;
 }
 
-DRW_ImageDef* dxfRW::writeImage(DRW_Image *ent, const std::string &name){
+auto dxfRW::writeImage(DRW_Image *ent, const std::string &name) -> DRW_ImageDef *
+{
     if (version > DRW::AC1009) {
         //search if exist imagedef with this mane (image inserted more than 1 time)
         //RLZ: imagedef_reactor seem needed to read in acad
@@ -1412,7 +1440,8 @@ DRW_ImageDef* dxfRW::writeImage(DRW_Image *ent, const std::string &name){
     return NULL; //not exist in acad 12
 }
 
-bool dxfRW::writeBlockRecord(std::string name){
+auto dxfRW::writeBlockRecord(std::string name) -> bool
+{
     if (version > DRW::AC1009) {
         writer->writeString(0, "BLOCK_RECORD");
         writer->writeString(5, toHexStr(++entCount));
@@ -1435,7 +1464,8 @@ bool dxfRW::writeBlockRecord(std::string name){
     return true;
 }
 
-bool dxfRW::writeBlock(DRW_Block *bk){
+auto dxfRW::writeBlock(DRW_Block *bk) -> bool
+{
     if (writingBlock) {
         writer->writeString(0, "ENDBLK");
         if (version > DRW::AC1009) {
@@ -1481,7 +1511,8 @@ bool dxfRW::writeBlock(DRW_Block *bk){
     return true;
 }
 
-bool dxfRW::writeTables() {
+auto dxfRW::writeTables() -> bool
+{
     writer->writeString(0, "TABLE");
     writer->writeString(2, "VPORT");
     if (version > DRW::AC1009) {
@@ -1723,7 +1754,7 @@ bool dxfRW::writeTables() {
 return true;
 }
 
-bool dxfRW::writeBlocks()
+auto dxfRW::writeBlocks() -> bool
 {
     if (version > DRW::AC1009 || m_xSpaceBlock)
     {
@@ -1850,7 +1881,8 @@ bool dxfRW::writeBlocks()
     return true;
 }
 
-bool dxfRW::writeObjects() {
+auto dxfRW::writeObjects() -> bool
+{
     writer->writeString(0, "DICTIONARY");
     std::string imgDictH;
     writer->writeString(5, "C");
@@ -1930,7 +1962,8 @@ bool dxfRW::writeObjects() {
     return true;
 }
 
-bool dxfRW::writeExtData(const std::vector<DRW_Variant*> &ed){
+auto dxfRW::writeExtData(const std::vector<DRW_Variant *> &ed) -> bool
+{
     for (std::vector<DRW_Variant*>::const_iterator it=ed.begin(); it!=ed.end(); ++it){
         switch ((*it)->code) {
         case 1000:
@@ -1977,7 +2010,8 @@ bool dxfRW::writeExtData(const std::vector<DRW_Variant*> &ed){
 
 /********* Reader Process *********/
 
-bool dxfRW::processDxf() {
+auto dxfRW::processDxf() -> bool
+{
     DRW_DBG("dxfRW::processDxf() start processing dxf\n");
     int code = -1;
     bool inSection = false;
@@ -2076,7 +2110,8 @@ bool dxfRW::processDxf() {
 
 /********* Header Section *********/
 
-bool dxfRW::processHeader() {
+auto dxfRW::processHeader() -> bool
+{
     DRW_DBG("dxfRW::processHeader\n");
     int code;
     std::string sectionstr;
@@ -2103,7 +2138,8 @@ bool dxfRW::processHeader() {
 
 /********* Tables Section *********/
 
-bool dxfRW::processTables() {
+auto dxfRW::processTables() -> bool
+{
     DRW_DBG("dxfRW::processTables\n");
     int code;
     std::string sectionstr;
@@ -2152,7 +2188,8 @@ bool dxfRW::processTables() {
     return setError(DRW::BAD_READ_TABLES);
 }
 
-bool dxfRW::processLType() {
+auto dxfRW::processLType() -> bool
+{
     DRW_DBG("dxfRW::processLType\n");
     int code;
     std::string sectionstr;
@@ -2183,7 +2220,8 @@ bool dxfRW::processLType() {
     return setError(DRW::BAD_READ_TABLES);
 }
 
-bool dxfRW::processLayer() {
+auto dxfRW::processLayer() -> bool
+{
     DRW_DBG("dxfRW::processLayer\n");
     int code;
     std::string sectionstr;
@@ -2212,7 +2250,8 @@ bool dxfRW::processLayer() {
     return setError(DRW::BAD_READ_TABLES);
 }
 
-bool dxfRW::processDimStyle() {
+auto dxfRW::processDimStyle() -> bool
+{
     DRW_DBG("dxfRW::processDimStyle");
     int code;
     std::string sectionstr;
@@ -2241,7 +2280,8 @@ bool dxfRW::processDimStyle() {
     return setError(DRW::BAD_READ_TABLES);
 }
 
-bool dxfRW::processTextStyle(){
+auto dxfRW::processTextStyle() -> bool
+{
     DRW_DBG("dxfRW::processTextStyle");
     int code;
     std::string sectionstr;
@@ -2270,7 +2310,8 @@ bool dxfRW::processTextStyle(){
     return setError(DRW::BAD_READ_TABLES);
 }
 
-bool dxfRW::processVports(){
+auto dxfRW::processVports() -> bool
+{
     DRW_DBG("dxfRW::processVports");
     int code;
     std::string sectionstr;
@@ -2299,7 +2340,8 @@ bool dxfRW::processVports(){
     return setError(DRW::BAD_READ_TABLES);
 }
 
-bool dxfRW::processAppId(){
+auto dxfRW::processAppId() -> bool
+{
     DRW_DBG("dxfRW::processAppId");
     int code;
     std::string sectionstr;
@@ -2330,7 +2372,8 @@ bool dxfRW::processAppId(){
 
 /********* Block Section *********/
 
-bool dxfRW::processBlocks() {
+auto dxfRW::processBlocks() -> bool
+{
     DRW_DBG("dxfRW::processBlocks\n");
     int code;
     std::string sectionstr;
@@ -2350,7 +2393,8 @@ bool dxfRW::processBlocks() {
     return setError(DRW::BAD_READ_BLOCKS);
 }
 
-bool dxfRW::processBlock() {
+auto dxfRW::processBlock() -> bool
+{
     DRW_DBG("dxfRW::processBlock");
     int code;
     DRW_Block block;
@@ -2378,10 +2422,10 @@ bool dxfRW::processBlock() {
     return setError(DRW::BAD_READ_BLOCKS);
 }
 
-
 /********* Entities Section *********/
 
-bool dxfRW::processEntities(bool isblock) {
+auto dxfRW::processEntities(bool isblock) -> bool
+{
     DRW_DBG("dxfRW::processEntities\n");
     int code;
     if (!reader->readRec(&code)){
@@ -2456,7 +2500,8 @@ bool dxfRW::processEntities(bool isblock) {
     return setError(DRW::BAD_READ_ENTITIES);
 }
 
-bool dxfRW::processEllipse() {
+auto dxfRW::processEllipse() -> bool
+{
     DRW_DBG("dxfRW::processEllipse");
     int code;
     DRW_Ellipse ellipse;
@@ -2479,7 +2524,8 @@ bool dxfRW::processEllipse() {
     return setError(DRW::BAD_READ_ENTITIES);
 }
 
-bool dxfRW::processTrace() {
+auto dxfRW::processTrace() -> bool
+{
     DRW_DBG("dxfRW::processTrace");
     int code;
     DRW_Trace trace;
@@ -2502,7 +2548,8 @@ bool dxfRW::processTrace() {
     return setError(DRW::BAD_READ_ENTITIES);
 }
 
-bool dxfRW::processSolid() {
+auto dxfRW::processSolid() -> bool
+{
     DRW_DBG("dxfRW::processSolid");
     int code;
     DRW_Solid solid;
@@ -2525,7 +2572,8 @@ bool dxfRW::processSolid() {
     return setError(DRW::BAD_READ_ENTITIES);
 }
 
-bool dxfRW::process3dface() {
+auto dxfRW::process3dface() -> bool
+{
     DRW_DBG("dxfRW::process3dface");
     int code;
     DRW_3Dface face;
@@ -2546,7 +2594,8 @@ bool dxfRW::process3dface() {
     return setError(DRW::BAD_READ_ENTITIES);
 }
 
-bool dxfRW::processViewport() {
+auto dxfRW::processViewport() -> bool
+{
     DRW_DBG("dxfRW::processViewport");
     int code;
     DRW_Viewport vp;
@@ -2567,7 +2616,8 @@ bool dxfRW::processViewport() {
     return setError(DRW::BAD_READ_ENTITIES);
 }
 
-bool dxfRW::processPoint() {
+auto dxfRW::processPoint() -> bool
+{
     DRW_DBG("dxfRW::processPoint\n");
     int code;
     DRW_Point point;
@@ -2588,7 +2638,8 @@ bool dxfRW::processPoint() {
     return setError(DRW::BAD_READ_ENTITIES);
 }
 
-bool dxfRW::processLine() {
+auto dxfRW::processLine() -> bool
+{
     DRW_DBG("dxfRW::processLine\n");
     int code;
     DRW_Line line;
@@ -2609,7 +2660,8 @@ bool dxfRW::processLine() {
     return setError(DRW::BAD_READ_ENTITIES);
 }
 
-bool dxfRW::processRay() {
+auto dxfRW::processRay() -> bool
+{
     DRW_DBG("dxfRW::processRay\n");
     int code;
     DRW_Ray line;
@@ -2630,7 +2682,8 @@ bool dxfRW::processRay() {
     return setError(DRW::BAD_READ_ENTITIES);
 }
 
-bool dxfRW::processXline() {
+auto dxfRW::processXline() -> bool
+{
     DRW_DBG("dxfRW::processXline\n");
     int code;
     DRW_Xline line;
@@ -2651,7 +2704,8 @@ bool dxfRW::processXline() {
     return setError(DRW::BAD_READ_ENTITIES);
 }
 
-bool dxfRW::processCircle() {
+auto dxfRW::processCircle() -> bool
+{
     DRW_DBG("dxfRW::processPoint\n");
     int code;
     DRW_Circle circle;
@@ -2674,7 +2728,8 @@ bool dxfRW::processCircle() {
     return setError(DRW::BAD_READ_ENTITIES);
 }
 
-bool dxfRW::processArc() {
+auto dxfRW::processArc() -> bool
+{
     DRW_DBG("dxfRW::processPoint\n");
     int code;
     DRW_Arc arc;
@@ -2697,7 +2752,8 @@ bool dxfRW::processArc() {
     return setError(DRW::BAD_READ_ENTITIES);
 }
 
-bool dxfRW::processInsert() {
+auto dxfRW::processInsert() -> bool
+{
     DRW_DBG("dxfRW::processInsert");
     int code;
     DRW_Insert insert;
@@ -2718,7 +2774,8 @@ bool dxfRW::processInsert() {
     return setError(DRW::BAD_READ_ENTITIES);
 }
 
-bool dxfRW::processLWPolyline() {
+auto dxfRW::processLWPolyline() -> bool
+{
     DRW_DBG("dxfRW::processLWPolyline");
     int code;
     DRW_LWPolyline pl;
@@ -2741,7 +2798,8 @@ bool dxfRW::processLWPolyline() {
     return setError(DRW::BAD_READ_ENTITIES);
 }
 
-bool dxfRW::processPolyline() {
+auto dxfRW::processPolyline() -> bool
+{
     DRW_DBG("dxfRW::processPolyline");
     int code;
     DRW_Polyline pl;
@@ -2765,7 +2823,8 @@ bool dxfRW::processPolyline() {
     return setError(DRW::BAD_READ_ENTITIES);
 }
 
-bool dxfRW::processVertex(DRW_Polyline *pl) {
+auto dxfRW::processVertex(DRW_Polyline *pl) -> bool
+{
     DRW_DBG("dxfRW::processVertex");
     int code;
     std::unique_ptr<DRW_Vertex> v(new DRW_Vertex());
@@ -2791,7 +2850,8 @@ bool dxfRW::processVertex(DRW_Polyline *pl) {
     return setError(DRW::BAD_READ_ENTITIES);
 }
 
-bool dxfRW::processText() {
+auto dxfRW::processText() -> bool
+{
     DRW_DBG("dxfRW::processText");
     int code;
     DRW_Text txt;
@@ -2812,7 +2872,8 @@ bool dxfRW::processText() {
     return setError(DRW::BAD_READ_ENTITIES);
 }
 
-bool dxfRW::processMText() {
+auto dxfRW::processMText() -> bool
+{
     DRW_DBG("dxfRW::processMText");
     int code;
     DRW_MText txt;
@@ -2834,7 +2895,8 @@ bool dxfRW::processMText() {
     return setError(DRW::BAD_READ_ENTITIES);
 }
 
-bool dxfRW::processHatch() {
+auto dxfRW::processHatch() -> bool
+{
     DRW_DBG("dxfRW::processHatch");
     int code;
     DRW_Hatch hatch;
@@ -2855,8 +2917,8 @@ bool dxfRW::processHatch() {
     return setError(DRW::BAD_READ_ENTITIES);
 }
 
-
-bool dxfRW::processSpline() {
+auto dxfRW::processSpline() -> bool
+{
     DRW_DBG("dxfRW::processSpline");
     int code;
     DRW_Spline sp;
@@ -2877,8 +2939,8 @@ bool dxfRW::processSpline() {
     return setError(DRW::BAD_READ_ENTITIES);
 }
 
-
-bool dxfRW::processImage() {
+auto dxfRW::processImage() -> bool
+{
     DRW_DBG("dxfRW::processImage");
     int code;
     DRW_Image img;
@@ -2899,8 +2961,8 @@ bool dxfRW::processImage() {
     return setError(DRW::BAD_READ_ENTITIES);
 }
 
-
-bool dxfRW::processDimension() {
+auto dxfRW::processDimension() -> bool
+{
     DRW_DBG("dxfRW::processDimension");
     int code;
     DRW_Dimension dim;
@@ -2959,7 +3021,8 @@ bool dxfRW::processDimension() {
     return setError(DRW::BAD_READ_ENTITIES);
 }
 
-bool dxfRW::processLeader() {
+auto dxfRW::processLeader() -> bool
+{
     DRW_DBG("dxfRW::processLeader");
     int code;
     DRW_Leader leader;
@@ -2980,10 +3043,10 @@ bool dxfRW::processLeader() {
     return setError(DRW::BAD_READ_ENTITIES);
 }
 
-
 /********* Objects Section *********/
 
-bool dxfRW::processObjects() {
+auto dxfRW::processObjects() -> bool
+{
     DRW_DBG("dxfRW::processObjects\n");
     int code;
     if (!reader->readRec(&code) || 0 != code){
@@ -3019,7 +3082,8 @@ bool dxfRW::processObjects() {
     return setError(DRW::BAD_READ_OBJECTS);
 }
 
-bool dxfRW::processImageDef() {
+auto dxfRW::processImageDef() -> bool
+{
     DRW_DBG("dxfRW::processImageDef");
     int code;
     DRW_ImageDef img;
@@ -3040,7 +3104,8 @@ bool dxfRW::processImageDef() {
     return setError(DRW::BAD_READ_OBJECTS);
 }
 
-bool dxfRW::processPlotSettings() {
+auto dxfRW::processPlotSettings() -> bool
+{
     DRW_DBG("dxfRW::processPlotSettings");
     int code;
     DRW_PlotSettings ps;
@@ -3061,7 +3126,8 @@ bool dxfRW::processPlotSettings() {
     return setError(DRW::BAD_READ_OBJECTS);
 }
 
-bool dxfRW::writePlotSettings(DRW_PlotSettings *ent) {
+auto dxfRW::writePlotSettings(DRW_PlotSettings *ent) -> bool
+{
     writer->writeString(0, "PLOTSETTINGS");
     writer->writeString(5, toHexStr(++entCount));
     writer->writeString(100, "AcDbPlotSettings");
@@ -3076,7 +3142,8 @@ bool dxfRW::writePlotSettings(DRW_PlotSettings *ent) {
 /** utility function
  * convert a int to string in hex
  **/
-std::string dxfRW::toHexStr(int n){
+auto dxfRW::toHexStr(int n) -> std::string
+{
 #if defined(__APPLE__)
     char buffer[9]= {'\0'};
     snprintf(buffer,9, "%X", n);
@@ -3088,16 +3155,17 @@ std::string dxfRW::toHexStr(int n){
 #endif
 }
 
-DRW::Version dxfRW::getVersion() const {
+auto dxfRW::getVersion() const -> DRW::Version
+{
     return version;
 }
 
-DRW::error dxfRW::getError() const
+auto dxfRW::getError() const -> DRW::error
 {
     return error;
 }
 
-bool dxfRW::setError(const DRW::error lastError)
+auto dxfRW::setError(const DRW::error lastError) -> bool
 {
     error = lastError;
     return (DRW::BAD_NONE == error);

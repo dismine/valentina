@@ -47,69 +47,69 @@ public:
 
     ~VPieceNode();
 
-    VPieceNode &operator=(const VPieceNode &node);
+    auto operator=(const VPieceNode &node) -> VPieceNode &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VPieceNode(VPieceNode &&node) Q_DECL_NOTHROW;
-    VPieceNode &operator=(VPieceNode &&node) Q_DECL_NOTHROW;
+    auto operator=(VPieceNode &&node) Q_DECL_NOTHROW->VPieceNode &;
 #endif
 
-    friend QDataStream& operator<<(QDataStream& out, const VPieceNode& p);
-    friend QDataStream& operator>>(QDataStream& in, VPieceNode& p);
+    friend auto operator<<(QDataStream &out, const VPieceNode &p) -> QDataStream &;
+    friend auto operator>>(QDataStream &in, VPieceNode &p) -> QDataStream &;
 
-    quint32 GetId() const;
+    auto GetId() const -> quint32;
     void    SetId(quint32 id);
 
-    Tool GetTypeTool() const;
+    auto GetTypeTool() const -> Tool;
     void SetTypeTool(Tool value);
 
-    bool GetReverse() const;
+    auto GetReverse() const -> bool;
     void SetReverse(bool reverse);
 
-    bool IsExcluded() const;
+    auto IsExcluded() const -> bool;
     void SetExcluded(bool exclude);
 
-    qreal GetSABefore(const VContainer *data) const;
-    qreal GetSABefore(const VContainer *data, Unit unit) const;
+    auto GetSABefore(const VContainer *data) const -> qreal;
+    auto GetSABefore(const VContainer *data, Unit unit) const -> qreal;
 
-    QString GetFormulaSABefore() const;
+    auto GetFormulaSABefore() const -> QString;
     void    SetFormulaSABefore(const QString &formula);
 
-    qreal GetSAAfter(const VContainer *data) const;
-    qreal GetSAAfter(const VContainer *data, Unit unit) const;
+    auto GetSAAfter(const VContainer *data) const -> qreal;
+    auto GetSAAfter(const VContainer *data, Unit unit) const -> qreal;
 
-    QString GetFormulaSAAfter() const;
+    auto GetFormulaSAAfter() const -> QString;
     void    SetFormulaSAAfter(const QString &formula);
 
-    QString GetFormulaPassmarkLength() const;
+    auto GetFormulaPassmarkLength() const -> QString;
     void    SetFormulaPassmarkLength(const QString &formula);
 
-    qreal GetPassmarkLength(const VContainer *data, Unit unit) const;
+    auto GetPassmarkLength(const VContainer *data, Unit unit) const -> qreal;
 
-    PieceNodeAngle GetAngleType() const;
+    auto GetAngleType() const -> PieceNodeAngle;
     void           SetAngleType(PieceNodeAngle type);
 
-    bool IsPassmark() const;
+    auto IsPassmark() const -> bool;
     void SetPassmark(bool passmark);
 
-    bool IsMainPathNode() const;
+    auto IsMainPathNode() const -> bool;
     void SetMainPathNode(bool value);
 
-    PassmarkLineType GetPassmarkLineType() const;
+    auto GetPassmarkLineType() const -> PassmarkLineType;
     void             SetPassmarkLineType(PassmarkLineType lineType);
 
-    PassmarkAngleType GetPassmarkAngleType() const;
+    auto GetPassmarkAngleType() const -> PassmarkAngleType;
     void              SetPassmarkAngleType(PassmarkAngleType angleType);
 
-    bool IsShowSecondPassmark() const;
+    auto IsShowSecondPassmark() const -> bool;
     void SetShowSecondPassmark(bool value);
 
-    bool IsCheckUniqueness() const;
+    auto IsCheckUniqueness() const -> bool;
     void SetCheckUniqueness(bool value);
 
-    bool IsManualPassmarkLength() const;
+    auto IsManualPassmarkLength() const -> bool;
     void SetManualPassmarkLength(bool value);
 
-    bool IsTurnPoint() const;
+    auto IsTurnPoint() const -> bool;
     void SetTurnPoint(bool value);
 private:
     QSharedDataPointer<VPieceNodeData> d;

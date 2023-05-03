@@ -59,47 +59,48 @@ namespace qmu
         virtual void InitConst() override;
         virtual void InitOprt() override;
         virtual void OnDetectVar(const QString &pExpr, qmusizetype &nStart, qmusizetype &nEnd) override;
-        qreal        Diff(qreal *a_Var, qreal a_fPos, qreal a_fEpsilon = 0) const;
+        auto Diff(qreal *a_Var, qreal a_fPos, qreal a_fEpsilon = 0) const -> qreal;
+
     protected:
-        static int   IsVal(const QString &a_szExpr, qmusizetype *a_iPos, qreal *a_fVal, const QLocale &locale,
-                           bool cNumbers, const QChar &decimal, const QChar &thousand);
+        static auto IsVal(const QString &a_szExpr, qmusizetype *a_iPos, qreal *a_fVal, const QLocale &locale,
+                          bool cNumbers, const QChar &decimal, const QChar &thousand) -> int;
         // hyperbolic functions
-        static qreal Sinh(qreal);
-        static qreal Cosh(qreal);
-        static qreal Tanh(qreal);
+        static auto Sinh(qreal) -> qreal;
+        static auto Cosh(qreal) -> qreal;
+        static auto Tanh(qreal) -> qreal;
         // arcus hyperbolic functions
-        static qreal ASinh(qreal);
-        static qreal ACosh(qreal);
-        static qreal ATanh(qreal);
+        static auto ASinh(qreal) -> qreal;
+        static auto ACosh(qreal) -> qreal;
+        static auto ATanh(qreal) -> qreal;
         // functions working with degrees
-        static qreal DegreeToRadian(qreal);
-        static qreal RadianToDegree(qreal);
-        static qreal SinD(qreal);
-        static qreal CosD(qreal);
-        static qreal TanD(qreal);
-        static qreal ASinD(qreal);
-        static qreal ACosD(qreal);
-        static qreal ATanD(qreal);
+        static auto DegreeToRadian(qreal) -> qreal;
+        static auto RadianToDegree(qreal) -> qreal;
+        static auto SinD(qreal) -> qreal;
+        static auto CosD(qreal) -> qreal;
+        static auto TanD(qreal) -> qreal;
+        static auto ASinD(qreal) -> qreal;
+        static auto ACosD(qreal) -> qreal;
+        static auto ATanD(qreal) -> qreal;
 
         // Logarithm functions
-        static qreal Log2(qreal);  // Logarithm Base 2
-        static qreal Log10(qreal); // Logarithm Base 10
+        static auto Log2(qreal) -> qreal;  // Logarithm Base 2
+        static auto Log10(qreal) -> qreal; // Logarithm Base 10
         // misc
-        static qreal Abs(qreal);
-        static qreal Rint(qreal);
-        static qreal R2CM(qreal);
-        static qreal CSRCm(qreal length, qreal split, qreal arcLength);
-        static qreal CSRInch(qreal length, qreal split, qreal arcLength);
-        static qreal Sign(qreal);
-        static qreal FMod(qreal, qreal);
+        static auto Abs(qreal) -> qreal;
+        static auto Rint(qreal) -> qreal;
+        static auto R2CM(qreal) -> qreal;
+        static auto CSRCm(qreal length, qreal split, qreal arcLength) -> qreal;
+        static auto CSRInch(qreal length, qreal split, qreal arcLength) -> qreal;
+        static auto Sign(qreal) -> qreal;
+        static auto FMod(qreal, qreal) -> qreal;
         // Prefix operators
         // !!! Unary Minus is a MUST if you want to use negative signs !!!
-        static qreal UnaryMinus(qreal v);
+        static auto UnaryMinus(qreal v) -> qreal;
         // Functions with variable number of arguments
-        static qreal Sum(const qreal*, qmusizetype);  // sum
-        static qreal Avg(const qreal*, qmusizetype);  // mean value
-        static qreal Min(const qreal*, qmusizetype);  // minimum
-        static qreal Max(const qreal*, qmusizetype);  // maximum
+        static auto Sum(const qreal *, qmusizetype) -> qreal; // sum
+        static auto Avg(const qreal *, qmusizetype) -> qreal; // mean value
+        static auto Min(const qreal *, qmusizetype) -> qreal; // minimum
+        static auto Max(const qreal *, qmusizetype) -> qreal; // maximum
     };
 
     QT_WARNING_POP
@@ -110,9 +111,9 @@ namespace qmu
  * @param v The value to negate
  * @return -v
  */
-inline qreal QmuParser::UnaryMinus(qreal v)
-{
-    return -v;
+    inline auto QmuParser::UnaryMinus(qreal v) -> qreal
+    {
+        return -v;
 }
 
 } // namespace qmu

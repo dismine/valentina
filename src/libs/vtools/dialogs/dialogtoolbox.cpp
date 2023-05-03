@@ -174,7 +174,7 @@ auto CurveAliases(const QString &alias1, const QString &alias2) -> QPair<QString
 }  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceNode RowNode(QListWidget *listWidget, int i)
+auto RowNode(QListWidget *listWidget, int i) -> VPieceNode
 {
     SCASSERT(listWidget != nullptr);
 
@@ -239,7 +239,7 @@ void DeployFormula(QDialog *dialog, QPlainTextEdit *formula, QPushButton *button
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FilterObject(QObject *object, QEvent *event)
+auto FilterObject(QObject *object, QEvent *event) -> bool
 {
     if (QPlainTextEdit *plainTextEdit = qobject_cast<QPlainTextEdit *>(object))
     {
@@ -265,7 +265,7 @@ bool FilterObject(QObject *object, QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal EvalToolFormula(QDialog *dialog, const FormulaData &data, bool &flag)
+auto EvalToolFormula(QDialog *dialog, const FormulaData &data, bool &flag) -> qreal
 {
     SCASSERT(data.labelResult != nullptr)
     SCASSERT(data.labelEditFormula != nullptr)
@@ -352,7 +352,7 @@ void ChangeColor(QWidget *widget, const QColor &color)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QColor OkColor(QWidget *widget)
+auto OkColor(QWidget *widget) -> QColor
 {
     SCASSERT(widget != nullptr);
     return widget->palette().color(QPalette::Active, QPalette::WindowText);
@@ -381,7 +381,7 @@ void CheckPointLabel(QDialog *dialog, QLineEdit* edit, QLabel *labelEditNamePoin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int FindNotExcludedNodeDown(QListWidget *listWidget, int candidate)
+auto FindNotExcludedNodeDown(QListWidget *listWidget, int candidate) -> int
 {
     SCASSERT(listWidget != nullptr);
 
@@ -412,7 +412,7 @@ int FindNotExcludedNodeDown(QListWidget *listWidget, int candidate)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int FindNotExcludedNodeUp(QListWidget *listWidget, int candidate)
+auto FindNotExcludedNodeUp(QListWidget *listWidget, int candidate) -> int
 {
     SCASSERT(listWidget != nullptr);
 
@@ -443,7 +443,7 @@ int FindNotExcludedNodeUp(QListWidget *listWidget, int candidate)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FirstPointEqualLast(QListWidget *listWidget, const VContainer *data, QString &error)
+auto FirstPointEqualLast(QListWidget *listWidget, const VContainer *data, QString &error) -> bool
 {
     SCASSERT(listWidget != nullptr);
     if (listWidget->count() > 1)
@@ -457,7 +457,7 @@ bool FirstPointEqualLast(QListWidget *listWidget, const VContainer *data, QStrin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DoublePoints(QListWidget *listWidget, const VContainer *data, QString &error)
+auto DoublePoints(QListWidget *listWidget, const VContainer *data, QString &error) -> bool
 {
     SCASSERT(listWidget != nullptr);
     for (int i=0, sz = listWidget->count()-1; i<sz; ++i)
@@ -514,7 +514,7 @@ auto EachPointLabelIsUnique(QListWidget *listWidget) -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogWarningIcon()
+auto DialogWarningIcon() -> QString
 {
     const QIcon icon = QIcon::fromTheme("dialog-warning",
                                   QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
@@ -527,7 +527,7 @@ QString DialogWarningIcon()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QFont NodeFont(QFont font, bool nodeExcluded)
+auto NodeFont(QFont font, bool nodeExcluded) -> QFont
 {
     font.setPointSize(12);
     font.setWeight(QFont::Bold);
@@ -578,7 +578,7 @@ void SetTabStopDistance(QPlainTextEdit *edit, int tabWidthChar)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QIcon LineColor(int size, const QString &color)
+auto LineColor(int size, const QString &color) -> QIcon
 {
     // On Mac pixmap should be little bit smaller.
 #if defined(Q_OS_MAC)
@@ -621,7 +621,7 @@ auto SegmentAliases(GOType curveType, const QString &alias1, const QString &alia
 QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
-QString GetNodeName(const VContainer *data, const VPieceNode &node, bool showPassmarkDetails)
+auto GetNodeName(const VContainer *data, const VPieceNode &node, bool showPassmarkDetails) -> QString
 {
     const QSharedPointer<VGObject> obj = data->GetGObject(node.GetId());
     QString name = obj->ObjectName();

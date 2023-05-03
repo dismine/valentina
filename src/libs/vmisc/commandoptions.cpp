@@ -140,7 +140,7 @@ const QString LONG_OPTION_PREFER_ONE_SHEET_SOLUTION = QStringLiteral("preferOneS
  * @brief AllKeys return list with all command line keys (short and long forms). Used for testing on conflicts.
  * @return list with all command line keys
  */
-QStringList AllKeys()
+auto AllKeys() -> QStringList
 {
     return QStringList
     {

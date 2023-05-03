@@ -110,7 +110,7 @@ void SavePlaceLabelOptions::redo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool SavePlaceLabelOptions::mergeWith(const QUndoCommand *command)
+auto SavePlaceLabelOptions::mergeWith(const QUndoCommand *command) -> bool
 {
     const SavePlaceLabelOptions *saveCommand = static_cast<const SavePlaceLabelOptions *>(command);
     SCASSERT(saveCommand != nullptr);

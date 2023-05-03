@@ -49,29 +49,30 @@ class VPattern : public VAbstractPattern
 public:
     VPattern(VContainer *data, VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail,
              QObject *parent = nullptr);
+    ~VPattern() override = default;
 
-    virtual void   CreateEmptyFile() override;
+    void CreateEmptyFile() override;
 
-    void           Parse(const Document &parse);
+    void Parse(const Document &parse);
 
-    void           GarbageCollector(bool commit = false);
+    void GarbageCollector(bool commit = false);
 
-    void           setCurrentData();
-    virtual void   UpdateToolData(const quint32 &id, VContainer *data) override;
+    void setCurrentData();
+    void UpdateToolData(const quint32 &id, VContainer *data) override;
 
-    virtual VContainer GetCompleteData() const override;
-    virtual VContainer GetCompletePPData(const QString &name) const override;
+    auto GetCompleteData() const -> VContainer override;
+    auto GetCompletePPData(const QString &name) const -> VContainer override;
 
-    virtual void   IncrementReferens(quint32 id) const override;
-    virtual void   DecrementReferens(quint32 id) const override;
+    void IncrementReferens(quint32 id) const override;
+    void DecrementReferens(quint32 id) const override;
 
-    quint32        SPointActiveDraw();
+    auto SPointActiveDraw() -> quint32;
 
-    QVector<quint32> GetActivePPPieces() const;
+    auto GetActivePPPieces() const -> QVector<quint32>;
 
-    virtual bool   SaveDocument(const QString &fileName, QString &error) override;
+    auto SaveDocument(const QString &fileName, QString &error) -> bool override;
 
-    QRectF         ActiveDrawBoundingRect() const;
+    auto ActiveDrawBoundingRect() const -> QRectF;
 
     void AddEmptyIncrement(const QString &name, IncrementType type = IncrementType::Increment);
     void AddEmptyPreviewCalculation(const QString &name, IncrementType type = IncrementType::Increment);
@@ -97,33 +98,33 @@ public:
 
     void ReplaceNameInFormula(QVector<VFormulaField> &expressions, const QString &name, const QString &newName);
 
-    virtual QString GenerateLabel(const LabelType &type, const QString &reservedName = QString())const override;
-    virtual QString GenerateSuffix() const override;
-    virtual void    Clear() override;
+    auto GenerateLabel(const LabelType &type, const QString &reservedName = QString()) const -> QString override;
+    auto GenerateSuffix() const -> QString override;
+    void Clear() override;
 
-    bool IsReadOnly() const;
+    auto IsReadOnly() const -> bool;
     void SetReadOnly(bool rOnly);
 
-    QString GetLabelPrefix() const;
-    void    SetLabelPrefix(const QString &prefix);
+    auto GetLabelPrefix() const -> QString;
+    void SetLabelPrefix(const QString &prefix);
 
     void LiteParseIncrements();
 
     static const QString AttrReadOnly;
     static const QString AttrLabelPrefix;
 
-    int ElementsToParse() const;
+    auto ElementsToParse() const -> int;
 
 signals:
     void PreParseState();
 
 public slots:
-    virtual void LiteParseTree(const Document &parse) override;
+    void LiteParseTree(const Document &parse) override;
 
     void RefreshPieceGeometry();
 
 protected:
-    virtual void   customEvent(QEvent * event) override;
+    void customEvent(QEvent *event) override;
 
 private:
     // cppcheck-suppress unknownMacro
@@ -141,50 +142,46 @@ private:
      * finish */
     bool m_parsing{false};
 
-    VNodeDetail    ParseDetailNode(const QDomElement &domElement) const;
+    static auto ParseDetailNode(const QDomElement &domElement) -> VNodeDetail;
 
-    void           ParseDrawElement(const QDomNode& node, const Document &parse);
-    void           ParseDrawMode(const QDomNode& node, const Document &parse, const Draw &mode);
-    void           ParseDetailElement(QDomElement &domElement, const Document &parse);
-    void           ParseDetailInternals(const QDomElement &domElement, VPiece &detail) const;
-    QVector<VPieceNode> ParseDetailNodes(const QDomElement &domElement, qreal width, bool closed) const;
-    VPieceLabelData ParsePieceDataTag(const QDomElement &domElement, VPieceLabelData ppData) const;
-    VPatternLabelData ParsePiecePatternInfo(const QDomElement &domElement, VPatternLabelData patternInfo) const;
-    VGrainlineData ParsePieceGrainline(const QDomElement &domElement, VGrainlineData gGeometry) const;
-    void           ParseDetails(const QDomElement &domElement, const Document &parse);
+    void ParseRootElement(const Document &parse, const QDomNode &node);
+    void ParseDrawElement(const QDomNode& node, const Document &parse);
+    void ParseDrawMode(const QDomNode& node, const Document &parse, const Draw &mode);
+    void ParseDrawModeElement(QDomElement &domElement, const Document &parse, const Draw &mode);
+    void ParseDetailElement(QDomElement &domElement, const Document &parse);
+    void ParseDetailInternals(const QDomElement &domElement, VPiece &detail) const;
+    auto ParseDetailNodes(const QDomElement &domElement, qreal width, bool closed) const -> QVector<VPieceNode>;
+    auto ParsePieceDataTag(const QDomElement &domElement, VPieceLabelData ppData) const -> VPieceLabelData;
+    auto ParsePiecePatternInfo(const QDomElement &domElement, VPatternLabelData patternInfo) const -> VPatternLabelData;
+    auto ParsePieceGrainline(const QDomElement &domElement, VGrainlineData gGeometry) const -> VGrainlineData;
+    void ParseDetails(const QDomElement &domElement, const Document &parse);
+    void ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse,
+                           const QString &type);
+    void ParseLineElement(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
+    void ParseSplineElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse,
+                            const QString &type);
+    void ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse,
+                         const QString &type);
+    void ParseEllipticalArcElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse,
+                                   const QString &type);
+    void ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse,
+                           const QString &type);
+    void ParseOperationElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse,
+                               const QString &type);
+    void ParsePathElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
+    void ParseIncrementsElement(const QDomNode &node, const Document &parse);
 
-    void           ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElement,
-                                     const Document &parse, const QString &type);
-    void           ParseLineElement(VMainGraphicsScene *scene, const QDomElement& domElement,
-                                    const Document &parse);
-    void           ParseSplineElement(VMainGraphicsScene *scene, QDomElement &domElement,
-                                      const Document &parse, const QString& type);
-    void           ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElement,
-                                   const Document &parse, const QString& type);
-    void           ParseEllipticalArcElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse,
-                                             const QString &type);
-    void           ParseToolsElement(VMainGraphicsScene *scene, const QDomElement& domElement,
-                                     const Document &parse, const QString& type);
-    void           ParseOperationElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse,
-                                         const QString& type);
-
-    void           ParsePathElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
-
-    void           ParseIncrementsElement(const QDomNode& node, const Document &parse);
-    void           PrepareForParse(const Document &parse);
-    void           ToolsCommonAttributes(const QDomElement &domElement, quint32 &id);
-    void           DrawToolsCommonAttributes(const QDomElement &domElement, quint32 &id, QString &notes);
-    void           PointsWithLineCommonAttributes(const QDomElement &domElement, VToolLinePointInitData &initData);
-    void           PointsCommonAttributes(const QDomElement &domElement, VToolSinglePointInitData &initData);
-    void           PointsCommonAttributes(const QDomElement &domElement, quint32 &id, qreal &mx, qreal &my);
-    void           DrawPointsCommonAttributes(const QDomElement &domElement, quint32 &id, qreal &mx, qreal &my,
-                                    QString &notes);
-    void           SplinesCommonAttributes(const QDomElement &domElement, quint32 &id, quint32 &idObject,
-                                           quint32 &idTool);
-    template <typename T>
-    QRectF         ToolBoundingRect(const QRectF &rec, quint32 id) const;
-    void           ParseCurrentPP();
-    QString        GetLabelBase(quint32 index)const;
+    void PrepareForParse(const Document &parse);
+    void ToolsCommonAttributes(const QDomElement &domElement, quint32 &id);
+    void DrawToolsCommonAttributes(const QDomElement &domElement, quint32 &id, QString &notes);
+    void PointsWithLineCommonAttributes(const QDomElement &domElement, VToolLinePointInitData &initData);
+    void PointsCommonAttributes(const QDomElement &domElement, VToolSinglePointInitData &initData);
+    void PointsCommonAttributes(const QDomElement &domElement, quint32 &id, qreal &mx, qreal &my);
+    void DrawPointsCommonAttributes(const QDomElement &domElement, quint32 &id, qreal &mx, qreal &my, QString &notes);
+    void SplinesCommonAttributes(const QDomElement &domElement, quint32 &id, quint32 &idObject, quint32 &idTool);
+    template <typename T> auto ToolBoundingRect(const QRectF &rec, quint32 id) const -> QRectF;
+    void ParseCurrentPP();
+    auto GetLabelBase(quint32 index) const -> QString;
 
     void ParseToolBasePoint(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
     void ParseToolEndLine(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
@@ -245,10 +242,10 @@ private:
     void ParseToolFlippingByAxis(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
     void ParseToolMove(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
 
-    qreal EvalFormula(VContainer *data, const QString &formula, bool *ok) const;
+    auto EvalFormula(VContainer *data, const QString &formula, bool *ok) const -> qreal;
 
-    QDomElement MakeEmptyIncrement(const QString &name, IncrementType type);
-    QDomElement FindIncrement(const QString &name) const;
+    auto MakeEmptyIncrement(const QString &name, IncrementType type) -> QDomElement;
+    auto FindIncrement(const QString &name) const -> QDomElement;
 
     void NewEmptyIncrement(const QString &type, const QString &name, IncrementType varType);
     void NewEmptyIncrementAfter(const QString &type, const QString &after, const QString &name, IncrementType varType);
@@ -258,9 +255,9 @@ private:
 
     void SetIncrementAttribute(const QString &name, const QString &attr, const QString &text);
 
-    QString LastDrawName() const;
-    quint32 LastToolId() const;
-    quint32 PPLastToolId(const QString &name) const;
+    auto LastDrawName() const -> QString;
+    auto LastToolId() const -> quint32;
+    auto PPLastToolId(const QString &name) const -> quint32;
 };
 
 #endif // VPATTERN_H

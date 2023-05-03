@@ -176,12 +176,12 @@ extern const QString TypeLineDotLine;
 extern const QString TypeLineDashDotLine;
 extern const QString TypeLineDashDotDotLine;
 
-QStringList          StylesList();
-Qt::PenStyle         LineStyleToPenStyle(const QString &typeLine);
-QString              PenStyleToLineStyle(Qt::PenStyle penStyle);
-QIcon                PenStylePic(Qt::PenStyle style);
-QMap<QString, QIcon> LineStylesPics();
-QMap<QString, QIcon> CurvePenStylesPics();
+auto StylesList() -> QStringList;
+auto LineStyleToPenStyle(const QString &typeLine) -> Qt::PenStyle;
+auto PenStyleToLineStyle(Qt::PenStyle penStyle) -> QString;
+auto PenStylePic(Qt::PenStyle style) -> QIcon;
+auto LineStylesPics() -> QMap<QString, QIcon>;
+auto CurvePenStylesPics() -> QMap<QString, QIcon>;
 
 extern const QString ColorDefault;
 extern const QString ColorBlack;

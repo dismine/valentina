@@ -45,7 +45,7 @@ VPE::VObjectProperty::VObjectProperty(const QString& name)
 }
 
 //! Get the data how it should be displayed
-QVariant VPE::VObjectProperty::data (int column, int role) const
+auto VPE::VObjectProperty::data(int column, int role) const -> QVariant
 {
     if (objects.empty())
     {
@@ -58,17 +58,17 @@ QVariant VPE::VObjectProperty::data (int column, int role) const
     {
         return VProperty::d_ptr->VariantValue;
     }
-    else if (column == DPC_Data && Qt::EditRole == role)
+    
+    if (column == DPC_Data && Qt::EditRole == role)
     {
         return tmpEditor->currentIndex();
     }
-    else
-        return VProperty::data(column, role);
+    return VProperty::data(column, role);
 }
 
 //! Returns an editor widget, or NULL if it doesn't supply one
-QWidget* VPE::VObjectProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
-                                       const QAbstractItemDelegate* delegate)
+auto VPE::VObjectProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
+                                        const QAbstractItemDelegate *delegate) -> QWidget *
 {
     Q_UNUSED(options)
     Q_UNUSED(delegate)
@@ -84,7 +84,7 @@ QWidget* VPE::VObjectProperty::createEditor(QWidget * parent, const QStyleOption
     return VProperty::d_ptr->editor;
 }
 
-bool VPE::VObjectProperty::setEditorData(QWidget *editor)
+auto VPE::VObjectProperty::setEditorData(QWidget *editor) -> bool
 {
     if (!editor)
     {
@@ -111,7 +111,7 @@ bool VPE::VObjectProperty::setEditorData(QWidget *editor)
 }
 
 //! Gets the data from the widget
-QVariant VPE::VObjectProperty::getEditorData(const QWidget *editor) const
+auto VPE::VObjectProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
     const QComboBox* tmpEditor = qobject_cast<const QComboBox*>(editor);
     if (tmpEditor)
@@ -131,7 +131,7 @@ void VPE::VObjectProperty::setObjectsList(const QMap<QString, quint32> &objects)
 
 //! Get the settings. This function has to be implemented in a subclass in order to have an effect
 // cppcheck-suppress unusedFunction
-QMap<QString, quint32> VPE::VObjectProperty::getObjects() const
+auto VPE::VObjectProperty::getObjects() const -> QMap<QString, quint32>
 {
     return objects;
 }
@@ -152,12 +152,12 @@ void VPE::VObjectProperty::setValue(const QVariant& value)
     }
 }
 
-QString VPE::VObjectProperty::type() const
+auto VPE::VObjectProperty::type() const -> QString
 {
     return "objectList";
 }
 
-VPE::VProperty* VPE::VObjectProperty::clone(bool include_children, VProperty* container) const
+auto VPE::VObjectProperty::clone(bool include_children, VProperty *container) const -> VPE::VProperty *
 {
     return VProperty::clone(include_children, container ? container : new VObjectProperty(getName()));
 }

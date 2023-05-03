@@ -85,7 +85,7 @@ void MoveSPoint::redo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool MoveSPoint::mergeWith(const QUndoCommand *command)
+auto MoveSPoint::mergeWith(const QUndoCommand *command) -> bool
 {
     const auto *moveCommand = static_cast<const MoveSPoint *>(command);
     SCASSERT(moveCommand != nullptr)
@@ -107,7 +107,7 @@ bool MoveSPoint::mergeWith(const QUndoCommand *command)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int MoveSPoint::id() const
+auto MoveSPoint::id() const -> int
 {
     return static_cast<int>(UndoCommand::MoveSPoint);
 }

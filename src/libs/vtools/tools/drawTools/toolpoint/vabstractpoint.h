@@ -56,7 +56,7 @@ public:
     VAbstractPoint(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes);
     virtual ~VAbstractPoint() = default;
 
-    virtual QString      getTagName() const override;
+    virtual auto getTagName() const -> QString override;
 
     template <typename T>
     void ShowToolVisualization(bool show);

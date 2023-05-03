@@ -51,32 +51,32 @@ public:
     DialogCurveIntersectAxis(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogCurveIntersectAxis() override;
 
-    QString      GetPointName() const;
+    auto GetPointName() const -> QString;
     void         SetPointName(const QString &value);
 
-    QString      GetTypeLine() const;
+    auto GetTypeLine() const -> QString;
     void         SetTypeLine(const QString &value);
 
-    QString      GetAngle() const;
+    auto GetAngle() const -> QString;
     void         SetAngle(const QString &value);
 
-    quint32      GetBasePointId() const;
+    auto GetBasePointId() const -> quint32;
     void         SetBasePointId(quint32 value);
 
-    quint32      getCurveId() const;
+    auto getCurveId() const -> quint32;
     void         setCurveId(quint32 value);
 
-    QString      GetLineColor() const;
+    auto GetLineColor() const -> QString;
     void         SetLineColor(const QString &value);
 
     void    SetNotes(const QString &notes);
-    QString GetNotes() const;
+    auto GetNotes() const -> QString;
 
     void    SetAliasSuffix1(const QString &alias);
-    QString GetAliasSuffix1() const;
+    auto GetAliasSuffix1() const -> QString;
 
     void    SetAliasSuffix2(const QString &alias);
-    QString GetAliasSuffix2() const;
+    auto GetAliasSuffix2() const -> QString;
 
     virtual void ShowDialog(bool click) override;
 public slots:
@@ -91,7 +91,7 @@ protected:
      */
     virtual void SaveData() override;
     virtual void closeEvent(QCloseEvent *event) override;
-    virtual bool IsValid() const final;
+    virtual auto IsValid() const -> bool final;
 private slots:
     void ValidateAlias();
 private:
@@ -120,7 +120,7 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogCurveIntersectAxis::IsValid() const
+inline auto DialogCurveIntersectAxis::IsValid() const -> bool
 {
     return flagFormula && flagName && flagAlias1 && flagAlias2;
 }

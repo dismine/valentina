@@ -52,7 +52,7 @@ public:
     explicit VGraphicsSimpleTextItem( const QString & text, QGraphicsItem *parent = nullptr );
     virtual ~VGraphicsSimpleTextItem() =default;
 
-    virtual int  type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Vis::GraphicsSimpleTextItem)};
 
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
@@ -65,7 +65,7 @@ public:
 
     void SetRealPos(const QPointF &pos);
 
-    QColor BaseColor() const;
+    auto BaseColor() const -> QColor;
     void   SetBaseColor(const QColor &baseColor);
 
     void SetDestination(const QPointF &destination);
@@ -85,7 +85,7 @@ signals:
     void         PointChoosed();
     void         PointSelected(bool selected);
 protected:
-    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) override;
+    virtual auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
     virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent *event ) override;
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent *event ) override;
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent *event ) override;

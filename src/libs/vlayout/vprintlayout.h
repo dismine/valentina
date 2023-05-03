@@ -164,13 +164,13 @@ private:
     void SetPrinterOutputFileName(QPrinter *printer, PrintType printType, const QString &filePath = QString());
     void SetPrinterPageSize(QPrinter *printer);
 
-    QString DocName() const;
+    auto DocName() const -> QString;
 
     void PreparePaper(vsizetype index) const;
     void RestorePaper(vsizetype index) const;
 
-    bool IsPagesUniform() const;
-    bool IsPagesFit(QSizeF printPaper) const;
+    auto IsPagesUniform() const -> bool;
+    auto IsPagesFit(QSizeF printPaper) const -> bool;
 
     auto WatermarkData() const -> VWatermarkData;
 };
@@ -260,7 +260,7 @@ inline void VPrintLayout::SetAutoCropLength(bool isAutoCropLength)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool VPrintLayout::IsAutoCropWidth() const
+inline auto VPrintLayout::IsAutoCropWidth() const -> bool
 {
     return m_isAutoCropWidth;
 }

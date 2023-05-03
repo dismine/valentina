@@ -39,6 +39,7 @@ public:
     VPSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
                     QObject *parent = nullptr);
     VPSettings(const QString &fileName, Format format, QObject *parent = nullptr);
+    ~VPSettings() override = default;
 
     auto IsDockWidgetPropertiesActive() const -> bool;
     static auto GetDefDockWidgetPropertiesActive() -> bool;
@@ -103,7 +104,7 @@ public:
     auto GetLayoutLineWidth() const -> int;
     void SetLayoutLineWidth(int width);
 
-    bool GetShowGrainline() const;
+    auto GetShowGrainline() const -> bool;
     void SetShowGrainline(bool value);
 
 private:

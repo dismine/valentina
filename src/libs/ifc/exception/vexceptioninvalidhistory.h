@@ -35,12 +35,12 @@ class VExceptionInvalidHistory : public VException
 public:
     explicit VExceptionInvalidHistory(const QString &error) V_NOEXCEPT_EXPR (true);
     VExceptionInvalidHistory(const VExceptionInvalidHistory &e) V_NOEXCEPT_EXPR (true);
-    VExceptionInvalidHistory &operator=(const VExceptionInvalidHistory &e) V_NOEXCEPT_EXPR (true);
+    auto operator=(const VExceptionInvalidHistory &e) V_NOEXCEPT_EXPR(true) -> VExceptionInvalidHistory &;
     virtual ~VExceptionInvalidHistory() V_NOEXCEPT_EXPR (true) = default;
 
     Q_NORETURN virtual void raise() const override { throw *this; }
 
-    Q_REQUIRED_RESULT virtual VExceptionInvalidHistory *clone() const override
+    Q_REQUIRED_RESULT virtual auto clone() const -> VExceptionInvalidHistory * override
     { return new VExceptionInvalidHistory(*this); }
 };
 

@@ -388,7 +388,7 @@ void VPatternConverter::DowngradeToCurrentMaxVersion()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPatternConverter::IsReadOnly() const
+auto VPatternConverter::IsReadOnly() const -> bool
 {
     // Check if attribute readOnly was not changed in file format
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == FormatVersion(0, 9, 2),
@@ -620,7 +620,7 @@ void VPatternConverter::ConvertMeasurementsToV0_2_0()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSet<QString> VPatternConverter::FixIncrementsToV0_2_0()
+auto VPatternConverter::FixIncrementsToV0_2_0() -> QSet<QString>
 {
     // TODO. Delete if minimal supported version is 0.2.0
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 2, 0),
@@ -994,7 +994,8 @@ void VPatternConverter::ConvertPathPointExpressionsToV0_2_0(const QMap<QString, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPatternConverter::FixMeasurementInFormulaToV0_2_0(const QString &formula, const QMap<QString, QString> &names)
+auto VPatternConverter::FixMeasurementInFormulaToV0_2_0(const QString &formula, const QMap<QString, QString> &names)
+    -> QString
 {
     // TODO. Delete if minimal supported version is 0.2.0
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 2, 0),
@@ -1028,7 +1029,7 @@ QString VPatternConverter::FixMeasurementInFormulaToV0_2_0(const QString &formul
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPatternConverter::FixIncrementInFormulaToV0_2_0(const QString &formula, const QSet<QString> &names)
+auto VPatternConverter::FixIncrementInFormulaToV0_2_0(const QString &formula, const QSet<QString> &names) -> QString
 {
     // TODO. Delete if minimal supported version is 0.2.0
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 2, 0),
@@ -1116,7 +1117,7 @@ void VPatternConverter::RemoveColorToolCutV0_3_1()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPatternConverter::MUnitV0_1_4() const
+auto VPatternConverter::MUnitV0_1_4() const -> QString
 {
     // TODO. Delete if minimal supported version is 0.2.0
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 2, 0),
@@ -1136,7 +1137,7 @@ QString VPatternConverter::MUnitV0_1_4() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternConverter::TagMeasurementsV0_1_4() const
+auto VPatternConverter::TagMeasurementsV0_1_4() const -> QDomElement
 {
     // TODO. Delete if minimal supported version is 0.2.0
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 2, 0),
@@ -1153,7 +1154,7 @@ QDomElement VPatternConverter::TagMeasurementsV0_1_4() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternConverter::TagIncrementsV0_1_4() const
+auto VPatternConverter::TagIncrementsV0_1_4() const -> QDomElement
 {
     // TODO. Delete if minimal supported version is 0.2.0
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 2, 0),
@@ -1247,7 +1248,7 @@ void VPatternConverter::SaveChildrenToolUnionToV0_2_4(quint32 id, const QVector<
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_0()
+auto VPatternConverter::OldNamesToNewNames_InV0_2_0() -> QMap<QString, QString>
 {
     // TODO. Delete if minimal supported version is 0.2.0
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 2, 0),
@@ -1427,7 +1428,7 @@ QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_0()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_1()
+auto VPatternConverter::OldNamesToNewNames_InV0_2_1() -> QMap<QString, QString>
 {
     // TODO. Delete if minimal supported version is 0.2.1
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 2, 1),
@@ -1741,7 +1742,7 @@ void VPatternConverter::TagDetailToV0_4_0()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternConverter::GetUnionDetailNodesV0_4_0(const QDomElement &detail)
+auto VPatternConverter::GetUnionDetailNodesV0_4_0(const QDomElement &detail) -> QDomElement
 {
     QDomElement tagNodes = createElement(*strNodes);
 
@@ -1773,7 +1774,7 @@ QDomElement VPatternConverter::GetUnionDetailNodesV0_4_0(const QDomElement &deta
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternConverter::GetUnionChildrenNodesV0_4_0(const QDomElement &detail)
+auto VPatternConverter::GetUnionChildrenNodesV0_4_0(const QDomElement &detail) -> QDomElement
 {
     QDomElement tagNodes = createElement(*strNodes);
 
@@ -1847,7 +1848,7 @@ void VPatternConverter::LabelTagToV0_4_4(const QString &tagName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternConverter::AddTagPatternLabelV0_5_1()
+auto VPatternConverter::AddTagPatternLabelV0_5_1() -> QDomElement
 {
     // TODO. Delete if minimal supported version is 0.6.0
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 6, 0),

@@ -109,8 +109,8 @@ void VToolTrueDarts::SetDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolTrueDarts *VToolTrueDarts::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                       VAbstractPattern *doc, VContainer *data)
+auto VToolTrueDarts::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                            VContainer *data) -> VToolTrueDarts *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogTrueDarts> dialogTool = qobject_cast<DialogTrueDarts *>(dialog);
@@ -140,7 +140,7 @@ VToolTrueDarts *VToolTrueDarts::Create(const QPointer<DialogTool> &dialog, VMain
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolTrueDarts *VToolTrueDarts::Create(VToolTrueDartsInitData initData)
+auto VToolTrueDarts::Create(VToolTrueDartsInitData initData) -> VToolTrueDarts *
 {
     const QSharedPointer<VPointF> baseLineP1 = initData.data->GeometricObject<VPointF>(initData.baseLineP1Id);
     const QSharedPointer<VPointF> baseLineP2 = initData.data->GeometricObject<VPointF>(initData.baseLineP2Id);
@@ -200,31 +200,31 @@ void VToolTrueDarts::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolTrueDarts::BaseLineP1Name() const
+auto VToolTrueDarts::BaseLineP1Name() const -> QString
 {
     return VAbstractTool::data.GetGObject(baseLineP1Id)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolTrueDarts::BaseLineP2Name() const
+auto VToolTrueDarts::BaseLineP2Name() const -> QString
 {
     return VAbstractTool::data.GetGObject(baseLineP2Id)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolTrueDarts::DartP1Name() const
+auto VToolTrueDarts::DartP1Name() const -> QString
 {
     return VAbstractTool::data.GetGObject(dartP1Id)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolTrueDarts::DartP2Name() const
+auto VToolTrueDarts::DartP2Name() const -> QString
 {
     return VAbstractTool::data.GetGObject(dartP2Id)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolTrueDarts::DartP3Name() const
+auto VToolTrueDarts::DartP3Name() const -> QString
 {
     return VAbstractTool::data.GetGObject(dartP3Id)->name();
 }

@@ -343,7 +343,7 @@ void exactinit()
 /*                                                                           */
 /*****************************************************************************/
 
-int fast_expansion_sum_zeroelim(int elen, qreal *e, int flen, qreal *f, qreal *h)  /* h cannot be e or f. */
+auto fast_expansion_sum_zeroelim(int elen, qreal *e, int flen, qreal *f, qreal *h) -> int /* h cannot be e or f. */
 {
     qreal Q;
     INEXACT qreal Qnew;
@@ -445,7 +445,7 @@ int fast_expansion_sum_zeroelim(int elen, qreal *e, int flen, qreal *f, qreal *h
 /*                                                                           */
 /*****************************************************************************/
 
-int scale_expansion_zeroelim(int elen, qreal *e, qreal b, qreal *h)   /* e and h cannot be the same. */
+auto scale_expansion_zeroelim(int elen, qreal *e, qreal b, qreal *h) -> int /* e and h cannot be the same. */
 {
     INEXACT qreal Q, sum;
     qreal hh;
@@ -496,7 +496,7 @@ int scale_expansion_zeroelim(int elen, qreal *e, qreal b, qreal *h)   /* e and h
 /*                                                                           */
 /*****************************************************************************/
 
-qreal estimate(int elen, qreal *e)
+auto estimate(int elen, qreal *e) -> qreal
 {
     qreal Q;
     int eindex;
@@ -509,7 +509,7 @@ qreal estimate(int elen, qreal *e)
     return Q;
 }
 
-qreal incircleadapt(qreal *pa, qreal *pb, qreal *pc, qreal *pd, qreal permanent)
+auto incircleadapt(qreal *pa, qreal *pb, qreal *pc, qreal *pd, qreal permanent) -> qreal
 {
     INEXACT qreal adx, bdx, cdx, ady, bdy, cdy;
     qreal det, errbound;
@@ -1043,8 +1043,7 @@ qreal incircleadapt(qreal *pa, qreal *pb, qreal *pc, qreal *pd, qreal permanent)
     return finnow[finlength - 1];
 }
 
-
-qreal incircle(qreal *pa, qreal *pb, qreal *pc, qreal *pd)
+auto incircle(qreal *pa, qreal *pb, qreal *pc, qreal *pd) -> qreal
 {
     qreal adx, bdx, cdx, ady, bdy, cdy;
     qreal bdxcdy, cdxbdy, cdxady, adxcdy, adxbdy, bdxady;

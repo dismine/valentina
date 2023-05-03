@@ -46,10 +46,11 @@ public:
                       QUndoCommand *parent = nullptr);
     virtual ~OperationMoveLabel()=default;
 
-    virtual bool mergeWith(const QUndoCommand *command) override;
-    virtual int  id() const override;
+    virtual auto mergeWith(const QUndoCommand *command) -> bool override;
+    virtual auto id() const -> int override;
 
-    quint32 GetToolId() const;
+    auto GetToolId() const -> quint32;
+
 protected:
     virtual void Do(const QPointF &pos) override;
 private:
@@ -61,7 +62,7 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline quint32 OperationMoveLabel::GetToolId() const
+inline auto OperationMoveLabel::GetToolId() const -> quint32
 {
     return m_idTool;
 }

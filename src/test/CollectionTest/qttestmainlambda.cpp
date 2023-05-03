@@ -31,7 +31,7 @@
 #include "tst_tapecommandline.h"
 #include "tst_valentinacommandline.h"
 
-int main(int argc, char** argv)
+auto main(int argc, char **argv) -> int
 {
     QApplication app( argc, argv );
 

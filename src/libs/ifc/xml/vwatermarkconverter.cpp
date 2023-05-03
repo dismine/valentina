@@ -65,25 +65,25 @@ auto VWatermarkConverter::XSDSchemas() -> QHash<unsigned int, QString>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-unsigned VWatermarkConverter::MinVer() const
+auto VWatermarkConverter::MinVer() const -> unsigned
 {
     return WatermarkMinVer;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-unsigned VWatermarkConverter::MaxVer() const
+auto VWatermarkConverter::MaxVer() const -> unsigned
 {
     return WatermarkMaxVer;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VWatermarkConverter::MinVerStr() const
+auto VWatermarkConverter::MinVerStr() const -> QString
 {
     return WatermarkMinVerStr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VWatermarkConverter::MaxVerStr() const
+auto VWatermarkConverter::MaxVerStr() const -> QString
 {
     return WatermarkMaxVerStr;
 }

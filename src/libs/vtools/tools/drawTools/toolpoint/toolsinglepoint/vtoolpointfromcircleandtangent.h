@@ -66,22 +66,22 @@ class VToolPointFromCircleAndTangent : public VToolSinglePoint
     Q_OBJECT // NOLINT
 public:
     virtual void SetDialog() override;
-    static VToolPointFromCircleAndTangent *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
-                                                  VAbstractPattern *doc, VContainer *data);
-    static VToolPointFromCircleAndTangent *Create(VToolPointFromCircleAndTangentInitData &initData);
-    static bool FindPoint(const QPointF &p, const QPointF &center, qreal radius, const CrossCirclesPoint crossPoint,
-                          QPointF *intersectionPoint);
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolPointFromCircleAndTangent *;
+    static auto Create(VToolPointFromCircleAndTangentInitData &initData) -> VToolPointFromCircleAndTangent *;
+    static auto FindPoint(const QPointF &p, const QPointF &center, qreal radius, const CrossCirclesPoint crossPoint,
+                          QPointF *intersectionPoint) -> bool;
     static const QString ToolType;
-    virtual int  type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::PointFromCircleAndTangent) };
 
-    QString TangentPointName() const;
-    QString CircleCenterPointName() const;
+    auto TangentPointName() const -> QString;
+    auto CircleCenterPointName() const -> QString;
 
-    VFormula GetCircleRadius() const;
+    auto GetCircleRadius() const -> VFormula;
     void     SetCircleRadius(const VFormula &value);
 
-    CrossCirclesPoint GetCrossCirclesPoint() const;
+    auto GetCrossCirclesPoint() const -> CrossCirclesPoint;
     void              SetCrossCirclesPoint(const CrossCirclesPoint &value);
 
     virtual void ShowVisualization(bool show) override;

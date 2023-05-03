@@ -44,19 +44,17 @@ VPE::VShortcutProperty::~VShortcutProperty()
     //
 }
 
-QVariant VPE::VShortcutProperty::data (int column, int role) const
+auto VPE::VShortcutProperty::data(int column, int role) const -> QVariant
 {
     if (column == DPC_Data && (Qt::DisplayRole == role || Qt::EditRole == role))
     {
         return d_ptr->VariantValue;
     }
-    else
-        return VProperty::data(column, role);
+    return VProperty::data(column, role);
 }
 
-
-QWidget* VPE::VShortcutProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
-                                              const QAbstractItemDelegate* delegate)
+auto VPE::VShortcutProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
+                                          const QAbstractItemDelegate *delegate) -> QWidget *
 {
     Q_UNUSED(options)
 
@@ -69,8 +67,7 @@ QWidget* VPE::VShortcutProperty::createEditor(QWidget * parent, const QStyleOpti
     return tmpWidget;
 }
 
-
-bool VPE::VShortcutProperty::setEditorData(QWidget* editor)
+auto VPE::VShortcutProperty::setEditorData(QWidget *editor) -> bool
 {
     VShortcutEditWidget* tmpWidget = qobject_cast<VShortcutEditWidget*>(editor);
     if (tmpWidget)
@@ -83,8 +80,7 @@ bool VPE::VShortcutProperty::setEditorData(QWidget* editor)
     return true;
 }
 
-
-QVariant VPE::VShortcutProperty::getEditorData(const QWidget *editor) const
+auto VPE::VShortcutProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
     const VShortcutEditWidget* tmpWidget = qobject_cast<const VShortcutEditWidget*>(editor);
     if (tmpWidget)
@@ -95,13 +91,12 @@ QVariant VPE::VShortcutProperty::getEditorData(const QWidget *editor) const
     return QVariant();
 }
 
-
-QString VPE::VShortcutProperty::type() const
+auto VPE::VShortcutProperty::type() const -> QString
 {
     return "shortcut";
 }
 
-VPE::VProperty* VPE::VShortcutProperty::clone(bool include_children, VProperty* container) const
+auto VPE::VShortcutProperty::clone(bool include_children, VProperty *container) const -> VPE::VProperty *
 {
     return VProperty::clone(include_children, container ? container : new VShortcutProperty(getName()));
 }

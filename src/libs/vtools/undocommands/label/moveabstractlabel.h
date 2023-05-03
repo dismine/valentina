@@ -49,8 +49,9 @@ public:
     virtual void undo() override;
     virtual void redo() override;
 
-    quint32 GetPointId() const;
-    QPointF GetNewPos() const;
+    auto GetPointId() const -> quint32;
+    auto GetNewPos() const -> QPointF;
+
 protected:
     QPointF m_oldPos;
     QPointF m_newPos;
@@ -61,13 +62,13 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline quint32 MoveAbstractLabel::GetPointId() const
+inline auto MoveAbstractLabel::GetPointId() const -> quint32
 {
     return nodeId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QPointF MoveAbstractLabel::GetNewPos() const
+inline auto MoveAbstractLabel::GetNewPos() const -> QPointF
 {
     return m_newPos;
 }

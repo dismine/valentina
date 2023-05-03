@@ -44,10 +44,10 @@ public:
 
     virtual void undo() override;
     virtual void redo() override;
-    virtual bool mergeWith(const QUndoCommand *command) override;
-    virtual int  id() const override;
-    quint32      DetId() const;
-    VPiece       NewDet() const;
+    virtual auto mergeWith(const QUndoCommand *command) -> bool override;
+    virtual auto id() const -> int override;
+    auto DetId() const -> quint32;
+    auto NewDet() const -> VPiece;
 signals:
     void UpdateGroups();
 private:
@@ -59,13 +59,13 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline quint32 SavePieceOptions::DetId() const
+inline auto SavePieceOptions::DetId() const -> quint32
 {
     return nodeId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline VPiece SavePieceOptions::NewDet() const
+inline auto SavePieceOptions::NewDet() const -> VPiece
 {
     return m_newDet;
 }

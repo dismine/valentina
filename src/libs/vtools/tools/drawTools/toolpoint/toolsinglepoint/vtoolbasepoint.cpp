@@ -98,7 +98,7 @@ void VToolBasePoint::SetDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolBasePoint *VToolBasePoint::Create(VToolBasePointInitData initData)
+auto VToolBasePoint::Create(VToolBasePointInitData initData) -> VToolBasePoint *
 {
     VPointF *point = new VPointF(initData.x, initData.y, initData.name, initData.mx, initData.my);
     point->SetShowLabel(initData.showLabel);
@@ -172,7 +172,7 @@ void VToolBasePoint::AddToFile()
  * @param value value.
  * @return value.
  */
-QVariant VToolBasePoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+auto VToolBasePoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value) -> QVariant
 {
     if (change == ItemPositionChange && scene())
     {
@@ -203,7 +203,7 @@ QVariant VToolBasePoint::itemChange(QGraphicsItem::GraphicsItemChange change, co
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VToolBasePoint::GetBasePointPos() const
+auto VToolBasePoint::GetBasePointPos() const -> QPointF
 {
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     QPointF pos(VAbstractValApplication::VApp()->fromPixel(p->x()), VAbstractValApplication::VApp()->fromPixel(p->y()));
@@ -327,7 +327,7 @@ void VToolBasePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolBasePoint::MakeToolTip() const
+auto VToolBasePoint::MakeToolTip() const -> QString
 {
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(m_id);
 

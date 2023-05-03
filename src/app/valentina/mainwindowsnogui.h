@@ -39,7 +39,6 @@
 #include "dialogs/dialogsavelayout.h"
 #include "../vlayout/vlayoutgenerator.h"
 #include "../vwidgets/vabstractmainwindow.h"
-#include "../vlayout/vtextmanager.h"
 #include "../vlayout/vprintlayout.h"
 
 class QGraphicsScene;
@@ -55,15 +54,16 @@ class QWinTaskbarProgress;
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 
-struct DetailForLayout {
+struct DetailForLayout
+{
     DetailForLayout() = default;
 
     DetailForLayout(quint32 id, const VPiece &piece)
         : id(id), piece(piece)
     {}
 
-    quint32 id{NULL_ID};
-    VPiece piece;
+    quint32 id{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
+    VPiece piece{};      // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
 QT_WARNING_POP
@@ -75,7 +75,7 @@ class MainWindowsNoGUI : public VAbstractMainWindow
     Q_OBJECT // NOLINT
 public:
     explicit MainWindowsNoGUI(QWidget *parent = nullptr);
-    virtual ~MainWindowsNoGUI() override;
+    ~MainWindowsNoGUI() override;
 
 public slots:
     void ToolLayoutSettings(bool checked);
@@ -86,70 +86,69 @@ public slots:
 protected slots:
     void ExportFMeasurementsToCSV();
 protected:
-    QVector<VLayoutPiece> listDetails{};
+    QVector<VLayoutPiece> listDetails{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief currentScene pointer to current scene. */
-    QGraphicsScene *currentScene{nullptr};
+    QGraphicsScene *currentScene{nullptr}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    QGraphicsScene *tempSceneLayout{nullptr};
+    QGraphicsScene *tempSceneLayout{nullptr}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief pattern container with data (points, arcs, splines, spline paths, variables) */
-    VContainer         *pattern;
+    VContainer *pattern; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief doc dom document container */
-    VPattern           *doc{nullptr};
+    VPattern *doc{nullptr}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    QList<QGraphicsItem *> gcontours{};
+    QList<QGraphicsItem *> gcontours{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    QVector<QVector<VLayoutPiece> > detailsOnLayout{};
+    QVector<QVector<VLayoutPiece>> detailsOnLayout{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    QAction *undoAction{nullptr};
-    QAction *redoAction{nullptr};
-    QAction *actionDockWidgetToolOptions{nullptr};
-    QAction *actionDockWidgetGroups{nullptr};
-    QAction *actionDockWidgetBackgroundImages{nullptr};
+    QAction *undoAction{nullptr};                       // NOLINT(misc-non-private-member-variables-in-classes)
+    QAction *redoAction{nullptr};                       // NOLINT(misc-non-private-member-variables-in-classes)
+    QAction *actionDockWidgetToolOptions{nullptr};      // NOLINT(misc-non-private-member-variables-in-classes)
+    QAction *actionDockWidgetGroups{nullptr};           // NOLINT(misc-non-private-member-variables-in-classes)
+    QAction *actionDockWidgetBackgroundImages{nullptr}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    bool isNoScaling{false};
-    bool isNeedAutosave{false};
-    VPrintLayout *m_layoutSettings{new VPrintLayout(this)};
+    bool isNoScaling{false};                                // NOLINT(misc-non-private-member-variables-in-classes)
+    bool isNeedAutosave{false};                             // NOLINT(misc-non-private-member-variables-in-classes)
+    VPrintLayout *m_layoutSettings{new VPrintLayout(this)}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief mouseCoordinate pointer to label who show mouse coordinate. */
-    QPointer<QLabel> m_mouseCoordinate{nullptr};
-    QPointer<QLabel> m_unreadPatternMessage{nullptr};
+    QPointer<QLabel> m_mouseCoordinate{nullptr};      // NOLINT(misc-non-private-member-variables-in-classes)
+    QPointer<QLabel> m_unreadPatternMessage{nullptr}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    QSharedPointer<DialogSaveLayout> m_dialogSaveLayout{};
+    QSharedPointer<DialogSaveLayout> m_dialogSaveLayout{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 #if defined(Q_OS_WIN) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
-    QWinTaskbarButton *m_taskbarButton;
-    QWinTaskbarProgress *m_taskbarProgress{nullptr};
+    QWinTaskbarButton *m_taskbarButton;              // NOLINT(misc-non-private-member-variables-in-classes)
+    QWinTaskbarProgress *m_taskbarProgress{nullptr}; // NOLINT(misc-non-private-member-variables-in-classes)
 #endif
 
-    static QVector<VLayoutPiece> PrepareDetailsForLayout(const QVector<DetailForLayout> &details);
+    static auto PrepareDetailsForLayout(const QVector<DetailForLayout> &details) -> QVector<VLayoutPiece>;
 
     void ExportData(const QVector<VLayoutPiece> &listDetails);
 
     void InitTempLayoutScene();
     virtual void CleanLayout()=0;
     virtual void PrepareSceneList(PreviewQuatilty quality)=0;
-    virtual QStringList RecentFileList() const override;
-    QIcon ScenePreview(int i, QSize iconSize, PreviewQuatilty quality) const;
-    bool GenerateLayout(VLayoutGenerator& lGenerator);
-    QString FileName() const;
+    auto RecentFileList() const -> QStringList override;
+    auto ScenePreview(int i, QSize iconSize, PreviewQuatilty quality) const -> QIcon;
+    auto GenerateLayout(VLayoutGenerator &lGenerator) -> bool;
+    auto FileName() const -> QString;
 
-    bool ExportFMeasurementsToCSVData(const QString &fileName,
-                                      bool withHeader, int mib, const QChar &separator) const;
+    auto ExportFMeasurementsToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator) const
+        -> bool;
 
-    QSharedPointer<VMeasurements> OpenMeasurementFile(const QString &path) const;
+    auto OpenMeasurementFile(const QString &path) const -> QSharedPointer<VMeasurements>;
 
     void CheckRequiredMeasurements(const VMeasurements *m) const;
 
 private:
     Q_DISABLE_COPY_MOVE(MainWindowsNoGUI) // NOLINT
 
-    static QList<QGraphicsItem *> CreateShadows(const QList<QGraphicsItem *> &papers);
-    static QList<QGraphicsScene *> CreateScenes(const QList<QGraphicsItem *> &papers,
-                                                const QList<QGraphicsItem *> &shadows,
-                                                const QList<QList<QGraphicsItem *> > &details);
+    static auto CreateShadows(const QList<QGraphicsItem *> &papers) -> QList<QGraphicsItem *>;
+    static auto CreateScenes(const QList<QGraphicsItem *> &papers, const QList<QGraphicsItem *> &shadows,
+                             const QList<QList<QGraphicsItem *>> &details) -> QList<QGraphicsScene *>;
 
     void PdfTiledFile(const QString &name);
 

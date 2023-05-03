@@ -215,7 +215,7 @@ void VPE::VPropertyFormView::connectPropertyFormWidget(VPropertyFormWidget *widg
             Qt::UniqueConnection);
     const QList<VPropertyFormWidget*> tmpList = widget->getChildPropertyFormWidgets();
 
-    for (auto tmpEditorWidget : tmpList)
+    for (auto *tmpEditorWidget : tmpList)
     {
         connectPropertyFormWidget(tmpEditorWidget);
     }

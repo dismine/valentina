@@ -52,26 +52,26 @@ public:
 
     virtual ~VIncrement() override;
 
-    VIncrement &operator=(const VIncrement &incr);
+    auto operator=(const VIncrement &incr) -> VIncrement &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VIncrement(VIncrement &&incr) Q_DECL_NOTHROW;
-    VIncrement &operator=(VIncrement &&incr) Q_DECL_NOTHROW;
+    auto operator=(VIncrement &&incr) Q_DECL_NOTHROW->VIncrement &;
 #endif
 
     void    SetFormula(qreal base, const QString &formula, bool ok);
-    QString GetFormula() const;
-    bool    IsFormulaOk() const;
+    auto GetFormula() const -> QString;
+    auto IsFormulaOk() const -> bool;
 
     void    SetIndex(quint32 index);
-    quint32 GetIndex() const;
+    auto GetIndex() const -> quint32;
 
-    VContainer   *GetData();
-    IncrementType GetIncrementType() const;
+    auto GetData() -> VContainer *;
+    auto GetIncrementType() const -> IncrementType;
 
-    bool IsPreviewCalculation() const;
+    auto IsPreviewCalculation() const -> bool;
     void SetPreviewCalculation(bool value);
 
-    bool IsSpecialUnits() const;
+    auto IsSpecialUnits() const -> bool;
     void SetSpecialUnits(bool special);
 
 private:

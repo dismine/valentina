@@ -82,9 +82,8 @@ void VToolPointFromCircleAndTangent::SetDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(const QPointer<DialogTool> &dialog,
-                                                                       VMainGraphicsScene *scene,
-                                                                       VAbstractPattern *doc, VContainer *data)
+auto VToolPointFromCircleAndTangent::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
+                                            VAbstractPattern *doc, VContainer *data) -> VToolPointFromCircleAndTangent *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogPointFromCircleAndTangent> dialogTool =
@@ -113,7 +112,8 @@ VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(const QPo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(VToolPointFromCircleAndTangentInitData &initData)
+auto VToolPointFromCircleAndTangent::Create(VToolPointFromCircleAndTangentInitData &initData)
+    -> VToolPointFromCircleAndTangent *
 {
     const qreal radius =
             VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.circleRadius, initData.data));
@@ -165,8 +165,8 @@ VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(VToolPoin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VToolPointFromCircleAndTangent::FindPoint(const QPointF &p, const QPointF &center, qreal radius,
-                                               const CrossCirclesPoint crossPoint, QPointF *intersectionPoint)
+auto VToolPointFromCircleAndTangent::FindPoint(const QPointF &p, const QPointF &center, qreal radius,
+                                               const CrossCirclesPoint crossPoint, QPointF *intersectionPoint) -> bool
 {
     SCASSERT(intersectionPoint != nullptr)
 
@@ -189,19 +189,19 @@ bool VToolPointFromCircleAndTangent::FindPoint(const QPointF &p, const QPointF &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolPointFromCircleAndTangent::TangentPointName() const
+auto VToolPointFromCircleAndTangent::TangentPointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(tangentPointId)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolPointFromCircleAndTangent::CircleCenterPointName() const
+auto VToolPointFromCircleAndTangent::CircleCenterPointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(circleCenterId)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolPointFromCircleAndTangent::GetCircleRadius() const
+auto VToolPointFromCircleAndTangent::GetCircleRadius() const -> VFormula
 {
     VFormula radius(circleRadius, getData());
     radius.setCheckZero(true);
@@ -226,7 +226,7 @@ void VToolPointFromCircleAndTangent::SetCircleRadius(const VFormula &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-CrossCirclesPoint VToolPointFromCircleAndTangent::GetCrossCirclesPoint() const
+auto VToolPointFromCircleAndTangent::GetCrossCirclesPoint() const -> CrossCirclesPoint
 {
     return crossPoint;
 }

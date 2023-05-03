@@ -42,7 +42,7 @@ VCurvePathItem::VCurvePathItem(QGraphicsItem *parent)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QPainterPath VCurvePathItem::shape() const
+auto VCurvePathItem::shape() const -> QPainterPath
 {
     QPainterPath itemPath;
 

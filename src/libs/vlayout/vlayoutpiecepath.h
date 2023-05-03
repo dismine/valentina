@@ -46,25 +46,25 @@ public:
 
     virtual ~VLayoutPiecePath();
 
-    VLayoutPiecePath &operator=(const VLayoutPiecePath &path);
+    auto operator=(const VLayoutPiecePath &path) -> VLayoutPiecePath &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VLayoutPiecePath(VLayoutPiecePath &&path) Q_DECL_NOTHROW;
-    VLayoutPiecePath &operator=(VLayoutPiecePath &&path) Q_DECL_NOTHROW;
+    auto operator=(VLayoutPiecePath &&path) Q_DECL_NOTHROW->VLayoutPiecePath &;
 #endif
 
-    QPainterPath GetPainterPath() const;
+    auto GetPainterPath() const -> QPainterPath;
 
-    QVector<VLayoutPoint> Points() const;
+    auto Points() const -> QVector<VLayoutPoint>;
     void                  SetPoints(const QVector<VLayoutPoint> &points);
 
-    Qt::PenStyle PenStyle() const;
+    auto PenStyle() const -> Qt::PenStyle;
     void         SetPenStyle(const Qt::PenStyle &penStyle);
 
-    bool IsCutPath() const;
+    auto IsCutPath() const -> bool;
     void SetCutPath(bool cut);
 
-    friend QDataStream& operator<< (QDataStream& dataStream, const VLayoutPiecePath& path);
-    friend QDataStream& operator>> (QDataStream& dataStream, VLayoutPiecePath& path);
+    friend auto operator<<(QDataStream &dataStream, const VLayoutPiecePath &path) -> QDataStream &;
+    friend auto operator>>(QDataStream &dataStream, VLayoutPiecePath &path) -> QDataStream &;
 
 private:
     QSharedDataPointer<VLayoutPiecePathData> d;

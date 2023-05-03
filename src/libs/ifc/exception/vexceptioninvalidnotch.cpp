@@ -38,7 +38,8 @@ VExceptionInvalidNotch::VExceptionInvalidNotch(const VExceptionInvalidNotch &e) 
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionInvalidNotch &VExceptionInvalidNotch::operator=(const VExceptionInvalidNotch &e) V_NOEXCEPT_EXPR (true)
+auto VExceptionInvalidNotch::operator=(const VExceptionInvalidNotch &e) V_NOEXCEPT_EXPR(true)
+    -> VExceptionInvalidNotch &
 {
     if ( &e == this )
     {

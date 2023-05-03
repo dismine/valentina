@@ -84,7 +84,7 @@ public:
     DialogTool(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual          ~DialogTool() override;
 
-    VAbstractTool*   GetAssociatedTool();
+    auto GetAssociatedTool() -> VAbstractTool *;
     void             SetAssociatedTool(VAbstractTool* tool);
 
     virtual void     ShowDialog(bool click);
@@ -92,7 +92,7 @@ public:
     virtual void     SetPiecesList(const QVector<quint32> &list);
     virtual void     SetPatternDoc(VAbstractPattern *doc);
 
-    quint32          GetToolId() const;
+    auto GetToolId() const -> quint32;
     void             SetToolId(const quint32 &value);
 
     virtual void SetGroupCategories(const QStringList &categories);
@@ -153,9 +153,9 @@ protected:
     virtual void     closeEvent ( QCloseEvent * event ) override;
     virtual void     showEvent( QShowEvent *event ) override;
     virtual void     keyPressEvent(QKeyEvent *event) override;
-    virtual bool     eventFilter(QObject *object, QEvent *event) override;
+    virtual auto eventFilter(QObject *object, QEvent *event) -> bool override;
 
-    virtual bool     IsValid() const =0;
+    virtual auto IsValid() const -> bool = 0;
     virtual void     CheckState();
 
     void             FillComboBoxPiecesList(QComboBox *box, const QVector<quint32> &list);
@@ -174,10 +174,9 @@ protected:
     void             FillComboBoxVCrossCurvesPoint(QComboBox *box) const;
     void             FillComboBoxHCrossCurvesPoint(QComboBox *box) const;
 
-
-    QString          GetComboBoxCurrentData(const QComboBox *box, const QString &def)const;
+    auto GetComboBoxCurrentData(const QComboBox *box, const QString &def) const -> QString;
     void             ChangeCurrentData(QComboBox *box, const QVariant &value) const;
-    qreal            Eval(const FormulaData &formulaData, bool &flag);
+    auto Eval(const FormulaData &formulaData, bool &flag) -> qreal;
 
     void             setCurrentPointId(QComboBox *box, const quint32 &value,
                                        FillComboBox rule = FillComboBox::NoChildren,
@@ -189,12 +188,11 @@ protected:
     void             setCurrentSplinePathId(QComboBox *box, const quint32 &value) const;
     void             setCurrentCurveId(QComboBox *box, const quint32 &value) const;
 
-    quint32          getCurrentObjectId(QComboBox *box) const;
+    auto getCurrentObjectId(QComboBox *box) const -> quint32;
 
-    template <typename T>
-    T                getCurrentCrossPoint(QComboBox *box) const;
+    template <typename T> auto getCurrentCrossPoint(QComboBox *box) const -> T;
 
-    bool             SetObject(const quint32 &id, QComboBox *box, const QString &toolTip);
+    auto SetObject(const quint32 &id, QComboBox *box, const QString &toolTip) -> bool;
 
     template <typename T>
     void             InitOkCancelApply(T *ui);
@@ -205,15 +203,14 @@ protected:
     template <typename T>
     void             AddVisualization();
 
-    template <typename T>
-    QVector<T> GetListInternals(const QListWidget *list) const;
+    template <typename T> auto GetListInternals(const QListWidget *list) const -> QVector<T>;
 
     virtual void     ShowVisualization() {}
     /**
      * @brief SaveData Put dialog data in local variables
      */
     virtual void     SaveData() {}
-    quint32          DNumber(const QString &baseName) const;
+    auto DNumber(const QString &baseName) const -> quint32;
     void             NewNodeItem(QListWidget *listWidget, const VPieceNode &node, bool showPassmark = true,
                      bool showExclusion = true);
 
@@ -225,8 +222,8 @@ private:
     template <typename T>
     void PrepareList(QMap<QString, quint32> &list, quint32 id) const;
 
-    bool IsSpline(const QSharedPointer<VGObject> &obj) const;
-    bool IsSplinePath(const QSharedPointer<VGObject> &obj) const;
+    auto IsSpline(const QSharedPointer<VGObject> &obj) const -> bool;
+    auto IsSplinePath(const QSharedPointer<VGObject> &obj) const -> bool;
 
     template <typename GObject>
     void FillCombo(QComboBox *box, GOType gType, FillComboBox rule = FillComboBox::Whole,
@@ -237,8 +234,7 @@ private:
 QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-QVector<T> DialogTool::GetListInternals(const QListWidget *list) const
+template <typename T> auto DialogTool::GetListInternals(const QListWidget *list) const -> QVector<T>
 {
     SCASSERT(list != nullptr)
     QVector<T> internals;
@@ -251,7 +247,7 @@ QVector<T> DialogTool::GetListInternals(const QListWidget *list) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline VAbstractTool *DialogTool::GetAssociatedTool()
+inline auto DialogTool::GetAssociatedTool() -> VAbstractTool *
 {
     return this->associatedTool;
 }
@@ -313,8 +309,7 @@ inline void DialogTool::AddVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-inline T DialogTool::getCurrentCrossPoint(QComboBox *box) const
+template <typename T> inline auto DialogTool::getCurrentCrossPoint(QComboBox *box) const -> T
 {
     int value;
     bool ok = false;

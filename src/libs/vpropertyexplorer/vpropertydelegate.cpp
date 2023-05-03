@@ -43,8 +43,8 @@ VPE::VPropertyDelegate::~VPropertyDelegate()
     //
 }
 
-QWidget* VPE::VPropertyDelegate::createEditor (QWidget* parent, const QStyleOptionViewItem& option,
-                                               const QModelIndex& index) const
+auto VPE::VPropertyDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option,
+                                          const QModelIndex &index) const -> QWidget *
 {
     QWidget* tmpWidget = nullptr;
     if (index.isValid())
@@ -92,7 +92,7 @@ void VPE::VPropertyDelegate::setModelData (QWidget * editor, QAbstractItemModel 
         model->setData(index, tmpData);
 }
 
-QSize VPE::VPropertyDelegate::sizeHint (const QStyleOptionViewItem& option, const QModelIndex& index) const
+auto VPE::VPropertyDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const -> QSize
 {
     QSize tmpStandardSizeHint = QStyledItemDelegate::sizeHint(option, index);
     tmpStandardSizeHint.setHeight(tmpStandardSizeHint.height() + 1);
@@ -101,8 +101,7 @@ QSize VPE::VPropertyDelegate::sizeHint (const QStyleOptionViewItem& option, cons
     {
         return QSize(tmpStandardSizeHint.width(), AddRowHeight ? tmpStandardSizeHint.height() + RowHeight : RowHeight);
     }
-    else
-        return tmpStandardSizeHint;
+    return tmpStandardSizeHint;
 }
 
 void VPE::VPropertyDelegate::setRowHeight(int height, bool add_to_standard)

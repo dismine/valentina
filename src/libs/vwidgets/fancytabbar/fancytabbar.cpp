@@ -72,7 +72,7 @@ FancyTabBar::FancyTabBar(const TabBarPosition position, QWidget *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSize FancyTabBar::TabSizeHint(bool minimum) const
+auto FancyTabBar::TabSizeHint(bool minimum) const -> QSize
 {
     QFont boldFont(font());
     boldFont.setPointSizeF(StyleHelper::sidebarFontSize());
@@ -89,7 +89,7 @@ QSize FancyTabBar::TabSizeHint(bool minimum) const
         if (words.size() > 1)
         {
             QString sentence;
-            for (auto &word : words)
+            for (const auto &word : words)
             {
                 sentence = sentence.isEmpty() ? sentence = word : sentence + QLatin1Char(' ') + word;
 
@@ -118,7 +118,7 @@ QSize FancyTabBar::TabSizeHint(bool minimum) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPoint FancyTabBar::GetCorner(const QRect& rect, const Corner corner) const
+auto FancyTabBar::GetCorner(const QRect &rect, const Corner corner) const -> QPoint
 {
     switch(m_position)
     {
@@ -200,8 +200,8 @@ QPoint FancyTabBar::GetCorner(const QRect& rect, const Corner corner) const
 //  gives
 //
 //      QRect(-3, -1, 9, 13) // 9 by 13 rect, starting at -3/-1.
-QRect FancyTabBar::AdjustRect(const QRect& rect, const qint8 offsetOutside, const qint8 offsetInside,
-                              const qint8 offsetBeginning, const qint8 offsetEnd) const
+auto FancyTabBar::AdjustRect(const QRect &rect, const qint8 offsetOutside, const qint8 offsetInside,
+                             const qint8 offsetBeginning, const qint8 offsetEnd) const -> QRect
 {
     switch(m_position)
     {
@@ -223,8 +223,8 @@ QRect FancyTabBar::AdjustRect(const QRect& rect, const qint8 offsetOutside, cons
 
 //---------------------------------------------------------------------------------------------------------------------
 // Same with a point: + means towards Outside/End, - means towards Inside/Beginning
-QPoint FancyTabBar::AdjustPoint(const QPoint& point, const qint8 offsetInsideOutside,
-                                const qint8 offsetBeginningEnd) const
+auto FancyTabBar::AdjustPoint(const QPoint &point, const qint8 offsetInsideOutside,
+                              const qint8 offsetBeginningEnd) const -> QPoint
 {
     switch(m_position)
     {
@@ -319,7 +319,7 @@ void FancyTabBar::mouseMoveEvent(QMouseEvent *e)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FancyTabBar::event(QEvent *event)
+auto FancyTabBar::event(QEvent *event) -> bool
 {
     if (event->type() == QEvent::ToolTip)
     {
@@ -363,7 +363,7 @@ void FancyTabBar::leaveEvent(QEvent *e)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FancyTabBar::ValidIndex(int index) const
+auto FancyTabBar::ValidIndex(int index) const -> bool
 {
     return index >= 0 && index < m_attachedTabs.count();
 }
@@ -375,7 +375,7 @@ void FancyTabBar::SetOrientation(const FancyTabBar::TabBarPosition p)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSize FancyTabBar::sizeHint() const
+auto FancyTabBar::sizeHint() const -> QSize
 {
     QSize sh = TabSizeHint();
     //    return QSize(sh.width(), sh.height() * mAttachedTabs.count());
@@ -389,7 +389,7 @@ QSize FancyTabBar::sizeHint() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSize FancyTabBar::minimumSizeHint() const
+auto FancyTabBar::minimumSizeHint() const -> QSize
 {
     const QSize sh = TabSizeHint(true);
 //    return QSize(sh.width(), sh.height() * mAttachedTabs.count());
@@ -403,7 +403,7 @@ QSize FancyTabBar::minimumSizeHint() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRect FancyTabBar::TabRect(int index) const
+auto FancyTabBar::TabRect(int index) const -> QRect
 {
     QSize sh = TabSizeHint();
 
@@ -591,7 +591,7 @@ void FancyTabBar::SetCurrentIndex(int index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int FancyTabBar::CurrentIndex() const
+auto FancyTabBar::CurrentIndex() const -> int
 {
     return m_currentIndex;
 }
@@ -603,19 +603,19 @@ void FancyTabBar::SetTabToolTip(int index, const QString &toolTip)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString FancyTabBar::TabToolTip(int index) const
+auto FancyTabBar::TabToolTip(int index) const -> QString
 {
     return m_attachedTabs.at(index)->m_toolTip;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QIcon FancyTabBar::TabIcon(int index) const
+auto FancyTabBar::TabIcon(int index) const -> QIcon
 {
     return m_attachedTabs.at(index)->m_icon;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString FancyTabBar::TabText(int index) const
+auto FancyTabBar::TabText(int index) const -> QString
 {
     return m_attachedTabs.at(index)->m_text;
 }
@@ -629,7 +629,7 @@ void FancyTabBar::SetTabText(int index, const QString &text)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-vsizetype FancyTabBar::Count() const
+auto FancyTabBar::Count() const -> vsizetype
 {
     return m_attachedTabs.count();
 }
@@ -648,7 +648,7 @@ void FancyTabBar::SetTabEnabled(int index, bool enable)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool FancyTabBar::IsTabEnabled(int index) const
+auto FancyTabBar::IsTabEnabled(int index) const -> bool
 {
     Q_ASSERT(index < m_attachedTabs.size());
     Q_ASSERT(index >= 0);

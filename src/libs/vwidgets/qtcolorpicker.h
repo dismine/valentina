@@ -73,18 +73,18 @@ public:
 
     void insertColor(const QColor &color, const QString &text = QString(), int index = -1);
 
-    QColor currentColor() const;
+    auto currentColor() const -> QColor;
 
-    QColor color(int index) const;
+    auto color(int index) const -> QColor;
 
     void setColorDialogEnabled(bool enabled);
-    bool colorDialogEnabled() const;
+    auto colorDialogEnabled() const -> bool;
 
     void setStandardColors();
 
     auto CustomColors() const -> QVector<QColor>;
 
-    static QColor getColor(const QPoint &point, bool allowCustomColors = true);
+    static auto getColor(const QPoint &point, bool allowCustomColors = true) -> QColor;
 
 public Q_SLOTS:
     void setCurrentColor(const QColor &color);

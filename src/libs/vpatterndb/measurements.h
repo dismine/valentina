@@ -300,26 +300,26 @@ extern const QString dartWidthShoulder_M; // Q01
 extern const QString dartWidthBust_M;	  // Q02
 extern const QString dartWidthWaist_M;    // Q03
 
-QStringList ListGroupA();
-QStringList ListGroupB();
-QStringList ListGroupC();
-QStringList ListGroupD();
-QStringList ListGroupE();
-QStringList ListGroupF();
-QStringList ListGroupG();
-QStringList ListGroupH();
-QStringList ListGroupI();
-QStringList ListGroupJ();
-QStringList ListGroupK();
-QStringList ListGroupL();
-QStringList ListGroupM();
-QStringList ListGroupN();
-QStringList ListGroupO();
-QStringList ListGroupP();
-QStringList ListGroupQ();
+auto ListGroupA() -> QStringList;
+auto ListGroupB() -> QStringList;
+auto ListGroupC() -> QStringList;
+auto ListGroupD() -> QStringList;
+auto ListGroupE() -> QStringList;
+auto ListGroupF() -> QStringList;
+auto ListGroupG() -> QStringList;
+auto ListGroupH() -> QStringList;
+auto ListGroupI() -> QStringList;
+auto ListGroupJ() -> QStringList;
+auto ListGroupK() -> QStringList;
+auto ListGroupL() -> QStringList;
+auto ListGroupM() -> QStringList;
+auto ListGroupN() -> QStringList;
+auto ListGroupO() -> QStringList;
+auto ListGroupP() -> QStringList;
+auto ListGroupQ() -> QStringList;
 
-QStringList ListNumbers(const VTranslateMeasurements *trM, const QStringList & listMeasurements);
-QString MapDiagrams(const VTranslateMeasurements *trM, const QString &number);
-Q_REQUIRED_RESULT QStringList AllGroupNames();
+auto ListNumbers(const VTranslateMeasurements *trM, const QStringList &listMeasurements) -> QStringList;
+auto MapDiagrams(const VTranslateMeasurements *trM, const QString &number) -> QString;
+Q_REQUIRED_RESULT auto AllGroupNames() -> QStringList;
 
 #endif // MEASUREMENTS_H

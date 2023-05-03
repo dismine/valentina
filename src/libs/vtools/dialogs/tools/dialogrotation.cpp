@@ -131,7 +131,7 @@ DialogRotation::~DialogRotation()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogRotation::GetOrigPointId() const
+auto DialogRotation::GetOrigPointId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxOriginPoint);
 }
@@ -146,7 +146,7 @@ void DialogRotation::SetOrigPointId(quint32 value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogRotation::GetAngle() const
+auto DialogRotation::GetAngle() const -> QString
 {
     return VTranslateVars::TryFormulaFromUser(formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
@@ -171,7 +171,7 @@ void DialogRotation::SetAngle(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogRotation::GetSuffix() const
+auto DialogRotation::GetSuffix() const -> QString
 {
     return m_suffix;
 }
@@ -184,7 +184,7 @@ void DialogRotation::SetSuffix(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogRotation::GetVisibilityGroupName() const
+auto DialogRotation::GetVisibilityGroupName() const -> QString
 {
     return ui->lineEditVisibilityGroup->text();
 }
@@ -196,7 +196,7 @@ void DialogRotation::SetVisibilityGroupName(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogRotation::HasLinkedVisibilityGroup() const
+auto DialogRotation::HasLinkedVisibilityGroup() const -> bool
 {
     return ui->groupBoxVisibilityGroup->isChecked();
 }
@@ -214,7 +214,7 @@ void DialogRotation::SetVisibilityGroupTags(const QStringList &tags)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList DialogRotation::GetVisibilityGroupTags() const
+auto DialogRotation::GetVisibilityGroupTags() const -> QStringList
 {
     return ui->lineEditGroupTags->text().split(',');
 }
@@ -304,7 +304,7 @@ void DialogRotation::ShowDialog(bool click)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<SourceItem> DialogRotation::GetSourceObjects() const
+auto DialogRotation::GetSourceObjects() const -> QVector<SourceItem>
 {
     return sourceObjects;
 }
@@ -426,23 +426,21 @@ void DialogRotation::SuffixChanged()
             CheckState();
             return;
         }
-        else
+
+        if (m_suffix != suffix)
         {
-            if (m_suffix != suffix)
+            QRegularExpression rx(NameRegExp());
+            const QStringList uniqueNames = data->AllUniqueNames();
+            for (const auto &uniqueName : uniqueNames)
             {
-                QRegularExpression rx(NameRegExp());
-                const QStringList uniqueNames = data->AllUniqueNames();
-                for (const auto &uniqueName : uniqueNames)
+                const QString name = uniqueName + suffix;
+                if (not rx.match(name).hasMatch() || not data->IsUnique(name))
                 {
-                    const QString name = uniqueName + suffix;
-                    if (not rx.match(name).hasMatch() || not data->IsUnique(name))
-                    {
-                        flagName = false;
-                        ChangeColor(ui->labelSuffix, errorColor);
-                        ui->labelStatus->setText(tr("Invalid suffix"));
-                        CheckState();
-                        return;
-                    }
+                    flagName = false;
+                    ChangeColor(ui->labelSuffix, errorColor);
+                    ui->labelStatus->setText(tr("Invalid suffix"));
+                    CheckState();
+                    return;
                 }
             }
         }
@@ -785,13 +783,13 @@ void DialogRotation::SetNotes(const QString &notes)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogRotation::GetNotes() const
+auto DialogRotation::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogRotation::IsValid() const
+auto DialogRotation::IsValid() const -> bool
 {
     bool ready = flagAngle && flagName && flagError && flagGroupName && flagAlias;
 

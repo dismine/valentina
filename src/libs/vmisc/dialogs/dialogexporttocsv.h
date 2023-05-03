@@ -46,19 +46,19 @@ public:
     explicit DialogExportToCSV(QWidget *parent = nullptr);
     virtual ~DialogExportToCSV();
 
-    bool IsWithHeader() const;
+    auto IsWithHeader() const -> bool;
     void SetWithHeader(bool value);
 
-    int  GetSelectedMib() const;
+    auto GetSelectedMib() const -> int;
     void SetSelectedMib(int value);
 
-    QChar GetSeparator() const;
+    auto GetSeparator() const -> QChar;
     void  SetSeparator(const QChar &separator);
 
     void ShowFilePreview(const QString &fileName);
 
-    static QString MakeHelpCodecsList();
-    static QString MakeHelpSeparatorList();
+    static auto MakeHelpCodecsList() -> QString;
+    static auto MakeHelpSeparatorList() -> QString;
 
 protected:
     virtual void changeEvent(QEvent* event) override;

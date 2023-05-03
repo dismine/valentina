@@ -75,8 +75,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QKeySequence, restoreOriginShortcut, // NOLINT
 #endif
 
 QT_WARNING_POP
-}
-
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VPMainGraphicsView::VPMainGraphicsView(const VPLayoutPtr &layout, QWidget *parent) :

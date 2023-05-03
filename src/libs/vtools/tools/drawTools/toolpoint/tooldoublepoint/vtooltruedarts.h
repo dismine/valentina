@@ -89,20 +89,20 @@ public:
     static void    FindPoint(const QPointF &baseLineP1, const QPointF &baseLineP2, const QPointF &dartP1,
                              const QPointF &dartP2, const QPointF &dartP3, QPointF &p1, QPointF &p2);
     virtual void   SetDialog() override;
-    static VToolTrueDarts* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                  VContainer *data);
-    static VToolTrueDarts* Create(VToolTrueDartsInitData initData);
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolTrueDarts *;
+    static auto Create(VToolTrueDartsInitData initData) -> VToolTrueDarts *;
     static const QString ToolType;
-    virtual int    type() const  override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::TrueDarts)};
 
     virtual void   ShowVisualization(bool show) override;
 
-    QString BaseLineP1Name() const;
-    QString BaseLineP2Name() const;
-    QString DartP1Name() const;
-    QString DartP2Name() const;
-    QString DartP3Name() const;
+    auto BaseLineP1Name() const -> QString;
+    auto BaseLineP2Name() const -> QString;
+    auto DartP1Name() const -> QString;
+    auto DartP2Name() const -> QString;
+    auto DartP3Name() const -> QString;
 
 protected slots:
     virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;

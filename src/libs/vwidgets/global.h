@@ -44,18 +44,18 @@ class QPainterPath;
 class QPen;
 class QGraphicsSceneMouseEvent;
 
-bool IsSelectedByReleaseEvent(QGraphicsItem *item, QGraphicsSceneMouseEvent *event);
+auto IsSelectedByReleaseEvent(QGraphicsItem *item, QGraphicsSceneMouseEvent *event) -> bool;
 
-qreal SceneScale(QGraphicsScene *scene);
+auto SceneScale(QGraphicsScene *scene) -> qreal;
 
-QColor CorrectColor(const QGraphicsItem *item, const QColor &color);
+auto CorrectColor(const QGraphicsItem *item, const QColor &color) -> QColor;
 
-QRectF PointRect(qreal radius);
-qreal  ScaledRadius(qreal scale);
+auto PointRect(qreal radius) -> QRectF;
+auto ScaledRadius(qreal scale) -> qreal;
 void   ScaleCircleSize(QGraphicsEllipseItem *item, qreal scale);
-qreal  ScaleWidth(qreal width, qreal scale);
+auto ScaleWidth(qreal width, qreal scale) -> qreal;
 
-QPainterPath ItemShapeFromPath(const QPainterPath &path, const QPen &pen);
+auto ItemShapeFromPath(const QPainterPath &path, const QPen &pen) -> QPainterPath;
 
 auto PixmapToPainterPath(const QPixmap &pixmap) -> QPainterPath;
 

@@ -74,8 +74,8 @@ QmuParserTester::QmuParserTester(QObject *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int QmuParserTester::IsHexVal ( const QString &a_szExpr, qmusizetype *a_iPos, qreal *a_fVal, const QLocale &locale,
-                                bool cNumbers, const QChar &decimal, const QChar &thousand )
+auto QmuParserTester::IsHexVal(const QString &a_szExpr, qmusizetype *a_iPos, qreal *a_fVal, const QLocale &locale,
+                               bool cNumbers, const QChar &decimal, const QChar &thousand) -> int
 {
     Q_UNUSED(locale)
     Q_UNUSED(decimal)
@@ -108,7 +108,7 @@ int QmuParserTester::IsHexVal ( const QString &a_szExpr, qmusizetype *a_iPos, qr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int QmuParserTester::TestInterface()
+auto QmuParserTester::TestInterface() -> int
 {
     int iStat = 0;
     qWarning() << "testing member functions...";
@@ -154,7 +154,7 @@ int QmuParserTester::TestInterface()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int QmuParserTester::TestStrArg()
+auto QmuParserTester::TestStrArg() -> int
 {
     int iStat = 0;
     qWarning() << "testing string arguments...";
@@ -183,7 +183,7 @@ int QmuParserTester::TestStrArg()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int QmuParserTester::TestBulkMode()
+auto QmuParserTester::TestBulkMode() -> int
 {
     int iStat = 0;
     qWarning() << "testing bulkmode...";
@@ -221,7 +221,7 @@ int QmuParserTester::TestBulkMode()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int QmuParserTester::TestBinOprt()
+auto QmuParserTester::TestBinOprt() -> int
 {
     int iStat = 0;
     qWarning() << "testing binary operators...";
@@ -290,7 +290,7 @@ int QmuParserTester::TestBinOprt()
 
 //---------------------------------------------------------------------------------------------------------------------
 /** @brief Check muParser name restriction enforcement. */
-int QmuParserTester::TestNames()
+auto QmuParserTester::TestNames() -> int
 {
     int  iStat = 0,
          iErr = 0;
@@ -402,7 +402,7 @@ int QmuParserTester::TestNames()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int QmuParserTester::TestSyntax()
+auto QmuParserTester::TestSyntax() -> int
 {
     int iStat = 0;
     qWarning() << "testing syntax engine...";
@@ -455,7 +455,7 @@ int QmuParserTester::TestSyntax()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int QmuParserTester::TestVarConst()
+auto QmuParserTester::TestVarConst() -> int
 {
     int iStat = 0;
     qWarning() << "testing variable/constant detection...";
@@ -588,7 +588,7 @@ int QmuParserTester::TestVarConst()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int QmuParserTester::TestMultiArg()
+auto QmuParserTester::TestMultiArg() -> int
 {
     int iStat = 0;
     qWarning() << "testing multiarg functions...";
@@ -687,7 +687,7 @@ int QmuParserTester::TestMultiArg()
 
 
 //---------------------------------------------------------------------------------------------------------------------
-int QmuParserTester::TestInfixOprt()
+auto QmuParserTester::TestInfixOprt() -> int
 {
     int iStat ( 0 );
     qWarning() << "testing infix operators...";
@@ -756,7 +756,7 @@ int QmuParserTester::TestInfixOprt()
 
 
 //---------------------------------------------------------------------------------------------------------------------
-int QmuParserTester::TestPostFix()
+auto QmuParserTester::TestPostFix() -> int
 {
     int iStat = 0;
     qWarning() << "testing postfix operators...";
@@ -811,7 +811,7 @@ int QmuParserTester::TestPostFix()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int QmuParserTester::TestExpression()
+auto QmuParserTester::TestExpression() -> int
 {
     int iStat = 0;
     qWarning() << "testing expression samples...";
@@ -901,7 +901,7 @@ int QmuParserTester::TestExpression()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int QmuParserTester::TestIfThenElse()
+auto QmuParserTester::TestIfThenElse() -> int
 {
     int iStat = 0;
     qWarning() << "testing if-then-else operator...";
@@ -1011,7 +1011,7 @@ int QmuParserTester::TestIfThenElse()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int QmuParserTester::TestException()
+auto QmuParserTester::TestException() -> int
 {
     int  iStat = 0;
     qWarning() << "testing error codes...";
@@ -1169,7 +1169,7 @@ void QmuParserTester::Run()
 
 
 //---------------------------------------------------------------------------------------------------------------------
-int QmuParserTester::ThrowTest ( const QString &a_str, int a_iErrc, bool a_bFail )
+auto QmuParserTester::ThrowTest(const QString &a_str, int a_iErrc, bool a_bFail) -> int
 {
     QmuParserTester::c_iCount++;
 
@@ -1221,8 +1221,8 @@ int QmuParserTester::ThrowTest ( const QString &a_str, int a_iErrc, bool a_bFail
  *
  * @return 1 in case of a failure, 0 otherwise.
  */
-int QmuParserTester::EqnTestWithVarChange (const QString &a_str, double a_fRes1, double a_fVar1, double a_fRes2,
-                                           double a_fVar2)
+auto QmuParserTester::EqnTestWithVarChange(const QString &a_str, double a_fRes1, double a_fVar1, double a_fRes2,
+                                           double a_fVar2) -> int
 {
     QmuParserTester::c_iCount++;
     qreal fVal[2] = { -999, -999 }; // should be equalinitially
@@ -1277,7 +1277,7 @@ int QmuParserTester::EqnTestWithVarChange (const QString &a_str, double a_fRes1,
  *
  * @return 1 in case of a failure, 0 otherwise.
  */
-int QmuParserTester::EqnTest ( const QString &a_str, double a_fRes, bool a_fPass )
+auto QmuParserTester::EqnTest(const QString &a_str, double a_fRes, bool a_fPass) -> int
 {
     QmuParserTester::c_iCount++;
     int iRet ( 0 );
@@ -1467,7 +1467,7 @@ QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 /** \brief Test an expression in Bulk Mode. */
-int QmuParserTester::EqnTestBulk(const QString &a_str, double a_fRes[4], bool a_fPass)
+auto QmuParserTester::EqnTestBulk(const QString &a_str, double a_fRes[4], bool a_fPass) -> int
 {
     QmuParserTester::c_iCount++;
     int iRet(0);

@@ -67,8 +67,8 @@ public:
 
     ~VPieceNodeData() = default;
 
-    friend QDataStream& operator<<(QDataStream& out, const VPieceNodeData& p);
-    friend QDataStream& operator>>(QDataStream& in, VPieceNodeData& p);
+    friend auto operator<<(QDataStream &out, const VPieceNodeData &p) -> QDataStream &;
+    friend auto operator>>(QDataStream &in, VPieceNodeData &p) -> QDataStream &;
 
     /** @brief id object id. */
     quint32 m_id{NULL_ID};
@@ -124,7 +124,7 @@ constexpr quint16 VPieceNodeData::classVersion;  // NOLINT(readability-redundant
 
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream &operator<<(QDataStream &out, const VPieceNodeData &p)
+auto operator<<(QDataStream &out, const VPieceNodeData &p) -> QDataStream &
 {
     out << VPieceNodeData::streamHeader << VPieceNodeData::classVersion;
 
@@ -152,7 +152,7 @@ QDataStream &operator<<(QDataStream &out, const VPieceNodeData &p)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream &operator>>(QDataStream &in, VPieceNodeData &p)
+auto operator>>(QDataStream &in, VPieceNodeData &p) -> QDataStream &
 {
     quint32 actualStreamHeader = 0;
     in >> actualStreamHeader;

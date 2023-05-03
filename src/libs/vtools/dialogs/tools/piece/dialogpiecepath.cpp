@@ -43,7 +43,7 @@
 
 namespace
 {
-QVector<QPointF> CuttingPath(quint32 id, const VContainer *data)
+auto CuttingPath(quint32 id, const VContainer *data) -> QVector<QPointF>
 {
     QVector<QPointF> path;
     const quint32 pieceId = data->GetPieceForPiecePath(id);
@@ -168,7 +168,7 @@ void DialogPiecePath::ChosenObject(quint32 id, const SceneObject &type)
 
         if (not m_showMode)
         {
-            auto visPath = qobject_cast<VisToolPiecePath *>(vis);
+            auto *visPath = qobject_cast<VisToolPiecePath *>(vis);
             SCASSERT(visPath != nullptr);
             const VPiecePath p = CreatePath();
             visPath->SetPath(p);
@@ -209,7 +209,7 @@ void DialogPiecePath::ShowDialog(bool click)
 
             if (not m_showMode)
             {
-                auto visPath = qobject_cast<VisToolPiecePath *>(vis);
+                auto *visPath = qobject_cast<VisToolPiecePath *>(vis);
                 SCASSERT(visPath != nullptr);
                 visPath->SetMode(Mode::Show);
                 visPath->RefreshGeometry();
@@ -300,7 +300,7 @@ void DialogPiecePath::ShowVisualization()
     {
         VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(GetPieceId()));
         SCASSERT(tool != nullptr);
-        auto visPath = qobject_cast<VisToolPiecePath *>(vis);
+        auto *visPath = qobject_cast<VisToolPiecePath *>(vis);
         SCASSERT(visPath != nullptr);
         visPath->setParentItem(tool);
     }
@@ -416,7 +416,7 @@ void DialogPiecePath::ListChanged()
 {
     if (not m_showMode)
     {
-        auto visPath = qobject_cast<VisToolPiecePath *>(vis);
+        auto *visPath = qobject_cast<VisToolPiecePath *>(vis);
         SCASSERT(visPath != nullptr);
         visPath->SetPath(CreatePath());
         visPath->SetCuttingPath(CuttingPath(toolId, data));
@@ -826,7 +826,7 @@ void DialogPiecePath::EvalWidth()
     {
         VContainer *locData = const_cast<VContainer *> (data);
 
-        auto currentSA = new VIncrement(locData, currentSeamAllowance);
+        auto *currentSA = new VIncrement(locData, currentSeamAllowance);
         currentSA->SetFormula(m_saWidth, QString().setNum(m_saWidth), true);
         currentSA->SetDescription(tr("Current seam allowance"));
 
@@ -1290,7 +1290,7 @@ void DialogPiecePath::InitPassmarksList()
 
     const QVector<VPieceNode> nodes = GetListInternals<VPieceNode>(ui->listWidget);
 
-    for (auto &node : nodes)
+    for (const auto &node : nodes)
     {
         if (node.GetTypeTool() == Tool::NodePoint && node.IsPassmark())
         {
@@ -1333,7 +1333,7 @@ void DialogPiecePath::NodeAngleChanged(int index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPiecePath DialogPiecePath::GetPiecePath() const
+auto DialogPiecePath::GetPiecePath() const -> VPiecePath
 {
     return CreatePath();
 }
@@ -1376,7 +1376,7 @@ void DialogPiecePath::SetPiecePath(const VPiecePath &path)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PiecePathType DialogPiecePath::GetType() const
+auto DialogPiecePath::GetType() const -> PiecePathType
 {
     return static_cast<PiecePathType>(ui->comboBoxType->currentData().toInt());
 }
@@ -1397,7 +1397,7 @@ void DialogPiecePath::SetType(PiecePathType type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Qt::PenStyle DialogPiecePath::GetPenType() const
+auto DialogPiecePath::GetPenType() const -> Qt::PenStyle
 {
     return LineStyleToPenStyle(GetComboBoxCurrentData(ui->comboBoxPenType, TypeLineLine));
 }
@@ -1410,7 +1410,7 @@ void DialogPiecePath::SetPenType(const Qt::PenStyle &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogPiecePath::IsCutPath() const
+auto DialogPiecePath::IsCutPath() const -> bool
 {
     return ui->checkBoxCut->isChecked();
 }
@@ -1422,7 +1422,7 @@ void DialogPiecePath::SetCutPath(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QListWidgetItem *DialogPiecePath::GetItemById(quint32 id)
+auto DialogPiecePath::GetItemById(quint32 id) -> QListWidgetItem *
 {
     for (qint32 i = ui->listWidget->count()-1; i >= 0; --i)
     {
@@ -1438,7 +1438,7 @@ QListWidgetItem *DialogPiecePath::GetItemById(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogPiecePath::GetLastId() const
+auto DialogPiecePath::GetLastId() const -> quint32
 {
     const int count = ui->listWidget->count();
     if (count > 0)
@@ -1447,10 +1447,8 @@ quint32 DialogPiecePath::GetLastId() const
         const VPieceNode node = qvariant_cast<VPieceNode>(item->data(Qt::UserRole));
         return node.GetId();
     }
-    else
-    {
-        return NULL_ID;
-    }
+
+    return NULL_ID;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1568,7 +1566,7 @@ void DialogPiecePath::SetFormulaSAWidth(const QString &formula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogPiecePath::GetPieceId() const
+auto DialogPiecePath::GetPieceId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxPiece);
 }
@@ -1595,7 +1593,7 @@ void DialogPiecePath::SetPieceId(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogPiecePath::GetFormulaSAWidth() const
+auto DialogPiecePath::GetFormulaSAWidth() const -> QString
 {
     QString width = ui->plainTextEditFormulaWidth->toPlainText();
     return VTranslateVars::TryFormulaFromUser(width, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
@@ -1614,7 +1612,7 @@ void DialogPiecePath::SetPiecesList(const QVector<quint32> &list)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPiecePath DialogPiecePath::CreatePath() const
+auto DialogPiecePath::CreatePath() const -> VPiecePath
 {
     VPiecePath path;
     for (qint32 i = 0; i < ui->listWidget->count(); ++i)
@@ -1712,21 +1710,21 @@ void DialogPiecePath::NewItem(const VPieceNode &node)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogPiecePath::GetFormulaSAWidthBefore() const
+auto DialogPiecePath::GetFormulaSAWidthBefore() const -> QString
 {
     QString width = ui->plainTextEditFormulaWidthBefore->toPlainText();
     return VTranslateVars::TryFormulaFromUser(width, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogPiecePath::GetFormulaSAWidthAfter() const
+auto DialogPiecePath::GetFormulaSAWidthAfter() const -> QString
 {
     QString width = ui->plainTextEditFormulaWidthAfter->toPlainText();
     return VTranslateVars::TryFormulaFromUser(width, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogPiecePath::GetFormulaVisible() const
+auto DialogPiecePath::GetFormulaVisible() const -> QString
 {
     QString formula = ui->plainTextEditFormulaVisible->toPlainText();
     return VTranslateVars::TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
@@ -1747,7 +1745,7 @@ void DialogPiecePath::SetFormulaVisible(const QString &formula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogPiecePath::GetFormulaPassmarkLength() const
+auto DialogPiecePath::GetFormulaPassmarkLength() const -> QString
 {
     QString formula = ui->plainTextEditPassmarkLength->toPlainText();
     return VTranslateVars::TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());

@@ -41,14 +41,14 @@ enum class VarInsunits : quint8 { Inches=1, Millimeters=4, Centimeters=5 };
 // Helps mark end of string. See VDxfEngine::drawTextItem for more details
 extern const QString endStringPlaceholder;
 
-Q_REQUIRED_RESULT static inline bool DL_FuzzyComparePossibleNulls(double p1, double p2);
-static inline bool DL_FuzzyComparePossibleNulls(double p1, double p2)
+Q_REQUIRED_RESULT static inline auto DL_FuzzyComparePossibleNulls(double p1, double p2) -> bool;
+static inline auto DL_FuzzyComparePossibleNulls(double p1, double p2) -> bool
 {
     if(qFuzzyIsNull(p1))
     {
         return qFuzzyIsNull(p2);
     }
-    else if(qFuzzyIsNull(p2))
+    if (qFuzzyIsNull(p2))
     {
         return false;
     }
@@ -58,6 +58,6 @@ static inline bool DL_FuzzyComparePossibleNulls(double p1, double p2)
     }
 }
 
-QMap <QString, QString> LocaleMap();
+auto LocaleMap() -> QMap<QString, QString>;
 
 #endif // DXFDEF_H

@@ -41,11 +41,12 @@ public:
 
     virtual void undo() override;
     virtual void redo() override;
-    virtual bool mergeWith(const QUndoCommand *command) override;
-    virtual int  id() const override;
+    virtual auto mergeWith(const QUndoCommand *command) -> bool override;
+    virtual auto id() const -> int override;
 
-    quint32         LabelId() const;
-    VPlaceLabelItem NewLabel() const;
+    auto LabelId() const -> quint32;
+    auto NewLabel() const -> VPlaceLabelItem;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(SavePlaceLabelOptions) // NOLINT
@@ -58,19 +59,19 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline int SavePlaceLabelOptions::id() const
+inline auto SavePlaceLabelOptions::id() const -> int
 {
     return static_cast<int>(UndoCommand::SavePlaceLabelOptions);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline quint32 SavePlaceLabelOptions::LabelId() const
+inline auto SavePlaceLabelOptions::LabelId() const -> quint32
 {
     return nodeId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline VPlaceLabelItem SavePlaceLabelOptions::NewLabel() const
+inline auto SavePlaceLabelOptions::NewLabel() const -> VPlaceLabelItem
 {
     return m_newLabel;
 }

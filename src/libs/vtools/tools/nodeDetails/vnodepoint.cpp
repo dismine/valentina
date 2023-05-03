@@ -169,7 +169,7 @@ void VNodePoint::Create(const VAbstractNodeInitData &initData)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VNodePoint::getTagName() const
+auto VNodePoint::getTagName() const -> QString
 {
     return VAbstractPattern::TagPoint;
 }
@@ -306,7 +306,7 @@ void VNodePoint::HideNode()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QHash<int, QAction *> VNodePoint::InitContextMenu(QMenu *menu, vidtype pieceId, quint32 referens)
+auto VNodePoint::InitContextMenu(QMenu *menu, vidtype pieceId, quint32 referens) -> QHash<int, QAction *>
 {
     SCASSERT(menu != nullptr)
 

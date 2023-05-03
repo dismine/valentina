@@ -50,9 +50,9 @@ class VDataTool : public QObject
 public:
     explicit VDataTool(VContainer *data, QObject *parent = nullptr);
     virtual ~VDataTool() = default;
-    VContainer      getData() const;
+    auto getData() const -> VContainer;
     void            setData(const VContainer *value);
-    virtual quint32 referens() const;
+    virtual auto referens() const -> quint32;
     virtual void    incrementReferens();
     virtual void    decrementReferens();
     virtual void    GroupVisibility(quint32 object, bool visible)=0;
@@ -71,7 +71,7 @@ private:
  * @brief getData return data container.
  * @return container.
  */
-inline VContainer VDataTool::getData() const
+inline auto VDataTool::getData() const -> VContainer
 {
     return data;
 }
@@ -91,7 +91,7 @@ inline void VDataTool::setData(const VContainer *value)
  * @brief referens return count of referens.
  * @return count count of referens.
  */
-inline quint32 VDataTool::referens() const
+inline auto VDataTool::referens() const -> quint32
 {
     return _referens;
 }

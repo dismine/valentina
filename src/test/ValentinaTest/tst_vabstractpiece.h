@@ -67,19 +67,19 @@ private slots:
     void IsAllowanceValid() const;
 
 private:
-    QVector<VSAPoint> InputPointsCase3() const;
-    QVector<QPointF>  OutputPointsCase3() const;
+    auto InputPointsCase3() const -> QVector<VSAPoint>;
+    auto OutputPointsCase3() const -> QVector<QPointF>;
 
     void Case3() const;
     void Case4() const;
     void Case5() const;
 
-    QVector<QPointF> InputPointsCase3a() const;
-    QVector<QPointF> InputPointsCase4a() const;
-    QVector<QPointF> InputPointsCase5a() const;
+    auto InputPointsCase3a() const -> QVector<QPointF>;
+    auto InputPointsCase4a() const -> QVector<QPointF>;
+    auto InputPointsCase5a() const -> QVector<QPointF>;
 
-    QVector<VSAPoint> InputLoopByIntersectionTest();
-    QVector<QPointF>  OutputLoopByIntersectionTest();
+    auto InputLoopByIntersectionTest() -> QVector<VSAPoint>;
+    auto OutputLoopByIntersectionTest() -> QVector<QPointF>;
 };
 
 #endif // TST_VABSTRACTPIECE_H

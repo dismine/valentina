@@ -253,7 +253,7 @@ QmuParserError::QmuParserError ( const QmuParserError &a_Obj )
 
 //---------------------------------------------------------------------------------------------------------------------
 /** @brief Assignment operator. */
-QmuParserError& QmuParserError::operator= ( const QmuParserError &a_Obj )
+auto QmuParserError::operator=(const QmuParserError &a_Obj) -> QmuParserError &
 {
     if ( this == &a_Obj )
     {
@@ -296,7 +296,7 @@ Q_NORETURN void QmuParserError::raise() const
  * @brief clone clone exception
  * @return new exception
  */
-QmuParserError *QmuParserError::clone() const
+auto QmuParserError::clone() const -> QmuParserError *
 {
     return new QmuParserError(*this);
 }
@@ -312,7 +312,7 @@ QmuParserWarning::QmuParserWarning(const QmuParserWarning &a_Obj)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QmuParserWarning &QmuParserWarning::operator=(const QmuParserWarning &a_Obj)
+auto QmuParserWarning::operator=(const QmuParserWarning &a_Obj) -> QmuParserWarning &
 {
     if ( this == &a_Obj )
     {
@@ -337,7 +337,7 @@ Q_NORETURN void QmuParserWarning::raise() const
  * @brief clone clone exception
  * @return new exception
  */
-QmuParserWarning *QmuParserWarning::clone() const
+auto QmuParserWarning::clone() const -> QmuParserWarning *
 {
     return new QmuParserWarning(*this);
 }

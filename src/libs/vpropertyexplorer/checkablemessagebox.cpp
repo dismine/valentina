@@ -129,12 +129,12 @@ void CheckableMessageBox::slotClicked(QAbstractButton *b)
     d->clickedButton = b;
 }
 
-QAbstractButton *CheckableMessageBox::clickedButton() const
+auto CheckableMessageBox::clickedButton() const -> QAbstractButton *
 {
     return d->clickedButton;
 }
 
-QDialogButtonBox::StandardButton CheckableMessageBox::clickedStandardButton() const
+auto CheckableMessageBox::clickedStandardButton() const -> QDialogButtonBox::StandardButton
 {
     if (d->clickedButton)
     {
@@ -143,7 +143,7 @@ QDialogButtonBox::StandardButton CheckableMessageBox::clickedStandardButton() co
     return QDialogButtonBox::NoButton;
 }
 
-QString CheckableMessageBox::text() const
+auto CheckableMessageBox::text() const -> QString
 {
     return d->messageLabel->text();
 }
@@ -154,7 +154,7 @@ void CheckableMessageBox::setText(const QString &t)
 }
 
 // cppcheck-suppress unusedFunction
-QPixmap CheckableMessageBox::iconPixmap() const
+auto CheckableMessageBox::iconPixmap() const -> QPixmap
 {
 #if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
     if (const QPixmap *p = d->pixmapLabel->pixmap())
@@ -173,7 +173,7 @@ void CheckableMessageBox::setIconPixmap(const QPixmap &p)
     d->pixmapLabel->setVisible(!p.isNull());
 }
 
-bool CheckableMessageBox::isChecked() const
+auto CheckableMessageBox::isChecked() const -> bool
 {
     return d->checkBox->isChecked();
 }
@@ -183,7 +183,7 @@ void CheckableMessageBox::setChecked(bool s)
     d->checkBox->setChecked(s);
 }
 
-QString CheckableMessageBox::checkBoxText() const
+auto CheckableMessageBox::checkBoxText() const -> QString
 {
     return d->checkBox->text();
 }
@@ -194,7 +194,7 @@ void CheckableMessageBox::setCheckBoxText(const QString &t)
 }
 
 // cppcheck-suppress unusedFunction
-bool CheckableMessageBox::isCheckBoxVisible() const
+auto CheckableMessageBox::isCheckBoxVisible() const -> bool
 {
     return d->checkBox->isVisible();
 }
@@ -204,7 +204,7 @@ void CheckableMessageBox::setCheckBoxVisible(bool v)
     d->checkBox->setVisible(v);
 }
 
-QDialogButtonBox::StandardButtons CheckableMessageBox::standardButtons() const
+auto CheckableMessageBox::standardButtons() const -> QDialogButtonBox::StandardButtons
 {
     return d->buttonBox->standardButtons();
 }
@@ -214,20 +214,20 @@ void CheckableMessageBox::setStandardButtons(QDialogButtonBox::StandardButtons s
     d->buttonBox->setStandardButtons(s);
 }
 
-QPushButton *CheckableMessageBox::button(QDialogButtonBox::StandardButton b) const
+auto CheckableMessageBox::button(QDialogButtonBox::StandardButton b) const -> QPushButton *
 {
     return d->buttonBox->button(b);
 }
 
-QPushButton *CheckableMessageBox::addButton(const QString &text, QDialogButtonBox::ButtonRole role)
+auto CheckableMessageBox::addButton(const QString &text, QDialogButtonBox::ButtonRole role) -> QPushButton *
 {
     return d->buttonBox->addButton(text, role);
 }
 
-QDialogButtonBox::StandardButton CheckableMessageBox::defaultButton() const
+auto CheckableMessageBox::defaultButton() const -> QDialogButtonBox::StandardButton
 {
     const QList<QAbstractButton *> buttons = d->buttonBox->buttons();
-    for (auto b : buttons)
+    for (auto *b : buttons)
     {
         if (QPushButton *pb = qobject_cast<QPushButton *>(b))
         {
@@ -249,14 +249,10 @@ void CheckableMessageBox::setDefaultButton(QDialogButtonBox::StandardButton s)
     }
 }
 
-QDialogButtonBox::StandardButton
-CheckableMessageBox::question(QWidget *parent,
-                              const QString &title,
-                              const QString &question,
-                              const QString &checkBoxText,
-                              bool *checkBoxSetting,
-                              QDialogButtonBox::StandardButtons buttons,
-                              QDialogButtonBox::StandardButton defaultButton)
+auto CheckableMessageBox::question(QWidget *parent, const QString &title, const QString &question,
+                                   const QString &checkBoxText, bool *checkBoxSetting,
+                                   QDialogButtonBox::StandardButtons buttons,
+                                   QDialogButtonBox::StandardButton defaultButton) -> QDialogButtonBox::StandardButton
 {
     CheckableMessageBox mb(parent);
     mb.setWindowTitle(title);
@@ -271,14 +267,11 @@ CheckableMessageBox::question(QWidget *parent,
     return mb.clickedStandardButton();
 }
 
-QDialogButtonBox::StandardButton
-CheckableMessageBox::information(QWidget *parent,
-                              const QString &title,
-                              const QString &text,
-                              const QString &checkBoxText,
-                              bool *checkBoxSetting,
-                              QDialogButtonBox::StandardButtons buttons,
-                              QDialogButtonBox::StandardButton defaultButton)
+auto CheckableMessageBox::information(QWidget *parent, const QString &title, const QString &text,
+                                      const QString &checkBoxText, bool *checkBoxSetting,
+                                      QDialogButtonBox::StandardButtons buttons,
+                                      QDialogButtonBox::StandardButton defaultButton)
+    -> QDialogButtonBox::StandardButton
 {
     CheckableMessageBox mb(parent);
     mb.setWindowTitle(title);
@@ -294,12 +287,13 @@ CheckableMessageBox::information(QWidget *parent,
 }
 
 // cppcheck-suppress unusedFunction
-QMessageBox::StandardButton CheckableMessageBox::dialogButtonBoxToMessageBoxButton(QDialogButtonBox::StandardButton db)
+auto CheckableMessageBox::dialogButtonBoxToMessageBoxButton(QDialogButtonBox::StandardButton db)
+    -> QMessageBox::StandardButton
 {
     return static_cast<QMessageBox::StandardButton>(int(db));
 }
 
-bool CheckableMessageBox::askAgain(QSettings *settings, const QString &settingsSubKey)
+auto CheckableMessageBox::askAgain(QSettings *settings, const QString &settingsSubKey) -> bool
 {
     //QTC_CHECK(settings);
     if (settings)
@@ -354,14 +348,14 @@ void CheckableMessageBox::doNotAskAgain(QSettings *settings, const QString &sett
     Returns the clicked button, or QDialogButtonBox::NoButton if the user rejects the dialog
     with the escape key, or \a acceptButton if the dialog is suppressed.
 */
-QDialogButtonBox::StandardButton
+auto
 // cppcheck-suppress unusedFunction
-CheckableMessageBox::doNotAskAgainQuestion(QWidget *parent, const QString &title,
-                                           const QString &text, QSettings *settings,
-                                           const QString &settingsSubKey,
+CheckableMessageBox::doNotAskAgainQuestion(QWidget *parent, const QString &title, const QString &text,
+                                           QSettings *settings, const QString &settingsSubKey,
                                            QDialogButtonBox::StandardButtons buttons,
                                            QDialogButtonBox::StandardButton defaultButton,
                                            QDialogButtonBox::StandardButton acceptButton)
+    -> QDialogButtonBox::StandardButton
 
 {
     if (!askAgain(settings, settingsSubKey))
@@ -388,13 +382,13 @@ CheckableMessageBox::doNotAskAgainQuestion(QWidget *parent, const QString &title
     Returns the clicked button, or QDialogButtonBox::NoButton if the user rejects the dialog
     with the escape key, or \a defaultButton if the dialog is suppressed.
 */
-QDialogButtonBox::StandardButton
+auto
 // cppcheck-suppress unusedFunction
-CheckableMessageBox::doNotShowAgainInformation(QWidget *parent, const QString &title,
-                                           const QString &text, QSettings *settings,
-                                           const QString &settingsSubKey,
-                                           QDialogButtonBox::StandardButtons buttons,
-                                           QDialogButtonBox::StandardButton defaultButton)
+CheckableMessageBox::doNotShowAgainInformation(QWidget *parent, const QString &title, const QString &text,
+                                               QSettings *settings, const QString &settingsSubKey,
+                                               QDialogButtonBox::StandardButtons buttons,
+                                               QDialogButtonBox::StandardButton defaultButton)
+    -> QDialogButtonBox::StandardButton
 
 {
     if (!askAgain(settings, settingsSubKey))
@@ -431,7 +425,7 @@ void CheckableMessageBox::resetAllDoNotAskAgainQuestions(QSettings *settings)
     in the \a settings.
 */
 // cppcheck-suppress unusedFunction
-bool CheckableMessageBox::hasSuppressedQuestions(QSettings *settings)
+auto CheckableMessageBox::hasSuppressedQuestions(QSettings *settings) -> bool
 {
     //Q_ASSERT(settings, return false);
     bool hasSuppressed = false;
@@ -452,7 +446,7 @@ bool CheckableMessageBox::hasSuppressedQuestions(QSettings *settings)
     Returns the standard \gui {Do not ask again} check box text.
     \sa doNotAskAgainQuestion()
 */
-QString CheckableMessageBox::msgDoNotAskAgain()
+auto CheckableMessageBox::msgDoNotAskAgain() -> QString
 {
     return QApplication::translate("Utils::CheckableMessageBox", "Do not &ask again");
 }
@@ -461,7 +455,7 @@ QString CheckableMessageBox::msgDoNotAskAgain()
     Returns the standard \gui {Do not show again} check box text.
     \sa doNotShowAgainInformation()
 */
-QString CheckableMessageBox::msgDoNotShowAgain()
+auto CheckableMessageBox::msgDoNotShowAgain() -> QString
 {
     return QApplication::translate("Utils::CheckableMessageBox", "Do not &show again");
 }

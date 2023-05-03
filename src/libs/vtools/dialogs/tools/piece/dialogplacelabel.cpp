@@ -88,7 +88,7 @@ void DialogPlaceLabel::EnbleShowMode(bool disable)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogPlaceLabel::GetCenterPoint() const
+auto DialogPlaceLabel::GetCenterPoint() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxPoint);
 }
@@ -109,7 +109,7 @@ void DialogPlaceLabel::SetCenterPoint(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PlaceLabelType DialogPlaceLabel::GetLabelType() const
+auto DialogPlaceLabel::GetLabelType() const -> PlaceLabelType
 {
     return static_cast<PlaceLabelType>(ui->comboBoxLabelType->currentData().toInt());
 }
@@ -125,7 +125,7 @@ void DialogPlaceLabel::SetLabelType(PlaceLabelType type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogPlaceLabel::GetWidth() const
+auto DialogPlaceLabel::GetWidth() const -> QString
 {
     return VTranslateVars::TryFormulaFromUser(ui->plainTextEditFormulaWidth->toPlainText(),
                                               VAbstractApplication::VApp()->Settings()->GetOsSeparator());
@@ -152,7 +152,7 @@ void DialogPlaceLabel::SetWidth(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogPlaceLabel::GetHeight() const
+auto DialogPlaceLabel::GetHeight() const -> QString
 {
     return VTranslateVars::TryFormulaFromUser(ui->plainTextEditFormulaHeight->toPlainText(),
                                               VAbstractApplication::VApp()->Settings()->GetOsSeparator());
@@ -179,7 +179,7 @@ void DialogPlaceLabel::SetHeight(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogPlaceLabel::GetAngle() const
+auto DialogPlaceLabel::GetAngle() const -> QString
 {
     return VTranslateVars::TryFormulaFromUser(ui->plainTextEditFormulaAngle->toPlainText(),
                                               VAbstractApplication::VApp()->Settings()->GetOsSeparator());
@@ -206,7 +206,7 @@ void DialogPlaceLabel::SetAngle(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogPlaceLabel::GetPieceId() const
+auto DialogPlaceLabel::GetPieceId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxPiece);
 }
@@ -548,7 +548,7 @@ void DialogPlaceLabel::CheckPoint()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogPlaceLabel::GetFormulaVisible() const
+auto DialogPlaceLabel::GetFormulaVisible() const -> QString
 {
     QString formula = ui->plainTextEditFormulaVisible->toPlainText();
     return VTranslateVars::TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());

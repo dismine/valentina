@@ -56,34 +56,34 @@ class VBank
 public:
     VBank();
 
-    qreal GetLayoutWidth() const;
+    auto GetLayoutWidth() const -> qreal;
     void SetLayoutWidth(qreal value);
 
-    bool GetManualPriority() const;
+    auto GetManualPriority() const -> bool;
     void SetManualPriority(bool value);
 
-    bool IsNestQuantity() const;
+    auto IsNestQuantity() const -> bool;
     void SetNestQuantity(bool value);
 
     void SetDetails(const QVector<VLayoutPiece> &details);
-    int  GetNext();
-    VLayoutPiece GetDetail(int i) const;
+    auto GetNext() -> int;
+    auto GetDetail(int i) const -> VLayoutPiece;
 
     void Arranged(int i);
     void NotArranged(int i);
 
-    bool PrepareUnsorted();
-    bool PrepareDetails();
+    auto PrepareUnsorted() -> bool;
+    auto PrepareDetails() -> bool;
     void Reset();
     void SetCaseType(Cases caseType);
 
-    vsizetype AllDetailsCount() const;
-    vsizetype LeftToArrange() const;
-    vsizetype FailedToArrange() const;
+    auto AllDetailsCount() const -> vsizetype;
+    auto LeftToArrange() const -> vsizetype;
+    auto FailedToArrange() const -> vsizetype;
 
-    qreal GetBiggestDiagonal() const;
+    auto GetBiggestDiagonal() const -> qreal;
 
-    bool IsRotationNeeded() const;
+    auto IsRotationNeeded() const -> bool;
 
 private:
     Q_DISABLE_COPY_MOVE(VBank) // NOLINT
@@ -112,14 +112,14 @@ private:
     void PrepareTwoGroups(uint priority);
     void PrepareDescGroup(uint priority);
 
-    int GetNextThreeGroups(uint priority) const;
-    int GetNextTwoGroups(uint priority) const;
-    int GetNextDescGroup(uint priority) const;
+    auto GetNextThreeGroups(uint priority) const -> int;
+    auto GetNextTwoGroups(uint priority) const -> int;
+    auto GetNextDescGroup(uint priority) const -> int;
 
     void SqMaxMin(qint64 &sMax, qint64 &sMin, uint priority) const;
 
-    bool ArrangedDetail(QMap<uint, QHash<int, qint64>> &container, int i);
-    bool ArrangedDetail(QMap<uint, QMultiMap<qint64, int>> &container, int i);
+    auto ArrangedDetail(QMap<uint, QHash<int, qint64>> &container, int i) -> bool;
+    auto ArrangedDetail(QMap<uint, QMultiMap<qint64, int>> &container, int i) -> bool;
 };
 
 #if defined (Q_OS_WIN) && defined (Q_CC_MSVC)

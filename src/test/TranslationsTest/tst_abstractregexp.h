@@ -50,9 +50,9 @@ protected:
     VTranslateVars *m_trMs;
 
     virtual void        PrepareData()=0;
-    virtual QStringList AllNames()=0;
+    virtual auto AllNames() -> QStringList = 0;
 
-    int  LoadVariables(const QString &checkedLocale);
+    auto LoadVariables(const QString &checkedLocale) -> int;
     void RemoveTrVariables(const QString &checkedLocale);
     void InitTrMs();
 

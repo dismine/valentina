@@ -50,13 +50,13 @@ public:
 
     virtual ~VVariable() override;
 
-    VVariable &operator=(const VVariable &var);
+    auto operator=(const VVariable &var) -> VVariable &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VVariable(VVariable &&var) Q_DECL_NOTHROW;
-    VVariable &operator=(VVariable &&var) Q_DECL_NOTHROW;
+    auto operator=(VVariable &&var) Q_DECL_NOTHROW->VVariable &;
 #endif
 
-    QString GetDescription() const;
+    auto GetDescription() const -> QString;
     void    SetDescription(const QString &desc);
 
 private:

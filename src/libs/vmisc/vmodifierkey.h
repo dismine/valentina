@@ -72,34 +72,34 @@ public:
     operator QString() const;
 
     /** Returns a shared Alt modifier key. */
-    static const VModifierKey& Alt();
+    static auto Alt() -> const VModifierKey &;
 
     /** Returns a shared Control modifier key. */
-    static const VModifierKey& Control();
+    static auto Control() -> const VModifierKey &;
 
     /** Returns a shared Control+Shift modifier key. */
-    static const VModifierKey& ControlShift();
+    static auto ControlShift() -> const VModifierKey &;
 
     /** Returns a shared Meta modifier key. */
-    static const VModifierKey& Meta();
+    static auto Meta() -> const VModifierKey &;
 
     /** Returns a shared Shift modifier key. */
-    static const VModifierKey& Shift();
+    static auto Shift() -> const VModifierKey &;
 
     /** Returns a shared Space key. */
-    static const VModifierKey& Space();
+    static auto Space() -> const VModifierKey &;
 
     /** Returns a shared Return key. */
-    static const VModifierKey& ReturnKey();
+    static auto ReturnKey() -> const VModifierKey &;
 
     /** Returns a shared Enter key. */
-    static const VModifierKey& EnterKey();
+    static auto EnterKey() -> const VModifierKey &;
 
     /** Returns a shared Backspace key. */
-    static const VModifierKey& Backspace();
+    static auto Backspace() -> const VModifierKey &;
 
     /** Returns a shared Escape modifier key. */
-    static const VModifierKey& Escape();
+    static auto Escape() -> const VModifierKey &;
 
 protected:
     /** Constructs a new VModifierKey for the given key. */

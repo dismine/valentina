@@ -150,7 +150,7 @@ void SavePieceOptions::redo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool SavePieceOptions::mergeWith(const QUndoCommand *command)
+auto SavePieceOptions::mergeWith(const QUndoCommand *command) -> bool
 {
     const SavePieceOptions *saveCommand = static_cast<const SavePieceOptions *>(command);
     SCASSERT(saveCommand != nullptr);
@@ -195,7 +195,7 @@ bool SavePieceOptions::mergeWith(const QUndoCommand *command)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int SavePieceOptions::id() const
+auto SavePieceOptions::id() const -> int
 {
     return static_cast<int>(UndoCommand::SavePieceOptions);
 }

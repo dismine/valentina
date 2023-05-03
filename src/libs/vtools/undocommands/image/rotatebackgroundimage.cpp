@@ -70,7 +70,7 @@ void RotateBackgroundImage::redo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool RotateBackgroundImage::mergeWith(const QUndoCommand *command)
+auto RotateBackgroundImage::mergeWith(const QUndoCommand *command) -> bool
 {
     if (command->id() != id())
     {
@@ -90,25 +90,25 @@ bool RotateBackgroundImage::mergeWith(const QUndoCommand *command)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int RotateBackgroundImage::id() const
+auto RotateBackgroundImage::id() const -> int
 {
     return static_cast<int>(UndoCommand::RotateBackGroundImage);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QUuid RotateBackgroundImage::ImageId() const
+auto RotateBackgroundImage::ImageId() const -> QUuid
 {
     return m_id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QTransform RotateBackgroundImage::Matrix() const
+auto RotateBackgroundImage::Matrix() const -> QTransform
 {
     return m_matrix;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool RotateBackgroundImage::AllowMerge() const
+auto RotateBackgroundImage::AllowMerge() const -> bool
 {
     return m_allowMerge;
 }

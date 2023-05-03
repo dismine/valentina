@@ -143,8 +143,8 @@ void VToolSpline::SetDialog()
  * @param data container with variables.
  * @return the created tool
  */
-VToolSpline* VToolSpline::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                 VContainer *data)
+auto VToolSpline::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                         VContainer *data) -> VToolSpline *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogSpline> dialogTool = qobject_cast<DialogSpline *>(dialog);
@@ -158,7 +158,7 @@ VToolSpline* VToolSpline::Create(const QPointer<DialogTool> &dialog, VMainGraphi
     initData.typeCreation = Source::FromGui;
     initData.notes = dialogTool->GetNotes();
 
-    auto spl = Create(initData, new VSpline(dialogTool->GetSpline()));
+    auto *spl = Create(initData, new VSpline(dialogTool->GetSpline()));
 
     if (spl != nullptr)
     {
@@ -174,7 +174,7 @@ VToolSpline* VToolSpline::Create(const QPointer<DialogTool> &dialog, VMainGraphi
  * @param spline spline.
  * @return the created tool
  */
-VToolSpline* VToolSpline::Create(VToolSplineInitData &initData, VSpline *spline)
+auto VToolSpline::Create(VToolSplineInitData &initData, VSpline *spline) -> VToolSpline *
 {
     if (initData.typeCreation == Source::FromGui)
     {
@@ -206,7 +206,7 @@ VToolSpline* VToolSpline::Create(VToolSplineInitData &initData, VSpline *spline)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolSpline *VToolSpline::Create(VToolSplineInitData &initData)
+auto VToolSpline::Create(VToolSplineInitData &initData) -> VToolSpline *
 {
     const qreal calcAngle1 = CheckFormula(initData.id, initData.a1, initData.data);
     const qreal calcAngle2 = CheckFormula(initData.id, initData.a2, initData.data);
@@ -235,7 +235,7 @@ VToolSpline *VToolSpline::Create(VToolSplineInitData &initData)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSpline VToolSpline::getSpline() const
+auto VToolSpline::getSpline() const -> VSpline
 {
     auto spline = VAbstractTool::data.GeometricObject<VSpline>(m_id);
     return *spline.data();
@@ -323,7 +323,7 @@ void VToolSpline::RemoveReferens()
 void VToolSpline::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    auto dialogTool = qobject_cast<DialogSpline*>(m_dialog);
+    auto *dialogTool = qobject_cast<DialogSpline*>(m_dialog);
     SCASSERT(dialogTool != nullptr)
 
     const auto oldSpl = VAbstractTool::data.GeometricObject<VSpline>(m_id);
@@ -556,7 +556,7 @@ void VToolSpline::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VToolSpline::IsMovable() const
+auto VToolSpline::IsMovable() const -> bool
 {
     const auto spline = VAbstractTool::data.GeometricObject<VSpline>(m_id);
 
@@ -570,7 +570,7 @@ bool VToolSpline::IsMovable() const
 void VToolSpline::RefreshCtrlPoints()
 {
     // Very important to disable control points. Without it the pogram can't move the curve.
-    for (auto point : qAsConst(controlPoints))
+    for (auto *point : qAsConst(controlPoints))
     {
         point->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
     }
@@ -603,7 +603,7 @@ void VToolSpline::RefreshCtrlPoints()
     controlPoints[0]->blockSignals(false);
     controlPoints[1]->blockSignals(false);
 
-    for (auto point : qAsConst(controlPoints))
+    for (auto *point : qAsConst(controlPoints))
     {
         point->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     }

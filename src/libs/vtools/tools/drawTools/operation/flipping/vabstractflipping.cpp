@@ -160,8 +160,9 @@ QT_WARNING_POP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-DestinationItem VAbstractFlipping::CreatePoint(quint32 idTool, const SourceItem &sItem, const QPointF &firstPoint,
-                                               const QPointF &secondPoint, const QString &suffix, VContainer *data)
+auto VAbstractFlipping::CreatePoint(quint32 idTool, const SourceItem &sItem, const QPointF &firstPoint,
+                                    const QPointF &secondPoint, const QString &suffix, VContainer *data)
+    -> DestinationItem
 {
     const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(sItem.id);
     VPointF rotated = point->Flip(QLineF(firstPoint, secondPoint), suffix);
@@ -182,8 +183,9 @@ DestinationItem VAbstractFlipping::CreatePoint(quint32 idTool, const SourceItem 
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Item>
-DestinationItem VAbstractFlipping::CreateArc(quint32 idTool, const SourceItem &sItem, const QPointF &firstPoint,
-                                             const QPointF &secondPoint, const QString &suffix, VContainer *data)
+auto VAbstractFlipping::CreateArc(quint32 idTool, const SourceItem &sItem, const QPointF &firstPoint,
+                                  const QPointF &secondPoint, const QString &suffix, VContainer *data)
+    -> DestinationItem
 {
     const DestinationItem item = CreateItem<Item>(idTool, sItem, firstPoint, secondPoint, suffix, data);
     data->AddArc(data->GeometricObject<Item>(item.id), item.id);

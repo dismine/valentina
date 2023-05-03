@@ -69,7 +69,7 @@ void MoveSplinePath::redo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool MoveSplinePath::mergeWith(const QUndoCommand *command)
+auto MoveSplinePath::mergeWith(const QUndoCommand *command) -> bool
 {
     const MoveSplinePath *moveCommand = static_cast<const MoveSplinePath *>(command);
     SCASSERT(moveCommand != nullptr)
@@ -85,7 +85,7 @@ bool MoveSplinePath::mergeWith(const QUndoCommand *command)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int MoveSplinePath::id() const
+auto MoveSplinePath::id() const -> int
 {
     return static_cast<int>(UndoCommand::MoveSplinePath);
 }

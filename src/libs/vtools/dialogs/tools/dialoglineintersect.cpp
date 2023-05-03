@@ -276,7 +276,7 @@ void DialogLineIntersect::ShowVisualization()
  * @brief CheckIntersecion check intersection of points
  * @return true - line have intersection, false = don't have
  */
-bool DialogLineIntersect::CheckIntersecion()
+auto DialogLineIntersect::CheckIntersecion() -> bool
 {
     try
     {
@@ -312,7 +312,7 @@ void DialogLineIntersect::SetP2Line2(quint32 value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogLineIntersect::GetPointName() const
+auto DialogLineIntersect::GetPointName() const -> QString
 {
     return pointName;
 }
@@ -375,7 +375,7 @@ void DialogLineIntersect::SetPointName(const QString &value)
  * @brief GetP1Line1 return id first point of first line
  * @return id
  */
-quint32 DialogLineIntersect::GetP1Line1() const
+auto DialogLineIntersect::GetP1Line1() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxP1Line1);
 }
@@ -385,7 +385,7 @@ quint32 DialogLineIntersect::GetP1Line1() const
  * @brief GetP2Line1 return id second point of first line
  * @return id
  */
-quint32 DialogLineIntersect::GetP2Line1() const
+auto DialogLineIntersect::GetP2Line1() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxP2Line1);
 }
@@ -395,7 +395,7 @@ quint32 DialogLineIntersect::GetP2Line1() const
  * @brief GetP1Line2 return id first point of second line
  * @return id
  */
-quint32 DialogLineIntersect::GetP1Line2() const
+auto DialogLineIntersect::GetP1Line2() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxP1Line2);
 }
@@ -405,7 +405,7 @@ quint32 DialogLineIntersect::GetP1Line2() const
  * @brief GetP2Line2 return id second point of second line
  * @return id
  */
-quint32 DialogLineIntersect::GetP2Line2() const
+auto DialogLineIntersect::GetP2Line2() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxP2Line2);
 }
@@ -417,7 +417,7 @@ void DialogLineIntersect::SetNotes(const QString &notes)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogLineIntersect::GetNotes() const
+auto DialogLineIntersect::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
 }

@@ -44,7 +44,7 @@ VGrainlineData::VGrainlineData(const VGrainlineData &data)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VGrainlineData &VGrainlineData::operator=(const VGrainlineData &data)
+auto VGrainlineData::operator=(const VGrainlineData &data) -> VGrainlineData &
 {
     if ( &data == this )
     {
@@ -63,7 +63,7 @@ VGrainlineData::VGrainlineData(VGrainlineData &&data) Q_DECL_NOTHROW
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VGrainlineData &VGrainlineData::operator=(VGrainlineData &&data) Q_DECL_NOTHROW
+auto VGrainlineData::operator=(VGrainlineData &&data) Q_DECL_NOTHROW->VGrainlineData &
 {
     VAbstractFloatItemData::operator=(data);
     std::swap(d, data.d);
@@ -76,7 +76,7 @@ VGrainlineData::~VGrainlineData()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VGrainlineData::GetLength() const
+auto VGrainlineData::GetLength() const -> QString
 {
     return d->m_qsLength;
 }
@@ -88,7 +88,7 @@ void VGrainlineData::SetLength(const QString& qsLen)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VGrainlineData::GetRotation() const
+auto VGrainlineData::GetRotation() const -> QString
 {
     return d->m_dRotation;
 }
@@ -100,7 +100,7 @@ void VGrainlineData::SetRotation(const QString& qsRot)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-GrainlineArrowDirection VGrainlineData::GetArrowType() const
+auto VGrainlineData::GetArrowType() const -> GrainlineArrowDirection
 {
     return d->m_eArrowType;
 }
@@ -112,7 +112,7 @@ void VGrainlineData::SetArrowType(GrainlineArrowDirection eAT)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VGrainlineData::CenterPin() const
+auto VGrainlineData::CenterPin() const -> quint32
 {
     return d->m_centerPin;
 }
@@ -124,7 +124,7 @@ void VGrainlineData::SetCenterPin(quint32 centerPin)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VGrainlineData::TopPin() const
+auto VGrainlineData::TopPin() const -> quint32
 {
     return d->m_topPin;
 }
@@ -136,7 +136,7 @@ void VGrainlineData::SetTopPin(quint32 topPin)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VGrainlineData::BottomPin() const
+auto VGrainlineData::BottomPin() const -> quint32
 {
     return d->m_bottomPin;
 }

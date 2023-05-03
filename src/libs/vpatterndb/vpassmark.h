@@ -63,7 +63,7 @@ struct VPiecePassmarkData
     vidtype id{NULL_ID};
     qreal globalPassmarkLength{0};
 
-    QJsonObject toJson() const;
+    auto toJson() const -> QJsonObject;
 };
 
 Q_DECLARE_METATYPE(VPiecePassmarkData)
@@ -79,25 +79,25 @@ public:
     VPassmark();
     explicit VPassmark(const VPiecePassmarkData &data);
 
-    QVector<QLineF> FullPassmark(const VPiece& piece, const VContainer *data) const;
-    QVector<QLineF> SAPassmark(const VPiece& piece, const VContainer *data, PassmarkSide side) const;
-    QVector<QLineF> SAPassmark(const QVector<QPointF> &seamAllowance, const QVector<QPointF> &rotatedSeamAllowance,
-                               PassmarkSide side) const;
-    QVector<QLineF> BuiltInSAPassmark(const VPiece &piece, const VContainer *data) const;
+    auto FullPassmark(const VPiece &piece, const VContainer *data) const -> QVector<QLineF>;
+    auto SAPassmark(const VPiece &piece, const VContainer *data, PassmarkSide side) const -> QVector<QLineF>;
+    auto SAPassmark(const QVector<QPointF> &seamAllowance, const QVector<QPointF> &rotatedSeamAllowance,
+                    PassmarkSide side) const -> QVector<QLineF>;
+    auto BuiltInSAPassmark(const VPiece &piece, const VContainer *data) const -> QVector<QLineF>;
 
-    QVector<QLineF> BuiltInSAPassmarkBaseLine(const VPiece &piece) const;
-    QVector<QLineF> SAPassmarkBaseLine(const VPiece &piece, const VContainer *data, PassmarkSide side) const;
-    QVector<QLineF> SAPassmarkBaseLine(const QVector<QPointF> &seamAllowance,
-                                       const QVector<QPointF> &rotatedSeamAllowance, PassmarkSide side) const;
+    auto BuiltInSAPassmarkBaseLine(const VPiece &piece) const -> QVector<QLineF>;
+    auto SAPassmarkBaseLine(const VPiece &piece, const VContainer *data, PassmarkSide side) const -> QVector<QLineF>;
+    auto SAPassmarkBaseLine(const QVector<QPointF> &seamAllowance, const QVector<QPointF> &rotatedSeamAllowance,
+                            PassmarkSide side) const -> QVector<QLineF>;
 
-    QPainterPath SAPassmarkPath(const VPiece& piece, const VContainer *data, PassmarkSide side) const;
-    QPainterPath BuiltInSAPassmarkPath(const VPiece &piece, const VContainer *data) const;
+    auto SAPassmarkPath(const VPiece &piece, const VContainer *data, PassmarkSide side) const -> QPainterPath;
+    auto BuiltInSAPassmarkPath(const VPiece &piece, const VContainer *data) const -> QPainterPath;
 
-    bool IsNull() const;
+    auto IsNull() const -> bool;
 
-    VPiecePassmarkData Data() const;
+    auto Data() const -> VPiecePassmarkData;
 
-    static QLineF FindIntersection(const QLineF &line, const QVector<QPointF> &seamAllowance);
+    static auto FindIntersection(const QLineF &line, const QVector<QPointF> &seamAllowance) -> QLineF;
 
     static const qreal passmarkRadiusFactor;
 private:

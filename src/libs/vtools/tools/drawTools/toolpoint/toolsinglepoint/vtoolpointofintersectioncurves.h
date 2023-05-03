@@ -64,22 +64,23 @@ class VToolPointOfIntersectionCurves : public VToolSinglePoint
     Q_OBJECT // NOLINT
 public:
     virtual void SetDialog() override;
-    static VToolPointOfIntersectionCurves *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
-                                                  VAbstractPattern *doc, VContainer *data);
-    static VToolPointOfIntersectionCurves *Create(VToolPointOfIntersectionCurvesInitData initData);
-    static bool FindPoint(const QVector<QPointF> &curve1Points, const QVector<QPointF> &curve2Points,
-                             VCrossCurvesPoint vCrossPoint, HCrossCurvesPoint hCrossPoint, QPointF *intersectionPoint);
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolPointOfIntersectionCurves *;
+    static auto Create(VToolPointOfIntersectionCurvesInitData initData) -> VToolPointOfIntersectionCurves *;
+    static auto FindPoint(const QVector<QPointF> &curve1Points, const QVector<QPointF> &curve2Points,
+                          VCrossCurvesPoint vCrossPoint, HCrossCurvesPoint hCrossPoint, QPointF *intersectionPoint)
+        -> bool;
     static const QString ToolType;
-    virtual int  type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::PointOfIntersectionCurves) };
 
-    QString FirstCurveName() const;
-    QString SecondCurveName() const;
+    auto FirstCurveName() const -> QString;
+    auto SecondCurveName() const -> QString;
 
-    VCrossCurvesPoint GetVCrossPoint() const;
+    auto GetVCrossPoint() const -> VCrossCurvesPoint;
     void              SetVCrossPoint(VCrossCurvesPoint value);
 
-    HCrossCurvesPoint GetHCrossPoint() const;
+    auto GetHCrossPoint() const -> HCrossCurvesPoint;
     void              SetHCrossPoint(HCrossCurvesPoint value);
 
     virtual void ShowVisualization(bool show) override;

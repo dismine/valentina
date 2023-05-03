@@ -95,15 +95,14 @@ namespace
 #define AttrRotationAngleValue QStringLiteral("rotationAngleValue")
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString FileComment()
+inline auto FileComment() -> QString
 {
     return QStringLiteral("Recipe created with Valentina v%1 (https://smart-pattern.com.ua/).")
             .arg(APP_VERSION_STR);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-T *GetPatternTool(quint32 id)
+template <typename T> auto GetPatternTool(quint32 id) -> T *
 {
     T* tool = qobject_cast<T*>(VAbstractPattern::getTool(id));
     if (not tool)
@@ -134,7 +133,7 @@ VPatternRecipe::VPatternRecipe(VAbstractPattern *pattern, QObject *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::Prerequisite()
+auto VPatternRecipe::Prerequisite() -> QDomElement
 {
     /*
      <prerequisite>
@@ -166,7 +165,7 @@ QDomElement VPatternRecipe::Prerequisite()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::Measurements()
+auto VPatternRecipe::Measurements() -> QDomElement
 {
     QDomElement measurements = createElement(QStringLiteral("measurements"));
 
@@ -187,7 +186,7 @@ QDomElement VPatternRecipe::Measurements()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::Measurement(const QSharedPointer<VMeasurement> &m)
+auto VPatternRecipe::Measurement(const QSharedPointer<VMeasurement> &m) -> QDomElement
 {
     /*
      * <measurements>
@@ -223,7 +222,7 @@ QDomElement VPatternRecipe::Measurement(const QSharedPointer<VMeasurement> &m)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::Increments()
+auto VPatternRecipe::Increments() -> QDomElement
 {
     QDomElement increments = createElement(QStringLiteral("increments"));
 
@@ -247,7 +246,7 @@ QDomElement VPatternRecipe::Increments()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::PreviewCalculations()
+auto VPatternRecipe::PreviewCalculations() -> QDomElement
 {
     QDomElement previewCalculations = createElement(QStringLiteral("previewCalculations"));
 
@@ -271,7 +270,7 @@ QDomElement VPatternRecipe::PreviewCalculations()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::Increment(const QSharedPointer<VIncrement> &incr)
+auto VPatternRecipe::Increment(const QSharedPointer<VIncrement> &incr) -> QDomElement
 {
     QDomElement measurement = createElement(QStringLiteral("increment"));
 
@@ -292,7 +291,7 @@ QDomElement VPatternRecipe::Increment(const QSharedPointer<VIncrement> &incr)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::Content()
+auto VPatternRecipe::Content() -> QDomElement
 {
     QDomElement content = createElement(QStringLiteral("content"));
 
@@ -314,7 +313,7 @@ QDomElement VPatternRecipe::Content()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::Draft(const QDomElement &draft)
+auto VPatternRecipe::Draft(const QDomElement &draft) -> QDomElement
 {
     QDomElement recipeDraft = createElement(QStringLiteral("draft"));
 
@@ -340,7 +339,7 @@ QDomElement VPatternRecipe::Draft(const QDomElement &draft)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::Step(const VToolRecord &tool, const VContainer &data)
+auto VPatternRecipe::Step(const VToolRecord &tool, const VContainer &data) -> QDomElement
 {
     // This check helps to find missed tools in the switch
     Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Not all tools were used in history.");
@@ -467,14 +466,14 @@ QT_WARNING_POP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::FinalMeasurements()
+auto VPatternRecipe::FinalMeasurements() -> QDomElement
 {
     QDomElement recipeFinalMeasurements = createElement(QStringLiteral("finalMeasurements"));
 
     const QVector<VFinalMeasurement> measurements = m_pattern->GetFinalMeasurements();
     VContainer data = m_pattern->GetCompleteData();
 
-    for (auto &m : measurements)
+    for (const auto &m : measurements)
     {
         recipeFinalMeasurements.appendChild(FinalMeasurement(m, data));
     }
@@ -483,7 +482,7 @@ QDomElement VPatternRecipe::FinalMeasurements()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::FinalMeasurement(const VFinalMeasurement &fm, const VContainer &data)
+auto VPatternRecipe::FinalMeasurement(const VFinalMeasurement &fm, const VContainer &data) -> QDomElement
 {
     QDomElement recipeFinalMeasurement = createElement(QStringLiteral("finalMeasurement"));
 
@@ -517,7 +516,7 @@ QDomElement VPatternRecipe::FinalMeasurement(const VFinalMeasurement &fm, const 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::BasePoint(const VToolRecord &record)
+auto VPatternRecipe::BasePoint(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolBasePoint>(record.getId());
 
@@ -527,7 +526,7 @@ QDomElement VPatternRecipe::BasePoint(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::EndLine(const VToolRecord &record)
+auto VPatternRecipe::EndLine(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolEndLine>(record.getId());
 
@@ -543,7 +542,7 @@ QDomElement VPatternRecipe::EndLine(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::Line(const VToolRecord &record)
+auto VPatternRecipe::Line(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolLine>(record.getId());
 
@@ -558,7 +557,7 @@ QDomElement VPatternRecipe::Line(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::AlongLine(const VToolRecord &record)
+auto VPatternRecipe::AlongLine(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolAlongLine>(record.getId());
 
@@ -574,7 +573,7 @@ QDomElement VPatternRecipe::AlongLine(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::ShoulderPoint(const VToolRecord &record)
+auto VPatternRecipe::ShoulderPoint(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolShoulderPoint>(record.getId());
 
@@ -591,7 +590,7 @@ QDomElement VPatternRecipe::ShoulderPoint(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::Normal(const VToolRecord &record)
+auto VPatternRecipe::Normal(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolNormal>(record.getId());
 
@@ -608,7 +607,7 @@ QDomElement VPatternRecipe::Normal(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::Bisector(const VToolRecord &record)
+auto VPatternRecipe::Bisector(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolBisector>(record.getId());
 
@@ -625,7 +624,7 @@ QDomElement VPatternRecipe::Bisector(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::LineIntersect(const VToolRecord &record)
+auto VPatternRecipe::LineIntersect(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolLineIntersect>(record.getId());
 
@@ -642,7 +641,7 @@ QDomElement VPatternRecipe::LineIntersect(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::Spline(const VToolRecord &record)
+auto VPatternRecipe::Spline(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolSpline>(record.getId());
     VSpline spl = tool->getSpline();
@@ -673,7 +672,7 @@ QDomElement VPatternRecipe::Spline(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::CubicBezier(const VToolRecord &record)
+auto VPatternRecipe::CubicBezier(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolCubicBezier>(record.getId());
     VCubicBezier spl = tool->getSpline();
@@ -692,7 +691,7 @@ QDomElement VPatternRecipe::CubicBezier(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::Arc(const VToolRecord &record)
+auto VPatternRecipe::Arc(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolArc>(record.getId());
 
@@ -711,7 +710,7 @@ QDomElement VPatternRecipe::Arc(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::ArcWithLength(const VToolRecord &record)
+auto VPatternRecipe::ArcWithLength(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolArcWithLength>(record.getId());
 
@@ -729,7 +728,7 @@ QDomElement VPatternRecipe::ArcWithLength(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::SplinePath(const VToolRecord &record)
+auto VPatternRecipe::SplinePath(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolSplinePath>(record.getId());
     VSplinePath spl = tool->getSplinePath();
@@ -776,7 +775,7 @@ QDomElement VPatternRecipe::SplinePath(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::CubicBezierPath(const VToolRecord &record)
+auto VPatternRecipe::CubicBezierPath(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolCubicBezierPath>(record.getId());
     VCubicBezierPath spl = tool->getSplinePath();
@@ -810,7 +809,7 @@ QDomElement VPatternRecipe::CubicBezierPath(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::PointOfContact(const VToolRecord &record)
+auto VPatternRecipe::PointOfContact(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolPointOfContact>(record.getId());
 
@@ -826,7 +825,7 @@ QDomElement VPatternRecipe::PointOfContact(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::Height(const VToolRecord &record)
+auto VPatternRecipe::Height(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolHeight>(record.getId());
 
@@ -842,7 +841,7 @@ QDomElement VPatternRecipe::Height(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::Triangle(const VToolRecord &record)
+auto VPatternRecipe::Triangle(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolTriangle>(record.getId());
 
@@ -858,7 +857,7 @@ QDomElement VPatternRecipe::Triangle(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::PointOfIntersection(const VToolRecord &record)
+auto VPatternRecipe::PointOfIntersection(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolPointOfIntersection>(record.getId());
 
@@ -872,7 +871,7 @@ QDomElement VPatternRecipe::PointOfIntersection(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::CutArc(const VToolRecord &record)
+auto VPatternRecipe::CutArc(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolCutArc>(record.getId());
 
@@ -888,7 +887,7 @@ QDomElement VPatternRecipe::CutArc(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::CutSpline(const VToolRecord &record)
+auto VPatternRecipe::CutSpline(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolCutSpline>(record.getId());
 
@@ -904,7 +903,7 @@ QDomElement VPatternRecipe::CutSpline(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::CutSplinePath(const VToolRecord &record)
+auto VPatternRecipe::CutSplinePath(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolCutSplinePath>(record.getId());
 
@@ -920,7 +919,7 @@ QDomElement VPatternRecipe::CutSplinePath(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::LineIntersectAxis(const VToolRecord &record)
+auto VPatternRecipe::LineIntersectAxis(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolLineIntersectAxis>(record.getId());
 
@@ -937,7 +936,7 @@ QDomElement VPatternRecipe::LineIntersectAxis(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::CurveIntersectAxis(const VToolRecord &record)
+auto VPatternRecipe::CurveIntersectAxis(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolCurveIntersectAxis>(record.getId());
 
@@ -953,7 +952,7 @@ QDomElement VPatternRecipe::CurveIntersectAxis(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::PointOfIntersectionArcs(const VToolRecord &record)
+auto VPatternRecipe::PointOfIntersectionArcs(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolPointOfIntersectionArcs>(record.getId());
 
@@ -968,7 +967,7 @@ QDomElement VPatternRecipe::PointOfIntersectionArcs(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::PointOfIntersectionCircles(const VToolRecord &record)
+auto VPatternRecipe::PointOfIntersectionCircles(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolPointOfIntersectionCircles>(record.getId());
 
@@ -985,7 +984,7 @@ QDomElement VPatternRecipe::PointOfIntersectionCircles(const VToolRecord &record
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::PointOfIntersectionCurves(const VToolRecord &record)
+auto VPatternRecipe::PointOfIntersectionCurves(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolPointOfIntersectionCurves>(record.getId());
 
@@ -1001,7 +1000,7 @@ QDomElement VPatternRecipe::PointOfIntersectionCurves(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::PointFromCircleAndTangent(const VToolRecord &record)
+auto VPatternRecipe::PointFromCircleAndTangent(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolPointFromCircleAndTangent>(record.getId());
 
@@ -1017,7 +1016,7 @@ QDomElement VPatternRecipe::PointFromCircleAndTangent(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::PointFromArcAndTangent(const VToolRecord &record)
+auto VPatternRecipe::PointFromArcAndTangent(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolPointFromArcAndTangent>(record.getId());
 
@@ -1032,7 +1031,7 @@ QDomElement VPatternRecipe::PointFromArcAndTangent(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::TrueDarts(const VToolRecord &record)
+auto VPatternRecipe::TrueDarts(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolTrueDarts>(record.getId());
 
@@ -1051,7 +1050,7 @@ QDomElement VPatternRecipe::TrueDarts(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::EllipticalArc(const VToolRecord &record)
+auto VPatternRecipe::EllipticalArc(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolEllipticalArc>(record.getId());
 
@@ -1073,7 +1072,7 @@ QDomElement VPatternRecipe::EllipticalArc(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::Rotation(const VToolRecord &record, const VContainer &data)
+auto VPatternRecipe::Rotation(const VToolRecord &record, const VContainer &data) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolRotation>(record.getId());
 
@@ -1090,7 +1089,7 @@ QDomElement VPatternRecipe::Rotation(const VToolRecord &record, const VContainer
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::FlippingByLine(const VToolRecord &record, const VContainer &data)
+auto VPatternRecipe::FlippingByLine(const VToolRecord &record, const VContainer &data) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolFlippingByLine>(record.getId());
 
@@ -1107,7 +1106,7 @@ QDomElement VPatternRecipe::FlippingByLine(const VToolRecord &record, const VCon
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::FlippingByAxis(const VToolRecord &record, const VContainer &data)
+auto VPatternRecipe::FlippingByAxis(const VToolRecord &record, const VContainer &data) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolFlippingByAxis>(record.getId());
 
@@ -1124,7 +1123,7 @@ QDomElement VPatternRecipe::FlippingByAxis(const VToolRecord &record, const VCon
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::Move(const VToolRecord &record, const VContainer &data)
+auto VPatternRecipe::Move(const VToolRecord &record, const VContainer &data) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolMove>(record.getId());
 
@@ -1199,7 +1198,7 @@ inline void VPatternRecipe::ToolAttributes(QDomElement &step, T *tool)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VPatternRecipe::GroupOperationSource(VAbstractOperation *tool, quint32 id, const VContainer &data)
+auto VPatternRecipe::GroupOperationSource(VAbstractOperation *tool, quint32 id, const VContainer &data) -> QDomElement
 {
     SCASSERT(tool)
 

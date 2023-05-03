@@ -63,25 +63,25 @@ auto VLabelTemplateConverter::XSDSchemas() -> QHash<unsigned int, QString>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-unsigned VLabelTemplateConverter::MinVer() const
+auto VLabelTemplateConverter::MinVer() const -> unsigned
 {
     return LabelTemplateMinVer;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-unsigned VLabelTemplateConverter::MaxVer() const
+auto VLabelTemplateConverter::MaxVer() const -> unsigned
 {
     return LabelTemplateMaxVer;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VLabelTemplateConverter::MinVerStr() const
+auto VLabelTemplateConverter::MinVerStr() const -> QString
 {
     return LabelTemplateMinVerStr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VLabelTemplateConverter::MaxVerStr() const
+auto VLabelTemplateConverter::MaxVerStr() const -> QString
 {
     return LabelTemplateMaxVerStr;
 }

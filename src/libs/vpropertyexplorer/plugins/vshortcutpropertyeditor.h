@@ -47,13 +47,13 @@ public:
     virtual ~VShortcutEditWidget() override;
 
     //! Needed for proper event handling
-    virtual bool eventFilter(QObject* obj, QEvent* event) override;
+    virtual auto eventFilter(QObject *obj, QEvent *event) -> bool override;
 
     //! Returns the currently set shortcut
-    QString getShortcutAsString() const;
+    auto getShortcutAsString() const -> QString;
 
     //! Returns the currently set shortcut
-    QKeySequence getShortcut();
+    auto getShortcut() -> QKeySequence;
 
 signals:
     //! This signal is emitted when the user changed the current shortcut

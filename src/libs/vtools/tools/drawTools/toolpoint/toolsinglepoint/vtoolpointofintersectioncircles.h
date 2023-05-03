@@ -68,25 +68,25 @@ class VToolPointOfIntersectionCircles : public VToolSinglePoint
     Q_OBJECT // NOLINT
 public:
     virtual void SetDialog() override;
-    static VToolPointOfIntersectionCircles *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
-                                                   VAbstractPattern *doc, VContainer *data);
-    static VToolPointOfIntersectionCircles *Create(VToolPointOfIntersectionCirclesInitData &initData);
-    static bool FindPoint(const QPointF &c1Point, const QPointF &c2Point, qreal c1Radius, qreal c2Radius,
-                             const CrossCirclesPoint crossPoint, QPointF *intersectionPoint);
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolPointOfIntersectionCircles *;
+    static auto Create(VToolPointOfIntersectionCirclesInitData &initData) -> VToolPointOfIntersectionCircles *;
+    static auto FindPoint(const QPointF &c1Point, const QPointF &c2Point, qreal c1Radius, qreal c2Radius,
+                          const CrossCirclesPoint crossPoint, QPointF *intersectionPoint) -> bool;
     static const QString ToolType;
-    virtual int  type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::PointOfIntersectionCircles) };
 
-    QString FirstCircleCenterPointName() const;
-    QString SecondCircleCenterPointName() const;
+    auto FirstCircleCenterPointName() const -> QString;
+    auto SecondCircleCenterPointName() const -> QString;
 
-    VFormula GetFirstCircleRadius() const;
+    auto GetFirstCircleRadius() const -> VFormula;
     void     SetFirstCircleRadius(const VFormula &value);
 
-    VFormula GetSecondCircleRadius() const;
+    auto GetSecondCircleRadius() const -> VFormula;
     void     SetSecondCircleRadius(const VFormula &value);
 
-    CrossCirclesPoint GetCrossCirclesPoint() const;
+    auto GetCrossCirclesPoint() const -> CrossCirclesPoint;
     void              SetCrossCirclesPoint(const CrossCirclesPoint &value);
 
     virtual void ShowVisualization(bool show) override;

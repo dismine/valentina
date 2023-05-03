@@ -65,8 +65,8 @@ VPE::VLabelProperty::VLabelProperty(const QString &name)
 #endif
 }
 
-QWidget *VPE::VLabelProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
-                                           const QAbstractItemDelegate *delegate)
+auto VPE::VLabelProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
+                                       const QAbstractItemDelegate *delegate) -> QWidget *
 {
     Q_UNUSED(options)
     Q_UNUSED(delegate)
@@ -80,7 +80,7 @@ QWidget *VPE::VLabelProperty::createEditor(QWidget *parent, const QStyleOptionVi
     return d_ptr->editor;
 }
 
-bool VPE::VLabelProperty::setEditorData(QWidget *editor)
+auto VPE::VLabelProperty::setEditorData(QWidget *editor) -> bool
 {
     if (QLabel* tmpWidget = qobject_cast<QLabel*>(editor))
     {
@@ -91,7 +91,7 @@ bool VPE::VLabelProperty::setEditorData(QWidget *editor)
     return false;
 }
 
-QVariant VPE::VLabelProperty::getEditorData(const QWidget *editor) const
+auto VPE::VLabelProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
     const QLabel* tmpEditor = qobject_cast<const QLabel*>(editor);
     if (tmpEditor)
@@ -110,7 +110,7 @@ void VPE::VLabelProperty::setSetting(const QString &key, const QVariant &value)
     }
 }
 
-QVariant VPE::VLabelProperty::getSetting(const QString &key) const
+auto VPE::VLabelProperty::getSetting(const QString &key) const -> QVariant
 {
     if (key == QLatin1String("TypeForParent"))
     {
@@ -120,19 +120,19 @@ QVariant VPE::VLabelProperty::getSetting(const QString &key) const
         return VProperty::getSetting(key);
 }
 
-QStringList VPE::VLabelProperty::getSettingKeys() const
+auto VPE::VLabelProperty::getSettingKeys() const -> QStringList
 {
     QStringList settings;
     settings << QStringLiteral("TypeForParent");
     return settings;
 }
 
-QString VPE::VLabelProperty::type() const
+auto VPE::VLabelProperty::type() const -> QString
 {
     return QStringLiteral("label");
 }
 
-VPE::VProperty *VPE::VLabelProperty::clone(bool include_children, VPE::VProperty *container) const
+auto VPE::VLabelProperty::clone(bool include_children, VPE::VProperty *container) const -> VPE::VProperty *
 {
     return VProperty::clone(include_children, container ? container : new VLabelProperty(getName(), getSettings()));
 }
@@ -142,7 +142,7 @@ void VPE::VLabelProperty::UpdateParent(const QVariant &value)
     emit childChanged(value, typeForParent);
 }
 
-int VPE::VLabelProperty::getTypeForParent() const
+auto VPE::VLabelProperty::getTypeForParent() const -> int
 {
     return typeForParent;
 }

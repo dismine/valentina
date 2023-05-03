@@ -57,7 +57,7 @@ private:
     qmu::QmuParserErrorMsg *msg;
 
     void AddCase(int code, bool tok, bool pos);
-    int  LoadTranslation(const QString &checkedLocale);
+    auto LoadTranslation(const QString &checkedLocale) -> int;
     void RemoveTranslation();
 };
 

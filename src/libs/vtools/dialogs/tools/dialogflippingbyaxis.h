@@ -55,32 +55,32 @@ public:
     explicit DialogFlippingByAxis(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogFlippingByAxis();
 
-    quint32 GetOriginPointId() const;
+    auto GetOriginPointId() const -> quint32;
     void    SetOriginPointId(quint32 value);
 
-    AxisType GetAxisType() const;
+    auto GetAxisType() const -> AxisType;
     void     SetAxisType(AxisType type);
 
-    QString GetSuffix() const;
+    auto GetSuffix() const -> QString;
     void    SetSuffix(const QString &value);
 
-    QString GetVisibilityGroupName() const;
+    auto GetVisibilityGroupName() const -> QString;
     void    SetVisibilityGroupName(const QString &name);
 
-    bool HasLinkedVisibilityGroup() const;
+    auto HasLinkedVisibilityGroup() const -> bool;
     void SetHasLinkedVisibilityGroup(bool linked);
 
     void        SetVisibilityGroupTags(const QStringList &tags);
-    QStringList GetVisibilityGroupTags() const;
+    auto GetVisibilityGroupTags() const -> QStringList;
 
     void    SetNotes(const QString &notes);
-    QString GetNotes() const;
+    auto GetNotes() const -> QString;
 
     virtual void SetGroupCategories(const QStringList &categories) override;
 
     virtual void ShowDialog(bool click) override;
 
-    QVector<SourceItem> GetSourceObjects() const;
+    auto GetSourceObjects() const -> QVector<SourceItem>;
     void                SetSourceObjects(const QVector<SourceItem> &value);
 
 public slots:
@@ -100,7 +100,7 @@ protected:
 
     /** @brief SaveData Put dialog data in local variables */
     virtual void SaveData() override;
-    virtual bool IsValid() const final;
+    virtual auto IsValid() const -> bool final;
 
 private slots:
     void PointChanged();

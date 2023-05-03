@@ -200,7 +200,7 @@ auto Visualization::FindValFromUser(const QString &expression,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal Visualization::CorrectAngle(qreal angle)
+auto Visualization::CorrectAngle(qreal angle) -> qreal
 {
     qreal ang = angle;
     if (angle > 360)

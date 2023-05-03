@@ -137,7 +137,7 @@ void VScenePoint::SetOnlyPoint(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VScenePoint::IsOnlyPoint() const
+auto VScenePoint::IsOnlyPoint() const -> bool
 {
     return m_onlyPoint;
 }

@@ -88,7 +88,8 @@ public slots:
     void HorizontalScrollingTime(qreal x);
     void animFinished();
 protected:
-    virtual bool eventFilter(QObject* object, QEvent* event) override;
+    virtual auto eventFilter(QObject *object, QEvent *event) -> bool override;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(GraphicsViewZoom) // NOLINT
@@ -109,7 +110,7 @@ private:
     void StartVerticalScrollings(QWheelEvent* wheel_event);
     void StartHorizontalScrollings(QWheelEvent* wheel_event);
 
-    bool GestureEvent(QGestureEvent *event);
+    auto GestureEvent(QGestureEvent *event) -> bool;
     void PinchTriggered(QPinchGesture* gesture);
 };
 
@@ -125,10 +126,10 @@ public:
     void AllowRubberBand(bool value);
 
     static void NewSceneRect(QGraphicsScene *sc, QGraphicsView *view, QGraphicsItem *item = nullptr);
-    static QRectF SceneVisibleArea(QGraphicsView *view);
+    static auto SceneVisibleArea(QGraphicsView *view) -> QRectF;
 
-    static qreal MinScale();
-    static qreal MaxScale();
+    static auto MinScale() -> qreal;
+    static auto MaxScale() -> qreal;
 
     void EnsureItemVisibleWithDelay(const QGraphicsItem *item, unsigned long msecs, int xmargin = 5, int ymargin = 5);
 
@@ -141,7 +142,7 @@ public:
 
     void SetAntialiasing(bool value);
 
-    bool IsOpenGLRender() const;
+    auto IsOpenGLRender() const -> bool;
 
 signals:
     /**

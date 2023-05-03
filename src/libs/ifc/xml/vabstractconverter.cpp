@@ -64,7 +64,7 @@ VAbstractConverter::VAbstractConverter(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractConverter::Convert()
+auto VAbstractConverter::Convert() -> QString
 {
     if (m_ver == MaxVer())
     {
@@ -369,7 +369,7 @@ void VAbstractConverter::SetVersion(const QString &version)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractConverter::XSDSchema(unsigned int ver) const
+auto VAbstractConverter::XSDSchema(unsigned int ver) const -> QString
 {
     const QHash <unsigned, QString> schemas = Schemas();
     if (schemas.contains(ver))

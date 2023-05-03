@@ -68,21 +68,21 @@ class VToolLine: public VDrawTool, public VScaledLine
     Q_OBJECT // NOLINT
 public:
     virtual void     SetDialog() override;
-    static VToolLine *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
-                             VContainer *data);
-    static VToolLine *Create(VToolLineInitData initData);
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolLine *;
+    static auto Create(VToolLineInitData initData) -> VToolLine *;
 
-    virtual int      type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::Line)};
-    virtual QString  getTagName() const override;
+    virtual auto getTagName() const -> QString override;
 
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                        QWidget *widget = nullptr) override;
 
-    QString FirstPointName() const;
-    QString SecondPointName() const;
+    auto FirstPointName() const -> QString;
+    auto SecondPointName() const -> QString;
 
-    QString GetLineColor() const;
+    auto GetLineColor() const -> QString;
     void    SetLineColor(const QString &value);
 
     virtual void SetNotes(const QString &notes) override;
@@ -105,14 +105,15 @@ protected:
     virtual void     hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) override;
     virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) override;
     virtual void     RemoveReferens() override;
-    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) override;
+    virtual auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
     virtual void     keyReleaseEvent(QKeyEvent * event) override;
     virtual void     SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
                                 QList<quint32> &newDependencies) override;
     virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     virtual void     ReadToolAttributes(const QDomElement &domElement) override;
     virtual void     SetVisualization() override;
-    virtual QString  MakeToolTip() const override;
+    virtual auto MakeToolTip() const -> QString override;
+
 private:
     Q_DISABLE_COPY_MOVE(VToolLine) // NOLINT
 

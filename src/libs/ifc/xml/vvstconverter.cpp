@@ -209,7 +209,7 @@ void VVSTConverter::ConvertMeasurementsToV0_4_0()
 
     const QMultiMap<QString, QString> names = OldNamesToNewNames_InV0_3_0();
     const QList<QString> keys = names.uniqueKeys();
-    for (auto &key : keys)
+    for (const auto &key : keys)
     {
         qreal resValue = 0;
         qreal resSizeIncrease = 0;
@@ -247,7 +247,8 @@ void VVSTConverter::ConvertMeasurementsToV0_4_0()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VVSTConverter::AddMV0_4_0(const QString &name, qreal value, qreal sizeIncrease, qreal heightIncrease)
+auto VVSTConverter::AddMV0_4_0(const QString &name, qreal value, qreal sizeIncrease, qreal heightIncrease)
+    -> QDomElement
 {
     // TODO. Delete if minimal supported version is 0.4.0
     Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FormatVersion(0, 4, 0),

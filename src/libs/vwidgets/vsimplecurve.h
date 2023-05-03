@@ -53,7 +53,7 @@ public:
     VSimpleCurve(quint32 id, const QSharedPointer<VAbstractCurve> &curve, QObject *parent = nullptr);
     virtual ~VSimpleCurve() = default;
 
-    virtual int  type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Vis::SimpleCurve)};
 
     void RefreshGeometry(const QSharedPointer<VAbstractCurve> &curve);
@@ -74,7 +74,7 @@ protected:
     virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
     virtual void     hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) override;
     virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) override;
-    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) override;
+    virtual auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
     virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) override;
     virtual void     keyReleaseEvent ( QKeyEvent * event ) override;
     virtual void     ScalePenWidth() override;

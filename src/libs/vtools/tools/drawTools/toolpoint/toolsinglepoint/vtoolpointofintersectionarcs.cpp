@@ -78,9 +78,8 @@ void VToolPointOfIntersectionArcs::SetDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPointOfIntersectionArcs *VToolPointOfIntersectionArcs::Create(const QPointer<DialogTool> &dialog,
-                                                                   VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                                                   VContainer *data)
+auto VToolPointOfIntersectionArcs::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
+                                          VAbstractPattern *doc, VContainer *data) -> VToolPointOfIntersectionArcs *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogPointOfIntersectionArcs> dialogTool = qobject_cast<DialogPointOfIntersectionArcs *>(dialog);
@@ -107,7 +106,8 @@ VToolPointOfIntersectionArcs *VToolPointOfIntersectionArcs::Create(const QPointe
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPointOfIntersectionArcs *VToolPointOfIntersectionArcs::Create(VToolPointOfIntersectionArcsInitData initData)
+auto VToolPointOfIntersectionArcs::Create(VToolPointOfIntersectionArcsInitData initData)
+    -> VToolPointOfIntersectionArcs *
 {
     const QSharedPointer<VArc> firstArc = initData.data->GeometricObject<VArc>(initData.firstArcId);
     const QSharedPointer<VArc> secondArc = initData.data->GeometricObject<VArc>(initData.secondArcId);
@@ -154,8 +154,8 @@ VToolPointOfIntersectionArcs *VToolPointOfIntersectionArcs::Create(VToolPointOfI
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VToolPointOfIntersectionArcs::FindPoint(const VArc *arc1, const VArc *arc2, const CrossCirclesPoint pType,
-                                             QPointF *intersectionPoint)
+auto VToolPointOfIntersectionArcs::FindPoint(const VArc *arc1, const VArc *arc2, const CrossCirclesPoint pType,
+                                             QPointF *intersectionPoint) -> bool
 {
     SCASSERT(intersectionPoint != nullptr)
 
@@ -245,19 +245,19 @@ bool VToolPointOfIntersectionArcs::FindPoint(const VArc *arc1, const VArc *arc2,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolPointOfIntersectionArcs::FirstArcName() const
+auto VToolPointOfIntersectionArcs::FirstArcName() const -> QString
 {
     return VAbstractTool::data.GetGObject(firstArcId)->ObjectName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolPointOfIntersectionArcs::SecondArcName() const
+auto VToolPointOfIntersectionArcs::SecondArcName() const -> QString
 {
     return VAbstractTool::data.GetGObject(secondArcId)->ObjectName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-CrossCirclesPoint VToolPointOfIntersectionArcs::GetCrossCirclesPoint() const
+auto VToolPointOfIntersectionArcs::GetCrossCirclesPoint() const -> CrossCirclesPoint
 {
     return crossPoint;
 }

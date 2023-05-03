@@ -56,66 +56,67 @@ public:
 
     ~VLayoutPaper();
 
-    VLayoutPaper &operator=(const VLayoutPaper &paper);
+    auto operator=(const VLayoutPaper &paper) -> VLayoutPaper &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VLayoutPaper(VLayoutPaper &&paper) Q_DECL_NOTHROW;
-    VLayoutPaper &operator=(VLayoutPaper &&paper) Q_DECL_NOTHROW;
+    auto operator=(VLayoutPaper &&paper) Q_DECL_NOTHROW->VLayoutPaper &;
 #endif
 
-    int  GetHeight() const;
+    auto GetHeight() const -> int;
     void SetHeight(int height);
 
-    int  GetWidth() const;
+    auto GetWidth() const -> int;
     void SetWidth(int width);
 
-    qreal GetLayoutWidth() const;
+    auto GetLayoutWidth() const -> qreal;
     void  SetLayoutWidth(qreal width);
 
-    qreal GetShift() const;
+    auto GetShift() const -> qreal;
     void    SetShift(qreal shift);
 
-    bool GetRotate() const;
+    auto GetRotate() const -> bool;
     void SetRotate(bool value);
 
-    bool GetFollowGrainline() const;
+    auto GetFollowGrainline() const -> bool;
     void SetFollowGrainline(bool value);
 
-    int GetRotationNumber() const;
+    auto GetRotationNumber() const -> int;
     void SetRotationNumber(int value);
 
-    bool IsSaveLength() const;
+    auto IsSaveLength() const -> bool;
     void SetSaveLength(bool value);
 
     void SetPaperIndex(quint32 index);
 
-    bool IsOriginPaperPortrait() const;
+    auto IsOriginPaperPortrait() const -> bool;
     void SetOriginPaperPortrait(bool portrait);
 
-    bool ArrangeDetail(const VLayoutPiece &detail, std::atomic_bool &stop);
-    vsizetype  Count() const;
-    Q_REQUIRED_RESULT QGraphicsRectItem *GetPaperItem(bool autoCropLength, bool autoCropWidth, bool textAsPaths) const;
-    Q_REQUIRED_RESULT QGraphicsPathItem *GetGlobalContour() const;
-    Q_REQUIRED_RESULT QList<QGraphicsItem *> GetItemDetails(bool textAsPaths) const;
+    auto ArrangeDetail(const VLayoutPiece &detail, std::atomic_bool &stop) -> bool;
+    auto Count() const -> vsizetype;
+    Q_REQUIRED_RESULT auto GetPaperItem(bool autoCropLength, bool autoCropWidth, bool textAsPaths) const
+        -> QGraphicsRectItem *;
+    Q_REQUIRED_RESULT auto GetGlobalContour() const -> QGraphicsPathItem *;
+    Q_REQUIRED_RESULT auto GetItemDetails(bool textAsPaths) const -> QList<QGraphicsItem *>;
 
-    QVector<VLayoutPiece> GetDetails() const;
+    auto GetDetails() const -> QVector<VLayoutPiece>;
     void                  SetDetails(const QVector<VLayoutPiece>& details);
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     void                  SetDetails(const QList<VLayoutPiece>& details);
 #endif
 
-    QRectF DetailsBoundingRect() const;
+    auto DetailsBoundingRect() const -> QRectF;
 
-    qreal Efficiency() const;
+    auto Efficiency() const -> qreal;
 
 private:
     QSharedDataPointer<VLayoutPaperData> d;
 
-    bool SaveResult(const VBestSquare &bestResult, const VLayoutPiece &detail
+    auto SaveResult(const VBestSquare &bestResult, const VLayoutPiece &detail
 #ifdef LAYOUT_DEBUG
-                    , QMutex *mutex
+                    ,
+                    QMutex *mutex
 #endif
-                   );
-
+                    ) -> bool;
 };
 
 Q_DECLARE_TYPEINFO(VLayoutPaper, Q_MOVABLE_TYPE); // NOLINT

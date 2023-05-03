@@ -44,9 +44,9 @@ auto IsMimeTypeImage(const QMimeType &mime) -> bool
     QStringList aliases = mime.aliases();
     aliases.prepend(mime.name());
 
-    QRegularExpression rx(QStringLiteral("^image\\/[-\\w]+(\\.[-\\w]+)*([+][-\\w]+)?$"));
+    static QRegularExpression rx(QStringLiteral("^image\\/[-\\w]+(\\.[-\\w]+)*([+][-\\w]+)?$"));
 
-    return std::any_of(aliases.begin(), aliases.end(), [rx](const QString &name) { return rx.match(name).hasMatch(); });
+    return std::any_of(aliases.begin(), aliases.end(), [](const QString &name) { return rx.match(name).hasMatch(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

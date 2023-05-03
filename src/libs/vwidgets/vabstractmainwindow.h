@@ -70,19 +70,19 @@ protected:
     QVector<QAction *> m_recentFileActs{QVector<QAction *>(MaxRecentFiles)};
     QAction *m_separatorAct{nullptr};
 
-    bool ContinueFormatRewrite(const QString &currentFormatVersion, const QString &maxFormatVersion);
+    auto ContinueFormatRewrite(const QString &currentFormatVersion, const QString &maxFormatVersion) -> bool;
     virtual void ToolBarStyle(QToolBar *bar) const;
 
-    QString CSVFilePath();
+    auto CSVFilePath() -> QString;
 
     virtual void ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator);
 
-    virtual QStringList RecentFileList() const =0;
+    virtual auto RecentFileList() const -> QStringList = 0;
     void UpdateRecentFileActions();
 
-    static bool CheckFilePermissions(const QString &path, QWidget *messageBoxParent=nullptr);
+    static auto CheckFilePermissions(const QString &path, QWidget *messageBoxParent = nullptr) -> bool;
 
-    bool IgnoreLocking(int error, const QString &path, bool guiMode);
+    auto IgnoreLocking(int error, const QString &path, bool guiMode) -> bool;
 
 private:
     Q_DISABLE_COPY_MOVE(VAbstractMainWindow) // NOLINT

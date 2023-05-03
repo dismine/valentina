@@ -44,7 +44,7 @@ VPieceLabelData::VPieceLabelData(const VPieceLabelData &data)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceLabelData &VPieceLabelData::operator=(const VPieceLabelData &data)
+auto VPieceLabelData::operator=(const VPieceLabelData &data) -> VPieceLabelData &
 {
     if ( &data == this )
     {
@@ -63,7 +63,7 @@ VPieceLabelData::VPieceLabelData(VPieceLabelData &&data) Q_DECL_NOTHROW
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceLabelData &VPieceLabelData::operator=(VPieceLabelData &&data) Q_DECL_NOTHROW
+auto VPieceLabelData::operator=(VPieceLabelData &&data) Q_DECL_NOTHROW->VPieceLabelData &
 {
     VPatternLabelData::operator=(data);
     std::swap(d, data.d);
@@ -82,7 +82,7 @@ void VPieceLabelData::Clear()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPieceLabelData::GetLetter() const
+auto VPieceLabelData::GetLetter() const -> QString
 {
     return d->m_qsLetter;
 }
@@ -94,7 +94,7 @@ void VPieceLabelData::SetLetter(const QString &qsLetter)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPieceLabelData::GetAnnotation() const
+auto VPieceLabelData::GetAnnotation() const -> QString
 {
     return d->m_annotation;
 }
@@ -106,7 +106,7 @@ void VPieceLabelData::SetAnnotation(const QString &val)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPieceLabelData::GetOrientation() const
+auto VPieceLabelData::GetOrientation() const -> QString
 {
     return d->m_orientation;
 }
@@ -118,7 +118,7 @@ void VPieceLabelData::SetOrientation(const QString &val)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPieceLabelData::GetRotationWay() const
+auto VPieceLabelData::GetRotationWay() const -> QString
 {
     return d->m_rotationWay;
 }
@@ -130,7 +130,7 @@ void VPieceLabelData::SetRotationWay(const QString &val)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPieceLabelData::GetTilt() const
+auto VPieceLabelData::GetTilt() const -> QString
 {
     return d->m_tilt;
 }
@@ -142,7 +142,7 @@ void VPieceLabelData::SetTilt(const QString &val)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPieceLabelData::GetFoldPosition() const
+auto VPieceLabelData::GetFoldPosition() const -> QString
 {
     return d->m_foldPosition;
 }
@@ -154,7 +154,7 @@ void VPieceLabelData::SetFoldPosition(const QString &val)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint16 VPieceLabelData::GetQuantity() const
+auto VPieceLabelData::GetQuantity() const -> quint16
 {
     return d->m_quantity;
 }
@@ -166,7 +166,7 @@ void VPieceLabelData::SetQuantity(quint16 val)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPieceLabelData::IsOnFold() const
+auto VPieceLabelData::IsOnFold() const -> bool
 {
     return d->m_onFold;
 }
@@ -178,7 +178,7 @@ void VPieceLabelData::SetOnFold(bool onFold)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPieceLabelData::GetAreaShartName() const
+auto VPieceLabelData::GetAreaShartName() const -> QString
 {
     return d->m_areaShortName;
 }
@@ -190,7 +190,7 @@ void VPieceLabelData::SetAreaShartName(const QString &val)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VLabelTemplateLine> VPieceLabelData::GetLabelTemplate() const
+auto VPieceLabelData::GetLabelTemplate() const -> QVector<VLabelTemplateLine>
 {
     return d->m_lines;
 }

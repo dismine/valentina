@@ -51,22 +51,21 @@ namespace bpstd {
   ///
   /// \param function Callable object to be invoked
   /// \param args     arguments to pass to \p function
-  template <typename Func, typename... Args>
-  constexpr invoke_result_t<Func,Args...> invoke(Func&& function, Args&&... args)
-    noexcept(is_nothrow_invocable<Func,Args...>::value);
+template <typename Func, typename... Args>
+constexpr auto invoke(Func &&function, Args &&...args) noexcept(is_nothrow_invocable<Func, Args...>::value)
+    -> invoke_result_t<Func, Args...>;
 
-  namespace detail {
-    template <typename Fn>
-    struct not_fn_t
-    {
-      Fn fn;
+namespace detail
+{
+template <typename Fn> struct not_fn_t
+{
+    Fn fn;
 
-      template <typename...Args>
-      inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR
-      auto operator()(Args&&... args) &
-        noexcept(noexcept(!::bpstd::invoke(fn, ::bpstd::forward<Args>(args)...)))
+    template <typename... Args>
+    inline BPSTD_INLINE_VISIBILITY BPSTD_CPP14_CONSTEXPR auto
+    operator()(Args &&...args) & noexcept(noexcept(!::bpstd::invoke(fn, ::bpstd::forward<Args>(args)...)))
         -> decltype(!::bpstd::invoke(fn, ::bpstd::forward<Args>(args)...))
-      {
+    {
         return !::bpstd::invoke(fn, bpstd::forward<Args>(args)...);
       }
 
@@ -105,8 +104,7 @@ namespace bpstd {
   /// \param fn the object from which the Callable object held by the wrapper
   ///           is constructed
   /// \return the negated object
-  template <typename Fn>
-  constexpr detail::not_fn_t<decay_t<Fn>> not_fn(Fn&& fn);
+  template <typename Fn> constexpr auto not_fn(Fn &&fn) -> detail::not_fn_t<decay_t<Fn>>;
 
   //============================================================================
   // struct : plus
@@ -115,11 +113,9 @@ namespace bpstd {
   template <typename T = void>
   struct plus
   {
-    inline BPSTD_INLINE_VISIBILITY constexpr
-    T operator()(const T& lhs, const T& rhs)
-      const
-    {
-      return lhs + rhs;
+      inline BPSTD_INLINE_VISIBILITY constexpr auto operator()(const T &lhs, const T &rhs) const -> T
+      {
+        return lhs + rhs;
     }
   };
 
@@ -144,9 +140,7 @@ namespace bpstd {
   template <typename T = void>
   struct minus
   {
-    inline BPSTD_INLINE_VISIBILITY constexpr
-    T operator()(const T& lhs, const T& rhs)
-      const
+    inline BPSTD_INLINE_VISIBILITY constexpr auto operator()(const T &lhs, const T &rhs) const -> T
     {
       return lhs - rhs;
     }
@@ -173,9 +167,7 @@ namespace bpstd {
   template <typename T = void>
   struct multiplies
   {
-    inline BPSTD_INLINE_VISIBILITY constexpr
-    T operator()(const T& lhs, const T& rhs)
-      const
+    inline BPSTD_INLINE_VISIBILITY constexpr auto operator()(const T &lhs, const T &rhs) const -> T
     {
       return lhs * rhs;
     }
@@ -202,9 +194,7 @@ namespace bpstd {
   template <typename T = void>
   struct divides
   {
-    inline BPSTD_INLINE_VISIBILITY constexpr
-    T operator()(const T& lhs, const T& rhs)
-      const
+    inline BPSTD_INLINE_VISIBILITY constexpr auto operator()(const T &lhs, const T &rhs) const -> T
     {
       return lhs / rhs;
     }
@@ -231,9 +221,7 @@ namespace bpstd {
   template <typename T = void>
   struct modulus
   {
-    inline BPSTD_INLINE_VISIBILITY constexpr
-    T operator()(const T& lhs, const T& rhs)
-      const
+    inline BPSTD_INLINE_VISIBILITY constexpr auto operator()(const T &lhs, const T &rhs) const -> T
     {
       return lhs % rhs;
     }
@@ -260,12 +248,7 @@ namespace bpstd {
   template <typename T = void>
   struct negate
   {
-    inline BPSTD_INLINE_VISIBILITY constexpr
-    T operator()(const T& arg)
-      const
-    {
-      return -arg;
-    }
+    inline BPSTD_INLINE_VISIBILITY constexpr auto operator()(const T &arg) const -> T { return -arg; }
   };
 
   template <>
@@ -289,9 +272,7 @@ namespace bpstd {
   template <typename T = void>
   struct equal_to
   {
-    inline BPSTD_INLINE_VISIBILITY constexpr
-    bool operator()(const T& lhs, const T& rhs)
-      const
+    inline BPSTD_INLINE_VISIBILITY constexpr auto operator()(const T &lhs, const T &rhs) const -> bool
     {
       return lhs == rhs;
     }
@@ -318,9 +299,7 @@ namespace bpstd {
   template <typename T = void>
   struct not_equal_to
   {
-    inline BPSTD_INLINE_VISIBILITY constexpr
-    bool operator()(const T& lhs, const T& rhs)
-      const
+    inline BPSTD_INLINE_VISIBILITY constexpr auto operator()(const T &lhs, const T &rhs) const -> bool
     {
       return lhs != rhs;
     }
@@ -347,9 +326,7 @@ namespace bpstd {
   template <typename T = void>
   struct greater
   {
-    inline BPSTD_INLINE_VISIBILITY constexpr
-    bool operator()(const T& lhs, const T& rhs)
-      const
+    inline BPSTD_INLINE_VISIBILITY constexpr auto operator()(const T &lhs, const T &rhs) const -> bool
     {
       return lhs > rhs;
     }
@@ -376,9 +353,7 @@ namespace bpstd {
   template <typename T = void>
   struct greater_equal
   {
-    inline BPSTD_INLINE_VISIBILITY constexpr
-    bool operator()(const T& lhs, const T& rhs)
-      const
+    inline BPSTD_INLINE_VISIBILITY constexpr auto operator()(const T &lhs, const T &rhs) const -> bool
     {
       return lhs >= rhs;
     }
@@ -405,9 +380,7 @@ namespace bpstd {
   template <typename T = void>
   struct less
   {
-    inline BPSTD_INLINE_VISIBILITY constexpr
-    bool operator()(const T& lhs, const T& rhs)
-      const
+    inline BPSTD_INLINE_VISIBILITY constexpr auto operator()(const T &lhs, const T &rhs) const -> bool
     {
       return lhs < rhs;
     }
@@ -434,9 +407,7 @@ namespace bpstd {
   template <typename T = void>
   struct less_equal
   {
-    inline BPSTD_INLINE_VISIBILITY constexpr
-    bool operator()(const T& lhs, const T& rhs)
-      const
+    inline BPSTD_INLINE_VISIBILITY constexpr auto operator()(const T &lhs, const T &rhs) const -> bool
     {
       return lhs <= rhs;
     }
@@ -463,9 +434,7 @@ namespace bpstd {
   template <typename T = void>
   struct logical_and
   {
-    inline BPSTD_INLINE_VISIBILITY constexpr
-    bool operator()(const T& lhs, const T& rhs)
-      const
+    inline BPSTD_INLINE_VISIBILITY constexpr auto operator()(const T &lhs, const T &rhs) const -> bool
     {
       return lhs && rhs;
     }
@@ -492,9 +461,7 @@ namespace bpstd {
   template <typename T = void>
   struct logical_or
   {
-    inline BPSTD_INLINE_VISIBILITY constexpr
-    bool operator()(const T& lhs, const T& rhs)
-      const
+    inline BPSTD_INLINE_VISIBILITY constexpr auto operator()(const T &lhs, const T &rhs) const -> bool
     {
       return lhs || rhs;
     }
@@ -521,12 +488,7 @@ namespace bpstd {
   template <typename T = void>
   struct logical_not
   {
-    inline BPSTD_INLINE_VISIBILITY constexpr
-    bool operator()(const T& arg)
-      const
-    {
-      return !arg;
-    }
+    inline BPSTD_INLINE_VISIBILITY constexpr auto operator()(const T &arg) const -> bool { return !arg; }
   };
 
   template <>
@@ -550,9 +512,7 @@ namespace bpstd {
   template <typename T = void>
   struct bit_and
   {
-    inline BPSTD_INLINE_VISIBILITY constexpr
-    T operator()(const T& lhs, const T& rhs)
-      const
+    inline BPSTD_INLINE_VISIBILITY constexpr auto operator()(const T &lhs, const T &rhs) const -> T
     {
       return lhs & rhs;
     }
@@ -579,9 +539,7 @@ namespace bpstd {
   template <typename T = void>
   struct bit_or
   {
-    inline BPSTD_INLINE_VISIBILITY constexpr
-    T operator()(const T& lhs, const T& rhs)
-      const
+    inline BPSTD_INLINE_VISIBILITY constexpr auto operator()(const T &lhs, const T &rhs) const -> T
     {
       return lhs | rhs;
     }
@@ -608,9 +566,7 @@ namespace bpstd {
   template <typename T = void>
   struct bit_xor
   {
-    inline BPSTD_INLINE_VISIBILITY constexpr
-    T operator()(const T& lhs, const T& rhs)
-      const
+    inline BPSTD_INLINE_VISIBILITY constexpr auto operator()(const T &lhs, const T &rhs) const -> T
     {
       return lhs ^ rhs;
     }
@@ -637,12 +593,7 @@ namespace bpstd {
   template <typename T = void>
   struct bit_not
   {
-    inline BPSTD_INLINE_VISIBILITY constexpr
-    T operator()(const T& arg)
-      const
-    {
-      return ~arg;
-    }
+    inline BPSTD_INLINE_VISIBILITY constexpr auto operator()(const T &arg) const -> T { return ~arg; }
   };
 
   template <>
@@ -666,9 +617,9 @@ namespace bpstd {
 //==============================================================================
 
 template <typename Func, typename... Args>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bpstd::invoke_result_t<Func,Args...> bpstd::invoke(Func&& function, Args&&... args)
-  noexcept(is_nothrow_invocable<Func,Args...>::value)
+inline BPSTD_INLINE_VISIBILITY constexpr auto
+bpstd::invoke(Func &&function, Args &&...args) noexcept(is_nothrow_invocable<Func, Args...>::value)
+    -> bpstd::invoke_result_t<Func, Args...>
 {
   return detail::INVOKE(bpstd::forward<Func>(function), bpstd::forward<Args>(args)...);
 }
@@ -679,8 +630,7 @@ bpstd::invoke_result_t<Func,Args...> bpstd::invoke(Func&& function, Args&&... ar
 //==============================================================================
 
 template <typename Fn>
-inline BPSTD_INLINE_VISIBILITY constexpr
-bpstd::detail::not_fn_t<bpstd::decay_t<Fn>> bpstd::not_fn(Fn&& fn)
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::not_fn(Fn &&fn) -> bpstd::detail::not_fn_t<bpstd::decay_t<Fn>>
 {
   static_assert(
     is_move_constructible<Fn>::value,

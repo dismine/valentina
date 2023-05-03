@@ -59,8 +59,8 @@ public:
     VLayoutPiecePathData(const VLayoutPiecePathData &path) = default;
     ~VLayoutPiecePathData() = default;
 
-    friend QDataStream& operator<<(QDataStream& dataStream, const VLayoutPiecePathData& path);
-    friend QDataStream& operator>>(QDataStream& dataStream, VLayoutPiecePathData& path);
+    friend auto operator<<(QDataStream &dataStream, const VLayoutPiecePathData &path) -> QDataStream &;
+    friend auto operator>>(QDataStream &dataStream, VLayoutPiecePathData &path) -> QDataStream &;
 
     /** @brief m_points list of path points. */
     QVector<VLayoutPoint> m_points{};
@@ -87,8 +87,8 @@ QT_WARNING_POP
 
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream& operator<<(QDataStream &dataStream, const VLayoutPiecePathData &path)
-{
+    auto operator<<(QDataStream &dataStream, const VLayoutPiecePathData &path) -> QDataStream &
+    {
     dataStream << VLayoutPiecePathData::streamHeader << VLayoutPiecePathData::classVersion;
 
     // Added in classVersion = 1
@@ -102,7 +102,7 @@ QDataStream& operator<<(QDataStream &dataStream, const VLayoutPiecePathData &pat
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDataStream& operator>>(QDataStream &dataStream, VLayoutPiecePathData &path)
+auto operator>>(QDataStream &dataStream, VLayoutPiecePathData &path) -> QDataStream &
 {
     quint32 actualStreamHeader = 0;
     dataStream >> actualStreamHeader;

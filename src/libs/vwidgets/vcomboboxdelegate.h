@@ -38,8 +38,8 @@ class VComboBoxDelegate : public QItemDelegate
 public:
     explicit VComboBoxDelegate(const QStringList &items, QObject *parent = nullptr);
 
-    virtual QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option,
-                                  const QModelIndex &index) const override;
+    virtual auto createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const
+        -> QWidget * override;
     virtual void setEditorData(QWidget *editor, const QModelIndex &index) const override;
     virtual void setModelData(QWidget *editor, QAbstractItemModel *model,
                               const QModelIndex &index) const override;

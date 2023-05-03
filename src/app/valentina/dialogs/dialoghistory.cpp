@@ -45,6 +45,15 @@
 #include <QtConcurrent>
 #include <functional>
 
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+auto AttrUInt(const QDomElement &domElement, const QString &name) -> quint32
+{
+    return VDomDocument::GetParametrUInt(domElement, name, QChar('0'));
+}
+} // namespace
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogHistory create dialog
@@ -529,12 +538,6 @@ void DialogHistory::ShowPoint()
 auto DialogHistory::PointName(quint32 pointId) const -> QString
 {
     return data->GeometricObject<VPointF>(pointId)->name();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogHistory::AttrUInt(const QDomElement &domElement, const QString &name) const -> quint32
-{
-    return VDomDocument::GetParametrUInt(domElement, name, QChar('0'));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

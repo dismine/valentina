@@ -53,27 +53,25 @@ VPE::VPointFProperty::VPointFProperty(const QString &name)
     setValue(QPointF());
 }
 
-QVariant VPE::VPointFProperty::data(int column, int role) const
+auto VPE::VPointFProperty::data(int column, int role) const -> QVariant
 {
     if (column == DPC_Data && Qt::DisplayRole == role)
     {
         return getPointF();
     }
-    else
-        return VProperty::data(column, role);
+    return VProperty::data(column, role);
 }
 
-Qt::ItemFlags VPE::VPointFProperty::flags(int column) const
+auto VPE::VPointFProperty::flags(int column) const -> Qt::ItemFlags
 {
     if (column == DPC_Name || column == DPC_Data)
     {
         return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
     }
-    else
-        return Qt::NoItemFlags;
+    return Qt::NoItemFlags;
 }
 
-QPointF VPE::VPointFProperty::getPointF() const
+auto VPE::VPointFProperty::getPointF() const -> QPointF
 {
     QPointF tmpValue;
 
@@ -118,12 +116,12 @@ void VPE::VPointFProperty::setPointF(qreal x, qreal y)
     d_ptr->Children.at(1)->setValue(tmpY);
 }
 
-QString VPE::VPointFProperty::type() const
+auto VPE::VPointFProperty::type() const -> QString
 {
     return "pointF";
 }
 
-VPE::VProperty *VPE::VPointFProperty::clone(bool include_children, VProperty *container) const
+auto VPE::VPointFProperty::clone(bool include_children, VProperty *container) const -> VPE::VProperty *
 {
     if (!container)
     {
@@ -132,7 +130,7 @@ VPE::VProperty *VPE::VPointFProperty::clone(bool include_children, VProperty *co
         if (!include_children)
         {
             const QList<VProperty*> &tmpChildren = container->getChildren();
-            for(auto tmpChild : tmpChildren)
+            for (auto *tmpChild : tmpChildren)
             {
                 container->removeChild(tmpChild);
                 delete tmpChild;
@@ -149,7 +147,7 @@ void VPE::VPointFProperty::setValue(const QVariant &value)
     setPointF(tmpPoint);
 }
 
-QVariant VPE::VPointFProperty::getValue() const
+auto VPE::VPointFProperty::getValue() const -> QVariant
 {
     QPointF tmpValue = getPointF();
     return QString("%1,%2").arg(QString::number(tmpValue.x()), QString::number(tmpValue.y()));

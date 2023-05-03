@@ -63,15 +63,15 @@ class VToolPointOfIntersection : public VToolSinglePoint
     Q_OBJECT // NOLINT
 public:
     virtual void SetDialog() override;
-    static VToolPointOfIntersection *Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene,
-                                            VAbstractPattern *doc, VContainer *data);
-    static VToolPointOfIntersection *Create(VToolPointOfIntersectionInitData initData);
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                       VContainer *data) -> VToolPointOfIntersection *;
+    static auto Create(VToolPointOfIntersectionInitData initData) -> VToolPointOfIntersection *;
     static const QString ToolType;
-    virtual int  type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::PointOfIntersection) };
 
-    QString FirstPointName() const;
-    QString SecondPointName() const;
+    auto FirstPointName() const -> QString;
+    auto SecondPointName() const -> QString;
 
     virtual void ShowVisualization(bool show) override;
 protected:

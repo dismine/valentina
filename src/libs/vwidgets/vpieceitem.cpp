@@ -55,7 +55,7 @@ VPieceItem::~VPieceItem()
  * @brief boundingRect returns the item bounding box
  * @return item bounding box
  */
-QRectF VPieceItem::boundingRect() const
+auto VPieceItem::boundingRect() const -> QRectF
 {
     return m_rectBoundingBox;
 }
@@ -81,7 +81,7 @@ void VPieceItem::Reset()
  * @brief IsIdle returns the idle flag.
  * @return true, if item mode is normal and false otherwise.
  */
-bool VPieceItem::IsIdle() const
+auto VPieceItem::IsIdle() const -> bool
 {
     return m_eMode == mNormal;
 }
@@ -92,7 +92,7 @@ bool VPieceItem::IsIdle() const
  * @param pt point of interest
  * @return the angle between line from rotation center and point of interest and x axis
  */
-double VPieceItem::GetAngle(const QPointF &pt) const
+auto VPieceItem::GetAngle(const QPointF &pt) const -> double
 {
     const double dX = pt.x() - m_ptRotCenter.x();
     const double dY = pt.y() - m_ptRotCenter.y();
@@ -101,14 +101,12 @@ double VPieceItem::GetAngle(const QPointF &pt) const
     {
         return 0;
     }
-    else
-    {
-        return qAtan2(dY, dX);
-    }
+
+    return qAtan2(dY, dX);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceItem::MoveTypes VPieceItem::GetMoveType() const
+auto VPieceItem::GetMoveType() const -> VPieceItem::MoveTypes
 {
     return m_moveType;
 }

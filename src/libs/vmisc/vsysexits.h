@@ -82,7 +82,7 @@ static const auto V_UNUSED V_EX_CONFIG = 78;      /*Something was found in an un
 #undef V_UNUSED
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QTextStream& vStdErr()
+inline auto vStdErr() -> QTextStream &
 {
     static QTextStream ts(stderr, QIODevice::Unbuffered | QIODevice::WriteOnly);
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -92,7 +92,7 @@ inline QTextStream& vStdErr()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QTextStream& vStdOut()
+inline auto vStdOut() -> QTextStream &
 {
     static QTextStream ts(stdout, QIODevice::Unbuffered | QIODevice::WriteOnly);
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)

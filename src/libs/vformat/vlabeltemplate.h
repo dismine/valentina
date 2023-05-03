@@ -43,7 +43,8 @@ public:
     void CreateEmptyTemplate();
 
     void AddLines(const QVector<VLabelTemplateLine> &lines);
-    QVector<VLabelTemplateLine> ReadLines() const;
+    auto ReadLines() const -> QVector<VLabelTemplateLine>;
+
 private:
     Q_DISABLE_COPY_MOVE(VLabelTemplate) // NOLINT
 };

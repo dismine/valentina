@@ -69,7 +69,7 @@ void DialogPin::EnbleShowMode(bool disable)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogPin::GetPieceId() const
+auto DialogPin::GetPieceId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxPiece);
 }
@@ -96,7 +96,7 @@ void DialogPin::SetPieceId(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogPin::GetPointId() const
+auto DialogPin::GetPointId() const -> quint32
 {
     return getCurrentObjectId(ui->comboBoxPoint);
 }

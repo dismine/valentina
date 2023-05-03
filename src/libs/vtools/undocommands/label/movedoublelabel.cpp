@@ -86,7 +86,7 @@ MoveDoubleLabel::MoveDoubleLabel(VAbstractPattern *doc, const QPointF &pos, Move
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool MoveDoubleLabel::mergeWith(const QUndoCommand *command)
+auto MoveDoubleLabel::mergeWith(const QUndoCommand *command) -> bool
 {
     const MoveDoubleLabel *moveCommand = static_cast<const MoveDoubleLabel *>(command);
     SCASSERT(moveCommand != nullptr)
@@ -114,7 +114,7 @@ bool MoveDoubleLabel::mergeWith(const QUndoCommand *command)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int MoveDoubleLabel::id() const
+auto MoveDoubleLabel::id() const -> int
 {
     return static_cast<int>(UndoCommand::MoveDoubleLabel);
 }

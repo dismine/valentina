@@ -101,24 +101,24 @@ public:
     explicit VAbstractPattern(QObject *parent = nullptr);
     virtual ~VAbstractPattern();
 
-    bool           RequiresMeasurements() const;
-    QStringList    ListMeasurements() const;
-    QVector<VFormulaField> ListExpressions() const;
-    QVector<VFormulaField> ListIncrementExpressions() const;
+    auto RequiresMeasurements() const -> bool;
+    auto ListMeasurements() const -> QStringList;
+    auto ListExpressions() const -> QVector<VFormulaField>;
+    auto ListIncrementExpressions() const -> QVector<VFormulaField>;
 
     virtual void   CreateEmptyFile()=0;
 
     void           ChangeActivPP(const QString& name, const Document &parse = Document::FullParse);
-    QString        GetNameActivPP() const;
-    bool           CheckExistNamePP(const QString& name) const;
-    int            CountPP() const;
-    QDomElement    GetPPElement(const QString &name);
-    bool           ChangeNamePP(const QString& oldName, const QString &newName);
-    bool           appendPP(const QString& name);
+    auto GetNameActivPP() const -> QString;
+    auto CheckExistNamePP(const QString &name) const -> bool;
+    auto CountPP() const -> int;
+    auto GetPPElement(const QString &name) -> QDomElement;
+    auto ChangeNamePP(const QString &oldName, const QString &newName) -> bool;
+    auto appendPP(const QString &name) -> bool;
 
-    bool           GetActivNodeElement(const QString& name, QDomElement& element) const;
+    auto GetActivNodeElement(const QString &name, QDomElement &element) const -> bool;
 
-    quint32        getCursor() const;
+    auto getCursor() const -> quint32;
     void           setCursor(const quint32 &value);
 
     virtual void   setXMLContent(const QString &fileName) override;
@@ -126,87 +126,87 @@ public:
     virtual void   IncrementReferens(quint32 id) const=0;
     virtual void   DecrementReferens(quint32 id) const=0;
 
-    virtual QString GenerateLabel(const LabelType &type, const QString &reservedName = QString())const=0;
-    virtual QString GenerateSuffix() const=0;
+    virtual auto GenerateLabel(const LabelType &type, const QString &reservedName = QString()) const -> QString = 0;
+    virtual auto GenerateSuffix() const -> QString = 0;
 
     virtual void   UpdateToolData(const quint32 &id, VContainer *data)=0;
 
     virtual void Clear();
 
-    static VDataTool* getTool(quint32 id);
+    static auto getTool(quint32 id) -> VDataTool *;
     static void       AddTool(quint32 id, VDataTool *tool);
     static void       RemoveTool(quint32 id);
 
-    static VPiecePath              ParsePieceNodes(const QDomElement &domElement);
-    static QVector<CustomSARecord> ParsePieceCSARecords(const QDomElement &domElement);
-    static QVector<quint32>        ParsePieceInternalPaths(const QDomElement &domElement);
-    static QVector<quint32>        ParsePiecePointRecords(const QDomElement &domElement);
+    static auto ParsePieceNodes(const QDomElement &domElement) -> VPiecePath;
+    static auto ParsePieceCSARecords(const QDomElement &domElement) -> QVector<CustomSARecord>;
+    static auto ParsePieceInternalPaths(const QDomElement &domElement) -> QVector<quint32>;
+    static auto ParsePiecePointRecords(const QDomElement &domElement) -> QVector<quint32>;
 
     void           AddToolOnRemove(VDataTool *tool);
 
-    QVector<VToolRecord> *getHistory();
-    QVector<VToolRecord> getLocalHistory() const;
+    auto getHistory() -> QVector<VToolRecord> *;
+    auto getLocalHistory() const -> QVector<VToolRecord>;
 
-    QString        MPath() const;
+    auto MPath() const -> QString;
     void           SetMPath(const QString &path);
 
-    quint32        SiblingNodeId(const quint32 &nodeId) const;
+    auto SiblingNodeId(const quint32 &nodeId) const -> quint32;
 
-    QStringList    getPatternPieces() const;
+    auto getPatternPieces() const -> QStringList;
 
-    QString        GetDescription() const;
+    auto GetDescription() const -> QString;
     void           SetDescription(const QString &text);
 
-    QString        GetNotes() const;
+    auto GetNotes() const -> QString;
     void           SetNotes(const QString &text);
 
-    QString        GetPatternName() const;
+    auto GetPatternName() const -> QString;
     void           SetPatternName(const QString& qsName);
 
-    QString        GetCompanyName() const;
+    auto GetCompanyName() const -> QString;
     void           SetCompanyName(const QString& qsName);
 
-    QString        GetPatternNumber() const;
+    auto GetPatternNumber() const -> QString;
     void           SetPatternNumber(const QString &qsNum);
 
-    QString        GetCustomerName() const;
+    auto GetCustomerName() const -> QString;
     void           SetCustomerName(const QString& qsName);
 
-    QDate          GetCustomerBirthDate() const;
+    auto GetCustomerBirthDate() const -> QDate;
     void           SetCustomerBirthDate(const QDate& date);
 
-    QString        GetCustomerEmail() const;
+    auto GetCustomerEmail() const -> QString;
     void           SetCustomerEmail(const QString& email);
 
-    QString        GetLabelDateFormat() const;
+    auto GetLabelDateFormat() const -> QString;
     void           SetLabelDateFormat(const QString &format);
 
-    QString        GetLabelTimeFormat() const;
+    auto GetLabelTimeFormat() const -> QString;
     void           SetLabelTimeFormat(const QString &format);
 
     void                        SetPatternLabelTemplate(const QVector<VLabelTemplateLine> &lines);
-    QVector<VLabelTemplateLine> GetPatternLabelTemplate() const;
+    auto GetPatternLabelTemplate() const -> QVector<VLabelTemplateLine>;
 
-    bool SetWatermarkPath(const QString &path);
-    QString GetWatermarkPath() const;
+    auto SetWatermarkPath(const QString &path) -> bool;
+    auto GetWatermarkPath() const -> QString;
 
     void               SetPatternMaterials(const QMap<int, QString> &materials);
-    QMap<int, QString> GetPatternMaterials() const;
+    auto GetPatternMaterials() const -> QMap<int, QString>;
 
-    QVector<VFinalMeasurement> GetFinalMeasurements() const;
+    auto GetFinalMeasurements() const -> QVector<VFinalMeasurement>;
     void                       SetFinalMeasurements(const QVector<VFinalMeasurement> &measurements);
 
-    QString GetDefaultPieceLabelPath() const;
+    auto GetDefaultPieceLabelPath() const -> QString;
     void    SetDefaultPieceLabelPath(const QString &path);
 
     void SetPatternWasChanged(bool changed);
-    bool GetPatternWasChanged() const;
+    auto GetPatternWasChanged() const -> bool;
 
-    QString GetPassmarkLengthVariable() const;
+    auto GetPassmarkLengthVariable() const -> QString;
     void    SetPassmarkLengthVariable(const QString &name);
 
-    VPatternImage  GetImage() const;
-    bool           SetImage(const VPatternImage &image);
+    auto GetImage() const -> VPatternImage;
+    auto SetImage(const VPatternImage &image) -> bool;
     void           DeleteImage();
 
     auto GetBackgroundImages() const -> QVector<VBackgroundPatternImage>;
@@ -215,24 +215,24 @@ public:
     void SaveBackgroundImage(const VBackgroundPatternImage &image);
     void DeleteBackgroundImage(const QUuid &id);
 
-    QString        GetVersion() const;
+    auto GetVersion() const -> QString;
     void           SetVersion();
 
-    bool           IsModified() const;
+    auto IsModified() const -> bool;
     void           SetModified(bool modified);
 
-    QDomElement    GetDraw(const QString &name) const;
+    auto GetDraw(const QString &name) const -> QDomElement;
 
     void           ParseGroups(const QDomElement &domElement);
-    QDomElement    CreateGroups(const QString &patternPieceName = QString());
-    QDomElement    CreateGroup(quint32 id, const QString &name, const QStringList &tags,
-                               const QMap<quint32, quint32> &groupData, vidtype tool=null_id);
-    vidtype        GroupLinkedToTool(vidtype toolId) const;
+    auto CreateGroups(const QString &patternPieceName = QString()) -> QDomElement;
+    auto CreateGroup(quint32 id, const QString &name, const QStringList &tags, const QMap<quint32, quint32> &groupData,
+                     vidtype tool = null_id) -> QDomElement;
+    auto GroupLinkedToTool(vidtype toolId) const -> vidtype;
 
-    QString        GetGroupName(quint32 id);
+    auto GetGroupName(quint32 id) -> QString;
     void           SetGroupName(quint32 id, const QString &name);
 
-    QStringList    GetGroupTags(vidtype id);
+    auto GetGroupTags(vidtype id) -> QStringList;
     void           SetGroupTags(quint32 id, const QStringList &tags);
 
     auto GetDimensionAValue() -> double;
@@ -244,20 +244,20 @@ public:
     auto GetDimensionCValue() -> double;
     void SetDimensionCValue(double value);
 
-    QStringList GetGroupCategories() const;
+    auto GetGroupCategories() const -> QStringList;
 
-    QMap<quint32, VGroupData> GetGroups(const QString &patternPieceName = QString());
-    QMap<quint32, QString> GetGroupsContainingItem(quint32 toolId, quint32 objectId, bool containItem);
-    QDomElement           AddItemToGroup(quint32 toolId, quint32 objectId, quint32 groupId);
-    QDomElement           RemoveItemFromGroup(quint32 toolId, quint32 objectId, quint32 groupId);
-    bool           GetGroupVisibility(quint32 id);
+    auto GetGroups(const QString &patternPieceName = QString()) -> QMap<quint32, VGroupData>;
+    auto GetGroupsContainingItem(quint32 toolId, quint32 objectId, bool containItem) -> QMap<quint32, QString>;
+    auto AddItemToGroup(quint32 toolId, quint32 objectId, quint32 groupId) -> QDomElement;
+    auto RemoveItemFromGroup(quint32 toolId, quint32 objectId, quint32 groupId) -> QDomElement;
+    auto GetGroupVisibility(quint32 id) -> bool;
 
-    static QStringList FilterGroupTags(const QString &tags);
+    static auto FilterGroupTags(const QString &tags) -> QStringList;
 
-    QString PieceDrawName(quint32 id);
+    auto PieceDrawName(quint32 id) -> QString;
 
-    virtual VContainer GetCompleteData() const;
-    virtual VContainer GetCompletePPData(const QString &name) const;
+    virtual auto GetCompleteData() const -> VContainer;
+    virtual auto GetCompletePPData(const QString &name) const -> VContainer;
 
     auto Units() const -> Unit;
 
@@ -463,22 +463,22 @@ protected:
     static bool patternLabelWasChanged;
 
     static void       ToolExists(const quint32 &id);
-    static VPiecePath ParsePathNodes(const QDomElement &domElement);
-    static VPieceNode ParseSANode(const QDomElement &domElement);
+    static auto ParsePathNodes(const QDomElement &domElement) -> VPiecePath;
+    static auto ParseSANode(const QDomElement &domElement) -> VPieceNode;
 
     void           SetActivPP(const QString& name);
 
-    QDomElement    CheckTagExists(const QString &tag);
+    auto CheckTagExists(const QString &tag) -> QDomElement;
     void           InsertTag(const QStringList &tags, const QDomElement &element);
 
     void           SetChildTag(const QString& qsParent, const QString& qsChild, const QString& qsValue);
 
-    int  GetIndexActivPP() const;
-    bool GetActivDrawElement(QDomElement &element) const;
+    auto GetIndexActivPP() const -> int;
+    auto GetActivDrawElement(QDomElement &element) const -> bool;
 
-    QVector<VToolRecord> getLocalHistory(const QString &draw) const;
+    auto getLocalHistory(const QString &draw) const -> QVector<VToolRecord>;
 
-    bool GroupHasItem(const QDomElement &groupDomElement, quint32 toolId, quint32 objectId);
+    auto GroupHasItem(const QDomElement &groupDomElement, quint32 toolId, quint32 objectId) -> bool;
 
     auto ReadUnits() const -> Unit;
     auto ReadPatternNumber() const ->QString;
@@ -491,28 +491,28 @@ protected:
 private:
     Q_DISABLE_COPY_MOVE(VAbstractPattern) // NOLINT
 
-    QStringList ListIncrements() const;
-    QVector<VFormulaField> ListPointExpressions() const;
-    QVector<VFormulaField> ListArcExpressions() const;
-    QVector<VFormulaField> ListElArcExpressions() const;
-    QVector<VFormulaField> ListSplineExpressions() const;
-    QVector<VFormulaField> ListPathPointExpressions() const;
-    QVector<VFormulaField> ListOperationExpressions() const;
-    QVector<VFormulaField> ListNodesExpressions(const QDomElement &nodes) const;
-    QVector<VFormulaField> ListPathExpressions() const;
-    QVector<VFormulaField> ListGrainlineExpressions(const QDomElement &element) const;
-    QVector<VFormulaField> ListPieceExpressions() const;
-    QVector<VFormulaField> ListFinalMeasurementsExpressions() const;
+    auto ListIncrements() const -> QStringList;
+    auto ListPointExpressions() const -> QVector<VFormulaField>;
+    auto ListArcExpressions() const -> QVector<VFormulaField>;
+    auto ListElArcExpressions() const -> QVector<VFormulaField>;
+    auto ListSplineExpressions() const -> QVector<VFormulaField>;
+    auto ListPathPointExpressions() const -> QVector<VFormulaField>;
+    auto ListOperationExpressions() const -> QVector<VFormulaField>;
+    auto ListNodesExpressions(const QDomElement &nodes) const -> QVector<VFormulaField>;
+    auto ListPathExpressions() const -> QVector<VFormulaField>;
+    auto ListGrainlineExpressions(const QDomElement &element) const -> QVector<VFormulaField>;
+    auto ListPieceExpressions() const -> QVector<VFormulaField>;
+    auto ListFinalMeasurementsExpressions() const -> QVector<VFormulaField>;
 
-    bool IsVariable(const QString& token) const;
-    bool IsFunction(const QString& token) const;
+    auto IsVariable(const QString &token) const -> bool;
+    auto IsFunction(const QString &token) const -> bool;
 
-    QPair<bool, QMap<quint32, quint32> > ParseItemElement(const QDomElement &domElement);
+    auto ParseItemElement(const QDomElement &domElement) -> QPair<bool, QMap<quint32, quint32>>;
 
-    QMap<int, QString> GetMaterials(const QDomElement &element) const;
+    auto GetMaterials(const QDomElement &element) const -> QMap<int, QString>;
     void               SetMaterials(QDomElement &element, const QMap<int, QString> &materials);
 
-    QVector<VFinalMeasurement> GetFMeasurements(const QDomElement &element) const;
+    auto GetFMeasurements(const QDomElement &element) const -> QVector<VFinalMeasurement>;
     void                       SetFMeasurements(QDomElement &element, const QVector<VFinalMeasurement> &measurements);
 
     auto GetBackgroundPatternImage(const QDomElement &element) const -> VBackgroundPatternImage;
@@ -527,7 +527,7 @@ QT_WARNING_POP
  * @brief GetNameActivPP return current pattern piece name.
  * @return pattern piece name.
  */
-inline QString VAbstractPattern::GetNameActivPP() const
+inline auto VAbstractPattern::GetNameActivPP() const -> QString
 {
     return nameActivPP;
 }

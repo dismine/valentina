@@ -64,32 +64,31 @@ public:
     VAbstractApplication(int &argc, char ** argv);
     virtual ~VAbstractApplication();
 
-    virtual const VTranslateVars *TrVars()=0;
+    virtual auto TrVars() -> const VTranslateVars * = 0;
 
-    static QString translationsPath(const QString &locale = QString());
+    static auto translationsPath(const QString &locale = QString()) -> QString;
 
     void LoadTranslation(QString locale);
 
     virtual void     OpenSettings()=0;
-    VCommonSettings *Settings();
+    auto Settings() -> VCommonSettings *;
 
-    template <typename T>
-    QString LocaleToString(const T &value);
+    template <typename T> auto LocaleToString(const T &value) -> QString;
 
-    QUndoStack *getUndoStack() const;
+    auto getUndoStack() const -> QUndoStack *;
 
-    virtual bool IsAppInGUIMode()const =0;
-    virtual bool IsPedantic() const;
+    virtual auto IsAppInGUIMode() const -> bool = 0;
+    virtual auto IsPedantic() const -> bool;
 
-    static QString ClearMessage(QString msg);
+    static auto ClearMessage(QString msg) -> QString;
 
     static const QString warningMessageSignature;
-    bool IsWarningMessage(const QString &message) const;
+    auto IsWarningMessage(const QString &message) const -> bool;
 
-    QFileDialog::Options NativeFileDialog(QFileDialog::Options options = QFileDialog::Options()) const;
+    auto NativeFileDialog(QFileDialog::Options options = QFileDialog::Options()) const -> QFileDialog::Options;
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    VTextCodec * TextCodecCache(QStringConverter::Encoding encoding) const;
+    auto TextCodecCache(QStringConverter::Encoding encoding) const -> VTextCodec *;
     void CacheTextCodec(QStringConverter::Encoding encoding, VTextCodec *codec);
 #endif
 
@@ -97,7 +96,7 @@ public:
     static void WinAttachConsole();
 #endif
 
-    static VAbstractApplication *VApp();
+    static auto VApp() -> VAbstractApplication *;
 
 protected:
     QUndoStack *undoStack;
@@ -135,8 +134,7 @@ private:
 QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-inline QString VAbstractApplication::LocaleToString(const T &value)
+template <typename T> inline auto VAbstractApplication::LocaleToString(const T &value) -> QString
 {
     QLocale loc;
     VAbstractApplication::VApp()->Settings()->GetOsSeparator() ? loc = QLocale() : loc = QLocale::c();
@@ -154,7 +152,7 @@ inline auto VAbstractApplication::VApp() -> VAbstractApplication *
  * @brief getSettings hide settings constructor.
  * @return pointer to class for acssesing to settings in ini file.
  */
-inline VCommonSettings *VAbstractApplication::Settings()
+inline auto VAbstractApplication::Settings() -> VCommonSettings *
 {
     SCASSERT(settings != nullptr)
     return settings;

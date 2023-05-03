@@ -52,19 +52,19 @@ VPlaceLabelItem::~VPlaceLabelItem()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPlaceLabelItem::GetWidthFormula() const
+auto VPlaceLabelItem::GetWidthFormula() const -> QString
 {
     return d->width;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString &VPlaceLabelItem::GetWidthFormula()
+auto VPlaceLabelItem::GetWidthFormula() -> QString &
 {
     return d->width;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPlaceLabelItem::GetWidth() const
+auto VPlaceLabelItem::GetWidth() const -> qreal
 {
     return d->wValue;
 }
@@ -77,19 +77,19 @@ void VPlaceLabelItem::SetWidth(qreal value, const QString &formula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPlaceLabelItem::GetHeightFormula() const
+auto VPlaceLabelItem::GetHeightFormula() const -> QString
 {
     return d->height;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString &VPlaceLabelItem::GetHeightFormula()
+auto VPlaceLabelItem::GetHeightFormula() -> QString &
 {
     return d->height;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPlaceLabelItem::GetHeight() const
+auto VPlaceLabelItem::GetHeight() const -> qreal
 {
     return d->hValue;
 }
@@ -102,19 +102,19 @@ void VPlaceLabelItem::SetHeight(qreal value, const QString &formula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPlaceLabelItem::GetAngleFormula() const
+auto VPlaceLabelItem::GetAngleFormula() const -> QString
 {
     return d->angle;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString &VPlaceLabelItem::GetAngleFormula()
+auto VPlaceLabelItem::GetAngleFormula() -> QString &
 {
     return d->angle;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPlaceLabelItem::GetAngle() const
+auto VPlaceLabelItem::GetAngle() const -> qreal
 {
     return d->aValue;
 }
@@ -127,19 +127,19 @@ void VPlaceLabelItem::SetAngle(qreal value, const QString &formula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPlaceLabelItem::GetVisibilityTrigger() const
+auto VPlaceLabelItem::GetVisibilityTrigger() const -> QString
 {
     return d->visibilityTrigger;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString &VPlaceLabelItem::GetVisibilityTrigger()
+auto VPlaceLabelItem::GetVisibilityTrigger() -> QString &
 {
     return d->visibilityTrigger;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPlaceLabelItem::IsVisible() const
+auto VPlaceLabelItem::IsVisible() const -> bool
 {
     bool visible = true;
 
@@ -162,7 +162,7 @@ void VPlaceLabelItem::SetVisibilityTrigger(qreal visible, const QString &formula
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPlaceLabelItem::GetCorrectionAngle() const
+auto VPlaceLabelItem::GetCorrectionAngle() const -> qreal
 {
     return d->correctionAngle;
 }
@@ -174,7 +174,7 @@ void VPlaceLabelItem::SetCorrectionAngle(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VPlaceLabelItem::GetCenterPoint() const
+auto VPlaceLabelItem::GetCenterPoint() const -> quint32
 {
     return d->centerPoint;
 }
@@ -186,7 +186,7 @@ void VPlaceLabelItem::SetCenterPoint(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PlaceLabelType VPlaceLabelItem::GetLabelType() const
+auto VPlaceLabelItem::GetLabelType() const -> PlaceLabelType
 {
     return d->type;
 }
@@ -198,7 +198,7 @@ void VPlaceLabelItem::SetLabelType(PlaceLabelType type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QTransform VPlaceLabelItem::RotationMatrix() const
+auto VPlaceLabelItem::RotationMatrix() const -> QTransform
 {
     QTransform t;
     t.translate(x(), y());
@@ -208,13 +208,13 @@ QTransform VPlaceLabelItem::RotationMatrix() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VPlaceLabelItem::Box() const
+auto VPlaceLabelItem::Box() const -> QRectF
 {
     return QRectF(0, 0, d->wValue, d->hValue);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPlaceLabelItem &VPlaceLabelItem::operator=(const VPlaceLabelItem &item)
+auto VPlaceLabelItem::operator=(const VPlaceLabelItem &item) -> VPlaceLabelItem &
 {
     if ( &item == this )
     {
@@ -232,7 +232,7 @@ VPlaceLabelItem::VPlaceLabelItem(VPlaceLabelItem &&item) Q_DECL_NOTHROW
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VPlaceLabelItem &VPlaceLabelItem::operator=(VPlaceLabelItem &&item) Q_DECL_NOTHROW
+auto VPlaceLabelItem::operator=(VPlaceLabelItem &&item) Q_DECL_NOTHROW->VPlaceLabelItem &
 {
     VPointF::operator=(item);
     std::swap(d, item.d);

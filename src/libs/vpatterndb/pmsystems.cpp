@@ -91,7 +91,7 @@ const QString p54_S = QStringLiteral("p54");
 const QString p998_S = QStringLiteral("p998");
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList ListPMSystems()
+auto ListPMSystems() -> QStringList
 {
     QStringList list;
     list << p0_S
@@ -159,7 +159,7 @@ void InitPMSystems(QComboBox *systemCombo)
 {
     const QStringList listSystems = ListPMSystems();
     QMap<QString, QString> systems;
-    for (auto &sys : listSystems)
+    for (const auto &sys : listSystems)
     {
         systems.insert(VAbstractApplication::VApp()->TrVars()->PMSystemName(sys) + QLatin1String(" (") + sys +
                        QLatin1String(")"), sys);

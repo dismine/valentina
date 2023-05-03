@@ -52,13 +52,13 @@ public:
                      const QString &notes, QGraphicsItem * parent = nullptr);
     virtual ~VToolDoublePoint() = default;
 
-    virtual int   type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Tool::DoublePoint)};
 
-    QString nameP1() const;
+    auto nameP1() const -> QString;
     void    setNameP1(const QString &name);
 
-    QString nameP2() const;
+    auto nameP2() const -> QString;
     void    setNameP2(const QString &name);
 
     void SetNotes(const QString &notes) override;
@@ -66,7 +66,7 @@ public:
     virtual void GroupVisibility(quint32 object, bool visible) override;
     virtual void ChangeLabelPosition(quint32 id, const QPointF &pos) override;
 
-    virtual bool IsLabelVisible(quint32 id) const override;
+    virtual auto IsLabelVisible(quint32 id) const -> bool override;
     virtual void SetLabelVisible(quint32 id, bool visible) override;
 public slots:
     void         Label1ChangePosition(const QPointF &pos);
@@ -92,14 +92,14 @@ protected:
     quint32      p2id;
 
     virtual void UpdateNamePosition(quint32 id, const QPointF &pos) override;
-    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) override;
+    virtual auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
     virtual void keyReleaseEvent(QKeyEvent * event) override;
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) override;
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
     virtual void AddToFile() override;
     virtual void ChangeLabelVisibility(quint32 id, bool visible) override;
 
-    QString ComplexToolTip(quint32 itemId) const;
+    auto ComplexToolTip(quint32 itemId) const -> QString;
 
 private:
     Q_DISABLE_COPY_MOVE(VToolDoublePoint) // NOLINT

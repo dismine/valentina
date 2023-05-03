@@ -44,8 +44,9 @@ public:
     MoveLabel(VAbstractPattern *doc, const QPointF &pos, const quint32 &id, QUndoCommand *parent = nullptr);
     virtual ~MoveLabel()=default;
 
-    virtual bool mergeWith(const QUndoCommand *command) override;
-    virtual int  id() const override;
+    virtual auto mergeWith(const QUndoCommand *command) -> bool override;
+    virtual auto id() const -> int override;
+
 protected:
     virtual void Do(const QPointF &pos) override;
 private:

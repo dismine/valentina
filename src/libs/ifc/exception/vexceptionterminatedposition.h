@@ -35,13 +35,13 @@ class VExceptionTerminatedPosition : public VException
 public:
     explicit VExceptionTerminatedPosition(const QString &error) V_NOEXCEPT_EXPR (true);
     VExceptionTerminatedPosition(const VExceptionTerminatedPosition &e) V_NOEXCEPT_EXPR (true);
-    VExceptionTerminatedPosition &operator=(const VExceptionTerminatedPosition &e) V_NOEXCEPT_EXPR (true);
+    auto operator=(const VExceptionTerminatedPosition &e) V_NOEXCEPT_EXPR(true) -> VExceptionTerminatedPosition &;
     virtual ~VExceptionTerminatedPosition() V_NOEXCEPT_EXPR (true);
 
     Q_NORETURN virtual void raise() const override;
 
     // cppcheck-suppress unusedFunction
-    Q_REQUIRED_RESULT virtual VExceptionTerminatedPosition *clone() const override;
+    Q_REQUIRED_RESULT virtual auto clone() const -> VExceptionTerminatedPosition * override;
 };
 
 #endif // VEXCEPTIONTERMINATEDPOSITION_H

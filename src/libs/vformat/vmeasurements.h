@@ -57,7 +57,7 @@ public:
     virtual ~VMeasurements() = default;
 
     virtual void setXMLContent(const QString &fileName) override;
-    virtual bool SaveDocument(const QString &fileName, QString &error) override;
+    virtual auto SaveDocument(const QString &fileName, QString &error) -> bool override;
 
     void AddEmpty(const QString &name, const QString &formula = QString());
     void AddEmptyAfter(const QString &after, const QString &name, const QString &formula = QString());
@@ -76,37 +76,37 @@ public:
     void ReadMeasurements(qreal baseA, qreal baseB=0, qreal baseC=0) const;
     void ClearForExport();
 
-    MeasurementsType Type() const;
-    qreal DimensionABase() const;
-    qreal DimensionBBase() const;
-    qreal DimensionCBase() const;
+    auto Type() const -> MeasurementsType;
+    auto DimensionABase() const -> qreal;
+    auto DimensionBBase() const -> qreal;
+    auto DimensionCBase() const -> qreal;
 
-    qreal DimensionAStep() const;
-    qreal DimensionBStep() const;
-    qreal DimensionCStep() const;
+    auto DimensionAStep() const -> qreal;
+    auto DimensionBStep() const -> qreal;
+    auto DimensionCStep() const -> qreal;
 
-    QString Notes() const;
+    auto Notes() const -> QString;
     void    SetNotes(const QString &text);
 
-    QString Customer() const;
+    auto Customer() const -> QString;
     void    SetCustomer(const QString &text);
 
-    QDate   BirthDate() const;
+    auto BirthDate() const -> QDate;
     void    SetBirthDate(const QDate &date);
 
-    GenderType Gender() const;
+    auto Gender() const -> GenderType;
     void       SetGender(const GenderType &gender);
 
-    QString PMSystem() const;
+    auto PMSystem() const -> QString;
     void    SetPMSystem(const QString &system);
 
-    QString Email() const;
+    auto Email() const -> QString;
     void    SetEmail(const QString &text);
 
-    bool    IsReadOnly() const;
+    auto IsReadOnly() const -> bool;
     void    SetReadOnly(bool ro);
 
-    bool    IsFullCircumference() const;
+    auto IsFullCircumference() const -> bool;
     void    SetFullCircumference(bool fc);
 
     void SetMName(const QString &name, const QString &text);
@@ -121,7 +121,7 @@ public:
     void SetMFullName(const QString &name, const QString &text);
     void SetMDimension(const QString &name, IMD type);
 
-    QString MeasurementForDimension(IMD type) const;
+    auto MeasurementForDimension(IMD type) const -> QString;
 
     auto Dimensions() const -> VDimensions;
 
@@ -184,23 +184,23 @@ public:
     static const QString DimensionW;
     static const QString DimensionZ;
 
-    static QString GenderToStr(const GenderType &sex);
-    static GenderType StrToGender(const QString &sex);
+    static auto GenderToStr(const GenderType &sex) -> QString;
+    static auto StrToGender(const QString &sex) -> GenderType;
 
-    static QString DimensionTypeToStr(const MeasurementDimension &type);
-    static MeasurementDimension StrToDimensionType(const QString &type);
+    static auto DimensionTypeToStr(const MeasurementDimension &type) -> QString;
+    static auto StrToDimensionType(const QString &type) -> MeasurementDimension;
 
-    static QString IMDToStr(const IMD &type);
-    static IMD StrToIMD(const QString &type);
+    static auto IMDToStr(const IMD &type) -> QString;
+    static auto StrToIMD(const QString &type) -> IMD;
 
-    static QString IMDName(IMD type);
+    static auto IMDName(IMD type) -> QString;
 
-    QStringList ListAll() const;
-    QStringList ListKnown() const;
+    auto ListAll() const -> QStringList;
+    auto ListKnown() const -> QStringList;
 
-    bool IsDefinedKnownNamesValid() const;
+    auto IsDefinedKnownNamesValid() const -> bool;
 
-    VContainer *GetData() const;
+    auto GetData() const -> VContainer *;
 
 private:
     Q_DISABLE_COPY_MOVE(VMeasurements) // NOLINT
@@ -219,25 +219,25 @@ private:
     void CreateEmptyMultisizeFile(Unit unit, const QVector<MeasurementDimension_p > &dimensions);
     void CreateEmptyIndividualFile(Unit unit);
 
-    QDomElement CreateDimensions(const QVector<MeasurementDimension_p > &dimensions);
+    auto CreateDimensions(const QVector<MeasurementDimension_p> &dimensions) -> QDomElement;
 
-    qreal UniqueTagAttr(const QString &tag, const QString &attr, qreal defValue) const;
+    auto UniqueTagAttr(const QString &tag, const QString &attr, qreal defValue) const -> qreal;
 
-    QDomElement MakeEmpty(const QString &name, const QString &formula, MeasurementType varType);
-    QDomElement FindM(const QString &name) const;
-    MeasurementsType ReadType() const;
+    auto MakeEmpty(const QString &name, const QString &formula, MeasurementType varType) -> QDomElement;
+    auto FindM(const QString &name) const -> QDomElement;
+    auto ReadType() const -> MeasurementsType;
     auto ReadUnits() const -> Unit;
     auto ReadDimensions() const -> VDimensions;
 
-    qreal EvalFormula(VContainer *data, const QString &formula, bool *ok) const;
+    auto EvalFormula(VContainer *data, const QString &formula, bool *ok) const -> qreal;
 
-    QString ClearPMCode(const QString &code) const;
+    auto ClearPMCode(const QString &code) const -> QString;
 
-    QMap<QString, qreal> ReadCorrections(const QDomElement &mElement) const;
+    auto ReadCorrections(const QDomElement &mElement) const -> QMap<QString, qreal>;
     void                 WriteCorrections(QDomElement &mElement, const QMap<QString, qreal> &corrections);
 
     void           SaveDimesionLabels(QDomElement &dElement, const DimesionLabels &labels);
-    DimesionLabels ReadDimensionLabels(const QDomElement &dElement) const;
+    auto ReadDimensionLabels(const QDomElement &dElement) const -> DimesionLabels;
 
     void ClearDimension(IMD type);
 };

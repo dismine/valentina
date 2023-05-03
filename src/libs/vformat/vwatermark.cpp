@@ -44,7 +44,7 @@ const QString VWatermark::AttrShow      = QStringLiteral("show");
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-QString FileComment()
+auto FileComment() -> QString
 {
     return QString("Watermark created with Valentina v%1 (https://smart-pattern.com.ua/).")
             .arg(APP_VERSION_STR);
@@ -72,7 +72,7 @@ void VWatermark::CreateEmptyWatermark()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VWatermark::SaveDocument(const QString &fileName, QString &error)
+auto VWatermark::SaveDocument(const QString &fileName, QString &error) -> bool
 {
     // Update comment with Valentina version
     QDomNode commentNode = documentElement().firstChild();
@@ -86,7 +86,7 @@ bool VWatermark::SaveDocument(const QString &fileName, QString &error)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VWatermarkData VWatermark::GetWatermark() const
+auto VWatermark::GetWatermark() const -> VWatermarkData
 {
     VWatermarkData data;
 

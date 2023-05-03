@@ -177,8 +177,8 @@ void VToolSplinePath::SetDialog()
  * @param doc dom document container.
  * @param data container with variables.
  */
-VToolSplinePath* VToolSplinePath::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
-                                         VAbstractPattern *doc, VContainer *data)
+auto VToolSplinePath::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                             VContainer *data) -> VToolSplinePath *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogSplinePath> dialogTool = qobject_cast<DialogSplinePath *>(dialog);
@@ -212,7 +212,7 @@ VToolSplinePath* VToolSplinePath::Create(const QPointer<DialogTool> &dialog, VMa
  * @param initData init data.
  * @param path spline path.
  */
-VToolSplinePath* VToolSplinePath::Create(VToolSplinePathInitData &initData,  VSplinePath *path)
+auto VToolSplinePath::Create(VToolSplinePathInitData &initData, VSplinePath *path) -> VToolSplinePath *
 {
     if (initData.typeCreation == Source::FromGui)
     {
@@ -244,7 +244,7 @@ VToolSplinePath* VToolSplinePath::Create(VToolSplinePathInitData &initData,  VSp
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolSplinePath *VToolSplinePath::Create(VToolSplinePathInitData &initData)
+auto VToolSplinePath::Create(VToolSplinePathInitData &initData) -> VToolSplinePath *
 {
     auto* path = new VSplinePath();
 
@@ -322,7 +322,7 @@ void VToolSplinePath::EnableToolMove(bool move)
 {
     this->setFlag(QGraphicsItem::ItemIsMovable, move);
 
-    for (auto point : qAsConst(controlPoints))
+    for (auto *point : qAsConst(controlPoints))
     {
         point->setFlag(QGraphicsItem::ItemIsMovable, move);
     }
@@ -437,7 +437,7 @@ void VToolSplinePath::UpdatePathPoints(VAbstractPattern *doc, QDomElement &eleme
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSplinePath VToolSplinePath::getSplinePath() const
+auto VToolSplinePath::getSplinePath() const -> VSplinePath
 {
     QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
     return *splPath.data();
@@ -758,7 +758,7 @@ void VToolSplinePath::SetVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VToolSplinePath::IsMovable(int index) const
+auto VToolSplinePath::IsMovable(int index) const -> bool
 {
     const auto splPath = VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
 

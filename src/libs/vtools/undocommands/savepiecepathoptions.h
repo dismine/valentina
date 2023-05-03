@@ -44,10 +44,11 @@ public:
 
     virtual void undo() override;
     virtual void redo() override;
-    virtual bool mergeWith(const QUndoCommand *command) override;
-    virtual int  id() const override;
-    quint32      PathId() const;
-    VPiecePath   NewPath() const;
+    virtual auto mergeWith(const QUndoCommand *command) -> bool override;
+    virtual auto id() const -> int override;
+    auto PathId() const -> quint32;
+    auto NewPath() const -> VPiecePath;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(SavePiecePathOptions) // NOLINT
@@ -60,19 +61,19 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline int SavePiecePathOptions::id() const
+inline auto SavePiecePathOptions::id() const -> int
 {
     return static_cast<int>(UndoCommand::SavePiecePathOptions);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline quint32 SavePiecePathOptions::PathId() const
+inline auto SavePiecePathOptions::PathId() const -> quint32
 {
     return nodeId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline VPiecePath SavePiecePathOptions::NewPath() const
+inline auto SavePiecePathOptions::NewPath() const -> VPiecePath
 {
     return m_newPath;
 }

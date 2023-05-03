@@ -58,16 +58,16 @@ public:
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
     virtual void Update() override;
 
-    virtual int  type() const override {return Type;}
+    virtual auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Vis::TextGraphicsItem)};
 
     void SetFont(const QFont& fnt);
-    int  GetFontSize() const;
+    auto GetFontSize() const -> int;
     void SetSize(qreal fW, qreal fH);
-    bool IsContained(QRectF rectBB, qreal dRot, qreal& dX, qreal& dY) const;
+    auto IsContained(QRectF rectBB, qreal dRot, qreal &dX, qreal &dY) const -> bool;
     void UpdateData(const QString& qsName, const VPieceLabelData& data, const VContainer *pattern);
     void UpdateData(VAbstractPattern* pDoc, const VContainer *pattern);
-    vsizetype GetTextLines() const;
+    auto GetTextLines() const -> vsizetype;
 
 protected:
     virtual void mousePressEvent(QGraphicsSceneMouseEvent* pME) override;

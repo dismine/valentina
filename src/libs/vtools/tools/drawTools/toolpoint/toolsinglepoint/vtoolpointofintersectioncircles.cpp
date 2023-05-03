@@ -84,9 +84,9 @@ void VToolPointOfIntersectionCircles::SetDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPointOfIntersectionCircles *VToolPointOfIntersectionCircles::Create(const QPointer<DialogTool> &dialog,
-                                                                         VMainGraphicsScene *scene,
-                                                                         VAbstractPattern *doc, VContainer *data)
+auto VToolPointOfIntersectionCircles::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
+                                             VAbstractPattern *doc, VContainer *data)
+    -> VToolPointOfIntersectionCircles *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogPointOfIntersectionCircles> dialogTool =
@@ -116,8 +116,8 @@ VToolPointOfIntersectionCircles *VToolPointOfIntersectionCircles::Create(const Q
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolPointOfIntersectionCircles *
-VToolPointOfIntersectionCircles::Create(VToolPointOfIntersectionCirclesInitData &initData)
+auto VToolPointOfIntersectionCircles::Create(VToolPointOfIntersectionCirclesInitData &initData)
+    -> VToolPointOfIntersectionCircles *
 {
     const qreal calcC1Radius = VAbstractValApplication::VApp()
             ->toPixel(CheckFormula(initData.id, initData.firstCircleRadius, initData.data));
@@ -170,9 +170,9 @@ VToolPointOfIntersectionCircles::Create(VToolPointOfIntersectionCirclesInitData 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VToolPointOfIntersectionCircles::FindPoint(const QPointF &c1Point, const QPointF &c2Point, qreal c1Radius,
+auto VToolPointOfIntersectionCircles::FindPoint(const QPointF &c1Point, const QPointF &c2Point, qreal c1Radius,
                                                 qreal c2Radius, const CrossCirclesPoint crossPoint,
-                                                QPointF *intersectionPoint)
+                                                QPointF *intersectionPoint) -> bool
 {
     SCASSERT(intersectionPoint != nullptr)
 
@@ -203,19 +203,19 @@ bool VToolPointOfIntersectionCircles::FindPoint(const QPointF &c1Point, const QP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolPointOfIntersectionCircles::FirstCircleCenterPointName() const
+auto VToolPointOfIntersectionCircles::FirstCircleCenterPointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(firstCircleCenterId)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolPointOfIntersectionCircles::SecondCircleCenterPointName() const
+auto VToolPointOfIntersectionCircles::SecondCircleCenterPointName() const -> QString
 {
     return VAbstractTool::data.GetGObject(secondCircleCenterId)->name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolPointOfIntersectionCircles::GetFirstCircleRadius() const
+auto VToolPointOfIntersectionCircles::GetFirstCircleRadius() const -> VFormula
 {
     VFormula radius(firstCircleRadius, getData());
     radius.setCheckZero(true);
@@ -240,7 +240,7 @@ void VToolPointOfIntersectionCircles::SetFirstCircleRadius(const VFormula &value
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula VToolPointOfIntersectionCircles::GetSecondCircleRadius() const
+auto VToolPointOfIntersectionCircles::GetSecondCircleRadius() const -> VFormula
 {
     VFormula radius(secondCircleRadius, getData());
     radius.setCheckZero(true);
@@ -265,7 +265,7 @@ void VToolPointOfIntersectionCircles::SetSecondCircleRadius(const VFormula &valu
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-CrossCirclesPoint VToolPointOfIntersectionCircles::GetCrossCirclesPoint() const
+auto VToolPointOfIntersectionCircles::GetCrossCirclesPoint() const -> CrossCirclesPoint
 {
     return crossPoint;
 }

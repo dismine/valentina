@@ -107,7 +107,7 @@ DialogExportToCSV::~DialogExportToCSV()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogExportToCSV::IsWithHeader() const
+auto DialogExportToCSV::IsWithHeader() const -> bool
 {
     return ui->checkBoxWithHeader->isChecked();
 }
@@ -119,16 +119,14 @@ void DialogExportToCSV::SetWithHeader(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int DialogExportToCSV::GetSelectedMib() const
+auto DialogExportToCSV::GetSelectedMib() const -> int
 {
     if (ui->comboBoxCodec->currentIndex() != -1)
     {
         return ui->comboBoxCodec->currentData().toInt();
     }
-    else
-    {
-        return VCommonSettings::GetDefCSVCodec();
-    }
+
+    return VCommonSettings::GetDefCSVCodec();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -146,13 +144,13 @@ void DialogExportToCSV::SetSelectedMib(int value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QChar DialogExportToCSV::GetSeparator() const
+auto DialogExportToCSV::GetSeparator() const -> QChar
 {
     if (ui->radioButtonTab->isChecked())
     {
         return QChar('\t');
     }
-    else if (ui->radioButtonSemicolon->isChecked())
+    if (ui->radioButtonSemicolon->isChecked())
     {
         return QChar(';');
     }
@@ -287,7 +285,7 @@ void DialogExportToCSV::ShowFilePreview(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogExportToCSV::MakeHelpCodecsList()
+auto DialogExportToCSV::MakeHelpCodecsList() -> QString
 {
     QString out = QStringLiteral("\n");
     const QList<int> list = VTextCodec::availableMibs();
@@ -307,7 +305,7 @@ QString DialogExportToCSV::MakeHelpCodecsList()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogExportToCSV::MakeHelpSeparatorList()
+auto DialogExportToCSV::MakeHelpSeparatorList() -> QString
 {
     QString out = QStringLiteral("\n");
     out += QLatin1String("\t* 'Tab',\n");

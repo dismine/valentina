@@ -47,10 +47,10 @@ public:
 
     virtual void SetPiecesList(const QVector<quint32> &list) override;
 
-    quint32 GetPieceId() const;
+    auto GetPieceId() const -> quint32;
     void    SetPieceId(quint32 id);
 
-    QVector<VPieceNode> GetNodes() const;
+    auto GetNodes() const -> QVector<VPieceNode>;
 
     virtual void ShowDialog(bool click) override;
 
@@ -58,7 +58,7 @@ public slots:
     virtual void SelectedObject(bool selected, quint32 object, quint32 tool) override;
 
 protected:
-    virtual bool IsValid() const final;
+    virtual auto IsValid() const -> bool final;
 
 private slots:
     void ShowContextMenu(const QPoint &pos);
@@ -80,7 +80,7 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogInsertNode::IsValid() const
+inline auto DialogInsertNode::IsValid() const -> bool
 {
     return m_flagNodes && m_flagError;
 }

@@ -54,15 +54,15 @@ public:
     static auto XSDSchemas() -> QHash <unsigned, QString>;
 
 protected:
-    virtual unsigned MinVer() const override;
-    virtual unsigned MaxVer() const override;
+    virtual auto MinVer() const -> unsigned override;
+    virtual auto MaxVer() const -> unsigned override;
 
-    virtual QString MinVerStr() const override;
-    virtual QString MaxVerStr() const override;
+    virtual auto MinVerStr() const -> QString override;
+    virtual auto MaxVerStr() const -> QString override;
 
     virtual void ApplyPatches() override;
     virtual void DowngradeToCurrentMaxVersion() override;
-    virtual bool IsReadOnly() const override;
+    virtual auto IsReadOnly() const -> bool override;
 
     auto Schemas() const -> QHash <unsigned, QString> override;
 
@@ -73,7 +73,7 @@ private:
     void AddNewTagsForV0_4_0();
     void RemoveTagsForV0_4_0();
     void ConvertMeasurementsToV0_4_0();
-    QDomElement AddMV0_4_0(const QString &name, qreal value, qreal sizeIncrease, qreal heightIncrease);
+    auto AddMV0_4_0(const QString &name, qreal value, qreal sizeIncrease, qreal heightIncrease) -> QDomElement;
     void PM_SystemV0_4_1();
     void ConvertMeasurementsToV0_4_2();
 
@@ -91,25 +91,25 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline unsigned VVSTConverter::MinVer() const
+inline auto VVSTConverter::MinVer() const -> unsigned
 {
     return MeasurementMinVer;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline unsigned VVSTConverter::MaxVer() const
+inline auto VVSTConverter::MaxVer() const -> unsigned
 {
     return MeasurementMaxVer;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString VVSTConverter::MinVerStr() const
+inline auto VVSTConverter::MinVerStr() const -> QString
 {
     return MeasurementMinVerStr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QString VVSTConverter::MaxVerStr() const
+inline auto VVSTConverter::MaxVerStr() const -> QString
 {
     return MeasurementMaxVerStr;
 }

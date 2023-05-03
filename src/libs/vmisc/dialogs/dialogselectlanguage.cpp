@@ -46,7 +46,7 @@ DialogSelectLanguage::~DialogSelectLanguage()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogSelectLanguage::Locale() const
+auto DialogSelectLanguage::Locale() const -> QString
 {
     return qvariant_cast<QString>(ui->comboBoxLanguage->currentData());
 }

@@ -86,7 +86,7 @@ QT_WARNING_POP
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-bool CreateLayoutPath(const QString &path)
+auto CreateLayoutPath(const QString &path) -> bool
 {
     bool usedNotExistedDir = true;
     QDir dir(path);
@@ -182,7 +182,7 @@ void MainWindowsNoGUI::ToolLayoutSettings(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
+auto MainWindowsNoGUI::GenerateLayout(VLayoutGenerator &lGenerator) -> bool
 {
     lGenerator.SetDetails(listDetails);
 
@@ -422,15 +422,13 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
     {
         return true;
     }
-    else
+
+    ShowLayoutError(nestingState);
+    if (not VApplication::IsGUIMode())
     {
-        ShowLayoutError(nestingState);
-        if (not VApplication::IsGUIMode())
-        {
-            QCoreApplication::exit(V_EX_DATAERR);
-        }
-        return false;
+        QCoreApplication::exit(V_EX_DATAERR);
     }
+    return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -910,7 +908,7 @@ void MainWindowsNoGUI::PrintTiled()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VLayoutPiece> MainWindowsNoGUI::PrepareDetailsForLayout(const QVector<DetailForLayout> &details)
+auto MainWindowsNoGUI::PrepareDetailsForLayout(const QVector<DetailForLayout> &details) -> QVector<VLayoutPiece>
 {
     if (details.isEmpty())
     {
@@ -964,13 +962,13 @@ void MainWindowsNoGUI::InitTempLayoutScene()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList MainWindowsNoGUI::RecentFileList() const
+auto MainWindowsNoGUI::RecentFileList() const -> QStringList
 {
     return VAbstractValApplication::VApp()->ValentinaSettings()->GetRecentFileList();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QIcon MainWindowsNoGUI::ScenePreview(int i, QSize iconSize, PreviewQuatilty quality) const
+auto MainWindowsNoGUI::ScenePreview(int i, QSize iconSize, PreviewQuatilty quality) const -> QIcon
 {
     QImage image;
     QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(m_layoutSettings->LayoutPapers().at(i));
@@ -1018,11 +1016,11 @@ QIcon MainWindowsNoGUI::ScenePreview(int i, QSize iconSize, PreviewQuatilty qual
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<QGraphicsItem *> MainWindowsNoGUI::CreateShadows(const QList<QGraphicsItem *> &papers)
+auto MainWindowsNoGUI::CreateShadows(const QList<QGraphicsItem *> &papers) -> QList<QGraphicsItem *>
 {
     QList<QGraphicsItem *> shadows;
 
-    for (auto paper : papers)
+    for (auto *paper : papers)
     {
         qreal x1=0, y1=0, x2=0, y2=0;
         if (QGraphicsRectItem *item = qgraphicsitem_cast<QGraphicsRectItem *>(paper))
@@ -1042,9 +1040,8 @@ QList<QGraphicsItem *> MainWindowsNoGUI::CreateShadows(const QList<QGraphicsItem
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<QGraphicsScene *> MainWindowsNoGUI::CreateScenes(const QList<QGraphicsItem *> &papers,
-                                                       const QList<QGraphicsItem *> &shadows,
-                                                       const QList<QList<QGraphicsItem *> > &details)
+auto MainWindowsNoGUI::CreateScenes(const QList<QGraphicsItem *> &papers, const QList<QGraphicsItem *> &shadows,
+                                    const QList<QList<QGraphicsItem *>> &details) -> QList<QGraphicsScene *>
 {
     QList<QGraphicsScene *> scenes;
     scenes.reserve(papers.size());
@@ -1243,7 +1240,7 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString MainWindowsNoGUI::FileName() const
+auto MainWindowsNoGUI::FileName() const -> QString
 {
     QString fileName;
     VAbstractValApplication::VApp()->GetPatternPath().isEmpty()
@@ -1252,8 +1249,8 @@ QString MainWindowsNoGUI::FileName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, bool withHeader, int mib,
-                                                    const QChar &separator) const
+auto MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, bool withHeader, int mib,
+                                                    const QChar &separator) const -> bool
 {
     QxtCsvModel csv;
 
@@ -1332,7 +1329,7 @@ bool MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, boo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSharedPointer<VMeasurements> MainWindowsNoGUI::OpenMeasurementFile(const QString &path) const
+auto MainWindowsNoGUI::OpenMeasurementFile(const QString &path) const -> QSharedPointer<VMeasurements>
 {
     QSharedPointer<VMeasurements> m;
     if (path.isEmpty())

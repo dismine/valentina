@@ -69,30 +69,30 @@ struct FormulaData
 
 QT_WARNING_POP
 
-VPieceNode RowNode(QListWidget *listWidget, int i);
+auto RowNode(QListWidget *listWidget, int i) -> VPieceNode;
 void   MoveCursorToEnd(QPlainTextEdit *plainTextEdit);
 void   DeployFormula(QDialog *dialog, QPlainTextEdit *formula, QPushButton *buttonGrowLength, int formulaBaseHeight);
-bool   FilterObject(QObject *object, QEvent *event);
-qreal  EvalToolFormula(QDialog *dialog, const FormulaData &data, bool &flag);
+auto FilterObject(QObject *object, QEvent *event) -> bool;
+auto EvalToolFormula(QDialog *dialog, const FormulaData &data, bool &flag) -> qreal;
 void   ChangeColor(QWidget *widget, const QColor &color);
-QColor OkColor(QWidget *widget);
+auto OkColor(QWidget *widget) -> QColor;
 void   CheckPointLabel(QDialog *dialog, QLineEdit* edit, QLabel *labelEditNamePoint, const QString &pointName,
                        const VContainer *data, bool &flag);
-int    FindNotExcludedNodeDown(QListWidget *listWidget, int candidate);
-int    FindNotExcludedNodeUp(QListWidget *listWidget, int candidate);
-int    FindNotExcludedPointDown(QListWidget *listWidget, int start);
-int    FindNotExcludedCurveDown(QListWidget *listWidget, int start);
-bool   FirstPointEqualLast(QListWidget *listWidget, const VContainer *data, QString &error);
-bool   DoublePoints(QListWidget *listWidget, const VContainer *data, QString &error);
-bool   DoubleCurves(QListWidget *listWidget, const VContainer *data, QString &error);
-bool   EachPointLabelIsUnique(QListWidget *listWidget);
-bool   InvalidSegment(QListWidget *listWidget, const VContainer *data, QString &error);
-QString DialogWarningIcon();
-QFont  NodeFont(QFont font, bool nodeExcluded = false);
+auto FindNotExcludedNodeDown(QListWidget *listWidget, int candidate) -> int;
+auto FindNotExcludedNodeUp(QListWidget *listWidget, int candidate) -> int;
+auto FindNotExcludedPointDown(QListWidget *listWidget, int start) -> int;
+auto FindNotExcludedCurveDown(QListWidget *listWidget, int start) -> int;
+auto FirstPointEqualLast(QListWidget *listWidget, const VContainer *data, QString &error) -> bool;
+auto DoublePoints(QListWidget *listWidget, const VContainer *data, QString &error) -> bool;
+auto DoubleCurves(QListWidget *listWidget, const VContainer *data, QString &error) -> bool;
+auto EachPointLabelIsUnique(QListWidget *listWidget) -> bool;
+auto InvalidSegment(QListWidget *listWidget, const VContainer *data, QString &error) -> bool;
+auto DialogWarningIcon() -> QString;
+auto NodeFont(QFont font, bool nodeExcluded = false) -> QFont;
 void   CurrentCurveLength(vidtype curveId, VContainer *data);
 void   SetTabStopDistance(QPlainTextEdit *edit, int tabWidthChar=4);
-QIcon  LineColor(int size, const QString &color);
+auto LineColor(int size, const QString &color) -> QIcon;
 auto SegmentAliases(GOType curveType, const QString &alias1, const QString &alias2) -> QPair<QString, QString>;
-QString GetNodeName(const VContainer *data, const VPieceNode &node, bool showPassmarkDetails = false);
+auto GetNodeName(const VContainer *data, const VPieceNode &node, bool showPassmarkDetails = false) -> QString;
 
 #endif // DIALOGTOOLBOX_H

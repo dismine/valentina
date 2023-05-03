@@ -45,7 +45,7 @@ void TST_VCommandLine::UniqueKeys()
     const QStringList options = AllKeys();
     QSet<QString> unique;
 
-    for (auto &str : options)
+    for (const auto &str : options)
     {
         // cppcheck-suppress unreadVariable
         const QString message = QString("Options '%1' is not unique!").arg(str);

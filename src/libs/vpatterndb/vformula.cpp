@@ -55,7 +55,7 @@ VFormula::VFormula(const QString &formula, const VContainer *container)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula &VFormula::operator=(const VFormula &formula)
+auto VFormula::operator=(const VFormula &formula) -> VFormula &
 {
     if ( &formula == this )
     {
@@ -75,7 +75,7 @@ VFormula::~VFormula()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VFormula::operator==(const VFormula &formula) const
+auto VFormula::operator==(const VFormula &formula) const -> bool
 {
     return d->formula == formula.GetFormula() && d->strValue == formula.getStringValue() &&
             d->checkZero == formula.getCheckZero() && d->checkLessThanZero == formula.getCheckLessThanZero() &&
@@ -84,13 +84,13 @@ bool VFormula::operator==(const VFormula &formula) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VFormula::operator!=(const VFormula &formula) const
+auto VFormula::operator!=(const VFormula &formula) const -> bool
 {
     return !VFormula::operator==(formula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VFormula::GetFormula(FormulaType type) const
+auto VFormula::GetFormula(FormulaType type) const -> QString
 {
     if (type == FormulaType::ToUser)
     {
@@ -122,19 +122,19 @@ void VFormula::SetFormula(const QString &value, FormulaType type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VFormula::getStringValue() const
+auto VFormula::getStringValue() const -> QString
 {
     return d->strValue;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VFormula::getDoubleValue() const
+auto VFormula::getDoubleValue() const -> qreal
 {
     return d->dValue;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VFormula::getCheckZero() const
+auto VFormula::getCheckZero() const -> bool
 {
     return d->checkZero;
 }
@@ -147,7 +147,7 @@ void VFormula::setCheckZero(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VFormula::getCheckLessThanZero() const
+auto VFormula::getCheckLessThanZero() const -> bool
 {
     return d->checkLessThanZero;
 }
@@ -160,7 +160,7 @@ void VFormula::setCheckLessThanZero(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const VContainer *VFormula::getData() const
+auto VFormula::getData() const -> const VContainer *
 {
     return d->data;
 }
@@ -176,7 +176,7 @@ void VFormula::setData(const VContainer *value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VFormula::getToolId() const
+auto VFormula::getToolId() const -> quint32
 {
     return d->toolId;
 }
@@ -188,7 +188,7 @@ void VFormula::setToolId(quint32 value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VFormula::getPostfix() const
+auto VFormula::getPostfix() const -> QString
 {
     return d->postfix;
 }
@@ -200,19 +200,19 @@ void VFormula::setPostfix(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VFormula::error() const
+auto VFormula::error() const -> bool
 {
     return d->error;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VFormula::Reason() const
+auto VFormula::Reason() const -> QString
 {
     return d->reason;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VFormula::FormulaTypeId()
+auto VFormula::FormulaTypeId() -> int
 {
     return qMetaTypeId<VFormula>();
 }

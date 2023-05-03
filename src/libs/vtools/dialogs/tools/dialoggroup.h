@@ -52,14 +52,14 @@ public:
     ~DialogGroup();
 
     void    SetName(const QString &name);
-    QString GetName() const;
+    auto GetName() const -> QString;
 
     void        SetTags(const QStringList &tags);
-    QStringList GetTags() const;
+    auto GetTags() const -> QStringList;
 
     virtual void SetGroupCategories(const QStringList &categories) override;
 
-    QMap<quint32, quint32> GetGroup() const;
+    auto GetGroup() const -> QMap<quint32, quint32>;
 
     virtual void ShowDialog(bool click) override;
 
@@ -67,7 +67,7 @@ public slots:
     virtual void SelectedObject(bool selected, quint32 object, quint32 tool) override;
 
 protected:
-    virtual bool IsValid() const final;
+    virtual auto IsValid() const -> bool final;
 
 private slots:
     void NameChanged();
@@ -80,7 +80,7 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline bool DialogGroup::IsValid() const
+inline auto DialogGroup::IsValid() const -> bool
 {
     return flagName;
 }

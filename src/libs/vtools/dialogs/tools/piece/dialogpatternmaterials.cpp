@@ -38,13 +38,13 @@
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-QStringList PrepareKnowMaterials(const QStringList &patternMaterials, bool rememberPM)
+auto PrepareKnowMaterials(const QStringList &patternMaterials, bool rememberPM) -> QStringList
 {
     QStringList knownMaterials = VAbstractValApplication::VApp()->ValentinaSettings()->GetKnownMaterials();
 
     if (rememberPM)
     {
-        for(auto &patternMaterial : patternMaterials)
+        for (const auto &patternMaterial : patternMaterials)
         {
             if (not patternMaterial.isEmpty() && not knownMaterials.contains(patternMaterial))
             {
@@ -111,7 +111,7 @@ void DialogPatternMaterials::SetPatternMaterials(const QMap<int, QString> &list)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QMap<int, QString> DialogPatternMaterials::GetPatternMaterials() const
+auto DialogPatternMaterials::GetPatternMaterials() const -> QMap<int, QString>
 {
     QMap<int, QString> materials;
 
@@ -128,7 +128,7 @@ QMap<int, QString> DialogPatternMaterials::GetPatternMaterials() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QStringList DialogPatternMaterials::GetKnownMaterials() const
+auto DialogPatternMaterials::GetKnownMaterials() const -> QStringList
 {
     return m_knownMaterials;
 }

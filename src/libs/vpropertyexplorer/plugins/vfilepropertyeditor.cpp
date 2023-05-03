@@ -108,7 +108,7 @@ void VPE::VFileEditWidget::setDirectory(bool dir)
     Directory = dir;
 }
 
-QString VPE::VFileEditWidget::getFile() const
+auto VPE::VFileEditWidget::getFile() const -> QString
 {
     return CurrentFilePath;
 }
@@ -134,8 +134,7 @@ void VPE::VFileEditWidget::onToolButtonClicked()
     }
 }
 
-
-bool VPE::VFileEditWidget::eventFilter(QObject *obj, QEvent *ev)
+auto VPE::VFileEditWidget::eventFilter(QObject *obj, QEvent *ev) -> bool
 {
     if (ev->type() == QEvent::DragEnter || ev->type() == QEvent::Drop)
     {
@@ -153,8 +152,7 @@ bool VPE::VFileEditWidget::eventFilter(QObject *obj, QEvent *ev)
         {
             return true;
         }
-        else
-            return QWidget::eventFilter(obj, ev);
+        return QWidget::eventFilter(obj, ev);
     }
     else if (obj == ToolButton && ev->type() == QEvent::KeyPress)
     {
@@ -175,7 +173,7 @@ bool VPE::VFileEditWidget::eventFilter(QObject *obj, QEvent *ev)
     return QWidget::eventFilter(obj, ev);
 }
 
-bool VPE::VFileEditWidget::isDirectory()
+auto VPE::VFileEditWidget::isDirectory() -> bool
 {
     return Directory;
 }
@@ -242,7 +240,7 @@ auto VPE::VFileEditWidget::checkMimeData(const QMimeData* data, QString& file) c
     return false;
 }
 
-bool VPE::VFileEditWidget::checkFileFilter(const QString& file) const
+auto VPE::VFileEditWidget::checkFileFilter(const QString &file) const -> bool
 {
     if (FilterList.isEmpty())
     {

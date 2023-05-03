@@ -49,7 +49,7 @@ VToolRecord::VToolRecord(const quint32 &id, const Tool &typeTool, const QString 
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolRecord &VToolRecord::operator=(const VToolRecord &record)
+auto VToolRecord::operator=(const VToolRecord &record) -> VToolRecord &
 {
     if ( &record == this )
     {
@@ -68,7 +68,7 @@ VToolRecord::VToolRecord(const VToolRecord &record)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VToolRecord::IsMandatory() const
+auto VToolRecord::IsMandatory() const -> bool
 {
     return typeTool != Tool::Pin
             && typeTool != Tool::NodePoint

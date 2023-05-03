@@ -171,11 +171,11 @@ public:
 		      QWidget *parent = 0);
     ~ColorPickerItem();
 
-    QColor color() const;
-    QString text() const;
+    auto color() const -> QColor;
+    auto text() const -> QString;
 
     void setSelected(bool);
-    bool isSelected() const;
+    auto isSelected() const -> bool;
 signals:
     void clicked();
     void selected();
@@ -212,10 +212,10 @@ public:
 
     void setExecFlag();
 
-    QColor lastSelected() const;
+    auto lastSelected() const -> QColor;
 
-    ColorPickerItem *find(const QColor &col) const;
-    QColor color(int index) const;
+    auto find(const QColor &col) const -> ColorPickerItem *;
+    auto color(int index) const -> QColor;
 
     auto CustomItems() const -> QVector<ColorPickerItem *>;
 
@@ -381,7 +381,7 @@ void QtColorPicker::popupClosed()
 
     \sa text()
 */
-QColor QtColorPicker::currentColor() const
+auto QtColorPicker::currentColor() const -> QColor
 {
     return col;
 }
@@ -389,7 +389,7 @@ QColor QtColorPicker::currentColor() const
 /*!
     Returns the color at position \a index.
 */
-QColor QtColorPicker::color(int index) const
+auto QtColorPicker::color(int index) const -> QColor
 {
     return popup->color(index);
 }
@@ -502,7 +502,7 @@ void QtColorPicker::setColorDialogEnabled(bool enabled)
 {
     withColorDialog = enabled;
 }
-bool QtColorPicker::colorDialogEnabled() const
+auto QtColorPicker::colorDialogEnabled() const -> bool
 {
     return withColorDialog;
 }
@@ -523,7 +523,7 @@ bool QtColorPicker::colorDialogEnabled() const
         }
     \endcode
 */
-QColor QtColorPicker::getColor(const QPoint &point, bool allowCustomColors)
+auto QtColorPicker::getColor(const QPoint &point, bool allowCustomColors) -> QColor
 {
     ColorPickerPopup popup(-1, allowCustomColors);
 
@@ -664,7 +664,7 @@ void ColorPickerPopup::insertColor(const QColor &col, const QString &text, vsize
 /*! \internal
 
 */
-QColor ColorPickerPopup::color(int index) const
+auto ColorPickerPopup::color(int index) const -> QColor
 {
     if (index < 0 || index > static_cast<int> (items.count() - 1))
     {
@@ -905,7 +905,7 @@ void ColorPickerPopup::hideEvent(QHideEvent *e)
 /*! \internal
 
 */
-QColor ColorPickerPopup::lastSelected() const
+auto ColorPickerPopup::lastSelected() const -> QColor
 {
     return lastSel;
 }
@@ -1035,7 +1035,7 @@ ColorPickerItem::~ColorPickerItem()
 
     \sa text()
 */
-QColor ColorPickerItem::color() const
+auto ColorPickerItem::color() const -> QColor
 {
     return c;
 }
@@ -1045,7 +1045,7 @@ QColor ColorPickerItem::color() const
 
     \sa color()
 */
-QString ColorPickerItem::text() const
+auto ColorPickerItem::text() const -> QString
 {
     return t;
 }
@@ -1053,7 +1053,7 @@ QString ColorPickerItem::text() const
 /*!
 
 */
-bool ColorPickerItem::isSelected() const
+auto ColorPickerItem::isSelected() const -> bool
 {
     return sel;
 }

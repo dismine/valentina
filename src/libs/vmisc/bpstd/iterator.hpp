@@ -64,8 +64,7 @@ namespace bpstd {
   ///
   /// \param i the iterator
   /// \return the reverse_iterator
-  template <typename Iterator>
-  constexpr reverse_iterator<Iterator> make_reverse_iterator(Iterator i);
+  template <typename Iterator> constexpr auto make_reverse_iterator(Iterator i) -> reverse_iterator<Iterator>;
 
   //============================================================================
   // non-member functions
@@ -86,15 +85,13 @@ namespace bpstd {
   ///
   /// \param array the array to get the pointer to
   /// \return a pointer to the data
-  template <typename T, std::size_t N>
-  constexpr T* data(T (&array)[N]) noexcept;
+  template <typename T, std::size_t N> constexpr auto data(T (&array)[N]) noexcept -> T *;
 
   /// \brief Gets a pointer to the start of an initializer list
   ///
   /// \param il the initializer list
   /// \return a pointer to the start of the initializer list
-  template <typename E>
-  constexpr const E* data(std::initializer_list<E> il) noexcept;
+  template <typename E> constexpr auto data(std::initializer_list<E> il) noexcept -> const E *;
 
   //----------------------------------------------------------------------------
 
@@ -109,15 +106,13 @@ namespace bpstd {
   ///
   /// \param array the array to check
   /// \return true if N is 0
-  template <typename T, std::size_t N>
-  constexpr bool empty(const T (&array)[N]) noexcept;
+  template <typename T, std::size_t N> constexpr auto empty(const T (&array)[N]) noexcept -> bool;
 
   /// \brief Queries whether an initializer list is empty
   ///
   /// \param il the initializer list to check
   /// \return true if \p il is empty
-  template <typename E>
-  constexpr bool empty(std::initializer_list<E> il) noexcept;
+  template <typename E> constexpr auto empty(std::initializer_list<E> il) noexcept -> bool;
 
   //----------------------------------------------------------------------------
 
@@ -132,8 +127,7 @@ namespace bpstd {
   ///
   /// \param array the array to get the size from
   /// \return the size of an array
-  template <typename T, std::size_t N>
-  constexpr std::size_t size(const T (&array)[N]) noexcept;
+  template <typename T, std::size_t N> constexpr auto size(const T (&array)[N]) noexcept -> std::size_t;
 
   //----------------------------------------------------------------------------
 
@@ -149,8 +143,7 @@ namespace bpstd {
   ///
   /// \param array the array to get the size from
   /// \return the size of an array
-  template <typename T, std::ptrdiff_t N>
-  constexpr std::ptrdiff_t ssize(const T (&array)[N]) noexcept;
+  template <typename T, std::ptrdiff_t N> constexpr auto ssize(const T (&array)[N]) noexcept -> std::ptrdiff_t;
 
 } // namespace bpstd
 
@@ -163,9 +156,8 @@ namespace bpstd {
 //------------------------------------------------------------------------------
 
 template <typename Iterator>
-inline BPSTD_INLINE_VISIBILITY constexpr
- bpstd::reverse_iterator<Iterator>
-  bpstd::make_reverse_iterator(Iterator i)
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::make_reverse_iterator(Iterator i)
+    -> bpstd::reverse_iterator<Iterator>
 {
   return reverse_iterator<Iterator>{i};
 }
@@ -194,17 +186,13 @@ inline BPSTD_INLINE_VISIBILITY constexpr
   return c.data();
 }
 template <typename T, std::size_t N>
-inline BPSTD_INLINE_VISIBILITY constexpr
- T* bpstd::data(T (&array)[N])
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::data(T (&array)[N]) noexcept -> T *
 {
   return array;
 }
 
 template <typename E>
-inline BPSTD_INLINE_VISIBILITY constexpr
- const E* bpstd::data(std::initializer_list<E> il)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::data(std::initializer_list<E> il) noexcept -> const E *
 {
   return il.begin();
 }
@@ -220,17 +208,13 @@ inline BPSTD_INLINE_VISIBILITY constexpr
 }
 
 template <typename T, std::size_t N>
-inline BPSTD_INLINE_VISIBILITY constexpr
- bool bpstd::empty(const T (&)[N])
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::empty(const T (&)[N]) noexcept -> bool
 {
   return N == 0;
 }
 
 template <typename E>
-inline BPSTD_INLINE_VISIBILITY constexpr
- bool bpstd::empty(std::initializer_list<E> il)
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::empty(std::initializer_list<E> il) noexcept -> bool
 {
   return il.begin() == il.end();
 }
@@ -246,9 +230,7 @@ inline BPSTD_INLINE_VISIBILITY constexpr
 }
 
 template <typename T, std::size_t N>
-inline BPSTD_INLINE_VISIBILITY constexpr
- std::size_t bpstd::size(const T (&)[N])
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::size(const T (&)[N]) noexcept -> std::size_t
 {
   return N;
 }
@@ -266,9 +248,7 @@ inline BPSTD_INLINE_VISIBILITY constexpr
 }
 
 template <typename T, std::ptrdiff_t N>
-inline BPSTD_INLINE_VISIBILITY constexpr
- std::ptrdiff_t bpstd::ssize(const T (&)[N])
-  noexcept
+inline BPSTD_INLINE_VISIBILITY constexpr auto bpstd::ssize(const T (&)[N]) noexcept -> std::ptrdiff_t
 {
   return N;
 }

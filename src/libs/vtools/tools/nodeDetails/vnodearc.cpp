@@ -84,7 +84,7 @@ void VNodeArc::Create(const VAbstractNodeInitData &initData)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VNodeArc::getTagName() const
+auto VNodeArc::getTagName() const -> QString
 {
     return VAbstractPattern::TagArc;
 }

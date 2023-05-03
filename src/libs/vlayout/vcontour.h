@@ -54,39 +54,39 @@ public:
 
     ~VContour();
 
-    VContour &operator=(const VContour &contour);
+    auto operator=(const VContour &contour) -> VContour &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VContour(VContour &&contour) Q_DECL_NOTHROW;
-    VContour &operator=(VContour &&contour) Q_DECL_NOTHROW;
+    auto operator=(VContour &&contour) Q_DECL_NOTHROW->VContour &;
 #endif
 
     void CeateEmptySheetContour();
 
     void             SetContour(const QVector<QPointF> &contour);
-    QVector<QPointF> GetContour() const;
+    auto GetContour() const -> QVector<QPointF>;
 
-    qreal GetShift() const;
+    auto GetShift() const -> qreal;
     void  SetShift(qreal shift);
 
-    int  GetHeight() const;
+    auto GetHeight() const -> int;
     void SetHeight(int height);
 
-    int  GetWidth() const;
+    auto GetWidth() const -> int;
     void SetWidth(int width);
 
-    bool IsPortrait() const;
+    auto IsPortrait() const -> bool;
 
-    QSizeF GetSize() const;
+    auto GetSize() const -> QSizeF;
 
-    QVector<QPointF> UniteWithContour(const VLayoutPiece &detail, int globalI, int detJ, BestFrom type) const;
+    auto UniteWithContour(const VLayoutPiece &detail, int globalI, int detJ, BestFrom type) const -> QVector<QPointF>;
 
-    QLineF EmptySheetEdge() const;
-    vsizetype GlobalEdgesCount() const;
-    QLineF GlobalEdge(int i) const;
-    QVector<QPointF> CutEdge(const QLineF &edge) const;
-    QVector<QPointF> CutEmptySheetEdge() const;
+    auto EmptySheetEdge() const -> QLineF;
+    auto GlobalEdgesCount() const -> vsizetype;
+    auto GlobalEdge(int i) const -> QLineF;
+    auto CutEdge(const QLineF &edge) const -> QVector<QPointF>;
+    auto CutEmptySheetEdge() const -> QVector<QPointF>;
 
-    const QPointF &	at(int i) const;
+    auto at(int i) const -> const QPointF &;
 
 private:
     QSharedDataPointer<VContourData> d;
@@ -96,7 +96,7 @@ private:
 
     void ResetAttributes();
 
-    int EmptySheetEdgesCount() const;
+    auto EmptySheetEdgesCount() const -> int;
 };
 
 Q_DECLARE_TYPEINFO(VContour, Q_MOVABLE_TYPE); // NOLINT
