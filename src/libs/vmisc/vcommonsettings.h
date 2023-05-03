@@ -61,6 +61,8 @@ public:
     static auto PrepareMultisizeTables(const QString &currentPath) -> QString;
     static auto PrepareLabelTemplates(const QString &currentPath) -> QString;
 
+    static auto CastToLayoutExportFormat(qint8 f) -> qint8;
+
     static auto GetDefPathIndividualMeasurements() -> QString;
     auto GetPathIndividualMeasurements() const -> QString;
     void SetPathIndividualMeasurements(const QString &value);

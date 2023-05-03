@@ -315,7 +315,7 @@ auto VPSettings::GetLayoutPieceGap() const -> qreal
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSettings::GetLayoutExportFormat() const -> qint8
 {
-    return qvariant_cast<qint8>(value(*settingLayoutExportFormat, 0));
+    return CastToLayoutExportFormat(qvariant_cast<qint8>(value(*settingLayoutExportFormat, 0)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

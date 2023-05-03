@@ -487,24 +487,7 @@ void MainWindowsNoGUI::ExportData(const QVector<VLayoutPiece> &listDetails)
 {
     const LayoutExportFormats format = m_dialogSaveLayout->Format();
 
-    if (format == LayoutExportFormats::DXF_AC1006_AAMA ||
-        format == LayoutExportFormats::DXF_AC1009_AAMA ||
-        format == LayoutExportFormats::DXF_AC1012_AAMA ||
-        format == LayoutExportFormats::DXF_AC1014_AAMA ||
-        format == LayoutExportFormats::DXF_AC1015_AAMA ||
-        format == LayoutExportFormats::DXF_AC1018_AAMA ||
-        format == LayoutExportFormats::DXF_AC1021_AAMA ||
-        format == LayoutExportFormats::DXF_AC1024_AAMA ||
-        format == LayoutExportFormats::DXF_AC1027_AAMA ||
-        format == LayoutExportFormats::DXF_AC1006_ASTM ||
-        format == LayoutExportFormats::DXF_AC1009_ASTM ||
-        format == LayoutExportFormats::DXF_AC1012_ASTM ||
-        format == LayoutExportFormats::DXF_AC1014_ASTM ||
-        format == LayoutExportFormats::DXF_AC1015_ASTM ||
-        format == LayoutExportFormats::DXF_AC1018_ASTM ||
-        format == LayoutExportFormats::DXF_AC1021_ASTM ||
-        format == LayoutExportFormats::DXF_AC1024_ASTM ||
-        format == LayoutExportFormats::DXF_AC1027_ASTM ||
+    if (format == LayoutExportFormats::DXF_AAMA || format == LayoutExportFormats::DXF_ASTM ||
         format == LayoutExportFormats::RLD)
     {
         if (m_dialogSaveLayout->Mode() == Draw::Layout)
@@ -675,76 +658,12 @@ void MainWindowsNoGUI::ExportApparelLayout(const QVector<VLayoutPiece> &details,
 
     switch (format)
     {
-        case LayoutExportFormats::DXF_AC1006_ASTM:
-            exporter.SetDxfVersion(DRW::AC1006);
-            exporter.ExportToASTMDXF(details);
-            break;
-        case LayoutExportFormats::DXF_AC1009_ASTM:
+        case LayoutExportFormats::DXF_ASTM:
             exporter.SetDxfVersion(DRW::AC1009);
             exporter.ExportToASTMDXF(details);
             break;
-        case LayoutExportFormats::DXF_AC1012_ASTM:
-            exporter.SetDxfVersion(DRW::AC1012);
-            exporter.ExportToASTMDXF(details);
-            break;
-        case LayoutExportFormats::DXF_AC1014_ASTM:
-            exporter.SetDxfVersion(DRW::AC1014);
-            exporter.ExportToASTMDXF(details);
-            break;
-        case LayoutExportFormats::DXF_AC1015_ASTM:
-            exporter.SetDxfVersion(DRW::AC1015);
-            exporter.ExportToASTMDXF(details);
-            break;
-        case LayoutExportFormats::DXF_AC1018_ASTM:
-            exporter.SetDxfVersion(DRW::AC1018);
-            exporter.ExportToASTMDXF(details);
-            break;
-        case LayoutExportFormats::DXF_AC1021_ASTM:
-            exporter.SetDxfVersion(DRW::AC1021);
-            exporter.ExportToASTMDXF(details);
-            break;
-        case LayoutExportFormats::DXF_AC1024_ASTM:
-            exporter.SetDxfVersion(DRW::AC1024);
-            exporter.ExportToASTMDXF(details);
-            break;
-        case LayoutExportFormats::DXF_AC1027_ASTM:
-            exporter.SetDxfVersion(DRW::AC1027);
-            exporter.ExportToASTMDXF(details);
-            break;
-        case LayoutExportFormats::DXF_AC1006_AAMA:
-            exporter.SetDxfVersion(DRW::AC1006);
-            exporter.ExportToAAMADXF(details);
-            break;
-        case LayoutExportFormats::DXF_AC1009_AAMA:
+        case LayoutExportFormats::DXF_AAMA:
             exporter.SetDxfVersion(DRW::AC1009);
-            exporter.ExportToAAMADXF(details);
-            break;
-        case LayoutExportFormats::DXF_AC1012_AAMA:
-            exporter.SetDxfVersion(DRW::AC1012);
-            exporter.ExportToAAMADXF(details);
-            break;
-        case LayoutExportFormats::DXF_AC1014_AAMA:
-            exporter.SetDxfVersion(DRW::AC1014);
-            exporter.ExportToAAMADXF(details);
-            break;
-        case LayoutExportFormats::DXF_AC1015_AAMA:
-            exporter.SetDxfVersion(DRW::AC1015);
-            exporter.ExportToAAMADXF(details);
-            break;
-        case LayoutExportFormats::DXF_AC1018_AAMA:
-            exporter.SetDxfVersion(DRW::AC1018);
-            exporter.ExportToAAMADXF(details);
-            break;
-        case LayoutExportFormats::DXF_AC1021_AAMA:
-            exporter.SetDxfVersion(DRW::AC1021);
-            exporter.ExportToAAMADXF(details);
-            break;
-        case LayoutExportFormats::DXF_AC1024_AAMA:
-            exporter.SetDxfVersion(DRW::AC1024);
-            exporter.ExportToAAMADXF(details);
-            break;
-        case LayoutExportFormats::DXF_AC1027_AAMA:
-            exporter.SetDxfVersion(DRW::AC1027);
             exporter.ExportToAAMADXF(details);
             break;
         case LayoutExportFormats::RLD:

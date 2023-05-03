@@ -699,7 +699,7 @@ void VValentinaSettings::SetToolPanelScaling(const bool &value)
 //---------------------------------------------------------------------------------------------------------------------
 auto VValentinaSettings::GetLayoutExportFormat() const -> qint8
 {
-    return qvariant_cast<qint8>(value(*settingLayoutExportFormat, 0));
+    return CastToLayoutExportFormat(qvariant_cast<qint8>(value(*settingLayoutExportFormat, 0)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -711,7 +711,7 @@ void VValentinaSettings::SetLayoutExportFormat(qint8 format)
 //---------------------------------------------------------------------------------------------------------------------
 auto VValentinaSettings::GetDetailExportFormat() const -> qint8
 {
-    return qvariant_cast<qint8>(value(*settingDetailExportFormat, 0));
+    return CastToLayoutExportFormat(qvariant_cast<qint8>(value(*settingDetailExportFormat, 0)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

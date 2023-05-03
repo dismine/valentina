@@ -186,24 +186,8 @@ void DialogSaveManualLayout::SetBinaryDXFFormat(bool binary)
         case LayoutExportFormats::DXF_AC1021_Flat:
         case LayoutExportFormats::DXF_AC1024_Flat:
         case LayoutExportFormats::DXF_AC1027_Flat:
-        case LayoutExportFormats::DXF_AC1006_AAMA:
-        case LayoutExportFormats::DXF_AC1009_AAMA:
-        case LayoutExportFormats::DXF_AC1012_AAMA:
-        case LayoutExportFormats::DXF_AC1014_AAMA:
-        case LayoutExportFormats::DXF_AC1015_AAMA:
-        case LayoutExportFormats::DXF_AC1018_AAMA:
-        case LayoutExportFormats::DXF_AC1021_AAMA:
-        case LayoutExportFormats::DXF_AC1024_AAMA:
-        case LayoutExportFormats::DXF_AC1027_AAMA:
-        case LayoutExportFormats::DXF_AC1006_ASTM:
-        case LayoutExportFormats::DXF_AC1009_ASTM:
-        case LayoutExportFormats::DXF_AC1012_ASTM:
-        case LayoutExportFormats::DXF_AC1014_ASTM:
-        case LayoutExportFormats::DXF_AC1015_ASTM:
-        case LayoutExportFormats::DXF_AC1018_ASTM:
-        case LayoutExportFormats::DXF_AC1021_ASTM:
-        case LayoutExportFormats::DXF_AC1024_ASTM:
-        case LayoutExportFormats::DXF_AC1027_ASTM:
+        case LayoutExportFormats::DXF_AAMA:
+        case LayoutExportFormats::DXF_ASTM:
             ui->checkBoxBinaryDXF->setChecked(binary);
             break;
         default:
@@ -226,24 +210,8 @@ auto DialogSaveManualLayout::IsBinaryDXFFormat() const -> bool
         case LayoutExportFormats::DXF_AC1021_Flat:
         case LayoutExportFormats::DXF_AC1024_Flat:
         case LayoutExportFormats::DXF_AC1027_Flat:
-        case LayoutExportFormats::DXF_AC1006_AAMA:
-        case LayoutExportFormats::DXF_AC1009_AAMA:
-        case LayoutExportFormats::DXF_AC1012_AAMA:
-        case LayoutExportFormats::DXF_AC1014_AAMA:
-        case LayoutExportFormats::DXF_AC1015_AAMA:
-        case LayoutExportFormats::DXF_AC1018_AAMA:
-        case LayoutExportFormats::DXF_AC1021_AAMA:
-        case LayoutExportFormats::DXF_AC1024_AAMA:
-        case LayoutExportFormats::DXF_AC1027_AAMA:
-        case LayoutExportFormats::DXF_AC1006_ASTM:
-        case LayoutExportFormats::DXF_AC1009_ASTM:
-        case LayoutExportFormats::DXF_AC1012_ASTM:
-        case LayoutExportFormats::DXF_AC1014_ASTM:
-        case LayoutExportFormats::DXF_AC1015_ASTM:
-        case LayoutExportFormats::DXF_AC1018_ASTM:
-        case LayoutExportFormats::DXF_AC1021_ASTM:
-        case LayoutExportFormats::DXF_AC1024_ASTM:
-        case LayoutExportFormats::DXF_AC1027_ASTM:
+        case LayoutExportFormats::DXF_AAMA:
+        case LayoutExportFormats::DXF_ASTM:
             return ui->checkBoxBinaryDXF->isChecked();
         default:
             return false;
@@ -504,24 +472,8 @@ void DialogSaveManualLayout::ShowExample()
 
     switch(currentFormat)
     {
-        case LayoutExportFormats::DXF_AC1006_AAMA:
-        case LayoutExportFormats::DXF_AC1009_AAMA:
-        case LayoutExportFormats::DXF_AC1012_AAMA:
-        case LayoutExportFormats::DXF_AC1014_AAMA:
-        case LayoutExportFormats::DXF_AC1015_AAMA:
-        case LayoutExportFormats::DXF_AC1018_AAMA:
-        case LayoutExportFormats::DXF_AC1021_AAMA:
-        case LayoutExportFormats::DXF_AC1024_AAMA:
-        case LayoutExportFormats::DXF_AC1027_AAMA:
-        case LayoutExportFormats::DXF_AC1006_ASTM:
-        case LayoutExportFormats::DXF_AC1009_ASTM:
-        case LayoutExportFormats::DXF_AC1012_ASTM:
-        case LayoutExportFormats::DXF_AC1014_ASTM:
-        case LayoutExportFormats::DXF_AC1015_ASTM:
-        case LayoutExportFormats::DXF_AC1018_ASTM:
-        case LayoutExportFormats::DXF_AC1021_ASTM:
-        case LayoutExportFormats::DXF_AC1024_ASTM:
-        case LayoutExportFormats::DXF_AC1027_ASTM:
+        case LayoutExportFormats::DXF_AAMA:
+        case LayoutExportFormats::DXF_ASTM:
             ui->checkBoxBinaryDXF->setEnabled(true);
             ui->checkBoxShowGrainline->setEnabled(false);
             break;
@@ -600,24 +552,8 @@ auto DialogSaveManualLayout::InitFormats() -> QVector<std::pair<QString, LayoutE
     InitFormat(LayoutExportFormats::DXF_AC1021_Flat);
     InitFormat(LayoutExportFormats::DXF_AC1024_Flat);
     InitFormat(LayoutExportFormats::DXF_AC1027_Flat);
-    InitFormat(LayoutExportFormats::DXF_AC1006_AAMA);
-    InitFormat(LayoutExportFormats::DXF_AC1009_AAMA);
-    InitFormat(LayoutExportFormats::DXF_AC1012_AAMA);
-    InitFormat(LayoutExportFormats::DXF_AC1014_AAMA);
-    InitFormat(LayoutExportFormats::DXF_AC1015_AAMA);
-    InitFormat(LayoutExportFormats::DXF_AC1018_AAMA);
-    InitFormat(LayoutExportFormats::DXF_AC1021_AAMA);
-    InitFormat(LayoutExportFormats::DXF_AC1024_AAMA);
-    InitFormat(LayoutExportFormats::DXF_AC1027_AAMA);
-    InitFormat(LayoutExportFormats::DXF_AC1006_ASTM);
-    InitFormat(LayoutExportFormats::DXF_AC1009_ASTM);
-    InitFormat(LayoutExportFormats::DXF_AC1012_ASTM);
-    InitFormat(LayoutExportFormats::DXF_AC1014_ASTM);
-    InitFormat(LayoutExportFormats::DXF_AC1015_ASTM);
-    InitFormat(LayoutExportFormats::DXF_AC1018_ASTM);
-    InitFormat(LayoutExportFormats::DXF_AC1021_ASTM);
-    InitFormat(LayoutExportFormats::DXF_AC1024_ASTM);
-    InitFormat(LayoutExportFormats::DXF_AC1027_ASTM);
+    InitFormat(LayoutExportFormats::DXF_AAMA);
+    InitFormat(LayoutExportFormats::DXF_ASTM);
     InitFormat(LayoutExportFormats::PDFTiled);
 //    InitFormat(LayoutExportFormats::NC);
     InitFormat(LayoutExportFormats::RLD);

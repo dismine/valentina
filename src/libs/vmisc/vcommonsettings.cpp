@@ -375,6 +375,22 @@ auto VCommonSettings::PrepareLabelTemplates(const QString &currentPath) -> QStri
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::CastToLayoutExportFormat(qint8 f) -> qint8
+{
+    qint8 format = f;
+    if (f == 15 || (f > 16 && f < 23))
+    {
+        format = 16;
+    }
+    else if (f == 24 || (f > 26 && f < 33))
+    {
+        format = 26;
+    }
+
+    return format;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VCommonSettings::GetDefPathIndividualMeasurements() -> QString
 {
     return QDir::homePath() + QStringLiteral("/valentina/") + tr("measurements") + QStringLiteral("/") +

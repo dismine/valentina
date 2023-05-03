@@ -40,16 +40,15 @@
 #include <QGraphicsItem>
 #include <QImageWriter>
 
-#include "../vmisc/vmath.h"
-#include "../vmisc/defglobal.h"
-#include "../vmisc/def.h"
-#include "../vobj/vobjpaintdevice.h"
-#include "../vdxf/vdxfpaintdevice.h"
-#include "vrawlayout.h"
-#include "../vmisc/vabstractvalapplication.h"
 #include "../ifc/exception/vexception.h"
-#include "vprintlayout.h"
+#include "../vdxf/vdxfpaintdevice.h"
+#include "../vmisc/def.h"
+#include "../vmisc/defglobal.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vobj/vobjpaintdevice.h"
 #include "vgraphicsfillitem.h"
+#include "vprintlayout.h"
+#include "vrawlayout.h"
 
 namespace
 {
@@ -536,42 +535,10 @@ auto VLayoutExporter::ExportFormatDescription(LayoutExportFormats format) -> QSt
             return QStringLiteral("AutoCAD DXF 2010 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
         case LayoutExportFormats::DXF_AC1027_Flat:
             return QStringLiteral("AutoCAD DXF 2013 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1006_AAMA:
-            return QStringLiteral("AutoCAD DXF R10 AAMA %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1009_AAMA:
-            return QStringLiteral("AutoCAD DXF R11/12 AAMA %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1012_AAMA:
-            return QStringLiteral("AutoCAD DXF R13 AAMA %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1014_AAMA:
-            return QStringLiteral("AutoCAD DXF R14 AAMA %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1015_AAMA:
-            return QStringLiteral("AutoCAD DXF 2000 AAMA %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1018_AAMA:
-            return QStringLiteral("AutoCAD DXF 2004 AAMA %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1021_AAMA:
-            return QStringLiteral("AutoCAD DXF 2007 AAMA %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1024_AAMA:
-            return QStringLiteral("AutoCAD DXF 2010 AAMA %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1027_AAMA:
-            return QStringLiteral("AutoCAD DXF 2013 AAMA %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1006_ASTM:
-            return QStringLiteral("AutoCAD DXF R10 ASTM %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1009_ASTM:
-            return QStringLiteral("AutoCAD DXF R11/12 ASTM %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1012_ASTM:
-            return QStringLiteral("AutoCAD DXF R13 ASTM %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1014_ASTM:
-            return QStringLiteral("AutoCAD DXF R14 ASTM %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1015_ASTM:
-            return QStringLiteral("AutoCAD DXF 2000 ASTM %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1018_ASTM:
-            return QStringLiteral("AutoCAD DXF 2004 ASTM %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1021_ASTM:
-            return QStringLiteral("AutoCAD DXF 2007 ASTM %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1024_ASTM:
-            return QStringLiteral("AutoCAD DXF 2010 ASTM %1 %2").arg(filesStr, dxfSuffix);
-        case LayoutExportFormats::DXF_AC1027_ASTM:
-            return QStringLiteral("AutoCAD DXF 2013 ASTM %1 %2").arg(filesStr, dxfSuffix);
+        case LayoutExportFormats::DXF_AAMA:
+            return QStringLiteral("AutoCAD DXF AAMA %1 %2").arg(filesStr, dxfSuffix);
+        case LayoutExportFormats::DXF_ASTM:
+            return QStringLiteral("AutoCAD DXF ASTM %1 %2").arg(filesStr, dxfSuffix);
         case LayoutExportFormats::PDFTiled:
             return QStringLiteral("PDF %1 %2 (*.pdf)").arg(tr("tiled"), filesStr);
         case LayoutExportFormats::NC:
@@ -581,7 +548,7 @@ auto VLayoutExporter::ExportFormatDescription(LayoutExportFormats format) -> QSt
         case LayoutExportFormats::TIF:
             return QStringLiteral("TIFF %1 (*.tif)").arg(filesStr);
         default:
-            return QString();
+            return {};
     }
 }
 
@@ -612,24 +579,8 @@ auto VLayoutExporter::ExportFormatSuffix(LayoutExportFormats format) -> QString
         case LayoutExportFormats::DXF_AC1021_Flat:
         case LayoutExportFormats::DXF_AC1024_Flat:
         case LayoutExportFormats::DXF_AC1027_Flat:
-        case LayoutExportFormats::DXF_AC1006_AAMA:
-        case LayoutExportFormats::DXF_AC1009_AAMA:
-        case LayoutExportFormats::DXF_AC1012_AAMA:
-        case LayoutExportFormats::DXF_AC1014_AAMA:
-        case LayoutExportFormats::DXF_AC1015_AAMA:
-        case LayoutExportFormats::DXF_AC1018_AAMA:
-        case LayoutExportFormats::DXF_AC1021_AAMA:
-        case LayoutExportFormats::DXF_AC1024_AAMA:
-        case LayoutExportFormats::DXF_AC1027_AAMA:
-        case LayoutExportFormats::DXF_AC1006_ASTM:
-        case LayoutExportFormats::DXF_AC1009_ASTM:
-        case LayoutExportFormats::DXF_AC1012_ASTM:
-        case LayoutExportFormats::DXF_AC1014_ASTM:
-        case LayoutExportFormats::DXF_AC1015_ASTM:
-        case LayoutExportFormats::DXF_AC1018_ASTM:
-        case LayoutExportFormats::DXF_AC1021_ASTM:
-        case LayoutExportFormats::DXF_AC1024_ASTM:
-        case LayoutExportFormats::DXF_AC1027_ASTM:
+        case LayoutExportFormats::DXF_AAMA:
+        case LayoutExportFormats::DXF_ASTM:
             return QStringLiteral(".dxf");
         case LayoutExportFormats::NC:
             return QStringLiteral(".nc");
@@ -638,7 +589,7 @@ auto VLayoutExporter::ExportFormatSuffix(LayoutExportFormats format) -> QString
         case LayoutExportFormats::TIF:
             return QStringLiteral(".tif");
         default:
-            return QString();
+            return {};
     }
 }
 
