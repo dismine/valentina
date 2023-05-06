@@ -127,6 +127,7 @@ const QString VAbstractPattern::AttrNodePassmark      = QStringLiteral("passmark
 const QString VAbstractPattern::AttrNodePassmarkLine  = QStringLiteral("passmarkLine");
 const QString VAbstractPattern::AttrNodePassmarkAngle = QStringLiteral("passmarkAngle");
 const QString VAbstractPattern::AttrNodeShowSecondPassmark = QStringLiteral("showSecondPassmark");
+const QString VAbstractPattern::AttrNodePassmarkOpening = QStringLiteral("passmarkClockwiseOpening");
 const QString VAbstractPattern::AttrNodeTurnPoint     = QStringLiteral("turnPoint");
 const QString VAbstractPattern::AttrSABefore          = QStringLiteral("before");
 const QString VAbstractPattern::AttrSAAfter           = QStringLiteral("after");
@@ -139,6 +140,10 @@ const QString VAbstractPattern::AttrNumber            = QStringLiteral("number")
 const QString VAbstractPattern::AttrCheckUniqueness   = QStringLiteral("checkUniqueness");
 const QString VAbstractPattern::AttrManualPassmarkLength = QStringLiteral("manualPassmarkLength");
 const QString VAbstractPattern::AttrPassmarkLength    = QStringLiteral("passmarkLength");
+const QString VAbstractPattern::AttrManualPassmarkWidth = QStringLiteral("manualPassmarkWidth");
+const QString VAbstractPattern::AttrPassmarkWidth = QStringLiteral("passmarkWidth");
+const QString VAbstractPattern::AttrManualPassmarkAngle = QStringLiteral("manualPassmarkAngle");
+const QString VAbstractPattern::AttrPassmarkAngle = QStringLiteral("passmarkAngleFormula");
 const QString VAbstractPattern::AttrOpacity           = QStringLiteral("opacity");
 const QString VAbstractPattern::AttrTags              = QStringLiteral("tags");
 const QString VAbstractPattern::AttrTransform         = QStringLiteral("transform");
@@ -786,27 +791,36 @@ auto VAbstractPattern::ParseSANode(const QDomElement &domElement) -> VPieceNode
     const bool reverse = VDomDocument::GetParametrUInt(domElement, VAbstractPattern::AttrNodeReverse, QChar('0'));
     const bool excluded = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrNodeExcluded, falseStr);
     const bool uniqeness = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrCheckUniqueness, trueStr);
-    const QString saBefore = VDomDocument::GetParametrString(domElement, VAbstractPattern::AttrSABefore,
-                                                             currentSeamAllowance);
-    const QString saAfter = VDomDocument::GetParametrString(domElement, VAbstractPattern::AttrSAAfter,
-                                                            currentSeamAllowance);
-    const PieceNodeAngle angle = static_cast<PieceNodeAngle>(VDomDocument::GetParametrUInt(domElement, AttrAngle,
-                                                                                           QChar('0')));
+    const QString saBefore =
+        VDomDocument::GetParametrString(domElement, VAbstractPattern::AttrSABefore, currentSeamAllowance);
+    const QString saAfter =
+        VDomDocument::GetParametrString(domElement, VAbstractPattern::AttrSAAfter, currentSeamAllowance);
+    const PieceNodeAngle angle =
+        static_cast<PieceNodeAngle>(VDomDocument::GetParametrUInt(domElement, AttrAngle, QChar('0')));
 
     const bool passmark = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrNodePassmark, falseStr);
-    const PassmarkLineType passmarkLine = StringToPassmarkLineType(VDomDocument::GetParametrString(domElement,
-                                                                                 VAbstractPattern::AttrNodePassmarkLine,
-                                                                                                   strOne));
-    const PassmarkAngleType passmarkAngle = StringToPassmarkAngleType(VDomDocument::GetParametrString(domElement,
-                                                                                VAbstractPattern::AttrNodePassmarkAngle,
-                                                                                                   strStraightforward));
+    const PassmarkLineType passmarkLine = StringToPassmarkLineType(
+        VDomDocument::GetParametrString(domElement, VAbstractPattern::AttrNodePassmarkLine, strOne));
+    const PassmarkAngleType passmarkAngleType = StringToPassmarkAngleType(
+        VDomDocument::GetParametrString(domElement, VAbstractPattern::AttrNodePassmarkAngle, strStraightforward));
 
-    const bool showSecond = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrNodeShowSecondPassmark,
-                                                          trueStr);
+    const bool showSecond =
+        VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrNodeShowSecondPassmark, trueStr);
+    const bool passmarkOpening =
+        VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrNodePassmarkOpening, falseStr);
+
     const bool manualPassmarkLength =
-            VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrManualPassmarkLength, falseStr);
+        VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrManualPassmarkLength, falseStr);
     const QString passmarkLength =
-            VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrPassmarkLength);
+        VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrPassmarkLength);
+
+    const bool manualPassmarkWidth =
+        VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrManualPassmarkWidth, falseStr);
+    const QString passmarkWidth = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrPassmarkWidth);
+
+    const bool manualPassmarkAngle =
+        VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrManualPassmarkAngle, falseStr);
+    const QString passmarkAngle = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrPassmarkAngle);
 
     const bool turnPoint =
         VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrNodeTurnPoint, trueStr);
@@ -850,11 +864,16 @@ auto VAbstractPattern::ParseSANode(const QDomElement &domElement) -> VPieceNode
     node.SetExcluded(excluded);
     node.SetCheckUniqueness(uniqeness);
     node.SetShowSecondPassmark(showSecond);
+    node.SetPassmarkClockwiseOpening(passmarkOpening);
     node.SetPassmark(passmark);
     node.SetPassmarkLineType(passmarkLine);
-    node.SetPassmarkAngleType(passmarkAngle);
+    node.SetPassmarkAngleType(passmarkAngleType);
     node.SetManualPassmarkLength(manualPassmarkLength);
     node.SetFormulaPassmarkLength(passmarkLength);
+    node.SetManualPassmarkWidth(manualPassmarkWidth);
+    node.SetFormulaPassmarkWidth(passmarkWidth);
+    node.SetManualPassmarkAngle(manualPassmarkAngle);
+    node.SetFormulaPassmarkAngle(passmarkAngle);
     node.SetTurnPoint(turnPoint);
 
     return node;
@@ -1315,6 +1334,31 @@ void VAbstractPattern::SetPassmarkLengthVariable(const QString &name)
     if (not pattern.isNull())
     {
         SetAttribute(pattern, AttrPassmarkLength, name);
+        modified = true;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPattern::GetPassmarkWidthVariable() const -> QString
+{
+    const QDomElement pattern = documentElement();
+
+    if (pattern.isNull())
+    {
+        return {};
+    }
+
+    return GetParametrEmptyString(pattern, AttrPassmarkWidth);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetPassmarkWidthVariable(const QString &name)
+{
+    QDomElement pattern = documentElement();
+
+    if (not pattern.isNull())
+    {
+        SetAttribute(pattern, AttrPassmarkWidth, name);
         modified = true;
     }
 }

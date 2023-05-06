@@ -113,6 +113,7 @@ const QString AttrX                    = QStringLiteral("x"); // NOLINT(cert-err
 const QString AttrY                    = QStringLiteral("y"); // NOLINT(cert-err58-cpp)
 const QString AttrTurnPoint            = QStringLiteral("turnPoint"); // NOLINT(cert-err58-cpp)
 const QString AttrCurvePoint           = QStringLiteral("curvePoint"); // NOLINT(cert-err58-cpp)
+const QString AttrClockwiseOpening = QStringLiteral("clockwiseOpening"); // NOLINT(cert-err58-cpp)
 
 const QString oneWayUpStr = QStringLiteral("oneWayUp");                             // NOLINT(cert-err58-cpp)
 const QString oneWayDownStr = QStringLiteral("oneWayDown");                         // NOLINT(cert-err58-cpp)

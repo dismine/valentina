@@ -106,9 +106,9 @@ public:
     auto ListExpressions() const -> QVector<VFormulaField>;
     auto ListIncrementExpressions() const -> QVector<VFormulaField>;
 
-    virtual void   CreateEmptyFile()=0;
+    virtual void CreateEmptyFile() = 0;
 
-    void           ChangeActivPP(const QString& name, const Document &parse = Document::FullParse);
+    void ChangeActivPP(const QString &name, const Document &parse = Document::FullParse);
     auto GetNameActivPP() const -> QString;
     auto CheckExistNamePP(const QString &name) const -> bool;
     auto CountPP() const -> int;
@@ -119,95 +119,98 @@ public:
     auto GetActivNodeElement(const QString &name, QDomElement &element) const -> bool;
 
     auto getCursor() const -> quint32;
-    void           setCursor(const quint32 &value);
+    void setCursor(const quint32 &value);
 
-    virtual void   setXMLContent(const QString &fileName) override;
+    virtual void setXMLContent(const QString &fileName) override;
 
-    virtual void   IncrementReferens(quint32 id) const=0;
-    virtual void   DecrementReferens(quint32 id) const=0;
+    virtual void IncrementReferens(quint32 id) const = 0;
+    virtual void DecrementReferens(quint32 id) const = 0;
 
     virtual auto GenerateLabel(const LabelType &type, const QString &reservedName = QString()) const -> QString = 0;
     virtual auto GenerateSuffix() const -> QString = 0;
 
-    virtual void   UpdateToolData(const quint32 &id, VContainer *data)=0;
+    virtual void UpdateToolData(const quint32 &id, VContainer *data) = 0;
 
     virtual void Clear();
 
     static auto getTool(quint32 id) -> VDataTool *;
-    static void       AddTool(quint32 id, VDataTool *tool);
-    static void       RemoveTool(quint32 id);
+    static void AddTool(quint32 id, VDataTool *tool);
+    static void RemoveTool(quint32 id);
 
     static auto ParsePieceNodes(const QDomElement &domElement) -> VPiecePath;
     static auto ParsePieceCSARecords(const QDomElement &domElement) -> QVector<CustomSARecord>;
     static auto ParsePieceInternalPaths(const QDomElement &domElement) -> QVector<quint32>;
     static auto ParsePiecePointRecords(const QDomElement &domElement) -> QVector<quint32>;
 
-    void           AddToolOnRemove(VDataTool *tool);
+    void AddToolOnRemove(VDataTool *tool);
 
     auto getHistory() -> QVector<VToolRecord> *;
     auto getLocalHistory() const -> QVector<VToolRecord>;
 
     auto MPath() const -> QString;
-    void           SetMPath(const QString &path);
+    void SetMPath(const QString &path);
 
     auto SiblingNodeId(const quint32 &nodeId) const -> quint32;
 
     auto getPatternPieces() const -> QStringList;
 
     auto GetDescription() const -> QString;
-    void           SetDescription(const QString &text);
+    void SetDescription(const QString &text);
 
     auto GetNotes() const -> QString;
-    void           SetNotes(const QString &text);
+    void SetNotes(const QString &text);
 
     auto GetPatternName() const -> QString;
-    void           SetPatternName(const QString& qsName);
+    void SetPatternName(const QString &qsName);
 
     auto GetCompanyName() const -> QString;
-    void           SetCompanyName(const QString& qsName);
+    void SetCompanyName(const QString &qsName);
 
     auto GetPatternNumber() const -> QString;
-    void           SetPatternNumber(const QString &qsNum);
+    void SetPatternNumber(const QString &qsNum);
 
     auto GetCustomerName() const -> QString;
-    void           SetCustomerName(const QString& qsName);
+    void SetCustomerName(const QString &qsName);
 
     auto GetCustomerBirthDate() const -> QDate;
-    void           SetCustomerBirthDate(const QDate& date);
+    void SetCustomerBirthDate(const QDate &date);
 
     auto GetCustomerEmail() const -> QString;
-    void           SetCustomerEmail(const QString& email);
+    void SetCustomerEmail(const QString &email);
 
     auto GetLabelDateFormat() const -> QString;
-    void           SetLabelDateFormat(const QString &format);
+    void SetLabelDateFormat(const QString &format);
 
     auto GetLabelTimeFormat() const -> QString;
-    void           SetLabelTimeFormat(const QString &format);
+    void SetLabelTimeFormat(const QString &format);
 
-    void                        SetPatternLabelTemplate(const QVector<VLabelTemplateLine> &lines);
+    void SetPatternLabelTemplate(const QVector<VLabelTemplateLine> &lines);
     auto GetPatternLabelTemplate() const -> QVector<VLabelTemplateLine>;
 
     auto SetWatermarkPath(const QString &path) -> bool;
     auto GetWatermarkPath() const -> QString;
 
-    void               SetPatternMaterials(const QMap<int, QString> &materials);
+    void SetPatternMaterials(const QMap<int, QString> &materials);
     auto GetPatternMaterials() const -> QMap<int, QString>;
 
     auto GetFinalMeasurements() const -> QVector<VFinalMeasurement>;
-    void                       SetFinalMeasurements(const QVector<VFinalMeasurement> &measurements);
+    void SetFinalMeasurements(const QVector<VFinalMeasurement> &measurements);
 
     auto GetDefaultPieceLabelPath() const -> QString;
-    void    SetDefaultPieceLabelPath(const QString &path);
+    void SetDefaultPieceLabelPath(const QString &path);
 
     void SetPatternWasChanged(bool changed);
     auto GetPatternWasChanged() const -> bool;
 
     auto GetPassmarkLengthVariable() const -> QString;
-    void    SetPassmarkLengthVariable(const QString &name);
+    void SetPassmarkLengthVariable(const QString &name);
+
+    auto GetPassmarkWidthVariable() const -> QString;
+    void SetPassmarkWidthVariable(const QString &name);
 
     auto GetImage() const -> VPatternImage;
     auto SetImage(const VPatternImage &image) -> bool;
-    void           DeleteImage();
+    void DeleteImage();
 
     auto GetBackgroundImages() const -> QVector<VBackgroundPatternImage>;
     void SaveBackgroundImages(const QVector<VBackgroundPatternImage> &images);
@@ -216,24 +219,24 @@ public:
     void DeleteBackgroundImage(const QUuid &id);
 
     auto GetVersion() const -> QString;
-    void           SetVersion();
+    void SetVersion();
 
     auto IsModified() const -> bool;
-    void           SetModified(bool modified);
+    void SetModified(bool modified);
 
     auto GetDraw(const QString &name) const -> QDomElement;
 
-    void           ParseGroups(const QDomElement &domElement);
+    void ParseGroups(const QDomElement &domElement);
     auto CreateGroups(const QString &patternPieceName = QString()) -> QDomElement;
     auto CreateGroup(quint32 id, const QString &name, const QStringList &tags, const QMap<quint32, quint32> &groupData,
                      vidtype tool = null_id) -> QDomElement;
     auto GroupLinkedToTool(vidtype toolId) const -> vidtype;
 
     auto GetGroupName(quint32 id) -> QString;
-    void           SetGroupName(quint32 id, const QString &name);
+    void SetGroupName(quint32 id, const QString &name);
 
     auto GetGroupTags(vidtype id) -> QStringList;
-    void           SetGroupTags(quint32 id, const QStringList &tags);
+    void SetGroupTags(quint32 id, const QStringList &tags);
 
     auto GetDimensionAValue() -> double;
     void SetDimensionAValue(double value);
@@ -327,6 +330,7 @@ public:
     static const QString AttrNodePassmarkLine;
     static const QString AttrNodePassmarkAngle;
     static const QString AttrNodeShowSecondPassmark;
+    static const QString AttrNodePassmarkOpening;
     static const QString AttrNodeTurnPoint;
     static const QString AttrSABefore;
     static const QString AttrSAAfter;
@@ -339,6 +343,10 @@ public:
     static const QString AttrCheckUniqueness;
     static const QString AttrManualPassmarkLength;
     static const QString AttrPassmarkLength;
+    static const QString AttrManualPassmarkWidth;
+    static const QString AttrPassmarkWidth;
+    static const QString AttrManualPassmarkAngle;
+    static const QString AttrPassmarkAngle;
     static const QString AttrOpacity;
     static const QString AttrTags;
     static const QString AttrTransform;

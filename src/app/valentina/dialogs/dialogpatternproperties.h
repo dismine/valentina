@@ -79,9 +79,11 @@ private:
     QAction *m_changeImageAction{nullptr};
     QAction *m_saveImageAction{nullptr};
     QAction *m_showImageAction{nullptr};
-    QCompleter *m_completer{nullptr};
+    QCompleter *m_completerLength{nullptr};
+    QCompleter *m_completerWidth{nullptr};
     QStringList m_variables{};
     QString m_oldPassmarkLength{};
+    QString m_oldPassmarkWidth{};
     QPointer<QTemporaryFile> m_tmpImage{};
 
     void SaveDescription();
@@ -90,6 +92,7 @@ private:
     void InitImage();
 
     void ValidatePassmarkLength() const;
+    void ValidatePassmarkWidth() const;
 };
 
 #endif // DIALOGPATTERNPROPERTIES_H

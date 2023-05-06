@@ -212,10 +212,8 @@ auto IntersectionWithCuttingContour(const QVector<QPointF> &cuttingPath, const Q
         *connection = first;
         return true;
     }
-    else
-    {
-        return VAbstractCurve::CurveIntersectAxis(first, FindTipDirection(points), cuttingPath, connection);
-    }
+
+    return VAbstractCurve::CurveIntersectAxis(first, FindTipDirection(points), cuttingPath, connection);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1143,6 +1141,11 @@ auto VPiecePath::PreparePointEkv(const VPieceNode &node, const VContainer *data)
     p.SetAngleType(node.GetAngleType());
     p.SetManualPasskmarkLength(node.IsManualPassmarkLength());
     p.SetPasskmarkLength(node.GetPassmarkLength(data, *data->GetPatternUnit()));
+    p.SetManualPasskmarkWidth(node.IsManualPassmarkWidth());
+    p.SetPasskmarkWidth(node.GetPassmarkWidth(data, *data->GetPatternUnit()));
+    p.SetManualPasskmarkAngle(node.IsManualPassmarkAngle());
+    p.SetPasskmarkAngle(node.GetPassmarkAngle(data));
+    p.SetPassmarkClockwiseOpening(node.IsPassmarkClockwiseOpening());
 
     return p;
 }

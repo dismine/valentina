@@ -293,6 +293,7 @@ auto PrepareSAPassmark(const VPiece &piece, const VContainer *pattern, const VPa
     layoutPassmark.lines = lines;
     layoutPassmark.type = pData.passmarkLineType;
     layoutPassmark.isBuiltIn = false;
+    layoutPassmark.isClockwiseOpening = pData.passmarkSAPoint.IsPassmarkClockwiseOpening();
 
     ok = true;
     return layoutPassmark;
@@ -354,6 +355,7 @@ auto PreapreBuiltInSAPassmark(const VPiece &piece, const VContainer *pattern, co
     layoutPassmark.baseLine = ConstFirst (baseLines);
     layoutPassmark.type = pData.passmarkLineType;
     layoutPassmark.isBuiltIn = true;
+    layoutPassmark.isClockwiseOpening = pData.passmarkSAPoint.IsPassmarkClockwiseOpening();
 
     ok = true;
     return layoutPassmark;

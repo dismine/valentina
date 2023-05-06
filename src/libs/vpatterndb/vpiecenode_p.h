@@ -92,6 +92,8 @@ public:
     QString m_formulaWidthBefore{currentSeamAllowance}; // NOLINT(misc-non-private-member-variables-in-classes)
     QString m_formulaWidthAfter{currentSeamAllowance};  // NOLINT(misc-non-private-member-variables-in-classes)
     QString m_formulaPassmarkLength{};                  // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_formulaPassmarkWidth{};                   // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_formulaPassmarkAngle{};                   // NOLINT(misc-non-private-member-variables-in-classes)
 
     PieceNodeAngle m_angleType{PieceNodeAngle::ByLength}; // NOLINT(misc-non-private-member-variables-in-classes)
 
@@ -100,7 +102,8 @@ public:
     PassmarkAngleType m_passmarkAngleType{// NOLINT(misc-non-private-member-variables-in-classes)
                                           PassmarkAngleType::Straightforward};
 
-    bool m_isShowSecondPassmark{true}; // NOLINT(misc-non-private-member-variables-in-classes)
+    bool m_isShowSecondPassmark{true};        // NOLINT(misc-non-private-member-variables-in-classes)
+    bool m_isPassmarkClockwiseOpening{false}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief m_checkUniqueness need in cases where different points have the same coordinates, become one point.
      * By default the check enabled. Disable it only if in a path cannot be used just one point. For example if
@@ -108,6 +111,8 @@ public:
     bool m_checkUniqueness{true}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     bool m_manualPassmarkLength{false}; // NOLINT(misc-non-private-member-variables-in-classes)
+    bool m_manualPassmarkWidth{false};  // NOLINT(misc-non-private-member-variables-in-classes)
+    bool m_manualPassmarkAngle{false};  // NOLINT(misc-non-private-member-variables-in-classes)
 
     bool m_turnPoint{true}; // NOLINT(misc-non-private-member-variables-in-classes)
 
@@ -115,7 +120,7 @@ private:
     Q_DISABLE_ASSIGN_MOVE(VPieceNodeData) // NOLINT
 
     static constexpr quint32 streamHeader = 0x2198CBC8; // CRC-32Q string "VPieceNodeData"
-    static constexpr quint16 classVersion = 2;
+    static constexpr quint16 classVersion = 3;
 };
 
 // See https://stackoverflow.com/a/46719572/3045403
@@ -133,7 +138,8 @@ inline auto operator<<(QDataStream &out, const VPieceNodeData &p) -> QDataStream
     out << p.m_id << p.m_typeTool << p.m_reverse << p.m_excluded << p.m_isPassmark << p.m_formulaWidthBefore
         << p.m_formulaWidthAfter << p.m_formulaPassmarkLength << p.m_angleType << p.m_passmarkLineType
         << p.m_passmarkAngleType << p.m_isShowSecondPassmark << p.m_checkUniqueness << p.m_manualPassmarkLength
-        << p.m_turnPoint;
+        << p.m_turnPoint << p.m_formulaPassmarkWidth << p.m_formulaPassmarkAngle << p.m_manualPassmarkWidth
+        << p.m_manualPassmarkAngle << p.m_isPassmarkClockwiseOpening;
 
     return out;
 }
@@ -182,6 +188,12 @@ inline auto operator>>(QDataStream &in, VPieceNodeData &p) -> QDataStream &
     if (actualClassVersion >= 2)
     {
         in >> p.m_turnPoint;
+    }
+
+    if (actualClassVersion >= 3)
+    {
+        in >> p.m_formulaPassmarkWidth >> p.m_formulaPassmarkAngle >> p.m_manualPassmarkWidth >>
+            p.m_manualPassmarkAngle >> p.m_isPassmarkClockwiseOpening;
     }
 
     return in;

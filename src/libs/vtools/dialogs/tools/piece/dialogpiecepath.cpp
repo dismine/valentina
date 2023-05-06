@@ -34,9 +34,16 @@
 #include "../../../tools/vtoolseamallowance.h"
 #include "../../support/dialogeditwrongformula.h"
 #include "../vmisc/vmodifierkey.h"
+
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
+#include "../vmisc/backport/qscopeguard.h"
+#else
+#include <QScopeGuard>
+#endif
 
 #include <QMenu>
 #include <QTimer>
@@ -64,7 +71,9 @@ DialogPiecePath::DialogPiecePath(const VContainer *data, quint32 toolId, QWidget
     m_timerWidthBefore(new QTimer(this)),
     m_timerWidthAfter(new QTimer(this)),
     m_timerVisible(new QTimer(this)),
-    m_timerPassmarkLength(new QTimer(this))
+    m_timerPassmarkLength(new QTimer(this)),
+    m_timerPassmarkWidth(new QTimer(this)),
+    m_timerPassmarkAngle(new QTimer(this))
 {
     ui->setupUi(this);
     InitOkCancel(ui);
@@ -265,7 +274,7 @@ void DialogPiecePath::CheckState()
     }
 
     const int tabPassmarksIndex = ui->tabWidget->indexOf(ui->tabPassmarks);
-    if (m_flagFormulaPassmarkLength)
+    if (m_flagFormulaPassmarkLength && m_flagFormulaPassmarkWidth && m_flagFormulaPassmarkAngle)
     {
         ui->tabWidget->setTabIcon(tabPassmarksIndex, QIcon());
     }
@@ -276,7 +285,8 @@ void DialogPiecePath::CheckState()
         ui->tabWidget->setTabIcon(tabPassmarksIndex, icon);
     }
 
-    ui->comboBoxPassmarks->setEnabled(m_flagFormulaPassmarkLength);
+    ui->comboBoxPassmarks->setEnabled(m_flagFormulaPassmarkLength && m_flagFormulaPassmarkWidth &&
+                                      m_flagFormulaPassmarkAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -516,134 +526,72 @@ void DialogPiecePath::PassmarkChanged(int index)
     ui->groupBoxMarkType->setDisabled(true);
     ui->groupBoxAngleType->setDisabled(true);
     ui->groupBoxManualLength->setDisabled(true);
+    ui->groupBoxManualWidth->setDisabled(true);
+    ui->groupBoxManualAngle->setDisabled(true);
 
+    ui->labelEditPassmarkLength->setDisabled(true);
+    ui->labelEditPassmarkWidth->setDisabled(true);
+    ui->labelEditPassmarkAngle->setDisabled(true);
+
+    ui->checkBoxClockwiseOpening->setDisabled(true);
     ui->checkBoxShowSecondPassmark->setDisabled(true);
+
+    ui->checkBoxClockwiseOpening->blockSignals(true);
     ui->checkBoxShowSecondPassmark->blockSignals(true);
 
     ui->groupBoxManualLength->blockSignals(true);
+    ui->groupBoxManualWidth->blockSignals(true);
+    ui->groupBoxManualAngle->blockSignals(true);
     ui->groupBoxMarkType->blockSignals(true);
     ui->groupBoxAngleType->blockSignals(true);
 
+    ui->checkBoxClockwiseOpening->setChecked(false);
+
     ui->groupBoxManualLength->setChecked(false);
+    ui->groupBoxManualWidth->setChecked(false);
+    ui->groupBoxManualAngle->setChecked(false);
 
-    if (index != -1)
-    {
-        const VPiecePath path = CreatePath();
-        const int nodeIndex = path.indexOfNode(ui->comboBoxPassmarks->currentData().toUInt());
-        if (nodeIndex != -1)
+    auto EnableSignals = qScopeGuard(
+        [this]
         {
-            const VPieceNode &node = path.at(nodeIndex);
+            ui->checkBoxClockwiseOpening->blockSignals(false);
+            ui->checkBoxShowSecondPassmark->blockSignals(false);
+            ui->groupBoxManualLength->blockSignals(false);
+            ui->groupBoxManualWidth->blockSignals(false);
+            ui->groupBoxManualAngle->blockSignals(false);
+            ui->groupBoxMarkType->blockSignals(false);
+            ui->groupBoxAngleType->blockSignals(false);
+        });
 
-            // Passmark length
-            ui->groupBoxManualLength->setEnabled(true);
-
-            if (node.IsManualPassmarkLength())
-            {
-                ui->groupBoxManualLength->setChecked(true);
-
-                QString passmarkLength = node.GetFormulaPassmarkLength();
-                passmarkLength = VAbstractApplication::VApp()->TrVars()
-                        ->FormulaToUser(passmarkLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
-                if (passmarkLength.length() > 80)// increase height if needed.
-                {
-                    this->DeployPassmarkLength();
-                }
-
-                if (passmarkLength.isEmpty())
-                {
-                    qreal length = UnitConvertor(1, Unit::Cm, VAbstractValApplication::VApp()->patternUnits());
-                    ui->plainTextEditPassmarkLength->setPlainText(VAbstractApplication::VApp()->LocaleToString(length));
-                }
-                else
-                {
-                    ui->plainTextEditPassmarkLength->setPlainText(passmarkLength);
-                }
-            }
-            else
-            {
-                qreal length = UnitConvertor(1, Unit::Cm, VAbstractValApplication::VApp()->patternUnits());
-                ui->plainTextEditPassmarkLength->setPlainText(VAbstractApplication::VApp()->LocaleToString(length));
-            }
-
-            MoveCursorToEnd(ui->plainTextEditPassmarkLength);
-
-            // Line type
-            ui->groupBoxMarkType->setEnabled(true);
-
-            switch(node.GetPassmarkLineType())
-            {
-                case PassmarkLineType::OneLine:
-                    ui->radioButtonOneLine->setChecked(true);
-                    break;
-                case PassmarkLineType::TwoLines:
-                    ui->radioButtonTwoLines->setChecked(true);
-                    break;
-                case PassmarkLineType::ThreeLines:
-                    ui->radioButtonThreeLines->setChecked(true);
-                    break;
-                case PassmarkLineType::TMark:
-                    ui->radioButtonTMark->setChecked(true);
-                    break;
-                case PassmarkLineType::VMark:
-                    ui->radioButtonVMark->setChecked(true);
-                    break;
-                case PassmarkLineType::VMark2:
-                    ui->radioButtonVMark2->setChecked(true);
-                    break;
-                case PassmarkLineType::UMark:
-                    ui->radioButtonUMark->setChecked(true);
-                    break;
-                case PassmarkLineType::BoxMark:
-                    ui->radioButtonBoxMark->setChecked(true);
-                    break;
-                default:
-                    break;
-            }
-
-            // Angle type
-            ui->groupBoxAngleType->setEnabled(true);
-
-            switch(node.GetPassmarkAngleType())
-            {
-                case PassmarkAngleType::Straightforward:
-                    ui->radioButtonStraightforward->setChecked(true);
-                    break;
-                case PassmarkAngleType::Bisector:
-                    ui->radioButtonBisector->setChecked(true);
-                    break;
-                case PassmarkAngleType::Intersection:
-                    ui->radioButtonIntersection->setChecked(true);
-                    break;
-                case PassmarkAngleType::IntersectionOnlyLeft:
-                    ui->radioButtonIntersectionOnlyLeft->setChecked(true);
-                    break;
-                case PassmarkAngleType::IntersectionOnlyRight:
-                    ui->radioButtonIntersectionOnlyRight->setChecked(true);
-                    break;
-                case PassmarkAngleType::Intersection2:
-                    ui->radioButtonIntersection2->setChecked(true);
-                    break;
-                case PassmarkAngleType::Intersection2OnlyLeft:
-                    ui->radioButtonIntersection2OnlyLeft->setChecked(true);
-                    break;
-                case PassmarkAngleType::Intersection2OnlyRight:
-                    ui->radioButtonIntersection2OnlyRight->setChecked(true);
-                    break;
-                default:
-                    break;
-            }
-
-            // Show the second option
-            ui->checkBoxShowSecondPassmark->setEnabled(true);
-            ui->checkBoxShowSecondPassmark->setChecked(node.IsShowSecondPassmark());
-        }
+    if (index == -1)
+    {
+        return;
     }
 
-    ui->checkBoxShowSecondPassmark->blockSignals(false);
+    const VPiecePath path = CreatePath();
+    const int nodeIndex = path.indexOfNode(ui->comboBoxPassmarks->currentData().toUInt());
+    if (nodeIndex == -1)
+    {
+        return;
+    }
 
-    ui->groupBoxManualLength->blockSignals(false);
-    ui->groupBoxMarkType->blockSignals(false);
-    ui->groupBoxAngleType->blockSignals(false);
+    const VPieceNode &node = path.at(nodeIndex);
+
+    InitPassmarkLengthFormula(node);
+    InitPassmarkWidthFormula(node);
+    InitPassmarkAngleFormula(node);
+    InitPassmarkShapeType(node);
+    InitPassmarkAngleType(node);
+
+    if (node.GetPassmarkLineType() == PassmarkLineType::CheckMark)
+    {
+        ui->checkBoxClockwiseOpening->setEnabled(true);
+        ui->checkBoxClockwiseOpening->setChecked(node.IsPassmarkClockwiseOpening());
+    }
+
+    // Show the second option
+    ui->checkBoxShowSecondPassmark->setEnabled(true);
+    ui->checkBoxShowSecondPassmark->setChecked(node.IsShowSecondPassmark());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -700,11 +648,11 @@ void DialogPiecePath::PassmarkLineTypeChanged(int id)
             }
             else if (id == ui->buttonGroupMarkType->id(ui->radioButtonVMark))
             {
-                lineType = PassmarkLineType::VMark;
+                lineType = PassmarkLineType::ExternalVMark;
             }
             else if (id == ui->buttonGroupMarkType->id(ui->radioButtonVMark2))
             {
-                lineType = PassmarkLineType::VMark2;
+                lineType = PassmarkLineType::InternalVMark;
             }
             else if (id == ui->buttonGroupMarkType->id(ui->radioButtonUMark))
             {
@@ -713,6 +661,10 @@ void DialogPiecePath::PassmarkLineTypeChanged(int id)
             else if (id == ui->buttonGroupMarkType->id(ui->radioButtonBoxMark))
             {
                 lineType = PassmarkLineType::BoxMark;
+            }
+            else if (id == ui->buttonGroupMarkType->id(ui->radioButtonCheckMark))
+            {
+                lineType = PassmarkLineType::CheckMark;
             }
 
             rowNode.SetPassmarkLineType(lineType);
@@ -789,6 +741,24 @@ void DialogPiecePath::PassmarkShowSecondChanged(int state)
         {
             auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
             rowNode.SetShowSecondPassmark(state);
+            rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+
+            ListChanged();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::PassmarkClockwiseOrientationChanged(int state)
+{
+    const int i = ui->comboBoxPassmarks->currentIndex();
+    if (i != -1)
+    {
+        QListWidgetItem *rowItem = GetItemById(ui->comboBoxPassmarks->currentData().toUInt());
+        if (rowItem)
+        {
+            auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+            rowNode.SetPassmarkClockwiseOpening(state);
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
 
             ListChanged();
@@ -913,19 +883,94 @@ void DialogPiecePath::EvalVisible()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::EvalPassmarkLength()
 {
-    FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditPassmarkLength->toPlainText();
-    formulaData.variables = data->DataVariables();
-    formulaData.labelEditFormula = ui->labelEditPassmarkLength;
-    formulaData.labelResult = ui->labelResultPassmarkLength;
-    formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-    formulaData.checkZero = false;
-    formulaData.checkLessThanZero = false;
+    if (ui->groupBoxManualLength->isChecked())
+    {
+        if (ui->comboBoxPassmarks->count() > 0)
+        {
+            FormulaData formulaData;
+            formulaData.formula = ui->plainTextEditPassmarkLength->toPlainText();
+            formulaData.variables = data->DataVariables();
+            formulaData.labelEditFormula = ui->labelEditPassmarkLength;
+            formulaData.labelResult = ui->labelResultPassmarkLength;
+            formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+            formulaData.checkZero = true;
+            formulaData.checkLessThanZero = true;
 
-    Eval(formulaData, m_flagFormulaPassmarkLength);
+            Eval(formulaData, m_flagFormulaPassmarkLength);
 
-    UpdateNodePassmarkLength(VTranslateVars::TryFormulaFromUser(
-        ui->plainTextEditPassmarkLength->toPlainText(), VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+            UpdateNodePassmarkLength(
+                VTranslateVars::TryFormulaFromUser(ui->plainTextEditPassmarkLength->toPlainText(),
+                                                   VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+        }
+        else
+        {
+            ChangeColor(ui->labelEditPassmarkLength, OkColor(this));
+            ui->labelResultPassmarkLength->setText(tr("<Empty>"));
+            m_flagFormulaPassmarkLength = true;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::EvalPassmarkWidth()
+{
+    if (ui->groupBoxManualWidth->isChecked())
+    {
+        if (ui->comboBoxPassmarks->count() > 0)
+        {
+            FormulaData formulaData;
+            formulaData.formula = ui->plainTextEditPassmarkWidth->toPlainText();
+            formulaData.variables = data->DataVariables();
+            formulaData.labelEditFormula = ui->labelEditPassmarkWidth;
+            formulaData.labelResult = ui->labelResultPassmarkWidth;
+            formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+            formulaData.checkZero = true;
+            formulaData.checkLessThanZero = false;
+
+            Eval(formulaData, m_flagFormulaPassmarkWidth);
+
+            UpdateNodePassmarkWidth(
+                VTranslateVars::TryFormulaFromUser(ui->plainTextEditPassmarkWidth->toPlainText(),
+                                                   VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+        }
+        else
+        {
+            ChangeColor(ui->labelEditPassmarkWidth, OkColor(this));
+            ui->labelResultPassmarkWidth->setText(tr("<Empty>"));
+            m_flagFormulaPassmarkWidth = true;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::EvalPassmarkAngle()
+{
+    if (ui->groupBoxManualWidth->isChecked())
+    {
+        if (ui->comboBoxPassmarks->count() > 0)
+        {
+            FormulaData formulaData;
+            formulaData.formula = ui->plainTextEditPassmarkAngle->toPlainText();
+            formulaData.variables = data->DataVariables();
+            formulaData.labelEditFormula = ui->labelEditPassmarkAngle;
+            formulaData.labelResult = ui->labelResultPassmarkAngle;
+            formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+            formulaData.checkZero = false;
+            formulaData.checkLessThanZero = false;
+
+            Eval(formulaData, m_flagFormulaPassmarkAngle);
+
+            UpdateNodePassmarkAngle(
+                VTranslateVars::TryFormulaFromUser(ui->plainTextEditPassmarkAngle->toPlainText(),
+                                                   VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+        }
+        else
+        {
+            ChangeColor(ui->labelEditPassmarkAngle, OkColor(this));
+            ui->labelResultPassmarkAngle->setText(tr("<Empty>"));
+            m_flagFormulaPassmarkAngle = true;
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -996,6 +1041,32 @@ void DialogPiecePath::FXPassmarkLength()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::FXPassmarkWidth()
+{
+    QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
+    dialog->setWindowTitle(tr("Edit passmark width"));
+    dialog->SetFormula(GetFormulaPassmarkWidth());
+    dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        SetFormulaPassmarkWidth(dialog->GetFormula());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::FXPassmarkAngle()
+{
+    QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
+    dialog->setWindowTitle(tr("Edit passmark angle"));
+    dialog->SetFormula(GetFormulaPassmarkAngle());
+    dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        SetFormulaPassmarkAngle(dialog->GetFormula());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::DeployWidthFormulaTextEdit()
 {
     DeployFormula(this, ui->plainTextEditFormulaWidth, ui->pushButtonGrowWidth, m_formulaBaseWidth);
@@ -1023,6 +1094,18 @@ void DialogPiecePath::DeployVisibleFormulaTextEdit()
 void DialogPiecePath::DeployPassmarkLength()
 {
     DeployFormula(this, ui->plainTextEditPassmarkLength, ui->pushButtonGrowPassmarkLength, m_formulaBasePassmarkLength);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::DeployPassmarkWidth()
+{
+    DeployFormula(this, ui->plainTextEditPassmarkWidth, ui->pushButtonGrowPassmarkWidth, m_formulaBasePassmarkWidth);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::DeployPassmarkAngle()
+{
+    DeployFormula(this, ui->plainTextEditPassmarkAngle, ui->pushButtonGrowPassmarkAngle, m_formulaBasePassmarkAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1171,14 +1254,43 @@ void DialogPiecePath::InitSeamAllowanceTab()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::InitPassmarksTab()
 {
+    // Length formula
     this->m_formulaBasePassmarkLength = ui->plainTextEditPassmarkLength->height();
     ui->plainTextEditPassmarkLength->installEventFilter(this);
-
     m_timerPassmarkLength->setSingleShot(true);
+
     connect(m_timerPassmarkLength, &QTimer::timeout, this, &DialogPiecePath::EvalPassmarkLength);
-
     connect(ui->groupBoxManualLength, &QGroupBox::toggled, this, &DialogPiecePath::EnabledManualPassmarkLength);
+    connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogPiecePath::FXPassmarkLength);
+    connect(ui->plainTextEditPassmarkLength, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerPassmarkLength->start(formulaTimerTimeout); });
+    connect(ui->pushButtonGrowPassmarkLength, &QPushButton::clicked, this, &DialogPiecePath::DeployPassmarkLength);
 
+    // Width formula
+    this->m_formulaBasePassmarkWidth = ui->plainTextEditPassmarkWidth->height();
+    ui->plainTextEditPassmarkWidth->installEventFilter(this);
+    m_timerPassmarkWidth->setSingleShot(true);
+
+    connect(m_timerPassmarkWidth, &QTimer::timeout, this, &DialogPiecePath::EvalPassmarkWidth);
+    connect(ui->groupBoxManualWidth, &QGroupBox::toggled, this, &DialogPiecePath::EnabledManualPassmarkWidth);
+    connect(ui->toolButtonExprWidth, &QPushButton::clicked, this, &DialogPiecePath::FXPassmarkWidth);
+    connect(ui->plainTextEditPassmarkWidth, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerPassmarkWidth->start(formulaTimerTimeout); });
+    connect(ui->pushButtonGrowPassmarkWidth, &QPushButton::clicked, this, &DialogPiecePath::DeployPassmarkWidth);
+
+    // Angle formula
+    this->m_formulaBasePassmarkAngle = ui->plainTextEditPassmarkAngle->height();
+    ui->plainTextEditPassmarkAngle->installEventFilter(this);
+    m_timerPassmarkAngle->setSingleShot(true);
+
+    connect(m_timerPassmarkAngle, &QTimer::timeout, this, &DialogPiecePath::EvalPassmarkAngle);
+    connect(ui->groupBoxManualAngle, &QGroupBox::toggled, this, &DialogPiecePath::EnabledManualPassmarkAngle);
+    connect(ui->toolButtonExprAngle, &QPushButton::clicked, this, &DialogPiecePath::FXPassmarkAngle);
+    connect(ui->plainTextEditPassmarkAngle, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerPassmarkAngle->start(formulaTimerTimeout); });
+    connect(ui->pushButtonGrowPassmarkAngle, &QPushButton::clicked, this, &DialogPiecePath::DeployPassmarkAngle);
+
+    // notch list
     InitPassmarksList();
     connect(ui->comboBoxPassmarks, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &DialogPiecePath::PassmarkChanged);
@@ -1195,14 +1307,8 @@ void DialogPiecePath::InitPassmarksTab()
 
     connect(ui->checkBoxShowSecondPassmark, &QCheckBox::stateChanged, this,
             &DialogPiecePath::PassmarkShowSecondChanged);
-    connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogPiecePath::FXPassmarkLength);
-
-    connect(ui->plainTextEditPassmarkLength, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        m_timerPassmarkLength->start(formulaTimerTimeout);
-    });
-
-    connect(ui->pushButtonGrowPassmarkLength, &QPushButton::clicked, this, &DialogPiecePath::DeployPassmarkLength);
+    connect(ui->checkBoxClockwiseOpening, &QCheckBox::stateChanged, this,
+            &DialogPiecePath::PassmarkClockwiseOrientationChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1502,6 +1608,38 @@ void DialogPiecePath::UpdateNodePassmarkLength(const QString &formula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::UpdateNodePassmarkWidth(const QString &formula)
+{
+    const int index = ui->comboBoxPassmarks->currentIndex();
+    if (index != -1)
+    {
+        QListWidgetItem *rowItem = GetItemById(ui->comboBoxPassmarks->currentData().toUInt());
+        if (rowItem)
+        {
+            auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+            rowNode.SetFormulaPassmarkWidth(formula);
+            rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::UpdateNodePassmarkAngle(const QString &formula)
+{
+    const int index = ui->comboBoxPassmarks->currentIndex();
+    if (index != -1)
+    {
+        QListWidgetItem *rowItem = GetItemById(ui->comboBoxPassmarks->currentData().toUInt());
+        if (rowItem)
+        {
+            auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+            rowNode.SetFormulaPassmarkAngle(formula);
+            rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::EnabledManualPassmarkLength()
 {
     const int index = ui->comboBoxPassmarks->currentIndex();
@@ -1513,7 +1651,62 @@ void DialogPiecePath::EnabledManualPassmarkLength()
             auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
             rowNode.SetManualPassmarkLength(ui->groupBoxManualLength->isChecked());
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+
+            ui->toolButtonExprLength->setEnabled(ui->groupBoxManualLength->isChecked());
+            ui->plainTextEditPassmarkLength->setEnabled(ui->groupBoxManualLength->isChecked());
+            ui->pushButtonGrowPassmarkLength->setEnabled(ui->groupBoxManualLength->isChecked());
+            ui->labelEditPassmarkLength->setEnabled(ui->groupBoxManualLength->isChecked());
+            ui->label_8->setEnabled(ui->groupBoxManualLength->isChecked());
+
             EvalPassmarkLength();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::EnabledManualPassmarkWidth()
+{
+    const int index = ui->comboBoxPassmarks->currentIndex();
+    if (index != -1)
+    {
+        QListWidgetItem *rowItem = GetItemById(ui->comboBoxPassmarks->currentData().toUInt());
+        if (rowItem)
+        {
+            auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+            rowNode.SetManualPassmarkWidth(ui->groupBoxManualWidth->isChecked());
+            rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+
+            ui->toolButtonExprWidth->setEnabled(ui->groupBoxManualWidth->isChecked());
+            ui->plainTextEditPassmarkWidth->setEnabled(ui->groupBoxManualWidth->isChecked());
+            ui->pushButtonGrowPassmarkWidth->setEnabled(ui->groupBoxManualWidth->isChecked());
+            ui->labelEditPassmarkWidth->setEnabled(ui->groupBoxManualWidth->isChecked());
+            ui->label_4->setEnabled(ui->groupBoxManualWidth->isChecked());
+
+            EvalPassmarkWidth();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::EnabledManualPassmarkAngle()
+{
+    const int index = ui->comboBoxPassmarks->currentIndex();
+    if (index != -1)
+    {
+        QListWidgetItem *rowItem = GetItemById(ui->comboBoxPassmarks->currentData().toUInt());
+        if (rowItem)
+        {
+            auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+            rowNode.SetManualPassmarkAngle(ui->groupBoxManualAngle->isChecked());
+            rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+
+            ui->toolButtonExprAngle->setEnabled(ui->groupBoxManualAngle->isChecked());
+            ui->plainTextEditPassmarkAngle->setEnabled(ui->groupBoxManualAngle->isChecked());
+            ui->pushButtonGrowPassmarkAngle->setEnabled(ui->groupBoxManualAngle->isChecked());
+            ui->labelEditPassmarkAngle->setEnabled(ui->groupBoxManualAngle->isChecked());
+            ui->label_7->setEnabled(ui->groupBoxManualAngle->isChecked());
+
+            EvalPassmarkAngle();
         }
     }
 }
@@ -1755,6 +1948,48 @@ void DialogPiecePath::SetFormulaPassmarkLength(const QString &formula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto DialogPiecePath::GetFormulaPassmarkWidth() const -> QString
+{
+    QString formula = ui->plainTextEditPassmarkWidth->toPlainText();
+    return VTranslateVars::TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::SetFormulaPassmarkWidth(const QString &formula)
+{
+    const QString f = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    // increase height if needed.
+    if (f.length() > 80)
+    {
+        this->DeployPassmarkWidth();
+    }
+    ui->plainTextEditPassmarkWidth->setPlainText(f);
+    MoveCursorToEnd(ui->plainTextEditPassmarkWidth);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogPiecePath::GetFormulaPassmarkAngle() const -> QString
+{
+    QString formula = ui->plainTextEditPassmarkWidth->toPlainText();
+    return VTranslateVars::TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::SetFormulaPassmarkAngle(const QString &formula)
+{
+    const QString f = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    // increase height if needed.
+    if (f.length() > 80)
+    {
+        this->DeployPassmarkAngle();
+    }
+    ui->plainTextEditPassmarkAngle->setPlainText(f);
+    MoveCursorToEnd(ui->plainTextEditPassmarkAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::RefreshPathList(const VPiecePath &path)
 {
     ui->listWidget->blockSignals(true);
@@ -1764,4 +1999,219 @@ void DialogPiecePath::RefreshPathList(const VPiecePath &path)
         NewItem(path.at(i));
     }
     ui->listWidget->blockSignals(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::InitPassmarkLengthFormula(const VPieceNode &node)
+{
+    // notch depth
+    ui->groupBoxManualLength->setEnabled(true);
+
+    if (node.IsManualPassmarkLength())
+    {
+        ui->groupBoxManualLength->setChecked(true);
+
+        ui->toolButtonExprLength->setEnabled(ui->groupBoxManualLength->isChecked());
+        ui->plainTextEditPassmarkLength->setEnabled(ui->groupBoxManualLength->isChecked());
+        ui->pushButtonGrowPassmarkLength->setEnabled(ui->groupBoxManualLength->isChecked());
+        ui->labelEditPassmarkLength->setEnabled(ui->groupBoxManualLength->isChecked());
+        ui->label_8->setEnabled(ui->groupBoxManualLength->isChecked());
+
+        QString passmarkLength = node.GetFormulaPassmarkLength();
+        passmarkLength = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+            passmarkLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+        if (passmarkLength.length() > 80) // increase height if needed.
+        {
+            this->DeployPassmarkLength();
+        }
+
+        if (passmarkLength.isEmpty())
+        {
+            qreal length = UnitConvertor(1, Unit::Cm, VAbstractValApplication::VApp()->patternUnits());
+            ui->plainTextEditPassmarkLength->setPlainText(VAbstractApplication::VApp()->LocaleToString(length));
+        }
+        else
+        {
+            ui->plainTextEditPassmarkLength->setPlainText(passmarkLength);
+        }
+    }
+    else
+    {
+        qreal length = UnitConvertor(1, Unit::Cm, VAbstractValApplication::VApp()->patternUnits());
+        ui->plainTextEditPassmarkLength->setPlainText(VAbstractApplication::VApp()->LocaleToString(length));
+    }
+
+    MoveCursorToEnd(ui->plainTextEditPassmarkLength);
+    ChangeColor(ui->labelEditPassmarkLength, OkColor(this));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::InitPassmarkWidthFormula(const VPieceNode &node)
+{
+    // notch width
+    if (node.GetPassmarkLineType() != PassmarkLineType::OneLine)
+    {
+        ui->groupBoxManualWidth->setEnabled(true);
+
+        if (node.IsManualPassmarkWidth())
+        {
+            ui->groupBoxManualWidth->setChecked(true);
+
+            ui->toolButtonExprWidth->setEnabled(ui->groupBoxManualWidth->isChecked());
+            ui->plainTextEditPassmarkWidth->setEnabled(ui->groupBoxManualWidth->isChecked());
+            ui->pushButtonGrowPassmarkWidth->setEnabled(ui->groupBoxManualWidth->isChecked());
+            ui->labelEditPassmarkWidth->setEnabled(ui->groupBoxManualWidth->isChecked());
+            ui->label_4->setEnabled(ui->groupBoxManualWidth->isChecked());
+
+            QString passmarkWidth = node.GetFormulaPassmarkWidth();
+            passmarkWidth = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+                passmarkWidth, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+            if (passmarkWidth.length() > 80) // increase height if needed.
+            {
+                this->DeployPassmarkWidth();
+            }
+
+            if (passmarkWidth.isEmpty())
+            {
+                qreal width = UnitConvertor(0.85, Unit::Cm, VAbstractValApplication::VApp()->patternUnits());
+                ui->plainTextEditPassmarkWidth->setPlainText(VAbstractApplication::VApp()->LocaleToString(width));
+            }
+            else
+            {
+                ui->plainTextEditPassmarkWidth->setPlainText(passmarkWidth);
+            }
+        }
+        else
+        {
+            qreal width = UnitConvertor(0.85, Unit::Cm, VAbstractValApplication::VApp()->patternUnits());
+            ui->plainTextEditPassmarkWidth->setPlainText(VAbstractApplication::VApp()->LocaleToString(width));
+        }
+
+        MoveCursorToEnd(ui->plainTextEditPassmarkWidth);
+    }
+    else
+    {
+        qreal width = UnitConvertor(0.85, Unit::Cm, VAbstractValApplication::VApp()->patternUnits());
+        ui->plainTextEditPassmarkWidth->setPlainText(VAbstractApplication::VApp()->LocaleToString(width));
+    }
+    ChangeColor(ui->labelEditPassmarkWidth, OkColor(this));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::InitPassmarkAngleFormula(const VPieceNode &node)
+{
+    // notch angle
+    if (node.GetPassmarkAngleType() == PassmarkAngleType::Straightforward)
+    {
+        ui->groupBoxManualAngle->setEnabled(true);
+
+        if (node.IsManualPassmarkAngle())
+        {
+            ui->groupBoxManualAngle->setChecked(true);
+
+            ui->toolButtonExprAngle->setEnabled(ui->groupBoxManualAngle->isChecked());
+            ui->plainTextEditPassmarkAngle->setEnabled(ui->groupBoxManualAngle->isChecked());
+            ui->pushButtonGrowPassmarkAngle->setEnabled(ui->groupBoxManualAngle->isChecked());
+            ui->labelEditPassmarkAngle->setEnabled(ui->groupBoxManualAngle->isChecked());
+            ui->label_7->setEnabled(ui->groupBoxManualAngle->isChecked());
+
+            QString passmarkAngle = node.GetFormulaPassmarkLength();
+            passmarkAngle = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+                passmarkAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+            if (passmarkAngle.length() > 80) // increase height if needed.
+            {
+                this->DeployPassmarkAngle();
+            }
+
+            ui->plainTextEditPassmarkAngle->setPlainText(passmarkAngle.isEmpty() ? QString::number(0) : passmarkAngle);
+        }
+        else
+        {
+            ui->plainTextEditPassmarkAngle->setPlainText(QString::number(0));
+        }
+
+        MoveCursorToEnd(ui->plainTextEditPassmarkAngle);
+    }
+    else
+    {
+        ui->plainTextEditPassmarkAngle->setPlainText(QString::number(0));
+    }
+    ChangeColor(ui->labelEditPassmarkAngle, OkColor(this));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::InitPassmarkShapeType(const VPieceNode &node)
+{
+    // Line type
+    ui->groupBoxMarkType->setEnabled(true);
+
+    switch (node.GetPassmarkLineType())
+    {
+        case PassmarkLineType::OneLine:
+            ui->radioButtonOneLine->setChecked(true);
+            break;
+        case PassmarkLineType::TwoLines:
+            ui->radioButtonTwoLines->setChecked(true);
+            break;
+        case PassmarkLineType::ThreeLines:
+            ui->radioButtonThreeLines->setChecked(true);
+            break;
+        case PassmarkLineType::TMark:
+            ui->radioButtonTMark->setChecked(true);
+            break;
+        case PassmarkLineType::ExternalVMark:
+            ui->radioButtonVMark->setChecked(true);
+            break;
+        case PassmarkLineType::InternalVMark:
+            ui->radioButtonVMark2->setChecked(true);
+            break;
+        case PassmarkLineType::UMark:
+            ui->radioButtonUMark->setChecked(true);
+            break;
+        case PassmarkLineType::BoxMark:
+            ui->radioButtonBoxMark->setChecked(true);
+            break;
+        case PassmarkLineType::CheckMark:
+            ui->radioButtonCheckMark->setChecked(true);
+            break;
+        default:
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::InitPassmarkAngleType(const VPieceNode &node)
+{
+    // Angle type
+    ui->groupBoxAngleType->setEnabled(true);
+
+    switch (node.GetPassmarkAngleType())
+    {
+        case PassmarkAngleType::Straightforward:
+            ui->radioButtonStraightforward->setChecked(true);
+            break;
+        case PassmarkAngleType::Bisector:
+            ui->radioButtonBisector->setChecked(true);
+            break;
+        case PassmarkAngleType::Intersection:
+            ui->radioButtonIntersection->setChecked(true);
+            break;
+        case PassmarkAngleType::IntersectionOnlyLeft:
+            ui->radioButtonIntersectionOnlyLeft->setChecked(true);
+            break;
+        case PassmarkAngleType::IntersectionOnlyRight:
+            ui->radioButtonIntersectionOnlyRight->setChecked(true);
+            break;
+        case PassmarkAngleType::Intersection2:
+            ui->radioButtonIntersection2->setChecked(true);
+            break;
+        case PassmarkAngleType::Intersection2OnlyLeft:
+            ui->radioButtonIntersection2OnlyLeft->setChecked(true);
+            break;
+        case PassmarkAngleType::Intersection2OnlyRight:
+            ui->radioButtonIntersection2OnlyRight->setChecked(true);
+            break;
+        default:
+            break;
+    }
 }

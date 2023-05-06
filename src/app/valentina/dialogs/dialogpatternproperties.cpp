@@ -138,20 +138,22 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
         ui->checkBoxPatternReadOnly->setDisabled(true);
     }
 
-    //----------------------- Passmark length
     m_variables = pattern->DataMeasurements().keys() + pattern->DataIncrements().keys();
-    m_completer = new QCompleter(m_variables, this);
-    m_completer->setCompletionMode(QCompleter::PopupCompletion);
-    m_completer->setModelSorting(QCompleter::UnsortedModel);
-    m_completer->setFilterMode(Qt::MatchContains);
-    m_completer->setCaseSensitivity(Qt::CaseSensitive);
-    connect(m_completer, QOverload<const QString &>::of(&QCompleter::activated), this, [this]()
-    {
-        ValidatePassmarkLength();
-        DescEdited();
-    });
 
-    ui->lineEditPassmarkLength->setCompleter(m_completer);
+    //----------------------- Passmark length
+    m_completerLength = new QCompleter(m_variables, this);
+    m_completerLength->setCompletionMode(QCompleter::PopupCompletion);
+    m_completerLength->setModelSorting(QCompleter::UnsortedModel);
+    m_completerLength->setFilterMode(Qt::MatchContains);
+    m_completerLength->setCaseSensitivity(Qt::CaseSensitive);
+    connect(m_completerLength, QOverload<const QString &>::of(&QCompleter::activated), this,
+            [this]()
+            {
+                ValidatePassmarkLength();
+                DescEdited();
+            });
+
+    ui->lineEditPassmarkLength->setCompleter(m_completerLength);
     connect(ui->lineEditPassmarkLength, &QLineEdit::textEdited, this, [this]()
     {
         ValidatePassmarkLength();
@@ -162,6 +164,32 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     m_oldPassmarkLength = doc->GetPassmarkLengthVariable();
     ui->lineEditPassmarkLength->setText(m_oldPassmarkLength);
     ValidatePassmarkLength();
+
+    //----------------------- Passmark width
+    m_completerWidth = new QCompleter(m_variables, this);
+    m_completerWidth->setCompletionMode(QCompleter::PopupCompletion);
+    m_completerWidth->setModelSorting(QCompleter::UnsortedModel);
+    m_completerWidth->setFilterMode(Qt::MatchContains);
+    m_completerWidth->setCaseSensitivity(Qt::CaseSensitive);
+    connect(m_completerWidth, QOverload<const QString &>::of(&QCompleter::activated), this,
+            [this]()
+            {
+                ValidatePassmarkWidth();
+                DescEdited();
+            });
+
+    ui->lineEditPassmarkWidth->setCompleter(m_completerWidth);
+    connect(ui->lineEditPassmarkWidth, &QLineEdit::textEdited, this,
+            [this]()
+            {
+                ValidatePassmarkWidth();
+                DescEdited();
+            });
+
+    ui->lineEditPassmarkWidth->installEventFilter(this);
+    m_oldPassmarkWidth = doc->GetPassmarkWidthVariable();
+    ui->lineEditPassmarkWidth->setText(m_oldPassmarkWidth);
+    ValidatePassmarkWidth();
 
     //Initialization change value. Set to default value after initialization
     m_defaultChanged = false;
@@ -189,12 +217,27 @@ auto DialogPatternProperties::eventFilter(QObject *object, QEvent *event) -> boo
             auto *keyEvent = static_cast<QKeyEvent *>(event); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
             if ((keyEvent->key() == Qt::Key_Space) && ((keyEvent->modifiers() & Qt::ControlModifier) != 0U))
             {
-                m_completer->complete();
+                m_completerLength->complete();
                 return true;
             }
         }
 
         return false;// clazy:exclude=base-class-event
+    }
+
+    if (ui->lineEditPassmarkWidth == qobject_cast<QLineEdit *>(object))
+    {
+        if (event->type() == QEvent::KeyPress)
+        {
+            auto *keyEvent = static_cast<QKeyEvent *>(event); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
+            if ((keyEvent->key() == Qt::Key_Space) && ((keyEvent->modifiers() & Qt::ControlModifier) != 0U))
+            {
+                m_completerWidth->complete();
+                return true;
+            }
+        }
+
+        return false; // clazy:exclude=base-class-event
     }
 
     return QDialog::eventFilter(object, event);
@@ -240,12 +283,25 @@ void DialogPatternProperties::SaveDescription()
         m_doc->SetDescription(ui->plainTextEditDescription->document()->toPlainText());
         m_doc->SetLabelPrefix(qvariant_cast<QString>(ui->comboBoxLabelLanguage->currentData()));
         m_doc->SetPassmarkLengthVariable(ui->lineEditPassmarkLength->text());
+        m_doc->SetPassmarkWidthVariable(ui->lineEditPassmarkWidth->text());
         m_doc->SetDefaultPieceLabelPath(ui->lineEditPieceLabelPath->text());
 
-        if (m_oldPassmarkLength != ui->lineEditPassmarkLength->text())
+        const bool lengthChanged = m_oldPassmarkLength != ui->lineEditPassmarkLength->text();
+        const bool widthChanged = m_oldPassmarkWidth != ui->lineEditPassmarkWidth->text();
+
+        if (lengthChanged || widthChanged)
         {
             emit UpddatePieces();
-            m_oldPassmarkLength = ui->lineEditPassmarkLength->text();
+
+            if (lengthChanged)
+            {
+                m_oldPassmarkLength = ui->lineEditPassmarkLength->text();
+            }
+
+            if (widthChanged)
+            {
+                m_oldPassmarkWidth = ui->lineEditPassmarkWidth->text();
+            }
         }
 
         m_descriptionChanged = false;
@@ -283,6 +339,26 @@ void DialogPatternProperties::ValidatePassmarkLength() const
     }
 
     ui->lineEditPassmarkLength->setPalette(palette);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::ValidatePassmarkWidth() const
+{
+    const QString text = ui->lineEditPassmarkWidth->text();
+    QPalette palette = ui->lineEditPassmarkWidth->palette();
+    const QPalette::ColorRole foregroundRole = ui->lineEditPassmarkWidth->foregroundRole();
+
+    QRegularExpression rx(NameRegExp());
+    if (not text.isEmpty())
+    {
+        palette.setColor(foregroundRole, rx.match(text).hasMatch() && m_variables.contains(text) ? Qt::black : Qt::red);
+    }
+    else
+    {
+        palette.setColor(foregroundRole, Qt::black);
+    }
+
+    ui->lineEditPassmarkWidth->setPalette(palette);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

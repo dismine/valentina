@@ -318,13 +318,43 @@ void VPieceNode::SetFormulaPassmarkLength(const QString &formula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VPieceNode::GetFormulaPassmarkWidth() const -> QString
+{
+    return d->m_formulaPassmarkWidth;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetFormulaPassmarkWidth(const QString &formula)
+{
+    if (d->m_typeTool == Tool::NodePoint)
+    {
+        d->m_formulaPassmarkWidth = formula;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPieceNode::GetFormulaPassmarkAngle() const -> QString
+{
+    return d->m_formulaPassmarkAngle;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetFormulaPassmarkAngle(const QString &formula)
+{
+    if (d->m_typeTool == Tool::NodePoint)
+    {
+        d->m_formulaPassmarkAngle = formula;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VPieceNode::GetPassmarkLength(const VContainer *data, Unit unit) const -> qreal
 {
     if (d->m_manualPassmarkLength)
     {
         VFormula formula(d->m_formulaPassmarkLength, data);
-        formula.setCheckZero(false);
-        formula.setCheckLessThanZero(false);
+        formula.setCheckZero(true);
+        formula.setCheckLessThanZero(true);
         formula.Eval();
 
         if (formula.error())
@@ -347,6 +377,74 @@ auto VPieceNode::GetPassmarkLength(const VContainer *data, Unit unit) const -> q
         return ToPixel(formula.getDoubleValue(), unit);
     }
     return -1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPieceNode::GetPassmarkWidth(const VContainer *data, Unit unit) const -> qreal
+{
+    if (d->m_manualPassmarkWidth)
+    {
+        VFormula formula(d->m_formulaPassmarkWidth, data);
+        formula.setCheckZero(true);
+        formula.setCheckLessThanZero(false);
+        formula.Eval();
+
+        if (formula.error())
+        {
+            QString nodeName;
+            try
+            {
+                nodeName = data->GetGObject(d->m_id)->name();
+            }
+            catch (const VExceptionBadId &)
+            {
+            }
+
+            const QString errorMsg = QObject::tr("Cannot calculate passmark width for point '%1'. Reason: %2.")
+                                         .arg(nodeName, formula.Reason());
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(errorMsg)
+                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+            return 0;
+        }
+
+        return ToPixel(formula.getDoubleValue(), unit);
+    }
+    return -1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPieceNode::GetPassmarkAngle(const VContainer *data) const -> qreal
+{
+    if (d->m_manualPassmarkAngle)
+    {
+        VFormula formula(d->m_formulaPassmarkAngle, data);
+        formula.setCheckZero(false);
+        formula.setCheckLessThanZero(false);
+        formula.Eval();
+
+        if (formula.error())
+        {
+            QString nodeName;
+            try
+            {
+                nodeName = data->GetGObject(d->m_id)->name();
+            }
+            catch (const VExceptionBadId &)
+            {
+            }
+
+            const QString errorMsg = QObject::tr("Cannot calculate passmark angle for point '%1'. Reason: %2.")
+                                         .arg(nodeName, formula.Reason());
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(errorMsg)
+                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+            return 0;
+        }
+
+        return formula.getDoubleValue();
+    }
+    return 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -428,6 +526,18 @@ void VPieceNode::SetShowSecondPassmark(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VPieceNode::IsPassmarkClockwiseOpening() const -> bool
+{
+    return d->m_isPassmarkClockwiseOpening;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetPassmarkClockwiseOpening(bool value)
+{
+    d->m_isPassmarkClockwiseOpening = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VPieceNode::IsCheckUniqueness() const -> bool
 {
     return d->m_checkUniqueness;
@@ -449,6 +559,30 @@ auto VPieceNode::IsManualPassmarkLength() const -> bool
 void VPieceNode::SetManualPassmarkLength(bool value)
 {
     d->m_manualPassmarkLength = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPieceNode::IsManualPassmarkWidth() const -> bool
+{
+    return d->m_manualPassmarkWidth;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetManualPassmarkWidth(bool value)
+{
+    d->m_manualPassmarkWidth = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPieceNode::IsManualPassmarkAngle() const -> bool
+{
+    return d->m_manualPassmarkAngle;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetManualPassmarkAngle(bool value)
+{
+    d->m_manualPassmarkAngle = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

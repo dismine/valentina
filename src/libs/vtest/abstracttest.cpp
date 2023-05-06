@@ -207,6 +207,11 @@ void AbstractTest::PassmarkDataFromJson(const QString &json, VPiecePassmarkData 
     AbstractTest::ReadDoubleValue(passmarkData, QStringLiteral("globalPassmarkLength"), globalPassmarkLength,
                                   QString::number(NULL_ID));
     data.globalPassmarkLength = globalPassmarkLength;
+
+    qreal globalPassmarkWidth;
+    AbstractTest::ReadDoubleValue(passmarkData, QStringLiteral("globalPassmarkWidth"), globalPassmarkWidth,
+                                  QString::number(NULL_ID));
+    data.globalPassmarkWidth = globalPassmarkWidth;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

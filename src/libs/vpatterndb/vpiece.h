@@ -173,6 +173,7 @@ private:
     auto DBToJson(const VContainer *data) const -> QJsonObject;
 
     auto GlobalPassmarkLength(const VContainer *data) const -> qreal;
+    auto GlobalPassmarkWidth(const VContainer *data) const -> qreal;
 
     void TestInternalPathCuttingPathIntersection(const VContainer *data) const;
     void TestInternalPathsIntersections(const VContainer *data) const;

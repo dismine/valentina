@@ -1556,6 +1556,28 @@ auto VSAPoint::toJson() const -> QJsonObject
         pointObject[QLatin1String("angle")] = static_cast<int>(m_angle);
     }
 
+    if (m_manualPassmarkLength)
+    {
+        pointObject[QLatin1String("manualPassmarkLength")] = m_manualPassmarkLength;
+        pointObject[QLatin1String("passmarkLength")] = m_passmarkLength;
+    }
+
+    if (m_manualPassmarkWidth)
+    {
+        pointObject[QLatin1String("manualPassmarkWidth")] = m_manualPassmarkWidth;
+        pointObject[QLatin1String("passmarkWidth")] = m_passmarkWidth;
+    }
+    else
+    {
+        pointObject[QLatin1String("passmarkClockwiseOpening")] = m_passmarkClockwiseOpening;
+    }
+
+    if (m_manualPassmarkAngle)
+    {
+        pointObject[QLatin1String("manualPassmarkAngle")] = m_manualPassmarkAngle;
+        pointObject[QLatin1String("passmarkAngle")] = m_passmarkAngle;
+    }
+
     return pointObject;
 }
 

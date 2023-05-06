@@ -409,13 +409,18 @@
                                       <xs:attribute name="passmarkLine" type="passmarkLineType"/>
                                       <xs:attribute name="passmarkAngle" type="passmarkAngleType"/>
                                       <xs:attribute name="showSecondPassmark" type="xs:boolean"/>
+                                      <xs:attribute name="passmarkClockwiseOpening" type="xs:boolean"/>
                                       <xs:attribute name="allowCollapse" type="xs:boolean"/>
                                       <xs:attribute name="checkWidth" type="xs:string"/>
                                       <xs:attribute name="checkHeight" type="xs:string"/>
                                       <xs:attribute name="checkWidthReference" type="checkReference"/>
                                       <xs:attribute name="checkHeightReference" type="checkReference"/>
                                       <xs:attribute name="manualPassmarkLength" type="xs:boolean"/>
-                                      <xs:attribute name="passmarkLength" type="xs:string"/> 
+                                      <xs:attribute name="passmarkLength" type="xs:string"/>
+                                      <xs:attribute name="manualPassmarkWidth" type="xs:boolean"/>
+                                      <xs:attribute name="passmarkWidth" type="xs:string"/>
+                                      <xs:attribute name="manualPassmarkAngle" type="xs:boolean"/>
+                                      <xs:attribute name="passmarkAngleFormula" type="xs:string"/> 
                                       <xs:attribute name="singlePassmarkCuttingStop" type="cuttingStop"/>
                                       <xs:attribute name="leftPassmarkCuttingStop" type="cuttingStop"/>
                                       <xs:attribute name="rightPassmarkCuttingStop" type="cuttingStop"/>
@@ -473,9 +478,14 @@
                                             <xs:attribute name="passmarkLine" type="passmarkLineType"/>
                                             <xs:attribute name="passmarkAngle" type="passmarkAngleType"/>
                                             <xs:attribute name="showSecondPassmark" type="xs:boolean"/>
+                                            <xs:attribute name="passmarkClockwiseOpening" type="xs:boolean"/>
                                             <xs:attribute name="allowCollapse" type="xs:boolean"/>
                                             <xs:attribute name="manualPassmarkLength" type="xs:boolean"/>
                                             <xs:attribute name="passmarkLength" type="xs:string"/>
+                                            <xs:attribute name="manualPassmarkWidth" type="xs:boolean"/>
+                                            <xs:attribute name="passmarkWidth" type="xs:string"/>
+                                            <xs:attribute name="manualPassmarkAngle" type="xs:boolean"/>
+                                            <xs:attribute name="passmarkAngleFormula" type="xs:string"/>
                                             <xs:attribute name="singlePassmarkCuttingStop" type="cuttingStop"/>
                                             <xs:attribute name="leftPassmarkCuttingStop" type="cuttingStop"/>
                                             <xs:attribute name="rightPassmarkCuttingStop" type="cuttingStop"/>
@@ -673,6 +683,7 @@
                                     <xs:attribute name="passmarkLine" type="passmarkLineType"/>
                                     <xs:attribute name="passmarkAngle" type="passmarkAngleType"/>
                                     <xs:attribute name="showSecondPassmark" type="xs:boolean"/>
+                                    <xs:attribute name="passmarkClockwiseOpening" type="xs:boolean"/>
                                     <xs:attribute name="allowCollapse" type="xs:boolean"/>
                                     <xs:attribute name="checkWidth" type="xs:string"/>
                                     <xs:attribute name="checkHeight" type="xs:string"/>
@@ -681,6 +692,10 @@
                                     <xs:attribute name="checkStop" type="cuttingStop"/>
                                     <xs:attribute name="manualPassmarkLength" type="xs:boolean"/>
                                     <xs:attribute name="passmarkLength" type="xs:string"/>
+                                    <xs:attribute name="manualPassmarkWidth" type="xs:boolean"/>
+                                    <xs:attribute name="passmarkWidth" type="xs:string"/>
+                                    <xs:attribute name="manualPassmarkAngle" type="xs:boolean"/>
+                                    <xs:attribute name="passmarkAngleFormula" type="xs:string"/>
                                     <xs:attribute name="singlePassmarkCuttingStop" type="cuttingStop"/>
                                     <xs:attribute name="leftPassmarkCuttingStop" type="cuttingStop"/>
                                     <xs:attribute name="rightPassmarkCuttingStop" type="cuttingStop"/>
@@ -1023,6 +1038,7 @@
       <xs:enumeration value="vMark2"/>
       <xs:enumeration value="uMark"/>
       <xs:enumeration value="boxMark"/>
+      <xs:enumeration value="checkMark"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="passmarkAngleType">

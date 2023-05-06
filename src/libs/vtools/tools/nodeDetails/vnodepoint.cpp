@@ -92,6 +92,7 @@ enum class ContextMenuOption : int
     VMark2,
     UMark,
     BoxMark,
+    CheckMark,
     Option,
     InLayout,
     ForbidFlipping,
@@ -505,7 +506,7 @@ void VNodePoint::InitPassmarkLineTypeMenu(QMenu *menu, vidtype pieceId, QHash<in
         return action;
     };
 
-    Q_STATIC_ASSERT_X(static_cast<int>(PassmarkLineType::LAST_ONE_DO_NOT_USE) == 8, "Not all types were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(PassmarkLineType::LAST_ONE_DO_NOT_USE) == 9, "Not all types were handled.");
     contextMenu.insert(static_cast<int>(ContextMenuOption::OneLine),
                        InitPassmarkLineTypeAction(tr("One line"), PassmarkLineType::OneLine));
     contextMenu.insert(static_cast<int>(ContextMenuOption::TwoLines),
@@ -515,14 +516,15 @@ void VNodePoint::InitPassmarkLineTypeMenu(QMenu *menu, vidtype pieceId, QHash<in
     contextMenu.insert(static_cast<int>(ContextMenuOption::TMark),
                        InitPassmarkLineTypeAction(tr("T mark"), PassmarkLineType::TMark));
     contextMenu.insert(static_cast<int>(ContextMenuOption::VMark),
-                       InitPassmarkLineTypeAction(tr("External V mark"), PassmarkLineType::VMark));
+                       InitPassmarkLineTypeAction(tr("External V mark"), PassmarkLineType::ExternalVMark));
     contextMenu.insert(static_cast<int>(ContextMenuOption::VMark2),
-                       InitPassmarkLineTypeAction(tr("Internal V mark"), PassmarkLineType::VMark2));
+                       InitPassmarkLineTypeAction(tr("Internal V mark"), PassmarkLineType::InternalVMark));
     contextMenu.insert(static_cast<int>(ContextMenuOption::UMark),
                        InitPassmarkLineTypeAction(tr("U mark"), PassmarkLineType::UMark));
     contextMenu.insert(static_cast<int>(ContextMenuOption::BoxMark),
                        InitPassmarkLineTypeAction(tr("Box mark"), PassmarkLineType::BoxMark));
-
+    contextMenu.insert(static_cast<int>(ContextMenuOption::CheckMark),
+                       InitPassmarkLineTypeAction(tr("Check mark"), PassmarkLineType::CheckMark));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -582,7 +584,7 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         ContextMenuOption selectedOption = static_cast<ContextMenuOption>(
                     contextMenu.key(selectedAction, static_cast<int>(ContextMenuOption::NoSelection)));
 
-        Q_STATIC_ASSERT_X(static_cast<int>(ContextMenuOption::LAST_ONE_DO_NOT_USE) == 33,
+        Q_STATIC_ASSERT_X(static_cast<int>(ContextMenuOption::LAST_ONE_DO_NOT_USE) == 34,
                           "Not all options were handled.");
 
         QT_WARNING_PUSH
@@ -688,16 +690,19 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
                 SelectPassmarkLine(PassmarkLineType::TMark);
                 break;
             case ContextMenuOption::VMark:
-                SelectPassmarkLine(PassmarkLineType::VMark);
+                SelectPassmarkLine(PassmarkLineType::ExternalVMark);
                 break;
             case ContextMenuOption::VMark2:
-                SelectPassmarkLine(PassmarkLineType::VMark2);
+                SelectPassmarkLine(PassmarkLineType::InternalVMark);
                 break;
             case ContextMenuOption::UMark:
                 SelectPassmarkLine(PassmarkLineType::UMark);
                 break;
             case ContextMenuOption::BoxMark:
                 SelectPassmarkLine(PassmarkLineType::BoxMark);
+                break;
+            case ContextMenuOption::CheckMark:
+                SelectPassmarkLine(PassmarkLineType::CheckMark);
                 break;
         };
         QT_WARNING_POP

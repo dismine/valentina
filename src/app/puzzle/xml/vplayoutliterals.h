@@ -118,6 +118,7 @@ extern const QString AttrX;
 extern const QString AttrY;
 extern const QString AttrTurnPoint;
 extern const QString AttrCurvePoint;
+extern const QString AttrClockwiseOpening;
 
 extern const QString oneWayUpStr;
 extern const QString oneWayDownStr;

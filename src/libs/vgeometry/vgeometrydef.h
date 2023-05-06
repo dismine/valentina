@@ -66,10 +66,11 @@ enum class PlaceLabelType :  quint8
 
 struct VLayoutPassmark
 {
-    QVector<QLineF>  lines{};
+    QVector<QLineF> lines{};
     PassmarkLineType type{PassmarkLineType::OneLine};
-    QLineF           baseLine{};
-    bool             isBuiltIn{false};
+    QLineF baseLine{};
+    bool isBuiltIn{false};
+    bool isClockwiseOpening{false};
 
     friend auto operator<<(QDataStream& dataStream, const VLayoutPassmark& data) -> QDataStream&;
     friend auto operator>>(QDataStream& dataStream, VLayoutPassmark& data) -> QDataStream&;

@@ -115,6 +115,7 @@
                               <xs:attribute type="NotchType" name="type" use="optional"/>
                               <xs:attribute type="LinePath" name="baseLine" use="optional"/>
                               <xs:attribute type="LinesPath" name="path" use="optional"/>
+                              <xs:attribute type="xs:boolean" name="clockwiseOpening" use="optional"/>
                             </xs:complexType>
                           </xs:element>
                         </xs:sequence>
@@ -309,6 +310,7 @@
                                           <xs:attribute type="NotchType" name="type" use="optional"/>
                                           <xs:attribute type="LinePath" name="baseLine" use="optional"/>
                                           <xs:attribute type="LinesPath" name="path" use="optional"/>
+                                          <xs:attribute type="xs:boolean" name="clockwiseOpening" use="optional"/>
                                         </xs:complexType>
                                       </xs:element>
                                     </xs:sequence>
@@ -474,22 +476,24 @@
   </xs:simpleType>
   <xs:simpleType name="NotchType">
     <xs:restriction base="xs:unsignedInt">
-      <xs:enumeration value="0"/>
       <!--OneLine-->
-      <xs:enumeration value="1"/>
+      <xs:enumeration value="0"/>
       <!--TwoLines-->
-      <xs:enumeration value="2"/>
+      <xs:enumeration value="1"/>
       <!--ThreeLines-->
-      <xs:enumeration value="3"/>
+      <xs:enumeration value="2"/>
       <!--TMark-->
-      <xs:enumeration value="4"/>
+      <xs:enumeration value="3"/>
       <!--VMark-->
-      <xs:enumeration value="5"/>
+      <xs:enumeration value="4"/>
       <!--VMark2-->
-      <xs:enumeration value="6"/>
+      <xs:enumeration value="5"/>
       <!--UMark-->
-      <xs:enumeration value="7"/>
+      <xs:enumeration value="6"/>
       <!--BoxMark-->
+      <xs:enumeration value="7"/>
+      <!--CheckMark-->
+      <xs:enumeration value="8"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="CurvePenStyle">

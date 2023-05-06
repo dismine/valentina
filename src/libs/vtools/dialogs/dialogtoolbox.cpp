@@ -180,7 +180,7 @@ auto RowNode(QListWidget *listWidget, int i) -> VPieceNode
 
     if (i < 0 || i >= listWidget->count())
     {
-        return VPieceNode();
+        return {};
     }
 
     const QListWidgetItem *rowItem = listWidget->item(i);
@@ -651,10 +651,10 @@ auto GetNodeName(const VContainer *data, const VPieceNode &node, bool showPassma
                 case PassmarkLineType::TMark:
                     name += QStringLiteral("┴");
                     break;
-                case PassmarkLineType::VMark:
+                case PassmarkLineType::ExternalVMark:
                     name += QStringLiteral("⊼");
                     break;
-                case PassmarkLineType::VMark2:
+                case PassmarkLineType::InternalVMark:
                     name += QStringLiteral("⊽");
                     break;
                 case PassmarkLineType::UMark:
@@ -662,6 +662,9 @@ auto GetNodeName(const VContainer *data, const VPieceNode &node, bool showPassma
                     break;
                 case PassmarkLineType::BoxMark:
                     name += QStringLiteral("⎕");
+                    break;
+                case PassmarkLineType::CheckMark:
+                    name += QStringLiteral("✓");
                     break;
                 default:
                     break;

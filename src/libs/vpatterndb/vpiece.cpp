@@ -1116,6 +1116,7 @@ auto VPiece::CreatePassmark(const QVector<VPieceNode> &path, vsizetype previousI
     passmarkData.passmarkIndex = passmarkIndex;
     passmarkData.id = path.at(passmarkIndex).GetId();
     passmarkData.globalPassmarkLength = ToPixel(GlobalPassmarkLength(data), *data->GetPatternUnit());
+    passmarkData.globalPassmarkWidth = ToPixel(GlobalPassmarkWidth(data), *data->GetPatternUnit());
 
     // cppcheck-suppress unknownMacro
     QT_WARNING_POP
@@ -1200,6 +1201,40 @@ auto VPiece::GlobalPassmarkLength(const VContainer *data) const -> qreal
     }
 
     return length;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VPiece::GlobalPassmarkWidth(const VContainer *data) const
+{
+    QString passmarkWidthVariable = VAbstractValApplication::VApp()->getCurrentDocument()->GetPassmarkWidthVariable();
+    if (passmarkWidthVariable.isEmpty())
+    {
+        return 0;
+    }
+
+    qreal width = 0;
+
+    try
+    {
+        QSharedPointer<VInternalVariable> var = data->GetVariable<VInternalVariable>(passmarkWidthVariable);
+        width = *var->GetValue();
+
+        if (VAbstractValApplication::VApp()->toPixel(width) <= accuracyPointOnLine)
+        {
+            const QString errorMsg = QObject::tr("Invalid global value for a passmark width. Piece '%1'. Width is "
+                                                 "less than minimal allowed.")
+                                         .arg(GetName());
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(errorMsg)
+                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        }
+    }
+    catch (const VExceptionBadId &)
+    {
+        width = 0;
+    }
+
+    return width;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

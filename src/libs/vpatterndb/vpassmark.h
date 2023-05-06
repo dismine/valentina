@@ -63,6 +63,7 @@ struct VPiecePassmarkData
     vsizetype passmarkIndex{-1};            // NOLINT(misc-non-private-member-variables-in-classes)
     vidtype id{NULL_ID};                    // NOLINT(misc-non-private-member-variables-in-classes)
     qreal globalPassmarkLength{0};          // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal globalPassmarkWidth{0};           // NOLINT(misc-non-private-member-variables-in-classes)
 
     auto toJson() const -> QJsonObject;
 };
@@ -104,6 +105,17 @@ public:
 private:
     VPiecePassmarkData m_data{};
     bool m_null{true};
+
+    auto PassmarkIntersection(const QVector<QPointF> &path, QLineF line, qreal width) const -> QLineF;
+
+    auto PassmarkStraightforwardBaseLine(const QPointF &seamPassmarkSAPoint) const -> QVector<QLineF>;
+    auto PassmarkBisectorBaseLine(PassmarkStatus seamPassmarkType, const QPointF &seamPassmarkSAPoint,
+                                  const QVector<QPointF> &seamAllowance) const -> QVector<QLineF>;
+    auto PassmarkIntersectionBaseLine(const QVector<QPointF> &path, PassmarkSide side) const -> QVector<QLineF>;
+    auto PassmarkIntersection2BaseLine(const QVector<QPointF> &path, PassmarkSide side) const -> QVector<QLineF>;
+
+    auto CreatePassmarkLines(const QVector<QLineF> &lines, const QVector<QPointF> &seamAllowance,
+                             PassmarkSide side) const -> QVector<QLineF>;
 };
 
 #endif // VPASSMARK_H

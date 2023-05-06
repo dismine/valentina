@@ -310,6 +310,50 @@ inline auto AbstractTest::PointFromJson(const QJsonObject &pointObject, VSAPoint
     AbstractTest::ReadDoubleValue(pointObject, QStringLiteral("angle"), angleType,
                                   QString::number(static_cast<int>(PieceNodeAngle::ByLength)));
     point.SetAngleType(angleType);
+
+    bool manualPassmarkLength = false;
+    AbstractTest::ReadBooleanValue(pointObject, QLatin1String("manualPassmarkLength"), manualPassmarkLength,
+                                   QStringLiteral("0"));
+    point.SetManualPasskmarkLength(manualPassmarkLength);
+
+    if (manualPassmarkLength)
+    {
+        qreal passmarkLength = 0;
+        AbstractTest::ReadDoubleValue(pointObject, QStringLiteral("passmarkLength"), passmarkLength,
+                                      QStringLiteral("0"));
+        point.SetPasskmarkLength(passmarkLength);
+    }
+
+    bool manualPassmarkWidth = false;
+    AbstractTest::ReadBooleanValue(pointObject, QLatin1String("manualPassmarkWidth"), manualPassmarkWidth,
+                                   QStringLiteral("0"));
+    point.SetManualPasskmarkWidth(manualPassmarkWidth);
+
+    if (manualPassmarkWidth)
+    {
+        qreal passmarkWidth = 0;
+        AbstractTest::ReadDoubleValue(pointObject, QStringLiteral("passmarkWidth"), passmarkWidth, QStringLiteral("0"));
+        point.SetPasskmarkWidth(passmarkWidth);
+    }
+    else
+    {
+        bool passmarkClockwiseOpening = false;
+        AbstractTest::ReadBooleanValue(pointObject, QLatin1String("passmarkClockwiseOpening"), passmarkClockwiseOpening,
+                                       QStringLiteral("0"));
+        point.SetPassmarkClockwiseOpening(passmarkClockwiseOpening);
+    }
+
+    bool manualPassmarkAngle = false;
+    AbstractTest::ReadBooleanValue(pointObject, QLatin1String("manualPassmarkAngle"), manualPassmarkAngle,
+                                   QStringLiteral("0"));
+    point.SetManualPasskmarkAngle(manualPassmarkAngle);
+
+    if (manualPassmarkAngle)
+    {
+        qreal passmarkAngle = 0;
+        AbstractTest::ReadDoubleValue(pointObject, QStringLiteral("passmarkAngle"), passmarkAngle, QStringLiteral("0"));
+        point.SetPasskmarkAngle(passmarkAngle);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

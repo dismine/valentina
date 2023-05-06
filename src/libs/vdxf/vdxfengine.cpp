@@ -89,7 +89,7 @@
  // Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer26, (UTF8STRING("26"))) // NOLINT
  Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer80, (UTF8STRING("80"))) // NOLINT
  Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer81, (UTF8STRING("81"))) // NOLINT
- // Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer82, (UTF8STRING("82"))) // NOLINT
+ Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer82, (UTF8STRING("82"))) // NOLINT
  Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer83, (UTF8STRING("83"))) // NOLINT
  Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer84, (UTF8STRING("84"))) // NOLINT
  Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer85, (UTF8STRING("85"))) // NOLINT
@@ -1175,10 +1175,10 @@ void VDxfEngine::ExportASTMNotch(const QSharedPointer<dx_ifaceBlock> &detailBloc
                     // Slit notch
                     notch->layer = *layer4;
                     break;
-                case PassmarkLineType::VMark:
-                case PassmarkLineType::VMark2:
+                case PassmarkLineType::ExternalVMark:
+                case PassmarkLineType::InternalVMark:
                 { // V-Notch
-                    QLineF boundaryLine(ConstFirst(passmark.lines).p2(), ConstLast(passmark.lines).p2());
+                    QLineF boundaryLine(ConstFirst(passmark.lines).p1(), ConstLast(passmark.lines).p2());
                     notch->thickness = FromPixel(boundaryLine.length(), m_varInsunits); // width
                     notch->layer = *layer4;
                     break;
@@ -1205,6 +1205,22 @@ void VDxfEngine::ExportASTMNotch(const QSharedPointer<dx_ifaceBlock> &detailBloc
                     notch->thickness = FromPixel(QLineF(start, end).length(), m_varInsunits); // width
 
                     notch->layer = *layer83;
+                    break;
+                }
+                case PassmarkLineType::CheckMark:
+                { // Check Notch
+                    const QLineF &line1 = ConstFirst(passmark.lines);
+                    const QLineF &line2 = ConstLast(passmark.lines);
+
+                    qreal width = QLineF(line1.p1(), line2.p2()).length();
+
+                    if (not passmark.isClockwiseOpening)
+                    { // a counter clockwise opening
+                        width *= -1;
+                    }
+
+                    notch->thickness = FromPixel(width, m_varInsunits); // width
+                    notch->layer = *layer82;
                     break;
                 }
                 case PassmarkLineType::LAST_ONE_DO_NOT_USE:

@@ -107,6 +107,7 @@ private slots:
     void PassmarkLineTypeChanged(int id);
     void PassmarkAngleTypeChanged(int id);
     void PassmarkShowSecondChanged(int state);
+    void PassmarkClockwiseOrientationChanged(int state);
 
     void UpdateGrainlineValues();
     void UpdateDetailLabelValues();
@@ -134,21 +135,29 @@ private slots:
     void EnabledDetailLabel();
     void EnabledPatternLabel();
     void EnabledManualPassmarkLength();
+    void EnabledManualPassmarkWidth();
+    void EnabledManualPassmarkAngle();
 
     void EvalWidth();
     void EvalWidthBefore();
     void EvalWidthAfter();
     void EvalPassmarkLength();
+    void EvalPassmarkWidth();
+    void EvalPassmarkAngle();
 
     void FXWidth();
     void FXWidthBefore();
     void FXWidthAfter();
     void FXPassmarkLength();
+    void FXPassmarkWidth();
+    void FXPassmarkAngle();
 
     void DeployWidthFormulaTextEdit();
     void DeployWidthBeforeFormulaTextEdit();
     void DeployWidthAfterFormulaTextEdit();
     void DeployPassmarkLength();
+    void DeployPassmarkWidth();
+    void DeployPassmarkAngle();
 
     void GrainlinePinPointChanged();
     void DetailPinPointChanged();
@@ -195,6 +204,8 @@ private:
     bool flagFormulaBefore{true};
     bool flagFormulaAfter{true};
     bool flagFormulaPassmarkLength{true};
+    bool flagFormulaPassmarkWidth{true};
+    bool flagFormulaPassmarkAngle{true};
     bool flagMainPathIsValid{true};
     bool flagName{true}; // We have default name of piece.
     bool flagUUID{true};
@@ -224,11 +235,15 @@ private:
     int m_formulaBaseWidthBefore{0};
     int m_formulaBaseWidthAfter{0};
     int m_formulaBasePassmarkLength{0};
+    int m_formulaBasePassmarkWidth{0};
+    int m_formulaBasePassmarkAngle{0};
 
     QTimer *m_timerWidth{nullptr};
     QTimer *m_timerWidthBefore{nullptr};
     QTimer *m_timerWidthAfter{nullptr};
     QTimer *m_timerPassmarkLength{nullptr};
+    QTimer *m_timerPassmarkWidth{nullptr};
+    QTimer *m_timerPassmarkAngle{nullptr};
     qreal m_saWidth{0};
 
     QVector<VLabelTemplateLine> m_templateLines{};
@@ -266,6 +281,8 @@ private:
     void UpdateNodeSABefore(const QString &formula);
     void UpdateNodeSAAfter(const QString &formula);
     void UpdateNodePassmarkLength(const QString &formula);
+    void UpdateNodePassmarkWidth(const QString &formula);
+    void UpdateNodePassmarkAngle(const QString &formula);
 
     void InitFancyTabBar();
     void InitMainPathTab();
@@ -286,7 +303,9 @@ private:
     void InitAllPinComboboxes();
 
     void SetFormulaSAWidth(const QString &formula);
-    void SetFormularPassmarkLength(const QString &formula);
+    void SetFormulaPassmarkLength(const QString &formula);
+    void SetFormulaPassmarkWidth(const QString &formula);
+    void SetFormulaPassmarkAngle(const QString &formula);
 
     void SetGrainlineAngle(QString angleFormula);
     void SetGrainlineLength(QString lengthFormula);
@@ -317,6 +336,12 @@ private:
 
     void InitGradationPlaceholdersMenu();
     void InitGradationPlaceholders();
+
+    void InitPassmarkLengthFormula(const VPieceNode &node);
+    void InitPassmarkWidthFormula(const VPieceNode &node);
+    void InitPassmarkAngleFormula(const VPieceNode &node);
+    void InitPassmarkShapeType(const VPieceNode &node);
+    void InitPassmarkAngleType(const VPieceNode &node);
 };
 
 //---------------------------------------------------------------------------------------------------------------------

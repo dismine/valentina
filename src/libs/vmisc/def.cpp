@@ -328,6 +328,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVMark, (QLatin1String("vMark"))) // 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVMark2, (QLatin1String("vMark2"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strUMark, (QLatin1String("uMark"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strBoxMark, (QLatin1String("boxMark"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCheckMark, (QLatin1String("checkMark"))) // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
 auto PassmarkLineTypeToString(PassmarkLineType type) -> QString
@@ -342,14 +343,16 @@ auto PassmarkLineTypeToString(PassmarkLineType type) -> QString
             return strThree;
         case PassmarkLineType::TMark:
             return *strTMark;
-        case PassmarkLineType::VMark:
+        case PassmarkLineType::ExternalVMark:
             return *strVMark;
-        case PassmarkLineType::VMark2:
+        case PassmarkLineType::InternalVMark:
             return *strVMark2;
         case PassmarkLineType::UMark:
             return *strUMark;
         case PassmarkLineType::BoxMark:
             return *strBoxMark;
+        case PassmarkLineType::CheckMark:
+            return *strCheckMark;
         default:
             break;
     }
@@ -361,7 +364,7 @@ auto PassmarkLineTypeToString(PassmarkLineType type) -> QString
 auto StringToPassmarkLineType(const QString &value) -> PassmarkLineType
 {
     const QStringList values{strOne,     strTwo,    strThree,    *strTMark,    *strVMark,
-                             *strVMark2, *strUMark, *strBoxMark};
+                             *strVMark2, *strUMark, *strBoxMark, *strCheckMark};
 
     switch(values.indexOf(value))
     {
@@ -374,13 +377,15 @@ auto StringToPassmarkLineType(const QString &value) -> PassmarkLineType
         case 3: // strTMark
             return PassmarkLineType::TMark;
         case 4: // strVMark
-            return PassmarkLineType::VMark;
+            return PassmarkLineType::ExternalVMark;
         case 5: // strVMark2
-            return PassmarkLineType::VMark2;
+            return PassmarkLineType::InternalVMark;
         case 6: // strUMark
             return PassmarkLineType::UMark;
         case 7: // strBoxMark
             return PassmarkLineType::BoxMark;
+        case 8: // strCheckMark
+            return PassmarkLineType::CheckMark;
         default:
             break;
     }

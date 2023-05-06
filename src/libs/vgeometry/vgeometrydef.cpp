@@ -36,7 +36,7 @@
 #include <QCoreApplication>
 
 const quint32 VLayoutPassmark::streamHeader = 0x943E2759; // CRC-32Q string "VLayoutPassmark"
-const quint16 VLayoutPassmark::classVersion = 1;
+const quint16 VLayoutPassmark::classVersion = 2;
 
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------
@@ -44,14 +44,7 @@ auto operator<<(QDataStream &dataStream, const VLayoutPassmark &data) -> QDataSt
 {
     dataStream << VLayoutPassmark::streamHeader << VLayoutPassmark::classVersion;
 
-    // Added in classVersion = 1
-    dataStream << data.lines;
-    dataStream << data.type;
-    dataStream << data.baseLine;
-    dataStream << data.isBuiltIn;
-
-    // Added in classVersion = 2
-
+    dataStream << data.lines << data.type << data.baseLine << data.isBuiltIn << data.isClockwiseOpening;
     return dataStream;
 }
 
@@ -81,15 +74,12 @@ auto operator>>(QDataStream &dataStream, VLayoutPassmark &data) -> QDataStream &
         throw VException(message);
     }
 
-    dataStream >> data.lines;
-    dataStream >> data.type;
-    dataStream >> data.baseLine;
-    dataStream >> data.isBuiltIn;
+    dataStream >> data.lines >> data.type >> data.baseLine >> data.isBuiltIn;
 
-//    if (actualClassVersion >= 2)
-//    {
-
-//    }
+    if (actualClassVersion >= 2)
+    {
+        dataStream >> data.isClockwiseOpening;
+    }
 
     return dataStream;
 }

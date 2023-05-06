@@ -691,6 +691,7 @@ auto VPLayoutFileReader::ReadNotch() -> VLayoutPassmark
     passmark.isBuiltIn = ReadAttributeBool(attribs, ML::AttrBuiltIn, falseStr);
     passmark.baseLine = StringToLine(ReadAttributeEmptyString(attribs, ML::AttrBaseLine));
     passmark.lines = StringToLines(ReadAttributeEmptyString(attribs, ML::AttrPath));
+    passmark.isClockwiseOpening = ReadAttributeBool(attribs, ML::AttrClockwiseOpening, falseStr);
 
     QString defaultType = QString::number(static_cast<int>(PassmarkLineType::OneLine));
     passmark.type = static_cast<PassmarkLineType>(ReadAttributeUInt(attribs, ML::AttrType, defaultType));

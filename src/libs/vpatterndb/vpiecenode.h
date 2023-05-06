@@ -83,7 +83,15 @@ public:
     auto GetFormulaPassmarkLength() const -> QString;
     void SetFormulaPassmarkLength(const QString &formula);
 
+    auto GetFormulaPassmarkWidth() const -> QString;
+    void SetFormulaPassmarkWidth(const QString &formula);
+
+    auto GetFormulaPassmarkAngle() const -> QString;
+    void SetFormulaPassmarkAngle(const QString &formula);
+
     auto GetPassmarkLength(const VContainer *data, Unit unit) const -> qreal;
+    auto GetPassmarkWidth(const VContainer *data, Unit unit) const -> qreal;
+    auto GetPassmarkAngle(const VContainer *data) const -> qreal;
 
     auto GetAngleType() const -> PieceNodeAngle;
     void SetAngleType(PieceNodeAngle type);
@@ -103,11 +111,20 @@ public:
     auto IsShowSecondPassmark() const -> bool;
     void SetShowSecondPassmark(bool value);
 
+    auto IsPassmarkClockwiseOpening() const -> bool;
+    void SetPassmarkClockwiseOpening(bool value);
+
     auto IsCheckUniqueness() const -> bool;
     void SetCheckUniqueness(bool value);
 
     auto IsManualPassmarkLength() const -> bool;
     void SetManualPassmarkLength(bool value);
+
+    auto IsManualPassmarkWidth() const -> bool;
+    void SetManualPassmarkWidth(bool value);
+
+    auto IsManualPassmarkAngle() const -> bool;
+    void SetManualPassmarkAngle(bool value);
 
     auto IsTurnPoint() const -> bool;
     void SetTurnPoint(bool value);

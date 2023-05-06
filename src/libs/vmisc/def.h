@@ -111,10 +111,11 @@ enum class PassmarkLineType : quint8
     TwoLines = 1,
     ThreeLines = 2,
     TMark = 3,
-    VMark = 4,
-    VMark2 = 5,
+    ExternalVMark = 4,
+    InternalVMark = 5,
     UMark = 6,
     BoxMark = 7,
+    CheckMark = 8,
     LAST_ONE_DO_NOT_USE
 };
 
