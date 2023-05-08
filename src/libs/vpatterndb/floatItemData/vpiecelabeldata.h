@@ -32,7 +32,6 @@
 #include <QString>
 
 #include "vpatternlabeldata.h"
-#include "floatitemdef.h"
 
 class VPieceLabelDataPrivate;
 struct VLabelTemplateLine;
@@ -47,7 +46,7 @@ public:
     VPieceLabelData();
     VPieceLabelData(const VPieceLabelData &data);
 
-    virtual ~VPieceLabelData();
+    ~VPieceLabelData() override;
 
     auto operator=(const VPieceLabelData &data) -> VPieceLabelData &;
 #ifdef Q_COMPILER_RVALUE_REFS
@@ -59,34 +58,34 @@ public:
 
     // methods, which operate on other members
     auto GetLetter() const -> QString;
-    void    SetLetter(const QString &qsLetter);
+    void SetLetter(const QString &qsLetter);
 
     auto GetAnnotation() const -> QString;
-    void    SetAnnotation(const QString &val);
+    void SetAnnotation(const QString &val);
 
     auto GetOrientation() const -> QString;
-    void    SetOrientation(const QString &val);
+    void SetOrientation(const QString &val);
 
     auto GetRotationWay() const -> QString;
-    void    SetRotationWay(const QString &val);
+    void SetRotationWay(const QString &val);
 
     auto GetTilt() const -> QString;
-    void    SetTilt(const QString &val);
+    void SetTilt(const QString &val);
 
     auto GetFoldPosition() const -> QString;
-    void    SetFoldPosition(const QString &val);
+    void SetFoldPosition(const QString &val);
 
     auto GetQuantity() const -> quint16;
-    void    SetQuantity(quint16 val);
+    void SetQuantity(quint16 val);
 
     auto IsOnFold() const -> bool;
     void SetOnFold(bool onFold);
 
     auto GetAreaShartName() const -> QString;
-    void    SetAreaShartName(const QString &val);
+    void SetAreaShartName(const QString &val);
 
     auto GetLabelTemplate() const -> QVector<VLabelTemplateLine>;
-    void                        SetLabelTemplate(const QVector<VLabelTemplateLine> &lines);
+    void SetLabelTemplate(const QVector<VLabelTemplateLine> &lines);
 
 private:
     QSharedDataPointer<VPieceLabelDataPrivate> d;

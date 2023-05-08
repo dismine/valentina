@@ -62,7 +62,9 @@ public:
 
     Q_DECL_CONSTEXPR auto GetSABefore() const -> qreal;
     Q_DECL_CONSTEXPR auto GetSAAfter() const -> qreal;
+
     Q_DECL_CONSTEXPR auto GetAngleType() const -> PieceNodeAngle;
+
     Q_DECL_CONSTEXPR auto IsManualPasskmarkLength() const -> bool;
     Q_DECL_CONSTEXPR auto GetPasskmarkLength() const -> qreal;
 
@@ -73,6 +75,7 @@ public:
     Q_DECL_RELAXED_CONSTEXPR void SetSAAfter(qreal value);
 
     Q_DECL_RELAXED_CONSTEXPR void SetAngleType(PieceNodeAngle value);
+
     Q_DECL_RELAXED_CONSTEXPR void SetManualPasskmarkLength(bool value);
     Q_DECL_RELAXED_CONSTEXPR void SetPasskmarkLength(qreal value);
 

@@ -39,7 +39,6 @@
 #include "../vlayout/vlayoutgenerator.h"
 #include "dialogs/dialoglayoutprogress.h"
 #include "dialogs/dialogsavelayout.h"
-#include "../vlayout/vposter.h"
 #include "../vlayout/vlayoutexporter.h"
 #include "../vpatterndb/calculator.h"
 #include "../vtools/tools/vabstracttool.h"
@@ -1263,8 +1262,7 @@ auto MainWindowsNoGUI::OpenMeasurementFile(const QString &path) const -> QShared
 
         if (m->Type() == MeasurementsType::Unknown)
         {
-            VException e(tr("Measurement file has unknown format."));
-            throw e;
+            throw VException(tr("Measurement file has unknown format."));
         }
 
         if (m->Type() == MeasurementsType::Multisize)
@@ -1280,8 +1278,7 @@ auto MainWindowsNoGUI::OpenMeasurementFile(const QString &path) const -> QShared
 
         if (not m->IsDefinedKnownNamesValid())
         {
-            VException e(tr("Measurement file contains invalid known measurement(s)."));
-            throw e;
+            throw VException(tr("Measurement file contains invalid known measurement(s)."));
         }
 
         CheckRequiredMeasurements(m.data());

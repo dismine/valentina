@@ -179,14 +179,13 @@ auto VContainer::GetGObject(quint32 id) const -> const QSharedPointer<VGObject>
     {
         return d->calculationObjects.value(id);
     }
-    else if (d->modelingObjects->contains(id))
+
+    if (d->modelingObjects->contains(id))
     {
         return d->modelingObjects->value(id);
     }
-    else
-    {
-        throw VExceptionBadId(tr("Can't find object"), id);
-    }
+
+    throw VExceptionBadId(tr("Can't find object"), id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

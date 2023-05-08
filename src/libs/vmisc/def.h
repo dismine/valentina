@@ -108,13 +108,13 @@ enum class PieceNodeAngle : quint8
 enum class PassmarkLineType : quint8
 {
     OneLine = 0, // Default
-    TwoLines,
-    ThreeLines,
-    TMark,
-    VMark,
-    VMark2,
-    UMark,
-    BoxMark,
+    TwoLines = 1,
+    ThreeLines = 2,
+    TMark = 3,
+    VMark = 4,
+    VMark2 = 5,
+    UMark = 6,
+    BoxMark = 7,
     LAST_ONE_DO_NOT_USE
 };
 
@@ -409,9 +409,18 @@ const int userMaterialPlaceholdersQuantity = 20;
 auto QPixmapFromCache(const QString &pixmapPath) -> QPixmap;
 void SetItemOverrideCursor(QGraphicsItem *item, const QString & pixmapPath, int hotX = -1, int hotY = -1);
 
-template<typename T> constexpr inline auto MmToPixel(T val) -> T { return (val / 25.4) * PrintDPI; }
-template<typename T> constexpr inline auto CmToPixel(T val) -> T { return ((val * 10.0) / 25.4) * PrintDPI; }
-template<typename T> constexpr inline auto InchToPixel(T val) -> T { return val * PrintDPI; }
+template <typename T> constexpr inline auto MmToPixel(T val) noexcept -> T
+{
+    return (val / 25.4) * PrintDPI;
+}
+template <typename T> constexpr inline auto CmToPixel(T val) noexcept -> T
+{
+    return ((val * 10.0) / 25.4) * PrintDPI;
+}
+template <typename T> constexpr inline auto InchToPixel(T val) noexcept -> T
+{
+    return val * PrintDPI;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_RELAXED_CONSTEXPR inline auto ToPixel(double val, const Unit &unit) -> double

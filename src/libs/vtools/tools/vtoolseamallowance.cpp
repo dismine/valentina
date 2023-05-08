@@ -57,15 +57,17 @@
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "nodeDetails/vtoolpin.h"
-#include "nodeDetails/vnodepoint.h"
-#include "nodeDetails/vtoolpiecepath.h"
+#include "../vformat/vlabeltemplate.h"
+#include "../vpatterndb/floatItemData/vgrainlinedata.h"
+#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "nodeDetails/vnodearc.h"
 #include "nodeDetails/vnodeellipticalarc.h"
+#include "nodeDetails/vnodepoint.h"
 #include "nodeDetails/vnodespline.h"
 #include "nodeDetails/vnodesplinepath.h"
+#include "nodeDetails/vtoolpiecepath.h"
+#include "nodeDetails/vtoolpin.h"
 #include "nodeDetails/vtoolplacelabel.h"
-#include "../vformat/vlabeltemplate.h"
 
 #include <QFuture>
 #include <QtConcurrent/QtConcurrentRun>

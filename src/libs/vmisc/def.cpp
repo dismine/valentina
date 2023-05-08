@@ -54,6 +54,8 @@
 #include <QDesktopServices>
 #include <QUrl>
 
+#include "qassert.h"
+#include "qtpreprocessorsupport.h"
 #include "vabstractapplication.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
 #   include "vdatastreamenum.h"
@@ -279,15 +281,14 @@ auto IsOptionSet(int argc, char *argv[], const char *option) -> bool
 
 //---------------------------------------------------------------------------------------------------------------------
 // See issue #624. https://bitbucket.org/dismine/valentina/issues/624
-void InitHighDpiScaling(int argc, char *argv[])
+void InitHighDpiScaling(int argc, char *argv[]) // NOLINT(cppcoreguidelines-avoid-c-arrays)
 {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     /* For more info see: http://doc.qt.io/qt-5/highdpi.html */
     if (IsOptionSet(argc, argv, qPrintable(QLatin1String("--") + LONG_OPTION_NO_HDPI_SCALING)))
     {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         QCoreApplication::setAttribute(Qt::AA_DisableHighDpiScaling);
-#endif
 #else
         qputenv("QT_DEVICE_PIXEL_RATIO", QByteArray("1"));
 #endif
@@ -295,13 +296,15 @@ void InitHighDpiScaling(int argc, char *argv[])
     else
     {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         QApplication::setAttribute(Qt::AA_EnableHighDpiScaling); // DPI support
-#endif
 #else
         qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", QByteArray("1"));
 #endif
     }
+#else
+    Q_UNUSED(argc);
+    Q_UNUSED(argv);
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -357,7 +360,8 @@ auto PassmarkLineTypeToString(PassmarkLineType type) -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto StringToPassmarkLineType(const QString &value) -> PassmarkLineType
 {
-    const QStringList values{strOne, strTwo, strThree, *strTMark, *strVMark, *strVMark2, *strUMark, *strBoxMark};
+    const QStringList values{strOne,     strTwo,    strThree,    *strTMark,    *strVMark,
+                             *strVMark2, *strUMark, *strBoxMark};
 
     switch(values.indexOf(value))
     {
@@ -414,14 +418,9 @@ auto PassmarkAngleTypeToString(PassmarkAngleType type) -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto StringToPassmarkAngleType(const QString &value) -> PassmarkAngleType
 {
-    const QStringList values = QStringList() << strStraightforward
-                                             << strBisector
-                                             << strIntersection
-                                             << strIntersectionOnlyLeft
-                                             << strIntersectionOnlyRight
-                                             << strIntersection2
-                                             << strIntersection2OnlyLeft
-                                             << strIntersection2OnlyRight;
+    const QStringList values{
+        strStraightforward,       strBisector,      strIntersection,          strIntersectionOnlyLeft,
+        strIntersectionOnlyRight, strIntersection2, strIntersection2OnlyLeft, strIntersection2OnlyRight};
 
     switch(values.indexOf(value))
     {
@@ -451,25 +450,19 @@ auto StringToPassmarkAngleType(const QString &value) -> PassmarkAngleType
 //---------------------------------------------------------------------------------------------------------------------
 auto StrToUnits(const QString &unit) -> Unit
 {
-    const QStringList units = QStringList() << unitMM << unitCM << unitINCH << unitPX;
-    Unit result = Unit::Cm;
+    const QStringList units{unitMM, unitCM, unitINCH, unitPX};
     switch (units.indexOf(unit))
     {
         case 0:// mm
-            result = Unit::Mm;
-            break;
+            return Unit::Mm;
         case 2:// inch
-            result = Unit::Inch;
-            break;
+            return Unit::Inch;
         case 3:// px
-            result = Unit::Px;
-            break;
+            return Unit::Px;
         case 1:// cm
         default:
-            result = Unit::Cm;
-            break;
+            return Unit::Cm;
     }
-    return result;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -483,26 +476,21 @@ auto StrToUnits(const QString &unit) -> Unit
  */
 auto UnitsToStr(const Unit &unit, const bool translate) -> QString
 {
-    QString result;
     switch (unit)
     {
         case Unit::Mm:
-            translate ? result = QObject::tr("mm") : result = unitMM;
-            break;
+            return translate ? QObject::tr("mm") : unitMM;
         case Unit::Inch:
-            translate ? result = QObject::tr("inch") : result = unitINCH;
-            break;
+            return translate ? QObject::tr("inch") : unitINCH;
         case Unit::Px:
-            translate ? result = QObject::tr("px") : result = unitPX;
-            break;
+            return translate ? QObject::tr("px") : unitPX;
         case Unit::LAST_UNIT_DO_NOT_USE:
+            Q_UNREACHABLE();
             break;
         case Unit::Cm:
         default:
-            translate ? result = QObject::tr("cm") : result = unitCM;
-            break;
+            return translate ? QObject::tr("cm") : unitCM;
     }
-    return result;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

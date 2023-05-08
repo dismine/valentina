@@ -888,7 +888,7 @@ auto VPiece::GetNodeSAPoints(const QVector<VPieceNode> &path, vsizetype index, c
 
     if (index < 0 || index >= path.size())
     {
-        return QVector<VSAPoint>();
+        return {};
     }
 
     const VPieceNode &node = path.at(index);
@@ -1053,7 +1053,7 @@ auto VPiece::CreatePassmark(const QVector<VPieceNode> &path, vsizetype previousI
 
     if (not IsPassmarkVisible(path, passmarkIndex))
     {
-        return VPassmark();
+        return {};
     }
 
     VSAPoint passmarkSAPoint;
@@ -1063,26 +1063,26 @@ auto VPiece::CreatePassmark(const QVector<VPieceNode> &path, vsizetype previousI
                 .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
         VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
                                               qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
-        return VPassmark();
+        return {};
     }
 
     VSAPoint previousSAPoint;
     if (not GetPassmarkPreviousSAPoints(path, previousIndex, passmarkSAPoint, data, previousSAPoint, passmarkIndex))
     {
         // No check here because it will cover valid cases
-        return VPassmark(); // Something wrong
+        return {}; // Something wrong
     }
 
     VSAPoint nextSAPoint;
     if (not GetPassmarkNextSAPoints(path, nextIndex, passmarkSAPoint, data, nextSAPoint, passmarkIndex))
     {
         // No check here because it will cover valid cases
-        return VPassmark(); // Something wrong
+        return {}; // Something wrong
     }
 
     if (passmarkSAPoint.IsManualPasskmarkLength() && passmarkSAPoint.GetPasskmarkLength() <= 0)
     {
-        return VPassmark();
+        return {};
     }
 
     if (passmarkSAPoint.IsManualPasskmarkLength()
@@ -1096,7 +1096,7 @@ auto VPiece::CreatePassmark(const QVector<VPieceNode> &path, vsizetype previousI
 #else
         qWarning() << VAbstractValApplication::warningMessageSignature + infoMsg;
 #endif
-        return VPassmark();
+        return {};
     }
 
     QT_WARNING_PUSH
@@ -1171,12 +1171,13 @@ auto VPiece::Area(const QVector<QPointF> &shape, const VContainer *data) const -
 //---------------------------------------------------------------------------------------------------------------------
 auto VPiece::GlobalPassmarkLength(const VContainer *data) const -> qreal
 {
-    qreal length = 0;
     QString passmarkLengthVariable = VAbstractValApplication::VApp()->getCurrentDocument()->GetPassmarkLengthVariable();
     if (passmarkLengthVariable.isEmpty())
     {
         return 0;
     }
+
+    qreal length = 0;
 
     try
     {

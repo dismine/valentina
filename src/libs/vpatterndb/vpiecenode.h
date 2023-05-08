@@ -57,7 +57,7 @@ public:
     friend auto operator>>(QDataStream &in, VPieceNode &p) -> QDataStream &;
 
     auto GetId() const -> quint32;
-    void    SetId(quint32 id);
+    void SetId(quint32 id);
 
     auto GetTypeTool() const -> Tool;
     void SetTypeTool(Tool value);
@@ -72,21 +72,21 @@ public:
     auto GetSABefore(const VContainer *data, Unit unit) const -> qreal;
 
     auto GetFormulaSABefore() const -> QString;
-    void    SetFormulaSABefore(const QString &formula);
+    void SetFormulaSABefore(const QString &formula);
 
     auto GetSAAfter(const VContainer *data) const -> qreal;
     auto GetSAAfter(const VContainer *data, Unit unit) const -> qreal;
 
     auto GetFormulaSAAfter() const -> QString;
-    void    SetFormulaSAAfter(const QString &formula);
+    void SetFormulaSAAfter(const QString &formula);
 
     auto GetFormulaPassmarkLength() const -> QString;
-    void    SetFormulaPassmarkLength(const QString &formula);
+    void SetFormulaPassmarkLength(const QString &formula);
 
     auto GetPassmarkLength(const VContainer *data, Unit unit) const -> qreal;
 
     auto GetAngleType() const -> PieceNodeAngle;
-    void           SetAngleType(PieceNodeAngle type);
+    void SetAngleType(PieceNodeAngle type);
 
     auto IsPassmark() const -> bool;
     void SetPassmark(bool passmark);
@@ -95,10 +95,10 @@ public:
     void SetMainPathNode(bool value);
 
     auto GetPassmarkLineType() const -> PassmarkLineType;
-    void             SetPassmarkLineType(PassmarkLineType lineType);
+    void SetPassmarkLineType(PassmarkLineType lineType);
 
     auto GetPassmarkAngleType() const -> PassmarkAngleType;
-    void              SetPassmarkAngleType(PassmarkAngleType angleType);
+    void SetPassmarkAngleType(PassmarkAngleType angleType);
 
     auto IsShowSecondPassmark() const -> bool;
     void SetShowSecondPassmark(bool value);

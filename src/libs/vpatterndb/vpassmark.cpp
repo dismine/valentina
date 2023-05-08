@@ -41,6 +41,8 @@ const qreal VPassmark::passmarkRadiusFactor = 0.45;
 
 namespace
 {
+const qreal passmarkGap = MmToPixel(1.5);
+
 //---------------------------------------------------------------------------------------------------------------------
 auto GetSeamPassmarkSAPoint(const VPiecePassmarkData &passmarkData, const QVector<QPointF> &seamAllowance,
                             QPointF &point) -> PassmarkStatus
@@ -62,7 +64,7 @@ auto GetSeamPassmarkSAPoint(const VPiecePassmarkData &passmarkData, const QVecto
         return PassmarkStatus::Error; // Something wrong
     }
 
-    point = ConstFirst(ekvPoints);
+    point = ConstFirst(ekvPoints); // NOLINT(cppcoreguidelines-slicing)
     return needRollback ? PassmarkStatus::Rollback : PassmarkStatus::Common;
 }
 
@@ -77,7 +79,7 @@ auto FixNotchPoint(const QVector<QPointF> &seamAllowance, const QPointF &notchBa
         axis.setLength(ToPixel(50, Unit::Cm));
         const QVector<QPointF> points = VAbstractCurve::CurveIntersectLine(seamAllowance, axis);
 
-        if (points.size() > 0)
+        if (!points.empty())
         {
             if (points.size() == 1)
             {
@@ -125,12 +127,11 @@ auto FixNotchPoint(const QVector<QPointF> &seamAllowance, const QPointF &notchBa
 
     return fixed;
 }
-const qreal passmarkGap = MmToPixel(1.5);
 
 //---------------------------------------------------------------------------------------------------------------------
 auto CreateOnePassmarkLines(const QLineF &line) -> QVector<QLineF>
 {
-    return QVector<QLineF>({line});
+    return {line};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -284,6 +285,7 @@ auto PointsToSegments(const QVector<QPointF> &points) -> QVector<QLineF>
     QVector<QLineF> lines;
     if (points.size() >= 2)
     {
+        lines.reserve(points.size() - 1);
         for (int i=0; i < points.size()-1; ++i)
         {
             QLineF segment = QLineF(points.at(i), points.at(i+1));
@@ -414,7 +416,7 @@ auto CreatePassmarkLines(PassmarkLineType lineType, PassmarkAngleType angleType,
 {
     if (lines.isEmpty())
     {
-        return QVector<QLineF>();
+        return {};
     }
 
     QVector<QLineF> passmarksLines;
@@ -590,7 +592,7 @@ auto PassmarkBisectorBaseLine(PassmarkStatus seamPassmarkType, const VPiecePassm
     }
     else
     { // Should never happen
-        return QVector<QLineF>();
+        return {};
     }
 
     bool ok = false;
@@ -598,13 +600,13 @@ auto PassmarkBisectorBaseLine(PassmarkStatus seamPassmarkType, const VPiecePassm
                                         ok);
     if (not ok)
     {
-        return QVector<QLineF>();
+        return {};
     }
 
     edge1.setAngle(edge1.angle() + edge1.angleTo(edge2)/2.);
     edge1.setLength(length);
 
-    return QVector<QLineF>({edge1});
+    return {edge1};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -623,7 +625,7 @@ auto PassmarkToPath(const QVector<QLineF> &passmark) -> QPainterPath
     }
     return path;
 }
-}
+} // namespace
 
 //------------------------------VPiecePassmarkData---------------------------------------------------------------------
 auto VPiecePassmarkData::toJson() const -> QJsonObject
@@ -647,10 +649,6 @@ auto VPiecePassmarkData::toJson() const -> QJsonObject
 
     return dataObject;
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-VPassmark::VPassmark()
-{}
 
 //---------------------------------------------------------------------------------------------------------------------
 VPassmark::VPassmark(const VPiecePassmarkData &data)
@@ -766,7 +764,7 @@ auto VPassmark::FindIntersection(const QLineF &line, const QVector<QPointF> &sea
     QVector<QPointF> intersections = VAbstractCurve::CurveIntersectLine(seamAllowance, testLine);
     if (not intersections.isEmpty())
     {
-        return QLineF(line.p1(), ConstLast(intersections));
+        return {line.p1(), ConstLast(intersections)};
     }
 
     return line;
@@ -777,13 +775,13 @@ auto VPassmark::BuiltInSAPassmark(const VPiece &piece, const VContainer *data) c
 {
     if (m_null)
     {
-        return QVector<QLineF>();
+        return {};
     }
 
     const QVector<QLineF> lines = BuiltInSAPassmarkBaseLine(piece);
     if (lines.isEmpty())
     {
-        return QVector<QLineF>();
+        return {};
     }
 
     QVector<QPointF> points;
@@ -796,7 +794,7 @@ auto VPassmark::BuiltInSAPassmarkBaseLine(const VPiece &piece) const -> QVector<
 {
     if (m_null)
     {
-        return QVector<QLineF>();
+        return {};
     }
 
     qreal length = 0;
@@ -970,13 +968,15 @@ auto VPassmark::SAPassmarkBaseLine(const QVector<QPointF> &seamAllowance, const 
         line.setLength(length);
         return {line};
     }
-    else if (m_data.passmarkAngleType == PassmarkAngleType::Bisector)
+
+    if (m_data.passmarkAngleType == PassmarkAngleType::Bisector)
     {
         return PassmarkBisectorBaseLine(seamPassmarkType, m_data, seamPassmarkSAPoint, path);
     }
-    else if (m_data.passmarkAngleType == PassmarkAngleType::Intersection
-             || m_data.passmarkAngleType == PassmarkAngleType::IntersectionOnlyLeft
-             || m_data.passmarkAngleType == PassmarkAngleType::IntersectionOnlyRight)
+
+    if (m_data.passmarkAngleType == PassmarkAngleType::Intersection ||
+        m_data.passmarkAngleType == PassmarkAngleType::IntersectionOnlyLeft ||
+        m_data.passmarkAngleType == PassmarkAngleType::IntersectionOnlyRight)
     {
         QVector<QLineF> lines;
         if ((m_data.passmarkAngleType == PassmarkAngleType::Intersection
@@ -999,9 +999,10 @@ auto VPassmark::SAPassmarkBaseLine(const QVector<QPointF> &seamAllowance, const 
 
         return lines;
     }
-    else if (m_data.passmarkAngleType == PassmarkAngleType::Intersection2
-             || m_data.passmarkAngleType == PassmarkAngleType::Intersection2OnlyLeft
-             || m_data.passmarkAngleType == PassmarkAngleType::Intersection2OnlyRight)
+
+    if (m_data.passmarkAngleType == PassmarkAngleType::Intersection2 ||
+        m_data.passmarkAngleType == PassmarkAngleType::Intersection2OnlyLeft ||
+        m_data.passmarkAngleType == PassmarkAngleType::Intersection2OnlyRight)
     {
         QVector<QLineF> lines;
         if ((m_data.passmarkAngleType == PassmarkAngleType::Intersection2

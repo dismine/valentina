@@ -540,7 +540,7 @@ auto VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagName, con
     }
 
     {
-        const unsigned char angleType = static_cast<unsigned char>(node.GetAngleType());
+        const auto angleType = static_cast<unsigned char>(node.GetAngleType());
 
         if (angleType > 0)
         {

@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vdxfengine.h"
+#include "qassert.h"
 #include <QLineF>
 
 #include <QByteArray>
@@ -58,58 +59,58 @@
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "dxiface.h"
-#include "../vlayout/vlayoutpiece.h"
-#include "../vlayout/vlayoutpoint.h"
 #include "../vgeometry/vgeometrydef.h"
 #include "../vgeometry/vlayoutplacelabel.h"
+#include "../vlayout/vlayoutpiece.h"
+#include "../vlayout/vlayoutpoint.h"
+#include "dxiface.h"
 
-static const qreal AAMATextHeight = 2.5;
+ namespace
+ {
+ static const qreal AAMATextHeight = 2.5;
 
-namespace
-{
-Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer0, (UTF8STRING("0"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer1, (UTF8STRING("1"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer2, (UTF8STRING("2"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer3, (UTF8STRING("3"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer4, (UTF8STRING("4"))) // NOLINT
-//Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer5, (UTF8STRING("5"))) // NOLINT
-//Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer6, (UTF8STRING("6"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer7, (UTF8STRING("7"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer8, (UTF8STRING("8"))) // NOLINT
-//Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer9, (UTF8STRING("9"))) // NOLINT
-//Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer10, (UTF8STRING("10"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer11, (UTF8STRING("11"))) // NOLINT
-//Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer12, (UTF8STRING("12"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer13, (UTF8STRING("13"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer14, (UTF8STRING("14"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer15, (UTF8STRING("15"))) // NOLINT
-//Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer19, (UTF8STRING("19"))) // NOLINT
-//Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer26, (UTF8STRING("26"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer80, (UTF8STRING("80"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer81, (UTF8STRING("81"))) // NOLINT
-//Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer82, (UTF8STRING("82"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer83, (UTF8STRING("83"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer84, (UTF8STRING("84"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer85, (UTF8STRING("85"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer86, (UTF8STRING("86"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer87, (UTF8STRING("87"))) // NOLINT
+ Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer0, (UTF8STRING("0"))) // NOLINT
+ Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer1, (UTF8STRING("1"))) // NOLINT
+ Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer2, (UTF8STRING("2"))) // NOLINT
+ Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer3, (UTF8STRING("3"))) // NOLINT
+ Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer4, (UTF8STRING("4"))) // NOLINT
+ // Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer5, (UTF8STRING("5"))) // NOLINT
+ // Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer6, (UTF8STRING("6"))) // NOLINT
+ Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer7, (UTF8STRING("7"))) // NOLINT
+ Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer8, (UTF8STRING("8"))) // NOLINT
+ // Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer9, (UTF8STRING("9"))) // NOLINT
+ // Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer10, (UTF8STRING("10"))) // NOLINT
+ Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer11, (UTF8STRING("11"))) // NOLINT
+ // Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer12, (UTF8STRING("12"))) // NOLINT
+ Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer13, (UTF8STRING("13"))) // NOLINT
+ Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer14, (UTF8STRING("14"))) // NOLINT
+ Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer15, (UTF8STRING("15"))) // NOLINT
+ // Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer19, (UTF8STRING("19"))) // NOLINT
+ // Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer26, (UTF8STRING("26"))) // NOLINT
+ Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer80, (UTF8STRING("80"))) // NOLINT
+ Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer81, (UTF8STRING("81"))) // NOLINT
+ // Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer82, (UTF8STRING("82"))) // NOLINT
+ Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer83, (UTF8STRING("83"))) // NOLINT
+ Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer84, (UTF8STRING("84"))) // NOLINT
+ Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer85, (UTF8STRING("85"))) // NOLINT
+ Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer86, (UTF8STRING("86"))) // NOLINT
+ Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer87, (UTF8STRING("87"))) // NOLINT
 
-//---------------------------------------------------------------------------------------------------------------------
-auto PieceOutline(const VLayoutPiece &detail) -> QVector<VLayoutPoint>
-{
-    QVector<VLayoutPoint> outline;
-    if (detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn())
-    {
-        outline = detail.GetMappedSeamAllowancePoints();
-    }
-    else
-    {
-        outline = detail.GetMappedContourPoints();
-    }
-    return outline;
-}
-}  // namespace
+ //---------------------------------------------------------------------------------------------------------------------
+ auto PieceOutline(const VLayoutPiece &detail) -> QVector<VLayoutPoint>
+ {
+     QVector<VLayoutPoint> outline;
+     if (detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn())
+     {
+         outline = detail.GetMappedSeamAllowancePoints();
+     }
+     else
+     {
+         outline = detail.GetMappedContourPoints();
+     }
+     return outline;
+ }
+ } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 static inline auto svgEngineFeatures() -> QPaintEngine::PaintEngineFeatures
@@ -1166,42 +1167,50 @@ void VDxfEngine::ExportASTMNotch(const QSharedPointer<dx_ifaceBlock> &detailBloc
 
             notch->angle = passmark.baseLine.angle();
 
-            if (passmark.type == PassmarkLineType::OneLine || passmark.type == PassmarkLineType::TwoLines
-                || passmark.type == PassmarkLineType::ThreeLines)
-            { // Slit notch
-                notch->layer = *layer4;
-            }
-            else if (passmark.type == PassmarkLineType::VMark || passmark.type == PassmarkLineType::VMark2)
-            { // V-Notch
-                QLineF boundaryLine(ConstFirst(passmark.lines).p2(), ConstLast(passmark.lines).p2());
-                notch->thickness = FromPixel(boundaryLine.length(), m_varInsunits); // width
+            switch (passmark.type)
+            {
+                case PassmarkLineType::OneLine:
+                case PassmarkLineType::TwoLines:
+                case PassmarkLineType::ThreeLines:
+                    // Slit notch
+                    notch->layer = *layer4;
+                    break;
+                case PassmarkLineType::VMark:
+                case PassmarkLineType::VMark2:
+                { // V-Notch
+                    QLineF boundaryLine(ConstFirst(passmark.lines).p2(), ConstLast(passmark.lines).p2());
+                    notch->thickness = FromPixel(boundaryLine.length(), m_varInsunits); // width
+                    notch->layer = *layer4;
+                    break;
+                }
+                case PassmarkLineType::TMark:
+                    // T-Notch
+                    notch->thickness = FromPixel(ConstLast(passmark.lines).length(), m_varInsunits); // width
+                    notch->layer = *layer80;
+                    break;
+                case PassmarkLineType::BoxMark:
+                { // Castle Notch
+                    QPointF start = ConstFirst(passmark.lines).p1();
+                    QPointF end = ConstLast(passmark.lines).p2();
 
-                notch->layer = *layer4;
-            }
-            else if (passmark.type == PassmarkLineType::TMark)
-            { // T-Notch
-                notch->thickness = FromPixel(ConstLast(passmark.lines).length(), m_varInsunits); // width
+                    notch->layer = *layer81;
+                    notch->thickness = FromPixel(QLineF(start, end).length(), m_varInsunits); // width
+                    break;
+                }
+                case PassmarkLineType::UMark:
+                { // U-Notch
+                    QPointF start = ConstFirst(passmark.lines).p1();
+                    QPointF end = ConstLast(passmark.lines).p2();
 
-                notch->layer = *layer80;
-            }
-            else if (passmark.type == PassmarkLineType::BoxMark)
-            { // Castle Notch
-                QPointF start = ConstFirst(passmark.lines).p1();
-                QPointF end = ConstLast(passmark.lines).p2();
+                    notch->thickness = FromPixel(QLineF(start, end).length(), m_varInsunits); // width
 
-                notch->layer = *layer81;
-
-                notch->thickness = FromPixel(QLineF(start, end).length(), m_varInsunits);  // width
-            }
-            else if (passmark.type == PassmarkLineType::UMark)
-            { // U-Notch
-                QPointF start = ConstFirst(passmark.lines).p1();
-                QPointF end = ConstLast(passmark.lines).p2();
-
-                notch->thickness = FromPixel(QLineF(start, end).length(), m_varInsunits);  // width
-
-                notch->layer = *layer83;
-            }
+                    notch->layer = *layer83;
+                    break;
+                }
+                case PassmarkLineType::LAST_ONE_DO_NOT_USE:
+                    Q_UNREACHABLE();
+                    break;
+            };
 
             detailBlock->ent.push_back(notch);
         }

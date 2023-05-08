@@ -54,29 +54,17 @@ auto CuttingPath(quint32 id, const VContainer *data) -> QVector<QPointF>
 
     return path;
 }
-}
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPiecePath::DialogPiecePath(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogPiecePath),
-      m_showMode(false),
-      m_saWidth(0),
-      m_timerWidth(new QTimer(this)),
-      m_timerWidthBefore(new QTimer(this)),
-      m_timerWidthAfter(new QTimer(this)),
-      m_timerVisible(new QTimer(this)),
-      m_timerPassmarkLength(new QTimer(this)),
-      m_formulaBaseWidth(0),
-      m_formulaBaseWidthBefore(0),
-      m_formulaBaseWidthAfter(0),
-      m_formulaBaseVisible(0),
-      m_flagFormulaBefore(true),
-      m_flagFormulaAfter(true),
-      m_flagFormulaVisible(true),
-      m_flagName(true),//We have default name of piece.
-      m_flagError(false),
-      m_flagFormula(false)
+  : DialogTool(data, toolId, parent),
+    ui(new Ui::DialogPiecePath),
+    m_timerWidth(new QTimer(this)),
+    m_timerWidthBefore(new QTimer(this)),
+    m_timerWidthAfter(new QTimer(this)),
+    m_timerVisible(new QTimer(this)),
+    m_timerPassmarkLength(new QTimer(this))
 {
     ui->setupUi(this);
     InitOkCancel(ui);
@@ -200,7 +188,7 @@ void DialogPiecePath::ChosenObject(quint32 id, const SceneObject &type)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::ShowDialog(bool click)
 {
-    if (click == false)
+    if (not click)
     {
         if (CreatePath().CountNodes() > 0)
         {
@@ -252,7 +240,7 @@ void DialogPiecePath::CheckState()
     }
     else
     {
-        const QIcon icon = QIcon::fromTheme("dialog-warning",
+        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"),
                                             QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
         ui->tabWidget->setTabIcon(tabSeamAllowanceIndex, icon);
     }
@@ -266,7 +254,7 @@ void DialogPiecePath::CheckState()
     }
     else
     {
-        const QIcon icon = QIcon::fromTheme("dialog-warning",
+        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"),
                                             QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
         ui->tabWidget->setTabIcon(tabControlIndex, icon);
     }
@@ -283,7 +271,7 @@ void DialogPiecePath::CheckState()
     }
     else
     {
-        const QIcon icon = QIcon::fromTheme("dialog-warning",
+        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"),
                                             QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
         ui->tabWidget->setTabIcon(tabPassmarksIndex, icon);
     }
@@ -298,7 +286,7 @@ void DialogPiecePath::ShowVisualization()
 
     if (m_showMode)
     {
-        VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(GetPieceId()));
+        auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(GetPieceId()));
         SCASSERT(tool != nullptr);
         auto *visPath = qobject_cast<VisToolPiecePath *>(vis);
         SCASSERT(visPath != nullptr);
@@ -366,7 +354,7 @@ void DialogPiecePath::ShowContextMenu(const QPoint &pos)
     actionExcluded->setCheckable(true);
     actionExcluded->setChecked(rowNode.IsExcluded());
 
-    QAction *actionDelete = menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
+    QAction *actionDelete = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-delete")), tr("Delete"));
 
     QAction *selectedAction = menu->exec(ui->listWidget->viewport()->mapToGlobal(pos));
     if (selectedAction == actionDelete)
@@ -664,7 +652,7 @@ void DialogPiecePath::ReturnDefBefore()
     const QString def = VAbstractApplication::VApp()->TrVars()
             ->FormulaToUser(currentSeamAllowance, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     ui->plainTextEditFormulaWidthBefore->setPlainText(def);
-    if (QPushButton* button = qobject_cast<QPushButton*>(sender()))
+    if (auto *button = qobject_cast<QPushButton *>(sender()))
     {
         button->setEnabled(false);
     }
@@ -676,7 +664,7 @@ void DialogPiecePath::ReturnDefAfter()
     const QString def = VAbstractApplication::VApp()->TrVars()
             ->FormulaToUser(currentSeamAllowance, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     ui->plainTextEditFormulaWidthAfter->setPlainText(def);
-    if (QPushButton* button = qobject_cast<QPushButton*>(sender()))
+    if (auto *button = qobject_cast<QPushButton *>(sender()))
     {
         button->setEnabled(false);
     }
@@ -691,7 +679,7 @@ void DialogPiecePath::PassmarkLineTypeChanged(int id)
         QListWidgetItem *rowItem = GetItemById(ui->comboBoxPassmarks->currentData().toUInt());
         if (rowItem)
         {
-            VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+            auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 
             PassmarkLineType lineType = PassmarkLineType::OneLine;
             if (id == ui->buttonGroupMarkType->id(ui->radioButtonOneLine))
@@ -745,7 +733,7 @@ void DialogPiecePath::PassmarkAngleTypeChanged(int id)
         QListWidgetItem *rowItem = GetItemById(ui->comboBoxPassmarks->currentData().toUInt());
         if (rowItem)
         {
-            VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+            auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 
             PassmarkAngleType angleType = PassmarkAngleType::Straightforward;
             if (id == ui->buttonGroupAngleType->id(ui->radioButtonStraightforward))
@@ -799,7 +787,7 @@ void DialogPiecePath::PassmarkShowSecondChanged(int state)
         QListWidgetItem *rowItem = GetItemById(ui->comboBoxPassmarks->currentData().toUInt());
         if (rowItem)
         {
-            VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+            auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
             rowNode.SetShowSecondPassmark(state);
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
 
@@ -824,7 +812,7 @@ void DialogPiecePath::EvalWidth()
 
     if (m_saWidth >= 0)
     {
-        VContainer *locData = const_cast<VContainer *> (data);
+        auto *locData = const_cast<VContainer *>(data);
 
         auto *currentSA = new VIncrement(locData, currentSeamAllowance);
         currentSA->SetFormula(m_saWidth, QString().setNum(m_saWidth), true);
@@ -1258,7 +1246,7 @@ void DialogPiecePath::InitNodesList()
 
     for (int i = 0; i < path.CountNodes(); ++i)
     {
-        const VPieceNode node = path.at(i);
+        const VPieceNode &node = path.at(i);
         if (node.GetTypeTool() == Tool::NodePoint)
         {
             const QString name = GetNodeName(data, node);
@@ -1323,7 +1311,7 @@ void DialogPiecePath::NodeAngleChanged(int index)
         if (rowItem)
         {
             const PieceNodeAngle angle = static_cast<PieceNodeAngle>(ui->comboBoxAngle->currentData().toUInt());
-            VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+            auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
             rowNode.SetAngleType(angle);
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
 
@@ -1351,7 +1339,7 @@ void DialogPiecePath::SetPiecePath(const VPiecePath &path)
 
     ui->lineEditName->setText(path.GetName());
 
-    VisToolPiecePath *visPath = qobject_cast<VisToolPiecePath *>(vis);
+    auto *visPath = qobject_cast<VisToolPiecePath *>(vis);
     SCASSERT(visPath != nullptr);
     visPath->SetPath(path);
     visPath->SetCuttingPath(CuttingPath(toolId, data));
@@ -1427,7 +1415,7 @@ auto DialogPiecePath::GetItemById(quint32 id) -> QListWidgetItem *
     for (qint32 i = ui->listWidget->count()-1; i >= 0; --i)
     {
         QListWidgetItem *item = ui->listWidget->item(i);
-        const VPieceNode node = qvariant_cast<VPieceNode>(item->data(Qt::UserRole));
+        const auto node = qvariant_cast<VPieceNode>(item->data(Qt::UserRole));
 
         if (node.GetId() == id)
         {
@@ -1444,7 +1432,7 @@ auto DialogPiecePath::GetLastId() const -> quint32
     if (count > 0)
     {
         QListWidgetItem *item = ui->listWidget->item(count-1);
-        const VPieceNode node = qvariant_cast<VPieceNode>(item->data(Qt::UserRole));
+        const auto node = qvariant_cast<VPieceNode>(item->data(Qt::UserRole));
         return node.GetId();
     }
 
@@ -1474,7 +1462,7 @@ void DialogPiecePath::UpdateNodeSABefore(const QString &formula)
         QListWidgetItem *rowItem = GetItemById(ui->comboBoxNodes->currentData().toUInt());
         if (rowItem)
         {
-            VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+            auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
             rowNode.SetFormulaSABefore(formula);
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
         }
@@ -1490,7 +1478,7 @@ void DialogPiecePath::UpdateNodeSAAfter(const QString &formula)
         QListWidgetItem *rowItem = GetItemById(ui->comboBoxNodes->currentData().toUInt());
         if (rowItem)
         {
-            VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+            auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
             rowNode.SetFormulaSAAfter(formula);
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
         }
@@ -1506,7 +1494,7 @@ void DialogPiecePath::UpdateNodePassmarkLength(const QString &formula)
         QListWidgetItem *rowItem = GetItemById(ui->comboBoxPassmarks->currentData().toUInt());
         if (rowItem)
         {
-            VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+            auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
             rowNode.SetFormulaPassmarkLength(formula);
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
         }
@@ -1522,7 +1510,7 @@ void DialogPiecePath::EnabledManualPassmarkLength()
         QListWidgetItem *rowItem = GetItemById(ui->comboBoxPassmarks->currentData().toUInt());
         if (rowItem)
         {
-            VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+            auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
             rowNode.SetManualPassmarkLength(ui->groupBoxManualLength->isChecked());
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
             EvalPassmarkLength();
@@ -1547,7 +1535,7 @@ void DialogPiecePath::SetFormulaSAWidth(const QString &formula)
     }
     ui->plainTextEditFormulaWidth->setPlainText(width);
 
-    VisToolPiecePath *path = qobject_cast<VisToolPiecePath *>(vis);
+    auto *path = qobject_cast<VisToolPiecePath *>(vis);
     SCASSERT(path != nullptr)
     path->SetPath(CreatePath());
     path->SetCuttingPath(CuttingPath(toolId, data));
@@ -1645,24 +1633,25 @@ auto DialogPiecePath::PathIsValid() const -> bool
     QString error;
     if (GetType() == PiecePathType::CustomSeamAllowance && FirstPointEqualLast(ui->listWidget, data, error))
     {
-        ui->helpLabel->setText(
-                    QString("%1%2 %3")
-                    .arg(DialogWarningIcon(),
-                         tr("First point of <b>custom seam allowance</b> cannot be equal to the last point!"), error));
+        ui->helpLabel->setText(QStringLiteral("%1%2 %3").arg(
+            DialogWarningIcon(), tr("First point of <b>custom seam allowance</b> cannot be equal to the last point!"),
+            error));
         return false;
     }
 
     error.clear();
     if (DoublePoints(ui->listWidget, data, error))
     {
-        ui->helpLabel->setText(QString("%1%2 %3").arg(DialogWarningIcon(), tr("You have double points!"), error));
+        ui->helpLabel->setText(
+            QStringLiteral("%1%2 %3").arg(DialogWarningIcon(), tr("You have double points!"), error));
         return false;
     }
 
     error.clear();
     if (DoubleCurves(ui->listWidget, data, error))
     {
-        ui->helpLabel->setText(QString("%1%2 %3").arg(DialogWarningIcon(), tr("The same curve repeats twice!"), error));
+        ui->helpLabel->setText(
+            QStringLiteral("%1%2 %3").arg(DialogWarningIcon(), tr("The same curve repeats twice!"), error));
         return false;
     }
 
@@ -1688,7 +1677,7 @@ auto DialogPiecePath::PathIsValid() const -> bool
     error.clear();
     if (InvalidSegment(ui->listWidget, data, error))
     {
-        ui->helpLabel->setText(QString("%1%2 %3").arg(DialogWarningIcon(), tr("Invalid segment!"), error));
+        ui->helpLabel->setText(QStringLiteral("%1%2 %3").arg(DialogWarningIcon(), tr("Invalid segment!"), error));
         return false;
     }
 

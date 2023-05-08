@@ -31,9 +31,6 @@
 
 #include "../dialogtool.h"
 #include "../vpatterndb/vpiece.h"
-#include "../vpatterndb/floatItemData/vpatternlabeldata.h"
-#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
-#include "../vpatterndb/floatItemData/vgrainlinedata.h"
 
 namespace Ui
 {
@@ -59,30 +56,30 @@ public:
     DialogSeamAllowance(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
                         QWidget *parent = nullptr);
     DialogSeamAllowance(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogSeamAllowance();
+    ~DialogSeamAllowance() override;
 
     void EnableApply(bool enable);
 
     auto GetPiece() const -> VPiece;
-    void   SetPiece(const VPiece &piece);
+    void SetPiece(const VPiece &piece);
 
     auto GetFormulaSAWidth() const -> QString;
 
     auto UndoStack() -> QVector<QPointer<VUndoCommand>> &;
 
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
-    virtual void ShowDialog(bool click) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void ShowDialog(bool click) override;
 
 protected:
     /** @brief SaveData Put dialog data in local variables */
-    virtual void SaveData() override;
-    virtual void CheckState() final;
-    virtual void closeEvent(QCloseEvent *event) override;
-    virtual void showEvent( QShowEvent *event ) override;
-    virtual void resizeEvent(QResizeEvent *event) override;
-    virtual auto IsValid() const -> bool final;
-    virtual void SetPatternDoc(VAbstractPattern *doc) final;
+    void SaveData() override;
+    void CheckState() final;
+    void closeEvent(QCloseEvent *event) override;
+    void showEvent(QShowEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
+    auto IsValid() const -> bool final;
+    void SetPatternDoc(VAbstractPattern *doc) final;
 
 private slots:
     void NameDetailChanged();
@@ -175,70 +172,70 @@ private:
     Ui::TabGrainline        *uiTabGrainline;
     Ui::TabPins             *uiTabPins;
     Ui::TabPassmarks        *uiTabPassmarks;
-    Ui::TabPlaceLabels      *uiTabPlaceLabels;
+    Ui::TabPlaceLabels *uiTabPlaceLabels;
 
-    QWidget *m_tabPaths;
-    QWidget *m_tabLabels;
-    QWidget *m_tabGrainline;
-    QWidget *m_tabPins;
-    QWidget *m_tabPassmarks;
-    QWidget *m_tabPlaceLabels;
+    QWidget *m_tabPaths{nullptr};
+    QWidget *m_tabLabels{nullptr};
+    QWidget *m_tabGrainline{nullptr};
+    QWidget *m_tabPins{nullptr};
+    QWidget *m_tabPassmarks{nullptr};
+    QWidget *m_tabPlaceLabels{nullptr};
 
-    FancyTabBar* m_ftb;
+    FancyTabBar *m_ftb{nullptr};
 
-    bool   applyAllowed;
-    bool   flagGPin;
-    bool   flagDPin;
-    bool   flagPPin;
-    bool   flagGFormulas;
-    bool   flagDLAngle;
-    bool   flagDLFormulas;
-    bool   flagPLAngle;
-    bool   flagPLFormulas;
-    bool   flagFormulaBefore;
-    bool   flagFormulaAfter;
-    bool   flagFormulaPassmarkLength{true};
-    bool   flagMainPathIsValid;
-    bool   flagName;
-    bool   flagUUID;
-    bool   flagFormula;
-    bool   m_bAddMode;
-    bool   m_patternLabelDataChanged{false};
-    bool   m_askSavePatternLabelData{false};
-    bool   m_patternTemplateDataChanged{false};
-    bool   m_patternMaterialsChanged{false};
+    bool applyAllowed{false}; // By default disabled
+    bool flagGPin{false};
+    bool flagDPin{false};
+    bool flagPPin{false};
+    bool flagGFormulas{true};
+    bool flagDLAngle{true};
+    bool flagDLFormulas{true};
+    bool flagPLAngle{true};
+    bool flagPLFormulas{true};
+    bool flagFormulaBefore{true};
+    bool flagFormulaAfter{true};
+    bool flagFormulaPassmarkLength{true};
+    bool flagMainPathIsValid{true};
+    bool flagName{true}; // We have default name of piece.
+    bool flagUUID{true};
+    bool flagFormula{true};
+    bool m_bAddMode{true};
+    bool m_patternLabelDataChanged{false};
+    bool m_askSavePatternLabelData{false};
+    bool m_patternTemplateDataChanged{false};
+    bool m_patternMaterialsChanged{false};
 
-    QPointer<DialogTool>   m_dialog;
-    QPointer<VisPieceSpecialPoints> m_visSpecialPoints;
+    QPointer<DialogTool> m_dialog{};
+    QPointer<VisPieceSpecialPoints> m_visSpecialPoints{};
 
     QVector<VLabelTemplateLine> m_patternTemplateLines{};
 
     QMap<int, QString> m_patternMaterials{};
 
-    int                  m_iRotBaseHeight;
-    int                  m_iLenBaseHeight;
-    int                  m_DLWidthBaseHeight;
-    int                  m_DLHeightBaseHeight;
-    int                  m_DLAngleBaseHeight;
-    int                  m_PLWidthBaseHeight;
-    int                  m_PLHeightBaseHeight;
-    int                  m_PLAngleBaseHeight;
-    int                  m_formulaBaseWidth;
-    int                  m_formulaBaseWidthBefore;
-    int                  m_formulaBaseWidthAfter;
-    int                  m_formulaBasePassmarkLength{0};
+    int m_iRotBaseHeight{0};
+    int m_iLenBaseHeight{0};
+    int m_DLWidthBaseHeight{0};
+    int m_DLHeightBaseHeight{0};
+    int m_DLAngleBaseHeight{0};
+    int m_PLWidthBaseHeight{0};
+    int m_PLHeightBaseHeight{0};
+    int m_PLAngleBaseHeight{0};
+    int m_formulaBaseWidth{0};
+    int m_formulaBaseWidthBefore{0};
+    int m_formulaBaseWidthAfter{0};
+    int m_formulaBasePassmarkLength{0};
 
-    QTimer *m_timerWidth;
-    QTimer *m_timerWidthBefore;
-    QTimer *m_timerWidthAfter;
-    QTimer *m_timerPassmarkLength;
-    qreal   m_saWidth;
+    QTimer *m_timerWidth{nullptr};
+    QTimer *m_timerWidthBefore{nullptr};
+    QTimer *m_timerWidthAfter{nullptr};
+    QTimer *m_timerPassmarkLength{nullptr};
+    qreal m_saWidth{0};
 
-    QVector<VLabelTemplateLine> m_templateLines;
+    QVector<VLabelTemplateLine> m_templateLines{};
 
-    QVector<QPointer<VUndoCommand>> m_undoStack;
-    QHash<quint32, VPlaceLabelItem> m_newPlaceLabels;
-    QHash<quint32, VPiecePath> m_newPaths;
+    QVector<QPointer<VUndoCommand>> m_undoStack{};
+    QHash<quint32, VPlaceLabelItem> m_newPlaceLabels{};
+    QHash<quint32, VPiecePath> m_newPaths{};
 
     VAbstractPattern *m_doc{nullptr};
 
@@ -250,14 +247,14 @@ private:
 
     auto CreatePiece() const -> VPiece;
 
-    void    NewMainPathItem(const VPieceNode &node);
+    void NewMainPathItem(const VPieceNode &node);
     auto GetPathName(quint32 path, bool reverse = false) const -> QString;
     auto MainPathIsValid() const -> bool;
-    void    ValidObjects(bool value);
+    void ValidObjects(bool value);
     auto MainPathIsClockwise() const -> bool;
-    void    UpdateCurrentCustomSARecord();
-    void    UpdateCurrentInternalPathRecord();
-    void    UpdateCurrentPlaceLabelRecords();
+    void UpdateCurrentCustomSARecord();
+    void UpdateCurrentInternalPathRecord();
+    void UpdateCurrentPlaceLabelRecords();
 
     auto GetItemById(quint32 id) -> QListWidgetItem *;
 
@@ -325,9 +322,9 @@ private:
 //---------------------------------------------------------------------------------------------------------------------
 inline auto DialogSeamAllowance::IsValid() const -> bool
 {
-    return flagName && flagUUID && flagMainPathIsValid && flagFormula && flagFormulaBefore && flagFormulaAfter
-            && (flagGFormulas || flagGPin) && flagDLAngle && (flagDLFormulas || flagDPin) && flagPLAngle
-            && (flagPLFormulas || flagPPin) && flagFormulaPassmarkLength;
+    return flagName && flagUUID && flagMainPathIsValid && flagFormula && flagFormulaBefore && flagFormulaAfter &&
+           (flagGFormulas || flagGPin) && flagDLAngle && (flagDLFormulas || flagDPin) && flagPLAngle &&
+           (flagPLFormulas || flagPPin) && flagFormulaPassmarkLength;
 }
 
 #endif // DIALOGSEAMALLOWANCE_H

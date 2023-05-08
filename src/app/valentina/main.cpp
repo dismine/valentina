@@ -78,7 +78,9 @@ auto main(int argc, char *argv[]) -> int
     REGISTER_META_TYPE_STREAM_OPERATORS(CustomSARecord);
 
 #ifndef Q_OS_MAC // supports natively
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     InitHighDpiScaling(argc, argv);
+#endif
 #endif //Q_OS_MAC
 
 #ifdef Q_OS_MAC

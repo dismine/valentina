@@ -41,31 +41,31 @@ class DialogPiecePath : public DialogTool
     Q_OBJECT // NOLINT
 public:
     explicit DialogPiecePath(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogPiecePath();
+    ~DialogPiecePath() override;
 
     void EnbleShowMode(bool disable);
     void HideVisibilityTrigger();
 
     auto GetPiecePath() const -> VPiecePath;
-    void       SetPiecePath(const VPiecePath &path);
+    void SetPiecePath(const VPiecePath &path);
 
     auto GetPieceId() const -> quint32;
-    void    SetPieceId(quint32 id);
+    void SetPieceId(quint32 id);
 
     auto GetFormulaSAWidth() const -> QString;
-    void    SetFormulaSAWidth(const QString &formula);
+    void SetFormulaSAWidth(const QString &formula);
 
-    virtual void SetPiecesList(const QVector<quint32> &list) override;
+    void SetPiecesList(const QVector<quint32> &list) override;
 
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
-    virtual void ShowDialog(bool click) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void ShowDialog(bool click) override;
 
 protected:
-    virtual void CheckState() final;
-    virtual void ShowVisualization() override;
-    virtual void closeEvent(QCloseEvent *event) override;
-    virtual auto IsValid() const -> bool final;
+    void CheckState() final;
+    void ShowVisualization() override;
+    void closeEvent(QCloseEvent *event) override;
+    auto IsValid() const -> bool final;
 
 private slots:
     void ShowContextMenu(const QPoint &pos);
@@ -102,8 +102,8 @@ private slots:
 private:
     Q_DISABLE_COPY_MOVE(DialogPiecePath) // NOLINT
     Ui::DialogPiecePath *ui;
-    bool  m_showMode;
-    qreal m_saWidth;
+    bool m_showMode{false};
+    qreal m_saWidth{0};
 
     QTimer *m_timerWidth;
     QTimer *m_timerWidthBefore;
@@ -111,19 +111,19 @@ private:
     QTimer *m_timerVisible;
     QTimer *m_timerPassmarkLength;
 
-    int m_formulaBaseWidth;
-    int m_formulaBaseWidthBefore;
-    int m_formulaBaseWidthAfter;
-    int m_formulaBaseVisible;
+    int m_formulaBaseWidth{0};
+    int m_formulaBaseWidthBefore{0};
+    int m_formulaBaseWidthAfter{0};
+    int m_formulaBaseVisible{0};
     int m_formulaBasePassmarkLength{0};
 
-    bool m_flagFormulaBefore;
-    bool m_flagFormulaAfter;
-    bool m_flagFormulaVisible;
+    bool m_flagFormulaBefore{true};
+    bool m_flagFormulaAfter{true};
+    bool m_flagFormulaVisible{true};
     bool m_flagFormulaPassmarkLength{true};
-    bool m_flagName;
-    bool m_flagError;
-    bool m_flagFormula;
+    bool m_flagName{true}; // We have default name of piece.
+    bool m_flagError{false};
+    bool m_flagFormula{false};
 
     void InitPathTab();
     void InitSeamAllowanceTab();
@@ -141,10 +141,10 @@ private:
     void NewItem(const VPieceNode &node);
 
     auto GetType() const -> PiecePathType;
-    void          SetType(PiecePathType type);
+    void SetType(PiecePathType type);
 
     auto GetPenType() const -> Qt::PenStyle;
-    void         SetPenType(const Qt::PenStyle &type);
+    void SetPenType(const Qt::PenStyle &type);
 
     auto IsCutPath() const -> bool;
     void SetCutPath(bool value);
@@ -166,10 +166,10 @@ private:
     auto GetFormulaSAWidthAfter() const -> QString;
 
     auto GetFormulaVisible() const -> QString;
-    void    SetFormulaVisible(const QString &formula);
+    void SetFormulaVisible(const QString &formula);
 
     auto GetFormulaPassmarkLength() const -> QString;
-    void    SetFormulaPassmarkLength(const QString &formula);
+    void SetFormulaPassmarkLength(const QString &formula);
 
     auto IsShowNotch() const -> bool;
 
@@ -179,8 +179,8 @@ private:
 //---------------------------------------------------------------------------------------------------------------------
 inline auto DialogPiecePath::IsValid() const -> bool
 {
-    return m_flagName && m_flagError && m_flagFormula && m_flagFormulaBefore && m_flagFormulaAfter
-            && m_flagFormulaVisible && m_flagFormulaPassmarkLength;
+    return m_flagName && m_flagError && m_flagFormula && m_flagFormulaBefore && m_flagFormulaAfter &&
+           m_flagFormulaVisible && m_flagFormulaPassmarkLength;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

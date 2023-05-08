@@ -585,8 +585,8 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         Q_STATIC_ASSERT_X(static_cast<int>(ContextMenuOption::LAST_ONE_DO_NOT_USE) == 33,
                           "Not all options were handled.");
 
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wswitch-default")
+        QT_WARNING_PUSH
+        QT_WARNING_DISABLE_GCC("-Wswitch-default")
         switch(selectedOption)
         {
             case ContextMenuOption::LAST_ONE_DO_NOT_USE:
@@ -700,7 +700,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
                 SelectPassmarkLine(PassmarkLineType::BoxMark);
                 break;
         };
-QT_WARNING_POP
+        QT_WARNING_POP
     }
 }
 

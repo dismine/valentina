@@ -32,7 +32,6 @@
 #include <QMetaType>
 
 #include "vpiece.h"
-#include "../vgeometry/vgeometrydef.h"
 #include "../vmisc/typedef.h"
 
 class QPainterPath;
@@ -49,24 +48,26 @@ QT_WARNING_DISABLE_GCC("-Weffc++")
 
 struct VPiecePassmarkData
 {
-    VSAPoint previousSAPoint{};
-    VSAPoint passmarkSAPoint{};
-    VSAPoint nextSAPoint{};
-    qreal saWidth{0};
-    QString nodeName{};
-    QString pieceName{};
-    PassmarkLineType passmarkLineType{PassmarkLineType::OneLine};
-    PassmarkAngleType passmarkAngleType{PassmarkAngleType::Straightforward};
-    bool isMainPathNode{true};
-    bool isShowSecondPassmark{true};
-    vsizetype passmarkIndex{-1};
-    vidtype id{NULL_ID};
-    qreal globalPassmarkLength{0};
+    VSAPoint previousSAPoint{};       // NOLINT(misc-non-private-member-variables-in-classes)
+    VSAPoint passmarkSAPoint{};       // NOLINT(misc-non-private-member-variables-in-classes)
+    VSAPoint nextSAPoint{};           // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal saWidth{0};                 // NOLINT(misc-non-private-member-variables-in-classes)
+    QString nodeName{};               // NOLINT(misc-non-private-member-variables-in-classes)
+    QString pieceName{};              // NOLINT(misc-non-private-member-variables-in-classes)
+    PassmarkLineType passmarkLineType{// NOLINT(misc-non-private-member-variables-in-classes)
+                                      PassmarkLineType::OneLine};
+    PassmarkAngleType passmarkAngleType{// NOLINT(misc-non-private-member-variables-in-classes)
+                                        PassmarkAngleType::Straightforward};
+    bool isMainPathNode{true};              // NOLINT(misc-non-private-member-variables-in-classes)
+    bool isShowSecondPassmark{true};        // NOLINT(misc-non-private-member-variables-in-classes)
+    vsizetype passmarkIndex{-1};            // NOLINT(misc-non-private-member-variables-in-classes)
+    vidtype id{NULL_ID};                    // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal globalPassmarkLength{0};          // NOLINT(misc-non-private-member-variables-in-classes)
 
     auto toJson() const -> QJsonObject;
 };
 
-Q_DECLARE_METATYPE(VPiecePassmarkData)
+Q_DECLARE_METATYPE(VPiecePassmarkData)                  // NOLINT
 Q_DECLARE_TYPEINFO(VPiecePassmarkData, Q_MOVABLE_TYPE); // NOLINT
 
 QT_WARNING_POP
@@ -76,7 +77,7 @@ enum class PassmarkSide : qint8 { All=0, Left=1, Right=2 };
 class VPassmark
 {
 public:
-    VPassmark();
+    VPassmark() = default;
     explicit VPassmark(const VPiecePassmarkData &data);
 
     auto FullPassmark(const VPiece &piece, const VContainer *data) const -> QVector<QLineF>;
