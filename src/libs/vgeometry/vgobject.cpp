@@ -35,6 +35,7 @@
 #include <QPointF>
 #include <QRectF>
 #include <QTransform>
+#include <QtMath>
 
 #include "../vmisc/def.h"
 #include "../vmisc/compatibility.h"

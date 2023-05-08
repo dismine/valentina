@@ -28,11 +28,11 @@
 #ifndef VPIECEGRAINLINE_P_H
 #define VPIECEGRAINLINE_P_H
 
+#include "../ifc/exception/vexception.h"
+#include "../vmisc/defglobal.h"
+#include "../vpatterndb/floatItemData/floatitemdef.h"
 #include <QLineF>
 #include <QSharedData>
-#include "../vmisc/defglobal.h"
-#include "../ifc/exception/vexception.h"
-#include "vpatterndb/floatItemData/floatitemdef.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")

@@ -30,7 +30,6 @@
 #include "../ifcdef.h"
 #include "../vlayout/vlayoutpoint.h"
 #include "compatibility.h"
-#include "vpatterndb/floatItemData/floatitemdef.h"
 
 /*
  * Version rules:
