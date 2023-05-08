@@ -27,7 +27,6 @@
  *************************************************************************/
 
 #include "vdxfengine.h"
-#include "qassert.h"
 #include <QLineF>
 
 #include <QByteArray>

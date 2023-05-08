@@ -54,7 +54,6 @@
 #include <QDesktopServices>
 #include <QUrl>
 
-#include "qassert.h"
 #include "qtpreprocessorsupport.h"
 #include "vabstractapplication.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)

@@ -29,7 +29,7 @@
 #ifndef FLOATITEMDEF_H
 #define FLOATITEMDEF_H
 
-#include <QtTypes>
+#include <QtGlobal>
 
 // denotes the type of arrow for the grainline
 enum class GrainlineArrowDirection : qint8
