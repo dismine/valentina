@@ -179,7 +179,7 @@ auto VPiece::MainPathPoints(const VContainer *data) const -> QVector<VLayoutPoin
 //    DumpPiece(*this, data, QStringLiteral("input.json.XXXXXX"));  // Uncomment for dumping test data
 
     VPiecePath mainPath = GetPath();
-    mainPath.SetName(tr("Main path of piece %1").arg(GetName()));
+    mainPath.SetName(QCoreApplication::translate("VPiece", "Main path of piece %1").arg(GetName()));
 
     QVector<VLayoutPoint> points = mainPath.PathPoints(data);
     points = CheckLoops(CorrectEquidistantPoints(points));//A path can contains loops

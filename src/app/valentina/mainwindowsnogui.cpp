@@ -840,7 +840,8 @@ auto MainWindowsNoGUI::PrepareDetailsForLayout(const QVector<DetailForLayout> &d
         return VLayoutPiece::Create(data.piece, data.id, tool->getData());
     };
 
-    QProgressDialog progress(tr("Preparing details for layout"), QString(), 0, static_cast<int>(details.size()));
+    QProgressDialog progress(QCoreApplication::translate("MainWindowsNoGUI", "Preparing details for layout"), QString(),
+                             0, static_cast<int>(details.size()));
     progress.setWindowModality(Qt::ApplicationModal);
 
     QFutureWatcher<VLayoutPiece> futureWatcher;
@@ -1262,7 +1263,7 @@ auto MainWindowsNoGUI::OpenMeasurementFile(const QString &path) const -> QShared
 
         if (m->Type() == MeasurementsType::Unknown)
         {
-            throw VException(tr("Measurement file has unknown format."));
+            throw VException(QCoreApplication::translate("MainWindowsNoGUI", "Measurement file has unknown format."));
         }
 
         if (m->Type() == MeasurementsType::Multisize)
@@ -1278,14 +1279,16 @@ auto MainWindowsNoGUI::OpenMeasurementFile(const QString &path) const -> QShared
 
         if (not m->IsDefinedKnownNamesValid())
         {
-            throw VException(tr("Measurement file contains invalid known measurement(s)."));
+            throw VException(QCoreApplication::translate("MainWindowsNoGUI",
+                                                         "Measurement file contains invalid known measurement(s)."));
         }
 
         CheckRequiredMeasurements(m.data());
     }
     catch (VException &e)
     {
-        qCCritical(vMainNoGUIWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
+        qCCritical(vMainNoGUIWindow, "%s\n\n%s\n\n%s",
+                   qUtf8Printable(QCoreApplication::translate("MainWindowsNoGUI", "File error.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         if (not m.isNull())
         {

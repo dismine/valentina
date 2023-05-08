@@ -307,12 +307,12 @@ template <typename T> auto VContainer::GetVariable(const QString &name) const ->
         }
         catch (const std::bad_alloc &)
         {
-            throw VExceptionBadId(tr("Can't cast object"), name);
+            throw VExceptionBadId(QCoreApplication::translate("VContainer", "Can't cast object"), name);
         }
     }
     else
     {
-        throw VExceptionBadId(tr("Can't find object"), name);
+        throw VExceptionBadId(QCoreApplication::translate("VContainer", "Can't find object"), name);
     }
 }
 

@@ -2117,7 +2117,8 @@ auto VAbstractPattern::ParseItemElement(const QDomElement &domElement) -> QPair<
     }
     catch (const VExceptionBadId &e)
     {
-        VExceptionObjectError excep(tr("Error creating or updating group"), domElement);
+        VExceptionObjectError excep(QCoreApplication::translate("VAbstractPattern", "Error creating or updating group"),
+                                    domElement);
         excep.AddMoreInformation(e.ErrorMessage());
         throw excep;
     }
@@ -2183,7 +2184,8 @@ auto VAbstractPattern::GetFMeasurements(const QDomElement &element) const -> QVe
             {
                 VFinalMeasurement m;
 
-                m.name = GetParametrString(tagFMeasurement, AttrName, tr("measurement"));
+                m.name = GetParametrString(tagFMeasurement, AttrName,
+                                           QCoreApplication::translate("VAbstractPattern", "measurement"));
                 m.formula = GetParametrString(tagFMeasurement, AttrFormula, QChar('0'));
                 m.description = GetParametrEmptyString(tagFMeasurement, AttrDescription);
 
@@ -2694,7 +2696,8 @@ auto VAbstractPattern::GetGroupsContainingItem(quint32 toolId, quint32 objectId,
                         if((containItem && groupHasItem) || (not containItem && not groupHasItem))
                         {
                             const quint32 groupId = GetParametrUInt(group, AttrId, QChar('0'));
-                            const QString name = GetParametrString(group, AttrName, tr("New group"));
+                            const QString name = GetParametrString(
+                                group, AttrName, QCoreApplication::translate("VAbstractPattern", "New group"));
                             data.insert(groupId, name);
                         }
                     }

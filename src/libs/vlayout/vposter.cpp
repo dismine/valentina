@@ -246,13 +246,16 @@ auto VPoster::Borders(QGraphicsItem *parent, const PosterData &img, vsizetype sh
     labels->setPos(rec.x() + layoutX, rec.y() + rec.height()-static_cast<int>(allowance)+layoutY);
     labels->setTextWidth(rec.width()-(static_cast<int>(allowance)+layoutX));
 
-    const QString grid = tr("Grid ( %1 , %2 )").arg(img.row+1).arg(img.column+1);
-    const QString page = tr("Page %1 of %2").arg(img.row*(img.columns)+img.column+1).arg(img.rows*img.columns);
+    const QString grid =
+        QCoreApplication::translate("VPoster", "Grid ( %1 , %2 )").arg(img.row + 1).arg(img.column + 1);
+    const QString page = QCoreApplication::translate("VPoster", "Page %1 of %2")
+                             .arg(img.row * (img.columns) + img.column + 1)
+                             .arg(img.rows * img.columns);
 
     QString sheet;
     if (sheets > 1)
     {
-        sheet = tr("Sheet %1 of %2").arg(img.index+1).arg(sheets);
+        sheet = QCoreApplication::translate("VPoster", "Sheet %1 of %2").arg(img.index + 1).arg(sheets);
     }
 
     labels->setHtml(QString("<table width='100%'>"
@@ -317,7 +320,8 @@ auto VPoster::ImageWatermark(QGraphicsItem *parent, const PosterData &img, const
 
         if (watermark.isNull())
         {
-            const QString errorMsg = tr("Cannot open the watermark image.") + QChar(' ') + error;
+            const QString errorMsg =
+                QCoreApplication::translate("VPoster", "Cannot open the watermark image.") + QChar(' ') + error;
             VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
                                               qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
             return data;
@@ -327,7 +331,8 @@ auto VPoster::ImageWatermark(QGraphicsItem *parent, const PosterData &img, const
     }
     else
     {
-        const QString errorMsg = tr("Not supported file suffix '%1'").arg(f.suffix());
+        const QString errorMsg =
+            QCoreApplication::translate("VPoster", "Not supported file suffix '%1'").arg(f.suffix());
         VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
                                               qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         return data;

@@ -1085,7 +1085,8 @@ auto VDomDocument::GetLabelTemplate(const QDomElement &element) const -> QVector
             if (tagLine.tagName() == TagLine)
             {
                 VLabelTemplateLine line;
-                line.line = GetParametrString(tagLine, AttrText, tr("<empty>"));
+                line.line =
+                    GetParametrString(tagLine, AttrText, QCoreApplication::translate("VDomDocument", "<empty>"));
                 line.bold = GetParametrBool(tagLine, AttrBold, falseStr);
                 line.italic = GetParametrBool(tagLine, AttrItalic, falseStr);
                 line.alignment = static_cast<int>(GetParametrUInt(tagLine, AttrAlignment, QChar('0')));

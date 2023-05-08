@@ -313,14 +313,15 @@ auto VNodePoint::InitContextMenu(QMenu *menu, vidtype pieceId, quint32 referens)
 
     QHash<int, QAction *> contextMenu;
 
-    QAction *actionShowLabel = menu->addAction(tr("Show label"));
+    QAction *actionShowLabel = menu->addAction(QCoreApplication::translate("VNodePoint", "Show label"));
     actionShowLabel->setCheckable(true);
     actionShowLabel->setChecked(VAbstractTool::data.GeometricObject<VPointF>(m_id)->IsShowLabel());
     contextMenu.insert(static_cast<int>(ContextMenuOption::ShowLabel), actionShowLabel);
 
     InitPassmarkMenu(menu, pieceId, contextMenu);
 
-    contextMenu.insert(static_cast<int>(ContextMenuOption::Exclude), menu->addAction(tr("Exclude")));
+    contextMenu.insert(static_cast<int>(ContextMenuOption::Exclude),
+                       menu->addAction(QCoreApplication::translate("VNodePoint", "Exclude")));
 
     InitAngleTypeMenu(menu, pieceId, contextMenu);
     InitPassmarkAngleTypeMenu(menu, pieceId, contextMenu);
@@ -331,30 +332,33 @@ auto VNodePoint::InitContextMenu(QMenu *menu, vidtype pieceId, quint32 referens)
     menu->addAction(separatorAct);
 
     contextMenu.insert(static_cast<int>(ContextMenuOption::Option),
-                       menu->addAction(QIcon::fromTheme(QStringLiteral("preferences-other")), tr("Options")));
+                       menu->addAction(QIcon::fromTheme(QStringLiteral("preferences-other")),
+                                       QCoreApplication::translate("VNodePoint", "Options")));
 
     const VPiece detail = VAbstractTool::data.GetPiece(pieceId);
 
-    QAction *inLayoutOption = menu->addAction(tr("In layout"));
+    QAction *inLayoutOption = menu->addAction(QCoreApplication::translate("VNodePoint", "In layout"));
     inLayoutOption->setCheckable(true);
     inLayoutOption->setChecked(detail.IsInLayout());
     contextMenu.insert(static_cast<int>(ContextMenuOption::InLayout), inLayoutOption);
 
-    QAction *forbidFlippingOption = menu->addAction(tr("Forbid flipping"));
+    QAction *forbidFlippingOption = menu->addAction(QCoreApplication::translate("VNodePoint", "Forbid flipping"));
     forbidFlippingOption->setCheckable(true);
     forbidFlippingOption->setChecked(detail.IsForbidFlipping());
     contextMenu.insert(static_cast<int>(ContextMenuOption::ForbidFlipping), forbidFlippingOption);
 
-    QAction *forceFlippingOption = menu->addAction(tr("Force flipping"));
+    QAction *forceFlippingOption = menu->addAction(QCoreApplication::translate("VNodePoint", "Force flipping"));
     forceFlippingOption->setCheckable(true);
     forceFlippingOption->setChecked(detail.IsForceFlipping());
     contextMenu.insert(static_cast<int>(ContextMenuOption::ForceFlipping), forceFlippingOption);
 
-    QAction *reseteLabelTemplateOption = menu->addAction(tr("Reset piece label template"));
+    QAction *reseteLabelTemplateOption =
+        menu->addAction(QCoreApplication::translate("VNodePoint", "Reset piece label template"));
     reseteLabelTemplateOption->setEnabled(not doc->GetDefaultPieceLabelPath().isEmpty());
     contextMenu.insert(static_cast<int>(ContextMenuOption::ResetLabelTemplate), reseteLabelTemplateOption);
 
-    QAction *actionRemove = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-delete")), tr("Delete"));
+    QAction *actionRemove = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-delete")),
+                                            QCoreApplication::translate("VNodePoint", "Delete"));
     referens > 1 ? actionRemove->setEnabled(false) : actionRemove->setEnabled(true);
     contextMenu.insert(static_cast<int>(ContextMenuOption::Remove), actionRemove);
 

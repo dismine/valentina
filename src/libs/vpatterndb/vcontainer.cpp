@@ -185,7 +185,7 @@ auto VContainer::GetGObject(quint32 id) const -> const QSharedPointer<VGObject>
         return d->modelingObjects->value(id);
     }
 
-    throw VExceptionBadId(tr("Can't find object"), id);
+    throw VExceptionBadId(QCoreApplication::translate("VContainer", "Can't find object"), id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

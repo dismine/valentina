@@ -278,56 +278,56 @@ auto VAbstractTool::ColorsList() -> QMap<QString, QString>
         switch (i)
         {
             case 1: // ColorGreen
-                name = tr("green");
+                name = QCoreApplication::translate("VAbstractTool", "green");
                 break;
             case 2: // ColorBlue
-                name = tr("blue");
+                name = QCoreApplication::translate("VAbstractTool", "blue");
                 break;
             case 3: // ColorDarkRed
-                name = tr("dark red");
+                name = QCoreApplication::translate("VAbstractTool", "dark red");
                 break;
             case 4: // ColorDarkGreen
-                name = tr("dark green");
+                name = QCoreApplication::translate("VAbstractTool", "dark green");
                 break;
             case 5: // ColorDarkBlue
-                name = tr("dark blue");
+                name = QCoreApplication::translate("VAbstractTool", "dark blue");
                 break;
             case 6: // ColorYellow
-                name = tr("yellow");
+                name = QCoreApplication::translate("VAbstractTool", "yellow");
                 break;
             case 7: // ColorLightSalmon
-                name = tr("light salmon");
+                name = QCoreApplication::translate("VAbstractTool", "light salmon");
                 break;
             case 8: // ColorGoldenRod
-                name = tr("goldenrod");
+                name = QCoreApplication::translate("VAbstractTool", "goldenrod");
                 break;
             case 9: // ColorOrange
-                name = tr("orange");
+                name = QCoreApplication::translate("VAbstractTool", "orange");
                 break;
             case 10: // ColorDeepPink
-                name = tr("deep pink");
+                name = QCoreApplication::translate("VAbstractTool", "deep pink");
                 break;
             case 11: // ColorViolet
-                name = tr("violet");
+                name = QCoreApplication::translate("VAbstractTool", "violet");
                 break;
             case 12: // ColorDarkViolet
-                name = tr("dark violet");
+                name = QCoreApplication::translate("VAbstractTool", "dark violet");
                 break;
             case 13: // ColorMediumSeaGreen
-                name = tr("medium sea green");
+                name = QCoreApplication::translate("VAbstractTool", "medium sea green");
                 break;
             case 14: // ColorLime
-                name = tr("lime");
+                name = QCoreApplication::translate("VAbstractTool", "lime");
                 break;
             case 15: // ColorDeepSkyBlue
-                name = tr("deep sky blue");
+                name = QCoreApplication::translate("VAbstractTool", "deep sky blue");
                 break;
             case 16: // ColorCornFlowerBlue
-                name = tr("corn flower blue");
+                name = QCoreApplication::translate("VAbstractTool", "corn flower blue");
                 break;
             case 0: // ColorBlack
             default:
-                name = tr("black");
+                name = QCoreApplication::translate("VAbstractTool", "black");
                 break;
         }
 
