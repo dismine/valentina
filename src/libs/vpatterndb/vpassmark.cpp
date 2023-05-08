@@ -33,9 +33,6 @@
 #include "../vgeometry/varc.h"
 #include "../vlayout/vrawsapoint.h"
 #include "../vmisc/vabstractvalapplication.h"
-#include "qmath.h"
-#include "qnumeric.h"
-#include "qtpreprocessorsupport.h"
 #include "vgeometrydef.h"
 #include "vpassmark.h"
 
