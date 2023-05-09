@@ -28,12 +28,13 @@
 
 #include <cmath>
 
-#include <QPainter>
-#include <QGraphicsSceneMouseEvent>
-#include <QStyleOptionGraphicsItem>
 #include <QDebug>
 #include <QGraphicsScene>
+#include <QGraphicsSceneMouseEvent>
 #include <QGraphicsView>
+#include <QPainter>
+#include <QStyleOptionGraphicsItem>
+#include <QtMath>
 
 #include "../vmisc/def.h"
 #include "../vmisc/vabstractapplication.h"

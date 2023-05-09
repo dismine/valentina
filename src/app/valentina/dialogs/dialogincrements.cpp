@@ -654,32 +654,32 @@ auto DialogIncrements::IncrementUsed(const QString &name) const -> bool
 {
     const QVector<VFormulaField> expressions = m_doc->ListExpressions();
 
-    return std::ranges::any_of(expressions,
-                               [name](const auto &field)
+    return std::any_of(expressions.constBegin(), expressions.constEnd(),
+                       [name](const auto &field)
+                       {
+                           if (field.expression.indexOf(name) == -1)
+                           {
+                               return false;
+                           }
+
+                           // Eval formula
+                           try
+                           {
+                               QScopedPointer<qmu::QmuTokenParser> cal(
+                                   new qmu::QmuTokenParser(field.expression, false, false));
+
+                               // Tokens (variables, measurements)
+                               if (cal->GetTokens().values().contains(name))
                                {
-                                   if (field.expression.indexOf(name) == -1)
-                                   {
-                                       return false;
-                                   }
-
-                                   // Eval formula
-                                   try
-                                   {
-                                       QScopedPointer<qmu::QmuTokenParser> cal(
-                                           new qmu::QmuTokenParser(field.expression, false, false));
-
-                                       // Tokens (variables, measurements)
-                                       if (cal->GetTokens().values().contains(name))
-                                       {
-                                           return true;
-                                       }
-                                   }
-                                   catch (const qmu::QmuParserError &)
-                                   {
-                                       // Do nothing. Because we not sure if used. A formula is broken.
-                                   }
-                                   return false;
-                               });
+                                   return true;
+                               }
+                           }
+                           catch (const qmu::QmuParserError &)
+                           {
+                               // Do nothing. Because we not sure if used. A formula is broken.
+                           }
+                           return false;
+                       });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -27,18 +27,19 @@
  *************************************************************************/
 #include "vlayoutexporter.h"
 
+#include <QCursor>
 #include <QFileInfo>
+#include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <QGuiApplication>
+#include <QImageWriter>
 #include <QPainter>
 #include <QPrinter>
 #include <QProcess>
 #include <QSvgGenerator>
 #include <QTemporaryFile>
 #include <QtDebug>
-#include <QCursor>
-#include <QGraphicsItem>
-#include <QImageWriter>
+#include <QtMath>
 
 #include "../ifc/exception/vexception.h"
 #include "../vdxf/vdxfpaintdevice.h"
