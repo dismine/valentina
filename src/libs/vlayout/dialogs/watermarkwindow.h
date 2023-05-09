@@ -44,7 +44,7 @@ class WatermarkWindow : public QMainWindow
 
 public:
     explicit WatermarkWindow(const QString &patternPath, QWidget *parent = nullptr);
-    ~WatermarkWindow();
+    ~WatermarkWindow() override;
 
     auto CurrentFile() const -> QString;
 
@@ -52,13 +52,13 @@ public:
 
 signals:
     void New();
-    void OpenAnother(const QString &fileName) const;
+    void OpenAnother(const QString &fileName);
 
 protected:
-    virtual void closeEvent(QCloseEvent *event) override;
-    virtual void changeEvent(QEvent* event) override;
-    virtual void showEvent(QShowEvent *event) override;
-    virtual void resizeEvent(QResizeEvent *event) override;
+    void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
+    void showEvent(QShowEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
 
 private slots:
     void on_actionNew_triggered();
@@ -76,7 +76,7 @@ private:
     QString m_patternPath;
     QString m_curFile{};
     VWatermarkData m_data{};
-    QColor m_okPathColor;
+    QColor m_okPathColor{};
     bool m_isInitialized{false};
 
     unsigned m_curFileFormatVersion{0x0};
@@ -92,7 +92,7 @@ private:
     auto ContinueFormatRewrite(const QString &currentFormatVersion, const QString &maxFormatVersion) -> bool;
     auto SaveWatermark(const QString &fileName, QString &error) -> bool;
     void SetCurrentFile(const QString &fileName);
-    auto OpenNewEditor(const QString &fileName = QString()) const -> bool;
+    auto OpenNewEditor(const QString &fileName = QString()) -> bool;
     void Clear();
     auto IgnoreLocking(int error, const QString &path) -> bool;
     void ShowWatermark();

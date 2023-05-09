@@ -50,11 +50,10 @@
 #include "../vformat/vwatermark.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-WatermarkWindow::WatermarkWindow(const QString &patternPath, QWidget *parent) :
-    QMainWindow(parent),
+WatermarkWindow::WatermarkWindow(const QString &patternPath, QWidget *parent)
+  : QMainWindow(parent),
     ui(new Ui::WatermarkWindow),
-    m_patternPath(patternPath),
-    m_okPathColor()
+    m_patternPath(patternPath)
 {
     ui->setupUi(this);
     m_okPathColor = ui->lineEditPath->palette().color(ui->lineEditPath->foregroundRole());
@@ -274,7 +273,7 @@ void WatermarkWindow::showEvent(QShowEvent *event)
     // do your init stuff here
 
     QSize sz = VAbstractApplication::VApp()->Settings()->GetWatermarkEditorSize();
-    if (sz.isEmpty() == false)
+    if (not sz.isEmpty())
     {
         resize(sz);
     }
@@ -384,78 +383,76 @@ auto WatermarkWindow::on_actionSave_triggered() -> bool
     {
         return on_actionSaveAs_triggered();
     }
-    else
+
+    if (m_curFileFormatVersion < VWatermarkConverter::WatermarkMaxVer &&
+        not ContinueFormatRewrite(m_curFileFormatVersionStr, VWatermarkConverter::WatermarkMaxVerStr))
     {
-        if (m_curFileFormatVersion < VWatermarkConverter::WatermarkMaxVer
-                && not ContinueFormatRewrite(m_curFileFormatVersionStr, VWatermarkConverter::WatermarkMaxVerStr))
+        return false;
+    }
+
+    // #ifdef Q_OS_WIN32
+    //         qt_ntfs_permission_lookup++; // turn checking on
+    // #endif /*Q_OS_WIN32*/
+    const bool isFileWritable = QFileInfo(m_curFile).isWritable();
+    // #ifdef Q_OS_WIN32
+    //         qt_ntfs_permission_lookup--; // turn it off again
+    // #endif /*Q_OS_WIN32*/
+    if (not isFileWritable)
+    {
+        QMessageBox messageBox(this);
+        messageBox.setIcon(QMessageBox::Question);
+        messageBox.setText(tr("The document has no write permissions."));
+        messageBox.setInformativeText(tr("Do you want to change the permissions?"));
+        messageBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
+        messageBox.setDefaultButton(QMessageBox::Yes);
+
+        if (messageBox.exec() == QMessageBox::Yes)
         {
-            return false;
-        }
+            // #ifdef Q_OS_WIN32
+            //                 qt_ntfs_permission_lookup++; // turn checking on
+            // #endif /*Q_OS_WIN32*/
+            bool changed =
+                QFile::setPermissions(m_curFile, QFileInfo(m_curFile).permissions() | QFileDevice::WriteUser);
+            // #ifdef Q_OS_WIN32
+            //                 qt_ntfs_permission_lookup--; // turn it off again
+            // #endif /*Q_OS_WIN32*/
 
-//#ifdef Q_OS_WIN32
-//        qt_ntfs_permission_lookup++; // turn checking on
-//#endif /*Q_OS_WIN32*/
-        const bool isFileWritable = QFileInfo(m_curFile).isWritable();
-//#ifdef Q_OS_WIN32
-//        qt_ntfs_permission_lookup--; // turn it off again
-//#endif /*Q_OS_WIN32*/
-        if (not isFileWritable)
-        {
-            QMessageBox messageBox(this);
-            messageBox.setIcon(QMessageBox::Question);
-            messageBox.setText(tr("The document has no write permissions."));
-            messageBox.setInformativeText(tr("Do you want to change the permissions?"));
-            messageBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
-            messageBox.setDefaultButton(QMessageBox::Yes);
-
-            if (messageBox.exec() == QMessageBox::Yes)
+            if (not changed)
             {
-//#ifdef Q_OS_WIN32
-//                qt_ntfs_permission_lookup++; // turn checking on
-//#endif /*Q_OS_WIN32*/
-                bool changed = QFile::setPermissions(m_curFile,
-                                                     QFileInfo(m_curFile).permissions() | QFileDevice::WriteUser);
-//#ifdef Q_OS_WIN32
-//                qt_ntfs_permission_lookup--; // turn it off again
-//#endif /*Q_OS_WIN32*/
-
-                if (not changed)
-                {
-                    QMessageBox messageBoxWarning(this);
-                    messageBoxWarning.setIcon(QMessageBox::Warning);
-                    messageBoxWarning.setText(tr("Cannot set permissions for %1 to writable.").arg(m_curFile));
-                    messageBoxWarning.setInformativeText(tr("Could not save the file."));
-                    messageBoxWarning.setDefaultButton(QMessageBox::Ok);
-                    messageBoxWarning.setStandardButtons(QMessageBox::Ok);
-                    messageBoxWarning.exec();
-                    return false;
-                }
-            }
-            else
-            {
+                QMessageBox messageBoxWarning(this);
+                messageBoxWarning.setIcon(QMessageBox::Warning);
+                messageBoxWarning.setText(tr("Cannot set permissions for %1 to writable.").arg(m_curFile));
+                messageBoxWarning.setInformativeText(tr("Could not save the file."));
+                messageBoxWarning.setDefaultButton(QMessageBox::Ok);
+                messageBoxWarning.setStandardButtons(QMessageBox::Ok);
+                messageBoxWarning.exec();
                 return false;
             }
         }
-
-        QString error;
-        bool result = SaveWatermark(m_curFile, error);
-        if (result)
-        {
-            m_curFileFormatVersion = VWatermarkConverter::WatermarkMaxVer;
-            m_curFileFormatVersionStr = VWatermarkConverter::WatermarkMaxVerStr;
-        }
         else
         {
-            QMessageBox messageBox(this);
-            messageBox.setIcon(QMessageBox::Warning);
-            messageBox.setText(tr("Could not save the file"));
-            messageBox.setDefaultButton(QMessageBox::Ok);
-            messageBox.setDetailedText(error);
-            messageBox.setStandardButtons(QMessageBox::Ok);
-            messageBox.exec();
+            return false;
         }
-        return result;
     }
+
+    QString error;
+    bool result = SaveWatermark(m_curFile, error);
+    if (result)
+    {
+        m_curFileFormatVersion = VWatermarkConverter::WatermarkMaxVer;
+        m_curFileFormatVersionStr = VWatermarkConverter::WatermarkMaxVerStr;
+    }
+    else
+    {
+        QMessageBox messageBox(this);
+        messageBox.setIcon(QMessageBox::Warning);
+        messageBox.setText(tr("Could not save the file"));
+        messageBox.setDefaultButton(QMessageBox::Ok);
+        messageBox.setDetailedText(error);
+        messageBox.setStandardButtons(QMessageBox::Ok);
+        messageBox.exec();
+    }
+    return result;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -607,10 +604,7 @@ auto WatermarkWindow::ContinueFormatRewrite(const QString &currentFormatVersion,
             VAbstractApplication::VApp()->Settings()->SetConfirmFormatRewriting(not msgBox.isChecked());
             return true;
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
     return true;
 }
@@ -652,7 +646,7 @@ void WatermarkWindow::SetCurrentFile(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto WatermarkWindow::OpenNewEditor(const QString &fileName) const -> bool
+auto WatermarkWindow::OpenNewEditor(const QString &fileName) -> bool
 {
     if (this->isWindowModified() || not m_curFile.isEmpty())
     {
