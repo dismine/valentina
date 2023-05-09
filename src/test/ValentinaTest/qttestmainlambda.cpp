@@ -78,7 +78,7 @@ auto main(int argc, char **argv) -> int
     QResource::registerResource(QCoreApplication::applicationDirPath() + QStringLiteral("/test_data.rcc"));
 
     int status = 0;
-    auto ASSERT_TEST = [&status, argc, argv](QObject* obj)
+    auto ASSERT_TEST = [&status, argc, argv](QObject *obj)
     {
         status |= QTest::qExec(obj, argc, argv);
         delete obj;

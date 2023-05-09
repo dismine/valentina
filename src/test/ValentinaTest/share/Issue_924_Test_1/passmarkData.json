@@ -1,10 +1,12 @@
 {
     "data": {
         "globalPassmarkLength": 0,
+        "globalPassmarkWidth": 0,
         "id": 373,
         "isMainPathNode": true,
         "isShowSecondPassmark": true,
         "nextSAPoint": {
+            "passmarkClockwiseOpening": false,
             "saAfter": 37.795275590551185,
             "saBefore": 0,
             "turnPoint": true,
@@ -17,6 +19,7 @@
         "passmarkIndex": 0,
         "passmarkLineType": 3,
         "passmarkSAPoint": {
+            "passmarkClockwiseOpening": false,
             "saAfter": 0,
             "saBefore": 37.795275590551185,
             "turnPoint": true,
@@ -28,6 +31,7 @@
         "previousSAPoint": {
             "angle": 6,
             "curvePoint": true,
+            "passmarkClockwiseOpening": false,
             "saAfter": 37.795275590551185,
             "saBefore": 37.795275590551185,
             "type": "VSAPoint",

@@ -32,7 +32,9 @@
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
 #include "../vlayout/vrawsapoint.h"
+#include "../vmisc/testpath.h" // do not remove
 #include "../vmisc/vabstractvalapplication.h"
+#include "../vpatterndb/testpassmark.h" // do not remove
 #include "vgeometrydef.h"
 #include "vpassmark.h"
 
@@ -674,9 +676,10 @@ auto VPassmark::SAPassmark(const QVector<QPointF> &seamAllowance, const QVector<
         return {};
     }
 
-//    DumpVector(seamAllowance, QStringLiteral("seamAllowance.json.XXXXXX")); // Uncomment for dumping test data
-//    DumpVector(seamAllowance, QStringLiteral("rotatedSeamAllowance.json.XXXXXX")); // Uncomment for dumping test data
-//    DumpPassmarkData(m_data, QStringLiteral("passmarkData.json.XXXXXX")); // Uncomment for dumping test data
+    // DumpVector(seamAllowance, QStringLiteral("seamAllowance.json.XXXXXX")); // Uncomment for dumping test data
+    // DumpVector(rotatedSeamAllowance,
+    //            QStringLiteral("rotatedSeamAllowance.json.XXXXXX"));       // Uncomment for dumping test data
+    // DumpPassmarkData(m_data, QStringLiteral("passmarkData.json.XXXXXX")); // Uncomment for dumping test data
 
     QVector<QLineF> lines = SAPassmarkBaseLine(seamAllowance, rotatedSeamAllowance, side);
     if (lines.isEmpty())
@@ -685,7 +688,7 @@ auto VPassmark::SAPassmark(const QVector<QPointF> &seamAllowance, const QVector<
     }
 
     lines = CreatePassmarkLines(lines, seamAllowance, side);
-    //    DumpPassmarkShape(lines, QStringLiteral("passmarkShape.json.XXXXXX")); // Uncomment for dumping test data
+    // DumpPassmarkShape(lines, QStringLiteral("passmarkShape.json.XXXXXX")); // Uncomment for dumping test data
     return lines;
 }
 
