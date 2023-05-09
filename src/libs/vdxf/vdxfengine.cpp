@@ -1225,6 +1225,8 @@ void VDxfEngine::ExportASTMNotch(const QSharedPointer<dx_ifaceBlock> &detailBloc
                 case PassmarkLineType::LAST_ONE_DO_NOT_USE:
                     Q_UNREACHABLE();
                     break;
+                default:
+                    break;
             };
 
             detailBlock->ent.push_back(notch);

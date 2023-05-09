@@ -39,6 +39,7 @@
 #include "vpassmark.h"
 
 #include <QJsonObject>
+#include <QtMath>
 
 const qreal VPassmark::passmarkRadiusFactor = 0.45;
 

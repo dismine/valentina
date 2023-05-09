@@ -29,6 +29,7 @@
 #include "../vgeometry/vabstractcurve.h"
 #include "qmath.h"
 #include "vpiecegrainline_p.h"
+#include <algorithm>
 
 #include <QTransform>
 
@@ -427,10 +428,7 @@ auto VPieceGrainline::IsPositionValid(const QVector<QPointF> &contourPoints) con
 auto VPieceGrainline::IsShapeValid() const -> bool
 {
     GrainlineShape shape = Shape();
-    return std::ranges::all_of(shape, [](const auto& subShape)
-    {
-        return not subShape.isEmpty();
-    });
+    return std::all_of(shape.cbegin(), shape.cend(), [](const auto &subShape) { return not subShape.isEmpty(); });
 }
 
 // Friend functions
