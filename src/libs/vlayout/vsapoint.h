@@ -280,7 +280,7 @@ Q_DECL_RELAXED_CONSTEXPR inline auto VSAPoint::PassmarkLength(qreal width) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline bool VSAPoint::IsPassmarkClockwiseOpening() const
+Q_DECL_CONSTEXPR inline auto VSAPoint::IsPassmarkClockwiseOpening() const -> bool
 {
     return m_passmarkClockwiseOpening;
 }

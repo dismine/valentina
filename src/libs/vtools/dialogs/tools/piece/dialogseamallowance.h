@@ -31,6 +31,7 @@
 
 #include "../dialogtool.h"
 #include "../vpatterndb/vpiece.h"
+#include "../vpatterndb/vpiecepath.h"
 
 namespace Ui
 {
