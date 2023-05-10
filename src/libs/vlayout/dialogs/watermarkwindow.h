@@ -62,8 +62,8 @@ protected:
 
 private slots:
     void on_actionNew_triggered();
-    auto on_actionSaveAs_triggered() -> bool;
-    auto on_actionSave_triggered() -> bool;
+    bool on_actionSaveAs_triggered(); // NOLINT(modernize-use-trailing-return-type)
+    bool on_actionSave_triggered();   // NOLINT(modernize-use-trailing-return-type)
     void on_actionOpen_triggered();
     void on_actionExit_triggered();
 

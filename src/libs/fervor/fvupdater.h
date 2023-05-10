@@ -58,11 +58,11 @@ public:
 
 public slots:
     // Check for updates
-    auto CheckForUpdates(bool silentAsMuchAsItCouldGet = true) -> bool;
+    bool CheckForUpdates(bool silentAsMuchAsItCouldGet = true); // NOLINT(modernize-use-trailing-return-type)
 
     // Aliases
-    auto CheckForUpdatesSilent() -> bool;
-    auto CheckForUpdatesNotSilent() -> bool;
+    bool CheckForUpdatesSilent();    // NOLINT(modernize-use-trailing-return-type)
+    bool CheckForUpdatesNotSilent(); // NOLINT(modernize-use-trailing-return-type)
 
 protected:
     friend class FvUpdateWindow; // Uses GetProposedUpdate() and others
