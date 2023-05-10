@@ -3525,7 +3525,7 @@ void DialogSeamAllowance::InitGrainlineTab()
                                            static_cast<int>(GrainlineArrowDirection::twoWaysUpLeft));
     uiTabGrainline->comboBoxArrow->addItem(tr("Two ways (Up/Right)", "grainline direction"),
                                            static_cast<int>(GrainlineArrowDirection::twoWaysUpRight));
-    uiTabGrainline->comboBoxArrow->addItem(tr("Two ways (Down/Right)", "grainline direction"),
+    uiTabGrainline->comboBoxArrow->addItem(tr("Two ways (Down/Left)", "grainline direction"),
                                            static_cast<int>(GrainlineArrowDirection::twoWaysDownLeft));
     uiTabGrainline->comboBoxArrow->addItem(tr("Two ways (Down/Right)", "grainline direction"),
                                            static_cast<int>(GrainlineArrowDirection::twoWaysDownRight));
