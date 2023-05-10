@@ -29,9 +29,10 @@
 #include "../vgeometry/vabstractcurve.h"
 #include "qmath.h"
 #include "vpiecegrainline_p.h"
-#include <algorithm>
 
+#include <QPolygonF>
 #include <QTransform>
+#include <algorithm>
 
 namespace
 {
@@ -216,10 +217,10 @@ auto VPieceGrainline::ArrowUp() const -> QPolygonF
     const QPointF pt = mainLine.p2();
 
     return {
-        pt,
-        QPointF(pt.x() + arrowLength * cos(rotation + arrowAngle), pt.y() - arrowLength * sin(rotation + arrowAngle)),
-        QPointF(pt.x() + arrowLength * cos(rotation - arrowAngle), pt.y() - arrowLength * sin(rotation - arrowAngle)),
-        pt};
+        {pt,
+         QPointF(pt.x() + arrowLength * cos(rotation + arrowAngle), pt.y() - arrowLength * sin(rotation + arrowAngle)),
+         QPointF(pt.x() + arrowLength * cos(rotation - arrowAngle), pt.y() - arrowLength * sin(rotation - arrowAngle)),
+         pt}};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -230,10 +231,10 @@ auto VPieceGrainline::ArrowDown() const -> QPolygonF
     const QPointF pt = mainLine.p1();
 
     return {
-        pt,
-        QPointF(pt.x() + arrowLength * cos(rotation + arrowAngle), pt.y() - arrowLength * sin(rotation + arrowAngle)),
-        QPointF(pt.x() + arrowLength * cos(rotation - arrowAngle), pt.y() - arrowLength * sin(rotation - arrowAngle)),
-        pt};
+        {pt,
+         QPointF(pt.x() + arrowLength * cos(rotation + arrowAngle), pt.y() - arrowLength * sin(rotation + arrowAngle)),
+         QPointF(pt.x() + arrowLength * cos(rotation - arrowAngle), pt.y() - arrowLength * sin(rotation - arrowAngle)),
+         pt}};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -243,10 +244,10 @@ auto VPieceGrainline::ArrowLeft() const -> QPolygonF
     const QPointF pt = SecondaryLine().p1();
 
     return {
-        pt,
-        QPointF(pt.x() + arrowLength * cos(rotation - arrowAngle), pt.y() - arrowLength * sin(rotation - arrowAngle)),
-        QPointF(pt.x() + arrowLength * cos(rotation + arrowAngle), pt.y() - arrowLength * sin(rotation + arrowAngle)),
-        pt};
+        {pt,
+         QPointF(pt.x() + arrowLength * cos(rotation - arrowAngle), pt.y() - arrowLength * sin(rotation - arrowAngle)),
+         QPointF(pt.x() + arrowLength * cos(rotation + arrowAngle), pt.y() - arrowLength * sin(rotation + arrowAngle)),
+         pt}};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -256,10 +257,10 @@ auto VPieceGrainline::ArrowRight() const -> QPolygonF
     const QPointF pt = SecondaryLine().p2();
 
     return {
-        pt,
-        QPointF(pt.x() + arrowLength * cos(rotation + arrowAngle), pt.y() - arrowLength * sin(rotation + arrowAngle)),
-        QPointF(pt.x() + arrowLength * cos(rotation - arrowAngle), pt.y() - arrowLength * sin(rotation - arrowAngle)),
-        pt};
+        {pt,
+         QPointF(pt.x() + arrowLength * cos(rotation + arrowAngle), pt.y() - arrowLength * sin(rotation + arrowAngle)),
+         QPointF(pt.x() + arrowLength * cos(rotation - arrowAngle), pt.y() - arrowLength * sin(rotation - arrowAngle)),
+         pt}};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -403,7 +404,7 @@ auto VPieceGrainline::IsPositionValid(const QVector<QPointF> &contourPoints) con
 
     grainLine = {mainLine};
 
-    for (auto line : grainLine)
+    for (auto line : qAsConst(grainLine))
     {
         QVector<QPointF> points = VAbstractCurve::CurveIntersectLine(contourPoints, line);
         for (auto &point : points)
@@ -416,7 +417,7 @@ auto VPieceGrainline::IsPositionValid(const QVector<QPointF> &contourPoints) con
     }
 
     QPainterPath grainLinePath;
-    for (auto line : grainLine)
+    for (auto line : qAsConst(grainLine))
     {
         grainLinePath.addPath(VGObject::PainterPath(QVector<QPointF>{line.p1(), line.p2()}));
     }

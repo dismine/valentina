@@ -35,8 +35,6 @@
 #include "fvavailableupdate.h"
 #include "fvupdatewindow.h"
 
-#include "../vmisc/defglobal.h"
-
 class FvUpdater final : public QObject
 {
     Q_OBJECT // NOLINT
