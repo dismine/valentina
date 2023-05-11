@@ -21,7 +21,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabPath">
       <attribute name="title">
@@ -2192,7 +2192,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroupMarkType"/>
   <buttongroup name="buttonGroupAngleType"/>
+  <buttongroup name="buttonGroupMarkType"/>
  </buttongroups>
 </ui>
