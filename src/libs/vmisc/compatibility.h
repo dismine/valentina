@@ -28,12 +28,13 @@
 #ifndef COMPATIBILITY_H
 #define COMPATIBILITY_H
 
-#include <QtGlobal>
-#include <QStringList>
-#include <QSet>
-#include <QVector>
 #include <QFontMetrics>
 #include <QLibraryInfo>
+#include <QLineF>
+#include <QSet>
+#include <QStringList>
+#include <QVector>
+#include <QtGlobal>
 
 #include "defglobal.h"
 
@@ -357,6 +358,16 @@ inline auto QLibraryPath(T loc) -> QString
     return QLibraryInfo::path(loc);
 #else
     return QLibraryInfo::location(loc);
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto LineCenter(const QLineF &line) -> QPointF
+{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 8, 0)
+    return line.center();
+#else
+    return {0.5 * line.p1().x() + 0.5 * line.p2().x(), 0.5 * line.p1().y() + 0.5 * line.p2().y()};
 #endif
 }
 

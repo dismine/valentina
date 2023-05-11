@@ -30,6 +30,7 @@
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
 #   include "../vmisc/vdatastreamenum.h"
 #endif
+
 #include "../ifc/exception/vexception.h"
 
 // See https://stackoverflow.com/a/46719572/3045403

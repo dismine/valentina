@@ -371,10 +371,11 @@ void VNodePoint::InitPassmarkMenu(QMenu *menu, vidtype pieceId, QHash<int, QActi
     SCASSERT(menu != nullptr)
 
     const VPiece detail = VAbstractTool::data.GetPiece(pieceId);
-    const int nodeIndex = detail.GetPath().indexOfNode(m_id);
+    const VPiecePath &path = detail.GetPath();
+    const int nodeIndex = path.indexOfNode(m_id);
     if (nodeIndex != -1)
     {
-        const VPieceNode &node = detail.GetPath().at(nodeIndex);
+        const VPieceNode &node = path.at(nodeIndex);
 
         QAction *actionPassmark = menu->addAction(tr("Passmark"));
         actionPassmark->setCheckable(true);
@@ -395,11 +396,11 @@ void VNodePoint::InitAngleTypeMenu(QMenu *menu, vidtype pieceId, QHash<int, QAct
     PieceNodeAngle curType = PieceNodeAngle::ByLength;
 
     const VPiece detail = VAbstractTool::data.GetPiece(pieceId);
-    const int nodeIndex = detail.GetPath().indexOfNode(m_id);
+    const VPiecePath &path = detail.GetPath();
+    const int nodeIndex = path.indexOfNode(m_id);
     if (nodeIndex != -1)
     {
-        const VPieceNode &node = detail.GetPath().at(nodeIndex);
-        curType = node.GetAngleType();
+        curType = path.at(nodeIndex).GetAngleType();
 
         angleTypeMenu->setEnabled(detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn());
     }
@@ -438,10 +439,11 @@ void VNodePoint::InitPassmarkAngleTypeMenu(QMenu *menu, vidtype pieceId, QHash<i
     PassmarkAngleType passmarkAngleCurType = PassmarkAngleType::Straightforward;
 
     const VPiece detail = VAbstractTool::data.GetPiece(pieceId);
-    const int nodeIndex = detail.GetPath().indexOfNode(m_id);
+    const VPiecePath &path = detail.GetPath();
+    const int nodeIndex = path.indexOfNode(m_id);
     if (nodeIndex != -1)
     {
-        const VPieceNode &node = detail.GetPath().at(nodeIndex);
+        const VPieceNode &node = path.at(nodeIndex);
         passmarkAngleMenu->setEnabled(node.IsPassmark());
         passmarkAngleCurType = node.GetPassmarkAngleType();
     }
@@ -489,10 +491,11 @@ void VNodePoint::InitPassmarkLineTypeMenu(QMenu *menu, vidtype pieceId, QHash<in
     PassmarkLineType passmarkLineCurType = PassmarkLineType::OneLine;
 
     const VPiece detail = VAbstractTool::data.GetPiece(pieceId);
-    const int nodeIndex = detail.GetPath().indexOfNode(m_id);
+    const VPiecePath &path = detail.GetPath();
+    const int nodeIndex = path.indexOfNode(m_id);
     if (nodeIndex != -1)
     {
-        const VPieceNode &node = detail.GetPath().at(nodeIndex);
+        const VPieceNode &node = path.at(nodeIndex);
         passmarkLineTypeMenu->setEnabled(node.IsPassmark());
         passmarkLineCurType = node.GetPassmarkLineType();
     }
@@ -550,10 +553,11 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         bool isPassmark = false;
 
         const VPiece detail = VAbstractTool::data.GetPiece(piece->getId());
-        const int nodeIndex = detail.GetPath().indexOfNode(m_id);
+        const VPiecePath &path = detail.GetPath();
+        const int nodeIndex = path.indexOfNode(m_id);
         if (nodeIndex != -1)
         {
-            const VPieceNode &node = detail.GetPath().at(nodeIndex);
+            const VPieceNode &node = path.at(nodeIndex);
             angleCurType = node.GetAngleType();
             passmarkAngleCurType = node.GetPassmarkAngleType();
             passmarkLineCurType = node.GetPassmarkLineType();

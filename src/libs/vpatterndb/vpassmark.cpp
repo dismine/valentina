@@ -32,6 +32,7 @@
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
 #include "../vlayout/vrawsapoint.h"
+#include "../vmisc/compatibility.h"
 #include "../vmisc/testpath.h" // do not remove
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vpatterndb/testpassmark.h" // do not remove
@@ -363,7 +364,7 @@ auto CreateTMarkPassmark(const VPiecePassmarkData &passmarkData, const QLineF &l
         p2 = tmpLine.p2();
     }
 
-    return {line, {QLineF(p1, p2).center(), p2}, {p2, p1}};
+    return {line, {LineCenter({p1, p2}), p2}, {p2, p1}};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

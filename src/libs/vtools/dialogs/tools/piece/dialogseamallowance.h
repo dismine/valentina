@@ -30,6 +30,7 @@
 #define DIALOGSEAMALLOWANCE_H
 
 #include "../dialogtool.h"
+#include "../vgeometry/vplacelabelitem.h"
 #include "../vpatterndb/vpiece.h"
 #include "../vpatterndb/vpiecepath.h"
 
@@ -46,7 +47,6 @@ namespace Ui
 
 class VisPieceSpecialPoints;
 class FancyTabBar;
-class VPlaceLabelItem;
 class VUndoCommand;
 
 class DialogSeamAllowance : public DialogTool

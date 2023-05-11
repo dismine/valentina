@@ -27,6 +27,7 @@
  *************************************************************************/
 #include "vpiecegrainline.h"
 #include "../vgeometry/vabstractcurve.h"
+#include "compatibility.h"
 #include "qmath.h"
 #include "vpiecegrainline_p.h"
 
@@ -137,14 +138,13 @@ void VPieceGrainline::SetEnabled(bool enabled)
 //---------------------------------------------------------------------------------------------------------------------
 auto VPieceGrainline::SecondaryLine() const -> QLineF
 {
-    QLineF mainLine = GetMainLine();
-    QLineF secondaryLine = mainLine;
+    const QLineF mainLine = GetMainLine();
+    const QPointF center = LineCenter(mainLine);
     QTransform t;
-    t.translate(mainLine.center().x(), mainLine.center().y());
+    t.translate(center.x(), center.y());
     t.rotate(90);
-    t.translate(-mainLine.center().x(), -mainLine.center().y());
-    secondaryLine = t.map(secondaryLine);
-    return secondaryLine;
+    t.translate(-center.x(), -center.y());
+    return t.map(mainLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

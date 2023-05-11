@@ -40,9 +40,11 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "../vmisc/vabstractvalapplication.h"
+
 #if QT_VERSION < QT_VERSION_CHECK(5, 9, 0)
 #   include "../vmisc/vdatastreamenum.h"
 #endif
+
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/variables/vmeasurement.h"

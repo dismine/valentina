@@ -34,6 +34,10 @@
 #include <QLineF>
 #include <QSharedData>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
+#include "../vmisc/vdatastreamenum.h"
+#endif
+
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")

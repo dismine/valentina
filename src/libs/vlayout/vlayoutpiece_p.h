@@ -37,12 +37,15 @@
 #include "../vpatterndb/floatItemData/floatitemdef.h"
 #include "../vwidgets/vpiecegrainline.h"
 #include "compatibility.h"
+
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
 #   include "../vmisc/vdatastreamenum.h"
 #endif
+
 #include "vlayoutpiecepath.h"
 #include "../vgeometry/vgeometrydef.h"
 #include "vtextmanager.h"

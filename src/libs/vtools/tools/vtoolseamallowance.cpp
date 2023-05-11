@@ -1404,9 +1404,10 @@ VToolSeamAllowance::VToolSeamAllowance(const VToolSeamAllowanceInitData &initDat
 void VToolSeamAllowance::UpdateExcludeState()
 {
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
-    for (int i = 0; i< detail.GetPath().CountNodes(); ++i)
+    const VPiecePath &path = detail.GetPath();
+    for (int i = 0; i < path.CountNodes(); ++i)
     {
-        const VPieceNode &node = detail.GetPath().at(i);
+        const VPieceNode &node = path.at(i);
         if (node.GetTypeTool() == Tool::NodePoint)
         {
             auto *tool = qobject_cast<VNodePoint*>(VAbstractPattern::getTool(node.GetId()));
@@ -1970,9 +1971,10 @@ auto VToolSeamAllowance::FindGrainlineGeometry(const VGrainlineData &geom,
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::InitNodes(const VPiece &detail, VMainGraphicsScene *scene)
 {
-    for (int i = 0; i< detail.GetPath().CountNodes(); ++i)
+    const VPiecePath &path = detail.GetPath();
+    for (int i = 0; i < path.CountNodes(); ++i)
     {
-        const VPieceNode &node = detail.GetPath().at(i);
+        const VPieceNode &node = path.at(i);
         InitNode(node, scene, this);
         doc->IncrementReferens(VAbstractTool::data.GetGObject(node.GetId())->getIdTool());
     }
