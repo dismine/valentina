@@ -2437,7 +2437,7 @@ void DialogSeamAllowance::EvalPassmarkAngle()
             formulaData.variables = data->DataVariables();
             formulaData.labelEditFormula = uiTabPassmarks->labelEditPassmarkAngle;
             formulaData.labelResult = uiTabPassmarks->labelResultPassmarkAngle;
-            formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+            formulaData.postfix = degreeSymbol;
             formulaData.checkZero = false;
             formulaData.checkLessThanZero = false;
 
@@ -2528,7 +2528,7 @@ void DialogSeamAllowance::FXPassmarkAngle()
     QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit passmark angle"));
     dialog->SetFormula(GetFormulaFromUser(uiTabPassmarks->plainTextEditPassmarkAngle));
-    dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
+    dialog->setPostfix(degreeSymbol);
     if (dialog->exec() == QDialog::Accepted)
     {
         SetFormulaPassmarkAngle(dialog->GetFormula());
