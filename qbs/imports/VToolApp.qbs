@@ -51,6 +51,7 @@ VApp {
 
     Group {
         name: "Translations"
+        condition: product.primaryApp || (qbs.targetOS.contains("macos") && (!bundle.isBundle || (bundle.isBundle && buildconfig.enableMultiBundle)))
         prefix: project.sourceDirectory + "/share/translations/"
         files: {
             var files = [];
