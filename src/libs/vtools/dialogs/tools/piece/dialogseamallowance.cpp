@@ -1087,7 +1087,8 @@ void DialogSeamAllowance::NodeChanged(int index)
         const int nodeIndex = piece.GetPath().indexOfNode(uiTabPaths->comboBoxNodes->currentData().toUInt());
         if (nodeIndex != -1)
         {
-            const VPieceNode &node = piece.GetPath().at(nodeIndex);
+            const VPiecePath &path = piece.GetPath();
+            const VPieceNode &node = path.at(nodeIndex);
 
             // Seam alowance before
             uiTabPaths->plainTextEditFormulaWidthBefore->setEnabled(true);
@@ -1192,7 +1193,8 @@ void DialogSeamAllowance::PassmarkChanged(int index)
         return;
     }
 
-    const VPieceNode &node = piece.GetPath().at(nodeIndex);
+    const VPiecePath &path = piece.GetPath();
+    const VPieceNode &node = path.at(nodeIndex);
 
     InitPassmarkLengthFormula(node);
     InitPassmarkWidthFormula(node);

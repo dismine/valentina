@@ -711,6 +711,7 @@ Module {
                         "-Wall",
                         "-Wno-pragmas",
                         "-Wno-error=strict-overflow",
+                        "-Wno-strict-overflow",
                         "-Wextra"
                     )
 
