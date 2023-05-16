@@ -755,7 +755,8 @@ void VToolSeamAllowance::Highlight(quint32 id)
  */
 void VToolSeamAllowance::UpdateDetailLabel()
 {
-    const VPiece detail = VAbstractTool::data.GetPiece(m_id);
+    VPiece detail = VAbstractTool::data.GetPiece(m_id);
+    detail.SetPieceLabelData(detail.GetPieceLabelData()); // Refresh translation
     const VPieceLabelData &labelData = detail.GetPieceLabelData();
     const QVector<quint32> &pins = detail.GetPins();
 
