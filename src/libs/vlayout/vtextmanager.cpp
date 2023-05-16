@@ -355,7 +355,7 @@ void InitPiecePlaceholders(QMap<QString, QString> &placeholders, const QString &
 
     try
     {
-        const QString formula = pieceArea_ + data.GetAreaShartName();
+        const QString formula = pieceArea_ + data.GetAreaShortName();
         const qreal result = cal->EvalFormula(completeData.DataVariables(), formula);
         placeholders[pl_currentArea] = QString::number(result);
     }
@@ -368,7 +368,7 @@ void InitPiecePlaceholders(QMap<QString, QString> &placeholders, const QString &
 
     try
     {
-        const QString formula = pieceSeamLineArea_ + data.GetAreaShartName();
+        const QString formula = pieceSeamLineArea_ + data.GetAreaShortName();
         const qreal result = cal->EvalFormula(completeData.DataVariables(), formula);
         placeholders[pl_currentSeamLineArea] = QString::number(result);
     }

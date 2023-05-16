@@ -80,9 +80,9 @@ public:
 
     auto IsOnFold() const -> bool;
     void SetOnFold(bool onFold);
-
-    auto GetAreaShartName() const -> QString;
-    void SetAreaShartName(const QString &val);
+    
+    auto GetAreaShortName() const -> QString;
+    void SetAreaShortName(const QString &val);
 
     auto GetLabelTemplate() const -> QVector<VLabelTemplateLine>;
     void SetLabelTemplate(const QVector<VLabelTemplateLine> &lines);

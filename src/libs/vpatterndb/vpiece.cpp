@@ -573,7 +573,7 @@ auto VPiece::MissingPlaceLabels(const VPiece &det) const -> QVector<quint32>
 void VPiece::SetPieceLabelData(const VPieceLabelData &data)
 {
     d->m_ppData = data;
-    d->m_ppData.SetAreaShartName(VPieceArea::PieceShortName(*this));
+    d->m_ppData.SetAreaShortName(VPieceArea::PieceShortName(*this));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

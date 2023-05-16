@@ -178,13 +178,13 @@ void VPieceLabelData::SetOnFold(bool onFold)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPieceLabelData::GetAreaShartName() const -> QString
+auto VPieceLabelData::GetAreaShortName() const -> QString
 {
     return d->m_areaShortName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceLabelData::SetAreaShartName(const QString &val)
+void VPieceLabelData::SetAreaShortName(const QString &val)
 {
     d->m_areaShortName = val;
 }
