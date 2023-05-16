@@ -26,28 +26,29 @@
  **
  *************************************************************************/
 
+#include <QApplication>
 #include <QDate>
+#include <QDebug>
 #include <QFileInfo>
+#include <QFlags> // QFlags<Qt::Alignment>
 #include <QFontMetrics>
+#include <QGlobalStatic>
 #include <QLatin1String>
 #include <QRegularExpression>
-#include <QApplication>
-#include <QDebug>
-#include <QFlags> // QFlags<Qt::Alignment>
 #include <QtMath>
 #include <QGlobalStatic>
 
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "../vmisc/vabstractvalapplication.h"
+#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 9, 0)
-#   include "../vmisc/vdatastreamenum.h"
+#include "../vmisc/vdatastreamenum.h"
 #endif
 
-#include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/variables/vmeasurement.h"
+#include "../vpatterndb/vcontainer.h"
 #include "vtextmanager.h"
 
 const quint32 TextLine::streamHeader = 0xA3881E49; // CRC-32Q string "TextLine"
@@ -55,7 +56,7 @@ const quint16 TextLine::classVersion = 1;
 
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------
-auto operator<<(QDataStream &dataStream, const TextLine &data) -> QDataStream&
+auto operator<<(QDataStream &dataStream, const TextLine &data) -> QDataStream &
 {
     dataStream << TextLine::streamHeader << TextLine::classVersion;
 
@@ -72,7 +73,7 @@ auto operator<<(QDataStream &dataStream, const TextLine &data) -> QDataStream&
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto operator>>(QDataStream &dataStream, TextLine &data) -> QDataStream&
+auto operator>>(QDataStream &dataStream, TextLine &data) -> QDataStream &
 {
     quint32 actualStreamHeader = 0;
     dataStream >> actualStreamHeader;
@@ -81,8 +82,8 @@ auto operator>>(QDataStream &dataStream, TextLine &data) -> QDataStream&
     {
         QString message = QCoreApplication::tr("TextLine prefix mismatch error: actualStreamHeader = 0x%1 and "
                                                "streamHeader = 0x%2")
-                .arg(actualStreamHeader, 8, 0x10, QChar('0'))
-                .arg(TextLine::streamHeader, 8, 0x10, QChar('0'));
+                              .arg(actualStreamHeader, 8, 0x10, QChar('0'))
+                              .arg(TextLine::streamHeader, 8, 0x10, QChar('0'));
         throw VException(message);
     }
 
@@ -93,7 +94,8 @@ auto operator>>(QDataStream &dataStream, TextLine &data) -> QDataStream&
     {
         QString message = QCoreApplication::tr("TextLine compatibility error: actualClassVersion = %1 and "
                                                "classVersion = %2")
-                .arg(actualClassVersion).arg(TextLine::classVersion);
+                              .arg(actualClassVersion)
+                              .arg(TextLine::classVersion);
         throw VException(message);
     }
 
@@ -103,10 +105,10 @@ auto operator>>(QDataStream &dataStream, TextLine &data) -> QDataStream&
     dataStream >> data.m_italic;
     dataStream >> data.m_eAlign;
 
-//    if (actualClassVersion >= 2)
-//    {
+    //    if (actualClassVersion >= 2)
+    //    {
 
-//    }
+    //    }
 
     return dataStream;
 }
@@ -121,7 +123,7 @@ Q_GLOBAL_STATIC(QVector<TextLine>, m_patternLabelLines) // NOLINT
 
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------
-auto operator<<(QDataStream &dataStream, const VTextManager &data) -> QDataStream&
+auto operator<<(QDataStream &dataStream, const VTextManager &data) -> QDataStream &
 {
     dataStream << VTextManager::streamHeader << VTextManager::classVersion;
 
@@ -135,7 +137,7 @@ auto operator<<(QDataStream &dataStream, const VTextManager &data) -> QDataStrea
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto operator>>(QDataStream &dataStream, VTextManager &data) -> QDataStream&
+auto operator>>(QDataStream &dataStream, VTextManager &data) -> QDataStream &
 {
     quint32 actualStreamHeader = 0;
     dataStream >> actualStreamHeader;
@@ -144,8 +146,8 @@ auto operator>>(QDataStream &dataStream, VTextManager &data) -> QDataStream&
     {
         QString message = QCoreApplication::tr("VTextManager prefix mismatch error: actualStreamHeader = 0x%1 and "
                                                "streamHeader = 0x%2")
-                .arg(actualStreamHeader, 8, 0x10, QChar('0'))
-                .arg(VTextManager::streamHeader, 8, 0x10, QChar('0'));
+                              .arg(actualStreamHeader, 8, 0x10, QChar('0'))
+                              .arg(VTextManager::streamHeader, 8, 0x10, QChar('0'));
         throw VException(message);
     }
 
@@ -156,17 +158,18 @@ auto operator>>(QDataStream &dataStream, VTextManager &data) -> QDataStream&
     {
         QString message = QCoreApplication::tr("VTextManager compatibility error: actualClassVersion = %1 and "
                                                "classVersion = %2")
-                .arg(actualClassVersion).arg(VTextManager::classVersion);
+                              .arg(actualClassVersion)
+                              .arg(VTextManager::classVersion);
         throw VException(message);
     }
 
     dataStream >> data.m_font;
     dataStream >> data.m_liLines;
 
-//    if (actualClassVersion >= 2)
-//    {
+    //    if (actualClassVersion >= 2)
+    //    {
 
-//    }
+    //    }
 
     return dataStream;
 }
@@ -205,8 +208,8 @@ auto PreparePlaceholders(const VAbstractPattern *doc, const VContainer *data) ->
     {
         placeholders.insert(pl_customer, VAbstractValApplication::VApp()->GetCustomerName());
 
-        const QString birthDate = locale.toString(VAbstractValApplication::VApp()->GetCustomerBirthDate(),
-                                                  doc->GetLabelDateFormat());
+        const QString birthDate =
+            locale.toString(VAbstractValApplication::VApp()->GetCustomerBirthDate(), doc->GetLabelDateFormat());
         placeholders.insert(pl_birthDate, birthDate);
 
         placeholders.insert(pl_email, VAbstractValApplication::VApp()->CustomerEmail());
@@ -256,7 +259,8 @@ auto PreparePlaceholders(const VAbstractPattern *doc, const VContainer *data) ->
     }
 
     placeholders.insert(pl_mExt, VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Multisize
-                        ? QStringLiteral("vst") : QStringLiteral("vit"));
+                                     ? QStringLiteral("vst")
+                                     : QStringLiteral("vit"));
 
     const QMap<int, QString> materials = doc->GetPatternMaterials();
     for (int i = 0; i < userMaterialPlaceholdersQuantity; ++i)
@@ -273,7 +277,7 @@ auto PreparePlaceholders(const VAbstractPattern *doc, const VContainer *data) ->
     }
 
     {
-        const QMap<QString, QSharedPointer<VMeasurement> > measurements = data->DataMeasurements();
+        const QMap<QString, QSharedPointer<VMeasurement>> measurements = data->DataMeasurements();
         auto i = measurements.constBegin();
         while (i != measurements.constEnd())
         {
@@ -290,7 +294,7 @@ auto PreparePlaceholders(const VAbstractPattern *doc, const VContainer *data) ->
         placeholders.insert(pl_currentArea, QString());
         placeholders.insert(pl_currentSeamLineArea, QString());
 
-        for (int i=0; i < measurements.size(); ++i)
+        for (int i = 0; i < measurements.size(); ++i)
         {
             const VFinalMeasurement &m = measurements.at(i);
 
@@ -304,9 +308,12 @@ auto PreparePlaceholders(const VAbstractPattern *doc, const VContainer *data) ->
             catch (qmu::QmuParserError &e)
             {
                 const QString errorMsg = QObject::tr("Failed to prepare final measurement placeholder. Parser error at "
-                                                     "line %1: %2.").arg(i+1).arg(e.GetMsg());
-                VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+                                                     "line %1: %2.")
+                                             .arg(i + 1)
+                                             .arg(e.GetMsg());
+                VAbstractApplication::VApp()->IsPedantic()
+                    ? throw VException(errorMsg)
+                    : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
             }
         }
     }
@@ -362,8 +369,9 @@ void InitPiecePlaceholders(QMap<QString, QString> &placeholders, const QString &
     catch (qmu::QmuParserError &e)
     {
         const QString errorMsg = QObject::tr("Failed to prepare full piece area placeholder. %2.").arg(e.GetMsg());
-        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-            qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
     try
@@ -375,8 +383,9 @@ void InitPiecePlaceholders(QMap<QString, QString> &placeholders, const QString &
     catch (qmu::QmuParserError &e)
     {
         const QString errorMsg = QObject::tr("Failed to prepare piece seam line area placeholder. %2.").arg(e.GetMsg());
-        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-            qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 }
 
@@ -387,10 +396,11 @@ auto ReplacePlaceholders(const QMap<QString, QString> &placeholders, QString lin
 
     auto TestDimension = [per, placeholders, line](const QString &placeholder, const QString &errorMsg)
     {
-        if (line.contains(per+placeholder+per) && placeholders.value(placeholder) == QChar('0'))
+        if (line.contains(per + placeholder + per) && placeholders.value(placeholder) == QChar('0'))
         {
-            VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(errorMsg)
+                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         }
     };
 
@@ -407,7 +417,7 @@ auto ReplacePlaceholders(const QMap<QString, QString> &placeholders, QString lin
     auto i = placeholders.constBegin();
     while (i != placeholders.constEnd())
     {
-        line.replace(per+i.key()+per, i.value());
+        line.replace(per + i.key() + per, i.value());
         ++i;
     }
     return line;
@@ -435,7 +445,7 @@ auto PrepareLines(const QVector<VLabelTemplateLine> &lines) -> QVector<TextLine>
 
     return textLines;
 }
-}  // namespace
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -452,7 +462,7 @@ auto VTextManager::GetSpacing() const -> int
  * @brief SetFont set the text base font
  * @param font text base font
  */
-void VTextManager::SetFont(const QFont& font)
+void VTextManager::SetFont(const QFont &font)
 {
     m_font = font;
 }
@@ -462,7 +472,7 @@ void VTextManager::SetFont(const QFont& font)
  * @brief GetFont returns the text base font
  * @return text base font
  */
-auto VTextManager::GetFont() const -> const QFont&
+auto VTextManager::GetFont() const -> const QFont &
 {
     return m_font;
 }
@@ -505,7 +515,7 @@ auto VTextManager::GetSourceLinesCount() const -> vsizetype
  * @param i index of the requested line
  * @return reference to the requested TextLine object
  */
-auto VTextManager::GetSourceLine(vsizetype i) const -> const TextLine&
+auto VTextManager::GetSourceLine(vsizetype i) const -> const TextLine &
 {
     Q_ASSERT(i >= 0);
     Q_ASSERT(i < m_liLines.count());
@@ -518,7 +528,7 @@ auto VTextManager::MaxLineWidth(int width) const -> int
     int maxWidth = 0;
     for (int i = 0; i < m_liLines.count(); ++i)
     {
-        const TextLine& tl = m_liLines.at(i);
+        const TextLine &tl = m_liLines.at(i);
 
         QFont fnt = m_font;
         fnt.setPixelSize(fnt.pixelSize() + tl.m_iFontSize);
@@ -551,8 +561,8 @@ void VTextManager::FitFontSize(qreal fW, qreal fH)
 {
     int iFS = 0;
     if (GetSourceLinesCount() > 0)
-    {//division by zero
-        iFS = 3*qFloor(fH/static_cast<int>(GetSourceLinesCount()))/4;
+    { // division by zero
+        iFS = 3 * qFloor(fH / static_cast<int>(GetSourceLinesCount())) / 4;
     }
 
     if (iFS < MIN_FONT_SIZE)
@@ -567,7 +577,7 @@ void VTextManager::FitFontSize(qreal fW, qreal fH)
     QFont fnt;
     for (vsizetype i = 0; i < GetSourceLinesCount(); ++i)
     {
-        const TextLine& tl = GetSourceLine(i);
+        const TextLine &tl = GetSourceLine(i);
         fnt = m_font;
         fnt.setPixelSize(iFS + tl.m_iFontSize);
         fnt.setBold(tl.m_bold);
@@ -593,8 +603,7 @@ void VTextManager::FitFontSize(qreal fW, qreal fH)
             fnt.setPixelSize(iFS + maxLine.m_iFontSize);
             QFontMetrics fm(fnt);
             lineLength = TextWidth(fm, maxLine.m_qsText);
-        }
-        while (lineLength > fW && iFS > MIN_FONT_SIZE);
+        } while (lineLength > fW && iFS > MIN_FONT_SIZE);
     }
     SetFontSize(iFS);
 }
@@ -605,17 +614,17 @@ void VTextManager::FitFontSize(qreal fW, qreal fH)
  * @param qsName detail name
  * @param data reference to the detail data
  */
-void VTextManager::Update(const QString& qsName, const VPieceLabelData& data, const VContainer *pattern)
+void VTextManager::Update(const QString &qsName, const VPieceLabelData &data, const VContainer *pattern)
 {
     m_liLines.clear();
 
     QMap<QString, QString> placeholders =
-            PreparePlaceholders(VAbstractValApplication::VApp()->getCurrentDocument(), pattern);
+        PreparePlaceholders(VAbstractValApplication::VApp()->getCurrentDocument(), pattern);
     InitPiecePlaceholders(placeholders, qsName, data, pattern);
 
     QVector<VLabelTemplateLine> lines = data.GetLabelTemplate();
 
-    for (auto & line : lines)
+    for (auto &line : lines)
     {
         line.line = ReplacePlaceholders(placeholders, line.line);
     }
@@ -642,7 +651,7 @@ void VTextManager::Update(VAbstractPattern *pDoc, const VContainer *pattern)
 
         const QMap<QString, QString> placeholders = PreparePlaceholders(pDoc, pattern);
 
-        for (auto & line : lines)
+        for (auto &line : lines)
         {
             line.line = ReplacePlaceholders(placeholders, line.line);
         }

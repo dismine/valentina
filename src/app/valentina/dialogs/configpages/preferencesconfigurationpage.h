@@ -31,24 +31,23 @@
 
 #include <QWidget>
 
-#include "../vmisc/defglobal.h"
-
 namespace Ui
 {
-    class PreferencesConfigurationPage;
+class PreferencesConfigurationPage;
 }
 
 class PreferencesConfigurationPage : public QWidget
 {
     Q_OBJECT // NOLINT
 
-public:
-    explicit PreferencesConfigurationPage(QWidget *parent = nullptr);
+public : explicit PreferencesConfigurationPage(QWidget *parent = nullptr);
     ~PreferencesConfigurationPage() override;
 
     auto Apply() -> QStringList;
+
 protected:
-    void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent *event) override;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(PreferencesConfigurationPage) // NOLINT

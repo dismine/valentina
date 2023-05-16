@@ -38,19 +38,18 @@
 #include <QStringList>
 #include <QtGlobal>
 
-#include "../vmisc/def.h"
 #include "../vlayout/vlayoutdef.h"
+#include "../vmisc/def.h"
 
 class QMarginsF;
 
 class VCommonSettings : public QSettings
 {
     Q_OBJECT // NOLINT
-public:
-    VCommonSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
-              QObject *parent = nullptr);
+        public : VCommonSettings(Format format, Scope scope, const QString &organization,
+                                 const QString &application = QString(), QObject *parent = nullptr);
     VCommonSettings(const QString &fileName, Format format, QObject *parent = nullptr);
-    ~VCommonSettings() override =default;
+    ~VCommonSettings() override = default;
 
     static auto SharePath(const QString &shareItem) -> QString;
     static auto MultisizeTablesPath() -> QString;
@@ -146,25 +145,25 @@ public:
     void SetToolbarsState(const QByteArray &value);
 
     auto GetPreferenceDialogSize() const -> QSize;
-    void SetPreferenceDialogSize(const QSize& sz);
+    void SetPreferenceDialogSize(const QSize &sz);
 
     auto GetToolSeamAllowanceDialogSize() const -> QSize;
-    void SetToolSeamAllowanceDialogSize(const QSize& sz);
+    void SetToolSeamAllowanceDialogSize(const QSize &sz);
 
     auto GetFormulaWizardDialogSize() const -> QSize;
-    void SetFormulaWizardDialogSize(const QSize& sz);
+    void SetFormulaWizardDialogSize(const QSize &sz);
 
     auto GetIncrementsDialogSize() const -> QSize;
-    void SetIncrementsDialogSize(const QSize& sz);
+    void SetIncrementsDialogSize(const QSize &sz);
 
     auto GetFinalMeasurementsDialogSize() const -> QSize;
-    void SetFinalMeasurementsDialogSize(const QSize& sz);
+    void SetFinalMeasurementsDialogSize(const QSize &sz);
 
     auto GetLayoutSettingsDialogSize() const -> QSize;
-    void SetLayoutSettingsDialogSize(const QSize& sz);
+    void SetLayoutSettingsDialogSize(const QSize &sz);
 
     auto GetDialogSplinePathSize() const -> QSize;
-    void SetDialogSplinePathSize(const QSize& sz);
+    void SetDialogSplinePathSize(const QSize &sz);
 
     auto IsAutomaticallyCheckUpdates() const -> bool;
     void SetAutomaticallyCheckUpdates(bool value);
@@ -300,13 +299,12 @@ public:
     void SetGraphicalOutput(const bool &value);
 
     auto GetWatermarkEditorSize() const -> QSize;
-    void SetWatermarkEditorSize(const QSize& sz);
+    void SetWatermarkEditorSize(const QSize &sz);
 
     auto GetWatermarkCustomColors() const -> QVector<QColor>;
     void SetWatermarkCustomColors(QVector<QColor> colors);
 
 protected:
-
     template <typename T>
     static auto GetCachedValue(const QSettings &settings, T &cache, const QString &setting, T defValue, T valueMin,
                                T valueMax) -> T;
@@ -337,7 +335,7 @@ inline auto VCommonSettings::MaximalLineWidth() -> qreal
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template<typename T>
+template <typename T>
 auto VCommonSettings::GetCachedValue(const QSettings &settings, T &cache, const QString &setting, T defValue,
                                      T valueMin, T valueMax) -> T
 {
@@ -359,8 +357,8 @@ inline auto VCommonSettings::ValueOrDef(const QSettings &settings, const QString
 
 //---------------------------------------------------------------------------------------------------------------------
 template <>
-inline auto VCommonSettings::ValueOrDef<Cases>(const QSettings &settings, const QString &setting,
-                                               const Cases &defValue) -> Cases
+inline auto VCommonSettings::ValueOrDef<Cases>(const QSettings &settings, const QString &setting, const Cases &defValue)
+    -> Cases
 {
     const QVariant val = settings.value(setting, QVariant::fromValue(static_cast<int>(defValue)));
     const int g = val.canConvert<int>() ? val.toInt() : static_cast<int>(defValue);

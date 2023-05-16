@@ -32,34 +32,35 @@
 
 #include <QDate>
 
-class VAbstractValApplication;// use in define
+class VAbstractValApplication; // use in define
 class VAbstractPattern;
 class VMainGraphicsView;
 class QGraphicsScene;
 class VValentinaSettings;
+class QTranslator;
 
 class VAbstractValApplication : public VAbstractApplication
 {
     Q_OBJECT // NOLINT
-public:
-    VAbstractValApplication(int &argc, char **argv);
-    virtual ~VAbstractValApplication() =default;
+
+        public : VAbstractValApplication(int &argc, char **argv);
+    virtual ~VAbstractValApplication() = default;
 
     auto GetCustomerName() const -> QString;
-    void    SetCustomerName(const QString &name);
+    void SetCustomerName(const QString &name);
 
     auto GetCustomerBirthDate() const -> QDate;
-    void    SetCustomerBirthDate(const QDate &date);
+    void SetCustomerBirthDate(const QDate &date);
 
     auto CustomerEmail() const -> QString;
-    void    SetCustomerEmail(const QString &email);
+    void SetCustomerEmail(const QString &email);
 
     auto patternUnits() const -> Unit;
     auto patternUnitsP() const -> const Unit *;
-    void        SetPatternUnits(const Unit &patternUnit);
+    void SetPatternUnits(const Unit &patternUnit);
 
     auto GetMeasurementsType() const -> MeasurementsType;
-    void             SetMeasurementsType(const MeasurementsType &patternType);
+    void SetMeasurementsType(const MeasurementsType &patternType);
 
     auto MeasurementsUnits() const -> Unit;
     void SetMeasurementsUnits(const Unit &measurementsUnits);
@@ -70,26 +71,26 @@ public:
     auto toPixel(double val) const -> double;
     auto fromPixel(double pix) const -> double;
 
-    void              setCurrentDocument(VAbstractPattern *doc);
+    void setCurrentDocument(VAbstractPattern *doc);
     auto getCurrentDocument() const -> VAbstractPattern *;
 
     auto getSceneView() const -> VMainGraphicsView *;
-    void               setSceneView(VMainGraphicsView *value);
+    void setSceneView(VMainGraphicsView *value);
 
     auto getCurrentScene() const -> QGraphicsScene *;
-    void            setCurrentScene(QGraphicsScene **value);
+    void setCurrentScene(QGraphicsScene **value);
 
     auto getMainWindow() const -> QWidget *;
-    void     setMainWindow(QWidget *value);
+    void setMainWindow(QWidget *value);
 
     auto GetPatternPath() const -> QString;
-    void    SetPatternPath(const QString &value);
+    void SetPatternPath(const QString &value);
 
     auto GetUserMaterials() const -> QMap<int, QString>;
-    void               SetUserMaterials(const QMap<int, QString> &userMaterials);
+    void SetUserMaterials(const QMap<int, QString> &userMaterials);
 
     auto GetDrawMode() const -> const Draw &;
-    void        SetDrawMode(const Draw &value);
+    void SetDrawMode(const Draw &value);
 
     auto getOpeningPattern() const -> bool;
     void setOpeningPattern();
@@ -97,28 +98,28 @@ public:
     void PostWarningMessage(const QString &message, QtMsgType severity) const;
 
     auto GetDimensionHeight() const -> qreal;
-    void  SetDimensionHeight(qreal dimensionHeight);
+    void SetDimensionHeight(qreal dimensionHeight);
 
     auto GetDimensionSize() const -> qreal;
-    void  SetDimensionSize(qreal dimensionSize);
+    void SetDimensionSize(qreal dimensionSize);
 
     auto GetDimensionHip() const -> qreal;
-    void  SetDimensionHip(qreal dimensionHip);
+    void SetDimensionHip(qreal dimensionHip);
 
     auto GetDimensionWaist() const -> qreal;
-    void  SetDimensionWaist(qreal dimensionWaist);
+    void SetDimensionWaist(qreal dimensionWaist);
 
     auto GetDimensionHeightLabel() const -> QString;
-    void    SetDimensionHeightLabel(const QString &label);
+    void SetDimensionHeightLabel(const QString &label);
 
     auto GetDimensionSizeLabel() const -> QString;
-    void    SetDimensionSizeLabel(const QString &label);
+    void SetDimensionSizeLabel(const QString &label);
 
     auto GetDimensionHipLabel() const -> QString;
-    void    SetDimensionHipLabel(const QString &label);
+    void SetDimensionHipLabel(const QString &label);
 
     auto GetDimensionWaistLabel() const -> QString;
-    void    SetDimensionWaistLabel(const QString &label);
+    void SetDimensionWaistLabel(const QString &label);
 
     virtual void OpenSettings() override;
     auto ValentinaSettings() -> VValentinaSettings *;
@@ -127,17 +128,17 @@ public:
 
 protected:
     QString m_customerName{};
-    QDate   m_customerBirthDate{};
+    QDate m_customerBirthDate{};
     QString m_customerEmail{};
 
-    Unit                m_patternUnits{Unit::Cm};
-    MeasurementsType    m_measurementsType{MeasurementsType::Unknown};
-    Unit                m_measurementsUnits{Unit::Cm};
-    VAbstractPattern   *m_doc{nullptr};
-    VMainGraphicsView  *m_sceneView{nullptr};
-    QGraphicsScene    **m_currentScene{nullptr};
-    QString             m_patternFilePath{};
-    QMap<int, QString>  m_userMaterials{};
+    Unit m_patternUnits{Unit::Cm};
+    MeasurementsType m_measurementsType{MeasurementsType::Unknown};
+    Unit m_measurementsUnits{Unit::Cm};
+    VAbstractPattern *m_doc{nullptr};
+    VMainGraphicsView *m_sceneView{nullptr};
+    QGraphicsScene **m_currentScene{nullptr};
+    QString m_patternFilePath{};
+    QMap<int, QString> m_userMaterials{};
 
     qreal m_dimensionHeight{0};
     qreal m_dimensionSize{0};

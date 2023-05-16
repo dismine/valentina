@@ -33,9 +33,12 @@
 #include <QColor>
 #include <QComboBox>
 #include <QCursor>
+#include <QDesktopServices>
 #include <QDir>
 #include <QDirIterator>
 #include <QFileInfo>
+#include <QGlobalStatic>
+#include <QGraphicsItem>
 #include <QGuiApplication>
 #include <QImage>
 #include <QLatin1Char>
@@ -44,19 +47,16 @@
 #include <QMessageLogger>
 #include <QObject>
 #include <QPixmap>
+#include <QPixmapCache>
 #include <QPrinterInfo>
 #include <QProcess>
 #include <QRgb>
-#include <QtDebug>
-#include <QPixmapCache>
-#include <QGraphicsItem>
-#include <QGlobalStatic>
-#include <QDesktopServices>
 #include <QUrl>
+#include <QtDebug>
 
 #include "vabstractapplication.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-#   include "vdatastreamenum.h"
+#include "vdatastreamenum.h"
 #endif
 #include "../ifc/exception/vexception.h"
 #include "literals.h"
@@ -95,27 +95,8 @@ void SetItemOverrideCursor(QGraphicsItem *item, const QString &pixmapPath, int h
 //---------------------------------------------------------------------------------------------------------------------
 auto SupportedLocales() -> QStringList
 {
-    return QStringList
-    {
-        "uk_UA",
-        "de_DE",
-        "cs_CZ",
-        "he_IL",
-        "fr_FR",
-        "it_IT",
-        "nl_NL",
-        "id_ID",
-        "es_ES",
-        "fi_FI",
-        "en_US",
-        "en_CA",
-        "en_IN",
-        "ro_RO",
-        "zh_CN",
-        "pt_BR",
-        "el_GR",
-        "pl_PL"
-    };
+    return QStringList{"uk_UA", "de_DE", "cs_CZ", "he_IL", "fr_FR", "it_IT", "nl_NL", "id_ID", "es_ES",
+                       "fi_FI", "en_US", "en_CA", "en_IN", "ro_RO", "zh_CN", "pt_BR", "el_GR", "pl_PL"};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -224,12 +205,10 @@ auto darkenPixmap(const QPixmap &pixmap) -> QPixmap
 void ShowInGraphicalShell(const QString &filePath)
 {
 #ifdef Q_OS_MAC
-    QStringList args{
-        "-e", "tell application \"Finder\"",
-        "-e", "activate",
-        "-e", "select POSIX file \""+filePath+"\"",
-        "-e", "end tell"
-    };
+    QStringList args{"-e", "tell application \"Finder\"",
+                     "-e", "activate",
+                     "-e", "select POSIX file \"" + filePath + "\"",
+                     "-e", "end tell"};
     QProcess::startDetached(QStringLiteral("osascript"), args);
 #elif defined(Q_OS_WIN)
     QProcess::startDetached(QStringLiteral("explorer"), QStringList{"/select", QDir::toNativeSeparators(filePath)});
@@ -238,7 +217,8 @@ void ShowInGraphicalShell(const QString &filePath)
     QString command = QStringLiteral("dbus-send --reply-timeout=%1 --session --dest=org.freedesktop.FileManager1 "
                                      "--type=method_call /org/freedesktop/FileManager1 "
                                      "org.freedesktop.FileManager1.ShowItems array:string:\"%2\" string:\"\"")
-                          .arg(timeout).arg(QUrl::fromLocalFile(filePath).toString());
+                          .arg(timeout)
+                          .arg(QUrl::fromLocalFile(filePath).toString());
 
     // Sending message through dbus will highlighting file
     QProcess dbus;
@@ -321,17 +301,17 @@ void MacosEnableLayerBacking()
 #endif // MACOS_LAYER_BACKING_AFFECTED
 #endif // Q_OS_MAC
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTMark, (QLatin1String("tMark"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVMark, (QLatin1String("vMark"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVMark2, (QLatin1String("vMark2"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strUMark, (QLatin1String("uMark"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strBoxMark, (QLatin1String("boxMark"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTMark, (QLatin1String("tMark")))         // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVMark, (QLatin1String("vMark")))         // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVMark2, (QLatin1String("vMark2")))       // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strUMark, (QLatin1String("uMark")))         // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strBoxMark, (QLatin1String("boxMark")))     // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCheckMark, (QLatin1String("checkMark"))) // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
 auto PassmarkLineTypeToString(PassmarkLineType type) -> QString
 {
-    switch(type)
+    switch (type)
     {
         case PassmarkLineType::OneLine:
             return strOne;
@@ -364,7 +344,7 @@ auto StringToPassmarkLineType(const QString &value) -> PassmarkLineType
     const QStringList values{strOne,     strTwo,    strThree,    *strTMark,    *strVMark,
                              *strVMark2, *strUMark, *strBoxMark, *strCheckMark};
 
-    switch(values.indexOf(value))
+    switch (values.indexOf(value))
     {
         case 0: // strOne
             return PassmarkLineType::OneLine;
@@ -393,7 +373,7 @@ auto StringToPassmarkLineType(const QString &value) -> PassmarkLineType
 //---------------------------------------------------------------------------------------------------------------------
 auto PassmarkAngleTypeToString(PassmarkAngleType type) -> QString
 {
-    switch(type)
+    switch (type)
     {
         case PassmarkAngleType::Straightforward:
             return strStraightforward;
@@ -425,7 +405,7 @@ auto StringToPassmarkAngleType(const QString &value) -> PassmarkAngleType
         strStraightforward,       strBisector,      strIntersection,          strIntersectionOnlyLeft,
         strIntersectionOnlyRight, strIntersection2, strIntersection2OnlyLeft, strIntersection2OnlyRight};
 
-    switch(values.indexOf(value))
+    switch (values.indexOf(value))
     {
         case 0:
             return PassmarkAngleType::Straightforward;
@@ -449,20 +429,19 @@ auto StringToPassmarkAngleType(const QString &value) -> PassmarkAngleType
     return PassmarkAngleType::Straightforward;
 }
 
-
 //---------------------------------------------------------------------------------------------------------------------
 auto StrToUnits(const QString &unit) -> Unit
 {
     const QStringList units{unitMM, unitCM, unitINCH, unitPX};
     switch (units.indexOf(unit))
     {
-        case 0:// mm
+        case 0: // mm
             return Unit::Mm;
-        case 2:// inch
+        case 2: // inch
             return Unit::Inch;
-        case 3:// px
+        case 3: // px
             return Unit::Px;
-        case 1:// cm
+        case 1: // cm
         default:
             return Unit::Cm;
     }
@@ -591,8 +570,8 @@ auto operator>>(QDataStream &in, CustomSARecord &record) -> QDataStream &
     {
         QString message = QCoreApplication::tr("CustomSARecord prefix mismatch error: actualStreamHeader = 0x%1 "
                                                "and streamHeader = 0x%2")
-                .arg(actualStreamHeader, 8, 0x10, QChar('0'))
-                .arg(CustomSARecord::streamHeader, 8, 0x10, QChar('0'));
+                              .arg(actualStreamHeader, 8, 0x10, QChar('0'))
+                              .arg(CustomSARecord::streamHeader, 8, 0x10, QChar('0'));
         throw VException(message);
     }
 
@@ -603,7 +582,8 @@ auto operator>>(QDataStream &in, CustomSARecord &record) -> QDataStream &
     {
         QString message = QCoreApplication::tr("CustomSARecord compatibility error: actualClassVersion = %1 and "
                                                "classVersion = %2")
-                .arg(actualClassVersion).arg(CustomSARecord::classVersion);
+                              .arg(actualClassVersion)
+                              .arg(CustomSARecord::classVersion);
         throw VException(message);
     }
 
@@ -613,10 +593,10 @@ auto operator>>(QDataStream &in, CustomSARecord &record) -> QDataStream &
     in >> record.reverse;
     in >> record.includeType;
 
-//    if (actualClassVersion >= 2)
-//    {
+    //    if (actualClassVersion >= 2)
+    //    {
 
-//    }
+    //    }
 
     return in;
 }
@@ -624,7 +604,7 @@ auto operator>>(QDataStream &in, CustomSARecord &record) -> QDataStream &
 //---------------------------------------------------------------------------------------------------------------------
 auto IncrementTypeToString(IncrementType type) -> QString
 {
-    switch(type)
+    switch (type)
     {
         case IncrementType::Increment:
             return strTypeIncrement;
@@ -640,9 +620,9 @@ auto IncrementTypeToString(IncrementType type) -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto StringToIncrementType(const QString &value) -> IncrementType
 {
-    const QStringList values { strTypeIncrement, strTypeSeparator };
+    const QStringList values{strTypeIncrement, strTypeSeparator};
 
-    switch(values.indexOf(value))
+    switch (values.indexOf(value))
     {
         case 0:
             return IncrementType::Increment;
@@ -657,7 +637,7 @@ auto StringToIncrementType(const QString &value) -> IncrementType
 //---------------------------------------------------------------------------------------------------------------------
 auto MeasurementTypeToString(MeasurementType type) -> QString
 {
-    switch(type)
+    switch (type)
     {
         case MeasurementType::Measurement:
             return strTypeMeasurement;
@@ -673,9 +653,9 @@ auto MeasurementTypeToString(MeasurementType type) -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto StringToMeasurementType(const QString &value) -> MeasurementType
 {
-    const QStringList values { strTypeMeasurement, strTypeSeparator };
+    const QStringList values{strTypeMeasurement, strTypeSeparator};
 
-    switch(values.indexOf(value))
+    switch (values.indexOf(value))
     {
         case 0:
             return MeasurementType::Measurement;
@@ -703,8 +683,7 @@ auto SplitFilePaths(const QString &path) -> QStringList
             result.prepend(lastFileName);
             subPath = fileInfo.path();
         }
-    }
-    while(not lastFileName.isEmpty());
+    } while (not lastFileName.isEmpty());
 
     return result;
 }

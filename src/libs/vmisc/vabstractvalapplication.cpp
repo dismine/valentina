@@ -29,12 +29,14 @@
 #include "customevents.h"
 #include "vvalentinasettings.h"
 
+#include <QTranslator>
 #include <QWidget>
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractValApplication::VAbstractValApplication(int &argc, char **argv)
-    : VAbstractApplication(argc, argv)
-{}
+  : VAbstractApplication(argc, argv)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractValApplication::toPixel(double val) const -> double
@@ -71,11 +73,12 @@ void VAbstractValApplication::OpenSettings()
 auto VAbstractValApplication::ValentinaSettings() -> VValentinaSettings *
 {
     SCASSERT(settings != nullptr)
-            return qobject_cast<VValentinaSettings *>(settings);
+
+    return qobject_cast<VValentinaSettings *>(settings);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractValApplication::VApp() -> VAbstractValApplication *
 {
-    return qobject_cast<VAbstractValApplication*>(QCoreApplication::instance());
+    return qobject_cast<VAbstractValApplication *>(QCoreApplication::instance());
 }

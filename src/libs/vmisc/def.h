@@ -31,17 +31,17 @@
 
 #include <QtGlobal>
 #ifdef Q_OS_WIN
-#  include <qt_windows.h>
+#include <qt_windows.h>
 #endif /*Q_OS_WIN*/
 
-#include <qcompilerdetection.h>
+#include <QLineF>
+#include <QMargins>
 #include <QPrinter>
 #include <QString>
 #include <QStringList>
 #include <Qt>
 #include <csignal>
-#include <QMargins>
-#include <QLineF>
+#include <qcompilerdetection.h>
 
 #include "debugbreak.h"
 #include "defglobal.h"
@@ -56,16 +56,16 @@ template <class T> class QSharedPointer;
 // Backport of relaxed constexpr
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #if defined Q_COMPILER_CONSTEXPR
-# if defined(__cpp_constexpr) && __cpp_constexpr-0 >= 201304
-#  define Q_DECL_RELAXED_CONSTEXPR constexpr
-#  define Q_RELAXED_CONSTEXPR constexpr
-# else
-#  define Q_DECL_RELAXED_CONSTEXPR
-#  define Q_RELAXED_CONSTEXPR const
-# endif
+#if defined(__cpp_constexpr) && __cpp_constexpr - 0 >= 201304
+#define Q_DECL_RELAXED_CONSTEXPR constexpr
+#define Q_RELAXED_CONSTEXPR constexpr
 #else
-# define Q_DECL_RELAXED_CONSTEXPR
-# define Q_RELAXED_CONSTEXPR const
+#define Q_DECL_RELAXED_CONSTEXPR
+#define Q_RELAXED_CONSTEXPR const
+#endif
+#else
+#define Q_DECL_RELAXED_CONSTEXPR
+#define Q_RELAXED_CONSTEXPR const
 #endif
 #endif
 
@@ -83,15 +83,63 @@ constexpr qreal maxCurveApproximationScale = 10.0;
 constexpr int minLabelFontSize = 5;
 constexpr int maxLabelFontSize = 100;
 
-enum class NodeDetail : qint8 { Contour, Modeling };
-enum class SceneObject : qint8 { Point, Line, Spline, Arc, ElArc, SplinePath, Detail, Unknown };
-enum class MeasurementsType : qint8 { Multisize, Individual, Unknown};
-enum class Unit : qint8 { Mm = 0, Cm, Inch, Px, LAST_UNIT_DO_NOT_USE};
-enum class Source : qint8 { FromGui, FromFile, FromTool };
-enum class NodeUsage : bool {NotInUse = false, InUse = true};
-enum class SelectionType : bool {ByMousePress, ByMouseRelease};
-enum class PageOrientation : bool {Portrait = true, Landscape = false};
-enum class Draw : qint8 { Calculation, Modeling, Layout };
+enum class NodeDetail : qint8
+{
+    Contour,
+    Modeling
+};
+enum class SceneObject : qint8
+{
+    Point,
+    Line,
+    Spline,
+    Arc,
+    ElArc,
+    SplinePath,
+    Detail,
+    Unknown
+};
+enum class MeasurementsType : qint8
+{
+    Multisize,
+    Individual,
+    Unknown
+};
+enum class Unit : qint8
+{
+    Mm = 0,
+    Cm,
+    Inch,
+    Px,
+    LAST_UNIT_DO_NOT_USE
+};
+enum class Source : qint8
+{
+    FromGui,
+    FromFile,
+    FromTool
+};
+enum class NodeUsage : bool
+{
+    NotInUse = false,
+    InUse = true
+};
+enum class SelectionType : bool
+{
+    ByMousePress,
+    ByMouseRelease
+};
+enum class PageOrientation : bool
+{
+    Portrait = true,
+    Landscape = false
+};
+enum class Draw : qint8
+{
+    Calculation,
+    Modeling,
+    Layout
+};
 
 enum class PieceNodeAngle : quint8
 {
@@ -147,7 +195,13 @@ enum class PiecePathIncludeType : quint8
     AsCustomSA = 1
 };
 
-enum class PiecePathType :  quint8 {PiecePath = 0, CustomSeamAllowance = 1, InternalPath = 2, Unknown = 3};
+enum class PiecePathType : quint8
+{
+    PiecePath = 0,
+    CustomSeamAllowance = 1,
+    InternalPath = 2,
+    Unknown = 3
+};
 
 typedef int ToolVisHolderType;
 enum class Tool : ToolVisHolderType
@@ -211,7 +265,7 @@ enum class Tool : ToolVisHolderType
     BackgroundImageControls,
     BackgroundPixmapImage,
     BackgroundSVGImage,
-    LAST_ONE_DO_NOT_USE //add new stuffs above this, this constant must be last and never used
+    LAST_ONE_DO_NOT_USE // add new stuffs above this, this constant must be last and never used
 };
 
 enum class Vis : ToolVisHolderType
@@ -270,30 +324,51 @@ enum class Vis : ToolVisHolderType
     PieceItem,
     TextGraphicsItem,
     ScenePoint,
-    LAST_ONE_DO_NOT_USE //add new stuffs above this, this constant must be last and never used
+    LAST_ONE_DO_NOT_USE // add new stuffs above this, this constant must be last and never used
 };
 
 enum class Layout : ToolVisHolderType
 {
     GrainlineItem = static_cast<ToolVisHolderType>(Vis::LAST_ONE_DO_NOT_USE),
-    LAST_ONE_DO_NOT_USE //add new stuffs above this, this constant must be last and never used
+    LAST_ONE_DO_NOT_USE // add new stuffs above this, this constant must be last and never used
 };
 
-enum class VarType : qint8 { Measurement, MeasurementSeparator, Increment, IncrementSeparator, LineLength, CurveLength,
-                             CurveCLength, LineAngle, CurveAngle, ArcRadius, PieceExternalArea, PieceSeamLineArea,
-                             Unknown };
+enum class VarType : qint8
+{
+    Measurement,
+    MeasurementSeparator,
+    Increment,
+    IncrementSeparator,
+    LineLength,
+    CurveLength,
+    CurveCLength,
+    LineAngle,
+    CurveAngle,
+    ArcRadius,
+    PieceExternalArea,
+    PieceSeamLineArea,
+    Unknown
+};
 
-enum class IncrementType : qint8 { Increment, Separator };
+enum class IncrementType : qint8
+{
+    Increment,
+    Separator
+};
 
 auto IncrementTypeToString(IncrementType type) -> QString;
 auto StringToIncrementType(const QString &value) -> IncrementType;
 
-enum class MeasurementType : qint8 { Measurement, Separator };
+enum class MeasurementType : qint8
+{
+    Measurement,
+    Separator
+};
 
 auto MeasurementTypeToString(MeasurementType type) -> QString;
 auto StringToMeasurementType(const QString &value) -> MeasurementType;
 
-enum class IMD: qint8 // Individual measurement dimension
+enum class IMD : qint8 // Individual measurement dimension
 {
     N, // None
     X, // height
@@ -327,47 +402,46 @@ enum class IMD: qint8 // Individual measurement dimension
  */
 #ifndef V_NO_ASSERT
 
-#define SCASSERT(cond)                                  \
-if (!(cond))                                            \
-{                                                       \
-    qCritical("ASSERT: %s in %s (%s:%u)",               \
-              #cond, Q_FUNC_INFO , __FILE__, __LINE__); \
-    debug_break();                                      \
-    abort();                                            \
-}
+#define SCASSERT(cond)                                                                                                 \
+    if (!(cond))                                                                                                       \
+    {                                                                                                                  \
+        qCritical("ASSERT: %s in %s (%s:%u)", #cond, Q_FUNC_INFO, __FILE__, __LINE__);                                 \
+        debug_break();                                                                                                 \
+        abort();                                                                                                       \
+    }
 
 #else // define but disable this function if debugging is not set
 #define SCASSERT(cond) qt_noop();
 #endif /* V_NO_ASSERT */
 
 #ifndef __has_cpp_attribute
-# define __has_cpp_attribute(x) 0
+#define __has_cpp_attribute(x) 0
 #endif
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 8, 0)
 
 #ifndef QT_HAS_CPP_ATTRIBUTE
 #ifdef __has_cpp_attribute
-#  define QT_HAS_CPP_ATTRIBUTE(x) __has_cpp_attribute(x)
+#define QT_HAS_CPP_ATTRIBUTE(x) __has_cpp_attribute(x)
 #else
-#  define QT_HAS_CPP_ATTRIBUTE(x) 0
+#define QT_HAS_CPP_ATTRIBUTE(x) 0
 #endif
 #endif // QT_HAS_CPP_ATTRIBUTE
 
 #if defined(__cplusplus)
 #if QT_HAS_CPP_ATTRIBUTE(clang::fallthrough)
-#    define Q_FALLTHROUGH() [[clang::fallthrough]]
+#define Q_FALLTHROUGH() [[clang::fallthrough]]
 #elif QT_HAS_CPP_ATTRIBUTE(gnu::fallthrough)
-#    define Q_FALLTHROUGH() [[gnu::fallthrough]]
+#define Q_FALLTHROUGH() [[gnu::fallthrough]]
 #elif QT_HAS_CPP_ATTRIBUTE(fallthrough)
-#  define Q_FALLTHROUGH() [[fallthrough]]
+#define Q_FALLTHROUGH() [[fallthrough]]
 #endif
 #endif
 #ifndef Q_FALLTHROUGH
-#  if (defined(Q_CC_GNU) && Q_CC_GNU >= 700) && !defined(Q_CC_INTEL)
-#    define Q_FALLTHROUGH() __attribute__((fallthrough))
-#  else
-#    define Q_FALLTHROUGH() (void)0
+#if (defined(Q_CC_GNU) && Q_CC_GNU >= 700) && !defined(Q_CC_INTEL)
+#define Q_FALLTHROUGH() __attribute__((fallthrough))
+#else
+#define Q_FALLTHROUGH() (void)0
 #endif
 #endif // defined(__cplusplus)
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 8, 0)
@@ -392,11 +466,10 @@ void InitHighDpiScaling(int argc, char *argv[]);
 
 // We'll assume that it will be fixed in 5.12.11, 5.15.3, and 6.0.1.
 // Feel free to add other versions if needed.
-#define MACOS_LAYER_BACKING_AFFECTED \
-(QT_VERSION >= QT_VERSION_CHECK(5, 12, 0) && QT_VERSION < QT_VERSION_CHECK(5, 12, 11) \
- || (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0) &&  QT_VERSION < QT_VERSION_CHECK(5, 15, 3)) \
- || (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0) &&  QT_VERSION < QT_VERSION_CHECK(6, 0, 1)) \
- )
+#define MACOS_LAYER_BACKING_AFFECTED                                                                                   \
+    (QT_VERSION >= QT_VERSION_CHECK(5, 12, 0) && QT_VERSION < QT_VERSION_CHECK(5, 12, 11) ||                           \
+     (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0) && QT_VERSION < QT_VERSION_CHECK(5, 15, 3)) ||                          \
+     (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0) && QT_VERSION < QT_VERSION_CHECK(6, 0, 1)))
 
 #if MACOS_LAYER_BACKING_AFFECTED
 #include <QOperatingSystemVersion>
@@ -408,7 +481,7 @@ void MacosEnableLayerBacking();
 const int userMaterialPlaceholdersQuantity = 20;
 
 auto QPixmapFromCache(const QString &pixmapPath) -> QPixmap;
-void SetItemOverrideCursor(QGraphicsItem *item, const QString & pixmapPath, int hotX = -1, int hotY = -1);
+void SetItemOverrideCursor(QGraphicsItem *item, const QString &pixmapPath, int hotX = -1, int hotY = -1);
 
 template <typename T> constexpr inline auto MmToPixel(T val) noexcept -> T
 {
@@ -442,9 +515,18 @@ Q_DECL_RELAXED_CONSTEXPR inline auto ToPixel(double val, const Unit &unit) -> do
     return 0;
 }
 
-template<typename T> constexpr inline auto PixelToInch(T pix) -> T {return pix / PrintDPI;}
-template<typename T> constexpr inline auto PixelToMm(T pix) -> T {return PixelToInch(pix) * 25.4;}
-template<typename T> constexpr inline auto PixelToCm(T pix) -> T {return PixelToInch(pix) * 2.54;}
+template <typename T> constexpr inline auto PixelToInch(T pix) -> T
+{
+    return pix / PrintDPI;
+}
+template <typename T> constexpr inline auto PixelToMm(T pix) -> T
+{
+    return PixelToInch(pix) * 25.4;
+}
+template <typename T> constexpr inline auto PixelToCm(T pix) -> T
+{
+    return PixelToInch(pix) * 2.54;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_RELAXED_CONSTEXPR inline auto FromPixel(double pix, const Unit &unit) -> double
@@ -465,48 +547,66 @@ Q_DECL_RELAXED_CONSTEXPR inline auto FromPixel(double pix, const Unit &unit) -> 
     return 0;
 }
 
-template<typename T> constexpr inline auto Inch2ToPixel2(T val) -> T {return val * (PrintDPI * PrintDPI);}
-template<typename T> constexpr inline auto Mm2ToPixel2(T val) -> T {return Inch2ToPixel2(val * 0.001550031);}
-template<typename T> constexpr inline auto Cm2ToPixel2(T val) -> T {return Inch2ToPixel2(val * 0.15500031);}
+template <typename T> constexpr inline auto Inch2ToPixel2(T val) -> T
+{
+    return val * (PrintDPI * PrintDPI);
+}
+template <typename T> constexpr inline auto Mm2ToPixel2(T val) -> T
+{
+    return Inch2ToPixel2(val * 0.001550031);
+}
+template <typename T> constexpr inline auto Cm2ToPixel2(T val) -> T
+{
+    return Inch2ToPixel2(val * 0.15500031);
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_RELAXED_CONSTEXPR inline auto ToPixel2(double val, const Unit &unit) -> double
 {
     switch (unit)
     {
-    case Unit::Mm:
-        return Mm2ToPixel2(val);
-    case Unit::Cm:
-        return Cm2ToPixel2(val);
-    case Unit::Inch:
-        return Inch2ToPixel2(val);
-    case Unit::Px:
-        return val;
-    default:
-        break;
+        case Unit::Mm:
+            return Mm2ToPixel2(val);
+        case Unit::Cm:
+            return Cm2ToPixel2(val);
+        case Unit::Inch:
+            return Inch2ToPixel2(val);
+        case Unit::Px:
+            return val;
+        default:
+            break;
     }
     return 0;
 }
 
-template<typename T> constexpr inline auto Pixel2ToInch2(T pix) -> T { return pix / (PrintDPI * PrintDPI);}
-template<typename T> constexpr inline auto Pixel2ToMm2(T pix) -> T { return Pixel2ToInch2(pix) / 0.001550031;}
-template<typename T> constexpr inline auto Pixel2ToCm2(T pix) -> T { return Pixel2ToInch2(pix) / 0.15500031;}
+template <typename T> constexpr inline auto Pixel2ToInch2(T pix) -> T
+{
+    return pix / (PrintDPI * PrintDPI);
+}
+template <typename T> constexpr inline auto Pixel2ToMm2(T pix) -> T
+{
+    return Pixel2ToInch2(pix) / 0.001550031;
+}
+template <typename T> constexpr inline auto Pixel2ToCm2(T pix) -> T
+{
+    return Pixel2ToInch2(pix) / 0.15500031;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_RELAXED_CONSTEXPR inline auto FromPixel2(double pix, const Unit &unit) -> double
 {
     switch (unit)
     {
-    case Unit::Mm:
-        return Pixel2ToMm2(pix);
-    case Unit::Cm:
-        return Pixel2ToCm2(pix);
-    case Unit::Inch:
-        return Pixel2ToInch2(pix);
-    case Unit::Px:
-        return pix;
-    default:
-        break;
+        case Unit::Mm:
+            return Pixel2ToMm2(pix);
+        case Unit::Cm:
+            return Pixel2ToCm2(pix);
+        case Unit::Inch:
+            return Pixel2ToInch2(pix);
+        case Unit::Px:
+            return pix;
+        default:
+            break;
     }
     return 0;
 }
@@ -587,8 +687,8 @@ Q_DECL_RELAXED_CONSTEXPR inline auto UnitConvertor(qreal value, const Unit &from
  * @brief UnitConvertor Converts the values of the given margin from given unit to the new unit.
  * returns a new instand of QMarginsF.
  */
-Q_DECL_RELAXED_CONSTEXPR inline auto UnitConvertor(const QMarginsF &margins, const Unit &from,
-                                                   const Unit &to) -> QMarginsF
+Q_DECL_RELAXED_CONSTEXPR inline auto UnitConvertor(const QMarginsF &margins, const Unit &from, const Unit &to)
+    -> QMarginsF
 {
     const qreal left = UnitConvertor(margins.left(), from, to);
     const qreal top = UnitConvertor(margins.top(), from, to);
@@ -617,11 +717,11 @@ void ShowInGraphicalShell(const QString &filePath);
 Q_REQUIRED_RESULT Q_DECL_RELAXED_CONSTEXPR static inline auto VFuzzyComparePossibleNulls(double p1, double p2) -> bool;
 Q_DECL_RELAXED_CONSTEXPR static inline auto VFuzzyComparePossibleNulls(double p1, double p2) -> bool
 {
-    if(qFuzzyIsNull(p1))
+    if (qFuzzyIsNull(p1))
     {
         return qFuzzyIsNull(p2);
     }
-    else if(qFuzzyIsNull(p2))
+    else if (qFuzzyIsNull(p2))
     {
         return false;
     }
@@ -637,12 +737,13 @@ Q_DECL_RELAXED_CONSTEXPR static inline auto VFuzzyComparePossibleNulls(double p1
 struct CustomSARecord
 {
     CustomSARecord()
-        : startPoint(0),
-          path(0),
-          endPoint(0),
-          reverse(false),
-          includeType(PiecePathIncludeType::AsCustomSA)
-    {}
+      : startPoint(0),
+        path(0),
+        endPoint(0),
+        reverse(false),
+        includeType(PiecePathIncludeType::AsCustomSA)
+    {
+    }
 
     friend auto operator<<(QDataStream &out, const CustomSARecord &record) -> QDataStream &;
     friend auto operator>>(QDataStream &in, CustomSARecord &record) -> QDataStream &;
@@ -672,28 +773,27 @@ Q_DECLARE_TYPEINFO(CustomSARecord, Q_MOVABLE_TYPE); // NOLINT
 ** this file shall be copyright (C) 2006-2008 by Adam Higerd.
 ****************************************************************************/
 
-#define QXT_DECLARE_PRIVATE(PUB) friend class PUB##Private; QxtPrivateInterface<PUB, PUB##Private> qxt_d;
+#define QXT_DECLARE_PRIVATE(PUB)                                                                                       \
+    friend class PUB##Private;                                                                                         \
+    QxtPrivateInterface<PUB, PUB##Private> qxt_d;
 #define QXT_DECLARE_PUBLIC(PUB) friend class PUB;
 #define QXT_INIT_PRIVATE(PUB) qxt_d.setPublic(this);
-#define QXT_D(PUB) PUB##Private& d = qxt_d()
-#define QXT_P(PUB) PUB& p = qxt_p()
+#define QXT_D(PUB) PUB##Private &d = qxt_d()
+#define QXT_P(PUB) PUB &p = qxt_p()
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 
-template <typename PUB>
-class QxtPrivate
+template <typename PUB> class QxtPrivate
 {
 public:
-    QxtPrivate(): qxt_p_ptr(nullptr)
-    {}
-    virtual ~QxtPrivate()
-    {}
-    inline void QXT_setPublic(PUB* pub)
+    QxtPrivate()
+      : qxt_p_ptr(nullptr)
     {
-        qxt_p_ptr = pub;
     }
+    virtual ~QxtPrivate() {}
+    inline void QXT_setPublic(PUB *pub) { qxt_p_ptr = pub; }
 
 protected:
     inline auto qxt_p() -> PUB & { return *qxt_p_ptr; }
@@ -703,28 +803,24 @@ protected:
 
 private:
     Q_DISABLE_COPY_MOVE(QxtPrivate) // NOLINT
-    PUB* qxt_p_ptr;
+    PUB *qxt_p_ptr;
 };
 
 // cppcheck-suppress unknownMacro
 QT_WARNING_POP
 
-template <typename PUB, typename PVT>
-class QxtPrivateInterface
+template <typename PUB, typename PVT> class QxtPrivateInterface
 {
     friend class QxtPrivate<PUB>;
-public:
-    QxtPrivateInterface() : pvt(new PVT)
-    {}
-    ~QxtPrivateInterface()
-    {
-        delete pvt;
-    }
 
-    inline void setPublic(PUB* pub)
+public:
+    QxtPrivateInterface()
+      : pvt(new PVT)
     {
-        pvt->QXT_setPublic(pub);
     }
+    ~QxtPrivateInterface() { delete pvt; }
+
+    inline void setPublic(PUB *pub) { pvt->QXT_setPublic(pub); }
     inline auto operator()() -> PVT & { return *static_cast<PVT *>(pvt); }
     inline auto operator()() const -> const PVT & { return *static_cast<PVT *>(pvt); }
     inline auto operator->() -> PVT * { return static_cast<PVT *>(pvt); }
@@ -732,7 +828,7 @@ public:
 
 private:
     Q_DISABLE_COPY_MOVE(QxtPrivateInterface) // NOLINT
-    QxtPrivate<PUB>* pvt;
+    QxtPrivate<PUB> *pvt;
 };
 
 #endif // DEF_H

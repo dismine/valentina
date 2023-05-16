@@ -27,36 +27,36 @@
  *************************************************************************/
 
 #include "dialogeditlabel.h"
-#include "ui_dialogeditlabel.h"
 #include "../vmisc/vabstractapplication.h"
+#include "ui_dialogeditlabel.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vformat/vlabeltemplate.h"
-#include "../ifc/xml/vlabeltemplateconverter.h"
-#include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/exception/vexception.h"
-#include "../vpatterndb/vcontainer.h"
-#include "../vpatterndb/vpiece.h"
-#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vlabeltemplateconverter.h"
+#include "../tools/dialogtool.h"
+#include "../vformat/vlabeltemplate.h"
 #include "../vpatterndb/calculator.h"
+#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "../vpatterndb/variables/vmeasurement.h"
 #include "../vpatterndb/variables/vpiecearea.h"
-#include "../tools/dialogtool.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vpiece.h"
 
+#include <QDate>
 #include <QDir>
-#include <QMessageBox>
 #include <QFileDialog>
 #include <QMenu>
-#include <QDate>
+#include <QMessageBox>
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogEditLabel::DialogEditLabel(const VAbstractPattern *doc, const VContainer *data, QWidget *parent)
-    : QDialog(parent),
-      ui(new Ui::DialogEditLabel),
-      m_placeholdersMenu(new QMenu(this)),
-      m_doc(doc),
-      m_data(data)
+  : QDialog(parent),
+    ui(new Ui::DialogEditLabel),
+    m_placeholdersMenu(new QMenu(this)),
+    m_doc(doc),
+    m_data(data)
 {
     ui->setupUi(this);
 
@@ -77,12 +77,13 @@ DialogEditLabel::DialogEditLabel(const VAbstractPattern *doc, const VContainer *
     connect(ui->toolButtonImportLabel, &QToolButton::clicked, this, &DialogEditLabel::ImportTemplate);
     connect(ui->spinBoxFontSize, QOverload<int>::of(&QSpinBox::valueChanged), this,
             &DialogEditLabel::SaveAdditionalFontSize);
-    connect(ui->toolButtonTop, &QToolButton::clicked, this, [this](){DialogTool::MoveListRowTop(ui->listWidgetEdit);});
-    connect(ui->toolButtonUp, &QToolButton::clicked, this, [this](){DialogTool::MoveListRowUp(ui->listWidgetEdit);});
+    connect(ui->toolButtonTop, &QToolButton::clicked, this,
+            [this]() { DialogTool::MoveListRowTop(ui->listWidgetEdit); });
+    connect(ui->toolButtonUp, &QToolButton::clicked, this, [this]() { DialogTool::MoveListRowUp(ui->listWidgetEdit); });
     connect(ui->toolButtonDown, &QToolButton::clicked, this,
-            [this](){DialogTool::MoveListRowDown(ui->listWidgetEdit);});
+            [this]() { DialogTool::MoveListRowDown(ui->listWidgetEdit); });
     connect(ui->toolButtonBottom, &QToolButton::clicked, this,
-            [this](){DialogTool::MoveListRowBottom(ui->listWidgetEdit);});
+            [this]() { DialogTool::MoveListRowBottom(ui->listWidgetEdit); });
 
     InitPlaceholders();
     InitPlaceholdersMenu();
@@ -279,10 +280,11 @@ void DialogEditLabel::NewTemplate()
 {
     if (ui->listWidgetEdit->count() > 0)
     {
-        const QMessageBox::StandardButton answer = QMessageBox::question(this, tr("Create new template"),
-                                                            tr("Creating new template will overwrite the current, do "
-                                                               "you want to continue?"),
-                                                            QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+        const QMessageBox::StandardButton answer =
+            QMessageBox::question(this, tr("Create new template"),
+                                  tr("Creating new template will overwrite the current, do "
+                                     "you want to continue?"),
+                                  QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
         if (answer == QMessageBox::No)
         {
             return;
@@ -300,7 +302,7 @@ void DialogEditLabel::ExportTemplate()
 {
     QString filters(tr("Label template") + QLatin1String("(*.xml)"));
     const QString path =
-            VCommonSettings::PrepareLabelTemplates(VAbstractApplication::VApp()->Settings()->GetPathLabelTemplate());
+        VCommonSettings::PrepareLabelTemplates(VAbstractApplication::VApp()->Settings()->GetPathLabelTemplate());
 
     QString fileName = QFileDialog::getSaveFileName(this, tr("Export label template"),
                                                     path + QLatin1String("/") + tr("template") + QLatin1String(".xml"),
@@ -311,7 +313,7 @@ void DialogEditLabel::ExportTemplate()
         return;
     }
 
-    QFileInfo f( fileName );
+    QFileInfo f(fileName);
     if (f.suffix().isEmpty() && f.suffix() != QLatin1String("xml"))
     {
         fileName += QLatin1String(".xml");
@@ -340,10 +342,11 @@ void DialogEditLabel::ImportTemplate()
 {
     if (ui->listWidgetEdit->count() > 0)
     {
-        const QMessageBox::StandardButton answer = QMessageBox::question(this, tr("Import template"),
-                                                            tr("Import template will overwrite the current, do "
-                                                               "you want to continue?"),
-                                                            QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+        const QMessageBox::StandardButton answer =
+            QMessageBox::question(this, tr("Import template"),
+                                  tr("Import template will overwrite the current, do "
+                                     "you want to continue?"),
+                                  QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
         if (answer == QMessageBox::No)
         {
             return;
@@ -351,9 +354,9 @@ void DialogEditLabel::ImportTemplate()
     }
 
     QString filter(tr("Label template") + QLatin1String(" (*.xml)"));
-    //Use standard path to label templates
+    // Use standard path to label templates
     const QString path =
-            VCommonSettings::PrepareLabelTemplates(VAbstractApplication::VApp()->Settings()->GetPathLabelTemplate());
+        VCommonSettings::PrepareLabelTemplates(VAbstractApplication::VApp()->Settings()->GetPathLabelTemplate());
     const QString fileName = QFileDialog::getOpenFileName(this, tr("Import template"), path, filter, nullptr,
                                                           VAbstractApplication::VApp()->NativeFileDialog());
     if (fileName.isEmpty())
@@ -453,7 +456,7 @@ void DialogEditLabel::SetupControls()
             ui->toolButtonDown->setEnabled(true);
             ui->toolButtonBottom->setEnabled(true);
         }
-        else if (ui->listWidgetEdit->currentRow() == ui->listWidgetEdit->count()-1)
+        else if (ui->listWidgetEdit->currentRow() == ui->listWidgetEdit->count() - 1)
         {
             ui->toolButtonTop->setEnabled(true);
             ui->toolButtonUp->setEnabled(true);
@@ -518,22 +521,22 @@ void DialogEditLabel::InitPlaceholders()
 
     const QString pUnits = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
     m_placeholders.insert(pl_pUnits, qMakePair(tr("Pattern units"), pUnits));
-    m_placeholders.insert(pl_mSizeUnits, qMakePair(tr("Size units"),
-                                                   UnitsToStr(VAbstractValApplication::VApp()->DimensionSizeUnits(),
-                                                              true)));
+    m_placeholders.insert(
+        pl_mSizeUnits,
+        qMakePair(tr("Size units"), UnitsToStr(VAbstractValApplication::VApp()->DimensionSizeUnits(), true)));
     m_placeholders.insert(pl_areaUnits, qMakePair(tr("Area units"), pUnits + QStringLiteral("²")));
 
     if (VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Individual)
     {
-        m_placeholders.insert(pl_customer, qMakePair(tr("Customer name"),
-                                                     VAbstractValApplication::VApp()->GetCustomerName()));
+        m_placeholders.insert(pl_customer,
+                              qMakePair(tr("Customer name"), VAbstractValApplication::VApp()->GetCustomerName()));
 
-        const QString birthDate = locale.toString(VAbstractValApplication::VApp()->GetCustomerBirthDate(),
-                                                  m_doc->GetLabelDateFormat());
+        const QString birthDate =
+            locale.toString(VAbstractValApplication::VApp()->GetCustomerBirthDate(), m_doc->GetLabelDateFormat());
         m_placeholders.insert(pl_birthDate, qMakePair(tr("Customer birth date"), birthDate));
 
-        m_placeholders.insert(pl_email, qMakePair(tr("Customer email"),
-                                                  VAbstractValApplication::VApp()->CustomerEmail()));
+        m_placeholders.insert(pl_email,
+                              qMakePair(tr("Customer email"), VAbstractValApplication::VApp()->CustomerEmail()));
     }
     else
     {
@@ -571,41 +574,41 @@ void DialogEditLabel::InitPlaceholders()
 
     {
         QString label = VAbstractValApplication::VApp()->GetDimensionHeightLabel();
-        m_placeholders.insert(pl_heightLabel, qMakePair(tr("Height label", "dimension"),
-                                                        not label.isEmpty() ? label : heightValue));
-        m_placeholders.insert(pl_dimensionX, qMakePair(tr("Dimension X label", "dimension"),
-                                                        not label.isEmpty() ? label : heightValue));
+        m_placeholders.insert(pl_heightLabel,
+                              qMakePair(tr("Height label", "dimension"), not label.isEmpty() ? label : heightValue));
+        m_placeholders.insert(
+            pl_dimensionX, qMakePair(tr("Dimension X label", "dimension"), not label.isEmpty() ? label : heightValue));
 
         label = VAbstractValApplication::VApp()->GetDimensionSizeLabel();
-        m_placeholders.insert(pl_sizeLabel, qMakePair(tr("Size label", "dimension"),
-                                                      not label.isEmpty() ? label : sizeValue));
-        m_placeholders.insert(pl_dimensionY, qMakePair(tr("Dimension Y label", "dimension"),
-                                                      not label.isEmpty() ? label : sizeValue));
+        m_placeholders.insert(pl_sizeLabel,
+                              qMakePair(tr("Size label", "dimension"), not label.isEmpty() ? label : sizeValue));
+        m_placeholders.insert(pl_dimensionY,
+                              qMakePair(tr("Dimension Y label", "dimension"), not label.isEmpty() ? label : sizeValue));
 
         label = VAbstractValApplication::VApp()->GetDimensionHipLabel();
-        m_placeholders.insert(pl_hipLabel, qMakePair(tr("Hip label", "dimension"),
-                                                     not label.isEmpty() ? label : hipValue));
-        m_placeholders.insert(pl_dimensionZ, qMakePair(tr("Dimension Z label", "dimension"),
-                                                       not label.isEmpty() ? label : hipValue));
+        m_placeholders.insert(pl_hipLabel,
+                              qMakePair(tr("Hip label", "dimension"), not label.isEmpty() ? label : hipValue));
+        m_placeholders.insert(pl_dimensionZ,
+                              qMakePair(tr("Dimension Z label", "dimension"), not label.isEmpty() ? label : hipValue));
 
         label = VAbstractValApplication::VApp()->GetDimensionWaistLabel();
-        m_placeholders.insert(pl_waistLabel, qMakePair(tr("Waist label", "dimension"),
-                                                       not label.isEmpty() ? label : waistValue));
-        m_placeholders.insert(pl_dimensionW, qMakePair(tr("Dimension W label", "dimension"),
-                                                       not label.isEmpty() ? label : waistValue));
+        m_placeholders.insert(pl_waistLabel,
+                              qMakePair(tr("Waist label", "dimension"), not label.isEmpty() ? label : waistValue));
+        m_placeholders.insert(
+            pl_dimensionW, qMakePair(tr("Dimension W label", "dimension"), not label.isEmpty() ? label : waistValue));
     }
 
-
-    m_placeholders.insert(pl_mExt,
-                          qMakePair(tr("Measurments extension"),
-                                   VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Multisize
-                                    ? QStringLiteral("vst") : QStringLiteral("vit")));
+    m_placeholders.insert(
+        pl_mExt, qMakePair(tr("Measurments extension"),
+                           VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Multisize
+                               ? QStringLiteral("vst")
+                               : QStringLiteral("vit")));
 
     const QString userMaterialStr = tr("User material");
     const QMap<int, QString> materials = m_doc->GetPatternMaterials();
     for (int i = 0; i < userMaterialPlaceholdersQuantity; ++i)
     {
-        const QString number = QString::number(i+1);
+        const QString number = QString::number(i + 1);
         QString materialDescription;
 
         QString value;
@@ -623,7 +626,7 @@ void DialogEditLabel::InitPlaceholders()
     }
 
     {
-        const QMap<QString, QSharedPointer<VMeasurement> > measurements = m_data->DataMeasurements();
+        const QMap<QString, QSharedPointer<VMeasurement>> measurements = m_data->DataMeasurements();
         auto i = measurements.constBegin();
         while (i != measurements.constEnd())
         {
@@ -642,7 +645,7 @@ void DialogEditLabel::InitPlaceholders()
         m_placeholders.insert(pl_currentArea, qMakePair(tr("Piece full area"), QString()));
         m_placeholders.insert(pl_currentSeamLineArea, qMakePair(tr("Piece seam line area"), QString()));
 
-        for (int i=0; i < measurements.size(); ++i)
+        for (int i = 0; i < measurements.size(); ++i)
         {
             const VFinalMeasurement &m = measurements.at(i);
 
@@ -651,15 +654,18 @@ void DialogEditLabel::InitPlaceholders()
                 QScopedPointer<Calculator> cal(new Calculator());
                 const qreal result = cal->EvalFormula(completeData.DataVariables(), m.formula);
 
-                m_placeholders.insert(pl_finalMeasurement + m.name, qMakePair(tr("Final measurement: %1").arg(m.name),
-                                                                              QString::number(result)));
+                m_placeholders.insert(pl_finalMeasurement + m.name,
+                                      qMakePair(tr("Final measurement: %1").arg(m.name), QString::number(result)));
             }
             catch (qmu::QmuParserError &e)
             {
                 const QString errorMsg = QObject::tr("Failed to prepare final measurement placeholder. Parser error at "
-                                                     "line %1: %2.").arg(i+1).arg(e.GetMsg());
-                VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+                                                     "line %1: %2.")
+                                             .arg(i + 1)
+                                             .arg(e.GetMsg());
+                VAbstractApplication::VApp()->IsPedantic()
+                    ? throw VException(errorMsg)
+                    : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
             }
         }
     }
@@ -688,10 +694,11 @@ auto DialogEditLabel::ReplacePlaceholders(QString line) const -> QString
 
     auto TestDimension = [per, this, line](const QString &placeholder, const QString &errorMsg)
     {
-        if (line.contains(per+placeholder+per) && m_placeholders.value(placeholder).second == QChar('0'))
+        if (line.contains(per + placeholder + per) && m_placeholders.value(placeholder).second == QChar('0'))
         {
-            VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(errorMsg)
+                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         }
     };
 
@@ -708,7 +715,7 @@ auto DialogEditLabel::ReplacePlaceholders(QString line) const -> QString
     auto i = m_placeholders.constBegin();
     while (i != m_placeholders.constEnd())
     {
-        line.replace(per+i.key()+per, i.value().second);
+        line.replace(per + i.key() + per, i.value().second);
         ++i;
     }
     return line;
@@ -720,7 +727,7 @@ auto DialogEditLabel::GetTemplate() const -> QVector<VLabelTemplateLine>
     QVector<VLabelTemplateLine> lines;
     lines.reserve(ui->listWidgetEdit->count());
 
-    for (int i=0; i<ui->listWidgetEdit->count(); ++i)
+    for (int i = 0; i < ui->listWidgetEdit->count(); ++i)
     {
         const QListWidgetItem *lineItem = ui->listWidgetEdit->item(i);
         if (lineItem)
@@ -775,7 +782,7 @@ void DialogEditLabel::SetTemplate(const QVector<VLabelTemplateLine> &lines)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditLabel::SetPiece(const VPiece &piece)
 {
-    const VPieceLabelData& pieceData = piece.GetPieceLabelData();
+    const VPieceLabelData &pieceData = piece.GetPieceLabelData();
     m_placeholders[pl_pLetter].second = pieceData.GetLetter();
     m_placeholders[pl_pAnnotation].second = pieceData.GetAnnotation();
     m_placeholders[pl_pOrientation].second = pieceData.GetOrientation();
@@ -803,8 +810,9 @@ void DialogEditLabel::SetPiece(const VPiece &piece)
     catch (qmu::QmuParserError &e)
     {
         const QString errorMsg = QObject::tr("Failed to prepare full piece area placeholder. %2.").arg(e.GetMsg());
-        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-            qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
     try
@@ -816,8 +824,9 @@ void DialogEditLabel::SetPiece(const VPiece &piece)
     catch (qmu::QmuParserError &e)
     {
         const QString errorMsg = QObject::tr("Failed to prepare piece seam line area placeholder. %2.").arg(e.GetMsg());
-        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-            qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 }
 

@@ -27,11 +27,12 @@
  *************************************************************************/
 
 #include "preferencesconfigurationpage.h"
-#include "ui_preferencesconfigurationpage.h"
 #include "../../core/vapplication.h"
-#include "../vpatterndb/pmsystems.h"
-#include "../vmisc/vvalentinasettings.h"
 #include "../vmisc/literals.h"
+#include "../vmisc/vvalentinasettings.h"
+#include "../vpatterndb/pmsystems.h"
+#include "def.h"
+#include "ui_preferencesconfigurationpage.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
@@ -43,8 +44,8 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
-    : QWidget(parent),
-      ui(new Ui::PreferencesConfigurationPage)
+  : QWidget(parent),
+    ui(new Ui::PreferencesConfigurationPage)
 {
     ui->setupUi(this);
     RetranslateUi();
@@ -55,10 +56,8 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     ui->autoSaveCheck->setChecked(VAbstractValApplication::VApp()->ValentinaSettings()->GetAutosaveState());
 
     InitLanguages(ui->langCombo);
-    connect(ui->langCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
-    {
-        m_langChanged = true;
-    });
+    connect(ui->langCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            [this]() { m_langChanged = true; });
 
     //-------------------- Decimal separator setup
     ui->osOptionCheck->setChecked(VAbstractValApplication::VApp()->ValentinaSettings()->GetOsSeparator());
@@ -71,10 +70,8 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
         ui->unitCombo->setCurrentIndex(indexUnit);
     }
 
-    connect(ui->unitCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
-    {
-        m_unitChanged = true;
-    });
+    connect(ui->unitCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            [this]() { m_unitChanged = true; });
 
     //----------------------- Label language
     SetLabelComboBox(VApplication::LabelLanguages());
@@ -84,24 +81,23 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     {
         ui->labelCombo->setCurrentIndex(index);
     }
-    connect(ui->labelCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
-    {
-        m_labelLangChanged = true;
-    });
+    connect(ui->labelCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            [this]() { m_labelLangChanged = true; });
 
     //---------------------- Pattern making system
     ui->systemBookValueLabel->setFixedHeight(4 * QFontMetrics(ui->systemBookValueLabel->font()).lineSpacing());
-    connect(ui->systemCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
-    {
-        m_systemChanged = true;
-        QString text = VAbstractApplication::VApp()->TrVars()
-                ->PMSystemAuthor(ui->systemCombo->currentData().toString());
-        ui->systemAuthorValueLabel->setText(text);
-        ui->systemAuthorValueLabel->setToolTip(text);
+    connect(ui->systemCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            [this]()
+            {
+                m_systemChanged = true;
+                QString text =
+                    VAbstractApplication::VApp()->TrVars()->PMSystemAuthor(ui->systemCombo->currentData().toString());
+                ui->systemAuthorValueLabel->setText(text);
+                ui->systemAuthorValueLabel->setToolTip(text);
 
-        text = VAbstractApplication::VApp()->TrVars()->PMSystemBook(ui->systemCombo->currentData().toString());
-        ui->systemBookValueLabel->setPlainText(text);
-    });
+                text = VAbstractApplication::VApp()->TrVars()->PMSystemBook(ui->systemCombo->currentData().toString());
+                ui->systemBookValueLabel->setPlainText(text);
+            });
 
     // set default pattern making system
     index = ui->systemCombo->findData(VAbstractValApplication::VApp()->ValentinaSettings()->GetPMSystemCode());
@@ -111,14 +107,15 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     }
 
     //----------------------------- Pattern Editing
-    connect(ui->resetWarningsButton, &QPushButton::released, this, []()
-    {
-        VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    connect(ui->resetWarningsButton, &QPushButton::released, this,
+            []()
+            {
+                VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
-        settings->SetConfirmItemDelete(true);
-        settings->SetConfirmFormatRewriting(true);
-        settings->SetAskContinueIfLayoutStale(true);
-    });
+                settings->SetConfirmItemDelete(true);
+                settings->SetConfirmFormatRewriting(true);
+                settings->SetAskContinueIfLayoutStale(true);
+            });
 
     VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
@@ -181,7 +178,7 @@ auto PreferencesConfigurationPage::Apply() -> QStringList
     QTimer *autoSaveTimer = VApplication::VApp()->getAutoSaveTimer();
     SCASSERT(autoSaveTimer)
 
-    ui->autoSaveCheck->isChecked() ? autoSaveTimer->start(ui->autoTime->value()*60000) : autoSaveTimer->stop();
+    ui->autoSaveCheck->isChecked() ? autoSaveTimer->start(ui->autoTime->value() * 60000) : autoSaveTimer->stop();
 
     settings->SetOsSeparator(ui->osOptionCheck->isChecked());
     settings->SetToolBarStyle(ui->toolBarStyleCheck->isChecked());
@@ -285,21 +282,21 @@ void PreferencesConfigurationPage::RetranslateUi()
     ui->osOptionCheck->setText(tr("With OS options") + QStringLiteral(" (%1)").arg(LocaleDecimalPoint(QLocale())));
 
     {
-    ui->unitCombo->blockSignals(true);
-    const auto unit = qvariant_cast<QString>(ui->unitCombo->currentData());
-    ui->unitCombo->clear();
-    InitUnits();
-    ui->unitCombo->setCurrentIndex(ui->unitCombo->findData(unit));
-    ui->unitCombo->blockSignals(false);
+        ui->unitCombo->blockSignals(true);
+        const auto unit = qvariant_cast<QString>(ui->unitCombo->currentData());
+        ui->unitCombo->clear();
+        InitUnits();
+        ui->unitCombo->setCurrentIndex(ui->unitCombo->findData(unit));
+        ui->unitCombo->blockSignals(false);
     }
 
     {
-    const auto code = qvariant_cast<QString>(ui->systemCombo->currentData());
-    ui->systemCombo->blockSignals(true);
-    ui->systemCombo->clear();
-    InitPMSystems(ui->systemCombo);
-    ui->systemCombo->setCurrentIndex(-1);
-    ui->systemCombo->blockSignals(false);
-    ui->systemCombo->setCurrentIndex(ui->systemCombo->findData(code));
+        const auto code = qvariant_cast<QString>(ui->systemCombo->currentData());
+        ui->systemCombo->blockSignals(true);
+        ui->systemCombo->clear();
+        InitPMSystems(ui->systemCombo);
+        ui->systemCombo->setCurrentIndex(-1);
+        ui->systemCombo->blockSignals(false);
+        ui->systemCombo->setCurrentIndex(ui->systemCombo->findData(code));
     }
 }
