@@ -27,6 +27,7 @@
 - Simplify number of versions for DXF AAMA/ASTM.
 - New notch type - Check Notch.
 - Control a notch width and angle with formulas.
+- Independent translation for piece labels.
 
 # Valentina 0.7.52 September 12, 2022
 - Fix crash when default locale is ru.

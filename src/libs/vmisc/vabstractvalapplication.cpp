@@ -82,3 +82,29 @@ auto VAbstractValApplication::VApp() -> VAbstractValApplication *
 {
     return qobject_cast<VAbstractValApplication *>(QCoreApplication::instance());
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractValApplication::GetPlaceholderTranslator() -> QSharedPointer<QTranslator>
+{
+    VValentinaSettings *settings = ValentinaSettings();
+
+    QString pieceLabelLocale = settings->GetPieceLabelLocale();
+    if (pieceLabelLocale == VCommonSettings::defaultPieceLabelLocale)
+    {
+        pieceLabelLocale = settings->GetLocale();
+    }
+
+    if (pieceLabelLocale.startsWith(QLatin1String("ru")))
+    {
+        return QSharedPointer<QTranslator>(new QTranslator);
+    }
+
+    QSharedPointer<QTranslator> translator = QSharedPointer<QTranslator>(new QTranslator);
+    const QString appQmDir = VAbstractApplication::translationsPath(settings->GetLocale());
+    if (translator->load(QStringLiteral("valentina_") + pieceLabelLocale, appQmDir))
+    {
+        return translator;
+    }
+
+    return QSharedPointer<QTranslator>(new QTranslator);
+}

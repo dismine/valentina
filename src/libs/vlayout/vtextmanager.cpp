@@ -36,7 +36,6 @@
 #include <QLatin1String>
 #include <QRegularExpression>
 #include <QtMath>
-#include <QGlobalStatic>
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/vabstractvalapplication.h"
@@ -328,17 +327,20 @@ auto PreparePlaceholders(const VAbstractPattern *doc, const VContainer *data) ->
     placeholders.insert(pl_pName, QString());
     placeholders.insert(pl_pQuantity, QString());
     placeholders.insert(pl_wOnFold, QString());
-    placeholders.insert(pl_mFabric, QObject::tr("Fabric"));
-    placeholders.insert(pl_mLining, QObject::tr("Lining"));
-    placeholders.insert(pl_mInterfacing, QObject::tr("Interfacing"));
-    placeholders.insert(pl_mInterlining, QObject::tr("Interlining"));
-    placeholders.insert(pl_wCut, QObject::tr("Cut"));
+
+    QSharedPointer<QTranslator> phTr = VAbstractValApplication::VApp()->GetPlaceholderTranslator();
+
+    placeholders.insert(pl_mFabric, phTr->translate("Placeholder", "Fabric"));
+    placeholders.insert(pl_mLining, phTr->translate("Placeholder", "Lining"));
+    placeholders.insert(pl_mInterfacing, phTr->translate("Placeholder", "Interfacing"));
+    placeholders.insert(pl_mInterlining, phTr->translate("Placeholder", "Interlining"));
+    placeholders.insert(pl_wCut, phTr->translate("Placeholder", "Cut"));
 
     return placeholders;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void InitPiecePlaceholders(QMap<QString, QString> &placeholders, const QString &name, const VPieceLabelData& data,
+void InitPiecePlaceholders(QMap<QString, QString> &placeholders, const QString &name, const VPieceLabelData &data,
                            const VContainer *pattern)
 {
     placeholders[pl_pLetter] = data.GetLetter();
@@ -352,7 +354,8 @@ void InitPiecePlaceholders(QMap<QString, QString> &placeholders, const QString &
 
     if (data.IsOnFold())
     {
-        placeholders[pl_wOnFold] = QObject::tr("on fold");
+        QSharedPointer<QTranslator> phTr = VAbstractValApplication::VApp()->GetPlaceholderTranslator();
+        placeholders[pl_wOnFold] = phTr->translate("Placeholder", "on fold");
     }
 
     VContainer completeData = *pattern;

@@ -699,6 +699,7 @@ Q_DECL_RELAXED_CONSTEXPR inline auto UnitConvertor(const QMarginsF &margins, con
 }
 
 void InitLanguages(QComboBox *combobox);
+void InitPieceLabelLanguages(QComboBox *combobox);
 Q_REQUIRED_RESULT auto SupportedLocales() -> QStringList;
 
 Q_REQUIRED_RESULT auto StrippedName(const QString &fullFileName) -> QString;

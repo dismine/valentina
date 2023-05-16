@@ -53,6 +53,7 @@ private:
     Q_DISABLE_COPY_MOVE(PreferencesConfigurationPage) // NOLINT
     Ui::PreferencesConfigurationPage *ui;
     bool m_langChanged{false};
+    bool m_pieceLabelLangChanged{false};
     bool m_systemChanged{false};
     bool m_unitChanged{false};
     bool m_labelLangChanged{false};

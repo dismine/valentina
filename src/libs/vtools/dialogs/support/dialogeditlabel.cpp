@@ -670,6 +670,8 @@ void DialogEditLabel::InitPlaceholders()
         }
     }
 
+    QSharedPointer<QTranslator> phTr = VAbstractValApplication::VApp()->GetPlaceholderTranslator();
+
     // Piece tags
     m_placeholders.insert(pl_pLetter, qMakePair(tr("Piece letter"), QString()));
     m_placeholders.insert(pl_pAnnotation, qMakePair(tr("Piece annotation"), QString()));
@@ -679,12 +681,14 @@ void DialogEditLabel::InitPlaceholders()
     m_placeholders.insert(pl_pFoldPosition, qMakePair(tr("Piece fold position"), QString()));
     m_placeholders.insert(pl_pName, qMakePair(tr("Piece name"), QString()));
     m_placeholders.insert(pl_pQuantity, qMakePair(tr("Quantity"), QString()));
-    m_placeholders.insert(pl_mFabric, qMakePair(tr("Material: Fabric"), tr("Fabric")));
-    m_placeholders.insert(pl_mLining, qMakePair(tr("Material: Lining"), tr("Lining")));
-    m_placeholders.insert(pl_mInterfacing, qMakePair(tr("Material: Interfacing"), tr("Interfacing")));
-    m_placeholders.insert(pl_mInterlining, qMakePair(tr("Material: Interlining"), tr("Interlining")));
-    m_placeholders.insert(pl_wCut, qMakePair(tr("Word: Cut"), tr("Cut")));
-    m_placeholders.insert(pl_wOnFold, qMakePair(tr("Word: on fold"), QString()));// By default should be empty
+    m_placeholders.insert(pl_mFabric, qMakePair(tr("Material: Fabric"), phTr->translate("Placeholder", "Fabric")));
+    m_placeholders.insert(pl_mLining, qMakePair(tr("Material: Lining"), phTr->translate("Placeholder", "Lining")));
+    m_placeholders.insert(pl_mInterfacing,
+                          qMakePair(tr("Material: Interfacing"), phTr->translate("Placeholder", "Interfacing")));
+    m_placeholders.insert(pl_mInterlining,
+                          qMakePair(tr("Material: Interlining"), phTr->translate("Placeholder", "Interlining")));
+    m_placeholders.insert(pl_wCut, qMakePair(tr("Word: Cut"), phTr->translate("Placeholder", "Cut")));
+    m_placeholders.insert(pl_wOnFold, qMakePair(tr("Word: on fold"), QString())); // By default should be empty
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -793,7 +797,8 @@ void DialogEditLabel::SetPiece(const VPiece &piece)
     m_placeholders[pl_pQuantity].second = QString::number(pieceData.GetQuantity());
     if (pieceData.IsOnFold())
     {
-        m_placeholders[pl_wOnFold].second = tr("on fold");
+        QSharedPointer<QTranslator> phTr = VAbstractValApplication::VApp()->GetPlaceholderTranslator();
+        m_placeholders[pl_wOnFold].second = phTr->translate("Placeholder", "on fold");
     }
 
     VContainer completeData = m_doc->GetCompleteData();

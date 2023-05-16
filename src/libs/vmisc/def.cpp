@@ -65,6 +65,79 @@
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+auto LocalList() -> QStringList
+{
+    static QStringList fileNames;
+
+    // Check if file names have already been cached
+    if (!fileNames.isEmpty())
+    {
+        return fileNames;
+    }
+
+    QDirIterator it(VAbstractApplication::translationsPath(), QStringList("valentina_*.qm"), QDir::Files,
+                    QDirIterator::Subdirectories);
+    while (it.hasNext())
+    {
+        it.next();
+        fileNames.append(it.fileName());
+    }
+    return fileNames;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void InitLanguageList(QComboBox *combobox)
+{
+    SCASSERT(combobox != nullptr)
+    combobox->clear();
+
+    const QStringList fileNames = LocalList();
+    bool englishUS = false;
+    const QString en_US = QStringLiteral("en_US");
+
+    for (auto locale : fileNames)
+    {
+        // get locale extracted by filename           "valentina_de_De.qm"
+        locale.truncate(locale.lastIndexOf('.'));  // "valentina_de_De"
+        locale.remove(0, locale.indexOf('_') + 1); // "de_De"
+
+        if (locale.startsWith(QLatin1String("ru")))
+        {
+            continue;
+        }
+
+        if (not englishUS)
+        {
+            englishUS = (en_US == locale);
+        }
+
+        QLocale loc = QLocale(locale);
+        QString lang = loc.nativeLanguageName();
+        // Since Qt 5.12 country names have spaces
+        QString country = QLocale::countryToString(loc.country()).remove(' ');
+        if (country == QLatin1String("Czechia"))
+        {
+            country = QLatin1String("CzechRepublic");
+        }
+        QIcon ico(QString("://flags/%1.png").arg(country));
+
+        combobox->addItem(ico, lang, locale);
+    }
+
+    if (combobox->count() == 0 || not englishUS)
+    {
+        // English language is internal and doens't have own *.qm file.
+        // Since Qt 5.12 country names have spaces
+        QIcon ico(QString("://flags/%1.png").arg(QLocale::countryToString(QLocale::UnitedStates).remove(' ')));
+        QString lang = QLocale(en_US).nativeLanguageName();
+        combobox->addItem(ico, lang, en_US);
+    }
+}
+} // namespace
+
 //---------------------------------------------------------------------------------------------------------------------
 auto QPixmapFromCache(const QString &pixmapPath) -> QPixmap
 {
@@ -478,61 +551,25 @@ auto UnitsToStr(const Unit &unit, const bool translate) -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void InitLanguages(QComboBox *combobox)
 {
-    SCASSERT(combobox != nullptr)
-    combobox->clear();
-
-    QStringList fileNames;
-    QDirIterator it(VAbstractApplication::translationsPath(), QStringList("valentina_*.qm"), QDir::Files,
-                    QDirIterator::Subdirectories);
-    while (it.hasNext())
-    {
-        it.next();
-        fileNames.append(it.fileName());
-    }
-
-    bool englishUS = false;
-    const QString en_US = QStringLiteral("en_US");
-
-    for (auto locale : fileNames)
-    {
-        // get locale extracted by filename           "valentina_de_De.qm"
-        locale.truncate(locale.lastIndexOf('.'));  // "valentina_de_De"
-        locale.remove(0, locale.indexOf('_') + 1); // "de_De"
-
-        if (locale.startsWith(QLatin1String("ru")))
-        {
-            continue;
-        }
-
-        if (not englishUS)
-        {
-            englishUS = (en_US == locale);
-        }
-
-        QLocale loc = QLocale(locale);
-        QString lang = loc.nativeLanguageName();
-        // Since Qt 5.12 country names have spaces
-        QString country = QLocale::countryToString(loc.country()).remove(' ');
-        if (country == QLatin1String("Czechia"))
-        {
-            country = QLatin1String("CzechRepublic");
-        }
-        QIcon ico(QString("://flags/%1.png").arg(country));
-
-        combobox->addItem(ico, lang, locale);
-    }
-
-    if (combobox->count() == 0 || not englishUS)
-    {
-        // English language is internal and doens't have own *.qm file.
-        // Since Qt 5.12 country names have spaces
-        QIcon ico(QString("://flags/%1.png").arg(QLocale::countryToString(QLocale::UnitedStates).remove(' ')));
-        QString lang = QLocale(en_US).nativeLanguageName();
-        combobox->addItem(ico, lang, en_US);
-    }
+    InitLanguageList(combobox);
 
     // set default translators and language checked
     qint32 index = combobox->findData(VAbstractApplication::VApp()->Settings()->GetLocale());
+    if (index != -1)
+    {
+        combobox->setCurrentIndex(index);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void InitPieceLabelLanguages(QComboBox *combobox)
+{
+    InitLanguageList(combobox);
+
+    combobox->addItem(QApplication::translate("InitPieceLabelLanguages", "Default"),
+                      VCommonSettings::defaultPieceLabelLocale);
+
+    qint32 index = combobox->findData(VAbstractApplication::VApp()->Settings()->GetPieceLabelLocale());
     if (index != -1)
     {
         combobox->setCurrentIndex(index);

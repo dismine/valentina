@@ -59,6 +59,10 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     connect(ui->langCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             [this]() { m_langChanged = true; });
 
+    InitPieceLabelLanguages(ui->comboBoxPieceLbelLanguage);
+    connect(ui->comboBoxPieceLbelLanguage, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            [this]() { m_pieceLabelLangChanged = true; });
+
     //-------------------- Decimal separator setup
     ui->osOptionCheck->setChecked(VAbstractValApplication::VApp()->ValentinaSettings()->GetOsSeparator());
 
@@ -203,6 +207,13 @@ auto PreferencesConfigurationPage::Apply() -> QStringList
     settings->SetDoubleClickZoomFitBestCurrentPP(ui->checkBoxZoomFitBestCurrentPP->isChecked());
     settings->SetInteractiveTools(ui->checkBoxInteractiveTools->isChecked());
 
+    if (m_pieceLabelLangChanged)
+    {
+        const auto locale = qvariant_cast<QString>(ui->comboBoxPieceLbelLanguage->currentData());
+        settings->SetPieceLabelLocale(locale);
+        m_pieceLabelLangChanged = false;
+    }
+
     if (m_langChanged || m_systemChanged)
     {
         const auto locale = qvariant_cast<QString>(ui->langCombo->currentData());
@@ -298,5 +309,14 @@ void PreferencesConfigurationPage::RetranslateUi()
         ui->systemCombo->setCurrentIndex(-1);
         ui->systemCombo->blockSignals(false);
         ui->systemCombo->setCurrentIndex(ui->systemCombo->findData(code));
+    }
+
+    {
+        ui->comboBoxPieceLbelLanguage->blockSignals(true);
+        const auto code = qvariant_cast<QString>(ui->comboBoxPieceLbelLanguage->currentData());
+        InitPieceLabelLanguages(ui->comboBoxPieceLbelLanguage);
+        ui->comboBoxPieceLbelLanguage->setCurrentIndex(-1);
+        ui->comboBoxPieceLbelLanguage->blockSignals(false);
+        ui->comboBoxPieceLbelLanguage->setCurrentIndex(ui->comboBoxPieceLbelLanguage->findData(code));
     }
 }

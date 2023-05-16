@@ -37,6 +37,7 @@
 #include <QLocale>
 #include <QMarginsF>
 #include <QMessageLogger>
+#include <QStringLiteral>
 #include <QVariant>
 #include <QtDebug>
 
@@ -71,6 +72,8 @@ const qreal VCommonSettings::defaultScrollingAcceleration = 1.3;
 const qreal VCommonSettings::scrollingAccelerationMin = 1.0;
 const qreal VCommonSettings::scrollingAccelerationMax = 10.0;
 
+const QString VCommonSettings::defaultPieceLabelLocale = QStringLiteral("default");
+
 #ifndef QPRINTENGINE_H
 Q_DECLARE_METATYPE(QMarginsF) // NOLINT
 #endif
@@ -93,6 +96,8 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationAutosaveState,
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationAutosaveTime,
                           (QLatin1String("configuration/autosave/time")))                                     // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationLocale, (QLatin1String("configuration/locale"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationPieceLabelLocale,                                // NOLINT
+                          (QLatin1String("configuration/pieceLabelLocale")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPMSystemCode, (QLatin1String("configuration/pmscode")))   // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationUnit, (QLatin1String("configuration/unit"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationConfirmItemDeletion,
@@ -620,6 +625,18 @@ void VCommonSettings::SetLocale(const QString &value)
 {
     setValue(*settingConfigurationLocale, value);
     *localeCached = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::GetPieceLabelLocale() const -> QString
+{
+    return value(*settingConfigurationPieceLabelLocale, VCommonSettings::defaultPieceLabelLocale).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetPieceLabelLocale(const QString &value)
+{
+    setValue(*settingConfigurationPieceLabelLocale, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

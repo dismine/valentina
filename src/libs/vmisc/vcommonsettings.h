@@ -99,6 +99,10 @@ class VCommonSettings : public QSettings
     auto GetLocale() const -> QString;
     void SetLocale(const QString &value);
 
+    static const QString defaultPieceLabelLocale;
+    auto GetPieceLabelLocale() const -> QString;
+    void SetPieceLabelLocale(const QString &value);
+
     auto GetPMSystemCode() const -> QString;
     void SetPMSystemCode(const QString &value);
 

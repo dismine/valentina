@@ -126,6 +126,8 @@ class VAbstractValApplication : public VAbstractApplication
 
     static auto VApp() -> VAbstractValApplication *;
 
+    auto GetPlaceholderTranslator() -> QSharedPointer<QTranslator>;
+
 protected:
     QString m_customerName{};
     QDate m_customerBirthDate{};
