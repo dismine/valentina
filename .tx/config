@@ -1,5 +1,5 @@
 [main]
-host     = https://app.transifex.com/
+host     = https://www.transifex.com
 lang_map = es: es_ES, id: id_ID, uk: uk_UA, cs: cs_CZ, nl: nl_NL, fi: fi_FI
 
 [o:valentina:p:valentina-project:r:measurements_p0ts]
