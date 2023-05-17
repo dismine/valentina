@@ -27,12 +27,13 @@
  *************************************************************************/
 
 #include "vabstractlayoutdialog.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
 
-//must be the same order as PaperSizeTemplate constants
-const VAbstractLayoutDialog::FormatsVector VAbstractLayoutDialog::pageFormatNames
-{
+#include <QApplication>
+
+// must be the same order as PaperSizeTemplate constants
+const VAbstractLayoutDialog::FormatsVector VAbstractLayoutDialog::pageFormatNames{
     QStringLiteral("A0"),
     QStringLiteral("A1"),
     QStringLiteral("A2"),
@@ -49,13 +50,13 @@ const VAbstractLayoutDialog::FormatsVector VAbstractLayoutDialog::pageFormatName
     QApplication::translate("VAbstractLayoutDialog", "Roll 48in", "Paper format"),
     QApplication::translate("VAbstractLayoutDialog", "Roll 62in", "Paper format"),
     QApplication::translate("VAbstractLayoutDialog", "Roll 72in", "Paper format"),
-    QApplication::translate("VAbstractLayoutDialog", "Custom", "Paper format")
-};
+    QApplication::translate("VAbstractLayoutDialog", "Custom", "Paper format")};
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractLayoutDialog::VAbstractLayoutDialog(QWidget *parent)
-    : QDialog(parent)
-{}
+  : QDialog(parent)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractLayoutDialog::InitTemplates(QComboBox *comboBoxTemplates)
@@ -66,19 +67,19 @@ void VAbstractLayoutDialog::InitTemplates(QComboBox *comboBoxTemplates)
     const QString pdi = QStringLiteral("(%1ppi)").arg(PrintDPI);
 
     auto cntr = static_cast<VIndexType>(PaperSizeTemplate::A0);
-    for(const auto& v : pageFormatNames)
+    for (const auto &v : pageFormatNames)
     {
         if (cntr <= static_cast<int>(PaperSizeTemplate::Tabloid))
         {
-            comboBoxTemplates->addItem(icoPaper, v+QChar(QChar::Space)+pdi, QVariant(cntr++));
+            comboBoxTemplates->addItem(icoPaper, v + QChar(QChar::Space) + pdi, QVariant(cntr++));
         }
         else if (cntr <= static_cast<int>(PaperSizeTemplate::Roll72in))
         {
-            comboBoxTemplates->addItem(icoRoll, v+QChar(QChar::Space)+pdi, QVariant(cntr++));
+            comboBoxTemplates->addItem(icoRoll, v + QChar(QChar::Space) + pdi, QVariant(cntr++));
         }
         else
         {
-            comboBoxTemplates->addItem(v+QChar(QChar::Space)+pdi, QVariant(cntr++));
+            comboBoxTemplates->addItem(v + QChar(QChar::Space) + pdi, QVariant(cntr++));
         }
     }
     comboBoxTemplates->setCurrentIndex(-1);

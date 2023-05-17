@@ -27,7 +27,6 @@
  *************************************************************************/
 
 #include "tst_tstranslation.h"
-#include "../vmisc/def.h"
 
 #include <QDomDocument>
 #include <QtTest>
@@ -36,8 +35,9 @@ Q_DECLARE_METATYPE(QDomElement) // Need for testing
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_TSTranslation::TST_TSTranslation(QObject *parent)
-    : TST_AbstractTranslation(parent)
-{}
+  : TST_AbstractTranslation(parent)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void TST_TSTranslation::CheckEnglishLocalization_data()
@@ -78,8 +78,8 @@ void TST_TSTranslation::CheckEnglishLocalization_data()
                 continue;
             }
 
-            const QString caseName = QStringLiteral("File '%1'. Check modification source message '%2'.")
-                                        .arg(fileName, source);
+            const QString caseName =
+                QStringLiteral("File '%1'. Check modification source message '%2'.").arg(fileName, source);
             QTest::newRow(qUtf8Printable(caseName)) << source << translation;
         }
         else
@@ -166,8 +166,8 @@ void TST_TSTranslation::CheckEllipsis()
         }
 
         const QString contextName = context.firstChildElement(TagName).text();
-        const QString error = QString("String '%1' ends with '...' in context '%2'. Repalce it with '…'.")
-                .arg(source, contextName);
+        const QString error =
+            QString("String '%1' ends with '...' in context '%2'. Repalce it with '…'.").arg(source, contextName);
         QFAIL(qUtf8Printable(error));
     }
 }
@@ -224,7 +224,8 @@ void TST_TSTranslation::PrepareOriginalStrings()
                 continue;
             }
 
-            const QString tag = QStringLiteral("File '%1'. Check modification source message '%2'.").arg(fileName, source);
+            const QString tag =
+                QStringLiteral("File '%1'. Check modification source message '%2'.").arg(fileName, source);
             QTest::newRow(qUtf8Printable(tag)) << source << message;
         }
         else

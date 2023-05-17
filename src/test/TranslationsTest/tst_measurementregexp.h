@@ -29,8 +29,8 @@
 #ifndef TST_MEASUREMENTREGEXP_H
 #define TST_MEASUREMENTREGEXP_H
 
-#include "tst_abstractregexp.h"
 #include "../vmisc/defglobal.h"
+#include "tst_abstractregexp.h"
 
 #include <QPointer>
 
@@ -72,10 +72,10 @@ private:
     QString               m_system;
     QPointer<QTranslator> m_pmsTranslator;
 
-    void    TestCombinations(int systemCounts, const QStringList &locales) const;
+    void TestCombinations(const QStringList &locales) const;
 
     auto LoadMeasurements(const QString &checkedSystem, const QString &checkedLocale) -> int;
-    void    RemoveTrMeasurements(const QString &checkedSystem, const QString &checkedLocale);
+    void RemoveTrMeasurements(const QString &checkedSystem, const QString &checkedLocale);
 };
 
 #endif // TST_MEASUREMENTREGEXP_H

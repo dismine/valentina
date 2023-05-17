@@ -29,12 +29,11 @@
 #include "tst_abstractregexp.h"
 #include "../qmuparser/qmudef.h"
 #include "../qmuparser/qmuformulabase.h"
-#include "../vpatterndb/vtranslatevars.h"
-#include "../ifc/ifcdef.h"
 #include "../vmisc/compatibility.h"
+#include "../vpatterndb/vtranslatevars.h"
 
-#include <QtTest>
 #include <QTranslator>
+#include <QtTest>
 
 namespace
 {
@@ -49,7 +48,7 @@ auto PrepareValidNameChars() -> QString
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_AbstractRegExp::TST_AbstractRegExp(const QString &locale, QObject *parent)
-    : AbstractTest(parent),
+  : AbstractTest(parent),
     m_locale(locale),
     m_vTranslator(nullptr),
     m_trMs(nullptr)
@@ -69,10 +68,10 @@ auto TST_AbstractRegExp::LoadVariables(const QString &checkedLocale) -> int
     const QString path = TranslationsPath();
     const QString file = QString("valentina_%1.qm").arg(checkedLocale);
 
-    if (QFileInfo(path+QLatin1String("/")+file).size() <= 34)
+    if (QFileInfo(path + QLatin1String("/") + file).size() <= 34)
     {
         const QString message = QString("Translation variables for locale = %1 is empty. \nFull path: %2/%3")
-                .arg(checkedLocale, path, file);
+                                    .arg(checkedLocale, path, file);
         QWARN(qUtf8Printable(message));
 
         return ErrorSize;
@@ -83,7 +82,7 @@ auto TST_AbstractRegExp::LoadVariables(const QString &checkedLocale) -> int
     if (not m_vTranslator->load(file, path))
     {
         const QString message = QString("Can't load translation variables for locale = %1. \nFull path: %2/%3")
-                .arg(checkedLocale, path, file);
+                                    .arg(checkedLocale, path, file);
         QWARN(qUtf8Printable(message));
 
         delete m_vTranslator;
@@ -94,7 +93,7 @@ auto TST_AbstractRegExp::LoadVariables(const QString &checkedLocale) -> int
     if (not QCoreApplication::installTranslator(m_vTranslator))
     {
         const QString message = QString("Can't install translation variables for locale = %1. \nFull path: %2/%3")
-                .arg(checkedLocale, path, file);
+                                    .arg(checkedLocale, path, file);
         QWARN(qUtf8Printable(message));
 
         delete m_vTranslator;
@@ -114,8 +113,7 @@ void TST_AbstractRegExp::RemoveTrVariables(const QString &checkedLocale)
 
         if (result == false)
         {
-            const QString message = QString("Can't remove translation variables for locale = %1")
-                    .arg(checkedLocale);
+            const QString message = QString("Can't remove translation variables for locale = %1").arg(checkedLocale);
             QWARN(qUtf8Printable(message));
         }
         delete m_vTranslator;
@@ -143,8 +141,7 @@ void TST_AbstractRegExp::CallTestCheckNoEndLine()
     const QString translated = m_trMs->VarToUser(originalName);
     if (translated.endsWith(QLatin1String("\n")))
     {
-        const QString message = QString("Translated string '%1' shouldn't contain new line character.")
-                .arg(translated);
+        const QString message = QString("Translated string '%1' shouldn't contain new line character.").arg(translated);
         QFAIL(qUtf8Printable(message));
     }
 }
@@ -178,7 +175,7 @@ void TST_AbstractRegExp::CallTestCheckNoOriginalNamesInTranslation()
         {
             const QString message = QString("Translation repeat original name from other place. "
                                             "Original name:'%1', translated name:'%2'")
-                    .arg(originalName, translated);
+                                        .arg(originalName, translated);
             QFAIL(qUtf8Printable(message));
         }
     }
@@ -193,8 +190,8 @@ void TST_AbstractRegExp::CallTestForValidCharacters()
 
     if (QLocale() == QLocale(QStringLiteral("zh_CN")) || QLocale() == QLocale(QStringLiteral("he_IL")))
     {
-        const QString message = QStringLiteral("We do not support translation of variables for locale %1")
-                .arg(QLocale().name());
+        const QString message =
+            QStringLiteral("We do not support translation of variables for locale %1").arg(QLocale().name());
         QSKIP(qUtf8Printable(message));
     }
 
@@ -203,7 +200,10 @@ void TST_AbstractRegExp::CallTestForValidCharacters()
     if (pos != -1)
     {
         const QString message = QStringLiteral("Translated string '%1' contains invalid character '%2' at "
-                                               "position '%3'.").arg(translated).arg(translated.at(pos)).arg(pos);
+                                               "position '%3'.")
+                                    .arg(translated)
+                                    .arg(translated.at(pos))
+                                    .arg(pos);
         QFAIL(qUtf8Printable(message));
     }
 }

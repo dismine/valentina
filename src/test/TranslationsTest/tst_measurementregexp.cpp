@@ -27,13 +27,11 @@
  *************************************************************************/
 
 #include "tst_measurementregexp.h"
-#include "../qmuparser/qmudef.h"
 
-#include "../vpatterndb/vtranslatevars.h"
 #include "../vpatterndb/measurements.h"
-#include "../ifc/ifcdef.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "abstracttest.h"
 
-#include <QtTest>
 #include <QTranslator>
 
 const quint32 TST_MeasurementRegExp::systemCounts = 56; // count of pattern making systems
@@ -93,7 +91,7 @@ void TST_MeasurementRegExp::initTestCase()
 
     QLocale::setDefault(QLocale(m_locale));
 
-    InitTrMs();//Very important do this after loading QM files.
+    InitTrMs(); // Very important do this after loading QM files.
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -157,7 +155,7 @@ void TST_MeasurementRegExp::TestCheckIsNamesUnique()
     if (originalNames.size() > 1)
     {
         const QString message = QString("Name is not unique. Translated name:'%1' also assosiated with: %2.")
-                .arg(translatedName, originalNames.join(", "));
+                                    .arg(translatedName, originalNames.join(", "));
         QFAIL(qUtf8Printable(message));
     }
 }
@@ -202,8 +200,8 @@ void TST_MeasurementRegExp::TestCombinations(int systemCounts, const QStringList
     const QStringList fileNames = dir.entryList(QStringList("measurements_p*_*.qm"));
 
     // cppcheck-suppress unreadVariable
-    const QString error = QString("Unexpected count of files. Excpected %1, got %2.")
-            .arg(combinations).arg(fileNames.size());
+    const QString error =
+        QString("Unexpected count of files. Excpected %1, got %2.").arg(combinations).arg(fileNames.size());
     QVERIFY2(combinations == fileNames.size(), qUtf8Printable(error));
 }
 
@@ -233,10 +231,10 @@ auto TST_MeasurementRegExp::LoadMeasurements(const QString &checkedSystem, const
     const QString path = TranslationsPath();
     const QString file = QString("measurements_%1_%2.qm").arg(checkedSystem, checkedLocale);
 
-    if (QFileInfo(path+QLatin1String("/")+file).size() <= 34)
+    if (QFileInfo(path + QLatin1String("/") + file).size() <= 34)
     {
         const QString message = QString("Translation for system = %1 and locale = %2 is empty. \nFull path: %3/%4")
-                .arg(checkedSystem, checkedLocale, path, file);
+                                    .arg(checkedSystem, checkedLocale, path, file);
         QWARN(qUtf8Printable(message));
 
         return ErrorSize;
@@ -248,7 +246,7 @@ auto TST_MeasurementRegExp::LoadMeasurements(const QString &checkedSystem, const
     if (not m_pmsTranslator->load(file, path))
     {
         const QString message = QString("Can't load translation for system = %1 and locale = %2. \nFull path: %3/%4")
-                .arg(checkedSystem, checkedLocale, path, file);
+                                    .arg(checkedSystem, checkedLocale, path, file);
         QWARN(qUtf8Printable(message));
 
         delete m_pmsTranslator;
@@ -259,7 +257,7 @@ auto TST_MeasurementRegExp::LoadMeasurements(const QString &checkedSystem, const
     if (not QCoreApplication::installTranslator(m_pmsTranslator))
     {
         const QString message = QString("Can't install translation for system = %1 and locale = %2. \nFull path: %3/%4")
-                .arg(checkedSystem, checkedLocale, path, file);
+                                    .arg(checkedSystem, checkedLocale, path, file);
         QWARN(qUtf8Printable(message));
 
         delete m_pmsTranslator;
@@ -279,8 +277,8 @@ void TST_MeasurementRegExp::RemoveTrMeasurements(const QString &checkedSystem, c
 
         if (result == false)
         {
-            const QString message = QString("Can't remove translation for system = %1 and locale = %2")
-                    .arg(checkedSystem, checkedLocale);
+            const QString message =
+                QString("Can't remove translation for system = %1 and locale = %2").arg(checkedSystem, checkedLocale);
             QWARN(qUtf8Printable(message));
         }
         delete m_pmsTranslator;

@@ -36,17 +36,17 @@
 #include <QtDebug>
 
 #include "../ifc/ifcdef.h"
+#include "../qmuparser/qmudef.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "../qmuparser/qmutokenparser.h"
 #include "../qmuparser/qmutranslation.h"
-#include "../qmuparser/qmudef.h"
-#include "../vpatterndb/vtranslatevars.h"
-#include "../vmisc/def.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vmisc/literals.h"
 #include "../vmisc/compatibility.h"
-#include "vtranslatemeasurements.h"
+#include "../vmisc/def.h"
+#include "../vmisc/literals.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vtranslatevars.h"
 #include "pmsystems.h"
+#include "vtranslatemeasurements.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VTranslateVars::VTranslateVars()
@@ -63,8 +63,8 @@ VTranslateVars::VTranslateVars()
 //---------------------------------------------------------------------------------------------------------------------
 void VTranslateVars::InitPatternMakingSystems()
 {
-    //Note. We can't use here function and variables because lupdate tool doesn't see string in variables and doesn't
-    //mark such string to translation.
+    // Note. We can't use here function and variables because lupdate tool doesn't see string in variables and doesn't
+    // mark such string to translation.
     qmu::QmuTranslation name;
     qmu::QmuTranslation author;
     qmu::QmuTranslation book;
@@ -203,8 +203,10 @@ void VTranslateVars::InitPatternMakingSystems()
     //=================================================================================================================
     name = translate("VTranslateVars", "Fukomoto", "System name");
     author = translate("VTranslateVars", "Sue S. Fukomoto", "Author name");
-    book = translate("VTranslateVars", "Scientific Pattern Drafting as taught at Style Center School of Costume "
-                     "Design, Dressmaking and Millinery", "Book name");
+    book = translate("VTranslateVars",
+                     "Scientific Pattern Drafting as taught at Style Center School of Costume "
+                     "Design, Dressmaking and Millinery",
+                     "Book name");
     InitSystem(p26_S, name, author, book);
     //=================================================================================================================
     name = translate("VTranslateVars", "Dressmaking International", "System name");
@@ -266,8 +268,10 @@ void VTranslateVars::InitPatternMakingSystems()
     //=================================================================================================================
     name = translate("VTranslateVars", "Supreme System", "System name");
     author = translate("VTranslateVars", "Frederick T. Croonberg", "Author name");
-    book = translate("VTranslateVars", "The Blue Book of Men's Tailoring, Grand Edition of Supreme System for "
-                     "Producing Mens Garments (1907)", "Book name");
+    book = translate("VTranslateVars",
+                     "The Blue Book of Men's Tailoring, Grand Edition of Supreme System for "
+                     "Producing Mens Garments (1907)",
+                     "Book name");
     InitSystem(p38_S, name, author, book);
     //=================================================================================================================
     name = translate("VTranslateVars", "Sugino", "System name");
@@ -328,8 +332,10 @@ void VTranslateVars::InitPatternMakingSystems()
     //=================================================================================================================
     name = translate("VTranslateVars", "Mitchell", "System name");
     author = translate("VTranslateVars", "Jno. J. Mitchell", "Author name");
-    book = translate("VTranslateVars", "\"Standard\" Work on Cutting (Men's Garments) 1886: The Art and Science of "
-                     "Garment Cutting", "Book name");
+    book = translate("VTranslateVars",
+                     "\"Standard\" Work on Cutting (Men's Garments) 1886: The Art and Science of "
+                     "Garment Cutting",
+                     "Book name");
     InitSystem(p50_S, name, author, book);
     //=================================================================================================================
     name = translate("VTranslateVars", "GOST 17917-86", "System name");
@@ -344,8 +350,10 @@ void VTranslateVars::InitPatternMakingSystems()
     //=================================================================================================================
     name = translate("VTranslateVars", "Knowles/Women", "System name");
     author = translate("VTranslateVars", "Lori A. Knowles", "Author name");
-    book = translate("VTranslateVars", "Practical Guide to Patternmaking for Fashion Designers: Juniors, Misses, and "
-                     "Women", "Book name");
+    book = translate("VTranslateVars",
+                     "Practical Guide to Patternmaking for Fashion Designers: Juniors, Misses, and "
+                     "Women",
+                     "Book name");
     InitSystem(p53_S, name, author, book);
     //=================================================================================================================
     name = translate("VTranslateVars", "American Garment Cutter", "System name");
@@ -380,24 +388,24 @@ void VTranslateVars::InitVariables()
     variables.insert(angle2ElArc_, translate("VTranslateVars", "Angle2ElArc_", "Left symbol _ in the name"));
     variables.insert(angle1Spl_, translate("VTranslateVars", "Angle1Spl_", "Left symbol _ in the name"));
     variables.insert(angle2Spl_, translate("VTranslateVars", "Angle2Spl_", "Left symbol _ in the name"));
-    variables.insert(angle1SplPath, translate("VTranslateVars", "Angle1SplPath",
-                                              "Do not add symbol _ to the end of the name"));
-    variables.insert(angle2SplPath, translate("VTranslateVars", "Angle2SplPath",
-                                              "Do not add symbol _ to the end of the name"));
+    variables.insert(angle1SplPath,
+                     translate("VTranslateVars", "Angle1SplPath", "Do not add symbol _ to the end of the name"));
+    variables.insert(angle2SplPath,
+                     translate("VTranslateVars", "Angle2SplPath", "Do not add symbol _ to the end of the name"));
     variables.insert(seg_, translate("VTranslateVars", "Seg_", "Segment. Left symbol _ in the name"));
     variables.insert(currentLength, translate("VTranslateVars", "CurrentLength", "Do not add space between words"));
-    variables.insert(currentSeamAllowance, translate("VTranslateVars", "CurrentSeamAllowance",
-                                                     "Do not add space between words"));
+    variables.insert(currentSeamAllowance,
+                     translate("VTranslateVars", "CurrentSeamAllowance", "Do not add space between words"));
     variables.insert(c1LengthSpl_, translate("VTranslateVars", "C1LengthSpl_", "Left symbol _ in the name"));
     variables.insert(c2LengthSpl_, translate("VTranslateVars", "C2LengthSpl_", "Left symbol _ in the name"));
-    variables.insert(c1LengthSplPath, translate("VTranslateVars", "C1LengthSplPath",
-                                                "Do not add symbol _ to the end of the name"));
-    variables.insert(c2LengthSplPath, translate("VTranslateVars", "C2LengthSplPath",
-                                                "Do not add symbol _ to the end of the name"));
+    variables.insert(c1LengthSplPath,
+                     translate("VTranslateVars", "C1LengthSplPath", "Do not add symbol _ to the end of the name"));
+    variables.insert(c2LengthSplPath,
+                     translate("VTranslateVars", "C2LengthSplPath", "Do not add symbol _ to the end of the name"));
     variables.insert(rotationElArc_, translate("VTranslateVars", "RotationElArc_", "Left symbol _ in the name"));
     variables.insert(pieceArea_, translate("VTranslateVars", "PieceArea_", "Left symbol _ in the name"));
-    variables.insert(pieceSeamLineArea_, translate("VTranslateVars", "PieceSeamLineArea_",
-                                                   "Left symbol _ in the name"));
+    variables.insert(pieceSeamLineArea_,
+                     translate("VTranslateVars", "PieceSeamLineArea_", "Left symbol _ in the name"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -408,43 +416,43 @@ void VTranslateVars::InitFunctions()
     const QString threeArguments = QStringLiteral("(;;)");
 
     functions.insert(degTorad_F, translate("VTranslateVars", "degTorad", "converts degrees to radian"));
-    functionsDescriptions.insert(degTorad_F, translate("VTranslateVars", "converts degrees to radian",
-                                                      "function degTorad"));
+    functionsDescriptions.insert(degTorad_F,
+                                 translate("VTranslateVars", "converts degrees to radian", "function degTorad"));
     functionsArguments.insert(degTorad_F, oneArgument);
 
     functions.insert(radTodeg_F, translate("VTranslateVars", "radTodeg", "converts radian to degrees"));
-    functionsDescriptions.insert(radTodeg_F, translate("VTranslateVars", "converts radian to degrees",
-                                                      "function radTodeg"));
+    functionsDescriptions.insert(radTodeg_F,
+                                 translate("VTranslateVars", "converts radian to degrees", "function radTodeg"));
     functionsArguments.insert(radTodeg_F, oneArgument);
 
     functions.insert(sin_F, translate("VTranslateVars", "sin", "sine function working with radians"));
-    functionsDescriptions.insert(sin_F, translate("VTranslateVars", "sine function working with radians",
-                                                 "function sin"));
+    functionsDescriptions.insert(sin_F,
+                                 translate("VTranslateVars", "sine function working with radians", "function sin"));
     functionsArguments.insert(sin_F, oneArgument);
 
     functions.insert(cos_F, translate("VTranslateVars", "cos", "cosine function working with radians"));
-    functionsDescriptions.insert(cos_F, translate("VTranslateVars", "cosine function working with radians",
-                                                 "function cos"));
+    functionsDescriptions.insert(cos_F,
+                                 translate("VTranslateVars", "cosine function working with radians", "function cos"));
     functionsArguments.insert(cos_F, oneArgument);
 
     functions.insert(tan_F, translate("VTranslateVars", "tan", "tangens function working with radians"));
-    functionsDescriptions.insert(tan_F, translate("VTranslateVars", "tangens function working with radians",
-                                                 "function tan"));
+    functionsDescriptions.insert(tan_F,
+                                 translate("VTranslateVars", "tangens function working with radians", "function tan"));
     functionsArguments.insert(tan_F, oneArgument);
 
     functions.insert(asin_F, translate("VTranslateVars", "asin", "arcus sine function working with radians"));
-    functionsDescriptions.insert(asin_F, translate("VTranslateVars", "arcus sine function working with radians",
-                                                  "function asin"));
+    functionsDescriptions.insert(
+        asin_F, translate("VTranslateVars", "arcus sine function working with radians", "function asin"));
     functionsArguments.insert(asin_F, oneArgument);
 
     functions.insert(acos_F, translate("VTranslateVars", "acos", "arcus cosine function working with radians"));
-    functionsDescriptions.insert(acos_F, translate("VTranslateVars", "arcus cosine function working with radians",
-                                                  "function acos"));
+    functionsDescriptions.insert(
+        acos_F, translate("VTranslateVars", "arcus cosine function working with radians", "function acos"));
     functionsArguments.insert(acos_F, oneArgument);
 
     functions.insert(atan_F, translate("VTranslateVars", "atan", "arcus tangens function working with radians"));
-    functionsDescriptions.insert(atan_F, translate("VTranslateVars", "arcus tangens function working with radians",
-                                                  "function atan"));
+    functionsDescriptions.insert(
+        atan_F, translate("VTranslateVars", "arcus tangens function working with radians", "function atan"));
     functionsArguments.insert(atan_F, oneArgument);
 
     functions.insert(sinh_F, translate("VTranslateVars", "sinh", "hyperbolic sine function"));
@@ -460,52 +468,52 @@ void VTranslateVars::InitFunctions()
     functionsArguments.insert(tanh_F, oneArgument);
 
     functions.insert(asinh_F, translate("VTranslateVars", "asinh", "hyperbolic arcus sine function"));
-    functionsDescriptions.insert(asinh_F, translate("VTranslateVars", "hyperbolic arcus sine function",
-                                                   "function asinh"));
+    functionsDescriptions.insert(asinh_F,
+                                 translate("VTranslateVars", "hyperbolic arcus sine function", "function asinh"));
     functionsArguments.insert(asinh_F, oneArgument);
 
     functions.insert(acosh_F, translate("VTranslateVars", "acosh", "hyperbolic arcus cosine function"));
-    functionsDescriptions.insert(acosh_F, translate("VTranslateVars", "hyperbolic arcus cosine function",
-                                                   "function acosh"));
+    functionsDescriptions.insert(acosh_F,
+                                 translate("VTranslateVars", "hyperbolic arcus cosine function", "function acosh"));
     functionsArguments.insert(acosh_F, oneArgument);
 
     functions.insert(atanh_F, translate("VTranslateVars", "atanh", "hyperbolic arcur tangens function"));
-    functionsDescriptions.insert(atanh_F, translate("VTranslateVars", "hyperbolic arcur tangens function",
-                                                   "function atanh"));
+    functionsDescriptions.insert(atanh_F,
+                                 translate("VTranslateVars", "hyperbolic arcur tangens function", "function atanh"));
     functionsArguments.insert(atanh_F, oneArgument);
 
     functions.insert(sinD_F, translate("VTranslateVars", "sinD", "sine function working with degrees"));
-    functionsDescriptions.insert(sinD_F, translate("VTranslateVars", "sine function working with degrees",
-                                                  "function sinD"));
+    functionsDescriptions.insert(sinD_F,
+                                 translate("VTranslateVars", "sine function working with degrees", "function sinD"));
     functionsArguments.insert(sinD_F, oneArgument);
 
     functions.insert(cosD_F, translate("VTranslateVars", "cosD", "cosine function working with degrees"));
-    functionsDescriptions.insert(cosD_F, translate("VTranslateVars", "cosine function working with degrees",
-                                                  "function cosD"));
+    functionsDescriptions.insert(cosD_F,
+                                 translate("VTranslateVars", "cosine function working with degrees", "function cosD"));
     functionsArguments.insert(cosD_F, oneArgument);
 
     functions.insert(tanD_F, translate("VTranslateVars", "tanD", "tangens function working with degrees"));
-    functionsDescriptions.insert(tanD_F, translate("VTranslateVars", "tangens function working with degrees",
-                                                  "function tanD"));
+    functionsDescriptions.insert(tanD_F,
+                                 translate("VTranslateVars", "tangens function working with degrees", "function tanD"));
     functionsArguments.insert(tanD_F, oneArgument);
 
     functions.insert(asinD_F, translate("VTranslateVars", "asinD", "arcus sine function working with degrees"));
-    functionsDescriptions.insert(asinD_F, translate("VTranslateVars", "arcus sine function working with degrees",
-                                                   "function asinD"));
+    functionsDescriptions.insert(
+        asinD_F, translate("VTranslateVars", "arcus sine function working with degrees", "function asinD"));
     functionsArguments.insert(asinD_F, oneArgument);
 
     functions.insert(acosD_F, translate("VTranslateVars", "acosD", "arcus cosine function working with degrees"));
-    functionsDescriptions.insert(acosD_F, translate("VTranslateVars", "arcus cosine function working with degrees",
-                                                   "function acosD"));
+    functionsDescriptions.insert(
+        acosD_F, translate("VTranslateVars", "arcus cosine function working with degrees", "function acosD"));
     functionsArguments.insert(acosD_F, oneArgument);
 
     functions.insert(atanD_F, translate("VTranslateVars", "atanD", "arcus tangens function working with degrees"));
-    functionsDescriptions.insert(atanD_F, translate("VTranslateVars", "arcus tangens function working with degrees",
-                                                   "function atanD"));
+    functionsDescriptions.insert(
+        atanD_F, translate("VTranslateVars", "arcus tangens function working with degrees", "function atanD"));
     functionsArguments.insert(atanD_F, oneArgument);
 
     functions.insert(log2_F, translate("VTranslateVars", "log2", "logarithm to the base 2"));
-    functionsDescriptions.insert(log2_F, translate("VTranslateVars", "logarithm to the base 2",  "function log2"));
+    functionsDescriptions.insert(log2_F, translate("VTranslateVars", "logarithm to the base 2", "function log2"));
     functionsArguments.insert(log2_F, oneArgument);
 
     functions.insert(log10_F, translate("VTranslateVars", "log10", "logarithm to the base 10"));
@@ -529,8 +537,8 @@ void VTranslateVars::InitFunctions()
     functionsArguments.insert(sqrt_F, oneArgument);
 
     functions.insert(sign_F, translate("VTranslateVars", "sign", "sign function -1 if x<0; 1 if x>0"));
-    functionsDescriptions.insert(sign_F, translate("VTranslateVars", "sign function -1 if x<0; 1 if x>0",
-                                                  "function sign"));
+    functionsDescriptions.insert(sign_F,
+                                 translate("VTranslateVars", "sign function -1 if x<0; 1 if x>0", "function sign"));
     functionsArguments.insert(sign_F, oneArgument);
 
     functions.insert(rint_F, translate("VTranslateVars", "rint", "round to nearest integer"));
@@ -541,16 +549,22 @@ void VTranslateVars::InitFunctions()
     functionsDescriptions.insert(r2cm_F, translate("VTranslateVars", "round to up to 1 decimal", "function r2cm"));
     functionsArguments.insert(r2cm_F, oneArgument);
 
-    functions.insert(csrCm_F, translate("VTranslateVars", "csrCm", "cut, split and rotate modeling operation. Takes"
-                                                                   " cm units."));
-    functionsDescriptions.insert(csrCm_F, translate("VTranslateVars", "cut, split and rotate modeling operation. Takes "
-                                                                     "cm units.", "function csrCm"));
+    functions.insert(csrCm_F, translate("VTranslateVars", "csrCm",
+                                        "cut, split and rotate modeling operation. Takes"
+                                        " cm units."));
+    functionsDescriptions.insert(csrCm_F, translate("VTranslateVars",
+                                                    "cut, split and rotate modeling operation. Takes "
+                                                    "cm units.",
+                                                    "function csrCm"));
     functionsArguments.insert(csrCm_F, threeArguments);
 
-    functions.insert(csrInch_F, translate("VTranslateVars", "csrInch", "cut, split and rotate modeling operation. Takes"
-                                                                       " inch units."));
-    functionsDescriptions.insert(csrInch_F, translate("VTranslateVars", "cut, split and rotate modeling operation. "
-                                                                        "Takes inch units.", "function csrInch"));
+    functions.insert(csrInch_F, translate("VTranslateVars", "csrInch",
+                                          "cut, split and rotate modeling operation. Takes"
+                                          " inch units."));
+    functionsDescriptions.insert(csrInch_F, translate("VTranslateVars",
+                                                      "cut, split and rotate modeling operation. "
+                                                      "Takes inch units.",
+                                                      "function csrInch"));
     functionsArguments.insert(csrInch_F, threeArguments);
 
     functions.insert(abs_F, translate("VTranslateVars", "abs", "absolute value"));
@@ -575,14 +589,15 @@ void VTranslateVars::InitFunctions()
 
     functions.insert(fmod_F, translate("VTranslateVars", "fmod",
                                        "Returns the floating-point remainder of numer/denom (rounded towards zero)"));
-    functionsDescriptions.insert(fmod_F, translate("VTranslateVars", "Returns the floating-point remainder of "
-                                                                    "numer/denom (rounded towards zero)",
-                                                  "function fmod"));
+    functionsDescriptions.insert(fmod_F, translate("VTranslateVars",
+                                                   "Returns the floating-point remainder of "
+                                                   "numer/denom (rounded towards zero)",
+                                                   "function fmod"));
     functionsArguments.insert(fmod_F, twoArguments);
 
     functions.insert(warning_F, translate("VTranslateVars", "warning", "Calculation warning"));
-    functionsDescriptions.insert(warning_F, translate("VTranslateVars", "Show a warning in calculations",
-                                                      "function warning"));
+    functionsDescriptions.insert(warning_F,
+                                 translate("VTranslateVars", "Show a warning in calculations", "function warning"));
     functionsArguments.insert(warning_F, twoArguments);
 }
 
@@ -630,7 +645,7 @@ void VTranslateVars::CorrectionsPositions(vsizetype position, vsizetype bias, QM
 {
     if (bias == 0)
     {
-        return;// Nothing to correct;
+        return; // Nothing to correct;
     }
 
     BiasTokens(position, bias, tokens);
@@ -641,7 +656,7 @@ void VTranslateVars::CorrectionsPositions(vsizetype position, vsizetype bias, QM
 void VTranslateVars::TranslateVarsFromUser(QString &newFormula, QMap<vsizetype, QString> &tokens,
                                            QMap<vsizetype, QString> &numbers) const
 {
-    QList<vsizetype> tKeys = tokens.keys();// Take all tokens positions
+    QList<vsizetype> tKeys = tokens.keys(); // Take all tokens positions
     QList<QString> tValues = tokens.values();
     for (vsizetype i = 0; i < tKeys.size(); ++i)
     {
@@ -649,7 +664,7 @@ void VTranslateVars::TranslateVarsFromUser(QString &newFormula, QMap<vsizetype, 
         if (MeasurementsFromUser(newFormula, tKeys.at(i), tValues.at(i), bias))
         {
             if (bias != 0)
-            {// Translated token has different length than original. Position of next tokens need to be corrected.
+            { // Translated token has different length than original. Position of next tokens need to be corrected.
                 CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
                 tKeys = tokens.keys();
                 tValues = tokens.values();
@@ -660,7 +675,7 @@ void VTranslateVars::TranslateVarsFromUser(QString &newFormula, QMap<vsizetype, 
         if (VariablesFromUser(newFormula, tKeys.at(i), tValues.at(i), bias))
         {
             if (bias != 0)
-            {// Translated token has different length than original. Position of next tokens need to be corrected.
+            { // Translated token has different length than original. Position of next tokens need to be corrected.
                 CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
                 tKeys = tokens.keys();
                 tValues = tokens.values();
@@ -671,7 +686,7 @@ void VTranslateVars::TranslateVarsFromUser(QString &newFormula, QMap<vsizetype, 
         if (FunctionsFromUser(newFormula, tKeys.at(i), tValues.at(i), bias))
         {
             if (bias != 0)
-            {// Translated token has different length than original. Position of next tokens need to be corrected.
+            { // Translated token has different length than original. Position of next tokens need to be corrected.
                 CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
                 tKeys = tokens.keys();
                 tValues = tokens.values();
@@ -680,7 +695,7 @@ void VTranslateVars::TranslateVarsFromUser(QString &newFormula, QMap<vsizetype, 
         }
 
         if (tValues.at(i) == LocaleNegativeSign(QLocale()))
-        {// unary minus
+        { // unary minus
             newFormula.replace(tKeys.at(i), 1, '-');
         }
     }
@@ -692,26 +707,26 @@ void VTranslateVars::TranslateNumbersFromUser(QString &newFormula, QMap<vsizetyp
 {
     QLocale loc = QLocale(); // User locale
     if (loc != QLocale::c() && osSeparator)
-    {// User want use Os separator
-        QList<vsizetype> nKeys = numbers.keys();// Positions for all numbers in expression
+    {                                            // User want use Os separator
+        QList<vsizetype> nKeys = numbers.keys(); // Positions for all numbers in expression
         QList<QString> nValues = numbers.values();
         for (int i = 0; i < nKeys.size(); ++i)
         {
-            loc = QLocale();// From system locale
+            loc = QLocale(); // From system locale
             bool ok = false;
             const qreal d = loc.toDouble(nValues.at(i), &ok);
             if (not ok)
             {
-                qDebug()<<"Can't convert to double token"<<nValues.at(i);
-                continue;//Leave with out translation
+                qDebug() << "Can't convert to double token" << nValues.at(i);
+                continue; // Leave with out translation
             }
 
-            loc = QLocale::c();// To internal locale
-            const QString dStr = loc.toString(d);// Internal look for number
+            loc = QLocale::c();                   // To internal locale
+            const QString dStr = loc.toString(d); // Internal look for number
             newFormula.replace(nKeys.at(i), nValues.at(i).length(), dStr);
             const auto bias = nValues.at(i).length() - dStr.length();
             if (bias != 0)
-            {// Translated number has different length than original. Position next tokens need to be corrected.
+            { // Translated number has different length than original. Position next tokens need to be corrected.
                 CorrectionsPositions(nKeys.at(i), bias, tokens, numbers);
                 nKeys = numbers.keys();
                 nValues = numbers.values();
@@ -730,14 +745,14 @@ void VTranslateVars::TranslateVarsToUser(QString &newFormula, QMap<vsizetype, QS
     {
         if (measurements.contains(tValues.at(i)))
         {
-            newFormula.replace(tKeys.at(i), tValues.at(i).length(),
-                               measurements.value(tValues.at(i))
-                                   .translate(VAbstractApplication::VApp()->Settings()->GetLocale()));
-            auto bias = tValues.at(i).length() -
-                       measurements.value(tValues.at(i))
-                           .translate(VAbstractApplication::VApp()->Settings()->GetLocale()).length();
+            newFormula.replace(
+                tKeys.at(i), tValues.at(i).length(),
+                measurements.value(tValues.at(i)).translate(VAbstractApplication::VApp()->Settings()->GetLocale()));
+            auto bias = tValues.at(i).length() - measurements.value(tValues.at(i))
+                                                     .translate(VAbstractApplication::VApp()->Settings()->GetLocale())
+                                                     .length();
             if (bias != 0)
-            {// Translated token has different length than original. Position next tokens need to be corrected.
+            { // Translated token has different length than original. Position next tokens need to be corrected.
                 CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
                 tKeys = tokens.keys();
                 tValues = tokens.values();
@@ -747,14 +762,14 @@ void VTranslateVars::TranslateVarsToUser(QString &newFormula, QMap<vsizetype, QS
 
         if (functions.contains(tValues.at(i)))
         {
-            newFormula.replace(tKeys.at(i), tValues.at(i).length(),
-                               functions.value(tValues.at(i))
-                                   .translate(VAbstractApplication::VApp()->Settings()->GetLocale()));
-            auto bias = tValues.at(i).length() -
-                       functions.value(tValues.at(i))
-                           .translate(VAbstractApplication::VApp()->Settings()->GetLocale()).length();
+            newFormula.replace(
+                tKeys.at(i), tValues.at(i).length(),
+                functions.value(tValues.at(i)).translate(VAbstractApplication::VApp()->Settings()->GetLocale()));
+            auto bias = tValues.at(i).length() - functions.value(tValues.at(i))
+                                                     .translate(VAbstractApplication::VApp()->Settings()->GetLocale())
+                                                     .length();
             if (bias != 0)
-            {// Translated token has different length than original. Position next tokens need to be corrected.
+            { // Translated token has different length than original. Position next tokens need to be corrected.
                 CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
                 tKeys = tokens.keys();
                 tValues = tokens.values();
@@ -766,7 +781,7 @@ void VTranslateVars::TranslateVarsToUser(QString &newFormula, QMap<vsizetype, QS
         if (VariablesToUser(newFormula, tKeys.at(i), tValues.at(i), bias))
         {
             if (bias != 0)
-            {// Translated token has different length than original. Position next tokens need to be corrected.
+            { // Translated token has different length than original. Position next tokens need to be corrected.
                 CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
                 tKeys = tokens.keys();
                 tValues = tokens.values();
@@ -775,7 +790,7 @@ void VTranslateVars::TranslateVarsToUser(QString &newFormula, QMap<vsizetype, QS
         }
 
         if (tValues.at(i) == QChar('-'))
-        {// unary minus
+        { // unary minus
             newFormula.replace(tKeys.at(i), 1, LocaleNegativeSign(QLocale()));
         }
     }
@@ -785,24 +800,24 @@ void VTranslateVars::TranslateVarsToUser(QString &newFormula, QMap<vsizetype, QS
 void VTranslateVars::TranslateNumbersToUser(QString &newFormula, QMap<vsizetype, QString> &tokens,
                                             QMap<vsizetype, QString> &numbers, bool osSeparator)
 {
-    QLocale loc = QLocale();// User locale
+    QLocale loc = QLocale(); // User locale
     if (loc != QLocale::C && osSeparator)
-    {// User want use Os separator
-        QList<vsizetype> nKeys = numbers.keys();// Positions for all numbers in expression
+    {                                            // User want use Os separator
+        QList<vsizetype> nKeys = numbers.keys(); // Positions for all numbers in expression
         QList<QString> nValues = numbers.values();
         for (int i = 0; i < nKeys.size(); ++i)
         {
-            loc = QLocale::c();// From pattern locale
+            loc = QLocale::c(); // From pattern locale
             bool ok = false;
             const qreal d = loc.toDouble(nValues.at(i), &ok);
             if (not ok)
             {
-                qDebug()<<"Can't convert to double token"<<nValues.at(i);
-                continue;//Leave with out translation
+                qDebug() << "Can't convert to double token" << nValues.at(i);
+                continue; // Leave with out translation
             }
 
-            loc = QLocale();// To user locale
-            QString dStr = loc.toString(d);// Number string in user locale
+            loc = QLocale();                // To user locale
+            QString dStr = loc.toString(d); // Number string in user locale
             if (VLocaleCharacter(LocaleGroupSeparator(loc)).isSpace())
             {
                 dStr.replace(LocaleGroupSeparator(loc), QString());
@@ -810,7 +825,7 @@ void VTranslateVars::TranslateNumbersToUser(QString &newFormula, QMap<vsizetype,
             newFormula.replace(nKeys.at(i), nValues.at(i).length(), dStr);
             const auto bias = nValues.at(i).length() - dStr.length();
             if (bias != 0)
-            {// Translated number has different length than original. Position next tokens need to be corrected.
+            { // Translated number has different length than original. Position next tokens need to be corrected.
                 CorrectionsPositions(nKeys.at(i), bias, tokens, numbers);
                 nKeys = numbers.keys();
                 nValues = numbers.values();
@@ -832,20 +847,18 @@ void VTranslateVars::BiasTokens(vsizetype position, vsizetype bias, QMap<vsizety
     QMap<vsizetype, QString>::const_iterator i = tokens.constBegin();
     while (i != tokens.constEnd())
     {
-        if (i.key()<= position)
+        if (i.key() <= position)
         { // Tokens before position "position" did not change his positions.
             newTokens.insert(i.key(), i.value());
         }
         else
         {
-            newTokens.insert(i.key()-bias, i.value());
+            newTokens.insert(i.key() - bias, i.value());
         }
         ++i;
     }
     tokens = newTokens;
 }
-
-
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -860,9 +873,9 @@ auto VTranslateVars::VariablesFromUser(QString &newFormula, vsizetype position, 
                                        vsizetype &bias) const -> bool
 {
     const QString currentLengthTr =
-            variables.value(currentLength).translate(VAbstractApplication::VApp()->Settings()->GetLocale());
-    const QString currentSeamAllowanceTr = variables.value(currentSeamAllowance)
-            .translate(VAbstractApplication::VApp()->Settings()->GetLocale());
+        variables.value(currentLength).translate(VAbstractApplication::VApp()->Settings()->GetLocale());
+    const QString currentSeamAllowanceTr =
+        variables.value(currentSeamAllowance).translate(VAbstractApplication::VApp()->Settings()->GetLocale());
 
     QMap<QString, qmu::QmuTranslation>::const_iterator i = variables.constBegin();
     while (i != variables.constEnd())
@@ -930,7 +943,7 @@ auto VTranslateVars::VariablesToUser(QString &newFormula, vsizetype position, co
     QMap<QString, qmu::QmuTranslation>::const_iterator i = variables.constBegin();
     while (i != variables.constEnd())
     {
-        if (token.indexOf( i.key() ) == 0)
+        if (token.indexOf(i.key()) == 0)
         {
             if ((i.key() == currentLength || i.key() == currentSeamAllowance) && token != i.key())
             {
@@ -1049,11 +1062,11 @@ auto VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator) c
     // Eval formula
     QScopedPointer<qmu::QmuTokenParser> cal(
         new qmu::QmuTokenParser(formula, osSeparator, true, GetTranslatedFunctions()));
-    QMap<vsizetype, QString> tokens = cal->GetTokens();// Tokens (variables, measurements)
-    QMap<vsizetype, QString> numbers = cal->GetNumbers();// All numbers in expression for changing decimal separator
+    QMap<vsizetype, QString> tokens = cal->GetTokens();   // Tokens (variables, measurements)
+    QMap<vsizetype, QString> numbers = cal->GetNumbers(); // All numbers in expression for changing decimal separator
     cal.reset();
 
-    QString newFormula = formula;// Local copy for making changes
+    QString newFormula = formula; // Local copy for making changes
 
     TranslateVarsFromUser(newFormula, tokens, numbers);
     TranslateNumbersFromUser(newFormula, tokens, numbers, osSeparator);
@@ -1069,7 +1082,7 @@ auto VTranslateVars::TryFormulaFromUser(const QString &formula, bool osSeparator
         SCASSERT(VAbstractApplication::VApp()->TrVars() != nullptr)
         return VAbstractApplication::VApp()->TrVars()->FormulaFromUser(formula, osSeparator);
     }
-    catch (qmu::QmuParserError &e)// In case something bad will happen
+    catch (qmu::QmuParserError &e) // In case something bad will happen
     {
         Q_UNUSED(e)
         return formula;
@@ -1090,21 +1103,21 @@ auto VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) con
         return formula;
     }
 
-    QString newFormula = formula;// Local copy for making changes
+    QString newFormula = formula; // Local copy for making changes
 
     QMap<vsizetype, QString> tokens;
     QMap<vsizetype, QString> numbers;
     try
     {
-        QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(formula, false, false));// Eval formula
-        tokens = cal->GetTokens();// Tokens (variables, measurements)
-        numbers = cal->GetNumbers();// All numbers in expression for changing decimal separator
+        QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(formula, false, false)); // Eval formula
+        tokens = cal->GetTokens();   // Tokens (variables, measurements)
+        numbers = cal->GetNumbers(); // All numbers in expression for changing decimal separator
     }
     catch (qmu::QmuParserError &e)
     {
         qDebug() << "\nMath parser error:\n"
                  << "--------------------------------------\n"
-                 << "Message:     " << e.GetMsg()  << "\n"
+                 << "Message:     " << e.GetMsg() << "\n"
                  << "Expression:  " << e.GetExpr() << "\n"
                  << "--------------------------------------";
         return newFormula;
@@ -1123,7 +1136,7 @@ auto VTranslateVars::TryFormulaToUser(const QString &formula, bool osSeparator) 
     {
         return VAbstractApplication::VApp()->TrVars()->FormulaToUser(formula, osSeparator);
     }
-    catch (qmu::QmuParserError &e)// In case something bad will happen
+    catch (qmu::QmuParserError &e) // In case something bad will happen
     {
         Q_UNUSED(e)
         return formula;

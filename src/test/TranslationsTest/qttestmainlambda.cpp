@@ -28,21 +28,21 @@
 
 #include <QtTest>
 
-#include "tst_measurementregexp.h"
 #include "tst_buitinregexp.h"
+#include "tst_measurementregexp.h"
 #include "tst_qmuparsererrormsg.h"
-#include "tst_tstranslation.h"
 #include "tst_tslocaletranslation.h"
+#include "tst_tstranslation.h"
 
 #include "../vmisc/def.h"
 #include "../vmisc/testvapplication.h"
 
 auto main(int argc, char **argv) -> int
 {
-    TestVApplication app( argc, argv );// For QPrinter
+    TestVApplication app(argc, argv); // For QPrinter
 
     int status = 0;
-    auto ASSERT_TEST = [&status, argc, argv](QObject* obj)
+    auto ASSERT_TEST = [&status, argc, argv](QObject *obj)
     {
         status |= QTest::qExec(obj, argc, argv);
         delete obj;
@@ -51,7 +51,7 @@ auto main(int argc, char **argv) -> int
     ASSERT_TEST(new TST_TSTranslation());
 
     const QStringList locales = SupportedLocales();
-    for(const auto &locale : locales)
+    for (const auto &locale : locales)
     {
         for(quint32 s = 0; s < TST_MeasurementRegExp::systemCounts; ++s)
         {

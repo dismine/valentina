@@ -36,9 +36,10 @@ Q_DECLARE_METATYPE(Qt::LayoutDirection)
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_TSLocaleTranslation::TST_TSLocaleTranslation(const QString &locale, QObject *parent)
-    : TST_AbstractTranslation(parent),
-      m_locale(locale)
-{}
+  : TST_AbstractTranslation(parent),
+    m_locale(locale)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void TST_TSLocaleTranslation::CheckPlaceMarkerExist_data()
@@ -82,8 +83,8 @@ void TST_TSLocaleTranslation::CheckPlaceMarkerExist_data()
                 continue;
             }
 
-            const QString caseName = QStringLiteral("File '%1'. Check place holder source message '%2'")
-                    .arg(filename, source);
+            const QString caseName =
+                QStringLiteral("File '%1'. Check place holder source message '%2'").arg(filename, source);
             QTest::newRow(qUtf8Printable(caseName)) << source << translation << locale.textDirection();
         }
         else
@@ -116,9 +117,8 @@ void TST_TSLocaleTranslation::CheckPlaceMarkerExist()
             ++sourceMarkCount;
             if (sourceMarkCount != i)
             {
-                const QString message = QString("In source string '%1' was missed place marker ")
-                        .arg(source) + QLatin1String("'%") + QString().setNum(sourceMarkCount) +
-                        QLatin1String("'.");
+                const QString message = QString("In source string '%1' was missed place marker ").arg(source) +
+                                        QLatin1String("'%") + QString().setNum(sourceMarkCount) + QLatin1String("'.");
                 QFAIL(qUtf8Printable(message));
             }
         }
@@ -129,9 +129,9 @@ void TST_TSLocaleTranslation::CheckPlaceMarkerExist()
             ++translationMarkCount;
             if (translationMarkCount != i)
             {
-                const QString message = QString("In translation string '%1' was missed place marker ")
-                        .arg(translation) + QLatin1String("'%") + QString().setNum(translationMarkCount) +
-                        QLatin1String("'.");
+                const QString message =
+                    QString("In translation string '%1' was missed place marker ").arg(translation) +
+                    QLatin1String("'%") + QString().setNum(translationMarkCount) + QLatin1String("'.");
                 QFAIL(qUtf8Printable(message));
             }
         }
@@ -207,16 +207,9 @@ void TST_TSLocaleTranslation::TestPunctuation()
     QFETCH(QString, translation);
 
     static const QStringList punctuation{
-        QChar('.'),
-        QChar(':'),
-        QChar(QChar::Space),
-        QChar('\n'),
-        QChar('!'),
-        QChar('?'),
-        QChar(';'),
-        QChar(0x2026)//…
+        QChar('.'),   QChar(':'), QChar(QChar::Space), QChar('\n'), QChar('!'), QChar('?'), QChar(';'),
+        QChar(0x2026) // …
     };
-
 
     if (QLocale(locale).textDirection() != Qt::LeftToRight)
     {
@@ -224,9 +217,9 @@ void TST_TSLocaleTranslation::TestPunctuation()
     }
 
     bool testFail = false;
-    const QChar cSource = source.at(source.length()-1);
+    const QChar cSource = source.at(source.length() - 1);
     QChar cPunctuation = cSource;
-    const QChar cTranslation = translation.at(translation.length()-1);
+    const QChar cTranslation = translation.at(translation.length() - 1);
     if (punctuation.contains(cSource))
     {
         if (not translation.endsWith(cSource))
@@ -234,9 +227,9 @@ void TST_TSLocaleTranslation::TestPunctuation()
             testFail = true;
 
             if (locale == QLatin1String("el_GR")
-                    // Greek question mark
-                    // https://en.wikipedia.org/wiki/Question_mark#Greek_question_mark
-                    && (cSource == QLatin1Char('?') && cTranslation == QLatin1Char(';')))
+                // Greek question mark
+                // https://en.wikipedia.org/wiki/Question_mark#Greek_question_mark
+                && (cSource == QLatin1Char('?') && cTranslation == QLatin1Char(';')))
             {
                 testFail = false;
             }
@@ -261,8 +254,10 @@ void TST_TSLocaleTranslation::TestPunctuation()
     if (testFail)
     {
         const QString message = QString("Translation string does not end with the same punctuation character '%1' or "
-                                        "vice versa. ").arg(cPunctuation) + QString("Original name:'%1'").arg(source) +
-                QString(", translated name:'%1'").arg(translation);
+                                        "vice versa. ")
+                                    .arg(cPunctuation) +
+                                QString("Original name:'%1'").arg(source) +
+                                QString(", translated name:'%1'").arg(translation);
         QFAIL(qUtf8Printable(message));
     }
 }
@@ -324,9 +319,8 @@ void TST_TSLocaleTranslation::TestHTMLTags()
     QFETCH(QString, source);
     QFETCH(QString, translation);
 
-    static const QStringList tags = QStringList() << QLatin1String("p")
-                                                  << QLatin1String("html")
-                                                  << QLatin1String("body");
+    static const QStringList tags = QStringList()
+                                    << QLatin1String("p") << QLatin1String("html") << QLatin1String("body");
     static const QString pattern("{1}.*>");
     for (const auto &tag : tags)
     {
@@ -341,7 +335,8 @@ void TST_TSLocaleTranslation::TestHTMLTags()
             if (not translation.contains(closeRegex) || countCloseTag != countOpenTag)
             {
                 const QString message = QString("Tag mismatch. Tag: '<%1>'. ").arg(tag) +
-                        QString("Original name:'%1'").arg(source) + QString(", translated name:'%1'").arg(translation);
+                                        QString("Original name:'%1'").arg(source) +
+                                        QString(", translated name:'%1'").arg(translation);
                 QFAIL(qUtf8Printable(message));
             }
         }
