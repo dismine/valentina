@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="uk">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="uk">
 <context>
     <name>AddBackgroundImage</name>
     <message>
@@ -187,7 +185,7 @@
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="vanished">&amp;Відмінити</translation>
+        <translation type="vanished">&amp;Скасувати дію</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
@@ -218,7 +216,7 @@
     <name>ConfigurationPage</name>
     <message>
         <source>Setup user interface language updated and will be used the next time start</source>
-        <translation type="vanished">Налаштування мови інтерфейсу користувача оновлені і будуть застосовані наступного запуску</translation>
+        <translation type="vanished">Налаштування мови інтерфейсу користувача оновлені та будуть застосовані за наступного запуску</translation>
     </message>
     <message>
         <source>Default unit updated and will be used the next pattern creation</source>
@@ -230,7 +228,7 @@
     </message>
     <message>
         <source>Auto-save modified pattern</source>
-        <translation type="vanished">Авто збереження модифіковане лекало</translation>
+        <translation type="vanished">Автозбереження модифікованого лекала</translation>
     </message>
     <message>
         <source>min</source>
@@ -286,7 +284,7 @@
     </message>
     <message>
         <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation type="vanished">Після кожного падіння Valentina збирає інформацію яка може допомогти нам у виправленні помилки. Ми не збираємо персональну інформацію користувачів. Дізнатися більше про &lt;a href=https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&gt;информацію&lt;/a&gt; яку ми збираємо.</translation>
+        <translation type="vanished">Після кожного збою Valentina збирає інформацію, яка може допомогти нам виправити помилку. Ми не збираємо персональну інформацію користувачів. Докладніше про &lt;a href=https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&gt;інформацію,&lt;/a&gt; яку ми збираємо.</translation>
     </message>
     <message>
         <source>Pattern Editing</source>
@@ -302,7 +300,7 @@
     </message>
     <message>
         <source>The text appears under the icon. (recommended for beginners.)</source>
-        <translation type="vanished">Текст відображається під іконкою. (рекомендується для новачків.)</translation>
+        <translation type="vanished">Текст під піктограмою. (рекомендовано для новачків.)</translation>
     </message>
     <message>
         <source>GUI language:</source>
@@ -338,19 +336,19 @@
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation type="vanished">Одиниці вимірювання за замовчуванням були оновлені і будуть використанні як основні наступного разу при створенні нової викрійки.</translation>
+        <translation type="vanished">Одиниці вимірювання за замовчуванням були оновлені та будуть використанні основними під час створення нової викрійки.</translation>
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation type="vanished">Після кожного падіння Valentina збирає інформацію яка може допомогти нам у виправленні помилки. Ми не збираємо персональну інформацію користувачів. Дізнатися більше про &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;інформацію&lt;/a&gt; яку ми збираємо.</translation>
+        <translation type="vanished">Після кожного збою Valentina збирає інформацію, яка може допомогти нам виправити помилку. Ми не збираємо персональну інформацію користувачів. Докладніше про &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;інформацію,&lt;/a&gt; яку ми збираємо.</translation>
     </message>
     <message>
         <source>The text appears under the icon (recommended for beginners).</source>
-        <translation type="vanished">Текст відображається під іконкою (рекомендується для новачків).</translation>
+        <translation type="vanished">Текст під піктограмою (рекомендовано для новачків).</translation>
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
-        <translation type="vanished">Після кожного падіння Valentina збирає інформацію яка може допомогти нам у виправленні помилки. Ми не збираємо персональну інформацію користувачів. Дізнатися більше про %1інформацію%2 яку ми збираємо.</translation>
+        <translation type="vanished">Після кожного збою Valentina збирає інформацію, яка може допомогти нам виправити помилку. Ми не збираємо персональну інформацію користувачів. Докладніше про %1інформацію,%2 яку ми збираємо.</translation>
     </message>
 </context>
 <context>
@@ -358,7 +356,7 @@
     <message>
         <location filename="../../src/libs/vdxf/libdxfrw/intern/drw_textcodec.cpp" line="108"/>
         <source>No available codec for code page &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Для кодової сторінки &apos;%1&apos; немає доступних кодеків.</translation>
     </message>
 </context>
 <context>
@@ -451,7 +449,7 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.cpp" line="68"/>
         <source>Web site : %1</source>
-        <translation>Веб сайт : %1</translation>
+        <translation>Вебсайт : %1</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.cpp" line="74"/>
@@ -508,7 +506,7 @@
     <message>
         <location filename="../../src/app/tape/dialogs/dialogabouttape.cpp" line="146"/>
         <source>Web site : %1</source>
-        <translation>Веб сайт : %1</translation>
+        <translation>Вебсайт : %1</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogabouttape.cpp" line="63"/>
@@ -566,7 +564,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Ім&apos;я точки</translation>
+        <translation type="vanished">Назва точки</translation>
     </message>
     <message>
         <source>First point</source>
@@ -590,7 +588,7 @@
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation type="vanished">Показати лінію від першої точки до даної</translation>
+        <translation type="vanished">Показати лінію від першої точки до цієї</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.cpp" line="199"/>
@@ -619,7 +617,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="102"/>
         <source>Formula wizard</source>
-        <translation>Мастер формул</translation>
+        <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="150"/>
@@ -634,7 +632,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="231"/>
         <source>Point label:</source>
-        <translation>Ім&apos;я точки:</translation>
+        <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="238"/>
@@ -1023,7 +1021,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Ім&apos;я точки</translation>
+        <translation type="vanished">Назва точки</translation>
     </message>
     <message>
         <source>First point</source>
@@ -1104,7 +1102,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="228"/>
         <source>Point label:</source>
-        <translation>Ім&apos;я точки:</translation>
+        <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="235"/>
@@ -1156,7 +1154,7 @@
     <name>DialogCubicBezier</name>
     <message>
         <source>Cubic bezier</source>
-        <translation type="vanished">Кубічна крива бьзье </translation>
+        <translation type="vanished">Кубічна крива Безьє </translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="106"/>
@@ -1166,7 +1164,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="146"/>
         <source>Name:</source>
-        <translation>Імя:</translation>
+        <translation>Ім&apos;я:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="37"/>
@@ -1211,7 +1209,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="14"/>
         <source>Tool cubic bezier</source>
-        <translation>Інструмент кубічна крива безье</translation>
+        <translation>Інструмент кубічна крива Безьє</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="77"/>
@@ -1248,7 +1246,7 @@
     <name>DialogCubicBezierPath</name>
     <message>
         <source>Dialog cubic bezier path</source>
-        <translation type="vanished">Діалог складна кубічна крива безье</translation>
+        <translation type="vanished">Діалог складна кубічна крива Безьє</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="40"/>
@@ -1268,7 +1266,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="78"/>
         <source>Name:</source>
-        <translation>Імя:</translation>
+        <translation>Ім&apos;я:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.cpp" line="366"/>
@@ -1278,7 +1276,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="14"/>
         <source>Tool cubic bezier path</source>
-        <translation>Інструмент складна кубічна крива безье</translation>
+        <translation>Інструмент складна кубічна крива Безьє</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="92"/>
@@ -1341,7 +1339,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Ім&apos;я точки</translation>
+        <translation type="vanished">Назва точки</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -1349,7 +1347,7 @@
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation type="vanished">Показати лінію від першої точки до даної</translation>
+        <translation type="vanished">Показати лінію від першої точки до цієї</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.cpp" line="265"/>
@@ -1359,7 +1357,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="14"/>
         <source>Point intersect curve and axis</source>
-        <translation>Точка перениту кривої і вісі</translation>
+        <translation>Точка перетину кривої й осі</translation>
     </message>
     <message>
         <source>Axis Point</source>
@@ -1382,7 +1380,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="99"/>
         <source>Formula wizard</source>
-        <translation>Мастер формул</translation>
+        <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="141"/>
@@ -1407,7 +1405,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="264"/>
         <source>Point label:</source>
-        <translation>Ім&apos;я точки:</translation>
+        <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="277"/>
@@ -1471,7 +1469,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Ім&apos;я точки</translation>
+        <translation type="vanished">Назва точки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="14"/>
@@ -1499,7 +1497,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="99"/>
         <source>Formula wizard</source>
-        <translation>Мастер формул</translation>
+        <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="141"/>
@@ -1519,7 +1517,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="244"/>
         <source>Point label:</source>
-        <translation>Ім&apos;я точки:</translation>
+        <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="251"/>
@@ -1581,7 +1579,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Ім&apos;я точки</translation>
+        <translation type="vanished">Назва точки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="14"/>
@@ -1605,7 +1603,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="99"/>
         <source>Formula wizard</source>
-        <translation>Мастер формул</translation>
+        <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="141"/>
@@ -1687,7 +1685,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Ім&apos;я точки</translation>
+        <translation type="vanished">Назва точки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="14"/>
@@ -1711,7 +1709,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="99"/>
         <source>Formula wizard</source>
-        <translation>Мастер формул</translation>
+        <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="141"/>
@@ -1815,7 +1813,7 @@
     </message>
     <message>
         <source>Name of detail</source>
-        <translation type="vanished">Ім&apos;я деталі</translation>
+        <translation type="vanished">Назва деталі</translation>
     </message>
     <message>
         <source>Seam allowance</source>
@@ -1835,7 +1833,7 @@
     </message>
     <message>
         <source>Got wrong scene object. Ignore.</source>
-        <translation type="vanished">Отримано не правильний об&apos;єкт сцени. Інгнорується.</translation>
+        <translation type="vanished">Отримано неправильний об&apos;єкт сцени. Ігнорується.</translation>
     </message>
     <message>
         <source>Reverse</source>
@@ -1843,15 +1841,15 @@
     </message>
     <message>
         <source>Seam allowance tool</source>
-        <translation type="vanished">Деталь</translation>
+        <translation type="vanished">Інструмент припуску на шви</translation>
     </message>
     <message>
         <source>All objects in path should follow in clockwise direction.</source>
-        <translation type="vanished">Всі обєкти в контурі повинні слідувати за годинниковою стрілкою.</translation>
+        <translation type="vanished">Усі об&apos;єкти в контурі повинні слідувати за годинниковою стрілкою.</translation>
     </message>
     <message>
         <source>Scroll down the list</source>
-        <translation type="vanished">Перемістити в низ списку</translation>
+        <translation type="vanished">Перемістити вниз списку</translation>
     </message>
     <message>
         <source>...</source>
@@ -1859,7 +1857,7 @@
     </message>
     <message>
         <source>Scroll up the list</source>
-        <translation type="vanished">Перемістити у верх списку</translation>
+        <translation type="vanished">Перемістити вгору списку</translation>
     </message>
     <message>
         <source>Ready!</source>
@@ -1871,7 +1869,7 @@
     </message>
     <message>
         <source>First point can not equal the last point!</source>
-        <translation type="vanished">Перша точка не може співпадати з останньою точкою!</translation>
+        <translation type="vanished">Перша точка не може збігатися з останньою точкою!</translation>
     </message>
     <message>
         <source>You have double points!</source>
@@ -1891,7 +1889,7 @@
     </message>
     <message>
         <source>Name of detail:</source>
-        <translation type="vanished">Ім&apos;я деталі:</translation>
+        <translation type="vanished">Назва деталі:</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -1899,7 +1897,7 @@
     </message>
     <message>
         <source>First point cannot be equal to the last point!</source>
-        <translation type="vanished">Перша точка не може співпадати з останньою точкою!</translation>
+        <translation type="vanished">Перша точка не може збігатися з останньою точкою!</translation>
     </message>
     <message>
         <source>General</source>
@@ -1931,7 +1929,7 @@
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Відмінити</translation>
+        <translation type="vanished">Скасувати</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -1939,7 +1937,7 @@
     </message>
     <message>
         <source>Letter:</source>
-        <translation type="vanished">Літера:</translation>
+        <translation type="vanished">Лист:</translation>
     </message>
     <message>
         <source>Detail label visible</source>
@@ -1991,11 +1989,11 @@
     </message>
     <message>
         <source>You can choose one of the predefined materials or enter a new one</source>
-        <translation type="vanished">Ви можете вибрати один з стандартних матеріалів або ввести свій</translation>
+        <translation type="vanished">Ви можете вибрати один зі стандартних матеріалів або ввести свій</translation>
     </message>
     <message>
         <source>Forbid piece be mirrored in a layout.</source>
-        <translation type="vanished">Заборонити відображення деталі в розкладці.</translation>
+        <translation type="vanished">Заборонити віддзеркалення деталі в розкладці.</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
@@ -2007,7 +2005,7 @@
     </message>
     <message>
         <source>Name can&apos;t be empty</source>
-        <translation type="vanished">Ім&apos;я не може бути пустим</translation>
+        <translation type="vanished">Назва обов&apos;язкова</translation>
     </message>
     <message>
         <source>Grainline</source>
@@ -2023,7 +2021,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="vanished">Мастер формул</translation>
+        <translation type="vanished">Майстер формул</translation>
     </message>
     <message>
         <source>Value</source>
@@ -2043,15 +2041,15 @@
     </message>
     <message>
         <source>Infinite/undefined result</source>
-        <translation type="vanished">Безкінечний/не визначений результат</translation>
+        <translation type="vanished">Нескінченний/не визначений результат</translation>
     </message>
     <message>
         <source>Length should be positive</source>
-        <translation type="vanished">Довжина повинна додатнє значення</translation>
+        <translation type="vanished">Довжина повинна мати додатне значення</translation>
     </message>
     <message>
         <source>Arrows:</source>
-        <translation type="vanished">Стрільки:</translation>
+        <translation type="vanished">Стрілки:</translation>
     </message>
     <message>
         <source>Both</source>
@@ -2071,17 +2069,17 @@
     <message>
         <location filename="../../src/app/tape/dialogs/dialogdimensioncustomnames.ui" line="14"/>
         <source>Dimension custom names</source>
-        <translation>Користувацькі імена вимірів</translation>
+        <translation>Користувацькі назви вимірів</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogdimensioncustomnames.ui" line="31"/>
         <source>Name</source>
-        <translation>Ім&apos;я</translation>
+        <translation>Назва</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogdimensioncustomnames.ui" line="36"/>
         <source>Custom Name</source>
-        <translation>Користувацьке ім&apos;я</translation>
+        <translation>Користувацька назва</translation>
     </message>
 </context>
 <context>
@@ -2177,7 +2175,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="331"/>
         <source>Additional font size. Use to make a line bigger.</source>
-        <translation>Додатковий розмір шрифту. Використовуйте, щоб зробити лінію більше.</translation>
+        <translation>Додатковий розмір шрифту. Використовуйте, щоб зробити лінію більшою.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="387"/>
@@ -2264,7 +2262,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="512"/>
         <source>Pattern name</source>
-        <translation>Ім&apos;я лекала</translation>
+        <translation>Назва лекала</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="513"/>
@@ -2290,12 +2288,20 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="551"/>
         <source>Pattern file name</source>
-        <translation>Ім&apos;я файлу лекала</translation>
+        <translation>Назва файлу лекала</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="554"/>
         <source>Measurments file name</source>
-        <translation>Ім&apos;я файлу вимірювань</translation>
+        <translation>Назва файлу вимірювань</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="600"/>
@@ -2305,7 +2311,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="668"/>
         <source>Piece letter</source>
-        <translation>Літера деталі</translation>
+        <translation>Лист деталі</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="669"/>
@@ -2365,12 +2371,12 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="678"/>
         <source>Material: Interfacing</source>
-        <translation>Матеріал: Дублерін</translation>
+        <translation>Матеріал: Дублерин</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="678"/>
         <source>Interfacing</source>
-        <translation>Дублерін</translation>
+        <translation>Дублерин</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="679"/>
@@ -2608,17 +2614,17 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="524"/>
         <source>Area units</source>
-        <translation type="unfinished"></translation>
+        <translation>Одиниці виміру площі</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="642"/>
         <source>Piece full area</source>
-        <translation type="unfinished"></translation>
+        <translation>Повна площа деталі</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="643"/>
         <source>Piece seam line area</source>
-        <translation type="unfinished"></translation>
+        <translation>Площа лінії шва деталі</translation>
     </message>
 </context>
 <context>
@@ -2648,7 +2654,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="191"/>
         <source>Input data</source>
-        <translation>Вхідні данні</translation>
+        <translation>Вхідні дані</translation>
     </message>
     <message>
         <source>Size and height</source>
@@ -2686,7 +2692,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="348"/>
         <source>Hide empty measurements</source>
-        <translation>Сховати пусті мірки</translation>
+        <translation>Сховати порожні мірки</translation>
     </message>
     <message>
         <source>Double click for add to formula</source>
@@ -2811,6 +2817,10 @@
 <context>
     <name>DialogEllipticalArc</name>
     <message>
+        <source>Dialog</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="79"/>
         <source>Radius1:</source>
         <translation>Радіус1:</translation>
@@ -2822,7 +2832,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="657"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="843"/>
         <source>Formula wizard</source>
-        <translation>Мастер формул</translation>
+        <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="141"/>
@@ -2889,6 +2899,18 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="996"/>
         <source>Color:</source>
         <translation>Колір:</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Radius can&apos;t be negative</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Angles equal</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="461"/>
@@ -2985,7 +3007,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Ім&apos;я точки</translation>
+        <translation type="vanished">Назва точки</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -2993,7 +3015,7 @@
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation type="vanished">Показати лінію від першої точки до даної</translation>
+        <translation type="vanished">Показати лінію від першої точки до цієї</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="20"/>
@@ -3023,7 +3045,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="117"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="312"/>
         <source>Formula wizard</source>
-        <translation>Мастер формул</translation>
+        <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="165"/>
@@ -3050,7 +3072,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="463"/>
         <source>Point label:</source>
-        <translation>Ім&apos;я точки:</translation>
+        <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="470"/>
@@ -3153,6 +3175,10 @@
         <translation>Остаточні вимірювання</translation>
     </message>
     <message>
+        <source>Find:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="52"/>
         <source>Search</source>
         <translation>Пошук</translation>
@@ -3251,12 +3277,12 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.cpp" line="563"/>
         <source>Empty field</source>
-        <translation>Пусте поле</translation>
+        <translation>Порожнє поле</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.cpp" line="586"/>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
-        <translation>Недійсний результат. Значення безкінечність чи NaN, перевірте ваші розрахунки.</translation>
+        <translation>Недійсний результат. Значення нескінченність чи NaN, перевірте ваші розрахунки.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.cpp" line="593"/>
@@ -3293,17 +3319,17 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="127"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match words &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Співпадіння по словам &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Збіг за словами &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="161"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match with regular expressions &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Співпадіння по регулярному виразу &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Збіг за регулярним виразом &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="192"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use unicode properties &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;The meaning of the \w, \d, etc., character classes, as well as the meaning of their counterparts (\W, \D, etc.), is changed from matching ASCII characters only to matching any character with the corresponding Unicode property. For instance, \d is changed to match any character with the Unicode Nd (decimal digit) property; \w to match any character with either the Unicode L (letter) or N (digit) property, plus underscore, and so on. This option corresponds to the /u modifier in Perl regular expressions.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Використовувати властивості Unicode &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;Значення класів символів \w, \d і т.д., а також значення їх аналогів (\W, \D і т.д.) змінено з відповідності лише символам ASCII на відповідність будь-якому символу з властивістю Unicode. Наприклад, \d відповідатиме будь-якому символу з властивістю Unicode Nd (десяткова цифра); \w буде відповідати будь-якому символу з властивістю Unicode L (літера) або N (цифра) плюс знак підкреслення, і так далі. Ця опція відповідає модифікатору /u у регулярних виразах Perl.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Використовувати властивості Unicode &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;Значення класів символів \w, \d тощо, а також значення їх аналогів (\W, \D тощо) змінено з відповідності лише символам ASCII на відповідність будь-якому символу з властивістю Unicode. Наприклад, \d відповідатиме будь-якому символу з властивістю Unicode Nd (десяткова цифра); \w буде відповідати будь-якому символу з властивістю Unicode L (буква) або N (цифра) плюс знак підкреслення тощо. Ця опція відповідає модифікатору /u у регулярних виразах Perl.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="198"/>
@@ -3360,7 +3386,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="277"/>
         <source>Select origin point that is not part of the list of objects</source>
-        <translation>Виберіть початкову точку, що не є частиною списку обєктів</translation>
+        <translation>Виберіть початкову точку, що не є частиною списку об&apos;єктів</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="586"/>
@@ -3386,12 +3412,12 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="168"/>
         <source>Name:</source>
-        <translation>Імя:</translation>
+        <translation>Ім&apos;я:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="167"/>
         <source>Rotation</source>
-        <translation>Поворот</translation>
+        <translation>Обертання</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="185"/>
@@ -3444,12 +3470,12 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="332"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="348"/>
         <source>Invalid suffix</source>
-        <translation>Невірний суфікс</translation>
+        <translation>Недійсний суфікс</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="372"/>
         <source>Invalid group name</source>
-        <translation>Недійсне ім’я групи</translation>
+        <translation>Недійсна назва групи</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="401"/>
@@ -3464,17 +3490,17 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="569"/>
         <source>Invalid point</source>
-        <translation>Невірна точка</translation>
+        <translation>Неправильна точка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="634"/>
         <source>Invalid label</source>
-        <translation>Невірна мітка</translation>
+        <translation>Неправильна мітка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="634"/>
         <source>Invalid alias</source>
-        <translation>Невірний псевдонім</translation>
+        <translation>Неправильний псевдонім</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="153"/>
@@ -3511,7 +3537,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="277"/>
         <source>Select first line point that is not part of the list of objects</source>
-        <translation>Виберіть першу точку лінії, що не є частиною списку обєктів</translation>
+        <translation>Виберіть першу точку лінії, що не є частиною списку об&apos;єктів</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="281"/>
@@ -3521,7 +3547,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="293"/>
         <source>Select second line point that is not part of the list of objects</source>
-        <translation>Виберіть другу точку лінії, що не є частиною списку обєктів</translation>
+        <translation>Виберіть другу точку лінії, що не є частиною списку об&apos;єктів</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="14"/>
@@ -3537,12 +3563,12 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="168"/>
         <source>Name:</source>
-        <translation>Імя:</translation>
+        <translation>Ім&apos;я:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="166"/>
         <source>Rotation</source>
-        <translation>Поворот</translation>
+        <translation>Обертання</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="185"/>
@@ -3595,12 +3621,12 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="359"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="375"/>
         <source>Invalid suffix</source>
-        <translation>Невірний суфікс</translation>
+        <translation>Неправильний суфікс</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="399"/>
         <source>Invalid group name</source>
-        <translation>Недійсне ім’я групи</translation>
+        <translation>Неправильна назва групи</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="428"/>
@@ -3630,12 +3656,12 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="672"/>
         <source>Invalid label</source>
-        <translation>Невірна мітка</translation>
+        <translation>Неправильна мітка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="672"/>
         <source>Invalid alias</source>
-        <translation>Невірний псевдонім</translation>
+        <translation>Неправильний псевдонім</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="153"/>
@@ -3653,16 +3679,16 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggroup.ui" line="26"/>
         <source>Group name:</source>
-        <translation>Ім&apos;я групи:</translation>
+        <translation>Назва групи:</translation>
     </message>
     <message>
         <source>Unique pattern piece name</source>
-        <translation type="vanished">Унікальне ім&apos;я лекала</translation>
+        <translation type="vanished">Унікальна назва лекала</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggroup.ui" line="36"/>
         <source>Choose group name</source>
-        <translation>Виберіть ім&apos;я групи</translation>
+        <translation>Виберіть назву групи</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggroup.cpp" line="95"/>
@@ -3689,7 +3715,7 @@
     <name>DialogHeight</name>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Ім&apos;я точки</translation>
+        <translation type="vanished">Назва точки</translation>
     </message>
     <message>
         <source>Base point</source>
@@ -3737,7 +3763,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="46"/>
         <source>Point label:</source>
-        <translation>Ім&apos;я точки:</translation>
+        <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="53"/>
@@ -3872,7 +3898,7 @@
     </message>
     <message>
         <source>%1 - cut arc with center %2</source>
-        <translation type="vanished">%1 - розразає дугу з центром в точці %2</translation>
+        <translation type="vanished">%1 - розрізає дугу з центром в точці %2</translation>
     </message>
     <message>
         <source>%1 - cut curve %2_%3</source>
@@ -3934,7 +3960,7 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="339"/>
         <source>Cubic bezier curve</source>
-        <translation>Кубічна крива бьзье</translation>
+        <translation>Кубічна крива Безьє</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="345"/>
@@ -3956,7 +3982,7 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="365"/>
         <source>Cubic bezier curve path</source>
-        <translation>Складна кубічна крива безье</translation>
+        <translation>Складна кубічна крива Безьє</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="397"/>
@@ -4039,12 +4065,12 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="170"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match with regular expressions &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Співпадіння по регулярному виразу &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Збіги за регулярним виразом &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="202"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use unicode properties &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;The meaning of the \w, \d, etc., character classes, as well as the meaning of their counterparts (\W, \D, etc.), is changed from matching ASCII characters only to matching any character with the corresponding Unicode property. For instance, \d is changed to match any character with the Unicode Nd (decimal digit) property; \w to match any character with either the Unicode L (letter) or N (digit) property, plus underscore, and so on. This option corresponds to the /u modifier in Perl regular expressions.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Використовувати властивості Unicode &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;Значення класів символів \w, \d і т.д., а також значення їх аналогів (\W, \D і т.д.) змінено з відповідності лише символам ASCII на відповідність будь-якому символу з властивістю Unicode. Наприклад, \d відповідатиме будь-якому символу з властивістю Unicode Nd (десяткова цифра); \w буде відповідати будь-якому символу з властивістю Unicode L (літера) або N (цифра) плюс знак підкреслення, і так далі. Ця опція відповідає модифікатору /u у регулярних виразах Perl.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Використовувати властивості Unicode &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;Значення класів символів \w, \d тощо, а також значення їх аналогів (\W, \D тощо) змінено з відповідності лише символам ASCII на відповідність будь-якому символу з властивістю Unicode. Наприклад, \d відповідатиме будь-якому символу з властивістю Unicode Nd (десяткова цифра); \w буде відповідати будь-якому символу з властивістю Unicode L (буква) або N (цифра) плюс знак підкреслення, і так далі. Ця опція відповідає модифікатору /u у регулярних виразах Perl.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="208"/>
@@ -4201,7 +4227,7 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="492"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1147"/>
         <source>Name:</source>
-        <translation>Імя:</translation>
+        <translation>Ім&apos;я:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="516"/>
@@ -4246,7 +4272,7 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="376"/>
         <source>Empty field</source>
-        <translation>Пусте поле</translation>
+        <translation>Порожнє поле</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="404"/>
@@ -4271,7 +4297,7 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="502"/>
         <source>Unique increment name</source>
-        <translation>Унікальне ім&apos;я прибавки</translation>
+        <translation>Унікальна назва прибавки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="554"/>
@@ -4283,7 +4309,7 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="611"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1259"/>
         <source>Formula wizard</source>
-        <translation>Мастер формул</translation>
+        <translation>Майстер формул</translation>
     </message>
     <message>
         <source>Invalid value</source>
@@ -4308,7 +4334,7 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="399"/>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
-        <translation>Недійсний результат. Значення безкінечність чи NaN, перевірте ваші розрахунки.</translation>
+        <translation>Недійсний результат. Значення нескінченність чи NaN, перевірте ваші розрахунки.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="674"/>
@@ -4379,13 +4405,13 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="192"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="847"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match with regular expressions &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Співпадіння по регулярному виразу &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Збіг за регулярним виразом &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="223"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="878"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use unicode properties &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;The meaning of the \w, \d, etc., character classes, as well as the meaning of their counterparts (\W, \D, etc.), is changed from matching ASCII characters only to matching any character with the corresponding Unicode property. For instance, \d is changed to match any character with the Unicode Nd (decimal digit) property; \w to match any character with either the Unicode L (letter) or N (digit) property, plus underscore, and so on. This option corresponds to the /u modifier in Perl regular expressions.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Використовувати властивості Unicode &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;Значення класів символів \w, \d і т.д., а також значення їх аналогів (\W, \D і т.д.) змінено з відповідності лише символам ASCII на відповідність будь-якому символу з властивістю Unicode. Наприклад, \d відповідатиме будь-якому символу з властивістю Unicode Nd (десяткова цифра); \w буде відповідати будь-якому символу з властивістю Unicode L (літера) або N (цифра) плюс знак підкреслення, і так далі. Ця опція відповідає модифікатору /u у регулярних виразах Perl.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Використовувати властивості Unicode &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;Значення класів символів \w, \d тощо, а також значення їх аналогів (\W, \D тощо) змінено з відповідності лише символам ASCII на відповідність будь-якому символу з властивістю Unicode. Наприклад, \d відповідатиме будь-якому символу з властивістю Unicode Nd (десяткова цифра); \w буде відповідати будь-якому символу з властивістю Unicode L (буква) або N (цифра) плюс знак підкреслення, і так далі. Ця опція відповідає модифікатору /u у регулярних виразах Perl.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="229"/>
@@ -4499,11 +4525,11 @@
     <name>DialogLayoutProgress</name>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
-        <translation type="vanished">Не вдалося підготувати данні для створення розкладки</translation>
+        <translation type="vanished">Не вдалося підготувати дані для створення розкладки</translation>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation type="vanished">Декілька деталей залишилися укладеними, але жодна з них не підійшла для листа</translation>
+        <translation type="vanished">Кілька деталей залишилися укладеними, але жодна з них не підійшла для листа</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutprogress.ui" line="17"/>
@@ -4593,6 +4619,10 @@
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="150"/>
         <source>Vertical:</source>
         <translation>По вертикалі:</translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -4691,7 +4721,7 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="581"/>
         <source>Unite pages (if possible)</source>
-        <translation>Обєднати сторінки (якщо це можливо)</translation>
+        <translation>Об&apos;єднати сторінки (якщо можливо)</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="386"/>
@@ -4701,7 +4731,7 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="456"/>
         <source>Save length of the sheet</source>
-        <translation>Зберегти довжину аркушу</translation>
+        <translation>Зберегти довжину аркуша</translation>
     </message>
     <message>
         <source>Letter</source>
@@ -4746,7 +4776,7 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="44"/>
         <source>Paper format</source>
-        <translation>Формат листу</translation>
+        <translation>Формат листа</translation>
     </message>
     <message>
         <source>Fields</source>
@@ -4791,7 +4821,7 @@
 Apply settings anyway?</source>
         <translation type="vanished">Поля виходять за границі друку. 
 
-Застосувати налаштування незважаючи на це?</translation>
+Усе одно застосувати налаштування?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.cpp" line="513"/>
@@ -4820,12 +4850,12 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Enabling for sheets that have big height will speed up creating. </source>
-        <translation type="vanished">При ввімкненні для листів що мають велику довжину пришвидшує створення.</translation>
+        <translation type="vanished">Увімкнення для листів, що мають велику довжину пришвидшує створення.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="598"/>
         <source>Divide into strips</source>
-        <translation>Розділити на полоси</translation>
+        <translation>Розділити на смуги</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="610"/>
@@ -4844,7 +4874,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="595"/>
         <source>Enabling for sheets that have big height will speed up creating.</source>
-        <translation>При ввімкненні для листів що мають велику довжину пришвидшує створення.</translation>
+        <translation>Увімкнення для листів, що мають велику довжину пришвидшує створення.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="228"/>
@@ -4865,7 +4895,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="333"/>
         <source>Text will be converted to paths</source>
-        <translation>Текст буде перетворено в контури</translation>
+        <translation>Текст буде перетворено на контури</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="336"/>
@@ -4889,7 +4919,7 @@ Apply settings anyway?</source>
 Apply settings anyway?</source>
         <translation>Поля виходять за рамки друку.
 
-Все одно застосувати налаштування?</translation>
+Усе одно застосувати налаштування?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="480"/>
@@ -4950,7 +4980,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="438"/>
         <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made.</source>
-        <translation>Встановити коефіцієнт ефективності компоновки. Коефіцієнт ефективності компоновки — це відношення площі, яку займають фрагменти, до описаного прямокутника всіх деталей. Якщо вкладення досягає необхідного рівня, процес зупиняється. Якщо значення дорівнює 0, перевірка не проводиться.</translation>
+        <translation>Налаштувати коефіцієнт ефективності компонування. Коефіцієнт ефективності компонування — це відношення площі, яку займають фрагменти, до описаного прямокутника всіх деталей. Якщо вкладення досягає необхідного рівня, процес зупиняється. Якщо значення дорівнює 0, перевірка не проводиться.</translation>
     </message>
 </context>
 <context>
@@ -4969,7 +4999,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation type="vanished">Показати лінію від першої точки до даної</translation>
+        <translation type="vanished">Показати лінію від першої точки до цієї</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.cpp" line="189"/>
@@ -5020,7 +5050,7 @@ Apply settings anyway?</source>
     <name>DialogLineIntersect</name>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Ім&apos;я точки</translation>
+        <translation type="vanished">Назва точки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="64"/>
@@ -5043,7 +5073,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.cpp" line="128"/>
         <source>Select second point of first line</source>
-        <translation>Виберіть другу точка першої лінії</translation>
+        <translation>Виберіть другу точку першої лінії</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.cpp" line="137"/>
@@ -5063,7 +5093,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="45"/>
         <source>Point label:</source>
-        <translation>Ім&apos;я точки:</translation>
+        <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="52"/>
@@ -5132,7 +5162,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Ім&apos;я точки</translation>
+        <translation type="vanished">Назва точки</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -5141,7 +5171,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="330"/>
         <source>Show line from first point to this point</source>
-        <translation>Показати лінію від першої точки до даної</translation>
+        <translation>Показати лінію від першої точки до цієї</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="287"/>
@@ -5185,7 +5215,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="99"/>
         <source>Formula wizard</source>
-        <translation>Мастер формул</translation>
+        <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="141"/>
@@ -5215,7 +5245,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="288"/>
         <source>Point label:</source>
-        <translation>Ім&apos;я точки:</translation>
+        <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="301"/>
@@ -5307,7 +5337,7 @@ Apply settings anyway?</source>
         <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="391"/>
         <source>Bust</source>
         <comment>Measurement section</comment>
-        <translation>Грудь</translation>
+        <translation>Груди</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="132"/>
@@ -5382,7 +5412,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="304"/>
         <source>Collapse All</source>
-        <translation>Звернути всі</translation>
+        <translation>Згорнути всі</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="307"/>
@@ -5392,12 +5422,12 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="317"/>
         <source>Check all</source>
-        <translation>Відмітити все</translation>
+        <translation>Позначити все</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="317"/>
         <source>Uncheck all</source>
-        <translation>Зняти виділення з усіх</translation>
+        <translation>Прибрати виділення з усіх</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogmdatabase.ui" line="32"/>
@@ -5563,7 +5593,7 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="367"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="547"/>
         <source>Formula wizard</source>
-        <translation>Мастер формул</translation>
+        <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="229"/>
@@ -5640,12 +5670,12 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="710"/>
         <source>Name:</source>
-        <translation>Імя:</translation>
+        <translation>Ім&apos;я:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="283"/>
         <source>Rotation</source>
-        <translation>Поворот</translation>
+        <translation>Обертання</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="727"/>
@@ -5698,12 +5728,12 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="525"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="541"/>
         <source>Invalid suffix</source>
-        <translation>Невірний суфікс</translation>
+        <translation>Неправильний суфікс</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="565"/>
         <source>Invalid group name</source>
-        <translation>Недійсне ім’я групи</translation>
+        <translation>Неправильна назва групи</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="594"/>
@@ -5733,12 +5763,12 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="884"/>
         <source>Invalid label</source>
-        <translation>Невірна мітка</translation>
+        <translation>Неправильна мітка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="884"/>
         <source>Invalid alias</source>
-        <translation>Невірний псевдонім</translation>
+        <translation>Неправильний псевдонім</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="695"/>
@@ -5798,7 +5828,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/tape/dialogs/dialognewmeasurements.cpp" line="112"/>
         <source>Multisize</source>
-        <translation>Мультирозмірні</translation>
+        <translation>Багаторозмірні</translation>
     </message>
 </context>
 <context>
@@ -5809,7 +5839,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pattern piece name</source>
-        <translation type="vanished">Ім&apos;я лекала</translation>
+        <translation type="vanished">Назва лекала</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.ui" line="52"/>
@@ -5834,17 +5864,17 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.ui" line="35"/>
         <source>Pattern piece name:</source>
-        <translation>Ім&apos;я лекала:</translation>
+        <translation>Назва лекала:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.ui" line="42"/>
         <source>Unique pattern piece name</source>
-        <translation>Унікальне ім&apos;я лекала</translation>
+        <translation>Унікальна назва лекала</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.ui" line="45"/>
         <source>Choose unique pattern piece name.</source>
-        <translation>Виберіть унікальне ім&apos;я лекала.</translation>
+        <translation>Виберіть унікальну назву лекала.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.ui" line="17"/>
@@ -5869,7 +5899,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Ім&apos;я точки</translation>
+        <translation type="vanished">Назва точки</translation>
     </message>
     <message>
         <source>First point</source>
@@ -5889,7 +5919,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation type="vanished">Показати лінію від першої точки до даної</translation>
+        <translation type="vanished">Показати лінію від першої точки до цієї</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.cpp" line="209"/>
@@ -5926,7 +5956,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="102"/>
         <source>Formula wizard</source>
-        <translation>Мастер формул</translation>
+        <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="144"/>
@@ -5941,7 +5971,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="228"/>
         <source>Point label:</source>
-        <translation>Ім&apos;я точки:</translation>
+        <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="235"/>
@@ -6029,7 +6059,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>For technical notes.</source>
-        <translation type="vanished">Для технічних заміток.</translation>
+        <translation type="vanished">Для технічних приміток.</translation>
     </message>
     <message>
         <source>Heights and Sizes</source>
@@ -6037,11 +6067,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>All heights (cm)</source>
-        <translation type="vanished">Всі зрости (см)</translation>
+        <translation type="vanished">Усі зрости (см)</translation>
     </message>
     <message>
         <source>All sizes (cm)</source>
-        <translation type="vanished">Всі розміри (см)</translation>
+        <translation type="vanished">Усі розміри (см)</translation>
     </message>
     <message>
         <source>Default height and size</source>
@@ -6076,32 +6106,32 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="253"/>
         <source>Call context menu for edit</source>
-        <translation>Виклечіть контекстне меню для редагування</translation>
+        <translation>Викличте контекстне меню для редагування</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="128"/>
         <source>Passmark width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Довжина надсічки:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="144"/>
         <source>Default piece label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаблон мітки деталі за замовчуванням</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="163"/>
         <source>Path to default label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Шлях до шаблона мітки за замовчуванням</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="179"/>
         <source>Select path to label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Вибрати шлях до шаблону мітки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="182"/>
         <source>Browse…</source>
-        <translation type="unfinished">Переглянути…</translation>
+        <translation>Огляд…</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="256"/>
@@ -6127,7 +6157,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="383"/>
         <source>Show image</source>
-        <translation>Показати позбраження</translation>
+        <translation>Показати зображення</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="414"/>
@@ -6138,7 +6168,7 @@ Apply settings anyway?</source>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="517"/>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="519"/>
         <source>Label template</source>
-        <translation type="unfinished">Шаблон мітки</translation>
+        <translation>Шаблон мітки</translation>
     </message>
     <message>
         <source>Images (*.png *.jpg *.jpeg *.bmp)</source>
@@ -6155,7 +6185,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="448"/>
         <source>untitled</source>
-        <translation>без імені</translation>
+        <translation>без назви</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="36"/>
@@ -6189,7 +6219,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pattern name:</source>
-        <translation type="vanished">Ім&apos;я лекала:</translation>
+        <translation type="vanished">Назва лекала:</translation>
     </message>
     <message>
         <source>Pattern number:</source>
@@ -6221,7 +6251,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Use %1 and %2 to insert pattern size and height</source>
-        <translation type="vanished">Використовуй %1 і %2 для того щоб вставити розмір і зріст викрійки</translation>
+        <translation type="vanished">Використовуйте %1 і %2, щоб вставити розмір і зріст викрійки</translation>
     </message>
     <message>
         <source>Show date of layout creation (%1)</source>
@@ -6239,12 +6269,16 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="278"/>
         <source>For technical notes</source>
-        <translation>Для технічних заміток</translation>
+        <translation>Для технічних приміток</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="97"/>
         <source>Label language:</source>
         <translation>Мова назви точки:</translation>
+    </message>
+    <message>
+        <source>yyyy-MM-dd</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="114"/>
@@ -6310,11 +6344,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Remove attribute</source>
-        <translation type="vanished">Видалити атрибут</translation>
+        <translation type="vanished">Вилучити атрибут</translation>
     </message>
     <message>
         <source>Remove node</source>
-        <translation type="vanished">Видалити вузол</translation>
+        <translation type="vanished">Вилучити вузол</translation>
     </message>
     <message>
         <source>Set</source>
@@ -6322,7 +6356,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Відмінити</translation>
+        <translation type="vanished">Скасувати</translation>
     </message>
     <message>
         <source>Apply changes</source>
@@ -6330,7 +6364,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Undo last</source>
-        <translation type="vanished">Відмінити останнє</translation>
+        <translation type="vanished">Скасувати останнє</translation>
     </message>
     <message>
         <source>Immediate apply</source>
@@ -6342,7 +6376,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>All pattern pieces</source>
-        <translation type="vanished">Всі лекала</translation>
+        <translation type="vanished">Усі лекала</translation>
     </message>
     <message>
         <source>No changes</source>
@@ -6358,7 +6392,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Cannot undo change</source>
-        <translation type="vanished">Не можу відмінити зміни</translation>
+        <translation type="vanished">Не можу скасувати зміни</translation>
     </message>
     <message>
         <source>&lt;no value&gt;</source>
@@ -6374,15 +6408,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Node Name</source>
-        <translation type="vanished">Імя вузла</translation>
+        <translation type="vanished">Назва вузла</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="vanished">Імя:</translation>
+        <translation type="vanished">Ім&apos;я:</translation>
     </message>
     <message>
         <source>Node Value (may be empty)</source>
-        <translation type="vanished">Значення вузла (може бути пустим)</translation>
+        <translation type="vanished">Значення вузла (може бути порожнім)</translation>
     </message>
     <message>
         <source>Value:</source>
@@ -6390,11 +6424,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Attribute Name</source>
-        <translation type="vanished">Ім&apos;я атрибуту</translation>
+        <translation type="vanished">Назва атрибута</translation>
     </message>
     <message>
         <source>Attribute Value</source>
-        <translation type="vanished">Значення атрибуту</translation>
+        <translation type="vanished">Значення атрибута</translation>
     </message>
     <message>
         <source>No selection</source>
@@ -6406,7 +6440,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Node</source>
-        <translation type="vanished">Вузел</translation>
+        <translation type="vanished">Вузол</translation>
     </message>
     <message>
         <source>Attribute</source>
@@ -6440,7 +6474,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="39"/>
         <source>Name:</source>
-        <translation>Імя:</translation>
+        <translation>Ім&apos;я:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="46"/>
@@ -6450,7 +6484,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="49"/>
         <source>Create name for your path</source>
-        <translation>Створіть імя для вашого контуру</translation>
+        <translation>Створіть назву для вашого контуру</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="56"/>
@@ -6493,7 +6527,7 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1759"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2003"/>
         <source>Formula wizard</source>
-        <translation>Мастер формул</translation>
+        <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="350"/>
@@ -6535,7 +6569,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="434"/>
         <source>Node:</source>
-        <translation>Вузел:</translation>
+        <translation>Вузол:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="508"/>
@@ -6592,12 +6626,12 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1047"/>
         <source>Edit passmark width</source>
-        <translation type="unfinished"></translation>
+        <translation>Редагувати довжину надсічки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1060"/>
         <source>Edit passmark angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Редагувати кут надсічки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1336"/>
@@ -6634,6 +6668,10 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="920"/>
         <source>Passmark:</source>
         <translation>Надсічка:</translation>
+    </message>
+    <message>
+        <source>Lines</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="956"/>
@@ -6679,22 +6717,22 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="995"/>
         <source>T mark</source>
-        <translation>Т позначка</translation>
+        <translation>Т-позначка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1011"/>
         <source>V mark</source>
-        <translation>V позначка</translation>
+        <translation>V-позначка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1866"/>
         <source>Please, select a detail to insert into!</source>
-        <translation>Будьласка, виберіть деталь для вставки!</translation>
+        <translation>Будь ласка, виберіть деталь для вставки!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1860"/>
         <source>List of details is empty!</source>
-        <translation>Список деталей пустий!</translation>
+        <translation>Список деталей порожній!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1108"/>
@@ -6720,12 +6758,12 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="936"/>
         <source>Type</source>
-        <translation type="unfinished">Тип</translation>
+        <translation>Тип</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1057"/>
         <source>Check mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Вибрати позначку</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1124"/>
@@ -6752,40 +6790,40 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1209"/>
         <source>Clockwise opening</source>
-        <translation type="unfinished"></translation>
+        <translation>Відкриття за годинниковою стрілкою</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1217"/>
         <source>Manual shape</source>
-        <translation type="unfinished"></translation>
+        <translation>Manual shape</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1226"/>
         <source>Length</source>
-        <translation type="unfinished">Довжина</translation>
+        <translation>Довжина</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1286"/>
         <source>Length:</source>
         <comment>notch depth</comment>
-        <translation type="unfinished">Довжина:</translation>
+        <translation>Довжина:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1451"/>
         <source>Width</source>
-        <translation type="unfinished">Ширина</translation>
+        <translation>Ширина</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1511"/>
         <source>Width:</source>
         <comment>notch width</comment>
-        <translation type="unfinished">Ширина:</translation>
+        <translation>Ширина:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1736"/>
         <source>Angle:</source>
         <comment>notch angle</comment>
-        <translation type="unfinished">Кут:</translation>
+        <translation>Кут:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1929"/>
@@ -6835,7 +6873,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="127"/>
         <source>Move on top</source>
-        <translation>Перемістіться на вершину</translation>
+        <translation>Перемістити на вершину</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="144"/>
@@ -6865,7 +6903,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="207"/>
         <source>The path is a cut contour. Use to control export to DXF-AAMA</source>
-        <translation>Контур деталі – це контур вирізування. Використовується для управління експортом до DXF-AAMA</translation>
+        <translation>Контур деталі – це контур вирізування. Використовується для керування експортом до DXF-AAMA</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1790"/>
@@ -6875,7 +6913,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1905"/>
         <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
-        <translation>Ця опція має ефект тільки коли друга надсічка на лінії шву включена в глобальних налаштуваннях. Ця опція допомагає віключати другу надсічку для цієї надсічки.</translation>
+        <translation>Ця опція має ефект тільки коли друга надсічка на лінії шва включена в глобальних налаштуваннях. Ця опція допомагає виключати другу надсічку для цієї надсічки.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1908"/>
@@ -6919,7 +6957,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1027"/>
         <source>V mark 2</source>
-        <translation>V позначка 2</translation>
+        <translation>V-позначка 2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="176"/>
@@ -6927,17 +6965,13 @@ Apply settings anyway?</source>
         <translation>Вибрати об&apos;єкти головного контуру, &lt;b&gt;%1&lt;/b&gt; - протилежний напрямок кривої, &lt;b&gt;%2&lt;/b&gt; - закінчити створення</translation>
     </message>
     <message>
-        <source>Manual length</source>
-        <translation type="vanished">Ручна довжина</translation>
-    </message>
-    <message>
         <source>Length:</source>
-        <translation type="vanished">Довжина:</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1037"/>
         <source>U mark</source>
-        <translation>U позначка</translation>
+        <translation>U-позначка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1047"/>
@@ -6962,6 +6996,10 @@ Apply settings anyway?</source>
 </context>
 <context>
     <name>DialogPin</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished"/>
+    </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpin.ui" line="21"/>
         <source>Pin tool</source>
@@ -6990,6 +7028,10 @@ Apply settings anyway?</source>
 </context>
 <context>
     <name>DialogPlaceLabel</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished"/>
+    </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="79"/>
         <source>Width:</source>
@@ -7159,11 +7201,11 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="14"/>
         <source>Point from arc and tangent</source>
-        <translation>Точка перетину дуги і дотичної</translation>
+        <translation>Точка перетину дуги та дотичної</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Ім&apos;я точки</translation>
+        <translation type="vanished">Назва точки</translation>
     </message>
     <message>
         <source>Tangent point</source>
@@ -7189,7 +7231,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="43"/>
         <source>Point label:</source>
-        <translation>Ім&apos;я точки:</translation>
+        <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="50"/>
@@ -7245,7 +7287,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Ім&apos;я точки</translation>
+        <translation type="vanished">Назва точки</translation>
     </message>
     <message>
         <source>Center of the circle</source>
@@ -7306,7 +7348,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="225"/>
         <source>Point label:</source>
-        <translation>Ім&apos;я точки:</translation>
+        <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="232"/>
@@ -7361,7 +7403,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Ім&apos;я точки</translation>
+        <translation type="vanished">Назва точки</translation>
     </message>
     <message>
         <source>Center of arc</source>
@@ -7403,7 +7445,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="102"/>
         <source>Formula wizard</source>
-        <translation>Мастер формул</translation>
+        <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="144"/>
@@ -7418,7 +7460,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="228"/>
         <source>Point label:</source>
-        <translation>Ім&apos;я точки:</translation>
+        <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="235"/>
@@ -7460,7 +7502,7 @@ Apply settings anyway?</source>
     <name>DialogPointOfIntersection</name>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Ім&apos;я точки</translation>
+        <translation type="vanished">Назва точки</translation>
     </message>
     <message>
         <source>First point of angle</source>
@@ -7491,7 +7533,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="43"/>
         <source>Point label:</source>
-        <translation>Ім&apos;я точки:</translation>
+        <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="56"/>
@@ -7532,7 +7574,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Ім&apos;я точки</translation>
+        <translation type="vanished">Назва точки</translation>
     </message>
     <message>
         <source>First arc</source>
@@ -7558,7 +7600,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="43"/>
         <source>Point label:</source>
-        <translation>Ім&apos;я точки:</translation>
+        <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="50"/>
@@ -7623,7 +7665,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Ім&apos;я точки</translation>
+        <translation type="vanished">Назва точки</translation>
     </message>
     <message>
         <source>Center of the first circle</source>
@@ -7678,7 +7720,7 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="99"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="279"/>
         <source>Formula wizard</source>
-        <translation>Мастер формул</translation>
+        <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="141"/>
@@ -7700,7 +7742,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="405"/>
         <source>Point label:</source>
-        <translation>Ім&apos;я точки:</translation>
+        <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="412"/>
@@ -7828,12 +7870,12 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpreferences.ui" line="14"/>
         <source>Preferences</source>
-        <translation>Властивості</translation>
+        <translation>Налаштування</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpreferences.ui" line="60"/>
         <source>Configuration</source>
-        <translation>Налаштування</translation>
+        <translation>Конфігурація</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpreferences.ui" line="75"/>
@@ -7848,11 +7890,7 @@ Apply settings anyway?</source>
     <message numerus="yes">
         <location filename="../../src/app/valentina/dialogs/dialogpreferences.cpp" line="150"/>
         <source>Followed %n option(s) require restart to take effect: %1.</source>
-        <translation>
-            <numerusform>Щоб набрати чинності, %n параметр вимагає перезапуску: %1.</numerusform>
-            <numerusform>Щоб набрати чинності, %n параметра вимагає перезапуску: %1.</numerusform>
-            <numerusform>Щоб набрати чинності, %n параметрів вимагає перезапуску: %1.</numerusform>
-        </translation>
+        <translation><numerusform>Щоб набрати чинності, %n параметр вимагає перезапуску: %1.</numerusform><numerusform>Щоб набрати чинності, %n параметра вимагає перезапуску: %1.</numerusform><numerusform>Щоб набрати чинності, %n параметрів вимагає перезапуску: %1.</numerusform><numerusform>Потрібен перезапуск, щоб %n параметр(и) набрали чинності: %1.</numerusform></translation>
     </message>
 </context>
 <context>
@@ -7865,7 +7903,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogpuzzlepreferences.ui" line="60"/>
         <source>Configuration</source>
-        <translation>Налаштування</translation>
+        <translation>Конфігурація</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogpuzzlepreferences.ui" line="87"/>
@@ -7875,11 +7913,7 @@ Apply settings anyway?</source>
     <message numerus="yes">
         <location filename="../../src/app/puzzle/dialogs/dialogpuzzlepreferences.cpp" line="138"/>
         <source>Followed %n option(s) require restart to take effect: %1.</source>
-        <translation>
-            <numerusform>Щоб набрати чинності, %n параметр вимагає перезапуску: %1.</numerusform>
-            <numerusform>Щоб набрати чинності, %n параметра вимагає перезапуску: %1.</numerusform>
-            <numerusform>Щоб набрати чинності, %n параметрів вимагає перезапуску: %1.</numerusform>
-        </translation>
+        <translation><numerusform>Щоб набрати чинності, %n параметр вимагає перезапуску: %1.</numerusform><numerusform>Щоб набрати чинності, %n параметра вимагає перезапуску: %1.</numerusform><numerusform>Щоб набрати чинності, %n параметрів вимагає перезапуску: %1.</numerusform><numerusform>Потрібен перезапуск, щоб %n параметр(и) набрали чинності: %1.</numerusform></translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogpuzzlepreferences.ui" line="75"/>
@@ -7932,7 +7966,7 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="341"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="195"/>
         <source>Rotation</source>
-        <translation>Поворот</translation>
+        <translation>Обертання</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="160"/>
@@ -7980,7 +8014,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select origin point that is not part of the list of objects</source>
-        <translation type="vanished">Виберіть початкову точку, що не є частиною списку обєктів</translation>
+        <translation type="vanished">Виберіть початкову точку, що не є частиною списку об&apos;єктів</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="248"/>
@@ -8000,7 +8034,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="351"/>
         <source>Name:</source>
-        <translation>Імя:</translation>
+        <translation>Ім&apos;я:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="334"/>
@@ -8052,12 +8086,12 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="425"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="441"/>
         <source>Invalid suffix</source>
-        <translation>Невірний суфікс</translation>
+        <translation>Неправильний суфікс</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="465"/>
         <source>Invalid group name</source>
-        <translation>Недійсне ім’я групи</translation>
+        <translation>Неправильна назва групи</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="541"/>
@@ -8067,12 +8101,12 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="596"/>
         <source>Invalid label</source>
-        <translation>Невірна мітка</translation>
+        <translation>Неправильна мітка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="596"/>
         <source>Invalid alias</source>
-        <translation>Невірний псевдонім</translation>
+        <translation>Неправильний псевдонім</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="643"/>
@@ -8133,16 +8167,16 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="39"/>
         <source>Destination folder</source>
-        <translation>Папка призначення</translation>
+        <translation>Тека призначення</translation>
     </message>
     <message>
         <source>Path to destination folder.</source>
-        <translation type="vanished">Шлях до папки призначення.</translation>
+        <translation type="vanished">Шлях до теки призначення.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="55"/>
         <source>Select path to destination folder</source>
-        <translation>Вибрати шлях до папки призначення</translation>
+        <translation>Вибрати шлях до теки призначення</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="556"/>
@@ -8176,7 +8210,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="138"/>
         <source>Show grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати нитку основи</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="307"/>
@@ -8207,6 +8241,10 @@ Apply settings anyway?</source>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="450"/>
         <source>Paper format</source>
         <translation>Формат паперу</translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="58"/>
@@ -8257,12 +8295,12 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="402"/>
         <source>Name conflict</source>
-        <translation>Конфлікт імені</translation>
+        <translation>Конфлікт назви</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="403"/>
         <source>Folder already contain file with name %1. Rewrite all conflict file names?</source>
-        <translation>У папці вже є файл з ім&apos;ям %1. Бажаєте його перезаписати?</translation>
+        <translation>У теці вже є файл з назвою %1. Бажаєте її перезаписати?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="445"/>
@@ -8272,15 +8310,15 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="133"/>
         <source>Select folder</source>
-        <translation>Вибрати папку</translation>
+        <translation>Вибрати теку</translation>
     </message>
     <message>
         <source>Svg files (*.svg)</source>
-        <translation type="vanished">Svg файли (*.svg)</translation>
+        <translation type="vanished">Файли Svg (*.svg)</translation>
     </message>
     <message>
         <source>PDF files (*.pdf)</source>
-        <translation type="vanished">Pdf файли (*.pdf)</translation>
+        <translation type="vanished">Файли PDF (*.pdf)</translation>
     </message>
     <message>
         <source>Images (*.png)</source>
@@ -8292,11 +8330,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>PS files (*.ps)</source>
-        <translation type="vanished">Ps файл (*.ps)</translation>
+        <translation type="vanished">Файли PS (*.ps)</translation>
     </message>
     <message>
         <source>EPS files (*.eps)</source>
-        <translation type="vanished">EPS файл (*.eps)</translation>
+        <translation type="vanished">Файли EPS (*.eps)</translation>
     </message>
     <message>
         <source>DXF files (*.dxf)</source>
@@ -8310,11 +8348,11 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="177"/>
         <source>Selected not present format.</source>
-        <translation>Вибрано не існуючий формат.</translation>
+        <translation>Вибраного формату не існує.</translation>
     </message>
     <message>
         <source>The base filename has not match regular expression.</source>
-        <translation type="vanished">Базове імя файлу не відповідає регулярному виразу.</translation>
+        <translation type="vanished">Базова назва файлу не відповідає регулярному виразу.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="353"/>
@@ -8324,11 +8362,15 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="94"/>
         <source>The base filename does not match a regular expression.</source>
-        <translation>Базове імя файлу не відповідає регулярному виразу.</translation>
+        <translation>Базова назва файлу не відповідає регулярному виразу.</translation>
     </message>
 </context>
 <context>
     <name>DialogSaveManualLayout</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished"/>
+    </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.ui" line="26"/>
         <source>Path:</source>
@@ -8337,7 +8379,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.ui" line="39"/>
         <source>Destination folder</source>
-        <translation>Папка призначення</translation>
+        <translation>Тека призначення</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.ui" line="42"/>
@@ -8347,7 +8389,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.ui" line="58"/>
         <source>Select path to destination folder</source>
-        <translation>Вибрати шлях до папки призначення</translation>
+        <translation>Вибрати шлях до теки призначення</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.ui" line="61"/>
@@ -8372,7 +8414,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.ui" line="141"/>
         <source>Show grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати нитку основи</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.ui" line="154"/>
@@ -8403,12 +8445,12 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="82"/>
         <source>The base filename does not match a regular expression.</source>
-        <translation>Базове імя файлу не відповідає регулярному виразу.</translation>
+        <translation>Базова назва файлу не відповідає регулярному виразу.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="112"/>
         <source>Select folder</source>
-        <translation>Вибрати папку</translation>
+        <translation>Вибрати теку</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="164"/>
@@ -8418,7 +8460,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="170"/>
         <source>Selected not present format.</source>
-        <translation>Вибрано не існуючий формат.</translation>
+        <translation>Вибраного формату не існує.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="294"/>
@@ -8428,12 +8470,12 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="412"/>
         <source>Name conflict</source>
-        <translation>Конфлікт імені</translation>
+        <translation>Конфлікт назви</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="413"/>
         <source>Folder already contain file with name %1. Rewrite all conflict file names?</source>
-        <translation>У папці вже є файл з ім&apos;ям %1. Бажаєте його перезаписати?</translation>
+        <translation>У теці вже є файл з назвою %1. Бажаєте його перезаписати?</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="459"/>
@@ -8450,9 +8492,37 @@ Apply settings anyway?</source>
 <context>
     <name>DialogSeamAllowance</name>
     <message>
+        <source>Seam allowance tool</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>All objects in path should follow in clockwise direction.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Forbid piece be mirrored in a layout.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Forbid flipping</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="556"/>
         <source>Ready!</source>
         <translation>Готовий!</translation>
+    </message>
+    <message>
+        <source>Seam allowance</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1700"/>
@@ -8462,9 +8532,89 @@ Apply settings anyway?</source>
         <translation>Значення</translation>
     </message>
     <message>
+        <source>Calculation</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Pattern piece data</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Letter:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Letter of pattern piece</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Name of detail:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4018"/>
         <source>Detail</source>
         <translation>Деталь</translation>
+    </message>
+    <message>
+        <source>Name can&apos;t be empty</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Material/Cut number/Placement</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Cut number:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Material type:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>You can choose one of the predefined materials or enter a new one</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Placement:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Detail label visible</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Pattern label visible</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1740"/>
@@ -8473,6 +8623,30 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3083"/>
         <source>Grainline</source>
         <translation>Нитка основи</translation>
+    </message>
+    <message>
+        <source>Grainline visible</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Rotation:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Arrows:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Cut %1 of %2%3</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>on Fold</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="756"/>
@@ -8507,14 +8681,14 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1793"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1877"/>
         <source>Infinite/undefined result</source>
-        <translation>Безкінечний/не визначений результат</translation>
+        <translation>Нескінченний/не визначений результат</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1716"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1797"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1881"/>
         <source>Length should be positive</source>
-        <translation>Довжина повинна додатнє значення</translation>
+        <translation>Довжина повинна мати додатне значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1727"/>
@@ -8522,6 +8696,10 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1892"/>
         <source>Parser error: %1</source>
         <translation>Помилка синтаксичного аналізу: %1</translation>
+    </message>
+    <message>
+        <source>Update</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2299"/>
@@ -8546,12 +8724,12 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2516"/>
         <source>Edit passmark width</source>
-        <translation type="unfinished"></translation>
+        <translation>Редагувати довжину надсічки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2529"/>
         <source>Edit passmark angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Редагувати кут надсічки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2814"/>
@@ -8566,7 +8744,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2828"/>
         <source>First point cannot be equal to the last point!</source>
-        <translation>Перша точка не може співпадати з останньою точкою!</translation>
+        <translation>Перша точка не може збігатися з останньою точкою!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2836"/>
@@ -8576,7 +8754,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3308"/>
         <source>Empty</source>
-        <translation>Пусто</translation>
+        <translation>Порожньо</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3355"/>
@@ -8589,16 +8767,24 @@ Apply settings anyway?</source>
         <translation>користувацька прибавка на шви</translation>
     </message>
     <message>
+        <source>None</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Cut on fold</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <source>Both</source>
-        <translation type="vanished">В обидві сторони</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Just front</source>
-        <translation type="vanished">Тільки верхня</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Just rear</source>
-        <translation type="vanished">Тільки нижня</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3081"/>
@@ -8621,6 +8807,10 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3082"/>
         <source>Labels</source>
         <translation>Мітки</translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1724"/>
@@ -8799,73 +8989,73 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3516"/>
         <source>Two ways (Up/Down)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Two ways (Up/Down)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3518"/>
         <source>One way (Up)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>One way (Up)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3520"/>
         <source>One way (Down)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>One way (Down)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3522"/>
         <source>Four ways</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Four ways</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3524"/>
         <source>Two ways (Up/Left)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Two ways (Up/Left)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3526"/>
         <source>Two ways (Up/Right)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Two ways (Up/Right)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3528"/>
         <source>Two ways (Down/Left)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Two ways (Down/Left)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3530"/>
         <source>Two ways (Down/Right)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Two ways (Down/Right)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3532"/>
         <source>Three ways (Up/Down/Left)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Three ways (Up/Down/Left)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3534"/>
         <source>Three ways (Up/Down/Right)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Three ways (Up/Down/Right)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3536"/>
         <source>Three ways (Up/Left/Right)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Three ways (Up/Left/Right)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3538"/>
         <source>Three ways (Down/Left/Right)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Three ways (Down/Left/Right)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4449"/>
@@ -9020,6 +9210,11 @@ Apply settings anyway?</source>
         <translation>Використовуйте повну окружність</translation>
     </message>
     <message>
+        <source>Height</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="76"/>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="214"/>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="352"/>
@@ -9084,6 +9279,11 @@ Apply settings anyway?</source>
         <translation>Базове значення для стовпця</translation>
     </message>
     <message>
+        <source>Size</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.cpp" line="464"/>
         <source>Please, select at least one dimension</source>
         <translation>Будь ласка, виберіть принаймні один вимір</translation>
@@ -9112,7 +9312,7 @@ Apply settings anyway?</source>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="330"/>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="468"/>
         <source>Name:</source>
-        <translation>Імя:</translation>
+        <translation>Ім&apos;я:</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.cpp" line="426"/>
@@ -9216,7 +9416,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="102"/>
         <source>Formula wizard</source>
-        <translation>Мастер формул</translation>
+        <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="144"/>
@@ -9231,7 +9431,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="228"/>
         <source>Point label:</source>
-        <translation>Ім&apos;я точки:</translation>
+        <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="235"/>
@@ -9309,7 +9509,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="64"/>
         <source>Point label</source>
-        <translation>Ім&apos;я точки</translation>
+        <translation>Назва точки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="45"/>
@@ -9414,7 +9614,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="865"/>
         <source>Name:</source>
-        <translation>Імя:</translation>
+        <translation>Ім&apos;я:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="510"/>
@@ -9604,7 +9804,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="842"/>
         <source>Name:</source>
-        <translation>Імя:</translation>
+        <translation>Ім&apos;я:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="689"/>
@@ -9736,7 +9936,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogtapepreferences.ui" line="60"/>
         <source>Configuration</source>
-        <translation>Налаштування</translation>
+        <translation>Конфігурація</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogtapepreferences.ui" line="75"/>
@@ -9746,11 +9946,7 @@ Apply settings anyway?</source>
     <message numerus="yes">
         <location filename="../../src/app/tape/dialogs/dialogtapepreferences.cpp" line="134"/>
         <source>Followed %n option(s) require restart to take effect: %1.</source>
-        <translation>
-            <numerusform>Щоб набрати чинності, %n параметр вимагає перезапуску: %1.</numerusform>
-            <numerusform>Щоб набрати чинності, %n параметра вимагає перезапуску: %1.</numerusform>
-            <numerusform>Щоб набрати чинності, %n параметрів вимагає перезапуску: %1.</numerusform>
-        </translation>
+        <translation><numerusform>Щоб набрати чинності, %n параметр вимагає перезапуску: %1.</numerusform><numerusform>Щоб набрати чинності, %n параметра вимагає перезапуску: %1.</numerusform><numerusform>Щоб набрати чинності, %n параметрів вимагає перезапуску: %1.</numerusform><numerusform>Щоб набрати чинності, %n параметра вимагає перезапуску: %1.</numerusform></translation>
     </message>
 </context>
 <context>
@@ -9761,7 +9957,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Empty field</source>
-        <translation type="vanished">Пусте поле</translation>
+        <translation type="vanished">Порожнє поле</translation>
     </message>
     <message>
         <source>Value can&apos;t be 0</source>
@@ -9793,17 +9989,17 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="327"/>
         <source>Lowest point</source>
-        <translation>Найнища точка</translation>
+        <translation>Найнижча точка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="335"/>
         <source>Leftmost point</source>
-        <translation>Сама ліва точка</translation>
+        <translation>Найлівіша точка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="336"/>
         <source>Rightmost point</source>
-        <translation>Сама права точка</translation>
+        <translation>Найправіша точка</translation>
     </message>
     <message>
         <source>Invalid value</source>
@@ -9844,7 +10040,7 @@ Apply settings anyway?</source>
     <name>DialogTriangle</name>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Ім&apos;я точки</translation>
+        <translation type="vanished">Назва точки</translation>
     </message>
     <message>
         <source>First point of axis</source>
@@ -9901,7 +10097,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="46"/>
         <source>Point label:</source>
-        <translation>Ім&apos;я точки:</translation>
+        <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="53"/>
@@ -9981,7 +10177,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Show line from second point to this point</source>
-        <translation type="vanished">Показати лінію від першої точки до даної</translation>
+        <translation type="vanished">Показати лінію від першої точки до цієї</translation>
     </message>
     <message>
         <source>Third dart point</source>
@@ -10082,12 +10278,12 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error while calculation formula. You can try undo last operation or fix broken formula.</source>
-        <translation type="vanished">Помилка при розрахунку формули. Ви можете попробувати відмінити останню операцію чи виправити поламану формулу.</translation>
+        <translation type="vanished">Помилка під час обчислення формули. Ви можете спробувати скасувати останню операцію чи виправити поламану формулу.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogundo.ui" line="44"/>
         <source>&amp;Undo</source>
-        <translation>&amp;Відмінити</translation>
+        <translation>&amp;Скасувати дію</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogundo.ui" line="51"/>
@@ -10097,12 +10293,12 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogundo.ui" line="58"/>
         <source>&amp;Cancel</source>
-        <translation>&amp;Відмінити</translation>
+        <translation>&amp;Скасувати дію</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogundo.ui" line="32"/>
         <source>Error while calculation formula. You can try to undo last operation or fix broken formula.</source>
-        <translation>Помилка при розрахунку формули. Ви можете попробувати відмінити останню операцію чи виправити поламану формулу.</translation>
+        <translation>Помилка під час обчислення формули. Ви можете спробувати скасувати останню операцію чи виправити поламану формулу.</translation>
     </message>
 </context>
 <context>
@@ -10171,7 +10367,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/fervor/fvupdatewindow.ui" line="39"/>
         <source>%1 %2 is now available - you have %3. Would you like to download it now?</source>
-        <translation>%1 %2 доступна - у вас встановлено %3. Чи не хотіли б ви скачати її зараз?</translation>
+        <translation>%1 %2 доступна - у вас встановлено %3. Бажаєте звантажити її зараз?</translation>
     </message>
     <message>
         <location filename="../../src/libs/fervor/fvupdatewindow.ui" line="48"/>
@@ -10196,7 +10392,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/fervor/fvupdatewindow.cpp" line="73"/>
         <source>New %1 test version is now available. Would you like to download it now?</source>
-        <translation>Нова тестова версія %1 тепер доступна. Бажаєте завантажити її зараз?</translation>
+        <translation>Нова тестова версія %1 вже доступна. Бажаєте завантажити її зараз?</translation>
     </message>
 </context>
 <context>
@@ -10225,7 +10421,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/fervor/fvupdater.cpp" line="491"/>
         <source>Feed error: invalid &quot;enclosure&quot; with the download link</source>
-        <translation>Помилка feed: неправильний &quot;enclosure&quot; з посиланням на скачування</translation>
+        <translation>Помилка feed: неправильний &quot;enclosure&quot; з посиланням на звантаження</translation>
     </message>
     <message>
         <source>Error</source>
@@ -10241,7 +10437,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/undocommands/image/hideallbackgroundimages.cpp" line="38"/>
         <source>hide all background images</source>
-        <translation>приховати всі фонові зображення</translation>
+        <translation>сховати всі фонові зображення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/undocommands/image/hideallbackgroundimages.cpp" line="42"/>
@@ -10254,7 +10450,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/undocommands/image/hidebackgroundimage.cpp" line="39"/>
         <source>hide a background image</source>
-        <translation>приховати фонове зображення</translation>
+        <translation>сховати фонове зображення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/undocommands/image/hidebackgroundimage.cpp" line="43"/>
@@ -10303,7 +10499,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/tape/mapplication.cpp" line="335"/>
         <source>Error parsing file. Program will be terminated.</source>
-        <translation>Помилка парсінгу файла. Програма буде закрита.</translation>
+        <translation>Помилка парсингу файла. Програма буде закрита.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/mapplication.cpp" line="341"/>
@@ -10333,12 +10529,12 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/tape/mapplication.cpp" line="385"/>
         <source>Parser error: %1. Program will be terminated.</source>
-        <translation>Помилка парсінгу: %1. Програма буде закрита.</translation>
+        <translation>Помилка парсингу: %1. Програма буде закрита.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/mapplication.cpp" line="390"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
-        <translation>Виключення: %1. Програма буде закрита.</translation>
+        <translation>Винятки: %1. Програма буде закрита.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/mapplication.cpp" line="643"/>
@@ -10373,7 +10569,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/tape/mapplication.cpp" line="966"/>
         <source>Invalid base size argument. Must be cm, mm or inch.</source>
-        <translation>Не дійсний аргумент базового розміру. Має бути cm, mm, inch.</translation>
+        <translation>Недійсний аргумент базового розміру. Має бути cm, mm, inch.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/mapplication.cpp" line="798"/>
@@ -10382,7 +10578,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Test mode doesn&apos;t support openning several files.</source>
-        <translation type="vanished">Тестовий режим не підтримує відкриття одночасно декількох файлів.</translation>
+        <translation type="vanished">Тестовий режим не підтримує одночасного відкриття кількох файлів.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/mapplication.cpp" line="882"/>
@@ -10408,12 +10604,12 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/tape/mapplication.cpp" line="775"/>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
-        <translation>Використовуеється для тестування. Запускає програму і відкриває файл без показу головного вікна.</translation>
+        <translation>Використовується для тестування. Запускає програму і відкриває файл без показу головного вікна.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/mapplication.cpp" line="778"/>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
-        <translation>Відключити масштабування з високим розширенням. Викличте цю функцію якщо маєте проблему з масштабуванням (за замовчуванням масштабування увімкнено). Альтернативно ви можете використовувати перемену оточення %1.</translation>
+        <translation>Вимкнути масштабування з високим розширенням. Викличте цю функцію якщо маєте проблему з масштабуванням (за замовчуванням масштабування увімкнено). Альтернативно ви можете використовувати змінну середовища %1.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/mapplication.cpp" line="762"/>
@@ -10478,7 +10674,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/tape/mapplication.cpp" line="817"/>
         <source>Test mode doesn&apos;t support opening several files.</source>
-        <translation>Тестовий режим не підтримує відкриття одночасно декількох файлів.</translation>
+        <translation>Тестовий режим не підтримує одночасного відкриття кількох файлів.</translation>
     </message>
 </context>
 <context>
@@ -10587,7 +10783,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1751"/>
         <source>&amp;Help</source>
-        <translation>&amp;Допомога</translation>
+        <translation>&amp;Довідка</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1760"/>
@@ -10684,12 +10880,12 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="3206"/>
         <source>Interactive tools</source>
-        <translation type="unfinished">Інтерактивні інструменти</translation>
+        <translation>Інтерактивні інструменти</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="3209"/>
         <source>Ctrl+D</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+D</translation>
     </message>
     <message>
         <source>Save &amp;As...</source>
@@ -10698,7 +10894,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2279"/>
         <source>Save not yet saved pattern</source>
-        <translation>Зберегти ще не збережене лекало</translation>
+        <translation>Зберегти ще незбережене лекало</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2303"/>
@@ -10710,7 +10906,7 @@ Apply settings anyway?</source>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1787"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3582"/>
         <source>Details</source>
-        <translation>Деталь</translation>
+        <translation>Деталі</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2354"/>
@@ -10730,7 +10926,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2393"/>
         <source>Change the label of pattern piece</source>
-        <translation>Змінити ім&apos;я креслення</translation>
+        <translation>Змінити назву креслення</translation>
     </message>
     <message>
         <source>Table of variables</source>
@@ -10759,7 +10955,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2503"/>
         <source>E&amp;xit</source>
-        <translation>&amp;Вихід</translation>
+        <translation>Ви&amp;хід</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2506"/>
@@ -10770,7 +10966,7 @@ Apply settings anyway?</source>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2517"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="438"/>
         <source>Preferences</source>
-        <translation>Властивості</translation>
+        <translation>Налаштування</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2528"/>
@@ -10835,7 +11031,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Online help</source>
-        <translation type="vanished">Довідка в Інтернеті</translation>
+        <translation type="vanished">Онлайн-довідка</translation>
     </message>
     <message>
         <source>Show online help</source>
@@ -10904,7 +11100,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select points, arcs, curves clockwise.</source>
-        <translation type="vanished">Виберіть точки, дуги, криві загодинниковою стрілкою.</translation>
+        <translation type="vanished">Виберіть точки, дуги, криві за годинниковою стрілкою.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1298"/>
@@ -11004,7 +11200,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2779"/>
         <source>Error parsing file (std::bad_alloc).</source>
-        <translation>Помилка парсінгу файлу (std::bad_alloc).</translation>
+        <translation>Помилка парсингу файлу (std::bad_alloc).</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4200"/>
@@ -11025,13 +11221,13 @@ Apply settings anyway?</source>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="5289"/>
         <source>The pattern has been modified.
 Do you want to save your changes?</source>
-        <translation>Лекало було змінено. Ви хочете зберегти ваші зміни?</translation>
+        <translation>Лекало було змінено. Хочете зберегти свої зміни?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1775"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="5340"/>
         <source>&amp;Undo</source>
-        <translation>&amp;Відмінити</translation>
+        <translation>&amp;Скасувати дію</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1776"/>
@@ -11047,7 +11243,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="5812"/>
         <source>Enter a new label for the pattern piece.</source>
-        <translation>Введить нове ім&apos;я для креслення.</translation>
+        <translation>Введіть нову назву для креслення.</translation>
     </message>
     <message>
         <source>This file already opened in another window.</source>
@@ -11076,12 +11272,12 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="6376"/>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
-        <translation>Валентина не була закрита правильно. Ви хочете знову відкрити ці файли (%1)?</translation>
+        <translation>Валентина була закрита неправильно. Хочете знову відкрити ці файли (%1)?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="6378"/>
         <source>Reopen files.</source>
-        <translation>Відкрити знову файли.</translation>
+        <translation>Відкрити файли знову.</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst)</source>
@@ -11151,7 +11347,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Seam allowance tool</source>
-        <translation type="vanished">Деталь</translation>
+        <translation type="vanished">Інструмент припуску на шви</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1432"/>
@@ -11388,7 +11584,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="6634"/>
         <source>You can&apos;t export empty scene.</source>
-        <translation>Ви не можете експортувати пусту сцену.</translation>
+        <translation>Ви не можете експортувати порожню сцену.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1639"/>
@@ -11430,7 +11626,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Measurement file doesn&apos;t include all required measurements.</source>
-        <translation type="vanished">Файл мірок не містить усі мірки що вимагаються.</translation>
+        <translation type="vanished">Файл мірок містить не всі необхідні мірки.</translation>
     </message>
     <message>
         <source>Please, additionaly provide: %1</source>
@@ -11439,7 +11635,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="704"/>
         <source>Measurement files types have not match.</source>
-        <translation>Типи файлів мірок не співпадають.</translation>
+        <translation>Типи файлів мірок не збігаються.</translation>
     </message>
     <message>
         <source>Measurements was synced</source>
@@ -11459,11 +11655,11 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="5987"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="6007"/>
         <source>The measurements file &apos;%1&apos; could not be found.</source>
-        <translation>Файл мірок &apos;%1&apos; не вдалося знайти.</translation>
+        <translation>Не вдалося знайти файл мірок &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location</source>
-        <translation type="vanished">Файл мірок &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; не вдалося знайти. Ви хочете оновити місце знаходження</translation>
+        <translation type="vanished">Не вдалося знайти файл мірок &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt;. Хочете оновити розташування файлу</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="6453"/>
@@ -11472,11 +11668,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Not supported size value &apos;%1&apos; for this pattern file.</source>
-        <translation type="vanished">Не підтримуване значення розміру &apos;%1&apos; для цього файлу лекала.</translation>
+        <translation type="vanished">Непідтримуване значення розміру &apos;%1&apos; для цього файлу лекала.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set size. Need a file with standard measurements.</source>
-        <translation type="vanished">Не вдалося встановити розмір. Потрібно файл зі стандартними мірками.</translation>
+        <translation type="vanished">Не вдалося встановити розмір. Потрібен файл зі стандартними мірками.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set size. File wasn&apos;t opened.</source>
@@ -11491,11 +11687,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Not supported height value &apos;%1&apos; for this pattern file.</source>
-        <translation type="vanished">Не підтримуване значення висоти &apos;%1&apos; для цього файлу лекала.</translation>
+        <translation type="vanished">Непідтримуване значення висоти &apos;%1&apos; для цього файлу лекала.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set height. Need a file with standard measurements.</source>
-        <translation type="vanished">Не вдалося встановити зріст. Необхідно файл стандартних мірок.</translation>
+        <translation type="vanished">Не вдалося встановити зріст. Необхідний файл стандартних мірок.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set height. File wasn&apos;t opened.</source>
@@ -11537,12 +11733,12 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2330"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with details. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail on the stage &amp;quot;Draw mode&amp;quot;. Details created on this stage will be used for creating a layout. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Режим роботи з деталями. Перед тим як будите мати можливість працювати у &amp;quot;Режимі деталей&amp;quot; необхідно створити принаймні одну деталь у &amp;quot;Режимі креслення&amp;quot;. Деталі, створенні на цьому етапі, будуть використанні для створення розкладок.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Режим роботи з деталями. Перед тим як ви матимете можливість працювати у &amp;quot;Режимі деталей&amp;quot; необхідно створити принаймні одну деталь у &amp;quot;Режимі креслення&amp;quot;. Деталі, створенні на цьому етапі, будуть використанні для створення розкладок.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2462"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for creating a layout of details. This mode avaliable if was created at least one detail on the stage &amp;quot;Details mode&amp;quot;. The layout can be exported to your prefered file format and saved to your harddirve.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Режим для створення розкладок. Цей режим доступний коли створена принаймні одна деталь в &amp;quot;Режимі креслення&amp;quot;. Розкладки можуть бути експортованими у один з вибраних форматів і збережена на диск.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Режим для створення розкладок. Цей режим доступний коли створена принаймні одна деталь в &amp;quot;Режимі креслення&amp;quot;. Розкладки можуть бути експортованими в один з вибраних форматів і збережені на диск.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Unload measurements</source>
@@ -11721,7 +11917,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1788"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3584"/>
         <source>Show which details will go in layout</source>
-        <translation>Показує котрі деталі увійдуть до розкладки</translation>
+        <translation>Показує котрі деталі ввійдуть до розкладки</translation>
     </message>
     <message>
         <source>You can&apos;t use now the Layout mode. Please, include at least one detail in layout.</source>
@@ -11761,7 +11957,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="6451"/>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
-        <translation>Файл мірок &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; не вдалося знайти. Ви хочете оновити місце знаходження?</translation>
+        <translation>Не вдалося знайти файл мірок &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt;. Хочете оновити розташування файлу?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1222"/>
@@ -11832,7 +12028,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2417"/>
         <source>Contains information about increments and internal variables</source>
-        <translation>Містить інформацію про прибавки і внутрішні змінні</translation>
+        <translation>Містить інформацію про прибавки та внутрішні змінні</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2796"/>
@@ -11868,7 +12064,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2850"/>
         <source>Edit linked to the pattern measurements</source>
-        <translation>Редагувати зєднані з лекалом мірки</translation>
+        <translation>Редагувати пов&apos;язані з лекалом мірки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2868"/>
@@ -12051,12 +12247,12 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2949"/>
         <source>Export Final Measurements to CSV</source>
-        <translation>Експортувати фінальні вимірювання в CSV</translation>
+        <translation>Експортувати остаточні вимірювання в CSV</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="6643"/>
         <source>You can&apos;t export empty scene. Please, include at least one detail in layout.</source>
-        <translation>Ви не можете експортувати пусту сцену. Будь ласка, додайте принаймні одну деталь у розкладку.</translation>
+        <translation>Ви не можете експортувати порожню сцену. Будь ласка, додайте принаймні одну деталь у розкладку.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="6746"/>
@@ -12066,7 +12262,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="6747"/>
         <source>Destination path is empty.</source>
-        <translation>Шлях призначення пустий.</translation>
+        <translation>Шлях призначення порожній.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2960"/>
@@ -12170,7 +12366,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2992"/>
         <source>Increase label font</source>
-        <translation>Збільште шрифт мітки</translation>
+        <translation>Збільшити шрифт мітки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="3007"/>
@@ -12185,7 +12381,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="3036"/>
         <source>Hide labels</source>
-        <translation>Приховати мітки</translation>
+        <translation>Сховати мітки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1782"/>
@@ -12246,6 +12442,10 @@ Do you want to save your changes?</source>
         <translation>Очистити всі повідомлення</translation>
     </message>
     <message>
+        <source>...</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2126"/>
         <source>Filter</source>
         <translation>Фільтр</translation>
@@ -12253,7 +12453,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="7342"/>
         <source>DEBUG</source>
-        <translation>ВІДЛАДКА</translation>
+        <translation>НАЛАГОДЖЕННЯ</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="7345"/>
@@ -12369,7 +12569,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="6795"/>
         <source>Not supported dimension A value &apos;%1&apos; for this pattern file.</source>
-        <translation>Не підтримуване значення виміру A &quot;%1&quot; для цього файлу викрійки.</translation>
+        <translation>Непідтримуване значення виміру A &quot;%1&quot; для цього файлу викрійки.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="6803"/>
@@ -12384,7 +12584,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="6838"/>
         <source>Not supported dimension B value &apos;%1&apos; for this pattern file.</source>
-        <translation>Не підтримуване значення виміру B &quot;%1&quot; для цього файлу викрійки.</translation>
+        <translation>Непідтримуване значення виміру B &quot;%1&quot; для цього файлу викрійки.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="6846"/>
@@ -12475,12 +12675,12 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4607"/>
         <source>untitled</source>
-        <translation>без імені</translation>
+        <translation>без назви</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4621"/>
         <source>All files</source>
-        <translation>Всі файли</translation>
+        <translation>Усі файли</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4625"/>
@@ -12502,19 +12702,19 @@ Do you want to save your changes?</source>
     <name>MainWindowsNoGUI</name>
     <message>
         <source>For saving multypage document all sheet should have the same size. Use export function instead.</source>
-        <translation type="vanished">Для збереження багатосторінкового документу всі листи повинні мати однаковий розмір. Використовуйте замість цього функцію експорту.</translation>
+        <translation type="vanished">Для збереження багатосторінкового документа всі листи повинні мати однаковий розмір. Використовуйте замість цього функцію експорту.</translation>
     </message>
     <message>
         <source>For previewing multypage document all sheet should have the same size.</source>
-        <translation type="vanished">Для попереднього перегляду документу всі листи повинні мати той самий розмір.</translation>
+        <translation type="vanished">Для попереднього перегляду документа всі листи повинні мати той самий розмір.</translation>
     </message>
     <message>
         <source>For printing multypages document all sheet should have the same size.</source>
-        <translation type="vanished">Для друку багатосторінкового документу всі листи повинні мати той самий розмір.</translation>
+        <translation type="vanished">Для друку багатосторінкового документа всі листи повинні мати той самий розмір.</translation>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation type="vanished">Створення файлу &apos;%1&apos; не вдалося! %2</translation>
+        <translation type="vanished">Не вдалося створити файл &apos;%1&apos;! %2</translation>
     </message>
     <message>
         <source>Critical error!</source>
@@ -12526,7 +12726,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>PDF file (*.pdf)</source>
-        <translation type="vanished">PDF файл (*.pdf)</translation>
+        <translation type="vanished">Файл PDF (*.pdf)</translation>
     </message>
     <message>
         <source>Print error</source>
@@ -12534,7 +12734,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation type="vanished">Не можливо виконати тому що не знайдено доступних принтерів у вашій системі.</translation>
+        <translation type="vanished">Неможливо виконати, тому що не знайдено доступних принтерів у вашій системі.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1166"/>
@@ -12547,16 +12747,16 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation type="vanished">Розкладка не була оновлена з часу останніх змін креслення. Ви хочете продовжити?</translation>
+        <translation type="vanished">Розкладка не була оновлена з часу останніх змін креслення. Хочете продовжити?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="441"/>
         <source>Couldn&apos;t prepare data for creation layout</source>
-        <translation>Не вдалося підготувати данні для створення розкладки</translation>
+        <translation>Не вдалося підготувати дані для створення розкладки</translation>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation type="vanished">Декілька деталей залишилися укладеними, але жодна з них не підійшла для листа</translation>
+        <translation type="vanished">Кілька деталей залишилися укладеними, але жодна з них не підійшла для листа</translation>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
@@ -12568,19 +12768,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>For saving multipage document all sheet should have the same size. Use export function instead.</source>
-        <translation type="vanished">Для збереження багатосторінкового документу всі листи повинні мати той самий розмір. Натомість використовуйте функцію експорту.</translation>
+        <translation type="vanished">Для збереження багатосторінкового документа всі листи повинні мати той самий розмір. Натомість використовуйте функцію експорту.</translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
-        <translation type="vanished">Для перегляду багатосторінкового документу всі листи повинні мати той самий розмір.</translation>
+        <translation type="vanished">Для перегляду багатосторінкового документа всі листи повинні бути однакового розміру.</translation>
     </message>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
-        <translation type="vanished">Для друку багатосторінкового документа всі сторінки мають бути одного розміру.</translation>
+        <translation type="vanished">Для друку багатосторінкового документа всі сторінки повинні бути однакового розміру.</translation>
     </message>
     <message>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
-        <translation type="vanished">Сторінки будуть обрізані тому що вони не відповідають формату паперу принтера.</translation>
+        <translation type="vanished">Сторінки будуть обрізані, тому що вони не відповідають формату паперу принтера.</translation>
     </message>
     <message>
         <source>Can&apos;t create path</source>
@@ -12588,13 +12788,18 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot set printer margins</source>
-        <translation type="vanished">Не вдалося встановити поля принтеру</translation>
+        <translation type="vanished">Не вдалося встановити поля принтера</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="536"/>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="638"/>
         <source>Can&apos;t create a path</source>
         <translation>Не вдається створити шлях</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="843"/>
+        <source>Preparing details for layout</source>
+        <translation>Підготовка деталей для розкладки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1033"/>
@@ -12654,6 +12859,10 @@ Do you want to save your changes?</source>
         <translation>Файл мірок містить недійсні відомі мірки.</translation>
     </message>
     <message>
+        <source>Wrong units.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1291"/>
         <source>File error.</source>
         <translation>Помилка файла.</translation>
@@ -12661,17 +12870,12 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1321"/>
         <source>Measurement file doesn&apos;t include all required measurements.</source>
-        <translation>Файл мірок не містить усі мірки що вимагаються.</translation>
+        <translation>Файл мірок містить не всі необхідні мірки.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1322"/>
         <source>Please, additionally provide: %1</source>
         <translation>Будь ласка, додатково вкажіть: %1</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="843"/>
-        <source>Preparing details for layout</source>
-        <translation>Підготовка деталей для розкладки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="448"/>
@@ -12681,7 +12885,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="451"/>
         <source>Process has been stoped because of exception.</source>
-        <translation>Процес було зупинено через виключення.</translation>
+        <translation>Процес було зупинено через винятки.</translation>
     </message>
 </context>
 <context>
@@ -12828,7 +13032,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Undo</source>
-        <translation type="vanished">Відмінити</translation>
+        <translation type="vanished">Скасувати дію</translation>
     </message>
     <message>
         <source>Count steps (0 - no limit)</source>
@@ -12844,7 +13048,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>All user defined materials have been deleted!</source>
-        <translation type="vanished">Всі додані користувачем матеріали були видалені!</translation>
+        <translation type="vanished">Усі додані користувачем матеріали були видалені!</translation>
     </message>
     <message>
         <source>User defined materials</source>
@@ -12860,7 +13064,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Forbid flipping</source>
-        <translation type="vanished">Заборонити відзеркалення</translation>
+        <translation type="vanished">Заборонити віддзеркалення</translation>
     </message>
     <message>
         <source>By default forbid flipping for all workpieces</source>
@@ -12881,7 +13085,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="51"/>
         <source>Auto-save modified pattern</source>
-        <translation>Авто збереження модифіковане лекало</translation>
+        <translation>Автозбереження модифікованого лекала</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="61"/>
@@ -12939,6 +13143,14 @@ Do you want to save your changes?</source>
         <translation>Книга:</translation>
     </message>
     <message>
+        <source>Send crash reports</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Send crash reports (recommended)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="199"/>
         <source>Pattern editing</source>
         <translation>Редагування лекала</translation>
@@ -12956,12 +13168,20 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="263"/>
         <source>The text appears under the icon (recommended for beginners).</source>
-        <translation>Текст відображається під іконкою (рекомендується для новачків).</translation>
+        <translation>Текст під піктограмою (рекомендовано для новачків).</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="285"/>
         <source>With OS options</source>
         <translation>З параметрами ОС</translation>
+    </message>
+    <message>
+        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="277"/>
@@ -13081,7 +13301,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="282"/>
         <source>Activate dark mode</source>
-        <translation>Увімкніть темний режим</translation>
+        <translation>Увімкнути темний режим</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="192"/>
@@ -13200,6 +13420,14 @@ Do you want to save your changes?</source>
 <context>
     <name>PreferencesPatternPage</name>
     <message>
+        <source>User</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>User name:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="35"/>
         <source>Graphical output</source>
         <translation>Графічний вивід</translation>
@@ -13212,12 +13440,20 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="164"/>
         <source>Undo</source>
-        <translation>Відмінити</translation>
+        <translation>Скасувати дію</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="173"/>
         <source>Count steps (0 - no limit):</source>
         <translation>Кількість кроків (0 - без обмежень):</translation>
+    </message>
+    <message>
+        <source>User defined materials</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Delete all</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="186"/>
@@ -13227,7 +13463,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="195"/>
         <source>Forbid flipping</source>
-        <translation>Заборонити відзеркалення</translation>
+        <translation>Заборонити віддзеркалення</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="212"/>
@@ -13238,6 +13474,10 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="215"/>
         <source>Show second passmark on seam line</source>
         <translation>Показати другу надсічку на лінії шва</translation>
+    </message>
+    <message>
+        <source>All user defined materials have been deleted!</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="192"/>
@@ -13402,7 +13642,7 @@ This option will take an affect after restart.</source>
     <name>Puzzle</name>
     <message>
         <source>Export options can be used with single input file only.</source>
-        <translation type="vanished">Параметри експорту можуть використовуватися тільки з одним вхідним файлом.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpcommandline.cpp" line="71"/>
@@ -13417,6 +13657,10 @@ This option will take an affect after restart.</source>
 </context>
 <context>
     <name>PuzzlePreferencesConfigurationPage</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"/>
+    </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="45"/>
         <source>Language</source>
@@ -13435,7 +13679,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="73"/>
         <source>The text appears under the icon (recommended for beginners).</source>
-        <translation>Текст відображається під іконкою (рекомендується для новачків).</translation>
+        <translation>Текст під піктограмою (рекомендовано для новачків).</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="86"/>
@@ -13445,7 +13689,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="92"/>
         <source>Activate dark mode</source>
-        <translation>Увімкніть темний режим</translation>
+        <translation>Увімкнути темний режим</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="99"/>
@@ -13477,7 +13721,7 @@ This option will take an affect after restart.</source>
         <source>Use OpenGL to render a scene.
 This option will take an affect after restart.</source>
         <translation>Використовуйте OpenGL для візуалізації сцени.
-Ця опція почне діяти після перезавантаження.</translation>
+Ця опція почне діяти після перезапуску.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="126"/>
@@ -13487,7 +13731,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="139"/>
         <source>Undo</source>
-        <translation>Відмінити</translation>
+        <translation>Скасувати дію</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="148"/>
@@ -13587,7 +13831,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="167"/>
         <source>Automatically check for updates each time the application starts</source>
-        <translation>Автоматично перевіряти наявність оновлень при кожному запуску програми</translation>
+        <translation>Автоматично перевіряти наявність оновлень під час кожного запуску програми</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="170"/>
@@ -13597,6 +13841,10 @@ This option will take an affect after restart.</source>
 </context>
 <context>
     <name>PuzzlePreferencesLayoutPage</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"/>
+    </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferenceslayoutpage.ui" line="22"/>
         <source>Sheet</source>
@@ -13675,12 +13923,12 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferenceslayoutpage.ui" line="301"/>
         <source>Warning superposition of pieces</source>
-        <translation>Попереджувати про перетин деталей</translation>
+        <translation>Попереджати про перетин деталей</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferenceslayoutpage.ui" line="308"/>
         <source>Warning pieces out of bound</source>
-        <translation>Попереджати про вихід за межі аркушу</translation>
+        <translation>Попереджати про вихід за межі аркуша</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferenceslayoutpage.ui" line="315"/>
@@ -13750,6 +13998,10 @@ This option will take an affect after restart.</source>
 </context>
 <context>
     <name>PuzzlePreferencesPathPage</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"/>
+    </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencespathpage.ui" line="20"/>
         <source>Paths that Valentina uses</source>
@@ -13960,22 +14212,22 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece_p.h" line="176"/>
         <source>VLayoutPieceData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка невідповідності префікса VLayoutPieceData: actualStreamHeader = 0x%1 and streamHeader = 0x%2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece_p.h" line="188"/>
         <source>VLayoutPieceData compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка сумісності VLayoutPieceData: actualClassVersion = %1 and classVersion = %2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vwidgets/vpiecegrainline_p.h" line="104"/>
         <source>VPieceGrainlinePrivate prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка невідповідності префікса VPieceGrainlinePrivate: actualStreamHeader = 0x%1 and streamHeader = 0x%2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vwidgets/vpiecegrainline_p.h" line="116"/>
         <source>VPieceGrainlinePrivate compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка сумісності VPieceGrainlinePrivate: actualClassVersion = %1 and classVersion = %2</translation>
     </message>
 </context>
 <context>
@@ -14015,7 +14267,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/libs/vmisc/def.cpp" line="489"/>
         <source>px</source>
-        <translation>піксел</translation>
+        <translation>пікселі</translation>
     </message>
     <message>
         <source>add node</source>
@@ -14029,6 +14281,10 @@ This option will take an affect after restart.</source>
     <message>
         <source>Changes applied.</source>
         <translation type="vanished">Зміни застосовано.</translation>
+    </message>
+    <message>
+        <source>Wrong tag name &apos;%1&apos;.</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1077"/>
@@ -14046,7 +14302,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="570"/>
         <source>Got empty parameter</source>
-        <translation>Отримано пустий параметр</translation>
+        <translation>Отримано порожній параметр</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1051"/>
@@ -14078,7 +14334,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="326"/>
         <source>Interfacing</source>
-        <translation>Дублерін</translation>
+        <translation>Дублерин</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="327"/>
@@ -14130,7 +14386,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="160"/>
         <source>Error: notch for point &apos;%1&apos; in piece &apos;%2&apos;. Width is less than minimal allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка: надсічка для точки &apos;%1&apos; у деталі &apos;%2&apos;. Ширина менша за мінімально допустиму.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="763"/>
@@ -14212,16 +14468,12 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/libs/vpatterndb/vpiecenode.cpp" line="403"/>
         <source>Cannot calculate passmark width for point &apos;%1&apos;. Reason: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможливо обчислити ширину надсічки для точки &apos;%1&apos;. Причина: %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpiecenode.cpp" line="437"/>
         <source>Cannot calculate passmark angle for point &apos;%1&apos;. Reason: %2.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot calculate seam allowance after for point &apos;%1&apos;. Reason: </source>
-        <translation type="vanished">Не вдається розрахувати припуск на шов після точки &apos;%1&apos;. Причина: </translation>
+        <translation>Неможливо обчислити кут надсічки для точки &apos;%1&apos;. Причина: %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpiecenode.cpp" line="370"/>
@@ -14261,7 +14513,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="303"/>
         <source>Piece name &apos;%1&apos; is not unique.</source>
-        <translation>Ім&apos;я деталі &quot;%1&quot; не є унікальним.</translation>
+        <translation>Назва деталі &quot;%1&quot; не унікальна.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="113"/>
@@ -14276,7 +14528,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="128"/>
         <source>Segment is too short.</source>
-        <translation>Сегмент занадто короткий.</translation>
+        <translation>Сегмент закороткий.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="146"/>
@@ -14291,22 +14543,22 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="332"/>
         <source>Cannot prepare builtin passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark is empty.</source>
-        <translation>Неможливо підготувати вбудовану надсічку &quot;%1&quot; для деталі &quot;%2&quot;. Надсічка пуста.</translation>
+        <translation>Неможливо підготувати вбудовану надсічку &quot;%1&quot; для деталі &quot;%2&quot;. Надсічка порожня.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="346"/>
         <source>Cannot prepare builtin  passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark base line is empty.</source>
-        <translation>Неможливо підготувати вбудовану надсічку &quot;%1&quot; для деталі &quot;%2&quot;. Базова лінія надсічки пуста.</translation>
+        <translation>Неможливо підготувати вбудовану надсічку &quot;%1&quot; для деталі &quot;%2&quot;. Базова лінія надсічки порожня.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="264"/>
         <source>Cannot prepare passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark base line is empty.</source>
-        <translation>Неможливо підготувати надсічку &quot;%1&quot; для деталі &quot;%2&quot;. Базова лінія надсічки пуста.</translation>
+        <translation>Неможливо підготувати надсічку &quot;%1&quot; для деталі &quot;%2&quot;. Базова лінія надсічки порожня.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="285"/>
         <source>Cannot prepare passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark is empty.</source>
-        <translation>Неможливо підготувати надсічку &quot;%1&quot; для деталі &quot;%2&quot;. Надсічка пуста.</translation>
+        <translation>Неможливо підготувати надсічку &quot;%1&quot; для деталі &quot;%2&quot;. Надсічка порожня.</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="210"/>
@@ -14346,10 +14598,12 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="223"/>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1767"/>
-        <source>Piece &apos;%1&apos;. Unable to load default piece label template.
+        <source>Piece '%1'. Unable to load default piece label template.
 %2
 %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Деталь &apos;%1&apos;. Не вдалося завантажити шаблон мітки за замовчуванням.
+%2
+%3</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="844"/>
@@ -14382,25 +14636,25 @@ This option will take an affect after restart.</source>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="278"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2922"/>
         <source>Cannot set printer margins</source>
-        <translation>Не вдалося встановити поля принтеру</translation>
+        <translation>Не вдалося встановити поля принтера</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="410"/>
         <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="546"/>
         <source>Unable to cut curve &apos;%1&apos;. The curve is too short.</source>
-        <translation>Неможливо розрізати криву &quot;%1&quot;. Крива занадто коротка.</translation>
+        <translation>Неможливо розрізати криву &quot;%1&quot;. Крива закоротка.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="431"/>
         <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="567"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
-        <translation>Крива &quot;%1&quot;. Довжина відрізка занадто мала. Оптимізуйте його до мінімального значення.</translation>
+        <translation>Крива &quot;%1&quot;. Довжина відрізка замала. Оптимізуйте його до мінімального значення.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="449"/>
         <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="585"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
-        <translation>Крива &quot;%1&quot;. Занадто велика довжина відрізка. Оптимізуйте його до максимального значення.</translation>
+        <translation>Крива &quot;%1&quot;. Завелика довжина відрізка. Оптимізуйте його до максимального значення.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="90"/>
@@ -14432,12 +14686,12 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/libs/ifc/xml/utils.cpp" line="110"/>
         <source>All files</source>
-        <translation>Всі файли</translation>
+        <translation>Усі файли</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/toolsdef.cpp" line="132"/>
         <source>Confirm deletion</source>
-        <translation>Підтвердіть видалення</translation>
+        <translation>Підтвердьте видалення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/toolsdef.cpp" line="133"/>
@@ -14503,7 +14757,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1224"/>
         <source>Invalid global value for a passmark width. Piece &apos;%1&apos;. Width is less than minimal allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Недійсне глобальне значення ширини надсічки. Деталь &apos;%1&apos;. Ширина менша за мінімально дозволену.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1369"/>
@@ -14530,24 +14784,24 @@ This option will take an affect after restart.</source>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="364"/>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="805"/>
         <source>Failed to prepare full piece area placeholder. %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося підготувати заповнювач повної площі деталі. %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="377"/>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="818"/>
         <source>Failed to prepare piece seam line area placeholder. %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося підготувати заповнювач площі лінії шва. %2.</translation>
     </message>
 </context>
 <context>
     <name>QSaveFile</name>
     <message>
         <source>Existing file %1 is not writable</source>
-        <translation type="vanished">Існуючи файл %1 не для запису</translation>
+        <translation type="vanished">Наявний файл %1 не для запису</translation>
     </message>
     <message>
         <source>Writing canceled by application</source>
-        <translation type="vanished">Запис відмінено програмою</translation>
+        <translation type="vanished">Запис скасовано програмою</translation>
     </message>
     <message>
         <source>Partial write. Partition full?</source>
@@ -14561,14 +14815,14 @@ This option will take an affect after restart.</source>
         <location filename="../../src/libs/qmuparser/qmuparser.cpp" line="327"/>
         <source>too few arguments for function sum.</source>
         <comment>parser error message</comment>
-        <translation>занадто мало аргументів для функції sum.</translation>
+        <translation>замало аргументів для функції sum.</translation>
     </message>
     <message>
         <location filename="../../src/libs/qmuparser/qmuparser.cpp" line="348"/>
         <location filename="../../src/libs/qmuparser/qmuparser.cpp" line="369"/>
         <source>too few arguments for function min.</source>
         <comment>parser error message</comment>
-        <translation>занадто мало аргументів для функції min.</translation>
+        <translation>замало аргументів для функції min.</translation>
     </message>
 </context>
 <context>
@@ -14577,7 +14831,7 @@ This option will take an affect after restart.</source>
         <location filename="../../src/libs/qmuparser/qmuparsererror.cpp" line="45"/>
         <source>Unexpected token &quot;$TOK$&quot; found at position $POS$.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation>Несподіваний токен &quot;$TOK$&quot; знейдено в позиції $POS$.</translation>
+        <translation>Несподіваний токен &quot;$TOK$&quot; знайдено в позиції $POS$.</translation>
     </message>
     <message>
         <location filename="../../src/libs/qmuparser/qmuparsererror.cpp" line="48"/>
@@ -14589,31 +14843,31 @@ This option will take an affect after restart.</source>
         <location filename="../../src/libs/qmuparser/qmuparsererror.cpp" line="51"/>
         <source>Invalid function-, variable- or constant name: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation>Невірне ім&apos;я функції, змінної або константи: &quot;$TOK$&quot;.</translation>
+        <translation>Недійсна назва функції, змінної або константи: &quot;$TOK$&quot;.</translation>
     </message>
     <message>
         <location filename="../../src/libs/qmuparser/qmuparsererror.cpp" line="54"/>
         <source>Invalid binary operator identifier: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation>Невірний ідентифікатор бінарного оператора: &quot;$TOK$&quot;.</translation>
+        <translation>Недійсний ідентифікатор бінарного оператора: &quot;$TOK$&quot;.</translation>
     </message>
     <message>
         <location filename="../../src/libs/qmuparser/qmuparsererror.cpp" line="57"/>
         <source>Invalid infix operator identifier: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation>Невірний ідентифікатор інфіксного оператора: &quot;$TOK$&quot;.</translation>
+        <translation>Недійсний ідентифікатор інфіксного оператора: &quot;$TOK$&quot;.</translation>
     </message>
     <message>
         <location filename="../../src/libs/qmuparser/qmuparsererror.cpp" line="60"/>
         <source>Invalid postfix operator identifier: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation>Невірний ідентифікатор постфіксного оператора: &quot;$TOK$&quot;.</translation>
+        <translation>Недійсний ідентифікатор постфіксного оператора: &quot;$TOK$&quot;.</translation>
     </message>
     <message>
         <location filename="../../src/libs/qmuparser/qmuparsererror.cpp" line="63"/>
         <source>Invalid pointer to callback function.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Невірний покажчик на функцію зворотного виклику.</translation>
+        <translation>Недійсний покажчик на функцію зворотного виклику.</translation>
     </message>
     <message>
         <location filename="../../src/libs/qmuparser/qmuparsererror.cpp" line="66"/>
@@ -14625,7 +14879,7 @@ This option will take an affect after restart.</source>
         <location filename="../../src/libs/qmuparser/qmuparsererror.cpp" line="69"/>
         <source>Invalid pointer to variable.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Невірний покажчик на змінну.</translation>
+        <translation>Недійсний покажчик на змінну.</translation>
     </message>
     <message>
         <location filename="../../src/libs/qmuparser/qmuparsererror.cpp" line="72"/>
@@ -14649,13 +14903,13 @@ This option will take an affect after restart.</source>
         <location filename="../../src/libs/qmuparser/qmuparsererror.cpp" line="81"/>
         <source>Unexpected parenthesis &quot;$TOK$&quot; at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation>Несподівана дужка &quot;$TOK$&quot;в позиції $POS$</translation>
+        <translation>Несподівана дужка &quot;$TOK$&quot; в позиції $POS$</translation>
     </message>
     <message>
         <location filename="../../src/libs/qmuparser/qmuparsererror.cpp" line="84"/>
         <source>Unexpected function &quot;$TOK$&quot; at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation>Несподівана функція &quot;$TOK$&quot;в позиції $POS$</translation>
+        <translation>Несподівана функція &quot;$TOK$&quot; в позиції $POS$</translation>
     </message>
     <message>
         <location filename="../../src/libs/qmuparser/qmuparsererror.cpp" line="87"/>
@@ -14685,13 +14939,13 @@ This option will take an affect after restart.</source>
         <location filename="../../src/libs/qmuparser/qmuparsererror.cpp" line="99"/>
         <source>Too many parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation>Занадто багато параметрів для функції &quot;$TOK$&quot; у виразі в позиції $POS$</translation>
+        <translation>Забагато параметрів для функції &quot;$TOK$&quot; у виразі в позиції $POS$</translation>
     </message>
     <message>
         <location filename="../../src/libs/qmuparser/qmuparsererror.cpp" line="103"/>
         <source>Too few parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation>Занадто мало параметрів для функції &quot;$TOK$&quot; у виразі в позиції $POS$</translation>
+        <translation>Замало параметрів для функції &quot;$TOK$&quot; у виразі в позиції $POS$</translation>
     </message>
     <message>
         <location filename="../../src/libs/qmuparser/qmuparsererror.cpp" line="107"/>
@@ -14721,7 +14975,7 @@ This option will take an affect after restart.</source>
         <location filename="../../src/libs/qmuparser/qmuparsererror.cpp" line="120"/>
         <source>user defined binary operator &quot;$TOK$&quot; conflicts with a built in operator.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation>назначений користувачем бінарний оператор &quot;$TOK$&quot; конфліктує з вбудованим оператором.</translation>
+        <translation>визначений користувачем бінарний оператор &quot;$TOK$&quot; конфліктує з вбудованим оператором.</translation>
     </message>
     <message>
         <location filename="../../src/libs/qmuparser/qmuparsererror.cpp" line="124"/>
@@ -14827,7 +15081,7 @@ This option will take an affect after restart.</source>
         <location filename="../../src/libs/vwidgets/qtcolorpicker.cpp" line="412"/>
         <location filename="../../src/libs/vwidgets/qtcolorpicker.cpp" line="535"/>
         <source>Dark green</source>
-        <translation>Темно зелений</translation>
+        <translation>Темно-зелений</translation>
     </message>
     <message>
         <location filename="../../src/libs/vwidgets/qtcolorpicker.cpp" line="413"/>
@@ -14839,7 +15093,7 @@ This option will take an affect after restart.</source>
         <location filename="../../src/libs/vwidgets/qtcolorpicker.cpp" line="414"/>
         <location filename="../../src/libs/vwidgets/qtcolorpicker.cpp" line="537"/>
         <source>Dark blue</source>
-        <translation>Темно синій</translation>
+        <translation>Темно-синій</translation>
     </message>
     <message>
         <location filename="../../src/libs/vwidgets/qtcolorpicker.cpp" line="415"/>
@@ -14966,6 +15220,10 @@ This option will take an affect after restart.</source>
 <context>
     <name>SavePieceOptions</name>
     <message>
+        <source>save detail option</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/undocommands/savepieceoptions.cpp" line="54"/>
         <source>save detail options</source>
         <translation>зберегти параметри деталей</translation>
@@ -15021,7 +15279,18 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/libs/vtools/undocommands/label/showlabel.cpp" line="45"/>
         <source>toggle label</source>
-        <translation>переключити мітку</translation>
+        <translation>перемкнути мітку</translation>
+    </message>
+</context>
+<context>
+    <name>T</name>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -15064,7 +15333,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="514"/>
         <source>Name:</source>
-        <translation>Імя:</translation>
+        <translation>Ім&apos;я:</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="551"/>
@@ -15161,7 +15430,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Given name:</source>
-        <translation type="vanished">Імя:</translation>
+        <translation type="vanished">Ім&apos;я:</translation>
     </message>
     <message>
         <source>Family name:</source>
@@ -15174,7 +15443,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation type="vanished">yyyy-MM-dd</translation>
+        <translation type="vanished">dd-MM-yyyy</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1029"/>
@@ -15384,7 +15653,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="3506"/>
         <source>untitled</source>
-        <translation>без імені</translation>
+        <translation>без назви</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
@@ -15393,7 +15662,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="3157"/>
         <source>Unsaved changes</source>
-        <translation>Не збереженні змінення</translation>
+        <translation>Незбереженні змінення</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="3158"/>
@@ -15405,7 +15674,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="3567"/>
         <source>Empty field</source>
-        <translation>Пусте поле</translation>
+        <translation>Порожнє поле</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="3600"/>
@@ -15456,15 +15725,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Individual measurements (*.vit);;Standard measurements (*.vst);;All files (*.*)</source>
-        <translation type="vanished">Індивідуальні мірки (*.vit);;Стандартні мірки (*.vst);;Всі файли (*.*)</translation>
+        <translation type="vanished">Індивідуальні мірки (*.vit);;Стандартні мірки (*.vst);;Усі файли (*.*)</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst);;Individual measurements (*.vit);;All files (*.*)</source>
-        <translation type="vanished">Стандартні мірки (*.vst);;Індивідуальні мірки (*.vit);;Всі файли (*.*)</translation>
+        <translation type="vanished">Стандартні мірки (*.vst);;Індивідуальні мірки (*.vit);;Усі файли (*.*)</translation>
     </message>
     <message>
         <source>Measurements (*.vst *.vit);;All files (*.*)</source>
-        <translation type="vanished">Мірки (*.vst *.vit);;Всі файли (*.*)</translation>
+        <translation type="vanished">Мірки (*.vst *.vit);;Усі файли (*.*)</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1024"/>
@@ -15530,12 +15799,12 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Name in formula</source>
-        <translation type="vanished">Ім&apos;я в формулі</translation>
+        <translation type="vanished">Назва у формулі</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="623"/>
         <source>Function Wizard</source>
-        <translation>Мастер функцій</translation>
+        <translation>Майстер функцій</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="392"/>
@@ -15582,12 +15851,12 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Create from existing ...</source>
-        <translation type="vanished">Створити із існуючого ...</translation>
+        <translation type="vanished">Створити з наявного …</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1487"/>
         <source>Create from existing file</source>
-        <translation>Створити із існуючого файла</translation>
+        <translation>Створити з наявного файла</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="661"/>
@@ -15632,17 +15901,17 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="524"/>
         <source>Measurement&apos;s name in a formula</source>
-        <translation>Ім&apos;я мірки у формулі</translation>
+        <translation>Назва мірки у формулі</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="527"/>
         <source>Measurement&apos;s name in a formula.</source>
-        <translation>Ім&apos;я мірки у формулі.</translation>
+        <translation>Назва мірки у формулі.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="758"/>
         <source>Measurement&apos;s human-readable name.</source>
-        <translation>Ім&apos;я мірки, зручне для сприйняття людиною.</translation>
+        <translation>Назва мірки, зручна для сприйняття людиною.</translation>
     </message>
     <message>
         <source>Customer&apos;s name.</source>
@@ -15671,7 +15940,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="vanished">Цей файл вже відкрит в іншому вікні. Ігноруйте, якщо бажаєте продовжити (не рекомендується, може призвести до пошкодження даних).</translation>
+        <translation type="vanished">Цей файл вже відкритий в іншому вікні. Ігноруйте, якщо бажаєте продовжити (не рекомендується, може призвести до пошкодження даних).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
@@ -15696,7 +15965,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Comma-Separated Values (*.cvs)</source>
-        <translation type="vanished">Кома розділені значення (*.cvs)</translation>
+        <translation type="vanished">Розділені комою значення (*.cvs)</translation>
     </message>
     <message>
         <source>Invalid value</source>
@@ -15710,7 +15979,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1112"/>
         <source>Comma-Separated Values</source>
-        <translation>Comma-Separated Values</translation>
+        <translation>Розділені комою значення</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="960"/>
@@ -15740,7 +16009,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="641"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="658"/>
         <source>All files</source>
-        <translation>Всі файли</translation>
+        <translation>Усі файли</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="941"/>
@@ -15765,12 +16034,12 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="3590"/>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
-        <translation>Недійсний результат. Значення безкінечність чи NaN, перевірте ваші розрахунки.</translation>
+        <translation>Недійсний результат. Значення нескінченність чи NaN, перевірте ваші розрахунки.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="3109"/>
         <source>Empty</source>
-        <translation>Пусто</translation>
+        <translation>Порожньо</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="944"/>
@@ -15785,7 +16054,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1484"/>
         <source>Create from existing …</source>
-        <translation>Створити з існуючого…</translation>
+        <translation>Створити з наявного…</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="3166"/>
@@ -15802,7 +16071,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4002"/>
         <source>Individual measurements require at least 2 columns.</source>
-        <translation>Для окремих вимірювань потрібно щонайменше 2 колонки.</translation>
+        <translation>Для окремих вимірювань потрібно щонайменше 2 стовпці.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4072"/>
@@ -15827,22 +16096,22 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1168"/>
         <source>&amp;Window</source>
-        <translation>Вікно</translation>
+        <translation>&amp;Вікно</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1173"/>
         <source>&amp;Help</source>
-        <translation>&amp;Допомога</translation>
+        <translation>&amp;Довідка</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1180"/>
         <source>&amp;Measurements</source>
-        <translation>Мірки</translation>
+        <translation>&amp;Мірки</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1300"/>
         <source>&amp;Open individual …</source>
-        <translation>Відкрити індивідуальні …</translation>
+        <translation>Відкрити &amp;індивідуальні …</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1315"/>
@@ -15857,12 +16126,12 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1342"/>
         <source>&amp;Quit</source>
-        <translation>Вихід</translation>
+        <translation>Ви&amp;хід</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1362"/>
         <source>&amp;About Tape</source>
-        <translation>Про Tape</translation>
+        <translation>Про &amp;Tape</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1374"/>
@@ -16094,12 +16363,12 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="201"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match with regular expressions &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Співпадіння по регулярному виразу &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Збіг за регулярним виразом &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="232"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use unicode properties &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;The meaning of the \w, \d, etc., character classes, as well as the meaning of their counterparts (\W, \D, etc.), is changed from matching ASCII characters only to matching any character with the corresponding Unicode property. For instance, \d is changed to match any character with the Unicode Nd (decimal digit) property; \w to match any character with either the Unicode L (letter) or N (digit) property, plus underscore, and so on. This option corresponds to the /u modifier in Perl regular expressions.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Використовувати властивості Unicode &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;Значення класів символів \w, \d і т.д., а також значення їх аналогів (\W, \D і т.д.) змінено з відповідності лише символам ASCII на відповідність будь-якому символу з властивістю Unicode. Наприклад, \d відповідатиме будь-якому символу з властивістю Unicode Nd (десяткова цифра); \w буде відповідати будь-якому символу з властивістю Unicode L (літера) або N (цифра) плюс знак підкреслення, і так далі. Ця опція відповідає модифікатору /u у регулярних виразах Perl.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Використовувати властивості Unicode &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;Значення класів символів \w, \d тощо, а також значення їх аналогів (\W, \D тощо) змінено з відповідності лише символам ASCII на відповідність будь-якому символу з властивістю Unicode. Наприклад, \d відповідатиме будь-якому символу з властивістю Unicode Nd (десяткова цифра); \w буде відповідати будь-якому символу з властивістю Unicode L (буква) або N (цифра) плюс знак підкреслення, і так далі. Ця опція відповідає модифікатору /u у регулярних виразах Perl.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="238"/>
@@ -16134,7 +16403,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1640"/>
         <source>Dimension custom names</source>
-        <translation>Користувацькі імена вимірів</translation>
+        <translation>Користувацькі назви вимірів</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="3933"/>
@@ -16164,22 +16433,26 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4017"/>
         <source>Error in row %1. The measurement name is empty.</source>
-        <translation>Помилка в рядку %1. Назва мірки порожнє.</translation>
+        <translation>Помилка в рядку %1. Назва мірки порожня.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4139"/>
         <source>The measurement name is empty.</source>
-        <translation>Ім&apos;я мірки порожнє.</translation>
+        <translation>Назва мірки порожня.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4042"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4095"/>
         <source>Error in row %1. %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка в рядку %1. %2</translation>
     </message>
 </context>
 <context>
     <name>TabGrainline</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"/>
+    </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="39"/>
         <source>Grainline visible</source>
@@ -16194,7 +16467,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="116"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="305"/>
         <source>Formula wizard</source>
-        <translation>Мастер формул</translation>
+        <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="164"/>
@@ -16237,20 +16510,24 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="498"/>
         <source>Arrows:</source>
-        <translation>Стрільки:</translation>
+        <translation>Стрілки:</translation>
     </message>
 </context>
 <context>
     <name>TabLabels</name>
     <message>
+        <source>Form</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="43"/>
         <source>Piece label data</source>
-        <translation>Данні мітки деталі</translation>
+        <translation>Дані мітки деталі</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="92"/>
         <source>Letter:</source>
-        <translation>Літера:</translation>
+        <translation>Буква:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="102"/>
@@ -16258,14 +16535,58 @@ Do you want to save your changes?</source>
         <translation>Символ креслення</translation>
     </message>
     <message>
+        <source>Name of detail:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Detail</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Name can&apos;t be empty</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Material/Cut number/Placement</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Cut number:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Material type:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>You can choose one of the predefined materials or enter a new one</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="129"/>
         <source>Placement:</source>
         <translation>Розташування:</translation>
     </message>
     <message>
+        <source>Add</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="431"/>
         <source>Labels</source>
         <translation>Мітки</translation>
+    </message>
+    <message>
+        <source>Detail label visible</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="507"/>
@@ -16434,7 +16755,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="285"/>
         <source>Pattern name:</source>
-        <translation>Ім&apos;я лекала:</translation>
+        <translation>Назва лекала:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="299"/>
@@ -16444,7 +16765,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="313"/>
         <source>Company/Designer name:</source>
-        <translation>Компанія/дезайнер:</translation>
+        <translation>Компанія/дизайнер:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="327"/>
@@ -16469,7 +16790,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="368"/>
         <source>yyyy-MM-dd</source>
-        <translation>yyyy-MM-dd</translation>
+        <translation>dd-MM-yyyy</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="375"/>
@@ -16505,29 +16826,17 @@ Do you want to save your changes?</source>
 <context>
     <name>TabPassmarks</name>
     <message>
+        <source>Form</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="40"/>
         <source>Passmark:</source>
         <translation>Надсічка:</translation>
     </message>
     <message>
-        <source>One line</source>
-        <translation type="vanished">Одна лінія</translation>
-    </message>
-    <message>
-        <source>Two lines</source>
-        <translation type="vanished">Дві лінії</translation>
-    </message>
-    <message>
-        <source>Three lines</source>
-        <translation type="vanished">Три лінії</translation>
-    </message>
-    <message>
-        <source>T mark</source>
-        <translation type="vanished">Т позначка</translation>
-    </message>
-    <message>
-        <source>V mark</source>
-        <translation type="vanished">V позначка</translation>
+        <source>Lines</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="197"/>
@@ -16564,40 +16873,40 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="333"/>
         <source>Clockwise opening</source>
-        <translation type="unfinished"></translation>
+        <translation>Відкриття за годинниковою стрілкою</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="341"/>
         <source>Manual shape</source>
-        <translation type="unfinished"></translation>
+        <translation>Manual shape</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="350"/>
         <source>Length</source>
-        <translation type="unfinished">Довжина</translation>
+        <translation>Довжина</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="410"/>
         <source>Length:</source>
         <comment>notch depth</comment>
-        <translation type="unfinished">Довжина:</translation>
+        <translation>Довжина:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="575"/>
         <source>Width</source>
-        <translation type="unfinished">Ширина</translation>
+        <translation>Ширина</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="635"/>
         <source>Width:</source>
         <comment>notch width</comment>
-        <translation type="unfinished">Ширина:</translation>
+        <translation>Ширина:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="863"/>
         <source>Angle:</source>
         <comment>notch angle</comment>
-        <translation type="unfinished">Кут:</translation>
+        <translation>Кут:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1038"/>
@@ -16607,66 +16916,66 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1035"/>
         <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
-        <translation>Ця опція має ефект тільки коли друга надсічка на лінії шву включена в глобальних налаштуваннях. Ця опція допомагає віключати другу надсічку для цієї надсічки.</translation>
+        <translation>Ця опція має ефект тільки коли друга надсічка на лінії шва включена в глобальних налаштуваннях. Ця опція допомагає відключати другу надсічку для цієї надсічки.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="60"/>
         <source>Type</source>
-        <translation type="unfinished">Тип</translation>
+        <translation>Тип</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="80"/>
         <source>One line</source>
         <comment>notch type</comment>
-        <translation type="unfinished">Одна лінія</translation>
+        <translation>Одна лінія</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="93"/>
         <source>Two lines</source>
         <comment>notch type</comment>
-        <translation type="unfinished">Дві лінії</translation>
+        <translation>Дві лінії</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="106"/>
         <source>Three lines</source>
         <comment>notch type</comment>
-        <translation type="unfinished">Три лінії</translation>
+        <translation>Три лінії</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="119"/>
         <source>T mark</source>
         <comment>notch type</comment>
-        <translation type="unfinished">Т позначка</translation>
+        <translation>Т-позначка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="135"/>
         <source>External V mark</source>
         <comment>notch type</comment>
-        <translation type="unfinished"></translation>
+        <translation>Зовнішня V-позначка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="151"/>
         <source>Internal V mark</source>
         <comment>notch type</comment>
-        <translation type="unfinished"></translation>
+        <translation>Внутрішня V-позначка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="161"/>
         <source>U mark</source>
         <comment>notch type</comment>
-        <translation type="unfinished">U позначка</translation>
+        <translation>U-позначка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="171"/>
         <source>Box mark</source>
         <comment>notch type</comment>
-        <translation type="unfinished">Квадратна позначка</translation>
+        <translation>Квадратна позначка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="181"/>
         <source>Check mark</source>
         <comment>notch type</comment>
-        <translation type="unfinished"></translation>
+        <translation>Вибрати позначку</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="248"/>
@@ -16711,23 +17020,15 @@ Do you want to save your changes?</source>
         <translation>Гострий кут, що дивиться за межі деталі</translation>
     </message>
     <message>
-        <source>V mark 2</source>
-        <translation type="vanished">V позначка 2</translation>
-    </message>
-    <message>
-        <source>Manual length</source>
-        <translation type="vanished">Ручна довжина</translation>
-    </message>
-    <message>
         <source>Length:</source>
-        <translation type="vanished">Довжина:</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="433"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="658"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="886"/>
         <source>Formula wizard</source>
-        <translation>Мастер формул</translation>
+        <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="487"/>
@@ -16751,14 +17052,6 @@ Do you want to save your changes?</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>U mark</source>
-        <translation type="vanished">U позначка</translation>
-    </message>
-    <message>
-        <source>Box mark</source>
-        <translation type="vanished">Квадратна позначка</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="47"/>
         <source>List of all defined passmarks. To define a passmark return to the Main Path tab, call context menu for a point item and make it a passmark.</source>
         <translation>Список усіх визначених надсічок. Щоб визначити надсічку, поверніться на вкладку «Головний контур», викличте контекстне меню для вузла і зробіть його надсічкою.</translation>
@@ -16772,6 +17065,10 @@ Do you want to save your changes?</source>
 <context>
     <name>TabPaths</name>
     <message>
+        <source>Form</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="43"/>
         <source>Main path</source>
         <translation>Головний контур</translation>
@@ -16779,12 +17076,12 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="67"/>
         <source>All objects in path should follow in clockwise direction.</source>
-        <translation>Всі обєкти в контурі повинні слідувати за годинниковою стрілкою.</translation>
+        <translation>Усі об&apos;єкти в контурі повинні слідувати за годинниковою стрілкою.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="311"/>
         <source>Forbid piece be mirrored in a layout.</source>
-        <translation>Заборонити відображення деталі в розкладці.</translation>
+        <translation>Заборонити віддзеркалення деталі в розкладці.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="314"/>
@@ -16812,7 +17109,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="696"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="886"/>
         <source>Formula wizard</source>
-        <translation>Мастер формул</translation>
+        <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="499"/>
@@ -16843,7 +17140,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="589"/>
         <source>Node:</source>
-        <translation>Вузел:</translation>
+        <translation>Вузол:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="666"/>
@@ -16871,6 +17168,10 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1003"/>
         <source>Angle:</source>
         <translation>Кут:</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1078"/>
@@ -16915,7 +17216,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="243"/>
         <source>Name of detail:</source>
-        <translation>Ім&apos;я деталі:</translation>
+        <translation>Назва деталі:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="226"/>
@@ -16925,7 +17226,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="229"/>
         <source>Name can&apos;t be empty</source>
-        <translation>Ім&apos;я не може бути пустим</translation>
+        <translation>Назва обов&apos;язкова</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="321"/>
@@ -16940,7 +17241,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="111"/>
         <source>Move on top</source>
-        <translation>Перемістіться на вершину</translation>
+        <translation>Перемістити на вершину</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="128"/>
@@ -16987,7 +17288,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="213"/>
         <source>Universally Unique IDentifier of piece. Used to identifier piece while updating manual layout. Left empty to generate new value.</source>
-        <translation>Універсальний унікальний ідентифікатор дателі. Використовується для ідентифікації фрагмента під час оновлення розкладки вручну. Залиште порожнім, щоб створити нове значення.</translation>
+        <translation>Універсальний унікальний ідентифікатор деталі. Використовується для ідентифікації фрагмента під час оновлення розкладки вручну. Залиште порожнім, щоб створити нове значення.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="250"/>
@@ -17021,6 +17322,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>TabPins</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>TabPlaceLabels</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabplacelabels.ui" line="14"/>
@@ -17036,7 +17344,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="vanished">&amp;Відмінити</translation>
+        <translation type="vanished">&amp;Скасувати дію</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
@@ -17204,7 +17512,19 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="158"/>
         <source>The text appears under the icon (recommended for beginners).</source>
-        <translation>Текст відображається під іконкою (рекомендується для новачків).</translation>
+        <translation>Текст під піктограмою (рекомендовано для новачків).</translation>
+    </message>
+    <message>
+        <source>Default height and size</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Default height:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Default size:</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="167"/>
@@ -17219,7 +17539,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="177"/>
         <source>Activate dark mode</source>
-        <translation>Увімкніть темний режим</translation>
+        <translation>Увімкнути темний режим</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="117"/>
@@ -17239,7 +17559,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="200"/>
         <source>Automatically check for updates each time the application starts</source>
-        <translation>Автоматично перевіряти наявність оновлень при кожному запуску програми</translation>
+        <translation>Автоматично перевіряти наявність оновлень під час кожного запуску програми</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="203"/>
@@ -17329,6 +17649,41 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>Tool</name>
+    <message>
+        <source>First point</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Second point</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Highest point</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Lowest point</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Leftmost point</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Rightmost point</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Vertical axis</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Horizontal axis</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>Utils::CheckableMessageBox</name>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/checkablemessagebox.cpp" line="77"/>
@@ -17366,7 +17721,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vformat/vdimensions.cpp" line="259"/>
         <source>Units are invalid</source>
-        <translation type="unfinished"></translation>
+        <translation>Недійсні одиниці виміру</translation>
     </message>
     <message>
         <location filename="../../src/libs/vformat/vdimensions.cpp" line="271"/>
@@ -17405,6 +17760,10 @@ Do you want to save your changes?</source>
         <translation>Півобхват грудей</translation>
     </message>
     <message>
+        <source>Size</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/libs/vformat/vdimensions.cpp" line="305"/>
         <source>Waist full circumference</source>
         <comment>dimension</comment>
@@ -17437,7 +17796,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Too many tags &lt;%1&gt; in file.</source>
-        <translation type="vanished">За надто багато тегів &lt;%1&gt; у файлі.</translation>
+        <translation type="vanished">Забагато тегів &lt;%1&gt; у файлі.</translation>
     </message>
     <message>
         <source>Version &quot;%1&quot; invalid.</source>
@@ -17462,7 +17821,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="366"/>
         <source>Could not change version.</source>
-        <translation>Не давлося змінити версію.</translation>
+        <translation>Не вдалося змінити версію.</translation>
     </message>
     <message>
         <source>Error creating a backup file: %1.</source>
@@ -17495,14 +17854,14 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="223"/>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="247"/>
-        <source>Can&apos;t open file %1:
+        <source>Can't open file %1:
 %2.</source>
         <translation>Не можу відкрити файл%1: 
 %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="177"/>
-        <source>Can&apos;t open schema file %1:
+        <source>Can't open schema file %1:
 %2.</source>
         <translation>Не можу відкрити файл схеми %1:\n%2.</translation>
     </message>
@@ -17515,7 +17874,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="208"/>
         <source>Schema file %3 invalid in line %1 column %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл схеми %3 недійсний у рядку %1 стовпця %2</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="239"/>
@@ -17549,7 +17908,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vgeometry/vabstractcubicbezierpath.cpp" line="202"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
-        <translation>Крива &quot;%1&quot;. Довжина відрізка занадто мала. Оптимізуйте його до мінімального значення.</translation>
+        <translation>Крива &quot;%1&quot;. Довжина відрізка замала. Оптимізуйте його до мінімального значення.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/vabstractcubicbezierpath.cpp" line="215"/>
@@ -17559,11 +17918,55 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vgeometry/vabstractcubicbezierpath.cpp" line="220"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
-        <translation>Крива &quot;%1&quot;. Занадто велика довжина відрізка. Оптимізуйте його до максимального значення.</translation>
+        <translation>Крива &quot;%1&quot;. Завелика довжина відрізка. Оптимізуйте його до максимального значення.</translation>
     </message>
 </context>
 <context>
     <name>VAbstractLayoutDialog</name>
+    <message>
+        <source>Letter</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Legal</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 24in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 30in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 36in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 42in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 44in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 48in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 62in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 72in</source>
+        <translation type="unfinished"/>
+    </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/vabstractlayoutdialog.cpp" line="41"/>
         <source>Letter</source>
@@ -17652,7 +18055,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vwidgets/vabstractmainwindow.cpp" line="203"/>
         <source>Comma-Separated Values</source>
-        <translation>Comma-Separated Values</translation>
+        <translation>Розділені комою значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vwidgets/vabstractmainwindow.cpp" line="205"/>
@@ -17719,7 +18122,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vwidgets/vabstractmainwindow.cpp" line="281"/>
         <source>Do you want to change the permissions?</source>
-        <translation>Ви хочете змінити дозволи?</translation>
+        <translation>Хочете змінити дозволи?</translation>
     </message>
 </context>
 <context>
@@ -17749,6 +18152,11 @@ Do you want to save your changes?</source>
         <translation>параметри операції</translation>
     </message>
     <message>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="270"/>
+        <source>default</source>
+        <translation>по замовчуванню</translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="682"/>
         <source>delete operation</source>
         <translation>операцію видалення</translation>
@@ -17757,11 +18165,6 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="971"/>
         <source>Visibility group</source>
         <translation>Група видимості</translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="270"/>
-        <source>default</source>
-        <translation>по замовчуванню</translation>
     </message>
 </context>
 <context>
@@ -17777,6 +18180,11 @@ Do you want to save your changes?</source>
         <translation>Помилка створення чи оновлення групи</translation>
     </message>
     <message>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2188"/>
+        <source>measurement</source>
+        <translation>мірка</translation>
+    </message>
+    <message>
         <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2440"/>
         <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2620"/>
         <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2700"/>
@@ -17784,14 +18192,9 @@ Do you want to save your changes?</source>
         <translation>Нова група</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2188"/>
-        <source>measurement</source>
-        <translation>мірка</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="858"/>
         <source>Wrong tag name &apos;%1&apos;.</source>
-        <translation>Не правильне ім&apos;я тегу &apos;%1&apos;.</translation>
+        <translation>Неправильна назва тегу &apos;%1&apos;.</translation>
     </message>
 </context>
 <context>
@@ -17799,7 +18202,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vlayout/vabstractpiece.cpp" line="1075"/>
         <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
-        <translation type="unfinished"></translation>
+        <translation>Деталь &quot;%1&quot;. Недостатньо точок для створення припуску на шви.</translation>
     </message>
 </context>
 <context>
@@ -17848,7 +18251,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="290"/>
         <source>dark green</source>
-        <translation>темно зелений</translation>
+        <translation>темно-зелений</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="293"/>
@@ -17862,7 +18265,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Confirm deletion</source>
-        <translation type="vanished">Підтвердіть видалення</translation>
+        <translation type="vanished">Підтвердьте видалення</translation>
     </message>
     <message>
         <source>Do you really want to delete?</source>
@@ -17871,11 +18274,16 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="299"/>
         <source>light salmon</source>
-        <translation>світло рожевий</translation>
+        <translation>світло-рожевий</translation>
     </message>
     <message>
         <source>golden rod</source>
         <translation type="vanished">золотистий</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="302"/>
+        <source>goldenrod</source>
+        <translation>золотистий</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="305"/>
@@ -17885,7 +18293,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="308"/>
         <source>deep pink</source>
-        <translation>темно рожевий</translation>
+        <translation>темно-рожевий</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="311"/>
@@ -17895,7 +18303,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="314"/>
         <source>dark violet</source>
-        <translation>темно фіолетовий</translation>
+        <translation>темно-фіолетовий</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="317"/>
@@ -17910,7 +18318,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="323"/>
         <source>deep sky blue</source>
-        <translation>темно небесно синій</translation>
+        <translation>темний небесно-синій</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="326"/>
@@ -17922,18 +18330,13 @@ Do you want to save your changes?</source>
         <source>Edit wrong formula</source>
         <translation>Редагувати неправильну формулу</translation>
     </message>
-    <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="302"/>
-        <source>goldenrod</source>
-        <translation>золотистий</translation>
-    </message>
 </context>
 <context>
     <name>VApplication</name>
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="427"/>
         <source>Error parsing file. Program will be terminated.</source>
-        <translation>Помилка парсінгу файла. Програма буде закрита.</translation>
+        <translation>Помилка парсингу файла. Програма буде закрита.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="433"/>
@@ -17948,7 +18351,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="445"/>
         <source>Error empty parameter. Program will be terminated.</source>
-        <translation>Помилка пустий параметр. Програма буде закрита.</translation>
+        <translation>Помилка порожній параметр. Програма буде закрита.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="451"/>
@@ -17963,7 +18366,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="484"/>
         <source>Parser error: %1. Program will be terminated.</source>
-        <translation>Помилка парсінгу: %1. Програма буде закрита.</translation>
+        <translation>Помилка парсингу: %1. Програма буде закрита.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="489"/>
@@ -17986,7 +18389,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vgeometry/varc.cpp" line="360"/>
         <source>Unable to cut curve &apos;%1&apos;. The curve is too short.</source>
-        <translation>Неможливо розрізати криву &quot;%1&quot;. Крива занадто коротка.</translation>
+        <translation>Неможливо розрізати криву &quot;%1&quot;. Крива закоротка.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/varc.cpp" line="471"/>
@@ -17998,7 +18401,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vgeometry/varc.cpp" line="476"/>
         <location filename="../../src/libs/vgeometry/varc.cpp" line="528"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
-        <translation>Крива &quot;%1&quot;. Довжина відрізка занадто мала. Оптимізуйте його до мінімального значення.</translation>
+        <translation>Крива &quot;%1&quot;. Довжина відрізка замала. Оптимізуйте його до мінімального значення.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/varc.cpp" line="487"/>
@@ -18010,7 +18413,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vgeometry/varc.cpp" line="493"/>
         <location filename="../../src/libs/vgeometry/varc.cpp" line="544"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
-        <translation>Крива &quot;%1&quot;. Занадто велика довжина відрізка. Оптимізуйте його до максимального значення.</translation>
+        <translation>Крива &quot;%1&quot;. Завелика довжина відрізка. Оптимізуйте його до максимального значення.</translation>
     </message>
 </context>
 <context>
@@ -18235,12 +18638,12 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="111"/>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="530"/>
         <source>Unsupported paper units.</source>
-        <translation>Не підтримувані одиниці вимірювання для паперу.</translation>
+        <translation>Непідтримувані одиниці вимірювання для паперу.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="145"/>
         <source>Unsupported layout units.</source>
-        <translation>Не підтримувані одиниці вимірювання для розкладки.</translation>
+        <translation>Непідтримувані одиниці вимірювання для розкладки.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="240"/>
@@ -18250,7 +18653,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Run the program in a test mode. The program this mode load a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
-        <translation type="vanished">Запускає програму у тестовому режимі. Програма в цьому режимі завантажує один файл лекала і мовчки завершується, не показуючи головне вікно. Ключ має пріорітет перед ключем &apos;%1&apos;.</translation>
+        <translation type="vanished">Запускає програму у тестовому режимі. Програма в цьому режимі завантажує один файл лекала і мовчки завершується, не показуючи головне вікно. Ключ має пріоритет перед ключем &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="215"/>
@@ -18260,25 +18663,25 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="606"/>
         <source>The base filename of exported layout files. Use it to enable console export mode.</source>
-        <translation>Базове ім&apos;я експортуємих файлів розкладки. Використовуйте для консольного режиму експорту.</translation>
+        <translation>Базова назва файлів експорту розкладки. Використовуйте для консольного режиму експорту.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="607"/>
         <source>The base filename of layout files</source>
-        <translation>Базове ім&apos;я файлів розкладки</translation>
+        <translation>Базова назва файлів розкладки</translation>
     </message>
     <message>
         <source>The path to output destination folder.</source>
-        <translation type="vanished">Шлях до папки призначення виводу.</translation>
+        <translation type="vanished">Шлях до теки призначення виводу.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="611"/>
         <source>The destination folder</source>
-        <translation>Папка призначення</translation>
+        <translation>Тека призначення</translation>
     </message>
     <message>
         <source>Set size value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation type="vanished">Встановлює значення розміру для файлу лекала, котрий був відкрит за допомогою стандартних мірок (режим експорту). Припустимі значення: %1cm.</translation>
+        <translation type="vanished">Встановлює значення розміру для файлу лекала, котрий був відкритий за допомогою стандартних мірок (режим експорту). Припустимі значення: %1cm.</translation>
     </message>
     <message>
         <source>The size value</source>
@@ -18286,7 +18689,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Set height value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation type="vanished">Встановлює значення росту для файлу лекала, котрий був відкрит за допомогою стандартних мірок (режим експорту). Допустимі значення: %1 см.</translation>
+        <translation type="vanished">Встановлює значення росту для файлу лекала, котрий був відкритий за допомогою стандартних мірок (режим експорту). Допустимі значення: %1 см.</translation>
     </message>
     <message>
         <source>The height value</source>
@@ -18304,7 +18707,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode): </source>
-        <translation type="vanished">Одиниці вимірювання висоти і ширини сторінки (не може бути використано з &quot;%1&quot;, режим експорту).</translation>
+        <translation type="vanished">Одиниці вимірювання висоти та ширини сторінки (не може бути використано з &quot;%1&quot;, режим експорту).</translation>
     </message>
     <message>
         <source>Invalid gradation size value.</source>
@@ -18388,27 +18791,27 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Ignore margins printing (export mode). Disable value keys: &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Set all margins to 0.</source>
-        <translation type="vanished">Ігнорувати поля друку (режим експорту). Вимикає значення ключей: &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Встановлює всі поля в 0.</translation>
+        <translation type="vanished">Ігнорувати поля друку (режим експорту). Вимикає значення ключів: &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Встановлює всі поля в 0.</translation>
     </message>
     <message>
         <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="vanished">Ліве поле сторінки в поточних одиницях, наприклад, 3.0 (режим експорту). Якщо не встановлено, буде використане значення із принтера за замовчуванням. Або 0, якщо принтери не були виявлені. Значення будет проігноровано якщо був використан ключ &quot;%1&quot;.</translation>
+        <translation type="vanished">Ліве поле сторінки в поточних одиницях, наприклад, 3.0 (режим експорту). Якщо не встановлено, буде використане значення із принтера за замовчуванням. Або 0, якщо принтери не були виявлені. Значення буде проігноровано якщо був використаний ключ &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="vanished">Праве поле сторінки в поточних одиницях, наприклад, 3.0 (режим експорту). Якщо не встановлено, буде використане значення із принтера за замовчуванням. Або 0, якщо принтери не були виявлені. Значення будет проігноровано якщо був використан ключ &quot;%1&quot;.</translation>
+        <translation type="vanished">Праве поле сторінки в поточних одиницях, наприклад, 3.0 (режим експорту). Якщо не встановлено, буде використане значення із принтера за замовчуванням. Або 0, якщо принтери не були виявлені. Значення буде проігноровано якщо був використаний ключ &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="vanished">Верхнє поле сторінки в поточних одиницях, наприклад, 3.0 (режим експорту). Якщо не встановлено, буде використане значення із принтера за замовчуванням. Або 0, якщо принтери не були виявлені. Значення будет проігноровано якщо був використан ключ &quot;%1&quot;.</translation>
+        <translation type="vanished">Верхнє поле сторінки в поточних одиницях, наприклад, 3.0 (режим експорту). Якщо не встановлено, буде використане значення із принтера за замовчуванням. Або 0, якщо принтери не були виявлені. Значення буде проігноровано якщо був використаний ключ &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="vanished">Нижнє поле сторінки в поточних одиницях, наприклад, 3.0 (режим експорту). Якщо не встановлено, буде використане значення із принтера за замовчуванням. Або 0, якщо принтери не були виявлені. Значення будет проігноровано якщо був використан ключ &quot;%1&quot;.</translation>
+        <translation type="vanished">Нижнє поле сторінки в поточних одиницях, наприклад, 3.0 (режим експорту). Якщо не встановлено, буде використане значення із принтера за замовчуванням. Або 0, якщо принтери не були виявлені. Значення буде проігноровано якщо був використаний ключ &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Rotation in degrees (one of predefined, export mode). Default value is 180. 0 is no-rotate. Valid values: %1. Each value show how many times details will be rotated. For example 180 mean two times (360/180=2) by 180 degree.</source>
-        <translation type="vanished">Обертання в градусах (одне із наперед заданих значень, режим експорту). Значення за замовчуванням 180. 0 - немає повороту. Допустимі значення: %1. Кожне значення показує скільки разів деталь буде повернута. Наприклад, 180 означає поворот два рази (360/180=2) на 180 градусів.</translation>
+        <translation type="vanished">Обертання в градусах (одне з наперед заданих значень, режим експорту). Значення за замовчуванням 180. 0 - немає повороту. Допустимі значення: %1. Кожне значення показує скільки разів деталь буде повернута. Наприклад, 180 означає поворот два рази (360/180=2) на 180 градусів.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="713"/>
@@ -18422,12 +18825,12 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Shift layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation type="vanished">Довжина зміщення розкладки у одиницях виміру розкладки (режим експорту). Опція показує як багато точок уздовж ребра буде створено під час створення розкладки. </translation>
+        <translation type="vanished">Довжина зміщення розкладки в одиницях виміру розкладки (режим експорту). Опція показує як багато точок уздовж ребра буде створено під час створення розкладки. </translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="725"/>
         <source>The layout gap width x2, measured in layout units (export mode). Set distance between details and a detail and a sheet.</source>
-        <translation>Проміжок розкладки х2, виміряний у одиницях виміру розкладки (режим експорту). Встановлює відстань між деталями і деталлю і краєм листа.</translation>
+        <translation>Проміжок розкладки х2, виміряний в одиницях виміру розкладки (режим експорту). Встановлює відстань між деталями й деталлю і краєм листа.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="729"/>
@@ -18437,11 +18840,11 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="733"/>
         <source>Run the program in a test mode. The program in this mode loads a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
-        <translation>Запускає програму в тестовому режимі. Програма в цьому режимі завантажує один файл лекала і мовчки завершується, не показуючи головне вікно. Ключ має пріорітет перед ключем &apos;%1&apos;.</translation>
+        <translation>Запускає програму в тестовому режимі. Програма в цьому режимі завантажує один файл лекала і тихо завершується, не показуючи головне вікно. Ключ має пріоритет перед ключем &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Shift/Offset layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation type="vanished">Довжина зміщення розкладки у одиницях виміру розкладки (режим експорту). Опція показує як багато точок уздовж ребра буде створено під час створення розкладки.</translation>
+        <translation type="vanished">Довжина зміщення розкладки в одиницях виміру розкладки (режим експорту). Опція показує як багато точок уздовж ребра буде створено під час створення розкладки.</translation>
     </message>
     <message>
         <source>Shift/Offset length</source>
@@ -18458,13 +18861,13 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Number corresponding to page template (default = 0, export mode):</source>
-        <translation type="vanished">Номер, відповідаючий шаблону (за замовчуванням = 0, режим експорту):</translation>
+        <translation type="vanished">Номер, що відповідає шаблону (за замовчуванням = 0, режим експорту):</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpcommandline.cpp" line="106"/>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="740"/>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
-        <translation>Відключити масштабування з високим розширенням. Викличте цю функцію якщо маєте проблему з масштабуванням (за замовчуванням масштабування увімкнено). Альтернативно ви можете використовувати перемену оточення %1.</translation>
+        <translation>Вимкнути масштабування з високою роздільністю. Викличте цю функцію якщо маєте проблему з масштабуванням (за замовчуванням масштабування увімкнено). Альтернативно ви можете використовувати змінну середовища %1.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="629"/>
@@ -18474,7 +18877,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="630"/>
         <source>Show/hide grainline when export layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати/сховати нитку основи під час експорту розкладки.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="631"/>
@@ -18489,12 +18892,12 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="636"/>
         <source>Export only details that match a piece name regex.</source>
-        <translation>Експортувати лише ті деталі, які відповідають регулярному виразу імені деталі.</translation>
+        <translation>Експортувати лише ті деталі, які відповідають регулярному виразу назви деталі.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="637"/>
         <source>The name regex</source>
-        <translation>Регулярний вираз імені</translation>
+        <translation>Регулярний вираз назви</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="745"/>
@@ -18524,7 +18927,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="757"/>
         <source>Calling this command enable exporting final measurements. Specify path to csv file with final measurements. The path must contain path to directory and name of file. It can be absolute or relatetive. In case of relative path will be used current working directory to calc a destination path.</source>
-        <translation>Виклик цієї команди дозволяє експортувати фінальні вимірювання. Вкажіть шлях до файлу csv з фінальними вимірюваннями. Шлях повинен містити шлях до каталогу та ім&apos;я файлу. Він може бути абсолютним або відносним. У випадку відносного шляху буде використовуватися поточний робочий каталог для обчислення шляху призначення.</translation>
+        <translation>Виклик цієї команди дозволяє експортувати фінальні вимірювання. Вкажіть шлях до файлу csv з фінальними вимірюваннями. Шлях повинен містити шлях до каталогу та назву файлу. Він може бути абсолютним або відносним. У випадку відносного шляху буде використовуватися поточний робочий каталог для обчислення шляху призначення.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="760"/>
@@ -18588,7 +18991,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="783"/>
         <source>Set tiled page orienatation to landscape (export mode). Default value if not set portrait.</source>
-        <translation>Установити орієнтацію сторінки плиткою на альбомну (режим експорту). Значення за замовчуванням, якщо не встановлено портретна.</translation>
+        <translation>Установити орієнтацію сторінки плиткою на альбомну (режим експорту). Значення за замовчуванням, якщо не встановлена портретна.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="857"/>
@@ -18776,29 +19179,9 @@ Do you want to save your changes?</source>
         <translation>База виміру C</translation>
     </message>
     <message>
-        <source>The filename of exported layout file. Use it to enable console export mode.</source>
-        <translation type="vanished">Ім&apos;я файлу експортованого файлу розкладки. Використовується для активації режиму експорту консолі.</translation>
-    </message>
-    <message>
-        <source>The filename of layout file</source>
-        <translation type="vanished">Ім&apos;я файлу розкладки</translation>
-    </message>
-    <message>
         <location filename="../../src/app/puzzle/vpcommandline.cpp" line="104"/>
         <source>The raw layout data file</source>
         <translation>Файл необроблених даних розкладки</translation>
-    </message>
-    <message>
-        <source>Number corresponding to output format (default = 0, export mode): &lt;not defined&gt;</source>
-        <translation type="vanished">Число, що відповідає формату виводу (за замовчуванням = 0, режим експорту): &lt;not defined&gt;</translation>
-    </message>
-    <message>
-        <source>Number corresponding to tiled pdf page template (default = 0, export mode with tiled pdf format): &lt;not defined&gt;</source>
-        <translation type="vanished">Номер, що відповідає шаблону сторінки pdf плиткою (за замовчуванням = 0, режим експорту у форматі pdf плиткою): &lt;not defined&gt;</translation>
-    </message>
-    <message>
-        <source>Run the program in a test mode. The program in this mode loads a single layout file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
-        <translation type="vanished">Запуск програми в тестовому режимі. Програма в цьому режимі завантажує один файл розкладки та безшумно завершує роботу, не показуючи головне вікно. Ключ має пріоритет перед ключем «%1».</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="119"/>
@@ -18955,7 +19338,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vgeometry/vcubicbezierpath.cpp" line="213"/>
         <source>Not enough points to create the spline.</source>
-        <translation>Не достатньо точок для створення кривої.</translation>
+        <translation>Недостатньо точок для створення кривої.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/vcubicbezierpath.cpp" line="218"/>
@@ -18975,7 +19358,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Got empty parameter</source>
-        <translation type="vanished">Отримано пустий параметр</translation>
+        <translation type="vanished">Отримано порожній параметр</translation>
     </message>
     <message>
         <source>Can&apos;t convert toDouble parameter</source>
@@ -18983,15 +19366,16 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="728"/>
-        <source>Can&apos;t open file %1:
+        <source>Can't open file %1:
 %2.</source>
-        <translation>Не можу відкрити файл%1: 
+        <translation>Не можу відкрити файл %1: 
 %2.</translation>
     </message>
     <message>
-        <source>Can&apos;t open schema file %1:
+        <source>Can't open schema file %1:
 %2.</source>
-        <translation type="vanished">Не можу відкрити файл схеми %1:\n%2.</translation>
+        <translation type="vanished">Не можу відкрити файл схеми %1:
+%2.</translation>
     </message>
     <message>
         <source>Could not load schema file.</source>
@@ -18999,12 +19383,12 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Validation error file %3 in line %1 column %2</source>
-        <translation type="vanished">Помилка валідації файлу %3 в рядку %1 стовпця %2</translation>
+        <translation type="vanished">Помилка валідації файлу %3 в рядку %1 стовпчику %2</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="739"/>
         <source>Parsing error file %3 in line %1 column %2</source>
-        <translation>Помилка розбору файлу %3 в рядку %1 стовпця %2</translation>
+        <translation>Помилка розбору файлу %3 в рядку %1 стовпчику %2</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="999"/>
@@ -19021,7 +19405,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Could not copy temp file to document file</source>
-        <translation type="vanished">Не вдалося зкопіювати тимчасовий файл до файлу документа</translation>
+        <translation type="vanished">Не вдалося копіювати тимчасовий файл до файлу документа</translation>
     </message>
     <message>
         <source>Could not remove document file</source>
@@ -19035,11 +19419,6 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="418"/>
         <source>Fail to write Canonical XML.</source>
         <translation>Не вдалося записати канонічний XML.</translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1089"/>
-        <source>&lt;empty&gt;</source>
-        <translation>&lt;empty&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="355"/>
@@ -19059,7 +19438,12 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="845"/>
         <source>Too many tags &lt;%1&gt; in file.</source>
-        <translation>За надто багато тегів &lt;%1&gt; у файлі.</translation>
+        <translation>Забагато тегів &lt;%1&gt; у файлі.</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1089"/>
+        <source>&lt;empty&gt;</source>
+        <translation>&lt;empty&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1131"/>
@@ -19069,7 +19453,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1137"/>
         <source>Version &quot;0.0.0&quot; invalid.</source>
-        <translation>Версія &quot;0.0.0&quot; не дійсне.</translation>
+        <translation>Версія &quot;0.0.0&quot; не дійсна.</translation>
     </message>
 </context>
 <context>
@@ -19091,7 +19475,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.cpp" line="258"/>
         <source>This id (%1) is not unique.</source>
-        <translation>Цей id (%1) не є унікальним.</translation>
+        <translation>Цей id (%1) не унікальний.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="194"/>
@@ -19101,7 +19485,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="218"/>
         <source>Remove from group</source>
-        <translation>Видалити із групи</translation>
+        <translation>Видалити з групи</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="233"/>
@@ -19119,7 +19503,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/ifc/exception/vexception.cpp" line="83"/>
         <source>Exception: %1</source>
-        <translation>Виключення: %1</translation>
+        <translation>Виняток: %1</translation>
     </message>
 </context>
 <context>
@@ -19201,6 +19585,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VInteractiveTool</name>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>VLayoutConverter</name>
     <message>
         <location filename="../../src/libs/ifc/xml/vlayoutconverter.cpp" line="158"/>
@@ -19223,7 +19614,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="479"/>
         <source>Cannot set printer margins</source>
-        <translation>Не вдалося встановити поля принтеру</translation>
+        <translation>Не вдалося встановити поля принтера</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="486"/>
@@ -19238,7 +19629,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="436"/>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation>Створення файлу &apos;%1&apos; не вдалося! %2</translation>
+        <translation>Не вдалося створити файл &apos;%1&apos;! %2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="318"/>
@@ -19314,7 +19705,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1334"/>
         <source>The measurement name is empty!</source>
-        <translation>Ім&apos;я мірки порожнє!</translation>
+        <translation>Назва мірки порожня!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1118"/>
@@ -19339,7 +19730,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1437"/>
         <source>Dimension is not valid</source>
-        <translation type="unfinished"></translation>
+        <translation>Недійсний вимір</translation>
     </message>
     <message>
         <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1124"/>
@@ -19360,16 +19751,6 @@ Do you want to save your changes?</source>
         <translation>В розкладку</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="316"/>
-        <source>Show label</source>
-        <translation>Показати мітку</translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="324"/>
-        <source>Exclude</source>
-        <translation>Виключити</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="361"/>
         <source>Delete</source>
         <translation>Видалити</translation>
@@ -19380,9 +19761,8 @@ Do you want to save your changes?</source>
         <translation>Заборонити відзеркалення</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="350"/>
-        <source>Force flipping</source>
-        <translation>Примусове перевертання</translation>
+        <source>Angle</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="422"/>
@@ -19420,9 +19800,24 @@ Do you want to save your changes?</source>
         <translation>Надсічка</translation>
     </message>
     <message>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="316"/>
+        <source>Show label</source>
+        <translation>Показати мітку</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="324"/>
+        <source>Exclude</source>
+        <translation>Виключити</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="350"/>
+        <source>Force flipping</source>
+        <translation>Примусове перевертання</translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="356"/>
         <source>Reset piece label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Скинути шаблон мітки деталі</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="395"/>
@@ -19502,25 +19897,17 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="526"/>
         <source>External V mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Зовнішня V-позначка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="528"/>
         <source>Internal V mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Внутрішня V-позначка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="534"/>
         <source>Check mark</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>V mark</source>
-        <translation type="vanished">V позначка</translation>
-    </message>
-    <message>
-        <source>V mark 2</source>
-        <translation type="vanished">V позначка 2</translation>
+        <translation>Вибрати позначку</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="530"/>
@@ -19543,7 +19930,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/puzzle/vpapplication.cpp" line="292"/>
         <source>Error parsing file. Program will be terminated.</source>
-        <translation>Помилка парсінгу файла. Програма буде закрита.</translation>
+        <translation>Помилка парсингу файла. Програма буде закрита.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpapplication.cpp" line="298"/>
@@ -19558,7 +19945,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/puzzle/vpapplication.cpp" line="310"/>
         <source>Error empty parameter. Program will be terminated.</source>
-        <translation>Помилка пустий параметр. Програма буде закрита.</translation>
+        <translation>Помилка порожній параметр. Програма буде закрита.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpapplication.cpp" line="316"/>
@@ -19582,7 +19969,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Please, provide one input file.</source>
-        <translation type="vanished">Будь ласка, надайте один вхідний файл.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpapplication.cpp" line="664"/>
@@ -19648,12 +20035,12 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="97"/>
         <source>Build revision:</source>
-        <translation>Ревізія:</translation>
+        <translation>Версія збірки:</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="107"/>
         <source>This program is part of Valentina project.</source>
-        <translation>Ця програма є частиною проекту Valentina.</translation>
+        <translation>Ця програма є частиною проєкту Valentina.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="273"/>
@@ -19668,7 +20055,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.cpp" line="134"/>
         <source>Build revision: %1</source>
-        <translation>Ревізія: %1</translation>
+        <translation>Версія збірки: %1</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.cpp" line="138"/>
@@ -19678,7 +20065,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.cpp" line="145"/>
         <source>Web site : %1</source>
-        <translation>Веб сайт : %1</translation>
+        <translation>Вебсайт : %1</translation>
     </message>
 </context>
 <context>
@@ -19736,7 +20123,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="649"/>
         <source>Error in line %1. Grainline main line is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка в рядку %1. Рядок нитки основи порожній.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="994"/>
@@ -19747,10 +20134,6 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="624"/>
         <source>Error in line %1. Seam allowance is empty.</source>
         <translation>Помилка в рядку %1. Припуск на шви порожній.</translation>
-    </message>
-    <message>
-        <source>Error in line %1. Grainline is empty.</source>
-        <translation type="vanished">Помилка в рядку %1. Нитка основи порожня.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="743"/>
@@ -19765,7 +20148,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="479"/>
         <source>Piece %1 invalid. %2</source>
-        <translation>Деталь %1 невірна. %2</translation>
+        <translation>Деталь %1 недійсна. %2</translation>
     </message>
 </context>
 <context>
@@ -19796,12 +20179,12 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="76"/>
         <source>&amp;Window</source>
-        <translation>Вікно</translation>
+        <translation>&amp;Вікно</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="82"/>
         <source>&amp;Help</source>
-        <translation>&amp;Допомога</translation>
+        <translation>&amp;Довідка</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="120"/>
@@ -19841,7 +20224,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="751"/>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1658"/>
         <source>Name:</source>
-        <translation>Імя:</translation>
+        <translation>Ім&apos;я:</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="604"/>
@@ -19898,6 +20281,14 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1270"/>
         <source>Format</source>
         <translation>Формат</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1013"/>
@@ -20009,6 +20400,10 @@ Do you want to save your changes?</source>
         <translation>Розкладка</translation>
     </message>
     <message>
+        <source>Name</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1674"/>
         <source>Description</source>
         <translation>Опис</translation>
@@ -20016,7 +20411,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1693"/>
         <source>Warning superposition of pieces</source>
-        <translation>Попереджувати про перетин деталей</translation>
+        <translation>Попереджати про перетин деталей</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1700"/>
@@ -20047,17 +20442,17 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2042"/>
         <source>Save &amp;As</source>
-        <translation>Зберегти як</translation>
+        <translation>Зберегти &amp;як</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2056"/>
         <source>&amp;Import Raw Layout Data</source>
-        <translation>Імпорт необроблених даних розкладки</translation>
+        <translation>&amp;Імпорт необроблених даних розкладки</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2071"/>
         <source>E&amp;xit</source>
-        <translation>&amp;Вихід</translation>
+        <translation>Ви&amp;хід</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2086"/>
@@ -20227,7 +20622,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3536"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation>Неможливо заблокувати. Цей файл вже був відкритий в іншому вікні. Можливі конфлікти, якщо одночасно запущено кілька екземплярів програми.</translation>
+        <translation>Неможливо заблокувати. Цей файл вже був відкритий в іншому вікні. Можливі конфлікти, якщо одночасно запущено 2 екземпляри програми.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3546"/>
@@ -20242,12 +20637,12 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="62"/>
         <source>&amp;Sheet</source>
-        <translation>Аркуш</translation>
+        <translation>&amp;Аркуш</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="89"/>
         <source>&amp;Layout</source>
-        <translation>Розкладка</translation>
+        <translation>&amp;Розкладка</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="100"/>
@@ -20358,7 +20753,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1553"/>
         <source>Print tiles scheme</source>
-        <translation>Роздрукувати схему плитки</translation>
+        <translation>Надрукувати схему плитки</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1723"/>
@@ -20438,7 +20833,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="653"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3362"/>
         <source>&amp;Undo</source>
-        <translation>&amp;Відмінити</translation>
+        <translation>&amp;Скасувати дію</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="659"/>
@@ -20455,7 +20850,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1710"/>
         <source>Unsaved changes</source>
-        <translation>Не збереженні змінення</translation>
+        <translation>Незбереженні зміни</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1711"/>
@@ -20505,7 +20900,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2794"/>
         <source>The layout is invalid. Piece out of bound. Do you want to continue export?</source>
-        <translation>Розкладка недійсна. Деталь поза межами аркушу. Ви хочете продовжити експорт?</translation>
+        <translation>Розкладка недійсна. Деталь поза межами аркуша. Ви хочете продовжити експорт?</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2823"/>
@@ -20555,7 +20950,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4397"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4433"/>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation>Не можливо виконати тому що не знайдено доступних принтерів у вашій системі.</translation>
+        <translation>Неможливо виконати, тому що не знайдено доступних принтерів у вашій системі.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4496"/>
@@ -20603,7 +20998,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1550"/>
         <source>Has effect only when print in application. To export with tiles scheme use separate setting</source>
-        <translation>Впливає тільки при друку в додатку. Для експорту зі схемою плитки використовуйте окреме налаштування</translation>
+        <translation>Впливає тільки на друку в застосунку. Для експорту зі схемою плитки використовуйте окреме налаштування</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4091"/>
@@ -20633,6 +21028,53 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="480"/>
         <source>Grainline is empty</source>
         <translation>Нитка основи порожня</translation>
+    </message>
+</context>
+<context>
+    <name>VPSheet</name>
+    <message>
+        <source>Letter</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Legal</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 24in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 30in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 36in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 42in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 44in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 48in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 62in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 72in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -20732,7 +21174,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="537"/>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="637"/>
         <source>Error empty parameter.</source>
-        <translation>Помилка, пустий параметр.</translation>
+        <translation>Помилка, порожній параметр.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="544"/>
@@ -20744,7 +21186,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="558"/>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="670"/>
         <source>Error parsing file (std::bad_alloc).</source>
-        <translation>Помилка парсінгу файлу (std::bad_alloc).</translation>
+        <translation>Помилка парсингу файлу (std::bad_alloc).</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="999"/>
@@ -20921,7 +21363,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="851"/>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="928"/>
         <source>Wrong tag name &apos;%1&apos;.</source>
-        <translation>Не правильне ім&apos;я тегу &apos;%1&apos;.</translation>
+        <translation>Неправильна назва тегу &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1444"/>
@@ -20966,12 +21408,12 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2816"/>
         <source>Error creating or updating cubic bezier curve</source>
-        <translation>Помилка створення чи оновлення кубічної кривої безье</translation>
+        <translation>Помилка створення чи оновлення кубічної кривої Безьє</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3046"/>
         <source>Error creating or updating cubic bezier path curve</source>
-        <translation>Помилка створення чи оновлення складної кубічної кривої безье</translation>
+        <translation>Помилка створення чи оновлення складної кубічної кривої Безьє</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3426"/>
@@ -20992,7 +21434,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3496"/>
         <source>Error creating or updating operation of flipping by axis</source>
-        <translation>Помилка створення чи оновлення операції відзеркалення за вісью</translation>
+        <translation>Помилка створення чи оновлення операції віддзеркалення за віссю</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3542"/>
@@ -21145,6 +21587,11 @@ Do you want to save your changes?</source>
 <context>
     <name>VPiece</name>
     <message>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="182"/>
+        <source>Main path of piece %1</source>
+        <translation>Основний контур деталі %1</translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="939"/>
         <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="978"/>
         <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1062"/>
@@ -21155,11 +21602,6 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1091"/>
         <source>Notch for point &apos;%1&apos; in piece &apos;%2&apos; will be disabled. Manual length is less than allowed value.</source>
         <translation>Надсічка для точки «%1» у деталі «%2» буде вимкнена. Ручна довжина менша за допустиме значення.</translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="182"/>
-        <source>Main path of piece %1</source>
-        <translation>Основний контур деталі %1</translation>
     </message>
 </context>
 <context>
@@ -21180,6 +21622,11 @@ Do you want to save your changes?</source>
         <translation>Аркуш %1 з %2</translation>
     </message>
     <message>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="324"/>
+        <source>Cannot open the watermark image.</source>
+        <translation>Не вдається відкрити зображення водяного знака.</translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vlayout/vposter.cpp" line="335"/>
         <source>Not supported file suffix &apos;%1&apos;</source>
         <translation>Суфікс файлу &quot;%1&quot; не підтримується</translation>
@@ -21196,11 +21643,6 @@ Do you want to save your changes?</source>
         <comment>unit</comment>
         <translation>дюйм</translation>
     </message>
-    <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="324"/>
-        <source>Cannot open the watermark image.</source>
-        <translation>Не вдається відкрити зображення водяного знака.</translation>
-    </message>
 </context>
 <context>
     <name>VPrintLayout</name>
@@ -21212,12 +21654,12 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vlayout/vprintlayout.cpp" line="184"/>
         <source>For previewing multipage document all sheet should have the same size.</source>
-        <translation>Для перегляду багатосторінкового документу всі листи повинні мати той самий розмір.</translation>
+        <translation>Для перегляду багатосторінкового документа всі листи повинні мати той самий розмір.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vprintlayout.cpp" line="210"/>
         <source>Pages will be cropped because they do not fit printer paper size.</source>
-        <translation>Сторінки будуть обрізані тому що вони не відповідають формату паперу принтера.</translation>
+        <translation>Сторінки будуть обрізані, тому що вони не відповідають формату паперу принтера.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vprintlayout.cpp" line="245"/>
@@ -21229,7 +21671,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vlayout/vprintlayout.cpp" line="246"/>
         <location filename="../../src/libs/vlayout/vprintlayout.cpp" line="291"/>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation>Не можливо виконати тому що не знайдено доступних принтерів у вашій системі.</translation>
+        <translation>Не можливо виконати, тому що не знайдено доступних принтерів у вашій системі.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vprintlayout.cpp" line="320"/>
@@ -21244,7 +21686,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vlayout/vprintlayout.cpp" line="494"/>
         <source>Cannot set printer margins</source>
-        <translation>Не вдалося встановити поля принтеру</translation>
+        <translation>Не вдалося встановити поля принтера</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vprintlayout.cpp" line="586"/>
@@ -21287,7 +21729,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vlayout/vprintlayout.cpp" line="735"/>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation>Розкладка не була оновлена з часу останніх змін креслення. Ви хочете продовжити?</translation>
+        <translation>Розкладка не була оновлена з часу останніх змін креслення. Хочете продовжити?</translation>
     </message>
 </context>
 <context>
@@ -21302,7 +21744,7 @@ Do you want to save your changes?</source>
         <source>VRawLayout::ReadFile() failed.
 Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = %2</source>
         <translation>VRawLayout::ReadFile() завершилася невдачею.
-Помилка сумісності формату сирого макету: actualFileVersion = %1 та fileVersion = %2</translation>
+Помилка сумісності формату необробленого макета: actualFileVersion = %1 та fileVersion = %2</translation>
     </message>
 </context>
 <context>
@@ -21500,6 +21942,13 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
 </context>
 <context>
+    <name>VToolCut</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>VToolCutArc</name>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="291"/>
@@ -21681,7 +22130,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/operation/flipping/vtoolflippingbyline.cpp" line="253"/>
         <source>First line point</source>
-        <translation>Точка першої лінії</translation>
+        <translation>Перша точка лінії</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/operation/flipping/vtoolflippingbyline.cpp" line="254"/>
@@ -21821,7 +22270,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Ім&apos;я точки</translation>
+        <translation type="vanished">Назва точки</translation>
     </message>
     <message>
         <source>Position</source>
@@ -21917,7 +22366,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2995"/>
         <source>Tool to make point from x &amp; y of two other points</source>
-        <translation>Інструмент для створення точки з двох х и у координат двох інших точок</translation>
+        <translation>Інструмент для створення точки з двох координат x та у двох інших точок</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3082"/>
@@ -21946,7 +22395,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3209"/>
         <source>Point intersection line and axis</source>
-        <translation>Точка на перетині лінії і осі</translation>
+        <translation>Точка на перетині лінії й осі</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -21983,16 +22432,16 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <source>Point 1 label</source>
-        <translation type="vanished">Ім&apos;я точки 1</translation>
+        <translation type="vanished">Назва точки 1</translation>
     </message>
     <message>
         <source>Point 2 label</source>
-        <translation type="vanished">Ім&apos;я точки 2</translation>
+        <translation type="vanished">Назва точки 2</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3008"/>
         <source>Tool to make point from intersection two arcs</source>
-        <translation>Інструмент для створення точки перетину двух дуг</translation>
+        <translation>Інструмент для створення точки перетину двох дуг</translation>
     </message>
     <message>
         <source>Take</source>
@@ -22033,17 +22482,17 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="706"/>
         <source>Lowest point</source>
-        <translation>Найнища точка</translation>
+        <translation>Найнижча точка</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="716"/>
         <source>Leftmost point</source>
-        <translation>Сама ліва точка</translation>
+        <translation>Найлівіша точка</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="717"/>
         <source>Rightmost point</source>
-        <translation>Сама права точка</translation>
+        <translation>Найправіша точка</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3038"/>
@@ -22081,12 +22530,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3145"/>
         <source>Cubic bezier curve</source>
-        <translation>Кубічна крива бьзье</translation>
+        <translation>Кубічна крива Безьє</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3179"/>
         <source>Tool cubic bezier curve</source>
-        <translation>Складна кубічна крива безье</translation>
+        <translation>Складна кубічна крива Безьє</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3242"/>
@@ -22115,12 +22564,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3270"/>
         <source>Tool flipping by line</source>
-        <translation>Інструмент відзеркалення за лінією</translation>
+        <translation>Інструмент віддзеркалення за лінією</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3283"/>
         <source>Tool flipping by axis</source>
-        <translation>Інструмент віддзеркалення за вісью</translation>
+        <translation>Інструмент віддзеркалення за віссю</translation>
     </message>
     <message>
         <source>Axis type</source>
@@ -22154,7 +22603,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3211"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3228"/>
         <source>Point label:</source>
-        <translation>Ім&apos;я точки:</translation>
+        <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2748"/>
@@ -22288,12 +22737,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2849"/>
         <source>Point 1 label:</source>
-        <translation>Ім&apos;я точки 1:</translation>
+        <translation>Назва точки 1:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2850"/>
         <source>Point 2 label:</source>
-        <translation>Ім&apos;я точки 2:</translation>
+        <translation>Назва точки 2:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2851"/>
@@ -22440,7 +22889,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3043"/>
         <source>Vertical correction:</source>
-        <translation>Коррекція по вертикалі:</translation>
+        <translation>Корекція по вертикалі:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3044"/>
@@ -22474,7 +22923,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3317"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3329"/>
         <source>Name:</source>
-        <translation>Імя:</translation>
+        <translation>Ім&apos;я:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3110"/>
@@ -22773,7 +23222,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="253"/>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="265"/>
         <source>Current seam allowance</source>
-        <translation>Поточна прибавка на шви</translation>
+        <translation>Поточний припуск на шви</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="867"/>
@@ -22833,7 +23282,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1277"/>
         <source>Reset piece label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Скинути шаблон мітки деталі</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1280"/>
@@ -22863,7 +23312,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1065"/>
         <source>This id (%1) is not unique.</source>
-        <translation>Цей id (%1) не є унікальним.</translation>
+        <translation>Цей id (%1) не унікальний.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2093"/>
@@ -22911,7 +23360,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/vtooluniondetails.cpp" line="1848"/>
         <source>This id (%1) is not unique.</source>
-        <translation>Цей id (%1) не є унікальним.</translation>
+        <translation>Цей id (%1) не унікальний.</translation>
     </message>
 </context>
 <context>
@@ -23439,7 +23888,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="217"/>
         <source>Practical Dress Design</source>
         <comment>Book name</comment>
-        <translation>Практичне проектування одягу</translation>
+        <translation>Практичне проєктування одягу</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="220"/>
@@ -23565,7 +24014,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="254"/>
         <source>Men&apos;s 17th &amp; 18th Century Costume, Cut &amp; Fashion</source>
         <comment>Book name</comment>
-        <translation>Чоловічі костюми, кроєння та мода 17 та 18 столітть</translation>
+        <translation>Чоловічі костюми, кроєння та мода 17 та 18 століть</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="257"/>
@@ -23637,7 +24086,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="275"/>
         <source>Pattern Drafting Vols. I, II, III (Japan)</source>
         <comment>Book name</comment>
-        <translation>Створення викрійок, тома I, II и III (Японія)</translation>
+        <translation>Створення викрійок, томи I, II и III (Японія)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="278"/>
@@ -23758,7 +24207,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="310"/>
         <source>Dress Pattern Designing: The Basic Principles of Cut and Fit</source>
         <comment>Book name</comment>
-        <translation>Проектування викрійок одягу: основні принципи кроєння та примірки</translation>
+        <translation>Проєктування викрійок одягу: основні принципи кроєння та примірки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="313"/>
@@ -23777,7 +24226,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="315"/>
         <source>The Practical Guide to Patternmaking for Fashion Designers: Menswear</source>
         <comment>Book name</comment>
-        <translation>Практичне керівництво по створенню викрійок для модельєрів: чоловіки</translation>
+        <translation>Практичне керівництво зі створення викрійок для модельєрів: чоловіки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="319"/>
@@ -23861,7 +24310,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="342"/>
         <source>Pattern and Dress Design</source>
         <comment>Book name</comment>
-        <translation>Проектування викрійок та одягу</translation>
+        <translation>Проєктування викрійок та одягу</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="345"/>
@@ -23873,7 +24322,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="347"/>
         <source>Practical Guide to Patternmaking for Fashion Designers: Juniors, Misses, and Women</source>
         <comment>Book name</comment>
-        <translation>Практичне керівництво по створенню викрійок для модельєрів: діти, дівчини та жінки</translation>
+        <translation>Практичне керівництво зі створення викрійок для модельєрів: діти, дівчини та жінки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="351"/>
@@ -24302,6 +24751,36 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>atan</translation>
     </message>
     <message>
+        <source>sinh</source>
+        <comment>hyperbolic sine function working with radians</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>cosh</source>
+        <comment>hyperbolic cosine working with radians</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>tanh</source>
+        <comment>hyperbolic tangens function working with radians</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>asinh</source>
+        <comment>hyperbolic arcus sine function working with radians</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>acosh</source>
+        <comment>hyperbolic arcus cosine function working with radians</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>atanh</source>
+        <comment>hyperbolic arcur tangens function working with radians</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="477"/>
         <source>sinD</source>
         <comment>sine function working with degrees</comment>
@@ -24551,7 +25030,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="528"/>
         <source>square root of a value</source>
         <comment>function sqrt</comment>
-        <translation>квадратний корінь із значення</translation>
+        <translation>квадратний корінь зі значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="532"/>
@@ -24647,7 +25126,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="399"/>
         <source>PieceSeamLineArea_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>ПлощаЛініїШваДеталі_</translation>
     </message>
 </context>
 <context>
@@ -24940,7 +25419,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetgroups.cpp" line="290"/>
         <source>Preferences</source>
-        <translation>Властивості</translation>
+        <translation>Налаштування</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetgroups.cpp" line="367"/>
@@ -25293,7 +25772,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="247"/>
         <source>Browse…</source>
-        <translation>Переглянути…</translation>
+        <translation>Огляд…</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="276"/>
@@ -25324,7 +25803,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="366"/>
         <source>E&amp;xit</source>
-        <translation>&amp;Вихід</translation>
+        <translation>Ви&amp;хід</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="375"/>
@@ -25381,7 +25860,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="372"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation>Неможливо заблокувати. Цей файл вже був відкритий в іншому вікні. Можливі конфлікти, якщо одночасно запущено кілька екземплярів програми.</translation>
+        <translation>Неможливо заблокувати. Цей файл вже був відкритий в іншому вікні. Можливі конфлікти, якщо одночасно запущено 2 екземпляри програми.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="404"/>
@@ -25411,7 +25890,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="492"/>
         <source>Unsaved changes</source>
-        <translation>Не збереженні змінення</translation>
+        <translation>Незбережені зміни</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="493"/>
@@ -25433,7 +25912,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="575"/>
         <source>untitled.vwm</source>
-        <translation>неназваний.vwm</translation>
+        <translation>безіменний.vwm</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="591"/>
@@ -25443,7 +25922,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="592"/>
         <source>This file is using previous format version v%1. The current is v%2. Saving the file with this app version will update the format version for this file. This may prevent you from be able to open the file with older app versions. Do you really want to continue?</source>
-        <translation>Цей файл використовує попередню версію формату v%1. Поточна версія v%2. Збереження файлу з цією версією програми призведе до оновлення версії формату для цього файлу. Це може унеможливити вам відкриття файл у старіших версіях програми. Ви дійсно хочете продовжити?</translation>
+        <translation>Цей файл використовує попередню версію формату v%1. Поточна версія v%2. Збереження файлу з цією версією програми призведе до оновлення версії формату для цього файлу. Це може унеможливити відкриття файлу у старіших версіях програми. Ви дійсно хочете продовжити?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="633"/>
@@ -25510,7 +25989,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="122"/>
         <source>Dark green</source>
         <comment>color</comment>
-        <translation>Темно зелений</translation>
+        <translation>Темно-зелений</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="123"/>
@@ -25522,7 +26001,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="124"/>
         <source>Dark blue</source>
         <comment>color</comment>
-        <translation>Темно синій</translation>
+        <translation>Темно-синій</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="125"/>
@@ -25534,7 +26013,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="126"/>
         <source>Dark cyan</source>
         <comment>color</comment>
-        <translation>Темно блакитний</translation>
+        <translation>Темно-блакитний</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="127"/>
@@ -25598,7 +26077,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/puzzle/vpapplication.cpp" line="162"/>
         <location filename="../../src/app/tape/mapplication.cpp" line="199"/>
         <source>DEBUG:</source>
-        <translation>ВІДЛАДКА:</translation>
+        <translation>НАЛАГОДЖЕННЯ:</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpapplication.cpp" line="165"/>
@@ -25670,7 +26149,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="233"/>
         <source>DEBUG:</source>
-        <translation>ВІДЛАДКА:</translation>
+        <translation>НАЛАГОДЖЕННЯ:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="242"/>

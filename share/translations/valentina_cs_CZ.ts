@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="cs">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="cs">
 <context>
     <name>AddBackgroundImage</name>
     <message>
@@ -358,7 +356,7 @@
     <message>
         <location filename="../../src/libs/vdxf/libdxfrw/intern/drw_textcodec.cpp" line="108"/>
         <source>No available codec for code page &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>No available codec for code page &apos;%1&apos;.</translation>
     </message>
 </context>
 <context>
@@ -2298,6 +2296,14 @@
         <translation>Název souboru měření</translation>
     </message>
     <message>
+        <source>Size</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="600"/>
         <source>Measurments extension</source>
         <translation>Rozšíření měření</translation>
@@ -2608,17 +2614,17 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="524"/>
         <source>Area units</source>
-        <translation type="unfinished"></translation>
+        <translation>Area units</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="642"/>
         <source>Piece full area</source>
-        <translation type="unfinished"></translation>
+        <translation>Piece full area</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="643"/>
         <source>Piece seam line area</source>
-        <translation type="unfinished"></translation>
+        <translation>Piece seam line area</translation>
     </message>
 </context>
 <context>
@@ -2811,6 +2817,10 @@
 <context>
     <name>DialogEllipticalArc</name>
     <message>
+        <source>Dialog</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="79"/>
         <source>Radius1:</source>
         <translation>Poloměr1:</translation>
@@ -2889,6 +2899,18 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="996"/>
         <source>Color:</source>
         <translation>Barva:</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Radius can&apos;t be negative</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Angles equal</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="461"/>
@@ -3151,6 +3173,10 @@
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="14"/>
         <source>Final measurements</source>
         <translation>Konečné míry</translation>
+    </message>
+    <message>
+        <source>Find:</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="52"/>
@@ -4593,6 +4619,10 @@
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="150"/>
         <source>Vertical:</source>
         <translation>Svislá:</translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -6081,27 +6111,27 @@ Přesto použít nastavení?</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="128"/>
         <source>Passmark width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Passmark width:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="144"/>
         <source>Default piece label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Default piece label template</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="163"/>
         <source>Path to default label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Path to default label template</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="179"/>
         <source>Select path to label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Select path to label template</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="182"/>
         <source>Browse…</source>
-        <translation type="unfinished">Procházet…</translation>
+        <translation>Procházet…</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="256"/>
@@ -6138,7 +6168,7 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="517"/>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="519"/>
         <source>Label template</source>
-        <translation type="unfinished">Předloha popisu</translation>
+        <translation>Předloha popisu</translation>
     </message>
     <message>
         <source>Images (*.png *.jpg *.jpeg *.bmp)</source>
@@ -6245,6 +6275,10 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="97"/>
         <source>Label language:</source>
         <translation>Jazyk popisu:</translation>
+    </message>
+    <message>
+        <source>yyyy-MM-dd</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="114"/>
@@ -6592,12 +6626,12 @@ Přesto použít nastavení?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1047"/>
         <source>Edit passmark width</source>
-        <translation type="unfinished"></translation>
+        <translation>Edit passmark width</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1060"/>
         <source>Edit passmark angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Edit passmark angle</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1336"/>
@@ -6634,6 +6668,10 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="920"/>
         <source>Passmark:</source>
         <translation>Značka sestavení:</translation>
+    </message>
+    <message>
+        <source>Lines</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="956"/>
@@ -6720,12 +6758,12 @@ Přesto použít nastavení?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="936"/>
         <source>Type</source>
-        <translation type="unfinished">Typ</translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1057"/>
         <source>Check mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Check mark</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1124"/>
@@ -6752,40 +6790,40 @@ Přesto použít nastavení?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1209"/>
         <source>Clockwise opening</source>
-        <translation type="unfinished"></translation>
+        <translation>Clockwise opening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1217"/>
         <source>Manual shape</source>
-        <translation type="unfinished"></translation>
+        <translation>Manual shape</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1226"/>
         <source>Length</source>
-        <translation type="unfinished">Délka</translation>
+        <translation>Délka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1286"/>
         <source>Length:</source>
         <comment>notch depth</comment>
-        <translation type="unfinished">Délka:</translation>
+        <translation>Délka:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1451"/>
         <source>Width</source>
-        <translation type="unfinished">Šířka</translation>
+        <translation>Šířka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1511"/>
         <source>Width:</source>
         <comment>notch width</comment>
-        <translation type="unfinished">Šířka:</translation>
+        <translation>Šířka:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1736"/>
         <source>Angle:</source>
         <comment>notch angle</comment>
-        <translation type="unfinished">Úhel:</translation>
+        <translation>Úhel:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1929"/>
@@ -6927,12 +6965,8 @@ Přesto použít nastavení?</translation>
         <translation>Vybrat hlavní cestu předmětů, &lt;b&gt;%1&lt;/b&gt; - obrátit směr křivky, &lt;b&gt;%2&lt;/b&gt; - dokončit vytvoření</translation>
     </message>
     <message>
-        <source>Manual length</source>
-        <translation type="vanished">Ruční délka</translation>
-    </message>
-    <message>
         <source>Length:</source>
-        <translation type="vanished">Délka:</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1037"/>
@@ -6957,11 +6991,15 @@ Přesto použít nastavení?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="358"/>
         <source>Turn point</source>
-        <translation type="unfinished"></translation>
+        <translation>Turn point</translation>
     </message>
 </context>
 <context>
     <name>DialogPin</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished"/>
+    </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpin.ui" line="21"/>
         <source>Pin tool</source>
@@ -6990,6 +7028,10 @@ Přesto použít nastavení?</translation>
 </context>
 <context>
     <name>DialogPlaceLabel</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished"/>
+    </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="79"/>
         <source>Width:</source>
@@ -7848,11 +7890,7 @@ Přesto použít nastavení?</translation>
     <message numerus="yes">
         <location filename="../../src/app/valentina/dialogs/dialogpreferences.cpp" line="150"/>
         <source>Followed %n option(s) require restart to take effect: %1.</source>
-        <translation>
-            <numerusform>Následována %n volba, vyžaduje opětovné spuštění, aby se projevilo: %1.</numerusform>
-            <numerusform>Následovány %n volby, vyžaduje opětovné spuštění, aby se projevilo: %1.</numerusform>
-            <numerusform>Následováno %n voleb, vyžaduje opětovné spuštění, aby se projevilo: %1.</numerusform>
-        </translation>
+        <translation><numerusform>Následována %n volba, vyžaduje opětovné spuštění, aby se projevilo: %1.</numerusform><numerusform>Následovány %n volby, vyžaduje opětovné spuštění, aby se projevilo: %1.</numerusform><numerusform>Následováno %n voleb, vyžaduje opětovné spuštění, aby se projevilo: %1.</numerusform><numerusform>Následováno %n voleb, vyžaduje opětovné spuštění, aby se projevilo: %1.</numerusform></translation>
     </message>
 </context>
 <context>
@@ -7875,11 +7913,7 @@ Přesto použít nastavení?</translation>
     <message numerus="yes">
         <location filename="../../src/app/puzzle/dialogs/dialogpuzzlepreferences.cpp" line="138"/>
         <source>Followed %n option(s) require restart to take effect: %1.</source>
-        <translation>
-            <numerusform>Sledována %n volba vyžaduje opětovné spuštění, aby se projevilo %1.</numerusform>
-            <numerusform>Sledovány %n volby vyžaduje opětovné spuštění, aby se projevilo %1.</numerusform>
-            <numerusform>Sledováno %n voleb vyžaduje opětovné spuštění, aby se projevilo %1.</numerusform>
-        </translation>
+        <translation><numerusform>Sledována %n volba vyžaduje opětovné spuštění, aby se projevilo %1.</numerusform><numerusform>Sledovány %n volby vyžaduje opětovné spuštění, aby se projevilo %1.</numerusform><numerusform>Sledováno %n voleb vyžaduje opětovné spuštění, aby se projevilo %1.</numerusform><numerusform>Sledováno %n voleb vyžaduje opětovné spuštění, aby se projevilo %1.</numerusform></translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogpuzzlepreferences.ui" line="75"/>
@@ -8176,7 +8210,7 @@ Přesto použít nastavení?</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="138"/>
         <source>Show grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>Show grainline</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="307"/>
@@ -8207,6 +8241,10 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="450"/>
         <source>Paper format</source>
         <translation>Formát papíru</translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="58"/>
@@ -8330,6 +8368,10 @@ Přesto použít nastavení?</translation>
 <context>
     <name>DialogSaveManualLayout</name>
     <message>
+        <source>Dialog</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.ui" line="26"/>
         <source>Path:</source>
         <translation>Cesta:</translation>
@@ -8372,7 +8414,7 @@ Přesto použít nastavení?</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.ui" line="141"/>
         <source>Show grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>Show grainline</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.ui" line="154"/>
@@ -8450,9 +8492,37 @@ Přesto použít nastavení?</translation>
 <context>
     <name>DialogSeamAllowance</name>
     <message>
+        <source>Seam allowance tool</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>All objects in path should follow in clockwise direction.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Forbid piece be mirrored in a layout.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Forbid flipping</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="556"/>
         <source>Ready!</source>
         <translation>Připraven!</translation>
+    </message>
+    <message>
+        <source>Seam allowance</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1700"/>
@@ -8462,9 +8532,89 @@ Přesto použít nastavení?</translation>
         <translation>Hodnota</translation>
     </message>
     <message>
+        <source>Calculation</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Pattern piece data</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Letter:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Letter of pattern piece</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Name of detail:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4018"/>
         <source>Detail</source>
         <translation>Jednotlivost (díl střihu)</translation>
+    </message>
+    <message>
+        <source>Name can&apos;t be empty</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Material/Cut number/Placement</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Cut number:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Material type:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>You can choose one of the predefined materials or enter a new one</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Placement:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Detail label visible</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Pattern label visible</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1740"/>
@@ -8473,6 +8623,30 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3083"/>
         <source>Grainline</source>
         <translation>Dráha nitě</translation>
+    </message>
+    <message>
+        <source>Grainline visible</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Rotation:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Arrows:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Cut %1 of %2%3</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>on Fold</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="756"/>
@@ -8524,6 +8698,10 @@ Přesto použít nastavení?</translation>
         <translation>Chyba při zpracování: %1</translation>
     </message>
     <message>
+        <source>Update</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2299"/>
         <source>Current seam allowance</source>
         <translation>Nynější švová záložka</translation>
@@ -8546,12 +8724,12 @@ Přesto použít nastavení?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2516"/>
         <source>Edit passmark width</source>
-        <translation type="unfinished"></translation>
+        <translation>Edit passmark width</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2529"/>
         <source>Edit passmark angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Edit passmark angle</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2814"/>
@@ -8589,16 +8767,24 @@ Přesto použít nastavení?</translation>
         <translation>Vlastní švová záložka</translation>
     </message>
     <message>
+        <source>None</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Cut on fold</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <source>Both</source>
-        <translation type="vanished">Oba</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Just front</source>
-        <translation type="vanished">Jen vepředu</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Just rear</source>
-        <translation type="vanished">Jen vzadu</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3081"/>
@@ -8621,6 +8807,10 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3082"/>
         <source>Labels</source>
         <translation>Popisy</translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1724"/>
@@ -8799,73 +8989,73 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3516"/>
         <source>Two ways (Up/Down)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Two ways (Up/Down)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3518"/>
         <source>One way (Up)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>One way (Up)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3520"/>
         <source>One way (Down)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>One way (Down)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3522"/>
         <source>Four ways</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Four ways</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3524"/>
         <source>Two ways (Up/Left)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Two ways (Up/Left)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3526"/>
         <source>Two ways (Up/Right)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Two ways (Up/Right)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3528"/>
         <source>Two ways (Down/Left)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Two ways (Down/Left)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3530"/>
         <source>Two ways (Down/Right)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Two ways (Down/Right)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3532"/>
         <source>Three ways (Up/Down/Left)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Three ways (Up/Down/Left)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3534"/>
         <source>Three ways (Up/Down/Right)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Three ways (Up/Down/Right)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3536"/>
         <source>Three ways (Up/Left/Right)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Three ways (Up/Left/Right)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3538"/>
         <source>Three ways (Down/Left/Right)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Three ways (Down/Left/Right)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4449"/>
@@ -8986,7 +9176,7 @@ Přesto použít nastavení?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="773"/>
         <source>Turn point</source>
-        <translation type="unfinished"></translation>
+        <translation>Turn point</translation>
     </message>
 </context>
 <context>
@@ -9018,6 +9208,11 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="24"/>
         <source>Use full circumference</source>
         <translation>Použít celý obvod</translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="76"/>
@@ -9082,6 +9277,11 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="537"/>
         <source>The base value for the column</source>
         <translation>Základní hodnota pro sloupec</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <comment>dimension</comment>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.cpp" line="464"/>
@@ -9746,11 +9946,7 @@ Přesto použít nastavení?</translation>
     <message numerus="yes">
         <location filename="../../src/app/tape/dialogs/dialogtapepreferences.cpp" line="134"/>
         <source>Followed %n option(s) require restart to take effect: %1.</source>
-        <translation>
-            <numerusform>Sledováno %n volba vyžaduje opětovné spuštění, aby se projevila %1.</numerusform>
-            <numerusform>Sledováno %n volby vyžaduje opětovné spuštění, aby se projevily %1.</numerusform>
-            <numerusform>Sledováno %n voleb vyžaduje opětovné spuštění, aby se projevilo %1.</numerusform>
-        </translation>
+        <translation><numerusform>Sledováno %n volba vyžaduje opětovné spuštění, aby se projevila %1.</numerusform><numerusform>Sledováno %n volby vyžaduje opětovné spuštění, aby se projevily %1.</numerusform><numerusform>Sledováno %n voleb vyžaduje opětovné spuštění, aby se projevilo %1.</numerusform><numerusform>Sledováno %n voleb vyžaduje opětovné spuštění, aby se projevilo %1.</numerusform></translation>
     </message>
 </context>
 <context>
@@ -10684,12 +10880,12 @@ Přesto použít nastavení?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="3206"/>
         <source>Interactive tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Interactive tools</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="3209"/>
         <source>Ctrl+D</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+D</translation>
     </message>
     <message>
         <source>Save &amp;As...</source>
@@ -12247,6 +12443,10 @@ Chcete uložit své změny?</translation>
         <translation>Smazat všechny zprávy</translation>
     </message>
     <message>
+        <source>...</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2126"/>
         <source>Filter</source>
         <translation>Filtr</translation>
@@ -12598,6 +12798,11 @@ Chcete uložit své změny?</translation>
         <translation>Nelze vytvořit cestu</translation>
     </message>
     <message>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="843"/>
+        <source>Preparing details for layout</source>
+        <translation>Připravují se podrobnosti pro rozvržení</translation>
+    </message>
+    <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1033"/>
         <source>Pattern</source>
         <translation>Střih</translation>
@@ -12655,6 +12860,10 @@ Chcete uložit své změny?</translation>
         <translation>Soubor s mírami obsahuje neplatnou(é) míru(y).</translation>
     </message>
     <message>
+        <source>Wrong units.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1291"/>
         <source>File error.</source>
         <translation>Chyba souboru.</translation>
@@ -12668,11 +12877,6 @@ Chcete uložit své změny?</translation>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1322"/>
         <source>Please, additionally provide: %1</source>
         <translation>Dodatečně, prosím, poskytněte: %1</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="843"/>
-        <source>Preparing details for layout</source>
-        <translation>Připravují se podrobnosti pro rozvržení</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="448"/>
@@ -12940,6 +13144,14 @@ Chcete uložit své změny?</translation>
         <translation>Kniha:</translation>
     </message>
     <message>
+        <source>Send crash reports</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Send crash reports (recommended)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="199"/>
         <source>Pattern editing</source>
         <translation>Upravování střihu</translation>
@@ -12963,6 +13175,14 @@ Chcete uložit své změny?</translation>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="285"/>
         <source>With OS options</source>
         <translation>S volbami OS</translation>
+    </message>
+    <message>
+        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="277"/>
@@ -13122,12 +13342,12 @@ Chcete uložit své změny?</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="241"/>
         <source>Disable if you want to skip interactive part of creating tools. And go straight to editing formulas instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>Disable if you want to skip interactive part of creating tools. And go straight to editing formulas instead.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="244"/>
         <source>Interactive tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Interactive tools</translation>
     </message>
 </context>
 <context>
@@ -13201,6 +13421,14 @@ Chcete uložit své změny?</translation>
 <context>
     <name>PreferencesPatternPage</name>
     <message>
+        <source>User</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>User name:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="35"/>
         <source>Graphical output</source>
         <translation>Obrazový výstup</translation>
@@ -13221,6 +13449,14 @@ Chcete uložit své změny?</translation>
         <translation>Počítat kroky (0 - bez omezení):</translation>
     </message>
     <message>
+        <source>User defined materials</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Delete all</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="186"/>
         <source>Workpiece</source>
         <translation>Střihový díl</translation>
@@ -13239,6 +13475,10 @@ Chcete uložit své změny?</translation>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="215"/>
         <source>Show second passmark on seam line</source>
         <translation>Ukázat druhou značku sestavení na čáře švu</translation>
+    </message>
+    <message>
+        <source>All user defined materials have been deleted!</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="192"/>
@@ -13396,14 +13636,14 @@ Tato volba se projeví po opětovném spuštění.</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="205"/>
         <source>Sew line on drawing</source>
-        <translation type="unfinished"></translation>
+        <translation>Sew line on drawing</translation>
     </message>
 </context>
 <context>
     <name>Puzzle</name>
     <message>
         <source>Export options can be used with single input file only.</source>
-        <translation type="vanished">Volby pro vyvedení lze použít jen s jedním vstupním souborem.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpcommandline.cpp" line="71"/>
@@ -13418,6 +13658,10 @@ Tato volba se projeví po opětovném spuštění.</translation>
 </context>
 <context>
     <name>PuzzlePreferencesConfigurationPage</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"/>
+    </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="45"/>
         <source>Language</source>
@@ -13599,6 +13843,10 @@ Tato volba se projeví po opětovném spuštění.</translation>
 <context>
     <name>PuzzlePreferencesLayoutPage</name>
     <message>
+        <source>Form</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferenceslayoutpage.ui" line="22"/>
         <source>Sheet</source>
         <translation>List</translation>
@@ -13751,6 +13999,10 @@ Tato volba se projeví po opětovném spuštění.</translation>
 </context>
 <context>
     <name>PuzzlePreferencesPathPage</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"/>
+    </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencespathpage.ui" line="20"/>
         <source>Paths that Valentina uses</source>
@@ -13961,22 +14213,22 @@ Tato volba se projeví po opětovném spuštění.</translation>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece_p.h" line="176"/>
         <source>VLayoutPieceData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>VLayoutPieceData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece_p.h" line="188"/>
         <source>VLayoutPieceData compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>VLayoutPieceData compatibility error: actualClassVersion = %1 and classVersion = %2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vwidgets/vpiecegrainline_p.h" line="104"/>
         <source>VPieceGrainlinePrivate prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>VPieceGrainlinePrivate prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vwidgets/vpiecegrainline_p.h" line="116"/>
         <source>VPieceGrainlinePrivate compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>VPieceGrainlinePrivate compatibility error: actualClassVersion = %1 and classVersion = %2</translation>
     </message>
 </context>
 <context>
@@ -14030,6 +14282,10 @@ Tato volba se projeví po opětovném spuštění.</translation>
     <message>
         <source>Changes applied.</source>
         <translation type="vanished">Změny použity.</translation>
+    </message>
+    <message>
+        <source>Wrong tag name &apos;%1&apos;.</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1077"/>
@@ -14131,7 +14387,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
     <message>
         <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="160"/>
         <source>Error: notch for point &apos;%1&apos; in piece &apos;%2&apos;. Width is less than minimal allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error: notch for point &apos;%1&apos; in piece &apos;%2&apos;. Width is less than minimal allowed.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="763"/>
@@ -14213,16 +14469,12 @@ Tato volba se projeví po opětovném spuštění.</translation>
     <message>
         <location filename="../../src/libs/vpatterndb/vpiecenode.cpp" line="403"/>
         <source>Cannot calculate passmark width for point &apos;%1&apos;. Reason: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cannot calculate passmark width for point &apos;%1&apos;. Reason: %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpiecenode.cpp" line="437"/>
         <source>Cannot calculate passmark angle for point &apos;%1&apos;. Reason: %2.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot calculate seam allowance after for point &apos;%1&apos;. Reason: </source>
-        <translation type="vanished">Nelze vypočítat švovou záložku po pro bod &apos;%1&apos;. Důvod: </translation>
+        <translation>Cannot calculate passmark angle for point &apos;%1&apos;. Reason: %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpiecenode.cpp" line="370"/>
@@ -14347,10 +14599,12 @@ Tato volba se projeví po opětovném spuštění.</translation>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="223"/>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1767"/>
-        <source>Piece &apos;%1&apos;. Unable to load default piece label template.
+        <source>Piece '%1'. Unable to load default piece label template.
 %2
 %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Piece &apos;%1&apos;. Unable to load default piece label template.
+%2
+%3</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="844"/>
@@ -14504,7 +14758,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
     <message>
         <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1224"/>
         <source>Invalid global value for a passmark width. Piece &apos;%1&apos;. Width is less than minimal allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Invalid global value for a passmark width. Piece &apos;%1&apos;. Width is less than minimal allowed.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1369"/>
@@ -14531,13 +14785,13 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="364"/>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="805"/>
         <source>Failed to prepare full piece area placeholder. %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Failed to prepare full piece area placeholder. %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="377"/>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="818"/>
         <source>Failed to prepare piece seam line area placeholder. %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Failed to prepare piece seam line area placeholder. %2.</translation>
     </message>
 </context>
 <context>
@@ -14967,6 +15221,10 @@ Tato volba se projeví po opětovném spuštění.</translation>
 <context>
     <name>SavePieceOptions</name>
     <message>
+        <source>save detail option</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/undocommands/savepieceoptions.cpp" line="54"/>
         <source>save detail options</source>
         <translation>Uložit volby pro jednotlivosti (díly střihu)</translation>
@@ -15023,6 +15281,17 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <location filename="../../src/libs/vtools/undocommands/label/showlabel.cpp" line="45"/>
         <source>toggle label</source>
         <translation>Přepnout popis</translation>
+    </message>
+</context>
+<context>
+    <name>T</name>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -16176,11 +16445,15 @@ Chcete uložit změny?</translation>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4042"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4095"/>
         <source>Error in row %1. %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Error in row %1. %2</translation>
     </message>
 </context>
 <context>
     <name>TabGrainline</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"/>
+    </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="39"/>
         <source>Grainline visible</source>
@@ -16244,6 +16517,10 @@ Chcete uložit změny?</translation>
 <context>
     <name>TabLabels</name>
     <message>
+        <source>Form</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="43"/>
         <source>Piece label data</source>
         <translation>Data popisu dílu</translation>
@@ -16259,14 +16536,58 @@ Chcete uložit změny?</translation>
         <translation>Písmeno dílu střihu</translation>
     </message>
     <message>
+        <source>Name of detail:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Detail</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Name can&apos;t be empty</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Material/Cut number/Placement</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Cut number:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Material type:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>You can choose one of the predefined materials or enter a new one</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="129"/>
         <source>Placement:</source>
         <translation>Umístění:</translation>
     </message>
     <message>
+        <source>Add</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="431"/>
         <source>Labels</source>
         <translation>Popisy</translation>
+    </message>
+    <message>
+        <source>Detail label visible</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="507"/>
@@ -16506,29 +16827,17 @@ Chcete uložit změny?</translation>
 <context>
     <name>TabPassmarks</name>
     <message>
+        <source>Form</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="40"/>
         <source>Passmark:</source>
         <translation>Značka sestavení:</translation>
     </message>
     <message>
-        <source>One line</source>
-        <translation type="vanished">Jedna čára</translation>
-    </message>
-    <message>
-        <source>Two lines</source>
-        <translation type="vanished">Dvě čáry</translation>
-    </message>
-    <message>
-        <source>Three lines</source>
-        <translation type="vanished">Tři čáry</translation>
-    </message>
-    <message>
-        <source>T mark</source>
-        <translation type="vanished">Značka T</translation>
-    </message>
-    <message>
-        <source>V mark</source>
-        <translation type="vanished">Značka V</translation>
+        <source>Lines</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="197"/>
@@ -16565,40 +16874,40 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="333"/>
         <source>Clockwise opening</source>
-        <translation type="unfinished"></translation>
+        <translation>Clockwise opening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="341"/>
         <source>Manual shape</source>
-        <translation type="unfinished"></translation>
+        <translation>Manual shape</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="350"/>
         <source>Length</source>
-        <translation type="unfinished">Délka</translation>
+        <translation>Délka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="410"/>
         <source>Length:</source>
         <comment>notch depth</comment>
-        <translation type="unfinished">Délka:</translation>
+        <translation>Délka:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="575"/>
         <source>Width</source>
-        <translation type="unfinished">Šířka</translation>
+        <translation>Šířka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="635"/>
         <source>Width:</source>
         <comment>notch width</comment>
-        <translation type="unfinished">Šířka:</translation>
+        <translation>Šířka:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="863"/>
         <source>Angle:</source>
         <comment>notch angle</comment>
-        <translation type="unfinished">Úhel:</translation>
+        <translation>Úhel:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1038"/>
@@ -16613,61 +16922,61 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="60"/>
         <source>Type</source>
-        <translation type="unfinished">Typ</translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="80"/>
         <source>One line</source>
         <comment>notch type</comment>
-        <translation type="unfinished">Jedna čára</translation>
+        <translation>Jedna čára</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="93"/>
         <source>Two lines</source>
         <comment>notch type</comment>
-        <translation type="unfinished">Dvě čáry</translation>
+        <translation>Dvě čáry</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="106"/>
         <source>Three lines</source>
         <comment>notch type</comment>
-        <translation type="unfinished">Tři čáry</translation>
+        <translation>Tři čáry</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="119"/>
         <source>T mark</source>
         <comment>notch type</comment>
-        <translation type="unfinished">Značka T</translation>
+        <translation>Značka T</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="135"/>
         <source>External V mark</source>
         <comment>notch type</comment>
-        <translation type="unfinished"></translation>
+        <translation>External V mark</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="151"/>
         <source>Internal V mark</source>
         <comment>notch type</comment>
-        <translation type="unfinished"></translation>
+        <translation>Internal V mark</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="161"/>
         <source>U mark</source>
         <comment>notch type</comment>
-        <translation type="unfinished">Značka U</translation>
+        <translation>Značka U</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="171"/>
         <source>Box mark</source>
         <comment>notch type</comment>
-        <translation type="unfinished">Značka okénko</translation>
+        <translation>Značka okénko</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="181"/>
         <source>Check mark</source>
         <comment>notch type</comment>
-        <translation type="unfinished"></translation>
+        <translation>Check mark</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="248"/>
@@ -16712,16 +17021,8 @@ Chcete uložit změny?</translation>
         <translation>Ostrý úhel, který vypadá, že je vně střihu</translation>
     </message>
     <message>
-        <source>V mark 2</source>
-        <translation type="vanished">Značka V 2</translation>
-    </message>
-    <message>
-        <source>Manual length</source>
-        <translation type="vanished">Ruční délka</translation>
-    </message>
-    <message>
         <source>Length:</source>
-        <translation type="vanished">Délka:</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="433"/>
@@ -16752,14 +17053,6 @@ Chcete uložit změny?</translation>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ukázat celý výpočet v okně se zprávami&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>U mark</source>
-        <translation type="vanished">Značka U</translation>
-    </message>
-    <message>
-        <source>Box mark</source>
-        <translation type="vanished">Značka okénko</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="47"/>
         <source>List of all defined passmarks. To define a passmark return to the Main Path tab, call context menu for a point item and make it a passmark.</source>
         <translation>Seznam všech stanovených značek sestavení. Chcete-li stanovit obnovení značky sestavení na kartě Hlavní cesta, vyvolejte související nabídku pro bodovou položku a udělejte z ní značku sestavení.</translation>
@@ -16772,6 +17065,10 @@ Chcete uložit změny?</translation>
 </context>
 <context>
     <name>TabPaths</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"/>
+    </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="43"/>
         <source>Main path</source>
@@ -16872,6 +17169,10 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1003"/>
         <source>Angle:</source>
         <translation>Úhel:</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1078"/>
@@ -17018,7 +17319,14 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="89"/>
         <source>Export to DXF-AAMA sew line on Draw layer</source>
-        <translation type="unfinished"></translation>
+        <translation>Export to DXF-AAMA sew line on Draw layer</translation>
+    </message>
+</context>
+<context>
+    <name>TabPins</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -17208,6 +17516,18 @@ Chcete uložit změny?</translation>
         <translation>Text se ukáže pod symbolem (doporučeno pro začátečníky).</translation>
     </message>
     <message>
+        <source>Default height and size</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Default height:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Default size:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="167"/>
         <source>With OS options</source>
         <translation>S volbami OS</translation>
@@ -17330,6 +17650,41 @@ Chcete uložit změny?</translation>
     </message>
 </context>
 <context>
+    <name>Tool</name>
+    <message>
+        <source>First point</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Second point</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Highest point</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Lowest point</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Leftmost point</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Rightmost point</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Vertical axis</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Horizontal axis</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>Utils::CheckableMessageBox</name>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/checkablemessagebox.cpp" line="77"/>
@@ -17367,7 +17722,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vformat/vdimensions.cpp" line="259"/>
         <source>Units are invalid</source>
-        <translation type="unfinished"></translation>
+        <translation>Units are invalid</translation>
     </message>
     <message>
         <location filename="../../src/libs/vformat/vdimensions.cpp" line="271"/>
@@ -17404,6 +17759,10 @@ Chcete uložit změny?</translation>
         <source>Chest half circumference</source>
         <comment>dimension</comment>
         <translation>Polovina obvodu hrudníku</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vformat/vdimensions.cpp" line="305"/>
@@ -17496,14 +17855,14 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="223"/>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="247"/>
-        <source>Can&apos;t open file %1:
+        <source>Can't open file %1:
 %2.</source>
         <translation>Nelze otevřít soubor %1:
 %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="177"/>
-        <source>Can&apos;t open schema file %1:
+        <source>Can't open schema file %1:
 %2.</source>
         <translation>Nelze otevřít soubor se schématem %1:
 %2.</translation>
@@ -17517,7 +17876,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="208"/>
         <source>Schema file %3 invalid in line %1 column %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Schema file %3 invalid in line %1 column %2</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="239"/>
@@ -17566,6 +17925,50 @@ Chcete uložit změny?</translation>
 </context>
 <context>
     <name>VAbstractLayoutDialog</name>
+    <message>
+        <source>Letter</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Legal</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 24in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 30in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 36in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 42in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 44in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 48in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 62in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 72in</source>
+        <translation type="unfinished"/>
+    </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/vabstractlayoutdialog.cpp" line="41"/>
         <source>Letter</source>
@@ -17751,6 +18154,11 @@ Chcete uložit změny?</translation>
         <translation>Volby operace</translation>
     </message>
     <message>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="270"/>
+        <source>default</source>
+        <translation>Výchozí</translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="682"/>
         <source>delete operation</source>
         <translation>Smazat operaci</translation>
@@ -17759,11 +18167,6 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="971"/>
         <source>Visibility group</source>
         <translation>Skupina viditelnosti</translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="270"/>
-        <source>default</source>
-        <translation>Výchozí</translation>
     </message>
 </context>
 <context>
@@ -17779,16 +18182,16 @@ Chcete uložit změny?</translation>
         <translation>Chyba při vytváření nebo aktualizaci skupiny</translation>
     </message>
     <message>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2188"/>
+        <source>measurement</source>
+        <translation>míra</translation>
+    </message>
+    <message>
         <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2440"/>
         <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2620"/>
         <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2700"/>
         <source>New group</source>
         <translation>Nová skupina</translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2188"/>
-        <source>measurement</source>
-        <translation>míra</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="858"/>
@@ -17801,7 +18204,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vlayout/vabstractpiece.cpp" line="1075"/>
         <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
-        <translation type="unfinished"></translation>
+        <translation>Díl &apos;%1&apos;. Nedostatek bodů pro vytvoření švové záložky.</translation>
     </message>
 </context>
 <context>
@@ -17880,6 +18283,11 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Zlatavá</translation>
     </message>
     <message>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="302"/>
+        <source>goldenrod</source>
+        <translation>Zlatavá</translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="305"/>
         <source>orange</source>
         <translation>Oranžová</translation>
@@ -17923,11 +18331,6 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="160"/>
         <source>Edit wrong formula</source>
         <translation>Upravit nesprávný vzorec</translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="302"/>
-        <source>goldenrod</source>
-        <translation>Zlatavá</translation>
     </message>
 </context>
 <context>
@@ -18476,7 +18879,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="630"/>
         <source>Show/hide grainline when export layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Show/hide grainline when export layout.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="631"/>
@@ -18778,29 +19181,9 @@ Chcete uložit změny?</translation>
         <translation>Základní hodnota rozměru C</translation>
     </message>
     <message>
-        <source>The filename of exported layout file. Use it to enable console export mode.</source>
-        <translation type="vanished">Název souboru vyvedeného souboru rozvržení. Tento použijte k zapnutí režimu vyvedení v konzoli.</translation>
-    </message>
-    <message>
-        <source>The filename of layout file</source>
-        <translation type="vanished">Název souboru souboru rozvržení</translation>
-    </message>
-    <message>
         <location filename="../../src/app/puzzle/vpcommandline.cpp" line="104"/>
         <source>The raw layout data file</source>
         <translation>Soubor nezpracovaných dat rozvržení</translation>
-    </message>
-    <message>
-        <source>Number corresponding to output format (default = 0, export mode): &lt;not defined&gt;</source>
-        <translation type="vanished">Číslo odpovídající výstupnímu formátu (výchozí = 0, režim vyvedení): &lt;not defined&gt;</translation>
-    </message>
-    <message>
-        <source>Number corresponding to tiled pdf page template (default = 0, export mode with tiled pdf format): &lt;not defined&gt;</source>
-        <translation type="vanished">Číslo odpovídající předloze pro stranu dlaždicového PDF (výchozí = 0, režim vyvedení s formátem dlaždicového PDF): &lt;not defined&gt;</translation>
-    </message>
-    <message>
-        <source>Run the program in a test mode. The program in this mode loads a single layout file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
-        <translation type="vanished">Spustit program ve zkušebním režimu. Program v tomto režimu nahraje jeden soubor s rozvržením a tiše se ukončí bez ukázání hlavního okna. Klíč má přednost před klíčem &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="119"/>
@@ -18985,13 +19368,13 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="728"/>
-        <source>Can&apos;t open file %1:
+        <source>Can't open file %1:
 %2.</source>
         <translation>Nelze otevřít soubor %1:
 %2.</translation>
     </message>
     <message>
-        <source>Can&apos;t open schema file %1:
+        <source>Can't open schema file %1:
 %2.</source>
         <translation type="vanished">Nelze otevřít soubor se schématem %1:
 %2.</translation>
@@ -19040,11 +19423,6 @@ Chcete uložit změny?</translation>
         <translation>Nepodařilo se zapsat Canonical XML.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1089"/>
-        <source>&lt;empty&gt;</source>
-        <translation>&lt;prázdné&gt;</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="355"/>
         <source>Not unique id (%1)</source>
         <translation>Není jedinečné ID (%1)</translation>
@@ -19063,6 +19441,11 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="845"/>
         <source>Too many tags &lt;%1&gt; in file.</source>
         <translation>Příliš mnoho značek &lt;%1&gt; v souboru.</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1089"/>
+        <source>&lt;empty&gt;</source>
+        <translation>&lt;prázdné&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1131"/>
@@ -19204,6 +19587,13 @@ Chcete uložit změny?</translation>
     </message>
 </context>
 <context>
+    <name>VInteractiveTool</name>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>VLayoutConverter</name>
     <message>
         <location filename="../../src/libs/ifc/xml/vlayoutconverter.cpp" line="158"/>
@@ -19342,7 +19732,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1437"/>
         <source>Dimension is not valid</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimension is not valid</translation>
     </message>
     <message>
         <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1124"/>
@@ -19363,16 +19753,6 @@ Chcete uložit změny?</translation>
         <translation>V rozvržení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="316"/>
-        <source>Show label</source>
-        <translation>Ukázat popis</translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="324"/>
-        <source>Exclude</source>
-        <translation>Vyloučit</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="361"/>
         <source>Delete</source>
         <translation>Smazat</translation>
@@ -19383,9 +19763,8 @@ Chcete uložit změny?</translation>
         <translation>Zakázat přetočení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="350"/>
-        <source>Force flipping</source>
-        <translation>Vynutit přetočení</translation>
+        <source>Angle</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="422"/>
@@ -19423,9 +19802,24 @@ Chcete uložit změny?</translation>
         <translation>Značka sestavení</translation>
     </message>
     <message>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="316"/>
+        <source>Show label</source>
+        <translation>Ukázat popis</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="324"/>
+        <source>Exclude</source>
+        <translation>Vyloučit</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="350"/>
+        <source>Force flipping</source>
+        <translation>Vynutit přetočení</translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="356"/>
         <source>Reset piece label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Reset piece label template</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="395"/>
@@ -19505,25 +19899,17 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="526"/>
         <source>External V mark</source>
-        <translation type="unfinished"></translation>
+        <translation>External V mark</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="528"/>
         <source>Internal V mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Internal V mark</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="534"/>
         <source>Check mark</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>V mark</source>
-        <translation type="vanished">Značka V</translation>
-    </message>
-    <message>
-        <source>V mark 2</source>
-        <translation type="vanished">Značka V 2</translation>
+        <translation>Check mark</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="530"/>
@@ -19538,7 +19924,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="385"/>
         <source>Turn point</source>
-        <translation type="unfinished"></translation>
+        <translation>Turn point</translation>
     </message>
 </context>
 <context>
@@ -19585,7 +19971,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Please, provide one input file.</source>
-        <translation type="vanished">Poskytněte, prosím, jeden vstupní soubor.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpapplication.cpp" line="664"/>
@@ -19739,7 +20125,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="649"/>
         <source>Error in line %1. Grainline main line is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error in line %1. Grainline main line is empty.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="994"/>
@@ -19750,10 +20136,6 @@ Chcete uložit změny?</translation>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="624"/>
         <source>Error in line %1. Seam allowance is empty.</source>
         <translation>Chyba na řádku %1. Švová záložka je prázdná.</translation>
-    </message>
-    <message>
-        <source>Error in line %1. Grainline is empty.</source>
-        <translation type="vanished">Chyba na řádku %1. Dráha nitě je prázdná.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="743"/>
@@ -19768,7 +20150,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="479"/>
         <source>Piece %1 invalid. %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Piece %1 invalid. %2</translation>
     </message>
 </context>
 <context>
@@ -19814,7 +20196,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="158"/>
         <source>Piece Carrousel</source>
-        <translation type="unfinished"></translation>
+        <translation>Piece Carrousel</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="197"/>
@@ -19901,6 +20283,14 @@ Chcete uložit změny?</translation>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1270"/>
         <source>Format</source>
         <translation>Formát</translation>
+    </message>
+    <message>
+        <source>Width</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1013"/>
@@ -20010,6 +20400,10 @@ Chcete uložit změny?</translation>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1640"/>
         <source>Layout</source>
         <translation>Rozvržení</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1674"/>
@@ -20611,12 +21005,12 @@ Chcete uložit své změny?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4091"/>
         <source>sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>sheet</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3155"/>
         <source>Piece %1 invalid. %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Piece %1 invalid. %2</translation>
     </message>
 </context>
 <context>
@@ -20625,17 +21019,64 @@ Chcete uložit své změny?</translation>
         <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="462"/>
         <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="468"/>
         <source>Seam line is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Seam line is empty</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="474"/>
         <source>Seam allowance line is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Seam allowance line is empty</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="480"/>
         <source>Grainline is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Grainline is empty</translation>
+    </message>
+</context>
+<context>
+    <name>VPSheet</name>
+    <message>
+        <source>Letter</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Legal</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 24in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 30in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 36in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 42in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 44in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 48in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 62in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Roll 72in</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -21059,7 +21500,7 @@ Chcete uložit své změny?</translation>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4268"/>
         <source>Can&apos;t find increment &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Can&apos;t find increment &apos;%1&apos;</translation>
     </message>
 </context>
 <context>
@@ -21148,6 +21589,11 @@ Chcete uložit své změny?</translation>
 <context>
     <name>VPiece</name>
     <message>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="182"/>
+        <source>Main path of piece %1</source>
+        <translation>Hlavní cesta dílu %1</translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="939"/>
         <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="978"/>
         <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1062"/>
@@ -21158,11 +21604,6 @@ Chcete uložit své změny?</translation>
         <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1091"/>
         <source>Notch for point &apos;%1&apos; in piece &apos;%2&apos; will be disabled. Manual length is less than allowed value.</source>
         <translation>Zářez pro bod &apos;%1&apos; v části &apos;%2&apos; bude zakázán. Ruční délka je menší než povolená hodnota.</translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="182"/>
-        <source>Main path of piece %1</source>
-        <translation>Hlavní cesta dílu %1</translation>
     </message>
 </context>
 <context>
@@ -21183,6 +21624,11 @@ Chcete uložit své změny?</translation>
         <translation>List %1 z %2</translation>
     </message>
     <message>
+        <location filename="../../src/libs/vlayout/vposter.cpp" line="324"/>
+        <source>Cannot open the watermark image.</source>
+        <translation>Nelze otevřít obrázek vodoznaku.</translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vlayout/vposter.cpp" line="335"/>
         <source>Not supported file suffix &apos;%1&apos;</source>
         <translation>Nepodporovaná souborová přípona &apos;%1&apos;</translation>
@@ -21198,11 +21644,6 @@ Chcete uložit své změny?</translation>
         <source>in</source>
         <comment>unit</comment>
         <translation>palce</translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vlayout/vposter.cpp" line="324"/>
-        <source>Cannot open the watermark image.</source>
-        <translation>Nelze otevřít obrázek vodoznaku.</translation>
     </message>
 </context>
 <context>
@@ -21500,6 +21941,13 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.cpp" line="358"/>
         <source>Segment 2</source>
         <translation>Část 2</translation>
+    </message>
+</context>
+<context>
+    <name>VToolCut</name>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -22836,7 +23284,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1277"/>
         <source>Reset piece label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Reset piece label template</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1280"/>
@@ -24305,6 +24753,36 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <translation>atan</translation>
     </message>
     <message>
+        <source>sinh</source>
+        <comment>hyperbolic sine function working with radians</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>cosh</source>
+        <comment>hyperbolic cosine working with radians</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>tanh</source>
+        <comment>hyperbolic tangens function working with radians</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>asinh</source>
+        <comment>hyperbolic arcus sine function working with radians</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>acosh</source>
+        <comment>hyperbolic arcus cosine function working with radians</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>atanh</source>
+        <comment>hyperbolic arcur tangens function working with radians</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="477"/>
         <source>sinD</source>
         <comment>sine function working with degrees</comment>
@@ -24644,13 +25122,13 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="398"/>
         <source>PieceArea_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>PieceArea_</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="399"/>
         <source>PieceSeamLineArea_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>PieceSeamLineArea_</translation>
     </message>
 </context>
 <context>
@@ -24956,7 +25434,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/line/vistoolalongline.cpp" line="116"/>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</translation>
     </message>
 </context>
 <context>
@@ -24964,17 +25442,17 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolarc.cpp" line="93"/>
         <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolarc.cpp" line="111"/>
         <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first angle, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first angle, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - skip</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolarc.cpp" line="126"/>
         <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°, second angle = %4°; &lt;b&gt;Mouse click&lt;/b&gt; - finish creating, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - sticking end, &lt;b&gt;%7&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°, second angle = %4°; &lt;b&gt;Mouse click&lt;/b&gt; - finish creating, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - sticking end, &lt;b&gt;%7&lt;/b&gt; - skip</translation>
     </message>
 </context>
 <context>
@@ -24982,17 +25460,17 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolarcwithlength.cpp" line="90"/>
         <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolarcwithlength.cpp" line="108"/>
         <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first angle, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first angle, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - skip</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolarcwithlength.cpp" line="122"/>
         <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°, arc length = %4%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish creating, &lt;b&gt;%5&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°, arc length = %4%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish creating, &lt;b&gt;%5&lt;/b&gt; - skip</translation>
     </message>
 </context>
 <context>
@@ -25000,7 +25478,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/line/vistoolbisector.cpp" line="132"/>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</translation>
     </message>
 </context>
 <context>
@@ -25042,7 +25520,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolcutarc.cpp" line="87"/>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</translation>
     </message>
 </context>
 <context>
@@ -25050,7 +25528,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolcutspline.cpp" line="97"/>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</translation>
     </message>
 </context>
 <context>
@@ -25058,7 +25536,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolcutsplinepath.cpp" line="99"/>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</translation>
     </message>
 </context>
 <context>
@@ -25066,27 +25544,27 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarc.cpp" line="87"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first radius, &lt;b&gt;%3&lt;/b&gt; - skip</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarc.cpp" line="102"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%4&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%4&lt;/b&gt; - skip</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarc.cpp" line="119"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - skip</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarc.cpp" line="137"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°, angle2 = %5°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%6&lt;/b&gt; - sticking angle, &lt;b&gt;%7&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°, angle2 = %5°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%6&lt;/b&gt; - sticking angle, &lt;b&gt;%7&lt;/b&gt; - skip</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarc.cpp" line="161"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°, angle2 = %5°, rotation = %6°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%7&lt;/b&gt; - sticking angle, &lt;b&gt;%8&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°, angle2 = %5°, rotation = %6°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%7&lt;/b&gt; - sticking angle, &lt;b&gt;%8&lt;/b&gt; - skip</translation>
     </message>
 </context>
 <context>
@@ -25139,7 +25617,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/line/vistoolnormal.cpp" line="113"/>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</translation>
     </message>
 </context>
 <context>
@@ -25147,7 +25625,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/line/vistoolpointfromcircleandtangent.cpp" line="99"/>
         <source>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</translation>
     </message>
 </context>
 <context>
@@ -25155,7 +25633,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/line/vistoolpointofcontact.cpp" line="107"/>
         <source>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</translation>
     </message>
 </context>
 <context>
@@ -25163,12 +25641,12 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/line/vistoolpointofintersectioncircles.cpp" line="109"/>
         <source>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%3&lt;/b&gt; - skip</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/line/vistoolpointofintersectioncircles.cpp" line="125"/>
         <source>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first radius, &lt;b&gt;%3&lt;/b&gt; - skip</translation>
     </message>
 </context>
 <context>
@@ -25188,7 +25666,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/line/vistoolshoulderpoint.cpp" line="121"/>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</translation>
     </message>
 </context>
 <context>
