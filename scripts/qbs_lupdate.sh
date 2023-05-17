@@ -34,6 +34,10 @@ qbs resolve -d ../../build_translations modules.i18n.update:true moduleProviders
 qbs -d ../../build_translations -f ../valentina.qbs -p 'Translations' modules.i18n.update:true moduleProviders.Qt.qmakeFilePaths:$HOME/Qt6.5/6.5.0/gcc_64/bin/qmake
 qbs -d ../../build_translations -f ../valentina.qbs -p 'MTranslations' modules.i18n.update:true moduleProviders.Qt.qmakeFilePaths:$HOME/Qt6.5/6.5.0/gcc_64/bin/qmake
 
+# cannot fix incorrect placing for pattern making systems
+cp -r ./share/translations/* ../share/translations
+rm -r ./share
+
 end=$(date +%s)
 runtime=$(python3 -c "print('Time passed %u:%02u seconds' % ((${end} - ${start})/60, (${end} - ${start})%60))")
 echo $runtime
