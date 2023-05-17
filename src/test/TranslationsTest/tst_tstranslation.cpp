@@ -72,6 +72,26 @@ void TST_TSTranslation::CheckEnglishLocalization_data()
                     continue;
                 }
             }
+
+            auto PluralForm = [translationTag]()
+            {
+                QDomNodeList children = translationTag.childNodes();
+                for (int i = 0; i < children.size(); ++i)
+                {
+                    QDomNode child = children.item(i);
+                    if (child.isElement())
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            };
+
+            if (PluralForm())
+            {
+                continue; // do not check plural forms
+            }
+
             const QString translation = translationTag.text();
             if (translation.isEmpty())
             {

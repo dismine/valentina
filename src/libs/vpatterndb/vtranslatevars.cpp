@@ -981,9 +981,10 @@ auto VTranslateVars::InternalVarToUser(const QString &var) const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto VTranslateVars::VarToUser(const QString &var) const -> QString
 {
-    if (VAbstractApplication::VApp()->Settings()->GetLocale() == QStringLiteral("zh_CN"))
+    const QString locale = VAbstractApplication::VApp()->Settings()->GetLocale();
+    if (locale == QStringLiteral("zh_CN") || locale == QStringLiteral("he_IL"))
     {
-        return var; // We do not support translation of variables for Chinese
+        return var; // We do not support translation of variables for these locales
     }
 
     if (measurements.contains(var))
@@ -1002,7 +1003,8 @@ auto VTranslateVars::VarToUser(const QString &var) const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto VTranslateVars::VarFromUser(const QString &var) const -> QString
 {
-    if (VAbstractApplication::VApp()->Settings()->GetLocale() == QStringLiteral("zh_CN"))
+    const QString locale = VAbstractApplication::VApp()->Settings()->GetLocale();
+    if (locale == QStringLiteral("zh_CN") || locale == QStringLiteral("he_IL"))
     {
         return var; // We do not support translation of variables for Chinese
     }

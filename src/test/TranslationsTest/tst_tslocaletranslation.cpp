@@ -138,10 +138,8 @@ void TST_TSLocaleTranslation::CheckPlaceMarkerExist()
 
         if (sourceMarkerFlag != translationMarkerFlag)
         {
-            const QString message =
-                QString("Compare to source string in the translation string '%1' was missed place marker ")
-                    .arg(translation) + QLatin1String("'%") + QString().setNum(sourceMarkCount) +
-                    QLatin1String("'.");
+            const QString message = QString("String '%1'. Placemark '%%2' mismatch. ")
+                                        .arg(translation, QString().setNum(sourceMarkCount + 1));
             QFAIL(qUtf8Printable(message));
         }
     }

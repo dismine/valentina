@@ -65,6 +65,7 @@ enum ErrorState
     ErrorLoad = 0,
     ErrorInstall,
     ErrorSize,
+    ErrorMissing,
     NoError
 };
 

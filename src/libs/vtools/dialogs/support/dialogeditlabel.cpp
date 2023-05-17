@@ -814,7 +814,7 @@ void DialogEditLabel::SetPiece(const VPiece &piece)
     }
     catch (qmu::QmuParserError &e)
     {
-        const QString errorMsg = QObject::tr("Failed to prepare full piece area placeholder. %2.").arg(e.GetMsg());
+        const QString errorMsg = QObject::tr("Failed to prepare full piece area placeholder. %1.").arg(e.GetMsg());
         VAbstractApplication::VApp()->IsPedantic()
             ? throw VException(errorMsg)
             : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
@@ -828,7 +828,7 @@ void DialogEditLabel::SetPiece(const VPiece &piece)
     }
     catch (qmu::QmuParserError &e)
     {
-        const QString errorMsg = QObject::tr("Failed to prepare piece seam line area placeholder. %2.").arg(e.GetMsg());
+        const QString errorMsg = QObject::tr("Failed to prepare piece seam line area placeholder. %1.").arg(e.GetMsg());
         VAbstractApplication::VApp()->IsPedantic()
             ? throw VException(errorMsg)
             : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;

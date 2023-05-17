@@ -33,15 +33,26 @@
 #include "abstracttest.h"
 
 #include <QTranslator>
+#include <QtTest>
 
-const quint32 TST_MeasurementRegExp::systemCounts = 56; // count of pattern making systems
+namespace
+{
+auto InitializePmSystems() noexcept -> QStringList
+{
+    return {"p0",  "p1",  "p2",  "p3",  "p4",  "p5",  "p6",  "p7",  "p8",  "p9",  "p10", "p11", "p12", "p13",
+            "p14", "p15", "p16", "p17", "p18", "p19", "p20", "p21", "p22", "p23", "p24", "p25", "p26", "p27",
+            "p28", "p29", "p30", "p31", "p32", "p33", "p34", "p35", "p36", "p37", "p38", "p39", "p40", "p41",
+            "p42", "p43", "p44", "p45", "p46", "p47", "p48", "p49", "p50", "p51", "p52", "p53", "p54", "p998"};
+}
+} // namespace
+
+const QStringList TST_MeasurementRegExp::pmSystems = InitializePmSystems();
 
 //---------------------------------------------------------------------------------------------------------------------
-TST_MeasurementRegExp::TST_MeasurementRegExp(quint32 systemCode, const QString &locale, QObject *parent)
-    : TST_AbstractRegExp(locale, parent),
-      m_systemCode(systemCode),
-      m_system(),
-      m_pmsTranslator(nullptr)
+TST_MeasurementRegExp::TST_MeasurementRegExp(const QString &systemCode, const QString &locale, QObject *parent)
+  : TST_AbstractRegExp(locale, parent),
+    m_systemCode(systemCode),
+    m_pmsTranslator(nullptr)
 {
 }
 
@@ -54,13 +65,6 @@ TST_MeasurementRegExp::~TST_MeasurementRegExp()
 //---------------------------------------------------------------------------------------------------------------------
 void TST_MeasurementRegExp::initTestCase()
 {
-    if (m_systemCode > systemCounts)
-    {
-        QFAIL("Unexpected system code.");
-    }
-
-    m_system = QString("p%1").arg(m_systemCode);
-
     if (m_locale.isEmpty())
     {
         QFAIL("Empty locale code.");
@@ -73,19 +77,24 @@ void TST_MeasurementRegExp::initTestCase()
         QFAIL("Unsupported locale code.");
     }
 
-    TestCombinations(systemCounts, locales);
+    TestCombinations(locales);
 
-    if (LoadMeasurements(m_system, m_locale) != NoError)
+    const int res = LoadMeasurements(m_systemCode, m_locale);
+    if (res != NoError)
     {
-        const QString message = QString("Couldn't load measurements. System = %1, locale = %2")
-                .arg(m_system, m_locale);
-        QSKIP(qUtf8Printable(message));
+        const QString message =
+            QStringLiteral("Couldn't load measurements. System = %1, locale = %2").arg(m_systemCode, m_locale);
+
+        if (res == ErrorMissing)
+        {
+            QFAIL(qUtf8Printable(message));
+        }
     }
 
     if (LoadVariables(m_locale) != NoError)
     {
-        const QString message = QString("Couldn't load variables. System = %1, locale = %2")
-                .arg(m_system, m_locale);
+        const QString message =
+            QString("Couldn't load variables. System = %1, locale = %2").arg(m_systemCode, m_locale);
         QSKIP(qUtf8Printable(message));
     }
 
@@ -121,6 +130,9 @@ void TST_MeasurementRegExp::TestCheckRegExpNames()
 //---------------------------------------------------------------------------------------------------------------------
 void TST_MeasurementRegExp::TestCheckIsNamesUnique_data()
 {
+    QTest::addColumn<QString>("translatedName");
+    QTest::addColumn<QStringList>("originalNames");
+
     const QStringList originalNames = AllNames();
     QMultiMap<QString, QString> names;
     for (const auto &originalName : originalNames)
@@ -128,13 +140,10 @@ void TST_MeasurementRegExp::TestCheckIsNamesUnique_data()
         names.insert(m_trMs->VarToUser(originalName), originalName);
     }
 
-    QTest::addColumn<QString>("translatedName");
-    QTest::addColumn<QStringList>("originalNames");
-
     QList<QString> keys = names.uniqueKeys();
     for (const auto &key : keys)
     {
-        const QString tag = QString("System: '%1', locale: '%2'. Name '%3'").arg(m_system, m_locale, key);
+        const QString tag = QString("System: '%1', locale: '%2'. Name '%3'").arg(m_systemCode, m_locale, key);
         QTest::newRow(qUtf8Printable(tag)) << key << QStringList(names.values(key));
     }
 }
@@ -144,13 +153,6 @@ void TST_MeasurementRegExp::TestCheckIsNamesUnique()
 {
     QFETCH(QString, translatedName);
     QFETCH(QStringList, originalNames);
-
-    if (QLocale() == QLocale(QStringLiteral("zh_CN")) || QLocale() == QLocale(QStringLiteral("he_IL")))
-    {
-        const QString message = QStringLiteral("We do not support translation of variables for locale %1")
-                .arg(QLocale().name());
-        QSKIP(qUtf8Printable(message));
-    }
 
     if (originalNames.size() > 1)
     {
@@ -187,14 +189,14 @@ void TST_MeasurementRegExp::TestForValidChars()
 //---------------------------------------------------------------------------------------------------------------------
 void TST_MeasurementRegExp::cleanupTestCase()
 {
-    RemoveTrMeasurements(m_system, m_locale);
+    RemoveTrMeasurements(m_systemCode, m_locale);
     RemoveTrVariables(m_locale);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TST_MeasurementRegExp::TestCombinations(int systemCounts, const QStringList &locales) const
+void TST_MeasurementRegExp::TestCombinations(const QStringList &locales) const
 {
-    const vsizetype combinations = systemCounts * locales.size();
+    const vsizetype combinations = TST_MeasurementRegExp::pmSystems.size() * locales.size();
 
     QDir dir(TranslationsPath());
     const QStringList fileNames = dir.entryList(QStringList("measurements_p*_*.qm"));
@@ -214,7 +216,7 @@ void TST_MeasurementRegExp::PrepareData()
 
     for (const auto &str : originalNames)
     {
-        const QString tag = QString("System: '%1', locale: '%2'. Name '%3'").arg(m_system, m_locale, str);
+        const QString tag = QString("System: '%1', locale: '%2'. Name '%3'").arg(m_systemCode, m_locale, str);
         QTest::newRow(qUtf8Printable(tag)) << str;
     }
 }
@@ -229,7 +231,19 @@ auto TST_MeasurementRegExp::AllNames() -> QStringList
 auto TST_MeasurementRegExp::LoadMeasurements(const QString &checkedSystem, const QString &checkedLocale) -> int
 {
     const QString path = TranslationsPath();
-    const QString file = QString("measurements_%1_%2.qm").arg(checkedSystem, checkedLocale);
+    const QString file = QStringLiteral("measurements_%1_%2.qm").arg(checkedSystem, checkedLocale);
+
+    QFileInfo info(path + QLatin1String("/") + file);
+
+    if (not info.exists())
+    {
+        const QString message =
+            QString("File for translation for system = %1 and locale = %2 doesn't exists. \nFull path: %3/%4")
+                .arg(checkedSystem, checkedLocale, path, file);
+        QWARN(qUtf8Printable(message));
+
+        return ErrorMissing;
+    }
 
     if (QFileInfo(path + QLatin1String("/") + file).size() <= 34)
     {

@@ -53,9 +53,12 @@ auto main(int argc, char **argv) -> int
     const QStringList locales = SupportedLocales();
     for (const auto &locale : locales)
     {
-        for(quint32 s = 0; s < TST_MeasurementRegExp::systemCounts; ++s)
+        for (const auto &s : TST_MeasurementRegExp::pmSystems)
         {
-            ASSERT_TEST(new TST_MeasurementRegExp(s, locale));
+            if (locale != QStringLiteral("zh_CN") && locale != QStringLiteral("he_IL"))
+            {
+                ASSERT_TEST(new TST_MeasurementRegExp(s, locale));
+            }
         }
 
         ASSERT_TEST(new TST_TSLocaleTranslation(locale));

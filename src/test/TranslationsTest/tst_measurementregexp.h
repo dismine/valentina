@@ -40,14 +40,14 @@ class VTranslateVars;
 class TST_MeasurementRegExp : public TST_AbstractRegExp
 {
     Q_OBJECT // NOLINT
-public:
-    TST_MeasurementRegExp(quint32 systemCode, const QString &locale, QObject *parent = nullptr);
+
+        public : TST_MeasurementRegExp(const QString &systemCode, const QString &locale, QObject *parent = nullptr);
     virtual ~TST_MeasurementRegExp();
 
-    static const quint32 systemCounts;
+    static const QStringList pmSystems;
 
 protected:
-    virtual void        PrepareData() override;
+    virtual void PrepareData() override;
     virtual auto AllNames() -> QStringList override;
 
 private slots:
@@ -68,8 +68,7 @@ private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(TST_MeasurementRegExp) // NOLINT
 
-    quint32               m_systemCode;
-    QString               m_system;
+    QString m_systemCode;
     QPointer<QTranslator> m_pmsTranslator;
 
     void TestCombinations(const QStringList &locales) const;
