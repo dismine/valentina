@@ -37,7 +37,7 @@
 #include <QLocale>
 #include <QMarginsF>
 #include <QMessageLogger>
-#include <QStringLiteral>
+#include <QString>
 #include <QVariant>
 #include <QtDebug>
 
