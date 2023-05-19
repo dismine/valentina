@@ -35,3 +35,4 @@ IndentAccessModifiers: false
 AccessModifierOffset: -4
 SpaceBeforeParens: ControlStatementsExceptControlMacros
 IndentCaseLabels: true
+StatementMacros: ['Q_OBJECT', 'Q_UNUSED']
