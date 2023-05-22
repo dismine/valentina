@@ -886,11 +886,15 @@ void VLayoutPiece::SetPieceText(const QString &qsName, const VPieceLabelData &da
 
     // generate text
     d->m_tmDetail.SetFont(font);
-    d->m_tmDetail.SetFontSize(data.GetFontSize());
+
+    int fntSize = data.GetFontSize();
+    if (fntSize == 0)
+    {
+        fntSize = VAbstractApplication::VApp()->Settings()->GetPieceLabelFontPointSize();
+    }
+    d->m_tmDetail.SetFontSize(fntSize);
+
     d->m_tmDetail.Update(qsName, data, pattern);
-    // this will generate the lines of text
-    d->m_tmDetail.SetFontSize(data.GetFontSize());
-    d->m_tmDetail.FitFontSize(labelWidth, labelHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -962,13 +966,15 @@ void VLayoutPiece::SetPatternInfo(VAbstractPattern *pDoc, const VPatternLabelDat
 
     // Generate text
     d->m_tmPattern.SetFont(font);
-    d->m_tmPattern.SetFontSize(geom.GetFontSize());
+
+    int fntSize = geom.GetFontSize();
+    if (fntSize == 0)
+    {
+        fntSize = VAbstractApplication::VApp()->Settings()->GetPieceLabelFontPointSize();
+    }
+    d->m_tmPattern.SetFontSize(fntSize);
 
     d->m_tmPattern.Update(pDoc, pattern);
-
-    // generate lines of text
-    d->m_tmPattern.SetFontSize(geom.GetFontSize());
-    d->m_tmPattern.FitFontSize(labelWidth, labelHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1568,11 +1574,12 @@ void VLayoutPiece::CreateLabelStrings(QGraphicsItem *parent, const QVector<QPoin
     const qreal angle = -QLineF(labelShape.at(0), labelShape.at(1)).angle();
     qreal dY = 0;
 
-    for (int i = 0; i < tm.GetSourceLinesCount(); ++i)
+    const QVector<TextLine> labelLines = tm.GetLabelSourceLines(qFloor(dW), tm.GetFont());
+
+    for (const auto &tl : labelLines)
     {
-        const TextLine &tl = tm.GetSourceLine(i);
         QFont fnt = tm.GetFont();
-        fnt.setPixelSize(tm.GetFont().pixelSize() + tl.m_iFontSize);
+        fnt.setPointSize(tm.GetFont().pointSize() + tl.m_iFontSize);
         fnt.setBold(tl.m_bold);
         fnt.setItalic(tl.m_italic);
 
@@ -1581,19 +1588,21 @@ void VLayoutPiece::CreateLabelStrings(QGraphicsItem *parent, const QVector<QPoin
         if (textAsPaths)
         {
             dY += fm.height();
-        }
 
-        if (dY > dH)
+            if (dY > dH)
+            {
+                break;
+            }
+        }
+        else
         {
-            break;
+            if (dY + fm.height() > dH)
+            {
+                break;
+            }
         }
 
         QString qsText = tl.m_qsText;
-        if (TextWidth(fm, qsText) > dW)
-        {
-            qsText = fm.elidedText(qsText, Qt::ElideMiddle, static_cast<int>(dW));
-        }
-
         qreal dX = 0;
         if (tl.m_eAlign == 0 || (tl.m_eAlign & Qt::AlignLeft) > 0)
         {

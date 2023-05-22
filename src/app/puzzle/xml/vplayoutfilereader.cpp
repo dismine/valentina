@@ -900,7 +900,8 @@ auto VPLayoutFileReader::ReadLabelLine() -> TextLine
 
     QXmlStreamAttributes attribs = attributes();
 
-    line.m_iFontSize = ReadAttributeInt(attribs, ML::AttrFontSize, QString::number(MIN_FONT_SIZE));
+    line.m_iFontSize =
+        ReadAttributeInt(attribs, ML::AttrFontSize, QString::number(VCommonSettings::MinPieceLabelFontPointSize()));
     line.m_bold = ReadAttributeBool(attribs, ML::AttrBold, falseStr);
     line.m_italic = ReadAttributeBool(attribs, ML::AttrItalic, falseStr);
     int alignment = ReadAttributeInt(attribs, ML::AttrAlignment, QString::number(static_cast<int>(Qt::AlignCenter)));

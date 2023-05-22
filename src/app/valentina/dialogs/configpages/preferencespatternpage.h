@@ -65,6 +65,7 @@ private:
     Unit m_oldLineUnit{Unit::Mm};
 
     void InitLabelDateTimeFormats();
+    void InitLabelFontSizes();
     static void InitComboBoxFormats(QComboBox *box, const QStringList &items, const QString &currentFormat);
     void InitUnits();
     void RetranslateUi();

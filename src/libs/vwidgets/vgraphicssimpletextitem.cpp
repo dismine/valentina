@@ -92,9 +92,9 @@ void VGraphicsSimpleTextItem::paint(QPainter *painter, const QStyleOptionGraphic
     };
 
     QFont font = this->font();
-    if (font.pointSize() != VAbstractApplication::VApp()->Settings()->GetLabelFontSize())
+    if (font.pointSize() != VAbstractApplication::VApp()->Settings()->GetPatternLabelFontSize())
     {
-        font.setPointSize(VAbstractApplication::VApp()->Settings()->GetLabelFontSize());
+        font.setPointSize(VAbstractApplication::VApp()->Settings()->GetPatternLabelFontSize());
         setFont(font);
     }
 
@@ -373,8 +373,8 @@ void VGraphicsSimpleTextItem::Init()
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
     this->setAcceptHoverEvents(true);
     QFont font = this->font();
-    font.setPointSize(VAbstractApplication::VApp()->Settings()->GetLabelFontSize());
+    font.setPointSize(VAbstractApplication::VApp()->Settings()->GetPatternLabelFontSize());
     setFont(font);
-    m_oldScale = minVisibleFontSize / VAbstractApplication::VApp()->Settings()->GetLabelFontSize();
+    m_oldScale = minVisibleFontSize / VAbstractApplication::VApp()->Settings()->GetPatternLabelFontSize();
     setScale(m_oldScale);
 }

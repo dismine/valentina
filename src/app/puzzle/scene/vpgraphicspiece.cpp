@@ -104,22 +104,10 @@ inline auto LineMatrix(const VPPiecePtr &piece, const QPointF &topLeft, qreal an
 inline auto LineFont(const TextLine &tl, const QFont &base) -> QFont
 {
     QFont fnt = base;
-    fnt.setPixelSize(base.pixelSize() + tl.m_iFontSize);
+    fnt.setPointSize(base.pointSize() + tl.m_iFontSize);
     fnt.setBold(tl.m_bold);
     fnt.setItalic(tl.m_italic);
     return fnt;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto LineText(const TextLine &tl, const QFontMetrics &fm, qreal width) -> QString
-{
-    QString qsText = tl.m_qsText;
-    if (TextWidth(fm, qsText) > width)
-    {
-        qsText = fm.elidedText(qsText, Qt::ElideMiddle, static_cast<int>(width));
-    }
-
-    return qsText;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -404,23 +392,31 @@ void VPGraphicsPiece::InitPieceLabel(const QVector<QPointF> &labelShape, const V
 
     qreal dY = 0;
 
-    for (int i = 0; i < tm.GetSourceLinesCount(); ++i)
+    const QVector<TextLine> labelLines = tm.GetLabelSourceLines(qFloor(dW), tm.GetFont());
+
+    for (const auto &tl : labelLines)
     {
-        const TextLine& tl = tm.GetSourceLine(i);
         const QFont fnt = LineFont(tl, tm.GetFont());
         const QFontMetrics fm(fnt);
 
         if (m_textAsPaths)
         {
             dY += fm.height();
-        }
 
-        if (dY > dH)
+            if (dY > dH)
+            {
+                break;
+            }
+        }
+        else
         {
-            break;
+            if (dY + fm.height() > dH)
+            {
+                break;
+            }
         }
 
-        const QString qsText = LineText(tl, fm, dW);
+        const QString qsText = tl.m_qsText;
         const qreal dX = LineAlign(tl, qsText, fm, dW);
         // set up the rotation around top-left corner matrix
         const QTransform lineMatrix = LineMatrix(piece, labelShape.at(0), angle, QPointF(dX, dY), maxLineWidth);

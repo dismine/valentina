@@ -505,7 +505,8 @@ void VToolSeamAllowance::AddPatternPieceData(VAbstractPattern *doc, QDomElement 
     doc->SetAttribute(domData, AttrMy, data.GetPos().y());
     doc->SetAttribute(domData, AttrWidth, data.GetLabelWidth());
     doc->SetAttribute(domData, AttrHeight, data.GetLabelHeight());
-    doc->SetAttribute(domData, AttrFont, data.GetFontSize());
+    doc->SetAttributeOrRemoveIf<int>(domData, AttrFont, data.GetFontSize(),
+                                     [](int size) noexcept { return size == 0; });
     doc->SetAttribute(domData, VAbstractPattern::AttrRotation, data.GetRotation());
     doc->SetAttributeOrRemoveIf<quint32>(domData, AttrCenterPin, data.CenterPin(),
                                          [](quint32 pin) noexcept { return pin == NULL_ID; });
@@ -528,7 +529,8 @@ void VToolSeamAllowance::AddPatternInfo(VAbstractPattern *doc, QDomElement &domE
     doc->SetAttribute(domData, AttrMy, geom.GetPos().y());
     doc->SetAttribute(domData, AttrWidth, geom.GetLabelWidth());
     doc->SetAttribute(domData, AttrHeight, geom.GetLabelHeight());
-    doc->SetAttribute(domData, AttrFont, geom.GetFontSize());
+    doc->SetAttributeOrRemoveIf<int>(domData, AttrFont, geom.GetFontSize(),
+                                     [](int size) noexcept { return size == 0; });
     doc->SetAttribute(domData, VAbstractPattern::AttrRotation, geom.GetRotation());
     doc->SetAttributeOrRemoveIf<quint32>(domData, AttrCenterPin, geom.CenterPin(),
                                          [](quint32 pin) noexcept { return pin <= NULL_ID; });
@@ -767,6 +769,7 @@ void VToolSeamAllowance::UpdateDetailLabel()
 
         if (PrepareLabelData(labelData, pins, m_dataLabel, pos, labelAngle))
         {
+            m_dataLabel->SetPieceName(detail.GetName());
             m_dataLabel->UpdateData(detail.GetName(), labelData, getData());
             UpdateLabelItem(m_dataLabel, pos, labelAngle);
         }
@@ -794,6 +797,7 @@ void VToolSeamAllowance::UpdatePatternInfo()
 
         if (PrepareLabelData(geom, pins, m_patternInfo, pos, labelAngle))
         {
+            m_patternInfo->SetPieceName(detail.GetName());
             m_patternInfo->UpdateData(doc, getData());
             UpdateLabelItem(m_patternInfo, pos, labelAngle);
         }
@@ -872,7 +876,7 @@ void VToolSeamAllowance::SaveMoveDetail(const QPointF &ptPos)
 /**
  * @brief SaveResizeDetail saves the resize detail label operation to the undo stack
  */
-void VToolSeamAllowance::SaveResizeDetail(qreal dLabelW, int iFontSize)
+void VToolSeamAllowance::SaveResizeDetail(qreal dLabelW)
 {
     VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
     VPiece newDet = oldDet;
@@ -881,7 +885,6 @@ void VToolSeamAllowance::SaveResizeDetail(qreal dLabelW, int iFontSize)
     newDet.GetPieceLabelData().SetLabelWidth(QString().setNum(dLabelW));
     const qreal height = FromPixel(m_dataLabel->boundingRect().height(), *VDataTool::data.GetPatternUnit());
     newDet.GetPieceLabelData().SetLabelHeight(QString().setNum(height));
-    newDet.GetPieceLabelData().SetFontSize(iFontSize);
 
     auto *resizeCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
     resizeCommand->setText(tr("resize pattern piece label"));
@@ -928,7 +931,7 @@ void VToolSeamAllowance::SaveMovePattern(const QPointF &ptPos)
 /**
  * @brief: SaveResizePattern saves the pattern label width and font size
  */
-void VToolSeamAllowance::SaveResizePattern(qreal dLabelW, int iFontSize)
+void VToolSeamAllowance::SaveResizePattern(qreal dLabelW)
 {
     VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
     VPiece newDet = oldDet;
@@ -937,7 +940,6 @@ void VToolSeamAllowance::SaveResizePattern(qreal dLabelW, int iFontSize)
     newDet.GetPatternLabelData().SetLabelWidth(QString().setNum(dLabelW));
     qreal height = FromPixel(m_patternInfo->boundingRect().height(), *VDataTool::data.GetPatternUnit());
     newDet.GetPatternLabelData().SetLabelHeight(QString().setNum(height));
-    newDet.GetPatternLabelData().SetFontSize(iFontSize);
 
     auto *resizeCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
     resizeCommand->setText(tr("resize pattern info label"));
@@ -1372,8 +1374,8 @@ VToolSeamAllowance::VToolSeamAllowance(const VToolSeamAllowanceInitData &initDat
     m_sceneDetails(initData.scene),
     m_drawName(initData.drawName),
     m_seamAllowance(new VNoBrushScalePathItem(this)),
-    m_dataLabel(new VTextGraphicsItem(this)),
-    m_patternInfo(new VTextGraphicsItem(this)),
+    m_dataLabel(new VTextGraphicsItem(VTextGraphicsItem::ItemType::PieceLabel, this)),
+    m_patternInfo(new VTextGraphicsItem(VTextGraphicsItem::ItemType::PatternLabel, this)),
     m_grainLine(new VGrainlineItem(this)),
     m_passmarks(new QGraphicsPathItem(this)),
     m_placeLabels(new QGraphicsPathItem(this))
@@ -2116,10 +2118,12 @@ auto VToolSeamAllowance::PrepareLabelData(const VPatternLabelData &labelData, co
     }
     labelItem->SetMoveType(type);
 
-    QFont fnt = VAbstractApplication::VApp()->Settings()->GetLabelFont();
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    QFont fnt = settings->GetLabelFont();
     {
         const int iFS = labelData.GetFontSize();
-        iFS < MIN_FONT_SIZE ? fnt.setPixelSize(MIN_FONT_SIZE) : fnt.setPixelSize(iFS);
+        iFS < VCommonSettings::MinPieceLabelFontPointSize() ? fnt.setPointSize(settings->GetPieceLabelFontPointSize())
+                                                            : fnt.setPointSize(iFS);
     }
     labelItem->SetFont(fnt);
     labelItem->SetSize(ToPixel(labelWidth, *VDataTool::data.GetPatternUnit()),

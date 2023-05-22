@@ -112,7 +112,19 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
     ui->checkBoxSewLineOnDrawing->setChecked(settings->GetSewLineOnDrawing());
     ui->doublePassmarkCheck->setChecked(settings->IsDoublePassmark());
     ui->checkBoxHideMainPath->setChecked(settings->IsHideMainPath());
-    ui->fontComboBoxLabelFont->setCurrentFont(settings->GetLabelFont());
+
+    QFont labelFont = settings->GetLabelFont();
+    int pointSize = settings->GetPieceLabelFontPointSize();
+    labelFont.setPointSize(pointSize);
+
+    ui->fontComboBoxLabelFont->setCurrentFont(labelFont);
+
+    InitLabelFontSizes();
+    const qint32 indexSize = ui->comboBoxLabelFontSize->findData(pointSize);
+    if (indexSize != -1)
+    {
+        ui->comboBoxLabelFontSize->setCurrentIndex(indexSize);
+    }
 
     ui->checkBoxRemeberPatternMaterials->setChecked(settings->IsRememberPatternMaterials());
     m_knownMaterials = settings->GetKnownMaterials();
@@ -167,6 +179,7 @@ auto PreferencesPatternPage::Apply() -> QStringList
     settings->SetSewLineOnDrawing(ui->checkBoxSewLineOnDrawing->isChecked());
     settings->SetHideMainPath(ui->checkBoxHideMainPath->isChecked());
     settings->SetLabelFont(ui->fontComboBoxLabelFont->currentFont());
+    settings->SetPieceLabelFontPointSize(ui->comboBoxLabelFontSize->currentData().toInt());
 
     if (settings->IsDoublePassmark() != ui->doublePassmarkCheck->isChecked())
     {
@@ -253,6 +266,21 @@ void PreferencesPatternPage::InitLabelDateTimeFormats()
 
     connect(ui->pushButtonEditDateFormats, &QPushButton::clicked, this, &PreferencesPatternPage::EditDateTimeFormats);
     connect(ui->pushButtonEditTimeFormats, &QPushButton::clicked, this, &PreferencesPatternPage::EditDateTimeFormats);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PreferencesPatternPage::InitLabelFontSizes()
+{
+    ui->comboBoxLabelFontSize->clear();
+
+    // Get the available font sizes
+    for (auto size : QFontDatabase::standardSizes())
+    {
+        if (size >= VCommonSettings::MinPieceLabelFontPointSize())
+        {
+            ui->comboBoxLabelFontSize->addItem(QString::number(size), size);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

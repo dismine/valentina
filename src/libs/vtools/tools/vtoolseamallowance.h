@@ -136,10 +136,10 @@ public slots:
 protected slots:
     void UpdateGrainline();
     void SaveMoveDetail(const QPointF &ptPos);
-    void SaveResizeDetail(qreal dLabelW, int iFontSize);
+    void SaveResizeDetail(qreal dLabelW);
     void SaveRotationDetail(qreal dRot);
     void SaveMovePattern(const QPointF &ptPos);
-    void SaveResizePattern(qreal dLabelW, int iFontSize);
+    void SaveResizePattern(qreal dLabelW);
     void SaveRotationPattern(qreal dRot);
     void SaveMoveGrainline(const QPointF &ptPos);
     void SaveResizeGrainline(qreal dLength);

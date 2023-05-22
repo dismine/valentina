@@ -363,6 +363,11 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     uiTabLabels->checkBoxFold->setChecked(ppData.IsOnFold());
     m_templateLines = ppData.GetLabelTemplate();
 
+    {
+        const int piceFontSizeIndex = uiTabLabels->comboBoxPieceLabelSize->findData(ppData.GetFontSize());
+        uiTabLabels->comboBoxPieceLabelSize->setCurrentIndex(piceFontSizeIndex != -1 ? piceFontSizeIndex : 0);
+    }
+
     uiTabLabels->groupBoxDetailLabel->setEnabled(not m_templateLines.isEmpty());
 
     int index = uiTabGrainline->comboBoxArrow->findData(static_cast<int>(piece.GetGrainlineGeometry().GetArrowType()));
@@ -389,6 +394,11 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     SetPLWidth(patternInfo.GetLabelWidth());
     SetPLHeight(patternInfo.GetLabelHeight());
     SetPLAngle(patternInfo.GetRotation());
+
+    {
+        const int patternFontSizeIndex = uiTabLabels->comboBoxPatternLabelSize->findData(patternInfo.GetFontSize());
+        uiTabLabels->comboBoxPatternLabelSize->setCurrentIndex(patternFontSizeIndex != -1 ? patternFontSizeIndex : 0);
+    }
 
     const VGrainlineData &grainlineGeometry = piece.GetGrainlineGeometry();
     uiTabGrainline->groupBoxGrainline->setChecked(grainlineGeometry.IsVisible());
@@ -2725,6 +2735,7 @@ auto DialogSeamAllowance::CreatePiece() const -> VPiece
     piece.GetPieceLabelData().SetLabelTemplate(m_templateLines);
     piece.GetPieceLabelData().SetRotation(GetFormulaFromUser(uiTabLabels->lineEditDLAngleFormula));
     piece.GetPieceLabelData().SetVisible(uiTabLabels->groupBoxDetailLabel->isChecked());
+    piece.GetPieceLabelData().SetFontSize(uiTabLabels->comboBoxPieceLabelSize->currentData().toInt());
 
     if (not flagDPin)
     {
@@ -2745,6 +2756,7 @@ auto DialogSeamAllowance::CreatePiece() const -> VPiece
 
     piece.GetPatternLabelData().SetVisible(uiTabLabels->groupBoxPatternLabel->isChecked());
     piece.GetPatternLabelData().SetRotation(GetFormulaFromUser(uiTabLabels->lineEditPLAngleFormula));
+    piece.GetPatternLabelData().SetFontSize(uiTabLabels->comboBoxPatternLabelSize->currentData().toInt());
 
     if (not flagPPin)
     {
@@ -3387,6 +3399,9 @@ void DialogSeamAllowance::InitPatternPieceDataTab()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::InitLabelsTab()
 {
+    InitLabelFontSize(uiTabLabels->comboBoxPatternLabelSize);
+    InitLabelFontSize(uiTabLabels->comboBoxPieceLabelSize);
+
     uiTabLabels->lineEditDLWidthFormula->setPlainText(m_defLabelValue);
     uiTabLabels->lineEditDLHeightFormula->setPlainText(m_defLabelValue);
     uiTabLabels->lineEditPLWidthFormula->setPlainText(m_defLabelValue);
@@ -3663,6 +3678,23 @@ void DialogSeamAllowance::InitAllPinComboboxes()
     InitPinPoint(uiTabLabels->comboBoxPLCenterPin);
     InitPinPoint(uiTabLabels->comboBoxPLTopLeftPin);
     InitPinPoint(uiTabLabels->comboBoxPLBottomRightPin);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitLabelFontSize(QComboBox *box)
+{
+    SCASSERT(box != nullptr);
+    box->clear();
+    box->addItem(tr("Default"), 0);
+
+    // Get the available font sizes
+    for (auto size : QFontDatabase::standardSizes())
+    {
+        if (size >= VCommonSettings::MinPieceLabelFontPointSize())
+        {
+            box->addItem(QString::number(size), size);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

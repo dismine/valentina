@@ -45,16 +45,13 @@ class VPieceLabelData;
 class VAbstractPattern;
 class VContainer;
 
-#define MIN_FONT_SIZE 5
-#define MAX_FONT_SIZE 128
-
 /**
  * @brief The TextLine struct holds the information about one text line
  */
 struct TextLine
 {
     QString m_qsText{};
-    int m_iFontSize{MIN_FONT_SIZE}; // 0 means default
+    int m_iFontSize{0}; // 0 means default
     bool m_bold{false};
     bool m_italic{false};
     Qt::Alignment m_eAlign{Qt::AlignCenter};
@@ -92,12 +89,13 @@ public:
     void SetFont(const QFont &font);
     auto GetFont() const -> const QFont &;
     void SetFontSize(int iFS);
-    void FitFontSize(qreal fW, qreal fH);
 
     auto GetAllSourceLines() const -> QVector<TextLine>;
     void SetAllSourceLines(const QVector<TextLine> &lines);
     auto GetSourceLinesCount() const -> vsizetype;
     auto GetSourceLine(vsizetype i) const -> const TextLine &;
+
+    auto GetLabelSourceLines(int width, const QFont &font) const -> QVector<TextLine>;
 
     auto MaxLineWidth(int width) const -> int;
 
@@ -113,6 +111,8 @@ private:
 
     static const quint32 streamHeader;
     static const quint16 classVersion;
+
+    auto BreakTextIntoLines(const QString &text, const QFont &font, int maxWidth) const -> QStringList;
 };
 
 #endif // VTEXTMANAGER_H

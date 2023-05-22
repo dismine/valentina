@@ -213,9 +213,13 @@ public:
     auto GetLabelFont() const -> QFont;
     void SetLabelFont(const QFont &f);
 
-    auto GetLabelFontSize() const -> int;
-    void SetLabelFontSize(int size);
-    static auto GetDefLabelFontSize() -> int;
+    auto GetPieceLabelFontPointSize() const -> int;
+    void SetPieceLabelFontPointSize(int size);
+    static auto MinPieceLabelFontPointSize() -> int;
+
+    auto GetPatternLabelFontSize() const -> int;
+    void SetPatternLabelFontSize(int size);
+    static auto GetDefPatternLabelFontSize() -> int;
 
     auto GetHideLabels() const -> bool;
     void SetHideLabels(bool value);

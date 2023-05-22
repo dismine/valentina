@@ -53,7 +53,14 @@ class VTextGraphicsItem final : public VPieceItem
     Q_OBJECT // NOLINT
 
 public:
-    explicit VTextGraphicsItem(QGraphicsItem *pParent = nullptr);
+    enum ItemType
+    {
+        PatternLabel,
+        PieceLabel,
+        Unknown
+    };
+
+    explicit VTextGraphicsItem(ItemType type, QGraphicsItem *pParent = nullptr);
     ~VTextGraphicsItem() override = default;
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
@@ -72,6 +79,7 @@ public:
     void UpdateData(const QString &qsName, const VPieceLabelData &data, const VContainer *pattern);
     void UpdateData(VAbstractPattern *pDoc, const VContainer *pattern);
     auto GetTextLines() const -> vsizetype;
+    void SetPieceName(const QString &name);
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *pME) override;
@@ -84,7 +92,7 @@ protected:
     void CorrectLabel();
 
 signals:
-    void SignalResized(qreal iTW, int iFontSize);
+    void SignalResized(qreal iTW);
     void SignalRotated(qreal dAng);
     void SignalShrink();
 
@@ -97,6 +105,8 @@ private:
     double m_dAngle{0};
     QRectF m_rectResize{};
     VTextManager m_tm{};
+    QString m_pieceName{};
+    ItemType m_itemType{Unknown};
 
     void AllUserModifications(const QPointF &pos);
     void UserRotateAndMove();
@@ -105,6 +115,8 @@ private:
     void MoveLabel(QGraphicsSceneMouseEvent *pME);
     void ResizeLabel(QGraphicsSceneMouseEvent *pME);
     void RotateLabel(QGraphicsSceneMouseEvent *pME);
+
+    void PaintLabel(QPainter *painter);
 };
 
 #endif // VTEXTGRAPHICSITEM_H

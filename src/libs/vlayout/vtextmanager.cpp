@@ -38,7 +38,9 @@
 #include <QtMath>
 
 #include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/compatibility.h"
 #include "../vmisc/vabstractvalapplication.h"
+#include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 9, 0)
@@ -49,6 +51,49 @@
 #include "../vpatterndb/variables/vmeasurement.h"
 #include "../vpatterndb/vcontainer.h"
 #include "vtextmanager.h"
+
+namespace
+{
+auto SplitTextByWidth(const QString &text, const QFont &font, int maxWidth) -> QStringList
+{
+    QFontMetrics fontMetrics(font);
+    if (TextWidth(fontMetrics, text) <= maxWidth)
+    {
+        return {text};
+    }
+
+    QStringList substrings;
+    substrings.reserve(2);
+
+    const int textLength = static_cast<int>(text.length());
+    int lineWidth = 0;
+
+    for (int endIndex = 0; endIndex < textLength; ++endIndex)
+    {
+        QChar currentChar = text.at(endIndex);
+        const int charWidth = TextWidth(fontMetrics, currentChar);
+
+        if (lineWidth + charWidth > maxWidth)
+        {
+            if (endIndex > 0)
+            {
+                substrings.append(text.mid(0, endIndex));
+            }
+
+            if (endIndex < textLength)
+            {
+                substrings.append(text.mid(endIndex));
+            }
+
+            break;
+        }
+
+        lineWidth += charWidth;
+    }
+
+    return substrings;
+}
+} // namespace
 
 const quint32 TextLine::streamHeader = 0xA3881E49; // CRC-32Q string "TextLine"
 const quint16 TextLine::classVersion = 1;
@@ -487,7 +532,9 @@ auto VTextManager::GetFont() const -> const QFont &
  */
 void VTextManager::SetFontSize(int iFS)
 {
-    iFS < MIN_FONT_SIZE ? m_font.setPixelSize(MIN_FONT_SIZE) : m_font.setPixelSize(iFS);
+    iFS < VCommonSettings::MinPieceLabelFontPointSize()
+        ? m_font.setPointSize(VCommonSettings::MinPieceLabelFontPointSize())
+        : m_font.setPointSize(iFS);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -526,6 +573,40 @@ auto VTextManager::GetSourceLine(vsizetype i) const -> const TextLine &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VTextManager::GetLabelSourceLines(int width, const QFont &font) const -> QVector<TextLine>
+{
+    QVector<TextLine> lines;
+    lines.reserve(m_liLines.size());
+    QFont fnt = font;
+    int fSize = m_font.pointSize();
+
+    for (const auto &tl : m_liLines)
+    {
+        fnt.setPointSize(fSize + tl.m_iFontSize);
+        fnt.setBold(tl.m_bold);
+        fnt.setItalic(tl.m_italic);
+
+        QString qsText = tl.m_qsText;
+        QFontMetrics fm(fnt);
+        if (TextWidth(fm, qsText) > width)
+        {
+            const QStringList brokeLines = BreakTextIntoLines(qsText, fnt, width);
+            for (const auto &lineText : brokeLines)
+            {
+                TextLine line = tl;
+                line.m_qsText = lineText;
+                lines.append(line);
+            }
+        }
+        else
+        {
+            lines.append(tl);
+        }
+    }
+    return lines;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VTextManager::MaxLineWidth(int width) const -> int
 {
     int maxWidth = 0;
@@ -534,7 +615,7 @@ auto VTextManager::MaxLineWidth(int width) const -> int
         const TextLine &tl = m_liLines.at(i);
 
         QFont fnt = m_font;
-        fnt.setPixelSize(fnt.pixelSize() + tl.m_iFontSize);
+        fnt.setPointSize(fnt.pointSize() + tl.m_iFontSize);
         fnt.setBold(tl.m_bold);
         fnt.setItalic(tl.m_italic);
 
@@ -551,64 +632,6 @@ auto VTextManager::MaxLineWidth(int width) const -> int
     }
 
     return maxWidth;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VTextManager::FitFontSize sets the font size just big enough, so that the text fits into rectangle of
- * size (fW, fH)
- * @param fW rectangle width
- * @param fH rectangle height
- */
-void VTextManager::FitFontSize(qreal fW, qreal fH)
-{
-    int iFS = 0;
-    if (GetSourceLinesCount() > 0)
-    { // division by zero
-        iFS = 3 * qFloor(fH / static_cast<int>(GetSourceLinesCount())) / 4;
-    }
-
-    if (iFS < MIN_FONT_SIZE)
-    {
-        iFS = MIN_FONT_SIZE;
-    }
-
-    // get ratio between char width and height
-
-    int iMaxLen = 0;
-    TextLine maxLine;
-    QFont fnt;
-    for (vsizetype i = 0; i < GetSourceLinesCount(); ++i)
-    {
-        const TextLine &tl = GetSourceLine(i);
-        fnt = m_font;
-        fnt.setPixelSize(iFS + tl.m_iFontSize);
-        fnt.setBold(tl.m_bold);
-        fnt.setItalic(tl.m_italic);
-        QFontMetrics fm(fnt);
-        const int iTW = TextWidth(fm, tl.m_qsText);
-        if (iTW > iMaxLen)
-        {
-            iMaxLen = iTW;
-            maxLine = tl;
-        }
-    }
-    if (iMaxLen > fW)
-    {
-        QFont fnt = m_font;
-        fnt.setBold(maxLine.m_bold);
-        fnt.setItalic(maxLine.m_italic);
-
-        int lineLength = 0;
-        do
-        {
-            --iFS;
-            fnt.setPixelSize(iFS + maxLine.m_iFontSize);
-            QFontMetrics fm(fnt);
-            lineLength = TextWidth(fm, maxLine.m_qsText);
-        } while (lineLength > fW && iFS > MIN_FONT_SIZE);
-    }
-    SetFontSize(iFS);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -664,4 +687,94 @@ void VTextManager::Update(VAbstractPattern *pDoc, const VContainer *pattern)
     }
 
     m_liLines = *m_patternLabelLinesCache;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTextManager::BreakTextIntoLines(const QString &text, const QFont &font, int maxWidth) const -> QStringList
+{
+    QFontMetrics fontMetrics(font);
+    QStringList words = text.split(' ');
+
+    QString currentLine;
+    int currentLineWidth = 0;
+    const int spaceWidth = TextWidth(fontMetrics, QChar(' '));
+    const float tolerance = 0.3F;
+
+    QStringList lines;
+    lines.reserve(words.size());
+    QMutableListIterator<QString> iterator(words);
+
+    auto AppendWord = [&currentLine, &currentLineWidth](const QString &word, int totalWidth)
+    {
+        if (!currentLine.isEmpty())
+        {
+            currentLine += QChar(' ');
+        }
+        currentLine += word;
+        currentLineWidth = totalWidth;
+    };
+
+    while (iterator.hasNext())
+    {
+        const QString &word = iterator.next();
+        int wordWidth = TextWidth(fontMetrics, word);
+        int totalWidth = !currentLine.isEmpty() ? currentLineWidth + spaceWidth + wordWidth : wordWidth;
+
+        if (totalWidth <= maxWidth)
+        {
+            // Append the word to the current line
+            AppendWord(word, totalWidth);
+        }
+        else if ((maxWidth - currentLineWidth) <= qRound(static_cast<float>(maxWidth) * tolerance) &&
+                 maxWidth >= wordWidth)
+        {
+            // Start a new line with the word if it doesn't exceed the tolerance
+            lines.append(currentLine);
+            currentLine = word;
+            currentLineWidth = wordWidth;
+        }
+        else
+        {
+            // Word is too long, force line break
+            if (currentLineWidth + spaceWidth + TextWidth(fontMetrics, word.at(0)) > maxWidth)
+            {
+                lines.append(currentLine);
+                currentLine.clear();
+                currentLineWidth = 0;
+            }
+
+            const int subWordWidth = !currentLine.isEmpty() ? maxWidth - (currentLineWidth + spaceWidth) : maxWidth;
+            const QStringList subWords = SplitTextByWidth(word, font, subWordWidth);
+
+            if (subWords.isEmpty() || subWords.size() > 2)
+            {
+                AppendWord(word, totalWidth);
+            }
+            else
+            {
+                const int width = TextWidth(fontMetrics, ConstFirst(subWords));
+                const int tWidth = !currentLine.isEmpty() ? currentLineWidth + spaceWidth + width : width;
+                AppendWord(ConstFirst(subWords), tWidth);
+                lines.append(currentLine);
+
+                if (subWords.size() == 2)
+                {
+                    currentLine.clear();
+                    currentLineWidth = 0;
+
+                    // Insert the item after the current item
+                    iterator.insert(ConstLast(subWords));
+                    iterator.previous();
+                }
+            }
+        }
+    }
+
+    // Add the last line
+    if (!currentLine.isEmpty())
+    {
+        lines.append(currentLine);
+    }
+
+    return lines;
 }

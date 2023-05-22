@@ -2975,7 +2975,7 @@ void MainWindow::ToolBarTools()
     connect(ui->actionIncreaseLabelFont, &QAction::triggered, this, [this]()
     {
         VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
-        settings->SetLabelFontSize(settings->GetLabelFontSize() + 1);
+        settings->SetPatternLabelFontSize(settings->GetPatternLabelFontSize() + 1);
         if (m_sceneDraw)
         {
             m_sceneDraw->update();
@@ -2996,7 +2996,7 @@ void MainWindow::ToolBarTools()
     connect(ui->actionDecreaseLabelFont, &QAction::triggered, this, [this]()
     {
         VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
-        settings->SetLabelFontSize(settings->GetLabelFontSize() - 1);
+        settings->SetPatternLabelFontSize(settings->GetPatternLabelFontSize() - 1);
         if (m_sceneDraw)
         {
             m_sceneDraw->update();
@@ -3017,7 +3017,7 @@ void MainWindow::ToolBarTools()
     connect(ui->actionOriginalLabelFont, &QAction::triggered, this, [this]()
     {
         VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
-        settings->SetLabelFontSize(VCommonSettings::GetDefLabelFontSize());
+        settings->SetPatternLabelFontSize(VCommonSettings::GetDefPatternLabelFontSize());
         if (m_sceneDraw)
         {
             m_sceneDraw->update();

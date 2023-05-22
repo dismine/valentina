@@ -301,6 +301,7 @@ private:
     void InitPassmarksTab();
     void InitPlaceLabelsTab();
     void InitAllPinComboboxes();
+    void InitLabelFontSize(QComboBox *box);
 
     void SetFormulaSAWidth(const QString &formula);
     void SetFormulaPassmarkLength(const QString &formula);

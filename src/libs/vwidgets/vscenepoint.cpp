@@ -82,8 +82,8 @@ void VScenePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
         painter->drawEllipse(PointRect(accuracyPointOnLine));
         painter->restore();
     }
-
-    if (settings->GetLabelFontSize()*scale < minVisibleFontSize || settings->GetHideLabels())
+    
+    if (settings->GetPatternLabelFontSize()*scale < minVisibleFontSize || settings->GetHideLabels())
     {
         m_namePoint->setVisible(false);
         m_lineName->setVisible(false);

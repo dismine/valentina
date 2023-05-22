@@ -129,6 +129,8 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDoublePassmark, (QLatin1String("
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternDefaultSeamAllowance,
                           (QLatin1String("pattern/defaultSeamAllowance")))                              // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternLabelFont, (QLatin1String("pattern/labelFont"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPieceLabelFontPointSize,                                // NOLINT
+                          (QLatin1String("pattern/pieceLabelFontPointSize")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternLineWidth, (QLatin1String("pattern/lineWidth"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternCurveApproximationScale,
                           (QLatin1String("pattern/curveApproximationScale"))) // NOLINT
@@ -1188,15 +1190,49 @@ void VCommonSettings::SetLabelFont(const QFont &f)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VCommonSettings::GetLabelFontSize() const -> int
+auto VCommonSettings::GetPieceLabelFontPointSize() const -> int
+{
+    bool ok = false;
+    int val = value(*settingPieceLabelFontPointSize, VCommonSettings::MinPieceLabelFontPointSize()).toInt(&ok);
+    if (not ok)
+    {
+        qDebug() << "Could not convert value"
+                 << value(*settingPieceLabelFontPointSize, VCommonSettings::MinPieceLabelFontPointSize())
+                 << "to int. Return default value for label font size.";
+        val = 12;
+    }
+    else
+    {
+        if (val < VCommonSettings::MinPieceLabelFontPointSize())
+        {
+            return VCommonSettings::MinPieceLabelFontPointSize();
+        }
+    }
+    return val;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetPieceLabelFontPointSize(int size)
+{
+    setValue(*settingPieceLabelFontPointSize, size);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::MinPieceLabelFontPointSize() -> int
+{
+    return 5;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::GetPatternLabelFontSize() const -> int
 {
     if (labelFontSizeCached <= 0)
     {
         bool ok = false;
-        labelFontSizeCached = value(*settingPatternLabelFontSize, GetDefLabelFontSize()).toInt(&ok);
+        labelFontSizeCached = value(*settingPatternLabelFontSize, GetDefPatternLabelFontSize()).toInt(&ok);
         if (not ok)
         {
-            labelFontSizeCached = GetDefLabelFontSize();
+            labelFontSizeCached = GetDefPatternLabelFontSize();
         }
         labelFontSizeCached = qBound(minLabelFontSize, labelFontSizeCached, maxLabelFontSize);
     }
@@ -1204,7 +1240,7 @@ auto VCommonSettings::GetLabelFontSize() const -> int
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetLabelFontSize(int size)
+void VCommonSettings::SetPatternLabelFontSize(int size)
 {
     size = qBound(minLabelFontSize, size, maxLabelFontSize);
     setValue(*settingPatternLabelFontSize, size);
@@ -1212,7 +1248,7 @@ void VCommonSettings::SetLabelFontSize(int size)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VCommonSettings::GetDefLabelFontSize() -> int
+auto VCommonSettings::GetDefPatternLabelFontSize() -> int
 {
     return 32;
 }
