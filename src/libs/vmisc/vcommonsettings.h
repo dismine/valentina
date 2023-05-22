@@ -46,8 +46,10 @@ class QMarginsF;
 class VCommonSettings : public QSettings
 {
     Q_OBJECT // NOLINT
-        public : VCommonSettings(Format format, Scope scope, const QString &organization,
-                                 const QString &application = QString(), QObject *parent = nullptr);
+
+public:
+    VCommonSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
+                    QObject *parent = nullptr);
     VCommonSettings(const QString &fileName, Format format, QObject *parent = nullptr);
     ~VCommonSettings() override = default;
 

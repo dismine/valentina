@@ -27,19 +27,19 @@
  *************************************************************************/
 
 #include "preferencespatternpage.h"
-#include "ui_preferencespatternpage.h"
 #include "../dialogdatetimeformats.h"
 #include "../dialogknownmaterials.h"
-#include "../vmisc/vvalentinasettings.h"
 #include "../vmisc/vabstractvalapplication.h"
+#include "../vmisc/vvalentinasettings.h"
+#include "ui_preferencespatternpage.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vwidgets/vmaingraphicsview.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../vwidgets/vmaingraphicsview.h"
 
-#include <QMessageBox>
 #include <QDate>
+#include <QMessageBox>
 #include <QTime>
 
 namespace
@@ -57,12 +57,12 @@ auto ComboBoxAllStrings(QComboBox *combo) -> QStringList
 
     return itemsInComboBox;
 }
-}  // namespace
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
-    : QWidget(parent),
-      ui(new Ui::PreferencesPatternPage)
+  : QWidget(parent),
+    ui(new Ui::PreferencesPatternPage)
 {
     ui->setupUi(this);
     RetranslateUi();
@@ -85,18 +85,19 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
         ui->comboBoxLineWidthUnit->setCurrentIndex(indexUnit);
     }
 
-    connect(ui->comboBoxLineWidthUnit, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
-    {
-        const Unit lineUnit = static_cast<Unit>(ui->comboBoxLineWidthUnit->currentData().toInt());
-        const qreal value = UnitConvertor(ui->doubleSpinBoxLineWidth->value(), m_oldLineUnit, lineUnit);
-        ui->doubleSpinBoxLineWidth->setDecimals(lineUnit == Unit::Mm ? 1 : 6);
-        ui->doubleSpinBoxLineWidth->setMinimum(UnitConvertor(ui->doubleSpinBoxLineWidth->minimum(), m_oldLineUnit,
-                                                             lineUnit));
-        ui->doubleSpinBoxLineWidth->setMaximum(UnitConvertor(ui->doubleSpinBoxLineWidth->maximum(), m_oldLineUnit,
-                                                             lineUnit));
-        ui->doubleSpinBoxLineWidth->setValue(value);
-        m_oldLineUnit = lineUnit;
-    });
+    connect(ui->comboBoxLineWidthUnit, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            [this]()
+            {
+                const Unit lineUnit = static_cast<Unit>(ui->comboBoxLineWidthUnit->currentData().toInt());
+                const qreal value = UnitConvertor(ui->doubleSpinBoxLineWidth->value(), m_oldLineUnit, lineUnit);
+                ui->doubleSpinBoxLineWidth->setDecimals(lineUnit == Unit::Mm ? 1 : 6);
+                ui->doubleSpinBoxLineWidth->setMinimum(
+                    UnitConvertor(ui->doubleSpinBoxLineWidth->minimum(), m_oldLineUnit, lineUnit));
+                ui->doubleSpinBoxLineWidth->setMaximum(
+                    UnitConvertor(ui->doubleSpinBoxLineWidth->maximum(), m_oldLineUnit, lineUnit));
+                ui->doubleSpinBoxLineWidth->setValue(value);
+                m_oldLineUnit = lineUnit;
+            });
 
     m_oldLineUnit = static_cast<Unit>(ui->comboBoxLineWidthUnit->currentData().toInt());
     ui->doubleSpinBoxLineWidth->setDecimals(m_oldLineUnit == Unit::Mm ? 1 : 6);
@@ -192,7 +193,7 @@ void PreferencesPatternPage::InitDefaultSeamAllowance()
 {
     ui->defaultSeamAllowance->setValue(VAbstractValApplication::VApp()->ValentinaSettings()->GetDefaultSeamAllowance());
     ui->defaultSeamAllowance->setSuffix(
-                UnitsToStr(StrToUnits(VAbstractValApplication::VApp()->ValentinaSettings()->GetUnit()), true));
+        UnitsToStr(StrToUnits(VAbstractValApplication::VApp()->ValentinaSettings()->GetUnit()), true));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -217,12 +218,12 @@ void PreferencesPatternPage::EditDateTimeFormats()
     if (button == ui->pushButtonEditDateFormats)
     {
         CallDateTimeFormatEditor(QDate::currentDate(), VCommonSettings::PredefinedDateFormats(),
-                           settings->GetUserDefinedDateFormats(), ui->comboBoxDateFormats);
+                                 settings->GetUserDefinedDateFormats(), ui->comboBoxDateFormats);
     }
     else if (button == ui->pushButtonEditTimeFormats)
     {
         CallDateTimeFormatEditor(QTime::currentTime(), VCommonSettings::PredefinedTimeFormats(),
-                           settings->GetUserDefinedTimeFormats(), ui->comboBoxTimeFormats);
+                                 settings->GetUserDefinedTimeFormats(), ui->comboBoxTimeFormats);
     }
 }
 

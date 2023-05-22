@@ -85,7 +85,7 @@ void VGraphicsSimpleTextItem::paint(QPainter *painter, const QStyleOptionGraphic
 {
     auto UpdateLine = [this]()
     {
-        if (VScenePoint *parent = dynamic_cast<VScenePoint *>(parentItem()))
+        if (auto *parent = dynamic_cast<VScenePoint *>(parentItem()))
         {
             parent->RefreshLine();
         }

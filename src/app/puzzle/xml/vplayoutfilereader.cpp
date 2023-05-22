@@ -26,23 +26,24 @@
  **
  ** *************************************************************************/
 
-#include <Qt>
-#include <QFont>
-#include <QXmlStreamAttributes>
-#include <ciso646>
-#include "vpiecegrainline.h"
 #include "vplayoutfilereader.h"
-#include "vplayoutliterals.h"
-#include "../layout/vpsheet.h"
-#include "../vlayout/vlayoutpiecepath.h"
-#include "../vlayout/vtextmanager.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/exception/vexceptionconversionerror.h"
-#include "../vpatterndb/floatItemData/floatitemdef.h"
-#include "../vgeometry/vgeometrydef.h"
-#include "../vgeometry/vlayoutplacelabel.h"
 #include "../layout/vplayout.h"
 #include "../layout/vppiece.h"
+#include "../layout/vpsheet.h"
+#include "../vgeometry/vgeometrydef.h"
+#include "../vgeometry/vlayoutplacelabel.h"
+#include "../vlayout/vlayoutpiecepath.h"
+#include "../vlayout/vtextmanager.h"
+#include "../vmisc/vcommonsettings.h"
+#include "../vpatterndb/floatItemData/floatitemdef.h"
+#include "vpiecegrainline.h"
+#include "vplayoutliterals.h"
+#include <QFont>
+#include <QXmlStreamAttributes>
+#include <Qt>
+#include <ciso646>
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
@@ -99,7 +100,7 @@ auto StringToPath(const QString &path) -> QVector<QPointF>
 
     QStringList points = path.split(ML::pointsSep);
     p.reserve(points.size());
-    for (const auto& point : points)
+    for (const auto &point : points)
     {
         p.append(StringToPoint(point));
     }
@@ -188,7 +189,7 @@ auto StringToLines(const QString &string) -> QVector<QLineF>
     QVector<QLineF> path;
     path.reserve(lines.size());
 
-    for (const auto& line : lines)
+    for (const auto &line : lines)
     {
         QLineF l = StringToLine(line);
         if (not l.isNull())
@@ -211,7 +212,7 @@ auto StringToRect(const QString &string) -> QRectF
 
     return {};
 }
-}  // namespace
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPLayoutFileReader::ReadFile(const VPLayoutPtr &layout, QFile *file) -> bool
@@ -225,7 +226,7 @@ auto VPLayoutFileReader::ReadFile(const VPLayoutPtr &layout, QFile *file) -> boo
             ReadLayout(layout);
         }
     }
-    catch(const VException &e)
+    catch (const VException &e)
     {
         raiseError(e.ErrorMessage());
     }
@@ -238,8 +239,7 @@ void VPLayoutFileReader::ReadLayout(const VPLayoutPtr &layout)
 {
     AssertRootTag(ML::TagLayout);
 
-    const QStringList tags
-    {
+    const QStringList tags{
         ML::TagProperties,     // 0
         ML::TagUnplacedPieces, // 1
         ML::TagSheets          // 2
@@ -271,8 +271,7 @@ void VPLayoutFileReader::ReadProperties(const VPLayoutPtr &layout)
 {
     AssertRootTag(ML::TagProperties);
 
-    const QStringList tags
-    {
+    const QStringList tags{
         ML::TagUnit,        // 0
         ML::TagTitle,       // 1
         ML::TagDescription, // 2
@@ -288,15 +287,15 @@ void VPLayoutFileReader::ReadProperties(const VPLayoutPtr &layout)
 
         switch (tags.indexOf(name().toString()))
         {
-            case 0:// unit
+            case 0: // unit
                 qDebug("read unit");
                 layout->LayoutSettings().SetUnit(StrToUnits(readElementText()));
                 break;
-            case 1:// title
+            case 1: // title
                 qDebug("read title");
                 layout->LayoutSettings().SetTitle(readElementText());
                 break;
-            case 2:// description
+            case 2: // description
                 qDebug("read description");
                 layout->LayoutSettings().SetDescription(readElementText());
                 break;
@@ -331,7 +330,7 @@ void VPLayoutFileReader::ReadControl(const VPLayoutPtr &layout)
 
     QXmlStreamAttributes attribs = attributes();
     layout->LayoutSettings().SetWarningSuperpositionOfPieces(
-                ReadAttributeBool(attribs, ML::AttrWarningSuperposition, trueStr));
+        ReadAttributeBool(attribs, ML::AttrWarningSuperposition, trueStr));
     layout->LayoutSettings().SetWarningPiecesOutOfBound(ReadAttributeBool(attribs, ML::AttrWarningOutOfBound, trueStr));
     layout->LayoutSettings().SetStickyEdges(ReadAttributeBool(attribs, ML::AttrStickyEdges, trueStr));
     layout->LayoutSettings().SetPiecesGap(qMax(ReadAttributeDouble(attribs, ML::AttrPiecesGap, QChar('0')), 0.0));
@@ -357,10 +356,9 @@ void VPLayoutFileReader::ReadTiles(const VPLayoutPtr &layout)
     layout->LayoutSettings().SetShowTiles(ReadAttributeBool(attribs, ML::AttrVisible, falseStr));
     layout->LayoutSettings().SetPrintTilesScheme(ReadAttributeBool(attribs, ML::AttrPrintScheme, falseStr));
     layout->LayoutSettings().SetShowTileNumber(ReadAttributeBool(attribs, ML::AttrTileNumber, falseStr));
-//    attribs.value(ML::AttrMatchingMarks); // TODO
+    //    attribs.value(ML::AttrMatchingMarks); // TODO
 
-    const QStringList tags
-    {
+    const QStringList tags{
         ML::TagSize,  // 0
         ML::TagMargin // 1
     };
@@ -426,8 +424,7 @@ void VPLayoutFileReader::ReadSheet(const VPLayoutPtr &layout)
     QXmlStreamAttributes attribs = attributes();
     sheet->SetGrainlineType(StrToGrainlineType(ReadAttributeEmptyString(attribs, ML::AttrGrainlineType)));
 
-    const QStringList tags
-    {
+    const QStringList tags{
         ML::TagName,   // 0
         ML::TagSize,   // 1
         ML::TagMargin, // 2
@@ -461,7 +458,6 @@ void VPLayoutFileReader::ReadSheet(const VPLayoutPtr &layout)
 
     layout->AddSheet(sheet);
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayoutFileReader::ReadPieces(const VPLayoutPtr &layout, const VPSheetPtr &sheet)
@@ -513,8 +509,7 @@ void VPLayoutFileReader::ReadPiece(const VPPiecePtr &piece)
     piece->SetSewLineOnDrawing(ReadAttributeBool(attribs, ML::AttrSewLineOnDrawing, falseStr));
     piece->SetMatrix(StringToTransfrom(ReadAttributeEmptyString(attribs, ML::AttrTransform)));
 
-    const QStringList tags
-    {
+    const QStringList tags{
         ML::TagSeamLine,      // 0
         ML::TagSeamAllowance, // 1
         ML::TagGrainline,     // 2
@@ -976,7 +971,7 @@ auto VPLayoutFileReader::ReadSize() -> QSizeF
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayoutFileReader::AssertRootTag(const QString &tag) const
 {
-    if (not (isStartElement() && name() == tag))
+    if (not(isStartElement() && name() == tag))
     {
         throw VException(tr("Unexpected tag %1 in line %2").arg(name().toString()).arg(lineNumber()));
     }
@@ -984,7 +979,7 @@ void VPLayoutFileReader::AssertRootTag(const QString &tag) const
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPLayoutFileReader::ReadAttributeString(const QXmlStreamAttributes &attribs, const QString &name,
-                                                const QString &defValue) -> QString
+                                             const QString &defValue) -> QString
 {
     const QString parameter = attribs.value(name).toString();
     if (parameter.isEmpty())
@@ -1016,7 +1011,7 @@ auto VPLayoutFileReader::ReadAttributeBool(const QXmlStreamAttributes &attribs, 
     {
         parametr = ReadAttributeString(attribs, name, defValue);
 
-        const QStringList bools {trueStr, falseStr, QChar('1'), QChar('0')};
+        const QStringList bools{trueStr, falseStr, QChar('1'), QChar('0')};
         switch (bools.indexOf(parametr))
         {
             case 0: // true
@@ -1027,7 +1022,7 @@ auto VPLayoutFileReader::ReadAttributeBool(const QXmlStreamAttributes &attribs, 
             case 3: // 0
                 val = false;
                 break;
-            default:// others
+            default: // others
                 throw VExceptionConversionError(message, name);
         }
     }

@@ -28,32 +28,32 @@
 
 #include "vpgraphicspiece.h"
 
-#include <QPen>
-#include <QBrush>
-#include <QPainter>
-#include <QGraphicsSceneMouseEvent>
-#include <QStyleOptionGraphicsItem>
-#include <QGraphicsSceneContextMenuEvent>
-#include <QMenu>
-#include <QtMath>
-#include <QGraphicsScene>
 #include <QApplication>
+#include <QBrush>
+#include <QGraphicsScene>
+#include <QGraphicsSceneContextMenuEvent>
+#include <QGraphicsSceneMouseEvent>
+#include <QMenu>
+#include <QPainter>
+#include <QPen>
+#include <QStyleOptionGraphicsItem>
+#include <QtMath>
 
-#include "../layout/vppiece.h"
 #include "../layout/vplayout.h"
+#include "../layout/vppiece.h"
 #include "../layout/vpsheet.h"
-#include "../vlayout/vtextmanager.h"
 #include "../vlayout/vgraphicsfillitem.h"
+#include "../vlayout/vtextmanager.h"
 
 #include "../vpapplication.h"
 
-#include "compatibility.h"
 #include "../vlayout/vlayoutpiecepath.h"
+#include "compatibility.h"
 
 #include "../vgeometry/vlayoutplacelabel.h"
 
-#include "undocommands/vpundopiecemove.h"
 #include "undocommands/vpundomovepieceonsheet.h"
+#include "undocommands/vpundopiecemove.h"
 #include "vpiecegrainline.h"
 
 #include <QLoggingCategory>
@@ -69,7 +69,7 @@ QT_WARNING_POP
 namespace
 {
 Q_GLOBAL_STATIC_WITH_ARGS(QColor, mainColor, (Qt::black)) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(QColor, errorColor, (Qt::red)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(QColor, errorColor, (Qt::red))  // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
 inline auto LineMatrix(const VPPiecePtr &piece, const QPointF &topLeft, qreal angle, const QPointF &linePos,
@@ -101,7 +101,7 @@ inline auto LineMatrix(const VPPiecePtr &piece, const QPointF &topLeft, qreal an
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline auto LineFont(const TextLine& tl, const QFont &base) -> QFont
+inline auto LineFont(const TextLine &tl, const QFont &base) -> QFont
 {
     QFont fnt = base;
     fnt.setPixelSize(base.pixelSize() + tl.m_iFontSize);
@@ -110,9 +110,8 @@ inline auto LineFont(const TextLine& tl, const QFont &base) -> QFont
     return fnt;
 }
 
-
 //---------------------------------------------------------------------------------------------------------------------
-inline auto LineText(const TextLine& tl, const QFontMetrics &fm, qreal width) -> QString
+inline auto LineText(const TextLine &tl, const QFontMetrics &fm, qreal width) -> QString
 {
     QString qsText = tl.m_qsText;
     if (TextWidth(fm, qsText) > width)
@@ -124,7 +123,7 @@ inline auto LineText(const TextLine& tl, const QFontMetrics &fm, qreal width) ->
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline auto LineAlign(const TextLine& tl, const QString &text, const QFontMetrics &fm, qreal width) -> qreal
+inline auto LineAlign(const TextLine &tl, const QString &text, const QFontMetrics &fm, qreal width) -> qreal
 {
     const int lineWidth = TextWidth(fm, text);
 
@@ -135,7 +134,7 @@ inline auto LineAlign(const TextLine& tl, const QString &text, const QFontMetric
     }
     else if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
     {
-        dX = (width - lineWidth)/2;
+        dX = (width - lineWidth) / 2;
     }
     else if ((tl.m_eAlign & Qt::AlignRight) > 0)
     {
@@ -150,11 +149,11 @@ inline auto SelectionBrush() -> QBrush
 {
     return {QColor(255, 160, 160, 60)};
 }
-}  // namespace
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-VPGraphicsPiece::VPGraphicsPiece(const VPPiecePtr &piece, QGraphicsItem *parent) :
-    QGraphicsObject(parent),
+VPGraphicsPiece::VPGraphicsPiece(const VPPiecePtr &piece, QGraphicsItem *parent)
+  : QGraphicsObject(parent),
     m_piece(piece)
 {
     // set some infos
@@ -190,7 +189,7 @@ auto VPGraphicsPiece::boundingRect() const -> QRectF
     shape.addPath(m_stickyPath);
 
     VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
-    const qreal halfPenWidth = settings->GetLayoutLineWidth()/2.;
+    const qreal halfPenWidth = settings->GetLayoutLineWidth() / 2.;
 
     return shape.boundingRect().adjusted(-halfPenWidth, -halfPenWidth, halfPenWidth, halfPenWidth);
 }
@@ -198,7 +197,7 @@ auto VPGraphicsPiece::boundingRect() const -> QRectF
 //---------------------------------------------------------------------------------------------------------------------
 auto VPGraphicsPiece::shape() const -> QPainterPath
 {
-    if(!m_cuttingLine.isEmpty())
+    if (!m_cuttingLine.isEmpty())
     {
         return m_cuttingLine;
     }
@@ -222,11 +221,11 @@ void VPGraphicsPiece::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    //perform the default behaviour
+    // perform the default behaviour
     QGraphicsObject::mousePressEvent(event);
 
     // change the cursor when clicking the left button
-    if(event->button() == Qt::LeftButton)
+    if (event->button() == Qt::LeftButton)
     {
         setCursor(Qt::ClosedHandCursor);
 
@@ -250,7 +249,7 @@ void VPGraphicsPiece::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    //perform the default behaviour
+    // perform the default behaviour
     QGraphicsItem::mouseReleaseEvent(event);
 
     // change the cursor when clicking left button
@@ -267,8 +266,8 @@ void VPGraphicsPiece::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
             {
                 if (layout->LayoutSettings().GetStickyEdges() && m_hasStickyPosition)
                 {
-                    auto *command = new VPUndoPieceMove(piece, m_stickyTranslateX, m_stickyTranslateY,
-                                                        m_allowChangeMerge);
+                    auto *command =
+                        new VPUndoPieceMove(piece, m_stickyTranslateX, m_stickyTranslateY, m_allowChangeMerge);
                     layout->UndoStack()->push(command);
 
                     SetStickyPoints(QVector<QPointF>());
@@ -314,7 +313,7 @@ void VPGraphicsPiece::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     QList<VPSheetPtr> sheets = layout->GetSheets();
     sheets.removeAll(piece->Sheet());
 
-    QVector<QAction*> moveToActions;
+    QVector<QAction *> moveToActions;
 
     if (not sheets.isEmpty())
     {
@@ -324,7 +323,7 @@ void VPGraphicsPiece::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         {
             if (not sheet.isNull())
             {
-                QAction* moveToSheet = moveMenu->addAction(sheet->GetName());
+                QAction *moveToSheet = moveMenu->addAction(sheet->GetName());
                 moveToSheet->setData(QVariant::fromValue(sheet));
                 moveToActions.append(moveToSheet);
             }
@@ -399,7 +398,7 @@ void VPGraphicsPiece::InitPieceLabel(const QVector<QPointF> &labelShape, const V
 
     const qreal dW = QLineF(labelShape.at(0), labelShape.at(1)).length();
     const qreal dH = QLineF(labelShape.at(1), labelShape.at(2)).length();
-    const qreal angle = - QLineF(labelShape.at(0), labelShape.at(1)).angle();
+    const qreal angle = -QLineF(labelShape.at(0), labelShape.at(1)).angle();
     const QColor color = PieceColor();
     const int maxLineWidth = tm.MaxLineWidth(static_cast<int>(dW));
 
@@ -429,9 +428,9 @@ void VPGraphicsPiece::InitPieceLabel(const QVector<QPointF> &labelShape, const V
         if (m_textAsPaths)
         {
             QPainterPath path;
-            path.addText(0, - static_cast<qreal>(fm.ascent())/6., fnt, qsText);
+            path.addText(0, -static_cast<qreal>(fm.ascent()) / 6., fnt, qsText);
 
-            auto* item = new QGraphicsPathItem(this);
+            auto *item = new QGraphicsPathItem(this);
             item->setPath(path);
             item->setBrush(QBrush(color));
             item->setTransform(lineMatrix);
@@ -441,7 +440,7 @@ void VPGraphicsPiece::InitPieceLabel(const QVector<QPointF> &labelShape, const V
         }
         else
         {
-            auto* item = new QGraphicsSimpleTextItem(this);
+            auto *item = new QGraphicsSimpleTextItem(this);
             item->setFont(fnt);
             item->setText(qsText);
             item->setBrush(QBrush(color));
@@ -464,7 +463,7 @@ void VPGraphicsPiece::InitGrainlineItem()
         return;
     }
 
-    if(piece->IsGrainlineEnabled())
+    if (piece->IsGrainlineEnabled())
     {
         m_grainlineItem = new VGraphicsFillItem(this);
         m_grainlineItem->setPath(VLayoutPiece::GrainlinePath(piece->GetMappedGrainlineShape()));
@@ -516,7 +515,7 @@ void VPGraphicsPiece::PaintSeamLine(QPainter *painter, const VPPiecePtr &piece)
     if (not piece->IsHideMainPath() || not piece->IsSeamAllowance())
     {
         QVector<VLayoutPoint> seamLinePoints = piece->GetMappedContourPoints();
-        if(!seamLinePoints.isEmpty())
+        if (!seamLinePoints.isEmpty())
         {
             m_seamLine.moveTo(ConstFirst(seamLinePoints));
             for (int i = 1; i < seamLinePoints.size(); i++)
@@ -541,7 +540,7 @@ void VPGraphicsPiece::PaintCuttingLine(QPainter *painter, const VPPiecePtr &piec
     if (piece->IsSeamAllowance() && not piece->IsSeamAllowanceBuiltIn())
     {
         QVector<VLayoutPoint> cuttingLinepoints = piece->GetMappedSeamAllowancePoints();
-        if(!cuttingLinepoints.isEmpty())
+        if (!cuttingLinepoints.isEmpty())
         {
             m_cuttingLine.moveTo(ConstFirst(cuttingLinepoints));
             for (int i = 1; i < cuttingLinepoints.size(); i++)
@@ -564,7 +563,7 @@ void VPGraphicsPiece::PaintCuttingLine(QPainter *painter, const VPPiecePtr &piec
 void VPGraphicsPiece::PaintInternalPaths(QPainter *painter, const VPPiecePtr &piece)
 {
     QVector<VLayoutPiecePath> internalPaths = piece->GetInternalPaths();
-    for (const auto& piecePath : internalPaths)
+    for (const auto &piecePath : internalPaths)
     {
         QPainterPath path = piece->GetMatrix().map(piecePath.GetPainterPath());
 
@@ -585,7 +584,7 @@ void VPGraphicsPiece::PaintInternalPaths(QPainter *painter, const VPPiecePtr &pi
 void VPGraphicsPiece::PaintPassmarks(QPainter *painter, const VPPiecePtr &piece)
 {
     QVector<VLayoutPassmark> passmarks = piece->GetMappedPassmarks();
-    for(auto &passmark : passmarks)
+    for (auto &passmark : passmarks)
     {
         QPainterPath passmarkPath;
         for (auto &line : passmark.lines)
@@ -610,7 +609,7 @@ void VPGraphicsPiece::PaintPassmarks(QPainter *painter, const VPPiecePtr &piece)
 void VPGraphicsPiece::PaintPlaceLabels(QPainter *painter, const VPPiecePtr &piece)
 {
     QVector<VLayoutPlaceLabel> placeLabels = piece->GetPlaceLabels();
-    for(auto &placeLabel : placeLabels)
+    for (auto &placeLabel : placeLabels)
     {
         QPainterPath path =
             VAbstractPiece::LabelShapePath(piece->MapPlaceLabelShape(VAbstractPiece::PlaceLabelShape(placeLabel)));
@@ -807,7 +806,7 @@ auto VPGraphicsPiece::itemChange(GraphicsItemChange change, const QVariant &valu
 {
     if (scene() != nullptr)
     {
-        if(change == ItemSelectedHasChanged)
+        if (change == ItemSelectedHasChanged)
         {
             VPPiecePtr piece = m_piece.toStrongRef();
             if (not piece.isNull())
@@ -825,4 +824,3 @@ auto VPGraphicsPiece::itemChange(GraphicsItemChange change, const QVariant &valu
 
     return QGraphicsObject::itemChange(change, value);
 }
-

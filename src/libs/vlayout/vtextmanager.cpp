@@ -117,7 +117,7 @@ const quint16 VTextManager::classVersion = 1;
 
 namespace
 {
-Q_GLOBAL_STATIC(QVector<TextLine>, m_patternLabelLines) // NOLINT
+Q_GLOBAL_STATIC(QVector<TextLine>, m_patternLabelLinesCache) // NOLINT
 }
 
 // Friend functions
@@ -644,10 +644,10 @@ void VTextManager::Update(VAbstractPattern *pDoc, const VContainer *pattern)
 {
     m_liLines.clear();
 
-    if (m_patternLabelLines->isEmpty() || pDoc->GetPatternWasChanged())
+    if (m_patternLabelLinesCache->isEmpty() || pDoc->GetPatternWasChanged())
     {
         QVector<VLabelTemplateLine> lines = pDoc->GetPatternLabelTemplate();
-        if (lines.isEmpty() && m_patternLabelLines->isEmpty())
+        if (lines.isEmpty() && m_patternLabelLinesCache->isEmpty())
         {
             return; // Nothing to parse
         }
@@ -660,8 +660,8 @@ void VTextManager::Update(VAbstractPattern *pDoc, const VContainer *pattern)
         }
 
         pDoc->SetPatternWasChanged(false);
-        *m_patternLabelLines = PrepareLines(lines);
+        *m_patternLabelLinesCache = PrepareLines(lines);
     }
 
-    m_liLines = *m_patternLabelLines;
+    m_liLines = *m_patternLabelLinesCache;
 }

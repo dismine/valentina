@@ -36,14 +36,14 @@
 
 namespace Ui
 {
-    class DialogSeamAllowance;
-    class TabPaths;
-    class TabLabels;
-    class TabGrainline;
-    class TabPins;
-    class TabPassmarks;
-    class TabPlaceLabels;
-}
+class DialogSeamAllowance;
+class TabPaths;
+class TabLabels;
+class TabGrainline;
+class TabPins;
+class TabPassmarks;
+class TabPlaceLabels;
+} // namespace Ui
 
 class VisPieceSpecialPoints;
 class FancyTabBar;
@@ -54,8 +54,7 @@ class DialogSeamAllowance : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    DialogSeamAllowance(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
-                        QWidget *parent = nullptr);
+    DialogSeamAllowance(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
     DialogSeamAllowance(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     ~DialogSeamAllowance() override;
 
@@ -177,11 +176,11 @@ private:
     Q_DISABLE_COPY_MOVE(DialogSeamAllowance) // NOLINT
 
     Ui::DialogSeamAllowance *ui;
-    Ui::TabPaths            *uiTabPaths;
-    Ui::TabLabels           *uiTabLabels;
-    Ui::TabGrainline        *uiTabGrainline;
-    Ui::TabPins             *uiTabPins;
-    Ui::TabPassmarks        *uiTabPassmarks;
+    Ui::TabPaths *uiTabPaths;
+    Ui::TabLabels *uiTabLabels;
+    Ui::TabGrainline *uiTabGrainline;
+    Ui::TabPins *uiTabPins;
+    Ui::TabPassmarks *uiTabPassmarks;
     Ui::TabPlaceLabels *uiTabPlaceLabels;
 
     QWidget *m_tabPaths{nullptr};

@@ -29,12 +29,12 @@
 #ifndef PREFERENCESPATTERNPAGE_H
 #define PREFERENCESPATTERNPAGE_H
 
-#include <QWidget>
 #include "../vmisc/def.h"
+#include <QWidget>
 
 namespace Ui
 {
-    class PreferencesPatternPage;
+class PreferencesPatternPage;
 }
 
 class QComboBox;
@@ -51,7 +51,7 @@ public:
     void InitDefaultSeamAllowance();
 
 protected:
-    void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent *event) override;
 
 private slots:
     void EditDateTimeFormats();

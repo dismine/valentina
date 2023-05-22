@@ -57,14 +57,11 @@ class VToolSeamAllowance : public VInteractiveTool, public QGraphicsPathItem
 public:
     ~VToolSeamAllowance() override = default;
 
-    static auto Create(const QPointer<DialogTool> &dialog,
-                       VMainGraphicsScene *scene,
-                       VAbstractPattern *doc,
+    static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                        VContainer *data) -> VToolSeamAllowance *;
     static auto Create(VToolSeamAllowanceInitData &initData) -> VToolSeamAllowance *;
-    static auto Duplicate(const QPointer<DialogTool> &dialog,
-                          VMainGraphicsScene *scene,
-                          VAbstractPattern *doc) -> VToolSeamAllowance *;
+    static auto Duplicate(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc)
+        -> VToolSeamAllowance *;
     static auto Duplicate(VToolSeamAllowanceInitData &initData) -> VToolSeamAllowance *;
 
     static const quint8 pieceVersion;
@@ -89,32 +86,16 @@ public:
 
     void RemoveWithConfirm(bool ask);
 
-    static void InsertNodes(const QVector<VPieceNode> &nodes,
-                            quint32 pieceId,
-                            VMainGraphicsScene *scene,
-                            VContainer *data,
-                            VAbstractPattern *doc);
+    static void InsertNodes(const QVector<VPieceNode> &nodes, quint32 pieceId, VMainGraphicsScene *scene,
+                            VContainer *data, VAbstractPattern *doc);
 
-    static void AddAttributes(VAbstractPattern *doc,
-                              QDomElement &domElement,
-                              quint32 id,
-                              const VPiece &piece);
+    static void AddAttributes(VAbstractPattern *doc, QDomElement &domElement, quint32 id, const VPiece &piece);
     static void AddCSARecord(VAbstractPattern *doc, QDomElement &domElement, CustomSARecord record);
-    static void AddCSARecords(VAbstractPattern *doc,
-                              QDomElement &domElement,
-                              const QVector<CustomSARecord> &records);
-    static void AddInternalPaths(VAbstractPattern *doc,
-                                 QDomElement &domElement,
-                                 const QVector<quint32> &paths);
-    static void AddPins(VAbstractPattern *doc,
-                        QDomElement &domElement,
-                        const QVector<quint32> &pins);
-    static void AddPlaceLabels(VAbstractPattern *doc,
-                               QDomElement &domElement,
-                               const QVector<quint32> &placeLabels);
-    static void AddPatternPieceData(VAbstractPattern *doc,
-                                    QDomElement &domElement,
-                                    const VPiece &piece);
+    static void AddCSARecords(VAbstractPattern *doc, QDomElement &domElement, const QVector<CustomSARecord> &records);
+    static void AddInternalPaths(VAbstractPattern *doc, QDomElement &domElement, const QVector<quint32> &paths);
+    static void AddPins(VAbstractPattern *doc, QDomElement &domElement, const QVector<quint32> &pins);
+    static void AddPlaceLabels(VAbstractPattern *doc, QDomElement &domElement, const QVector<quint32> &placeLabels);
+    static void AddPatternPieceData(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
     static void AddPatternInfo(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
     static void AddGrainline(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
 
@@ -126,7 +107,10 @@ public:
     void RefreshGeometry(bool updateChildren = true);
 
     auto type() const -> int override { return Type; }
-    enum { Type = UserType + static_cast<int>(Tool::Piece) };
+    enum
+    {
+        Type = UserType + static_cast<int>(Tool::Piece)
+    };
 
     auto getTagName() const -> QString override;
     void ShowVisualization(bool show) override;
@@ -211,66 +195,45 @@ private:
     /** @brief m_geometryIsReady is true when a piece's geometry is ready and checks for validity can be enabled. */
     bool m_geometryIsReady{false};
 
-    explicit VToolSeamAllowance(const VToolSeamAllowanceInitData &initData,
-                                QGraphicsItem *parent = nullptr);
+    explicit VToolSeamAllowance(const VToolSeamAllowanceInitData &initData, QGraphicsItem *parent = nullptr);
 
     void UpdateExcludeState();
     void UpdateInternalPaths();
 
-    auto FindLabelGeometry(const VPatternLabelData &labelData,
-                           const QVector<quint32> &pins,
-                           qreal &rotationAngle,
-                           qreal &labelWidth,
-                           qreal &labelHeight,
-                           QPointF &pos) -> VPieceItem::MoveTypes;
-    auto FindGrainlineGeometry(const VGrainlineData &geom,
-                               const QVector<quint32> &pins,
-                               qreal &length,
-                               qreal &rotationAngle,
-                               QPointF &pos) -> VPieceItem::MoveTypes;
+    auto FindLabelGeometry(const VPatternLabelData &labelData, const QVector<quint32> &pins, qreal &rotationAngle,
+                           qreal &labelWidth, qreal &labelHeight, QPointF &pos) -> VPieceItem::MoveTypes;
+    auto FindGrainlineGeometry(const VGrainlineData &geom, const QVector<quint32> &pins, qreal &length,
+                               qreal &rotationAngle, QPointF &pos) -> VPieceItem::MoveTypes;
 
     void InitNodes(const VPiece &detail, VMainGraphicsScene *scene);
-    static void InitNode(const VPieceNode &node,
-                         VMainGraphicsScene *scene,
-                         VToolSeamAllowance *parent);
+    static void InitNode(const VPieceNode &node, VMainGraphicsScene *scene, VToolSeamAllowance *parent);
     void InitCSAPaths(const VPiece &detail) const;
     void InitInternalPaths(const VPiece &detail);
     void InitSpecialPoints(const QVector<quint32> &points) const;
 
-    auto PrepareLabelData(const VPatternLabelData &labelData,
-                          const QVector<quint32> &pins,
-                          VTextGraphicsItem *labelItem,
-                          QPointF &pos,
-                          qreal &labelAngle) -> bool;
+    auto PrepareLabelData(const VPatternLabelData &labelData, const QVector<quint32> &pins,
+                          VTextGraphicsItem *labelItem, QPointF &pos, qreal &labelAngle) -> bool;
 
     auto SelectedTools() const -> QList<VToolSeamAllowance *>;
 
     auto IsGrainlinePositionValid() const -> bool;
 
-    static void AddPointRecords(VAbstractPattern *doc,
-                                QDomElement &domElement,
-                                const QVector<quint32> &records,
+    static void AddPointRecords(VAbstractPattern *doc, QDomElement &domElement, const QVector<quint32> &records,
                                 const QString &tag);
 
-    static auto DuplicateNodes(const VPiecePath &path,
-                               const VToolSeamAllowanceInitData &initData,
+    static auto DuplicateNodes(const VPiecePath &path, const VToolSeamAllowanceInitData &initData,
                                QMap<quint32, quint32> &replacements) -> QVector<VPieceNode>;
-    static auto DuplicateNode(const VPieceNode &node, const VToolSeamAllowanceInitData &initData)
-        -> quint32;
+    static auto DuplicateNode(const VPieceNode &node, const VToolSeamAllowanceInitData &initData) -> quint32;
 
-    static auto DuplicatePiecePath(quint32 id, const VToolSeamAllowanceInitData &initData)
-        -> quint32;
+    static auto DuplicatePiecePath(quint32 id, const VToolSeamAllowanceInitData &initData) -> quint32;
 
     static auto DuplicateCustomSARecords(const QVector<CustomSARecord> &records,
                                          const VToolSeamAllowanceInitData &initData,
-                                         const QMap<quint32, quint32> &replacements)
-        -> QVector<CustomSARecord>;
+                                         const QMap<quint32, quint32> &replacements) -> QVector<CustomSARecord>;
 
-    static auto DuplicateInternalPaths(const QVector<quint32> &iPaths,
-                                       const VToolSeamAllowanceInitData &initData)
+    static auto DuplicateInternalPaths(const QVector<quint32> &iPaths, const VToolSeamAllowanceInitData &initData)
         -> QVector<quint32>;
-    static auto DuplicatePlaceLabels(const QVector<quint32> &placeLabels,
-                                     const VToolSeamAllowanceInitData &initData)
+    static auto DuplicatePlaceLabels(const QVector<quint32> &placeLabels, const VToolSeamAllowanceInitData &initData)
         -> QVector<quint32>;
 };
 
