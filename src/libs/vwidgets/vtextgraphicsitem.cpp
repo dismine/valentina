@@ -37,7 +37,7 @@
 #include <QPen>
 #include <QPoint>
 #include <QStyleOptionGraphicsItem>
-#include <Qt>
+#include <QtMath>
 
 #include "../ifc/exception/vexception.h"
 #include "../vmisc/def.h"
