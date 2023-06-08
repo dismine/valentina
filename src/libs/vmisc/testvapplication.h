@@ -29,18 +29,19 @@
 #ifndef TESTVAPPLICATION_H
 #define TESTVAPPLICATION_H
 
-#include "vabstractvalapplication.h"
-#include "projectversion.h"
-#include "../vmisc/vcommonsettings.h"
 #include "../vmisc/compatibility.h"
+#include "../vmisc/vcommonsettings.h"
+#include "projectversion.h"
+#include "vabstractvalapplication.h"
 
 class VTestSettings : public VCommonSettings
 {
     Q_OBJECT // NOLINT
+
 public:
     VTestSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
                   QObject *parent = nullptr)
-        : VCommonSettings(format, scope, organization, application, parent)
+      : VCommonSettings(format, scope, organization, application, parent)
     {
         REGISTER_META_TYPE_STREAM_OPERATORS(QMarginsF);
     }
@@ -49,10 +50,11 @@ public:
 class TestVApplication final : public VAbstractValApplication
 {
     Q_OBJECT // NOLINT
+
 public:
-    TestVApplication(int &argc, char ** argv)
-        : VAbstractValApplication(argc, argv),
-          m_trVars(nullptr)
+    TestVApplication(int &argc, char **argv)
+      : VAbstractValApplication(argc, argv),
+        m_trVars(nullptr)
     {
         setApplicationName("ValentinaTest");
         setOrganizationName(VER_COMPANYNAME_STR);
@@ -72,19 +74,14 @@ public:
 
     virtual auto IsAppInGUIMode() const -> bool override { return false; }
 
-    virtual void InitTrVars() override
-    {}
+    virtual void InitTrVars() override {}
 
-    void SetTrVars(VTranslateVars *trVars)
-    {
-        m_trVars = trVars;
-    }
+    void SetTrVars(VTranslateVars *trVars) { m_trVars = trVars; }
 
     static auto VApp() -> TestVApplication * { return static_cast<TestVApplication *>(QCoreApplication::instance()); }
 
 protected slots:
-    virtual void AboutToQuit() override
-    {}
+    virtual void AboutToQuit() override {}
 
 private:
     Q_DISABLE_COPY_MOVE(TestVApplication) // NOLINT

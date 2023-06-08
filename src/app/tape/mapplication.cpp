@@ -27,37 +27,37 @@
  *************************************************************************/
 
 #include "mapplication.h"
-#include "version.h"
-#include "tmainwindow.h"
-#include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/exception/vexceptionbadid.h"
 #include "../ifc/exception/vexceptionconversionerror.h"
 #include "../ifc/exception/vexceptionemptyparameter.h"
+#include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/exception/vexceptionwrongid.h"
-#include "../vmisc/vsysexits.h"
 #include "../vmisc/projectversion.h"
+#include "../vmisc/vsysexits.h"
+#include "tmainwindow.h"
+#include "version.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
-#include "../vmisc/qt_dispatch/qt_dispatch.h"
-#include "../qmuparser/qmuparsererror.h"
 #include "../fervor/fvupdater.h"
+#include "../qmuparser/qmuparsererror.h"
+#include "../vmisc/qt_dispatch/qt_dispatch.h"
 
 #include <QDir>
 #include <QFileOpenEvent>
-#include <QLocalSocket>
-#include <QResource>
-#include <QTranslator>
-#include <QPointer>
-#include <QLocalServer>
-#include <QMessageBox>
-#include <iostream>
+#include <QGlobalStatic>
 #include <QGridLayout>
+#include <QLocalServer>
+#include <QLocalSocket>
+#include <QMessageBox>
+#include <QPointer>
+#include <QResource>
 #include <QSpacerItem>
 #include <QThread>
-#include <QGlobalStatic>
+#include <QTranslator>
+#include <iostream>
 
 #if !defined(BUILD_REVISION) && defined(QBS_BUILD)
 #include <vcsRepoState.h>
@@ -65,7 +65,7 @@
 #endif
 
 #if defined(APPIMAGE) && defined(Q_OS_LINUX)
-#   include "../vmisc/appimage.h"
+#include "../vmisc/appimage.h"
 #endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 
 QT_WARNING_PUSH
@@ -81,19 +81,19 @@ QT_WARNING_POP
 namespace
 {
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_DIMENSION_A, (QLatin1String("dimensionA"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_DIMENSION_A, (QChar('a'))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_DIMENSION_A, (QChar('a')))                // NOLINT
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_DIMENSION_B, (QLatin1String("dimensionB"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_DIMENSION_B, (QChar('b'))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_DIMENSION_B, (QChar('b')))                // NOLINT
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_DIMENSION_C, (QLatin1String("dimensionC"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_DIMENSION_C, (QChar('c'))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_DIMENSION_C, (QChar('c')))                // NOLINT
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_UNITS, (QLatin1String("units"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_UNITS, (QChar('u'))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_UNITS, (QChar('u')))           // NOLINT
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_TEST, (QLatin1String("test"))) // NOLINT
-}  // namespace
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
@@ -107,9 +107,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     if (not isGuiThread)
     {
         auto Handler = [](QtMsgType type, const QMessageLogContext &context, const QString &msg)
-        {
-            noisyFailureMsgHandler(type, context, msg);
-        };
+        { noisyFailureMsgHandler(type, context, msg); };
 
         q_dispatch_async_main(Handler, type, context, msg);
         return;
@@ -132,20 +130,20 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     {
         type = QtDebugMsg;
     }
-#endif //defined(V_NO_ASSERT)
+#endif // defined(V_NO_ASSERT)
 
 #if defined(Q_OS_MAC)
-#   if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0) && QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-        // Try hide very annoying, Qt related, warnings in Mac OS X
-        // QNSView mouseDragged: Internal mouse button tracking invalid (missing Qt::LeftButton)
-        // https://bugreports.qt.io/browse/QTBUG-42846
-        if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QNSView")))
-        {
-            type = QtDebugMsg;
-        }
-#   endif
+#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0) && QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+    // Try hide very annoying, Qt related, warnings in Mac OS X
+    // QNSView mouseDragged: Internal mouse button tracking invalid (missing Qt::LeftButton)
+    // https://bugreports.qt.io/browse/QTBUG-42846
+    if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QNSView")))
+    {
+        type = QtDebugMsg;
+    }
+#endif
 
-#   if QT_VERSION < QT_VERSION_CHECK(5, 9, 0)
+#if QT_VERSION < QT_VERSION_CHECK(5, 9, 0)
     // Hide Qt bug 'Assertion when reading an icns file'
     // https://bugreports.qt.io/browse/QTBUG-45537
     // Remove after Qt fix will be released
@@ -153,7 +151,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     {
         type = QtDebugMsg;
     }
-#   endif
+#endif
 
     // Hide anything that starts with QMacCGContext
     if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QMacCGContext::")))
@@ -171,8 +169,8 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     // this is another one that doesn't make sense as just a debug message.  pretty serious
     // sign of a problem
     // http://www.developer.nokia.com/Community/Wiki/QPainter::begin:Paint_device_returned_engine_%3D%3D_0_(Known_Issue)
-    if ((type == QtDebugMsg) && msg.contains(QStringLiteral("QPainter::begin"))
-        && msg.contains(QStringLiteral("Paint device returned engine")))
+    if ((type == QtDebugMsg) && msg.contains(QStringLiteral("QPainter::begin")) &&
+        msg.contains(QStringLiteral("Paint device returned engine")))
     {
         type = QtWarningMsg;
     }
@@ -180,8 +178,8 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     // This qWarning about "Cowardly refusing to send clipboard message to hung application..."
     // is something that can easily happen if you are debugging and the application is paused.
     // As it is so common, not worth popping up a dialog.
-    if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QClipboard::event"))
-            && msg.contains(QStringLiteral("Cowardly refusing")))
+    if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QClipboard::event")) &&
+        msg.contains(QStringLiteral("Cowardly refusing")))
     {
         type = QtDebugMsg;
     }
@@ -207,11 +205,11 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         case QtFatalMsg:
             vStdErr() << QApplication::translate("mNoisyHandler", "FATAL:") << logMsg << "\n";
             break;
-        #if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
         case QtInfoMsg:
             vStdOut() << QApplication::translate("mNoisyHandler", "INFO:") << logMsg << "\n";
             break;
-        #endif
+#endif
         default:
             break;
     }
@@ -221,10 +219,10 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
 
     if (isGuiThread)
     {
-        //fixme: trying to make sure there are no save/load dialogs are opened, because error message during them will
-        //lead to crash
+        // fixme: trying to make sure there are no save/load dialogs are opened, because error message during them will
+        // lead to crash
         const bool topWinAllowsPop = (QApplication::activeModalWidget() == nullptr) ||
-                !QApplication::activeModalWidget()->inherits("QFileDialog");
+                                     !QApplication::activeModalWidget()->inherits("QFileDialog");
         QMessageBox messageBox;
         switch (type)
         {
@@ -240,12 +238,12 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
                 messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Fatal error"));
                 messageBox.setIcon(QMessageBox::Critical);
                 break;
-            #if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
             case QtInfoMsg:
                 messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Information"));
                 messageBox.setIcon(QMessageBox::Information);
                 break;
-            #endif
+#endif
             case QtDebugMsg:
                 Q_UNREACHABLE(); //-V501
                 break;
@@ -263,13 +261,13 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
                     messageBox.setStandardButtons(QMessageBox::Ok);
                     messageBox.setWindowModality(Qt::ApplicationModal);
                     messageBox.setModal(true);
-                #ifndef QT_NO_CURSOR
+#ifndef QT_NO_CURSOR
                     QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
-                #endif
+#endif
                     messageBox.exec();
-                #ifndef QT_NO_CURSOR
+#ifndef QT_NO_CURSOR
                     QGuiApplication::restoreOverrideCursor();
-                #endif
+#endif
                 }
             }
         }
@@ -290,7 +288,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
 
 //---------------------------------------------------------------------------------------------------------------------
 MApplication::MApplication(int &argc, char **argv)
-    :VAbstractApplication(argc, argv)
+  : VAbstractApplication(argc, argv)
 {
     setApplicationDisplayName(QStringLiteral(VER_PRODUCTNAME_STR));
     setApplicationName(QStringLiteral(VER_INTERNALNAME_STR));
@@ -332,7 +330,8 @@ auto MApplication::notify(QObject *receiver, QEvent *event) -> bool
     }
     catch (const VExceptionObjectError &e)
     {
-        qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file. Program will be terminated.")), //-V807
+        qCCritical(mApp, "%s\n\n%s\n\n%s",
+                   qUtf8Printable(tr("Error parsing file. Program will be terminated.")), //-V807
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         exit(V_EX_DATAERR);
     }
@@ -369,8 +368,8 @@ auto MApplication::notify(QObject *receiver, QEvent *event) -> bool
     }
     catch (const VException &e)
     {
-        qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Something's wrong!!")),
-                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Something's wrong!!")), qUtf8Printable(e.ErrorMessage()),
+                   qUtf8Printable(e.DetailedInformation()));
         return true;
     }
     catch (const qmu::QmuParserWarning &e)
@@ -423,7 +422,7 @@ auto MApplication::MainWindow() -> TMainWindow *
 auto MApplication::MainWindows() -> QList<TMainWindow *>
 {
     Clean();
-    QList<TMainWindow*> list;
+    QList<TMainWindow *> list;
     list.reserve(m_mainWindows.size());
     for (auto &w : m_mainWindows)
     {
@@ -446,18 +445,18 @@ void MApplication::InitOptions()
     qCDebug(mApp, "Command-line arguments: %s", qUtf8Printable(arguments().join(QStringLiteral(", "))));
     qCDebug(mApp, "Process ID: %s", qUtf8Printable(QString().setNum(applicationPid())));
 
-    LoadTranslation(QString());// By default the console version uses system locale
+    LoadTranslation(QString()); // By default the console version uses system locale
 
     CheckSystemLocale();
 
-    static const char * GENERIC_ICON_TO_CHECK = "document-open";
+    static const char *GENERIC_ICON_TO_CHECK = "document-open";
     if (not QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK))
     {
-       //If there is no default working icon theme then we should
-       //use an icon theme that we provide via a .qrc file
-       //This case happens under Windows and Mac OS X
-       //This does not happen under GNOME or KDE
-       QIcon::setThemeName(QStringLiteral("win.icon.theme"));
+        // If there is no default working icon theme then we should
+        // use an icon theme that we provide via a .qrc file
+        // This case happens under Windows and Mac OS X
+        // This does not happen under GNOME or KDE
+        QIcon::setThemeName(QStringLiteral("win.icon.theme"));
     }
     ActivateDarkMode();
     QResource::registerResource(diagramsPath());
@@ -468,21 +467,20 @@ void MApplication::InitOptions()
 void MApplication::ActivateDarkMode()
 {
     VTapeSettings *settings = TapeSettings();
-     if (settings->GetDarkMode())
-     {
-         QFile f(QStringLiteral(":qdarkstyle/style.qss"));
-         if (!f.exists())
-         {
-             qDebug()<<"Unable to set stylesheet, file not found\n";
-         }
-         else
-         {
-             f.open(QFile::ReadOnly | QFile::Text);
-             QTextStream ts(&f);
-             qApp->setStyleSheet(ts.readAll()); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
-         }
-
-     }
+    if (settings->GetDarkMode())
+    {
+        QFile f(QStringLiteral(":qdarkstyle/style.qss"));
+        if (!f.exists())
+        {
+            qDebug() << "Unable to set stylesheet, file not found\n";
+        }
+        else
+        {
+            f.open(QFile::ReadOnly | QFile::Text);
+            QTextStream ts(&f);
+            qApp->setStyleSheet(ts.readAll()); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -501,20 +499,21 @@ void MApplication::InitTrVars()
 //---------------------------------------------------------------------------------------------------------------------
 auto MApplication::event(QEvent *e) -> bool
 {
-    switch(e->type())
+    switch (e->type())
     {
         // In Mac OS X the QFileOpenEvent event is generated when user perform "Open With" from Finder (this event is
         // Mac specific).
         case QEvent::FileOpen:
         {
-            auto *fileOpenEvent = static_cast<QFileOpenEvent *>(e); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
+            auto *fileOpenEvent =
+                static_cast<QFileOpenEvent *>(e); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
             const QString macFileOpen = fileOpenEvent->file();
-            if(not macFileOpen.isEmpty())
+            if (not macFileOpen.isEmpty())
             {
                 TMainWindow *mw = MainWindow();
                 if (mw)
                 {
-                    mw->LoadFile(macFileOpen);  // open file in existing window
+                    mw->LoadFile(macFileOpen); // open file in existing window
                 }
                 return true;
             }
@@ -531,7 +530,7 @@ auto MApplication::event(QEvent *e) -> bool
             }
             return true;
         }
-#endif //defined(Q_OS_MAC)
+#endif // defined(Q_OS_MAC)
         default:
             return VAbstractApplication::event(e);
     }
@@ -629,7 +628,7 @@ void MApplication::RetranslateGroups()
 //---------------------------------------------------------------------------------------------------------------------
 void MApplication::RetranslateTables()
 {
-    const QList<TMainWindow*> list = MainWindows();
+    const QList<TMainWindow *> list = MainWindows();
     for (auto *w : list)
     {
         w->RetranslateTable();
@@ -688,7 +687,7 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
 //---------------------------------------------------------------------------------------------------------------------
 auto MApplication::VApp() -> MApplication *
 {
-    return qobject_cast<MApplication*>(QCoreApplication::instance());
+    return qobject_cast<MApplication *>(QCoreApplication::instance());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -757,27 +756,31 @@ void MApplication::InitParserOptions(QCommandLineParser &parser)
 {
     parser.addPositionalArgument(QStringLiteral("filename"), tr("The measurement file."));
 
-    parser.addOptions(
-    {
-        {{*SINGLE_OPTION_DIMENSION_A, *LONG_OPTION_DIMENSION_A}, tr("Set base for dimension A in the table units."),
-             tr("The dimension A base")},
+    parser.addOptions({
+        {{*SINGLE_OPTION_DIMENSION_A, *LONG_OPTION_DIMENSION_A},
+         tr("Set base for dimension A in the table units."),
+         tr("The dimension A base")},
 
-        {{*SINGLE_OPTION_DIMENSION_B, *LONG_OPTION_DIMENSION_B}, tr("Set base for dimension B in the table units."),
-             tr("The dimension B base")},
+        {{*SINGLE_OPTION_DIMENSION_B, *LONG_OPTION_DIMENSION_B},
+         tr("Set base for dimension B in the table units."),
+         tr("The dimension B base")},
 
-        {{*SINGLE_OPTION_DIMENSION_C, *LONG_OPTION_DIMENSION_C}, tr("Set base for dimension C in the table units."),
-             tr("The dimension C base")},
+        {{*SINGLE_OPTION_DIMENSION_C, *LONG_OPTION_DIMENSION_C},
+         tr("Set base for dimension C in the table units."),
+         tr("The dimension C base")},
 
-        {{*SINGLE_OPTION_UNITS, *LONG_OPTION_UNITS}, tr("Set pattern file units: cm, mm, inch."),
-             tr("The pattern units")},
+        {{*SINGLE_OPTION_UNITS, *LONG_OPTION_UNITS},
+         tr("Set pattern file units: cm, mm, inch."),
+         tr("The pattern units")},
 
         {*LONG_OPTION_TEST,
-             tr("Use for unit testing. Run the program and open a file without showing the main window.")},
+         tr("Use for unit testing. Run the program and open a file without showing the main window.")},
 
         {LONG_OPTION_NO_HDPI_SCALING,
-             tr("Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). "
-                "Alternatively you can use the %1 environment variable.").arg("QT_AUTO_SCREEN_SCALE_FACTOR=0")},
-     });
+         tr("Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). "
+            "Alternatively you can use the %1 environment variable.")
+             .arg("QT_AUTO_SCREEN_SCALE_FACTOR=0")},
+    });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -787,16 +790,15 @@ void MApplication::StartLocalServer(const QString &serverName)
     connect(m_localServer, &QLocalServer::newConnection, this, &MApplication::NewLocalSocketConnection);
     if (not m_localServer->listen(serverName))
     {
-        qCDebug(mApp, "Can't begin to listen for incoming connections on name '%s'",
-                qUtf8Printable(serverName));
+        qCDebug(mApp, "Can't begin to listen for incoming connections on name '%s'", qUtf8Printable(serverName));
         if (m_localServer->serverError() == QAbstractSocket::AddressInUseError)
         {
             QLocalServer::removeServer(serverName);
             if (not m_localServer->listen(serverName))
             {
-                qCWarning(mApp, "%s",
-                          qUtf8Printable(tr("Can't begin to listen for incoming connections on name '%1'")
-                                             .arg(serverName)));
+                qCWarning(
+                    mApp, "%s",
+                    qUtf8Printable(tr("Can't begin to listen for incoming connections on name '%1'").arg(serverName)));
             }
         }
     }
@@ -896,7 +898,7 @@ void MApplication::ParseDimensionAOption(QCommandLineParser &parser, int &dimens
 
         bool ok = false;
         dimensionAValue = value.toInt(&ok);
-        if(ok && dimensionAValue > 0)
+        if (ok && dimensionAValue > 0)
         {
             flagDimensionA = true;
         }
@@ -917,7 +919,7 @@ void MApplication::ParseDimensionBOption(QCommandLineParser &parser, int &dimens
 
         bool ok = false;
         dimensionBValue = value.toInt(&ok);
-        if(ok && dimensionBValue > 0)
+        if (ok && dimensionBValue > 0)
         {
             flagDimensionB = true;
         }
@@ -938,7 +940,7 @@ void MApplication::ParseDimensionCOption(QCommandLineParser &parser, int &dimens
 
         bool ok = false;
         dimensionCValue = value.toInt(&ok);
-        if(ok && dimensionCValue > 0)
+        if (ok && dimensionCValue > 0)
         {
             flagDimensionC = true;
         }

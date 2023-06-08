@@ -35,9 +35,10 @@
 class VPSettings : public VCommonSettings
 {
     Q_OBJECT // NOLINT
+
 public:
     VPSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
-                    QObject *parent = nullptr);
+               QObject *parent = nullptr);
     VPSettings(const QString &fileName, Format format, QObject *parent = nullptr);
     ~VPSettings() override = default;
 

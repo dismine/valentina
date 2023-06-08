@@ -27,30 +27,31 @@
  *************************************************************************/
 
 #include "tapepreferencespathpage.h"
-#include "ui_tapepreferencespathpage.h"
 #include "../../mapplication.h"
 #include "../../vtapesettings.h"
+#include "ui_tapepreferencespathpage.h"
 
 #include <QDir>
 #include <QFileDialog>
 
 //---------------------------------------------------------------------------------------------------------------------
 TapePreferencesPathPage::TapePreferencesPathPage(QWidget *parent)
-    : QWidget(parent),
-      ui(new Ui::TapePreferencesPathPage)
+  : QWidget(parent),
+    ui(new Ui::TapePreferencesPathPage)
 {
     ui->setupUi(this);
 
     InitTable();
 
-    connect(ui->pathTable, &QTableWidget::itemSelectionChanged, this, [this]()
-    {
-        ui->defaultButton->setEnabled(not ui->pathTable->selectedItems().isEmpty());
-        ui->defaultButton->setDefault(false);
+    connect(ui->pathTable, &QTableWidget::itemSelectionChanged, this,
+            [this]()
+            {
+                ui->defaultButton->setEnabled(not ui->pathTable->selectedItems().isEmpty());
+                ui->defaultButton->setDefault(false);
 
-        ui->editButton->setEnabled(not ui->pathTable->selectedItems().isEmpty());
-        ui->editButton->setDefault(true);
-    });
+                ui->editButton->setEnabled(not ui->pathTable->selectedItems().isEmpty());
+                ui->editButton->setDefault(true);
+            });
 
     connect(ui->defaultButton, &QPushButton::clicked, this, &TapePreferencesPathPage::DefaultPath);
     connect(ui->editButton, &QPushButton::clicked, this, &TapePreferencesPathPage::EditPath);

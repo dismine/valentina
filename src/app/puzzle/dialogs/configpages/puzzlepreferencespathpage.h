@@ -30,11 +30,9 @@
 
 #include <QWidget>
 
-#include "../vmisc/defglobal.h"
-
 namespace Ui
 {
-    class PuzzlePreferencesPathPage;
+class PuzzlePreferencesPathPage;
 }
 
 class PuzzlePreferencesPathPage : public QWidget
@@ -48,7 +46,7 @@ public:
     void Apply();
 
 protected:
-    void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent *event) override;
 
 private slots:
     void DefaultPath();

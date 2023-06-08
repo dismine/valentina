@@ -31,11 +31,9 @@
 
 #include <QWidget>
 
-#include "../vmisc/defglobal.h"
-
 namespace Ui
 {
-    class PreferencesPathPage;
+class PreferencesPathPage;
 }
 
 class PreferencesPathPage : public QWidget
@@ -49,7 +47,7 @@ public:
     auto Apply() -> QStringList;
 
 protected:
-    void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent *event) override;
 
 private slots:
     void DefaultPath();

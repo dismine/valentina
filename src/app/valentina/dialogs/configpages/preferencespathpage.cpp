@@ -27,30 +27,31 @@
  *************************************************************************/
 
 #include "preferencespathpage.h"
-#include "ui_preferencespathpage.h"
-#include "../vmisc/vvalentinasettings.h"
 #include "../vmisc/vabstractvalapplication.h"
+#include "../vmisc/vvalentinasettings.h"
+#include "ui_preferencespathpage.h"
 
 #include <QDir>
 #include <QFileDialog>
 
 //---------------------------------------------------------------------------------------------------------------------
 PreferencesPathPage::PreferencesPathPage(QWidget *parent)
-    : QWidget(parent),
-      ui(new Ui::PreferencesPathPage)
+  : QWidget(parent),
+    ui(new Ui::PreferencesPathPage)
 {
     ui->setupUi(this);
 
     InitTable();
 
-    connect(ui->pathTable, &QTableWidget::itemSelectionChanged, this, [this]()
-    {
-        ui->defaultButton->setEnabled(not ui->pathTable->selectedItems().isEmpty());
-        ui->defaultButton->setDefault(false);
+    connect(ui->pathTable, &QTableWidget::itemSelectionChanged, this,
+            [this]()
+            {
+                ui->defaultButton->setEnabled(not ui->pathTable->selectedItems().isEmpty());
+                ui->defaultButton->setDefault(false);
 
-        ui->editButton->setEnabled(not ui->pathTable->selectedItems().isEmpty());
-        ui->editButton->setDefault(true);
-    });
+                ui->editButton->setEnabled(not ui->pathTable->selectedItems().isEmpty());
+                ui->editButton->setDefault(true);
+            });
 
     connect(ui->defaultButton, &QPushButton::clicked, this, &PreferencesPathPage::DefaultPath);
     connect(ui->editButton, &QPushButton::clicked, this, &PreferencesPathPage::EditPath);

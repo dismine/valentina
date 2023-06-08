@@ -29,17 +29,21 @@
 #include "vabstractapplication.h"
 
 #include <QDir>
+#include <QFileSystemWatcher>
+#include <QFuture>
 #include <QLibraryInfo>
 #include <QLoggingCategory>
 #include <QMessageLogger>
+#include <QStandardPaths>
 #include <QTranslator>
 #include <QUndoStack>
+#include <QWidget>
 #include <Qt>
 #include <QtDebug>
-#include <QWidget>
-#include <QStandardPaths>
 
+#include "QtConcurrent/qtconcurrentrun.h"
 #include "compatibility.h"
+#include "svgfont/vsvgfontdatabase.h"
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include "../vmisc/vtextcodec.h"
@@ -48,11 +52,11 @@
 #endif
 
 #ifdef Q_OS_UNIX
-#  include <unistd.h>
+#include <unistd.h>
 #endif
 
 #if defined(APPIMAGE) && defined(Q_OS_LINUX)
-#   include "appimage.h"
+#include "appimage.h"
 #endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 
 namespace
@@ -97,14 +101,14 @@ auto LoadQM(QTranslator *translator, const QString &filename, const QString &loc
 
     return false;
 }
-}  // namespace
+} // namespace
 
 const QString VAbstractApplication::warningMessageSignature = QStringLiteral("[PATTERN MESSAGE]");
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractApplication::VAbstractApplication(int &argc, char **argv)
-    :QApplication(argc, argv),
-      undoStack(new QUndoStack(this))
+  : QApplication(argc, argv),
+    undoStack(new QUndoStack(this))
 {
     QString rules;
 
@@ -116,7 +120,7 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
     // See issue #568: Certificate checking on Mac OS X.
     rules += QLatin1String("qt.network.ssl.critical=false\n"
                            "qt.network.ssl.fatal=false\n");
-#endif //defined(V_NO_ASSERT)
+#endif // defined(V_NO_ASSERT)
 #endif // QT_VERSION >= QT_VERSION_CHECK(5, 4, 1)
 
 #if defined(V_NO_ASSERT)
@@ -185,8 +189,8 @@ auto VAbstractApplication::translationsPath(const QString &locale) -> QString
     }
     else
     {
-        mainPath = QCoreApplication::applicationDirPath() + QLatin1String("/../Resources") + trPath + QLatin1String("/")
-                + locale + QLatin1String(".lproj");
+        mainPath = QCoreApplication::applicationDirPath() + QLatin1String("/../Resources") + trPath +
+                   QLatin1String("/") + locale + QLatin1String(".lproj");
     }
     QDir dirBundle(mainPath);
     if (dirBundle.exists())
@@ -284,11 +288,11 @@ void VAbstractApplication::LoadTranslation(QString locale)
 
     if (locale.isEmpty())
     {
-        qDebug()<<"Default locale";
+        qDebug() << "Default locale";
     }
     else
     {
-        qDebug()<<"Checked locale:"<<locale;
+        qDebug() << "Checked locale:" << locale;
     }
 
     ClearTranslation();
@@ -322,7 +326,7 @@ void VAbstractApplication::LoadTranslation(QString locale)
     LoadQM(pmsTranslator, QStringLiteral("measurements_") + Settings()->GetPMSystemCode() + '_', locale, appQmDir);
     installTranslator(pmsTranslator);
 
-    InitTrVars();//Very important do it after load QM files.
+    InitTrVars(); // Very important do it after load QM files.
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -428,7 +432,7 @@ void VAbstractApplication::CheckSystemLocale()
         qFatal("Incompatible locale \"%s\"", qPrintable(defLocale));
     }
 
-    auto CheckLanguage =[](QStandardPaths::StandardLocation type, const QStringList &test)
+    auto CheckLanguage = [](QStandardPaths::StandardLocation type, const QStringList &test)
     {
         const QString path = QStandardPaths::locate(type, QString(), QStandardPaths::LocateDirectory);
         return std::any_of(test.begin(), test.end(), [path](const QString &t) { return path.contains(t); });

@@ -32,7 +32,6 @@
 #include <QXmlStreamReader>
 #include "../ifc/xml/vabstractconverter.h"
 #include "../layout/layoutdef.h"
-#include "../vmisc/defglobal.h"
 
 #include <QLoggingCategory>
 

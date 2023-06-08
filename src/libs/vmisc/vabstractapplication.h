@@ -29,25 +29,27 @@
 #ifndef VABSTRACTAPPLICATION_H
 #define VABSTRACTAPPLICATION_H
 
-#include <qcompilerdetection.h>
 #include <QApplication>
 #include <QCoreApplication>
+#include <QFileDialog>
 #include <QLocale>
 #include <QMetaObject>
 #include <QObject>
 #include <QPointer>
 #include <QString>
-#include <QtGlobal>
 #include <QTranslator>
-#include <QFileDialog>
+#include <QtGlobal>
+#include <qcompilerdetection.h>
 
 #include "../vmisc/def.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "vcommonsettings.h"
 
 class QUndoStack;
-class VAbstractApplication;// use in define
+class VAbstractApplication; // use in define
 class VCommonSettings;
+class VSvgFontDatabase;
+class QFileSystemWatcher;
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 class VTextCodec;
@@ -60,9 +62,10 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 class VAbstractApplication : public QApplication
 {
     Q_OBJECT // NOLINT
+
 public:
-    VAbstractApplication(int &argc, char ** argv);
-    virtual ~VAbstractApplication();
+    VAbstractApplication(int &argc, char **argv);
+    ~VAbstractApplication() override;
 
     virtual auto TrVars() -> const VTranslateVars * = 0;
 
@@ -70,7 +73,7 @@ public:
 
     void LoadTranslation(QString locale);
 
-    virtual void     OpenSettings()=0;
+    virtual void OpenSettings() = 0;
     auto Settings() -> VCommonSettings *;
 
     template <typename T> auto LocaleToString(const T &value) -> QString;
@@ -114,12 +117,12 @@ protected:
     QPointer<QTranslator> appTranslator{nullptr};
     QPointer<QTranslator> pmsTranslator{nullptr};
 
-    virtual void InitTrVars()=0;
+    virtual void InitTrVars() = 0;
 
     static void CheckSystemLocale();
 
 protected slots:
-    virtual void AboutToQuit()=0;
+    virtual void AboutToQuit() = 0;
 
 private:
     Q_DISABLE_COPY_MOVE(VAbstractApplication) // NOLINT
@@ -144,7 +147,7 @@ template <typename T> inline auto VAbstractApplication::LocaleToString(const T &
 //---------------------------------------------------------------------------------------------------------------------
 inline auto VAbstractApplication::VApp() -> VAbstractApplication *
 {
-    return qobject_cast<VAbstractApplication*>(QCoreApplication::instance());
+    return qobject_cast<VAbstractApplication *>(QCoreApplication::instance());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

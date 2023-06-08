@@ -26,26 +26,27 @@
  **
  *************************************************************************/
 #include "puzzlepreferencespathpage.h"
-#include "ui_puzzlepreferencespathpage.h"
 #include "../../vpapplication.h"
+#include "ui_puzzlepreferencespathpage.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-PuzzlePreferencesPathPage::PuzzlePreferencesPathPage(QWidget *parent) :
-    QWidget(parent),
+PuzzlePreferencesPathPage::PuzzlePreferencesPathPage(QWidget *parent)
+  : QWidget(parent),
     ui(new Ui::PuzzlePreferencesPathPage)
 {
     ui->setupUi(this);
 
     InitTable();
 
-    connect(ui->pathTable, &QTableWidget::itemSelectionChanged, this, [this]()
-    {
-        ui->defaultButton->setEnabled(not ui->pathTable->selectedItems().isEmpty());
-        ui->defaultButton->setDefault(false);
+    connect(ui->pathTable, &QTableWidget::itemSelectionChanged, this,
+            [this]()
+            {
+                ui->defaultButton->setEnabled(not ui->pathTable->selectedItems().isEmpty());
+                ui->defaultButton->setDefault(false);
 
-        ui->editButton->setEnabled(not ui->pathTable->selectedItems().isEmpty());
-        ui->editButton->setDefault(true);
-    });
+                ui->editButton->setEnabled(not ui->pathTable->selectedItems().isEmpty());
+                ui->editButton->setDefault(true);
+            });
 
     connect(ui->defaultButton, &QPushButton::clicked, this, &PuzzlePreferencesPathPage::DefaultPath);
     connect(ui->editButton, &QPushButton::clicked, this, &PuzzlePreferencesPathPage::EditPath);

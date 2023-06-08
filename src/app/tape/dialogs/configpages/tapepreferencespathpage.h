@@ -31,11 +31,9 @@
 
 #include <QWidget>
 
-#include "../vmisc/defglobal.h"
-
 namespace Ui
 {
-    class TapePreferencesPathPage;
+class TapePreferencesPathPage;
 }
 
 class TapePreferencesPathPage : public QWidget
@@ -47,11 +45,13 @@ public:
     ~TapePreferencesPathPage() override;
 
     void Apply();
+
 protected:
-    void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent *event) override;
 private slots:
     void DefaultPath();
     void EditPath();
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(TapePreferencesPathPage) // NOLINT
