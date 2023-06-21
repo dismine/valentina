@@ -29,20 +29,23 @@
 #include "vvalentinasettings.h"
 
 #include <QDir>
-#include <QLocale>
-#include <QMetaType>
-#include <QPrinter>
-#include <QSharedPointer>
-#include <QVariant>
-#include <QPrinterInfo>
-#include <QtDebug>
 #include <QGlobalStatic>
+#include <QLocale>
 #include <QMargins>
 #include <QMetaType>
+#include <QPrinter>
+#include <QPrinterInfo>
+#include <QSharedPointer>
+#include <QVariant>
+#include <QtDebug>
 
-#include "../vmisc/def.h"
-#include "../vmisc/compatibility.h"
+#include "compatibility.h"
+#include "def.h"
 #include "qglobal.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+#include "diagnostic.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
 #ifndef QPRINTENGINE_H
 Q_DECLARE_METATYPE(QMarginsF) // NOLINT
@@ -50,111 +53,151 @@ Q_DECLARE_METATYPE(QMarginsF) // NOLINT
 
 namespace
 {
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationLabelLanguage, // NOLINT
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
+
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationLabelLanguage,
                           (QLatin1String("configuration/label_language")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingAutoRefreshPatternMessage, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingAutoRefreshPatternMessage,
                           (QLatin1String("configuration/autoRefreshPatternMessage")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingToolPanelScaling, // NOLINT
-                          (QLatin1String("configuration/toolPanelScaling")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingToolPanelScaling, (QLatin1String("configuration/toolPanelScaling")))
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsLayout, (QLatin1String("paths/layout"))) // NOLINT
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternKnownMaterials, (QLatin1String("pattern/knownMaterials"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternRememberMaterials, (QLatin1String("pattern/rememberMaterials"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternBackgroundImageDefOpacity, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternKnownMaterials, (QLatin1String("pattern/knownMaterials")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternRememberMaterials, (QLatin1String("pattern/rememberMaterials")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternBackgroundImageDefOpacity,
                           (QLatin1String("pattern/backgroundImageDefOpacity")))
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutWidth, (QLatin1String("layout/width"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSorting, (QLatin1String("layout/sorting"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutWidth, (QLatin1String("layout/width")))             // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSorting, (QLatin1String("layout/sorting")))         // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutPaperHeight, (QLatin1String("layout/paperHeight"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutPaperWidth, (QLatin1String("layout/paperWidth"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutFollowGrainline, (QLatin1String("layout/followGrainline"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutManualPriority, (QLatin1String("layout/manualPriority"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutPaperWidth, (QLatin1String("layout/paperWidth")))   // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutFollowGrainline, (QLatin1String("layout/followGrainline")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutManualPriority, (QLatin1String("layout/manualPriority")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutNestQuantity, (QLatin1String("layout/nestQuantity"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutAutoCropLength, (QLatin1String("layout/autoCropLength"))) // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutAutoCropLength, (QLatin1String("layout/autoCropLength")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutAutoCropWidth, (QLatin1String("layout/autoCropWidth"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSaveLength, (QLatin1String("layout/saveLength"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutPreferOneSheetSolution, // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSaveLength, (QLatin1String("layout/saveLength")))       // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutPreferOneSheetSolution,
                           (QLatin1String("layout/preferOneSheetSolution")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutUnitePages, (QLatin1String("layout/unitePages"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutUnitePages, (QLatin1String("layout/unitePages")))       // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutShowGrainline, (QLatin1String("layout/showGrainline"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingFields, (QLatin1String("layout/fields"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingIgnoreFields, (QLatin1String("layout/ignoreFields"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingStripOptimization, (QLatin1String("layout/stripOptimization"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingMultiplier, (QLatin1String("layout/multiplier"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingFields, (QLatin1String("layout/fields")))                     // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingIgnoreFields, (QLatin1String("layout/ignoreFields")))         // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingStripOptimization, (QLatin1String("layout/stripOptimization")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingMultiplier, (QLatin1String("layout/multiplier")))   // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTextAsPaths, (QLatin1String("layout/textAsPaths"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingNestingTime, (QLatin1String("layout/time"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingEfficiencyCoefficient, (QLatin1String("layout/efficiencyCoefficient"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingNestingTime, (QLatin1String("layout/time")))        // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingEfficiencyCoefficient, (QLatin1String("layout/efficiencyCoefficient")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutExportFormat, (QLatin1String("layout/exportFormat"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDetailExportFormat, (QLatin1String("detail/exportFormat"))) // NOLINT
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFPaperHeight, (QLatin1String("tiledPDF/paperHeight"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFPaperWidth, (QLatin1String("tiledPDF/paperWidth"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFPaperWidth, (QLatin1String("tiledPDF/paperWidth")))   // NOLINT
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingdockWidgetGroupsActive, (QLatin1String("dockWidget/groupsActive"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetToolOptionsActive, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingdockWidgetGroupsActive, (QLatin1String("dockWidget/groupsActive")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetToolOptionsActive,
                           (QLatin1String("dockWidget/toolOptionsActive")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetPatternMessagesActive, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetPatternMessagesActive,
                           (QLatin1String("dockWidget/patternMessagesActive")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetBackgroundImagesActive, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetBackgroundImagesActive,
                           (QLatin1String("dockWidget/backgroundImagesActive")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternMessagesFontSize, (QLatin1String("font/patternMessagesSize"))) // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternMessagesFontSize, (QLatin1String("font/patternMessagesSize")))
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchHistoryHistory, (QLatin1String("searchHistory/history"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchHistoryIncrements, (QLatin1String("searchHistory/increments"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchHistoryPreviewCalculations, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchHistoryHistory, (QLatin1String("searchHistory/history")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchHistoryIncrements, (QLatin1String("searchHistory/increments")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchHistoryPreviewCalculations,
                           (QLatin1String("searchHistory/previewCalculations")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchHistoryFinalMeasurements, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchHistoryFinalMeasurements,
                           (QLatin1String("searchHistory/finalMeasurements")))
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsHistoryUseUnicodeProperties, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsHistoryUseUnicodeProperties,
                           (QLatin1String("searchOptions/historyUseUnicodeProperties")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsHistoryWholeWord, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsHistoryWholeWord,
                           (QLatin1String("searchOptions/historyWholeWord")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsHistoryRegexp, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsHistoryRegexp,
                           (QLatin1String("searchOptions/historyRegexp")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsHistoryMatchCase, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsHistoryMatchCase,
                           (QLatin1String("searchOptions/historyMatchCase")))
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsIncrementsUseUnicodeProperties, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsIncrementsUseUnicodeProperties,
                           (QLatin1String("searchOptions/incrementsUseUnicodeProperties")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsIncrementsWholeWord, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsIncrementsWholeWord,
                           (QLatin1String("searchOptions/incrementsWholeWord")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsIncrementsRegexp, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsIncrementsRegexp,
                           (QLatin1String("searchOptions/incrementsRegexp")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsIncrementsMatchCase, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsIncrementsMatchCase,
                           (QLatin1String("searchOptions/incrementsMatchCase")))
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsPreviewCalculationsUseUnicodeProperties, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsPreviewCalculationsUseUnicodeProperties,
                           (QLatin1String("searchOptions/previewCalculationsUseUnicodeProperties")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsPreviewCalculationsWholeWord, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsPreviewCalculationsWholeWord,
                           (QLatin1String("searchOptions/previewCalculationsWholeWord")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsPreviewCalculationsRegexp, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsPreviewCalculationsRegexp,
                           (QLatin1String("searchOptions/previewCalculationsRegexp")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsPreviewCalculationsMatchCase, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsPreviewCalculationsMatchCase,
                           (QLatin1String("searchOptions/previewCalculationsMatchCase")))
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsFinalMeasurementsUseUnicodeProperties, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsFinalMeasurementsUseUnicodeProperties,
                           (QLatin1String("searchOptions/finalMeasurementsUseUnicodeProperties")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsFinalMeasurementsWholeWord, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsFinalMeasurementsWholeWord,
                           (QLatin1String("searchOptions/finalMeasurementsWholeWord")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsFinalMeasurementsRegexp, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsFinalMeasurementsRegexp,
                           (QLatin1String("searchOptions/finalMeasurementsRegexp")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsFinalMeasurementsMatchCase, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsFinalMeasurementsMatchCase,
                           (QLatin1String("searchOptions/finalMeasurementsMatchCase")))
-}  // namespace
+QT_WARNING_POP
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-VValentinaSettings::VValentinaSettings(Format format, Scope scope, const QString &organization, const QString &application,
-                     QObject *parent)
-    :VCommonSettings(format, scope, organization, application, parent)
+VValentinaSettings::VValentinaSettings(Format format, Scope scope, const QString &organization,
+                                       const QString &application, QObject *parent)
+  : VCommonSettings(format, scope, organization, application, parent)
 {
     REGISTER_META_TYPE_STREAM_OPERATORS(QMarginsF);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VValentinaSettings::VValentinaSettings(const QString &fileName, QSettings::Format format, QObject *parent)
-    :VCommonSettings(fileName, format, parent)
+  : VCommonSettings(fileName, format, parent)
 {
     REGISTER_META_TYPE_STREAM_OPERATORS(QMarginsF);
 }
@@ -195,7 +238,7 @@ void VValentinaSettings::SetPathLayout(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 auto VValentinaSettings::GetLayoutPaperHeight() const -> qreal
 {
-    return ValueOrDef<qreal>(*this, *settingLayoutPaperHeight, UnitConvertor(1189/*A0*/, Unit::Mm, Unit::Px));
+    return ValueOrDef<qreal>(*this, *settingLayoutPaperHeight, UnitConvertor(1189 /*A0*/, Unit::Mm, Unit::Px));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -207,7 +250,7 @@ void VValentinaSettings::SetLayoutPaperHeight(qreal value)
 //---------------------------------------------------------------------------------------------------------------------
 auto VValentinaSettings::GetLayoutPaperWidth() const -> qreal
 {
-    return ValueOrDef<qreal>(*this, *settingLayoutPaperWidth, UnitConvertor(841/*A0*/, Unit::Mm, Unit::Px));
+    return ValueOrDef<qreal>(*this, *settingLayoutPaperWidth, UnitConvertor(841 /*A0*/, Unit::Mm, Unit::Px));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -569,9 +612,8 @@ auto VValentinaSettings::GetTiledPDFPaperWidth(const Unit &unit) const -> qreal
  */
 void VValentinaSettings::SetTiledPDFPaperWidth(qreal value, const Unit &unit)
 {
-    setValue(*settingTiledPDFPaperWidth, UnitConvertor(value,unit, Unit::Mm));
+    setValue(*settingTiledPDFPaperWidth, UnitConvertor(value, unit, Unit::Mm));
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VValentinaSettings::IsDockWidgetGroupsActive() const -> bool
@@ -668,8 +710,8 @@ auto VValentinaSettings::GetDefMaxPatternMessageFontSize() -> int
 //---------------------------------------------------------------------------------------------------------------------
 void VValentinaSettings::SetPatternMessageFontSize(int size)
 {
-    setValue(*settingPatternMessagesFontSize, qBound(GetDefMinPatternMessageFontSize(), size,
-                                                     GetDefMaxPatternMessageFontSize()));
+    setValue(*settingPatternMessagesFontSize,
+             qBound(GetDefMinPatternMessageFontSize(), size, GetDefMaxPatternMessageFontSize()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

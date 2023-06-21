@@ -29,13 +29,13 @@
 #ifndef VDXFENGINE_H
 #define VDXFENGINE_H
 
-#include <qcompilerdetection.h>
 #include <QPaintEngine>
 #include <QPointF>
 #include <QRectF>
 #include <QSize>
 #include <QString>
 #include <QtGlobal>
+#include <qcompilerdetection.h>
 #include <string>
 
 #include "../vmisc/def.h"
@@ -59,6 +59,7 @@ class VTextCodec;
 class VDxfEngine final : public QPaintEngine
 {
     friend class VDxfPaintDevice;
+
 public:
     VDxfEngine();
     ~VDxfEngine() override;
@@ -71,13 +72,13 @@ public:
     void updateState(const QPaintEngineState &state) override;
 
     void drawPath(const QPainterPath &path) override;
-    void drawLines(const QLineF * lines, int lineCount) override;
-    void drawLines(const QLine * lines, int lineCount) override;
+    void drawLines(const QLineF *lines, int lineCount) override;
+    void drawLines(const QLine *lines, int lineCount) override;
     void drawPolygon(const QPointF *points, int pointCount, PolygonDrawMode mode) override;
     void drawPolygon(const QPoint *points, int pointCount, PolygonDrawMode mode) override;
-    void drawEllipse(const QRectF & rect) override;
-    void drawEllipse(const QRect & rect) override;
-    void drawTextItem(const QPointF & p, const QTextItem & textItem) override;
+    void drawEllipse(const QRectF &rect) override;
+    void drawEllipse(const QRect &rect) override;
+    void drawTextItem(const QPointF &p, const QTextItem &textItem) override;
     void drawPixmap(const QRectF &r, const QPixmap &pm, const QRectF &sr) override;
 
     auto GetSize() const -> QSize;
@@ -147,20 +148,18 @@ private:
     void ExportASTMDrill(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
     void ExportASTMNotch(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
 
-    void ExportTurnPoints(const QSharedPointer<dx_ifaceBlock> &detailBlock,
-                          const QVector<VLayoutPoint> &points) const;
-    void ExportCurvePoints(const QSharedPointer<dx_ifaceBlock> &detailBlock,
-                           const QVector<VLayoutPoint> &points) const;
+    void ExportTurnPoints(const QSharedPointer<dx_ifaceBlock> &detailBlock, const QVector<VLayoutPoint> &points) const;
+    void ExportCurvePoints(const QSharedPointer<dx_ifaceBlock> &detailBlock, const QVector<VLayoutPoint> &points) const;
 
-    Q_REQUIRED_RESULT auto AAMAPolygon(const QVector<VLayoutPoint> &polygon, const UTF8STRING &layer,
-                                       bool forceClosed) -> DRW_Entity *;
+    Q_REQUIRED_RESULT auto AAMAPolygon(const QVector<VLayoutPoint> &polygon, const UTF8STRING &layer, bool forceClosed)
+        -> DRW_Entity *;
     Q_REQUIRED_RESULT auto AAMALine(const QLineF &line, const UTF8STRING &layer) -> DRW_Entity *;
     Q_REQUIRED_RESULT auto AAMAText(const QPointF &pos, const QString &text, const UTF8STRING &layer) -> DRW_Entity *;
     Q_REQUIRED_RESULT auto AAMAPoint(const QPointF &pos, const UTF8STRING &layer) const -> DRW_Point *;
 
-    template<class P, class V, class C>
-    Q_REQUIRED_RESULT auto CreateAAMAPolygon(const QVector<C> &polygon, const UTF8STRING &layer,
-                                             bool forceClosed) -> P *;
+    template <class P, class V, class C>
+    Q_REQUIRED_RESULT auto CreateAAMAPolygon(const QVector<C> &polygon, const UTF8STRING &layer, bool forceClosed)
+        -> P *;
 
     static auto FromUnicodeToCodec(const QString &str, VTextCodec *codec) -> std::string;
     auto GetFileNameForLocale() const -> std::string;

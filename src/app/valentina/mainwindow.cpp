@@ -27,31 +27,33 @@
  *************************************************************************/
 
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/exception/vexceptionconversionerror.h"
 #include "../ifc/exception/vexceptionemptyparameter.h"
-#include "../ifc/exception/vexceptionwrongid.h"
-#include "../ifc/exception/vexceptionundo.h"
 #include "../ifc/exception/vexceptioninvalidhistory.h"
-#include "core/vapplication.h"
+#include "../ifc/exception/vexceptionobjecterror.h"
+#include "../ifc/exception/vexceptionundo.h"
+#include "../ifc/exception/vexceptionwrongid.h"
+#include "../ifc/xml/vpatternconverter.h"
+#include "../ifc/xml/vvitconverter.h"
+#include "../ifc/xml/vvstconverter.h"
+#include "../vformat/vmeasurements.h"
+#include "../vformat/vpatternrecipe.h"
+#include "../vlayout/dialogs/watermarkwindow.h"
 #include "../vmisc/customevents.h"
-#include "../vmisc/vvalentinasettings.h"
 #include "../vmisc/def.h"
 #include "../vmisc/qxtcsvmodel.h"
 #include "../vmisc/vmodifierkey.h"
 #include "../vmisc/vsysexits.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../vtools/undocommands/renamepp.h"
-#include "core/vtooloptionspropertybrowser.h"
-#include "../ifc/xml/vpatternconverter.h"
-#include "../vformat/vmeasurements.h"
-#include "../ifc/xml/vvstconverter.h"
-#include "../ifc/xml/vvitconverter.h"
-#include "../vwidgets/vwidgetpopup.h"
-#include "../vwidgets/vmaingraphicsscene.h"
 #include "../vtools/undocommands/undogroup.h"
-#include "../vformat/vpatternrecipe.h"
-#include "../vlayout/dialogs/watermarkwindow.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/vwidgetpopup.h"
+#include "core/vapplication.h"
+#include "core/vtooloptionspropertybrowser.h"
+#include "ui_mainwindow.h"
+#include "vabstractapplication.h"
+#include "vsinglelineoutlinechar.h"
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include "../vmisc/vtextcodec.h"
@@ -63,30 +65,30 @@
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 
-#include "../vlayout/vlayoutexporter.h"
-#include "../vwidgets/vgraphicssimpletextitem.h"
 #include "../vlayout/dialogs/dialoglayoutscale.h"
+#include "../vlayout/vlayoutexporter.h"
 #include "../vmisc/dialogs/dialogselectlanguage.h"
+#include "../vwidgets/vgraphicssimpletextitem.h"
 
 #include "../vpatterndb/variables/vincrement.h"
 #include "../vpatterndb/variables/vmeasurement.h"
 
-#include "../vtools/undocommands/image/addbackgroundimage.h"
-#include "../vtools/undocommands/image/deletebackgroundimage.h"
 #include "../ifc/xml/utils.h"
 #include "../ifc/xml/vbackgroundpatternimage.h"
+#include "../vtools/undocommands/image/addbackgroundimage.h"
+#include "../vtools/undocommands/image/deletebackgroundimage.h"
 
-#include "dialogs/vwidgetbackgroundimages.h"
-#include "dialogs/vwidgetgroups.h"
-#include "dialogs/vwidgetdetails.h"
+#include "dialogs/dialogaboutapp.h"
 #include "dialogs/dialogaddbackgroundimage.h"
+#include "dialogs/dialogfinalmeasurements.h"
 #include "dialogs/dialoghistory.h"
 #include "dialogs/dialogincrements.h"
-#include "dialogs/dialogpatternproperties.h"
 #include "dialogs/dialognewpattern.h"
-#include "dialogs/dialogaboutapp.h"
+#include "dialogs/dialogpatternproperties.h"
 #include "dialogs/dialogpreferences.h"
-#include "dialogs/dialogfinalmeasurements.h"
+#include "dialogs/vwidgetbackgroundimages.h"
+#include "dialogs/vwidgetdetails.h"
+#include "dialogs/vwidgetgroups.h"
 
 #include "../vtools/dialogs/support/dialogeditlabel.h"
 
@@ -94,83 +96,83 @@
 #include "../vtools/dialogs/tools/dialogarc.h"
 #include "../vtools/dialogs/tools/dialogarcwithlength.h"
 #include "../vtools/dialogs/tools/dialogbisector.h"
-#include "../vtools/dialogs/tools/piece/dialogseamallowance.h"
-#include "../vtools/dialogs/tools/dialogendline.h"
-#include "../vtools/dialogs/tools/dialogline.h"
-#include "../vtools/dialogs/tools/dialoglineintersect.h"
-#include "../vtools/dialogs/tools/dialognormal.h"
-#include "../vtools/dialogs/tools/dialogpointofcontact.h"
-#include "../vtools/dialogs/tools/dialogshoulderpoint.h"
-#include "../vtools/dialogs/tools/dialogspline.h"
 #include "../vtools/dialogs/tools/dialogcubicbezier.h"
-#include "../vtools/dialogs/tools/dialogsplinepath.h"
 #include "../vtools/dialogs/tools/dialogcubicbezierpath.h"
-#include "../vtools/dialogs/tools/dialogheight.h"
+#include "../vtools/dialogs/tools/dialogcurveintersectaxis.h"
 #include "../vtools/dialogs/tools/dialogcutarc.h"
 #include "../vtools/dialogs/tools/dialogcutspline.h"
 #include "../vtools/dialogs/tools/dialogcutsplinepath.h"
-#include "../vtools/dialogs/tools/dialoguniondetails.h"
-#include "../vtools/dialogs/tools/dialogtriangle.h"
-#include "../vtools/dialogs/tools/dialogpointofintersection.h"
+#include "../vtools/dialogs/tools/dialogellipticalarc.h"
+#include "../vtools/dialogs/tools/dialogendline.h"
+#include "../vtools/dialogs/tools/dialogflippingbyaxis.h"
+#include "../vtools/dialogs/tools/dialogflippingbyline.h"
+#include "../vtools/dialogs/tools/dialoggroup.h"
+#include "../vtools/dialogs/tools/dialogheight.h"
+#include "../vtools/dialogs/tools/dialogline.h"
+#include "../vtools/dialogs/tools/dialoglineintersect.h"
 #include "../vtools/dialogs/tools/dialoglineintersectaxis.h"
-#include "../vtools/dialogs/tools/dialogcurveintersectaxis.h"
+#include "../vtools/dialogs/tools/dialogmove.h"
+#include "../vtools/dialogs/tools/dialognormal.h"
+#include "../vtools/dialogs/tools/dialogpointfromarcandtangent.h"
+#include "../vtools/dialogs/tools/dialogpointfromcircleandtangent.h"
+#include "../vtools/dialogs/tools/dialogpointofcontact.h"
+#include "../vtools/dialogs/tools/dialogpointofintersection.h"
 #include "../vtools/dialogs/tools/dialogpointofintersectionarcs.h"
 #include "../vtools/dialogs/tools/dialogpointofintersectioncircles.h"
 #include "../vtools/dialogs/tools/dialogpointofintersectioncurves.h"
-#include "../vtools/dialogs/tools/dialogpointfromcircleandtangent.h"
-#include "../vtools/dialogs/tools/dialogpointfromarcandtangent.h"
-#include "../vtools/dialogs/tools/dialogtruedarts.h"
-#include "../vtools/dialogs/tools/dialoggroup.h"
 #include "../vtools/dialogs/tools/dialogrotation.h"
-#include "../vtools/dialogs/tools/dialogflippingbyline.h"
-#include "../vtools/dialogs/tools/dialogflippingbyaxis.h"
-#include "../vtools/dialogs/tools/dialogmove.h"
-#include "../vtools/dialogs/tools/dialogellipticalarc.h"
+#include "../vtools/dialogs/tools/dialogshoulderpoint.h"
+#include "../vtools/dialogs/tools/dialogspline.h"
+#include "../vtools/dialogs/tools/dialogsplinepath.h"
+#include "../vtools/dialogs/tools/dialogtriangle.h"
+#include "../vtools/dialogs/tools/dialogtruedarts.h"
+#include "../vtools/dialogs/tools/dialoguniondetails.h"
+#include "../vtools/dialogs/tools/piece/dialogduplicatedetail.h"
+#include "../vtools/dialogs/tools/piece/dialoginsertnode.h"
 #include "../vtools/dialogs/tools/piece/dialogpiecepath.h"
 #include "../vtools/dialogs/tools/piece/dialogpin.h"
-#include "../vtools/dialogs/tools/piece/dialoginsertnode.h"
 #include "../vtools/dialogs/tools/piece/dialogplacelabel.h"
-#include "../vtools/dialogs/tools/piece/dialogduplicatedetail.h"
+#include "../vtools/dialogs/tools/piece/dialogseamallowance.h"
 
+#include "../vtools/tools/backgroundimage/vbackgroundimagecontrols.h"
 #include "../vtools/tools/backgroundimage/vbackgroundimageitem.h"
 #include "../vtools/tools/backgroundimage/vbackgroundpixmapitem.h"
 #include "../vtools/tools/backgroundimage/vbackgroundsvgitem.h"
-#include "../vtools/tools/backgroundimage/vbackgroundimagecontrols.h"
 
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolalongline.h"
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolbisector.h"
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolendline.h"
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolnormal.h"
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolshoulderpoint.h"
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolheight.h"
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollineintersectaxis.h"
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.h"
+#include "../vtools/tools/drawTools/operation/flipping/vtoolflippingbyaxis.h"
+#include "../vtools/tools/drawTools/operation/flipping/vtoolflippingbyline.h"
+#include "../vtools/tools/drawTools/operation/vtoolmove.h"
+#include "../vtools/tools/drawTools/operation/vtoolrotation.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolarc.h"
-#include "../vtools/tools/drawTools/toolcurve/vtoolellipticalarc.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolarcwithlength.h"
-#include "../vtools/tools/drawTools/toolcurve/vtoolspline.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolcubicbezier.h"
-#include "../vtools/tools/drawTools/toolcurve/vtoolsplinepath.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolcubicbezierpath.h"
-#include "../vtools/tools/drawTools/vtoolline.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolellipticalarc.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolspline.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolsplinepath.h"
+#include "../vtools/tools/drawTools/toolpoint/tooldoublepoint/vtooltruedarts.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutspline.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutsplinepath.h"
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.h"
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoollineintersect.h"
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofcontact.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolalongline.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolbisector.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolendline.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolheight.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollineintersectaxis.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolnormal.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolshoulderpoint.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolbasepoint.h"
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtooltriangle.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoollineintersect.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointfromarcandtangent.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointfromcircleandtangent.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofcontact.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersection.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectionarcs.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncircles.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.h"
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointfromcircleandtangent.h"
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointfromarcandtangent.h"
-#include "../vtools/tools/drawTools/toolpoint/tooldoublepoint/vtooltruedarts.h"
-#include "../vtools/tools/drawTools/operation/vtoolrotation.h"
-#include "../vtools/tools/drawTools/operation/flipping/vtoolflippingbyline.h"
-#include "../vtools/tools/drawTools/operation/flipping/vtoolflippingbyaxis.h"
-#include "../vtools/tools/drawTools/operation/vtoolmove.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtooltriangle.h"
+#include "../vtools/tools/drawTools/vtoolline.h"
 #include "../vtools/tools/vtoolseamallowance.h"
 #include "../vtools/tools/vtooluniondetails.h"
 
@@ -178,43 +180,47 @@
 #include "../vtools/tools/nodeDetails/vtoolpin.h"
 #include "../vtools/tools/nodeDetails/vtoolplacelabel.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+#include "../vmisc/diagnostic.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
 #include "../vmisc/backport/qscopeguard.h"
 #else
 #include <QScopeGuard>
 #endif
 
-#include <QInputDialog>
-#include <QtDebug>
-#include <QMessageBox>
-#include <QShowEvent>
-#include <QScrollBar>
 #include <QFileDialog>
+#include <QInputDialog>
+#include <QMessageBox>
+#include <QScrollBar>
+#include <QShowEvent>
+#include <QtDebug>
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <QSourceLocation>
 #endif
 
-#include <QUndoStack>
 #include <QAction>
-#include <QProcess>
-#include <QSettings>
-#include <QTimer>
-#include <QtGlobal>
-#include <QDesktopServices>
-#include <chrono>
-#include <thread>
-#include <memory>
-#include <QFileSystemWatcher>
 #include <QComboBox>
+#include <QDesktopServices>
 #include <QDoubleSpinBox>
-#include <QProgressBar>
-#include <QGlobalStatic>
+#include <QFileSystemWatcher>
 #include <QFuture>
-#include <QtConcurrent>
-#include <QStyleFactory>
+#include <QGlobalStatic>
 #include <QImageReader>
+#include <QProcess>
+#include <QProgressBar>
+#include <QSettings>
+#include <QStyleFactory>
+#include <QTimer>
+#include <QUndoStack>
 #include <QUuid>
+#include <QtConcurrent>
+#include <QtGlobal>
+#include <chrono>
+#include <memory>
+#include <thread>
 
 #if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
 #include <QWinTaskbarButton>
@@ -222,9 +228,9 @@
 #endif
 
 #if defined(Q_OS_MAC)
-#include <QMimeData>
 #include <QDrag>
-#endif //defined(Q_OS_MAC)
+#include <QMimeData>
+#endif // defined(Q_OS_MAC)
 
 #if (defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
 // DO NOT WORK WITH GCC 4.8
@@ -247,11 +253,16 @@ QT_WARNING_POP
 
 namespace
 {
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
+
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, autosavePrefix, (QLatin1String(".autosave"))) // NOLINT
 
+QT_WARNING_POP
+
 //---------------------------------------------------------------------------------------------------------------------
-auto SortDetailsForLayout(const QHash<quint32, VPiece> *allDetails,
-                          const QString &nameRegex = QString()) -> QVector<DetailForLayout>
+auto SortDetailsForLayout(const QHash<quint32, VPiece> *allDetails, const QString &nameRegex = QString())
+    -> QVector<DetailForLayout>
 {
     QVector<DetailForLayout> details;
     QHash<quint32, VPiece>::const_iterator i = allDetails->constBegin();
@@ -301,8 +312,9 @@ void WarningNotUniquePieceName(const QHash<quint32, VPiece> *allDetails)
         else
         {
             const QString errorMsg = QObject::tr("Piece name '%1' is not unique.").arg(pieceName);
-            VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(errorMsg)
+                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         }
 
         ++i;
@@ -317,7 +329,7 @@ void WarningNotUniquePieceName(const QHash<quint32, VPiece> *allDetails)
  * @param parent parent widget.
  */
 MainWindow::MainWindow(QWidget *parent)
-    : MainWindowsNoGUI(parent),
+  : MainWindowsNoGUI(parent),
     ui(new Ui::MainWindow),
     m_watcher(new QFileSystemWatcher(this)),
     m_dialogTable(nullptr),
@@ -338,16 +350,17 @@ MainWindow::MainWindow(QWidget *parent)
     connect(doc, &VPattern::patternChanged, this, &MainWindow::PatternChangesWereSaved);
     connect(doc, &VPattern::UndoCommand, this, &MainWindow::FullParseFile);
     connect(doc, &VPattern::SetEnabledGUI, this, &MainWindow::SetEnabledGUI);
-    connect(doc, &VPattern::CheckLayout, this, [this]()
-    {
-        if (pattern->DataPieces()->count() == 0)
-        {
-            if(not ui->actionDraw->isChecked())
+    connect(doc, &VPattern::CheckLayout, this,
+            [this]()
             {
-                ActionDraw(true);
-            }
-        }
-    });
+                if (pattern->DataPieces()->count() == 0)
+                {
+                    if (not ui->actionDraw->isChecked())
+                    {
+                        ActionDraw(true);
+                    }
+                }
+            });
     connect(doc, &VPattern::SetCurrentPP, this, &MainWindow::GlobalChangePP);
     connect(doc, &VPattern::MadeProgress, this, &MainWindow::ShowProgress);
     VAbstractValApplication::VApp()->setCurrentDocument(doc);
@@ -388,28 +401,29 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_watcher, &QFileSystemWatcher::fileChanged, this, &MainWindow::MeasurementsChanged);
 
     m_measurementsSyncTimer->setTimerType(Qt::VeryCoarseTimer);
-    connect(m_measurementsSyncTimer, &QTimer::timeout, this, [this]()
-    {
-        if (isActiveWindow())
-        {
-            static bool asking = false;
-            if (not asking && m_mChanges && not m_mChangesAsked)
+    connect(m_measurementsSyncTimer, &QTimer::timeout, this,
+            [this]()
             {
-                asking = true;
-                m_mChangesAsked = true;
-                m_measurementsSyncTimer->stop();
-                const auto answer =
-                    QMessageBox::question(this, tr("Measurements"),
-                                          tr("Measurements were changed. Do you want to sync measurements now?"),
-                                          QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
-                if (answer == QMessageBox::Yes)
+                if (isActiveWindow())
                 {
-                    SyncMeasurements();
+                    static bool asking = false;
+                    if (not asking && m_mChanges && not m_mChangesAsked)
+                    {
+                        asking = true;
+                        m_mChangesAsked = true;
+                        m_measurementsSyncTimer->stop();
+                        const auto answer = QMessageBox::question(
+                            this, tr("Measurements"),
+                            tr("Measurements were changed. Do you want to sync measurements now?"),
+                            QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+                        if (answer == QMessageBox::Yes)
+                        {
+                            SyncMeasurements();
+                        }
+                        asking = false;
+                    }
                 }
-                asking = false;
-            }
-        }
-    });
+            });
 
 #if defined(Q_OS_MAC)
     // On Mac deafault icon size is 32x32.
@@ -440,53 +454,53 @@ MainWindow::MainWindow(QWidget *parent)
     connect(actionPreferences, &QAction::triggered, this, &MainWindow::Preferences);
 
     menu->setAsDockMenu();
-#endif //defined(Q_OS_MAC)
+#endif // defined(Q_OS_MAC)
 
-    connect(ui->toolButtonMessagesZoomInFont, &QToolButton::clicked, this, [this]()
-    {
-        VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
-        QFont f = ui->plainTextEditPatternMessages->font();
-        if (f.pointSize() < VValentinaSettings::GetDefMaxPatternMessageFontSize())
-        {
-            f.setPointSize(f.pointSize()+1);
-            ui->plainTextEditPatternMessages->setFont(f);
-            settings->SetPatternMessageFontSize(f.pointSize());
-        }
-    });
+    connect(ui->toolButtonMessagesZoomInFont, &QToolButton::clicked, this,
+            [this]()
+            {
+                VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+                QFont f = ui->plainTextEditPatternMessages->font();
+                if (f.pointSize() < VValentinaSettings::GetDefMaxPatternMessageFontSize())
+                {
+                    f.setPointSize(f.pointSize() + 1);
+                    ui->plainTextEditPatternMessages->setFont(f);
+                    settings->SetPatternMessageFontSize(f.pointSize());
+                }
+            });
 
-    connect(ui->toolButtonMessagesZoomOutFont, &QToolButton::clicked, this, [this]()
-    {
-        VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
-        QFont f = ui->plainTextEditPatternMessages->font();
-        if (f.pointSize() > VValentinaSettings::GetDefMinPatternMessageFontSize())
-        {
-            f.setPointSize(f.pointSize()-1);
-            ui->plainTextEditPatternMessages->setFont(f);
-            settings->SetPatternMessageFontSize(f.pointSize());
-        }
-    });
+    connect(ui->toolButtonMessagesZoomOutFont, &QToolButton::clicked, this,
+            [this]()
+            {
+                VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+                QFont f = ui->plainTextEditPatternMessages->font();
+                if (f.pointSize() > VValentinaSettings::GetDefMinPatternMessageFontSize())
+                {
+                    f.setPointSize(f.pointSize() - 1);
+                    ui->plainTextEditPatternMessages->setFont(f);
+                    settings->SetPatternMessageFontSize(f.pointSize());
+                }
+            });
 
-    connect(ui->lineEditMessagesFilter, &QLineEdit::textChanged, this, [this](const QString &text)
-    {
-        ui->plainTextEditPatternMessages->SetFilter(text);
-    });
+    connect(ui->lineEditMessagesFilter, &QLineEdit::textChanged, this,
+            [this](const QString &text) { ui->plainTextEditPatternMessages->SetFilter(text); });
 
     connect(ui->toolButtonClearMessages, &QToolButton::clicked, this, &MainWindow::ClearPatternMessages);
 
-    ui->toolButtonAutoRefresh->setChecked(
-                VAbstractValApplication::VApp()->ValentinaSettings()->GetAutoRefreshPatternMessage());
-    connect(ui->toolButtonAutoRefresh, &QToolButton::clicked, this, [](bool checked)
-    {
-        VAbstractValApplication::VApp()->ValentinaSettings()->SetAutoRefreshPatternMessage(checked);
-    });
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    ui->toolButtonAutoRefresh->setChecked(settings->GetAutoRefreshPatternMessage());
+    connect(ui->toolButtonAutoRefresh, &QToolButton::clicked, this,
+            [](bool checked)
+            { VAbstractValApplication::VApp()->ValentinaSettings()->SetAutoRefreshPatternMessage(checked); });
 
-    connect(doc, &VPattern::PreParseState, this, [this]()
-    {
-        if (ui->toolButtonAutoRefresh->isChecked())
-        {
-            ClearPatternMessages();
-        }
-    });
+    connect(doc, &VPattern::PreParseState, this,
+            [this]()
+            {
+                if (ui->toolButtonAutoRefresh->isChecked())
+                {
+                    ClearPatternMessages();
+                }
+            });
 
     if (VApplication::IsGUIMode())
     {
@@ -513,8 +527,8 @@ void MainWindow::AddPP(const QString &PPName)
     m_comboBoxDraws->addItem(PPName);
 
     pattern->ClearCalculationGObjects();
-    //Create single point
-    emit ui->view->itemClicked(nullptr);//hide options previous tool
+    // Create single point
+    emit ui->view->itemClicked(nullptr); // hide options previous tool
     const QString label = doc->GenerateLabel(LabelType::NewPatternPiece);
     const QPointF startPosition = StartPositionNewPP();
 
@@ -536,7 +550,7 @@ void MainWindow::AddPP(const QString &PPName)
     SetEnableWidgets(true);
 
     const qint32 index = m_comboBoxDraws->findText(PPName);
-    if ( index != -1 )
+    if (index != -1)
     { // -1 for not found
         m_comboBoxDraws->setCurrentIndex(index);
     }
@@ -548,7 +562,7 @@ void MainWindow::AddPP(const QString &PPName)
 
     // Show best for new PP
     VMainGraphicsView::NewSceneRect(ui->view->scene(), ui->view, spoint);
-    //ZoomFitBestCurrent();
+    // ZoomFitBestCurrent();
     QApplication::postEvent(this, new FitBestCurrentEvent());
 
     ui->actionNewDraw->setEnabled(true);
@@ -566,10 +580,10 @@ auto MainWindow::StartPositionNewPP() const -> QPointF
         const QRectF rect = m_sceneDraw->VisibleItemsBoundingRect();
         if (rect.width() <= rect.height())
         {
-            return {rect.width()+margin, originY};
+            return {rect.width() + margin, originY};
         }
 
-        return {originX, rect.height()+margin};
+        return {originX, rect.height() + margin};
     }
 
     return {originX, originY};
@@ -621,9 +635,9 @@ void MainWindow::InitScenes()
     m_sceneDraw->setTransform(ui->view->transform());
     m_sceneDetails->setTransform(ui->view->transform());
 
-    connect(ui->view, &VMainGraphicsView::MouseRelease, this, [this](){EndVisualization(true);});
+    connect(ui->view, &VMainGraphicsView::MouseRelease, this, [this]() { EndVisualization(true); });
     connect(ui->view, &VMainGraphicsView::ScaleChanged, this, &MainWindow::ScaleChanged);
-    connect(ui->view, &VMainGraphicsView::ZoomFitBestCurrent, this, [this](){ZoomFitBestCurrent();});
+    connect(ui->view, &VMainGraphicsView::ZoomFitBestCurrent, this, [this]() { ZoomFitBestCurrent(); });
     QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     policy.setHorizontalStretch(12);
     ui->view->setSizePolicy(policy);
@@ -652,9 +666,7 @@ auto MainWindow::LoadMeasurements(const QString &path) -> bool
         else if (m_m->Type() == MeasurementsType::Multisize)
         {
             auto DimensionBase = [](qreal current, qreal tableBase)
-            {
-                return not VFuzzyComparePossibleNulls(current, -1) ? current : tableBase;
-            };
+            { return not VFuzzyComparePossibleNulls(current, -1) ? current : tableBase; };
 
             m_currentDimensionA = DimensionBase(doc->GetDimensionAValue(), m_m->DimensionABase());
             m_currentDimensionB = DimensionBase(doc->GetDimensionBValue(), m_m->DimensionBBase());
@@ -668,8 +680,8 @@ auto MainWindow::LoadMeasurements(const QString &path) -> bool
     }
     catch (VExceptionEmptyParameter &e)
     {
-        qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
-                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")), qUtf8Printable(e.ErrorMessage()),
+                   qUtf8Printable(e.DetailedInformation()));
         if (not VApplication::IsGUIMode())
         {
             QCoreApplication::exit(V_EX_NOINPUT);
@@ -689,8 +701,8 @@ auto MainWindow::UpdateMeasurements(const QString &path, qreal baseA, qreal base
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto MainWindow::UpdateMeasurements(const QSharedPointer<VMeasurements> &mFile, qreal baseA, qreal baseB,
-                                    qreal baseC) -> bool
+auto MainWindow::UpdateMeasurements(const QSharedPointer<VMeasurements> &mFile, qreal baseA, qreal baseB, qreal baseC)
+    -> bool
 {
     m_m = mFile;
 
@@ -715,8 +727,8 @@ auto MainWindow::UpdateMeasurements(const QSharedPointer<VMeasurements> &mFile, 
     }
     catch (VExceptionEmptyParameter &e)
     {
-        qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
-                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")), qUtf8Printable(e.ErrorMessage()),
+                   qUtf8Printable(e.DetailedInformation()));
         if (not VApplication::IsGUIMode())
         {
             QCoreApplication::exit(V_EX_NOINPUT);
@@ -736,8 +748,8 @@ void MainWindow::ReadMeasurements(qreal baseA, qreal baseB, qreal baseC)
     {
         const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
 
-        auto InitDimensionLabel = [this](const MeasurementDimension_p& dimension,
-                                         QPointer<QLabel> &name, QPointer<QComboBox> &control)
+        auto InitDimensionLabel =
+            [this](const MeasurementDimension_p &dimension, QPointer<QLabel> &name, QPointer<QComboBox> &control)
         {
             if (dimension.isNull())
             {
@@ -746,11 +758,11 @@ void MainWindow::ReadMeasurements(qreal baseA, qreal baseB, qreal baseC)
 
             if (name == nullptr)
             {
-                name = new QLabel(dimension->Name()+QChar(':'));
+                name = new QLabel(dimension->Name() + QChar(':'));
             }
             else
             {
-                name->setText(dimension->Name()+QChar(':'));
+                name->setText(dimension->Name() + QChar(':'));
             }
             name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension, m_m->IsFullCircumference()));
 
@@ -829,7 +841,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         // This check helps to find missed tools in the switch
         Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Check if need to extend.");
 
-        switch(t)
+        switch (t)
         {
             case Tool::Midpoint:
                 m_dialogTool->Build(t);
@@ -865,7 +877,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
     }
     else
     {
-        if (auto *tButton = qobject_cast< QToolButton * >(this->sender()))
+        if (auto *tButton = qobject_cast<QToolButton *>(this->sender()))
         {
             tButton->setChecked(true);
         }
@@ -894,7 +906,7 @@ void MainWindow::SetToolButtonWithApply(bool checked, Tool t, const QString &cur
     }
     else
     {
-        if (auto *tButton = qobject_cast< QToolButton * >(this->sender()))
+        if (auto *tButton = qobject_cast<QToolButton *>(this->sender()))
         {
             tButton->setChecked(true);
         }
@@ -905,8 +917,7 @@ void MainWindow::SetToolButtonWithApply(bool checked, Tool t, const QString &cur
  * @brief ClosedDialog handle close dialog
  * @param result result working dialog.
  */
-template <typename DrawTool>
-void MainWindow::ClosedDialog(int result)
+template <typename DrawTool> void MainWindow::ClosedDialog(int result)
 {
     SCASSERT(not m_dialogTool.isNull())
     if (result == QDialog::Accepted)
@@ -926,8 +937,7 @@ void MainWindow::ClosedDialog(int result)
  * @brief ClosedDialogWithApply handle close dialog that has apply button
  * @param result result working dialog.
  */
-template <typename DrawTool>
-void MainWindow::ClosedDialogWithApply(int result, VMainGraphicsScene *scene)
+template <typename DrawTool> void MainWindow::ClosedDialogWithApply(int result, VMainGraphicsScene *scene)
 {
     SCASSERT(not m_dialogTool.isNull())
     if (result == QDialog::Accepted)
@@ -935,7 +945,7 @@ void MainWindow::ClosedDialogWithApply(int result, VMainGraphicsScene *scene)
         ApplyDialog<DrawTool>(scene);
     }
     // If before Cancel was used Apply we have an item
-    auto *vtool = qobject_cast<DrawTool *>(m_dialogTool->GetAssociatedTool());// Don't check for nullptr here
+    auto *vtool = qobject_cast<DrawTool *>(m_dialogTool->GetAssociatedTool()); // Don't check for nullptr here
     if (m_dialogTool->GetAssociatedTool() != nullptr)
     {
         SCASSERT(vtool != nullptr)
@@ -943,10 +953,10 @@ void MainWindow::ClosedDialogWithApply(int result, VMainGraphicsScene *scene)
         connect(vtool, &DrawTool::ToolTip, this, &MainWindow::ShowToolTip);
     }
     ArrowTool(true);
-    ui->view->itemClicked(vtool);// Don't check for nullptr here
+    ui->view->itemClicked(vtool); // Don't check for nullptr here
     if (vtool)
     {
-       vtool->setFocus();
+        vtool->setFocus();
     }
     // If insert not to the end of file call lite parse
     if (doc->getCursor() > 0)
@@ -963,8 +973,7 @@ void MainWindow::ClosedDialogWithApply(int result, VMainGraphicsScene *scene)
 /**
  * @brief ApplyDialog handle apply in dialog
  */
-template <typename DrawTool>
-void MainWindow::ApplyDialog(VMainGraphicsScene *scene)
+template <typename DrawTool> void MainWindow::ApplyDialog(VMainGraphicsScene *scene)
 {
     SCASSERT(not m_dialogTool.isNull())
 
@@ -977,36 +986,32 @@ void MainWindow::ApplyDialog(VMainGraphicsScene *scene)
     }
     else
     { // Or update associated tool with data
-        auto * vtool = qobject_cast<DrawTool *>(m_dialogTool->GetAssociatedTool());
+        auto *vtool = qobject_cast<DrawTool *>(m_dialogTool->GetAssociatedTool());
         SCASSERT(vtool != nullptr)
         vtool->FullUpdateFromGuiApply();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename DrawTool>
-void MainWindow::ClosedDrawDialogWithApply(int result)
+template <typename DrawTool> void MainWindow::ClosedDrawDialogWithApply(int result)
 {
     ClosedDialogWithApply<DrawTool>(result, m_sceneDraw);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename DrawTool>
-void MainWindow::ApplyDrawDialog()
+template <typename DrawTool> void MainWindow::ApplyDrawDialog()
 {
     ApplyDialog<DrawTool>(m_sceneDraw);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename DrawTool>
-void MainWindow::ClosedDetailsDialogWithApply(int result)
+template <typename DrawTool> void MainWindow::ClosedDetailsDialogWithApply(int result)
 {
     ClosedDialogWithApply<DrawTool>(result, m_sceneDetails);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename DrawTool>
-void MainWindow::ApplyDetailsDialog()
+template <typename DrawTool> void MainWindow::ApplyDetailsDialog()
 {
     ApplyDialog<DrawTool>(m_sceneDetails);
 }
@@ -1020,8 +1025,7 @@ void MainWindow::ToolEndLine(bool checked)
 {
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogEndLine>(checked, Tool::EndLine, QStringLiteral(":/cursor/endline_cursor.png"),
-                                          tr("Select point"),
-                                          &MainWindow::ClosedDrawDialogWithApply<VToolEndLine>,
+                                          tr("Select point"), &MainWindow::ClosedDrawDialogWithApply<VToolEndLine>,
                                           &MainWindow::ApplyDrawDialog<VToolEndLine>);
 }
 
@@ -1034,8 +1038,7 @@ void MainWindow::ToolLine(bool checked)
 {
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogLine>(checked, Tool::Line, QStringLiteral(":/cursor/line_cursor.png"),
-                                       tr("Select first point"),
-                                       &MainWindow::ClosedDrawDialogWithApply<VToolLine>,
+                                       tr("Select first point"), &MainWindow::ClosedDrawDialogWithApply<VToolLine>,
                                        &MainWindow::ApplyDrawDialog<VToolLine>);
 }
 
@@ -1070,11 +1073,9 @@ void MainWindow::ToolMidpoint(bool checked)
 void MainWindow::ToolShoulderPoint(bool checked)
 {
     ToolSelectPointByRelease();
-    SetToolButtonWithApply<DialogShoulderPoint>(checked, Tool::ShoulderPoint,
-                                                QStringLiteral(":/cursor/shoulder_cursor.png"),
-                                                tr("Select point"),
-                                                &MainWindow::ClosedDrawDialogWithApply<VToolShoulderPoint>,
-                                                &MainWindow::ApplyDrawDialog<VToolShoulderPoint>);
+    SetToolButtonWithApply<DialogShoulderPoint>(
+        checked, Tool::ShoulderPoint, QStringLiteral(":/cursor/shoulder_cursor.png"), tr("Select point"),
+        &MainWindow::ClosedDrawDialogWithApply<VToolShoulderPoint>, &MainWindow::ApplyDrawDialog<VToolShoulderPoint>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1085,10 +1086,9 @@ void MainWindow::ToolShoulderPoint(bool checked)
 void MainWindow::ToolNormal(bool checked)
 {
     ToolSelectPointByRelease();
-    SetToolButtonWithApply<DialogNormal>(checked, Tool::Normal, QStringLiteral(":/cursor/normal_cursor.png"),
-                                         tr("Select first point of line"),
-                                         &MainWindow::ClosedDrawDialogWithApply<VToolNormal>,
-                                         &MainWindow::ApplyDrawDialog<VToolNormal>);
+    SetToolButtonWithApply<DialogNormal>(
+        checked, Tool::Normal, QStringLiteral(":/cursor/normal_cursor.png"), tr("Select first point of line"),
+        &MainWindow::ClosedDrawDialogWithApply<VToolNormal>, &MainWindow::ApplyDrawDialog<VToolNormal>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1099,10 +1099,9 @@ void MainWindow::ToolNormal(bool checked)
 void MainWindow::ToolBisector(bool checked)
 {
     ToolSelectPointByRelease();
-    SetToolButtonWithApply<DialogBisector>(checked, Tool::Bisector, QStringLiteral(":/cursor/bisector_cursor.png"),
-                                           tr("Select first point of angle"),
-                                           &MainWindow::ClosedDrawDialogWithApply<VToolBisector>,
-                                           &MainWindow::ApplyDrawDialog<VToolBisector>);
+    SetToolButtonWithApply<DialogBisector>(
+        checked, Tool::Bisector, QStringLiteral(":/cursor/bisector_cursor.png"), tr("Select first point of angle"),
+        &MainWindow::ClosedDrawDialogWithApply<VToolBisector>, &MainWindow::ApplyDrawDialog<VToolBisector>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1113,11 +1112,10 @@ void MainWindow::ToolBisector(bool checked)
 void MainWindow::ToolLineIntersect(bool checked)
 {
     ToolSelectPointByRelease();
-    SetToolButtonWithApply<DialogLineIntersect>(checked, Tool::LineIntersect,
-                                                QStringLiteral(":/cursor/intersect_cursor.png"),
-                                                tr("Select first point of first line"),
-                                                &MainWindow::ClosedDrawDialogWithApply<VToolLineIntersect>,
-                                                &MainWindow::ApplyDrawDialog<VToolLineIntersect>);
+    SetToolButtonWithApply<DialogLineIntersect>(
+        checked, Tool::LineIntersect, QStringLiteral(":/cursor/intersect_cursor.png"),
+        tr("Select first point of first line"), &MainWindow::ClosedDrawDialogWithApply<VToolLineIntersect>,
+        &MainWindow::ApplyDrawDialog<VToolLineIntersect>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1128,21 +1126,18 @@ void MainWindow::ToolLineIntersect(bool checked)
 void MainWindow::ToolSpline(bool checked)
 {
     ToolSelectPointByPress();
-    SetToolButtonWithApply<DialogSpline>(checked, Tool::Spline, QStringLiteral(":/cursor/spline_cursor.png"),
-                                         tr("Select first point curve"),
-                                         &MainWindow::ClosedDrawDialogWithApply<VToolSpline>,
-                                         &MainWindow::ApplyDrawDialog<VToolSpline>);
+    SetToolButtonWithApply<DialogSpline>(
+        checked, Tool::Spline, QStringLiteral(":/cursor/spline_cursor.png"), tr("Select first point curve"),
+        &MainWindow::ClosedDrawDialogWithApply<VToolSpline>, &MainWindow::ApplyDrawDialog<VToolSpline>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolCubicBezier(bool checked)
 {
     ToolSelectPointByRelease();
-    SetToolButtonWithApply<DialogCubicBezier>(checked, Tool::CubicBezier,
-                                              QStringLiteral(":/cursor/cubic_bezier_cursor.png"),
-                                              tr("Select first curve point"),
-                                              &MainWindow::ClosedDrawDialogWithApply<VToolCubicBezier>,
-                                              &MainWindow::ApplyDrawDialog<VToolCubicBezier>);
+    SetToolButtonWithApply<DialogCubicBezier>(
+        checked, Tool::CubicBezier, QStringLiteral(":/cursor/cubic_bezier_cursor.png"), tr("Select first curve point"),
+        &MainWindow::ClosedDrawDialogWithApply<VToolCubicBezier>, &MainWindow::ApplyDrawDialog<VToolCubicBezier>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1153,11 +1148,9 @@ void MainWindow::ToolCubicBezier(bool checked)
 void MainWindow::ToolCutSpline(bool checked)
 {
     ToolSelectSpline();
-    SetToolButtonWithApply<DialogCutSpline>(checked, Tool::CutSpline,
-                                            QStringLiteral(":/cursor/spline_cut_point_cursor.png"),
-                                            tr("Select simple curve"),
-                                            &MainWindow::ClosedDrawDialogWithApply<VToolCutSpline>,
-                                            &MainWindow::ApplyDrawDialog<VToolCutSpline>);
+    SetToolButtonWithApply<DialogCutSpline>(
+        checked, Tool::CutSpline, QStringLiteral(":/cursor/spline_cut_point_cursor.png"), tr("Select simple curve"),
+        &MainWindow::ClosedDrawDialogWithApply<VToolCutSpline>, &MainWindow::ApplyDrawDialog<VToolCutSpline>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1168,10 +1161,9 @@ void MainWindow::ToolCutSpline(bool checked)
 void MainWindow::ToolArc(bool checked)
 {
     ToolSelectPointByRelease();
-    SetToolButtonWithApply<DialogArc>(checked, Tool::Arc, QStringLiteral(":/cursor/arc_cursor.png"),
-                                      tr("Select point of center of arc"),
-                                      &MainWindow::ClosedDrawDialogWithApply<VToolArc>,
-                                      &MainWindow::ApplyDrawDialog<VToolArc>);
+    SetToolButtonWithApply<DialogArc>(
+        checked, Tool::Arc, QStringLiteral(":/cursor/arc_cursor.png"), tr("Select point of center of arc"),
+        &MainWindow::ClosedDrawDialogWithApply<VToolArc>, &MainWindow::ApplyDrawDialog<VToolArc>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1182,11 +1174,10 @@ void MainWindow::ToolArc(bool checked)
 void MainWindow::ToolEllipticalArc(bool checked)
 {
     ToolSelectPointByRelease();
-    SetToolButtonWithApply<DialogEllipticalArc>(checked, Tool::EllipticalArc,
-                                                QStringLiteral(":/cursor/el_arc_cursor.png"),
-                                                tr("Select point of center of elliptical arc"),
-                                                &MainWindow::ClosedDrawDialogWithApply<VToolEllipticalArc>,
-                                                &MainWindow::ApplyDrawDialog<VToolEllipticalArc>);
+    SetToolButtonWithApply<DialogEllipticalArc>(
+        checked, Tool::EllipticalArc, QStringLiteral(":/cursor/el_arc_cursor.png"),
+        tr("Select point of center of elliptical arc"), &MainWindow::ClosedDrawDialogWithApply<VToolEllipticalArc>,
+        &MainWindow::ApplyDrawDialog<VToolEllipticalArc>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1197,22 +1188,19 @@ void MainWindow::ToolEllipticalArc(bool checked)
 void MainWindow::ToolSplinePath(bool checked)
 {
     ToolSelectPointByPress();
-    SetToolButtonWithApply<DialogSplinePath>(checked, Tool::SplinePath,
-                                             QStringLiteral(":/cursor/splinepath_cursor.png"),
-                                             tr("Select point of curve path"),
-                                             &MainWindow::ClosedDrawDialogWithApply<VToolSplinePath>,
-                                             &MainWindow::ApplyDrawDialog<VToolSplinePath>);
+    SetToolButtonWithApply<DialogSplinePath>(
+        checked, Tool::SplinePath, QStringLiteral(":/cursor/splinepath_cursor.png"), tr("Select point of curve path"),
+        &MainWindow::ClosedDrawDialogWithApply<VToolSplinePath>, &MainWindow::ApplyDrawDialog<VToolSplinePath>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolCubicBezierPath(bool checked)
 {
     ToolSelectPointByRelease();
-    SetToolButtonWithApply<DialogCubicBezierPath>(checked, Tool::CubicBezierPath,
-                                                  QStringLiteral(":/cursor/cubic_bezier_path_cursor.png"),
-                                                  tr("Select point of cubic bezier path"),
-                                                  &MainWindow::ClosedDrawDialogWithApply<VToolCubicBezierPath>,
-                                                  &MainWindow::ApplyDrawDialog<VToolCubicBezierPath>);
+    SetToolButtonWithApply<DialogCubicBezierPath>(
+        checked, Tool::CubicBezierPath, QStringLiteral(":/cursor/cubic_bezier_path_cursor.png"),
+        tr("Select point of cubic bezier path"), &MainWindow::ClosedDrawDialogWithApply<VToolCubicBezierPath>,
+        &MainWindow::ApplyDrawDialog<VToolCubicBezierPath>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1223,11 +1211,10 @@ void MainWindow::ToolCubicBezierPath(bool checked)
 void MainWindow::ToolCutSplinePath(bool checked)
 {
     ToolSelectSplinePath();
-    SetToolButtonWithApply<DialogCutSplinePath>(checked, Tool::CutSplinePath,
-                                                QStringLiteral(":/cursor/splinepath_cut_point_cursor.png"),
-                                                tr("Select curve path"),
-                                                &MainWindow::ClosedDrawDialogWithApply<VToolCutSplinePath>,
-                                                &MainWindow::ApplyDrawDialog<VToolCutSplinePath>);
+    SetToolButtonWithApply<DialogCutSplinePath>(
+        checked, Tool::CutSplinePath, QStringLiteral(":/cursor/splinepath_cut_point_cursor.png"),
+        tr("Select curve path"), &MainWindow::ClosedDrawDialogWithApply<VToolCutSplinePath>,
+        &MainWindow::ApplyDrawDialog<VToolCutSplinePath>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1238,11 +1225,10 @@ void MainWindow::ToolCutSplinePath(bool checked)
 void MainWindow::ToolPointOfContact(bool checked)
 {
     ToolSelectPointByRelease();
-    SetToolButtonWithApply<DialogPointOfContact>(checked, Tool::PointOfContact,
-                                                 QStringLiteral(":/cursor/pointcontact_cursor.png"),
-                                                 tr("Select first point of line"),
-                                                 &MainWindow::ClosedDrawDialogWithApply<VToolPointOfContact>,
-                                                 &MainWindow::ApplyDrawDialog<VToolPointOfContact>);
+    SetToolButtonWithApply<DialogPointOfContact>(
+        checked, Tool::PointOfContact, QStringLiteral(":/cursor/pointcontact_cursor.png"),
+        tr("Select first point of line"), &MainWindow::ClosedDrawDialogWithApply<VToolPointOfContact>,
+        &MainWindow::ApplyDrawDialog<VToolPointOfContact>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1253,8 +1239,7 @@ void MainWindow::ToolPointOfContact(bool checked)
 void MainWindow::ToolDetail(bool checked)
 {
     ToolSelectAllDrawObjects();
-    SetToolButtonWithApply<DialogSeamAllowance>(checked, Tool::Piece,
-                                                QStringLiteral("://cursor/new_detail_cursor.png"),
+    SetToolButtonWithApply<DialogSeamAllowance>(checked, Tool::Piece, QStringLiteral("://cursor/new_detail_cursor.png"),
                                                 tr("Select main path objects clockwise."),
                                                 &MainWindow::ClosedDetailsDialogWithApply<VToolSeamAllowance>,
                                                 &MainWindow::ApplyDetailsDialog<VToolSeamAllowance>);
@@ -1264,10 +1249,10 @@ void MainWindow::ToolDetail(bool checked)
 void MainWindow::ToolPiecePath(bool checked)
 {
     ToolSelectAllDrawObjects();
-    SetToolButton<DialogPiecePath>(checked, Tool::PiecePath, QStringLiteral("://cursor/path_cursor.png"),
-                                   tr("Select path objects, <b>%1</b> - reverse direction curve")
-                                   .arg(VModifierKey::Shift()),
-                                   &MainWindow::ClosedDialogPiecePath);
+    SetToolButton<DialogPiecePath>(
+        checked, Tool::PiecePath, QStringLiteral("://cursor/path_cursor.png"),
+        tr("Select path objects, <b>%1</b> - reverse direction curve").arg(VModifierKey::Shift()),
+        &MainWindow::ClosedDialogPiecePath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1295,8 +1280,7 @@ void MainWindow::ToolHeight(bool checked)
 {
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogHeight>(checked, Tool::Height, QStringLiteral(":/cursor/height_cursor.png"),
-                                         tr("Select base point"),
-                                         &MainWindow::ClosedDrawDialogWithApply<VToolHeight>,
+                                         tr("Select base point"), &MainWindow::ClosedDrawDialogWithApply<VToolHeight>,
                                          &MainWindow::ApplyDrawDialog<VToolHeight>);
 }
 
@@ -1308,10 +1292,9 @@ void MainWindow::ToolHeight(bool checked)
 void MainWindow::ToolTriangle(bool checked)
 {
     ToolSelectPointByRelease();
-    SetToolButtonWithApply<DialogTriangle>(checked, Tool::Triangle, QStringLiteral(":/cursor/triangle_cursor.png"),
-                                           tr("Select first point of axis"),
-                                           &MainWindow::ClosedDrawDialogWithApply<VToolTriangle>,
-                                           &MainWindow::ApplyDrawDialog<VToolTriangle>);
+    SetToolButtonWithApply<DialogTriangle>(
+        checked, Tool::Triangle, QStringLiteral(":/cursor/triangle_cursor.png"), tr("Select first point of axis"),
+        &MainWindow::ClosedDrawDialogWithApply<VToolTriangle>, &MainWindow::ApplyDrawDialog<VToolTriangle>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1322,11 +1305,10 @@ void MainWindow::ToolTriangle(bool checked)
 void MainWindow::ToolPointOfIntersection(bool checked)
 {
     ToolSelectPointByRelease();
-    SetToolButtonWithApply<DialogPointOfIntersection>(checked, Tool::PointOfIntersection,
-                                                      QStringLiteral(":/cursor/pointofintersect_cursor.png"),
-                                                      tr("Select point for X value (vertical)"),
-                                                      &MainWindow::ClosedDrawDialogWithApply<VToolPointOfIntersection>,
-                                                      &MainWindow::ApplyDrawDialog<VToolPointOfIntersection>);
+    SetToolButtonWithApply<DialogPointOfIntersection>(
+        checked, Tool::PointOfIntersection, QStringLiteral(":/cursor/pointofintersect_cursor.png"),
+        tr("Select point for X value (vertical)"), &MainWindow::ClosedDrawDialogWithApply<VToolPointOfIntersection>,
+        &MainWindow::ApplyDrawDialog<VToolPointOfIntersection>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1348,7 +1330,7 @@ void MainWindow::ToolUnionDetails(bool checked)
  */
 void MainWindow::ClosedDialogUnionDetails(int result)
 {
-    ClosedDialog<VToolUnionDetails>(result);// Avoid error: Template function as signal or slot
+    ClosedDialog<VToolUnionDetails>(result); // Avoid error: Template function as signal or slot
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1356,8 +1338,8 @@ void MainWindow::ToolDuplicateDetail(bool checked)
 {
     ToolSelectDetail();
     SetToolButton<DialogDuplicateDetail>(checked, Tool::DuplicateDetail,
-                                         QStringLiteral(":/cursor/duplicate_detail_cursor.png"),
-                                         tr("Select detail"), &MainWindow::ClosedDialogDuplicateDetail);
+                                         QStringLiteral(":/cursor/duplicate_detail_cursor.png"), tr("Select detail"),
+                                         &MainWindow::ClosedDialogDuplicateDetail);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1382,7 +1364,7 @@ void MainWindow::ToolGroup(bool checked)
     ToolSelectGroupObjects();
     const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
                                "<b>%2</b> - finish creation")
-            .arg(VModifierKey::Control(), VModifierKey::EnterKey());
+                                .arg(VModifierKey::Control(), VModifierKey::EnterKey());
     SetToolButton<DialogGroup>(checked, Tool::Group, QStringLiteral(":/cursor/group_plus_cursor.png"), tooltip,
                                &MainWindow::ClosedDialogGroup);
 }
@@ -1393,7 +1375,7 @@ void MainWindow::ToolRotation(bool checked)
     ToolSelectOperationObjects();
     const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
                                "<b>%2</b> - confirm selection")
-            .arg(VModifierKey::Control(), VModifierKey::EnterKey());
+                                .arg(VModifierKey::Control(), VModifierKey::EnterKey());
     SetToolButtonWithApply<DialogRotation>(checked, Tool::Rotation, QStringLiteral(":/cursor/rotation_cursor.png"),
                                            tooltip, &MainWindow::ClosedDrawDialogWithApply<VToolRotation>,
                                            &MainWindow::ApplyDrawDialog<VToolRotation>);
@@ -1405,11 +1387,10 @@ void MainWindow::ToolFlippingByLine(bool checked)
     ToolSelectOperationObjects();
     const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
                                "<b>%2</b> - confirm selection")
-            .arg(VModifierKey::Control(), VModifierKey::EnterKey());
-    SetToolButtonWithApply<DialogFlippingByLine>(checked, Tool::FlippingByLine,
-                                                 QStringLiteral(":/cursor/flipping_line_cursor.png"),
-                                                 tooltip, &MainWindow::ClosedDrawDialogWithApply<VToolFlippingByLine>,
-                                                 &MainWindow::ApplyDrawDialog<VToolFlippingByLine>);
+                                .arg(VModifierKey::Control(), VModifierKey::EnterKey());
+    SetToolButtonWithApply<DialogFlippingByLine>(
+        checked, Tool::FlippingByLine, QStringLiteral(":/cursor/flipping_line_cursor.png"), tooltip,
+        &MainWindow::ClosedDrawDialogWithApply<VToolFlippingByLine>, &MainWindow::ApplyDrawDialog<VToolFlippingByLine>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1418,11 +1399,10 @@ void MainWindow::ToolFlippingByAxis(bool checked)
     ToolSelectOperationObjects();
     const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
                                "<b>%2</b> - confirm selection")
-            .arg(VModifierKey::Control(), VModifierKey::EnterKey());
-    SetToolButtonWithApply<DialogFlippingByAxis>(checked, Tool::FlippingByAxis,
-                                                 QStringLiteral(":/cursor/flipping_axis_cursor.png"),
-                                                 tooltip, &MainWindow::ClosedDrawDialogWithApply<VToolFlippingByAxis>,
-                                                 &MainWindow::ApplyDrawDialog<VToolFlippingByAxis>);
+                                .arg(VModifierKey::Control(), VModifierKey::EnterKey());
+    SetToolButtonWithApply<DialogFlippingByAxis>(
+        checked, Tool::FlippingByAxis, QStringLiteral(":/cursor/flipping_axis_cursor.png"), tooltip,
+        &MainWindow::ClosedDrawDialogWithApply<VToolFlippingByAxis>, &MainWindow::ApplyDrawDialog<VToolFlippingByAxis>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1431,7 +1411,7 @@ void MainWindow::ToolMove(bool checked)
     ToolSelectOperationObjects();
     const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
                                "<b>%2</b> - confirm selection")
-            .arg(VModifierKey::Control(), VModifierKey::EnterKey());
+                                .arg(VModifierKey::Control(), VModifierKey::EnterKey());
     SetToolButtonWithApply<DialogMove>(checked, Tool::Move, QStringLiteral(":/cursor/move_cursor.png"), tooltip,
                                        &MainWindow::ClosedDrawDialogWithApply<VToolMove>,
                                        &MainWindow::ApplyDrawDialog<VToolMove>);
@@ -1445,8 +1425,8 @@ void MainWindow::ClosedDialogGroup(int result)
     {
         const QPointer<DialogGroup> dialog = qobject_cast<DialogGroup *>(m_dialogTool);
         SCASSERT(not dialog.isNull())
-        const QDomElement group = doc->CreateGroup(pattern->getNextId(), dialog->GetName(), dialog->GetTags(),
-                                                   dialog->GetGroup());
+        const QDomElement group =
+            doc->CreateGroup(pattern->getNextId(), dialog->GetName(), dialog->GetTags(), dialog->GetGroup());
         if (not group.isNull())
         {
             auto *addGroup = new AddGroup(group, doc);
@@ -1510,7 +1490,7 @@ void MainWindow::ClosedDialogInsertNode(int result)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ZoomFitBestCurrent()
 {
-    if(m_drawMode)
+    if (m_drawMode)
     {
         const QRectF rect = doc->ActiveDrawBoundingRect();
         if (rect.isEmpty())
@@ -1545,7 +1525,7 @@ void MainWindow::PlaceBackgroundImage(const QPointF &pos, const QString &fileNam
     image.SetName(dialog.Name());
 
     VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
-    image.SetOpacity(settings->GetBackgroundImageDefOpacity()/100.);
+    image.SetOpacity(settings->GetBackgroundImageDefOpacity() / 100.);
 
     QTransform m;
     m.translate(pos.x(), pos.y());
@@ -1561,7 +1541,7 @@ void MainWindow::PlaceBackgroundImage(const QPointF &pos, const QString &fileNam
         return;
     }
 
-    auto* addBackgroundImage = new AddBackgroundImage(image, doc);
+    auto *addBackgroundImage = new AddBackgroundImage(image, doc);
     connect(addBackgroundImage, &AddBackgroundImage::AddItem, this, &MainWindow::AddBackgroundImageItem);
     connect(addBackgroundImage, &AddBackgroundImage::DeleteItem, this, &MainWindow::DeleteBackgroundImageItem);
     VApplication::VApp()->getUndoStack()->push(addBackgroundImage);
@@ -1572,7 +1552,7 @@ void MainWindow::RemoveBackgroundImage(const QUuid &id)
 {
     VBackgroundPatternImage image = doc->GetBackgroundImage(id);
 
-    auto* deleteBackgroundImage = new DeleteBackgroundImage(image, doc);
+    auto *deleteBackgroundImage = new DeleteBackgroundImage(image, doc);
     connect(deleteBackgroundImage, &DeleteBackgroundImage::AddItem, this, &MainWindow::AddBackgroundImageItem);
     connect(deleteBackgroundImage, &DeleteBackgroundImage::DeleteItem, this, &MainWindow::DeleteBackgroundImageItem);
     VApplication::VApp()->getUndoStack()->push(deleteBackgroundImage);
@@ -1595,22 +1575,20 @@ void MainWindow::ToolCutArc(bool checked)
 void MainWindow::ToolLineIntersectAxis(bool checked)
 {
     ToolSelectPointByRelease();
-    SetToolButtonWithApply<DialogLineIntersectAxis>(checked, Tool::LineIntersectAxis,
-                                                    QStringLiteral(":/cursor/line_intersect_axis_cursor.png"),
-                                                    tr("Select first point of line"),
-                                                    &MainWindow::ClosedDrawDialogWithApply<VToolLineIntersectAxis>,
-                                                    &MainWindow::ApplyDrawDialog<VToolLineIntersectAxis>);
+    SetToolButtonWithApply<DialogLineIntersectAxis>(
+        checked, Tool::LineIntersectAxis, QStringLiteral(":/cursor/line_intersect_axis_cursor.png"),
+        tr("Select first point of line"), &MainWindow::ClosedDrawDialogWithApply<VToolLineIntersectAxis>,
+        &MainWindow::ApplyDrawDialog<VToolLineIntersectAxis>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolCurveIntersectAxis(bool checked)
 {
     ToolSelectAllDrawObjects();
-    SetToolButtonWithApply<DialogCurveIntersectAxis>(checked, Tool::CurveIntersectAxis,
-                                                     QStringLiteral(":/cursor/curve_intersect_axis_cursor.png"),
-                                                     tr("Select curve"),
-                                                     &MainWindow::ClosedDrawDialogWithApply<VToolCurveIntersectAxis>,
-                                                     &MainWindow::ApplyDrawDialog<VToolCurveIntersectAxis>);
+    SetToolButtonWithApply<DialogCurveIntersectAxis>(
+        checked, Tool::CurveIntersectAxis, QStringLiteral(":/cursor/curve_intersect_axis_cursor.png"),
+        tr("Select curve"), &MainWindow::ClosedDrawDialogWithApply<VToolCurveIntersectAxis>,
+        &MainWindow::ApplyDrawDialog<VToolCurveIntersectAxis>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1618,22 +1596,20 @@ void MainWindow::ToolArcIntersectAxis(bool checked)
 {
     ToolSelectAllDrawObjects();
     // Reuse ToolCurveIntersectAxis but with different cursor and tool tip
-    SetToolButtonWithApply<DialogCurveIntersectAxis>(checked, Tool::ArcIntersectAxis,
-                                                     QStringLiteral(":/cursor/arc_intersect_axis_cursor.png"),
-                                                     tr("Select arc"),
-                                                     &MainWindow::ClosedDrawDialogWithApply<VToolCurveIntersectAxis>,
-                                                     &MainWindow::ApplyDrawDialog<VToolCurveIntersectAxis>);
+    SetToolButtonWithApply<DialogCurveIntersectAxis>(
+        checked, Tool::ArcIntersectAxis, QStringLiteral(":/cursor/arc_intersect_axis_cursor.png"), tr("Select arc"),
+        &MainWindow::ClosedDrawDialogWithApply<VToolCurveIntersectAxis>,
+        &MainWindow::ApplyDrawDialog<VToolCurveIntersectAxis>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolPointOfIntersectionArcs(bool checked)
 {
     ToolSelectArc();
-    SetToolButtonWithApply<DialogPointOfIntersectionArcs>(checked, Tool::PointOfIntersectionArcs,
-                                                          QStringLiteral("://cursor/point_of_intersection_arcs.png"),
-                                                          tr("Select first an arc"),
-                                                   &MainWindow::ClosedDrawDialogWithApply<VToolPointOfIntersectionArcs>,
-                                                          &MainWindow::ApplyDrawDialog<VToolPointOfIntersectionArcs>);
+    SetToolButtonWithApply<DialogPointOfIntersectionArcs>(
+        checked, Tool::PointOfIntersectionArcs, QStringLiteral("://cursor/point_of_intersection_arcs.png"),
+        tr("Select first an arc"), &MainWindow::ClosedDrawDialogWithApply<VToolPointOfIntersectionArcs>,
+        &MainWindow::ApplyDrawDialog<VToolPointOfIntersectionArcs>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1680,11 +1656,10 @@ void MainWindow::ToolPointFromArcAndTangent(bool checked)
 void MainWindow::ToolArcWithLength(bool checked)
 {
     ToolSelectPointByRelease();
-    SetToolButtonWithApply<DialogArcWithLength>(checked, Tool::ArcWithLength,
-                                                QStringLiteral("://cursor/arc_with_length_cursor.png"),
-                                                tr("Select point of the center of the arc"),
-                                                &MainWindow::ClosedDrawDialogWithApply<VToolArcWithLength>,
-                                                &MainWindow::ApplyDrawDialog<VToolArcWithLength>);
+    SetToolButtonWithApply<DialogArcWithLength>(
+        checked, Tool::ArcWithLength, QStringLiteral("://cursor/arc_with_length_cursor.png"),
+        tr("Select point of the center of the arc"), &MainWindow::ClosedDrawDialogWithApply<VToolArcWithLength>,
+        &MainWindow::ApplyDrawDialog<VToolArcWithLength>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1718,7 +1693,6 @@ void MainWindow::ShowToolTip(const QString &toolTip)
     m_statusLabel->setText(toolTip);
 }
 
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief triggers the update of the visibility groups
@@ -1742,10 +1716,10 @@ void MainWindow::UpdateDetailsList()
  * @brief showEvent handle after show window.
  * @param event show event.
  */
-void MainWindow::showEvent( QShowEvent *event )
+void MainWindow::showEvent(QShowEvent *event)
 {
-    QMainWindow::showEvent( event );
-    if ( event->spontaneous() )
+    QMainWindow::showEvent(event);
+    if (event->spontaneous())
     {
         return;
     }
@@ -1762,7 +1736,7 @@ void MainWindow::showEvent( QShowEvent *event )
 
     MinimumScrollBar();
 
-    m_isInitialized = true;//first show windows are held
+    m_isInitialized = true; // first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1858,9 +1832,9 @@ void MainWindow::CleanLayout()
 void MainWindow::PrepareSceneList(PreviewQuatilty quality)
 {
     ui->listWidget->clear();
-    for (int i=1; i<=m_layoutSettings->LayoutScenes().size(); ++i)
+    for (int i = 1; i <= m_layoutSettings->LayoutScenes().size(); ++i)
     {
-        auto *item = new QListWidgetItem(ScenePreview(i-1, ui->listWidget->iconSize(), quality), QString::number(i));
+        auto *item = new QListWidgetItem(ScenePreview(i - 1, ui->listWidget->iconSize(), quality), QString::number(i));
         ui->listWidget->addItem(item);
     }
 
@@ -1887,15 +1861,15 @@ void MainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int m
         csv.setHeaderText(2, tr("Formula"));
     }
 
-    const QMap<QString, QSharedPointer<VIncrement> > increments = pattern->DataIncrements();
+    const QMap<QString, QSharedPointer<VIncrement>> increments = pattern->DataIncrements();
 
     qint32 currentRow = -1;
 
     auto SavePreviewCalculation = [&currentRow, &csv, increments](bool save)
     {
-        QMap<QString, QSharedPointer<VIncrement> >::const_iterator i;
+        QMap<QString, QSharedPointer<VIncrement>>::const_iterator i;
         QMap<quint32, QString> map;
-        //Sorting QHash by id
+        // Sorting QHash by id
         for (i = increments.constBegin(); i != increments.constEnd(); ++i)
         {
             const QSharedPointer<VIncrement> &incr = i.value();
@@ -1917,9 +1891,8 @@ void MainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int m
             csv.setText(currentRow, 1,
                         VAbstractApplication::VApp()->LocaleToString(*incr->GetValue())); // calculated value
 
-            QString formula =
-                    VTranslateVars::TryFormulaToUser(incr->GetFormula(),
-                                                     VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+            QString formula = VTranslateVars::TryFormulaToUser(
+                incr->GetFormula(), VAbstractApplication::VApp()->Settings()->GetOsSeparator());
             csv.setText(currentRow, 2, formula); // formula
         }
     };
@@ -1939,7 +1912,7 @@ void MainWindow::ToolBarStyle(QToolBar *bar) const
 #if defined(Q_OS_MAC)
     // Temporary fix issue with toolbar black background on mac with OpenGL render
     if (VAbstractValApplication::VApp()->getSceneView() &&
-            VAbstractValApplication::VApp()->getSceneView()->IsOpenGLRender())
+        VAbstractValApplication::VApp()->getSceneView()->IsOpenGLRender())
     {
         bar->setStyle(QStyleFactory::create("fusion"));
     }
@@ -1952,9 +1925,9 @@ void MainWindow::ScaleChanged(qreal scale)
     if (not m_doubleSpinBoxScale.isNull())
     {
         m_doubleSpinBoxScale->blockSignals(true);
-        m_doubleSpinBoxScale->setMaximum(qFloor(VMainGraphicsView::MaxScale()*1000)/10.0);
-        m_doubleSpinBoxScale->setMinimum(qFloor(VMainGraphicsView::MinScale()*1000)/10.0);
-        m_doubleSpinBoxScale->setValue(qFloor(scale*1000)/10.0);
+        m_doubleSpinBoxScale->setMaximum(qFloor(VMainGraphicsView::MaxScale() * 1000) / 10.0);
+        m_doubleSpinBoxScale->setMinimum(qFloor(VMainGraphicsView::MinScale() * 1000) / 10.0);
+        m_doubleSpinBoxScale->setValue(qFloor(scale * 1000) / 10.0);
         m_doubleSpinBoxScale->setSingleStep(1);
         m_doubleSpinBoxScale->blockSignals(false);
     }
@@ -1965,7 +1938,7 @@ void MainWindow::LoadIndividual()
 {
     const QString filter = tr("Individual measurements") + QStringLiteral(" (*.vit);;") + tr("Multisize measurements") +
                            QStringLiteral(" (*.vst)");
-    //Use standard path to individual measurements
+    // Use standard path to individual measurements
     const QString path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathIndividualMeasurements();
 
     bool usedNotExistedDir = false;
@@ -2010,7 +1983,7 @@ void MainWindow::LoadMultisize()
 {
     const QString filter = tr("Multisize measurements") + QStringLiteral(" (*.vst);;") + tr("Individual measurements") +
                            QStringLiteral("(*.vit)");
-    //Use standard path to multisize measurements
+    // Use standard path to multisize measurements
     QString path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathMultisizeMeasurements();
     path = VCommonSettings::PrepareMultisizeTables(path);
     const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr,
@@ -2018,7 +1991,7 @@ void MainWindow::LoadMultisize()
 
     if (not mPath.isEmpty())
     {
-        if(LoadMeasurements(mPath))
+        if (LoadMeasurements(mPath))
         {
             if (not doc->MPath().isEmpty())
             {
@@ -2157,7 +2130,7 @@ void MainWindow::MeasurementsChanged(const QString &path)
     }
     else
     {
-        for(int i=0; i<=1000; i=i+10)
+        for (int i = 0; i <= 1000; i = i + 10)
         {
             if (checkFile.exists())
             {
@@ -2185,7 +2158,7 @@ void MainWindow::SyncMeasurements()
         // Temporarily remove the path to prevent infinite synchronization after a format conversion.
         m_watcher->removePath(path);
 
-        if(UpdateMeasurements(path, m_currentDimensionA, m_currentDimensionB, m_currentDimensionC))
+        if (UpdateMeasurements(path, m_currentDimensionA, m_currentDimensionB, m_currentDimensionC))
         {
             const QString msg = tr("Measurements have been synced");
             qCDebug(vMainWindow, "%s", qUtf8Printable(msg));
@@ -2260,7 +2233,6 @@ void MainWindow::RemoveWatermark()
     }
 }
 
-
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::CleanWaterkmarkEditors()
 {
@@ -2286,7 +2258,7 @@ void MainWindow::StoreMultisizeMDimensions()
     {
         if (not m_dimensionALabel.isNull())
         {
-            m_dimensionALabel->setText(dimensions.at(0)->Name()+QChar(':'));
+            m_dimensionALabel->setText(dimensions.at(0)->Name() + QChar(':'));
         }
     }
 
@@ -2294,7 +2266,7 @@ void MainWindow::StoreMultisizeMDimensions()
     {
         if (not m_dimensionBLabel.isNull())
         {
-            m_dimensionBLabel->setText(dimensions.at(1)->Name()+QChar(':'));
+            m_dimensionBLabel->setText(dimensions.at(1)->Name() + QChar(':'));
         }
     }
 
@@ -2302,7 +2274,7 @@ void MainWindow::StoreMultisizeMDimensions()
     {
         if (not m_dimensionCLabel.isNull())
         {
-            m_dimensionCLabel->setText(dimensions.at(2)->Name()+QChar(':'));
+            m_dimensionCLabel->setText(dimensions.at(2)->Name() + QChar(':'));
         }
     }
 
@@ -2314,7 +2286,7 @@ void MainWindow::StoreMultisizeMDimensions()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::StoreIndividualMDimensions()
 {
-    QMap<QString, QSharedPointer<VMeasurement> > measurements = pattern->DataMeasurements();
+    QMap<QString, QSharedPointer<VMeasurement>> measurements = pattern->DataMeasurements();
 
     StoreIndividualMDimension(measurements, IMD::X);
     StoreIndividualMDimension(measurements, IMD::Y);
@@ -2327,56 +2299,56 @@ void MainWindow::StoreMultisizeMDimension(const QList<MeasurementDimension_p> &d
 {
     if (dimensions.size() > index)
     {
-        const MeasurementDimension_p& dimension = dimensions.at(index);
+        const MeasurementDimension_p &dimension = dimensions.at(index);
         const DimesionLabels labels = dimension->Labels();
 
-        switch(dimension->Type())
+        switch (dimension->Type())
         {
-        case MeasurementDimension::X:
-            VAbstractValApplication::VApp()->SetDimensionHeight(currentBase);
-            VAbstractValApplication::VApp()->SetDimensionHeightLabel(
-                VFuzzyValue(labels, currentBase, QString::number(currentBase)));
-            break;
-        case MeasurementDimension::Y:
-        {
-            const bool fc = m_m->IsFullCircumference();
-            VAbstractValApplication::VApp()->SetDimensionSize(fc ? currentBase*2 : currentBase);
-            VAbstractValApplication::VApp()->SetDimensionSizeLabel(
-                VFuzzyValue(labels, currentBase, QString::number(fc ? currentBase*2 : currentBase)));
-            const bool measurement = dimension->IsBodyMeasurement();
-            VAbstractValApplication::VApp()
-                ->SetDimensionSizeUnits(measurement ? m_m->Units() : Unit::LAST_UNIT_DO_NOT_USE);
-            break;
-        }
-        case MeasurementDimension::W:
-        {
-            const bool fc = m_m->IsFullCircumference();
-            VAbstractValApplication::VApp()->SetDimensionWaist(fc ? currentBase*2 : currentBase);
-            VAbstractValApplication::VApp()->SetDimensionWaistLabel(
-                VFuzzyValue(labels, currentBase, QString::number(fc ? currentBase*2 : currentBase)));
-            break;
-        }
-        case MeasurementDimension::Z:
-        {
-            const bool fc = m_m->IsFullCircumference();
-            VAbstractValApplication::VApp()->SetDimensionHip(fc ? currentBase*2 : currentBase);
-            VAbstractValApplication::VApp()->SetDimensionHipLabel(
-                VFuzzyValue(labels, currentBase, QString::number(fc ? currentBase*2 : currentBase)));
-            break;
-        }
-        default:
-            break;
+            case MeasurementDimension::X:
+                VAbstractValApplication::VApp()->SetDimensionHeight(currentBase);
+                VAbstractValApplication::VApp()->SetDimensionHeightLabel(
+                    VFuzzyValue(labels, currentBase, QString::number(currentBase)));
+                break;
+            case MeasurementDimension::Y:
+            {
+                const bool fc = m_m->IsFullCircumference();
+                VAbstractValApplication::VApp()->SetDimensionSize(fc ? currentBase * 2 : currentBase);
+                VAbstractValApplication::VApp()->SetDimensionSizeLabel(
+                    VFuzzyValue(labels, currentBase, QString::number(fc ? currentBase * 2 : currentBase)));
+                const bool measurement = dimension->IsBodyMeasurement();
+                VAbstractValApplication::VApp()->SetDimensionSizeUnits(measurement ? m_m->Units()
+                                                                                   : Unit::LAST_UNIT_DO_NOT_USE);
+                break;
+            }
+            case MeasurementDimension::W:
+            {
+                const bool fc = m_m->IsFullCircumference();
+                VAbstractValApplication::VApp()->SetDimensionWaist(fc ? currentBase * 2 : currentBase);
+                VAbstractValApplication::VApp()->SetDimensionWaistLabel(
+                    VFuzzyValue(labels, currentBase, QString::number(fc ? currentBase * 2 : currentBase)));
+                break;
+            }
+            case MeasurementDimension::Z:
+            {
+                const bool fc = m_m->IsFullCircumference();
+                VAbstractValApplication::VApp()->SetDimensionHip(fc ? currentBase * 2 : currentBase);
+                VAbstractValApplication::VApp()->SetDimensionHipLabel(
+                    VFuzzyValue(labels, currentBase, QString::number(fc ? currentBase * 2 : currentBase)));
+                break;
+            }
+            default:
+                break;
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::StoreIndividualMDimension(const QMap<QString, QSharedPointer<VMeasurement> > &measurements, IMD type)
+void MainWindow::StoreIndividualMDimension(const QMap<QString, QSharedPointer<VMeasurement>> &measurements, IMD type)
 {
     const QString name = VAbstractApplication::VApp()->TrVars()->VarToUser(m_m->MeasurementForDimension(type));
     const bool valid = not name.isEmpty() && measurements.contains(name);
     const qreal value = valid ? *measurements.value(name)->GetValue() : 0;
-    switch(type)
+    switch (type)
     {
         case IMD::X:
             VAbstractValApplication::VApp()->SetDimensionHeight(value);
@@ -2436,7 +2408,7 @@ void MainWindow::SetDimensionBases()
 {
     const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
 
-    auto SetBase = [dimensions](int index, const QPointer<QComboBox>& control, double &value)
+    auto SetBase = [dimensions](int index, const QPointer<QComboBox> &control, double &value)
     {
         if (dimensions.size() > index)
         {
@@ -2509,7 +2481,7 @@ void MainWindow::ExportDraw(const QString &fileName)
         item->setEnabled(true);
         if (item->type() == VGraphicsSimpleTextItem::Type)
         {
-            auto *text = dynamic_cast<VGraphicsSimpleTextItem*>(item);
+            auto *text = dynamic_cast<VGraphicsSimpleTextItem *>(item);
             text->setBrush(text->BaseColor()); // Regular update doesn't work on labels
         }
     }
@@ -2610,7 +2582,7 @@ auto MainWindow::SavePatternAs(const QString &fileName) -> bool
     const bool wasModified = doc->IsModified(); // Need because SetReadOnly() will change internal state
     const bool readOnly = doc->IsReadOnly();
 
-    doc->SetReadOnly(false);// Save as... disable read only state
+    doc->SetReadOnly(false); // Save as... disable read only state
     QString error;
     const bool result = SavePattern(fileName, error);
     if (not result)
@@ -2702,7 +2674,7 @@ auto MainWindow::FullParsePattern() -> bool
     {
         if (VAbstractValApplication::VApp()->getOpeningPattern())
         {
-            futureTestUniqueId = QtConcurrent::run([this](){doc->TestUniqueId();});
+            futureTestUniqueId = QtConcurrent::run([this]() { doc->TestUniqueId(); });
         }
 
         SetEnabledGUI(true);
@@ -2788,8 +2760,9 @@ auto MainWindow::FullParsePattern() -> bool
 #if defined(Q_OS_MAC)
 void MainWindow::OpenAt(QAction *where)
 {
-    const QString path = VAbstractValApplication::VApp()->GetPatternPath()
-            .left(VAbstractValApplication::VApp()->GetPatternPath().indexOf(where->text())) + where->text();
+    const QString path = VAbstractValApplication::VApp()->GetPatternPath().left(
+                             VAbstractValApplication::VApp()->GetPatternPath().indexOf(where->text())) +
+                         where->text();
     if (path == VAbstractValApplication::VApp()->GetPatternPath())
     {
         return;
@@ -2798,7 +2771,7 @@ void MainWindow::OpenAt(QAction *where)
     process.start(QStringLiteral("/usr/bin/open"), QStringList() << path, QIODevice::ReadOnly);
     process.waitForFinished();
 }
-#endif //defined(Q_OS_MAC)
+#endif // defined(Q_OS_MAC)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -2836,14 +2809,14 @@ void MainWindow::ToolBarOption()
     m_doubleSpinBoxScale->setDecimals(1);
     m_doubleSpinBoxScale->setSuffix(QChar('%'));
     ScaleChanged(ui->view->transform().m11());
-    connect(m_doubleSpinBoxScale.data(), QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, [this](double d){ui->view->Zoom(d/100.0);});
+    connect(m_doubleSpinBoxScale.data(), QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            [this](double d) { ui->view->Zoom(d / 100.0); });
     ui->toolBarOption->addWidget(m_doubleSpinBoxScale);
 
     ui->toolBarOption->addSeparator();
 
-    m_mouseCoordinate = new QLabel(QStringLiteral("0, 0 (%1)")
-                                   .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true)));
+    m_mouseCoordinate =
+        new QLabel(QStringLiteral("0, 0 (%1)").arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true)));
     ui->toolBarOption->addWidget(m_mouseCoordinate);
 
     ui->toolBarOption->addSeparator();
@@ -2877,19 +2850,20 @@ void MainWindow::ToolBarDraws()
     ui->toolBarDraws->addWidget(m_comboBoxDraws);
     m_comboBoxDraws->setSizeAdjustPolicy(QComboBox::AdjustToContents);
     m_comboBoxDraws->setEnabled(false);
-    connect(m_comboBoxDraws, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, [this](int index){ChangePP(index);});
+    connect(m_comboBoxDraws, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            [this](int index) { ChangePP(index); });
 
-    connect(ui->actionOptionDraw, &QAction::triggered, this, [this]()
-    {
-        QString draw = doc->GetNameActivPP();
-        bool ok = PatternPieceName(draw);
-        if (not ok)
-        {
-            return;
-        }
-        VAbstractApplication::VApp()->getUndoStack()->push(new RenamePP(doc, draw, m_comboBoxDraws));
-    });
+    connect(ui->actionOptionDraw, &QAction::triggered, this,
+            [this]()
+            {
+                QString draw = doc->GetNameActivPP();
+                bool ok = PatternPieceName(draw);
+                if (not ok)
+                {
+                    return;
+                }
+                VAbstractApplication::VApp()->getUndoStack()->push(new RenamePP(doc, draw, m_comboBoxDraws));
+            });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2972,20 +2946,21 @@ void MainWindow::ToolBarTools()
 #else
         QKeySequence(Qt::ShiftModifier + Qt::Key_Plus));
 #endif
-    connect(ui->actionIncreaseLabelFont, &QAction::triggered, this, [this]()
-    {
-        VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
-        settings->SetPatternLabelFontSize(settings->GetPatternLabelFontSize() + 1);
-        if (m_sceneDraw)
-        {
-            m_sceneDraw->update();
-        }
+    connect(ui->actionIncreaseLabelFont, &QAction::triggered, this,
+            [this]()
+            {
+                VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+                settings->SetPatternLabelFontSize(settings->GetPatternLabelFontSize() + 1);
+                if (m_sceneDraw)
+                {
+                    m_sceneDraw->update();
+                }
 
-        if (m_sceneDetails)
-        {
-            m_sceneDetails->update();
-        }
-    });
+                if (m_sceneDetails)
+                {
+                    m_sceneDetails->update();
+                }
+            });
 
     ui->actionDecreaseLabelFont->setShortcut(
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -2993,20 +2968,21 @@ void MainWindow::ToolBarTools()
 #else
         QKeySequence(Qt::ShiftModifier + Qt::Key_Minus));
 #endif
-    connect(ui->actionDecreaseLabelFont, &QAction::triggered, this, [this]()
-    {
-        VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
-        settings->SetPatternLabelFontSize(settings->GetPatternLabelFontSize() - 1);
-        if (m_sceneDraw)
-        {
-            m_sceneDraw->update();
-        }
+    connect(ui->actionDecreaseLabelFont, &QAction::triggered, this,
+            [this]()
+            {
+                VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+                settings->SetPatternLabelFontSize(settings->GetPatternLabelFontSize() - 1);
+                if (m_sceneDraw)
+                {
+                    m_sceneDraw->update();
+                }
 
-        if (m_sceneDetails)
-        {
-            m_sceneDetails->update();
-        }
-    });
+                if (m_sceneDetails)
+                {
+                    m_sceneDetails->update();
+                }
+            });
 
     ui->actionOriginalLabelFont->setShortcut(
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -3014,20 +2990,21 @@ void MainWindow::ToolBarTools()
 #else
         QKeySequence(Qt::ShiftModifier + Qt::Key_0));
 #endif
-    connect(ui->actionOriginalLabelFont, &QAction::triggered, this, [this]()
-    {
-        VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
-        settings->SetPatternLabelFontSize(VCommonSettings::GetDefPatternLabelFontSize());
-        if (m_sceneDraw)
-        {
-            m_sceneDraw->update();
-        }
+    connect(ui->actionOriginalLabelFont, &QAction::triggered, this,
+            [this]()
+            {
+                VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+                settings->SetPatternLabelFontSize(VCommonSettings::GetDefPatternLabelFontSize());
+                if (m_sceneDraw)
+                {
+                    m_sceneDraw->update();
+                }
 
-        if (m_sceneDetails)
-        {
-            m_sceneDetails->update();
-        }
-    });
+                if (m_sceneDetails)
+                {
+                    m_sceneDetails->update();
+                }
+            });
 
     ui->actionHideLabels->setShortcut(
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -3036,19 +3013,20 @@ void MainWindow::ToolBarTools()
         QKeySequence(Qt::AltModifier + Qt::Key_L));
 #endif
     ui->actionHideLabels->setChecked(VAbstractValApplication::VApp()->ValentinaSettings()->GetHideLabels());
-    connect(ui->actionHideLabels, &QAction::triggered, this, [this](bool checked)
-    {
-        VAbstractValApplication::VApp()->ValentinaSettings()->SetHideLabels(checked);
-        if (m_sceneDraw)
-        {
-            m_sceneDraw->update();
-        }
+    connect(ui->actionHideLabels, &QAction::triggered, this,
+            [this](bool checked)
+            {
+                VAbstractValApplication::VApp()->ValentinaSettings()->SetHideLabels(checked);
+                if (m_sceneDraw)
+                {
+                    m_sceneDraw->update();
+                }
 
-        if (m_sceneDetails)
-        {
-            m_sceneDetails->update();
-        }
-    });
+                if (m_sceneDetails)
+                {
+                    m_sceneDetails->update();
+                }
+            });
 
     QT_WARNING_POP
 }
@@ -3133,10 +3111,11 @@ void MainWindow::MouseMove(const QPointF &scenePos)
 {
     if (not m_mouseCoordinate.isNull())
     {
-        m_mouseCoordinate->setText(QStringLiteral("%1, %2 (%3)")
-                                   .arg(static_cast<qint32>(VAbstractValApplication::VApp()->fromPixel(scenePos.x())))
-                                   .arg(static_cast<qint32>(VAbstractValApplication::VApp()->fromPixel(scenePos.y())))
-                                   .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true)));
+        m_mouseCoordinate->setText(
+            QStringLiteral("%1, %2 (%3)")
+                .arg(static_cast<qint32>(VAbstractValApplication::VApp()->fromPixel(scenePos.x())))
+                .arg(static_cast<qint32>(VAbstractValApplication::VApp()->fromPixel(scenePos.y())))
+                .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true)));
     }
 }
 
@@ -3152,7 +3131,7 @@ void MainWindow::CancelTool()
     Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Not all tools were handled.");
 
     qCDebug(vMainWindow, "Canceling tool.");
-    if(not m_dialogTool.isNull())
+    if (not m_dialogTool.isNull())
     {
         m_dialogTool->hide();
         m_dialogTool->deleteLater();
@@ -3163,7 +3142,7 @@ void MainWindow::CancelTool()
     currentScene->clearSelection();
     emit ui->view->itemClicked(nullptr); // Hide visualization to avoid a crash
 
-    switch ( m_currentTool )
+    switch (m_currentTool)
     {
         case Tool::Arrow:
             for (auto *pointer : qAsConst(m_toolButtonPointerList))
@@ -3196,7 +3175,7 @@ void MainWindow::CancelTool()
         case Tool::BackgroundPixmapImage:
         case Tool::BackgroundSVGImage:
             Q_UNREACHABLE(); //-V501
-            //Nothing to do here because we can't create this tool from main window.
+            // Nothing to do here because we can't create this tool from main window.
             break;
         case Tool::EndLine:
             ui->toolButtonEndLine->setChecked(false);
@@ -3342,7 +3321,7 @@ QT_WARNING_POP
 /**
  * @brief ArrowTool enable arrow tool.
  */
-void  MainWindow::ArrowTool(bool checked)
+void MainWindow::ArrowTool(bool checked)
 {
     if (checked && m_currentTool != Tool::Arrow)
     {
@@ -3367,7 +3346,7 @@ void  MainWindow::ArrowTool(bool checked)
         emit EnableSplinePathSelection(false);
         emit EnableNodeLabelSelection(true);
         emit EnableNodePointSelection(true);
-        emit EnableDetailSelection(true);// Disable when done visualization details
+        emit EnableDetailSelection(true); // Disable when done visualization details
         emit EnableBackgroundImageSelection(true);
 
         // Hovering
@@ -3405,7 +3384,7 @@ void  MainWindow::ArrowTool(bool checked)
  * @brief keyPressEvent handle key press events.
  * @param event key event.
  */
-void MainWindow::keyPressEvent ( QKeyEvent * event )
+void MainWindow::keyPressEvent(QKeyEvent *event)
 {
     switch (event->key())
     {
@@ -3419,7 +3398,7 @@ void MainWindow::keyPressEvent ( QKeyEvent * event )
         default:
             break;
     }
-    QMainWindow::keyPressEvent ( event );
+    QMainWindow::keyPressEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3429,7 +3408,7 @@ void MainWindow::keyPressEvent ( QKeyEvent * event )
 void MainWindow::SaveCurrentScene()
 {
     if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation ||
-            VAbstractValApplication::VApp()->GetDrawMode() == Draw::Modeling)
+        VAbstractValApplication::VApp()->GetDrawMode() == Draw::Modeling)
     {
         auto *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
         SCASSERT(scene != nullptr)
@@ -3487,7 +3466,7 @@ void MainWindow::ActionDraw(bool checked)
         RestoreCurrentScene();
 
         VAbstractValApplication::VApp()->SetDrawMode(Draw::Calculation);
-        m_comboBoxDraws->setCurrentIndex(m_currentDrawIndex);//restore current pattern peace
+        m_comboBoxDraws->setCurrentIndex(m_currentDrawIndex); // restore current pattern peace
         m_drawMode = true;
 
         SetEnableTool(true);
@@ -3526,12 +3505,12 @@ void MainWindow::ActionDetails(bool checked)
     {
         ArrowTool(true);
 
-        if(m_drawMode)
+        if (m_drawMode)
         {
-            m_currentDrawIndex = m_comboBoxDraws->currentIndex();//save current pattern piece
+            m_currentDrawIndex = m_comboBoxDraws->currentIndex(); // save current pattern piece
             m_drawMode = false;
         }
-        m_comboBoxDraws->setCurrentIndex(m_comboBoxDraws->count()-1);// Need to get data about all details
+        m_comboBoxDraws->setCurrentIndex(m_comboBoxDraws->count() - 1); // Need to get data about all details
 
         m_leftGoToStage->setPixmap(QPixmap(QStringLiteral("://icon/24x24/right_to_left_arrow.png")));
         m_rightGoToStage->setPixmap(QPixmap(QStringLiteral("://icon/24x24/left_to_right_arrow.png")));
@@ -3540,12 +3519,13 @@ void MainWindow::ActionDetails(bool checked)
         ui->actionDetails->setChecked(true);
         ui->actionLayout->setChecked(false);
 
-        if(not VAbstractValApplication::VApp()->getOpeningPattern())
+        if (not VAbstractValApplication::VApp()->getOpeningPattern())
         {
             if (pattern->DataPieces()->count() == 0)
             {
-                QMessageBox::information(this, tr("Detail mode"), tr("You can't use Detail mode yet. "
-                                                                     "Please, create at least one workpiece."),
+                QMessageBox::information(this, tr("Detail mode"),
+                                         tr("You can't use Detail mode yet. "
+                                            "Please, create at least one workpiece."),
                                          QMessageBox::Ok, QMessageBox::Ok);
                 ActionDraw(true);
                 return;
@@ -3611,12 +3591,12 @@ void MainWindow::ActionLayout(bool checked)
 
     ArrowTool(true);
 
-    if(m_drawMode)
+    if (m_drawMode)
     {
-        m_currentDrawIndex = m_comboBoxDraws->currentIndex();//save current pattern piece
+        m_currentDrawIndex = m_comboBoxDraws->currentIndex(); // save current pattern piece
         m_drawMode = false;
     }
-    m_comboBoxDraws->setCurrentIndex(m_comboBoxDraws->count()-1);// Need to get data about all details
+    m_comboBoxDraws->setCurrentIndex(m_comboBoxDraws->count() - 1); // Need to get data about all details
 
     m_leftGoToStage->setPixmap(QPixmap(QStringLiteral("://icon/24x24/right_to_left_arrow.png")));
     m_rightGoToStage->setPixmap(QPixmap(QStringLiteral("://icon/24x24/fast_forward_right_to_left_arrow.png")));
@@ -3626,13 +3606,14 @@ void MainWindow::ActionLayout(bool checked)
     ui->actionLayout->setChecked(true);
 
     QVector<DetailForLayout> details;
-    if(not VAbstractValApplication::VApp()->getOpeningPattern())
+    if (not VAbstractValApplication::VApp()->getOpeningPattern())
     {
         const QHash<quint32, VPiece> *allDetails = pattern->DataPieces();
         if (allDetails->count() == 0)
         {
-            QMessageBox::information(this, tr("Layout mode"), tr("You can't use Layout mode yet. "
-                                                                 "Please, create at least one workpiece."),
+            QMessageBox::information(this, tr("Layout mode"),
+                                     tr("You can't use Layout mode yet. "
+                                        "Please, create at least one workpiece."),
                                      QMessageBox::Ok, QMessageBox::Ok);
             ActionDraw(true);
             return;
@@ -3643,17 +3624,17 @@ void MainWindow::ActionLayout(bool checked)
 
         if (details.count() == 0)
         {
-            QMessageBox::information(this, tr("Layout mode"),  tr("You can't use Layout mode yet. Please, "
-                                                                  "include at least one detail in layout."),
+            QMessageBox::information(this, tr("Layout mode"),
+                                     tr("You can't use Layout mode yet. Please, "
+                                        "include at least one detail in layout."),
                                      QMessageBox::Ok, QMessageBox::Ok);
             VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation ? ActionDraw(true)
                                                                                 : ActionDetails(true);
             return;
         }
-
     }
 
-    m_comboBoxDraws->setCurrentIndex(-1);// Hide pattern pieces
+    m_comboBoxDraws->setCurrentIndex(-1); // Hide pattern pieces
 
     qCDebug(vMainWindow, "Show layout scene");
 
@@ -3669,8 +3650,7 @@ void MainWindow::ActionLayout(bool checked)
         QMessageBox::warning(this, tr("Layout mode"),
                              tr("You can't use Layout mode yet.") + QStringLiteral(" \n") + e.ErrorMessage(),
                              QMessageBox::Ok, QMessageBox::Ok);
-        VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation ? ActionDraw(true)
-                                                                            : ActionDetails(true);
+        VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation ? ActionDraw(true) : ActionDetails(true);
         return;
     }
 
@@ -3737,31 +3717,31 @@ auto MainWindow::on_actionSaveAs_triggered() -> bool
     }
 
     QString newFileName = tr("pattern") + QStringLiteral(".val");
-    if(not VAbstractValApplication::VApp()->GetPatternPath().isEmpty())
+    if (not VAbstractValApplication::VApp()->GetPatternPath().isEmpty())
     {
         newFileName = StrippedName(VAbstractValApplication::VApp()->GetPatternPath());
     }
 
     QString filters(tr("Pattern files") + QStringLiteral("(*.val)"));
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"),
-                                                    dir + QChar('/') + newFileName,
-                                                    filters, nullptr, VAbstractApplication::VApp()->NativeFileDialog());
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"), dir + QChar('/') + newFileName, filters,
+                                                    nullptr, VAbstractApplication::VApp()->NativeFileDialog());
 
-    auto RemoveTempDir = qScopeGuard([usedNotExistedDir, dir]()
-    {
-        if (usedNotExistedDir)
+    auto RemoveTempDir = qScopeGuard(
+        [usedNotExistedDir, dir]()
         {
-            QDir directory(dir);
-            directory.rmpath(QChar('.'));
-        }
-    });
+            if (usedNotExistedDir)
+            {
+                QDir directory(dir);
+                directory.rmpath(QChar('.'));
+            }
+        });
 
     if (fileName.isEmpty())
     {
         return false;
     }
 
-    QFileInfo f( fileName );
+    QFileInfo f(fileName);
     if (f.suffix().isEmpty() && f.suffix() != QLatin1String("val"))
     {
         fileName += QLatin1String(".val");
@@ -3795,8 +3775,8 @@ auto MainWindow::on_actionSave_triggered() -> bool
         return on_actionSaveAs_triggered();
     }
 
-    if (m_curFileFormatVersion < VPatternConverter::PatternMaxVer
-            && not ContinueFormatRewrite(m_curFileFormatVersionStr, VPatternConverter::PatternMaxVerStr))
+    if (m_curFileFormatVersion < VPatternConverter::PatternMaxVer &&
+        not ContinueFormatRewrite(m_curFileFormatVersionStr, VPatternConverter::PatternMaxVerStr))
     {
         return false;
     }
@@ -3835,7 +3815,7 @@ void MainWindow::on_actionOpen_triggered()
 {
     qCDebug(vMainWindow, "Openning new file.");
     const QString filter(tr("Pattern files") + QStringLiteral(" (*.val)"));
-    //Get list last open files
+    // Get list last open files
     const QStringList files = VAbstractValApplication::VApp()->ValentinaSettings()->GetRecentFileList();
     QString dir;
     if (files.isEmpty())
@@ -3844,7 +3824,7 @@ void MainWindow::on_actionOpen_triggered()
     }
     else
     {
-        //Absolute path to last open file
+        // Absolute path to last open file
         dir = QFileInfo(ConstFirst<QString>(files)).absolutePath();
     }
     qCDebug(vMainWindow, "Run QFileDialog::getOpenFileName: dir = %s.", qUtf8Printable(dir));
@@ -3872,15 +3852,16 @@ void MainWindow::on_actionOpenPuzzle_triggered()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::on_actionCreateManualLayout_triggered()
 {
-    QTemporaryFile rldFile(QDir::tempPath()+"/puzzle.rld.XXXXXX");
+    QTemporaryFile rldFile(QDir::tempPath() + "/puzzle.rld.XXXXXX");
     if (rldFile.open())
     {
         QVector<DetailForLayout> detailsInLayout = SortDetailsForLayout(pattern->DataPieces());
 
         if (detailsInLayout.count() == 0)
         {
-            QMessageBox::information(this, tr("Layout mode"),  tr("You don't have enough details to export. Please, "
-                                                                 "include at least one detail in layout."),
+            QMessageBox::information(this, tr("Layout mode"),
+                                     tr("You don't have enough details to export. Please, "
+                                        "include at least one detail in layout."),
                                      QMessageBox::Ok, QMessageBox::Ok);
             return;
         }
@@ -3909,7 +3890,7 @@ void MainWindow::on_actionCreateManualLayout_triggered()
         exporter.SetYScale(layoutScale.GetYScale());
         exporter.ExportToRLD(listDetails);
 
-        QStringList arguments {"-r", rldFile.fileName()};
+        QStringList arguments{"-r", rldFile.fileName()};
         if (isNoScaling)
         {
             arguments.append(QStringLiteral("--") + LONG_OPTION_NO_HDPI_SCALING);
@@ -3930,7 +3911,7 @@ void MainWindow::on_actionUpdateManualLayout_triggered()
 {
     const QString filter(tr("Manual layout files") + QStringLiteral(" (*.vlt)"));
 
-    //Use standard path to manual layouts
+    // Use standard path to manual layouts
     const QString path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathManualLayouts();
 
     bool usedNotExistedDir = false;
@@ -3940,14 +3921,15 @@ void MainWindow::on_actionUpdateManualLayout_triggered()
         usedNotExistedDir = directory.mkpath(QChar('.'));
     }
 
-    auto RemoveUnsuded = qScopeGuard([usedNotExistedDir, path]()
-    {
-        if (usedNotExistedDir)
+    auto RemoveUnsuded = qScopeGuard(
+        [usedNotExistedDir, path]()
         {
-            QDir directory(path);
-            directory.rmpath(QChar('.'));
-        }
-    });
+            if (usedNotExistedDir)
+            {
+                QDir directory(path);
+                directory.rmpath(QChar('.'));
+            }
+        });
 
     const QString filePath = QFileDialog::getOpenFileName(this, tr("Select manual layout"), path, filter, nullptr);
 
@@ -3956,7 +3938,7 @@ void MainWindow::on_actionUpdateManualLayout_triggered()
         return;
     }
 
-    QTemporaryFile rldFile(QDir::tempPath()+"/puzzle.rld.XXXXXX");
+    QTemporaryFile rldFile(QDir::tempPath() + "/puzzle.rld.XXXXXX");
     rldFile.setAutoRemove(false);
     if (rldFile.open())
     {
@@ -3964,8 +3946,9 @@ void MainWindow::on_actionUpdateManualLayout_triggered()
 
         if (detailsInLayout.count() == 0)
         {
-            QMessageBox::information(this, tr("Layout mode"),  tr("You don't have enough details to export. Please, "
-                                                                 "include at least one detail in layout."),
+            QMessageBox::information(this, tr("Layout mode"),
+                                     tr("You don't have enough details to export. Please, "
+                                        "include at least one detail in layout."),
                                      QMessageBox::Ok, QMessageBox::Ok);
             return;
         }
@@ -3994,7 +3977,7 @@ void MainWindow::on_actionUpdateManualLayout_triggered()
         exporter.SetYScale(layoutScale.GetYScale());
         exporter.ExportToRLD(listDetails);
 
-        QStringList arguments {filePath, "-r", rldFile.fileName()};
+        QStringList arguments{filePath, "-r", rldFile.fileName()};
         if (isNoScaling)
         {
             arguments.append(QStringLiteral("--") + LONG_OPTION_NO_HDPI_SCALING);
@@ -4013,9 +3996,9 @@ void MainWindow::on_actionUpdateManualLayout_triggered()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ActionAddBackgroundImage()
 {
-    const QString fileName = QFileDialog::getOpenFileName(this, tr("Select background image"), QDir::homePath(),
-                                                          PrepareImageFilters(), nullptr,
-                                                          VAbstractApplication::VApp()->NativeFileDialog());
+    const QString fileName =
+        QFileDialog::getOpenFileName(this, tr("Select background image"), QDir::homePath(), PrepareImageFilters(),
+                                     nullptr, VAbstractApplication::VApp()->NativeFileDialog());
     if (not fileName.isEmpty())
     {
         QRect viewportRect(0, 0, ui->view->viewport()->width(), ui->view->viewport()->height());
@@ -4034,7 +4017,7 @@ void MainWindow::Clear()
     qCDebug(vMainWindow, "Unlocked pattern file.");
     ActionDraw(true);
     qCDebug(vMainWindow, "Returned to Draw mode.");
-    setCurrentFile(QString());// Keep before cleaning a pattern data to prevent a crash
+    setCurrentFile(QString()); // Keep before cleaning a pattern data to prevent a crash
     pattern->Clear();
     qCDebug(vMainWindow, "Clearing pattern.");
     if (not VAbstractValApplication::VApp()->GetPatternPath().isEmpty() && not doc->MPath().isEmpty())
@@ -4115,7 +4098,7 @@ void MainWindow::FileClosedCorrect()
 {
     WriteSettings();
 
-    //File was closed correct.
+    // File was closed correct.
     QStringList restoreFiles = VAbstractValApplication::VApp()->ValentinaSettings()->GetRestoreFileList();
     restoreFiles.removeAll(VAbstractValApplication::VApp()->GetPatternPath());
     VAbstractValApplication::VApp()->ValentinaSettings()->SetRestoreFileList(restoreFiles);
@@ -4155,12 +4138,12 @@ void MainWindow::FullParseFile()
 
     if (not m_drawMode)
     {
-        m_comboBoxDraws->setCurrentIndex(m_comboBoxDraws->count()-1);
+        m_comboBoxDraws->setCurrentIndex(m_comboBoxDraws->count() - 1);
     }
     else
     {
         const qint32 index = m_comboBoxDraws->findText(patternPiece);
-        if ( index != -1 )
+        if (index != -1)
         {
             m_comboBoxDraws->setCurrentIndex(index);
         }
@@ -4183,7 +4166,7 @@ void MainWindow::GlobalChangePP(const QString &patternPiece)
     const qint32 index = m_comboBoxDraws->findText(patternPiece);
     try
     {
-        if ( index != -1 )
+        if (index != -1)
         { // -1 for not found
             ChangePP(index, false);
             m_comboBoxDraws->blockSignals(true);
@@ -4197,8 +4180,8 @@ void MainWindow::GlobalChangePP(const QString &patternPiece)
     }
     catch (VExceptionBadId &e)
     {
-        qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Bad id.")),
-                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Bad id.")), qUtf8Printable(e.ErrorMessage()),
+                   qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
         if (not VApplication::IsGUIMode())
         {
@@ -4251,7 +4234,7 @@ void MainWindow::NextPatternPiece()
         return;
     }
 
-    if (index == m_comboBoxDraws->count()-1)
+    if (index == m_comboBoxDraws->count() - 1)
     {
         index = 0;
     }
@@ -4279,9 +4262,9 @@ void MainWindow::SetEnabledGUI(bool enabled)
 
         SetEnableTool(enabled);
         ui->toolBarOption->setEnabled(enabled);
-    #ifndef QT_NO_CURSOR
+#ifndef QT_NO_CURSOR
         QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
-    #endif
+#endif
     }
 }
 
@@ -4351,7 +4334,7 @@ void MainWindow::SetEnableWidgets(bool enable)
     undoAction->setEnabled(enableOnDesignStage && VAbstractApplication::VApp()->getUndoStack()->canUndo());
     redoAction->setEnabled(enableOnDesignStage && VAbstractApplication::VApp()->getUndoStack()->canRedo());
 
-    //Now we don't want allow user call context menu
+    // Now we don't want allow user call context menu
     m_sceneDraw->SetDisableTools(!enable, doc->GetNameActivPP());
     ui->view->setEnabled(enable);
 }
@@ -4365,7 +4348,7 @@ void MainWindow::on_actionNew_triggered()
     if (m_comboBoxDraws->count() == 0)
     {
         qCDebug(vMainWindow, "New PP.");
-        QString patternPieceName = tr("Pattern piece %1").arg(m_comboBoxDraws->count()+1);
+        QString patternPieceName = tr("Pattern piece %1").arg(m_comboBoxDraws->count() + 1);
         qCDebug(vMainWindow, "Generated PP name: %s", qUtf8Printable(patternPieceName));
 
         qCDebug(vMainWindow, "First PP");
@@ -4382,14 +4365,14 @@ void MainWindow::on_actionNew_triggered()
             return;
         }
 
-        //Set scene size to size scene view
+        // Set scene size to size scene view
         VMainGraphicsView::NewSceneRect(m_sceneDraw, ui->view);
         VMainGraphicsView::NewSceneRect(m_sceneDetails, ui->view);
 
         AddPP(patternPieceName);
 
-        m_mouseCoordinate = new QLabel(QStringLiteral("0, 0 (%1)")
-                                       .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true)));
+        m_mouseCoordinate = new QLabel(
+            QStringLiteral("0, 0 (%1)").arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true)));
         ui->toolBarOption->addWidget(m_mouseCoordinate);
 
         m_curFileFormatVersion = VPatternConverter::PatternMaxVer;
@@ -4415,7 +4398,7 @@ void MainWindow::PatternChangesWereSaved(bool saved)
     {
         const bool state = doc->IsModified() || !saved;
         setWindowModified(state);
-        not m_patternReadOnly ? ui->actionSave->setEnabled(state): ui->actionSave->setEnabled(false);
+        not m_patternReadOnly ? ui->actionSave->setEnabled(state) : ui->actionSave->setEnabled(false);
         m_layoutSettings->SetLayoutStale(true);
         isNeedAutosave = not saved;
     }
@@ -4460,7 +4443,7 @@ void MainWindow::DimensionBBaseChanged()
 
         if (dimensions.size() > 2)
         {
-            const MeasurementDimension_p& dimension = dimensions.at(2);
+            const MeasurementDimension_p &dimension = dimensions.at(2);
             InitDimensionGradation(2, dimension, m_dimensionC);
         }
 
@@ -4566,7 +4549,7 @@ void MainWindow::DeleteBackgroundImageItem(const QUuid &id)
     {
         VBackgroundImageItem *item = m_backgroundImages.value(id);
         emit ui->view->itemClicked(nullptr); // Hide visualization to avoid a crash
-        item->setVisible(false); // Do not remove the item from scene to prevent crashes.
+        item->setVisible(false);             // Do not remove the item from scene to prevent crashes.
         if (m_backgroudcontrols != nullptr && m_backgroudcontrols->Id() == id)
         {
             m_backgroudcontrols->ActivateControls(QUuid());
@@ -4643,7 +4626,7 @@ void MainWindow::ParseBackgroundImages()
 {
     // No memory leak. Scene should take care of these items
     m_backgroudcontrols = nullptr; // force creating new controls
-    m_backgroundImages.clear(); // clear dangling pointers
+    m_backgroundImages.clear();    // clear dangling pointers
 
     QVector<VBackgroundPatternImage> allImages = doc->GetBackgroundImages();
     for (const auto &image : allImages)
@@ -4661,7 +4644,8 @@ void MainWindow::ActionHistory_triggered(bool checked)
         m_dialogHistory = new DialogHistory(pattern, doc, this);
         m_dialogHistory->setWindowFlags(Qt::Window);
         connect(this, &MainWindow::RefreshHistory, m_dialogHistory.data(), &DialogHistory::UpdateHistory);
-        connect(m_dialogHistory.data(), &DialogHistory::DialogClosed, this, [this]()
+        connect(m_dialogHistory.data(), &DialogHistory::DialogClosed, this,
+                [this]()
                 {
                     ui->actionHistory->setChecked(false);
                     delete m_dialogHistory;
@@ -4681,10 +4665,9 @@ void MainWindow::ActionHistory_triggered(bool checked)
 void MainWindow::ActionExportRecipe_triggered()
 {
     QString filters(tr("Recipe files") + QStringLiteral("(*.vpr)"));
-    QString fileName =
-        QFileDialog::getSaveFileName(this, tr("Export recipe"),
-                                     QDir::homePath() + '/' + tr("recipe") + QStringLiteral(".vpr"),
-                                     filters, nullptr, VAbstractApplication::VApp()->NativeFileDialog());
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Export recipe"),
+                                                    QDir::homePath() + '/' + tr("recipe") + QStringLiteral(".vpr"),
+                                                    filters, nullptr, VAbstractApplication::VApp()->NativeFileDialog());
     if (fileName.isEmpty())
     {
         return;
@@ -4709,7 +4692,7 @@ void MainWindow::ActionExportRecipe_triggered()
 void MainWindow::ActionNewDraw_triggered()
 {
     qCDebug(vMainWindow, "New PP.");
-    QString patternPieceName = tr("Pattern piece %1").arg(m_comboBoxDraws->count()+1);
+    QString patternPieceName = tr("Pattern piece %1").arg(m_comboBoxDraws->count() + 1);
     qCDebug(vMainWindow, "Generated PP name: %s", qUtf8Printable(patternPieceName));
 
     qCDebug(vMainWindow, "PP count %d", m_comboBoxDraws->count());
@@ -4750,7 +4733,8 @@ void MainWindow::ActionFinalMeasurements_triggered()
     {
         m_dialogFMeasurements = new DialogFinalMeasurements(doc, this);
         m_dialogFMeasurements->setAttribute(Qt::WA_DeleteOnClose);
-        connect(m_dialogFMeasurements.data(), &DialogFinalMeasurements::finished, this, [this](int result)
+        connect(m_dialogFMeasurements.data(), &DialogFinalMeasurements::finished, this,
+                [this](int result)
                 {
                     if (result == QDialog::Accepted)
                     {
@@ -4774,7 +4758,7 @@ void MainWindow::ActionShowMainPath_triggered(bool checked)
     const QList<quint32> ids = pattern->DataPieces()->keys();
     const bool updateChildren = false;
     QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-    for(const auto &id : ids)
+    for (const auto &id : ids)
     {
         try
         {
@@ -4783,8 +4767,9 @@ void MainWindow::ActionShowMainPath_triggered(bool checked)
                 tool->RefreshGeometry(updateChildren);
             }
         }
-        catch(VExceptionBadId &)
-        {}
+        catch (VExceptionBadId &)
+        {
+        }
     }
     QGuiApplication::restoreOverrideCursor();
 }
@@ -4839,15 +4824,15 @@ void MainWindow::InitDimensionControls()
         {
             if (dimensions.size() > index)
             {
-                const MeasurementDimension_p& dimension = dimensions.at(index);
+                const MeasurementDimension_p &dimension = dimensions.at(index);
 
                 if (name.isNull())
                 {
-                    name = new QLabel(dimension->Name()+QChar(':'));
+                    name = new QLabel(dimension->Name() + QChar(':'));
                 }
                 else
                 {
-                    name->setText(dimension->Name()+QChar(':'));
+                    name->setText(dimension->Name() + QChar(':'));
                 }
                 name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension, m_m->IsFullCircumference()));
 
@@ -4870,20 +4855,20 @@ void MainWindow::InitDimensionControls()
 
         if (not m_dimensionA.isNull())
         {
-            connect(m_dimensionA.data(), QOverload<int>::of(&QComboBox::currentIndexChanged),
-                    this, &MainWindow::DimensionABaseChanged);
+            connect(m_dimensionA.data(), QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+                    &MainWindow::DimensionABaseChanged);
         }
 
         if (not m_dimensionB.isNull())
         {
-            connect(m_dimensionB.data(), QOverload<int>::of(&QComboBox::currentIndexChanged),
-                    this, &MainWindow::DimensionBBaseChanged);
+            connect(m_dimensionB.data(), QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+                    &MainWindow::DimensionBBaseChanged);
         }
 
         if (not m_dimensionC.isNull())
         {
-            connect(m_dimensionC.data(), QOverload<int>::of(&QComboBox::currentIndexChanged),
-                    this, &MainWindow::DimensionCBaseChanged);
+            connect(m_dimensionC.data(), QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+                    &MainWindow::DimensionCBaseChanged);
         }
 
         ui->toolBarOption->addSeparator();
@@ -4956,7 +4941,7 @@ void MainWindow::InitDimensionXGradation(const QVector<qreal> &bases, const Dime
 {
     const QString unit = UnitsToStr(VAbstractValApplication::VApp()->MeasurementsUnits(), true);
 
-    for(auto base : bases)
+    for (auto base : bases)
     {
         if (VFuzzyContains(labels, base) && not VFuzzyValue(labels, base).isEmpty())
         {
@@ -4976,7 +4961,7 @@ void MainWindow::InitDimensionYWZGradation(const QVector<qreal> &bases, const Di
     const bool fc = m_m->IsFullCircumference();
     const QString unit = UnitsToStr(VAbstractValApplication::VApp()->MeasurementsUnits(), true);
 
-    for(auto base : bases)
+    for (auto base : bases)
     {
         if (VFuzzyContains(labels, base) && not VFuzzyValue(labels, base).isEmpty())
         {
@@ -4986,7 +4971,7 @@ void MainWindow::InitDimensionYWZGradation(const QVector<qreal> &bases, const Di
         {
             if (bodyMeasurement)
             {
-                control->addItem(QStringLiteral("%1 %2").arg(fc ? base*2 : base).arg(unit), base);
+                control->addItem(QStringLiteral("%1 %2").arg(fc ? base * 2 : base).arg(unit), base);
             }
             else
             {
@@ -5007,8 +4992,8 @@ void MainWindow::SetEnableTool(bool enable)
     bool modelingTools = false;
     bool layoutTools = false;
 
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wswitch-default")
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wswitch-default")
     switch (VAbstractValApplication::VApp()->GetDrawMode())
     {
         case Draw::Calculation:
@@ -5021,12 +5006,12 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
             layoutTools = enable;
             break;
     }
-QT_WARNING_POP
+    QT_WARNING_POP
 
     // This check helps to find missed tools
     Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Not all tools were handled.");
 
-    //Drawing Tools
+    // Drawing Tools
     ui->toolButtonEndLine->setEnabled(drawTools);
     ui->toolButtonLine->setEnabled(drawTools);
     ui->toolButtonAlongLine->setEnabled(drawTools);
@@ -5078,12 +5063,12 @@ QT_WARNING_POP
         pointer->setChecked(drawTools || modelingTools);
     }
 
-    //Modeling Tools
+    // Modeling Tools
     ui->toolButtonUnionDetails->setEnabled(modelingTools);
     ui->toolButtonDetailExportAs->setEnabled(modelingTools);
     ui->toolButtonDuplicateDetail->setEnabled(modelingTools);
 
-    //Layout tools
+    // Layout tools
     ui->toolButtonLayoutSettings->setEnabled(layoutTools);
 }
 
@@ -5155,8 +5140,8 @@ auto MainWindow::SavePattern(const QString &fileName, QString &error) -> bool
  */
 void MainWindow::AutoSavePattern()
 {
-    if (VApplication::IsGUIMode() && not VAbstractValApplication::VApp()->GetPatternPath().isEmpty()
-            && isWindowModified() && isNeedAutosave)
+    if (VApplication::IsGUIMode() && not VAbstractValApplication::VApp()->GetPatternPath().isEmpty() &&
+        isWindowModified() && isNeedAutosave)
     {
         qCDebug(vMainWindow, "Autosaving pattern.");
         QString error;
@@ -5295,8 +5280,9 @@ auto MainWindow::MaybeSave() -> bool
         messageBox->setEscapeButton(QMessageBox::Cancel);
 
         messageBox->setButtonText(QMessageBox::Yes,
-                                  VAbstractValApplication::VApp()
-                                  ->GetPatternPath().isEmpty() || m_patternReadOnly ? tr("Save…") : tr("Save"));
+                                  VAbstractValApplication::VApp()->GetPatternPath().isEmpty() || m_patternReadOnly
+                                      ? tr("Save…")
+                                      : tr("Save"));
         messageBox->setButtonText(QMessageBox::No, tr("Don't Save"));
 
         messageBox->setWindowModality(Qt::ApplicationModal);
@@ -5336,7 +5322,7 @@ void MainWindow::CreateMenus()
     ui->menuFile->insertAction(ui->actionPreferences, m_separatorAct);
     UpdateRecentFileActions();
 
-    //Add Undo/Redo actions.
+    // Add Undo/Redo actions.
     undoAction = VAbstractApplication::VApp()->getUndoStack()->createUndoAction(this, tr("&Undo"));
     connect(undoAction, &QAction::triggered, m_toolOptions, &VToolOptionsPropertyBrowser::RefreshOptions);
     undoAction->setShortcuts(QKeySequence::Undo);
@@ -5371,7 +5357,7 @@ void MainWindow::LastUsedTool()
         return;
     }
 
-    switch ( m_lastUsedTool )
+    switch (m_lastUsedTool)
     {
         case Tool::Arrow:
             for (auto *pointer : qAsConst(m_toolButtonPointerList))
@@ -5397,7 +5383,7 @@ void MainWindow::LastUsedTool()
         case Tool::BackgroundPixmapImage:
         case Tool::BackgroundSVGImage:
             Q_UNREACHABLE(); //-V501
-            //Nothing to do here because we can't create this tool from main window.
+            // Nothing to do here because we can't create this tool from main window.
             break;
         case Tool::EndLine:
             ui->toolButtonEndLine->setChecked(true);
@@ -5581,33 +5567,23 @@ void MainWindow::AddDocks()
 {
     ui->menuWindow->addSeparator();
 
-    //Add dock
+    // Add dock
     actionDockWidgetToolOptions = ui->dockWidgetToolOptions->toggleViewAction();
-    connect(actionDockWidgetToolOptions, &QAction::triggered, this, [this](bool checked)
-    {
-        m_toolOptionsActive = checked;
-    });
+    connect(actionDockWidgetToolOptions, &QAction::triggered, this,
+            [this](bool checked) { m_toolOptionsActive = checked; });
     ui->menuWindow->addAction(actionDockWidgetToolOptions);
 
     actionDockWidgetGroups = ui->dockWidgetGroups->toggleViewAction();
-    connect(actionDockWidgetGroups, &QAction::triggered, this, [this](bool checked)
-    {
-        m_groupsActive = checked;
-    });
+    connect(actionDockWidgetGroups, &QAction::triggered, this, [this](bool checked) { m_groupsActive = checked; });
     ui->menuWindow->addAction(actionDockWidgetGroups);
 
     QAction *action = ui->dockWidgetMessages->toggleViewAction();
-    connect(action, &QAction::triggered, this, [this](bool checked)
-    {
-        m_patternMessagesActive = checked;
-    });
+    connect(action, &QAction::triggered, this, [this](bool checked) { m_patternMessagesActive = checked; });
     ui->menuWindow->addAction(action);
 
     actionDockWidgetBackgroundImages = ui->dockWidgetBackgroundImages->toggleViewAction();
-    connect(actionDockWidgetBackgroundImages, &QAction::triggered, this, [this](bool checked)
-    {
-        m_backgroundImagesActive = checked;
-    });
+    connect(actionDockWidgetBackgroundImages, &QAction::triggered, this,
+            [this](bool checked) { m_backgroundImagesActive = checked; });
     ui->menuWindow->addAction(actionDockWidgetBackgroundImages);
 }
 
@@ -5665,74 +5641,77 @@ void MainWindow::CreateActions()
     connect(ui->actionTable, &QAction::triggered, this, &MainWindow::ActionTable_triggered);
     connect(ui->actionFinalMeasurements, &QAction::triggered, this, &MainWindow::ActionFinalMeasurements_triggered);
 
-    connect(ui->actionAbout_Qt, &QAction::triggered, this, [this]()
-    {
-        QMessageBox::aboutQt(this, tr("About Qt"));
-    });
+    connect(ui->actionAbout_Qt, &QAction::triggered, this, [this]() { QMessageBox::aboutQt(this, tr("About Qt")); });
 
-    connect(ui->actionAbout_Valentina, &QAction::triggered, this, [this]()
-    {
-        auto *aboutDialog = new DialogAboutApp(this);
-        aboutDialog->setAttribute(Qt::WA_DeleteOnClose, true);
-        aboutDialog->show();
-    });
+    connect(ui->actionAbout_Valentina, &QAction::triggered, this,
+            [this]()
+            {
+                auto *aboutDialog = new DialogAboutApp(this);
+                aboutDialog->setAttribute(Qt::WA_DeleteOnClose, true);
+                aboutDialog->show();
+            });
 
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::close);
 
     connect(ui->actionPreferences, &QAction::triggered, this, &MainWindow::Preferences);
-    connect(ui->actionReportBug, &QAction::triggered, this, []()
-    {
-        qCDebug(vMainWindow, "Reporting bug");
-        QDesktopServices::openUrl(QUrl(QStringLiteral("https://gitlab.com/smart-pattern/valentina/issues/new")));
-    });
-    connect(ui->actionShop, &QAction::triggered, this, []()
-    {
-        qCDebug(vMainWindow, "Open shop");
-        QDesktopServices::openUrl(QUrl(QStringLiteral("https://smart-pattern.com.ua/catalogue/")));
-    });
+    connect(ui->actionReportBug, &QAction::triggered, this,
+            []()
+            {
+                qCDebug(vMainWindow, "Reporting bug");
+                QDesktopServices::openUrl(
+                    QUrl(QStringLiteral("https://gitlab.com/smart-pattern/valentina/issues/new")));
+            });
+    connect(ui->actionShop, &QAction::triggered, this,
+            []()
+            {
+                qCDebug(vMainWindow, "Open shop");
+                QDesktopServices::openUrl(QUrl(QStringLiteral("https://smart-pattern.com.ua/catalogue/")));
+            });
 
     connect(ui->actionLast_tool, &QAction::triggered, this, &MainWindow::LastUsedTool);
 
     ui->actionInteractiveTools->setChecked(VAbstractValApplication::VApp()->ValentinaSettings()->IsInteractiveTools());
-    connect(ui->actionInteractiveTools, &QAction::triggered, this, [](bool checked)
-    {
-        VAbstractValApplication::VApp()->ValentinaSettings()->SetInteractiveTools(checked);
-    });
+    connect(ui->actionInteractiveTools, &QAction::triggered, this,
+            [](bool checked) { VAbstractValApplication::VApp()->ValentinaSettings()->SetInteractiveTools(checked); });
 
-    connect(ui->actionPattern_properties, &QAction::triggered, this, [this]()
-    {
-        DialogPatternProperties proper(doc, pattern, this);
-        connect(&proper, &DialogPatternProperties::UpddatePieces, m_sceneDetails,
-                &VMainGraphicsScene::UpdatePiecePassmarks);
-        proper.exec();
-    });
+    connect(ui->actionPattern_properties, &QAction::triggered, this,
+            [this]()
+            {
+                DialogPatternProperties proper(doc, pattern, this);
+                connect(&proper, &DialogPatternProperties::UpddatePieces, m_sceneDetails,
+                        &VMainGraphicsScene::UpdatePiecePassmarks);
+                proper.exec();
+            });
 
     ui->actionPattern_properties->setEnabled(false);
-    connect(ui->actionClosePattern, &QAction::triggered, this, [this]()
-    {
-        if (MaybeSave())
-        {
-            FileClosedCorrect();
-            Clear();
-        }
-    });
+    connect(ui->actionClosePattern, &QAction::triggered, this,
+            [this]()
+            {
+                if (MaybeSave())
+                {
+                    FileClosedCorrect();
+                    Clear();
+                }
+            });
 
     ui->actionShowCurveDetails->setChecked(VAbstractValApplication::VApp()->ValentinaSettings()->IsShowCurveDetails());
-    connect(ui->actionShowCurveDetails, &QAction::triggered, this, [this](bool checked)
-    {
-        emit ui->view->itemClicked(nullptr);
-        m_sceneDraw->EnableDetailsMode(checked);
-        VAbstractValApplication::VApp()->ValentinaSettings()->SetShowCurveDetails(checked);
-    });
+    connect(ui->actionShowCurveDetails, &QAction::triggered, this,
+            [this](bool checked)
+            {
+                emit ui->view->itemClicked(nullptr);
+                m_sceneDraw->EnableDetailsMode(checked);
+                VAbstractValApplication::VApp()->ValentinaSettings()->SetShowCurveDetails(checked);
+            });
 
     ui->actionShowAccuracyRadius->setChecked(
         VAbstractValApplication::VApp()->ValentinaSettings()->GetShowAccuracyRadius());
-    connect(ui->actionShowAccuracyRadius, &QAction::triggered, this, [this](bool checked)
-    {
-        VAbstractValApplication::VApp()->ValentinaSettings()->SetShowAccuracyRadius(checked);
-        m_sceneDetails->update();
-        m_sceneDraw->update();
-    });
+    connect(ui->actionShowAccuracyRadius, &QAction::triggered, this,
+            [this](bool checked)
+            {
+                VAbstractValApplication::VApp()->ValentinaSettings()->SetShowAccuracyRadius(checked);
+                m_sceneDetails->update();
+                m_sceneDraw->update();
+            });
 
     ui->actionShowMainPath->setChecked(VAbstractValApplication::VApp()->ValentinaSettings()->IsPieceShowMainPath());
     connect(ui->actionShowMainPath, &QAction::triggered, this, &MainWindow::ActionShowMainPath_triggered);
@@ -5747,33 +5726,35 @@ void MainWindow::CreateActions()
     connect(ui->actionPrint, &QAction::triggered, this, &MainWindow::PrintOrigin);
     connect(ui->actionPrintTiled, &QAction::triggered, this, &MainWindow::PrintTiled);
 
-    //Actions for recent files loaded by a main window application.
+    // Actions for recent files loaded by a main window application.
     for (int i = 0; i < MaxRecentFiles; ++i)
     {
         auto *action = new QAction(this);
         action->setVisible(false);
         m_recentFileActs[i] = action;
-        connect(m_recentFileActs[i], &QAction::triggered, this, [this]()
-        {
-            if (auto *action = qobject_cast<QAction*>(sender()))
-            {
-                const QString filePath = action->data().toString();
-                if (not filePath.isEmpty())
+        connect(m_recentFileActs[i], &QAction::triggered, this,
+                [this]()
                 {
-                    LoadPattern(filePath);
-                }
-            }
-        });
+                    if (auto *action = qobject_cast<QAction *>(sender()))
+                    {
+                        const QString filePath = action->data().toString();
+                        if (not filePath.isEmpty())
+                        {
+                            LoadPattern(filePath);
+                        }
+                    }
+                });
     }
 
     connect(ui->actionSyncMeasurements, &QAction::triggered, this, &MainWindow::SyncMeasurements);
     connect(ui->actionUnloadMeasurements, &QAction::triggered, this, &MainWindow::UnloadMeasurements);
 
-    connect(ui->actionLabelTemplateEditor, &QAction::triggered, this, [this]()
-    {
-        DialogEditLabel editor(doc, pattern);
-        editor.exec();
-    });
+    connect(ui->actionLabelTemplateEditor, &QAction::triggered, this,
+            [this]()
+            {
+                DialogEditLabel editor(doc, pattern);
+                editor.exec();
+            });
 
     connect(ui->actionWatermarkEditor, &QAction::triggered, this, &MainWindow::CreateWatermark);
     connect(ui->actionEditCurrentWatermark, &QAction::triggered, this, &MainWindow::EditCurrentWatermark);
@@ -5784,7 +5765,7 @@ void MainWindow::CreateActions()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::InitAutoSave()
 {
-    //Autosaving file each 1 minutes
+    // Autosaving file each 1 minutes
     delete m_autoSaveTimer;
     m_autoSaveTimer = nullptr;
 
@@ -5796,7 +5777,7 @@ void MainWindow::InitAutoSave()
     if (VAbstractValApplication::VApp()->ValentinaSettings()->GetAutosaveState())
     {
         const qint32 autoTime = VAbstractValApplication::VApp()->ValentinaSettings()->GetAutosaveTime();
-        m_autoSaveTimer->start(autoTime*60000);
+        m_autoSaveTimer->start(autoTime * 60000);
         qCDebug(vMainWindow, "Autosaving each %d minutes.", autoTime);
     }
     VApplication::VApp()->setAutoSaveTimer(m_autoSaveTimer);
@@ -5806,7 +5787,7 @@ void MainWindow::InitAutoSave()
 auto MainWindow::PatternPieceName(QString &name) -> bool
 {
     QScopedPointer<QInputDialog> dlg(new QInputDialog(this));
-    dlg->setInputMode( QInputDialog::TextInput );
+    dlg->setInputMode(QInputDialog::TextInput);
     dlg->setLabelText(tr("Pattern piece:"));
     dlg->setTextEchoMode(QLineEdit::Normal);
     dlg->setWindowTitle(tr("Enter a new label for the pattern piece."));
@@ -5830,7 +5811,7 @@ auto MainWindow::PatternPieceName(QString &name) -> bool
         if (m_comboBoxDraws->findText(nameDraw) == -1)
         {
             name = nameDraw;
-            break;// unique name
+            break; // unique name
         }
     }
     return true;
@@ -5850,7 +5831,7 @@ MainWindow::~MainWindow()
  * @brief LoadPattern open pattern file.
  * @param fileName name of file.
  */
-auto MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile) -> bool
+auto MainWindow::LoadPattern(QString fileName, const QString &customMeasureFile) -> bool
 {
     qCDebug(vMainWindow, "Loading new file %s.", qUtf8Printable(fileName));
 
@@ -5862,13 +5843,14 @@ auto MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
         }
     }
 
-    QFuture<VPatternConverter *> futureConverter = QtConcurrent::run([fileName]()
-    {
-        std::unique_ptr<VPatternConverter> converter(new VPatternConverter(fileName));
-        return converter.release();
-    });
+    QFuture<VPatternConverter *> futureConverter = QtConcurrent::run(
+        [fileName]()
+        {
+            std::unique_ptr<VPatternConverter> converter(new VPatternConverter(fileName));
+            return converter.release();
+        });
 
-    //We have unsaved changes or load more then one file per time
+    // We have unsaved changes or load more then one file per time
     if (OpenNewValentina(fileName))
     {
         return false;
@@ -5892,7 +5874,7 @@ auto MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
 
             if (m.Type() == MeasurementsType::Multisize || m.Type() == MeasurementsType::Individual)
             {
-                QStringList arguments {fileName};
+                QStringList arguments{fileName};
                 if (isNoScaling)
                 {
                     arguments.append(QStringLiteral("--") + LONG_OPTION_NO_HDPI_SCALING);
@@ -5920,7 +5902,7 @@ auto MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
     {
         // Here comes undocumented Valentina's feature.
         // Because app bundle in Mac OS X doesn't allow setup assosiation for Puzzle we must do this through Valentina
-        QStringList arguments {fileName};
+        QStringList arguments{fileName};
         if (isNoScaling)
         {
             arguments.append(QStringLiteral("--") + LONG_OPTION_NO_HDPI_SCALING);
@@ -5950,7 +5932,7 @@ auto MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
     VMainGraphicsView::NewSceneRect(m_sceneDraw, ui->view);
     VMainGraphicsView::NewSceneRect(m_sceneDetails, ui->view);
 
-    VAbstractValApplication::VApp()->setOpeningPattern();//Begin opening file
+    VAbstractValApplication::VApp()->setOpeningPattern(); // Begin opening file
     try
     {
         // Quick reading measurements
@@ -5982,10 +5964,10 @@ auto MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
             fixedMPath = CheckPathToMeasurements(fileName, fakeName);
             if (fixedMPath.isEmpty())
             {
-                VAbstractValApplication::VApp()->setOpeningPattern();// End opening file
+                VAbstractValApplication::VApp()->setOpeningPattern(); // End opening file
                 Clear();
-                qCCritical(vMainWindow, "%s", qUtf8Printable(tr("The measurements file '%1' could not be found.")
-                                                             .arg(fakeName)));
+                qCCritical(vMainWindow, "%s",
+                           qUtf8Printable(tr("The measurements file '%1' could not be found.").arg(fakeName)));
                 if (not VApplication::IsGUIMode())
                 {
                     QCoreApplication::exit(V_EX_NOINPUT);
@@ -6002,10 +5984,10 @@ auto MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
             fixedMPath = CheckPathToMeasurements(fileName, path);
             if (fixedMPath.isEmpty())
             {
-                VAbstractValApplication::VApp()->setOpeningPattern();// End opening file
+                VAbstractValApplication::VApp()->setOpeningPattern(); // End opening file
                 Clear();
-                qCCritical(vMainWindow, "%s", qUtf8Printable(tr("The measurements file '%1' could not be found.")
-                                                             .arg(path)));
+                qCCritical(vMainWindow, "%s",
+                           qUtf8Printable(tr("The measurements file '%1' could not be found.").arg(path)));
                 if (not VApplication::IsGUIMode())
                 {
                     QCoreApplication::exit(V_EX_NOINPUT);
@@ -6015,10 +5997,11 @@ auto MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
 
             if (not LoadMeasurements(fixedMPath))
             {
-                qCCritical(vMainWindow, "%s", qUtf8Printable(tr("The measurements file '%1' could not be found or "
-                                                                "provides not enough information.")
-                                                             .arg(fixedMPath)));
-                VAbstractValApplication::VApp()->setOpeningPattern();// End opening file
+                qCCritical(vMainWindow, "%s",
+                           qUtf8Printable(tr("The measurements file '%1' could not be found or "
+                                             "provides not enough information.")
+                                              .arg(fixedMPath)));
+                VAbstractValApplication::VApp()->setOpeningPattern(); // End opening file
                 Clear();
                 if (not VApplication::IsGUIMode())
                 {
@@ -6033,7 +6016,7 @@ auto MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
         }
 
         if (VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Unknown)
-        {// Show toolbar only if was not uploaded any measurements.
+        { // Show toolbar only if was not uploaded any measurements.
             ToolBarOption();
         }
 
@@ -6057,9 +6040,9 @@ auto MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
     }
     catch (VException &e)
     {
-        qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
-                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        VAbstractValApplication::VApp()->setOpeningPattern();// End opening file
+        qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")), qUtf8Printable(e.ErrorMessage()),
+                   qUtf8Printable(e.DetailedInformation()));
+        VAbstractValApplication::VApp()->setOpeningPattern(); // End opening file
         Clear();
         if (not VApplication::IsGUIMode())
         {
@@ -6077,7 +6060,7 @@ auto MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
     m_taskbarProgress->setVisible(true);
     m_taskbarProgress->setMaximum(elements);
 #endif
-    
+
     FullParseFile();
 
     m_progressBar->setVisible(false);
@@ -6090,9 +6073,9 @@ auto MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
     { // No errors occurred
         if (VApplication::IsGUIMode())
         {
-            /* Collect garbage only after successfully parse. This way wrongly accused items have one more time to restore
-             * a reference. */
-            QTimer::singleShot(V_MSECONDS(100), Qt::CoarseTimer, this, [this](){doc->GarbageCollector(true);});
+            /* Collect garbage only after successfully parse. This way wrongly accused items have one more time to
+             * restore a reference. */
+            QTimer::singleShot(V_MSECONDS(100), Qt::CoarseTimer, this, [this]() { doc->GarbageCollector(true); });
         }
 
         m_patternReadOnly = doc->IsReadOnly();
@@ -6101,17 +6084,17 @@ auto MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
         setCurrentFile(fileName);
         qCDebug(vMainWindow, "File loaded.");
 
-        //Fit scene size to best size for first show
+        // Fit scene size to best size for first show
         ZoomFirstShow();
 
         ActionDraw(true);
 
-        VAbstractValApplication::VApp()->setOpeningPattern();// End opening file
+        VAbstractValApplication::VApp()->setOpeningPattern(); // End opening file
         m_statusLabel->setText(QString());
         return true;
     }
 
-    VAbstractValApplication::VApp()->setOpeningPattern();// End opening file
+    VAbstractValApplication::VApp()->setOpeningPattern(); // End opening file
     return false;
 }
 
@@ -6119,7 +6102,7 @@ auto MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
 auto MainWindow::GetUnlokedRestoreFileList() -> QStringList
 {
     QStringList restoreFiles;
-    //Take all files that need to be restored
+    // Take all files that need to be restored
     QStringList files = VAbstractValApplication::VApp()->ValentinaSettings()->GetRestoreFileList();
     if (not files.empty())
     {
@@ -6170,7 +6153,8 @@ void MainWindow::ToolBoxSizePolicy()
 {
     ui->toolBox->setSizePolicy(ui->toolBox->sizePolicy().horizontalPolicy(),
                                VAbstractValApplication::VApp()->ValentinaSettings()->GetToolPanelScaling()
-                               ? QSizePolicy::Fixed : QSizePolicy::Preferred);
+                                   ? QSizePolicy::Fixed
+                                   : QSizePolicy::Preferred);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -6192,7 +6176,7 @@ void MainWindow::ShowPaper(int index)
 void MainWindow::Preferences()
 {
     // Calling constructor of the dialog take some time. Because of this user have time to call the dialog twice.
-    static QPointer<DialogPreferences> guard;// Prevent any second run
+    static QPointer<DialogPreferences> guard; // Prevent any second run
     if (guard.isNull())
     {
         QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -6205,7 +6189,7 @@ void MainWindow::Preferences()
                 &VToolOptionsPropertyBrowser::RefreshOptions);
         connect(dlg.data(), &DialogPreferences::UpdateProperties, this, &MainWindow::ToolBarStyles);
         connect(dlg.data(), &DialogPreferences::UpdateProperties, this, &MainWindow::ToolBoxSizePolicy);
-        connect(dlg.data(), &DialogPreferences::UpdateProperties, this, [this](){emit doc->FullUpdateFromFile();});
+        connect(dlg.data(), &DialogPreferences::UpdateProperties, this, [this]() { emit doc->FullUpdateFromFile(); });
         connect(dlg.data(), &DialogPreferences::UpdateProperties, ui->view,
                 &VMainGraphicsView::ResetScrollingAnimation);
         QGuiApplication::restoreOverrideCursor();
@@ -6237,7 +6221,7 @@ void MainWindow::CreateMeasurements()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ExportDrawAs()
 {
-    auto Uncheck = qScopeGuard([this] {ui->toolButtonExportDraw->setChecked(false);});
+    auto Uncheck = qScopeGuard([this] { ui->toolButtonExportDraw->setChecked(false); });
 
     QString filters(tr("Scalable Vector Graphics files") + QStringLiteral("(*.svg)"));
     QString dir = QDir::homePath() + QChar('/') + FileName() + QStringLiteral(".svg");
@@ -6249,7 +6233,7 @@ void MainWindow::ExportDrawAs()
         return;
     }
 
-    QFileInfo f( fileName );
+    QFileInfo f(fileName);
     if (f.suffix().isEmpty() || f.suffix() != QLatin1String("svg"))
     {
         fileName += QLatin1String(".svg");
@@ -6261,7 +6245,7 @@ void MainWindow::ExportDrawAs()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ExportLayoutAs()
 {
-    auto Uncheck = qScopeGuard([this] {ui->toolButtonLayoutExportAs->setChecked(false);});
+    auto Uncheck = qScopeGuard([this] { ui->toolButtonLayoutExportAs->setChecked(false); });
 
     if (m_layoutSettings->IsLayoutStale())
     {
@@ -6273,9 +6257,8 @@ void MainWindow::ExportLayoutAs()
 
     try
     {
-        m_dialogSaveLayout = QSharedPointer<DialogSaveLayout>(
-            new DialogSaveLayout(static_cast<int>(m_layoutSettings->LayoutScenes().size()), Draw::Layout, FileName(),
-                                 this));
+        m_dialogSaveLayout = QSharedPointer<DialogSaveLayout>(new DialogSaveLayout(
+            static_cast<int>(m_layoutSettings->LayoutScenes().size()), Draw::Layout, FileName(), this));
 
         if (m_dialogSaveLayout->exec() == QDialog::Rejected)
         {
@@ -6289,8 +6272,8 @@ void MainWindow::ExportLayoutAs()
     catch (const VException &e)
     {
         m_dialogSaveLayout.clear();
-        qCritical("%s\n\n%s\n\n%s", qUtf8Printable(tr("Export error.")),
-                  qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        qCritical("%s\n\n%s\n\n%s", qUtf8Printable(tr("Export error.")), qUtf8Printable(e.ErrorMessage()),
+                  qUtf8Printable(e.DetailedInformation()));
         return;
     }
 }
@@ -6298,14 +6281,15 @@ void MainWindow::ExportLayoutAs()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ExportDetailsAs()
 {
-    auto Uncheck = qScopeGuard([this] {ui->toolButtonDetailExportAs->setChecked(false);});
+    auto Uncheck = qScopeGuard([this] { ui->toolButtonDetailExportAs->setChecked(false); });
 
     QVector<DetailForLayout> detailsInLayout = SortDetailsForLayout(pattern->DataPieces());
 
     if (detailsInLayout.count() == 0)
     {
-        QMessageBox::information(this, tr("Layout mode"),  tr("You don't have enough details to export. Please, "
-                                                              "include at least one detail in layout."),
+        QMessageBox::information(this, tr("Layout mode"),
+                                 tr("You don't have enough details to export. Please, "
+                                    "include at least one detail in layout."),
                                  QMessageBox::Ok, QMessageBox::Ok);
         return;
     }
@@ -6318,15 +6302,15 @@ void MainWindow::ExportDetailsAs()
     catch (VException &e)
     {
         QMessageBox::warning(this, tr("Export details"),
-                             tr("Can't export details.") + QStringLiteral(" \n") + e.ErrorMessage(),
-                             QMessageBox::Ok, QMessageBox::Ok);
+                             tr("Can't export details.") + QStringLiteral(" \n") + e.ErrorMessage(), QMessageBox::Ok,
+                             QMessageBox::Ok);
         return;
     }
 
     try
     {
-        m_dialogSaveLayout = QSharedPointer<DialogSaveLayout>(new DialogSaveLayout(1, Draw::Modeling, FileName(),
-                                                                                   this));
+        m_dialogSaveLayout =
+            QSharedPointer<DialogSaveLayout>(new DialogSaveLayout(1, Draw::Modeling, FileName(), this));
 
         if (m_dialogSaveLayout->exec() == QDialog::Rejected)
         {
@@ -6340,8 +6324,8 @@ void MainWindow::ExportDetailsAs()
     catch (const VException &e)
     {
         m_dialogSaveLayout.clear();
-        qCritical("%s\n\n%s\n\n%s", qUtf8Printable(tr("Export error.")),
-                  qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        qCritical("%s\n\n%s\n\n%s", qUtf8Printable(tr("Export error.")), qUtf8Printable(e.ErrorMessage()),
+                  qUtf8Printable(e.DetailedInformation()));
         return;
     }
 }
@@ -6445,14 +6429,14 @@ auto MainWindow::CheckPathToMeasurements(const QString &patternPath, const QStri
     {
         if (not VApplication::IsGUIMode())
         {
-            return {};// console mode doesn't support fixing path to a measurement file
+            return {}; // console mode doesn't support fixing path to a measurement file
         }
 
         const QString text = tr("The measurements file <br/><br/> <b>%1</b> <br/><br/> could not be found. Do you "
-                                "want to update the file location?").arg(path);
+                                "want to update the file location?")
+                                 .arg(path);
         QMessageBox::StandardButton res = QMessageBox::question(this, tr("Loading measurements file"), text,
-                                                                QMessageBox::Yes | QMessageBox::No,
-                                                                QMessageBox::Yes);
+                                                                QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
         if (res == QMessageBox::No)
         {
             return {};
@@ -6490,28 +6474,25 @@ auto MainWindow::CheckPathToMeasurements(const QString &patternPath, const QStri
             return dirPath;
         };
 
-
         QString mPath;
         if (patternType == MeasurementsType::Multisize)
         {
             const QString filter = tr("Multisize measurements") + QStringLiteral(" (*.vst);;") +
                                    tr("Individual measurements") + QStringLiteral(" (*.vit)");
-            //Use standard path to multisize measurements
+            // Use standard path to multisize measurements
             QString selectedName;
-            const QString dirPath = DirPath(VAbstractValApplication::VApp()
-                                            ->ValentinaSettings()->GetPathMultisizeMeasurements(),
-                                            selectedName);
+            const QString dirPath = DirPath(
+                VAbstractValApplication::VApp()->ValentinaSettings()->GetPathMultisizeMeasurements(), selectedName);
             mPath = FindLocation(filter, dirPath, selectedName);
         }
         else
         {
             const QString filter = tr("Individual measurements") + QStringLiteral(" (*.vit);;") +
                                    tr("Multisize measurements") + QStringLiteral(" (*.vst)");
-            //Use standard path to individual measurements
+            // Use standard path to individual measurements
             QString selectedName;
-            const QString dirPath = DirPath(VAbstractValApplication::VApp()
-                                            ->ValentinaSettings()->GetPathIndividualMeasurements(),
-                                            selectedName);
+            const QString dirPath = DirPath(
+                VAbstractValApplication::VApp()->ValentinaSettings()->GetPathIndividualMeasurements(), selectedName);
             mPath = FindLocation(filter, dirPath, selectedName);
         }
 
@@ -6533,12 +6514,12 @@ auto MainWindow::CheckPathToMeasurements(const QString &patternPath, const QStri
         if (patternType == MeasurementsType::Multisize)
         {
             VVSTConverter converter(mPath);
-            m->setXMLContent(converter.Convert());// Read again after conversion
+            m->setXMLContent(converter.Convert()); // Read again after conversion
         }
         else
         {
             VVITConverter converter(mPath);
-            m->setXMLContent(converter.Convert());// Read again after conversion
+            m->setXMLContent(converter.Convert()); // Read again after conversion
         }
 
         if (not m->IsDefinedKnownNamesValid())
@@ -6571,7 +6552,7 @@ void MainWindow::ChangePP(int index, bool zoomBestFit)
                 ZoomFitBestCurrent();
             }
         }
-        m_toolOptions->itemClicked(nullptr);//hide options for tool in previous pattern piece
+        m_toolOptions->itemClicked(nullptr); // hide options for tool in previous pattern piece
         m_groupsWidget->UpdateGroups();
     }
 }
@@ -6626,7 +6607,7 @@ void MainWindow::ZoomFirstShow()
 auto MainWindow::DoExport(const VCommandLinePtr &expParams) -> bool
 {
     QVector<DetailForLayout> details;
-    if(not VAbstractValApplication::VApp()->getOpeningPattern())
+    if (not VAbstractValApplication::VApp()->getOpeningPattern())
     {
         const QHash<quint32, VPiece> *allDetails = pattern->DataPieces();
         if (allDetails->count() == 0)
@@ -6640,8 +6621,9 @@ auto MainWindow::DoExport(const VCommandLinePtr &expParams) -> bool
 
         if (details.count() == 0)
         {
-            qCCritical(vMainWindow, "%s", qUtf8Printable(tr("You can't export empty scene. Please, "
-                                                            "include at least one detail in layout.")));
+            qCCritical(vMainWindow, "%s",
+                       qUtf8Printable(tr("You can't export empty scene. Please, "
+                                         "include at least one detail in layout.")));
             QCoreApplication::exit(V_EX_DATAERR);
             return false;
         }
@@ -6653,8 +6635,8 @@ auto MainWindow::DoExport(const VCommandLinePtr &expParams) -> bool
     {
         try
         {
-            m_dialogSaveLayout = QSharedPointer<DialogSaveLayout>(new DialogSaveLayout(1, Draw::Modeling,
-                                                                                       expParams->OptBaseName(), this));
+            m_dialogSaveLayout = QSharedPointer<DialogSaveLayout>(
+                new DialogSaveLayout(1, Draw::Modeling, expParams->OptBaseName(), this));
             m_dialogSaveLayout->SetDestinationPath(expParams->OptDestinationPath());
             m_dialogSaveLayout->SelectFormat(static_cast<LayoutExportFormats>(expParams->OptExportType()));
             m_dialogSaveLayout->SetBinaryDXFFormat(expParams->IsBinaryDXF());
@@ -6692,8 +6674,8 @@ auto MainWindow::DoExport(const VCommandLinePtr &expParams) -> bool
             try
             {
                 m_dialogSaveLayout = QSharedPointer<DialogSaveLayout>(
-                    new DialogSaveLayout(static_cast<int>(m_layoutSettings->LayoutScenes().size()),
-                                         Draw::Layout, expParams->OptBaseName(), this));
+                    new DialogSaveLayout(static_cast<int>(m_layoutSettings->LayoutScenes().size()), Draw::Layout,
+                                         expParams->OptBaseName(), this));
                 m_dialogSaveLayout->SetDestinationPath(expParams->OptDestinationPath());
                 m_dialogSaveLayout->SelectFormat(static_cast<LayoutExportFormats>(expParams->OptExportType()));
                 m_dialogSaveLayout->SetBinaryDXFFormat(expParams->IsBinaryDXF());
@@ -6772,7 +6754,6 @@ auto MainWindow::DoFMExport(const VCommandLinePtr &expParams) -> bool
     }
 
     return ExportFMeasurementsToCSVData(filePath, expParams->IsCSVWithHeader(), mib, separator);
-
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -6791,9 +6772,9 @@ auto MainWindow::SetDimensionA(int value) -> bool
                 }
                 else
                 {
-                    qCCritical(vMainWindow, "%s",
-                               qUtf8Printable(tr("Not supported dimension A value '%1' for this pattern file.")
-                                                  .arg(value)));
+                    qCCritical(
+                        vMainWindow, "%s",
+                        qUtf8Printable(tr("Not supported dimension A value '%1' for this pattern file.").arg(value)));
                     return false;
                 }
             }
@@ -6834,16 +6815,16 @@ auto MainWindow::SetDimensionB(int value) -> bool
                 }
                 else
                 {
-                    qCCritical(vMainWindow, "%s",
-                              qUtf8Printable(tr("Not supported dimension B value '%1' for this pattern file.")
-                                                  .arg(value)));
+                    qCCritical(
+                        vMainWindow, "%s",
+                        qUtf8Printable(tr("Not supported dimension B value '%1' for this pattern file.").arg(value)));
                     return false;
                 }
             }
             else
             {
                 qCCritical(vMainWindow, "%s",
-                          qUtf8Printable(tr("Couldn't set dimension B. Need a file with multisize measurements.")));
+                           qUtf8Printable(tr("Couldn't set dimension B. Need a file with multisize measurements.")));
                 return false;
             }
         }
@@ -6877,9 +6858,9 @@ auto MainWindow::SetDimensionC(int value) -> bool
                 }
                 else
                 {
-                    qCCritical(vMainWindow, "%s",
-                               qUtf8Printable(tr("Not supported dimension C value '%1' for this pattern file.")
-                                                  .arg(value)));
+                    qCCritical(
+                        vMainWindow, "%s",
+                        qUtf8Printable(tr("Not supported dimension C value '%1' for this pattern file.").arg(value)));
                     return false;
                 }
             }
@@ -6957,7 +6938,7 @@ void MainWindow::ProcessCMD()
             cSetted = SetDimensionB(cmd->OptDimensionC());
         }
 
-        if (not (aSetted && bSetted && cSetted))
+        if (not(aSetted && bSetted && cSetted))
         {
             QCoreApplication::exit(V_EX_DATAERR);
             return;
@@ -6976,7 +6957,7 @@ void MainWindow::ProcessCMD()
             }
         }
 
-        QCoreApplication::exit(V_EX_OK);// close program after processing in console mode
+        QCoreApplication::exit(V_EX_OK); // close program after processing in console mode
     }
 }
 
@@ -6984,7 +6965,7 @@ void MainWindow::ProcessCMD()
 auto MainWindow::GetPatternFileName() -> QString
 {
     QString shownName = tr("untitled.val");
-    if(not VAbstractValApplication::VApp()->GetPatternPath().isEmpty())
+    if (not VAbstractValApplication::VApp()->GetPatternPath().isEmpty())
     {
         shownName = StrippedName(VAbstractValApplication::VApp()->GetPatternPath());
     }
@@ -6995,7 +6976,7 @@ auto MainWindow::GetPatternFileName() -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto MainWindow::GetMeasurementFileName() -> QString
 {
-    if(doc->MPath().isEmpty())
+    if (doc->MPath().isEmpty())
     {
         return {};
     }
@@ -7003,7 +6984,7 @@ auto MainWindow::GetMeasurementFileName() -> QString
     QString shownName = QStringLiteral(" [");
     shownName += StrippedName(AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->MPath()));
 
-    if(m_mChanges)
+    if (m_mChanges)
     {
         shownName += QChar('*');
     }
@@ -7018,29 +6999,29 @@ void MainWindow::UpdateWindowTitle()
     bool isFileWritable = true;
     if (not VAbstractValApplication::VApp()->GetPatternPath().isEmpty())
     {
-//#ifdef Q_OS_WIN32
-//        qt_ntfs_permission_lookup++; // turn checking on
-//#endif /*Q_OS_WIN32*/
+        // #ifdef Q_OS_WIN32
+        //         qt_ntfs_permission_lookup++; // turn checking on
+        // #endif /*Q_OS_WIN32*/
         isFileWritable = QFileInfo(VAbstractValApplication::VApp()->GetPatternPath()).isWritable();
-//#ifdef Q_OS_WIN32
-//        qt_ntfs_permission_lookup--; // turn it off again
-//#endif /*Q_OS_WIN32*/
+        // #ifdef Q_OS_WIN32
+        //         qt_ntfs_permission_lookup--; // turn it off again
+        // #endif /*Q_OS_WIN32*/
     }
 
     if (not m_patternReadOnly && isFileWritable)
     {
-        setWindowTitle(GetPatternFileName()+GetMeasurementFileName());
+        setWindowTitle(GetPatternFileName() + GetMeasurementFileName());
     }
     else
     {
-        setWindowTitle(GetPatternFileName()+GetMeasurementFileName() + QStringLiteral(" (") + tr("read only") +
+        setWindowTitle(GetPatternFileName() + GetMeasurementFileName() + QStringLiteral(" (") + tr("read only") +
                        QChar(')'));
     }
     setWindowFilePath(VAbstractValApplication::VApp()->GetPatternPath());
 
 #if defined(Q_OS_MAC)
-    static QIcon fileIcon = QIcon(QCoreApplication::applicationDirPath() +
-                                  QLatin1String("/../Resources/Valentina.icns"));
+    static QIcon fileIcon =
+        QIcon(QCoreApplication::applicationDirPath() + QLatin1String("/../Resources/Valentina.icns"));
     QIcon icon;
     if (not VAbstractValApplication::VApp()->GetPatternPath().isEmpty())
     {
@@ -7060,7 +7041,7 @@ void MainWindow::UpdateWindowTitle()
         }
     }
     setWindowIcon(icon);
-#endif //defined(Q_OS_MAC)
+#endif // defined(Q_OS_MAC)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -7316,7 +7297,7 @@ void MainWindow::ToolSelectDetail()
     // Only true for rubber band selection
     emit EnableNodeLabelSelection(false);
     emit EnableNodePointSelection(false);
-    emit EnableDetailSelection(true);// Disable when done visualization details
+    emit EnableDetailSelection(true); // Disable when done visualization details
 
     // Hovering
     emit EnableNodeLabelHover(true);
@@ -7332,11 +7313,12 @@ void MainWindow::ToolSelectDetail()
 void MainWindow::PrintPatternMessage(QEvent *event)
 {
     SCASSERT(event != nullptr)
-    auto *patternMessage = static_cast<WarningMessageEvent *>(event); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
+    auto *patternMessage =
+        static_cast<WarningMessageEvent *>(event); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
 
     QString severity;
 
-    switch(patternMessage->Severity())
+    switch (patternMessage->Severity())
     {
         case QtDebugMsg:
             severity = tr("DEBUG");
@@ -7350,11 +7332,11 @@ void MainWindow::PrintPatternMessage(QEvent *event)
         case QtFatalMsg:
             severity = tr("FATAL");
             break;
-        #if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
         case QtInfoMsg:
             severity = tr("INFO");
             break;
-        #endif
+#endif
         default:
             break;
     }
@@ -7382,8 +7364,8 @@ void MainWindow::OpenWatermark(const QString &path)
     }
 
     auto *watermark = new WatermarkWindow(VAbstractValApplication::VApp()->GetPatternPath(), this);
-    connect(watermark, &WatermarkWindow::New, this, [this](){OpenWatermark();});
-    connect(watermark, &WatermarkWindow::OpenAnother, this, [this](const QString &path){OpenWatermark(path);});
+    connect(watermark, &WatermarkWindow::New, this, [this]() { OpenWatermark(); });
+    connect(watermark, &WatermarkWindow::OpenAnother, this, [this](const QString &path) { OpenWatermark(path); });
     m_watermarkEditors.append(watermark);
     watermark->show();
     watermark->Open(path);

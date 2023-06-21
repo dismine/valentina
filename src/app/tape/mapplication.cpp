@@ -80,6 +80,9 @@ QT_WARNING_POP
 
 namespace
 {
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
+
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_DIMENSION_A, (QLatin1String("dimensionA"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_DIMENSION_A, (QChar('a')))                // NOLINT
 
@@ -93,6 +96,8 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_UNITS, (QLatin1String("unit
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_UNITS, (QChar('u')))           // NOLINT
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_TEST, (QLatin1String("test"))) // NOLINT
+
+QT_WARNING_POP
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------

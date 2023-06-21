@@ -42,19 +42,23 @@
 #include "../layout/vplayout.h"
 #include "../layout/vppiece.h"
 #include "../layout/vpsheet.h"
-#include "../vlayout/vgraphicsfillitem.h"
-#include "../vlayout/vtextmanager.h"
-
-#include "../vpapplication.h"
-
-#include "../vlayout/vlayoutpiecepath.h"
-#include "compatibility.h"
-
+#include "../vformat/vsinglelineoutlinechar.h"
 #include "../vgeometry/vlayoutplacelabel.h"
-
+#include "../vlayout/vgraphicsfillitem.h"
+#include "../vlayout/vlayoutpiecepath.h"
+#include "../vlayout/vtextmanager.h"
+#include "../vmisc/svgfont/vsvgfont.h"
+#include "../vmisc/svgfont/vsvgfontdatabase.h"
+#include "../vmisc/svgfont/vsvgfontengine.h"
+#include "../vpapplication.h"
+#include "compatibility.h"
 #include "undocommands/vpundomovepieceonsheet.h"
 #include "undocommands/vpundopiecemove.h"
 #include "vpiecegrainline.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+#include "../vmisc/diagnostic.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
 #include <QLoggingCategory>
 
@@ -68,8 +72,13 @@ QT_WARNING_POP
 
 namespace
 {
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
+
 Q_GLOBAL_STATIC_WITH_ARGS(QColor, mainColor, (Qt::black)) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(QColor, errorColor, (Qt::red))  // NOLINT
+
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 inline auto LineMatrix(const VPPiecePtr &piece, const QPointF &topLeft, qreal angle, const QPointF &linePos,

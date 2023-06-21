@@ -28,7 +28,6 @@
 
 #include "abstracttest.h"
 
-#include <qtestcase.h>
 #include <QApplication>
 #include <QByteArray>
 #include <QDir>
@@ -36,15 +35,16 @@
 #include <QFileInfo>
 #include <QFlags>
 #include <QIODevice>
+#include <QJsonArray>
+#include <QJsonObject>
+#include <QLineF>
 #include <QPointF>
 #include <QProcess>
 #include <QScopedPointer>
 #include <QStringList>
 #include <QVector>
 #include <QtGlobal>
-#include <QLineF>
-#include <QJsonObject>
-#include <QJsonArray>
+#include <qtestcase.h>
 
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
@@ -52,9 +52,9 @@
 #include "../vgeometry/vsplinepath.h"
 #include "../vlayout/vabstractpiece.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vpassmark.h"
 #include "../vpatterndb/vpiece.h"
 #include "../vpatterndb/vpiecenode.h"
-#include "../vpatterndb/vpassmark.h"
 
 namespace
 {
@@ -63,11 +63,11 @@ auto FillPath(const QVector<QPointF> &path, qreal accuracy) -> QVector<QPointF>
     QVector<QPointF> pathFilled;
     pathFilled.reserve(path.size());
 
-    for (int i=0; i < path.size()-1; ++i)
+    for (int i = 0; i < path.size() - 1; ++i)
     {
         pathFilled.append(path.at(i));
 
-        QLineF line(path.at(i), path.at(i+1));
+        QLineF line(path.at(i), path.at(i + 1));
         if (line.length() > accuracy)
         {
             qreal len = accuracy;
@@ -77,8 +77,7 @@ auto FillPath(const QVector<QPointF> &path, qreal accuracy) -> QVector<QPointF>
                 l.setLength(len);
                 pathFilled.append(l.p2());
                 len += accuracy;
-            }
-            while(line.length() > len);
+            } while (line.length() > len);
         }
     }
 
@@ -86,11 +85,11 @@ auto FillPath(const QVector<QPointF> &path, qreal accuracy) -> QVector<QPointF>
 
     return pathFilled;
 }
-}  // namespace
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-AbstractTest::AbstractTest(QObject *parent) :
-    QObject(parent)
+AbstractTest::AbstractTest(QObject *parent)
+  : QObject(parent)
 {
 }
 
@@ -238,7 +237,7 @@ void AbstractTest::PassmarkShapeFromJson(const QString &json, QVector<QLineF> &s
         if (type != QLatin1String("QLineF"))
         {
             const QString error = QStringLiteral("Invalid json file '%1'. Unexpected class '%2'.")
-                    .arg(json, lineObject[typeKey].toString());
+                                      .arg(json, lineObject[typeKey].toString());
             QFAIL(qUtf8Printable(error));
         }
 
@@ -252,18 +251,18 @@ void AbstractTest::ComparePaths(const QVector<QPointF> &actual, const QVector<QP
     QVERIFY2(actual.size() >= 2, "Not enough points");
     QVERIFY2(expected.size() >= 2, "Not enough points");
 
-    const qreal accuracy = accuracyPointOnLine*4.;
+    const qreal accuracy = accuracyPointOnLine * 4.;
     QVector<QPointF> actualFilled = FillPath(actual, accuracy);
 
     bool onLine = false;
     QSet<int> usedEdges;
     for (auto p : actualFilled)
     {
-        for(int i = 0; i < expected.size()-1; ++i)
+        for (int i = 0; i < expected.size() - 1; ++i)
         {
-            if (VGObject::IsPointOnLineSegment(p, expected.at(i), expected.at(i+1), accuracyPointOnLine*2.))
+            if (VGObject::IsPointOnLineSegment(p, expected.at(i), expected.at(i + 1), accuracyPointOnLine * 2.))
             {
-                usedEdges.insert(i+1);
+                usedEdges.insert(i + 1);
                 onLine = true;
             }
         }
@@ -282,10 +281,10 @@ void AbstractTest::ComparePaths(const QVector<QPointF> &actual, const QVector<QP
 void AbstractTest::ComparePathsDistance(const QVector<QPointF> &ekv, const QVector<QPointF> &ekvOrig) const
 {
     // Begin comparison
-    QCOMPARE(ekv.size(), ekvOrig.size());// First check if sizes are equal
+    QCOMPARE(ekv.size(), ekvOrig.size()); // First check if sizes are equal
     const qreal testAccuracy = MmToPixel(1.);
 
-    for (int i=0; i < ekv.size(); i++)
+    for (int i = 0; i < ekv.size(); i++)
     {
         ComparePointsDistance(ekv.at(i), ekvOrig.at(i), testAccuracy);
     }
@@ -295,38 +294,38 @@ void AbstractTest::ComparePathsDistance(const QVector<QPointF> &ekv, const QVect
 void AbstractTest::ComparePointsDistance(const QPointF &result, const QPointF &expected, qreal testAccuracy) const
 {
     const QString msg = QStringLiteral("Actual '%2;%3', Expected '%4;%5'. Distance between points %6 mm.")
-            .arg(result.x()).arg(result.y()).arg(expected.x()).arg(expected.y())
-            .arg(UnitConvertor(QLineF(result, expected).length(), Unit::Px, Unit::Mm));
+                            .arg(result.x())
+                            .arg(result.y())
+                            .arg(expected.x())
+                            .arg(expected.y())
+                            .arg(UnitConvertor(QLineF(result, expected).length(), Unit::Px, Unit::Mm));
     // Check each point. Don't use comparison float values
     QVERIFY2(VFuzzyComparePoints(result, expected, testAccuracy), qUtf8Printable(msg));
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void AbstractTest::CompareLinesDistance(const QVector<QLineF> &result, const QVector<QLineF> &expected) const
 {
     // Begin comparison
-    QCOMPARE(result.size(), expected.size());// First check if sizes equal
+    QCOMPARE(result.size(), expected.size()); // First check if sizes equal
 
-    for (int i=0; i < result.size(); i++)
+    for (int i = 0; i < result.size(); i++)
     {
         const QLineF &line1 = result.at(i);
         const QLineF &line2 = expected.at(i);
         // Check each point. Don't use comparison float values
-        QVERIFY2(VFuzzyComparePoints(line1.p1(), line2.p1()) && VFuzzyComparePoints(line1.p2(), line2.p2()),
-                 qUtf8Printable(
-                     QStringLiteral("Index: %1. Got line '(%2;%3):(%4;%5)', Expected line '(%6;%7):(%8;%9)'.")
-                     .arg(i)
-                     .arg(line1.p1().x())
-                     .arg(line1.p1().y())
-                     .arg(line1.p2().x())
-                     .arg(line1.p2().y())
-                     .arg(line2.p1().x())
-                     .arg(line2.p1().y())
-                     .arg(line2.p2().x())
-                     .arg(line2.p2().y())
-                     )
-                 );
+        QVERIFY2(
+            VFuzzyComparePoints(line1.p1(), line2.p1()) && VFuzzyComparePoints(line1.p2(), line2.p2()),
+            qUtf8Printable(QStringLiteral("Index: %1. Got line '(%2;%3):(%4;%5)', Expected line '(%6;%7):(%8;%9)'.")
+                               .arg(i)
+                               .arg(line1.p1().x())
+                               .arg(line1.p1().y())
+                               .arg(line1.p2().x())
+                               .arg(line1.p2().y())
+                               .arg(line2.p1().x())
+                               .arg(line2.p1().y())
+                               .arg(line2.p2().x())
+                               .arg(line2.p2().y())));
     }
 }
 
@@ -408,8 +407,8 @@ auto AbstractTest::Run(int exit, const QString &program, const QStringList &argu
 {
     msecs = AbstractTest::RunTimeout(msecs);
 
-    const QString parameters = QStringLiteral("Program: %1 \nArguments: %2.")
-            .arg(program, arguments.join(QStringLiteral(", ")));
+    const QString parameters =
+        QStringLiteral("Program: %1 \nArguments: %2.").arg(program, arguments.join(QStringLiteral(", ")));
 
     QFileInfo info(program);
     if (not info.exists())
@@ -425,7 +424,7 @@ auto AbstractTest::Run(int exit, const QString &program, const QStringList &argu
     if (not process->waitForStarted(msecs))
     {
         error = QStringLiteral("The start operation timed out or an error occurred.\n%1\n%2")
-                .arg(parameters, QString(process->readAllStandardError()));
+                    .arg(parameters, QString(process->readAllStandardError()));
         process->kill();
         return TST_EX_START_TIME_OUT;
     }
@@ -433,7 +432,7 @@ auto AbstractTest::Run(int exit, const QString &program, const QStringList &argu
     if (not process->waitForFinished(msecs))
     {
         error = QStringLiteral("The finish operation timed out or an error occurred.\n%1\n%2")
-                .arg(parameters, QString(process->readAllStandardError()));
+                    .arg(parameters, QString(process->readAllStandardError()));
         process->kill();
         return TST_EX_FINISH_TIME_OUT;
     }
@@ -446,8 +445,9 @@ auto AbstractTest::Run(int exit, const QString &program, const QStringList &argu
 
     if (process->exitCode() != exit)
     {
-        error = QStringLiteral("Unexpected finish. Exit code: %1\n%2").arg(process->exitCode())
-                .arg(QString(process->readAllStandardError()));
+        error = QStringLiteral("Unexpected finish. Exit code: %1\n%2")
+                    .arg(process->exitCode())
+                    .arg(QString(process->readAllStandardError()));
         return process->exitCode();
     }
 
@@ -470,8 +470,8 @@ auto AbstractTest::CopyRecursively(const QString &srcFilePath, const QString &tg
             return false;
         }
         QDir sourceDir(srcFilePath);
-        const QStringList fileNames = sourceDir.entryList(QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot |
-                                                          QDir::Hidden | QDir::System);
+        const QStringList fileNames =
+            sourceDir.entryList(QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot | QDir::Hidden | QDir::System);
         for (auto &fileName : fileNames)
         {
             const QString newSrcFilePath = srcFilePath + QDir::separator() + fileName;
@@ -504,8 +504,8 @@ auto AbstractTest::CopyRecursively(const QString &srcFilePath, const QString &tg
         QFile srcFile(srcFilePath);
         if (not srcFile.open(QFile::ReadOnly))
         {
-            const QString msg = QStringLiteral("Can't copy file '%1'. Error: %2")
-                    .arg(srcFilePath, srcFile.errorString());
+            const QString msg =
+                QStringLiteral("Can't copy file '%1'. Error: %2").arg(srcFilePath, srcFile.errorString());
             QWARN(qUtf8Printable(msg));
             return false;
         }
@@ -514,7 +514,7 @@ auto AbstractTest::CopyRecursively(const QString &srcFilePath, const QString &tg
         if (not srcFile.copy(tgtFilePath))
         {
             const QString msg = QStringLiteral("Can't copy file '%1' to '%2'. Error: %3")
-                    .arg(srcFilePath, tgtFilePath, srcFile.errorString());
+                                    .arg(srcFilePath, tgtFilePath, srcFile.errorString());
             QWARN(qUtf8Printable(msg));
             return false;
         }
@@ -589,8 +589,8 @@ void AbstractTest::ReadBooleanValue(const QJsonObject &itemObject, const QString
         }
         else
         {
-            const QString error = QStringLiteral("%1 is not boolean value '%2'.").arg(attribute,
-                                                                                      attributeValue.toString());
+            const QString error =
+                QStringLiteral("%1 is not boolean value '%2'.").arg(attribute, attributeValue.toString());
             QFAIL(qUtf8Printable(error));
         }
     }
@@ -703,9 +703,8 @@ void AbstractTest::ReadPieceNodeValue(const QJsonObject &itemObject, VPieceNode 
     node = VPieceNode(id, typeTool, reverse);
 }
 
-
 //---------------------------------------------------------------------------------------------------------------------
-template<typename T, typename std::enable_if<std::is_floating_point<T>::value>::type*>
+template <typename T, typename std::enable_if<std::is_floating_point<T>::value>::type *>
 void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString &attribute, T &value,
                                    const QString &defaultValue)
 {
@@ -744,7 +743,7 @@ void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template<typename T, typename std::enable_if<std::is_enum<T>::value>::type*>
+template <typename T, typename std::enable_if<std::is_enum<T>::value>::type *>
 void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString &attribute, T &value,
                                    const QString &defaultValue)
 {
@@ -783,7 +782,7 @@ void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template<typename T, typename std::enable_if<std::is_integral<T>::value>::type*>
+template <typename T, typename std::enable_if<std::is_integral<T>::value>::type *>
 void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString &attribute, T &value,
                                    const QString &defaultValue)
 {
@@ -913,7 +912,7 @@ void AbstractTest::DBFromJson(const QJsonObject &dbObject, QSharedPointer<VConta
             GOType objectType;
             AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("type"), objectType);
 
-            switch(objectType)
+            switch (objectType)
             {
                 case GOType::Point:
                 {
@@ -930,8 +929,8 @@ void AbstractTest::DBFromJson(const QJsonObject &dbObject, QSharedPointer<VConta
                     break;
                 default:
                 {
-                    const QString error = QStringLiteral("Not supported item type '%1'.")
-                            .arg(static_cast<int>(objectType));
+                    const QString error =
+                        QStringLiteral("Not supported item type '%1'.").arg(static_cast<int>(objectType));
                     QFAIL(qUtf8Printable(error));
                 }
             }

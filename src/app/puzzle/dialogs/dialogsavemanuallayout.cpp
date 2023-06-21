@@ -26,10 +26,10 @@
  **
  *************************************************************************/
 #include "dialogsavemanuallayout.h"
-#include "ui_dialogsavemanuallayout.h"
-#include "../vpapplication.h"
 #include "../ifc/exception/vexception.h"
 #include "../vlayout/vlayoutexporter.h"
+#include "../vpapplication.h"
+#include "ui_dialogsavemanuallayout.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
@@ -38,19 +38,31 @@
 #include <QShowEvent>
 #include <QtDebug>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+#include "diagnostic.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+
+namespace
+{
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
+
 #ifndef Q_OS_WIN
-    Q_GLOBAL_STATIC_WITH_ARGS(const QString, baseFilenameRegExp, (QLatin1String("^[^\\/]+$"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, baseFilenameRegExp, (QLatin1String("^[^\\/]+$"))) // NOLINT
 #else
-    Q_GLOBAL_STATIC_WITH_ARGS(const QString, baseFilenameRegExp, (QLatin1String("^[^\\:?\"*|\\/<>]+$"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, baseFilenameRegExp, (QLatin1String("^[^\\:?\"*|\\/<>]+$"))) // NOLINT
 #endif
+
+QT_WARNING_POP
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogSaveManualLayout::DialogSaveManualLayout(vsizetype count, bool consoleExport, const QString &fileName,
                                                QWidget *parent)
-    : VAbstractLayoutDialog(parent),
-      ui(new Ui::DialogSaveManualLayout),
-      m_count(count),
-      m_consoleExport(consoleExport)
+  : VAbstractLayoutDialog(parent),
+    ui(new Ui::DialogSaveManualLayout),
+    m_count(count),
+    m_consoleExport(consoleExport)
 {
     ui->setupUi(this);
 
@@ -64,7 +76,7 @@ DialogSaveManualLayout::DialogSaveManualLayout(vsizetype count, bool consoleExpo
     SCASSERT(bOk != nullptr)
     bOk->setEnabled(false);
 
-    ui->lineEditFileName->setValidator( new QRegularExpressionValidator(QRegularExpression(*baseFilenameRegExp), this));
+    ui->lineEditFileName->setValidator(new QRegularExpressionValidator(QRegularExpression(*baseFilenameRegExp), this));
 
     const QString mask = m_count > 1 ? fileName + '_' : fileName;
     if (not m_consoleExport)
@@ -91,45 +103,46 @@ DialogSaveManualLayout::DialogSaveManualLayout(vsizetype count, bool consoleExpo
     RemoveFormatFromList(LayoutExportFormats::OBJ);
 #endif
 
-//    RemoveFormatFromList(LayoutExportFormats::NC); // No support for now
+    //    RemoveFormatFromList(LayoutExportFormats::NC); // No support for now
 
     connect(bOk, &QPushButton::clicked, this, &DialogSaveManualLayout::Save);
     connect(ui->lineEditFileName, &QLineEdit::textChanged, this, &DialogSaveManualLayout::ShowExample);
-    connect(ui->comboBoxFormat, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, &DialogSaveManualLayout::ShowExample);
+    connect(ui->comboBoxFormat, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            &DialogSaveManualLayout::ShowExample);
 
-    connect(ui->pushButtonBrowse, &QPushButton::clicked, this, [this]()
-    {
-        const QString dirPath = VPApplication::VApp()->PuzzleSettings()->GetPathManualLayouts();
-        bool usedNotExistedDir = false;
-        QDir directory(dirPath);
-        if (not directory.exists())
-        {
-            usedNotExistedDir = directory.mkpath(QChar('.'));
-        }
+    connect(ui->pushButtonBrowse, &QPushButton::clicked, this,
+            [this]()
+            {
+                const QString dirPath = VPApplication::VApp()->PuzzleSettings()->GetPathManualLayouts();
+                bool usedNotExistedDir = false;
+                QDir directory(dirPath);
+                if (not directory.exists())
+                {
+                    usedNotExistedDir = directory.mkpath(QChar('.'));
+                }
 
-        const QString dir = QFileDialog::getExistingDirectory(
-            this, tr("Select folder"), dirPath,
-            VAbstractApplication::VApp()->NativeFileDialog(QFileDialog::ShowDirsOnly |
-                                                           QFileDialog::DontResolveSymlinks));
-        if (not dir.isEmpty())
-        {// If paths equal the signal will not be called, we will do this manually
-            dir == ui->lineEditPath->text() ? PathChanged(dir) : ui->lineEditPath->setText(dir);
-        }
+                const QString dir = QFileDialog::getExistingDirectory(
+                    this, tr("Select folder"), dirPath,
+                    VAbstractApplication::VApp()->NativeFileDialog(QFileDialog::ShowDirsOnly |
+                                                                   QFileDialog::DontResolveSymlinks));
+                if (not dir.isEmpty())
+                { // If paths equal the signal will not be called, we will do this manually
+                    dir == ui->lineEditPath->text() ? PathChanged(dir) : ui->lineEditPath->setText(dir);
+                }
 
-        if (usedNotExistedDir)
-        {
-            QDir directory(dirPath);
-            directory.rmpath(QChar('.'));
-        }
-    });
+                if (usedNotExistedDir)
+                {
+                    QDir directory(dirPath);
+                    directory.rmpath(QChar('.'));
+                }
+            });
     connect(ui->lineEditPath, &QLineEdit::textChanged, this, &DialogSaveManualLayout::PathChanged);
 
     ui->lineEditPath->setText(VPApplication::VApp()->PuzzleSettings()->GetPathManualLayouts());
 
     ReadSettings();
 
-    ShowExample();//Show example for current format.
+    ShowExample(); // Show example for current format.
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -175,7 +188,7 @@ void DialogSaveManualLayout::SelectFormat(LayoutExportFormats format)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSaveManualLayout::SetBinaryDXFFormat(bool binary)
 {
-    switch(Format())
+    switch (Format())
     {
         case LayoutExportFormats::DXF_AC1006_Flat:
         case LayoutExportFormats::DXF_AC1009_Flat:
@@ -199,7 +212,7 @@ void DialogSaveManualLayout::SetBinaryDXFFormat(bool binary)
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogSaveManualLayout::IsBinaryDXFFormat() const -> bool
 {
-    switch(Format())
+    switch (Format())
     {
         case LayoutExportFormats::DXF_AC1006_Flat:
         case LayoutExportFormats::DXF_AC1009_Flat:
@@ -221,7 +234,7 @@ auto DialogSaveManualLayout::IsBinaryDXFFormat() const -> bool
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSaveManualLayout::SetShowGrainline(bool show)
 {
-    switch(Format())
+    switch (Format())
     {
         case LayoutExportFormats::SVG:
         case LayoutExportFormats::PDF:
@@ -250,7 +263,7 @@ void DialogSaveManualLayout::SetShowGrainline(bool show)
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogSaveManualLayout::IsShowGrainline() const -> bool
 {
-    switch(Format())
+    switch (Format())
     {
         case LayoutExportFormats::SVG:
         case LayoutExportFormats::PDF:
@@ -315,7 +328,7 @@ void DialogSaveManualLayout::SetTextAsPaths(bool textAsPaths)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSaveManualLayout::SetExportUnified(bool value)
 {
-    switch(Format())
+    switch (Format())
     {
         case LayoutExportFormats::PDF:
         case LayoutExportFormats::PDFTiled:
@@ -332,7 +345,7 @@ void DialogSaveManualLayout::SetExportUnified(bool value)
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogSaveManualLayout::IsExportUnified() const -> bool
 {
-    switch(Format())
+    switch (Format())
     {
         case LayoutExportFormats::PDF:
         case LayoutExportFormats::PDFTiled:
@@ -347,7 +360,7 @@ auto DialogSaveManualLayout::IsExportUnified() const -> bool
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSaveManualLayout::SetTilesScheme(bool value)
 {
-    switch(Format())
+    switch (Format())
     {
         case LayoutExportFormats::PDFTiled:
             ui->checkBoxTilesScheme->setChecked(value);
@@ -361,7 +374,7 @@ void DialogSaveManualLayout::SetTilesScheme(bool value)
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogSaveManualLayout::IsTilesScheme() const -> bool
 {
-    switch(Format())
+    switch (Format())
     {
         case LayoutExportFormats::PDFTiled:
             return ui->checkBoxTilesScheme->isChecked();
@@ -373,8 +386,8 @@ auto DialogSaveManualLayout::IsTilesScheme() const -> bool
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSaveManualLayout::showEvent(QShowEvent *event)
 {
-    QDialog::showEvent( event );
-    if ( event->spontaneous() )
+    QDialog::showEvent(event);
+    if (event->spontaneous())
     {
         return;
     }
@@ -387,7 +400,7 @@ void DialogSaveManualLayout::showEvent(QShowEvent *event)
 
     setFixedHeight(size().height());
 
-    m_isInitialized = true;//first show windows are held
+    m_isInitialized = true; // first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -395,12 +408,12 @@ void DialogSaveManualLayout::Save()
 {
     WriteSettings();
 
-    for (int i=0; i < m_count; ++i)
+    for (int i = 0; i < m_count; ++i)
     {
         QString name;
         if (m_count > 1 && not IsExportUnified())
         {
-            name = Path() + '/' + FileName() + QString::number(i+1) + VLayoutExporter::ExportFormatSuffix(Format());
+            name = Path() + '/' + FileName() + QString::number(i + 1) + VLayoutExporter::ExportFormatSuffix(Format());
         }
         else
         {
@@ -409,9 +422,10 @@ void DialogSaveManualLayout::Save()
 
         if (QFile::exists(name))
         {
-            QMessageBox::StandardButton res = QMessageBox::question(this, tr("Name conflict"),
-                                  tr("Folder already contain file with name %1. Rewrite all conflict file names?")
-                                  .arg(name), QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
+            QMessageBox::StandardButton res = QMessageBox::question(
+                this, tr("Name conflict"),
+                tr("Folder already contain file with name %1. Rewrite all conflict file names?").arg(name),
+                QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
             if (res == QMessageBox::No)
             {
                 reject();
@@ -470,7 +484,7 @@ void DialogSaveManualLayout::ShowExample()
     ui->checkBoxTilesScheme->setEnabled(false);
     ui->checkBoxShowGrainline->setEnabled(true);
 
-    switch(currentFormat)
+    switch (currentFormat)
     {
         case LayoutExportFormats::DXF_AAMA:
         case LayoutExportFormats::DXF_ASTM:
@@ -515,7 +529,7 @@ void DialogSaveManualLayout::ShowExample()
 auto DialogSaveManualLayout::SupportPSTest() -> bool
 {
     static bool havePdf = false;
-    static bool tested  = false;
+    static bool tested = false;
     if (!tested)
     {
         havePdf = VLayoutExporter::SupportPDFConversion();
@@ -525,14 +539,12 @@ auto DialogSaveManualLayout::SupportPSTest() -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto DialogSaveManualLayout::InitFormats() -> QVector<std::pair<QString, LayoutExportFormats> >
+auto DialogSaveManualLayout::InitFormats() -> QVector<std::pair<QString, LayoutExportFormats>>
 {
     QVector<std::pair<QString, LayoutExportFormats>> list;
 
     auto InitFormat = [&list](LayoutExportFormats format)
-    {
-        list.append(std::make_pair(VLayoutExporter::ExportFormatDescription(format), format));
-    };
+    { list.append(std::make_pair(VLayoutExporter::ExportFormatDescription(format), format)); };
 
     InitFormat(LayoutExportFormats::SVG);
     InitFormat(LayoutExportFormats::PDF);
@@ -555,7 +567,7 @@ auto DialogSaveManualLayout::InitFormats() -> QVector<std::pair<QString, LayoutE
     InitFormat(LayoutExportFormats::DXF_AAMA);
     InitFormat(LayoutExportFormats::DXF_ASTM);
     InitFormat(LayoutExportFormats::PDFTiled);
-//    InitFormat(LayoutExportFormats::NC);
+    //    InitFormat(LayoutExportFormats::NC);
     InitFormat(LayoutExportFormats::RLD);
     InitFormat(LayoutExportFormats::TIF);
 

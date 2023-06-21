@@ -28,15 +28,15 @@
 
 #include "vdomdocument.h"
 
+#include <QSaveFile>
 #include <qcompilerdetection.h>
 #include <qdom.h>
-#include <QSaveFile>
 
+#include "../exception/vexception.h"
 #include "../exception/vexceptionbadid.h"
 #include "../exception/vexceptionconversionerror.h"
 #include "../exception/vexceptionemptyparameter.h"
 #include "../exception/vexceptionwrongid.h"
-#include "../exception/vexception.h"
 #include "../ifcdef.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -45,9 +45,12 @@
 #endif
 
 #include <QByteArray>
+#include <QDir>
 #include <QDomNodeList>
 #include <QDomText>
 #include <QFile>
+#include <QFileInfo>
+#include <QFutureWatcher>
 #include <QIODevice>
 #include <QMessageLogger>
 #include <QObject>
@@ -55,14 +58,12 @@
 #include <QTemporaryFile>
 #include <QTextDocument>
 #include <QTextStream>
+#include <QTimer>
 #include <QUrl>
 #include <QVector>
-#include <QtDebug>
 #include <QXmlStreamWriter>
-#include <QTimer>
 #include <QtConcurrentRun>
-#include <QFutureWatcher>
-#include <QRegularExpression>
+#include <QtDebug>
 
 namespace
 {
@@ -71,7 +72,7 @@ void SaveNodeCanonically(QXmlStreamWriter &stream, const QDomNode &domNode)
 {
     if (stream.hasError())
     {
-       return;
+        return;
     }
 
     if (domNode.isElement())
@@ -159,7 +160,7 @@ auto LessThen(const QDomNode &element1, const QDomNode &element2) -> bool
     QString tag1 = element1.nodeName();
     QString tag2 = element2.nodeName();
 
-    //qDebug() << tag1 <<tag2;
+    // qDebug() << tag1 <<tag2;
     if (tag1 != tag2)
     {
         return tag1 < tag2;
@@ -169,7 +170,7 @@ auto LessThen(const QDomNode &element1, const QDomNode &element2) -> bool
     QList<QDomNode> attributes1 = GetElementAttributes(element1);
     QList<QDomNode> attributes2 = GetElementAttributes(element2);
 
-    if(attributes1.size() != attributes2.size())
+    if (attributes1.size() != attributes2.size())
     {
         return attributes1.size() < attributes2.size();
     }
@@ -179,22 +180,22 @@ auto LessThen(const QDomNode &element1, const QDomNode &element2) -> bool
         *stop = false;
         std::sort(list1.begin(), list1.end(), LessThen);
         std::sort(list2.begin(), list2.end(), LessThen);
-        //qDebug() << "comparing sorted lists";
-        for(int k = 0; k < list1.size(); ++k)
+        // qDebug() << "comparing sorted lists";
+        for (int k = 0; k < list1.size(); ++k)
         {
             if (!LessThen(list1[k], list2[k]))
             {
                 if (LessThen(list2[k], list1[k]))
                 {
                     *stop = true;
-                    //qDebug() << "false!";
+                    // qDebug() << "false!";
                     return false;
                 }
             }
             else
             {
                 *stop = true;
-                //qDebug() << "true!";
+                // qDebug() << "true!";
                 return true;
             }
         }
@@ -214,17 +215,17 @@ auto LessThen(const QDomNode &element1, const QDomNode &element2) -> bool
 
     QString value1, value2;
 
-    if(elts1.size() != elts2.size())
+    if (elts1.size() != elts2.size())
     {
         return elts1.size() < elts2.size();
     }
 
-    if(elts1.isEmpty())
+    if (elts1.isEmpty())
     {
         value1 = element1.nodeValue();
         value2 = element2.nodeValue();
 
-        //qDebug() <<value1 << value2 << (value1 < value2);
+        // qDebug() <<value1 << value2 << (value1 < value2);
         return value1 < value2;
     }
 
@@ -235,7 +236,7 @@ auto LessThen(const QDomNode &element1, const QDomNode &element2) -> bool
     }
     return false;
 }
-}  // namespace
+} // namespace
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
@@ -245,23 +246,23 @@ Q_LOGGING_CATEGORY(vXML, "v.xml") // NOLINT
 
 QT_WARNING_POP
 
-const QString VDomDocument::AttrId          = QStringLiteral("id");
-const QString VDomDocument::AttrText        = QStringLiteral("text");
-const QString VDomDocument::AttrBold        = QStringLiteral("bold");
-const QString VDomDocument::AttrItalic      = QStringLiteral("italic");
-const QString VDomDocument::AttrAlignment   = QStringLiteral("alignment");
+const QString VDomDocument::AttrId = QStringLiteral("id");
+const QString VDomDocument::AttrText = QStringLiteral("text");
+const QString VDomDocument::AttrBold = QStringLiteral("bold");
+const QString VDomDocument::AttrItalic = QStringLiteral("italic");
+const QString VDomDocument::AttrAlignment = QStringLiteral("alignment");
 const QString VDomDocument::AttrFSIncrement = QStringLiteral("sfIncrement");
 
 const QString VDomDocument::TagVersion = QStringLiteral("version");
-const QString VDomDocument::TagUnit    = QStringLiteral("unit");
-const QString VDomDocument::TagLine    = QStringLiteral("line");
+const QString VDomDocument::TagUnit = QStringLiteral("unit");
+const QString VDomDocument::TagLine = QStringLiteral("line");
 
 //---------------------------------------------------------------------------------------------------------------------
 VDomDocument::VDomDocument(QObject *parent)
-    : QObject(parent),
-      QDomDocument(),
-      m_elementIdCache(),
-      m_watcher(new QFutureWatcher<QHash<quint32, QDomElement>>(this))
+  : QObject(parent),
+    QDomDocument(),
+    m_elementIdCache(),
+    m_watcher(new QFutureWatcher<QHash<quint32, QDomElement>>(this))
 {
     connect(m_watcher, &QFutureWatcher<QHash<quint32, QDomElement>>::finished, this, &VDomDocument::CacheRefreshed);
 }
@@ -300,7 +301,7 @@ auto VDomDocument::elementById(quint32 id, const QString &tagName, bool updateCa
     }
 
     if (updateCache)
-    {   // Cached missed
+    { // Cached missed
         RefreshElementIdCache();
     }
 
@@ -316,7 +317,7 @@ auto VDomDocument::elementById(quint32 id, const QString &tagName, bool updateCa
     else
     {
         const QDomNodeList list = elementsByTagName(tagName);
-        for (int i=0; i < list.size(); ++i)
+        for (int i = 0; i < list.size(); ++i)
         {
             const QDomElement domElement = list.at(i).toElement();
             if (not domElement.isNull() && domElement.hasAttribute(AttrId))
@@ -367,7 +368,7 @@ auto VDomDocument::find(QHash<quint32, QDomElement> &cache, const QDomElement &n
         }
     }
 
-    for (qint32 i=0; i<node.childNodes().length(); ++i)
+    for (qint32 i = 0; i < node.childNodes().length(); ++i)
     {
         const QDomNode n = node.childNodes().at(i);
         if (n.isElement())
@@ -380,7 +381,6 @@ auto VDomDocument::find(QHash<quint32, QDomElement> &cache, const QDomElement &n
     }
     return false;
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VDomDocument::RefreshCache(const QDomElement &root) const -> QHash<quint32, QDomElement>
@@ -500,7 +500,7 @@ auto VDomDocument::GetParametrBool(const QDomElement &domElement, const QString 
     {
         parametr = GetParametrString(domElement, name, defValue);
 
-        const QStringList bools {trueStr, falseStr, QChar('1'), QChar('0')};
+        const QStringList bools{trueStr, falseStr, QChar('1'), QChar('0')};
         switch (bools.indexOf(parametr))
         {
             case 0: // true
@@ -511,7 +511,7 @@ auto VDomDocument::GetParametrBool(const QDomElement &domElement, const QString 
             case 3: // 0
                 val = false;
                 break;
-            default:// others
+            default: // others
                 throw VExceptionConversionError(message, name);
         }
     }
@@ -687,7 +687,7 @@ void VDomDocument::CollectId(const QDomElement &node, QVector<quint32> &vector) 
         vector.append(id);
     }
 
-    for (qint32 i=0; i<node.childNodes().length(); ++i)
+    for (qint32 i = 0; i < node.childNodes().length(); ++i)
     {
         const QDomNode n = node.childNodes().at(i);
         if (n.isElement())
@@ -702,7 +702,7 @@ void VDomDocument::RefreshElementIdCache()
 {
     if (m_watcher->isFinished())
     {
-        m_watcher->setFuture(QtConcurrent::run([this](){return RefreshCache(documentElement());}));
+        m_watcher->setFuture(QtConcurrent::run([this]() { return RefreshCache(documentElement()); }));
     }
 }
 
@@ -736,8 +736,8 @@ void VDomDocument::setXMLContent(const QString &fileName)
     {
         file.close();
         VException e(errorMsg);
-        e.AddMoreInformation(tr("Parsing error file %3 in line %1 column %2").arg(errorLine).arg(errorColumn)
-                             .arg(fileName));
+        e.AddMoreInformation(
+            tr("Parsing error file %3 in line %1 column %2").arg(errorLine).arg(errorColumn).arg(fileName));
         throw e;
     }
 
@@ -748,7 +748,7 @@ void VDomDocument::setXMLContent(const QString &fileName)
 auto VDomDocument::UnitsHelpString() -> QString
 {
     QString r;
-    for (auto i = static_cast<int>(Unit::Mm), last = static_cast<int>(Unit::LAST_UNIT_DO_NOT_USE); i < last;++i)
+    for (auto i = static_cast<int>(Unit::Mm), last = static_cast<int>(Unit::LAST_UNIT_DO_NOT_USE); i < last; ++i)
     {
         r += UnitsToStr(static_cast<Unit>(i));
         if (i < last - 1)
@@ -772,7 +772,7 @@ auto VDomDocument::SaveDocument(const QString &fileName, QString &error) -> bool
 {
     if (fileName.isEmpty())
     {
-        qDebug()<<"Got empty file name.";
+        qDebug() << "Got empty file name.";
         return false;
     }
     bool success = false;
@@ -787,10 +787,10 @@ auto VDomDocument::SaveDocument(const QString &fileName, QString &error) -> bool
         }
         // Left these strings in case we will need them for testing purposes
         // QTextStream out(&file);
-//#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-        // out.setCodec("UTF-8");
-//#endif
-        // save(out, indent);
+        // #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+        //  out.setCodec("UTF-8");
+        // #endif
+        //  save(out, indent);
 
         success = file.commit();
     }
@@ -886,7 +886,7 @@ auto VDomDocument::GetFormatVersion(const QString &version) -> unsigned
         return 0x0;
     }
 
-    return (major<<16u)|(minor<<8u)|(patch);
+    return (major << 16u) | (minor << 8u) | (patch);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -895,7 +895,7 @@ auto VDomDocument::setTagText(const QString &tag, const QString &text) -> bool
     const QDomNodeList nodeList = this->elementsByTagName(tag);
     if (nodeList.isEmpty())
     {
-        qDebug()<<"Can't save tag "<<tag<<Q_FUNC_INFO;
+        qDebug() << "Can't save tag " << tag << Q_FUNC_INFO;
     }
     else
     {
@@ -967,11 +967,11 @@ auto VDomDocument::UniqueTag(const QString &tagName) const -> QDomElement
  */
 void VDomDocument::RemoveAllChildren(QDomElement &domElement)
 {
-    if ( domElement.hasChildNodes() )
+    if (domElement.hasChildNodes())
     {
-        while ( domElement.childNodes().length() >= 1 )
+        while (domElement.childNodes().length() >= 1)
         {
-            domElement.removeChild( domElement.firstChild() );
+            domElement.removeChild(domElement.firstChild());
         }
     }
 }
@@ -1006,12 +1006,12 @@ auto VDomDocument::SafeCopy(const QString &source, const QString &destination, Q
 {
     bool result = false;
 
-//#ifdef Q_OS_WIN32
-//    qt_ntfs_permission_lookup++; // turn checking on
-//#endif /*Q_OS_WIN32*/
+    // #ifdef Q_OS_WIN32
+    //     qt_ntfs_permission_lookup++; // turn checking on
+    // #endif /*Q_OS_WIN32*/
 
     QTemporaryFile destFile(destination + QLatin1String(".XXXXXX"));
-    destFile.setAutoRemove(false);// Will be renamed to be destination file
+    destFile.setAutoRemove(false); // Will be renamed to be destination file
     if (not destFile.open())
     {
         error = destFile.errorString();
@@ -1060,9 +1060,9 @@ auto VDomDocument::SafeCopy(const QString &source, const QString &destination, Q
         }
     }
 
-//#ifdef Q_OS_WIN32
-//    qt_ntfs_permission_lookup--; // turn off check permission again
-//#endif /*Q_OS_WIN32*/
+    // #ifdef Q_OS_WIN32
+    //     qt_ntfs_permission_lookup--; // turn off check permission again
+    // #endif /*Q_OS_WIN32*/
 
     return result;
 }

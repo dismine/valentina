@@ -29,17 +29,17 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "mainwindowsnogui.h"
-#include "core/vcmdexport.h"
-#include "../vmisc/vlockguard.h"
 #include "../vformat/vdimensions.h"
+#include "../vmisc/vlockguard.h"
+#include "core/vcmdexport.h"
+#include "mainwindowsnogui.h"
 
 #include <QDoubleSpinBox>
 #include <QPointer>
 
 namespace Ui
 {
-    class MainWindow;
+class MainWindow;
 }
 
 class VToolOptionsPropertyBrowser;
@@ -66,6 +66,7 @@ class VWidgetBackgroundImages;
 class MainWindow : public MainWindowsNoGUI
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
@@ -109,12 +110,13 @@ signals:
     void EnableNodePointHover(bool enable);
     void EnableDetailHover(bool enable);
     void EnableImageBackgroundHover(bool enable);
+
 protected:
     void keyPressEvent(QKeyEvent *event) override;
     void showEvent(QShowEvent *event) override;
-    void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent *event) override;
     void closeEvent(QCloseEvent *event) override;
-    void customEvent(QEvent * event) override;
+    void customEvent(QEvent *event) override;
     void CleanLayout() override;
     void PrepareSceneList(PreviewQuatilty quality) override;
     void ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator) final;
@@ -192,7 +194,7 @@ private slots:
 
     void on_actionNew_triggered();
     bool on_actionSaveAs_triggered(); // NOLINT(modernize-use-trailing-return-type)
-    bool on_actionSave_triggered(); // NOLINT(modernize-use-trailing-return-type)
+    bool on_actionSave_triggered();   // NOLINT(modernize-use-trailing-return-type)
     void on_actionOpen_triggered();
 
     void on_actionOpenPuzzle_triggered();
@@ -222,7 +224,7 @@ private slots:
     void RemoveWatermark();
 #if defined(Q_OS_MAC)
     void OpenAt(QAction *where);
-#endif //defined(Q_OS_MAC)
+#endif // defined(Q_OS_MAC)
 
     void DimensionABaseChanged();
     void DimensionBBaseChanged();
@@ -279,14 +281,14 @@ private:
 
     bool m_patternReadOnly{false};
 
-    QPointer<DialogIncrements>        m_dialogTable;
-    QPointer<DialogTool>              m_dialogTool{};
-    QPointer<DialogHistory>           m_dialogHistory;
+    QPointer<DialogIncrements> m_dialogTable;
+    QPointer<DialogTool> m_dialogTool{};
+    QPointer<DialogHistory> m_dialogHistory;
     QPointer<DialogFinalMeasurements> m_dialogFMeasurements;
 
     /** @brief comboBoxDraws comboc who show name of pattern peaces. */
     QComboBox *m_comboBoxDraws{nullptr};
-    QLabel    *m_patternPieceLabel{nullptr};
+    QLabel *m_patternPieceLabel{nullptr};
 
     /** @brief currentDrawIndex save current selected pattern peace. */
     qint32 m_currentDrawIndex{0};
@@ -316,10 +318,10 @@ private:
     VWidgetBackgroundImages *m_backgroundImagesWidget{nullptr};
     QSharedPointer<VLockGuard<char>> m_lock{nullptr};
 
-    QList<QToolButton*> m_toolButtonPointerList{};
+    QList<QToolButton *> m_toolButtonPointerList{};
 
     QProgressBar *m_progressBar;
-    QLabel       *m_statusLabel;
+    QLabel *m_statusLabel;
 
     QList<QPointer<WatermarkWindow>> m_watermarkEditors{};
 
@@ -332,7 +334,7 @@ private:
     QTimer *m_gradation;
 
     QMap<QUuid, VBackgroundImageItem *> m_backgroundImages{};
-    VBackgroundImageControls* m_backgroudcontrols{nullptr};
+    VBackgroundImageControls *m_backgroudcontrols{nullptr};
 
     bool m_groupsActive{false};
     bool m_toolOptionsActive{false};
@@ -366,21 +368,14 @@ private:
     template <typename Dialog, typename Func, typename Func2>
     void SetToolButtonWithApply(bool checked, Tool t, const QString &cursor, const QString &toolTip,
                                 Func closeDialogSlot, Func2 applyDialogSlot);
-    template <typename DrawTool>
-    void ClosedDialog(int result);
+    template <typename DrawTool> void ClosedDialog(int result);
 
-    template <typename DrawTool>
-    void ClosedDialogWithApply(int result, VMainGraphicsScene *scene);
-    template <typename DrawTool>
-    void ApplyDialog(VMainGraphicsScene *scene);
-    template <typename DrawTool>
-    void ClosedDrawDialogWithApply(int result);
-    template <typename DrawTool>
-    void ApplyDrawDialog();
-    template <typename DrawTool>
-    void ClosedDetailsDialogWithApply(int result);
-    template <typename DrawTool>
-    void ApplyDetailsDialog();
+    template <typename DrawTool> void ClosedDialogWithApply(int result, VMainGraphicsScene *scene);
+    template <typename DrawTool> void ApplyDialog(VMainGraphicsScene *scene);
+    template <typename DrawTool> void ClosedDrawDialogWithApply(int result);
+    template <typename DrawTool> void ApplyDrawDialog();
+    template <typename DrawTool> void ClosedDetailsDialogWithApply(int result);
+    template <typename DrawTool> void ApplyDetailsDialog();
 
     auto SavePattern(const QString &fileName, QString &error) -> bool;
     void AutoSavePattern();
@@ -404,7 +399,7 @@ private:
 
     void AddDocks();
     void InitDocksContain();
-    auto OpenNewValentina(const QString &fileName = QString())const -> bool;
+    auto OpenNewValentina(const QString &fileName = QString()) const -> bool;
     void FileClosedCorrect();
     static auto GetUnlokedRestoreFileList() -> QStringList;
 
@@ -420,8 +415,8 @@ private:
     void ReadMeasurements(qreal baseA, qreal baseB, qreal baseC);
 
     void ReopenFilesAfterCrash(QStringList &args);
-    auto DoExport(const VCommandLinePtr& expParams) -> bool;
-    auto DoFMExport(const VCommandLinePtr& expParams) -> bool;
+    auto DoExport(const VCommandLinePtr &expParams) -> bool;
+    auto DoFMExport(const VCommandLinePtr &expParams) -> bool;
 
     auto SetDimensionA(int value) -> bool;
     auto SetDimensionB(int value) -> bool;
@@ -454,7 +449,7 @@ private:
     void StoreIndividualMDimensions();
 
     void StoreMultisizeMDimension(const QList<MeasurementDimension_p> &dimensions, int index, qreal currentBase);
-    void StoreIndividualMDimension(const QMap<QString, QSharedPointer<VMeasurement> > &measurements, IMD type);
+    void StoreIndividualMDimension(const QMap<QString, QSharedPointer<VMeasurement>> &measurements, IMD type);
 
     auto DimensionRestrictedValues(int index, const MeasurementDimension_p &dimension) -> QVector<qreal>;
     void SetDimensionBases();

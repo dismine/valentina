@@ -29,11 +29,11 @@
 #ifndef VDXFPAINTDEVICE_H
 #define VDXFPAINTDEVICE_H
 
-#include <qcompilerdetection.h>
 #include <QPaintDevice>
 #include <QSize>
 #include <QString>
 #include <QtGlobal>
+#include <qcompilerdetection.h>
 
 #include "dxfdef.h"
 #include "libdxfrw/drw_base.h"
@@ -80,11 +80,12 @@ public:
 
 protected:
     auto metric(PaintDeviceMetric metric) const -> int override;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VDxfPaintDevice) // NOLINT
     VDxfEngine *m_engine;
-    QString     m_fileName{};
+    QString m_fileName{};
 };
 
 #endif // VDXFPAINTDEVICE_H

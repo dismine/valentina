@@ -29,7 +29,7 @@
 #ifndef VLAYOUTDETAIL_H
 #define VLAYOUTDETAIL_H
 
-#include <qcompilerdetection.h>
+#include <QCoreApplication>
 #include <QDate>
 #include <QLineF>
 #include <QPointF>
@@ -39,7 +39,6 @@
 #include <QTypeInfo>
 #include <QVector>
 #include <QtGlobal>
-#include <QCoreApplication>
 
 #include "../vmisc/typedef.h"
 #include "../vpatterndb/floatItemData/floatitemdef.h"
@@ -70,9 +69,10 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 
-class VLayoutPiece :public VAbstractPiece
+class VLayoutPiece : public VAbstractPiece
 {
     Q_DECLARE_TR_FUNCTIONS(VLayoutPiece) // NOLINT
+
 public:
     VLayoutPiece();
     VLayoutPiece(const VLayoutPiece &detail);
@@ -82,7 +82,8 @@ public:
     auto operator=(const VLayoutPiece &detail) -> VLayoutPiece &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VLayoutPiece(VLayoutPiece &&detail) Q_DECL_NOTHROW;
-    auto operator=(VLayoutPiece &&detail) Q_DECL_NOTHROW -> VLayoutPiece &;
+    auto operator=(VLayoutPiece &&detail) Q_DECL_NOTHROW
+    ->VLayoutPiece &;
 #endif
 
     static auto Create(const VPiece &piece, vidtype id, const VContainer *pattern) -> VLayoutPiece;
@@ -112,20 +113,21 @@ public:
     auto GetPlaceLabels() const -> QVector<VLayoutPlaceLabel>;
     void SetPlaceLabels(const QVector<VLayoutPlaceLabel> &labels);
 
-    auto MappedInternalPathsForCut(bool cut) const -> QVector<QVector<VLayoutPoint> >;
+    auto MappedInternalPathsForCut(bool cut) const -> QVector<QVector<VLayoutPoint>>;
     auto GetInternalPaths() const -> QVector<VLayoutPiecePath>;
     void SetInternalPaths(const QVector<VLayoutPiecePath> &internalPaths);
 
     auto GetPieceTextPosition() const -> QPointF;
     auto GetPieceText() const -> QStringList;
-    void SetPieceText(const QString &qsName, const VPieceLabelData& data, const QFont& font, const VContainer *pattern);
+    void SetPieceText(const QString &qsName, const VPieceLabelData &data, const QFont &font,
+                      const VContainer *pattern);
 
     auto GetPatternTextPosition() const -> QPointF;
     auto GetPatternText() const -> QStringList;
-    void SetPatternInfo(VAbstractPattern *pDoc, const VPatternLabelData& geom, const QFont& font,
+    void SetPatternInfo(VAbstractPattern *pDoc, const VPatternLabelData &geom, const QFont &font,
                         const VContainer *pattern);
 
-    void SetGrainline(const VGrainlineData& geom, const VContainer *pattern);
+    void SetGrainline(const VGrainlineData &geom, const VContainer *pattern);
     auto GetGrainline() const -> VPieceGrainline;
     auto GetMappedGrainlineShape() const -> GrainlineShape;
     auto GetGrainlineShape() const -> GrainlineShape;
@@ -194,8 +196,8 @@ public:
 
     auto BiggestEdge() const -> qreal;
 
-    friend auto operator<< (QDataStream& dataStream, const VLayoutPiece& piece) -> QDataStream&;
-    friend auto operator>> (QDataStream& dataStream, VLayoutPiece& piece) -> QDataStream&;
+    friend auto operator<<(QDataStream &dataStream, const VLayoutPiece &piece) -> QDataStream &;
+    friend auto operator>>(QDataStream &dataStream, VLayoutPiece &piece) -> QDataStream &;
 
     auto MapPlaceLabelShape(PlaceLabelImg shape) const -> PlaceLabelImg;
 
@@ -205,13 +207,13 @@ protected:
     auto GetPieceLabelRect() const -> QVector<QPointF>;
     void SetPieceLabelRect(const QVector<QPointF> &rect);
 
-    auto GetPieceLabelData() const ->VTextManager;
+    auto GetPieceLabelData() const -> VTextManager;
     void SetPieceLabelData(const VTextManager &data);
 
     auto GetPatternLabelRect() const -> QVector<QPointF>;
     void SetPatternLabelRect(const QVector<QPointF> &rect);
 
-    auto GetPatternLabelData() const ->VTextManager;
+    auto GetPatternLabelData() const -> VTextManager;
     void SetPatternLabelData(const VTextManager &data);
 
 private:
@@ -226,8 +228,7 @@ private:
                             bool textAsPaths) const;
     void CreateGrainlineItem(QGraphicsItem *parent) const;
 
-    template <class T>
-    auto Map(QVector<T> points) const -> QVector<T>;
+    template <class T> auto Map(QVector<T> points) const -> QVector<T>;
     auto Map(const GrainlineShape &shape) const -> GrainlineShape;
 
     auto Edge(const QVector<QPointF> &path, int i) const -> QLineF;

@@ -137,7 +137,6 @@ extern const QChar groupSep;
 extern const QChar coordintatesSep;
 extern const QChar pointsSep;
 extern const QChar itemsSep;
-}  // namespace ML
-
+} // namespace ML
 
 #endif // VPLAYOUTLITERALS_H

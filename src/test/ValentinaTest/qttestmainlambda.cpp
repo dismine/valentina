@@ -32,34 +32,35 @@
 #include <xercesc/util/PlatformUtils.hpp>
 #endif
 
-#include "tst_vposter.h"
-#include "tst_vabstractpiece.h"
-#include "tst_vspline.h"
-#include "tst_nameregexp.h"
-#include "tst_vlayoutdetail.h"
-#include "tst_varc.h"
-#include "tst_vellipticalarc.h"
-#include "tst_qmutokenparser.h"
-#include "tst_vmeasurements.h"
-#include "tst_vlockguard.h"
-#include "tst_misc.h"
-#include "tst_vcommandline.h"
-#include "tst_vpiece.h"
-#include "tst_findpoint.h"
-#include "tst_vabstractcurve.h"
-#include "tst_vcubicbezierpath.h"
-#include "tst_vgobject.h"
-#include "tst_vsplinepath.h"
-#include "tst_vpointf.h"
-#include "tst_readval.h"
-#include "tst_vtranslatevars.h"
-#include "tst_vtooluniondetails.h"
-#include "tst_vdomdocument.h"
 #include "tst_dxf.h"
+#include "tst_findpoint.h"
+#include "tst_misc.h"
+#include "tst_nameregexp.h"
+#include "tst_qmutokenparser.h"
+#include "tst_readval.h"
+#include "tst_vabstractcurve.h"
+#include "tst_vabstractpiece.h"
+#include "tst_varc.h"
+#include "tst_vcommandline.h"
+#include "tst_vcubicbezierpath.h"
+#include "tst_vdomdocument.h"
+#include "tst_vellipticalarc.h"
+#include "tst_vgobject.h"
+#include "tst_vlayoutdetail.h"
+#include "tst_vlockguard.h"
+#include "tst_vmeasurements.h"
+#include "tst_vpiece.h"
+#include "tst_vpointf.h"
+#include "tst_vposter.h"
+#include "tst_vspline.h"
+#include "tst_vsplinepath.h"
+#include "tst_vsvgpathtokenizer.h"
+#include "tst_vtooluniondetails.h"
+#include "tst_vtranslatevars.h"
 #include "tst_xsdschema.h"
 
-#include "../vmisc/def.h"
 #include "../qmuparser/qmudef.h"
+#include "../vmisc/def.h"
 #include "../vmisc/testvapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -70,10 +71,10 @@ auto main(int argc, char **argv) -> int
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     XERCES_CPP_NAMESPACE::XMLPlatformUtils::Initialize();
 
-    auto Terminate = qScopeGuard([](){ XERCES_CPP_NAMESPACE::XMLPlatformUtils::Terminate(); });
+    auto Terminate = qScopeGuard([]() { XERCES_CPP_NAMESPACE::XMLPlatformUtils::Terminate(); });
 #endif
 
-    TestVApplication app( argc, argv );// For QPrinter
+    TestVApplication app(argc, argv); // For QPrinter
 
     QResource::registerResource(QCoreApplication::applicationDirPath() + QStringLiteral("/test_data.rcc"));
 

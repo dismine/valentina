@@ -27,24 +27,22 @@
  *************************************************************************/
 
 #include "puzzlepreferencesconfigurationpage.h"
-#include "ui_puzzlepreferencesconfigurationpage.h"
 #include "../../vpapplication.h"
+#include "ui_puzzlepreferencesconfigurationpage.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 
 //---------------------------------------------------------------------------------------------------------------------
-PuzzlePreferencesConfigurationPage::PuzzlePreferencesConfigurationPage(QWidget *parent) :
-    QWidget(parent),
+PuzzlePreferencesConfigurationPage::PuzzlePreferencesConfigurationPage(QWidget *parent)
+  : QWidget(parent),
     ui(new Ui::PuzzlePreferencesConfigurationPage)
 {
     ui->setupUi(this);
 
     InitLanguages(ui->langCombo);
-    connect(ui->langCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
-    {
-        m_langChanged = true;
-    });
+    connect(ui->langCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            [this]() { m_langChanged = true; });
 
     VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
 
@@ -60,7 +58,7 @@ PuzzlePreferencesConfigurationPage::PuzzlePreferencesConfigurationPage(QWidget *
     // Undo
     ui->undoCount->setValue(settings->GetUndoCount());
 
-    //Graphical output
+    // Graphical output
     ui->graphOutputCheck->setChecked(settings->GetGraphicalOutput());
     ui->checkBoxOpenGLRender->setChecked(settings->IsOpenGLRender());
 
@@ -121,7 +119,7 @@ auto PuzzlePreferencesConfigurationPage::Apply() -> QStringList
         m_langChanged = false;
 
         VAbstractApplication::VApp()->LoadTranslation(locale);
-        QCoreApplication::processEvents();// force to call changeEvent
+        QCoreApplication::processEvents(); // force to call changeEvent
     }
 
     /* Maximum number of commands in undo stack may only be set when the undo stack is empty, since setting it on a

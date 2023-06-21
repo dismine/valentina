@@ -28,36 +28,57 @@
 #include "vpsettings.h"
 #include "../vmisc/compatibility.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+#include "../vmisc/diagnostic.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+
 #include <QMarginsF>
 
 namespace
 {
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetPropertiesActive, (QLatin1String("dockWidget/properties"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockPropertiesContentsActive, (QLatin1String("dockWidget/contents"))) // NOLINT
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
+
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetPropertiesActive, (QLatin1String("dockWidget/properties")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockPropertiesContentsActive, (QLatin1String("dockWidget/contents")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutUnit, (QLatin1String("layout/unit"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSheetPaperWidth, (QLatin1String("layout/sheetPaperWidth"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSheetPaperHeight, (QLatin1String("layout/sheetPaperHeight"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTilePaperWidth, (QLatin1String("layout/tilePaperWidth"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTilePaperHeight, (QLatin1String("layout/tilePaperHeight"))) // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSheetPaperWidth, (QLatin1String("layout/sheetPaperWidth")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSheetPaperHeight, (QLatin1String("layout/sheetPaperHeight")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTilePaperWidth, (QLatin1String("layout/tilePaperWidth")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTilePaperHeight, (QLatin1String("layout/tilePaperHeight")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSheetMargins, (QLatin1String("layout/sheetMargins"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTileMargins, (QLatin1String("layout/tileMargins"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSheetIgnoreMargins, (QLatin1String("layout/sheetIgnoreMargins"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTileIgnoreMargins, (QLatin1String("layout/tileIgnoreMargins"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTileMargins, (QLatin1String("layout/tileMargins")))   // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSheetIgnoreMargins, (QLatin1String("layout/sheetIgnoreMargins")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTileIgnoreMargins, (QLatin1String("layout/tileIgnoreMargins")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTileShowTiles, (QLatin1String("layout/tileShowTiles"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTileShowWatermark, (QLatin1String("layout/tileShowWatermark"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutWarningPiecesSuperposition, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTileShowWatermark, (QLatin1String("layout/tileShowWatermark")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutWarningPiecesSuperposition,
                           (QLatin1String("layout/warningPiecesSuperposition")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutStickyEdges, (QLatin1String("layout/stickyEdges"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutWarningPiecesOutOfBound, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutWarningPiecesOutOfBound,
                           (QLatin1String("layout/warningPiecesOutOfBound")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutFollowGrainline, (QLatin1String("layout/followGrainline"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutPieceGap, (QLatin1String("layout/pieceGap"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutExportFormat, (QLatin1String("layout/exportFormat"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutLineWidth, (QLatin1String("layout/lineWidth"))) // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutFollowGrainline, (QLatin1String("layout/followGrainline")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutPieceGap, (QLatin1String("layout/pieceGap")))           // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutExportFormat, (QLatin1String("layout/exportFormat")))   // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutLineWidth, (QLatin1String("layout/lineWidth")))         // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutShowGrainline, (QLatin1String("layout/showGrainline"))) // NOLINT
 
+QT_WARNING_POP
+
 int cachedLineWidth = -1; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
-}  // namespace
+} // namespace
 
 #ifndef QPRINTENGINE_H
 Q_DECLARE_METATYPE(QMarginsF) // NOLINT
@@ -65,15 +86,12 @@ Q_DECLARE_METATYPE(QMarginsF) // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
 VPSettings::VPSettings(Format format, Scope scope, const QString &organization, const QString &application,
-                                 QObject *parent)
-    : VCommonSettings(format, scope, organization, application, parent)
-{
-    REGISTER_META_TYPE_STREAM_OPERATORS(QMarginsF)
-}
+                       QObject *parent)
+  : VCommonSettings(format, scope, organization, application, parent){REGISTER_META_TYPE_STREAM_OPERATORS(QMarginsF)}
 
-//---------------------------------------------------------------------------------------------------------------------
-VPSettings::VPSettings(const QString &fileName, QSettings::Format format, QObject *parent)
-    : VCommonSettings(fileName, format, parent)
+    //---------------------------------------------------------------------------------------------------------------------
+    VPSettings::VPSettings(const QString &fileName, QSettings::Format format, QObject *parent)
+  : VCommonSettings(fileName, format, parent)
 {
     REGISTER_META_TYPE_STREAM_OPERATORS(QMarginsF)
 }
@@ -135,7 +153,7 @@ void VPSettings::SetLayoutSheetPaperWidth(qreal width)
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSettings::GetLayoutSheetPaperWidth() const -> qreal
 {
-    return ValueOrDef<qreal>(*this, *settingLayoutSheetPaperWidth, UnitConvertor(841/*A0*/, Unit::Mm, Unit::Px));
+    return ValueOrDef<qreal>(*this, *settingLayoutSheetPaperWidth, UnitConvertor(841 /*A0*/, Unit::Mm, Unit::Px));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -147,7 +165,7 @@ void VPSettings::SetLayoutSheetPaperHeight(qreal height)
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSettings::GetLayoutSheetPaperHeight() const -> qreal
 {
-    return ValueOrDef<qreal>(*this, *settingLayoutSheetPaperHeight, UnitConvertor(1189/*A0*/, Unit::Mm, Unit::Px));
+    return ValueOrDef<qreal>(*this, *settingLayoutSheetPaperHeight, UnitConvertor(1189 /*A0*/, Unit::Mm, Unit::Px));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -159,7 +177,7 @@ void VPSettings::SetLayoutTilePaperWidth(qreal width)
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSettings::GetLayoutTilePaperWidth() const -> qreal
 {
-    return ValueOrDef<qreal>(*this, *settingLayoutTilePaperWidth, UnitConvertor(210/*A4*/, Unit::Mm, Unit::Px));
+    return ValueOrDef<qreal>(*this, *settingLayoutTilePaperWidth, UnitConvertor(210 /*A4*/, Unit::Mm, Unit::Px));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -171,7 +189,7 @@ void VPSettings::SetLayoutTilePaperHeight(qreal height)
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSettings::GetLayoutTilePaperHeight() const -> qreal
 {
-    return ValueOrDef<qreal>(*this, *settingLayoutTilePaperHeight, UnitConvertor(297/*A4*/, Unit::Mm, Unit::Px));
+    return ValueOrDef<qreal>(*this, *settingLayoutTilePaperHeight, UnitConvertor(297 /*A4*/, Unit::Mm, Unit::Px));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

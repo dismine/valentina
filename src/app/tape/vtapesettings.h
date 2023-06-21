@@ -42,6 +42,7 @@
 class VTapeSettings : public VCommonSettings
 {
     Q_OBJECT // NOLINT
+
 public:
     VTapeSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
                   QObject *parent = nullptr);
@@ -62,7 +63,7 @@ public:
     auto GetTapeSearchOptionRegexp() const -> bool;
     void SetTapeSearchOptionRegexp(bool value);
 
-    auto GetTapeSearchOptionMatchCase() const ->bool;
+    auto GetTapeSearchOptionMatchCase() const -> bool;
     void SetTapeSearchOptionMatchCase(bool value);
 
 private:

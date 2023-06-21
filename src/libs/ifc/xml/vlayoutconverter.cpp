@@ -31,6 +31,10 @@
 #include "../vlayout/vlayoutpoint.h"
 #include "compatibility.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+#include "../vmisc/diagnostic.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+
 /*
  * Version rules:
  * 1. Version have three parts "major.minor.patch";
@@ -43,33 +47,38 @@ const QString VLayoutConverter::LayoutMinVerStr = QStringLiteral("0.1.0");
 const QString VLayoutConverter::LayoutMaxVerStr = QStringLiteral("0.1.5");
 const QString VLayoutConverter::CurrentSchema = QStringLiteral("://schema/layout/v0.1.5.xsd");
 
-//VLayoutConverter::LayoutMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
-//VLayoutConverter::LayoutMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
+// VLayoutConverter::LayoutMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
+// VLayoutConverter::LayoutMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 
 namespace
 {
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
+
 // The list of all string we use for conversion
 // Better to use global variables because repeating QStringLiteral blows up code size
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSeamLineTag, (QLatin1String("seamLine"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSeamAllowanceTag, (QLatin1String("seamAllowance"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strInternalPathTag, (QLatin1String("internalPath"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMarkerTag, (QLatin1String("marker"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPointTag, (QLatin1String("point"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPieceTag, (QLatin1String("piece"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strGrainlineTag, (QLatin1String("grainline"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrX, (QLatin1String("x"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrY, (QLatin1String("y"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrTurnPoint, (QLatin1String("turnPoint"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrCurvePoint, (QLatin1String("curvePoint"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrId, (QLatin1String("id"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrUId, (QLatin1String("uid"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSeamLineTag, (QLatin1String("seamLine")))              // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSeamAllowanceTag, (QLatin1String("seamAllowance")))    // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strInternalPathTag, (QLatin1String("internalPath")))      // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMarkerTag, (QLatin1String("marker")))                  // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPointTag, (QLatin1String("point")))                    // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPieceTag, (QLatin1String("piece")))                    // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strGrainlineTag, (QLatin1String("grainline")))            // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrX, (QLatin1String("x")))                           // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrY, (QLatin1String("y")))                           // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrTurnPoint, (QLatin1String("turnPoint")))           // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrCurvePoint, (QLatin1String("curvePoint")))         // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrId, (QLatin1String("id")))                         // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrUId, (QLatin1String("uid")))                       // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrAngle, (QLatin1String("angle")))                   // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrArrowDirection, (QLatin1String("arrowDirection"))) // NOLINT
 
+QT_WARNING_POP
+
 const QChar groupSep = QLatin1Char(';');
 const QChar coordintatesSep = QLatin1Char(',');
-const QChar pointsSep       = QLatin1Char(' ');
-//const QChar itemsSep        = QLatin1Char('*');
+const QChar pointsSep = QLatin1Char(' ');
+// const QChar itemsSep        = QLatin1Char('*');
 
 //---------------------------------------------------------------------------------------------------------------------
 auto StringV0_1_2ToPoint(const QString &point) -> QPointF
@@ -89,7 +98,7 @@ auto StringV0_1_2ToPath(const QString &path) -> QVector<QPointF>
     QVector<QPointF> p;
     QStringList points = path.split(pointsSep);
     p.reserve(points.size());
-    for (const auto& point : points)
+    for (const auto &point : points)
     {
         p.append(StringV0_1_2ToPoint(point));
     }
@@ -103,11 +112,11 @@ template <class T> auto NumberToString(T number) -> QString
     const QLocale locale = QLocale::c();
     return locale.toString(number, 'g', 12).remove(LocaleGroupSeparator(locale));
 }
-}  // namespace
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutConverter::VLayoutConverter(const QString &fileName)
-    : VAbstractConverter(fileName)
+  : VAbstractConverter(fileName)
 {
     m_ver = GetFormatVersion(VLayoutConverter::GetFormatVersionStr());
     ValidateInputFile(CurrentSchema);
@@ -204,20 +213,14 @@ auto VLayoutConverter::Schemas() const -> QHash<unsigned int, QString>
 void VLayoutConverter::ConvertPiecesToV0_1_3()
 {
     // TODO. Delete if minimal supported version is 0.1.3
-    Q_STATIC_ASSERT_X(VLayoutConverter::LayoutMinVer < FormatVersion(0, 1, 3),
-                      "Time to refactor the code.");
+    Q_STATIC_ASSERT_X(VLayoutConverter::LayoutMinVer < FormatVersion(0, 1, 3), "Time to refactor the code.");
 
-    const QStringList types
-    {
-        *strSeamLineTag,
-        *strSeamAllowanceTag,
-        *strInternalPathTag
-    };
+    const QStringList types{*strSeamLineTag, *strSeamAllowanceTag, *strInternalPathTag};
 
     for (const auto &tagType : types)
     {
         QDomNodeList tags = elementsByTagName(tagType);
-        for (int i=0; i < tags.size(); ++i)
+        for (int i = 0; i < tags.size(); ++i)
         {
             QDomElement node = tags.at(i).toElement();
             ConvertPathToV0_1_3(node);
@@ -225,14 +228,14 @@ void VLayoutConverter::ConvertPiecesToV0_1_3()
     }
 
     QDomNodeList tags = elementsByTagName(*strMarkerTag);
-    for (int i=0; i < tags.size(); ++i)
+    for (int i = 0; i < tags.size(); ++i)
     {
         QDomElement node = tags.at(i).toElement();
         RemoveAllChildren(node);
     }
 
     QDomNodeList pieceTags = elementsByTagName(*strPieceTag);
-    for (int i=0; i < pieceTags.size(); ++i)
+    for (int i = 0; i < pieceTags.size(); ++i)
     {
         QDomElement node = pieceTags.at(i).toElement();
         if (node.isElement() && node.hasAttribute(*strAttrId))
@@ -374,8 +377,7 @@ void VLayoutConverter::ConvertPiecesToV0_1_5()
 void VLayoutConverter::ToV0_1_3()
 {
     // TODO. Delete if minimal supported version is 0.1.3
-    Q_STATIC_ASSERT_X(VLayoutConverter::LayoutMinVer < FormatVersion(0, 1, 3),
-                      "Time to refactor the code.");
+    Q_STATIC_ASSERT_X(VLayoutConverter::LayoutMinVer < FormatVersion(0, 1, 3), "Time to refactor the code.");
 
     ConvertPiecesToV0_1_3();
     SetVersion(QStringLiteral("0.1.3"));

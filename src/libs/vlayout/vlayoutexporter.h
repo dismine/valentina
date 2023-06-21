@@ -28,11 +28,11 @@
 #ifndef VLAYOUTEXPORTER_H
 #define VLAYOUTEXPORTER_H
 
+#include <QCoreApplication>
 #include <QMargins>
 #include <QPen>
 #include <QRectF>
 #include <QString>
-#include <QCoreApplication>
 
 #include "../vlayout/vlayoutdef.h"
 
@@ -43,6 +43,7 @@ class VLayoutPiece;
 class VLayoutExporter
 {
     Q_DECLARE_TR_FUNCTIONS(VLayoutExporter) // NOLINT
+
 public:
     VLayoutExporter() = default;
 
@@ -106,19 +107,19 @@ public:
     void SetOffset(const QPointF &newOffset);
 
 private:
-    QString   m_fileName{};
+    QString m_fileName{};
     QMarginsF m_margins{};
-    QRectF    m_imageRect{};
-    qreal     m_xScale{1.0};
-    qreal     m_yScale{1.0};
-    QString   m_title{};
-    QString   m_description{};
-    QPen      m_pen{};
-    bool      m_ignorePrinterMargins{false};
-    bool      m_binaryDxfFormat{false};
-    bool      m_showGrainline{true};
-    int       m_dxfVersion{0};
-    QPointF   m_offset{};
+    QRectF m_imageRect{};
+    qreal m_xScale{1.0};
+    qreal m_yScale{1.0};
+    QString m_title{};
+    QString m_description{};
+    QPen m_pen{};
+    bool m_ignorePrinterMargins{false};
+    bool m_binaryDxfFormat{false};
+    bool m_showGrainline{true};
+    int m_dxfVersion{0};
+    QPointF m_offset{};
 
     void ExportToPDF(QGraphicsScene *scene, const QList<QGraphicsItem *> &details, const QString &filename) const;
 };

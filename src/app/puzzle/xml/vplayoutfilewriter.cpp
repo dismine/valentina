@@ -27,21 +27,20 @@
  *************************************************************************/
 
 #include "vplayoutfilewriter.h"
-#include "../layout/vplayout.h"
-#include "../layout/vpsheet.h"
-#include "../layout/vppiece.h"
-#include "vplayoutliterals.h"
 #include "../ifc/xml/vlayoutconverter.h"
-#include "../vmisc/projectversion.h"
+#include "../layout/vplayout.h"
+#include "../layout/vppiece.h"
+#include "../layout/vpsheet.h"
+#include "../vgeometry/vlayoutplacelabel.h"
 #include "../vlayout/vlayoutpiecepath.h"
 #include "../vlayout/vtextmanager.h"
-#include "../vgeometry/vlayoutplacelabel.h"
+#include "../vmisc/projectversion.h"
+#include "vplayoutliterals.h"
 
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-template <class T>
-auto NumberToString(T number) -> QString
+template <class T> auto NumberToString(T number) -> QString
 {
     const QLocale locale = QLocale::c();
     return locale.toString(number, 'g', 12).remove(LocaleGroupSeparator(locale));
@@ -50,18 +49,9 @@ auto NumberToString(T number) -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto TransformToString(const QTransform &m) -> QString
 {
-    QStringList matrix
-    {
-        NumberToString(m.m11()),
-        NumberToString(m.m12()),
-        NumberToString(m.m13()),
-        NumberToString(m.m21()),
-        NumberToString(m.m22()),
-        NumberToString(m.m23()),
-        NumberToString(m.m31()),
-        NumberToString(m.m32()),
-        NumberToString(m.m33())
-    };
+    QStringList matrix{NumberToString(m.m11()), NumberToString(m.m12()), NumberToString(m.m13()),
+                       NumberToString(m.m21()), NumberToString(m.m22()), NumberToString(m.m23()),
+                       NumberToString(m.m31()), NumberToString(m.m32()), NumberToString(m.m33())};
     return matrix.join(ML::groupSep);
 }
 
@@ -88,10 +78,8 @@ auto PathToString(const QVector<QPointF> &pathPoints) -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto RectToString(const QRectF &r) -> QString
 {
-    return NumberToString(r.x()) + ML::groupSep +
-            NumberToString(r.y()) + ML::groupSep +
-            NumberToString(r.width()) + ML::groupSep +
-            NumberToString(r.height());
+    return NumberToString(r.x()) + ML::groupSep + NumberToString(r.y()) + ML::groupSep + NumberToString(r.width()) +
+           ML::groupSep + NumberToString(r.height());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -144,7 +132,7 @@ auto GrainlineArrowDirrectionToString(GrainlineArrowDirection type) -> QString
             return ML::twoWaysUpDownStr;
     }
 }
-}  // namespace
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayoutFileWriter::WriteFile(const VPLayoutPtr &layout, QIODevice *file)
@@ -153,8 +141,8 @@ void VPLayoutFileWriter::WriteFile(const VPLayoutPtr &layout, QIODevice *file)
     setAutoFormatting(true);
 
     writeStartDocument();
-    writeComment(QStringLiteral("Layout created with Valentina v%1 (https://smart-pattern.com.ua/).")
-                 .arg(APP_VERSION_STR));
+    writeComment(
+        QStringLiteral("Layout created with Valentina v%1 (https://smart-pattern.com.ua/).").arg(APP_VERSION_STR));
     WriteLayout(layout);
     writeEndDocument();
 }
@@ -167,7 +155,7 @@ void VPLayoutFileWriter::WriteLayout(const VPLayoutPtr &layout)
     WriteLayoutProperties(layout);
     WritePieceList(layout->GetUnplacedPieces(), ML::TagUnplacedPieces);
     WriteSheets(layout);
-    writeEndElement(); //layout
+    writeEndElement(); // layout
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -196,7 +184,7 @@ void VPLayoutFileWriter::WriteLayoutProperties(const VPLayoutPtr &layout)
 
     writeStartElement(ML::TagWatermark);
     SetAttributeOrRemoveIf<bool>(ML::AttrShowPreview, layout->LayoutSettings().GetShowWatermark(),
-                                 [](bool show) noexcept {return not show;});
+                                 [](bool show) noexcept { return not show; });
     writeCharacters(layout->LayoutSettings().WatermarkPath());
     writeEndElement(); // watermark
 
@@ -226,7 +214,7 @@ void VPLayoutFileWriter::WriteSheet(const VPSheetPtr &sheet)
     writeStartElement(ML::TagSheet);
     SetAttributeOrRemoveIf<QString>(ML::AttrGrainlineType, GrainlineTypeToStr(sheet->GetGrainlineType()),
                                     [](const QString &type) noexcept
-    {return type == GrainlineTypeToStr(GrainlineType::NotFixed);});
+                                    { return type == GrainlineTypeToStr(GrainlineType::NotFixed); });
 
     writeTextElement(ML::TagName, sheet->GetName());
     WriteSize(sheet->GetSheetSize());
@@ -239,18 +227,18 @@ void VPLayoutFileWriter::WriteSheet(const VPSheetPtr &sheet)
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayoutFileWriter::WriteTiles(const VPLayoutPtr &layout)
 {
-   writeStartElement(ML::TagTiles);
-   SetAttribute(ML::AttrVisible, layout->LayoutSettings().GetShowTiles());
-   SetAttribute(ML::AttrMatchingMarks, "standard"); // TODO / Fixme get the right value
-   SetAttributeOrRemoveIf<bool>(ML::AttrPrintScheme, layout->LayoutSettings().GetPrintTilesScheme(),
-                                [](bool print) noexcept {return not print;});
-   SetAttributeOrRemoveIf<bool>(ML::AttrTileNumber, layout->LayoutSettings().GetShowTileNumber(),
-                                [](bool show) noexcept {return not show;});
+    writeStartElement(ML::TagTiles);
+    SetAttribute(ML::AttrVisible, layout->LayoutSettings().GetShowTiles());
+    SetAttribute(ML::AttrMatchingMarks, "standard"); // TODO / Fixme get the right value
+    SetAttributeOrRemoveIf<bool>(ML::AttrPrintScheme, layout->LayoutSettings().GetPrintTilesScheme(),
+                                 [](bool print) noexcept { return not print; });
+    SetAttributeOrRemoveIf<bool>(ML::AttrTileNumber, layout->LayoutSettings().GetShowTileNumber(),
+                                 [](bool show) noexcept { return not show; });
 
-   WriteSize(layout->LayoutSettings().GetTilesSize());
-   WriteMargins(layout->LayoutSettings().GetTilesMargins(), layout->LayoutSettings().IgnoreTilesMargins());
+    WriteSize(layout->LayoutSettings().GetTilesSize());
+    WriteMargins(layout->LayoutSettings().GetTilesMargins(), layout->LayoutSettings().IgnoreTilesMargins());
 
-   writeEndElement(); // tiles
+    writeEndElement(); // tiles
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -272,25 +260,25 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
     SetAttribute(ML::AttrUID, piece->GetUUID().toString());
     SetAttribute(ML::AttrName, piece->GetName());
     SetAttributeOrRemoveIf<bool>(ML::AttrMirrored, piece->IsMirror(),
-                                 [](bool mirrored) noexcept {return not mirrored;});
+                                 [](bool mirrored) noexcept { return not mirrored; });
     SetAttributeOrRemoveIf<bool>(ML::AttrForbidFlipping, piece->IsForbidFlipping(),
-                                 [](bool forbid) noexcept {return not forbid;});
+                                 [](bool forbid) noexcept { return not forbid; });
     SetAttributeOrRemoveIf<bool>(ML::AttrForceFlipping, piece->IsForceFlipping(),
-                                 [](bool force) noexcept {return not force;});
+                                 [](bool force) noexcept { return not force; });
     SetAttributeOrRemoveIf<bool>(ML::AttrSewLineOnDrawing, piece->IsSewLineOnDrawing(),
-                                 [](bool value) noexcept {return not value;});
+                                 [](bool value) noexcept { return not value; });
     SetAttribute(ML::AttrTransform, TransformToString(piece->GetMatrix()));
     SetAttributeOrRemoveIf<QString>(ML::AttrGradationLabel, piece->GetGradationId(),
-                                    [](const QString &label) noexcept {return label.isEmpty();});
+                                    [](const QString &label) noexcept { return label.isEmpty(); });
     SetAttribute(ML::AttrCopyNumber, piece->CopyNumber());
     SetAttributeOrRemoveIf<bool>(ML::AttrShowSeamline, not piece->IsHideMainPath(),
-                                 [](bool show) noexcept {return show;});
+                                 [](bool show) noexcept { return show; });
     SetAttributeOrRemoveIf<qreal>(ML::AttrXScale, piece->GetXScale(),
-                                  [](qreal xs) noexcept {return VFuzzyComparePossibleNulls(xs, 1.0);});
+                                  [](qreal xs) noexcept { return VFuzzyComparePossibleNulls(xs, 1.0); });
     SetAttributeOrRemoveIf<qreal>(ML::AttrYScale, piece->GetYScale(),
-                                  [](qreal ys) noexcept {return VFuzzyComparePossibleNulls(ys, 1.0);});
+                                  [](qreal ys) noexcept { return VFuzzyComparePossibleNulls(ys, 1.0); });
     SetAttributeOrRemoveIf<qreal>(ML::AttrZValue, piece->ZValue(),
-                                  [](qreal z) noexcept {return VFuzzyComparePossibleNulls(z, 1.0);});
+                                  [](qreal z) noexcept { return VFuzzyComparePossibleNulls(z, 1.0); });
 
     writeStartElement(ML::TagSeamLine);
     QVector<VLayoutPoint> contourPoints = piece->GetContourPoints();
@@ -302,9 +290,9 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
 
     writeStartElement(ML::TagSeamAllowance);
     SetAttributeOrRemoveIf<bool>(ML::AttrEnabled, piece->IsSeamAllowance(),
-                                 [](bool enabled) noexcept {return not enabled;});
+                                 [](bool enabled) noexcept { return not enabled; });
     SetAttributeOrRemoveIf<bool>(ML::AttrBuiltIn, piece->IsSeamAllowanceBuiltIn(),
-                                 [](bool builtin) noexcept {return not builtin;});
+                                 [](bool builtin) noexcept { return not builtin; });
     if (piece->IsSeamAllowance() && not piece->IsSeamAllowanceBuiltIn())
     {
         QVector<VLayoutPoint> seamAllowancePoints = piece->GetSeamAllowancePoints();
@@ -317,7 +305,7 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
 
     writeStartElement(ML::TagGrainline);
     SetAttributeOrRemoveIf<bool>(ML::AttrEnabled, piece->IsGrainlineEnabled(),
-                                 [](bool enabled) noexcept {return not enabled;});
+                                 [](bool enabled) noexcept { return not enabled; });
     if (piece->IsGrainlineEnabled())
     {
         SetAttribute(ML::AttrArrowDirection, GrainlineArrowDirrectionToString(piece->GetGrainline().GetArrowType()));
@@ -327,7 +315,7 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
 
     writeStartElement(ML::TagNotches);
     QVector<VLayoutPassmark> passmarks = piece->GetPassmarks();
-    for (const auto& passmark : passmarks)
+    for (const auto &passmark : passmarks)
     {
         writeStartElement(ML::TagNotch);
         SetAttribute(ML::AttrBuiltIn, passmark.isBuiltIn);
@@ -342,7 +330,7 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
 
     writeStartElement(ML::TagInternalPaths);
     QVector<VLayoutPiecePath> internalPaths = piece->GetInternalPaths();
-    for (const auto& path : internalPaths)
+    for (const auto &path : internalPaths)
     {
         writeStartElement(ML::TagInternalPath);
         SetAttribute(ML::AttrCut, path.IsCutPath());
@@ -360,7 +348,7 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
 
     writeStartElement(ML::TagMarkers);
     QVector<VLayoutPlaceLabel> placelabels = piece->GetPlaceLabels();
-    for (const auto& label : placelabels)
+    for (const auto &label : placelabels)
     {
         writeStartElement(ML::TagMarker);
         SetAttribute(ML::AttrTransform, TransformToString(label.RotationMatrix()));
@@ -400,7 +388,7 @@ void VPLayoutFileWriter::WriteLabelLines(const VTextManager &tm)
     for (int i = 0; i < tm.GetSourceLinesCount(); ++i)
     {
         writeStartElement(ML::TagLine);
-        const TextLine& tl = tm.GetSourceLine(i);
+        const TextLine &tl = tm.GetSourceLine(i);
         SetAttribute(ML::AttrFontSize, tl.m_iFontSize);
         SetAttribute(ML::AttrBold, tl.m_bold);
         SetAttribute(ML::AttrItalic, tl.m_italic);
@@ -416,12 +404,12 @@ void VPLayoutFileWriter::WriteMargins(const QMarginsF &margins, bool ignore)
 {
     writeStartElement(ML::TagMargin);
 
-    SetAttributeOrRemoveIf<qreal>(ML::AttrLeft, margins.left(), [](qreal margin) noexcept {return margin <= 0;});
-    SetAttributeOrRemoveIf<qreal>(ML::AttrTop, margins.top(), [](qreal margin) noexcept {return margin <= 0;});
-    SetAttributeOrRemoveIf<qreal>(ML::AttrRight, margins.right(), [](qreal margin) noexcept {return margin <= 0;});
-    SetAttributeOrRemoveIf<qreal>(ML::AttrBottom, margins.bottom(), [](qreal margin) noexcept {return margin <= 0;});
+    SetAttributeOrRemoveIf<qreal>(ML::AttrLeft, margins.left(), [](qreal margin) noexcept { return margin <= 0; });
+    SetAttributeOrRemoveIf<qreal>(ML::AttrTop, margins.top(), [](qreal margin) noexcept { return margin <= 0; });
+    SetAttributeOrRemoveIf<qreal>(ML::AttrRight, margins.right(), [](qreal margin) noexcept { return margin <= 0; });
+    SetAttributeOrRemoveIf<qreal>(ML::AttrBottom, margins.bottom(), [](qreal margin) noexcept { return margin <= 0; });
 
-    SetAttributeOrRemoveIf<bool>(ML::AttrIgnoreMargins, ignore, [](bool ignore) noexcept {return not ignore;});
+    SetAttributeOrRemoveIf<bool>(ML::AttrIgnoreMargins, ignore, [](bool ignore) noexcept { return not ignore; });
 
     writeEndElement(); // margin
 }
@@ -429,15 +417,16 @@ void VPLayoutFileWriter::WriteMargins(const QMarginsF &margins, bool ignore)
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayoutFileWriter::WriteSize(QSizeF size)
 {
-    // maybe not necessary to test this, the writer should "stupidly write", the application should take care of these tests
+    // maybe not necessary to test this, the writer should "stupidly write", the application should take care of these
+    // tests
     qreal width = size.width();
-    if(width < 0)
+    if (width < 0)
     {
         width = 0;
     }
 
     qreal length = size.height();
-    if(length < 0)
+    if (length < 0)
     {
         length = 0;
     }
@@ -454,7 +443,7 @@ auto VPLayoutFileWriter::WriteLayoutPoint(const VLayoutPoint &point) -> void
     writeStartElement(ML::TagPoint);
     SetAttribute(ML::AttrX, point.x());
     SetAttribute(ML::AttrY, point.y());
-    SetAttributeOrRemoveIf<bool>(ML::AttrTurnPoint, point.TurnPoint(), [](bool val) noexcept {return val;});
-    SetAttributeOrRemoveIf<bool>(ML::AttrCurvePoint, point.CurvePoint(), [](bool val) noexcept {return val;});
+    SetAttributeOrRemoveIf<bool>(ML::AttrTurnPoint, point.TurnPoint(), [](bool val) noexcept { return val; });
+    SetAttributeOrRemoveIf<bool>(ML::AttrCurvePoint, point.CurvePoint(), [](bool val) noexcept { return val; });
     writeEndElement();
 }

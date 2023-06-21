@@ -31,13 +31,16 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VDecorationAligningDelegate::VDecorationAligningDelegate(Qt::Alignment alignment, QObject *parent)
-    : QStyledItemDelegate(parent), m_alignment(alignment)
-{}
+  : QStyledItemDelegate(parent),
+    m_alignment(alignment)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDecorationAligningDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+void VDecorationAligningDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
+                                        const QModelIndex &index) const
 {
-    QIcon icon = QIcon(qvariant_cast<QIcon>(index.data(Qt::DecorationRole)));
+    auto icon(qvariant_cast<QIcon>(index.data(Qt::DecorationRole)));
 
     if ((option.state & QStyle::State_Selected) != 0U)
     {

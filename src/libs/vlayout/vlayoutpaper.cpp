@@ -333,7 +333,7 @@ auto VLayoutPaper::GetPaperItem(bool autoCropLength, bool autoCropWidth, bool te
     {
         QScopedPointer<QGraphicsScene> scene(new QGraphicsScene());
         QList<QGraphicsItem *> list = GetItemDetails(textAsPaths);
-        for (auto item : list)
+        for (auto *item : list)
         {
             scene->addItem(item);
         }
@@ -411,7 +411,7 @@ auto VLayoutPaper::GetGlobalContour() const -> QGraphicsPathItem *
         path.lineTo(side2.p2());
     }
 
-    QGraphicsPathItem *item = new QGraphicsPathItem(path);
+    auto *item = new QGraphicsPathItem(path);
     QPen pen = item->pen();
     pen.setWidthF(0.25);
     item->setPen(pen);
@@ -424,7 +424,7 @@ auto VLayoutPaper::GetItemDetails(bool textAsPaths) const -> QList<QGraphicsItem
 {
     QList<QGraphicsItem *> list;
     list.reserve(d->details.count());
-    for (auto &detail : d->details)
+    for (const auto &detail : d->details)
     {
         list.append(detail.GetItem(textAsPaths));
     }

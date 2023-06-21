@@ -29,11 +29,11 @@
 #ifndef VPGRAPHICSPIECE_H
 #define VPGRAPHICSPIECE_H
 
-#include <QGraphicsItem>
 #include <QCursor>
+#include <QGraphicsItem>
 
-#include "scenedef.h"
 #include "../layout/layoutdef.h"
+#include "scenedef.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
@@ -45,6 +45,7 @@ class VGraphicsFillItem;
 class VPGraphicsPiece : public QGraphicsObject
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit VPGraphicsPiece(const VPPiecePtr &piece, QGraphicsItem *parent = nullptr);
     ~VPGraphicsPiece() override = default;
@@ -55,8 +56,11 @@ public:
      */
     auto GetPiece() -> VPPiecePtr;
 
-    auto type() const -> int override {return Type;}
-    enum { Type = UserType + static_cast<int>(PGraphicsItem::Piece)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(PGraphicsItem::Piece)
+    };
 
     void SetStickyPoints(const QVector<QPointF> &newStickyPoint);
 
@@ -75,7 +79,7 @@ protected:
     auto shape() const -> QPainterPath override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
-    void mousePressEvent(QGraphicsSceneMouseEvent * event) override;
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
@@ -120,7 +124,7 @@ private:
     void InitLabels();
     void InitPieceLabel(const QVector<QPointF> &labelShape, const VTextManager &tm);
     void InitGrainlineItem();
-    void PaintPiece(QPainter *painter=nullptr);
+    void PaintPiece(QPainter *painter = nullptr);
     void PaintSeamLine(QPainter *painter, const VPPiecePtr &piece);
     void PaintCuttingLine(QPainter *painter, const VPPiecePtr &piece);
     void PaintInternalPaths(QPainter *painter, const VPPiecePtr &piece);

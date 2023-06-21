@@ -27,39 +27,43 @@
  *************************************************************************/
 
 #include "dialogincrements.h"
-#include "ui_dialogincrements.h"
 #include "../vmisc/vvalentinasettings.h"
+#include "ui_dialogincrements.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../qmuparser/qmudef.h"
 #include "../qmuparser/qmutokenparser.h"
-#include "../vpatterndb/vtranslatevars.h"
 #include "../vpatterndb/calculator.h"
-#include "../vpatterndb/variables/vincrement.h"
-#include "../vpatterndb/variables/vlinelength.h"
-#include "../vpatterndb/variables/vlineangle.h"
-#include "../vpatterndb/variables/vcurveangle.h"
-#include "../vpatterndb/variables/vcurvelength.h"
-#include "../vpatterndb/variables/vcurveclength.h"
 #include "../vpatterndb/variables/varcradius.h"
+#include "../vpatterndb/variables/vcurveangle.h"
+#include "../vpatterndb/variables/vcurveclength.h"
+#include "../vpatterndb/variables/vcurvelength.h"
+#include "../vpatterndb/variables/vincrement.h"
+#include "../vpatterndb/variables/vlineangle.h"
+#include "../vpatterndb/variables/vlinelength.h"
+#include "../vpatterndb/vtranslatevars.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
 
-#include <QFileDialog>
-#include <QDir>
-#include <QMessageBox>
 #include <QCloseEvent>
-#include <QTableWidget>
+#include <QDir>
+#include <QFileDialog>
+#include <QMenu>
+#include <QMessageBox>
 #include <QSettings>
+#include <QTableWidget>
 #include <QTableWidgetItem>
 #include <QtNumeric>
-#include <QMenu>
 
 constexpr int DIALOG_MAX_FORMULA_HEIGHT = 64;
 
 namespace
 {
-enum class IncrUnits : qint8 {Pattern, Degrees};
+enum class IncrUnits : qint8
+{
+    Pattern,
+    Degrees
+};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -70,13 +74,13 @@ enum class IncrUnits : qint8 {Pattern, Degrees};
  * @param parent parent widget
  */
 DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *parent)
-    :DialogTool(data, NULL_ID, parent),
-      ui(new Ui::DialogIncrements),
-      m_data(data),
-      m_doc(doc),
-      m_completeData(doc->GetCompleteData()),
-      m_searchHistory(new QMenu(this)),
-      m_searchHistoryPC(new QMenu(this))
+  : DialogTool(data, NULL_ID, parent),
+    ui(new Ui::DialogIncrements),
+    m_data(data),
+    m_doc(doc),
+    m_completeData(doc->GetCompleteData()),
+    m_searchHistory(new QMenu(this)),
+    m_searchHistoryPC(new QMenu(this))
 {
     ui->setupUi(this);
 
@@ -129,14 +133,13 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     connect(this->m_doc, &VPattern::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
 
     ui->tabWidget->setCurrentIndex(0);
-    auto *validator = new QRegularExpressionValidator(QRegularExpression(QStringLiteral("^$|")+NameRegExp()), this);
+    auto *validator = new QRegularExpressionValidator(QRegularExpression(QStringLiteral("^$|") + NameRegExp()), this);
     ui->lineEditName->setValidator(validator);
     ui->lineEditNamePC->setValidator(validator);
 
     connect(ui->tableWidgetIncrement, &QTableWidget::itemSelectionChanged, this,
             &DialogIncrements::ShowIncrementDetails);
-    connect(ui->tableWidgetPC, &QTableWidget::itemSelectionChanged, this,
-            &DialogIncrements::ShowIncrementDetails);
+    connect(ui->tableWidgetPC, &QTableWidget::itemSelectionChanged, this, &DialogIncrements::ShowIncrementDetails);
 
     ui->toolButtonAdd->setMenu(InitVarTypeMenu(ui->toolButtonAdd->menu(), true /*increments tab*/));
     ui->toolButtonAddPC->setMenu(InitVarTypeMenu(ui->toolButtonAddPC->menu(), false /*preview calculations tab*/));
@@ -191,8 +194,7 @@ void DialogIncrements::FillPreviewCalculations()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-void DialogIncrements::FillTable(const QMap<QString, T> &varTable, QTableWidget *table)
+template <typename T> void DialogIncrements::FillTable(const QMap<QString, T> &varTable, QTableWidget *table)
 {
     SCASSERT(table != nullptr)
 
@@ -203,7 +205,7 @@ void DialogIncrements::FillTable(const QMap<QString, T> &varTable, QTableWidget 
         i.next();
         qreal length = *i.value()->GetValue();
         currentRow++;
-        table->setRowCount ( static_cast<int>(varTable.size()) );
+        table->setRowCount(static_cast<int>(varTable.size()));
 
         auto *item = new QTableWidgetItem(i.key());
         item->setTextAlignment(Qt::AlignLeft);
@@ -268,17 +270,17 @@ void DialogIncrements::ShowUnits()
 {
     const QString unit = UnitsToStr(VAbstractValApplication::VApp()->patternUnits());
 
-    ShowHeaderUnits(ui->tableWidgetIncrement, 1, unit);// calculated value
-    ShowHeaderUnits(ui->tableWidgetIncrement, 2, unit);// formula
-    ShowHeaderUnits(ui->tableWidgetPC, 1, unit);// calculated value
-    ShowHeaderUnits(ui->tableWidgetPC, 2, unit);// formula
+    ShowHeaderUnits(ui->tableWidgetIncrement, 1, unit); // calculated value
+    ShowHeaderUnits(ui->tableWidgetIncrement, 2, unit); // formula
+    ShowHeaderUnits(ui->tableWidgetPC, 1, unit);        // calculated value
+    ShowHeaderUnits(ui->tableWidgetPC, 2, unit);        // formula
 
-    ShowHeaderUnits(ui->tableWidgetLines, 1, unit);// lengths
-    ShowHeaderUnits(ui->tableWidgetSplines, 1, unit);// lengths
-    ShowHeaderUnits(ui->tableWidgetCLength, 1, unit);// lengths
-    ShowHeaderUnits(ui->tableWidgetLinesAngles, 1, degreeSymbol);// angle
-    ShowHeaderUnits(ui->tableWidgetRadiusesArcs, 1, unit);// radius
-    ShowHeaderUnits(ui->tableWidgetAnglesCurves, 1, degreeSymbol);// angle
+    ShowHeaderUnits(ui->tableWidgetLines, 1, unit);                // lengths
+    ShowHeaderUnits(ui->tableWidgetSplines, 1, unit);              // lengths
+    ShowHeaderUnits(ui->tableWidgetCLength, 1, unit);              // lengths
+    ShowHeaderUnits(ui->tableWidgetLinesAngles, 1, degreeSymbol);  // angle
+    ShowHeaderUnits(ui->tableWidgetRadiusesArcs, 1, unit);         // radius
+    ShowHeaderUnits(ui->tableWidgetAnglesCurves, 1, degreeSymbol); // angle
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -292,8 +294,8 @@ void DialogIncrements::ShowHeaderUnits(QTableWidget *table, int column, const QS
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto DialogIncrements::AddCell(QTableWidget *table, const QString &text, int row, int column, int aligment,
-                               bool ok) -> QTableWidgetItem *
+auto DialogIncrements::AddCell(QTableWidget *table, const QString &text, int row, int column, int aligment, bool ok)
+    -> QTableWidgetItem *
 {
     SCASSERT(table != nullptr)
 
@@ -320,7 +322,7 @@ auto DialogIncrements::AddCell(QTableWidget *table, const QString &text, int row
 
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogIncrements::AddSeparatorCell(QTableWidget *table, const QString &text, int row, int column, int aligment,
-                                        bool ok) -> QTableWidgetItem*
+                                        bool ok) -> QTableWidgetItem *
 {
     QTableWidgetItem *item = AddCell(table, text, row, column, aligment, ok);
 
@@ -368,7 +370,8 @@ auto DialogIncrements::EvalIncrementFormula(const QString &formula, bool fromUse
     }
     else
     {
-        postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits());//Show unit in dialog lable (cm, mm or inch)
+        postfix =
+            UnitsToStr(VAbstractValApplication::VApp()->patternUnits()); // Show unit in dialog lable (cm, mm or inch)
     }
     if (formula.isEmpty())
     {
@@ -383,8 +386,8 @@ auto DialogIncrements::EvalIncrementFormula(const QString &formula, bool fromUse
         // Replace line return character with spaces for calc if exist
         if (fromUser)
         {
-            f = VAbstractApplication::VApp()->TrVars()
-                    ->FormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+            f = VAbstractApplication::VApp()->TrVars()->FormulaFromUser(
+                formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
         }
         else
         {
@@ -458,7 +461,7 @@ void DialogIncrements::Controls(QTableWidget *table)
                 ui->toolButtonDownPC->setEnabled(true);
             }
         }
-        else if (table->currentRow() == table->rowCount()-1)
+        else if (table->currentRow() == table->rowCount() - 1)
         {
             if (table == ui->tableWidgetIncrement)
             {
@@ -685,7 +688,7 @@ auto DialogIncrements::IncrementUsed(const QString &name) const -> bool
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::CacheRename(const QString &name, const QString &newName)
 {
-    for (auto & i : m_renameList)
+    for (auto &i : m_renameList)
     {
         if (i.second == name)
         {
@@ -739,7 +742,7 @@ void DialogIncrements::ShowTableIncrementDetails(QTableWidget *table)
         {
             incr = m_data->GetVariable<VIncrement>(nameField->text());
         }
-        catch(const VExceptionBadId &e)
+        catch (const VExceptionBadId &e)
         {
             Q_UNUSED(e)
             EnableDetails(table, false);
@@ -762,9 +765,8 @@ void DialogIncrements::ShowTableIncrementDetails(QTableWidget *table)
         EvalIncrementFormula(incr->GetFormula(), false, incr->GetData(), labelCalculatedValue, incr->IsSpecialUnits());
         plainTextEditFormula->blockSignals(true);
 
-        QString formula =
-                VTranslateVars::TryFormulaToUser(incr->GetFormula(),
-                                                 VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+        QString formula = VTranslateVars::TryFormulaToUser(incr->GetFormula(),
+                                                           VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 
         plainTextEditFormula->setPlainText(formula);
         plainTextEditFormula->blockSignals(false);
@@ -829,11 +831,11 @@ void DialogIncrements::AddNewIncrement(IncrementType type)
     }
     else
     {
-        currentRow  = table->currentRow()+1;
+        currentRow = table->currentRow() + 1;
         const QTableWidgetItem *nameField = table->item(table->currentRow(), 0);
 
-        incrementMode ? m_doc->AddEmptyIncrementAfter(nameField->text(), name, type) :
-                        m_doc->AddEmptyPreviewCalculationAfter(nameField->text(), name, type);
+        incrementMode ? m_doc->AddEmptyIncrementAfter(nameField->text(), name, type)
+                      : m_doc->AddEmptyPreviewCalculationAfter(nameField->text(), name, type);
     }
 
     m_hasChanges = true;
@@ -863,207 +865,225 @@ void DialogIncrements::InitSearch()
 
     UpdateSearchControlsTooltips();
 
-    connect(ui->lineEditFind, &QLineEdit::textEdited, this, [this](const QString &term){m_search->Find(term);});
-    connect(ui->lineEditFind, &QLineEdit::editingFinished, this, [this]()
-    {
-        SaveIncrementsSearchRequest();
-        InitIncrementsSearchHistory();
-        m_search->Find(ui->lineEditFind->text());
-    });
-    connect(ui->lineEditFindPC, &QLineEdit::textEdited, this, [this](const QString &term){m_searchPC->Find(term);});
-    connect(ui->lineEditFindPC, &QLineEdit::editingFinished, this, [this]()
-    {
-        SavePreviewCalculationsSearchRequest();
-        InitPreviewCalculationsSearchHistory();
-        m_searchPC->Find(ui->lineEditFindPC->text());
-    });
+    connect(ui->lineEditFind, &QLineEdit::textEdited, this, [this](const QString &term) { m_search->Find(term); });
+    connect(ui->lineEditFind, &QLineEdit::editingFinished, this,
+            [this]()
+            {
+                SaveIncrementsSearchRequest();
+                InitIncrementsSearchHistory();
+                m_search->Find(ui->lineEditFind->text());
+            });
+    connect(ui->lineEditFindPC, &QLineEdit::textEdited, this, [this](const QString &term) { m_searchPC->Find(term); });
+    connect(ui->lineEditFindPC, &QLineEdit::editingFinished, this,
+            [this]()
+            {
+                SavePreviewCalculationsSearchRequest();
+                InitPreviewCalculationsSearchHistory();
+                m_searchPC->Find(ui->lineEditFindPC->text());
+            });
 
-    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, this, [this]()
-    {
-        SaveIncrementsSearchRequest();
-        InitPreviewCalculationsSearchHistory();
-        m_search->FindPrevious();
-        ui->labelResults->setText(QStringLiteral("%1/%2").arg(m_search->MatchIndex()+1).arg(m_search->MatchCount()));
-    });
-    connect(ui->toolButtonFindPreviousPC, &QToolButton::clicked, this, [this]()
-    {
-        SavePreviewCalculationsSearchRequest();
-        InitPreviewCalculationsSearchHistory();
-        m_searchPC->FindPrevious();
-        ui->labelResultsPC->setText(
-            QStringLiteral("%1/%2").arg(m_searchPC->MatchIndex()+1).arg(m_searchPC->MatchCount()));
-    });
-    connect(ui->toolButtonFindNext, &QToolButton::clicked, this, [this]()
-    {
-        SaveIncrementsSearchRequest();
-        InitIncrementsSearchHistory();
-        m_search->FindNext();
-        ui->labelResults->setText(QStringLiteral("%1/%2").arg(m_search->MatchIndex()+1).arg(m_search->MatchCount()));
-    });
-    connect(ui->toolButtonFindNextPC, &QToolButton::clicked, this, [this]()
-    {
-        SavePreviewCalculationsSearchRequest();
-        InitPreviewCalculationsSearchHistory();
-        m_searchPC->FindNext();
-        ui->labelResultsPC->setText(
-            QStringLiteral("%1/%2").arg(m_searchPC->MatchIndex()+1).arg(m_searchPC->MatchCount()));
-    });
+    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, this,
+            [this]()
+            {
+                SaveIncrementsSearchRequest();
+                InitPreviewCalculationsSearchHistory();
+                m_search->FindPrevious();
+                ui->labelResults->setText(
+                    QStringLiteral("%1/%2").arg(m_search->MatchIndex() + 1).arg(m_search->MatchCount()));
+            });
+    connect(ui->toolButtonFindPreviousPC, &QToolButton::clicked, this,
+            [this]()
+            {
+                SavePreviewCalculationsSearchRequest();
+                InitPreviewCalculationsSearchHistory();
+                m_searchPC->FindPrevious();
+                ui->labelResultsPC->setText(
+                    QStringLiteral("%1/%2").arg(m_searchPC->MatchIndex() + 1).arg(m_searchPC->MatchCount()));
+            });
+    connect(ui->toolButtonFindNext, &QToolButton::clicked, this,
+            [this]()
+            {
+                SaveIncrementsSearchRequest();
+                InitIncrementsSearchHistory();
+                m_search->FindNext();
+                ui->labelResults->setText(
+                    QStringLiteral("%1/%2").arg(m_search->MatchIndex() + 1).arg(m_search->MatchCount()));
+            });
+    connect(ui->toolButtonFindNextPC, &QToolButton::clicked, this,
+            [this]()
+            {
+                SavePreviewCalculationsSearchRequest();
+                InitPreviewCalculationsSearchHistory();
+                m_searchPC->FindNext();
+                ui->labelResultsPC->setText(
+                    QStringLiteral("%1/%2").arg(m_searchPC->MatchIndex() + 1).arg(m_searchPC->MatchCount()));
+            });
 
-    connect(m_search.data(), &VTableSearch::HasResult, this, [this] (bool state)
-    {
-        ui->toolButtonFindPrevious->setEnabled(state);
-        ui->toolButtonFindNext->setEnabled(state);
+    connect(m_search.data(), &VTableSearch::HasResult, this,
+            [this](bool state)
+            {
+                ui->toolButtonFindPrevious->setEnabled(state);
+                ui->toolButtonFindNext->setEnabled(state);
 
-        if (state)
-        {
-            ui->labelResults->setText(
-                QStringLiteral("%1/%2").arg(m_search->MatchIndex()+1).arg(m_search->MatchCount()));
-        }
-        else
-        {
-            ui->labelResults->setText(tr("0 results"));
-        }
+                if (state)
+                {
+                    ui->labelResults->setText(
+                        QStringLiteral("%1/%2").arg(m_search->MatchIndex() + 1).arg(m_search->MatchCount()));
+                }
+                else
+                {
+                    ui->labelResults->setText(tr("0 results"));
+                }
 
-        QPalette palette;
+                QPalette palette;
 
-        if (not state && not ui->lineEditFind->text().isEmpty())
-        {
-            palette.setColor(QPalette::Text, Qt::red);
-            ui->lineEditFind->setPalette(palette);
+                if (not state && not ui->lineEditFind->text().isEmpty())
+                {
+                    palette.setColor(QPalette::Text, Qt::red);
+                    ui->lineEditFind->setPalette(palette);
 
-            palette.setColor(QPalette::Active, ui->labelResults->foregroundRole(), Qt::red);
-            palette.setColor(QPalette::Inactive, ui->labelResults->foregroundRole(), Qt::red);
-            ui->labelResults->setPalette(palette);
-        }
-        else
-        {
-            ui->lineEditFind->setPalette(palette);
-            ui->labelResults->setPalette(palette);
-        }
-    });
+                    palette.setColor(QPalette::Active, ui->labelResults->foregroundRole(), Qt::red);
+                    palette.setColor(QPalette::Inactive, ui->labelResults->foregroundRole(), Qt::red);
+                    ui->labelResults->setPalette(palette);
+                }
+                else
+                {
+                    ui->lineEditFind->setPalette(palette);
+                    ui->labelResults->setPalette(palette);
+                }
+            });
 
-    connect(m_searchPC.data(), &VTableSearch::HasResult, this, [this] (bool state)
-    {
-        ui->toolButtonFindPreviousPC->setEnabled(state);
-        ui->toolButtonFindNextPC->setEnabled(state);
+    connect(m_searchPC.data(), &VTableSearch::HasResult, this,
+            [this](bool state)
+            {
+                ui->toolButtonFindPreviousPC->setEnabled(state);
+                ui->toolButtonFindNextPC->setEnabled(state);
 
-        if (state)
-        {
-            ui->labelResultsPC->setText(
-                QStringLiteral("%1/%2").arg(m_searchPC->MatchIndex()+1).arg(m_searchPC->MatchCount()));
-        }
-        else
-        {
-            ui->labelResultsPC->setText(tr("0 results"));
-        }
+                if (state)
+                {
+                    ui->labelResultsPC->setText(
+                        QStringLiteral("%1/%2").arg(m_searchPC->MatchIndex() + 1).arg(m_searchPC->MatchCount()));
+                }
+                else
+                {
+                    ui->labelResultsPC->setText(tr("0 results"));
+                }
 
-        QPalette palette;
+                QPalette palette;
 
-        if (not state && not ui->lineEditFindPC->text().isEmpty())
-        {
-            palette.setColor(QPalette::Text, Qt::red);
-            ui->lineEditFindPC->setPalette(palette);
+                if (not state && not ui->lineEditFindPC->text().isEmpty())
+                {
+                    palette.setColor(QPalette::Text, Qt::red);
+                    ui->lineEditFindPC->setPalette(palette);
 
-            palette.setColor(QPalette::Active, ui->labelResultsPC->foregroundRole(), Qt::red);
-            palette.setColor(QPalette::Inactive, ui->labelResultsPC->foregroundRole(), Qt::red);
-            ui->labelResultsPC->setPalette(palette);
-        }
-        else
-        {
-            ui->lineEditFindPC->setPalette(palette);
-            ui->labelResultsPC->setPalette(palette);
-        }
-    });
+                    palette.setColor(QPalette::Active, ui->labelResultsPC->foregroundRole(), Qt::red);
+                    palette.setColor(QPalette::Inactive, ui->labelResultsPC->foregroundRole(), Qt::red);
+                    ui->labelResultsPC->setPalette(palette);
+                }
+                else
+                {
+                    ui->lineEditFindPC->setPalette(palette);
+                    ui->labelResultsPC->setPalette(palette);
+                }
+            });
 
-    connect(ui->toolButtonCaseSensitive, &QToolButton::toggled, this, [this](bool checked)
-    {
-        m_search->SetMatchCase(checked);
-        m_search->Find(ui->lineEditFind->text());
-        ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
-    });
+    connect(ui->toolButtonCaseSensitive, &QToolButton::toggled, this,
+            [this](bool checked)
+            {
+                m_search->SetMatchCase(checked);
+                m_search->Find(ui->lineEditFind->text());
+                ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
+            });
 
-    connect(ui->toolButtonCaseSensitivePC, &QToolButton::toggled, this, [this](bool checked)
-    {
-        m_searchPC->SetMatchCase(checked);
-        m_searchPC->Find(ui->lineEditFindPC->text());
-        ui->lineEditFindPC->setPlaceholderText(m_searchPC->SearchPlaceholder());
-    });
+    connect(ui->toolButtonCaseSensitivePC, &QToolButton::toggled, this,
+            [this](bool checked)
+            {
+                m_searchPC->SetMatchCase(checked);
+                m_searchPC->Find(ui->lineEditFindPC->text());
+                ui->lineEditFindPC->setPlaceholderText(m_searchPC->SearchPlaceholder());
+            });
 
-    connect(ui->toolButtonWholeWord, &QToolButton::toggled, this, [this](bool checked)
-    {
-        m_search->SetMatchWord(checked);
-        m_search->Find(ui->lineEditFind->text());
-        ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
-    });
+    connect(ui->toolButtonWholeWord, &QToolButton::toggled, this,
+            [this](bool checked)
+            {
+                m_search->SetMatchWord(checked);
+                m_search->Find(ui->lineEditFind->text());
+                ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
+            });
 
-    connect(ui->toolButtonWholeWordPC, &QToolButton::toggled, this, [this](bool checked)
-    {
-        m_searchPC->SetMatchWord(checked);
-        m_searchPC->Find(ui->lineEditFindPC->text());
-        ui->lineEditFindPC->setPlaceholderText(m_searchPC->SearchPlaceholder());
-    });
+    connect(ui->toolButtonWholeWordPC, &QToolButton::toggled, this,
+            [this](bool checked)
+            {
+                m_searchPC->SetMatchWord(checked);
+                m_searchPC->Find(ui->lineEditFindPC->text());
+                ui->lineEditFindPC->setPlaceholderText(m_searchPC->SearchPlaceholder());
+            });
 
-    connect(ui->toolButtonRegexp, &QToolButton::toggled, this, [this](bool checked)
-    {
-        m_search->SetMatchRegexp(checked);
+    connect(ui->toolButtonRegexp, &QToolButton::toggled, this,
+            [this](bool checked)
+            {
+                m_search->SetMatchRegexp(checked);
 
-        if (checked)
-        {
-            ui->toolButtonWholeWord->blockSignals(true);
-            ui->toolButtonWholeWord->setChecked(false);
-            ui->toolButtonWholeWord->blockSignals(false);
-            ui->toolButtonWholeWord->setEnabled(false);
+                if (checked)
+                {
+                    ui->toolButtonWholeWord->blockSignals(true);
+                    ui->toolButtonWholeWord->setChecked(false);
+                    ui->toolButtonWholeWord->blockSignals(false);
+                    ui->toolButtonWholeWord->setEnabled(false);
 
-            ui->toolButtonUseUnicodeProperties->setEnabled(true);
-        }
-        else
-        {
-            ui->toolButtonWholeWord->setEnabled(true);
-            ui->toolButtonUseUnicodeProperties->blockSignals(true);
-            ui->toolButtonUseUnicodeProperties->setChecked(false);
-            ui->toolButtonUseUnicodeProperties->blockSignals(false);
-            ui->toolButtonUseUnicodeProperties->setEnabled(false);
-        }
-        m_search->Find(ui->lineEditFind->text());
-        ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
-    });
+                    ui->toolButtonUseUnicodeProperties->setEnabled(true);
+                }
+                else
+                {
+                    ui->toolButtonWholeWord->setEnabled(true);
+                    ui->toolButtonUseUnicodeProperties->blockSignals(true);
+                    ui->toolButtonUseUnicodeProperties->setChecked(false);
+                    ui->toolButtonUseUnicodeProperties->blockSignals(false);
+                    ui->toolButtonUseUnicodeProperties->setEnabled(false);
+                }
+                m_search->Find(ui->lineEditFind->text());
+                ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
+            });
 
-    connect(ui->toolButtonRegexpPC, &QToolButton::toggled, this, [this](bool checked)
-    {
-        m_searchPC->SetMatchRegexp(checked);
+    connect(ui->toolButtonRegexpPC, &QToolButton::toggled, this,
+            [this](bool checked)
+            {
+                m_searchPC->SetMatchRegexp(checked);
 
-        if (checked)
-        {
-            ui->toolButtonWholeWordPC->blockSignals(true);
-            ui->toolButtonWholeWordPC->setChecked(false);
-            ui->toolButtonWholeWordPC->blockSignals(false);
-            ui->toolButtonWholeWordPC->setEnabled(false);
+                if (checked)
+                {
+                    ui->toolButtonWholeWordPC->blockSignals(true);
+                    ui->toolButtonWholeWordPC->setChecked(false);
+                    ui->toolButtonWholeWordPC->blockSignals(false);
+                    ui->toolButtonWholeWordPC->setEnabled(false);
 
-            ui->toolButtonUseUnicodePropertiesPC->setEnabled(true);
-        }
-        else
-        {
-            ui->toolButtonWholeWordPC->setEnabled(true);
-            ui->toolButtonUseUnicodePropertiesPC->blockSignals(true);
-            ui->toolButtonUseUnicodePropertiesPC->setChecked(false);
-            ui->toolButtonUseUnicodePropertiesPC->blockSignals(false);
-            ui->toolButtonUseUnicodePropertiesPC->setEnabled(false);
-        }
-        m_searchPC->Find(ui->lineEditFindPC->text());
-        ui->lineEditFindPC->setPlaceholderText(m_searchPC->SearchPlaceholder());
-    });
+                    ui->toolButtonUseUnicodePropertiesPC->setEnabled(true);
+                }
+                else
+                {
+                    ui->toolButtonWholeWordPC->setEnabled(true);
+                    ui->toolButtonUseUnicodePropertiesPC->blockSignals(true);
+                    ui->toolButtonUseUnicodePropertiesPC->setChecked(false);
+                    ui->toolButtonUseUnicodePropertiesPC->blockSignals(false);
+                    ui->toolButtonUseUnicodePropertiesPC->setEnabled(false);
+                }
+                m_searchPC->Find(ui->lineEditFindPC->text());
+                ui->lineEditFindPC->setPlaceholderText(m_searchPC->SearchPlaceholder());
+            });
 
-    connect(ui->toolButtonUseUnicodeProperties, &QToolButton::toggled, this, [this](bool checked)
-    {
-        m_search->SetUseUnicodePreperties(checked);
-        m_search->Find(ui->lineEditFind->text());
-    });
+    connect(ui->toolButtonUseUnicodeProperties, &QToolButton::toggled, this,
+            [this](bool checked)
+            {
+                m_search->SetUseUnicodePreperties(checked);
+                m_search->Find(ui->lineEditFind->text());
+            });
 
-    connect(ui->toolButtonUseUnicodePropertiesPC, &QToolButton::toggled, this, [this](bool checked)
-    {
-        m_searchPC->SetUseUnicodePreperties(checked);
-        m_searchPC->Find(ui->lineEditFindPC->text());
-    });
+    connect(ui->toolButtonUseUnicodePropertiesPC, &QToolButton::toggled, this,
+            [this](bool checked)
+            {
+                m_searchPC->SetUseUnicodePreperties(checked);
+                m_searchPC->Find(ui->lineEditFindPC->text());
+            });
 
     m_searchHistory->setStyleSheet(QStringLiteral("QMenu { menu-scrollable: 1; }"));
     m_searchHistoryPC->setStyleSheet(QStringLiteral("QMenu { menu-scrollable: 1; }"));
@@ -1080,21 +1100,22 @@ void DialogIncrements::InitIncrementsSearchHistory()
 {
     QStringList searchHistory = VAbstractValApplication::VApp()->ValentinaSettings()->GetIncrementsSearchHistory();
     m_searchHistory->clear();
-    for (const auto& term : searchHistory)
+    for (const auto &term : searchHistory)
     {
         QAction *action = m_searchHistory->addAction(term);
         action->setData(term);
-        connect(action, &QAction::triggered, this, [this]()
-        {
-            auto *action = qobject_cast<QAction *>(sender());
-            if (action != nullptr)
-            {
-                QString term = action->data().toString();
-                ui->lineEditFind->setText(term);
-                m_search->Find(term);
-                ui->lineEditFind->setFocus();
-            }
-        });
+        connect(action, &QAction::triggered, this,
+                [this]()
+                {
+                    auto *action = qobject_cast<QAction *>(sender());
+                    if (action != nullptr)
+                    {
+                        QString term = action->data().toString();
+                        ui->lineEditFind->setText(term);
+                        m_search->Find(term);
+                        ui->lineEditFind->setFocus();
+                    }
+                });
     }
 }
 
@@ -1102,23 +1123,24 @@ void DialogIncrements::InitIncrementsSearchHistory()
 void DialogIncrements::InitPreviewCalculationsSearchHistory()
 {
     QStringList searchHistory =
-            VAbstractValApplication::VApp()->ValentinaSettings()->GetPreviewCalculationsSearchHistory();
+        VAbstractValApplication::VApp()->ValentinaSettings()->GetPreviewCalculationsSearchHistory();
     m_searchHistoryPC->clear();
-    for (const auto& term : searchHistory)
+    for (const auto &term : searchHistory)
     {
         QAction *action = m_searchHistoryPC->addAction(term);
         action->setData(term);
-        connect(action, &QAction::triggered, this, [this]()
-        {
-            auto *action = qobject_cast<QAction *>(sender());
-            if (action != nullptr)
-            {
-                QString term = action->data().toString();
-                ui->lineEditFindPC->setText(term);
-                m_searchPC->Find(term);
-                ui->lineEditFindPC->setFocus();
-            }
-        });
+        connect(action, &QAction::triggered, this,
+                [this]()
+                {
+                    auto *action = qobject_cast<QAction *>(sender());
+                    if (action != nullptr)
+                    {
+                        QString term = action->data().toString();
+                        ui->lineEditFindPC->setText(term);
+                        m_searchPC->Find(term);
+                        ui->lineEditFindPC->setFocus();
+                    }
+                });
     }
 }
 
@@ -1144,7 +1166,8 @@ void DialogIncrements::SaveIncrementsSearchRequest()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::SavePreviewCalculationsSearchRequest()
 {
-    QStringList searchHistory = VAbstractValApplication::VApp()->ValentinaSettings()->GetPreviewCalculationsSearchHistory();
+    QStringList searchHistory =
+        VAbstractValApplication::VApp()->ValentinaSettings()->GetPreviewCalculationsSearchHistory();
     QString term = ui->lineEditFindPC->text();
     if (term.isEmpty())
     {
@@ -1297,7 +1320,7 @@ void DialogIncrements::RefreshPattern()
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::FillIncrementsTable(QTableWidget *table,
-                                           const QMap<QString, QSharedPointer<VIncrement> > &increments,
+                                           const QMap<QString, QSharedPointer<VIncrement>> &increments,
                                            bool takePreviewCalculations)
 {
     SCASSERT(table != nullptr)
@@ -1305,12 +1328,12 @@ void DialogIncrements::FillIncrementsTable(QTableWidget *table,
     table->blockSignals(true);
     table->clearContents();
 
-    QMap<QString, QSharedPointer<VIncrement> >::const_iterator i;
+    QMap<QString, QSharedPointer<VIncrement>>::const_iterator i;
     QMap<quint32, QString> map;
-    //Sorting QHash by id
+    // Sorting QHash by id
     for (i = increments.constBegin(); i != increments.constEnd(); ++i)
     {
-        const QSharedPointer<VIncrement>& incr = i.value();
+        const QSharedPointer<VIncrement> &incr = i.value();
         if (takePreviewCalculations == incr->IsPreviewCalculation())
         {
             map.insert(incr->GetIndex(), i.key());
@@ -1319,7 +1342,7 @@ void DialogIncrements::FillIncrementsTable(QTableWidget *table,
 
     qint32 currentRow = -1;
     QMapIterator<quint32, QString> iMap(map);
-    table->setRowCount ( static_cast<int>(map.size()) );
+    table->setRowCount(static_cast<int>(map.size()));
     while (iMap.hasNext())
     {
         iMap.next();
@@ -1337,9 +1360,8 @@ void DialogIncrements::FillIncrementsTable(QTableWidget *table,
             }
             AddCell(table, calculatedValue, currentRow, 1, Qt::AlignCenter, incr->IsFormulaOk()); // calculated value
 
-            QString formula =
-                    VTranslateVars::TryFormulaToUser(incr->GetFormula(),
-                                                     VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+            QString formula = VTranslateVars::TryFormulaToUser(
+                incr->GetFormula(), VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 
             AddCell(table, formula, currentRow, 2, Qt::AlignVCenter); // formula
 
@@ -1351,7 +1373,7 @@ void DialogIncrements::FillIncrementsTable(QTableWidget *table,
         else if (incr->GetType() == VarType::IncrementSeparator)
         {
             AddSeparatorCell(table, incr->GetName(), currentRow, 0, Qt::AlignVCenter); // name
-            AddCell(table, incr->GetDescription(), currentRow, 1, Qt::AlignCenter); // description
+            AddCell(table, incr->GetDescription(), currentRow, 1, Qt::AlignCenter);    // description
             table->setSpan(currentRow, 1, 1, 2);
         }
     }
@@ -1464,7 +1486,7 @@ void DialogIncrements::MoveUp()
     m_hasChanges = true;
     LocalUpdateTree();
 
-    table->selectRow(row-1);
+    table->selectRow(row - 1);
     table->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
 
@@ -1509,7 +1531,7 @@ void DialogIncrements::MoveDown()
     m_hasChanges = true;
     LocalUpdateTree();
 
-    table->selectRow(row+1);
+    table->selectRow(row + 1);
     table->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
 
@@ -1704,9 +1726,9 @@ void DialogIncrements::SaveIncrFormula()
         }
         else
         {
-            //Show unit in dialog lable (cm, mm or inch)
+            // Show unit in dialog lable (cm, mm or inch)
             const QString postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits());
-            labelCalculatedValue->setText(result->text() + QChar(QChar::Space) +postfix);
+            labelCalculatedValue->setText(result->text() + QChar(QChar::Space) + postfix);
         }
         return;
     }
@@ -1719,7 +1741,7 @@ void DialogIncrements::SaveIncrFormula()
         }
         else
         {
-            //Show unit in dialog lable (cm, mm or inch)
+            // Show unit in dialog lable (cm, mm or inch)
             const QString postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits());
             labelCalculatedValue->setText(tr("Error") + " (" + postfix + "). " + tr("Empty field."));
         }
@@ -1738,8 +1760,8 @@ void DialogIncrements::SaveIncrFormula()
 
     try
     {
-        const QString formula = VAbstractApplication::VApp()->TrVars()
-                ->FormulaFromUser(text, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+        const QString formula = VAbstractApplication::VApp()->TrVars()->FormulaFromUser(
+            text, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
         m_doc->SetIncrementFormula(nameField->text(), formula);
     }
     catch (qmu::QmuParserError &e) // Just in case something bad will happen
@@ -1795,16 +1817,16 @@ void DialogIncrements::DeployFormula()
     if (plainTextEditFormula->height() < DIALOG_MAX_FORMULA_HEIGHT)
     {
         plainTextEditFormula->setFixedHeight(DIALOG_MAX_FORMULA_HEIGHT);
-        //Set icon from theme (internal for Windows system)
-        pushButtonGrow->setIcon(QIcon::fromTheme(QStringLiteral("go-next"),
-                                                 QIcon(":/icons/win.icon.theme/16x16/actions/go-next.png")));
+        // Set icon from theme (internal for Windows system)
+        pushButtonGrow->setIcon(
+            QIcon::fromTheme(QStringLiteral("go-next"), QIcon(":/icons/win.icon.theme/16x16/actions/go-next.png")));
     }
     else
     {
-       plainTextEditFormula->setFixedHeight(baseHeight);
-       //Set icon from theme (internal for Windows system)
-       pushButtonGrow->setIcon(QIcon::fromTheme(QStringLiteral("go-down"),
-                                                QIcon(":/icons/win.icon.theme/16x16/actions/go-down.png")));
+        plainTextEditFormula->setFixedHeight(baseHeight);
+        // Set icon from theme (internal for Windows system)
+        pushButtonGrow->setIcon(
+            QIcon::fromTheme(QStringLiteral("go-down"), QIcon(":/icons/win.icon.theme/16x16/actions/go-down.png")));
     }
 
     // I found that after change size of formula field, it was filed for angle formula, field for formula became black.
@@ -1860,7 +1882,7 @@ void DialogIncrements::Fx()
     dialog->SetFormula(VTranslateVars::TryFormulaFromUser(plainTextEditFormula->toPlainText(),
                                                           VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
     const QString postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-    dialog->setPostfix(postfix);//Show unit in dialog lable (cm, mm or inch)
+    dialog->setPostfix(postfix); // Show unit in dialog lable (cm, mm or inch)
 
     if (dialog->exec() == QDialog::Accepted)
     {
@@ -1957,7 +1979,7 @@ void DialogIncrements::showEvent(QShowEvent *event)
 {
     // Skip DialogTool implementation
     QDialog::showEvent(event); // NOLINT(bugprone-parent-virtual-call)
-    if ( event->spontaneous() )
+    if (event->spontaneous())
     {
         return;
     }
@@ -1974,7 +1996,7 @@ void DialogIncrements::showEvent(QShowEvent *event)
         resize(sz);
     }
 
-    isInitialized = true;//first show windows are held
+    isInitialized = true; // first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1999,7 +2021,7 @@ void DialogIncrements::ShowIncrementDetails()
 //---------------------------------------------------------------------------------------------------------------------
 DialogIncrements::~DialogIncrements()
 {
-    ui->lineEditFind->blockSignals(true); // prevents crash
+    ui->lineEditFind->blockSignals(true);   // prevents crash
     ui->lineEditFindPC->blockSignals(true); // prevents crash
     delete ui;
 }

@@ -40,9 +40,10 @@
 class VValentinaSettings : public VCommonSettings
 {
     Q_OBJECT // NOLINT
+
 public:
     VValentinaSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
-              QObject *parent = nullptr);
+                       QObject *parent = nullptr);
     VValentinaSettings(const QString &fileName, Format format, QObject *parent = nullptr);
 
     auto GetLabelLanguage() const -> QString;
@@ -127,17 +128,17 @@ public:
     void SetTextAsPaths(bool value);
 
     auto GetKnownMaterials() const -> QStringList;
-    void        SetKnownMaterials(const QStringList &list);
+    void SetKnownMaterials(const QStringList &list);
 
     auto IsRememberPatternMaterials() const -> bool;
     void SetRememberPatternMaterials(bool value);
 
     // settings for the tiled PDFs
     auto GetTiledPDFPaperHeight(const Unit &unit) const -> qreal;
-    void  SetTiledPDFPaperHeight(qreal value, const Unit &unit);
+    void SetTiledPDFPaperHeight(qreal value, const Unit &unit);
 
     auto GetTiledPDFPaperWidth(const Unit &unit) const -> qreal;
-    void  SetTiledPDFPaperWidth(qreal value, const Unit &unit);
+    void SetTiledPDFPaperWidth(qreal value, const Unit &unit);
 
     auto IsDockWidgetGroupsActive() const -> bool;
     static auto GetDefDockWidgetGroupsActive() -> bool;
@@ -193,7 +194,7 @@ public:
     auto GetHistorySearchOptionRegexp() const -> bool;
     void SetHistorySearchOptionRegexp(bool value);
 
-    auto GetHistorySearchOptionMatchCase() const ->bool;
+    auto GetHistorySearchOptionMatchCase() const -> bool;
     void SetHistorySearchOptionMatchCase(bool value);
 
     auto GetIncrementsSearchOptionUseUnicodeProperties() const -> bool;
@@ -205,7 +206,7 @@ public:
     auto GetIncrementsSearchOptionRegexp() const -> bool;
     void SetIncrementsSearchOptionRegexp(bool value);
 
-    auto GetIncrementsSearchOptionMatchCase() const ->bool;
+    auto GetIncrementsSearchOptionMatchCase() const -> bool;
     void SetIncrementsSearchOptionMatchCase(bool value);
 
     auto GetPreviewCalculationsSearchOptionUseUnicodeProperties() const -> bool;
@@ -217,7 +218,7 @@ public:
     auto GetPreviewCalculationsSearchOptionRegexp() const -> bool;
     void SetPreviewCalculationsSearchOptionRegexp(bool value);
 
-    auto GetPreviewCalculationsSearchOptionMatchCase() const ->bool;
+    auto GetPreviewCalculationsSearchOptionMatchCase() const -> bool;
     void SetPreviewCalculationsSearchOptionMatchCase(bool value);
 
     auto GetFinalMeasurementsSearchOptionUseUnicodeProperties() const -> bool;
@@ -229,7 +230,7 @@ public:
     auto GetFinalMeasurementsSearchOptionRegexp() const -> bool;
     void SetFinalMeasurementsSearchOptionRegexp(bool value);
 
-    auto GetFinalMeasurementsSearchOptionMatchCase() const ->bool;
+    auto GetFinalMeasurementsSearchOptionMatchCase() const -> bool;
     void SetFinalMeasurementsSearchOptionMatchCase(bool value);
 
     auto GetBackgroundImageDefOpacity() const -> int;

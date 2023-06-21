@@ -62,7 +62,7 @@
 #include "literals.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
+#include "diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
 namespace
@@ -374,12 +374,17 @@ void MacosEnableLayerBacking()
 #endif // MACOS_LAYER_BACKING_AFFECTED
 #endif // Q_OS_MAC
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
+
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTMark, (QLatin1String("tMark")))         // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVMark, (QLatin1String("vMark")))         // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVMark2, (QLatin1String("vMark2")))       // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strUMark, (QLatin1String("uMark")))         // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strBoxMark, (QLatin1String("boxMark")))     // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCheckMark, (QLatin1String("checkMark"))) // NOLINT
+
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 auto PassmarkLineTypeToString(PassmarkLineType type) -> QString

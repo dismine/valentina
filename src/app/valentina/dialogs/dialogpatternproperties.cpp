@@ -29,36 +29,36 @@
 #include "dialogpatternproperties.h"
 #include "ui_dialogpatternproperties.h"
 #include <QBuffer>
-#include <QPushButton>
-#include <QFileDialog>
-#include <QMenu>
-#include <QDate>
-#include <QMessageBox>
-#include <QRadioButton>
 #include <QCompleter>
-#include <QSet>
-#include <QImageReader>
-#include <QMimeType>
+#include <QDate>
 #include <QDesktopServices>
+#include <QFileDialog>
+#include <QImageReader>
+#include <QMenu>
+#include <QMessageBox>
+#include <QMimeType>
+#include <QPushButton>
+#include <QRadioButton>
+#include <QSet>
 #include <QUrl>
 
-#include "../xml/vpattern.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../core/vapplication.h"
 #include "../vmisc/vvalentinasettings.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../xml/vpattern.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../qmuparser/qmudef.h"
-#include "../ifc/xml/vpatternimage.h"
 #include "../ifc/xml/utils.h"
+#include "../ifc/xml/vpatternimage.h"
+#include "../qmuparser/qmudef.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pattern, QWidget *parent)
-    : QDialog(parent),
-      ui(new Ui::DialogPatternProperties),
-      m_doc(doc),
-      m_pattern(pattern)
+DialogPatternProperties::DialogPatternProperties(VPattern *doc, VContainer *pattern, QWidget *parent)
+  : QDialog(parent),
+    ui(new Ui::DialogPatternProperties),
+    m_doc(doc),
+    m_pattern(pattern)
 {
     ui->setupUi(this);
 
@@ -85,13 +85,11 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     }
     ui->lineEditPathToFile->setCursorPosition(0);
 
-    connect(ui->pushButtonShowInExplorer, &QPushButton::clicked, this, []()
-    {
-        ShowInGraphicalShell(VAbstractValApplication::VApp()->GetPatternPath());
-    });
+    connect(ui->pushButtonShowInExplorer, &QPushButton::clicked, this,
+            []() { ShowInGraphicalShell(VAbstractValApplication::VApp()->GetPatternPath()); });
 #if defined(Q_OS_MAC)
     ui->pushButtonShowInExplorer->setText(tr("Show in Finder"));
-#endif //defined(Q_OS_MAC)
+#endif // defined(Q_OS_MAC)
 
     //----------------------- Label language
     for (auto &name : VApplication::LabelLanguages())
@@ -99,8 +97,8 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
         ui->comboBoxLabelLanguage->addItem(QLocale(name).nativeLanguageName(), name);
     }
 
-    int index = ui->comboBoxLabelLanguage->findData(
-                VAbstractValApplication::VApp()->ValentinaSettings()->GetLabelLanguage());
+    int index =
+        ui->comboBoxLabelLanguage->findData(VAbstractValApplication::VApp()->ValentinaSettings()->GetLabelLanguage());
     if (index != -1)
     {
         ui->comboBoxLabelLanguage->setCurrentIndex(index);
@@ -131,7 +129,7 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     ui->checkBoxPatternReadOnly->setChecked(readOnly);
     if (not readOnly)
     {
-        connect(ui->checkBoxPatternReadOnly, &QRadioButton::toggled, this, [this](){m_securityChanged = true;});
+        connect(ui->checkBoxPatternReadOnly, &QRadioButton::toggled, this, [this]() { m_securityChanged = true; });
     }
     else
     {
@@ -154,11 +152,12 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
             });
 
     ui->lineEditPassmarkLength->setCompleter(m_completerLength);
-    connect(ui->lineEditPassmarkLength, &QLineEdit::textEdited, this, [this]()
-    {
-        ValidatePassmarkLength();
-        DescEdited();
-    });
+    connect(ui->lineEditPassmarkLength, &QLineEdit::textEdited, this,
+            [this]()
+            {
+                ValidatePassmarkLength();
+                DescEdited();
+            });
 
     ui->lineEditPassmarkLength->installEventFilter(this);
     m_oldPassmarkLength = doc->GetPassmarkLengthVariable();
@@ -191,12 +190,11 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     ui->lineEditPassmarkWidth->setText(m_oldPassmarkWidth);
     ValidatePassmarkWidth();
 
-    //Initialization change value. Set to default value after initialization
+    // Initialization change value. Set to default value after initialization
     m_defaultChanged = false;
     m_securityChanged = false;
 
-    connect(ui->pushButtonBrowsePieceLabelPath, &QPushButton::clicked, this,
-            &DialogPatternProperties::BrowseLabelPath);
+    connect(ui->pushButtonBrowsePieceLabelPath, &QPushButton::clicked, this, &DialogPatternProperties::BrowseLabelPath);
     ui->lineEditPieceLabelPath->setText(m_doc->GetDefaultPieceLabelPath());
     connect(ui->lineEditPieceLabelPath, &QLineEdit::textChanged, this, &DialogPatternProperties::LabelPathChanged);
 }
@@ -222,7 +220,7 @@ auto DialogPatternProperties::eventFilter(QObject *object, QEvent *event) -> boo
             }
         }
 
-        return false;// clazy:exclude=base-class-event
+        return false; // clazy:exclude=base-class-event
     }
 
     if (ui->lineEditPassmarkWidth == qobject_cast<QLineEdit *>(object))
@@ -330,8 +328,7 @@ void DialogPatternProperties::ValidatePassmarkLength() const
     QRegularExpression rx(NameRegExp());
     if (not text.isEmpty())
     {
-        palette.setColor(foregroundRole,
-                         rx.match(text).hasMatch() && m_variables.contains(text) ? Qt::black : Qt::red);
+        palette.setColor(foregroundRole, rx.match(text).hasMatch() && m_variables.contains(text) ? Qt::black : Qt::red);
     }
     else
     {
@@ -366,30 +363,32 @@ void DialogPatternProperties::InitImage()
 {
     ui->imageLabel->setContextMenuPolicy(Qt::CustomContextMenu);
     ui->imageLabel->setScaledContents(true);
-    connect(ui->imageLabel, &QWidget::customContextMenuRequested, this, [this]()
-    {
-        QMenu menu(this);
-        menu.addAction(m_deleteAction);
-        menu.addAction(m_changeImageAction);
-        menu.addAction(m_saveImageAction);
-        menu.addAction(m_showImageAction);
-        menu.exec(QCursor::pos());
-        menu.show();
-    });
+    connect(ui->imageLabel, &QWidget::customContextMenuRequested, this,
+            [this]()
+            {
+                QMenu menu(this);
+                menu.addAction(m_deleteAction);
+                menu.addAction(m_changeImageAction);
+                menu.addAction(m_saveImageAction);
+                menu.addAction(m_showImageAction);
+                menu.exec(QCursor::pos());
+                menu.show();
+            });
 
-    m_deleteAction      = new QAction(tr("Delete image"), this);
+    m_deleteAction = new QAction(tr("Delete image"), this);
     m_changeImageAction = new QAction(tr("Change image"), this);
-    m_saveImageAction   = new QAction(tr("Save image to file"), this);
-    m_showImageAction   = new QAction(tr("Show image"), this);
+    m_saveImageAction = new QAction(tr("Save image to file"), this);
+    m_showImageAction = new QAction(tr("Show image"), this);
 
-    connect(m_deleteAction, &QAction::triggered, this, [this]()
-    {
-        m_doc->DeleteImage();
-        ui->imageLabel->setText(tr("Change image"));
-        m_deleteAction->setEnabled(false);
-        m_saveImageAction->setEnabled(false);
-        m_showImageAction->setEnabled(false);
-    });
+    connect(m_deleteAction, &QAction::triggered, this,
+            [this]()
+            {
+                m_doc->DeleteImage();
+                ui->imageLabel->setText(tr("Change image"));
+                m_deleteAction->setEnabled(false);
+                m_saveImageAction->setEnabled(false);
+                m_showImageAction->setEnabled(false);
+            });
 
     connect(m_changeImageAction, &QAction::triggered, this, &DialogPatternProperties::ChangeImage);
     connect(m_saveImageAction, &QAction::triggered, this, &DialogPatternProperties::SaveImage);
@@ -411,9 +410,9 @@ void DialogPatternProperties::InitImage()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::ChangeImage()
 {
-    const QString fileName = QFileDialog::getOpenFileName(this, tr("Image for pattern"), QString(),
-                                                          PrepareImageFilters(), nullptr,
-                                                          VAbstractApplication::VApp()->NativeFileDialog());
+    const QString fileName =
+        QFileDialog::getOpenFileName(this, tr("Image for pattern"), QString(), PrepareImageFilters(), nullptr,
+                                     VAbstractApplication::VApp()->NativeFileDialog());
     if (not fileName.isEmpty())
     {
         VPatternImage image = VPatternImage::FromFile(fileName);

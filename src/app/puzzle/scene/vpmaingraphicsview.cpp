@@ -29,25 +29,29 @@
 #include "vpmaingraphicsview.h"
 
 #include <QDragEnterEvent>
-#include <QMimeData>
 #include <QKeyEvent>
 #include <QMenu>
+#include <QMimeData>
 #include <QUndoStack>
 
 #include "../carousel/vpmimedatapiece.h"
 #include "../layout/vplayout.h"
-#include "../layout/vpsheet.h"
 #include "../layout/vppiece.h"
+#include "../layout/vpsheet.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "undocommands/vpundopiecezvaluemove.h"
 #include "vpgraphicspiece.h"
 #include "vpgraphicspiececontrols.h"
 
+#include "../undocommands/vpundomovepieceonsheet.h"
+#include "../undocommands/vpundooriginmove.h"
 #include "../undocommands/vpundopiecemove.h"
 #include "../undocommands/vpundopiecerotate.h"
-#include "../undocommands/vpundooriginmove.h"
-#include "../undocommands/vpundomovepieceonsheet.h"
 #include "../undocommands/vpundoremovesheet.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+#include "../vmisc/diagnostic.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
 #include <QLoggingCategory>
 
@@ -66,11 +70,15 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wenum-enum-conversion")
 #endif
 
+QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
+
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-Q_GLOBAL_STATIC_WITH_ARGS(const QKeySequence, restoreOriginShortcut, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QKeySequence, restoreOriginShortcut,
                           (QKeySequence(Qt::ControlModifier | Qt::Key_Asterisk)))
 #else
-Q_GLOBAL_STATIC_WITH_ARGS(const QKeySequence, restoreOriginShortcut, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QKeySequence, restoreOriginShortcut,
                           (QKeySequence(Qt::ControlModifier + Qt::Key_Asterisk)))
 #endif
 
@@ -78,8 +86,8 @@ QT_WARNING_POP
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-VPMainGraphicsView::VPMainGraphicsView(const VPLayoutPtr &layout, QWidget *parent) :
-    VMainGraphicsView(parent),
+VPMainGraphicsView::VPMainGraphicsView(const VPLayoutPtr &layout, QWidget *parent)
+  : VMainGraphicsView(parent),
     m_layout(layout)
 {
     SCASSERT(not layout.isNull())
@@ -131,7 +139,7 @@ void VPMainGraphicsView::dragEnterEvent(QDragEnterEvent *event)
 {
     const QMimeData *mime = event->mimeData();
 
-    if(mime->hasFormat(VPMimeDataPiece::mineFormatPiecePtr))
+    if (mime->hasFormat(VPMimeDataPiece::mineFormatPiecePtr))
     {
         VPLayoutPtr layout = m_layout.toStrongRef();
         if (layout.isNull())
@@ -139,7 +147,7 @@ void VPMainGraphicsView::dragEnterEvent(QDragEnterEvent *event)
             return;
         }
 
-        const auto *mimePiece = qobject_cast<const VPMimeDataPiece *> (mime);
+        const auto *mimePiece = qobject_cast<const VPMimeDataPiece *>(mime);
         if (mimePiece != nullptr && mimePiece->LayoutUuid() == layout->Uuid())
         {
             qCDebug(pMainGraphicsView(), "drag enter");
@@ -153,7 +161,7 @@ void VPMainGraphicsView::dragMoveEvent(QDragMoveEvent *event)
 {
     const QMimeData *mime = event->mimeData();
 
-    if(mime->hasFormat(VPMimeDataPiece::mineFormatPiecePtr))
+    if (mime->hasFormat(VPMimeDataPiece::mineFormatPiecePtr))
     {
         VPLayoutPtr layout = m_layout.toStrongRef();
         if (layout.isNull())
@@ -161,7 +169,7 @@ void VPMainGraphicsView::dragMoveEvent(QDragMoveEvent *event)
             return;
         }
 
-        const auto *mimePiece = qobject_cast<const VPMimeDataPiece *> (mime);
+        const auto *mimePiece = qobject_cast<const VPMimeDataPiece *>(mime);
         if (mimePiece != nullptr && mimePiece->LayoutUuid() == layout->Uuid())
         {
             event->acceptProposedAction();
@@ -182,7 +190,7 @@ void VPMainGraphicsView::dropEvent(QDropEvent *event)
 
     qCDebug(pMainGraphicsView(), "drop enter , %s", qUtf8Printable(mime->objectName()));
 
-    if(mime->hasFormat(VPMimeDataPiece::mineFormatPiecePtr))
+    if (mime->hasFormat(VPMimeDataPiece::mineFormatPiecePtr))
     {
         VPLayoutPtr layout = m_layout.toStrongRef();
         if (layout.isNull())
@@ -190,7 +198,7 @@ void VPMainGraphicsView::dropEvent(QDropEvent *event)
             return;
         }
 
-        const auto *mimePiece = qobject_cast<const VPMimeDataPiece *> (mime);
+        const auto *mimePiece = qobject_cast<const VPMimeDataPiece *>(mime);
 
         if (mimePiece == nullptr || mimePiece->LayoutUuid() != layout->Uuid())
         {
@@ -198,7 +206,7 @@ void VPMainGraphicsView::dropEvent(QDropEvent *event)
         }
 
         VPPiecePtr piece = mimePiece->GetPiecePtr();
-        if(not piece.isNull())
+        if (not piece.isNull())
         {
             qCDebug(pMainGraphicsView(), "element dropped, %s", qUtf8Printable(piece->GetName()));
             event->acceptProposedAction();
@@ -220,7 +228,7 @@ void VPMainGraphicsView::keyPressEvent(QKeyEvent *event)
     const bool controlModifier = (event->modifiers() & Qt::ControlModifier) != 0U;
     const bool altModifier = (event->modifiers() & Qt::AltModifier) != 0U;
 
-    switch(event->key())
+    switch (event->key())
     {
         case Qt::Key_Backspace:
         case Qt::Key_Delete:
@@ -239,11 +247,11 @@ void VPMainGraphicsView::keyPressEvent(QKeyEvent *event)
             shiftModifier ? TranslatePiecesOn(0, 10) : TranslatePiecesOn(0, 1);
             break;
         case Qt::Key_BracketLeft:
-            if(controlModifier)
+            if (controlModifier)
             {
                 RotatePiecesByAngle(90);
             }
-            else if(altModifier)
+            else if (altModifier)
             {
                 RotatePiecesByAngle(1);
             }
@@ -253,11 +261,11 @@ void VPMainGraphicsView::keyPressEvent(QKeyEvent *event)
             }
             break;
         case Qt::Key_BracketRight:
-            if(controlModifier)
+            if (controlModifier)
             {
                 RotatePiecesByAngle(-90);
             }
-            else if(altModifier)
+            else if (altModifier)
             {
                 RotatePiecesByAngle(-1);
             }
@@ -286,7 +294,7 @@ void VPMainGraphicsView::keyPressEvent(QKeyEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::keyReleaseEvent(QKeyEvent *event)
 {
-    switch(event->key())
+    switch (event->key())
     {
         case Qt::Key_Left:
         case Qt::Key_Right:
@@ -360,7 +368,6 @@ void VPMainGraphicsView::contextMenuEvent(QContextMenuEvent *event)
     {
         RestoreOrigin();
     }
-
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -382,7 +389,7 @@ void VPMainGraphicsView::RestoreOrigin() const
 
             QRectF boundingRect;
             QList<VPPiecePtr> selectedPieces = sheet->GetSelectedPieces();
-            for (const auto& piece : selectedPieces)
+            for (const auto &piece : selectedPieces)
             {
                 if (piece->IsSelected())
                 {
@@ -559,10 +566,10 @@ void VPMainGraphicsView::SwitchScene(const VPSheetPtr &sheet)
 {
     if (not sheet.isNull())
     {
-       VMainGraphicsScene *scene = sheet->SceneData()->Scene();
-       setScene(scene);
-       connect(scene, &VMainGraphicsScene::mouseMove, this, &VPMainGraphicsView::on_SceneMouseMove,
-               Qt::UniqueConnection);
+        VMainGraphicsScene *scene = sheet->SceneData()->Scene();
+        setScene(scene);
+        connect(scene, &VMainGraphicsScene::mouseMove, this, &VPMainGraphicsView::on_SceneMouseMove,
+                Qt::UniqueConnection);
     }
 }
 
@@ -582,7 +589,7 @@ void VPMainGraphicsView::ClearSelection()
     }
 
     QList<VPPiecePtr> pieces = sheet->GetSelectedPieces();
-    for (const auto& piece : pieces)
+    for (const auto &piece : pieces)
     {
         piece->SetSelected(false);
         emit layout->PieceSelectionChanged(piece);
@@ -640,15 +647,15 @@ void VPMainGraphicsView::RemovePiece() const
     VPSheetPtr sheet = layout->GetFocusedSheet();
     if (sheet.isNull())
     {
-        return ;
+        return;
     }
 
     const QList<VPGraphicsPiece *> &graphicsPieces = sheet->SceneData()->GraphicsPieces();
-    for(auto *graphicsPiece : graphicsPieces)
+    for (auto *graphicsPiece : graphicsPieces)
     {
         VPPiecePtr piece = graphicsPiece->GetPiece();
 
-        if(not piece.isNull() && piece->IsSelected())
+        if (not piece.isNull() && piece->IsSelected())
         {
             piece->SetSelected(false);
 
@@ -703,11 +710,10 @@ void VPMainGraphicsView::MovePiece(QKeyEvent *event)
                 {
                     const VPPiecePtr &p = ConstFirst(pieces);
 
-                    auto *command = new VPUndoPieceMove(p, m_stickyTranslateX, m_stickyTranslateY,
-                                                        m_allowChangeMerge);
+                    auto *command = new VPUndoPieceMove(p, m_stickyTranslateX, m_stickyTranslateY, m_allowChangeMerge);
                     layout->UndoStack()->push(command);
 
-                    VPGraphicsPiece * gPiece = sheet->SceneData()->ScenePiece(p);
+                    VPGraphicsPiece *gPiece = sheet->SceneData()->ScenePiece(p);
                     if (gPiece != nullptr)
                     {
                         gPiece->SetStickyPoints(QVector<QPointF>());
@@ -739,7 +745,7 @@ void VPMainGraphicsView::on_PieceSheetChanged(const VPPiecePtr &piece)
     VPGraphicsPiece *graphicsPiece = sheet->SceneData()->ScenePiece(piece);
 
     if (piece != nullptr && (piece->Sheet().isNull() || piece->Sheet() == layout->GetTrashSheet() ||
-            piece->Sheet() != layout->GetFocusedSheet())) // remove
+                             piece->Sheet() != layout->GetFocusedSheet())) // remove
     {
         if (graphicsPiece != nullptr)
         {
@@ -750,7 +756,7 @@ void VPMainGraphicsView::on_PieceSheetChanged(const VPPiecePtr &piece)
     }
     else // add
     {
-        if(graphicsPiece == nullptr)
+        if (graphicsPiece == nullptr)
         {
             graphicsPiece = new VPGraphicsPiece(piece);
             sheet->SceneData()->AddPiece(graphicsPiece);

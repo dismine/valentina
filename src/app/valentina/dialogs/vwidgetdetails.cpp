@@ -27,12 +27,16 @@
  *************************************************************************/
 
 #include "vwidgetdetails.h"
-#include "ui_vwidgetdetails.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../vmisc/vabstractapplication.h"
-#include "../vtools/undocommands/togglepiecestate.h"
+#include "../vpatterndb/vcontainer.h"
 #include "../vtools/tools/vtoolseamallowance.h"
+#include "../vtools/undocommands/togglepiecestate.h"
+#include "ui_vwidgetdetails.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+#include "../vmisc/diagnostic.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
 #include <QMenu>
 #include <QTimer>
@@ -58,17 +62,22 @@ enum PieceColumn
     PieceName = 1
 };
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, allowDetailIcon, (QLatin1String("://icon/16x16/allow_detail.png"))) // NOLINT
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
+
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, allowDetailIcon, (QLatin1String("://icon/16x16/allow_detail.png")))   // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, forbidDetailIcon, (QLatin1String("://icon/16x16/forbid_detail.png"))) // NOLINT
-}  // namespace
+
+QT_WARNING_POP
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VWidgetDetails::VWidgetDetails(VContainer *data, VAbstractPattern *doc, QWidget *parent)
-    : QWidget(parent),
-      ui(new Ui::VWidgetDetails),
-      m_doc(doc),
-      m_data(data),
-      m_updateListTimer(new QTimer(this))
+  : QWidget(parent),
+    ui(new Ui::VWidgetDetails),
+    m_doc(doc),
+    m_data(data),
+    m_updateListTimer(new QTimer(this))
 {
     ui->setupUi(this);
 
@@ -82,10 +91,7 @@ VWidgetDetails::VWidgetDetails(VContainer *data, VAbstractPattern *doc, QWidget 
     connect(ui->tableWidget, &QTableWidget::customContextMenuRequested, this, &VWidgetDetails::ShowContextMenu);
 
     m_updateListTimer->setSingleShot(true);
-    connect(m_updateListTimer, &QTimer::timeout, this, [this]()
-    {
-        FillTable(m_data->DataPieces());
-    });
+    connect(m_updateListTimer, &QTimer::timeout, this, [this]() { FillTable(m_data->DataPieces()); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -203,12 +209,12 @@ void VWidgetDetails::ToggleSectionDetails(bool select)
         return;
     }
 
-    for (int i = 0; i<ui->tableWidget->rowCount(); ++i)
+    for (int i = 0; i < ui->tableWidget->rowCount(); ++i)
     {
         const quint32 id = ui->tableWidget->item(i, PieceColumn::InLayout)->data(Qt::UserRole).toUInt();
         if (allDetails->contains(id))
         {
-            if (not (select == allDetails->value(id).IsInLayout()))
+            if (not(select == allDetails->value(id).IsInLayout()))
             {
                 auto *togglePrint = new TogglePieceInLayout(id, select, m_data, m_doc);
                 connect(togglePrint, &TogglePieceInLayout::Toggled, this, &VWidgetDetails::ToggledPiece);
@@ -229,13 +235,12 @@ void VWidgetDetails::ToggledPieceItem(QTableWidgetItem *item)
     if (details->contains(id))
     {
         const bool inLayout = details->value(id).IsInLayout();
-        inLayout ? item->setIcon(QIcon(*allowDetailIcon))
-                 : item->setIcon(QIcon(*forbidDetailIcon));
+        inLayout ? item->setIcon(QIcon(*allowDetailIcon)) : item->setIcon(QIcon(*forbidDetailIcon));
 
         VToolSeamAllowance *tool = nullptr;
         try
         {
-            tool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(id));
+            tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(id));
             tool->setVisible(ui->checkBoxHideNotInLayout->isChecked() ? inLayout : true);
         }
         catch (VExceptionBadId &)
@@ -309,11 +314,11 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
                 pieceMode = true;
                 menu->addSeparator();
 
-                actionPieceOptions = menu->addAction(QIcon::fromTheme(QStringLiteral("preferences-other")),
-                                                     tr("Piece options"));
+                actionPieceOptions =
+                    menu->addAction(QIcon::fromTheme(QStringLiteral("preferences-other")), tr("Piece options"));
 
-                actionDeletePiece = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-delete")),
-                                                     tr("Delete piece"));
+                actionDeletePiece =
+                    menu->addAction(QIcon::fromTheme(QStringLiteral("edit-delete")), tr("Delete piece"));
                 actionDeletePiece->setDisabled(toolPiece->referens() > 0);
             }
         }
@@ -335,7 +340,7 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
     auto iter = allDetails->constBegin();
     while (iter != allDetails->constEnd())
     {
-        if(iter.value().IsInLayout())
+        if (iter.value().IsInLayout())
         {
             selectedDetails++;
         }
@@ -372,7 +377,7 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
     {
         VAbstractApplication::VApp()->getUndoStack()->beginMacro(tr("invert selection"));
 
-        for (int i = 0; i<ui->tableWidget->rowCount(); ++i)
+        for (int i = 0; i < ui->tableWidget->rowCount(); ++i)
         {
             QTableWidgetItem *item = ui->tableWidget->item(i, PieceColumn::InLayout);
             const quint32 id = item->data(Qt::UserRole).toUInt();
@@ -398,12 +403,12 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
         {
             toolPiece->DeleteFromMenu();
         }
-        catch(const VExceptionToolWasDeleted &e)
+        catch (const VExceptionToolWasDeleted &e)
         {
             Q_UNUSED(e);
-            return;//Leave this method immediately!!!
+            return; // Leave this method immediately!!!
         }
-        //Leave this method immediately after call!!!
+        // Leave this method immediately after call!!!
     }
 }
 

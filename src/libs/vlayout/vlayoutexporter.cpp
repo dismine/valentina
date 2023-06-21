@@ -51,13 +51,22 @@
 #include "vprintlayout.h"
 #include "vrawlayout.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+#include "../vmisc/diagnostic.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+
 namespace
 {
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
+
 #ifdef Q_OS_WIN
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, PDFTOPS, (QLatin1String("pdftops.exe"))) // NOLINT
 #else
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, PDFTOPS, (QLatin1String("pdftops"))) // NOLINT
 #endif
+
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -77,7 +86,7 @@ void PrepareDetailsForDXF(const QString &placeholder, const QList<QGraphicsItem 
         {
             if (child->type() == QGraphicsSimpleTextItem::Type)
             {
-                if(auto *textItem = qgraphicsitem_cast<QGraphicsSimpleTextItem *>(child))
+                if (auto *textItem = qgraphicsitem_cast<QGraphicsSimpleTextItem *>(child))
                 {
                     textItem->setText(textItem->text() + placeholder);
                 }
@@ -104,7 +113,7 @@ void RestoreDetailsAfterDXF(const QString &placeholder, const QList<QGraphicsIte
         {
             if (child->type() == QGraphicsSimpleTextItem::Type)
             {
-                if(auto *textItem = qgraphicsitem_cast<QGraphicsSimpleTextItem *>(child))
+                if (auto *textItem = qgraphicsitem_cast<QGraphicsSimpleTextItem *>(child))
                 {
                     QString text = textItem->text();
                     text.replace(placeholder, QString());
@@ -114,7 +123,7 @@ void RestoreDetailsAfterDXF(const QString &placeholder, const QList<QGraphicsIte
         }
     }
 }
-}  // namespace
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutExporter::IsShowGrainline() const -> bool
@@ -283,7 +292,7 @@ void VLayoutExporter::ExportToFlatDXF(QGraphicsScene *scene, const QList<QGraphi
     generator.SetResolution(PrintDPI);
     generator.SetVersion(static_cast<DRW::Version>(m_dxfVersion));
     generator.SetBinaryFormat(m_binaryDxfFormat);
-    generator.SetInsunits(VarInsunits::Millimeters);// Decided to always use mm. See issue #745
+    generator.SetInsunits(VarInsunits::Millimeters); // Decided to always use mm. See issue #745
 
     QPainter painter;
     if (painter.begin(&generator))
@@ -292,8 +301,7 @@ void VLayoutExporter::ExportToFlatDXF(QGraphicsScene *scene, const QList<QGraphi
         scene->render(&painter, m_imageRect, m_imageRect, Qt::IgnoreAspectRatio);
         if (not painter.end())
         {
-            qCritical() << tr("Can't create a flat dxf file.")
-                        << generator.ErrorString();
+            qCritical() << tr("Can't create a flat dxf file.") << generator.ErrorString();
         }
     }
 
@@ -310,13 +318,12 @@ void VLayoutExporter::ExportToAAMADXF(const QVector<VLayoutPiece> &details) cons
     generator.SetResolution(PrintDPI);
     generator.SetVersion(static_cast<DRW::Version>(m_dxfVersion));
     generator.SetBinaryFormat(m_binaryDxfFormat);
-    generator.SetInsunits(VarInsunits::Millimeters);// Decided to always use mm. See issue #745
+    generator.SetInsunits(VarInsunits::Millimeters); // Decided to always use mm. See issue #745
     generator.SetXScale(m_xScale);
     generator.SetYScale(m_yScale);
     if (not generator.ExportToAAMA(details))
     {
-        qCritical() << tr("Can't create an AAMA dxf file.")
-                    << generator.ErrorString();
+        qCritical() << tr("Can't create an AAMA dxf file.") << generator.ErrorString();
     }
 }
 
@@ -329,13 +336,12 @@ void VLayoutExporter::ExportToASTMDXF(const QVector<VLayoutPiece> &details) cons
     generator.SetResolution(PrintDPI);
     generator.SetVersion(static_cast<DRW::Version>(m_dxfVersion));
     generator.SetBinaryFormat(m_binaryDxfFormat);
-    generator.SetInsunits(VarInsunits::Millimeters);// Decided to always use mm. See issue #745
+    generator.SetInsunits(VarInsunits::Millimeters); // Decided to always use mm. See issue #745
     generator.SetXScale(m_xScale);
     generator.SetYScale(m_yScale);
     if (not generator.ExportToASTM(details))
     {
-        qCritical() << tr("Can't create an ASTM dxf file.")
-                    << generator.ErrorString();
+        qCritical() << tr("Can't create an ASTM dxf file.") << generator.ErrorString();
     }
 }
 
@@ -345,7 +351,7 @@ void VLayoutExporter::ExportToRLD(const QVector<VLayoutPiece> &details) const
     QVector<VLayoutPiece> scaledPieces;
     scaledPieces.reserve(details.size());
 
-    for(auto detail : details)
+    for (auto detail : details)
     {
         detail.Scale(m_xScale, m_yScale);
         scaledPieces.append(detail);
@@ -370,9 +376,9 @@ auto VLayoutExporter::SupportPDFConversion() -> bool
     QProcess proc;
 #if defined(Q_OS_WIN) || defined(Q_OS_OSX)
     // Seek pdftops in app bundle or near valentina.exe
-    proc.start(qApp->applicationDirPath() + QLatin1String("/")+ *PDFTOPS, QStringList());
+    proc.start(qApp->applicationDirPath() + QLatin1String("/") + *PDFTOPS, QStringList());
 #else
-    proc.start(*PDFTOPS, QStringList()); // Seek pdftops in standard path
+    proc.start(*PDFTOPS, QStringList());                                      // Seek pdftops in standard path
 #endif
 
     const int timeout = 15000;
@@ -433,8 +439,8 @@ void VLayoutExporter::PdfToPs(const QStringList &params)
     QFile f(ConstLast<QString>(params));
     if (not f.exists())
     {
-        qCritical() << qUtf8Printable(tr("Creating file '%1' failed! %2")
-                                      .arg(ConstLast<QString>(params), proc.errorString()));
+        qCritical() << qUtf8Printable(
+            tr("Creating file '%1' failed! %2").arg(ConstLast<QString>(params), proc.errorString()));
     }
 }
 
@@ -453,8 +459,8 @@ void VLayoutExporter::ExportToPDF(QGraphicsScene *scene, const QList<QGraphicsIt
     printer.setResolution(static_cast<int>(PrintDPI));
     printer.setFullPage(m_ignorePrinterMargins);
 
-    QPageLayout::Orientation imageOrientation = m_imageRect.height() >= m_imageRect.width() ? QPageLayout::Portrait
-                                                                                            : QPageLayout::Landscape;
+    QPageLayout::Orientation imageOrientation =
+        m_imageRect.height() >= m_imageRect.width() ? QPageLayout::Portrait : QPageLayout::Landscape;
 
     qreal width = FromPixel(m_imageRect.width() * m_xScale + m_margins.left() + m_margins.right(), Unit::Mm);
     qreal height = FromPixel(m_imageRect.height() * m_yScale + m_margins.top() + m_margins.bottom(), Unit::Mm);
@@ -504,7 +510,7 @@ auto VLayoutExporter::ExportFormatDescription(LayoutExportFormats format) -> QSt
     const QString dxfFlatFilesStr = tr("(flat) files");
     const QString filesStr = tr("files");
 
-    switch(format)
+    switch (format)
     {
         case LayoutExportFormats::SVG:
             return QStringLiteral("Svg %1 (*.svg)").arg(filesStr);
@@ -556,7 +562,7 @@ auto VLayoutExporter::ExportFormatDescription(LayoutExportFormats format) -> QSt
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutExporter::ExportFormatSuffix(LayoutExportFormats format) -> QString
 {
-    switch(format)
+    switch (format)
     {
         case LayoutExportFormats::SVG:
             return QStringLiteral(".svg");

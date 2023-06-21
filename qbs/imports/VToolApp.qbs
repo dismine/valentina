@@ -3,7 +3,6 @@ import qbs.File
 
 VApp {
     Depends { name: "freedesktop2" }
-    Depends { name: "tenv" }
     Depends { name: "windeployqt"; condition: qbs.targetOS.contains("windows") }
     Depends { name: "i18nconfig"; }
     Depends { name: "i18n"; }

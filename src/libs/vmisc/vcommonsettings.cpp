@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vcommonsettings.h"
+#include <QVariant>
 
 #include <QApplication>
 #include <QColor>
@@ -51,6 +52,10 @@
 #include "def.h"
 #include "defglobal.h"
 #include "literals.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+#include "diagnostic.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
 const int VCommonSettings::defaultScrollingDuration = 300;
 const int VCommonSettings::scrollingDurationMin = 100;
@@ -78,98 +83,119 @@ const QString VCommonSettings::defaultPieceLabelLocale = QStringLiteral("default
 Q_DECLARE_METATYPE(QMarginsF) // NOLINT
 #endif
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
+
 namespace
 {
+// NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsIndividualMeasurements,
-                          (QLatin1String("paths/individual_measurements"))) // NOLINT
+                          (QLatin1String("paths/individual_measurements")))
+// NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsMultisizeMeasurements,
-                          (QLatin1String("paths/standard_measurements")))                                   // NOLINT
+                          (QLatin1String("paths/standard_measurements")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsPattern, (QLatin1String("paths/pattern")))             // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsTemplates, (QLatin1String("paths/templates")))         // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsLabelTemplate, (QLatin1String("paths/labels")))        // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsManualLayouts, (QLatin1String("paths/manualLayouts"))) // NOLINT
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationOsSeparator,
-                          (QLatin1String("configuration/osSeparator"))) // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationOsSeparator, (QLatin1String("configuration/osSeparator")))
+// NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationAutosaveState,
-                          (QLatin1String("configuration/autosave/state"))) // NOLINT
+                          (QLatin1String("configuration/autosave/state")))
+// NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationAutosaveTime,
-                          (QLatin1String("configuration/autosave/time")))                                     // NOLINT
+                          (QLatin1String("configuration/autosave/time")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationLocale, (QLatin1String("configuration/locale"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationPieceLabelLocale,                                // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationPieceLabelLocale,
                           (QLatin1String("configuration/pieceLabelLocale")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPMSystemCode, (QLatin1String("configuration/pmscode")))   // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationUnit, (QLatin1String("configuration/unit"))) // NOLINT
+// NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationConfirmItemDeletion,
-                          (QLatin1String("configuration/confirm_item_deletion"))) // NOLINT
+                          (QLatin1String("configuration/confirm_item_deletion")))
+// NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationConfirmFormatRewriting,
-                          (QLatin1String("configuration/confirm_format_rewriting"))) // NOLINT
+                          (QLatin1String("configuration/confirm_format_rewriting")))
+// NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationAskContinueIfLayoutStale,
-                          (QLatin1String("configuration/askContinueIfLayoutStale"))) // NOLINT
+                          (QLatin1String("configuration/askContinueIfLayoutStale")))
+// NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationToolBarStyle,
-                          (QLatin1String("configuration/tool_bar_style"))) // NOLINT
+                          (QLatin1String("configuration/tool_bar_style")))
+// NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationFreeCurveMode,
-                          (QLatin1String("configuration/freeCurveMode"))) // NOLINT
+                          (QLatin1String("configuration/freeCurveMode")))
+// NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationDoubleClickZoomFitBestCurrentPP,
-                          (QLatin1String("configuration/doubleClickZoomFitBestCurrentPP"))) // NOLINT
+                          (QLatin1String("configuration/doubleClickZoomFitBestCurrentPP")))
+// NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationInteractiveTools,
-                          (QLatin1String("configuration/interactiveTools"))) // NOLINT
+                          (QLatin1String("configuration/interactiveTools")))
+// NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationDontUseNativeDialog,
-                          (QLatin1String("configuration/dontUseNativeDialog"))) // NOLINT
+                          (QLatin1String("configuration/dontUseNativeDialog")))
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternUndo, (QLatin1String("pattern/undo"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternForbidFlipping,
-                          (QLatin1String("pattern/forbidFlipping"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternForceFlipping,
-                          (QLatin1String("pattern/forceFlipping"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternSewLineOnDrawing,
-                          (QLatin1String("pattern/sewLineOnDrawing")))                                        // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternForbidFlipping, (QLatin1String("pattern/forbidFlipping")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternForceFlipping, (QLatin1String("pattern/forceFlipping")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternSewLineOnDrawing, (QLatin1String("pattern/sewLineOnDrawing")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternHideMainPath, (QLatin1String("pattern/hideMainPath"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDoublePassmark, (QLatin1String("pattern/doublePassmark")))    // NOLINT
+// NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternDefaultSeamAllowance,
-                          (QLatin1String("pattern/defaultSeamAllowance")))                              // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternLabelFont, (QLatin1String("pattern/labelFont"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPieceLabelFontPointSize,                                // NOLINT
+                          (QLatin1String("pattern/defaultSeamAllowance")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternLabelFont, (QLatin1String("pattern/labelFont")))       // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPieceLabelFontPointSize,
                           (QLatin1String("pattern/pieceLabelFontPointSize")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternLineWidth, (QLatin1String("pattern/lineWidth"))) // NOLINT
+// NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternCurveApproximationScale,
-                          (QLatin1String("pattern/curveApproximationScale"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternShowCurveDetails,
-                          (QLatin1String("pattern/showCurveDetails"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternPieceShowMainPath,
-                          (QLatin1String("pattern/pieceShowMainPath"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternLabelFontSize,
-                          (QLatin1String("pattern/labelFontSize")))                                       // NOLINT
+                          (QLatin1String("pattern/curveApproximationScale")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternShowCurveDetails, (QLatin1String("pattern/showCurveDetails")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternPieceShowMainPath, (QLatin1String("pattern/pieceShowMainPath")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternLabelFontSize, (QLatin1String("pattern/labelFontSize")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternHideLabels, (QLatin1String("pattern/hideLabels"))) // NOLINT
+// NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternShowAccuracyRadius,
-                          (QLatin1String("pattern/showAccuracyRadius"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternUseOpenGLRender,
-                          (QLatin1String("pattern/useOpenGLRender"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternGraphicalOutput,
-                          (QLatin1String("pattern/graphicalOutput"))) // NOLINT
-
+                          (QLatin1String("pattern/showAccuracyRadius")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternUseOpenGLRender, (QLatin1String("pattern/useOpenGLRender")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternGraphicalOutput, (QLatin1String("pattern/graphicalOutput")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralRecentFileList, (QLatin1String("recentFileList")))   // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralRestoreFileList, (QLatin1String("restoreFileList"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralGeometry, (QLatin1String("geometry")))               // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralToolbarsState, (QLatin1String("toolbarsState")))     // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationDarkMode,
-                          (QLatin1String("configuration/dark_mode")))                                          // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationDarkMode, (QLatin1String("configuration/dark_mode")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPreferenceDialogSize, (QLatin1String("preferenceDialogSize"))) // NOLINT
+// NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingToolSeamAllowanceDialogSize,
-                          (QLatin1String("toolSeamAllowanceDialogSize"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingIncrementsDialogSize,
-                          (QLatin1String("toolIncrementsDialogSize"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingFormulaWizardDialogSize,
-                          (QLatin1String("formulaWizardDialogSize"))) // NOLINT
+                          (QLatin1String("toolSeamAllowanceDialogSize")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingIncrementsDialogSize, (QLatin1String("toolIncrementsDialogSize")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingFormulaWizardDialogSize, (QLatin1String("formulaWizardDialogSize")))
+// NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingFinalMeasurementsDialogSize,
-                          (QLatin1String("finalMeasurementsDialogSize"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSettingsDialogSize,
-                          (QLatin1String("layoutSettingsDialogSize")))                                         // NOLINT
+                          (QLatin1String("finalMeasurementsDialogSize")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSettingsDialogSize, (QLatin1String("layoutSettingsDialogSize")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDialogSplinePathSize, (QLatin1String("splinePathDialogSize"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingAutomaticallyCheckUpdates,
-                          (QLatin1String("automaticallyCheckUpdates"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLatestSkippedVersion,
-                          (QLatin1String("lastestSkippedVersion")))                                    // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingAutomaticallyCheckUpdates, (QLatin1String("automaticallyCheckUpdates")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLatestSkippedVersion, (QLatin1String("lastestSkippedVersion")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDateOfLastRemind, (QLatin1String("dateOfLastRemind"))) // NOLINT
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingCSVWithHeader, (QLatin1String("csv/withHeader")))   // NOLINT
@@ -177,28 +203,29 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingCSVCodec, (QLatin1String("csv/wi
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingCSVSeparator, (QLatin1String("csv/withSeparator"))) // NOLINT
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLabelDateFormat, (QLatin1String("label/dateFormat"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLabelUserDateFormats,
-                          (QLatin1String("label/userDateFormats")))                                   // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLabelUserDateFormats, (QLatin1String("label/userDateFormats")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLabelTimeFormat, (QLatin1String("label/timeFormat"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLabelUserTimeFormats,
-                          (QLatin1String("label/userTimeFormats"))) // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLabelUserTimeFormats, (QLatin1String("label/userTimeFormats")))
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingDuration, (QLatin1String("scrolling/duration"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingUpdateInterval,
-                          (QLatin1String("scrolling/updateInterval"))) // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingUpdateInterval, (QLatin1String("scrolling/updateInterval")))
+// NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingSensorMouseScale,
-                          (QLatin1String("scrolling/sensorMouseScale"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingWheelMouseScale,
-                          (QLatin1String("scrolling/wheelMouseScale"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingAcceleration,
-                          (QLatin1String("scrolling/acceleration"))) // NOLINT
+                          (QLatin1String("scrolling/sensorMouseScale")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingWheelMouseScale, (QLatin1String("scrolling/wheelMouseScale")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingAcceleration, (QLatin1String("scrolling/acceleration")))
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFMargins, (QLatin1String("tiledPDF/margins")))         // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFOrientation, (QLatin1String("tiledPDF/orientation"))) // NOLINT
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingWatermarkEditorSize, (QLatin1String("watermarkEditorSize"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingWatermarkCustomColors,
-                          (QLatin1String("watermarkCustomColors"))) // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingWatermarkCustomColors, (QLatin1String("watermarkCustomColors")))
 
 // Reading settings file is very expensive, cache curve approximation to speed up getting value
 qreal curveApproximationCached = -1;        // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
@@ -329,6 +356,8 @@ auto PrepareStandardFiles(const QString &currentPath, const QString &standardPat
 }
 } // namespace
 
+QT_WARNING_POP
+
 //---------------------------------------------------------------------------------------------------------------------
 VCommonSettings::VCommonSettings(Format format, Scope scope, const QString &organization, const QString &application,
                                  QObject *parent)
@@ -353,36 +382,26 @@ auto VCommonSettings::SharePath(const QString &shareItem) -> QString
     {
         return dirBundle.absolutePath();
     }
-    else
+
+    QDir appDir = QDir(qApp->applicationDirPath());
+    appDir.cdUp();
+    appDir.cdUp();
+    appDir.cdUp();
+    QDir dir(appDir.absolutePath() + shareItem);
+    if (dir.exists())
     {
-        QDir appDir = QDir(qApp->applicationDirPath());
-        appDir.cdUp();
-        appDir.cdUp();
-        appDir.cdUp();
-        QDir dir(appDir.absolutePath() + shareItem);
-        if (dir.exists())
-        {
-            return dir.absolutePath();
-        }
-        else
-        {
-            return VCommonSettings::unixStandardSharePath + shareItem;
-        }
+        return dir.absolutePath();
     }
+
+    return VCommonSettings::unixStandardSharePath + shareItem;
 #else // Unix
-#ifdef QT_DEBUG
-    return QCoreApplication::applicationDirPath() + shareItem;
-#else
     QDir dir(QCoreApplication::applicationDirPath() + shareItem);
     if (dir.exists())
     {
         return dir.absolutePath();
     }
-    else
-    {
-        return VCommonSettings::unixStandardSharePath + shareItem;
-    }
-#endif
+
+    return VCommonSettings::unixStandardSharePath + shareItem;
 #endif
 }
 
@@ -1109,20 +1128,20 @@ auto VCommonSettings::GetCSVSeparator() const -> QChar
     switch (separator)
     {
         case 0:
-            return QChar('\t');
+            return {'\t'};
         case 1:
-            return QChar(';');
+            return {';'};
         case 2:
-            return QChar(' ');
+            return {' '};
         default:
-            return QChar(',');
+            return {','};
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VCommonSettings::GetDefCSVSeparator() -> QChar
 {
-    return QChar(',');
+    return {','};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

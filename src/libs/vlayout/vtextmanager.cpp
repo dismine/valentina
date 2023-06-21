@@ -52,8 +52,19 @@
 #include "../vpatterndb/vcontainer.h"
 #include "vtextmanager.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+#include "../vmisc/diagnostic.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+
 namespace
 {
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
+
+Q_GLOBAL_STATIC(QVector<TextLine>, m_patternLabelLinesCache) // NOLINT
+
+QT_WARNING_POP
+
 auto SplitTextByWidth(const QString &text, const QFont &font, int maxWidth) -> QStringList
 {
     QFontMetrics fontMetrics(font);
@@ -159,11 +170,6 @@ auto operator>>(QDataStream &dataStream, TextLine &data) -> QDataStream &
 
 const quint32 VTextManager::streamHeader = 0x47E6A9EE; // CRC-32Q string "VTextManager"
 const quint16 VTextManager::classVersion = 1;
-
-namespace
-{
-Q_GLOBAL_STATIC(QVector<TextLine>, m_patternLabelLinesCache) // NOLINT
-}
 
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------

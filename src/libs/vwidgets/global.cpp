@@ -27,9 +27,9 @@
  *************************************************************************/
 
 #include "global.h"
+#include "../vmisc/compatibility.h"
 #include "../vmisc/def.h"
 #include "../vmisc/vabstractapplication.h"
-#include "../vmisc/compatibility.h"
 
 #include <QBitmap>
 #include <QGraphicsItem>
@@ -79,7 +79,7 @@ auto CorrectColor(const QGraphicsItem *item, const QColor &color) -> QColor
 //---------------------------------------------------------------------------------------------------------------------
 auto PointRect(qreal radius) -> QRectF
 {
-    QRectF rec = QRectF(0, 0, radius*2, radius*2);
+    QRectF rec = QRectF(0, 0, radius * 2, radius * 2);
     rec.translate(-rec.center().x(), -rec.center().y());
     return rec;
 }
@@ -90,7 +90,7 @@ auto ScaledRadius(qreal scale) -> qreal
     qreal scaledRadius = DefPointRadiusPixel();
     if (scale > 1)
     {
-        scaledRadius = qMax(DefPointRadiusPixel()/96, DefPointRadiusPixel()/scale);
+        scaledRadius = qMax(DefPointRadiusPixel() / 96, DefPointRadiusPixel() / scale);
     }
     return scaledRadius;
 }
@@ -108,7 +108,7 @@ auto ScaleWidth(qreal width, qreal scale) -> qreal
 {
     if (scale > 1)
     {
-        width = qMax(0.01, width/scale);
+        width = qMax(0.01, width / scale);
     }
     return width;
 }
@@ -158,7 +158,7 @@ auto PixmapToPainterPath(const QPixmap &pixmap) -> QPainterPath
 
 //---------------------------------------------------------------------------------------------------------------------
 void GraphicsItemHighlightSelected(const QRectF &boundingRect, qreal itemPenWidth, QPainter *painter,
-                                    const QStyleOptionGraphicsItem *option)
+                                   const QStyleOptionGraphicsItem *option)
 {
     const QRectF murect = painter->transform().mapRect(QRectF(0, 0, 1, 1));
     if (qFuzzyIsNull(qMax(murect.width(), murect.height())))
@@ -178,9 +178,7 @@ void GraphicsItemHighlightSelected(const QRectF &boundingRect, qreal itemPenWidt
 
     const QColor fgcolor = option->palette.windowText().color();
     const QColor bgcolor( // ensure good contrast against fgcolor
-                          fgcolor.red()   > 127 ? 0 : 255,
-                          fgcolor.green() > 127 ? 0 : 255,
-                          fgcolor.blue()  > 127 ? 0 : 255);
+        fgcolor.red() > 127 ? 0 : 255, fgcolor.green() > 127 ? 0 : 255, fgcolor.blue() > 127 ? 0 : 255);
 
     painter->setPen(QPen(bgcolor, penWidth, Qt::SolidLine));
     painter->setBrush(Qt::NoBrush);
@@ -195,6 +193,6 @@ void GraphicsItemHighlightSelected(const QRectF &boundingRect, qreal itemPenWidt
 auto IsSelectedByReleaseEvent(QGraphicsItem *item, QGraphicsSceneMouseEvent *event) -> bool
 {
     SCASSERT(item != nullptr)
-    return event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick
-            && item->contains(event->pos());
+    return event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick &&
+           item->contains(event->pos());
 }

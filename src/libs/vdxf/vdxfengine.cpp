@@ -1,30 +1,30 @@
- /************************************************************************
- **
- **  @file   vdxfengine.cpp
- **  @author Valentina Zhuravska <zhuravska19(at)gmail.com>
- **  @date   12 8, 2015
- **
- **  @brief
- **  @copyright
- **  This source code is part of the Valentina project, a pattern making
- **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
- **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
- **
- **  Valentina is free software: you can redistribute it and/or modify
- **  it under the terms of the GNU General Public License as published by
- **  the Free Software Foundation, either version 3 of the License, or
- **  (at your option) any later version.
- **
- **  Valentina is distributed in the hope that it will be useful,
- **  but WITHOUT ANY WARRANTY; without even the implied warranty of
- **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- **  GNU General Public License for more details.
- **
- **  You should have received a copy of the GNU General Public License
- **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
- **
- *************************************************************************/
+/************************************************************************
+**
+**  @file   vdxfengine.cpp
+**  @author Valentina Zhuravska <zhuravska19(at)gmail.com>
+**  @date   12 8, 2015
+**
+**  @brief
+**  @copyright
+**  This source code is part of the Valentina project, a pattern making
+**  program, whose allow create and modeling patterns of clothing.
+**  Copyright (C) 2013-2015 Valentina project
+**  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
+**
+**  Valentina is free software: you can redistribute it and/or modify
+**  it under the terms of the GNU General Public License as published by
+**  the Free Software Foundation, either version 3 of the License, or
+**  (at your option) any later version.
+**
+**  Valentina is distributed in the hope that it will be useful,
+**  but WITHOUT ANY WARRANTY; without even the implied warranty of
+**  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+**  GNU General Public License for more details.
+**
+**  You should have received a copy of the GNU General Public License
+**  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
+**
+*************************************************************************/
 
 #include "vdxfengine.h"
 #include <QLineF>
@@ -54,83 +54,86 @@
 #include <QTextCodec>
 #endif
 
-#include "../vmisc/def.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+
 #include "../vgeometry/vgeometrydef.h"
 #include "../vgeometry/vlayoutplacelabel.h"
 #include "../vlayout/vlayoutpiece.h"
 #include "../vlayout/vlayoutpoint.h"
+#include "../vmisc/def.h"
 #include "dxiface.h"
 
- namespace
- {
- static const qreal AAMATextHeight = 2.5;
+namespace
+{
+const qreal AAMATextHeight = 2.5;
 
- Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer0, (UTF8STRING("0"))) // NOLINT
- Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer1, (UTF8STRING("1"))) // NOLINT
- Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer2, (UTF8STRING("2"))) // NOLINT
- Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer3, (UTF8STRING("3"))) // NOLINT
- Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer4, (UTF8STRING("4"))) // NOLINT
- // Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer5, (UTF8STRING("5"))) // NOLINT
- // Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer6, (UTF8STRING("6"))) // NOLINT
- Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer7, (UTF8STRING("7"))) // NOLINT
- Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer8, (UTF8STRING("8"))) // NOLINT
- // Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer9, (UTF8STRING("9"))) // NOLINT
- // Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer10, (UTF8STRING("10"))) // NOLINT
- Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer11, (UTF8STRING("11"))) // NOLINT
- // Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer12, (UTF8STRING("12"))) // NOLINT
- Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer13, (UTF8STRING("13"))) // NOLINT
- Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer14, (UTF8STRING("14"))) // NOLINT
- Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer15, (UTF8STRING("15"))) // NOLINT
- // Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer19, (UTF8STRING("19"))) // NOLINT
- // Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer26, (UTF8STRING("26"))) // NOLINT
- Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer80, (UTF8STRING("80"))) // NOLINT
- Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer81, (UTF8STRING("81"))) // NOLINT
- Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer82, (UTF8STRING("82"))) // NOLINT
- Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer83, (UTF8STRING("83"))) // NOLINT
- Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer84, (UTF8STRING("84"))) // NOLINT
- Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer85, (UTF8STRING("85"))) // NOLINT
- Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer86, (UTF8STRING("86"))) // NOLINT
- Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer87, (UTF8STRING("87"))) // NOLINT
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
- //---------------------------------------------------------------------------------------------------------------------
- auto PieceOutline(const VLayoutPiece &detail) -> QVector<VLayoutPoint>
- {
-     QVector<VLayoutPoint> outline;
-     if (detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn())
-     {
-         outline = detail.GetMappedSeamAllowancePoints();
-     }
-     else
-     {
-         outline = detail.GetMappedContourPoints();
-     }
-     return outline;
- }
- } // namespace
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer0, (UTF8STRING("0"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer1, (UTF8STRING("1"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer2, (UTF8STRING("2"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer3, (UTF8STRING("3"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer4, (UTF8STRING("4"))) // NOLINT
+// Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer5, (UTF8STRING("5"))) // NOLINT
+// Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer6, (UTF8STRING("6"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer7, (UTF8STRING("7"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer8, (UTF8STRING("8"))) // NOLINT
+// Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer9, (UTF8STRING("9"))) // NOLINT
+// Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer10, (UTF8STRING("10"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer11, (UTF8STRING("11"))) // NOLINT
+// Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer12, (UTF8STRING("12"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer13, (UTF8STRING("13"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer14, (UTF8STRING("14"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer15, (UTF8STRING("15"))) // NOLINT
+// Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer19, (UTF8STRING("19"))) // NOLINT
+// Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer26, (UTF8STRING("26"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer80, (UTF8STRING("80"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer81, (UTF8STRING("81"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer82, (UTF8STRING("82"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer83, (UTF8STRING("83"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer84, (UTF8STRING("84"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer85, (UTF8STRING("85"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer86, (UTF8STRING("86"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer87, (UTF8STRING("87"))) // NOLINT
+
+QT_WARNING_POP
+
+//---------------------------------------------------------------------------------------------------------------------
+auto PieceOutline(const VLayoutPiece &detail) -> QVector<VLayoutPoint>
+{
+    QVector<VLayoutPoint> outline;
+    if (detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn())
+    {
+        outline = detail.GetMappedSeamAllowancePoints();
+    }
+    else
+    {
+        outline = detail.GetMappedContourPoints();
+    }
+    return outline;
+}
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 static inline auto svgEngineFeatures() -> QPaintEngine::PaintEngineFeatures
 {
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_CLANG("-Wsign-conversion")
-QT_WARNING_DISABLE_INTEL(68)
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_CLANG("-Wsign-conversion")
+    QT_WARNING_DISABLE_INTEL(68)
 
-    return {QPaintEngine::AllFeatures
-        & ~QPaintEngine::PatternBrush
-        & ~QPaintEngine::PerspectiveTransform
-        & ~QPaintEngine::ConicalGradientFill
-        & ~QPaintEngine::PorterDuff};
+    return {QPaintEngine::AllFeatures & ~QPaintEngine::PatternBrush & ~QPaintEngine::PerspectiveTransform &
+            ~QPaintEngine::ConicalGradientFill & ~QPaintEngine::PorterDuff};
 
-QT_WARNING_POP
+    QT_WARNING_POP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VDxfEngine::VDxfEngine()
-    :QPaintEngine(svgEngineFeatures()),
-      m_textBuffer(new DRW_Text())
+  : QPaintEngine(svgEngineFeatures()),
+    m_textBuffer(new DRW_Text())
 {
 }
 
@@ -153,12 +156,12 @@ auto VDxfEngine::begin(QPaintDevice *pdev) -> bool
 
     if (not m_size.isValid())
     {
-        qWarning()<<"VDxfEngine::begin(), size is not valid";
+        qWarning() << "VDxfEngine::begin(), size is not valid";
         return false;
     }
 
-    m_input = QSharedPointer<dx_iface>(new dx_iface(GetFileNameForLocale(), m_version, m_varMeasurement,
-                                                    m_varInsunits));
+    m_input =
+        QSharedPointer<dx_iface>(new dx_iface(GetFileNameForLocale(), m_version, m_varMeasurement, m_varInsunits));
     m_input->AddDefHeaderData();
     m_input->AddQtLTypes();
     m_input->AddDefLayers();
@@ -180,7 +183,6 @@ void VDxfEngine::updateState(const QPaintEngineState &state)
     // always stream full gstate, which is not required, but...
     flags |= QPaintEngine::AllDirty;
 
-
     if (flags & QPaintEngine::DirtyTransform)
     {
         m_matrix = state.transform(); // Save new matrix for moving paths
@@ -192,7 +194,7 @@ void VDxfEngine::drawPath(const QPainterPath &path)
 {
     const QList<QPolygonF> subpaths = path.toSubpathPolygons(m_matrix);
 
-    for (const auto& polygon : subpaths)
+    for (const auto &polygon : subpaths)
     {
         if (polygon.isEmpty())
         {
@@ -256,10 +258,10 @@ void VDxfEngine::drawLines(const QLineF *lines, int lineCount)
         const QPointF p2 = m_matrix.map(lines[i].p2()); // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
 
         auto *line = new DRW_Line();
-        line->basePoint = DRW_Coord(FromPixel(p1.x(), m_varInsunits),
-                                    FromPixel(GetSize().height() - p1.y(), m_varInsunits), 0);
-        line->secPoint =  DRW_Coord(FromPixel(p2.x(), m_varInsunits),
-                                    FromPixel(GetSize().height() - p2.y(), m_varInsunits), 0);
+        line->basePoint =
+            DRW_Coord(FromPixel(p1.x(), m_varInsunits), FromPixel(GetSize().height() - p1.y(), m_varInsunits), 0);
+        line->secPoint =
+            DRW_Coord(FromPixel(p2.x(), m_varInsunits), FromPixel(GetSize().height() - p2.y(), m_varInsunits), 0);
         line->layer = *layer0;
         line->color = GetPenColor();
         line->lWeight = DRW_LW_Conv::widthByLayer;
@@ -270,7 +272,7 @@ void VDxfEngine::drawLines(const QLineF *lines, int lineCount)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::drawLines(const QLine * lines, int lineCount)
+void VDxfEngine::drawLines(const QLine *lines, int lineCount)
 {
     QPaintEngine::drawLines(lines, lineCount);
 }
@@ -293,7 +295,8 @@ void VDxfEngine::drawPolygon(const QPointF *points, int pointCount, PolygonDrawM
         poly->lWeight = DRW_LW_Conv::widthByLayer;
         poly->lineType = GetPenStyle();
 
-        if (pointCount > 1 && points[0] == points[pointCount]) // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
+        if (pointCount > 1 &&
+            points[0] == points[pointCount]) // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
         {
             poly->flags |= 0x1; // closed NOLINT(hicpp-signed-bitwise)
         }
@@ -303,8 +306,8 @@ void VDxfEngine::drawPolygon(const QPointF *points, int pointCount, PolygonDrawM
         for (int i = 0; i < pointCount; ++i)
         {
             const QPointF p = m_matrix.map(points[i]); // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
-            poly->addVertex(DRW_Vertex2D(FromPixel(p.x(), m_varInsunits),
-                                         FromPixel(GetSize().height() - p.y(), m_varInsunits), 0));
+            poly->addVertex(
+                DRW_Vertex2D(FromPixel(p.x(), m_varInsunits), FromPixel(GetSize().height() - p.y(), m_varInsunits), 0));
         }
 
         m_input->AddEntity(poly);
@@ -317,7 +320,8 @@ void VDxfEngine::drawPolygon(const QPointF *points, int pointCount, PolygonDrawM
         poly->lWeight = DRW_LW_Conv::widthByLayer;
         poly->lineType = GetPenStyle();
 
-        if (pointCount > 1 && points[0] == points[pointCount]) // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
+        if (pointCount > 1 &&
+            points[0] == points[pointCount]) // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
         {
             poly->flags |= 0x1; // closed NOLINT(hicpp-signed-bitwise)
         }
@@ -342,28 +346,28 @@ void VDxfEngine::drawPolygon(const QPoint *points, int pointCount, QPaintEngine:
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::drawEllipse(const QRectF & rect)
+void VDxfEngine::drawEllipse(const QRectF &rect)
 {
     const QRectF newRect = m_matrix.mapRect(rect);
-    const double rotationAngle = atan(m_matrix.m12()/m_matrix.m11());
+    const double rotationAngle = atan(m_matrix.m12() / m_matrix.m11());
 
     double majorX, majorY; // distanse between center and endpoint of the major axis
-    double ratio; // ratio of minor axis to major axis
-    if(rect.width()<= rect.height())
+    double ratio;          // ratio of minor axis to major axis
+    if (rect.width() <= rect.height())
     {
-        majorX = (rect.top() - rect.center().y())*sin(rotationAngle)*m_matrix.m11()/cos(rotationAngle);
+        majorX = (rect.top() - rect.center().y()) * sin(rotationAngle) * m_matrix.m11() / cos(rotationAngle);
         // major axis * sin(rotation angle) * x-scale-factor
-        majorY = (rect.top() - rect.center().y())*m_matrix.m22();
+        majorY = (rect.top() - rect.center().y()) * m_matrix.m22();
         // major axis * cos(rotation angle) * y-scale-factor, where y-scale-factor = matrix.m22()/cos(rotationAngle)
-        ratio  = rect.width()/rect.height();
+        ratio = rect.width() / rect.height();
     }
     else
     {
-        majorX = (rect.right() - rect.center().x())*m_matrix.m11();
+        majorX = (rect.right() - rect.center().x()) * m_matrix.m11();
         // major axis * cos(rotation angle) * x-scale-factor, where y-scale-factor = matrix.m22()/cos(rotationAngle)
-        majorY = (rect.right() - rect.center().x())*sin(rotationAngle)*m_matrix.m22()/cos(rotationAngle);
+        majorY = (rect.right() - rect.center().x()) * sin(rotationAngle) * m_matrix.m22() / cos(rotationAngle);
         // major axis * sin(rotation angle) * y-scale-factor
-        ratio  = rect.height()/rect.width();
+        ratio = rect.height() / rect.width();
     }
 
     auto *ellipse = new DRW_Ellipse();
@@ -372,7 +376,7 @@ void VDxfEngine::drawEllipse(const QRectF & rect)
     ellipse->secPoint = DRW_Coord(FromPixel(majorX, m_varInsunits), FromPixel(majorY, m_varInsunits), 0);
     ellipse->ratio = ratio;
     ellipse->staparam = 0;
-    ellipse->endparam = 2*M_PI;
+    ellipse->endparam = 2 * M_PI;
 
     ellipse->layer = *layer0;
     ellipse->color = GetPenColor();
@@ -383,13 +387,13 @@ void VDxfEngine::drawEllipse(const QRectF & rect)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::drawEllipse(const QRect & rect)
+void VDxfEngine::drawEllipse(const QRect &rect)
 {
     QPaintEngine::drawEllipse(rect);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::drawTextItem(const QPointF & p, const QTextItem & textItem)
+void VDxfEngine::drawTextItem(const QPointF &p, const QTextItem &textItem)
 {
     if (m_textBuffer->text.empty())
     {
@@ -400,9 +404,9 @@ void VDxfEngine::drawTextItem(const QPointF & p, const QTextItem & textItem)
         const UTF8STRING fontStyle = m_input->AddFont(f);
 
         m_textBuffer->basePoint = DRW_Coord(FromPixel(startPoint.x(), m_varInsunits),
-                                    FromPixel(GetSize().height() - startPoint.y(), m_varInsunits), 0);
+                                            FromPixel(GetSize().height() - startPoint.y(), m_varInsunits), 0);
         m_textBuffer->secPoint = DRW_Coord(FromPixel(startPoint.x(), m_varInsunits),
-                                   FromPixel(GetSize().height() - startPoint.y(), m_varInsunits), 0);
+                                           FromPixel(GetSize().height() - startPoint.y(), m_varInsunits), 0);
         m_textBuffer->height = FromPixel(QFontMetrics(f).height(), m_varInsunits);
 
         m_textBuffer->style = fontStyle;
@@ -448,20 +452,20 @@ void VDxfEngine::drawPixmap(const QRectF &r, const QPixmap &pm, const QRectF &sr
     Q_UNUSED(sr)
 }
 
- //---------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 auto VDxfEngine::GetSize() const -> QSize
 {
     return m_size;
 }
 
- //---------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::SetSize(const QSize &value)
 {
     Q_ASSERT(not isActive());
     m_size = value;
 }
 
- //---------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 auto VDxfEngine::GetResolution() const -> double
 {
     return m_resolution;
@@ -536,77 +540,77 @@ auto VDxfEngine::GetPenColor() -> int
 {
     QColor color = state->pen().color();
 
-    if(color == Qt::black)
+    if (color == Qt::black)
     {
         return DRW::black;
     }
 
-    if(color == Qt::white)
+    if (color == Qt::white)
     {
         return DRW::white;
     }
 
-    if(color == Qt::darkGray)
+    if (color == Qt::darkGray)
     {
         return DRW::gray;
     }
 
-    if(color == Qt::gray)
+    if (color == Qt::gray)
     {
         return DRW::l_gray;
     }
 
-    if(color == Qt::darkMagenta)
+    if (color == Qt::darkMagenta)
     {
         return DRW::magenta;
     }
 
-    if(color == Qt::magenta)
+    if (color == Qt::magenta)
     {
         return DRW::l_magenta;
     }
 
-    if(color == Qt::cyan)
+    if (color == Qt::cyan)
     {
         return DRW::l_cyan;
     }
 
-    if(color == Qt::darkCyan)
+    if (color == Qt::darkCyan)
     {
         return DRW::cyan;
     }
 
-    if(color == Qt::blue)
+    if (color == Qt::blue)
     {
         return DRW::l_blue;
     }
 
-    if(color == Qt::darkBlue)
+    if (color == Qt::darkBlue)
     {
         return DRW::blue;
     }
 
-    if(color == Qt::darkGreen)
+    if (color == Qt::darkGreen)
     {
         return DRW::green;
     }
 
-    if(color == Qt::green)
+    if (color == Qt::green)
     {
         return DRW::l_green;
     }
 
-    if(color == Qt::darkRed)
+    if (color == Qt::darkRed)
     {
         return DRW::red;
     }
 
-    if(color == Qt::red)
+    if (color == Qt::red)
     {
         return DRW::l_red;
     }
 
-    if(color == Qt::yellow)
+    if (color == Qt::yellow)
     {
         return DRW::yellow;
     }
@@ -698,7 +702,7 @@ auto VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details) -> bool
 {
     if (not m_size.isValid())
     {
-        qWarning()<<"VDxfEngine::begin(), size is not valid";
+        qWarning() << "VDxfEngine::begin(), size is not valid";
         return false;
     }
 
@@ -713,11 +717,11 @@ auto VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details) -> bool
 
     ExportStyleSystemText(m_input, details);
 
-    for(auto detail : details)
+    for (auto detail : details)
     {
         // Use custom deleter function to lose ownership after adding the block
         bool deleteBlock = true;
-        auto NoOpDeleter =[&deleteBlock](dx_ifaceBlock* block)
+        auto NoOpDeleter = [&deleteBlock](dx_ifaceBlock *block)
         {
             if (deleteBlock)
             {
@@ -793,7 +797,7 @@ void VDxfEngine::ExportAAMADraw(const QSharedPointer<dx_ifaceBlock> &detailBlock
     }
 
     const QVector<QVector<VLayoutPoint>> drawIntLine = detail.MappedInternalPathsForCut(false);
-    for(const auto &intLine : drawIntLine)
+    for (const auto &intLine : drawIntLine)
     {
         if (DRW_Entity *e = AAMAPolygon(intLine, *layer8, false))
         {
@@ -805,13 +809,13 @@ void VDxfEngine::ExportAAMADraw(const QSharedPointer<dx_ifaceBlock> &detailBlock
     }
 
     const QVector<VLayoutPlaceLabel> labels = detail.GetPlaceLabels();
-    for(const auto &label : labels)
+    for (const auto &label : labels)
     {
-        if (label.Type() != PlaceLabelType::Doubletree && label.Type() != PlaceLabelType::Button
-                && label.Type() != PlaceLabelType::Circle)
+        if (label.Type() != PlaceLabelType::Doubletree && label.Type() != PlaceLabelType::Button &&
+            label.Type() != PlaceLabelType::Circle)
         {
             PlaceLabelImg shape = detail.MapPlaceLabelShape(VAbstractPiece::PlaceLabelShape(label));
-            for(const auto &points : shape)
+            for (const auto &points : shape)
             {
                 if (DRW_Entity *e = AAMAPolygon(points, *layer8, false))
                 {
@@ -829,7 +833,7 @@ void VDxfEngine::ExportAAMADraw(const QSharedPointer<dx_ifaceBlock> &detailBlock
 void VDxfEngine::ExportAAMAIntcut(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
     QVector<QVector<VLayoutPoint>> drawIntCut = detail.MappedInternalPathsForCut(true);
-    for(auto &intCut : drawIntCut)
+    for (auto &intCut : drawIntCut)
     {
         if (DRW_Entity *e = AAMAPolygon(intCut, *layer11, false))
         {
@@ -847,7 +851,7 @@ void VDxfEngine::ExportAAMANotch(const QSharedPointer<dx_ifaceBlock> &detailBloc
     if (detail.IsSeamAllowance())
     {
         const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
-        for(const auto &passmark : passmarks)
+        for (const auto &passmark : passmarks)
         {
             std::unique_ptr<DRW_ASTMNotch> notch(new DRW_ASTMNotch());
             const QPointF center = passmark.baseLine.p1();
@@ -885,7 +889,7 @@ void VDxfEngine::ExportPieceText(const QSharedPointer<dx_ifaceBlock> &detailBloc
     for (int i = 0; i < list.size(); ++i)
     {
         const qreal height = ToPixel(AAMATextHeight * m_yscale, m_varInsunits);
-        QPointF pos(startPos.x(), startPos.y() - height * (static_cast<int>(list.size()) - i-1));
+        QPointF pos(startPos.x(), startPos.y() - height * (static_cast<int>(list.size()) - i - 1));
         detailBlock->ent.push_back(AAMAText(pos, list.at(i), *layer1));
     }
 }
@@ -893,7 +897,7 @@ void VDxfEngine::ExportPieceText(const QSharedPointer<dx_ifaceBlock> &detailBloc
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::ExportStyleSystemText(const QSharedPointer<dx_iface> &input, const QVector<VLayoutPiece> &details)
 {
-    for(const auto &detail : details)
+    for (const auto &detail : details)
     {
         const QStringList strings = detail.GetPatternText();
         if (not strings.isEmpty())
@@ -901,7 +905,7 @@ void VDxfEngine::ExportStyleSystemText(const QSharedPointer<dx_iface> &input, co
             for (int j = 0; j < strings.size(); ++j)
             {
                 const qreal height = ToPixel(AAMATextHeight * m_yscale, m_varInsunits);
-                QPointF pos(0, GetSize().height() - height * (static_cast<int>(strings.size()) - j-1));
+                QPointF pos(0, GetSize().height() - height * (static_cast<int>(strings.size()) - j - 1));
                 input->AddEntity(AAMAText(pos, strings.at(j), *layer1));
             }
             return;
@@ -914,10 +918,10 @@ void VDxfEngine::ExportAAMADrill(const QSharedPointer<dx_ifaceBlock> &detailBloc
 {
     const QVector<VLayoutPlaceLabel> labels = detail.GetPlaceLabels();
 
-    for(const auto &label : labels)
+    for (const auto &label : labels)
     {
-        if (label.Type() == PlaceLabelType::Doubletree || label.Type() == PlaceLabelType::Button
-                || label.Type() == PlaceLabelType::Circle)
+        if (label.Type() == PlaceLabelType::Doubletree || label.Type() == PlaceLabelType::Button ||
+            label.Type() == PlaceLabelType::Circle)
         {
             const QPointF center = detail.GetMatrix().map(label.Center());
             detailBlock->ent.push_back(AAMAPoint(center, *layer13));
@@ -930,12 +934,12 @@ auto VDxfEngine::ExportToASTM(const QVector<VLayoutPiece> &details) -> bool
 {
     if (not m_size.isValid())
     {
-        qWarning()<<"VDxfEngine::begin(), size is not valid";
+        qWarning() << "VDxfEngine::begin(), size is not valid";
         return false;
     }
 
-    m_input = QSharedPointer<dx_iface>(new dx_iface(GetFileNameForLocale(), m_version, m_varMeasurement,
-                                                    m_varInsunits));
+    m_input =
+        QSharedPointer<dx_iface>(new dx_iface(GetFileNameForLocale(), m_version, m_varMeasurement, m_varInsunits));
     m_input->AddXSpaceBlock(false);
     m_input->AddAAMAHeaderData();
     if (m_version > DRW::AC1009)
@@ -946,11 +950,11 @@ auto VDxfEngine::ExportToASTM(const QVector<VLayoutPiece> &details) -> bool
 
     ExportStyleSystemText(m_input, details);
 
-    for(auto detail : details)
+    for (auto detail : details)
     {
         // Use custom deleter function to lose ownership after adding the block
         bool deleteBlock = true;
-        auto NoOpDeleter =[&deleteBlock](dx_ifaceBlock* block)
+        auto NoOpDeleter = [&deleteBlock](dx_ifaceBlock *block)
         {
             if (deleteBlock)
             {
@@ -1043,7 +1047,7 @@ void VDxfEngine::ExportASTMSewLine(const QSharedPointer<dx_ifaceBlock> &detailBl
 void VDxfEngine::ExportASTMInternalLine(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
     const QVector<QVector<VLayoutPoint>> drawIntLine = detail.MappedInternalPathsForCut(false);
-    for(const auto &intLine : drawIntLine)
+    for (const auto &intLine : drawIntLine)
     {
         // Internal line
         if (DRW_Entity *e = AAMAPolygon(intLine, *layer8, false))
@@ -1062,13 +1066,13 @@ void VDxfEngine::ExportASTMInternalLine(const QSharedPointer<dx_ifaceBlock> &det
     }
 
     const QVector<VLayoutPlaceLabel> labels = detail.GetPlaceLabels();
-    for(const auto &label : labels)
+    for (const auto &label : labels)
     {
-        if (label.Type() != PlaceLabelType::Doubletree && label.Type() != PlaceLabelType::Button
-            && label.Type() != PlaceLabelType::Circle)
+        if (label.Type() != PlaceLabelType::Doubletree && label.Type() != PlaceLabelType::Button &&
+            label.Type() != PlaceLabelType::Circle)
         {
             PlaceLabelImg shape = detail.MapPlaceLabelShape(VAbstractPiece::PlaceLabelShape(label));
-            for(const auto &p : shape)
+            for (const auto &p : shape)
             {
                 // Internal line (placelabel)
                 if (DRW_Entity *e = AAMAPolygon(p, *layer8, false))
@@ -1093,7 +1097,7 @@ void VDxfEngine::ExportASTMInternalLine(const QSharedPointer<dx_ifaceBlock> &det
 void VDxfEngine::ExportASTMInternalCutout(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
     QVector<QVector<VLayoutPoint>> drawIntCut = detail.MappedInternalPathsForCut(true);
-    for(auto &intCut : drawIntCut)
+    for (auto &intCut : drawIntCut)
     {
         // Internal cutout
         if (DRW_Entity *e = AAMAPolygon(intCut, *layer11, false))
@@ -1127,10 +1131,10 @@ void VDxfEngine::ExportASTMDrill(const QSharedPointer<dx_ifaceBlock> &detailBloc
 {
     const QVector<VLayoutPlaceLabel> labels = detail.GetPlaceLabels();
 
-    for(const auto &label : labels)
+    for (const auto &label : labels)
     {
-        if (label.Type() == PlaceLabelType::Doubletree || label.Type() == PlaceLabelType::Button
-            || label.Type() == PlaceLabelType::Circle)
+        if (label.Type() == PlaceLabelType::Doubletree || label.Type() == PlaceLabelType::Button ||
+            label.Type() == PlaceLabelType::Circle)
         {
             const QPointF center = detail.GetMatrix().map(label.Center());
             QLineF diameter = detail.GetMatrix().map(QLineF(label.Box().bottomLeft(), label.Box().topRight()));
@@ -1143,8 +1147,8 @@ void VDxfEngine::ExportASTMDrill(const QSharedPointer<dx_ifaceBlock> &detailBloc
             detailBlock->ent.push_back(point.release());
 
             // TODO. Investigate drill category
-//            QPointF pos(center.x(), center.y() - ToPixel(AAMATextHeight, m_varInsunits));
-//            detailBlock->ent.push_back(AAMAText(pos, category, *layer13));
+            //            QPointF pos(center.x(), center.y() - ToPixel(AAMATextHeight, m_varInsunits));
+            //            detailBlock->ent.push_back(AAMAText(pos, category, *layer13));
         }
     }
 }
@@ -1155,7 +1159,7 @@ void VDxfEngine::ExportASTMNotch(const QSharedPointer<dx_ifaceBlock> &detailBloc
     if (detail.IsSeamAllowance())
     {
         const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
-        for(const auto &passmark : passmarks)
+        for (const auto &passmark : passmarks)
         {
             auto *notch = new DRW_ASTMNotch();
             const QPointF center = passmark.baseLine.p1();
@@ -1238,7 +1242,7 @@ void VDxfEngine::ExportASTMNotch(const QSharedPointer<dx_ifaceBlock> &detailBloc
 void VDxfEngine::ExportTurnPoints(const QSharedPointer<dx_ifaceBlock> &detailBlock,
                                   const QVector<VLayoutPoint> &points) const
 {
-    for(const auto &p : qAsConst(points))
+    for (const auto &p : qAsConst(points))
     {
         if (p.TurnPoint())
         {
@@ -1251,7 +1255,7 @@ void VDxfEngine::ExportTurnPoints(const QSharedPointer<dx_ifaceBlock> &detailBlo
 void VDxfEngine::ExportCurvePoints(const QSharedPointer<dx_ifaceBlock> &detailBlock,
                                    const QVector<VLayoutPoint> &points) const
 {
-    for(const auto &p : qAsConst(points))
+    for (const auto &p : qAsConst(points))
     {
         if (p.CurvePoint() && not p.TurnPoint())
         {
@@ -1261,8 +1265,8 @@ void VDxfEngine::ExportCurvePoints(const QSharedPointer<dx_ifaceBlock> &detailBl
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VDxfEngine::AAMAPolygon(const QVector<VLayoutPoint> &polygon, const UTF8STRING &layer,
-                             bool forceClosed) -> DRW_Entity *
+auto VDxfEngine::AAMAPolygon(const QVector<VLayoutPoint> &polygon, const UTF8STRING &layer, bool forceClosed)
+    -> DRW_Entity *
 {
     if (polygon.isEmpty())
     {
@@ -1284,8 +1288,8 @@ auto VDxfEngine::AAMALine(const QLineF &line, const UTF8STRING &layer) -> DRW_En
     auto *lineEnt = new DRW_Line();
     lineEnt->basePoint = DRW_Coord(FromPixel(line.p1().x(), m_varInsunits),
                                    FromPixel(GetSize().height() - line.p1().y(), m_varInsunits), 0);
-    lineEnt->secPoint =  DRW_Coord(FromPixel(line.p2().x(), m_varInsunits),
-                                   FromPixel(GetSize().height() - line.p2().y(), m_varInsunits), 0);
+    lineEnt->secPoint = DRW_Coord(FromPixel(line.p2().x(), m_varInsunits),
+                                  FromPixel(GetSize().height() - line.p2().y(), m_varInsunits), 0);
     lineEnt->layer = layer;
 
     return lineEnt;
@@ -1296,10 +1300,10 @@ auto VDxfEngine::AAMAText(const QPointF &pos, const QString &text, const UTF8STR
 {
     auto *textLine = new DRW_Text();
 
-    textLine->basePoint = DRW_Coord(FromPixel(pos.x(), m_varInsunits),
-                                    FromPixel(GetSize().height() - pos.y(), m_varInsunits), 0);
-    textLine->secPoint = DRW_Coord(FromPixel(pos.x(), m_varInsunits),
-                                   FromPixel(GetSize().height() - pos.y(), m_varInsunits), 0);
+    textLine->basePoint =
+        DRW_Coord(FromPixel(pos.x(), m_varInsunits), FromPixel(GetSize().height() - pos.y(), m_varInsunits), 0);
+    textLine->secPoint =
+        DRW_Coord(FromPixel(pos.x(), m_varInsunits), FromPixel(GetSize().height() - pos.y(), m_varInsunits), 0);
     textLine->height = AAMATextHeight;
     textLine->layer = layer;
     textLine->text = text.toStdString();
@@ -1311,8 +1315,8 @@ auto VDxfEngine::AAMAText(const QPointF &pos, const QString &text, const UTF8STR
 auto VDxfEngine::AAMAPoint(const QPointF &pos, const UTF8STRING &layer) const -> DRW_Point *
 {
     auto *point = new DRW_Point();
-    point->basePoint = DRW_Coord(FromPixel(pos.x(), m_varInsunits),
-                                 FromPixel(GetSize().height() - pos.y(), m_varInsunits), 0);
+    point->basePoint =
+        DRW_Coord(FromPixel(pos.x(), m_varInsunits), FromPixel(GetSize().height() - pos.y(), m_varInsunits), 0);
     point->layer = layer;
     return point;
 }
@@ -1334,9 +1338,8 @@ auto VDxfEngine::GetFileNameForLocale() const -> std::string
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template<class P, class V, class C>
-auto VDxfEngine::CreateAAMAPolygon(const QVector<C> &polygon, const UTF8STRING &layer,
-                                   bool forceClosed) -> P *
+template <class P, class V, class C>
+auto VDxfEngine::CreateAAMAPolygon(const QVector<C> &polygon, const UTF8STRING &layer, bool forceClosed) -> P *
 {
     auto *poly = new P();
     poly->layer = layer;
@@ -1355,8 +1358,7 @@ auto VDxfEngine::CreateAAMAPolygon(const QVector<C> &polygon, const UTF8STRING &
 
     for (const auto &p : polygon)
     {
-        poly->addVertex(V(FromPixel(p.x(), m_varInsunits),
-                          FromPixel(GetSize().height() - p.y(), m_varInsunits)));
+        poly->addVertex(V(FromPixel(p.x(), m_varInsunits), FromPixel(GetSize().height() - p.y(), m_varInsunits)));
     }
 
     return poly;

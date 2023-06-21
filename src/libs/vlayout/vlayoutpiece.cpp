@@ -60,13 +60,13 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpassmark.h"
 #include "../vpatterndb/vpiecenode.h"
-#include "qline.h"
-#include "qpainterpath.h"
 #include "vgobject.h"
 #include "vgraphicsfillitem.h"
 #include "vlayoutpiece_p.h"
 #include "vpiecegrainline.h"
 #include "vtextmanager.h"
+#include <QLine>
+#include <QPainterPath>
 
 namespace
 {
@@ -195,16 +195,19 @@ auto RotatePoint(const QPointF &ptCenter, const QPointF &pt, qreal dAng) -> QPoi
 //---------------------------------------------------------------------------------------------------------------------
 auto PieceLabelText(const QVector<QPointF> &labelShape, const VTextManager &tm) -> QStringList
 {
-    QStringList text;
-    if (labelShape.count() > 2)
+    if (labelShape.count() <= 2)
     {
-        auto sourceCount = tm.GetSourceLinesCount();
-        text.reserve(sourceCount);
-        for (int i = 0; i < sourceCount; ++i)
-        {
-            text.append(tm.GetSourceLine(i).m_qsText);
-        }
+        return {};
     }
+
+    QStringList text;
+    auto sourceCount = tm.GetSourceLinesCount();
+    text.reserve(sourceCount);
+    for (int i = 0; i < sourceCount; ++i)
+    {
+        text.append(tm.GetSourceLine(i).m_qsText);
+    }
+
     return text;
 }
 
@@ -616,7 +619,8 @@ VLayoutPiece::VLayoutPiece(VLayoutPiece &&detail) Q_DECL_NOTHROW : VAbstractPiec
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPiece::operator=(VLayoutPiece &&detail) Q_DECL_NOTHROW->VLayoutPiece &
+auto VLayoutPiece::operator=(VLayoutPiece &&detail) Q_DECL_NOTHROW
+->VLayoutPiece &
 {
     VAbstractPiece::operator=(detail);
     std::swap(d, detail.d);

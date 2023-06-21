@@ -28,25 +28,29 @@
 #include "vpgraphicspiececontrols.h"
 
 #include <QCursor>
+#include <QFileInfo>
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
+#include <QGuiApplication>
 #include <QIcon>
 #include <QPainter>
-#include <QtDebug>
-#include <QGuiApplication>
 #include <QScreen>
-#include <QFileInfo>
+#include <QtDebug>
 
-#include "../vmisc/compatibility.h"
-#include "../vwidgets/global.h"
 #include "../layout/vplayout.h"
 #include "../layout/vppiece.h"
 #include "../layout/vpsheet.h"
-#include "../undocommands/vpundopiecerotate.h"
 #include "../undocommands/vpundooriginmove.h"
+#include "../undocommands/vpundopiecerotate.h"
+#include "../vmisc/compatibility.h"
+#include "../vwidgets/global.h"
 #include "qgraphicsscene.h"
 #include "qgraphicsview.h"
 #include "qnamespace.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+#include "../vmisc/diagnostic.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
 namespace
 {
@@ -55,8 +59,13 @@ constexpr qreal penWidth = 2;
 const qreal centerRadius1 = 5;
 const qreal centerRadius2 = 10;
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
+
 Q_GLOBAL_STATIC_WITH_ARGS(const QColor, defaultColor, (Qt::black)) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QColor, hoverColor, (Qt::green)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QColor, hoverColor, (Qt::green))   // NOLINT
+
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 auto TransformationOrigin(const VPLayoutPtr &layout, const QRectF &boundingRect) -> VPTransformationOrigon
@@ -80,13 +89,13 @@ auto TransformationOrigin(const VPLayoutPtr &layout, const QRectF &boundingRect)
 
     return origin;
 }
-}  // namespace
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VPGraphicsTransformationOrigin::VPGraphicsTransformationOrigin(const VPLayoutPtr &layout, QGraphicsItem *parent)
-    : QGraphicsObject(parent),
-      m_layout(layout),
-      m_color(*defaultColor)
+  : QGraphicsObject(parent),
+    m_layout(layout),
+    m_color(*defaultColor)
 {
     SCASSERT(m_layout != nullptr)
     setCursor(Qt::OpenHandCursor);
@@ -120,7 +129,7 @@ void VPGraphicsTransformationOrigin::on_ShowOrigin(bool show)
 //---------------------------------------------------------------------------------------------------------------------
 auto VPGraphicsTransformationOrigin::boundingRect() const -> QRectF
 {
-    constexpr qreal halfPenWidth = penWidth/2.;
+    constexpr qreal halfPenWidth = penWidth / 2.;
     return Center2().boundingRect().adjusted(-halfPenWidth, -halfPenWidth, halfPenWidth, halfPenWidth);
 }
 
@@ -138,7 +147,7 @@ void VPGraphicsTransformationOrigin::paint(QPainter *painter, const QStyleOption
 
     const qreal scale = SceneScale(scene());
 
-    QPen pen(m_color, penWidth/scale, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    QPen pen(m_color, penWidth / scale, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 
     painter->setPen(pen);
 
@@ -160,14 +169,14 @@ void VPGraphicsTransformationOrigin::paint(QPainter *painter, const QStyleOption
 void VPGraphicsTransformationOrigin::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     // change the cursor when clicking the left button
-    if((event->button() == Qt::LeftButton))
+    if ((event->button() == Qt::LeftButton))
     {
         setCursor(Qt::ClosedHandCursor);
         event->accept();
     }
     else
     {
-        //perform the default behaviour
+        // perform the default behaviour
         QGraphicsObject::mousePressEvent(event);
     }
 }
@@ -198,7 +207,7 @@ void VPGraphicsTransformationOrigin::mouseMoveEvent(QGraphicsSceneMouseEvent *ev
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsTransformationOrigin::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    //perform the default behaviour
+    // perform the default behaviour
     QGraphicsItem::mouseReleaseEvent(event);
 
     // change the cursor when clicking left button
@@ -229,9 +238,10 @@ auto VPGraphicsTransformationOrigin::RotationCenter(QPainter *painter) const -> 
     QPainterPath path;
 
     const qreal scale = SceneScale(scene());
-    qreal radius = centerRadius1/scale;
+    qreal radius = centerRadius1 / scale;
     VPTransformationOrigon transformationOrigin = TransformationOrigin(m_layout, QRectF());
-    QRectF rect(transformationOrigin.origin.x()-radius, transformationOrigin.origin.y()-radius, radius*2., radius*2.);
+    QRectF rect(transformationOrigin.origin.x() - radius, transformationOrigin.origin.y() - radius, radius * 2.,
+                radius * 2.);
 
     QPainterPath center1;
     center1.addEllipse(rect);
@@ -245,8 +255,9 @@ auto VPGraphicsTransformationOrigin::RotationCenter(QPainter *painter) const -> 
     }
     path.addPath(center1);
 
-    radius = centerRadius2/scale;
-    rect = QRectF(transformationOrigin.origin.x()-radius, transformationOrigin.origin.y()-radius, radius*2., radius*2.);
+    radius = centerRadius2 / scale;
+    rect = QRectF(transformationOrigin.origin.x() - radius, transformationOrigin.origin.y() - radius, radius * 2.,
+                  radius * 2.);
 
     QPainterPath center2;
     center2.addEllipse(rect);
@@ -267,9 +278,10 @@ auto VPGraphicsTransformationOrigin::RotationCenter(QPainter *painter) const -> 
 auto VPGraphicsTransformationOrigin::Center1() const -> QPainterPath
 {
     const qreal scale = SceneScale(scene());
-    qreal radius = centerRadius1/scale;
+    qreal radius = centerRadius1 / scale;
     VPTransformationOrigon transformationOrigin = TransformationOrigin(m_layout, QRectF());
-    QRectF rect(transformationOrigin.origin.x()-radius, transformationOrigin.origin.y()-radius, radius*2., radius*2.);
+    QRectF rect(transformationOrigin.origin.x() - radius, transformationOrigin.origin.y() - radius, radius * 2.,
+                radius * 2.);
 
     QPainterPath center1;
     center1.addEllipse(rect);
@@ -281,10 +293,10 @@ auto VPGraphicsTransformationOrigin::Center1() const -> QPainterPath
 auto VPGraphicsTransformationOrigin::Center2() const -> QPainterPath
 {
     const qreal scale = SceneScale(scene());
-    qreal radius = centerRadius2/scale;
+    qreal radius = centerRadius2 / scale;
     VPTransformationOrigon transformationOrigin = TransformationOrigin(m_layout, QRectF());
-    QRectF rect = QRectF(transformationOrigin.origin.x()-radius, transformationOrigin.origin.y()-radius, radius*2.,
-                         radius*2.);
+    QRectF rect = QRectF(transformationOrigin.origin.x() - radius, transformationOrigin.origin.y() - radius,
+                         radius * 2., radius * 2.);
 
     QPainterPath center2;
     center2.addEllipse(rect);
@@ -295,8 +307,8 @@ auto VPGraphicsTransformationOrigin::Center2() const -> QPainterPath
 // VPGraphicsPieceControls
 //---------------------------------------------------------------------------------------------------------------------
 VPGraphicsPieceControls::VPGraphicsPieceControls(const VPLayoutPtr &layout, QGraphicsItem *parent)
-    : QGraphicsObject(parent),
-      m_layout(layout)
+  : QGraphicsObject(parent),
+    m_layout(layout)
 {
     SCASSERT(m_layout != nullptr)
     setCursor(QCursor(Qt::OpenHandCursor));
@@ -383,27 +395,23 @@ void VPGraphicsPieceControls::paint(QPainter *painter, const QStyleOptionGraphic
     if (m_controlsVisible)
     {
         painter->drawPixmap(TopLeftHandlerPosition(),
-                            HandlerPixmap(m_handleCorner == VPHandleCorner::TopLeft,
-                                          VPHandleCornerType::TopLeft));
+                            HandlerPixmap(m_handleCorner == VPHandleCorner::TopLeft, VPHandleCornerType::TopLeft));
 
         painter->drawPixmap(TopRightHandlerPosition(),
-                            HandlerPixmap(m_handleCorner == VPHandleCorner::TopRight,
-                                          VPHandleCornerType::TopRight));
+                            HandlerPixmap(m_handleCorner == VPHandleCorner::TopRight, VPHandleCornerType::TopRight));
 
-        painter->drawPixmap(BottomRightHandlerPosition(),
-                            HandlerPixmap(m_handleCorner == VPHandleCorner::BottomRight,
-                                          VPHandleCornerType::BottomRight));
+        painter->drawPixmap(BottomRightHandlerPosition(), HandlerPixmap(m_handleCorner == VPHandleCorner::BottomRight,
+                                                                        VPHandleCornerType::BottomRight));
 
-        painter->drawPixmap(BottomLeftHandlerPosition(),
-                            HandlerPixmap(m_handleCorner == VPHandleCorner::BottomLeft,
-                                          VPHandleCornerType::BottomLeft));
+        painter->drawPixmap(BottomLeftHandlerPosition(), HandlerPixmap(m_handleCorner == VPHandleCorner::BottomLeft,
+                                                                       VPHandleCornerType::BottomLeft));
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPieceControls::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    if(event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
+    if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
         m_rotationStartPoint = event->scenePos();
         m_rotationSum = 0;
@@ -469,8 +477,8 @@ void VPGraphicsPieceControls::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
             }
             else if (pieces.size() > 1)
             {
-                auto *command = new VPUndoPiecesRotate(pieces, rotationOrigin, rotateOn, m_rotationSum,
-                                                       allowChangeMerge);
+                auto *command =
+                    new VPUndoPiecesRotate(pieces, rotationOrigin, rotateOn, m_rotationSum, allowChangeMerge);
                 layout->UndoStack()->push(command);
             }
         }
@@ -479,7 +487,7 @@ void VPGraphicsPieceControls::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     if (m_originSaved && m_savedOrigin.custom)
     {
         QLineF line(rotationOrigin.origin, m_savedOrigin.origin);
-        line.setAngle(line.angle()+rotateOn);
+        line.setAngle(line.angle() + rotateOn);
         m_savedOrigin.origin = line.p2();
     }
 
@@ -491,7 +499,7 @@ void VPGraphicsPieceControls::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPieceControls::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if(event->button() == Qt::LeftButton)
+    if (event->button() == Qt::LeftButton)
     {
         m_controlsVisible = true;
         m_ignorePieceTransformation = false;
@@ -568,17 +576,17 @@ void VPGraphicsPieceControls::InitPixmaps()
         const QFileInfo fileInfo(fileName);
         const QString imageName = fileInfo.baseName();
 
-        const QString fileNameHover = QStringLiteral("%1/%2-hover.%3")
-                .arg(fileInfo.absolutePath(), imageName, fileInfo.suffix());
+        const QString fileNameHover =
+            QStringLiteral("%1/%2-hover.%3").arg(fileInfo.absolutePath(), imageName, fileInfo.suffix());
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
-        if (QGuiApplication::primaryScreen()->devicePixelRatio() >= 2 )
+        if (QGuiApplication::primaryScreen()->devicePixelRatio() >= 2)
         {
-            const QString fileName2x = QStringLiteral("%1/%2@2x.%3")
-                    .arg(fileInfo.absolutePath(), imageName, fileInfo.suffix());
+            const QString fileName2x =
+                QStringLiteral("%1/%2@2x.%3").arg(fileInfo.absolutePath(), imageName, fileInfo.suffix());
 
-            const QString fileName2xHover = QStringLiteral("%1/%2-hover@2x.%3")
-                    .arg(fileInfo.absolutePath(), imageName, fileInfo.suffix());
+            const QString fileName2xHover =
+                QStringLiteral("%1/%2-hover@2x.%3").arg(fileInfo.absolutePath(), imageName, fileInfo.suffix());
 
             m_handlePixmaps.insert(type, QPixmap(fileName2x));
             m_handleHoverPixmaps.insert(type, QPixmap(fileName2xHover));
@@ -625,8 +633,7 @@ auto VPGraphicsPieceControls::BottomRightHandlerPosition() const -> QPointF
     QRectF rect = ControllersRect();
     QPixmap handler = m_handlePixmaps.value(VPHandleCornerType::BottomRight);
     QSize size = handler.size() / handler.devicePixelRatio();
-    return {rect.topLeft().x() + (rect.width() - size.width()),
-                rect.topLeft().y() + (rect.height() - size.height())};
+    return {rect.topLeft().x() + (rect.width() - size.width()), rect.topLeft().y() + (rect.height() - size.height())};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -701,7 +708,7 @@ auto VPGraphicsPieceControls::ControllersRect() const -> QRectF
     QPixmap handler = m_handlePixmaps.value(VPHandleCornerType::TopLeft);
     QRectF pieceRect = m_pieceRect;
 
-    pieceRect = QRectF(pieceRect.topLeft()*scale, QSizeF(pieceRect.width()*scale, pieceRect.height()*scale));
+    pieceRect = QRectF(pieceRect.topLeft() * scale, QSizeF(pieceRect.width() * scale, pieceRect.height() * scale));
     QRectF rect = pieceRect;
 
     if (pieceRect.width() < handler.width())
@@ -717,7 +724,7 @@ auto VPGraphicsPieceControls::ControllersRect() const -> QRectF
     }
 
     const qreal gap = 2;
-    rect.adjust(- (handler.width() + gap), - (handler.height() + gap), handler.width() + gap, handler.height() + gap);
+    rect.adjust(-(handler.width() + gap), -(handler.height() + gap), handler.width() + gap, handler.height() + gap);
 
     return rect;
 }
@@ -744,7 +751,7 @@ auto VPGraphicsPieceControls::SelectedPieces() const -> QList<VPPiecePtr>
 auto VPGraphicsPieceControls::PiecesBoundingRect(const QList<VPPiecePtr> &selectedPieces) -> QRectF
 {
     QRectF rect;
-    for (const auto& item : selectedPieces)
+    for (const auto &item : selectedPieces)
     {
         if (not item.isNull())
         {
@@ -793,7 +800,7 @@ void VPGraphicsPieceControls::UpdateCursor(VPHandleCorner corner)
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPieceControls::PrepareTransformationOrigin(bool shiftPressed)
 {
-    if(shiftPressed && m_handleCorner != VPHandleCorner::Invalid)
+    if (shiftPressed && m_handleCorner != VPHandleCorner::Invalid)
     {
         if (m_originSaved)
         {
@@ -900,8 +907,7 @@ void VPGraphicsPieceControls::CorrectRotationSum(const VPLayoutPtr &layout,
 //---------------------------------------------------------------------------------------------------------------------
 auto VPGraphicsPieceControls::SelectedHandleCorner(const QPointF &pos) const -> VPHandleCorner
 {
-    QMap<VPHandleCorner, QPainterPath> corners
-    {
+    QMap<VPHandleCorner, QPainterPath> corners{
         {VPHandleCorner::TopLeft, TopLeftControl()},
         {VPHandleCorner::TopRight, TopRightControl()},
         {VPHandleCorner::BottomRight, BottomRightControl()},
@@ -909,12 +915,10 @@ auto VPGraphicsPieceControls::SelectedHandleCorner(const QPointF &pos) const -> 
     };
 
     QPainterPath circle;
-    circle.addEllipse(pos.x()-4, pos.y()-4, 8, 8);
+    circle.addEllipse(pos.x() - 4, pos.y() - 4, 8, 8);
 
     auto CheckCorner = [circle](const QPainterPath &handler)
-    {
-        return handler.intersects(circle) || handler.contains(circle);
-    };
+    { return handler.intersects(circle) || handler.contains(circle); };
 
     auto i = corners.constBegin();
     while (i != corners.constEnd())

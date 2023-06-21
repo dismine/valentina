@@ -28,27 +28,40 @@
 
 #include "vtapesettings.h"
 
-#include <QVariant>
+#include <QDir>
 #include <QGlobalStatic>
+#include <QVariant>
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+#include "diagnostic.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
 namespace
 {
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDataBaseGeometry, (QLatin1String("database/geometry"))) // NOLINT
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
+
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDataBaseGeometry, (QLatin1String("database/geometry")))   // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchHistoryTape, (QLatin1String("searchHistory/tape"))) // NOLINT
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeUseUnicodeProperties, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeUseUnicodeProperties,
                           (QLatin1String("searchOptions/tapeUseUnicodeProperties")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeWholeWord, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeWholeWord,
                           (QLatin1String("searchOptions/tapeWholeWord")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeRegexp, (QLatin1String("searchOptions/tapeRegexp"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeMatchCase, // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeRegexp, (QLatin1String("searchOptions/tapeRegexp")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeMatchCase,
                           (QLatin1String("searchOptions/tapeMatchCase")))
-}  // namespace
+QT_WARNING_POP
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VTapeSettings::VTapeSettings(Format format, Scope scope, const QString &organization, const QString &application,
                              QObject *parent)
-    :VCommonSettings(format, scope, organization, application, parent)
+  : VCommonSettings(format, scope, organization, application, parent)
 {
 }
 

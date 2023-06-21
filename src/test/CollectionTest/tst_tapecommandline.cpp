@@ -29,17 +29,26 @@
 #include "tst_tapecommandline.h"
 #include "../vmisc/vsysexits.h"
 
-#include <QtTest>
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+#include "../vmisc/diagnostic.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+
 #include <QGlobalStatic>
+#include <QtTest>
 
 namespace
 {
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
+
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, tmpTestFolder, (QLatin1String("tst_tape_tmp"))) // NOLINT
-}
+
+QT_WARNING_POP
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_TapeCommandLine::TST_TapeCommandLine(QObject *parent)
-    :AbstractTest(parent)
+  : AbstractTest(parent)
 {
 }
 
@@ -66,50 +75,35 @@ void TST_TapeCommandLine::OpenMeasurements_data() const
     QTest::addColumn<int>("exitCode");
 
     // The file doesn't exist!
-    QTest::newRow("Send wrong path to a file")                                     << "wrongPath.vit"
-                                                                                   << V_EX_NOINPUT;
+    QTest::newRow("Send wrong path to a file") << "wrongPath.vit" << V_EX_NOINPUT;
 
-    QTest::newRow("Old individual format to new version")                          << "keiko.vit"
-                                                                                   << V_EX_OK;
+    QTest::newRow("Old individual format to new version") << "keiko.vit" << V_EX_OK;
 
-    QTest::newRow("Open empty file")                                               << "empty.vit"
-                                                                                   << V_EX_OK;
+    QTest::newRow("Open empty file") << "empty.vit" << V_EX_OK;
 
-    QTest::newRow("Open the VIT file with all know measurements (v0.3.0)")         << "all_measurements_v0.3.0.vit"
-                                                                                   << V_EX_OK;
+    QTest::newRow("Open the VIT file with all know measurements (v0.3.0)") << "all_measurements_v0.3.0.vit" << V_EX_OK;
 
-    QTest::newRow("Open the VST file with all know measurements (v0.4.0)")         << "all_measurements_v0.4.0.vst"
-                                                                                   << V_EX_OK;
+    QTest::newRow("Open the VST file with all know measurements (v0.4.0)") << "all_measurements_v0.4.0.vst" << V_EX_OK;
 
-    QTest::newRow("Open the VST file for man ru GOST (v0.3.0).")                   << "GOST_man_ru_v0.3.0.vst"
-                                                                                   << V_EX_OK;
+    QTest::newRow("Open the VST file for man ru GOST (v0.3.0).") << "GOST_man_ru_v0.3.0.vst" << V_EX_OK;
 
-    QTest::newRow("Open the VIT file with all know measurements (v0.3.3)")         << "all_measurements_v0.3.3.vit"
-                                                                                   << V_EX_OK;
+    QTest::newRow("Open the VIT file with all know measurements (v0.3.3)") << "all_measurements_v0.3.3.vit" << V_EX_OK;
 
-    QTest::newRow("Open the VST file with all know measurements (v0.4.2)")         << "all_measurements_v0.4.2.vst"
-                                                                                   << V_EX_OK;
+    QTest::newRow("Open the VST file with all know measurements (v0.4.2)") << "all_measurements_v0.4.2.vst" << V_EX_OK;
 
-    QTest::newRow("Open the VST file for man ru GOST (v0.4.2).")                   << "GOST_man_ru_v0.4.2.vst"
-                                                                                   << V_EX_OK;
+    QTest::newRow("Open the VST file for man ru GOST (v0.4.2).") << "GOST_man_ru_v0.4.2.vst" << V_EX_OK;
 
-    QTest::newRow("Broken file. Not unique name.")                                 << "broken1.vit"
-                                                                                   << V_EX_NOINPUT;
+    QTest::newRow("Broken file. Not unique name.") << "broken1.vit" << V_EX_NOINPUT;
 
-    QTest::newRow("Broken file. Measurement name can't be empty.")                 << "broken1.vit"
-                                                                                   << V_EX_NOINPUT;
+    QTest::newRow("Broken file. Measurement name can't be empty.") << "broken1.vit" << V_EX_NOINPUT;
 
-    QTest::newRow("Broken file. An empty value shouldn't break a file.")           << "broken3.vit"
-                                                                                   << V_EX_OK;
+    QTest::newRow("Broken file. An empty value shouldn't break a file.") << "broken3.vit" << V_EX_OK;
 
-    QTest::newRow("Broken file. Invalid measurement name.")                        << "broken4.vit"
-                                                                                   << V_EX_NOINPUT;
+    QTest::newRow("Broken file. Invalid measurement name.") << "broken4.vit" << V_EX_NOINPUT;
 
-    QTest::newRow("Empty text VIT file.")                                          << "text.vit"
-                                                                                   << V_EX_NOINPUT;
+    QTest::newRow("Empty text VIT file.") << "text.vit" << V_EX_NOINPUT;
 
-    QTest::newRow("Empty text VST file.")                                          << "text.vst"
-                                                                                   << V_EX_NOINPUT;
+    QTest::newRow("Empty text VST file.") << "text.vst" << V_EX_NOINPUT;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -119,9 +113,11 @@ void TST_TapeCommandLine::OpenMeasurements()
     QFETCH(int, exitCode);
 
     QString error;
-    const int exit = Run(exitCode, TapePath(), QStringList() << "--test"
-                         << QCoreApplication::applicationDirPath() + QDir::separator() + *tmpTestFolder +
-                         QDir::separator() + file, error);
+    const int exit = Run(exitCode, TapePath(),
+                         QStringList() << "--test"
+                                       << QCoreApplication::applicationDirPath() + QDir::separator() + *tmpTestFolder +
+                                              QDir::separator() + file,
+                         error);
 
     QVERIFY2(exit == exitCode, qUtf8Printable(error.right(350)));
 }

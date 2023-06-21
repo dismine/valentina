@@ -30,22 +30,25 @@
 
 #include <QItemDelegate>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 class VComboBoxDelegate : public QItemDelegate
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit VComboBoxDelegate(const QStringList &items, QObject *parent = nullptr);
 
     virtual auto createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const
         -> QWidget * override;
     virtual void setEditorData(QWidget *editor, const QModelIndex &index) const override;
-    virtual void setModelData(QWidget *editor, QAbstractItemModel *model,
-                              const QModelIndex &index) const override;
+    virtual void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const override;
 
     virtual void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option,
                                       const QModelIndex &index) const override;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VComboBoxDelegate) // NOLINT
