@@ -95,6 +95,7 @@ const QString AttrCenter = QStringLiteral("center");                            
 const QString AttrBox = QStringLiteral("box");                                   // NOLINT(cert-err58-cpp)
 const QString AttrShape = QStringLiteral("shape");                               // NOLINT(cert-err58-cpp)
 const QString AttrFont = QStringLiteral("font");                                 // NOLINT(cert-err58-cpp)
+const QString AttrSVGFont = QStringLiteral("svgFont");                           // NOLINT(cert-err58-cpp)
 const QString AttrFontSize = QStringLiteral("fontSize");                         // NOLINT(cert-err58-cpp)
 const QString AttrBold = QStringLiteral("bold");                                 // NOLINT(cert-err58-cpp)
 const QString AttrItalic = QStringLiteral("italic");                             // NOLINT(cert-err58-cpp)

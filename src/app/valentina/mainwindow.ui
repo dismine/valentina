@@ -1782,6 +1782,8 @@
     <addaction name="actionShowAccuracyRadius"/>
     <addaction name="separator"/>
     <addaction name="actionAddBackgroundImage"/>
+    <addaction name="separator"/>
+    <addaction name="actionExportFontCorrections"/>
    </widget>
    <widget class="QMenu" name="menuMeasurements">
     <property name="title">
@@ -3207,6 +3209,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+D</string>
+   </property>
+  </action>
+  <action name="actionExportFontCorrections">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Export font corrections</string>
    </property>
   </action>
  </widget>

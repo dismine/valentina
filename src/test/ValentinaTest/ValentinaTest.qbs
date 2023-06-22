@@ -46,6 +46,8 @@ VTestApp {
         "tst_vsplinepath.cpp",
         "tst_vpointf.cpp",
         "tst_readval.cpp",
+        "tst_vsvgpathtokenizer.cpp",
+        "tst_vsvgpathtokenizer.h",
         "tst_vtranslatevars.cpp",
         "tst_vabstractpiece.cpp",
         "tst_vtooluniondetails.cpp",

@@ -71,7 +71,6 @@ void TapePreferencesPathPage::Apply()
     settings->SetPathMultisizeMeasurements(ui->pathTable->item(1, 1)->text());
     settings->SetPathPattern(ui->pathTable->item(2, 1)->text());
     settings->SetPathTemplate(ui->pathTable->item(3, 1)->text());
-    settings->SetPathManualLayouts(ui->pathTable->item(4, 1)->text());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -107,10 +106,7 @@ void TapePreferencesPathPage::DefaultPath()
             path = VCommonSettings::GetDefPathPattern();
             break;
         case 3: // templates
-            path = VCommonSettings::GetDefPathTemplate();
-            break;
-        case 4: // layouts
-            path = VCommonSettings::GetDefPathManualLayouts();
+            path = VTapeSettings::GetDefPathTemplate();
             break;
         default:
             break;
@@ -134,17 +130,14 @@ void TapePreferencesPathPage::EditPath()
             path = MApplication::VApp()->TapeSettings()->GetPathIndividualMeasurements();
             break;
         case 1: // multisize measurements
-            path = MApplication::VApp()->TapeSettings()->GetPathMultisizeMeasurements();
-            path = VCommonSettings::PrepareMultisizeTables(path);
+            path = VCommonSettings::PrepareMultisizeTables(
+                MApplication::VApp()->TapeSettings()->GetPathMultisizeMeasurements());
             break;
         case 2: // pattern path
             path = MApplication::VApp()->TapeSettings()->GetPathPattern();
             break;
         case 3: // templates
             path = MApplication::VApp()->TapeSettings()->GetPathTemplate();
-            break;
-        case 4: // layouts
-            path = MApplication::VApp()->TapeSettings()->GetPathManualLayouts();
             break;
         default:
             break;
@@ -179,7 +172,7 @@ void TapePreferencesPathPage::EditPath()
 void TapePreferencesPathPage::InitTable()
 {
     ui->pathTable->clearContents();
-    ui->pathTable->setRowCount(5);
+    ui->pathTable->setRowCount(4);
     ui->pathTable->setColumnCount(2);
 
     const VTapeSettings *settings = MApplication::VApp()->TapeSettings();
@@ -210,13 +203,6 @@ void TapePreferencesPathPage::InitTable()
         auto *item = new QTableWidgetItem(settings->GetPathTemplate());
         item->setToolTip(settings->GetPathTemplate());
         ui->pathTable->setItem(3, 1, item);
-    }
-
-    {
-        ui->pathTable->setItem(4, 0, new QTableWidgetItem(tr("My Layouts")));
-        auto *item = new QTableWidgetItem(settings->GetPathManualLayouts());
-        item->setToolTip(settings->GetPathManualLayouts());
-        ui->pathTable->setItem(4, 1, item);
     }
 
     ui->pathTable->verticalHeader()->setDefaultSectionSize(20);

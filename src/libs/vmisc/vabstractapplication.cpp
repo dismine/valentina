@@ -166,6 +166,7 @@ VAbstractApplication::~VAbstractApplication()
         delete i.value();
     }
 #endif
+    delete m_svgFontDatabase;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -401,6 +402,37 @@ auto VAbstractApplication::NativeFileDialog(QFileDialog::Options options) const 
     return options;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractApplication::SVGFontDatabase() -> VSvgFontDatabase *
+{
+    if (m_svgFontDatabase == nullptr)
+    {
+        m_svgFontDatabase = new VSvgFontDatabase();
+
+        RestartSVGFontDatabaseWatcher();
+    }
+
+    if (!m_svgFontDatabase->IsPopulated())
+    {
+        m_svgFontDatabase->PopulateFontDatabase(QString());
+    }
+
+    return m_svgFontDatabase;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractApplication::RestartSVGFontDatabaseWatcher()
+{
+    if (m_svgFontDatabase != nullptr)
+    {
+        delete m_svgFontDatabaseWatcher;
+        m_svgFontDatabaseWatcher =
+            new QFileSystemWatcher({settings->GetPathSVGFonts(), VSvgFontDatabase::SystemSVGFontPath()}, this);
+        connect(m_svgFontDatabaseWatcher, &QFileSystemWatcher::directoryChanged, this,
+                &VAbstractApplication::RepopulateFontDatabase);
+    }
+}
+
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractApplication::TextCodecCache(QStringConverter::Encoding encoding) const -> VTextCodec *
@@ -449,5 +481,28 @@ void VAbstractApplication::CheckSystemLocale()
     if (match >= 4)
     {
         qFatal("russian language detected");
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractApplication::SVGFontsPathChanged(const QString &oldPath, const QString &newPath)
+{
+    if (oldPath != newPath)
+    {
+        if (m_svgFontDatabase != nullptr)
+        {
+            RestartSVGFontDatabaseWatcher();
+            m_svgFontDatabase->InvalidatePath(oldPath);
+            RepopulateFontDatabase(newPath);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractApplication::RepopulateFontDatabase(const QString &path)
+{
+    if (m_svgFontDatabase != nullptr)
+    {
+        QFuture<void> future = QtConcurrent::run([this, path]() { m_svgFontDatabase->PopulateFontDatabase(path); });
     }
 }

@@ -43,6 +43,8 @@
 #include "../vlayout/vtextmanager.h"
 #include "vpieceitem.h"
 
+class VSvgFont;
+
 /**
  * @brief The VTextGraphicsItem class. This class implements text graphics item,
  * which can be dragged around, resized and rotated within the parent item. The text font
@@ -73,6 +75,8 @@ public:
     };
 
     void SetFont(const QFont &fnt);
+    void SetSVGFontFamily(const QString &fntFamily);
+    void SetSVGFontPointSize(int pointSize);
     auto GetFontSize() const -> int;
     void SetSize(qreal fW, qreal fH);
     auto IsContained(QRectF rectBB, qreal dRot, qreal &dX, qreal &dY) const -> bool;
@@ -117,6 +121,10 @@ private:
     void RotateLabel(QGraphicsSceneMouseEvent *pME);
 
     void PaintLabel(QPainter *painter);
+    void PaintLabelOutlineFont(QPainter *painter);
+    void PaintLabelSVGFont(QPainter *painter);
+
+    void NotEnoughSpace() const;
 };
 
 #endif // VTEXTGRAPHICSITEM_H

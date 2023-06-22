@@ -189,6 +189,14 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         type = QtDebugMsg;
     }
 
+    // Annoying warning that we can ignore
+    if ((type == QtWarningMsg) && (msg.contains(QStringLiteral("OpenType support missing for")) ||
+                                   msg.contains(QStringLiteral("DirectWrite: CreateFontFaceFromHDC() failed (Indicates "
+                                                               "an error in an input file such as a font file.)"))))
+    {
+        type = QtDebugMsg;
+    }
+
     QString logMsg = msg;
     const bool isWarningMessage = VAbstractApplication::VApp()->IsWarningMessage(msg);
     if (isWarningMessage)
@@ -556,6 +564,7 @@ void MApplication::OpenSettings()
 {
     settings = new VTapeSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
                                  QCoreApplication::applicationName(), this);
+    connect(settings, &VTapeSettings::SVGFontsPathChanged, this, &MApplication::SVGFontsPathChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -372,6 +372,7 @@ MainWindow::MainWindow(QWidget *parent)
     InitToolButtons();
 
     connect(ui->actionAddBackgroundImage, &QAction::triggered, this, &MainWindow::ActionAddBackgroundImage);
+    connect(ui->actionExportFontCorrections, &QAction::triggered, this, &MainWindow::ActionExportFontCorrections);
 
     m_progressBar->setVisible(false);
 #if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
@@ -506,6 +507,8 @@ MainWindow::MainWindow(QWidget *parent)
     {
         QTimer::singleShot(V_SECONDS(1), this, &MainWindow::SetDefaultGUILanguage);
     }
+
+    ui->actionExportFontCorrections->setEnabled(settings->GetSingleStrokeOutlineFont());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4007,6 +4010,40 @@ void MainWindow::ActionAddBackgroundImage()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ActionExportFontCorrections()
+{
+    // Use standard path to manual layouts
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    const QString dirPath = settings->GetPathFontCorrections();
+
+    bool usedNotExistedDir = false;
+    QDir directory(dirPath);
+    if (not directory.exists())
+    {
+        usedNotExistedDir = directory.mkpath(QChar('.'));
+    }
+
+    auto RemoveUnsuded = qScopeGuard(
+        [usedNotExistedDir, dirPath]()
+        {
+            if (usedNotExistedDir)
+            {
+                QDir directory(dirPath);
+                directory.rmpath(QChar('.'));
+            }
+        });
+
+    const QString dir = QFileDialog::getExistingDirectory(
+        this, tr("Select folder"), dirPath,
+        VAbstractApplication::VApp()->NativeFileDialog(QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks));
+    if (not dir.isEmpty())
+    {
+        VSingleLineOutlineChar corrector(settings->GetLabelFont());
+        corrector.ExportCorrections(dir);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Clear reset to default window.
  */
@@ -6197,6 +6234,8 @@ void MainWindow::Preferences()
         if (guard->exec() == QDialog::Accepted)
         {
             InitAutoSave();
+            VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+            ui->actionExportFontCorrections->setEnabled(settings->GetSingleStrokeOutlineFont());
         }
     }
 }

@@ -648,7 +648,7 @@ void TMainWindow::OpenTemplate()
         tr("Measurements") + QStringLiteral(" (*.vst *.vit);;") + tr("All files") + QStringLiteral(" (*.*)");
     // Use standard path to template files
     QString pathTo = MApplication::VApp()->TapeSettings()->GetPathTemplate();
-    pathTo = VCommonSettings::PrepareStandardTemplates(pathTo);
+    pathTo = VTapeSettings::PrepareStandardTemplates(pathTo);
     Open(pathTo, filter);
 
     if (m_m != nullptr)

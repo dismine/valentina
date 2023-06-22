@@ -95,10 +95,10 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsIndividualMeasurements,
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsMultisizeMeasurements,
                           (QLatin1String("paths/standard_measurements")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsPattern, (QLatin1String("paths/pattern")))             // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsTemplates, (QLatin1String("paths/templates")))         // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsLabelTemplate, (QLatin1String("paths/labels")))        // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsManualLayouts, (QLatin1String("paths/manualLayouts"))) // NOLINT
-
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsSVGFonts, (QLatin1String("paths/svgFonts")))           // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsFontCorrections, (QLatin1String("paths/fontCorrections")))
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationOsSeparator, (QLatin1String("configuration/osSeparator")))
 // NOLINTNEXTLINE
@@ -151,9 +151,15 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDoublePassmark, (QLatin1String("
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternDefaultSeamAllowance,
                           (QLatin1String("pattern/defaultSeamAllowance")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternLabelFont, (QLatin1String("pattern/labelFont")))       // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternLabelSVGFont, (QLatin1String("pattern/labelSVGFont"))) // NOLINT
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPieceLabelFontPointSize,
                           (QLatin1String("pattern/pieceLabelFontPointSize")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternSingleStrokeOutlineFont,
+                          (QLatin1String("pattern/singleStrokeOutlineFont")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternSingleLineFonts, (QLatin1String("pattern/singleLineFonts")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternLineWidth, (QLatin1String("pattern/lineWidth"))) // NOLINT
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternCurveApproximationScale,
@@ -337,23 +343,6 @@ void SymlinkCopyDirRecursive(const QString &fromDir, const QString &toDir, bool 
         SymlinkCopyDirRecursive(from, to, replaceOnConflit);
     }
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-auto PrepareStandardFiles(const QString &currentPath, const QString &standardPath, const QString &defPath) -> QString
-{
-    QDir standardPathDir(standardPath);
-    QDir currentPathDir(currentPath);
-    if ((currentPath == defPath || not currentPathDir.exists()) && standardPathDir.exists())
-    {
-        const QDir localdata(defPath);
-        if (localdata.mkpath(QChar('.')))
-        {
-            SymlinkCopyDirRecursive(standardPath, defPath, false);
-        }
-        return defPath;
-    }
-    return currentPath;
-}
 } // namespace
 
 QT_WARNING_POP
@@ -424,21 +413,9 @@ auto VCommonSettings::LabelTemplatesPath() -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VCommonSettings::PrepareStandardTemplates(const QString &currentPath) -> QString
-{
-    return PrepareStandardFiles(currentPath, StandardTemplatesPath(), GetDefPathTemplate());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto VCommonSettings::PrepareMultisizeTables(const QString &currentPath) -> QString
 {
     return PrepareStandardFiles(currentPath, MultisizeTablesPath(), GetDefPathMultisizeMeasurements());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VCommonSettings::PrepareLabelTemplates(const QString &currentPath) -> QString
-{
-    return PrepareStandardFiles(currentPath, LabelTemplatesPath(), GetDefPathLabelTemplate());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -522,45 +499,6 @@ void VCommonSettings::SetPathPattern(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VCommonSettings::GetDefPathTemplate() -> QString
-{
-    return QDir::homePath() + QStringLiteral("/valentina/") + tr("templates");
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VCommonSettings::GetPathTemplate() const -> QString
-{
-    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
-    return settings.value(*settingPathsTemplates, GetDefPathTemplate()).toString();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetPathTemplate(const QString &value)
-{
-    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
-    settings.setValue(*settingPathsTemplates, value);
-    settings.sync();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VCommonSettings::GetDefPathLabelTemplate() -> QString
-{
-    return QDir::homePath() + QStringLiteral("/valentina/") + tr("label templates");
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VCommonSettings::GetPathLabelTemplate() const -> QString
-{
-    return value(*settingPathsLabelTemplate, GetDefPathLabelTemplate()).toString();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetPathLabelTemplate(const QString &value)
-{
-    setValue(*settingPathsLabelTemplate, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto VCommonSettings::GetDefPathManualLayouts() -> QString
 {
     return QDir::homePath() + QStringLiteral("/valentina/") + tr("manual layouts");
@@ -569,13 +507,63 @@ auto VCommonSettings::GetDefPathManualLayouts() -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto VCommonSettings::GetPathManualLayouts() const -> QString
 {
-    return value(*settingPathsManualLayouts, GetDefPathManualLayouts()).toString();
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return settings.value(*settingPathsManualLayouts, GetDefPathManualLayouts()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetPathManualLayouts(const QString &value)
 {
-    setValue(*settingPathsManualLayouts, value);
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingPathsManualLayouts, value);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::GetDefPathSVGFonts() -> QString
+{
+    return QDir::homePath() + QStringLiteral("/valentina/") + tr("svg fonts");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::GetPathSVGFonts() const -> QString
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return settings.value(*settingPathsSVGFonts, GetDefPathSVGFonts()).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetPathSVGFonts(const QString &value)
+{
+    const QString oldPath = GetDefPathSVGFonts();
+
+    setValue(*settingPathsSVGFonts, value);
+
+    if (oldPath != value)
+    {
+        emit SVGFontsPathChanged(oldPath, value);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::GetDefPathFontCorrections() -> QString
+{
+    return QDir::homePath() + QStringLiteral("/valentina/") + tr("font corrections");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::GetPathFontCorrections() const -> QString
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return settings.value(*settingPathsFontCorrections, GetDefPathFontCorrections()).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetPathFontCorrections(const QString &value)
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingPathsFontCorrections, value);
+    settings.sync();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1128,20 +1116,20 @@ auto VCommonSettings::GetCSVSeparator() const -> QChar
     switch (separator)
     {
         case 0:
-            return {'\t'};
+            return QChar('\t');
         case 1:
-            return {';'};
+            return QChar(';');
         case 2:
-            return {' '};
+            return QChar(' ');
         default:
-            return {','};
+            return QChar(',');
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VCommonSettings::GetDefCSVSeparator() -> QChar
 {
-    return {','};
+    return QChar(',');
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1199,13 +1187,72 @@ auto VCommonSettings::GetDefaultSeamAllowance() -> double
 //---------------------------------------------------------------------------------------------------------------------
 auto VCommonSettings::GetLabelFont() const -> QFont
 {
-    return qvariant_cast<QFont>(value(*settingPatternLabelFont, QApplication::font()));
+    QString fontStr = value(*settingPatternLabelFont, QApplication::font().toString()).toString();
+
+    QFont font;
+
+    if (!fontStr.isEmpty())
+    {
+// Qt 6's QFont::toString returns a value with 17 fields, e.g.
+// Ubuntu,11,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+// Qt 5's QFont::fromString expects a value with 11 fields, e.g.
+// Ubuntu,10,-1,5,50,0,0,0,0,0
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+        const auto l = fontStr.split(QLatin1Char(','));
+        // Qt5's QFont::fromString() isn't compatible with Qt6's QFont::toString().
+        // If we were built with Qt5, don't try to process a font preference that
+        // was created by Qt6.
+        if (l.count() <= 11)
+        {
+            font.fromString(fontStr);
+        }
+#else
+        font.fromString(fontStr);
+#endif
+    }
+    return font;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetLabelFont(const QFont &f)
 {
-    setValue(*settingPatternLabelFont, f);
+    setValue(*settingPatternLabelFont, f.toString());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::GetLabelSVGFont() const -> QString
+{
+    return value(*settingPatternLabelSVGFont, QString()).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetLabelSVGFont(const QString &family)
+{
+    setValue(*settingPatternLabelSVGFont, family);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::GetSingleStrokeOutlineFont() const -> bool
+{
+    return value(*settingPatternSingleStrokeOutlineFont, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetSingleStrokeOutlineFont(bool value)
+{
+    setValue(*settingPatternSingleStrokeOutlineFont, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::GetSingleLineFonts() const -> bool
+{
+    return value(*settingPatternSingleLineFonts, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetSingleLineFonts(bool value)
+{
+    setValue(*settingPatternSingleLineFonts, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1702,4 +1749,22 @@ void VCommonSettings::SetWatermarkCustomColors(QVector<QColor> colors)
 
     settings.setValue(*settingWatermarkCustomColors, customColors);
     settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::PrepareStandardFiles(const QString &currentPath, const QString &standardPath,
+                                           const QString &defPath) -> QString
+{
+    QDir standardPathDir(standardPath);
+    QDir currentPathDir(currentPath);
+    if ((currentPath == defPath || not currentPathDir.exists()) && standardPathDir.exists())
+    {
+        const QDir localdata(defPath);
+        if (localdata.mkpath(QChar('.')))
+        {
+            SymlinkCopyDirRecursive(standardPath, defPath, false);
+        }
+        return defPath;
+    }
+    return currentPath;
 }

@@ -65,7 +65,8 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingAutoRefreshPatternMessage,
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingToolPanelScaling, (QLatin1String("configuration/toolPanelScaling")))
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsLayout, (QLatin1String("paths/layout"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsLayout, (QLatin1String("paths/layout")))        // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsLabelTemplate, (QLatin1String("paths/labels"))) // NOLINT
 
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternKnownMaterials, (QLatin1String("pattern/knownMaterials")))
@@ -184,6 +185,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsFinalMeasurementsRe
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsFinalMeasurementsMatchCase,
                           (QLatin1String("searchOptions/finalMeasurementsMatchCase")))
+
 QT_WARNING_POP
 } // namespace
 
@@ -200,6 +202,12 @@ VValentinaSettings::VValentinaSettings(const QString &fileName, QSettings::Forma
   : VCommonSettings(fileName, format, parent)
 {
     REGISTER_META_TYPE_STREAM_OPERATORS(QMarginsF);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::PrepareLabelTemplates(const QString &currentPath) -> QString
+{
+    return PrepareStandardFiles(currentPath, LabelTemplatesPath(), GetDefPathLabelTemplate());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -233,6 +241,24 @@ void VValentinaSettings::SetPathLayout(const QString &value)
     QSettings settings(this->format(), this->scope(), this->organizationName(), this->applicationName());
     settings.setValue(*settingPathsLayout, value);
     settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetDefPathLabelTemplate() -> QString
+{
+    return QDir::homePath() + QStringLiteral("/valentina/") + tr("label templates");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetPathLabelTemplate() const -> QString
+{
+    return value(*settingPathsLabelTemplate, GetDefPathLabelTemplate()).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetPathLabelTemplate(const QString &value)
+{
+    setValue(*settingPathsLabelTemplate, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

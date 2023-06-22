@@ -1,5 +1,6 @@
 import qbs.FileInfo
 import qbs.Utilities
+import qbs.File
 
 VToolApp {
     Depends { name: "buildconfig" }
@@ -31,6 +32,7 @@ VToolApp {
     name: "Valentina"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "Valentina" : "valentina"
     targetName: buildconfig.appTarget
+    type: base.concat("install_root_svg_fonts")
 
     Properties {
         condition: buildconfig.useConanPackages && (qbs.targetOS.contains("windows") || qbs.targetOS.contains("macos"))
@@ -185,7 +187,6 @@ VToolApp {
             "def_pattern_label.xml",
             "def_piece_label.xml"
         ]
-        fileTags: ["label_templates"]
         qbs.install: true
         qbs.installDir: buildconfig.installDataPath + "/labels"
     }
@@ -196,7 +197,6 @@ VToolApp {
         files: [
             "GOST_man_ru.vst"
         ]
-        fileTags: ["multisize_tables"]
         qbs.install: true
         qbs.installDir: buildconfig.installDataPath + "/tables/multisize"
     }
@@ -208,9 +208,38 @@ VToolApp {
             "template_all_measurements.vit",
             "t_Aldrich_Women.vit"
         ]
-        fileTags: ["measurements_templates"]
         qbs.install: true
         qbs.installDir: buildconfig.installDataPath + "/tables/templates"
+    }
+
+    Group {
+        name: "SVG Fonts"
+        prefix: project.sourceDirectory + "/src/app/share/svgfonts/"
+        files: [
+            "**/*.svg"
+        ]
+        fileTags:["svg_fonts"]
+    }
+
+    Rule {
+        inputs: ["svg_fonts"]
+        Artifact {
+            filePath: {
+                var dstDir = product.qbs.installRoot + product.qbs.installPrefix + "/" +
+                        product.buildconfig.installDataPath + "/svgfonts";
+                return dstDir + "/" + input.filePath.split("src/app/share/svgfonts/")[1];
+            }
+            fileTags: ["install_root_svg_fonts"]
+        }
+        prepare: {
+            var cmd = new JavaScriptCommand();
+            cmd.description = "Installing " + input.fileName;
+            cmd.highlight = "codegen";
+            cmd.sourceCode = function() {
+                File.copy(input.filePath, output.filePath);
+            }
+            return [cmd];
+        }
     }
 
     Group {
@@ -218,7 +247,6 @@ VToolApp {
         name: "pdftops Windows"
         prefix: project.sourceDirectory + "/dist/win/"
         files: ["pdftops.exe"]
-        fileTags: ["pdftops_dist_win"]
         qbs.install: true
         qbs.installDir: buildconfig.installBinaryPath
     }
@@ -228,7 +256,6 @@ VToolApp {
         name: "pdftops MacOS"
         prefix: project.sourceDirectory + "/dist/macx/bin64/"
         files: ["pdftops"]
-        fileTags: ["pdftops_dist_macx"]
         qbs.install: true
         qbs.installDir: buildconfig.installBinaryPath
     }

@@ -32,28 +32,28 @@
 
 namespace
 {
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, StrMin, (QLatin1String("Min"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, StrMax, (QLatin1String("Max"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, StrInteger, (QLatin1String("integer"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, StrStep, (QLatin1String("Step"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, StrSuffix, (QLatin1String("Suffix"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, StrMin, (QLatin1String("Min")))             // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, StrMax, (QLatin1String("Max")))             // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, StrInteger, (QLatin1String("integer")))     // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, StrStep, (QLatin1String("Step")))           // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, StrSuffix, (QLatin1String("Suffix")))       // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, StrPrecision, (QLatin1String("Precision"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, StrDouble, (QLatin1String("double"))) // NOLINT
-}
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, StrDouble, (QLatin1String("double")))       // NOLINT
+} // namespace
 
 const int VPE::VIntegerProperty::StandardMin = -1000000;
 const int VPE::VIntegerProperty::StandardMax = 1000000;
 
-VPE::VIntegerProperty::VIntegerProperty(const QString& name, const QMap<QString, QVariant>& settings)
-    : VProperty(name,
+VPE::VIntegerProperty::VIntegerProperty(const QString &name, const QMap<QString, QVariant> &settings)
+  : VProperty(name,
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-                QMetaType::Int),
+              QMetaType::Int),
 #else
-                QVariant::Int),
+              QVariant::Int),
 #endif
-      m_minValue(StandardMin),
-      m_maxValue(StandardMax),
-      m_singleStep(1.0)
+    m_minValue(StandardMin),
+    m_maxValue(StandardMax),
+    m_singleStep(1.0)
 {
     VProperty::setSettings(settings);
     VProperty::d_ptr->VariantValue.setValue(0);
@@ -65,7 +65,10 @@ VPE::VIntegerProperty::VIntegerProperty(const QString& name, const QMap<QString,
 }
 
 VPE::VIntegerProperty::VIntegerProperty(const QString &name)
-    : VProperty(name), m_minValue(StandardMin), m_maxValue(StandardMax), m_singleStep(1.0)
+  : VProperty(name),
+    m_minValue(StandardMin),
+    m_maxValue(StandardMax),
+    m_singleStep(1.0)
 {
     VProperty::d_ptr->VariantValue.setValue(0);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -76,13 +79,13 @@ VPE::VIntegerProperty::VIntegerProperty(const QString &name)
 }
 
 //! Returns an editor widget, or NULL if it doesn't supply one
-auto VPE::VIntegerProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
-                                         const QAbstractItemDelegate* delegate) -> QWidget*
+auto VPE::VIntegerProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
+                                         const QAbstractItemDelegate *delegate) -> QWidget *
 {
     Q_UNUSED(options)
     Q_UNUSED(delegate)
 
-    auto* tmpEditor = new QSpinBox(parent);
+    auto *tmpEditor = new QSpinBox(parent);
     tmpEditor->setLocale(parent->locale());
     tmpEditor->setMinimum(static_cast<int>(m_minValue));
     tmpEditor->setMaximum(static_cast<int>(m_maxValue));
@@ -99,7 +102,7 @@ auto VPE::VIntegerProperty::createEditor(QWidget * parent, const QStyleOptionVie
 //! Gets the data from the widget
 auto VPE::VIntegerProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
-    const auto* tmpEditor = qobject_cast<const QSpinBox*>(editor);
+    const auto *tmpEditor = qobject_cast<const QSpinBox *>(editor);
     if (tmpEditor)
     {
         return tmpEditor->value();
@@ -108,7 +111,7 @@ auto VPE::VIntegerProperty::getEditorData(const QWidget *editor) const -> QVaria
     return {0};
 }
 
-void VPE::VIntegerProperty::setSetting(const QString& key, const QVariant& value)
+void VPE::VIntegerProperty::setSetting(const QString &key, const QVariant &value)
 {
     if (key == *StrMax)
     {
@@ -128,7 +131,7 @@ void VPE::VIntegerProperty::setSetting(const QString& key, const QVariant& value
     }
 }
 
-auto VPE::VIntegerProperty::getSetting(const QString& key) const -> QVariant
+auto VPE::VIntegerProperty::getSetting(const QString &key) const -> QVariant
 {
     if (key == *StrMin)
     {
@@ -163,7 +166,7 @@ auto VPE::VIntegerProperty::type() const -> QString
     return *StrInteger;
 }
 
-auto VPE::VIntegerProperty::clone(bool include_children, VProperty* container) const -> VPE::VProperty*
+auto VPE::VIntegerProperty::clone(bool include_children, VProperty *container) const -> VPE::VProperty *
 {
     return VProperty::clone(include_children, container ? container : new VIntegerProperty(getName()));
 }
@@ -171,25 +174,25 @@ auto VPE::VIntegerProperty::clone(bool include_children, VProperty* container) c
 void VPE::VIntegerProperty::valueChanged(int i)
 {
     Q_UNUSED(i)
-    QCoreApplication::postEvent ( VProperty::d_ptr->editor, new UserChangeEvent() );
+    QCoreApplication::postEvent(VProperty::d_ptr->editor, new UserChangeEvent());
 }
 
 const int VPE::VDoubleProperty::StandardMin = -1000000;
 const int VPE::VDoubleProperty::StandardMax = 1000000;
 const double VPE::VDoubleProperty::StandardPrecision = 5;
 
-VPE::VDoubleProperty::VDoubleProperty(const QString& name, const QMap<QString, QVariant>& settings)
-    : VProperty(name,
+VPE::VDoubleProperty::VDoubleProperty(const QString &name, const QMap<QString, QVariant> &settings)
+  : VProperty(name,
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-                QMetaType::Double),
+              QMetaType::Double),
 #else
-                QVariant::Double),
+              QVariant::Double),
 #endif
 
-      m_minValue(StandardMin),
-      m_maxValue(StandardMax),
-      m_singleStep(1.0),
-      m_precision(static_cast<int>(StandardPrecision))
+    m_minValue(StandardMin),
+    m_maxValue(StandardMax),
+    m_singleStep(1.0),
+    m_precision(static_cast<int>(StandardPrecision))
 {
     VProperty::setSettings(settings);
     VProperty::d_ptr->VariantValue.setValue(0);
@@ -201,11 +204,11 @@ VPE::VDoubleProperty::VDoubleProperty(const QString& name, const QMap<QString, Q
 }
 
 VPE::VDoubleProperty::VDoubleProperty(const QString &name)
-    : VProperty(name),
-      m_minValue(StandardMin),
-      m_maxValue(StandardMax),
-      m_singleStep(1.0),
-      m_precision(static_cast<int>(StandardPrecision))
+  : VProperty(name),
+    m_minValue(StandardMin),
+    m_maxValue(StandardMax),
+    m_singleStep(1.0),
+    m_precision(static_cast<int>(StandardPrecision))
 {
     VProperty::d_ptr->VariantValue.setValue(0);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -218,12 +221,12 @@ VPE::VDoubleProperty::VDoubleProperty(const QString &name)
 }
 
 //! Returns an editor widget, or NULL if it doesn't supply one
-auto VPE::VDoubleProperty::createEditor(QWidget * parent, const QStyleOptionViewItem& options,
-                                        const QAbstractItemDelegate* delegate) -> QWidget*
+auto VPE::VDoubleProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
+                                        const QAbstractItemDelegate *delegate) -> QWidget *
 {
     Q_UNUSED(options)
     Q_UNUSED(delegate)
-    auto* tmpEditor = new QDoubleSpinBox(parent);
+    auto *tmpEditor = new QDoubleSpinBox(parent);
     tmpEditor->setLocale(parent->locale());
     tmpEditor->setMinimum(m_minValue);
     tmpEditor->setMaximum(m_maxValue);
@@ -241,7 +244,7 @@ auto VPE::VDoubleProperty::createEditor(QWidget * parent, const QStyleOptionView
 //! Gets the data from the widget
 auto VPE::VDoubleProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
-    const auto* tmpEditor = qobject_cast<const QDoubleSpinBox*>(editor);
+    const auto *tmpEditor = qobject_cast<const QDoubleSpinBox *>(editor);
     if (tmpEditor)
     {
         return tmpEditor->value();
@@ -250,7 +253,7 @@ auto VPE::VDoubleProperty::getEditorData(const QWidget *editor) const -> QVarian
     return {0};
 }
 
-void VPE::VDoubleProperty::setSetting(const QString& key, const QVariant& value)
+void VPE::VDoubleProperty::setSetting(const QString &key, const QVariant &value)
 {
     if (key == *StrMin)
     {
@@ -274,7 +277,7 @@ void VPE::VDoubleProperty::setSetting(const QString& key, const QVariant& value)
     }
 }
 
-auto VPE::VDoubleProperty::getSetting(const QString& key) const -> QVariant
+auto VPE::VDoubleProperty::getSetting(const QString &key) const -> QVariant
 {
     if (key == *StrMin)
     {
@@ -314,7 +317,7 @@ auto VPE::VDoubleProperty::type() const -> QString
     return *StrDouble;
 }
 
-auto VPE::VDoubleProperty::clone(bool include_children, VProperty* container) const -> VPE::VProperty*
+auto VPE::VDoubleProperty::clone(bool include_children, VProperty *container) const -> VPE::VProperty *
 {
     return VProperty::clone(include_children, container ? container : new VDoubleProperty(getName()));
 }
@@ -322,5 +325,5 @@ auto VPE::VDoubleProperty::clone(bool include_children, VProperty* container) co
 void VPE::VDoubleProperty::valueChanged(int i)
 {
     Q_UNUSED(i)
-    QCoreApplication::postEvent ( VProperty::d_ptr->editor, new UserChangeEvent() );
+    QCoreApplication::postEvent(VProperty::d_ptr->editor, new UserChangeEvent());
 }

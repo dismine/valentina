@@ -44,6 +44,7 @@
 class VPieceLabelData;
 class VAbstractPattern;
 class VContainer;
+class VSvgFont;
 
 /**
  * @brief The TextLine struct holds the information about one text line
@@ -88,6 +89,13 @@ public:
 
     void SetFont(const QFont &font);
     auto GetFont() const -> const QFont &;
+
+    void SetSVGFontFamily(const QString &fontFamily);
+    auto GetSVGFontFamily() const -> QString;
+
+    void SetSVGFontPointSize(int pointSize);
+    auto GetSVGFontPointSize() const -> int;
+
     void SetFontSize(int iFS);
 
     auto GetAllSourceLines() const -> QVector<TextLine>;
@@ -96,8 +104,10 @@ public:
     auto GetSourceLine(vsizetype i) const -> const TextLine &;
 
     auto GetLabelSourceLines(int width, const QFont &font) const -> QVector<TextLine>;
+    auto GetLabelSourceLines(int width, const VSvgFont &font, qreal penWidth) const -> QVector<TextLine>;
 
-    auto MaxLineWidth(int width) const -> int;
+    auto MaxLineWidthOutlineFont(int width) const -> int;
+    auto MaxLineWidthSVGFont(int width, qreal penWidth) const -> int;
 
     void Update(const QString &qsName, const VPieceLabelData &data, const VContainer *pattern);
     void Update(VAbstractPattern *pDoc, const VContainer *pattern);
@@ -107,12 +117,16 @@ public:
 
 private:
     QFont m_font{};
+    QString m_svgFontFamily{};
+    int m_svgFontPointSize{-1};
     QVector<TextLine> m_liLines{};
 
     static const quint32 streamHeader;
     static const quint16 classVersion;
 
     auto BreakTextIntoLines(const QString &text, const QFont &font, int maxWidth) const -> QStringList;
+    auto BreakTextIntoLines(const QString &text, const VSvgFont &font, int maxWidth, qreal penWidth) const
+        -> QStringList;
 };
 
 #endif // VTEXTMANAGER_H

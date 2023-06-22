@@ -509,8 +509,8 @@ void DialogPatternProperties::BrowseLabelPath()
     QString path = ui->lineEditPieceLabelPath->text();
     if (path.isEmpty())
     {
-        path = VCommonSettings::PrepareLabelTemplates(
-            VAbstractApplication::VApp()->Settings()->GetPathLabelTemplate());
+        path = VValentinaSettings::PrepareLabelTemplates(
+            VAbstractValApplication::VApp()->ValentinaSettings()->GetPathLabelTemplate());
     }
 
     QString filters(tr("Label template") + QLatin1String("(*.xml)"));

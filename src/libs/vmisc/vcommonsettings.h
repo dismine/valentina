@@ -58,9 +58,7 @@ public:
     static auto StandardTemplatesPath() -> QString;
     static auto LabelTemplatesPath() -> QString;
 
-    static auto PrepareStandardTemplates(const QString &currentPath) -> QString;
     static auto PrepareMultisizeTables(const QString &currentPath) -> QString;
-    static auto PrepareLabelTemplates(const QString &currentPath) -> QString;
 
     static auto CastToLayoutExportFormat(qint8 f) -> qint8;
 
@@ -76,17 +74,17 @@ public:
     auto GetPathPattern() const -> QString;
     void SetPathPattern(const QString &value);
 
-    static auto GetDefPathTemplate() -> QString;
-    auto GetPathTemplate() const -> QString;
-    void SetPathTemplate(const QString &value);
-
-    static auto GetDefPathLabelTemplate() -> QString;
-    auto GetPathLabelTemplate() const -> QString;
-    void SetPathLabelTemplate(const QString &value);
-
     static auto GetDefPathManualLayouts() -> QString;
     auto GetPathManualLayouts() const -> QString;
     void SetPathManualLayouts(const QString &value);
+
+    static auto GetDefPathSVGFonts() -> QString;
+    auto GetPathSVGFonts() const -> QString;
+    void SetPathSVGFonts(const QString &value);
+
+    static auto GetDefPathFontCorrections() -> QString;
+    auto GetPathFontCorrections() const -> QString;
+    void SetPathFontCorrections(const QString &value);
 
     auto GetOsSeparator() const -> bool;
     void SetOsSeparator(const bool &value);
@@ -213,6 +211,15 @@ public:
     auto GetLabelFont() const -> QFont;
     void SetLabelFont(const QFont &f);
 
+    auto GetLabelSVGFont() const -> QString;
+    void SetLabelSVGFont(const QString &family);
+
+    auto GetSingleStrokeOutlineFont() const -> bool;
+    void SetSingleStrokeOutlineFont(bool value);
+
+    auto GetSingleLineFonts() const -> bool;
+    void SetSingleLineFonts(bool value);
+
     auto GetPieceLabelFontPointSize() const -> int;
     void SetPieceLabelFontPointSize(int size);
     static auto MinPieceLabelFontPointSize() -> int;
@@ -314,6 +321,9 @@ public:
     auto GetWatermarkCustomColors() const -> QVector<QColor>;
     void SetWatermarkCustomColors(QVector<QColor> colors);
 
+signals:
+    void SVGFontsPathChanged(const QString &oldPath, const QString &newPath);
+
 protected:
     template <typename T>
     static auto GetCachedValue(const QSettings &settings, T &cache, const QString &setting, T defValue, T valueMin,
@@ -321,6 +331,9 @@ protected:
 
     template <class T>
     static auto ValueOrDef(const QSettings &settings, const QString &setting, const T &defValue) -> T;
+
+    static auto PrepareStandardFiles(const QString &currentPath, const QString &standardPath, const QString &defPath)
+        -> QString;
 
 private:
     Q_DISABLE_COPY_MOVE(VCommonSettings) // NOLINT

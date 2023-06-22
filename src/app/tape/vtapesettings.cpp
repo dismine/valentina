@@ -41,6 +41,8 @@ namespace
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsTemplates, (QLatin1String("paths/templates"))) // NOLINT
+
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDataBaseGeometry, (QLatin1String("database/geometry")))   // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchHistoryTape, (QLatin1String("searchHistory/tape"))) // NOLINT
 
@@ -63,6 +65,30 @@ VTapeSettings::VTapeSettings(Format format, Scope scope, const QString &organiza
                              QObject *parent)
   : VCommonSettings(format, scope, organization, application, parent)
 {
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTapeSettings::PrepareStandardTemplates(const QString &currentPath) -> QString
+{
+    return PrepareStandardFiles(currentPath, StandardTemplatesPath(), GetDefPathTemplate());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTapeSettings::GetDefPathTemplate() -> QString
+{
+    return QDir::homePath() + QStringLiteral("/valentina/") + tr("templates");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTapeSettings::GetPathTemplate() const -> QString
+{
+    return value(*settingPathsTemplates, GetDefPathTemplate()).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTapeSettings::SetPathTemplate(const QString &value)
+{
+    setValue(*settingPathsTemplates, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

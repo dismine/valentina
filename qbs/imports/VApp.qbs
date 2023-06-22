@@ -92,7 +92,6 @@ CppApplication {
             }
             return files;
         }
-        fileTags: ["openssl_dist"]
         qbs.install: true
         qbs.installDir: buildconfig.installBinaryPath
     }

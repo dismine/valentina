@@ -136,6 +136,8 @@ win32:RC_FILE = share/resources/valentina.rc
 # INSTALL_MULTISIZE_MEASUREMENTS and INSTALL_STANDARD_TEMPLATES inside tables.pri
 include(../tables.pri)
 
+include(../svgfont.pri)
+
 win32 {
     INSTALL_PDFTOPS += ../../../dist/win/pdftops.exe
 }
@@ -246,6 +248,9 @@ unix{
         label.path = $$PKGDATADIR/labels/
         label.files = $$INSTALL_LABEL_TEMPLATES
 
+        svgfonts.path = $$PKGDATADIR/svgfonts/
+        svgfonts.files = $$INSTALL_SVG_FONTS
+
         INSTALLS += \
             target \
             tape \
@@ -265,7 +270,8 @@ unix{
             translations \
             multisize \
             templates \
-            label
+            label \
+            svgfonts
     }
     macx{
         # Some macx stuff
@@ -319,6 +325,9 @@ unix{
             label.path = $$RESOURCES_DIR/labels/
             label.files = $$INSTALL_LABEL_TEMPLATES
 
+            svgfonts.path = $$RESOURCES_DIR/svgfonts/
+            svgfonts.files = $$INSTALL_SVG_FONTS
+
             icns_resources.path = $$RESOURCES_DIR/
             icns_resources.files += $$PWD/../../../dist/macx/i-measurements.icns
             icns_resources.files += $$PWD/../../../dist/macx/s-measurements.icns
@@ -333,6 +342,7 @@ unix{
                 templates \
                 multisize \
                 label \
+                svgfonts \
                 libraries \
                 tape \
                 puzzle \
@@ -443,6 +453,10 @@ win32:*g++* {
     package_labels.path = $${OUT_PWD}/../../../package/valentina/labels
     package_labels.files += $$INSTALL_LABEL_TEMPLATES
     INSTALLS += package_labels
+
+    package_svgfonts.path = $${OUT_PWD}/../../../package/valentina/svgfonts
+    package_svgfonts.files += $$INSTALL_SVG_FONTS
+    INSTALLS += package_svgfonts
 
     package_translations.path = $${OUT_PWD}/../../../package/valentina/translations
     package_translations.files += \
@@ -594,7 +608,7 @@ DEPENDPATH += $$PWD/../../libs/vtools
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vtools/$${DESTDIR}/vtools.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vtools/$${DESTDIR}/libvtools.a
 
-# VLayout static library  (depend on IFC, VGeometry, VWidgets)
+# VLayout static library  (depend on IFC, VGeometry, VWidgets, VFormat)
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/vlayout/$${DESTDIR}/ -lvlayout
 
 INCLUDEPATH += $$PWD/../../libs/vlayout

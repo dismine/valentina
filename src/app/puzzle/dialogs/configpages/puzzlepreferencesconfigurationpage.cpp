@@ -62,6 +62,10 @@ PuzzlePreferencesConfigurationPage::PuzzlePreferencesConfigurationPage(QWidget *
     ui->graphOutputCheck->setChecked(settings->GetGraphicalOutput());
     ui->checkBoxOpenGLRender->setChecked(settings->IsOpenGLRender());
 
+    // Font
+    ui->checkBoxSingleStrokeOutlineFont->setChecked(settings->GetSingleStrokeOutlineFont());
+    ui->checkBoxSingleLineFonts->setChecked(settings->GetSingleLineFonts());
+
     //----------------------- Update
     ui->checkBoxAutomaticallyCheckUpdates->setChecked(settings->IsAutomaticallyCheckUpdates());
 
@@ -148,6 +152,12 @@ auto PuzzlePreferencesConfigurationPage::Apply() -> QStringList
     {
         settings->SetAutomaticallyCheckUpdates(ui->checkBoxAutomaticallyCheckUpdates->isChecked());
     }
+
+    if (settings->GetSingleStrokeOutlineFont() != ui->checkBoxSingleStrokeOutlineFont->isChecked())
+    {
+        settings->SetSingleStrokeOutlineFont(ui->checkBoxSingleStrokeOutlineFont->isChecked());
+    }
+    settings->SetSingleLineFonts(ui->checkBoxSingleLineFonts->isChecked());
 
     // Tab Scrolling
     settings->SetScrollingDuration(ui->spinBoxDuration->value());

@@ -100,6 +100,7 @@ extern const QString AttrCenter;
 extern const QString AttrBox;
 extern const QString AttrShape;
 extern const QString AttrFont;
+extern const QString AttrSVGFont;
 extern const QString AttrFontSize;
 extern const QString AttrBold;
 extern const QString AttrItalic;

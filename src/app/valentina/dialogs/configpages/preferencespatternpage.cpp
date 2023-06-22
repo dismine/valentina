@@ -32,13 +32,12 @@
 #include "../vmisc/svgfont/vsvgfontdatabase.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vvalentinasettings.h"
-#include "qnamespace.h"
-#include "qnumeric.h"
 #include "svgfont/svgdef.h"
 #include "svgfont/vsvgfont.h"
 #include "svgfont/vsvgfontengine.h"
 #include "ui_preferencespatternpage.h"
 #include "vabstractapplication.h"
+#include <QFontMetrics>
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
@@ -137,6 +136,13 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
         ui->comboBoxLabelFontSize->setCurrentIndex(indexSize);
     }
 
+    InitSingleLineFonts();
+    const qint32 indexFont = ui->comboBoxSingleLineFont->findData(settings->GetLabelSVGFont());
+    ui->comboBoxSingleLineFont->setCurrentIndex(indexFont);
+
+    ui->checkBoxSingleStrokeOutlineFont->setChecked(settings->GetSingleStrokeOutlineFont());
+    ui->checkBoxSingleLineFonts->setChecked(settings->GetSingleLineFonts());
+
     ui->checkBoxRemeberPatternMaterials->setChecked(settings->IsRememberPatternMaterials());
     m_knownMaterials = settings->GetKnownMaterials();
 
@@ -191,6 +197,23 @@ auto PreferencesPatternPage::Apply() -> QStringList
     settings->SetHideMainPath(ui->checkBoxHideMainPath->isChecked());
     settings->SetLabelFont(ui->fontComboBoxLabelFont->currentFont());
     settings->SetPieceLabelFontPointSize(ui->comboBoxLabelFontSize->currentData().toInt());
+    settings->SetLabelSVGFont(ui->comboBoxSingleLineFont->currentData().toString());
+
+    if (settings->GetSingleStrokeOutlineFont() != ui->checkBoxSingleStrokeOutlineFont->isChecked())
+    {
+        settings->SetSingleStrokeOutlineFont(ui->checkBoxSingleStrokeOutlineFont->isChecked());
+
+        VSingleLineOutlineChar corrector(settings->GetLabelFont());
+        if (ui->checkBoxSingleStrokeOutlineFont->isChecked())
+        {
+            corrector.LoadCorrections(settings->GetPathFontCorrections());
+        }
+        else
+        {
+            corrector.ClearCorrectionsCache();
+        }
+    }
+    settings->SetSingleLineFonts(ui->checkBoxSingleLineFonts->isChecked());
 
     if (settings->IsDoublePassmark() != ui->doublePassmarkCheck->isChecked())
     {
@@ -285,12 +308,74 @@ void PreferencesPatternPage::InitLabelFontSizes()
     ui->comboBoxLabelFontSize->clear();
 
     // Get the available font sizes
-    for (auto size : QFontDatabase::standardSizes())
+    QList<int> sizes = QFontDatabase::standardSizes();
+    for (auto size : sizes)
     {
         if (size >= VCommonSettings::MinPieceLabelFontPointSize())
         {
             ui->comboBoxLabelFontSize->addItem(QString::number(size), size);
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PreferencesPatternPage::InitSingleLineFonts()
+{
+    QScreen *primaryScreen = QGuiApplication::primaryScreen();
+
+    // Retrieve the screen's physical DPI values and scale factor
+    const qreal dpiX = primaryScreen->physicalDotsPerInchX();
+    const qreal dpiY = primaryScreen->physicalDotsPerInchY();
+    const qreal scale = primaryScreen->devicePixelRatio();
+
+    int previewWidth = 250;
+    int previewHeight = QFontMetrics(QGuiApplication::font()).height();
+
+    // Calculate the desired image size in physical pixels
+    const int desiredWidthInPixels = qRound(previewWidth * dpiX / 96.0);
+    const int desiredHeightInPixels = qRound(previewHeight * dpiY / 96.0);
+
+    // Adjust the image size based on the screen's scale factor
+    const int previewScaledWidthPixels = qRound(desiredWidthInPixels * scale);
+    const int previewScaledHeightPixels = qRound(desiredHeightInPixels * scale);
+
+    ui->comboBoxSingleLineFont->clear();
+    ui->comboBoxSingleLineFont->setMinimumSize(QSize(previewScaledWidthPixels, 0));
+    ui->comboBoxSingleLineFont->setIconSize(QSize(previewScaledWidthPixels, previewScaledHeightPixels));
+
+    QPen pen(Qt::SolidPattern, 1 * scale, Qt::SolidLine, Qt::RoundCap, Qt::SvgMiterJoin);
+
+    VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
+    QStringList families = db->Families();
+    families.sort();
+
+    for (const auto &family : families)
+    {
+        VSvgFontEngine engine = db->FontEngine(family, SVGFontStyle::Normal, SVGFontWeight::Normal);
+
+        VSvgFont svgFont = engine.Font();
+        if (!svgFont.IsValid())
+        {
+            continue;
+        }
+
+        engine.SetFontPixelSize(previewScaledHeightPixels);
+
+        QPixmap pixmap(previewScaledWidthPixels, previewScaledHeightPixels);
+        pixmap.fill(Qt::white);
+        QPainter painter(&pixmap);
+        painter.setRenderHint(QPainter::Antialiasing);
+        painter.setPen(pen);
+
+        engine.Draw(&painter, QPointF(0, 0), engine.FontSample());
+
+        ui->comboBoxSingleLineFont->addItem(pixmap, svgFont.FamilyName(), svgFont.FamilyName());
+    }
+
+    ui->comboBoxSingleLineFont->setInsertPolicy(QComboBox::NoInsert);
+    if (ui->comboBoxSingleLineFont->count() > 0)
+    {
+        ui->comboBoxSingleLineFont->completer()->setCompletionMode(QCompleter::QCompleter::UnfilteredPopupCompletion);
     }
 }
 

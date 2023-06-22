@@ -40,10 +40,16 @@
 #include <QtMath>
 
 #include "../ifc/exception/vexception.h"
+#include "../vformat/vsinglelineoutlinechar.h"
+#include "../vmisc/compatibility.h"
 #include "../vmisc/def.h"
 #include "../vmisc/literals.h"
+#include "../vmisc/svgfont/svgdef.h"
+#include "../vmisc/svgfont/vsvgfont.h"
+#include "../vmisc/svgfont/vsvgfontdatabase.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "vtextgraphicsitem.h"
+#include <QtMath>
 
 namespace
 {
@@ -134,6 +140,18 @@ VTextGraphicsItem::VTextGraphicsItem(ItemType type, QGraphicsItem *pParent)
 void VTextGraphicsItem::SetFont(const QFont &fnt)
 {
     m_tm.SetFont(fnt);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::SetSVGFontFamily(const QString &fntFamily)
+{
+    m_tm.SetSVGFontFamily(fntFamily);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::SetSVGFontPointSize(int pointSize)
+{
+    m_tm.SetSVGFontPointSize(pointSize);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -706,55 +724,201 @@ void VTextGraphicsItem::RotateLabel(QGraphicsSceneMouseEvent *pME)
 //---------------------------------------------------------------------------------------------------------------------
 void VTextGraphicsItem::PaintLabel(QPainter *painter)
 {
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    if (settings->GetSingleLineFonts())
+    {
+        PaintLabelSVGFont(painter);
+    }
+    else
+    {
+        PaintLabelOutlineFont(painter);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::PaintLabelOutlineFont(QPainter *painter)
+{
     const QRectF boundingRect = this->boundingRect();
     const int iW = qFloor(boundingRect.width());
     QFont fnt = m_tm.GetFont();
     const QVector<TextLine> labelLines = m_tm.GetLabelSourceLines(iW, fnt);
 
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    bool textAsPaths = settings->GetSingleStrokeOutlineFont();
+
     // draw text lines
-    int iY = 0;
+    qreal iY = 0;
+    qreal penWidth = VAbstractApplication::VApp()->Settings()->WidthHairLine();
+
+    if (textAsPaths)
+    {
+        QPen pen = painter->pen();
+        pen.setCapStyle(Qt::RoundCap);
+        pen.setJoinStyle(Qt::RoundJoin);
+        pen.setWidthF(penWidth);
+        painter->setPen(pen);
+
+        iY += penWidth * 2;
+    }
+
+    painter->setClipRect(boundingRect);
+
     for (const auto &tl : labelLines)
     {
         fnt.setPointSize(m_tm.GetFont().pointSize() + tl.m_iFontSize);
         fnt.setBold(tl.m_bold);
         fnt.setItalic(tl.m_italic);
 
-        QString qsText = tl.m_qsText;
-        QFontMetrics fm(fnt);
-
-        int lineHeight = fm.height();
-        if (iY + fm.height() > boundingRect.height())
+        VSingleLineOutlineChar corrector(fnt);
+        if (!corrector.IsPopulated())
         {
-            lineHeight = qFloor(boundingRect.height()) - iY;
+            corrector.LoadCorrections(settings->GetPathFontCorrections());
         }
 
-        painter->setFont(fnt);
-        painter->drawText(0, iY, iW, lineHeight, static_cast<int>(tl.m_eAlign), qsText);
+        QString qsText = tl.m_qsText;
+        QFontMetrics fm(fnt);
+        qreal lineHeight = fm.height();
+
+        if (iY + lineHeight > boundingRect.height())
+        {
+            lineHeight = boundingRect.height() - iY;
+        }
+
+        if (textAsPaths)
+        {
+            QString qsText = tl.m_qsText;
+            qreal dX = 0;
+            if (tl.m_eAlign == 0 || (tl.m_eAlign & Qt::AlignLeft) > 0)
+            {
+                dX = 0;
+            }
+            else if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
+            {
+                dX = (boundingRect.width() - TextWidth(fm, qsText)) / 2;
+            }
+            else if ((tl.m_eAlign & Qt::AlignRight) > 0)
+            {
+                dX = boundingRect.width() - TextWidth(fm, qsText);
+            }
+
+            QPainterPath path;
+            int w = 0;
+            for (auto c : qAsConst(qsText))
+            {
+                path.addPath(corrector.DrawChar(w, static_cast<qreal>(fm.ascent()), c));
+                w += TextWidth(fm, c);
+            }
+
+            QTransform matrix;
+            matrix.translate(dX, iY);
+            path = matrix.map(path);
+
+            painter->save();
+            painter->setBrush(QBrush(Qt::NoBrush));
+            painter->drawPath(path);
+            painter->restore();
+        }
+        else
+        {
+            painter->save();
+            painter->setFont(fnt);
+            painter->drawText(QRectF(0, iY, iW, lineHeight * 2), static_cast<int>(tl.m_eAlign), qsText);
+            painter->restore();
+        }
 
         // check if the next line will go out of bounds
-        if (iY + fm.height() > boundingRect.height())
+        qreal nextStep = textAsPaths ? iY + fm.height() + penWidth * 2 : iY + fm.height();
+        if (nextStep > boundingRect.height())
         {
-            QString errorMsg;
-            switch (m_itemType)
-            {
-                case PatternLabel:
-                    errorMsg = tr("Piece '%1'. Not enough space for pattern info label.").arg(m_pieceName);
-                    break;
-                case PieceLabel:
-                    errorMsg = tr("Piece '%1'. Not enough space for piece info label.").arg(m_pieceName);
-                    break;
-                case Unknown:
-                default:
-                    errorMsg = tr("Piece '%1'. Not enough space for label.").arg(m_pieceName);
-                    break;
-            };
-
-            VAbstractApplication::VApp()->IsPedantic()
-                ? throw VException(errorMsg)
-                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+            NotEnoughSpace();
             break;
         }
 
-        iY += fm.height() + m_tm.GetSpacing();
+        iY = nextStep + m_tm.GetSpacing();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::PaintLabelSVGFont(QPainter *painter)
+{
+    VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
+    VSvgFontEngine engine = db->FontEngine(m_tm.GetSVGFontFamily(), SVGFontStyle::Normal, SVGFontWeight::Normal,
+                                           m_tm.GetSVGFontPointSize());
+
+    VSvgFont svgFont = engine.Font();
+    if (!svgFont.IsValid())
+    {
+        QString errorMsg = tr("Invalid SVG font '%1'. Fallback to outline font.").arg(svgFont.Name());
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        PaintLabelOutlineFont(painter);
+        return;
+    }
+
+    qreal penWidth = VAbstractApplication::VApp()->Settings()->WidthHairLine();
+    QPen pen = painter->pen();
+    pen.setCapStyle(Qt::RoundCap);
+    pen.setJoinStyle(Qt::RoundJoin);
+    pen.setWidthF(penWidth);
+    painter->setPen(pen);
+
+    const QRectF boundingRect = this->boundingRect().adjusted(-penWidth, -penWidth, -penWidth, -penWidth);
+
+    const qreal iW = boundingRect.width();
+    const QVector<TextLine> labelLines = m_tm.GetLabelSourceLines(qFloor(iW), svgFont, penWidth / 2);
+
+    // draw text lines
+    qreal iY = 0;
+    for (const auto &tl : labelLines)
+    {
+        VSvgFont lineFont = svgFont;
+        lineFont.SetBold(tl.m_bold);
+        lineFont.SetItalic(tl.m_italic);
+        lineFont.SetPointSize(svgFont.PointSize() + tl.m_iFontSize);
+
+        engine = db->FontEngine(lineFont);
+
+        QString qsText = tl.m_qsText;
+        qreal lineHeight = engine.FontHeight() + painter->pen().widthF() * 2;
+        if (iY + lineHeight > boundingRect.height())
+        {
+            lineHeight = boundingRect.height() - iY;
+        }
+
+        engine.Draw(painter, QRectF(0, iY, iW, lineHeight), qsText, tl.m_eAlign);
+
+        // check if the next line will go out of bounds
+        qreal nextStep = iY + engine.FontHeight() + painter->pen().widthF() * 2;
+        if (nextStep > boundingRect.height())
+        {
+            NotEnoughSpace();
+            break;
+        }
+
+        iY = nextStep + m_tm.GetSpacing();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::NotEnoughSpace() const
+{
+    QString errorMsg;
+    switch (m_itemType)
+    {
+        case PatternLabel:
+            errorMsg = tr("Piece '%1'. Not enough space for pattern info label.").arg(m_pieceName);
+            break;
+        case PieceLabel:
+            errorMsg = tr("Piece '%1'. Not enough space for piece info label.").arg(m_pieceName);
+            break;
+        case Unknown:
+        default:
+            errorMsg = tr("Piece '%1'. Not enough space for label.").arg(m_pieceName);
+            break;
+    };
+
+    VAbstractApplication::VApp()->IsPedantic()
+        ? throw VException(errorMsg)
+        : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
 }

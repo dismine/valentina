@@ -71,9 +71,10 @@ auto PreferencesPathPage::Apply() -> QStringList
     settings->SetPathMultisizeMeasurements(ui->pathTable->item(1, 1)->text());
     settings->SetPathPattern(ui->pathTable->item(2, 1)->text());
     settings->SetPathLayout(ui->pathTable->item(3, 1)->text());
-    settings->SetPathTemplate(ui->pathTable->item(4, 1)->text());
-    settings->SetPathLabelTemplate(ui->pathTable->item(5, 1)->text());
-    settings->SetPathManualLayouts(ui->pathTable->item(6, 1)->text());
+    settings->SetPathLabelTemplate(ui->pathTable->item(4, 1)->text());
+    settings->SetPathManualLayouts(ui->pathTable->item(5, 1)->text());
+    settings->SetPathSVGFonts(ui->pathTable->item(6, 1)->text());
+    settings->SetPathFontCorrections(ui->pathTable->item(7, 1)->text());
 
     return {}; // No changes those require restart.
 }
@@ -114,14 +115,17 @@ void PreferencesPathPage::DefaultPath()
         case 3: // layout path
             path = VValentinaSettings::GetDefPathLayout();
             break;
-        case 4: // templates
-            path = VCommonSettings::GetDefPathTemplate();
+        case 4: // label templates
+            path = VValentinaSettings::GetDefPathLabelTemplate();
             break;
-        case 5: // label templates
-            path = VCommonSettings::GetDefPathLabelTemplate();
-            break;
-        case 6: // manual layouts
+        case 5: // manual layouts
             path = VCommonSettings::GetDefPathManualLayouts();
+            break;
+        case 6: // svg fonts
+            path = VCommonSettings::GetDefPathSVGFonts();
+            break;
+        case 7: // font corrections
+            path = VCommonSettings::GetDefPathFontCorrections();
             break;
         default:
             break;
@@ -154,14 +158,17 @@ void PreferencesPathPage::EditPath()
         case 3: // layout path
             path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathLayout();
             break;
-        case 4: // templates
-            path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathTemplate();
-            break;
-        case 5: // label templates
+        case 4: // label templates
             path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathLabelTemplate();
             break;
-        case 6: // manual layouts
+        case 5: // manual layouts
             path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathManualLayouts();
+            break;
+        case 6: // svg fonts
+            path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathSVGFonts();
+            break;
+        case 7: // font corrections
+            path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathFontCorrections();
             break;
         default:
             break;
@@ -200,7 +207,7 @@ void PreferencesPathPage::EditPath()
 void PreferencesPathPage::InitTable()
 {
     ui->pathTable->clearContents();
-    ui->pathTable->setRowCount(7);
+    ui->pathTable->setRowCount(8);
     ui->pathTable->setColumnCount(2);
 
     const VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
@@ -234,24 +241,31 @@ void PreferencesPathPage::InitTable()
     }
 
     {
-        ui->pathTable->setItem(4, 0, new QTableWidgetItem(tr("My Templates")));
-        auto *item = new QTableWidgetItem(settings->GetPathTemplate());
-        item->setToolTip(settings->GetPathTemplate());
+        ui->pathTable->setItem(4, 0, new QTableWidgetItem(tr("My label templates")));
+        auto *item = new QTableWidgetItem(settings->GetPathLabelTemplate());
+        item->setToolTip(settings->GetPathLabelTemplate());
         ui->pathTable->setItem(4, 1, item);
     }
 
     {
-        ui->pathTable->setItem(5, 0, new QTableWidgetItem(tr("My label templates")));
-        auto *item = new QTableWidgetItem(settings->GetPathLabelTemplate());
-        item->setToolTip(settings->GetPathLabelTemplate());
+        ui->pathTable->setItem(5, 0, new QTableWidgetItem(tr("My manual layouts")));
+        auto *item = new QTableWidgetItem(settings->GetPathManualLayouts());
+        item->setToolTip(settings->GetPathManualLayouts());
         ui->pathTable->setItem(5, 1, item);
     }
 
     {
-        ui->pathTable->setItem(6, 0, new QTableWidgetItem(tr("My manual layouts")));
-        auto *item = new QTableWidgetItem(settings->GetPathManualLayouts());
-        item->setToolTip(settings->GetPathManualLayouts());
+        ui->pathTable->setItem(6, 0, new QTableWidgetItem(tr("My SVG Fonts")));
+        auto *item = new QTableWidgetItem(settings->GetPathSVGFonts());
+        item->setToolTip(settings->GetPathSVGFonts());
         ui->pathTable->setItem(6, 1, item);
+    }
+
+    {
+        ui->pathTable->setItem(7, 0, new QTableWidgetItem(tr("My font corrections")));
+        auto *item = new QTableWidgetItem(settings->GetPathFontCorrections());
+        item->setToolTip(settings->GetPathFontCorrections());
+        ui->pathTable->setItem(7, 1, item);
     }
 
     ui->pathTable->verticalHeader()->setDefaultSectionSize(20);

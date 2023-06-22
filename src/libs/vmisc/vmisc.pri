@@ -3,6 +3,13 @@
 
 SOURCES += \
     $$PWD/def.cpp \
+    $$PWD/svgfont/svgdef.cpp \
+    $$PWD/svgfont/vsvgfont.cpp \
+    $$PWD/svgfont/vsvgfontdatabase.cpp \
+    $$PWD/svgfont/vsvgfontengine.cpp \
+    $$PWD/svgfont/vsvgfontreader.cpp \
+    $$PWD/svgfont/vsvgglyph.cpp \
+    $$PWD/svgfont/vsvgpathtokenizer.cpp \
     $$PWD/testpath.cpp \
     $$PWD/vabstractvalapplication.cpp \
     $$PWD/vabstractapplication.cpp \
@@ -57,6 +64,16 @@ HEADERS += \
     $$PWD/lambdaconstants.h \
     $$PWD/stable.h \
     $$PWD/def.h \
+    $$PWD/svgfont/svgdef.h \
+    $$PWD/svgfont/vsvgfont.h \
+    $$PWD/svgfont/vsvgfont_p.h \
+    $$PWD/svgfont/vsvgfontdatabase.h \
+    $$PWD/svgfont/vsvgfontengine.h \
+    $$PWD/svgfont/vsvgfontengine_p.h \
+    $$PWD/svgfont/vsvgfontreader.h \
+    $$PWD/svgfont/vsvgglyph.h \
+    $$PWD/svgfont/vsvgglyph_p.h \
+    $$PWD/svgfont/vsvgpathtokenizer.h \
     $$PWD/testpath.h \
     $$PWD/vabstractvalapplication.h \
     $$PWD/vmath.h \

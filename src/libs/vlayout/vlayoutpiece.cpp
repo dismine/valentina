@@ -51,6 +51,8 @@
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/compatibility.h"
 #include "../vmisc/literals.h"
+#include "../vmisc/svgfont/vsvgfontdatabase.h"
+#include "../vmisc/svgfont/vsvgfontengine.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/floatItemData/vgrainlinedata.h"
@@ -60,10 +62,12 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpassmark.h"
 #include "../vpatterndb/vpiecenode.h"
+#include "../vwidgets/global.h"
 #include "vgobject.h"
 #include "vgraphicsfillitem.h"
 #include "vlayoutpiece_p.h"
 #include "vpiecegrainline.h"
+#include "vsinglelineoutlinechar.h"
 #include "vtextmanager.h"
 #include <QLine>
 #include <QPainterPath>
@@ -669,9 +673,8 @@ auto VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContainer *pat
             : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
-    det.SetContourPoints(futureMainPath.result(), VAbstractApplication::VApp()->Settings()->IsPieceShowMainPath()
-                                                      ? false
-                                                      : piece.IsHideMainPath());
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    det.SetContourPoints(futureMainPath.result(), settings->IsPieceShowMainPath() ? false : piece.IsHideMainPath());
     det.SetSeamAllowancePoints(futureSeamAllowance.result(), piece.IsSeamAllowance(), piece.IsSeamAllowanceBuiltIn());
     det.SetInternalPaths(futureInternalPaths.result());
     det.SetPassmarks(futurePassmarks.result());
@@ -688,14 +691,14 @@ auto VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContainer *pat
     det.SetQuantity(data.GetQuantity());
     if (data.IsVisible())
     {
-        det.SetPieceText(piece.GetName(), data, VAbstractApplication::VApp()->Settings()->GetLabelFont(), pattern);
+        det.SetPieceText(piece.GetName(), data, settings->GetLabelFont(), settings->GetLabelSVGFont(), pattern);
     }
 
     const VPatternLabelData &geom = piece.GetPatternLabelData();
     if (geom.IsVisible())
     {
         VAbstractPattern *pDoc = VAbstractValApplication::VApp()->getCurrentDocument();
-        det.SetPatternInfo(pDoc, geom, VAbstractApplication::VApp()->Settings()->GetLabelFont(), pattern);
+        det.SetPatternInfo(pDoc, geom, settings->GetLabelFont(), settings->GetLabelSVGFont(), pattern);
     }
 
     const VGrainlineData &grainlineGeom = piece.GetGrainlineGeometry();
@@ -862,7 +865,7 @@ auto VLayoutPiece::GetPieceText() const -> QStringList
 
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutPiece::SetPieceText(const QString &qsName, const VPieceLabelData &data, const QFont &font,
-                                const VContainer *pattern)
+                                const QString &SVGFontFamily, const VContainer *pattern)
 {
     QPointF ptPos;
     qreal labelWidth = 0;
@@ -890,6 +893,7 @@ void VLayoutPiece::SetPieceText(const QString &qsName, const VPieceLabelData &da
 
     // generate text
     d->m_tmDetail.SetFont(font);
+    d->m_tmDetail.SetSVGFontFamily(SVGFontFamily);
 
     int fntSize = data.GetFontSize();
     if (fntSize == 0)
@@ -897,6 +901,7 @@ void VLayoutPiece::SetPieceText(const QString &qsName, const VPieceLabelData &da
         fntSize = VAbstractApplication::VApp()->Settings()->GetPieceLabelFontPointSize();
     }
     d->m_tmDetail.SetFontSize(fntSize);
+    d->m_tmDetail.SetSVGFontPointSize(fntSize);
 
     d->m_tmDetail.Update(qsName, data, pattern);
 }
@@ -944,7 +949,7 @@ auto VLayoutPiece::GetPatternText() const -> QStringList
 
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutPiece::SetPatternInfo(VAbstractPattern *pDoc, const VPatternLabelData &geom, const QFont &font,
-                                  const VContainer *pattern)
+                                  const QString &SVGFontFamily, const VContainer *pattern)
 {
     QPointF ptPos;
     qreal labelWidth = 0;
@@ -970,6 +975,7 @@ void VLayoutPiece::SetPatternInfo(VAbstractPattern *pDoc, const VPatternLabelDat
 
     // Generate text
     d->m_tmPattern.SetFont(font);
+    d->m_tmPattern.SetSVGFontFamily(SVGFontFamily);
 
     int fntSize = geom.GetFontSize();
     if (fntSize == 0)
@@ -977,6 +983,7 @@ void VLayoutPiece::SetPatternInfo(VAbstractPattern *pDoc, const VPatternLabelDat
         fntSize = VAbstractApplication::VApp()->Settings()->GetPieceLabelFontPointSize();
     }
     d->m_tmPattern.SetFontSize(fntSize);
+    d->m_tmPattern.SetSVGFontPointSize(fntSize);
 
     d->m_tmPattern.Update(pDoc, pattern);
 }
@@ -1563,8 +1570,8 @@ auto VLayoutPiece::GrainlinePath(const GrainlineShape &shape) -> QPainterPath
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiece::CreateLabelStrings(QGraphicsItem *parent, const QVector<QPointF> &labelShape, const VTextManager &tm,
-                                      bool textAsPaths) const
+void VLayoutPiece::LabelStringsSVGFont(QGraphicsItem *parent, const QVector<QPointF> &labelShape,
+                                       const VTextManager &tm, bool textAsPaths) const
 {
     SCASSERT(parent != nullptr)
 
@@ -1573,12 +1580,120 @@ void VLayoutPiece::CreateLabelStrings(QGraphicsItem *parent, const QVector<QPoin
         return;
     }
 
+    VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
+    VSvgFontEngine engine =
+        db->FontEngine(tm.GetSVGFontFamily(), SVGFontStyle::Normal, SVGFontWeight::Normal, tm.GetSVGFontPointSize());
+
+    VSvgFont svgFont = engine.Font();
+    if (!svgFont.IsValid())
+    {
+        QString errorMsg = tr("Invalid SVG font '%1'. Fallback to outline font.").arg(svgFont.Name());
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        LabelStringsOutlineFont(parent, labelShape, tm, textAsPaths);
+        return;
+    }
+
+    qreal penWidth = VAbstractApplication::VApp()->Settings()->WidthHairLine();
+
     const qreal dW = QLineF(labelShape.at(0), labelShape.at(1)).length();
     const qreal dH = QLineF(labelShape.at(1), labelShape.at(2)).length();
     const qreal angle = -QLineF(labelShape.at(0), labelShape.at(1)).angle();
+    qreal dY = penWidth;
+
+    const QVector<TextLine> labelLines = tm.GetLabelSourceLines(qFloor(dW), svgFont, penWidth);
+
+    for (const auto &tl : labelLines)
+    {
+        VSvgFont lineFont = svgFont;
+        lineFont.SetPointSize(svgFont.PointSize() + tl.m_iFontSize);
+        lineFont.SetBold(tl.m_bold);
+        lineFont.SetItalic(tl.m_italic);
+
+        engine = db->FontEngine(lineFont);
+
+        if (dY + engine.FontHeight() + penWidth > dH)
+        {
+            break;
+        }
+
+        QString qsText = tl.m_qsText;
+        qreal dX = 0;
+        if (tl.m_eAlign == 0 || (tl.m_eAlign & Qt::AlignLeft) > 0)
+        {
+            dX = 0;
+        }
+        else if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
+        {
+            dX = (dW - engine.TextWidth(qsText, penWidth)) / 2;
+        }
+        else if ((tl.m_eAlign & Qt::AlignRight) > 0)
+        {
+            dX = dW - engine.TextWidth(qsText, penWidth);
+        }
+
+        // set up the rotation around top-left corner matrix
+        QTransform labelMatrix;
+        labelMatrix.translate(labelShape.at(0).x(), labelShape.at(0).y());
+        if (d->m_mirror)
+        {
+            labelMatrix.scale(-1, 1);
+            labelMatrix.rotate(-angle);
+            labelMatrix.translate(-dW, 0);
+            labelMatrix.translate(dX, dY); // Each string has own position
+        }
+        else
+        {
+            labelMatrix.rotate(angle);
+            labelMatrix.translate(dX, dY); // Each string has own position
+        }
+
+        labelMatrix *= d->m_matrix;
+
+        auto *item = new QGraphicsPathItem(parent);
+
+        QPen pen = item->pen();
+        pen.setCapStyle(Qt::RoundCap);
+        pen.setJoinStyle(Qt::RoundJoin);
+        pen.setWidthF(penWidth);
+        item->setPen(pen);
+
+        item->setPath(engine.DrawPath(QPointF(), qsText));
+        item->setBrush(QBrush(Qt::NoBrush));
+        item->setTransform(labelMatrix);
+
+        dY += engine.FontHeight() + penWidth + tm.GetSpacing();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::LabelStringsOutlineFont(QGraphicsItem *parent, const QVector<QPointF> &labelShape,
+                                           const VTextManager &tm, bool textAsPaths) const
+{
+    SCASSERT(parent != nullptr)
+
+    if (labelShape.count() <= 2)
+    {
+        return;
+    }
+
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+
+    const qreal dW = QLineF(labelShape.at(0), labelShape.at(1)).length();
+    const qreal dH = QLineF(labelShape.at(1), labelShape.at(2)).length();
+    const qreal angle = -QLineF(labelShape.at(0), labelShape.at(1)).angle();
+    qreal penWidth = settings->WidthHairLine();
     qreal dY = 0;
 
     const QVector<TextLine> labelLines = tm.GetLabelSourceLines(qFloor(dW), tm.GetFont());
+
+    if (settings->GetSingleStrokeOutlineFont())
+    {
+        textAsPaths = true;
+
+        dY += penWidth;
+    }
 
     for (const auto &tl : labelLines)
     {
@@ -1587,23 +1702,17 @@ void VLayoutPiece::CreateLabelStrings(QGraphicsItem *parent, const QVector<QPoin
         fnt.setBold(tl.m_bold);
         fnt.setItalic(tl.m_italic);
 
+        VSingleLineOutlineChar corrector(fnt);
+        if (settings->GetSingleStrokeOutlineFont() && !corrector.IsPopulated())
+        {
+            corrector.LoadCorrections(settings->GetPathFontCorrections());
+        }
+
         QFontMetrics fm(fnt);
 
-        if (textAsPaths)
+        if (dY + fm.height() > dH)
         {
-            dY += fm.height();
-
-            if (dY > dH)
-            {
-                break;
-            }
-        }
-        else
-        {
-            if (dY + fm.height() > dH)
-            {
-                break;
-            }
+            break;
         }
 
         QString qsText = tl.m_qsText;
@@ -1642,14 +1751,34 @@ void VLayoutPiece::CreateLabelStrings(QGraphicsItem *parent, const QVector<QPoin
         if (textAsPaths)
         {
             QPainterPath path;
-            path.addText(0, -static_cast<qreal>(fm.ascent()) / 6., fnt, qsText);
+
+            if (settings->GetSingleStrokeOutlineFont())
+            {
+                int w = 0;
+                for (auto c : qAsConst(qsText))
+                {
+                    path.addPath(corrector.DrawChar(w, static_cast<qreal>(fm.ascent()), c));
+                    w += TextWidth(fm, c);
+                }
+            }
+            else
+            {
+                path.addText(0, static_cast<qreal>(fm.ascent()), fnt, qsText);
+            }
 
             auto *item = new QGraphicsPathItem(parent);
             item->setPath(path);
-            item->setBrush(QBrush(Qt::black));
+
+            QPen itemPen = item->pen();
+            itemPen.setColor(Qt::black);
+            itemPen.setCapStyle(Qt::RoundCap);
+            itemPen.setJoinStyle(Qt::RoundJoin);
+            itemPen.setWidthF(penWidth);
+            item->setPen(itemPen);
+            item->setBrush(settings->GetSingleStrokeOutlineFont() ? QBrush(Qt::NoBrush) : QBrush(Qt::black));
             item->setTransform(labelMatrix);
 
-            dY += tm.GetSpacing();
+            dY += fm.height() + penWidth + tm.GetSpacing();
         }
         else
         {
@@ -1660,6 +1789,21 @@ void VLayoutPiece::CreateLabelStrings(QGraphicsItem *parent, const QVector<QPoin
 
             dY += (fm.height() + tm.GetSpacing());
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::CreateLabelStrings(QGraphicsItem *parent, const QVector<QPointF> &labelShape, const VTextManager &tm,
+                                      bool textAsPaths) const
+{
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    if (settings->GetSingleLineFonts())
+    {
+        LabelStringsSVGFont(parent, labelShape, tm, textAsPaths);
+    }
+    else
+    {
+        LabelStringsOutlineFont(parent, labelShape, tm, textAsPaths);
     }
 }
 

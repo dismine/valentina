@@ -122,6 +122,8 @@ private:
     QVector<QGraphicsSimpleTextItem *> m_labelTextItems{};
 
     void InitLabels();
+    void InitPieceLabelSVGFont(const QVector<QPointF> &labelShape, const VTextManager &tm);
+    void InitPieceLabelOutlineFont(const QVector<QPointF> &labelShape, const VTextManager &tm);
     void InitPieceLabel(const QVector<QPointF> &labelShape, const VTextManager &tm);
     void InitGrainlineItem();
     void PaintPiece(QPainter *painter = nullptr);

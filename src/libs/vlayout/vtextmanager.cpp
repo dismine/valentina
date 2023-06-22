@@ -39,9 +39,13 @@
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/compatibility.h"
+#include "../vmisc/svgfont/vsvgfontdatabase.h"
+#include "../vmisc/svgfont/vsvgfontengine.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
+#include <QtMath>
+#include "svgfont/vsvgfont.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 9, 0)
 #include "../vmisc/vdatastreamenum.h"
@@ -83,6 +87,49 @@ auto SplitTextByWidth(const QString &text, const QFont &font, int maxWidth) -> Q
     {
         QChar currentChar = text.at(endIndex);
         const int charWidth = TextWidth(fontMetrics, currentChar);
+
+        if (lineWidth + charWidth > maxWidth)
+        {
+            if (endIndex > 0)
+            {
+                substrings.append(text.mid(0, endIndex));
+            }
+
+            if (endIndex < textLength)
+            {
+                substrings.append(text.mid(endIndex));
+            }
+
+            break;
+        }
+
+        lineWidth += charWidth;
+    }
+
+    return substrings;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto SplitTextByWidth(const QString &text, const VSvgFont &font, int maxWidth, qreal penWidth) -> QStringList
+{
+    VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
+    VSvgFontEngine engine = db->FontEngine(font);
+
+    if (engine.TextWidth(text, penWidth) <= maxWidth)
+    {
+        return {text};
+    }
+
+    QStringList substrings;
+    substrings.reserve(2);
+
+    const int textLength = static_cast<int>(text.length());
+    qreal lineWidth = 0;
+
+    for (int endIndex = 0; endIndex < textLength; ++endIndex)
+    {
+        QChar currentChar = text.at(endIndex);
+        const qreal charWidth = engine.TextWidth(currentChar, penWidth);
 
         if (lineWidth + charWidth > maxWidth)
         {
@@ -169,7 +216,7 @@ auto operator>>(QDataStream &dataStream, TextLine &data) -> QDataStream &
 }
 
 const quint32 VTextManager::streamHeader = 0x47E6A9EE; // CRC-32Q string "VTextManager"
-const quint16 VTextManager::classVersion = 1;
+const quint16 VTextManager::classVersion = 2;
 
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------
@@ -182,6 +229,8 @@ auto operator<<(QDataStream &dataStream, const VTextManager &data) -> QDataStrea
     dataStream << data.m_liLines;
 
     // Added in classVersion = 2
+    dataStream << data.m_svgFontFamily;
+    dataStream << data.m_svgFontPointSize;
 
     return dataStream;
 }
@@ -216,10 +265,11 @@ auto operator>>(QDataStream &dataStream, VTextManager &data) -> QDataStream &
     dataStream >> data.m_font;
     dataStream >> data.m_liLines;
 
-    //    if (actualClassVersion >= 2)
-    //    {
-
-    //    }
+    if (actualClassVersion >= 2)
+    {
+        dataStream >> data.m_svgFontFamily;
+        dataStream >> data.m_svgFontPointSize;
+    }
 
     return dataStream;
 }
@@ -532,6 +582,32 @@ auto VTextManager::GetFont() const -> const QFont &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VTextManager::SetSVGFontFamily(const QString &fontFamily)
+{
+    m_svgFontFamily = fontFamily;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTextManager::GetSVGFontFamily() const -> QString
+{
+    return m_svgFontFamily;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextManager::SetSVGFontPointSize(int pointSize)
+{
+    m_svgFontPointSize = pointSize < VCommonSettings::MinPieceLabelFontPointSize()
+                             ? VCommonSettings::MinPieceLabelFontPointSize()
+                             : pointSize;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTextManager::GetSVGFontPointSize() const -> int
+{
+    return m_svgFontPointSize;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SetFontSize sets the font size
  * @param iFS font size in pixels
@@ -613,7 +689,55 @@ auto VTextManager::GetLabelSourceLines(int width, const QFont &font) const -> QV
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VTextManager::MaxLineWidth(int width) const -> int
+auto VTextManager::GetLabelSourceLines(int width, const VSvgFont &font, qreal penWidth) const -> QVector<TextLine>
+{
+    if (!font.IsValid())
+    {
+        return m_liLines;
+    }
+
+    VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
+    QVector<TextLine> lines;
+    lines.reserve(m_liLines.size());
+    int fSize = m_font.pointSize();
+
+    for (const auto &tl : m_liLines)
+    {
+        VSvgFont lineFont = font;
+        lineFont.SetPointSize(fSize + tl.m_iFontSize);
+        lineFont.SetBold(tl.m_bold);
+        lineFont.SetItalic(tl.m_italic);
+
+        VSvgFontEngine engine = db->FontEngine(lineFont);
+
+        VSvgFont svgFont = engine.Font();
+        if (!svgFont.IsValid())
+        {
+            lines.append(tl);
+            continue;
+        }
+
+        QString qsText = tl.m_qsText;
+        if (engine.TextWidth(qsText, penWidth) > width)
+        {
+            const QStringList brokeLines = BreakTextIntoLines(qsText, svgFont, width, penWidth);
+            for (const auto &lineText : brokeLines)
+            {
+                TextLine line = tl;
+                line.m_qsText = lineText;
+                lines.append(line);
+            }
+        }
+        else
+        {
+            lines.append(tl);
+        }
+    }
+    return lines;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTextManager::MaxLineWidthOutlineFont(int width) const -> int
 {
     int maxWidth = 0;
     for (int i = 0; i < m_liLines.count(); ++i)
@@ -635,6 +759,39 @@ auto VTextManager::MaxLineWidth(int width) const -> int
         }
 
         maxWidth = qMax(TextWidth(fm, qsText), maxWidth);
+    }
+
+    return maxWidth;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTextManager::MaxLineWidthSVGFont(int width, qreal penWidth) const -> int
+{
+    VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
+    VSvgFontEngine engine =
+        db->FontEngine(m_svgFontFamily, SVGFontStyle::Normal, SVGFontWeight::Normal, m_svgFontPointSize);
+    VSvgFont svgFont = engine.Font();
+
+    int maxWidth = 0;
+    for (int i = 0; i < m_liLines.count(); ++i)
+    {
+        const TextLine &tl = m_liLines.at(i);
+
+        VSvgFont fnt = svgFont;
+        fnt.SetPointSize(fnt.PointSize() + tl.m_iFontSize);
+        fnt.SetBold(tl.m_bold);
+        fnt.SetItalic(tl.m_italic);
+
+        engine = db->FontEngine(fnt);
+
+        QString qsText = tl.m_qsText;
+
+        if (engine.TextWidth(qsText, penWidth) > width)
+        {
+            qsText = engine.ElidedText(qsText, SVGTextElideMode::ElideMiddle, width);
+        }
+
+        maxWidth = qMax(qRound(engine.TextWidth(qsText, penWidth)), maxWidth);
     }
 
     return maxWidth;
@@ -759,6 +916,106 @@ auto VTextManager::BreakTextIntoLines(const QString &text, const QFont &font, in
             else
             {
                 const int width = TextWidth(fontMetrics, ConstFirst(subWords));
+                const int tWidth = !currentLine.isEmpty() ? currentLineWidth + spaceWidth + width : width;
+                AppendWord(ConstFirst(subWords), tWidth);
+                lines.append(currentLine);
+
+                if (subWords.size() == 2)
+                {
+                    currentLine.clear();
+                    currentLineWidth = 0;
+
+                    // Insert the item after the current item
+                    iterator.insert(ConstLast(subWords));
+                    iterator.previous();
+                }
+            }
+        }
+    }
+
+    // Add the last line
+    if (!currentLine.isEmpty())
+    {
+        lines.append(currentLine);
+    }
+
+    return lines;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTextManager::BreakTextIntoLines(const QString &text, const VSvgFont &font, int maxWidth, qreal penWidth) const
+    -> QStringList
+{
+    VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
+
+    VSvgFontEngine engine = db->FontEngine(font);
+
+    VSvgFont svgFont = engine.Font();
+    if (!svgFont.IsValid())
+    {
+        return {text};
+    }
+
+    QStringList words = text.split(' ');
+
+    QString currentLine;
+    int currentLineWidth = 0;
+    const int spaceWidth = qRound(engine.TextWidth(QChar(' ')));
+    const float tolerance = 0.3F;
+
+    QStringList lines;
+    lines.reserve(words.size());
+    QMutableListIterator<QString> iterator(words);
+
+    auto AppendWord = [&currentLine, &currentLineWidth](const QString &word, int totalWidth)
+    {
+        if (!currentLine.isEmpty())
+        {
+            currentLine += QChar(' ');
+        }
+        currentLine += word;
+        currentLineWidth = totalWidth;
+    };
+
+    while (iterator.hasNext())
+    {
+        const QString &word = iterator.next();
+        int wordWidth = qRound(engine.TextWidth(word, penWidth));
+        int totalWidth = !currentLine.isEmpty() ? currentLineWidth + spaceWidth + wordWidth : wordWidth;
+
+        if (totalWidth <= maxWidth)
+        {
+            // Append the word to the current line
+            AppendWord(word, totalWidth);
+        }
+        else if ((maxWidth - currentLineWidth) <= qFloor(static_cast<float>(maxWidth) * tolerance) &&
+                 maxWidth >= wordWidth)
+        {
+            // Start a new line with the word if it doesn't exceed the tolerance
+            lines.append(currentLine);
+            currentLine = word;
+            currentLineWidth = wordWidth;
+        }
+        else
+        {
+            // Word is too long, force line break
+            if (currentLineWidth + spaceWidth + engine.TextWidth(word.at(0), penWidth) > maxWidth)
+            {
+                lines.append(currentLine);
+                currentLine.clear();
+                currentLineWidth = 0;
+            }
+
+            const int subWordWidth = !currentLine.isEmpty() ? maxWidth - (currentLineWidth + spaceWidth) : maxWidth;
+            const QStringList subWords = SplitTextByWidth(word, svgFont, subWordWidth, penWidth);
+
+            if (subWords.isEmpty() || subWords.size() > 2)
+            {
+                AppendWord(word, totalWidth);
+            }
+            else
+            {
+                const int width = qRound(engine.TextWidth(ConstFirst(subWords), penWidth));
                 const int tWidth = !currentLine.isEmpty() ? currentLineWidth + spaceWidth + width : width;
                 AppendWord(ConstFirst(subWords), tWidth);
                 lines.append(currentLine);

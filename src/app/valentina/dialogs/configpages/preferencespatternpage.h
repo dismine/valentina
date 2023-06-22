@@ -66,6 +66,7 @@ private:
 
     void InitLabelDateTimeFormats();
     void InitLabelFontSizes();
+    void InitSingleLineFonts();
     static void InitComboBoxFormats(QComboBox *box, const QStringList &items, const QString &currentFormat);
     void InitUnits();
     void RetranslateUi();

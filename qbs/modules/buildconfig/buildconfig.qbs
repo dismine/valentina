@@ -191,6 +191,7 @@ Module {
         if (qbs.toolchain.contains("gcc")) {
             if (qbs.toolchain.contains("clang")) {
                 debugFlags.push(
+                    "-gdwarf-4",
                     "-fparse-all-comments",
                     "-Wabi",
                     "-Wabstract-final-class",

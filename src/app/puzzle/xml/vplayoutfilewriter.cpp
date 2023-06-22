@@ -384,6 +384,7 @@ void VPLayoutFileWriter::WriteLabelLines(const VTextManager &tm)
 {
     writeStartElement(ML::TagLines);
     SetAttribute(ML::AttrFont, tm.GetFont().toString());
+    SetAttribute(ML::AttrSVGFont, QStringLiteral("%1,%2").arg(tm.GetSVGFontFamily(), tm.GetSVGFontPointSize()));
 
     for (int i = 0; i < tm.GetSourceLinesCount(); ++i)
     {

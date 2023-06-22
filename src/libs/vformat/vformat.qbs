@@ -8,6 +8,8 @@ VLib {
         "vmeasurements.cpp",
         "vlabeltemplate.cpp",
         "vpatternrecipe.cpp",
+        "vsinglelineoutlinechar.cpp",
+        "vsinglelineoutlinechar.h",
         "vwatermark.cpp",
         "vdimensions.h",
         "vmeasurements.h",

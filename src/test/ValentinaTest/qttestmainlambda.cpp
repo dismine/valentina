@@ -109,6 +109,7 @@ auto main(int argc, char **argv) -> int
     ASSERT_TEST(new TST_VToolUnionDetails());
     ASSERT_TEST(new TST_DXF());
     ASSERT_TEST(new TST_XSDShema());
+    ASSERT_TEST(new TST_VSVGPathTokenizer());
 
     return status;
 }

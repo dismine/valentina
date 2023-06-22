@@ -65,6 +65,7 @@ RESOURCES += \
     share/resources/cursor.qrc \
     share/resources/puzzleicon.qrc
 
+include(../svgfont.pri)
 include(../translations.pri)
 
 # Set "make install" command for Unix-like systems.
@@ -191,7 +192,7 @@ noRunPath{ # For enable run qmake with CONFIG+=noRunPath
 #win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vtools/$${DESTDIR}/vtools.lib
 #else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vtools/$${DESTDIR}/libvtools.a
 
-# VLayout static library (depend on VGeometry, VFormat, VWidgets)
+# VLayout static library (depend on VGeometry, VFormat, VWidgets, VFormat)
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/vlayout/$${DESTDIR}/ -lvlayout
 
 INCLUDEPATH += $$PWD/../../libs/vlayout

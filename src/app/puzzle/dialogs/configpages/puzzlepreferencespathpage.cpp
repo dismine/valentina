@@ -62,11 +62,8 @@ PuzzlePreferencesPathPage::~PuzzlePreferencesPathPage()
 void PuzzlePreferencesPathPage::Apply()
 {
     VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
-    settings->SetPathIndividualMeasurements(ui->pathTable->item(0, 1)->text());
-    settings->SetPathMultisizeMeasurements(ui->pathTable->item(1, 1)->text());
-    settings->SetPathPattern(ui->pathTable->item(2, 1)->text());
-    settings->SetPathTemplate(ui->pathTable->item(3, 1)->text());
-    settings->SetPathManualLayouts(ui->pathTable->item(4, 1)->text());
+    settings->SetPathManualLayouts(ui->pathTable->item(0, 1)->text());
+    settings->SetPathSVGFonts(ui->pathTable->item(1, 1)->text());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -92,20 +89,11 @@ void PuzzlePreferencesPathPage::DefaultPath()
     QString path;
     switch (row)
     {
-        case 0: // individual measurements
-            path = VCommonSettings::GetDefPathIndividualMeasurements();
-            break;
-        case 1: // multisize measurements
-            path = VCommonSettings::GetDefPathMultisizeMeasurements();
-            break;
-        case 2: // pattern path
-            path = VCommonSettings::GetDefPathPattern();
-            break;
-        case 3: // templates
-            path = VCommonSettings::GetDefPathTemplate();
-            break;
-        case 4: // layouts
+        case 0: // layouts
             path = VCommonSettings::GetDefPathManualLayouts();
+            break;
+        case 1: // svg fonts
+            path = VCommonSettings::GetDefPathSVGFonts();
             break;
         default:
             break;
@@ -125,21 +113,11 @@ void PuzzlePreferencesPathPage::EditPath()
     QString path;
     switch (row)
     {
-        case 0: // individual measurements
-            path = VPApplication::VApp()->PuzzleSettings()->GetPathIndividualMeasurements();
-            break;
-        case 1: // multisize measurements
-            path = VPApplication::VApp()->PuzzleSettings()->GetPathMultisizeMeasurements();
-            path = VCommonSettings::PrepareMultisizeTables(path);
-            break;
-        case 2: // pattern path
-            path = VPApplication::VApp()->PuzzleSettings()->GetPathPattern();
-            break;
-        case 3: // templates
-            path = VPApplication::VApp()->PuzzleSettings()->GetPathTemplate();
-            break;
-        case 4: // layouts
+        case 0: // layouts
             path = VPApplication::VApp()->PuzzleSettings()->GetPathManualLayouts();
+            break;
+        case 1: // svg fonts
+            path = VPApplication::VApp()->PuzzleSettings()->GetPathSVGFonts();
             break;
         default:
             break;
@@ -174,44 +152,23 @@ void PuzzlePreferencesPathPage::EditPath()
 void PuzzlePreferencesPathPage::InitTable()
 {
     ui->pathTable->clearContents();
-    ui->pathTable->setRowCount(5);
+    ui->pathTable->setRowCount(2);
     ui->pathTable->setColumnCount(2);
 
     const VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
 
     {
-        ui->pathTable->setItem(0, 0, new QTableWidgetItem(tr("My Individual Measurements")));
-        auto *item = new QTableWidgetItem(settings->GetPathIndividualMeasurements());
-        item->setToolTip(settings->GetPathIndividualMeasurements());
+        ui->pathTable->setItem(0, 0, new QTableWidgetItem(tr("My Layouts")));
+        auto *item = new QTableWidgetItem(settings->GetPathManualLayouts());
+        item->setToolTip(settings->GetPathManualLayouts());
         ui->pathTable->setItem(0, 1, item);
     }
 
     {
-        ui->pathTable->setItem(1, 0, new QTableWidgetItem(tr("My Multisize Measurements")));
-        auto *item = new QTableWidgetItem(settings->GetPathMultisizeMeasurements());
-        item->setToolTip(settings->GetPathMultisizeMeasurements());
+        ui->pathTable->setItem(1, 0, new QTableWidgetItem(tr("My SVG Fonts")));
+        auto *item = new QTableWidgetItem(settings->GetPathSVGFonts());
+        item->setToolTip(settings->GetPathSVGFonts());
         ui->pathTable->setItem(1, 1, item);
-    }
-
-    {
-        ui->pathTable->setItem(2, 0, new QTableWidgetItem(tr("My Patterns")));
-        auto *item = new QTableWidgetItem(settings->GetPathPattern());
-        item->setToolTip(settings->GetPathPattern());
-        ui->pathTable->setItem(2, 1, item);
-    }
-
-    {
-        ui->pathTable->setItem(3, 0, new QTableWidgetItem(tr("My Templates")));
-        auto *item = new QTableWidgetItem(settings->GetPathTemplate());
-        item->setToolTip(settings->GetPathTemplate());
-        ui->pathTable->setItem(3, 1, item);
-    }
-
-    {
-        ui->pathTable->setItem(4, 0, new QTableWidgetItem(tr("My Layouts")));
-        auto *item = new QTableWidgetItem(settings->GetPathManualLayouts());
-        item->setToolTip(settings->GetPathManualLayouts());
-        ui->pathTable->setItem(4, 1, item);
     }
 
     ui->pathTable->verticalHeader()->setDefaultSectionSize(20);

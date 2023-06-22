@@ -203,6 +203,8 @@ private slots:
 
     void ActionAddBackgroundImage();
 
+    void ActionExportFontCorrections();
+
     void ClosedDialogUnionDetails(int result);
     void ClosedDialogDuplicateDetail(int result);
     void ClosedDialogGroup(int result);

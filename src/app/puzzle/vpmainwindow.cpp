@@ -2520,7 +2520,7 @@ void VPMainWindow::ExportPdfTiledFile(const VPExportData &data)
         bool firstPage = true;
         for (const auto &sheet : data.sheets)
         {
-            if (not GeneratePdfTiledFile(sheet, data.showTilesScheme, data.showGrainline, &painter, printer, firstPage))
+            if (not GeneratePdfTiledFile(sheet, data, &painter, printer, firstPage))
             {
                 break;
             }
@@ -2538,8 +2538,7 @@ void VPMainWindow::ExportPdfTiledFile(const VPExportData &data)
 
             QPainter painter;
             bool firstPage = true;
-            if (not GeneratePdfTiledFile(data.sheets.at(i), data.showTilesScheme, data.showGrainline, &painter, printer,
-                                         firstPage))
+            if (not GeneratePdfTiledFile(data.sheets.at(i), data, &painter, printer, firstPage))
             {
                 break;
             }
@@ -2548,26 +2547,27 @@ void VPMainWindow::ExportPdfTiledFile(const VPExportData &data)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet, bool showTilesScheme, bool showGrainline,
-                                        QPainter *painter, const QSharedPointer<QPrinter> &printer,
-                                        bool &firstPage) -> bool
+auto VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet, const VPExportData &data, QPainter *painter,
+                                        const QSharedPointer<QPrinter> &printer, bool &firstPage) -> bool
 {
     SCASSERT(not sheet.isNull())
     SCASSERT(painter != nullptr)
     SCASSERT(not printer.isNull())
 
     sheet->SceneData()->PrepareForExport(); // Go first because recreates pieces
-    VLayoutExporter::PrepareGrainlineForExport(sheet->SceneData()->GraphicsPiecesAsItems(), showGrainline);
+    VLayoutExporter::PrepareGrainlineForExport(sheet->SceneData()->GraphicsPiecesAsItems(), data.showGrainline);
     m_layout->TileFactory()->RefreshTileInfos();
     m_layout->TileFactory()->RefreshWatermarkData();
-    sheet->SceneData()->SetTextAsPaths(false);
+    sheet->SceneData()->SetTextAsPaths(data.textAsPaths);
 
-    auto Clean = qScopeGuard([sheet]()
-    {
-        sheet->SceneData()->CleanAfterExport(); // Will restore the grainlines automatically
-    });
+    auto Clean = qScopeGuard(
+        [sheet, data]()
+        {
+            sheet->SceneData()->SetTextAsPaths(false);
+            sheet->SceneData()->CleanAfterExport(); // Will restore the grainlines automatically
+        });
 
-    if (showTilesScheme)
+    if (data.showTilesScheme)
     {
         SetPrinterTiledPageSettings(printer, m_layout, sheet, sheet->GetSheetOrientation(), true);
     }
@@ -2590,7 +2590,7 @@ auto VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet, bool showTilesS
         painter->setRenderHint(QPainter::Antialiasing, true);
     }
 
-    if (showTilesScheme)
+    if (data.showTilesScheme)
     {
         if (not DrawTilesScheme(printer.data(), painter, sheet, firstPage))
         {
@@ -3034,9 +3034,16 @@ auto VPMainWindow::PrintLayoutTiledSheetPage(QPrinter *printer, QPainter &painte
                                              bool firstPage) -> bool
 {
     page.sheet->SceneData()->PrepareForExport();
-    page.sheet->SceneData()->SetTextAsPaths(false);
 
-    auto clean = qScopeGuard([page](){ page.sheet->SceneData()->CleanAfterExport(); });
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    page.sheet->SceneData()->SetTextAsPaths(settings->GetSingleLineFonts() || settings->GetSingleStrokeOutlineFont());
+
+    auto clean = qScopeGuard(
+        [page]()
+        {
+            page.sheet->SceneData()->SetTextAsPaths(false);
+            page.sheet->SceneData()->CleanAfterExport();
+        });
 
     if (firstPage)
     {

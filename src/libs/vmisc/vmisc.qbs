@@ -130,6 +130,30 @@ VLib {
     }
 
     Group {
+        name: "svgfont"
+        prefix: "svgfont/"
+        files: [
+            "svgdef.cpp",
+            "svgdef.h",
+            "vsvgfont.cpp",
+            "vsvgfont.h",
+            "vsvgfont_p.h",
+            "vsvgfontdatabase.cpp",
+            "vsvgfontdatabase.h",
+            "vsvgfontengine.cpp",
+            "vsvgfontengine.h",
+            "vsvgfontengine_p.h",
+            "vsvgfontreader.cpp",
+            "vsvgfontreader.h",
+            "vsvgglyph.cpp",
+            "vsvgglyph.h",
+            "vsvgglyph_p.h",
+            "vsvgpathtokenizer.cpp",
+            "vsvgpathtokenizer.h",
+        ]
+    }
+
+    Group {
         name: "Resources"
         prefix: "share/resources/"
         files: [

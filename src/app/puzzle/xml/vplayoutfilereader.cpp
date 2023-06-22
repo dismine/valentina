@@ -38,6 +38,8 @@
 #include "../vlayout/vtextmanager.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/floatItemData/floatitemdef.h"
+#include "compatibility.h"
+#include "svgfont/vsvgfont.h"
 #include "vpiecegrainline.h"
 #include "vplayoutliterals.h"
 #include <QFont>
@@ -872,6 +874,17 @@ auto VPLayoutFileReader::ReadLabelLines() -> VTextManager
     QFont f;
     f.fromString(ReadAttributeEmptyString(attribs, ML::AttrFont));
     text.SetFont(f);
+
+    QStringList svgFontData = ReadAttributeEmptyString(attribs, ML::AttrSVGFont).split(',');
+    if (!svgFontData.isEmpty())
+    {
+        text.SetSVGFontFamily(ConstFirst(svgFontData));
+
+        if (svgFontData.size() > 1)
+        {
+            text.SetSVGFontPointSize(svgFontData.at(1).toInt());
+        }
+    }
 
     while (readNextStartElement())
     {

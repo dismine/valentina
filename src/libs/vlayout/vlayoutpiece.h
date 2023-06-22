@@ -120,12 +120,12 @@ public:
     auto GetPieceTextPosition() const -> QPointF;
     auto GetPieceText() const -> QStringList;
     void SetPieceText(const QString &qsName, const VPieceLabelData &data, const QFont &font,
-                      const VContainer *pattern);
+                      const QString &SVGFontFamily, const VContainer *pattern);
 
     auto GetPatternTextPosition() const -> QPointF;
     auto GetPatternText() const -> QStringList;
     void SetPatternInfo(VAbstractPattern *pDoc, const VPatternLabelData &geom, const QFont &font,
-                        const VContainer *pattern);
+                        const QString &SVGFontFamily, const VContainer *pattern);
 
     void SetGrainline(const VGrainlineData &geom, const VContainer *pattern);
     auto GetGrainline() const -> VPieceGrainline;
@@ -223,6 +223,11 @@ private:
 
     Q_REQUIRED_RESULT auto GetMainItem() const -> QGraphicsPathItem *;
     Q_REQUIRED_RESULT auto GetMainPathItem() const -> QGraphicsPathItem *;
+
+    void LabelStringsSVGFont(QGraphicsItem *parent, const QVector<QPointF> &labelShape, const VTextManager &tm,
+                             bool textAsPaths) const;
+    void LabelStringsOutlineFont(QGraphicsItem *parent, const QVector<QPointF> &labelShape, const VTextManager &tm,
+                                 bool textAsPaths) const;
 
     void CreateLabelStrings(QGraphicsItem *parent, const QVector<QPointF> &labelShape, const VTextManager &tm,
                             bool textAsPaths) const;

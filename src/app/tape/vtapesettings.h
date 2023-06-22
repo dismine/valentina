@@ -48,6 +48,12 @@ public:
                   QObject *parent = nullptr);
     ~VTapeSettings() override = default;
 
+    static auto PrepareStandardTemplates(const QString &currentPath) -> QString;
+
+    static auto GetDefPathTemplate() -> QString;
+    auto GetPathTemplate() const -> QString;
+    void SetPathTemplate(const QString &value);
+
     auto GetDataBaseGeometry() const -> QByteArray;
     void SetDataBaseGeometry(const QByteArray &value);
 

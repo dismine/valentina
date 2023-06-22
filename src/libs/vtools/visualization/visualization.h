@@ -29,17 +29,21 @@
 #ifndef VISUALIZATION_H
 #define VISUALIZATION_H
 
-#include <qcompilerdetection.h>
 #include <QGraphicsItem>
+#include <QLoggingCategory>
 #include <QObject>
 #include <QtGlobal>
-#include <QLoggingCategory>
+#include <qcompilerdetection.h>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include <QtCore/QHashFunctions>
+#endif
+
+#include "../vgeometry/vabstractcurve.h"
 #include "../vmisc/def.h"
 #include "../vmisc/vabstractvalapplication.h"
-#include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vcurvepathitem.h"
-#include "../vgeometry/vabstractcurve.h"
+#include "../vwidgets/vmaingraphicsscene.h"
 
 Q_DECLARE_LOGGING_CATEGORY(vVis) // NOLINT
 
@@ -48,14 +52,27 @@ class VScaledLine;
 class VContainer;
 class VInternalVariable;
 
-enum class Mode : qint8 {Creation, Show};
-
-enum class VColor : qint8 {MainColor, SupportColor, SupportColor2, SupportColor3};
-
-inline auto qHash(VColor key) noexcept -> size_t
+enum class Mode : qint8
 {
-    return ::qHash(static_cast<qint8>(key));
+    Creation,
+    Show
+};
+
+enum class VColor : qint8
+{
+    MainColor,
+    SupportColor,
+    SupportColor2,
+    SupportColor3
+};
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+Q_DECL_CONST_FUNCTION inline auto qHash(VColor key, uint seed = 0) noexcept -> uint
+{
+    auto underlyingValue = static_cast<typename std::underlying_type<VColor>::type>(key);
+    return ::qHash(underlyingValue, seed);
 }
+#endif
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
@@ -64,12 +81,13 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 class Visualization : public QObject
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit Visualization(const VContainer *data);
     ~Visualization() override = default;
 
-    virtual void RefreshGeometry()=0;
-    virtual void VisualMode(quint32 id)=0;
+    virtual void RefreshGeometry() = 0;
+    virtual void VisualMode(quint32 id) = 0;
 
     void SetLineStyle(const Qt::PenStyle &value);
     auto LineStyle() const -> Qt::PenStyle;
@@ -80,10 +98,12 @@ public:
     auto GetMode() const -> Mode;
     void SetMode(const Mode &value);
 
-    static auto FindLengthFromUser(const QString &expression, const QHash<QString,
-                                   QSharedPointer<VInternalVariable> > *vars, bool fromUser = true) -> qreal;
-    static auto FindValFromUser(const QString &expression, const QHash<QString,
-                                QSharedPointer<VInternalVariable> > *vars, bool fromUser = true) -> qreal;
+    static auto FindLengthFromUser(const QString &expression,
+                                   const QHash<QString, QSharedPointer<VInternalVariable>> *vars, bool fromUser = true)
+        -> qreal;
+    static auto FindValFromUser(const QString &expression,
+                                const QHash<QString, QSharedPointer<VInternalVariable>> *vars, bool fromUser = true)
+        -> qreal;
     static auto CorrectAngle(qreal angle) -> qreal;
 
     auto CurrentToolTip() const -> QString;
@@ -93,9 +113,10 @@ signals:
     void ToolTip(const QString &toolTip) const; // clazy:exclude=const-signal-or-slot
 public slots:
     void MousePos(const QPointF &scenePos);
+
 protected:
-    virtual void InitPen()=0;
-    virtual void AddOnScene()=0;
+    virtual void InitPen() = 0;
+    virtual void AddOnScene() = 0;
 
     static auto InitPoint(const QColor &color, QGraphicsItem *parent, qreal z = 0) -> VScaledEllipse *;
     static void DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, const QColor &color,
@@ -105,24 +126,22 @@ protected:
     static void DrawPath(VCurvePathItem *pathItem, const QPainterPath &path, const QColor &color,
                          Qt::PenStyle style = Qt::SolidLine, Qt::PenCapStyle cap = Qt::SquareCap);
     static void DrawPath(VCurvePathItem *pathItem, const QPainterPath &path,
-                         const QVector<DirectionArrow> &directionArrows,
-                         const QColor &color, Qt::PenStyle style = Qt::SolidLine, Qt::PenCapStyle cap = Qt::SquareCap);
+                         const QVector<DirectionArrow> &directionArrows, const QColor &color,
+                         Qt::PenStyle style = Qt::SolidLine, Qt::PenCapStyle cap = Qt::SquareCap);
 
-    template <typename Item>
-    void AddItem(Item *item);
+    template <typename Item> void AddItem(Item *item);
 
-    template <class Item>
-    auto InitItem(const QColor &color, QGraphicsItem *parent) -> Item *;
+    template <class Item> auto InitItem(const QColor &color, QGraphicsItem *parent) -> Item *;
 
-    static auto GetPointItem(QVector<VScaledEllipse *> &points, quint32 i, const QColor &color,
-                             QGraphicsItem *parent) -> VScaledEllipse *;
-    static auto GetCurveItem(QVector<VCurvePathItem *> &curves, quint32 i, const QColor &color,
-                             QGraphicsItem *parent) -> VCurvePathItem *;
+    static auto GetPointItem(QVector<VScaledEllipse *> &points, quint32 i, const QColor &color, QGraphicsItem *parent)
+        -> VScaledEllipse *;
+    static auto GetCurveItem(QVector<VCurvePathItem *> &curves, quint32 i, const QColor &color, QGraphicsItem *parent)
+        -> VCurvePathItem *;
 
     static auto LengthToUser(qreal value) -> QString;
     static auto AngleToUser(qreal value) -> QString;
 
-    void SetColor(VColor type, const QColor& color);
+    void SetColor(VColor type, const QColor &color);
 
     auto Color(VColor type) const -> QColor;
 
@@ -134,6 +153,7 @@ protected:
     void SetToolTip(const QString &tooltip);
 
     void StartVisualMode();
+
 private:
     Q_DISABLE_COPY_MOVE(Visualization) // NOLINT
 
@@ -149,8 +169,7 @@ private:
 QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename Item>
-inline void Visualization::AddItem(Item *item)
+template <typename Item> inline void Visualization::AddItem(Item *item)
 {
     SCASSERT(item != nullptr)
     auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
@@ -161,8 +180,7 @@ inline void Visualization::AddItem(Item *item)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class Item>
-inline auto Visualization::InitItem(const QColor &color, QGraphicsItem *parent) -> Item *
+template <class Item> inline auto Visualization::InitItem(const QColor &color, QGraphicsItem *parent) -> Item *
 {
     Item *item = new Item(parent);
 

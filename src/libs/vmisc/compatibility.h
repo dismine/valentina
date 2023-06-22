@@ -43,15 +43,13 @@
 // QVariant::value<T>() fails to convert unless QVariant::fromValue<T>() has been called previously.
 // https://stackoverflow.com/questions/70974383/qvariantvaluet-fails-to-convert-unless-qvariantfromvaluet-has-been-c
 #if QT_VERSION >= QT_VERSION_CHECK(6, 1, 0)
-#define REGISTER_META_TYPE_STREAM_OPERATORS(TYPE)                             \
-QMetaType::fromType<TYPE>().hasRegisteredDataStreamOperators(); // Dummy call
+#define REGISTER_META_TYPE_STREAM_OPERATORS(TYPE)                                                                      \
+    QMetaType::fromType<TYPE>().hasRegisteredDataStreamOperators(); // Dummy call
 #else
-#define REGISTER_META_TYPE_STREAM_OPERATORS(TYPE) \
-QVariant::fromValue<TYPE>(TYPE{}); // Dummy call
+#define REGISTER_META_TYPE_STREAM_OPERATORS(TYPE) QVariant::fromValue<TYPE>(TYPE{}); // Dummy call
 #endif // QT_VERSION >= QT_VERSION_CHECK(6, 1, 0)
 #else
-#define REGISTER_META_TYPE_STREAM_OPERATORS(TYPE) \
-qRegisterMetaTypeStreamOperators<TYPE>(#TYPE);
+#define REGISTER_META_TYPE_STREAM_OPERATORS(TYPE) qRegisterMetaTypeStreamOperators<TYPE>(#TYPE);
 #endif // QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
@@ -63,8 +61,7 @@ class QPointF;
 // Contains helpful methods to hide version dependent code. It can be deprecation of method or change in API
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T, template <typename> class Cont>
-inline auto ConstFirst (const Cont<T> &container) -> const T&
+template <typename T, template <typename> class Cont> inline auto ConstFirst(const Cont<T> &container) -> const T &
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
     return container.constFirst();
@@ -74,8 +71,7 @@ inline auto ConstFirst (const Cont<T> &container) -> const T&
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T, typename C>
-inline auto ConstFirst (const C &container) -> const T&
+template <typename T, typename C> inline auto ConstFirst(const C &container) -> const T &
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
     return container.constFirst();
@@ -85,24 +81,22 @@ inline auto ConstFirst (const C &container) -> const T&
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T, template <typename> class Cont>
-inline auto ConstLast (const Cont<T> &container) -> const T&
+template <typename T, template <typename> class Cont> inline auto ConstLast(const Cont<T> &container) -> const T &
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
     return container.constLast();
 #else
-    return container.last(); // clazy:exclude=detaching-temporary
+    return container.last();  // clazy:exclude=detaching-temporary
 #endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T, typename C>
-inline auto ConstLast (const C &container) -> const T&
+template <typename T, typename C> inline auto ConstLast(const C &container) -> const T &
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
     return container.constLast();
 #else
-    return container.last(); // clazy:exclude=detaching-temporary
+    return container.last();  // clazy:exclude=detaching-temporary
 #endif
 }
 
@@ -118,8 +112,7 @@ inline auto Intersects(const T &l1, const T &l2, QPointF *intersectionPoint) -> 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T, template <typename> class C>
-inline auto ConvertToList(const C<T> &container) -> QList<T>
+template <typename T, template <typename> class C> inline auto ConvertToList(const C<T> &container) -> QList<T>
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     return QList<T>(container.begin(), container.end());
@@ -129,15 +122,13 @@ inline auto ConvertToList(const C<T> &container) -> QList<T>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T, template <typename> class C>
-inline auto ConvertToStringList(const C<T> &container) -> QStringList
+template <typename T, template <typename> class C> inline auto ConvertToStringList(const C<T> &container) -> QStringList
 {
     return {ConvertToList(container)};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T, template <typename> class C>
-inline auto ConvertToSet(const C<T> &container) -> QSet<T>
+template <typename T, template <typename> class C> inline auto ConvertToSet(const C<T> &container) -> QSet<T>
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     return QSet<T>(container.begin(), container.end());
@@ -147,8 +138,7 @@ inline auto ConvertToSet(const C<T> &container) -> QSet<T>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T, typename C>
-inline auto ConvertToSet(const C &container) -> QSet<T>
+template <typename T, typename C> inline auto ConvertToSet(const C &container) -> QSet<T>
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     return QSet<T>(container.begin(), container.end());
@@ -158,8 +148,7 @@ inline auto ConvertToSet(const C &container) -> QSet<T>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T, template <typename> class C>
-inline auto ConvertToVector(const C<T> &container) -> QVector<T>
+template <typename T, template <typename> class C> inline auto ConvertToVector(const C<T> &container) -> QVector<T>
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     return QVector<T>(container.begin(), container.end());
@@ -169,8 +158,7 @@ inline auto ConvertToVector(const C<T> &container) -> QVector<T>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-inline auto ConvertToVector(const QSet<T> &container) -> QVector<T>
+template <typename T> inline auto ConvertToVector(const QSet<T> &container) -> QVector<T>
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     return QVector<T>(container.begin(), container.end());
@@ -181,19 +169,18 @@ inline auto ConvertToVector(const QSet<T> &container) -> QVector<T>
 
 //---------------------------------------------------------------------------------------------------------------------
 // NOTE: Delete if not necessary anymore
-//template <typename T>
-//inline void SwapItemsAt(T &container, int i, int j)
+// template <typename T>
+// inline void SwapItemsAt(T &container, int i, int j)
 //{
-//#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
+// #if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
 //    container.swapItemsAt(i, j);
-//#else
+// #else
 //    container.swap(i, j);
-//#endif
+// #endif
 //}
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-inline void Move(T &vector, int from, int to)
+template <typename T> inline void Move(T &vector, int from, int to)
 {
     QT_WARNING_PUSH
     // cppcheck-suppress unknownMacro
@@ -207,8 +194,7 @@ inline void Move(T &vector, int from, int to)
         return;
     }
     typename T::iterator b = vector.begin();
-    from < to ? std::rotate(b + from, b + from + 1, b + to + 1)
-              : std::rotate(b + to, b + from, b + from + 1);
+    from < to ? std::rotate(b + from, b + from + 1, b + to + 1) : std::rotate(b + to, b + from, b + from + 1);
 #else
     vector.move(from, to);
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
@@ -217,8 +203,7 @@ inline void Move(T &vector, int from, int to)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-inline auto Reverse(const QVector<T> &container) -> QVector<T>
+template <typename T> inline auto Reverse(const QVector<T> &container) -> QVector<T>
 {
     if (container.isEmpty())
     {
@@ -242,15 +227,14 @@ inline auto Reverse(const C<T> &container) -> C<T>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T, typename std::enable_if<std::is_same<T, QStringList>::value, T>::type* = nullptr>
+template <typename T, typename std::enable_if<std::is_same<T, QStringList>::value, T>::type * = nullptr>
 inline auto Reverse(const T &container) -> T
 {
     return Reverse<QString, QList>(container);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename Cont, typename Input>
-inline void AppendTo(Cont &container, const Input &input)
+template <typename Cont, typename Input> inline void AppendTo(Cont &container, const Input &input)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
     container.append(input);
@@ -263,8 +247,7 @@ inline void AppendTo(Cont &container, const Input &input)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-inline auto SetIntersects(const QSet<T> &set1, const QSet<T> &set2) -> bool
+template <typename T> inline auto SetIntersects(const QSet<T> &set1, const QSet<T> &set2) -> bool
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
     return set1.intersects(set2);
@@ -307,8 +290,7 @@ inline auto TextWidthF(const QFontMetricsF &fm, const QString &text) -> qreal
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename Key, typename T>
-inline auto Insert(QMap<Key, T> &map1, const QMap<Key, T> &map2) -> void
+template <typename Key, typename T> inline auto Insert(QMap<Key, T> &map1, const QMap<Key, T> &map2) -> void
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     map1.insert(map2);
@@ -340,8 +322,7 @@ inline auto VLocaleCharacter(const QChar &character) -> QChar
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-inline auto DropEventPos(const T *event) -> QPoint
+template <typename T> inline auto DropEventPos(const T *event) -> QPoint
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     return event->position().toPoint();
@@ -351,8 +332,7 @@ inline auto DropEventPos(const T *event) -> QPoint
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-inline auto QLibraryPath(T loc) -> QString
+template <typename T> inline auto QLibraryPath(T loc) -> QString
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     return QLibraryInfo::path(loc);
@@ -368,6 +348,64 @@ inline auto LineCenter(const QLineF &line) -> QPointF
     return line.center();
 #else
     return {0.5 * line.p1().x() + 0.5 * line.p2().x(), 0.5 * line.p1().y() + 0.5 * line.p2().y()};
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T, typename N> inline auto First(const T &list, N n) -> T
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    return list.first(n);
+#else
+    Q_ASSERT(n <= list.size());
+    T result;
+    result.reserve(n);
+    std::copy(list.begin(), list.begin() + n, std::back_inserter(result));
+    return result;
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T, typename N> inline auto Last(const T &list, N n) -> T
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    return list.last(n);
+#else
+    Q_ASSERT(n <= list.size());
+    T result;
+    result.reserve(n);
+    std::copy(list.end() - n, list.end(), std::back_inserter(result));
+    return result;
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T, typename N> inline auto Sliced(const T &list, N pos) -> T
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    return list.sliced(pos);
+#else
+    Q_ASSERT(pos <= list.size());
+    T result;
+    result.reserve(list.size() - pos);
+    std::copy(list.begin() + pos, list.end(), std::back_inserter(result));
+    return result;
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T, typename N> inline auto Sliced(const T &list, N pos, N n) -> T
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    return list.sliced(pos, n);
+#else
+    Q_ASSERT(pos <= list.size());
+    Q_ASSERT(n >= 0);
+    Q_ASSERT(pos + n <= list.size());
+    T result;
+    result.reserve(n);
+    std::copy(list.begin() + pos, list.begin() + pos + n, std::back_inserter(result));
+    return result;
 #endif
 }
 

@@ -120,9 +120,42 @@ inline auto LineFont(const TextLine &tl, const QFont &base) -> QFont
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+inline auto LineFont(const TextLine &tl, const VSvgFont &base) -> VSvgFont
+{
+    VSvgFont fnt = base;
+    fnt.SetPointSize(base.PointSize() + tl.m_iFontSize);
+    fnt.SetBold(tl.m_bold);
+    fnt.SetItalic(tl.m_italic);
+    return fnt;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 inline auto LineAlign(const TextLine &tl, const QString &text, const QFontMetrics &fm, qreal width) -> qreal
 {
     const int lineWidth = TextWidth(fm, text);
+
+    qreal dX = 0;
+    if (tl.m_eAlign == 0 || (tl.m_eAlign & Qt::AlignLeft) > 0)
+    {
+        dX = 0;
+    }
+    else if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
+    {
+        dX = (width - lineWidth) / 2;
+    }
+    else if ((tl.m_eAlign & Qt::AlignRight) > 0)
+    {
+        dX = width - lineWidth;
+    }
+
+    return dX;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto LineAlign(const TextLine &tl, const QString &text, const VSvgFontEngine &engine, qreal width,
+                      qreal penWidth) -> qreal
+{
+    const int lineWidth = qRound(engine.TextWidth(text, penWidth));
 
     qreal dX = 0;
     if (tl.m_eAlign == 0 || (tl.m_eAlign & Qt::AlignLeft) > 0)
@@ -380,7 +413,79 @@ void VPGraphicsPiece::SetStickyPoints(const QVector<QPointF> &newStickyPoint)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPGraphicsPiece::InitPieceLabel(const QVector<QPointF> &labelShape, const VTextManager &tm)
+void VPGraphicsPiece::InitPieceLabelSVGFont(const QVector<QPointF> &labelShape, const VTextManager &tm)
+{
+    VPPiecePtr piece = m_piece.toStrongRef();
+    if (piece.isNull())
+    {
+        return;
+    }
+
+    if (labelShape.count() <= 2)
+    {
+        return;
+    }
+
+    VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
+    VSvgFontEngine engine =
+        db->FontEngine(tm.GetSVGFontFamily(), SVGFontStyle::Normal, SVGFontWeight::Normal, tm.GetSVGFontPointSize());
+
+    VSvgFont svgFont = engine.Font();
+    if (!svgFont.IsValid())
+    {
+        QString errorMsg = tr("Invalid SVG font '%1'. Fallback to outline font.").arg(svgFont.Name());
+        qDebug() << errorMsg;
+        InitPieceLabelOutlineFont(labelShape, tm);
+        return;
+    }
+
+    qreal penWidth = VPApplication::VApp()->PuzzleSettings()->GetLayoutLineWidth();
+
+    const qreal dW = QLineF(labelShape.at(0), labelShape.at(1)).length();
+    const qreal dH = QLineF(labelShape.at(1), labelShape.at(2)).length();
+    const qreal angle = -QLineF(labelShape.at(0), labelShape.at(1)).angle();
+    const QColor color = PieceColor();
+    const int maxLineWidth = tm.MaxLineWidthSVGFont(static_cast<int>(dW), penWidth);
+
+    qreal dY = penWidth;
+
+    const QVector<TextLine> labelLines = tm.GetLabelSourceLines(qFloor(dW), svgFont, penWidth);
+
+    for (const auto &tl : labelLines)
+    {
+        const VSvgFont fnt = LineFont(tl, svgFont);
+        engine = db->FontEngine(fnt);
+
+        if (dY + engine.FontHeight() + penWidth > dH)
+        {
+            break;
+        }
+
+        const QString qsText = tl.m_qsText;
+        const qreal dX = LineAlign(tl, qsText, engine, dW, penWidth);
+        // set up the rotation around top-left corner matrix
+        const QTransform lineMatrix = LineMatrix(piece, labelShape.at(0), angle, QPointF(dX, dY), maxLineWidth);
+
+        auto *item = new QGraphicsPathItem(this);
+        item->setPath(engine.DrawPath(QPointF(), qsText));
+
+        QPen itemPen = item->pen();
+        itemPen.setColor(color);
+        itemPen.setCapStyle(Qt::RoundCap);
+        itemPen.setJoinStyle(Qt::RoundJoin);
+        itemPen.setWidthF(penWidth);
+        item->setPen(itemPen);
+
+        item->setBrush(QBrush(Qt::NoBrush));
+        item->setTransform(lineMatrix);
+        m_labelPathItems.append(item);
+
+        dY += engine.FontHeight() + penWidth + tm.GetSpacing();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPiece::InitPieceLabelOutlineFont(const QVector<QPointF> &labelShape, const VTextManager &tm)
 {
     VPPiecePtr piece = m_piece.toStrongRef();
     if (piece.isNull())
@@ -397,32 +502,37 @@ void VPGraphicsPiece::InitPieceLabel(const QVector<QPointF> &labelShape, const V
     const qreal dH = QLineF(labelShape.at(1), labelShape.at(2)).length();
     const qreal angle = -QLineF(labelShape.at(0), labelShape.at(1)).angle();
     const QColor color = PieceColor();
-    const int maxLineWidth = tm.MaxLineWidth(static_cast<int>(dW));
+    const int maxLineWidth = tm.MaxLineWidthOutlineFont(static_cast<int>(dW));
+    qreal penWidth = VPApplication::VApp()->PuzzleSettings()->GetLayoutLineWidth();
 
     qreal dY = 0;
+
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+
+    bool textAsPaths = m_textAsPaths;
+    if (settings->GetSingleStrokeOutlineFont())
+    {
+        textAsPaths = true;
+        dY += penWidth;
+    }
 
     const QVector<TextLine> labelLines = tm.GetLabelSourceLines(qFloor(dW), tm.GetFont());
 
     for (const auto &tl : labelLines)
     {
         const QFont fnt = LineFont(tl, tm.GetFont());
-        const QFontMetrics fm(fnt);
 
-        if (m_textAsPaths)
+        VSingleLineOutlineChar corrector(fnt);
+        if (settings->GetSingleStrokeOutlineFont() && !corrector.IsPopulated())
         {
-            dY += fm.height();
-
-            if (dY > dH)
-            {
-                break;
-            }
+            corrector.LoadCorrections(settings->GetPathFontCorrections());
         }
-        else
+
+        QFontMetrics fm(fnt);
+
+        if (dY + fm.height() > dH)
         {
-            if (dY + fm.height() > dH)
-            {
-                break;
-            }
+            break;
         }
 
         const QString qsText = tl.m_qsText;
@@ -430,18 +540,38 @@ void VPGraphicsPiece::InitPieceLabel(const QVector<QPointF> &labelShape, const V
         // set up the rotation around top-left corner matrix
         const QTransform lineMatrix = LineMatrix(piece, labelShape.at(0), angle, QPointF(dX, dY), maxLineWidth);
 
-        if (m_textAsPaths)
+        if (textAsPaths)
         {
             QPainterPath path;
-            path.addText(0, -static_cast<qreal>(fm.ascent()) / 6., fnt, qsText);
+
+            if (settings->GetSingleStrokeOutlineFont())
+            {
+                int w = 0;
+                for (auto c : qAsConst(qsText))
+                {
+                    path.addPath(corrector.DrawChar(w, static_cast<qreal>(fm.ascent()), c));
+                    w += TextWidth(fm, c);
+                }
+            }
+            else
+            {
+                path.addText(0, static_cast<qreal>(fm.ascent()), fnt, qsText);
+            }
 
             auto *item = new QGraphicsPathItem(this);
             item->setPath(path);
-            item->setBrush(QBrush(color));
+
+            QPen itemPen = item->pen();
+            itemPen.setColor(color);
+            itemPen.setCapStyle(Qt::RoundCap);
+            itemPen.setJoinStyle(Qt::RoundJoin);
+            itemPen.setWidthF(penWidth);
+            item->setPen(itemPen);
+            item->setBrush(settings->GetSingleStrokeOutlineFont() ? QBrush(Qt::NoBrush) : QBrush(color));
             item->setTransform(lineMatrix);
             m_labelPathItems.append(item);
 
-            dY += tm.GetSpacing();
+            dY += fm.height() + penWidth + tm.GetSpacing();
         }
         else
         {
@@ -454,6 +584,20 @@ void VPGraphicsPiece::InitPieceLabel(const QVector<QPointF> &labelShape, const V
 
             dY += (fm.height() + tm.GetSpacing());
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPiece::InitPieceLabel(const QVector<QPointF> &labelShape, const VTextManager &tm)
+{
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    if (settings->GetSingleLineFonts())
+    {
+        InitPieceLabelSVGFont(labelShape, tm);
+    }
+    else
+    {
+        InitPieceLabelOutlineFont(labelShape, tm);
     }
 }
 

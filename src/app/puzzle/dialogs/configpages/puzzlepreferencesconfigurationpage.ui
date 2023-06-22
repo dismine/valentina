@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>702</width>
-    <height>741</height>
+    <width>545</width>
+    <height>696</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,11 +34,11 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>660</width>
-            <height>672</height>
+            <width>503</width>
+            <height>627</height>
            </rect>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_6">
+          <layout class="QVBoxLayout" name="verticalLayout_10">
            <item>
             <widget class="QGroupBox" name="groupBox_2">
              <property name="title">
@@ -134,6 +134,32 @@ This option will take an affect after restart.</string>
             </widget>
            </item>
            <item>
+            <widget class="QGroupBox" name="groupBox_10">
+             <property name="title">
+              <string>Font</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_6">
+              <item>
+               <widget class="QCheckBox" name="checkBoxSingleStrokeOutlineFont">
+                <property name="text">
+                 <string>Allow single stroke outline fonts</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="checkBoxSingleLineFonts">
+                <property name="toolTip">
+                 <string>When this option is activated, the application will utilize SVG Fonts present in your system to render piece label text, instead of using outline fonts. </string>
+                </property>
+                <property name="text">
+                 <string>Use single-line fonts</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
             <widget class="QGroupBox" name="groupBox_5">
              <property name="title">
               <string>Undo</string>
@@ -211,8 +237,8 @@ This option will take an affect after restart.</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>660</width>
-            <height>672</height>
+            <width>503</width>
+            <height>627</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_8">

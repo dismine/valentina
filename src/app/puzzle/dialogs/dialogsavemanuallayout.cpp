@@ -39,7 +39,7 @@
 #include <QtDebug>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "diagnostic.h"
+#include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
 namespace
@@ -70,7 +70,14 @@ DialogSaveManualLayout::DialogSaveManualLayout(vsizetype count, bool consoleExpo
     setWindowFlags(Qt::Window);
 #endif
 
-    VPApplication::VApp()->PuzzleSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+    settings->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+
+    if (settings->GetSingleLineFonts() || settings->GetSingleStrokeOutlineFont())
+    {
+        ui->checkBoxTextAsPaths->setChecked(true);
+        ui->checkBoxTextAsPaths->setDisabled(true);
+    }
 
     QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
     SCASSERT(bOk != nullptr)
@@ -322,7 +329,15 @@ auto DialogSaveManualLayout::IsTextAsPaths() const -> bool
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSaveManualLayout::SetTextAsPaths(bool textAsPaths)
 {
-    ui->checkBoxTextAsPaths->setChecked(textAsPaths);
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    if (settings->GetSingleLineFonts() || settings->GetSingleStrokeOutlineFont())
+    {
+        ui->checkBoxTextAsPaths->setChecked(true);
+    }
+    else
+    {
+        ui->checkBoxTextAsPaths->setChecked(textAsPaths);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -478,8 +493,10 @@ void DialogSaveManualLayout::ShowExample()
     }
     ui->labelExample->setText(example);
 
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+
     ui->checkBoxBinaryDXF->setEnabled(false);
-    ui->checkBoxTextAsPaths->setEnabled(true);
+    ui->checkBoxTextAsPaths->setEnabled(!settings->GetSingleLineFonts() && !settings->GetSingleStrokeOutlineFont());
     ui->checkBoxExportUnified->setEnabled(false);
     ui->checkBoxTilesScheme->setEnabled(false);
     ui->checkBoxShowGrainline->setEnabled(true);

@@ -58,6 +58,7 @@
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vformat/vlabeltemplate.h"
+#include "../vmisc/svgfont/vsvgfontdatabase.h"
 #include "../vpatterndb/floatItemData/vgrainlinedata.h"
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "nodeDetails/vnodearc.h"
@@ -2121,11 +2122,14 @@ auto VToolSeamAllowance::PrepareLabelData(const VPatternLabelData &labelData, co
     VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
     QFont fnt = settings->GetLabelFont();
     {
-        const int iFS = labelData.GetFontSize();
-        iFS < VCommonSettings::MinPieceLabelFontPointSize() ? fnt.setPointSize(settings->GetPieceLabelFontPointSize())
-                                                            : fnt.setPointSize(iFS);
+        const int iFS = labelData.GetFontSize() < VCommonSettings::MinPieceLabelFontPointSize()
+                            ? settings->GetPieceLabelFontPointSize()
+                            : labelData.GetFontSize();
+        fnt.setPointSize(iFS);
+        labelItem->SetSVGFontPointSize(iFS);
     }
     labelItem->SetFont(fnt);
+    labelItem->SetSVGFontFamily(settings->GetLabelSVGFont());
     labelItem->SetSize(ToPixel(labelWidth, *VDataTool::data.GetPatternUnit()),
                        ToPixel(labelHeight, *VDataTool::data.GetPatternUnit()));
 

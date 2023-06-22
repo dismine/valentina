@@ -105,11 +105,13 @@ VToolApp {
         files: [
             "GOST_man_ru.vst"
         ]
-        fileTags: ["multisize_tables"]
         qbs.install: true
         qbs.installDir: {
             if (qbs.targetOS.contains("macos") && !buildconfig.enableMultiBundle)
                 return buildconfig.installAppPath + "/Valentina.app/Contents/Resources/tables/multisize"
+
+            if (qbs.targetOS.includes("linux"))
+                return "share/valentina/tables/multisize"
 
             return buildconfig.installDataPath + "/tables/multisize"
         }
@@ -122,11 +124,13 @@ VToolApp {
             "template_all_measurements.vit",
             "t_Aldrich_Women.vit"
         ]
-        fileTags: ["measurements_templates"]
         qbs.install: true
         qbs.installDir: {
             if (qbs.targetOS.contains("macos") && !buildconfig.enableMultiBundle)
                 return buildconfig.installAppPath + "/Valentina.app/Contents/Resources/tables/templates"
+
+            if (qbs.targetOS.includes("linux"))
+                return "share/valentina/tables/templates"
 
             return buildconfig.installDataPath + "/tables/templates"
         }
