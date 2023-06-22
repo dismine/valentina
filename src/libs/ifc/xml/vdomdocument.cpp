@@ -54,6 +54,7 @@
 #include <QIODevice>
 #include <QMessageLogger>
 #include <QObject>
+#include <QRegularExpression>
 #include <QStringList>
 #include <QTemporaryFile>
 #include <QTextDocument>
@@ -64,6 +65,11 @@
 #include <QXmlStreamWriter>
 #include <QtConcurrentRun>
 #include <QtDebug>
+
+#ifdef Q_OS_UNIX
+#include <fcntl.h>
+#include <unistd.h>
+#endif
 
 namespace
 {
@@ -793,6 +799,20 @@ auto VDomDocument::SaveDocument(const QString &fileName, QString &error) -> bool
         //  save(out, indent);
 
         success = file.commit();
+
+#if defined(_POSIX_SYNCHRONIZED_IO) && _POSIX_SYNCHRONIZED_IO > 0
+        if (success)
+        {
+            // https://stackoverflow.com/questions/74051505/does-qsavefilecommit-fsync-the-file-to-the-filesystem
+            QString directoryPath = QFileInfo(file.fileName()).absoluteDir().path();
+            int dirFd = ::open(directoryPath.toLocal8Bit().data(), O_RDONLY | O_DIRECTORY);
+            if (dirFd != -1)
+            {
+                ::fsync(dirFd);
+                ::close(dirFd);
+            }
+        }
+#endif
     }
 
     if (not success)
