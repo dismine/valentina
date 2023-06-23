@@ -110,7 +110,7 @@ VToolApp {
             if (qbs.targetOS.contains("macos") && !buildconfig.enableMultiBundle)
                 return buildconfig.installAppPath + "/Valentina.app/Contents/Resources/tables/multisize"
 
-            if (qbs.targetOS.includes("linux"))
+            if (qbs.targetOS.contains("linux"))
                 return "share/valentina/tables/multisize"
 
             return buildconfig.installDataPath + "/tables/multisize"
@@ -129,7 +129,7 @@ VToolApp {
             if (qbs.targetOS.contains("macos") && !buildconfig.enableMultiBundle)
                 return buildconfig.installAppPath + "/Valentina.app/Contents/Resources/tables/templates"
 
-            if (qbs.targetOS.includes("linux"))
+            if (qbs.targetOS.contains("linux"))
                 return "share/valentina/tables/templates"
 
             return buildconfig.installDataPath + "/tables/templates"
