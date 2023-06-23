@@ -99,7 +99,7 @@ protected:
     auto PuzzlePath() const -> QString;
     auto ValentinaPath() const -> QString;
     auto TapePath() const -> QString;
-    auto TranslationsPath() const -> QString;
+    static auto TranslationsPath() -> QString;
 
     static auto RunTimeout(int defMsecs) -> int;
 

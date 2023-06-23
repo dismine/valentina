@@ -375,7 +375,7 @@ auto AbstractTest::TapePath() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto AbstractTest::TranslationsPath() const -> QString
+auto AbstractTest::TranslationsPath() -> QString
 {
 #ifdef QBS_BUILD
     return QStringLiteral(TRANSLATIONS_DIR);
