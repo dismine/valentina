@@ -1,4 +1,5 @@
 import qbs.FileInfo
+import qbs.File
 
 VToolApp {
     Depends { name: "buildconfig" }
