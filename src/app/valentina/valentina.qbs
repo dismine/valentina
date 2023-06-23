@@ -175,7 +175,7 @@ VToolApp {
             // TODO: If minimal qbs version is 1.23 replace with FileInfo.executableSuffix(
             var extension = qbs.targetOS.contains("windows") ? ".exe" : "";
             defines.push('VALENTINA_BUILDDIR="' + FileInfo.joinPaths(exportingProduct.buildDirectory, exportingProduct.targetName + extension) +'"');
-            defines.push('TRANSLATIONS_DIR="' + FileInfo.joinPaths(exportingProduct.buildDirectory, 'translations') +'"');
+            defines.push('TRANSLATIONS_DIR="' + exportingProduct.buildDirectory +'"');
             return defines;
         }
     }
