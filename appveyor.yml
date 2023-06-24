@@ -51,7 +51,7 @@ environment:
       BUILD_SYSTEM: "qbs"
       QMAKE: qmake.exe
       ENABLE_PCH: true
-      GCC_VERSION: 12.2
+      GCC_VERSION: 13.1
       MINGW_PATH: C:\msys64\mingw64\bin
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
@@ -151,7 +151,7 @@ environment:
       BUILD_SYSTEM: "qbs"
       QMAKE: qmake.exe
       ENABLE_PCH: true
-      GCC_VERSION: 12.2
+      GCC_VERSION: 13.1
       MINGW_PATH: C:\msys64\mingw64\bin
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
@@ -379,6 +379,7 @@ for:
         } else {
           if ($env:MSYS2_PACKAGES -eq "true") {
               & 'C:\msys64\usr\bin\bash' -lc "pacman --noconfirm -Syuu"
+              & 'C:\msys64\usr\bin\bash' -lc "pacman -R --noconfirm mingw-w64-x86_64-gcc-ada mingw-w64-x86_64-gcc-objc"
               & 'C:\msys64\usr\bin\bash' -lc "pacman --noconfirm -S mingw-w64-x86_64-gcc mingw-w64-x86_64-make"
           }
           $env:Path += ";$env:MINGW_PATH"
