@@ -284,6 +284,10 @@ matrix:
   fast_finish: false
   exclude:
     - platform: x86
+      job_name: Windows_Qt_6_5_(GCC_x64)
+    - platform: x86
+      job_name: Windows_Qt_6_5_(MSVC_x64)
+    - platform: x86
       job_name: Windows_Qt_6_4_(GCC_x64)
     - platform: x86
       job_name: Windows_Qt_6_4_(MSVC_x64)
@@ -323,6 +327,8 @@ for:
 -
   matrix:
     only:
+      - job_name: Windows_Qt_6_5_(GCC_x64)
+      - job_name: Windows_Qt_6_5_(MSVC_x64)
       - job_name: Windows_Qt_6_4_(GCC_x64)
       - job_name: Windows_Qt_6_4_(MSVC_x64)
       - job_name: Windows_Qt_5_15_(qbs_GCC_x64)
