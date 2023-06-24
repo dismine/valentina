@@ -171,7 +171,7 @@ void VSingleLineOutlineChar::LoadCorrections(const QString &dirPath) const
     {
         return;
     }
-    QString filePath = directory.absoluteFilePath(ConstFirst(matchingFiles));
+    QString filePath = directory.absoluteFilePath(ConstFirst<QString>(matchingFiles));
 
     QFile jsonFile(filePath);
     if (!jsonFile.open(QIODevice::ReadOnly | QIODevice::Text))
