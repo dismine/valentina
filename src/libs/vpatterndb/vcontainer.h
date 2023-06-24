@@ -240,7 +240,11 @@ private:
     template <typename T>
     void AddVariable(const QSharedPointer<T> &var, const QString &name);
 
-    template <class T> auto qHash(const QSharedPointer<T> &p) -> uint;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    template <class T> auto qHash(const QSharedPointer<T> &p, uint seed = 0) -> uint;
+#else
+    template <class T> auto qHash(const QSharedPointer<T> &p, size_t seed = 0) -> size_t;
+#endif
 
     template <typename T> void UpdateObject(const quint32 &id, const QSharedPointer<T> &point);
 
@@ -376,9 +380,13 @@ template <typename T> void VContainer::AddVariable(const QSharedPointer<T> &var,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class T> auto VContainer::qHash(const QSharedPointer<T> &p) -> uint
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+template <class T> auto VContainer::qHash(const QSharedPointer<T> &p, uint seed) -> uint
+#else
+template <class T> auto VContainer::qHash(const QSharedPointer<T> &p, size_t seed) -> size_t
+#endif
 {
-    return qHash(p.data());
+    return qHash(p.data(), seed);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
