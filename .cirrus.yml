@@ -167,7 +167,9 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
     - sudo xcode-select -p
     - brew update > /dev/null
+    - brew outdated
     - brew install --force qt6 coreutils ccache qbs cmake git
+    - brew upgrade
     - echo $PATH
     - export PATH="${HOME}/.local/bin:`python3 -m site --user-base`/bin:$PATH"
     - echo $PATH
