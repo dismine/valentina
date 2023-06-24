@@ -41,13 +41,13 @@ environment:
     secure: RUhnEHqaR8KhalOMWwZZOoO342Ja50QV4KpEWdm9g3pG+jG7i6aJqUmeKF1l5VN6dzksk1u+yN6pOLnU8oGcaVQ6v+1dpKK1oZvF0tyHhNE=
 
   matrix:
-    - job_name: Windows_Qt_6_4_(GCC_x64)
+    - job_name: Windows_Qt_6_5_(GCC_x64)
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       COMPILER: mingw
       COMPILER_CPPSTD: gnu17
       COMPILER_LIBCXX: libstdc++11
-      QT: Qt\6.4\mingw_64
-      QT_VERSION: Qt6_4
+      QT: Qt\6.5\mingw_64
+      QT_VERSION: Qt6_5
       BUILD_SYSTEM: "qbs"
       QMAKE: qmake.exe
       ENABLE_PCH: true
@@ -141,6 +141,24 @@ environment:
       MULTI_BUNDLE: false
       DEPLOY: true
 
+    - job_name: Windows_Qt_6_4_(GCC_x64)
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+      COMPILER: mingw
+      COMPILER_CPPSTD: gnu17
+      COMPILER_LIBCXX: libstdc++11
+      QT: Qt\6.4\mingw_64
+      QT_VERSION: Qt6_4
+      BUILD_SYSTEM: "qbs"
+      QMAKE: qmake.exe
+      ENABLE_PCH: true
+      GCC_VERSION: 12.2
+      MINGW_PATH: C:\msys64\mingw64\bin
+      ARCH: x64
+      PYTHON: "C:\\Python311-x64"
+      PLATFORM: "Windows10+"
+      MSYS2_PACKAGES: true
+      DEPLOY: false
+
     - job_name: Windows_Qt_5_15_(make_GCC_x86)
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       COMPILER: mingw
@@ -151,6 +169,21 @@ environment:
       ARCH: x86
       PYTHON: "C:\\Python311"
       PLATFORM: "Windows7+"
+      DEPLOY: false
+
+    - job_name: Windows_Qt_6_5_(MSVC_x64)
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+      COMPILER: msvc
+      QT: Qt\6.5\msvc2019_64
+      QT_VERSION: Qt6_5
+      BUILD_SYSTEM: "qbs"
+      QMAKE: qmake.exe
+      ENABLE_PCH: true
+      MSVC_PATH: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\x64"
+      ARCH: x64
+      PYTHON: "C:\\Python311-x64"
+      PLATFORM: "Windows10+"
+      MSYS2_PACKAGES: false
       DEPLOY: false
 
     - job_name: Windows_Qt_6_4_(MSVC_x64)
