@@ -398,6 +398,7 @@ for:
     - del /F "C:\Program Files\Git\usr\bin\sh.exe"
     - del /F "C:\Program Files\Git\bin\sh.exe"
     - dir "C:\"
+    - dir "C:\Qt"
     - dir %QTDIR%
     - dir "%QTDIR%\bin"
     - qbs --version
