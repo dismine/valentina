@@ -169,7 +169,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - brew update > /dev/null
     - brew outdated
     - brew install --force qt6 coreutils ccache qbs cmake git
-    - brew upgrade
+    - brew upgrade qt6 coreutils ccache qbs cmake git
     - echo $PATH
     - export PATH="${HOME}/.local/bin:`python3 -m site --user-base`/bin:$PATH"
     - echo $PATH
