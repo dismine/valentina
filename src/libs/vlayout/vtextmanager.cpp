@@ -925,7 +925,7 @@ auto VTextManager::BreakTextIntoLines(const QString &text, const QFont &font, in
                     currentLineWidth = 0;
 
                     // Insert the item after the current item
-                    iterator.insert(ConstLast(subWords));
+                    iterator.insert(ConstLast<QString>(subWords));
                     iterator.previous();
                 }
             }
@@ -1025,7 +1025,7 @@ auto VTextManager::BreakTextIntoLines(const QString &text, const VSvgFont &font,
                     currentLineWidth = 0;
 
                     // Insert the item after the current item
-                    iterator.insert(ConstLast(subWords));
+                    iterator.insert(ConstLast<QString>(subWords));
                     iterator.previous();
                 }
             }
