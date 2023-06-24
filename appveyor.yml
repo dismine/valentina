@@ -379,7 +379,7 @@ for:
         } else {
           if ($env:MSYS2_PACKAGES -eq "true") {
               & 'C:\msys64\usr\bin\bash' -lc "pacman --noconfirm -Syuu"
-              & 'C:\msys64\usr\bin\bash' -lc "pacman -R --noconfirm mingw-w64-x86_64-gcc-ada mingw-w64-x86_64-gcc-objc"
+              & 'C:\msys64\usr\bin\bash' -lc "pacman -R --noconfirm mingw-w64-x86_64-gcc-ada mingw-w64-x86_64-gcc-objc mingw-w64-x86_64-gcc-fortran mingw-w64-x86_64-gcc-libgfortran mingw-w64-x86_64-libgccjit"
               & 'C:\msys64\usr\bin\bash' -lc "pacman --noconfirm -S mingw-w64-x86_64-gcc mingw-w64-x86_64-make"
           }
           $env:Path += ";$env:MINGW_PATH"
