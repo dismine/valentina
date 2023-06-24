@@ -1,10 +1,15 @@
+import qbs.Utilities
+
 VLib {
     Depends { name: "windeployqt"; }
     Depends { name: "i18nconfig"; }
 
     buildconfig.staticBuild: false
 
-    windeployqt.noVirtualkeyboard: true
+    Properties {
+        condition: qbs.targetOS.contains("windows") && Utilities.versionCompare(Qt.core.version, "6.5") < 0
+        windeployqt.noVirtualkeyboard: true
+    }
 
     Properties {
         condition: qbs.targetOS.contains("macos")

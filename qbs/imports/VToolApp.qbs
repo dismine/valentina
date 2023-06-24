@@ -1,5 +1,6 @@
 import qbs.FileInfo
 import qbs.File
+import qbs.Utilities
 
 VApp {
     Depends { name: "freedesktop2" }
@@ -196,7 +197,7 @@ VApp {
     }
 
     Properties {
-        condition: qbs.targetOS.contains("windows")
+        condition: qbs.targetOS.contains("windows") && Utilities.versionCompare(Qt.core.version, "6.5") < 0
         windeployqt.noVirtualkeyboard: true
     }
 

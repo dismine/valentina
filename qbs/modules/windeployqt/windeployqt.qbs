@@ -143,7 +143,7 @@ Module {
                 else if (product.windeployqt.noCompilerRuntime)
                     cmdArgs.push("--no-compiler-runtime")
 
-                if (product.windeployqt.noVirtualkeyboard)
+                if (product.windeployqt.noVirtualkeyboard && Utilities.versionCompare(Qt.core.version, "6.5") < 0)
                     cmdArgs.push("--no-virtualkeyboard")
 
                 if (product.windeployqt.json)
