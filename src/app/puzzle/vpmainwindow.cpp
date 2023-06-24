@@ -2561,7 +2561,7 @@ auto VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet, const VPExportD
     sheet->SceneData()->SetTextAsPaths(data.textAsPaths);
 
     auto Clean = qScopeGuard(
-        [sheet, data]()
+        [sheet]()
         {
             sheet->SceneData()->SetTextAsPaths(false);
             sheet->SceneData()->CleanAfterExport(); // Will restore the grainlines automatically
