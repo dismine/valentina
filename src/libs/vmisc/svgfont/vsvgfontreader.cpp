@@ -115,7 +115,7 @@ auto ParseFontWeight(const QString &fontWeight) -> SVGFontWeight
 //---------------------------------------------------------------------------------------------------------------------
 auto InitFont(const QXmlStreamAttributes &fontAttr) -> VSvgFont
 {
-    const QStringView hax = fontAttr.value(QLatin1String("horiz-adv-x"));
+    const auto hax = fontAttr.value(QLatin1String("horiz-adv-x"));
     qreal horizAdvX = hax.toDouble();
 
     QString id = fontAttr.value(QLatin1String("id")).toString();
@@ -332,7 +332,7 @@ void VSvgFontReader::SetFontFace(VSvgFont *font)
 {
     QXmlStreamAttributes fontFaceAttr = attributes();
     QString fontFamily = fontFaceAttr.value(QLatin1String("font-family")).toString();
-    const QStringView unitsPerEmStr = fontFaceAttr.value(QLatin1String("units-per-em"));
+    const auto unitsPerEmStr = fontFaceAttr.value(QLatin1String("units-per-em"));
 
     qreal unitsPerEm = unitsPerEmStr.toDouble();
     if (qFuzzyIsNull(unitsPerEm))
@@ -340,14 +340,14 @@ void VSvgFontReader::SetFontFace(VSvgFont *font)
         unitsPerEm = 1000;
     }
 
-    const QStringView ascentStr = fontFaceAttr.value(QLatin1String("ascent"));
+    const auto ascentStr = fontFaceAttr.value(QLatin1String("ascent"));
     qreal ascent = ascentStr.toDouble();
     if (qFuzzyIsNull(ascent))
     {
         ascent = 800;
     }
 
-    const QStringView descentStr = fontFaceAttr.value(QLatin1String("descent"));
+    const auto descentStr = fontFaceAttr.value(QLatin1String("descent"));
     qreal descent = descentStr.toDouble();
     if (qFuzzyIsNull(descent))
     {
@@ -392,9 +392,9 @@ void VSvgFontReader::SetFontFace(VSvgFont *font)
 //---------------------------------------------------------------------------------------------------------------------
 void VSvgFontReader::ParseSvgGlyph(VSvgFontEngine *engine, const QXmlStreamAttributes &glyphAttr)
 {
-    QStringView uncStr = glyphAttr.value(QLatin1String("unicode"));
-    QStringView havStr = glyphAttr.value(QLatin1String("horiz-adv-x"));
-    QStringView pathStr = glyphAttr.value(QLatin1String("d"));
+    auto uncStr = glyphAttr.value(QLatin1String("unicode"));
+    auto havStr = glyphAttr.value(QLatin1String("horiz-adv-x"));
+    auto pathStr = glyphAttr.value(QLatin1String("d"));
 
     QChar unicode = (uncStr.isEmpty()) ? u'\0' : uncStr.at(0);
     qreal havx = (havStr.isEmpty()) ? -1 : havStr.toDouble();
