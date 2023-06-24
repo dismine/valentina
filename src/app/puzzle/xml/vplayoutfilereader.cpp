@@ -878,7 +878,7 @@ auto VPLayoutFileReader::ReadLabelLines() -> VTextManager
     QStringList svgFontData = ReadAttributeEmptyString(attribs, ML::AttrSVGFont).split(',');
     if (!svgFontData.isEmpty())
     {
-        text.SetSVGFontFamily(ConstFirst(svgFontData));
+        text.SetSVGFontFamily(ConstFirst<QString>(svgFontData));
 
         if (svgFontData.size() > 1)
         {

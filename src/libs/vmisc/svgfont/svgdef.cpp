@@ -30,6 +30,7 @@
 
 #include <QChar>
 #include <QString>
+#include <QStringView>
 
 //---------------------------------------------------------------------------------------------------------------------
 auto LatinWritingSystem(QChar c) -> bool
