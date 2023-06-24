@@ -42,7 +42,7 @@ environment:
 
   matrix:
     - job_name: Windows_Qt_6_5_(GCC_x64)
-      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
       COMPILER: mingw
       COMPILER_CPPSTD: gnu17
       COMPILER_LIBCXX: libstdc++11
@@ -172,7 +172,7 @@ environment:
       DEPLOY: false
 
     - job_name: Windows_Qt_6_5_(MSVC_x64)
-      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
       COMPILER: msvc
       QT: Qt\6.5\msvc2019_64
       QT_VERSION: Qt6_5
