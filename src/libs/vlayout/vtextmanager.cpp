@@ -39,13 +39,12 @@
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/compatibility.h"
+#include "../vmisc/svgfont/vsvgfont.h"
 #include "../vmisc/svgfont/vsvgfontdatabase.h"
 #include "../vmisc/svgfont/vsvgfontengine.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
-#include <QtMath>
-#include "svgfont/vsvgfont.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 9, 0)
 #include "../vmisc/vdatastreamenum.h"
@@ -915,9 +914,9 @@ auto VTextManager::BreakTextIntoLines(const QString &text, const QFont &font, in
             }
             else
             {
-                const int width = TextWidth(fontMetrics, ConstFirst(subWords));
+                const int width = TextWidth(fontMetrics, ConstFirst<QString>(subWords));
                 const int tWidth = !currentLine.isEmpty() ? currentLineWidth + spaceWidth + width : width;
-                AppendWord(ConstFirst(subWords), tWidth);
+                AppendWord(ConstFirst<QString>(subWords), tWidth);
                 lines.append(currentLine);
 
                 if (subWords.size() == 2)
@@ -1015,9 +1014,9 @@ auto VTextManager::BreakTextIntoLines(const QString &text, const VSvgFont &font,
             }
             else
             {
-                const int width = qRound(engine.TextWidth(ConstFirst(subWords), penWidth));
+                const int width = qRound(engine.TextWidth(ConstFirst<QString>(subWords), penWidth));
                 const int tWidth = !currentLine.isEmpty() ? currentLineWidth + spaceWidth + width : width;
-                AppendWord(ConstFirst(subWords), tWidth);
+                AppendWord(ConstFirst<QString>(subWords), tWidth);
                 lines.append(currentLine);
 
                 if (subWords.size() == 2)
