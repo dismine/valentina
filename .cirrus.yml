@@ -175,7 +175,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - echo $PATH
     - chmod -R 755 /opt/homebrew/opt/qt6/*
     - python3 --version
-    - pip3 install --user --upgrade pip dropbox conan==1.59
+    - pip3 install --user --upgrade pip dropbox conan==1.60
     - ccache --set-config=sloppiness=pch_defines,time_macros 
     - conan --version
     - qmake --version

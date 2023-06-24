@@ -393,7 +393,7 @@ for:
     # Install the build dependencies of the project.
     - (python -m pip install --upgrade pip)
     - if "%DEPLOY%" == "true" (python -m pip install dropbox)
-    - python -m pip install conan==1.59
+    - python -m pip install conan==1.60
     # Trick qmake to not work through MSYS
     - del /F "C:\Program Files\Git\usr\bin\sh.exe"
     - del /F "C:\Program Files\Git\bin\sh.exe"
@@ -577,7 +577,7 @@ for:
     - export PATH="$QTDIR/bin:$HOME/.local/bin:`python3 -m site --user-base`/bin:${HOME}/Qt/Qt Creator.app/Contents/MacOS:$PATH"
     - echo $PATH
     - python3 --version
-    - pip3 install --user --upgrade pip dropbox conan==1.59
+    - pip3 install --user --upgrade pip dropbox conan==1.60
     - conan --version
     - clang --version
     - qmake --version
