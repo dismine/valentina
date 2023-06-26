@@ -74,6 +74,7 @@
 #include <QUuid>
 #include <QtNumeric>
 #include <array>
+#include <array>
 #include <cstddef>
 
 enum TabOrder

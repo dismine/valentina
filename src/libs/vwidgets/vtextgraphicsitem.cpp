@@ -38,6 +38,7 @@
 #include <QPoint>
 #include <QStyleOptionGraphicsItem>
 #include <QtMath>
+#include <array>
 
 #include "../ifc/exception/vexception.h"
 #include "../vformat/vsinglelineoutlinechar.h"
