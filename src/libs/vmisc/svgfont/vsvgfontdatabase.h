@@ -70,6 +70,14 @@ private:
     void UpdateIndexes();
 
     void ParseDirectory(const QString &path, int priority);
+
+    void Invalidate(const QString &path);
+
+    auto QueryFont(const QString &family, SVGFontStyle style = SVGFontStyle::Normal,
+                   SVGFontWeight weight = SVGFontWeight::Normal) const -> VSvgFont;
+
+    auto QueryFontEngine(const QString &family, SVGFontStyle style = SVGFontStyle::Normal,
+                         SVGFontWeight weight = SVGFontWeight::Normal, int pointSize = -1) const -> VSvgFontEngine;
 };
 
 #endif // VSVGFONTDATABASE_H
