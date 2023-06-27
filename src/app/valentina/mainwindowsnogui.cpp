@@ -27,25 +27,25 @@
  *************************************************************************/
 
 #include "mainwindowsnogui.h"
-#include "core/vapplication.h"
-#include "../vpatterndb/vcontainer.h"
-#include "dialogs/dialoglayoutsettings.h"
-#include "../vwidgets/vmaingraphicsscene.h"
+#include "../ifc/xml/vvitconverter.h"
+#include "../ifc/xml/vvstconverter.h"
+#include "../vdxf/libdxfrw/drw_base.h"
+#include "../vformat/vmeasurements.h"
+#include "../vlayout/vlayoutexporter.h"
+#include "../vlayout/vlayoutgenerator.h"
+#include "../vmisc/compatibility.h"
 #include "../vmisc/dialogs/dialogexporttocsv.h"
 #include "../vmisc/qxtcsvmodel.h"
-#include "../vmisc/compatibility.h"
 #include "../vmisc/vsysexits.h"
-#include "../vformat/vmeasurements.h"
-#include "../vlayout/vlayoutgenerator.h"
-#include "dialogs/dialoglayoutprogress.h"
-#include "dialogs/dialogsavelayout.h"
-#include "../vlayout/vlayoutexporter.h"
-#include "../vpatterndb/calculator.h"
-#include "../vtools/tools/vabstracttool.h"
-#include "../ifc/xml/vvstconverter.h"
-#include "../ifc/xml/vvitconverter.h"
 #include "../vmisc/vvalentinasettings.h"
-#include "../vdxf/libdxfrw/drw_base.h"
+#include "../vpatterndb/calculator.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vtools/tools/vabstracttool.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "core/vapplication.h"
+#include "dialogs/dialoglayoutprogress.h"
+#include "dialogs/dialoglayoutsettings.h"
+#include "dialogs/dialogsavelayout.h"
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include "../vmisc/vtextcodec.h"
@@ -53,21 +53,21 @@
 #include <QTextCodec>
 #endif
 
+#include <QDebug>
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QGraphicsScene>
 #include <QMessageBox>
-#include <QProcess>
-#include <QToolButton>
-#include <QtSvg>
-#include <QPrintPreviewDialog>
-#include <QPrintDialog>
-#include <QPrinterInfo>
-#include <QtConcurrent>
-#include <functional>
 #include <QPageSize>
-#include <QDebug>
+#include <QPrintDialog>
+#include <QPrintPreviewDialog>
+#include <QPrinterInfo>
+#include <QProcess>
 #include <QProgressDialog>
+#include <QToolButton>
+#include <QtConcurrent>
+#include <QtSvg>
+#include <functional>
 
 #if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
 #include <QWinTaskbarButton>
@@ -117,21 +117,22 @@ void InsertGlobalContours(const QList<QGraphicsScene *> &scenes, const QList<QGr
         return;
     }
 
-    for(int i = 0; i < scenes.size(); ++i)
+    for (int i = 0; i < scenes.size(); ++i)
     {
         scenes.at(i)->addItem(gcontours.at(i));
     }
 }
 #endif
-}
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
-    : VAbstractMainWindow(parent),
-      pattern(new VContainer(VAbstractApplication::VApp()->TrVars(), VAbstractValApplication::VApp()->patternUnitsP(),
-                             valentinaNamespace))
+  : VAbstractMainWindow(parent),
+    pattern(new VContainer(VAbstractApplication::VApp()->TrVars(), VAbstractValApplication::VApp()->patternUnitsP(),
+                           valentinaNamespace))
 #if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
-      ,m_taskbarButton(new QWinTaskbarButton(this))
+    ,
+    m_taskbarButton(new QWinTaskbarButton(this))
 #endif
 {
     InitTempLayoutScene();
@@ -157,7 +158,7 @@ MainWindowsNoGUI::~MainWindowsNoGUI()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindowsNoGUI::ToolLayoutSettings(bool checked)
 {
-    QToolButton *tButton = qobject_cast< QToolButton * >(this->sender());
+    QToolButton *tButton = qobject_cast<QToolButton *>(this->sender());
     SCASSERT(tButton != nullptr)
 
     if (checked)
@@ -198,17 +199,15 @@ auto MainWindowsNoGUI::GenerateLayout(VLayoutGenerator &lGenerator) -> bool
 #if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
         m_taskbarProgress->setVisible(true);
         m_taskbarProgress->setValue(0);
-        m_taskbarProgress->setMaximum(lGenerator.GetNestingTime()*60);
+        m_taskbarProgress->setMaximum(lGenerator.GetNestingTime() * 60);
         progressTimer = new QTimer(this);
-        connect(progressTimer, &QTimer::timeout, this, [this, timer]()
-        {
-            m_taskbarProgress->setValue(static_cast<int>(timer.elapsed()/1000));
-        });
+        connect(progressTimer, &QTimer::timeout, this,
+                [this, timer]() { m_taskbarProgress->setValue(static_cast<int>(timer.elapsed() / 1000)); });
         progressTimer->start(1000);
 #endif
 
         progress = QSharedPointer<DialogLayoutProgress>(
-                    new DialogLayoutProgress(timer, lGenerator.GetNestingTimeMSecs(), this));
+            new DialogLayoutProgress(timer, lGenerator.GetNestingTimeMSecs(), this));
 
         connect(progress.data(), &DialogLayoutProgress::Abort, &lGenerator, &VLayoutGenerator::Abort);
         connect(progress.data(), &DialogLayoutProgress::Timeout, &lGenerator, &VLayoutGenerator::Timeout);
@@ -219,17 +218,18 @@ auto MainWindowsNoGUI::GenerateLayout(VLayoutGenerator &lGenerator) -> bool
     {
         // Because the progress bar dialog will not terminate nesting we must create separate timer for this
         auto *progressTimer = new QTimer(this);
-        connect(progressTimer, &QTimer::timeout, this, [timer, &lGenerator, progressTimer]()
-        {
-            const int timeout = static_cast<int>(lGenerator.GetNestingTimeMSecs() - timer.elapsed());
+        connect(progressTimer, &QTimer::timeout, this,
+                [timer, &lGenerator, progressTimer]()
+                {
+                    const int timeout = static_cast<int>(lGenerator.GetNestingTimeMSecs() - timer.elapsed());
 
-            if (timeout <= 1000)
-            {
-                lGenerator.Timeout();
-                progressTimer->stop();
-                progressTimer->deleteLater();
-            }
-        });
+                    if (timeout <= 1000)
+                    {
+                        lGenerator.Timeout();
+                        progressTimer->stop();
+                        progressTimer->deleteLater();
+                    }
+                });
         progressTimer->start(1000);
     }
 
@@ -264,7 +264,7 @@ auto MainWindowsNoGUI::GenerateLayout(VLayoutGenerator &lGenerator) -> bool
     QCoreApplication::processEvents();
 
 #ifdef LAYOUT_DEBUG
-    const QString path = QDir::homePath()+QStringLiteral("/LayoutDebug");
+    const QString path = QDir::homePath() + QStringLiteral("/LayoutDebug");
     QDir debugDir(path);
     debugDir.removeRecursively();
     debugDir.mkpath(path);
@@ -301,16 +301,16 @@ auto MainWindowsNoGUI::GenerateLayout(VLayoutGenerator &lGenerator) -> bool
                         }
 
                         CleanLayout();
-                        m_layoutSettings->SetLayoutPapers(lGenerator.GetPapersItems());// Blank sheets
-                        m_layoutSettings->SetLayoutDetails(lGenerator.GetAllDetailsItems());// All details items
-                        detailsOnLayout = lGenerator.GetAllDetails();// All details items
+                        m_layoutSettings->SetLayoutPapers(lGenerator.GetPapersItems());      // Blank sheets
+                        m_layoutSettings->SetLayoutDetails(lGenerator.GetAllDetailsItems()); // All details items
+                        detailsOnLayout = lGenerator.GetAllDetails();                        // All details items
                         m_layoutSettings->SetLayoutShadows(CreateShadows(m_layoutSettings->LayoutPapers()));
                         m_layoutSettings->SetLayoutPortrait(lGenerator.IsPortrait());
                         m_layoutSettings->SetLayoutScenes(CreateScenes(m_layoutSettings->LayoutPapers(),
                                                                        m_layoutSettings->LayoutShadows(),
                                                                        m_layoutSettings->LayoutDetails()));
 #if !defined(V_NO_ASSERT)
-                       //Uncomment to debug, shows global contour
+                        // Uncomment to debug, shows global contour
 //                        gcontours = lGenerator.GetGlobalContours(); // uncomment for debugging
 //                        InsertGlobalContours(scenes, gcontours); // uncomment for debugging
 #endif
@@ -320,8 +320,8 @@ auto MainWindowsNoGUI::GenerateLayout(VLayoutGenerator &lGenerator) -> bool
                         }
                         m_layoutSettings->SetIgnorePrinterMargins(not lGenerator.IsUsePrinterFields());
                         m_layoutSettings->SetLayoutMargins(lGenerator.GetPrinterFields());
-                        m_layoutSettings->SetLayoutPaperSize(QSizeF(lGenerator.GetPaperWidth(),
-                                                                    lGenerator.GetPaperHeight()));
+                        m_layoutSettings->SetLayoutPaperSize(
+                            QSizeF(lGenerator.GetPaperWidth(), lGenerator.GetPaperHeight()));
                         m_layoutSettings->SetAutoCropLength(lGenerator.GetAutoCropLength());
                         m_layoutSettings->SetAutoCropWidth(lGenerator.GetAutoCropWidth());
                         m_layoutSettings->SetUnitePages(lGenerator.IsUnitePages());
@@ -349,7 +349,7 @@ auto MainWindowsNoGUI::GenerateLayout(VLayoutGenerator &lGenerator) -> bool
                         rotationUsed = true;
                     }
                 }
-                lGenerator.SetShift(lGenerator.GetShift()/2.0);
+                lGenerator.SetShift(lGenerator.GetShift() / 2.0);
                 break;
             case LayoutErrors::EmptyPaperError:
                 if (lGenerator.IsRotationNeeded())
@@ -362,13 +362,13 @@ auto MainWindowsNoGUI::GenerateLayout(VLayoutGenerator &lGenerator) -> bool
                     }
                     else
                     {
-                        lGenerator.SetShift(lGenerator.GetShift()/2.0);
+                        lGenerator.SetShift(lGenerator.GetShift() / 2.0);
                         rotationUsed = false;
                     }
                 }
                 else
                 {
-                    lGenerator.SetShift(lGenerator.GetShift()/2.0);
+                    lGenerator.SetShift(lGenerator.GetShift() / 2.0);
                 }
                 break;
             case LayoutErrors::Timeout:
@@ -381,10 +381,10 @@ auto MainWindowsNoGUI::GenerateLayout(VLayoutGenerator &lGenerator) -> bool
 
         nestingState = lGenerator.State();
 
-        if (nestingState == LayoutErrors::PrepareLayoutError || nestingState == LayoutErrors::ProcessStoped
-                || nestingState == LayoutErrors::TerminatedByException
-                || (nestingState == LayoutErrors::NoError && not qFuzzyIsNull(lGenerator.GetEfficiencyCoefficient())
-                    && efficiency >= lGenerator.GetEfficiencyCoefficient()))
+        if (nestingState == LayoutErrors::PrepareLayoutError || nestingState == LayoutErrors::ProcessStoped ||
+            nestingState == LayoutErrors::TerminatedByException ||
+            (nestingState == LayoutErrors::NoError && not qFuzzyIsNull(lGenerator.GetEfficiencyCoefficient()) &&
+             efficiency >= lGenerator.GetEfficiencyCoefficient()))
         {
             if (not lGenerator.IsPreferOneSheetSolution() || lGenerator.PapersCount() == 1)
             {
@@ -494,10 +494,11 @@ void MainWindowsNoGUI::ExportData(const QVector<VLayoutPiece> &listDetails)
             for (int i = 0; i < detailsOnLayout.size(); ++i)
             {
                 const QString name = m_dialogSaveLayout->Path() + '/' + m_dialogSaveLayout->FileName() +
-                        QString::number(i+1) + VLayoutExporter::ExportFormatSuffix(m_dialogSaveLayout->Format());
+                                     QString::number(i + 1) +
+                                     VLayoutExporter::ExportFormatSuffix(m_dialogSaveLayout->Format());
 
-                QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(
-                            m_layoutSettings->LayoutPapers().at(i));
+                QGraphicsRectItem *paper =
+                    qgraphicsitem_cast<QGraphicsRectItem *>(m_layoutSettings->LayoutPapers().at(i));
                 SCASSERT(paper != nullptr)
 
                 ExportApparelLayout(detailsOnLayout.at(i), name, paper->rect().size().toSize());
@@ -524,9 +525,9 @@ void MainWindowsNoGUI::ExportData(const QVector<VLayoutPiece> &listDetails)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::ExportFlatLayout(const QList<QGraphicsScene *> &scenes,
-                                        const QList<QGraphicsItem *> &papers, const QList<QGraphicsItem *> &shadows,
-                                        const QList<QList<QGraphicsItem *> > &details, bool ignorePrinterFields,
+void MainWindowsNoGUI::ExportFlatLayout(const QList<QGraphicsScene *> &scenes, const QList<QGraphicsItem *> &papers,
+                                        const QList<QGraphicsItem *> &shadows,
+                                        const QList<QList<QGraphicsItem *>> &details, bool ignorePrinterFields,
                                         const QMarginsF &margins)
 {
     const QString path = m_dialogSaveLayout->Path();
@@ -579,7 +580,7 @@ void MainWindowsNoGUI::ExportDetailsAsFlatLayout(const QVector<VLayoutPiece> &li
 
         if (piece.IsForceFlipping())
         {
-            item->setPos(piece.GetMx()-diff, piece.GetMy());
+            item->setPos(piece.GetMx() - diff, piece.GetMy());
         }
         else
         {
@@ -593,7 +594,7 @@ void MainWindowsNoGUI::ExportDetailsAsFlatLayout(const QVector<VLayoutPiece> &li
         scene->addItem(item);
     }
 
-    QList<QGraphicsItem *> papers;// Blank sheets
+    QList<QGraphicsItem *> papers; // Blank sheets
     QRect rect = scene->itemsBoundingRect().toRect();
 
     const int mx = rect.x();
@@ -614,7 +615,7 @@ void MainWindowsNoGUI::ExportDetailsAsFlatLayout(const QVector<VLayoutPiece> &li
     paper->setBrush(QBrush(Qt::white));
     papers.append(paper);
 
-    QList<QList<QGraphicsItem *> > details;// All details
+    QList<QList<QGraphicsItem *>> details; // All details
     details.append(list);
 
     QList<QGraphicsItem *> shadows = CreateShadows(papers);
@@ -624,7 +625,7 @@ void MainWindowsNoGUI::ExportDetailsAsFlatLayout(const QVector<VLayoutPiece> &li
     const qreal margin = ToPixel(1, Unit::Cm);
     ExportFlatLayout(scenes, papers, shadows, details, ignorePrinterFields, QMarginsF(margin, margin, margin, margin));
 
-    qDeleteAll(scenes);//Scene will clear all other items
+    qDeleteAll(scenes); // Scene will clear all other items
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -688,7 +689,7 @@ void MainWindowsNoGUI::ExportDetailsAsApparelLayout(QVector<VLayoutPiece> listDe
 
     QList<QGraphicsItem *> list;
     list.reserve(listDetails.count());
-    for (int i=0; i < listDetails.count(); ++i)
+    for (int i = 0; i < listDetails.count(); ++i)
     {
         VLayoutPiece piece = listDetails.at(i);
         QGraphicsItem *item = piece.GetItem(m_dialogSaveLayout->IsTextAsPaths());
@@ -705,8 +706,8 @@ void MainWindowsNoGUI::ExportDetailsAsApparelLayout(QVector<VLayoutPiece> listDe
         QTransform moveMatrix = piece.GetMatrix();
         if (piece.IsForceFlipping())
         {
-            item->setPos(piece.GetMx()-diff, piece.GetMy());
-            moveMatrix = moveMatrix.translate(-piece.GetMx()+diff, piece.GetMy());
+            item->setPos(piece.GetMx() - diff, piece.GetMy());
+            moveMatrix = moveMatrix.translate(-piece.GetMx() + diff, piece.GetMy());
         }
         else
         {
@@ -737,7 +738,7 @@ void MainWindowsNoGUI::ExportDetailsAsApparelLayout(QVector<VLayoutPiece> listDe
 
     rect = scene->itemsBoundingRect().toRect();
 
-    for (int i=0; i < listDetails.count(); ++i)
+    for (int i = 0; i < listDetails.count(); ++i)
     {
         QTransform moveMatrix = listDetails.at(i).GetMatrix();
         if (listDetails.at(i).IsForceFlipping())
@@ -751,8 +752,8 @@ void MainWindowsNoGUI::ExportDetailsAsApparelLayout(QVector<VLayoutPiece> listDe
         listDetails[i].SetMatrix(moveMatrix);
     }
 
-    const QString name = m_dialogSaveLayout->Path() + '/' + m_dialogSaveLayout->FileName() +
-            QString::number(1) + VLayoutExporter::ExportFormatSuffix(m_dialogSaveLayout->Format());
+    const QString name = m_dialogSaveLayout->Path() + '/' + m_dialogSaveLayout->FileName() + QString::number(1) +
+                         VLayoutExporter::ExportFormatSuffix(m_dialogSaveLayout->Format());
 
     ExportApparelLayout(listDetails, name, rect.size());
 }
@@ -782,12 +783,12 @@ void MainWindowsNoGUI::PrintPreviewTiled()
         VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
         m_layoutSettings->SetTiledMargins(settings->GetTiledPDFMargins(Unit::Mm));
         m_layoutSettings->SetTiledPDFOrientation(settings->GetTiledPDFOrientation());
-        m_layoutSettings->SetTiledPDFPaperSize(QSizeF(settings->GetTiledPDFPaperWidth(Unit::Mm),
-                                                      settings->GetTiledPDFPaperHeight(Unit::Mm)));
+        m_layoutSettings->SetTiledPDFPaperSize(
+            QSizeF(settings->GetTiledPDFPaperWidth(Unit::Mm), settings->GetTiledPDFPaperHeight(Unit::Mm)));
     }
 
     m_layoutSettings->SetWatermarkPath(
-                AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->GetWatermarkPath()));
+        AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->GetWatermarkPath()));
     m_layoutSettings->PrintPreviewTiled();
 }
 
@@ -816,12 +817,12 @@ void MainWindowsNoGUI::PrintTiled()
         VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
         m_layoutSettings->SetTiledMargins(settings->GetTiledPDFMargins(Unit::Mm));
         m_layoutSettings->SetTiledPDFOrientation(settings->GetTiledPDFOrientation());
-        m_layoutSettings->SetTiledPDFPaperSize(QSizeF(settings->GetTiledPDFPaperWidth(Unit::Mm),
-                                                      settings->GetTiledPDFPaperHeight(Unit::Mm)));
+        m_layoutSettings->SetTiledPDFPaperSize(
+            QSizeF(settings->GetTiledPDFPaperWidth(Unit::Mm), settings->GetTiledPDFPaperHeight(Unit::Mm)));
     }
 
     m_layoutSettings->SetWatermarkPath(
-                AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->GetWatermarkPath()));
+        AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->GetWatermarkPath()));
     m_layoutSettings->PrintTiled();
 }
 
@@ -846,7 +847,7 @@ auto MainWindowsNoGUI::PrepareDetailsForLayout(const QVector<DetailForLayout> &d
 
     QFutureWatcher<VLayoutPiece> futureWatcher;
     QObject::connect(&futureWatcher, &QFutureWatcher<VLayoutPiece>::finished, &progress, &QProgressDialog::reset);
-    QObject::connect(&futureWatcher,  &QFutureWatcher<VLayoutPiece>::progressRangeChanged, &progress,
+    QObject::connect(&futureWatcher, &QFutureWatcher<VLayoutPiece>::progressRangeChanged, &progress,
                      &QProgressDialog::setRange);
     QObject::connect(&futureWatcher, &QFutureWatcher<VLayoutPiece>::progressValueChanged, &progress,
                      &QProgressDialog::setValue);
@@ -877,7 +878,7 @@ auto MainWindowsNoGUI::PrepareDetailsForLayout(const QVector<DetailForLayout> &d
 void MainWindowsNoGUI::InitTempLayoutScene()
 {
     tempSceneLayout = new VMainGraphicsScene();
-    tempSceneLayout->setBackgroundBrush( QBrush(QColor(Qt::gray), Qt::SolidPattern) );
+    tempSceneLayout->setBackgroundBrush(QBrush(QColor(Qt::gray), Qt::SolidPattern));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -902,24 +903,24 @@ auto MainWindowsNoGUI::ScenePreview(int i, QSize iconSize, PreviewQuatilty quali
         {
             const QRectF r = paper->rect();
             // Create the image with the exact size of the shrunk scene
-            image = QImage(QSize(static_cast<qint32>(r.width()), static_cast<qint32>(r.height())),
-                           QImage::Format_RGB32);
+            image =
+                QImage(QSize(static_cast<qint32>(r.width()), static_cast<qint32>(r.height())), QImage::Format_RGB32);
 
             if (not image.isNull())
             {
                 image.fill(Qt::white);
                 QPainter painter(&image);
-                painter.setFont( QFont( QStringLiteral("Arial"), 8, QFont::Normal ) );
+                painter.setFont(QFont(QStringLiteral("Arial"), 8, QFont::Normal));
                 painter.setRenderHint(QPainter::Antialiasing, true);
                 painter.setPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthMainLine(), Qt::SolidLine,
                                     Qt::RoundCap, Qt::RoundJoin));
-                painter.setBrush ( QBrush ( Qt::NoBrush ) );
+                painter.setBrush(QBrush(Qt::NoBrush));
                 m_layoutSettings->LayoutScenes().at(i)->render(&painter, r, r, Qt::IgnoreAspectRatio);
                 painter.end();
             }
             else
             {
-                qDebug()<<"Cannot create image. Size " << r.size() << "too big";
+                qDebug() << "Cannot create image. Size " << r.size() << "too big";
 
                 image = QImage(iconSize, QImage::Format_RGB32);
                 image.fill(Qt::white);
@@ -941,11 +942,11 @@ auto MainWindowsNoGUI::CreateShadows(const QList<QGraphicsItem *> &papers) -> QL
 
     for (auto *paper : papers)
     {
-        qreal x1=0, y1=0, x2=0, y2=0;
+        qreal x1 = 0, y1 = 0, x2 = 0, y2 = 0;
         if (QGraphicsRectItem *item = qgraphicsitem_cast<QGraphicsRectItem *>(paper))
         {
             item->rect().getCoords(&x1, &y1, &x2, &y2);
-            QGraphicsRectItem *shadowPaper = new QGraphicsRectItem(QRectF(x1+4, y1+4, x2+4, y2+4));
+            QGraphicsRectItem *shadowPaper = new QGraphicsRectItem(QRectF(x1 + 4, y1 + 4, x2 + 4, y2 + 4));
             shadowPaper->setBrush(QBrush(Qt::black));
             shadows.append(shadowPaper);
         }
@@ -964,7 +965,7 @@ auto MainWindowsNoGUI::CreateScenes(const QList<QGraphicsItem *> &papers, const 
 {
     QList<QGraphicsScene *> scenes;
     scenes.reserve(papers.size());
-    for (int i=0; i<papers.size(); ++i)
+    for (int i = 0; i < papers.size(); ++i)
     {
         auto *scene = new VMainGraphicsScene();
         scene->SetNonInteractive(true);
@@ -1003,22 +1004,21 @@ void MainWindowsNoGUI::PdfTiledFile(const QString &name)
         VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
         m_layoutSettings->SetTiledMargins(QMarginsF(settings->GetTiledPDFMargins(Unit::Mm)));
         m_layoutSettings->SetTiledPDFOrientation(settings->GetTiledPDFOrientation());
-        m_layoutSettings->SetTiledPDFPaperSize(QSizeF(settings->GetTiledPDFPaperWidth(Unit::Mm),
-                                                      settings->GetTiledPDFPaperHeight(Unit::Mm)));
+        m_layoutSettings->SetTiledPDFPaperSize(
+            QSizeF(settings->GetTiledPDFPaperWidth(Unit::Mm), settings->GetTiledPDFPaperHeight(Unit::Mm)));
         m_layoutSettings->SetXScale(1);
         m_layoutSettings->SetYScale(1);
     }
 
     m_layoutSettings->SetWatermarkPath(
-                AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->GetWatermarkPath()));
+        AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->GetWatermarkPath()));
     m_layoutSettings->PdfTiledFile(name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
-                                   const QList<QGraphicsItem *> &papers, const QList<QGraphicsItem *> &shadows,
-                                   const QList<QList<QGraphicsItem *> > &details, bool ignorePrinterFields,
-                                   const QMarginsF &margins) const
+void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes, const QList<QGraphicsItem *> &papers,
+                                   const QList<QGraphicsItem *> &shadows, const QList<QList<QGraphicsItem *>> &details,
+                                   bool ignorePrinterFields, const QMarginsF &margins) const
 {
     QT_WARNING_PUSH
     QT_WARNING_DISABLE_GCC("-Wnoexcept")
@@ -1036,17 +1036,18 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
     exporter.SetBinaryDxfFormat(m_dialogSaveLayout->IsBinaryDXFFormat());
     exporter.SetShowGrainline(m_dialogSaveLayout->IsShowGrainline());
 
-    for (int i=0; i < scenes.size(); ++i)
+    for (int i = 0; i < scenes.size(); ++i)
     {
         auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
         if (paper != nullptr)
         {
             const QString name = m_dialogSaveLayout->Path() + '/' + m_dialogSaveLayout->FileName() +
-                    QString::number(i+1) + VLayoutExporter::ExportFormatSuffix(m_dialogSaveLayout->Format());
+                                 QString::number(i + 1) +
+                                 VLayoutExporter::ExportFormatSuffix(m_dialogSaveLayout->Format());
             auto *brush = new QBrush();
-            brush->setColor( QColor( Qt::white ) );
+            brush->setColor(QColor(Qt::white));
             QGraphicsScene *scene = scenes.at(i);
-            scene->setBackgroundBrush( *brush );
+            scene->setBackgroundBrush(*brush);
             shadows[i]->setVisible(false);
             const qreal thinPen = 0.1;
             paper->setPen(QPen(QBrush(Qt::white, Qt::NoBrush), thinPen, Qt::NoPen));
@@ -1149,9 +1150,9 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
                     break;
             }
             paper->setPen(QPen(Qt::black, 1));
-            brush->setColor( QColor( Qt::gray ) );
-            brush->setStyle( Qt::SolidPattern );
-            scenes[i]->setBackgroundBrush( *brush );
+            brush->setColor(QColor(Qt::gray));
+            brush->setStyle(Qt::SolidPattern);
+            scenes[i]->setBackgroundBrush(*brush);
             shadows[i]->setVisible(true);
             delete brush;
         }
@@ -1163,7 +1164,8 @@ auto MainWindowsNoGUI::FileName() const -> QString
 {
     QString fileName;
     VAbstractValApplication::VApp()->GetPatternPath().isEmpty()
-            ? fileName = tr("unnamed") : fileName = VAbstractValApplication::VApp()->GetPatternPath();
+        ? fileName = tr("unnamed")
+        : fileName = VAbstractValApplication::VApp()->GetPatternPath();
     return QFileInfo(fileName).baseName();
 }
 
@@ -1188,7 +1190,7 @@ auto MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, boo
     VContainer completeData = doc->GetCompleteData();
     completeData.FillPiecesAreas(VAbstractValApplication::VApp()->patternUnits());
 
-    for (int i=0; i < measurements.size(); ++i)
+    for (int i = 0; i < measurements.size(); ++i)
     {
         const VFinalMeasurement &m = measurements.at(i);
 
@@ -1206,9 +1208,10 @@ auto MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, boo
 
                 if (qIsInf(result) || qIsNaN(result))
                 {
-                    qCritical("%s\n\n%s", qUtf8Printable(tr("Export final measurements error.")),
-                              qUtf8Printable(tr("Value in line %1 is infinite or NaN. Please, check your calculations.")
-                                             .arg(i+1)));
+                    qCritical(
+                        "%s\n\n%s", qUtf8Printable(tr("Export final measurements error.")),
+                        qUtf8Printable(
+                            tr("Value in line %1 is infinite or NaN. Please, check your calculations.").arg(i + 1)));
                     if (not VApplication::IsGUIMode())
                     {
                         QCoreApplication::exit(V_EX_DATAERR);
@@ -1219,7 +1222,7 @@ auto MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, boo
             catch (qmu::QmuParserError &e)
             {
                 qCritical("%s\n\n%s", qUtf8Printable(tr("Export final measurements error.")),
-                          qUtf8Printable(tr("Parser error at line %1: %2.").arg(i+1).arg(e.GetMsg())));
+                          qUtf8Printable(tr("Parser error at line %1: %2.").arg(i + 1).arg(e.GetMsg())));
                 if (not VApplication::IsGUIMode())
                 {
                     QCoreApplication::exit(V_EX_DATAERR);
@@ -1269,12 +1272,12 @@ auto MainWindowsNoGUI::OpenMeasurementFile(const QString &path) const -> QShared
         if (m->Type() == MeasurementsType::Multisize)
         {
             VVSTConverter converter(path);
-            m->setXMLContent(converter.Convert());// Read again after conversion
+            m->setXMLContent(converter.Convert()); // Read again after conversion
         }
         else
         {
             VVITConverter converter(path);
-            m->setXMLContent(converter.Convert());// Read again after conversion
+            m->setXMLContent(converter.Convert()); // Read again after conversion
         }
 
         if (not m->IsDefinedKnownNamesValid())
@@ -1307,8 +1310,8 @@ auto MainWindowsNoGUI::OpenMeasurementFile(const QString &path) const -> QShared
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindowsNoGUI::CheckRequiredMeasurements(const VMeasurements *m) const
 {
-    const QSet<QString> match = ConvertToSet<QString>(doc->ListMeasurements())
-            .subtract(ConvertToSet<QString>(m->ListAll()));
+    const QSet<QString> match =
+        ConvertToSet<QString>(doc->ListMeasurements()).subtract(ConvertToSet<QString>(m->ListAll()));
 
     if (not match.isEmpty())
     {

@@ -28,14 +28,16 @@
 #ifndef VPSHEET_H
 #define VPSHEET_H
 
-#include <QSizeF>
-#include <QMarginsF>
-#include <QList>
 #include <QComboBox>
+#include <QList>
+#include <QMarginsF>
+#include <QPageLayout>
+#include <QSizeF>
 #include <QUuid>
 
-#include "def.h"
 #include "layoutdef.h"
+
+#include "../vmisc/def.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
@@ -50,6 +52,7 @@ class VPGraphicsPiece;
 class VPGraphicsTileGrid;
 class VPGraphicsSheet;
 class VLayoutPiece;
+class QGraphicsItem;
 
 class VPSheetSceneData
 {
@@ -108,7 +111,7 @@ private:
     VPGraphicsPieceControls *m_rotationControls{nullptr};
     VPGraphicsTransformationOrigin *m_rotationOrigin{nullptr};
 
-    QList<VPGraphicsPiece*> m_graphicsPieces{};
+    QList<VPGraphicsPiece *> m_graphicsPieces{};
 
     /**
      * variable to hold temporarly hte value of the show tiles
@@ -136,6 +139,7 @@ private:
 class VPSheet : public QObject
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit VPSheet(const VPLayoutPtr &layout, QObject *parent = nullptr);
 
@@ -314,7 +318,6 @@ private:
     VPSheetSceneData *m_sceneData{nullptr};
 
     auto SheetUnits() const -> Unit;
-
 };
 
 Q_DECLARE_METATYPE(VPSheetPtr) // NOLINT

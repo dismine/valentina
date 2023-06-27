@@ -27,10 +27,10 @@
  *************************************************************************/
 
 #include "tapepreferencesconfigurationpage.h"
-#include "ui_tapepreferencesconfigurationpage.h"
 #include "../../mapplication.h"
 #include "../../vtapesettings.h"
 #include "../vpatterndb/pmsystems.h"
+#include "ui_tapepreferencesconfigurationpage.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
@@ -38,19 +38,19 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *parent)
-    : QWidget(parent),
-      ui(new Ui::TapePreferencesConfigurationPage),
-      m_langChanged(false),
-      m_systemChanged(false)
+  : QWidget(parent),
+    ui(new Ui::TapePreferencesConfigurationPage),
+    m_langChanged(false),
+    m_systemChanged(false)
 {
     ui->setupUi(this);
     RetranslateUi();
 
     InitLanguages(ui->langCombo);
-    connect(ui->langCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
-    {
-        m_langChanged = true;
-    });
+    connect(ui->langCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            [this]() { m_langChanged = true; });
+
+    VTapeSettings *settings = MApplication::VApp()->TapeSettings();
 
     //-------------------- Decimal separator setup
     ui->osOptionCheck->setChecked(MApplication::VApp()->TapeSettings()->GetOsSeparator());
@@ -63,17 +63,18 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
 
     //---------------------- Pattern making system
     ui->systemBookValueLabel->setFixedHeight(4 * QFontMetrics(ui->systemBookValueLabel->font()).lineSpacing());
-    connect(ui->systemCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
-    {
-        m_systemChanged = true;
-        QString text = VAbstractApplication::VApp()->TrVars()
-                ->PMSystemAuthor(ui->systemCombo->currentData().toString());
-        ui->systemAuthorValueLabel->setText(text);
-        ui->systemAuthorValueLabel->setToolTip(text);
+    connect(ui->systemCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            [this]()
+            {
+                m_systemChanged = true;
+                QString text =
+                    VAbstractApplication::VApp()->TrVars()->PMSystemAuthor(ui->systemCombo->currentData().toString());
+                ui->systemAuthorValueLabel->setText(text);
+                ui->systemAuthorValueLabel->setToolTip(text);
 
-        text = VAbstractApplication::VApp()->TrVars()->PMSystemBook(ui->systemCombo->currentData().toString());
-        ui->systemBookValueLabel->setPlainText(text);
-    });
+                text = VAbstractApplication::VApp()->TrVars()->PMSystemBook(ui->systemCombo->currentData().toString());
+                ui->systemBookValueLabel->setPlainText(text);
+            });
 
     // set default pattern making system
     int index = ui->systemCombo->findData(MApplication::VApp()->TapeSettings()->GetPMSystemCode());
@@ -83,10 +84,8 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
     }
 
     //----------------------------- Measurements Editing
-    connect(ui->resetWarningsButton, &QPushButton::released, this, []()
-    {
-        MApplication::VApp()->TapeSettings()->SetConfirmFormatRewriting(true);
-    });
+    connect(ui->resetWarningsButton, &QPushButton::released, this,
+            []() { MApplication::VApp()->TapeSettings()->SetConfirmFormatRewriting(true); });
 
     //----------------------- Toolbar
     ui->toolBarStyleCheck->setChecked(MApplication::VApp()->TapeSettings()->GetToolBarStyle());
@@ -133,7 +132,7 @@ auto TapePreferencesConfigurationPage::Apply() -> QStringList
         m_systemChanged = false;
 
         VAbstractApplication::VApp()->LoadTranslation(locale);
-        QCoreApplication::processEvents();// force to call changeEvent
+        QCoreApplication::processEvents(); // force to call changeEvent
 
         // Part about measurments will not be updated automatically
         MApplication::VApp()->RetranslateTables();
@@ -167,12 +166,12 @@ void TapePreferencesConfigurationPage::RetranslateUi()
     ui->osOptionCheck->setText(tr("With OS options") + QStringLiteral(" (%1)").arg(LocaleDecimalPoint(QLocale())));
 
     {
-    const auto code = qvariant_cast<QString>(ui->systemCombo->currentData());
-    ui->systemCombo->blockSignals(true);
-    ui->systemCombo->clear();
-    InitPMSystems(ui->systemCombo);
-    ui->systemCombo->setCurrentIndex(-1);
-    ui->systemCombo->blockSignals(false);
-    ui->systemCombo->setCurrentIndex(ui->systemCombo->findData(code));
+        const auto code = qvariant_cast<QString>(ui->systemCombo->currentData());
+        ui->systemCombo->blockSignals(true);
+        ui->systemCombo->clear();
+        InitPMSystems(ui->systemCombo);
+        ui->systemCombo->setCurrentIndex(-1);
+        ui->systemCombo->blockSignals(false);
+        ui->systemCombo->setCurrentIndex(ui->systemCombo->findData(code));
     }
 }

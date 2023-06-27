@@ -43,8 +43,9 @@ class VAbstractValApplication : public VAbstractApplication
 {
     Q_OBJECT // NOLINT
 
-        public : VAbstractValApplication(int &argc, char **argv);
-    virtual ~VAbstractValApplication() = default;
+public:
+    VAbstractValApplication(int &argc, char **argv);
+    ~VAbstractValApplication() override = default;
 
     auto GetCustomerName() const -> QString;
     void SetCustomerName(const QString &name);

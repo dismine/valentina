@@ -145,7 +145,7 @@ private slots:
 
     void EditDimensionLabels();
     void DimensionCustomNames();
-
+    
     void SetDefaultGUILanguage();
 
 private:
