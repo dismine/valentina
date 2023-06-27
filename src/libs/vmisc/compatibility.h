@@ -409,4 +409,14 @@ template <typename T, typename N> inline auto Sliced(const T &list, N pos, N n) 
 #endif
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+inline auto Back(const QString &str) -> QChar
+{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+    return str.back();
+#else
+    return str.at(str.size() - 1);
+#endif
+}
+
 #endif // COMPATIBILITY_H

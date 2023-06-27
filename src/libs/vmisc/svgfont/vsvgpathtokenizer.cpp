@@ -33,8 +33,10 @@
 #include <QtMath>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
+#include "../diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+
+#include "../compatibility.h"
 
 namespace
 {
@@ -68,12 +70,12 @@ auto IsSeparator(const QString &currentToken, const QChar &ch) -> bool
         return true;
     }
 
-    if (ch == '-' && !currentToken.isEmpty() && currentToken.back() != 'e' && currentToken.back() != 'E')
+    if (ch == '-' && !currentToken.isEmpty() && Back(currentToken) != 'e' && Back(currentToken) != 'E')
     {
         return true;
     }
 
-    if (ch == '+' && !currentToken.isEmpty() && currentToken.back() != 'e' && currentToken.back() != 'E')
+    if (ch == '+' && !currentToken.isEmpty() && Back(currentToken) != 'e' && Back(currentToken) != 'E')
     {
         return true;
     }

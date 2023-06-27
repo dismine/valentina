@@ -71,7 +71,7 @@ Q_REQUIRED_RESULT auto ParseCorrectiosn(const QJsonObject &correctionsObject) ->
         for (auto segmentsIt = segmentsObject.constBegin(); segmentsIt != segmentsObject.constEnd(); ++segmentsIt)
         {
             bool correct = segmentsIt.value().toBool();
-            if (not correct)
+            if (!correct)
             {
                 segments.insert(segmentsIt.key().toInt(), correct);
             }

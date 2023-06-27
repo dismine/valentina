@@ -143,7 +143,8 @@ Module {
                 else if (product.windeployqt.noCompilerRuntime)
                     cmdArgs.push("--no-compiler-runtime")
 
-                if (product.windeployqt.noVirtualkeyboard && Utilities.versionCompare(Qt.core.version, "6.5") < 0)
+                if (product.windeployqt.noVirtualkeyboard &&
+                        Utilities.versionCompare(product.Qt.core.version, "6.5") < 0)
                     cmdArgs.push("--no-virtualkeyboard")
 
                 if (product.windeployqt.json)
@@ -158,7 +159,7 @@ Module {
                 if (product.windeployqt.verbose !== undefined)
                     cmdArgs.push("--verbose", product.windeployqt.verbose)
 
-                cmdArgs.push(product.installDir + "/" + input.fileName);
+                cmdArgs.push(product.installDir + "\\" + input.fileName);
 
                 var cmd = new Command(product.Qt.core.binPath + "/" + windeployqtProgram, cmdArgs);
                 cmd.jobPool = "windeployqt";
