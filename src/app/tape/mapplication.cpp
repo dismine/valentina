@@ -32,6 +32,8 @@
 #include "../ifc/exception/vexceptionemptyparameter.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/exception/vexceptionwrongid.h"
+#include "../vganalytics/def.h"
+#include "../vganalytics/vganalytics.h"
 #include "../vmisc/projectversion.h"
 #include "../vmisc/vsysexits.h"
 #include "tmainwindow.h"
@@ -77,6 +79,7 @@ Q_LOGGING_CATEGORY(mApp, "m.application") // NOLINT
 QT_WARNING_POP
 
 #include <QCommandLineParser>
+#include <QUuid>
 
 namespace
 {
@@ -318,6 +321,17 @@ MApplication::MApplication(int &argc, char **argv)
 //---------------------------------------------------------------------------------------------------------------------
 MApplication::~MApplication()
 {
+    if (settings->IsCollectStatistic())
+    {
+        auto *statistic = VGAnalytics::Instance();
+
+        QString clientID = settings->GetClientID();
+        if (!clientID.isEmpty())
+        {
+            statistic->SendAppCloseEvent(m_uptimeTimer.elapsed());
+        }
+    }
+
     qDeleteAll(m_mainWindows);
 
     delete m_trVars;
@@ -473,6 +487,19 @@ void MApplication::InitOptions()
     }
     ActivateDarkMode();
     QResource::registerResource(diagramsPath());
+
+    auto *statistic = VGAnalytics::Instance();
+    QString clientID = settings->GetClientID();
+    if (clientID.isEmpty())
+    {
+        clientID = QUuid::createUuid().toString();
+        settings->SetClientID(clientID);
+    }
+    statistic->SetClientID(clientID);
+    statistic->SetGUILanguage(settings->GetLocale());
+    statistic->SetMeasurementId(GA_MEASUREMENT_ID);
+    statistic->SetApiSecret(GA_API_SECRET);
+    statistic->Enable(settings->IsCollectStatistic());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

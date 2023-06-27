@@ -36,10 +36,11 @@
 #include "../mainwindow.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "../version.h"
+#include "../vganalytics/def.h"
+#include "../vganalytics/vganalytics.h"
 #include "../vmisc/qt_dispatch/qt_dispatch.h"
 #include "../vmisc/vsysexits.h"
 #include "../vmisc/vvalentinasettings.h"
-#include <qstringliteral.h>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
 #include "../vmisc/backport/text.h"
@@ -383,6 +384,18 @@ VApplication::VApplication(int &argc, char **argv)
 VApplication::~VApplication()
 {
     qCDebug(vApp, "Application closing.");
+
+    if (settings->IsCollectStatistic())
+    {
+        auto *statistic = VGAnalytics::Instance();
+
+        QString clientID = settings->GetClientID();
+        if (!clientID.isEmpty())
+        {
+            statistic->SendAppCloseEvent(m_uptimeTimer.elapsed());
+        }
+    }
+
     qInstallMessageHandler(nullptr); // Resore the message handler
     delete m_trVars;
     VCommandLine::Reset();
@@ -695,6 +708,19 @@ void VApplication::InitOptions()
         QIcon::setThemeName(QStringLiteral("win.icon.theme"));
     }
     ActivateDarkMode();
+
+    auto *statistic = VGAnalytics::Instance();
+    QString clientID = settings->GetClientID();
+    if (clientID.isEmpty())
+    {
+        clientID = QUuid::createUuid().toString();
+        settings->SetClientID(clientID);
+    }
+    statistic->SetClientID(clientID);
+    statistic->SetGUILanguage(settings->GetLocale());
+    statistic->SetMeasurementId(GA_MEASUREMENT_ID);
+    statistic->SetApiSecret(GA_API_SECRET);
+    statistic->Enable(settings->IsCollectStatistic());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

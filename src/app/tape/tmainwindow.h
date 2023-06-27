@@ -146,7 +146,7 @@ private slots:
     void EditDimensionLabels();
     void DimensionCustomNames();
     
-    void SetDefaultGUILanguage();
+    void AskDefaultSettings();
 
 private:
     // cppcheck-suppress unknownMacro

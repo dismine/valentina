@@ -35,6 +35,7 @@
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../qmuparser/qmudef.h"
+#include "../vganalytics/vganalytics.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *parent)
@@ -53,13 +54,13 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
     VTapeSettings *settings = MApplication::VApp()->TapeSettings();
 
     //-------------------- Decimal separator setup
-    ui->osOptionCheck->setChecked(MApplication::VApp()->TapeSettings()->GetOsSeparator());
+    ui->osOptionCheck->setChecked(settings->GetOsSeparator());
 
     // Theme
-    ui->darkModeCheck->setChecked(MApplication::VApp()->TapeSettings()->GetDarkMode());
+    ui->darkModeCheck->setChecked(settings->GetDarkMode());
 
     // Native dialogs
-    ui->checkBoxDontUseNativeDialog->setChecked(MApplication::VApp()->TapeSettings()->IsDontUseNativeDialog());
+    ui->checkBoxDontUseNativeDialog->setChecked(settings->IsDontUseNativeDialog());
 
     //---------------------- Pattern making system
     ui->systemBookValueLabel->setFixedHeight(4 * QFontMetrics(ui->systemBookValueLabel->font()).lineSpacing());
@@ -77,7 +78,7 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
             });
 
     // set default pattern making system
-    int index = ui->systemCombo->findData(MApplication::VApp()->TapeSettings()->GetPMSystemCode());
+    int index = ui->systemCombo->findData(settings->GetPMSystemCode());
     if (index != -1)
     {
         ui->systemCombo->setCurrentIndex(index);
@@ -88,11 +89,13 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
             []() { MApplication::VApp()->TapeSettings()->SetConfirmFormatRewriting(true); });
 
     //----------------------- Toolbar
-    ui->toolBarStyleCheck->setChecked(MApplication::VApp()->TapeSettings()->GetToolBarStyle());
+    ui->toolBarStyleCheck->setChecked(settings->GetToolBarStyle());
 
     //----------------------- Update
-    ui->checkBoxAutomaticallyCheckUpdates->setChecked(
-                MApplication::VApp()->TapeSettings()->IsAutomaticallyCheckUpdates());
+    ui->checkBoxAutomaticallyCheckUpdates->setChecked(settings->IsAutomaticallyCheckUpdates());
+
+    // Tab Privacy
+    ui->checkBoxSendUsageStatistics->setChecked(settings->IsCollectStatistic());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -143,6 +146,10 @@ auto TapePreferencesConfigurationPage::Apply() -> QStringList
     {
         settings->SetAutomaticallyCheckUpdates(ui->checkBoxAutomaticallyCheckUpdates->isChecked());
     }
+
+    // Tab Privacy
+    settings->SetCollectStatistic(ui->checkBoxSendUsageStatistics->isChecked());
+    VGAnalytics::Instance()->Enable(ui->checkBoxSendUsageStatistics->isChecked());
 
     return preferences;
 }

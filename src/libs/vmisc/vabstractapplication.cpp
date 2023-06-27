@@ -153,6 +153,8 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
 #endif
 
     connect(this, &QApplication::aboutToQuit, this, &VAbstractApplication::AboutToQuit);
+
+    m_uptimeTimer.start();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -431,6 +433,12 @@ void VAbstractApplication::RestartSVGFontDatabaseWatcher()
         connect(m_svgFontDatabaseWatcher, &QFileSystemWatcher::directoryChanged, this,
                 &VAbstractApplication::RepopulateFontDatabase);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractApplication::AppUptime() const -> qint64
+{
+    return m_uptimeTimer.elapsed();
 }
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)

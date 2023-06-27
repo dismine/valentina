@@ -321,6 +321,15 @@ public:
     auto GetWatermarkCustomColors() const -> QVector<QColor>;
     void SetWatermarkCustomColors(QVector<QColor> colors);
 
+    auto IsAskCollectStatistic() const -> bool;
+    void SetAskCollectStatistic(bool value);
+
+    auto IsCollectStatistic() const -> bool;
+    void SetCollectStatistic(bool value);
+
+    auto GetClientID() const -> QString;
+    void SetClientID(const QString &clientID);
+
 signals:
     void SVGFontsPathChanged(const QString &oldPath, const QString &newPath);
 

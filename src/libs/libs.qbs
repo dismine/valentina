@@ -14,5 +14,6 @@ Project {
         "vtest/vtest.qbs",
         "vtools/vtools.qbs",
         "vwidgets/vwidgets.qbs",
+        "vganalytics/vganalytics.qbs",
     ]
 }

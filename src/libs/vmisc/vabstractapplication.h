@@ -31,6 +31,7 @@
 
 #include <QApplication>
 #include <QCoreApplication>
+#include <QElapsedTimer>
 #include <QFileDialog>
 #include <QLocale>
 #include <QMetaObject>
@@ -104,6 +105,8 @@ public:
     auto SVGFontDatabase() -> VSvgFontDatabase *;
     void RestartSVGFontDatabaseWatcher();
 
+    auto AppUptime() const -> qint64;
+
 protected:
     QUndoStack *undoStack;
 
@@ -119,6 +122,8 @@ protected:
 #endif // defined(Q_OS_WIN) && !defined(QBS_BUILD)
     QPointer<QTranslator> appTranslator{nullptr};
     QPointer<QTranslator> pmsTranslator{nullptr};
+
+    QElapsedTimer m_uptimeTimer{};
 
     virtual void InitTrVars() = 0;
 

@@ -38,9 +38,11 @@
 #include "../ifc/xml/vvstconverter.h"
 #include "../vformat/vmeasurements.h"
 #include "../vformat/vpatternrecipe.h"
+#include "../vganalytics/vganalytics.h"
 #include "../vlayout/dialogs/watermarkwindow.h"
 #include "../vmisc/customevents.h"
 #include "../vmisc/def.h"
+#include "../vmisc/dialogs/dialogaskcollectstatistic.h"
 #include "../vmisc/qxtcsvmodel.h"
 #include "../vmisc/vmodifierkey.h"
 #include "../vmisc/vsysexits.h"
@@ -505,7 +507,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     if (VApplication::IsGUIMode())
     {
-        QTimer::singleShot(V_SECONDS(1), this, &MainWindow::SetDefaultGUILanguage);
+        QTimer::singleShot(V_SECONDS(1), this, &MainWindow::AskDefaultSettings);
     }
 
     ui->actionExportFontCorrections->setEnabled(settings->GetSingleStrokeOutlineFont());
@@ -4548,7 +4550,7 @@ void MainWindow::ClearPatternMessages()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::SetDefaultGUILanguage()
+void MainWindow::AskDefaultSettings()
 {
     if (VApplication::IsGUIMode())
     {
@@ -4564,6 +4566,38 @@ void MainWindow::SetDefaultGUILanguage()
                 settings->SetLocale(locale);
                 VAbstractApplication::VApp()->LoadTranslation(locale);
             }
+        }
+
+        if (settings->IsAskCollectStatistic())
+        {
+            DialogAskCollectStatistic dialog(this);
+            if (dialog.exec() == QDialog::Accepted)
+            {
+                settings->SetCollectStatistic(dialog.CollectStatistic());
+            }
+
+            settings->SetAskCollectStatistic(false);
+        }
+
+        if (settings->IsCollectStatistic())
+        {
+            auto *statistic = VGAnalytics::Instance();
+            statistic->SetGUILanguage(settings->GetLocale());
+
+            QString clientID = settings->GetClientID();
+            bool freshID = false;
+            if (clientID.isEmpty())
+            {
+                clientID = QUuid::createUuid().toString();
+                settings->SetClientID(clientID);
+                statistic->SetClientID(clientID);
+                freshID = true;
+            }
+
+            statistic->Enable(true);
+
+            const qint64 uptime = VAbstractValApplication::VApp()->AppUptime();
+            freshID ? statistic->SendAppFreshInstallEvent(uptime) : statistic->SendAppStartEvent(uptime);
         }
     }
 }

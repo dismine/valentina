@@ -286,7 +286,7 @@ private slots:
     void AboutToShowDockMenu();
 #endif //defined(Q_OS_MAC)
     
-    void SetDefaultGUILanguage();
+    void AskDefaultSettings();
 
     void HorizontalScaleChanged(double value);
     void VerticalScaleChanged(double value);

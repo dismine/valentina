@@ -237,7 +237,7 @@ private slots:
     void ShowProgress();
     void ClearPatternMessages();
     
-    void SetDefaultGUILanguage();
+    void AskDefaultSettings();
 
     void AddBackgroundImageItem(const QUuid &id);
     void DeleteBackgroundImageItem(const QUuid &id);

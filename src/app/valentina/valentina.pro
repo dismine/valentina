@@ -698,6 +698,15 @@ DEPENDPATH += $$PWD/../../libs/vdxf
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vdxf/$${DESTDIR}/vdxf.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vdxf/$${DESTDIR}/libvdxf.a
 
+# VGAnalytics static library
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/vganalytics/$${DESTDIR}/ -lvganalytics
+
+INCLUDEPATH += $$PWD/../../libs/vganalytics
+DEPENDPATH += $$PWD/../../libs/vganalytics
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vganalytics/$${DESTDIR}/vganalytics.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vganalytics/$${DESTDIR}/libvganalytics.a
+
 # QMuParser library
 win32:CONFIG(release, debug|release): LIBS += -L$${OUT_PWD}/../../libs/qmuparser/$${DESTDIR} -lqmuparser2
 else:win32:CONFIG(debug, debug|release): LIBS += -L$${OUT_PWD}/../../libs/qmuparser/$${DESTDIR} -lqmuparser2

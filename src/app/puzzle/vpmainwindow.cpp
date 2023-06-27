@@ -47,6 +47,7 @@
 #include "../vlayout/vlayoutexporter.h"
 #include "../vlayout/vprintlayout.h"
 #include "../vlayout/vrawlayout.h"
+#include "../vmisc/dialogs/dialogaskcollectstatistic.h"
 #include "../vmisc/dialogs/dialogselectlanguage.h"
 #include "../vmisc/lambdaconstants.h"
 #include "../vmisc/projectversion.h"
@@ -67,6 +68,7 @@
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../vganalytics/vganalytics.h"
 #include "layout/vppiece.h"
 #include "vptilefactory.h"
 
@@ -389,7 +391,7 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent)
 
     if (m_cmd->IsGuiEnabled())
     {
-        QTimer::singleShot(V_SECONDS(1), this, &VPMainWindow::SetDefaultGUILanguage);
+        QTimer::singleShot(V_SECONDS(1), this, &VPMainWindow::AskDefaultSettings);
     }
 }
 
@@ -4536,7 +4538,7 @@ void VPMainWindow::RemoveWatermark()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::SetDefaultGUILanguage()
+void VPMainWindow::AskDefaultSettings()
 {
     if (m_cmd->IsGuiEnabled())
     {
@@ -4553,6 +4555,38 @@ void VPMainWindow::SetDefaultGUILanguage()
                 settings->SetLocale(locale);
                 VAbstractApplication::VApp()->LoadTranslation(locale);
             }
+        }
+
+        if (settings->IsAskCollectStatistic())
+        {
+            DialogAskCollectStatistic dialog(this);
+            if (dialog.exec() == QDialog::Accepted)
+            {
+                settings->SetCollectStatistic(dialog.CollectStatistic());
+            }
+
+            settings->SetAskCollectStatistic(false);
+        }
+
+        if (settings->IsCollectStatistic())
+        {
+            auto *statistic = VGAnalytics::Instance();
+            statistic->SetGUILanguage(settings->GetLocale());
+
+            QString clientID = settings->GetClientID();
+            bool freshID = false;
+            if (clientID.isEmpty())
+            {
+                clientID = QUuid::createUuid().toString();
+                settings->SetClientID(clientID);
+                statistic->SetClientID(clientID);
+                freshID = true;
+            }
+
+            statistic->Enable(true);
+
+            const qint64 uptime = VPApplication::VApp()->AppUptime();
+            freshID ? statistic->SendAppFreshInstallEvent(uptime) : statistic->SendAppStartEvent(uptime);
         }
     }
 }

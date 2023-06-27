@@ -32,6 +32,7 @@
 #include "../ifc/xml/vvitconverter.h"
 #include "../ifc/xml/vvstconverter.h"
 #include "../vmisc/compatibility.h"
+#include "../vmisc/dialogs/dialogaskcollectstatistic.h"
 #include "../vmisc/dialogs/dialogexporttocsv.h"
 #include "../vmisc/qxtcsvmodel.h"
 #include "../vmisc/vsysexits.h"
@@ -56,6 +57,7 @@
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../qmuparser/qmudef.h"
+#include "../vganalytics/vganalytics.h"
 #include "../vmisc/dialogs/dialogselectlanguage.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
 #include "mapplication.h" // Should be last because of definning qApp
@@ -304,7 +306,7 @@ TMainWindow::TMainWindow(QWidget *parent)
 
     if (MApplication::VApp()->IsAppInGUIMode())
     {
-        QTimer::singleShot(V_SECONDS(1), this, &TMainWindow::SetDefaultGUILanguage);
+        QTimer::singleShot(V_SECONDS(1), this, &TMainWindow::AskDefaultSettings);
     }
 }
 
@@ -2534,7 +2536,7 @@ void TMainWindow::DimensionCustomNames()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::SetDefaultGUILanguage()
+void TMainWindow::AskDefaultSettings()
 {
     if (MApplication::VApp()->IsAppInGUIMode())
     {
@@ -2551,6 +2553,38 @@ void TMainWindow::SetDefaultGUILanguage()
                 settings->SetLocale(locale);
                 VAbstractApplication::VApp()->LoadTranslation(locale);
             }
+        }
+
+        if (settings->IsAskCollectStatistic())
+        {
+            DialogAskCollectStatistic dialog(this);
+            if (dialog.exec() == QDialog::Accepted)
+            {
+                settings->SetCollectStatistic(dialog.CollectStatistic());
+            }
+
+            settings->SetAskCollectStatistic(false);
+        }
+
+        if (settings->IsCollectStatistic())
+        {
+            auto *statistic = VGAnalytics::Instance();
+            statistic->SetGUILanguage(settings->GetLocale());
+
+            QString clientID = settings->GetClientID();
+            bool freshID = false;
+            if (clientID.isEmpty())
+            {
+                clientID = QUuid::createUuid().toString();
+                settings->SetClientID(clientID);
+                statistic->SetClientID(clientID);
+                freshID = true;
+            }
+
+            statistic->Enable(true);
+
+            const qint64 uptime = MApplication::VApp()->AppUptime();
+            freshID ? statistic->SendAppFreshInstallEvent(uptime) : statistic->SendAppStartEvent(uptime);
         }
     }
 }

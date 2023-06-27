@@ -233,6 +233,10 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingWatermarkEditorSize, (QLatin1Str
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingWatermarkCustomColors, (QLatin1String("watermarkCustomColors")))
 
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingsStatistictAskCollect, (QLatin1String("askCollect"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingsStatistictCollect, (QLatin1String("collect")))       // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingsStatistictClientID, (QLatin1String("clientID")))     // NOLINT
+
 // Reading settings file is very expensive, cache curve approximation to speed up getting value
 qreal curveApproximationCached = -1;        // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 Q_GLOBAL_STATIC(QString, localeCached)      // NOLINT
@@ -1116,20 +1120,20 @@ auto VCommonSettings::GetCSVSeparator() const -> QChar
     switch (separator)
     {
         case 0:
-            return QChar('\t');
+            return QChar('\t'); // NOLINT(modernize-return-braced-init-list)
         case 1:
-            return QChar(';');
+            return QChar(';'); // NOLINT(modernize-return-braced-init-list)
         case 2:
-            return QChar(' ');
+            return QChar(' '); // NOLINT(modernize-return-braced-init-list)
         default:
-            return QChar(',');
+            return QChar(','); // NOLINT(modernize-return-braced-init-list)
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VCommonSettings::GetDefCSVSeparator() -> QChar
 {
-    return QChar(',');
+    return QChar(','); // NOLINT(modernize-return-braced-init-list)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1748,6 +1752,51 @@ void VCommonSettings::SetWatermarkCustomColors(QVector<QColor> colors)
     }
 
     settings.setValue(*settingWatermarkCustomColors, customColors);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::IsAskCollectStatistic() const -> bool
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return settings.value(*settingsStatistictAskCollect, 1).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetAskCollectStatistic(bool value)
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingsStatistictAskCollect, value);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::IsCollectStatistic() const -> bool
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return settings.value(*settingsStatistictCollect, 1).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetCollectStatistic(bool value)
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingsStatistictCollect, value);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::GetClientID() const -> QString
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return settings.value(*settingsStatistictClientID, QString()).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetClientID(const QString &clientID)
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingsStatistictClientID, clientID);
     settings.sync();
 }
 

@@ -14,6 +14,7 @@ VToolApp {
     Depends { name: "VToolsLib"; }
     Depends { name: "VFormatLib"; }
     Depends { name: "VMiscLib"; }
+    Depends { name: "VGAnalyticsLib" }
 
     Depends {
         name: "Qt.xmlpatterns"

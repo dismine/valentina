@@ -13,4 +13,5 @@ SUBDIRS = \
     vtools \
     vformat \
     fervor \
-    vtest
+    vtest \
+    vganalytics

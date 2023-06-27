@@ -31,12 +31,12 @@
 #include "../vmisc/literals.h"
 #include "../vmisc/vvalentinasettings.h"
 #include "../vpatterndb/pmsystems.h"
-#include "def.h"
 #include "ui_preferencesconfigurationpage.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../qmuparser/qmudef.h"
+#include "../vganalytics/vganalytics.h"
 
 #include <QDir>
 #include <QDirIterator>
@@ -162,6 +162,9 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     ui->doubleSpinBoxAcceleration->setMinimum(VCommonSettings::scrollingAccelerationMin);
     ui->doubleSpinBoxAcceleration->setMaximum(VCommonSettings::scrollingAccelerationMax);
     ui->doubleSpinBoxAcceleration->setValue(settings->GetScrollingAcceleration());
+
+    // Tab Privacy
+    ui->checkBoxSendUsageStatistics->setChecked(settings->IsCollectStatistic());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -253,6 +256,10 @@ auto PreferencesConfigurationPage::Apply() -> QStringList
     settings->SetSensorMouseScale(ui->doubleSpinBoxSensor->value());
     settings->SetWheelMouseScale(ui->doubleSpinBoxWheel->value());
     settings->SetScrollingAcceleration(ui->doubleSpinBoxAcceleration->value());
+
+    // Tab Privacy
+    settings->SetCollectStatistic(ui->checkBoxSendUsageStatistics->isChecked());
+    VGAnalytics::Instance()->Enable(ui->checkBoxSendUsageStatistics->isChecked());
 
     return preferences;
 }

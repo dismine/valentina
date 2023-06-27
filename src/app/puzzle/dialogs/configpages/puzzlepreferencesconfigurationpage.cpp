@@ -33,6 +33,8 @@
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 
+#include "../vganalytics/vganalytics.h"
+
 //---------------------------------------------------------------------------------------------------------------------
 PuzzlePreferencesConfigurationPage::PuzzlePreferencesConfigurationPage(QWidget *parent)
   : QWidget(parent),
@@ -89,6 +91,9 @@ PuzzlePreferencesConfigurationPage::PuzzlePreferencesConfigurationPage(QWidget *
     ui->doubleSpinBoxAcceleration->setMinimum(VCommonSettings::scrollingAccelerationMin);
     ui->doubleSpinBoxAcceleration->setMaximum(VCommonSettings::scrollingAccelerationMax);
     ui->doubleSpinBoxAcceleration->setValue(settings->GetScrollingAcceleration());
+
+    // Tab Privacy
+    ui->checkBoxSendUsageStatistics->setChecked(settings->IsCollectStatistic());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -165,6 +170,10 @@ auto PuzzlePreferencesConfigurationPage::Apply() -> QStringList
     settings->SetSensorMouseScale(ui->doubleSpinBoxSensor->value());
     settings->SetWheelMouseScale(ui->doubleSpinBoxWheel->value());
     settings->SetScrollingAcceleration(ui->doubleSpinBoxAcceleration->value());
+
+    // Tab Privacy
+    settings->SetCollectStatistic(ui->checkBoxSendUsageStatistics->isChecked());
+    VGAnalytics::Instance()->Enable(ui->checkBoxSendUsageStatistics->isChecked());
 
     return preferences;
 }

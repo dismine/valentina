@@ -32,6 +32,8 @@
 #include "../ifc/exception/vexceptionemptyparameter.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/exception/vexceptionwrongid.h"
+#include "../vganalytics/def.h"
+#include "../vganalytics/vganalytics.h"
 #include "../vmisc/vsysexits.h"
 #include "version.h"
 #include "vpmainwindow.h"
@@ -277,6 +279,17 @@ VPApplication::VPApplication(int &argc, char **argv)
 //---------------------------------------------------------------------------------------------------------------------
 VPApplication::~VPApplication()
 {
+    if (settings->IsCollectStatistic())
+    {
+        auto *statistic = VGAnalytics::Instance();
+
+        QString clientID = settings->GetClientID();
+        if (!clientID.isEmpty())
+        {
+            statistic->SendAppCloseEvent(m_uptimeTimer.elapsed());
+        }
+    }
+
     qDeleteAll(m_mainWindows);
 }
 
@@ -430,6 +443,19 @@ void VPApplication::InitOptions()
         QIcon::setThemeName(QStringLiteral("win.icon.theme"));
     }
     ActivateDarkMode();
+
+    auto *statistic = VGAnalytics::Instance();
+    QString clientID = settings->GetClientID();
+    if (clientID.isEmpty())
+    {
+        clientID = QUuid::createUuid().toString();
+        settings->SetClientID(clientID);
+    }
+    statistic->SetClientID(clientID);
+    statistic->SetGUILanguage(settings->GetLocale());
+    statistic->SetMeasurementId(GA_MEASUREMENT_ID);
+    statistic->SetApiSecret(GA_API_SECRET);
+    statistic->Enable(settings->IsCollectStatistic());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

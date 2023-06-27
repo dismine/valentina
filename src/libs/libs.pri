@@ -33,3 +33,6 @@ INCLUDEPATH += $${PWD}/vpropertyexplorer
 
 #VTools static library
 INCLUDEPATH += $${PWD}/vtest
+
+#VGAnalytics static library
+INCLUDEPATH += $${PWD}/vganalytics

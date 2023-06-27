@@ -12,6 +12,7 @@ VToolApp {
     Depends { name: "VWidgetsLib" }
     Depends { name: "FervorLib" }
     Depends { name: "multibundle"; }
+    Depends { name: "VGAnalyticsLib" }
 
     name: "Puzzle"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "Puzzle" : "puzzle"
