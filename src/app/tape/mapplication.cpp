@@ -321,7 +321,7 @@ MApplication::MApplication(int &argc, char **argv)
 //---------------------------------------------------------------------------------------------------------------------
 MApplication::~MApplication()
 {
-    if (settings->IsCollectStatistic())
+    if (IsAppInGUIMode() && settings->IsCollectStatistic())
     {
         auto *statistic = VGAnalytics::Instance();
 

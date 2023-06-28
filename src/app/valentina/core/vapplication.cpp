@@ -385,7 +385,7 @@ VApplication::~VApplication()
 {
     qCDebug(vApp, "Application closing.");
 
-    if (settings->IsCollectStatistic())
+    if (IsGUIMode() && settings->IsCollectStatistic())
     {
         auto *statistic = VGAnalytics::Instance();
 

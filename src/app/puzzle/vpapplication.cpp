@@ -279,7 +279,7 @@ VPApplication::VPApplication(int &argc, char **argv)
 //---------------------------------------------------------------------------------------------------------------------
 VPApplication::~VPApplication()
 {
-    if (settings->IsCollectStatistic())
+    if (IsAppInGUIMode() && settings->IsCollectStatistic())
     {
         auto *statistic = VGAnalytics::Instance();
 
