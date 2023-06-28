@@ -19,6 +19,11 @@ Module {
 
     property string windeployqtProgram: "windeployqt.exe"
 
+    /**
+      Setup if need different path to windeployqt tool.
+      */
+    property string windeployqtProgramBinPath: undefined
+
     property string qmake: undefined
 
     /**
@@ -161,7 +166,11 @@ Module {
 
                 cmdArgs.push(product.installDir + "\\" + input.fileName);
 
-                var cmd = new Command(product.Qt.core.binPath + "/" + windeployqtProgram, cmdArgs);
+                var windeployqtProgramBinPath = product.Qt.core.binPath;
+                if (product.windeployqt.windeployqtProgramBinPath !== undefined)
+                    windeployqtProgramBinPath = product.windeployqt.windeployqtProgramBinPath;
+
+                var cmd = new Command(windeployqtProgramBinPath + "/" + windeployqtProgram, cmdArgs);
                 cmd.jobPool = "windeployqt";
                 cmd.description = "invoking '" + windeployqtProgram;
                 cmd.stdoutFilePath = product.buildDirectory + "/" + product.windeployqt.windeployqtArtifact;

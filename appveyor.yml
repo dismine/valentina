@@ -57,6 +57,7 @@ environment:
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows10+"
       MSYS2_PACKAGES: true
+      WINDEPLOYQT_BIN_PATH: "C:\\Qt\\6.4\\mingw_64\\bin"
       DEPLOY: true
 
     - job_name: Windows_Qt_5_15_(qbs_GCC_x86)
@@ -75,6 +76,7 @@ environment:
       PYTHON: "C:\\Python311"
       PLATFORM: "Windows7+"
       MSYS2_PACKAGES: false
+      WINDEPLOYQT_BIN_PATH: "undefined"
       DEPLOY: true
     
     - job_name: Windows_Qt_5_6_(GCC_x86)
@@ -156,7 +158,8 @@ environment:
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows10+"
-      MSYS2_PACKAGES: true
+      MSYS2_PACKAGES: false
+      WINDEPLOYQT_BIN_PATH: "undefined"
       DEPLOY: false
 
     - job_name: Windows_Qt_5_15_(make_GCC_x86)
@@ -184,6 +187,7 @@ environment:
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows10+"
       MSYS2_PACKAGES: false
+      WINDEPLOYQT_BIN_PATH: "C:\\Qt\\6.4\\mingw_64\\bin"
       DEPLOY: false
 
     - job_name: Windows_Qt_6_4_(MSVC_x64)
@@ -199,6 +203,7 @@ environment:
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows10+"
       MSYS2_PACKAGES: false
+      WINDEPLOYQT_BIN_PATH: "undefined"
       DEPLOY: false
 
     - job_name: Windows_Qt_5_15_(qbs_GCC_x64)
@@ -217,6 +222,7 @@ environment:
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows7+"
       MSYS2_PACKAGES: false
+      WINDEPLOYQT_BIN_PATH: "undefined"
       DEPLOY: false
 
     - job_name: Windows_Qt_5_15_(qbs_MSVC_x64)
@@ -232,6 +238,7 @@ environment:
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows7+"
       MSYS2_PACKAGES: false
+      WINDEPLOYQT_BIN_PATH: "undefined"
       DEPLOY: false 
 
     - job_name: Windows_Qt_5_15_(make_GCC_x64)
@@ -442,7 +449,7 @@ for:
 
   build_script:
     - conan install . -s os=Windows --build=missing -pr valentina
-    - qbs build -f valentina.qbs -d %APPVEYOR_BUILD_FOLDER%\build --jobs %NUMBER_OF_PROCESSORS% config:release qbs.installRoot:%APPVEYOR_BUILD_FOLDER%\build\install-root\valentina profile:qt6 project.enableConan:true modules.buildconfig.enableCcache:false project.conanProfiles:valentina modules.buildconfig.enablePCH:%ENABLE_PCH%
+    - qbs build -f valentina.qbs -d %APPVEYOR_BUILD_FOLDER%\build --jobs %NUMBER_OF_PROCESSORS% config:release qbs.installRoot:%APPVEYOR_BUILD_FOLDER%\build\install-root\valentina profile:qt6 project.enableConan:true modules.buildconfig.enableCcache:false project.conanProfiles:valentina modules.buildconfig.enablePCH:%ENABLE_PCH% modules.windeployqt.windeployqtProgramBinPath:%WINDEPLOYQT_BIN_PATH%
   
   test_script:
     - qbs -p autotest-runner -d %APPVEYOR_BUILD_FOLDER%\build profile:qt6 config:release
