@@ -338,7 +338,7 @@ auto VSvgFontEngine::InFont(QChar ch) const -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto VSvgFontEngine::CanRender(const QString &str) const -> bool
 {
-    return std::all_of(str.cbegin(), str.cend(), [this](auto c) { return InFont(c); });
+    return std::all_of(str.cbegin(), str.cend(), [this](auto c) { return this->InFont(c); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

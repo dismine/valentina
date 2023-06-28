@@ -419,4 +419,14 @@ inline auto Back(const QString &str) -> QChar
 #endif
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+inline auto Front(const QString &str) -> QChar
+{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+    return str.front();
+#else
+    return str.at(0);
+#endif
+}
+
 #endif // COMPATIBILITY_H
