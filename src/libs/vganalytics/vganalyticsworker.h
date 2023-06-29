@@ -35,6 +35,7 @@
 #include <QNetworkRequest>
 #include <QObject>
 #include <QQueue>
+#include <QStringLiteral>
 #include <QTimer>
 #include <QUrlQuery>
 #include <QtGlobal>
@@ -66,19 +67,19 @@ public:
     QNetworkRequest m_request{};                               // NOLINT(misc-non-private-member-variables-in-classes)
     enum VGAnalytics::LogLevel m_logLevel{VGAnalytics::Debug}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    QString m_measurementId{};    // NOLINT(misc-non-private-member-variables-in-classes)
-    QString m_apiSecret{};        // NOLINT(misc-non-private-member-variables-in-classes)
-    QString m_clientID{};         // NOLINT(misc-non-private-member-variables-in-classes)
-    QString m_userID{};           // NOLINT(misc-non-private-member-variables-in-classes)
-    QString m_appName{};          // NOLINT(misc-non-private-member-variables-in-classes)
-    QString m_appVersion{};       // NOLINT(misc-non-private-member-variables-in-classes)
-    QString m_guiLanguage{};      // NOLINT(misc-non-private-member-variables-in-classes)
-    QString m_screenResolution{}; // NOLINT(misc-non-private-member-variables-in-classes)
-    QString m_repoRevision{};     // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_measurementId{};                         // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_apiSecret{};                             // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_clientID{};                              // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_userID{};                                // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_appName{};                               // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_appVersion{};                            // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_guiLanguage{};                           // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_screenResolution{QStringLiteral("0x0")}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_repoRevision{QStringLiteral("Unknown")}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    bool m_isEnabled{false};     // NOLINT(misc-non-private-member-variables-in-classes)
-    int m_timerInterval{30000};  // NOLINT(misc-non-private-member-variables-in-classes)
-    qreal m_screenScaleFactor{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    bool m_isEnabled{false};      // NOLINT(misc-non-private-member-variables-in-classes)
+    int m_timerInterval{30000};   // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal m_screenScaleFactor{0}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     const static QLatin1String dateTimeFormat;
 

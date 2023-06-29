@@ -30,6 +30,10 @@
 
 #include <QObject>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 1, 0)
+#include <QLocale>
+#endif
+
 #if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
 #endif
@@ -95,6 +99,11 @@ private:
     void SendEvent(const QString &eventName, const QHash<QString, QJsonValue> &params);
 
     auto InitAppStartEventParams(qint64 engagementTimeMsec) const -> QHash<QString, QJsonValue>;
+
+    static auto TerritoryCode() -> QString;
+#if QT_VERSION < QT_VERSION_CHECK(6, 1, 0)
+    static auto GetTerritoryCode(QLocale::Country territory) -> QString;
+#endif
 
     friend auto operator<<(QDataStream &outStream, const VGAnalytics &analytics) -> QDataStream &;
     friend auto operator>>(QDataStream &inStream, VGAnalytics &analytics) -> QDataStream &;
