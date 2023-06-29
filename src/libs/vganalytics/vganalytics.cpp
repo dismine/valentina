@@ -332,7 +332,11 @@ auto VGAnalytics::GetTerritoryCode(QLocale::Country territory) -> QString
         {QLocale::Bermuda, QLatin1String("BM")},
         {QLocale::Bhutan, QLatin1String("BT")},
         {QLocale::Bolivia, QLatin1String("BO")},
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         {QLocale::BosniaAndHerzegovina, QLatin1String("BA")},
+#else
+        {QLocale::BosniaAndHerzegowina, QLatin1String("BA")},
+#endif
         {QLocale::Botswana, QLatin1String("BW")},
         {QLocale::BouvetIsland, QLatin1String("BV")},
         {QLocale::Brazil, QLatin1String("BR")},
@@ -347,7 +351,9 @@ auto VGAnalytics::GetTerritoryCode(QLocale::Country territory) -> QString
         {QLocale::Canada, QLatin1String("CA")},
         {QLocale::CanaryIslands, QLatin1String("IC")},
         {QLocale::CapeVerde, QLatin1String("CV")},
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         {QLocale::CaribbeanNetherlands, QLatin1String("BQ")},
+#endif
         {QLocale::CaymanIslands, QLatin1String("KY")},
         {QLocale::CentralAfricanRepublic, QLatin1String("CF")},
         {QLocale::CeutaAndMelilla, QLatin1String("EA")},
@@ -365,9 +371,17 @@ auto VGAnalytics::GetTerritoryCode(QLocale::Country territory) -> QString
         {QLocale::CostaRica, QLatin1String("CR")},
         {QLocale::Croatia, QLatin1String("HR")},
         {QLocale::Cuba, QLatin1String("CU")},
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         {QLocale::Curacao, QLatin1String("CW")},
+#else
+        {QLocale::CuraSao, QLatin1String("CW")},
+#endif
         {QLocale::Cyprus, QLatin1String("CY")},
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         {QLocale::Czechia, QLatin1String("CZ")},
+#else
+        {QLocale::Czech, QLatin1String("CZ")},
+#endif
         {QLocale::Denmark, QLatin1String("DK")},
         {QLocale::DiegoGarcia, QLatin1String("DG")},
         {QLocale::Djibouti, QLatin1String("DJ")},
@@ -379,7 +393,11 @@ auto VGAnalytics::GetTerritoryCode(QLocale::Country territory) -> QString
         {QLocale::EquatorialGuinea, QLatin1String("GQ")},
         {QLocale::Eritrea, QLatin1String("ER")},
         {QLocale::Estonia, QLatin1String("EE")},
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         {QLocale::Eswatini, QLatin1String("SZ")},
+#else
+        {QLocale::Swaziland, QLatin1String("SZ")},
+#endif
         {QLocale::Ethiopia, QLatin1String("ET")},
         {QLocale::Europe, QLatin1String("150")},
         {QLocale::EuropeanUnion, QLatin1String("EU")},
@@ -442,7 +460,11 @@ auto VGAnalytics::GetTerritoryCode(QLocale::Country territory) -> QString
         {QLocale::Liechtenstein, QLatin1String("LI")},
         {QLocale::Lithuania, QLatin1String("LT")},
         {QLocale::Luxembourg, QLatin1String("LU")},
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         {QLocale::Macao, QLatin1String("MO")},
+#else
+        {QLocale::Macau, QLatin1String("MO")},
+#endif
         {QLocale::Macedonia, QLatin1String("MK")},
         {QLocale::Madagascar, QLatin1String("MG")},
         {QLocale::Malawi, QLatin1String("MW")},
@@ -504,7 +526,11 @@ auto VGAnalytics::GetTerritoryCode(QLocale::Country territory) -> QString
         {QLocale::SaintLucia, QLatin1String("LC")},
         {QLocale::SaintMartin, QLatin1String("MF")},
         {QLocale::SaintPierreAndMiquelon, QLatin1String("PM")},
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         {QLocale::SaintVincentAndGrenadines, QLatin1String("VC")},
+#else
+        {QLocale::SaintVincentAndTheGrenadines, QLatin1String("VC")},
+#endif
         {QLocale::Samoa, QLatin1String("WS")},
         {QLocale::SanMarino, QLatin1String("SM")},
         {QLocale::SaoTomeAndPrincipe, QLatin1String("ST")},
@@ -520,14 +546,23 @@ auto VGAnalytics::GetTerritoryCode(QLocale::Country territory) -> QString
         {QLocale::SolomonIslands, QLatin1String("SB")},
         {QLocale::Somalia, QLatin1String("SO")},
         {QLocale::SouthAfrica, QLatin1String("ZA")},
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         {QLocale::SouthGeorgiaAndSouthSandwichIslands, QLatin1String("GS")},
+#else
+        {QLocale::SouthGeorgiaAndTheSouthSandwichIslands, QLatin1String("GS")},
+#endif
         {QLocale::SouthKorea, QLatin1String("KR")},
         {QLocale::SouthSudan, QLatin1String("SS")},
         {QLocale::Spain, QLatin1String("ES")},
         {QLocale::SriLanka, QLatin1String("LK")},
         {QLocale::Sudan, QLatin1String("SD")},
         {QLocale::Suriname, QLatin1String("SR")},
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         {QLocale::SvalbardAndJanMayen, QLatin1String("SJ")},
+#else
+        {QLocale::SvalbardAndJanMayenIslands, QLatin1String("SJ")},
+#endif
+
         {QLocale::Sweden, QLatin1String("SE")},
         {QLocale::Switzerland, QLatin1String("CH")},
         {QLocale::Syria, QLatin1String("SY")},
@@ -535,7 +570,11 @@ auto VGAnalytics::GetTerritoryCode(QLocale::Country territory) -> QString
         {QLocale::Tajikistan, QLatin1String("TJ")},
         {QLocale::Tanzania, QLatin1String("TZ")},
         {QLocale::Thailand, QLatin1String("TH")},
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         {QLocale::TimorLeste, QLatin1String("TL")},
+#else
+        {QLocale::EastTimor, QLatin1String("TL")},
+#endif
         {QLocale::Togo, QLatin1String("TG")},
         {QLocale::TokelauCountry, QLatin1String("TK")},
         {QLocale::Tonga, QLatin1String("TO")},
@@ -550,16 +589,28 @@ auto VGAnalytics::GetTerritoryCode(QLocale::Country territory) -> QString
         {QLocale::Ukraine, QLatin1String("UA")},
         {QLocale::UnitedArabEmirates, QLatin1String("AE")},
         {QLocale::UnitedKingdom, QLatin1String("GB")},
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         {QLocale::UnitedStatesOutlyingIslands, QLatin1String("UM")},
+#else
+        {QLocale::UnitedStatesMinorOutlyingIslands, QLatin1String("UM")},
+#endif
         {QLocale::UnitedStates, QLatin1String("US")},
         {QLocale::UnitedStatesVirginIslands, QLatin1String("VI")},
         {QLocale::Uruguay, QLatin1String("UY")},
         {QLocale::Uzbekistan, QLatin1String("UZ")},
         {QLocale::Vanuatu, QLatin1String("VU")},
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         {QLocale::VaticanCity, QLatin1String("VA")},
+#else
+        {QLocale::VaticanCityState, QLatin1String("VA")},
+#endif
         {QLocale::Venezuela, QLatin1String("VE")},
         {QLocale::Vietnam, QLatin1String("VN")},
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         {QLocale::WallisAndFutuna, QLatin1String("WF")},
+#else
+        {QLocale::WallisAndFutunaIslands, QLatin1String("WF")},
+#endif
         {QLocale::WesternSahara, QLatin1String("EH")},
         {QLocale::World, QLatin1String("001")},
         {QLocale::Yemen, QLatin1String("YE")},
@@ -572,7 +623,7 @@ auto VGAnalytics::GetTerritoryCode(QLocale::Country territory) -> QString
         return territoryCodeList.value(territory);
     }
 
-    return QString();
+    return {};
 }
 #endif
 
