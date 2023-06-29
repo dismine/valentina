@@ -37,7 +37,11 @@
 #include <QQueue>
 #include <QTimer>
 #include <QUrlQuery>
-#include <qglobal.h>
+#include <QtGlobal>
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
+#include "../vmisc/defglobal.h"
+#endif
 
 class QNetworkReply;
 
@@ -53,6 +57,7 @@ class VGAnalyticsWorker : public QObject
 
 public:
     explicit VGAnalyticsWorker(QObject *parent = nullptr);
+    ~VGAnalyticsWorker() override = default;
 
     QNetworkAccessManager *networkManager{nullptr}; // NOLINT(misc-non-private-member-variables-in-classes)
 
@@ -91,7 +96,7 @@ public slots:
     void PostMessageFinished();
 
 private:
-    Q_DISABLE_COPY_MOVE(VGAnalyticsWorker)
+    Q_DISABLE_COPY_MOVE(VGAnalyticsWorker) // NOLINT
 };
 
 #endif // VGANALYTICSWORKER_H
