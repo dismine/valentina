@@ -56,7 +56,7 @@ environment:
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows10+"
-      MSYS2_PACKAGES: true
+      MSYS2_PACKAGES: false
       WINDEPLOYQT_BIN_PATH: "C:\\Qt\\6.4\\mingw_64\\bin"
       DEPLOY: true
 
@@ -187,7 +187,7 @@ environment:
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows10+"
       MSYS2_PACKAGES: false
-      WINDEPLOYQT_BIN_PATH: "C:\\Qt\\6.4\\mingw_64\\bin"
+      WINDEPLOYQT_BIN_PATH: "C:\\Qt\\6.4\\msvc2019_64\\bin"
       DEPLOY: false
 
     - job_name: Windows_Qt_6_4_(MSVC_x64)
