@@ -221,6 +221,7 @@ auto PreferencesConfigurationPage::Apply() -> QStringList
     {
         const auto locale = qvariant_cast<QString>(ui->langCombo->currentData());
         settings->SetLocale(locale);
+        VGAnalytics::Instance()->SetGUILanguage(settings->GetLocale());
         m_langChanged = false;
 
         const auto code = qvariant_cast<QString>(ui->systemCombo->currentData());
