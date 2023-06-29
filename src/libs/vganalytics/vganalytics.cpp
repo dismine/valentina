@@ -298,7 +298,7 @@ auto VGAnalytics::TerritoryCode() -> QString
 #if QT_VERSION < QT_VERSION_CHECK(6, 1, 0)
 auto VGAnalytics::GetTerritoryCode(QLocale::Country territory) -> QString
 {
-    if (territory == QLocale::AnyTerritory || territory > QLocale::LastTerritory)
+    if (territory == QLocale::AnyCountry || territory > QLocale::LastCountry)
     {
         return {};
     }
