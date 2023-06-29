@@ -84,7 +84,7 @@ auto VGAnalytics::LogLevel() const -> enum VGAnalytics::LogLevel { return d->m_l
 //---------------------------------------------------------------------------------------------------------------------
 void VGAnalytics::SetRepoRevision(const QString &rev)
 {
-    d->m_repoRevision = rev;
+    d->m_repoRevision = !rev.isEmpty() ? rev : QStringLiteral("Unknown");
 }
 
 //---------------------------------------------------------------------------------------------------------------------

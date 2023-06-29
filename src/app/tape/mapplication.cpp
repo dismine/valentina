@@ -499,6 +499,7 @@ void MApplication::InitOptions()
     statistic->SetGUILanguage(settings->GetLocale());
     statistic->SetMeasurementId(GA_MEASUREMENT_ID);
     statistic->SetApiSecret(GA_API_SECRET);
+    statistic->SetRepoRevision(QLatin1String(BUILD_REVISION));
     statistic->Enable(settings->IsCollectStatistic());
 }
 
