@@ -35,7 +35,7 @@
 #include <QNetworkRequest>
 #include <QObject>
 #include <QQueue>
-#include <QStringLiteral>
+#include <QString>
 #include <QTimer>
 #include <QUrlQuery>
 #include <QtGlobal>

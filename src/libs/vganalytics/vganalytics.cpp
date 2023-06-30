@@ -31,6 +31,7 @@
 #include <QDataStream>
 #include <QDebug>
 #include <QGuiApplication>
+#include <QHash>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -380,7 +381,7 @@ auto VGAnalytics::GetTerritoryCode(QLocale::Country territory) -> QString
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         {QLocale::Czechia, QLatin1String("CZ")},
 #else
-        {QLocale::Czech, QLatin1String("CZ")},
+        {QLocale::CzechRepublic, QLatin1String("CZ")},
 #endif
         {QLocale::Denmark, QLatin1String("DK")},
         {QLocale::DiegoGarcia, QLatin1String("DG")},
