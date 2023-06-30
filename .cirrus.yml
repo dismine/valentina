@@ -215,7 +215,7 @@ macos_task:
   env:
     DEPLOY: "true"
     QT_VERSION: Qt6
-    ARCH: arm64
+    ARCH: armv8
     PLATFORM: "macOS_12.4+"
     MACOS_DEPLOYMENT_TARGET: 12.0
     ENABLE_CCACHE: false
