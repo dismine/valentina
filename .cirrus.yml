@@ -186,13 +186,21 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - export PATH="${HOME}/.local/bin:`python3 -m site --user-base`/bin:$PATH"
     - echo $PATH
     - pwd
-    - conan install . -s os=Macos -s os.version=${MACOS_DEPLOYMENT_TARGET} --build=missing
+    - conan profile new valentina
+    - conan profile update settings.build_type=Release valentina
+    - conan profile update settings.os=Macos valentina
+    - conan profile update settings.os.version=${MACOS_DEPLOYMENT_TARGET} valentina
+    - conan profile update settings.arch=${ARCH} valentina
+    - conan profile update settings.compiler=apple-clang valentina
+    - conan profile update settings.compiler.libcxx=libc++ valentina
+    - conan profile update settings.compiler.version=14 valentina
+    - conan install . --build=missing -pr valentina
     - qbs setup-toolchains --detect
     - qbs config --list profiles
     - qbs setup-qt /opt/homebrew/opt/qt6/bin/qmake qt6
     - qbs-config defaultProfile qt6
     - qbs config profiles.qt6.baseProfile clang
-    - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build --command-echo-mode command-line --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:$CIRRUS_WORKING_DIR/build/install-root profile:qt6 project.enableConan:true project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:${ENABLE_CCACHE}
+    - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build --command-echo-mode command-line --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:$CIRRUS_WORKING_DIR/build/install-root profile:qt6 project.enableConan:true project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:${ENABLE_CCACHE} project.conanProfiles:valentina
     - ccache -s
   deploy_script:
     - pwd
