@@ -202,14 +202,14 @@ macos_task_template: &MACOS_TASK_TEMPLATE
 
 macos_task:
   macos_instance:
-    image: ghcr.io/cirruslabs/macos-monterey-xcode:13.4.1
+    image: ghcr.io/cirruslabs/macos-monterey-xcode:14
   << : *MACOS_TASK_TEMPLATE
   env:
     DEPLOY: "true"
     QT_VERSION: Qt6
     ARCH: arm64
-    PLATFORM: "macOS_11+"
-    MACOS_DEPLOYMENT_TARGET: 11.0
+    PLATFORM: "macOS_12.4+"
+    MACOS_DEPLOYMENT_TARGET: 12.0
     ENABLE_CCACHE: false
   matrix:
     - name: 'macOS Monterey 12 [signle bundle, no tests]'
