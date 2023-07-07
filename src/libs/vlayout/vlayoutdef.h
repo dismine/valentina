@@ -29,9 +29,9 @@
 #ifndef VLAYOUTDEF_H
 #define VLAYOUTDEF_H
 
+#include <QPainterPath>
 #include <QSize>
 #include <QTransform>
-#include <QPainterPath>
 #include <ciso646>
 #include <climits>
 
@@ -79,19 +79,19 @@ enum class BestFrom : qint8
 
 struct VBestSquareResData
 {
-    QSizeF        bestSize{INT_MAX, INT_MAX};
+    QSizeF bestSize{INT_MAX, INT_MAX};
     // cppcheck-suppress unusedStructMember
-    int           globalI{0}; // Edge of global contour
+    int globalI{0}; // Edge of global contour
     // cppcheck-suppress unusedStructMember
-    int           detJ{0}; // Edge of detail
-    QTransform    resMatrix{}; // Matrix for rotation and translation detail
+    int detJ{0};            // Edge of detail
+    QTransform resMatrix{}; // Matrix for rotation and translation detail
     // cppcheck-suppress unusedStructMember
-    bool          resMirror{false};
-    BestFrom      type{BestFrom::Rotation};
+    bool resMirror{false};
+    BestFrom type{BestFrom::Rotation};
     // cppcheck-suppress unusedStructMember
-    qreal         depthPosition{INT_MAX};
+    qreal depthPosition{INT_MAX};
     // cppcheck-suppress unusedStructMember
-    qreal         sidePosition{0};
+    qreal sidePosition{0};
 };
 
 struct VCachedPositions
@@ -100,28 +100,34 @@ struct VCachedPositions
     QPainterPath layoutAllowancePath{};
 };
 
-enum class Cases : qint8 { CaseThreeGroup = 0, CaseTwoGroup, CaseDesc, UnknownCase};
+enum class Cases : qint8
+{
+    CaseThreeGroup = 0,
+    CaseTwoGroup,
+    CaseDesc,
+    UnknownCase
+};
 
 /* Warning! Debugging doesn't work stable in debug mode. If you need big allocation use release mode. Or disable
  * Address Sanitizer. See page https://bitbucket.org/dismine/valentina/wiki/developers/Address_Sanitizer
  */
-//#define LAYOUT_DEBUG // Enable debug mode
+// #define LAYOUT_DEBUG // Enable debug mode
 
 // This block help rule debug mode. Don't turn all options at the same time!
 #ifdef LAYOUT_DEBUG
 // Nice looking
-#   define SHOW_VERTICES         // Show contour vertices
-#   define SHOW_DIRECTION        // Show contour direction
-#   define ARRANGED_DETAILS      // Show already arranged details
-#   define SHOW_SHEET            // Show sheet rect
-#   define SHOW_CANDIDATE        // Show each position
+#define SHOW_VERTICES    // Show contour vertices
+#define SHOW_DIRECTION   // Show contour direction
+#define ARRANGED_DETAILS // Show already arranged details
+#define SHOW_SHEET       // Show sheet rect
+#define SHOW_CANDIDATE   // Show each position
 
 // Debugging
-//#   define SHOW_ROTATION         // For each position show rotation part
-//#   define SHOW_COMBINE          // For each position show edge combine part
-//#   define SHOW_MIRROR           // For each position show mirror part
-//#   define SHOW_CANDIDATE_BEST   // For only correct positions that pass checks
-#   define SHOW_BEST             // Show only best position for workpiece
-#endif//LAYOUT_DEBUG
+// #   define SHOW_ROTATION         // For each position show rotation part
+// #   define SHOW_COMBINE          // For each position show edge combine part
+// #   define SHOW_MIRROR           // For each position show mirror part
+// #   define SHOW_CANDIDATE_BEST   // For only correct positions that pass checks
+#define SHOW_BEST // Show only best position for workpiece
+#endif            // LAYOUT_DEBUG
 
 #endif // VLAYOUTDEF_H

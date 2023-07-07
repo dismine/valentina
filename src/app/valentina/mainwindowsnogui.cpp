@@ -497,7 +497,7 @@ void MainWindowsNoGUI::ExportData(const QVector<VLayoutPiece> &listDetails)
                                      QString::number(i + 1) +
                                      VLayoutExporter::ExportFormatSuffix(m_dialogSaveLayout->Format());
 
-                QGraphicsRectItem *paper =
+                auto *paper =
                     qgraphicsitem_cast<QGraphicsRectItem *>(m_layoutSettings->LayoutPapers().at(i));
                 SCASSERT(paper != nullptr)
 

@@ -41,7 +41,6 @@
 #include <QtGlobal>
 
 #include "../vmisc/typedef.h"
-#include "../vpatterndb/floatItemData/floatitemdef.h"
 #include "../vwidgets/vpiecegrainline.h"
 #include "qpainterpath.h"
 #include "vabstractpiece.h"

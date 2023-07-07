@@ -27,33 +27,34 @@
  *************************************************************************/
 #include "vwatermark.h"
 
-#include "../vmisc/projectversion.h"
 #include "../ifc/xml/vwatermarkconverter.h"
+#include "../vmisc/compatibility.h"
+#include "../vmisc/projectversion.h"
 
 const QString VWatermark::TagWatermark = QStringLiteral("watermark");
-const QString VWatermark::TagText      = QStringLiteral("text");
-const QString VWatermark::TagImage     = QStringLiteral("image");
+const QString VWatermark::TagText = QStringLiteral("text");
+const QString VWatermark::TagImage = QStringLiteral("image");
 
-const QString VWatermark::AttrOpacity   = QStringLiteral("opacity");
-const QString VWatermark::AttrRotation  = QStringLiteral("rotation");
-const QString VWatermark::AttrFont      = QStringLiteral("font");
-const QString VWatermark::AttrPath      = QStringLiteral("path");
+const QString VWatermark::AttrOpacity = QStringLiteral("opacity");
+const QString VWatermark::AttrRotation = QStringLiteral("rotation");
+const QString VWatermark::AttrFont = QStringLiteral("font");
+const QString VWatermark::AttrPath = QStringLiteral("path");
 const QString VWatermark::AttrGrayscale = QStringLiteral("grayscale");
-const QString VWatermark::AttrShow      = QStringLiteral("show");
+const QString VWatermark::AttrShow = QStringLiteral("show");
 
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
 auto FileComment() -> QString
 {
-    return QString("Watermark created with Valentina v%1 (https://smart-pattern.com.ua/).")
-            .arg(APP_VERSION_STR);
+    return QString("Watermark created with Valentina v%1 (https://smart-pattern.com.ua/).").arg(APP_VERSION_STR);
 }
-}
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VWatermark::VWatermark()
-{}
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VWatermark::CreateEmptyWatermark()
@@ -67,8 +68,9 @@ void VWatermark::CreateEmptyWatermark()
     wElement.appendChild(createElement(TagImage));
 
     appendChild(wElement);
-    insertBefore(createProcessingInstruction(QStringLiteral("xml"),
-                                             QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"")), this->firstChild());
+    insertBefore(
+        createProcessingInstruction(QStringLiteral("xml"), QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"")),
+        this->firstChild());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -138,11 +140,11 @@ void VWatermark::SetWatermark(const VWatermarkData &data)
         {
             SetAttribute(text, AttrShow, data.showText);
             SetAttributeOrRemoveIf<QString>(text, AttrText, data.text,
-                                            [](const QString &text) noexcept {return text.isEmpty();});
+                                            [](const QString &text) noexcept { return text.isEmpty(); });
             SetAttributeOrRemoveIf<int>(text, AttrRotation, data.textRotation,
-                                        [](int textRotation) noexcept {return textRotation == 0;});
+                                        [](int textRotation) noexcept { return textRotation == 0; });
             SetAttributeOrRemoveIf<QString>(text, AttrFont, data.font.toString(),
-                                            [](const QString &fontString) noexcept {return fontString.isEmpty();});
+                                            [](const QString &fontString) noexcept { return fontString.isEmpty(); });
             SetAttribute(text, AttrColor, data.textColor.name());
         }
 
@@ -151,11 +153,11 @@ void VWatermark::SetWatermark(const VWatermarkData &data)
         {
             SetAttribute(image, AttrShow, data.showImage);
             SetAttributeOrRemoveIf<QString>(image, AttrPath, data.path,
-                                            [](const QString &path) noexcept {return path.isEmpty();});
+                                            [](const QString &path) noexcept { return path.isEmpty(); });
             SetAttributeOrRemoveIf<int>(image, AttrRotation, data.imageRotation,
-                                        [](int imageRotation) noexcept {return imageRotation == 0;});
+                                        [](int imageRotation) noexcept { return imageRotation == 0; });
             SetAttributeOrRemoveIf<bool>(image, AttrGrayscale, data.grayscale,
-                                         [](bool grayscale) noexcept {return not grayscale;});
+                                         [](bool grayscale) noexcept { return not grayscale; });
         }
     }
 }

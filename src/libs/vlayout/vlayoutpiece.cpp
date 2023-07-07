@@ -34,6 +34,7 @@
 #include <QFontMetrics>
 #include <QFuture>
 #include <QGraphicsPathItem>
+#include <QLine>
 #include <QList>
 #include <QMessageLogger>
 #include <QPainterPath>
@@ -46,6 +47,8 @@
 #include <QtDebug>
 #include <QtMath>
 
+#include "../vformat/vsinglelineoutlinechar.h"
+#include "../vgeometry/vgobject.h"
 #include "../vgeometry/vlayoutplacelabel.h"
 #include "../vgeometry/vplacelabelitem.h"
 #include "../vgeometry/vpointf.h"
@@ -62,15 +65,10 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpassmark.h"
 #include "../vpatterndb/vpiecenode.h"
-#include "../vwidgets/global.h"
-#include "vgobject.h"
+#include "../vwidgets/vpiecegrainline.h"
 #include "vgraphicsfillitem.h"
 #include "vlayoutpiece_p.h"
-#include "vpiecegrainline.h"
-#include "vsinglelineoutlinechar.h"
 #include "vtextmanager.h"
-#include <QLine>
-#include <QPainterPath>
 
 namespace
 {
@@ -773,7 +771,7 @@ auto VLayoutPiece::Map(const GrainlineShape &shape) const -> GrainlineShape
     GrainlineShape mappedShape;
     mappedShape.reserve(shape.size());
 
-    for (auto subShape : shape)
+    for (const auto &subShape : shape)
     {
         mappedShape.append(Map(subShape));
     }

@@ -483,14 +483,19 @@ const int userMaterialPlaceholdersQuantity = 20;
 auto QPixmapFromCache(const QString &pixmapPath) -> QPixmap;
 void SetItemOverrideCursor(QGraphicsItem *item, const QString &pixmapPath, int hotX = -1, int hotY = -1);
 
+//---------------------------------------------------------------------------------------------------------------------
 template <typename T> constexpr inline auto MmToPixel(T val) noexcept -> T
 {
     return (val / 25.4) * PrintDPI;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
 template <typename T> constexpr inline auto CmToPixel(T val) noexcept -> T
 {
     return ((val * 10.0) / 25.4) * PrintDPI;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
 template <typename T> constexpr inline auto InchToPixel(T val) noexcept -> T
 {
     return val * PrintDPI;
@@ -515,14 +520,19 @@ Q_DECL_RELAXED_CONSTEXPR inline auto ToPixel(double val, const Unit &unit) -> do
     return 0;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 template <typename T> constexpr inline auto PixelToInch(T pix) -> T
 {
     return pix / PrintDPI;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
 template <typename T> constexpr inline auto PixelToMm(T pix) -> T
 {
     return PixelToInch(pix) * 25.4;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
 template <typename T> constexpr inline auto PixelToCm(T pix) -> T
 {
     return PixelToInch(pix) * 2.54;
@@ -547,16 +557,23 @@ Q_DECL_RELAXED_CONSTEXPR inline auto FromPixel(double pix, const Unit &unit) -> 
     return 0;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 template <typename T> constexpr inline auto Inch2ToPixel2(T val) -> T
 {
     return val * (PrintDPI * PrintDPI);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
 template <typename T> constexpr inline auto Mm2ToPixel2(T val) -> T
 {
+    // There are 0.15500031 square inches in a square centimeter.
     return Inch2ToPixel2(val * 0.001550031);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
 template <typename T> constexpr inline auto Cm2ToPixel2(T val) -> T
 {
+    // There are 0.15500031 square inches in a square centimeter.
     return Inch2ToPixel2(val * 0.15500031);
 }
 
@@ -579,16 +596,23 @@ Q_DECL_RELAXED_CONSTEXPR inline auto ToPixel2(double val, const Unit &unit) -> d
     return 0;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 template <typename T> constexpr inline auto Pixel2ToInch2(T pix) -> T
 {
     return pix / (PrintDPI * PrintDPI);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
 template <typename T> constexpr inline auto Pixel2ToMm2(T pix) -> T
 {
+    // There are 0.15500031 square inches in a square centimeter.
     return Pixel2ToInch2(pix) / 0.001550031;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
 template <typename T> constexpr inline auto Pixel2ToCm2(T pix) -> T
 {
+    // There are 0.15500031 square inches in a square centimeter.
     return Pixel2ToInch2(pix) / 0.15500031;
 }
 

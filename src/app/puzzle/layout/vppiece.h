@@ -28,13 +28,13 @@
 #ifndef VPPIECE_H
 #define VPPIECE_H
 
-#include <QUuid>
-#include <QVector>
 #include <QPoint>
 #include <QTransform>
+#include <QUuid>
+#include <QVector>
 
-#include "../vlayout/vlayoutpiece.h"
 #include "../layout/layoutdef.h"
+#include "../vlayout/vlayoutpiece.h"
 #include "vpiecegrainline.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
@@ -47,6 +47,7 @@ class VPSheet;
 class VPPiece : public VLayoutPiece
 {
     Q_DECLARE_TR_FUNCTIONS(VPPiece) // NOLINT
+
 public:
     VPPiece() = default;
     explicit VPPiece(const VLayoutPiece &layoutPiece);

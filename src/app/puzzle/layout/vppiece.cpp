@@ -67,7 +67,7 @@ auto CutEdge(const QLineF &edge) -> QVector<QPointF>
     }
     else
     {
-        const int n = qFloor(edge.length()/stickyShift);
+        const int n = qFloor(edge.length() / stickyShift);
 
         if (n <= 0)
         {
@@ -77,11 +77,11 @@ auto CutEdge(const QLineF &edge) -> QVector<QPointF>
         else
         {
             points.reserve(n);
-            const qreal nShift = edge.length()/n;
-            for (int i = 1; i <= n+1; ++i)
+            const qreal nShift = edge.length() / n;
+            for (int i = 1; i <= n + 1; ++i)
             {
                 QLineF l1 = edge;
-                l1.setLength(nShift*(i-1));
+                l1.setLength(nShift * (i - 1));
                 points.append(l1.p2());
             }
         }
@@ -99,9 +99,9 @@ auto PrepareStickyPath(const QVector<QPointF> &path) -> QVector<QPointF>
 
     QVector<QPointF> stickyPath;
 
-    for (int i=0; i<path.size(); ++i)
+    for (int i = 0; i < path.size(); ++i)
     {
-        stickyPath += CutEdge(QLineF(path.at(i), path.at(i < path.size()-1 ? i+1 : 0)));
+        stickyPath += CutEdge(QLineF(path.at(i), path.at(i < path.size() - 1 ? i + 1 : 0)));
     }
 
     return stickyPath;
@@ -128,11 +128,11 @@ auto ClosestDistance(const QVector<QPointF> &path1, const QVector<QPointF> &path
 
     return closestDistance;
 }
-}  // namespace
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VPPiece::VPPiece(const VLayoutPiece &layoutPiece)
-    : VLayoutPiece(layoutPiece)
+  : VLayoutPiece(layoutPiece)
 {
     ClearTransformations();
 
@@ -375,14 +375,14 @@ auto VPPiece::StickyPosition(qreal &dx, qreal &dy) const -> bool
     QVector<QPointF> path;
     CastTo(GetMappedExternalContourPoints(), path);
     QRectF boundingRect = VLayoutPiece::BoundingRect(path);
-    const qreal stickyDistance = pieceGap+minStickyDistance;
-    QRectF stickyZone = QRectF(boundingRect.topLeft().x()-stickyDistance, boundingRect.topLeft().y()-stickyDistance,
-                               boundingRect.width()+stickyDistance*2, boundingRect.height()+stickyDistance*2);
+    const qreal stickyDistance = pieceGap + minStickyDistance;
+    QRectF stickyZone = QRectF(boundingRect.topLeft().x() - stickyDistance, boundingRect.topLeft().y() - stickyDistance,
+                               boundingRect.width() + stickyDistance * 2, boundingRect.height() + stickyDistance * 2);
 
     QVector<QPointF> stickyPath = PrepareStickyPath(path);
     QLineF closestDistance;
 
-    for (const auto& piece : allPieces)
+    for (const auto &piece : allPieces)
     {
         if (piece.isNull() || piece->GetUniqueID() == GetUniqueID())
         {
@@ -394,7 +394,7 @@ auto VPPiece::StickyPosition(qreal &dx, qreal &dy) const -> bool
         QRectF pieceBoundingRect = VLayoutPiece::BoundingRect(piecePath);
 
         if (stickyZone.intersects(pieceBoundingRect) || pieceBoundingRect.contains(stickyZone) ||
-                stickyZone.contains(pieceBoundingRect))
+            stickyZone.contains(pieceBoundingRect))
         {
             if (not VPPiece::PathsSuperposition(path, piecePath))
             {

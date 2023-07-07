@@ -104,16 +104,11 @@ QT_WARNING_POP
 //---------------------------------------------------------------------------------------------------------------------
 auto PieceOutline(const VLayoutPiece &detail) -> QVector<VLayoutPoint>
 {
-    QVector<VLayoutPoint> outline;
     if (detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn())
     {
-        outline = detail.GetMappedSeamAllowancePoints();
+        return detail.GetMappedSeamAllowancePoints();
     }
-    else
-    {
-        outline = detail.GetMappedContourPoints();
-    }
-    return outline;
+    return detail.GetMappedContourPoints();
 }
 } // namespace
 

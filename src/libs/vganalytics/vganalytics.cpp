@@ -42,7 +42,7 @@
 #include <QQueue>
 #include <QScreen>
 #include <QSettings>
-#include <QStringLiteral>
+#include <QString>
 #include <QTimer>
 #include <QUrlQuery>
 #include <QUuid>

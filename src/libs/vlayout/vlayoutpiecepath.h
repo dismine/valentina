@@ -30,9 +30,9 @@
 #define VLAYOUTPIECEPATH_H
 
 #include "vlayoutpoint.h"
+#include <QMetaType>
 #include <QPointF>
 #include <QSharedDataPointer>
-#include <QMetaType>
 
 class VLayoutPiecePathData;
 class QPainterPath;
@@ -48,17 +48,17 @@ public:
 
     auto operator=(const VLayoutPiecePath &path) -> VLayoutPiecePath &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VLayoutPiecePath(VLayoutPiecePath &&path) Q_DECL_NOTHROW;
-    auto operator=(VLayoutPiecePath &&path) Q_DECL_NOTHROW->VLayoutPiecePath &;
+    VLayoutPiecePath(VLayoutPiecePath &&path) noexcept;
+    auto operator=(VLayoutPiecePath &&path) noexcept -> VLayoutPiecePath &;
 #endif
 
     auto GetPainterPath() const -> QPainterPath;
 
     auto Points() const -> QVector<VLayoutPoint>;
-    void                  SetPoints(const QVector<VLayoutPoint> &points);
+    void SetPoints(const QVector<VLayoutPoint> &points);
 
     auto PenStyle() const -> Qt::PenStyle;
-    void         SetPenStyle(const Qt::PenStyle &penStyle);
+    void SetPenStyle(const Qt::PenStyle &penStyle);
 
     auto IsCutPath() const -> bool;
     void SetCutPath(bool cut);
@@ -70,7 +70,7 @@ private:
     QSharedDataPointer<VLayoutPiecePathData> d;
 };
 
-Q_DECLARE_METATYPE(VLayoutPiecePath)
+Q_DECLARE_METATYPE(VLayoutPiecePath)                  // NOLINT
 Q_DECLARE_TYPEINFO(VLayoutPiecePath, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VLAYOUTPIECEPATH_H
