@@ -871,9 +871,7 @@ auto VPLayoutFileReader::ReadLabelLines() -> VTextManager
     QVector<TextLine> lines;
 
     QXmlStreamAttributes attribs = attributes();
-    QFont f;
-    f.fromString(ReadAttributeEmptyString(attribs, ML::AttrFont));
-    text.SetFont(f);
+    text.SetFont(FontFromString(ReadAttributeEmptyString(attribs, ML::AttrFont)));
 
     QStringList svgFontData = ReadAttributeEmptyString(attribs, ML::AttrSVGFont).split(',');
     if (!svgFontData.isEmpty())

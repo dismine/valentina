@@ -104,7 +104,7 @@ auto VWatermark::GetWatermark() const -> VWatermarkData
             data.showText = GetParametrBool(text, AttrShow, trueStr);
             data.text = GetParametrEmptyString(text, AttrText);
             data.textRotation = GetParametrInt(text, AttrRotation, QChar('0'));
-            data.font.fromString(GetParametrEmptyString(text, AttrFont));
+            data.font = FontFromString(GetParametrEmptyString(text, AttrFont));
             QColor color(GetParametrString(text, AttrColor, QColor(Qt::black).name()));
             if (not color.isValid())
             {

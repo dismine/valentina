@@ -429,4 +429,31 @@ inline auto Front(const QString &str) -> QChar
 #endif
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+inline auto FontFromString(const QString &descrip) -> QFont
+{
+    QFont font;
+
+    if (!descrip.isEmpty())
+    {
+// Qt 6's QFont::toString returns a value with 17 fields, e.g.
+// Ubuntu,11,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+// Qt 5's QFont::fromString expects a value with 11 fields, e.g.
+// Ubuntu,10,-1,5,50,0,0,0,0,0
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+        const auto l = descrip.split(QLatin1Char(','));
+        // Qt5's QFont::fromString() isn't compatible with Qt6's QFont::toString().
+        // If we were built with Qt5, don't try to process a font preference that
+        // was created by Qt6.
+        if (l.count() <= 11)
+        {
+            font.fromString(descrip);
+        }
+#else
+        font.fromString(descrip);
+#endif
+    }
+    return font;
+}
+
 #endif // COMPATIBILITY_H
