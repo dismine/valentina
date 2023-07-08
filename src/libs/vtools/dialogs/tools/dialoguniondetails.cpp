@@ -31,7 +31,6 @@
 #include <QCheckBox>
 #include <QVector>
 
-#include "../ifc/ifcdef.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpiece.h"
 #include "../vpatterndb/vpiecenode.h"
@@ -45,16 +44,16 @@
  * @param parent parent widget
  */
 DialogUnionDetails::DialogUnionDetails(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogUnionDetails),
-      indexD1(0),
-      indexD2(0),
-      d1(NULL_ID),
-      d2(NULL_ID),
-      numberD(0),
-      numberP(0),
-      p1(NULL_ID),
-      p2(NULL_ID)
+  : DialogTool(data, toolId, parent),
+    ui(new Ui::DialogUnionDetails),
+    indexD1(0),
+    indexD2(0),
+    d1(NULL_ID),
+    d2(NULL_ID),
+    numberD(0),
+    numberP(0),
+    p1(NULL_ID),
+    p2(NULL_ID)
 {
     ui->setupUi(this);
     InitOkCancel(ui);
@@ -114,15 +113,9 @@ auto DialogUnionDetails::CheckDetail(const quint32 &idDetail) const -> bool
     {
         return false;
     }
+
     const VPiece det = data->GetPiece(idDetail);
-    if (det.GetPath().CountNodes() >= 3 && det.GetPath().ListNodePoint().size() >= 2)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return det.GetPath().CountNodes() >= 3 && det.GetPath().ListNodePoint().size() >= 2;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -133,8 +126,7 @@ auto DialogUnionDetails::CheckDetail(const quint32 &idDetail) const -> bool
  * @param idDetail id detail
  * @param index index of edge
  */
-void DialogUnionDetails::ChoosedDetail(const quint32 &id, const SceneObject &type, quint32 &idDetail,
-                                       vsizetype &index)
+void DialogUnionDetails::ChoosedDetail(const quint32 &id, const SceneObject &type, quint32 &idDetail, vsizetype &index)
 {
     if (idDetail == NULL_ID)
     {
