@@ -133,9 +133,6 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     // Theme
     ui->darkModeCheck->setChecked(settings->GetDarkMode());
 
-    // Tool panel
-    ui->checkBoxToolPanelScaling->setChecked(settings->GetToolPanelScaling());
-
     // Native dialogs
     ui->checkBoxDontUseNativeDialog->setChecked(settings->IsDontUseNativeDialog());
 
@@ -194,11 +191,6 @@ auto PreferencesConfigurationPage::Apply() -> QStringList
     {
         settings->SetDarkMode(ui->darkModeCheck->isChecked());
         preferences.append(tr("dark mode"));
-    }
-
-    if (settings->GetToolPanelScaling() != ui->checkBoxToolPanelScaling->isChecked())
-    {
-        settings->SetToolPanelScaling(ui->checkBoxToolPanelScaling->isChecked());
     }
 
     if (settings->IsDontUseNativeDialog() != ui->checkBoxDontUseNativeDialog->isChecked())

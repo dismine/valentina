@@ -50,12 +50,14 @@
 #include "../vtools/undocommands/renamepp.h"
 #include "../vtools/undocommands/undogroup.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/vtoolbuttonpopup.h"
 #include "../vwidgets/vwidgetpopup.h"
 #include "core/vapplication.h"
 #include "core/vtooloptionspropertybrowser.h"
 #include "ui_mainwindow.h"
 #include "vabstractapplication.h"
 #include "vsinglelineoutlinechar.h"
+#include <QAction>
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include "../vmisc/vtextcodec.h"
@@ -371,6 +373,7 @@ MainWindow::MainWindow(QWidget *parent)
     CreateMenus();
     ToolBarDraws();
     ToolBarStages();
+    ToolBarDrawTools();
     InitToolButtons();
 
     connect(ui->actionAddBackgroundImage, &QAction::triggered, this, &MainWindow::ActionAddBackgroundImage);
@@ -390,8 +393,6 @@ MainWindow::MainWindow(QWidget *parent)
             &MainWindow::PatternChangesWereSaved);
 
     InitAutoSave();
-
-    ui->toolBox->setCurrentIndex(0);
 
     ReadSettings();
 
@@ -882,7 +883,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
     }
     else
     {
-        if (auto *tButton = qobject_cast<QToolButton *>(this->sender()))
+        if (auto *tButton = qobject_cast<QAction *>(this->sender()))
         {
             tButton->setChecked(true);
         }
@@ -911,7 +912,7 @@ void MainWindow::SetToolButtonWithApply(bool checked, Tool t, const QString &cur
     }
     else
     {
-        if (auto *tButton = qobject_cast<QToolButton *>(this->sender()))
+        if (auto *tButton = qobject_cast<QAction *>(this->sender()))
         {
             tButton->setChecked(true);
         }
@@ -3037,74 +3038,247 @@ void MainWindow::ToolBarTools()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolBarDrawTools()
+{
+    // Point tools
+    {
+        auto *linePointToolMenu = new QMenu(this);
+        linePointToolMenu->addAction(ui->actionEndLineTool);
+        linePointToolMenu->addAction(ui->actionAlongLineTool);
+        linePointToolMenu->addAction(ui->actionMidpointTool);
+
+        auto *linePointTool = new VToolButtonPopup(this);
+        linePointTool->setMenu(linePointToolMenu);
+        linePointTool->setDefaultAction(ui->actionEndLineTool);
+
+        ui->toolBarPointTools->addWidget(linePointTool);
+    }
+
+    {
+        auto *angleLinePointToolMenu = new QMenu(this);
+        angleLinePointToolMenu->addAction(ui->actionNormalTool);
+        angleLinePointToolMenu->addAction(ui->actionBisectorTool);
+        angleLinePointToolMenu->addAction(ui->actionHeightTool);
+
+        auto *angleLinePointTool = new VToolButtonPopup(this);
+        angleLinePointTool->setMenu(angleLinePointToolMenu);
+        angleLinePointTool->setDefaultAction(ui->actionNormalTool);
+
+        ui->toolBarPointTools->addWidget(angleLinePointTool);
+    }
+
+    {
+        auto *lineIntersectionPointToolMenu = new QMenu(this);
+        lineIntersectionPointToolMenu->addAction(ui->actionPointOfIntersectionTool);
+        lineIntersectionPointToolMenu->addAction(ui->actionLineIntersectTool);
+
+        auto *lineIntersectionPointTool = new VToolButtonPopup(this);
+        lineIntersectionPointTool->setMenu(lineIntersectionPointToolMenu);
+        lineIntersectionPointTool->setDefaultAction(ui->actionPointOfIntersectionTool);
+
+        ui->toolBarPointTools->addWidget(lineIntersectionPointTool);
+    }
+
+    {
+        auto *specialPointToolMenu = new QMenu(this);
+        specialPointToolMenu->addAction(ui->actionShoulderPointTool);
+        specialPointToolMenu->addAction(ui->actionTriangleTool);
+
+        auto *specialPointTool = new VToolButtonPopup(this);
+        specialPointTool->setMenu(specialPointToolMenu);
+        specialPointTool->setDefaultAction(ui->actionShoulderPointTool);
+
+        ui->toolBarPointTools->addWidget(specialPointTool);
+    }
+
+    {
+        auto *axisPointToolMenu = new QMenu(this);
+        axisPointToolMenu->addAction(ui->actionLineIntersectAxisTool);
+        axisPointToolMenu->addAction(ui->actionCurveIntersectAxisTool);
+        axisPointToolMenu->addAction(ui->actionArcIntersectAxisTool);
+
+        auto *axisPointTool = new VToolButtonPopup(this);
+        axisPointTool->setMenu(axisPointToolMenu);
+        axisPointTool->setDefaultAction(ui->actionLineIntersectAxisTool);
+
+        ui->toolBarPointTools->addWidget(axisPointTool);
+    }
+
+    {
+        auto *curveSegmentPointToolMenu = new QMenu(this);
+        curveSegmentPointToolMenu->addAction(ui->actionSplineCutPointTool);
+        curveSegmentPointToolMenu->addAction(ui->actionSplinePathCutPointTool);
+        curveSegmentPointToolMenu->addAction(ui->actionArcCutPointTool);
+
+        auto *curveSegmentPointTool = new VToolButtonPopup(this);
+        curveSegmentPointTool->setMenu(curveSegmentPointToolMenu);
+        curveSegmentPointTool->setDefaultAction(ui->actionSplineCutPointTool);
+
+        ui->toolBarPointTools->addWidget(curveSegmentPointTool);
+    }
+
+    {
+        auto *curveIntersectionPointToolMenu = new QMenu(this);
+        curveIntersectionPointToolMenu->addAction(ui->actionIntersectionCurvesTool);
+        curveIntersectionPointToolMenu->addAction(ui->actionPointOfIntersectionArcsTool);
+        curveIntersectionPointToolMenu->addAction(ui->actionPointOfIntersectionCirclesTool);
+
+        auto *curveIntersectionPointTool = new VToolButtonPopup(this);
+        curveIntersectionPointTool->setMenu(curveIntersectionPointToolMenu);
+        curveIntersectionPointTool->setDefaultAction(ui->actionIntersectionCurvesTool);
+
+        ui->toolBarPointTools->addWidget(curveIntersectionPointTool);
+    }
+
+    {
+        auto *tangentPointToolMenu = new QMenu(this);
+        tangentPointToolMenu->addAction(ui->actionPointFromArcAndTangentTool);
+        tangentPointToolMenu->addAction(ui->actionPointFromCircleAndTangentTool);
+        tangentPointToolMenu->addAction(ui->actionPointOfContactTool);
+
+        auto *tangentPointTool = new VToolButtonPopup(this);
+        tangentPointTool->setMenu(tangentPointToolMenu);
+        tangentPointTool->setDefaultAction(ui->actionPointFromArcAndTangentTool);
+
+        ui->toolBarPointTools->addWidget(tangentPointTool);
+    }
+
+    // Curve tools
+    {
+        auto *curveToolMenu = new QMenu(this);
+        curveToolMenu->addAction(ui->actionSplineTool);
+        curveToolMenu->addAction(ui->actionCubicBezierTool);
+        curveToolMenu->addAction(ui->actionSplinePathTool);
+        curveToolMenu->addAction(ui->actionCubicBezierPathTool);
+        curveToolMenu->addAction(ui->actionArcTool);
+        curveToolMenu->addAction(ui->actionArcWithLengthTool);
+        curveToolMenu->addAction(ui->actionEllipticalArcTool);
+
+        auto *curvePointTool = new VToolButtonPopup(this);
+        curvePointTool->setMenu(curveToolMenu);
+        curvePointTool->setDefaultAction(ui->actionSplineTool);
+
+        ui->toolBarCurveTools->addWidget(curvePointTool);
+    }
+
+    // Group tools
+    ui->toolBarOperationTools->addAction(ui->actionGroupTool);
+
+    {
+        auto *symmetryToolMenu = new QMenu(this);
+        symmetryToolMenu->addAction(ui->actionFlippingByAxisTool);
+        symmetryToolMenu->addAction(ui->actionFlippingByLineTool);
+
+        auto *symmetryTool = new VToolButtonPopup(this);
+        symmetryTool->setMenu(symmetryToolMenu);
+        symmetryTool->setDefaultAction(ui->actionFlippingByAxisTool);
+
+        ui->toolBarOperationTools->addWidget(symmetryTool);
+    }
+
+    {
+        auto *transformToolMenu = new QMenu(this);
+        transformToolMenu->addAction(ui->actionRotationTool);
+        transformToolMenu->addAction(ui->actionMoveTool);
+
+        auto *transformTool = new VToolButtonPopup(this);
+        transformTool->setMenu(transformToolMenu);
+        transformTool->setDefaultAction(ui->actionRotationTool);
+
+        ui->toolBarOperationTools->addWidget(transformTool);
+    }
+
+    ui->toolBarOperationTools->addAction(ui->actionTrueDartsTool);
+    ui->toolBarOperationTools->addAction(ui->actionExportDraw);
+
+    // Detail tools
+    ui->toolBarDetailTools->addAction(ui->actionNewDetailTool);
+    {
+        auto *detailToolMenu = new QMenu(this);
+        detailToolMenu->addAction(ui->actionUnionDetailsTool);
+        detailToolMenu->addAction(ui->actionDuplicateDetailTool);
+
+        auto *detailTool = new VToolButtonPopup(this);
+        detailTool->setMenu(detailToolMenu);
+        detailTool->setDefaultAction(ui->actionUnionDetailsTool);
+
+        ui->toolBarDetailTools->addWidget(detailTool);
+    }
+
+    {
+        auto *internalDetailItemToolMenu = new QMenu(this);
+        internalDetailItemToolMenu->addAction(ui->actionInternalPathTool);
+        internalDetailItemToolMenu->addAction(ui->actionPinTool);
+        internalDetailItemToolMenu->addAction(ui->actionInsertNodeTool);
+        internalDetailItemToolMenu->addAction(ui->actionPlaceLabelTool);
+
+        auto *detailTool = new VToolButtonPopup(this);
+        detailTool->setMenu(internalDetailItemToolMenu);
+        detailTool->setDefaultAction(ui->actionInternalPathTool);
+
+        ui->toolBarDetailTools->addWidget(detailTool);
+    }
+
+    ui->toolBarDetailTools->addAction(ui->actionDetailExportAs);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::InitToolButtons()
 {
-    m_toolButtonPointerList.append(ui->toolButtonPointerPoint);
-    m_toolButtonPointerList.append(ui->toolButtonPointerLine);
-    m_toolButtonPointerList.append(ui->toolButtonPointerCurve);
-    m_toolButtonPointerList.append(ui->toolButtonPointerArc);
-    m_toolButtonPointerList.append(ui->toolButtonPointerDetail);
-    m_toolButtonPointerList.append(ui->toolButtonPointerOperations);
-    m_toolButtonPointerList.append(ui->toolButtonPointerEllipticalArc);
-
-    for (auto *pointer : qAsConst(m_toolButtonPointerList))
-    {
-        connect(pointer, &QToolButton::clicked, this, &MainWindow::ArrowTool);
-    }
+    connect(ui->actionToolSelect, &QAction::triggered, this, &MainWindow::ArrowTool);
 
     // This check helps to find missed tools
     Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Check if all tools were connected.");
 
-    connect(ui->toolButtonEndLine, &QToolButton::clicked, this, &MainWindow::ToolEndLine);
-    connect(ui->toolButtonLine, &QToolButton::clicked, this, &MainWindow::ToolLine);
-    connect(ui->toolButtonAlongLine, &QToolButton::clicked, this, &MainWindow::ToolAlongLine);
-    connect(ui->toolButtonShoulderPoint, &QToolButton::clicked, this, &MainWindow::ToolShoulderPoint);
-    connect(ui->toolButtonNormal, &QToolButton::clicked, this, &MainWindow::ToolNormal);
-    connect(ui->toolButtonBisector, &QToolButton::clicked, this, &MainWindow::ToolBisector);
-    connect(ui->toolButtonLineIntersect, &QToolButton::clicked, this, &MainWindow::ToolLineIntersect);
-    connect(ui->toolButtonSpline, &QToolButton::clicked, this, &MainWindow::ToolSpline);
-    connect(ui->toolButtonCubicBezier, &QToolButton::clicked, this, &MainWindow::ToolCubicBezier);
-    connect(ui->toolButtonArc, &QToolButton::clicked, this, &MainWindow::ToolArc);
-    connect(ui->toolButtonSplinePath, &QToolButton::clicked, this, &MainWindow::ToolSplinePath);
-    connect(ui->toolButtonCubicBezierPath, &QToolButton::clicked, this, &MainWindow::ToolCubicBezierPath);
-    connect(ui->toolButtonPointOfContact, &QToolButton::clicked, this, &MainWindow::ToolPointOfContact);
-    connect(ui->toolButtonNewDetail, &QToolButton::clicked, this, &MainWindow::ToolDetail);
-    connect(ui->toolButtonInternalPath, &QToolButton::clicked, this, &MainWindow::ToolPiecePath);
-    connect(ui->toolButtonHeight, &QToolButton::clicked, this, &MainWindow::ToolHeight);
-    connect(ui->toolButtonTriangle, &QToolButton::clicked, this, &MainWindow::ToolTriangle);
-    connect(ui->toolButtonPointOfIntersection, &QToolButton::clicked, this, &MainWindow::ToolPointOfIntersection);
-    connect(ui->toolButtonSplineCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutSpline);
-    connect(ui->toolButtonSplinePathCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutSplinePath);
-    connect(ui->toolButtonUnionDetails, &QToolButton::clicked, this, &MainWindow::ToolUnionDetails);
-    connect(ui->toolButtonDuplicateDetail, &QToolButton::clicked, this, &MainWindow::ToolDuplicateDetail);
-    connect(ui->toolButtonArcCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutArc);
-    connect(ui->toolButtonLineIntersectAxis, &QToolButton::clicked, this, &MainWindow::ToolLineIntersectAxis);
-    connect(ui->toolButtonCurveIntersectAxis, &QToolButton::clicked, this, &MainWindow::ToolCurveIntersectAxis);
-    connect(ui->toolButtonArcIntersectAxis, &QToolButton::clicked, this, &MainWindow::ToolArcIntersectAxis);
-    connect(ui->toolButtonLayoutSettings, &QToolButton::clicked, this, &MainWindow::ToolLayoutSettings);
-    connect(ui->toolButtonPointOfIntersectionArcs, &QToolButton::clicked, this,
-            &MainWindow::ToolPointOfIntersectionArcs);
-    connect(ui->toolButtonPointOfIntersectionCircles, &QToolButton::clicked, this,
+    connect(ui->actionEndLineTool, &QAction::triggered, this, &MainWindow::ToolEndLine);
+    connect(ui->actionLineTool, &QAction::triggered, this, &MainWindow::ToolLine);
+    connect(ui->actionAlongLineTool, &QAction::triggered, this, &MainWindow::ToolAlongLine);
+    connect(ui->actionShoulderPointTool, &QAction::triggered, this, &MainWindow::ToolShoulderPoint);
+    connect(ui->actionNormalTool, &QAction::triggered, this, &MainWindow::ToolNormal);
+    connect(ui->actionBisectorTool, &QAction::triggered, this, &MainWindow::ToolBisector);
+    connect(ui->actionLineIntersectTool, &QAction::triggered, this, &MainWindow::ToolLineIntersect);
+    connect(ui->actionSplineTool, &QAction::triggered, this, &MainWindow::ToolSpline);
+    connect(ui->actionCubicBezierTool, &QAction::triggered, this, &MainWindow::ToolCubicBezier);
+    connect(ui->actionArcTool, &QAction::triggered, this, &MainWindow::ToolArc);
+    connect(ui->actionSplinePathTool, &QAction::triggered, this, &MainWindow::ToolSplinePath);
+    connect(ui->actionCubicBezierPathTool, &QAction::triggered, this, &MainWindow::ToolCubicBezierPath);
+    connect(ui->actionPointOfContactTool, &QAction::triggered, this, &MainWindow::ToolPointOfContact);
+    connect(ui->actionNewDetailTool, &QAction::triggered, this, &MainWindow::ToolDetail);
+    connect(ui->actionInternalPathTool, &QAction::triggered, this, &MainWindow::ToolPiecePath);
+    connect(ui->actionHeightTool, &QAction::triggered, this, &MainWindow::ToolHeight);
+    connect(ui->actionTriangleTool, &QAction::triggered, this, &MainWindow::ToolTriangle);
+    connect(ui->actionPointOfIntersectionTool, &QAction::triggered, this, &MainWindow::ToolPointOfIntersection);
+    connect(ui->actionSplineCutPointTool, &QAction::triggered, this, &MainWindow::ToolCutSpline);
+    connect(ui->actionSplinePathCutPointTool, &QAction::triggered, this, &MainWindow::ToolCutSplinePath);
+    connect(ui->actionUnionDetailsTool, &QAction::triggered, this, &MainWindow::ToolUnionDetails);
+    connect(ui->actionDuplicateDetailTool, &QAction::triggered, this, &MainWindow::ToolDuplicateDetail);
+    connect(ui->actionArcCutPointTool, &QAction::triggered, this, &MainWindow::ToolCutArc);
+    connect(ui->actionLineIntersectAxisTool, &QAction::triggered, this, &MainWindow::ToolLineIntersectAxis);
+    connect(ui->actionCurveIntersectAxisTool, &QAction::triggered, this, &MainWindow::ToolCurveIntersectAxis);
+    connect(ui->actionArcIntersectAxisTool, &QAction::triggered, this, &MainWindow::ToolArcIntersectAxis);
+    connect(ui->actionLayoutSettings, &QAction::triggered, this, &MainWindow::ToolLayoutSettings);
+    connect(ui->actionPointOfIntersectionArcsTool, &QAction::triggered, this, &MainWindow::ToolPointOfIntersectionArcs);
+    connect(ui->actionPointOfIntersectionCirclesTool, &QAction::triggered, this,
             &MainWindow::ToolPointOfIntersectionCircles);
-    connect(ui->toolButtonIntersectionCurves, &QToolButton::clicked, this, &MainWindow::ToolPointOfIntersectionCurves);
-    connect(ui->toolButtonPointFromCircleAndTangent, &QToolButton::clicked, this,
+    connect(ui->actionIntersectionCurvesTool, &QAction::triggered, this, &MainWindow::ToolPointOfIntersectionCurves);
+    connect(ui->actionPointFromCircleAndTangentTool, &QAction::triggered, this,
             &MainWindow::ToolPointFromCircleAndTangent);
-    connect(ui->toolButtonPointFromArcAndTangent, &QToolButton::clicked, this, &MainWindow::ToolPointFromArcAndTangent);
-    connect(ui->toolButtonArcWithLength, &QToolButton::clicked, this, &MainWindow::ToolArcWithLength);
-    connect(ui->toolButtonTrueDarts, &QToolButton::clicked, this, &MainWindow::ToolTrueDarts);
-    connect(ui->toolButtonGroup, &QToolButton::clicked, this, &MainWindow::ToolGroup);
-    connect(ui->toolButtonRotation, &QToolButton::clicked, this, &MainWindow::ToolRotation);
-    connect(ui->toolButtonFlippingByLine, &QToolButton::clicked, this, &MainWindow::ToolFlippingByLine);
-    connect(ui->toolButtonFlippingByAxis, &QToolButton::clicked, this, &MainWindow::ToolFlippingByAxis);
-    connect(ui->toolButtonMove, &QToolButton::clicked, this, &MainWindow::ToolMove);
-    connect(ui->toolButtonMidpoint, &QToolButton::clicked, this, &MainWindow::ToolMidpoint);
-    connect(ui->toolButtonExportDraw, &QToolButton::clicked, this, &MainWindow::ExportDrawAs);
-    connect(ui->toolButtonLayoutExportAs, &QToolButton::clicked, this, &MainWindow::ExportLayoutAs);
-    connect(ui->toolButtonDetailExportAs, &QToolButton::clicked, this, &MainWindow::ExportDetailsAs);
-    connect(ui->toolButtonEllipticalArc, &QToolButton::clicked, this, &MainWindow::ToolEllipticalArc);
-    connect(ui->toolButtonPin, &QToolButton::clicked, this, &MainWindow::ToolPin);
-    connect(ui->toolButtonInsertNode, &QToolButton::clicked, this, &MainWindow::ToolInsertNode);
-    connect(ui->toolButtonPlaceLabel, &QToolButton::clicked, this, &MainWindow::ToolPlaceLabel);
+    connect(ui->actionPointFromArcAndTangentTool, &QAction::triggered, this, &MainWindow::ToolPointFromArcAndTangent);
+    connect(ui->actionArcWithLengthTool, &QAction::triggered, this, &MainWindow::ToolArcWithLength);
+    connect(ui->actionTrueDartsTool, &QAction::triggered, this, &MainWindow::ToolTrueDarts);
+    connect(ui->actionGroupTool, &QAction::triggered, this, &MainWindow::ToolGroup);
+    connect(ui->actionRotationTool, &QAction::triggered, this, &MainWindow::ToolRotation);
+    connect(ui->actionFlippingByLineTool, &QAction::triggered, this, &MainWindow::ToolFlippingByLine);
+    connect(ui->actionFlippingByAxisTool, &QAction::triggered, this, &MainWindow::ToolFlippingByAxis);
+    connect(ui->actionMoveTool, &QAction::triggered, this, &MainWindow::ToolMove);
+    connect(ui->actionMidpointTool, &QAction::triggered, this, &MainWindow::ToolMidpoint);
+    connect(ui->actionExportDraw, &QAction::triggered, this, &MainWindow::ExportDrawAs);
+    connect(ui->actionLayoutExportAs, &QAction::triggered, this, &MainWindow::ExportLayoutAs);
+    connect(ui->actionDetailExportAs, &QAction::triggered, this, &MainWindow::ExportDetailsAs);
+    connect(ui->actionEllipticalArcTool, &QAction::triggered, this, &MainWindow::ToolEllipticalArc);
+    connect(ui->actionPinTool, &QAction::triggered, this, &MainWindow::ToolPin);
+    connect(ui->actionInsertNodeTool, &QAction::triggered, this, &MainWindow::ToolInsertNode);
+    connect(ui->actionPlaceLabelTool, &QAction::triggered, this, &MainWindow::ToolPlaceLabel);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3150,10 +3324,7 @@ void MainWindow::CancelTool()
     switch (m_currentTool)
     {
         case Tool::Arrow:
-            for (auto *pointer : qAsConst(m_toolButtonPointerList))
-            {
-                pointer->setChecked(false);
-            }
+            ui->actionToolSelect->setChecked(false);
             m_statusLabel->setText(QString());
 
             // Crash: using CRTL+Z while using line tool.
@@ -3183,133 +3354,133 @@ void MainWindow::CancelTool()
             // Nothing to do here because we can't create this tool from main window.
             break;
         case Tool::EndLine:
-            ui->toolButtonEndLine->setChecked(false);
+            ui->actionEndLineTool->setChecked(false);
             break;
         case Tool::Line:
-            ui->toolButtonLine->setChecked(false);
+            ui->actionLineTool->setChecked(false);
             break;
         case Tool::AlongLine:
-            ui->toolButtonAlongLine->setChecked(false);
+            ui->actionAlongLineTool->setChecked(false);
             break;
         case Tool::Midpoint:
-            ui->toolButtonMidpoint->setChecked(false);
+            ui->actionMidpointTool->setChecked(false);
             break;
         case Tool::ShoulderPoint:
-            ui->toolButtonShoulderPoint->setChecked(false);
+            ui->actionShoulderPointTool->setChecked(false);
             break;
         case Tool::Normal:
-            ui->toolButtonNormal->setChecked(false);
+            ui->actionNormalTool->setChecked(false);
             break;
         case Tool::Bisector:
-            ui->toolButtonBisector->setChecked(false);
+            ui->actionBisectorTool->setChecked(false);
             break;
         case Tool::LineIntersect:
-            ui->toolButtonLineIntersect->setChecked(false);
+            ui->actionLineIntersectTool->setChecked(false);
             break;
         case Tool::Spline:
-            ui->toolButtonSpline->setChecked(false);
+            ui->actionSplineTool->setChecked(false);
             break;
         case Tool::CubicBezier:
-            ui->toolButtonCubicBezier->setChecked(false);
+            ui->actionCubicBezierTool->setChecked(false);
             break;
         case Tool::Arc:
-            ui->toolButtonArc->setChecked(false);
+            ui->actionArcTool->setChecked(false);
             break;
         case Tool::ArcWithLength:
-            ui->toolButtonArcWithLength->setChecked(false);
+            ui->actionArcWithLengthTool->setChecked(false);
             break;
         case Tool::SplinePath:
-            ui->toolButtonSplinePath->setChecked(false);
+            ui->actionSplinePathTool->setChecked(false);
             break;
         case Tool::CubicBezierPath:
-            ui->toolButtonCubicBezierPath->setChecked(false);
+            ui->actionCubicBezierPathTool->setChecked(false);
             break;
         case Tool::PointOfContact:
-            ui->toolButtonPointOfContact->setChecked(false);
+            ui->actionPointOfContactTool->setChecked(false);
             break;
         case Tool::Piece:
-            ui->toolButtonNewDetail->setChecked(false);
+            ui->actionNewDetailTool->setChecked(false);
             break;
         case Tool::PiecePath:
-            ui->toolButtonInternalPath->setChecked(false);
+            ui->actionInternalPathTool->setChecked(false);
             break;
         case Tool::Height:
-            ui->toolButtonHeight->setChecked(false);
+            ui->actionHeightTool->setChecked(false);
             break;
         case Tool::Triangle:
-            ui->toolButtonTriangle->setChecked(false);
+            ui->actionTriangleTool->setChecked(false);
             break;
         case Tool::PointOfIntersection:
-            ui->toolButtonPointOfIntersection->setChecked(false);
+            ui->actionPointOfIntersectionTool->setChecked(false);
             break;
         case Tool::CutSpline:
-            ui->toolButtonSplineCutPoint->setChecked(false);
+            ui->actionSplineCutPointTool->setChecked(false);
             break;
         case Tool::CutSplinePath:
-            ui->toolButtonSplinePathCutPoint->setChecked(false);
+            ui->actionSplinePathCutPointTool->setChecked(false);
             break;
         case Tool::UnionDetails:
-            ui->toolButtonUnionDetails->setChecked(false);
+            ui->actionUnionDetailsTool->setChecked(false);
             break;
         case Tool::DuplicateDetail:
-            ui->toolButtonDuplicateDetail->setChecked(false);
+            ui->actionDuplicateDetailTool->setChecked(false);
             break;
         case Tool::CutArc:
-            ui->toolButtonArcCutPoint->setChecked(false);
+            ui->actionArcCutPointTool->setChecked(false);
             break;
         case Tool::LineIntersectAxis:
-            ui->toolButtonLineIntersectAxis->setChecked(false);
+            ui->actionLineIntersectAxisTool->setChecked(false);
             break;
         case Tool::CurveIntersectAxis:
-            ui->toolButtonCurveIntersectAxis->setChecked(false);
+            ui->actionCurveIntersectAxisTool->setChecked(false);
             break;
         case Tool::ArcIntersectAxis:
-            ui->toolButtonArcIntersectAxis->setChecked(false);
+            ui->actionArcIntersectAxisTool->setChecked(false);
             break;
         case Tool::PointOfIntersectionArcs:
-            ui->toolButtonPointOfIntersectionArcs->setChecked(false);
+            ui->actionPointOfIntersectionArcsTool->setChecked(false);
             break;
         case Tool::PointOfIntersectionCircles:
-            ui->toolButtonPointOfIntersectionCircles->setChecked(false);
+            ui->actionPointOfIntersectionCirclesTool->setChecked(false);
             break;
         case Tool::PointOfIntersectionCurves:
-            ui->toolButtonIntersectionCurves->setChecked(false);
+            ui->actionIntersectionCurvesTool->setChecked(false);
             break;
         case Tool::PointFromCircleAndTangent:
-            ui->toolButtonPointFromCircleAndTangent->setChecked(false);
+            ui->actionPointFromCircleAndTangentTool->setChecked(false);
             break;
         case Tool::PointFromArcAndTangent:
-            ui->toolButtonPointFromArcAndTangent->setChecked(false);
+            ui->actionPointFromArcAndTangentTool->setChecked(false);
             break;
         case Tool::TrueDarts:
-            ui->toolButtonTrueDarts->setChecked(false);
+            ui->actionTrueDartsTool->setChecked(false);
             break;
         case Tool::Group:
-            ui->toolButtonGroup->setChecked(false);
+            ui->actionGroupTool->setChecked(false);
             break;
         case Tool::Rotation:
-            ui->toolButtonRotation->setChecked(false);
+            ui->actionRotationTool->setChecked(false);
             break;
         case Tool::FlippingByLine:
-            ui->toolButtonFlippingByLine->setChecked(false);
+            ui->actionFlippingByLineTool->setChecked(false);
             break;
         case Tool::FlippingByAxis:
-            ui->toolButtonFlippingByAxis->setChecked(false);
+            ui->actionFlippingByAxisTool->setChecked(false);
             break;
         case Tool::Move:
-            ui->toolButtonMove->setChecked(false);
+            ui->actionMoveTool->setChecked(false);
             break;
         case Tool::EllipticalArc:
-            ui->toolButtonEllipticalArc->setChecked(false);
+            ui->actionEllipticalArcTool->setChecked(false);
             break;
         case Tool::Pin:
-            ui->toolButtonPin->setChecked(false);
+            ui->actionPinTool->setChecked(false);
             break;
         case Tool::InsertNode:
-            ui->toolButtonInsertNode->setChecked(false);
+            ui->actionInsertNodeTool->setChecked(false);
             break;
         case Tool::PlaceLabel:
-            ui->toolButtonPlaceLabel->setChecked(false);
+            ui->actionPlaceLabelTool->setChecked(false);
             break;
     }
 
@@ -3332,10 +3503,7 @@ void MainWindow::ArrowTool(bool checked)
     {
         qCDebug(vMainWindow, "Arrow tool.");
         CancelTool();
-        for (auto *pointer : qAsConst(m_toolButtonPointerList))
-        {
-            pointer->setChecked(true);
-        }
+        ui->actionToolSelect->setChecked(true);
         m_currentTool = Tool::Arrow;
         emit EnableItemMove(true);
         emit ItemsSelection(SelectionType::ByMouseRelease);
@@ -3377,10 +3545,7 @@ void MainWindow::ArrowTool(bool checked)
     }
     else
     {
-        for (auto *pointer : qAsConst(m_toolButtonPointerList))
-        {
-            pointer->setChecked(true);
-        }
+        ui->actionToolSelect->setChecked(true);
     }
 }
 
@@ -3476,7 +3641,6 @@ void MainWindow::ActionDraw(bool checked)
 
         SetEnableTool(true);
         SetEnableWidgets(true);
-        ui->toolBox->setCurrentIndex(m_currentToolBoxIndex);
 
         if (VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Multisize)
         {
@@ -3547,14 +3711,9 @@ void MainWindow::ActionDetails(bool checked)
         ui->view->setScene(currentScene);
         RestoreCurrentScene();
 
-        if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
-        {
-            m_currentToolBoxIndex = ui->toolBox->currentIndex();
-        }
         VAbstractValApplication::VApp()->SetDrawMode(Draw::Modeling);
         SetEnableTool(true);
         SetEnableWidgets(true);
-        ui->toolBox->setCurrentIndex(ui->toolBox->indexOf(ui->detailPage));
 
         if (VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Multisize)
         {
@@ -3663,14 +3822,9 @@ void MainWindow::ActionLayout(bool checked)
     emit ui->view->itemClicked(nullptr);
     ui->view->setScene(currentScene);
 
-    if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
-    {
-        m_currentToolBoxIndex = ui->toolBox->currentIndex();
-    }
     VAbstractValApplication::VApp()->SetDrawMode(Draw::Layout);
     SetEnableTool(true);
     SetEnableWidgets(true);
-    ui->toolBox->setCurrentIndex(ui->toolBox->indexOf(ui->layoutPage));
 
     if (not m_mouseCoordinate.isNull())
     {
@@ -3691,7 +3845,7 @@ void MainWindow::ActionLayout(bool checked)
 
     if (m_layoutSettings->LayoutScenes().isEmpty() || m_layoutSettings->IsLayoutStale())
     {
-        ui->toolButtonLayoutSettings->click();
+        ui->actionLayoutSettings->activate(QAction::Trigger);
     }
 
     m_statusLabel->setText(QString());
@@ -5083,64 +5237,62 @@ void MainWindow::SetEnableTool(bool enable)
     Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Not all tools were handled.");
 
     // Drawing Tools
-    ui->toolButtonEndLine->setEnabled(drawTools);
-    ui->toolButtonLine->setEnabled(drawTools);
-    ui->toolButtonAlongLine->setEnabled(drawTools);
-    ui->toolButtonShoulderPoint->setEnabled(drawTools);
-    ui->toolButtonNormal->setEnabled(drawTools);
-    ui->toolButtonBisector->setEnabled(drawTools);
-    ui->toolButtonLineIntersect->setEnabled(drawTools);
-    ui->toolButtonSpline->setEnabled(drawTools);
-    ui->toolButtonCubicBezier->setEnabled(drawTools);
-    ui->toolButtonArc->setEnabled(drawTools);
-    ui->toolButtonSplinePath->setEnabled(drawTools);
-    ui->toolButtonCubicBezierPath->setEnabled(drawTools);
-    ui->toolButtonPointOfContact->setEnabled(drawTools);
-    ui->toolButtonNewDetail->setEnabled(drawTools);
-    ui->toolButtonInternalPath->setEnabled(drawTools);
-    ui->toolButtonHeight->setEnabled(drawTools);
-    ui->toolButtonTriangle->setEnabled(drawTools);
-    ui->toolButtonPointOfIntersection->setEnabled(drawTools);
-    ui->toolButtonSplineCutPoint->setEnabled(drawTools);
-    ui->toolButtonSplinePathCutPoint->setEnabled(drawTools);
-    ui->toolButtonArcCutPoint->setEnabled(drawTools);
-    ui->toolButtonLineIntersectAxis->setEnabled(drawTools);
-    ui->toolButtonCurveIntersectAxis->setEnabled(drawTools);
-    ui->toolButtonArcIntersectAxis->setEnabled(drawTools);
-    ui->toolButtonPointOfIntersectionArcs->setEnabled(drawTools);
-    ui->toolButtonIntersectionCurves->setEnabled(drawTools);
-    ui->toolButtonPointOfIntersectionCircles->setEnabled(drawTools);
-    ui->toolButtonPointFromCircleAndTangent->setEnabled(drawTools);
-    ui->toolButtonPointFromArcAndTangent->setEnabled(drawTools);
-    ui->toolButtonArcWithLength->setEnabled(drawTools);
-    ui->toolButtonTrueDarts->setEnabled(drawTools);
-    ui->toolButtonGroup->setEnabled(drawTools);
-    ui->toolButtonRotation->setEnabled(drawTools);
-    ui->toolButtonFlippingByLine->setEnabled(drawTools);
-    ui->toolButtonFlippingByAxis->setEnabled(drawTools);
-    ui->toolButtonMove->setEnabled(drawTools);
-    ui->toolButtonMidpoint->setEnabled(drawTools);
-    ui->toolButtonEllipticalArc->setEnabled(drawTools);
-    ui->toolButtonPin->setEnabled(drawTools);
-    ui->toolButtonInsertNode->setEnabled(drawTools);
-    ui->toolButtonPlaceLabel->setEnabled(drawTools);
-    ui->toolButtonExportDraw->setEnabled(drawTools);
+    ui->actionEndLineTool->setEnabled(drawTools);
+    ui->actionLineTool->setEnabled(drawTools);
+    ui->actionAlongLineTool->setEnabled(drawTools);
+    ui->actionShoulderPointTool->setEnabled(drawTools);
+    ui->actionNormalTool->setEnabled(drawTools);
+    ui->actionBisectorTool->setEnabled(drawTools);
+    ui->actionLineIntersectTool->setEnabled(drawTools);
+    ui->actionSplineTool->setEnabled(drawTools);
+    ui->actionCubicBezierTool->setEnabled(drawTools);
+    ui->actionArcTool->setEnabled(drawTools);
+    ui->actionSplinePathTool->setEnabled(drawTools);
+    ui->actionCubicBezierPathTool->setEnabled(drawTools);
+    ui->actionPointOfContactTool->setEnabled(drawTools);
+    ui->actionNewDetailTool->setEnabled(drawTools);
+    ui->actionInternalPathTool->setEnabled(drawTools);
+    ui->actionHeightTool->setEnabled(drawTools);
+    ui->actionTriangleTool->setEnabled(drawTools);
+    ui->actionPointOfIntersectionTool->setEnabled(drawTools);
+    ui->actionSplineCutPointTool->setEnabled(drawTools);
+    ui->actionSplinePathCutPointTool->setEnabled(drawTools);
+    ui->actionArcCutPointTool->setEnabled(drawTools);
+    ui->actionLineIntersectAxisTool->setEnabled(drawTools);
+    ui->actionCurveIntersectAxisTool->setEnabled(drawTools);
+    ui->actionArcIntersectAxisTool->setEnabled(drawTools);
+    ui->actionPointOfIntersectionArcsTool->setEnabled(drawTools);
+    ui->actionIntersectionCurvesTool->setEnabled(drawTools);
+    ui->actionPointOfIntersectionCirclesTool->setEnabled(drawTools);
+    ui->actionPointFromCircleAndTangentTool->setEnabled(drawTools);
+    ui->actionPointFromArcAndTangentTool->setEnabled(drawTools);
+    ui->actionArcWithLengthTool->setEnabled(drawTools);
+    ui->actionTrueDartsTool->setEnabled(drawTools);
+    ui->actionGroupTool->setEnabled(drawTools);
+    ui->actionRotationTool->setEnabled(drawTools);
+    ui->actionFlippingByLineTool->setEnabled(drawTools);
+    ui->actionFlippingByAxisTool->setEnabled(drawTools);
+    ui->actionMoveTool->setEnabled(drawTools);
+    ui->actionMidpointTool->setEnabled(drawTools);
+    ui->actionEllipticalArcTool->setEnabled(drawTools);
+    ui->actionPinTool->setEnabled(drawTools);
+    ui->actionInsertNodeTool->setEnabled(drawTools);
+    ui->actionPlaceLabelTool->setEnabled(drawTools);
+    ui->actionExportDraw->setEnabled(drawTools);
 
     ui->actionLast_tool->setEnabled(drawTools);
 
-    for (auto *pointer : qAsConst(m_toolButtonPointerList))
-    {
-        pointer->setEnabled(drawTools || modelingTools);
-        pointer->setChecked(drawTools || modelingTools);
-    }
+    ui->actionToolSelect->setEnabled(drawTools || modelingTools);
+    ui->actionToolSelect->setChecked(drawTools || modelingTools);
 
     // Modeling Tools
-    ui->toolButtonUnionDetails->setEnabled(modelingTools);
-    ui->toolButtonDetailExportAs->setEnabled(modelingTools);
-    ui->toolButtonDuplicateDetail->setEnabled(modelingTools);
+    ui->actionUnionDetailsTool->setEnabled(modelingTools);
+    ui->actionDetailExportAs->setEnabled(modelingTools);
+    ui->actionDuplicateDetailTool->setEnabled(modelingTools);
 
     // Layout tools
-    ui->toolButtonLayoutSettings->setEnabled(layoutTools);
+    ui->actionLayoutSettings->setEnabled(layoutTools);
+    ui->actionLayoutExportAs->setEnabled(layoutTools && not m_layoutSettings->LayoutScenes().isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -5148,7 +5300,7 @@ void MainWindow::SetLayoutModeActions()
 {
     const bool enabled = not m_layoutSettings->LayoutScenes().isEmpty();
 
-    ui->toolButtonLayoutExportAs->setEnabled(enabled);
+    ui->actionLayoutExportAs->setEnabled(enabled);
     ui->actionExportAs->setEnabled(enabled);
     ui->actionPrintPreview->setEnabled(enabled);
     ui->actionPrintPreviewTiled->setEnabled(enabled);
@@ -5295,9 +5447,6 @@ void MainWindow::ReadSettings()
         // Text under tool buton icon
         ToolBarStyles();
 
-        // Tool box scaling
-        ToolBoxSizePolicy();
-
         QFont f = ui->plainTextEditPatternMessages->font();
         f.setPointSize(settings->GetPatternMessageFontSize(f.pointSize()));
         ui->plainTextEditPatternMessages->setFont(f);
@@ -5431,10 +5580,7 @@ void MainWindow::LastUsedTool()
     switch (m_lastUsedTool)
     {
         case Tool::Arrow:
-            for (auto *pointer : qAsConst(m_toolButtonPointerList))
-            {
-                pointer->setChecked(true);
-            }
+            ui->actionToolSelect->setChecked(true);
             ArrowTool(true);
             break;
         case Tool::BasePoint:
@@ -5457,175 +5603,175 @@ void MainWindow::LastUsedTool()
             // Nothing to do here because we can't create this tool from main window.
             break;
         case Tool::EndLine:
-            ui->toolButtonEndLine->setChecked(true);
+            ui->actionEndLineTool->setChecked(true);
             ToolEndLine(true);
             break;
         case Tool::Line:
-            ui->toolButtonLine->setChecked(true);
+            ui->actionLineTool->setChecked(true);
             ToolLine(true);
             break;
         case Tool::AlongLine:
-            ui->toolButtonAlongLine->setChecked(true);
+            ui->actionAlongLineTool->setChecked(true);
             ToolAlongLine(true);
             break;
         case Tool::Midpoint:
-            ui->toolButtonMidpoint->setChecked(true);
+            ui->actionMidpointTool->setChecked(true);
             ToolMidpoint(true);
             break;
         case Tool::ShoulderPoint:
-            ui->toolButtonShoulderPoint->setChecked(true);
+            ui->actionShoulderPointTool->setChecked(true);
             ToolShoulderPoint(true);
             break;
         case Tool::Normal:
-            ui->toolButtonNormal->setChecked(true);
+            ui->actionNormalTool->setChecked(true);
             ToolNormal(true);
             break;
         case Tool::Bisector:
-            ui->toolButtonBisector->setChecked(true);
+            ui->actionBisectorTool->setChecked(true);
             ToolBisector(true);
             break;
         case Tool::LineIntersect:
-            ui->toolButtonLineIntersect->setChecked(true);
+            ui->actionLineIntersectTool->setChecked(true);
             ToolLineIntersect(true);
             break;
         case Tool::Spline:
-            ui->toolButtonSpline->setChecked(true);
+            ui->actionSplineTool->setChecked(true);
             ToolSpline(true);
             break;
         case Tool::CubicBezier:
-            ui->toolButtonCubicBezier->setChecked(true);
+            ui->actionCubicBezierTool->setChecked(true);
             ToolCubicBezier(true);
             break;
         case Tool::Arc:
-            ui->toolButtonArc->setChecked(true);
+            ui->actionArcTool->setChecked(true);
             ToolArc(true);
             break;
         case Tool::SplinePath:
-            ui->toolButtonSplinePath->setChecked(true);
+            ui->actionSplinePathTool->setChecked(true);
             ToolSplinePath(true);
             break;
         case Tool::CubicBezierPath:
-            ui->toolButtonCubicBezierPath->setChecked(true);
+            ui->actionCubicBezierPathTool->setChecked(true);
             ToolCubicBezierPath(true);
             break;
         case Tool::PointOfContact:
-            ui->toolButtonPointOfContact->setChecked(true);
+            ui->actionPointOfContactTool->setChecked(true);
             ToolPointOfContact(true);
             break;
         case Tool::Piece:
-            ui->toolButtonNewDetail->setChecked(true);
+            ui->actionNewDetailTool->setChecked(true);
             ToolDetail(true);
             break;
         case Tool::PiecePath:
-            ui->toolButtonInternalPath->setChecked(true);
+            ui->actionInternalPathTool->setChecked(true);
             ToolPiecePath(true);
             break;
         case Tool::Height:
-            ui->toolButtonHeight->setChecked(true);
+            ui->actionHeightTool->setChecked(true);
             ToolHeight(true);
             break;
         case Tool::Triangle:
-            ui->toolButtonTriangle->setChecked(true);
+            ui->actionTriangleTool->setChecked(true);
             ToolTriangle(true);
             break;
         case Tool::PointOfIntersection:
-            ui->toolButtonPointOfIntersection->setChecked(true);
+            ui->actionPointOfIntersectionTool->setChecked(true);
             ToolPointOfIntersection(true);
             break;
         case Tool::PointOfIntersectionArcs:
-            ui->toolButtonPointOfIntersectionArcs->setChecked(true);
+            ui->actionPointOfIntersectionArcsTool->setChecked(true);
             ToolPointOfIntersectionArcs(true);
             break;
         case Tool::CutSpline:
-            ui->toolButtonSplineCutPoint->setChecked(true);
+            ui->actionSplineCutPointTool->setChecked(true);
             ToolCutSpline(true);
             break;
         case Tool::CutSplinePath:
-            ui->toolButtonSplinePathCutPoint->setChecked(true);
+            ui->actionSplinePathCutPointTool->setChecked(true);
             ToolCutSplinePath(true);
             break;
         case Tool::UnionDetails:
-            ui->toolButtonUnionDetails->setChecked(true);
+            ui->actionUnionDetailsTool->setChecked(true);
             ToolUnionDetails(true);
             break;
         case Tool::DuplicateDetail:
-            ui->toolButtonDuplicateDetail->setChecked(true);
+            ui->actionDuplicateDetailTool->setChecked(true);
             ToolDuplicateDetail(true);
             break;
         case Tool::CutArc:
-            ui->toolButtonArcCutPoint->setChecked(true);
+            ui->actionArcCutPointTool->setChecked(true);
             ToolCutArc(true);
             break;
         case Tool::LineIntersectAxis:
-            ui->toolButtonLineIntersectAxis->setChecked(true);
+            ui->actionLineIntersectAxisTool->setChecked(true);
             ToolLineIntersectAxis(true);
             break;
         case Tool::CurveIntersectAxis:
-            ui->toolButtonCurveIntersectAxis->setChecked(true);
+            ui->actionCurveIntersectAxisTool->setChecked(true);
             ToolCurveIntersectAxis(true);
             break;
         case Tool::ArcIntersectAxis:
-            ui->toolButtonArcIntersectAxis->setChecked(true);
+            ui->actionArcIntersectAxisTool->setChecked(true);
             ToolArcIntersectAxis(true);
             break;
         case Tool::PointOfIntersectionCircles:
-            ui->toolButtonPointOfIntersectionCircles->setChecked(true);
+            ui->actionPointOfIntersectionCirclesTool->setChecked(true);
             ToolPointOfIntersectionCircles(true);
             break;
         case Tool::PointOfIntersectionCurves:
-            ui->toolButtonIntersectionCurves->setChecked(true);
+            ui->actionIntersectionCurvesTool->setChecked(true);
             ToolPointOfIntersectionCurves(true);
             break;
         case Tool::PointFromCircleAndTangent:
-            ui->toolButtonPointFromCircleAndTangent->setChecked(true);
+            ui->actionPointFromCircleAndTangentTool->setChecked(true);
             ToolPointFromCircleAndTangent(true);
             break;
         case Tool::PointFromArcAndTangent:
-            ui->toolButtonPointFromArcAndTangent->setChecked(true);
+            ui->actionPointFromArcAndTangentTool->setChecked(true);
             ToolPointFromArcAndTangent(true);
             break;
         case Tool::ArcWithLength:
-            ui->toolButtonArcWithLength->setChecked(true);
+            ui->actionArcWithLengthTool->setChecked(true);
             ToolArcWithLength(true);
             break;
         case Tool::TrueDarts:
-            ui->toolButtonTrueDarts->setChecked(true);
+            ui->actionTrueDartsTool->setChecked(true);
             ToolTrueDarts(true);
             break;
         case Tool::Group:
-            ui->toolButtonGroup->setChecked(true);
+            ui->actionGroupTool->setChecked(true);
             ToolGroup(true);
             break;
         case Tool::Rotation:
-            ui->toolButtonRotation->setChecked(true);
+            ui->actionRotationTool->setChecked(true);
             ToolRotation(true);
             break;
         case Tool::FlippingByLine:
-            ui->toolButtonFlippingByLine->setChecked(true);
+            ui->actionFlippingByLineTool->setChecked(true);
             ToolFlippingByLine(true);
             break;
         case Tool::FlippingByAxis:
-            ui->toolButtonFlippingByAxis->setChecked(true);
+            ui->actionFlippingByAxisTool->setChecked(true);
             ToolFlippingByAxis(true);
             break;
         case Tool::Move:
-            ui->toolButtonMove->setChecked(true);
+            ui->actionMoveTool->setChecked(true);
             ToolMove(true);
             break;
         case Tool::EllipticalArc:
-            ui->toolButtonEllipticalArc->setChecked(true);
+            ui->actionEllipticalArcTool->setChecked(true);
             ToolEllipticalArc(true);
             break;
         case Tool::Pin:
-            ui->toolButtonPin->setChecked(true);
+            ui->actionPinTool->setChecked(true);
             ToolPin(true);
             break;
         case Tool::InsertNode:
-            ui->toolButtonInsertNode->setChecked(true);
+            ui->actionInsertNodeTool->setChecked(true);
             ToolInsertNode(true);
             break;
         case Tool::PlaceLabel:
-            ui->toolButtonPlaceLabel->setChecked(true);
+            ui->actionPlaceLabelTool->setChecked(true);
             ToolPlaceLabel(true);
             break;
     }
@@ -6220,15 +6366,6 @@ void MainWindow::ToolBarStyles()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ToolBoxSizePolicy()
-{
-    ui->toolBox->setSizePolicy(ui->toolBox->sizePolicy().horizontalPolicy(),
-                               VAbstractValApplication::VApp()->ValentinaSettings()->GetToolPanelScaling()
-                                   ? QSizePolicy::Fixed
-                                   : QSizePolicy::Preferred);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ShowPaper(int index)
 {
     if (index < 0 || index >= m_layoutSettings->LayoutScenes().size())
@@ -6259,7 +6396,6 @@ void MainWindow::Preferences()
         connect(dlg.data(), &DialogPreferences::UpdateProperties, m_toolOptions,
                 &VToolOptionsPropertyBrowser::RefreshOptions);
         connect(dlg.data(), &DialogPreferences::UpdateProperties, this, &MainWindow::ToolBarStyles);
-        connect(dlg.data(), &DialogPreferences::UpdateProperties, this, &MainWindow::ToolBoxSizePolicy);
         connect(dlg.data(), &DialogPreferences::UpdateProperties, this, [this]() { emit doc->FullUpdateFromFile(); });
         connect(dlg.data(), &DialogPreferences::UpdateProperties, ui->view,
                 &VMainGraphicsView::ResetScrollingAnimation);
@@ -6294,7 +6430,7 @@ void MainWindow::CreateMeasurements()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ExportDrawAs()
 {
-    auto Uncheck = qScopeGuard([this] { ui->toolButtonExportDraw->setChecked(false); });
+    auto Uncheck = qScopeGuard([this] { ui->actionExportDraw->setChecked(false); });
 
     QString filters(tr("Scalable Vector Graphics files") + QStringLiteral("(*.svg)"));
     QString dir = QDir::homePath() + QChar('/') + FileName() + QStringLiteral(".svg");
@@ -6318,7 +6454,7 @@ void MainWindow::ExportDrawAs()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ExportLayoutAs()
 {
-    auto Uncheck = qScopeGuard([this] { ui->toolButtonLayoutExportAs->setChecked(false); });
+    auto Uncheck = qScopeGuard([this] { ui->actionLayoutExportAs->setChecked(false); });
 
     if (m_layoutSettings->IsLayoutStale())
     {
@@ -6354,7 +6490,7 @@ void MainWindow::ExportLayoutAs()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ExportDetailsAs()
 {
-    auto Uncheck = qScopeGuard([this] { ui->toolButtonDetailExportAs->setChecked(false); });
+    auto Uncheck = qScopeGuard([this] { ui->actionDetailExportAs->setChecked(false); });
 
     QVector<DetailForLayout> detailsInLayout = SortDetailsForLayout(pattern->DataPieces());
 

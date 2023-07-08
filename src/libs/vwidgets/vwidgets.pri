@@ -29,8 +29,9 @@ SOURCES += \
     $$PWD/vlineedit.cpp \
     $$PWD/vplaintextedit.cpp \
     $$PWD/vhighlighter.cpp \
-    $$PWD/vpiecegrainline.cpp
-
+    $$PWD/vpiecegrainline.cpp \
+    $$PWD/vtoolbuttonpopup.cpp
+        
 *msvc*:SOURCES += $$PWD/stable.cpp
 
 HEADERS += \
@@ -63,4 +64,6 @@ HEADERS += \
     $$PWD/vplaintextedit.h \
     $$PWD/vhighlighter.h \
     $$PWD/vpiecegrainline.h \
-    $$PWD/vpiecegrainline_p.h
+    $$PWD/vpiecegrainline_p.h \
+    $$PWD/vtoolbuttonpopup.h
+

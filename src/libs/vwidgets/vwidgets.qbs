@@ -19,6 +19,8 @@ VLib {
         "velidedlabel.cpp",
         "vmaingraphicsscene.cpp",
         "vmaingraphicsview.cpp",
+        "vtoolbuttonpopup.cpp",
+        "vtoolbuttonpopup.h",
         "vwidgetpopup.cpp",
         "vcontrolpointspline.cpp",
         "vgraphicssimpletextitem.cpp",
@@ -69,7 +71,7 @@ VLib {
         "vhighlighter.h",
         "vpiecegrainline.h",
         "vpiecegrainline.cpp",
-        "vpiecegrainline_p.h"
+        "vpiecegrainline_p.h",
     ]
 
     Export {

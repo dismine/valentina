@@ -133,7 +133,6 @@ private slots:
     void PreviousPatternPiece();
     void NextPatternPiece();
     void ToolBarStyles();
-    void ToolBoxSizePolicy();
     void ShowPaper(int index);
     void Preferences();
 #if defined(Q_OS_MAC)
@@ -236,7 +235,7 @@ private slots:
 
     void ShowProgress();
     void ClearPatternMessages();
-    
+
     void AskDefaultSettings();
 
     void AddBackgroundImageItem(const QUuid &id);
@@ -295,9 +294,6 @@ private:
     /** @brief currentDrawIndex save current selected pattern peace. */
     qint32 m_currentDrawIndex{0};
 
-    /** @brief currentToolBoxIndex save current set of tools. */
-    qint32 m_currentToolBoxIndex{0};
-
     /** @brief drawMode true if we current draw scene. */
     bool m_drawMode{true};
 
@@ -319,8 +315,6 @@ private:
     VWidgetDetails *m_detailsWidget{nullptr};
     VWidgetBackgroundImages *m_backgroundImagesWidget{nullptr};
     QSharedPointer<VLockGuard<char>> m_lock{nullptr};
-
-    QList<QToolButton *> m_toolButtonPointerList{};
 
     QProgressBar *m_progressBar;
     QLabel *m_statusLabel;
@@ -354,6 +348,7 @@ private:
     void ToolBarStages();
     void ToolBarDraws();
     void ToolBarTools();
+    void ToolBarDrawTools();
     void InitToolButtons();
     void CancelTool();
 

@@ -37,22 +37,12 @@
         <file>icon/16x16/roll.png</file>
         <file>icon/16x16/progress.gif</file>
         <file>icon/32x32/export_to_picture_document.png</file>
-        <file>icon/16x16/toolsectionline.png</file>
-        <file>icon/16x16/toolsectioncurve.png</file>
-        <file>icon/16x16/toolsectionarc.png</file>
-        <file>icon/16x16/toolsectionpoint.png</file>
-        <file>icon/16x16/toolsectiondetail.png</file>
-        <file>icon/16x16/toolsectionlayout.png</file>
         <file>icon/24x24/fast_forward_left_to_right_arrow.png</file>
         <file>icon/24x24/fast_forward_right_to_left_arrow.png</file>
         <file>icon/24x24/left_to_right_arrow.png</file>
         <file>icon/24x24/right_to_left_arrow.png</file>
         <file>icon/32x32/clockwise.png</file>
         <file>icon/32x32/syncM.png</file>
-        <file>icon/16x16/toolsectionarc@2x.png</file>
-        <file>icon/16x16/toolsectioncurve@2x.png</file>
-        <file>icon/16x16/toolsectionline@2x.png</file>
-        <file>icon/16x16/toolsectionpoint@2x.png</file>
         <file>icon/16x16/operations.png</file>
         <file>icon/16x16/operations@2x.png</file>
         <file>icon/16x16/closed_eye.png</file>
@@ -63,8 +53,6 @@
         <file>icon/16x16/allow_detail@2x.png</file>
         <file>icon/16x16/forbid_detail.png</file>
         <file>icon/16x16/forbid_detail@2x.png</file>
-        <file>icon/16x16/toolsectionelarc.png</file>
-        <file>icon/16x16/toolsectionelarc@2x.png</file>
         <file>icon/32x32/grainline.png</file>
         <file>icon/32x32/grainline@2x.png</file>
         <file>icon/32x32/labels.png</file>

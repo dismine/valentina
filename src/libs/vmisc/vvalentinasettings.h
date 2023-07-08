@@ -170,9 +170,6 @@ public:
     auto GetAutoRefreshPatternMessage() const -> bool;
     void SetAutoRefreshPatternMessage(bool value);
 
-    auto GetToolPanelScaling() const -> bool;
-    void SetToolPanelScaling(const bool &value);
-
     auto GetLayoutExportFormat() const -> qint8;
     void SetLayoutExportFormat(qint8 format);
 

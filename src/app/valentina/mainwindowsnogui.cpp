@@ -46,6 +46,7 @@
 #include "dialogs/dialoglayoutprogress.h"
 #include "dialogs/dialoglayoutsettings.h"
 #include "dialogs/dialogsavelayout.h"
+#include <QAction>
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include "../vmisc/vtextcodec.h"
@@ -158,7 +159,7 @@ MainWindowsNoGUI::~MainWindowsNoGUI()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindowsNoGUI::ToolLayoutSettings(bool checked)
 {
-    QToolButton *tButton = qobject_cast<QToolButton *>(this->sender());
+    auto *tButton = qobject_cast<QAction *>(this->sender());
     SCASSERT(tButton != nullptr)
 
     if (checked)
@@ -498,8 +499,7 @@ void MainWindowsNoGUI::ExportData(const QVector<VLayoutPiece> &listDetails)
                                      QString::number(i + 1) +
                                      VLayoutExporter::ExportFormatSuffix(m_dialogSaveLayout->Format());
 
-                auto *paper =
-                    qgraphicsitem_cast<QGraphicsRectItem *>(m_layoutSettings->LayoutPapers().at(i));
+                auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(m_layoutSettings->LayoutPapers().at(i));
                 SCASSERT(paper != nullptr)
 
                 ExportApparelLayout(detailsOnLayout.at(i), name, paper->rect().size().toSize());

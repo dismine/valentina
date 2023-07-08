@@ -62,8 +62,6 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationLabelLanguage,
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingAutoRefreshPatternMessage,
                           (QLatin1String("configuration/autoRefreshPatternMessage")))
-// NOLINTNEXTLINE
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingToolPanelScaling, (QLatin1String("configuration/toolPanelScaling")))
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsLayout, (QLatin1String("paths/layout")))        // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsLabelTemplate, (QLatin1String("paths/labels"))) // NOLINT
@@ -750,18 +748,6 @@ auto VValentinaSettings::GetAutoRefreshPatternMessage() const -> bool
 void VValentinaSettings::SetAutoRefreshPatternMessage(bool value)
 {
     setValue(*settingAutoRefreshPatternMessage, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VValentinaSettings::GetToolPanelScaling() const -> bool
-{
-    return value(*settingToolPanelScaling, false).toBool();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VValentinaSettings::SetToolPanelScaling(const bool &value)
-{
-    setValue(*settingToolPanelScaling, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
