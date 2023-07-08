@@ -85,6 +85,11 @@ void DialogUnionDetails::ChosenObject(quint32 id, const SceneObject &type)
     }
     else
     {
+        if (d1 == id)
+        {
+            emit ToolTip(tr("Select unique detail"));
+            return;
+        }
         ChoosedDetail(id, type, d2, indexD2);
     }
 }

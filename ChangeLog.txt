@@ -31,6 +31,7 @@
 - Piece labels line break.
 - Support for single-line fonts.
 - Export to HP-GL format.
+- Fix crash after using tool Union of details.
 
 # Valentina 0.7.52 September 12, 2022
 - Fix crash when default locale is ru.
