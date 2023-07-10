@@ -6,6 +6,7 @@ VLib {
     Depends { name: "VObjLib" }
     Depends { name: "QMUParserLib" }
     Depends { name: "VDXFLib" }
+    Depends { name: "VHPGLLib"}
     Depends { name: "IFCLib" }
     Depends { name: "VWidgetsLib" }
     Depends { name: "VFormatLib" }

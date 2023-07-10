@@ -487,7 +487,8 @@ void MainWindowsNoGUI::ExportData(const QVector<VLayoutPiece> &listDetails)
     const LayoutExportFormats format = m_dialogSaveLayout->Format();
 
     if (format == LayoutExportFormats::DXF_AAMA || format == LayoutExportFormats::DXF_ASTM ||
-        format == LayoutExportFormats::RLD)
+        format == LayoutExportFormats::RLD || format == LayoutExportFormats::HPGL ||
+        format == LayoutExportFormats::HPGL2)
     {
         if (m_dialogSaveLayout->Mode() == Draw::Layout)
         {
@@ -640,7 +641,8 @@ void MainWindowsNoGUI::ExportApparelLayout(const QVector<VLayoutPiece> &details,
         return;
     }
 
-    VAbstractValApplication::VApp()->ValentinaSettings()->SetPathLayout(path);
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    settings->SetPathLayout(path);
     const LayoutExportFormats format = m_dialogSaveLayout->Format();
 
     QT_WARNING_PUSH
@@ -655,6 +657,7 @@ void MainWindowsNoGUI::ExportApparelLayout(const QVector<VLayoutPiece> &details,
     exporter.SetXScale(m_dialogSaveLayout->GetXScale());
     exporter.SetYScale(m_dialogSaveLayout->GetYScale());
     exporter.SetBinaryDxfFormat(m_dialogSaveLayout->IsBinaryDXFFormat());
+    exporter.SetShowGrainline(m_dialogSaveLayout->IsShowGrainline());
 
     switch (format)
     {
@@ -668,6 +671,18 @@ void MainWindowsNoGUI::ExportApparelLayout(const QVector<VLayoutPiece> &details,
             break;
         case LayoutExportFormats::RLD:
             exporter.ExportToRLD(details);
+            break;
+        case LayoutExportFormats::HPGL:
+            exporter.SetSingleLineFont(settings->GetSingleLineFonts());
+            exporter.SetSingleStrokeOutlineFont(settings->GetSingleStrokeOutlineFont());
+            exporter.SetPenWidth(qCeil(settings->WidthHairLine()));
+            exporter.ExportToHPGL(details);
+            break;
+        case LayoutExportFormats::HPGL2:
+            exporter.SetSingleLineFont(settings->GetSingleLineFonts());
+            exporter.SetSingleStrokeOutlineFont(settings->GetSingleStrokeOutlineFont());
+            exporter.SetPenWidth(qCeil(settings->WidthHairLine()));
+            exporter.ExportToHPGL2(details);
             break;
         default:
             qDebug() << "Can't recognize file type." << Q_FUNC_INFO;

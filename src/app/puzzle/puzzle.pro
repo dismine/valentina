@@ -282,6 +282,15 @@ DEPENDPATH += $$PWD/../../libs/vdxf
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vdxf/$${DESTDIR}/vdxf.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vdxf/$${DESTDIR}/libvdxf.a
 
+# VHPGL static library
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/vhpgl/$${DESTDIR}/ -lvhpgl
+
+INCLUDEPATH += $$PWD/../../libs/vhpgl
+DEPENDPATH += $$PWD/../../libs/vhpgl
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vhpgl/$${DESTDIR}/vhpgl.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vhpgl/$${DESTDIR}/libvhpgl.a
+
 # VGAnalytics static library
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/vganalytics/$${DESTDIR}/ -lvganalytics
 

@@ -209,16 +209,6 @@ void DialogSaveLayout::SetBinaryDXFFormat(bool binary)
         case LayoutExportFormats::DXF_ASTM:
             ui->checkBoxBinaryDXF->setChecked(binary);
             break;
-        case LayoutExportFormats::SVG:
-        case LayoutExportFormats::PDF:
-        case LayoutExportFormats::PDFTiled:
-        case LayoutExportFormats::PNG:
-        case LayoutExportFormats::OBJ:
-        case LayoutExportFormats::PS:
-        case LayoutExportFormats::EPS:
-        case LayoutExportFormats::NC:
-        case LayoutExportFormats::RLD:
-        case LayoutExportFormats::TIF:
         default:
             ui->checkBoxBinaryDXF->setChecked(false);
             break;
@@ -242,16 +232,6 @@ auto DialogSaveLayout::IsBinaryDXFFormat() const -> bool
         case LayoutExportFormats::DXF_AAMA:
         case LayoutExportFormats::DXF_ASTM:
             return ui->checkBoxBinaryDXF->isChecked();
-        case LayoutExportFormats::SVG:
-        case LayoutExportFormats::PDF:
-        case LayoutExportFormats::PDFTiled:
-        case LayoutExportFormats::PNG:
-        case LayoutExportFormats::OBJ:
-        case LayoutExportFormats::PS:
-        case LayoutExportFormats::EPS:
-        case LayoutExportFormats::NC:
-        case LayoutExportFormats::RLD:
-        case LayoutExportFormats::TIF:
         default:
             return false;
     }
@@ -278,13 +258,10 @@ void DialogSaveLayout::SetShowGrainline(bool show)
         case LayoutExportFormats::PS:
         case LayoutExportFormats::EPS:
         case LayoutExportFormats::TIF:
+        case LayoutExportFormats::HPGL:
+        case LayoutExportFormats::HPGL2:
             ui->checkBoxShowGrainline->setChecked(show);
             break;
-        case LayoutExportFormats::DXF_AAMA:
-        case LayoutExportFormats::DXF_ASTM:
-        case LayoutExportFormats::RLD:
-        case LayoutExportFormats::NC:
-        case LayoutExportFormats::OBJ:
         default:
             ui->checkBoxShowGrainline->setChecked(true);
             break;
@@ -312,12 +289,9 @@ auto DialogSaveLayout::IsShowGrainline() const -> bool
         case LayoutExportFormats::PS:
         case LayoutExportFormats::EPS:
         case LayoutExportFormats::TIF:
+        case LayoutExportFormats::HPGL:
+        case LayoutExportFormats::HPGL2:
             return ui->checkBoxShowGrainline->isChecked();
-        case LayoutExportFormats::DXF_AAMA:
-        case LayoutExportFormats::DXF_ASTM:
-        case LayoutExportFormats::RLD:
-        case LayoutExportFormats::NC:
-        case LayoutExportFormats::OBJ:
         default:
             return true;
     }
@@ -459,30 +433,38 @@ void DialogSaveLayout::ShowExample()
     ui->labelExample->setText(tr("Example:") + FileName() + QLatin1Char('1') +
                               VLayoutExporter::ExportFormatSuffix(currentFormat));
 
-    ui->checkBoxBinaryDXF->setEnabled(false);
     ui->groupBoxPaperFormat->setEnabled(false);
     ui->groupBoxMargins->setEnabled(false);
-    ui->checkBoxTextAsPaths->setEnabled(true);
-    ui->checkBoxShowGrainline->setEnabled(m_mode == Draw::Layout);
+
+    ui->labelOptionsNotAvailable->setVisible(false);
+    ui->checkBoxBinaryDXF->setVisible(false);
+    ui->checkBoxTextAsPaths->setVisible(false);
+    ui->checkBoxShowGrainline->setVisible(false);
 
     switch (currentFormat)
     {
         case LayoutExportFormats::DXF_AAMA:
         case LayoutExportFormats::DXF_ASTM:
-            ui->checkBoxBinaryDXF->setEnabled(true);
-            ui->checkBoxShowGrainline->setEnabled(false);
+            ui->checkBoxBinaryDXF->setVisible(true);
             break;
         case LayoutExportFormats::PDFTiled:
             ui->groupBoxPaperFormat->setEnabled(true);
             ui->groupBoxMargins->setEnabled(true);
+            ui->checkBoxTextAsPaths->setVisible(m_mode != Draw::Layout);
+            ui->checkBoxShowGrainline->setVisible(true);
             break;
-        case LayoutExportFormats::RLD:
-            ui->checkBoxTextAsPaths->setEnabled(false);
-            ui->checkBoxShowGrainline->setEnabled(false);
+        case LayoutExportFormats::HPGL:
+        case LayoutExportFormats::HPGL2:
+            ui->checkBoxShowGrainline->setVisible(true);
             break;
-        case LayoutExportFormats::NC:
-        case LayoutExportFormats::OBJ:
-            ui->checkBoxShowGrainline->setEnabled(false);
+        case LayoutExportFormats::SVG:
+        case LayoutExportFormats::PDF:
+        case LayoutExportFormats::PNG:
+        case LayoutExportFormats::PS:
+        case LayoutExportFormats::EPS:
+        case LayoutExportFormats::TIF:
+            ui->checkBoxTextAsPaths->setVisible(m_mode != Draw::Layout);
+            ui->checkBoxShowGrainline->setVisible(true);
             break;
         case LayoutExportFormats::DXF_AC1006_Flat:
         case LayoutExportFormats::DXF_AC1009_Flat:
@@ -493,13 +475,12 @@ void DialogSaveLayout::ShowExample()
         case LayoutExportFormats::DXF_AC1021_Flat:
         case LayoutExportFormats::DXF_AC1024_Flat:
         case LayoutExportFormats::DXF_AC1027_Flat:
-        case LayoutExportFormats::SVG:
-        case LayoutExportFormats::PDF:
-        case LayoutExportFormats::PNG:
-        case LayoutExportFormats::PS:
-        case LayoutExportFormats::EPS:
-        case LayoutExportFormats::TIF:
+            ui->checkBoxBinaryDXF->setVisible(true);
+            ui->checkBoxTextAsPaths->setVisible(m_mode != Draw::Layout);
+            ui->checkBoxShowGrainline->setVisible(true);
+            break;
         default:
+            ui->labelOptionsNotAvailable->setVisible(true);
             break;
     }
 }
@@ -714,6 +695,8 @@ auto DialogSaveLayout::InitFormats() -> QVector<std::pair<QString, LayoutExportF
     //    InitFormat(LayoutExportFormats::NC);
     InitFormat(LayoutExportFormats::RLD);
     InitFormat(LayoutExportFormats::TIF);
+    InitFormat(LayoutExportFormats::HPGL);
+    InitFormat(LayoutExportFormats::HPGL2);
 
     return list;
 }

@@ -94,6 +94,8 @@ public:
     void ExportToAAMADXF(const QVector<VLayoutPiece> &details) const;
     void ExportToASTMDXF(const QVector<VLayoutPiece> &details) const;
     void ExportToRLD(const QVector<VLayoutPiece> &details) const;
+    void ExportToHPGL(const QVector<VLayoutPiece> &details) const;
+    void ExportToHPGL2(const QVector<VLayoutPiece> &details) const;
 
     static auto SupportPDFConversion() -> bool;
 
@@ -105,6 +107,15 @@ public:
 
     auto offset() const -> QPointF;
     void SetOffset(const QPointF &newOffset);
+
+    auto GetSingleLineFont() const -> bool;
+    void SetSingleLineFont(bool newSingleLineFont);
+
+    auto GetSingleStrokeOutlineFont() const -> bool;
+    void SetSingleStrokeOutlineFont(bool newSingleStrokeOutlineFont);
+
+    auto GetPenWidth() const -> int;
+    void SetPenWidth(int newPenWidth);
 
 private:
     QString m_fileName{};
@@ -120,6 +131,9 @@ private:
     bool m_showGrainline{true};
     int m_dxfVersion{0};
     QPointF m_offset{};
+    bool m_singleLineFont{false};
+    bool m_singleStrokeOutlineFont{false};
+    int m_penWidth{1};
 
     void ExportToPDF(QGraphicsScene *scene, const QList<QGraphicsItem *> &details, const QString &filename) const;
 };
@@ -254,6 +268,54 @@ inline auto VLayoutExporter::DxfVersion() const -> int
 inline void VLayoutExporter::SetDxfVersion(int dxfVersion)
 {
     m_dxfVersion = dxfVersion;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VLayoutExporter::offset() const -> QPointF
+{
+    return m_offset;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VLayoutExporter::SetOffset(const QPointF &newOffset)
+{
+    m_offset = newOffset;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VLayoutExporter::GetSingleLineFont() const -> bool
+{
+    return m_singleLineFont;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VLayoutExporter::SetSingleLineFont(bool newSingleLineFont)
+{
+    m_singleLineFont = newSingleLineFont;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VLayoutExporter::GetSingleStrokeOutlineFont() const -> bool
+{
+    return m_singleStrokeOutlineFont;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VLayoutExporter::SetSingleStrokeOutlineFont(bool newSingleStrokeOutlineFont)
+{
+    m_singleStrokeOutlineFont = newSingleStrokeOutlineFont;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline int VLayoutExporter::GetPenWidth() const
+{
+    return m_penWidth;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VLayoutExporter::SetPenWidth(int newPenWidth)
+{
+    m_penWidth = newPenWidth;
 }
 
 #endif // VLAYOUTEXPORTER_H

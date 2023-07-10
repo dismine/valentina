@@ -281,54 +281,6 @@ void VPPiece::SetGrainline(const VPieceGrainline &grainline)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPPiece::GetPieceLabelRect() const -> QVector<QPointF>
-{
-    return VLayoutPiece::GetPieceLabelRect();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPPiece::SetPieceLabelRect(const QVector<QPointF> &rect)
-{
-    VLayoutPiece::SetPieceLabelRect(rect);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VPPiece::GetPieceLabelData() const -> VTextManager
-{
-    return VLayoutPiece::GetPieceLabelData();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPPiece::SetPieceLabelData(const VTextManager &data)
-{
-    VLayoutPiece::SetPieceLabelData(data);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VPPiece::GetPatternLabelRect() const -> QVector<QPointF>
-{
-    return VLayoutPiece::GetPatternLabelRect();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPPiece::SetPatternLabelRect(const QVector<QPointF> &rect)
-{
-    VLayoutPiece::SetPatternLabelRect(rect);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VPPiece::GetPatternLabelData() const -> VTextManager
-{
-    return VLayoutPiece::GetPatternLabelData();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPPiece::SetPatternLabelData(const VTextManager &data)
-{
-    VLayoutPiece::SetPatternLabelData(data);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VPPiece::Flip()
 {
     QTransform pieceMatrix = GetMatrix();

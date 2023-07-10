@@ -112,7 +112,7 @@
         <item>
          <widget class="QCheckBox" name="checkBoxBinaryDXF">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="text">
            <string>Binary form</string>
@@ -139,6 +139,16 @@
           </property>
           <property name="checked">
            <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelOptionsNotAvailable">
+          <property name="text">
+           <string comment="options">Not available</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
           </property>
          </widget>
         </item>

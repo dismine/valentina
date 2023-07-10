@@ -722,18 +722,6 @@ auto VLayoutPiece::GetUniqueID() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class T> auto VLayoutPiece::Map(QVector<T> points) const -> QVector<T>
-{
-    std::transform(points.begin(), points.end(), points.begin(),
-                   [this](const T &point) { return d->m_matrix.map(point); });
-    if (d->m_mirror)
-    {
-        std::reverse(points.begin(), points.end());
-    }
-    return points;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 template <> // NOLINTNEXTLINE(readability-inconsistent-declaration-parameter-name)
 auto VLayoutPiece::Map<VLayoutPassmark>(QVector<VLayoutPassmark> passmarks) const -> QVector<VLayoutPassmark>
 {
@@ -1957,4 +1945,10 @@ auto VLayoutPiece::EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) 
         return static_cast<int>(posIter - points.cbegin() + 1);
     }
     return {}; // Did not find edge
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T> auto VLayoutPiece::Map(QVector<T> points) const -> QVector<T>
+{
+    return Map(points, d->m_matrix, d->m_mirror);
 }

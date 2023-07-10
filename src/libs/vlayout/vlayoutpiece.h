@@ -64,6 +64,16 @@ class VAbstractPattern;
 class VPatternLabelData;
 class VLayoutPoint;
 
+template <typename T> struct IsLayoutPoint
+{
+    static const bool value = false;
+};
+
+template <> struct IsLayoutPoint<VLayoutPoint>
+{
+    static const bool value = true;
+};
+
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
@@ -158,6 +168,18 @@ public:
     auto GetYScale() const -> qreal;
     void SetYScale(qreal ys);
 
+    auto GetPieceLabelRect() const -> QVector<QPointF>;
+    void SetPieceLabelRect(const QVector<QPointF> &rect);
+
+    auto GetPieceLabelData() const -> VTextManager;
+    void SetPieceLabelData(const VTextManager &data);
+
+    auto GetPatternLabelRect() const -> QVector<QPointF>;
+    void SetPatternLabelRect(const QVector<QPointF> &rect);
+
+    auto GetPatternLabelData() const -> VTextManager;
+    void SetPatternLabelData(const VTextManager &data);
+
     void Translate(const QPointF &p);
     void Translate(qreal dx, qreal dy);
     void Scale(qreal sx, qreal sy);
@@ -200,20 +222,16 @@ public:
 
     auto MapPlaceLabelShape(PlaceLabelImg shape) const -> PlaceLabelImg;
 
+    template <class T> static auto Map(QVector<T> points, const QTransform &matrix, bool mirror) -> QVector<T>;
+
+    template <class T>
+    static auto Map(T obj, const QTransform &matrix) -> typename std::enable_if<!IsLayoutPoint<T>::value, T>::type;
+
+    template <class T>
+    static auto Map(T obj, const QTransform &matrix) -> typename std::enable_if<IsLayoutPoint<T>::value, T>::type;
+
 protected:
     void SetGrainline(const VPieceGrainline &grainline);
-
-    auto GetPieceLabelRect() const -> QVector<QPointF>;
-    void SetPieceLabelRect(const QVector<QPointF> &rect);
-
-    auto GetPieceLabelData() const -> VTextManager;
-    void SetPieceLabelData(const VTextManager &data);
-
-    auto GetPatternLabelRect() const -> QVector<QPointF>;
-    void SetPatternLabelRect(const QVector<QPointF> &rect);
-
-    auto GetPatternLabelData() const -> VTextManager;
-    void SetPatternLabelData(const VTextManager &data);
 
 private:
     QSharedDataPointer<VLayoutPieceData> d;
@@ -242,5 +260,34 @@ private:
 QT_WARNING_POP
 
 Q_DECLARE_TYPEINFO(VLayoutPiece, Q_MOVABLE_TYPE); // NOLINT
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T> inline auto VLayoutPiece::Map(QVector<T> points, const QTransform &matrix, bool mirror) -> QVector<T>
+{
+    std::transform(points.begin(), points.end(), points.begin(),
+                   [matrix](const T &point) { return Map(point, matrix); });
+    if (mirror)
+    {
+        std::reverse(points.begin(), points.end());
+    }
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+auto VLayoutPiece::Map(T obj, const QTransform &matrix) -> typename std::enable_if<!IsLayoutPoint<T>::value, T>::type
+{
+    return matrix.map(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+auto VLayoutPiece::Map(T obj, const QTransform &matrix) -> typename std::enable_if<IsLayoutPoint<T>::value, T>::type
+{
+    auto p = matrix.map(obj);
+    obj.setX(p.x());
+    obj.setY(p.y());
+    return obj;
+}
 
 #endif // VLAYOUTDETAIL_H

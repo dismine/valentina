@@ -96,18 +96,6 @@ public:
 
     void SetGrainline(const VPieceGrainline &grainline);
 
-    auto GetPieceLabelRect() const -> QVector<QPointF>;
-    void SetPieceLabelRect(const QVector<QPointF> &rect);
-
-    auto GetPieceLabelData() const ->VTextManager;
-    void SetPieceLabelData(const VTextManager &data);
-
-    auto GetPatternLabelRect() const -> QVector<QPointF>;
-    void SetPatternLabelRect(const QVector<QPointF> &rect);
-
-    auto GetPatternLabelData() const ->VTextManager;
-    void SetPatternLabelData(const VTextManager &data);
-
     /**
      * @brief Flip horizontally mirror around center of bounding rect
      */

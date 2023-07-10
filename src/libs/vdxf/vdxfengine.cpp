@@ -636,6 +636,7 @@ auto VDxfEngine::GetXScale() const -> qreal
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::SetXScale(const qreal &xscale)
 {
+    Q_ASSERT(not isActive());
     m_xscale = xscale;
 }
 
@@ -648,6 +649,7 @@ auto VDxfEngine::GetYScale() const -> qreal
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::SetYScale(const qreal &yscale)
 {
+    Q_ASSERT(not isActive());
     m_yscale = yscale;
 }
 

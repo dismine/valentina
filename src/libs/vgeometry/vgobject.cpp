@@ -40,7 +40,7 @@
 #include "../vmisc/compatibility.h"
 #include "../vmisc/def.h"
 #include "../vmisc/vabstractapplication.h"
-#include "vgeometry/vgeometrydef.h"
+#include "vgeometrydef.h"
 #include "vgobject_p.h"
 
 namespace
@@ -651,6 +651,11 @@ auto VGObject::CorrectDistortion(const QPointF &t, const QPointF &p1, const QPoi
  */
 auto VGObject::IsPointOnLineviaPDP(const QPointF &t, const QPointF &p1, const QPointF &p2, qreal accuracy) -> bool
 {
+    if (p1 == p2)
+    {
+        return VFuzzyComparePoints(p1, t, accuracy);
+    }
+
     const double p = qAbs(PerpDotProduct(p1, p2, t));
     const double e = GetEpsilon(t, p1, p2, accuracy);
 

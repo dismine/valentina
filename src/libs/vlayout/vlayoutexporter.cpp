@@ -43,6 +43,7 @@
 
 #include "../ifc/exception/vexception.h"
 #include "../vdxf/vdxfpaintdevice.h"
+#include "../vhpgl/vhpglpaintdevice.h"
 #include "../vmisc/def.h"
 #include "../vmisc/defglobal.h"
 #include "../vmisc/vabstractapplication.h"
@@ -369,6 +370,42 @@ void VLayoutExporter::ExportToRLD(const QVector<VLayoutPiece> &details) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VLayoutExporter::ExportToHPGL(const QVector<VLayoutPiece> &details) const
+{
+    VHPGLPaintDevice generator;
+    generator.SetFileName(m_fileName);
+    generator.SetSize(QSize(qCeil(m_imageRect.width() * m_xScale), qCeil(m_imageRect.height() * m_yScale)));
+    generator.SetXScale(m_xScale);
+    generator.SetYScale(m_yScale);
+    generator.SetShowGrainline(m_showGrainline);
+    generator.SetSingleLineFont(m_singleLineFont);
+    generator.SetSingleStrokeOutlineFont(m_singleStrokeOutlineFont);
+    generator.SetPenWidth(m_penWidth);
+    if (not generator.ExportToHPGL(details))
+    {
+        qCritical() << tr("Can't create an HP-GL file.");
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutExporter::ExportToHPGL2(const QVector<VLayoutPiece> &details) const
+{
+    VHPGLPaintDevice generator;
+    generator.SetFileName(m_fileName);
+    generator.SetSize(QSize(qCeil(m_imageRect.width() * m_xScale), qCeil(m_imageRect.height() * m_yScale)));
+    generator.SetXScale(m_xScale);
+    generator.SetYScale(m_yScale);
+    generator.SetShowGrainline(m_showGrainline);
+    generator.SetSingleLineFont(m_singleLineFont);
+    generator.SetSingleStrokeOutlineFont(m_singleStrokeOutlineFont);
+    generator.SetPenWidth(m_penWidth);
+    if (not generator.ExportToHPGL2(details))
+    {
+        qCritical() << tr("Can't create an HP-GL file.");
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VLayoutExporter::SupportPDFConversion() -> bool
 {
     bool res = false;
@@ -391,18 +428,6 @@ auto VLayoutExporter::SupportPDFConversion() -> bool
         qDebug() << *PDFTOPS << "error" << proc.error() << proc.errorString();
     }
     return res;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VLayoutExporter::offset() const -> QPointF
-{
-    return m_offset;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VLayoutExporter::SetOffset(const QPointF &newOffset)
-{
-    m_offset = newOffset;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -506,7 +531,6 @@ void VLayoutExporter::ExportToPDF(QGraphicsScene *scene, const QList<QGraphicsIt
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutExporter::ExportFormatDescription(LayoutExportFormats format) -> QString
 {
-    const QString dxfSuffix = QStringLiteral("(*.dxf)");
     const QString dxfFlatFilesStr = tr("(flat) files");
     const QString filesStr = tr("files");
 
@@ -525,27 +549,27 @@ auto VLayoutExporter::ExportFormatDescription(LayoutExportFormats format) -> QSt
         case LayoutExportFormats::EPS:
             return QStringLiteral("EPS %1 (*.eps)").arg(filesStr);
         case LayoutExportFormats::DXF_AC1006_Flat:
-            return QStringLiteral("AutoCAD DXF R10 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF R10 %1 (*.dxf)").arg(dxfFlatFilesStr);
         case LayoutExportFormats::DXF_AC1009_Flat:
-            return QStringLiteral("AutoCAD DXF R11/12 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF R11/12 %1 (*.dxf)").arg(dxfFlatFilesStr);
         case LayoutExportFormats::DXF_AC1012_Flat:
-            return QStringLiteral("AutoCAD DXF R13 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF R13 %1 (*.dxf)").arg(dxfFlatFilesStr);
         case LayoutExportFormats::DXF_AC1014_Flat:
-            return QStringLiteral("AutoCAD DXF R14 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF R14 %1 (*.dxf)").arg(dxfFlatFilesStr);
         case LayoutExportFormats::DXF_AC1015_Flat:
-            return QStringLiteral("AutoCAD DXF 2000 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF 2000 %1 (*.dxf)").arg(dxfFlatFilesStr);
         case LayoutExportFormats::DXF_AC1018_Flat:
-            return QStringLiteral("AutoCAD DXF 2004 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF 2004 %1 (*.dxf)").arg(dxfFlatFilesStr);
         case LayoutExportFormats::DXF_AC1021_Flat:
-            return QStringLiteral("AutoCAD DXF 2007 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF 2007 %1 (*.dxf)").arg(dxfFlatFilesStr);
         case LayoutExportFormats::DXF_AC1024_Flat:
-            return QStringLiteral("AutoCAD DXF 2010 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF 2010 %1 (*.dxf)").arg(dxfFlatFilesStr);
         case LayoutExportFormats::DXF_AC1027_Flat:
-            return QStringLiteral("AutoCAD DXF 2013 %1 %2").arg(dxfFlatFilesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF 2013 %1 (*.dxf)").arg(dxfFlatFilesStr);
         case LayoutExportFormats::DXF_AAMA:
-            return QStringLiteral("AutoCAD DXF AAMA %1 %2").arg(filesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF AAMA %1 (*.dxf)").arg(filesStr);
         case LayoutExportFormats::DXF_ASTM:
-            return QStringLiteral("AutoCAD DXF ASTM %1 %2").arg(filesStr, dxfSuffix);
+            return QStringLiteral("AutoCAD DXF ASTM %1 (*.dxf)").arg(filesStr);
         case LayoutExportFormats::PDFTiled:
             return QStringLiteral("PDF %1 %2 (*.pdf)").arg(tr("tiled"), filesStr);
         case LayoutExportFormats::NC:
@@ -554,6 +578,10 @@ auto VLayoutExporter::ExportFormatDescription(LayoutExportFormats format) -> QSt
             return QStringLiteral("%1 %2 (*.rld)").arg(tr("Raw Layout Data"), filesStr);
         case LayoutExportFormats::TIF:
             return QStringLiteral("TIFF %1 (*.tif)").arg(filesStr);
+        case LayoutExportFormats::HPGL:
+            return QStringLiteral("HP-GL %1 (*.hpgl)").arg(filesStr);
+        case LayoutExportFormats::HPGL2:
+            return QStringLiteral("HP-GL/2 %1 (*.hpgl)").arg(filesStr);
         default:
             return {};
     }
@@ -595,6 +623,9 @@ auto VLayoutExporter::ExportFormatSuffix(LayoutExportFormats format) -> QString
             return QStringLiteral(".rld");
         case LayoutExportFormats::TIF:
             return QStringLiteral(".tif");
+        case LayoutExportFormats::HPGL:
+        case LayoutExportFormats::HPGL2:
+            return QStringLiteral(".hpgl");
         default:
             return {};
     }

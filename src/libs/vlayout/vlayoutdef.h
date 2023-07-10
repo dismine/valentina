@@ -58,6 +58,8 @@ enum class LayoutExportFormats : qint8
     NC = 34,  /*G-code. Reserved for future*/
     RLD = 35, /*Raw Layout Data*/
     TIF = 36,
+    HPGL = 37,
+    HPGL2 = 38,
     COUNT /*Use only for validation*/
 };
 

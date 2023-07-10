@@ -259,6 +259,8 @@ void DialogSaveManualLayout::SetShowGrainline(bool show)
         case LayoutExportFormats::DXF_AC1021_Flat:
         case LayoutExportFormats::DXF_AC1024_Flat:
         case LayoutExportFormats::DXF_AC1027_Flat:
+        case LayoutExportFormats::HPGL:
+        case LayoutExportFormats::HPGL2:
             ui->checkBoxShowGrainline->setChecked(show);
             break;
         default:
@@ -288,6 +290,8 @@ auto DialogSaveManualLayout::IsShowGrainline() const -> bool
         case LayoutExportFormats::DXF_AC1021_Flat:
         case LayoutExportFormats::DXF_AC1024_Flat:
         case LayoutExportFormats::DXF_AC1027_Flat:
+        case LayoutExportFormats::HPGL:
+        case LayoutExportFormats::HPGL2:
             return ui->checkBoxShowGrainline->isChecked();
         default:
             return true;
@@ -495,35 +499,43 @@ void DialogSaveManualLayout::ShowExample()
 
     VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
 
-    ui->checkBoxBinaryDXF->setEnabled(false);
-    ui->checkBoxTextAsPaths->setEnabled(!settings->GetSingleLineFonts() && !settings->GetSingleStrokeOutlineFont());
-    ui->checkBoxExportUnified->setEnabled(false);
-    ui->checkBoxTilesScheme->setEnabled(false);
-    ui->checkBoxShowGrainline->setEnabled(true);
+    ui->labelOptionsNotAvailable->setVisible(false);
+    ui->checkBoxBinaryDXF->setVisible(false);
+    ui->checkBoxTextAsPaths->setVisible(false);
+    ui->checkBoxExportUnified->setVisible(false);
+    ui->checkBoxTilesScheme->setVisible(false);
+    ui->checkBoxShowGrainline->setVisible(false);
+
+    const bool editableTextAsPaths = !settings->GetSingleLineFonts() && !settings->GetSingleStrokeOutlineFont();
 
     switch (currentFormat)
     {
         case LayoutExportFormats::DXF_AAMA:
         case LayoutExportFormats::DXF_ASTM:
-            ui->checkBoxBinaryDXF->setEnabled(true);
-            ui->checkBoxShowGrainline->setEnabled(false);
-            break;
-        case LayoutExportFormats::RLD:
-            ui->checkBoxTextAsPaths->setEnabled(false);
-            ui->checkBoxShowGrainline->setEnabled(false);
+            ui->checkBoxBinaryDXF->setVisible(true);
             break;
         case LayoutExportFormats::PDFTiled:
-            ui->checkBoxTilesScheme->setEnabled(true);
-            ui->checkBoxExportUnified->setEnabled(true);
+            ui->checkBoxTextAsPaths->setVisible(editableTextAsPaths);
+            ui->checkBoxTilesScheme->setVisible(true);
+            ui->checkBoxExportUnified->setVisible(m_count > 1);
+            ui->checkBoxShowGrainline->setVisible(true);
             break;
         case LayoutExportFormats::PDF:
         case LayoutExportFormats::PS:
         case LayoutExportFormats::EPS:
-            ui->checkBoxExportUnified->setEnabled(true);
+            ui->checkBoxTextAsPaths->setVisible(editableTextAsPaths);
+            ui->checkBoxExportUnified->setVisible(m_count > 1);
+            ui->checkBoxShowGrainline->setVisible(true);
             break;
-        case LayoutExportFormats::NC:
-        case LayoutExportFormats::OBJ:
-            ui->checkBoxShowGrainline->setEnabled(false);
+        case LayoutExportFormats::HPGL:
+        case LayoutExportFormats::HPGL2:
+            ui->checkBoxShowGrainline->setVisible(true);
+            break;
+        case LayoutExportFormats::SVG:
+        case LayoutExportFormats::PNG:
+        case LayoutExportFormats::TIF:
+            ui->checkBoxTextAsPaths->setVisible(editableTextAsPaths);
+            ui->checkBoxShowGrainline->setVisible(true);
             break;
         case LayoutExportFormats::DXF_AC1006_Flat:
         case LayoutExportFormats::DXF_AC1009_Flat:
@@ -534,10 +546,12 @@ void DialogSaveManualLayout::ShowExample()
         case LayoutExportFormats::DXF_AC1021_Flat:
         case LayoutExportFormats::DXF_AC1024_Flat:
         case LayoutExportFormats::DXF_AC1027_Flat:
-        case LayoutExportFormats::SVG:
-        case LayoutExportFormats::PNG:
-        case LayoutExportFormats::TIF:
+            ui->checkBoxBinaryDXF->setVisible(true);
+            ui->checkBoxTextAsPaths->setVisible(editableTextAsPaths);
+            ui->checkBoxShowGrainline->setVisible(true);
+            break;
         default:
+            ui->labelOptionsNotAvailable->setVisible(true);
             break;
     }
 }
@@ -587,6 +601,8 @@ auto DialogSaveManualLayout::InitFormats() -> QVector<std::pair<QString, LayoutE
     //    InitFormat(LayoutExportFormats::NC);
     InitFormat(LayoutExportFormats::RLD);
     InitFormat(LayoutExportFormats::TIF);
+    InitFormat(LayoutExportFormats::HPGL);
+    InitFormat(LayoutExportFormats::HPGL2);
 
     return list;
 }

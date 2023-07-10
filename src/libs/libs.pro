@@ -14,4 +14,5 @@ SUBDIRS = \
     vformat \
     fervor \
     vtest \
-    vganalytics
+    vganalytics \
+    vhpgl

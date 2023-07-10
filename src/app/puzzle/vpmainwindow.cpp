@@ -2173,7 +2173,8 @@ void VPMainWindow::RotatePiecesToGrainline()
 void VPMainWindow::ExportData(const VPExportData &data)
 {
     if (data.format == LayoutExportFormats::DXF_AAMA || data.format == LayoutExportFormats::DXF_ASTM ||
-        data.format == LayoutExportFormats::RLD)
+        data.format == LayoutExportFormats::RLD || data.format == LayoutExportFormats::HPGL ||
+        data.format == LayoutExportFormats::HPGL2)
     {
         for (int i = 0; i < data.sheets.size(); ++i)
         {
@@ -2211,7 +2212,8 @@ void VPMainWindow::ExportApparelLayout(const VPExportData &data, const QVector<V
         return;
     }
 
-    VPApplication::VApp()->PuzzleSettings()->SetPathManualLayouts(path);
+    VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+    settings->SetPathManualLayouts(path);
 
     QT_WARNING_PUSH
     QT_WARNING_DISABLE_GCC("-Wnoexcept")
@@ -2225,6 +2227,7 @@ void VPMainWindow::ExportApparelLayout(const VPExportData &data, const QVector<V
     exporter.SetXScale(data.xScale);
     exporter.SetYScale(data.yScale);
     exporter.SetBinaryDxfFormat(data.isBinaryDXF);
+    exporter.SetShowGrainline(data.showGrainline);
 
     switch (data.format)
     {
@@ -2238,6 +2241,18 @@ void VPMainWindow::ExportApparelLayout(const VPExportData &data, const QVector<V
             break;
         case LayoutExportFormats::RLD:
             exporter.ExportToRLD(details);
+            break;
+        case LayoutExportFormats::HPGL:
+            exporter.SetSingleLineFont(settings->GetSingleLineFonts());
+            exporter.SetSingleStrokeOutlineFont(settings->GetSingleStrokeOutlineFont());
+            exporter.SetPenWidth(settings->GetLayoutLineWidth());
+            exporter.ExportToHPGL(details);
+            break;
+        case LayoutExportFormats::HPGL2:
+            exporter.SetSingleLineFont(settings->GetSingleLineFonts());
+            exporter.SetSingleStrokeOutlineFont(settings->GetSingleStrokeOutlineFont());
+            exporter.SetPenWidth(settings->GetLayoutLineWidth());
+            exporter.ExportToHPGL2(details);
             break;
         default:
             qDebug() << "Can't recognize file type." << Q_FUNC_INFO;
