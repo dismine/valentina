@@ -21,7 +21,7 @@
 #ifndef VPROPERTYSET_H
 #define VPROPERTYSET_H
 
-#include <qcompilerdetection.h>
+
 #include <QMap>
 #include <QString>
 #include <QtGlobal>

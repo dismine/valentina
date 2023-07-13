@@ -29,7 +29,7 @@
 #ifndef VISTOOLENDLINE_H
 #define VISTOOLENDLINE_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>

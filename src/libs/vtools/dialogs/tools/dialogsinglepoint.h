@@ -29,7 +29,6 @@
 #ifndef DIALOGSINGLEPOINT_H
 #define DIALOGSINGLEPOINT_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QPointF>
@@ -40,7 +39,7 @@
 
 namespace Ui
 {
-    class DialogSinglePoint;
+class DialogSinglePoint;
 }
 
 /**
@@ -49,26 +48,28 @@ namespace Ui
 class DialogSinglePoint : public DialogTool
 {
     Q_OBJECT // NOLINT
+
 public:
     DialogSinglePoint(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogSinglePoint() override;
+    ~DialogSinglePoint() override;
 
-    void           SetData(const QString &name, const QPointF &point);
+    void SetData(const QString &name, const QPointF &point);
     auto GetPoint() const -> QPointF;
 
     auto GetPointName() const -> QString;
 
-    void    SetNotes(const QString &notes);
+    void SetNotes(const QString &notes);
     auto GetNotes() const -> QString;
 
 public slots:
-    void           mousePress(const QPointF &scenePos);
+    void mousePress(const QPointF &scenePos);
+
 protected:
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void   SaveData() override;
-    virtual auto IsValid() const -> bool final;
+    void SaveData() override;
+    auto IsValid() const -> bool final;
 
 private:
     Q_DISABLE_COPY_MOVE(DialogSinglePoint) // NOLINT

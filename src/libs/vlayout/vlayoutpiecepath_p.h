@@ -29,17 +29,17 @@
 #ifndef VLAYOUTPIECEPATH_P_H
 #define VLAYOUTPIECEPATH_P_H
 
-#include <QSharedData>
-#include <QPointF>
-#include <QVector>
 #include <QDataStream>
+#include <QPointF>
+#include <QSharedData>
+#include <QVector>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-#   include "../vmisc/vdatastreamenum.h"
+#include "../vmisc/vdatastreamenum.h"
 #endif
 
 #include "../ifc/exception/vexception.h"
@@ -52,12 +52,8 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VLayoutPiecePathData : public QSharedData
 {
 public:
-    VLayoutPiecePathData(){}  // NOLINT(modernize-use-equals-default)
-
-    explicit VLayoutPiecePathData(const QVector<VLayoutPoint> &points)
-        : m_points(points)
-    {}
-
+    VLayoutPiecePathData() = default;
+    explicit VLayoutPiecePathData(const QVector<VLayoutPoint> &points);
     VLayoutPiecePathData(const VLayoutPiecePathData &path) = default;
     ~VLayoutPiecePathData() = default;
 
@@ -65,12 +61,12 @@ public:
     friend auto operator>>(QDataStream &dataStream, VLayoutPiecePathData &path) -> QDataStream &;
 
     /** @brief m_points list of path points. */
-    QVector<VLayoutPoint> m_points{};
+    QVector<VLayoutPoint> m_points{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief m_penStyle path pen style. */
-    Qt::PenStyle     m_penStyle{Qt::SolidLine};
+    Qt::PenStyle m_penStyle{Qt::SolidLine}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    bool             m_cut{false};
+    bool m_cut{false}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VLayoutPiecePathData) // NOLINT
@@ -82,15 +78,21 @@ private:
 QT_WARNING_POP
 
 // See https://stackoverflow.com/a/46719572/3045403
-#if __cplusplus < 201703L // C++17
-    constexpr quint32 VLayoutPiecePathData::streamHeader;  // NOLINT(readability-redundant-declaration)
-    constexpr quint16 VLayoutPiecePathData::classVersion;  // NOLINT(readability-redundant-declaration)
+#if __cplusplus < 201703L                             // C++17
+constexpr quint32 VLayoutPiecePathData::streamHeader; // NOLINT(readability-redundant-declaration)
+constexpr quint16 VLayoutPiecePathData::classVersion; // NOLINT(readability-redundant-declaration)
 #endif
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VLayoutPiecePathData::VLayoutPiecePathData(const QVector<VLayoutPoint> &points)
+  : m_points(points)
+{
+}
 
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------
-    auto operator<<(QDataStream &dataStream, const VLayoutPiecePathData &path) -> QDataStream &
-    {
+auto operator<<(QDataStream &dataStream, const VLayoutPiecePathData &path) -> QDataStream &
+{
     dataStream << VLayoutPiecePathData::streamHeader << VLayoutPiecePathData::classVersion;
 
     // Added in classVersion = 1
@@ -113,8 +115,8 @@ auto operator>>(QDataStream &dataStream, VLayoutPiecePathData &path) -> QDataStr
     {
         QString message = QCoreApplication::tr("VLayoutPiecePathData prefix mismatch error: actualStreamHeader = 0x%1 "
                                                "and streamHeader = 0x%2")
-                .arg(actualStreamHeader, 8, 0x10, QChar('0'))
-                .arg(VLayoutPiecePathData::streamHeader, 8, 0x10, QChar('0'));
+                              .arg(actualStreamHeader, 8, 0x10, QChar('0'))
+                              .arg(VLayoutPiecePathData::streamHeader, 8, 0x10, QChar('0'));
         throw VException(message);
     }
 
@@ -125,7 +127,8 @@ auto operator>>(QDataStream &dataStream, VLayoutPiecePathData &path) -> QDataStr
     {
         QString message = QCoreApplication::tr("VLayoutPiecePathData compatibility error: actualClassVersion = %1 and "
                                                "classVersion = %2")
-                .arg(actualClassVersion).arg(VLayoutPiecePathData::classVersion);
+                              .arg(actualClassVersion)
+                              .arg(VLayoutPiecePathData::classVersion);
         throw VException(message);
     }
 
@@ -142,13 +145,12 @@ auto operator>>(QDataStream &dataStream, VLayoutPiecePathData &path) -> QDataStr
     dataStream >> path.m_penStyle;
     dataStream >> path.m_cut;
 
-//    if (actualClassVersion >= 2)
-//    {
+    //    if (actualClassVersion >= 2)
+    //    {
 
-//    }
+    //    }
 
     return dataStream;
 }
 
 #endif // VLAYOUTPIECEPATH_P_H
-

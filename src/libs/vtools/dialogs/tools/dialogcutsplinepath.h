@@ -29,7 +29,6 @@
 #ifndef DIALOGCUTSPLINEPATH_H
 #define DIALOGCUTSPLINEPATH_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -40,7 +39,7 @@
 
 namespace Ui
 {
-    class DialogCutSplinePath;
+class DialogCutSplinePath;
 }
 
 /**
@@ -49,6 +48,7 @@ namespace Ui
 class DialogCutSplinePath final : public DialogTool
 {
     Q_OBJECT // NOLINT
+
 public:
     DialogCutSplinePath(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     ~DialogCutSplinePath() override;
@@ -72,6 +72,7 @@ public:
     auto GetAliasSuffix2() const -> QString;
 
     void ShowDialog(bool click) override;
+
 public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
     /**
@@ -80,6 +81,7 @@ public slots:
     void DeployFormulaTextEdit();
     void FXLength();
     void EvalFormula();
+
 protected:
     void ShowVisualization() override;
     /**
@@ -88,9 +90,11 @@ protected:
     void SaveData() override;
     void closeEvent(QCloseEvent *event) override;
     auto IsValid() const -> bool final;
+
 private slots:
     void SplinePathChanged();
     void ValidateAlias();
+
 private:
     Q_DISABLE_COPY_MOVE(DialogCutSplinePath) // NOLINT
 

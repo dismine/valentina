@@ -29,7 +29,7 @@
 #ifndef VTOOLPOINTOFINTERSECTIONARCS_H
 #define VTOOLPOINTOFINTERSECTIONARCS_H
 
-#include <qcompilerdetection.h>
+
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QMetaObject>

@@ -22,7 +22,6 @@
 #ifndef QMUFORMULABASE_H
 #define QMUFORMULABASE_H
 
-#include <qcompilerdetection.h>
 #include <QString>
 #include <QtGlobal>
 
@@ -38,9 +37,9 @@ class QMUPARSERSHARED_EXPORT QmuFormulaBase : public QmuParser
 {
 public:
     QmuFormulaBase();
-    virtual ~QmuFormulaBase() override;
+    ~QmuFormulaBase() override;
 
-    virtual void InitCharSets() override;
+    void InitCharSets() override;
 
     void SetSepForTr(bool osSeparator, bool fromUser);
 
@@ -48,7 +47,8 @@ public:
 
 protected:
     static auto AddVariable(const QString &a_szName, void *a_pUserData) -> qreal *;
-    void          SetSepForEval();
+    void SetSepForEval();
+
 private:
     Q_DISABLE_COPY_MOVE(QmuFormulaBase) // NOLINT
 };

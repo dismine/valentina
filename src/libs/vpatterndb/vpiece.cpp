@@ -138,12 +138,12 @@ auto VPiece::operator=(const VPiece &piece) -> VPiece &
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VPiece::VPiece(VPiece &&piece) Q_DECL_NOTHROW
+VPiece::VPiece(VPiece &&piece) noexcept
     : VAbstractPiece(std::move(piece)), d (std::move(piece.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPiece::operator=(VPiece &&piece) Q_DECL_NOTHROW->VPiece &
+auto VPiece::operator=(VPiece &&piece) noexcept->VPiece &
 {
     VAbstractPiece::operator=(piece);
     std::swap(d, piece.d);

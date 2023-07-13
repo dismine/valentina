@@ -29,26 +29,28 @@
 #ifndef VARCRADIUS_H
 #define VARCRADIUS_H
 
-#include <qcompilerdetection.h>
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
-#include "../ifc/ifcdef.h"
 #include "vcurvevariable.h"
 
 class VArc;
 class VEllipticalArc;
 
-class VArcRadius final :public VCurveVariable
+class VArcRadius final : public VCurveVariable
 {
 public:
     VArcRadius();
     VArcRadius(const quint32 &id, const quint32 &parentId, const VArc *arc, Unit patternUnit);
-    VArcRadius(const quint32 &id, const quint32 &parentId, const VEllipticalArc *elArc, const int numberRadius,
+    VArcRadius(const quint32 &id, const quint32 &parentId, const VEllipticalArc *elArc, int numberRadius,
                Unit patternUnit);
-    VArcRadius(const VArcRadius &var);
+    VArcRadius(const VArcRadius &var) = default;
     auto operator=(const VArcRadius &var) -> VArcRadius &;
-    virtual ~VArcRadius() override;
+    ~VArcRadius() override = default;
+#ifdef Q_COMPILER_RVALUE_REFS
+    VArcRadius(VArcRadius &&var) noexcept = default;
+    auto operator=(VArcRadius &&var) noexcept -> VArcRadius & = default;
+#endif
 };
 
 #endif // VARCRADIUS_H

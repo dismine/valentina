@@ -29,7 +29,6 @@
 #ifndef VEXCEPTIONBADID_H
 #define VEXCEPTIONBADID_H
 
-#include <qcompilerdetection.h>
 #include <QString>
 #include <QtGlobal>
 
@@ -42,11 +41,11 @@
 class VExceptionBadId final : public VException
 {
 public:
-    VExceptionBadId(const QString &error, const quint32 &id) V_NOEXCEPT_EXPR (true);
-    VExceptionBadId(const QString &error, const QString &key) V_NOEXCEPT_EXPR (true);
-    VExceptionBadId(const VExceptionBadId &e) V_NOEXCEPT_EXPR (true);
+    VExceptionBadId(const QString &error, const quint32 &id) V_NOEXCEPT_EXPR(true);
+    VExceptionBadId(const QString &error, const QString &key) V_NOEXCEPT_EXPR(true);
+    VExceptionBadId(const VExceptionBadId &e) V_NOEXCEPT_EXPR(true);
     auto operator=(const VExceptionBadId &e) V_NOEXCEPT_EXPR(true) -> VExceptionBadId &;
-    virtual         ~VExceptionBadId() V_NOEXCEPT_EXPR (true) = default;
+    virtual ~VExceptionBadId() V_NOEXCEPT_EXPR(true) = default;
 
     Q_NORETURN virtual void raise() const override { throw *this; }
 
@@ -58,10 +57,10 @@ public:
 
 protected:
     /** @brief id id */
-    quint32          id;
+    quint32 id;
 
     /** @brief key key */
-    QString         key;
+    QString key;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

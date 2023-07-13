@@ -44,8 +44,8 @@ public:
 
     auto operator=(const VAbstractFloatItemData &data) -> VAbstractFloatItemData &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VAbstractFloatItemData(VAbstractFloatItemData &&data) Q_DECL_NOTHROW;
-    auto operator=(VAbstractFloatItemData &&data) Q_DECL_NOTHROW->VAbstractFloatItemData &;
+    VAbstractFloatItemData(VAbstractFloatItemData &&data) noexcept;
+    auto operator=(VAbstractFloatItemData &&data) noexcept->VAbstractFloatItemData &;
 #endif
 
     // methods, which set and return values of different parameters

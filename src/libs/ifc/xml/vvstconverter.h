@@ -29,7 +29,7 @@
 #ifndef VMEASUREMENTCONVERTER_H
 #define VMEASUREMENTCONVERTER_H
 
-#include <qcompilerdetection.h>
+
 #include <QCoreApplication>
 #include <QString>
 #include <QtGlobal>

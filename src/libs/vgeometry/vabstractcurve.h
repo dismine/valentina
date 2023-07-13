@@ -29,7 +29,6 @@
 #ifndef VABSTRACTCURVE_H
 #define VABSTRACTCURVE_H
 
-#include <qcompilerdetection.h>
 #include <QPointF>
 #include <QSharedDataPointer>
 #include <QString>
@@ -37,9 +36,9 @@
 #include <QVector>
 #include <QtGlobal>
 
+#include "../vmisc/typedef.h"
 #include "vgeometrydef.h"
 #include "vgobject.h"
-#include "../vmisc/typedef.h"
 
 using DirectionArrow = QPair<QLineF, QLineF>;
 
@@ -50,7 +49,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 
-class VAbstractCurve :public VGObject
+class VAbstractCurve : public VGObject
 {
 public:
     explicit VAbstractCurve(const GOType &type, const quint32 &idObject = NULL_ID,
@@ -58,20 +57,20 @@ public:
     VAbstractCurve(const VAbstractCurve &curve);
     ~VAbstractCurve() override;
 
-    auto operator= (const VAbstractCurve &curve) -> VAbstractCurve&;
+    auto operator=(const VAbstractCurve &curve) -> VAbstractCurve &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VAbstractCurve(VAbstractCurve &&curve) Q_DECL_NOTHROW;
-    auto operator=(VAbstractCurve &&curve) Q_DECL_NOTHROW -> VAbstractCurve &;
+    VAbstractCurve(VAbstractCurve &&curve) noexcept;
+    auto operator=(VAbstractCurve &&curve) noexcept -> VAbstractCurve &;
 #endif
 
-    virtual auto GetPoints() const -> QVector<QPointF> =0;
-    static auto GetSegmentPoints(const QVector<QPointF> &points, const QPointF &begin, const QPointF &end,
-                                  bool reverse, QString &error) -> QVector<QPointF>;
+    virtual auto GetPoints() const -> QVector<QPointF> = 0;
+    static auto GetSegmentPoints(const QVector<QPointF> &points, const QPointF &begin, const QPointF &end, bool reverse,
+                                 QString &error) -> QVector<QPointF>;
     auto GetSegmentPoints(const QPointF &begin, const QPointF &end, bool reverse,
                           const QString &piece = QString()) const -> QVector<QPointF>;
 
     virtual auto GetPath() const -> QPainterPath;
-    virtual auto GetLength() const -> qreal =0;
+    virtual auto GetLength() const -> qreal = 0;
     auto GetLengthByPoint(const QPointF &point) const -> qreal;
     virtual auto IntersectLine(const QLineF &line) const -> QVector<QPointF>;
     virtual auto IsIntersectLine(const QLineF &line) const -> bool;
@@ -79,13 +78,13 @@ public:
     static auto IsPointOnCurve(const QVector<QPointF> &points, const QPointF &p) -> bool;
     auto IsPointOnCurve(const QPointF &p) const -> bool;
 
-    static auto SubdividePath(const QVector<QPointF> &points, QPointF p, QVector<QPointF> &sub1,
-                              QVector<QPointF> &sub2) -> bool;
+    static auto SubdividePath(const QVector<QPointF> &points, QPointF p, QVector<QPointF> &sub1, QVector<QPointF> &sub2)
+        -> bool;
 
     auto ClosestPoint(QPointF scenePoint) const -> QPointF;
 
-    virtual auto GetStartAngle () const -> qreal=0;
-    virtual auto GetEndAngle () const -> qreal=0;
+    virtual auto GetStartAngle() const -> qreal = 0;
+    virtual auto GetEndAngle() const -> qreal = 0;
 
     auto GetDuplicate() const -> quint32;
     void SetDuplicate(quint32 number);
@@ -105,7 +104,7 @@ public:
     static auto CurveIntersectAxis(const QPointF &point, qreal angle, const QVector<QPointF> &curvePoints,
                                    QPointF *intersectionPoint) -> bool;
 
-    virtual auto NameForHistory(const QString &toolName) const -> QString=0;
+    virtual auto NameForHistory(const QString &toolName) const -> QString = 0;
     virtual auto DirectionArrows() const -> QVector<DirectionArrow>;
     static auto ShowDirection(const QVector<DirectionArrow> &arrows, qreal width) -> QPainterPath;
 
@@ -116,8 +115,9 @@ public:
     static constexpr qreal minLength = MmToPixel(1.);
 
 protected:
-    virtual void CreateName() =0;
-    virtual void CreateAlias() =0;
+    virtual void CreateName() = 0;
+    virtual void CreateAlias() = 0;
+
 private:
     QSharedDataPointer<VAbstractCurveData> d;
 

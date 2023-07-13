@@ -29,7 +29,6 @@
 #ifndef DELTOOL_H
 #define DELTOOL_H
 
-#include <qcompilerdetection.h>
 #include <QDomNode>
 #include <QMetaObject>
 #include <QObject>
@@ -41,16 +40,18 @@
 class DelTool : public VUndoCommand
 {
     Q_OBJECT // NOLINT
+
 public:
     DelTool(VAbstractPattern *doc, quint32 id, QUndoCommand *parent = nullptr);
-    virtual ~DelTool() override =default;
-    virtual void undo() override;
-    virtual void redo() override;
+    ~DelTool() override = default;
+    void undo() override;
+    void redo() override;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DelTool) // NOLINT
-    QDomNode      parentNode{};
-    quint32       siblingId{NULL_ID};
+    QDomNode parentNode{};
+    quint32 siblingId{NULL_ID};
     const QString nameActivDraw;
     QMap<quint32, VGroupData> m_groupsBefore{};
     QMap<quint32, VGroupData> m_groupsAfter{};

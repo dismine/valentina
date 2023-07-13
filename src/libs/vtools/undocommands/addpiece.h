@@ -29,7 +29,6 @@
 #ifndef ADDPIECE_H
 #define ADDPIECE_H
 
-#include <qcompilerdetection.h>
 #include <QDomElement>
 #include <QMetaObject>
 #include <QObject>
@@ -43,24 +42,26 @@
 class AddPiece : public VUndoCommand
 {
     Q_OBJECT // NOLINT
+
 public:
-    AddPiece(const QDomElement &xml, VAbstractPattern *doc, VContainer data, VMainGraphicsScene *scene,
+    AddPiece(const QDomElement &xml, VAbstractPattern *doc, const VContainer &data, VMainGraphicsScene *scene,
              const QString &drawName = QString(), QUndoCommand *parent = nullptr);
-    virtual ~AddPiece();
+    ~AddPiece() override;
 
     // cppcheck-suppress unusedFunction
-    virtual void undo() override;
+    void undo() override;
     // cppcheck-suppress unusedFunction
-    virtual void redo() override;
+    void redo() override;
+
 private:
     Q_DISABLE_COPY_MOVE(AddPiece) // NOLINT
 
-    VPiece m_detail;
+    VPiece m_detail{};
     QString m_drawName;
-    QPointer<VToolSeamAllowance> m_tool;
-    VToolRecord                  m_record;
-    VMainGraphicsScene          *m_scene;
-    VContainer                   m_data;
+    QPointer<VToolSeamAllowance> m_tool{};
+    VToolRecord m_record{};
+    VMainGraphicsScene *m_scene;
+    VContainer m_data;
 
     auto GetDetailsSection() const -> QDomElement;
 };

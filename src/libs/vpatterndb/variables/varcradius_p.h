@@ -41,30 +41,23 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VArcRadiusData : public QSharedData
 {
 public:
+    VArcRadiusData() = default;
+    explicit VArcRadiusData(const quint32 &arcId);
+    VArcRadiusData(const VArcRadiusData &var) = default;
+    ~VArcRadiusData() = default;
 
-    VArcRadiusData()
-        :arcId(NULL_ID)
-    {}
-
-    explicit VArcRadiusData(const quint32 &arcId)
-        :arcId(arcId)
-    {}
-
-    VArcRadiusData(const VArcRadiusData &var)
-        :QSharedData(var), arcId(var.arcId)
-    {}
-
-    virtual  ~VArcRadiusData();
-
-    quint32 arcId;
+    quint32 arcId{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VArcRadiusData) // NOLINT
 };
 
-VArcRadiusData::~VArcRadiusData()
-{}
-
 QT_WARNING_POP
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VArcRadiusData::VArcRadiusData(const quint32 &arcId)
+  : arcId(arcId)
+{
+}
 
 #endif // VARCRADIUSDATA_H

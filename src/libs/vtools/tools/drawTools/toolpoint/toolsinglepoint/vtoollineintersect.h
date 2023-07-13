@@ -29,7 +29,7 @@
 #ifndef VTOOLLINEINTERSECT_H
 #define VTOOLLINEINTERSECT_H
 
-#include <qcompilerdetection.h>
+
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QMetaObject>

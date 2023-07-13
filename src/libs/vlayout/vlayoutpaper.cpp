@@ -47,33 +47,36 @@
 #include <QMutex>
 #endif
 
-#include "vbestsquare.h"
-#include "vcontour.h"
-#include "vlayoutpiece.h"
-#include "vlayoutpaper_p.h"
-#include "vposition.h"
 #include "../ifc/exception/vexceptionterminatedposition.h"
 #include "../vmisc/compatibility.h"
+#include "vbestsquare.h"
+#include "vcontour.h"
+#include "vlayoutpaper_p.h"
+#include "vlayoutpiece.h"
+#include "vposition.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPaper::VLayoutPaper()
-    :d(new VLayoutPaperData)
-{}
+  : d(new VLayoutPaperData)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPaper::VLayoutPaper(int height, int width, qreal layoutWidth)
-    :d(new VLayoutPaperData(height, width, layoutWidth))
-{}
+  : d(new VLayoutPaperData(height, width, layoutWidth))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPaper::VLayoutPaper(const VLayoutPaper &paper)
-    :d (paper.d)
-{}
+  : d(paper.d)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutPaper::operator=(const VLayoutPaper &paper) -> VLayoutPaper &
 {
-    if ( &paper == this )
+    if (&paper == this)
     {
         return *this;
     }
@@ -83,12 +86,13 @@ auto VLayoutPaper::operator=(const VLayoutPaper &paper) -> VLayoutPaper &
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutPaper::VLayoutPaper(VLayoutPaper &&paper) Q_DECL_NOTHROW
-    :d (std::move(paper.d))
-{}
+VLayoutPaper::VLayoutPaper(VLayoutPaper &&paper) noexcept
+  : d(std::move(paper.d))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPaper::operator=(VLayoutPaper &&paper) Q_DECL_NOTHROW->VLayoutPaper &
+auto VLayoutPaper::operator=(VLayoutPaper &&paper) noexcept -> VLayoutPaper &
 {
     std::swap(d, paper.d);
     return *this;
@@ -97,7 +101,8 @@ auto VLayoutPaper::operator=(VLayoutPaper &&paper) Q_DECL_NOTHROW->VLayoutPaper 
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPaper::~VLayoutPaper()
-{}
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutPaper::GetHeight() const -> int
@@ -229,7 +234,7 @@ auto VLayoutPaper::ArrangeDetail(const VLayoutPiece &detail, std::atomic_bool &s
 {
     if (detail.LayoutEdgesCount() < 3 || detail.DetailEdgesCount() < 3)
     {
-        return false;//Not enough edges
+        return false; // Not enough edges
     }
 
     if ((detail.IsForceFlipping() || detail.IsForbidFlipping()) && not d->globalRotate)
@@ -285,7 +290,7 @@ auto VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutPiece 
     if (bestResult.HasValidResult())
     {
         VLayoutPiece workDetail = detail;
-        workDetail.SetMatrix(bestResult.Matrix());// Don't forget set matrix
+        workDetail.SetMatrix(bestResult.Matrix()); // Don't forget set matrix
         workDetail.SetMirror(bestResult.Mirror());
 
         if (d->saveLength)
@@ -293,9 +298,8 @@ auto VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutPiece 
             d->globalContour.CeateEmptySheetContour();
         }
 
-        const QVector<QPointF> newGContour = d->globalContour.UniteWithContour(workDetail, bestResult.GContourEdge(),
-                                                                               bestResult.DetailEdge(),
-                                                                               bestResult.Type());
+        const QVector<QPointF> newGContour = d->globalContour.UniteWithContour(
+            workDetail, bestResult.GContourEdge(), bestResult.DetailEdge(), bestResult.Type());
         if (newGContour.isEmpty())
         {
             return false;
@@ -310,9 +314,9 @@ auto VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutPiece 
         d->positionsCache.append(positionChache);
 
 #ifdef LAYOUT_DEBUG
-#   ifdef SHOW_BEST
+#ifdef SHOW_BEST
         VPosition::DumpFrame(d->globalContour, workDetail, mutex, d->details);
-#   endif
+#endif
 #endif
     }
     else if (bestResult.IsTerminatedByException())
@@ -390,23 +394,23 @@ auto VLayoutPaper::GetGlobalContour() const -> QGraphicsPathItem *
     const qreal radius = 1;
     for (auto point : points)
     {
-        path.addEllipse(point.x()-radius, point.y()-radius, radius*2, radius*2);
+        path.addEllipse(point.x() - radius, point.y() - radius, radius * 2, radius * 2);
     }
 
-    for (int i=0; i < points.size()-1; ++i)
+    for (int i = 0; i < points.size() - 1; ++i)
     {
-        QLineF line(points.at(i), points.at(i+1));
-        line.setLength(line.length()/2);
+        QLineF line(points.at(i), points.at(i + 1));
+        line.setLength(line.length() / 2);
 
         path.moveTo(line.p2());
         QLineF side1(line.p2(), line.p1());
-        side1.setAngle(side1.angle()+35);
+        side1.setAngle(side1.angle() + 35);
         side1.setLength(3);
         path.lineTo(side1.p2());
 
         path.moveTo(line.p2());
         QLineF side2(line.p2(), line.p1());
-        side2.setAngle(side2.angle()-35);
+        side2.setAngle(side2.angle() - 35);
         side2.setLength(3);
         path.lineTo(side2.p2());
     }

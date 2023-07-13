@@ -29,7 +29,7 @@
 #ifndef VTOOLPOINTFROMARCANDTANGENT_H
 #define VTOOLPOINTFROMARCANDTANGENT_H
 
-#include <qcompilerdetection.h>
+
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QMetaObject>

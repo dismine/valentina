@@ -29,7 +29,6 @@
 #ifndef VABSTRACTCUBICBEZIER_H
 #define VABSTRACTCUBICBEZIER_H
 
-#include <qcompilerdetection.h>
 #include <QPointF>
 #include <QString>
 #include <QVector>
@@ -49,18 +48,18 @@ public:
     explicit VAbstractCubicBezier(const GOType &type, const quint32 &idObject = NULL_ID,
                                   const Draw &mode = Draw::Calculation);
     VAbstractCubicBezier(const VAbstractCubicBezier &curve) = default;
-    auto operator= (const VAbstractCubicBezier &curve) -> VAbstractCubicBezier&;
+    auto operator=(const VAbstractCubicBezier &curve) -> VAbstractCubicBezier &;
     ~VAbstractCubicBezier() override = default;
 
 #ifdef Q_COMPILER_RVALUE_REFS
-    VAbstractCubicBezier(VAbstractCubicBezier &&curve) Q_DECL_NOTHROW =default;
-    auto operator=(VAbstractCubicBezier &&curve) Q_DECL_NOTHROW -> VAbstractCubicBezier & =default;
+    VAbstractCubicBezier(VAbstractCubicBezier &&curve) noexcept = default;
+    auto operator=(VAbstractCubicBezier &&curve) noexcept -> VAbstractCubicBezier & = default;
 #endif
 
-    virtual auto GetP1 () const -> VPointF =0;
-    virtual auto GetP2 () const -> VPointF =0;
-    virtual auto GetP3 () const -> VPointF =0;
-    virtual auto GetP4 () const -> VPointF =0;
+    virtual auto GetP1() const -> VPointF = 0;
+    virtual auto GetP2() const -> VPointF = 0;
+    virtual auto GetP3() const -> VPointF = 0;
+    virtual auto GetP4() const -> VPointF = 0;
 
     auto CutSpline(qreal length, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2, QPointF &spl2p3,
                    const QString &pointName) const -> QPointF;
@@ -74,14 +73,14 @@ protected:
     void CreateName() override;
     void CreateAlias() override;
 
-    static auto GetCubicBezierPoints(const QPointF &p1, const QPointF &p2, const QPointF &p3,
-                                     const QPointF &p4, qreal approximationScale) -> QVector<QPointF>;
+    static auto GetCubicBezierPoints(const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4,
+                                     qreal approximationScale) -> QVector<QPointF>;
     static auto LengthBezier(const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4,
                              qreal approximationScale) -> qreal;
 
-    virtual auto GetControlPoint1() const -> QPointF =0;
-    virtual auto GetControlPoint2() const -> QPointF =0;
-    virtual auto GetRealLength() const -> qreal =0;
+    virtual auto GetControlPoint1() const -> QPointF = 0;
+    virtual auto GetControlPoint2() const -> QPointF = 0;
+    virtual auto GetRealLength() const -> qreal = 0;
 };
 
 QT_WARNING_POP

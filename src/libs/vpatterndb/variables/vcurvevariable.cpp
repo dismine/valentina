@@ -29,33 +29,30 @@
 #include "vcurvevariable.h"
 
 #include "../vmisc/def.h"
-#include "../ifc/ifcdef.h"
-#include "vinternalvariable.h"
 #include "vcurvevariable_p.h"
+#include "vinternalvariable.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveVariable::VCurveVariable()
-    :VInternalVariable(), d(new VCurveVariableData)
+  : d(new VCurveVariableData)
 {
     SetType(VarType::Unknown);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveVariable::VCurveVariable(const quint32 &id, const quint32 &parentId)
-    :VInternalVariable(), d(new VCurveVariableData(id, parentId))
+  : d(new VCurveVariableData(id, parentId))
 {
     SetType(VarType::Unknown);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCurveVariable::VCurveVariable(const VCurveVariable &var)
-    :VInternalVariable(var), d(var.d)
-{}
+VCurveVariable::VCurveVariable(const VCurveVariable &var) = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VCurveVariable::operator=(const VCurveVariable &var) -> VCurveVariable &
 {
-    if ( &var == this )
+    if (&var == this)
     {
         return *this;
     }
@@ -66,12 +63,14 @@ auto VCurveVariable::operator=(const VCurveVariable &var) -> VCurveVariable &
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VCurveVariable::VCurveVariable(VCurveVariable &&var) Q_DECL_NOTHROW
-    :VInternalVariable(std::move(var)), d(std::move(var.d))
-{}
+VCurveVariable::VCurveVariable(VCurveVariable &&var) noexcept
+  : VInternalVariable(std::move(var)),
+    d(std::move(var.d))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VCurveVariable::operator=(VCurveVariable &&var) Q_DECL_NOTHROW->VCurveVariable &
+auto VCurveVariable::operator=(VCurveVariable &&var) noexcept -> VCurveVariable &
 {
     VInternalVariable::operator=(var);
     std::swap(d, var.d);
@@ -80,8 +79,7 @@ auto VCurveVariable::operator=(VCurveVariable &&var) Q_DECL_NOTHROW->VCurveVaria
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VCurveVariable::~VCurveVariable()
-{}
+VCurveVariable::~VCurveVariable() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VCurveVariable::Filter(quint32 id) -> bool
@@ -94,8 +92,8 @@ auto VCurveVariable::Filter(quint32 id) -> bool
     QT_WARNING_PUSH
     QT_WARNING_DISABLE_GCC("-Wnull-dereference")
 
-    if (d->parentId != NULL_ID)//Do not check if value zero
-    {// Not all curves have parents. Only those who was created after cutting the parent curve.
+    if (d->parentId != NULL_ID) // Do not check if value zero
+    { // Not all curves have parents. Only those who was created after cutting the parent curve.
         return d->id == id || d->parentId == id;
     }
 

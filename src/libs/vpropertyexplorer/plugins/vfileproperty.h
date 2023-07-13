@@ -21,7 +21,7 @@
 #ifndef VFILEPROPERTY_H
 #define VFILEPROPERTY_H
 
-#include <qcompilerdetection.h>
+
 #include <QMetaObject>
 #include <QObject>
 #include <QPointer>

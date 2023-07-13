@@ -33,13 +33,15 @@
 #include <Qt>
 #include <new>
 
-#include "../../../dialogs/tools/dialogtool.h"
 #include "../../../dialogs/tools/dialogarcwithlength.h"
-#include "../../../visualization/visualization.h"
+#include "../../../dialogs/tools/dialogtool.h"
 #include "../../../visualization/path/vistoolarcwithlength.h"
+#include "../../../visualization/visualization.h"
+#include "../../vabstracttool.h"
 #include "../ifc/exception/vexception.h"
-#include "../ifc/xml/vdomdocument.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../vdrawtool.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
@@ -49,19 +51,17 @@
 #include "../vpatterndb/vformula.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "../../vabstracttool.h"
-#include "../vdrawtool.h"
 #include "vabstractspline.h"
 
 const QString VToolArcWithLength::ToolType = QStringLiteral("arcWithLength");
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolArcWithLength::VToolArcWithLength(const VToolArcWithLengthInitData &initData, QGraphicsItem *parent)
-    :VToolAbstractArc(initData.doc, initData.data, initData.id, initData.notes, parent)
+  : VToolAbstractArc(initData.doc, initData.data, initData.id, initData.notes, parent)
 {
-    sceneType = SceneObject::Arc;
+    SetSceneType(SceneObject::Arc);
 
-    this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
+    this->setFlag(QGraphicsItem::ItemIsFocusable, true); // For keyboard input focus
 
     ToolCreation(initData.typeCreation);
 }
@@ -108,7 +108,7 @@ auto VToolArcWithLength::Create(const QPointer<DialogTool> &dialog, VMainGraphic
     initData.notes = dialogTool->GetNotes();
     initData.aliasSuffix = dialogTool->GetAliasSuffix();
 
-    VToolArcWithLength* point = Create(initData);
+    VToolArcWithLength *point = Create(initData);
     if (point != nullptr)
     {
         point->m_dialog = dialog;
@@ -185,7 +185,7 @@ void VToolArcWithLength::SetFormulaRadius(const VFormula &value)
 {
     if (value.error() == false)
     {
-        if (value.getDoubleValue() > 0)// Formula don't check this, but radius can't be 0 or negative
+        if (value.getDoubleValue() > 0) // Formula don't check this, but radius can't be 0 or negative
         {
             QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
             QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
@@ -217,7 +217,7 @@ void VToolArcWithLength::SetFormulaF1(const VFormula &value)
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
         QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
 
-        if (not VFuzzyComparePossibleNulls(value.getDoubleValue(), arc->GetEndAngle()))// Angles can't be equal
+        if (not VFuzzyComparePossibleNulls(value.getDoubleValue(), arc->GetEndAngle())) // Angles can't be equal
         {
             arc->SetFormulaF1(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
             SaveOption(obj);
@@ -283,10 +283,10 @@ void VToolArcWithLength::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, 
     {
         ContextMenu<DialogArcWithLength>(event);
     }
-    catch(const VExceptionToolWasDeleted &e)
+    catch (const VExceptionToolWasDeleted &e)
     {
         Q_UNUSED(e)
-        return;//Leave this method immediately!!!
+        return; // Leave this method immediately!!!
     }
 }
 
@@ -318,9 +318,9 @@ void VToolArcWithLength::SaveDialog(QDomElement &domElement, QList<quint32> &old
     doc->SetAttribute(domElement, AttrPenStyle, dialogTool->GetPenStyle());
     doc->SetAttribute(domElement, AttrAScale, dialogTool->GetApproximationScale());
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrAlias, dialogTool->GetAliasSuffix(),
-                                         [](const QString &suffix) noexcept {return suffix.isEmpty();});
+                                         [](const QString &suffix) noexcept { return suffix.isEmpty(); });
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept {return notes.isEmpty();});
+                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -373,14 +373,14 @@ auto VToolArcWithLength::MakeToolTip() const -> QString
                                     "<tr> <td><b>%6:</b> %7°</td> </tr>"
                                     "<tr> <td><b>%8:</b> %9°</td> </tr>"
                                     "</table>")
-            .arg(tr("Length"))
-            .arg(VAbstractValApplication::VApp()->fromPixel(arc->GetLength()))
-            .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Radius"))
-            .arg(VAbstractValApplication::VApp()->fromPixel(arc->GetRadius()))
-            .arg(tr("Start angle"))
-            .arg(arc->GetStartAngle())
-            .arg(tr("End angle"))
-            .arg(arc->GetEndAngle())
-            .arg(tr("Label"), arc->ObjectName());
+                                .arg(tr("Length"))
+                                .arg(VAbstractValApplication::VApp()->fromPixel(arc->GetLength()))
+                                .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Radius"))
+                                .arg(VAbstractValApplication::VApp()->fromPixel(arc->GetRadius()))
+                                .arg(tr("Start angle"))
+                                .arg(arc->GetStartAngle())
+                                .arg(tr("End angle"))
+                                .arg(arc->GetEndAngle())
+                                .arg(tr("Label"), arc->ObjectName());
     return toolTip;
 }

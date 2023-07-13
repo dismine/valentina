@@ -29,7 +29,6 @@
 #ifndef VINCREMENTTABLEROW_H
 #define VINCREMENTTABLEROW_H
 
-#include <qcompilerdetection.h>
 #include <QSharedDataPointer>
 #include <QString>
 #include <QTypeInfo>
@@ -43,7 +42,7 @@ class VContainer;
 /**
  * @brief The VIncrement class keep data row of increment table
  */
-class VIncrement :public VVariable
+class VIncrement : public VVariable
 {
 public:
     VIncrement();
@@ -54,15 +53,15 @@ public:
 
     auto operator=(const VIncrement &incr) -> VIncrement &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VIncrement(VIncrement &&incr) Q_DECL_NOTHROW;
-    auto operator=(VIncrement &&incr) Q_DECL_NOTHROW->VIncrement &;
+    VIncrement(VIncrement &&incr) noexcept;
+    auto operator=(VIncrement &&incr) noexcept -> VIncrement &;
 #endif
 
-    void    SetFormula(qreal base, const QString &formula, bool ok);
+    void SetFormula(qreal base, const QString &formula, bool ok);
     auto GetFormula() const -> QString;
     auto IsFormulaOk() const -> bool;
 
-    void    SetIndex(quint32 index);
+    void SetIndex(quint32 index);
     auto GetIndex() const -> quint32;
 
     auto GetData() -> VContainer *;

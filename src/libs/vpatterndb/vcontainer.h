@@ -42,7 +42,6 @@
 #include <QTypeInfo>
 #include <QtGlobal>
 #include <new>
-#include <qcompilerdetection.h>
 
 #include "../ifc/exception/vexceptionbadid.h"
 #include "../vgeometry/vabstractcubicbezierpath.h"
@@ -76,49 +75,32 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VContainerData final : public QSharedData //-V690
 {
 public:
-    VContainerData(const VTranslateVars *trVars, const Unit *patternUnit, const QString &nspace)
-      : calculationObjects(QHash<quint32, QSharedPointer<VGObject>>()),
-        modelingObjects(QSharedPointer<QHash<quint32, QSharedPointer<VGObject>>>::create()),
-        variables(QHash<QString, QSharedPointer<VInternalVariable>>()),
-        pieces(QSharedPointer<QHash<quint32, VPiece>>::create()),
-        piecePaths(QSharedPointer<QHash<quint32, VPiecePath>>::create()),
-        trVars(trVars),
-        patternUnit(patternUnit),
-        nspace(nspace)
-    {
-    }
-
-    VContainerData(const VContainerData &data)
-      : QSharedData(data),
-        calculationObjects(data.calculationObjects),
-        modelingObjects(data.modelingObjects),
-        variables(data.variables),
-        pieces(data.pieces),
-        piecePaths(data.piecePaths),
-        trVars(data.trVars),
-        patternUnit(data.patternUnit),
-        nspace(data.nspace)
-    {
-    }
-
+    VContainerData(const VTranslateVars *trVars, const Unit *patternUnit, const QString &nspace);
+    VContainerData(const VContainerData &data) = default;
     virtual ~VContainerData();
 
-    QHash<quint32, QSharedPointer<VGObject>> calculationObjects;
-    QSharedPointer<QHash<quint32, QSharedPointer<VGObject>>> modelingObjects;
+    // NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
+    QHash<quint32, QSharedPointer<VGObject>> calculationObjects{};
+    // NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
+    QSharedPointer<QHash<quint32, QSharedPointer<VGObject>>> modelingObjects{
+        QSharedPointer<QHash<quint32, QSharedPointer<VGObject>>>::create()};
 
     /**
      * @brief variables container for measurements, increments, lines lengths, lines angles, arcs lengths, curve lengths
      */
-    QHash<QString, QSharedPointer<VInternalVariable>> variables;
+    // NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
+    QHash<QString, QSharedPointer<VInternalVariable>> variables{};
 
-    QSharedPointer<QHash<quint32, VPiece>> pieces;
-    QSharedPointer<QHash<quint32, VPiecePath>> piecePaths;
+    // NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
+    QSharedPointer<QHash<quint32, VPiece>> pieces{QSharedPointer<QHash<quint32, VPiece>>::create()};
+    // NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
+    QSharedPointer<QHash<quint32, VPiecePath>> piecePaths{QSharedPointer<QHash<quint32, VPiecePath>>::create()};
 
-    const VTranslateVars *trVars;
-    const Unit *patternUnit;
+    const VTranslateVars *trVars; // NOLINT(misc-non-private-member-variables-in-classes)
+    const Unit *patternUnit;      // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief nspace namespace for static variables */
-    QString nspace;
+    QString nspace; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VContainerData) // NOLINT
@@ -142,9 +124,8 @@ public:
 
     auto operator=(const VContainer &data) -> VContainer &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VContainer(VContainer &&data) Q_DECL_NOTHROW;
-    auto operator=(VContainer &&data) Q_DECL_NOTHROW
-    ->VContainer &;
+    VContainer(VContainer &&data) noexcept;
+    auto operator=(VContainer &&data) noexcept -> VContainer &;
 #endif
 
     static auto UniqueNamespace() -> QString;
@@ -237,8 +218,7 @@ private:
 
     void AddCurve(const QSharedPointer<VAbstractCurve> &curve, const quint32 &id, quint32 parentId = NULL_ID);
 
-    template <typename T>
-    void AddVariable(const QSharedPointer<T> &var, const QString &name);
+    template <typename T> void AddVariable(const QSharedPointer<T> &var, const QString &name);
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     template <class T> auto qHash(const QSharedPointer<T> &p, uint seed = 0) -> uint;

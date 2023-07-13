@@ -21,7 +21,7 @@
 #ifndef VPROPERTY_H
 #define VPROPERTY_H
 
-#include <qcompilerdetection.h>
+
 #include <QAbstractItemDelegate>
 #include <QEvent>
 #include <QMap>

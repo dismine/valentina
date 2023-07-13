@@ -44,23 +44,14 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VAbstractFloatItemDataPrivate : public QSharedData
 {
 public:
-    VAbstractFloatItemDataPrivate()
-        : m_ptPos(),
-          m_bVisible(false)
-    {}
-
-    VAbstractFloatItemDataPrivate(const VAbstractFloatItemDataPrivate &data)
-        : QSharedData(data),
-          m_ptPos(data.m_ptPos),
-          m_bVisible(data.m_bVisible)
-    {}
-
+    VAbstractFloatItemDataPrivate() = default;
+    VAbstractFloatItemDataPrivate(const VAbstractFloatItemDataPrivate &data) = default;
     ~VAbstractFloatItemDataPrivate() = default;
 
     /** @brief m_ptPos position of label's top left corner */
-    QPointF m_ptPos;
+    QPointF m_ptPos{}; // NOLINT(misc-non-private-member-variables-in-classes)
     /** @brief m_bVisible visibility flag */
-    bool    m_bVisible;
+    bool m_bVisible{false}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VAbstractFloatItemDataPrivate) // NOLINT
@@ -69,4 +60,3 @@ private:
 QT_WARNING_POP
 
 #endif // VABSTRACTFLOATITEMDATA_P_H
-

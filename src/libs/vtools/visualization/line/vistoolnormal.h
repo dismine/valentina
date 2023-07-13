@@ -29,7 +29,7 @@
 #ifndef VISTOOLNORMAL_H
 #define VISTOOLNORMAL_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>

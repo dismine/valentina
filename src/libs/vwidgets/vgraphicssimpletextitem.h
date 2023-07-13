@@ -29,7 +29,7 @@
 #ifndef VGRAPHICSSIMPLETEXTITEM_H
 #define VGRAPHICSSIMPLETEXTITEM_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsItem>
 #include <QGraphicsSimpleTextItem>
 #include <QMetaObject>

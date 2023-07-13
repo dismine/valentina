@@ -29,7 +29,6 @@
 #ifndef DIALOGROTATION_H
 #define DIALOGROTATION_H
 
-#include <qcompilerdetection.h>
 #include <QList>
 #include <QMetaObject>
 #include <QObject>
@@ -37,53 +36,54 @@
 #include <QVector>
 #include <QtGlobal>
 
+#include "../../tools/toolsdef.h"
 #include "../vmisc/def.h"
 #include "dialogtool.h"
-#include "../../tools/toolsdef.h"
 
 namespace Ui
 {
-    class DialogRotation;
+class DialogRotation;
 }
 
 class DialogRotation : public DialogTool
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit DialogRotation(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogRotation();
+    ~DialogRotation() override;
 
     auto GetOrigPointId() const -> quint32;
-    void    SetOrigPointId(quint32 value);
+    void SetOrigPointId(quint32 value);
 
     auto GetAngle() const -> QString;
-    void    SetAngle(const QString &value);
+    void SetAngle(const QString &value);
 
     auto GetSuffix() const -> QString;
-    void    SetSuffix(const QString &value);
+    void SetSuffix(const QString &value);
 
     auto GetVisibilityGroupName() const -> QString;
-    void    SetVisibilityGroupName(const QString &name);
+    void SetVisibilityGroupName(const QString &name);
 
     auto HasLinkedVisibilityGroup() const -> bool;
     void SetHasLinkedVisibilityGroup(bool linked);
 
-    void        SetVisibilityGroupTags(const QStringList &tags);
+    void SetVisibilityGroupTags(const QStringList &tags);
     auto GetVisibilityGroupTags() const -> QStringList;
 
-    void    SetNotes(const QString &notes);
+    void SetNotes(const QString &notes);
     auto GetNotes() const -> QString;
 
-    virtual void SetGroupCategories(const QStringList &categories) override;
+    void SetGroupCategories(const QStringList &categories) override;
 
-    virtual void ShowDialog(bool click) override;
+    void ShowDialog(bool click) override;
 
     auto GetSourceObjects() const -> QVector<SourceItem>;
-    void                SetSourceObjects(const QVector<SourceItem> &value);
+    void SetSourceObjects(const QVector<SourceItem> &value);
 
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
-    virtual void SelectedObject(bool selected, quint32 object, quint32 tool) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void SelectedObject(bool selected, quint32 object, quint32 tool) override;
 
 private slots:
     /** @brief DeployAngleTextEdit grow or shrink formula input */
@@ -98,12 +98,12 @@ private slots:
     void ColorChanged();
 
 protected:
-    virtual void ShowVisualization() override;
+    void ShowVisualization() override;
 
     /** @brief SaveData Put dialog data in local variables */
-    virtual void SaveData() override;
-    virtual void closeEvent(QCloseEvent *event) override;
-    virtual auto IsValid() const -> bool final;
+    void SaveData() override;
+    void closeEvent(QCloseEvent *event) override;
+    auto IsValid() const -> bool final;
 
 private slots:
     void PointChanged();
@@ -113,13 +113,13 @@ private:
     Ui::DialogRotation *ui;
 
     /** @brief timerAngle timer of check formula of angle */
-    QTimer  *timerAngle;
+    QTimer *timerAngle;
 
     /** @brief angle formula of angle */
     QString formulaAngle;
 
     /** @brief formulaBaseHeightAngle base height defined by dialogui */
-    int     formulaBaseHeightAngle;
+    int formulaBaseHeightAngle;
 
     QVector<SourceItem> sourceObjects{};
 

@@ -29,8 +29,8 @@
 #ifndef VGOBJECT_P_H
 #define VGOBJECT_P_H
 
-#include <QSharedData>
 #include "vgeometrydef.h"
+#include <QSharedData>
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
@@ -45,20 +45,15 @@ class VGObjectData final : public QSharedData
 {
 public:
     VGObjectData() = default;
-    VGObjectData(const GOType &type, const quint32 &idObject, const Draw &mode)
-        :type(type),
-         idObject(idObject),
-         mode(mode)
-    {}
-
+    VGObjectData(const GOType &type, const quint32 &idObject, const Draw &mode);
     VGObjectData(const VGObjectData &obj) = default;
-    virtual ~VGObjectData() = default;
+    ~VGObjectData() = default;
 
     /** @brief _id id in container. Ned for arcs, spline and spline paths. */
     quint32 _id{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief type type of graphical object */
-    GOType  type{GOType::Unknown}; // NOLINT(misc-non-private-member-variables-in-classes)
+    GOType type{GOType::Unknown}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief idObject id of parent object. */
     quint32 idObject{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
@@ -67,14 +62,22 @@ public:
     QString _name{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief mode object created in calculation or drawing mode */
-    Draw    mode{Draw::Calculation}; // NOLINT(misc-non-private-member-variables-in-classes)
+    Draw mode{Draw::Calculation}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    QString m_alias{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_alias{};       // NOLINT(misc-non-private-member-variables-in-classes)
     QString m_aliasSuffix{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VGObjectData) // NOLINT
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VGObjectData::VGObjectData(const GOType &type, const quint32 &idObject, const Draw &mode)
+  : type(type),
+    idObject(idObject),
+    mode(mode)
+{
+}
 
 QT_WARNING_POP
 

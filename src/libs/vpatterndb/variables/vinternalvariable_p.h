@@ -29,9 +29,9 @@
 #ifndef VINTERNALVARIABLE_P_H
 #define VINTERNALVARIABLE_P_H
 
-#include <QSharedData>
 #include "../vmisc/def.h"
 #include "../vmisc/defglobal.h"
+#include <QSharedData>
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -40,33 +40,21 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VInternalVariableData final : public QSharedData
 {
 public:
-    VInternalVariableData()
-    {}
+    VInternalVariableData() = default;
+    VInternalVariableData(const VInternalVariableData &var) = default;
+    ~VInternalVariableData() = default;
 
-    VInternalVariableData(const VInternalVariableData &var)
-        :QSharedData(var),
-         type(var.type),
-         value(var.value),
-         name(var.name),
-         alias(var.alias)
-    {}
-
-    virtual ~VInternalVariableData();
-
-    VarType type{VarType::Unknown};
+    VarType type{VarType::Unknown}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief value variable's value */
-    qreal   value{0};
+    qreal value{0}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    QString name{};
-    QString alias{};
+    QString name{};  // NOLINT(misc-non-private-member-variables-in-classes)
+    QString alias{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VInternalVariableData) // NOLINT
 };
-
-VInternalVariableData::~VInternalVariableData()
-{}
 
 QT_WARNING_POP
 

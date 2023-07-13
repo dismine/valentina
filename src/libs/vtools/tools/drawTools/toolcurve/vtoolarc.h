@@ -29,7 +29,6 @@
 #ifndef VTOOLARC_H
 #define VTOOLARC_H
 
-#include <qcompilerdetection.h>
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
@@ -45,65 +44,64 @@ template <class T> class QSharedPointer;
 
 struct VToolArcInitData : VAbstractSplineInitData
 {
-    VToolArcInitData()
-        : VAbstractSplineInitData(),
-          center(NULL_ID),
-          radius('0'),
-          f1('0'),
-          f2('0')
-    {}
+    VToolArcInitData() = default;
 
-    quint32 center;
-    QString radius;
-    QString f1;
-    QString f2;
+    quint32 center{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QString radius{'0'};     // NOLINT(misc-non-private-member-variables-in-classes)
+    QString f1{'0'};         // NOLINT(misc-non-private-member-variables-in-classes)
+    QString f2{'0'};         // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
 /**
  * @brief The VToolArc class tool for creation arc.
  */
-class VToolArc :public VToolAbstractArc
+class VToolArc : public VToolAbstractArc
 {
     Q_OBJECT // NOLINT
+
 public:
-    virtual void     SetDialog() override;
+    void SetDialog() override;
     static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                        VContainer *data) -> VToolArc *;
     static auto Create(VToolArcInitData &initData) -> VToolArc *;
 
     static const QString ToolType;
-    virtual auto type() const -> int override { return Type; }
-    enum { Type = UserType + static_cast<int>(Tool::Arc)};
-    virtual auto getTagName() const -> QString override;
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Tool::Arc)
+    };
+    auto getTagName() const -> QString override;
 
     auto GetFormulaRadius() const -> VFormula;
-    void             SetFormulaRadius(const VFormula &value);
+    void SetFormulaRadius(const VFormula &value);
 
     auto GetFormulaF1() const -> VFormula;
-    void             SetFormulaF1(const VFormula &value);
+    void SetFormulaF1(const VFormula &value);
 
     auto GetFormulaF2() const -> VFormula;
-    void             SetFormulaF2(const VFormula &value);
+    void SetFormulaF2(const VFormula &value);
 
     auto GetApproximationScale() const -> qreal;
-    void             SetApproximationScale(qreal value);
+    void SetApproximationScale(qreal value);
 
-    virtual void     ShowVisualization(bool show) override;
+    void ShowVisualization(bool show) override;
+
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
+
 protected:
-    virtual void     RemoveReferens() override;
-    virtual void     SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                QList<quint32> &newDependencies) override;
-    virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void     SetVisualization() override;
-    virtual auto MakeToolTip() const -> QString override;
+    void RemoveReferens() override;
+    void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void SetVisualization() override;
+    auto MakeToolTip() const -> QString override;
 
 private:
     Q_DISABLE_COPY_MOVE(VToolArc) // NOLINT
 
-    VToolArc(const VToolArcInitData &initData, QGraphicsItem * parent = nullptr);
-    virtual ~VToolArc()=default;
+    explicit VToolArc(const VToolArcInitData &initData, QGraphicsItem *parent = nullptr);
+    ~VToolArc() override = default;
 };
 
 #endif // VTOOLARC_H

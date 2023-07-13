@@ -29,7 +29,7 @@
 #ifndef VEXCEPTIONUNDO_H
 #define VEXCEPTIONUNDO_H
 
-#include <qcompilerdetection.h>
+
 #include <QString>
 
 #include "../ifcdef.h"

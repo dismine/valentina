@@ -29,7 +29,6 @@
 #include "vdomdocument.h"
 
 #include <QSaveFile>
-#include <qcompilerdetection.h>
 #include <qdom.h>
 
 #include "../exception/vexception.h"

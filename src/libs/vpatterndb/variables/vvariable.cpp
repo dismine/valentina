@@ -36,25 +36,28 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VVariable::VVariable()
-    :VInternalVariable(), d(new VVariableData)
-{}
+  : d(new VVariableData)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VVariable::VVariable(const QString &name, const QString &description)
-    :VInternalVariable(), d(new VVariableData(description))
+  : d(new VVariableData(description))
 {
     SetName(name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VVariable::VVariable(const VVariable &var)
-    :VInternalVariable(var), d(var.d)
-{}
+VVariable::VVariable(const VVariable &var) // NOLINT(modernize-use-equals-default)
+  : VInternalVariable(var),
+    d(var.d)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VVariable::operator=(const VVariable &var) -> VVariable &
 {
-    if ( &var == this )
+    if (&var == this)
     {
         return *this;
     }
@@ -65,12 +68,14 @@ auto VVariable::operator=(const VVariable &var) -> VVariable &
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VVariable::VVariable(VVariable &&var) Q_DECL_NOTHROW
-    :VInternalVariable(std::move(var)), d(std::move(var.d))
-{}
+VVariable::VVariable(VVariable &&var) noexcept
+  : VInternalVariable(std::move(var)),
+    d(std::move(var.d))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VVariable::operator=(VVariable &&var) Q_DECL_NOTHROW->VVariable &
+auto VVariable::operator=(VVariable &&var) noexcept -> VVariable &
 {
     VInternalVariable::operator=(var);
     std::swap(d, var.d);
@@ -79,15 +84,15 @@ auto VVariable::operator=(VVariable &&var) Q_DECL_NOTHROW->VVariable &
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VVariable::~VVariable()
-{}
+VVariable::~VVariable() // NOLINT(modernize-use-equals-default)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VVariable::GetDescription() const -> QString
 {
     return d->description;
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void VVariable::SetDescription(const QString &desc)

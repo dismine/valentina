@@ -28,14 +28,14 @@
 
 #include "calculator.h"
 
-#include <QStringList>
 #include <QSharedPointer>
+#include <QStringList>
 #include <QtDebug>
 
-#include "../vmisc/def.h"
 #include "../qmuparser/qmuparsererror.h"
-#include "variables/vinternalvariable.h"
+#include "../vmisc/def.h"
 #include "../vmisc/vabstractapplication.h"
+#include "variables/vinternalvariable.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -52,9 +52,6 @@
  *
  */
 Calculator::Calculator()
-    : QmuFormulaBase(),
-      m_varsValues(),
-      m_vars(nullptr)
 {
     InitCharSets();
 
@@ -88,7 +85,7 @@ auto Calculator::EvalFormula(const QHash<QString, QSharedPointer<VInternalVariab
         return result;
     }
 
-    SetSepForEval();//Reset separators options
+    SetSepForEval(); // Reset separators options
     m_vars = vars;
     SetExpr(formula);
 
@@ -116,14 +113,15 @@ auto Calculator::VarFactory(const QString &a_szName, void *a_pUserData) -> qreal
         return val.data();
     }
 
-    throw qmu::QmuParserError (qmu::ecUNASSIGNABLE_TOKEN);
+    throw qmu::QmuParserError(qmu::ecUNASSIGNABLE_TOKEN);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto Calculator::Warning(const QString &warningMsg, qreal value) -> qreal
 {
-    VAbstractApplication::VApp()->IsPedantic() ? throw qmu::QmuParserWarning(warningMsg) :
-                                               qWarning() << VAbstractApplication::warningMessageSignature + warningMsg;
+    VAbstractApplication::VApp()->IsPedantic()
+        ? throw qmu::QmuParserWarning(warningMsg)
+        : qWarning() << VAbstractApplication::warningMessageSignature + warningMsg;
 
     return value;
 }

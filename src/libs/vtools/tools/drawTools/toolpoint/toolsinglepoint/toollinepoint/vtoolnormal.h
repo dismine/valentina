@@ -29,7 +29,7 @@
 #ifndef VTOOLNORMAL_H
 #define VTOOLNORMAL_H
 
-#include <qcompilerdetection.h>
+
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QMetaObject>

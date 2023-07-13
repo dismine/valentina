@@ -104,12 +104,12 @@ auto VPointF::operator=(const VPointF &point) -> VPointF &
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VPointF::VPointF(VPointF &&point) Q_DECL_NOTHROW
+VPointF::VPointF(VPointF &&point) noexcept
     :VGObject(std::move(point)), d(std::move(point.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPointF::operator=(VPointF &&point) Q_DECL_NOTHROW->VPointF &
+auto VPointF::operator=(VPointF &&point) noexcept->VPointF &
 {
     VGObject::operator=(point);
     std::swap(d, point.d);

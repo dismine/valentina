@@ -29,7 +29,6 @@
 #ifndef VMULTISIZETABLEROW_H
 #define VMULTISIZETABLEROW_H
 
-#include <qcompilerdetection.h>
 #include <QMap>
 #include <QSharedDataPointer>
 #include <QString>
@@ -38,7 +37,6 @@
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
-#include "../ifc/ifcdef.h"
 #include "vvariable.h"
 
 class VContainer;
@@ -47,7 +45,7 @@ class VMeasurementData;
 /**
  * @brief The VMeasurement class keep data row of multisize table
  */
-class VMeasurement final :public VVariable
+class VMeasurement final : public VVariable
 {
 public:
     VMeasurement(quint32 index, const QString &name);
@@ -56,16 +54,16 @@ public:
                  bool ok);
     VMeasurement(const VMeasurement &m);
 
-    virtual ~VMeasurement() override;
+    ~VMeasurement() override;
 
     auto operator=(const VMeasurement &m) -> VMeasurement &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VMeasurement(VMeasurement &&m) Q_DECL_NOTHROW;
-    auto operator=(VMeasurement &&m) Q_DECL_NOTHROW->VMeasurement &;
+    VMeasurement(VMeasurement &&m) noexcept;
+    auto operator=(VMeasurement &&m) noexcept -> VMeasurement &;
 #endif
 
     auto GetGuiText() const -> QString;
-    void    SetGuiText(const QString &guiText);
+    void SetGuiText(const QString &guiText);
 
     auto GetFormula() const -> QString;
 
@@ -76,10 +74,10 @@ public:
 
     auto GetMeasurementType() const -> MeasurementType;
 
-    virtual auto IsNotUsed() const -> bool override;
+    auto IsNotUsed() const -> bool override;
 
-    virtual auto GetValue() const -> qreal override;
-    virtual auto GetValue() -> qreal * override;
+    auto GetValue() const -> qreal override;
+    auto GetValue() -> qreal * override;
 
     auto GetData() -> VContainer *;
 
@@ -88,25 +86,25 @@ public:
     void SetBaseC(qreal base);
 
     auto GetBase() const -> qreal;
-    void  SetBase(qreal value);
+    void SetBase(qreal value);
 
     auto GetShiftA() const -> qreal;
-    void  SetShiftA(qreal value);
+    void SetShiftA(qreal value);
 
     auto GetShiftB() const -> qreal;
-    void  SetShiftB(qreal value);
+    void SetShiftB(qreal value);
 
     auto GetShiftC() const -> qreal;
-    void  SetShiftC(qreal value);
+    void SetShiftC(qreal value);
 
     auto GetStepA() const -> qreal;
-    void  SetStepA(qreal value);
+    void SetStepA(qreal value);
 
     auto GetStepB() const -> qreal;
-    void  SetStepB(qreal value);
+    void SetStepB(qreal value);
 
     auto GetStepC() const -> qreal;
-    void  SetStepC(qreal value);
+    void SetStepC(qreal value);
 
     auto IsSpecialUnits() const -> bool;
     void SetSpecialUnits(bool special);
@@ -117,7 +115,7 @@ public:
     auto GetCorrection(qreal baseA, qreal baseB, qreal baseC) const -> qreal;
 
     auto GetCorrections() const -> QMap<QString, qreal>;
-    void  SetCorrections(const QMap<QString, qreal> &corrections);
+    void SetCorrections(const QMap<QString, qreal> &corrections);
 
     static auto CorrectionHash(qreal baseA, qreal baseB = 0, qreal baseC = 0) -> QString;
 

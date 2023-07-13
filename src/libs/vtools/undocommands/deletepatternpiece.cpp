@@ -31,29 +31,25 @@
 #include <QDomNode>
 #include <QDomNodeList>
 
-#include "../vmisc/vabstractvalapplication.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DeletePatternPiece::DeletePatternPiece(VAbstractPattern *doc, const QString &namePP, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent), namePP(namePP), patternPiece(QDomElement()),
-      previousPPName(QString())
+  : VUndoCommand(QDomElement(), doc, parent),
+    namePP(namePP)
 {
     setText(tr("delete pattern piece %1").arg(namePP));
 
     const QDomElement patternP = doc->GetPPElement(namePP);
     patternPiece = patternP.cloneNode().toElement();
-    const QDomElement previousPP = patternP.previousSibling().toElement();//find previous pattern piece
+    const QDomElement previousPP = patternP.previousSibling().toElement(); // find previous pattern piece
     if (not previousPP.isNull() && previousPP.tagName() == VAbstractPattern::TagDraw)
     {
-        previousPPName = doc->GetParametrString(previousPP, VAbstractPattern::AttrName, QString());
+        previousPPName = VAbstractPattern::GetParametrString(previousPP, VAbstractPattern::AttrName, QString());
     }
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-DeletePatternPiece::~DeletePatternPiece()
-{}
 
 //---------------------------------------------------------------------------------------------------------------------
 void DeletePatternPiece::undo()
@@ -84,7 +80,7 @@ void DeletePatternPiece::undo()
     emit NeedFullParsing();
     if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {
-        emit doc->SetCurrentPP(namePP);//Without this user will not see this change
+        emit doc->SetCurrentPP(namePP); // Without this user will not see this change
     }
 }
 
@@ -95,7 +91,7 @@ void DeletePatternPiece::redo()
 
     if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {
-        emit doc->SetCurrentPP(namePP);//Without this user will not see this change
+        emit doc->SetCurrentPP(namePP); // Without this user will not see this change
     }
     QDomElement rootElement = doc->documentElement();
     const QDomElement patternPieceElement = doc->GetPPElement(namePP);

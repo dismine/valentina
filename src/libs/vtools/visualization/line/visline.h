@@ -29,7 +29,7 @@
 #ifndef VISLINE_H
 #define VISLINE_H
 
-#include <qcompilerdetection.h>
+
 #include <QColor>
 #include <QGraphicsItem>
 #include <QGraphicsLineItem>

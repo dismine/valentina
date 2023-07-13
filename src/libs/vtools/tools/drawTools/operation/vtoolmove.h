@@ -29,7 +29,7 @@
 #ifndef VTOOLMOVING_H
 #define VTOOLMOVING_H
 
-#include <qcompilerdetection.h>
+
 #include <QMap>
 #include <QMetaObject>
 #include <QObject>

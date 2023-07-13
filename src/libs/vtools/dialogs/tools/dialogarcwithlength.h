@@ -29,19 +29,17 @@
 #ifndef DIALOGARCWITHLENGTH_H
 #define DIALOGARCWITHLENGTH_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
-#include "../vmisc/defglobal.h"
 #include "dialogtool.h"
 
 namespace Ui
 {
-    class DialogArcWithLength;
+class DialogArcWithLength;
 }
 
 class DialogArcWithLength final : public DialogTool

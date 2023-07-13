@@ -29,7 +29,7 @@
 #ifndef VTOOLPOINTFROMCIRCLEANDTANGENT_H
 #define VTOOLPOINTFROMCIRCLEANDTANGENT_H
 
-#include <qcompilerdetection.h>
+
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QMetaObject>

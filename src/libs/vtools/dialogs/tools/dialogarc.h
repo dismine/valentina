@@ -29,7 +29,6 @@
 #ifndef DIALOGARC_H
 #define DIALOGARC_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -40,7 +39,7 @@
 
 namespace Ui
 {
-    class DialogArc;
+class DialogArc;
 }
 
 /**
@@ -49,6 +48,7 @@ namespace Ui
 class DialogArc final : public DialogTool
 {
     Q_OBJECT // NOLINT
+
 public:
     DialogArc(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     ~DialogArc() override;
@@ -81,6 +81,7 @@ public:
     auto GetAliasSuffix() const -> QString;
 
     void ShowDialog(bool click) override;
+
 public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
     /**
@@ -105,6 +106,7 @@ protected:
 
 private slots:
     void ValidateAlias();
+
 private:
     Q_DISABLE_COPY_MOVE(DialogArc) // NOLINT
 

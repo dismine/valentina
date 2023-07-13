@@ -51,8 +51,8 @@ public:
 
     auto operator=(const VGrainlineData &data) -> VGrainlineData &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VGrainlineData(VGrainlineData &&data) Q_DECL_NOTHROW;
-    auto operator=(VGrainlineData &&data) Q_DECL_NOTHROW->VGrainlineData &;
+    VGrainlineData(VGrainlineData &&data) noexcept;
+    auto operator=(VGrainlineData &&data) noexcept->VGrainlineData &;
 #endif
 
     // methods, which set and return values of different parameters

@@ -34,34 +34,33 @@
 #include <Qt>
 #include <new>
 
-#include "../../../dialogs/tools/dialogtool.h"
 #include "../../../dialogs/tools/dialogcubicbezierpath.h"
-#include "../../../visualization/visualization.h"
+#include "../../../dialogs/tools/dialogtool.h"
 #include "../../../visualization/path/vistoolcubicbezierpath.h"
+#include "../../../visualization/visualization.h"
+#include "../../vabstracttool.h"
 #include "../ifc/exception/vexception.h"
-#include "../ifc/xml/vdomdocument.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../vdrawtool.h"
 #include "../vgeometry/vabstractcubicbezierpath.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vcubicbezierpath.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
-#include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "../../vabstracttool.h"
-#include "../vdrawtool.h"
 #include "vabstractspline.h"
 
 const QString VToolCubicBezierPath::ToolType = QStringLiteral("cubicBezierPath");
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolCubicBezierPath::VToolCubicBezierPath(const VToolCubicBezierPathInitData &initData, QGraphicsItem *parent)
-    : VAbstractSpline(initData.doc, initData.data, initData.id, initData.notes, parent)
+  : VAbstractSpline(initData.doc, initData.data, initData.id, initData.notes, parent)
 {
-    sceneType = SceneObject::SplinePath;
+    SetSceneType(SceneObject::SplinePath);
 
-    this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
+    this->setFlag(QGraphicsItem::ItemIsFocusable, true); // For keyboard input focus
 
     ToolCreation(initData.typeCreation);
 }
@@ -99,7 +98,7 @@ auto VToolCubicBezierPath::Create(const QPointer<DialogTool> &dialog, VMainGraph
         doc->IncrementReferens((*initData.path)[i].getIdTool());
     }
 
-    VToolCubicBezierPath* spl = Create(initData);
+    VToolCubicBezierPath *spl = Create(initData);
     if (spl != nullptr)
     {
         spl->m_dialog = dialog;
@@ -130,7 +129,7 @@ auto VToolCubicBezierPath::Create(VToolCubicBezierPathInitData initData) -> VToo
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::CubicBezierPath, initData.doc);
-        VToolCubicBezierPath *spl = new VToolCubicBezierPath(initData);
+        auto *spl = new VToolCubicBezierPath(initData);
         initData.scene->addItem(spl);
         InitSplinePathToolConnections(initData.scene, spl);
         VAbstractPattern::AddTool(initData.id, spl);
@@ -179,10 +178,10 @@ void VToolCubicBezierPath::ShowContextMenu(QGraphicsSceneContextMenuEvent *event
     {
         ContextMenu<DialogCubicBezierPath>(event);
     }
-    catch(const VExceptionToolWasDeleted &e)
+    catch (const VExceptionToolWasDeleted &e)
     {
         Q_UNUSED(e)
-        return;//Leave this method immediately!!!
+        return; // Leave this method immediately!!!
     }
 }
 
@@ -217,7 +216,7 @@ void VToolCubicBezierPath::SaveDialog(QDomElement &domElement, QList<quint32> &o
     }
 
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept {return notes.isEmpty();});
+                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
 
     SetSplinePathAttributes(domElement, splPath);
 }
@@ -272,7 +271,7 @@ void VToolCubicBezierPath::SetSplinePathAttributes(QDomElement &domElement, cons
 {
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttributeOrRemoveIf<quint32>(domElement, AttrDuplicate, path.GetDuplicate(),
-                                         [](quint32 duplicate) noexcept {return duplicate <= 0;});
+                                         [](quint32 duplicate) noexcept { return duplicate <= 0; });
     doc->SetAttribute(domElement, AttrColor, path.GetColor());
     doc->SetAttribute(domElement, AttrPenStyle, path.GetPenStyle());
     doc->SetAttribute(domElement, AttrAScale, path.GetApproximationScale());

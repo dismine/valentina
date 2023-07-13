@@ -29,7 +29,6 @@
 #ifndef VLINEANGLE_H
 #define VLINEANGLE_H
 
-#include <qcompilerdetection.h>
 #include <QSharedDataPointer>
 #include <QTypeInfo>
 #include <QtGlobal>
@@ -39,23 +38,24 @@
 class VLineAngleData;
 class VPointF;
 
-class VLineAngle final :public VInternalVariable
+class VLineAngle final : public VInternalVariable
 {
 public:
     VLineAngle();
     VLineAngle(const VPointF *p1, const quint32 &p1Id, const VPointF *p2, const quint32 &p2Id);
     VLineAngle(const VLineAngle &var);
-
-    virtual ~VLineAngle() override;
+    ~VLineAngle() override;
 
     auto operator=(const VLineAngle &var) -> VLineAngle &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VLineAngle(VLineAngle &&var) Q_DECL_NOTHROW;
-    auto operator=(VLineAngle &&var) Q_DECL_NOTHROW->VLineAngle &;
+    VLineAngle(VLineAngle &&var) noexcept;
+    auto operator=(VLineAngle &&var) noexcept -> VLineAngle &;
 #endif
 
     virtual auto Filter(quint32 id) -> bool override;
-    void         SetValue(const VPointF *p1, const VPointF *p2);
+
+    void SetValue(const VPointF *p1, const VPointF *p2);
+
     auto GetP1Id() const -> quint32;
     auto GetP2Id() const -> quint32;
 

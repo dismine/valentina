@@ -28,15 +28,14 @@
 #ifndef VFORMULA_P_H
 #define VFORMULA_P_H
 
+#include <QCoreApplication>
+#include <QSharedData>
+
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/typedef.h"
-#include "../vmisc/vmath.h"
 #include "../vmisc/defglobal.h"
-
-#include <QSharedData>
-#include <QCoreApplication>
+#include "../vmisc/typedef.h"
 
 class VContainer;
 
@@ -47,47 +46,36 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VFormulaData : public QSharedData
 {
     Q_DECLARE_TR_FUNCTIONS(VFormulaData) // NOLINT
+
 public:
-  VFormulaData()
-  {}
+    VFormulaData() = default;
+    VFormulaData(const QString &formula, const VContainer *container);
+    VFormulaData(const VFormulaData &formula) = default;
+    ~VFormulaData() = default;
 
-  VFormulaData(const QString &formula, const VContainer *container)
-      : formula(formula),
-        data(container),
-        reason(tr("Not evaluated"))
-  {}
-
-  VFormulaData (const VFormulaData& formula)
-      : QSharedData(formula),
-        formula(formula.formula),
-        strValue(formula.strValue),
-        checkZero(formula.checkZero),
-        checkLessThanZero(formula.checkLessThanZero),
-        data(formula.data),
-        toolId(formula.toolId),
-        postfix(formula.postfix),
-        error(formula.error),
-        dValue(formula.dValue),
-        reason(formula.reason)
-  {}
-
-  ~VFormulaData() {}
-
-  QString formula{};
-  QString strValue{tr("Error")};
-  bool checkZero{true};
-  bool checkLessThanZero{false};
-  const VContainer *data{nullptr};
-  quint32 toolId{NULL_ID};
-  QString postfix{};
-  bool error{true};
-  qreal dValue{NAN};
-  QString reason{tr("Formula is empty")};
+    QString formula{};                      // NOLINT(misc-non-private-member-variables-in-classes)
+    QString strValue{tr("Error")};          // NOLINT(misc-non-private-member-variables-in-classes)
+    bool checkZero{true};                   // NOLINT(misc-non-private-member-variables-in-classes)
+    bool checkLessThanZero{false};          // NOLINT(misc-non-private-member-variables-in-classes)
+    const VContainer *data{nullptr};        // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 toolId{NULL_ID};                // NOLINT(misc-non-private-member-variables-in-classes)
+    QString postfix{};                      // NOLINT(misc-non-private-member-variables-in-classes)
+    bool error{true};                       // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal dValue{NAN};                      // NOLINT(misc-non-private-member-variables-in-classes)
+    QString reason{tr("Formula is empty")}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VFormulaData) // NOLINT
 };
 
 QT_WARNING_POP
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VFormulaData::VFormulaData(const QString &formula, const VContainer *container)
+  : formula(formula),
+    data(container),
+    reason(tr("Not evaluated"))
+{
+}
 
 #endif // VFORMULA_P_H

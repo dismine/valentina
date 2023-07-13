@@ -29,7 +29,7 @@
 #ifndef VPOSITION_H
 #define VPOSITION_H
 
-#include <qcompilerdetection.h>
+
 #include <QRunnable>
 #include <QVector>
 #include <QtGlobal>

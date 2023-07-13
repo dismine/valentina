@@ -29,7 +29,6 @@
 #ifndef VEXCEPTION_H
 #define VEXCEPTION_H
 
-#include <qcompilerdetection.h>
 #include <QCoreApplication>
 #include <QException>
 #include <QString>
@@ -46,11 +45,12 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 class VException : public QException
 {
     Q_DECLARE_TR_FUNCTIONS(VException) // NOLINT
+
 public:
-    explicit VException(const QString &error) V_NOEXCEPT_EXPR (true);
-    VException(const VException &e) V_NOEXCEPT_EXPR (true);
+    explicit VException(const QString &error) V_NOEXCEPT_EXPR(true);
+    VException(const VException &e) V_NOEXCEPT_EXPR(true);
     auto operator=(const VException &e) V_NOEXCEPT_EXPR(true) -> VException &;
-    virtual ~VException() V_NOEXCEPT_EXPR (true) = default;
+    virtual ~VException() V_NOEXCEPT_EXPR(true) = default;
 
     Q_NORETURN virtual void raise() const override;
 
@@ -60,15 +60,15 @@ public:
     virtual auto ErrorMessage() const -> QString;
     virtual auto DetailedInformation() const -> QString;
     auto WhatUtf8() const V_NOEXCEPT_EXPR(true) -> QString;
-    void            AddMoreInformation(const QString &info);
+    void AddMoreInformation(const QString &info);
     auto MoreInformation() const -> QString;
 
 protected:
     /** @brief error string with error */
-    QString         error;
+    QString error;
 
     /** @brief moreInfo more information about error */
-    QString         moreInfo {};
+    QString moreInfo{};
 
     auto MoreInfo(const QString &detInfo) const -> QString;
 };
@@ -99,11 +99,12 @@ inline auto VException::MoreInformation() const -> QString
 class VExceptionToolWasDeleted : public VException
 {
     Q_DECLARE_TR_FUNCTIONS(VExceptionToolDeleted) // NOLINT
+
 public:
-    explicit VExceptionToolWasDeleted(const QString &error) V_NOEXCEPT_EXPR (true);
-    VExceptionToolWasDeleted(const VExceptionToolWasDeleted &e) V_NOEXCEPT_EXPR (true);
+    explicit VExceptionToolWasDeleted(const QString &error) V_NOEXCEPT_EXPR(true);
+    VExceptionToolWasDeleted(const VExceptionToolWasDeleted &e) V_NOEXCEPT_EXPR(true);
     auto operator=(const VExceptionToolWasDeleted &e) V_NOEXCEPT_EXPR(true) -> VExceptionToolWasDeleted &;
-    virtual ~VExceptionToolWasDeleted() V_NOEXCEPT_EXPR (true) = default;
+    virtual ~VExceptionToolWasDeleted() V_NOEXCEPT_EXPR(true) = default;
 
     Q_NORETURN virtual void raise() const override;
     // cppcheck-suppress unusedFunction

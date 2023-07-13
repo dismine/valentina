@@ -29,7 +29,6 @@
 #ifndef VTOOLTRUEDARTS_H
 #define VTOOLTRUEDARTS_H
 
-#include <qcompilerdetection.h>
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QMetaObject>
@@ -46,57 +45,45 @@ template <class T> class QSharedPointer;
 
 struct VToolTrueDartsInitData : VDrawToolInitData
 {
-    VToolTrueDartsInitData()
-        : VDrawToolInitData(),
-          p1id(NULL_ID),
-          p2id(NULL_ID),
-          baseLineP1Id(NULL_ID),
-          baseLineP2Id(NULL_ID),
-          dartP1Id(NULL_ID),
-          dartP2Id(NULL_ID),
-          dartP3Id(NULL_ID),
-          name1(),
-          mx1(labelMX),
-          my1(labelMY),
-          showLabel1(true),
-          name2(),
-          mx2(10),
-          my2(15),
-          showLabel2(true)
-    {}
+    VToolTrueDartsInitData() = default;
 
-    quint32 p1id;
-    quint32 p2id;
-    quint32 baseLineP1Id;
-    quint32 baseLineP2Id;
-    quint32 dartP1Id;
-    quint32 dartP2Id;
-    quint32 dartP3Id;
-    QString name1;
-    qreal   mx1;
-    qreal   my1;
-    bool    showLabel1;
-    QString name2;
-    qreal   mx2;
-    qreal   my2;
-    bool    showLabel2;
+    quint32 p1id{NULL_ID};         // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 p2id{NULL_ID};         // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 baseLineP1Id{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 baseLineP2Id{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 dartP1Id{NULL_ID};     // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 dartP2Id{NULL_ID};     // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 dartP3Id{NULL_ID};     // NOLINT(misc-non-private-member-variables-in-classes)
+    QString name1{};               // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal mx1{labelMX};            // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal my1{labelMY};            // NOLINT(misc-non-private-member-variables-in-classes)
+    bool showLabel1{true};         // NOLINT(misc-non-private-member-variables-in-classes)
+    QString name2{};               // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal mx2{10};                 // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal my2{15};                 // NOLINT(misc-non-private-member-variables-in-classes)
+    bool showLabel2{true};         // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
 class VToolTrueDarts : public VToolDoublePoint
 {
     Q_OBJECT // NOLINT
+
 public:
-    static void    FindPoint(const QPointF &baseLineP1, const QPointF &baseLineP2, const QPointF &dartP1,
-                             const QPointF &dartP2, const QPointF &dartP3, QPointF &p1, QPointF &p2);
-    virtual void   SetDialog() override;
+    ~VToolTrueDarts() override = default;
+    static void FindPoint(const QPointF &baseLineP1, const QPointF &baseLineP2, const QPointF &dartP1,
+                          const QPointF &dartP2, const QPointF &dartP3, QPointF &p1, QPointF &p2);
+    void SetDialog() override;
     static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                        VContainer *data) -> VToolTrueDarts *;
     static auto Create(VToolTrueDartsInitData initData) -> VToolTrueDarts *;
     static const QString ToolType;
-    virtual auto type() const -> int override { return Type; }
-    enum { Type = UserType + static_cast<int>(Tool::TrueDarts)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Tool::TrueDarts)
+    };
 
-    virtual void   ShowVisualization(bool show) override;
+    void ShowVisualization(bool show) override;
 
     auto BaseLineP1Name() const -> QString;
     auto BaseLineP2Name() const -> QString;
@@ -105,14 +92,14 @@ public:
     auto DartP3Name() const -> QString;
 
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
+
 protected:
-    virtual void RemoveReferens() override;
-    virtual void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                            QList<quint32> &newDependencies) override;
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void ReadToolAttributes(const QDomElement &domElement) override;
-    virtual void SetVisualization() override;
+    void RemoveReferens() override;
+    void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void ReadToolAttributes(const QDomElement &domElement) override;
+    void SetVisualization() override;
 
 private:
     Q_DISABLE_COPY_MOVE(VToolTrueDarts) // NOLINT
@@ -122,7 +109,7 @@ private:
     quint32 dartP2Id;
     quint32 dartP3Id;
 
-    VToolTrueDarts(const VToolTrueDartsInitData &initData, QGraphicsItem *parent = nullptr);
+    explicit VToolTrueDarts(const VToolTrueDartsInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLTRUEDARTS_H

@@ -29,7 +29,6 @@
 #ifndef MOVEDETAIL_H
 #define MOVEDETAIL_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -42,16 +41,17 @@ class QGraphicsScene;
 class MovePiece : public VUndoCommand
 {
     Q_OBJECT // NOLINT
+
 public:
     MovePiece(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
-               QUndoCommand *parent = nullptr);
-    virtual ~MovePiece()=default;
+              QUndoCommand *parent = nullptr);
+    ~MovePiece() = default;
 
-    virtual void undo() override;
-    virtual void redo() override;
+    void undo() override;
+    void redo() override;
     // cppcheck-suppress unusedFunction
-    virtual auto mergeWith(const QUndoCommand *command) -> bool override;
-    virtual auto id() const -> int override;
+    auto mergeWith(const QUndoCommand *command) -> bool override;
+    auto id() const -> int override;
 
     void Do(qreal x, qreal y);
 
@@ -63,10 +63,10 @@ private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(MovePiece) // NOLINT
 
-    double          m_oldX;
-    double          m_oldY;
-    double          m_newX;
-    double          m_newY;
+    double m_oldX;
+    double m_oldY;
+    double m_newX;
+    double m_newY;
     QGraphicsScene *m_scene;
 
     void SaveCoordinates(QDomElement &domElement, double x, double y);

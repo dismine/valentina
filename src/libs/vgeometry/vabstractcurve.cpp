@@ -69,12 +69,12 @@ auto VAbstractCurve::operator=(const VAbstractCurve &curve) -> VAbstractCurve &
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractCurve::VAbstractCurve(VAbstractCurve &&curve) Q_DECL_NOTHROW
+VAbstractCurve::VAbstractCurve(VAbstractCurve &&curve) noexcept
     :VGObject(std::move(curve)), d (std::move(curve.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractCurve::operator=(VAbstractCurve &&curve) Q_DECL_NOTHROW -> VAbstractCurve &
+auto VAbstractCurve::operator=(VAbstractCurve &&curve) noexcept -> VAbstractCurve &
 {
     VGObject::operator=(curve);
     std::swap(d, curve.d);

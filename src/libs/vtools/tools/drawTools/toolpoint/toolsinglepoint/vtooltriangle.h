@@ -29,7 +29,6 @@
 #ifndef VTOOLTRIANGLE_H
 #define VTOOLTRIANGLE_H
 
-#include <qcompilerdetection.h>
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QMetaObject>
@@ -46,18 +45,12 @@ template <class T> class QSharedPointer;
 
 struct VToolTriangleInitData : VToolSinglePointInitData
 {
-    VToolTriangleInitData()
-        : VToolSinglePointInitData(),
-          axisP1Id(NULL_ID),
-          axisP2Id(NULL_ID),
-          firstPointId(NULL_ID),
-          secondPointId(NULL_ID)
-    {}
+    VToolTriangleInitData() = default;
 
-    quint32 axisP1Id;
-    quint32 axisP2Id;
-    quint32 firstPointId;
-    quint32 secondPointId;
+    quint32 axisP1Id{NULL_ID};      // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 axisP2Id{NULL_ID};      // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 firstPointId{NULL_ID};  // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 secondPointId{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
 /**
@@ -67,16 +60,21 @@ struct VToolTriangleInitData : VToolSinglePointInitData
 class VToolTriangle : public VToolSinglePoint
 {
     Q_OBJECT // NOLINT
+
 public:
-    virtual void   SetDialog() override;
+    ~VToolTriangle() override = default;
+    void SetDialog() override;
     static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                        VContainer *data) -> VToolTriangle *;
     static auto Create(VToolTriangleInitData initData) -> VToolTriangle *;
     static auto FindPoint(const QPointF &axisP1, const QPointF &axisP2, const QPointF &firstPoint,
                           const QPointF &secondPoint, QPointF *intersectionPoint) -> bool;
     static const QString ToolType;
-    virtual auto type() const -> int override { return Type; }
-    enum { Type = UserType + static_cast<int>(Tool::Triangle)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Tool::Triangle)
+    };
 
     auto AxisP1Name() const -> QString;
     auto AxisP2Name() const -> QString;
@@ -84,42 +82,44 @@ public:
     auto SecondPointName() const -> QString;
 
     auto GetAxisP1Id() const -> quint32;
-    void    SetAxisP1Id(const quint32 &value);
+    void SetAxisP1Id(const quint32 &value);
 
     auto GetAxisP2Id() const -> quint32;
-    void    SetAxisP2Id(const quint32 &value);
+    void SetAxisP2Id(const quint32 &value);
 
     auto GetFirstPointId() const -> quint32;
-    void    SetFirstPointId(const quint32 &value);
+    void SetFirstPointId(const quint32 &value);
 
     auto GetSecondPointId() const -> quint32;
-    void    SetSecondPointId(const quint32 &value);
+    void SetSecondPointId(const quint32 &value);
 
-    virtual void   ShowVisualization(bool show) override;
+    void ShowVisualization(bool show) override;
+
 protected:
-    virtual void   RemoveReferens() override;
-    virtual void   SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                              QList<quint32> &newDependencies) override;
-    virtual void   SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void   ReadToolAttributes(const QDomElement &domElement) override;
-    virtual void   SetVisualization() override;
+    void RemoveReferens() override;
+    void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void ReadToolAttributes(const QDomElement &domElement) override;
+    void SetVisualization() override;
+
 private slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
+
 private:
     Q_DISABLE_COPY_MOVE(VToolTriangle) // NOLINT
     /** @brief axisP1Id id first axis point. */
-    quint32        axisP1Id;
+    quint32 axisP1Id;
 
     /** @brief axisP2Id id second axis point. */
-    quint32        axisP2Id;
+    quint32 axisP2Id;
 
     /** @brief firstPointId id first triangle point, what lies on the hypotenuse. */
-    quint32        firstPointId;
+    quint32 firstPointId;
 
     /** @brief secondPointId id second triangle point, what lies on the hypotenuse. */
-    quint32        secondPointId;
+    quint32 secondPointId;
 
-    VToolTriangle(const VToolTriangleInitData &initData, QGraphicsItem *parent = nullptr);
+    explicit VToolTriangle(const VToolTriangleInitData &initData, QGraphicsItem *parent = nullptr);
 };
 
 #endif // VTOOLTRIANGLE_H

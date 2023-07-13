@@ -90,8 +90,8 @@ public:
 
     auto operator=(const VLayoutPiece &detail) -> VLayoutPiece &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VLayoutPiece(VLayoutPiece &&detail) Q_DECL_NOTHROW;
-    auto operator=(VLayoutPiece &&detail) Q_DECL_NOTHROW
+    VLayoutPiece(VLayoutPiece &&detail) noexcept;
+    auto operator=(VLayoutPiece &&detail) noexcept
     ->VLayoutPiece &;
 #endif
 

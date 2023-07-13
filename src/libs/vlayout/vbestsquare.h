@@ -49,8 +49,8 @@ public:
 
     auto operator=(const VBestSquare &res) -> VBestSquare &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VBestSquare(VBestSquare &&res) Q_DECL_NOTHROW;
-    auto operator=(VBestSquare &&res) Q_DECL_NOTHROW->VBestSquare &;
+    VBestSquare(VBestSquare &&res) noexcept;
+    auto operator=(VBestSquare &&res) noexcept->VBestSquare &;
 #endif
 
     void NewResult(const VBestSquareResData &data);

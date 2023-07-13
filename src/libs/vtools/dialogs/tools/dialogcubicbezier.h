@@ -29,7 +29,6 @@
 #ifndef DIALOGCUBICBEZIER_H
 #define DIALOGCUBICBEZIER_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QSharedPointer>
@@ -42,7 +41,7 @@
 
 namespace Ui
 {
-    class DialogCubicBezier;
+class DialogCubicBezier;
 }
 
 class DialogCubicBezier : public DialogTool
@@ -51,26 +50,29 @@ class DialogCubicBezier : public DialogTool
 
 public:
     explicit DialogCubicBezier(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogCubicBezier();
+    ~DialogCubicBezier() override;
 
     auto GetSpline() const -> VCubicBezier;
-    void         SetSpline(const VCubicBezier &spline);
+    void SetSpline(const VCubicBezier &spline);
 
-    void    SetNotes(const QString &notes);
+    void SetNotes(const QString &notes);
     auto GetNotes() const -> QString;
+
 public slots:
-    virtual void  ChosenObject(quint32 id, const SceneObject &type) override;
-    virtual void  PointNameChanged() override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void PointNameChanged() override;
+
 protected:
-    virtual void  ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void  SaveData() override;
-    virtual auto IsValid() const -> bool final;
+    void SaveData() override;
+    auto IsValid() const -> bool final;
 
 private slots:
     void ValidateAlias();
+
 private:
     Q_DISABLE_COPY_MOVE(DialogCubicBezier) // NOLINT
     Ui::DialogCubicBezier *ui;

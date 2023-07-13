@@ -41,32 +41,30 @@
 #include <QSharedPointer>
 #include <QUndoStack>
 #include <QVector>
-#include <Qt>
-#include <new>
 #include <QtMath>
 
 #include "../../../dialogs/tools/dialogspline.h"
 #include "../../../dialogs/tools/dialogtool.h"
 #include "../../../undocommands/movespline.h"
-#include "../../../visualization/visualization.h"
 #include "../../../visualization/path/vistoolspline.h"
+#include "../../../visualization/visualization.h"
+#include "../../vabstracttool.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
 #include "../qmuparser/qmutokenparser.h"
+#include "../vdrawtool.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/global.h"
 #include "../vwidgets/vcontrolpointspline.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "../vwidgets/global.h"
-#include "../../vabstracttool.h"
-#include "../vdrawtool.h"
 #include "vabstractspline.h"
 
-const QString VToolSpline::ToolType = QStringLiteral("simpleInteractive");
-const QString VToolSpline::OldToolType = QStringLiteral("simple");
+const QString VToolSpline::ToolType = QStringLiteral("simpleInteractive"); // NOLINT
+const QString VToolSpline::OldToolType = QStringLiteral("simple");         // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -75,20 +73,16 @@ const QString VToolSpline::OldToolType = QStringLiteral("simple");
  * @param parent parent object.
  */
 VToolSpline::VToolSpline(const VToolSplineInitData &initData, QGraphicsItem *parent)
-    : VAbstractSpline(initData.doc, initData.data, initData.id, initData.notes, parent),
-      oldPosition(),
-      moved(false),
-      oldMoveSpline(),
-      newMoveSpline()
+  : VAbstractSpline(initData.doc, initData.data, initData.id, initData.notes, parent)
 {
-    sceneType = SceneObject::Spline;
+    SetSceneType(SceneObject::Spline);
 
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
-    this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
+    this->setFlag(QGraphicsItem::ItemIsFocusable, true); // For keyboard input focus
 
     const auto spl = VAbstractTool::data.GeometricObject<VSpline>(initData.id);
 
-    auto InitControlPoint = [this](VControlPointSpline* cPoint)
+    auto InitControlPoint = [this](VControlPointSpline *cPoint)
     {
         connect(cPoint, &VControlPointSpline::ControlPointChangePosition, this,
                 &VToolSpline::ControlPointChangePosition);
@@ -109,13 +103,13 @@ VToolSpline::VToolSpline(const VToolSplineInitData &initData, QGraphicsItem *par
     const bool freeAngle2 = qmu::QmuTokenParser::IsSingle(spl->GetEndAngleFormula());
     const bool freeLength2 = qmu::QmuTokenParser::IsSingle(spl->GetC2LengthFormula());
 
-    auto *controlPoint2 = new VControlPointSpline(1, SplinePointPosition::LastPoint,
-                                                  static_cast<QPointF>(spl->GetP3()), freeAngle2, freeLength2, this);
+    auto *controlPoint2 = new VControlPointSpline(1, SplinePointPosition::LastPoint, static_cast<QPointF>(spl->GetP3()),
+                                                  freeAngle2, freeLength2, this);
     InitControlPoint(controlPoint2);
 
     VToolSpline::RefreshCtrlPoints();
 
-    ShowHandles(detailsMode);
+    VToolSpline::ShowHandles(IsDetailsMode());
 
     ToolCreation(initData.typeCreation);
 }
@@ -194,7 +188,7 @@ auto VToolSpline::Create(VToolSplineInitData &initData, VSpline *spline) -> VToo
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::Spline, initData.doc);
-        auto* _spl = new VToolSpline(initData);
+        auto *_spl = new VToolSpline(initData);
         initData.scene->addItem(_spl);
         InitSplineToolConnections(initData.scene, _spl);
         VAbstractPattern::AddTool(initData.id, _spl);
@@ -212,14 +206,14 @@ auto VToolSpline::Create(VToolSplineInitData &initData) -> VToolSpline *
     const qreal calcAngle2 = CheckFormula(initData.id, initData.a2, initData.data);
 
     const qreal calcLength1 =
-            VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.l1, initData.data));
+        VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.l1, initData.data));
     const qreal calcLength2 =
-            VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.l2, initData.data));
+        VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.l2, initData.data));
 
     auto p1 = initData.data->GeometricObject<VPointF>(initData.point1);
     auto p4 = initData.data->GeometricObject<VPointF>(initData.point4);
 
-    auto* spline = new VSpline(*p1, *p4, calcAngle1, initData.a1, calcAngle2, initData.a2, calcLength1, initData.l1,
+    auto *spline = new VSpline(*p1, *p4, calcAngle1, initData.a1, calcAngle2, initData.a2, calcLength1, initData.l1,
                                calcLength2, initData.l2);
     if (initData.duplicate > 0)
     {
@@ -254,6 +248,16 @@ void VToolSpline::setSpline(const VSpline &spl)
 void VToolSpline::ShowVisualization(bool show)
 {
     ShowToolVisualization<VisToolSpline>(show);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSpline::ShowHandles(bool show)
+{
+    for (auto *point : qAsConst(controlPoints))
+    {
+        point->setVisible(show);
+    }
+    VAbstractSpline::ShowHandles(show);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -299,9 +303,31 @@ void VToolSpline::EnableToolMove(bool move)
 {
     this->setFlag(QGraphicsItem::ItemIsMovable, move);
 
-    for (auto point : qAsConst(controlPoints))
+    for (auto *point : qAsConst(controlPoints))
     {
         point->setFlag(QGraphicsItem::ItemIsMovable, move);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSpline::AllowHover(bool enabled)
+{
+    VAbstractSpline::AllowHover(enabled);
+
+    for (auto *point : qAsConst(controlPoints))
+    {
+        point->setAcceptHoverEvents(enabled);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSpline::AllowSelecting(bool enabled)
+{
+    VAbstractSpline::AllowSelecting(enabled);
+
+    for (auto *point : qAsConst(controlPoints))
+    {
+        point->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
     }
 }
 
@@ -323,7 +349,7 @@ void VToolSpline::RemoveReferens()
 void VToolSpline::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    auto *dialogTool = qobject_cast<DialogSpline*>(m_dialog);
+    auto *dialogTool = qobject_cast<DialogSpline *>(m_dialog);
     SCASSERT(dialogTool != nullptr)
 
     const auto oldSpl = VAbstractTool::data.GeometricObject<VSpline>(m_id);
@@ -344,7 +370,7 @@ void VToolSpline::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepende
     controlPoints[1]->blockSignals(false);
 
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept {return notes.isEmpty();});
+                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
 
     SetSplineAttributes(domElement, spl);
 }
@@ -398,106 +424,108 @@ void VToolSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (IsMovable())
+    if (!IsMovable())
     {
-        // Don't need check if left mouse button was pressed. According to the Qt documentation "If you do receive this
-        // event, you can be certain that this item also received a mouse press event, and that this item is the current
-        // mouse grabber.".
+        return;
+    }
 
-        // Magic Bezier Drag Equations follow!
-        // "weight" describes how the influence of the drag should be distributed
-        // among the handles; 0 = front handle only, 1 = back handle only.
+    // Don't need check if left mouse button was pressed. According to the Qt documentation "If you do receive this
+    // event, you can be certain that this item also received a mouse press event, and that this item is the current
+    // mouse grabber.".
 
-        const auto spline = VAbstractTool::data.GeometricObject<VSpline>(m_id);
+    // Magic Bezier Drag Equations follow!
+    // "weight" describes how the influence of the drag should be distributed
+    // among the handles; 0 = front handle only, 1 = back handle only.
 
-        if (VAbstractApplication::VApp()->Settings()->IsFreeCurveMode() && not moved)
+    const auto spline = VAbstractTool::data.GeometricObject<VSpline>(m_id);
+
+    if (VAbstractApplication::VApp()->Settings()->IsFreeCurveMode() && not moved)
+    {
+        oldMoveSpline = QSharedPointer<VSpline>::create(*spline);
+        moved = true;
+    }
+
+    const qreal t = spline->ParamT(oldPosition);
+
+    if (qFloor(t) == -1)
+    {
+        moved = false;
+        return;
+    }
+
+    double weight;
+    if (t <= 1.0 / 6.0)
+    {
+        weight = 0;
+    }
+    else if (t <= 0.5)
+    {
+        weight = (pow((6 * t - 1) / 2.0, 3)) / 2;
+    }
+    else if (t <= 5.0 / 6.0)
+    {
+        weight = (1 - pow((6 * (1 - t) - 1) / 2.0, 3)) / 2 + 0.5;
+    }
+    else
+    {
+        weight = 1;
+    }
+
+    const QPointF delta = event->scenePos() - oldPosition;
+    const QPointF offset0 = ((1 - weight) / (3 * t * (1 - t) * (1 - t))) * delta;
+    const QPointF offset1 = (weight / (3 * t * t * (1 - t))) * delta;
+
+    const QPointF p2 = static_cast<QPointF>(spline->GetP2()) + offset0;
+    const QPointF p3 = static_cast<QPointF>(spline->GetP3()) + offset1;
+
+    oldPosition = event->scenePos(); // Now mouse here
+
+    newMoveSpline = QSharedPointer<VSpline>::create(spline->GetP1(), p2, p3, spline->GetP4());
+
+    if (not VAbstractApplication::VApp()->Settings()->IsFreeCurveMode())
+    {
+        UndoCommandMove(*spline, *newMoveSpline);
+    }
+    else
+    {
+        VAbstractTool::data.UpdateGObject(m_id, newMoveSpline);
+        RefreshGeometry();
+
+        if (QGraphicsScene *sc = scene())
         {
-            oldMoveSpline = QSharedPointer<VSpline>::create(*spline);
-            moved = true;
+            VMainGraphicsView::NewSceneRect(sc, VAbstractValApplication::VApp()->getSceneView(), this);
         }
+    }
 
-        const qreal t = spline->ParamT(oldPosition);
+    // Each time we move something we call recalculation scene rect. In some cases this can cause moving
+    // objects positions. And this cause infinite redrawing. That's why we wait the finish of saving the last move.
+    static bool changeFinished = true;
+    if (changeFinished)
+    {
+        changeFinished = false;
 
-        if (qFloor(t) == -1)
+        const QList<QGraphicsView *> viewList = scene()->views();
+        if (not viewList.isEmpty())
         {
-            moved = false;
-            return;
-        }
-
-        double weight;
-        if (t <= 1.0 / 6.0)
-        {
-            weight = 0;
-        }
-        else if (t <= 0.5)
-        {
-            weight = (pow((6 * t - 1) / 2.0, 3)) / 2;
-        }
-        else if (t <= 5.0 / 6.0)
-        {
-            weight = (1 - pow((6 * (1-t) - 1) / 2.0, 3)) / 2 + 0.5;
-        }
-        else
-        {
-            weight = 1;
-        }
-
-        const QPointF delta = event->scenePos() - oldPosition;
-        const QPointF offset0 = ((1-weight)/(3*t*(1-t)*(1-t))) * delta;
-        const QPointF offset1 = (weight/(3*t*t*(1-t))) * delta;
-
-        const QPointF p2 = static_cast<QPointF>(spline->GetP2()) + offset0;
-        const QPointF p3 = static_cast<QPointF>(spline->GetP3()) + offset1;
-
-        oldPosition = event->scenePos(); // Now mouse here
-
-        newMoveSpline = QSharedPointer<VSpline>::create(spline->GetP1(), p2, p3, spline->GetP4());
-
-        if (not VAbstractApplication::VApp()->Settings()->IsFreeCurveMode())
-        {
-            UndoCommandMove(*spline, *newMoveSpline);
-        }
-        else
-        {
-            VAbstractTool::data.UpdateGObject(m_id, newMoveSpline);
-            RefreshGeometry();
-
-            if (QGraphicsScene *sc = scene())
+            if (auto *view = qobject_cast<VMainGraphicsView *>(viewList.at(0)))
             {
-                VMainGraphicsView::NewSceneRect(sc, VAbstractValApplication::VApp()->getSceneView(), this);
+                auto *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
+                SCASSERT(currentScene)
+                const QPointF cursorPosition = currentScene->getScenePos();
+                const qreal scale = SceneScale(scene());
+                view->EnsureVisibleWithDelay(
+                    QRectF(cursorPosition.x() - 5 / scale, cursorPosition.y() - 5 / scale, 10 / scale, 10 / scale),
+                    VMainGraphicsView::scrollDelay);
             }
         }
-
-        // Each time we move something we call recalculation scene rect. In some cases this can cause moving
-        // objects positions. And this cause infinite redrawing. That's why we wait the finish of saving the last move.
-        static bool changeFinished = true;
-        if (changeFinished)
-        {
-           changeFinished = false;
-
-           const QList<QGraphicsView *> viewList = scene()->views();
-           if (not viewList.isEmpty())
-           {
-               if (VMainGraphicsView *view = qobject_cast<VMainGraphicsView *>(viewList.at(0)))
-               {
-                   VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
-                   SCASSERT(currentScene)
-                   const QPointF cursorPosition = currentScene->getScenePos();
-                   const qreal scale = SceneScale(scene());
-                   view->EnsureVisibleWithDelay(QRectF(cursorPosition.x()-5/scale, cursorPosition.y()-5/scale, 10/scale,
-                                                       10/scale),
-                                                VMainGraphicsView::scrollDelay);
-               }
-           }
-           changeFinished = true;
-        }
+        changeFinished = true;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    if (m_acceptHoverEvents)
+    if (GetAcceptHoverEvents())
     {
         if (flags() & QGraphicsItem::ItemIsMovable)
         {
@@ -526,7 +554,7 @@ void VToolSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    if (m_acceptHoverEvents)
+    if (GetAcceptHoverEvents())
     {
         VAbstractSpline::hoverLeaveEvent(event);
     }
@@ -585,7 +613,7 @@ void VToolSpline::RefreshCtrlPoints()
         const bool freeLength1 = qmu::QmuTokenParser::IsSingle(spl->GetC1LengthFormula());
 
         const QPointF splinePoint =
-                static_cast<QPointF>(*VAbstractTool::data.GeometricObject<VPointF>(spl->GetP1().id()));
+            static_cast<QPointF>(*VAbstractTool::data.GeometricObject<VPointF>(spl->GetP1().id()));
         controlPoints[0]->RefreshCtrlPoint(1, SplinePointPosition::FirstPoint, static_cast<QPointF>(spl->GetP2()),
                                            static_cast<QPointF>(splinePoint), freeAngle1, freeLength1);
     }
@@ -595,7 +623,7 @@ void VToolSpline::RefreshCtrlPoints()
         const bool freeLength2 = qmu::QmuTokenParser::IsSingle(spl->GetC2LengthFormula());
 
         const QPointF splinePoint =
-                static_cast<QPointF>(*VAbstractTool::data.GeometricObject<VPointF>(spl->GetP4().id()));
+            static_cast<QPointF>(*VAbstractTool::data.GeometricObject<VPointF>(spl->GetP4().id()));
         controlPoints[1]->RefreshCtrlPoint(1, SplinePointPosition::LastPoint, static_cast<QPointF>(spl->GetP3()),
                                            static_cast<QPointF>(splinePoint), freeAngle2, freeLength2);
     }
@@ -631,10 +659,23 @@ void VToolSpline::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32
     {
         ContextMenu<DialogSpline>(event);
     }
-    catch(const VExceptionToolWasDeleted &e)
+    catch (const VExceptionToolWasDeleted &e)
     {
         Q_UNUSED(e)
-        return;//Leave this method immediately!!!
+        return; // Leave this method immediately!!!
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSpline::CurveSelected(bool selected)
+{
+    setSelected(selected);
+
+    for (auto *point : qAsConst(controlPoints))
+    {
+        point->blockSignals(true);
+        point->setSelected(selected);
+        point->blockSignals(false);
     }
 }
 
@@ -643,20 +684,20 @@ void VToolSpline::SetSplineAttributes(QDomElement &domElement, const VSpline &sp
 {
     SCASSERT(doc != nullptr)
 
-    doc->SetAttribute(domElement, AttrType,    ToolType);
-    doc->SetAttribute(domElement, AttrPoint1,  spl.GetP1().id());
-    doc->SetAttribute(domElement, AttrPoint4,  spl.GetP4().id());
-    doc->SetAttribute(domElement, AttrAngle1,  spl.GetStartAngleFormula());
-    doc->SetAttribute(domElement, AttrAngle2,  spl.GetEndAngleFormula());
+    doc->SetAttribute(domElement, AttrType, ToolType);
+    doc->SetAttribute(domElement, AttrPoint1, spl.GetP1().id());
+    doc->SetAttribute(domElement, AttrPoint4, spl.GetP4().id());
+    doc->SetAttribute(domElement, AttrAngle1, spl.GetStartAngleFormula());
+    doc->SetAttribute(domElement, AttrAngle2, spl.GetEndAngleFormula());
     doc->SetAttribute(domElement, AttrLength1, spl.GetC1LengthFormula());
     doc->SetAttribute(domElement, AttrLength2, spl.GetC2LengthFormula());
-    doc->SetAttribute(domElement, AttrColor,   spl.GetColor());
+    doc->SetAttribute(domElement, AttrColor, spl.GetColor());
     doc->SetAttribute(domElement, AttrPenStyle, spl.GetPenStyle());
     doc->SetAttribute(domElement, AttrAScale, spl.GetApproximationScale());
     doc->SetAttributeOrRemoveIf<quint32>(domElement, AttrDuplicate, spl.GetDuplicate(),
-                                         [](quint32 duplicate) noexcept {return duplicate == 0;});
+                                         [](quint32 duplicate) noexcept { return duplicate == 0; });
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrAlias, spl.GetAliasSuffix(),
-                                         [](const QString &suffix) noexcept {return suffix.isEmpty();});
+                                         [](const QString &suffix) noexcept { return suffix.isEmpty(); });
 
     if (domElement.hasAttribute(AttrKCurve))
     {
@@ -677,7 +718,7 @@ void VToolSpline::SetSplineAttributes(QDomElement &domElement, const VSpline &sp
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::UndoCommandMove(const VSpline &oldSpl, const VSpline &newSpl)
 {
-    MoveSpline *moveSpl = new MoveSpline(doc, oldSpl, newSpl, m_id);
+    auto *moveSpl = new MoveSpline(doc, oldSpl, newSpl, m_id);
     connect(moveSpl, &MoveSpline::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     VAbstractApplication::VApp()->getUndoStack()->push(moveSpl);
 }

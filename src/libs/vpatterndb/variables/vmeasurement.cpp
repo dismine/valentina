@@ -92,12 +92,12 @@ auto VMeasurement::operator=(const VMeasurement &m) -> VMeasurement &
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VMeasurement::VMeasurement(VMeasurement &&m) Q_DECL_NOTHROW
+VMeasurement::VMeasurement(VMeasurement &&m) noexcept
     :VVariable(std::move(m)), d(std::move(m.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VMeasurement::operator=(VMeasurement &&m) Q_DECL_NOTHROW->VMeasurement &
+auto VMeasurement::operator=(VMeasurement &&m) noexcept->VMeasurement &
 {
     VVariable::operator=(m);
     std::swap(d, m.d);

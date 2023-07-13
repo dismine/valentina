@@ -18,7 +18,6 @@
 #ifndef CHECKABLEMESSAGEBOX_H
 #define CHECKABLEMESSAGEBOX_H
 
-#include <qcompilerdetection.h>
 #include <QDialog>
 #include <QDialogButtonBox>
 #include <QFlags>
@@ -99,7 +98,7 @@ public:
 
     // See static QMessageBox::standardPixmap()
     auto iconPixmap() const -> QPixmap;
-    void setIconPixmap (const QPixmap &p);
+    void setIconPixmap(const QPixmap &p);
 
     // Query the result
     auto clickedButton() const -> QAbstractButton *;
@@ -119,13 +118,16 @@ private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(CheckableMessageBox) // NOLINT
     CheckableMessageBoxPrivate *d;
-    enum DoNotAskAgainType{Question, Information};
+    enum DoNotAskAgainType
+    {
+        Question,
+        Information
+    };
 
     static auto askAgain(QSettings *settings, const QString &settingsSubKey) -> bool;
-    static void initDoNotAskAgainMessageBox(CheckableMessageBox &messageBox, const QString &title,
-                                            const QString &text, QDialogButtonBox::StandardButtons buttons,
-                                            QDialogButtonBox::StandardButton defaultButton,
-                                            DoNotAskAgainType type);
+    static void initDoNotAskAgainMessageBox(CheckableMessageBox &messageBox, const QString &title, const QString &text,
+                                            QDialogButtonBox::StandardButtons buttons,
+                                            QDialogButtonBox::StandardButton defaultButton, DoNotAskAgainType type);
     static void doNotAskAgain(QSettings *settings, const QString &settingsSubKey);
 };
 

@@ -29,7 +29,6 @@
 #ifndef DIALOGLINEINTERSECT_H
 #define DIALOGLINEINTERSECT_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -40,7 +39,7 @@
 
 namespace Ui
 {
-    class DialogLineIntersect;
+class DialogLineIntersect;
 }
 
 /**
@@ -49,38 +48,41 @@ namespace Ui
 class DialogLineIntersect : public DialogTool
 {
     Q_OBJECT // NOLINT
+
 public:
     DialogLineIntersect(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogLineIntersect() override;
+    ~DialogLineIntersect() override;
 
     auto GetP1Line1() const -> quint32;
-    void                    SetP1Line1(quint32 value);
+    void SetP1Line1(quint32 value);
 
     auto GetP2Line1() const -> quint32;
-    void                    SetP2Line1(quint32 value);
+    void SetP2Line1(quint32 value);
 
     auto GetP1Line2() const -> quint32;
-    void                    SetP1Line2(quint32 value);
+    void SetP1Line2(quint32 value);
 
     auto GetP2Line2() const -> quint32;
-    void                    SetP2Line2(quint32 value);
+    void SetP2Line2(quint32 value);
 
     auto GetPointName() const -> QString;
-    void                    SetPointName(const QString &value);
+    void SetPointName(const QString &value);
 
-    void    SetNotes(const QString &notes);
+    void SetNotes(const QString &notes);
     auto GetNotes() const -> QString;
+
 public slots:
-    virtual void            ChosenObject(quint32 id, const SceneObject &type) override;
-    void                    PointChanged();
-    virtual void            PointNameChanged() override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void PointChanged();
+    void PointNameChanged() override;
+
 protected:
-    virtual void            ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void            SaveData() override;
-    virtual auto IsValid() const -> bool final;
+    void SaveData() override;
+    auto IsValid() const -> bool final;
 
 private:
     Q_DISABLE_COPY_MOVE(DialogLineIntersect) // NOLINT

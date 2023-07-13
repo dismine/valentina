@@ -29,13 +29,11 @@
 #ifndef VABSTRACTMAINWINDOW_H
 #define VABSTRACTMAINWINDOW_H
 
-#include <qcompilerdetection.h>
 #include <QMainWindow>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
 
-#include "../vmisc/defglobal.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
@@ -49,9 +47,10 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 class VAbstractMainWindow : public QMainWindow
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit VAbstractMainWindow(QWidget *parent = nullptr);
-    virtual ~VAbstractMainWindow() = default;
+    ~VAbstractMainWindow() override = default;
 
 public slots:
     virtual void ShowToolTip(const QString &toolTip);
@@ -66,7 +65,10 @@ protected slots:
 protected:
     unsigned m_curFileFormatVersion;
     QString m_curFileFormatVersionStr;
-    enum { MaxRecentFiles = 5 };
+    enum
+    {
+        MaxRecentFiles = 5
+    };
     QVector<QAction *> m_recentFileActs{QVector<QAction *>(MaxRecentFiles)};
     QAction *m_separatorAct{nullptr};
 

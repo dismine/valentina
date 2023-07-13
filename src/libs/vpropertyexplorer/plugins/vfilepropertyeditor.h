@@ -21,7 +21,7 @@
 #ifndef VFILEPROPERTYEDITOR_H
 #define VFILEPROPERTYEDITOR_H
 
-#include <qcompilerdetection.h>
+
 #include <QLineEdit>
 #include <QMetaObject>
 #include <QMimeData>

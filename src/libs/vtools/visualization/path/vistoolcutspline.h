@@ -29,7 +29,7 @@
 #ifndef VISTOOLCUTSPLINE_H
 #define VISTOOLCUTSPLINE_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>

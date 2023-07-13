@@ -29,7 +29,6 @@
 #ifndef VCONTROLPOINTSPLINE_H
 #define VCONTROLPOINTSPLINE_H
 
-#include <qcompilerdetection.h>
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
@@ -49,17 +48,20 @@
 class VControlPointSpline : public QObject, public VScenePoint
 {
     Q_OBJECT // NOLINT
+
 public:
-    VControlPointSpline(const vsizetype &indexSpline, SplinePointPosition position, QGraphicsItem * parent = nullptr);
+    VControlPointSpline(const vsizetype &indexSpline, SplinePointPosition position, QGraphicsItem *parent = nullptr);
     VControlPointSpline(const vsizetype &indexSpline, SplinePointPosition position, const QPointF &controlPoint,
-                        bool freeAngle, bool freeLength, QGraphicsItem * parent = nullptr);
-    virtual ~VControlPointSpline() =default;
+                        bool freeAngle, bool freeLength, QGraphicsItem *parent = nullptr);
+    virtual ~VControlPointSpline() = default;
 
     virtual auto type() const -> int override { return Type; }
-    enum { Type = UserType + static_cast<int>(Vis::ControlPointSpline)};
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::ControlPointSpline)
+    };
 
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                       QWidget *widget = nullptr) override;
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 signals:
     /**
      * @brief ControlPointChangePosition emit when control point change position.
@@ -67,32 +69,33 @@ signals:
      * @param position position point in spline.
      * @param pos new posotion.
      */
-    void              ControlPointChangePosition(const vsizetype &indexSpline, SplinePointPosition position,
-                                                 const QPointF &pos);
+    void ControlPointChangePosition(const vsizetype &indexSpline, SplinePointPosition position, const QPointF &pos);
     /**
      * @brief ShowContextMenu emit when need show tool's context menu.
      * @param event context menu event.
      */
-    void              ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
-    void              Released();
-    void              Selected(bool selected);
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
+    void Released();
+    void Selected(bool selected);
 public slots:
-    void              RefreshCtrlPoint(const vsizetype &indexSpline, SplinePointPosition pos, const QPointF &controlPoint,
-                                       const QPointF &splinePoint, bool freeAngle = true, bool freeLength = true);
-    void              setEnabledPoint(bool enable);
+    void RefreshCtrlPoint(const vsizetype &indexSpline, SplinePointPosition pos, const QPointF &controlPoint,
+                          const QPointF &splinePoint, bool freeAngle = true, bool freeLength = true);
+    void setEnabledPoint(bool enable);
+
 protected:
     /** @brief controlLine pointer to line control point. */
-    VScaledLine      *controlLine;
+    VScaledLine *controlLine;
 
-    virtual void      hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) override;
+    virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
     auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
-    virtual void      mousePressEvent( QGraphicsSceneMouseEvent * event ) override;
-    virtual void      mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
-    virtual void      contextMenuEvent ( QGraphicsSceneContextMenuEvent *event ) override;
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+    virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
+
 private:
     Q_DISABLE_COPY_MOVE(VControlPointSpline) // NOLINT
     /** @brief indexSpline index spline in list.. */
-    vsizetype           indexSpline;
+    vsizetype indexSpline;
 
     /** @brief position position point in spline. */
     SplinePointPosition position;
@@ -100,8 +103,8 @@ private:
     bool freeAngle;
     bool freeLength;
 
-    void  Init();
-    void  SetCtrlLine(const QPointF &controlPoint, const QPointF &splinePoint);
+    void Init();
+    void SetCtrlLine(const QPointF &controlPoint, const QPointF &splinePoint);
 };
 
 #endif // VCONTROLPOINTSPLINE_H

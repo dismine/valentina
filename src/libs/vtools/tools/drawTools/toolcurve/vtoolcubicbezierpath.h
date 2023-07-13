@@ -29,7 +29,6 @@
 #ifndef VTOOLCUBICBEZIERPATH_H
 #define VTOOLCUBICBEZIERPATH_H
 
-#include <qcompilerdetection.h>
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
@@ -48,51 +47,54 @@ QT_WARNING_DISABLE_GCC("-Weffc++")
 
 struct VToolCubicBezierPathInitData : VDrawToolInitData
 {
-    VToolCubicBezierPathInitData()
-        : VDrawToolInitData(),
-          path(nullptr)
-    {}
+    VToolCubicBezierPathInitData() = default;
 
-    VCubicBezierPath *path;
+    VCubicBezierPath *path{nullptr}; // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
 QT_WARNING_POP
 
-class VToolCubicBezierPath:public VAbstractSpline
+class VToolCubicBezierPath : public VAbstractSpline
 {
     Q_OBJECT // NOLINT
+
 public:
-    virtual ~VToolCubicBezierPath() = default;
-    virtual void SetDialog() override;
+    ~VToolCubicBezierPath() override = default;
+    void SetDialog() override;
     static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                        VContainer *data) -> VToolCubicBezierPath *;
     static auto Create(VToolCubicBezierPathInitData initData) -> VToolCubicBezierPath *;
 
     static const QString ToolType;
-    static void  UpdatePathPoints(VAbstractPattern *doc, QDomElement &element, const VCubicBezierPath &path);
-    virtual auto type() const -> int override { return Type; }
-    enum { Type = UserType + static_cast<int>(Tool::CubicBezierPath)};
+    static void UpdatePathPoints(VAbstractPattern *doc, QDomElement &element, const VCubicBezierPath &path);
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Tool::CubicBezierPath)
+    };
 
     auto getSplinePath() const -> VCubicBezierPath;
-    void             setSplinePath(const VCubicBezierPath &splPath);
+    void setSplinePath(const VCubicBezierPath &splPath);
 
-    virtual void ShowVisualization(bool show) override;
+    void ShowVisualization(bool show) override;
+
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
+
 protected:
-    virtual void  RemoveReferens() override;
-    virtual void  SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                             QList<quint32> &newDependencies) override;
-    virtual void  SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void  SetVisualization() override;
-    virtual void  RefreshGeometry() override;
+    void RemoveReferens() override;
+    void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void SetVisualization() override;
+    void RefreshGeometry() override;
+
 private:
     Q_DISABLE_COPY_MOVE(VToolCubicBezierPath) // NOLINT
 
-    VToolCubicBezierPath(const VToolCubicBezierPathInitData &initData, QGraphicsItem * parent = nullptr);
+    explicit VToolCubicBezierPath(const VToolCubicBezierPathInitData &initData, QGraphicsItem *parent = nullptr);
 
-    static void   AddPathPoint(VAbstractPattern *doc, QDomElement &domElement, const VPointF &splPoint);
-    void          SetSplinePathAttributes(QDomElement &domElement, const VCubicBezierPath &path);
+    static void AddPathPoint(VAbstractPattern *doc, QDomElement &domElement, const VPointF &splPoint);
+    void SetSplinePathAttributes(QDomElement &domElement, const VCubicBezierPath &path);
 };
 
 #endif // VTOOLCUBICBEZIERPATH_H

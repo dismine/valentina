@@ -40,32 +40,24 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VVariableData final : public QSharedData
 {
 public:
-
-    VVariableData()
-        : description()
-    {}
-
-    explicit VVariableData(const QString &description)
-        : description(description)
-    {}
-
-    VVariableData(const VVariableData &var)
-        : QSharedData(var),
-          description(var.description)
-    {}
-
-    virtual ~VVariableData();
+    VVariableData() = default;
+    explicit VVariableData(const QString &description);
+    VVariableData(const VVariableData &var) = default;
+    ~VVariableData() = default;
 
     /** @brief description description of increment */
-    QString description;
+    QString description{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VVariableData) // NOLINT
 };
 
-VVariableData::~VVariableData()
-{}
-
 QT_WARNING_POP
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VVariableData::VVariableData(const QString &description)
+  : description(description)
+{
+}
 
 #endif // VVARIABLE_P_H

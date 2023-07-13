@@ -29,15 +29,14 @@
 #ifndef VTOOLCUBICBEZIER_H
 #define VTOOLCUBICBEZIER_H
 
-#include <qcompilerdetection.h>
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
 #include <QtGlobal>
 
-#include "../vmisc/def.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
 #include "vabstractspline.h"
 
 class VCubicBezier;
@@ -48,12 +47,9 @@ QT_WARNING_DISABLE_GCC("-Weffc++")
 
 struct VToolCubicBezierInitData : VDrawToolInitData
 {
-    VToolCubicBezierInitData()
-        : VDrawToolInitData(),
-          spline(nullptr)
-    {}
+    VToolCubicBezierInitData() = default;
 
-    VCubicBezier *spline;
+    VCubicBezier *spline{nullptr}; // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
 QT_WARNING_POP
@@ -61,15 +57,19 @@ QT_WARNING_POP
 class VToolCubicBezier : public VAbstractSpline
 {
     Q_OBJECT // NOLINT
+
 public:
-    virtual ~VToolCubicBezier() = default;
-    virtual void SetDialog() override;
+    ~VToolCubicBezier() override = default;
+    void SetDialog() override;
     static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                        VContainer *data) -> VToolCubicBezier *;
     static auto Create(VToolCubicBezierInitData initData) -> VToolCubicBezier *;
     static const QString ToolType;
-    virtual auto type() const -> int override { return Type; }
-    enum { Type = UserType + static_cast<int>(Tool::CubicBezier)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Tool::CubicBezier)
+    };
 
     auto FirstPointName() const -> QString;
     auto SecondPointName() const -> QString;
@@ -77,22 +77,24 @@ public:
     auto ForthPointName() const -> QString;
 
     auto getSpline() const -> VCubicBezier;
-    void         setSpline(const VCubicBezier &spl);
+    void setSpline(const VCubicBezier &spl);
 
-    virtual void ShowVisualization(bool show) override;
+    void ShowVisualization(bool show) override;
+
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
+
 protected:
-    virtual void RemoveReferens() override;
-    virtual void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                            QList<quint32> &newDependencies) override;
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void SetVisualization() override;
-    virtual void RefreshGeometry() override;
+    void RemoveReferens() override;
+    void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void SetVisualization() override;
+    void RefreshGeometry() override;
+
 private:
     Q_DISABLE_COPY_MOVE(VToolCubicBezier) // NOLINT
 
-    VToolCubicBezier(const VToolCubicBezierInitData &initData, QGraphicsItem *parent = nullptr);
+    explicit VToolCubicBezier(const VToolCubicBezierInitData &initData, QGraphicsItem *parent = nullptr);
 
     void SetSplineAttributes(QDomElement &domElement, const VCubicBezier &spl);
 };

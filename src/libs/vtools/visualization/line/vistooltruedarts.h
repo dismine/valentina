@@ -29,7 +29,7 @@
 #ifndef VISTOOLTRUEDARTS_H
 #define VISTOOLTRUEDARTS_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>

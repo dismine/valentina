@@ -33,7 +33,7 @@
 #include <QLoggingCategory>
 #include <QObject>
 #include <QtGlobal>
-#include <qcompilerdetection.h>
+
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <QtCore/QHashFunctions>

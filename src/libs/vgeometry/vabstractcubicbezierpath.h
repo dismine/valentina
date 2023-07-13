@@ -29,7 +29,6 @@
 #ifndef VABSTRACTCUBICBEZIERPATH_H
 #define VABSTRACTCUBICBEZIERPATH_H
 
-#include <qcompilerdetection.h>
 #include <QCoreApplication>
 #include <QPointF>
 #include <QString>
@@ -50,18 +49,24 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 class VAbstractCubicBezierPath : public VAbstractBezier
 {
     Q_DECLARE_TR_FUNCTIONS(VAbstractCubicBezierPath) // NOLINT
+
 public:
     explicit VAbstractCubicBezierPath(const GOType &type, const quint32 &idObject = NULL_ID,
                                       const Draw &mode = Draw::Calculation);
     VAbstractCubicBezierPath(const VAbstractCubicBezierPath &curve) = default;
-    auto operator= (const VAbstractCubicBezierPath &curve) -> VAbstractCubicBezierPath&;
+    auto operator=(const VAbstractCubicBezierPath &curve) -> VAbstractCubicBezierPath &;
     ~VAbstractCubicBezierPath() override;
 
-    virtual auto CountSubSpl() const -> vsizetype =0;
-    virtual auto CountPoints() const -> vsizetype =0;
-    virtual void Clear() =0;
-    virtual auto GetSpline(vsizetype index) const -> VSpline =0;
-    virtual auto GetSplinePath() const -> QVector<VSplinePoint> =0;
+#ifdef Q_COMPILER_RVALUE_REFS
+    VAbstractCubicBezierPath(VAbstractCubicBezierPath &&curve) noexcept = default;
+    auto operator=(VAbstractCubicBezierPath &&curve) noexcept -> VAbstractCubicBezierPath & = default;
+#endif
+
+    virtual auto CountSubSpl() const -> vsizetype = 0;
+    virtual auto CountPoints() const -> vsizetype = 0;
+    virtual void Clear() = 0;
+    virtual auto GetSpline(vsizetype index) const -> VSpline = 0;
+    virtual auto GetSplinePath() const -> QVector<VSplinePoint> = 0;
 
     auto GetPath() const -> QPainterPath override;
     auto GetPoints() const -> QVector<QPointF> override;
@@ -80,8 +85,8 @@ protected:
     void CreateName() override;
     void CreateAlias() override;
 
-    virtual auto FirstPoint() const -> VPointF =0;
-    virtual auto LastPoint() const -> VPointF =0;
+    virtual auto FirstPoint() const -> VPointF = 0;
+    virtual auto LastPoint() const -> VPointF = 0;
 };
 
 QT_WARNING_POP

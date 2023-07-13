@@ -21,7 +21,7 @@
 #ifndef VSTRINGPROPERTY_H
 #define VSTRINGPROPERTY_H
 
-#include <qcompilerdetection.h>
+
 #include <QMap>
 #include <QMetaObject>
 #include <QObject>

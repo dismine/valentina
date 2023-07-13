@@ -29,7 +29,7 @@
 #ifndef VISTOOLTRIANGLE_H
 #define VISTOOLTRIANGLE_H
 
-#include <qcompilerdetection.h>
+
 #include <QColor>
 #include <QGraphicsItem>
 #include <QLineF>

@@ -202,7 +202,7 @@ void TST_Misc::TestCLocale()
     QFETCH(qreal, number);
     QFETCH(QString, expected);
 
-    const QString localized = QString().number(number);
+    const QString localized = QString::number(number);
 
     QCOMPARE(localized, expected);
 }

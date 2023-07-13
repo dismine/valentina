@@ -29,7 +29,6 @@
 #ifndef DIALOGTRUEDARTS_H
 #define DIALOGTRUEDARTS_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -40,7 +39,7 @@
 
 namespace Ui
 {
-    class DialogTrueDarts;
+class DialogTrueDarts;
 }
 
 class DialogTrueDarts : public DialogTool
@@ -49,43 +48,45 @@ class DialogTrueDarts : public DialogTool
 
 public:
     DialogTrueDarts(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    ~DialogTrueDarts();
+    ~DialogTrueDarts() override;
 
     auto GetFirstNewDartPointName() -> QString;
     auto GetSecondNewDartPointName() -> QString;
-    void               SetNewDartPointNames(const QString &firstPoint, const QString &secondPoint);
+    void SetNewDartPointNames(const QString &firstPoint, const QString &secondPoint);
 
     auto GetFirstBasePointId() const -> quint32;
-    void               SetFirstBasePointId(const quint32 &value);
+    void SetFirstBasePointId(const quint32 &value);
 
     auto GetSecondBasePointId() const -> quint32;
-    void               SetSecondBasePointId(const quint32 &value);
+    void SetSecondBasePointId(const quint32 &value);
 
     auto GetFirstDartPointId() const -> quint32;
-    void               SetFirstDartPointId(const quint32 &value);
+    void SetFirstDartPointId(const quint32 &value);
 
     auto GetSecondDartPointId() const -> quint32;
-    void               SetSecondDartPointId(const quint32 &value);
+    void SetSecondDartPointId(const quint32 &value);
 
     auto GetThirdDartPointId() const -> quint32;
-    void               SetThirdDartPointId(const quint32 &value);
+    void SetThirdDartPointId(const quint32 &value);
 
-    void               SetChildrenId(const quint32 &ch1, const quint32 &ch2);
+    void SetChildrenId(const quint32 &ch1, const quint32 &ch2);
 
-    void    SetNotes(const QString &notes);
+    void SetNotes(const QString &notes);
     auto GetNotes() const -> QString;
+
 public slots:
-    virtual void       ChosenObject(quint32 id, const SceneObject &type) override;
-    virtual void       PointNameChanged() override;
-    void               NameDartPoint1Changed();
-    void               NameDartPoint2Changed();
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void PointNameChanged() override;
+    void NameDartPoint1Changed();
+    void NameDartPoint2Changed();
+
 protected:
-    virtual void       ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void       SaveData() override;
-    virtual auto IsValid() const -> bool final;
+    void SaveData() override;
+    auto IsValid() const -> bool final;
 
 private:
     Q_DISABLE_COPY_MOVE(DialogTrueDarts) // NOLINT
@@ -109,7 +110,7 @@ private:
 
     void FillComboBoxs(const quint32 &ch1, const quint32 &ch2);
 
-    void CheckName(QLineEdit* edit, QLabel *labelEditNamePoint, const QString &pointD1Name, const QString &pointD2Name,
+    void CheckName(QLineEdit *edit, QLabel *labelEditNamePoint, const QString &pointD1Name, const QString &pointD2Name,
                    QLineEdit *secondPointName, bool &flagName);
 };
 

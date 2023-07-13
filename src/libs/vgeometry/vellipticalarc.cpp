@@ -315,13 +315,13 @@ auto VEllipticalArc::operator =(const VEllipticalArc &arc) -> VEllipticalArc &
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VEllipticalArc::VEllipticalArc(VEllipticalArc &&arc) Q_DECL_NOTHROW
+VEllipticalArc::VEllipticalArc(VEllipticalArc &&arc) noexcept
     : VAbstractArc(std::move(arc)),
       d(std::move(arc.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VEllipticalArc::operator=(VEllipticalArc &&arc) Q_DECL_NOTHROW -> VEllipticalArc &
+auto VEllipticalArc::operator=(VEllipticalArc &&arc) noexcept -> VEllipticalArc &
 {
     VAbstractArc::operator=(arc);
     std::swap(d, arc.d);

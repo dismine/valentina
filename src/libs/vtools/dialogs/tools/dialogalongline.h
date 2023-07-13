@@ -29,7 +29,6 @@
 #ifndef DIALOGALONGLINE_H
 #define DIALOGALONGLINE_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -40,7 +39,7 @@
 
 namespace Ui
 {
-    class DialogAlongLine;
+class DialogAlongLine;
 }
 
 /**
@@ -49,6 +48,7 @@ namespace Ui
 class DialogAlongLine final : public DialogTool
 {
     Q_OBJECT // NOLINT
+
 public:
     DialogAlongLine(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     ~DialogAlongLine() override;
@@ -76,6 +76,7 @@ public:
 
     void Build(const Tool &type) override;
     void ShowDialog(bool click) override;
+
 public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
     /**
@@ -86,6 +87,7 @@ public slots:
 
     void FXLength();
     void EvalFormula();
+
 protected:
     void ShowVisualization() override;
     /**
@@ -94,6 +96,7 @@ protected:
     void SaveData() override;
     void closeEvent(QCloseEvent *event) override;
     auto IsValid() const -> bool final;
+
 private:
     Q_DISABLE_COPY_MOVE(DialogAlongLine) // NOLINT
 
@@ -131,7 +134,7 @@ private:
 //---------------------------------------------------------------------------------------------------------------------
 inline auto DialogAlongLine::IsValid() const -> bool
 {
-    return m_flagName &&m_flagFormula && m_flagError;
+    return m_flagName && m_flagFormula && m_flagError;
 }
 
 #endif // DIALOGALONGLINE_H

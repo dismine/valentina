@@ -52,8 +52,8 @@ public:
 
     auto operator=(const VPieceGrainline &grainline) -> VPieceGrainline &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VPieceGrainline(VPieceGrainline &&grainline) Q_DECL_NOTHROW;
-    auto operator=(VPieceGrainline &&grainline) Q_DECL_NOTHROW -> VPieceGrainline &;
+    VPieceGrainline(VPieceGrainline &&grainline) noexcept;
+    auto operator=(VPieceGrainline &&grainline) noexcept -> VPieceGrainline &;
 #endif
 
     auto GetMainLine() const -> QLineF;

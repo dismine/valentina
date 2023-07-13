@@ -29,7 +29,6 @@
 #ifndef ADDPATTERNPIECE_H
 #define ADDPATTERNPIECE_H
 
-#include <qcompilerdetection.h>
 #include <QDomElement>
 #include <QMetaObject>
 #include <QObject>
@@ -41,16 +40,18 @@
 class AddPatternPiece : public VUndoCommand
 {
     Q_OBJECT // NOLINT
+
 public:
     AddPatternPiece(const QDomElement &xml, VAbstractPattern *doc, const QString &namePP,
                     QUndoCommand *parent = nullptr);
-    virtual ~AddPatternPiece() override;
-    virtual void undo() override;
-    virtual void redo() override;
+    ~AddPatternPiece() override = default;
+    void undo() override;
+    void redo() override;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(AddPatternPiece) // NOLINT
-    QString    namePP;
+    QString namePP;
 };
 
 #endif // ADDPATTERNPIECE_H

@@ -21,7 +21,7 @@
 #ifndef VPROPERTYFACTORYMANAGER_H
 #define VPROPERTYFACTORYMANAGER_H
 
-#include <qcompilerdetection.h>
+
 #include <QMetaObject>
 #include <QObject>
 #include <QString>

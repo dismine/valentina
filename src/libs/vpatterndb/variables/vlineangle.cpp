@@ -80,12 +80,12 @@ auto VLineAngle::operator=(const VLineAngle &var) -> VLineAngle &
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VLineAngle::VLineAngle(VLineAngle &&var) Q_DECL_NOTHROW
+VLineAngle::VLineAngle(VLineAngle &&var) noexcept
     :VInternalVariable(std::move(var)), d(std::move(var.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLineAngle::operator=(VLineAngle &&var) Q_DECL_NOTHROW->VLineAngle &
+auto VLineAngle::operator=(VLineAngle &&var) noexcept->VLineAngle &
 {
     VInternalVariable::operator=(var);
     std::swap(d, var.d);

@@ -21,7 +21,6 @@
 #ifndef VEMPTYPROPERTY_H
 #define VEMPTYPROPERTY_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -36,7 +35,7 @@
 namespace VPE
 {
 class VPropertyPrivate;
-}  // namespace VPE
+} // namespace VPE
 
 namespace VPE
 {
@@ -47,9 +46,10 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 class VPROPERTYEXPLORERSHARED_EXPORT VEmptyProperty : public VProperty
 {
     Q_OBJECT // NOLINT
+
 public:
     //! Standard constructor, takes a name and a parent property as argument
-    explicit VEmptyProperty(const QString& name);
+    explicit VEmptyProperty(const QString &name);
 
     //! Destructor
     virtual ~VEmptyProperty() override;
@@ -84,7 +84,7 @@ public:
 
 protected:
     //! Protected constructor
-    explicit VEmptyProperty(VPropertyPrivate* d);
+    explicit VEmptyProperty(VPropertyPrivate *d);
 
 private:
     Q_DISABLE_COPY_MOVE(VEmptyProperty) // NOLINT
@@ -92,6 +92,6 @@ private:
 
 QT_WARNING_POP
 
-}
+} // namespace VPE
 
 #endif // VEMPTYPROPERTY_H

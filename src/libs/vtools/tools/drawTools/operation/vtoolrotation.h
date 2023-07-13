@@ -29,7 +29,7 @@
 #ifndef VTOOLROTATION_H
 #define VTOOLROTATION_H
 
-#include <qcompilerdetection.h>
+
 #include <QMap>
 #include <QMetaObject>
 #include <QObject>

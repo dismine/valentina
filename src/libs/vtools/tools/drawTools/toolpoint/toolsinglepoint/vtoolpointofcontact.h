@@ -29,7 +29,7 @@
 #ifndef VTOOLPOINTOFCONTACT_H
 #define VTOOLPOINTOFCONTACT_H
 
-#include <qcompilerdetection.h>
+
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QMetaObject>

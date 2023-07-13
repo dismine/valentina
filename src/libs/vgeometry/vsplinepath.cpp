@@ -33,7 +33,6 @@
 #include <QPoint>
 
 #include "../ifc/exception/vexception.h"
-#include "../vmisc/vmath.h"
 #include "../vmisc/compatibility.h"
 #include "vabstractcurve.h"
 #include "vsplinepath_p.h"
@@ -317,13 +316,13 @@ auto VSplinePath::operator=(const VSplinePath &path) -> VSplinePath &
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VSplinePath::VSplinePath(VSplinePath &&splPath) Q_DECL_NOTHROW
+VSplinePath::VSplinePath(VSplinePath &&splPath) noexcept
     : VAbstractCubicBezierPath(std::move(splPath)),
       d(std::move(splPath.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VSplinePath::operator=(VSplinePath &&path) Q_DECL_NOTHROW->VSplinePath &
+auto VSplinePath::operator=(VSplinePath &&path) noexcept->VSplinePath &
 {
     VAbstractCubicBezierPath::operator=(path);
     std::swap(d, path.d);

@@ -29,7 +29,6 @@
 #ifndef DELETEPATTERNPIECE_H
 #define DELETEPATTERNPIECE_H
 
-#include <qcompilerdetection.h>
 #include <QDomElement>
 #include <QMetaObject>
 #include <QObject>
@@ -41,17 +40,20 @@
 class DeletePatternPiece : public VUndoCommand
 {
     Q_OBJECT // NOLINT
+
 public:
     DeletePatternPiece(VAbstractPattern *doc, const QString &namePP, QUndoCommand *parent = nullptr);
-    virtual ~DeletePatternPiece() override;
-    virtual void undo() override;
-    virtual void redo() override;
+    ~DeletePatternPiece() override = default;
+
+    void undo() override;
+    void redo() override;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DeletePatternPiece) // NOLINT
-    QString     namePP;
-    QDomElement patternPiece;
-    QString     previousPPName;
+    QString namePP;
+    QDomElement patternPiece{};
+    QString previousPPName{};
 };
 
 #endif // DELETEPATTERNPIECE_H

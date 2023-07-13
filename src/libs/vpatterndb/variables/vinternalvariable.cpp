@@ -31,18 +31,17 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VInternalVariable::VInternalVariable()
-    :d(new VInternalVariableData)
-{}
+  : d(new VInternalVariableData)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VInternalVariable::VInternalVariable(const VInternalVariable &var)
-    :d(var.d)
-{}
+VInternalVariable::VInternalVariable(const VInternalVariable &var) = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VInternalVariable::operator=(const VInternalVariable &var) -> VInternalVariable &
 {
-    if ( &var == this )
+    if (&var == this)
     {
         return *this;
     }
@@ -51,13 +50,14 @@ auto VInternalVariable::operator=(const VInternalVariable &var) -> VInternalVari
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VInternalVariable::VInternalVariable(VInternalVariable &&var) Q_DECL_NOTHROW
-    :d(std::move(var.d))
-{}
+VInternalVariable::VInternalVariable(VInternalVariable &&var) noexcept
+  : d(std::move(var.d))
+{
+}
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-auto VInternalVariable::operator=(VInternalVariable &&var) Q_DECL_NOTHROW->VInternalVariable &
+auto VInternalVariable::operator=(VInternalVariable &&var) noexcept -> VInternalVariable &
 {
     std::swap(d, var.d);
     return *this;
@@ -65,8 +65,7 @@ auto VInternalVariable::operator=(VInternalVariable &&var) Q_DECL_NOTHROW->VInte
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VInternalVariable::~VInternalVariable()
-{}
+VInternalVariable::~VInternalVariable() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VInternalVariable::Filter(quint32 id) -> bool
@@ -116,7 +115,6 @@ auto VInternalVariable::GetType() const -> VarType
 {
     return d->type;
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void VInternalVariable::SetType(const VarType &type)

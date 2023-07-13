@@ -29,7 +29,7 @@
 #ifndef VISTOOLPOINTOFINTERSECTION_H
 #define VISTOOLPOINTOFINTERSECTION_H
 
-#include <qcompilerdetection.h>
+
 #include <QColor>
 #include <QGraphicsItem>
 #include <QLineF>

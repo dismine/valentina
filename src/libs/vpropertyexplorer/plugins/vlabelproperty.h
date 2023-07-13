@@ -29,7 +29,7 @@
 #ifndef VLABELPROPERTY_H
 #define VLABELPROPERTY_H
 
-#include <qcompilerdetection.h>
+
 #include <QMap>
 #include <QMetaObject>
 #include <QObject>

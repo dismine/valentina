@@ -29,7 +29,6 @@
 #ifndef VABSTRACTARC_H
 #define VABSTRACTARC_H
 
-#include <qcompilerdetection.h>
 #include <QSharedDataPointer>
 #include <QString>
 #include <QtGlobal>
@@ -58,35 +57,37 @@ public:
     VAbstractArc(const VAbstractArc &arc);
     ~VAbstractArc() override;
 
-    auto operator= (const VAbstractArc &arc) -> VAbstractArc&;
+    auto operator=(const VAbstractArc &arc) -> VAbstractArc &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VAbstractArc(VAbstractArc &&arc) Q_DECL_NOTHROW;
-    auto operator=(VAbstractArc &&arc) Q_DECL_NOTHROW -> VAbstractArc &;
+    VAbstractArc(VAbstractArc &&arc) noexcept;
+    auto operator=(VAbstractArc &&arc) noexcept -> VAbstractArc &;
 #endif
 
-    auto GetFormulaF1 () const -> QString;
-    void SetFormulaF1 (const QString &formula, qreal value);
-    auto GetStartAngle () const -> qreal override;
+    auto GetFormulaF1() const -> QString;
+    void SetFormulaF1(const QString &formula, qreal value);
+    auto GetStartAngle() const -> qreal override;
 
-    auto GetFormulaF2 () const -> QString;
-    void SetFormulaF2 (const QString &formula, qreal value);
-    auto GetEndAngle () const -> qreal override;
+    auto GetFormulaF2() const -> QString;
+    void SetFormulaF2(const QString &formula, qreal value);
+    auto GetEndAngle() const -> qreal override;
 
-    auto GetCenter () const -> VPointF;
-    void SetCenter (const VPointF &point);
+    auto GetCenter() const -> VPointF;
+    void SetCenter(const VPointF &point);
 
-    auto GetFormulaLength () const -> QString;
-    void SetFormulaLength (const QString &formula, qreal value);
+    auto GetFormulaLength() const -> QString;
+    void SetFormulaLength(const QString &formula, qreal value);
 
     void setId(const quint32 &id) override;
     auto NameForHistory(const QString &toolName) const -> QString override;
 
     auto IsFlipped() const -> bool;
     auto AngleArc() const -> qreal;
+
 protected:
     void SetFlipped(bool value);
-    virtual void FindF2(qreal length)=0;
+    virtual void FindF2(qreal length) = 0;
     void SetFormulaLength(const QString &formula);
+
 private:
     QSharedDataPointer<VAbstractArcData> d;
 };

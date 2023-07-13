@@ -28,14 +28,14 @@
 
 #include "vundocommand.h"
 
-#include <QDomNode>
 #include <QApplication>
+#include <QDomNode>
 
 #include "../ifc/ifcdef.h"
-#include "../vmisc/def.h"
-#include "../vmisc/customevents.h"
-#include "../vpatterndb/vpiecenode.h"
 #include "../tools/drawTools/operation/vabstractoperation.h"
+#include "../vmisc/customevents.h"
+#include "../vmisc/def.h"
+#include "../vpatterndb/vpiecenode.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
@@ -47,7 +47,12 @@ QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 VUndoCommand::VUndoCommand(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)
-    :QObject(), QUndoCommand(parent), xml(xml), doc(doc), nodeId(NULL_ID), redoFlag(false)
+  : QObject(),
+    QUndoCommand(parent),
+    xml(xml),
+    doc(doc),
+    nodeId(NULL_ID),
+    redoFlag(false)
 {
     SCASSERT(doc != nullptr)
 }
@@ -117,6 +122,7 @@ void VUndoCommand::DecrementReferences(const QVector<quint32> &nodes) const
 void VUndoCommand::IncrementReferences(const QVector<CustomSARecord> &nodes) const
 {
     QVector<quint32> n;
+    n.reserve(nodes.size());
 
     for (qint32 i = 0; i < nodes.size(); ++i)
     {
@@ -130,6 +136,7 @@ void VUndoCommand::IncrementReferences(const QVector<CustomSARecord> &nodes) con
 void VUndoCommand::DecrementReferences(const QVector<CustomSARecord> &nodes) const
 {
     QVector<quint32> n;
+    n.reserve(nodes.size());
 
     for (qint32 i = 0; i < nodes.size(); ++i)
     {
@@ -143,6 +150,7 @@ void VUndoCommand::DecrementReferences(const QVector<CustomSARecord> &nodes) con
 void VUndoCommand::IncrementReferences(const QVector<VPieceNode> &nodes) const
 {
     QVector<quint32> n;
+    n.reserve(nodes.size());
 
     for (qint32 i = 0; i < nodes.size(); ++i)
     {
@@ -156,6 +164,7 @@ void VUndoCommand::IncrementReferences(const QVector<VPieceNode> &nodes) const
 void VUndoCommand::DecrementReferences(const QVector<VPieceNode> &nodes) const
 {
     QVector<quint32> n;
+    n.reserve(nodes.size());
 
     for (qint32 i = 0; i < nodes.size(); ++i)
     {
@@ -201,5 +210,5 @@ auto VUndoCommand::GetDestinationObject(quint32 idTool, quint32 idPoint) const -
         }
     }
 
-    return QDomElement();
+    return {};
 }

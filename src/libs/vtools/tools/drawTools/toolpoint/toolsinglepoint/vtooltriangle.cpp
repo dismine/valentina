@@ -31,28 +31,27 @@
 #include <QLine>
 #include <QLineF>
 #include <QSharedPointer>
-#include <new>
 #include <QtMath>
 
-#include "../../../../dialogs/tools/dialogtriangle.h"
 #include "../../../../dialogs/tools/dialogtool.h"
-#include "../../../../visualization/visualization.h"
+#include "../../../../dialogs/tools/dialogtriangle.h"
 #include "../../../../visualization/line/vistooltriangle.h"
+#include "../../../../visualization/visualization.h"
+#include "../../../vabstracttool.h"
+#include "../../vdrawtool.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/compatibility.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "../../../vabstracttool.h"
-#include "../../vdrawtool.h"
 #include "vtoolsinglepoint.h"
-#include "../vmisc/compatibility.h"
 
 template <class T> class QSharedPointer;
 
-const QString VToolTriangle::ToolType = QStringLiteral("triangle");
+const QString VToolTriangle::ToolType = QStringLiteral("triangle"); // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -61,11 +60,11 @@ const QString VToolTriangle::ToolType = QStringLiteral("triangle");
  * @param parent parent object.
  */
 VToolTriangle::VToolTriangle(const VToolTriangleInitData &initData, QGraphicsItem *parent)
-    :VToolSinglePoint(initData.doc, initData.data, initData.id, initData.notes, parent),
-      axisP1Id(initData.axisP1Id),
-      axisP2Id(initData.axisP2Id),
-      firstPointId(initData.firstPointId),
-      secondPointId(initData.secondPointId)
+  : VToolSinglePoint(initData.doc, initData.data, initData.id, initData.notes, parent),
+    axisP1Id(initData.axisP1Id),
+    axisP2Id(initData.axisP2Id),
+    firstPointId(initData.firstPointId),
+    secondPointId(initData.secondPointId)
 {
     ToolCreation(initData.typeCreation);
 }
@@ -117,7 +116,7 @@ auto VToolTriangle::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScen
     initData.typeCreation = Source::FromGui;
     initData.notes = dialogTool->GetNotes();
 
-    VToolTriangle* point = Create(initData);
+    VToolTriangle *point = Create(initData);
     if (point != nullptr)
     {
         point->m_dialog = dialog;
@@ -144,13 +143,14 @@ auto VToolTriangle::Create(VToolTriangleInitData initData) -> VToolTriangle *
 
     if (not success)
     {
-        const QString errorMsg = tr("Error calculating point '%1'. Point of intersection cannot be found")
-                      .arg(initData.name);
-        VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        const QString errorMsg =
+            tr("Error calculating point '%1'. Point of intersection cannot be found").arg(initData.name);
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VExceptionObjectError(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
-    VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);
+    auto *p = new VPointF(point, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
 
     if (initData.typeCreation == Source::FromGui)
@@ -169,7 +169,7 @@ auto VToolTriangle::Create(VToolTriangleInitData initData) -> VToolTriangle *
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::Triangle, initData.doc);
-        VToolTriangle *point = new VToolTriangle(initData);
+        auto *point = new VToolTriangle(initData);
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
@@ -207,8 +207,8 @@ auto VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, cons
     {
         return false;
     }
-    if (VFuzzyComparePossibleNulls(axis.angle(), hypotenuse.angle())
-        || VFuzzyComparePossibleNulls(qAbs(axis.angle() - hypotenuse.angle()), 180))
+    if (VFuzzyComparePossibleNulls(axis.angle(), hypotenuse.angle()) ||
+        VFuzzyComparePossibleNulls(qAbs(axis.angle() - hypotenuse.angle()), 180))
     {
         return false;
     }
@@ -221,12 +221,12 @@ auto VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, cons
     line.setLength(step);
 
     qint64 c = qFloor(hypotenuse.length());
-    while (1)
+    while (true)
     {
-        line.setLength(line.length()+step);
+        line.setLength(line.length() + step);
         qint64 a = qFloor(QLineF(line.p2(), firstPoint).length());
         qint64 b = qFloor(QLineF(line.p2(), secondPoint).length());
-        if (c*c <= (a*a + b*b))
+        if (c * c <= (a * a + b * b))
         {
             *intersectionPoint = line.p2();
             return true;
@@ -304,7 +304,7 @@ void VToolTriangle::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepen
 
     const QString notes = dialogTool->GetNotes();
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, notes,
-                                         [](const QString &notes) noexcept {return notes.isEmpty();});
+                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -324,10 +324,10 @@ void VToolTriangle::ReadToolAttributes(const QDomElement &domElement)
 {
     VToolSinglePoint::ReadToolAttributes(domElement);
 
-    axisP1Id = doc->GetParametrUInt(domElement, AttrAxisP1, NULL_ID_STR);
-    axisP2Id = doc->GetParametrUInt(domElement, AttrAxisP2, NULL_ID_STR);
-    firstPointId = doc->GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
-    secondPointId = doc->GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
+    axisP1Id = VAbstractPattern::GetParametrUInt(domElement, AttrAxisP1, NULL_ID_STR);
+    axisP2Id = VAbstractPattern::GetParametrUInt(domElement, AttrAxisP2, NULL_ID_STR);
+    firstPointId = VAbstractPattern::GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
+    secondPointId = VAbstractPattern::GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -335,7 +335,7 @@ void VToolTriangle::SetVisualization()
 {
     if (not vis.isNull())
     {
-        auto * visual = qobject_cast<VisToolTriangle *>(vis);
+        auto *visual = qobject_cast<VisToolTriangle *>(vis);
         SCASSERT(visual != nullptr)
 
         visual->SetObject1Id(axisP1Id);
@@ -354,10 +354,10 @@ void VToolTriangle::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint
     {
         ContextMenu<DialogTriangle>(event, id);
     }
-    catch(const VExceptionToolWasDeleted &e)
+    catch (const VExceptionToolWasDeleted &e)
     {
         Q_UNUSED(e)
-        return;//Leave this method immediately!!!
+        return; // Leave this method immediately!!!
     }
 }
 

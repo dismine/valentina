@@ -29,7 +29,7 @@
 #ifndef VLINETYPEPROPERTY_H
 #define VLINETYPEPROPERTY_H
 
-#include <qcompilerdetection.h>
+
 #include <QIcon>
 #include <QMap>
 #include <QMetaObject>

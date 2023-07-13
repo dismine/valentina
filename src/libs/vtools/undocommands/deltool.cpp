@@ -30,7 +30,6 @@
 
 #include <QDomElement>
 
-#include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "vundocommand.h"
@@ -49,12 +48,12 @@ auto FixGroups(QMap<quint32, VGroupData> groups, const QMap<quint32, VGroupData>
 
     return groups;
 }
-}  // namespace
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 DelTool::DelTool(VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      nameActivDraw(doc->GetNameActivPP())
+  : VUndoCommand(QDomElement(), doc, parent),
+    nameActivDraw(doc->GetNameActivPP())
 {
     setText(tr("delete tool"));
     nodeId = id;
@@ -62,19 +61,22 @@ DelTool::DelTool(VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
     parentNode = doc->ParentNodeById(nodeId);
     xml = doc->CloneNodeById(nodeId);
 
+    QVector<QPair<vidtype, vidtype>> cleanItems;
     QMap<quint32, VGroupData> groups = doc->GetGroups(nameActivDraw);
     auto i = groups.constBegin();
     while (i != groups.constEnd())
     {
         VGroupData groupData = i.value();
         auto itemRecord = std::find_if(groupData.items.begin(), groupData.items.end(),
-                                  [id](const QPair<vidtype, vidtype> &item) { return item.second == id; });
+                                       [id](const QPair<vidtype, vidtype> &item) { return item.second == id; });
 
         if (itemRecord != groupData.items.end())
         {
             m_groupsBefore.insert(i.key(), groupData);
 
-            QVector<QPair<vidtype, vidtype>> cleanItems;
+            cleanItems.clear();
+            cleanItems.reserve(groupData.items.size());
+
             for (auto item : groupData.items)
             {
                 if (item.second != id)
@@ -106,8 +108,8 @@ void DelTool::undo()
     emit NeedFullParsing();
 
     if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
-    {//Keep last!
-        emit doc->SetCurrentPP(nameActivDraw);//Without this user will not see this change
+    {                                          // Keep last!
+        emit doc->SetCurrentPP(nameActivDraw); // Without this user will not see this change
     }
 }
 
@@ -117,8 +119,8 @@ void DelTool::redo()
     qCDebug(vUndo, "Redo.");
 
     if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
-    {//Keep first!
-        emit doc->SetCurrentPP(nameActivDraw);//Without this user will not see this change
+    {                                          // Keep first!
+        emit doc->SetCurrentPP(nameActivDraw); // Without this user will not see this change
     }
     QDomElement domElement = doc->NodeById(nodeId);
     parentNode.removeChild(domElement);

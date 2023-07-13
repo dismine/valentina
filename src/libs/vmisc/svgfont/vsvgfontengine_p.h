@@ -48,7 +48,7 @@ public:
     VSvgFontEngineData() = default;
     explicit VSvgFontEngineData(const VSvgFont &font);
     VSvgFontEngineData(const VSvgFontEngineData &engine) = default;
-    virtual ~VSvgFontEngineData() = default;
+    ~VSvgFontEngineData() = default;
 
     VSvgFont m_font{};                  // NOLINT(misc-non-private-member-variables-in-classes)
     QHash<QChar, VSvgGlyph> m_glyphs{}; // NOLINT(misc-non-private-member-variables-in-classes)

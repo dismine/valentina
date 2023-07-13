@@ -22,7 +22,6 @@
 #ifndef QMUPARSER_H
 #define QMUPARSER_H
 
-#include <qcompilerdetection.h>
 #include <QString>
 #include <QtGlobal>
 #include <locale>
@@ -37,73 +36,73 @@
 
 namespace qmu
 {
-    QT_WARNING_PUSH
-    QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 
-    /** @brief Mathematical expressions parser.
-    *
-    * Standard implementation of the mathematical expressions parser.
-    * Can be used as a reference implementation for subclassing the parser.
-    *
-    * <small>
-    * (C) 2011 Ingo Berg<br>
-    * muparser(at)gmx.de
-    * </small>
-    */
-    /* final */ class QMUPARSERSHARED_EXPORT QmuParser : public QmuParserBase
-    {
-    public:
-        QmuParser();
-        virtual void InitCharSets() override;
-        virtual void InitFun() override;
-        virtual void InitConst() override;
-        virtual void InitOprt() override;
-        virtual void OnDetectVar(const QString &pExpr, qmusizetype &nStart, qmusizetype &nEnd) override;
-        auto Diff(qreal *a_Var, qreal a_fPos, qreal a_fEpsilon = 0) const -> qreal;
+/** @brief Mathematical expressions parser.
+ *
+ * Standard implementation of the mathematical expressions parser.
+ * Can be used as a reference implementation for subclassing the parser.
+ *
+ * <small>
+ * (C) 2011 Ingo Berg<br>
+ * muparser(at)gmx.de
+ * </small>
+ */
+/* final */ class QMUPARSERSHARED_EXPORT QmuParser : public QmuParserBase
+{
+public:
+    QmuParser();
+    void InitCharSets() override;
+    void InitFun() override;
+    void InitConst() override;
+    void InitOprt() override;
+    void OnDetectVar(const QString &pExpr, qmusizetype &nStart, qmusizetype &nEnd) override;
+    auto Diff(qreal *a_Var, qreal a_fPos, qreal a_fEpsilon = 0) const -> qreal;
 
-    protected:
-        static auto IsVal(const QString &a_szExpr, qmusizetype *a_iPos, qreal *a_fVal, const QLocale &locale,
-                          bool cNumbers, const QChar &decimal, const QChar &thousand) -> int;
-        // hyperbolic functions
-        static auto Sinh(qreal) -> qreal;
-        static auto Cosh(qreal) -> qreal;
-        static auto Tanh(qreal) -> qreal;
-        // arcus hyperbolic functions
-        static auto ASinh(qreal) -> qreal;
-        static auto ACosh(qreal) -> qreal;
-        static auto ATanh(qreal) -> qreal;
-        // functions working with degrees
-        static auto DegreeToRadian(qreal) -> qreal;
-        static auto RadianToDegree(qreal) -> qreal;
-        static auto SinD(qreal) -> qreal;
-        static auto CosD(qreal) -> qreal;
-        static auto TanD(qreal) -> qreal;
-        static auto ASinD(qreal) -> qreal;
-        static auto ACosD(qreal) -> qreal;
-        static auto ATanD(qreal) -> qreal;
+protected:
+    static auto IsVal(const QString &a_szExpr, qmusizetype *a_iPos, qreal *a_fVal, const QLocale &locale, bool cNumbers,
+                      const QChar &decimal, const QChar &thousand) -> int;
+    // hyperbolic functions
+    static auto Sinh(qreal) -> qreal;
+    static auto Cosh(qreal) -> qreal;
+    static auto Tanh(qreal) -> qreal;
+    // arcus hyperbolic functions
+    static auto ASinh(qreal) -> qreal;
+    static auto ACosh(qreal) -> qreal;
+    static auto ATanh(qreal) -> qreal;
+    // functions working with degrees
+    static auto DegreeToRadian(qreal) -> qreal;
+    static auto RadianToDegree(qreal) -> qreal;
+    static auto SinD(qreal) -> qreal;
+    static auto CosD(qreal) -> qreal;
+    static auto TanD(qreal) -> qreal;
+    static auto ASinD(qreal) -> qreal;
+    static auto ACosD(qreal) -> qreal;
+    static auto ATanD(qreal) -> qreal;
 
-        // Logarithm functions
-        static auto Log2(qreal) -> qreal;  // Logarithm Base 2
-        static auto Log10(qreal) -> qreal; // Logarithm Base 10
-        // misc
-        static auto Abs(qreal) -> qreal;
-        static auto Rint(qreal) -> qreal;
-        static auto R2CM(qreal) -> qreal;
-        static auto CSRCm(qreal length, qreal split, qreal arcLength) -> qreal;
-        static auto CSRInch(qreal length, qreal split, qreal arcLength) -> qreal;
-        static auto Sign(qreal) -> qreal;
-        static auto FMod(qreal, qreal) -> qreal;
-        // Prefix operators
-        // !!! Unary Minus is a MUST if you want to use negative signs !!!
-        static auto UnaryMinus(qreal v) -> qreal;
-        // Functions with variable number of arguments
-        static auto Sum(const qreal *, qmusizetype) -> qreal; // sum
-        static auto Avg(const qreal *, qmusizetype) -> qreal; // mean value
-        static auto Min(const qreal *, qmusizetype) -> qreal; // minimum
-        static auto Max(const qreal *, qmusizetype) -> qreal; // maximum
-    };
+    // Logarithm functions
+    static auto Log2(qreal) -> qreal;  // Logarithm Base 2
+    static auto Log10(qreal) -> qreal; // Logarithm Base 10
+    // misc
+    static auto Abs(qreal) -> qreal;
+    static auto Rint(qreal) -> qreal;
+    static auto R2CM(qreal) -> qreal;
+    static auto CSRCm(qreal length, qreal split, qreal arcLength) -> qreal;
+    static auto CSRInch(qreal length, qreal split, qreal arcLength) -> qreal;
+    static auto Sign(qreal) -> qreal;
+    static auto FMod(qreal, qreal) -> qreal;
+    // Prefix operators
+    // !!! Unary Minus is a MUST if you want to use negative signs !!!
+    static auto UnaryMinus(qreal v) -> qreal;
+    // Functions with variable number of arguments
+    static auto Sum(const qreal *, qmusizetype) -> qreal; // sum
+    static auto Avg(const qreal *, qmusizetype) -> qreal; // mean value
+    static auto Min(const qreal *, qmusizetype) -> qreal; // minimum
+    static auto Max(const qreal *, qmusizetype) -> qreal; // maximum
+};
 
-    QT_WARNING_POP
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -111,9 +110,9 @@ namespace qmu
  * @param v The value to negate
  * @return -v
  */
-    inline auto QmuParser::UnaryMinus(qreal v) -> qreal
-    {
-        return -v;
+inline auto QmuParser::UnaryMinus(qreal v) -> qreal
+{
+    return -v;
 }
 
 } // namespace qmu

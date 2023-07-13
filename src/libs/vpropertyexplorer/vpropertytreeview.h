@@ -21,7 +21,7 @@
 #ifndef VPROPERTYTREEVIEW_H
 #define VPROPERTYTREEVIEW_H
 
-#include <qcompilerdetection.h>
+
 #include <QMetaObject>
 #include <QObject>
 #include <QString>

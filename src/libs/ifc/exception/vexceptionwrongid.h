@@ -29,7 +29,7 @@
 #ifndef VEXCEPTIONWRONGID_H
 #define VEXCEPTIONWRONGID_H
 
-#include <qcompilerdetection.h>
+
 #include <QString>
 #include <QtGlobal>
 

@@ -29,7 +29,6 @@
 #ifndef VSPLINEPATH_H
 #define VSPLINEPATH_H
 
-#include <qcompilerdetection.h>
 #include <QCoreApplication>
 #include <QPainterPath>
 #include <QPointF>
@@ -50,53 +49,54 @@ class VSplinePathData;
 /**
  * @brief The VSplinePath class keep information about splinePath.
  */
-class VSplinePath final :public VAbstractCubicBezierPath
+class VSplinePath final : public VAbstractCubicBezierPath
 {
     Q_DECLARE_TR_FUNCTIONS(VSplinePath) // NOLINT
+
 public:
     explicit VSplinePath(quint32 idObject = 0, Draw mode = Draw::Calculation);
-    VSplinePath(const QVector<VFSplinePoint> &points, qreal kCurve = 1, quint32 idObject = 0,
-                Draw mode = Draw::Calculation);
-    VSplinePath(const QVector<VSplinePoint> &points, quint32 idObject = 0, Draw mode = Draw::Calculation);
-    VSplinePath(const VSplinePath& splPath);
+    explicit VSplinePath(const QVector<VFSplinePoint> &points, qreal kCurve = 1, quint32 idObject = 0,
+                         Draw mode = Draw::Calculation);
+    explicit VSplinePath(const QVector<VSplinePoint> &points, quint32 idObject = 0, Draw mode = Draw::Calculation);
+    VSplinePath(const VSplinePath &splPath);
     auto Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const -> VSplinePath;
     auto Flip(const QLineF &axis, const QString &prefix = QString()) const -> VSplinePath;
     auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VSplinePath;
-    virtual ~VSplinePath() override;
+    ~VSplinePath() override;
 
     auto operator[](vsizetype indx) -> VSplinePoint &;
     auto operator=(const VSplinePath &path) -> VSplinePath &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VSplinePath(VSplinePath&& splPath) Q_DECL_NOTHROW;
-    auto operator=(VSplinePath &&path) Q_DECL_NOTHROW->VSplinePath &;
+    VSplinePath(VSplinePath &&splPath) noexcept;
+    auto operator=(VSplinePath &&path) noexcept -> VSplinePath &;
 #endif
 
-    void   append(const VSplinePoint &point);
+    void append(const VSplinePoint &point);
 
-    virtual auto CountSubSpl() const -> vsizetype override;
-    virtual auto CountPoints() const -> vsizetype override;
-    virtual void    Clear() override;
-    virtual auto GetSpline(vsizetype index) const -> VSpline override;
+    auto CountSubSpl() const -> vsizetype override;
+    auto CountPoints() const -> vsizetype override;
+    void Clear() override;
+    auto GetSpline(vsizetype index) const -> VSpline override;
 
-    virtual auto GetSplinePath() const -> QVector<VSplinePoint> override;
+    auto GetSplinePath() const -> QVector<VSplinePoint> override;
     auto GetFSplinePath() const -> QVector<VFSplinePoint>;
 
-    virtual auto GetStartAngle() const -> qreal override;
-    virtual auto GetEndAngle() const -> qreal override;
+    auto GetStartAngle() const -> qreal override;
+    auto GetEndAngle() const -> qreal override;
 
-    virtual auto GetC1Length() const -> qreal override;
-    virtual auto GetC2Length() const -> qreal override;
+    auto GetC1Length() const -> qreal override;
+    auto GetC2Length() const -> qreal override;
 
-    void         UpdatePoint(qint32 indexSpline, const SplinePointPosition &pos, const VSplinePoint &point);
+    void UpdatePoint(qint32 indexSpline, const SplinePointPosition &pos, const VSplinePoint &point);
     auto GetSplinePoint(qint32 indexSpline, SplinePointPosition pos) const -> VSplinePoint;
 
     auto at(vsizetype indx) const -> const VSplinePoint &;
 
-    virtual auto ToJson() const -> QJsonObject override;
+    auto ToJson() const -> QJsonObject override;
 
 protected:
-    virtual auto FirstPoint() const -> VPointF override;
-    virtual auto LastPoint() const -> VPointF override;
+    auto FirstPoint() const -> VPointF override;
+    auto LastPoint() const -> VPointF override;
 
 private:
     QSharedDataPointer<VSplinePathData> d;

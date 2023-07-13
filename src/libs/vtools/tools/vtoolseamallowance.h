@@ -29,7 +29,7 @@
 #ifndef VTOOLSEAMALLOWANCE_H
 #define VTOOLSEAMALLOWANCE_H
 
-#include <qcompilerdetection.h>
+
 
 #include <QGraphicsPathItem>
 #include <QObject>

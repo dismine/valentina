@@ -29,7 +29,6 @@
 #ifndef VCUBICBEZIER_H
 #define VCUBICBEZIER_H
 
-#include <qcompilerdetection.h>
 #include <QPointF>
 #include <QSharedDataPointer>
 #include <QString>
@@ -38,7 +37,6 @@
 #include <QtGlobal>
 
 #include "vabstractcubicbezier.h"
-#include "vgeometrydef.h"
 #include "vpointf.h"
 
 class VCubicBezierData;
@@ -57,21 +55,21 @@ public:
 
     auto operator=(const VCubicBezier &curve) -> VCubicBezier &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VCubicBezier(VCubicBezier &&curve) Q_DECL_NOTHROW;
-    auto operator=(VCubicBezier &&curve) Q_DECL_NOTHROW->VCubicBezier &;
+    VCubicBezier(VCubicBezier &&curve) noexcept;
+    auto operator=(VCubicBezier &&curve) noexcept -> VCubicBezier &;
 #endif
 
     virtual auto GetP1() const -> VPointF override;
-    void            SetP1(const VPointF &p);
+    void SetP1(const VPointF &p);
 
     virtual auto GetP2() const -> VPointF override;
-    void    SetP2(const VPointF &p);
+    void SetP2(const VPointF &p);
 
     virtual auto GetP3() const -> VPointF override;
-    void    SetP3(const VPointF &p);
+    void SetP3(const VPointF &p);
 
     virtual auto GetP4() const -> VPointF override;
-    void            SetP4(const VPointF &p);
+    void SetP4(const VPointF &p);
 
     virtual auto GetStartAngle() const -> qreal override;
     virtual auto GetEndAngle() const -> qreal override;

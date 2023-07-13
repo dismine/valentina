@@ -31,7 +31,6 @@
 
 #include "dialogtool.h"
 
-#include <qcompilerdetection.h>
 #include <QList>
 #include <QMetaObject>
 #include <QObject>
@@ -39,12 +38,12 @@
 #include <QVector>
 #include <QtGlobal>
 
-#include "../vmisc/def.h"
 #include "../../tools/toolsdef.h"
+#include "../vmisc/def.h"
 
 namespace Ui
 {
-    class DialogFlippingByLine;
+class DialogFlippingByLine;
 }
 
 class DialogFlippingByLine : public DialogTool
@@ -53,39 +52,39 @@ class DialogFlippingByLine : public DialogTool
 
 public:
     explicit DialogFlippingByLine(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogFlippingByLine();
+    ~DialogFlippingByLine() override;
 
     auto GetFirstLinePointId() const -> quint32;
-    void    SetFirstLinePointId(quint32 value);
+    void SetFirstLinePointId(quint32 value);
 
     auto GetSecondLinePointId() const -> quint32;
-    void    SetSecondLinePointId(quint32 value);
+    void SetSecondLinePointId(quint32 value);
 
     auto GetSuffix() const -> QString;
-    void    SetSuffix(const QString &value);
+    void SetSuffix(const QString &value);
 
     auto GetVisibilityGroupName() const -> QString;
-    void    SetVisibilityGroupName(const QString &name);
+    void SetVisibilityGroupName(const QString &name);
 
     auto HasLinkedVisibilityGroup() const -> bool;
     void SetHasLinkedVisibilityGroup(bool linked);
 
-    void        SetVisibilityGroupTags(const QStringList &tags);
+    void SetVisibilityGroupTags(const QStringList &tags);
     auto GetVisibilityGroupTags() const -> QStringList;
 
-    void    SetNotes(const QString &notes);
+    void SetNotes(const QString &notes);
     auto GetNotes() const -> QString;
 
-    virtual void SetGroupCategories(const QStringList &categories) override;
+    void SetGroupCategories(const QStringList &categories) override;
 
-    virtual void ShowDialog(bool click) override;
+    void ShowDialog(bool click) override;
 
     auto GetSourceObjects() const -> QVector<SourceItem>;
-    void                SetSourceObjects(const QVector<SourceItem> &value);
+    void SetSourceObjects(const QVector<SourceItem> &value);
 
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
-    virtual void SelectedObject(bool selected, quint32 object, quint32 tool) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void SelectedObject(bool selected, quint32 object, quint32 tool) override;
 
 private slots:
     void SuffixChanged();
@@ -96,11 +95,11 @@ private slots:
     void ColorChanged();
 
 protected:
-    virtual void ShowVisualization() override;
+    void ShowVisualization() override;
 
     /** @brief SaveData Put dialog data in local variables */
-    virtual void SaveData() override;
-    virtual auto IsValid() const -> bool final;
+    void SaveData() override;
+    auto IsValid() const -> bool final;
 
 private slots:
     void PointChanged();

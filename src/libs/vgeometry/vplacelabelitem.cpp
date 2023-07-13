@@ -227,12 +227,12 @@ auto VPlaceLabelItem::operator=(const VPlaceLabelItem &item) -> VPlaceLabelItem 
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VPlaceLabelItem::VPlaceLabelItem(VPlaceLabelItem &&item) Q_DECL_NOTHROW
+VPlaceLabelItem::VPlaceLabelItem(VPlaceLabelItem &&item) noexcept
     : VPointF(std::move(item)), d(std::move(item.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPlaceLabelItem::operator=(VPlaceLabelItem &&item) Q_DECL_NOTHROW->VPlaceLabelItem &
+auto VPlaceLabelItem::operator=(VPlaceLabelItem &&item) noexcept->VPlaceLabelItem &
 {
     VPointF::operator=(item);
     std::swap(d, item.d);

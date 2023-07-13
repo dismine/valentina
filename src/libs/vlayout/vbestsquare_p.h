@@ -44,45 +44,35 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VBestSquareData : public QSharedData
 {
 public:
-    VBestSquareData()
-    {}
+    VBestSquareData() = default;
+    VBestSquareData(const QSizeF &sheetSize, bool saveLength, bool isPortrait);
 
-    VBestSquareData(const QSizeF &sheetSize, bool saveLength, bool isPortrait)
-        : isValid(true),
-          sheetSize(sheetSize),
-          saveLength(saveLength),
-          isPortrait(isPortrait)
-    {
-        data.bestSize = QSizeF(sheetSize.width()+10, sheetSize.height()+10);
-    }
+    VBestSquareData(const VBestSquareData &res) = default;
+    ~VBestSquareData() = default;
 
-    VBestSquareData(const VBestSquareData &res)
-        : QSharedData(res),
-          isValid(res.isValid),
-          sheetSize(res.sheetSize),
-          valideResult(res.valideResult),
-          saveLength(res.saveLength),
-          data(res.data),
-          isPortrait(res.isPortrait),
-          terminatedByException(res.terminatedByException),
-          exceptionReason(res.exceptionReason)
-    {}
-
-    ~VBestSquareData() {}
-
-    bool isValid{false};
-    QSizeF sheetSize{};
-    bool valideResult{false};
-    bool saveLength{false};
-    VBestSquareResData data{};
-    bool isPortrait{true};
-    bool terminatedByException{false};
-    QString exceptionReason{};
+    bool isValid{false};               // NOLINT (misc-non-private-member-variables-in-classes)
+    QSizeF sheetSize{};                // NOLINT (misc-non-private-member-variables-in-classes)
+    bool valideResult{false};          // NOLINT (misc-non-private-member-variables-in-classes)
+    bool saveLength{false};            // NOLINT (misc-non-private-member-variables-in-classes)
+    VBestSquareResData data{};         // NOLINT (misc-non-private-member-variables-in-classes)
+    bool isPortrait{true};             // NOLINT (misc-non-private-member-variables-in-classes)
+    bool terminatedByException{false}; // NOLINT (misc-non-private-member-variables-in-classes)
+    QString exceptionReason{};         // NOLINT (misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VBestSquareData) // NOLINT
 };
 
 QT_WARNING_POP
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VBestSquareData::VBestSquareData(const QSizeF &sheetSize, bool saveLength, bool isPortrait)
+  : isValid(true),
+    sheetSize(sheetSize),
+    saveLength(saveLength),
+    isPortrait(isPortrait)
+{
+    data.bestSize = QSizeF(sheetSize.width() + 10, sheetSize.height() + 10);
+}
 
 #endif // VBESTSQUARE_P_H

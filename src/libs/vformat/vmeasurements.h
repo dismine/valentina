@@ -29,7 +29,7 @@
 #ifndef VMEASUREMENTS_H
 #define VMEASUREMENTS_H
 
-#include <qcompilerdetection.h>
+
 #include <QCoreApplication>
 #include <QDomElement>
 #include <QString>

@@ -43,50 +43,35 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VArcData final : public QSharedData
 {
 public:
-    VArcData();
+    VArcData() = default;
     VArcData(qreal radius, const QString &formulaRadius);
     explicit VArcData(qreal radius);
-    VArcData(const VArcData &arc);
-    virtual ~VArcData();
+    VArcData(const VArcData &arc) = default;
+    ~VArcData() = default;
 
     /** @brief radius arc radius. */
-    qreal              radius;
+    qreal radius{0}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief formulaRadius formula for arc radius. */
-    QString            formulaRadius;
+    QString formulaRadius{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VArcData) // NOLINT
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-VArcData::VArcData()
-    : radius(0),
-      formulaRadius(QString())
-{}
+inline VArcData::VArcData(qreal radius, const QString &formulaRadius)
+  : radius(radius),
+    formulaRadius(formulaRadius)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VArcData::VArcData(qreal radius, const QString &formulaRadius)
-    : radius(radius),
-      formulaRadius(formulaRadius)
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VArcData::VArcData(qreal radius)
-    : radius(radius),
-      formulaRadius(QString().number(radius))
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VArcData::VArcData(const VArcData &arc)
-    : QSharedData(arc),
-      radius(arc.radius),
-      formulaRadius(arc.formulaRadius)
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VArcData::~VArcData()
-{}
+inline VArcData::VArcData(qreal radius)
+  : radius(radius),
+    formulaRadius(QString::number(radius))
+{
+}
 
 QT_WARNING_POP
 

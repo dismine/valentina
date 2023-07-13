@@ -29,7 +29,7 @@
 #ifndef VEXCEPTIONEMPTYPARAMETER_H
 #define VEXCEPTIONEMPTYPARAMETER_H
 
-#include <qcompilerdetection.h>
+
 #include <QString>
 #include <QtGlobal>
 

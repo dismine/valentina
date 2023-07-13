@@ -29,7 +29,6 @@
 #ifndef VELLIPTICALARC_H
 #define VELLIPTICALARC_H
 
-#include <qcompilerdetection.h>
 #include <QCoreApplication>
 #include <QPointF>
 #include <QSharedDataPointer>
@@ -47,6 +46,7 @@ class VEllipticalArcData;
 class VEllipticalArc final : public VAbstractArc
 {
     Q_DECLARE_TR_FUNCTIONS(VEllipticalArc) // NOLINT
+
 public:
     VEllipticalArc();
     VEllipticalArc(const VPointF &center, qreal radius1, qreal radius2, const QString &formulaRadius1,
@@ -67,10 +67,10 @@ public:
 
     ~VEllipticalArc() override;
 
-    auto operator= (const VEllipticalArc &arc) -> VEllipticalArc&;
+    auto operator=(const VEllipticalArc &arc) -> VEllipticalArc &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VEllipticalArc(VEllipticalArc &&arc) Q_DECL_NOTHROW;
-    auto operator=(VEllipticalArc &&arc) Q_DECL_NOTHROW -> VEllipticalArc &;
+    VEllipticalArc(VEllipticalArc &&arc) noexcept;
+    auto operator=(VEllipticalArc &&arc) noexcept -> VEllipticalArc &;
 #endif
 
     auto GetFormulaRotationAngle() const -> QString;
@@ -101,15 +101,17 @@ public:
     auto GetStartAngle() const -> qreal override;
     auto GetEndAngle() const -> qreal override;
 
-    auto CutArc (const qreal &length, VEllipticalArc &arc1, VEllipticalArc &arc2,
-                 const QString &pointName) const -> QPointF;
-    auto CutArc (const qreal &length, const QString &pointName) const -> QPointF;
+    auto CutArc(const qreal &length, VEllipticalArc &arc1, VEllipticalArc &arc2, const QString &pointName) const
+        -> QPointF;
+    auto CutArc(const qreal &length, const QString &pointName) const -> QPointF;
 
     static auto OptimizeAngle(qreal angle) -> qreal;
+
 protected:
     void CreateName() override;
     void CreateAlias() override;
     void FindF2(qreal length) override;
+
 private:
     QSharedDataPointer<VEllipticalArcData> d;
 
@@ -118,13 +120,13 @@ private:
     auto ArcPoints(QVector<QPointF> points) const -> QVector<QPointF>;
 };
 
-Q_DECLARE_METATYPE(VEllipticalArc) // NOLINT
+Q_DECLARE_METATYPE(VEllipticalArc)                  // NOLINT
 Q_DECLARE_TYPEINFO(VEllipticalArc, Q_MOVABLE_TYPE); // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
 inline auto VEllipticalArc::OptimizeAngle(qreal angle) -> qreal
 {
-    return angle - 360.*qFloor(angle/360.);
+    return angle - 360. * qFloor(angle / 360.);
 }
 
 #endif // VELLIPTICALARC_H

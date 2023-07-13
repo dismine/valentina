@@ -29,39 +29,41 @@
 #ifndef VDATATOOL_H
 #define VDATATOOL_H
 
-#include <qcompilerdetection.h>
+#include <QLoggingCategory>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
 #include <QtGlobal>
-#include <QLoggingCategory>
 
 #include "../vpatterndb/vcontainer.h"
 
 Q_DECLARE_LOGGING_CATEGORY(vTool)
 
-//We need QObject class because we use qobject_cast.
+// We need QObject class because we use qobject_cast.
 /**
  * @brief The VDataTool class need for getting access to data container of tool.
  */
 class VDataTool : public QObject
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit VDataTool(VContainer *data, QObject *parent = nullptr);
     virtual ~VDataTool() = default;
     auto getData() const -> VContainer;
-    void            setData(const VContainer *value);
+    void setData(const VContainer *value);
     virtual auto referens() const -> quint32;
-    virtual void    incrementReferens();
-    virtual void    decrementReferens();
-    virtual void    GroupVisibility(quint32 object, bool visible)=0;
+    virtual void incrementReferens();
+    virtual void decrementReferens();
+    virtual void GroupVisibility(quint32 object, bool visible) = 0;
+
 protected:
     /** @brief data container with data */
-    VContainer            data;
+    VContainer data;
 
     /** @brief _referens keep count tools what use this tool. If value more than 1 you can't delete tool. */
-    quint32                _referens;
+    quint32 _referens;
+
 private:
     Q_DISABLE_COPY_MOVE(VDataTool) // NOLINT
 };

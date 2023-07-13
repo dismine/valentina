@@ -29,7 +29,6 @@
 #ifndef DIALOGSPLINE_H
 #define DIALOGSPLINE_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QSharedPointer>
@@ -42,7 +41,7 @@
 
 namespace Ui
 {
-    class DialogSpline;
+class DialogSpline;
 }
 
 /**
@@ -51,28 +50,31 @@ namespace Ui
 class DialogSpline : public DialogTool
 {
     Q_OBJECT // NOLINT
+
 public:
     DialogSpline(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogSpline() override;
+    ~DialogSpline() override;
 
     auto GetSpline() const -> VSpline;
-    void    SetSpline(const VSpline &spline);
+    void SetSpline(const VSpline &spline);
 
-    void    SetNotes(const QString &notes);
+    void SetNotes(const QString &notes);
     auto GetNotes() const -> QString;
 
 public slots:
-    virtual void  ChosenObject(quint32 id, const SceneObject &type) override;
-    virtual void  PointNameChanged() override;
-    virtual void  ShowDialog(bool click) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void PointNameChanged() override;
+    void ShowDialog(bool click) override;
+
 protected:
-    virtual void  ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void  SaveData() override;
-    virtual void  closeEvent(QCloseEvent *event) override;
-    virtual auto IsValid() const -> bool final;
+    void SaveData() override;
+    void closeEvent(QCloseEvent *event) override;
+    auto IsValid() const -> bool final;
+
 private slots:
     void DeployAngle1TextEdit();
     void DeployAngle2TextEdit();
@@ -90,6 +92,7 @@ private slots:
     void EvalLength2();
 
     void ValidateAlias();
+
 private:
     Q_DISABLE_COPY_MOVE(DialogSpline) // NOLINT
 
@@ -97,15 +100,15 @@ private:
     Ui::DialogSpline *ui;
 
     /** @brief spl spline */
-    VSpline spl;
+    VSpline spl{};
 
-    qint32 newDuplicate;
+    qint32 newDuplicate{-1};
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int formulaBaseHeightAngle1;
-    int formulaBaseHeightAngle2;
-    int formulaBaseHeightLength1;
-    int formulaBaseHeightLength2;
+    int formulaBaseHeightAngle1{0};
+    int formulaBaseHeightAngle2{0};
+    int formulaBaseHeightLength1{0};
+    int formulaBaseHeightLength2{0};
 
     /** @brief timerAngle1 timer of check first angle formula */
     QTimer *timerAngle1;
@@ -114,11 +117,11 @@ private:
     QTimer *timerLength2;
 
     /** @brief flagAngle1 true if value of first angle is correct */
-    bool flagAngle1;
-    bool flagAngle2;
-    bool flagLength1;
-    bool flagLength2;
-    bool flagError;
+    bool flagAngle1{false};
+    bool flagAngle2{false};
+    bool flagLength1{false};
+    bool flagLength2{false};
+    bool flagError{false};
     bool flagAlias{true};
 
     QString originAliasSuffix{};

@@ -31,35 +31,34 @@
 #include <QLine>
 #include <QLineF>
 #include <QSharedPointer>
-#include <new>
 
-#include "../../../../dialogs/tools/dialogtruedarts.h"
 #include "../../../../dialogs/tools/dialogtool.h"
-#include "../../../../visualization/visualization.h"
+#include "../../../../dialogs/tools/dialogtruedarts.h"
 #include "../../../../visualization/line/vistooltruedarts.h"
+#include "../../../../visualization/visualization.h"
+#include "../../../vabstracttool.h"
+#include "../../vdrawtool.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/compatibility.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "../../../vabstracttool.h"
-#include "../../vdrawtool.h"
 #include "vtooldoublepoint.h"
-#include "../vmisc/compatibility.h"
 
 template <class T> class QSharedPointer;
 
-const QString VToolTrueDarts::ToolType = QStringLiteral("trueDarts");
+const QString VToolTrueDarts::ToolType = QStringLiteral("trueDarts"); // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolTrueDarts::VToolTrueDarts(const VToolTrueDartsInitData &initData, QGraphicsItem *parent)
-    :VToolDoublePoint(initData.doc, initData.data, initData.id, initData.p1id, initData.p2id, initData.notes, parent),
-      baseLineP1Id (initData.baseLineP1Id),
-      baseLineP2Id(initData.baseLineP2Id),
-      dartP1Id(initData.dartP1Id),
-      dartP2Id(initData.dartP2Id),
-      dartP3Id(initData.dartP3Id)
+  : VToolDoublePoint(initData.doc, initData.data, initData.id, initData.p1id, initData.p2id, initData.notes, parent),
+    baseLineP1Id(initData.baseLineP1Id),
+    baseLineP2Id(initData.baseLineP2Id),
+    dartP1Id(initData.dartP1Id),
+    dartP2Id(initData.dartP2Id),
+    dartP3Id(initData.dartP3Id)
 {
     ToolCreation(initData.typeCreation);
 }
@@ -74,7 +73,7 @@ void VToolTrueDarts::FindPoint(const QPointF &baseLineP1, const QPointF &baseLin
     const qreal degrees = d2d3.angleTo(d2d1);
 
     QLineF d2blP2(dartP2, baseLineP2);
-    d2blP2.setAngle(d2blP2.angle()+degrees);
+    d2blP2.setAngle(d2blP2.angle() + degrees);
 
     if (Intersects(QLineF(baseLineP1, d2blP2.p2()), d2d1, &p1) == QLineF::NoIntersection)
     {
@@ -84,7 +83,7 @@ void VToolTrueDarts::FindPoint(const QPointF &baseLineP1, const QPointF &baseLin
     }
 
     QLineF d2p1(dartP2, p1);
-    d2p1.setAngle(d2p1.angle()-degrees);
+    d2p1.setAngle(d2p1.angle() - degrees);
     p2 = d2p1.p2();
 }
 
@@ -154,15 +153,15 @@ auto VToolTrueDarts::Create(VToolTrueDartsInitData initData) -> VToolTrueDarts *
                               static_cast<QPointF>(*dartP1), static_cast<QPointF>(*dartP2),
                               static_cast<QPointF>(*dartP3), fPoint1, fPoint2);
 
-    VPointF *p1 = new VPointF(fPoint1, initData.name1, initData.mx1, initData.my1, initData.id);
+    auto *p1 = new VPointF(fPoint1, initData.name1, initData.mx1, initData.my1, initData.id);
     p1->SetShowLabel(initData.showLabel1);
 
-    VPointF *p2 = new VPointF(fPoint2, initData.name2, initData.mx2, initData.my2, initData.id);
+    auto *p2 = new VPointF(fPoint2, initData.name2, initData.mx2, initData.my2, initData.id);
     p2->SetShowLabel(initData.showLabel2);
 
     if (initData.typeCreation == Source::FromGui)
     {
-        initData.id = initData.data->getNextId();//Just reserve id for tool
+        initData.id = initData.data->getNextId(); // Just reserve id for tool
         initData.p1id = initData.data->AddGObject(p1);
         initData.p2id = initData.data->AddGObject(p2);
     }
@@ -179,7 +178,7 @@ auto VToolTrueDarts::Create(VToolTrueDartsInitData initData) -> VToolTrueDarts *
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::TrueDarts, initData.doc);
-        VToolTrueDarts *points = new VToolTrueDarts(initData);
+        auto *points = new VToolTrueDarts(initData);
         initData.scene->addItem(points);
         InitToolConnections(initData.scene, points);
         VAbstractPattern::AddTool(initData.id, points);
@@ -236,10 +235,10 @@ void VToolTrueDarts::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quin
     {
         ContextMenu<DialogTrueDarts>(event, id);
     }
-    catch(const VExceptionToolWasDeleted &e)
+    catch (const VExceptionToolWasDeleted &e)
     {
         Q_UNUSED(e)
-        return;//Leave this method immediately!!!
+        return; // Leave this method immediately!!!
     }
 }
 
@@ -288,7 +287,7 @@ void VToolTrueDarts::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepe
     doc->SetAttribute(domElement, AttrDartP2, QString().setNum(dialogTool->GetSecondDartPointId()));
     doc->SetAttribute(domElement, AttrDartP3, QString().setNum(dialogTool->GetThirdDartPointId()));
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept {return notes.isEmpty();});
+                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -309,11 +308,11 @@ void VToolTrueDarts::ReadToolAttributes(const QDomElement &domElement)
 {
     VToolDoublePoint::ReadToolAttributes(domElement);
 
-    baseLineP1Id = doc->GetParametrUInt(domElement, AttrBaseLineP1, NULL_ID_STR);
-    baseLineP2Id = doc->GetParametrUInt(domElement, AttrBaseLineP2, NULL_ID_STR);
-    dartP1Id = doc->GetParametrUInt(domElement, AttrDartP1, NULL_ID_STR);
-    dartP2Id = doc->GetParametrUInt(domElement, AttrDartP2, NULL_ID_STR);
-    dartP3Id = doc->GetParametrUInt(domElement, AttrDartP3, NULL_ID_STR);
+    baseLineP1Id = VAbstractPattern::GetParametrUInt(domElement, AttrBaseLineP1, NULL_ID_STR);
+    baseLineP2Id = VAbstractPattern::GetParametrUInt(domElement, AttrBaseLineP2, NULL_ID_STR);
+    dartP1Id = VAbstractPattern::GetParametrUInt(domElement, AttrDartP1, NULL_ID_STR);
+    dartP2Id = VAbstractPattern::GetParametrUInt(domElement, AttrDartP2, NULL_ID_STR);
+    dartP3Id = VAbstractPattern::GetParametrUInt(domElement, AttrDartP3, NULL_ID_STR);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

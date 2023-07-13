@@ -29,7 +29,6 @@
 #ifndef DIALOGUNIONDETAILS_H
 #define DIALOGUNIONDETAILS_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -40,7 +39,7 @@
 
 namespace Ui
 {
-    class DialogUnionDetails;
+class DialogUnionDetails;
 }
 
 /**
@@ -49,9 +48,10 @@ namespace Ui
 class DialogUnionDetails : public DialogTool
 {
     Q_OBJECT // NOLINT
+
 public:
     DialogUnionDetails(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogUnionDetails() override;
+    ~DialogUnionDetails() override;
 
     auto getD1() const -> quint32;
     auto getD2() const -> quint32;
@@ -59,10 +59,12 @@ public:
     auto getIndexD2() const -> vsizetype;
 
     auto RetainPieces() const -> bool;
+
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+
 protected:
-    virtual auto IsValid() const -> bool final { return true; }
+    auto IsValid() const -> bool final { return true; }
 
 private:
     Q_DISABLE_COPY_MOVE(DialogUnionDetails) // NOLINT
@@ -77,28 +79,27 @@ private:
     vsizetype indexD2;
 
     /** @brief d1 id first detail */
-    quint32           d1;
+    quint32 d1;
 
     /** @brief d2 id second detail */
-    quint32           d2;
+    quint32 d2;
 
     /** @brief numberD number of detail, what we already have */
-    qint32           numberD;
+    qint32 numberD;
 
     /** @brief numberP number of points, what we already have */
-    qint32           numberP;
+    qint32 numberP;
 
     /** @brief p1 id first point of detail */
-    quint32           p1;
+    quint32 p1;
 
     /** @brief p2 id second point of detail */
-    quint32           p2;
+    quint32 p2;
 
     auto CheckObject(const quint32 &id, const quint32 &idDetail) const -> bool;
     auto CheckDetail(const quint32 &idDetail) const -> bool;
 
-    void             ChoosedDetail(const quint32 &id, const SceneObject &type, quint32 &idDetail,
-                                   vsizetype &index);
+    void ChoosedDetail(const quint32 &id, const SceneObject &type, quint32 &idDetail, vsizetype &index);
 };
 
 //---------------------------------------------------------------------------------------------------------------------

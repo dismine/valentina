@@ -22,7 +22,6 @@
 #ifndef QMUTOKENPARSER_H
 #define QMUTOKENPARSER_H
 
-#include <qcompilerdetection.h>
 #include <QString>
 #include <QtGlobal>
 

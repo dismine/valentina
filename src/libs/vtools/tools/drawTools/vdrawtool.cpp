@@ -232,7 +232,7 @@ void VDrawTool::EnableToolMove(bool move)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDrawTool::DetailsMode(bool mode)
+void VDrawTool::SetDetailsMode(bool mode)
 {
     Q_UNUSED(mode)
     // Do nothing.

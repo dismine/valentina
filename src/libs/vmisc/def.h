@@ -41,7 +41,6 @@
 #include <QStringList>
 #include <Qt>
 #include <csignal>
-#include <qcompilerdetection.h>
 
 #include "debugbreak.h"
 #include "defglobal.h"

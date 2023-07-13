@@ -63,7 +63,7 @@ void VToolCut::Disable(bool disable, const QString &namePP)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCut::DetailsMode(bool mode)
+void VToolCut::SetDetailsMode(bool mode)
 {
     detailsMode = mode;
 }

@@ -29,7 +29,7 @@
 #ifndef VSIMPLECURVE_H
 #define VSIMPLECURVE_H
 
-#include <qcompilerdetection.h>
+
 #include <QColor>
 #include <QGraphicsItem>
 #include <QMetaObject>

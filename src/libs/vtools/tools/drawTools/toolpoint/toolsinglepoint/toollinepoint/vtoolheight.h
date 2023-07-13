@@ -29,7 +29,7 @@
 #ifndef VTOOLHEIGHT_H
 #define VTOOLHEIGHT_H
 
-#include <qcompilerdetection.h>
+
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QLineF>

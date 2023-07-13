@@ -46,7 +46,7 @@ public:
     VSvgGlyphData() = default;
     VSvgGlyphData(QChar unicode, const QPainterPath &path, qreal horizAdvX);
     VSvgGlyphData(const VSvgGlyphData &glyph) = default;
-    virtual ~VSvgGlyphData() = default;
+    ~VSvgGlyphData() = default;
 
     QChar m_unicode{0};    // NOLINT(misc-non-private-member-variables-in-classes)
     QPainterPath m_path{}; // NOLINT(misc-non-private-member-variables-in-classes)

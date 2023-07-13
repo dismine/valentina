@@ -87,12 +87,12 @@ auto VPieceGrainline::operator=(const VPieceGrainline &grainline) -> VPieceGrain
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VPieceGrainline::VPieceGrainline(VPieceGrainline &&grainline) Q_DECL_NOTHROW
+VPieceGrainline::VPieceGrainline(VPieceGrainline &&grainline) noexcept
     : d(std::move(grainline.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPieceGrainline::operator=(VPieceGrainline &&grainline) Q_DECL_NOTHROW -> VPieceGrainline &
+auto VPieceGrainline::operator=(VPieceGrainline &&grainline) noexcept -> VPieceGrainline &
 {
     std::swap(d, grainline.d);
     return *this;

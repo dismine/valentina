@@ -21,7 +21,7 @@
 #ifndef VSHORTCUTROPERTY_H
 #define VSHORTCUTROPERTY_H
 
-#include <qcompilerdetection.h>
+
 #include <QMetaObject>
 #include <QObject>
 #include <QString>

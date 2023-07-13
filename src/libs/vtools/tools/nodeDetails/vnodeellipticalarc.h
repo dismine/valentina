@@ -29,7 +29,7 @@
 #ifndef VNODEELLIPTICALARC_H
 #define VNODEELLIPTICALARC_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsPathItem>
 #include <QMetaObject>
 #include <QObject>

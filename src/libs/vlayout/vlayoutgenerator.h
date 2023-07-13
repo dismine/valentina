@@ -29,7 +29,7 @@
 #ifndef VLAYOUTGENERATOR_H
 #define VLAYOUTGENERATOR_H
 
-#include <qcompilerdetection.h>
+
 #include <QList>
 #include <QMetaObject>
 #include <QObject>

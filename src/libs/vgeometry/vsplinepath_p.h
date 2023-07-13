@@ -29,8 +29,8 @@
 #ifndef VSPLINEPATH_P_H
 #define VSPLINEPATH_P_H
 
-#include <QSharedData>
 #include "vsplinepoint.h"
+#include <QSharedData>
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -39,27 +39,18 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VSplinePathData final : public QSharedData
 {
 public:
-
     VSplinePathData() = default;
-
-    VSplinePathData(const VSplinePathData &splPath)
-        : QSharedData(splPath),
-          path(splPath.path)
-    {}
-
-    virtual ~VSplinePathData();
+    VSplinePathData(const VSplinePathData &splPath) = default;
+    ~VSplinePathData() = default;
 
     /**
      * @brief path list spline point.
      */
-    QVector<VSplinePoint> path{};
+    QVector<VSplinePoint> path{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VSplinePathData) // NOLINT
 };
-
-VSplinePathData::~VSplinePathData()
-{}
 
 QT_WARNING_POP
 

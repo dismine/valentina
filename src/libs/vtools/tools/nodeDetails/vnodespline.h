@@ -29,7 +29,7 @@
 #ifndef VNODESPLINE_H
 #define VNODESPLINE_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsPathItem>
 #include <QMetaObject>
 #include <QObject>

@@ -20,7 +20,7 @@
 #ifndef VTEXTPROPERTY_H
 #define VTEXTPROPERTY_H
 
-#include <qcompilerdetection.h>
+
 #include <QMap>
 #include <QMetaObject>
 #include <QObject>

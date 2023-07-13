@@ -29,7 +29,6 @@
 #ifndef VABSTRACTNODE_H
 #define VABSTRACTNODE_H
 
-#include <qcompilerdetection.h>
 #include <QColor>
 #include <QDomElement>
 #include <QMetaObject>
@@ -39,16 +38,21 @@
 
 #include "../vabstracttool.h"
 
-enum class ParentType : bool {Scene, Item};
+enum class ParentType : bool
+{
+    Scene,
+    Item
+};
 
 struct VAbstractNodeInitData : VAbstractToolInitData
 {
     VAbstractNodeInitData()
-        : VAbstractToolInitData(),
-          idObject(NULL_ID),
-          drawName(),
-          idTool(NULL_ID)
-    {}
+      : VAbstractToolInitData(),
+        idObject(NULL_ID),
+        drawName(),
+        idTool(NULL_ID)
+    {
+    }
 
     quint32 idObject;
     QString drawName;
@@ -61,21 +65,23 @@ struct VAbstractNodeInitData : VAbstractToolInitData
 class VAbstractNode : public VAbstractTool
 {
     Q_OBJECT // NOLINT
+
 public:
     VAbstractNode(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &idNode,
                   const QString &drawName = QString(), const quint32 &idTool = 0, QObject *parent = nullptr);
-    virtual      ~VAbstractNode() = default;
+    virtual ~VAbstractNode() override = default;
+
     static const QString AttrIdTool;
-    virtual void ShowVisualization(bool show) override;
-    virtual void incrementReferens() override;
-    virtual void decrementReferens() override;
+    void ShowVisualization(bool show) override;
+    void incrementReferens() override;
+    void decrementReferens() override;
 
     auto GetParentType() const -> ParentType;
-    void       SetParentType(const ParentType &value);
+    void SetParentType(const ParentType &value);
 
     auto GetIdTool() const -> quint32;
 
-    virtual void GroupVisibility(quint32 object, bool visible) override;
+    void GroupVisibility(quint32 object, bool visible) override;
 
     auto IsExluded() const -> bool;
     void SetExluded(bool exluded);
@@ -84,21 +90,22 @@ protected:
     ParentType parentType;
 
     /** @brief idNodenode id. */
-    quint32       idNode;
+    quint32 idNode;
 
     /** @brief idTool id tool. */
-    quint32       idTool;
+    quint32 idTool;
 
-    QString       m_drawName;
+    QString m_drawName;
 
-    bool          m_exluded;
+    bool m_exluded;
 
-    void         AddToModeling(const QDomElement &domElement);
-    virtual void ToolCreation(const Source &typeCreation) override;
-    virtual void SetVisualization() override {}
+    void AddToModeling(const QDomElement &domElement);
+    void ToolCreation(const Source &typeCreation) override;
+    void SetVisualization() override {}
 
-    virtual void ShowNode()=0;
-    virtual void HideNode()=0;
+    virtual void ShowNode() = 0;
+    virtual void HideNode() = 0;
+
 private:
     Q_DISABLE_COPY_MOVE(VAbstractNode) // NOLINT
 };

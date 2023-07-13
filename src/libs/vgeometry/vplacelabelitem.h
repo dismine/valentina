@@ -48,8 +48,8 @@ public:
 
     auto operator=(const VPlaceLabelItem &item) -> VPlaceLabelItem &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VPlaceLabelItem(VPlaceLabelItem &&item) Q_DECL_NOTHROW;
-    auto operator=(VPlaceLabelItem &&item) Q_DECL_NOTHROW->VPlaceLabelItem &;
+    VPlaceLabelItem(VPlaceLabelItem &&item) noexcept;
+    auto operator=(VPlaceLabelItem &&item) noexcept->VPlaceLabelItem &;
 #endif
 
     auto GetWidthFormula() const -> QString;

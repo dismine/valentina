@@ -44,44 +44,30 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VPiecePathData : public QSharedData
 {
 public:
-    VPiecePathData()
-    {}
+    VPiecePathData() = default;
+    explicit VPiecePathData(PiecePathType type);
+    VPiecePathData(const VPiecePathData &path) = default;
+    ~VPiecePathData() = default;
 
-    explicit VPiecePathData(PiecePathType type)
-        : m_type(type)
-    {}
-
-    VPiecePathData(const VPiecePathData &path)
-        : QSharedData(path),
-          m_nodes(path.m_nodes),
-          m_type(path.m_type),
-          m_name(path.m_name),
-          m_penType(path.m_penType),
-          m_cut(path.m_cut),
-          m_visibilityTrigger(path.m_visibilityTrigger),
-          m_firstToCuttingContour(path.m_firstToCuttingContour),
-          m_lastToCuttingContour(path.m_lastToCuttingContour)
-    {}
-
-    ~VPiecePathData();
-
-    QVector<VPieceNode> m_nodes{};
-    PiecePathType m_type{PiecePathType::Unknown};
-    QString m_name{};
-    Qt::PenStyle m_penType{Qt::SolidLine};
-    bool m_cut{false};
-    QString m_visibilityTrigger{'1'};
-    bool m_firstToCuttingContour{false};
-    bool m_lastToCuttingContour{false};
+    QVector<VPieceNode> m_nodes{};                // NOLINT(misc-non-private-member-variables-in-classes)
+    PiecePathType m_type{PiecePathType::Unknown}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_name{};                             // NOLINT(misc-non-private-member-variables-in-classes)
+    Qt::PenStyle m_penType{Qt::SolidLine};        // NOLINT(misc-non-private-member-variables-in-classes)
+    bool m_cut{false};                            // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_visibilityTrigger{'1'};             // NOLINT(misc-non-private-member-variables-in-classes)
+    bool m_firstToCuttingContour{false};          // NOLINT(misc-non-private-member-variables-in-classes)
+    bool m_lastToCuttingContour{false};           // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VPiecePathData) // NOLINT
 };
 
-VPiecePathData::~VPiecePathData()
-{}
-
 QT_WARNING_POP
 
-#endif // VPIECEPATH_P_H
+//---------------------------------------------------------------------------------------------------------------------
+inline VPiecePathData::VPiecePathData(PiecePathType type)
+  : m_type(type)
+{
+}
 
+#endif // VPIECEPATH_P_H

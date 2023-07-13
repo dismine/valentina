@@ -21,7 +21,7 @@
 #ifndef VOBJECTPROPERTY_H
 #define VOBJECTPROPERTY_H
 
-#include <qcompilerdetection.h>
+
 #include <QMap>
 #include <QMetaObject>
 #include <QObject>

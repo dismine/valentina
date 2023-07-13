@@ -34,7 +34,6 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/def.h"
-#include "../vwidgets/vmaingraphicsview.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
 #include "vundocommand.h"

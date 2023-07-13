@@ -30,16 +30,17 @@
 
 #include <QDomNode>
 
-#include "../vwidgets/vmaingraphicsview.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../ifc/ifcdef.h"
-#include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/customevents.h"
+#include "../vmisc/vabstractvalapplication.h"
+#include "../vwidgets/vmaingraphicsview.h"
 #include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 AddToCalc::AddToCalc(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)
-    : VUndoCommand(xml, doc, parent), nameActivDraw(doc->GetNameActivPP()), cursor(doc->getCursor())
+  : VUndoCommand(xml, doc, parent),
+    nameActivDraw(doc->GetNameActivPP()),
+    cursor(doc->getCursor())
 {
     setText(tr("add object"));
     nodeId = VAbstractPattern::GetParametrId(xml);
@@ -50,7 +51,7 @@ void AddToCalc::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    doc->ChangeActivPP(nameActivDraw);//Without this user will not see this change
+    doc->ChangeActivPP(nameActivDraw); // Without this user will not see this change
 
     QDomElement calcElement;
     if (doc->GetActivNodeElement(VAbstractPattern::TagCalculation, calcElement))
@@ -80,7 +81,7 @@ void AddToCalc::undo()
                                     VAbstractValApplication::VApp()->getSceneView());
     if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
     {
-        emit doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
+        emit doc->SetCurrentPP(nameActivDraw); // Return current pattern piece after undo
     }
 }
 
@@ -89,7 +90,7 @@ void AddToCalc::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    doc->ChangeActivPP(nameActivDraw);//Without this user will not see this change
+    doc->ChangeActivPP(nameActivDraw); // Without this user will not see this change
     doc->setCursor(cursor);
 
     QDomElement calcElement;
@@ -131,7 +132,7 @@ void AddToCalc::RedoFullParsing()
         emit NeedFullParsing();
         if (VAbstractValApplication::VApp()->GetDrawMode() == Draw::Calculation)
         {
-            emit doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
+            emit doc->SetCurrentPP(nameActivDraw); // Return current pattern piece after undo
         }
     }
     else

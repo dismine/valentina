@@ -29,7 +29,6 @@
 #ifndef DIALOGPOINTOFINTERSECTIONARCS_H
 #define DIALOGPOINTOFINTERSECTIONARCS_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -41,7 +40,7 @@
 
 namespace Ui
 {
-    class DialogPointOfIntersectionArcs;
+class DialogPointOfIntersectionArcs;
 }
 
 class DialogPointOfIntersectionArcs : public DialogTool
@@ -50,34 +49,34 @@ class DialogPointOfIntersectionArcs : public DialogTool
 
 public:
     DialogPointOfIntersectionArcs(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogPointOfIntersectionArcs() override;
+    ~DialogPointOfIntersectionArcs() override;
 
     auto GetPointName() const -> QString;
-    void           SetPointName(const QString &value);
+    void SetPointName(const QString &value);
 
     auto GetFirstArcId() const -> quint32;
-    void           SetFirstArcId(quint32 value);
+    void SetFirstArcId(quint32 value);
 
     auto GetSecondArcId() const -> quint32;
-    void           SetSecondArcId(quint32 value);
+    void SetSecondArcId(quint32 value);
 
     auto GetCrossArcPoint() const -> CrossCirclesPoint;
-    void              SetCrossArcPoint(CrossCirclesPoint p);
+    void SetCrossArcPoint(CrossCirclesPoint p);
 
-    void    SetNotes(const QString &notes);
+    void SetNotes(const QString &notes);
     auto GetNotes() const -> QString;
 
 public slots:
-    virtual void   ChosenObject(quint32 id, const SceneObject &type) override;
-    virtual void   ArcChanged();
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void ArcChanged();
 
 protected:
-    virtual void   ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void   SaveData() override;
-    virtual auto IsValid() const -> bool final;
+    void SaveData() override;
+    auto IsValid() const -> bool final;
 
 private:
     Q_DISABLE_COPY_MOVE(DialogPointOfIntersectionArcs) // NOLINT
@@ -90,7 +89,7 @@ private:
     bool flagError;
 
     /** @brief number number of handled objects */
-    qint32  number{0};
+    qint32 number{0};
 };
 
 //---------------------------------------------------------------------------------------------------------------------

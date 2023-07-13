@@ -21,7 +21,7 @@
 #ifndef VWIDGETROPERTY_H
 #define VWIDGETROPERTY_H
 
-#include <qcompilerdetection.h>
+
 #include <QPointer>
 #include <QString>
 

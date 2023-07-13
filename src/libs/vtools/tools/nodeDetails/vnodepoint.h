@@ -29,7 +29,7 @@
 #ifndef VNODEPOINT_H
 #define VNODEPOINT_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsEllipseItem>
 #include <QGraphicsItem>
 #include <QMetaObject>

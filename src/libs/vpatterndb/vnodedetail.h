@@ -74,8 +74,8 @@ public:
      */
     auto operator=(const VNodeDetail &node) -> VNodeDetail &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VNodeDetail(VNodeDetail &&node) Q_DECL_NOTHROW;
-    auto operator=(VNodeDetail &&node) Q_DECL_NOTHROW->VNodeDetail &;
+    VNodeDetail(VNodeDetail &&node) noexcept;
+    auto operator=(VNodeDetail &&node) noexcept->VNodeDetail &;
 #endif
 
     /**

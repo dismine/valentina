@@ -21,14 +21,13 @@
 #ifndef VBOOLPROPERTY_H
 #define VBOOLPROPERTY_H
 
-#include <qcompilerdetection.h>
-#include <stddef.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
 #include <QVariant>
 #include <Qt>
 #include <QtGlobal>
+#include <stddef.h>
 
 #include "../vproperty.h"
 #include "../vpropertyexplorer_global.h"
@@ -43,9 +42,10 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 class VPROPERTYEXPLORERSHARED_EXPORT VBoolProperty : public VProperty
 {
     Q_OBJECT // NOLINT
+
 public:
     //! Default constructor
-    explicit VBoolProperty(const QString& name);
+    explicit VBoolProperty(const QString &name);
 
     //! Destructor
     ~VBoolProperty() override = default;
@@ -58,17 +58,17 @@ public:
     //! \options Render options
     //! \delegate A pointer to the QAbstractItemDelegate requesting the editor. This can be used to connect signals and
     //! slots.
-    auto createEditor(QWidget* parent, const QStyleOptionViewItem& options,
-                      const QAbstractItemDelegate* delegate) -> QWidget* override;
+    auto createEditor(QWidget *parent, const QStyleOptionViewItem &options, const QAbstractItemDelegate *delegate)
+        -> QWidget * override;
 
     //! Sets the property's data to the editor (returns false, if the standard delegate should do that)
-    auto setEditorData(QWidget* editor) -> bool override;
+    auto setEditorData(QWidget *editor) -> bool override;
 
     //! Gets the data from the widget
-    auto getEditorData(const QWidget* editor) const -> QVariant override;
+    auto getEditorData(const QWidget *editor) const -> QVariant override;
 
     //! Sets the value of the property
-    void setValue(const QVariant& value) override;
+    void setValue(const QVariant &value) override;
 
     //! Returns item flags
     auto flags(int column = DPC_Name) const -> Qt::ItemFlags override;
@@ -81,7 +81,7 @@ public:
     //! \param container If a property is being passed here, no new VProperty is being created but instead it is tried
     //! to fill all the data into container. This can also be used when subclassing this function.
     //! \return Returns the newly created property (or container, if it was not NULL)
-    auto clone(bool include_children = true, VProperty* container = NULL) const -> VProperty* override;
+    auto clone(bool include_children = true, VProperty *container = NULL) const -> VProperty * override;
 
 public slots:
     void StateChanged();
@@ -92,6 +92,6 @@ private:
 
 QT_WARNING_POP
 
-}  // namespace VPE
+} // namespace VPE
 
 #endif // VBOOLPROPERTY_H

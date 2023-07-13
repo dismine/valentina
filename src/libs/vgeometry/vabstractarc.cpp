@@ -36,40 +36,48 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractArc::VAbstractArc(const GOType &type, const quint32 &idObject, const Draw &mode)
-    : VAbstractCurve(type, idObject, mode), d (new VAbstractArcData())
-{}
+  : VAbstractCurve(type, idObject, mode),
+    d(new VAbstractArcData())
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractArc::VAbstractArc(const GOType &type, const VPointF &center, qreal f1, const QString &formulaF1, qreal f2,
                            const QString &formulaF2, quint32 idObject, Draw mode)
-    : VAbstractCurve(type, idObject, mode), d (new VAbstractArcData(center, f1, formulaF1, f2, formulaF2))
-{}
+  : VAbstractCurve(type, idObject, mode),
+    d(new VAbstractArcData(center, f1, formulaF1, f2, formulaF2))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractArc::VAbstractArc(const GOType &type, const VPointF &center, qreal f1, qreal f2, quint32 idObject, Draw mode)
-    : VAbstractCurve(type, idObject, mode), d (new VAbstractArcData(center, f1, f2))
-{}
+  : VAbstractCurve(type, idObject, mode),
+    d(new VAbstractArcData(center, f1, f2))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractArc::VAbstractArc(const GOType &type, const QString &formulaLength, const VPointF &center,
-                           qreal f1, const QString &formulaF1, quint32 idObject, Draw mode)
-    : VAbstractCurve(type, idObject, mode), d (new VAbstractArcData(formulaLength, center, f1, formulaF1))
-{}
+VAbstractArc::VAbstractArc(const GOType &type, const QString &formulaLength, const VPointF &center, qreal f1,
+                           const QString &formulaF1, quint32 idObject, Draw mode)
+  : VAbstractCurve(type, idObject, mode),
+    d(new VAbstractArcData(formulaLength, center, f1, formulaF1))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractArc::VAbstractArc(const GOType &type, const VPointF &center, qreal f1, quint32 idObject, Draw mode)
-    : VAbstractCurve(type, idObject, mode), d (new VAbstractArcData(center, f1))
-{}
+  : VAbstractCurve(type, idObject, mode),
+    d(new VAbstractArcData(center, f1))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractArc::VAbstractArc(const VAbstractArc &arc)
-    : VAbstractCurve(arc), d (arc.d)
-{}
+VAbstractArc::VAbstractArc(const VAbstractArc &arc) = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractArc::operator=(const VAbstractArc &arc) -> VAbstractArc &
 {
-    if ( &arc == this )
+    if (&arc == this)
     {
         return *this;
     }
@@ -80,13 +88,14 @@ auto VAbstractArc::operator=(const VAbstractArc &arc) -> VAbstractArc &
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractArc::VAbstractArc(VAbstractArc &&arc) Q_DECL_NOTHROW
-    : VAbstractCurve(std::move(arc)),
-      d(std::move(arc.d))
-{}
+VAbstractArc::VAbstractArc(VAbstractArc &&arc) noexcept
+  : VAbstractCurve(std::move(arc)),
+    d(std::move(arc.d))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractArc::operator=(VAbstractArc &&arc) Q_DECL_NOTHROW -> VAbstractArc &
+auto VAbstractArc::operator=(VAbstractArc &&arc) noexcept -> VAbstractArc &
 {
     VAbstractCurve::operator=(arc);
     std::swap(d, arc.d);
@@ -95,8 +104,7 @@ auto VAbstractArc::operator=(VAbstractArc &&arc) Q_DECL_NOTHROW -> VAbstractArc 
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractArc::~VAbstractArc() // NOLINT(hicpp-use-equals-default, modernize-use-equals-default)
-{}
+VAbstractArc::~VAbstractArc() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractArc::GetFormulaF1() const -> QString
@@ -171,26 +179,26 @@ void VAbstractArc::setId(const quint32 &id)
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractArc::NameForHistory(const QString &toolName) const -> QString
 {
-    QString name = toolName + QString(" %1").arg(GetCenter().name());
+    QString name = toolName + QStringLiteral(" %1").arg(GetCenter().name());
 
     if (VAbstractCurve::id() != NULL_ID)
     {
-        name += QString("_%1").arg(VAbstractCurve::id());
+        name += QStringLiteral("_%1").arg(VAbstractCurve::id());
     }
 
     if (GetDuplicate() > 0)
     {
-        name += QString("_%1").arg(GetDuplicate());
+        name += QStringLiteral("_%1").arg(GetDuplicate());
     }
 
     QString alias;
 
     if (not GetAliasSuffix().isEmpty())
     {
-        alias = QString("%1 %2").arg(toolName, GetAliasSuffix());
+        alias = QStringLiteral("%1 %2").arg(toolName, GetAliasSuffix());
     }
 
-    return not alias.isEmpty() ? QString("%1 (%2)").arg(alias, name) : name;
+    return not alias.isEmpty() ? QStringLiteral("%1 (%2)").arg(alias, name) : name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

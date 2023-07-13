@@ -31,8 +31,8 @@
 
 #include <QSharedData>
 
-#include "../vmisc/defglobal.h"
 #include "../vmisc/def.h"
+#include "../vmisc/defglobal.h"
 #include "../vmisc/typedef.h"
 
 QT_WARNING_PUSH
@@ -42,31 +42,27 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VLengthLineData final : public QSharedData
 {
 public:
-    VLengthLineData()
-        :p1Id(NULL_ID), p2Id(NULL_ID), patternUnit(Unit::Cm)
-    {}
+    VLengthLineData() = default;
+    VLengthLineData(const quint32 &p1Id, const quint32 &p2Id, Unit patternUnit);
+    VLengthLineData(const VLengthLineData &var) = default;
+    ~VLengthLineData() = default;
 
-    VLengthLineData(const quint32 &p1Id, const quint32 &p2Id, Unit patternUnit)
-        :p1Id(p1Id), p2Id(p2Id), patternUnit(patternUnit)
-    {}
-
-    VLengthLineData(const VLengthLineData &var)
-        :QSharedData(var), p1Id(var.p1Id), p2Id(var.p2Id), patternUnit(var.patternUnit)
-    {}
-
-    virtual  ~VLengthLineData();
-
-    quint32 p1Id;
-    quint32 p2Id;
-    Unit    patternUnit;
+    quint32 p1Id{NULL_ID};      // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 p2Id{NULL_ID};      // NOLINT(misc-non-private-member-variables-in-classes)
+    Unit patternUnit{Unit::Cm}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VLengthLineData) // NOLINT
 };
 
-VLengthLineData::~VLengthLineData()
-{}
-
 QT_WARNING_POP
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VLengthLineData::VLengthLineData(const quint32 &p1Id, const quint32 &p2Id, Unit patternUnit)
+  : p1Id(p1Id),
+    p2Id(p2Id),
+    patternUnit(patternUnit)
+{
+}
 
 #endif // VLINELENGTH_P_H

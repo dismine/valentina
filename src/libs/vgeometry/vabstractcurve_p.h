@@ -43,38 +43,21 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VAbstractCurveData final : public QSharedData
 {
 public:
-
-    VAbstractCurveData ()
-        : duplicate(0),
-          color(ColorBlack),
-          penStyle(TypeLineLine),
-          approximationScale(defCurveApproximationScale)
-    {}
-
-    VAbstractCurveData(const VAbstractCurveData &curve)
-        : QSharedData(curve),
-          duplicate(curve.duplicate),
-          color(curve.color),
-          penStyle(curve.penStyle),
-          approximationScale(curve.approximationScale)
-    {}
-
-    virtual ~VAbstractCurveData();
+    VAbstractCurveData() = default;
+    VAbstractCurveData(const VAbstractCurveData &curve) = default;
+    ~VAbstractCurveData() = default;
 
     /** @brief duplicate helps create unique name for curves that connects the same start and finish points. */
-    quint32 duplicate;
+    quint32 duplicate{0}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    QString color;
-    QString penStyle;
+    QString color{ColorBlack};      // NOLINT(misc-non-private-member-variables-in-classes)
+    QString penStyle{TypeLineLine}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    qreal approximationScale;
+    qreal approximationScale{defCurveApproximationScale}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VAbstractCurveData) // NOLINT
 };
-
-VAbstractCurveData::~VAbstractCurveData()
-{}
 
 QT_WARNING_POP
 

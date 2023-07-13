@@ -38,7 +38,6 @@
 
 #include "vcontour_p.h"
 #include "vlayoutpiece.h"
-#include "../vmisc/vmath.h"
 #include "../vgeometry/vgeometrydef.h"
 #include "../vgeometry/vgobject.h"
 
@@ -122,12 +121,12 @@ auto VContour::operator=(const VContour &contour) -> VContour &
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VContour::VContour(VContour &&contour) Q_DECL_NOTHROW
+VContour::VContour(VContour &&contour) noexcept
     :d (std::move(contour.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VContour::operator=(VContour &&contour) Q_DECL_NOTHROW->VContour &
+auto VContour::operator=(VContour &&contour) noexcept->VContour &
 {
     std::swap(d, contour.d);
     return *this;

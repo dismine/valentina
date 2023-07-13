@@ -29,13 +29,11 @@
 #ifndef CUSTOMEVENTS_H
 #define CUSTOMEVENTS_H
 
-#include <qcompilerdetection.h>
 #include <QEvent>
 #include <QString>
 
-#include "typedef.h"
-
-enum CustomEventType {
+enum CustomEventType
+{
     UndoEventType = 1,
     LiteParseEventType = 2,
     FitBestCurrentEventType = 3,
@@ -50,12 +48,14 @@ const QEvent::Type UNDO_EVENT =
 class UndoEvent : public QEvent
 {
 public:
-    UndoEvent()
-        : QEvent(UNDO_EVENT)
-    {}
-
-    virtual ~UndoEvent() =default;
+    UndoEvent();
+    ~UndoEvent() override = default;
 };
+
+inline UndoEvent::UndoEvent()
+  : QEvent(UNDO_EVENT)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 const QEvent::Type LITE_PARSE_EVENT =
@@ -64,12 +64,14 @@ const QEvent::Type LITE_PARSE_EVENT =
 class LiteParseEvent : public QEvent
 {
 public:
-    LiteParseEvent()
-        : QEvent(LITE_PARSE_EVENT)
-    {}
-
-    virtual ~LiteParseEvent() =default;
+    LiteParseEvent();
+    ~LiteParseEvent() override = default;
 };
+
+inline LiteParseEvent::LiteParseEvent()
+  : QEvent(LITE_PARSE_EVENT)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 const QEvent::Type FIT_BEST_CURRENT_EVENT =
@@ -78,12 +80,14 @@ const QEvent::Type FIT_BEST_CURRENT_EVENT =
 class FitBestCurrentEvent : public QEvent
 {
 public:
-    FitBestCurrentEvent()
-        : QEvent(FIT_BEST_CURRENT_EVENT)
-    {}
-
-    virtual ~FitBestCurrentEvent() =default;
+    FitBestCurrentEvent();
+    ~FitBestCurrentEvent() override = default;
 };
+
+inline FitBestCurrentEvent::FitBestCurrentEvent()
+  : QEvent(FIT_BEST_CURRENT_EVENT)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 const QEvent::Type WARNING_MESSAGE_EVENT =
@@ -92,13 +96,8 @@ const QEvent::Type WARNING_MESSAGE_EVENT =
 class WarningMessageEvent : public QEvent
 {
 public:
-    WarningMessageEvent(const QString &message, QtMsgType severity)
-        : QEvent(WARNING_MESSAGE_EVENT),
-          m_message(message),
-          m_severity(severity)
-    {}
-
-    virtual ~WarningMessageEvent() =default;
+    WarningMessageEvent(const QString &message, QtMsgType severity);
+    ~WarningMessageEvent() override = default;
 
     auto Message() const -> QString;
 
@@ -108,6 +107,13 @@ private:
     QString m_message;
     QtMsgType m_severity;
 };
+
+inline WarningMessageEvent::WarningMessageEvent(const QString &message, QtMsgType severity)
+  : QEvent(WARNING_MESSAGE_EVENT),
+    m_message(message),
+    m_severity(severity)
+{
+}
 
 inline auto WarningMessageEvent::Message() const -> QString
 {

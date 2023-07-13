@@ -29,7 +29,6 @@
 #ifndef SAVETOOLOPTIONS_H
 #define SAVETOOLOPTIONS_H
 
-#include <qcompilerdetection.h>
 #include <QDomElement>
 #include <QMetaObject>
 #include <QObject>
@@ -41,15 +40,18 @@
 class SaveToolOptions : public VUndoCommand
 {
     Q_OBJECT // NOLINT
+
 public:
     SaveToolOptions(const QDomElement &oldXml, const QDomElement &newXml, const QList<quint32> &oldDependencies,
                     const QList<quint32> &newDependencies, VAbstractPattern *doc, const quint32 &id,
                     QUndoCommand *parent = nullptr);
-    virtual ~SaveToolOptions() = default;
-    virtual void undo() override;
-    virtual void redo() override;
-    virtual auto mergeWith(const QUndoCommand *command) -> bool override;
-    virtual auto id() const -> int override;
+    ~SaveToolOptions() override = default;
+
+    void undo() override;
+    void redo() override;
+
+    auto mergeWith(const QUndoCommand *command) -> bool override;
+    auto id() const -> int override;
 
     auto getNewXml() const -> QDomElement;
     auto getToolId() const -> quint32;
@@ -58,8 +60,8 @@ public:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(SaveToolOptions) // NOLINT
-    const QDomElement    oldXml;
-    QDomElement          newXml;
+    const QDomElement oldXml;
+    QDomElement newXml;
     const QList<quint32> oldDependencies;
     const QList<quint32> newDependencies;
 

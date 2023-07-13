@@ -29,10 +29,10 @@
 #ifndef VLAYOUTDETAIL_P_H
 #define VLAYOUTDETAIL_P_H
 
-#include <QSharedData>
 #include <QPointF>
-#include <QVector>
+#include <QSharedData>
 #include <QTransform>
+#include <QVector>
 
 #include "../vpatterndb/floatItemData/floatitemdef.h"
 #include "../vwidgets/vpiecegrainline.h"
@@ -43,15 +43,15 @@
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-#   include "../vmisc/vdatastreamenum.h"
+#include "../vmisc/vdatastreamenum.h"
 #endif
 
-#include "vlayoutpiecepath.h"
-#include "../vgeometry/vgeometrydef.h"
-#include "vtextmanager.h"
 #include "../ifc/exception/vexception.h"
-#include "vlayoutpoint.h"
+#include "../vgeometry/vgeometrydef.h"
 #include "../vgeometry/vlayoutplacelabel.h"
+#include "vlayoutpiecepath.h"
+#include "vlayoutpoint.h"
+#include "vtextmanager.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -60,50 +60,49 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VLayoutPieceData : public QSharedData
 {
 public:
-    VLayoutPieceData(){} // NOLINT(modernize-use-equals-default)
-
+    VLayoutPieceData() = default;
     VLayoutPieceData(const VLayoutPieceData &detail) = default;
     ~VLayoutPieceData() = default;
 
-    friend auto operator<<(QDataStream& dataStream, const VLayoutPieceData& piece) -> QDataStream&;
-    friend auto operator>>(QDataStream& dataStream, VLayoutPieceData& piece) -> QDataStream&;
+    friend auto operator<<(QDataStream &dataStream, const VLayoutPieceData &piece) -> QDataStream &;
+    friend auto operator>>(QDataStream &dataStream, VLayoutPieceData &piece) -> QDataStream &;
 
     /** @brief contour list of contour points. */
-    QVector<VLayoutPoint>     m_contour{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QVector<VLayoutPoint> m_contour{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief seamAllowance list of seam allowance points. */
-    QVector<VLayoutPoint>     m_seamAllowance{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QVector<VLayoutPoint> m_seamAllowance{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief layoutAllowance list of layout allowance points. */
-    QVector<QPointF>          m_layoutAllowance{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QVector<QPointF> m_layoutAllowance{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief passmarks list of passmakrs. */
-    QVector<VLayoutPassmark>  m_passmarks{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QVector<VLayoutPassmark> m_passmarks{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief m_internalPaths list of internal paths. */
     QVector<VLayoutPiecePath> m_internalPaths{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief matrix transformation matrix*/
-    QTransform                m_matrix{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QTransform m_matrix{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief layoutWidth value layout allowance width in pixels. */
-    qreal                     m_layoutWidth{0}; // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal m_layoutWidth{0}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    bool                      m_mirror{false}; // NOLINT(misc-non-private-member-variables-in-classes)
+    bool m_mirror{false}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief detailLabel detail label rectangle */
-    QVector<QPointF>          m_detailLabel{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QVector<QPointF> m_detailLabel{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief patternInfo pattern info rectangle */
-    QVector<QPointF>          m_patternInfo{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QVector<QPointF> m_patternInfo{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    VPieceGrainline           m_grainline{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    VPieceGrainline m_grainline{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief m_tmDetail text manager for laying out detail info */
-    VTextManager              m_tmDetail{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    VTextManager m_tmDetail{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief m_tmPattern text manager for laying out pattern info */
-    VTextManager              m_tmPattern{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    VTextManager m_tmPattern{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief m_placeLabels list of place labels. */
     QVector<VLayoutPlaceLabel> m_placeLabels{}; // NOLINT(misc-non-private-member-variables-in-classes)
@@ -130,9 +129,9 @@ private:
 QT_WARNING_POP
 
 // See https://stackoverflow.com/a/46719572/3045403
-#if __cplusplus < 201703L // C++17
-constexpr quint32 VLayoutPieceData::streamHeader;  // NOLINT(readability-redundant-declaration)
-constexpr quint16 VLayoutPieceData::classVersion;  // NOLINT(readability-redundant-declaration)
+#if __cplusplus < 201703L                         // C++17
+constexpr quint32 VLayoutPieceData::streamHeader; // NOLINT(readability-redundant-declaration)
+constexpr quint16 VLayoutPieceData::classVersion; // NOLINT(readability-redundant-declaration)
 #endif
 
 // Friend functions
@@ -175,8 +174,8 @@ inline auto operator>>(QDataStream &dataStream, VLayoutPieceData &piece) -> QDat
     {
         QString message = QCoreApplication::tr("VLayoutPieceData prefix mismatch error: actualStreamHeader = 0x%1 and "
                                                "streamHeader = 0x%2")
-                .arg(actualStreamHeader, 8, 0x10, QChar('0'))
-                .arg(VLayoutPieceData::streamHeader, 8, 0x10, QChar('0'));
+                              .arg(actualStreamHeader, 8, 0x10, QChar('0'))
+                              .arg(VLayoutPieceData::streamHeader, 8, 0x10, QChar('0'));
         throw VException(message);
     }
 
@@ -187,7 +186,8 @@ inline auto operator>>(QDataStream &dataStream, VLayoutPieceData &piece) -> QDat
     {
         QString message = QCoreApplication::tr("VLayoutPieceData compatibility error: actualClassVersion = %1 and "
                                                "classVersion = %2")
-                .arg(actualClassVersion).arg(VLayoutPieceData::classVersion);
+                              .arg(actualClassVersion)
+                              .arg(VLayoutPieceData::classVersion);
         throw VException(message);
     }
 

@@ -43,8 +43,8 @@ public:
     ~VAbstractBezier() override =default;
 
 #ifdef Q_COMPILER_RVALUE_REFS
-    VAbstractBezier(VAbstractBezier &&curve) Q_DECL_NOTHROW =default;
-    auto operator=(VAbstractBezier &&curve) Q_DECL_NOTHROW -> VAbstractBezier & =default;
+    VAbstractBezier(VAbstractBezier &&curve) noexcept =default;
+    auto operator=(VAbstractBezier &&curve) noexcept -> VAbstractBezier & =default;
 #endif
 
     virtual auto GetC1Length() const -> qreal =0;

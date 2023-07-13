@@ -77,12 +77,12 @@ auto VFSplinePoint::operator=(const VFSplinePoint &point) -> VFSplinePoint &
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VFSplinePoint::VFSplinePoint(VFSplinePoint &&point) Q_DECL_NOTHROW
+VFSplinePoint::VFSplinePoint(VFSplinePoint &&point) noexcept
     :d(std::move(point.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VFSplinePoint::operator=(VFSplinePoint &&point) Q_DECL_NOTHROW->VFSplinePoint &
+auto VFSplinePoint::operator=(VFSplinePoint &&point) noexcept->VFSplinePoint &
 {
     std::swap(d, point.d);
     return *this;
@@ -236,12 +236,12 @@ auto VSplinePoint::operator=(const VSplinePoint &point) -> VSplinePoint &
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VSplinePoint::VSplinePoint(VSplinePoint &&point) Q_DECL_NOTHROW
+VSplinePoint::VSplinePoint(VSplinePoint &&point) noexcept
     : d(std::move(point.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VSplinePoint::operator=(VSplinePoint &&point) Q_DECL_NOTHROW->VSplinePoint &
+auto VSplinePoint::operator=(VSplinePoint &&point) noexcept->VSplinePoint &
 {
     std::swap(d, point.d);
     return *this;
@@ -288,7 +288,7 @@ void VSplinePoint::SetAngle1(const qreal &value, const QString &angle1F)
 
     line.setAngle(d->angle1+180);
     d->angle2 = line.angle();
-    d->angle2F = QString().number(d->angle2);
+    d->angle2F = QString::number(d->angle2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -314,7 +314,7 @@ void VSplinePoint::SetAngle2(const qreal &value, const QString &angle2F)
 
     line.setAngle(d->angle2+180);
     d->angle1 = line.angle();
-    d->angle1F = QString().number(d->angle1);
+    d->angle1F = QString::number(d->angle1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

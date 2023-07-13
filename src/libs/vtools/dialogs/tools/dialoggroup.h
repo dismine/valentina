@@ -29,7 +29,6 @@
 #ifndef DIALOGGROUP_H
 #define DIALOGGROUP_H
 
-#include <qcompilerdetection.h>
 #include <QMap>
 #include <QMetaObject>
 #include <QObject>
@@ -40,7 +39,7 @@
 
 namespace Ui
 {
-    class DialogGroup;
+class DialogGroup;
 }
 
 class DialogGroup : public DialogTool
@@ -49,25 +48,25 @@ class DialogGroup : public DialogTool
 
 public:
     explicit DialogGroup(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    ~DialogGroup();
+    ~DialogGroup() override;
 
-    void    SetName(const QString &name);
+    void SetName(const QString &name);
     auto GetName() const -> QString;
 
-    void        SetTags(const QStringList &tags);
+    void SetTags(const QStringList &tags);
     auto GetTags() const -> QStringList;
 
-    virtual void SetGroupCategories(const QStringList &categories) override;
+    void SetGroupCategories(const QStringList &categories) override;
 
     auto GetGroup() const -> QMap<quint32, quint32>;
 
-    virtual void ShowDialog(bool click) override;
+    void ShowDialog(bool click) override;
 
 public slots:
-    virtual void SelectedObject(bool selected, quint32 object, quint32 tool) override;
+    void SelectedObject(bool selected, quint32 object, quint32 tool) override;
 
 protected:
-    virtual auto IsValid() const -> bool final;
+    auto IsValid() const -> bool final;
 
 private slots:
     void NameChanged();

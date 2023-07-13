@@ -83,7 +83,7 @@ auto VPieceArea::operator=(const VPieceArea &var) -> VPieceArea &
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VPieceArea::VPieceArea(VPieceArea &&var) Q_DECL_NOTHROW
+VPieceArea::VPieceArea(VPieceArea &&var) noexcept
     :VInternalVariable(std::move(var)), d(std::move(var.d))
 {}
 
@@ -92,7 +92,7 @@ VPieceArea::~VPieceArea() // NOLINT(modernize-use-equals-default)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPieceArea::operator=(VPieceArea &&var) Q_DECL_NOTHROW -> VPieceArea &
+auto VPieceArea::operator=(VPieceArea &&var) noexcept -> VPieceArea &
 {
     VInternalVariable::operator=(var);
     std::swap(d, var.d);

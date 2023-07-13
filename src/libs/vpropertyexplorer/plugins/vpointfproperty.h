@@ -21,7 +21,7 @@
 #ifndef VPOINTFPROPERTY_H
 #define VPOINTFPROPERTY_H
 
-#include <qcompilerdetection.h>
+
 #include <QMetaObject>
 #include <QObject>
 #include <QPointF>

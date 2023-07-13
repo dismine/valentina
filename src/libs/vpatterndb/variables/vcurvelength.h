@@ -29,12 +29,10 @@
 #ifndef VCURVELENGTH_H
 #define VCURVELENGTH_H
 
-#include <qcompilerdetection.h>
 #include <QString>
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
-#include "../ifc/ifcdef.h"
 #include "vcurvevariable.h"
 
 class VAbstractCurve;
@@ -49,7 +47,7 @@ public:
                  Unit patternUnit, qint32 segment);
     VCurveLength(const VCurveLength &var);
     auto operator=(const VCurveLength &var) -> VCurveLength &;
-    virtual ~VCurveLength() override;
+    ~VCurveLength() override;
 };
 
 #endif // VCURVELENGTH_H

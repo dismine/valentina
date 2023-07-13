@@ -29,7 +29,6 @@
 #ifndef VCUBICBEZIERPATH_H
 #define VCUBICBEZIERPATH_H
 
-#include <qcompilerdetection.h>
 #include <QCoreApplication>
 #include <QPointF>
 #include <QSharedDataPointer>
@@ -39,7 +38,6 @@
 #include <QtGlobal>
 
 #include "vabstractcubicbezierpath.h"
-#include "vgeometrydef.h"
 #include "vpointf.h"
 
 class VCubicBezierPathData;
@@ -47,6 +45,7 @@ class VCubicBezierPathData;
 class VCubicBezierPath final : public VAbstractCubicBezierPath
 {
     Q_DECLARE_TR_FUNCTIONS(VCubicBezierPath) // NOLINT
+
 public:
     explicit VCubicBezierPath(quint32 idObject = 0, Draw mode = Draw::Calculation);
     VCubicBezierPath(const VCubicBezierPath &curve);
@@ -58,19 +57,19 @@ public:
 
     auto operator=(const VCubicBezierPath &curve) -> VCubicBezierPath &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VCubicBezierPath(VCubicBezierPath &&curve) Q_DECL_NOTHROW;
-    auto operator=(VCubicBezierPath &&curve) Q_DECL_NOTHROW->VCubicBezierPath &;
+    VCubicBezierPath(VCubicBezierPath &&curve) noexcept;
+    auto operator=(VCubicBezierPath &&curve) noexcept -> VCubicBezierPath &;
 #endif
 
     auto operator[](vsizetype indx) -> VPointF &;
 
     auto at(vsizetype indx) const -> const VPointF &;
 
-    void   append(const VPointF &point);
+    void append(const VPointF &point);
 
     virtual auto CountSubSpl() const -> vsizetype override;
     virtual auto CountPoints() const -> vsizetype override;
-    virtual void    Clear() override;
+    virtual void Clear() override;
     virtual auto GetSpline(vsizetype index) const -> VSpline override;
     virtual auto GetStartAngle() const -> qreal override;
     virtual auto GetEndAngle() const -> qreal override;

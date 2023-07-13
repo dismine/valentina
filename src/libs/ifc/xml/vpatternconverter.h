@@ -29,7 +29,7 @@
 #ifndef VPATTERNCONVERTER_H
 #define VPATTERNCONVERTER_H
 
-#include <qcompilerdetection.h>
+
 #include <QCoreApplication>
 #include <QDomElement>
 #include <QMap>

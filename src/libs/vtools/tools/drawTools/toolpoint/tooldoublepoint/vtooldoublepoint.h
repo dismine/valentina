@@ -29,7 +29,7 @@
 #ifndef VTOOLDOUBLEPOINT_H
 #define VTOOLDOUBLEPOINT_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsItem>
 #include <QGraphicsPathItem>
 #include <QMetaObject>

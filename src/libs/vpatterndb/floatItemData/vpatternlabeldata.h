@@ -48,8 +48,8 @@ public:
 
     auto operator=(const VPatternLabelData &data) -> VPatternLabelData &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VPatternLabelData(VPatternLabelData &&data) Q_DECL_NOTHROW;
-    auto operator=(VPatternLabelData &&data) Q_DECL_NOTHROW->VPatternLabelData &;
+    VPatternLabelData(VPatternLabelData &&data) noexcept;
+    auto operator=(VPatternLabelData &&data) noexcept->VPatternLabelData &;
 #endif
 
     // methods, which set up label parameters

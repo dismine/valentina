@@ -28,8 +28,8 @@
 #ifndef VPLACELABELITEM_P_H
 #define VPLACELABELITEM_P_H
 
-#include <QSharedData>
 #include "vgeometrydef.h"
+#include <QSharedData>
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
@@ -41,45 +41,26 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VPlaceLabelItemData final : public QSharedData
 {
 public:
-    VPlaceLabelItemData()
-    {}
+    VPlaceLabelItemData() = default;
+    VPlaceLabelItemData(const VPlaceLabelItemData &item) = default;
+    ~VPlaceLabelItemData() = default;
 
-    VPlaceLabelItemData(const VPlaceLabelItemData &item)
-        : QSharedData(item),
-          width(item.width),
-          height(item.height),
-          angle(item.angle),
-          visibilityTrigger(item.visibilityTrigger),
-          type(item.type),
-          centerPoint(item.centerPoint),
-          wValue(item.wValue),
-          hValue(item.hValue),
-          aValue(item.aValue),
-          correctionAngle(item.correctionAngle),
-          isVisible(item.isVisible)
-    {}
+    QString width{};                             // NOLINT(misc-non-private-member-variables-in-classes)
+    QString height{};                            // NOLINT(misc-non-private-member-variables-in-classes)
+    QString angle{'0'};                          // NOLINT(misc-non-private-member-variables-in-classes)
+    QString visibilityTrigger{'1'};              // NOLINT(misc-non-private-member-variables-in-classes)
+    PlaceLabelType type{PlaceLabelType::Button}; // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 centerPoint{0};                      // NOLINT(misc-non-private-member-variables-in-classes)
 
-    virtual ~VPlaceLabelItemData();
-
-    QString width{};
-    QString height{};
-    QString angle{'0'};
-    QString visibilityTrigger{'1'};
-    PlaceLabelType type{PlaceLabelType::Button};
-    quint32 centerPoint{0};
-
-    qreal wValue{0};
-    qreal hValue{0};
-    qreal aValue{0};
-    qreal correctionAngle{0};
-    qreal isVisible{1};
+    qreal wValue{0};          // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal hValue{0};          // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal aValue{0};          // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal correctionAngle{0}; // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal isVisible{1};       // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VPlaceLabelItemData) // NOLINT
 };
-
-VPlaceLabelItemData::~VPlaceLabelItemData()
-{}
 
 QT_WARNING_POP
 

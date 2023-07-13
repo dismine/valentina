@@ -29,19 +29,18 @@
 #ifndef VABSTRACTOPERATION_H
 #define VABSTRACTOPERATION_H
 
-#include <QtGlobal>
-#include <qcompilerdetection.h>
+#include <QGraphicsLineItem>
 #include <QMap>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
 #include <QVector>
-#include <QGraphicsLineItem>
+#include <QtGlobal>
 
+#include "../../toolsdef.h"
 #include "../vdrawtool.h"
 #include "../vwidgets/vsimplecurve.h"
 #include "../vwidgets/vsimplepoint.h"
-#include "../../toolsdef.h"
 
 struct DestinationItem
 {
@@ -54,8 +53,9 @@ struct DestinationItem
 struct VAbstractOperationInitData : VDrawToolInitData
 {
     VAbstractOperationInitData()
-        : VDrawToolInitData()
-    {}
+      : VDrawToolInitData()
+    {
+    }
 
     QString suffix{};
     QVector<SourceItem> source{};
@@ -74,6 +74,7 @@ class VAbstractOperation : public VDrawTool, public QGraphicsLineItem
     // Fix warning "Class implements the interface QGraphicsItem but does not list it
     // in Q_INTERFACES. qobject_cast to QGraphicsItem will not work!"
     Q_INTERFACES(QGraphicsItem)
+
 public:
     virtual ~VAbstractOperation() = default;
 
@@ -84,7 +85,7 @@ public:
     virtual auto getTagName() const -> QString override;
 
     auto Suffix() const -> QString;
-    void    SetSuffix(const QString &suffix);
+    void SetSuffix(const QString &suffix);
 
     virtual void SetNotes(const QString &notes) override;
 
@@ -109,29 +110,30 @@ public slots:
     virtual void AllowSelecting(bool enabled) override;
     virtual void EnableToolMove(bool move) override;
 
-    void         AllowPointHover(bool enabled);
-    void         AllowPointSelecting(bool enabled);
+    void AllowPointHover(bool enabled);
+    void AllowPointSelecting(bool enabled);
 
-    void         AllowPointLabelHover(bool enabled);
-    void         AllowPointLabelSelecting(bool enabled);
+    void AllowPointLabelHover(bool enabled);
+    void AllowPointLabelSelecting(bool enabled);
 
-    void         AllowSplineHover(bool enabled);
-    void         AllowSplineSelecting(bool enabled);
+    void AllowSplineHover(bool enabled);
+    void AllowSplineSelecting(bool enabled);
 
-    void         AllowSplinePathHover(bool enabled);
-    void         AllowSplinePathSelecting(bool enabled);
+    void AllowSplinePathHover(bool enabled);
+    void AllowSplinePathSelecting(bool enabled);
 
-    void         AllowArcHover(bool enabled);
-    void         AllowArcSelecting(bool enabled);
+    void AllowArcHover(bool enabled);
+    void AllowArcSelecting(bool enabled);
 
-    void         AllowElArcHover(bool enabled);
-    void         AllowElArcSelecting(bool enabled);
+    void AllowElArcHover(bool enabled);
+    void AllowElArcSelecting(bool enabled);
 
     virtual void ToolSelectionType(const SelectionType &type) override;
     virtual void Disable(bool disable, const QString &namePP) override;
-    void         ObjectSelected(bool selected, quint32 objId);
-    void         DeleteFromLabel();
-    void         LabelChangePosition(const QPointF &pos, quint32 labelId);
+    void ObjectSelected(bool selected, quint32 objId);
+    void DeleteFromLabel();
+    void LabelChangePosition(const QPointF &pos, quint32 labelId);
+
 protected:
     QString suffix;
 
@@ -157,19 +159,15 @@ protected:
     virtual void UpdateNamePosition(quint32 id, const QPointF &pos) override;
     void SaveSourceDestination(QDomElement &tag);
 
-    template <typename T>
-    void ShowToolVisualization(bool show);
+    template <typename T> void ShowToolVisualization(bool show);
 
-    template <typename T>
-    void SetDialogVisibilityGroupData(QPointer<T> dialogTool);
+    template <typename T> void SetDialogVisibilityGroupData(QPointer<T> dialogTool);
 
-    template <typename T>
-    void SaveVisibilityGroupData(QPointer<T> dialogTool);
+    template <typename T> void SaveVisibilityGroupData(QPointer<T> dialogTool);
 
     void InitCurve(quint32 id, VContainer *data, GOType curveType, SceneObject sceneType);
 
-    template <typename T>
-    static void InitOperationToolConnections(VMainGraphicsScene *scene, T *tool);
+    template <typename T> static void InitOperationToolConnections(VMainGraphicsScene *scene, T *tool);
 
     void InitOperatedObjects();
 
@@ -177,7 +175,8 @@ protected:
     auto ComplexCurveToolTip(quint32 itemId) const -> QString;
     auto VisibilityGroupToolTip() const -> QString;
 
-    static void CreateVisibilityGroup(const VAbstractOperationInitData & initData);
+    static void CreateVisibilityGroup(const VAbstractOperationInitData &initData);
+
 private:
     Q_DISABLE_COPY_MOVE(VAbstractOperation) // NOLINT
 
@@ -188,8 +187,7 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-template<typename T>
-void VAbstractOperation::SetDialogVisibilityGroupData(QPointer<T> dialogTool)
+template <typename T> void VAbstractOperation::SetDialogVisibilityGroupData(QPointer<T> dialogTool)
 {
     SCASSERT(not dialogTool.isNull())
 
@@ -208,8 +206,7 @@ void VAbstractOperation::SetDialogVisibilityGroupData(QPointer<T> dialogTool)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template<typename T>
-void VAbstractOperation::SaveVisibilityGroupData(QPointer<T> dialogTool)
+template <typename T> void VAbstractOperation::SaveVisibilityGroupData(QPointer<T> dialogTool)
 {
     SCASSERT(not dialogTool.isNull())
 
@@ -220,8 +217,7 @@ void VAbstractOperation::SaveVisibilityGroupData(QPointer<T> dialogTool)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-void VAbstractOperation::ShowToolVisualization(bool show)
+template <typename T> void VAbstractOperation::ShowToolVisualization(bool show)
 {
     if (show)
     {
@@ -245,8 +241,7 @@ void VAbstractOperation::ShowToolVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-void VAbstractOperation::InitOperationToolConnections(VMainGraphicsScene *scene, T *tool)
+template <typename T> void VAbstractOperation::InitOperationToolConnections(VMainGraphicsScene *scene, T *tool)
 {
     SCASSERT(scene != nullptr)
     SCASSERT(tool != nullptr)

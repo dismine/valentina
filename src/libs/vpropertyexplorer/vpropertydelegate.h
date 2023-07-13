@@ -21,7 +21,7 @@
 #ifndef VPROPERTYDELEGATE_H
 #define VPROPERTYDELEGATE_H
 
-#include <qcompilerdetection.h>
+
 #include <QMetaObject>
 #include <QObject>
 #include <QSize>

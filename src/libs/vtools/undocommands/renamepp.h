@@ -29,7 +29,6 @@
 #ifndef RENAMEPP_H
 #define RENAMEPP_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -37,17 +36,20 @@
 
 #include "vundocommand.h"
 
-class RenamePP :public VUndoCommand
+class RenamePP : public VUndoCommand
 {
     Q_OBJECT // NOLINT
+
 public:
     RenamePP(VAbstractPattern *doc, const QString &newPPname, QComboBox *combo, QUndoCommand *parent = nullptr);
-    virtual ~RenamePP() override;
+    ~RenamePP() override;
 
-    virtual void undo() override;
-    virtual void redo() override;
-    virtual auto mergeWith(const QUndoCommand *command) -> bool override;
-    virtual auto id() const -> int override;
+    void undo() override;
+    void redo() override;
+
+    auto mergeWith(const QUndoCommand *command) -> bool override;
+    auto id() const -> int override;
+
     auto getNewPPname() const -> QString;
     auto getOldPPname() const -> QString;
 
@@ -55,9 +57,9 @@ private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(RenamePP) // NOLINT
     QComboBox *combo;
-    QString   newPPname;
-    QString   oldPPname;
-    void      ChangeName(const QString &oldName, const QString &newName);
+    QString newPPname;
+    QString oldPPname;
+    void ChangeName(const QString &oldName, const QString &newName);
 };
 
 //---------------------------------------------------------------------------------------------------------------------

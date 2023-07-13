@@ -28,23 +28,20 @@
 
 #include "addpatternpiece.h"
 
-#include "../vmisc/def.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/def.h"
 #include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 AddPatternPiece::AddPatternPiece(const QDomElement &xml, VAbstractPattern *doc, const QString &namePP,
                                  QUndoCommand *parent)
-    : VUndoCommand(xml, doc, parent), namePP(namePP)
+  : VUndoCommand(xml, doc, parent),
+    namePP(namePP)
 {
     // cppcheck-suppress unknownMacro
     SCASSERT(namePP.isEmpty() == false)
     setText(tr("add pattern piece %1").arg(namePP));
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-AddPatternPiece::~AddPatternPiece()
-{}
 
 //---------------------------------------------------------------------------------------------------------------------
 void AddPatternPiece::undo()

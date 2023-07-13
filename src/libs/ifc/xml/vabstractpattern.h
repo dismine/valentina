@@ -29,7 +29,6 @@
 #ifndef VABSTRACTPATTERN_H
 #define VABSTRACTPATTERN_H
 
-#include <qcompilerdetection.h>
 #include <QHash>
 #include <QMap>
 #include <QMetaObject>
@@ -37,9 +36,9 @@
 #include <QPair>
 #include <QString>
 #include <QStringList>
+#include <QUuid>
 #include <QVector>
 #include <QtGlobal>
-#include <QUuid>
 
 #include "../vmisc/def.h"
 #include "vdomdocument.h"
@@ -51,14 +50,40 @@ class VPieceNode;
 class VPatternImage;
 class VBackgroundPatternImage;
 
-enum class Document : qint8 { FullLiteParse, LiteParse, LitePPParse, FullParse };
-enum class LabelType : qint8 {NewPatternPiece, NewLabel};
+enum class Document : qint8
+{
+    FullLiteParse,
+    LiteParse,
+    LitePPParse,
+    FullParse
+};
+enum class LabelType : qint8
+{
+    NewPatternPiece,
+    NewLabel
+};
 
 // Don't touch values!!!. Same values stored in xml.
-enum class CrossCirclesPoint : qint8 {FirstPoint = 1, SecondPoint = 2};
-enum class VCrossCurvesPoint : qint8 {HighestPoint = 1, LowestPoint = 2};
-enum class HCrossCurvesPoint : qint8 {LeftmostPoint = 1, RightmostPoint = 2};
-enum class AxisType : qint8 {VerticalAxis = 1, HorizontalAxis = 2};
+enum class CrossCirclesPoint : qint8
+{
+    FirstPoint = 1,
+    SecondPoint = 2
+};
+enum class VCrossCurvesPoint : qint8
+{
+    HighestPoint = 1,
+    LowestPoint = 2
+};
+enum class HCrossCurvesPoint : qint8
+{
+    LeftmostPoint = 1,
+    RightmostPoint = 2
+};
+enum class AxisType : qint8
+{
+    VerticalAxis = 1,
+    HorizontalAxis = 2
+};
 
 class VContainer;
 class VDataTool;
@@ -68,9 +93,9 @@ QT_WARNING_DISABLE_GCC("-Weffc++")
 
 struct VFormulaField
 {
-    QString     expression;
+    QString expression;
     QDomElement element;
-    QString     attribute;
+    QString attribute;
 };
 
 struct VFinalMeasurement
@@ -97,6 +122,7 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 class VAbstractPattern : public VDomDocument
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit VAbstractPattern(QObject *parent = nullptr);
     virtual ~VAbstractPattern();
@@ -374,48 +400,48 @@ signals:
      * @brief ChangedActivPP change active pattern peace.
      * @param newName new pattern peace name.
      */
-    void           ChangedActivPP(const QString &newName);
+    void ChangedActivPP(const QString &newName);
 
     /**
      * @brief ChangedCursor change cursor position.
      * @param id tool id.
      */
-    void           ChangedCursor(quint32 id);
+    void ChangedCursor(quint32 id);
 
     /**
      * @brief ChangedNameDraw save new name pattern peace.
      * @param oldName old name.
      * @param newName new name.
      */
-    void           ChangedNameDraw(const QString &oldName, const QString &newName);
+    void ChangedNameDraw(const QString &oldName, const QString &newName);
     /**
      * @brief FullUpdateFromFile update tool data form file.
      */
-    void           FullUpdateFromFile();
+    void FullUpdateFromFile();
     /**
      * @brief patternChanged emit if we have unsaved change.
      */
-    void           patternChanged(bool saved);
-    void           UpdatePatternLabel();
+    void patternChanged(bool saved);
+    void UpdatePatternLabel();
     /**
      * @brief ShowTool highlight tool.
      * @param id tool id.
      * @param enable enable or disable highlight.
      */
-    void           ShowTool(quint32 id, bool enable);
-    void           ClearMainWindow();
-    void           UndoCommand();
-    void           SetEnabledGUI(bool enabled);
-    void           CheckLayout();
-    void           UpdateInLayoutList();
-    void           ShowDetail(quint32 id);
-    void           SetCurrentPP(const QString &patterPiece);
-    void           MadeProgress();
+    void ShowTool(quint32 id, bool enable);
+    void ClearMainWindow();
+    void UndoCommand();
+    void SetEnabledGUI(bool enabled);
+    void CheckLayout();
+    void UpdateInLayoutList();
+    void ShowDetail(quint32 id);
+    void SetCurrentPP(const QString &patterPiece);
+    void MadeProgress();
     /**
      * @brief UpdateGroups emit if the groups have been updated
      */
-    void           UpdateGroups();
-    void           UpdateToolTip();
+    void UpdateGroups();
+    void UpdateToolTip();
 
     void BackgroundImageTransformationChanged(QUuid id);
     void BackgroundImagesHoldChanged();
@@ -428,31 +454,31 @@ signals:
     void BackgroundImageOpacityChanged(const QUuid &id);
 
 public slots:
-    virtual void   LiteParseTree(const Document &parse)=0;
-    void           haveLiteChange();
-    void           NeedFullParsing();
-    void           ClearScene();
-    void           CheckInLayoutList();
-    void           SelectedDetail(quint32 id);
-    void           UpdateVisiblityGroups();
+    virtual void LiteParseTree(const Document &parse) = 0;
+    void haveLiteChange();
+    void NeedFullParsing();
+    void ClearScene();
+    void CheckInLayoutList();
+    void SelectedDetail(quint32 id);
+    void UpdateVisiblityGroups();
 
 protected:
     /** @brief nameActivDraw name current pattern peace. */
-    QString        nameActivPP;
+    QString nameActivPP;
 
     /** @brief cursor cursor keep id tool after which we will add new tool in file. */
-    quint32        cursor;
+    quint32 cursor;
 
-    QVector<VDataTool*> toolsOnRemove;
+    QVector<VDataTool *> toolsOnRemove;
 
     /** @brief history history records. */
     QVector<VToolRecord> history;
 
     /** @brief patternPieces list of patern pieces names for combobox*/
-    QStringList    patternPieces;
+    QStringList patternPieces;
 
     /** @brief modified keep state of the document for cases that do not cover QUndoStack*/
-    mutable bool   modified;
+    mutable bool modified;
 
     Unit m_units{Unit::LAST_UNIT_DO_NOT_USE};
     QString m_patternNumber{};
@@ -463,23 +489,23 @@ protected:
     QString m_companyName{};
 
     /** @brief tools list with pointer on tools. */
-    static QHash<quint32, VDataTool*> tools;
+    static QHash<quint32, VDataTool *> tools;
     /** @brief patternLabelLines list to speed up reading a template by many pieces. */
     static QVector<VLabelTemplateLine> patternLabelLines;
     /** @brief patternMaterials list to speed up reading materials by many pieces. */
     static QMap<int, QString> patternMaterials;
     static bool patternLabelWasChanged;
 
-    static void       ToolExists(const quint32 &id);
+    static void ToolExists(const quint32 &id);
     static auto ParsePathNodes(const QDomElement &domElement) -> VPiecePath;
     static auto ParseSANode(const QDomElement &domElement) -> VPieceNode;
 
-    void           SetActivPP(const QString& name);
+    void SetActivPP(const QString &name);
 
     auto CheckTagExists(const QString &tag) -> QDomElement;
-    void           InsertTag(const QStringList &tags, const QDomElement &element);
+    void InsertTag(const QStringList &tags, const QDomElement &element);
 
-    void           SetChildTag(const QString& qsParent, const QString& qsChild, const QString& qsValue);
+    void SetChildTag(const QString &qsParent, const QString &qsChild, const QString &qsValue);
 
     auto GetIndexActivPP() const -> int;
     auto GetActivDrawElement(QDomElement &element) const -> bool;
@@ -489,10 +515,10 @@ protected:
     auto GroupHasItem(const QDomElement &groupDomElement, quint32 toolId, quint32 objectId) -> bool;
 
     auto ReadUnits() const -> Unit;
-    auto ReadPatternNumber() const ->QString;
-    auto ReadLabelDateFormat() const ->QString;
-    auto ReadPatternName() const ->QString;
-    auto ReadMPath() const ->QString;
+    auto ReadPatternNumber() const -> QString;
+    auto ReadLabelDateFormat() const -> QString;
+    auto ReadPatternName() const -> QString;
+    auto ReadMPath() const -> QString;
     auto ReadWatermarkPath() const -> QString;
     auto ReadCompanyName() const -> QString;
 
@@ -518,10 +544,10 @@ private:
     auto ParseItemElement(const QDomElement &domElement) -> QPair<bool, QMap<quint32, quint32>>;
 
     auto GetMaterials(const QDomElement &element) const -> QMap<int, QString>;
-    void               SetMaterials(QDomElement &element, const QMap<int, QString> &materials);
+    void SetMaterials(QDomElement &element, const QMap<int, QString> &materials);
 
     auto GetFMeasurements(const QDomElement &element) const -> QVector<VFinalMeasurement>;
-    void                       SetFMeasurements(QDomElement &element, const QVector<VFinalMeasurement> &measurements);
+    void SetFMeasurements(QDomElement &element, const QVector<VFinalMeasurement> &measurements);
 
     auto GetBackgroundPatternImage(const QDomElement &element) const -> VBackgroundPatternImage;
     auto GetBackgroundImageElement(const QUuid &id) const -> QDomElement;

@@ -29,7 +29,6 @@
 #ifndef DIALOGELLIPTICALARC_H
 #define DIALOGELLIPTICALARC_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -40,12 +39,13 @@
 
 namespace Ui
 {
-    class DialogEllipticalArc;
+class DialogEllipticalArc;
 }
 
 class DialogEllipticalArc : public DialogTool
 {
     Q_OBJECT // NOLINT
+
 public:
     DialogEllipticalArc(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     ~DialogEllipticalArc() override;

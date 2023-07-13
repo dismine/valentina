@@ -29,11 +29,10 @@
 #ifndef VTRANSLATEVARS_H
 #define VTRANSLATEVARS_H
 
-#include <qcompilerdetection.h>
 #include <QtGlobal>
 
-#include "vtranslatemeasurements.h"
 #include "../vmisc/defglobal.h"
+#include "vtranslatemeasurements.h"
 
 class VTranslateVars : public VTranslateMeasurements
 {
@@ -41,10 +40,10 @@ public:
     explicit VTranslateVars();
     ~VTranslateVars() override = default;
 
-    auto VariablesFromUser(QString &newFormula, vsizetype position, const QString &token,
-                           vsizetype &bias) const -> bool;
-    auto FunctionsFromUser(QString &newFormula, vsizetype position, const QString &token,
-                           vsizetype &bias) const -> bool;
+    auto VariablesFromUser(QString &newFormula, vsizetype position, const QString &token, vsizetype &bias) const
+        -> bool;
+    auto FunctionsFromUser(QString &newFormula, vsizetype position, const QString &token, vsizetype &bias) const
+        -> bool;
     auto VariablesToUser(QString &newFormula, vsizetype position, const QString &token, vsizetype &bias) const -> bool;
 
     auto InternalVarToUser(const QString &var) const -> QString;
@@ -73,7 +72,7 @@ public:
 
 private:
     // cppcheck-suppress unknownMacro
-    Q_DISABLE_COPY_MOVE(VTranslateVars) //NOLINT
+    Q_DISABLE_COPY_MOVE(VTranslateVars) // NOLINT
     QMap<QString, qmu::QmuTranslation> PMSystemNames{};
     QMap<QString, qmu::QmuTranslation> PMSystemAuthors{};
     QMap<QString, qmu::QmuTranslation> PMSystemBooks{};

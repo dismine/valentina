@@ -29,7 +29,6 @@
 #ifndef DIALOGSPLINEPATH_H
 #define DIALOGSPLINEPATH_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QSet>
@@ -43,7 +42,7 @@
 
 namespace Ui
 {
-    class DialogSplinePath;
+class DialogSplinePath;
 }
 
 /**
@@ -52,26 +51,30 @@ namespace Ui
 class DialogSplinePath : public DialogTool
 {
     Q_OBJECT // NOLINT
+
 public:
     DialogSplinePath(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogSplinePath() override;
+    ~DialogSplinePath() override;
 
     auto GetPath() const -> VSplinePath;
-    void        SetPath(const VSplinePath &value);
+    void SetPath(const VSplinePath &value);
 
-    void    SetNotes(const QString &notes);
+    void SetNotes(const QString &notes);
     auto GetNotes() const -> QString;
+
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
-    virtual void ShowDialog(bool click) override;
-    void         PathUpdated(const VSplinePath &path);
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void ShowDialog(bool click) override;
+    void PathUpdated(const VSplinePath &path);
+
 protected:
-    virtual void ShowVisualization() override;
-    virtual void SaveData() override;
-    virtual void closeEvent(QCloseEvent *event) override;
-    virtual auto IsValid() const -> bool final;
-    void showEvent( QShowEvent *event ) override;
+    void ShowVisualization() override;
+    void SaveData() override;
+    void closeEvent(QCloseEvent *event) override;
+    auto IsValid() const -> bool final;
+    void showEvent(QShowEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
+
 private slots:
     void PointChanged(int row);
     void currentPointChanged(int index);
@@ -92,6 +95,7 @@ private slots:
     void FXLength2();
 
     void ValidateAlias();
+
 private:
     Q_DISABLE_COPY_MOVE(DialogSplinePath) // NOLINT
 
@@ -124,13 +128,13 @@ private:
     void EvalLength1();
     void EvalLength2();
 
-    void          NewItem(const VSplinePoint &point);
-    void          DataPoint(const VSplinePoint &p);
-    void          SavePath();
+    void NewItem(const VSplinePoint &point);
+    void DataPoint(const VSplinePoint &p);
+    void SavePath();
     auto AllIds() const -> QSet<quint32>;
     auto IsPathValid() const -> bool;
     auto ExtractPath() const -> VSplinePath;
-    void          ShowPointIssue(const QString &pName);
+    void ShowPointIssue(const QString &pName);
 };
 
 //---------------------------------------------------------------------------------------------------------------------

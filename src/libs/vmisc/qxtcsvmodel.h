@@ -31,7 +31,6 @@
 #ifndef QXTCSVMODEL_H
 #define QXTCSVMODEL_H
 
-#include <qcompilerdetection.h>
 #include <QAbstractTableModel>
 #include <QChar>
 #include <QFlags>
@@ -57,6 +56,7 @@ class VTextCodec;
 class QxtCsvModel final : public QAbstractTableModel
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit QxtCsvModel(QObject *parent = nullptr);
     explicit QxtCsvModel(QIODevice *file, QObject *parent = nullptr, bool withHeader = false, QChar separator = ',',
@@ -73,13 +73,13 @@ public:
         -> QVariant override;
     virtual auto setHeaderData(int section, Qt::Orientation orientation, const QVariant &value,
                                int role = Qt::DisplayRole) -> bool override;
-    void             setHeaderData(const QStringList& data);
+    void setHeaderData(const QStringList &data);
 
     auto text(int row, int column) const -> QString;
-    void setText(int row, int column, const QString& value);
+    void setText(int row, int column, const QString &value);
 
     auto headerText(int column) const -> QString;
-    void setHeaderText(int column, const QString& value);
+    void setHeaderText(int column, const QString &value);
 
     auto insertRow(int row, const QModelIndex &parent = QModelIndex()) -> bool;
     virtual auto insertRows(int row, int count, const QModelIndex &parent = QModelIndex()) -> bool override;
@@ -93,24 +93,27 @@ public:
     auto removeColumn(int col, const QModelIndex &parent = QModelIndex()) -> bool;
     virtual auto removeColumns(int col, int count, const QModelIndex &parent = QModelIndex()) -> bool override;
 
-    void setSource(QIODevice *file, bool withHeader = false, QChar separator = ',', VTextCodec* codec = nullptr);
+    void setSource(QIODevice *file, bool withHeader = false, QChar separator = ',', VTextCodec *codec = nullptr);
     void setSource(const QString &filename, bool withHeader = false, QChar separator = ',',
-                   VTextCodec* codec = nullptr);
+                   VTextCodec *codec = nullptr);
 
     auto toCSV(QIODevice *file, QString &error, bool withHeader = false, QChar separator = ',',
                VTextCodec *codec = nullptr) const -> bool;
     auto toCSV(const QString &filename, QString &error, bool withHeader = false, QChar separator = ',',
                VTextCodec *codec = nullptr) const -> bool;
 
-    enum QuoteOption { NoQuotes = 0,
-                       SingleQuote = 1,
-                       DoubleQuote = 2,
-                       BothQuotes = 3,
-                       NoEscape = 0,
-                       TwoQuoteEscape = 4,
-                       BackslashEscape = 8,
-                       AlwaysQuoteOutput = 16,
-                       DefaultQuoteMode = BothQuotes | BackslashEscape | AlwaysQuoteOutput };
+    enum QuoteOption
+    {
+        NoQuotes = 0,
+        SingleQuote = 1,
+        DoubleQuote = 2,
+        BothQuotes = 3,
+        NoEscape = 0,
+        TwoQuoteEscape = 4,
+        BackslashEscape = 8,
+        AlwaysQuoteOutput = 16,
+        DefaultQuoteMode = BothQuotes | BackslashEscape | AlwaysQuoteOutput
+    };
     Q_DECLARE_FLAGS(QuoteMode, QuoteOption)
 
     auto quoteMode() const -> QuoteMode;

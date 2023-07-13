@@ -53,8 +53,8 @@ public:
 
     auto operator=(const VFSplinePoint &point) -> VFSplinePoint &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VFSplinePoint(VFSplinePoint &&point) Q_DECL_NOTHROW;
-    auto operator=(VFSplinePoint &&point) Q_DECL_NOTHROW->VFSplinePoint &;
+    VFSplinePoint(VFSplinePoint &&point) noexcept;
+    auto operator=(VFSplinePoint &&point) noexcept->VFSplinePoint &;
 #endif
 
     auto P() const -> VPointF;
@@ -91,8 +91,8 @@ public:
 
     auto operator=(const VSplinePoint &point) -> VSplinePoint &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VSplinePoint(VSplinePoint &&point) Q_DECL_NOTHROW;
-    auto operator=(VSplinePoint &&point) Q_DECL_NOTHROW->VSplinePoint &;
+    VSplinePoint(VSplinePoint &&point) noexcept;
+    auto operator=(VSplinePoint &&point) noexcept->VSplinePoint &;
 #endif
 
     auto P() const -> VPointF;

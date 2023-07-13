@@ -29,7 +29,7 @@
 #ifndef VTOOLLINE_H
 #define VTOOLLINE_H
 
-#include <qcompilerdetection.h>
+
 #include <QDomElement>
 #include <QMetaObject>
 #include <QObject>

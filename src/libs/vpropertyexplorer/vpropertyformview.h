@@ -21,7 +21,7 @@
 #ifndef VPROPERTYFORMVIEW_H
 #define VPROPERTYFORMVIEW_H
 
-#include <qcompilerdetection.h>
+
 #include <QMetaObject>
 #include <QObject>
 #include <QPointer>

@@ -29,7 +29,7 @@
 #ifndef VISTOOLPOINTFROMARCANDTANGENT_H
 #define VISTOOLPOINTFROMARCANDTANGENT_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>

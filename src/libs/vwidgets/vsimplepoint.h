@@ -29,7 +29,7 @@
 #ifndef VSIMPLEPOINT_H
 #define VSIMPLEPOINT_H
 
-#include <qcompilerdetection.h>
+
 #include <QColor>
 #include <QGraphicsItem>
 #include <QMetaObject>

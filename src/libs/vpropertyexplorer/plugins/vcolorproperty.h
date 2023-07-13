@@ -21,8 +21,6 @@
 #ifndef VCOLORPROPERTY_H
 #define VCOLORPROPERTY_H
 
-#include <qcompilerdetection.h>
-#include <stddef.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -30,6 +28,7 @@
 #include <QVariant>
 #include <Qt>
 #include <QtGlobal>
+#include <stddef.h>
 
 #include "../vproperty.h"
 #include "../vpropertyexplorer_global.h"
@@ -43,6 +42,7 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 class VPROPERTYEXPLORERSHARED_EXPORT VColorProperty : public VProperty
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit VColorProperty(const QString &name);
 
@@ -79,6 +79,6 @@ private:
 
 QT_WARNING_POP
 
-}
+} // namespace VPE
 
 #endif // VCOLORPROPERTY_H

@@ -56,8 +56,8 @@ public:
 
     auto operator=(const VPiece &piece) -> VPiece &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VPiece(VPiece &&piece) Q_DECL_NOTHROW;
-    auto operator=(VPiece &&piece) Q_DECL_NOTHROW->VPiece &;
+    VPiece(VPiece &&piece) noexcept;
+    auto operator=(VPiece &&piece) noexcept->VPiece &;
 #endif
 
     auto GetPath() const -> VPiecePath;

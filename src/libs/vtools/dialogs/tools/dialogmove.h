@@ -29,7 +29,6 @@
 #ifndef DIALOGMOVING_H
 #define DIALOGMOVING_H
 
-#include <qcompilerdetection.h>
 #include <QList>
 #include <QMetaObject>
 #include <QObject>
@@ -37,13 +36,13 @@
 #include <QVector>
 #include <QtGlobal>
 
+#include "../../tools/toolsdef.h"
 #include "../vmisc/def.h"
 #include "dialogtool.h"
-#include "../../tools/toolsdef.h"
 
 namespace Ui
 {
-    class DialogMove;
+class DialogMove;
 }
 
 class DialogMove : public DialogTool
@@ -52,45 +51,45 @@ class DialogMove : public DialogTool
 
 public:
     explicit DialogMove(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogMove();
+    ~DialogMove() override;
 
     auto GetAngle() const -> QString;
-    void    SetAngle(const QString &value);
+    void SetAngle(const QString &value);
 
     auto GetLength() const -> QString;
-    void    SetLength(const QString &value);
+    void SetLength(const QString &value);
 
     auto GetRotationAngle() const -> QString;
-    void    SetRotationAngle(const QString &value);
+    void SetRotationAngle(const QString &value);
 
     auto GetSuffix() const -> QString;
-    void    SetSuffix(const QString &value);
+    void SetSuffix(const QString &value);
 
     auto GetRotationOrigPointId() const -> quint32;
-    void    SetRotationOrigPointId(const quint32 &value);
+    void SetRotationOrigPointId(const quint32 &value);
 
     auto GetVisibilityGroupName() const -> QString;
-    void    SetVisibilityGroupName(const QString &name);
+    void SetVisibilityGroupName(const QString &name);
 
     auto HasLinkedVisibilityGroup() const -> bool;
     void SetHasLinkedVisibilityGroup(bool linked);
 
-    void        SetVisibilityGroupTags(const QStringList &tags);
+    void SetVisibilityGroupTags(const QStringList &tags);
     auto GetVisibilityGroupTags() const -> QStringList;
 
-    void    SetNotes(const QString &notes);
+    void SetNotes(const QString &notes);
     auto GetNotes() const -> QString;
 
-    virtual void SetGroupCategories(const QStringList &categories) override;
+    void SetGroupCategories(const QStringList &categories) override;
 
-    virtual void ShowDialog(bool click) override;
+    void ShowDialog(bool click) override;
 
     auto GetSourceObjects() const -> QVector<SourceItem>;
-    void                SetSourceObjects(const QVector<SourceItem> &value);
+    void SetSourceObjects(const QVector<SourceItem> &value);
 
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
-    virtual void SelectedObject(bool selected, quint32 object, quint32 tool) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void SelectedObject(bool selected, quint32 object, quint32 tool) override;
 
 private slots:
     /** @brief DeployAngleTextEdit grow or shrink formula input */
@@ -111,21 +110,21 @@ private slots:
     void ColorChanged();
 
 protected:
-    virtual void ShowVisualization() override;
+    void ShowVisualization() override;
 
     /** @brief SaveData Put dialog data in local variables */
-    virtual void SaveData() override;
-    virtual void closeEvent(QCloseEvent *event) override;
-    virtual auto IsValid() const -> bool final;
+    void SaveData() override;
+    void closeEvent(QCloseEvent *event) override;
+    auto IsValid() const -> bool final;
 
 private:
     Q_DISABLE_COPY_MOVE(DialogMove) // NOLINT
     Ui::DialogMove *ui;
 
     /** @brief timerAngle timer of check formula of angle */
-    QTimer  *timerAngle;
-    QTimer  *timerRotationAngle;
-    QTimer  *timerLength;
+    QTimer *timerAngle;
+    QTimer *timerRotationAngle;
+    QTimer *timerLength;
 
     /** @brief angle formula of angle */
     QString formulaAngle;
@@ -133,9 +132,9 @@ private:
     QString formulaLength;
 
     /** @brief formulaBaseHeightAngle base height defined by dialogui */
-    int     formulaBaseHeightAngle;
-    int     formulaBaseHeightRotationAngle;
-    int     formulaBaseHeightLength;
+    int formulaBaseHeightAngle;
+    int formulaBaseHeightRotationAngle;
+    int formulaBaseHeightLength;
 
     QVector<SourceItem> sourceObjects{};
 

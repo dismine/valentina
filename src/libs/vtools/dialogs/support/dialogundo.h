@@ -29,33 +29,39 @@
 #ifndef DIALOGUNDO_H
 #define DIALOGUNDO_H
 
-#include <qcompilerdetection.h>
 #include <QDialog>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
 #include <QtGlobal>
 
-#include "../vmisc/defglobal.h"
-
 namespace Ui
 {
-    class DialogUndo;
+class DialogUndo;
 }
 
-enum class UndoButton {Undo, Fix, Cancel};
+enum class UndoButton
+{
+    Undo,
+    Fix,
+    Cancel
+};
 
 class DialogUndo : public QDialog
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit DialogUndo(QWidget *parent = nullptr);
     auto Result() const -> UndoButton;
-    virtual ~DialogUndo() override;
+    ~DialogUndo() override;
+
 protected:
-    virtual void closeEvent ( QCloseEvent *event ) override;
+    void closeEvent(QCloseEvent *event) override;
+
 private slots:
     void Cancel();
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DialogUndo) // NOLINT

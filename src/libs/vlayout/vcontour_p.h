@@ -29,11 +29,11 @@
 #ifndef VCONTOUR_P_H
 #define VCONTOUR_P_H
 
-#include <QSharedData>
-#include <QPointF>
-#include <QVector>
-#include <QRectF>
 #include <QPainterPath>
+#include <QPointF>
+#include <QRectF>
+#include <QSharedData>
+#include <QVector>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
@@ -47,41 +47,25 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VContourData : public QSharedData
 {
 public:
-    VContourData()
-    {}
-
-    VContourData(int height, int width, qreal layoutWidth)
-        : paperHeight(height),
-          paperWidth(width),
-          layoutWidth(layoutWidth)
-    {}
-
-    VContourData(const VContourData &contour)
-        : QSharedData(contour),
-          globalContour(contour.globalContour),
-          paperHeight(contour.paperHeight),
-          paperWidth(contour.paperWidth),
-          shift(contour.shift),
-          layoutWidth(contour.layoutWidth),
-          m_emptySheetEdgesCount(contour.m_emptySheetEdgesCount)
-    {}
-
-    ~VContourData() {}
+    VContourData() = default;
+    VContourData(int height, int width, qreal layoutWidth);
+    VContourData(const VContourData &contour) = default;
+    ~VContourData() = default;
 
     /** @brief globalContour list of global points contour. */
-    QVector<QPointF> globalContour{};
+    QVector<QPointF> globalContour{}; // NOLINT (misc-non-private-member-variables-in-classes)
 
     /** @brief paperHeight height of paper in pixels*/
-    int paperHeight{0};
+    int paperHeight{0}; // NOLINT (misc-non-private-member-variables-in-classes)
 
     /** @brief paperWidth width of paper in pixels*/
-    int paperWidth{0};
+    int paperWidth{0}; // NOLINT (misc-non-private-member-variables-in-classes)
 
-    qreal shift{0};
+    qreal shift{0}; // NOLINT (misc-non-private-member-variables-in-classes)
 
-    qreal layoutWidth{0};
+    qreal layoutWidth{0}; // NOLINT (misc-non-private-member-variables-in-classes)
 
-    vsizetype m_emptySheetEdgesCount{0};
+    vsizetype m_emptySheetEdgesCount{0}; // NOLINT (misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VContourData) // NOLINT
@@ -89,5 +73,13 @@ private:
 
 // cppcheck-suppress unknownMacro
 QT_WARNING_POP
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VContourData::VContourData(int height, int width, qreal layoutWidth)
+  : paperHeight(height),
+    paperWidth(width),
+    layoutWidth(layoutWidth)
+{
+}
 
 #endif // VCONTOUR_P_H

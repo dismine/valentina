@@ -21,7 +21,6 @@
 #ifndef VCOLORPROPERTYEDITOR_H
 #define VCOLORPROPERTYEDITOR_H
 
-#include <qcompilerdetection.h>
 #include <QColor>
 #include <QLabel>
 #include <QLineEdit>
@@ -50,7 +49,6 @@ public:
     //! Destructor
     virtual ~VColorPropertyEditor() override;
 
-
     //! Returns the color currently set
     auto GetColor() const -> QColor;
 
@@ -70,7 +68,7 @@ public:
 
 signals:
     //! This is emitted, when the user changes the color
-    void dataChangedByUser(const QColor &GetColor, VColorPropertyEditor* editor);
+    void dataChangedByUser(const QColor &GetColor, VColorPropertyEditor *editor);
 
     void dataChanged();
 
@@ -85,12 +83,12 @@ private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VColorPropertyEditor) // NOLINT
     QColor Color;
-    QToolButton* ToolButton;
-    QLabel* TextLabel;
-    QLabel* ColorLabel;
-    QSpacerItem* Spacer;
+    QToolButton *ToolButton;
+    QLabel *TextLabel;
+    QLabel *ColorLabel;
+    QSpacerItem *Spacer;
 };
 
-}
+} // namespace VPE
 
 #endif // QFILEPROPERTYEDITOR_H

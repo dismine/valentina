@@ -29,7 +29,7 @@
 #ifndef VPOINTF_H
 #define VPOINTF_H
 
-#include <qcompilerdetection.h>
+
 #include <QMetaType>
 #include <QSharedDataPointer>
 #include <QString>
@@ -65,8 +65,8 @@ public:
 
     auto operator=(const VPointF &point) -> VPointF &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VPointF(VPointF &&point) Q_DECL_NOTHROW;
-    auto operator=(VPointF &&point) Q_DECL_NOTHROW->VPointF &;
+    VPointF(VPointF &&point) noexcept;
+    auto operator=(VPointF &&point) noexcept->VPointF &;
 #endif
 
     explicit operator QPointF() const;

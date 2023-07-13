@@ -29,7 +29,6 @@
 #ifndef DIALOGNORMAL_H
 #define DIALOGNORMAL_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -40,7 +39,7 @@
 
 namespace Ui
 {
-    class DialogNormal;
+class DialogNormal;
 }
 
 /**
@@ -49,6 +48,7 @@ namespace Ui
 class DialogNormal : public DialogTool
 {
     Q_OBJECT // NOLINT
+
 public:
     DialogNormal(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     ~DialogNormal() override;
@@ -78,6 +78,7 @@ public:
     auto GetNotes() const -> QString;
 
     void ShowDialog(bool click) override;
+
 public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
     /**
@@ -87,6 +88,7 @@ public slots:
     void PointNameChanged() override;
     void FXLength();
     void EvalFormula();
+
 protected:
     void ShowVisualization() override;
     /**
@@ -95,6 +97,7 @@ protected:
     void SaveData() override;
     void closeEvent(QCloseEvent *event) override;
     auto IsValid() const -> bool final;
+
 private:
     Q_DISABLE_COPY_MOVE(DialogNormal) // NOLINT
 

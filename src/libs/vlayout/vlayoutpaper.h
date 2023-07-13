@@ -29,7 +29,7 @@
 #ifndef VLAYOUTPAPER_H
 #define VLAYOUTPAPER_H
 
-#include <qcompilerdetection.h>
+
 #include <QSharedDataPointer>
 #include <QTypeInfo>
 #include <QtGlobal>
@@ -58,8 +58,8 @@ public:
 
     auto operator=(const VLayoutPaper &paper) -> VLayoutPaper &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VLayoutPaper(VLayoutPaper &&paper) Q_DECL_NOTHROW;
-    auto operator=(VLayoutPaper &&paper) Q_DECL_NOTHROW->VLayoutPaper &;
+    VLayoutPaper(VLayoutPaper &&paper) noexcept;
+    auto operator=(VLayoutPaper &&paper) noexcept->VLayoutPaper &;
 #endif
 
     auto GetHeight() const -> int;

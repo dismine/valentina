@@ -29,7 +29,7 @@
 #ifndef VEXCEPTIONCONVERSIONERROR_H
 #define VEXCEPTIONCONVERSIONERROR_H
 
-#include <qcompilerdetection.h>
+
 #include <QString>
 
 #include "../ifcdef.h"

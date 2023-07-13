@@ -29,16 +29,13 @@
 #ifndef DIALOGEDITWRONGFORMULA_H
 #define DIALOGEDITWRONGFORMULA_H
 
-#include <qcompilerdetection.h>
+#include <QDialog>
 #include <QMap>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
 #include <QTableWidgetItem>
 #include <QtGlobal>
-#include <QDialog>
-
-#include "../vmisc/defglobal.h"
 
 class VMeasurement;
 struct FormulaData;
@@ -59,7 +56,8 @@ class DialogEditWrongFormula;
  */
 class DialogEditWrongFormula final : public QDialog
 {
-    Q_OBJECT //NOLINT
+    Q_OBJECT // NOLINT
+
 public:
     DialogEditWrongFormula(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     ~DialogEditWrongFormula() override;
@@ -73,6 +71,7 @@ public:
     void SetIncrementsMode();
     void SetPreviewCalculationsMode();
     void ShowPieceArea(bool show) const;
+
 public slots:
     virtual void DialogAccepted();
     virtual void DialogRejected();
@@ -80,7 +79,7 @@ public slots:
     void EvalFormula();
     void ValChanged(int row);
     void PutHere();
-    void PutVal(QTableWidgetItem * item);
+    void PutVal(QTableWidgetItem *item);
 
     void Measurements();
     void LengthLines();
@@ -93,6 +92,7 @@ public slots:
     void PreviewCalculations();
     void PieceArea();
     void Functions();
+
 signals:
     /**
      * @brief DialogClosed signal dialog closed
@@ -103,17 +103,20 @@ signals:
      * @brief DialogApplied emit signal dialog apply changes
      */
     void DialogApplied();
+
 protected:
     virtual auto IsValid() const -> bool final;
     void closeEvent(QCloseEvent *event) override;
-    void showEvent( QShowEvent *event ) override;
+    void showEvent(QShowEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
     virtual void CheckState();
+
 private slots:
     void FilterVariablesEdited(const QString &filter);
+
 private:
     // cppcheck-suppress unknownMacro
-    Q_DISABLE_COPY_MOVE(DialogEditWrongFormula) //NOLINT
+    Q_DISABLE_COPY_MOVE(DialogEditWrongFormula) // NOLINT
     Ui::DialogEditWrongFormula *ui;
 
     const VContainer *m_data;
@@ -140,9 +143,8 @@ private:
 
     void InitVariables();
 
-    template <class key, class val>
-    void ShowVariable(const QMap<key, val> &var);
-    void ShowMeasurements(const QMap<QString, QSharedPointer<VMeasurement> > &var);
+    template <class key, class val> void ShowVariable(const QMap<key, val> &var);
+    void ShowMeasurements(const QMap<QString, QSharedPointer<VMeasurement>> &var);
     void ShowFunctions();
     void ShowIncrementsInPreviewCalculation(bool show);
 

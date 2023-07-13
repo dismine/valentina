@@ -21,7 +21,7 @@
 #ifndef VSHORTCUTPROPERTYEDITOR_H
 #define VSHORTCUTPROPERTYEDITOR_H
 
-#include <qcompilerdetection.h>
+
 #include <QKeySequence>
 #include <QLineEdit>
 #include <QMetaObject>

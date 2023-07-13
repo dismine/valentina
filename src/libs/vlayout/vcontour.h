@@ -56,8 +56,8 @@ public:
 
     auto operator=(const VContour &contour) -> VContour &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VContour(VContour &&contour) Q_DECL_NOTHROW;
-    auto operator=(VContour &&contour) Q_DECL_NOTHROW->VContour &;
+    VContour(VContour &&contour) noexcept;
+    auto operator=(VContour &&contour) noexcept->VContour &;
 #endif
 
     void CeateEmptySheetContour();

@@ -36,10 +36,10 @@
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/def.h"
-#include "vpiecepath.h"
-#include "floatItemData/vpiecelabeldata.h"
-#include "floatItemData/vpatternlabeldata.h"
 #include "floatItemData/vgrainlinedata.h"
+#include "floatItemData/vpatternlabeldata.h"
+#include "floatItemData/vpiecelabeldata.h"
+#include "vpiecepath.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -48,24 +48,20 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VPieceData : public QSharedData
 {
 public:
-    explicit VPieceData(PiecePathType type)
-        : m_path(type)
-    {}
-
+    explicit VPieceData(PiecePathType type);
     VPieceData(const VPieceData &detail) = default;
-
     ~VPieceData() = default;
 
     /** @brief nodes list detail nodes. */
     VPiecePath m_path; // NOLINT(misc-non-private-member-variables-in-classes)
 
     bool m_inLayout{true}; // NOLINT(misc-non-private-member-variables-in-classes)
-    bool m_united{false}; // NOLINT(misc-non-private-member-variables-in-classes)
+    bool m_united{false};  // NOLINT(misc-non-private-member-variables-in-classes)
 
     QVector<CustomSARecord> m_customSARecords{}; // NOLINT(misc-non-private-member-variables-in-classes)
-    QVector<quint32>        m_internalPaths{}; // NOLINT(misc-non-private-member-variables-in-classes)
-    QVector<quint32>        m_pins{}; // NOLINT(misc-non-private-member-variables-in-classes)
-    QVector<quint32>        m_placeLabels{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QVector<quint32> m_internalPaths{};          // NOLINT(misc-non-private-member-variables-in-classes)
+    QVector<quint32> m_pins{};                   // NOLINT(misc-non-private-member-variables-in-classes)
+    QVector<quint32> m_placeLabels{};            // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief Pattern piece data */
     VPieceLabelData m_ppData{}; // NOLINT(misc-non-private-member-variables-in-classes)
@@ -88,5 +84,10 @@ private:
 
 QT_WARNING_POP
 
-#endif // VPIECE_P_H
+//---------------------------------------------------------------------------------------------------------------------
+inline VPieceData::VPieceData(PiecePathType type)
+  : m_path(type)
+{
+}
 
+#endif // VPIECE_P_H

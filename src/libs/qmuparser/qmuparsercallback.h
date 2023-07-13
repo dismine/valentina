@@ -22,15 +22,14 @@
 #ifndef QMUPARSERCALLBACK_H
 #define QMUPARSERCALLBACK_H
 
-#include <qcompilerdetection.h>
-#include <QString>
-#include <map>
-#include <QTypeInfo>
 #include <QSharedDataPointer>
+#include <QString>
+#include <QTypeInfo>
+#include <map>
 
 #include "qmuparser_global.h"
-#include "qmuparserdef.h"
 #include "qmuparsercallback_p.h"
+#include "qmuparserdef.h"
 
 /**
  * @file
@@ -53,29 +52,29 @@ namespace qmu
 class QMUPARSERSHARED_EXPORT QmuParserCallback
 {
 public:
-    QmuParserCallback(fun_type0  a_pFun, bool a_bAllowOpti);
-    QmuParserCallback(fun_type1  a_pFun, bool a_bAllowOpti, int a_iPrec = -1, ECmdCode a_iCode=cmFUNC);
-    QmuParserCallback(fun_type2  a_pFun, bool a_bAllowOpti, int a_iPrec, EOprtAssociativity a_eOprtAsct);
-    QmuParserCallback(fun_type2  a_pFun, bool a_bAllowOpti);
-    QmuParserCallback(fun_type3  a_pFun, bool a_bAllowOpti);
-    QmuParserCallback(fun_type4  a_pFun, bool a_bAllowOpti);
-    QmuParserCallback(fun_type5  a_pFun, bool a_bAllowOpti);
-    QmuParserCallback(fun_type6  a_pFun, bool a_bAllowOpti);
-    QmuParserCallback(fun_type7  a_pFun, bool a_bAllowOpti);
-    QmuParserCallback(fun_type8  a_pFun, bool a_bAllowOpti);
-    QmuParserCallback(fun_type9  a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(fun_type0 a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(fun_type1 a_pFun, bool a_bAllowOpti, int a_iPrec = -1, ECmdCode a_iCode = cmFUNC);
+    QmuParserCallback(fun_type2 a_pFun, bool a_bAllowOpti, int a_iPrec, EOprtAssociativity a_eOprtAsct);
+    QmuParserCallback(fun_type2 a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(fun_type3 a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(fun_type4 a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(fun_type5 a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(fun_type6 a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(fun_type7 a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(fun_type8 a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(fun_type9 a_pFun, bool a_bAllowOpti);
     QmuParserCallback(fun_type10 a_pFun, bool a_bAllowOpti);
 
-    QmuParserCallback(bulkfun_type0  a_pFun, bool a_bAllowOpti);
-    QmuParserCallback(bulkfun_type1  a_pFun, bool a_bAllowOpti);
-    QmuParserCallback(bulkfun_type2  a_pFun, bool a_bAllowOpti);
-    QmuParserCallback(bulkfun_type3  a_pFun, bool a_bAllowOpti);
-    QmuParserCallback(bulkfun_type4  a_pFun, bool a_bAllowOpti);
-    QmuParserCallback(bulkfun_type5  a_pFun, bool a_bAllowOpti);
-    QmuParserCallback(bulkfun_type6  a_pFun, bool a_bAllowOpti);
-    QmuParserCallback(bulkfun_type7  a_pFun, bool a_bAllowOpti);
-    QmuParserCallback(bulkfun_type8  a_pFun, bool a_bAllowOpti);
-    QmuParserCallback(bulkfun_type9  a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(bulkfun_type0 a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(bulkfun_type1 a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(bulkfun_type2 a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(bulkfun_type3 a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(bulkfun_type4 a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(bulkfun_type5 a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(bulkfun_type6 a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(bulkfun_type7 a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(bulkfun_type8 a_pFun, bool a_bAllowOpti);
+    QmuParserCallback(bulkfun_type9 a_pFun, bool a_bAllowOpti);
     QmuParserCallback(bulkfun_type10 a_pFun, bool a_bAllowOpti);
 
     QmuParserCallback(multfun_type a_pFun, bool a_bAllowOpti);
@@ -87,8 +86,8 @@ public:
     auto operator=(const QmuParserCallback &a_Fun) -> QmuParserCallback &;
 
 #ifdef Q_COMPILER_RVALUE_REFS
-    QmuParserCallback(QmuParserCallback &&a_Fun) Q_DECL_NOTHROW;
-    auto operator=(QmuParserCallback &&a_Fun) Q_DECL_NOTHROW->QmuParserCallback &;
+    QmuParserCallback(QmuParserCallback &&a_Fun) noexcept;
+    auto operator=(QmuParserCallback &&a_Fun) noexcept -> QmuParserCallback &;
 #endif
 
     Q_REQUIRED_RESULT auto Clone() const -> QmuParserCallback *;
@@ -117,7 +116,7 @@ typedef std::map<QString, QmuParserCallback> funmap_type;
  */
 inline auto QmuParserCallback::Clone() const -> QmuParserCallback *
 {
-    return new QmuParserCallback ( *this );
+    return new QmuParserCallback(*this);
 }
 
 } // namespace qmu

@@ -50,8 +50,8 @@ public:
 
     auto operator=(const VPieceLabelData &data) -> VPieceLabelData &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VPieceLabelData(VPieceLabelData &&data) Q_DECL_NOTHROW;
-    auto operator=(VPieceLabelData &&data) Q_DECL_NOTHROW->VPieceLabelData &;
+    VPieceLabelData(VPieceLabelData &&data) noexcept;
+    auto operator=(VPieceLabelData &&data) noexcept->VPieceLabelData &;
 #endif
 
     void Clear();

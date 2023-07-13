@@ -29,7 +29,6 @@
 #ifndef DIALOGENDLINE_H
 #define DIALOGENDLINE_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -40,7 +39,7 @@
 
 namespace Ui
 {
-    class DialogEndLine;
+class DialogEndLine;
 }
 
 /**
@@ -49,52 +48,55 @@ namespace Ui
 class DialogEndLine : public DialogTool
 {
     Q_OBJECT // NOLINT
+
 public:
     DialogEndLine(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogEndLine() override;
+    ~DialogEndLine() override;
 
     auto GetPointName() const -> QString;
-    void              SetPointName(const QString &value);
+    void SetPointName(const QString &value);
 
     auto GetTypeLine() const -> QString;
-    void              SetTypeLine(const QString &value);
+    void SetTypeLine(const QString &value);
 
     auto GetFormula() const -> QString;
-    void              SetFormula(const QString &value);
+    void SetFormula(const QString &value);
 
     auto GetAngle() const -> QString;
-    void              SetAngle(const QString &value);
+    void SetAngle(const QString &value);
 
     auto GetBasePointId() const -> quint32;
-    void              SetBasePointId(const quint32 &value);
+    void SetBasePointId(const quint32 &value);
 
     auto GetLineColor() const -> QString;
-    void              SetLineColor(const QString &value);
+    void SetLineColor(const QString &value);
 
-    void    SetNotes(const QString &notes);
+    void SetNotes(const QString &notes);
     auto GetNotes() const -> QString;
 
-    virtual void      ShowDialog(bool click) override;
-public slots:
-    virtual void      ChosenObject(quint32 id, const SceneObject &type) override;
+    void ShowDialog(bool click) override;
 
-    void             EvalLength();
-    void             EvalAngle();
+public slots:
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+
+    void EvalLength();
+    void EvalAngle();
 
     /** @brief DeployFormulaTextEdit grow or shrink formula input */
-    void             DeployFormulaTextEdit();
-    void             DeployAngleTextEdit();
+    void DeployFormulaTextEdit();
+    void DeployAngleTextEdit();
 
-    void             FXAngle();
-    void             FXLength();
+    void FXAngle();
+    void FXLength();
+
 protected:
-    virtual void     ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void     SaveData() override;
-    virtual void     closeEvent(QCloseEvent *event) override;
-    virtual auto IsValid() const -> bool final;
+    void SaveData() override;
+    void closeEvent(QCloseEvent *event) override;
+    auto IsValid() const -> bool final;
 
 private:
     Q_DISABLE_COPY_MOVE(DialogEndLine) // NOLINT

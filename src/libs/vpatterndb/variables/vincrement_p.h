@@ -43,57 +43,37 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VIncrementData final : public QSharedData
 {
 public:
-
-    VIncrementData()
-    {}
-
-    VIncrementData(VContainer *data, IncrementType incrType)
-        : data(QSharedPointer<VContainer>(new VContainer(*data))),
-          incrType(incrType)
-    {
-        // When we create an increment in the dialog it will get neccesary data. Such data must be removed because will
-        // confuse a user. Increment should not know nothing about internal variables.
-        Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 12, "Check that you used all types");
-        this->data->ClearVariables(QVector<VarType>{VarType::LineAngle,
-                                                    VarType::LineLength,
-                                                    VarType::CurveLength,
-                                                    VarType::CurveCLength,
-                                                    VarType::ArcRadius,
-                                                    VarType::CurveAngle,
-                                                    VarType::IncrementSeparator,
-                                                    VarType::PieceExternalArea,
-                                                    VarType::PieceSeamLineArea});
-    }
-
-    VIncrementData(const VIncrementData &incr)
-        : QSharedData(incr),
-          index(incr.index),
-          formula(incr.formula),
-          formulaOk(incr.formulaOk),
-          previewCalculation(incr.previewCalculation),
-          data(incr.data),
-          incrType(incr.incrType),
-          specialUnits(incr.specialUnits)
-    {}
-
-    virtual  ~VIncrementData();
+    VIncrementData() = default;
+    VIncrementData(VContainer *data, IncrementType incrType);
+    VIncrementData(const VIncrementData &incr) = default;
+    ~VIncrementData() = default;
 
     /** @brief id each increment have unique identificator */
-    quint32 index{0};
-    QString formula;
-    bool    formulaOk{false};
-    bool    previewCalculation{false};
-    QSharedPointer<VContainer> data;
-    IncrementType incrType{IncrementType::Increment};
-    bool specialUnits{false};
+    quint32 index{0};                                 // NOLINT(misc-non-private-member-variables-in-classes)
+    QString formula;                                  // NOLINT(misc-non-private-member-variables-in-classes)
+    bool formulaOk{false};                            // NOLINT(misc-non-private-member-variables-in-classes)
+    bool previewCalculation{false};                   // NOLINT(misc-non-private-member-variables-in-classes)
+    QSharedPointer<VContainer> data;                  // NOLINT(misc-non-private-member-variables-in-classes)
+    IncrementType incrType{IncrementType::Increment}; // NOLINT(misc-non-private-member-variables-in-classes)
+    bool specialUnits{false};                         // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VIncrementData) // NOLINT
 };
 
-VIncrementData::~VIncrementData()
-{}
-
 QT_WARNING_POP
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VIncrementData::VIncrementData(VContainer *data, IncrementType incrType)
+  : data(QSharedPointer<VContainer>(new VContainer(*data))),
+    incrType(incrType)
+{
+    // When we create an increment in the dialog it will get neccesary data. Such data must be removed because will
+    // confuse a user. Increment should not know nothing about internal variables.
+    Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 12, "Check that you used all types");
+    this->data->ClearVariables(QVector<VarType>{
+        VarType::LineAngle, VarType::LineLength, VarType::CurveLength, VarType::CurveCLength, VarType::ArcRadius,
+        VarType::CurveAngle, VarType::IncrementSeparator, VarType::PieceExternalArea, VarType::PieceSeamLineArea});
+}
 
 #endif // VINCREMENT_P_H

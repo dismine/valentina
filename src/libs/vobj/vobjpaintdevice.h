@@ -29,7 +29,7 @@
 #ifndef VOBJPAINTDEVICE_H
 #define VOBJPAINTDEVICE_H
 
-#include <qcompilerdetection.h>
+
 #include <QPaintDevice>
 #include <QSharedPointer>
 #include <QSize>

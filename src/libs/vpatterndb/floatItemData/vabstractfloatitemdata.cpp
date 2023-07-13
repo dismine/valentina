@@ -52,12 +52,12 @@ auto VAbstractFloatItemData::operator=(const VAbstractFloatItemData &data) -> VA
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractFloatItemData::VAbstractFloatItemData(VAbstractFloatItemData &&data) Q_DECL_NOTHROW
+VAbstractFloatItemData::VAbstractFloatItemData(VAbstractFloatItemData &&data) noexcept
     : d (std::move(data.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractFloatItemData::operator=(VAbstractFloatItemData &&data) Q_DECL_NOTHROW->VAbstractFloatItemData &
+auto VAbstractFloatItemData::operator=(VAbstractFloatItemData &&data) noexcept->VAbstractFloatItemData &
 {
     std::swap(d, data.d);
     return *this;

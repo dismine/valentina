@@ -29,7 +29,7 @@
 #ifndef VISTOOLHEIGHT_H
 #define VISTOOLHEIGHT_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsItem>
 #include <QLineF>
 #include <QMetaObject>

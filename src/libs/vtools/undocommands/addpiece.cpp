@@ -32,18 +32,15 @@
 #include "../vwidgets/vmaingraphicsview.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-AddPiece::AddPiece(const QDomElement &xml, VAbstractPattern *doc, VContainer data, VMainGraphicsScene *scene,
+AddPiece::AddPiece(const QDomElement &xml, VAbstractPattern *doc, const VContainer &data, VMainGraphicsScene *scene,
                    const QString &drawName, QUndoCommand *parent)
-    : VUndoCommand(xml, doc, parent),
-      m_detail(),
-      m_drawName(drawName),
-      m_tool(),
-      m_record(),
-      m_scene(scene),
-      m_data(data)
+  : VUndoCommand(xml, doc, parent),
+    m_drawName(drawName),
+    m_scene(scene),
+    m_data(data)
 {
     setText(tr("add detail"));
-    nodeId = doc->GetParametrId(xml);
+    nodeId = VAbstractPattern::GetParametrId(xml);
     m_detail = data.GetPiece(nodeId);
     m_record = VAbstractTool::GetRecord(nodeId, Tool::Piece, doc);
 }
@@ -74,7 +71,7 @@ void AddPiece::undo()
                 return;
             }
 
-            m_tool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(nodeId));
+            m_tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId));
             SCASSERT(not m_tool.isNull());
             m_tool->DisconnectOutsideSignals();
             m_tool->hide();

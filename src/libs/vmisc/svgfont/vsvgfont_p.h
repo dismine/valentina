@@ -46,7 +46,7 @@ public:
     VSvgFontData() = default;
     explicit VSvgFontData(qreal horizAdvX);
     VSvgFontData(const VSvgFontData &font) = default;
-    virtual ~VSvgFontData() = default;
+    ~VSvgFontData() = default;
 
     QString m_id{};                                // NOLINT(misc-non-private-member-variables-in-classes)
     QString m_familyName{};                        // NOLINT(misc-non-private-member-variables-in-classes)

@@ -28,7 +28,7 @@
 #ifndef VISTOOLELLIPTICALARC_H
 #define VISTOOLELLIPTICALARC_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>

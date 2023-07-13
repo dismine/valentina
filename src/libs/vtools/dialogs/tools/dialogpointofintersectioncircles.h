@@ -29,7 +29,6 @@
 #ifndef DIALOGPOINTOFINTERSECTIONCIRCLES_H
 #define DIALOGPOINTOFINTERSECTIONCIRCLES_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -41,7 +40,7 @@
 
 namespace Ui
 {
-    class DialogPointOfIntersectionCircles;
+class DialogPointOfIntersectionCircles;
 }
 
 class DialogPointOfIntersectionCircles : public DialogTool

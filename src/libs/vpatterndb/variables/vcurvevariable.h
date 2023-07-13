@@ -29,7 +29,6 @@
 #ifndef VCURVEVARIABLE_H
 #define VCURVEVARIABLE_H
 
-#include <qcompilerdetection.h>
 #include <QSharedDataPointer>
 #include <QTypeInfo>
 #include <QtGlobal>
@@ -44,22 +43,22 @@ public:
     VCurveVariable();
     VCurveVariable(const quint32 &id, const quint32 &parentId);
     VCurveVariable(const VCurveVariable &var);
-
-    virtual ~VCurveVariable() override;
+    ~VCurveVariable() override;
 
     auto operator=(const VCurveVariable &var) -> VCurveVariable &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VCurveVariable(VCurveVariable &&var) Q_DECL_NOTHROW;
-    auto operator=(VCurveVariable &&var) Q_DECL_NOTHROW->VCurveVariable &;
+    VCurveVariable(VCurveVariable &&var) noexcept;
+    auto operator=(VCurveVariable &&var) noexcept -> VCurveVariable &;
 #endif
 
-    virtual auto Filter(quint32 id) -> bool override;
+    auto Filter(quint32 id) -> bool override;
 
     auto GetId() const -> quint32;
-    void         SetId(const quint32 &id);
+    void SetId(const quint32 &id);
 
     auto GetParentId() const -> quint32;
-    void         SetParentId(const quint32 &value);
+    void SetParentId(const quint32 &value);
+
 private:
     QSharedDataPointer<VCurveVariableData> d;
 };

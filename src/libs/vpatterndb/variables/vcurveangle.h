@@ -29,7 +29,6 @@
 #ifndef VCURVEANGLE_H
 #define VCURVEANGLE_H
 
-#include <qcompilerdetection.h>
 #include <QString>
 #include <QtGlobal>
 
@@ -39,7 +38,11 @@ class VAbstractCurve;
 class VSpline;
 class VEllipticalArc;
 
-enum class CurveAngle : qint8 { StartAngle, EndAngle };
+enum class CurveAngle : qint8
+{
+    StartAngle,
+    EndAngle
+};
 
 class VCurveAngle : public VCurveVariable
 {
@@ -48,6 +51,7 @@ public:
     VCurveAngle(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve, CurveAngle angle);
     VCurveAngle(const quint32 &id, const quint32 &parentId, const VAbstractCurve *baseCurve, const VSpline &spl,
                 CurveAngle angle, qint32 segment);
+
 protected:
     VCurveAngle(const quint32 &id, const quint32 &parentId);
 };

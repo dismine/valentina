@@ -77,12 +77,12 @@ auto VLayoutPiecePath::operator=(const VLayoutPiecePath &path) -> VLayoutPiecePa
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutPiecePath::VLayoutPiecePath(VLayoutPiecePath &&path) Q_DECL_NOTHROW
+VLayoutPiecePath::VLayoutPiecePath(VLayoutPiecePath &&path) noexcept
     : d(std::move(path.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPiecePath::operator=(VLayoutPiecePath &&path) Q_DECL_NOTHROW->VLayoutPiecePath &
+auto VLayoutPiecePath::operator=(VLayoutPiecePath &&path) noexcept->VLayoutPiecePath &
 {
     std::swap(d, path.d);
     return *this;

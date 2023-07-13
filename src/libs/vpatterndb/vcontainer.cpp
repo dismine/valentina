@@ -119,12 +119,13 @@ auto VContainer::operator=(const VContainer &data) -> VContainer &
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VContainer::VContainer(VContainer &&data) Q_DECL_NOTHROW : d(std::move(data.d))
+VContainer::VContainer(VContainer &&data) noexcept
+  : d(std::move(data.d))
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VContainer::operator=(VContainer &&data) Q_DECL_NOTHROW->VContainer &
+auto VContainer::operator=(VContainer &&data) noexcept -> VContainer &
 {
     std::swap(d, data.d);
     return *this;
@@ -783,6 +784,14 @@ auto VContainer::DataPieces() const -> const QHash<quint32, VPiece> *
 auto VContainer::DataVariables() const -> const QHash<QString, QSharedPointer<VInternalVariable>> *
 {
     return &d->variables;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VContainerData::VContainerData(const VTranslateVars *trVars, const Unit *patternUnit, const QString &nspace)
+  : trVars(trVars),
+    patternUnit(patternUnit),
+    nspace(nspace)
+{
 }
 
 //---------------------------------------------------------------------------------------------------------------------

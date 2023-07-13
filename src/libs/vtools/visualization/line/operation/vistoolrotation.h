@@ -29,7 +29,7 @@
 #ifndef VISTOOLROTATION_H
 #define VISTOOLROTATION_H
 
-#include <qcompilerdetection.h>
+
 #include <QColor>
 #include <QGraphicsItem>
 #include <QMetaObject>

@@ -29,7 +29,7 @@
 #ifndef VGRAPHICSLINEITEM_H
 #define VGRAPHICSLINEITEM_H
 
-#include <qcompilerdetection.h>
+
 #include <QColor>
 #include <QGraphicsItem>
 #include <QLineF>

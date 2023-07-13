@@ -43,27 +43,16 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VCubicBezierPathData final : public QSharedData
 {
 public:
-
-    VCubicBezierPathData()
-        : path()
-    {}
-
-    VCubicBezierPathData(const VCubicBezierPathData &splPath)
-        : QSharedData(splPath),
-          path(splPath.path)
-    {}
-
-    virtual ~VCubicBezierPathData();
+    VCubicBezierPathData() = default;
+    VCubicBezierPathData(const VCubicBezierPathData &splPath) = default;
+    ~VCubicBezierPathData() = default;
 
     /** @brief path list of points. */
-    QVector<VPointF> path;
+    QVector<VPointF> path{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VCubicBezierPathData) // NOLINT
 };
-
-VCubicBezierPathData::~VCubicBezierPathData()
-{}
 
 QT_WARNING_POP
 

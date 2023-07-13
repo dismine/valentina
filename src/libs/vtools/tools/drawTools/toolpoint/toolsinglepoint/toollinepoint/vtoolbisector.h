@@ -29,7 +29,7 @@
 #ifndef VTOOLBISECTOR_H
 #define VTOOLBISECTOR_H
 
-#include <qcompilerdetection.h>
+
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QMetaObject>

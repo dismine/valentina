@@ -268,12 +268,12 @@ auto VPiecePath::operator=(const VPiecePath &path) -> VPiecePath &
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VPiecePath::VPiecePath(VPiecePath &&path) Q_DECL_NOTHROW
+VPiecePath::VPiecePath(VPiecePath &&path) noexcept
     : d (std::move(path.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPiecePath::operator=(VPiecePath &&path) Q_DECL_NOTHROW->VPiecePath &
+auto VPiecePath::operator=(VPiecePath &&path) noexcept->VPiecePath &
 {
     std::swap(d, path.d);
     return *this;

@@ -60,8 +60,8 @@ public:
 
     auto operator=(const VAbstractPiece &piece) -> VAbstractPiece &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VAbstractPiece(VAbstractPiece &&piece) Q_DECL_NOTHROW;
-    auto operator=(VAbstractPiece &&piece) Q_DECL_NOTHROW -> VAbstractPiece &;
+    VAbstractPiece(VAbstractPiece &&piece) noexcept;
+    auto operator=(VAbstractPiece &&piece) noexcept -> VAbstractPiece &;
 #endif
 
     auto GetName() const -> QString;

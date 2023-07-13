@@ -21,7 +21,7 @@
 #ifndef VVECTOR3DPROPERTY_H
 #define VVECTOR3DPROPERTY_H
 
-#include <qcompilerdetection.h>
+
 #include <stddef.h>
 #include <QMetaObject>
 #include <QObject>

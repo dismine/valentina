@@ -29,7 +29,6 @@
 #ifndef DIALOGPOINTOFINTERSECTIONCURVES_H
 #define DIALOGPOINTOFINTERSECTIONCURVES_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -39,7 +38,8 @@
 #include "../vmisc/def.h"
 #include "dialogtool.h"
 
-namespace Ui {
+namespace Ui
+{
 class DialogPointOfIntersectionCurves;
 }
 
@@ -49,49 +49,49 @@ class DialogPointOfIntersectionCurves : public DialogTool
 
 public:
     explicit DialogPointOfIntersectionCurves(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogPointOfIntersectionCurves() override;
+    ~DialogPointOfIntersectionCurves() override;
 
     auto GetPointName() const -> QString;
-    void    SetPointName(const QString &value);
+    void SetPointName(const QString &value);
 
     auto GetFirstCurveId() const -> quint32;
-    void    SetFirstCurveId(quint32 value);
+    void SetFirstCurveId(quint32 value);
 
     auto GetSecondCurveId() const -> quint32;
-    void    SetSecondCurveId(quint32 value);
+    void SetSecondCurveId(quint32 value);
 
     auto GetVCrossPoint() const -> VCrossCurvesPoint;
-    void              SetVCrossPoint(VCrossCurvesPoint vP);
+    void SetVCrossPoint(VCrossCurvesPoint vP);
 
     auto GetHCrossPoint() const -> HCrossCurvesPoint;
-    void              SetHCrossPoint(HCrossCurvesPoint hP);
+    void SetHCrossPoint(HCrossCurvesPoint hP);
 
-    void    SetNotes(const QString &notes);
+    void SetNotes(const QString &notes);
     auto GetNotes() const -> QString;
 
-    void    SetCurve1AliasSuffix1(const QString &alias);
+    void SetCurve1AliasSuffix1(const QString &alias);
     auto GetCurve1AliasSuffix1() const -> QString;
 
-    void    SetCurve1AliasSuffix2(const QString &alias);
+    void SetCurve1AliasSuffix2(const QString &alias);
     auto GetCurve1AliasSuffix2() const -> QString;
 
-    void    SetCurve2AliasSuffix1(const QString &alias);
+    void SetCurve2AliasSuffix1(const QString &alias);
     auto GetCurve2AliasSuffix1() const -> QString;
 
-    void    SetCurve2AliasSuffix2(const QString &alias);
+    void SetCurve2AliasSuffix2(const QString &alias);
     auto GetCurve2AliasSuffix2() const -> QString;
 
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
 
 protected:
-    virtual void ShowVisualization() override;
+    void ShowVisualization() override;
 
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void SaveData() override;
-    virtual auto IsValid() const -> bool final;
+    void SaveData() override;
+    auto IsValid() const -> bool final;
 
 private slots:
     void CurveChanged();

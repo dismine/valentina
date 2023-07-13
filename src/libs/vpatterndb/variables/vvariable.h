@@ -29,35 +29,32 @@
 #ifndef VVARIABLE_H
 #define VVARIABLE_H
 
-#include <qcompilerdetection.h>
 #include <QSharedDataPointer>
 #include <QString>
 #include <QTypeInfo>
 #include <QtGlobal>
 
-#include "../vmisc/def.h"
-#include "../ifc/ifcdef.h"
 #include "vinternalvariable.h"
 
 class VVariableData;
 
-class VVariable :public VInternalVariable
+class VVariable : public VInternalVariable
 {
 public:
     VVariable();
     explicit VVariable(const QString &name, const QString &description = QString());
     VVariable(const VVariable &var);
 
-    virtual ~VVariable() override;
+    ~VVariable() override;
 
     auto operator=(const VVariable &var) -> VVariable &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VVariable(VVariable &&var) Q_DECL_NOTHROW;
-    auto operator=(VVariable &&var) Q_DECL_NOTHROW->VVariable &;
+    VVariable(VVariable &&var) noexcept;
+    auto operator=(VVariable &&var) noexcept -> VVariable &;
 #endif
 
     auto GetDescription() const -> QString;
-    void    SetDescription(const QString &desc);
+    void SetDescription(const QString &desc);
 
 private:
     QSharedDataPointer<VVariableData> d;

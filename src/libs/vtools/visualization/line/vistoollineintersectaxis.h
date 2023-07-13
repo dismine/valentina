@@ -29,7 +29,7 @@
 #ifndef VISTOOLLINEINTERSECTAXIS_H
 #define VISTOOLLINEINTERSECTAXIS_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsItem>
 #include <QLineF>
 #include <QMetaObject>

@@ -29,7 +29,7 @@
 #ifndef VTOOLALONGLINE_H
 #define VTOOLALONGLINE_H
 
-#include <qcompilerdetection.h>
+
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QMetaObject>

@@ -57,13 +57,13 @@ auto VPieceLabelData::operator=(const VPieceLabelData &data) -> VPieceLabelData 
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VPieceLabelData::VPieceLabelData(VPieceLabelData &&data) Q_DECL_NOTHROW
+VPieceLabelData::VPieceLabelData(VPieceLabelData &&data) noexcept
     : VPatternLabelData(std::move(data)),
       d (std::move(data.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPieceLabelData::operator=(VPieceLabelData &&data) Q_DECL_NOTHROW->VPieceLabelData &
+auto VPieceLabelData::operator=(VPieceLabelData &&data) noexcept->VPieceLabelData &
 {
     VPatternLabelData::operator=(data);
     std::swap(d, data.d);

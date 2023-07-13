@@ -29,7 +29,7 @@
 #ifndef VISTOOLLINEINTERSECT_H
 #define VISTOOLLINEINTERSECT_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>

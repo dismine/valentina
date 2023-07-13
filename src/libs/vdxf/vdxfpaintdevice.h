@@ -33,7 +33,6 @@
 #include <QSize>
 #include <QString>
 #include <QtGlobal>
-#include <qcompilerdetection.h>
 
 #include "dxfdef.h"
 #include "libdxfrw/drw_base.h"

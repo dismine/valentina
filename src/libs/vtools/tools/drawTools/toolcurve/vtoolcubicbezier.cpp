@@ -34,11 +34,13 @@
 #include <Qt>
 #include <new>
 
-#include "../../../dialogs/tools/dialogtool.h"
 #include "../../../dialogs/tools/dialogcubicbezier.h"
-#include "../../../visualization/visualization.h"
+#include "../../../dialogs/tools/dialogtool.h"
 #include "../../../visualization/path/vistoolcubicbezier.h"
+#include "../../../visualization/visualization.h"
+#include "../../vabstracttool.h"
 #include "../ifc/exception/vexception.h"
+#include "../vdrawtool.h"
 #include "../vgeometry/../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vcubicbezier.h"
@@ -46,19 +48,17 @@
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "../../vabstracttool.h"
-#include "../vdrawtool.h"
 #include "vabstractspline.h"
 
 const QString VToolCubicBezier::ToolType = QStringLiteral("cubicBezier");
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolCubicBezier::VToolCubicBezier(const VToolCubicBezierInitData &initData, QGraphicsItem *parent)
-    :VAbstractSpline(initData.doc, initData.data, initData.id, initData.notes, parent)
+  : VAbstractSpline(initData.doc, initData.data, initData.id, initData.notes, parent)
 {
-    sceneType = SceneObject::Spline;
+    SetSceneType(SceneObject::Spline);
 
-    this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
+    this->setFlag(QGraphicsItem::ItemIsFocusable, true); // For keyboard input focus
 
     ToolCreation(initData.typeCreation);
 }
@@ -91,7 +91,7 @@ auto VToolCubicBezier::Create(const QPointer<DialogTool> &dialog, VMainGraphicsS
     initData.spline = new VCubicBezier(dialogTool->GetSpline());
     initData.notes = dialogTool->GetNotes();
 
-    auto* spl = Create(initData);
+    auto *spl = Create(initData);
 
     if (spl != nullptr)
     {
@@ -121,7 +121,7 @@ auto VToolCubicBezier::Create(VToolCubicBezierInitData initData) -> VToolCubicBe
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::CubicBezier, initData.doc);
-        auto* _spl = new VToolCubicBezier(initData);
+        auto *_spl = new VToolCubicBezier(initData);
         initData.scene->addItem(_spl);
         InitSplineToolConnections(initData.scene, _spl);
         VAbstractPattern::AddTool(initData.id, _spl);
@@ -192,10 +192,10 @@ void VToolCubicBezier::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, qu
     {
         ContextMenu<DialogCubicBezier>(event);
     }
-    catch(const VExceptionToolWasDeleted &e)
+    catch (const VExceptionToolWasDeleted &e)
     {
         Q_UNUSED(e)
-        return;//Leave this method immediately!!!
+        return; // Leave this method immediately!!!
     }
 }
 
@@ -229,7 +229,7 @@ void VToolCubicBezier::SaveDialog(QDomElement &domElement, QList<quint32> &oldDe
     AddDependence(newDependencies, spl.GetP3().id());
     AddDependence(newDependencies, spl.GetP4().id());
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept {return notes.isEmpty();});
+                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
 
     SetSplineAttributes(domElement, spl);
 }
@@ -278,16 +278,16 @@ void VToolCubicBezier::SetSplineAttributes(QDomElement &domElement, const VCubic
 {
     SCASSERT(doc != nullptr)
 
-    doc->SetAttribute(domElement, AttrType,     ToolType);
-    doc->SetAttribute(domElement, AttrPoint1,   spl.GetP1().id());
-    doc->SetAttribute(domElement, AttrPoint2,   spl.GetP2().id());
-    doc->SetAttribute(domElement, AttrPoint3,   spl.GetP3().id());
-    doc->SetAttribute(domElement, AttrPoint4,   spl.GetP4().id());
-    doc->SetAttribute(domElement, AttrColor,    spl.GetColor());
+    doc->SetAttribute(domElement, AttrType, ToolType);
+    doc->SetAttribute(domElement, AttrPoint1, spl.GetP1().id());
+    doc->SetAttribute(domElement, AttrPoint2, spl.GetP2().id());
+    doc->SetAttribute(domElement, AttrPoint3, spl.GetP3().id());
+    doc->SetAttribute(domElement, AttrPoint4, spl.GetP4().id());
+    doc->SetAttribute(domElement, AttrColor, spl.GetColor());
     doc->SetAttribute(domElement, AttrPenStyle, spl.GetPenStyle());
-    doc->SetAttribute(domElement, AttrAScale,   spl.GetApproximationScale());
+    doc->SetAttribute(domElement, AttrAScale, spl.GetApproximationScale());
     doc->SetAttributeOrRemoveIf<quint32>(domElement, AttrDuplicate, spl.GetDuplicate(),
-                                         [](quint32 duplicate) noexcept {return duplicate == 0;});
+                                         [](quint32 duplicate) noexcept { return duplicate == 0; });
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrAlias, spl.GetAliasSuffix(),
-                                         [](const QString &suffix) noexcept {return suffix.isEmpty();});
+                                         [](const QString &suffix) noexcept { return suffix.isEmpty(); });
 }

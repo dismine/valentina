@@ -29,7 +29,6 @@
 #ifndef VSPLINE_H
 #define VSPLINE_H
 
-#include <qcompilerdetection.h>
 #include <QLineF>
 #include <QMetaType>
 #include <QPointF>
@@ -47,7 +46,7 @@ class VSplineData;
 /**
  * @brief VSpline class that implements the spline.
  */
-class VSpline final :public VAbstractCubicBezier
+class VSpline final : public VAbstractCubicBezier
 {
 public:
     VSpline();
@@ -66,8 +65,8 @@ public:
 
     auto operator=(const VSpline &spline) -> VSpline &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VSpline(VSpline &&spline) Q_DECL_NOTHROW;
-    auto operator=(VSpline &&spline) Q_DECL_NOTHROW -> VSpline &;
+    VSpline(VSpline &&spline) noexcept;
+    auto operator=(VSpline &&spline) noexcept -> VSpline &;
 #endif
 
     auto GetP1() const -> VPointF override;
@@ -82,7 +81,7 @@ public:
     auto GetStartAngle() const -> qreal override;
     auto GetEndAngle() const -> qreal override;
 
-    auto GetStartAngleFormula () const -> QString;
+    auto GetStartAngleFormula() const -> QString;
     auto GetEndAngleFormula() const -> QString;
 
     void SetStartAngle(qreal angle, const QString &formula);
@@ -107,8 +106,8 @@ public:
 
     auto GetPoints() const -> QVector<QPointF> override;
     // cppcheck-suppress unusedFunction
-    static auto SplinePoints(const QPointF &p1, const QPointF &p4, qreal angle1, qreal angle2, qreal kAsm1,
-                             qreal kAsm2, qreal kCurve, qreal approximationScale) -> QVector<QPointF>;
+    static auto SplinePoints(const QPointF &p1, const QPointF &p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2,
+                             qreal kCurve, qreal approximationScale) -> QVector<QPointF>;
     auto ParamT(const QPointF &pBt) const -> qreal;
 
     auto ToJson() const -> QJsonObject override;
@@ -117,15 +116,16 @@ protected:
     auto GetControlPoint1() const -> QPointF override;
     auto GetControlPoint2() const -> QPointF override;
     auto GetRealLength() const -> qreal override;
+
 private:
     QSharedDataPointer<VSplineData> d;
-    static auto CalcT(qreal curveCoord1, qreal curveCoord2, qreal curveCoord3, qreal curveCoord4,
-                      qreal pointCoord) -> QVector<qreal>;
+    static auto CalcT(qreal curveCoord1, qreal curveCoord2, qreal curveCoord3, qreal curveCoord4, qreal pointCoord)
+        -> QVector<qreal>;
     static auto Cubic(QVector<qreal> &x, qreal a, qreal b, qreal c) -> qint32;
     static auto Sign(long double ld) -> int;
 };
 
-Q_DECLARE_METATYPE(VSpline) // NOLINT
+Q_DECLARE_METATYPE(VSpline)                  // NOLINT
 Q_DECLARE_TYPEINFO(VSpline, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VSPLINE_H

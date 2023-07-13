@@ -29,7 +29,7 @@
 #ifndef VMAINGRAPHICSVIEW_H
 #define VMAINGRAPHICSVIEW_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsView>
 #include <QMetaObject>
 #include <QObject>

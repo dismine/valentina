@@ -29,7 +29,6 @@
 #ifndef DIALOGCURVEINTERSECTAXIS_H
 #define DIALOGCURVEINTERSECTAXIS_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -40,7 +39,7 @@
 
 namespace Ui
 {
-    class DialogCurveIntersectAxis;
+class DialogCurveIntersectAxis;
 }
 
 class DialogCurveIntersectAxis final : public DialogTool
@@ -49,57 +48,61 @@ class DialogCurveIntersectAxis final : public DialogTool
 
 public:
     DialogCurveIntersectAxis(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogCurveIntersectAxis() override;
+    ~DialogCurveIntersectAxis() override;
 
     auto GetPointName() const -> QString;
-    void         SetPointName(const QString &value);
+    void SetPointName(const QString &value);
 
     auto GetTypeLine() const -> QString;
-    void         SetTypeLine(const QString &value);
+    void SetTypeLine(const QString &value);
 
     auto GetAngle() const -> QString;
-    void         SetAngle(const QString &value);
+    void SetAngle(const QString &value);
 
     auto GetBasePointId() const -> quint32;
-    void         SetBasePointId(quint32 value);
+    void SetBasePointId(quint32 value);
 
     auto getCurveId() const -> quint32;
-    void         setCurveId(quint32 value);
+    void setCurveId(quint32 value);
 
     auto GetLineColor() const -> QString;
-    void         SetLineColor(const QString &value);
+    void SetLineColor(const QString &value);
 
-    void    SetNotes(const QString &notes);
+    void SetNotes(const QString &notes);
     auto GetNotes() const -> QString;
 
-    void    SetAliasSuffix1(const QString &alias);
+    void SetAliasSuffix1(const QString &alias);
     auto GetAliasSuffix1() const -> QString;
 
-    void    SetAliasSuffix2(const QString &alias);
+    void SetAliasSuffix2(const QString &alias);
     auto GetAliasSuffix2() const -> QString;
 
-    virtual void ShowDialog(bool click) override;
+    void ShowDialog(bool click) override;
+
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
-    void         EvalAngle();
-    void         DeployAngleTextEdit();
-    void         FXAngle();
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void EvalAngle();
+    void DeployAngleTextEdit();
+    void FXAngle();
+
 protected:
-    virtual void ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void SaveData() override;
-    virtual void closeEvent(QCloseEvent *event) override;
-    virtual auto IsValid() const -> bool final;
+    void SaveData() override;
+    void closeEvent(QCloseEvent *event) override;
+    auto IsValid() const -> bool final;
+
 private slots:
     void ValidateAlias();
+
 private:
     Q_DISABLE_COPY_MOVE(DialogCurveIntersectAxis) // NOLINT
     Ui::DialogCurveIntersectAxis *ui;
 
     QString formulaAngle;
-    int     formulaBaseHeightAngle;
+    int formulaBaseHeightAngle;
 
     QString pointName;
 
@@ -116,7 +119,7 @@ private:
     QString originAliasSuffix2{};
 
     /** @brief number number of handled objects */
-    qint32  number{0};
+    qint32 number{0};
 };
 
 //---------------------------------------------------------------------------------------------------------------------

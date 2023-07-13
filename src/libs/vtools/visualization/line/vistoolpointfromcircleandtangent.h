@@ -29,7 +29,7 @@
 #ifndef VISTOOLPOINTFROMCIRCLEANDTANGENT_H
 #define VISTOOLPOINTFROMCIRCLEANDTANGENT_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>

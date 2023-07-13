@@ -21,7 +21,7 @@
 #ifndef VPROPERTYMODEL_H
 #define VPROPERTYMODEL_H
 
-#include <qcompilerdetection.h>
+
 #include <QAbstractItemModel>
 #include <QMap>
 #include <QMetaObject>

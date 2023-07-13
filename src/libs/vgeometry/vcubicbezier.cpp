@@ -66,12 +66,12 @@ auto VCubicBezier::operator=(const VCubicBezier &curve) -> VCubicBezier &
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VCubicBezier::VCubicBezier(VCubicBezier &&curve) Q_DECL_NOTHROW
+VCubicBezier::VCubicBezier(VCubicBezier &&curve) noexcept
     : VAbstractCubicBezier(std::move(curve)), d(std::move(curve.d))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VCubicBezier::operator=(VCubicBezier &&curve) Q_DECL_NOTHROW->VCubicBezier &
+auto VCubicBezier::operator=(VCubicBezier &&curve) noexcept->VCubicBezier &
 {
     VAbstractCubicBezier::operator=(curve);
     std::swap(d, curve.d);

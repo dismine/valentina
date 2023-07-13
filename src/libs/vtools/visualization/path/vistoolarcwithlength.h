@@ -29,7 +29,7 @@
 #ifndef VISTOOLARCWITHLENGTH_H
 #define VISTOOLARCWITHLENGTH_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>

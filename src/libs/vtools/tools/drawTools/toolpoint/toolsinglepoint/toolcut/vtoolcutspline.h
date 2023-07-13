@@ -29,7 +29,7 @@
 #ifndef VTOOLCUTSPLINE_H
 #define VTOOLCUTSPLINE_H
 
-#include <qcompilerdetection.h>
+
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QMetaObject>

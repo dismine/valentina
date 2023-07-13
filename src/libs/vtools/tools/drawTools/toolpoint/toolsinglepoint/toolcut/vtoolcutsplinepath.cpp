@@ -248,14 +248,14 @@ auto VToolCutSplinePath::CutSplinePath(qreal length, const QSharedPointer<VAbstr
             if (i == p1)
             {
                 const qreal angle1 = spl1.GetStartAngle()+180;
-                const QString angle1F = QString().number(angle1);
+                const QString angle1F = QString::number(angle1);
 
                 (*splPath1)->append(VSplinePoint(splP1.P(), angle1, angle1F, spl1.GetStartAngle(),
                                                  spl1.GetStartAngleFormula(), splP1.Length1(), splP1.Length1Formula(),
                                                  spl1.GetC1Length(), spl1.GetC1LengthFormula()));
 
                 const qreal angle2 = spl1.GetEndAngle()+180;
-                const QString angle2F = QString().number(angle2);
+                const QString angle2F = QString::number(angle2);
 
                 const auto cutPoint = VSplinePoint(*p, spl1.GetEndAngle(), spl1.GetEndAngleFormula(), angle2, angle2F,
                                                    spl1.GetC2Length(), spl1.GetC2LengthFormula(), spl2.GetC1Length(),
@@ -270,7 +270,7 @@ auto VToolCutSplinePath::CutSplinePath(qreal length, const QSharedPointer<VAbstr
             if (i == p2)
             {
                 const qreal angle1 = spl2.GetStartAngle()+180;
-                const QString angle1F = QString().number(angle1);
+                const QString angle1F = QString::number(angle1);
 
                 const auto cutPoint = VSplinePoint(*p, angle1, angle1F, spl2.GetStartAngle(),
                                                    spl2.GetStartAngleFormula(), spl1.GetC2Length(),
@@ -280,7 +280,7 @@ auto VToolCutSplinePath::CutSplinePath(qreal length, const QSharedPointer<VAbstr
                 (*splPath2)->append(cutPoint);
 
                 const qreal angle2 = spl2.GetEndAngle()+180;
-                const QString angle2F = QString().number(angle2);
+                const QString angle2F = QString::number(angle2);
 
                 (*splPath2)->append(VSplinePoint(splP2.P(), spl2.GetEndAngle(), spl2.GetEndAngleFormula(), angle2,
                                                  angle2F, spl2.GetC2Length(), spl2.GetC2LengthFormula(),

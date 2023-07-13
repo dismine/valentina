@@ -29,7 +29,6 @@
 #ifndef VABSTRACTPOINT_H
 #define VABSTRACTPOINT_H
 
-#include <qcompilerdetection.h>
 #include <QColor>
 #include <QMetaObject>
 #include <QObject>
@@ -39,45 +38,40 @@
 #include <Qt>
 #include <QtGlobal>
 
-#include "../vdrawtool.h"
-#include "../ifc/ifcdef.h"
-#include "../vgeometry/vpointf.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vpatterndb/vcontainer.h"
-#include "../vmisc/def.h"
-#include "../vwidgets/vmaingraphicsscene.h"
 #include "../../../visualization/visualization.h"
 #include "../../vabstracttool.h"
+#include "../vdrawtool.h"
+#include "../vmisc/def.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vmaingraphicsscene.h"
 
-class VAbstractPoint: public VDrawTool
+class VAbstractPoint : public VDrawTool
 {
     Q_OBJECT // NOLINT
+
 public:
     VAbstractPoint(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes);
     virtual ~VAbstractPoint() = default;
 
     virtual auto getTagName() const -> QString override;
 
-    template <typename T>
-    void ShowToolVisualization(bool show);
+    template <typename T> void ShowToolVisualization(bool show);
 
 public slots:
     virtual void ShowTool(quint32 id, bool enable) override;
-    void         DeleteFromLabel();
+    void DeleteFromLabel();
 
 protected:
     void SetPointName(quint32 id, const QString &name);
 
-    template <typename T>
-    static void InitToolConnections(VMainGraphicsScene *scene, T *tool);
+    template <typename T> static void InitToolConnections(VMainGraphicsScene *scene, T *tool);
 
 private:
     Q_DISABLE_COPY_MOVE(VAbstractPoint) // NOLINT
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-void VAbstractPoint::ShowToolVisualization(bool show)
+template <typename T> void VAbstractPoint::ShowToolVisualization(bool show)
 {
     if (show)
     {
@@ -101,8 +95,7 @@ void VAbstractPoint::ShowToolVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-void VAbstractPoint::InitToolConnections(VMainGraphicsScene *scene, T *tool)
+template <typename T> void VAbstractPoint::InitToolConnections(VMainGraphicsScene *scene, T *tool)
 {
     SCASSERT(scene != nullptr)
     SCASSERT(tool != nullptr)

@@ -29,7 +29,7 @@
 #ifndef VISTOOLMOVE_H
 #define VISTOOLMOVE_H
 
-#include <qcompilerdetection.h>
+
 #include <QColor>
 #include <QGraphicsItem>
 #include <QMetaObject>

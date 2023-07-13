@@ -29,7 +29,7 @@
 #ifndef VEXCEPTIONOBJECTERROR_H
 #define VEXCEPTIONOBJECTERROR_H
 
-#include <qcompilerdetection.h>
+
 #include <QString>
 #include <QtGlobal>
 

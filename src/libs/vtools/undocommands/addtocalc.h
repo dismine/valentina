@@ -29,7 +29,6 @@
 #ifndef ADDTOCALC_H
 #define ADDTOCALC_H
 
-#include <qcompilerdetection.h>
 #include <QDomElement>
 #include <QMetaObject>
 #include <QObject>
@@ -41,18 +40,21 @@
 class AddToCalc : public VUndoCommand
 {
     Q_OBJECT // NOLINT
+
 public:
     AddToCalc(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
-    virtual ~AddToCalc() =default;
-    virtual void undo() override;
-    virtual void redo() override;
+    ~AddToCalc() override = default;
+    void undo() override;
+    void redo() override;
+
 protected:
-    virtual void RedoFullParsing() override;
+    void RedoFullParsing() override;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(AddToCalc) // NOLINT
-    const QString     nameActivDraw;
-    quint32           cursor;
+    const QString nameActivDraw;
+    quint32 cursor;
 };
 
 #endif // ADDTOCALC_H

@@ -43,95 +43,75 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VMeasurementData final : public QSharedData
 {
 public:
+    VMeasurementData(quint32 index, MeasurementType varType);
+    VMeasurementData(quint32 index, qreal baseA, qreal baseB, qreal baseC, qreal base);
+    VMeasurementData(VContainer *data, quint32 index, const QString &formula, bool ok, qreal base);
+    VMeasurementData(const VMeasurementData &m) = default;
+    ~VMeasurementData() = default;
 
-    explicit VMeasurementData(quint32 index, MeasurementType varType)
-        : index(index),
-          varType(varType)
-    {}
+    QSharedPointer<VContainer> data{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 index;                     // NOLINT(misc-non-private-member-variables-in-classes)
+    QString formula{};                 // NOLINT(misc-non-private-member-variables-in-classes)
+    QString gui_text{};                // NOLINT(misc-non-private-member-variables-in-classes)
+    bool formulaOk{true};              // NOLINT(misc-non-private-member-variables-in-classes)
 
-    VMeasurementData(quint32 index, qreal baseA, qreal baseB, qreal baseC, qreal base)
-        : index(index),
-          shiftBase(base),
-          baseA(baseA),
-          baseB(baseB),
-          baseC(baseC)
-    {}
+    qreal currentBaseA{0}; // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal currentBaseB{0}; // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal currentBaseC{0}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    VMeasurementData(VContainer *data, quint32 index, const QString &formula, bool ok, qreal base)
-        : data(QSharedPointer<VContainer>(new VContainer(*data))),
-          index(index),
-          formula(formula),
-          formulaOk(ok),
-          shiftBase(base)
-    {}
+    qreal shiftBase{0}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    VMeasurementData(const VMeasurementData &m)
-        : QSharedData(m),
-          data(m.data),
-          index(m.index),
-          formula(m.formula),
-          gui_text(m.gui_text),
-          formulaOk(m.formulaOk),
-          currentBaseA(m.currentBaseA),
-          currentBaseB(m.currentBaseB),
-          currentBaseC(m.currentBaseC),
-          shiftBase(m.shiftBase),
-          shiftA(m.shiftA),
-          shiftB(m.shiftB),
-          shiftC(m.shiftC),
-          stepA(m.stepA),
-          stepB(m.stepB),
-          stepC(m.stepC),
-          baseA(m.baseA),
-          baseB(m.baseB),
-          baseC(m.baseC),
-          corrections(m.corrections),
-          specialUnits(m.specialUnits),
-          dimension(m.dimension),
-          varType(m.varType)
-    {}
+    qreal shiftA{0}; // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal shiftB{0}; // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal shiftC{0}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    virtual  ~VMeasurementData();
+    qreal stepA{0}; // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal stepB{0}; // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal stepC{0}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    QSharedPointer<VContainer> data{};
-    quint32 index;
-    QString formula{};
-    QString gui_text{};
-    bool formulaOk{true};
+    qreal baseA{0}; // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal baseB{0}; // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal baseC{0}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    qreal currentBaseA{0};
-    qreal currentBaseB{0};
-    qreal currentBaseC{0};
+    QMap<QString, qreal> corrections{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    qreal shiftBase{0};
+    bool specialUnits{false}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    qreal shiftA{0};
-    qreal shiftB{0};
-    qreal shiftC{0};
+    IMD dimension{IMD::N}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    qreal stepA{0};
-    qreal stepB{0};
-    qreal stepC{0};
-
-    qreal baseA{0};
-    qreal baseB{0};
-    qreal baseC{0};
-
-    QMap<QString, qreal> corrections{};
-
-    bool specialUnits{false};
-
-    IMD dimension{IMD::N};
-
-    MeasurementType varType{MeasurementType::Measurement};
+    MeasurementType varType{MeasurementType::Measurement}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VMeasurementData) // NOLINT
 };
 
-VMeasurementData::~VMeasurementData()
-{}
-
 QT_WARNING_POP
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VMeasurementData::VMeasurementData(quint32 index, MeasurementType varType)
+  : index(index),
+    varType(varType)
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VMeasurementData::VMeasurementData(quint32 index, qreal baseA, qreal baseB, qreal baseC, qreal base)
+  : index(index),
+    shiftBase(base),
+    baseA(baseA),
+    baseB(baseB),
+    baseC(baseC)
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VMeasurementData::VMeasurementData(VContainer *data, quint32 index, const QString &formula, bool ok, qreal base)
+  : data(QSharedPointer<VContainer>(new VContainer(*data))),
+    index(index),
+    formula(formula),
+    formulaOk(ok),
+    shiftBase(base)
+{
+}
 
 #endif // VMEASUREMENT_P_H

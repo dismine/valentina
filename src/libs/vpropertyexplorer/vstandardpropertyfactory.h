@@ -21,7 +21,7 @@
 #ifndef VASTANDARDPROPERTYFACTORY_H
 #define VASTANDARDPROPERTYFACTORY_H
 
-#include <qcompilerdetection.h>
+
 #include <QString>
 
 #include "vabstractpropertyfactory.h"

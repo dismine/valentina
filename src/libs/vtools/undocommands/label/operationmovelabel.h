@@ -29,7 +29,6 @@
 #ifndef OPERATIONMOVELABEL_H
 #define OPERATIONMOVELABEL_H
 
-#include <qcompilerdetection.h>
 #include <QDomElement>
 #include <QMetaObject>
 #include <QObject>
@@ -41,23 +40,25 @@
 class OperationMoveLabel : public MoveAbstractLabel
 {
     Q_OBJECT // NOLINT
+
 public:
     OperationMoveLabel(quint32 idTool, VAbstractPattern *doc, const QPointF &pos, quint32 idPoint,
-                      QUndoCommand *parent = nullptr);
-    virtual ~OperationMoveLabel()=default;
+                       QUndoCommand *parent = nullptr);
+    ~OperationMoveLabel() override = default;
 
-    virtual auto mergeWith(const QUndoCommand *command) -> bool override;
-    virtual auto id() const -> int override;
+    auto mergeWith(const QUndoCommand *command) -> bool override;
+    auto id() const -> int override;
 
     auto GetToolId() const -> quint32;
 
 protected:
-    virtual void Do(const QPointF &pos) override;
+    void Do(const QPointF &pos) override;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(OperationMoveLabel) // NOLINT
     quint32 m_idTool;
-    //Need for resizing scene rect
+    // Need for resizing scene rect
     QGraphicsScene *m_scene;
 };
 

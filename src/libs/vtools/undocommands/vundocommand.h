@@ -29,7 +29,6 @@
 #ifndef VUNDOCOMMAND_H
 #define VUNDOCOMMAND_H
 
-#include <qcompilerdetection.h>
 #include <QDomElement>
 #include <QMetaObject>
 #include <QObject>
@@ -42,7 +41,7 @@
 
 Q_DECLARE_LOGGING_CATEGORY(vUndo)
 
-enum class UndoCommand: qint8
+enum class UndoCommand : qint8
 {
     AddPatternPiece,
     AddToCalc,
@@ -64,37 +63,38 @@ enum class UndoCommand: qint8
     MoveBackGroundImage,
     ScaleBackGroundImage,
     RotateBackGroundImage
- };
+};
 
 class VPattern;
 
 class VUndoCommand : public QObject, public QUndoCommand
 {
     Q_OBJECT // NOLINT
+
 public:
     VUndoCommand(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
-    virtual ~VUndoCommand() =default;
+    virtual ~VUndoCommand() = default;
 signals:
     void ClearScene();
     void NeedFullParsing();
     void NeedLiteParsing(const Document &parse);
+
 protected:
-    QDomElement  xml;
+    QDomElement xml;
     VAbstractPattern *doc;
-    quint32      nodeId;
-    bool         redoFlag;
+    quint32 nodeId;
+    bool redoFlag;
     virtual void RedoFullParsing();
-    void         UndoDeleteAfterSibling(QDomNode &parentNode, quint32 siblingId,
-                                        const QString &tagName = QString()) const;
+    void UndoDeleteAfterSibling(QDomNode &parentNode, quint32 siblingId, const QString &tagName = QString()) const;
 
-    void         IncrementReferences(const QVector<quint32> &nodes) const;
-    void         DecrementReferences(const QVector<quint32> &nodes) const;
+    void IncrementReferences(const QVector<quint32> &nodes) const;
+    void DecrementReferences(const QVector<quint32> &nodes) const;
 
-    void         IncrementReferences(const QVector<CustomSARecord> &nodes) const;
-    void         DecrementReferences(const QVector<CustomSARecord> &nodes) const;
+    void IncrementReferences(const QVector<CustomSARecord> &nodes) const;
+    void DecrementReferences(const QVector<CustomSARecord> &nodes) const;
 
-    void         IncrementReferences(const QVector<VPieceNode> &nodes) const;
-    void         DecrementReferences(const QVector<VPieceNode> &nodes) const;
+    void IncrementReferences(const QVector<VPieceNode> &nodes) const;
+    void DecrementReferences(const QVector<VPieceNode> &nodes) const;
 
     auto GetDestinationObject(quint32 idTool, quint32 idPoint) const -> QDomElement;
 

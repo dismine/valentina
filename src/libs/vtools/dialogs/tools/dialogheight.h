@@ -29,7 +29,6 @@
 #ifndef DIALOGHEIGHT_H
 #define DIALOGHEIGHT_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -40,7 +39,7 @@
 
 namespace Ui
 {
-    class DialogHeight;
+class DialogHeight;
 }
 
 /**
@@ -49,6 +48,7 @@ namespace Ui
 class DialogHeight final : public DialogTool
 {
     Q_OBJECT // NOLINT
+
 public:
     DialogHeight(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     ~DialogHeight() override;
@@ -73,9 +73,11 @@ public:
 
     void SetNotes(const QString &notes);
     auto GetNotes() const -> QString;
+
 public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
     void PointNameChanged() override;
+
 protected:
     void ShowVisualization() override;
     /**
@@ -83,6 +85,7 @@ protected:
      */
     void SaveData() override;
     auto IsValid() const -> bool final;
+
 private:
     Q_DISABLE_COPY_MOVE(DialogHeight) // NOLINT
 

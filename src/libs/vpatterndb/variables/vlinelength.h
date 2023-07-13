@@ -29,35 +29,34 @@
 #ifndef VLINELENGTH_H
 #define VLINELENGTH_H
 
-#include <qcompilerdetection.h>
 #include <QSharedDataPointer>
 #include <QTypeInfo>
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
-#include "../ifc/ifcdef.h"
 #include "vinternalvariable.h"
 
 class VLengthLineData;
 class VPointF;
 
-class VLengthLine final :public VInternalVariable
+class VLengthLine final : public VInternalVariable
 {
 public:
     VLengthLine();
     VLengthLine(const VPointF *p1, const quint32 &p1Id, const VPointF *p2, const quint32 &p2Id, Unit patternUnit);
     VLengthLine(const VLengthLine &var);
-
-    virtual ~VLengthLine() override;
+    ~VLengthLine() override;
 
     auto operator=(const VLengthLine &var) -> VLengthLine &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VLengthLine(VLengthLine &&var) Q_DECL_NOTHROW;
-    auto operator=(VLengthLine &&var) Q_DECL_NOTHROW->VLengthLine &;
+    VLengthLine(VLengthLine &&var) noexcept;
+    auto operator=(VLengthLine &&var) noexcept -> VLengthLine &;
 #endif
 
     virtual auto Filter(quint32 id) -> bool override;
-    void         SetValue(const VPointF *p1, const VPointF *p2);
+
+    void SetValue(const VPointF *p1, const VPointF *p2);
+
     auto GetP1Id() const -> quint32;
     auto GetP2Id() const -> quint32;
 

@@ -29,7 +29,6 @@
 #ifndef VTOOLUNIONDETAILS_H
 #define VTOOLUNIONDETAILS_H
 
-#include <qcompilerdetection.h>
 #include <QDomElement>
 #include <QDomNode>
 #include <QMetaObject>
@@ -39,34 +38,24 @@
 #include <QVector>
 #include <QtGlobal>
 
-#include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vmisc/def.h"
-#include "vabstracttool.h"
 #include "../vpatterndb/vpiece.h"
+#include "vabstracttool.h"
 
 class DialogTool;
 
-#define UNION_VERSSION 2
+constexpr int UNION_VERSSION = 2;
 
 struct VToolUnionDetailsInitData : VAbstractToolInitData
 {
-    VToolUnionDetailsInitData()
-        : VAbstractToolInitData(),
-          d1id(NULL_ID),
-          d2id(NULL_ID),
-          indexD1(NULL_ID),
-          indexD2(NULL_ID),
-          retainPieces(false),
-          version(UNION_VERSSION)
-    {}
+    VToolUnionDetailsInitData() = default;
 
-    quint32 d1id;
-    quint32 d2id;
-    quint32 indexD1;
-    quint32 indexD2;
-    bool retainPieces;
-    uint version;
+    quint32 d1id{NULL_ID};        // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 d2id{NULL_ID};        // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 indexD1{NULL_ID};     // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 indexD2{NULL_ID};     // NOLINT(misc-non-private-member-variables-in-classes)
+    bool retainPieces{false};     // NOLINT(misc-non-private-member-variables-in-classes)
+    uint version{UNION_VERSSION}; // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
 /**
@@ -75,7 +64,9 @@ struct VToolUnionDetailsInitData : VAbstractToolInitData
 class VToolUnionDetails : public VAbstractTool
 {
     Q_OBJECT // NOLINT
+
 public:
+    ~VToolUnionDetails() override = default;
     static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                        VContainer *data) -> VToolUnionDetails *;
     static auto Create(VToolUnionDetailsInitData initData) -> VToolUnionDetails *;
@@ -94,11 +85,11 @@ public:
 
     static const quint8 unionVersion;
 
-    virtual auto getTagName() const -> QString override;
-    virtual void ShowVisualization(bool show) override;
-    virtual void incrementReferens() override;
-    virtual void decrementReferens() override;
-    virtual void GroupVisibility(quint32 object, bool visible) override;
+    auto getTagName() const -> QString override;
+    void ShowVisualization(bool show) override;
+    void incrementReferens() override;
+    void decrementReferens() override;
+    void GroupVisibility(quint32 object, bool visible) override;
 
     static auto CalcUnitedPath(const VPiecePath &d1Path, const VPiecePath &d2Path, quint32 indexD2, quint32 pRotate)
         -> QVector<QPair<bool, VPieceNode>>;
@@ -106,12 +97,14 @@ public slots:
     /**
      * @brief FullUpdateFromFile update tool data form file.
      */
-    virtual void FullUpdateFromFile () override {}
-    virtual void AllowHover(bool) override {}
-    virtual void AllowSelecting(bool) override {}
+    void FullUpdateFromFile() override {}
+    void AllowHover(bool /*enabled*/) override {}
+    void AllowSelecting(bool /*enabled*/) override {}
+
 protected:
-    virtual void AddToFile() override;
-    virtual void SetVisualization() override {}
+    void AddToFile() override;
+    void SetVisualization() override {}
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VToolUnionDetails) // NOLINT
@@ -129,12 +122,12 @@ private:
 
     uint version;
 
-    VToolUnionDetails(const VToolUnionDetailsInitData &initData, QObject *parent = nullptr);
+    explicit VToolUnionDetails(const VToolUnionDetailsInitData &initData, QObject *parent = nullptr);
 
-    void             AddDetail(QDomElement &domElement, const VPiece &d) const;
-    void             AddToModeling(const QDomElement &domElement);
+    void AddDetail(QDomElement &domElement, const VPiece &d) const;
+    void AddToModeling(const QDomElement &domElement);
     auto GetReferenceObjects() const -> QVector<quint32>;
-    auto ReferenceObjects(const QDomElement &root, const QString &tag, const QString &attribute) const
+    static auto ReferenceObjects(const QDomElement &root, const QString &tag, const QString &attribute)
         -> QVector<quint32>;
 };
 

@@ -29,7 +29,6 @@
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
 
-#include <qcompilerdetection.h>
 #include <QHash>
 #include <QMap>
 #include <QString>
@@ -61,7 +60,7 @@ class Calculator final : public qmu::QmuFormulaBase
 {
 public:
     Calculator();
-    virtual ~Calculator() = default;
+    ~Calculator() override = default;
 
     auto EvalFormula(const QHash<QString, QSharedPointer<VInternalVariable>> *vars, const QString &formula) -> qreal;
 
@@ -71,8 +70,8 @@ protected:
 
 private:
     Q_DISABLE_COPY_MOVE(Calculator) // NOLINT
-    QVector<QSharedPointer<qreal>> m_varsValues;
-    const QHash<QString, QSharedPointer<VInternalVariable> > *m_vars;
+    QVector<QSharedPointer<qreal>> m_varsValues{};
+    const QHash<QString, QSharedPointer<VInternalVariable>> *m_vars{nullptr};
 };
 
 #endif // CALCULATOR_H

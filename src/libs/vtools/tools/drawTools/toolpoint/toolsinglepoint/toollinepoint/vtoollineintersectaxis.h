@@ -29,7 +29,7 @@
 #ifndef VTOOLLINEINTERSECTAXIS_H
 #define VTOOLLINEINTERSECTAXIS_H
 
-#include <qcompilerdetection.h>
+
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QLineF>

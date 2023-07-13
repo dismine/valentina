@@ -615,13 +615,13 @@ auto VLayoutPiece::operator=(const VLayoutPiece &detail) -> VLayoutPiece &
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutPiece::VLayoutPiece(VLayoutPiece &&detail) Q_DECL_NOTHROW : VAbstractPiece(std::move(detail)),
+VLayoutPiece::VLayoutPiece(VLayoutPiece &&detail) noexcept : VAbstractPiece(std::move(detail)),
                                                                    d(std::move(detail.d))
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPiece::operator=(VLayoutPiece &&detail) Q_DECL_NOTHROW
+auto VLayoutPiece::operator=(VLayoutPiece &&detail) noexcept
 ->VLayoutPiece &
 {
     VAbstractPiece::operator=(detail);

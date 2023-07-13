@@ -29,7 +29,6 @@
 #ifndef DIALOGPOINTOFCONTACT_H
 #define DIALOGPOINTOFCONTACT_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -40,7 +39,7 @@
 
 namespace Ui
 {
-    class DialogPointOfContact;
+class DialogPointOfContact;
 }
 
 /**
@@ -49,6 +48,7 @@ namespace Ui
 class DialogPointOfContact : public DialogTool
 {
     Q_OBJECT // NOLINT
+
 public:
     DialogPointOfContact(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     ~DialogPointOfContact() override;
@@ -72,6 +72,7 @@ public:
     auto GetNotes() const -> QString;
 
     void ShowDialog(bool click) override;
+
 public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
     /**
@@ -81,6 +82,7 @@ public slots:
     void PointNameChanged() override;
     void FXRadius();
     void EvalFormula();
+
 protected:
     void ShowVisualization() override;
     /**
@@ -89,6 +91,7 @@ protected:
     void SaveData() override;
     void closeEvent(QCloseEvent *event) override;
     auto IsValid() const -> bool final;
+
 private:
     Q_DISABLE_COPY_MOVE(DialogPointOfContact) // NOLINT
 

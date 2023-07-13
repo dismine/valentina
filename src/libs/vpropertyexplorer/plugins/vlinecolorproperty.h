@@ -29,7 +29,7 @@
 #ifndef VLINECOLORPROPERTY_H
 #define VLINECOLORPROPERTY_H
 
-#include <qcompilerdetection.h>
+
 #include <QMap>
 #include <QMetaObject>
 #include <QObject>

@@ -29,7 +29,7 @@
 #ifndef VOBJENGINE_H
 #define VOBJENGINE_H
 
-#include <qcompilerdetection.h>
+
 #include <QPaintEngine>
 #include <QPolygonF>
 #include <QRectF>

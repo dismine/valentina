@@ -29,7 +29,7 @@
 #ifndef VMAINGRAPHICSSCENE_H
 #define VMAINGRAPHICSSCENE_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsScene>
 #include <QMetaObject>
 #include <QObject>

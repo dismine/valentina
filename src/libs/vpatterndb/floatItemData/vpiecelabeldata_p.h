@@ -33,8 +33,8 @@
 #include <QString>
 #include <QVector>
 
-#include "../vmisc/defglobal.h"
 #include "../ifc/ifcdef.h"
+#include "../vmisc/defglobal.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -43,21 +43,21 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VPieceLabelDataPrivate : public QSharedData
 {
 public:
-    VPieceLabelDataPrivate(){} // NOLINT(modernize-use-equals-default)
+    VPieceLabelDataPrivate() = default;
     VPieceLabelDataPrivate(const VPieceLabelDataPrivate &data) = default;
     ~VPieceLabelDataPrivate() = default;
 
     /** @brief m_qsLetter Detail letter (should be no more than 3 characters) */
-    QString m_qsLetter{}; // NOLINT(misc-non-private-member-variables-in-classes)
-    QString m_annotation{}; // NOLINT(misc-non-private-member-variables-in-classes)
-    QString m_orientation{}; // NOLINT(misc-non-private-member-variables-in-classes)
-    QString m_rotationWay{}; // NOLINT(misc-non-private-member-variables-in-classes)
-    QString m_tilt{}; // NOLINT(misc-non-private-member-variables-in-classes)
-    QString m_foldPosition{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_qsLetter{};      // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_annotation{};    // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_orientation{};   // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_rotationWay{};   // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_tilt{};          // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_foldPosition{};  // NOLINT(misc-non-private-member-variables-in-classes)
     QString m_areaShortName{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     quint16 m_quantity{1}; // NOLINT(misc-non-private-member-variables-in-classes)
-    bool m_onFold{false}; // NOLINT(misc-non-private-member-variables-in-classes)
+    bool m_onFold{false};  // NOLINT(misc-non-private-member-variables-in-classes)
 
     QVector<VLabelTemplateLine> m_lines{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
@@ -68,4 +68,3 @@ private:
 QT_WARNING_POP
 
 #endif // VPIECELABELDATA_P_H
-

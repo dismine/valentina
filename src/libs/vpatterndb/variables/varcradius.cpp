@@ -37,14 +37,13 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VArcRadius::VArcRadius()
-    :VCurveVariable()
 {
     SetType(VarType::ArcRadius);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VArcRadius::VArcRadius(const quint32 &id, const quint32 &parentId, const VArc *arc, Unit patternUnit)
-    :VCurveVariable(id, parentId)
+  : VCurveVariable(id, parentId)
 {
     // cppcheck-suppress unknownMacro
     SCASSERT(arc != nullptr)
@@ -62,12 +61,12 @@ VArcRadius::VArcRadius(const quint32 &id, const quint32 &parentId, const VArc *a
 //---------------------------------------------------------------------------------------------------------------------
 VArcRadius::VArcRadius(const quint32 &id, const quint32 &parentId, const VEllipticalArc *elArc, const int numberRadius,
                        Unit patternUnit)
-    : VCurveVariable(id, parentId)
+  : VCurveVariable(id, parentId)
 {
     SCASSERT(elArc != nullptr)
 
     SetType(VarType::ArcRadius);
-    SetName(radius_V + QString("%1%2").arg(numberRadius).arg(elArc->name()));
+    SetName(radius_V + QStringLiteral("%1%2").arg(numberRadius).arg(elArc->name()));
 
     if (not elArc->GetAlias().isEmpty())
     {
@@ -85,21 +84,12 @@ VArcRadius::VArcRadius(const quint32 &id, const quint32 &parentId, const VEllipt
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VArcRadius::VArcRadius(const VArcRadius &var)
-    :VCurveVariable(var)
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto VArcRadius::operator=(const VArcRadius &var) -> VArcRadius &
 {
-    if ( &var == this )
+    if (&var == this)
     {
         return *this;
     }
     VCurveVariable::operator=(var);
     return *this;
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-VArcRadius::~VArcRadius()
-{}

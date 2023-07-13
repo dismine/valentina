@@ -41,11 +41,7 @@ class VPieceAreaData final : public QSharedData
 {
 public:
     VPieceAreaData() = default;
-
-    explicit VPieceAreaData(quint32 pieceId)
-        : m_pieceId(pieceId)
-    {}
-
+    explicit VPieceAreaData(quint32 pieceId);
     VPieceAreaData(const VPieceAreaData &var) = default;
     ~VPieceAreaData() = default;
 
@@ -56,5 +52,11 @@ private:
 };
 
 QT_WARNING_POP
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VPieceAreaData::VPieceAreaData(quint32 pieceId)
+  : m_pieceId(pieceId)
+{
+}
 
 #endif // VPIECEAREA_P_H

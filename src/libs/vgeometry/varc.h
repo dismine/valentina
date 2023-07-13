@@ -29,7 +29,6 @@
 #ifndef VARC_H
 #define VARC_H
 
-#include <qcompilerdetection.h>
 #include <QCoreApplication>
 #include <QPointF>
 #include <QSharedDataPointer>
@@ -39,7 +38,6 @@
 #include <QtGlobal>
 
 #include "vabstractarc.h"
-#include "vgeometrydef.h"
 #include "vpointf.h"
 
 class VArcData;
@@ -50,13 +48,14 @@ class VArcData;
 class VArc final : public VAbstractArc
 {
     Q_DECLARE_TR_FUNCTIONS(VArc) // NOLINT
+
 public:
     VArc();
     VArc(const VPointF &center, qreal radius, const QString &formulaRadius, qreal f1, const QString &formulaF1,
          qreal f2, const QString &formulaF2, quint32 idObject = 0, Draw mode = Draw::Calculation);
     VArc(const VPointF &center, qreal radius, qreal f1, qreal f2);
     VArc(qreal length, const QString &formulaLength, const VPointF &center, qreal radius, const QString &formulaRadius,
-         qreal f1, const QString &formulaF1,  quint32 idObject = 0, Draw mode = Draw::Calculation);
+         qreal f1, const QString &formulaF1, quint32 idObject = 0, Draw mode = Draw::Calculation);
     VArc(qreal length, const VPointF &center, qreal radius, qreal f1);
     VArc(const VArc &arc);
     auto Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const -> VArc;
@@ -64,10 +63,10 @@ public:
     auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VArc;
     ~VArc() override;
 
-    auto operator= (const VArc &arc) -> VArc&;
+    auto operator=(const VArc &arc) -> VArc &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VArc(VArc &&arc) Q_DECL_NOTHROW;
-    auto operator=(VArc &&arc) Q_DECL_NOTHROW -> VArc &;
+    VArc(VArc &&arc) noexcept;
+    auto operator=(VArc &&arc) noexcept -> VArc &;
 #endif
 
     auto GetFormulaRadius() const -> QString;
@@ -83,10 +82,12 @@ public:
 
     auto CutArc(qreal length, VArc &arc1, VArc &arc2, const QString &pointName) const -> QPointF;
     auto CutArc(qreal length, const QString &pointName) const -> QPointF;
+
 protected:
     void CreateName() override;
     void CreateAlias() override;
     void FindF2(qreal length) override;
+
 private:
     QSharedDataPointer<VArcData> d;
 

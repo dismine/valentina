@@ -46,8 +46,8 @@ public:
 
     auto operator=(const VPieceArea &var) -> VPieceArea &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VPieceArea(VPieceArea &&var) Q_DECL_NOTHROW;
-    auto operator=(VPieceArea &&var) Q_DECL_NOTHROW -> VPieceArea &;
+    VPieceArea(VPieceArea &&var) noexcept;
+    auto operator=(VPieceArea &&var) noexcept -> VPieceArea &;
 #endif
 
     void SetValue(quint32 pieceId, const VPiece &piece, const VContainer *data, Unit unit);

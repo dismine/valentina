@@ -29,8 +29,8 @@
 #ifndef VDRAWTOOL_H
 #define VDRAWTOOL_H
 
-#include <qcompilerdetection.h>
 #include <QAction>
+#include <QActionGroup>
 #include <QByteArray>
 #include <QColor>
 #include <QDomElement>
@@ -41,26 +41,27 @@
 #include <QObject>
 #include <QString>
 #include <QtGlobal>
-#include <QActionGroup>
+
 
 #include "../ifc/exception/vexceptionbadid.h"
-#include "../vinteractivetool.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vmisc/def.h"
-#include "../vwidgets/vmaingraphicsscene.h"
-#include "../vwidgets/vmaingraphicsview.h"
-#include "../vwidgets/vabstractmainwindow.h"
+#include "../toolsdef.h"
 #include "../vdatatool.h"
 #include "../vgeometry/vpointf.h"
+#include "../vinteractivetool.h"
+#include "../vmisc/def.h"
+#include "../vmisc/vabstractapplication.h"
 #include "../vtools/undocommands/undogroup.h"
-#include "../toolsdef.h"
+#include "../vwidgets/vabstractmainwindow.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/vmaingraphicsview.h"
 
 struct VDrawToolInitData : VAbstractToolInitData
 {
     VDrawToolInitData()
-        : VAbstractToolInitData(),
+      : VAbstractToolInitData(),
         notes()
-    {}
+    {
+    }
 
     QString notes;
 };
@@ -71,8 +72,8 @@ struct VDrawToolInitData : VAbstractToolInitData
 class VDrawTool : public VInteractiveTool
 {
     Q_OBJECT // NOLINT
-public:
 
+public:
     VDrawTool(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes, QObject *parent = nullptr);
     virtual ~VDrawTool() = default;
 
@@ -90,60 +91,66 @@ signals:
 public slots:
     virtual void ShowTool(quint32 id, bool enable);
     virtual void ChangedActivDraw(const QString &newName);
-    void         ChangedNameDraw(const QString &oldName, const QString &newName);
+    void ChangedNameDraw(const QString &oldName, const QString &newName);
     virtual void EnableToolMove(bool move);
-    virtual void Disable(bool disable, const QString &namePP)=0;
-    virtual void DetailsMode(bool mode);
+    virtual void Disable(bool disable, const QString &namePP) = 0;
+    virtual void SetDetailsMode(bool mode);
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID)=0;
-protected:
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) = 0;
 
-    enum class RemoveOption : bool {Disable = false, Enable = true};
-    enum class Referens : bool {Follow = true, Ignore = false};
+protected:
+    enum class RemoveOption : bool
+    {
+        Disable = false,
+        Enable = true
+    };
+    enum class Referens : bool
+    {
+        Follow = true,
+        Ignore = false
+    };
 
     /** @brief nameActivDraw name of tool's pattern peace. */
-    QString      nameActivDraw;
+    QString nameActivDraw;
 
     /** @brief typeLine line type. */
-    QString      m_lineType;
+    QString m_lineType;
 
-    QString      m_notes{};
+    QString m_notes{};
 
     void AddToCalculation(const QDomElement &domElement);
     void AddDependence(QList<quint32> &list, quint32 objectId) const;
 
     /** @brief SaveDialog save options into file after change in dialog. */
-    virtual void    SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                               QList<quint32> &newDependencies)=0;
-    virtual void    SaveDialogChange(const QString &undoText = QString()) final;
-    virtual void    ApplyToolOptions(const QList<quint32> &oldDependencies, const QList<quint32> &newDependencies,
-                                     const QDomElement &oldDomElement, const QDomElement &newDomElement);
-    virtual void    AddToFile() override;
-    void            SaveOption(QSharedPointer<VGObject> &obj);
-    virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
+    virtual void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                            QList<quint32> &newDependencies) = 0;
+    virtual void SaveDialogChange(const QString &undoText = QString()) final;
+    virtual void ApplyToolOptions(const QList<quint32> &oldDependencies, const QList<quint32> &newDependencies,
+                                  const QDomElement &oldDomElement, const QDomElement &newDomElement);
+    virtual void AddToFile() override;
+    void SaveOption(QSharedPointer<VGObject> &obj);
+    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
     virtual auto MakeToolTip() const -> QString;
-    virtual void    UpdateNamePosition(quint32 id, const QPointF &pos);
+    virtual void UpdateNamePosition(quint32 id, const QPointF &pos);
 
     auto CorrectDisable(bool disable, const QString &namePP) const -> bool;
 
-    void         ReadAttributes();
+    void ReadAttributes();
     virtual void ReadToolAttributes(const QDomElement &domElement);
     virtual void ChangeLabelVisibility(quint32 id, bool visible);
 
     template <class Dialog>
     void ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemId = NULL_ID,
-                     const RemoveOption &showRemove = RemoveOption::Enable,
-                     const Referens &ref = Referens::Follow);
+                     const RemoveOption &showRemove = RemoveOption::Enable, const Referens &ref = Referens::Follow);
 
-    template <class Item>
-    void ShowItem(Item *item, quint32 id, bool enable);
+    template <class Item> void ShowItem(Item *item, quint32 id, bool enable);
 
     template <class T> auto ObjectName(quint32 id) const -> QString;
 
     template <class T> auto ObjectAliasSuffix(quint32 id) const -> QString;
 
-    template <class T>
-    static void InitDrawToolConnections(VMainGraphicsScene *scene, T *tool);
+    template <class T> static void InitDrawToolConnections(VMainGraphicsScene *scene, T *tool);
+
 private:
     Q_DISABLE_COPY_MOVE(VDrawTool) // NOLINT
 };
@@ -167,8 +174,8 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
         return;
     }
 
-    GOType itemType =  GOType::Unknown;
-    if(itemId != NULL_ID)
+    GOType itemType = GOType::Unknown;
+    if (itemId != NULL_ID)
     {
         try
         {
@@ -182,21 +189,21 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
 
     qCDebug(vTool, "Creating tool context menu.");
     QMenu menu;
-    QAction *actionOption = menu.addAction(QIcon::fromTheme(QStringLiteral("preferences-other")),
-                                           VDrawTool::tr("Options"));
+    QAction *actionOption =
+        menu.addAction(QIcon::fromTheme(QStringLiteral("preferences-other")), VDrawTool::tr("Options"));
 
     // add the menu "add to group" to the context menu
-    QMap<quint32,QString> groupsNotContainingItem =  doc->GetGroupsContainingItem(this->getId(), itemId, false);
-    QActionGroup* actionsAddToGroup = new QActionGroup(this);
-    if(not groupsNotContainingItem.empty())
+    QMap<quint32, QString> groupsNotContainingItem = doc->GetGroupsContainingItem(this->getId(), itemId, false);
+    QActionGroup *actionsAddToGroup = new QActionGroup(this);
+    if (not groupsNotContainingItem.empty())
     {
-        QMenu *menuAddToGroup = menu.addMenu(QIcon::fromTheme(QStringLiteral("list-add")),
-                                             VDrawTool::tr("Add to group"));
+        QMenu *menuAddToGroup =
+            menu.addMenu(QIcon::fromTheme(QStringLiteral("list-add")), VDrawTool::tr("Add to group"));
 
         QStringList list = QStringList(groupsNotContainingItem.values());
         list.sort(Qt::CaseInsensitive);
 
-        for(int i=0; i<list.count(); ++i)
+        for (int i = 0; i < list.count(); ++i)
         {
             QAction *actionAddToGroup = menuAddToGroup->addAction(list[i]);
             actionsAddToGroup->addAction(actionAddToGroup);
@@ -210,17 +217,17 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
     }
 
     // add the menu "remove from group" to the context menu
-    QMap<quint32,QString> groupsContainingItem =  doc->GetGroupsContainingItem(this->getId(), itemId, true);
-    QActionGroup* actionsRemoveFromGroup = new QActionGroup(this);
-    if(not groupsContainingItem.empty())
+    QMap<quint32, QString> groupsContainingItem = doc->GetGroupsContainingItem(this->getId(), itemId, true);
+    QActionGroup *actionsRemoveFromGroup = new QActionGroup(this);
+    if (not groupsContainingItem.empty())
     {
-        QMenu *menuRemoveFromGroup = menu.addMenu(QIcon::fromTheme(QStringLiteral("list-remove")),
-                                                  VDrawTool::tr("Remove from group"));
+        QMenu *menuRemoveFromGroup =
+            menu.addMenu(QIcon::fromTheme(QStringLiteral("list-remove")), VDrawTool::tr("Remove from group"));
 
         QStringList list = QStringList(groupsContainingItem.values());
         list.sort(Qt::CaseInsensitive);
 
-        for(int i=0; i<list.count(); ++i)
+        for (int i = 0; i < list.count(); ++i)
         {
             QAction *actionRemoveFromGroup = menuRemoveFromGroup->addAction(list[i]);
             actionsRemoveFromGroup->addAction(actionRemoveFromGroup);
@@ -239,7 +246,7 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
     }
     else
     {
-       actionShowLabel->setVisible(false);
+        actionShowLabel->setVisible(false);
     }
 
     QAction *actionRestoreLabelPosition = menu.addAction(VDrawTool::tr("Restore label position"));
@@ -275,7 +282,7 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
 
     QAction *selectedAction = menu.exec(event->screenPos());
 
-    if(selectedAction == nullptr)
+    if (selectedAction == nullptr)
     {
         return;
     }
@@ -288,7 +295,7 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
 
         connect(m_dialog.data(), &DialogTool::DialogClosed, this, &VDrawTool::FullUpdateFromGuiOk);
         connect(m_dialog.data(), &DialogTool::DialogApplied, this, &VDrawTool::FullUpdateFromGuiApply);
-        
+
         this->SetDialog();
 
         m_dialog->show();
@@ -297,7 +304,7 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
     {
         qCDebug(vTool, "Deleting tool.");
         DeleteToolWithConfirm(); // do not catch exception here
-        return; //Leave this method immediately after call!!!
+        return;                  // Leave this method immediately after call!!!
     }
     else if (selectedAction == actionShowLabel)
     {
@@ -313,12 +320,12 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
         QDomElement item = doc->AddItemToGroup(this->getId(), itemId, groupId);
 
         VMainGraphicsScene *scene =
-                qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
+            qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
         SCASSERT(scene != nullptr)
         scene->clearSelection();
 
         VAbstractMainWindow *window =
-                qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+            qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
         SCASSERT(window != nullptr)
         {
             AddItemToGroup *addItemToGroup = new AddItemToGroup(item, doc, groupId);
@@ -333,7 +340,7 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
         QDomElement item = doc->RemoveItemFromGroup(this->getId(), itemId, groupId);
 
         VAbstractMainWindow *window =
-                qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+            qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
         SCASSERT(window != nullptr)
         {
             RemoveItemFromGroup *removeItemFromGroup = new RemoveItemFromGroup(item, doc, groupId);
@@ -376,9 +383,8 @@ auto VDrawTool::ObjectName(quint32 id) const -> QString
     catch (const VExceptionBadId &e)
     {
         qCDebug(vTool, "Error! Couldn't get object name by id = %s. %s %s", qUtf8Printable(QString().setNum(id)),
-                qUtf8Printable(e.ErrorMessage()),
-                qUtf8Printable(e.DetailedInformation()));
-        return QString();// Return empty string for property browser
+                qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        return QString(); // Return empty string for property browser
     }
 }
 
@@ -396,16 +402,15 @@ auto VDrawTool::ObjectAliasSuffix(quint32 id) const -> QString
     }
     catch (const VExceptionBadId &e)
     {
-        qCDebug(vTool, "Error! Couldn't get object alias suffix by id = %s. %s %s", qUtf8Printable(QString().setNum(id)),
-                qUtf8Printable(e.ErrorMessage()),
+        qCDebug(vTool, "Error! Couldn't get object alias suffix by id = %s. %s %s",
+                qUtf8Printable(QString().setNum(id)), qUtf8Printable(e.ErrorMessage()),
                 qUtf8Printable(e.DetailedInformation()));
-        return QString();// Return empty string for property browser
+        return QString(); // Return empty string for property browser
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class T>
-void VDrawTool::InitDrawToolConnections(VMainGraphicsScene *scene, T *tool)
+template <class T> void VDrawTool::InitDrawToolConnections(VMainGraphicsScene *scene, T *tool)
 {
     SCASSERT(scene != nullptr)
     SCASSERT(tool != nullptr)
@@ -414,7 +419,7 @@ void VDrawTool::InitDrawToolConnections(VMainGraphicsScene *scene, T *tool)
     QObject::connect(tool, &T::ChangedToolSelection, scene, &VMainGraphicsScene::SelectedItem);
     QObject::connect(scene, &VMainGraphicsScene::DisableItem, tool, &T::Disable);
     QObject::connect(scene, &VMainGraphicsScene::EnableToolMove, tool, &T::EnableToolMove);
-    QObject::connect(scene, &VMainGraphicsScene::CurveDetailsMode, tool, &T::DetailsMode);
+    QObject::connect(scene, &VMainGraphicsScene::CurveDetailsMode, tool, &T::SetDetailsMode);
     QObject::connect(scene, &VMainGraphicsScene::ItemSelection, tool, &T::ToolSelectionType);
 }
 

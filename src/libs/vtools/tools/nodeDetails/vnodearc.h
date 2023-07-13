@@ -29,7 +29,7 @@
 #ifndef VNODEARC_H
 #define VNODEARC_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsPathItem>
 #include <QMetaObject>
 #include <QObject>

@@ -29,7 +29,6 @@
 #ifndef VABSTRACTMCONVERTER_H
 #define VABSTRACTMCONVERTER_H
 
-#include <qcompilerdetection.h>
 #include <QMap>
 #include <QMultiMap>
 #include <QString>
@@ -41,7 +40,7 @@ class VAbstractMConverter : public VAbstractConverter
 {
 public:
     explicit VAbstractMConverter(const QString &fileName);
-    virtual ~VAbstractMConverter() = default;
+    ~VAbstractMConverter() override = default;
 
     auto Units() const -> Unit;
 

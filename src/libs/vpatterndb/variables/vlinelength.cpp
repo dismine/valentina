@@ -77,13 +77,13 @@ auto VLengthLine::operator=(const VLengthLine &var) -> VLengthLine &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLengthLine::VLengthLine(VLengthLine &&var) Q_DECL_NOTHROW
+VLengthLine::VLengthLine(VLengthLine &&var) noexcept
     :VInternalVariable(std::move(var)), d(std::move(var.d))
 {}
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-auto VLengthLine::operator=(VLengthLine &&var) Q_DECL_NOTHROW->VLengthLine &
+auto VLengthLine::operator=(VLengthLine &&var) noexcept->VLengthLine &
 {
     VInternalVariable::operator=(var);
     std::swap(d, var.d);

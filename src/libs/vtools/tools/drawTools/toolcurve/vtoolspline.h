@@ -29,7 +29,6 @@
 #ifndef VTOOLSPLINE_H
 #define VTOOLSPLINE_H
 
-#include <qcompilerdetection.h>
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
@@ -37,87 +36,93 @@
 #include <QString>
 #include <QtGlobal>
 
-#include "../vgeometry/vgeometrydef.h"
-#include "../vmisc/def.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "vabstractspline.h"
+#include "../vgeometry/vgeometrydef.h"
 #include "../vgeometry/vspline.h"
+#include "../vmisc/def.h"
+#include "vabstractspline.h"
 
 template <class T> class QSharedPointer;
 
 struct VToolSplineInitData : VAbstractSplineInitData
 {
-    VToolSplineInitData()
-        : VAbstractSplineInitData(),
-          point1(NULL_ID),
-          point4(NULL_ID),
-          a1(),
-          a2(),
-          l1(),
-          l2(),
-          duplicate(0)
-    {}
+    VToolSplineInitData() = default;
 
-    quint32 point1;
-    quint32 point4;
-    QString a1;
-    QString a2;
-    QString l1;
-    QString l2;
-    quint32 duplicate;
+    quint32 point1{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 point4{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QString a1{};            // NOLINT(misc-non-private-member-variables-in-classes)
+    QString a2{};            // NOLINT(misc-non-private-member-variables-in-classes)
+    QString l1{};            // NOLINT(misc-non-private-member-variables-in-classes)
+    QString l2{};            // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 duplicate{0};    // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
 /**
  * @brief The VToolSpline class tool for creation spline. I mean bezier curve.
  */
-class VToolSpline:public VAbstractSpline
+class VToolSpline : public VAbstractSpline
 {
     Q_OBJECT // NOLINT
+
 public:
-    virtual ~VToolSpline() =default;
-    virtual void SetDialog() override;
+    ~VToolSpline() override = default;
+    void SetDialog() override;
     static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                        VContainer *data) -> VToolSpline *;
     static auto Create(VToolSplineInitData &initData, VSpline *spline) -> VToolSpline *;
     static auto Create(VToolSplineInitData &initData) -> VToolSpline *;
     static const QString ToolType;
     static const QString OldToolType;
-    virtual auto type() const -> int override { return Type; }
-    enum { Type = UserType + static_cast<int>(Tool::Spline)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Tool::Spline)
+    };
 
     auto getSpline() const -> VSpline;
-    void    setSpline(const VSpline &spl);
+    void setSpline(const VSpline &spl);
 
-    virtual void ShowVisualization(bool show) override;
+    void ShowVisualization(bool show) override;
+
+    void ShowHandles(bool show) override;
+
 public slots:
-    void         ControlPointChangePosition (const qint32 &indexSpline, const SplinePointPosition &position,
-                                             const QPointF &pos);
-    virtual void EnableToolMove(bool move) override;
+    void ControlPointChangePosition(const qint32 &indexSpline, const SplinePointPosition &position, const QPointF &pos);
+    void EnableToolMove(bool move) override;
+    void AllowHover(bool enabled) override;
+    void AllowSelecting(bool enabled) override;
+
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
+    void CurveSelected(bool selected);
+
 protected:
-    virtual void RemoveReferens() override;
-    virtual void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                            QList<quint32> &newDependencies) override;
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void mousePressEvent(QGraphicsSceneMouseEvent * event) override;
-    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
-    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent * event) override;
-    virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) override;
-    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) override;
-    virtual void SetVisualization() override;
-    virtual void RefreshCtrlPoints() override;
+    void RemoveReferens() override;
+    void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
+    void SetVisualization() override;
+    void RefreshCtrlPoints() override;
+
 private slots:
     void CurveReleased();
+
 private:
     Q_DISABLE_COPY_MOVE(VToolSpline) // NOLINT
-    QPointF oldPosition;
+    QPointF oldPosition{};
+    bool moved{false};
+    QSharedPointer<VSpline> oldMoveSpline{};
+    QSharedPointer<VSpline> newMoveSpline{};
+    /**
+     * @brief controlPoints list pointers of control points.
+     */
+    QVector<VControlPointSpline *> controlPoints{};
 
-    bool moved;
-    QSharedPointer<VSpline> oldMoveSpline;
-    QSharedPointer<VSpline> newMoveSpline;
-
-    VToolSpline (const VToolSplineInitData &initData, QGraphicsItem *parent = nullptr );
+    explicit VToolSpline(const VToolSplineInitData &initData, QGraphicsItem *parent = nullptr);
 
     auto IsMovable() const -> bool;
     void SetSplineAttributes(QDomElement &domElement, const VSpline &spl);

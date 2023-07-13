@@ -29,7 +29,6 @@
 #ifndef TOGGLEDETAILINLAYOUT_H
 #define TOGGLEDETAILINLAYOUT_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -40,45 +39,55 @@
 class TogglePieceInLayout : public VUndoCommand
 {
     Q_OBJECT // NOLINT
+
 public:
     TogglePieceInLayout(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
                         QUndoCommand *parent = nullptr);
-    virtual ~TogglePieceInLayout() = default;
-    virtual void undo() override;
-    virtual void redo() override;
+    ~TogglePieceInLayout() override = default;
+
+    void undo() override;
+    void redo() override;
+
 signals:
     void Toggled(quint32 id);
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(TogglePieceInLayout) // NOLINT
-    quint32     m_id;
+    quint32 m_id;
     VContainer *m_data;
-    bool        m_oldState;
-    bool        m_newState;
+    bool m_oldState;
+    bool m_newState;
 
     void Do(bool state);
 };
 
-enum class ForceForbidFlippingType : qint8 {ForceFlipping, ForbidFlipping};
+enum class ForceForbidFlippingType : qint8
+{
+    ForceFlipping,
+    ForbidFlipping
+};
 
 class TogglePieceForceForbidFlipping : public VUndoCommand
 {
     Q_OBJECT // NOLINT
+
 public:
     TogglePieceForceForbidFlipping(quint32 id, bool state, ForceForbidFlippingType type, VContainer *data,
                                    VAbstractPattern *doc, QUndoCommand *parent = nullptr);
     virtual ~TogglePieceForceForbidFlipping() = default;
     virtual void undo() override;
     virtual void redo() override;
+
 private:
     Q_DISABLE_COPY_MOVE(TogglePieceForceForbidFlipping) // NOLINT
-    quint32     m_id;
+    quint32 m_id;
     VContainer *m_data;
     ForceForbidFlippingType m_type;
-    bool        m_oldForceState;
-    bool        m_newForceState;
-    bool        m_oldForbidState;
-    bool        m_newForbidState;
+    bool m_oldForceState;
+    bool m_newForceState;
+    bool m_oldForbidState;
+    bool m_newForbidState;
 };
 
 #endif // TOGGLEDETAILINLAYOUT_H

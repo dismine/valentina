@@ -29,7 +29,6 @@
 #ifndef MOVESPOINT_H
 #define MOVESPOINT_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -42,25 +41,31 @@ class QGraphicsScene;
 class MoveSPoint : public VUndoCommand
 {
     Q_OBJECT // NOLINT
+
 public:
     MoveSPoint(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
                QUndoCommand *parent = nullptr);
-    virtual ~MoveSPoint() override;
-    virtual void undo() override;
-    virtual void redo() override;
-    virtual auto mergeWith(const QUndoCommand *command) -> bool override;
-    virtual auto id() const -> int override;
+    ~MoveSPoint() override;
+
+    void undo() override;
+    void redo() override;
+
+    auto mergeWith(const QUndoCommand *command) -> bool override;
+    auto id() const -> int override;
+
     auto getSPointId() const -> quint32;
     auto getNewX() const -> double;
     auto getNewY() const -> double;
-    void         Do(double x, double y);
+
+    void Do(double x, double y);
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(MoveSPoint) // NOLINT
-    double   oldX;
-    double   oldY;
-    double   newX;
-    double   newY;
+    double oldX;
+    double oldY;
+    double newX;
+    double newY;
     QGraphicsScene *scene;
 };
 

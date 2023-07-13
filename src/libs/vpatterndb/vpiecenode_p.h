@@ -29,17 +29,17 @@
 #ifndef VPIECENODE_P_H
 #define VPIECENODE_P_H
 
-#include <QSharedData>
-#include <QDataStream>
 #include <QCoreApplication>
+#include <QDataStream>
+#include <QSharedData>
 
-#include "../ifc/ifcdef.h"
 #include "../ifc/exception/vexception.h"
+#include "../ifc/ifcdef.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-#   include "../vmisc/vdatastreamenum.h"
+#include "../vmisc/vdatastreamenum.h"
 #endif
 
 QT_WARNING_PUSH
@@ -49,22 +49,9 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VPieceNodeData : public QSharedData
 {
 public:
-    VPieceNodeData()
-    {}
-
-    VPieceNodeData(quint32 id, Tool typeTool, bool reverse)
-        : m_id(id),
-          m_typeTool(typeTool),
-          m_reverse(reverse)
-    {
-        if (m_typeTool == Tool::NodePoint)
-        {
-            m_reverse = false;
-        }
-    }
-
-    VPieceNodeData (const VPieceNodeData& node) = default;
-
+    VPieceNodeData() = default;
+    VPieceNodeData(quint32 id, Tool typeTool, bool reverse);
+    VPieceNodeData(const VPieceNodeData &node) = default;
     ~VPieceNodeData() = default;
 
     friend auto operator<<(QDataStream &out, const VPieceNodeData &p) -> QDataStream &;
@@ -124,10 +111,22 @@ private:
 };
 
 // See https://stackoverflow.com/a/46719572/3045403
-#if __cplusplus < 201703L // C++17
-constexpr quint32 VPieceNodeData::streamHeader;  // NOLINT(readability-redundant-declaration)
-constexpr quint16 VPieceNodeData::classVersion;  // NOLINT(readability-redundant-declaration)
+#if __cplusplus < 201703L                       // C++17
+constexpr quint32 VPieceNodeData::streamHeader; // NOLINT(readability-redundant-declaration)
+constexpr quint16 VPieceNodeData::classVersion; // NOLINT(readability-redundant-declaration)
 #endif
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VPieceNodeData::VPieceNodeData(quint32 id, Tool typeTool, bool reverse)
+  : m_id(id),
+    m_typeTool(typeTool),
+    m_reverse(reverse)
+{
+    if (m_typeTool == Tool::NodePoint)
+    {
+        m_reverse = false;
+    }
+}
 
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------
@@ -154,8 +153,8 @@ inline auto operator>>(QDataStream &in, VPieceNodeData &p) -> QDataStream &
     {
         QString message = QCoreApplication::tr("VPieceNodeData prefix mismatch error: actualStreamHeader = 0x%1 "
                                                "and streamHeader = 0x%2")
-                .arg(actualStreamHeader, 8, 0x10, QChar('0'))
-                .arg(VPieceNodeData::streamHeader, 8, 0x10, QChar('0'));
+                              .arg(actualStreamHeader, 8, 0x10, QChar('0'))
+                              .arg(VPieceNodeData::streamHeader, 8, 0x10, QChar('0'));
         throw VException(message);
     }
 
@@ -166,24 +165,14 @@ inline auto operator>>(QDataStream &in, VPieceNodeData &p) -> QDataStream &
     {
         QString message = QCoreApplication::tr("VPieceNodeData compatibility error: actualClassVersion = %1 and "
                                                "classVersion = %2")
-                .arg(actualClassVersion).arg(VPieceNodeData::classVersion);
+                              .arg(actualClassVersion)
+                              .arg(VPieceNodeData::classVersion);
         throw VException(message);
     }
 
-    in >> p.m_id
-       >> p.m_typeTool
-       >> p.m_reverse
-       >> p.m_excluded
-       >> p.m_isPassmark
-       >> p.m_formulaWidthBefore
-       >> p.m_formulaWidthAfter
-       >> p.m_formulaPassmarkLength
-       >> p.m_angleType
-       >> p.m_passmarkLineType
-       >> p.m_passmarkAngleType
-       >> p.m_isShowSecondPassmark
-       >> p.m_checkUniqueness
-       >> p.m_manualPassmarkLength;
+    in >> p.m_id >> p.m_typeTool >> p.m_reverse >> p.m_excluded >> p.m_isPassmark >> p.m_formulaWidthBefore >>
+        p.m_formulaWidthAfter >> p.m_formulaPassmarkLength >> p.m_angleType >> p.m_passmarkLineType >>
+        p.m_passmarkAngleType >> p.m_isShowSecondPassmark >> p.m_checkUniqueness >> p.m_manualPassmarkLength;
 
     if (actualClassVersion >= 2)
     {
@@ -202,4 +191,3 @@ inline auto operator>>(QDataStream &in, VPieceNodeData &p) -> QDataStream &
 QT_WARNING_POP
 
 #endif // VPIECENODE_P_H
-

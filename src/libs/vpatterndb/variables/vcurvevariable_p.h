@@ -32,6 +32,7 @@
 #include <QSharedData>
 
 #include "../vmisc/defglobal.h"
+#include "../vmisc/typedef.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -40,32 +41,25 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VCurveVariableData final : public QSharedData
 {
 public:
+    VCurveVariableData() = default;
+    VCurveVariableData(const quint32 &id, const quint32 &parentId);
+    VCurveVariableData(const VCurveVariableData &var) = default;
+    ~VCurveVariableData() = default;
 
-    VCurveVariableData()
-    {}
-
-    VCurveVariableData(const quint32 &id, const quint32 &parentId)
-        :id(id), parentId(parentId)
-    {}
-
-    VCurveVariableData(const VCurveVariableData &var)
-        :QSharedData(var),
-         id(var.id),
-         parentId(var.parentId)
-    {}
-
-    virtual  ~VCurveVariableData();
-
-    quint32 id{NULL_ID};
-    quint32 parentId{NULL_ID};
+    quint32 id{NULL_ID};       // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 parentId{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VCurveVariableData) // NOLINT
 };
 
-VCurveVariableData::~VCurveVariableData()
-{}
-
 QT_WARNING_POP
+
+//---------------------------------------------------------------------------------------------------------------------
+inline VCurveVariableData::VCurveVariableData(const quint32 &id, const quint32 &parentId)
+  : id(id),
+    parentId(parentId)
+{
+}
 
 #endif // VCURVELENGTH_P_H

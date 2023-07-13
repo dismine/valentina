@@ -29,7 +29,6 @@
 #ifndef DIALOGPOINTOFINTERSECTION_H
 #define DIALOGPOINTOFINTERSECTION_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -40,7 +39,7 @@
 
 namespace Ui
 {
-    class DialogPointOfIntersection;
+class DialogPointOfIntersection;
 }
 
 /**
@@ -49,31 +48,34 @@ namespace Ui
 class DialogPointOfIntersection : public DialogTool
 {
     Q_OBJECT // NOLINT
+
 public:
     DialogPointOfIntersection(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogPointOfIntersection() override;
+    ~DialogPointOfIntersection() override;
 
     auto GetPointName() const -> QString;
-    void           SetPointName(const QString &value);
+    void SetPointName(const QString &value);
 
     auto GetFirstPointId() const -> quint32;
-    void           SetFirstPointId(quint32 value);
+    void SetFirstPointId(quint32 value);
 
     auto GetSecondPointId() const -> quint32;
-    void           SetSecondPointId(quint32 value);
+    void SetSecondPointId(quint32 value);
 
-    void    SetNotes(const QString &notes);
+    void SetNotes(const QString &notes);
     auto GetNotes() const -> QString;
+
 public slots:
-    virtual void   ChosenObject(quint32 id, const SceneObject &type) override;
-    virtual void   PointNameChanged() override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void PointNameChanged() override;
+
 protected:
-    virtual void   ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void   SaveData() override;
-    virtual auto IsValid() const -> bool final;
+    void SaveData() override;
+    auto IsValid() const -> bool final;
 
 private:
     Q_DISABLE_COPY_MOVE(DialogPointOfIntersection) // NOLINT
@@ -87,7 +89,7 @@ private:
     bool flagError;
 
     /** @brief number number of handled objects */
-    qint32  number{0};
+    qint32 number{0};
 };
 
 //---------------------------------------------------------------------------------------------------------------------

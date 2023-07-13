@@ -29,7 +29,7 @@
 #ifndef VISTOOLCUBICBEZIER_H
 #define VISTOOLCUBICBEZIER_H
 
-#include <qcompilerdetection.h>
+
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>

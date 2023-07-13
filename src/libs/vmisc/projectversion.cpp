@@ -28,7 +28,6 @@
 
 #include "projectversion.h"
 
-#include <qcompilerdetection.h>
 #include <QCoreApplication>
 #include <QLatin1Char>
 #include <QLatin1String>
@@ -42,8 +41,8 @@
 #define LATEST_TAG_DISTANCE VCS_REPO_STATE_DISTANCE
 #endif
 
-extern const QString APP_VERSION_STR(QStringLiteral("%1.%2.%3.%4").arg(MAJOR_VERSION).arg(MINOR_VERSION)
-                                         .arg(DEBUG_VERSION).arg(LATEST_TAG_DISTANCE));
+extern const QString APP_VERSION_STR(
+    QStringLiteral("%1.%2.%3.%4").arg(MAJOR_VERSION).arg(MINOR_VERSION).arg(DEBUG_VERSION).arg(LATEST_TAG_DISTANCE));
 
 //---------------------------------------------------------------------------------------------------------------------
 auto compilerString() -> QString
@@ -62,7 +61,7 @@ auto compilerString() -> QString
     QString iccVersion;
     if (__INTEL_COMPILER >= 1300)
     {
-        iccVersion = QString::number(__INTEL_COMPILER/100);
+        iccVersion = QString::number(__INTEL_COMPILER / 100);
     }
     else
     {
@@ -77,16 +76,16 @@ auto compilerString() -> QString
            QLatin1String(__INTEL_COMPILER_BUILD_DATE) + QLatin1String(" [") + iccCompact +
            QLatin1String(" compatibility]");
 #endif
-#elif defined(Q_CC_CLANG) // must be before GNU, because clang claims to be GNU too
+#elif defined(Q_CC_CLANG)            // must be before GNU, because clang claims to be GNU too
     // cppcheck-suppress unassignedVariable
     QString isAppleString;
 #if defined(__apple_build_version__) // Apple clang has other version numbers
     isAppleString = QLatin1String(" (Apple)");
 #endif
-    return QLatin1String("Clang " ) + QString::number(__clang_major__) + QLatin1Char('.')
-            + QString::number(__clang_minor__) + isAppleString;
+    return QLatin1String("Clang ") + QString::number(__clang_major__) + QLatin1Char('.') +
+           QString::number(__clang_minor__) + isAppleString;
 #elif defined(Q_CC_GNU)
-    return QLatin1String("GCC " ) + QLatin1String(__VERSION__);
+    return QLatin1String("GCC ") + QLatin1String(__VERSION__);
 #elif defined(Q_CC_MSVC)
     if (_MSC_VER >= 1800) // 1800: MSVC 2013 (yearly release cycle)
     {
@@ -105,6 +104,6 @@ auto compilerString() -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto buildCompatibilityString() -> QString
 {
-    return QCoreApplication::tr("Based on Qt %1 (%2, %3 bit)").arg(QLatin1String(qVersion()), compilerString(),
-                                                                   QString::number(QSysInfo::WordSize));
+    return QCoreApplication::tr("Based on Qt %1 (%2, %3 bit)")
+        .arg(QLatin1String(qVersion()), compilerString(), QString::number(QSysInfo::WordSize));
 }

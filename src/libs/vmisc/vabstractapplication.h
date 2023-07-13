@@ -40,7 +40,6 @@
 #include <QString>
 #include <QTranslator>
 #include <QtGlobal>
-#include <qcompilerdetection.h>
 
 #include "../vmisc/def.h"
 #include "../vpatterndb/vtranslatevars.h"

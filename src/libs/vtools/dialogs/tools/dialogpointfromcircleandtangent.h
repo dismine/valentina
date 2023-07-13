@@ -29,7 +29,6 @@
 #ifndef DIALOGPOINTFROMCIRCLEANDTANGENT_H
 #define DIALOGPOINTFROMCIRCLEANDTANGENT_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -41,7 +40,7 @@
 
 namespace Ui
 {
-    class DialogPointFromCircleAndTangent;
+class DialogPointFromCircleAndTangent;
 }
 
 class DialogPointFromCircleAndTangent : public DialogTool
@@ -71,6 +70,7 @@ public:
     auto GetNotes() const -> QString;
 
     void ShowDialog(bool click) override;
+
 public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
     void PointChanged();
@@ -93,16 +93,16 @@ private:
 
     Ui::DialogPointFromCircleAndTangent *ui;
 
-    QTimer* m_timerCircleRadius{nullptr};
+    QTimer *m_timerCircleRadius{nullptr};
     QString m_circleRadius{};
-    int     m_formulaBaseHeightCircleRadius{0};
+    int m_formulaBaseHeightCircleRadius{0};
     QString m_pointName{};
-    bool    m_flagCircleRadius{false};
-    bool    m_flagName{true};
-    bool    m_flagError{true};
+    bool m_flagCircleRadius{false};
+    bool m_flagName{true};
+    bool m_flagError{true};
     /** @brief number number of handled objects */
-    qint32  m_number{0};
-    bool    m_firstRelease{false};
+    qint32 m_number{0};
+    bool m_firstRelease{false};
 
     void FinishCreating();
 };

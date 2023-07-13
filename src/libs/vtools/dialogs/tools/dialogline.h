@@ -29,7 +29,6 @@
 #ifndef DIALOGLINE_H
 #define DIALOGLINE_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -40,7 +39,7 @@
 
 namespace Ui
 {
-    class DialogLine;
+class DialogLine;
 }
 
 /**
@@ -49,34 +48,37 @@ namespace Ui
 class DialogLine : public DialogTool
 {
     Q_OBJECT // NOLINT
+
 public:
     DialogLine(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogLine() override;
+    ~DialogLine() override;
 
     auto GetFirstPoint() const -> quint32;
-    void           SetFirstPoint(quint32 value);
+    void SetFirstPoint(quint32 value);
 
     auto GetSecondPoint() const -> quint32;
-    void           SetSecondPoint(quint32 value);
+    void SetSecondPoint(quint32 value);
 
     auto GetTypeLine() const -> QString;
-    void           SetTypeLine(const QString &value);
+    void SetTypeLine(const QString &value);
 
     auto GetLineColor() const -> QString;
-    void           SetLineColor(const QString &value);
+    void SetLineColor(const QString &value);
 
-    void    SetNotes(const QString &notes);
+    void SetNotes(const QString &notes);
     auto GetNotes() const -> QString;
+
 public slots:
-    virtual void   ChosenObject(quint32 id, const SceneObject &type) override;
-    virtual void   PointNameChanged() override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
+    void PointNameChanged() override;
+
 protected:
-    virtual void   ShowVisualization() override;
+    void ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
-    virtual void   SaveData() override;
-    virtual auto IsValid() const -> bool final;
+    void SaveData() override;
+    auto IsValid() const -> bool final;
 
 private:
     Q_DISABLE_COPY_MOVE(DialogLine) // NOLINT
@@ -87,7 +89,7 @@ private:
     bool flagError;
 
     /** @brief number number of handled objects */
-    qint32  number{0};
+    qint32 number{0};
 };
 
 //---------------------------------------------------------------------------------------------------------------------

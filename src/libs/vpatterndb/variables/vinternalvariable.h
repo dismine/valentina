@@ -47,24 +47,23 @@ class VInternalVariable
 public:
     VInternalVariable();
     VInternalVariable(const VInternalVariable &var);
-
     virtual ~VInternalVariable();
 
     auto operator=(const VInternalVariable &var) -> VInternalVariable &;
 #ifdef Q_COMPILER_RVALUE_REFS
-    VInternalVariable(VInternalVariable &&var) Q_DECL_NOTHROW;
-    auto operator=(VInternalVariable &&var) Q_DECL_NOTHROW->VInternalVariable &;
+    VInternalVariable(VInternalVariable &&var) noexcept;
+    auto operator=(VInternalVariable &&var) noexcept -> VInternalVariable &;
 #endif
 
     virtual auto GetValue() const -> qreal;
     virtual auto GetValue() -> qreal *;
 
     auto GetName() const -> QString;
-    void         SetName(const QString &name);
+    void SetName(const QString &name);
 
     auto GetType() const -> VarType;
 
-    void    SetAlias(const QString &alias);
+    void SetAlias(const QString &alias);
     auto GetAlias() const -> QString;
 
     virtual auto Filter(quint32 id) -> bool;
@@ -74,6 +73,7 @@ public:
 protected:
     void SetValue(const qreal &value);
     void SetType(const VarType &type);
+
 private:
     QSharedDataPointer<VInternalVariableData> d;
 };

@@ -29,7 +29,6 @@
 #ifndef VABSTRACTCONVERTER_H
 #define VABSTRACTCONVERTER_H
 
-#include <qcompilerdetection.h>
 #include <QCoreApplication>
 #include <QString>
 #include <QTemporaryFile>
@@ -41,12 +40,13 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 
-class VAbstractConverter :public VDomDocument
+class VAbstractConverter : public VDomDocument
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit VAbstractConverter(const QString &fileName);
-    virtual ~VAbstractConverter() = default;
+    ~VAbstractConverter() override = default;
 
     auto Convert() -> QString;
 
@@ -69,12 +69,12 @@ protected:
     virtual auto MaxVerStr() const -> QString = 0;
 
     virtual auto XSDSchema(unsigned ver) const -> QString;
-    virtual void    ApplyPatches() =0;
-    virtual void    DowngradeToCurrentMaxVersion() =0;
+    virtual void ApplyPatches() = 0;
+    virtual void DowngradeToCurrentMaxVersion() = 0;
 
     virtual auto IsReadOnly() const -> bool = 0;
 
-    virtual auto Schemas() const -> QHash <unsigned, QString> =0;
+    virtual auto Schemas() const -> QHash<unsigned, QString> = 0;
 
     void Replace(QString &formula, const QString &newName, vsizetype position, const QString &token,
                  vsizetype &bias) const;

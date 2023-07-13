@@ -32,31 +32,26 @@
 #include <QPoint>
 
 #include "../ifc/exception/vexception.h"
-#include "../vmisc/vmath.h"
+#include "../vmisc/compatibility.h"
 #include "vabstractcurve.h"
 #include "vcubicbezierpath_p.h"
 #include "vspline.h"
 #include "vsplinepoint.h"
-#include "../vmisc/compatibility.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VCubicBezierPath::VCubicBezierPath(quint32 idObject, Draw mode)
-    : VAbstractCubicBezierPath(GOType::CubicBezierPath, idObject, mode),
-      d(new VCubicBezierPathData())
+  : VAbstractCubicBezierPath(GOType::CubicBezierPath, idObject, mode),
+    d(new VCubicBezierPathData())
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCubicBezierPath::VCubicBezierPath(const VCubicBezierPath &curve)
-    : VAbstractCubicBezierPath(curve),
-      d(curve.d)
-{
-}
+VCubicBezierPath::VCubicBezierPath(const VCubicBezierPath &curve) = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 VCubicBezierPath::VCubicBezierPath(const QVector<VPointF> &points, quint32 idObject, Draw mode)
-    : VAbstractCubicBezierPath(GOType::CubicBezierPath, idObject, mode),
-      d(new VCubicBezierPathData())
+  : VAbstractCubicBezierPath(GOType::CubicBezierPath, idObject, mode),
+    d(new VCubicBezierPathData())
 {
     if (points.isEmpty())
     {
@@ -70,7 +65,7 @@ VCubicBezierPath::VCubicBezierPath(const QVector<VPointF> &points, quint32 idObj
 //---------------------------------------------------------------------------------------------------------------------
 auto VCubicBezierPath::operator=(const VCubicBezierPath &curve) -> VCubicBezierPath &
 {
-    if ( &curve == this )
+    if (&curve == this)
     {
         return *this;
     }
@@ -81,13 +76,14 @@ auto VCubicBezierPath::operator=(const VCubicBezierPath &curve) -> VCubicBezierP
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VCubicBezierPath::VCubicBezierPath(VCubicBezierPath &&curve) Q_DECL_NOTHROW
-    : VAbstractCubicBezierPath(std::move(curve)),
-      d(std::move(curve.d))
-{}
+VCubicBezierPath::VCubicBezierPath(VCubicBezierPath &&curve) noexcept
+  : VAbstractCubicBezierPath(std::move(curve)),
+    d(std::move(curve.d))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VCubicBezierPath::operator=(VCubicBezierPath &&curve) Q_DECL_NOTHROW->VCubicBezierPath &
+auto VCubicBezierPath::operator=(VCubicBezierPath &&curve) noexcept -> VCubicBezierPath &
 {
     VAbstractCubicBezierPath::operator=(curve);
     std::swap(d, curve.d);
@@ -163,9 +159,7 @@ auto VCubicBezierPath::Move(qreal length, qreal angle, const QString &prefix) co
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCubicBezierPath::~VCubicBezierPath()
-{
-}
+VCubicBezierPath::~VCubicBezierPath() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VCubicBezierPath::operator[](vsizetype indx) -> VPointF &
@@ -221,7 +215,7 @@ auto VCubicBezierPath::GetSpline(vsizetype index) const -> VSpline
     const vsizetype base = SubSplOffset(index);
 
     // Correction the first control point of each next spline curve except for the first.
-    QPointF p2 = static_cast<QPointF>(d->path.at(base + 1));
+    auto p2 = static_cast<QPointF>(d->path.at(base + 1));
     if (base + 1 > 1)
     {
         const QPointF b = static_cast<QPointF>(d->path.at(base));
@@ -283,18 +277,18 @@ auto VCubicBezierPath::GetC2Length() const -> qreal
 auto VCubicBezierPath::GetSplinePath() const -> QVector<VSplinePoint>
 {
     const vsizetype size = CountSubSpl();
-    QVector<VSplinePoint> splPoints(size+1);
+    QVector<VSplinePoint> splPoints(size + 1);
 
     for (qint32 i = 1; i <= size; ++i)
     {
         const VSpline spl = GetSpline(i);
 
         {
-            VSplinePoint p = splPoints.at(i-1);
+            VSplinePoint p = splPoints.at(i - 1);
             p.SetP(spl.GetP1());
             p.SetAngle2(spl.GetStartAngle(), spl.GetStartAngleFormula());
             p.SetLength2(spl.GetC1Length(), spl.GetC1LengthFormula());
-            splPoints[i-1] = p;
+            splPoints[i - 1] = p;
         }
 
         {
@@ -366,7 +360,7 @@ auto VCubicBezierPath::LastPoint() const -> VPointF
     const vsizetype count = CountSubSpl();
     if (count >= 1)
     {
-        return d->path.at(SubSplOffset(count) + 3);// Take last point of the last real spline
+        return d->path.at(SubSplOffset(count) + 3); // Take last point of the last real spline
     }
 
     return {};

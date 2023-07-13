@@ -21,7 +21,6 @@
 #ifndef VENUMPROPERTY_H
 #define VENUMPROPERTY_H
 
-#include <qcompilerdetection.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -44,9 +43,10 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 class VPROPERTYEXPLORERSHARED_EXPORT VEnumProperty : public VProperty
 {
     Q_OBJECT // NOLINT
+
 public:
     //! Constructor
-    explicit VEnumProperty(const QString& name);
+    explicit VEnumProperty(const QString &name);
 
     //! Destructor
     virtual ~VEnumProperty() override {}
@@ -72,7 +72,7 @@ public:
     virtual auto getLiterals() const -> QStringList;
 
     //! Sets the value of the property
-    virtual void setValue(const QVariant& value) override;
+    virtual void setValue(const QVariant &value) override;
 
     //! Returns a string containing the type of the property
     virtual auto type() const -> QString override;
@@ -88,7 +88,7 @@ public:
     //! Sets the settings. Available settings:
     //!
     //! key: "literals" - value: "item1;;item2;;item3"
-    virtual void setSetting(const QString& key, const QVariant& value) override;
+    virtual void setSetting(const QString &key, const QVariant &value) override;
 
     //! Get the settings. This function has to be implemented in a subclass in order to have an effect
     virtual auto getSetting(const QString &key) const -> QVariant override;
@@ -103,13 +103,14 @@ protected:
     //! The list of possible options to choose from
     QStringList EnumerationLiterals;
     // No use of d-pointer in this case, because it is unlikely this will change. If it does, we can still add other
-    //members by reimplementing the VPropertyPrivate class without touching this header file.
+    // members by reimplementing the VPropertyPrivate class without touching this header file.
+
 private:
     Q_DISABLE_COPY_MOVE(VEnumProperty) // NOLINT
 };
 
 QT_WARNING_POP
 
-}
+} // namespace VPE
 
 #endif // VENUMPROPERTY_H
