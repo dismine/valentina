@@ -57,7 +57,7 @@ environment:
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows10+"
       MSYS2_PACKAGES: false
-      WINDEPLOYQT_BIN_PATH: "C:\\Qt\\6.4\\mingw_64\\bin"
+      WINDEPLOYQT_BIN_PATH: "undefined"
       DEPLOY: true
 
     - job_name: Windows_Qt_5_15_(qbs_GCC_x86)
