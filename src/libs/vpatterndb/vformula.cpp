@@ -32,6 +32,7 @@
 #include <QMessageLogger>
 #include <QScopedPointer>
 #include <QtDebug>
+#include <limits>
 
 #include "../qmuparser/qmuparsererror.h"
 #include "../vmisc/def.h"
@@ -273,6 +274,6 @@ void VFormula::ResetState()
 {
     d->strValue = tr("Error");
     d->error = true;
-    d->dValue = NAN;
+    d->dValue = std::numeric_limits<qreal>::quiet_NaN();
     d->reason = tr("Not evaluated");
 }

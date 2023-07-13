@@ -30,6 +30,7 @@
 
 #include <QCoreApplication>
 #include <QSharedData>
+#include <limits>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
@@ -53,16 +54,16 @@ public:
     VFormulaData(const VFormulaData &formula) = default;
     ~VFormulaData() = default;
 
-    QString formula{};                      // NOLINT(misc-non-private-member-variables-in-classes)
-    QString strValue{tr("Error")};          // NOLINT(misc-non-private-member-variables-in-classes)
-    bool checkZero{true};                   // NOLINT(misc-non-private-member-variables-in-classes)
-    bool checkLessThanZero{false};          // NOLINT(misc-non-private-member-variables-in-classes)
-    const VContainer *data{nullptr};        // NOLINT(misc-non-private-member-variables-in-classes)
-    quint32 toolId{NULL_ID};                // NOLINT(misc-non-private-member-variables-in-classes)
-    QString postfix{};                      // NOLINT(misc-non-private-member-variables-in-classes)
-    bool error{true};                       // NOLINT(misc-non-private-member-variables-in-classes)
-    qreal dValue{NAN};                      // NOLINT(misc-non-private-member-variables-in-classes)
-    QString reason{tr("Formula is empty")}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QString formula{};                                     // NOLINT(misc-non-private-member-variables-in-classes)
+    QString strValue{tr("Error")};                         // NOLINT(misc-non-private-member-variables-in-classes)
+    bool checkZero{true};                                  // NOLINT(misc-non-private-member-variables-in-classes)
+    bool checkLessThanZero{false};                         // NOLINT(misc-non-private-member-variables-in-classes)
+    const VContainer *data{nullptr};                       // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 toolId{NULL_ID};                               // NOLINT(misc-non-private-member-variables-in-classes)
+    QString postfix{};                                     // NOLINT(misc-non-private-member-variables-in-classes)
+    bool error{true};                                      // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal dValue{std::numeric_limits<qreal>::quiet_NaN()}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QString reason{tr("Formula is empty")};                // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VFormulaData) // NOLINT
