@@ -27,6 +27,8 @@
  *************************************************************************/
 #include "vtoolbuttonpopup.h"
 
+#include <QAction>
+
 //---------------------------------------------------------------------------------------------------------------------
 VToolButtonPopup::VToolButtonPopup(QWidget *parent)
   : QToolButton(parent)

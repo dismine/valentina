@@ -30,6 +30,7 @@
 
 #include <QLineF>
 #include <QPoint>
+#include <QtMath>
 
 #include "../ifc/exception/vexception.h"
 #include "../vmisc/compatibility.h"

@@ -34,7 +34,7 @@
 #include <QPointF>
 #include <QPolygonF>
 #include <QRectF>
-#include <Qt>
+#include <QtMath>
 
 #include "../vgeometry/vgeometrydef.h"
 #include "../vgeometry/vgobject.h"
