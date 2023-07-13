@@ -29,13 +29,11 @@
 #include "vformula.h"
 #include "vformula_p.h"
 
-#include <qnumeric.h>
 #include <QMessageLogger>
 #include <QScopedPointer>
 #include <QtDebug>
 
 #include "../qmuparser/qmuparsererror.h"
-#include "../vgeometry/../ifc/ifcdef.h"
 #include "../vmisc/def.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
@@ -43,21 +41,23 @@
 #include "vcontainer.h"
 #include "vtranslatevars.h"
 
-//VFormula
+// VFormula
 //---------------------------------------------------------------------------------------------------------------------
 VFormula::VFormula()
-    : d(new VFormulaData)
-{}
+  : d(new VFormulaData)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VFormula::VFormula(const QString &formula, const VContainer *container)
-    : d(new VFormulaData(formula, container))
-{}
+  : d(new VFormulaData(formula, container))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VFormula::operator=(const VFormula &formula) -> VFormula &
 {
-    if ( &formula == this )
+    if (&formula == this)
     {
         return *this;
     }
@@ -66,21 +66,18 @@ auto VFormula::operator=(const VFormula &formula) -> VFormula &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula::VFormula(const VFormula &formula)
-    : d (formula.d)
-{}
+VFormula::VFormula(const VFormula &formula) = default;
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula::~VFormula()
-{}
+VFormula::~VFormula() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VFormula::operator==(const VFormula &formula) const -> bool
 {
     return d->formula == formula.GetFormula() && d->strValue == formula.getStringValue() &&
-            d->checkZero == formula.getCheckZero() && d->checkLessThanZero == formula.getCheckLessThanZero() &&
-            d->data == formula.getData() && d->toolId == formula.getToolId() && d->postfix == formula.getPostfix() &&
-            d->error == formula.error() && VFuzzyComparePossibleNulls(d->dValue, formula.getDoubleValue());
+           d->checkZero == formula.getCheckZero() && d->checkLessThanZero == formula.getCheckLessThanZero() &&
+           d->data == formula.getData() && d->toolId == formula.getToolId() && d->postfix == formula.getPostfix() &&
+           d->error == formula.error() && VFuzzyComparePossibleNulls(d->dValue, formula.getDoubleValue());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -96,10 +93,8 @@ auto VFormula::GetFormula(FormulaType type) const -> QString
     {
         return VTranslateVars::TryFormulaToUser(d->formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     }
-    else
-    {
-        return d->formula;
-    }
+
+    return d->formula;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -109,8 +104,8 @@ void VFormula::SetFormula(const QString &value, FormulaType type)
     {
         if (type == FormulaType::FromUser)
         {
-            d->formula = VTranslateVars::TryFormulaFromUser(value,
-                                                            VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+            d->formula =
+                VTranslateVars::TryFormulaFromUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
         }
         else
         {
