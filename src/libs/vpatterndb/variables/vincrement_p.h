@@ -50,7 +50,7 @@ public:
 
     /** @brief id each increment have unique identificator */
     quint32 index{0};                                 // NOLINT(misc-non-private-member-variables-in-classes)
-    QString formula;                                  // NOLINT(misc-non-private-member-variables-in-classes)
+    QString formula{};                                // NOLINT(misc-non-private-member-variables-in-classes)
     bool formulaOk{false};                            // NOLINT(misc-non-private-member-variables-in-classes)
     bool previewCalculation{false};                   // NOLINT(misc-non-private-member-variables-in-classes)
     QSharedPointer<VContainer> data;                  // NOLINT(misc-non-private-member-variables-in-classes)

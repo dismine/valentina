@@ -36,10 +36,10 @@
 #include <QRectF>
 #include <Qt>
 
-#include "vcontour_p.h"
-#include "vlayoutpiece.h"
 #include "../vgeometry/vgeometrydef.h"
 #include "../vgeometry/vgobject.h"
+#include "vcontour_p.h"
+#include "vlayoutpiece.h"
 
 namespace
 {
@@ -74,10 +74,10 @@ auto OptimizeCombining(const QVector<QPointF> &contour, const QPointF &withdrawE
 
     for (auto i = contour.size() - 2; i >= 0; --i)
     {
-        if (not VGObject::IsPointOnLineSegment(contour.at(i), withdrawFirst, withdrawEnd, accuracyPointOnLine*2))
+        if (not VGObject::IsPointOnLineSegment(contour.at(i), withdrawFirst, withdrawEnd, accuracyPointOnLine * 2))
         {
             optimize = true;
-            cutIndex = i+1;
+            cutIndex = i + 1;
             break;
         }
 
@@ -86,7 +86,7 @@ auto OptimizeCombining(const QVector<QPointF> &contour, const QPointF &withdrawE
 
     if (optimize && count > 0)
     {
-        return contour.mid(0, cutIndex+1);
+        return contour.mid(0, cutIndex + 1);
     }
 
     return contour;
@@ -95,23 +95,23 @@ auto OptimizeCombining(const QVector<QPointF> &contour, const QPointF &withdrawE
 
 //---------------------------------------------------------------------------------------------------------------------
 VContour::VContour()
-    :d(new VContourData())
-{}
+  : d(new VContourData())
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VContour::VContour(int height, int width, qreal layoutWidth)
-    :d(new VContourData(height, width, layoutWidth))
-{}
+  : d(new VContourData(height, width, layoutWidth))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VContour::VContour(const VContour &contour)
-    :d (contour.d)
-{}
+VContour::VContour(const VContour &contour) = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VContour::operator=(const VContour &contour) -> VContour &
 {
-    if ( &contour == this )
+    if (&contour == this)
     {
         return *this;
     }
@@ -122,11 +122,12 @@ auto VContour::operator=(const VContour &contour) -> VContour &
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VContour::VContour(VContour &&contour) noexcept
-    :d (std::move(contour.d))
-{}
+  : d(std::move(contour.d))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VContour::operator=(VContour &&contour) noexcept->VContour &
+auto VContour::operator=(VContour &&contour) noexcept -> VContour &
 {
     std::swap(d, contour.d);
     return *this;
@@ -134,8 +135,7 @@ auto VContour::operator=(VContour &&contour) noexcept->VContour &
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VContour::~VContour()
-{}
+VContour::~VContour() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 void VContour::CeateEmptySheetContour()
@@ -204,7 +204,7 @@ void VContour::SetWidth(int width)
 //---------------------------------------------------------------------------------------------------------------------
 auto VContour::GetSize() const -> QSizeF
 {
-    return QSizeF(d->paperWidth, d->paperHeight);
+    return {static_cast<qreal>(d->paperWidth), static_cast<qreal>(d->paperHeight)};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -220,15 +220,15 @@ auto VContour::UniteWithContour(const VLayoutPiece &detail, int globalI, int det
     {
         if (globalI <= 0 || globalI > GlobalEdgesCount())
         {
-            return QVector<QPointF>();
+            return {};
         }
 
         if (detJ <= 0 || detJ > detail.LayoutEdgesCount())
         {
-            return QVector<QPointF>();
+            return {};
         }
 
-        int i=0;
+        int i = 0;
         while (i < d->globalContour.count())
         {
             AppendToContour(newContour, d->globalContour.at(i));
@@ -242,7 +242,7 @@ auto VContour::UniteWithContour(const VLayoutPiece &detail, int globalI, int det
             }
             else
             {
-                if (i == globalI-1)
+                if (i == globalI - 1)
                 {
                     InsertDetail(newContour, detail, detJ);
                 }
@@ -274,25 +274,25 @@ auto VContour::GlobalEdge(int i) const -> QLineF
 
         const QLineF emptyEdge = EmptySheetEdge();
         const qreal nShift = emptyEdge.length() / static_cast<int>(GlobalEdgesCount());
-        edge = IsPortrait() ? QLineF(nShift*(i-1) + emptyEdge.x1(), emptyEdge.y1(),
-                                     nShift*i + emptyEdge.x1(), emptyEdge.y2()) :
-                              QLineF(emptyEdge.x1(), nShift*(i-1) + emptyEdge.y1(),
-                                     emptyEdge.x2(), nShift*i + emptyEdge.y1());
+        edge = IsPortrait() ? QLineF(nShift * (i - 1) + emptyEdge.x1(), emptyEdge.y1(), nShift * i + emptyEdge.x1(),
+                                     emptyEdge.y2())
+                            : QLineF(emptyEdge.x1(), nShift * (i - 1) + emptyEdge.y1(), emptyEdge.x2(),
+                                     nShift * i + emptyEdge.y1());
     }
     else
     {
         if (i < 1 || i > GlobalEdgesCount())
         { // Doesn't exist such edge
-            return QLineF();
+            return {};
         }
 
         if (i < GlobalEdgesCount())
         {
-            edge = QLineF(d->globalContour.at(i-1), d->globalContour.at(i));
+            edge = QLineF(d->globalContour.at(i - 1), d->globalContour.at(i));
         }
         else
         { // Closed contour
-            edge = QLineF(d->globalContour.at(GlobalEdgesCount()-1), d->globalContour.at(0));
+            edge = QLineF(d->globalContour.at(GlobalEdgesCount() - 1), d->globalContour.at(0));
         }
     }
     return edge;
@@ -309,7 +309,7 @@ auto VContour::CutEdge(const QLineF &edge) const -> QVector<QPointF>
     }
     else
     {
-        const int n = qFloor(edge.length()/d->shift);
+        const int n = qFloor(edge.length() / d->shift);
 
         if (n <= 0)
         {
@@ -319,11 +319,11 @@ auto VContour::CutEdge(const QLineF &edge) const -> QVector<QPointF>
         else
         {
             points.reserve(n);
-            const qreal nShift = edge.length()/n;
-            for (int i = 1; i <= n+1; ++i)
+            const qreal nShift = edge.length() / n;
+            for (int i = 1; i <= n + 1; ++i)
             {
                 QLineF l1 = edge;
-                l1.setLength(nShift*(i-1));
+                l1.setLength(nShift * (i - 1));
                 points.append(l1.p2());
             }
         }
@@ -335,11 +335,13 @@ auto VContour::CutEdge(const QLineF &edge) const -> QVector<QPointF>
 auto VContour::CutEmptySheetEdge() const -> QVector<QPointF>
 {
     QVector<QPointF> points;
+    points.reserve(GlobalEdgesCount() + 1);
+
     const qreal nShift = EmptySheetEdge().length() / static_cast<int>(GlobalEdgesCount());
-    for (int i = 1; i <= GlobalEdgesCount()+1; ++i)
+    for (int i = 1; i <= GlobalEdgesCount() + 1; ++i)
     {
         QLineF l1 = EmptySheetEdge();
-        l1.setLength(nShift*(i-1));
+        l1.setLength(nShift * (i - 1));
         points.append(l1.p2());
     }
     return points;
@@ -364,17 +366,16 @@ void VContour::AppendWhole(QVector<QPointF> &contour, const VLayoutPiece &detail
     {
         if (j >= nD)
         {
-            j=0;
+            j = 0;
         }
 
-        for(auto &point : CutEdge(detail.LayoutEdge(j+1)))
+        for (auto &point : CutEdge(detail.LayoutEdge(j + 1)))
         {
             AppendToContour(contour, point);
         }
         ++processedEdges;
         ++j;
-    }
-    while (processedEdges < nD);
+    } while (processedEdges < nD);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -390,20 +391,19 @@ void VContour::InsertDetail(QVector<QPointF> &contour, const VLayoutPiece &detai
     {
         if (j >= nD)
         {
-            j=0;
+            j = 0;
         }
 
-        if (j != detJ-1)
+        if (j != detJ - 1)
         {
-            for(auto &point : CutEdge(detail.LayoutEdge(j+1)))
+            for (auto &point : CutEdge(detail.LayoutEdge(j + 1)))
             {
                 AppendToContour(contour, point);
             }
         }
         ++processedEdges;
         ++j;
-    }
-    while (processedEdges < nD);
+    } while (processedEdges < nD);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -430,7 +430,7 @@ auto VContour::EmptySheetEdgesCount() const -> int
     }
 
     const qreal shift = (qFuzzyIsNull(d->shift) || d->shift > defaultShift) ? defaultShift : d->shift;
-    return qFloor(emptyEdgeLength/shift);
+    return qFloor(emptyEdgeLength / shift);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -442,8 +442,8 @@ auto VContour::IsPortrait() const -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto VContour::EmptySheetEdge() const -> QLineF
 {
-    const int offset = qRound(accuracyPointOnLine*4.);
-    const int layoutOffset = qCeil(d->layoutWidth - accuracyPointOnLine*2.);
-    return IsPortrait() ? QLineF(offset, -layoutOffset, d->paperWidth-offset, -layoutOffset) :
-                          QLineF(-layoutOffset, offset, -layoutOffset, d->paperHeight-offset);
+    const int offset = qRound(accuracyPointOnLine * 4.);
+    const int layoutOffset = qCeil(d->layoutWidth - accuracyPointOnLine * 2.);
+    return IsPortrait() ? QLineF(offset, -layoutOffset, d->paperWidth - offset, -layoutOffset)
+                        : QLineF(-layoutOffset, offset, -layoutOffset, d->paperHeight - offset);
 }
