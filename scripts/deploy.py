@@ -132,15 +132,13 @@ def run_clean(refresh_token):
                      "access token from the app console on the web.")
 
         clean_folders = ["/0.7.x/Mac OS X", "/0.7.x/Windows"]
-        arhive_types = [r'^valentina-Windows7\+-mingw-x86-Qt5_15-develop-[a-f0-9]{40}\.tar\.xz$',
-                        r'^valentina-Windows10\+-mingw-x64-Qt6_4-develop-[a-f0-9]{40}\.tar\.xz$',
-                        r'^valentina-WindowsXP\+-mingw-x86-Qt5_6-develop-[a-f0-9]{40}\.tar\.xz$',
-                        r'^valentina-macOS_11\+-Qt6_4-x64-develop-[a-f0-9]{40}\.tar\.xz$',
-                        r'^valentina-macOS_11\+-Qt6-arm64-develop-[a-f0-9]{7,40}\.tar\.xz$',
-                        r'^valentina-macOS_11\+-Qt6_4-x64-develop-multibundle-[a-f0-9]{40}$',
-                        r'^valentina-macOS_11\+-Qt6-arm64-develop-multibundle-[a-f0-9]{40}$',
-                        r'^valentina-macOS10.13\+-Qt5_15-x64-develop-multibundle-[a-f0-9]{40}$',
-                        r'^valentina-macOS10.13\+-Qt5_15-x64-develop-[a-f0-9]{40}\.tar\.xz$']
+        arhive_types = [r'^valentina-Windows.*\+-mingw-x86-Qt.*-develop-[a-f0-9]{40}\.tar\.xz$',
+                        r'^valentina-Windows.*\+-mingw-x64-Qt.*-develop-[a-f0-9]{40}\.tar\.xz$',
+                        r'^valentina-Windows.*\+-mingw-x86-Qt.*-develop-[a-f0-9]{40}\.tar\.xz$',
+                        r'^valentina-macOS.*\+-Qt.*-x64-develop-[a-f0-9]{40}\.tar\.xz$',
+                        r'^valentina-macOS.*\+-Qt.*-arm.*-develop-[a-f0-9]{40}\.tar\.xz$',
+                        r'^valentina-macOS.*\+-Qt.*-x64-develop-multibundle-[a-f0-9]{40}$',
+                        r'^valentina-macOS.*\+-Qt.*-arm.*-develop-multibundle-[a-f0-9]{40}$']
 
         item_types = {}
 
