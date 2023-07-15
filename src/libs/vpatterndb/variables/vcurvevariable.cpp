@@ -47,7 +47,7 @@ VCurveVariable::VCurveVariable(const quint32 &id, const quint32 &parentId)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-COPY_CONSTRUCTOR_IMPL(VCurveVariable)
+COPY_CONSTRUCTOR_IMPL_2(VCurveVariable, VInternalVariable)
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VCurveVariable::operator=(const VCurveVariable &var) -> VCurveVariable &
