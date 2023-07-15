@@ -51,12 +51,13 @@ environment:
       BUILD_SYSTEM: "qbs"
       QMAKE: qmake.exe
       ENABLE_PCH: true
-      GCC_VERSION: 8.1
-      MINGW_PATH: C:\Qt\Tools\mingw810_64\bin
+      GCC_VERSION: 12.2
+      MINGW_PATH: C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows10+"
-      MSYS2_PACKAGES: false
+      CHOCOLATEY_PACKAGES: true
+      CHOCOLATEY_MINGW_VERSION: 12.2.0.03042023
       WINDEPLOYQT_BIN_PATH: "undefined"
       DEPLOY: true
 
@@ -75,7 +76,7 @@ environment:
       ARCH: x86
       PYTHON: "C:\\Python311"
       PLATFORM: "Windows7+"
-      MSYS2_PACKAGES: false
+      CHOCOLATEY_PACKAGES: false
       WINDEPLOYQT_BIN_PATH: "undefined"
       DEPLOY: true
     
@@ -153,12 +154,13 @@ environment:
       BUILD_SYSTEM: "qbs"
       QMAKE: qmake.exe
       ENABLE_PCH: true
-      GCC_VERSION: 8.1
-      MINGW_PATH: C:\Qt\6.5\mingw810_64\bin
+      GCC_VERSION: 12.2
+      MINGW_PATH: C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows10+"
-      MSYS2_PACKAGES: false
+      CHOCOLATEY_PACKAGES: true
+      CHOCOLATEY_MINGW_VERSION: 12.2.0.03042023
       WINDEPLOYQT_BIN_PATH: "undefined"
       DEPLOY: false
 
@@ -186,7 +188,7 @@ environment:
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows10+"
-      MSYS2_PACKAGES: false
+      CHOCOLATEY_PACKAGES: false
       WINDEPLOYQT_BIN_PATH: "C:\\Qt\\6.4\\msvc2019_64\\bin"
       DEPLOY: false
 
@@ -202,7 +204,7 @@ environment:
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows10+"
-      MSYS2_PACKAGES: false
+      CHOCOLATEY_PACKAGES: false
       WINDEPLOYQT_BIN_PATH: "undefined"
       DEPLOY: false
 
@@ -221,7 +223,7 @@ environment:
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows7+"
-      MSYS2_PACKAGES: false
+      CHOCOLATEY_PACKAGES: false
       WINDEPLOYQT_BIN_PATH: "undefined"
       DEPLOY: false
 
@@ -237,7 +239,7 @@ environment:
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows7+"
-      MSYS2_PACKAGES: false
+      CHOCOLATEY_PACKAGES: false
       WINDEPLOYQT_BIN_PATH: "undefined"
       DEPLOY: false 
 
@@ -384,10 +386,8 @@ for:
             }
           }  
         } else {
-          if ($env:MSYS2_PACKAGES -eq "true") {
-              & 'C:\msys64\usr\bin\bash' -lc "pacman --noconfirm -Syuu"
-              & 'C:\msys64\usr\bin\bash' -lc "pacman -R --noconfirm mingw-w64-x86_64-gcc-ada mingw-w64-x86_64-gcc-objc mingw-w64-x86_64-gcc-fortran mingw-w64-x86_64-gcc-libgfortran mingw-w64-x86_64-libgccjit"
-              & 'C:\msys64\usr\bin\bash' -lc "pacman --noconfirm -S mingw-w64-x86_64-gcc mingw-w64-x86_64-make"
+          if ($env:CHOCOLATEY_PACKAGES -eq "true") {
+              & choco install mingw --version $env:CHOCOLATEY_MINGW_VERSION
           }
           $env:Path += ";$env:MINGW_PATH"
           $env:CC = "gcc.exe"
