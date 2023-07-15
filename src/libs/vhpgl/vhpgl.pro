@@ -7,6 +7,8 @@
 # File with common stuff for whole project
 include(../../../common.pri)
 
+QT += printsupport 
+
 # Name of the library
 TARGET = vhpgl
 
