@@ -28,11 +28,14 @@
 #include <QUrl>
 #include <QtGlobal>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 class FvAvailableUpdate final : public QObject
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit FvAvailableUpdate(QObject *parent = nullptr);
 
@@ -50,9 +53,9 @@ private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(FvAvailableUpdate) // NOLINT
 
-    QUrl          m_enclosureUrl;
-    QString       m_enclosureVersion;
-    QString       m_enclosurePlatform;
+    QUrl m_enclosureUrl;
+    QString m_enclosureVersion;
+    QString m_enclosurePlatform;
 };
 
 #endif // FVAVAILABLEUPDATE_H

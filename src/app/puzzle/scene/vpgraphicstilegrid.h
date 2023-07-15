@@ -33,7 +33,6 @@
 #include <QPainter>
 #include <QUuid>
 
-#include "../vmisc/def.h"
 #include "../layout/layoutdef.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)

@@ -29,10 +29,12 @@
 #ifndef TST_MEASUREMENTREGEXP_H
 #define TST_MEASUREMENTREGEXP_H
 
-#include "../vmisc/defglobal.h"
-#include "tst_abstractregexp.h"
-
 #include <QPointer>
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
+#include "../vmisc/defglobal.h"
+#endif
+#include "tst_abstractregexp.h"
 
 class QTranslator;
 class VTranslateVars;
@@ -41,7 +43,8 @@ class TST_MeasurementRegExp : public TST_AbstractRegExp
 {
     Q_OBJECT // NOLINT
 
-        public : TST_MeasurementRegExp(const QString &systemCode, const QString &locale, QObject *parent = nullptr);
+public:
+    TST_MeasurementRegExp(const QString &systemCode, const QString &locale, QObject *parent = nullptr);
     virtual ~TST_MeasurementRegExp();
 
     static const QStringList pmSystems;

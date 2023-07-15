@@ -35,6 +35,8 @@
 #include <QtDebug>
 #include <chrono>
 
+#include "../vmisc/defglobal.h"
+
 #if (defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
 // DO NOT WORK WITH GCC 4.8
 #else
@@ -51,8 +53,8 @@ namespace
 class MultiSelectCompleter : public QCompleter
 {
 public:
-    explicit MultiSelectCompleter(QObject* parent=nullptr);
-    virtual ~MultiSelectCompleter() =default;
+    explicit MultiSelectCompleter(QObject *parent = nullptr);
+    virtual ~MultiSelectCompleter() = default;
 
     virtual auto pathFromIndex(const QModelIndex &index) const -> QString override;
     virtual auto splitPath(const QString &path) const -> QStringList override;
@@ -60,20 +62,21 @@ public:
 private:
     Q_DISABLE_COPY_MOVE(MultiSelectCompleter) // NOLINT
 };
-}
+} // namespace
 
-//MultiSelectCompleter
+// MultiSelectCompleter
 //---------------------------------------------------------------------------------------------------------------------
 MultiSelectCompleter::MultiSelectCompleter(QObject *parent)
-    : QCompleter(parent)
-{}
+  : QCompleter(parent)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto MultiSelectCompleter::pathFromIndex(const QModelIndex &index) const -> QString
 {
     QString path = QCompleter::pathFromIndex(index);
 
-    QString text = static_cast<QLineEdit*>(widget())->text();
+    QString text = static_cast<QLineEdit *>(widget())->text();
 
     vsizetype pos = text.lastIndexOf(',');
     if (pos >= 0)
@@ -97,18 +100,20 @@ auto MultiSelectCompleter::splitPath(const QString &path) const -> QStringList
     return QStringList(path.mid(pos));
 }
 
-//VLineEdit
+// VLineEdit
 //---------------------------------------------------------------------------------------------------------------------
 VLineEdit::VLineEdit(QWidget *parent)
-    : QLineEdit(parent),
-      m_selectOnMousePress(false)
-{}
+  : QLineEdit(parent),
+    m_selectOnMousePress(false)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VLineEdit::VLineEdit(const QString &contents, QWidget *parent)
-    : QLineEdit(contents, parent),
-      m_selectOnMousePress(false)
-{}
+  : QLineEdit(contents, parent),
+    m_selectOnMousePress(false)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VLineEdit::focusInEvent(QFocusEvent *e)
@@ -137,7 +142,7 @@ void VLineEdit::focusOutEvent(QFocusEvent *e)
 void VLineEdit::mousePressEvent(QMouseEvent *e)
 {
     QLineEdit::mousePressEvent(e);
-    if(m_selectOnMousePress)
+    if (m_selectOnMousePress)
     {
         selectAll();
         m_selectOnMousePress = false;
@@ -147,8 +152,8 @@ void VLineEdit::mousePressEvent(QMouseEvent *e)
 // VCompleterLineEdit
 //---------------------------------------------------------------------------------------------------------------------
 VCompleterLineEdit::VCompleterLineEdit(QWidget *parent)
-    : VLineEdit(parent),
-      m_model(new QStringListModel(this))
+  : VLineEdit(parent),
+    m_model(new QStringListModel(this))
 {
     setCompleter(new MultiSelectCompleter());
     completer()->setModel(m_model);
@@ -174,7 +179,7 @@ void VCompleterLineEdit::focusInEvent(QFocusEvent *e)
 //---------------------------------------------------------------------------------------------------------------------
 void VCompleterLineEdit::ShowCompletion()
 {
-//    PrepareCompletion();
+    //    PrepareCompletion();
 
     // force to show all items when text is empty
     completer()->setCompletionMode(text().isEmpty() ? QCompleter::UnfilteredPopupCompletion

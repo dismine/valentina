@@ -28,7 +28,6 @@
 #ifndef VHPGLENGINE_H
 #define VHPGLENGINE_H
 
-#include "../vmisc/def.h"
 #include <QPoint>
 #include <QSize>
 #include <QString>

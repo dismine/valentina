@@ -14,11 +14,15 @@
 #define DXFREADER_H
 
 #include "drw_textcodec.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
-class dxfReader {
+class dxfReader
+{
 public:
-    enum TYPE {
+    enum TYPE
+    {
         STRING,
         INT32,
         INT64,
@@ -27,17 +31,19 @@ public:
         INVALID
     };
     TYPE type;
+
 public:
     explicit dxfReader(std::istream *stream)
-        : type(INVALID),
-          filestr(stream),
-          strData(),
-          doubleData(),
-          intData(),
-          int64(),
-          skip(),
-          decoder()
-    {}
+      : type(INVALID),
+        filestr(stream),
+        strData(),
+        doubleData(),
+        intData(),
+        int64(),
+        skip(),
+        decoder()
+    {
+    }
 
     virtual ~dxfReader() = default;
     auto readRec(int *codeData) -> bool;
@@ -51,10 +57,10 @@ public:
     auto getInt64() const -> unsigned long long int { return int64; }
     auto getBool() const -> bool { return (intData == 0) ? false : true; }
     auto getVersion() const -> int { return decoder.getVersion(); }
-    void setVersion(const std::string &v, bool dxfFormat){decoder.setVersion(v, dxfFormat);}
-    void setCodePage(const std::string &c){decoder.setCodePage(c, true);}
+    void setVersion(const std::string &v, bool dxfFormat) { decoder.setVersion(v, dxfFormat); }
+    void setCodePage(const std::string &c) { decoder.setCodePage(c, true); }
     auto getCodePage() const -> std::string { return decoder.getCodePage(); }
-    void setIgnoreComments(const bool bValue) {m_bIgnoreComments = bValue;}
+    void setIgnoreComments(const bool bValue) { m_bIgnoreComments = bValue; }
 
 protected:
     virtual auto readCode(int *code) -> bool = 0; // return true if successful (not EOF)
@@ -71,20 +77,24 @@ protected:
     std::istream *filestr;
     std::string strData;
     double doubleData;
-    signed int intData; //32 bits integer
-    unsigned long long int int64; //64 bits integer
-    bool skip; //set to true for ascii dxf, false for binary
+    signed int intData;           // 32 bits integer
+    unsigned long long int int64; // 64 bits integer
+    bool skip;                    // set to true for ascii dxf, false for binary
+
 private:
     Q_DISABLE_COPY_MOVE(dxfReader) // NOLINT
     DRW_TextCodec decoder;
-    bool m_bIgnoreComments {false};
+    bool m_bIgnoreComments{false};
 };
 
-class dxfReaderBinary : public dxfReader {
+class dxfReaderBinary : public dxfReader
+{
 public:
     explicit dxfReaderBinary(std::istream *stream)
-        : dxfReader(stream)
-    {skip = false; }
+      : dxfReader(stream)
+    {
+        skip = false;
+    }
 
     virtual ~dxfReaderBinary() = default;
     virtual auto readCode(int *code) -> bool override;
@@ -98,11 +108,14 @@ public:
     virtual auto readBool() -> bool override;
 };
 
-class dxfReaderAscii final : public dxfReader {
+class dxfReaderAscii final : public dxfReader
+{
 public:
     explicit dxfReaderAscii(std::istream *stream)
-        : dxfReader(stream)
-    {skip = true; }
+      : dxfReader(stream)
+    {
+        skip = true;
+    }
 
     virtual ~dxfReaderAscii() = default;
     virtual auto readCode(int *code) -> bool override;

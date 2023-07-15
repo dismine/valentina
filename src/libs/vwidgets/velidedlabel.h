@@ -30,7 +30,9 @@
 
 #include <QFrame>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 class VElidedLabel : public QFrame
 {
@@ -38,32 +40,33 @@ class VElidedLabel : public QFrame
     Q_PROPERTY(QString text READ text WRITE setText)
     Q_PROPERTY(bool IsElided READ IsElided)
     Q_PROPERTY(bool showElided READ ShowElided WRITE SetShowElided)
+
 public:
-   explicit VElidedLabel(QWidget *parent = nullptr);
-   explicit VElidedLabel(const QString &text, QWidget *parent = nullptr);
+    explicit VElidedLabel(QWidget *parent = nullptr);
+    explicit VElidedLabel(const QString &text, QWidget *parent = nullptr);
 
-   void           setText(const QString &text);
-   auto text() const -> const QString &;
+    void setText(const QString &text);
+    auto text() const -> const QString &;
 
-   auto IsElided() const -> bool;
+    auto IsElided() const -> bool;
 
-   auto ShowElided() const -> bool;
-   void SetShowElided(bool showElided);
+    auto ShowElided() const -> bool;
+    void SetShowElided(bool showElided);
 
 protected:
-   virtual void paintEvent(QPaintEvent *event) override;
+    virtual void paintEvent(QPaintEvent *event) override;
 
 signals:
-   void ElisionChanged(bool m_elided);
+    void ElisionChanged(bool m_elided);
 
 private:
-   // cppcheck-suppress unknownMacro
-   Q_DISABLE_COPY_MOVE(VElidedLabel) // NOLINT
-   bool    m_elided{false};
-   bool    m_showElided{true};
-   QString m_content{};
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(VElidedLabel) // NOLINT
+    bool m_elided{false};
+    bool m_showElided{true};
+    QString m_content{};
 
-   auto DrawParagraph(QPainter &painter, const QString &paragraph, int &y, bool &didElide) -> bool;
+    auto DrawParagraph(QPainter &painter, const QString &paragraph, int &y, bool &didElide) -> bool;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

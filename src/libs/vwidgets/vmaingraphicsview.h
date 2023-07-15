@@ -29,18 +29,19 @@
 #ifndef VMAINGRAPHICSVIEW_H
 #define VMAINGRAPHICSVIEW_H
 
-
 #include <QGraphicsView>
 #include <QMetaObject>
 #include <QObject>
 #include <QPointF>
+#include <QPointer>
 #include <QRectF>
 #include <QString>
 #include <Qt>
 #include <QtGlobal>
-#include <QPointer>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 /*!
  * This class adds ability to zoom QGraphicsView using mouse wheel. The point under cursor
@@ -75,8 +76,9 @@ class QPinchGesture;
 class GraphicsViewZoom : public QObject
 {
     Q_OBJECT // NOLINT
+
 public:
-    explicit GraphicsViewZoom(QGraphicsView* view);
+    explicit GraphicsViewZoom(QGraphicsView *view);
     void gentle_zoom(double factor);
     void set_modifiers(Qt::KeyboardModifiers modifiers);
     void set_zoom_factor_base(double value);
@@ -87,31 +89,32 @@ public slots:
     void VerticalScrollingTime(qreal x);
     void HorizontalScrollingTime(qreal x);
     void animFinished();
+
 protected:
     virtual auto eventFilter(QObject *object, QEvent *event) -> bool override;
 
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(GraphicsViewZoom) // NOLINT
-    QGraphicsView        *_view;
+    QGraphicsView *_view;
     Qt::KeyboardModifiers _modifiers;
-    double                _zoom_factor_base;
-    QPointF               target_scene_pos;
-    QPointF               target_viewport_pos;
-    QPointer<QTimeLine>   verticalScrollAnim;
+    double _zoom_factor_base;
+    QPointF target_scene_pos;
+    QPointF target_viewport_pos;
+    QPointer<QTimeLine> verticalScrollAnim;
     /** @brief _numScheduledVerticalScrollings keep number scheduled vertical scrollings. */
-    qreal                _numScheduledVerticalScrollings;
-    QPointer<QTimeLine>   horizontalScrollAnim;
+    qreal _numScheduledVerticalScrollings;
+    QPointer<QTimeLine> horizontalScrollAnim;
     /** @brief _numScheduledHorizontalScrollings keep number scheduled horizontal scrollings. */
-    qreal                _numScheduledHorizontalScrollings;
+    qreal _numScheduledHorizontalScrollings;
 
     void FictiveSceneRect(QGraphicsScene *sc, QGraphicsView *view);
 
-    void StartVerticalScrollings(QWheelEvent* wheel_event);
-    void StartHorizontalScrollings(QWheelEvent* wheel_event);
+    void StartVerticalScrollings(QWheelEvent *wheel_event);
+    void StartHorizontalScrollings(QWheelEvent *wheel_event);
 
     auto GestureEvent(QGestureEvent *event) -> bool;
-    void PinchTriggered(QPinchGesture* gesture);
+    void PinchTriggered(QPinchGesture *gesture);
 };
 
 /**
@@ -120,6 +123,7 @@ private:
 class VMainGraphicsView : public QGraphicsView
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit VMainGraphicsView(QWidget *parent = nullptr);
     void setShowToolOptions(bool value);
@@ -150,17 +154,18 @@ signals:
      *
      * Usefull when you need show dialog after working with tool visualization.
      */
-    void     MouseRelease();
-    void     itemClicked(QGraphicsItem *item);
-    void     ScaleChanged(qreal scale);
-    void     ZoomFitBestCurrent();
+    void MouseRelease();
+    void itemClicked(QGraphicsItem *item);
+    void ScaleChanged(qreal scale);
+    void ZoomFitBestCurrent();
 public slots:
-    void     Zoom(qreal scale);
-    void     ZoomIn();
-    void     ZoomOut();
-    void     ZoomOriginal();
-    void     ZoomFitBest();
-    void     ResetScrollingAnimation();
+    void Zoom(qreal scale);
+    void ZoomIn();
+    void ZoomOut();
+    void ZoomOriginal();
+    void ZoomFitBest();
+    void ResetScrollingAnimation();
+
 protected:
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
@@ -169,14 +174,15 @@ protected:
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dragMoveEvent(QDragMoveEvent *event) override;
     void dropEvent(QDropEvent *event) override;
+
 private:
     Q_DISABLE_COPY_MOVE(VMainGraphicsView) // NOLINT
-    GraphicsViewZoom* zoom;
-    bool              showToolOptions;
-    bool              isAllowRubberBand;
-    QPoint            m_ptStartPos;
-    QCursor           m_oldCursor;
-    Qt::CursorShape   m_currentCursor;
+    GraphicsViewZoom *zoom;
+    bool showToolOptions;
+    bool isAllowRubberBand;
+    QPoint m_ptStartPos;
+    QCursor m_oldCursor;
+    Qt::CursorShape m_currentCursor;
 };
 
 #endif // VMAINGRAPHICSVIEW_H

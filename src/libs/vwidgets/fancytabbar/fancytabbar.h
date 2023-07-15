@@ -31,13 +31,14 @@
 #define FANCYTABWIDGET_H
 
 #include <QIcon>
-#include <QWidget>
-#include <QTimer>
 #include <QPropertyAnimation>
+#include <QTimer>
+#include <QWidget>
+
+#include "../vmisc/defglobal.h"
+#include "fancytab.h"
 
 class QPainter;
-
-#include "fancytab.h"
 
 class FancyTabBar : public QWidget
 {
@@ -69,13 +70,13 @@ public:
     void SetCurrentIndex(int index);
     auto CurrentIndex() const -> int;
 
-    void    SetTabToolTip(int index, const QString &toolTip);
+    void SetTabToolTip(int index, const QString &toolTip);
     auto TabToolTip(int index) const -> QString;
 
     auto TabIcon(int index) const -> QIcon;
 
     auto TabText(int index) const -> QString;
-    void    SetTabText(int index, const QString &text);
+    void SetTabText(int index, const QString &text);
 
     auto Count() const -> vsizetype;
     auto TabRect(int index) const -> QRect;
@@ -101,16 +102,22 @@ private slots:
 private:
     Q_DISABLE_COPY_MOVE(FancyTabBar) // NOLINT
 
-    enum Corner { OutsideBeginning, OutsideEnd, InsideBeginning, InsideEnd };
+    enum Corner
+    {
+        OutsideBeginning,
+        OutsideEnd,
+        InsideBeginning,
+        InsideEnd
+    };
 
     static const int m_rounding;
 
-    TabBarPosition   m_position;
-    QRect            m_hoverRect;
-    int              m_hoverIndex;
-    int              m_currentIndex;
-    QList<FancyTab*> m_attachedTabs;
-    QTimer           m_timerTriggerChangedSignal;
+    TabBarPosition m_position;
+    QRect m_hoverRect;
+    int m_hoverIndex;
+    int m_currentIndex;
+    QList<FancyTab *> m_attachedTabs;
+    QTimer m_timerTriggerChangedSignal;
 
     auto GetCorner(const QRect &rect, const Corner corner) const -> QPoint;
 
@@ -122,7 +129,7 @@ private:
         -> QPoint;
 
     auto TabSizeHint(bool minimum = false) const -> QSize;
-    void  PaintTab(QPainter *painter, int tabIndex) const;
+    void PaintTab(QPainter *painter, int tabIndex) const;
     auto ValidIndex(int index) const -> bool;
 };
 

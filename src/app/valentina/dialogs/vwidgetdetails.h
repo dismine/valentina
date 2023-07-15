@@ -31,7 +31,9 @@
 
 #include <QWidget>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 class VAbstractPattern;
 class VContainer;
@@ -40,7 +42,7 @@ class QTableWidgetItem;
 
 namespace Ui
 {
-    class VWidgetDetails;
+class VWidgetDetails;
 }
 
 class VWidgetDetails : public QWidget
@@ -60,7 +62,7 @@ public slots:
     void ToggledPiece(quint32 id);
 
 protected:
-    void changeEvent ( QEvent * event) override;
+    void changeEvent(QEvent *event) override;
 
 private slots:
     void InLayoutStateChanged(int row, int column);
@@ -72,9 +74,9 @@ private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VWidgetDetails) // NOLINT
     Ui::VWidgetDetails *ui;
-    VAbstractPattern   *m_doc;
-    VContainer         *m_data;
-    QTimer             *m_updateListTimer;
+    VAbstractPattern *m_doc;
+    VContainer *m_data;
+    QTimer *m_updateListTimer;
 
     void FillTable(const QHash<quint32, VPiece> *details);
     void ToggleSectionDetails(bool select);

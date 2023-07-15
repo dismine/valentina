@@ -31,11 +31,13 @@
 
 #include <QDialog>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 namespace Ui
 {
-    class DialogAboutTape;
+class DialogAboutTape;
 }
 
 class DialogAboutTape : public QDialog
@@ -47,7 +49,7 @@ public:
     ~DialogAboutTape() override;
 
 protected:
-    void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent *event) override;
     void showEvent(QShowEvent *event) override;
 
 private:

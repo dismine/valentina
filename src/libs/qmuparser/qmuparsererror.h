@@ -34,7 +34,9 @@
 #include "qmuparserdef.h"
 #include "qmutranslation.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 /** @file
     @brief This file defines the error class used by the parser.
@@ -78,11 +80,11 @@ enum EErrorCodes
     ecEMPTY_EXPRESSION = 25, ///< The Expression is empty
     ecNAME_CONFLICT = 26,    ///< Name conflict
     ecOPT_PRI = 27,          ///< Invalid operator priority
-                    //
-    ecDOMAIN_ERROR = 28, ///< catch division by zero, sqrt(-1), log(0) (currently unused)
-    ecDIV_BY_ZERO = 29,  ///< Division by zero (currently unused)
-    ecGENERIC = 30,      ///< Generic error
-    ecLOCALE = 31,       ///< Conflict with current locale
+                             //
+    ecDOMAIN_ERROR = 28,     ///< catch division by zero, sqrt(-1), log(0) (currently unused)
+    ecDIV_BY_ZERO = 29,      ///< Division by zero (currently unused)
+    ecGENERIC = 30,          ///< Generic error
+    ecLOCALE = 31,           ///< Conflict with current locale
 
     ecUNEXPECTED_CONDITIONAL = 32,
     ecMISSING_ELSE_CLAUSE = 33,

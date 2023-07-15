@@ -31,21 +31,25 @@
 
 #include <QLineEdit>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 class QStringListModel;
 
 class VLineEdit : public QLineEdit
 {
     Q_OBJECT // NOLINT
+
 public:
-    explicit VLineEdit(QWidget * parent = nullptr);
+    explicit VLineEdit(QWidget *parent = nullptr);
     explicit VLineEdit(const QString &contents, QWidget *parent = nullptr);
 
 protected:
     virtual void focusInEvent(QFocusEvent *e) override;
     virtual void focusOutEvent(QFocusEvent *e) override;
     virtual void mousePressEvent(QMouseEvent *e) override;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VLineEdit) // NOLINT
@@ -60,6 +64,7 @@ private:
 class VCompleterLineEdit : public VLineEdit
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit VCompleterLineEdit(QWidget *parent = nullptr);
 
@@ -68,7 +73,7 @@ public:
 
 protected:
     virtual void focusInEvent(QFocusEvent *e) override;
-    virtual void customEvent(QEvent* e) override;
+    virtual void customEvent(QEvent *e) override;
 
 private slots:
     void ShowCompletion();

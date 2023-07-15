@@ -30,7 +30,9 @@
 #define TST_ABSTRACTREGEXP_H
 
 #include "../vtest/abstracttest.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 #include <QPointer>
 
@@ -40,6 +42,7 @@ class VTranslateVars;
 class TST_AbstractRegExp : public AbstractTest
 {
     Q_OBJECT // NOLINT
+
 public:
     TST_AbstractRegExp(const QString &locale, QObject *parent = nullptr);
     virtual ~TST_AbstractRegExp();
@@ -49,7 +52,7 @@ protected:
     QPointer<QTranslator> m_vTranslator;
     VTranslateVars *m_trMs;
 
-    virtual void        PrepareData()=0;
+    virtual void PrepareData() = 0;
     virtual auto AllNames() -> QStringList = 0;
 
     auto LoadVariables(const QString &checkedLocale) -> int;

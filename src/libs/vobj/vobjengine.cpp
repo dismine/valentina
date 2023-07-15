@@ -40,14 +40,14 @@
 #include <QString>
 #include <QTextStream>
 #include <QVector>
-#include <QtDebug>
 #include <Qt>
+#include <QtDebug>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
-#include "../vmisc/vmath.h"
+#include "../vmisc/defglobal.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
 #include "../vmisc/backport/text.h"
@@ -65,28 +65,31 @@ class QRectF;
 //---------------------------------------------------------------------------------------------------------------------
 static inline auto svgEngineFeatures() -> QPaintEngine::PaintEngineFeatures
 {
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_CLANG("-Wsign-conversion")
-// cppcheck-suppress unknownMacro
-QT_WARNING_DISABLE_INTEL(68)
-QT_WARNING_DISABLE_INTEL(2022)
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_CLANG("-Wsign-conversion")
+    // cppcheck-suppress unknownMacro
+    QT_WARNING_DISABLE_INTEL(68)
+    QT_WARNING_DISABLE_INTEL(2022)
 
-    return QPaintEngine::PaintEngineFeatures(
-        QPaintEngine::AllFeatures
-        & ~QPaintEngine::PatternBrush
-        & ~QPaintEngine::PerspectiveTransform
-        & ~QPaintEngine::ConicalGradientFill
-        & ~QPaintEngine::PorterDuff);
+    return QPaintEngine::PaintEngineFeatures(QPaintEngine::AllFeatures & ~QPaintEngine::PatternBrush &
+                                             ~QPaintEngine::PerspectiveTransform & ~QPaintEngine::ConicalGradientFill &
+                                             ~QPaintEngine::PorterDuff);
 
-QT_WARNING_POP
+    QT_WARNING_POP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VObjEngine::VObjEngine()
-    :QPaintEngine(svgEngineFeatures()), stream(), globalPointsCount(0), outputDevice(), planeCount(0),
-      size(), resolution(96), matrix()
+  : QPaintEngine(svgEngineFeatures()),
+    stream(),
+    globalPointsCount(0),
+    outputDevice(),
+    planeCount(0),
+    size(),
+    resolution(96),
+    matrix()
 {
-    for (int i=0; i < MAX_POINTS; i++)
+    for (int i = 0; i < MAX_POINTS; i++)
     {
         points[i].x = 0;
         points[i].y = 0;
@@ -94,7 +97,7 @@ VObjEngine::VObjEngine()
 }
 
 #if defined(Q_CC_INTEL)
-#pragma warning( pop )
+#pragma warning(pop)
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -129,13 +132,13 @@ auto VObjEngine::begin(QPaintDevice *pdev) -> bool
 
     if (size.isValid() == false)
     {
-        qWarning()<<"VObjEngine::begin(), size is not valid";
+        qWarning() << "VObjEngine::begin(), size is not valid";
         return false;
     }
 
     stream = QSharedPointer<QTextStream>(new QTextStream(outputDevice.data()));
-    *stream << "# Valentina OBJ File" <<  Qt::endl;
-    *stream << "# smart-pattern.com.ua/" <<  Qt::endl;
+    *stream << "# Valentina OBJ File" << Qt::endl;
+    *stream << "# smart-pattern.com.ua/" << Qt::endl;
     return true;
 }
 
@@ -155,7 +158,6 @@ void VObjEngine::updateState(const QPaintEngineState &state)
     // always stream full gstate, which is not required, but...
     flags |= QPaintEngine::AllDirty;
 
-
     if (flags & QPaintEngine::DirtyTransform)
     {
         matrix = state.transform(); // Save new matrix for moving paths
@@ -166,7 +168,7 @@ void VObjEngine::updateState(const QPaintEngineState &state)
 void VObjEngine::drawPath(const QPainterPath &path)
 {
     QPolygonF polygon = path.toFillPolygon(matrix);
-    polygon = MakePointsUnique(polygon);// Points must be unique
+    polygon = MakePointsUnique(polygon); // Points must be unique
     if (polygon.size() < 3)
     {
         return;
@@ -181,7 +183,7 @@ void VObjEngine::drawPath(const QPainterPath &path)
 
     for (auto &p : polygon)
     {
-        if ( num_points < MAX_POINTS )
+        if (num_points < MAX_POINTS)
         {
             points[num_points].x = p.x();
             points[num_points].y = p.y();
@@ -190,47 +192,47 @@ void VObjEngine::drawPath(const QPainterPath &path)
     }
 
     int offset = 0;
-    delaunay2d_t *res = delaunay2d_from(points, num_points);//Calculate faces
+    delaunay2d_t *res = delaunay2d_from(points, num_points); // Calculate faces
 
     QPointF pf[MAX_POINTS];
     // cppcheck-suppress unreadVariable
-    bool skipFace=false;//Need skip first face
+    bool skipFace = false; // Need skip first face
 
-    for (quint32 i = 0; i < res->num_faces; i++ )
+    for (quint32 i = 0; i < res->num_faces; i++)
     {
         if (offset == 0)
         {
-            skipFace=true;
+            skipFace = true;
         }
         else
         {
-            skipFace=false;
+            skipFace = false;
         }
         int num_verts = static_cast<int>(res->faces[offset]);
         offset++;
-        for ( int j = 0; j < num_verts; j++ )
+        for (int j = 0; j < num_verts; j++)
         {
             int p0 = static_cast<int>(res->faces[offset + j]);
             pf[j] = QPointF(points[p0].x, points[p0].y);
         }
-        if (skipFace == false )
+        if (skipFace == false)
         {
             QPolygonF face;
-            for ( int ind = 0; ind < num_verts; ind++ )
+            for (int ind = 0; ind < num_verts; ind++)
             {
                 face << QPointF(pf[ind]);
             }
             QPolygonF united = polygon.united(face);
             qint64 sqUnited = Square(united);
             if (sqUnited <= sq)
-            {// This face incide our base polygon.
+            { // This face incide our base polygon.
                 drawPolygon(pf, num_verts, QPaintEngine::OddEvenMode);
             }
         }
         offset += num_verts;
     }
 
-    delaunay2d_release(res);//Don't forget release data
+    delaunay2d_release(res); // Don't forget release data
     *stream << "s off" << Qt::endl;
 }
 
@@ -266,10 +268,11 @@ void VObjEngine::drawPoints(const QPointF *points, int pointCount)
 {
     for (int i = 0; i < pointCount; ++i)
     {
-        qreal x = ((points[i].x() - 0)/qFloor(size.width()/2.0)) - 1.0;
-        qreal y = (((points[i].y() - 0)/qFloor(size.width()/2.0)) - 1.0)*-1;
+        qreal x = ((points[i].x() - 0) / qFloor(size.width() / 2.0)) - 1.0;
+        qreal y = (((points[i].y() - 0) / qFloor(size.width() / 2.0)) - 1.0) * -1;
 
-        *stream << "v" << " " << QString::number(x, 'f', 6 ) << " " << QString::number(y, 'f', 6 ) << " "
+        *stream << "v"
+                << " " << QString::number(x, 'f', 6) << " " << QString::number(y, 'f', 6) << " "
                 << "0.000000" << Qt::endl;
         ++globalPointsCount;
     }
@@ -355,7 +358,7 @@ auto VObjEngine::Square(const QPolygonF &poly) const -> qint64
     qreal s, res = 0;
     qint64 sq = 0;
 
-    for (int i=0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
         x.append(poly.at(i).x());
         y.append(poly.at(i).y());
@@ -366,23 +369,23 @@ auto VObjEngine::Square(const QPolygonF &poly) const -> qint64
     {
         if (i == 0)
         {
-            s = x.at(i)*(y.at(n-1) - y.at(i+1)); //if i == 0, then y[i-1] replace on y[n-1]
+            s = x.at(i) * (y.at(n - 1) - y.at(i + 1)); // if i == 0, then y[i-1] replace on y[n-1]
             res += s;
         }
         else
         {
-            if (i == n-1)
+            if (i == n - 1)
             {
-                s = x.at(i)*(y.at(i-1) - y.at(0)); // if i == n-1, then y[i+1] replace on y[0]
+                s = x.at(i) * (y.at(i - 1) - y.at(0)); // if i == n-1, then y[i+1] replace on y[0]
                 res += s;
             }
             else
             {
-                s = x.at(i)*(y.at(i-1) - y.at(i+1));
+                s = x.at(i) * (y.at(i - 1) - y.at(i + 1));
                 res += s;
             }
         }
     }
-    sq = qFloor(qAbs(res/2.0));
+    sq = qFloor(qAbs(res / 2.0));
     return sq;
 }

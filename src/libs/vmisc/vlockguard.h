@@ -32,7 +32,7 @@
 
 #include <QtGlobal>
 #ifdef Q_OS_WIN
-#  include <qt_windows.h>
+#include <qt_windows.h>
 #endif /*Q_OS_WIN*/
 
 #include <QString>
@@ -41,7 +41,10 @@
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 #include <QFileInfo>
 #include <QLockFile>
@@ -53,32 +56,30 @@
  *
  * On older Qt lock assumed always taken and compile-time warning is shown.
  *
-*/
-template <typename Guarded>
-class VLockGuard
+ */
+template <typename Guarded> class VLockGuard
 {
 public:
-    explicit VLockGuard(const QString& lockName, int stale = 0, int timeout = 0);
+    explicit VLockGuard(const QString &lockName, int stale = 0, int timeout = 0);
 
-    template <typename Alloc>
-    VLockGuard(const QString& lockName, Alloc a, int stale = 0, int timeout=0);
+    template <typename Alloc> VLockGuard(const QString &lockName, Alloc a, int stale = 0, int timeout = 0);
 
     template <typename Alloc, typename Delete>
-    VLockGuard(const QString& lockName, Alloc a, Delete d, int stale = 0, int timeout=0);
+    VLockGuard(const QString &lockName, Alloc a, Delete d, int stale = 0, int timeout = 0);
 
     auto GetProtected() const -> const QSharedPointer<Guarded> &;
     auto GetLockError() const -> int;
     auto IsLocked() const -> bool;
-    void            Unlock();
+    void Unlock();
     auto GetLockFile() const -> QString;
 
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VLockGuard) // NOLINT
 
-    QSharedPointer<Guarded>   holder;
-    int                       lockError;
-    QString                   lockFile;
+    QSharedPointer<Guarded> holder;
+    int lockError;
+    QString lockFile;
     QSharedPointer<QLockFile> lock;
 
     auto TryLock(const QString &lockName, int stale, int timeout) -> bool;
@@ -87,7 +88,10 @@ private:
 //---------------------------------------------------------------------------------------------------------------------
 template <typename Guarded>
 VLockGuard<Guarded>::VLockGuard(const QString &lockName, int stale, int timeout)
-    : holder(nullptr), lockError(0), lockFile(), lock(nullptr)
+  : holder(nullptr),
+    lockError(0),
+    lockFile(),
+    lock(nullptr)
 {
     if (TryLock(lockName, stale, timeout))
     {
@@ -96,11 +100,15 @@ VLockGuard<Guarded>::VLockGuard(const QString &lockName, int stale, int timeout)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-//using allocator lambdas seems logically better than supplying pointer, because we will take ownership of allocated
-//object
-template <typename Guarded> template <typename Alloc>
-VLockGuard<Guarded>::VLockGuard(const QString& lockName, Alloc a, int stale, int timeout)
-    : holder(nullptr), lockError(0), lockFile(), lock(nullptr)
+// using allocator lambdas seems logically better than supplying pointer, because we will take ownership of allocated
+// object
+template <typename Guarded>
+template <typename Alloc>
+VLockGuard<Guarded>::VLockGuard(const QString &lockName, Alloc a, int stale, int timeout)
+  : holder(nullptr),
+    lockError(0),
+    lockFile(),
+    lock(nullptr)
 {
     if (TryLock(lockName, stale, timeout))
     {
@@ -109,9 +117,13 @@ VLockGuard<Guarded>::VLockGuard(const QString& lockName, Alloc a, int stale, int
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename Guarded> template <typename Alloc, typename Delete>
-VLockGuard<Guarded>::VLockGuard(const QString& lockName, Alloc a, Delete d, int stale, int timeout)
-    : holder(nullptr), lockError(0), lockFile(), lock(nullptr)
+template <typename Guarded>
+template <typename Alloc, typename Delete>
+VLockGuard<Guarded>::VLockGuard(const QString &lockName, Alloc a, Delete d, int stale, int timeout)
+  : holder(nullptr),
+    lockError(0),
+    lockFile(),
+    lock(nullptr)
 {
     if (TryLock(lockName, stale, timeout))
     {
@@ -138,8 +150,7 @@ template <typename Guarded> inline auto VLockGuard<Guarded>::IsLocked() const ->
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template<typename Guarded>
-inline void VLockGuard<Guarded>::Unlock()
+template <typename Guarded> inline void VLockGuard<Guarded>::Unlock()
 {
     if (IsLocked())
     {
@@ -191,27 +202,27 @@ template <typename Guarded> auto VLockGuard<Guarded>::TryLock(const QString &loc
     return res;
 }
 
-//use pointer and function below to persistent things like class-member, because lock is taken by constructor
-//helper functions allow to write shorter creating and setting new lock-pointer
+// use pointer and function below to persistent things like class-member, because lock is taken by constructor
+// helper functions allow to write shorter creating and setting new lock-pointer
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_INTEL(1418)
 
 template <typename Guarded>
-void VlpCreateLock(QSharedPointer<VLockGuard<Guarded>>& r, const QString& lockName, int stale = 0, int timeout = 0)
+void VlpCreateLock(QSharedPointer<VLockGuard<Guarded>> &r, const QString &lockName, int stale = 0, int timeout = 0)
 {
     r.reset(new VLockGuard<Guarded>(lockName, stale, timeout));
 }
 
 template <typename Guarded, typename Alloc>
-void VlpCreateLock(QSharedPointer<VLockGuard<Guarded>>& r, const QString& lockName, Alloc a, int stale = 0,
+void VlpCreateLock(QSharedPointer<VLockGuard<Guarded>> &r, const QString &lockName, Alloc a, int stale = 0,
                    int timeout = 0)
 {
     r.reset(new VLockGuard<Guarded>(lockName, a, stale, timeout));
 }
 
 template <typename Guarded, typename Alloc, typename Del>
-void VlpCreateLock(QSharedPointer<VLockGuard<Guarded>>& r, const QString& lockName, Alloc a, Del d, int stale = 0,
+void VlpCreateLock(QSharedPointer<VLockGuard<Guarded>> &r, const QString &lockName, Alloc a, Del d, int stale = 0,
                    int timeout = 0)
 {
     r.reset(new VLockGuard<Guarded>(lockName, a, d, stale, timeout));

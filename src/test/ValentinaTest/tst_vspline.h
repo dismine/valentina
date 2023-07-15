@@ -30,13 +30,16 @@
 #define TST_VSPLINE_H
 
 #include "../vtest/abstracttest.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 class VSpline;
 
 class TST_VSpline : public AbstractTest
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit TST_VSpline(QObject *parent = nullptr);
 

@@ -8,8 +8,8 @@
 #include "../vmisc/literals.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "layout/vplayout.h"
 #include "layout/vpsheet.h"
-#include "qobject.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"

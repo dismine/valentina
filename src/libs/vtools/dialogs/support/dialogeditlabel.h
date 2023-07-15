@@ -32,11 +32,13 @@
 #include <QDialog>
 #include <QMap>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 namespace Ui
 {
-    class DialogEditLabel;
+class DialogEditLabel;
 }
 
 struct VLabelTemplateLine;
@@ -77,9 +79,9 @@ private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DialogEditLabel) // NOLINT
     Ui::DialogEditLabel *ui;
-    QMenu               *m_placeholdersMenu;
+    QMenu *m_placeholdersMenu;
     const VAbstractPattern *m_doc;
-    const VContainer    *m_data;
+    const VContainer *m_data;
 
     QMap<QString, QPair<QString, QString>> m_placeholders{};
 

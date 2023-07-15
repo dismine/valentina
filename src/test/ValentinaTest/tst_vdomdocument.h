@@ -30,17 +30,21 @@
 
 #include <QObject>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
-class TST_VDomDocument :public QObject
+class TST_VDomDocument : public QObject
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit TST_VDomDocument(QObject *parent = nullptr);
 
 private slots:
     void TestCompareDomElements_data();
     void TestCompareDomElements();
+
 private:
     Q_DISABLE_COPY_MOVE(TST_VDomDocument) // NOLINT
 };

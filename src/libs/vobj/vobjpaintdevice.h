@@ -29,14 +29,15 @@
 #ifndef VOBJPAINTDEVICE_H
 #define VOBJPAINTDEVICE_H
 
-
 #include <QPaintDevice>
 #include <QSharedPointer>
 #include <QSize>
 #include <QString>
 #include <QtGlobal>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 class QIODevice;
 class VObjEngine;
@@ -67,8 +68,8 @@ private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VObjPaintDevice) // NOLINT
     QSharedPointer<VObjEngine> engine;
-    QString     fileName;
-    uint        owns_iodevice;
+    QString fileName;
+    uint owns_iodevice;
 };
 
 #endif // VOBJPAINTDEVICE_H

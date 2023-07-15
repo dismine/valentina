@@ -33,7 +33,9 @@
 #include <QMap>
 #include <QPointer>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 class VPattern;
 class VContainer;
@@ -43,17 +45,19 @@ class QTemporaryFile;
 
 namespace Ui
 {
-    class DialogPatternProperties;
+class DialogPatternProperties;
 }
 
 class DialogPatternProperties : public QDialog
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit DialogPatternProperties(VPattern *doc, VContainer *pattern, QWidget *parent = nullptr);
     ~DialogPatternProperties() override;
 signals:
     void UpddatePieces();
+
 protected:
     auto eventFilter(QObject *object, QEvent *event) -> bool override;
 private slots:
@@ -65,6 +69,7 @@ private slots:
     void ShowImage();
     void BrowseLabelPath();
     void LabelPathChanged(const QString &text);
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DialogPatternProperties) // NOLINT

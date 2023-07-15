@@ -31,11 +31,13 @@
 
 #include <QDialog>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 namespace Ui
 {
-    class DialogMDataBase;
+class DialogMDataBase;
 }
 
 class QTreeWidgetItem;
@@ -56,7 +58,7 @@ public:
     static auto ImgTag(const QString &number) -> QString;
 
 protected:
-    void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent *event) override;
     auto eventFilter(QObject *target, QEvent *event) -> bool override;
 
 private slots:

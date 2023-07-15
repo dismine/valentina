@@ -28,19 +28,22 @@
 #ifndef VPCOMMANDLINE_H
 #define VPCOMMANDLINE_H
 
-#include <memory>
-#include <QCoreApplication>
 #include <QCommandLineParser>
+#include <QCoreApplication>
 #include <ciso646>
+#include <memory>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 class VPCommandLine;
 using VPCommandLinePtr = std::shared_ptr<VPCommandLine>;
 
-class VPCommandLine: public QObject
+class VPCommandLine : public QObject
 {
     Q_OBJECT // NOLINT
+
 public:
     ~VPCommandLine() override = default;
 
@@ -57,16 +60,18 @@ public:
     auto IsNoScalingEnabled() const -> bool;
 
     Q_NORETURN void ShowHelp(int exitCode = 0);
+
 protected:
     VPCommandLine();
 
     /** @brief create the single instance of the class inside vpapplication */
     static auto Instance() -> VPCommandLinePtr;
     static void ProcessInstance(VPCommandLinePtr &instance, const QStringList &arguments);
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VPCommandLine) // NOLINT
-    static VPCommandLinePtr instance; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+    static VPCommandLinePtr instance;  // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
     QCommandLineParser parser{};
     bool isGuiEnabled{true};
     friend class VPApplication;
@@ -74,7 +79,7 @@ private:
     /** @brief add options to the QCommandLineParser that there are in the cmd can be */
     void InitCommandLineOptions();
 
-    auto IsOptionSet(const QString &option)const -> bool;
+    auto IsOptionSet(const QString &option) const -> bool;
     auto OptionValue(const QString &option) const -> QString;
     auto OptionValues(const QString &option) const -> QStringList;
 };

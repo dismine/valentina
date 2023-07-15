@@ -29,15 +29,17 @@
 #ifndef DIALOGDATETIMEFORMATS_H
 #define DIALOGDATETIMEFORMATS_H
 
-#include <QDialog>
 #include <QDate>
+#include <QDialog>
 #include <QTime>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 namespace Ui
 {
-    class DialogDateTimeFormats;
+class DialogDateTimeFormats;
 }
 
 class QListWidgetItem;
@@ -65,7 +67,7 @@ private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DialogDateTimeFormats) // NOLINT
     Ui::DialogDateTimeFormats *ui;
-    bool  m_dateMode;
+    bool m_dateMode;
     QDate m_date{};
     QTime m_time{};
     QStringList m_predefined;

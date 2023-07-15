@@ -31,11 +31,14 @@
 
 #include <QObject>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
-class TST_Misc :public QObject
+class TST_Misc : public QObject
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit TST_Misc(QObject *parent = nullptr);
 

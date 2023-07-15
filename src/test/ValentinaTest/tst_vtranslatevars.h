@@ -29,17 +29,20 @@
 #ifndef TST_VTRANSLATEVARS_H
 #define TST_VTRANSLATEVARS_H
 
-#include <QtCore/qglobal.h>
 #include <QLocale>
 #include <QObject>
+#include <QtCore/qglobal.h>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 class VTranslateVars;
 
 class TST_VTranslateVars : public QObject
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit TST_VTranslateVars(QObject *parent = nullptr);
 private slots:
@@ -49,6 +52,7 @@ private slots:
     void TestFormulaToUser_data();
     void TestFormulaToUser();
     void cleanupTestCase();
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(TST_VTranslateVars) // NOLINT

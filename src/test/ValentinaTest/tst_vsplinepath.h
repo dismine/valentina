@@ -31,11 +31,14 @@
 
 #include <QObject>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 class TST_VSplinePath : public QObject
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit TST_VSplinePath(QObject *parent = nullptr);
 private slots:
@@ -43,6 +46,7 @@ private slots:
     void TestRotation();
     void TestFlip_data();
     void TestFlip();
+
 private:
     Q_DISABLE_COPY_MOVE(TST_VSplinePath) // NOLINT
 };

@@ -29,11 +29,11 @@
 #ifndef VPTILEFACTORY_H
 #define VPTILEFACTORY_H
 
-#include <QtMath>
 #include <QObject>
+#include <QtMath>
 
-#include "layout/vplayout.h"
 #include "../ifc/ifcdef.h"
+#include "layout/layoutdef.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
@@ -108,7 +108,7 @@ private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VPTileFactory) // NOLINT
 
-    VPLayoutWeakPtr  m_layout;
+    VPLayoutWeakPtr m_layout;
     VCommonSettings *m_commonSettings{nullptr};
 
     /**

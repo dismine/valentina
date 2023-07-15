@@ -29,9 +29,11 @@
 #ifndef VWIDGETGROUPS_H
 #define VWIDGETGROUPS_H
 
-#include <QWidget>
 #include "../vmisc/typedef.h"
+#include <QWidget>
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 class QTableWidgetItem;
 class VAbstractPattern;
@@ -39,7 +41,7 @@ struct VGroupData;
 
 namespace Ui
 {
-    class VWidgetGroups;
+class VWidgetGroups;
 }
 
 class VWidgetGroups : public QWidget

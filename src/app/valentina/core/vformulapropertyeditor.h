@@ -29,13 +29,15 @@
 #ifndef VFORMULAPROPERTYEDITOR_H
 #define VFORMULAPROPERTYEDITOR_H
 
-#include <QWidget>
-#include <QToolButton>
-#include <QLineEdit>
 #include <QLabel>
+#include <QLineEdit>
+#include <QToolButton>
+#include <QWidget>
 
 #include "../vpatterndb/vformula.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 class VFormulaPropertyEditor : public QWidget
 {
@@ -56,7 +58,7 @@ public:
 
 signals:
     //! This is emitted, when the user changes the color
-    void dataChangedByUser(const VFormula &GetFormula, VFormulaPropertyEditor* editor);
+    void dataChangedByUser(const VFormula &GetFormula, VFormulaPropertyEditor *editor);
 
     void dataChanged();
 
@@ -71,9 +73,8 @@ private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VFormulaPropertyEditor) // NOLINT
     VFormula m_formula{};
-    QToolButton* m_ToolButton{nullptr};
-    QLabel* m_TextLabel{nullptr};
+    QToolButton *m_ToolButton{nullptr};
+    QLabel *m_TextLabel{nullptr};
 };
-
 
 #endif // VFORMULAPROPERTYEDITOR_H

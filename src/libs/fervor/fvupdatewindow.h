@@ -28,13 +28,15 @@
 #include <QString>
 #include <QtGlobal>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 class QGraphicsScene;
 
 namespace Ui
 {
-    class FvUpdateWindow;
+class FvUpdateWindow;
 }
 
 class FvUpdateWindow : public QDialog
@@ -52,7 +54,7 @@ private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(FvUpdateWindow) // NOLINT
 
-    Ui::FvUpdateWindow*	m_ui;
+    Ui::FvUpdateWindow *m_ui;
 };
 
 #endif // FVUPDATEWINDOW_H

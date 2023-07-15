@@ -21,7 +21,6 @@
 #ifndef VPROPERTYFACTORYMANAGER_H
 #define VPROPERTYFACTORYMANAGER_H
 
-
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
@@ -29,7 +28,9 @@
 
 #include "vpropertyexplorer_global.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 namespace VPE
 {
@@ -41,9 +42,10 @@ class VPropertyFactoryManagerPrivate;
 class VPROPERTYEXPLORERSHARED_EXPORT VPropertyFactoryManager : public QObject
 {
     Q_OBJECT // NOLINT
+
 public:
     //! Constructor
-    explicit VPropertyFactoryManager(QObject* parent = nullptr);
+    explicit VPropertyFactoryManager(QObject *parent = nullptr);
 
     //! Destructor
     virtual ~VPropertyFactoryManager() override;
@@ -51,7 +53,7 @@ public:
     //! Register a factory to the factory manager
     //! Note that the manager takes ownership of the factory, so don't delete it.
     //! You can unregister a factory using unregisterFactory()
-    void registerFactory(const QString& type, VAbstractPropertyFactory* factory);
+    void registerFactory(const QString &type, VAbstractPropertyFactory *factory);
 
     //! Removes a factory from the manager.
     //! \param factory The factory to unregister
@@ -59,7 +61,7 @@ public:
     //! for are being removed
     //! \param delete_if_unused Determines whether the factory should be deleted, if it not used anymore by this
     //! manager. Default: true. Otherwise, if the factory is unused by this manager, ownership is being passed on.
-    void unregisterFactory(VAbstractPropertyFactory* factory, const QString& type = QString(),
+    void unregisterFactory(VAbstractPropertyFactory *factory, const QString &type = QString(),
                            bool delete_if_unused = true);
 
     //! Returns whether a factory is registered (and thus owned) by this factory manager
@@ -80,20 +82,21 @@ public:
                         const QString &default_value = QString()) -> VProperty *;
 
     //! Returns the default manager.
-    //static VPropertyFactoryManager* getDefaultManager();
+    // static VPropertyFactoryManager* getDefaultManager();
 
     //! Returns a list of all supported property types
     auto getSupportedTypes() -> QStringList;
 
 protected:
-    VPropertyFactoryManagerPrivate* d_ptr;
+    VPropertyFactoryManagerPrivate *d_ptr;
 
     //! The default manager
-    static VPropertyFactoryManager* DefaultManager;
+    static VPropertyFactoryManager *DefaultManager;
+
 private:
     Q_DISABLE_COPY_MOVE(VPropertyFactoryManager) // NOLINT
 };
 
-}
+} // namespace VPE
 
 #endif // VPROPERTYFACTORYMANAGER_H

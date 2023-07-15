@@ -33,7 +33,9 @@
 #include <QPainter>
 
 #include "../layout/layoutdef.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 class VPLayout;
 
@@ -41,7 +43,7 @@ class VPGraphicsSheet : public QGraphicsItem
 {
 public:
     explicit VPGraphicsSheet(const VPLayoutPtr &layout, QGraphicsItem *parent = nullptr);
-    ~VPGraphicsSheet() override =default;
+    ~VPGraphicsSheet() override = default;
 
     auto boundingRect() const -> QRectF override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;

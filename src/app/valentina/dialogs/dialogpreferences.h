@@ -31,11 +31,13 @@
 
 #include <QDialog>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 namespace Ui
 {
-    class DialogPreferences;
+class DialogPreferences;
 }
 
 class PreferencesConfigurationPage;
@@ -53,20 +55,22 @@ public:
     ~DialogPreferences() override;
 signals:
     void UpdateProperties();
+
 protected:
     void showEvent(QShowEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
-    void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent *event) override;
 private slots:
     void PageChanged(QListWidgetItem *current, QListWidgetItem *previous);
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DialogPreferences) // NOLINT
     Ui::DialogPreferences *ui;
     bool m_isInitialized{false};
     PreferencesConfigurationPage *m_configurePage;
-    PreferencesPatternPage       *m_patternPage;
-    PreferencesPathPage          *m_pathPage;
+    PreferencesPatternPage *m_patternPage;
+    PreferencesPathPage *m_pathPage;
 
     void Apply();
     void Ok();

@@ -29,7 +29,6 @@
 #ifndef VISTOOLARCWITHLENGTH_H
 #define VISTOOLARCWITHLENGTH_H
 
-
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
@@ -38,14 +37,17 @@
 
 #include "../vmisc/def.h"
 #include "vispath.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 class VisToolArcWithLength final : public VisPath
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit VisToolArcWithLength(const VContainer *data, QGraphicsItem *parent = nullptr);
-    ~VisToolArcWithLength() override =default;
+    ~VisToolArcWithLength() override = default;
 
     void RefreshGeometry() override;
     void VisualMode(quint32 id) override;
@@ -55,18 +57,22 @@ public:
     void SetF1(const QString &expression);
     void SetLength(const QString &expression);
 
-    auto type() const -> int override {return Type;}
-    enum {Type = UserType + static_cast<int>(Vis::ToolArcWithLength)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::ToolArcWithLength)
+    };
 
     static auto CorrectAngle(qreal angle) -> qreal;
+
 private:
     Q_DISABLE_COPY_MOVE(VisToolArcWithLength) // NOLINT
     VScaledEllipse *m_arcCenter{nullptr};
     VScaledEllipse *m_f1Point{nullptr};
-    qreal           m_radius{0};
-    qreal           m_f1{-1};
-    qreal           m_length{0};
-    quint32         m_centerId{NULL_ID};
+    qreal m_radius{0};
+    qreal m_f1{-1};
+    qreal m_length{0};
+    quint32 m_centerId{NULL_ID};
 };
 
 //---------------------------------------------------------------------------------------------------------------------

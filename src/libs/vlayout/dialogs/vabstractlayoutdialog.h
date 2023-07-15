@@ -32,14 +32,17 @@
 #include <QComboBox>
 #include <QDialog>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 enum class Unit : qint8;
 
 class VAbstractLayoutDialog : public QDialog
 {
 public:
-    enum class PaperSizeTemplate : qint8 {
+    enum class PaperSizeTemplate : qint8
+    {
         A0 = 0,
         A1,
         A2,
@@ -72,7 +75,6 @@ protected:
     typedef int VIndexType;
 
     static auto RoundTemplateSize(qreal width, qreal height, Unit unit) -> QSizeF;
-
 
 private:
     Q_DISABLE_COPY_MOVE(VAbstractLayoutDialog) // NOLINT

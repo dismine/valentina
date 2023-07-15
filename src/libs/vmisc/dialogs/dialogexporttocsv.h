@@ -31,11 +31,13 @@
 
 #include <QDialog>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../defglobal.h"
+#endif
 
 namespace Ui
 {
-    class DialogExportToCSV;
+class DialogExportToCSV;
 }
 
 class DialogExportToCSV : public QDialog
@@ -53,7 +55,7 @@ public:
     void SetSelectedMib(int value);
 
     auto GetSeparator() const -> QChar;
-    void  SetSeparator(const QChar &separator);
+    void SetSeparator(const QChar &separator);
 
     void ShowFilePreview(const QString &fileName);
 
@@ -61,7 +63,7 @@ public:
     static auto MakeHelpSeparatorList() -> QString;
 
 protected:
-    virtual void changeEvent(QEvent* event) override;
+    virtual void changeEvent(QEvent *event) override;
     virtual void showEvent(QShowEvent *event) override;
 
 private:

@@ -33,7 +33,9 @@
 #include <QIcon>
 #include <QPropertyAnimation>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 class FancyTab final : public QObject
 {
@@ -41,11 +43,12 @@ class FancyTab final : public QObject
     Q_OBJECT // NOLINT
 
     Q_PROPERTY(double fader READ fader WRITE setFader)
+
 public:
     explicit FancyTab(QWidget *tabbar);
 
     auto fader() -> double;
-    void   setFader(double value);
+    void setFader(double value);
 
     void fadeIn();
     void fadeOut();
@@ -53,13 +56,13 @@ public:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(FancyTab) // NOLINT
-    QIcon              m_icon;
-    QString            m_text;
-    QString            m_toolTip;
-    bool               m_enabled;
+    QIcon m_icon;
+    QString m_text;
+    QString m_toolTip;
+    bool m_enabled;
     QPropertyAnimation m_Animator;
-    QWidget           *m_TabBar;
-    double             m_Fader;
+    QWidget *m_TabBar;
+    double m_Fader;
 };
 
 #endif // FANCYTAB_H

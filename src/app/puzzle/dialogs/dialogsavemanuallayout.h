@@ -30,6 +30,7 @@
 
 #include "../vlayout/dialogs/vabstractlayoutdialog.h"
 #include "../vlayout/vlayoutdef.h"
+#include "../vmisc/defglobal.h"
 
 namespace Ui
 {
@@ -57,7 +58,7 @@ public:
     void SetShowGrainline(bool show);
     auto IsShowGrainline() const -> bool;
 
-    void SetDestinationPath(const QString& cmdDestinationPath);
+    void SetDestinationPath(const QString &cmdDestinationPath);
 
     auto IsTextAsPaths() const -> bool;
     void SetTextAsPaths(bool textAsPaths);
@@ -86,7 +87,7 @@ private:
     bool m_consoleExport;
 
     static auto SupportPSTest() -> bool;
-    static auto InitFormats() -> QVector<std::pair<QString, LayoutExportFormats> >;
+    static auto InitFormats() -> QVector<std::pair<QString, LayoutExportFormats>>;
 
     void RemoveFormatFromList(LayoutExportFormats format);
 

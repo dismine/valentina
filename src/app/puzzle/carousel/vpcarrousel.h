@@ -29,13 +29,15 @@
 #ifndef VPCARROUSEL_H
 #define VPCARROUSEL_H
 
-#include <QWidget>
 #include <QComboBox>
 #include <QScrollArea>
 #include <QUuid>
+#include <QWidget>
 
 #include "../layout/layoutdef.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 namespace Ui
 {
@@ -54,6 +56,7 @@ struct VPCarrouselSheet
 class VPCarrousel : public QWidget
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit VPCarrousel(const VPLayoutPtr &layout, QWidget *parent = nullptr);
     ~VPCarrousel() override = default;
@@ -87,7 +90,7 @@ public slots:
     void on_ActiveSheetChanged(const VPSheetPtr &sheet);
 
 protected:
-    void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent *event) override;
 
 private slots:
 

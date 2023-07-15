@@ -30,11 +30,13 @@
 
 #include <QDialog>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 namespace Ui
 {
-    class DialogPuzzlePreferences;
+class DialogPuzzlePreferences;
 }
 
 class PuzzlePreferencesConfigurationPage;
@@ -56,7 +58,7 @@ signals:
 protected:
     void showEvent(QShowEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
-    void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent *event) override;
 
 private slots:
     void Apply();
@@ -69,8 +71,8 @@ private:
     Ui::DialogPuzzlePreferences *ui;
     bool m_isInitialized{false};
     PuzzlePreferencesConfigurationPage *m_configurationPage;
-    PuzzlePreferencesLayoutPage        *m_layoutPage;
-    PuzzlePreferencesPathPage          *m_pathPage;
+    PuzzlePreferencesLayoutPage *m_layoutPage;
+    PuzzlePreferencesPathPage *m_pathPage;
 };
 
 #endif // DIALOGPUZZLEPREFERENCES_H

@@ -28,17 +28,20 @@
 #ifndef TST_ABSTRACTTRANSLATION_H
 #define TST_ABSTRACTTRANSLATION_H
 
-#include <QObject>
-#include <QFile>
-#include <QSharedPointer>
 #include <QDomDocument>
+#include <QFile>
+#include <QObject>
+#include <QSharedPointer>
 #include <ciso646>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 class TST_AbstractTranslation : public QObject
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit TST_AbstractTranslation(QObject *parent = nullptr);
 

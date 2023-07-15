@@ -31,11 +31,13 @@
 
 #include <QDialog>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 namespace Ui
 {
-    class DialogTapePreferences;
+class DialogTapePreferences;
 }
 
 class TapePreferencesConfigurationPage;
@@ -51,21 +53,23 @@ public:
     ~DialogTapePreferences() override;
 signals:
     void UpdateProperties();
+
 protected:
     void showEvent(QShowEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
-    void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent *event) override;
 private slots:
     void Apply();
     void Ok();
     void PageChanged(QListWidgetItem *current, QListWidgetItem *previous);
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DialogTapePreferences) // NOLINT
     Ui::DialogTapePreferences *ui;
     bool m_isInitialized{false};
     TapePreferencesConfigurationPage *m_configurationPage;
-    TapePreferencesPathPage          *m_pathPage;
+    TapePreferencesPathPage *m_pathPage;
 };
 
 #endif // DIALOGTAPEPREFERENCES_H

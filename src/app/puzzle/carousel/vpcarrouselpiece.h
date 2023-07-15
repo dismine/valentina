@@ -28,18 +28,23 @@
 #ifndef VPCARROUSELPIECE_H
 #define VPCARROUSELPIECE_H
 
-#include <QMouseEvent>
 #include <QListWidgetItem>
+#include <QMouseEvent>
 
 #include "../layout/layoutdef.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 class VPCarrouselPiece : public QListWidgetItem
 {
 public:
-    enum { Type = UserType + 1};
+    enum
+    {
+        Type = UserType + 1
+    };
 
-    explicit VPCarrouselPiece(const VPPiecePtr &piece, QListWidget* parent);
+    explicit VPCarrouselPiece(const VPPiecePtr &piece, QListWidget *parent);
     ~VPCarrouselPiece() override = default;
 
     /**
@@ -59,7 +64,6 @@ public:
      * @return the created icon
      */
     auto CreatePieceIcon(const QSize &size, bool isDragIcon = false) const -> QIcon;
-
 
 private:
     // cppcheck-suppress unknownMacro

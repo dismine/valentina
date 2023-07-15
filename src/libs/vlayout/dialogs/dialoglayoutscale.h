@@ -30,11 +30,13 @@
 
 #include <QDialog>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 namespace Ui
 {
-    class DialogLayoutScale;
+class DialogLayoutScale;
 }
 
 class DialogLayoutScale final : public QDialog
@@ -45,13 +47,13 @@ public:
     explicit DialogLayoutScale(bool printTiled, QWidget *parent = nullptr);
     ~DialogLayoutScale();
 
-    void      SetTiledMargins(QMarginsF margins);
+    void SetTiledMargins(QMarginsF margins);
     auto GetTiledMargins() const -> QMarginsF;
 
-    void  SetXScale(qreal scale);
+    void SetXScale(qreal scale);
     auto GetXScale() const -> qreal;
 
-    void  SetYScale(qreal scale);
+    void SetYScale(qreal scale);
     auto GetYScale() const -> qreal;
 
 protected:

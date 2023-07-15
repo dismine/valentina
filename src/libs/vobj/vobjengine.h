@@ -29,7 +29,6 @@
 #ifndef VOBJENGINE_H
 #define VOBJENGINE_H
 
-
 #include <QPaintEngine>
 #include <QPolygonF>
 #include <QRectF>
@@ -38,11 +37,13 @@
 #include <QtGlobal>
 
 #include "delaunay.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 class QTextStream;
 
-#define MAX_POINTS      512
+#define MAX_POINTS 512
 
 class VObjEngine final : public QPaintEngine
 {
@@ -74,13 +75,13 @@ private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VObjEngine) // NOLINT
     QSharedPointer<QTextStream> stream;
-    quint32     globalPointsCount;
+    quint32 globalPointsCount;
     QSharedPointer<QIODevice> outputDevice;
-    del_point2d_t    points[MAX_POINTS];
-    quint32     planeCount;
-    QSize            size;
-    int              resolution;
-    QTransform       matrix;
+    del_point2d_t points[MAX_POINTS];
+    quint32 planeCount;
+    QSize size;
+    int resolution;
+    QTransform matrix;
 
     auto MakePointsUnique(const QPolygonF &polygon) const -> QPolygonF;
     auto Square(const QPolygonF &poly) const -> qint64;

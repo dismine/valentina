@@ -31,11 +31,14 @@
 
 #include <QObject>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
+#endif
 
 class TST_VCubicBezierPath : public QObject
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit TST_VCubicBezierPath(QObject *parent = nullptr);
 
@@ -49,7 +52,6 @@ private slots:
 
 private:
     Q_DISABLE_COPY_MOVE(TST_VCubicBezierPath) // NOLINT
-
 };
 
 #endif // TST_VCUBICBEZIERPATH_H
