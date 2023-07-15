@@ -51,7 +51,7 @@ environment:
       BUILD_SYSTEM: "qbs"
       QMAKE: qmake.exe
       ENABLE_PCH: true
-      GCC_VERSION: 9.0
+      GCC_VERSION: 9
       MINGW_PATH: C:\Qt\6.5\mingw_64\bin
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
@@ -153,7 +153,7 @@ environment:
       BUILD_SYSTEM: "qbs"
       QMAKE: qmake.exe
       ENABLE_PCH: true
-      GCC_VERSION: 9.0
+      GCC_VERSION: 9
       MINGW_PATH: C:\Qt\6.5\mingw_64\bin
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
