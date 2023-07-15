@@ -68,7 +68,7 @@ template <class T> class QSharedPointer;
 #endif
 #endif
 
-#if defined(Q_COMPILER_GCC) && defined(Q_CC_GNU) && defined(Q_CC_GNU_VERSION) && (Q_CC_GNU_VERSION <= 40900)
+#if (defined(Q_CC_GNU) && Q_CC_GNU <= 409) && !defined(Q_CC_CLANG)
 // NOLINTNEXTLINE(cppcoreguidelines-macro-usage)
 #define COPY_CONSTRUCTOR_IMPL(className)                                                                               \
     className::className(const className &item)                                                                        \
@@ -88,6 +88,18 @@ template <class T> class QSharedPointer;
 #define COPY_CONSTRUCTOR_IMPL(className) className::className(const className &) = default;
 // NOLINTNEXTLINE(cppcoreguidelines-macro-usage)
 #define COPY_CONSTRUCTOR_IMPL_2(className, baseClassName) className::className(const className &) = default;
+#endif
+
+// https://stackoverflow.com/questions/75008386/constructor-is-implicitly-deleted-because-its-exception-specification-does-not-m
+#if (defined(Q_CC_GNU) && Q_CC_GNU < 1001) && !defined(Q_CC_CLANG)
+// NOLINTNEXTLINE(cppcoreguidelines-macro-usage)
+#define DEF_CONSTRUCTOR(className)                                                                                     \
+    className() noexcept                                                                                               \
+    {                                                                                                                  \
+    }
+#else
+// NOLINTNEXTLINE(cppcoreguidelines-macro-usage)
+#define DEF_CONSTRUCTOR(className) className() noexcept = default;
 #endif
 
 class QComboBox;

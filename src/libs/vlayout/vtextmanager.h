@@ -39,6 +39,7 @@
 #include <Qt>
 #include <QtGlobal>
 
+#include "../vmisc/def.h"
 #include "../vmisc/defglobal.h"
 
 class VPieceLabelData;
@@ -74,7 +75,7 @@ class VTextManager
     Q_DECLARE_TR_FUNCTIONS(VTextManager) // NOLINT
 
 public:
-    VTextManager() noexcept = default;
+    DEF_CONSTRUCTOR(VTextManager)
     virtual ~VTextManager() = default;
 
     VTextManager(const VTextManager &text) = default;
