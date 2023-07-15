@@ -517,7 +517,7 @@ void VHPGLEngine::PlotInternalPaths(QTextStream &out, const VLayoutPiece &detail
     QVector<VLayoutPiecePath> internalPaths = detail.GetInternalPaths();
     for (const auto &path : internalPaths)
     {
-        QVector<VLayoutPoint> points = VLayoutPiece::Map(path.Points(), detail.GetMatrix(), detail.IsMirror());
+        QVector<VLayoutPoint> points = VLayoutPiece::MapVector(path.Points(), detail.GetMatrix(), detail.IsMirror());
         PlotPath(out, CastToPoint(ConvertPath(points)), path.PenStyle());
     }
 }
