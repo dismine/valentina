@@ -221,13 +221,13 @@ public:
 
     auto MapPlaceLabelShape(PlaceLabelImg shape) const -> PlaceLabelImg;
 
-    template <class T> static auto Map(QVector<T> points, const QTransform &matrix, bool mirror) -> QVector<T>;
+    template <class T> static auto MapVector(QVector<T> points, const QTransform &matrix, bool mirror) -> QVector<T>;
 
     template <class T>
-    static auto Map(T obj, const QTransform &matrix) -> typename std::enable_if<!IsLayoutPoint<T>::value, T>::type;
+    static auto MapPoint(T obj, const QTransform &matrix) -> typename std::enable_if<!IsLayoutPoint<T>::value, T>::type;
 
     template <class T>
-    static auto Map(T obj, const QTransform &matrix) -> typename std::enable_if<IsLayoutPoint<T>::value, T>::type;
+    static auto MapPoint(T obj, const QTransform &matrix) -> typename std::enable_if<IsLayoutPoint<T>::value, T>::type;
 
 protected:
     void SetGrainline(const VPieceGrainline &grainline);
@@ -261,10 +261,11 @@ QT_WARNING_POP
 Q_DECLARE_TYPEINFO(VLayoutPiece, Q_MOVABLE_TYPE); // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class T> inline auto VLayoutPiece::Map(QVector<T> points, const QTransform &matrix, bool mirror) -> QVector<T>
+template <class T>
+inline auto VLayoutPiece::MapVector(QVector<T> points, const QTransform &matrix, bool mirror) -> QVector<T>
 {
     std::transform(points.begin(), points.end(), points.begin(),
-                   [matrix](const T &point) { return VLayoutPiece::Map(point, matrix); });
+                   [matrix](const T &point) { return MapPoint(point, matrix); });
     if (mirror)
     {
         std::reverse(points.begin(), points.end());
@@ -274,14 +275,16 @@ template <class T> inline auto VLayoutPiece::Map(QVector<T> points, const QTrans
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
-auto VLayoutPiece::Map(T obj, const QTransform &matrix) -> typename std::enable_if<!IsLayoutPoint<T>::value, T>::type
+auto VLayoutPiece::MapPoint(T obj, const QTransform &matrix) ->
+    typename std::enable_if<!IsLayoutPoint<T>::value, T>::type
 {
     return matrix.map(obj);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
-auto VLayoutPiece::Map(T obj, const QTransform &matrix) -> typename std::enable_if<IsLayoutPoint<T>::value, T>::type
+auto VLayoutPiece::MapPoint(T obj, const QTransform &matrix) ->
+    typename std::enable_if<IsLayoutPoint<T>::value, T>::type
 {
     auto p = matrix.map(obj);
     obj.setX(p.x());

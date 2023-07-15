@@ -1944,5 +1944,5 @@ auto VLayoutPiece::EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) 
 //---------------------------------------------------------------------------------------------------------------------
 template <class T> auto VLayoutPiece::Map(QVector<T> points) const -> QVector<T>
 {
-    return Map(points, d->m_matrix, d->m_mirror);
+    return MapVector(points, d->m_matrix, d->m_mirror);
 }
