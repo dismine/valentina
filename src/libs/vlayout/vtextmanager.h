@@ -74,7 +74,7 @@ class VTextManager
     Q_DECLARE_TR_FUNCTIONS(VTextManager) // NOLINT
 
 public:
-    VTextManager() = default;
+    VTextManager() noexcept = default;
     virtual ~VTextManager() = default;
 
     VTextManager(const VTextManager &text) = default;
