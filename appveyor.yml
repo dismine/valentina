@@ -52,7 +52,7 @@ environment:
       QMAKE: qmake.exe
       ENABLE_PCH: true
       GCC_VERSION: 9
-      MINGW_PATH: C:\Qt\6.5\mingw_64\bin
+      MINGW_PATH: C:\Qt\Tools\mingw_64\bin
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows10+"
@@ -406,6 +406,7 @@ for:
     - del /F "C:\Program Files\Git\bin\sh.exe"
     - dir "C:\"
     - dir "C:\Qt"
+    - dir "C:\Qt\Tools"
     - dir %QTDIR%
     - dir "%QTDIR%\bin"
     - qbs --version
