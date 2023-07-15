@@ -400,8 +400,12 @@ auto VGAnalytics::GetTerritoryCode(QLocale::Country territory) -> QString
         {QLocale::Swaziland, QLatin1String("SZ")},
 #endif
         {QLocale::Ethiopia, QLatin1String("ET")},
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
         {QLocale::Europe, QLatin1String("150")},
+#endif
+#if QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
         {QLocale::EuropeanUnion, QLatin1String("EU")},
+#endif
         {QLocale::FalklandIslands, QLatin1String("FK")},
         {QLocale::FaroeIslands, QLatin1String("FO")},
         {QLocale::Fiji, QLatin1String("FJ")},
@@ -503,7 +507,9 @@ auto VGAnalytics::GetTerritoryCode(QLocale::Country territory) -> QString
         {QLocale::NorthKorea, QLatin1String("KP")},
         {QLocale::Norway, QLatin1String("NO")},
         {QLocale::Oman, QLatin1String("OM")},
+#if QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
         {QLocale::OutlyingOceania, QLatin1String("QO")},
+#endif
         {QLocale::Pakistan, QLatin1String("PK")},
         {QLocale::Palau, QLatin1String("PW")},
         {QLocale::PalestinianTerritories, QLatin1String("PS")},
@@ -613,7 +619,9 @@ auto VGAnalytics::GetTerritoryCode(QLocale::Country territory) -> QString
         {QLocale::WallisAndFutunaIslands, QLatin1String("WF")},
 #endif
         {QLocale::WesternSahara, QLatin1String("EH")},
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
         {QLocale::World, QLatin1String("001")},
+#endif
         {QLocale::Yemen, QLatin1String("YE")},
         {QLocale::Zambia, QLatin1String("ZM")},
         {QLocale::Zimbabwe, QLatin1String("ZW")},
