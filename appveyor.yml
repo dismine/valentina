@@ -51,8 +51,8 @@ environment:
       BUILD_SYSTEM: "qbs"
       QMAKE: qmake.exe
       ENABLE_PCH: true
-      GCC_VERSION: 11.2
-      MINGW_PATH: C:\Qt\Tools\mingw1120_64\bin
+      GCC_VERSION: 8.1
+      MINGW_PATH: C:\Qt\Tools\mingw810_64\bin
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows10+"
@@ -153,8 +153,8 @@ environment:
       BUILD_SYSTEM: "qbs"
       QMAKE: qmake.exe
       ENABLE_PCH: true
-      GCC_VERSION: 11.2
-      MINGW_PATH: C:\Qt\6.5\mingw1120_64\bin
+      GCC_VERSION: 8.1
+      MINGW_PATH: C:\Qt\6.5\mingw810_64\bin
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows10+"
