@@ -29,11 +29,11 @@
 #ifndef VGRAINLINEGEOMETRY_H
 #define VGRAINLINEGEOMETRY_H
 
-#include <QString>
 #include <QPointF>
+#include <QString>
 
-#include "vabstractfloatitemdata.h"
 #include "floatitemdef.h"
+#include "vabstractfloatitemdata.h"
 
 class VGrainlineDataPrivate;
 
@@ -47,36 +47,35 @@ public:
     VGrainlineData();
     VGrainlineData(const VGrainlineData &data);
 
-    virtual ~VGrainlineData();
+    ~VGrainlineData() override;
 
     auto operator=(const VGrainlineData &data) -> VGrainlineData &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VGrainlineData(VGrainlineData &&data) noexcept;
-    auto operator=(VGrainlineData &&data) noexcept->VGrainlineData &;
+    auto operator=(VGrainlineData &&data) noexcept -> VGrainlineData &;
 #endif
 
     // methods, which set and return values of different parameters
     auto GetLength() const -> QString;
-    void    SetLength(const QString& qsLen);
+    void SetLength(const QString &qsLen);
 
     auto GetRotation() const -> QString;
-    void    SetRotation(const QString& qsRot);
+    void SetRotation(const QString &qsRot);
 
     auto GetArrowType() const -> GrainlineArrowDirection;
-    void      SetArrowType(GrainlineArrowDirection eAT);
+    void SetArrowType(GrainlineArrowDirection eAT);
 
     auto CenterPin() const -> quint32;
-    void    SetCenterPin(quint32 centerPin);
+    void SetCenterPin(quint32 centerPin);
 
     auto TopPin() const -> quint32;
-    void    SetTopPin(quint32 topPin);
+    void SetTopPin(quint32 topPin);
 
     auto BottomPin() const -> quint32;
-    void    SetBottomPin(quint32 bottomPin);
+    void SetBottomPin(quint32 bottomPin);
 
 private:
     QSharedDataPointer<VGrainlineDataPrivate> d;
 };
 
 #endif // VGRAINLINEGEOMETRY_H
-

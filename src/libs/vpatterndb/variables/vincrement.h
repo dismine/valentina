@@ -49,7 +49,7 @@ public:
     VIncrement(VContainer *data, const QString &name, IncrementType incrType = IncrementType::Increment);
     VIncrement(const VIncrement &incr);
 
-    virtual ~VIncrement() override;
+    ~VIncrement() override;
 
     auto operator=(const VIncrement &incr) -> VIncrement &;
 #ifdef Q_COMPILER_RVALUE_REFS

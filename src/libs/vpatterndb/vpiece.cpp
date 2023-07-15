@@ -27,29 +27,29 @@
  *************************************************************************/
 
 #include "vpiece.h"
-#include "vpiece_p.h"
-#include "vpassmark.h"
-#include "../vgeometry/vpointf.h"
-#include "../vgeometry/vabstractcurve.h"
-#include "../vgeometry/vplacelabelitem.h"
-#include "../vgeometry/vlayoutplacelabel.h"
-#include "vcontainer.h"
-#include "../vmisc/vabstractvalapplication.h"
-#include "../vmisc/compatibility.h"
 #include "../ifc/exception/vexceptioninvalidnotch.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
-#include "../vmisc/testpath.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vpatterndb/vpiecenode.h"
+#include "../vgeometry/vabstractcurve.h"
+#include "../vgeometry/vlayoutplacelabel.h"
+#include "../vgeometry/vplacelabelitem.h"
+#include "../vgeometry/vpointf.h"
+#include "../vmisc/compatibility.h"
+#include "../vmisc/testpath.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vpatterndb/variables/vpiecearea.h"
+#include "../vpatterndb/vpiecenode.h"
+#include "vcontainer.h"
+#include "vpassmark.h"
+#include "vpiece_p.h"
 
-#include <QSharedPointer>
 #include <QDebug>
-#include <QPainterPath>
-#include <QTemporaryFile>
-#include <QJsonObject>
-#include <QJsonDocument>
 #include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QPainterPath>
+#include <QSharedPointer>
+#include <QTemporaryFile>
 
 namespace
 {
@@ -93,7 +93,7 @@ auto IsPassmarksPossible(const QVector<VPieceNode> &path) -> bool
     {
         if (node.IsExcluded())
         {
-            continue;// skip node
+            continue; // skip node
         }
 
         node.GetTypeTool() == Tool::NodePoint ? ++countPointNodes : ++countOthers;
@@ -116,18 +116,18 @@ auto RotatePath(const QVector<VPieceNode> &path, vsizetype index) -> QVector<VPi
 
 //---------------------------------------------------------------------------------------------------------------------
 VPiece::VPiece()
-    : VAbstractPiece(), d(new VPieceData(PiecePathType::PiecePath))
-{}
+  : VAbstractPiece(),
+    d(new VPieceData(PiecePathType::PiecePath))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VPiece::VPiece(const VPiece &piece)
-    : VAbstractPiece(piece), d (piece.d)
-{}
+COPY_CONSTRUCTOR_IMPL_2(VPiece, VAbstractPiece)
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPiece::operator=(const VPiece &piece) -> VPiece &
 {
-    if ( &piece == this )
+    if (&piece == this)
     {
         return *this;
     }
@@ -139,11 +139,13 @@ auto VPiece::operator=(const VPiece &piece) -> VPiece &
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VPiece::VPiece(VPiece &&piece) noexcept
-    : VAbstractPiece(std::move(piece)), d (std::move(piece.d))
-{}
+  : VAbstractPiece(std::move(piece)),
+    d(std::move(piece.d))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPiece::operator=(VPiece &&piece) noexcept->VPiece &
+auto VPiece::operator=(VPiece &&piece) noexcept -> VPiece &
 {
     VAbstractPiece::operator=(piece);
     std::swap(d, piece.d);
@@ -152,8 +154,7 @@ auto VPiece::operator=(VPiece &&piece) noexcept->VPiece &
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VPiece::~VPiece()
-{}
+VPiece::~VPiece() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPiece::GetPath() const -> VPiecePath
@@ -176,15 +177,15 @@ void VPiece::SetPath(const VPiecePath &path)
 //---------------------------------------------------------------------------------------------------------------------
 auto VPiece::MainPathPoints(const VContainer *data) const -> QVector<VLayoutPoint>
 {
-//    DumpPiece(*this, data, QStringLiteral("input.json.XXXXXX"));  // Uncomment for dumping test data
+    //    DumpPiece(*this, data, QStringLiteral("input.json.XXXXXX"));  // Uncomment for dumping test data
 
     VPiecePath mainPath = GetPath();
     mainPath.SetName(QCoreApplication::translate("VPiece", "Main path of piece %1").arg(GetName()));
 
     QVector<VLayoutPoint> points = mainPath.PathPoints(data);
-    points = CheckLoops(CorrectEquidistantPoints(points));//A path can contains loops
+    points = CheckLoops(CorrectEquidistantPoints(points)); // A path can contains loops
 
-//    DumpVector(points, QStringLiteral("output.json.XXXXXX")); // Uncomment for dumping test data
+    //    DumpVector(points, QStringLiteral("output.json.XXXXXX")); // Uncomment for dumping test data
     return points;
 }
 
@@ -192,7 +193,7 @@ auto VPiece::MainPathPoints(const VContainer *data) const -> QVector<VLayoutPoin
 auto VPiece::UniteMainPathPoints(const VContainer *data) const -> QVector<VLayoutPoint>
 {
     QVector<VLayoutPoint> points = VPiecePath::NodesToPoints(data, GetUnitedPath(data), GetName());
-    points = CheckLoops(CorrectEquidistantPoints(points));//A path can contains loops
+    points = CheckLoops(CorrectEquidistantPoints(points)); // A path can contains loops
     return points;
 }
 
@@ -227,7 +228,7 @@ auto VPiece::PassmarksLines(const VContainer *data) const -> QVector<QLineF>
 {
     QVector<VPassmark> passmarks = Passmarks(data);
     QVector<QLineF> lines;
-    for(auto &passmark : passmarks)
+    for (auto &passmark : passmarks)
     {
         if (not passmark.IsNull())
         {
@@ -249,12 +250,12 @@ auto VPiece::Passmarks(const VContainer *data) const -> QVector<VPassmark>
 
     QVector<VPassmark> passmarks;
 
-    for (int i = 0; i< unitedPath.size(); ++i)
+    for (int i = 0; i < unitedPath.size(); ++i)
     {
         const VPieceNode &node = unitedPath.at(i);
         if (node.IsExcluded() || not node.IsPassmark())
         {
-            continue;// skip node
+            continue; // skip node
         }
 
         const vsizetype previousIndex = VPiecePath::FindInLoopNotExcludedUp(i, unitedPath);
@@ -333,7 +334,7 @@ auto VPiece::PassmarksPath(const VContainer *data) const -> QPainterPath
 auto VPiece::PlaceLabelPath(const VContainer *data) const -> QPainterPath
 {
     QPainterPath path;
-    for(auto placeLabel : d->m_placeLabels)
+    for (auto placeLabel : d->m_placeLabels)
     {
         try
         {
@@ -662,16 +663,16 @@ auto VPiece::SeamAllowancePointsWithRotation(const VContainer *data, vsizetype m
     int recordIndex = -1;
     bool insertingCSA = false;
     const qreal width = ToPixel(GetSAWidth(), *data->GetPatternUnit());
-    const QVector<VPieceNode> unitedPath = makeFirst > 0 ? RotatePath(GetUnitedPath(data), makeFirst)
-                                                         : GetUnitedPath(data);
+    const QVector<VPieceNode> unitedPath =
+        makeFirst > 0 ? RotatePath(GetUnitedPath(data), makeFirst) : GetUnitedPath(data);
 
     QVector<VSAPoint> pointsEkv;
-    for (int i = 0; i< unitedPath.size(); ++i)
+    for (int i = 0; i < unitedPath.size(); ++i)
     {
         const VPieceNode &node = unitedPath.at(i);
         if (node.IsExcluded())
         {
-            continue;// skip excluded node
+            continue; // skip excluded node
         }
 
         switch (node.GetTypeTool())
@@ -727,7 +728,7 @@ auto VPiece::SeamAllowancePointsWithRotation(const VContainer *data, vsizetype m
             }
             break;
             default:
-                qDebug()<<"Get wrong tool type. Ignore."<< static_cast<char>(node.GetTypeTool());
+                qDebug() << "Get wrong tool type. Ignore." << static_cast<char>(node.GetTypeTool());
                 break;
         }
     }
@@ -777,12 +778,12 @@ auto VPiece::GetUnitedPath(const VContainer *data) const -> QVector<VPieceNode>
             QVector<VPieceNode> midAfter;
             if (indexStartPoint <= indexEndPoint)
             {
-                midBefore = united.mid(0, indexStartPoint+1);
+                midBefore = united.mid(0, indexStartPoint + 1);
                 midAfter = united.mid(indexEndPoint, united.size() - midBefore.size());
             }
             else
             {
-                midBefore = united.mid(indexEndPoint, indexStartPoint+1);
+                midBefore = united.mid(indexEndPoint, indexStartPoint + 1);
             }
 
             QVector<VPieceNode> customNodes = data->GetPiecePath(records.at(i).path).GetNodes();
@@ -827,13 +828,9 @@ auto VPiece::GetValidRecords() const -> QVector<CustomSARecord>
         const int indexStartPoint = d->m_path.indexOfNode(record.startPoint);
         const int indexEndPoint = d->m_path.indexOfNode(record.endPoint);
 
-        if (record.startPoint > NULL_ID
-                && record.path > NULL_ID
-                && record.endPoint > NULL_ID
-                && indexStartPoint != -1
-                && not d->m_path.at(indexStartPoint).IsExcluded()
-                && indexEndPoint != -1
-                && not d->m_path.at(indexEndPoint).IsExcluded())
+        if (record.startPoint > NULL_ID && record.path > NULL_ID && record.endPoint > NULL_ID &&
+            indexStartPoint != -1 && not d->m_path.at(indexStartPoint).IsExcluded() && indexEndPoint != -1 &&
+            not d->m_path.at(indexEndPoint).IsExcluded())
         {
             records.append(record);
         }
@@ -865,12 +862,12 @@ auto VPiece::FilterRecords(QVector<CustomSARecord> records) const -> QVector<Cus
         QVector<VPieceNode> midAfter;
         if (indexStartPoint <= indexEndPoint)
         {
-            midBefore = path.mid(0, indexStartPoint+1);
+            midBefore = path.mid(0, indexStartPoint + 1);
             midAfter = path.mid(indexEndPoint, path.size() - midBefore.size());
         }
         else
         {
-            midBefore = path.mid(indexEndPoint, indexStartPoint+1);
+            midBefore = path.mid(indexEndPoint, indexStartPoint + 1);
         }
 
         path = midBefore + midAfter;
@@ -937,14 +934,15 @@ auto VPiece::GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path, vsizet
     if (points.isEmpty())
     {
         const QString errorMsg = tr("Cannot calculate a notch for point '%1' in piece '%2'.")
-                .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
-        VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+                                     .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VExceptionInvalidNotch(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         return false; // Something wrong
     }
 
     bool found = false;
-    auto nodeIndex = points.size()-1;
+    auto nodeIndex = points.size() - 1;
     do
     {
         const VSAPoint previous = points.at(nodeIndex);
@@ -976,9 +974,10 @@ auto VPiece::GetPassmarkNextSAPoints(const QVector<VPieceNode> &path, vsizetype 
     if (points.isEmpty())
     {
         const QString errorMsg = tr("Cannot calculate a notch for point '%1' in piece '%2'.")
-                .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
-        VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+                                     .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VExceptionInvalidNotch(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         return false; // Something wrong
     }
 
@@ -1060,9 +1059,10 @@ auto VPiece::CreatePassmark(const QVector<VPieceNode> &path, vsizetype previousI
     if (not GetPassmarkSAPoint(path, passmarkIndex, data, passmarkSAPoint))
     {
         const QString errorMsg = tr("Cannot calculate a notch for point '%1' in piece '%2'.")
-                .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
-        VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+                                     .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VExceptionInvalidNotch(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         return {};
     }
 
@@ -1085,12 +1085,11 @@ auto VPiece::CreatePassmark(const QVector<VPieceNode> &path, vsizetype previousI
         return {};
     }
 
-    if (passmarkSAPoint.IsManualPasskmarkLength()
-            && passmarkSAPoint.GetPasskmarkLength() <= accuracyPointOnLine)
+    if (passmarkSAPoint.IsManualPasskmarkLength() && passmarkSAPoint.GetPasskmarkLength() <= accuracyPointOnLine)
     {
         const QString infoMsg = tr("Notch for point '%1' in piece '%2' will be disabled. Manual length is less than "
-                                    "allowed value.")
-                .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
+                                   "allowed value.")
+                                    .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
 #if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
         qInfo() << VAbstractValApplication::warningMessageSignature + infoMsg;
 #else
@@ -1143,7 +1142,7 @@ auto VPiece::Area(const QVector<QPointF> &shape, const VContainer *data) const -
 {
     SCASSERT(data != nullptr)
 
-    const qreal mainArea = qAbs(VAbstractPiece::SumTrapezoids(shape))/2.0;
+    const qreal mainArea = qAbs(VAbstractPiece::SumTrapezoids(shape)) / 2.0;
 
     qreal internalPathArea = 0;
     const QVector<quint32> pathsId = GetInternalPaths();
@@ -1163,7 +1162,7 @@ auto VPiece::Area(const QVector<QPointF> &shape, const VContainer *data) const -
             continue;
         }
 
-        internalPathArea += qAbs(VAbstractPiece::SumTrapezoids(points))/2.0;
+        internalPathArea += qAbs(VAbstractPiece::SumTrapezoids(points)) / 2.0;
     }
 
     return mainArea - internalPathArea;
@@ -1243,8 +1242,7 @@ qreal VPiece::GlobalPassmarkWidth(const VContainer *data) const
 //---------------------------------------------------------------------------------------------------------------------
 auto VPiece::MainPathToJson() const -> QJsonObject
 {
-    QJsonObject pieceObject
-    {
+    QJsonObject pieceObject{
         {"seamAllowance", IsSeamAllowance()},
         {"saWidth", GetSAWidth()},
     };
@@ -1252,8 +1250,7 @@ auto VPiece::MainPathToJson() const -> QJsonObject
     QJsonArray nodesArray;
     for (qint32 i = 0; i < d->m_path.CountNodes(); ++i)
     {
-        QJsonObject nodeObject
-        {
+        QJsonObject nodeObject{
             {"id", static_cast<qint64>(d->m_path.at(i).GetId())},
             {"type", static_cast<int>(d->m_path.at(i).GetTypeTool())},
             {"reverse", d->m_path.at(i).GetReverse()},
@@ -1275,10 +1272,7 @@ auto VPiece::DBToJson(const VContainer *data) const -> QJsonObject
         itemsArray.append(data->GetGObject(d->m_path.at(i).GetId())->ToJson());
     }
 
-    QJsonObject dbObject
-    {
-        {"items", itemsArray}
-    };
+    QJsonObject dbObject{{"items", itemsArray}};
 
     return dbObject;
 }
@@ -1287,7 +1281,7 @@ auto VPiece::DBToJson(const VContainer *data) const -> QJsonObject
 void VPiece::DumpPiece(const VPiece &piece, const VContainer *data, const QString &templateName)
 {
     SCASSERT(data != nullptr)
-    QTemporaryFile temp; // Go to tmp folder to find dump
+    QTemporaryFile temp;       // Go to tmp folder to find dump
     temp.setAutoRemove(false); // Remove dump manually
 
     if (not templateName.isEmpty())
@@ -1298,23 +1292,21 @@ void VPiece::DumpPiece(const VPiece &piece, const VContainer *data, const QStrin
     if (temp.open())
     {
 #if defined(Q_OS_LINUX)
-    #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
-//        On Linux, QTemporaryFile will attempt to create unnamed temporary
-//        files. If that succeeds, open() will return true but exists() will be
-//        false. If you call fileName() or any function that calls it,
-//        QTemporaryFile will give the file a name, so most applications will
-//        not see a difference.
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+        //        On Linux, QTemporaryFile will attempt to create unnamed temporary
+        //        files. If that succeeds, open() will return true but exists() will be
+        //        false. If you call fileName() or any function that calls it,
+        //        QTemporaryFile will give the file a name, so most applications will
+        //        not see a difference.
         temp.fileName(); // call to create a file on disk
-    #endif
 #endif
-        QJsonObject testCase
-        {
+#endif
+        QJsonObject testCase{
             {"bd", piece.DBToJson(data)},
             {"piece", piece.MainPathToJson()},
         };
 
-        QJsonObject json
-        {
+        QJsonObject json{
             {"testCase", testCase},
         };
 
@@ -1358,18 +1350,22 @@ void VPiece::TestInternalPathCuttingPathIntersection(const VContainer *data) con
         if (internalPath.intersects(contourPath))
         {
             const QString errorMsg = QObject::tr("Piece '%1'. Internal path '%2' intersects with cutting "
-                                                 "contour.").arg(GetName(), path.GetName());
-            VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+                                                 "contour.")
+                                         .arg(GetName(), path.GetName());
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VExceptionObjectError(errorMsg)
+                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
             continue;
         }
 
         if (not contourPath.contains(internalPath))
         {
             const QString errorMsg = QObject::tr("Piece '%1'. Internal path '%2' not inside of cutting "
-                                                 "contour.").arg(GetName(), path.GetName());
-            VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+                                                 "contour.")
+                                         .arg(GetName(), path.GetName());
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VExceptionObjectError(errorMsg)
+                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         }
     }
 }
@@ -1390,7 +1386,7 @@ void VPiece::TestInternalPathsIntersections(const VContainer *data) const
 
     // Internal pieces for cutting must not intersect
     QSet<QPair<int, int>> pairs;
-    for (int k=0; k < pathsId.size(); ++k)
+    for (int k = 0; k < pathsId.size(); ++k)
     {
         const VPiecePath path1 = data->GetPiecePath(pathsId.at(k));
 
@@ -1409,7 +1405,7 @@ void VPiece::TestInternalPathsIntersections(const VContainer *data) const
 
         const QPainterPath painterPath1 = VGObject::PainterPath(pointsPath1);
 
-        for (int i=0; i < pathsId.size(); ++i)
+        for (int i = 0; i < pathsId.size(); ++i)
         {
             if (k == i || pairs.contains(qMakePair(k, i)) || pairs.contains(qMakePair(i, k)))
             {
@@ -1439,9 +1435,11 @@ void VPiece::TestInternalPathsIntersections(const VContainer *data) const
             if (painterPath1.intersects(painterPath2))
             {
                 const QString errorMsg = QObject::tr("Piece '%1'. Internal path '%2' intersects with internal path "
-                                                     "'%3'.").arg(GetName(), path1.GetName(), path2.GetName());
-                VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                    qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+                                                     "'%3'.")
+                                             .arg(GetName(), path1.GetName(), path2.GetName());
+                VAbstractApplication::VApp()->IsPedantic()
+                    ? throw VExceptionObjectError(errorMsg)
+                    : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
             }
         }
     }
@@ -1483,7 +1481,7 @@ auto VPiece::ShortNameRegExp() -> QString
         QString decimalPoints;
         QString groupSeparators;
 
-        for(const auto &locale : allLocales)
+        for (const auto &locale : allLocales)
         {
             if (not positiveSigns.contains(LocalePositiveSign(locale)))
             {
@@ -1509,11 +1507,11 @@ auto VPiece::ShortNameRegExp() -> QString
         negativeSigns.replace('-', QLatin1String("\\-"));
         groupSeparators.remove('\'');
 
-        //Same regexp in pattern.xsd shema file. Don't forget to synchronize.
-        // \p{Zs} - \p{Space_Separator}
-        // Here we use permanent start of string and end of string anchors \A and \z to match whole pattern as one
-        // string. In some cases, a user may pass multiline or line that ends with a new line. To cover case with a new
-        // line at the end of string use /z anchor.
+        // Same regexp in pattern.xsd shema file. Don't forget to synchronize.
+        //  \p{Zs} - \p{Space_Separator}
+        //  Here we use permanent start of string and end of string anchors \A and \z to match whole pattern as one
+        //  string. In some cases, a user may pass multiline or line that ends with a new line. To cover case with a new
+        //  line at the end of string use /z anchor.
         regex = QStringLiteral("\\A([^\\p{Zs}*\\/&|!<>^\\n\\()%1%2%3%4=?:;\"]){0,}\\z")
                     .arg(negativeSigns, positiveSigns, decimalPoints, groupSeparators);
     }

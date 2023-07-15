@@ -54,24 +54,25 @@ public:
     auto operator=(const VFSplinePoint &point) -> VFSplinePoint &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VFSplinePoint(VFSplinePoint &&point) noexcept;
-    auto operator=(VFSplinePoint &&point) noexcept->VFSplinePoint &;
+    auto operator=(VFSplinePoint &&point) noexcept -> VFSplinePoint &;
 #endif
 
     auto P() const -> VPointF;
-    void    SetP(const VPointF &value);
+    void SetP(const VPointF &value);
     auto Angle1() const -> qreal;
-    void    SetAngle1(const qreal &value);
-    void    SetAngle2(const qreal &value);
+    void SetAngle1(const qreal &value);
+    void SetAngle2(const qreal &value);
     auto Angle2() const -> qreal;
     auto KAsm1() const -> qreal;
-    void    SetKAsm1(const qreal &value);
+    void SetKAsm1(const qreal &value);
     auto KAsm2() const -> qreal;
-    void    SetKAsm2(const qreal &value);
+    void SetKAsm2(const qreal &value);
+
 protected:
     QSharedDataPointer<VFSplinePointData> d;
 };
 
-Q_DECLARE_METATYPE(VFSplinePoint)
+Q_DECLARE_METATYPE(VFSplinePoint)                  // NOLINT
 Q_DECLARE_TYPEINFO(VFSplinePoint, Q_MOVABLE_TYPE); // NOLINT
 
 class VSplinePointData;
@@ -92,27 +93,27 @@ public:
     auto operator=(const VSplinePoint &point) -> VSplinePoint &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VSplinePoint(VSplinePoint &&point) noexcept;
-    auto operator=(VSplinePoint &&point) noexcept->VSplinePoint &;
+    auto operator=(VSplinePoint &&point) noexcept -> VSplinePoint &;
 #endif
 
     auto P() const -> VPointF;
-    void    SetP(const VPointF &value);
+    void SetP(const VPointF &value);
 
     auto Angle1() const -> qreal;
     auto Angle1Formula() const -> QString;
-    void    SetAngle1(const qreal &value, const QString &angle1F);
+    void SetAngle1(const qreal &value, const QString &angle1F);
 
     auto Angle2() const -> qreal;
     auto Angle2Formula() const -> QString;
-    void    SetAngle2(const qreal &value, const QString &angle2F);
+    void SetAngle2(const qreal &value, const QString &angle2F);
 
     auto Length1() const -> qreal;
     auto Length1Formula() const -> QString;
-    void    SetLength1(const qreal &value, const QString &length1F);
+    void SetLength1(const qreal &value, const QString &length1F);
 
     auto Length2() const -> qreal;
     auto Length2Formula() const -> QString;
-    void    SetLength2(const qreal &value, const QString &length2F);
+    void SetLength2(const qreal &value, const QString &length2F);
 
     auto IsMovable() const -> bool;
 
@@ -122,7 +123,7 @@ protected:
     QSharedDataPointer<VSplinePointData> d;
 };
 
-Q_DECLARE_METATYPE(VSplinePoint)
+Q_DECLARE_METATYPE(VSplinePoint)                  // NOLINT
 Q_DECLARE_TYPEINFO(VSplinePoint, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VSPLINEPOINT_H

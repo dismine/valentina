@@ -53,7 +53,7 @@ public:
     auto operator=(VLengthLine &&var) noexcept -> VLengthLine &;
 #endif
 
-    virtual auto Filter(quint32 id) -> bool override;
+    auto Filter(quint32 id) -> bool override;
 
     void SetValue(const VPointF *p1, const VPointF *p2);
 

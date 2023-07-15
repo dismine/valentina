@@ -44,35 +44,35 @@ public:
     VPatternLabelData();
     VPatternLabelData(const VPatternLabelData &data);
 
-    virtual ~VPatternLabelData();
+    ~VPatternLabelData() override;
 
     auto operator=(const VPatternLabelData &data) -> VPatternLabelData &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VPatternLabelData(VPatternLabelData &&data) noexcept;
-    auto operator=(VPatternLabelData &&data) noexcept->VPatternLabelData &;
+    auto operator=(VPatternLabelData &&data) noexcept -> VPatternLabelData &;
 #endif
 
     // methods, which set up label parameters
     auto GetLabelWidth() const -> QString;
-    void    SetLabelWidth(const QString &dLabelW);
+    void SetLabelWidth(const QString &dLabelW);
 
     auto GetLabelHeight() const -> QString;
-    void    SetLabelHeight(const QString &dLabelH);
+    void SetLabelHeight(const QString &dLabelH);
 
     auto GetFontSize() const -> int;
-    void  SetFontSize(int iSize);
+    void SetFontSize(int iSize);
 
     auto GetRotation() const -> QString;
-    void    SetRotation(const QString &dRot);
+    void SetRotation(const QString &dRot);
 
     auto CenterPin() const -> quint32;
-    void    SetCenterPin(const quint32 &centerPin);
+    void SetCenterPin(const quint32 &centerPin);
 
     auto TopLeftPin() const -> quint32;
-    void    SetTopLeftPin(const quint32 &topLeftPin);
+    void SetTopLeftPin(const quint32 &topLeftPin);
 
     auto BottomRightPin() const -> quint32;
-    void    SetBottomRightPin(const quint32 &bottomRightPin);
+    void SetBottomRightPin(const quint32 &bottomRightPin);
 
 private:
     QSharedDataPointer<VPatternLabelDataPrivate> d;

@@ -28,9 +28,9 @@
 #ifndef VPIECEGRAINLINE_H
 #define VPIECEGRAINLINE_H
 
-#include <QSharedDataPointer>
-#include <QMetaType>
 #include "../vpatterndb/floatItemData/floatitemdef.h"
+#include <QMetaType>
+#include <QSharedDataPointer>
 
 class QPointF;
 class VPieceGrainlinePrivate;
@@ -86,13 +86,14 @@ public:
 
     auto IsShapeValid() const -> bool;
 
-    friend auto operator<< (QDataStream& dataStream, const VPieceGrainline& grainline) -> QDataStream&;
-    friend auto operator>> (QDataStream& dataStream, VPieceGrainline& grainline) -> QDataStream&;
+    friend auto operator<<(QDataStream &dataStream, const VPieceGrainline &grainline) -> QDataStream &;
+    friend auto operator>>(QDataStream &dataStream, VPieceGrainline &grainline) -> QDataStream &;
+
 private:
     QSharedDataPointer<VPieceGrainlinePrivate> d;
 };
 
-Q_DECLARE_METATYPE(VPieceGrainline)
+Q_DECLARE_METATYPE(VPieceGrainline)                  // NOLINT
 Q_DECLARE_TYPEINFO(VPieceGrainline, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VPIECEGRAINLINE_H

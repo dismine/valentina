@@ -28,25 +28,24 @@
 
 #include <QPointF>
 
+#include "../vmisc/def.h"
 #include "vgrainlinedata.h"
 #include "vgrainlinedata_p.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VGrainlineData::VGrainlineData()
-    : VAbstractFloatItemData(),
-      d(new VGrainlineDataPrivate())
-{}
+  : VAbstractFloatItemData(),
+    d(new VGrainlineDataPrivate())
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VGrainlineData::VGrainlineData(const VGrainlineData &data)
-    : VAbstractFloatItemData(data),
-      d (data.d)
-{}
+COPY_CONSTRUCTOR_IMPL_2(VGrainlineData, VAbstractFloatItemData)
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VGrainlineData::operator=(const VGrainlineData &data) -> VGrainlineData &
 {
-    if ( &data == this )
+    if (&data == this)
     {
         return *this;
     }
@@ -58,12 +57,13 @@ auto VGrainlineData::operator=(const VGrainlineData &data) -> VGrainlineData &
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VGrainlineData::VGrainlineData(VGrainlineData &&data) noexcept
-    : VAbstractFloatItemData(std::move(data)),
-      d (std::move(data.d))
-{}
+  : VAbstractFloatItemData(std::move(data)),
+    d(std::move(data.d))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VGrainlineData::operator=(VGrainlineData &&data) noexcept->VGrainlineData &
+auto VGrainlineData::operator=(VGrainlineData &&data) noexcept -> VGrainlineData &
 {
     VAbstractFloatItemData::operator=(data);
     std::swap(d, data.d);
@@ -72,8 +72,7 @@ auto VGrainlineData::operator=(VGrainlineData &&data) noexcept->VGrainlineData &
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VGrainlineData::~VGrainlineData()
-{}
+VGrainlineData::~VGrainlineData() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VGrainlineData::GetLength() const -> QString
@@ -82,7 +81,7 @@ auto VGrainlineData::GetLength() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VGrainlineData::SetLength(const QString& qsLen)
+void VGrainlineData::SetLength(const QString &qsLen)
 {
     d->m_qsLength = qsLen;
 }
@@ -94,7 +93,7 @@ auto VGrainlineData::GetRotation() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VGrainlineData::SetRotation(const QString& qsRot)
+void VGrainlineData::SetRotation(const QString &qsRot)
 {
     d->m_dRotation = qsRot;
 }

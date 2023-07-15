@@ -29,8 +29,8 @@
 #ifndef VPIECE_H
 #define VPIECE_H
 
-#include <QtGlobal>
 #include <QSharedDataPointer>
+#include <QtGlobal>
 
 #include "../vlayout/vabstractpiece.h"
 
@@ -48,21 +48,22 @@ class VPassmark;
 class VPiece : public VAbstractPiece
 {
     Q_DECLARE_TR_FUNCTIONS(VPiece) // NOLINT
+
 public:
     VPiece();
     VPiece(const VPiece &piece);
 
-    virtual ~VPiece();
+    ~VPiece() override;
 
     auto operator=(const VPiece &piece) -> VPiece &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VPiece(VPiece &&piece) noexcept;
-    auto operator=(VPiece &&piece) noexcept->VPiece &;
+    auto operator=(VPiece &&piece) noexcept -> VPiece &;
 #endif
 
     auto GetPath() const -> VPiecePath;
     auto GetPath() -> VPiecePath &;
-    void       SetPath(const VPiecePath &path);
+    void SetPath(const VPiecePath &path);
 
     auto MainPathPoints(const VContainer *data) const -> QVector<VLayoutPoint>;
     auto UniteMainPathPoints(const VContainer *data) const -> QVector<VLayoutPoint>;
@@ -95,23 +96,23 @@ public:
     void SetShortName(const QString &value);
 
     auto GetFormulaSAWidth() const -> QString;
-    void    SetFormulaSAWidth(const QString &formula, qreal value);
+    void SetFormulaSAWidth(const QString &formula, qreal value);
 
     auto GetInternalPaths() const -> QVector<quint32>;
     auto GetInternalPaths() -> QVector<quint32> &;
-    void             SetInternalPaths(const QVector<quint32> &iPaths);
+    void SetInternalPaths(const QVector<quint32> &iPaths);
 
     auto GetCustomSARecords() const -> QVector<CustomSARecord>;
     auto GetCustomSARecords() -> QVector<CustomSARecord> &;
-    void                    SetCustomSARecords(const QVector<CustomSARecord> &records);
+    void SetCustomSARecords(const QVector<CustomSARecord> &records);
 
     auto GetPins() const -> QVector<quint32>;
     auto GetPins() -> QVector<quint32> &;
-    void             SetPins(const QVector<quint32> &pins);
+    void SetPins(const QVector<quint32> &pins);
 
     auto GetPlaceLabels() const -> QVector<quint32>;
     auto GetPlaceLabels() -> QVector<quint32> &;
-    void             SetPlaceLabels(const QVector<quint32> &labels);
+    void SetPlaceLabels(const QVector<quint32> &labels);
 
     auto Dependencies() const -> QList<quint32>;
     auto MissingNodes(const VPiece &det) const -> QVector<quint32>;
@@ -120,15 +121,15 @@ public:
     auto MissingPins(const VPiece &det) const -> QVector<quint32>;
     auto MissingPlaceLabels(const VPiece &det) const -> QVector<quint32>;
 
-    void                   SetPieceLabelData(const VPieceLabelData &data);
+    void SetPieceLabelData(const VPieceLabelData &data);
     auto GetPieceLabelData() -> VPieceLabelData &;
     auto GetPieceLabelData() const -> const VPieceLabelData &;
 
-    void                     SetPatternLabelData(const VPatternLabelData &info);
+    void SetPatternLabelData(const VPatternLabelData &info);
     auto GetPatternLabelData() -> VPatternLabelData &;
     auto GetPatternLabelData() const -> const VPatternLabelData &;
 
-    void                    SetGrainlineGeometry(const VGrainlineData &data);
+    void SetGrainlineGeometry(const VGrainlineData &data);
     auto GetGrainlineGeometry() -> VGrainlineData &;
     auto GetGrainlineGeometry() const -> const VGrainlineData &;
 
@@ -139,13 +140,14 @@ public:
     void SetGradationLabel(const QString &label);
     auto GetGradationLabel() const -> QString;
 
-    static void DumpPiece(const VPiece &piece, const VContainer *data, const QString &templateName=QString());
+    static void DumpPiece(const VPiece &piece, const VContainer *data, const QString &templateName = QString());
 
     void TestInternalPaths(const VContainer *data) const;
 
     static auto ShortNameRegExp() -> QString;
     auto ExternalArea(const VContainer *data) const -> qreal;
     auto SeamLineArea(const VContainer *data) const -> qreal;
+
 private:
     QSharedDataPointer<VPieceData> d;
 

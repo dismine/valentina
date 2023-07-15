@@ -27,22 +27,22 @@
  *************************************************************************/
 
 #include "vabstractfloatitemdata.h"
+#include "../vmisc/def.h"
 #include "vabstractfloatitemdata_p.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractFloatItemData::VAbstractFloatItemData()
-    : d(new VAbstractFloatItemDataPrivate())
-{}
+  : d(new VAbstractFloatItemDataPrivate())
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractFloatItemData::VAbstractFloatItemData(const VAbstractFloatItemData &data)
-    : d (data.d)
-{}
+COPY_CONSTRUCTOR_IMPL(VAbstractFloatItemData)
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractFloatItemData::operator=(const VAbstractFloatItemData &data) -> VAbstractFloatItemData &
 {
-    if ( &data == this )
+    if (&data == this)
     {
         return *this;
     }
@@ -53,11 +53,12 @@ auto VAbstractFloatItemData::operator=(const VAbstractFloatItemData &data) -> VA
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractFloatItemData::VAbstractFloatItemData(VAbstractFloatItemData &&data) noexcept
-    : d (std::move(data.d))
-{}
+  : d(std::move(data.d))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractFloatItemData::operator=(VAbstractFloatItemData &&data) noexcept->VAbstractFloatItemData &
+auto VAbstractFloatItemData::operator=(VAbstractFloatItemData &&data) noexcept -> VAbstractFloatItemData &
 {
     std::swap(d, data.d);
     return *this;
@@ -65,8 +66,7 @@ auto VAbstractFloatItemData::operator=(VAbstractFloatItemData &&data) noexcept->
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractFloatItemData::~VAbstractFloatItemData()
-{}
+VAbstractFloatItemData::~VAbstractFloatItemData() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractFloatItemData::GetPos() const -> QPointF

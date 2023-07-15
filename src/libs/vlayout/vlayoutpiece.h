@@ -91,8 +91,7 @@ public:
     auto operator=(const VLayoutPiece &detail) -> VLayoutPiece &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VLayoutPiece(VLayoutPiece &&detail) noexcept;
-    auto operator=(VLayoutPiece &&detail) noexcept
-    ->VLayoutPiece &;
+    auto operator=(VLayoutPiece &&detail) noexcept -> VLayoutPiece &;
 #endif
 
     static auto Create(const VPiece &piece, vidtype id, const VContainer *pattern) -> VLayoutPiece;
@@ -265,7 +264,7 @@ Q_DECLARE_TYPEINFO(VLayoutPiece, Q_MOVABLE_TYPE); // NOLINT
 template <class T> inline auto VLayoutPiece::Map(QVector<T> points, const QTransform &matrix, bool mirror) -> QVector<T>
 {
     std::transform(points.begin(), points.end(), points.begin(),
-                   [matrix](const T &point) { return Map(point, matrix); });
+                   [matrix](const T &point) { return VLayoutPiece::Map(point, matrix); });
     if (mirror)
     {
         std::reverse(points.begin(), points.end());

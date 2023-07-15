@@ -26,23 +26,23 @@
  **
  *************************************************************************/
 #include "vpiecearea.h"
-#include "vpiecearea_p.h"
-#include "../vpiece.h"
 #include "../vcontainer.h"
+#include "../vpiece.h"
 #include "vincrement.h"
+#include "vpiecearea_p.h"
 
 #include <QRegularExpression>
 
 //---------------------------------------------------------------------------------------------------------------------
 VPieceArea::VPieceArea()
-    :d(new VPieceAreaData)
+  : d(new VPieceAreaData)
 {
     SetType(VarType::PieceExternalArea);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VPieceArea::VPieceArea(PieceAreaType type, quint32 pieceId, const VPiece &piece, const VContainer *data, Unit unit)
-    :d(new VPieceAreaData(pieceId))
+  : d(new VPieceAreaData(pieceId))
 {
     // cppcheck-suppress unknownMacro
     SCASSERT(data != nullptr)
@@ -72,7 +72,7 @@ VPieceArea::VPieceArea(PieceAreaType type, quint32 pieceId, const VPiece &piece,
 //---------------------------------------------------------------------------------------------------------------------
 auto VPieceArea::operator=(const VPieceArea &var) -> VPieceArea &
 {
-    if ( &var == this )
+    if (&var == this)
     {
         return *this;
     }
@@ -81,15 +81,16 @@ auto VPieceArea::operator=(const VPieceArea &var) -> VPieceArea &
     return *this;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+VPieceArea::~VPieceArea() = default;
+
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VPieceArea::VPieceArea(VPieceArea &&var) noexcept
-    :VInternalVariable(std::move(var)), d(std::move(var.d))
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-VPieceArea::~VPieceArea() // NOLINT(modernize-use-equals-default)
-{}
+  : VInternalVariable(std::move(var)),
+    d(std::move(var.d))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPieceArea::operator=(VPieceArea &&var) noexcept -> VPieceArea &
@@ -106,8 +107,8 @@ void VPieceArea::SetValue(quint32 pieceId, const VPiece &piece, const VContainer
     // cppcheck-suppress unknownMacro
     SCASSERT(data != nullptr)
     d->m_pieceId = pieceId;
-    VInternalVariable::SetValue(FromPixel2(GetType() == VarType::PieceExternalArea ? piece.ExternalArea(data)
-                                                                                   : piece.SeamLineArea(data), unit));
+    VInternalVariable::SetValue(FromPixel2(
+        GetType() == VarType::PieceExternalArea ? piece.ExternalArea(data) : piece.SeamLineArea(data), unit));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

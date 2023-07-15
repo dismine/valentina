@@ -49,11 +49,11 @@ class VCubicBezierPath final : public VAbstractCubicBezierPath
 public:
     explicit VCubicBezierPath(quint32 idObject = 0, Draw mode = Draw::Calculation);
     VCubicBezierPath(const VCubicBezierPath &curve);
-    VCubicBezierPath(const QVector<VPointF> &points, quint32 idObject = 0, Draw mode = Draw::Calculation);
+    explicit VCubicBezierPath(const QVector<VPointF> &points, quint32 idObject = 0, Draw mode = Draw::Calculation);
     auto Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const -> VCubicBezierPath;
     auto Flip(const QLineF &axis, const QString &prefix = QString()) const -> VCubicBezierPath;
     auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VCubicBezierPath;
-    virtual ~VCubicBezierPath();
+    ~VCubicBezierPath() override;
 
     auto operator=(const VCubicBezierPath &curve) -> VCubicBezierPath &;
 #ifdef Q_COMPILER_RVALUE_REFS
@@ -67,17 +67,17 @@ public:
 
     void append(const VPointF &point);
 
-    virtual auto CountSubSpl() const -> vsizetype override;
-    virtual auto CountPoints() const -> vsizetype override;
-    virtual void Clear() override;
-    virtual auto GetSpline(vsizetype index) const -> VSpline override;
-    virtual auto GetStartAngle() const -> qreal override;
-    virtual auto GetEndAngle() const -> qreal override;
+    auto CountSubSpl() const -> vsizetype override;
+    auto CountPoints() const -> vsizetype override;
+    void Clear() override;
+    auto GetSpline(vsizetype index) const -> VSpline override;
+    auto GetStartAngle() const -> qreal override;
+    auto GetEndAngle() const -> qreal override;
 
-    virtual auto GetC1Length() const -> qreal override;
-    virtual auto GetC2Length() const -> qreal override;
+    auto GetC1Length() const -> qreal override;
+    auto GetC2Length() const -> qreal override;
 
-    virtual auto GetSplinePath() const -> QVector<VSplinePoint> override;
+    auto GetSplinePath() const -> QVector<VSplinePoint> override;
     auto GetCubicPath() const -> QVector<VPointF>;
 
     static auto CountSubSpl(vsizetype size) -> vsizetype;
@@ -85,8 +85,8 @@ public:
     static auto SubSplPointsCount(vsizetype countSubSpl) -> vsizetype;
 
 protected:
-    virtual auto FirstPoint() const -> VPointF override;
-    virtual auto LastPoint() const -> VPointF override;
+    auto FirstPoint() const -> VPointF override;
+    auto LastPoint() const -> VPointF override;
 
 private:
     QSharedDataPointer<VCubicBezierPathData> d;

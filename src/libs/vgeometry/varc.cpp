@@ -32,24 +32,25 @@
 #include <QPointF>
 #include <QtDebug>
 
-#include "../vmisc/def.h"
-#include "../vmisc/vmath.h"
-#include "../vmisc/compatibility.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../ifc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
+#include "../vmisc/compatibility.h"
+#include "../vmisc/def.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vmath.h"
 #include "vabstractcurve.h"
 #include "varc_p.h"
 #include "vspline.h"
-#include "../ifc/exception/vexception.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VArc default constructor.
  */
-VArc::VArc ()
-    : VAbstractArc(GOType::Arc),
-      d (new VArcData)
-{}
+VArc::VArc()
+  : VAbstractArc(GOType::Arc),
+    d(new VArcData)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -59,18 +60,18 @@ VArc::VArc ()
  * @param f1 start angle (degree).
  * @param f2 end angle (degree).
  */
-VArc::VArc (const VPointF &center, qreal radius, const QString &formulaRadius, qreal f1, const QString &formulaF1,
-            qreal f2, const QString &formulaF2, quint32 idObject, Draw mode)
-    : VAbstractArc(GOType::Arc, center, f1, formulaF1, f2, formulaF2, idObject, mode),
-      d (new VArcData(radius, formulaRadius))
+VArc::VArc(const VPointF &center, qreal radius, const QString &formulaRadius, qreal f1, const QString &formulaF1,
+           qreal f2, const QString &formulaF2, quint32 idObject, Draw mode)
+  : VAbstractArc(GOType::Arc, center, f1, formulaF1, f2, formulaF2, idObject, mode),
+    d(new VArcData(radius, formulaRadius))
 {
     CreateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VArc::VArc(const VPointF &center, qreal radius, qreal f1, qreal f2)
-    : VAbstractArc(GOType::Arc, center, f1, f2, NULL_ID, Draw::Calculation),
-      d (new VArcData(radius))
+  : VAbstractArc(GOType::Arc, center, f1, f2, NULL_ID, Draw::Calculation),
+    d(new VArcData(radius))
 {
     CreateName();
 }
@@ -78,8 +79,8 @@ VArc::VArc(const VPointF &center, qreal radius, qreal f1, qreal f2)
 //---------------------------------------------------------------------------------------------------------------------
 VArc::VArc(qreal length, const QString &formulaLength, const VPointF &center, qreal radius,
            const QString &formulaRadius, qreal f1, const QString &formulaF1, quint32 idObject, Draw mode)
-    : VAbstractArc(GOType::Arc, formulaLength, center, f1, formulaF1, idObject, mode),
-      d (new VArcData(radius, formulaRadius))
+  : VAbstractArc(GOType::Arc, formulaLength, center, f1, formulaF1, idObject, mode),
+    d(new VArcData(radius, formulaRadius))
 {
     CreateName();
     FindF2(length);
@@ -87,21 +88,15 @@ VArc::VArc(qreal length, const QString &formulaLength, const VPointF &center, qr
 
 //---------------------------------------------------------------------------------------------------------------------
 VArc::VArc(qreal length, const VPointF &center, qreal radius, qreal f1)
-    : VAbstractArc(GOType::Arc, center, f1, NULL_ID, Draw::Calculation),
-      d (new VArcData(radius))
+  : VAbstractArc(GOType::Arc, center, f1, NULL_ID, Draw::Calculation),
+    d(new VArcData(radius))
 {
     CreateName();
     FindF2(length);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VArc copy constructor
- * @param arc arc
- */
-VArc::VArc(const VArc &arc)
-    : VAbstractArc(arc), d (arc.d)
-{}
+COPY_CONSTRUCTOR_IMPL_2(VArc, VAbstractArc)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -109,9 +104,9 @@ VArc::VArc(const VArc &arc)
  * @param arc arc
  * @return arc
  */
-auto VArc::operator =(const VArc &arc) -> VArc &
+auto VArc::operator=(const VArc &arc) -> VArc &
 {
-    if ( &arc == this )
+    if (&arc == this)
     {
         return *this;
     }
@@ -123,8 +118,10 @@ auto VArc::operator =(const VArc &arc) -> VArc &
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VArc::VArc(VArc &&arc) noexcept
-    : VAbstractArc(std::move(arc)), d (std::move(arc.d))
-{}
+  : VAbstractArc(std::move(arc)),
+    d(std::move(arc.d))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VArc::operator=(VArc &&arc) noexcept -> VArc &
@@ -214,8 +211,7 @@ auto VArc::Move(qreal length, qreal angle, const QString &prefix) const -> VArc
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VArc::~VArc() // NOLINT(hicpp-use-equals-default, modernize-use-equals-default)
-{}
+VArc::~VArc() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -240,7 +236,7 @@ auto VArc::GetLength() const -> qreal
  */
 auto VArc::GetP1() const -> QPointF
 {
-    QPointF p1 ( GetCenter().x () + d->radius, GetCenter().y () );
+    QPointF p1(GetCenter().x() + d->radius, GetCenter().y());
     QLineF centerP1(static_cast<QPointF>(GetCenter()), p1);
     centerP1.setAngle(GetStartAngle());
     return centerP1.p2();
@@ -251,9 +247,9 @@ auto VArc::GetP1() const -> QPointF
  * @brief GetP2 return point associated with end angle.
  * @return точку point.
  */
-auto VArc::GetP2 () const -> QPointF
+auto VArc::GetP2() const -> QPointF
 {
-    QPointF p2 ( GetCenter().x () + d->radius, GetCenter().y () );
+    QPointF p2(GetCenter().x() + d->radius, GetCenter().y());
     QLineF centerP2(static_cast<QPointF>(GetCenter()), p2);
     centerP2.setAngle(GetEndAngle());
     return centerP2.p2();
@@ -286,15 +282,15 @@ auto VArc::GetPoints() const -> QVector<QPointF>
         }
 
         if (angle > 360 || angle < 0)
-        {// Filter incorect value
-            QLineF dummy(0,0, 100, 0);
+        { // Filter incorect value
+            QLineF dummy(0, 0, 100, 0);
             dummy.setAngle(angle);
             angle = dummy.angle();
         }
 
-        const qreal angleInterpolation = 45; //degree
+        const qreal angleInterpolation = 45; // degree
         const int sections = qFloor(angle / angleInterpolation);
-        sectionAngle.reserve(sections+1);
+        sectionAngle.reserve(sections + 1);
         for (int i = 0; i < sections; ++i)
         {
             sectionAngle.append(angleInterpolation);
@@ -309,7 +305,7 @@ auto VArc::GetPoints() const -> QVector<QPointF>
 
     for (int i = 0; i < sectionAngle.size(); ++i)
     {
-        const qreal lDistance = GetRadius() * 4.0/3.0 * qTan(qDegreesToRadians(sectionAngle.at(i)) * 0.25);
+        const qreal lDistance = GetRadius() * 4.0 / 3.0 * qTan(qDegreesToRadians(sectionAngle.at(i)) * 0.25);
 
         const QPointF center = static_cast<QPointF>(GetCenter());
 
@@ -319,7 +315,7 @@ auto VArc::GetPoints() const -> QVector<QPointF>
 
         QLineF lineP4P3(center, pStart);
         lineP4P3.setAngle(lineP4P3.angle() + sectionAngle.at(i));
-        lineP4P3.setLength(GetRadius());//in case of computing error
+        lineP4P3.setLength(GetRadius()); // in case of computing error
         lineP4P3 = QLineF(lineP4P3.p2(), center);
         lineP4P3.setAngle(lineP4P3.angle() + 90.0);
         lineP4P3.setLength(lDistance);
@@ -349,7 +345,7 @@ auto VArc::GetPoints() const -> QVector<QPointF>
  */
 auto VArc::CutArc(qreal length, VArc &arc1, VArc &arc2, const QString &pointName) const -> QPointF
 {
-    //Always need return two arcs, so we must correct wrong length.
+    // Always need return two arcs, so we must correct wrong length.
     const qreal fullLength = GetLength();
 
     if (qAbs(fullLength) < ToPixel(2, Unit::Mm))
@@ -358,14 +354,15 @@ auto VArc::CutArc(qreal length, VArc &arc1, VArc &arc2, const QString &pointName
         arc2 = VArc();
 
         const QString errorMsg = tr("Unable to cut curve '%1'. The curve is too short.").arg(name());
-        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                          qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
 
         return {};
     }
 
-    QLineF line = not IsFlipped() ? CutPoint(length, fullLength, pointName)
-                                  : CutPointFlipped(length, fullLength, pointName);
+    QLineF line =
+        not IsFlipped() ? CutPoint(length, fullLength, pointName) : CutPointFlipped(length, fullLength, pointName);
 
     arc1 = VArc(GetCenter(), d->radius, d->formulaRadius, GetStartAngle(), GetFormulaF1(), line.angle(),
                 QString().setNum(line.angle()), getIdObject(), getMode());
@@ -378,7 +375,6 @@ auto VArc::CutArc(qreal length, VArc &arc1, VArc &arc2, const QString &pointName
     arc2.SetFlipped(IsFlipped());
     return line.p2();
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VArc::CutArc(qreal length, const QString &pointName) const -> QPointF
@@ -434,7 +430,7 @@ void VArc::FindF2(qreal length)
         length = MaxLength();
     }
 
-    qreal arcAngle = qAbs(qRadiansToDegrees(length/d->radius));
+    qreal arcAngle = qAbs(qRadiansToDegrees(length / d->radius));
 
     if (IsFlipped())
     {
@@ -442,7 +438,7 @@ void VArc::FindF2(qreal length)
     }
 
     QLineF startAngle(0, 0, 100, 0);
-    startAngle.setAngle(GetStartAngle() + arcAngle);// We use QLineF just because it is easy way correct angle value
+    startAngle.setAngle(GetStartAngle() + arcAngle); // We use QLineF just because it is easy way correct angle value
 
     SetFormulaF2(QString::number(startAngle.angle()), startAngle.angle());
 }
@@ -450,7 +446,7 @@ void VArc::FindF2(qreal length)
 //---------------------------------------------------------------------------------------------------------------------
 auto VArc::MaxLength() const -> qreal
 {
-    return M_2PI*d->radius;
+    return M_2PI * d->radius;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -469,15 +465,16 @@ auto VArc::CutPoint(qreal length, qreal fullLength, const QString &pointName) co
         if (not pointName.isEmpty())
         {
             errorMsg = tr("Curve '%1'. Length of a cut segment (%2) is too small. Optimize it to minimal value.")
-                    .arg(name(), pointName);
+                           .arg(name(), pointName);
         }
         else
         {
-            errorMsg = tr("Curve '%1'. Length of a cut segment is too small. Optimize it to minimal value.")
-                    .arg(name());
+            errorMsg =
+                tr("Curve '%1'. Length of a cut segment is too small. Optimize it to minimal value.").arg(name());
         }
-        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                          qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
     else if (length > maxLength)
     {
@@ -485,22 +482,22 @@ auto VArc::CutPoint(qreal length, qreal fullLength, const QString &pointName) co
         if (not pointName.isEmpty())
         {
             errorMsg = tr("Curve '%1'. Length of a cut segment (%2) is too big. Optimize it to maximal value.")
-                    .arg(name(), pointName);
+                           .arg(name(), pointName);
         }
         else
         {
 
-            errorMsg = tr("Curve '%1'. Length of a cut segment is too big. Optimize it to maximal value.")
-                    .arg(name());
+            errorMsg = tr("Curve '%1'. Length of a cut segment is too big. Optimize it to maximal value.").arg(name());
         }
-        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                          qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
 
     length = qBound(minLength, length, maxLength);
 
     QLineF line(static_cast<QPointF>(GetCenter()), GetP1());
-    line.setAngle(line.angle() + qRadiansToDegrees(length/d->radius));
+    line.setAngle(line.angle() + qRadiansToDegrees(length / d->radius));
     return line;
 }
 
@@ -521,15 +518,16 @@ auto VArc::CutPointFlipped(qreal length, qreal fullLength, const QString &pointN
         if (not pointName.isEmpty())
         {
             errorMsg = tr("Curve '%1'. Length of a cut segment (%2) is too small. Optimize it to minimal value.")
-                    .arg(name(), pointName);
+                           .arg(name(), pointName);
         }
         else
         {
-            errorMsg = tr("Curve '%1'. Length of a cut segment is too small. Optimize it to minimal value.")
-                    .arg(name());
+            errorMsg =
+                tr("Curve '%1'. Length of a cut segment is too small. Optimize it to minimal value.").arg(name());
         }
-        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                          qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
     else if (length > maxLengthFlipped)
     {
@@ -537,21 +535,21 @@ auto VArc::CutPointFlipped(qreal length, qreal fullLength, const QString &pointN
         if (not pointName.isEmpty())
         {
             errorMsg = tr("Curve '%1'. Length of a cut segment (%2) is too big. Optimize it to maximal value.")
-                    .arg(name(), errorMsg);
+                           .arg(name(), errorMsg);
         }
         else
         {
-            errorMsg = tr("Curve '%1'. Length of a cut segment is too big. Optimize it to maximal value.")
-                    .arg(name());
+            errorMsg = tr("Curve '%1'. Length of a cut segment is too big. Optimize it to maximal value.").arg(name());
         }
-        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                          qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
 
     length = qBound(minLengthFlipped, length, maxLengthFlipped);
 
     QLineF line(static_cast<QPointF>(GetCenter()), GetP1());
-    line.setAngle(line.angle() - qRadiansToDegrees(qAbs(length)/d->radius));
+    line.setAngle(line.angle() - qRadiansToDegrees(qAbs(length) / d->radius));
     return line;
 }
 

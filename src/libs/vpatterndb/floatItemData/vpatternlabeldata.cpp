@@ -27,25 +27,23 @@
  *************************************************************************/
 
 #include "vpatternlabeldata.h"
+#include "../vmisc/def.h"
 #include "vpatternlabeldata_p.h"
-#include "../ifc/ifcdef.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternLabelData::VPatternLabelData()
-    : VAbstractFloatItemData(),
-      d(new VPatternLabelDataPrivate())
-{}
+  : VAbstractFloatItemData(),
+    d(new VPatternLabelDataPrivate())
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VPatternLabelData::VPatternLabelData(const VPatternLabelData &data)
-    : VAbstractFloatItemData(data),
-      d (data.d)
-{}
+COPY_CONSTRUCTOR_IMPL_2(VPatternLabelData, VAbstractFloatItemData)
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPatternLabelData::operator=(const VPatternLabelData &data) -> VPatternLabelData &
 {
-    if ( &data == this )
+    if (&data == this)
     {
         return *this;
     }
@@ -57,12 +55,13 @@ auto VPatternLabelData::operator=(const VPatternLabelData &data) -> VPatternLabe
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VPatternLabelData::VPatternLabelData(VPatternLabelData &&data) noexcept
-    : VAbstractFloatItemData(std::move(data)),
-      d (std::move(data.d))
-{}
+  : VAbstractFloatItemData(std::move(data)),
+    d(std::move(data.d))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPatternLabelData::operator=(VPatternLabelData &&data) noexcept->VPatternLabelData &
+auto VPatternLabelData::operator=(VPatternLabelData &&data) noexcept -> VPatternLabelData &
 {
     VAbstractFloatItemData::operator=(data);
     std::swap(d, data.d);
@@ -71,8 +70,7 @@ auto VPatternLabelData::operator=(VPatternLabelData &&data) noexcept->VPatternLa
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VPatternLabelData::~VPatternLabelData()
-{}
+VPatternLabelData::~VPatternLabelData() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPatternLabelData::GetLabelWidth() const -> QString

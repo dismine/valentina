@@ -35,10 +35,10 @@
 #include <QPoint>
 #include <QtDebug>
 
-#include "vabstractcurve_p.h"
-#include "../vmisc/vabstractvalapplication.h"
-#include "../vmisc/compatibility.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
+#include "../vmisc/compatibility.h"
+#include "../vmisc/vabstractvalapplication.h"
+#include "vabstractcurve_p.h"
 
 // See https://stackoverflow.com/a/46719572/3045403
 #if __cplusplus < 201703L
@@ -47,18 +47,18 @@ constexpr qreal VAbstractCurve::minLength; // NOLINT(readability-redundant-decla
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractCurve::VAbstractCurve(const GOType &type, const quint32 &idObject, const Draw &mode)
-    :VGObject(type, idObject, mode), d (new VAbstractCurveData())
-{}
+  : VGObject(type, idObject, mode),
+    d(new VAbstractCurveData())
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractCurve::VAbstractCurve(const VAbstractCurve &curve) // NOLINT(modernize-use-equals-default)
-    :VGObject(curve), d (curve.d)
-{}
+COPY_CONSTRUCTOR_IMPL_2(VAbstractCurve, VGObject)
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractCurve::operator=(const VAbstractCurve &curve) -> VAbstractCurve &
 {
-    if ( &curve == this )
+    if (&curve == this)
     {
         return *this;
     }
@@ -70,8 +70,10 @@ auto VAbstractCurve::operator=(const VAbstractCurve &curve) -> VAbstractCurve &
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractCurve::VAbstractCurve(VAbstractCurve &&curve) noexcept
-    :VGObject(std::move(curve)), d (std::move(curve.d))
-{}
+  : VGObject(std::move(curve)),
+    d(std::move(curve.d))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractCurve::operator=(VAbstractCurve &&curve) noexcept -> VAbstractCurve &
@@ -83,8 +85,7 @@ auto VAbstractCurve::operator=(VAbstractCurve &&curve) noexcept -> VAbstractCurv
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractCurve::~VAbstractCurve() // NOLINT(modernize-use-equals-default)
-{}
+VAbstractCurve::~VAbstractCurve() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractCurve::GetSegmentPoints(const QVector<QPointF> &points, const QPointF &begin, const QPointF &end,
@@ -143,16 +144,16 @@ auto VAbstractCurve::GetSegmentPoints(const QPointF &begin, const QPointF &end, 
         QString errorMsg;
         if (piece.isEmpty())
         {
-            errorMsg = QObject::tr("Error calculating segment for curve '%1'. %2")
-                                         .arg(name(), error);
+            errorMsg = QObject::tr("Error calculating segment for curve '%1'. %2").arg(name(), error);
         }
         else
         {
             errorMsg = QObject::tr("Error in path '%1'. Calculating segment for curve '%2' has failed. %3")
                            .arg(piece, name(), error);
         }
-        VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VExceptionObjectError(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
     return segment;
@@ -161,69 +162,65 @@ auto VAbstractCurve::GetSegmentPoints(const QPointF &begin, const QPointF &end, 
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractCurve::FromBegin(const QVector<QPointF> &points, const QPointF &begin, bool *ok) -> QVector<QPointF>
 {
-    if (points.count() >= 2)
+    auto SetResult = [&ok](bool res)
     {
-        if (ConstFirst(points).toPoint() == begin.toPoint())
-        {
-            if (ok != nullptr)
-            {
-                *ok = true;
-            }
-            return points;
-        }
-
-        QVector<QPointF> segment;
-        bool theBegin = false;
-        for (qint32 i = 0; i < points.count()-1; ++i)
-        {
-            if (not theBegin)
-            {
-                if (IsPointOnLineSegment(begin, points.at(i), points.at(i+1)))
-                {
-                    theBegin = true;
-
-                    if (not VFuzzyComparePoints(begin, points.at(i+1)))
-                    {
-                        segment.append(begin);
-                    }
-
-                    if (i == points.count()-2)
-                    {
-                         segment.append(points.at(i+1));
-                    }
-                }
-            }
-            else
-            {
-                segment.append(points.at(i));
-                if (i == points.count()-2)
-                {
-                     segment.append(points.at(i+1));
-                }
-            }
-        }
-
-        if (segment.isEmpty())
-        {
-            if (ok != nullptr)
-            {
-                *ok = false;
-            }
-            return points;
-        }
-
         if (ok != nullptr)
         {
-            *ok = true;
+            *ok = res;
         }
-        return segment;
+    };
+
+    if (points.count() < 2)
+    {
+        SetResult(false);
+        return points;
     }
 
-    if (ok != nullptr)
+    if (ConstFirst(points).toPoint() == begin.toPoint())
     {
-        *ok = false;
+        SetResult(true);
+        return points;
     }
-    return points;
+
+    QVector<QPointF> segment;
+    bool theBegin = false;
+    for (qint32 i = 0; i < points.count() - 1; ++i)
+    {
+        if (not theBegin)
+        {
+            if (IsPointOnLineSegment(begin, points.at(i), points.at(i + 1)))
+            {
+                theBegin = true;
+
+                if (not VFuzzyComparePoints(begin, points.at(i + 1)))
+                {
+                    segment.append(begin);
+                }
+
+                if (i == points.count() - 2)
+                {
+                    segment.append(points.at(i + 1));
+                }
+            }
+        }
+        else
+        {
+            segment.append(points.at(i));
+            if (i == points.count() - 2)
+            {
+                segment.append(points.at(i + 1));
+            }
+        }
+    }
+
+    if (segment.isEmpty())
+    {
+        SetResult(false);
+        return points;
+    }
+
+    SetResult(true);
+    return segment;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -252,11 +249,11 @@ auto VAbstractCurve::ClosestPoint(QPointF scenePoint) const -> QPointF
     qreal bestDistance = INT_MAX;
     bool found = false;
 
-    for (qint32 i = 0; i < points.count()-1; ++i)
+    for (qint32 i = 0; i < points.count() - 1; ++i)
     {
-        const QPointF cPoint = VGObject::ClosestPoint(QLineF(points.at(i), points.at(i+1)), scenePoint);
+        const QPointF cPoint = VGObject::ClosestPoint(QLineF(points.at(i), points.at(i + 1)), scenePoint);
 
-        if (IsPointOnLineSegment(cPoint, points.at(i), points.at(i+1)))
+        if (IsPointOnLineSegment(cPoint, points.at(i), points.at(i + 1)))
         {
             const qreal length = QLineF(scenePoint, cPoint).length();
             if (length < bestDistance)
@@ -290,7 +287,7 @@ auto VAbstractCurve::GetPath() const -> QPainterPath
     }
     else
     {
-        qDebug()<<"points.count() < 2"<<Q_FUNC_INFO;
+        qDebug() << "points.count() < 2" << Q_FUNC_INFO;
     }
     return path;
 }
@@ -349,9 +346,9 @@ auto VAbstractCurve::IsPointOnCurve(const QVector<QPointF> &points, const QPoint
         return points.at(0) == p;
     }
 
-    for (qint32 i = 0; i < points.count()-1; ++i)
+    for (qint32 i = 0; i < points.count() - 1; ++i)
     {
-        if (IsPointOnLineSegment(p, points.at(i), points.at(i+1)))
+        if (IsPointOnLineSegment(p, points.at(i), points.at(i + 1)))
         {
             return true;
         }
@@ -379,11 +376,11 @@ auto VAbstractCurve::SubdividePath(const QVector<QPointF> &points, QPointF p, QV
     sub1.clear();
     sub2.clear();
 
-    for (qint32 i = 0; i < points.count()-1; ++i)
+    for (qint32 i = 0; i < points.count() - 1; ++i)
     {
         if (not found)
         {
-            if (IsPointOnLineSegment(p, points.at(i), points.at(i+1)))
+            if (IsPointOnLineSegment(p, points.at(i), points.at(i + 1)))
             {
                 if (not VFuzzyComparePoints(points.at(i), p))
                 {
@@ -398,13 +395,13 @@ auto VAbstractCurve::SubdividePath(const QVector<QPointF> &points, QPointF p, QV
                     }
                 }
 
-                if (not VFuzzyComparePoints(points.at(i+1), p))
+                if (not VFuzzyComparePoints(points.at(i + 1), p))
                 {
                     sub2.append(p);
 
-                    if (i+1 == points.count()-1)
+                    if (i + 1 == points.count() - 1)
                     {
-                        sub2.append(points.at(i+1));
+                        sub2.append(points.at(i + 1));
                     }
                 }
 
@@ -419,9 +416,9 @@ auto VAbstractCurve::SubdividePath(const QVector<QPointF> &points, QPointF p, QV
         {
             sub2.append(points.at(i));
 
-            if (i+1 == points.count()-1)
+            if (i + 1 == points.count() - 1)
             {
-                sub2.append(points.at(i+1));
+                sub2.append(points.at(i + 1));
             }
         }
     }
@@ -487,16 +484,16 @@ void VAbstractCurve::SetApproximationScale(qreal value)
 auto VAbstractCurve::CurveIntersectLine(const QVector<QPointF> &points, const QLineF &line) -> QVector<QPointF>
 {
     QVector<QPointF> intersections;
-    intersections.reserve(points.count()-1);
-    for ( auto i = 0; i < points.count()-1; ++i )
+    intersections.reserve(points.count() - 1);
+    for (auto i = 0; i < points.count() - 1; ++i)
     {
         QPointF crosPoint;
-        auto type = Intersects(line, QLineF(points.at(i), points.at(i+1)), &crosPoint);
+        auto type = Intersects(line, QLineF(points.at(i), points.at(i + 1)), &crosPoint);
 
         // QLineF::intersects not always accurate on edge cases
         if (type == QLineF::BoundedIntersection ||
-            (VGObject::IsPointOnLineSegment (crosPoint, points.at(i), points.at(i+1)) &&
-             VGObject::IsPointOnLineSegment (crosPoint, line.p1(), line.p2())))
+            (VGObject::IsPointOnLineSegment(crosPoint, points.at(i), points.at(i + 1)) &&
+             VGObject::IsPointOnLineSegment(crosPoint, line.p1(), line.p2())))
         {
             intersections.append(crosPoint);
         }
@@ -512,13 +509,13 @@ auto VAbstractCurve::CurveIntersectAxis(const QPointF &point, qreal angle, const
 
     // Normalize an angle
     {
-        QLineF line(QPointF(10,10), QPointF(100, 10));
+        QLineF line(QPointF(10, 10), QPointF(100, 10));
         line.setAngle(angle);
         angle = line.angle();
     }
 
     QRectF rec = QRectF(0, 0, INT_MAX, INT_MAX);
-    rec.translate(-INT_MAX/2.0, -INT_MAX/2.0);
+    rec.translate(-INT_MAX / 2.0, -INT_MAX / 2.0);
 
     // Instead of using axis compare two rays. See issue #963.
     QLineF axis = QLineF(point, VGObject::BuildRay(point, angle, rec));
@@ -538,7 +535,7 @@ auto VAbstractCurve::CurveIntersectAxis(const QPointF &point, qreal angle, const
         QMap<qreal, int> forward;
         QMap<qreal, int> backward;
 
-        for ( qint32 i = 0; i < points.size(); ++i )
+        for (qint32 i = 0; i < points.size(); ++i)
         {
             if (VFuzzyComparePoints(points.at(i), point))
             { // Always seek unique intersection
@@ -546,7 +543,7 @@ auto VAbstractCurve::CurveIntersectAxis(const QPointF &point, qreal angle, const
             }
 
             const QLineF length(point, points.at(i));
-            if (qAbs(length.angle()-angle) < 0.1)
+            if (qAbs(length.angle() - angle) < 0.1)
             {
                 forward.insert(length.length(), i);
             }
@@ -597,33 +594,33 @@ auto VAbstractCurve::DirectionArrows() const -> QVector<DirectionArrow>
     {
         /*Need find coordinate midle of curve.
           Universal way is take all points and find sum.*/
-        const qreal seek_length = qAbs(GetLength())/2.0;
+        const qreal seek_length = qAbs(GetLength()) / 2.0;
         qreal found_length = 0;
         QLineF arrow;
-        for (qint32 i = 1; i <= points.size()-1; ++i)
+        for (qint32 i = 1; i <= points.size() - 1; ++i)
         {
-            arrow = QLineF(points.at(i-1), points.at(i));
-            found_length += arrow.length();//Length that we aready find
+            arrow = QLineF(points.at(i - 1), points.at(i));
+            found_length += arrow.length(); // Length that we aready find
 
-            if (seek_length <= found_length)// if have found more that need stop.
+            if (seek_length <= found_length) // if have found more that need stop.
             {
-                //subtract length in last line and you will find position of the middle point.
+                // subtract length in last line and you will find position of the middle point.
                 arrow.setLength(arrow.length() - (found_length - seek_length));
                 break;
             }
         }
 
-        //Reverse line because we want start arrow from this point
+        // Reverse line because we want start arrow from this point
         arrow = QLineF(arrow.p2(), arrow.p1());
-        const qreal angle = arrow.angle();//we each time change line angle, better save original angle value
+        const qreal angle = arrow.angle(); // we each time change line angle, better save original angle value
         arrow.setLength(VAbstractCurve::LengthCurveDirectionArrow());
 
         DirectionArrow dArrow;
 
-        arrow.setAngle(angle-35);
+        arrow.setAngle(angle - 35);
         dArrow.first = arrow;
 
-        arrow.setAngle(angle+35);
+        arrow.setAngle(angle + 35);
         dArrow.second = arrow;
 
         arrows.append(dArrow);

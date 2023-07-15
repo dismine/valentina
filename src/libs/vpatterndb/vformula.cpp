@@ -67,7 +67,7 @@ auto VFormula::operator=(const VFormula &formula) -> VFormula &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VFormula::VFormula(const VFormula &formula) = default;
+COPY_CONSTRUCTOR_IMPL(VFormula)
 
 //---------------------------------------------------------------------------------------------------------------------
 VFormula::~VFormula() = default;

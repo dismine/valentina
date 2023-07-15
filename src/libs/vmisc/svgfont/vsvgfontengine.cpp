@@ -53,15 +53,10 @@ VSvgFontEngine::VSvgFontEngine(const VSvgFont &font)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSvgFontEngine::VSvgFontEngine(const VSvgFontEngine &engine) // NOLINT(modernize-use-equals-default)
-  : d(engine.d)
-{
-}
+COPY_CONSTRUCTOR_IMPL(VSvgFontEngine)
 
 //---------------------------------------------------------------------------------------------------------------------
-VSvgFontEngine::~VSvgFontEngine() // NOLINT(modernize-use-equals-default)
-{
-}
+VSvgFontEngine::~VSvgFontEngine() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VSvgFontEngine::operator=(const VSvgFontEngine &engine) -> VSvgFontEngine &

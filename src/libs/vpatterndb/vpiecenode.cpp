@@ -27,34 +27,34 @@
  *************************************************************************/
 
 #include "vpiecenode.h"
-#include "vpiecenode_p.h"
-#include "vcontainer.h"
-#include "calculator.h"
-#include "vformula.h"
 #include "../vmisc/vabstractvalapplication.h"
+#include "calculator.h"
+#include "vcontainer.h"
+#include "vformula.h"
+#include "vpiecenode_p.h"
 
 #include <QDataStream>
 #include <QtNumeric>
 
 //---------------------------------------------------------------------------------------------------------------------
 VPieceNode::VPieceNode()
-    : d(new VPieceNodeData)
-{}
+  : d(new VPieceNodeData)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VPieceNode::VPieceNode(quint32 id, Tool typeTool, bool reverse)
-    : d(new VPieceNodeData(id, typeTool, reverse))
-{}
+  : d(new VPieceNodeData(id, typeTool, reverse))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceNode::VPieceNode(const VPieceNode &node)
-    : d (node.d)
-{}
+COPY_CONSTRUCTOR_IMPL(VPieceNode)
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPieceNode::operator=(const VPieceNode &node) -> VPieceNode &
 {
-    if ( &node == this )
+    if (&node == this)
     {
         return *this;
     }
@@ -65,11 +65,12 @@ auto VPieceNode::operator=(const VPieceNode &node) -> VPieceNode &
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VPieceNode::VPieceNode(VPieceNode &&node) noexcept
-    : d (std::move(node.d))
-{}
+  : d(std::move(node.d))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPieceNode::operator=(VPieceNode &&node) noexcept->VPieceNode &
+auto VPieceNode::operator=(VPieceNode &&node) noexcept -> VPieceNode &
 {
     std::swap(d, node.d);
     return *this;
@@ -77,8 +78,7 @@ auto VPieceNode::operator=(VPieceNode &&node) noexcept->VPieceNode &
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceNode::~VPieceNode()
-{}
+VPieceNode::~VPieceNode() = default;
 
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------
@@ -154,12 +154,14 @@ auto VPieceNode::GetSABefore(const VContainer *data) const -> qreal
             nodeName = data->GetGObject(d->m_id)->name();
         }
         catch (const VExceptionBadId &)
-        {}
+        {
+        }
 
         const QString errorMsg = QObject::tr("Cannot calculate seam allowance before for point '%1'. Reason: %2.")
-                .arg(nodeName, formula.Reason());
-        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+                                     .arg(nodeName, formula.Reason());
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         return -1;
     }
     return formula.getDoubleValue();
@@ -185,12 +187,14 @@ auto VPieceNode::GetSABefore(const VContainer *data, Unit unit) const -> qreal
             nodeName = data->GetGObject(d->m_id)->name();
         }
         catch (const VExceptionBadId &)
-        {}
+        {
+        }
 
         const QString errorMsg = QObject::tr("Cannot calculate seam allowance before for point '%1'. Reason: %2.")
-                .arg(nodeName, formula.Reason());
-        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+                                     .arg(nodeName, formula.Reason());
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         return -1;
     }
 
@@ -237,12 +241,14 @@ auto VPieceNode::GetSAAfter(const VContainer *data) const -> qreal
             nodeName = data->GetGObject(d->m_id)->name();
         }
         catch (const VExceptionBadId &)
-        {}
+        {
+        }
 
         const QString errorMsg = QObject::tr("Cannot calculate seam allowance after for point '%1'. Reason: %2.")
-                .arg(nodeName, formula.Reason());
-        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+                                     .arg(nodeName, formula.Reason());
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         return -1;
     }
 
@@ -269,12 +275,14 @@ auto VPieceNode::GetSAAfter(const VContainer *data, Unit unit) const -> qreal
             nodeName = data->GetGObject(d->m_id)->name();
         }
         catch (const VExceptionBadId &)
-        {}
+        {
+        }
 
         const QString errorMsg = QObject::tr("Cannot calculate seam allowance after for point '%1'. Reason: %2.")
-                .arg(nodeName, formula.Reason());
-        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+                                     .arg(nodeName, formula.Reason());
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         return -1;
     }
 
@@ -365,12 +373,14 @@ auto VPieceNode::GetPassmarkLength(const VContainer *data, Unit unit) const -> q
                 nodeName = data->GetGObject(d->m_id)->name();
             }
             catch (const VExceptionBadId &)
-            {}
+            {
+            }
 
             const QString errorMsg = QObject::tr("Cannot calculate passmark length for point '%1'. Reason: %2.")
-                    .arg(nodeName, formula.Reason());
-            VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+                                         .arg(nodeName, formula.Reason());
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(errorMsg)
+                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
             return VSAPoint::maxPassmarkLength;
         }
 

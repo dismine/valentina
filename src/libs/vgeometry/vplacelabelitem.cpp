@@ -26,30 +26,27 @@
  **
  *************************************************************************/
 #include "vplacelabelitem.h"
-#include "vplacelabelitem_p.h"
 #include "../vpatterndb/vcontainer.h"
+#include "vplacelabelitem_p.h"
 
-#include <qnumeric.h>
+#include <QPainterPath>
 #include <QPolygonF>
 #include <QTransform>
-#include <QPainterPath>
+#include <qnumeric.h>
 
 //---------------------------------------------------------------------------------------------------------------------
 VPlaceLabelItem::VPlaceLabelItem()
-    : VPointF(), d(new VPlaceLabelItemData)
+  : d(new VPlaceLabelItemData)
 {
     setType(GOType::PlaceLabel);
     setMode(Draw::Modeling);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPlaceLabelItem::VPlaceLabelItem(const VPlaceLabelItem &item)
-    : VPointF(item), d(item.d)
-{}
+COPY_CONSTRUCTOR_IMPL_2(VPlaceLabelItem, VPointF)
 
 //---------------------------------------------------------------------------------------------------------------------
-VPlaceLabelItem::~VPlaceLabelItem()
-{}
+VPlaceLabelItem::~VPlaceLabelItem() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPlaceLabelItem::GetWidthFormula() const -> QString
@@ -202,7 +199,7 @@ auto VPlaceLabelItem::RotationMatrix() const -> QTransform
 {
     QTransform t;
     t.translate(x(), y());
-    t.rotate(-d->aValue-d->correctionAngle);
+    t.rotate(-d->aValue - d->correctionAngle);
     t.translate(-x(), -y());
     return t;
 }
@@ -216,7 +213,7 @@ auto VPlaceLabelItem::Box() const -> QRectF
 //---------------------------------------------------------------------------------------------------------------------
 auto VPlaceLabelItem::operator=(const VPlaceLabelItem &item) -> VPlaceLabelItem &
 {
-    if ( &item == this )
+    if (&item == this)
     {
         return *this;
     }
@@ -228,11 +225,13 @@ auto VPlaceLabelItem::operator=(const VPlaceLabelItem &item) -> VPlaceLabelItem 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VPlaceLabelItem::VPlaceLabelItem(VPlaceLabelItem &&item) noexcept
-    : VPointF(std::move(item)), d(std::move(item.d))
-{}
+  : VPointF(std::move(item)),
+    d(std::move(item.d))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPlaceLabelItem::operator=(VPlaceLabelItem &&item) noexcept->VPlaceLabelItem &
+auto VPlaceLabelItem::operator=(VPlaceLabelItem &&item) noexcept -> VPlaceLabelItem &
 {
     VPointF::operator=(item);
     std::swap(d, item.d);

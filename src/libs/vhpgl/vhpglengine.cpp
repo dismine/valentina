@@ -309,6 +309,12 @@ auto NextPattern(int patternIndex, const QVector<int> &pattern) -> int
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
+VHPGLEngine::VHPGLEngine()
+  : m_penWidthPx(qCeil(ToPixel(0.025, Unit::Mm)))
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VHPGLEngine::SortDetails(const QVector<VLayoutPiece> &details) -> QList<VLayoutPiece>
 {
     QList<VLayoutPiece> sorted;

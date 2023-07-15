@@ -48,7 +48,6 @@
 #endif
 
 #include "../ifc/exception/vexceptionterminatedposition.h"
-#include "../vmisc/compatibility.h"
 #include "vbestsquare.h"
 #include "vcontour.h"
 #include "vlayoutpaper_p.h"
@@ -68,10 +67,7 @@ VLayoutPaper::VLayoutPaper(int height, int width, qreal layoutWidth)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutPaper::VLayoutPaper(const VLayoutPaper &paper)
-  : d(paper.d)
-{
-}
+COPY_CONSTRUCTOR_IMPL(VLayoutPaper)
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutPaper::operator=(const VLayoutPaper &paper) -> VLayoutPaper &
@@ -100,9 +96,7 @@ auto VLayoutPaper::operator=(VLayoutPaper &&paper) noexcept -> VLayoutPaper &
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutPaper::~VLayoutPaper()
-{
-}
+VLayoutPaper::~VLayoutPaper() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutPaper::GetHeight() const -> int
@@ -382,7 +376,7 @@ auto VLayoutPaper::GetGlobalContour() const -> QGraphicsPathItem *
     const QVector<QPointF> points = d->globalContour.GetContour();
 
     QPainterPath path;
-    if (points.size() > 0)
+    if (!points.isEmpty())
     {
         path.moveTo(points.at(0));
         for (auto point : points)

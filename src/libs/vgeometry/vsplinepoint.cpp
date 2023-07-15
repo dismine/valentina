@@ -39,8 +39,9 @@
  * @brief VFSplinePoint default constructor.
  */
 VFSplinePoint::VFSplinePoint()
-    :d(new VFSplinePointData)
-{}
+  : d(new VFSplinePointData)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -52,22 +53,17 @@ VFSplinePoint::VFSplinePoint()
  * @param angle2 second angle control line.
  */
 VFSplinePoint::VFSplinePoint(const VPointF &pSpline, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2)
-    :d(new VFSplinePointData(pSpline, kAsm1, angle1, kAsm2, angle2))
-{}
+  : d(new VFSplinePointData(pSpline, kAsm1, angle1, kAsm2, angle2))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VFSplinePoint copy constructor
- * @param point point
- */
-VFSplinePoint::VFSplinePoint(const VFSplinePoint &point)
-    :d(point.d)
-{}
+COPY_CONSTRUCTOR_IMPL(VFSplinePoint)
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VFSplinePoint::operator=(const VFSplinePoint &point) -> VFSplinePoint &
 {
-    if ( &point == this )
+    if (&point == this)
     {
         return *this;
     }
@@ -78,11 +74,12 @@ auto VFSplinePoint::operator=(const VFSplinePoint &point) -> VFSplinePoint &
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VFSplinePoint::VFSplinePoint(VFSplinePoint &&point) noexcept
-    :d(std::move(point.d))
-{}
+  : d(std::move(point.d))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VFSplinePoint::operator=(VFSplinePoint &&point) noexcept->VFSplinePoint &
+auto VFSplinePoint::operator=(VFSplinePoint &&point) noexcept -> VFSplinePoint &
 {
     std::swap(d, point.d);
     return *this;
@@ -90,8 +87,7 @@ auto VFSplinePoint::operator=(VFSplinePoint &&point) noexcept->VFSplinePoint &
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VFSplinePoint::~VFSplinePoint()
-{}
+VFSplinePoint::~VFSplinePoint() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -104,7 +100,7 @@ void VFSplinePoint::SetAngle1(const qreal &value)
     line.setAngle(value);
     d->angle1 = line.angle();
 
-    line.setAngle(d->angle1+180);
+    line.setAngle(d->angle1 + 180);
     d->angle2 = line.angle();
 }
 
@@ -119,7 +115,7 @@ void VFSplinePoint::SetAngle2(const qreal &value)
     line.setAngle(value);
     d->angle2 = line.angle();
 
-    line.setAngle(d->angle2+180);
+    line.setAngle(d->angle2 + 180);
     d->angle1 = line.angle();
 }
 
@@ -205,7 +201,7 @@ void VFSplinePoint::SetKAsm2(const qreal &value)
 
 //------------------------------------------VSplinePoint---------------------------------------------------------------
 VSplinePoint::VSplinePoint()
-    : d(new VSplinePointData)
+  : d(new VSplinePointData)
 {
 }
 
@@ -213,20 +209,17 @@ VSplinePoint::VSplinePoint()
 VSplinePoint::VSplinePoint(const VPointF &pSpline, qreal angle1, const QString &angle1F, qreal angle2,
                            const QString &angle2F, qreal length1, const QString &length1F, qreal length2,
                            const QString &length2F)
-    : d(new VSplinePointData(pSpline, angle1, angle1F, angle2, angle2F, length1, length1F, length2, length2F))
+  : d(new VSplinePointData(pSpline, angle1, angle1F, angle2, angle2F, length1, length1F, length2, length2F))
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSplinePoint::VSplinePoint(const VSplinePoint &point)
-    : d(point.d)
-{
-}
+COPY_CONSTRUCTOR_IMPL(VSplinePoint)
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VSplinePoint::operator=(const VSplinePoint &point) -> VSplinePoint &
 {
-    if ( &point == this )
+    if (&point == this)
     {
         return *this;
     }
@@ -237,11 +230,12 @@ auto VSplinePoint::operator=(const VSplinePoint &point) -> VSplinePoint &
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VSplinePoint::VSplinePoint(VSplinePoint &&point) noexcept
-    : d(std::move(point.d))
-{}
+  : d(std::move(point.d))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VSplinePoint::operator=(VSplinePoint &&point) noexcept->VSplinePoint &
+auto VSplinePoint::operator=(VSplinePoint &&point) noexcept -> VSplinePoint &
 {
     std::swap(d, point.d);
     return *this;
@@ -249,9 +243,7 @@ auto VSplinePoint::operator=(VSplinePoint &&point) noexcept->VSplinePoint &
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VSplinePoint::~VSplinePoint()
-{
-}
+VSplinePoint::~VSplinePoint() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VSplinePoint::P() const -> VPointF
@@ -286,7 +278,7 @@ void VSplinePoint::SetAngle1(const qreal &value, const QString &angle1F)
     line.setAngle(value);
     d->angle1 = line.angle();
 
-    line.setAngle(d->angle1+180);
+    line.setAngle(d->angle1 + 180);
     d->angle2 = line.angle();
     d->angle2F = QString::number(d->angle2);
 }
@@ -312,7 +304,7 @@ void VSplinePoint::SetAngle2(const qreal &value, const QString &angle2F)
     line.setAngle(value);
     d->angle2 = line.angle();
 
-    line.setAngle(d->angle2+180);
+    line.setAngle(d->angle2 + 180);
     d->angle1 = line.angle();
     d->angle1F = QString::number(d->angle1);
 }
@@ -365,17 +357,10 @@ auto VSplinePoint::IsMovable() const -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto VSplinePoint::ToJson() const -> QJsonObject
 {
-    QJsonObject object
-    {
-        {"point", d->pSpline.ToJson()},
-        {"angle1", d->angle1},
-        {"angle1Formula", d->angle1F},
-        {"angle2", d->angle2},
-        {"angle2Formula", d->angle2F},
-        {"length1", d->length1},
-        {"length1Formula", d->length1F},
-        {"length2", d->length2},
-        {"length2Formula", d->length2F},
+    QJsonObject object{
+        {"point", d->pSpline.ToJson()},  {"angle1", d->angle1},         {"angle1Formula", d->angle1F},
+        {"angle2", d->angle2},           {"angle2Formula", d->angle2F}, {"length1", d->length1},
+        {"length1Formula", d->length1F}, {"length2", d->length2},       {"length2Formula", d->length2F},
     };
     return object;
 }

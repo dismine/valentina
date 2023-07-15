@@ -26,6 +26,7 @@
  **
  *************************************************************************/
 #include "vsvgfont.h"
+#include "../def.h"
 #include "svgdef.h"
 #include "vsvgfont_p.h"
 
@@ -47,15 +48,10 @@ VSvgFont::VSvgFont(qreal horizAdvX)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSvgFont::VSvgFont(const VSvgFont &font) // NOLINT(modernize-use-equals-default)
-  : d(font.d)
-{
-}
+COPY_CONSTRUCTOR_IMPL(VSvgFont)
 
 //---------------------------------------------------------------------------------------------------------------------
-VSvgFont::~VSvgFont() // NOLINT(modernize-use-equals-default)
-{
-}
+VSvgFont::~VSvgFont() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VSvgFont::operator=(const VSvgFont &font) -> VSvgFont &

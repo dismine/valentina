@@ -33,13 +33,13 @@
 #include <QtDebug>
 
 #include "../ifc/ifcdef.h"
-#include "vvariable.h"
 #include "vmeasurement_p.h"
+#include "vvariable.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VMeasurement::VMeasurement(quint32 index, const QString &name)
-    :VVariable(name),
-     d(new VMeasurementData(index, MeasurementType::Separator))
+  : VVariable(name),
+    d(new VMeasurementData(index, MeasurementType::Separator))
 {
     SetType(VarType::MeasurementSeparator);
     VInternalVariable::SetValue(0);
@@ -52,8 +52,8 @@ VMeasurement::VMeasurement(quint32 index, const QString &name)
  * @param base measurement's base value
  */
 VMeasurement::VMeasurement(quint32 index, const QString &name, qreal baseA, qreal baseB, qreal baseC, qreal base)
-    :VVariable(name),
-      d(new VMeasurementData(index, baseA, baseB, baseC, base))
+  : VVariable(name),
+    d(new VMeasurementData(index, baseA, baseB, baseC, base))
 {
     SetType(VarType::Measurement);
     VInternalVariable::SetValue(d->shiftBase);
@@ -67,21 +67,20 @@ VMeasurement::VMeasurement(quint32 index, const QString &name, qreal baseA, qrea
  */
 VMeasurement::VMeasurement(VContainer *data, quint32 index, const QString &name, const qreal &base,
                            const QString &formula, bool ok)
-    :VVariable(name), d(new VMeasurementData(data, index, formula, ok, base))
+  : VVariable(name),
+    d(new VMeasurementData(data, index, formula, ok, base))
 {
     SetType(VarType::Measurement);
     VInternalVariable::SetValue(base);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VMeasurement::VMeasurement(const VMeasurement &m)
-    :VVariable(m), d(m.d)
-{}
+COPY_CONSTRUCTOR_IMPL_2(VMeasurement, VVariable)
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VMeasurement::operator=(const VMeasurement &m) -> VMeasurement &
 {
-    if ( &m == this )
+    if (&m == this)
     {
         return *this;
     }
@@ -93,11 +92,13 @@ auto VMeasurement::operator=(const VMeasurement &m) -> VMeasurement &
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VMeasurement::VMeasurement(VMeasurement &&m) noexcept
-    :VVariable(std::move(m)), d(std::move(m.d))
-{}
+  : VVariable(std::move(m)),
+    d(std::move(m.d))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VMeasurement::operator=(VMeasurement &&m) noexcept->VMeasurement &
+auto VMeasurement::operator=(VMeasurement &&m) noexcept -> VMeasurement &
 {
     VVariable::operator=(m);
     std::swap(d, m.d);
@@ -106,8 +107,7 @@ auto VMeasurement::operator=(VMeasurement &&m) noexcept->VMeasurement &
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VMeasurement::~VMeasurement()
-{}
+VMeasurement::~VMeasurement() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VMeasurement::CorrectionHash(qreal baseA, qreal baseB, qreal baseC) -> QString

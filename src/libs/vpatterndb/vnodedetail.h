@@ -75,7 +75,7 @@ public:
     auto operator=(const VNodeDetail &node) -> VNodeDetail &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VNodeDetail(VNodeDetail &&node) noexcept;
-    auto operator=(VNodeDetail &&node) noexcept->VNodeDetail &;
+    auto operator=(VNodeDetail &&node) noexcept -> VNodeDetail &;
 #endif
 
     /**
@@ -87,7 +87,7 @@ public:
      * @brief setId set object id.
      * @param value object id.
      */
-    void        setId(const quint32 &value);
+    void setId(const quint32 &value);
     /**
      * @brief getTypeTool return tool type.
      * @return tool type.
@@ -97,7 +97,7 @@ public:
      * @brief setTypeTool set tool type.
      * @param value tool type.
      */
-    void        setTypeTool(const Tool &value);
+    void setTypeTool(const Tool &value);
     /**
      * @brief getTypeNode return node type.
      * @return node type.
@@ -107,7 +107,7 @@ public:
      * @brief setTypeNode set node type.
      * @param value node type.
      */
-    void        setTypeNode(const NodeDetail &value);
+    void setTypeNode(const NodeDetail &value);
     /**
      * @brief getMx return object bias x axis.
      * @return bias x axis.
@@ -117,7 +117,7 @@ public:
      * @brief setMx set object bias x axis.
      * @param value bias x axis.
      */
-    void        setMx(const qreal &value);
+    void setMx(const qreal &value);
     /**
      * @brief getMy return object bias y axis.
      * @return bias y axis.
@@ -127,10 +127,10 @@ public:
      * @brief setMy set object bias y axis.
      * @param value bias y axis.
      */
-    void        setMy(const qreal &value);
+    void setMy(const qreal &value);
 
     auto getReverse() const -> bool;
-    void        setReverse(bool reverse);
+    void setReverse(bool reverse);
 
     static auto Convert(const VContainer *data, const QVector<VNodeDetail> &nodes, qreal width, bool closed)
         -> QVector<VPieceNode>;
@@ -139,7 +139,7 @@ private:
     QSharedDataPointer<VNodeDetailData> d;
 };
 
-Q_DECLARE_METATYPE(VNodeDetail)
+Q_DECLARE_METATYPE(VNodeDetail)                  // NOLINT
 Q_DECLARE_TYPEINFO(VNodeDetail, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VNODEDETAIL_H

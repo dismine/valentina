@@ -34,20 +34,19 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VCubicBezier::VCubicBezier()
-    : VAbstractCubicBezier(GOType::CubicBezier), d(new VCubicBezierData)
+  : VAbstractCubicBezier(GOType::CubicBezier),
+    d(new VCubicBezierData)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCubicBezier::VCubicBezier(const VCubicBezier &curve)
-    : VAbstractCubicBezier(curve), d(curve.d)
-{
-}
+COPY_CONSTRUCTOR_IMPL_2(VCubicBezier, VAbstractCubicBezier)
 
 //---------------------------------------------------------------------------------------------------------------------
 VCubicBezier::VCubicBezier(const VPointF &p1, const VPointF &p2, const VPointF &p3, const VPointF &p4, quint32 idObject,
                            Draw mode)
-    : VAbstractCubicBezier(GOType::CubicBezier, idObject, mode), d(new VCubicBezierData(p1, p2, p3, p4))
+  : VAbstractCubicBezier(GOType::CubicBezier, idObject, mode),
+    d(new VCubicBezierData(p1, p2, p3, p4))
 {
     CreateName();
 }
@@ -55,7 +54,7 @@ VCubicBezier::VCubicBezier(const VPointF &p1, const VPointF &p2, const VPointF &
 //---------------------------------------------------------------------------------------------------------------------
 auto VCubicBezier::operator=(const VCubicBezier &curve) -> VCubicBezier &
 {
-    if ( &curve == this )
+    if (&curve == this)
     {
         return *this;
     }
@@ -67,11 +66,13 @@ auto VCubicBezier::operator=(const VCubicBezier &curve) -> VCubicBezier &
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VCubicBezier::VCubicBezier(VCubicBezier &&curve) noexcept
-    : VAbstractCubicBezier(std::move(curve)), d(std::move(curve.d))
-{}
+  : VAbstractCubicBezier(std::move(curve)),
+    d(std::move(curve.d))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VCubicBezier::operator=(VCubicBezier &&curve) noexcept->VCubicBezier &
+auto VCubicBezier::operator=(VCubicBezier &&curve) noexcept -> VCubicBezier &
 {
     VAbstractCubicBezier::operator=(curve);
     std::swap(d, curve.d);
@@ -143,9 +144,7 @@ auto VCubicBezier::Move(qreal length, qreal angle, const QString &prefix) const 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCubicBezier::~VCubicBezier()
-{
-}
+VCubicBezier::~VCubicBezier() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VCubicBezier::GetP1() const -> VPointF
@@ -214,8 +213,8 @@ auto VCubicBezier::GetEndAngle() const -> qreal
  */
 auto VCubicBezier::GetLength() const -> qreal
 {
-    return LengthBezier (static_cast<QPointF>(GetP1()), static_cast<QPointF>(GetP2()),
-                         static_cast<QPointF>(GetP3()), static_cast<QPointF>(GetP4()), GetApproximationScale());
+    return LengthBezier(static_cast<QPointF>(GetP1()), static_cast<QPointF>(GetP2()), static_cast<QPointF>(GetP3()),
+                        static_cast<QPointF>(GetP4()), GetApproximationScale());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -256,6 +255,6 @@ auto VCubicBezier::GetControlPoint2() const -> QPointF
 //---------------------------------------------------------------------------------------------------------------------
 auto VCubicBezier::GetRealLength() const -> qreal
 {
-    return LengthBezier (static_cast<QPointF>(GetP1()), static_cast<QPointF>(GetP2()),
-                         static_cast<QPointF>(GetP3()), static_cast<QPointF>(GetP4()), maxCurveApproximationScale);
+    return LengthBezier(static_cast<QPointF>(GetP1()), static_cast<QPointF>(GetP2()), static_cast<QPointF>(GetP3()),
+                        static_cast<QPointF>(GetP4()), maxCurveApproximationScale);
 }

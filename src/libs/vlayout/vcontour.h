@@ -35,8 +35,8 @@
 #include <QVector>
 #include <QtGlobal>
 
-#include "vlayoutdef.h"
 #include "../vmisc/defglobal.h"
+#include "vlayoutdef.h"
 
 class VContourData;
 class QPointF;
@@ -57,16 +57,16 @@ public:
     auto operator=(const VContour &contour) -> VContour &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VContour(VContour &&contour) noexcept;
-    auto operator=(VContour &&contour) noexcept->VContour &;
+    auto operator=(VContour &&contour) noexcept -> VContour &;
 #endif
 
     void CeateEmptySheetContour();
 
-    void             SetContour(const QVector<QPointF> &contour);
+    void SetContour(const QVector<QPointF> &contour);
     auto GetContour() const -> QVector<QPointF>;
 
     auto GetShift() const -> qreal;
-    void  SetShift(qreal shift);
+    void SetShift(qreal shift);
 
     auto GetHeight() const -> int;
     void SetHeight(int height);

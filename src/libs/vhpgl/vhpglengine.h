@@ -49,7 +49,7 @@ class VHPGLEngine
     friend class VHPGLPaintDevice;
 
 public:
-    VHPGLEngine() = default;
+    VHPGLEngine();
     ~VHPGLEngine() = default;
 
     auto isActive() const -> bool;
@@ -93,7 +93,7 @@ private:
     QPoint m_currentPos{-1, -1};
     bool m_singleLineFont{false};
     bool m_singleStrokeOutlineFont{false};
-    int m_penWidthPx{qCeil(ToPixel(0.025, Unit::Mm))};
+    int m_penWidthPx;
     qreal m_xscale{1};
     qreal m_yscale{1};
     bool m_showGrainline{true};

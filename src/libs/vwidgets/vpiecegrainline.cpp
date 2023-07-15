@@ -37,9 +37,9 @@
 
 namespace
 {
-constexpr qreal arrowAngle = M_PI/9;
+constexpr qreal arrowAngle = M_PI / 9;
 constexpr int arrowLength = 15;
-}
+} // namespace
 
 // VPieceGrainlinePrivate
 //---------------------------------------------------------------------------------------------------------------------
@@ -52,32 +52,32 @@ auto VPieceGrainlinePrivate::MainLine(const QPointF &p1, qreal length, qreal ang
 // VPieceGrainline
 //---------------------------------------------------------------------------------------------------------------------
 VPieceGrainline::VPieceGrainline()
-    :d(new VPieceGrainlinePrivate)
-{}
+  : d(new VPieceGrainlinePrivate)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceGrainline::~VPieceGrainline() //NOLINT(modernize-use-equals-default)
-{}
+VPieceGrainline::~VPieceGrainline() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 VPieceGrainline::VPieceGrainline(const QLineF &mainLine, GrainlineArrowDirection arrowType)
-    :d (new VPieceGrainlinePrivate(mainLine, arrowType))
-{}
+  : d(new VPieceGrainlinePrivate(mainLine, arrowType))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VPieceGrainline::VPieceGrainline(const QPointF &p1, qreal length, qreal angle, GrainlineArrowDirection arrowType)
-    :d (new VPieceGrainlinePrivate(VPieceGrainlinePrivate::MainLine(p1, length, angle), arrowType))
-{}
+  : d(new VPieceGrainlinePrivate(VPieceGrainlinePrivate::MainLine(p1, length, angle), arrowType))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceGrainline::VPieceGrainline(const VPieceGrainline &other) //NOLINT(modernize-use-equals-default)
-    :d (other.d)
-{}
+COPY_CONSTRUCTOR_IMPL(VPieceGrainline)
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPieceGrainline::operator=(const VPieceGrainline &grainline) -> VPieceGrainline &
 {
-    if ( &grainline == this )
+    if (&grainline == this)
     {
         return *this;
     }
@@ -88,8 +88,9 @@ auto VPieceGrainline::operator=(const VPieceGrainline &grainline) -> VPieceGrain
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VPieceGrainline::VPieceGrainline(VPieceGrainline &&grainline) noexcept
-    : d(std::move(grainline.d))
-{}
+  : d(std::move(grainline.d))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPieceGrainline::operator=(VPieceGrainline &&grainline) noexcept -> VPieceGrainline &
@@ -397,7 +398,7 @@ auto VPieceGrainline::IsPositionValid(const QVector<QPointF> &contourPoints) con
 {
     QVector<QLineF> grainLine;
     QLineF mainLine = GetMainLine();
-    if (IsFourWays ())
+    if (IsFourWays())
     {
         grainLine = {mainLine, SecondaryLine()};
     }
@@ -409,7 +410,7 @@ auto VPieceGrainline::IsPositionValid(const QVector<QPointF> &contourPoints) con
         QVector<QPointF> points = VAbstractCurve::CurveIntersectLine(contourPoints, line);
         for (auto &point : points)
         {
-            if (not VFuzzyComparePoints (line.p1 (), point) && not VFuzzyComparePoints (line.p2 (), point))
+            if (not VFuzzyComparePoints(line.p1(), point) && not VFuzzyComparePoints(line.p2(), point))
             {
                 return false;
             }

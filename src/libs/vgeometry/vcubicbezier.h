@@ -51,7 +51,7 @@ public:
     auto Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const -> VCubicBezier;
     auto Flip(const QLineF &axis, const QString &prefix = QString()) const -> VCubicBezier;
     auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VCubicBezier;
-    virtual ~VCubicBezier();
+    ~VCubicBezier() override;
 
     auto operator=(const VCubicBezier &curve) -> VCubicBezier &;
 #ifdef Q_COMPILER_RVALUE_REFS
@@ -59,29 +59,29 @@ public:
     auto operator=(VCubicBezier &&curve) noexcept -> VCubicBezier &;
 #endif
 
-    virtual auto GetP1() const -> VPointF override;
+    auto GetP1() const -> VPointF override;
     void SetP1(const VPointF &p);
 
-    virtual auto GetP2() const -> VPointF override;
+    auto GetP2() const -> VPointF override;
     void SetP2(const VPointF &p);
 
-    virtual auto GetP3() const -> VPointF override;
+    auto GetP3() const -> VPointF override;
     void SetP3(const VPointF &p);
 
-    virtual auto GetP4() const -> VPointF override;
+    auto GetP4() const -> VPointF override;
     void SetP4(const VPointF &p);
 
-    virtual auto GetStartAngle() const -> qreal override;
-    virtual auto GetEndAngle() const -> qreal override;
-    virtual auto GetLength() const -> qreal override;
-    virtual auto GetPoints() const -> QVector<QPointF> override;
+    auto GetStartAngle() const -> qreal override;
+    auto GetEndAngle() const -> qreal override;
+    auto GetLength() const -> qreal override;
+    auto GetPoints() const -> QVector<QPointF> override;
 
-    virtual auto GetC1Length() const -> qreal override;
-    virtual auto GetC2Length() const -> qreal override;
+    auto GetC1Length() const -> qreal override;
+    auto GetC2Length() const -> qreal override;
 
 protected:
-    virtual auto GetControlPoint1() const -> QPointF override;
-    virtual auto GetControlPoint2() const -> QPointF override;
+    auto GetControlPoint1() const -> QPointF override;
+    auto GetControlPoint2() const -> QPointF override;
     auto GetRealLength() const -> qreal override;
 
 private:

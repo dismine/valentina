@@ -36,7 +36,7 @@ VInternalVariable::VInternalVariable()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VInternalVariable::VInternalVariable(const VInternalVariable &var) = default;
+COPY_CONSTRUCTOR_IMPL(VInternalVariable)
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VInternalVariable::operator=(const VInternalVariable &var) -> VInternalVariable &

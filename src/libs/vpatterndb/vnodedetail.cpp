@@ -27,11 +27,11 @@
  *************************************************************************/
 
 #include "vnodedetail.h"
+#include "../vgeometry/vpointf.h"
+#include "../vpatterndb/vcontainer.h"
 #include "vnodedetail_p.h"
 #include "vpiecenode.h"
 #include "vpiecepath.h"
-#include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vcontainer.h"
 
 #include <QLineF>
 #include <QVector>
@@ -41,9 +41,8 @@ namespace
 //---------------------------------------------------------------------------------------------------------------------
 auto IsOX(const QLineF &line) -> bool
 {
-    return VFuzzyComparePossibleNulls(line.angle(), 0)
-            || VFuzzyComparePossibleNulls(line.angle(), 360)
-            || VFuzzyComparePossibleNulls(line.angle(), 180);
+    return VFuzzyComparePossibleNulls(line.angle(), 0) || VFuzzyComparePossibleNulls(line.angle(), 360) ||
+           VFuzzyComparePossibleNulls(line.angle(), 180);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -92,27 +91,27 @@ void ConvertAfter(VPieceNode &node, const QLineF &line, qreal mX, qreal mY)
         node.SetFormulaSAAfter(LocalWidth(line, movedLine));
     }
 }
-}//static functions
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VNodeDetail::VNodeDetail()
-    :d(new VNodeDetailData)
-{}
+  : d(new VNodeDetailData)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VNodeDetail::VNodeDetail(quint32 id, Tool typeTool, NodeDetail typeNode, qreal mx, qreal my, bool reverse)
-    :d(new VNodeDetailData(id, typeTool, typeNode, mx, my, reverse))
-{}
+  : d(new VNodeDetailData(id, typeTool, typeNode, mx, my, reverse))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VNodeDetail::VNodeDetail(const VNodeDetail &node)
-    :d (node.d)
-{}
+COPY_CONSTRUCTOR_IMPL(VNodeDetail)
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VNodeDetail::operator=(const VNodeDetail &node) -> VNodeDetail &
 {
-    if ( &node == this )
+    if (&node == this)
     {
         return *this;
     }
@@ -123,11 +122,12 @@ auto VNodeDetail::operator=(const VNodeDetail &node) -> VNodeDetail &
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VNodeDetail::VNodeDetail(VNodeDetail &&node) noexcept
-    :d (std::move(node.d))
-{}
+  : d(std::move(node.d))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VNodeDetail::operator=(VNodeDetail &&node) noexcept->VNodeDetail &
+auto VNodeDetail::operator=(VNodeDetail &&node) noexcept -> VNodeDetail &
 {
     std::swap(d, node.d);
     return *this;
@@ -135,8 +135,7 @@ auto VNodeDetail::operator=(VNodeDetail &&node) noexcept->VNodeDetail &
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VNodeDetail::~VNodeDetail()
-{}
+VNodeDetail::~VNodeDetail() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VNodeDetail::getId() const -> quint32
@@ -253,13 +252,13 @@ auto VNodeDetail::Convert(const VContainer *data, const QVector<VNodeDetail> &no
                     const QPointF point = data->GeometricObject<VPointF>(node.getId())->toQPointF();
 
                     QLineF lineBefore(point, previosPoint);
-                    lineBefore.setAngle(lineBefore.angle()-90);
+                    lineBefore.setAngle(lineBefore.angle() - 90);
                     lineBefore.setLength(width);
 
                     ConvertBefore(path[i], lineBefore, node.getMx(), node.getMy());
 
                     QLineF lineAfter(point, nextPoint);
-                    lineAfter.setAngle(lineAfter.angle()+90);
+                    lineAfter.setAngle(lineAfter.angle() + 90);
                     lineAfter.setLength(width);
 
                     ConvertAfter(path[i], lineAfter, node.getMx(), node.getMy());
@@ -271,7 +270,7 @@ auto VNodeDetail::Convert(const VContainer *data, const QVector<VNodeDetail> &no
     if (not closed && path.CountNodes() > 1)
     {
         path[0].SetFormulaSABefore(QChar('0'));
-        path[path.CountNodes()-1].SetFormulaSAAfter(QChar('0'));
+        path[path.CountNodes() - 1].SetFormulaSAAfter(QChar('0'));
     }
 
     return path.GetNodes();

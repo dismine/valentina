@@ -28,10 +28,10 @@
 #ifndef VPLACELABELITEM_H
 #define VPLACELABELITEM_H
 
+#include <QMetaType>
 #include <QSharedDataPointer>
 #include <QTypeInfo>
 #include <QtGlobal>
-#include <QMetaType>
 
 #include "vpointf.h"
 
@@ -44,42 +44,42 @@ class VPlaceLabelItem : public VPointF
 public:
     VPlaceLabelItem();
     VPlaceLabelItem(const VPlaceLabelItem &item);
-    virtual ~VPlaceLabelItem() override;
+    ~VPlaceLabelItem() override;
 
     auto operator=(const VPlaceLabelItem &item) -> VPlaceLabelItem &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VPlaceLabelItem(VPlaceLabelItem &&item) noexcept;
-    auto operator=(VPlaceLabelItem &&item) noexcept->VPlaceLabelItem &;
+    auto operator=(VPlaceLabelItem &&item) noexcept -> VPlaceLabelItem &;
 #endif
 
     auto GetWidthFormula() const -> QString;
     auto GetWidthFormula() -> QString &;
     auto GetWidth() const -> qreal;
-    void     SetWidth(qreal value, const QString &formula);
+    void SetWidth(qreal value, const QString &formula);
 
     auto GetHeightFormula() const -> QString;
     auto GetHeightFormula() -> QString &;
     auto GetHeight() const -> qreal;
-    void     SetHeight(qreal value, const QString &formula);
+    void SetHeight(qreal value, const QString &formula);
 
     auto GetAngleFormula() const -> QString;
     auto GetAngleFormula() -> QString &;
     auto GetAngle() const -> qreal;
-    void     SetAngle(qreal value, const QString &formula);
+    void SetAngle(qreal value, const QString &formula);
 
     auto GetVisibilityTrigger() const -> QString;
     auto GetVisibilityTrigger() -> QString &;
     auto IsVisible() const -> bool;
-    void     SetVisibilityTrigger(qreal visible, const QString &formula);
+    void SetVisibilityTrigger(qreal visible, const QString &formula);
 
     auto GetCorrectionAngle() const -> qreal;
-    void     SetCorrectionAngle(qreal value);
+    void SetCorrectionAngle(qreal value);
 
     auto GetCenterPoint() const -> quint32;
-    void    SetCenterPoint(quint32 id);
+    void SetCenterPoint(quint32 id);
 
     auto GetLabelType() const -> PlaceLabelType;
-    void           SetLabelType(PlaceLabelType type);
+    void SetLabelType(PlaceLabelType type);
 
     auto RotationMatrix() const -> QTransform;
     auto Box() const -> QRectF;
@@ -88,7 +88,7 @@ private:
     QSharedDataPointer<VPlaceLabelItemData> d;
 };
 
-Q_DECLARE_METATYPE(VPlaceLabelItem)
+Q_DECLARE_METATYPE(VPlaceLabelItem)                  // NOLINT
 Q_DECLARE_TYPEINFO(VPlaceLabelItem, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VPLACELABELITEM_H

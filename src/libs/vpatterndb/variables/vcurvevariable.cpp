@@ -47,7 +47,7 @@ VCurveVariable::VCurveVariable(const quint32 &id, const quint32 &parentId)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCurveVariable::VCurveVariable(const VCurveVariable &var) = default;
+COPY_CONSTRUCTOR_IMPL(VCurveVariable)
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VCurveVariable::operator=(const VCurveVariable &var) -> VCurveVariable &

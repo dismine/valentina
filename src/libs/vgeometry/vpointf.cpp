@@ -39,18 +39,20 @@
  * @brief VPointF creat empty point
  */
 VPointF::VPointF()
-    :VGObject(GOType::Point, 0, Draw::Calculation), d(new VPointFData)
-{}
+  : VGObject(GOType::Point, 0, Draw::Calculation),
+    d(new VPointFData)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VPointF::VPointF(const VPointF &point)
-    :VGObject(point), d(point.d)
-{}
+COPY_CONSTRUCTOR_IMPL_2(VPointF, VGObject)
 
 //---------------------------------------------------------------------------------------------------------------------
 VPointF::VPointF(const QPointF &point)
-    :VGObject(VPointF()), d(new VPointFData(point))
-{}
+  : VGObject(VPointF()),
+    d(new VPointFData(point))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -62,7 +64,8 @@ VPointF::VPointF(const QPointF &point)
  * @param my offset name respect to y
  */
 VPointF::VPointF(qreal x, qreal y, const QString &name, qreal mx, qreal my, quint32 idObject, const Draw &mode)
-    :VGObject(GOType::Point, idObject, mode), d(new VPointFData(x, y, mx, my))
+  : VGObject(GOType::Point, idObject, mode),
+    d(new VPointFData(x, y, mx, my))
 {
     setName(name);
 }
@@ -76,14 +79,14 @@ VPointF::VPointF(qreal x, qreal y, const QString &name, qreal mx, qreal my, quin
  * @param my offset name respect to y
  */
 VPointF::VPointF(const QPointF &point, const QString &name, qreal mx, qreal my, quint32 idObject, const Draw &mode)
-    :VGObject(GOType::Point, idObject, mode), d(new VPointFData(point, mx, my))
+  : VGObject(GOType::Point, idObject, mode),
+    d(new VPointFData(point, mx, my))
 {
     setName(name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPointF::~VPointF()
-{}
+VPointF::~VPointF() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -93,7 +96,7 @@ VPointF::~VPointF()
  */
 auto VPointF::operator=(const VPointF &point) -> VPointF &
 {
-    if ( &point == this )
+    if (&point == this)
     {
         return *this;
     }
@@ -105,11 +108,13 @@ auto VPointF::operator=(const VPointF &point) -> VPointF &
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VPointF::VPointF(VPointF &&point) noexcept
-    :VGObject(std::move(point)), d(std::move(point.d))
-{}
+  : VGObject(std::move(point)),
+    d(std::move(point.d))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPointF::operator=(VPointF &&point) noexcept->VPointF &
+auto VPointF::operator=(VPointF &&point) noexcept -> VPointF &
 {
     VGObject::operator=(point);
     std::swap(d, point.d);

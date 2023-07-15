@@ -26,6 +26,7 @@
  **
  *************************************************************************/
 #include "vsvgglyph.h"
+#include "../def.h"
 #include "vsvgglyph_p.h"
 
 #include <QChar>
@@ -44,15 +45,10 @@ VSvgGlyph::VSvgGlyph(QChar unicode, const QPainterPath &path, qreal horizAdvX)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSvgGlyph::VSvgGlyph(const VSvgGlyph &font) // NOLINT(modernize-use-equals-default)
-  : d(font.d)
-{
-}
+COPY_CONSTRUCTOR_IMPL(VSvgGlyph)
 
 //---------------------------------------------------------------------------------------------------------------------
-VSvgGlyph::~VSvgGlyph() // NOLINT(modernize-use-equals-default)
-{
-}
+VSvgGlyph::~VSvgGlyph() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VSvgGlyph::operator=(const VSvgGlyph &glyph) -> VSvgGlyph &

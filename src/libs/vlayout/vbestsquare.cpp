@@ -27,41 +27,40 @@
  *************************************************************************/
 
 #include "vbestsquare.h"
-#include "vbestsquare_p.h"
 #include "../vgeometry/vgeometrydef.h"
+#include "vbestsquare_p.h"
 
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_CONSTEXPR inline auto Square(QSizeF size) -> qint64
 {
-    return static_cast<qint64>(size.width()*size.height());
+    return static_cast<qint64>(size.width() * size.height());
 }
 } // anonymous namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VBestSquare::VBestSquare()
-    : d(new VBestSquareData())
-{}
+  : d(new VBestSquareData())
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VBestSquare::VBestSquare(QSizeF sheetSize, bool saveLength, bool isPortrait)
-    : d(new VBestSquareData(sheetSize, saveLength, isPortrait))
-{}
+  : d(new VBestSquareData(sheetSize, saveLength, isPortrait))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VBestSquare::VBestSquare(const VBestSquare &res)
-    : d(res.d)
-{}
+COPY_CONSTRUCTOR_IMPL(VBestSquare)
 
 //---------------------------------------------------------------------------------------------------------------------
-VBestSquare::~VBestSquare()
-{}
+VBestSquare::~VBestSquare() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VBestSquare::operator=(const VBestSquare &res) -> VBestSquare &
 {
-    if ( &res == this )
+    if (&res == this)
     {
         return *this;
     }
@@ -72,11 +71,12 @@ auto VBestSquare::operator=(const VBestSquare &res) -> VBestSquare &
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VBestSquare::VBestSquare(VBestSquare &&res) noexcept
-    : d(std::move(res.d))
-{}
+  : d(std::move(res.d))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VBestSquare::operator=(VBestSquare &&res) noexcept->VBestSquare &
+auto VBestSquare::operator=(VBestSquare &&res) noexcept -> VBestSquare &
 {
     std::swap(d, res.d);
     return *this;
@@ -104,12 +104,9 @@ void VBestSquare::NewResult(const VBestSquareResData &data)
         {
             if (d->saveLength)
             {
-                if (VFuzzyOnAxis(data.depthPosition, d->data.depthPosition)
-                        && IsImprovedSidePosition(data.sidePosition))
-                {
-                    SaveResult();
-                }
-                else if (data.depthPosition < d->data.depthPosition)
+                if ((VFuzzyOnAxis(data.depthPosition, d->data.depthPosition) &&
+                     IsImprovedSidePosition(data.sidePosition)) ||
+                    data.depthPosition < d->data.depthPosition)
                 {
                     SaveResult();
                 }
@@ -214,7 +211,7 @@ auto VBestSquare::IsImprovedSidePosition(qreal sidePosition) const -> bool
     const bool lessThan = d->data.sidePosition < sidePosition;
     const bool greaterThan = d->data.sidePosition > sidePosition;
 
-    return IsPortrait() ?  greaterThan : lessThan;
+    return IsPortrait() ? greaterThan : lessThan;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

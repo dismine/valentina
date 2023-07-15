@@ -29,7 +29,6 @@
 #ifndef VPOINTF_H
 #define VPOINTF_H
 
-
 #include <QMetaType>
 #include <QSharedDataPointer>
 #include <QString>
@@ -39,7 +38,6 @@
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "vgeometrydef.h"
 #include "vgobject.h"
 
 class VPointFData;
@@ -51,22 +49,22 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 /**
  * @brief The VPointF class keep data of point.
  */
-class VPointF:public VGObject
+class VPointF : public VGObject
 {
 public:
-    VPointF ();
-    VPointF (const VPointF &point );
-    explicit VPointF (const QPointF &point );
-    VPointF (qreal x, qreal y, const QString &name, qreal mx, qreal my, quint32 idObject = 0,
-             const Draw &mode = Draw::Calculation);
-    VPointF (const QPointF &point, const QString &name, qreal mx, qreal my, quint32 idObject = 0,
-             const Draw &mode = Draw::Calculation);
-    virtual ~VPointF() override;
+    VPointF();
+    VPointF(const VPointF &point);
+    explicit VPointF(const QPointF &point);
+    VPointF(qreal x, qreal y, const QString &name, qreal mx, qreal my, quint32 idObject = 0,
+            const Draw &mode = Draw::Calculation);
+    VPointF(const QPointF &point, const QString &name, qreal mx, qreal my, quint32 idObject = 0,
+            const Draw &mode = Draw::Calculation);
+    ~VPointF() override;
 
     auto operator=(const VPointF &point) -> VPointF &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VPointF(VPointF &&point) noexcept;
-    auto operator=(VPointF &&point) noexcept->VPointF &;
+    auto operator=(VPointF &&point) noexcept -> VPointF &;
 #endif
 
     explicit operator QPointF() const;
@@ -75,21 +73,21 @@ public:
     auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VPointF;
     auto mx() const -> qreal;
     auto my() const -> qreal;
-    void    setMx(qreal mx);
-    void    setMy(qreal my);
+    void setMx(qreal mx);
+    void setMy(qreal my);
     auto toQPointF() const -> QPointF;
     auto x() const -> qreal;
-    void    setX(const qreal &value);
+    void setX(const qreal &value);
     auto y() const -> qreal;
-    void    setY(const qreal &value);
+    void setY(const qreal &value);
 
     auto IsShowLabel() const -> bool;
     void SetShowLabel(bool hide);
 
-    virtual auto ToJson() const -> QJsonObject override;
+    auto ToJson() const -> QJsonObject override;
 
-    virtual void SetAlias(const QString &alias) override;
-    virtual void SetAliasSuffix(const QString &aliasSuffix) override;
+    void SetAlias(const QString &alias) override;
+    void SetAliasSuffix(const QString &aliasSuffix) override;
 
     static auto RotatePF(const QPointF &originPoint, const QPointF &point, qreal degrees) -> QPointF;
     static auto FlipPF(const QLineF &axis, const QPointF &point) -> QPointF;
@@ -99,7 +97,7 @@ private:
     QSharedDataPointer<VPointFData> d;
 };
 
-Q_DECLARE_METATYPE(VPointF)
+Q_DECLARE_METATYPE(VPointF)                  // NOLINT
 Q_DECLARE_TYPEINFO(VPointF, Q_MOVABLE_TYPE); // NOLINT
 
 QT_WARNING_POP

@@ -68,6 +68,28 @@ template <class T> class QSharedPointer;
 #endif
 #endif
 
+#if defined(Q_COMPILER_GCC) && defined(Q_CC_GNU) && defined(Q_CC_GNU_VERSION) && (Q_CC_GNU_VERSION <= 40900)
+// NOLINTNEXTLINE(cppcoreguidelines-macro-usage)
+#define COPY_CONSTRUCTOR_IMPL(className)                                                                               \
+    className::className(const className &item)                                                                        \
+      : d(item.d)                                                                                                      \
+    {                                                                                                                  \
+    }
+
+// NOLINTNEXTLINE(cppcoreguidelines-macro-usage)
+#define COPY_CONSTRUCTOR_IMPL_2(className, baseClassName)                                                              \
+    className::className(const className &item)                                                                        \
+      : baseClassName(item),                                                                                           \
+        d(item.d)                                                                                                      \
+    {                                                                                                                  \
+    }
+#else
+// NOLINTNEXTLINE(cppcoreguidelines-macro-usage)
+#define COPY_CONSTRUCTOR_IMPL(className) className::className(const className &) = default;
+// NOLINTNEXTLINE(cppcoreguidelines-macro-usage)
+#define COPY_CONSTRUCTOR_IMPL_2(className, baseClassName) className::className(const className &) = default;
+#endif
+
 class QComboBox;
 class QMarginsF;
 class VTranslateMeasurements;
@@ -501,7 +523,7 @@ template <typename T> constexpr inline auto InchToPixel(T val) noexcept -> T
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline auto ToPixel(double val, const Unit &unit) -> double
+Q_DECL_RELAXED_CONSTEXPR inline auto ToPixel(double val, const Unit &unit) noexcept -> double
 {
     switch (unit)
     {

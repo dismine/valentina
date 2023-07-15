@@ -29,11 +29,11 @@
 #ifndef VBESTSQUARE_H
 #define VBESTSQUARE_H
 
+#include <QSharedDataPointer>
 #include <QSizeF>
 #include <QTransform>
-#include <QtGlobal>
-#include <QSharedDataPointer>
 #include <QTypeInfo>
+#include <QtGlobal>
 
 #include "vlayoutdef.h"
 
@@ -50,7 +50,7 @@ public:
     auto operator=(const VBestSquare &res) -> VBestSquare &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VBestSquare(VBestSquare &&res) noexcept;
-    auto operator=(VBestSquare &&res) noexcept->VBestSquare &;
+    auto operator=(VBestSquare &&res) noexcept -> VBestSquare &;
 #endif
 
     void NewResult(const VBestSquareResData &data);
@@ -65,7 +65,7 @@ public:
     auto Type() const -> BestFrom;
     auto IsTerminatedByException() const -> bool;
     auto ReasonTerminatedByException() const -> QString;
-    void       TerminatedByException(const QString &reason);
+    void TerminatedByException(const QString &reason);
 
     auto BestResultData() const -> VBestSquareResData;
 
@@ -75,7 +75,6 @@ public:
 
 private:
     QSharedDataPointer<VBestSquareData> d;
-
 };
 
 Q_DECLARE_TYPEINFO(VBestSquare, Q_MOVABLE_TYPE); // NOLINT

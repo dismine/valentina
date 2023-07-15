@@ -29,9 +29,9 @@
 #ifndef VPIECENODE_H
 #define VPIECENODE_H
 
-#include <QtGlobal>
-#include <QSharedDataPointer>
 #include <QMetaType>
+#include <QSharedDataPointer>
+#include <QtGlobal>
 
 #include "../vmisc/def.h"
 
@@ -50,7 +50,7 @@ public:
     auto operator=(const VPieceNode &node) -> VPieceNode &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VPieceNode(VPieceNode &&node) noexcept;
-    auto operator=(VPieceNode &&node) noexcept->VPieceNode &;
+    auto operator=(VPieceNode &&node) noexcept -> VPieceNode &;
 #endif
 
     friend auto operator<<(QDataStream &out, const VPieceNode &p) -> QDataStream &;
@@ -128,11 +128,12 @@ public:
 
     auto IsTurnPoint() const -> bool;
     void SetTurnPoint(bool value);
+
 private:
     QSharedDataPointer<VPieceNodeData> d;
 };
 
-Q_DECLARE_METATYPE(VPieceNode)
+Q_DECLARE_METATYPE(VPieceNode)                  // NOLINT
 Q_DECLARE_TYPEINFO(VPieceNode, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VPIECENODE_H

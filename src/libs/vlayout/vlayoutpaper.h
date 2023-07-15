@@ -29,13 +29,12 @@
 #ifndef VLAYOUTPAPER_H
 #define VLAYOUTPAPER_H
 
-
+#include <QGraphicsPathItem>
 #include <QSharedDataPointer>
 #include <QTypeInfo>
+#include <QtCore/qcontainerfwd.h>
 #include <QtGlobal>
 #include <atomic>
-#include <QGraphicsPathItem>
-#include <QtCore/qcontainerfwd.h>
 
 #include "../vmisc/defglobal.h"
 
@@ -59,7 +58,7 @@ public:
     auto operator=(const VLayoutPaper &paper) -> VLayoutPaper &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VLayoutPaper(VLayoutPaper &&paper) noexcept;
-    auto operator=(VLayoutPaper &&paper) noexcept->VLayoutPaper &;
+    auto operator=(VLayoutPaper &&paper) noexcept -> VLayoutPaper &;
 #endif
 
     auto GetHeight() const -> int;
@@ -69,10 +68,10 @@ public:
     void SetWidth(int width);
 
     auto GetLayoutWidth() const -> qreal;
-    void  SetLayoutWidth(qreal width);
+    void SetLayoutWidth(qreal width);
 
     auto GetShift() const -> qreal;
-    void    SetShift(qreal shift);
+    void SetShift(qreal shift);
 
     auto GetRotate() const -> bool;
     void SetRotate(bool value);
@@ -99,9 +98,9 @@ public:
     Q_REQUIRED_RESULT auto GetItemDetails(bool textAsPaths) const -> QList<QGraphicsItem *>;
 
     auto GetDetails() const -> QVector<VLayoutPiece>;
-    void                  SetDetails(const QVector<VLayoutPiece>& details);
+    void SetDetails(const QVector<VLayoutPiece> &details);
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    void                  SetDetails(const QList<VLayoutPiece>& details);
+    void SetDetails(const QList<VLayoutPiece> &details);
 #endif
 
     auto DetailsBoundingRect() const -> QRectF;

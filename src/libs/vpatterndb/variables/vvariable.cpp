@@ -48,11 +48,7 @@ VVariable::VVariable(const QString &name, const QString &description)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VVariable::VVariable(const VVariable &var) // NOLINT(modernize-use-equals-default)
-  : VInternalVariable(var),
-    d(var.d)
-{
-}
+COPY_CONSTRUCTOR_IMPL_2(VVariable, VInternalVariable)
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VVariable::operator=(const VVariable &var) -> VVariable &
@@ -84,9 +80,7 @@ auto VVariable::operator=(VVariable &&var) noexcept -> VVariable &
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VVariable::~VVariable() // NOLINT(modernize-use-equals-default)
-{
-}
+VVariable::~VVariable() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VVariable::GetDescription() const -> QString

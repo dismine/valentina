@@ -107,14 +107,7 @@ VGObject::VGObject(const GOType &type, const quint32 &idObject, const Draw &mode
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief VGObject copy constructor.
- * @param obj object.
- */
-VGObject::VGObject(const VGObject &obj) // NOLINT(modernize-use-equals-default)
-  : d(obj.d)
-{
-}
+COPY_CONSTRUCTOR_IMPL(VGObject)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -148,9 +141,7 @@ auto VGObject::operator=(VGObject &&obj) noexcept -> VGObject &
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VGObject::~VGObject() // NOLINT(modernize-use-equals-default)
-{
-}
+VGObject::~VGObject() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

@@ -30,10 +30,10 @@
 #define VFORMULA_H
 
 #include <QCoreApplication>
-#include <QSharedDataPointer>
 #include <QMetaType>
-#include <QTypeInfo>
+#include <QSharedDataPointer>
 #include <QString>
+#include <QTypeInfo>
 #include <QtGlobal>
 
 enum class FormulaType : qint8
@@ -50,6 +50,7 @@ class VFormulaData;
 class VFormula
 {
     Q_DECLARE_TR_FUNCTIONS(VFormula) // NOLINT
+
 public:
     VFormula();
     VFormula(const QString &formula, const VContainer *container);
@@ -87,12 +88,13 @@ public:
     static auto FormulaTypeId() -> int;
 
     void Eval();
+
 private:
     QSharedDataPointer<VFormulaData> d;
 
     void ResetState();
 };
-Q_DECLARE_METATYPE(VFormula)
+Q_DECLARE_METATYPE(VFormula)                  // NOLINT
 Q_DECLARE_TYPEINFO(VFormula, Q_MOVABLE_TYPE); // NOLINT
 
 #endif // VFORMULA_H

@@ -106,7 +106,7 @@ VContour::VContour(int height, int width, qreal layoutWidth)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VContour::VContour(const VContour &contour) = default;
+COPY_CONSTRUCTOR_IMPL(VContour)
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VContour::operator=(const VContour &contour) -> VContour &

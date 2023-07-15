@@ -29,15 +29,16 @@
 #include "vincrement.h"
 
 #include "../vmisc/def.h"
-#include "vvariable.h"
 #include "vincrement_p.h"
+#include "vvariable.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VIncrement create enpty increment
  */
 VIncrement::VIncrement()
-    :VVariable(), d(new VIncrementData)
+  : VVariable(),
+    d(new VIncrementData)
 {
     SetType(VarType::Increment);
 }
@@ -48,20 +49,19 @@ VIncrement::VIncrement()
  * @param name increment's name
  */
 VIncrement::VIncrement(VContainer *data, const QString &name, IncrementType incrType)
-    :VVariable(name, QString()), d(new VIncrementData(data, incrType))
+  : VVariable(name, QString()),
+    d(new VIncrementData(data, incrType))
 {
     incrType == IncrementType::Separator ? SetType(VarType::IncrementSeparator) : SetType(VarType::Increment);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VIncrement::VIncrement(const VIncrement &incr)
-    :VVariable(incr), d(incr.d)
-{}
+COPY_CONSTRUCTOR_IMPL_2(VIncrement, VVariable)
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VIncrement::operator=(const VIncrement &incr) -> VIncrement &
 {
-    if ( &incr == this )
+    if (&incr == this)
     {
         return *this;
     }
@@ -73,11 +73,13 @@ auto VIncrement::operator=(const VIncrement &incr) -> VIncrement &
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VIncrement::VIncrement(VIncrement &&incr) noexcept
-    :VVariable(std::move(incr)), d(std::move(incr.d))
-{}
+  : VVariable(std::move(incr)),
+    d(std::move(incr.d))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VIncrement::operator=(VIncrement &&incr) noexcept->VIncrement &
+auto VIncrement::operator=(VIncrement &&incr) noexcept -> VIncrement &
 {
     VVariable::operator=(incr);
     std::swap(d, incr.d);
@@ -86,8 +88,7 @@ auto VIncrement::operator=(VIncrement &&incr) noexcept->VIncrement &
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VIncrement::~VIncrement()
-{}
+VIncrement::~VIncrement() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

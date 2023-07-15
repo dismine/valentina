@@ -595,11 +595,7 @@ VLayoutPiece::VLayoutPiece()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutPiece::VLayoutPiece(const VLayoutPiece &detail) // NOLINT(modernize-use-equals-default)
-  : VAbstractPiece(detail),
-    d(detail.d)
-{
-}
+COPY_CONSTRUCTOR_IMPL_2(VLayoutPiece, VAbstractPiece)
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutPiece::operator=(const VLayoutPiece &detail) -> VLayoutPiece &
@@ -615,14 +611,14 @@ auto VLayoutPiece::operator=(const VLayoutPiece &detail) -> VLayoutPiece &
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutPiece::VLayoutPiece(VLayoutPiece &&detail) noexcept : VAbstractPiece(std::move(detail)),
-                                                                   d(std::move(detail.d))
+VLayoutPiece::VLayoutPiece(VLayoutPiece &&detail) noexcept
+  : VAbstractPiece(std::move(detail)),
+    d(std::move(detail.d))
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPiece::operator=(VLayoutPiece &&detail) noexcept
-->VLayoutPiece &
+auto VLayoutPiece::operator=(VLayoutPiece &&detail) noexcept -> VLayoutPiece &
 {
     VAbstractPiece::operator=(detail);
     std::swap(d, detail.d);
@@ -631,9 +627,7 @@ auto VLayoutPiece::operator=(VLayoutPiece &&detail) noexcept
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutPiece::~VLayoutPiece() // NOLINT(modernize-use-equals-default)
-{
-}
+VLayoutPiece::~VLayoutPiece() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContainer *pattern) -> VLayoutPiece

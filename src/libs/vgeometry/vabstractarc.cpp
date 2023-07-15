@@ -72,7 +72,7 @@ VAbstractArc::VAbstractArc(const GOType &type, const VPointF &center, qreal f1, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VAbstractArc::VAbstractArc(const VAbstractArc &arc) = default;
+COPY_CONSTRUCTOR_IMPL_2(VAbstractArc, VAbstractCurve)
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractArc::operator=(const VAbstractArc &arc) -> VAbstractArc &

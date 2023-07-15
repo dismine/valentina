@@ -47,7 +47,7 @@ VCubicBezierPath::VCubicBezierPath(quint32 idObject, Draw mode)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VCubicBezierPath::VCubicBezierPath(const VCubicBezierPath &curve) = default;
+COPY_CONSTRUCTOR_IMPL_2(VCubicBezierPath, VAbstractCubicBezierPath)
 
 //---------------------------------------------------------------------------------------------------------------------
 VCubicBezierPath::VCubicBezierPath(const QVector<VPointF> &points, quint32 idObject, Draw mode)

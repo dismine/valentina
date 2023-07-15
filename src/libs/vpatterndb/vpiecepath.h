@@ -29,11 +29,11 @@
 #ifndef VPIECEPATH_H
 #define VPIECEPATH_H
 
-#include <QtGlobal>
 #include <QSharedDataPointer>
+#include <QtGlobal>
 
-#include "../vmisc/def.h"
 #include "../vgeometry/vabstractcurve.h"
+#include "../vmisc/def.h"
 
 class VPiecePathData;
 class VSAPoint;
@@ -56,33 +56,33 @@ public:
     auto operator=(const VPiecePath &path) -> VPiecePath &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VPiecePath(VPiecePath &&path) noexcept;
-    auto operator=(VPiecePath &&path) noexcept->VPiecePath &;
+    auto operator=(VPiecePath &&path) noexcept -> VPiecePath &;
 #endif
 
-    void   Append(const VPieceNode &node);
-    void   Clear();
+    void Append(const VPieceNode &node);
+    void Clear();
     auto CountNodes() const -> vsizetype;
 
     auto operator[](vsizetype indx) -> VPieceNode &;
     auto at(vsizetype indx) const -> const VPieceNode &;
 
     auto GetNodes() const -> QVector<VPieceNode>;
-    void                SetNodes(const QVector<VPieceNode> &nodes);
+    void SetNodes(const QVector<VPieceNode> &nodes);
 
     auto GetType() const -> PiecePathType;
-    void          SetType(PiecePathType type);
+    void SetType(PiecePathType type);
 
     auto GetName() const -> QString;
-    void    SetName(const QString &name);
+    void SetName(const QString &name);
 
     auto GetPenType() const -> Qt::PenStyle;
-    void         SetPenType(const Qt::PenStyle &type);
+    void SetPenType(const Qt::PenStyle &type);
 
     auto IsCutPath() const -> bool;
     void SetCutPath(bool cut);
 
     auto GetVisibilityTrigger() const -> QString;
-    void    SetVisibilityTrigger(const QString &formula);
+    void SetVisibilityTrigger(const QString &formula);
 
     void SetFirstToCuttingContour(bool value);
     auto IsFirstToCuttingContour() const -> bool;
@@ -146,6 +146,6 @@ private:
 };
 
 Q_DECLARE_TYPEINFO(VPiecePath, Q_MOVABLE_TYPE); // NOLINT
-Q_DECLARE_METATYPE(VPiecePath)
+Q_DECLARE_METATYPE(VPiecePath)                  // NOLINT
 
 #endif // VPIECEPATH_H

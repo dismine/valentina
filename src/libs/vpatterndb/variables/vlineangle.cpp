@@ -34,22 +34,24 @@
 #include <QString>
 #include <QtMath>
 
-#include "../vmisc/def.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/def.h"
 #include "vinternalvariable.h"
 #include "vlineangle_p.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VLineAngle::VLineAngle()
-    :VInternalVariable(), d(new VLineAngleData)
+  : VInternalVariable(),
+    d(new VLineAngleData)
 {
     SetType(VarType::LineAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VLineAngle::VLineAngle(const VPointF *p1, const quint32 &p1Id, const VPointF *p2, const quint32 &p2Id)
-    :VInternalVariable(), d(new VLineAngleData(p1Id, p2Id))
+  : VInternalVariable(),
+    d(new VLineAngleData(p1Id, p2Id))
 {
     SetType(VarType::LineAngle);
 
@@ -57,19 +59,17 @@ VLineAngle::VLineAngle(const VPointF *p1, const quint32 &p1Id, const VPointF *p2
     SCASSERT(p1 != nullptr)
     SCASSERT(p2 != nullptr)
 
-    SetName(QString(angleLine_+"%1_%2").arg(p1->name(), p2->name()));
+    SetName(QString(angleLine_ + "%1_%2").arg(p1->name(), p2->name()));
     SetValue(p1, p2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLineAngle::VLineAngle(const VLineAngle &var)
-    :VInternalVariable(var), d(var.d)
-{}
+COPY_CONSTRUCTOR_IMPL_2(VLineAngle, VInternalVariable)
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VLineAngle::operator=(const VLineAngle &var) -> VLineAngle &
 {
-    if ( &var == this )
+    if (&var == this)
     {
         return *this;
     }
@@ -81,11 +81,13 @@ auto VLineAngle::operator=(const VLineAngle &var) -> VLineAngle &
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VLineAngle::VLineAngle(VLineAngle &&var) noexcept
-    :VInternalVariable(std::move(var)), d(std::move(var.d))
-{}
+  : VInternalVariable(std::move(var)),
+    d(std::move(var.d))
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLineAngle::operator=(VLineAngle &&var) noexcept->VLineAngle &
+auto VLineAngle::operator=(VLineAngle &&var) noexcept -> VLineAngle &
 {
     VInternalVariable::operator=(var);
     std::swap(d, var.d);
@@ -94,8 +96,7 @@ auto VLineAngle::operator=(VLineAngle &&var) noexcept->VLineAngle &
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VLineAngle::~VLineAngle()
-{}
+VLineAngle::~VLineAngle() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VLineAngle::Filter(quint32 id) -> bool
@@ -108,9 +109,9 @@ void VLineAngle::SetValue(const VPointF *p1, const VPointF *p2)
 {
     SCASSERT(p1 != nullptr)
     SCASSERT(p2 != nullptr)
-    //Correct angle. Try avoid results like 6,7563e-15.
-    const qreal angle = qFloor(QLineF(static_cast<QPointF>(*p1),
-                                      static_cast<QPointF>(*p2)).angle() * 100000.) / 100000.;
+    // Correct angle. Try avoid results like 6,7563e-15.
+    const qreal angle =
+        qFloor(QLineF(static_cast<QPointF>(*p1), static_cast<QPointF>(*p2)).angle() * 100000.) / 100000.;
     VInternalVariable::SetValue(angle);
 }
 
