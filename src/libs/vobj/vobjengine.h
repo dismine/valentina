@@ -49,7 +49,7 @@ class VObjEngine final : public QPaintEngine
 {
 public:
     VObjEngine();
-    virtual ~VObjEngine() override;
+    ~VObjEngine() override = default;
 
     virtual auto begin(QPaintDevice *pdev) -> bool override;
     virtual auto end() -> bool override;

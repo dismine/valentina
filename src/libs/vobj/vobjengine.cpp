@@ -40,8 +40,8 @@
 #include <QString>
 #include <QTextStream>
 #include <QVector>
-#include <Qt>
 #include <QtDebug>
+#include <QtMath>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
@@ -71,9 +71,8 @@ static inline auto svgEngineFeatures() -> QPaintEngine::PaintEngineFeatures
     QT_WARNING_DISABLE_INTEL(68)
     QT_WARNING_DISABLE_INTEL(2022)
 
-    return QPaintEngine::PaintEngineFeatures(QPaintEngine::AllFeatures & ~QPaintEngine::PatternBrush &
-                                             ~QPaintEngine::PerspectiveTransform & ~QPaintEngine::ConicalGradientFill &
-                                             ~QPaintEngine::PorterDuff);
+    return {QPaintEngine::AllFeatures & ~QPaintEngine::PatternBrush & ~QPaintEngine::PerspectiveTransform &
+            ~QPaintEngine::ConicalGradientFill & ~QPaintEngine::PorterDuff};
 
     QT_WARNING_POP
 }
@@ -99,11 +98,6 @@ VObjEngine::VObjEngine()
 #if defined(Q_CC_INTEL)
 #pragma warning(pop)
 #endif
-
-//---------------------------------------------------------------------------------------------------------------------
-VObjEngine::~VObjEngine()
-{
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VObjEngine::begin(QPaintDevice *pdev) -> bool
