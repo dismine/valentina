@@ -132,12 +132,14 @@ def run_clean(refresh_token):
                      "access token from the app console on the web.")
 
         clean_folders = ["/0.7.x/Mac OS X", "/0.7.x/Windows"]
-        arhive_types = [r'^valentina-Windows.*\+-mingw-x86-Qt.*-develop-[a-f0-9]{40}\.tar\.xz$',
-                        r'^valentina-Windows.*\+-mingw-x64-Qt.*-develop-[a-f0-9]{40}\.tar\.xz$',
-                        r'^valentina-Windows.*\+-mingw-x86-Qt.*-develop-[a-f0-9]{40}\.tar\.xz$',
-                        r'^valentina-macOS.*\+-Qt.*-x64-develop-[a-f0-9]{40}\.tar\.xz$',
+        arhive_types = [r'^valentina-Windows10\+-mingw-x64-Qt.*-develop-[a-f0-9]{40}\.tar\.xz$',
+                        r'^valentina-Windows7\+-mingw-x86-Qt.*-develop-[a-f0-9]{40}\.tar\.xz$',
+                        r'^valentina-WindowsXP\+-mingw-x86-Qt.*-develop-[a-f0-9]{40}\.tar\.xz$',
+                        r'^valentina-macOS_11\+-Qt.*-x64-develop-[a-f0-9]{40}\.tar\.xz$',
+                        r'^valentina-macOS_11\+-Qt.*-x64-develop-multibundle-[a-f0-9]{40}$',
+                        r'^valentina-macOS_10.13\+-Qt.*-x64-develop-[a-f0-9]{40}\.tar\.xz$',
+                        r'^valentina-macOS_10.13\+-Qt.*-x64-develop-multibundle-[a-f0-9]{40}$',
                         r'^valentina-macOS.*\+-Qt.*-arm.*-develop-[a-f0-9]{40}\.tar\.xz$',
-                        r'^valentina-macOS.*\+-Qt.*-x64-develop-multibundle-[a-f0-9]{40}$',
                         r'^valentina-macOS.*\+-Qt.*-arm.*-develop-multibundle-[a-f0-9]{40}$']
 
         item_types = {}

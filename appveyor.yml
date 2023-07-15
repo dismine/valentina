@@ -126,7 +126,7 @@ environment:
       BUILD_SYSTEM: "qbs"
       ARCH: x64
       XCODE_VERSION: 12.3
-      PLATFORM: "macOS10.13+"
+      PLATFORM: "macOS_10.13+"
       MACOS_DEPLOYMENT_TARGET: 10.13
       MULTI_BUNDLE: true
       DEPLOY: true
@@ -139,7 +139,7 @@ environment:
       BUILD_SYSTEM: "qbs"
       ARCH: x64
       XCODE_VERSION: 12.3
-      PLATFORM: "macOS10.13+"
+      PLATFORM: "macOS_10.13+"
       MACOS_DEPLOYMENT_TARGET: 10.13
       MULTI_BUNDLE: false
       DEPLOY: true
@@ -274,7 +274,7 @@ environment:
       BUILD_SYSTEM: "make"
       ARCH: x64
       XCODE_VERSION: 12.3
-      PLATFORM: "macOS10.13+"
+      PLATFORM: "macOS_10.13+"
       DEPLOY: false 
 
     - job_name: Windows_Qt_5_6_(MSVC_x64)
