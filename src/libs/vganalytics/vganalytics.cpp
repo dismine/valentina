@@ -456,7 +456,11 @@ auto VGAnalytics::GetTerritoryCode(QLocale::Country territory) -> QString
         {QLocale::Kuwait, QLatin1String("KW")},
         {QLocale::Kyrgyzstan, QLatin1String("KG")},
         {QLocale::Laos, QLatin1String("LA")},
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
         {QLocale::LatinAmerica, QLatin1String("419")},
+#else
+        {QLocale::LatinAmericaAndTheCaribbean, QLatin1String("419")},
+#endif
         {QLocale::Latvia, QLatin1String("LV")},
         {QLocale::Lebanon, QLatin1String("LB")},
         {QLocale::Lesotho, QLatin1String("LS")},
