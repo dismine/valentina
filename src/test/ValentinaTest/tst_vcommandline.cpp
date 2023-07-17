@@ -30,11 +30,15 @@
 #include "../vmisc/commandoptions.h"
 
 #include <QtTest>
-#include <ciso646>
+
+// Header <ciso646> is removed in C++20.
+#if __cplusplus <= 201703L
+#include <ciso646> // and, not, or
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_VCommandLine::TST_VCommandLine(QObject *parent)
-    :QObject(parent)
+  : QObject(parent)
 {
 }
 

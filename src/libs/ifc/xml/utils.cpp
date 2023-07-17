@@ -34,7 +34,11 @@
 #include <QSet>
 #include <QStringList>
 #include <QSvgRenderer>
-#include <ciso646>
+
+// Header <ciso646> is removed in C++20.
+#if __cplusplus <= 201703L
+#include <ciso646> // and, not, or
+#endif
 
 #include "../vmisc/compatibility.h"
 
@@ -72,7 +76,7 @@ auto MimeTypeFromByteArray(const QByteArray &data) -> QMimeType
     QSet<QString> aliases = ConvertToSet<QString>(mime.aliases());
     aliases.insert(mime.name());
 
-    QSet<QString> gzipMime {"application/gzip", "application/x-gzip"};
+    QSet<QString> gzipMime{"application/gzip", "application/x-gzip"};
 
     if (gzipMime.contains(aliases))
     {
@@ -92,7 +96,7 @@ auto PrepareImageFilters() -> QString
     const QList<QByteArray> supportedFormats = QImageReader::supportedImageFormats();
     const QSet<QString> filterFormats{"bmp", "jpeg", "jpg", "png", "svg", "svgz", "tif", "tiff", "webp"};
     QStringList sufixes;
-    for (const auto& format : supportedFormats)
+    for (const auto &format : supportedFormats)
     {
         if (filterFormats.contains(format))
         {

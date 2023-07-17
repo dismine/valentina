@@ -50,7 +50,10 @@
 
 template <class T> class QSharedPointer;
 
-#include <ciso646>
+// Header <ciso646> is removed in C++20.
+#if __cplusplus <= 201703L
+#include <ciso646> // and, not, or
+#endif
 
 // Backport of relaxed constexpr
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)

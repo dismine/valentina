@@ -28,16 +28,20 @@
 
 #include "dialogdatetimeformats.h"
 #include "ui_dialogdatetimeformats.h"
-#include <ciso646>
+
+// Header <ciso646> is removed in C++20.
+#if __cplusplus <= 201703L
+#include <ciso646> // and, not, or
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogDateTimeFormats::DialogDateTimeFormats(const QDate &date, const QStringList &predefinedFormats,
                                              const QStringList &userDefinedFormats, QWidget *parent)
-    : QDialog(parent),
-      ui(new Ui::DialogDateTimeFormats),
-      m_dateMode(true),
-      m_date(date),
-      m_predefined(predefinedFormats)
+  : QDialog(parent),
+    ui(new Ui::DialogDateTimeFormats),
+    m_dateMode(true),
+    m_date(date),
+    m_predefined(predefinedFormats)
 {
     ui->setupUi(this);
 
@@ -47,11 +51,11 @@ DialogDateTimeFormats::DialogDateTimeFormats(const QDate &date, const QStringLis
 //---------------------------------------------------------------------------------------------------------------------
 DialogDateTimeFormats::DialogDateTimeFormats(const QTime &time, const QStringList &predefinedFormats,
                                              const QStringList &userDefinedFormats, QWidget *parent)
-    : QDialog(parent),
-      ui(new Ui::DialogDateTimeFormats),
-      m_dateMode(false),
-      m_time(time),
-      m_predefined(predefinedFormats)
+  : QDialog(parent),
+    ui(new Ui::DialogDateTimeFormats),
+    m_dateMode(false),
+    m_time(time),
+    m_predefined(predefinedFormats)
 {
     ui->setupUi(this);
 
@@ -69,7 +73,7 @@ auto DialogDateTimeFormats::GetFormats() const -> QStringList
 {
     QStringList formats;
 
-    for (int i=0; i<ui->listWidget->count(); ++i)
+    for (int i = 0; i < ui->listWidget->count(); ++i)
     {
         if (const QListWidgetItem *lineItem = ui->listWidget->item(i))
         {

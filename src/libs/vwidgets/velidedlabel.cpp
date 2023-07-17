@@ -29,11 +29,15 @@
 
 #include <QPainter>
 #include <QTextLayout>
-#include <ciso646>
+
+// Header <ciso646> is removed in C++20.
+#if __cplusplus <= 201703L
+#include <ciso646> // and, not, or
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VElidedLabel::VElidedLabel(QWidget *parent)
-    : QFrame(parent)
+  : QFrame(parent)
 {
     // reserve size for one line of text
     setMinimumHeight(fontMetrics().lineSpacing());
@@ -41,8 +45,8 @@ VElidedLabel::VElidedLabel(QWidget *parent)
 
 //---------------------------------------------------------------------------------------------------------------------
 VElidedLabel::VElidedLabel(const QString &text, QWidget *parent)
-    : QFrame(parent),
-      m_content(text)
+  : QFrame(parent),
+    m_content(text)
 {
     // reserve size for one line of text
     setMinimumHeight(fontMetrics().lineSpacing());
@@ -71,7 +75,7 @@ void VElidedLabel::paintEvent(QPaintEvent *event)
         if (not DrawParagraph(painter, paragraphs.at(i), y, didElide))
         {
             // It text has empty strings a user will not see elided string, but we still want to show a tooltip.
-            if (i != paragraphs.size()-1 && !didElide)
+            if (i != paragraphs.size() - 1 && !didElide)
             {
                 didElide = true;
             }
@@ -90,7 +94,7 @@ void VElidedLabel::paintEvent(QPaintEvent *event)
                 // Show a tooltip in case we cannot show a whole text in the widget
                 // Use dumb html tag to separate paragraphs.
                 QString toolTip;
-                for(int i = 0; i < paragraphs.size(); ++i)
+                for (int i = 0; i < paragraphs.size(); ++i)
                 {
                     if (i != 0)
                     {

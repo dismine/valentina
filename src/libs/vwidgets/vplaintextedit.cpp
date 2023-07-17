@@ -27,20 +27,23 @@
  *************************************************************************/
 #include "vplaintextedit.h"
 
-#include <ciso646>
+// Header <ciso646> is removed in C++20.
+#if __cplusplus <= 201703L
+#include <ciso646> // and, not, or
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VPlainTextEdit::VPlainTextEdit(QWidget * parent)
-    : QPlainTextEdit(parent),
-      m_highlighter(document())
+VPlainTextEdit::VPlainTextEdit(QWidget *parent)
+  : QPlainTextEdit(parent),
+    m_highlighter(document())
 {
     connect(this, &QPlainTextEdit::cursorPositionChanged, this, &VPlainTextEdit::MatchParentheses);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPlainTextEdit::VPlainTextEdit(const QString & text, QWidget * parent)
-    : QPlainTextEdit(text, parent),
-      m_highlighter(document())
+VPlainTextEdit::VPlainTextEdit(const QString &text, QWidget *parent)
+  : QPlainTextEdit(text, parent),
+    m_highlighter(document())
 {
     connect(this, &QPlainTextEdit::cursorPositionChanged, this, &VPlainTextEdit::MatchParentheses);
 }
@@ -54,13 +57,13 @@ VPlainTextEdit::~VPlainTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 void VPlainTextEdit::SetFilter(const QString &filter)
 {
-    if(m_filter.isEmpty() && not filter.isEmpty())
+    if (m_filter.isEmpty() && not filter.isEmpty())
     {
         QTextDocument *doc = document();
         m_allLines.clear();
         m_allLines.reserve(doc->lineCount());
 
-        for(int i=0; i < doc->blockCount(); ++i)
+        for (int i = 0; i < doc->blockCount(); ++i)
         {
             m_allLines.append(doc->findBlockByNumber(i).text());
         }
@@ -70,7 +73,7 @@ void VPlainTextEdit::SetFilter(const QString &filter)
 
     Filter();
 
-    if(m_filter.isEmpty())
+    if (m_filter.isEmpty())
     {
         m_allLines.clear();
     }
@@ -232,9 +235,9 @@ void VPlainTextEdit::CreateParenthesisSelection(int pos, bool match)
 void VPlainTextEdit::Filter()
 {
     clear();
-    if(not m_filter.isEmpty())
+    if (not m_filter.isEmpty())
     {
-        for(auto &line : m_allLines)
+        for (auto &line : m_allLines)
         {
             if (line.contains(m_filter))
             {
@@ -244,7 +247,7 @@ void VPlainTextEdit::Filter()
     }
     else
     {
-        for(auto &line : m_allLines)
+        for (auto &line : m_allLines)
         {
             QPlainTextEdit::appendPlainText(line);
         }

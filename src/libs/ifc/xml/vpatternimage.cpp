@@ -27,22 +27,25 @@
  *************************************************************************/
 #include "vpatternimage.h"
 
+#include <QBuffer>
+#include <QDebug>
+#include <QFile>
 #include <QImage>
 #include <QImageReader>
 #include <QMimeDatabase>
 #include <QPainter>
 #include <QPixmap>
 #include <QRegularExpressionMatch>
-#include <QSvgRenderer>
-#include <QDebug>
-#include <QBuffer>
 #include <QSize>
-#include <QFile>
-#include <ciso646>
+#include <QSvgRenderer>
 
-#include "utils.h"
+// Header <ciso646> is removed in C++20.
+#if __cplusplus <= 201703L
+#include <ciso646> // and, not, or
+#endif
+
 #include "../vmisc/compatibility.h"
-
+#include "utils.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPatternImage::FromFile(const QString &fileName) -> VPatternImage
@@ -148,7 +151,7 @@ auto VPatternImage::GetPixmap(int width, int height) const -> QPixmap
     QImage image = imageReader.read();
     if (image.isNull())
     {
-        qCritical()<< tr("Couldn't read the image. Error: %1").arg(imageReader.errorString());
+        qCritical() << tr("Couldn't read the image. Error: %1").arg(imageReader.errorString());
         return {};
     }
 

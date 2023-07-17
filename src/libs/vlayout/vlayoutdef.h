@@ -32,8 +32,12 @@
 #include <QPainterPath>
 #include <QSize>
 #include <QTransform>
-#include <ciso646>
 #include <climits>
+
+// Header <ciso646> is removed in C++20.
+#if __cplusplus <= 201703L
+#include <ciso646> // and, not, or
+#endif
 
 enum class LayoutExportFormats : qint8
 {

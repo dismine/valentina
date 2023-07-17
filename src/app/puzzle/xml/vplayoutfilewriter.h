@@ -29,15 +29,19 @@
 #ifndef VPLAYOUTFILEWRITER_H
 #define VPLAYOUTFILEWRITER_H
 
+#include <QCoreApplication>
 #include <QLocale>
 #include <QXmlStreamWriter>
-#include <QCoreApplication>
 #include <functional>
-#include <ciso646>
 
-#include "../vmisc/literals.h"
+// Header <ciso646> is removed in C++20.
+#if __cplusplus <= 201703L
+#include <ciso646> // and, not, or
+#endif
+
 #include "../layout/layoutdef.h"
 #include "../qmuparser/qmudef.h"
+#include "../vmisc/literals.h"
 
 class VPLayout;
 class VPSheet;
@@ -53,8 +57,8 @@ class VPLayoutFileWriter : public QXmlStreamWriter
     Q_DECLARE_TR_FUNCTIONS(VPLayoutFileWriter) // NOLINT
 
 public:
-    VPLayoutFileWriter()= default;
-    ~VPLayoutFileWriter()= default;
+    VPLayoutFileWriter() = default;
+    ~VPLayoutFileWriter() = default;
 
     void WriteFile(const VPLayoutPtr &layout, QIODevice *file);
 
@@ -75,20 +79,20 @@ private:
     void WriteMargins(const QMarginsF &margins, bool ignore);
     void WriteSize(QSizeF size);
 
-    template <typename T>
-    void SetAttribute(const QString &name, const T &value);
+    template <typename T> void SetAttribute(const QString &name, const T &value);
 
     template <size_t N>
-    void SetAttribute(const QString &name, const char (&value)[N]); //NOLINT(cppcoreguidelines-avoid-c-arrays) NOLINT(hicpp-avoid-c-arrays) NOLINT(modernize-avoid-c-arrays)
+    void SetAttribute(const QString &name,
+                      const char (&value)[N]); // NOLINT(cppcoreguidelines-avoid-c-arrays) NOLINT(hicpp-avoid-c-arrays)
+                                               // NOLINT(modernize-avoid-c-arrays)
 
     template <typename T>
     void SetAttributeOrRemoveIf(const QString &name, const T &value,
-                                const std::function<bool(const T&)> &removeCondition);
+                                const std::function<bool(const T &)> &removeCondition);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-template<typename T>
-void VPLayoutFileWriter::SetAttribute(const QString &name, const T &value)
+template <typename T> void VPLayoutFileWriter::SetAttribute(const QString &name, const T &value)
 {
     // See specification for xs:decimal
     const QLocale locale = QLocale::c();
@@ -96,29 +100,28 @@ void VPLayoutFileWriter::SetAttribute(const QString &name, const T &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <>
-inline void VPLayoutFileWriter::SetAttribute<QString>(const QString &name, const QString &value)
+template <> inline void VPLayoutFileWriter::SetAttribute<QString>(const QString &name, const QString &value)
 {
     writeAttribute(name, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <>
-inline void VPLayoutFileWriter::SetAttribute<QChar>(const QString &name, const QChar &value)
+template <> inline void VPLayoutFileWriter::SetAttribute<QChar>(const QString &name, const QChar &value)
 {
     writeAttribute(name, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <>
-inline void VPLayoutFileWriter::SetAttribute<bool>(const QString &name, const bool &value)
+template <> inline void VPLayoutFileWriter::SetAttribute<bool>(const QString &name, const bool &value)
 {
     writeAttribute(name, value ? trueStr : falseStr);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <size_t N>
-inline void VPLayoutFileWriter::SetAttribute(const QString &name, const char (&value)[N]) //NOLINT(cppcoreguidelines-avoid-c-arrays) NOLINT(hicpp-avoid-c-arrays) NOLINT(modernize-avoid-c-arrays)
+inline void VPLayoutFileWriter::SetAttribute(
+    const QString &name, const char (&value)[N]) // NOLINT(cppcoreguidelines-avoid-c-arrays)
+                                                 // NOLINT(hicpp-avoid-c-arrays) NOLINT(modernize-avoid-c-arrays)
 {
     writeAttribute(name, QString(value));
 }
@@ -126,7 +129,7 @@ inline void VPLayoutFileWriter::SetAttribute(const QString &name, const char (&v
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
 inline void VPLayoutFileWriter::SetAttributeOrRemoveIf(const QString &name, const T &value,
-                                                       const std::function<bool(const T&)> &removeCondition)
+                                                       const std::function<bool(const T &)> &removeCondition)
 {
     if (not removeCondition(value))
     {

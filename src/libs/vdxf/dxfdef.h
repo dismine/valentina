@@ -29,14 +29,27 @@
 #ifndef DXFDEF_H
 #define DXFDEF_H
 
-#include <QtGlobal>
-#include <ciso646>
 #include <QtCore/qcontainerfwd.h>
+#include <QtGlobal>
 
-enum class VarMeasurement : quint8 { English=0, Metric=1 };
+// Header <ciso646> is removed in C++20.
+#if __cplusplus <= 201703L
+#include <ciso646> // and, not, or
+#endif
 
-//Default drawing units for AutoCAD DesignCenter blocks:
-enum class VarInsunits : quint8 { Inches=1, Millimeters=4, Centimeters=5 };
+enum class VarMeasurement : quint8
+{
+    English = 0,
+    Metric = 1
+};
+
+// Default drawing units for AutoCAD DesignCenter blocks:
+enum class VarInsunits : quint8
+{
+    Inches = 1,
+    Millimeters = 4,
+    Centimeters = 5
+};
 
 // Helps mark end of string. See VDxfEngine::drawTextItem for more details
 extern const QString endStringPlaceholder;
@@ -44,7 +57,7 @@ extern const QString endStringPlaceholder;
 Q_REQUIRED_RESULT static inline auto DL_FuzzyComparePossibleNulls(double p1, double p2) -> bool;
 static inline auto DL_FuzzyComparePossibleNulls(double p1, double p2) -> bool
 {
-    if(qFuzzyIsNull(p1))
+    if (qFuzzyIsNull(p1))
     {
         return qFuzzyIsNull(p2);
     }

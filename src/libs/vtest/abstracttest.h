@@ -44,7 +44,10 @@
 #include "../vlayout/vrawsapoint.h"
 #include "../vlayout/vsapoint.h"
 
-#include <ciso646>
+// Header <ciso646> is removed in C++20.
+#if __cplusplus <= 201703L
+#include <ciso646> // and, not, or
+#endif
 
 #ifdef __GNUC__
 #define V_UNUSED __attribute__((unused))
@@ -81,7 +84,9 @@ class VRawSAPoint;
 class AbstractTest : public QObject
 {
     Q_OBJECT // NOLINT
-        public : explicit AbstractTest(QObject *parent = nullptr);
+
+public:
+    explicit AbstractTest(QObject *parent = nullptr);
 
     template <class T> static auto VectorFromJson(const QString &json) -> QVector<T>;
 

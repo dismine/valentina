@@ -15,166 +15,161 @@
 
 #define DRW_VERSION "0.6.3"
 
-#include <string>
-#include <list>
-#include <cmath>
-#include <unordered_map>
 #include <QtGlobal>
-#include <ciso646>
+#include <cmath>
+#include <list>
+#include <string>
+#include <unordered_map>
+
+// Header <ciso646> is removed in C++20.
+#if __cplusplus <= 201703L
+#include <ciso646> // and, not, or
+#endif
 
 #ifdef DRW_ASSERTS
-# define drw_assert(a) assert(a)
+#define drw_assert(a) assert(a)
 #else
-# define drw_assert(a)
+#define drw_assert(a)
 #endif
 
 #define UTF8STRING std::string
 #define DRW_UNUSED(x) (void)x
 
 #if defined(WIN64) || defined(_WIN64) || defined(__WIN64__)
-#  define DRW_WIN
+#define DRW_WIN
 #elif defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
-#    define DRW_WIN
+#define DRW_WIN
 #elif defined(__MWERKS__) && defined(__INTEL__)
-#  define DRW_WIN
+#define DRW_WIN
 #else
-#  define DRW_POSIX
+#define DRW_POSIX
 #endif
 
 #ifndef M_PI
- #define M_PI       3.141592653589793238462643
+#define M_PI 3.141592653589793238462643
 #endif
 #ifndef M_PI_2
- #define M_PI_2       1.57079632679489661923
+#define M_PI_2 1.57079632679489661923
 #endif
-#define M_PIx2      6.283185307179586 // 2*PI
+#define M_PIx2 6.283185307179586 // 2*PI
 #define ARAD 57.29577951308232
 
 #ifndef __has_cpp_attribute
-# define __has_cpp_attribute(x) 0
+#define __has_cpp_attribute(x) 0
 #endif
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 8, 0)
 
 #ifndef QT_HAS_CPP_ATTRIBUTE
 #ifdef __has_cpp_attribute
-#  define QT_HAS_CPP_ATTRIBUTE(x) __has_cpp_attribute(x)
+#define QT_HAS_CPP_ATTRIBUTE(x) __has_cpp_attribute(x)
 #else
-#  define QT_HAS_CPP_ATTRIBUTE(x) 0
+#define QT_HAS_CPP_ATTRIBUTE(x) 0
 #endif
 #endif // QT_HAS_CPP_ATTRIBUTE
 
 #if defined(__cplusplus)
 #if QT_HAS_CPP_ATTRIBUTE(clang::fallthrough)
-#    define Q_FALLTHROUGH() [[clang::fallthrough]]
+#define Q_FALLTHROUGH() [[clang::fallthrough]]
 #elif QT_HAS_CPP_ATTRIBUTE(gnu::fallthrough)
-#    define Q_FALLTHROUGH() [[gnu::fallthrough]]
+#define Q_FALLTHROUGH() [[gnu::fallthrough]]
 #elif QT_HAS_CPP_ATTRIBUTE(fallthrough)
-#  define Q_FALLTHROUGH() [[fallthrough]]
+#define Q_FALLTHROUGH() [[fallthrough]]
 #endif
 #endif
 #ifndef Q_FALLTHROUGH
-#  if (defined(Q_CC_GNU) && Q_CC_GNU >= 700) && !defined(Q_CC_INTEL)
-#    define Q_FALLTHROUGH() __attribute__((fallthrough))
-#  else
-#    define Q_FALLTHROUGH() (void)0
+#if (defined(Q_CC_GNU) && Q_CC_GNU >= 700) && !defined(Q_CC_INTEL)
+#define Q_FALLTHROUGH() __attribute__((fallthrough))
+#else
+#define Q_FALLTHROUGH() (void)0
 #endif
 #endif // defined(__cplusplus)
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 8, 0)
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#define Q_DISABLE_COPY_MOVE(Class) \
-    Q_DISABLE_COPY(Class) \
-    Class(Class &&) = delete; \
+#define Q_DISABLE_COPY_MOVE(Class)                                                                                     \
+    Q_DISABLE_COPY(Class)                                                                                              \
+    Class(Class &&) = delete;                                                                                          \
     Class &operator=(Class &&) = delete;
 #endif
 
 #ifndef Q_DISABLE_ASSIGN_MOVE
-#define Q_DISABLE_ASSIGN_MOVE(Class) \
-    Q_DISABLE_ASSIGN(Class) \
-    Class(Class &&) = delete; \
+#define Q_DISABLE_ASSIGN_MOVE(Class)                                                                                   \
+    Q_DISABLE_ASSIGN(Class)                                                                                            \
+    Class(Class &&) = delete;                                                                                          \
     Class &operator=(Class &&) = delete;
 #endif
 
-typedef signed char dint8;              /* 8 bit signed */
-typedef signed short dint16;            /* 16 bit signed */
-typedef signed int dint32;              /* 32 bit signed */
-typedef long long int dint64;           /* 64 bit signed */
+typedef signed char dint8;    /* 8 bit signed */
+typedef signed short dint16;  /* 16 bit signed */
+typedef signed int dint32;    /* 32 bit signed */
+typedef long long int dint64; /* 64 bit signed */
 
 typedef unsigned char duint8;           /* 8 bit unsigned */
 typedef unsigned short duint16;         /* 16 bit unsigned */
 typedef unsigned int duint32;           /* 32 bit unsigned */
 typedef unsigned long long int duint64; /* 64 bit unsigned */
 
-typedef float dfloat32;                 /* 32 bit floating point */
-typedef double ddouble64;               /* 64 bit floating point */
-typedef long double ddouble80;          /* 80 bit floating point */
+typedef float dfloat32;        /* 32 bit floating point */
+typedef double ddouble64;      /* 64 bit floating point */
+typedef long double ddouble80; /* 80 bit floating point */
 
-namespace DRW {
+namespace DRW
+{
 
 //! Version numbers for the DXF Format.
-enum Version {
-    UNKNOWNV,     //!< UNKNOWN VERSION.
-    MC00,         //!< DWG Release 1.1
-    AC12,         //!< DWG Release 1.2
-    AC14,         //!< DWG Release 1.4
-    AC150,        //!< DWG Release 2.0
-    AC210,        //!< DWG Release 2.10
-    AC1002,       //!< DWG Release 2.5
-    AC1003,       //!< DWG Release 2.6
-    AC1004,       //!< DWG Relase 9
-    AC1006,       //!< DWG Release 10 (R10)
-    AC1009,       //!< DWG Release 11/12 (LT R1/R2) (R11 & R12)
-    AC1012,       //!< DWG Release 13 (LT95) (R13)
-    AC1014,       //!< DWG Release 14/14.01 (LT97/LT98) (R14)
-    AC1015,       //!< AutoCAD 2000/2000i/2002 (ACAD 2000)
-    AC1018,       //!< AutoCAD 2004/2005/2006 (ACAD 2004)
-    AC1021,       //!< AutoCAD 2007/2008/2009 (ACAD 2007)
-    AC1024,       //!< AutoCAD 2010/2011/2012 (ACAD 2010)
-    AC1027,       //!< AutoCAD 2013/2014/2015/2016/2017 (ACAD 2013)
-    AC1032,       //!< AutoCAD 2018/2019/2020 (ACAD 2018)
+enum Version
+{
+    UNKNOWNV, //!< UNKNOWN VERSION.
+    MC00,     //!< DWG Release 1.1
+    AC12,     //!< DWG Release 1.2
+    AC14,     //!< DWG Release 1.4
+    AC150,    //!< DWG Release 2.0
+    AC210,    //!< DWG Release 2.10
+    AC1002,   //!< DWG Release 2.5
+    AC1003,   //!< DWG Release 2.6
+    AC1004,   //!< DWG Relase 9
+    AC1006,   //!< DWG Release 10 (R10)
+    AC1009,   //!< DWG Release 11/12 (LT R1/R2) (R11 & R12)
+    AC1012,   //!< DWG Release 13 (LT95) (R13)
+    AC1014,   //!< DWG Release 14/14.01 (LT97/LT98) (R14)
+    AC1015,   //!< AutoCAD 2000/2000i/2002 (ACAD 2000)
+    AC1018,   //!< AutoCAD 2004/2005/2006 (ACAD 2004)
+    AC1021,   //!< AutoCAD 2007/2008/2009 (ACAD 2007)
+    AC1024,   //!< AutoCAD 2010/2011/2012 (ACAD 2010)
+    AC1027,   //!< AutoCAD 2013/2014/2015/2016/2017 (ACAD 2013)
+    AC1032,   //!< AutoCAD 2018/2019/2020 (ACAD 2018)
 };
 
-const std::unordered_map< const char*, DRW::Version > dwgVersionStrings {
-    { "MC0.0", DRW::MC00 },
-    { "AC1.2", DRW::AC12 },
-    { "AC1.4", DRW::AC14 },
-    { "AC1.50", DRW::AC150 },
-    { "AC2.10", DRW::AC210 },
-    { "AC1002", DRW::AC1002 },
-    { "AC1003", DRW::AC1003 },
-    { "AC1004", DRW::AC1004 },
-    { "AC1006", DRW::AC1006 },
-    { "AC1009", DRW::AC1009 },
-    { "AC1012", DRW::AC1012 },
-    { "AC1014", DRW::AC1014 },
-    { "AC1015", DRW::AC1015 },
-    { "AC1018", DRW::AC1018 },
-    { "AC1021", DRW::AC1021 },
-    { "AC1024", DRW::AC1024 },
-    { "AC1027", DRW::AC1027 },
-    { "AC1032", DRW::AC1032 },
+const std::unordered_map<const char *, DRW::Version> dwgVersionStrings{
+    {"MC0.0", DRW::MC00},    {"AC1.2", DRW::AC12},    {"AC1.4", DRW::AC14},    {"AC1.50", DRW::AC150},
+    {"AC2.10", DRW::AC210},  {"AC1002", DRW::AC1002}, {"AC1003", DRW::AC1003}, {"AC1004", DRW::AC1004},
+    {"AC1006", DRW::AC1006}, {"AC1009", DRW::AC1009}, {"AC1012", DRW::AC1012}, {"AC1014", DRW::AC1014},
+    {"AC1015", DRW::AC1015}, {"AC1018", DRW::AC1018}, {"AC1021", DRW::AC1021}, {"AC1024", DRW::AC1024},
+    {"AC1027", DRW::AC1027}, {"AC1032", DRW::AC1032},
 };
 
-enum error {
-BAD_NONE,             /*!< No error. */
-BAD_UNKNOWN,          /*!< UNKNOWN. */
-BAD_OPEN,             /*!< error opening file. */
-BAD_VERSION,          /*!< unsupported version. */
-BAD_READ_METADATA,    /*!< error reading matadata. */
-BAD_READ_FILE_HEADER, /*!< error in file header read process. */
-BAD_READ_HEADER,      /*!< error in header vars read process. */
-BAD_READ_HANDLES,     /*!< error in object map read process. */
-BAD_READ_CLASSES,     /*!< error in classes read process. */
-BAD_READ_TABLES,      /*!< error in tables read process. */
-BAD_READ_BLOCKS,      /*!< error in block read process. */
-BAD_READ_ENTITIES,    /*!< error in entities read process. */
-BAD_READ_OBJECTS,     /*!< error in objects read process. */
-BAD_READ_SECTION,     /*!< error in sections read process. */
-BAD_CODE_PARSED,      /*!< error in any parseCodes() method. */
+enum error
+{
+    BAD_NONE,             /*!< No error. */
+    BAD_UNKNOWN,          /*!< UNKNOWN. */
+    BAD_OPEN,             /*!< error opening file. */
+    BAD_VERSION,          /*!< unsupported version. */
+    BAD_READ_METADATA,    /*!< error reading matadata. */
+    BAD_READ_FILE_HEADER, /*!< error in file header read process. */
+    BAD_READ_HEADER,      /*!< error in header vars read process. */
+    BAD_READ_HANDLES,     /*!< error in object map read process. */
+    BAD_READ_CLASSES,     /*!< error in classes read process. */
+    BAD_READ_TABLES,      /*!< error in tables read process. */
+    BAD_READ_BLOCKS,      /*!< error in block read process. */
+    BAD_READ_ENTITIES,    /*!< error in entities read process. */
+    BAD_READ_OBJECTS,     /*!< error in objects read process. */
+    BAD_READ_SECTION,     /*!< error in sections read process. */
+    BAD_CODE_PARSED,      /*!< error in any parseCodes() method. */
 };
 
-enum class DebugLevel {
+enum class DebugLevel
+{
     None,
     Debug
 };
@@ -184,18 +179,29 @@ enum class DebugLevel {
  *
  * The base class is silent and ignores all debugging.
  */
-class DebugPrinter {
+class DebugPrinter
+{
 public:
-    virtual void printS(const std::string &s){(void)s;}
-    virtual void printI(long long int i){(void)i;}
-    virtual void printUI(long long unsigned int i){(void)i;}
-    virtual void printD(double d){(void)d;}
-    virtual void printH(long long int i){(void)i;}
-    virtual void printB(int i){(void)i;}
-    virtual void printHL(int c, int s, int h){(void)c;(void)s;(void)h;}
-    virtual void printPT(double x, double y, double z){(void)x;(void)y;(void)z;}
-    DebugPrinter()=default;
-    virtual ~DebugPrinter()=default;
+    virtual void printS(const std::string &s) { (void)s; }
+    virtual void printI(long long int i) { (void)i; }
+    virtual void printUI(long long unsigned int i) { (void)i; }
+    virtual void printD(double d) { (void)d; }
+    virtual void printH(long long int i) { (void)i; }
+    virtual void printB(int i) { (void)i; }
+    virtual void printHL(int c, int s, int h)
+    {
+        (void)c;
+        (void)s;
+        (void)h;
+    }
+    virtual void printPT(double x, double y, double z)
+    {
+        (void)x;
+        (void)y;
+        (void)z;
+    }
+    DebugPrinter() = default;
+    virtual ~DebugPrinter() = default;
 };
 
 /**
@@ -203,10 +209,11 @@ public:
  *
  * Ownership of `printer` is transferred.
  */
-void setCustomDebugPrinter( DebugPrinter* printer );
+void setCustomDebugPrinter(DebugPrinter *printer);
 
 //! Special codes for colors
-enum ColorCodes {
+enum ColorCodes
+{
     black = 250,
     green = 3,
     red = 1,
@@ -228,18 +235,21 @@ enum ColorCodes {
 };
 
 //! Spaces
-enum Space {
+enum Space
+{
     ModelSpace = 0,
     PaperSpace = 1
 };
 
 //! Special kinds of handles
-enum HandleCodes {
+enum HandleCodes
+{
     NoHandle = 0
 };
 
 //! Shadow mode
-enum ShadowMode {
+enum ShadowMode
+{
     CastAndReceieveShadows = 0,
     CastShadows = 1,
     ReceiveShadows = 2,
@@ -247,17 +257,20 @@ enum ShadowMode {
 };
 
 //! Special kinds of materials
-enum MaterialCodes {
+enum MaterialCodes
+{
     MaterialByLayer = 0
 };
 
 //! Special kinds of plot styles
-enum PlotStyleCodes {
+enum PlotStyleCodes
+{
     DefaultPlotStyle = 0
 };
 
 //! Special kinds of transparencies
-enum TransparencyCodes {
+enum TransparencyCodes
+{
     Opaque = 0,
     Transparent = -1
 };
@@ -267,7 +280,7 @@ enum TransparencyCodes {
 Q_REQUIRED_RESULT static inline auto DRW_FuzzyComparePossibleNulls(double p1, double p2) -> bool;
 static inline auto DRW_FuzzyComparePossibleNulls(double p1, double p2) -> bool
 {
-    if(qFuzzyIsNull(p1))
+    if (qFuzzyIsNull(p1))
     {
         return qFuzzyIsNull(p2);
     }
@@ -286,24 +299,27 @@ static inline auto DRW_FuzzyComparePossibleNulls(double p1, double p2) -> bool
  *  Class to handle 3D coordinate point
  *  @author Rallaz
  */
-class DRW_Coord {
+class DRW_Coord
+{
 public:
     DRW_Coord() = default;
     DRW_Coord(double ix, double iy, double iz)
-        : x(ix),
-          y(iy),
-          z(iz)
-    {}
+      : x(ix),
+        y(iy),
+        z(iz)
+    {
+    }
 
     DRW_Coord(const DRW_Coord &data)
-        : x(data.x),
-          y(data.y),
-          z(data.z)
-    {}
+      : x(data.x),
+        y(data.y),
+        z(data.z)
+    {
+    }
 
     auto operator=(const DRW_Coord &data) -> DRW_Coord &
     {
-        if ( &data == this )
+        if (&data == this)
         {
             return *this;
         }
@@ -313,136 +329,141 @@ public:
         z = data.z;
         return *this;
     }
-/*!< convert to unitary vector */
-    void unitize(){
+    /*!< convert to unitary vector */
+    void unitize()
+    {
         double dist;
         dist = hypot(hypot(x, y), z);
-        if (dist > 0.0) {
-            x= x/dist;
-            y= y/dist;
-            z= z/dist;
+        if (dist > 0.0)
+        {
+            x = x / dist;
+            y = y / dist;
+            z = z / dist;
         }
     }
 
 public:
-    double x {0};
-    double y {0};
-    double z {0};
+    double x{0};
+    double y{0};
+    double z{0};
 };
-
 
 //! Class to handle vertex
 /*!
-*  Class to handle vertex for lwpolyline entity
-*  @author Rallaz
-*/
-class DRW_Vertex2D {
+ *  Class to handle vertex for lwpolyline entity
+ *  @author Rallaz
+ */
+class DRW_Vertex2D
+{
 public:
     DRW_Vertex2D()
-        : x(),
-          y(),
-          stawidth(0),
-          endwidth(0),
-          bulge(0)
+      : x(),
+        y(),
+        stawidth(0),
+        endwidth(0),
+        bulge(0)
     {
-//        eType = DRW::LWPOLYLINE;
+        //        eType = DRW::LWPOLYLINE;
     }
     DRW_Vertex2D(double sx, double sy, double b = 0.0)
-        : x(sx),
-          y(sy),
-          stawidth(0),
-          endwidth(0),
-          bulge(b)
-    {}
+      : x(sx),
+        y(sy),
+        stawidth(0),
+        endwidth(0),
+        bulge(b)
+    {
+    }
 
 public:
-    double x;                 /*!< x coordinate, code 10 */
-    double y;                 /*!< y coordinate, code 20 */
-    double stawidth;          /*!< Start width, code 40 */
-    double endwidth;          /*!< End width, code 41 */
-    double bulge;             /*!< bulge, code 42 */
+    double x;        /*!< x coordinate, code 10 */
+    double y;        /*!< y coordinate, code 20 */
+    double stawidth; /*!< Start width, code 40 */
+    double endwidth; /*!< End width, code 41 */
+    double bulge;    /*!< bulge, code 42 */
 };
-
 
 //! Class to handle header vars
 /*!
-*  Class to handle header vars
-*  @author Rallaz
-*/
-class DRW_Variant {
+ *  Class to handle header vars
+ *  @author Rallaz
+ */
+class DRW_Variant
+{
 public:
-    enum TYPE {
+    enum TYPE
+    {
         STRING,
         INTEGER,
         DOUBLE,
         COORD,
         INVALID
     };
-//TODO: add INT64 support
+    // TODO: add INT64 support
     DRW_Variant()
-        : content(),
-          type(INVALID),
-          code(),
-          sdata(),
-          vdata()
-    {}
+      : content(),
+        type(INVALID),
+        code(),
+        sdata(),
+        vdata()
+    {
+    }
 
     DRW_Variant(int c, dint32 i)
-        : content(),
-          type(),
-          code(c),
-          sdata(),
-          vdata()
+      : content(),
+        type(),
+        code(c),
+        sdata(),
+        vdata()
     {
         addInt(i);
     }
 
     DRW_Variant(int c, duint32 i)
-        : content(),
-          type(),
-          code(c),
-          sdata(),
-          vdata()
+      : content(),
+        type(),
+        code(c),
+        sdata(),
+        vdata()
     {
-        addInt(static_cast<dint32>(i));//RLZ: verify if work with big numbers
+        addInt(static_cast<dint32>(i)); // RLZ: verify if work with big numbers
     }
 
     DRW_Variant(int c, double d)
-        : content(),
-          type(),
-          code(c),
-          sdata(),
-          vdata()
+      : content(),
+        type(),
+        code(c),
+        sdata(),
+        vdata()
     {
         addDouble(d);
     }
 
     DRW_Variant(int c, const UTF8STRING &s)
-        : content(),
-          type(),
-          code(c),
-          sdata(),
-          vdata()
+      : content(),
+        type(),
+        code(c),
+        sdata(),
+        vdata()
     {
         addString(s);
     }
 
     DRW_Variant(int c, const DRW_Coord &crd)
-        : content(),
-          type(),
-          code(c),
-          sdata(),
-          vdata()
+      : content(),
+        type(),
+        code(c),
+        sdata(),
+        vdata()
     {
         addCoord(crd);
     }
 
-    DRW_Variant(const DRW_Variant& d)
-        : content(d.content),
-          type(d.type),
-          code(d.code),
-          sdata(),
-          vdata()
+    DRW_Variant(const DRW_Variant &d)
+      : content(d.content),
+        type(d.type),
+        code(d.code),
+        sdata(),
+        vdata()
     {
         if (d.type == COORD)
         {
@@ -459,18 +480,56 @@ public:
 
     ~DRW_Variant() = default;
 
-    void addString(const UTF8STRING &s) {setType(STRING); sdata = s; content.s = &sdata;}
-    void addInt(int i) {setType(INTEGER); content.i = i;}
-    void addDouble(double d) {setType(DOUBLE); content.d = d;}
-    void addCoord() {setType(COORD); vdata.x=0.0; vdata.y=0.0; vdata.z=0.0; content.v = &vdata;}
-    void addCoord(const DRW_Coord &v) {setType(COORD); vdata = v; content.v = &vdata;}
-    void setType(TYPE t) { type = t;}
-    void setCoordX(double d) { if (type == COORD) vdata.x = d;}
-    void setCoordY(double d) { if (type == COORD) vdata.y = d;}
-    void setCoordZ(double d) { if (type == COORD) vdata.z = d;}
+    void addString(const UTF8STRING &s)
+    {
+        setType(STRING);
+        sdata = s;
+        content.s = &sdata;
+    }
+    void addInt(int i)
+    {
+        setType(INTEGER);
+        content.i = i;
+    }
+    void addDouble(double d)
+    {
+        setType(DOUBLE);
+        content.d = d;
+    }
+    void addCoord()
+    {
+        setType(COORD);
+        vdata.x = 0.0;
+        vdata.y = 0.0;
+        vdata.z = 0.0;
+        content.v = &vdata;
+    }
+    void addCoord(const DRW_Coord &v)
+    {
+        setType(COORD);
+        vdata = v;
+        content.v = &vdata;
+    }
+    void setType(TYPE t) { type = t; }
+    void setCoordX(double d)
+    {
+        if (type == COORD)
+            vdata.x = d;
+    }
+    void setCoordY(double d)
+    {
+        if (type == COORD)
+            vdata.y = d;
+    }
+    void setCoordZ(double d)
+    {
+        if (type == COORD)
+            vdata.z = d;
+    }
 
 private:
-    typedef union {
+    typedef union
+    {
         UTF8STRING *s;
         dint32 i;
         double d;
@@ -480,7 +539,7 @@ private:
 public:
     DRW_VarContent content;
     TYPE type;
-    int code;            /*!< dxf code of this value*/
+    int code; /*!< dxf code of this value*/
 
 private:
     auto operator=(const DRW_Variant &) -> DRW_Variant &Q_DECL_EQ_DELETE;
@@ -490,14 +549,16 @@ private:
 
 //! Class to convert between line width and integer
 /*!
-*  Class to convert between line width and integer
-*  verifing valid values, if value is not valid
-*  returns widthDefault.
-*  @author Rallaz
-*/
-class DRW_LW_Conv{
+ *  Class to convert between line width and integer
+ *  verifing valid values, if value is not valid
+ *  returns widthDefault.
+ *  @author Rallaz
+ */
+class DRW_LW_Conv
+{
 public:
-    enum lineWidth {
+    enum lineWidth
+    {
         width00 = 0,       /*!< 0.00mm (dxf 0)*/
         width01 = 1,       /*!< 0.05mm (dxf 5)*/
         width02 = 2,       /*!< 0.09mm (dxf 9)*/
@@ -529,71 +590,73 @@ public:
 
     static auto lineWidth2dxfInt(lineWidth lw) -> int
     {
-        switch (lw){
-        case widthByLayer:
-            return -1;
-        case widthByBlock:
-            return -2;
-        case widthDefault:
-            return -3;
-        case width00:
-            return 0;
-        case width01:
-            return 5;
-        case width02:
-            return 9;
-        case width03:
-            return 13;
-        case width04:
-            return 15;
-        case width05:
-            return 18;
-        case width06:
-            return 20;
-        case width07:
-            return 25;
-        case width08:
-            return 30;
-        case width09:
-            return 35;
-        case width10:
-            return 40;
-        case width11:
-            return 50;
-        case width12:
-            return 53;
-        case width13:
-            return 60;
-        case width14:
-            return 70;
-        case width15:
-            return 80;
-        case width16:
-            return 90;
-        case width17:
-            return 100;
-        case width18:
-            return 106;
-        case width19:
-            return 120;
-        case width20:
-            return 140;
-        case width21:
-            return 158;
-        case width22:
-            return 200;
-        case width23:
-            return 211;
-        default:
-            break;
+        switch (lw)
+        {
+            case widthByLayer:
+                return -1;
+            case widthByBlock:
+                return -2;
+            case widthDefault:
+                return -3;
+            case width00:
+                return 0;
+            case width01:
+                return 5;
+            case width02:
+                return 9;
+            case width03:
+                return 13;
+            case width04:
+                return 15;
+            case width05:
+                return 18;
+            case width06:
+                return 20;
+            case width07:
+                return 25;
+            case width08:
+                return 30;
+            case width09:
+                return 35;
+            case width10:
+                return 40;
+            case width11:
+                return 50;
+            case width12:
+                return 53;
+            case width13:
+                return 60;
+            case width14:
+                return 70;
+            case width15:
+                return 80;
+            case width16:
+                return 90;
+            case width17:
+                return 100;
+            case width18:
+                return 106;
+            case width19:
+                return 120;
+            case width20:
+                return 140;
+            case width21:
+                return 158;
+            case width22:
+                return 200;
+            case width23:
+                return 211;
+            default:
+                break;
         }
         return -3;
     }
 
     static auto dxfInt2lineWidth(int i) -> lineWidth
     {
-        if (i<0) {
-            if (i==-1)
+        if (i < 0)
+        {
+            if (i == -1)
                 return widthByLayer;
             if (i == -2)
                 return widthByBlock;
@@ -696,7 +759,7 @@ public:
         {
             return width23;
         }
-        //default by default
+        // default by default
         return widthDefault;
     }
 };

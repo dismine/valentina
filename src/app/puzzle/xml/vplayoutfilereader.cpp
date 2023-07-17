@@ -36,16 +36,18 @@
 #include "../vgeometry/vlayoutplacelabel.h"
 #include "../vlayout/vlayoutpiecepath.h"
 #include "../vlayout/vtextmanager.h"
+#include "../vmisc/compatibility.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/floatItemData/floatitemdef.h"
-#include "compatibility.h"
-#include "svgfont/vsvgfont.h"
-#include "vpiecegrainline.h"
+#include "../vwidgets/vpiecegrainline.h"
 #include "vplayoutliterals.h"
 #include <QFont>
 #include <QXmlStreamAttributes>
-#include <Qt>
-#include <ciso646>
+
+// Header <ciso646> is removed in C++20.
+#if __cplusplus <= 201703L
+#include <ciso646> // and, not, or
+#endif
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")

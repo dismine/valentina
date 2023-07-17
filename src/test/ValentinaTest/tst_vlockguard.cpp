@@ -30,11 +30,15 @@
 #include "../vmisc/vlockguard.h"
 
 #include <QtTest>
-#include <ciso646>
+
+// Header <ciso646> is removed in C++20.
+#if __cplusplus <= 201703L
+#include <ciso646> // and, not, or
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_VLockGuard::TST_VLockGuard(QObject *parent)
-    :QObject(parent)
+  : QObject(parent)
 {
 }
 

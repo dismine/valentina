@@ -30,8 +30,12 @@
 
 #include <QCommandLineParser>
 #include <QCoreApplication>
-#include <ciso646>
 #include <memory>
+
+// Header <ciso646> is removed in C++20.
+#if __cplusplus <= 201703L
+#include <ciso646> // and, not, or
+#endif
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"

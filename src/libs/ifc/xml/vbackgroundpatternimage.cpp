@@ -27,19 +27,23 @@
  *************************************************************************/
 #include "vbackgroundpatternimage.h"
 
-#include "utils.h"
 #include "../vmisc/compatibility.h"
 #include "../vmisc/defglobal.h"
+#include "utils.h"
 
-#include <QMimeType>
+#include <QBuffer>
 #include <QDebug>
 #include <QFile>
-#include <QMimeDatabase>
-#include <QPixmap>
-#include <QBuffer>
 #include <QImageReader>
-#include <ciso646>
+#include <QMimeDatabase>
+#include <QMimeType>
+#include <QPixmap>
 #include <QSvgRenderer>
+
+// Header <ciso646> is removed in C++20.
+#if __cplusplus <= 201703L
+#include <ciso646> // and, not, or
+#endif
 
 const QString VBackgroundPatternImage::brokenImage = QStringLiteral("://icon/svg/broken_path.svg");
 
@@ -57,7 +61,7 @@ auto ScaleRasterImage(const QImage &image) -> QSize
     const double ratioX = PrintDPI / (image.dotsPerMeterX() / 100. * 2.54);
     const double ratioY = PrintDPI / (image.dotsPerMeterY() / 100. * 2.54);
     const QSize imageSize = image.size();
-    return {qRound(imageSize.width()*ratioX), qRound(imageSize.height()*ratioY)};
+    return {qRound(imageSize.width() * ratioX), qRound(imageSize.height() * ratioY)};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -65,9 +69,9 @@ auto ScaleVectorImage(const QSvgRenderer &renderer) -> QSize
 {
     const QSize imageSize = renderer.defaultSize();
     constexpr double ratio = PrintDPI / 90.;
-    return {qRound(imageSize.width()*ratio), qRound(imageSize.height()*ratio)};
+    return {qRound(imageSize.width() * ratio), qRound(imageSize.height() * ratio)};
 }
-}  // namespace
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VBackgroundPatternImage::FromFile(const QString &fileName, bool builtIn) -> VBackgroundPatternImage

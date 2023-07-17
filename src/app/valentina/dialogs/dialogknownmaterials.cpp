@@ -28,12 +28,16 @@
 
 #include "dialogknownmaterials.h"
 #include "ui_dialogknownmaterials.h"
-#include <ciso646>
+
+// Header <ciso646> is removed in C++20.
+#if __cplusplus <= 201703L
+#include <ciso646> // and, not, or
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogKnownMaterials::DialogKnownMaterials(QWidget *parent)
-    : QDialog(parent),
-      ui(new Ui::DialogKnownMaterials)
+  : QDialog(parent),
+    ui(new Ui::DialogKnownMaterials)
 {
     ui->setupUi(this);
 
@@ -80,7 +84,7 @@ auto DialogKnownMaterials::GetList() const -> QStringList
 {
     QStringList list;
 
-    for (int i=0; i<ui->listWidget->count(); ++i)
+    for (int i = 0; i < ui->listWidget->count(); ++i)
     {
         if (const QListWidgetItem *item = ui->listWidget->item(i))
         {

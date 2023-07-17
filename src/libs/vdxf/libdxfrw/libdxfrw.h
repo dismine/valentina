@@ -13,20 +13,25 @@
 #ifndef LIBDXFRW_H
 #define LIBDXFRW_H
 
-#include <string>
-#include <unordered_map>
 #include "drw_entities.h"
-#include "drw_objects.h"
 #include "drw_header.h"
 #include "drw_interface.h"
-#include <ciso646>
+#include "drw_objects.h"
+#include <string>
+#include <unordered_map>
+
+// Header <ciso646> is removed in C++20.
+#if __cplusplus <= 201703L
+#include <ciso646> // and, not, or
+#endif
 
 class dxfReader;
 class dxfWriter;
 
-class dxfRW {
+class dxfRW
+{
 public:
-    explicit dxfRW(const char* name);
+    explicit dxfRW(const char *name);
     ~dxfRW();
     static void setDebug(DRW::DebugLevel lvl);
     /// reads the file specified in constructor
@@ -38,8 +43,8 @@ public:
      * @return true for success
      */
     auto read(DRW_Interface *interface_, bool ext) -> bool;
-    void setBinary(bool b) {binFile = b;}
-    void AddXSpaceBlock(bool add) {m_xSpaceBlock = add;}
+    void setBinary(bool b) { binFile = b; }
+    void AddXSpaceBlock(bool add) { m_xSpaceBlock = add; }
 
     auto write(DRW_Interface *interface_, DRW::Version ver, bool bin) -> bool;
     auto writeLineType(DRW_LType *ent) -> bool;
@@ -72,7 +77,7 @@ public:
     auto writeImage(DRW_Image *ent, const std::string &name) -> DRW_ImageDef *;
     auto writeLeader(DRW_Leader *ent) -> bool;
     auto writeDimension(DRW_Dimension *ent) -> bool;
-    void setEllipseParts(int parts){elParts = parts;} /*!< set parts number when convert ellipse to polyline */
+    void setEllipseParts(int parts) { elParts = parts; } /*!< set parts number when convert ellipse to polyline */
     auto writePlotSettings(DRW_PlotSettings *ent) -> bool;
 
     auto ErrorString() const -> std::string;
@@ -135,7 +140,7 @@ private:
 
 private:
     DRW::Version version;
-    DRW::error error {DRW::BAD_NONE};
+    DRW::error error{DRW::BAD_NONE};
     std::string fileName;
     std::string codePage;
     bool binFile;
@@ -144,16 +149,16 @@ private:
     dxfWriter *writer;
     DRW_Interface *iface;
     DRW_Header header;
-//    int section;
+    //    int section;
     std::string nextentity;
     int entCount;
     bool wlayer0;
     bool dimstyleStd;
     bool applyExt;
     bool writingBlock;
-    int elParts;  /*!< parts number when convert ellipse to polyline */
-    std::unordered_map<std::string,int> blockMap;
-    std::vector<DRW_ImageDef*> imageDef;  /*!< imageDef list */
+    int elParts; /*!< parts number when convert ellipse to polyline */
+    std::unordered_map<std::string, int> blockMap;
+    std::vector<DRW_ImageDef *> imageDef; /*!< imageDef list */
 
     int currHandle;
 

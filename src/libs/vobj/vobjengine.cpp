@@ -53,14 +53,17 @@
 #include "../vmisc/backport/text.h"
 #endif
 
+// Header <ciso646> is removed in C++20.
+#if __cplusplus <= 201703L
+#include <ciso646> // and, not, or
+#endif
+
 class QPaintDevice;
 class QPixmap;
 class QPoint;
 class QPointF;
 class QPolygonF;
 class QRectF;
-
-#include <ciso646>
 
 //---------------------------------------------------------------------------------------------------------------------
 static inline auto svgEngineFeatures() -> QPaintEngine::PaintEngineFeatures

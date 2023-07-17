@@ -21,7 +21,6 @@
 #ifndef VPROPERTY_H
 #define VPROPERTY_H
 
-
 #include <QAbstractItemDelegate>
 #include <QEvent>
 #include <QMap>
@@ -32,30 +31,39 @@
 #include <QStringList>
 #include <QStyleOptionViewItem>
 #include <QVariant>
-#include <Qt>
-#include <QtGlobal>
 #include <QtCore/qcontainerfwd.h>
+#include <QtGlobal>
 
 #include "vpropertyexplorer_global.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 
-#include <ciso646>
+// Header <ciso646> is removed in C++20.
+#if __cplusplus <= 201703L
+#include <ciso646> // and, not, or
+#endif
 
 #include "vpropertydef.h"
 
 namespace VPE
 {
 
-enum class Property : qint8 {Simple, Complex};
+enum class Property : qint8
+{
+    Simple,
+    Complex
+};
 
 static const int MyCustomEventType = 1099;
 
 class VPROPERTYEXPLORERSHARED_EXPORT UserChangeEvent : public QEvent
 {
 public:
-    UserChangeEvent() : QEvent(static_cast<QEvent::Type>(MyCustomEventType)) {}
+    UserChangeEvent()
+      : QEvent(static_cast<QEvent::Type>(MyCustomEventType))
+    {
+    }
     virtual ~UserChangeEvent() override;
 };
 
@@ -68,6 +76,7 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 class VPROPERTYEXPLORERSHARED_EXPORT VProperty : public QObject
 {
     Q_OBJECT // NOLINT
+
 public:
     enum DPC_DisplayColumn
     {
@@ -76,7 +85,7 @@ public:
     };
 
     //! Standard constructor, takes a name and a parent property as argument
-    explicit VProperty(const QString& name,
+    explicit VProperty(const QString &name,
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
                        QMetaType::Type type = QMetaType::QString);
 #else
@@ -122,7 +131,7 @@ public:
     virtual auto flags(int column = DPC_Name) const -> Qt::ItemFlags;
 
     //! Sets the value of the property
-    virtual void setValue(const QVariant& value);
+    virtual void setValue(const QVariant &value);
 
     //! Returns the value of the property as a QVariant
     virtual auto getValue() const -> QVariant;
@@ -131,7 +140,7 @@ public:
     virtual auto serialize() const -> QString;
 
     //! Deserializes the value from a string
-    virtual void deserialize(const QString& value);
+    virtual void deserialize(const QString &value);
 
     // The following functions are experimental and not yet implemented.
     /*//! Returns a pointer to the data stored and handled by this property. In most cases this function shouldn't be
@@ -146,13 +155,13 @@ public:
     virtual bool setDataPointer(void* pointer);*/
 
     //! Sets the name of the property
-    virtual void setName(const QString& name);
+    virtual void setName(const QString &name);
 
     //! Gets the name of the property
     virtual auto getName() const -> QString;
 
     //! Sets the name of the property
-    virtual void setDescription(const QString& desc);
+    virtual void setDescription(const QString &desc);
 
     //! Gets the name of the property
     virtual auto getDescription() const -> QString;
@@ -176,10 +185,10 @@ public:
     virtual auto getParent() const -> VProperty *;
 
     //! Sets the parent of this property
-    virtual void setParent(VProperty* parent);
+    virtual void setParent(VProperty *parent);
 
     //! Removes a child from the children list, doesn't delete the child!
-    virtual void removeChild(VProperty* child);
+    virtual void removeChild(VProperty *child);
 
     //! Returns the row the child has
     virtual auto getChildRow(VProperty *child) const -> vpesizetype;
@@ -195,13 +204,13 @@ public:
 
     //! Sets the settings by calling the overloaded setSetting(const QString& key, const QVariant& value) for each item
     //! in the map.
-    virtual void setSettings(const QMap<QString, QVariant>& settings);
+    virtual void setSettings(const QMap<QString, QVariant> &settings);
 
     //! Get the settings.
     virtual auto getSettings() const -> QMap<QString, QVariant>;
 
     //! Sets the settings. This function has to be implemented in a subclass in order to have an effect
-    virtual void setSetting(const QString& key, const QVariant& value);
+    virtual void setSetting(const QString &key, const QVariant &value);
 
     //! Get the settings. This function has to be implemented in a subclass in order to have an effect
     virtual auto getSetting(const QString &key) const -> QVariant;
@@ -218,7 +227,7 @@ public:
         -> VProperty *;
 
     auto propertyType() const -> Property;
-    void     setPropertyType(const Property &type);
+    void setPropertyType(const Property &type);
 
     virtual void UpdateParent(const QVariant &value);
 public slots:
@@ -228,10 +237,10 @@ signals:
 
 protected:
     //! Protected constructor
-    explicit VProperty(VPropertyPrivate* d);
+    explicit VProperty(VPropertyPrivate *d);
 
     //! The protected structure holding the member variables (to assure binary compatibility)
-    VPropertyPrivate* d_ptr;
+    VPropertyPrivate *d_ptr;
 
 private:
     // Provide access functions for the d_ptr
@@ -241,6 +250,6 @@ private:
 
 QT_WARNING_POP
 
-}
+} // namespace VPE
 
 #endif // VPROPERTY_H
