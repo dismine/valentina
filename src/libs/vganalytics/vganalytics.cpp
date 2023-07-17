@@ -587,7 +587,11 @@ auto VGAnalytics::GetTerritoryCode(QLocale::Country territory) -> QString
         {QLocale::EastTimor, QLatin1String("TL")},
 #endif
         {QLocale::Togo, QLatin1String("TG")},
+#if QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
         {QLocale::TokelauCountry, QLatin1String("TK")},
+#else
+        {QLocale::Tokelau, QLatin1String("TK")},
+#endif
         {QLocale::Tonga, QLatin1String("TO")},
         {QLocale::TrinidadAndTobago, QLatin1String("TT")},
         {QLocale::TristanDaCunha, QLatin1String("TA")},
@@ -595,7 +599,11 @@ auto VGAnalytics::GetTerritoryCode(QLocale::Country territory) -> QString
         {QLocale::Turkey, QLatin1String("TR")},
         {QLocale::Turkmenistan, QLatin1String("TM")},
         {QLocale::TurksAndCaicosIslands, QLatin1String("TC")},
+#if QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
         {QLocale::TuvaluCountry, QLatin1String("TV")},
+#else
+        {QLocale::Tuvalu, QLatin1String("TV")},
+#endif
         {QLocale::Uganda, QLatin1String("UG")},
         {QLocale::Ukraine, QLatin1String("UA")},
         {QLocale::UnitedArabEmirates, QLatin1String("AE")},
