@@ -143,6 +143,7 @@ auto VPLayout::TileFactory() const -> VPTileFactory *
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayout::SetTileFactory(VPTileFactory *newTileFactory)
 {
+    delete m_tileFactory;
     m_tileFactory = newTileFactory;
 }
 
