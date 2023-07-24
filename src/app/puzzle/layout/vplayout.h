@@ -45,7 +45,7 @@ class VPLayout : public QObject
 {
     Q_OBJECT // NOLINT
 public:
-    ~VPLayout() override = default;
+    ~VPLayout() override;
 
     static auto CreateLayout(QUndoStack *undoStack) -> VPLayoutPtr;
     static void AddPiece(const VPLayoutPtr &layout, const VPPiecePtr &piece);

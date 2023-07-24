@@ -59,7 +59,7 @@ class VPCarrousel : public QWidget
 
 public:
     explicit VPCarrousel(const VPLayoutPtr &layout, QWidget *parent = nullptr);
-    ~VPCarrousel() override = default;
+    ~VPCarrousel() override;
 
     /**
      * @brief SetOrientation Sets the orientation to the given value and refreshes

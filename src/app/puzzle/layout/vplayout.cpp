@@ -55,6 +55,11 @@ VPLayout::VPLayout(QUndoStack *undoStack) :
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VPLayout::~VPLayout()
+{
+    delete m_tileFactory;
+}
+
 auto VPLayout::CreateLayout(QUndoStack *undoStack) -> VPLayoutPtr
 {
     SCASSERT(undoStack != nullptr)

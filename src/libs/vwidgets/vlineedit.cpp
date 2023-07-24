@@ -155,7 +155,7 @@ VCompleterLineEdit::VCompleterLineEdit(QWidget *parent)
   : VLineEdit(parent),
     m_model(new QStringListModel(this))
 {
-    setCompleter(new MultiSelectCompleter());
+    setCompleter(new MultiSelectCompleter(this));
     completer()->setModel(m_model);
     completer()->setCompletionMode(QCompleter::PopupCompletion);
     completer()->setCaseSensitivity(Qt::CaseInsensitive);

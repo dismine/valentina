@@ -337,6 +337,12 @@ VPSheet::VPSheet(const VPLayoutPtr &layout, QObject *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VPSheet::~VPSheet()
+{
+    delete m_sceneData;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VPSheet::GetLayout() const -> VPLayoutPtr
 {
     return m_layout;

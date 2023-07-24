@@ -72,6 +72,12 @@ VPCarrousel::VPCarrousel(const VPLayoutPtr &layout, QWidget *parent) :
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VPCarrousel::~VPCarrousel()
+{
+    delete ui;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPCarrousel::Refresh()
 {
     const QUuid sheetUuid = ui->comboBoxPieceList->currentData().toUuid();

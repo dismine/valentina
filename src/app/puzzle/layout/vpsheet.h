@@ -143,7 +143,7 @@ class VPSheet : public QObject
 public:
     explicit VPSheet(const VPLayoutPtr &layout, QObject *parent = nullptr);
 
-    ~VPSheet() override = default;
+    ~VPSheet() override;
 
     /**
      * @brief GetLayout Returns the Layout of the sheet
