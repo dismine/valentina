@@ -2012,7 +2012,10 @@ void VPMainWindow::SheetPaperSizeChanged()
         }
     }
 
-    VMainGraphicsView::NewSceneRect(m_graphicsView->scene(), m_graphicsView);
+    if (m_graphicsView->scene() != nullptr)
+    {
+        VMainGraphicsView::NewSceneRect(m_graphicsView->scene(), m_graphicsView);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
