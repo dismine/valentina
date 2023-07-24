@@ -29,16 +29,20 @@
 #ifndef MAPPLICATION_H
 #define MAPPLICATION_H
 
-#include "../vpatterndb/vtranslatevars.h"
-#include "vtapesettings.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vtranslatevars.h"
 #include "dialogs/dialogmdatabase.h"
+#include "vtapesettings.h"
 
 class TMainWindow;
 class QLocalServer;
 class QCommandLineParser;
 
-enum class SocketConnection : bool {Client = false, Server = true};
+enum class SocketConnection : bool
+{
+    Client = false,
+    Server = true
+};
 
 class MApplication : public VAbstractApplication
 {
@@ -48,12 +52,12 @@ public:
     MApplication(int &argc, char **argv);
     ~MApplication() override;
 
-    auto notify(QObject * receiver, QEvent * event) -> bool override;
+    auto notify(QObject *receiver, QEvent *event) -> bool override;
 
     auto IsTestMode() const -> bool;
     auto IsAppInGUIMode() const -> bool override;
     auto MainWindow() -> TMainWindow *;
-    auto MainWindows() -> QList<TMainWindow*>;
+    auto MainWindows() -> QList<TMainWindow *>;
     auto NewMainWindow() -> TMainWindow *;
 
     void InitOptions();
@@ -62,7 +66,6 @@ public:
 
     void OpenSettings() override;
     auto TapeSettings() -> VTapeSettings *;
-    void ActivateDarkMode();
 
     static auto diagramsPath() -> QString;
 
@@ -90,7 +93,7 @@ private slots:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(MApplication) // NOLINT
-    QList<QPointer<TMainWindow> > m_mainWindows{};
+    QList<QPointer<TMainWindow>> m_mainWindows{};
     QLocalServer *m_localServer{nullptr};
     VTranslateVars *m_trVars{nullptr};
     QPointer<DialogMDataBase> m_dataBase{};
@@ -107,7 +110,7 @@ private:
     static void ParseDimensionAOption(QCommandLineParser &parser, int &dimensionAValue, bool &flagDimensionA);
     static void ParseDimensionBOption(QCommandLineParser &parser, int &dimensionBValue, bool &flagDimensionB);
     static void ParseDimensionCOption(QCommandLineParser &parser, int &dimensionCValue, bool &flagDimensionC);
-    static void ParseUnitsOption(QCommandLineParser &parser, Unit &unit , bool &flagUnits);
+    static void ParseUnitsOption(QCommandLineParser &parser, Unit &unit, bool &flagUnits);
 };
 
 //---------------------------------------------------------------------------------------------------------------------

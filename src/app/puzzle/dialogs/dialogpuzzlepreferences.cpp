@@ -27,19 +27,19 @@
  *************************************************************************/
 
 #include "dialogpuzzlepreferences.h"
-#include "ui_dialogpuzzlepreferences.h"
 #include "../vpapplication.h"
 #include "configpages/puzzlepreferencesconfigurationpage.h"
-#include "configpages/puzzlepreferencespathpage.h"
 #include "configpages/puzzlepreferenceslayoutpage.h"
+#include "configpages/puzzlepreferencespathpage.h"
+#include "ui_dialogpuzzlepreferences.h"
 
 #include <QMessageBox>
 #include <QPushButton>
 #include <QShowEvent>
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogPuzzlePreferences::DialogPuzzlePreferences(QWidget *parent) :
-    QDialog(parent),
+DialogPuzzlePreferences::DialogPuzzlePreferences(QWidget *parent)
+  : QDialog(parent),
     ui(new Ui::DialogPuzzlePreferences),
     m_configurationPage(new PuzzlePreferencesConfigurationPage),
     m_layoutPage(new PuzzlePreferencesLayoutPage),
@@ -78,8 +78,8 @@ DialogPuzzlePreferences::~DialogPuzzlePreferences()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPuzzlePreferences::showEvent(QShowEvent *event)
 {
-    QDialog::showEvent( event );
-    if ( event->spontaneous() )
+    QDialog::showEvent(event);
+    if (event->spontaneous())
     {
         return;
     }
@@ -96,7 +96,7 @@ void DialogPuzzlePreferences::showEvent(QShowEvent *event)
         resize(sz);
     }
 
-    m_isInitialized = true;//first show windows are held
+    m_isInitialized = true; // first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -120,6 +120,24 @@ void DialogPuzzlePreferences::changeEvent(QEvent *event)
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
     }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        QStyle *style = QApplication::style();
+
+        QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
+        SCASSERT(bOk != nullptr)
+        bOk->setIcon(style->standardIcon(QStyle::SP_DialogOkButton));
+
+        QPushButton *bApply = ui->buttonBox->button(QDialogButtonBox::Apply);
+        SCASSERT(bApply != nullptr)
+        bApply->setIcon(style->standardIcon(QStyle::SP_DialogApplyButton));
+
+        QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
+        SCASSERT(bCancel != nullptr)
+        bCancel->setIcon(style->standardIcon(QStyle::SP_DialogCancelButton));
+    }
+
     // remember to call base class implementation
     QDialog::changeEvent(event);
 }
@@ -135,8 +153,9 @@ void DialogPuzzlePreferences::Apply()
 
     if (not preferences.isEmpty())
     {
-        const QString text = tr("Followed %n option(s) require restart to take effect: %1.", "",
-                                static_cast<int>(preferences.size())).arg(preferences.join(QStringLiteral(", ")));
+        const QString text =
+            tr("Followed %n option(s) require restart to take effect: %1.", "", static_cast<int>(preferences.size()))
+                .arg(preferences.join(QStringLiteral(", ")));
         QMessageBox::information(this, QCoreApplication::applicationName(), text);
     }
 

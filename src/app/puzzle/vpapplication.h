@@ -29,29 +29,34 @@
 #define VPAPPLICATION_H
 
 #include "../vmisc/def.h"
-#include "vpsettings.h"
 #include "../vmisc/vabstractapplication.h"
 #include "vpcommandline.h"
+#include "vpsettings.h"
 
 template <typename T> class QWeakPointer;
 class VPMainWindow;
 class QLocalServer;
 class DialogPuzzlePreferences;
 
-enum class SocketConnection : bool {Client = false, Server = true};
+enum class SocketConnection : bool
+{
+    Client = false,
+    Server = true
+};
 
 class VPApplication : public VAbstractApplication
 {
     Q_OBJECT // NOLINT
+
 public:
     VPApplication(int &argc, char **argv);
     ~VPApplication() override;
 
-    auto notify(QObject * receiver, QEvent * event) -> bool override;
+    auto notify(QObject *receiver, QEvent *event) -> bool override;
 
     auto IsAppInGUIMode() const -> bool override;
     auto MainWindow() -> VPMainWindow *;
-    auto MainWindows() -> QList<VPMainWindow*>;
+    auto MainWindows() -> QList<VPMainWindow *>;
     auto NewMainWindow() -> VPMainWindow *;
     auto NewMainWindow(const VPCommandLinePtr &cmd) -> VPMainWindow *;
 
@@ -61,7 +66,6 @@ public:
 
     void OpenSettings() override;
     auto PuzzleSettings() -> VPSettings *;
-    void ActivateDarkMode();
 
     void ParseCommandLine(const SocketConnection &connection, const QStringList &arguments);
     void ProcessArguments(const VPCommandLinePtr &cmd);
@@ -87,8 +91,8 @@ private slots:
 
 private:
     // cppcheck-suppress unknownMacro
-    Q_DISABLE_COPY_MOVE(VPApplication) //NOLINT
-    QList<QPointer<VPMainWindow> > m_mainWindows{};
+    Q_DISABLE_COPY_MOVE(VPApplication) // NOLINT
+    QList<QPointer<VPMainWindow>> m_mainWindows{};
     QLocalServer *m_localServer{nullptr};
     QWeakPointer<DialogPuzzlePreferences> m_preferencesDialog{};
 

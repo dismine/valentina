@@ -183,7 +183,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralRestoreFileList, (QLatin1
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralGeometry, (QLatin1String("geometry")))               // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralToolbarsState, (QLatin1String("toolbarsState")))     // NOLINT
 // NOLINTNEXTLINE
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationDarkMode, (QLatin1String("configuration/dark_mode")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationThemeMode, (QLatin1String("configuration/themeMode")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPreferenceDialogSize, (QLatin1String("preferenceDialogSize"))) // NOLINT
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingToolSeamAllowanceDialogSize,
@@ -726,15 +726,25 @@ void VCommonSettings::SetToolBarStyle(const bool &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VCommonSettings::GetDarkMode() const -> bool
+auto VCommonSettings::GetThemeMode() const -> VThemeMode
 {
-    return value(*settingConfigurationDarkMode, 0).toBool();
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    int val = settings.value(*settingConfigurationThemeMode, static_cast<int>(VThemeMode::System)).toInt();
+
+    if (val < 0 || val > 2)
+    {
+        val = 0;
+    }
+
+    return static_cast<VThemeMode>(val);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetDarkMode(const bool &value)
+void VCommonSettings::SetThemeMode(VThemeMode mode)
 {
-    setValue(*settingConfigurationDarkMode, value);
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingConfigurationThemeMode, static_cast<int>(mode));
+    settings.sync();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

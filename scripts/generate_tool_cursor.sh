@@ -15,19 +15,31 @@
 # I have spent hour before understand why i don't see PNG inside SVG in Nautilus.
 
 PATTERN=*@2x.png
-TOOLICONPATH=../src/app/valentina/share/resources/toolicon/32x32/ # PNG tool icon should be here
-TOOLICONS=`ls $TOOLICONPATH$PATTERN`
-OUTPATH=../src/app/valentina/share/resources/cursor/svg # Seek SVG templates here
+TOOLICONPATH=../src/app/valentina/share/resources/toolicon/ # PNG tool icon should be here
+OUTPATH=../src/app/valentina/share/resources/cursor
 
+COLOR_SCHEMES=("light" "dark")
 
-for var in $TOOLICONS
+for scheme in "${COLOR_SCHEMES[@]}"
 do
-	basename=${var##*/} # remove the path from a path-string
-	basename=${basename%.png} # remove the extension from a path-string
-	basename=${basename%@2x} # remove optional @2x suffix
-	if [ ! -f $basename@2x.png ]; then # always prefere hidpi version
-		sed "s/<<basename>>/$basename@2x/" $OUTPATH/template_cursor.svg > $OUTPATH/${basename}_cursor.svg
-	else
-		sed "s/<<basename>>/$basename/" $OUTPATH/template_cursor.svg > $OUTPATH/${basename}_cursor.svg
-	fi
+  # Create a subdirectory for the current scheme if it doesn't exist
+  mkdir -p "$OUTPATH/$scheme"
+
+  TOOLICONS=`ls $TOOLICONPATH${scheme}/$PATTERN`
+
+  for var in $TOOLICONS
+  do
+	  basename=${var##*/} # remove the path from a path-string
+	  basename=${basename%.png} # remove the extension from a path-string
+	  basename=${basename%@2x} # remove optional @2x suffix
+	  if [ ! -f $basename@2x.png ]; then # always prefere hidpi version
+		  sed "s/<<basename>>/$basename@2x/" $OUTPATH/svg/template_cursor_${scheme}.svg > $OUTPATH/svg/${scheme}/${basename}_cursor.svg
+	  else
+		  sed "s/<<basename>>/$basename/" $OUTPATH/svg/template_cursor_${scheme}.svg > $OUTPATH/svg/${scheme}/${basename}_cursor.svg
+	  fi
+
+    # Generate PNG files from the SVGs
+    inkscape --export-filename "$OUTPATH/$scheme/${basename}_cursor@2x.png" --export-width 64 --export-height 64 "$OUTPATH/svg/$scheme/${basename}_cursor.svg"
+    inkscape --export-filename "$OUTPATH/$scheme/${basename}_cursor.png" --export-width 32 --export-height 32 "$OUTPATH/svg/$scheme/${basename}_cursor.svg"
+  done
 done

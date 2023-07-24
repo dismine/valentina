@@ -157,14 +157,52 @@ VLib {
     }
 
     Group {
+        name: "theme"
+        prefix: "theme/"
+        files: [
+            "vapplicationstyle.cpp",
+            "vapplicationstyle.h",
+            "vtheme.h",
+            "vtheme.cpp",
+        ]
+    }
+
+    Group {
+        name: "Mac utils"
+        prefix: "theme/"
+        files: [
+            "macutils.h",
+            "macutils.mm"
+        ]
+        condition: qbs.targetOS.contains("macos")
+    }
+
+    Group {
         name: "Resources"
         prefix: "share/resources/"
         files: [
-            "theme.qrc", // Windows theme icons.
-            "icon.qrc", // All other icons except cursors and Windows theme.
+            "icon.qrc",
             "flags.qrc",
-            "qdarkstyle/style.qrc"
+            "breezethemes/breeze.qrc"
         ]
+    }
+
+    Group {
+        name: "Win icon theme"
+        prefix: "share/resources/"
+        files: [
+            "win_theme.qrc"
+        ]
+        condition: !qbs.targetOS.contains("macos")
+    }
+
+    Group {
+        name: "Mac icon theme"
+        prefix: "share/resources/"
+        files: [
+            "mac_theme.qrc"
+        ]
+        condition: qbs.targetOS.contains("macos")
     }
 
     Export {

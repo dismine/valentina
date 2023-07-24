@@ -12,6 +12,8 @@ SOURCES += \
     $$PWD/svgfont/vsvgglyph.cpp \
     $$PWD/svgfont/vsvgpathtokenizer.cpp \
     $$PWD/testpath.cpp \
+    $$PWD/theme/vapplicationstyle.cpp \
+    $$PWD/theme/vtheme.cpp \
     $$PWD/vabstractvalapplication.cpp \
     $$PWD/vabstractapplication.cpp \
     $$PWD/projectversion.cpp \
@@ -26,6 +28,11 @@ SOURCES += \
     $$PWD/dialogs/dialogselectlanguage.cpp
 
 *msvc*:SOURCES += $$PWD/stable.cpp
+
+macx {
+  HEADERS += $$PWD/theme/macutils.h
+  OBJECTIVE_SOURCES += $$PWD/theme/macutils.mm
+}
 
 contains(DEFINES, APPIMAGE) {
     SOURCES += \
@@ -77,6 +84,8 @@ HEADERS += \
     $$PWD/svgfont/vsvgglyph_p.h \
     $$PWD/svgfont/vsvgpathtokenizer.h \
     $$PWD/testpath.h \
+    $$PWD/theme/vapplicationstyle.h \
+    $$PWD/theme/vtheme.h \
     $$PWD/vabstractvalapplication.h \
     $$PWD/vmath.h \
     $$PWD/vabstractapplication.h \

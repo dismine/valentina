@@ -57,6 +57,8 @@ private:
     Q_DISABLE_COPY_MOVE(PuzzlePreferencesConfigurationPage) // NOLINT
     Ui::PuzzlePreferencesConfigurationPage *ui;
     bool m_langChanged{false};
+
+    void SetThemeModeComboBox();
 };
 
 #endif // PUZZLEPREFERENCESCONFIGURATIONPAGE_H

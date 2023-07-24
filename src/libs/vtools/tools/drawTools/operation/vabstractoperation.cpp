@@ -892,7 +892,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
         {
             case GOType::Point:
             {
-                VSimplePoint *point = new VSimplePoint(object.id, QColor(Qt::black));
+                auto *point = new VSimplePoint(object.id, QColor(Qt::black));
                 point->setParentItem(this);
                 point->SetType(GOType::Point);
                 point->setToolTip(ComplexPointToolTip(object.id));

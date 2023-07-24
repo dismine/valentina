@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vpapplication.h"
+#include "../fervor/fvupdater.h"
 #include "../ifc/exception/vexceptionbadid.h"
 #include "../ifc/exception/vexceptionconversionerror.h"
 #include "../ifc/exception/vexceptionemptyparameter.h"
@@ -34,6 +35,9 @@
 #include "../ifc/exception/vexceptionwrongid.h"
 #include "../vganalytics/def.h"
 #include "../vganalytics/vganalytics.h"
+#include "../vmisc/qt_dispatch/qt_dispatch.h"
+#include "../vmisc/theme/vapplicationstyle.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vsysexits.h"
 #include "version.h"
 #include "vpmainwindow.h"
@@ -42,11 +46,14 @@
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
-#include "../fervor/fvupdater.h"
-#include "../vmisc/qt_dispatch/qt_dispatch.h"
-
+#include <QCommandLineParser>
+#include <QFileOpenEvent>
+#include <QLocalServer>
+#include <QLocalSocket>
 #include <QLoggingCategory>
 #include <QMessageBox>
+#include <QPixmapCache>
+#include <QStyleFactory>
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
@@ -55,12 +62,6 @@ QT_WARNING_DISABLE_INTEL(1418)
 Q_LOGGING_CATEGORY(pApp, "p.application") // NOLINT
 
 QT_WARNING_POP
-
-#include <QCommandLineParser>
-#include <QFileOpenEvent>
-#include <QLocalServer>
-#include <QLocalSocket>
-#include <QPixmapCache>
 
 #if !defined(BUILD_REVISION) && defined(QBS_BUILD)
 #include <vcsRepoState.h>
@@ -274,12 +275,13 @@ VPApplication::VPApplication(int &argc, char **argv)
     // The first inside own bundle where info.plist is works fine, but the second,
     // when we run inside Valentina's bundle, require direct setting the icon.
     setWindowIcon(QIcon(":/puzzleicon/64x64/logo.png"));
+    VTheme::Instance()->StoreDefaultThemeName(QIcon::themeName());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VPApplication::~VPApplication()
 {
-    if (IsAppInGUIMode() && settings->IsCollectStatistic())
+    if (VPApplication::IsAppInGUIMode() && settings->IsCollectStatistic())
     {
         auto *statistic = VGAnalytics::Instance();
 
@@ -433,16 +435,8 @@ void VPApplication::InitOptions()
 
     CheckSystemLocale();
 
-    static const char *GENERIC_ICON_TO_CHECK = "document-open";
-    if (not QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK))
-    {
-        // If there is no default working icon theme then we should
-        // use an icon theme that we provide via a .qrc file
-        // This case happens under Windows and Mac OS X
-        // This does not happen under GNOME or KDE
-        QIcon::setThemeName(QStringLiteral("win.icon.theme"));
-    }
-    ActivateDarkMode();
+    VTheme::SetIconTheme();
+    VTheme::InitThemeMode();
 
     auto *statistic = VGAnalytics::Instance();
     QString clientID = settings->GetClientID();
@@ -481,26 +475,6 @@ auto VPApplication::PuzzleSettings() -> VPSettings *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPApplication::ActivateDarkMode()
-{
-    VPSettings *settings = PuzzleSettings();
-    if (settings->GetDarkMode())
-    {
-        QFile f(QStringLiteral(":qdarkstyle/style.qss"));
-        if (!f.exists())
-        {
-            qDebug() << "Unable to set stylesheet, file not found\n";
-        }
-        else
-        {
-            f.open(QFile::ReadOnly | QFile::Text);
-            QTextStream ts(&f);
-            VPApplication::VApp()->setStyleSheet(ts.readAll());
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VPApplication::ParseCommandLine(const SocketConnection &connection, const QStringList &arguments)
 {
     VPCommandLinePtr cmd;
@@ -525,6 +499,17 @@ void VPApplication::ParseCommandLine(const SocketConnection &connection, const Q
         qCDebug(pApp, "Can't establish connection to the server '%s'", qUtf8Printable(serverName));
         StartLocalServer(serverName);
         LoadTranslation(PuzzleSettings()->GetLocale());
+
+        QString styleOpt = cmd->OptionStyle();
+        if (styleOpt != QLatin1String("native"))
+        {
+            QStyle *style = QStyleFactory::create(styleOpt);
+            if (style != nullptr)
+            {
+                style = new VApplicationStyle(style);
+                setStyle(style);
+            }
+        }
     }
 
     ProcessArguments(cmd);

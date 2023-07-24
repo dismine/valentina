@@ -46,7 +46,7 @@
              </property>
              <layout class="QFormLayout" name="formLayout">
               <property name="fieldGrowthPolicy">
-               <enum>QFormLayout::ExpandingFieldsGrow</enum>
+               <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
               </property>
               <item row="0" column="0">
                <widget class="QLabel" name="label_2">
@@ -87,11 +87,24 @@
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_5">
               <item>
-               <widget class="QCheckBox" name="darkModeCheck">
-                <property name="text">
-                 <string>Activate dark mode</string>
-                </property>
-               </widget>
+               <layout class="QHBoxLayout" name="horizontalLayout">
+                <item>
+                 <widget class="QLabel" name="label_4">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string>Theme:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="comboBoxThemeMode"/>
+                </item>
+               </layout>
               </item>
               <item>
                <widget class="QCheckBox" name="checkBoxDontUseNativeDialog">
@@ -237,8 +250,8 @@ This option will take an affect after restart.</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>503</width>
-            <height>627</height>
+            <width>497</width>
+            <height>633</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -249,7 +262,7 @@ This option will take an affect after restart.</string>
              </property>
              <layout class="QFormLayout" name="formLayout_3">
               <property name="fieldGrowthPolicy">
-               <enum>QFormLayout::ExpandingFieldsGrow</enum>
+               <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
               </property>
               <item row="0" column="0">
                <widget class="QLabel" name="label_8">
@@ -313,7 +326,7 @@ This option will take an affect after restart.</string>
              </property>
              <layout class="QFormLayout" name="formLayout_4">
               <property name="fieldGrowthPolicy">
-               <enum>QFormLayout::ExpandingFieldsGrow</enum>
+               <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
               </property>
               <item row="0" column="0">
                <widget class="QLabel" name="label_11">
@@ -377,7 +390,7 @@ This option will take an affect after restart.</string>
              </property>
              <layout class="QFormLayout" name="formLayout_5">
               <property name="fieldGrowthPolicy">
-               <enum>QFormLayout::ExpandingFieldsGrow</enum>
+               <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
               </property>
               <item row="0" column="0">
                <widget class="QLabel" name="label_13">

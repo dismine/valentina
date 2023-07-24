@@ -106,6 +106,11 @@ public:
 
     auto AppUptime() const -> qint64;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays, hicpp-avoid-c-arrays, modernize-avoid-c-arrays)
+    static auto IsOptionSet(int argc, char *argv[], const char *option) -> bool;
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays, hicpp-avoid-c-arrays, modernize-avoid-c-arrays)
+    static void InitHighDpiScaling(int argc, char *argv[]);
+
 protected:
     QUndoStack *undoStack;
 

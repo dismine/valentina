@@ -26,14 +26,16 @@
  **
  *************************************************************************/
 #include "vpcommandline.h"
-#include "vpcommands.h"
-#include "../vmisc/vsysexits.h"
 #include "../vmisc/literals.h"
+#include "../vmisc/vsysexits.h"
+#include "vpcommands.h"
 #include <QDebug>
 
-std::shared_ptr<VPCommandLine> VPCommandLine::instance = nullptr; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+std::shared_ptr<VPCommandLine> VPCommandLine::instance =
+    nullptr; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 
-#define translate(context, source) QCoreApplication::translate((context), source)// NOLINT(cppcoreguidelines-macro-usage)
+#define translate(context, source)                                                                                     \
+    QCoreApplication::translate((context), source) // NOLINT(cppcoreguidelines-macro-usage)
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPCommandLine::OptionRawLayouts() const -> QStringList
@@ -65,7 +67,19 @@ void VPCommandLine::ShowHelp(int exitCode)
     parser.showHelp(exitCode);
 }
 
-//----------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
+auto VPCommandLine::OptionStyle() const -> QString
+{
+    QString value = OptionValue(LONG_OPTION_STYLE);
+    if (value.isEmpty())
+    {
+        return QStringLiteral("native");
+    }
+
+    return value;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
 VPCommandLine::VPCommandLine()
 {
     parser.setApplicationDescription(translate("Puzzle", "Valentina's manual layout editor."));
@@ -96,7 +110,7 @@ void VPCommandLine::ProcessInstance(VPCommandLinePtr &instance, const QStringLis
 //-------------------------------------------------------------------------------------------
 void VPCommandLine::InitCommandLineOptions()
 {
-    //keep in mind order here - that is how user will see it, so group-up for usability
+    // keep in mind order here - that is how user will see it, so group-up for usability
     //=================================================================================================================
     parser.addOptions({
         {{SINGLE_OPTION_RAW_LAYOUT, LONG_OPTION_RAW_LAYOUT},
@@ -106,6 +120,7 @@ void VPCommandLine::InitCommandLineOptions()
          translate("VCommandLine", "Disable high dpi scaling. Call this option if has problem with scaling (by default "
                                    "scaling enabled). Alternatively you can use the %1 environment variable.")
              .arg(QStringLiteral("QT_AUTO_SCREEN_SCALE_FACTOR=0"))},
+        {LONG_OPTION_STYLE, tr("Application style") + QString(" `Fusion`, `Windows`, `native`, ..."), "", "native"},
     });
 }
 
@@ -126,5 +141,3 @@ auto VPCommandLine::OptionValues(const QString &option) const -> QStringList
 {
     return parser.values(option);
 }
-
-

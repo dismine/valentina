@@ -34,6 +34,7 @@
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 
 #include "../vganalytics/vganalytics.h"
+#include "../vmisc/theme/vtheme.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 PuzzlePreferencesConfigurationPage::PuzzlePreferencesConfigurationPage(QWidget *parent)
@@ -49,7 +50,12 @@ PuzzlePreferencesConfigurationPage::PuzzlePreferencesConfigurationPage(QWidget *
     VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
 
     // Theme
-    ui->darkModeCheck->setChecked(settings->GetDarkMode());
+    SetThemeModeComboBox();
+    int index = ui->comboBoxThemeMode->findData(static_cast<int>(settings->GetThemeMode()));
+    if (index != -1)
+    {
+        ui->comboBoxThemeMode->setCurrentIndex(index);
+    }
 
     // Native dialogs
     ui->checkBoxDontUseNativeDialog->setChecked(settings->IsDontUseNativeDialog());
@@ -110,10 +116,11 @@ auto PuzzlePreferencesConfigurationPage::Apply() -> QStringList
 
     settings->SetToolBarStyle(ui->toolBarStyleCheck->isChecked());
 
-    if (settings->GetDarkMode() != ui->darkModeCheck->isChecked())
+    auto themeMode = static_cast<VThemeMode>(ui->comboBoxThemeMode->currentData().toInt());
+    if (settings->GetThemeMode() != themeMode)
     {
-        settings->SetDarkMode(ui->darkModeCheck->isChecked());
-        preferences.append(tr("dark mode"));
+        settings->SetThemeMode(themeMode);
+        VTheme::Instance()->ResetThemeSettings();
     }
 
     if (settings->IsDontUseNativeDialog() != ui->checkBoxDontUseNativeDialog->isChecked())
@@ -189,4 +196,13 @@ void PuzzlePreferencesConfigurationPage::changeEvent(QEvent *event)
     }
     // remember to call base class implementation
     QWidget::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzlePreferencesConfigurationPage::SetThemeModeComboBox()
+{
+    ui->comboBoxThemeMode->clear();
+    ui->comboBoxThemeMode->addItem(tr("System", "theme"), static_cast<int>(VThemeMode::System));
+    ui->comboBoxThemeMode->addItem(tr("Dark", "theme"), static_cast<int>(VThemeMode::Dark));
+    ui->comboBoxThemeMode->addItem(tr("Light", "theme"), static_cast<int>(VThemeMode::Light));
 }

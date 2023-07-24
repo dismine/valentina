@@ -54,6 +54,7 @@
 #include "../vwidgets/vwidgetpopup.h"
 #include "core/vapplication.h"
 #include "core/vtooloptionspropertybrowser.h"
+#include "theme/vtheme.h"
 #include "ui_mainwindow.h"
 #include "vabstractapplication.h"
 #include "vsinglelineoutlinechar.h"
@@ -826,7 +827,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         CancelTool();
         emit EnableItemMove(false);
         m_currentTool = m_lastUsedTool = t;
-        auto cursorResource = cursor;
+        auto cursorResource = VTheme::GetResourceName(QStringLiteral("cursor"), cursor);
         if (qApp->devicePixelRatio() >= 2) // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
         {
             // Try to load HiDPI versions of the cursors if availible
@@ -1030,7 +1031,7 @@ template <typename DrawTool> void MainWindow::ApplyDetailsDialog()
 void MainWindow::ToolEndLine(bool checked)
 {
     ToolSelectPointByRelease();
-    SetToolButtonWithApply<DialogEndLine>(checked, Tool::EndLine, QStringLiteral(":/cursor/endline_cursor.png"),
+    SetToolButtonWithApply<DialogEndLine>(checked, Tool::EndLine, QStringLiteral("segment_cursor.png"),
                                           tr("Select point"), &MainWindow::ClosedDrawDialogWithApply<VToolEndLine>,
                                           &MainWindow::ApplyDrawDialog<VToolEndLine>);
 }
@@ -1043,8 +1044,8 @@ void MainWindow::ToolEndLine(bool checked)
 void MainWindow::ToolLine(bool checked)
 {
     ToolSelectPointByRelease();
-    SetToolButtonWithApply<DialogLine>(checked, Tool::Line, QStringLiteral(":/cursor/line_cursor.png"),
-                                       tr("Select first point"), &MainWindow::ClosedDrawDialogWithApply<VToolLine>,
+    SetToolButtonWithApply<DialogLine>(checked, Tool::Line, QStringLiteral("line_cursor.png"), tr("Select first point"),
+                                       &MainWindow::ClosedDrawDialogWithApply<VToolLine>,
                                        &MainWindow::ApplyDrawDialog<VToolLine>);
 }
 
@@ -1056,7 +1057,7 @@ void MainWindow::ToolLine(bool checked)
 void MainWindow::ToolAlongLine(bool checked)
 {
     ToolSelectPointByRelease();
-    SetToolButtonWithApply<DialogAlongLine>(checked, Tool::AlongLine, QStringLiteral(":/cursor/alongline_cursor.png"),
+    SetToolButtonWithApply<DialogAlongLine>(checked, Tool::AlongLine, QStringLiteral("along_line_cursor.png"),
                                             tr("Select point"), &MainWindow::ClosedDrawDialogWithApply<VToolAlongLine>,
                                             &MainWindow::ApplyDrawDialog<VToolAlongLine>);
 }
@@ -1066,7 +1067,7 @@ void MainWindow::ToolMidpoint(bool checked)
 {
     ToolSelectPointByRelease();
     // Reuse DialogAlongLine and VToolAlongLine but with different cursor
-    SetToolButtonWithApply<DialogAlongLine>(checked, Tool::Midpoint, QStringLiteral(":/cursor/midpoint_cursor.png"),
+    SetToolButtonWithApply<DialogAlongLine>(checked, Tool::Midpoint, QStringLiteral("midpoint_cursor.png"),
                                             tr("Select point"), &MainWindow::ClosedDrawDialogWithApply<VToolAlongLine>,
                                             &MainWindow::ApplyDrawDialog<VToolAlongLine>);
 }
@@ -1080,7 +1081,7 @@ void MainWindow::ToolShoulderPoint(bool checked)
 {
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogShoulderPoint>(
-        checked, Tool::ShoulderPoint, QStringLiteral(":/cursor/shoulder_cursor.png"), tr("Select point"),
+        checked, Tool::ShoulderPoint, QStringLiteral("shoulder_cursor.png"), tr("Select point"),
         &MainWindow::ClosedDrawDialogWithApply<VToolShoulderPoint>, &MainWindow::ApplyDrawDialog<VToolShoulderPoint>);
 }
 
@@ -1093,7 +1094,7 @@ void MainWindow::ToolNormal(bool checked)
 {
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogNormal>(
-        checked, Tool::Normal, QStringLiteral(":/cursor/normal_cursor.png"), tr("Select first point of line"),
+        checked, Tool::Normal, QStringLiteral("normal_cursor.png"), tr("Select first point of line"),
         &MainWindow::ClosedDrawDialogWithApply<VToolNormal>, &MainWindow::ApplyDrawDialog<VToolNormal>);
 }
 
@@ -1106,7 +1107,7 @@ void MainWindow::ToolBisector(bool checked)
 {
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogBisector>(
-        checked, Tool::Bisector, QStringLiteral(":/cursor/bisector_cursor.png"), tr("Select first point of angle"),
+        checked, Tool::Bisector, QStringLiteral("bisector_cursor.png"), tr("Select first point of angle"),
         &MainWindow::ClosedDrawDialogWithApply<VToolBisector>, &MainWindow::ApplyDrawDialog<VToolBisector>);
 }
 
@@ -1119,9 +1120,8 @@ void MainWindow::ToolLineIntersect(bool checked)
 {
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogLineIntersect>(
-        checked, Tool::LineIntersect, QStringLiteral(":/cursor/intersect_cursor.png"),
-        tr("Select first point of first line"), &MainWindow::ClosedDrawDialogWithApply<VToolLineIntersect>,
-        &MainWindow::ApplyDrawDialog<VToolLineIntersect>);
+        checked, Tool::LineIntersect, QStringLiteral("intersect_cursor.png"), tr("Select first point of first line"),
+        &MainWindow::ClosedDrawDialogWithApply<VToolLineIntersect>, &MainWindow::ApplyDrawDialog<VToolLineIntersect>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1133,7 +1133,7 @@ void MainWindow::ToolSpline(bool checked)
 {
     ToolSelectPointByPress();
     SetToolButtonWithApply<DialogSpline>(
-        checked, Tool::Spline, QStringLiteral(":/cursor/spline_cursor.png"), tr("Select first point curve"),
+        checked, Tool::Spline, QStringLiteral("spline_cursor.png"), tr("Select first point curve"),
         &MainWindow::ClosedDrawDialogWithApply<VToolSpline>, &MainWindow::ApplyDrawDialog<VToolSpline>);
 }
 
@@ -1142,7 +1142,7 @@ void MainWindow::ToolCubicBezier(bool checked)
 {
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogCubicBezier>(
-        checked, Tool::CubicBezier, QStringLiteral(":/cursor/cubic_bezier_cursor.png"), tr("Select first curve point"),
+        checked, Tool::CubicBezier, QStringLiteral("cubic_bezier_cursor.png"), tr("Select first curve point"),
         &MainWindow::ClosedDrawDialogWithApply<VToolCubicBezier>, &MainWindow::ApplyDrawDialog<VToolCubicBezier>);
 }
 
@@ -1155,7 +1155,7 @@ void MainWindow::ToolCutSpline(bool checked)
 {
     ToolSelectSpline();
     SetToolButtonWithApply<DialogCutSpline>(
-        checked, Tool::CutSpline, QStringLiteral(":/cursor/spline_cut_point_cursor.png"), tr("Select simple curve"),
+        checked, Tool::CutSpline, QStringLiteral("spline_cut_point_cursor.png"), tr("Select simple curve"),
         &MainWindow::ClosedDrawDialogWithApply<VToolCutSpline>, &MainWindow::ApplyDrawDialog<VToolCutSpline>);
 }
 
@@ -1168,7 +1168,7 @@ void MainWindow::ToolArc(bool checked)
 {
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogArc>(
-        checked, Tool::Arc, QStringLiteral(":/cursor/arc_cursor.png"), tr("Select point of center of arc"),
+        checked, Tool::Arc, QStringLiteral("arc_cursor.png"), tr("Select point of center of arc"),
         &MainWindow::ClosedDrawDialogWithApply<VToolArc>, &MainWindow::ApplyDrawDialog<VToolArc>);
 }
 
@@ -1180,10 +1180,10 @@ void MainWindow::ToolArc(bool checked)
 void MainWindow::ToolEllipticalArc(bool checked)
 {
     ToolSelectPointByRelease();
-    SetToolButtonWithApply<DialogEllipticalArc>(
-        checked, Tool::EllipticalArc, QStringLiteral(":/cursor/el_arc_cursor.png"),
-        tr("Select point of center of elliptical arc"), &MainWindow::ClosedDrawDialogWithApply<VToolEllipticalArc>,
-        &MainWindow::ApplyDrawDialog<VToolEllipticalArc>);
+    SetToolButtonWithApply<DialogEllipticalArc>(checked, Tool::EllipticalArc, QStringLiteral("el_arc_cursor.png"),
+                                                tr("Select point of center of elliptical arc"),
+                                                &MainWindow::ClosedDrawDialogWithApply<VToolEllipticalArc>,
+                                                &MainWindow::ApplyDrawDialog<VToolEllipticalArc>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1195,7 +1195,7 @@ void MainWindow::ToolSplinePath(bool checked)
 {
     ToolSelectPointByPress();
     SetToolButtonWithApply<DialogSplinePath>(
-        checked, Tool::SplinePath, QStringLiteral(":/cursor/splinepath_cursor.png"), tr("Select point of curve path"),
+        checked, Tool::SplinePath, QStringLiteral("splinePath_cursor.png"), tr("Select point of curve path"),
         &MainWindow::ClosedDrawDialogWithApply<VToolSplinePath>, &MainWindow::ApplyDrawDialog<VToolSplinePath>);
 }
 
@@ -1204,7 +1204,7 @@ void MainWindow::ToolCubicBezierPath(bool checked)
 {
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogCubicBezierPath>(
-        checked, Tool::CubicBezierPath, QStringLiteral(":/cursor/cubic_bezier_path_cursor.png"),
+        checked, Tool::CubicBezierPath, QStringLiteral("cubic_bezier_path_cursor.png"),
         tr("Select point of cubic bezier path"), &MainWindow::ClosedDrawDialogWithApply<VToolCubicBezierPath>,
         &MainWindow::ApplyDrawDialog<VToolCubicBezierPath>);
 }
@@ -1218,9 +1218,8 @@ void MainWindow::ToolCutSplinePath(bool checked)
 {
     ToolSelectSplinePath();
     SetToolButtonWithApply<DialogCutSplinePath>(
-        checked, Tool::CutSplinePath, QStringLiteral(":/cursor/splinepath_cut_point_cursor.png"),
-        tr("Select curve path"), &MainWindow::ClosedDrawDialogWithApply<VToolCutSplinePath>,
-        &MainWindow::ApplyDrawDialog<VToolCutSplinePath>);
+        checked, Tool::CutSplinePath, QStringLiteral("splinePath_cut_point_cursor.png"), tr("Select curve path"),
+        &MainWindow::ClosedDrawDialogWithApply<VToolCutSplinePath>, &MainWindow::ApplyDrawDialog<VToolCutSplinePath>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1232,9 +1231,8 @@ void MainWindow::ToolPointOfContact(bool checked)
 {
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogPointOfContact>(
-        checked, Tool::PointOfContact, QStringLiteral(":/cursor/pointcontact_cursor.png"),
-        tr("Select first point of line"), &MainWindow::ClosedDrawDialogWithApply<VToolPointOfContact>,
-        &MainWindow::ApplyDrawDialog<VToolPointOfContact>);
+        checked, Tool::PointOfContact, QStringLiteral("point_of_contact_cursor.png"), tr("Select first point of line"),
+        &MainWindow::ClosedDrawDialogWithApply<VToolPointOfContact>, &MainWindow::ApplyDrawDialog<VToolPointOfContact>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1245,7 +1243,7 @@ void MainWindow::ToolPointOfContact(bool checked)
 void MainWindow::ToolDetail(bool checked)
 {
     ToolSelectAllDrawObjects();
-    SetToolButtonWithApply<DialogSeamAllowance>(checked, Tool::Piece, QStringLiteral("://cursor/new_detail_cursor.png"),
+    SetToolButtonWithApply<DialogSeamAllowance>(checked, Tool::Piece, QStringLiteral("new_detail_cursor.png"),
                                                 tr("Select main path objects clockwise."),
                                                 &MainWindow::ClosedDetailsDialogWithApply<VToolSeamAllowance>,
                                                 &MainWindow::ApplyDetailsDialog<VToolSeamAllowance>);
@@ -1256,7 +1254,7 @@ void MainWindow::ToolPiecePath(bool checked)
 {
     ToolSelectAllDrawObjects();
     SetToolButton<DialogPiecePath>(
-        checked, Tool::PiecePath, QStringLiteral("://cursor/path_cursor.png"),
+        checked, Tool::PiecePath, QStringLiteral("path_cursor.png"),
         tr("Select path objects, <b>%1</b> - reverse direction curve").arg(VModifierKey::Shift()),
         &MainWindow::ClosedDialogPiecePath);
 }
@@ -1265,7 +1263,7 @@ void MainWindow::ToolPiecePath(bool checked)
 void MainWindow::ToolPin(bool checked)
 {
     ToolSelectPointByRelease();
-    SetToolButton<DialogPin>(checked, Tool::Pin, QStringLiteral("://cursor/pin_cursor.png"), tr("Select pin point"),
+    SetToolButton<DialogPin>(checked, Tool::Pin, QStringLiteral("pin_cursor.png"), tr("Select pin point"),
                              &MainWindow::ClosedDialogPin);
 }
 
@@ -1273,7 +1271,7 @@ void MainWindow::ToolPin(bool checked)
 void MainWindow::ToolPlaceLabel(bool checked)
 {
     ToolSelectPointByRelease();
-    SetToolButton<DialogPlaceLabel>(checked, Tool::PlaceLabel, QStringLiteral("://cursor/place_label_cursor.png"),
+    SetToolButton<DialogPlaceLabel>(checked, Tool::PlaceLabel, QStringLiteral("place_label_cursor.png"),
                                     tr("Select placelabel center point"), &MainWindow::ClosedDialogPlaceLabel);
 }
 
@@ -1285,7 +1283,7 @@ void MainWindow::ToolPlaceLabel(bool checked)
 void MainWindow::ToolHeight(bool checked)
 {
     ToolSelectPointByRelease();
-    SetToolButtonWithApply<DialogHeight>(checked, Tool::Height, QStringLiteral(":/cursor/height_cursor.png"),
+    SetToolButtonWithApply<DialogHeight>(checked, Tool::Height, QStringLiteral("height_cursor.png"),
                                          tr("Select base point"), &MainWindow::ClosedDrawDialogWithApply<VToolHeight>,
                                          &MainWindow::ApplyDrawDialog<VToolHeight>);
 }
@@ -1299,7 +1297,7 @@ void MainWindow::ToolTriangle(bool checked)
 {
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogTriangle>(
-        checked, Tool::Triangle, QStringLiteral(":/cursor/triangle_cursor.png"), tr("Select first point of axis"),
+        checked, Tool::Triangle, QStringLiteral("triangle_cursor.png"), tr("Select first point of axis"),
         &MainWindow::ClosedDrawDialogWithApply<VToolTriangle>, &MainWindow::ApplyDrawDialog<VToolTriangle>);
 }
 
@@ -1312,7 +1310,7 @@ void MainWindow::ToolPointOfIntersection(bool checked)
 {
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogPointOfIntersection>(
-        checked, Tool::PointOfIntersection, QStringLiteral(":/cursor/pointofintersect_cursor.png"),
+        checked, Tool::PointOfIntersection, QStringLiteral("point_of_intersection_cursor.png"),
         tr("Select point for X value (vertical)"), &MainWindow::ClosedDrawDialogWithApply<VToolPointOfIntersection>,
         &MainWindow::ApplyDrawDialog<VToolPointOfIntersection>);
 }
@@ -1325,7 +1323,7 @@ void MainWindow::ToolPointOfIntersection(bool checked)
 void MainWindow::ToolUnionDetails(bool checked)
 {
     ToolSelectDetail();
-    SetToolButton<DialogUnionDetails>(checked, Tool::UnionDetails, QStringLiteral(":/cursor/union_cursor.png"),
+    SetToolButton<DialogUnionDetails>(checked, Tool::UnionDetails, QStringLiteral("union_cursor.png"),
                                       tr("Select detail"), &MainWindow::ClosedDialogUnionDetails);
 }
 
@@ -1343,9 +1341,8 @@ void MainWindow::ClosedDialogUnionDetails(int result)
 void MainWindow::ToolDuplicateDetail(bool checked)
 {
     ToolSelectDetail();
-    SetToolButton<DialogDuplicateDetail>(checked, Tool::DuplicateDetail,
-                                         QStringLiteral(":/cursor/duplicate_detail_cursor.png"), tr("Select detail"),
-                                         &MainWindow::ClosedDialogDuplicateDetail);
+    SetToolButton<DialogDuplicateDetail>(checked, Tool::DuplicateDetail, QStringLiteral("duplicate_detail_cursor.png"),
+                                         tr("Select detail"), &MainWindow::ClosedDialogDuplicateDetail);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1371,7 +1368,7 @@ void MainWindow::ToolGroup(bool checked)
     const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
                                "<b>%2</b> - finish creation")
                                 .arg(VModifierKey::Control(), VModifierKey::EnterKey());
-    SetToolButton<DialogGroup>(checked, Tool::Group, QStringLiteral(":/cursor/group_plus_cursor.png"), tooltip,
+    SetToolButton<DialogGroup>(checked, Tool::Group, QStringLiteral("group_plus_cursor.png"), tooltip,
                                &MainWindow::ClosedDialogGroup);
 }
 
@@ -1382,8 +1379,8 @@ void MainWindow::ToolRotation(bool checked)
     const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
                                "<b>%2</b> - confirm selection")
                                 .arg(VModifierKey::Control(), VModifierKey::EnterKey());
-    SetToolButtonWithApply<DialogRotation>(checked, Tool::Rotation, QStringLiteral(":/cursor/rotation_cursor.png"),
-                                           tooltip, &MainWindow::ClosedDrawDialogWithApply<VToolRotation>,
+    SetToolButtonWithApply<DialogRotation>(checked, Tool::Rotation, QStringLiteral("rotation_cursor.png"), tooltip,
+                                           &MainWindow::ClosedDrawDialogWithApply<VToolRotation>,
                                            &MainWindow::ApplyDrawDialog<VToolRotation>);
 }
 
@@ -1395,7 +1392,7 @@ void MainWindow::ToolFlippingByLine(bool checked)
                                "<b>%2</b> - confirm selection")
                                 .arg(VModifierKey::Control(), VModifierKey::EnterKey());
     SetToolButtonWithApply<DialogFlippingByLine>(
-        checked, Tool::FlippingByLine, QStringLiteral(":/cursor/flipping_line_cursor.png"), tooltip,
+        checked, Tool::FlippingByLine, QStringLiteral("flipping_line_cursor.png"), tooltip,
         &MainWindow::ClosedDrawDialogWithApply<VToolFlippingByLine>, &MainWindow::ApplyDrawDialog<VToolFlippingByLine>);
 }
 
@@ -1407,7 +1404,7 @@ void MainWindow::ToolFlippingByAxis(bool checked)
                                "<b>%2</b> - confirm selection")
                                 .arg(VModifierKey::Control(), VModifierKey::EnterKey());
     SetToolButtonWithApply<DialogFlippingByAxis>(
-        checked, Tool::FlippingByAxis, QStringLiteral(":/cursor/flipping_axis_cursor.png"), tooltip,
+        checked, Tool::FlippingByAxis, QStringLiteral("flipping_axis_cursor.png"), tooltip,
         &MainWindow::ClosedDrawDialogWithApply<VToolFlippingByAxis>, &MainWindow::ApplyDrawDialog<VToolFlippingByAxis>);
 }
 
@@ -1418,7 +1415,7 @@ void MainWindow::ToolMove(bool checked)
     const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
                                "<b>%2</b> - confirm selection")
                                 .arg(VModifierKey::Control(), VModifierKey::EnterKey());
-    SetToolButtonWithApply<DialogMove>(checked, Tool::Move, QStringLiteral(":/cursor/move_cursor.png"), tooltip,
+    SetToolButtonWithApply<DialogMove>(checked, Tool::Move, QStringLiteral("move_cursor.png"), tooltip,
                                        &MainWindow::ClosedDrawDialogWithApply<VToolMove>,
                                        &MainWindow::ApplyDrawDialog<VToolMove>);
 }
@@ -1572,8 +1569,8 @@ void MainWindow::RemoveBackgroundImage(const QUuid &id)
 void MainWindow::ToolCutArc(bool checked)
 {
     ToolSelectArc();
-    SetToolButtonWithApply<DialogCutArc>(checked, Tool::CutArc, QStringLiteral(":/cursor/arc_cut_cursor.png"),
-                                         tr("Select arc"), &MainWindow::ClosedDrawDialogWithApply<VToolCutArc>,
+    SetToolButtonWithApply<DialogCutArc>(checked, Tool::CutArc, QStringLiteral("arc_cut_cursor.png"), tr("Select arc"),
+                                         &MainWindow::ClosedDrawDialogWithApply<VToolCutArc>,
                                          &MainWindow::ApplyDrawDialog<VToolCutArc>);
 }
 
@@ -1582,7 +1579,7 @@ void MainWindow::ToolLineIntersectAxis(bool checked)
 {
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogLineIntersectAxis>(
-        checked, Tool::LineIntersectAxis, QStringLiteral(":/cursor/line_intersect_axis_cursor.png"),
+        checked, Tool::LineIntersectAxis, QStringLiteral("line_intersect_axis_cursor.png"),
         tr("Select first point of line"), &MainWindow::ClosedDrawDialogWithApply<VToolLineIntersectAxis>,
         &MainWindow::ApplyDrawDialog<VToolLineIntersectAxis>);
 }
@@ -1592,8 +1589,8 @@ void MainWindow::ToolCurveIntersectAxis(bool checked)
 {
     ToolSelectAllDrawObjects();
     SetToolButtonWithApply<DialogCurveIntersectAxis>(
-        checked, Tool::CurveIntersectAxis, QStringLiteral(":/cursor/curve_intersect_axis_cursor.png"),
-        tr("Select curve"), &MainWindow::ClosedDrawDialogWithApply<VToolCurveIntersectAxis>,
+        checked, Tool::CurveIntersectAxis, QStringLiteral("curve_intersect_axis_cursor.png"), tr("Select curve"),
+        &MainWindow::ClosedDrawDialogWithApply<VToolCurveIntersectAxis>,
         &MainWindow::ApplyDrawDialog<VToolCurveIntersectAxis>);
 }
 
@@ -1602,10 +1599,10 @@ void MainWindow::ToolArcIntersectAxis(bool checked)
 {
     ToolSelectAllDrawObjects();
     // Reuse ToolCurveIntersectAxis but with different cursor and tool tip
-    SetToolButtonWithApply<DialogCurveIntersectAxis>(
-        checked, Tool::ArcIntersectAxis, QStringLiteral(":/cursor/arc_intersect_axis_cursor.png"), tr("Select arc"),
-        &MainWindow::ClosedDrawDialogWithApply<VToolCurveIntersectAxis>,
-        &MainWindow::ApplyDrawDialog<VToolCurveIntersectAxis>);
+    SetToolButtonWithApply<DialogCurveIntersectAxis>(checked, Tool::ArcIntersectAxis,
+                                                     QStringLiteral("arc_intersect_axis_cursor.png"), tr("Select arc"),
+                                                     &MainWindow::ClosedDrawDialogWithApply<VToolCurveIntersectAxis>,
+                                                     &MainWindow::ApplyDrawDialog<VToolCurveIntersectAxis>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1613,7 +1610,7 @@ void MainWindow::ToolPointOfIntersectionArcs(bool checked)
 {
     ToolSelectArc();
     SetToolButtonWithApply<DialogPointOfIntersectionArcs>(
-        checked, Tool::PointOfIntersectionArcs, QStringLiteral("://cursor/point_of_intersection_arcs.png"),
+        checked, Tool::PointOfIntersectionArcs, QStringLiteral("point_of_intersection_arcs.png"),
         tr("Select first an arc"), &MainWindow::ClosedDrawDialogWithApply<VToolPointOfIntersectionArcs>,
         &MainWindow::ApplyDrawDialog<VToolPointOfIntersectionArcs>);
 }
@@ -1623,7 +1620,7 @@ void MainWindow::ToolPointOfIntersectionCircles(bool checked)
 {
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogPointOfIntersectionCircles>(
-        checked, Tool::PointOfIntersectionCircles, QStringLiteral("://cursor/point_of_intersection_circles.png"),
+        checked, Tool::PointOfIntersectionCircles, QStringLiteral("point_of_intersection_circles.png"),
         tr("Select first circle center"), &MainWindow::ClosedDrawDialogWithApply<VToolPointOfIntersectionCircles>,
         &MainWindow::ApplyDrawDialog<VToolPointOfIntersectionCircles>);
 }
@@ -1633,7 +1630,7 @@ void MainWindow::ToolPointOfIntersectionCurves(bool checked)
 {
     ToolSelectCurve();
     SetToolButtonWithApply<DialogPointOfIntersectionCurves>(
-        checked, Tool::PointOfIntersectionCurves, QStringLiteral("://cursor/intersection_curves_cursor.png"),
+        checked, Tool::PointOfIntersectionCurves, QStringLiteral("intersection_curves_cursor.png"),
         tr("Select first curve"), &MainWindow::ClosedDrawDialogWithApply<VToolPointOfIntersectionCurves>,
         &MainWindow::ApplyDrawDialog<VToolPointOfIntersectionCurves>);
 }
@@ -1643,7 +1640,7 @@ void MainWindow::ToolPointFromCircleAndTangent(bool checked)
 {
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogPointFromCircleAndTangent>(
-        checked, Tool::PointFromCircleAndTangent, QStringLiteral("://cursor/point_from_circle_and_tangent_cursor.png"),
+        checked, Tool::PointFromCircleAndTangent, QStringLiteral("point_from_circle_and_tangent_cursor.png"),
         tr("Select point on tangent"), &MainWindow::ClosedDrawDialogWithApply<VToolPointFromCircleAndTangent>,
         &MainWindow::ApplyDrawDialog<VToolPointFromCircleAndTangent>);
 }
@@ -1653,7 +1650,7 @@ void MainWindow::ToolPointFromArcAndTangent(bool checked)
 {
     ToolSelectPointArc();
     SetToolButtonWithApply<DialogPointFromArcAndTangent>(
-        checked, Tool::PointFromArcAndTangent, QStringLiteral("://cursor/point_from_arc_and_tangent_cursor.png"),
+        checked, Tool::PointFromArcAndTangent, QStringLiteral("point_from_arc_and_tangent_cursor.png"),
         tr("Select point on tangent"), &MainWindow::ClosedDrawDialogWithApply<VToolPointFromArcAndTangent>,
         &MainWindow::ApplyDrawDialog<VToolPointFromArcAndTangent>);
 }
@@ -1663,7 +1660,7 @@ void MainWindow::ToolArcWithLength(bool checked)
 {
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogArcWithLength>(
-        checked, Tool::ArcWithLength, QStringLiteral("://cursor/arc_with_length_cursor.png"),
+        checked, Tool::ArcWithLength, QStringLiteral("arc_with_length_cursor.png"),
         tr("Select point of the center of the arc"), &MainWindow::ClosedDrawDialogWithApply<VToolArcWithLength>,
         &MainWindow::ApplyDrawDialog<VToolArcWithLength>);
 }
@@ -1672,10 +1669,9 @@ void MainWindow::ToolArcWithLength(bool checked)
 void MainWindow::ToolTrueDarts(bool checked)
 {
     ToolSelectPointByRelease();
-    SetToolButtonWithApply<DialogTrueDarts>(checked, Tool::TrueDarts, QStringLiteral("://cursor/true_darts_cursor.png"),
-                                            tr("Select the first base line point"),
-                                            &MainWindow::ClosedDrawDialogWithApply<VToolTrueDarts>,
-                                            &MainWindow::ApplyDrawDialog<VToolTrueDarts>);
+    SetToolButtonWithApply<DialogTrueDarts>(
+        checked, Tool::TrueDarts, QStringLiteral("true_darts_cursor.png"), tr("Select the first base line point"),
+        &MainWindow::ClosedDrawDialogWithApply<VToolTrueDarts>, &MainWindow::ApplyDrawDialog<VToolTrueDarts>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1685,8 +1681,8 @@ void MainWindow::ToolInsertNode(bool checked)
     const QString tooltip = tr("Select one or more objects, hold <b>%1</b> - for multiple selection, "
                                "<b>%2</b> - finish creation")
                                 .arg(VModifierKey::Control(), VModifierKey::EnterKey());
-    SetToolButton<DialogInsertNode>(checked, Tool::InsertNode, QStringLiteral("://cursor/insert_node_cursor.png"),
-                                    tooltip, &MainWindow::ClosedDialogInsertNode);
+    SetToolButton<DialogInsertNode>(checked, Tool::InsertNode, QStringLiteral("insert_node_cursor.png"), tooltip,
+                                    &MainWindow::ClosedDialogInsertNode);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1773,6 +1769,12 @@ void MainWindow::changeEvent(QEvent *event)
         UpdateWindowTitle();
         emit m_sceneDetails->LanguageChanged();
     }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        SetupDrawToolsIcons();
+    }
+
     // remember to call base class implementation
     QMainWindow::changeEvent(event);
 }
@@ -3040,6 +3042,8 @@ void MainWindow::ToolBarTools()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolBarDrawTools()
 {
+    SetupDrawToolsIcons();
+
     // Point tools
     {
         auto *linePointToolMenu = new QMenu(this);
@@ -3489,6 +3493,66 @@ void MainWindow::CancelTool()
     // https://bitbucket.org/dismine/valentina/issues/454/crash-using-crtl-z-while-using-line-tool
     undoAction->setEnabled(VAbstractApplication::VApp()->getUndoStack()->canUndo());
     redoAction->setEnabled(VAbstractApplication::VApp()->getUndoStack()->canRedo());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::SetupDrawToolsIcons()
+{
+    const QString resource = QStringLiteral("toolicon");
+
+    ui->actionLineTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("line.png")));
+    ui->actionEndLineTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("segment.png")));
+    ui->actionAlongLineTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("along_line.png")));
+    ui->actionMidpointTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("midpoint.png")));
+    ui->actionNormalTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("normal.png")));
+    ui->actionBisectorTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("bisector.png")));
+    ui->actionHeightTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("height.png")));
+    ui->actionPointOfIntersectionTool->setIcon(
+        VTheme::GetIconResource(resource, QStringLiteral("point_of_intersection.png")));
+    ui->actionLineIntersectTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("intersect.png")));
+    ui->actionShoulderPointTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("shoulder.png")));
+    ui->actionTriangleTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("triangle.png")));
+    ui->actionLineIntersectAxisTool->setIcon(
+        VTheme::GetIconResource(resource, QStringLiteral("line_intersect_axis.png")));
+    ui->actionCurveIntersectAxisTool->setIcon(
+        VTheme::GetIconResource(resource, QStringLiteral("curve_intersect_axis.png")));
+    ui->actionArcIntersectAxisTool->setIcon(
+        VTheme::GetIconResource(resource, QStringLiteral("arc_intersect_axis.png")));
+    ui->actionSplineCutPointTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("spline_cut_point.png")));
+    ui->actionSplinePathCutPointTool->setIcon(
+        VTheme::GetIconResource(resource, QStringLiteral("splinePath_cut_point.png")));
+    ui->actionArcCutPointTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("arc_cut.png")));
+    ui->actionIntersectionCurvesTool->setIcon(
+        VTheme::GetIconResource(resource, QStringLiteral("intersection_curves.png")));
+    ui->actionPointOfIntersectionArcsTool->setIcon(
+        VTheme::GetIconResource(resource, QStringLiteral("point_of_intersection_arcs.png")));
+    ui->actionPointOfIntersectionCirclesTool->setIcon(
+        VTheme::GetIconResource(resource, QStringLiteral("point_of_intersection_circles.png")));
+    ui->actionPointFromArcAndTangentTool->setIcon(
+        VTheme::GetIconResource(resource, QStringLiteral("point_from_arc_and_tangent.png")));
+    ui->actionPointFromCircleAndTangentTool->setIcon(
+        VTheme::GetIconResource(resource, QStringLiteral("point_from_circle_and_tangent.png")));
+    ui->actionPointOfContactTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("point_of_contact.png")));
+    ui->actionSplineTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("spline.png")));
+    ui->actionCubicBezierTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("cubic_bezier.png")));
+    ui->actionSplinePathTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("splinePath.png")));
+    ui->actionCubicBezierPathTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("cubic_bezier_path.png")));
+    ui->actionArcTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("arc.png")));
+    ui->actionArcWithLengthTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("arc_with_length.png")));
+    ui->actionEllipticalArcTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("el_arc.png")));
+    ui->actionGroupTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("group_plus.png")));
+    ui->actionFlippingByAxisTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("flipping_axis.png")));
+    ui->actionFlippingByLineTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("flipping_line.png")));
+    ui->actionRotationTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("rotation.png")));
+    ui->actionMoveTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("move.png")));
+    ui->actionTrueDartsTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("true_darts.png")));
+    ui->actionNewDetailTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("new_detail.png")));
+    ui->actionUnionDetailsTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("union.png")));
+    ui->actionDuplicateDetailTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("duplicate_detail.png")));
+    ui->actionInternalPathTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("path.png")));
+    ui->actionPinTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("pin.png")));
+    ui->actionInsertNodeTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("insert_node.png")));
+    ui->actionPlaceLabelTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("place_label.png")));
 }
 
 QT_WARNING_POP

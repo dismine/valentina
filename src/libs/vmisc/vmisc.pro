@@ -46,10 +46,17 @@ include(vmisc.pri)
 
 # Resource files. This files will be included in binary.
 RESOURCES += \
-    share/resources/theme.qrc \ # Windows theme icons.
     share/resources/icon.qrc \ # All other icons except cursors and Windows theme.
     share/resources/flags.qrc \
-    share/resources/qdarkstyle/style.qrc
+    share/resources/breezethemes/breeze.qrc
+
+macx {
+    RESOURCES += \
+        share/resources/mac_theme.qrc
+} else {
+    RESOURCES += \
+        share/resources/win_theme.qrc
+}
 
 # This is static library so no need in "make install"
 

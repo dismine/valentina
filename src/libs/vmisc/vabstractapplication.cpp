@@ -43,6 +43,7 @@
 
 #include "QtConcurrent/qtconcurrentrun.h"
 #include "compatibility.h"
+#include "literals.h"
 #include "svgfont/vsvgfontdatabase.h"
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -513,4 +514,47 @@ void VAbstractApplication::RepopulateFontDatabase(const QString &path)
     {
         QFuture<void> future = QtConcurrent::run([this, path]() { m_svgFontDatabase->PopulateFontDatabase(path); });
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays, hicpp-avoid-c-arrays, modernize-avoid-c-arrays)
+auto VAbstractApplication::IsOptionSet(int argc, char *argv[], const char *option) -> bool
+{
+    for (int i = 1; i < argc; ++i)
+    {
+        if (qstrcmp(argv[i], option) == 0) // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// See issue #624. https://bitbucket.org/dismine/valentina/issues/624
+// NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays, hicpp-avoid-c-arrays, modernize-avoid-c-arrays)
+void VAbstractApplication::InitHighDpiScaling(int argc, char *argv[])
+{
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    /* For more info see: http://doc.qt.io/qt-5/highdpi.html */
+    if (IsOptionSet(argc, argv, qPrintable(QLatin1String("--") + LONG_OPTION_NO_HDPI_SCALING)))
+    {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+        QCoreApplication::setAttribute(Qt::AA_DisableHighDpiScaling);
+#else
+        qputenv("QT_DEVICE_PIXEL_RATIO", QByteArray("1"));
+#endif
+    }
+    else
+    {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+        QApplication::setAttribute(Qt::AA_EnableHighDpiScaling); // DPI support
+#else
+        qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", QByteArray("1"));
+#endif
+    }
+#else
+    Q_UNUSED(argc);
+    Q_UNUSED(argv);
+#endif
 }

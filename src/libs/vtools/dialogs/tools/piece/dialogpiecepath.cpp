@@ -27,13 +27,13 @@
  *************************************************************************/
 
 #include "dialogpiecepath.h"
-#include "ui_dialogpiecepath.h"
-#include "../vpatterndb/vpiecenode.h"
-#include "../vpatterndb/variables/vincrement.h"
-#include "../../../visualization/path/vistoolpiecepath.h"
 #include "../../../tools/vtoolseamallowance.h"
+#include "../../../visualization/path/vistoolpiecepath.h"
 #include "../../support/dialogeditwrongformula.h"
 #include "../vmisc/vmodifierkey.h"
+#include "../vpatterndb/variables/vincrement.h"
+#include "../vpatterndb/vpiecenode.h"
+#include "ui_dialogpiecepath.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
@@ -92,10 +92,8 @@ DialogPiecePath::DialogPiecePath(const VContainer *data, quint32 toolId, QWidget
     ui->tabWidget->removeTab(ui->tabWidget->indexOf(ui->tabSeamAllowance));
     ui->tabWidget->removeTab(ui->tabWidget->indexOf(ui->tabPassmarks));
 
-    connect(ui->comboBoxPiece, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
-    {
-        ValidObjects(PathIsValid());
-    });
+    connect(ui->comboBoxPiece, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            [this]() { ValidObjects(PathIsValid()); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -175,7 +173,7 @@ void DialogPiecePath::ChosenObject(quint32 id, const SceneObject &type)
             {
                 emit ToolTip(tr("Select main path objects, <b>%1</b> - reverse direction curve, "
                                 "<b>%2</b> - finish creation")
-                             .arg(VModifierKey::Shift(), VModifierKey::EnterKey()));
+                                 .arg(VModifierKey::Shift(), VModifierKey::EnterKey()));
 
                 if (not VAbstractValApplication::VApp()->getCurrentScene()->items().contains(visPath))
                 {
@@ -249,8 +247,7 @@ void DialogPiecePath::CheckState()
     }
     else
     {
-        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"),
-                                            QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
+        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
         ui->tabWidget->setTabIcon(tabSeamAllowanceIndex, icon);
     }
 
@@ -263,8 +260,7 @@ void DialogPiecePath::CheckState()
     }
     else
     {
-        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"),
-                                            QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
+        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
         ui->tabWidget->setTabIcon(tabControlIndex, icon);
     }
 
@@ -280,8 +276,7 @@ void DialogPiecePath::CheckState()
     }
     else
     {
-        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"),
-                                            QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
+        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
         ui->tabWidget->setTabIcon(tabPassmarksIndex, icon);
     }
 
@@ -343,8 +338,8 @@ void DialogPiecePath::ShowContextMenu(const QPoint &pos)
     }
     else
     {
-        if (m_showMode && GetType() == PiecePathType::CustomSeamAllowance
-                && ui->tabWidget->indexOf(ui->tabPassmarks) != -1)
+        if (m_showMode && GetType() == PiecePathType::CustomSeamAllowance &&
+            ui->tabWidget->indexOf(ui->tabPassmarks) != -1)
         {
             actionPassmark = menu->addAction(tr("Passmark"));
             actionPassmark->setCheckable(true);
@@ -377,9 +372,8 @@ void DialogPiecePath::ShowContextMenu(const QPoint &pos)
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
         rowItem->setText(GetNodeName(data, rowNode, IsShowNotch()));
     }
-    else if (m_showMode && rowNode.GetTypeTool() == Tool::NodePoint && selectedAction == actionPassmark
-             && GetType() == PiecePathType::CustomSeamAllowance
-             && ui->tabWidget->indexOf(ui->tabPassmarks) != -1)
+    else if (m_showMode && rowNode.GetTypeTool() == Tool::NodePoint && selectedAction == actionPassmark &&
+             GetType() == PiecePathType::CustomSeamAllowance && ui->tabWidget->indexOf(ui->tabPassmarks) != -1)
     {
         rowNode.SetPassmark(not rowNode.IsPassmark());
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
@@ -474,12 +468,12 @@ void DialogPiecePath::NodeChanged(int index)
             {
                 ui->pushButtonDefBefore->setEnabled(true);
             }
-            if (w1Formula.length() > 80)// increase height if needed.
+            if (w1Formula.length() > 80) // increase height if needed.
             {
                 this->DeployWidthBeforeFormulaTextEdit();
             }
-            w1Formula = VAbstractApplication::VApp()->TrVars()
-                    ->FormulaToUser(w1Formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+            w1Formula = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+                w1Formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
             ui->plainTextEditFormulaWidthBefore->setPlainText(w1Formula);
             MoveCursorToEnd(ui->plainTextEditFormulaWidthBefore);
 
@@ -492,12 +486,12 @@ void DialogPiecePath::NodeChanged(int index)
             {
                 ui->pushButtonDefAfter->setEnabled(true);
             }
-            if (w2Formula.length() > 80)// increase height if needed.
+            if (w2Formula.length() > 80) // increase height if needed.
             {
                 this->DeployWidthAfterFormulaTextEdit();
             }
-            w2Formula = VAbstractApplication::VApp()->TrVars()
-                    ->FormulaToUser(w2Formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+            w2Formula = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+                w2Formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
             ui->plainTextEditFormulaWidthAfter->setPlainText(w2Formula);
             MoveCursorToEnd(ui->plainTextEditFormulaWidthAfter);
 
@@ -597,8 +591,8 @@ void DialogPiecePath::PassmarkChanged(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::ReturnDefBefore()
 {
-    const QString def = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(currentSeamAllowance, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString def = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        currentSeamAllowance, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     ui->plainTextEditFormulaWidthBefore->setPlainText(def);
     if (auto *button = qobject_cast<QPushButton *>(sender()))
     {
@@ -609,8 +603,8 @@ void DialogPiecePath::ReturnDefBefore()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::ReturnDefAfter()
 {
-    const QString def = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(currentSeamAllowance, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString def = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        currentSeamAllowance, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     ui->plainTextEditFormulaWidthAfter->setPlainText(def);
     if (auto *button = qobject_cast<QPushButton *>(sender()))
     {
@@ -1123,7 +1117,7 @@ void DialogPiecePath::SetMoveControls()
             ui->toolButtonDown->setEnabled(true);
             ui->toolButtonBottom->setEnabled(true);
         }
-        else if (ui->listWidget->currentRow() == ui->listWidget->count()-1)
+        else if (ui->listWidget->currentRow() == ui->listWidget->count() - 1)
         {
             ui->toolButtonTop->setEnabled(true);
             ui->toolButtonUp->setEnabled(true);
@@ -1148,47 +1142,49 @@ void DialogPiecePath::InitPathTab()
     connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogPiecePath::NameChanged);
 
     InitPathTypes();
-    connect(ui->comboBoxType, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
-    {
-        const bool isInternalPath = GetType() == PiecePathType::InternalPath;
-        ui->comboBoxPenType->setEnabled(isInternalPath);
-        ui->checkBoxCut->setEnabled(isInternalPath);
-        ui->tabControl->setEnabled(isInternalPath);
-        ui->checkBoxFirstPointToCuttingContour->setEnabled(isInternalPath);
-        ui->checkBoxLastPointToCuttingContour->setEnabled(isInternalPath);
-        ValidObjects(PathIsValid());
-    });
+    connect(ui->comboBoxType, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            [this]()
+            {
+                const bool isInternalPath = GetType() == PiecePathType::InternalPath;
+                ui->comboBoxPenType->setEnabled(isInternalPath);
+                ui->checkBoxCut->setEnabled(isInternalPath);
+                ui->tabControl->setEnabled(isInternalPath);
+                ui->checkBoxFirstPointToCuttingContour->setEnabled(isInternalPath);
+                ui->checkBoxLastPointToCuttingContour->setEnabled(isInternalPath);
+                ValidObjects(PathIsValid());
+            });
 
     ui->listWidget->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(ui->listWidget, &QListWidget::customContextMenuRequested, this, &DialogPiecePath::ShowContextMenu);
     connect(ui->listWidget->model(), &QAbstractItemModel::rowsMoved, this, &DialogPiecePath::ListChanged);
     connect(ui->listWidget, &QListWidget::itemSelectionChanged, this, &DialogPiecePath::SetMoveControls);
 
-    connect(ui->listWidget->model(), &QAbstractItemModel::rowsMoved, this, [this]()
-    {
-        ValidObjects(PathIsValid());
-    });
+    connect(ui->listWidget->model(), &QAbstractItemModel::rowsMoved, this, [this]() { ValidObjects(PathIsValid()); });
 
-    connect(ui->toolButtonTop, &QToolButton::clicked, this, [this]()
-    {
-        MoveListRowTop(ui->listWidget);
-        ValidObjects(PathIsValid());
-    });
-    connect(ui->toolButtonUp, &QToolButton::clicked, this, [this]()
-    {
-        MoveListRowUp(ui->listWidget);
-        ValidObjects(PathIsValid());
-    });
-    connect(ui->toolButtonDown, &QToolButton::clicked, this, [this]()
-    {
-        MoveListRowDown(ui->listWidget);
-        ValidObjects(PathIsValid());
-    });
-    connect(ui->toolButtonBottom, &QToolButton::clicked, this, [this]()
-    {
-        MoveListRowBottom(ui->listWidget);
-        ValidObjects(PathIsValid());
-    });
+    connect(ui->toolButtonTop, &QToolButton::clicked, this,
+            [this]()
+            {
+                MoveListRowTop(ui->listWidget);
+                ValidObjects(PathIsValid());
+            });
+    connect(ui->toolButtonUp, &QToolButton::clicked, this,
+            [this]()
+            {
+                MoveListRowUp(ui->listWidget);
+                ValidObjects(PathIsValid());
+            });
+    connect(ui->toolButtonDown, &QToolButton::clicked, this,
+            [this]()
+            {
+                MoveListRowDown(ui->listWidget);
+                ValidObjects(PathIsValid());
+            });
+    connect(ui->toolButtonBottom, &QToolButton::clicked, this,
+            [this]()
+            {
+                MoveListRowBottom(ui->listWidget);
+                ValidObjects(PathIsValid());
+            });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1229,24 +1225,18 @@ void DialogPiecePath::InitSeamAllowanceTab()
     connect(ui->toolButtonExprBefore, &QPushButton::clicked, this, &DialogPiecePath::FXWidthBefore);
     connect(ui->toolButtonExprAfter, &QPushButton::clicked, this, &DialogPiecePath::FXWidthAfter);
 
-    connect(ui->plainTextEditFormulaWidth, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        m_timerWidth->start(formulaTimerTimeout);
-    });
+    connect(ui->plainTextEditFormulaWidth, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerWidth->start(formulaTimerTimeout); });
 
-    connect(ui->plainTextEditFormulaWidthBefore, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        m_timerWidthBefore->start(formulaTimerTimeout);
-    });
+    connect(ui->plainTextEditFormulaWidthBefore, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerWidthBefore->start(formulaTimerTimeout); });
 
-    connect(ui->plainTextEditFormulaWidthAfter, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        m_timerWidthAfter->start(formulaTimerTimeout);
-    });
+    connect(ui->plainTextEditFormulaWidthAfter, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerWidthAfter->start(formulaTimerTimeout); });
 
     connect(ui->pushButtonGrowWidth, &QPushButton::clicked, this, &DialogPiecePath::DeployWidthFormulaTextEdit);
-    connect(ui->pushButtonGrowWidthBefore, &QPushButton::clicked,
-            this, &DialogPiecePath::DeployWidthBeforeFormulaTextEdit);
+    connect(ui->pushButtonGrowWidthBefore, &QPushButton::clicked, this,
+            &DialogPiecePath::DeployWidthBeforeFormulaTextEdit);
     connect(ui->pushButtonGrowWidthAfter, &QPushButton::clicked, this,
             &DialogPiecePath::DeployWidthAfterFormulaTextEdit);
 }
@@ -1292,14 +1282,14 @@ void DialogPiecePath::InitPassmarksTab()
 
     // notch list
     InitPassmarksList();
-    connect(ui->comboBoxPassmarks, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, &DialogPiecePath::PassmarkChanged);
+    connect(ui->comboBoxPassmarks, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            &DialogPiecePath::PassmarkChanged);
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-    connect(ui->buttonGroupMarkType, QOverload<int>::of(&QButtonGroup::buttonClicked),
-            this, &DialogPiecePath::PassmarkLineTypeChanged);
-    connect(ui->buttonGroupAngleType, QOverload<int>::of(&QButtonGroup::buttonClicked),
-            this, &DialogPiecePath::PassmarkAngleTypeChanged);
+    connect(ui->buttonGroupMarkType, QOverload<int>::of(&QButtonGroup::buttonClicked), this,
+            &DialogPiecePath::PassmarkLineTypeChanged);
+    connect(ui->buttonGroupAngleType, QOverload<int>::of(&QButtonGroup::buttonClicked), this,
+            &DialogPiecePath::PassmarkAngleTypeChanged);
 #else
     connect(ui->buttonGroupMarkType, &QButtonGroup::idClicked, this, &DialogPiecePath::PassmarkLineTypeChanged);
     connect(ui->buttonGroupAngleType, &QButtonGroup::idClicked, this, &DialogPiecePath::PassmarkAngleTypeChanged);
@@ -1322,12 +1312,9 @@ void DialogPiecePath::InitControlTab()
 
     connect(m_timerVisible, &QTimer::timeout, this, &DialogPiecePath::EvalVisible);
     connect(ui->toolButtonExprVisible, &QPushButton::clicked, this, &DialogPiecePath::FXVisible);
-    connect(ui->plainTextEditFormulaVisible, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        m_timerVisible->start(formulaTimerTimeout);
-    });
-    connect(ui->pushButtonGrowVisible, &QPushButton::clicked, this,
-            &DialogPiecePath::DeployVisibleFormulaTextEdit);
+    connect(ui->plainTextEditFormulaVisible, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerVisible->start(formulaTimerTimeout); });
+    connect(ui->pushButtonGrowVisible, &QPushButton::clicked, this, &DialogPiecePath::DeployVisibleFormulaTextEdit);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1366,7 +1353,7 @@ void DialogPiecePath::InitNodesList()
     if (index != -1)
     {
         ui->comboBoxNodes->setCurrentIndex(index);
-        NodeChanged(index);// Need in case combox index was not changed
+        NodeChanged(index); // Need in case combox index was not changed
     }
     else
     {
@@ -1399,7 +1386,7 @@ void DialogPiecePath::InitPassmarksList()
     if (index != -1)
     {
         ui->comboBoxPassmarks->setCurrentIndex(index);
-        PassmarkChanged(index);// Need in case combox index was not changed
+        PassmarkChanged(index); // Need in case combox index was not changed
     }
     else
     {
@@ -1518,7 +1505,7 @@ void DialogPiecePath::SetCutPath(bool value)
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogPiecePath::GetItemById(quint32 id) -> QListWidgetItem *
 {
-    for (qint32 i = ui->listWidget->count()-1; i >= 0; --i)
+    for (qint32 i = ui->listWidget->count() - 1; i >= 0; --i)
     {
         QListWidgetItem *item = ui->listWidget->item(i);
         const auto node = qvariant_cast<VPieceNode>(item->data(Qt::UserRole));
@@ -1537,7 +1524,7 @@ auto DialogPiecePath::GetLastId() const -> quint32
     const int count = ui->listWidget->count();
     if (count > 0)
     {
-        QListWidgetItem *item = ui->listWidget->item(count-1);
+        QListWidgetItem *item = ui->listWidget->item(count - 1);
         const auto node = qvariant_cast<VPieceNode>(item->data(Qt::UserRole));
         return node.GetId();
     }
@@ -1719,8 +1706,8 @@ void DialogPiecePath::SetFormulaSAWidth(const QString &formula)
         return;
     }
 
-    const QString width = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString width = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (width.length() > 80)
     {
@@ -1817,7 +1804,7 @@ auto DialogPiecePath::CreatePath() const -> VPiecePath
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogPiecePath::PathIsValid() const -> bool
 {
-    if(CreatePath().PathPoints(data).count() < 2)
+    if (CreatePath().PathPoints(data).count() < 2)
     {
         ui->helpLabel->setText(DialogWarningIcon() + tr("You need more points!"));
         return false;
@@ -1915,8 +1902,8 @@ auto DialogPiecePath::GetFormulaVisible() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::SetFormulaVisible(const QString &formula)
 {
-    const QString f = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString f = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (f.length() > 80)
     {
@@ -1936,8 +1923,8 @@ auto DialogPiecePath::GetFormulaPassmarkLength() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::SetFormulaPassmarkLength(const QString &formula)
 {
-    const QString f = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString f = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (f.length() > 80)
     {

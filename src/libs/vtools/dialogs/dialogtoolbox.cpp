@@ -27,36 +27,35 @@
  *************************************************************************/
 #include "dialogtoolbox.h"
 
-#include "../vmisc/def.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vpatterndb/calculator.h"
-#include "../vpatterndb/vcontainer.h"
-#include "../vpatterndb/vpiecenode.h"
-#include "../vgeometry/vpointf.h"
-#include "../vpatterndb/variables/vcurvelength.h"
 #include "../ifc/exception/vexceptionbadid.h"
-#include "../vpatterndb/vcontainer.h"
-#include "../vgeometry/vellipticalarc.h"
+#include "../qmuparser/qmudef.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vcubicbezierpath.h"
+#include "../vgeometry/vellipticalarc.h"
+#include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
 #include "../vgeometry/vsplinepath.h"
-#include "../qmuparser/qmudef.h"
+#include "../vmisc/def.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/calculator.h"
+#include "../vpatterndb/variables/vcurvelength.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vpiecenode.h"
 
+#include <QBuffer>
+#include <QDebug>
 #include <QDialog>
 #include <QLabel>
+#include <QLineEdit>
+#include <QListWidget>
 #include <QLocale>
 #include <QPlainTextEdit>
 #include <QPushButton>
-#include <QTextCursor>
-#include <QDebug>
-#include <QTimer>
-#include <QLineEdit>
 #include <QRegularExpression>
+#include <QTextCursor>
+#include <QTimer>
 #include <qnumeric.h>
-#include <QListWidget>
-#include <QBuffer>
 
 const QColor errorColor = Qt::red;
 
@@ -65,11 +64,11 @@ namespace
 const int dialogMaxFormulaHeight = 80;
 
 //---------------------------------------------------------------------------------------------------------------------
-auto DoublePoint(const VPieceNode &firstNode, const VPieceNode &secondNode, const VContainer *data,
-                 QString &error) -> bool
+auto DoublePoint(const VPieceNode &firstNode, const VPieceNode &secondNode, const VContainer *data, QString &error)
+    -> bool
 {
-    if (firstNode.GetTypeTool() == Tool::NodePoint && not (firstNode.GetId() == NULL_ID)
-            && secondNode.GetTypeTool() == Tool::NodePoint && not (secondNode.GetId() == NULL_ID))
+    if (firstNode.GetTypeTool() == Tool::NodePoint && not(firstNode.GetId() == NULL_ID) &&
+        secondNode.GetTypeTool() == Tool::NodePoint && not(secondNode.GetId() == NULL_ID))
     {
         QSharedPointer<VPointF> firstPoint;
         QSharedPointer<VPointF> secondPoint;
@@ -79,7 +78,7 @@ auto DoublePoint(const VPieceNode &firstNode, const VPieceNode &secondNode, cons
             firstPoint = data->GeometricObject<VPointF>(firstNode.GetId());
             secondPoint = data->GeometricObject<VPointF>(secondNode.GetId());
         }
-        catch(const VExceptionBadId &)
+        catch (const VExceptionBadId &)
         {
             return false;
         }
@@ -93,8 +92,8 @@ auto DoublePoint(const VPieceNode &firstNode, const VPieceNode &secondNode, cons
 
         // The same point, but different modeling objects
         if (firstPoint->getIdObject() != NULL_ID && secondPoint->getIdObject() != NULL_ID &&
-                firstPoint->getMode() == Draw::Modeling && secondPoint->getMode() == Draw::Modeling &&
-                firstPoint->getIdObject() == secondPoint->getIdObject())
+            firstPoint->getMode() == Draw::Modeling && secondPoint->getMode() == Draw::Modeling &&
+            firstPoint->getIdObject() == secondPoint->getIdObject())
         {
             error = QObject::tr("Point '%1' repeats twice").arg(firstPoint->name());
             return true;
@@ -110,7 +109,7 @@ auto DoublePoint(const VPieceNode &firstNode, const VPieceNode &secondNode, cons
         if (sameCoordinates)
         {
             error = QObject::tr("Points '%1' and '%2' have the same coordinates.")
-                    .arg(firstPoint->name(), secondPoint->name());
+                        .arg(firstPoint->name(), secondPoint->name());
         }
 
         return sameCoordinates;
@@ -120,11 +119,11 @@ auto DoublePoint(const VPieceNode &firstNode, const VPieceNode &secondNode, cons
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto DoubleCurve(const VPieceNode &firstNode, const VPieceNode &secondNode, const VContainer *data,
-                 QString &error) -> bool
+auto DoubleCurve(const VPieceNode &firstNode, const VPieceNode &secondNode, const VContainer *data, QString &error)
+    -> bool
 {
-    if (firstNode.GetTypeTool() != Tool::NodePoint && not (firstNode.GetId() == NULL_ID)
-            && secondNode.GetTypeTool() != Tool::NodePoint && not (secondNode.GetId() == NULL_ID))
+    if (firstNode.GetTypeTool() != Tool::NodePoint && not(firstNode.GetId() == NULL_ID) &&
+        secondNode.GetTypeTool() != Tool::NodePoint && not(secondNode.GetId() == NULL_ID))
     {
         QSharedPointer<VGObject> curve1;
         QSharedPointer<VGObject> curve2;
@@ -160,8 +159,7 @@ auto DoubleCurve(const VPieceNode &firstNode, const VPieceNode &secondNode, cons
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class T>
-auto CurveAliases(const QString &alias1, const QString &alias2) -> QPair<QString, QString>
+template <class T> auto CurveAliases(const QString &alias1, const QString &alias2) -> QPair<QString, QString>
 {
     T curve1;
     curve1.SetAliasSuffix(alias1);
@@ -171,7 +169,7 @@ auto CurveAliases(const QString &alias1, const QString &alias2) -> QPair<QString
 
     return qMakePair(curve1.GetAlias(), curve2.GetAlias());
 }
-}  // namespace
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 auto RowNode(QListWidget *listWidget, int i) -> VPieceNode
@@ -207,25 +205,23 @@ void DeployFormula(QDialog *dialog, QPlainTextEdit *formula, QPushButton *button
 
     const QTextCursor cursor = formula->textCursor();
 
-    //Before deploy ned to release dialog size
-    //I don't know why, but don't need to fixate again.
-    //A dialog will be lefted fixated. That's what we need.
+    // Before deploy ned to release dialog size
+    // I don't know why, but don't need to fixate again.
+    // A dialog will be lefted fixated. That's what we need.
     dialog->setMaximumSize(QSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX));
     dialog->setMinimumSize(QSize(0, 0));
 
     if (formula->height() < dialogMaxFormulaHeight)
     {
         formula->setFixedHeight(dialogMaxFormulaHeight);
-        //Set icon from theme (internal for Windows system)
-        buttonGrowLength->setIcon(QIcon::fromTheme(QStringLiteral("go-next"),
-                                                   QIcon(":/icons/win.icon.theme/16x16/actions/go-next.png")));
+        // Set icon from theme (internal for Windows system)
+        buttonGrowLength->setIcon(QIcon::fromTheme(QStringLiteral("go-next")));
     }
     else
     {
-       formula->setFixedHeight(formulaBaseHeight);
-       //Set icon from theme (internal for Windows system)
-       buttonGrowLength->setIcon(QIcon::fromTheme(QStringLiteral("go-down"),
-                                                  QIcon(":/icons/win.icon.theme/16x16/actions/go-down.png")));
+        formula->setFixedHeight(formulaBaseHeight);
+        // Set icon from theme (internal for Windows system)
+        buttonGrowLength->setIcon(QIcon::fromTheme(QStringLiteral("go-down")));
     }
 
     // I found that after change size of formula field, it was filed for angle formula, field for formula became black.
@@ -270,7 +266,7 @@ auto EvalToolFormula(QDialog *dialog, const FormulaData &data, bool &flag) -> qr
     SCASSERT(data.labelResult != nullptr)
     SCASSERT(data.labelEditFormula != nullptr)
 
-    qreal result = INT_MIN;//Value can be 0, so use max imposible value
+    qreal result = INT_MIN; // Value can be 0, so use max imposible value
 
     if (data.formula.isEmpty())
     {
@@ -284,9 +280,8 @@ auto EvalToolFormula(QDialog *dialog, const FormulaData &data, bool &flag) -> qr
         try
         {
             // Translate to internal look.
-            QString formula = VAbstractApplication::VApp()
-                    ->TrVars()->FormulaFromUser(data.formula,
-                                                VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+            QString formula = VAbstractApplication::VApp()->TrVars()->FormulaFromUser(
+                data.formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
             QScopedPointer<Calculator> cal(new Calculator());
             result = cal->EvalFormula(data.variables, formula);
 
@@ -300,7 +295,7 @@ auto EvalToolFormula(QDialog *dialog, const FormulaData &data, bool &flag) -> qr
             }
             else
             {
-                //if result equal 0
+                // if result equal 0
                 if (data.checkZero && qFuzzyIsNull(result))
                 {
                     flag = false;
@@ -317,8 +312,8 @@ auto EvalToolFormula(QDialog *dialog, const FormulaData &data, bool &flag) -> qr
                 }
                 else
                 {
-                    data.labelResult->setText(VAbstractApplication::VApp()
-                                              ->LocaleToString(result) + QChar(QChar::Space) + data.postfix);
+                    data.labelResult->setText(VAbstractApplication::VApp()->LocaleToString(result) +
+                                              QChar(QChar::Space) + data.postfix);
                     flag = true;
                     ChangeColor(data.labelEditFormula, OkColor(dialog));
                     data.labelResult->setToolTip(QObject::tr("Value"));
@@ -333,7 +328,7 @@ auto EvalToolFormula(QDialog *dialog, const FormulaData &data, bool &flag) -> qr
             data.labelResult->setToolTip(QObject::tr("Parser error: %1").arg(e.GetMsg()));
             qDebug() << "\nMath parser error:\n"
                      << "--------------------------------------\n"
-                     << "Message:     " << e.GetMsg()  << "\n"
+                     << "Message:     " << e.GetMsg() << "\n"
                      << "Expression:  " << e.GetExpr() << "\n"
                      << "--------------------------------------";
         }
@@ -359,7 +354,7 @@ auto OkColor(QWidget *widget) -> QColor
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void CheckPointLabel(QDialog *dialog, QLineEdit* edit, QLabel *labelEditNamePoint, const QString &pointName,
+void CheckPointLabel(QDialog *dialog, QLineEdit *edit, QLabel *labelEditNamePoint, const QString &pointName,
                      const VContainer *data, bool &flag)
 {
     SCASSERT(dialog != nullptr)
@@ -405,8 +400,7 @@ auto FindNotExcludedNodeDown(QListWidget *listWidget, int candidate) -> int
         }
 
         ++i;
-    }
-    while (rowNode.IsExcluded() && i < listWidget->count());
+    } while (rowNode.IsExcluded() && i < listWidget->count());
 
     return index;
 }
@@ -436,8 +430,7 @@ auto FindNotExcludedNodeUp(QListWidget *listWidget, int candidate) -> int
         }
 
         --i;
-    }
-    while (rowNode.IsExcluded() && i > -1);
+    } while (rowNode.IsExcluded() && i > -1);
 
     return index;
 }
@@ -449,7 +442,7 @@ auto FirstPointEqualLast(QListWidget *listWidget, const VContainer *data, QStrin
     if (listWidget->count() > 1)
     {
         const VPieceNode topNode = RowNode(listWidget, FindNotExcludedNodeDown(listWidget, 0));
-        const VPieceNode bottomNode = RowNode(listWidget, FindNotExcludedNodeUp(listWidget, listWidget->count()-1));
+        const VPieceNode bottomNode = RowNode(listWidget, FindNotExcludedNodeUp(listWidget, listWidget->count() - 1));
 
         return DoublePoint(topNode, bottomNode, data, error);
     }
@@ -460,11 +453,11 @@ auto FirstPointEqualLast(QListWidget *listWidget, const VContainer *data, QStrin
 auto DoublePoints(QListWidget *listWidget, const VContainer *data, QString &error) -> bool
 {
     SCASSERT(listWidget != nullptr);
-    for (int i=0, sz = listWidget->count()-1; i<sz; ++i)
+    for (int i = 0, sz = listWidget->count() - 1; i < sz; ++i)
     {
         const int firstIndex = FindNotExcludedNodeDown(listWidget, i);
         const VPieceNode firstNode = RowNode(listWidget, firstIndex);
-        const VPieceNode secondNode = RowNode(listWidget, FindNotExcludedNodeDown(listWidget, firstIndex+1));
+        const VPieceNode secondNode = RowNode(listWidget, FindNotExcludedNodeDown(listWidget, firstIndex + 1));
 
         if (DoublePoint(firstNode, secondNode, data, error))
         {
@@ -478,11 +471,11 @@ auto DoublePoints(QListWidget *listWidget, const VContainer *data, QString &erro
 auto DoubleCurves(QListWidget *listWidget, const VContainer *data, QString &error) -> bool
 {
     SCASSERT(listWidget != nullptr);
-    for (int i=0, sz = listWidget->count()-1; i<sz; ++i)
+    for (int i = 0, sz = listWidget->count() - 1; i < sz; ++i)
     {
         const int firstIndex = FindNotExcludedNodeDown(listWidget, i);
         const VPieceNode firstNode = RowNode(listWidget, firstIndex);
-        const VPieceNode secondNode = RowNode(listWidget, FindNotExcludedNodeDown(listWidget, firstIndex+1));
+        const VPieceNode secondNode = RowNode(listWidget, FindNotExcludedNodeDown(listWidget, firstIndex + 1));
 
         if (DoubleCurve(firstNode, secondNode, data, error))
         {
@@ -498,7 +491,7 @@ auto EachPointLabelIsUnique(QListWidget *listWidget) -> bool
     SCASSERT(listWidget != nullptr);
     QSet<quint32> pointLabels;
     int countPoints = 0;
-    for (int i=0; i < listWidget->count(); ++i)
+    for (int i = 0; i < listWidget->count(); ++i)
     {
         const QListWidgetItem *rowItem = listWidget->item(i);
         SCASSERT(rowItem != nullptr);
@@ -516,8 +509,7 @@ auto EachPointLabelIsUnique(QListWidget *listWidget) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogWarningIcon() -> QString
 {
-    const QIcon icon = QIcon::fromTheme("dialog-warning",
-                                  QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
+    const QIcon icon = QIcon::fromTheme("dialog-warning");
 
     const QPixmap pixmap = icon.pixmap(QSize(16, 16));
     QByteArray byteArray;
@@ -583,7 +575,7 @@ auto LineColor(int size, const QString &color) -> QIcon
     // On Mac pixmap should be little bit smaller.
 #if defined(Q_OS_MAC)
     size -= 2; // Two pixels should be enough.
-#endif //defined(Q_OS_MAC)
+#endif         // defined(Q_OS_MAC)
 
     QPixmap pix(size, size);
     pix.fill(QColor(color));
@@ -595,7 +587,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
 auto SegmentAliases(GOType curveType, const QString &alias1, const QString &alias2) -> QPair<QString, QString>
 {
-    switch(curveType)
+    switch (curveType)
     {
         case GOType::EllipticalArc:
             return CurveAliases<VEllipticalArc>(alias1, alias2);
@@ -637,7 +629,7 @@ auto GetNodeName(const VContainer *data, const VPieceNode &node, bool showPassma
     {
         if (showPassmarkDetails && node.IsPassmark())
         {
-            switch(node.GetPassmarkLineType())
+            switch (node.GetPassmarkLineType())
             {
                 case PassmarkLineType::OneLine:
                     name += QLatin1Char('|');
@@ -717,8 +709,7 @@ auto FindNotExcludedPointDown(QListWidget *listWidget, int start) -> int
         }
 
         ++count;
-    }
-    while (count < listWidget->count());
+    } while (count < listWidget->count());
 
     return index;
 }
@@ -755,8 +746,7 @@ auto FindNotExcludedCurveDown(QListWidget *listWidget, int start) -> int
         }
 
         ++count;
-    }
-    while (count < listWidget->count());
+    } while (count < listWidget->count());
 
     return index;
 }
@@ -766,15 +756,15 @@ auto InvalidSegment(QListWidget *listWidget, const VContainer *data, QString &er
 {
     SCASSERT(listWidget != nullptr);
 
-    for (int index=0; index < listWidget->count(); ++index)
+    for (int index = 0; index < listWidget->count(); ++index)
     {
         int firstCurveIndex = -1;
         int pointIndex = -1;
         int secondCurveIndex = -1;
 
-        auto FindPair = [listWidget, &firstCurveIndex, &pointIndex, &secondCurveIndex]( int start)
+        auto FindPair = [listWidget, &firstCurveIndex, &pointIndex, &secondCurveIndex](int start)
         {
-            for (int i=start; i < listWidget->count(); ++i)
+            for (int i = start; i < listWidget->count(); ++i)
             {
                 firstCurveIndex = FindNotExcludedCurveDown(listWidget, i);
                 if (firstCurveIndex == -1)
@@ -782,13 +772,13 @@ auto InvalidSegment(QListWidget *listWidget, const VContainer *data, QString &er
                     continue;
                 }
 
-                pointIndex = FindNotExcludedPointDown(listWidget, firstCurveIndex+1);
+                pointIndex = FindNotExcludedPointDown(listWidget, firstCurveIndex + 1);
                 if (pointIndex == -1)
                 {
                     continue;
                 }
 
-                secondCurveIndex = FindNotExcludedCurveDown(listWidget, pointIndex+1);
+                secondCurveIndex = FindNotExcludedCurveDown(listWidget, pointIndex + 1);
                 if (secondCurveIndex == -1 || firstCurveIndex == secondCurveIndex)
                 {
                     continue;

@@ -39,6 +39,8 @@
 #include "../vganalytics/def.h"
 #include "../vganalytics/vganalytics.h"
 #include "../vmisc/qt_dispatch/qt_dispatch.h"
+#include "../vmisc/theme/vapplicationstyle.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vsysexits.h"
 #include "../vmisc/vvalentinasettings.h"
 
@@ -50,12 +52,15 @@
 #include <QDir>
 #include <QFile>
 #include <QIcon>
+#include <QLoggingCategory>
 #include <QMessageBox>
 #include <QProcess>
 #include <QStandardPaths>
+#include <QStyleFactory>
 #include <QTemporaryFile>
 #include <QThread>
-#include <Qt>
+#include <QTimer>
+#include <QUuid>
 #include <QtDebug>
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -378,6 +383,7 @@ VApplication::VApplication(int &argc, char **argv)
     setApplicationVersion(APP_VERSION_STR);
     // making sure will create new instance...just in case we will ever do 2 objects of VApplication
     VCommandLine::Reset();
+    VTheme::Instance()->StoreDefaultThemeName(QIcon::themeName());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -521,26 +527,6 @@ auto VApplication::notify(QObject *receiver, QEvent *event) -> bool
         exit(V_EX_SOFTWARE);
     }
     return false;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VApplication::ActivateDarkMode()
-{
-    VValentinaSettings *settings = ValentinaSettings();
-    if (settings->GetDarkMode())
-    {
-        QFile f(QStringLiteral(":qdarkstyle/style.qss"));
-        if (!f.exists())
-        {
-            qDebug() << "Unable to set stylesheet, file not found\n";
-        }
-        else
-        {
-            f.open(QFile::ReadOnly | QFile::Text);
-            QTextStream ts(&f);
-            qApp->setStyleSheet(ts.readAll()); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
-        }
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -696,18 +682,21 @@ void VApplication::InitOptions()
     if (VApplication::IsGUIMode()) // By default console version uses system locale
     {
         LoadTranslation(ValentinaSettings()->GetLocale());
-    }
 
-    static const char *GENERIC_ICON_TO_CHECK = "document-open";
-    if (not QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK))
-    {
-        // If there is no default working icon theme then we should
-        // use an icon theme that we provide via a .qrc file
-        // This case happens under Windows and Mac OS X
-        // This does not happen under GNOME or KDE
-        QIcon::setThemeName(QStringLiteral("win.icon.theme"));
+        VTheme::SetIconTheme();
+        VTheme::InitThemeMode();
+
+        QString styleOpt = VApplication::CommandLine()->OptStyle();
+        if (styleOpt != QLatin1String("native"))
+        {
+            QStyle *style = QStyleFactory::create(styleOpt);
+            if (style != nullptr)
+            {
+                style = new VApplicationStyle(style);
+                setStyle(style);
+            }
+        }
     }
-    ActivateDarkMode();
 
     auto *statistic = VGAnalytics::Instance();
     QString clientID = settings->GetClientID();

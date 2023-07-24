@@ -30,11 +30,11 @@
 #define VAPPLICATION_H
 
 #include "../vmisc/vabstractvalapplication.h"
+#include "../vmisc/vlockguard.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "vcmdexport.h"
-#include "../vmisc/vlockguard.h"
 
-class VApplication;// use in define
+class VApplication; // use in define
 
 /**
  * @brief The VApplication class reimplamentation QApplication class.
@@ -42,12 +42,13 @@ class VApplication;// use in define
 class VApplication : public VAbstractValApplication
 {
     Q_OBJECT // NOLINT
+
 public:
-    VApplication(int &argc, char ** argv);
+    VApplication(int &argc, char **argv);
     ~VApplication() override;
 
     static void NewValentina(const QString &fileName = QString());
-    auto notify(QObject * receiver, QEvent * event) -> bool override;
+    auto notify(QObject *receiver, QEvent *event) -> bool override;
 
     void InitOptions();
 
@@ -62,7 +63,6 @@ public:
     static auto LabelLanguages() -> QStringList;
 
     void StartLogging();
-    void ActivateDarkMode();
     auto LogFile() -> QTextStream *;
 
     auto TrVars() -> const VTranslateVars * override;
@@ -85,7 +85,7 @@ private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VApplication) // NOLINT
     VTranslateVars *m_trVars{nullptr};
-    QTimer         *m_autoSaveTimer{nullptr};
+    QTimer *m_autoSaveTimer{nullptr};
 
     QSharedPointer<VLockGuard<QFile>> m_lockLog{};
     std::shared_ptr<QTextStream> m_out{nullptr};

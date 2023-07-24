@@ -40,7 +40,8 @@ class PreferencesConfigurationPage : public QWidget
 {
     Q_OBJECT // NOLINT
 
-public : explicit PreferencesConfigurationPage(QWidget *parent = nullptr);
+public:
+    explicit PreferencesConfigurationPage(QWidget *parent = nullptr);
     ~PreferencesConfigurationPage() override;
 
     auto Apply() -> QStringList;
@@ -59,6 +60,7 @@ private:
     bool m_labelLangChanged{false};
 
     void SetLabelComboBox(const QStringList &list);
+    void SetThemeModeComboBox();
     void InitUnits();
     void RetranslateUi();
 };

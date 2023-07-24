@@ -74,7 +74,6 @@
 #include <QUuid>
 #include <QtNumeric>
 #include <array>
-#include <array>
 #include <cstddef>
 
 enum TabOrder
@@ -560,8 +559,7 @@ void DialogSeamAllowance::CheckState()
     else
     {
         m_ftb->SetTabText(TabOrder::Paths, tr("Paths") + '*');
-        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"),
-                                            QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
+        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
         uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabSeamAllowance), icon);
     }
 
@@ -584,8 +582,7 @@ void DialogSeamAllowance::CheckState()
     else
     {
         m_ftb->SetTabText(TabOrder::Paths, tr("Paths") + '*');
-        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"),
-                                            QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
+        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
         uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabMainPath), icon);
     }
 
@@ -600,8 +597,7 @@ void DialogSeamAllowance::CheckState()
     else
     {
         m_ftb->SetTabText(TabOrder::Paths, tr("Paths") + '*');
-        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"),
-                                            QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
+        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
         uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabPiece), icon);
     }
 
@@ -623,8 +619,7 @@ void DialogSeamAllowance::CheckState()
     else
     {
         m_ftb->SetTabText(TabOrder::Passmarks, tr("Passmarks") + '*');
-        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"),
-                                            QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
+        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
         uiTabPassmarks->tabWidget->setTabIcon(uiTabPassmarks->tabWidget->indexOf(uiTabPassmarks->tabManualShape), icon);
     }
 
@@ -1836,8 +1831,7 @@ void DialogSeamAllowance::UpdateDetailLabelValues()
     if (not flagDLAngle || not(flagDLFormulas || flagDPin) || not flagPLAngle || not(flagPLFormulas || flagPPin))
     {
         m_ftb->SetTabText(TabOrder::Labels, tr("Labels") + '*');
-        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"),
-                                            QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
+        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
         uiTabLabels->tabWidget->setTabIcon(uiTabLabels->tabWidget->indexOf(uiTabLabels->tabLabels), icon);
     }
     else
@@ -1920,8 +1914,7 @@ void DialogSeamAllowance::UpdatePatternLabelValues()
     if (not flagDLAngle || not(flagDLFormulas || flagDPin) || not flagPLAngle || not(flagPLFormulas || flagPPin))
     {
         m_ftb->SetTabText(TabOrder::Labels, tr("Labels") + '*');
-        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"),
-                                            QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
+        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
         uiTabLabels->tabWidget->setTabIcon(uiTabLabels->tabWidget->indexOf(uiTabLabels->tabLabels), icon);
     }
     else
@@ -2645,8 +2638,7 @@ void DialogSeamAllowance::DetailPinPointChanged()
         topPinId == NULL_ID &&bottomPinId == NULL_ID ? color = OkColor(this) : color = errorColor;
 
         m_ftb->SetTabText(TabOrder::Labels, tr("Labels") + '*');
-        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"),
-                                            QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
+        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
         uiTabLabels->tabWidget->setTabIcon(uiTabLabels->tabWidget->indexOf(uiTabLabels->tabLabels), icon);
     }
     EnableDetailLabelFormulaControls(not flagDPin);
@@ -2679,8 +2671,7 @@ void DialogSeamAllowance::PatternPinPointChanged()
         topPinId == NULL_ID &&bottomPinId == NULL_ID ? color = OkColor(this) : color = errorColor;
 
         m_ftb->SetTabText(TabOrder::Labels, tr("Labels") + '*');
-        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"),
-                                            QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
+        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
         uiTabLabels->tabWidget->setTabIcon(uiTabLabels->tabWidget->indexOf(uiTabLabels->tabLabels), icon);
     }
     EnablePatternLabelFormulaControls(not flagPPin);

@@ -26,21 +26,22 @@
  **
  *************************************************************************/
 
-#include "mainwindow.h"
-#include "core/vapplication.h"
 #include "../fervor/fvupdater.h"
 #include "../vpatterndb/vpiecenode.h"
+#include "core/vapplication.h"
+#include "mainwindow.h"
+#include "vabstractapplication.h"
 
 #include <QMessageBox> // For QT_REQUIRE_VERSION
 #include <QTimer>
 
 #if defined(APPIMAGE) && defined(Q_OS_LINUX)
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
-#   include "../vmisc/backport/qscopeguard.h"
+#include "../vmisc/backport/qscopeguard.h"
 #else
-#   include <QScopeGuard>
+#include <QScopeGuard>
 #endif
-#   include "../vmisc/appimage.h"
+#include "../vmisc/appimage.h"
 #endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -54,19 +55,23 @@ auto main(int argc, char *argv[]) -> int
 #if defined(APPIMAGE) && defined(Q_OS_LINUX)
     /* Fix path to ICU_DATA when run AppImage.*/
     char *exe_dir = IcuDataPath("/../share/icu");
-    auto FreeMemory = qScopeGuard([exe_dir] {free(exe_dir);});
+    auto FreeMemory = qScopeGuard([exe_dir] { free(exe_dir); });
 #endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 
-    Q_INIT_RESOURCE(cursor); // NOLINT
-    Q_INIT_RESOURCE(icon); // NOLINT
-    Q_INIT_RESOURCE(schema); // NOLINT
-    Q_INIT_RESOURCE(theme); // NOLINT
-    Q_INIT_RESOURCE(flags); // NOLINT
-    Q_INIT_RESOURCE(icons); // NOLINT
+    Q_INIT_RESOURCE(cursor);   // NOLINT
+    Q_INIT_RESOURCE(icon);     // NOLINT
+    Q_INIT_RESOURCE(schema);   // NOLINT
+    Q_INIT_RESOURCE(flags);    // NOLINT
+    Q_INIT_RESOURCE(icons);    // NOLINT
     Q_INIT_RESOURCE(toolicon); // NOLINT
-    Q_INIT_RESOURCE(style); // NOLINT
+    Q_INIT_RESOURCE(breeze);   // NOLINT
+#if defined(Q_OS_MACX)
+    Q_INIT_RESOURCE(mac_theme); // NOLINT
+#else
+    Q_INIT_RESOURCE(win_theme); // NOLINT
+#endif
 
-    QT_REQUIRE_VERSION(argc, argv, "5.4.0")// clazy:exclude=qstring-arg,qstring-allocations NOLINT
+    QT_REQUIRE_VERSION(argc, argv, "5.4.0") // clazy:exclude=qstring-arg,qstring-allocations NOLINT
 
 #if defined(Q_OS_WIN)
     VAbstractApplication::WinAttachConsole();
@@ -79,9 +84,9 @@ auto main(int argc, char *argv[]) -> int
 
 #ifndef Q_OS_MAC // supports natively
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    InitHighDpiScaling(argc, argv);
+    VAbstractApplication::InitHighDpiScaling(argc, argv);
 #endif
-#endif //Q_OS_MAC
+#endif // Q_OS_MAC
 
 #ifdef Q_OS_MAC
 #if MACOS_LAYER_BACKING_AFFECTED
@@ -92,7 +97,7 @@ auto main(int argc, char *argv[]) -> int
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     XERCES_CPP_NAMESPACE::XMLPlatformUtils::Initialize();
 
-    auto Terminate = qScopeGuard([](){ XERCES_CPP_NAMESPACE::XMLPlatformUtils::Terminate(); });
+    auto Terminate = qScopeGuard([]() { XERCES_CPP_NAMESPACE::XMLPlatformUtils::Terminate(); });
 #endif
 
     VApplication app(argc, argv);
@@ -118,7 +123,7 @@ auto main(int argc, char *argv[]) -> int
     app.setMainWindow(&w);
 
     int msec = 0;
-    //Before we load pattern show window.
+    // Before we load pattern show window.
     if (VApplication::IsGUIMode())
     {
         w.show();

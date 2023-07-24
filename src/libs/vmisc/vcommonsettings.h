@@ -43,6 +43,13 @@
 
 class QMarginsF;
 
+enum class VThemeMode
+{
+    System = 0,
+    Dark = 1,
+    Light = 2
+};
+
 class VCommonSettings : public QSettings
 {
     Q_OBJECT // NOLINT
@@ -121,8 +128,8 @@ public:
     auto GetToolBarStyle() const -> bool;
     void SetToolBarStyle(const bool &value);
 
-    auto GetDarkMode() const -> bool;
-    void SetDarkMode(const bool &value);
+    auto GetThemeMode() const -> VThemeMode;
+    void SetThemeMode(VThemeMode mode);
 
     auto IsFreeCurveMode() const -> bool;
     void SetFreeCurveMode(bool value);

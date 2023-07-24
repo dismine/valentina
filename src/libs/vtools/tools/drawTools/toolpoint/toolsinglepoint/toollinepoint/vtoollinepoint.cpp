@@ -35,20 +35,19 @@
 #include <QPoint>
 #include <QPointF>
 #include <QSharedPointer>
-#include <Qt>
 #include <new>
 
+#include "../../../../vabstracttool.h"
+#include "../../../vdrawtool.h"
+#include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vdomdocument.h"
-#include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
-#include "../../../../vabstracttool.h"
-#include "../../../vdrawtool.h"
 #include "../vtoolsinglepoint.h"
-#include "../vwidgets/scalesceneitems.h"
 #include "../vwidgets/global.h"
+#include "../vwidgets/scalesceneitems.h"
 
 template <class T> class QSharedPointer;
 
@@ -68,8 +67,12 @@ template <class T> class QSharedPointer;
 VToolLinePoint::VToolLinePoint(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
                                const QString &lineColor, const QString &formula, const quint32 &basePointId,
                                const qreal &angle, const QString &notes, QGraphicsItem *parent)
-    :VToolSinglePoint(doc, data, id, notes, parent), formulaLength(formula), angle(angle), basePointId(basePointId),
-      mainLine(nullptr), lineColor(lineColor)
+  : VToolSinglePoint(doc, data, id, notes, parent),
+    formulaLength(formula),
+    angle(angle),
+    basePointId(basePointId),
+    mainLine(nullptr),
+    lineColor(lineColor)
 {
     this->m_lineType = typeLine;
     Q_ASSERT_X(basePointId != 0, Q_FUNC_INFO, "basePointId == 0"); //-V654 //-V712
@@ -160,11 +163,11 @@ auto VToolLinePoint::MakeToolTip() const -> QString
                                     "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
                                     "<tr> <td><b>%4:</b> %5°</td> </tr>"
                                     "</table>")
-            .arg(tr("Length"))
-            .arg(VAbstractValApplication::VApp()->fromPixel(line.length()))
-            .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Angle"))
-            .arg(line.angle())
-            .arg(tr("Label"), second->name());
+                                .arg(tr("Length"))
+                                .arg(VAbstractValApplication::VApp()->fromPixel(line.length()))
+                                .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Angle"))
+                                .arg(line.angle())
+                                .arg(tr("Label"), second->name());
     return toolTip;
 }
 

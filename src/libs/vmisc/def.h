@@ -482,9 +482,6 @@ enum class IMD : qint8 // Individual measurement dimension
 #endif // defined(__cplusplus)
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 8, 0)
 
-auto IsOptionSet(int argc, char *argv[], const char *option) -> bool;
-void InitHighDpiScaling(int argc, char *argv[]);
-
 #ifdef Q_OS_MAC
 // Fix QT issue on MacOS version 11.0 "Big Sur"
 //     https://bugreports.qt.io/browse/QTBUG-87014

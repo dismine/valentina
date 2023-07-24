@@ -27,24 +27,25 @@
  *************************************************************************/
 
 #include "dialogpreferences.h"
-#include "ui_dialogpreferences.h"
-#include "configpages/preferencesconfigurationpage.h"
-#include "configpages/preferencespatternpage.h"
-#include "configpages/preferencespathpage.h"
-#include "../vmisc/vvalentinasettings.h"
 #include "../vmisc/vabstractvalapplication.h"
+#include "../vmisc/vvalentinasettings.h"
+#include "configpages/preferencesconfigurationpage.h"
+#include "configpages/preferencespathpage.h"
+#include "configpages/preferencespatternpage.h"
+#include "ui_dialogpreferences.h"
 
+#include <QApplication>
 #include <QMessageBox>
 #include <QPushButton>
 #include <QShowEvent>
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPreferences::DialogPreferences(QWidget *parent)
-    : QDialog(parent),
-      ui(new Ui::DialogPreferences),
-      m_configurePage(new PreferencesConfigurationPage),
-      m_patternPage(new PreferencesPatternPage),
-      m_pathPage(new PreferencesPathPage)
+  : QDialog(parent),
+    ui(new Ui::DialogPreferences),
+    m_configurePage(new PreferencesConfigurationPage),
+    m_patternPage(new PreferencesPatternPage),
+    m_pathPage(new PreferencesPathPage)
 {
     ui->setupUi(this);
 
@@ -79,8 +80,8 @@ DialogPreferences::~DialogPreferences()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPreferences::showEvent(QShowEvent *event)
 {
-    QDialog::showEvent( event );
-    if ( event->spontaneous() )
+    QDialog::showEvent(event);
+    if (event->spontaneous())
     {
         return;
     }
@@ -97,7 +98,7 @@ void DialogPreferences::showEvent(QShowEvent *event)
         resize(sz);
     }
 
-    m_isInitialized = true;//first show windows are held
+    m_isInitialized = true; // first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -121,6 +122,24 @@ void DialogPreferences::changeEvent(QEvent *event)
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
     }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        QStyle *style = QApplication::style();
+
+        QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
+        SCASSERT(bOk != nullptr)
+        bOk->setIcon(style->standardIcon(QStyle::SP_DialogOkButton));
+
+        QPushButton *bApply = ui->buttonBox->button(QDialogButtonBox::Apply);
+        SCASSERT(bApply != nullptr)
+        bApply->setIcon(style->standardIcon(QStyle::SP_DialogApplyButton));
+
+        QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
+        SCASSERT(bCancel != nullptr)
+        bCancel->setIcon(style->standardIcon(QStyle::SP_DialogCancelButton));
+    }
+
     // remember to call base class implementation
     QDialog::changeEvent(event);
 }
@@ -147,11 +166,11 @@ void DialogPreferences::Apply()
 
     if (not preferences.isEmpty())
     {
-        const QString text = tr("Followed %n option(s) require restart to take effect: %1.", "",
-                                static_cast<int>(preferences.size())).arg(preferences.join(QStringLiteral(", ")));
+        const QString text =
+            tr("Followed %n option(s) require restart to take effect: %1.", "", static_cast<int>(preferences.size()))
+                .arg(preferences.join(QStringLiteral(", ")));
         QMessageBox::information(this, QCoreApplication::applicationName(), text);
     }
-
 
     m_patternPage->InitDefaultSeamAllowance();
 

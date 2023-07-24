@@ -418,7 +418,7 @@
           <string>Clear all messages</string>
          </property>
          <property name="text">
-          <string notr="true">...</string>
+          <string notr="true"/>
          </property>
          <property name="icon">
           <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
@@ -432,7 +432,7 @@
           <string>Auto refresh the list with each parse</string>
          </property>
          <property name="text">
-          <string notr="true">...</string>
+          <string notr="true"/>
          </property>
          <property name="icon">
           <iconset theme="view-refresh">
@@ -474,7 +474,7 @@
           <string>Zoom in</string>
          </property>
          <property name="text">
-          <string notr="true">...</string>
+          <string notr="true"/>
          </property>
          <property name="icon">
           <iconset theme="zoom-in">
@@ -488,11 +488,17 @@
           <string>Zoom out</string>
          </property>
          <property name="text">
-          <string notr="true">...</string>
+          <string notr="true"/>
          </property>
          <property name="icon">
           <iconset theme="zoom-out">
            <normaloff>.</normaloff>.</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -543,6 +549,12 @@
    <property name="toolTip">
     <string>Tools for creating points</string>
    </property>
+   <property name="iconSize">
+    <size>
+     <width>24</width>
+     <height>24</height>
+    </size>
+   </property>
    <attribute name="toolBarArea">
     <enum>LeftToolBarArea</enum>
    </attribute>
@@ -553,6 +565,12 @@
   <widget class="QToolBar" name="toolBarSelectingTools">
    <property name="windowTitle">
     <string>Selecting tools</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>24</width>
+     <height>24</height>
+    </size>
    </property>
    <property name="toolButtonStyle">
     <enum>Qt::ToolButtonIconOnly</enum>
@@ -572,6 +590,12 @@
    <property name="toolTip">
     <string>Tools for creating segments</string>
    </property>
+   <property name="iconSize">
+    <size>
+     <width>24</width>
+     <height>24</height>
+    </size>
+   </property>
    <attribute name="toolBarArea">
     <enum>LeftToolBarArea</enum>
    </attribute>
@@ -587,6 +611,12 @@
    <property name="toolTip">
     <string>Tools for creating curves</string>
    </property>
+   <property name="iconSize">
+    <size>
+     <width>24</width>
+     <height>24</height>
+    </size>
+   </property>
    <attribute name="toolBarArea">
     <enum>LeftToolBarArea</enum>
    </attribute>
@@ -597,6 +627,12 @@
   <widget class="QToolBar" name="toolBarOperationTools">
    <property name="windowTitle">
     <string>Operation tools</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>24</width>
+     <height>24</height>
+    </size>
    </property>
    <attribute name="toolBarArea">
     <enum>LeftToolBarArea</enum>
@@ -612,6 +648,12 @@
    <property name="toolTip">
     <string>Tools for creating detail</string>
    </property>
+   <property name="iconSize">
+    <size>
+     <width>24</width>
+     <height>24</height>
+    </size>
+   </property>
    <attribute name="toolBarArea">
     <enum>LeftToolBarArea</enum>
    </attribute>
@@ -625,6 +667,12 @@
    </property>
    <property name="toolTip">
     <string/>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>24</width>
+     <height>24</height>
+    </size>
    </property>
    <attribute name="toolBarArea">
     <enum>LeftToolBarArea</enum>
@@ -1726,7 +1774,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/segment.png</normaloff>:/toolicon/32x32/segment.png</iconset>
+     <normaloff>:/toolicon/light/segment.png</normaloff>:/toolicon/light/segment.png</iconset>
    </property>
    <property name="text">
     <string>Point at distance and angle</string>
@@ -1744,7 +1792,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/point_of_intersection_arcs.png</normaloff>:/toolicon/32x32/point_of_intersection_arcs.png</iconset>
+     <normaloff>:/toolicon/light/point_of_intersection_arcs.png</normaloff>:/toolicon/light/point_of_intersection_arcs.png</iconset>
    </property>
    <property name="text">
     <string>Point of intersection arcs</string>
@@ -1762,7 +1810,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/arc_intersect_axis.png</normaloff>:/toolicon/32x32/arc_intersect_axis.png</iconset>
+     <normaloff>:/toolicon/light/arc_intersect_axis.png</normaloff>:/toolicon/light/arc_intersect_axis.png</iconset>
    </property>
    <property name="text">
     <string>Point of intersection arc and axis</string>
@@ -1780,7 +1828,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/arc_cut.png</normaloff>:/toolicon/32x32/arc_cut.png</iconset>
+     <normaloff>:/toolicon/light/arc_cut.png</normaloff>:/toolicon/light/arc_cut.png</iconset>
    </property>
    <property name="text">
     <string>Segment an arc</string>
@@ -1798,7 +1846,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/arc.png</normaloff>:/toolicon/32x32/arc.png</iconset>
+     <normaloff>:/toolicon/light/arc.png</normaloff>:/toolicon/light/arc.png</iconset>
    </property>
    <property name="text">
     <string>Arc</string>
@@ -1816,7 +1864,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/curve_intersect_axis.png</normaloff>:/toolicon/32x32/curve_intersect_axis.png</iconset>
+     <normaloff>:/toolicon/light/curve_intersect_axis.png</normaloff>:/toolicon/light/curve_intersect_axis.png</iconset>
    </property>
    <property name="text">
     <string>Point intersect curve and axis</string>
@@ -1834,7 +1882,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/intersection_curves.png</normaloff>:/toolicon/32x32/intersection_curves.png</iconset>
+     <normaloff>:/toolicon/light/intersection_curves.png</normaloff>:/toolicon/light/intersection_curves.png</iconset>
    </property>
    <property name="text">
     <string>Point intersection curves</string>
@@ -1852,7 +1900,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/cubic_bezier_path.png</normaloff>:/toolicon/32x32/cubic_bezier_path.png</iconset>
+     <normaloff>:/toolicon/light/cubic_bezier_path.png</normaloff>:/toolicon/light/cubic_bezier_path.png</iconset>
    </property>
    <property name="text">
     <string>Curved path tool which uses point as control handle</string>
@@ -1870,7 +1918,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/splinePath_cut_point.png</normaloff>:/toolicon/32x32/splinePath_cut_point.png</iconset>
+     <normaloff>:/toolicon/light/splinePath_cut_point.png</normaloff>:/toolicon/light/splinePath_cut_point.png</iconset>
    </property>
    <property name="text">
     <string>Segment a curved path</string>
@@ -1888,7 +1936,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/along_line.png</normaloff>:/toolicon/32x32/along_line.png</iconset>
+     <normaloff>:/toolicon/light/along_line.png</normaloff>:/toolicon/light/along_line.png</iconset>
    </property>
    <property name="text">
     <string>Point at distance along line</string>
@@ -1906,7 +1954,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/normal.png</normaloff>:/toolicon/32x32/normal.png</iconset>
+     <normaloff>:/toolicon/light/normal.png</normaloff>:/toolicon/light/normal.png</iconset>
    </property>
    <property name="text">
     <string>Point along perpendicular</string>
@@ -1924,7 +1972,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/bisector.png</normaloff>:/toolicon/32x32/bisector.png</iconset>
+     <normaloff>:/toolicon/light/bisector.png</normaloff>:/toolicon/light/bisector.png</iconset>
    </property>
    <property name="text">
     <string>Point along bisector</string>
@@ -1942,7 +1990,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/shoulder.png</normaloff>:/toolicon/32x32/shoulder.png</iconset>
+     <normaloff>:/toolicon/light/shoulder.png</normaloff>:/toolicon/light/shoulder.png</iconset>
    </property>
    <property name="text">
     <string>Special point on shoulder</string>
@@ -1960,7 +2008,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/triangle.png</normaloff>:/toolicon/32x32/triangle.png</iconset>
+     <normaloff>:/toolicon/light/triangle.png</normaloff>:/toolicon/light/triangle.png</iconset>
    </property>
    <property name="text">
     <string>Triangle tool</string>
@@ -1978,7 +2026,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/point_of_intersection.png</normaloff>:/toolicon/32x32/point_of_intersection.png</iconset>
+     <normaloff>:/toolicon/light/point_of_intersection.png</normaloff>:/toolicon/light/point_of_intersection.png</iconset>
    </property>
    <property name="text">
     <string>Point from X and Y of two other points</string>
@@ -1996,7 +2044,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/height.png</normaloff>:/toolicon/32x32/height.png</iconset>
+     <normaloff>:/toolicon/light/height.png</normaloff>:/toolicon/light/height.png</iconset>
    </property>
    <property name="text">
     <string>Perpendicular point along line</string>
@@ -2014,7 +2062,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/line_intersect_axis.png</normaloff>:/toolicon/32x32/line_intersect_axis.png</iconset>
+     <normaloff>:/toolicon/light/line_intersect_axis.png</normaloff>:/toolicon/light/line_intersect_axis.png</iconset>
    </property>
    <property name="text">
     <string>Point intersect line and axis</string>
@@ -2032,7 +2080,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/midpoint.png</normaloff>:/toolicon/32x32/midpoint.png</iconset>
+     <normaloff>:/toolicon/light/midpoint.png</normaloff>:/toolicon/light/midpoint.png</iconset>
    </property>
    <property name="text">
     <string>Midpoint between two points</string>
@@ -2050,7 +2098,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/intersect.png</normaloff>:/toolicon/32x32/intersect.png</iconset>
+     <normaloff>:/toolicon/light/intersect.png</normaloff>:/toolicon/light/intersect.png</iconset>
    </property>
    <property name="text">
     <string>Point at line intersection</string>
@@ -2068,7 +2116,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/line.png</normaloff>:/toolicon/32x32/line.png</iconset>
+     <normaloff>:/toolicon/light/line.png</normaloff>:/toolicon/light/line.png</iconset>
    </property>
    <property name="text">
     <string>Line between points</string>
@@ -2086,7 +2134,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/spline.png</normaloff>:/toolicon/32x32/spline.png</iconset>
+     <normaloff>:/toolicon/light/spline.png</normaloff>:/toolicon/light/spline.png</iconset>
    </property>
    <property name="text">
     <string>Simple curve</string>
@@ -2104,7 +2152,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/spline_cut_point.png</normaloff>:/toolicon/32x32/spline_cut_point.png</iconset>
+     <normaloff>:/toolicon/light/spline_cut_point.png</normaloff>:/toolicon/light/spline_cut_point.png</iconset>
    </property>
    <property name="text">
     <string>Segmenting a simple curve</string>
@@ -2122,7 +2170,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/cubic_bezier.png</normaloff>:/toolicon/32x32/cubic_bezier.png</iconset>
+     <normaloff>:/toolicon/light/cubic_bezier.png</normaloff>:/toolicon/light/cubic_bezier.png</iconset>
    </property>
    <property name="text">
     <string>Curve tool which uses point as control handle</string>
@@ -2140,7 +2188,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/splinePath.png</normaloff>:/toolicon/32x32/splinePath.png</iconset>
+     <normaloff>:/toolicon/light/splinePath.png</normaloff>:/toolicon/light/splinePath.png</iconset>
    </property>
    <property name="text">
     <string>Curved path</string>
@@ -2158,7 +2206,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/el_arc.png</normaloff>:/toolicon/32x32/el_arc.png</iconset>
+     <normaloff>:/toolicon/light/el_arc.png</normaloff>:/toolicon/light/el_arc.png</iconset>
    </property>
    <property name="text">
     <string>Elliptical Arc</string>
@@ -2176,7 +2224,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/arc_with_length.png</normaloff>:/toolicon/32x32/arc_with_length.png</iconset>
+     <normaloff>:/toolicon/light/arc_with_length.png</normaloff>:/toolicon/light/arc_with_length.png</iconset>
    </property>
    <property name="text">
     <string>Arc with given length</string>
@@ -2194,7 +2242,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/point_of_intersection_circles.png</normaloff>:/toolicon/32x32/point_of_intersection_circles.png</iconset>
+     <normaloff>:/toolicon/light/point_of_intersection_circles.png</normaloff>:/toolicon/light/point_of_intersection_circles.png</iconset>
    </property>
    <property name="text">
     <string>Point of intersection circles</string>
@@ -2212,7 +2260,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/point_from_arc_and_tangent.png</normaloff>:/toolicon/32x32/point_from_arc_and_tangent.png</iconset>
+     <normaloff>:/toolicon/light/point_from_arc_and_tangent.png</normaloff>:/toolicon/light/point_from_arc_and_tangent.png</iconset>
    </property>
    <property name="text">
     <string>Point from arc and tangent</string>
@@ -2230,7 +2278,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/point_from_circle_and_tangent.png</normaloff>:/toolicon/32x32/point_from_circle_and_tangent.png</iconset>
+     <normaloff>:/toolicon/light/point_from_circle_and_tangent.png</normaloff>:/toolicon/light/point_from_circle_and_tangent.png</iconset>
    </property>
    <property name="text">
     <string>Point from circle and tangent</string>
@@ -2248,7 +2296,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/point_of_contact.png</normaloff>:/toolicon/32x32/point_of_contact.png</iconset>
+     <normaloff>:/toolicon/light/point_of_contact.png</normaloff>:/toolicon/light/point_of_contact.png</iconset>
    </property>
    <property name="text">
     <string>Point of intersection circle and segment</string>
@@ -2266,7 +2314,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/flipping_axis.png</normaloff>:/toolicon/32x32/flipping_axis.png</iconset>
+     <normaloff>:/toolicon/light/flipping_axis.png</normaloff>:/toolicon/light/flipping_axis.png</iconset>
    </property>
    <property name="text">
     <string>Flipping objects by axis</string>
@@ -2284,7 +2332,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/flipping_line.png</normaloff>:/toolicon/32x32/flipping_line.png</iconset>
+     <normaloff>:/toolicon/light/flipping_line.png</normaloff>:/toolicon/light/flipping_line.png</iconset>
    </property>
    <property name="text">
     <string>Flipping objects by line</string>
@@ -2302,7 +2350,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/rotation.png</normaloff>:/toolicon/32x32/rotation.png</iconset>
+     <normaloff>:/toolicon/light/rotation.png</normaloff>:/toolicon/light/rotation.png</iconset>
    </property>
    <property name="text">
     <string>Rotate objects</string>
@@ -2320,7 +2368,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/move.png</normaloff>:/toolicon/32x32/move.png</iconset>
+     <normaloff>:/toolicon/light/move.png</normaloff>:/toolicon/light/move.png</iconset>
    </property>
    <property name="text">
     <string>Move objects</string>
@@ -2338,7 +2386,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/group_plus.png</normaloff>:/toolicon/32x32/group_plus.png</iconset>
+     <normaloff>:/toolicon/light/group_plus.png</normaloff>:/toolicon/light/group_plus.png</iconset>
    </property>
    <property name="text">
     <string>Visibility group</string>
@@ -2356,7 +2404,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/true_darts.png</normaloff>:/toolicon/32x32/true_darts.png</iconset>
+     <normaloff>:/toolicon/light/true_darts.png</normaloff>:/toolicon/light/true_darts.png</iconset>
    </property>
    <property name="text">
     <string>True darts</string>
@@ -2392,7 +2440,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/new_detail.png</normaloff>:/toolicon/32x32/new_detail.png</iconset>
+     <normaloff>:/toolicon/light/new_detail.png</normaloff>:/toolicon/light/new_detail.png</iconset>
    </property>
    <property name="text">
     <string>Workpiece tool</string>
@@ -2410,7 +2458,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/union.png</normaloff>:/toolicon/32x32/union.png</iconset>
+     <normaloff>:/toolicon/light/union.png</normaloff>:/toolicon/light/union.png</iconset>
    </property>
    <property name="text">
     <string>Union tool</string>
@@ -2428,7 +2476,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/duplicate_detail.png</normaloff>:/toolicon/32x32/duplicate_detail.png</iconset>
+     <normaloff>:/toolicon/light/duplicate_detail.png</normaloff>:/toolicon/light/duplicate_detail.png</iconset>
    </property>
    <property name="text">
     <string>Duplicate detail tool</string>
@@ -2446,7 +2494,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/path.png</normaloff>:/toolicon/32x32/path.png</iconset>
+     <normaloff>:/toolicon/light/path.png</normaloff>:/toolicon/light/path.png</iconset>
    </property>
    <property name="text">
     <string>Internal path tool</string>
@@ -2464,7 +2512,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/pin.png</normaloff>:/toolicon/32x32/pin.png</iconset>
+     <normaloff>:/toolicon/light/pin.png</normaloff>:/toolicon/light/pin.png</iconset>
    </property>
    <property name="text">
     <string>Pin tool</string>
@@ -2482,7 +2530,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/insert_node.png</normaloff>:/toolicon/32x32/insert_node.png</iconset>
+     <normaloff>:/toolicon/light/insert_node.png</normaloff>:/toolicon/light/insert_node.png</iconset>
    </property>
    <property name="text">
     <string>Insert node tool</string>
@@ -2500,7 +2548,7 @@
    </property>
    <property name="icon">
     <iconset resource="share/resources/toolicon.qrc">
-     <normaloff>:/toolicon/32x32/place_label.png</normaloff>:/toolicon/32x32/place_label.png</iconset>
+     <normaloff>:/toolicon/light/place_label.png</normaloff>:/toolicon/light/place_label.png</iconset>
    </property>
    <property name="text">
     <string>Place label tool</string>
@@ -2531,6 +2579,11 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
+   <class>VPlainTextEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header>../vwidgets/vplaintextedit.h</header>
+  </customwidget>
+  <customwidget>
    <class>VMainGraphicsView</class>
    <extends>QGraphicsView</extends>
    <header>../vwidgets/vmaingraphicsview.h</header>
@@ -2539,11 +2592,6 @@
    <class>VLineEdit</class>
    <extends>QLineEdit</extends>
    <header>../vwidgets/vlineedit.h</header>
-  </customwidget>
-  <customwidget>
-   <class>VPlainTextEdit</class>
-   <extends>QPlainTextEdit</extends>
-   <header>../vwidgets/vplaintextedit.h</header>
   </customwidget>
  </customwidgets>
  <resources>

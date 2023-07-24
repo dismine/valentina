@@ -138,7 +138,10 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
 
     InitSingleLineFonts();
     const qint32 indexFont = ui->comboBoxSingleLineFont->findData(settings->GetLabelSVGFont());
-    ui->comboBoxSingleLineFont->setCurrentIndex(indexFont);
+    if (indexFont != -1)
+    {
+        ui->comboBoxSingleLineFont->setCurrentIndex(indexFont);
+    }
 
     ui->checkBoxSingleStrokeOutlineFont->setChecked(settings->GetSingleStrokeOutlineFont());
     ui->checkBoxSingleLineFonts->setChecked(settings->GetSingleLineFonts());
@@ -252,6 +255,18 @@ void PreferencesPatternPage::changeEvent(QEvent *event)
         RetranslateUi();
         ui->retranslateUi(this);
     }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        QString currentSingleLineFont = ui->comboBoxSingleLineFont->currentData().toString();
+        InitSingleLineFonts();
+        const qint32 indexFont = ui->comboBoxSingleLineFont->findData(currentSingleLineFont);
+        if (indexFont != -1)
+        {
+            ui->comboBoxSingleLineFont->setCurrentIndex(indexFont);
+        }
+    }
+
     // remember to call base class implementation
     QWidget::changeEvent(event);
 }
@@ -344,6 +359,7 @@ void PreferencesPatternPage::InitSingleLineFonts()
     ui->comboBoxSingleLineFont->setIconSize(QSize(previewScaledWidthPixels, previewScaledHeightPixels));
 
     QPen pen(Qt::SolidPattern, 1 * scale, Qt::SolidLine, Qt::RoundCap, Qt::SvgMiterJoin);
+    pen.setColor(ui->comboBoxSingleLineFont->palette().color(QPalette::Text));
 
     VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
     QStringList families = db->Families();
@@ -362,7 +378,7 @@ void PreferencesPatternPage::InitSingleLineFonts()
         engine.SetFontPixelSize(previewScaledHeightPixels);
 
         QPixmap pixmap(previewScaledWidthPixels, previewScaledHeightPixels);
-        pixmap.fill(Qt::white);
+        pixmap.fill(ui->comboBoxSingleLineFont->palette().color(QPalette::Base));
         QPainter painter(&pixmap);
         painter.setRenderHint(QPainter::Antialiasing);
         painter.setPen(pen);

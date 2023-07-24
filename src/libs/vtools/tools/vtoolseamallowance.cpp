@@ -58,7 +58,6 @@
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vformat/vlabeltemplate.h"
-#include "../vmisc/svgfont/vsvgfontdatabase.h"
 #include "../vpatterndb/floatItemData/vgrainlinedata.h"
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "nodeDetails/vnodearc.h"

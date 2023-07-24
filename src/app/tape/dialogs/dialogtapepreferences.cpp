@@ -27,10 +27,10 @@
  *************************************************************************/
 
 #include "dialogtapepreferences.h"
-#include "ui_dialogtapepreferences.h"
 #include "../mapplication.h"
 #include "configpages/tapepreferencesconfigurationpage.h"
 #include "configpages/tapepreferencespathpage.h"
+#include "ui_dialogtapepreferences.h"
 
 #include <QMessageBox>
 #include <QPushButton>
@@ -38,10 +38,10 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogTapePreferences::DialogTapePreferences(QWidget *parent)
-    :QDialog(parent),
-     ui(new Ui::DialogTapePreferences),
-     m_configurationPage(new TapePreferencesConfigurationPage),
-     m_pathPage(new TapePreferencesPathPage)
+  : QDialog(parent),
+    ui(new Ui::DialogTapePreferences),
+    m_configurationPage(new TapePreferencesConfigurationPage),
+    m_pathPage(new TapePreferencesPathPage)
 {
     ui->setupUi(this);
 
@@ -75,8 +75,8 @@ DialogTapePreferences::~DialogTapePreferences()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogTapePreferences::showEvent(QShowEvent *event)
 {
-    QDialog::showEvent( event );
-    if ( event->spontaneous() )
+    QDialog::showEvent(event);
+    if (event->spontaneous())
     {
         return;
     }
@@ -93,7 +93,7 @@ void DialogTapePreferences::showEvent(QShowEvent *event)
         resize(sz);
     }
 
-    m_isInitialized = true;//first show windows are held
+    m_isInitialized = true; // first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -117,6 +117,24 @@ void DialogTapePreferences::changeEvent(QEvent *event)
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
     }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        QStyle *style = QApplication::style();
+
+        QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
+        SCASSERT(bOk != nullptr)
+        bOk->setIcon(style->standardIcon(QStyle::SP_DialogOkButton));
+
+        QPushButton *bApply = ui->buttonBox->button(QDialogButtonBox::Apply);
+        SCASSERT(bApply != nullptr)
+        bApply->setIcon(style->standardIcon(QStyle::SP_DialogApplyButton));
+
+        QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
+        SCASSERT(bCancel != nullptr)
+        bCancel->setIcon(style->standardIcon(QStyle::SP_DialogCancelButton));
+    }
+
     // remember to call base class implementation
     QDialog::changeEvent(event);
 }
@@ -131,8 +149,9 @@ void DialogTapePreferences::Apply()
 
     if (not preferences.isEmpty())
     {
-        const QString text = tr("Followed %n option(s) require restart to take effect: %1.", "",
-                                static_cast<int>(preferences.size())).arg(preferences.join(QStringLiteral(", ")));
+        const QString text =
+            tr("Followed %n option(s) require restart to take effect: %1.", "", static_cast<int>(preferences.size()))
+                .arg(preferences.join(QStringLiteral(", ")));
         QMessageBox::information(this, QCoreApplication::applicationName(), text);
     }
 

@@ -352,6 +352,8 @@ private:
     void InitToolButtons();
     void CancelTool();
 
+    void SetupDrawToolsIcons();
+
     void SetEnableWidgets(bool enable);
     void SetEnableTool(bool enable);
     void SetLayoutModeActions();

@@ -29,8 +29,9 @@
 
 #include <QStringList>
 
-const QString LONG_OPTION_RAW_LAYOUT    = QStringLiteral("rawLayout"); // NOLINT
-const QString SINGLE_OPTION_RAW_LAYOUT  = QStringLiteral("r"); // NOLINT
+const QString LONG_OPTION_RAW_LAYOUT = QStringLiteral("rawLayout"); // NOLINT
+const QString SINGLE_OPTION_RAW_LAYOUT = QStringLiteral("r");       // NOLINT
+const QString LONG_OPTION_STYLE = QStringLiteral("style");          // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -39,9 +40,5 @@ const QString SINGLE_OPTION_RAW_LAYOUT  = QStringLiteral("r"); // NOLINT
  */
 auto AllKeys() -> QStringList
 {
-    return
-    {
-        LONG_OPTION_RAW_LAYOUT,
-        SINGLE_OPTION_RAW_LAYOUT
-    };
+    return {LONG_OPTION_RAW_LAYOUT, SINGLE_OPTION_RAW_LAYOUT, LONG_OPTION_STYLE};
 }

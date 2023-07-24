@@ -36,6 +36,7 @@
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../qmuparser/qmudef.h"
 #include "../vganalytics/vganalytics.h"
+#include "../vmisc/theme/vtheme.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *parent)
@@ -57,7 +58,12 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
     ui->osOptionCheck->setChecked(settings->GetOsSeparator());
 
     // Theme
-    ui->darkModeCheck->setChecked(settings->GetDarkMode());
+    SetThemeModeComboBox();
+    int index = ui->comboBoxThemeMode->findData(static_cast<int>(settings->GetThemeMode()));
+    if (index != -1)
+    {
+        ui->comboBoxThemeMode->setCurrentIndex(index);
+    }
 
     // Native dialogs
     ui->checkBoxDontUseNativeDialog->setChecked(settings->IsDontUseNativeDialog());
@@ -78,7 +84,7 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
             });
 
     // set default pattern making system
-    int index = ui->systemCombo->findData(settings->GetPMSystemCode());
+    index = ui->systemCombo->findData(settings->GetPMSystemCode());
     if (index != -1)
     {
         ui->systemCombo->setCurrentIndex(index);
@@ -113,10 +119,11 @@ auto TapePreferencesConfigurationPage::Apply() -> QStringList
 
     settings->SetToolBarStyle(ui->toolBarStyleCheck->isChecked());
 
-    if (settings->GetDarkMode() != ui->darkModeCheck->isChecked())
+    auto themeMode = static_cast<VThemeMode>(ui->comboBoxThemeMode->currentData().toInt());
+    if (settings->GetThemeMode() != themeMode)
     {
-        settings->SetDarkMode(ui->darkModeCheck->isChecked());
-        preferences.append(tr("dark mode"));
+        settings->SetThemeMode(themeMode);
+        VTheme::Instance()->ResetThemeSettings();
     }
 
     if (settings->IsDontUseNativeDialog() != ui->checkBoxDontUseNativeDialog->isChecked())
@@ -182,4 +189,13 @@ void TapePreferencesConfigurationPage::RetranslateUi()
         ui->systemCombo->blockSignals(false);
         ui->systemCombo->setCurrentIndex(ui->systemCombo->findData(code));
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TapePreferencesConfigurationPage::SetThemeModeComboBox()
+{
+    ui->comboBoxThemeMode->clear();
+    ui->comboBoxThemeMode->addItem(tr("System", "theme"), static_cast<int>(VThemeMode::System));
+    ui->comboBoxThemeMode->addItem(tr("Dark", "theme"), static_cast<int>(VThemeMode::Dark));
+    ui->comboBoxThemeMode->addItem(tr("Light", "theme"), static_cast<int>(VThemeMode::Light));
 }

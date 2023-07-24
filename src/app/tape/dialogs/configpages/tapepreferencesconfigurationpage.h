@@ -31,6 +31,10 @@
 
 #include <QWidget>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
+#include "../vmisc/defglobal.h"
+#endif
+
 namespace Ui
 {
 class TapePreferencesConfigurationPage;
@@ -57,6 +61,7 @@ private:
     bool m_systemChanged;
 
     void RetranslateUi();
+    void SetThemeModeComboBox();
 };
 
 #endif // TAPEPREFERENCESCONFIGURATIONPAGE_H
