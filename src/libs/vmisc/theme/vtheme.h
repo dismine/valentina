@@ -33,7 +33,7 @@
 #include <QTimer>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
+#include "../defglobal.h"
 #endif
 
 enum class VColorSheme

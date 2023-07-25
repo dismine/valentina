@@ -32,6 +32,7 @@
 #include <QLineF>
 #include <QSharedData>
 #include <QtDebug>
+#include <QtGlobal>
 
 #include "../qmuparser/qmutokenparser.h"
 #include "../vmisc/def.h"

@@ -32,8 +32,8 @@
 #include <QMap>
 #include <QUuid>
 
-#include "vplayoutsettings.h"
 #include "layoutdef.h"
+#include "vplayoutsettings.h"
 
 class VPPiece;
 class VPSheet;
@@ -44,6 +44,7 @@ struct VWatermarkData;
 class VPLayout : public QObject
 {
     Q_OBJECT // NOLINT
+
 public:
     ~VPLayout() override;
 

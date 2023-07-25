@@ -612,9 +612,16 @@ void VApplication::BeginLogging()
 void VApplication::ClearOldLogs()
 {
     const QString workingDirectory = QDir::currentPath(); // Save the app working directory
-    QDir logsDir(LogDirPath());
+    const QString logDirPath = LogDirPath();
+    QDir logsDir(logDirPath);
+
+    if (!logsDir.exists())
+    {
+        return;
+    }
+
     logsDir.setNameFilters(QStringList(QStringLiteral("*.log")));
-    QDir::setCurrent(LogDirPath());
+    QDir::setCurrent(logDirPath);
 
     // Restore working directory
     auto restore = qScopeGuard([workingDirectory] { QDir::setCurrent(workingDirectory); });

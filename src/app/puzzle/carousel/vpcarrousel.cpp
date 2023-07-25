@@ -27,16 +27,16 @@
  *************************************************************************/
 #include "vpcarrousel.h"
 #include "ui_vpcarrousel.h"
-#include <QVBoxLayout>
+#include <QFontMetrics>
 #include <QMessageBox>
 #include <QScrollBar>
-#include <QFontMetrics>
+#include <QVBoxLayout>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../layout/vpsheet.h"
 #include "../layout/vplayout.h"
+#include "../layout/vpsheet.h"
 
 #include <QLoggingCategory>
 #include <QMenu>
@@ -51,8 +51,8 @@ Q_LOGGING_CATEGORY(pCarrousel, "p.carrousel") // NOLINT
 QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
-VPCarrousel::VPCarrousel(const VPLayoutPtr &layout, QWidget *parent) :
-    QWidget(parent),
+VPCarrousel::VPCarrousel(const VPLayoutPtr &layout, QWidget *parent)
+  : QWidget(parent),
     ui(new Ui::VPCarrousel),
     m_layout(layout)
 {
@@ -122,7 +122,7 @@ void VPCarrousel::Refresh()
 
         ui->comboBoxPieceList->blockSignals(true);
 
-        for (const auto& sheet: qAsConst(m_pieceLists))
+        for (const auto &sheet : qAsConst(m_pieceLists))
         {
             ui->comboBoxPieceList->addItem(GetSheetName(sheet), sheet.sheetUuid);
         }
@@ -166,7 +166,7 @@ void VPCarrousel::RefreshSheetNames()
         return;
     }
 
-    for (int i=0; i < m_pieceLists.size(); ++i)
+    for (int i = 0; i < m_pieceLists.size(); ++i)
     {
         if (not m_pieceLists.at(i).unplaced)
         {
@@ -257,7 +257,7 @@ void VPCarrousel::SetOrientation(Qt::Orientation orientation)
 void VPCarrousel::RefreshOrientation()
 {
     // then update the scrollarea min height / width and scrollbar behaviour
-    if(m_orientation == Qt::Horizontal)
+    if (m_orientation == Qt::Horizontal)
     {
         ui->comboBoxPieceList->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 

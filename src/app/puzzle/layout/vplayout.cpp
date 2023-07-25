@@ -27,17 +27,17 @@
  *************************************************************************/
 
 #include "vplayout.h"
-#include "vppiece.h"
-#include "vpsheet.h"
-#include "../vpapplication.h"
-#include "../vptilefactory.h"
+#include "../ifc/exception/vexception.h"
 #include "../ifc/xml/vwatermarkconverter.h"
 #include "../vformat/vwatermark.h"
-#include "../ifc/exception/vexception.h"
+#include "../vpapplication.h"
+#include "../vptilefactory.h"
+#include "vppiece.h"
+#include "vpsheet.h"
 
 #include <QLoggingCategory>
-#include <QUndoStack>
 #include <QPixmapCache>
+#include <QUndoStack>
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
@@ -48,10 +48,10 @@ Q_LOGGING_CATEGORY(pLayout, "p.layout") // NOLINT
 QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
-VPLayout::VPLayout(QUndoStack *undoStack) :
-    m_undoStack(undoStack)
+VPLayout::VPLayout(QUndoStack *undoStack)
+  : m_undoStack(undoStack)
 {
-    SCASSERT(m_undoStack != nullptr)
+    SCASSERT(m_undoStack != nullptr);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -60,6 +60,7 @@ VPLayout::~VPLayout()
     delete m_tileFactory;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 auto VPLayout::CreateLayout(QUndoStack *undoStack) -> VPLayoutPtr
 {
     SCASSERT(undoStack != nullptr)
@@ -69,7 +70,7 @@ auto VPLayout::CreateLayout(QUndoStack *undoStack) -> VPLayoutPtr
 
     // create a standard sheet
     VPSheetPtr sheet(new VPSheet(layout));
-    sheet->SetName(tr("Sheet %1").arg(layout->GetAllSheets().size()+1));
+    sheet->SetName(tr("Sheet %1").arg(layout->GetAllSheets().size() + 1));
     layout->AddSheet(sheet);
     layout->SetFocusedSheet(sheet);
 
@@ -79,8 +80,8 @@ auto VPLayout::CreateLayout(QUndoStack *undoStack) -> VPLayoutPtr
 
     layout->LayoutSettings().SetShowTiles(settings->GetLayoutTileShowTiles());
     layout->LayoutSettings().SetShowWatermark(settings->GetLayoutTileShowWatermark());
-    layout->LayoutSettings().SetTilesSize(QSizeF(settings->GetLayoutTilePaperWidth(),
-                                                 settings->GetLayoutTilePaperHeight()));
+    layout->LayoutSettings().SetTilesSize(
+        QSizeF(settings->GetLayoutTilePaperWidth(), settings->GetLayoutTilePaperHeight()));
     layout->LayoutSettings().SetIgnoreTilesMargins(settings->GetLayoutTileIgnoreMargins());
     layout->LayoutSettings().SetTilesMargins(settings->GetLayoutTileMargins());
 
@@ -151,7 +152,7 @@ void VPLayout::SetTileFactory(VPTileFactory *newTileFactory)
 void VPLayout::RefreshScenePieces() const
 {
     const QList<VPSheetPtr> sheets = GetSheets();
-    for (const auto& sheet : sheets)
+    for (const auto &sheet : sheets)
     {
         if (not sheet.isNull())
         {
@@ -204,15 +205,16 @@ auto VPLayout::IsSheetsUniform() const -> bool
 
     QSizeF sheetSize = sheet->GetSheetSize().toSize();
 
-    return std::all_of(sheets.begin(), sheets.end(), [sheetSize](const VPSheetPtr &sheet)
-    {
-        if (sheet.isNull())
-        {
-            return false;
-        }
-        QSize size = sheet->GetSheetSize().toSize();
-        return size == sheetSize || size.transposed() == sheetSize;
-    });
+    return std::all_of(sheets.begin(), sheets.end(),
+                       [sheetSize](const VPSheetPtr &sheet)
+                       {
+                           if (sheet.isNull())
+                           {
+                               return false;
+                           }
+                           QSize size = sheet->GetSheetSize().toSize();
+                           return size == sheetSize || size.transposed() == sheetSize;
+                       });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -227,7 +229,7 @@ auto VPLayout::GetPlacedPieces() const -> QList<VPPiecePtr>
     QList<VPPiecePtr> pieces;
     pieces.reserve(m_pieces.size());
 
-    for (const auto& piece : m_pieces)
+    for (const auto &piece : m_pieces)
     {
         if (not piece->isNull() && piece->Sheet() != VPSheetPtr() && piece->Sheet() != m_trashSheet)
         {
@@ -340,7 +342,7 @@ auto VPLayout::PiecesForSheet(const VPSheetPtr &sheet) const -> QList<VPPiecePtr
     QList<VPPiecePtr> list;
     list.reserve(m_pieces.size());
 
-    for (const auto& piece : m_pieces)
+    for (const auto &piece : m_pieces)
     {
         if (not piece.isNull() && piece->Sheet() == sheet)
         {
@@ -357,7 +359,7 @@ auto VPLayout::PiecesForSheet(const QUuid &uuid) const -> QList<VPPiecePtr>
     QList<VPPiecePtr> list;
     list.reserve(m_pieces.size());
 
-    for (const auto& piece : m_pieces)
+    for (const auto &piece : m_pieces)
     {
         if (not piece.isNull())
         {

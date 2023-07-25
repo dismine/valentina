@@ -27,22 +27,21 @@
  *************************************************************************/
 #include "vpsheet.h"
 
-#include "vplayout.h"
-#include "vppiece.h"
+#include "../scene/vpgraphicspiece.h"
+#include "../scene/vpgraphicspiececontrols.h"
+#include "../scene/vpgraphicssheet.h"
+#include "../scene/vpgraphicstilegrid.h"
 #include "../vpapplication.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "../scene/vpgraphicssheet.h"
-#include "../scene/vpgraphicspiece.h"
-#include "../scene/vpgraphicstilegrid.h"
-#include "../scene/vpgraphicspiececontrols.h"
-#include "../scene/vpgraphicstilegrid.h"
+#include "vplayout.h"
+#include "vppiece.h"
 
 // VPSheetSceneData
 //---------------------------------------------------------------------------------------------------------------------
 VPSheetSceneData::VPSheetSceneData(const VPLayoutPtr &layout, const QUuid &sheetUuid)
-    : m_layout(layout),
-      m_scene(new VMainGraphicsScene()),
-      m_sheetUuid(sheetUuid)
+  : m_layout(layout),
+    m_scene(new VMainGraphicsScene()),
+    m_sheetUuid(sheetUuid)
 {
     SCASSERT(not layout.isNull())
 
@@ -60,10 +59,10 @@ VPSheetSceneData::VPSheetSceneData(const VPLayoutPtr &layout, const QUuid &sheet
     m_rotationOrigin->setVisible(false);
     m_scene->addItem(m_rotationOrigin);
 
-    QObject::connect(m_rotationControls, &VPGraphicsPieceControls::ShowOrigin,
-                     m_rotationOrigin, &VPGraphicsTransformationOrigin::on_ShowOrigin);
-    QObject::connect(m_rotationControls, &VPGraphicsPieceControls::TransformationOriginChanged,
-                     m_rotationOrigin, &VPGraphicsTransformationOrigin::SetTransformationOrigin);
+    QObject::connect(m_rotationControls, &VPGraphicsPieceControls::ShowOrigin, m_rotationOrigin,
+                     &VPGraphicsTransformationOrigin::on_ShowOrigin);
+    QObject::connect(m_rotationControls, &VPGraphicsPieceControls::TransformationOriginChanged, m_rotationOrigin,
+                     &VPGraphicsTransformationOrigin::SetTransformationOrigin);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -95,7 +94,7 @@ void VPSheetSceneData::RefreshPieces()
     m_graphicsPieces.clear();
 
     VPLayoutPtr layout = m_layout.toStrongRef();
-    if(layout.isNull())
+    if (layout.isNull())
     {
         return;
     }
@@ -140,7 +139,7 @@ void VPSheetSceneData::PrepareForExport()
         VPSheetPtr sheet = layout->GetSheet(m_sheetUuid);
         m_slectedPiecesTmp = sheet->GetSelectedPieces();
 
-        for (const auto& piece : qAsConst(m_slectedPiecesTmp))
+        for (const auto &piece : qAsConst(m_slectedPiecesTmp))
         {
             if (not piece.isNull())
             {
@@ -173,7 +172,7 @@ void VPSheetSceneData::CleanAfterExport()
         layout->LayoutSettings().SetShowGrid(m_showGridTmp);
         layout->LayoutSettings().SetShowTiles(m_showTilesTmp);
 
-        for (const auto& piece : qAsConst(m_slectedPiecesTmp))
+        for (const auto &piece : qAsConst(m_slectedPiecesTmp))
         {
             if (not piece.isNull())
             {
@@ -202,7 +201,7 @@ auto VPSheetSceneData::GraphicsPiecesAsItems() const -> QList<QGraphicsItem *>
     QList<QGraphicsItem *> items;
     items.reserve(m_graphicsPieces.size());
 
-    for(auto *item : m_graphicsPieces)
+    for (auto *item : m_graphicsPieces)
     {
         items.append(item);
     }
@@ -220,8 +219,8 @@ auto VPSheetSceneData::RotationControls() const -> VPGraphicsPieceControls *
 auto VPSheetSceneData::ScenePiece(const VPPiecePtr &piece) const -> VPGraphicsPiece *
 {
     auto _graphicsPiece =
-            std::find_if(m_graphicsPieces.begin(), m_graphicsPieces.end(),
-                         [piece](VPGraphicsPiece *graphicPiece) { return graphicPiece->GetPiece() == piece; });
+        std::find_if(m_graphicsPieces.begin(), m_graphicsPieces.end(),
+                     [piece](VPGraphicsPiece *graphicPiece) { return graphicPiece->GetPiece() == piece; });
 
     if (_graphicsPiece != m_graphicsPieces.end())
     {
@@ -305,28 +304,25 @@ void VPSheetSceneData::ConnectPiece(VPGraphicsPiece *piece)
         return;
     }
 
-    QObject::connect(layout.data(), &VPLayout::PieceTransformationChanged, piece,
-                     &VPGraphicsPiece::on_RefreshPiece);
-    QObject::connect(layout.data(), &VPLayout::PieceZValueChanged, piece,
-                     &VPGraphicsPiece::PieceZValueChanged);
-    QObject::connect(layout.data(), &VPLayout::PieceSelectionChanged,
-                     m_rotationControls, &VPGraphicsPieceControls::on_UpdateControls);
-    QObject::connect(layout.data(), &VPLayout::PiecePositionValidityChanged,
-                     piece, &VPGraphicsPiece::on_RefreshPiece);
-    QObject::connect(piece, &VPGraphicsPiece::PieceTransformationChanged,
-                     m_rotationControls, &VPGraphicsPieceControls::on_UpdateControls);
-    QObject::connect(piece, &VPGraphicsPiece::HideTransformationHandles,
-                     m_rotationControls, &VPGraphicsPieceControls::on_HideHandles);
-    QObject::connect(piece, &VPGraphicsPiece::HideTransformationHandles,
-                     m_rotationOrigin, &VPGraphicsTransformationOrigin::on_HideHandles);
+    QObject::connect(layout.data(), &VPLayout::PieceTransformationChanged, piece, &VPGraphicsPiece::on_RefreshPiece);
+    QObject::connect(layout.data(), &VPLayout::PieceZValueChanged, piece, &VPGraphicsPiece::PieceZValueChanged);
+    QObject::connect(layout.data(), &VPLayout::PieceSelectionChanged, m_rotationControls,
+                     &VPGraphicsPieceControls::on_UpdateControls);
+    QObject::connect(layout.data(), &VPLayout::PiecePositionValidityChanged, piece, &VPGraphicsPiece::on_RefreshPiece);
+    QObject::connect(piece, &VPGraphicsPiece::PieceTransformationChanged, m_rotationControls,
+                     &VPGraphicsPieceControls::on_UpdateControls);
+    QObject::connect(piece, &VPGraphicsPiece::HideTransformationHandles, m_rotationControls,
+                     &VPGraphicsPieceControls::on_HideHandles);
+    QObject::connect(piece, &VPGraphicsPiece::HideTransformationHandles, m_rotationOrigin,
+                     &VPGraphicsTransformationOrigin::on_HideHandles);
 }
 
 // VPSheet
 //---------------------------------------------------------------------------------------------------------------------
 VPSheet::VPSheet(const VPLayoutPtr &layout, QObject *parent)
-    : QObject(parent),
-      m_layout(layout),
-      m_sceneData(new VPSheetSceneData(layout, Uuid()))
+  : QObject(parent),
+    m_layout(layout),
+    m_sceneData(new VPSheetSceneData(layout, Uuid()))
 {
     SCASSERT(not layout.isNull())
 
@@ -371,7 +367,7 @@ auto VPSheet::GetSelectedPieces() const -> QList<VPPiecePtr>
         QList<VPPiecePtr> selected;
         selected.reserve(list.size());
 
-        for (const auto& piece : list)
+        for (const auto &piece : list)
         {
             if (not piece.isNull() && piece->IsSelected())
             {
@@ -393,7 +389,7 @@ auto VPSheet::GetAsLayoutPieces() const -> QVector<VLayoutPiece>
     QVector<VLayoutPiece> details;
     details.reserve(pieces.size());
 
-    for (const auto& piece : pieces)
+    for (const auto &piece : pieces)
     {
         if (not piece.isNull())
         {
@@ -571,7 +567,6 @@ void VPSheet::ValidatePieceOutOfBound(const VPPiecePtr &piece) const
             emit layout->PiecePositionValidityChanged(piece);
         }
     }
-
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -620,7 +615,7 @@ void VPSheet::RemoveUnusedLength()
 
     QRectF piecesBoundingRect;
 
-    for (const auto& piece : pieces)
+    for (const auto &piece : pieces)
     {
         if (not piece.isNull())
         {
@@ -698,7 +693,7 @@ auto VPSheet::SceneData() const -> VPSheetSceneData *
 void VPSheet::ClearSelection() const
 {
     QList<VPPiecePtr> selectedPieces = GetSelectedPieces();
-    for (const auto& piece : selectedPieces)
+    for (const auto &piece : selectedPieces)
     {
         if (piece->IsSelected())
         {
@@ -774,8 +769,7 @@ void VPSheet::SetSheetSize(const QSizeF &size)
 void VPSheet::SetSheetSizeConverted(const QSizeF &size)
 {
     Unit unit = SheetUnits();
-    m_size = QSizeF(UnitConvertor(size.width(), unit, Unit::Px),
-                    UnitConvertor(size.height(), unit, Unit::Px));
+    m_size = QSizeF(UnitConvertor(size.width(), unit, Unit::Px), UnitConvertor(size.height(), unit, Unit::Px));
 
     if (m_sceneData != nullptr)
     {
@@ -793,10 +787,8 @@ auto VPSheet::GetSheetSize() const -> QSizeF
 auto VPSheet::GetSheetSizeConverted() const -> QSizeF
 {
     Unit unit = SheetUnits();
-    QSizeF convertedSize = QSizeF(
-                UnitConvertor(m_size.width(), Unit::Px, unit),
-                UnitConvertor(m_size.height(), Unit::Px, unit)
-                );
+    QSizeF convertedSize =
+        QSizeF(UnitConvertor(m_size.width(), Unit::Px, unit), UnitConvertor(m_size.height(), Unit::Px, unit));
 
     return convertedSize;
 }

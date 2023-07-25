@@ -50,7 +50,6 @@
 #include "../vmisc/svgfont/vsvgfontdatabase.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "vtextgraphicsitem.h"
-#include <QtMath>
 
 namespace
 {

@@ -408,8 +408,6 @@ void VLayoutExporter::ExportToHPGL2(const QVector<VLayoutPiece> &details) const
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutExporter::SupportPDFConversion() -> bool
 {
-    bool res = false;
-
     QProcess proc;
 #if defined(Q_OS_WIN) || defined(Q_OS_OSX)
     // Seek pdftops in app bundle or near valentina.exe
@@ -421,13 +419,11 @@ auto VLayoutExporter::SupportPDFConversion() -> bool
     const int timeout = 15000;
     if (proc.waitForStarted(timeout) && (proc.waitForFinished(timeout) || proc.state() == QProcess::NotRunning))
     {
-        res = true;
+        return true;
     }
-    else
-    {
-        qDebug() << *PDFTOPS << "error" << proc.error() << proc.errorString();
-    }
-    return res;
+
+    qDebug() << *PDFTOPS << "error" << proc.error() << proc.errorString();
+    return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
