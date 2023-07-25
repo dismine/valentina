@@ -27,10 +27,10 @@
  *************************************************************************/
 
 #include "vpdialogabout.h"
-#include "ui_vpdialogabout.h"
-#include "../vmisc/projectversion.h"
-#include "../vmisc/def.h"
 #include "../fervor/fvupdater.h"
+#include "../vmisc/def.h"
+#include "../vmisc/projectversion.h"
+#include "ui_vpdialogabout.h"
 
 #include <QDate>
 #include <QDesktopServices>
@@ -46,29 +46,31 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VPDialogAbout::VPDialogAbout(QWidget *parent)
-    :QDialog(parent),
-      ui(new Ui::VPDialogAbout),
-      m_isInitialized(false)
+  : QDialog(parent),
+    ui(new Ui::VPDialogAbout),
+    m_isInitialized(false)
 {
     ui->setupUi(this);
 
-    //mApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+    // mApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
     RetranslateUi();
-    connect(ui->pushButton_Web_Site, &QPushButton::clicked, this, []()
-    {
-        if ( not QDesktopServices::openUrl(QUrl(QStringLiteral(VER_COMPANYDOMAIN_STR))))
-        {
-            qWarning() << tr("Cannot open your default browser");
-        }
-    });
+    connect(ui->pushButton_Web_Site, &QPushButton::clicked, this,
+            []()
+            {
+                if (not QDesktopServices::openUrl(QUrl(QStringLiteral(VER_COMPANYDOMAIN_STR))))
+                {
+                    qWarning() << tr("Cannot open your default browser");
+                }
+            });
     connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &VPDialogAbout::close);
-    connect(ui->pushButtonCheckUpdate, &QPushButton::clicked, []()
-    {
-        // Set feed URL before doing anything else
-        FvUpdater::sharedUpdater()->SetFeedURL(FvUpdater::CurrentFeedURL());
-        FvUpdater::sharedUpdater()->CheckForUpdatesNotSilent();
-    });
+    connect(ui->pushButtonCheckUpdate, &QPushButton::clicked,
+            []()
+            {
+                // Set feed URL before doing anything else
+                FvUpdater::sharedUpdater()->SetFeedURL(FvUpdater::CurrentFeedURL());
+                FvUpdater::sharedUpdater()->CheckForUpdatesNotSilent();
+            });
 
     // By default on Windows font point size 8 points we need 11 like on Linux.
     FontPointSize(ui->label_Legal_Stuff, 11);
@@ -99,8 +101,8 @@ void VPDialogAbout::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VPDialogAbout::showEvent(QShowEvent *event)
 {
-    QDialog::showEvent( event );
-    if ( event->spontaneous() )
+    QDialog::showEvent(event);
+    if (event->spontaneous())
     {
         return;
     }
@@ -114,7 +116,7 @@ void VPDialogAbout::showEvent(QShowEvent *event)
     setMaximumSize(size());
     setMinimumSize(size());
 
-    m_isInitialized = true;//first show windows are held
+    m_isInitialized = true; // first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------

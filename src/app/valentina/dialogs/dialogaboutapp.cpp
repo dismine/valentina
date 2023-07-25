@@ -27,15 +27,15 @@
  *************************************************************************/
 
 #include "dialogaboutapp.h"
+#include "../fervor/fvupdater.h"
+#include "../vmisc/projectversion.h"
+#include "../vmisc/vabstractvalapplication.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "ui_dialogaboutapp.h"
 #include <QDate>
 #include <QDesktopServices>
 #include <QMessageBox>
 #include <QtDebug>
-#include "../fervor/fvupdater.h"
-#include "../vmisc/projectversion.h"
-#include "../vmisc/vabstractvalapplication.h"
-#include "../vmisc/vvalentinasettings.h"
 
 #if !defined(BUILD_REVISION) && defined(QBS_BUILD)
 #include <vcsRepoState.h>
@@ -43,8 +43,8 @@
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogAboutApp::DialogAboutApp(QWidget *parent) :
-    QDialog(parent),
+DialogAboutApp::DialogAboutApp(QWidget *parent)
+  : QDialog(parent),
     ui(new Ui::DialogAboutApp)
 {
     ui->setupUi(this);
@@ -64,23 +64,24 @@ DialogAboutApp::DialogAboutApp(QWidget *parent) :
                                                            "KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY "
                                                            "AND FITNESS FOR A PARTICULAR PURPOSE."));
 
-
     ui->pushButton_Web_Site->setText(tr("Web site : %1").arg(QStringLiteral(VER_COMPANYDOMAIN_STR)));
-    connect(ui->pushButton_Web_Site, &QPushButton::clicked, this, []()
-    {
-        if (not QDesktopServices::openUrl(
+    connect(ui->pushButton_Web_Site, &QPushButton::clicked, this,
+            []()
+            {
+                if (not QDesktopServices::openUrl(
                         QUrl(QStringLiteral("https://%1").arg(QStringLiteral(VER_COMPANYDOMAIN_STR)))))
-        {
-            qWarning() << tr("Cannot open your default browser");
-        }
-    });
+                {
+                    qWarning() << tr("Cannot open your default browser");
+                }
+            });
 
-    connect(ui->pushButtonCheckUpdate, &QPushButton::clicked, []()
-    {
-        // Set feed URL before doing anything else
-        FvUpdater::sharedUpdater()->SetFeedURL(FvUpdater::CurrentFeedURL());
-        FvUpdater::sharedUpdater()->CheckForUpdatesNotSilent();
-    });
+    connect(ui->pushButtonCheckUpdate, &QPushButton::clicked,
+            []()
+            {
+                // Set feed URL before doing anything else
+                FvUpdater::sharedUpdater()->SetFeedURL(FvUpdater::CurrentFeedURL());
+                FvUpdater::sharedUpdater()->CheckForUpdatesNotSilent();
+            });
 
     // By default on Windows font point size 8 points we need 11 like on Linux.
     FontPointSize(ui->label_Legal_Stuff, 11);
@@ -98,8 +99,8 @@ DialogAboutApp::~DialogAboutApp()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogAboutApp::showEvent(QShowEvent *event)
 {
-    QDialog::showEvent( event );
-    if ( event->spontaneous() )
+    QDialog::showEvent(event);
+    if (event->spontaneous())
     {
         return;
     }
@@ -113,7 +114,7 @@ void DialogAboutApp::showEvent(QShowEvent *event)
     setMaximumSize(size());
     setMinimumSize(size());
 
-    m_isInitialized = true;//first show windows are held
+    m_isInitialized = true; // first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------

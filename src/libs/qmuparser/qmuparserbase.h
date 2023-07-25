@@ -71,7 +71,7 @@ class QMUPARSERSHARED_EXPORT QmuParserBase
 
 public:
     QmuParserBase();
-    explicit QmuParserBase(const QmuParserBase &a_Parser);
+    QmuParserBase(const QmuParserBase &a_Parser);
     auto operator=(const QmuParserBase &a_Parser) -> QmuParserBase &;
     virtual ~QmuParserBase();
 

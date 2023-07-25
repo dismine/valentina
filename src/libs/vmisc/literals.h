@@ -28,8 +28,8 @@
 #ifndef LITERALS_H
 #define LITERALS_H
 
-#include <QtGlobal>
 #include <QtCore/qcontainerfwd.h>
+#include <QtGlobal>
 
 class QString;
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)

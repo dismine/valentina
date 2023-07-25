@@ -32,7 +32,7 @@
 #include <QtGlobal>
 #ifdef Q_OS_WIN
 //   extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
-#  include <qt_windows.h>
+#include <qt_windows.h>
 #endif /*Q_OS_WIN*/
 
 #include <QColor>
@@ -40,8 +40,8 @@
 #include <QString>
 #include <QStringList>
 
-#include "../vmisc/typedef.h"
 #include "../vmisc/def.h"
+#include "../vmisc/typedef.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
@@ -50,19 +50,19 @@ extern const QString CustomMSign;
 extern const QString CustomIncrSign;
 
 // Detect whether the compiler supports C++11 noexcept exception specifications.
-#  if   defined(__clang__)
-#    if __has_feature(cxx_noexcept)
-#      define V_NOEXCEPT_EXPR(x) noexcept(x) // Clang 3.0 and above have noexcept
-#    endif
-#  elif defined(__GNUC__)
-#    if (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6)) && defined(__GXX_EXPERIMENTAL_CXX0X__)
-#      define V_NOEXCEPT_EXPR(x) noexcept(x) // GCC 4.7 and following have noexcept
-#    endif
-#  elif defined(_MSC_FULL_VER) && _MSC_FULL_VER >= 190023026
-#    define V_NOEXCEPT_EXPR(x) noexcept(x) // Visual Studio 2015 and following have noexcept
-#  else
-#    define V_NOEXCEPT_EXPR(x)
-#  endif
+#if defined(__clang__)
+#if __has_feature(cxx_noexcept)
+#define V_NOEXCEPT_EXPR(x) noexcept(x) // Clang 3.0 and above have noexcept
+#endif
+#elif defined(__GNUC__)
+#if (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6)) && defined(__GXX_EXPERIMENTAL_CXX0X__)
+#define V_NOEXCEPT_EXPR(x) noexcept(x) // GCC 4.7 and following have noexcept
+#endif
+#elif defined(_MSC_FULL_VER) && _MSC_FULL_VER >= 190023026
+#define V_NOEXCEPT_EXPR(x) noexcept(x) // Visual Studio 2015 and following have noexcept
+#else
+#define V_NOEXCEPT_EXPR(x)
+#endif
 
 extern const QString AttrType;
 extern const QString AttrMx;
@@ -112,9 +112,9 @@ extern const QString AttrPoint1;
 extern const QString AttrPoint2;
 extern const QString AttrPoint3;
 extern const QString AttrPoint4;
-extern const QString AttrKAsm1;// TODO. Delete if minimal supported version is 0.2.7
-extern const QString AttrKAsm2;// TODO. Delete if minimal supported version is 0.2.7
-extern const QString AttrKCurve;// TODO. Delete if minimal supported version is 0.2.7
+extern const QString AttrKAsm1;  // TODO. Delete if minimal supported version is 0.2.7
+extern const QString AttrKAsm2;  // TODO. Delete if minimal supported version is 0.2.7
+extern const QString AttrKCurve; // TODO. Delete if minimal supported version is 0.2.7
 extern const QString AttrDuplicate;
 extern const QString AttrAScale;
 extern const QString AttrPathPoint;
@@ -202,7 +202,6 @@ extern const QString ColorLime;
 extern const QString ColorDeepSkyBlue;
 extern const QString ColorCornFlowerBlue;
 
-
 // variables name
 // Hacks for avoiding the linker error "undefined reference to"
 #define SPL_ "Spl_"
@@ -253,25 +252,25 @@ QT_WARNING_DISABLE_GCC("-Weffc++")
 struct VLabelTemplateLine
 {
     QString line;
-    bool    bold;
-    bool    italic;
-    int     alignment;
-    int     fontSizeIncrement;
+    bool bold;
+    bool italic;
+    int alignment;
+    int fontSizeIncrement;
 };
 
 struct VWatermarkData
 {
-    int     opacity{20};
-    bool    showText{true};
+    int opacity{20};
+    bool showText{true};
     QString text{};
-    int     textRotation{0};
-    QFont   font{};
-    bool    showImage{true};
+    int textRotation{0};
+    QFont font{};
+    bool showImage{true};
     QString path{};
-    int     imageRotation{0};
-    bool    grayscale{false};
-    bool    invalidFile{false};
-    QColor  textColor{Qt::black};
+    int imageRotation{0};
+    bool grayscale{false};
+    bool invalidFile{false};
+    QColor textColor{Qt::black};
 };
 
 QT_WARNING_POP

@@ -104,10 +104,10 @@ enum EErrorCodes
 class QMUPARSERSHARED_EXPORT QmuParserErrorMsg
 {
 public:
-    typedef QmuParserErrorMsg self_type;
+    using self_type = QmuParserErrorMsg;
 
     QmuParserErrorMsg();
-    ~QmuParserErrorMsg();
+    ~QmuParserErrorMsg() = default;
 
     static auto Instance() -> const QmuParserErrorMsg &;
     auto operator[](int a_iIdx) const -> QString;
@@ -115,7 +115,7 @@ public:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(QmuParserErrorMsg) // NOLINT
-    QMap<int, QmuTranslation> m_vErrMsg;   ///< A map with the predefined error messages
+    QMap<int, QmuTranslation> m_vErrMsg{}; ///< A map with the predefined error messages
 };
 
 //---------------------------------------------------------------------------------------------------------------------

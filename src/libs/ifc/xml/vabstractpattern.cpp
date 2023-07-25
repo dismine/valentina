@@ -2039,7 +2039,7 @@ auto VAbstractPattern::ListFinalMeasurementsExpressions() const -> QVector<VForm
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractPattern::IsVariable(const QString &token) const -> bool
+auto VAbstractPattern::IsVariable(const QString &token) -> bool
 {
     for (const auto &var : BuilInVariables())
     {
@@ -2054,16 +2054,11 @@ auto VAbstractPattern::IsVariable(const QString &token) const -> bool
         }
     }
 
-    if (token.startsWith('#'))
-    {
-        return true;
-    }
-
-    return false;
+    return token.startsWith('#');
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractPattern::IsFunction(const QString &token) const -> bool
+auto VAbstractPattern::IsFunction(const QString &token) -> bool
 {
     for (const auto &fn : BuilInFunctions())
     {

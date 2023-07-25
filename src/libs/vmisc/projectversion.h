@@ -39,7 +39,7 @@ auto AppVersionStr() -> const QString &;
 
 constexpr inline auto FormatVersion(unsigned major, unsigned minor, unsigned patch) -> unsigned
 {
-    return ((major<<16u)|(minor<<8u)|patch);
+    return ((major << 16u) | (minor << 8u) | patch);
 }
 
 constexpr inline auto AppVersion() -> unsigned
@@ -50,24 +50,24 @@ constexpr inline auto AppVersion() -> unsigned
 // Change version number in projectversion.cpp too.
 // Synchronize valentina.nsi
 
-#define VER_FILEVERSION             0,7,52
-#define VER_FILEVERSION_STR         "0.7.52\0"
+#define VER_FILEVERSION 0, 7, 52
+#define VER_FILEVERSION_STR "0.7.52\0"
 
 #define V_PRERELEASE // Mark prerelease builds
 
-#define VER_PRODUCTVERSION          VER_FILEVERSION
-#define VER_PRODUCTVERSION_STR      VER_FILEVERSION_STR
+#define VER_PRODUCTVERSION VER_FILEVERSION
+#define VER_PRODUCTVERSION_STR VER_FILEVERSION_STR
 
-#define VER_COMPANYNAME_STR         "ValentinaTeam"
-//#define VER_FILEDESCRIPTION_STR   "Patternmaking program." // Defined in program
-//#define VER_INTERNALNAME_STR      "Valentina" // Defined in program
-#define VER_LEGALCOPYRIGHT_STR      "Copyright © 2014-2022 Valentina Team"
-#define VER_LEGALTRADEMARKS1_STR    "All Rights Reserved"
-#define VER_LEGALTRADEMARKS2_STR    VER_LEGALTRADEMARKS1_STR
-//#define VER_ORIGINALFILENAME_STR  "valentina.exe" // Defined in program
-//#define VER_PRODUCTNAME_STR       "Valentina" // Defined in program
+#define VER_COMPANYNAME_STR "ValentinaTeam"
+// #define VER_FILEDESCRIPTION_STR   "Patternmaking program." // Defined in program
+// #define VER_INTERNALNAME_STR      "Valentina" // Defined in program
+#define VER_LEGALCOPYRIGHT_STR "Copyright © 2014-2022 Valentina Team"
+#define VER_LEGALTRADEMARKS1_STR "All Rights Reserved"
+#define VER_LEGALTRADEMARKS2_STR VER_LEGALTRADEMARKS1_STR
+// #define VER_ORIGINALFILENAME_STR  "valentina.exe" // Defined in program
+// #define VER_PRODUCTNAME_STR       "Valentina" // Defined in program
 
-#define VER_COMPANYDOMAIN_STR       "smart-pattern.com.ua"
+#define VER_COMPANYDOMAIN_STR "smart-pattern.com.ua"
 
 auto compilerString() -> QString;
 auto buildCompatibilityString() -> QString;

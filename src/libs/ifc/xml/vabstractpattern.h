@@ -538,8 +538,8 @@ private:
     auto ListPieceExpressions() const -> QVector<VFormulaField>;
     auto ListFinalMeasurementsExpressions() const -> QVector<VFormulaField>;
 
-    auto IsVariable(const QString &token) const -> bool;
-    auto IsFunction(const QString &token) const -> bool;
+    static auto IsVariable(const QString &token) -> bool;
+    static auto IsFunction(const QString &token) -> bool;
 
     auto ParseItemElement(const QDomElement &domElement) -> QPair<bool, QMap<quint32, quint32>>;
 

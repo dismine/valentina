@@ -27,17 +27,16 @@
  *************************************************************************/
 
 #include "tst_buitinregexp.h"
-#include "../qmuparser/qmudef.h"
-#include "../vpatterndb/vtranslatevars.h"
 #include "../ifc/ifcdef.h"
 #include "../vmisc/literals.h"
+#include "../vpatterndb/vtranslatevars.h"
 
-#include <QtTest>
 #include <QTranslator>
+#include <QtTest>
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_BuitInRegExp::TST_BuitInRegExp(const QString &locale, QObject *parent)
-    : TST_AbstractRegExp(locale, parent)
+  : TST_AbstractRegExp(locale, parent)
 {
 }
 
@@ -64,7 +63,7 @@ void TST_BuitInRegExp::initTestCase()
 
     QLocale::setDefault(QLocale(m_locale));
 
-    InitTrMs();//Very important do this after loading QM files.
+    InitTrMs(); // Very important do this after loading QM files.
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -121,7 +120,7 @@ void TST_BuitInRegExp::TestCheckIsNamesUnique()
     if (originalNames.size() > 1)
     {
         const QString message = QString("Name is not unique. Translated name:'%1' also assosiated with: %2.")
-                .arg(translatedName, originalNames.join(", "));
+                                    .arg(translatedName, originalNames.join(", "));
         QFAIL(qUtf8Printable(message));
     }
 }
@@ -197,8 +196,8 @@ void TST_BuitInRegExp::TestCheckUnderlineExists()
     const QString translated = m_trMs->InternalVarToUser(name);
     if ((translated.right(1) == QLatin1String("_")) != exists)
     {
-        const QString message = QString("String '%1' doesn't contain underline. Original string is '%2'")
-                .arg(translated, name);
+        const QString message =
+            QString("String '%1' doesn't contain underline. Original string is '%2'").arg(translated, name);
         QFAIL(qUtf8Printable(message));
     }
 }

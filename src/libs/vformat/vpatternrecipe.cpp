@@ -27,53 +27,53 @@
  *************************************************************************/
 
 #include "vpatternrecipe.h"
+#include "../ifc/exception/vexceptioninvalidhistory.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vgeometry/vcubicbezier.h"
+#include "../vgeometry/vcubicbezierpath.h"
+#include "../vgeometry/vpointf.h"
+#include "../vgeometry/vsplinepath.h"
 #include "../vmisc/projectversion.h"
 #include "../vmisc/vabstractvalapplication.h"
-#include "../ifc/xml/vabstractpattern.h"
-#include "../ifc/exception/vexceptioninvalidhistory.h"
-#include "../vpatterndb/vcontainer.h"
-#include "../vgeometry/vpointf.h"
-#include "../vgeometry/vcubicbezier.h"
-#include "../vgeometry/vsplinepath.h"
-#include "../vgeometry/vcubicbezierpath.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/variables/vincrement.h"
 #include "../vpatterndb/variables/vmeasurement.h"
+#include "../vpatterndb/vcontainer.h"
 
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolalongline.h"
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolbisector.h"
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolendline.h"
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolnormal.h"
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolshoulderpoint.h"
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolheight.h"
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollineintersectaxis.h"
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.h"
+#include "../vtools/tools/drawTools/operation/flipping/vtoolflippingbyaxis.h"
+#include "../vtools/tools/drawTools/operation/flipping/vtoolflippingbyline.h"
+#include "../vtools/tools/drawTools/operation/vtoolmove.h"
+#include "../vtools/tools/drawTools/operation/vtoolrotation.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolarc.h"
-#include "../vtools/tools/drawTools/toolcurve/vtoolellipticalarc.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolarcwithlength.h"
-#include "../vtools/tools/drawTools/toolcurve/vtoolspline.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolcubicbezier.h"
-#include "../vtools/tools/drawTools/toolcurve/vtoolsplinepath.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolcubicbezierpath.h"
-#include "../vtools/tools/drawTools/vtoolline.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolellipticalarc.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolspline.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolsplinepath.h"
+#include "../vtools/tools/drawTools/toolpoint/tooldoublepoint/vtooltruedarts.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutspline.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutsplinepath.h"
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.h"
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoollineintersect.h"
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofcontact.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolalongline.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolbisector.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolendline.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolheight.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollineintersectaxis.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolnormal.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolshoulderpoint.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolbasepoint.h"
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtooltriangle.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoollineintersect.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointfromarcandtangent.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointfromcircleandtangent.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofcontact.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersection.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectionarcs.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncircles.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.h"
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointfromcircleandtangent.h"
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointfromarcandtangent.h"
-#include "../vtools/tools/drawTools/toolpoint/tooldoublepoint/vtooltruedarts.h"
-#include "../vtools/tools/drawTools/operation/vtoolrotation.h"
-#include "../vtools/tools/drawTools/operation/flipping/vtoolflippingbyline.h"
-#include "../vtools/tools/drawTools/operation/flipping/vtoolflippingbyaxis.h"
-#include "../vtools/tools/drawTools/operation/vtoolmove.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtooltriangle.h"
+#include "../vtools/tools/drawTools/vtoolline.h"
 
 namespace
 {
@@ -103,19 +103,19 @@ inline auto FileComment() -> QString
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T> auto GetPatternTool(quint32 id) -> T *
 {
-    T* tool = qobject_cast<T*>(VAbstractPattern::getTool(id));
+    T *tool = qobject_cast<T *>(VAbstractPattern::getTool(id));
     if (not tool)
     {
         throw VExceptionInvalidHistory(QObject::tr("Cannot cast tool with id '%1'.").arg(id));
     }
     return tool;
 }
-}  // namespace
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternRecipe::VPatternRecipe(VAbstractPattern *pattern, QObject *parent)
-    : VDomDocument(parent),
-      m_pattern(pattern)
+  : VDomDocument(parent),
+    m_pattern(pattern)
 {
     SCASSERT(pattern != nullptr)
 
@@ -127,8 +127,9 @@ VPatternRecipe::VPatternRecipe(VAbstractPattern *pattern, QObject *parent)
     recipeElement.appendChild(Content());
 
     appendChild(recipeElement);
-    insertBefore(createProcessingInstruction(QStringLiteral("xml"),
-                                             QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"")), firstChild());
+    insertBefore(
+        createProcessingInstruction(QStringLiteral("xml"), QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"")),
+        firstChild());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -150,8 +151,8 @@ auto VPatternRecipe::Prerequisite() -> QDomElement
     QDomElement prerequisiteElement = createElement(QStringLiteral("prerequisite"));
 
     prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("valentina"), AppVersionStr()));
-    prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("unit"),
-                                                          UnitsToStr(VAbstractValApplication::VApp()->patternUnits())));
+    prerequisiteElement.appendChild(
+        CreateElementWithText(QStringLiteral("unit"), UnitsToStr(VAbstractValApplication::VApp()->patternUnits())));
     prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("author"), m_pattern->GetCompanyName()));
     prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("pattenName"), m_pattern->GetPatternName()));
     prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("description"), m_pattern->GetDescription()));
@@ -174,9 +175,9 @@ auto VPatternRecipe::Measurements() -> QDomElement
     // Resore order
     std::sort(patternMeasurements.begin(), patternMeasurements.end(),
               [](const QSharedPointer<VMeasurement> &a, const QSharedPointer<VMeasurement> &b)
-    {return a->Index() < b->Index();});
+              { return a->Index() < b->Index(); });
 
-    for(auto &m : patternMeasurements)
+    for (auto &m : patternMeasurements)
     {
         measurements.appendChild(Measurement(m));
     }
@@ -231,9 +232,9 @@ auto VPatternRecipe::Increments() -> QDomElement
     // Resore order
     std::sort(patternIncrements.begin(), patternIncrements.end(),
               [](const QSharedPointer<VIncrement> &a, const QSharedPointer<VIncrement> &b)
-    {return a->GetIndex() < b->GetIndex();});
+              { return a->GetIndex() < b->GetIndex(); });
 
-    for(auto &incr : patternIncrements)
+    for (auto &incr : patternIncrements)
     {
         if (not incr->IsPreviewCalculation())
         {
@@ -255,9 +256,9 @@ auto VPatternRecipe::PreviewCalculations() -> QDomElement
     // Resore order
     std::sort(patternIncrements.begin(), patternIncrements.end(),
               [](const QSharedPointer<VIncrement> &a, const QSharedPointer<VIncrement> &b)
-    {return a->GetIndex() < b->GetIndex();});
+              { return a->GetIndex() < b->GetIndex(); });
 
-    for(auto &incr : patternIncrements)
+    for (auto &incr : patternIncrements)
     {
         if (incr->IsPreviewCalculation())
         {
@@ -295,7 +296,7 @@ auto VPatternRecipe::Content() -> QDomElement
     QDomElement content = createElement(QStringLiteral("content"));
 
     const QDomNodeList draws = m_pattern->documentElement().elementsByTagName(VAbstractPattern::TagDraw);
-    for (int i=0; i < draws.size(); ++i)
+    for (int i = 0; i < draws.size(); ++i)
     {
         QDomElement draw = draws.at(i).toElement();
         if (draw.isNull())
@@ -350,8 +351,8 @@ auto VPatternRecipe::Step(const VToolRecord &tool, const VContainer &data) -> QD
     }
     try
     {
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wswitch-default")
+        QT_WARNING_PUSH
+        QT_WARNING_DISABLE_GCC("-Wswitch-default")
         switch (tool.getTypeTool())
         {
             case Tool::Arrow:
@@ -360,8 +361,8 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
             case Tool::LinePoint:
             case Tool::AbstractSpline:
             case Tool::Cut:
-            case Tool::Midpoint:// Same as Tool::AlongLine, but tool will never has such type
-            case Tool::ArcIntersectAxis:// Same as Tool::CurveIntersectAxis, but tool will never has such type
+            case Tool::Midpoint:         // Same as Tool::AlongLine, but tool will never has such type
+            case Tool::ArcIntersectAxis: // Same as Tool::CurveIntersectAxis, but tool will never has such type
             case Tool::BackgroundImage:
             case Tool::BackgroundImageControls:
             case Tool::BackgroundPixmapImage:
@@ -437,8 +438,8 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
                 return FlippingByAxis(tool, data);
             case Tool::Move:
                 return Move(tool, data);
-            //Because "history" not only show history of pattern, but help restore current data for each pattern's
-            //piece, we need add record about details and nodes, but don't show them.
+            // Because "history" not only show history of pattern, but help restore current data for each pattern's
+            // piece, we need add record about details and nodes, but don't show them.
             case Tool::Piece:
             case Tool::UnionDetails:
             case Tool::NodeArc:
@@ -454,7 +455,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
             case Tool::DuplicateDetail:
                 return QDomElement();
         }
-QT_WARNING_POP
+        QT_WARNING_POP
     }
     catch (const VExceptionBadId &e)
     {
@@ -495,20 +496,22 @@ auto VPatternRecipe::FinalMeasurement(const VFinalMeasurement &fm, const VContai
         const qreal result = cal->EvalFormula(data.DataVariables(), fm.formula);
         if (qIsInf(result) || qIsNaN(result))
         {
-            const QString errorMsg = QString("%1\n\n%1").arg(tr("Reading final measurements error."),
-                                                             tr("Value for final measurtement '%1' is infinite or NaN. "
-                                                                "Please, check your calculations.").arg(fm.name));
-            VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg)
-                                                       : qWarning()
-                                                         << VAbstractValApplication::warningMessageSignature + errorMsg;
+            const QString errorMsg = QString("%1\n\n%1")
+                                         .arg(tr("Reading final measurements error."),
+                                              tr("Value for final measurtement '%1' is infinite or NaN. "
+                                                 "Please, check your calculations.")
+                                                  .arg(fm.name));
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(errorMsg)
+                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         }
 
         SetAttribute(recipeFinalMeasurement, QStringLiteral("value"), result);
     }
     catch (const qmu::QmuParserError &e)
     {
-        throw VExceptionInvalidHistory(tr("Unable to create record for final measurement '%1'. Error: %2")
-                                       .arg(fm.name).arg(e.GetMsg()));
+        throw VExceptionInvalidHistory(
+            tr("Unable to create record for final measurement '%1'. Error: %2").arg(fm.name).arg(e.GetMsg()));
     }
 
     return recipeFinalMeasurement;
@@ -1142,14 +1145,14 @@ auto VPatternRecipe::Move(const VToolRecord &record, const VContainer &data) -> 
 
 //---------------------------------------------------------------------------------------------------------------------
 inline void VPatternRecipe::Formula(QDomElement &step, const VFormula &formula, const QString &formulaStr,
-                             const QString &formulaValue)
+                                    const QString &formulaValue)
 {
     if (formula.error())
     {
         throw VExceptionInvalidHistory(QObject::tr("Invalid formula '%1' for tool with id '%2'. %3.")
-                                       .arg(formula.GetFormula(FormulaType::ToSystem))
-                                       .arg(formula.getToolId())
-                                       .arg(formula.Reason()));
+                                           .arg(formula.GetFormula(FormulaType::ToSystem))
+                                           .arg(formula.getToolId())
+                                           .arg(formula.Reason()));
     }
 
     SetAttribute(step, formulaStr, formula.GetFormula(FormulaType::ToSystem));
@@ -1157,39 +1160,34 @@ inline void VPatternRecipe::Formula(QDomElement &step, const VFormula &formula, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template<typename T>
-inline void VPatternRecipe::LineAttributes(QDomElement &step, T *tool)
+template <typename T> inline void VPatternRecipe::LineAttributes(QDomElement &step, T *tool)
 {
     SetAttribute(step, AttrLineColor, tool->GetLineColor());
     SetAttribute(step, AttrTypeLine, tool->getLineType());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template<typename T>
-void VPatternRecipe::CurveAttributes(QDomElement &step, T *tool)
+template <typename T> void VPatternRecipe::CurveAttributes(QDomElement &step, T *tool)
 {
     SetAttribute(step, AttrLineColor, tool->GetLineColor());
     SetAttribute(step, AttrPenStyle, tool->GetPenStyle());
     SetAttribute(step, AttrAScale, tool->GetApproximationScale());
     SetAttribute(step, AttrDuplicate, tool->GetDuplicate());
     SetAttributeOrRemoveIf<QString>(step, AttrAlias, tool->GetAliasSuffix(),
-                                    [](const QString &suffix) noexcept {return suffix.isEmpty();});
+                                    [](const QString &suffix) noexcept { return suffix.isEmpty(); });
 }
 
-
 //---------------------------------------------------------------------------------------------------------------------
-template<typename T>
-void VPatternRecipe::CutCurveAttributes(QDomElement &step, T *tool)
+template <typename T> void VPatternRecipe::CutCurveAttributes(QDomElement &step, T *tool)
 {
     SetAttributeOrRemoveIf<QString>(step, AttrAlias1, tool->GetAliasSuffix1(),
-                                    [](const QString &suffix) noexcept {return suffix.isEmpty();});
+                                    [](const QString &suffix) noexcept { return suffix.isEmpty(); });
     SetAttributeOrRemoveIf<QString>(step, AttrAlias2, tool->GetAliasSuffix2(),
-                                    [](const QString &suffix) noexcept {return suffix.isEmpty();});
+                                    [](const QString &suffix) noexcept { return suffix.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template<typename T>
-inline void VPatternRecipe::ToolAttributes(QDomElement &step, T *tool)
+template <typename T> inline void VPatternRecipe::ToolAttributes(QDomElement &step, T *tool)
 {
     SetAttribute(step, AttrType, T::ToolType);
     SetAttribute(step, AttrLabel, tool->name());
@@ -1221,13 +1219,13 @@ auto VPatternRecipe::GroupOperationSource(VAbstractOperation *tool, quint32 id, 
         }
         catch (const VExceptionBadId &e)
         {
-            qCritical() << e.ErrorMessage()<<Q_FUNC_INFO;
+            qCritical() << e.ErrorMessage() << Q_FUNC_INFO;
             continue;
         }
 
         SetAttribute(node, AttrItem, obj->ObjectName());
         SetAttributeOrRemoveIf<QString>(node, AttrAlias, item.alias,
-                                        [](const QString &alias) noexcept {return alias.isEmpty();});
+                                        [](const QString &alias) noexcept { return alias.isEmpty(); });
 
         if (obj->getType() != GOType::Point)
         {
@@ -1244,7 +1242,7 @@ auto VPatternRecipe::GroupOperationSource(VAbstractOperation *tool, quint32 id, 
 
         QT_WARNING_PUSH
         QT_WARNING_DISABLE_GCC("-Wswitch-default")
-        switch(static_cast<GOType>(obj->getType()))
+        switch (static_cast<GOType>(obj->getType()))
         {
             case GOType::Point:
                 SetAttribute(node, AttrType, QStringLiteral("point"));

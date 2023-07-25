@@ -20,7 +20,6 @@
  ******************************************************************************************************/
 
 #include "qmutranslation.h"
-#include "qmuparserdef.h"
 
 #include <QByteArray>
 #include <QCoreApplication>
@@ -37,29 +36,36 @@ auto QmuTranslation::translate(const char *context, const char *sourceText, cons
     {
         n = -1;
     }
-    QmuTranslation t(context, sourceText, disambiguation, n);
-    return t;
+
+    return {context, sourceText, disambiguation, n};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QmuTranslation::QmuTranslation()
-    : mcontext(), msourceText(), mdisambiguation(), mn(-1), localeName(), cachedTranslation()
-{}
+  : mcontext(),
+    msourceText(),
+    mdisambiguation(),
+    mn(-1),
+    localeName(),
+    cachedTranslation()
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 QmuTranslation::QmuTranslation(const QString &context, const QString &sourceText, const QString &disambiguation, int n)
-    : mcontext(context),
-      msourceText(sourceText),
-      mdisambiguation(disambiguation),
-      mn(n),
-      localeName(),
-      cachedTranslation()
-{}
+  : mcontext(context),
+    msourceText(sourceText),
+    mdisambiguation(disambiguation),
+    mn(n),
+    localeName(),
+    cachedTranslation()
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto QmuTranslation::operator=(const QmuTranslation &tr) -> QmuTranslation &
 {
-    if ( &tr == this )
+    if (&tr == this)
     {
         return *this;
     }
@@ -74,13 +80,14 @@ auto QmuTranslation::operator=(const QmuTranslation &tr) -> QmuTranslation &
 
 //---------------------------------------------------------------------------------------------------------------------
 QmuTranslation::QmuTranslation(const QmuTranslation &tr)
-    : mcontext(tr.mcontext),
-      msourceText(tr.msourceText),
-      mdisambiguation(tr.mdisambiguation),
-      mn(tr.mn),
-      localeName(),
-      cachedTranslation()
-{}
+  : mcontext(tr.mcontext),
+    msourceText(tr.msourceText),
+    mdisambiguation(tr.mdisambiguation),
+    mn(tr.mn),
+    localeName(),
+    cachedTranslation()
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto QmuTranslation::translate(const QString &locale) const -> QString
