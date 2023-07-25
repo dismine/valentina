@@ -6,6 +6,7 @@ Module {
     property bool frameworksBuild: qbs.targetOS.contains("macos") && !staticBuild
 
     property bool enableAddressSanitizer: false
+    property bool enableMemorySanitizer: false
     property bool enableUbSanitizer: false
     property bool enableThreadSanitizer: false
 
@@ -799,8 +800,12 @@ Module {
 
     cpp.cxxFlags: {
         var flags = debugFlags;
-        if (qbs.toolchain.contains("gcc") && enableAddressSanitizer)
+        if ((qbs.toolchain.contains("gcc") || qbs.toolchain.contains("clang")) &&
+                (enableAddressSanitizer || enableMemorySanitizer))
             flags.push("-fno-omit-frame-pointer");
+
+        if ((qbs.toolchain.contains("gcc") || qbs.toolchain.contains("clang")) && enableMemorySanitizer)
+            flags.push("-fPIE", "-pie", "-fsanitize-memory-track-origins");
 
         if (qbs.toolchain.contains("msvc"))
             flags.push("/utf-8");
@@ -848,11 +853,13 @@ Module {
     }
 
     Properties {
-        condition: qbs.toolchain.contains("gcc")
+        condition: qbs.toolchain.contains("gcc") || qbs.toolchain.contains("clang")
         cpp.driverFlags: {
             var flags = [];
             if (enableAddressSanitizer)
                 flags.push("-fsanitize=address");
+            if (enableMemorySanitizer)
+                flags.push("-fsanitize=memory");
             if (enableUbSanitizer)
                 flags.push("-fsanitize=undefined");
             if (enableThreadSanitizer)
