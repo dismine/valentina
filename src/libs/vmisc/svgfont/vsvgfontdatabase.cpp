@@ -366,13 +366,13 @@ auto VSvgFontDatabase::QueryFont(const QString &family, SVGFontStyle style, SVGF
 auto VSvgFontDatabase::QueryFontEngine(const QString &family, SVGFontStyle style, SVGFontWeight weight,
                                        int pointSize) const -> VSvgFontEngine
 {
-    QByteArray hash = VSvgFont::Hash(family, style, weight);
+    VSvgFont font = QueryFont(family, style, weight);
+    QByteArray hash = font.Hash();
     if (m_fontEngineCache.contains(hash))
     {
         return {*m_fontEngineCache.object(hash)};
     }
 
-    VSvgFont font = QueryFont(family, style, weight);
     if (font.IsValid())
     {
         VSvgFontReader reader;
