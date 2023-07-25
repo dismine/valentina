@@ -668,7 +668,7 @@ auto VContainer::IsUnique(const QString &name, const QString &nspace) -> bool
 {
     if (uniqueNames.contains(nspace))
     {
-        return (!uniqueNames.value(nspace).contains(name) && !builInFunctions.contains(name));
+        return (!uniqueNames.value(nspace).contains(name) && !BuilInFunctions().contains(name));
     }
     else
     {
@@ -687,7 +687,7 @@ auto VContainer::AllUniqueNames(const QString &nspace) -> QStringList
 {
     if (uniqueNames.contains(nspace))
     {
-        QStringList names = builInFunctions;
+        QStringList names = BuilInFunctions();
         names.append(uniqueNames.value(nspace).values());
         return names;
     }

@@ -245,7 +245,7 @@ extern const QString rotationElArc_;
 extern const QString pieceArea_;
 extern const QString pieceSeamLineArea_;
 
-extern const QStringList builInVariables;
+auto BuilInVariables() -> QStringList;
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")

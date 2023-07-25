@@ -52,7 +52,7 @@ DialogAboutApp::DialogAboutApp(QWidget *parent) :
     VAbstractValApplication::VApp()->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale())
                                                                            : setLocale(QLocale::c());
 
-    ui->label_Valentina_Version->setText(QStringLiteral("Valentina %1").arg(APP_VERSION_STR));
+    ui->label_Valentina_Version->setText(QStringLiteral("Valentina %1").arg(AppVersionStr()));
     ui->labelBuildRevision->setText(QStringLiteral("Build revision: %1").arg(QStringLiteral(BUILD_REVISION)));
     ui->label_QT_Version->setText(buildCompatibilityString());
 

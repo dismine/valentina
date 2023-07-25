@@ -2041,7 +2041,7 @@ auto VAbstractPattern::ListFinalMeasurementsExpressions() const -> QVector<VForm
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractPattern::IsVariable(const QString &token) const -> bool
 {
-    for (const auto &var : builInVariables)
+    for (const auto &var : BuilInVariables())
     {
         if (token.indexOf(var) == 0)
         {
@@ -2065,7 +2065,7 @@ auto VAbstractPattern::IsVariable(const QString &token) const -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractPattern::IsFunction(const QString &token) const -> bool
 {
-    for (const auto &fn : builInFunctions)
+    for (const auto &fn : BuilInFunctions())
     {
         if (token.indexOf(fn) == 0)
         {

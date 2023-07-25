@@ -551,7 +551,7 @@ void QmuParserBase::DefineOprt( const QString &a_sName, fun_type2 a_pFun, unsign
     // Check for conflicts with built in operator names
     for (int i=0; m_bBuiltInOp && i<cmENDIF; ++i)
     {
-        if (a_sName == c_DefaultOprt.at(i))
+        if (a_sName == GetOprtDef().at(i))
         {
             Error(ecBUILTIN_OVERLOAD, -1, a_sName);
         }

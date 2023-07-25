@@ -71,9 +71,9 @@ public:
 
 protected:
     typedef QStringList FormatsVector;
-    const static FormatsVector pageFormatNames;
     typedef int VIndexType;
 
+    static auto PageFormatNames() -> const FormatsVector &;
     static auto RoundTemplateSize(qreal width, qreal height, Unit unit) -> QSizeF;
 
 private:

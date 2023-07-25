@@ -380,7 +380,7 @@ VApplication::VApplication(int &argc, char **argv)
     setOrganizationName(QStringLiteral(VER_COMPANYNAME_STR));
     setOrganizationDomain(QStringLiteral(VER_COMPANYDOMAIN_STR));
     // Setting the Application version
-    setApplicationVersion(APP_VERSION_STR);
+    setApplicationVersion(AppVersionStr());
     // making sure will create new instance...just in case we will ever do 2 objects of VApplication
     VCommandLine::Reset();
     VTheme::Instance()->StoreDefaultThemeName(QIcon::themeName());
@@ -672,7 +672,7 @@ void VApplication::InitOptions()
     // Run creation log after sending crash report
     StartLogging();
 
-    qDebug() << "Version:" << APP_VERSION_STR;
+    qDebug() << "Version:" << AppVersionStr();
     qDebug() << "Build revision:" << BUILD_REVISION;
     qDebug() << buildCompatibilityString();
     qDebug() << "Built on" << __DATE__ << "at" << __TIME__;

@@ -130,7 +130,7 @@ void VPDialogAbout::FontPointSize(QWidget *w, int pointSize)
 //---------------------------------------------------------------------------------------------------------------------
 void VPDialogAbout::RetranslateUi()
 {
-    ui->label_Puzzle_Version->setText(QStringLiteral("Puzzle %1").arg(APP_VERSION_STR));
+    ui->label_Puzzle_Version->setText(QStringLiteral("Puzzle %1").arg(AppVersionStr()));
     ui->labelBuildRevision->setText(tr("Build revision: %1").arg(QStringLiteral(BUILD_REVISION)));
     ui->label_QT_Version->setText(buildCompatibilityString());
 

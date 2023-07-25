@@ -35,7 +35,7 @@ constexpr unsigned MAJOR_VERSION = 0;
 constexpr unsigned MINOR_VERSION = 7;
 constexpr unsigned DEBUG_VERSION = 52;
 
-extern const QString APP_VERSION_STR;
+auto AppVersionStr() -> const QString &;
 
 constexpr inline auto FormatVersion(unsigned major, unsigned minor, unsigned patch) -> unsigned
 {

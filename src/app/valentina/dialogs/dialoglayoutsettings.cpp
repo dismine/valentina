@@ -814,13 +814,13 @@ auto DialogLayoutSettings::MakeHelpTemplateList() -> QString
     QString out = QChar('\n');
 
     auto cntr = static_cast<VIndexType>(PaperSizeTemplate::A0);
-    for (int i = 0; i < VAbstractLayoutDialog::pageFormatNames.size(); ++i)
+    for (int i = 0; i < VAbstractLayoutDialog::PageFormatNames().size(); ++i)
     {
         if (cntr < static_cast<int>(PaperSizeTemplate::Custom))// Don't include custom template
         {
-            out += "\t* "+VAbstractLayoutDialog::pageFormatNames.at(i)+" = "+ QString::number(cntr++);
+            out += "\t* "+VAbstractLayoutDialog::PageFormatNames().at(i)+" = "+ QString::number(cntr++);
 
-            if (i < VAbstractLayoutDialog::pageFormatNames.size() - 2)
+            if (i < VAbstractLayoutDialog::PageFormatNames().size() - 2)
             {
                out += QLatin1String(",\n");
             }
@@ -840,7 +840,7 @@ auto DialogLayoutSettings::MakeHelpTiledPdfTemplateList() -> QString
 
     for (int i = 0; i <= static_cast<int>(PaperSizeTemplate::Tabloid); ++i)
     {
-        out += "\t* "+VAbstractLayoutDialog::pageFormatNames.at(i)+" = "+ QString::number(i);
+        out += "\t* "+VAbstractLayoutDialog::PageFormatNames().at(i)+" = "+ QString::number(i);
 
         if (i < static_cast<int>(PaperSizeTemplate::Tabloid))
         {

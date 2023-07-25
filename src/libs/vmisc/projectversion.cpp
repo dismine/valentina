@@ -41,8 +41,13 @@
 #define LATEST_TAG_DISTANCE VCS_REPO_STATE_DISTANCE
 #endif
 
-extern const QString APP_VERSION_STR(
-    QStringLiteral("%1.%2.%3.%4").arg(MAJOR_VERSION).arg(MINOR_VERSION).arg(DEBUG_VERSION).arg(LATEST_TAG_DISTANCE));
+//---------------------------------------------------------------------------------------------------------------------
+auto AppVersionStr() -> const QString &
+{
+    static const QString appVersionStr =
+        QStringLiteral("%1.%2.%3.%4").arg(MAJOR_VERSION).arg(MINOR_VERSION).arg(DEBUG_VERSION).arg(LATEST_TAG_DISTANCE);
+    return appVersionStr;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto compilerString() -> QString

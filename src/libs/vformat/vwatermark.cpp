@@ -47,7 +47,7 @@ namespace
 //---------------------------------------------------------------------------------------------------------------------
 auto FileComment() -> QString
 {
-    return QString("Watermark created with Valentina v%1 (https://smart-pattern.com.ua/).").arg(APP_VERSION_STR);
+    return QString("Watermark created with Valentina v%1 (https://smart-pattern.com.ua/).").arg(AppVersionStr());
 }
 } // namespace
 

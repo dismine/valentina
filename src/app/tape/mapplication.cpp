@@ -316,7 +316,7 @@ MApplication::MApplication(int &argc, char **argv)
     setOrganizationName(QStringLiteral(VER_COMPANYNAME_STR));
     setOrganizationDomain(QStringLiteral(VER_COMPANYDOMAIN_STR));
     // Setting the Application version
-    setApplicationVersion(APP_VERSION_STR);
+    setApplicationVersion(AppVersionStr());
     // We have been running Tape in two different cases.
     // The first inside own bundle where info.plist is works fine, but the second,
     // when we run inside Valentina's bundle, require direct setting the icon.
@@ -471,7 +471,7 @@ void MApplication::InitOptions()
 
     OpenSettings();
 
-    qCDebug(mApp, "Version: %s", qUtf8Printable(APP_VERSION_STR));
+    qCDebug(mApp, "Version: %s", qUtf8Printable(AppVersionStr()));
     qCDebug(mApp, "Build revision: %s", BUILD_REVISION);
     qCDebug(mApp, "%s", qUtf8Printable(buildCompatibilityString()));
     qCDebug(mApp, "Built on %s at %s", __DATE__, __TIME__);

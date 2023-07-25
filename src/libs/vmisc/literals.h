@@ -87,7 +87,7 @@ extern const QString avg_F;
 extern const QString fmod_F;
 extern const QString warning_F;
 
-extern const QStringList builInFunctions;
+auto BuilInFunctions() -> QStringList;
 
 // Placeholders
 extern const QString pl_height;

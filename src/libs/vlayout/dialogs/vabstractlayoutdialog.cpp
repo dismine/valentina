@@ -32,26 +32,6 @@
 
 #include <QApplication>
 
-// must be the same order as PaperSizeTemplate constants
-const VAbstractLayoutDialog::FormatsVector VAbstractLayoutDialog::pageFormatNames{
-    QStringLiteral("A0"),
-    QStringLiteral("A1"),
-    QStringLiteral("A2"),
-    QStringLiteral("A3"),
-    QStringLiteral("A4"),
-    QApplication::translate("VAbstractLayoutDialog", "Letter", "Paper format"),
-    QApplication::translate("VAbstractLayoutDialog", "Legal", "Paper format"),
-    QApplication::translate("VAbstractLayoutDialog", "Tabloid", "Paper format"),
-    QApplication::translate("VAbstractLayoutDialog", "Roll 24in", "Paper format"),
-    QApplication::translate("VAbstractLayoutDialog", "Roll 30in", "Paper format"),
-    QApplication::translate("VAbstractLayoutDialog", "Roll 36in", "Paper format"),
-    QApplication::translate("VAbstractLayoutDialog", "Roll 42in", "Paper format"),
-    QApplication::translate("VAbstractLayoutDialog", "Roll 44in", "Paper format"),
-    QApplication::translate("VAbstractLayoutDialog", "Roll 48in", "Paper format"),
-    QApplication::translate("VAbstractLayoutDialog", "Roll 62in", "Paper format"),
-    QApplication::translate("VAbstractLayoutDialog", "Roll 72in", "Paper format"),
-    QApplication::translate("VAbstractLayoutDialog", "Custom", "Paper format")};
-
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractLayoutDialog::VAbstractLayoutDialog(QWidget *parent)
   : QDialog(parent)
@@ -67,7 +47,7 @@ void VAbstractLayoutDialog::InitTemplates(QComboBox *comboBoxTemplates)
     const QString pdi = QStringLiteral("(%1ppi)").arg(PrintDPI);
 
     auto cntr = static_cast<VIndexType>(PaperSizeTemplate::A0);
-    for (const auto &v : pageFormatNames)
+    for (const auto &v : PageFormatNames())
     {
         if (cntr <= static_cast<int>(PaperSizeTemplate::Tabloid))
         {
@@ -101,6 +81,31 @@ void VAbstractLayoutDialog::InitTileTemplates(QComboBox *comboBoxTemplates, bool
         }
         comboBoxTemplates->removeItem(comboBoxTemplates->findData(i));
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractLayoutDialog::PageFormatNames() -> const VAbstractLayoutDialog::FormatsVector &
+{
+    // must be the same order as PaperSizeTemplate constants
+    static const FormatsVector pageFormatNames{
+        QStringLiteral("A0"),
+        QStringLiteral("A1"),
+        QStringLiteral("A2"),
+        QStringLiteral("A3"),
+        QStringLiteral("A4"),
+        QApplication::translate("VAbstractLayoutDialog", "Letter", "Paper format"),
+        QApplication::translate("VAbstractLayoutDialog", "Legal", "Paper format"),
+        QApplication::translate("VAbstractLayoutDialog", "Tabloid", "Paper format"),
+        QApplication::translate("VAbstractLayoutDialog", "Roll 24in", "Paper format"),
+        QApplication::translate("VAbstractLayoutDialog", "Roll 30in", "Paper format"),
+        QApplication::translate("VAbstractLayoutDialog", "Roll 36in", "Paper format"),
+        QApplication::translate("VAbstractLayoutDialog", "Roll 42in", "Paper format"),
+        QApplication::translate("VAbstractLayoutDialog", "Roll 44in", "Paper format"),
+        QApplication::translate("VAbstractLayoutDialog", "Roll 48in", "Paper format"),
+        QApplication::translate("VAbstractLayoutDialog", "Roll 62in", "Paper format"),
+        QApplication::translate("VAbstractLayoutDialog", "Roll 72in", "Paper format"),
+        QApplication::translate("VAbstractLayoutDialog", "Custom", "Paper format")};
+    return pageFormatNames;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

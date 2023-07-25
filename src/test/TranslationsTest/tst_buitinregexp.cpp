@@ -173,8 +173,8 @@ void TST_BuitInRegExp::TestCheckUnderlineExists_data()
     data.insert(pieceArea_, true);
     data.insert(pieceSeamLineArea_, true);
 
-    //Catch case when new internal variable appears.
-    QCOMPARE(data.size(), builInVariables.size());
+    // Catch case when new internal variable appears.
+    QCOMPARE(data.size(), BuilInVariables().size());
 
     QTest::addColumn<QString>("name");
     QTest::addColumn<bool>("exists");
@@ -209,7 +209,7 @@ void TST_BuitInRegExp::TestCheckInternalVaribleRegExp_data()
     QTest::addColumn<QString>("var");
     QTest::addColumn<QString>("originalName");
 
-    for (const auto &var : qAsConst(builInVariables))
+    for (const auto &var : BuilInVariables())
     {
         const QString tag = QString("Locale: '%1'. Var '%2'").arg(m_locale, var);
         const QStringList originalNames = AllNames();
@@ -286,5 +286,5 @@ void TST_BuitInRegExp::PrepareData()
 //---------------------------------------------------------------------------------------------------------------------
 auto TST_BuitInRegExp::AllNames() -> QStringList
 {
-    return builInFunctions + builInVariables;
+    return BuilInFunctions() + BuilInVariables();
 }

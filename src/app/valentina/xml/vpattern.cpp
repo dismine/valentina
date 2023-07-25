@@ -140,7 +140,7 @@ namespace
 //---------------------------------------------------------------------------------------------------------------------
 auto FileComment() -> QString
 {
-    return QStringLiteral("Pattern created with Valentina v%1 (https://smart-pattern.com.ua/).").arg(APP_VERSION_STR);
+    return QStringLiteral("Pattern created with Valentina v%1 (https://smart-pattern.com.ua/).").arg(AppVersionStr());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

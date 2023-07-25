@@ -78,31 +78,15 @@ const QString avg_F   = QStringLiteral("avg");
 const QString fmod_F  = QStringLiteral("fmod");
 const QString warning_F = QStringLiteral("warning");
 
-const QStringList builInFunctions
+auto BuilInFunctions() -> QStringList
 {
-    degTorad_F, radTodeg_F,
-    sin_F, cos_F, tan_F,
-    asin_F, acos_F, atan_F,
-    sinh_F, cosh_F, tanh_F,
-    asinh_F, acosh_F, atanh_F,
-    sinD_F, cosD_F, tanD_F,
-    asinD_F, acosD_F, atanD_F,
-    log2_F, log10_F, log_F,
-    ln_F,
-    exp_F,
-    sqrt_F,
-    sign_F,
-    rint_F, r2cm_F,
-    csrCm_F, csrInch_F,
-    abs_F,
-    min_F, max_F,
-    sum_F,
-    avg_F,
-    fmod_F,
-    warning_F
-};
+    return {degTorad_F, radTodeg_F, sin_F,   cos_F,   tan_F,  asin_F, acos_F, atan_F,   sinh_F,  cosh_F,
+            tanh_F,     asinh_F,    acosh_F, atanh_F, sinD_F, cosD_F, tanD_F, asinD_F,  acosD_F, atanD_F,
+            log2_F,     log10_F,    log_F,   ln_F,    exp_F,  sqrt_F, sign_F, rint_F,   r2cm_F,  csrCm_F,
+            csrInch_F,  abs_F,      min_F,   max_F,   sum_F,  avg_F,  fmod_F, warning_F};
+}
 
-const QString pl_size   = QStringLiteral("size");
+const QString pl_size = QStringLiteral("size");
 const QString pl_height = QStringLiteral("height");
 const QString pl_hip    = QStringLiteral("hip");
 const QString pl_waist  = QStringLiteral("waist");

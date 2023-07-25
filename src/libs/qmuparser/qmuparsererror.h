@@ -116,14 +116,14 @@ private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(QmuParserErrorMsg) // NOLINT
     QMap<int, QmuTranslation> m_vErrMsg;   ///< A map with the predefined error messages
-    static const self_type m_Instance;     ///< The instance pointer
 };
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
 inline auto QmuParserErrorMsg::Instance() -> const QmuParserErrorMsg &
 {
-    return m_Instance;
+    const static QmuParserErrorMsg instance;
+    return instance;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

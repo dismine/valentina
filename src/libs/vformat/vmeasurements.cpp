@@ -122,7 +122,7 @@ QT_WARNING_POP
 //---------------------------------------------------------------------------------------------------------------------
 auto FileComment() -> QString
 {
-    return QString("Measurements created with Valentina v%1 (https://smart-pattern.com.ua/).").arg(APP_VERSION_STR);
+    return QString("Measurements created with Valentina v%1 (https://smart-pattern.com.ua/).").arg(AppVersionStr());
 }
 } // namespace
 

@@ -143,7 +143,6 @@ protected:
      */
     typedef QmuParserTokenReader token_reader_type;
 
-    static const QStringList c_DefaultOprt;
     QLocale m_locale; ///< The locale used by the parser
     QChar m_decimalPoint;
     QChar m_thousandsSeparator;
@@ -328,6 +327,15 @@ inline void QmuParserBase::AddValIdent(identfun_type a_pCallback)
  */
 inline auto QmuParserBase::GetOprtDef() -> const QStringList &
 {
+    /**
+     * @brief Identifiers for built in binary operators.
+     *
+     * When defining custom binary operators with #AddOprt(...) make sure not to choose
+     * names conflicting with these definitions.
+     */
+    const static QStringList c_DefaultOprt = {"<=",       ">=",       "!=",       "==",       QChar('<'), QChar('>'),
+                                              QChar('+'), QChar('-'), QChar('*'), QChar('/'), QChar('^'), "&&",
+                                              "||",       QChar('='), QChar('('), QChar(')'), QChar('?'), QChar(':')};
     return c_DefaultOprt;
 }
 

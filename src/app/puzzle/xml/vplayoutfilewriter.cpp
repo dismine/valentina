@@ -142,7 +142,7 @@ void VPLayoutFileWriter::WriteFile(const VPLayoutPtr &layout, QIODevice *file)
 
     writeStartDocument();
     writeComment(
-        QStringLiteral("Layout created with Valentina v%1 (https://smart-pattern.com.ua/).").arg(APP_VERSION_STR));
+        QStringLiteral("Layout created with Valentina v%1 (https://smart-pattern.com.ua/).").arg(AppVersionStr()));
     WriteLayout(layout);
     writeEndDocument();
 }

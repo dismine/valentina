@@ -97,8 +97,7 @@ namespace
 //---------------------------------------------------------------------------------------------------------------------
 inline auto FileComment() -> QString
 {
-    return QStringLiteral("Recipe created with Valentina v%1 (https://smart-pattern.com.ua/).")
-            .arg(APP_VERSION_STR);
+    return QStringLiteral("Recipe created with Valentina v%1 (https://smart-pattern.com.ua/).").arg(AppVersionStr());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -150,7 +149,7 @@ auto VPatternRecipe::Prerequisite() -> QDomElement
      */
     QDomElement prerequisiteElement = createElement(QStringLiteral("prerequisite"));
 
-    prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("valentina"), APP_VERSION_STR));
+    prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("valentina"), AppVersionStr()));
     prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("unit"),
                                                           UnitsToStr(VAbstractValApplication::VApp()->patternUnits())));
     prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("author"), m_pattern->GetCompanyName()));
