@@ -284,7 +284,7 @@ void VPattern::setCurrentData()
     const quint32 id = ConstLast(localHistory).getId();
     qCDebug(vXML, "Resoring data from tool with id %u", id);
 
-    if (not tools.isEmpty())
+    if (tools.isEmpty())
     {
         qCDebug(vXML, "List of tools is empty!");
         return;
