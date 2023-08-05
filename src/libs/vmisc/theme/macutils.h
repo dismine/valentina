@@ -28,10 +28,10 @@
 #ifndef MACUTILS_H
 #define MACUTILS_H
 
-bool NativeMacDarkThemeAvailable();
-bool MacIsInDarkTheme();
-void MacSetToDarkTheme();
-void MacSetToLightTheme();
-void MacSetToAutoTheme();
+bool NSNativeMacDarkThemeAvailable();
+bool NSMacIsInDarkTheme();
+void NSMacSetToDarkTheme();
+void NSMacSetToLightTheme();
+void NSMacSetToAutoTheme();
 
 #endif // MACUTILS_H

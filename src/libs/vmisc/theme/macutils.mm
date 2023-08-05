@@ -30,20 +30,13 @@
 #import <Cocoa/Cocoa.h>
 
 //---------------------------------------------------------------------------------------------------------------------
-bool NativeMacDarkThemeAvailable()
+bool NSNativeMacDarkThemeAvailable()
 {
-    if (__builtin_available(macOS 10.14, *))
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return __builtin_available(macOS 10.14, *);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool MacIsInDarkTheme()
+bool NSMacIsInDarkTheme()
 {
     if (__builtin_available(macOS 10.14, *))
     {
@@ -55,7 +48,7 @@ bool MacIsInDarkTheme()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MacSetToDarkTheme()
+void NSMacSetToDarkTheme()
 {
     // https://stackoverflow.com/questions/55925862/how-can-i-set-my-os-x-application-theme-in-code
     if (__builtin_available(macOS 10.14, *))
@@ -65,7 +58,7 @@ void MacSetToDarkTheme()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MacSetToLightTheme()
+void NSMacSetToLightTheme()
 {
     // https://stackoverflow.com/questions/55925862/how-can-i-set-my-os-x-application-theme-in-code
     if (__builtin_available(macOS 10.14, *))
@@ -75,7 +68,7 @@ void MacSetToLightTheme()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MacSetToAutoTheme()
+void NSMacSetToAutoTheme()
 {
     if (__builtin_available(macOS 10.14, *))
     {

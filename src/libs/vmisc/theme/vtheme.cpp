@@ -168,7 +168,7 @@ auto NativeWindowsDarkThemeAvailable() -> bool
 #if defined(Q_OS_MACX)
 auto NativeMacDarkThemeAvailable() -> bool
 {
-    return NativeMacDarkThemeAvailable();
+    return NSNativeMacDarkThemeAvailable();
 }
 #endif
 
@@ -219,7 +219,7 @@ void ActivateDefaultTheme()
     qApp->setStyleSheet(QString()); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
 
 #if defined(Q_OS_MACX)
-    MacSetToAutoTheme();
+    NSMacSetToAutoTheme();
 #endif
 }
 
@@ -261,7 +261,7 @@ void VTheme::StoreDefaultThemeName(const QString &themeName)
 auto VTheme::NativeDarkThemeAvailable() -> bool
 {
 #if defined(Q_OS_MACX)
-    return NativeMacDarkThemeAvailable();
+    return NSNativeMacDarkThemeAvailable();
 #elif defined(Q_OS_WIN)
     return NativeWindowsDarkThemeAvailable();
 #elif defined(Q_OS_LINUX)
@@ -281,7 +281,7 @@ auto VTheme::IsInDarkTheme() -> bool
         return hints->colorScheme() == Qt::ColorScheme::Dark;
 #else
 #if defined(Q_OS_MACX)
-        return MacIsInDarkTheme();
+        return NSMacIsInDarkTheme();
 #elif defined(Q_OS_WIN)
         QSettings settings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
                            QSettings::NativeFormat);
@@ -344,16 +344,16 @@ void VTheme::SetIconTheme()
     static const char *GENERIC_ICON_TO_CHECK = "document-open";
     if (not QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK))
     {
-        //        // If there is no default working icon theme then we should
-        //        // use an icon theme that we provide via a .qrc file
-        //        // This case happens under Windows and Mac OS X
-        //        // This does not happen under GNOME or KDE
+        // If there is no default working icon theme then we should
+        // use an icon theme that we provide via a .qrc file
+        // This case happens under Windows and Mac OS X
+        // This does not happen under GNOME or KDE
 
-        // #if defined(Q_OS_MACX)
-        //         QIcon::setThemeName(QStringLiteral("La-Sierra-%1").arg(themePrefix));
-        // #else
+#if defined(Q_OS_MACX)
+        QIcon::setThemeName(QStringLiteral("La-Sierra-%1").arg(themePrefix));
+#else
         QIcon::setThemeName(QStringLiteral("Eleven-%1").arg(themePrefix));
-        // #endif
+#endif
     }
     else
     {
@@ -386,7 +386,7 @@ void VTheme::InitThemeMode()
             if (IsInDarkTheme())
             {
 #if defined(Q_OS_MACX)
-                MacSetToLightTheme();
+                NSMacSetToLightTheme();
 #else
                 ActivateCustomLightTheme();
 #endif
@@ -404,7 +404,7 @@ void VTheme::InitThemeMode()
             if (!IsInDarkTheme())
             {
 #if defined(Q_OS_MACX)
-                MacSetToDarkTheme();
+                NSMacSetToDarkTheme();
 #else
                 ActivateCustomDarkTheme();
 #endif
