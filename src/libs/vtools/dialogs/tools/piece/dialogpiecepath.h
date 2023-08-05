@@ -33,12 +33,13 @@
 
 namespace Ui
 {
-    class DialogPiecePath;
+class DialogPiecePath;
 }
 
 class DialogPiecePath : public DialogTool
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit DialogPiecePath(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     ~DialogPiecePath() override;
@@ -65,6 +66,7 @@ protected:
     void CheckState() final;
     void ShowVisualization() override;
     void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
     auto IsValid() const -> bool final;
 
 private slots:
@@ -203,6 +205,8 @@ private:
     void InitPassmarkAngleFormula(const VPieceNode &node);
     void InitPassmarkShapeType(const VPieceNode &node);
     void InitPassmarkAngleType(const VPieceNode &node);
+
+    void InitIcons();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

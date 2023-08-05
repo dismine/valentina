@@ -21,13 +21,11 @@
 #ifndef VPOINTFPROPERTY_H
 #define VPOINTFPROPERTY_H
 
-
 #include <QMetaObject>
 #include <QObject>
 #include <QPointF>
 #include <QString>
 #include <QVariant>
-#include <Qt>
 #include <QtGlobal>
 
 #include "../vproperty.h"
@@ -39,8 +37,9 @@ namespace VPE
 class VPROPERTYEXPLORERSHARED_EXPORT VPointFProperty : public VProperty
 {
     Q_OBJECT // NOLINT
+
 public:
-    explicit VPointFProperty(const QString& name);
+    explicit VPointFProperty(const QString &name);
 
     virtual ~VPointFProperty() override {}
 
@@ -54,7 +53,7 @@ public:
     virtual auto getPointF() const -> QPointF;
 
     //! Sets the QPointF
-    virtual void setPointF(const QPointF& point);
+    virtual void setPointF(const QPointF &point);
 
     //! Sets the QPointF
     virtual void setPointF(qreal x, qreal y);
@@ -71,7 +70,7 @@ public:
         -> VProperty * override;
 
     //! Sets the value of the property
-    virtual void setValue(const QVariant& value) override;
+    virtual void setValue(const QVariant &value) override;
 
     //! Returns the value of the property as a QVariant
     virtual auto getValue() const -> QVariant override;
@@ -80,6 +79,6 @@ private:
     Q_DISABLE_COPY_MOVE(VPointFProperty) // NOLINT
 };
 
-}
+} // namespace VPE
 
 #endif // VPOINTFPROPERTY_H

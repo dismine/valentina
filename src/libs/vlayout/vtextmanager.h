@@ -36,7 +36,6 @@
 #include <QString>
 #include <QStringList>
 #include <QVector>
-#include <Qt>
 #include <QtGlobal>
 
 #include "../vmisc/def.h"

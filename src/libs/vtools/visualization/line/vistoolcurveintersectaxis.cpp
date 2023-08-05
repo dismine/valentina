@@ -35,28 +35,25 @@
 #include <QPainterPath>
 #include <QPointF>
 #include <QSharedPointer>
-#include <Qt>
 #include <new>
 
 #include "../../tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
-#include "visline.h"
 #include "../vmisc/vmodifierkey.h"
+#include "../vpatterndb/vcontainer.h"
+#include "visline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCurveIntersectAxis::VisToolCurveIntersectAxis(const VContainer *data, QGraphicsItem *parent)
-    : VisLine(data, parent)
+  : VisLine(data, parent)
 {
-    SetMainColor(Qt::red);
-
-    m_visCurve = InitItem<VCurvePathItem>(Qt::darkGreen, this);
-    m_basePoint = InitPoint(Color(VColor::SupportColor), this);
-    m_baseLine = InitItem<VScaledLine>(Color(VColor::SupportColor), this);
-    m_axisLine = InitItem<VScaledLine>(Color(VColor::SupportColor), this); //-V656
-    m_point = InitPoint(Color(VColor::MainColor), this);
+    m_visCurve = InitItem<VCurvePathItem>(VColorRole::VisSupportColor2, this);
+    m_basePoint = InitPoint(VColorRole::VisSupportColor, this);
+    m_baseLine = InitItem<VScaledLine>(VColorRole::VisSupportColor, this);
+    m_axisLine = InitItem<VScaledLine>(VColorRole::VisSupportColor, this); //-V656
+    m_point = InitPoint(VColorRole::VisMainColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -65,8 +62,7 @@ void VisToolCurveIntersectAxis::RefreshGeometry()
     if (m_curveId > NULL_ID)
     {
         const QSharedPointer<VAbstractCurve> curve = GetData()->GeometricObject<VAbstractCurve>(m_curveId);
-        DrawPath(m_visCurve, curve->GetPath(), curve->DirectionArrows(), Color(VColor::SupportColor), Qt::SolidLine,
-                 Qt::RoundCap);
+        DrawPath(m_visCurve, curve->GetPath(), curve->DirectionArrows(), Qt::SolidLine, Qt::RoundCap);
 
         if (m_axisPointId > NULL_ID)
         {
@@ -80,15 +76,15 @@ void VisToolCurveIntersectAxis::RefreshGeometry()
             {
                 axis = Axis(static_cast<QPointF>(*first), m_angle);
             }
-            DrawPoint(m_basePoint, static_cast<QPointF>(*first), Color(VColor::MainColor));
-            DrawLine(m_axisLine, axis, Color(VColor::SupportColor), Qt::DashLine);
+            DrawPoint(m_basePoint, static_cast<QPointF>(*first));
+            DrawLine(m_axisLine, axis, Qt::DashLine);
 
             QPointF p;
             VToolCurveIntersectAxis::FindPoint(static_cast<QPointF>(*first), axis.angle(), curve->GetPoints(), &p);
             QLineF axis_line(static_cast<QPointF>(*first), p);
-            DrawLine(this, axis_line, Color(VColor::MainColor), LineStyle());
+            DrawLine(this, axis_line, LineStyle());
 
-            DrawPoint(m_point, p, Color(VColor::MainColor));
+            DrawPoint(m_point, p);
 
             SetToolTip(tr("<b>Intersection curve and axis</b>: angle = %1°; <b>%2</b> - "
                           "sticking angle, <b>%3</b> - finish creation")

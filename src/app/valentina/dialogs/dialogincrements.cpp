@@ -34,6 +34,7 @@
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../qmuparser/qmudef.h"
 #include "../qmuparser/qmutokenparser.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/variables/varcradius.h"
 #include "../vpatterndb/variables/vcurveangle.h"
@@ -87,6 +88,8 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
 #if defined(Q_OS_MAC)
     setWindowFlags(Qt::Window);
 #endif
+
+    InitIcons();
 
     ui->lineEditName->setClearButtonEnabled(true);
     ui->lineEditNamePC->setClearButtonEnabled(true);
@@ -1255,6 +1258,16 @@ void DialogIncrements::InitIncrementUnits(QComboBox *combo)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::InitIcons()
+{
+    const QString resource = QStringLiteral("icon");
+    const QString fxIcon = QStringLiteral("24x24/fx.png");
+
+    ui->toolButtonExpr->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprPC->setIcon(VTheme::GetIconResource(resource, fxIcon));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FullUpdateFromFile update information in tables form file
  */
@@ -1941,6 +1954,12 @@ void DialogIncrements::changeEvent(QEvent *event)
 
         FullUpdateFromFile();
     }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        InitIcons();
+    }
+
     // remember to call base class implementation
     QWidget::changeEvent(event);
 }

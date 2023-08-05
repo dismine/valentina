@@ -275,7 +275,7 @@
              </size>
             </property>
             <property name="text">
-             <string notr="true">...</string>
+             <string notr="true"></string>
             </property>
             <property name="icon">
              <iconset resource="../../../libs/vmisc/share/resources/icon.qrc">
@@ -482,7 +482,7 @@
           <item>
            <widget class="QToolButton" name="toolButtonPortrait">
             <property name="text">
-             <string notr="true">...</string>
+             <string notr="true"></string>
             </property>
             <property name="icon">
              <iconset resource="../../../libs/vmisc/share/resources/icon.qrc">
@@ -502,7 +502,7 @@
           <item>
            <widget class="QToolButton" name="toolButtonLandscape">
             <property name="text">
-             <string notr="true">...</string>
+             <string notr="true"></string>
             </property>
             <property name="icon">
              <iconset resource="../../../libs/vmisc/share/resources/icon.qrc">

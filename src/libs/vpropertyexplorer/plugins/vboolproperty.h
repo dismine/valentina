@@ -25,7 +25,6 @@
 #include <QObject>
 #include <QString>
 #include <QVariant>
-#include <Qt>
 #include <QtGlobal>
 #include <stddef.h>
 

@@ -306,7 +306,7 @@
           <item>
            <widget class="QToolButton" name="toolButtonBottom">
             <property name="text">
-             <string notr="true">...</string>
+             <string notr="true"></string>
             </property>
             <property name="icon">
              <iconset theme="go-bottom"/>
@@ -322,7 +322,7 @@
           <item>
            <widget class="QToolButton" name="toolButtonDown">
             <property name="text">
-             <string notr="true">...</string>
+             <string notr="true"></string>
             </property>
             <property name="icon">
              <iconset theme="go-down"/>
@@ -338,7 +338,7 @@
           <item>
            <widget class="QToolButton" name="toolButtonUp">
             <property name="text">
-             <string notr="true">...</string>
+             <string notr="true"></string>
             </property>
             <property name="icon">
              <iconset theme="go-up"/>
@@ -354,7 +354,7 @@
           <item>
            <widget class="QToolButton" name="toolButtonTop">
             <property name="text">
-             <string notr="true">...</string>
+             <string notr="true"></string>
             </property>
             <property name="icon">
              <iconset theme="go-top"/>

@@ -1,0 +1,48 @@
+{
+  "ToolStyle": {
+    "PatternColor": [120, 160, 200],
+    "DisabledColor": "#dedede",
+    "ColorAdjustments": {
+      "black": [120, 160, 200]
+    },
+    "PointColor": [120, 160, 200],
+    "LabelColor": "#f8f8f8",
+    "LabelHoverColor": "lightGreen",
+    "LabelLineColor": [120, 160, 200, 125],
+    "AccuracyRadiusColor": "yellow",
+    "ControlLineColor": [120, 160, 200, 125],
+    "ControlPointColor": "red",
+    "VisMainColor": "red",
+    "VisSupportColor": "magenta",
+    "VisSupportColor2": "darkGreen",
+    "VisSupportColor3": "darkBlue",
+    "VisSupportColor4": "darkRed",
+    "BasePointColor": "red"
+  },
+  "PatternPieceStyle": {
+    "PieceColor": [120, 160, 200],
+    "PointColor": [120, 160, 200],
+    "NodeLabelColor": "#f8f8f8",
+    "NodeLabelHoverColor": "lightGreen",
+    "NodeLabelLineColor": [120, 160, 200, 125],
+    "LabelBackgroundColor": [255, 255, 180, 200],
+    "LabelTextColor": "black",
+    "LabelModeColor": "white"
+  },
+  "ManualLayoutStyle": {
+    "SheetBorderColor": "#808080",
+    "SheetMarginColor": [0, 179, 255],
+    "SheetGridColor": [204, 204, 204],
+    "SheetTileGridColor": [255, 0, 0, 127],
+    "SheetTileNumberColor": "lightBlue",
+    "PieceOkColor": [120, 160, 200],
+    "PieceErrorColor": [255, 150, 150],
+    "PieceHoverColor": [199, 244, 249, 60],
+    "PieceHandleColor": "lightBlue",
+    "PieceHandleHoverColor": "lightGreen",
+    "CarrouselPieceColor": [120, 160, 200],
+    "CarrouselPieceSelectedColor": [255, 160, 160, 60],
+    "CarrouselPieceBackgroundColor": [32, 32, 32],
+    "CarrouselPieceForegroundColor": [0, 0, 80]
+  }
+}

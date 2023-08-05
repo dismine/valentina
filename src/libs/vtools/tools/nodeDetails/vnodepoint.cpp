@@ -40,25 +40,26 @@
 #include <QPoint>
 #include <QRectF>
 #include <QSharedPointer>
-#include <Qt>
 #include <new>
 
 #include "../../../vgeometry/vpointf.h"
 #include "../../../vwidgets/vgraphicssimpletextitem.h"
-#include "../ifc/xml/vdomdocument.h"
+#include "../../undocommands/label/movelabel.h"
+#include "../../undocommands/label/showlabel.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../vabstracttool.h"
+#include "../vdatatool.h"
+#include "../vmisc/theme/themeDef.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpiecenode.h"
+#include "../vtoolseamallowance.h"
+#include "../vwidgets/global.h"
+#include "../vwidgets/scalesceneitems.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
-#include "../vwidgets/global.h"
-#include "../vabstracttool.h"
-#include "../vdatatool.h"
 #include "vabstractnode.h"
-#include "../../undocommands/label/movelabel.h"
-#include "../../undocommands/label/showlabel.h"
-#include "../vtoolseamallowance.h"
 
 const QString VNodePoint::ToolType = QStringLiteral("modeling");
 
@@ -102,7 +103,7 @@ enum class ContextMenuOption : int
     TurnPoint,
     LAST_ONE_DO_NOT_USE
 };
-}
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -111,18 +112,18 @@ enum class ContextMenuOption : int
  * @param parent parent object.
  */
 VNodePoint::VNodePoint(const VAbstractNodeInitData &initData, QObject *qoParent, QGraphicsItem *parent)
-    : VAbstractNode(initData.doc, initData.data, initData.id, initData.idObject, initData.drawName, initData.idTool,
-                    qoParent),
-      VScenePoint(parent)
+  : VAbstractNode(initData.doc, initData.data, initData.id, initData.idObject, initData.drawName, initData.idTool,
+                  qoParent),
+    VScenePoint(VColorRole::PiecePointColor, parent)
 {
+    m_namePoint->SetTextColor(VColorRole::PieceNodeLabelColor);
+    m_namePoint->SetTextHoverColor(VColorRole::PieceNodeLabelHoverColor);
     m_namePoint->SetShowParentTooltip(false);
     connect(m_namePoint, &VGraphicsSimpleTextItem::PointChoosed, this, &VNodePoint::PointChoosed);
     connect(m_namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VNodePoint::NameChangePosition);
-    connect(m_namePoint, &VGraphicsSimpleTextItem::ShowContextMenu,
-            this, [this](QGraphicsSceneContextMenuEvent *event)
-    {
-        contextMenuEvent(event);
-    });
+    connect(m_namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this,
+            [this](QGraphicsSceneContextMenuEvent *event) { contextMenuEvent(event); });
+    m_lineName->SetColorRole(VColorRole::PieceNodeLabelLineColor);
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(initData.id));
     ToolCreation(initData.typeCreation);
     setCursor(Qt::ArrowCursor);
@@ -138,8 +139,8 @@ void VNodePoint::Create(const VAbstractNodeInitData &initData)
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::NodePoint, initData.doc);
-        //TODO Need create garbage collector and remove all nodes, what we don't use.
-        //Better check garbage before each saving file. Check only modeling tags.
+        // TODO Need create garbage collector and remove all nodes, what we don't use.
+        // Better check garbage before each saving file. Check only modeling tags.
         auto *point = new VNodePoint(initData);
 
         connect(initData.scene, &VMainGraphicsScene::EnableToolMove, point, &VNodePoint::EnableToolMove);
@@ -150,16 +151,16 @@ void VNodePoint::Create(const VAbstractNodeInitData &initData)
         VAbstractPattern::AddTool(initData.id, point);
         if (initData.idTool != NULL_ID)
         {
-            //Some nodes we don't show on scene. Tool that create this nodes must free memory.
+            // Some nodes we don't show on scene. Tool that create this nodes must free memory.
             VDataTool *tool = VAbstractPattern::getTool(initData.idTool);
             SCASSERT(tool != nullptr)
-            point->setParent(tool);// Adopted by a tool
+            point->setParent(tool); // Adopted by a tool
         }
         else
         {
             // Try to prevent memory leak
-            initData.scene->addItem(point);// First adopted by scene
-            point->hide();// If no one will use node, it will stay hidden
+            initData.scene->addItem(point); // First adopted by scene
+            point->hide();                  // If no one will use node, it will stay hidden
             point->SetParentType(ParentType::Scene);
         }
     }
@@ -259,12 +260,12 @@ void VNodePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
     VScenePoint::mousePressEvent(event);
 
     // Somehow clicking on notselectable object do not clean previous selections.
-    if (not (flags() & ItemIsSelectable) && scene())
+    if (not(flags() & ItemIsSelectable) && scene())
     {
         scene()->clearSelection();
     }
 
-    event->accept();// Special for not selectable item first need to call standard mousePressEvent then accept event
+    event->accept(); // Special for not selectable item first need to call standard mousePressEvent then accept event
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -452,8 +453,8 @@ void VNodePoint::InitPassmarkAngleTypeMenu(QMenu *menu, vidtype pieceId, QHash<i
         passmarkAngleMenu->setVisible(false);
     }
 
-    auto InitPassmarkAngleAction = [passmarkAngleMenu, passmarkAngleCurType](const QString &name,
-            PassmarkAngleType checkType)
+    auto InitPassmarkAngleAction =
+        [passmarkAngleMenu, passmarkAngleCurType](const QString &name, PassmarkAngleType checkType)
     {
         QAction *action = passmarkAngleMenu->addAction(name);
         action->setCheckable(true);
@@ -468,20 +469,20 @@ void VNodePoint::InitPassmarkAngleTypeMenu(QMenu *menu, vidtype pieceId, QHash<i
                        InitPassmarkAngleAction(tr("Bisector"), PassmarkAngleType::Bisector));
     contextMenu.insert(static_cast<int>(ContextMenuOption::Intersection),
                        InitPassmarkAngleAction(tr("Intersection"), PassmarkAngleType::Intersection));
-    contextMenu.insert(static_cast<int>(ContextMenuOption::IntersectionOnlyLeft),
-                       InitPassmarkAngleAction(tr("Intersection (only left)"),
-                                               PassmarkAngleType::IntersectionOnlyLeft));
-    contextMenu.insert(static_cast<int>(ContextMenuOption::IntersectionOnlyRight),
-                       InitPassmarkAngleAction(tr("Intersection (only right)"),
-                                               PassmarkAngleType::IntersectionOnlyRight));
+    contextMenu.insert(
+        static_cast<int>(ContextMenuOption::IntersectionOnlyLeft),
+        InitPassmarkAngleAction(tr("Intersection (only left)"), PassmarkAngleType::IntersectionOnlyLeft));
+    contextMenu.insert(
+        static_cast<int>(ContextMenuOption::IntersectionOnlyRight),
+        InitPassmarkAngleAction(tr("Intersection (only right)"), PassmarkAngleType::IntersectionOnlyRight));
     contextMenu.insert(static_cast<int>(ContextMenuOption::Intersection2),
                        InitPassmarkAngleAction(tr("Intersection 2"), PassmarkAngleType::Intersection2));
-    contextMenu.insert(static_cast<int>(ContextMenuOption::Intersection2OnlyLeft),
-                       InitPassmarkAngleAction(tr("Intersection 2 (only left)"),
-                                               PassmarkAngleType::Intersection2OnlyLeft));
-    contextMenu.insert(static_cast<int>(ContextMenuOption::Intersection2OnlyRight),
-                       InitPassmarkAngleAction(tr("Intersection 2 (only right)"),
-                                               PassmarkAngleType::Intersection2OnlyRight));
+    contextMenu.insert(
+        static_cast<int>(ContextMenuOption::Intersection2OnlyLeft),
+        InitPassmarkAngleAction(tr("Intersection 2 (only left)"), PassmarkAngleType::Intersection2OnlyLeft));
+    contextMenu.insert(
+        static_cast<int>(ContextMenuOption::Intersection2OnlyRight),
+        InitPassmarkAngleAction(tr("Intersection 2 (only right)"), PassmarkAngleType::Intersection2OnlyRight));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -504,8 +505,8 @@ void VNodePoint::InitPassmarkLineTypeMenu(QMenu *menu, vidtype pieceId, QHash<in
         passmarkLineTypeMenu->setVisible(false);
     }
 
-    auto InitPassmarkLineTypeAction = [passmarkLineTypeMenu, passmarkLineCurType](const QString &name,
-            PassmarkLineType checkType)
+    auto InitPassmarkLineTypeAction =
+        [passmarkLineTypeMenu, passmarkLineCurType](const QString &name, PassmarkLineType checkType)
     {
         QAction *action = passmarkLineTypeMenu->addAction(name);
         action->setCheckable(true);
@@ -590,14 +591,14 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
         QAction *selectedAction = menu.exec(event->screenPos());
         ContextMenuOption selectedOption = static_cast<ContextMenuOption>(
-                    contextMenu.key(selectedAction, static_cast<int>(ContextMenuOption::NoSelection)));
+            contextMenu.key(selectedAction, static_cast<int>(ContextMenuOption::NoSelection)));
 
         Q_STATIC_ASSERT_X(static_cast<int>(ContextMenuOption::LAST_ONE_DO_NOT_USE) == 34,
                           "Not all options were handled.");
 
         QT_WARNING_PUSH
         QT_WARNING_DISABLE_GCC("-Wswitch-default")
-        switch(selectedOption)
+        switch (selectedOption)
         {
             case ContextMenuOption::LAST_ONE_DO_NOT_USE:
                 Q_UNREACHABLE();
@@ -624,15 +625,15 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
                 {
                     emit Delete();
                 }
-                catch(const VExceptionToolWasDeleted &e)
+                catch (const VExceptionToolWasDeleted &e)
                 {
                     Q_UNUSED(e);
-                    return;//Leave this method immediately!!!
+                    return; // Leave this method immediately!!!
                 }
-                return;//Leave this method immediately after call!!!
+                return; // Leave this method immediately after call!!!
             case ContextMenuOption::ShowLabel:
                 VAbstractApplication::VApp()->getUndoStack()->push(
-                            new ShowLabel(doc, m_id, selectedAction->isChecked()));
+                    new ShowLabel(doc, m_id, selectedAction->isChecked()));
                 break;
             case ContextMenuOption::Exclude:
                 emit ToggleExcludeState(m_id);

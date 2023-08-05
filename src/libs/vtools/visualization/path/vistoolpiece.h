@@ -32,13 +32,14 @@
 #include <QtCore/QObject>
 #include <QtGlobal>
 
-#include "vispath.h"
-#include "../vpatterndb/vpiece.h"
 #include "../vgeometry/vpointf.h"
+#include "../vpatterndb/vpiece.h"
+#include "vispath.h"
 
 class VisToolPiece : public VisPath
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit VisToolPiece(const VContainer *data, QGraphicsItem *parent = nullptr);
     ~VisToolPiece() override = default;
@@ -48,8 +49,12 @@ public:
 
     void SetPiece(const VPiece &piece);
 
-    auto type() const -> int override {return Type;}
-    enum {Type = UserType + static_cast<int>(Vis::ToolPiece)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::ToolPiece)
+    };
+
 private:
     Q_DISABLE_COPY_MOVE(VisToolPiece) // NOLINT
     QVector<VScaledEllipse *> m_points{};
@@ -64,8 +69,8 @@ private:
     QVector<QPointF> m_cachedMainPathPoints{};
     QVector<QPainterPath> m_cachedCurvesPath{};
 
-    auto GetPoint(quint32 i, const QColor &color) -> VScaledEllipse *;
-    auto GetCurve(quint32 i, const QColor &color) -> VCurvePathItem *;
+    auto GetPoint(quint32 i, VColorRole role) -> VScaledEllipse *;
+    auto GetCurve(quint32 i, VColorRole role) -> VCurvePathItem *;
 
     void HideAllItems();
 };

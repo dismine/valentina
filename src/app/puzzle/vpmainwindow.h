@@ -28,24 +28,24 @@
 #ifndef VPMAINWINDOW_H
 #define VPMAINWINDOW_H
 
+#include <QDoubleSpinBox>
 #include <QMainWindow>
 #include <QMessageBox>
-#include <QDoubleSpinBox>
 #include <QPointer>
 
-#include "../vmisc/def.h"
-#include "carousel/vpcarrousel.h"
-#include "scene/vpmaingraphicsview.h"
-#include "layout/vplayout.h"
-#include "../vlayout/vlayoutpiece.h"
-#include "vpcommandline.h"
-#include "../vwidgets/vabstractmainwindow.h"
-#include "../vmisc/vlockguard.h"
 #include "../vlayout/dialogs/vabstractlayoutdialog.h"
+#include "../vlayout/vlayoutpiece.h"
+#include "../vmisc/def.h"
+#include "../vmisc/vlockguard.h"
+#include "../vwidgets/vabstractmainwindow.h"
+#include "carousel/vpcarrousel.h"
+#include "layout/vplayout.h"
+#include "scene/vpmaingraphicsview.h"
+#include "vpcommandline.h"
 
 namespace Ui
 {
-    class VPMainWindow;
+class VPMainWindow;
 }
 
 class QFileSystemWatcher;
@@ -70,7 +70,7 @@ public:
      * @param path path to layout
      * @return true if success
      */
-    auto LoadFile(const QString& path) -> bool;
+    auto LoadFile(const QString &path) -> bool;
 
     void LayoutWasSaved(bool saved);
     void SetCurrentFile(const QString &fileName);
@@ -106,7 +106,7 @@ public slots:
 
 protected:
     void closeEvent(QCloseEvent *event) override;
-    void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent *event) override;
     auto RecentFileList() const -> QStringList override;
 
 private slots:
@@ -122,14 +122,14 @@ private slots:
      * triggered.
      * The slot is automatically connected through name convention.
      */
-    bool on_actionSave_triggered(); //NOLINT(modernize-use-trailing-return-type)
+    bool on_actionSave_triggered(); // NOLINT(modernize-use-trailing-return-type)
 
     /**
      * @brief on_actionSaveAs_triggered When the menu action File > Save As
      * is triggered.
      * The slot is automatically connected through name convention.
      */
-    bool on_actionSaveAs_triggered(); //NOLINT(modernize-use-trailing-return-type)
+    bool on_actionSaveAs_triggered(); // NOLINT(modernize-use-trailing-return-type)
 
     /**
      * @brief on_actionImportRawLayout_triggered When the menu action
@@ -284,8 +284,8 @@ private slots:
 
 #if defined(Q_OS_MAC)
     void AboutToShowDockMenu();
-#endif //defined(Q_OS_MAC)
-    
+#endif // defined(Q_OS_MAC)
+
     void AskDefaultSettings();
 
     void HorizontalScaleChanged(double value);
@@ -315,9 +315,9 @@ private:
     /**
      * @brief mouseCoordinate pointer to label who show mouse coordinate.
      */
-    QLabel* m_mouseCoordinate{nullptr};
+    QLabel *m_mouseCoordinate{nullptr};
 
-    QLabel* m_statusLabel{nullptr};
+    QLabel *m_statusLabel{nullptr};
 
     QString curFile{};
 
@@ -342,9 +342,9 @@ private:
     struct VPLayoutPrinterPage
     {
         VPSheetPtr sheet{};
-        bool       tilesScheme{false};
-        int        tileRow{-1};
-        int        tileCol{-1};
+        bool tilesScheme{false};
+        int tileRow{-1};
+        int tileCol{-1};
     };
 
     /**
@@ -425,9 +425,9 @@ private:
     void SetPropertyTabTilesData();
 
     /**
-    * @brief SetPropertyTabLayoutData Sets the values of UI elements
-    * in the Layout Tab to the values saved in m_layout
-    */
+     * @brief SetPropertyTabLayoutData Sets the values of UI elements
+     * in the Layout Tab to the values saved in m_layout
+     */
     void SetPropertyTabLayoutData();
 
     void ReadSettings();
@@ -473,7 +473,7 @@ private:
 
     void ExportData(const VPExportData &data);
     static void ExportApparelLayout(const VPExportData &data, const QVector<VLayoutPiece> &details, const QString &name,
-                             const QSize &size) ;
+                                    const QSize &size);
     void ExportFlatLayout(const VPExportData &data);
     void ExportScene(const VPExportData &data);
     static void ExportUnifiedPdfFile(const VPExportData &data);
@@ -494,7 +494,7 @@ private:
     auto CheckSuperpositionOfPieces(const VPPiecePtr &piece, bool &pieceSuperpositionChecked) -> bool;
 
     void PrintLayoutSheets(QPrinter *printer, const QList<VPSheetPtr> &sheets);
-    static auto PrintLayoutSheetPage(QPrinter *printer, QPainter &painter, const VPSheetPtr& sheet) -> bool;
+    static auto PrintLayoutSheetPage(QPrinter *printer, QPainter &painter, const VPSheetPtr &sheet) -> bool;
     void PrintLayoutTiledSheets(QPrinter *printer, const QList<VPSheetPtr> &sheets);
     auto PrepareLayoutTilePages(const QList<VPSheetPtr> &sheets) -> QVector<VPLayoutPrinterPage>;
     auto PrintLayoutTiledSheetPage(QPrinter *printer, QPainter &painter, const VPLayoutPrinterPage &page,
@@ -509,6 +509,8 @@ private:
     void TranslatePieceRelatively(const VPPiecePtr &piece, const QRectF &rect, vsizetype selectedPiecesCount, qreal dx,
                                   qreal dy);
     void RotatePieces();
+
+    void InitIcons();
 };
 
 #endif // VPMAINWINDOW_H

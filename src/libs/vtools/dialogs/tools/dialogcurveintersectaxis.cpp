@@ -40,42 +40,45 @@
 #include <QToolButton>
 #include <new>
 
-#include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vcontainer.h"
-#include "../vpatterndb/vtranslatevars.h"
-#include "../vwidgets/vmaingraphicsscene.h"
-#include "../vwidgets/vabstractmainwindow.h"
 #include "../../visualization/line/vistoolcurveintersectaxis.h"
 #include "../../visualization/visualization.h"
+#include "../dialogtoolbox.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../qmuparser/qmudef.h"
 #include "../support/dialogeditwrongformula.h"
+#include "../vgeometry/vpointf.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
-#include "../qmuparser/qmudef.h"
-#include "../dialogtoolbox.h"
-#include "ui_dialogcurveintersectaxis.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/global.h"
+#include "../vwidgets/vabstractmainwindow.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "ui_dialogcurveintersectaxis.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogCurveIntersectAxis),
-      formulaAngle(),
-      formulaBaseHeightAngle(0),
-      pointName(),
-      m_firstRelease(false),
-      timerFormula(new QTimer(this)),
-      flagFormula(false),
-      flagName(true)
+  : DialogTool(data, toolId, parent),
+    ui(new Ui::DialogCurveIntersectAxis),
+    formulaAngle(),
+    formulaBaseHeightAngle(0),
+    pointName(),
+    m_firstRelease(false),
+    timerFormula(new QTimer(this)),
+    flagFormula(false),
+    flagName(true)
 {
     ui->setupUi(this);
+
+    InitIcons();
 
     timerFormula->setSingleShot(true);
 
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
     ui->lineEditNamePoint->setText(
-                VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
+        VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     formulaBaseHeightAngle = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
 
@@ -83,19 +86,19 @@ DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, quint
 
     FillComboBoxPoints(ui->comboBoxAxisPoint);
     FillComboBoxCurves(ui->comboBoxCurve);
-    FillComboBoxTypeLine(ui->comboBoxLineType, LineStylesPics());
+    FillComboBoxTypeLine(ui->comboBoxLineType, LineStylesPics(ui->comboBoxLineType->palette().color(QPalette::Base),
+                                                              ui->comboBoxLineType->palette().color(QPalette::Text)));
     FillComboBoxLineColors(ui->comboBoxLineColor);
 
     connect(ui->toolButtonExprAngle, &QPushButton::clicked, this, &DialogCurveIntersectAxis::FXAngle);
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
-    {
-        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
-        CheckState();
-    });
-    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        timerFormula->start(formulaTimerTimeout);
-    });
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
+            [this]()
+            {
+                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+                CheckState();
+            });
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this,
+            [this]() { timerFormula->start(formulaTimerTimeout); });
     connect(ui->pushButtonGrowLengthAngle, &QPushButton::clicked, this, &DialogCurveIntersectAxis::DeployAngleTextEdit);
     connect(timerFormula, &QTimer::timeout, this, &DialogCurveIntersectAxis::EvalAngle);
     connect(ui->lineEditAlias1, &QLineEdit::textEdited, this, &DialogCurveIntersectAxis::ValidateAlias);
@@ -148,8 +151,8 @@ auto DialogCurveIntersectAxis::GetAngle() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCurveIntersectAxis::SetAngle(const QString &value)
 {
-    formulaAngle = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    formulaAngle = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed. TODO : see if I can get the max number of caracters in one line
     // of this PlainTextEdit to change 80 to this value
     if (formulaAngle.length() > 80)
@@ -230,8 +233,8 @@ void DialogCurveIntersectAxis::ShowDialog(bool click)
             const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(GetBasePointId());
             QLineF line = QLineF(static_cast<QPointF>(*point), scene->getScenePos());
 
-            //Radius of point circle, but little bigger. Need handle with hover sizes.
-            if (line.length() <= ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene()))*1.5)
+            // Radius of point circle, but little bigger. Need handle with hover sizes.
+            if (line.length() <= ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene())) * 1.5)
             {
                 return;
             }
@@ -239,17 +242,17 @@ void DialogCurveIntersectAxis::ShowDialog(bool click)
 
         auto *line = qobject_cast<VisToolCurveIntersectAxis *>(vis);
         SCASSERT(line != nullptr)
-        SetAngle(line->Angle());//Show in dialog angle what user choose
+        SetAngle(line->Angle()); // Show in dialog angle what user choose
 
         emit ToolTip(QString());
-        DialogAccepted();// Just set default values and don't show dialog
+        DialogAccepted(); // Just set default values and don't show dialog
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCurveIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare == false)// After first choose we ignore all objects
+    if (prepare == false) // After first choose we ignore all objects
     {
         auto *line = qobject_cast<VisToolCurveIntersectAxis *>(vis);
         SCASSERT(line != nullptr)
@@ -257,20 +260,17 @@ void DialogCurveIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
         switch (number)
         {
             case (0):
-                if (type == SceneObject::Spline
-                        || type == SceneObject::Arc
-                        || type == SceneObject::ElArc
-                        || type == SceneObject::SplinePath)
+                if (type == SceneObject::Spline || type == SceneObject::Arc || type == SceneObject::ElArc ||
+                    type == SceneObject::SplinePath)
                 {
                     if (SetObject(id, ui->comboBoxCurve, tr("Select axis point")))
                     {
                         number++;
                         line->VisualMode(id);
                         VAbstractMainWindow *window =
-                                qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+                            qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
                         SCASSERT(window != nullptr)
                         connect(line, &VisToolCurveIntersectAxis::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
-
                     }
                 }
                 break;
@@ -363,6 +363,24 @@ void DialogCurveIntersectAxis::closeEvent(QCloseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogCurveIntersectAxis::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        InitIcons();
+        InitDialogButtonBoxIcons(ui->buttonBox);
+    }
+
+    // remember to call base class implementation
+    DialogTool::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogCurveIntersectAxis::ValidateAlias()
 {
     QRegularExpression rx(NameRegExp());
@@ -370,11 +388,9 @@ void DialogCurveIntersectAxis::ValidateAlias()
     const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(getCurveId());
     QPair<QString, QString> alias = SegmentAliases(curve->getType(), GetAliasSuffix1(), GetAliasSuffix2());
 
-
     if (not GetAliasSuffix1().isEmpty() &&
         (not rx.match(alias.first).hasMatch() ||
-         (originAliasSuffix1 != GetAliasSuffix1() && not data->IsUnique(alias.first)) ||
-         alias.first == alias.second))
+         (originAliasSuffix1 != GetAliasSuffix1() && not data->IsUnique(alias.first)) || alias.first == alias.second))
     {
         flagAlias1 = false;
         ChangeColor(ui->labelAlias1, errorColor);
@@ -387,8 +403,7 @@ void DialogCurveIntersectAxis::ValidateAlias()
 
     if (not GetAliasSuffix2().isEmpty() &&
         (not rx.match(alias.second).hasMatch() ||
-         (originAliasSuffix2 != GetAliasSuffix2() && not data->IsUnique(alias.second)) ||
-         alias.first == alias.second))
+         (originAliasSuffix2 != GetAliasSuffix2() && not data->IsUnique(alias.second)) || alias.first == alias.second))
     {
         flagAlias2 = false;
         ChangeColor(ui->labelAlias2, errorColor);
@@ -400,6 +415,15 @@ void DialogCurveIntersectAxis::ValidateAlias()
     }
 
     CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCurveIntersectAxis::InitIcons()
+{
+    QString resource = QStringLiteral("icon");
+
+    ui->toolButtonExprAngle->setIcon(VTheme::GetIconResource(resource, QStringLiteral("24x24/fx.png")));
+    ui->label_3->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/equal.png")));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

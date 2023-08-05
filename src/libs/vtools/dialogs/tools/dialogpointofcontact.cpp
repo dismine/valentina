@@ -40,17 +40,18 @@
 #include <QTimer>
 #include <QToolButton>
 
-#include "../vpatterndb/vtranslatevars.h"
-#include "../vpatterndb/vcontainer.h"
-#include "../../visualization/visualization.h"
 #include "../../visualization/line/vistoolpointofcontact.h"
+#include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../support/dialogeditwrongformula.h"
+#include "../vgeometry/vpointf.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
-#include "ui_dialogpointofcontact.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vabstractmainwindow.h"
-#include "../vgeometry/vpointf.h"
+#include "ui_dialogpointofcontact.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -59,11 +60,13 @@
  * @param parent parent widget
  */
 DialogPointOfContact::DialogPointOfContact(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogPointOfContact),
-      m_timerFormula(new QTimer(this))
+  : DialogTool(data, toolId, parent),
+    ui(new Ui::DialogPointOfContact),
+    m_timerFormula(new QTimer(this))
 {
     ui->setupUi(this);
+
+    InitIcons();
 
     m_timerFormula->setSingleShot(true);
     connect(m_timerFormula, &QTimer::timeout, this, &DialogPointOfContact::EvalFormula);
@@ -71,7 +74,7 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, quint32 toolI
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
     ui->lineEditNamePoint->setText(
-                VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
+        VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     this->m_formulaBaseHeight = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
 
@@ -82,22 +85,19 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, quint32 toolI
     FillComboBoxPoints(ui->comboBoxCenter);
 
     connect(ui->toolButtonExprRadius, &QPushButton::clicked, this, &DialogPointOfContact::FXRadius);
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
-    {
-        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, m_pointName, this->data, m_flagName);
-        CheckState();
-    });
-    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        m_timerFormula->start(formulaTimerTimeout);
-    });
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
+            [this]()
+            {
+                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, m_pointName, this->data,
+                                m_flagName);
+                CheckState();
+            });
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerFormula->start(formulaTimerTimeout); });
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogPointOfContact::DeployFormulaTextEdit);
-    connect(ui->comboBoxFirstPoint, &QComboBox::currentTextChanged,
-            this, &DialogPointOfContact::PointNameChanged);
-    connect(ui->comboBoxSecondPoint, &QComboBox::currentTextChanged,
-            this, &DialogPointOfContact::PointNameChanged);
-    connect(ui->comboBoxCenter, &QComboBox::currentTextChanged,
-            this, &DialogPointOfContact::PointNameChanged);
+    connect(ui->comboBoxFirstPoint, &QComboBox::currentTextChanged, this, &DialogPointOfContact::PointNameChanged);
+    connect(ui->comboBoxSecondPoint, &QComboBox::currentTextChanged, this, &DialogPointOfContact::PointNameChanged);
+    connect(ui->comboBoxCenter, &QComboBox::currentTextChanged, this, &DialogPointOfContact::PointNameChanged);
 
     vis = new VisToolPointOfContact(data);
 
@@ -220,7 +220,7 @@ void DialogPointOfContact::ShowDialog(bool click)
  */
 void DialogPointOfContact::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare)// After first choose we ignore all objects
+    if (prepare) // After first choose we ignore all objects
     {
         return;
     }
@@ -264,8 +264,8 @@ void DialogPointOfContact::ChosenObject(quint32 id, const SceneObject &type)
             {
                 if (SetObject(id, ui->comboBoxCenter, QString()))
                 {
-                    auto *window = qobject_cast<VAbstractMainWindow *>(
-                        VAbstractValApplication::VApp()->getMainWindow());
+                    auto *window =
+                        qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
                     SCASSERT(window != nullptr)
                     connect(line, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
 
@@ -280,7 +280,7 @@ void DialogPointOfContact::ChosenObject(quint32 id, const SceneObject &type)
                 }
             }
         }
-            break;
+        break;
         default:
             break;
     }
@@ -310,6 +310,24 @@ void DialogPointOfContact::closeEvent(QCloseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfContact::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        InitIcons();
+        InitDialogButtonBoxIcons(ui->buttonBox);
+    }
+
+    // remember to call base class implementation
+    DialogTool::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfContact::FinishCreating()
 {
     vis->SetMode(Mode::Show);
@@ -319,6 +337,15 @@ void DialogPointOfContact::FinishCreating()
 
     setModal(true);
     show();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfContact::InitIcons()
+{
+    const QString resource = QStringLiteral("icon");
+
+    ui->toolButtonExprRadius->setIcon(VTheme::GetIconResource(resource, QStringLiteral("24x24/fx.png")));
+    ui->label->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/equal.png")));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -370,8 +397,8 @@ void DialogPointOfContact::SetCenter(quint32 value)
  */
 void DialogPointOfContact::SetRadius(const QString &value)
 {
-    m_radius = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    m_radius = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (m_radius.length() > 80)
     {

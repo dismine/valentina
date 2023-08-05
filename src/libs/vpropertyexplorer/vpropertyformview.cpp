@@ -21,27 +21,26 @@
 #include "vpropertyformview.h"
 
 #include <QList>
-#include <Qt>
 
 #include "vpropertyformview_p.h"
 #include "vpropertyformwidget_p.h"
 #include "vpropertymodel.h"
 #include "vpropertyset.h"
 
-VPE::VPropertyFormView::VPropertyFormView(QWidget* parent)
-    : VPropertyFormWidget(new VPropertyFormViewPrivate(), parent)
+VPE::VPropertyFormView::VPropertyFormView(QWidget *parent)
+  : VPropertyFormWidget(new VPropertyFormViewPrivate(), parent)
 {
     //
 }
 
-VPE::VPropertyFormView::VPropertyFormView(VPropertyModel* model, QWidget *parent)
-    : VPropertyFormWidget(new VPropertyFormViewPrivate(), parent)
+VPE::VPropertyFormView::VPropertyFormView(VPropertyModel *model, QWidget *parent)
+  : VPropertyFormWidget(new VPropertyFormViewPrivate(), parent)
 {
     setModel(model);
 }
 
-VPE::VPropertyFormView::VPropertyFormView(VPropertySet* property_set, QWidget *parent)
-    : VPropertyFormWidget(new VPropertyFormViewPrivate(), parent)
+VPE::VPropertyFormView::VPropertyFormView(VPropertySet *property_set, QWidget *parent)
+  : VPropertyFormWidget(new VPropertyFormViewPrivate(), parent)
 {
     setPropertySet(property_set);
 }
@@ -65,7 +64,7 @@ void VPE::VPropertyFormView::setModel(VPropertyModel *model)
     removeModelAndSet();
 
     // Set model
-    static_cast<VPropertyFormViewPrivate*>(d_ptr)->Model = model;
+    static_cast<VPropertyFormViewPrivate *>(d_ptr)->Model = model;
     if (model)
     {
         // Set the property list
@@ -85,13 +84,13 @@ void VPE::VPropertyFormView::setModel(VPropertyModel *model)
     updatePropertyList();
 }
 
-void VPE::VPropertyFormView::setPropertySet(VPropertySet* property_set)
+void VPE::VPropertyFormView::setPropertySet(VPropertySet *property_set)
 {
     // Remove old model or set
     removeModelAndSet();
 
     // Set property set
-    static_cast<VPropertyFormViewPrivate*>(d_ptr)->PropertySet = property_set;
+    static_cast<VPropertyFormViewPrivate *>(d_ptr)->PropertySet = property_set;
     if (property_set)
     {
         // Set the property list
@@ -137,40 +136,40 @@ void VPE::VPropertyFormView::dataChanged(const QModelIndex &top_left, const QMod
     Q_UNUSED(bottom_right)
 
     // Ucomment when handle data changes
-//    if (static_cast<VPropertyFormViewPrivate*>(d_ptr)->IgnoreDataChangedSignal)
-//    {
-//        return;
-//    }
+    //    if (static_cast<VPropertyFormViewPrivate*>(d_ptr)->IgnoreDataChangedSignal)
+    //    {
+    //        return;
+    //    }
 
     // todo: handle data changes
 }
 
 void VPE::VPropertyFormView::dataSubmitted(VProperty *property)
 {
-    VPropertyModel* tmpModel = static_cast<VPropertyFormViewPrivate*>(d_ptr)->Model;
+    VPropertyModel *tmpModel = static_cast<VPropertyFormViewPrivate *>(d_ptr)->Model;
 
     if (tmpModel && d_ptr->UpdateEditors)
     {
-        static_cast<VPropertyFormViewPrivate*>(d_ptr)->IgnoreDataChangedSignal = true;
+        static_cast<VPropertyFormViewPrivate *>(d_ptr)->IgnoreDataChangedSignal = true;
         tmpModel->onDataChangedByModel(property);
-        static_cast<VPropertyFormViewPrivate*>(d_ptr)->IgnoreDataChangedSignal = false;
+        static_cast<VPropertyFormViewPrivate *>(d_ptr)->IgnoreDataChangedSignal = false;
     }
 }
 
 void VPE::VPropertyFormView::showEvent(QShowEvent *event)
 {
     Q_UNUSED(event)
-    if (static_cast<VPropertyFormViewPrivate*>(d_ptr)->NeedsRebuild)
+    if (static_cast<VPropertyFormViewPrivate *>(d_ptr)->NeedsRebuild)
     {
         build();
     }
-    static_cast<VPropertyFormViewPrivate*>(d_ptr)->NeedsRebuild = false;
+    static_cast<VPropertyFormViewPrivate *>(d_ptr)->NeedsRebuild = false;
 }
 
 void VPE::VPropertyFormView::updatePropertyList()
 {
-    VPropertyModel* tmpModel = static_cast<VPropertyFormViewPrivate*>(d_ptr)->Model;
-    VPropertySet* tmpSet = static_cast<VPropertyFormViewPrivate*>(d_ptr)->PropertySet;
+    VPropertyModel *tmpModel = static_cast<VPropertyFormViewPrivate *>(d_ptr)->Model;
+    VPropertySet *tmpSet = static_cast<VPropertyFormViewPrivate *>(d_ptr)->PropertySet;
 
     if (tmpModel && tmpModel->getPropertySet())
     {
@@ -188,20 +187,20 @@ void VPE::VPropertyFormView::updatePropertyList()
         build();
     }
     else
-        static_cast<VPropertyFormViewPrivate*>(d_ptr)->NeedsRebuild = true;
+        static_cast<VPropertyFormViewPrivate *>(d_ptr)->NeedsRebuild = true;
 }
 
 void VPE::VPropertyFormView::removeModelAndSet()
 {
-    if (static_cast<VPropertyFormViewPrivate*>(d_ptr)->Model)
+    if (static_cast<VPropertyFormViewPrivate *>(d_ptr)->Model)
     {
-        disconnect(static_cast<VPropertyFormViewPrivate*>(d_ptr)->Model, nullptr, this, nullptr);
-        static_cast<VPropertyFormViewPrivate*>(d_ptr)->Model = nullptr;
+        disconnect(static_cast<VPropertyFormViewPrivate *>(d_ptr)->Model, nullptr, this, nullptr);
+        static_cast<VPropertyFormViewPrivate *>(d_ptr)->Model = nullptr;
     }
 
-    static_cast<VPropertyFormViewPrivate*>(d_ptr)->NeedsRebuild = true;
+    static_cast<VPropertyFormViewPrivate *>(d_ptr)->NeedsRebuild = true;
     d_ptr->Properties.clear();
-    static_cast<VPropertyFormViewPrivate*>(d_ptr)->PropertySet = nullptr;
+    static_cast<VPropertyFormViewPrivate *>(d_ptr)->PropertySet = nullptr;
 }
 
 void VPE::VPropertyFormView::connectPropertyFormWidget(VPropertyFormWidget *widget)
@@ -213,7 +212,7 @@ void VPE::VPropertyFormView::connectPropertyFormWidget(VPropertyFormWidget *widg
 
     connect(widget, &VPropertyFormWidget::propertyDataSubmitted, this, &VPropertyFormView::dataSubmitted,
             Qt::UniqueConnection);
-    const QList<VPropertyFormWidget*> tmpList = widget->getChildPropertyFormWidgets();
+    const QList<VPropertyFormWidget *> tmpList = widget->getChildPropertyFormWidgets();
 
     for (auto *tmpEditorWidget : tmpList)
     {

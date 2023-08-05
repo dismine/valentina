@@ -30,6 +30,7 @@
 #include "../qmuparser/qmudef.h"
 #include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vcubicbezierpath.h"
+#include "../vgeometry/vsplinepath.h"
 #include "../vmisc/def.h"
 #include "../vpatterndb/vformula.h"
 #include "../vpropertyexplorer/plugins/vboolproperty.h"
@@ -47,6 +48,7 @@
 #include "../vwidgets/vgraphicssimpletextitem.h"
 #include "../vwidgets/vsimplecurve.h"
 #include "../vwidgets/vsimplepoint.h"
+#include "qobject.h"
 #include "vformulaproperty.h"
 
 #include "../vtools/tools/drawTools/operation/flipping/vtoolflippingbyaxis.h"
@@ -88,9 +90,11 @@
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
+#include <QComboBox>
 #include <QDebug>
 #include <QDockWidget>
 #include <QHBoxLayout>
+#include <QPalette>
 #include <QRegularExpression>
 #include <QScrollArea>
 
@@ -535,6 +539,14 @@ void VToolOptionsPropertyBrowser::userChangedData(VPE::VProperty *property)
             break;
     }
     VAbstractValApplication::VApp()->getSceneView()->update();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolOptionsPropertyBrowser::ComboBoxPalette() const -> QPalette
+{
+    QComboBox comboBox;
+    comboBox.setPalette(m_formView->palette());
+    return comboBox.palette();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2727,9 +2739,12 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolEndLine(QGraphicsItem *item)
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Point at distance and angle"));
 
+    QPalette comboBoxPalette = ComboBoxPalette();
+
     AddPropertyObjectName(i, tr("Point label:"));
     AddPropertyParentPointName(i->BasePointName(), tr("Base point:"), AttrBasePoint);
-    AddPropertyLineType(i, tr("Line type:"), LineStylesPics());
+    AddPropertyLineType(i, tr("Line type:"),
+                        LineStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)));
     AddPropertyLineColor(i, tr("Line color:"), VAbstractTool::ColorsList(), AttrLineColor);
     AddPropertyFormula(tr("Length:"), i->GetFormulaLength(), AttrLength);
     AddPropertyFormula(tr("Angle:"), i->GetFormulaAngle(), AttrAngle);
@@ -2743,10 +2758,13 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolAlongLine(QGraphicsItem *item)
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Point at distance along line"));
 
+    QPalette comboBoxPalette = ComboBoxPalette();
+
     AddPropertyObjectName(i, tr("Point label:"));
     AddPropertyParentPointName(i->BasePointName(), tr("First point:"), AttrBasePoint);
     AddPropertyParentPointName(i->SecondPointName(), tr("Second point:"), AttrSecondPoint);
-    AddPropertyLineType(i, tr("Line type:"), LineStylesPics());
+    AddPropertyLineType(i, tr("Line type:"),
+                        LineStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)));
     AddPropertyLineColor(i, tr("Line color:"), VAbstractTool::ColorsList(), AttrLineColor);
     AddPropertyFormula(tr("Length:"), i->GetFormulaLength(), AttrLength);
     AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
@@ -2759,13 +2777,17 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolArc(QGraphicsItem *item)
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Arc"));
 
+    QPalette comboBoxPalette = ComboBoxPalette();
+
     AddPropertyObjectName(i, tr("Name:"), true);
     AddPropertyParentPointName(i->CenterPointName(), tr("Center point:"), AttrCenter);
     AddPropertyFormula(tr("Radius:"), i->GetFormulaRadius(), AttrRadius);
     AddPropertyFormula(tr("First angle:"), i->GetFormulaF1(), AttrAngle1);
     AddPropertyFormula(tr("Second angle:"), i->GetFormulaF2(), AttrAngle2);
     AddPropertyAlias(i, tr("Alias:"));
-    AddPropertyCurvePenStyle(i, tr("Pen style:"), CurvePenStylesPics());
+    AddPropertyCurvePenStyle(
+        i, tr("Pen style:"),
+        CurvePenStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)));
     AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
     AddPropertyApproximationScale(tr("Approximation scale:"), i->GetApproximationScale());
     AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
@@ -2778,13 +2800,17 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolArcWithLength(QGraphicsItem *it
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Arc with given length"));
 
+    QPalette comboBoxPalette = ComboBoxPalette();
+
     AddPropertyObjectName(i, tr("Name:"), true);
     AddPropertyParentPointName(i->CenterPointName(), tr("Center point:"), AttrCenter);
     AddPropertyFormula(tr("Radius:"), i->GetFormulaRadius(), AttrRadius);
     AddPropertyFormula(tr("First angle:"), i->GetFormulaF1(), AttrAngle1);
     AddPropertyFormula(tr("Length:"), i->GetFormulaLength(), AttrLength);
     AddPropertyAlias(i, tr("Alias:"));
-    AddPropertyCurvePenStyle(i, tr("Pen style:"), CurvePenStylesPics());
+    AddPropertyCurvePenStyle(
+        i, tr("Pen style:"),
+        CurvePenStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)));
     AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
     AddPropertyApproximationScale(tr("Approximation scale:"), i->GetApproximationScale());
     AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
@@ -2797,11 +2823,14 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolBisector(QGraphicsItem *item)
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Point along bisector"));
 
+    QPalette comboBoxPalette = ComboBoxPalette();
+
     AddPropertyObjectName(i, tr("Point label:"));
     AddPropertyParentPointName(i->FirstPointName(), tr("First point:"), AttrFirstPoint);
     AddPropertyParentPointName(i->BasePointName(), tr("Second point:"), AttrBasePoint);
     AddPropertyParentPointName(i->ThirdPointName(), tr("Third point:"), AttrThirdPoint);
-    AddPropertyLineType(i, tr("Line type:"), LineStylesPics());
+    AddPropertyLineType(i, tr("Line type:"),
+                        LineStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)));
     AddPropertyLineColor(i, tr("Line color:"), VAbstractTool::ColorsList(), AttrLineColor);
     AddPropertyFormula(tr("Length:"), i->GetFormulaLength(), AttrLength);
     AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
@@ -2876,11 +2905,14 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolHeight(QGraphicsItem *item)
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Perpendicular point along line"));
 
+    QPalette comboBoxPalette = ComboBoxPalette();
+
     AddPropertyObjectName(i, tr("Point label:"));
     AddPropertyParentPointName(i->BasePointName(), tr("Base point:"), AttrBasePoint);
     AddPropertyParentPointName(i->FirstLinePointName(), tr("First line point:"), AttrP1Line);
     AddPropertyParentPointName(i->SecondLinePointName(), tr("Second line point:"), AttrP2Line);
-    AddPropertyLineType(i, tr("Line type:"), LineStylesPics());
+    AddPropertyLineType(i, tr("Line type:"),
+                        LineStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)));
     AddPropertyLineColor(i, tr("Line color:"), VAbstractTool::ColorsList(), AttrLineColor);
     AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
 }
@@ -2892,9 +2924,12 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolLine(QGraphicsItem *item)
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Line between points"));
 
+    QPalette comboBoxPalette = ComboBoxPalette();
+
     AddPropertyParentPointName(i->FirstPointName(), tr("First point:"), AttrFirstPoint);
     AddPropertyParentPointName(i->SecondPointName(), tr("Second point:"), AttrSecondPoint);
-    QMap<QString, QIcon> styles = LineStylesPics();
+    QMap<QString, QIcon> styles =
+        LineStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text));
     styles.remove(TypeLineNone);
     AddPropertyLineType(i, tr("Line type:"), styles);
     AddPropertyLineColor(i, tr("Line color:"), VAbstractTool::ColorsList(), AttrLineColor);
@@ -2923,11 +2958,14 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolNormal(QGraphicsItem *item)
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Point along perpendicular"));
 
+    QPalette comboBoxPalette = ComboBoxPalette();
+
     AddPropertyFormula(tr("Length:"), i->GetFormulaLength(), AttrLength);
     AddPropertyObjectName(i, tr("Point label:"));
     AddPropertyParentPointName(i->BasePointName(), tr("First point:"), AttrBasePoint);
     AddPropertyParentPointName(i->SecondPointName(), tr("Second point:"), AttrSecondPoint);
-    AddPropertyLineType(i, tr("Line type:"), LineStylesPics());
+    AddPropertyLineType(i, tr("Line type:"),
+                        LineStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)));
     AddPropertyLineColor(i, tr("Line color:"), VAbstractTool::ColorsList(), AttrLineColor);
 
     auto *itemAngle = new VPE::VDoubleProperty(tr("Additional angle degrees:"));
@@ -3049,11 +3087,14 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolShoulderPoint(QGraphicsItem *it
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Special point on shoulder"));
 
+    QPalette comboBoxPalette = ComboBoxPalette();
+
     AddPropertyObjectName(i, tr("Point label:"));
     AddPropertyParentPointName(i->BasePointName(), tr("First point:"), AttrBasePoint);
     AddPropertyParentPointName(i->SecondPointName(), tr("Second point:"), AttrSecondPoint);
     AddPropertyParentPointName(i->ShoulderPointName(), tr("Third point:"), AttrThirdPoint);
-    AddPropertyLineType(i, tr("Line type:"), LineStylesPics());
+    AddPropertyLineType(i, tr("Line type:"),
+                        LineStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)));
     AddPropertyLineColor(i, tr("Line color:"), VAbstractTool::ColorsList(), AttrLineColor);
     AddPropertyFormula(tr("Length:"), i->GetFormulaLength(), AttrLength);
     AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
@@ -3098,8 +3139,12 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSpline(QGraphicsItem *item)
     length2.Eval();
     AddPropertyFormula(tr("C2: length:"), length2, AttrLength2);
 
+    QPalette comboBoxPalette = ComboBoxPalette();
+
     AddPropertyAlias(i, tr("Alias:"));
-    AddPropertyCurvePenStyle(i, tr("Pen style:"), CurvePenStylesPics());
+    AddPropertyCurvePenStyle(
+        i, tr("Pen style:"),
+        CurvePenStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)));
     AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
     AddPropertyApproximationScale(tr("Approximation scale:"), spl.GetApproximationScale());
     AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
@@ -3112,13 +3157,17 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCubicBezier(QGraphicsItem *item
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Cubic bezier curve"));
 
+    QPalette comboBoxPalette = ComboBoxPalette();
+
     AddPropertyObjectName(i, tr("Name:"), true);
     AddPropertyParentPointName(i->FirstPointName(), tr("First point:"), AttrPoint1);
     AddPropertyParentPointName(i->SecondPointName(), tr("Second point:"), AttrPoint2);
     AddPropertyParentPointName(i->ThirdPointName(), tr("Third point:"), AttrPoint3);
     AddPropertyParentPointName(i->ForthPointName(), tr("Fourth point:"), AttrPoint4);
     AddPropertyAlias(i, tr("Alias:"));
-    AddPropertyCurvePenStyle(i, tr("Pen style:"), CurvePenStylesPics());
+    AddPropertyCurvePenStyle(
+        i, tr("Pen style:"),
+        CurvePenStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)));
     AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
     AddPropertyApproximationScale(tr("Approximation scale:"), i->getSpline().GetApproximationScale());
     AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
@@ -3131,9 +3180,13 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSplinePath(QGraphicsItem *item)
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Tool for path curve"));
 
+    QPalette comboBoxPalette = ComboBoxPalette();
+
     AddPropertyObjectName(i, tr("Name:"), true);
     AddPropertyAlias(i, tr("Alias:"));
-    AddPropertyCurvePenStyle(i, tr("Pen style:"), CurvePenStylesPics());
+    AddPropertyCurvePenStyle(
+        i, tr("Pen style:"),
+        CurvePenStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)));
     AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
     AddPropertyApproximationScale(tr("Approximation scale:"), i->getSplinePath().GetApproximationScale());
     AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
@@ -3146,9 +3199,13 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCubicBezierPath(QGraphicsItem *
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Tool cubic bezier curve"));
 
+    QPalette comboBoxPalette = ComboBoxPalette();
+
     AddPropertyObjectName(i, tr("Name:"), true);
     AddPropertyAlias(i, tr("Alias:"));
-    AddPropertyCurvePenStyle(i, tr("Pen style:"), CurvePenStylesPics());
+    AddPropertyCurvePenStyle(
+        i, tr("Pen style:"),
+        CurvePenStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)));
     AddPropertyLineColor(i, tr("Color:"), VAbstractTool::ColorsList(), AttrColor);
     AddPropertyApproximationScale(tr("Approximation scale:"), i->getSplinePath().GetApproximationScale());
     AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
@@ -3176,11 +3233,14 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolLineIntersectAxis(QGraphicsItem
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Point intersection line and axis"));
 
+    QPalette comboBoxPalette = ComboBoxPalette();
+
     AddPropertyObjectName(i, tr("Point label:"));
     AddPropertyParentPointName(i->BasePointName(), tr("Axis point:"), AttrBasePoint);
     AddPropertyParentPointName(i->FirstLinePoint(), tr("First line point:"), AttrFirstPoint);
     AddPropertyParentPointName(i->SecondLinePoint(), tr("Second line point:"), AttrSecondPoint);
-    AddPropertyLineType(i, tr("Line type:"), LineStylesPics());
+    AddPropertyLineType(i, tr("Line type:"),
+                        LineStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)));
     AddPropertyLineColor(i, tr("Line color:"), VAbstractTool::ColorsList(), AttrLineColor);
     AddPropertyFormula(tr("Angle:"), i->GetFormulaAngle(), AttrAngle);
     AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
@@ -3193,10 +3253,13 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCurveIntersectAxis(QGraphicsIte
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Point intersection curve and axis"));
 
+    QPalette comboBoxPalette = ComboBoxPalette();
+
     AddPropertyObjectName(i, tr("Point label:"));
     AddPropertyParentPointName(i->BasePointName(), tr("Axis point:"), AttrBasePoint);
     AddPropertyParentPointName(i->CurveName(), tr("Curve:"), AttrCurve);
-    AddPropertyLineType(i, tr("Line type:"), LineStylesPics());
+    AddPropertyLineType(i, tr("Line type:"),
+                        LineStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)));
     AddPropertyLineColor(i, tr("Line color:"), VAbstractTool::ColorsList(), AttrLineColor);
     AddPropertyFormula(tr("Angle:"), i->GetFormulaAngle(), AttrAngle);
     AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
@@ -3316,7 +3379,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolEndLine()
     m_idToProperty[AttrName]->setValue(i->name());
 
     {
-        const auto index = VPE::VLineTypeProperty::IndexOfStyle(LineStylesPics(), i->getLineType());
+        QPalette comboBoxPalette = ComboBoxPalette();
+        const auto index = VPE::VLineTypeProperty::IndexOfStyle(
+            LineStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
+            i->getLineType());
         m_idToProperty[AttrTypeLine]->setValue(index);
     }
 
@@ -3347,7 +3413,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolAlongLine()
     m_idToProperty[AttrName]->setValue(i->name());
 
     {
-        const auto index = VPE::VLineTypeProperty::IndexOfStyle(LineStylesPics(), i->getLineType());
+        QPalette comboBoxPalette = ComboBoxPalette();
+        const auto index = VPE::VLineTypeProperty::IndexOfStyle(
+            LineStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
+            i->getLineType());
         m_idToProperty[AttrTypeLine]->setValue(index);
     }
 
@@ -3391,7 +3460,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolArc()
     m_idToProperty[AttrAngle2]->setValue(valueSecondAngle);
 
     {
-        const auto index = VPE::VLineTypeProperty::IndexOfStyle(CurvePenStylesPics(), i->GetPenStyle());
+        QPalette comboBoxPalette = ComboBoxPalette();
+        const auto index = VPE::VLineTypeProperty::IndexOfStyle(
+            CurvePenStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
+            i->GetPenStyle());
         m_idToProperty[AttrPenStyle]->setValue(index);
     }
 
@@ -3433,7 +3505,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolArcWithLength()
     m_idToProperty[AttrLength]->setValue(valueLength);
 
     {
-        const auto index = VPE::VLineTypeProperty::IndexOfStyle(CurvePenStylesPics(), i->GetPenStyle());
+        QPalette comboBoxPalette = ComboBoxPalette();
+        const auto index = VPE::VLineTypeProperty::IndexOfStyle(
+            CurvePenStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
+            i->GetPenStyle());
         m_idToProperty[AttrPenStyle]->setValue(index);
     }
 
@@ -3467,7 +3542,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolBisector()
     m_idToProperty[AttrLength]->setValue(valueFormula);
 
     {
-        const auto index = VPE::VLineTypeProperty::IndexOfStyle(LineStylesPics(), i->getLineType());
+        QPalette comboBoxPalette = ComboBoxPalette();
+        const auto index = VPE::VLineTypeProperty::IndexOfStyle(
+            LineStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
+            i->getLineType());
         m_idToProperty[AttrTypeLine]->setValue(index);
     }
 
@@ -3593,7 +3671,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolHeight()
     m_idToProperty[AttrName]->setValue(i->name());
 
     {
-        const auto index = VPE::VLineTypeProperty::IndexOfStyle(LineStylesPics(), i->getLineType());
+        QPalette comboBoxPalette = ComboBoxPalette();
+        const auto index = VPE::VLineTypeProperty::IndexOfStyle(
+            LineStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
+            i->getLineType());
         m_idToProperty[AttrTypeLine]->setValue(index);
     }
 
@@ -3623,7 +3704,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolLine()
     auto *i = qgraphicsitem_cast<VToolLine *>(m_currentItem);
 
     {
-        const auto index = VPE::VLineTypeProperty::IndexOfStyle(LineStylesPics(), i->getLineType());
+        QPalette comboBoxPalette = ComboBoxPalette();
+        const auto index = VPE::VLineTypeProperty::IndexOfStyle(
+            LineStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
+            i->getLineType());
         m_idToProperty[AttrTypeLine]->setValue(index);
     }
 
@@ -3683,7 +3767,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolNormal()
     m_idToProperty[AttrAngle]->setValue(i->GetAngle());
 
     {
-        const auto index = VPE::VLineTypeProperty::IndexOfStyle(LineStylesPics(), i->getLineType());
+        QPalette comboBoxPalette = ComboBoxPalette();
+        const auto index = VPE::VLineTypeProperty::IndexOfStyle(
+            LineStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
+            i->getLineType());
         m_idToProperty[AttrTypeLine]->setValue(index);
     }
 
@@ -3867,7 +3954,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolShoulderPoint()
     m_idToProperty[AttrName]->setValue(i->name());
 
     {
-        const auto index = VPE::VLineTypeProperty::IndexOfStyle(LineStylesPics(), i->getLineType());
+        QPalette comboBoxPalette = ComboBoxPalette();
+        const auto index = VPE::VLineTypeProperty::IndexOfStyle(
+            LineStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
+            i->getLineType());
         m_idToProperty[AttrTypeLine]->setValue(index);
     }
 
@@ -3936,7 +4026,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSpline()
     m_idToProperty[AttrLength2]->setValue(length2);
 
     {
-        const auto index = VPE::VLineTypeProperty::IndexOfStyle(CurvePenStylesPics(), i->GetPenStyle());
+        QPalette comboBoxPalette = ComboBoxPalette();
+        const auto index = VPE::VLineTypeProperty::IndexOfStyle(
+            CurvePenStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
+            i->GetPenStyle());
         m_idToProperty[AttrPenStyle]->setValue(index);
     }
 
@@ -3960,7 +4053,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCubicBezier()
     m_idToProperty[AttrName]->setValue(i->name());
 
     {
-        const auto index = VPE::VLineTypeProperty::IndexOfStyle(CurvePenStylesPics(), i->GetPenStyle());
+        QPalette comboBoxPalette = ComboBoxPalette();
+        const auto index = VPE::VLineTypeProperty::IndexOfStyle(
+            CurvePenStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
+            i->GetPenStyle());
         m_idToProperty[AttrPenStyle]->setValue(index);
     }
 
@@ -4000,7 +4096,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSplinePath()
     m_idToProperty[AttrName]->setValue(i->name());
 
     {
-        const auto index = VPE::VLineTypeProperty::IndexOfStyle(CurvePenStylesPics(), i->GetPenStyle());
+        QPalette comboBoxPalette = ComboBoxPalette();
+        const auto index = VPE::VLineTypeProperty::IndexOfStyle(
+            CurvePenStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
+            i->GetPenStyle());
         m_idToProperty[AttrPenStyle]->setValue(index);
     }
 
@@ -4024,7 +4123,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCubicBezierPath()
     m_idToProperty[AttrName]->setValue(i->name());
 
     {
-        const auto index = VPE::VLineTypeProperty::IndexOfStyle(CurvePenStylesPics(), i->GetPenStyle());
+        QPalette comboBoxPalette = ComboBoxPalette();
+        const auto index = VPE::VLineTypeProperty::IndexOfStyle(
+            CurvePenStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
+            i->GetPenStyle());
         m_idToProperty[AttrPenStyle]->setValue(index);
     }
 
@@ -4073,7 +4175,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolLineIntersectAxis()
     m_idToProperty[AttrName]->setValue(i->name());
 
     {
-        const auto index = VPE::VLineTypeProperty::IndexOfStyle(LineStylesPics(), i->getLineType());
+        QPalette comboBoxPalette = ComboBoxPalette();
+        const auto index = VPE::VLineTypeProperty::IndexOfStyle(
+            LineStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
+            i->getLineType());
         m_idToProperty[AttrTypeLine]->setValue(index);
     }
 
@@ -4108,7 +4213,10 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCurveIntersectAxis()
     m_idToProperty[AttrName]->setValue(i->name());
 
     {
-        const auto index = VPE::VLineTypeProperty::IndexOfStyle(LineStylesPics(), i->getLineType());
+        QPalette comboBoxPalette = ComboBoxPalette();
+        const auto index = VPE::VLineTypeProperty::IndexOfStyle(
+            LineStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
+            i->getLineType());
         m_idToProperty[AttrTypeLine]->setValue(index);
     }
 

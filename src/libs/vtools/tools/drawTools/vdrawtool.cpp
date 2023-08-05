@@ -34,18 +34,17 @@
 #include <QScopedPointer>
 #include <QSharedPointer>
 #include <QUndoStack>
-#include <Qt>
 #include <QtDebug>
 
-#include "../ifc/ifcdef.h"
-#include "../ifc/xml/vdomdocument.h"
-#include "../ifc/xml/vabstractpattern.h"
-#include "../ifc/exception/vexceptionwrongid.h"
 #include "../../undocommands/addtocalc.h"
 #include "../../undocommands/savetooloptions.h"
+#include "../ifc/exception/vexceptionwrongid.h"
+#include "../ifc/ifcdef.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../ifc/xml/vdomdocument.h"
 #include "../qmuparser/qmuparsererror.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../vabstracttool.h"
+#include "../vpatterndb/vcontainer.h"
 
 template <class T> class QSharedPointer;
 
@@ -57,10 +56,10 @@ template <class T> class QSharedPointer;
  * @param id object id in container.
  */
 VDrawTool::VDrawTool(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes, QObject *parent)
-    : VInteractiveTool(doc, data, id, parent),
-      nameActivDraw(doc->GetNameActivPP()),
-      m_lineType(TypeLineLine),
-      m_notes(notes)
+  : VInteractiveTool(doc, data, id, parent),
+    nameActivDraw(doc->GetNameActivPP()),
+    m_lineType(TypeLineLine),
+    m_notes(notes)
 {
     connect(this->doc, &VAbstractPattern::ChangedActivPP, this, &VDrawTool::ChangedActivDraw);
     connect(this->doc, &VAbstractPattern::ChangedNameDraw, this, &VDrawTool::ChangedNameDraw);
@@ -125,12 +124,12 @@ void VDrawTool::SaveDialogChange(const QString &undoText)
 
 //---------------------------------------------------------------------------------------------------------------------
 void VDrawTool::ApplyToolOptions(const QList<quint32> &oldDependencies, const QList<quint32> &newDependencies,
-                                const QDomElement &oldDomElement, const QDomElement &newDomElement)
+                                 const QDomElement &oldDomElement, const QDomElement &newDomElement)
 {
     if (newDependencies != oldDependencies || not VDomDocument::Compare(newDomElement, oldDomElement))
     {
-        SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, oldDependencies,
-                                                           newDependencies, doc, m_id);
+        SaveToolOptions *saveOptions =
+            new SaveToolOptions(oldDomElement, newDomElement, oldDependencies, newDependencies, doc, m_id);
         connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         VAbstractApplication::VApp()->getUndoStack()->push(saveOptions);
     }
@@ -159,8 +158,8 @@ void VDrawTool::SaveOption(QSharedPointer<VGObject> &obj)
 
         SaveOptions(newDomElement, obj);
 
-        SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, QList<quint32>(),
-                                                           QList<quint32>(), doc, m_id);
+        SaveToolOptions *saveOptions =
+            new SaveToolOptions(oldDomElement, newDomElement, QList<quint32>(), QList<quint32>(), doc, m_id);
         connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         VAbstractApplication::VApp()->getUndoStack()->push(saveOptions);
     }
@@ -177,7 +176,7 @@ void VDrawTool::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 
     doc->SetAttribute(tag, VDomDocument::AttrId, m_id);
     doc->SetAttributeOrRemoveIf<QString>(tag, AttrNotes, m_notes,
-                                         [](const QString &notes) noexcept {return notes.isEmpty();});
+                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

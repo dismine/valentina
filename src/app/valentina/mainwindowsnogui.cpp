@@ -193,7 +193,7 @@ auto MainWindowsNoGUI::GenerateLayout(VLayoutGenerator &lGenerator) -> bool
 #if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
     QTimer *progressTimer = nullptr;
 #endif
-
+    
     QSharedPointer<DialogLayoutProgress> progress;
     if (VApplication::IsGUIMode())
     {
@@ -206,10 +206,10 @@ auto MainWindowsNoGUI::GenerateLayout(VLayoutGenerator &lGenerator) -> bool
                 [this, timer]() { m_taskbarProgress->setValue(static_cast<int>(timer.elapsed() / 1000)); });
         progressTimer->start(1000);
 #endif
-
+        
         progress = QSharedPointer<DialogLayoutProgress>(
             new DialogLayoutProgress(timer, lGenerator.GetNestingTimeMSecs(), this));
-
+        
         connect(progress.data(), &DialogLayoutProgress::Abort, &lGenerator, &VLayoutGenerator::Abort);
         connect(progress.data(), &DialogLayoutProgress::Timeout, &lGenerator, &VLayoutGenerator::Timeout);
 
@@ -906,7 +906,7 @@ auto MainWindowsNoGUI::RecentFileList() const -> QStringList
 auto MainWindowsNoGUI::ScenePreview(int i, QSize iconSize, PreviewQuatilty quality) const -> QIcon
 {
     QImage image;
-    QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(m_layoutSettings->LayoutPapers().at(i));
+    auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(m_layoutSettings->LayoutPapers().at(i));
     if (paper)
     {
         if (quality == PreviewQuatilty::Fast)
@@ -947,21 +947,22 @@ auto MainWindowsNoGUI::ScenePreview(int i, QSize iconSize, PreviewQuatilty quali
         image = QImage(iconSize, QImage::Format_RGB32);
         image.fill(Qt::white);
     }
-    return QIcon(QBitmap::fromImage(image));
+    return {QBitmap::fromImage(image)};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto MainWindowsNoGUI::CreateShadows(const QList<QGraphicsItem *> &papers) -> QList<QGraphicsItem *>
 {
     QList<QGraphicsItem *> shadows;
+    shadows.reserve(papers.size());
 
     for (auto *paper : papers)
     {
         qreal x1 = 0, y1 = 0, x2 = 0, y2 = 0;
-        if (QGraphicsRectItem *item = qgraphicsitem_cast<QGraphicsRectItem *>(paper))
+        if (auto *item = qgraphicsitem_cast<QGraphicsRectItem *>(paper))
         {
             item->rect().getCoords(&x1, &y1, &x2, &y2);
-            QGraphicsRectItem *shadowPaper = new QGraphicsRectItem(QRectF(x1 + 4, y1 + 4, x2 + 4, y2 + 4));
+            auto *shadowPaper = new QGraphicsRectItem(QRectF(x1 + 4, y1 + 4, x2 + 4, y2 + 4));
             shadowPaper->setBrush(QBrush(Qt::black));
             shadows.append(shadowPaper);
         }

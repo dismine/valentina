@@ -29,17 +29,16 @@
 #include <QPainterPath>
 #include <QPointF>
 #include <QSharedPointer>
-#include <Qt>
 #include <new>
 
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vellipticalarc.h"
 #include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
+#include "../vmisc/vmodifierkey.h"
+#include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/scalesceneitems.h"
 #include "vispath.h"
-#include "../vmisc/vmodifierkey.h"
 
 namespace
 {
@@ -54,16 +53,16 @@ auto Angle(const QLineF &radius) -> qreal
 
     return radius.angle();
 }
-}  // namespace
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolEllipticalArc::VisToolEllipticalArc(const VContainer *data, QGraphicsItem *parent)
-    :VisPath(data, parent)
+  : VisPath(data, parent)
 {
-    m_arcCenter = InitPoint(Color(VColor::MainColor), this);
-    m_radius1Line = InitItem<VScaledLine>(Color(VColor::SupportColor), this);
-    m_radius2Line = InitItem<VScaledLine>(Color(VColor::SupportColor), this);
-    m_f1Point = InitPoint(Color(VColor::SupportColor), this);
+    m_arcCenter = InitPoint(VColorRole::VisSupportColor, this);
+    m_radius1Line = InitItem<VScaledLine>(VColorRole::VisSupportColor, this);
+    m_radius2Line = InitItem<VScaledLine>(VColorRole::VisSupportColor, this);
+    m_f1Point = InitPoint(VColorRole::VisSupportColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -72,10 +71,10 @@ void VisToolEllipticalArc::RefreshGeometry()
     if (m_centerId > NULL_ID)
     {
         const QSharedPointer<VPointF> first = GetData()->GeometricObject<VPointF>(m_centerId);
-        DrawPoint(m_arcCenter, static_cast<QPointF>(*first), Color(VColor::SupportColor));
+        DrawPoint(m_arcCenter, static_cast<QPointF>(*first));
 
         static const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-        QLineF radius (static_cast<QPointF>(*first), ScenePos());
+        QLineF radius(static_cast<QPointF>(*first), ScenePos());
         auto center = static_cast<QPointF>(*first);
 
         if (GetMode() == Mode::Creation)
@@ -86,7 +85,8 @@ void VisToolEllipticalArc::RefreshGeometry()
 
                 SetToolTip(tr("<b>Elliptical arc</b>: radius1 = %1%2; "
                               "<b>Mouse click</b> - finish selecting the first radius, "
-                              "<b>%3</b> - skip").arg(LengthToUser(radius.length()), prefix, VModifierKey::EnterKey()));
+                              "<b>%3</b> - skip")
+                               .arg(LengthToUser(radius.length()), prefix, VModifierKey::EnterKey()));
             }
             else if (qFuzzyIsNull(m_radius2))
             {
@@ -99,12 +99,12 @@ void VisToolEllipticalArc::RefreshGeometry()
                 DrawRadius2Line(center, radius.length());
                 DrawElArc(*first, m_radius1, radius.length(), 0, 0);
 
-                SetToolTip(tr("<b>Elliptical arc</b>: radius1 = %1%2, "
-                              "radius2 = %3%2; "
-                              "<b>Mouse click</b> - finish selecting the second radius, "
-                              "<b>%4</b> - skip")
-                               .arg(LengthToUser(m_radius1), prefix, LengthToUser(radius.length()),
-                                    VModifierKey::EnterKey()));
+                SetToolTip(
+                    tr("<b>Elliptical arc</b>: radius1 = %1%2, "
+                       "radius2 = %3%2; "
+                       "<b>Mouse click</b> - finish selecting the second radius, "
+                       "<b>%4</b> - skip")
+                        .arg(LengthToUser(m_radius1), prefix, LengthToUser(radius.length()), VModifierKey::EnterKey()));
             }
             else if (m_f1 < 0)
             {
@@ -114,15 +114,15 @@ void VisToolEllipticalArc::RefreshGeometry()
                 qreal f1Angle = Angle(radius);
                 VEllipticalArc elArc = DrawElArc(*first, m_radius1, m_radius2, f1Angle, f1Angle);
 
-                DrawPoint(m_f1Point, elArc.GetP1(), Color(VColor::SupportColor));
+                DrawPoint(m_f1Point, elArc.GetP1());
 
                 SetToolTip(tr("<b>Elliptical arc</b>: radius1 = %1%2, "
                               "radius2 = %3%2, angle1 = %4°; "
                               "<b>Mouse click</b> - finish selecting the second radius, "
                               "<b>%5</b> - sticking angle, "
                               "<b>%6</b> - skip")
-                               .arg(LengthToUser(m_radius1), prefix, LengthToUser(m_radius2),
-                                    AngleToUser(f1Angle), VModifierKey::Shift(), VModifierKey::EnterKey()));
+                               .arg(LengthToUser(m_radius1), prefix, LengthToUser(m_radius2), AngleToUser(f1Angle),
+                                    VModifierKey::Shift(), VModifierKey::EnterKey()));
             }
             else if (m_f2 < 0)
             {
@@ -132,16 +132,15 @@ void VisToolEllipticalArc::RefreshGeometry()
                 const qreal f2Angle = Angle(radius);
                 VEllipticalArc elArc = DrawElArc(*first, m_radius1, m_radius2, m_f1, f2Angle);
 
-                DrawPoint(m_f1Point, elArc.GetP1(), Color(VColor::SupportColor));
+                DrawPoint(m_f1Point, elArc.GetP1());
 
                 SetToolTip(tr("<b>Elliptical arc</b>: radius1 = %1%2, "
                               "radius2 = %3%2, angle1 = %4°, angle2 = %5°; "
                               "<b>Mouse click</b> - finish selecting the second radius, "
                               "<b>%6</b> - sticking angle, "
                               "<b>%7</b> - skip")
-                               .arg(LengthToUser(m_radius1), prefix, LengthToUser(m_radius2),
-                                    AngleToUser(m_f1), AngleToUser(f2Angle), VModifierKey::Shift(),
-                                    VModifierKey::EnterKey()));
+                               .arg(LengthToUser(m_radius1), prefix, LengthToUser(m_radius2), AngleToUser(m_f1),
+                                    AngleToUser(f2Angle), VModifierKey::Shift(), VModifierKey::EnterKey()));
             }
             else if (VFuzzyComparePossibleNulls(m_rotationAngle, INT_MAX))
             {
@@ -156,16 +155,16 @@ void VisToolEllipticalArc::RefreshGeometry()
                 DrawRadius2Line(center, m_radius2, rotationAngle);
                 VEllipticalArc elArc = DrawElArc(*first, m_radius1, m_radius2, m_f1, m_f2, rotationAngle);
 
-                DrawPoint(m_f1Point, elArc.GetP1(), Color(VColor::SupportColor));
+                DrawPoint(m_f1Point, elArc.GetP1());
 
                 SetToolTip(tr("<b>Elliptical arc</b>: radius1 = %1%2, "
                               "radius2 = %3%2, angle1 = %4°, angle2 = %5°, rotation = %6°; "
                               "<b>Mouse click</b> - finish selecting the second radius, "
                               "<b>%7</b> - sticking angle, "
                               "<b>%8</b> - skip")
-                               .arg(LengthToUser(m_radius1), prefix, LengthToUser(radius.length()),
-                                    AngleToUser(m_f1), AngleToUser(m_f2), AngleToUser(rotationAngle),
-                                    VModifierKey::Shift(), VModifierKey::EnterKey()));
+                               .arg(LengthToUser(m_radius1), prefix, LengthToUser(radius.length()), AngleToUser(m_f1),
+                                    AngleToUser(m_f2), AngleToUser(rotationAngle), VModifierKey::Shift(),
+                                    VModifierKey::EnterKey()));
             }
         }
         else if (not qFuzzyIsNull(m_radius1) && not qFuzzyIsNull(m_radius2) && m_f1 >= 0 && m_f2 >= 0 &&
@@ -219,7 +218,7 @@ void VisToolEllipticalArc::DrawRadius1Line(const QPointF &center, qreal radius, 
     QLineF radiusLine(center.x(), center.y(), center.x() + 100, center.y());
     radiusLine.setLength(radius);
     radiusLine.setAngle(radiusLine.angle() + rotationAngle);
-    DrawLine(m_radius1Line, radiusLine, Color(VColor::SupportColor));
+    DrawLine(m_radius1Line, radiusLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -228,7 +227,7 @@ void VisToolEllipticalArc::DrawRadius2Line(const QPointF &center, qreal radius, 
     QLineF radiusLine(center.x(), center.y(), center.x(), center.y() - 100);
     radiusLine.setLength(radius);
     radiusLine.setAngle(radiusLine.angle() + rotationAngle);
-    DrawLine(m_radius2Line, radiusLine, Color(VColor::SupportColor));
+    DrawLine(m_radius2Line, radiusLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -237,7 +236,7 @@ auto VisToolEllipticalArc::DrawElArc(const VPointF &center, qreal radius1, qreal
 {
     VEllipticalArc elArc(center, radius1, radius2, f1, f2, rotationAngle);
     elArc.SetApproximationScale(ApproximationScale());
-    DrawPath(this, elArc.GetPath(), elArc.DirectionArrows(), Color(VColor::MainColor), LineStyle(), Qt::RoundCap);
+    DrawPath(this, elArc.GetPath(), elArc.DirectionArrows(), LineStyle(), Qt::RoundCap);
 
     return elArc;
 }

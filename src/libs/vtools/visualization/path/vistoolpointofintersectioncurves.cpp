@@ -32,22 +32,26 @@
 #include <QPainterPath>
 #include <QPointF>
 #include <QSharedPointer>
-#include <Qt>
 #include <new>
 
 #include "../../tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.h"
+#include "../../visualization/path/vispath.h"
 #include "../vgeometry/vabstractcurve.h"
+#include "../visualization.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/scalesceneitems.h"
-#include "../visualization.h"
-#include "../../visualization/path/vispath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointOfIntersectionCurves::VisToolPointOfIntersectionCurves(const VContainer *data, QGraphicsItem *parent)
-    :VisPath(data, parent)
+  : VisPath(data, parent)
 {
-    m_visCurve2 = InitItem<VCurvePathItem>(Color(VColor::SupportColor), this);
-    m_point = InitPoint(Color(VColor::MainColor), this);
+    SetColorRole(VColorRole::VisSupportColor);
+
+    m_visCurve2 = InitItem<VCurvePathItem>(VColorRole::VisSupportColor, this);
+    m_visCurve2->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
+    m_point = InitPoint(VColorRole::VisMainColor, this);
+    m_point->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
+    m_point->setZValue(1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -56,19 +60,17 @@ void VisToolPointOfIntersectionCurves::RefreshGeometry()
     if (m_curve1Id > NULL_ID)
     {
         auto curve1 = GetData()->GeometricObject<VAbstractCurve>(m_curve1Id);
-        DrawPath(this, curve1->GetPath(), curve1->DirectionArrows(), Color(VColor::SupportColor), Qt::SolidLine,
-                 Qt::RoundCap);
+        DrawPath(this, curve1->GetPath(), curve1->DirectionArrows(), Qt::SolidLine, Qt::RoundCap);
 
         if (m_curve2Id > NULL_ID)
         {
             auto curve2 = GetData()->GeometricObject<VAbstractCurve>(m_curve2Id);
-            DrawPath(m_visCurve2, curve2->GetPath(), curve2->DirectionArrows(), Color(VColor::SupportColor),
-                     Qt::SolidLine, Qt::RoundCap);
+            DrawPath(m_visCurve2, curve2->GetPath(), curve2->DirectionArrows(), Qt::SolidLine, Qt::RoundCap);
 
             QPointF p;
             VToolPointOfIntersectionCurves::FindPoint(curve1->GetPoints(), curve2->GetPoints(), m_vCrossPoint,
                                                       m_hCrossPoint, &p);
-            DrawPoint(m_point, p, Color(VColor::MainColor));
+            DrawPoint(m_point, p);
         }
     }
 }

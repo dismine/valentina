@@ -64,19 +64,6 @@ auto SceneScale(QGraphicsScene *scene) -> qreal
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto CorrectColor(const QGraphicsItem *item, const QColor &color) -> QColor
-{
-    SCASSERT(item != nullptr)
-
-    if (item->isEnabled())
-    {
-        return color;
-    }
-
-    return Qt::gray;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto PointRect(qreal radius) -> QRectF
 {
     QRectF rec = QRectF(0, 0, radius * 2, radius * 2);

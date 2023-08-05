@@ -27,16 +27,17 @@
  *************************************************************************/
 
 #include "dialoglayoutprogress.h"
-#include "ui_dialoglayoutprogress.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vvalentinasettings.h"
+#include "ui_dialoglayoutprogress.h"
 
 #include <QMessageBox>
-#include <QPushButton>
 #include <QMovie>
-#include <QtDebug>
-#include <QTime>
+#include <QPushButton>
 #include <QShowEvent>
+#include <QTime>
+#include <QtDebug>
 #include <chrono>
 
 #if (defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
@@ -52,46 +53,49 @@ using namespace bpstd::literals::chrono_literals;
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogLayoutProgress::DialogLayoutProgress(QElapsedTimer timer, qint64 timeout, QWidget *parent)
-    : QDialog(parent),
-      ui(new Ui::DialogLayoutProgress),
-      m_movie(new QMovie(QStringLiteral("://icon/16x16/progress.gif"))),
-      m_timer(timer),
-      m_timeout(timeout),
-      m_progressTimer(new QTimer(this))
+  : QDialog(parent),
+    ui(new Ui::DialogLayoutProgress),
+    m_timer(timer),
+    m_timeout(timeout),
+    m_progressTimer(new QTimer(this))
 {
     ui->setupUi(this);
 
     VAbstractValApplication::VApp()->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale())
                                                                            : setLocale(QLocale::c());
 
-    ui->progressBar->setMaximum(static_cast<int>(timeout/1000));
+    ui->progressBar->setMaximum(static_cast<int>(timeout / 1000));
     ui->progressBar->setValue(0);
 
+    const QString scheme =
+        (VTheme::ColorSheme() == VColorSheme::Light ? QStringLiteral("light") : QStringLiteral("dark"));
+    m_movie = new QMovie(QStringLiteral("://icon/%1/16x16/progress.gif").arg(scheme));
     ui->labelProgress->setMovie(m_movie);
     m_movie->start();
 
     QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     SCASSERT(bCancel != nullptr)
-    connect(bCancel, &QPushButton::clicked, this, [this](){emit Abort();});
+    connect(bCancel, &QPushButton::clicked, this, [this]() { emit Abort(); });
     setModal(true);
 
     this->setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
 
-    connect(m_progressTimer, &QTimer::timeout, this, [this]()
-    {
-        const qint64 elapsed = m_timer.elapsed();
-        const int timeout = static_cast<int>(m_timeout - elapsed);
-        QTime t(0, 0);
-        t = t.addMSecs(timeout);
-        ui->labelTimeLeft->setText(tr("Time left: %1").arg(t.toString()));
-        ui->progressBar->setValue(static_cast<int>(elapsed/1000));
+    connect(m_progressTimer, &QTimer::timeout, this,
+            [this]()
+            {
+                const qint64 elapsed = m_timer.elapsed();
+                const int timeout = static_cast<int>(m_timeout - elapsed);
+                QTime t(0, 0);
+                t = t.addMSecs(timeout);
+                ui->labelTimeLeft->setText(tr("Time left: %1").arg(t.toString()));
+                ui->progressBar->setValue(static_cast<int>(elapsed / 1000));
 
-        if (timeout <= 1000)
-        {
-            emit Timeout();
-            m_progressTimer->stop();
-        }
-    });
+                if (timeout <= 1000)
+                {
+                    emit Timeout();
+                    m_progressTimer->stop();
+                }
+            });
     m_progressTimer->start(V_SECONDS(1));
 }
 
@@ -124,8 +128,8 @@ void DialogLayoutProgress::Efficiency(qreal value)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutProgress::showEvent(QShowEvent *event)
 {
-    QDialog::showEvent( event );
-    if ( event->spontaneous() )
+    QDialog::showEvent(event);
+    if (event->spontaneous())
     {
         return;
     }
@@ -139,5 +143,5 @@ void DialogLayoutProgress::showEvent(QShowEvent *event)
     setMaximumSize(size());
     setMinimumSize(size());
 
-    m_isInitialized = true;//first show windows are held
+    m_isInitialized = true; // first show windows are held
 }

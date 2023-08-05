@@ -90,6 +90,7 @@ protected:
      */
     void SaveData() override;
     void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
     auto IsValid() const -> bool final;
 
 private slots:
@@ -121,6 +122,8 @@ private:
     bool m_firstRelease{false};
 
     void FinishCreating();
+
+    void InitIcons();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

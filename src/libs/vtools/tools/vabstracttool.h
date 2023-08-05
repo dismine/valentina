@@ -34,7 +34,6 @@
 #include <QObject>
 #include <QString>
 #include <QStringList>
-#include <Qt>
 #include <QtGlobal>
 
 #include "../ifc/xml/vabstractpattern.h"

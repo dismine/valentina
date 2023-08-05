@@ -160,10 +160,21 @@ VLib {
         name: "theme"
         prefix: "theme/"
         files: [
+            "themeDef.h",
             "vapplicationstyle.cpp",
             "vapplicationstyle.h",
+            "vmanuallayoutstyle.cpp",
+            "vmanuallayoutstyle.h",
+            "vpatternpiecestyle.cpp",
+            "vpatternpiecestyle.h",
+            "vscenestylesheet.cpp",
+            "vscenestylesheet.h",
+            "vstylesheetstyle.cpp",
+            "vstylesheetstyle.h",
             "vtheme.h",
             "vtheme.cpp",
+            "vtoolstyle.cpp",
+            "vtoolstyle.h",
         ]
     }
 
@@ -183,7 +194,8 @@ VLib {
         files: [
             "icon.qrc",
             "flags.qrc",
-            "breezethemes/breeze.qrc"
+            "breezethemes/breeze.qrc",
+            "scenestyle.qrc",
         ]
     }
 

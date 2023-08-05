@@ -49,7 +49,7 @@ auto FilterByMinimum(const QVector<qreal> &base, qreal restriction) -> QVector<q
 
     QVector<qreal> filtered;
     filtered.reserve(base.size());
-    for(const auto &b : base)
+    for (const auto &b : base)
     {
         if (b > restriction || VFuzzyComparePossibleNulls(b, restriction))
         {
@@ -69,7 +69,7 @@ auto FilterByMaximum(const QVector<qreal> &base, qreal restriction) -> QVector<q
 
     QVector<qreal> filtered;
     filtered.reserve(base.size());
-    for(const auto &b : base)
+    for (const auto &b : base)
     {
         if (b < restriction || VFuzzyComparePossibleNulls(b, restriction))
         {
@@ -100,6 +100,8 @@ void InitMinMax(qreal &min, qreal &max, const MeasurementDimension_p &dimension,
 void SetCellIcon(QTableWidgetItem *item, const QVector<qreal> &validRows, qreal rowValue, qreal columnValue,
                  const VDimensionRestriction &restriction, qreal min, qreal max)
 {
+    const QIcon closeIcon = QIcon(QStringLiteral("://icon/24x24/close.png"));
+
     if (VFuzzyContains(validRows, rowValue))
     {
         const bool leftRestriction = columnValue > min || VFuzzyComparePossibleNulls(columnValue, min);
@@ -107,32 +109,32 @@ void SetCellIcon(QTableWidgetItem *item, const QVector<qreal> &validRows, qreal 
 
         if (leftRestriction && rightRestriction)
         {
-            item->setIcon(QIcon(VFuzzyContains(restriction.GetExcludeValues(), columnValue)
-                                    ? QStringLiteral("://icon/24x24/close.png")
-                                    : QStringLiteral("://icon/24x24/star.png")));
+            item->setIcon(VFuzzyContains(restriction.GetExcludeValues(), columnValue)
+                              ? closeIcon
+                              : QIcon(QStringLiteral("://icon/24x24/star.png")));
         }
         else
         {
-            item->setIcon(QIcon(QStringLiteral("://icon/24x24/close.png")));
+            item->setIcon(closeIcon);
         }
     }
     else
     {
-        item->setIcon(QIcon(QStringLiteral("://icon/24x24/close.png")));
+        item->setIcon(closeIcon);
 
         Qt::ItemFlags flags = item->flags();
         flags &= ~(Qt::ItemIsEnabled);
         item->setFlags(flags);
     }
 }
-}  // namespace
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogRestrictDimension::DialogRestrictDimension(const QList<MeasurementDimension_p> &dimensions,
                                                  const QMap<QString, VDimensionRestriction> &restrictions,
                                                  RestrictDimension restrictionType, bool fullCircumference,
-                                                 QWidget *parent) :
-    QDialog(parent),
+                                                 QWidget *parent)
+  : QDialog(parent),
     ui(new Ui::DialogRestrictDimension),
     m_restrictionType(restrictionType),
     m_fullCircumference(fullCircumference),
@@ -185,7 +187,7 @@ void DialogRestrictDimension::changeEvent(QEvent *event)
             {
                 MeasurementDimension_p dimension = m_dimensions.at(index);
 
-                name->setText(dimension->Name()+QChar(':'));
+                name->setText(dimension->Name() + QChar(':'));
                 name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension, m_fullCircumference));
 
                 InitDimensionGradation(dimension, control);
@@ -449,7 +451,7 @@ void DialogRestrictDimension::InitDimensionsBaseValues()
         if (m_dimensions.size() > index)
         {
             MeasurementDimension_p dimension = m_dimensions.at(index);
-            name->setText(dimension->Name()+QChar(':'));
+            name->setText(dimension->Name() + QChar(':'));
             name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension, m_fullCircumference));
 
             InitDimensionGradation(dimension, control);
@@ -614,16 +616,16 @@ void DialogRestrictDimension::RefreshTable()
 
     if (m_restrictionType == RestrictDimension::First)
     {
-        for(int column=0; column < basesColumn.size(); ++column)
+        for (int column = 0; column < basesColumn.size(); ++column)
         {
             AddCell(0, column, 0, basesColumn.at(column));
         }
     }
     else
     {
-        for(int row=0; row < basesRow.size(); ++row)
+        for (int row = 0; row < basesRow.size(); ++row)
         {
-            for(int column=0; column < basesColumn.size(); ++column)
+            for (int column = 0; column < basesColumn.size(); ++column)
             {
                 AddCell(row, column, basesRow.at(row), basesColumn.at(column));
             }
@@ -765,8 +767,8 @@ void DialogRestrictDimension::FillBase(double base, const MeasurementDimension_p
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto DialogRestrictDimension::FillDimensionXBases(const QVector<qreal> &bases,
-                                                  const MeasurementDimension_p &dimension) -> QStringList
+auto DialogRestrictDimension::FillDimensionXBases(const QVector<qreal> &bases, const MeasurementDimension_p &dimension)
+    -> QStringList
 {
     const bool showUnits = dimension->IsBodyMeasurement() || dimension->Type() == MeasurementDimension::X;
     const QString units = showUnits ? UnitsToStr(dimension->Units(), true) : QString();
@@ -774,7 +776,7 @@ auto DialogRestrictDimension::FillDimensionXBases(const QVector<qreal> &bases,
 
     QStringList labels;
 
-    for(auto base : bases)
+    for (auto base : bases)
     {
         if (VFuzzyContains(dimensionLabels, base) && not VFuzzyValue(dimensionLabels, base).isEmpty())
         {
@@ -799,7 +801,7 @@ auto DialogRestrictDimension::FillDimensionYBases(const QVector<qreal> &bases,
 
     QStringList labels;
 
-    for(auto base : bases)
+    for (auto base : bases)
     {
         if (VFuzzyContains(dimensionLabels, base) && not VFuzzyValue(dimensionLabels, base).isEmpty())
         {
@@ -809,7 +811,7 @@ auto DialogRestrictDimension::FillDimensionYBases(const QVector<qreal> &bases,
         {
             if (dimension->IsBodyMeasurement())
             {
-                labels.append(QStringLiteral("%1 %2").arg(m_fullCircumference ? base*2 : base).arg(units));
+                labels.append(QStringLiteral("%1 %2").arg(m_fullCircumference ? base * 2 : base).arg(units));
             }
             else
             {
@@ -831,7 +833,7 @@ auto DialogRestrictDimension::FillDimensionWZBases(const QVector<qreal> &bases,
 
     QStringList labels;
 
-    for(auto base : bases)
+    for (auto base : bases)
     {
         if (VFuzzyContains(dimensionLabels, base) && not VFuzzyValue(dimensionLabels, base).isEmpty())
         {
@@ -839,7 +841,7 @@ auto DialogRestrictDimension::FillDimensionWZBases(const QVector<qreal> &bases,
         }
         else
         {
-            labels.append(QStringLiteral("%1 %2").arg(m_fullCircumference ? base*2 : base).arg(units));
+            labels.append(QStringLiteral("%1 %2").arg(m_fullCircumference ? base * 2 : base).arg(units));
         }
     }
 
@@ -918,7 +920,7 @@ auto DialogRestrictDimension::StartRow() const -> int
 
         QVector<qreal> validRows = DimensionRestrictedValues(dimensionB);
 
-        for(int i=0; i < basesRow.size(); ++i)
+        for (int i = 0; i < basesRow.size(); ++i)
         {
             if (VFuzzyContains(validRows, basesRow.at(i)))
             {

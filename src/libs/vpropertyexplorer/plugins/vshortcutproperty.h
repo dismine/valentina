@@ -21,13 +21,11 @@
 #ifndef VSHORTCUTROPERTY_H
 #define VSHORTCUTROPERTY_H
 
-
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
 #include <QStyleOptionViewItem>
 #include <QVariant>
-#include <Qt>
 #include <QtGlobal>
 
 #include "../vproperty.h"
@@ -43,6 +41,7 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 class VPROPERTYEXPLORERSHARED_EXPORT VShortcutProperty : public VProperty
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit VShortcutProperty(const QString &name);
 
@@ -78,7 +77,7 @@ public:
         -> VProperty * override;
 
     //! Sets the value of the property
-    virtual void setValue(const QVariant& value) override;
+    virtual void setValue(const QVariant &value) override;
 
 private:
     Q_DISABLE_COPY_MOVE(VShortcutProperty) // NOLINT
@@ -86,6 +85,6 @@ private:
 
 QT_WARNING_POP
 
-}
+} // namespace VPE
 
 #endif // VFILEPROPERTY_H

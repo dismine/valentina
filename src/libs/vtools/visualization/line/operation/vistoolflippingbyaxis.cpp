@@ -31,9 +31,11 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolFlippingByAxis::VisToolFlippingByAxis(const VContainer *data, QGraphicsItem *parent)
-    : VisOperation(data, parent)
+  : VisOperation(data, parent)
 {
-    m_point1 = InitPoint(Color(VColor::SupportColor2), this);
+    SetColorRole(VColorRole::VisSupportColor2);
+
+    m_point1 = InitPoint(VColorRole::VisSupportColor2, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -50,7 +52,7 @@ void VisToolFlippingByAxis::RefreshGeometry()
     if (m_originPointId != NULL_ID)
     {
         firstPoint = static_cast<QPointF>(*GetData()->GeometricObject<VPointF>(m_originPointId));
-        DrawPoint(m_point1, firstPoint, Color(VColor::SupportColor2));
+        DrawPoint(m_point1, firstPoint);
 
         if (m_axisType == AxisType::VerticalAxis)
         {
@@ -61,7 +63,7 @@ void VisToolFlippingByAxis::RefreshGeometry()
             secondPoint = QPointF(firstPoint.x() + 100, firstPoint.y());
         }
 
-        DrawLine(this, Axis(firstPoint, secondPoint), Color(VColor::SupportColor2), Qt::DashLine);
+        DrawLine(this, Axis(firstPoint, secondPoint), Qt::DashLine);
     }
 
     RefreshFlippedObjects(m_originPointId, firstPoint, secondPoint);

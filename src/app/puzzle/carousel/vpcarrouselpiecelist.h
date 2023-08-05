@@ -33,12 +33,12 @@
 
 #include "vpcarrousel.h"
 
-
 class VPCarrouselPieceList : public QListWidget
 {
     Q_OBJECT // NOLINT
+
 public:
-    explicit VPCarrouselPieceList(QWidget* parent);
+    explicit VPCarrouselPieceList(QWidget *parent);
     ~VPCarrouselPieceList() override = default;
 
     /**
@@ -66,7 +66,7 @@ public slots:
 
 protected:
     void startDrag(Qt::DropActions supportedActions) override;
-    void dragMoveEvent(QDragMoveEvent* e) override;
+    void dragMoveEvent(QDragMoveEvent *e) override;
 
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
@@ -79,6 +79,8 @@ private:
     QList<VPPiecePtr> m_pieceList{};
     QPoint m_dragStart{};
     VPCarrousel *m_carrousel{nullptr};
+
+    void InitStyleSheet();
 };
 
 #endif // VPCARROUSELPIECELIST_H

@@ -30,16 +30,16 @@
 
 #include <QPen>
 
-#include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
+#include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vsimplepoint.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisPath::VisPath(const VContainer *data, QGraphicsItem *parent)
-    : Visualization(data),
-      VCurvePathItem(parent)
+  : Visualization(data),
+    VCurvePathItem(VColorRole::VisMainColor, parent)
 {
-    setZValue(1);// Show on top real tool
+    setZValue(1); // Show on top real tool
     VisPath::InitPen();
 }
 
@@ -47,9 +47,7 @@ VisPath::VisPath(const VContainer *data, QGraphicsItem *parent)
 void VisPath::InitPen()
 {
     QPen visPen = pen();
-    visPen.setColor(Color(VColor::MainColor));
     visPen.setStyle(LineStyle());
-
     setPen(visPen);
 }
 
@@ -60,14 +58,14 @@ void VisPath::AddOnScene()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VisPath::GetPoint(QVector<VSimplePoint *> &points, quint32 i, const QColor &color) -> VSimplePoint *
+auto VisPath::GetPoint(QVector<VSimplePoint *> &points, quint32 i, VColorRole role) -> VSimplePoint *
 {
     if (not points.isEmpty() && static_cast<quint32>(points.size() - 1) >= i)
     {
         return points.at(static_cast<int>(i));
     }
 
-    auto *point = new VSimplePoint(NULL_ID, color);
+    auto *point = new VSimplePoint(NULL_ID, role);
     point->SetPointHighlight(true);
     point->setParentItem(this);
     point->SetVisualizationMode(true);

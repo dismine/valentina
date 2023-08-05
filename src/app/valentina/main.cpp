@@ -58,13 +58,14 @@ auto main(int argc, char *argv[]) -> int
     auto FreeMemory = qScopeGuard([exe_dir] { free(exe_dir); });
 #endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 
-    Q_INIT_RESOURCE(cursor);   // NOLINT
-    Q_INIT_RESOURCE(icon);     // NOLINT
-    Q_INIT_RESOURCE(schema);   // NOLINT
-    Q_INIT_RESOURCE(flags);    // NOLINT
-    Q_INIT_RESOURCE(icons);    // NOLINT
-    Q_INIT_RESOURCE(toolicon); // NOLINT
-    Q_INIT_RESOURCE(breeze);   // NOLINT
+    Q_INIT_RESOURCE(cursor);     // NOLINT
+    Q_INIT_RESOURCE(icon);       // NOLINT
+    Q_INIT_RESOURCE(schema);     // NOLINT
+    Q_INIT_RESOURCE(flags);      // NOLINT
+    Q_INIT_RESOURCE(icons);      // NOLINT
+    Q_INIT_RESOURCE(toolicon);   // NOLINT
+    Q_INIT_RESOURCE(breeze);     // NOLINT
+    Q_INIT_RESOURCE(scenestyle); // NOLINT
 #if defined(Q_OS_MACX)
     Q_INIT_RESOURCE(mac_theme); // NOLINT
 #else

@@ -33,30 +33,27 @@
 #include <QLine>
 #include <QPointF>
 #include <QSharedPointer>
-#include <Qt>
 #include <new>
 
 #include "../../tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollineintersectaxis.h"
 #include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
-#include "visline.h"
-#include "../vmisc/vmodifierkey.h"
 #include "../vmisc/compatibility.h"
+#include "../vmisc/vmodifierkey.h"
+#include "../vpatterndb/vcontainer.h"
+#include "visline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolLineIntersectAxis::VisToolLineIntersectAxis(const VContainer *data, QGraphicsItem *parent)
-    : VisLine(data, parent)
+  : VisLine(data, parent)
 {
-    SetMainColor(Qt::red);
-
-    m_lineP1 = InitPoint(Color(VColor::SupportColor), this);
-    m_lineP2 = InitPoint(Color(VColor::SupportColor), this);
-    m_basePoint = InitPoint(Color(VColor::SupportColor), this);
-    m_baseLine = InitItem<VScaledLine>(Color(VColor::SupportColor), this);
-    m_axisLine = InitItem<VScaledLine>(Color(VColor::SupportColor), this);
-    m_lineIntersection = InitItem<VScaledLine>(Color(VColor::SupportColor), this);
-    m_point = InitPoint(Color(VColor::MainColor), this);
+    m_lineP1 = InitPoint(VColorRole::VisSupportColor, this);
+    m_lineP2 = InitPoint(VColorRole::VisSupportColor, this);
+    m_basePoint = InitPoint(VColorRole::VisSupportColor, this);
+    m_baseLine = InitItem<VScaledLine>(VColorRole::VisSupportColor, this);
+    m_axisLine = InitItem<VScaledLine>(VColorRole::VisSupportColor, this);
+    m_lineIntersection = InitItem<VScaledLine>(VColorRole::VisSupportColor, this);
+    m_point = InitPoint(VColorRole::VisMainColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -65,25 +62,25 @@ void VisToolLineIntersectAxis::RefreshGeometry()
     if (m_point1Id > NULL_ID)
     {
         const QSharedPointer<VPointF> first = GetData()->GeometricObject<VPointF>(m_point1Id);
-        DrawPoint(m_lineP1, static_cast<QPointF>(*first), Color(VColor::SupportColor));
+        DrawPoint(m_lineP1, static_cast<QPointF>(*first));
 
         if (m_point2Id <= NULL_ID)
         {
-            DrawLine(m_baseLine, QLineF(static_cast<QPointF>(*first), ScenePos()), Color(VColor::SupportColor));
+            DrawLine(m_baseLine, QLineF(static_cast<QPointF>(*first), ScenePos()));
         }
         else
         {
             const QSharedPointer<VPointF> second = GetData()->GeometricObject<VPointF>(m_point2Id);
-            DrawPoint(m_lineP2, static_cast<QPointF>(*second), Color(VColor::SupportColor));
+            DrawPoint(m_lineP2, static_cast<QPointF>(*second));
 
             const QLineF base_line(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
-            DrawLine(m_baseLine, base_line, Color(VColor::SupportColor));
+            DrawLine(m_baseLine, base_line);
 
             if (m_axisPointId > NULL_ID)
             {
                 QLineF axis;
                 const QSharedPointer<VPointF> third = GetData()->GeometricObject<VPointF>(m_axisPointId);
-                DrawPoint(m_basePoint, static_cast<QPointF>(*third), Color(VColor::MainColor));
+                DrawPoint(m_basePoint, static_cast<QPointF>(*third));
 
                 if (VFuzzyComparePossibleNulls(m_angle, -1))
                 {
@@ -98,25 +95,25 @@ void VisToolLineIntersectAxis::RefreshGeometry()
                     axis = Axis(static_cast<QPointF>(*third), m_angle);
                 }
 
-                DrawLine(m_axisLine, axis, Color(VColor::SupportColor), Qt::DashLine);
+                DrawLine(m_axisLine, axis, Qt::DashLine);
 
                 QPointF p;
                 VToolLineIntersectAxis::FindPoint(axis, base_line, &p);
                 QLineF axis_line(static_cast<QPointF>(*third), p);
                 if (not axis_line.isNull())
                 {
-                    DrawLine(this, axis_line, Color(VColor::MainColor), LineStyle());
+                    DrawLine(this, axis_line, LineStyle());
                 }
 
-                DrawPoint(m_point, p, Color(VColor::MainColor));
+                DrawPoint(m_point, p);
                 ShowIntersection(axis_line, base_line);
 
                 if (GetMode() == Mode::Creation)
                 {
-                    SetToolTip(tr("<b>Intersection line and axis</b>: angle = %1°; <b>%2</b> - "
-                                  "sticking angle, <b>%3</b> - finish creation")
-                                   .arg(AngleToUser(this->line().angle()), VModifierKey::Shift(),
-                                        VModifierKey::EnterKey()));
+                    SetToolTip(
+                        tr("<b>Intersection line and axis</b>: angle = %1°; <b>%2</b> - "
+                           "sticking angle, <b>%3</b> - finish creation")
+                            .arg(AngleToUser(this->line().angle()), VModifierKey::Shift(), VModifierKey::EnterKey()));
                 }
             }
         }
@@ -151,7 +148,7 @@ void VisToolLineIntersectAxis::ShowIntersection(const QLineF &axis_line, const Q
     if (intersect == QLineF::UnboundedIntersection)
     {
         m_lineIntersection->setVisible(true);
-        DrawLine(m_lineIntersection, QLineF(base_line.p1(), axis_line.p2()), Color(VColor::SupportColor), Qt::DashLine);
+        DrawLine(m_lineIntersection, QLineF(base_line.p1(), axis_line.p2()), Qt::DashLine);
     }
     else if (intersect == QLineF::BoundedIntersection || intersect == QLineF::NoIntersection)
     {

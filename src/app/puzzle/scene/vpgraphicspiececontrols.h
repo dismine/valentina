@@ -31,8 +31,8 @@
 #include <QColor>
 #include <QGraphicsObject>
 
-#include "scenedef.h"
 #include "../layout/layoutdef.h"
+#include "scenedef.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
@@ -62,12 +62,16 @@ enum class VPHandleCornerType
 class VPGraphicsTransformationOrigin : public QGraphicsObject
 {
     Q_OBJECT // NOLINT
+
 public:
-    explicit VPGraphicsTransformationOrigin(const VPLayoutPtr &layout, QGraphicsItem * parent = nullptr);
+    explicit VPGraphicsTransformationOrigin(const VPLayoutPtr &layout, QGraphicsItem *parent = nullptr);
     ~VPGraphicsTransformationOrigin() override = default;
 
-    auto type() const -> int override {return Type;}
-    enum { Type = UserType + static_cast<int>(PGraphicsItem::TransformationOrigin)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(PGraphicsItem::TransformationOrigin)
+    };
 
 public slots:
     void SetTransformationOrigin();
@@ -79,8 +83,8 @@ protected:
     auto shape() const -> QPainterPath override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
-    void mousePressEvent(QGraphicsSceneMouseEvent * event) override;
-    void mouseMoveEvent(QGraphicsSceneMouseEvent * event) override;
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
     void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
@@ -90,25 +94,31 @@ private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VPGraphicsTransformationOrigin) // NOLINT
 
-    bool            m_originVisible{true};
+    bool m_originVisible{true};
     VPLayoutWeakPtr m_layout{};
-    QColor          m_color;
-    bool            m_allowChangeMerge{false};
+    bool m_hoverMode{false};
+    bool m_allowChangeMerge{false};
 
     auto RotationCenter(QPainter *painter = nullptr) const -> QPainterPath;
     auto Center1() const -> QPainterPath;
     auto Center2() const -> QPainterPath;
+
+    auto CurrentColor() const -> QColor;
 };
 
 class VPGraphicsPieceControls : public QGraphicsObject
 {
     Q_OBJECT // NOLINT
+
 public:
-    explicit VPGraphicsPieceControls(const VPLayoutPtr &layout, QGraphicsItem * parent = nullptr);
+    explicit VPGraphicsPieceControls(const VPLayoutPtr &layout, QGraphicsItem *parent = nullptr);
     ~VPGraphicsPieceControls() override = default;
 
-    auto type() const -> int override {return Type;}
-    enum { Type = UserType + static_cast<int>(PGraphicsItem::Handles)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(PGraphicsItem::Handles)
+    };
 
     void SetIgnorePieceTransformation(bool newIgnorePieceTransformation);
 
@@ -135,17 +145,17 @@ protected:
 private:
     Q_DISABLE_COPY_MOVE(VPGraphicsPieceControls) // NOLINT
 
-    QRectF          m_pieceRect{};
-    QPointF         m_rotationStartPoint{};
-    qreal           m_rotationSum{0};
-    bool            m_controlsVisible{false};
+    QRectF m_pieceRect{};
+    QPointF m_rotationStartPoint{};
+    qreal m_rotationSum{0};
+    bool m_controlsVisible{false};
     VPLayoutWeakPtr m_layout{};
-    VPHandleCorner  m_handleCorner{VPHandleCorner::Invalid};
+    VPHandleCorner m_handleCorner{VPHandleCorner::Invalid};
     VPTransformationOrigon m_savedOrigin{};
-    bool            m_originSaved{false};
-    bool            allowChangeMerge{false};
+    bool m_originSaved{false};
+    bool allowChangeMerge{false};
     QList<VPPiecePtr> m_selectedPieces{};
-    bool            m_ignorePieceTransformation{false};
+    bool m_ignorePieceTransformation{false};
 
     QMap<VPHandleCornerType, QPixmap> m_handlePixmaps{};
     QMap<VPHandleCornerType, QPixmap> m_handleHoverPixmaps{};

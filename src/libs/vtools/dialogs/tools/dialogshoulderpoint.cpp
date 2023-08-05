@@ -40,17 +40,18 @@
 #include <QTimer>
 #include <QToolButton>
 
-#include "../vpatterndb/vtranslatevars.h"
-#include "../../visualization/visualization.h"
 #include "../../visualization/line/vistoolshoulderpoint.h"
+#include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../support/dialogeditwrongformula.h"
+#include "../vgeometry/vpointf.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
-#include "ui_dialogshoulderpoint.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vabstractmainwindow.h"
-#include "../vgeometry/vpointf.h"
+#include "ui_dialogshoulderpoint.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -59,11 +60,13 @@
  * @param parent parent widget
  */
 DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogShoulderPoint),
-      m_timerFormula(new QTimer(this))
+  : DialogTool(data, toolId, parent),
+    ui(new Ui::DialogShoulderPoint),
+    m_timerFormula(new QTimer(this))
 {
     ui->setupUi(this);
+
+    InitIcons();
 
     m_timerFormula->setSingleShot(true);
     connect(m_timerFormula, &QTimer::timeout, this, &DialogShoulderPoint::EvalFormula);
@@ -71,35 +74,33 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, quint32 toolId,
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
     ui->lineEditNamePoint->setText(
-                VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
+        VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     m_formulaBaseHeight = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
 
     InitOkCancelApply(ui);
 
-    FillComboBoxTypeLine(ui->comboBoxLineType, LineStylesPics());
+    FillComboBoxTypeLine(ui->comboBoxLineType, LineStylesPics(ui->comboBoxLineType->palette().color(QPalette::Base),
+                                                              ui->comboBoxLineType->palette().color(QPalette::Text)));
     FillComboBoxPoints(ui->comboBoxP1Line);
     FillComboBoxPoints(ui->comboBoxP2Line);
     FillComboBoxPoints(ui->comboBoxP3);
     FillComboBoxLineColors(ui->comboBoxLineColor);
 
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogShoulderPoint::FXLength);
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
-    {
-        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, m_pointName, this->data, m_flagName);
-        CheckState();
-    });
-    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        m_timerFormula->start(formulaTimerTimeout);
-    });
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
+            [this]()
+            {
+                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, m_pointName, this->data,
+                                m_flagName);
+                CheckState();
+            });
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerFormula->start(formulaTimerTimeout); });
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogShoulderPoint::DeployFormulaTextEdit);
-    connect(ui->comboBoxP1Line, &QComboBox::currentTextChanged,
-            this, &DialogShoulderPoint::PointNameChanged);
-    connect(ui->comboBoxP2Line, &QComboBox::currentTextChanged,
-            this, &DialogShoulderPoint::PointNameChanged);
-    connect(ui->comboBoxP3, &QComboBox::currentTextChanged,
-            this, &DialogShoulderPoint::PointNameChanged);
+    connect(ui->comboBoxP1Line, &QComboBox::currentTextChanged, this, &DialogShoulderPoint::PointNameChanged);
+    connect(ui->comboBoxP2Line, &QComboBox::currentTextChanged, this, &DialogShoulderPoint::PointNameChanged);
+    connect(ui->comboBoxP3, &QComboBox::currentTextChanged, this, &DialogShoulderPoint::PointNameChanged);
 
     vis = new VisToolShoulderPoint(data);
 
@@ -255,6 +256,24 @@ void DialogShoulderPoint::closeEvent(QCloseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogShoulderPoint::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        InitIcons();
+        InitDialogButtonBoxIcons(ui->buttonBox);
+    }
+
+    // remember to call base class implementation
+    DialogTool::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogShoulderPoint::ChosenThirdPoint(quint32 id)
 {
     QSet<quint32> set;
@@ -266,8 +285,7 @@ void DialogShoulderPoint::ChosenThirdPoint(quint32 id)
     {
         if (SetObject(id, ui->comboBoxP2Line, QString()))
         {
-            auto *window = qobject_cast<VAbstractMainWindow *>(
-                VAbstractValApplication::VApp()->getMainWindow());
+            auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
             SCASSERT(window != nullptr)
 
             auto *line = qobject_cast<VisToolShoulderPoint *>(vis);
@@ -294,6 +312,15 @@ void DialogShoulderPoint::FinishCreating()
     emit ToolTip(QString());
     setModal(true);
     show();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogShoulderPoint::InitIcons()
+{
+    const QString resource = QStringLiteral("icon");
+
+    ui->toolButtonExprLength->setIcon(VTheme::GetIconResource(resource, QStringLiteral("24x24/fx.png")));
+    ui->label_3->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/equal.png")));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -357,8 +384,8 @@ void DialogShoulderPoint::SetP1Line(const quint32 &value)
  */
 void DialogShoulderPoint::SetFormula(const QString &value)
 {
-    m_formula = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    m_formula = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (m_formula.length() > 80)
     {

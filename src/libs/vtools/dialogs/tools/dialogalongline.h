@@ -95,6 +95,7 @@ protected:
      */
     void SaveData() override;
     void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
     auto IsValid() const -> bool final;
 
 private:
@@ -129,6 +130,8 @@ private:
     void ChosenSecondPoint(quint32 id, const QString &toolTip);
 
     void FinishCreating();
+
+    void InitIcons();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -37,13 +37,14 @@
 #include "../vproperty_p.h"
 
 VPE::VLineTypeProperty::VLineTypeProperty(const QString &name)
-    : VProperty(name,
+  : VProperty(name,
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-                QMetaType::Int),
+              QMetaType::Int),
 #else
-                QVariant::Int),
+              QVariant::Int),
 #endif
-      styles(), indexList()
+    styles(),
+    indexList()
 {
     VProperty::d_ptr->VariantValue = 0;
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -57,7 +58,7 @@ auto VPE::VLineTypeProperty::data(int column, int role) const -> QVariant
 {
     if (styles.empty())
     {
-        return QVariant();
+        return {};
     }
 
     int tmpIndex = VProperty::d_ptr->VariantValue.toInt();
@@ -71,14 +72,12 @@ auto VPE::VLineTypeProperty::data(int column, int role) const -> QVariant
     {
         return indexList.at(tmpIndex);
     }
+
     if (column == DPC_Data && Qt::EditRole == role)
     {
         return tmpIndex;
     }
-    else
-    {
-        return VProperty::data(column, role);
-    }
+    return VProperty::data(column, role);
 }
 
 auto VPE::VLineTypeProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
@@ -86,7 +85,7 @@ auto VPE::VLineTypeProperty::createEditor(QWidget *parent, const QStyleOptionVie
 {
     Q_UNUSED(options)
     Q_UNUSED(delegate)
-    QComboBox* tmpEditor = new QComboBox(parent);
+    auto *tmpEditor = new QComboBox(parent);
     tmpEditor->clear();
     tmpEditor->setLocale(parent->locale());
     tmpEditor->setIconSize(QSize(80, 14));
@@ -110,13 +109,13 @@ auto VPE::VLineTypeProperty::createEditor(QWidget *parent, const QStyleOptionVie
 
 auto VPE::VLineTypeProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
-    const QComboBox* tmpEditor = qobject_cast<const QComboBox*>(editor);
+    const auto *tmpEditor = qobject_cast<const QComboBox *>(editor);
     if (tmpEditor)
     {
         return tmpEditor->currentIndex();
     }
 
-    return QVariant(0);
+    return {0};
 }
 
 void VPE::VLineTypeProperty::setStyles(const QMap<QString, QIcon> &styles)
@@ -184,6 +183,6 @@ auto VPE::VLineTypeProperty::IndexOfStyle(const QMap<QString, QIcon> &styles, co
 void VPE::VLineTypeProperty::currentIndexChanged(int index)
 {
     Q_UNUSED(index)
-    UserChangeEvent *event = new UserChangeEvent();
-    QCoreApplication::postEvent ( VProperty::d_ptr->editor, event );
+    auto *event = new UserChangeEvent();
+    QCoreApplication::postEvent(VProperty::d_ptr->editor, event);
 }

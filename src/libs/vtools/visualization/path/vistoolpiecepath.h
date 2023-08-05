@@ -65,7 +65,7 @@ private:
 
     QVector<QPointF> m_cuttingPath{};
 
-    auto GetPoint(quint32 i, const QColor &color) -> VSimplePoint *;
+    auto GetPoint(quint32 i, VColorRole role) -> VSimplePoint *;
 
     void HideAllItems();
 };

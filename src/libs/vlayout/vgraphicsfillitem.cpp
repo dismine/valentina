@@ -30,20 +30,18 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VGraphicsFillItem::VGraphicsFillItem(QGraphicsItem *parent)
-    :QGraphicsPathItem(parent)
-{}
+  : QGraphicsPathItem(parent)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VGraphicsFillItem::VGraphicsFillItem(const QPainterPath &path, QGraphicsItem *parent)
-    :QGraphicsPathItem(path, parent)
-{}
+  : QGraphicsPathItem(path, parent)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VGraphicsFillItem::~VGraphicsFillItem()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VGraphicsFillItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+void VGraphicsFillItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(option)
     Q_UNUSED(widget)

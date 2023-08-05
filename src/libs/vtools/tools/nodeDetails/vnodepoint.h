@@ -29,7 +29,6 @@
 #ifndef VNODEPOINT_H
 #define VNODEPOINT_H
 
-
 #include <QGraphicsEllipseItem>
 #include <QGraphicsItem>
 #include <QMetaObject>
@@ -39,25 +38,31 @@
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
-#include "vabstractnode.h"
 #include "../vwidgets/vscenepoint.h"
+#include "vabstractnode.h"
 
 /**
  * @brief The VNodePoint class point detail node.
  */
-class VNodePoint: public VAbstractNode, public VScenePoint
+class VNodePoint : public VAbstractNode, public VScenePoint
 {
     Q_OBJECT // NOLINT
+
 public:
+    ~VNodePoint() override = default;
+
     static void Create(const VAbstractNodeInitData &initData);
 
     static const QString ToolType;
-    virtual auto type() const -> int override { return Type; }
-    enum { Type = UserType + static_cast<int>(Tool::NodePoint)};
-    virtual auto getTagName() const -> QString override;
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Tool::NodePoint)
+    };
+    auto getTagName() const -> QString override;
 
-    virtual void ChangeLabelPosition(quint32 id, const QPointF &pos) override;
-    virtual void SetLabelVisible(quint32 id, bool visible) override;
+    void ChangeLabelPosition(quint32 id, const QPointF &pos) override;
+    void SetLabelVisible(quint32 id, bool visible) override;
 signals:
     void ShowOptions();
     void ToggleInLayout(bool checked);
@@ -72,27 +77,30 @@ signals:
     void TogglePassmarkLineType(quint32 id, PassmarkLineType type);
     void ResetPieceLabelTemplate();
 public slots:
-    virtual void FullUpdateFromFile() override;
-    void         NameChangePosition(const QPointF &pos);
-    void         PointChoosed();
-    void         EnableToolMove(bool move);
-    virtual void AllowHover(bool enabled) override;
-    virtual void AllowSelecting(bool enabled) override;
-    void         AllowLabelHover(bool enabled);
-    void         AllowLabelSelecting(bool enabled);
+    void FullUpdateFromFile() override;
+    void NameChangePosition(const QPointF &pos);
+    void PointChoosed();
+    void EnableToolMove(bool move);
+    void AllowHover(bool enabled) override;
+    void AllowSelecting(bool enabled) override;
+    void AllowLabelHover(bool enabled);
+    void AllowLabelSelecting(bool enabled);
+
 protected:
-    virtual void AddToFile() override;
-    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
-    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
-    virtual void ShowNode() override;
-    virtual void HideNode() override;
-    virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
-    virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+    void AddToFile() override;
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+    void ShowNode() override;
+    void HideNode() override;
+    void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VNodePoint) // NOLINT
 
-    VNodePoint(const VAbstractNodeInitData &initData, QObject *qoParent = nullptr, QGraphicsItem *parent = nullptr);
+    explicit VNodePoint(const VAbstractNodeInitData &initData, QObject *qoParent = nullptr,
+                        QGraphicsItem *parent = nullptr);
 
     auto InitContextMenu(QMenu *menu, vidtype pieceId, quint32 referens) -> QHash<int, QAction *>;
     void InitPassmarkMenu(QMenu *menu, vidtype pieceId, QHash<int, QAction *> &contextMenu);

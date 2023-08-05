@@ -10,6 +10,7 @@
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "layout/vplayout.h"
 #include "layout/vpsheet.h"
+#include "theme/vtheme.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
@@ -390,7 +391,7 @@ void VPTileFactory::DrawWatermark(QPainter *painter) const
 
         if (m_watermarkData.showImage && not m_watermarkData.path.isEmpty())
         {
-            PaintWatermarkImage(painter, img, m_watermarkData, layout->LayoutSettings().WatermarkPath());
+            PaintWatermarkImage(painter, img, m_watermarkData, layout->LayoutSettings().WatermarkPath(), false);
         }
 
         if (m_watermarkData.showText && not m_watermarkData.text.isEmpty())
@@ -690,16 +691,25 @@ void VPTileFactory::PaintWatermarkText(QPainter *painter, const QRectF &img, con
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPTileFactory::PaintWatermarkImage(QPainter *painter, const QRectF &img, const VWatermarkData &watermarkData,
-                                        const QString &watermarkPath, qreal xScale, qreal yScale)
+                                        const QString &watermarkPath, bool folowColorScheme, qreal xScale, qreal yScale)
 {
     SCASSERT(painter != nullptr)
 
     const qreal opacity = watermarkData.opacity / 100.;
-    auto BrokenImage = [img, watermarkData, watermarkPath, opacity]()
+    auto BrokenImage = [img, watermarkData, watermarkPath, opacity, folowColorScheme]()
     {
+        QString colorScheme = QStringLiteral("light");
+
+        if (folowColorScheme)
+        {
+            colorScheme =
+                (VTheme::ColorSheme() == VColorSheme::Light ? QStringLiteral("light") : QStringLiteral("dark"));
+        }
+
         QPixmap watermark;
-        QString imagePath = QStringLiteral("puzzle=path%1+opacity%2_broken")
-                                .arg(AbsoluteMPath(watermarkPath, watermarkData.path), QString::number(opacity));
+        QString imagePath =
+            QStringLiteral("puzzle=colorScheme%1+path%2+opacity%3_broken")
+                .arg(colorScheme, AbsoluteMPath(watermarkPath, watermarkData.path), QString::number(opacity));
 
         if (not QPixmapCache::find(imagePath, &watermark))
         {
@@ -712,7 +722,7 @@ void VPTileFactory::PaintWatermarkImage(QPainter *painter, const QRectF &img, co
             QPainter imagePainter(&watermark);
             imagePainter.setOpacity(opacity);
 
-            svgRenderer->load(QStringLiteral("://puzzleicon/svg/no_watermark_image.svg"));
+            svgRenderer->load(QStringLiteral("://puzzleicon/svg/%1/no_watermark_image.svg").arg(colorScheme));
             svgRenderer->render(&imagePainter, imageRect);
 
             QPixmapCache::insert(imagePath, watermark);

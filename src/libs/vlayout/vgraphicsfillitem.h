@@ -34,6 +34,10 @@
 
 #include "../vmisc/def.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
+#include "../vmisc/defglobal.h"
+#endif
+
 class VGraphicsFillItem : public QGraphicsPathItem
 {
 public:
@@ -41,12 +45,9 @@ public:
      * @brief VGraphicsFillItem Constructor
      */
     explicit VGraphicsFillItem(QGraphicsItem *parent = nullptr);
+    explicit VGraphicsFillItem(const QPainterPath &path, QGraphicsItem *parent = nullptr);
+    ~VGraphicsFillItem() override = default;
 
-    VGraphicsFillItem(const QPainterPath &path, QGraphicsItem *parent = nullptr);
-    /**
-     * @brief ~VGraphicsFillItem Destructor
-     */
-    ~VGraphicsFillItem();
     /**
      * @brief paint Paints the item, filling the inside surface
      * @param painter pointer to the painter object
@@ -56,7 +57,10 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
     auto type() const -> int override { return Type; }
-    enum { Type = UserType + static_cast<int>(Layout::GrainlineItem)};
+    enum
+    {
+        Type = UserType + static_cast<int>(Layout::GrainlineItem)
+    };
 
     auto GetWidth() const -> qreal;
     void SetWidth(const qreal &value);
@@ -65,6 +69,7 @@ public:
     void SetCustomPen(bool newCustomPen);
 
 private:
+    Q_DISABLE_COPY_MOVE(VGraphicsFillItem) // NOLINT
     qreal width{1};
     bool m_customPen{false};
 };

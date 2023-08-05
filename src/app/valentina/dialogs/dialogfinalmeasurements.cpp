@@ -29,13 +29,15 @@
 #include "dialogfinalmeasurements.h"
 #include "../qmuparser/qmudef.h"
 #include "../vmisc/compatibility.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vvalentinasettings.h"
 #include "../vpatterndb/calculator.h"
+#include "../vtools/dialogs/dialogtoolbox.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
 #include "ui_dialogfinalmeasurements.h"
+
 #include <QMenu>
-#include <qnumeric.h>
 
 constexpr int DIALOG_MAX_FORMULA_HEIGHT = 64;
 
@@ -53,6 +55,8 @@ DialogFinalMeasurements::DialogFinalMeasurements(VPattern *doc, QWidget *parent)
 #if defined(Q_OS_MAC)
     setWindowFlags(Qt::Window);
 #endif
+
+    InitIcons();
 
     m_data.FillPiecesAreas(VAbstractValApplication::VApp()->patternUnits());
 
@@ -131,6 +135,13 @@ void DialogFinalMeasurements::changeEvent(QEvent *event)
         UpdateSearchControlsTooltips();
         FullUpdateFromFile();
     }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        InitIcons();
+        InitDialogButtonBoxIcons(ui->buttonBox);
+    }
+
     // remember to call base class implementation
     QDialog::changeEvent(event);
 }
@@ -905,4 +916,12 @@ void DialogFinalMeasurements::UpdateSearchControlsTooltips()
     UpdateToolTip(ui->pushButtonSearch);
     UpdateToolTip(ui->toolButtonFindPrevious);
     UpdateToolTip(ui->toolButtonFindNext);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFinalMeasurements::InitIcons()
+{
+    QString resource = QStringLiteral("icon");
+
+    ui->toolButtonExpr->setIcon(VTheme::GetIconResource(resource, QStringLiteral("24x24/fx.png")));
 }

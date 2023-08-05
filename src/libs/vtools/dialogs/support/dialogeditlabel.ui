@@ -35,7 +35,7 @@
         <string>Clear current and begin new label</string>
        </property>
        <property name="text">
-        <string notr="true">...</string>
+        <string notr="true"></string>
        </property>
        <property name="icon">
         <iconset theme="document-new">
@@ -68,7 +68,7 @@
         <string>Import from label template</string>
        </property>
        <property name="text">
-        <string notr="true">...</string>
+        <string notr="true"></string>
        </property>
        <property name="icon">
         <iconset theme="document-open">
@@ -91,7 +91,7 @@
         <string>Export label as template</string>
        </property>
        <property name="text">
-        <string notr="true">...</string>
+        <string notr="true"></string>
        </property>
        <property name="icon">
         <iconset theme="document-save-as">
@@ -141,7 +141,7 @@
             <string>Move on top</string>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"></string>
            </property>
            <property name="icon">
             <iconset theme="go-top">
@@ -158,7 +158,7 @@
             <string>Move up</string>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"></string>
            </property>
            <property name="icon">
             <iconset theme="go-up">
@@ -175,7 +175,7 @@
             <string>Move down</string>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"></string>
            </property>
            <property name="icon">
             <iconset theme="go-down">
@@ -192,7 +192,7 @@
             <string>Move on bottom</string>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"></string>
            </property>
            <property name="icon">
             <iconset theme="go-bottom">
@@ -231,7 +231,7 @@
               <string comment="Font formating">Bold</string>
              </property>
              <property name="text">
-              <string notr="true">...</string>
+              <string notr="true"></string>
              </property>
              <property name="icon">
               <iconset theme="format-text-bold">
@@ -251,7 +251,7 @@
               <string comment="Font formating">Italic</string>
              </property>
              <property name="text">
-              <string notr="true">...</string>
+              <string notr="true"></string>
              </property>
              <property name="icon">
               <iconset theme="format-text-italic">
@@ -271,7 +271,7 @@
               <string>Aligns with the left edge</string>
              </property>
              <property name="text">
-              <string notr="true">...</string>
+              <string notr="true"></string>
              </property>
              <property name="icon">
               <iconset theme="format-justify-left">
@@ -291,7 +291,7 @@
               <string>Centers horizontally in the available space</string>
              </property>
              <property name="text">
-              <string notr="true">...</string>
+              <string notr="true"></string>
              </property>
              <property name="icon">
               <iconset theme="format-justify-center">
@@ -311,7 +311,7 @@
               <string>Aligns with the right edge</string>
              </property>
              <property name="text">
-              <string notr="true">...</string>
+              <string notr="true"></string>
              </property>
              <property name="icon">
               <iconset theme="format-justify-right">
@@ -363,7 +363,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string notr="true">...</string>
+              <string notr="true"></string>
              </property>
              <property name="icon">
               <iconset theme="list-add">
@@ -377,7 +377,7 @@
               <bool>false</bool>
              </property>
              <property name="text">
-              <string notr="true">...</string>
+              <string notr="true"></string>
              </property>
              <property name="icon">
               <iconset theme="list-remove">

@@ -44,9 +44,9 @@
 #include "../ifc/xml/vdomdocument.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/theme/vscenestylesheet.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vtoolsinglepoint.h"
-#include "../vwidgets/global.h"
 #include "../vwidgets/scalesceneitems.h"
 
 template <class T> class QSharedPointer;
@@ -71,7 +71,6 @@ VToolLinePoint::VToolLinePoint(VAbstractPattern *doc, VContainer *data, const qu
     formulaLength(formula),
     angle(angle),
     basePointId(basePointId),
-    mainLine(nullptr),
     lineColor(lineColor)
 {
     this->m_lineType = typeLine;
@@ -79,7 +78,7 @@ VToolLinePoint::VToolLinePoint(VAbstractPattern *doc, VContainer *data, const qu
     QPointF point1 = static_cast<QPointF>(*data->GeometricObject<VPointF>(basePointId));
     QPointF point2 = static_cast<QPointF>(*data->GeometricObject<VPointF>(id));
     QLineF line(point1 - point2, QPointF());
-    mainLine = new VScaledLine(line, this);
+    mainLine = new VScaledLine(line, VColorRole::CustomColor, this);
     mainLine->SetBoldLine(false);
     mainLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
     mainLine->setVisible(not line.isNull());
@@ -95,7 +94,7 @@ VToolLinePoint::~VToolLinePoint()
 void VToolLinePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QPen mPen = mainLine->pen();
-    mPen.setColor(CorrectColor(this, lineColor));
+    mPen.setColor(VSceneStylesheet::CorrectToolColor(this, VSceneStylesheet::CorrectToolColorForDarkTheme(lineColor)));
     mPen.setStyle(LineStyleToPenStyle(m_lineType));
 
     mainLine->setPen(mPen);

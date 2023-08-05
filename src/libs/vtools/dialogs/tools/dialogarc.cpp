@@ -28,7 +28,6 @@
 
 #include "dialogarc.h"
 
-#include <climits>
 #include <QDialog>
 #include <QLabel>
 #include <QPlainTextEdit>
@@ -36,20 +35,21 @@
 #include <QPushButton>
 #include <QTimer>
 #include <QToolButton>
-#include <Qt>
+#include <climits>
 
-#include "../vpatterndb/vtranslatevars.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../../visualization/path/vistoolarc.h"
 #include "../../visualization/visualization.h"
+#include "../qmuparser/qmudef.h"
 #include "../support/dialogeditwrongformula.h"
+#include "../vgeometry/varc.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
-#include "ui_dialogarc.h"
-#include "../vgeometry/varc.h"
-#include "../qmuparser/qmudef.h"
-#include "../vwidgets/vabstractmainwindow.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/global.h"
+#include "../vwidgets/vabstractmainwindow.h"
+#include "ui_dialogarc.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -58,13 +58,15 @@
  * @param parent parent widget
  */
 DialogArc::DialogArc(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogArc),
-      m_timerRadius(new QTimer(this)),
-      m_timerF1(new QTimer(this)),
-      m_timerF2(new QTimer(this))
+  : DialogTool(data, toolId, parent),
+    ui(new Ui::DialogArc),
+    m_timerRadius(new QTimer(this)),
+    m_timerF1(new QTimer(this)),
+    m_timerF2(new QTimer(this))
 {
     ui->setupUi(this);
+
+    InitIcons();
 
     ui->doubleSpinBoxApproximationScale->setMaximum(maxCurveApproximationScale);
 
@@ -89,26 +91,22 @@ DialogArc::DialogArc(const VContainer *data, quint32 toolId, QWidget *parent)
 
     FillComboBoxPoints(ui->comboBoxBasePoint);
     FillComboBoxLineColors(ui->comboBoxColor);
-    FillComboBoxTypeLine(ui->comboBoxPenStyle, CurvePenStylesPics());
+    FillComboBoxTypeLine(ui->comboBoxPenStyle,
+                         CurvePenStylesPics(ui->comboBoxPenStyle->palette().color(QPalette::Base),
+                                            ui->comboBoxPenStyle->palette().color(QPalette::Text)));
 
     connect(ui->toolButtonExprRadius, &QPushButton::clicked, this, &DialogArc::FXRadius);
     connect(ui->toolButtonExprF1, &QPushButton::clicked, this, &DialogArc::FXF1);
     connect(ui->toolButtonExprF2, &QPushButton::clicked, this, &DialogArc::FXF2);
 
-    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        m_timerRadius->start(formulaTimerTimeout);
-    });
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerRadius->start(formulaTimerTimeout); });
 
-    connect(ui->plainTextEditF1, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        m_timerF1->start(formulaTimerTimeout);
-    });
+    connect(ui->plainTextEditF1, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerF1->start(formulaTimerTimeout); });
 
-    connect(ui->plainTextEditF2, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        m_timerF2->start(formulaTimerTimeout);
-    });
+    connect(ui->plainTextEditF2, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerF2->start(formulaTimerTimeout); });
 
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogArc::DeployFormulaTextEdit);
     connect(ui->pushButtonGrowLengthF1, &QPushButton::clicked, this, &DialogArc::DeployF1TextEdit);
@@ -167,8 +165,8 @@ void DialogArc::SetCenter(const quint32 &value)
  */
 void DialogArc::SetF2(const QString &value)
 {
-    m_f2 = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    m_f2 = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (m_f2.length() > 80)
     {
@@ -287,8 +285,8 @@ void DialogArc::ShowDialog(bool click)
 
             if (m_stageRadius)
             {
-                //Radius of point circle, but little bigger. Need handle with hover sizes.
-                if (line.length() <= ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene()))*1.5)
+                // Radius of point circle, but little bigger. Need handle with hover sizes.
+                if (line.length() <= ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene())) * 1.5)
                 {
                     return;
                 }
@@ -324,8 +322,8 @@ void DialogArc::ShowDialog(bool click)
  */
 void DialogArc::SetF1(const QString &value)
 {
-    m_f1 = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    m_f1 = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (m_f1.length() > 80)
     {
@@ -347,8 +345,8 @@ void DialogArc::SetF1(const QString &value)
  */
 void DialogArc::SetRadius(const QString &value)
 {
-    m_radius = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    m_radius = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (m_radius.length() > 80)
     {
@@ -371,7 +369,7 @@ void DialogArc::SetRadius(const QString &value)
  */
 void DialogArc::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (not prepare)// After first choose we ignore all objects
+    if (not prepare) // After first choose we ignore all objects
     {
         if (type == SceneObject::Point)
         {
@@ -379,8 +377,8 @@ void DialogArc::ChosenObject(quint32 id, const SceneObject &type)
             {
                 if (vis != nullptr)
                 {
-                    auto *window = qobject_cast<VAbstractMainWindow *>(
-                                VAbstractValApplication::VApp()->getMainWindow());
+                    auto *window =
+                        qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
                     SCASSERT(window != nullptr)
                     connect(vis.data(), &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
 
@@ -430,6 +428,24 @@ void DialogArc::closeEvent(QCloseEvent *event)
     ui->plainTextEditF1->blockSignals(true);
     ui->plainTextEditF2->blockSignals(true);
     DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArc::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        InitIcons();
+        InitDialogButtonBoxIcons(ui->buttonBox);
+    }
+
+    // remember to call base class implementation
+    DialogTool::changeEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -555,6 +571,22 @@ void DialogArc::FinishCreating()
 
     setModal(true);
     show();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArc::InitIcons()
+{
+    const QString resource = QStringLiteral("icon");
+
+    const QString fxIcon = QStringLiteral("24x24/fx.png");
+    ui->toolButtonExprRadius->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprF1->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprF2->setIcon(VTheme::GetIconResource(resource, fxIcon));
+
+    const QString equalIcon = QStringLiteral("24x24/equal.png");
+    ui->label_2->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    ui->label_3->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    ui->label_5->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -218,7 +218,7 @@
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
-        <string notr="true">...</string>
+        <string notr="true"></string>
        </property>
        <property name="icon">
         <iconset theme="go-up">
@@ -238,7 +238,7 @@
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Next %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
-        <string notr="true">...</string>
+        <string notr="true"></string>
        </property>
        <property name="icon">
         <iconset theme="go-down">
@@ -377,7 +377,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"></string>
            </property>
            <property name="icon">
             <iconset theme="list-add">
@@ -391,7 +391,7 @@
             <bool>false</bool>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"></string>
            </property>
            <property name="icon">
             <iconset theme="list-remove">
@@ -522,11 +522,11 @@
             <string>Formula wizard</string>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"></string>
            </property>
            <property name="icon">
             <iconset resource="../../../libs/vmisc/share/resources/icon.qrc">
-             <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+             <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -575,7 +575,7 @@
             <string>Move measurement up</string>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"></string>
            </property>
            <property name="icon">
             <iconset theme="go-up">
@@ -592,7 +592,7 @@
             <string>Move measurement down</string>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"></string>
            </property>
            <property name="icon">
             <iconset theme="go-down">

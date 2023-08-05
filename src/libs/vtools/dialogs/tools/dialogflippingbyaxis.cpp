@@ -42,32 +42,31 @@
 #include <QSharedPointer>
 #include <QStringList>
 #include <QToolButton>
-#include <Qt>
 #include <new>
 
-#include "../../visualization/visualization.h"
 #include "../../visualization/line/operation/vistoolflippingbyaxis.h"
+#include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vdomdocument.h"
 #include "../qmuparser/qmudef.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../../tools/drawTools/operation/vabstractoperation.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "ui_dialogflippingbyaxis.h"
-#include "../../tools/drawTools/operation/vabstractoperation.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogFlippingByAxis::DialogFlippingByAxis(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogFlippingByAxis),
-      stage1(true),
-      m_suffix(),
-      flagName(true),
-      flagGroupName(true),
-      flagError(false)
+  : DialogTool(data, toolId, parent),
+    ui(new Ui::DialogFlippingByAxis),
+    stage1(true),
+    m_suffix(),
+    flagName(true),
+    flagGroupName(true),
+    flagError(false)
 {
     ui->setupUi(this);
 
@@ -77,15 +76,17 @@ DialogFlippingByAxis::DialogFlippingByAxis(const VContainer *data, quint32 toolI
 
     FillComboBoxPoints(ui->comboBoxOriginPoint);
     FillComboBoxAxisType(ui->comboBoxAxisType);
-    FillComboBoxTypeLine(ui->comboBoxPenStyle, OperationLineStylesPics(), TypeLineDefault);
+    FillComboBoxTypeLine(ui->comboBoxPenStyle,
+                         OperationLineStylesPics(ui->comboBoxPenStyle->palette().color(QPalette::Base),
+                                                 ui->comboBoxPenStyle->palette().color(QPalette::Text)),
+                         TypeLineDefault);
     FillComboBoxLineColors(ui->comboBoxColor, VAbstractOperation::OperationColorsList());
 
     ui->comboBoxOriginPoint->setCurrentIndex(-1);
 
     connect(ui->lineEditSuffix, &QLineEdit::textChanged, this, &DialogFlippingByAxis::SuffixChanged);
     connect(ui->lineEditVisibilityGroup, &QLineEdit::textChanged, this, &DialogFlippingByAxis::GroupNameChanged);
-    connect(ui->comboBoxOriginPoint, &QComboBox::currentTextChanged,
-            this, &DialogFlippingByAxis::PointChanged);
+    connect(ui->comboBoxOriginPoint, &QComboBox::currentTextChanged, this, &DialogFlippingByAxis::PointChanged);
 
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogFlippingByAxis::ShowSourceDetails);
     connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogFlippingByAxis::AliasChanged);
@@ -93,7 +94,6 @@ DialogFlippingByAxis::DialogFlippingByAxis(const VContainer *data, quint32 toolI
             &DialogFlippingByAxis::PenStyleChanged);
     connect(ui->comboBoxColor, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &DialogFlippingByAxis::ColorChanged);
-
 
     vis = new VisToolFlippingByAxis(data);
 
@@ -211,7 +211,7 @@ void DialogFlippingByAxis::ShowDialog(bool click)
         stage1 = false;
 
         VMainGraphicsScene *scene =
-                qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
+            qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
         SCASSERT(scene != nullptr)
         scene->clearSelection();
 
@@ -265,7 +265,7 @@ void DialogFlippingByAxis::SetSourceObjects(const QVector<SourceItem> &value)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByAxis::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (not stage1 && not prepare)// After first choose we ignore all objects
+    if (not stage1 && not prepare) // After first choose we ignore all objects
     {
         if (type == SceneObject::Point)
         {
@@ -321,7 +321,7 @@ void DialogFlippingByAxis::SelectedObject(bool selected, quint32 object, quint32
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByAxis::SuffixChanged()
 {
-    QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
+    QLineEdit *edit = qobject_cast<QLineEdit *>(sender());
     if (edit)
     {
         const QString suffix = edit->text();
@@ -361,7 +361,7 @@ void DialogFlippingByAxis::SuffixChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByAxis::GroupNameChanged()
 {
-    QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
+    QLineEdit *edit = qobject_cast<QLineEdit *>(sender());
     if (edit)
     {
         const QString name = edit->text();
@@ -445,7 +445,8 @@ void DialogFlippingByAxis::ShowSourceDetails(int row)
         {
             const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(sourceItem.id);
             int index = ui->comboBoxColor->currentIndex();
-            ui->comboBoxColor->setItemIcon(index, LineColor(ui->comboBoxColor->iconSize().height(), curve->GetColor()));
+            ui->comboBoxColor->setItemIcon(index, LineColor(ui->comboBoxColor->palette().color(QPalette::Text),
+                                                            ui->comboBoxColor->iconSize().height(), curve->GetColor()));
         }
 
         ui->comboBoxPenStyle->setEnabled(true);
@@ -526,7 +527,7 @@ void DialogFlippingByAxis::SaveData()
     sourceObjects.clear();
     sourceObjects.reserve(ui->listWidget->count());
 
-    for (int i=0; i<ui->listWidget->count(); ++i)
+    for (int i = 0; i < ui->listWidget->count(); ++i)
     {
         if (const QListWidgetItem *item = ui->listWidget->item(i))
         {
@@ -620,7 +621,7 @@ void DialogFlippingByAxis::FillSourceList()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByAxis::ValidateSourceAliases()
 {
-    for (int i=0; i<ui->listWidget->count(); ++i)
+    for (int i = 0; i < ui->listWidget->count(); ++i)
     {
         if (const QListWidgetItem *item = ui->listWidget->item(i))
         {

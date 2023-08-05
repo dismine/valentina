@@ -90,6 +90,7 @@ protected:
      */
     void SaveData() override;
     void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
     auto IsValid() const -> bool final;
 
 private:
@@ -111,6 +112,8 @@ private:
 
     /** @brief number number of handled objects */
     qint32 number{0};
+
+    void InitIcons();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

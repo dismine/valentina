@@ -40,9 +40,9 @@
 #include <QSharedPointer>
 #include <new>
 
+#include "../../visualization/line/visline.h"
 #include "../../visualization/line/vistoolheight.h"
 #include "../../visualization/visualization.h"
-#include "../../visualization/line/visline.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
@@ -57,34 +57,34 @@
  * @param parent parent widget
  */
 DialogHeight::DialogHeight(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogHeight)
+  : DialogTool(data, toolId, parent),
+    ui(new Ui::DialogHeight)
 {
     ui->setupUi(this);
 
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
     ui->lineEditNamePoint->setText(
-                VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
+        VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     InitOkCancelApply(ui);
 
     FillComboBoxPoints(ui->comboBoxBasePoint);
     FillComboBoxPoints(ui->comboBoxP1Line);
     FillComboBoxPoints(ui->comboBoxP2Line);
-    FillComboBoxTypeLine(ui->comboBoxLineType, LineStylesPics());
+    FillComboBoxTypeLine(ui->comboBoxLineType, LineStylesPics(ui->comboBoxLineType->palette().color(QPalette::Base),
+                                                              ui->comboBoxLineType->palette().color(QPalette::Text)));
     FillComboBoxLineColors(ui->comboBoxLineColor);
 
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
-    {
-        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, m_pointName, this->data, m_flagName);
-        CheckState();
-    });
-    connect(ui->comboBoxBasePoint, &QComboBox::currentTextChanged,
-            this, &DialogHeight::PointNameChanged);
-    connect(ui->comboBoxP1Line, &QComboBox::currentTextChanged,
-            this, &DialogHeight::PointNameChanged);
-    connect(ui->comboBoxP2Line, &QComboBox::currentTextChanged,
-            this, &DialogHeight::PointNameChanged);
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
+            [this]()
+            {
+                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, m_pointName, this->data,
+                                m_flagName);
+                CheckState();
+            });
+    connect(ui->comboBoxBasePoint, &QComboBox::currentTextChanged, this, &DialogHeight::PointNameChanged);
+    connect(ui->comboBoxP1Line, &QComboBox::currentTextChanged, this, &DialogHeight::PointNameChanged);
+    connect(ui->comboBoxP2Line, &QComboBox::currentTextChanged, this, &DialogHeight::PointNameChanged);
 
     vis = new VisToolHeight(data);
 
@@ -188,7 +188,7 @@ void DialogHeight::SetLineColor(const QString &value)
  */
 void DialogHeight::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare)// After first choose we ignore all objects
+    if (prepare) // After first choose we ignore all objects
     {
         return;
     }
@@ -236,7 +236,7 @@ void DialogHeight::ChosenObject(quint32 id, const SceneObject &type)
                     }
                 }
             }
-                break;
+            break;
             default:
                 break;
         }

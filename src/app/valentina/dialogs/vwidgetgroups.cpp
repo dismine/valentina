@@ -27,11 +27,13 @@
  *************************************************************************/
 
 #include "vwidgetgroups.h"
-#include "ui_vwidgetgroups.h"
+#include "../vmisc/compatibility.h"
+#include "../vmisc/theme/vtheme.h"
+#include "../vpatterndb/vcontainer.h"
 #include "../vtools/dialogs/tools/dialoggroup.h"
 #include "../vtools/undocommands/undogroup.h"
-#include "../vpatterndb/vcontainer.h"
-#include "../vmisc/compatibility.h"
+#include "qstringliteral.h"
+#include "ui_vwidgetgroups.h"
 
 #include <QCompleter>
 #include <QMenu>
@@ -39,9 +41,9 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VWidgetGroups::VWidgetGroups(VAbstractPattern *doc, QWidget *parent)
-    : QWidget(parent),
-      ui(new Ui::VWidgetGroups),
-      m_doc(doc)
+  : QWidget(parent),
+    ui(new Ui::VWidgetGroups),
+    m_doc(doc)
 {
     ui->setupUi(this);
 
@@ -66,21 +68,23 @@ VWidgetGroups::~VWidgetGroups()
 void VWidgetGroups::SetGroupVisibility(vidtype id, bool visible) const
 {
     auto *changeGroup = new ChangeGroupVisibility(m_doc, id, visible);
-    connect(changeGroup, &ChangeGroupVisibility::UpdateGroup, this, [this](vidtype id, bool visible)
-    {
-        int row = GroupRow(id);
-        if (row == -1)
-        {
-            return;
-        }
+    connect(changeGroup, &ChangeGroupVisibility::UpdateGroup, this,
+            [this](vidtype id, bool visible)
+            {
+                int row = GroupRow(id);
+                if (row == -1)
+                {
+                    return;
+                }
 
-        QTableWidgetItem *item = ui->tableWidget->item(row, 0);
-        if (item)
-        {
-            (visible) ? item->setIcon(QIcon(QStringLiteral("://icon/16x16/open_eye.png")))
-                      : item->setIcon(QIcon(QStringLiteral("://icon/16x16/closed_eye.png")));
-        }
-    });
+                QTableWidgetItem *item = ui->tableWidget->item(row, 0);
+                if (item)
+                {
+                    const QString resource = QStringLiteral("icon");
+                    item->setIcon(visible ? VTheme::GetIconResource(resource, QStringLiteral("16x16/open_eye.png"))
+                                          : VTheme::GetIconResource(resource, QStringLiteral("16x16/closed_eye.png")));
+                }
+            });
     VAbstractApplication::VApp()->getUndoStack()->push(changeGroup);
 }
 
@@ -90,27 +94,28 @@ void VWidgetGroups::SetMultipleGroupsVisibility(const QVector<vidtype> &groups, 
     auto *changeGroups = new ChangeMultipleGroupsVisibility(m_doc, groups, visible);
     connect(changeGroups, &ChangeMultipleGroupsVisibility::UpdateMultipleGroups, this,
             [this](const QMap<vidtype, bool> &groups)
-    {
-        QMap<vidtype, bool>::const_iterator i = groups.constBegin();
-        while (i != groups.constEnd())
-        {
-            int row = GroupRow(i.key());
-            if (row == -1)
             {
-                ++i;
-                continue;
-            }
+                QMap<vidtype, bool>::const_iterator i = groups.constBegin();
+                while (i != groups.constEnd())
+                {
+                    int row = GroupRow(i.key());
+                    if (row == -1)
+                    {
+                        ++i;
+                        continue;
+                    }
 
-            QTableWidgetItem *item = ui->tableWidget->item(row, 0);
-            if (item)
-            {
-                (i.value()) ? item->setIcon(QIcon(QStringLiteral("://icon/16x16/open_eye.png")))
-                            : item->setIcon(QIcon(QStringLiteral("://icon/16x16/closed_eye.png")));
-            }
-            ++i;
-        }
-
-    });
+                    QTableWidgetItem *item = ui->tableWidget->item(row, 0);
+                    if (item)
+                    {
+                        const QString resource = QStringLiteral("icon");
+                        item->setIcon(i.value()
+                                          ? VTheme::GetIconResource(resource, QStringLiteral("16x16/open_eye.png"))
+                                          : VTheme::GetIconResource(resource, QStringLiteral("16x16/closed_eye.png")));
+                    }
+                    ++i;
+                }
+            });
     VAbstractApplication::VApp()->getUndoStack()->push(changeGroups);
 }
 
@@ -259,7 +264,7 @@ void VWidgetGroups::RenameGroup(int row, int column)
 void VWidgetGroups::CtxMenu(const QPoint &pos)
 {
     QTableWidgetItem *item = ui->tableWidget->itemAt(pos);
-    if(not item)
+    if (not item)
     {
         return;
     }
@@ -283,9 +288,11 @@ void VWidgetGroups::CtxMenu(const QPoint &pos)
     };
 
     QScopedPointer<QMenu> menu(new QMenu());
-    QAction *triggerVisibilityMenu = m_doc->GetGroupVisibility(id) ?
-                menu->addAction(QIcon(QStringLiteral("://icon/16x16/closed_eye.png")), tr("Hide")) :
-                menu->addAction(QIcon(QStringLiteral("://icon/16x16/open_eye.png")), tr("Show"));
+    const QString resource = QStringLiteral("icon");
+    QAction *triggerVisibilityMenu =
+        m_doc->GetGroupVisibility(id)
+            ? menu->addAction(VTheme::GetIconResource(resource, QStringLiteral("16x16/closed_eye.png")), tr("Hide"))
+            : menu->addAction(VTheme::GetIconResource(resource, QStringLiteral("16x16/open_eye.png")), tr("Show"));
 
     QAction *actionPreferences = menu->addAction(QIcon::fromTheme(preferencesOtherIcon), tr("Preferences"));
     QAction *actionDelete = menu->addAction(QIcon::fromTheme(editDeleteIcon), tr("Delete"));
@@ -312,11 +319,11 @@ void VWidgetGroups::CtxMenu(const QPoint &pos)
         VAbstractApplication::VApp()->getUndoStack()->push(delGroup);
     }
     else if (selectedAction == actionHideAll)
-    {//all groups in "group" make unvisible
+    { // all groups in "group" make unvisible
         ActionHideAll();
     }
     else if (selectedAction == actionShowAll)
-    {//all groups in "group" make visible
+    { // all groups in "group" make visible
         ActionShowAll();
     }
 }
@@ -346,10 +353,11 @@ void VWidgetGroups::FillTable(QMap<quint32, VGroupData> groups)
         ++currentRow;
         const VGroupData data = i.value();
 
+        const QString resource = QStringLiteral("icon");
         auto *item = new QTableWidgetItem();
         item->setTextAlignment(Qt::AlignHCenter);
-        (data.visible) ? item->setIcon(QIcon("://icon/16x16/open_eye.png"))
-                       : item->setIcon(QIcon("://icon/16x16/closed_eye.png"));
+        (data.visible) ? item->setIcon(VTheme::GetIconResource(resource, QStringLiteral("16x16/open_eye.png")))
+                       : item->setIcon(VTheme::GetIconResource(resource, QStringLiteral("16x16/closed_eye.png")));
 
         item->setData(Qt::UserRole, i.key());
 
@@ -367,7 +375,7 @@ void VWidgetGroups::FillTable(QMap<quint32, VGroupData> groups)
             item->setToolTip(tr("Categories: %1.").arg(data.tags.join(QStringLiteral(", "))));
         }
 
-        if(data.items.isEmpty())
+        if (data.items.isEmpty())
         {
             QFont font = item->font();
             font.setStrikeOut(true);

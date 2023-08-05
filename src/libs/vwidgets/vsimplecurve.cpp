@@ -36,25 +36,26 @@
 #include <QMessageLogger>
 #include <QPainterPath>
 #include <QPen>
-#include <Qt>
 #include <QtDebug>
 
-#include "global.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcurve.h"
+#include "../vmisc/theme/vscenestylesheet.h"
 #include "../vmisc/vabstractapplication.h"
+#include "global.h"
 
 template <class T> class QSharedPointer;
 
 //---------------------------------------------------------------------------------------------------------------------
 VSimpleCurve::VSimpleCurve(quint32 id, const QSharedPointer<VAbstractCurve> &curve, QObject *parent)
-    : VAbstractSimple(id, parent),
-      VCurvePathItem(),
-      m_curve(curve),
-      m_isHovered(false)
+  : VAbstractSimple(id, parent),
+    VCurvePathItem(VColorRole::CustomColor),
+    m_curve(curve),
+    m_isHovered(false)
 {
-    this->setBrush(QBrush(Qt::NoBrush));
-    this->setAcceptHoverEvents(true);
-    this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
+    setBrush(QBrush(Qt::NoBrush));
+    setAcceptHoverEvents(true);
+    setFlag(QGraphicsItem::ItemIsFocusable, true); // For keyboard input focus
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -93,14 +94,15 @@ void VSimpleCurve::mousePressEvent(QGraphicsSceneMouseEvent *event)
     QGraphicsPathItem::mousePressEvent(event);
 
     // Somehow clicking on notselectable object do not clean previous selections.
-    if (not (flags() & ItemIsSelectable) && scene())
+    if (not(flags() & ItemIsSelectable) && scene())
     {
         scene()->clearSelection();
     }
 
     if (selectionType == SelectionType::ByMouseRelease)
     {
-        event->accept();// Special for not selectable item first need to call standard mousePressEvent then accept event
+        event
+            ->accept(); // Special for not selectable item first need to call standard mousePressEvent then accept event
     }
     else
     {
@@ -165,11 +167,11 @@ void VSimpleCurve::keyReleaseEvent(QKeyEvent *event)
     {
         case Qt::Key_Delete:
             emit Delete();
-            return; //Leave this method immediately after call!!!
+            return; // Leave this method immediately after call!!!
         default:
             break;
     }
-    QGraphicsPathItem::keyReleaseEvent ( event );
+    QGraphicsPathItem::keyReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -178,5 +180,11 @@ void VSimpleCurve::ScalePenWidth()
     qreal width = m_isHovered ? VAbstractApplication::VApp()->Settings()->WidthMainLine()
                               : VAbstractApplication::VApp()->Settings()->WidthHairLine();
     width = ScaleWidth(width, SceneScale(scene()));
-    setPen(QPen(CorrectColor(this, m_curve->GetColor()), width, LineStyleToPenStyle(m_curve->GetPenStyle())));
+
+    QPen curvePen = pen();
+    curvePen.setColor(
+        VSceneStylesheet::CorrectToolColor(this, VSceneStylesheet::CorrectToolColorForDarkTheme(m_curve->GetColor())));
+    curvePen.setWidthF(width);
+    curvePen.setStyle(LineStyleToPenStyle(m_curve->GetPenStyle()));
+    setPen(curvePen);
 }

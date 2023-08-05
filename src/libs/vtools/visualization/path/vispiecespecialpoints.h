@@ -57,7 +57,7 @@ private:
     QRectF                   m_placeLabelRect{};
     VCurvePathItem          *m_rectItem{nullptr};
 
-    auto GetPoint(quint32 i, const QColor &color) -> VSimplePoint *;
+    auto GetPoint(quint32 i, VColorRole role) -> VSimplePoint *;
 
     void HideAllItems();
 };

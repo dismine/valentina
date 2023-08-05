@@ -33,6 +33,8 @@
 #include "../scene/vpgraphicstilegrid.h"
 #include "../vpapplication.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "theme/vscenestylesheet.h"
+#include "theme/vstylesheetstyle.h"
 #include "vplayout.h"
 #include "vppiece.h"
 
@@ -121,6 +123,9 @@ void VPSheetSceneData::RefreshPieces()
 //---------------------------------------------------------------------------------------------------------------------
 void VPSheetSceneData::PrepareForExport()
 {
+    VStylesheetStyle::SetExportColorScheme(ExportColorScheme::BackAndWhite);
+    VSceneStylesheet::ResetStyles();
+
     m_graphicsSheet->SetShowBorder(false);
     m_graphicsSheet->SetShowMargin(false);
 
@@ -161,6 +166,9 @@ void VPSheetSceneData::PrepareForExport()
 //---------------------------------------------------------------------------------------------------------------------
 void VPSheetSceneData::CleanAfterExport()
 {
+    VStylesheetStyle::SetExportColorScheme(ExportColorScheme::Default);
+    VSceneStylesheet::ResetStyles();
+
     m_graphicsSheet->SetShowBorder(true);
     m_graphicsSheet->SetShowMargin(true);
 

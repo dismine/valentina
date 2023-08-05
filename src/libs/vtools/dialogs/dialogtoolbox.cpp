@@ -42,6 +42,7 @@
 #include "../vpatterndb/variables/vcurvelength.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpiecenode.h"
+#include "qdialogbuttonbox.h"
 
 #include <QBuffer>
 #include <QDebug>
@@ -50,6 +51,7 @@
 #include <QLineEdit>
 #include <QListWidget>
 #include <QLocale>
+#include <QPainter>
 #include <QPlainTextEdit>
 #include <QPushButton>
 #include <QRegularExpression>
@@ -570,7 +572,7 @@ void SetTabStopDistance(QPlainTextEdit *edit, int tabWidthChar)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto LineColor(int size, const QString &color) -> QIcon
+auto LineColor(const QColor &borderColor, int size, const QString &color) -> QIcon
 {
     // On Mac pixmap should be little bit smaller.
 #if defined(Q_OS_MAC)
@@ -579,7 +581,13 @@ auto LineColor(int size, const QString &color) -> QIcon
 
     QPixmap pix(size, size);
     pix.fill(QColor(color));
-    return QIcon(pix);
+
+    // Draw a white border around the icon
+    QPainter painter(&pix);
+    painter.setPen(borderColor);
+    painter.drawRect(0, 0, size - 1, size - 1);
+
+    return {pix};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -830,4 +838,27 @@ auto InvalidSegment(QListWidget *listWidget, const VContainer *data, QString &er
     }
 
     return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void InitDialogButtonBoxIcons(QDialogButtonBox *buttonBox)
+{
+    SCASSERT(buttonBox != nullptr)
+
+    QStyle *style = QApplication::style();
+
+    if (QPushButton *bOk = buttonBox->button(QDialogButtonBox::Ok))
+    {
+        bOk->setIcon(style->standardIcon(QStyle::SP_DialogOkButton));
+    }
+
+    if (QPushButton *bApply = buttonBox->button(QDialogButtonBox::Apply))
+    {
+        bApply->setIcon(style->standardIcon(QStyle::SP_DialogApplyButton));
+    }
+
+    if (QPushButton *bCancel = buttonBox->button(QDialogButtonBox::Cancel))
+    {
+        bCancel->setIcon(style->standardIcon(QStyle::SP_DialogCancelButton));
+    }
 }

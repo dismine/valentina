@@ -34,22 +34,22 @@
 #include <QPen>
 #include <QPointF>
 #include <QSharedPointer>
-#include <Qt>
 #include <QtDebug>
 #include <new>
 
 #include "../../dialogs/tools/dialogline.h"
 #include "../../dialogs/tools/dialogtool.h"
-#include "../../visualization/visualization.h"
 #include "../../visualization/line/vistoolline.h"
+#include "../../visualization/visualization.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
+#include "../vabstracttool.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/theme/vscenestylesheet.h"
 #include "../vpatterndb/vcontainer.h"
-#include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/global.h"
-#include "../vabstracttool.h"
+#include "../vwidgets/vmaingraphicsscene.h"
 #include "vdrawtool.h"
 
 template <class T> class QSharedPointer;
@@ -61,18 +61,18 @@ template <class T> class QSharedPointer;
  * @param parent parent object.
  */
 VToolLine::VToolLine(const VToolLineInitData &initData, QGraphicsItem *parent)
-    :VDrawTool(initData.doc, initData.data, initData.id, initData.notes),
-      VScaledLine(parent),
-      firstPoint(initData.firstPoint),
-      secondPoint(initData.secondPoint),
-      lineColor(initData.lineColor),
-      m_acceptHoverEvents(true)
+  : VDrawTool(initData.doc, initData.data, initData.id, initData.notes),
+    VScaledLine(VColorRole::CustomColor, parent),
+    firstPoint(initData.firstPoint),
+    secondPoint(initData.secondPoint),
+    lineColor(initData.lineColor),
+    m_acceptHoverEvents(true)
 {
     SetBoldLine(false);
     this->m_lineType = initData.typeLine;
-    //Line
+    // Line
     RefreshGeometry();
-    this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
+    this->setFlag(QGraphicsItem::ItemIsFocusable, true); // For keyboard input focus
     this->setAcceptHoverEvents(m_acceptHoverEvents);
 
     ToolCreation(initData.typeCreation);
@@ -157,7 +157,7 @@ auto VToolLine::Create(VToolLineInitData initData) -> VToolLine *
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::Line, initData.doc);
-        VToolLine *line = new VToolLine(initData);
+        auto *line = new VToolLine(initData);
         initData.scene->addItem(line);
         InitDrawToolConnections(initData.scene, line);
         connect(initData.scene, &VMainGraphicsScene::EnableLineItemSelection, line, &VToolLine::AllowSelecting);
@@ -185,7 +185,7 @@ void VToolLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 {
     // Don't set pen width. Parent should take care of it.
     QPen lPen = pen();
-    lPen.setColor(CorrectColor(this, lineColor));
+    lPen.setColor(VSceneStylesheet::CorrectToolColor(this, VSceneStylesheet::CorrectToolColorForDarkTheme(lineColor)));
     lPen.setStyle(LineStyleToPenStyle(m_lineType));
     setPen(lPen);
 
@@ -254,10 +254,10 @@ void VToolLine::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 i
     {
         ContextMenu<DialogLine>(event);
     }
-    catch(const VExceptionToolWasDeleted &e)
+    catch (const VExceptionToolWasDeleted &e)
     {
         Q_UNUSED(e)
-        return;//Leave this method immediately!!!
+        return; // Leave this method immediately!!!
     }
 }
 
@@ -278,7 +278,7 @@ void VToolLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 void VToolLine::AddToFile()
 {
     QDomElement domElement = doc->createElement(getTagName());
-    QSharedPointer<VGObject> obj = QSharedPointer<VGObject> ();
+    QSharedPointer<VGObject> obj = QSharedPointer<VGObject>();
     SaveOptions(domElement, obj);
     AddToCalculation(domElement);
 }
@@ -360,24 +360,23 @@ void VToolLine::keyReleaseEvent(QKeyEvent *event)
             {
                 DeleteToolWithConfirm();
             }
-            catch(const VExceptionToolWasDeleted &e)
+            catch (const VExceptionToolWasDeleted &e)
             {
                 Q_UNUSED(e)
-                return;//Leave this method immediately!!!
+                return; // Leave this method immediately!!!
             }
             break;
         default:
             break;
     }
-    QGraphicsItem::keyReleaseEvent ( event );
+    QGraphicsItem::keyReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolLine::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                           QList<quint32> &newDependencies)
+void VToolLine::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogLine> dialogTool = qobject_cast<DialogLine *>(m_dialog);
@@ -393,7 +392,7 @@ void VToolLine::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependenc
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept {return notes.isEmpty();});
+                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -446,10 +445,10 @@ auto VToolLine::MakeToolTip() const -> QString
                                     "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
                                     "<tr> <td><b>%4:</b> %5°</td> </tr>"
                                     "</table>")
-            .arg(tr("Length"))
-            .arg(VAbstractValApplication::VApp()->fromPixel(line.length()))
-            .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Angle"))
-            .arg(line.angle());
+                                .arg(tr("Length"))
+                                .arg(VAbstractValApplication::VApp()->fromPixel(line.length()))
+                                .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Angle"))
+                                .arg(line.angle());
     return toolTip;
 }
 
@@ -483,7 +482,7 @@ void VToolLine::SetLineType(const QString &value)
 {
     m_lineType = value;
 
-    QSharedPointer<VGObject> obj;//We don't have object for line in data container. Just will send an empty object.
+    QSharedPointer<VGObject> obj; // We don't have object for line in data container. Just will send an empty object.
     SaveOption(obj);
 }
 
@@ -498,7 +497,7 @@ void VToolLine::SetLineColor(const QString &value)
 {
     lineColor = value;
 
-    QSharedPointer<VGObject> obj;//We don't have object for line in data container. Just will send an empty object.
+    QSharedPointer<VGObject> obj; // We don't have object for line in data container. Just will send an empty object.
     SaveOption(obj);
 }
 
@@ -507,7 +506,7 @@ void VToolLine::SetNotes(const QString &notes)
 {
     m_notes = notes;
 
-    QSharedPointer<VGObject> obj;//We don't have object for line in data container. Just will send an empty object.
+    QSharedPointer<VGObject> obj; // We don't have object for line in data container. Just will send an empty object.
     SaveOption(obj);
 }
 

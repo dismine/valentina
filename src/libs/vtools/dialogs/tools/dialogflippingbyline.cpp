@@ -42,37 +42,36 @@
 #include <QSharedPointer>
 #include <QStringList>
 #include <QToolButton>
-#include <Qt>
 #include <new>
 
-#include "../../visualization/visualization.h"
 #include "../../visualization/line/operation/vistoolflippingbyline.h"
+#include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vdomdocument.h"
 #include "../qmuparser/qmudef.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/compatibility.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
-#include "../vmisc/compatibility.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../../tools/drawTools/operation/vabstractoperation.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vabstractmainwindow.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "ui_dialogflippingbyline.h"
-#include "../../tools/drawTools/operation/vabstractoperation.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogFlippingByLine::DialogFlippingByLine(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogFlippingByLine),
-      stage1(true),
-      m_suffix(),
-      flagName(true),
-      flagGroupName(true),
-      flagError(false)
+  : DialogTool(data, toolId, parent),
+    ui(new Ui::DialogFlippingByLine),
+    stage1(true),
+    m_suffix(),
+    flagName(true),
+    flagGroupName(true),
+    flagError(false)
 {
     ui->setupUi(this);
 
@@ -82,15 +81,16 @@ DialogFlippingByLine::DialogFlippingByLine(const VContainer *data, quint32 toolI
 
     FillComboBoxPoints(ui->comboBoxFirstLinePoint);
     FillComboBoxPoints(ui->comboBoxSecondLinePoint);
-    FillComboBoxTypeLine(ui->comboBoxPenStyle, OperationLineStylesPics(), TypeLineDefault);
+    FillComboBoxTypeLine(ui->comboBoxPenStyle,
+                         OperationLineStylesPics(ui->comboBoxPenStyle->palette().color(QPalette::Base),
+                                                 ui->comboBoxPenStyle->palette().color(QPalette::Text)),
+                         TypeLineDefault);
     FillComboBoxLineColors(ui->comboBoxColor, VAbstractOperation::OperationColorsList());
 
     connect(ui->lineEditSuffix, &QLineEdit::textChanged, this, &DialogFlippingByLine::SuffixChanged);
     connect(ui->lineEditVisibilityGroup, &QLineEdit::textChanged, this, &DialogFlippingByLine::GroupNameChanged);
-    connect(ui->comboBoxFirstLinePoint, &QComboBox::currentTextChanged,
-            this, &DialogFlippingByLine::PointChanged);
-    connect(ui->comboBoxSecondLinePoint, &QComboBox::currentTextChanged,
-            this, &DialogFlippingByLine::PointChanged);
+    connect(ui->comboBoxFirstLinePoint, &QComboBox::currentTextChanged, this, &DialogFlippingByLine::PointChanged);
+    connect(ui->comboBoxSecondLinePoint, &QComboBox::currentTextChanged, this, &DialogFlippingByLine::PointChanged);
 
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogFlippingByLine::ShowSourceDetails);
     connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogFlippingByLine::AliasChanged);
@@ -210,7 +210,7 @@ void DialogFlippingByLine::ShowDialog(bool click)
         stage1 = false;
 
         VMainGraphicsScene *scene =
-                qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
+            qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
         SCASSERT(scene != nullptr)
         scene->clearSelection();
 
@@ -263,7 +263,7 @@ void DialogFlippingByLine::SetSourceObjects(const QVector<SourceItem> &value)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByLine::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (not stage1 && not prepare)// After first choose we ignore all objects
+    if (not stage1 && not prepare) // After first choose we ignore all objects
     {
         if (type == SceneObject::Point)
         {
@@ -348,7 +348,7 @@ void DialogFlippingByLine::SelectedObject(bool selected, quint32 object, quint32
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByLine::SuffixChanged()
 {
-    QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
+    QLineEdit *edit = qobject_cast<QLineEdit *>(sender());
     if (edit)
     {
         const QString suffix = edit->text();
@@ -388,7 +388,7 @@ void DialogFlippingByLine::SuffixChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByLine::GroupNameChanged()
 {
-    QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
+    QLineEdit *edit = qobject_cast<QLineEdit *>(sender());
     if (edit)
     {
         const QString name = edit->text();
@@ -461,7 +461,8 @@ void DialogFlippingByLine::ShowSourceDetails(int row)
         SetValue(ui->comboBoxPenStyle, sourceItem.penStyle, TypeLineDefault);
 
         if (sourceItem.penStyle.isEmpty() || sourceItem.penStyle == TypeLineDefault)
-        {;
+        {
+            ;
             int index = ui->comboBoxPenStyle->currentIndex();
             ui->comboBoxPenStyle->setItemText(index, '<' + tr("Default") + '>');
         }
@@ -472,7 +473,8 @@ void DialogFlippingByLine::ShowSourceDetails(int row)
         {
             const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(sourceItem.id);
             int index = ui->comboBoxColor->currentIndex();
-            ui->comboBoxColor->setItemIcon(index, LineColor(ui->comboBoxColor->iconSize().height(), curve->GetColor()));
+            ui->comboBoxColor->setItemIcon(index, LineColor(ui->comboBoxColor->palette().color(QPalette::Text),
+                                                            ui->comboBoxColor->iconSize().height(), curve->GetColor()));
         }
 
         ui->comboBoxPenStyle->setEnabled(true);
@@ -553,7 +555,7 @@ void DialogFlippingByLine::SaveData()
     sourceObjects.clear();
     sourceObjects.reserve(ui->listWidget->count());
 
-    for (int i=0; i<ui->listWidget->count(); ++i)
+    for (int i = 0; i < ui->listWidget->count(); ++i)
     {
         if (const QListWidgetItem *item = ui->listWidget->item(i))
         {
@@ -593,7 +595,7 @@ void DialogFlippingByLine::PointChanged()
 
     quint32 id1 = getCurrentObjectId(ui->comboBoxFirstLinePoint);
     auto obj1 = std::find_if(sourceObjects.begin(), sourceObjects.end(),
-                            [id1](const SourceItem &sItem) { return sItem.id == id1; });
+                             [id1](const SourceItem &sItem) { return sItem.id == id1; });
 
     quint32 id2 = getCurrentObjectId(ui->comboBoxSecondLinePoint);
     auto obj2 = std::find_if(sourceObjects.begin(), sourceObjects.end(),
@@ -658,7 +660,7 @@ void DialogFlippingByLine::FillSourceList()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByLine::ValidateSourceAliases()
 {
-    for (int i=0; i<ui->listWidget->count(); ++i)
+    for (int i = 0; i < ui->listWidget->count(); ++i)
     {
         if (const QListWidgetItem *item = ui->listWidget->item(i))
         {

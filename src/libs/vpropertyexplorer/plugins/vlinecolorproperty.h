@@ -29,7 +29,6 @@
 #ifndef VLINECOLORPROPERTY_H
 #define VLINECOLORPROPERTY_H
 
-
 #include <QMap>
 #include <QMetaObject>
 #include <QObject>
@@ -37,7 +36,6 @@
 #include <QStyleOptionViewItem>
 #include <QVariant>
 #include <QVector>
-#include <Qt>
 #include <QtGlobal>
 
 #include "../vproperty.h"
@@ -49,12 +47,13 @@ namespace VPE
 class VPROPERTYEXPLORERSHARED_EXPORT VLineColorProperty : public VProperty
 {
     Q_OBJECT // NOLINT
+
 public:
     //! Constructor
-    explicit VLineColorProperty(const QString& name);
+    explicit VLineColorProperty(const QString &name);
 
     //! Destructor
-    virtual ~VLineColorProperty() override {}
+    ~VLineColorProperty() override {}
 
     //! Get the data how it should be displayed
     virtual auto data(int column = DPC_Name, int role = Qt::DisplayRole) const -> QVariant override;
@@ -77,7 +76,7 @@ public:
     virtual auto getColors() const -> QMap<QString, QString>;
 
     //! Sets the value of the property
-    virtual void setValue(const QVariant& value) override;
+    virtual void setValue(const QVariant &value) override;
 
     //! Returns a string containing the type of the property
     virtual auto type() const -> QString override;
@@ -100,11 +99,12 @@ protected:
     QMap<QString, QString> colors;
     QVector<QString> indexList;
     // No use of d-pointer in this case, because it is unlikely this will change. If it does, we can still add other
-    //members by reimplementing the VPropertyPrivate class without touching this header file.
+    // members by reimplementing the VPropertyPrivate class without touching this header file.
+
 private:
     Q_DISABLE_COPY_MOVE(VLineColorProperty) // NOLINT
 };
 
-}
+} // namespace VPE
 
 #endif // VLINECOLORPROPERTY_H

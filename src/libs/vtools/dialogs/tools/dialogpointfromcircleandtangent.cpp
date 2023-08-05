@@ -28,7 +28,6 @@
 
 #include "dialogpointfromcircleandtangent.h"
 
-#include <climits>
 #include <QColor>
 #include <QComboBox>
 #include <QDialog>
@@ -39,31 +38,34 @@
 #include <QPushButton>
 #include <QTimer>
 #include <QToolButton>
-#include <Qt>
+#include <climits>
 
-#include "../vpatterndb/vtranslatevars.h"
-#include "../vpatterndb/vcontainer.h"
-#include "../../visualization/visualization.h"
 #include "../../visualization/line/vistoolpointfromcircleandtangent.h"
+#include "../../visualization/visualization.h"
 #include "../support/dialogeditwrongformula.h"
+#include "../vgeometry/vpointf.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
-#include "ui_dialogpointfromcircleandtangent.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vabstractmainwindow.h"
-#include "../vgeometry/vpointf.h"
+#include "ui_dialogpointfromcircleandtangent.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointFromCircleAndTangent::DialogPointFromCircleAndTangent(const VContainer *data, quint32 toolId,
                                                                  QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogPointFromCircleAndTangent)
+  : DialogTool(data, toolId, parent),
+    ui(new Ui::DialogPointFromCircleAndTangent)
 {
     ui->setupUi(this);
+
+    InitIcons();
 
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
     ui->lineEditNamePoint->setText(
-                VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
+        VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
 
     this->m_formulaBaseHeightCircleRadius = ui->plainTextEditRadius->height();
 
@@ -78,21 +80,20 @@ DialogPointFromCircleAndTangent::DialogPointFromCircleAndTangent(const VContaine
     FillComboBoxPoints(ui->comboBoxTangentPoint);
     FillComboBoxCrossCirclesPoints(ui->comboBoxResult);
 
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
-    {
-        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, m_pointName, this->data, m_flagName);
-        CheckState();
-    });
-    connect(ui->comboBoxCircleCenter, &QComboBox::currentTextChanged,
-            this, &DialogPointFromCircleAndTangent::PointChanged);
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
+            [this]()
+            {
+                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, m_pointName, this->data,
+                                m_flagName);
+                CheckState();
+            });
+    connect(ui->comboBoxCircleCenter, &QComboBox::currentTextChanged, this,
+            &DialogPointFromCircleAndTangent::PointChanged);
 
-    connect(ui->toolButtonExprRadius, &QPushButton::clicked, this,
-            &DialogPointFromCircleAndTangent::FXCircleRadius);
+    connect(ui->toolButtonExprRadius, &QPushButton::clicked, this, &DialogPointFromCircleAndTangent::FXCircleRadius);
 
-    connect(ui->plainTextEditRadius, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        m_timerCircleRadius->start(formulaTimerTimeout);
-    });
+    connect(ui->plainTextEditRadius, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerCircleRadius->start(formulaTimerTimeout); });
 
     connect(ui->pushButtonGrowRadius, &QPushButton::clicked, this,
             &DialogPointFromCircleAndTangent::DeployCircleRadiusTextEdit);
@@ -148,8 +149,8 @@ auto DialogPointFromCircleAndTangent::GetCircleRadius() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointFromCircleAndTangent::SetCircleRadius(const QString &value)
 {
-    const QString formula = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString formula = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formula.length() > 80)
     {
@@ -233,7 +234,7 @@ void DialogPointFromCircleAndTangent::ShowDialog(bool click)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointFromCircleAndTangent::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare)// After first choose we ignore all objects
+    if (prepare) // After first choose we ignore all objects
     {
         return;
     }
@@ -257,8 +258,8 @@ void DialogPointFromCircleAndTangent::ChosenObject(quint32 id, const SceneObject
                 {
                     if (SetObject(id, ui->comboBoxCircleCenter, QString()))
                     {
-                        auto *window = qobject_cast<VAbstractMainWindow *>(
-                            VAbstractValApplication::VApp()->getMainWindow());
+                        auto *window =
+                            qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
                         SCASSERT(window != nullptr)
                         connect(vis.data(), &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
 
@@ -371,6 +372,24 @@ void DialogPointFromCircleAndTangent::closeEvent(QCloseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPointFromCircleAndTangent::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        InitIcons();
+        InitDialogButtonBoxIcons(ui->buttonBox);
+    }
+
+    // remember to call base class implementation
+    DialogTool::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPointFromCircleAndTangent::FinishCreating()
 {
     vis->SetMode(Mode::Show);
@@ -380,6 +399,15 @@ void DialogPointFromCircleAndTangent::FinishCreating()
 
     setModal(true);
     show();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointFromCircleAndTangent::InitIcons()
+{
+    const QString resource = QStringLiteral("icon");
+
+    ui->toolButtonExprRadius->setIcon(VTheme::GetIconResource(resource, QStringLiteral("24x24/fx.png")));
+    ui->label_3->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/equal.png")));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -73,6 +73,7 @@ protected:
      */
     void SaveData() override;
     void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
     auto IsValid() const -> bool final;
 
 private slots:
@@ -133,6 +134,8 @@ private:
     auto GetP4() const -> const QSharedPointer<VPointF>;
 
     auto CurrentSpline() const -> VSpline;
+
+    void InitIcons();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

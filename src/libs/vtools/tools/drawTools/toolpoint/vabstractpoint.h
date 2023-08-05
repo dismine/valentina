@@ -35,7 +35,6 @@
 #include <QPen>
 #include <QPointF>
 #include <QString>
-#include <Qt>
 #include <QtGlobal>
 
 #include "../../../visualization/visualization.h"

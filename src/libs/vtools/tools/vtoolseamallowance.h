@@ -29,8 +29,6 @@
 #ifndef VTOOLSEAMALLOWANCE_H
 #define VTOOLSEAMALLOWANCE_H
 
-
-
 #include <QGraphicsPathItem>
 #include <QObject>
 #include <QtGlobal>
@@ -54,6 +52,7 @@ struct VToolSeamAllowanceInitData : VAbstractToolInitData
 class VToolSeamAllowance : public VInteractiveTool, public QGraphicsPathItem
 {
     Q_OBJECT // NOLINT
+
 public:
     ~VToolSeamAllowance() override = default;
 

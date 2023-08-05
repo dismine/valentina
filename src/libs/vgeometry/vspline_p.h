@@ -108,12 +108,18 @@ inline VSplineData::VSplineData(const VPointF &p1, const VPointF &p4, qreal angl
     QLineF p1p2(p1.x(), p1.y(), p1.x() + L * kAsm1, p1.y());
     p1p2.setAngle(angle1);
     c1Length = p1p2.length();
-    c1LengthF = QString::number(VAbstractValApplication::VApp()->fromPixel(c1Length));
+    if (VAbstractValApplication::VApp())
+    {
+        c1LengthF = QString::number(VAbstractValApplication::VApp()->fromPixel(c1Length));
+    }
 
     QLineF p4p3(p4.x(), p4.y(), p4.x() + L * kAsm2, p4.y());
     p4p3.setAngle(angle2);
     c2Length = p4p3.length();
-    c2LengthF = QString::number(VAbstractValApplication::VApp()->fromPixel(c2Length));
+    if (VAbstractValApplication::VApp())
+    {
+        c2LengthF = QString::number(VAbstractValApplication::VApp()->fromPixel(c2Length));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -127,7 +133,10 @@ inline VSplineData::VSplineData(const VPointF &p1, QPointF p2, QPointF p3, const
     angle1F = QString::number(angle1);
 
     c1Length = p1p2.length();
-    c1LengthF = QString::number(VAbstractValApplication::VApp()->fromPixel(c1Length));
+    if (VAbstractValApplication::VApp())
+    {
+        c1LengthF = QString::number(VAbstractValApplication::VApp()->fromPixel(c1Length));
+    }
 
     QLineF p4p3(static_cast<QPointF>(p4), static_cast<QPointF>(p3));
 
@@ -135,7 +144,10 @@ inline VSplineData::VSplineData(const VPointF &p1, QPointF p2, QPointF p3, const
     angle2F = QString::number(angle2);
 
     c2Length = p4p3.length();
-    c2LengthF = QString::number(VAbstractValApplication::VApp()->fromPixel(c2Length));
+    if (VAbstractValApplication::VApp())
+    {
+        c2LengthF = QString::number(VAbstractValApplication::VApp()->fromPixel(c2Length));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

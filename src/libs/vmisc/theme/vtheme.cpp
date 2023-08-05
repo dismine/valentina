@@ -66,6 +66,7 @@ using namespace bpstd::literals::chrono_literals;
 
 #include "../defglobal.h"
 #include "../vabstractapplication.h"
+#include "vscenestylesheet.h"
 
 namespace
 {
@@ -223,7 +224,7 @@ void ActivateDefaultTheme()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString GetResourceName(const QString &root, const QString &iconName, bool dark)
+auto GetResourceName(const QString &root, const QString &iconName, bool dark) -> QString
 {
     return QStringLiteral(":/%1/%2/%3").arg(root, dark ? "dark" : "light", iconName);
 }
@@ -500,6 +501,9 @@ void VTheme::ResetThemeSettings() const
     SetToAutoTheme();
     SetIconTheme();
     InitThemeMode();
+    VSceneStylesheet::ResetStyles();
+
+    emit Instance()->ThemeSettingsChanged();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -507,7 +511,7 @@ auto VTheme::GetIconResource(const QString &root, const QString &iconName) -> QI
 {
     QIcon icon;
     bool dark = (ColorSheme() == VColorSheme::Dark);
-    QPixmap pixmap = GetPixmapResource(root, iconName, dark);
+    QPixmap pixmap = ::GetPixmapResource(root, iconName, dark);
     icon.addPixmap(pixmap);
     if (dark)
     {
@@ -518,6 +522,13 @@ auto VTheme::GetIconResource(const QString &root, const QString &iconName) -> QI
         icon.addPixmap(pixmap, QIcon::Disabled);
     }
     return icon;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTheme::GetPixmapResource(const QString &root, const QString &iconName) -> QPixmap
+{
+    bool dark = (ColorSheme() == VColorSheme::Dark);
+    return ::GetPixmapResource(root, iconName, dark);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

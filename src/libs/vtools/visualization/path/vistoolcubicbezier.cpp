@@ -33,28 +33,27 @@
 #include <QPainterPath>
 #include <QPointF>
 #include <QSharedPointer>
-#include <Qt>
 #include <new>
 
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
-#include "vispath.h"
+#include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/scalesceneitems.h"
+#include "vispath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCubicBezier::VisToolCubicBezier(const VContainer *data, QGraphicsItem *parent)
-    : VisPath(data, parent)
+  : VisPath(data, parent)
 {
-    m_helpLine1 = InitItem<VScaledLine>(Color(VColor::MainColor), this);
-    m_helpLine2 = InitItem<VScaledLine>(Color(VColor::MainColor), this);
+    m_helpLine1 = InitItem<VScaledLine>(VColorRole::VisMainColor, this);
+    m_helpLine2 = InitItem<VScaledLine>(VColorRole::VisMainColor, this);
 
-    m_point1 = InitPoint(Color(VColor::SupportColor), this);
-    m_point2 = InitPoint(Color(VColor::SupportColor), this); //-V656
-    m_point3 = InitPoint(Color(VColor::SupportColor), this); //-V656
-    m_point4 = InitPoint(Color(VColor::SupportColor), this); //-V656
+    m_point1 = InitPoint(VColorRole::VisSupportColor, this);
+    m_point2 = InitPoint(VColorRole::VisSupportColor, this); //-V656
+    m_point3 = InitPoint(VColorRole::VisSupportColor, this); //-V656
+    m_point4 = InitPoint(VColorRole::VisSupportColor, this); //-V656
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -67,46 +66,42 @@ void VisToolCubicBezier::RefreshGeometry()
 
         if (m_point2Id <= NULL_ID)
         {
-            DrawLine(m_helpLine1, QLineF(static_cast<QPointF>(*first), ScenePos()), Color(VColor::MainColor),
-                     Qt::DashLine);
+            DrawLine(m_helpLine1, QLineF(static_cast<QPointF>(*first), ScenePos()), Qt::DashLine);
         }
         else
         {
             const auto second = GetData()->GeometricObject<VPointF>(m_point2Id);
-            DrawPoint(m_point2, static_cast<QPointF>(*second), Color(VColor::SupportColor));
-            DrawLine(m_helpLine1, QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)),
-                     Color(VColor::MainColor), Qt::DashLine);
+            DrawPoint(m_point2, static_cast<QPointF>(*second));
+            DrawLine(m_helpLine1, QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)), Qt::DashLine);
 
             if (m_point3Id <= NULL_ID)
             {
                 VCubicBezier spline(*first, *second, VPointF(ScenePos()), VPointF(ScenePos()));
                 spline.SetApproximationScale(ApproximationScale());
-                DrawPath(this, spline.GetPath(), Color(VColor::MainColor), LineStyle(), Qt::RoundCap);
+                DrawPath(this, spline.GetPath(), LineStyle(), Qt::RoundCap);
             }
             else
             {
                 const auto third = GetData()->GeometricObject<VPointF>(m_point3Id);
-                DrawPoint(m_point3, static_cast<QPointF>(*third), Color(VColor::SupportColor));
+                DrawPoint(m_point3, static_cast<QPointF>(*third));
 
                 if (m_point4Id <= NULL_ID)
                 {
-                    VCubicBezier spline(*first, *second, *third,  VPointF(ScenePos()));
+                    VCubicBezier spline(*first, *second, *third, VPointF(ScenePos()));
                     spline.SetApproximationScale(ApproximationScale());
-                    DrawPath(this, spline.GetPath(), Color(VColor::MainColor), LineStyle(), Qt::RoundCap);
-                    DrawLine(m_helpLine2, QLineF(static_cast<QPointF>(*third), ScenePos()), Color(VColor::MainColor),
-                             Qt::DashLine);
+                    DrawPath(this, spline.GetPath(), LineStyle(), Qt::RoundCap);
+                    DrawLine(m_helpLine2, QLineF(static_cast<QPointF>(*third), ScenePos()), Qt::DashLine);
                 }
                 else
                 {
                     const auto fourth = GetData()->GeometricObject<VPointF>(m_point4Id);
-                    DrawPoint(m_point4, static_cast<QPointF>(*fourth), Color(VColor::SupportColor));
+                    DrawPoint(m_point4, static_cast<QPointF>(*fourth));
                     DrawLine(m_helpLine2, QLineF(static_cast<QPointF>(*fourth), static_cast<QPointF>(*third)),
-                             Color(VColor::MainColor), Qt::DashLine);
+                             Qt::DashLine);
 
-                    VCubicBezier spline(*first, *second, *third,  *fourth);
+                    VCubicBezier spline(*first, *second, *third, *fourth);
                     spline.SetApproximationScale(ApproximationScale());
-                    DrawPath(this, spline.GetPath(), spline.DirectionArrows(), Color(VColor::MainColor), LineStyle(),
-                             Qt::RoundCap);
+                    DrawPath(this, spline.GetPath(), spline.DirectionArrows(), LineStyle(), Qt::RoundCap);
                 }
             }
         }

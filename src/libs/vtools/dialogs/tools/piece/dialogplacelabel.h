@@ -32,7 +32,7 @@
 
 namespace Ui
 {
-    class DialogPlaceLabel;
+class DialogPlaceLabel;
 }
 
 class VPlaceLabelItem;
@@ -43,40 +43,41 @@ class DialogPlaceLabel : public DialogTool
 
 public:
     explicit DialogPlaceLabel(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogPlaceLabel();
+    ~DialogPlaceLabel() override;
 
     void EnbleShowMode(bool disable);
 
     auto GetCenterPoint() const -> quint32;
-    void    SetCenterPoint(quint32 id);
+    void SetCenterPoint(quint32 id);
 
     auto GetLabelType() const -> PlaceLabelType;
-    void           SetLabelType(PlaceLabelType type);
+    void SetLabelType(PlaceLabelType type);
 
     auto GetWidth() const -> QString;
-    void    SetWidth(const QString &value);
+    void SetWidth(const QString &value);
 
     auto GetHeight() const -> QString;
-    void    SetHeight(const QString &value);
+    void SetHeight(const QString &value);
 
     auto GetAngle() const -> QString;
-    void    SetAngle(const QString &value);
+    void SetAngle(const QString &value);
 
     auto GetPieceId() const -> quint32;
-    void    SetPieceId(quint32 id);
+    void SetPieceId(quint32 id);
 
     auto GetFormulaVisible() const -> QString;
-    void    SetFormulaVisible(const QString &formula);
+    void SetFormulaVisible(const QString &formula);
 
-    virtual void SetPiecesList(const QVector<quint32> &list) override;
+    void SetPiecesList(const QVector<quint32> &list) override;
 
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
 
 protected:
-    virtual void ShowVisualization() override;
-    virtual void closeEvent(QCloseEvent *event) override;
-    virtual auto IsValid() const -> bool final;
+    void ShowVisualization() override;
+    void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
+    auto IsValid() const -> bool final;
 
 private slots:
     void DeployFormulaWidthEdit();
@@ -124,6 +125,8 @@ private:
 
     void CheckPieces();
     void CheckPoint();
+
+    void InitIcons();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

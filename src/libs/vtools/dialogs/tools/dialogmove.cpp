@@ -45,54 +45,54 @@
 #include <QStringList>
 #include <QTimer>
 #include <QToolButton>
-#include <Qt>
 #include <new>
 
-#include "../../visualization/visualization.h"
+#include "../../tools/drawTools/operation/vabstractoperation.h"
 #include "../../visualization/line/operation/vistoolmove.h"
+#include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../ifc/xml/vdomdocument.h"
 #include "../qmuparser/qmudef.h"
 #include "../support/dialogeditwrongformula.h"
-#include "../vgeometry/vpointf.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
-#include "../vmisc/compatibility.h"
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vmisc/backport/qoverload.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vabstractmainwindow.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "ui_dialogmove.h"
-#include "../../tools/drawTools/operation/vabstractoperation.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../vmisc/backport/qoverload.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogMove::DialogMove(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogMove),
-      timerAngle(new QTimer(this)),
-      timerRotationAngle(new QTimer(this)),
-      timerLength(new QTimer(this)),
-      formulaAngle(),
-      formulaRotationAngle(),
-      formulaLength(),
-      formulaBaseHeightAngle(0),
-      formulaBaseHeightRotationAngle(0),
-      formulaBaseHeightLength(0),
-      stage1(true),
-      stage2(false),
-      m_suffix(),
-      optionalRotationOrigin(false),
-      flagAngle(false),
-      flagRotationAngle(false),
-      flagLength(false),
-      flagName(true),
-      flagGroupName(true)
+  : DialogTool(data, toolId, parent),
+    ui(new Ui::DialogMove),
+    timerAngle(new QTimer(this)),
+    timerRotationAngle(new QTimer(this)),
+    timerLength(new QTimer(this)),
+    formulaAngle(),
+    formulaRotationAngle(),
+    formulaLength(),
+    formulaBaseHeightAngle(0),
+    formulaBaseHeightRotationAngle(0),
+    formulaBaseHeightLength(0),
+    stage1(true),
+    stage2(false),
+    m_suffix(),
+    optionalRotationOrigin(false),
+    flagAngle(false),
+    flagRotationAngle(false),
+    flagLength(false),
+    flagName(true),
+    flagGroupName(true)
 {
     ui->setupUi(this);
+
+    InitIcons();
 
     this->formulaBaseHeightAngle = ui->plainTextEditAngle->height();
     ui->plainTextEditAngle->installEventFilter(this);
@@ -116,7 +116,10 @@ DialogMove::DialogMove(const VContainer *data, quint32 toolId, QWidget *parent)
 
     InitOkCancelApply(ui);
 
-    FillComboBoxTypeLine(ui->comboBoxPenStyle, OperationLineStylesPics(), TypeLineDefault);
+    FillComboBoxTypeLine(ui->comboBoxPenStyle,
+                         OperationLineStylesPics(ui->comboBoxPenStyle->palette().color(QPalette::Base),
+                                                 ui->comboBoxPenStyle->palette().color(QPalette::Text)),
+                         TypeLineDefault);
     FillComboBoxLineColors(ui->comboBoxColor, VAbstractOperation::OperationColorsList());
     FillComboBoxPoints(ui->comboBoxRotationOriginPoint);
 
@@ -129,20 +132,14 @@ DialogMove::DialogMove(const VContainer *data, quint32 toolId, QWidget *parent)
     connect(ui->toolButtonExprAngle, &QPushButton::clicked, this, &DialogMove::FXAngle);
     connect(ui->toolButtonExprRotationAngle, &QPushButton::clicked, this, &DialogMove::FXRotationAngle);
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogMove::FXLength);
-    connect(ui->plainTextEditAngle, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        timerAngle->start(formulaTimerTimeout);
-    });
+    connect(ui->plainTextEditAngle, &QPlainTextEdit::textChanged, this,
+            [this]() { timerAngle->start(formulaTimerTimeout); });
 
-    connect(ui->plainTextEditRotationAngle, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        timerRotationAngle->start(formulaTimerTimeout);
-    });
+    connect(ui->plainTextEditRotationAngle, &QPlainTextEdit::textChanged, this,
+            [this]() { timerRotationAngle->start(formulaTimerTimeout); });
 
-    connect(ui->plainTextEditLength, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        timerLength->start(formulaTimerTimeout);
-    });
+    connect(ui->plainTextEditLength, &QPlainTextEdit::textChanged, this,
+            [this]() { timerLength->start(formulaTimerTimeout); });
 
     connect(ui->pushButtonGrowAngle, &QPushButton::clicked, this, &DialogMove::DeployAngleTextEdit);
     connect(ui->pushButtonGrowRotationAngle, &QPushButton::clicked, this, &DialogMove::DeployRotationAngleTextEdit);
@@ -177,8 +174,8 @@ auto DialogMove::GetAngle() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::SetAngle(const QString &value)
 {
-    formulaAngle = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    formulaAngle = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formulaAngle.length() > 80)
     {
@@ -186,7 +183,7 @@ void DialogMove::SetAngle(const QString &value)
     }
     ui->plainTextEditAngle->setPlainText(formulaAngle);
 
-    VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
+    auto *operation = qobject_cast<VisToolMove *>(vis);
     SCASSERT(operation != nullptr)
     operation->SetAngle(formulaAngle);
 
@@ -196,14 +193,15 @@ void DialogMove::SetAngle(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogMove::GetLength() const -> QString
 {
-    return VTranslateVars::TryFormulaFromUser(formulaLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(formulaLength,
+                                              VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::SetLength(const QString &value)
 {
-    formulaLength = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    formulaLength = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formulaLength.length() > 80)
     {
@@ -211,7 +209,7 @@ void DialogMove::SetLength(const QString &value)
     }
     ui->plainTextEditLength->setPlainText(formulaLength);
 
-    VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
+    auto *operation = qobject_cast<VisToolMove *>(vis);
     SCASSERT(operation != nullptr)
     operation->SetLength(formulaLength);
 
@@ -221,14 +219,15 @@ void DialogMove::SetLength(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogMove::GetRotationAngle() const -> QString
 {
-    return VTranslateVars::TryFormulaFromUser(formulaRotationAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(formulaRotationAngle,
+                                              VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::SetRotationAngle(const QString &value)
 {
-    formulaRotationAngle = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    formulaRotationAngle = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formulaRotationAngle.length() > 80)
     {
@@ -236,7 +235,7 @@ void DialogMove::SetRotationAngle(const QString &value)
     }
     ui->plainTextEditRotationAngle->setPlainText(formulaRotationAngle);
 
-    VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
+    auto *operation = qobject_cast<VisToolMove *>(vis);
     SCASSERT(operation != nullptr)
     operation->SetRotationAngle(formulaRotationAngle);
 
@@ -266,7 +265,7 @@ auto DialogMove::GetRotationOrigPointId() const -> quint32
 void DialogMove::SetRotationOrigPointId(const quint32 &value)
 {
     ChangeCurrentData(ui->comboBoxRotationOriginPoint, value);
-    VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
+    auto *operation = qobject_cast<VisToolMove *>(vis);
     SCASSERT(operation != nullptr)
     operation->SetRotationOriginPointId(value);
 }
@@ -361,10 +360,10 @@ void DialogMove::ShowDialog(bool click)
 
         if (operation->LengthValue() > 0)
         {
-            formulaAngle = VAbstractApplication::VApp()->TrVars()
-                    ->FormulaToUser(operation->Angle(), VAbstractApplication::VApp()->Settings()->GetOsSeparator());
-            formulaLength = VAbstractApplication::VApp()->TrVars()
-                    ->FormulaToUser(operation->Length(), VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+            formulaAngle = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+                operation->Angle(), VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+            formulaLength = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+                operation->Length(), VAbstractApplication::VApp()->Settings()->GetOsSeparator());
             operation->SetAngle(formulaAngle);
             operation->SetLength(formulaLength);
             operation->RefreshGeometry();
@@ -389,10 +388,10 @@ void DialogMove::ShowDialog(bool click)
         }
         else
         {
-            SetAngle(VAbstractApplication::VApp()->TrVars()
-                     ->FormulaFromUser(formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
-            SetLength(VAbstractApplication::VApp()->TrVars()
-                      ->FormulaFromUser(formulaLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+            SetAngle(VAbstractApplication::VApp()->TrVars()->FormulaFromUser(
+                formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+            SetLength(VAbstractApplication::VApp()->TrVars()->FormulaFromUser(
+                formulaLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
             SetRotationAngle(operation->RotationAngle());
             setModal(true);
             emit ToolTip(QString());
@@ -407,7 +406,7 @@ void DialogMove::ShowDialog(bool click)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (not stage1 && stage2 && prepare)// After first choose we ignore all objects
+    if (not stage1 && stage2 && prepare) // After first choose we ignore all objects
     {
         if (type == SceneObject::Point && QGuiApplication::keyboardModifiers() == Qt::ControlModifier)
         {
@@ -434,7 +433,7 @@ void DialogMove::SelectedObject(bool selected, quint32 object, quint32 tool)
                                 [object](const SourceItem &sItem) { return sItem.id == object; });
         if (selected)
         {
-            if (obj == sourceObjects.cend())
+            if (obj == sourceObjects.end())
             {
                 SourceItem item;
                 item.id = object;
@@ -443,7 +442,7 @@ void DialogMove::SelectedObject(bool selected, quint32 object, quint32 tool)
         }
         else
         {
-            if (obj != sourceObjects.cend())
+            if (obj != sourceObjects.end())
             {
                 sourceObjects.erase(obj);
             }
@@ -460,7 +459,8 @@ void DialogMove::DeployAngleTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::DeployRotationAngleTextEdit()
 {
-    DeployFormula(this, ui->plainTextEditRotationAngle, ui->pushButtonGrowRotationAngle, formulaBaseHeightRotationAngle);
+    DeployFormula(this, ui->plainTextEditRotationAngle, ui->pushButtonGrowRotationAngle,
+                  formulaBaseHeightRotationAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -472,7 +472,7 @@ void DialogMove::DeployLengthTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::FXAngle()
 {
-    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit angle"));
     dialog->SetFormula(GetAngle());
     dialog->setPostfix(degreeSymbol);
@@ -486,7 +486,7 @@ void DialogMove::FXAngle()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::FXRotationAngle()
 {
-    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit rotation angle"));
     dialog->SetFormula(GetRotationAngle());
     dialog->setPostfix(degreeSymbol);
@@ -500,7 +500,7 @@ void DialogMove::FXRotationAngle()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::FXLength()
 {
-    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit length"));
     dialog->SetFormula(GetLength());
     dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
@@ -514,7 +514,7 @@ void DialogMove::FXLength()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::SuffixChanged()
 {
-    QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
+    auto *edit = qobject_cast<QLineEdit *>(sender());
     if (edit)
     {
         const QString suffix = edit->text();
@@ -531,7 +531,7 @@ void DialogMove::SuffixChanged()
         {
             QRegularExpression rx(NameRegExp());
             const QStringList uniqueNames = data->AllUniqueNames();
-            for (auto &uniqueName : uniqueNames)
+            for (const auto &uniqueName : uniqueNames)
             {
                 const QString name = uniqueName + suffix;
                 if (not rx.match(name).hasMatch() || not data->IsUnique(name))
@@ -554,7 +554,7 @@ void DialogMove::SuffixChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::GroupNameChanged()
 {
-    QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
+    auto *edit = qobject_cast<QLineEdit *>(sender());
     if (edit)
     {
         const QString name = edit->text();
@@ -639,7 +639,8 @@ void DialogMove::ShowSourceDetails(int row)
         {
             const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(sourceItem.id);
             int index = ui->comboBoxColor->currentIndex();
-            ui->comboBoxColor->setItemIcon(index, LineColor(ui->comboBoxColor->iconSize().height(), curve->GetColor()));
+            ui->comboBoxColor->setItemIcon(index, LineColor(ui->comboBoxColor->palette().color(QPalette::Text),
+                                                            ui->comboBoxColor->iconSize().height(), curve->GetColor()));
         }
 
         ui->comboBoxPenStyle->setEnabled(true);
@@ -723,7 +724,7 @@ void DialogMove::SaveData()
     sourceObjects.clear();
     sourceObjects.reserve(ui->listWidget->count());
 
-    for (int i=0; i<ui->listWidget->count(); ++i)
+    for (int i = 0; i < ui->listWidget->count(); ++i)
     {
         if (const QListWidgetItem *item = ui->listWidget->item(i))
         {
@@ -732,7 +733,7 @@ void DialogMove::SaveData()
         }
     }
 
-    VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
+    auto *operation = qobject_cast<VisToolMove *>(vis);
     SCASSERT(operation != nullptr)
 
     operation->SetObjects(SourceToObjects(sourceObjects));
@@ -776,7 +777,7 @@ void DialogMove::SetSourceObjects(const QVector<SourceItem> &value)
     sourceObjects = value;
     FillSourceList();
 
-    VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
+    auto *operation = qobject_cast<VisToolMove *>(vis);
     SCASSERT(operation != nullptr)
     operation->SetObjects(SourceToObjects(sourceObjects));
 }
@@ -870,7 +871,7 @@ void DialogMove::FillSourceList()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::ValidateSourceAliases()
 {
-    for (int i=0; i<ui->listWidget->count(); ++i)
+    for (int i = 0; i < ui->listWidget->count(); ++i)
     {
         if (const QListWidgetItem *item = ui->listWidget->item(i))
         {
@@ -911,6 +912,22 @@ void DialogMove::SetAliasValid(quint32 id, bool valid)
             ChangeColor(ui->labelAlias, valid ? OkColor(this) : errorColor);
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::InitIcons()
+{
+    const QString resource = QStringLiteral("icon");
+
+    const QString fxIcon = QStringLiteral("24x24/fx.png");
+    ui->toolButtonExprAngle->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprLength->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprRotationAngle->setIcon(VTheme::GetIconResource(resource, fxIcon));
+
+    const QString equalIcon = QStringLiteral("24x24/equal.png");
+    ui->label_2->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    ui->label_3->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    ui->label_4->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

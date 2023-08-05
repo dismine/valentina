@@ -48,8 +48,6 @@ auto IsSelectedByReleaseEvent(QGraphicsItem *item, QGraphicsSceneMouseEvent *eve
 
 auto SceneScale(QGraphicsScene *scene) -> qreal;
 
-auto CorrectColor(const QGraphicsItem *item, const QColor &color) -> QColor;
-
 auto PointRect(qreal radius) -> QRectF;
 auto ScaledRadius(qreal scale) -> qreal;
 void ScaleCircleSize(QGraphicsEllipseItem *item, qreal scale);

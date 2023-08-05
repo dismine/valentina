@@ -29,12 +29,12 @@
 #ifndef VTOOLOPTIONSPROPERTYBROWSER_H
 #define VTOOLOPTIONSPROPERTYBROWSER_H
 
-#include <QObject>
 #include <QMap>
+#include <QObject>
 
 #include "../vpropertyexplorer/vproperty.h"
-#include "../vpropertyexplorer/vpropertymodel.h"
 #include "../vpropertyexplorer/vpropertyformview.h"
+#include "../vpropertyexplorer/vpropertymodel.h"
 
 class QDockWidget;
 class QGraphicsItem;
@@ -44,151 +44,120 @@ class VFormula;
 class VToolOptionsPropertyBrowser : public QObject
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit VToolOptionsPropertyBrowser(QDockWidget *parent);
-    ~VToolOptionsPropertyBrowser() override =default;
+    ~VToolOptionsPropertyBrowser() override = default;
+
     void ClearPropertyBrowser();
+
 public slots:
     void itemClicked(QGraphicsItem *item);
     void UpdateOptions();
     void RefreshOptions();
+
 private slots:
-    void userChangedData(VPE::VProperty* property);
+    void userChangedData(VPE::VProperty *property);
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VToolOptionsPropertyBrowser) // NOLINT
 
-    VPE::VPropertyModel* m_PropertyModel{nullptr};
-    VPE::VPropertyFormView* m_formView{nullptr};
+    VPE::VPropertyModel *m_PropertyModel{nullptr};
+    VPE::VPropertyFormView *m_formView{nullptr};
 
     QGraphicsItem *m_currentItem{nullptr};
     QMap<VPE::VProperty *, QString> m_propertyToId{};
     QMap<QString, VPE::VProperty *> m_idToProperty{};
 
+    auto ComboBoxPalette() const -> QPalette;
+
     void AddProperty(VPE::VProperty *property, const QString &id);
     void ShowItemOptions(QGraphicsItem *item);
 
-    template<class Tool>
-    void SetName(VPE::VProperty *property);
+    template <class Tool> void SetName(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetHold(VPE::VProperty *property);
+    template <class Tool> void SetHold(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetVisible(VPE::VProperty *property);
+    template <class Tool> void SetVisible(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetOpacity(VPE::VProperty *property);
+    template <class Tool> void SetOpacity(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetPointName(VPE::VProperty *property);
+    template <class Tool> void SetPointName(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetPointName1(VPE::VProperty *property);
+    template <class Tool> void SetPointName1(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetPointName2(VPE::VProperty *property);
+    template <class Tool> void SetPointName2(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetOperationSuffix(VPE::VProperty *property);
+    template <class Tool> void SetOperationSuffix(VPE::VProperty *property);
 
-    template<class Type>
-    auto GetCrossPoint(const QVariant &value) -> Type;
+    template <class Type> auto GetCrossPoint(const QVariant &value) -> Type;
 
-    template<class Tool>
-    void SetCrossCirclesPoint(VPE::VProperty *property);
+    template <class Tool> void SetCrossCirclesPoint(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetVCrossCurvesPoint(VPE::VProperty *property);
+    template <class Tool> void SetVCrossCurvesPoint(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetHCrossCurvesPoint(VPE::VProperty *property);
+    template <class Tool> void SetHCrossCurvesPoint(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetAxisType(VPE::VProperty *property);
+    template <class Tool> void SetAxisType(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetNotes(VPE::VProperty *property);
+    template <class Tool> void SetNotes(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetAlias(VPE::VProperty *property);
+    template <class Tool> void SetAlias(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetAlias1(VPE::VProperty *property);
+    template <class Tool> void SetAlias1(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetAlias2(VPE::VProperty *property);
+    template <class Tool> void SetAlias2(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetLineType(VPE::VProperty *property);
+    template <class Tool> void SetLineType(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetLineColor(VPE::VProperty *property);
+    template <class Tool> void SetLineColor(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetFormulaLength(VPE::VProperty *property);
+    template <class Tool> void SetFormulaLength(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetFormulaAngle(VPE::VProperty *property);
+    template <class Tool> void SetFormulaAngle(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetFormulaRadius(VPE::VProperty *property);
+    template <class Tool> void SetFormulaRadius(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetFormulaF1(VPE::VProperty *property);
+    template <class Tool> void SetFormulaF1(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetFormulaF2(VPE::VProperty *property);
+    template <class Tool> void SetFormulaF2(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetPenStyle(VPE::VProperty *property);
+    template <class Tool> void SetPenStyle(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetFormulaRotationAngle(VPE::VProperty *property);
+    template <class Tool> void SetFormulaRotationAngle(VPE::VProperty *property);
 
-    template<class Tool>
-    void SetApproximationScale(VPE::VProperty *property);
+    template <class Tool> void SetApproximationScale(VPE::VProperty *property);
 
-    template<class Tool>
-    void AddPropertyObjectName(Tool *i, const QString &propertyName, bool readOnly = false);
+    template <class Tool> void AddPropertyObjectName(Tool *i, const QString &propertyName, bool readOnly = false);
 
-    template<class Tool>
-    void AddPropertyAlias(Tool *i, const QString &propertyName);
+    template <class Tool> void AddPropertyAlias(Tool *i, const QString &propertyName);
 
-    template<class Tool>
-    void AddPropertyAlias1(Tool *i, const QString &propertyName);
+    template <class Tool> void AddPropertyAlias1(Tool *i, const QString &propertyName);
 
-    template<class Tool>
-    void AddPropertyAlias2(Tool *i, const QString &propertyName);
+    template <class Tool> void AddPropertyAlias2(Tool *i, const QString &propertyName);
 
-    template<class Tool>
-    void AddPropertyPointName1(Tool *i, const QString &propertyName);
+    template <class Tool> void AddPropertyPointName1(Tool *i, const QString &propertyName);
 
-    template<class Tool>
-    void AddPropertyPointName2(Tool *i, const QString &propertyName);
+    template <class Tool> void AddPropertyPointName2(Tool *i, const QString &propertyName);
 
-    template<class Tool>
-    void AddPropertyOperationSuffix(Tool *i, const QString &propertyName, bool readOnly = false);
+    template <class Tool> void AddPropertyOperationSuffix(Tool *i, const QString &propertyName, bool readOnly = false);
 
-    template<class Tool>
-    void AddPropertyCrossPoint(Tool *i, const QString &propertyName);
+    template <class Tool> void AddPropertyCrossPoint(Tool *i, const QString &propertyName);
 
-    template<class Tool>
-    void AddPropertyVCrossPoint(Tool *i, const QString &propertyName);
+    template <class Tool> void AddPropertyVCrossPoint(Tool *i, const QString &propertyName);
 
-    template<class Tool>
-    void AddPropertyHCrossPoint(Tool *i, const QString &propertyName);
+    template <class Tool> void AddPropertyHCrossPoint(Tool *i, const QString &propertyName);
 
-    template<class Tool>
-    void AddPropertyAxisType(Tool *i, const QString &propertyName);
+    template <class Tool> void AddPropertyAxisType(Tool *i, const QString &propertyName);
 
-    template<class Tool>
+    template <class Tool>
     void AddPropertyLineType(Tool *i, const QString &propertyName, const QMap<QString, QIcon> &styles);
 
-    template<class Tool>
+    template <class Tool>
     void AddPropertyCurvePenStyle(Tool *i, const QString &propertyName, const QMap<QString, QIcon> &styles);
 
-    template<class Tool>
+    template <class Tool>
     void AddPropertyLineColor(Tool *i, const QString &propertyName, const QMap<QString, QString> &colors,
                               const QString &id);
 

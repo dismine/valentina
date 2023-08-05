@@ -41,7 +41,6 @@
 #include <QSharedPointer>
 #include <QVariant>
 #include <QVector>
-#include <Qt>
 #include <new>
 
 #include "../../visualization/path/vistoolcubicbezierpath.h"
@@ -51,21 +50,21 @@
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../qmuparser/qmudef.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vabstractmainwindow.h"
 #include "dialogtool.h"
 #include "ui_dialogcubicbezierpath.h"
-#include "../qmuparser/qmudef.h"
 
 class QWidget;
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogCubicBezierPath::DialogCubicBezierPath(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogCubicBezierPath),
-      path(),
-      newDuplicate(-1),
-      flagError(false)
+  : DialogTool(data, toolId, parent),
+    ui(new Ui::DialogCubicBezierPath),
+    path(),
+    newDuplicate(-1),
+    flagError(false)
 {
     ui->setupUi(this);
 
@@ -74,13 +73,15 @@ DialogCubicBezierPath::DialogCubicBezierPath(const VContainer *data, quint32 too
 
     FillComboBoxPoints(ui->comboBoxPoint);
     FillComboBoxLineColors(ui->comboBoxColor);
-    FillComboBoxTypeLine(ui->comboBoxPenStyle, CurvePenStylesPics());
+    FillComboBoxTypeLine(ui->comboBoxPenStyle,
+                         CurvePenStylesPics(ui->comboBoxPenStyle->palette().color(QPalette::Base),
+                                            ui->comboBoxPenStyle->palette().color(QPalette::Text)));
 
     ui->doubleSpinBoxApproximationScale->setMaximum(maxCurveApproximationScale);
 
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogCubicBezierPath::PointChanged);
-    connect(ui->comboBoxPoint, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, &DialogCubicBezierPath::currentPointChanged);
+    connect(ui->comboBoxPoint, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            &DialogCubicBezierPath::currentPointChanged);
 
     connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogCubicBezierPath::ValidateAlias);
 
@@ -159,7 +160,7 @@ void DialogCubicBezierPath::ChosenObject(quint32 id, const SceneObject &type)
         {
             visPath->VisualMode(NULL_ID);
             VAbstractMainWindow *window =
-                    qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+                qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
             SCASSERT(window != nullptr)
             connect(visPath, &VisToolCubicBezierPath::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
         }
@@ -179,7 +180,7 @@ void DialogCubicBezierPath::ShowDialog(bool click)
         if (size >= 7)
         {
             if (size - VCubicBezierPath::SubSplPointsCount(path.CountSubSpl()) == 0)
-            {// Accept only if all subpaths are completed
+            { // Accept only if all subpaths are completed
                 emit ToolTip(QString());
 
                 if (not data->IsUnique(path.name()))
@@ -202,7 +203,7 @@ void DialogCubicBezierPath::ShowVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCubicBezierPath::SaveData()
 {
-    const quint32 d = path.GetDuplicate();//Save previous value
+    const quint32 d = path.GetDuplicate(); // Save previous value
     SavePath();
     newDuplicate <= -1 ? path.SetDuplicate(d) : path.SetDuplicate(static_cast<quint32>(newDuplicate));
 
@@ -237,7 +238,7 @@ void DialogCubicBezierPath::currentPointChanged(int index)
 
     try
     {
-        QListWidgetItem *item = ui->listWidget->item( ui->listWidget->currentRow() );
+        QListWidgetItem *item = ui->listWidget->item(ui->listWidget->currentRow());
         const auto point = data->GeometricObject<VPointF>(id);
         DataPoint(*point);
         item->setData(Qt::UserRole, QVariant::fromValue(*point));
@@ -280,7 +281,7 @@ void DialogCubicBezierPath::ValidateAlias()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCubicBezierPath::NewItem(const VPointF &point)
 {
-    auto* item = new QListWidgetItem(point.name());
+    auto *item = new QListWidgetItem(point.name());
     item->setFont(NodeFont(item->font()));
     item->setData(Qt::UserRole, QVariant::fromValue(point));
 
@@ -320,12 +321,12 @@ auto DialogCubicBezierPath::AllPathBackboneIds() const -> QSet<quint32>
     }
 
     QSet<quint32> ids;
-    const auto count = VCubicBezierPath::CountSubSpl(points.size());// Count subpaths
+    const auto count = VCubicBezierPath::CountSubSpl(points.size()); // Count subpaths
     for (qint32 i = 1; i <= count; ++i)
     {
         const auto base = VCubicBezierPath::SubSplOffset(i);
-        ids.insert(points.at(base));// The first subpath's point
-        ids.insert(points.at(base + 3));// The last subpath's point
+        ids.insert(points.at(base));     // The first subpath's point
+        ids.insert(points.at(base + 3)); // The last subpath's point
     }
 
     return ids;
@@ -371,9 +372,9 @@ void DialogCubicBezierPath::ValidatePath()
         color = OkColor(this);
 
         auto first = qvariant_cast<VPointF>(ui->listWidget->item(0)->data(Qt::UserRole));
-        auto last = qvariant_cast<VPointF>(ui->listWidget->item(ui->listWidget->count()-1)->data(Qt::UserRole));
+        auto last = qvariant_cast<VPointF>(ui->listWidget->item(ui->listWidget->count() - 1)->data(Qt::UserRole));
 
-        if (first.id() == path.at(0).id() && last.id() == path.at(path.CountPoints()-1).id())
+        if (first.id() == path.at(0).id() && last.id() == path.at(path.CountPoints() - 1).id())
         {
             newDuplicate = -1;
             ui->lineEditSplPathName->setText(VAbstractApplication::VApp()->TrVars()->VarToUser(path.name()));

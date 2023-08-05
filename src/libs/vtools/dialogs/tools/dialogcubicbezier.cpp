@@ -37,19 +37,19 @@
 
 #include "../../visualization/path/vistoolcubicbezier.h"
 #include "../../visualization/visualization.h"
+#include "../qmuparser/qmudef.h"
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
 #include "dialogtool.h"
 #include "ui_dialogcubicbezier.h"
-#include "../qmuparser/qmudef.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogCubicBezier::DialogCubicBezier(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogCubicBezier),
-      spl(),
-      newDuplicate(-1),
-      flagError(false)
+  : DialogTool(data, toolId, parent),
+    ui(new Ui::DialogCubicBezier),
+    spl(),
+    newDuplicate(-1),
+    flagError(false)
 {
     ui->setupUi(this);
     InitOkCancelApply(ui);
@@ -59,18 +59,16 @@ DialogCubicBezier::DialogCubicBezier(const VContainer *data, quint32 toolId, QWi
     FillComboBoxPoints(ui->comboBoxP3);
     FillComboBoxPoints(ui->comboBoxP4);
     FillComboBoxLineColors(ui->comboBoxColor);
-    FillComboBoxTypeLine(ui->comboBoxPenStyle, CurvePenStylesPics());
+    FillComboBoxTypeLine(ui->comboBoxPenStyle,
+                         CurvePenStylesPics(ui->comboBoxPenStyle->palette().color(QPalette::Base),
+                                            ui->comboBoxPenStyle->palette().color(QPalette::Text)));
 
     ui->doubleSpinBoxApproximationScale->setMaximum(maxCurveApproximationScale);
 
-    connect(ui->comboBoxP1, &QComboBox::currentTextChanged,
-            this, &DialogCubicBezier::PointNameChanged);
-    connect(ui->comboBoxP2, &QComboBox::currentTextChanged,
-            this, &DialogCubicBezier::PointNameChanged);
-    connect(ui->comboBoxP3, &QComboBox::currentTextChanged,
-            this, &DialogCubicBezier::PointNameChanged);
-    connect(ui->comboBoxP4, &QComboBox::currentTextChanged,
-            this, &DialogCubicBezier::PointNameChanged);
+    connect(ui->comboBoxP1, &QComboBox::currentTextChanged, this, &DialogCubicBezier::PointNameChanged);
+    connect(ui->comboBoxP2, &QComboBox::currentTextChanged, this, &DialogCubicBezier::PointNameChanged);
+    connect(ui->comboBoxP3, &QComboBox::currentTextChanged, this, &DialogCubicBezier::PointNameChanged);
+    connect(ui->comboBoxP4, &QComboBox::currentTextChanged, this, &DialogCubicBezier::PointNameChanged);
 
     connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogCubicBezier::ValidateAlias);
 
@@ -124,7 +122,7 @@ void DialogCubicBezier::SetSpline(const VCubicBezier &spline)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCubicBezier::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare == false)// After first choose we ignore all objects
+    if (prepare == false) // After first choose we ignore all objects
     {
         if (type == SceneObject::Point)
         {
@@ -249,7 +247,7 @@ void DialogCubicBezier::SaveData()
     spl.SetColor(GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack));
     spl.SetAliasSuffix(ui->lineEditAlias->text());
 
-    const quint32 d = spl.GetDuplicate();//Save previous value
+    const quint32 d = spl.GetDuplicate(); // Save previous value
     newDuplicate <= -1 ? spl.SetDuplicate(d) : spl.SetDuplicate(static_cast<quint32>(newDuplicate));
 
     auto *path = qobject_cast<VisToolCubicBezier *>(vis);

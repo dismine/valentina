@@ -30,45 +30,46 @@
 
 #include "../../../visualization/line/vistoolspecialpoint.h"
 #include "../../support/dialogeditwrongformula.h"
+#include "../vmisc/theme/vtheme.h"
+#include "../vpatterndb/vcontainer.h"
+
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vpatterndb/vcontainer.h"
 
 #include <QTimer>
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPlaceLabel::DialogPlaceLabel(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogPlaceLabel),
-      m_showMode(false),
-      m_formulaBaseHeightWidth(0),
-      m_formulaBaseHeightHeight(0),
-      m_formulaBaseHeightAngle(0),
-      m_formulaBaseVisible(0),
-      timerAngle(new QTimer(this)),
-      timerWidth(new QTimer(this)),
-      timerHeight(new QTimer(this)),
-      m_timerVisible(new QTimer(this)),
-      m_flagPoint(false),
-      m_flagWidth(false),
-      m_flagHeight(false),
-      m_flagAngle(false),
-      m_flagFormulaVisible(false),
-      m_flagError(false)
+  : DialogTool(data, toolId, parent),
+    ui(new Ui::DialogPlaceLabel),
+    m_showMode(false),
+    m_formulaBaseHeightWidth(0),
+    m_formulaBaseHeightHeight(0),
+    m_formulaBaseHeightAngle(0),
+    m_formulaBaseVisible(0),
+    timerAngle(new QTimer(this)),
+    timerWidth(new QTimer(this)),
+    timerHeight(new QTimer(this)),
+    m_timerVisible(new QTimer(this)),
+    m_flagPoint(false),
+    m_flagWidth(false),
+    m_flagHeight(false),
+    m_flagAngle(false),
+    m_flagFormulaVisible(false),
+    m_flagError(false)
 {
     ui->setupUi(this);
     InitOkCancel(ui);
+
+    InitIcons();
 
     InitPlaceLabelTab();
     InitControlTab();
 
     EvalVisible();
 
-    connect(ui->comboBoxPiece, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
-    {
-        CheckPieces();
-    });
+    connect(ui->comboBoxPiece, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]() { CheckPieces(); });
 
     vis = new VisToolSpecialPoint(data);
 }
@@ -134,8 +135,8 @@ auto DialogPlaceLabel::GetWidth() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::SetWidth(const QString &value)
 {
-    const QString formula = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString formula = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed. TODO : see if I can get the max number of caracters in one line
     // of this PlainTextEdit to change 80 to this value
     if (formula.length() > 80)
@@ -144,9 +145,9 @@ void DialogPlaceLabel::SetWidth(const QString &value)
     }
     ui->plainTextEditFormulaWidth->setPlainText(formula);
 
-//    VisToolPlaceLabel *point = qobject_cast<VisToolPlaceLabel *>(vis);
-//    SCASSERT(point != nullptr)
-//    point->SetPointId(id);
+    //    VisToolPlaceLabel *point = qobject_cast<VisToolPlaceLabel *>(vis);
+    //    SCASSERT(point != nullptr)
+    //    point->SetPointId(id);
 
     MoveCursorToEnd(ui->plainTextEditFormulaWidth);
 }
@@ -161,8 +162,8 @@ auto DialogPlaceLabel::GetHeight() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::SetHeight(const QString &value)
 {
-    const QString formula = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString formula = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed. TODO : see if I can get the max number of caracters in one line
     // of this PlainTextEdit to change 80 to this value
     if (formula.length() > 80)
@@ -171,9 +172,9 @@ void DialogPlaceLabel::SetHeight(const QString &value)
     }
     ui->plainTextEditFormulaHeight->setPlainText(formula);
 
-//    VisToolPlaceLabel *point = qobject_cast<VisToolPlaceLabel *>(vis);
-//    SCASSERT(point != nullptr)
-//    point->SetPointId(id);
+    //    VisToolPlaceLabel *point = qobject_cast<VisToolPlaceLabel *>(vis);
+    //    SCASSERT(point != nullptr)
+    //    point->SetPointId(id);
 
     MoveCursorToEnd(ui->plainTextEditFormulaHeight);
 }
@@ -188,8 +189,8 @@ auto DialogPlaceLabel::GetAngle() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::SetAngle(const QString &value)
 {
-    const QString formula = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString formula = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed. TODO : see if I can get the max number of caracters in one line
     // of this PlainTextEdit to change 80 to this value
     if (formula.length() > 80)
@@ -198,9 +199,9 @@ void DialogPlaceLabel::SetAngle(const QString &value)
     }
     ui->plainTextEditFormulaAngle->setPlainText(formula);
 
-//    VisToolPlaceLabel *point = qobject_cast<VisToolPlaceLabel *>(vis);
-//    SCASSERT(point != nullptr)
-//    point->SetPointId(id);
+    //    VisToolPlaceLabel *point = qobject_cast<VisToolPlaceLabel *>(vis);
+    //    SCASSERT(point != nullptr)
+    //    point->SetPointId(id);
 
     MoveCursorToEnd(ui->plainTextEditFormulaAngle);
 }
@@ -288,6 +289,24 @@ void DialogPlaceLabel::closeEvent(QCloseEvent *event)
     ui->plainTextEditFormulaAngle->blockSignals(true);
     ui->plainTextEditFormulaVisible->blockSignals(true);
     DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPlaceLabel::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        InitIcons();
+        InitDialogButtonBoxIcons(ui->buttonBox);
+    }
+
+    // remember to call base class implementation
+    DialogTool::changeEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -437,28 +456,22 @@ void DialogPlaceLabel::InitPlaceLabelTab()
     ui->plainTextEditFormulaAngle->installEventFilter(this);
 
     ui->plainTextEditFormulaWidth->setPlainText(
-                QString::number(UnitConvertor(1, Unit::Cm, VAbstractValApplication::VApp()->patternUnits())));
+        QString::number(UnitConvertor(1, Unit::Cm, VAbstractValApplication::VApp()->patternUnits())));
     ui->plainTextEditFormulaHeight->setPlainText(
-                QString::number(UnitConvertor(1, Unit::Cm, VAbstractValApplication::VApp()->patternUnits())));
+        QString::number(UnitConvertor(1, Unit::Cm, VAbstractValApplication::VApp()->patternUnits())));
 
     connect(ui->toolButtonExprWidth, &QPushButton::clicked, this, &DialogPlaceLabel::FXWidth);
     connect(ui->toolButtonExprHeight, &QPushButton::clicked, this, &DialogPlaceLabel::FXHeight);
     connect(ui->toolButtonExprAngle, &QPushButton::clicked, this, &DialogPlaceLabel::FXAngle);
 
-    connect(ui->plainTextEditFormulaWidth, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        timerWidth->start(formulaTimerTimeout);
-    });
+    connect(ui->plainTextEditFormulaWidth, &QPlainTextEdit::textChanged, this,
+            [this]() { timerWidth->start(formulaTimerTimeout); });
 
-    connect(ui->plainTextEditFormulaHeight, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        timerHeight->start(formulaTimerTimeout);
-    });
+    connect(ui->plainTextEditFormulaHeight, &QPlainTextEdit::textChanged, this,
+            [this]() { timerHeight->start(formulaTimerTimeout); });
 
-    connect(ui->plainTextEditFormulaAngle, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        timerAngle->start(formulaTimerTimeout);
-    });
+    connect(ui->plainTextEditFormulaAngle, &QPlainTextEdit::textChanged, this,
+            [this]() { timerAngle->start(formulaTimerTimeout); });
 
     connect(ui->pushButtonGrowWidth, &QPushButton::clicked, this, &DialogPlaceLabel::DeployFormulaWidthEdit);
     connect(ui->pushButtonGrowHeight, &QPushButton::clicked, this, &DialogPlaceLabel::DeployFormulaHeightEdit);
@@ -488,12 +501,9 @@ void DialogPlaceLabel::InitControlTab()
 
     connect(m_timerVisible, &QTimer::timeout, this, &DialogPlaceLabel::EvalVisible);
     connect(ui->toolButtonExprVisible, &QPushButton::clicked, this, &DialogPlaceLabel::FXVisible);
-    connect(ui->plainTextEditFormulaVisible, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        m_timerVisible->start(formulaTimerTimeout);
-    });
-    connect(ui->pushButtonGrowVisible, &QPushButton::clicked, this,
-            &DialogPlaceLabel::DeployVisibleFormulaTextEdit);
+    connect(ui->plainTextEditFormulaVisible, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerVisible->start(formulaTimerTimeout); });
+    connect(ui->pushButtonGrowVisible, &QPushButton::clicked, this, &DialogPlaceLabel::DeployVisibleFormulaTextEdit);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -548,6 +558,24 @@ void DialogPlaceLabel::CheckPoint()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPlaceLabel::InitIcons()
+{
+    const QString resource = QStringLiteral("icon");
+
+    const QString fxIcon = QStringLiteral("24x24/fx.png");
+    ui->toolButtonExprWidth->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprHeight->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprAngle->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprVisible->setIcon(VTheme::GetIconResource(resource, fxIcon));
+
+    const QString equalIcon = QStringLiteral("24x24/equal.png");
+    ui->label_4->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    ui->label_5->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    ui->label_6->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    ui->label_8->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto DialogPlaceLabel::GetFormulaVisible() const -> QString
 {
     QString formula = ui->plainTextEditFormulaVisible->toPlainText();
@@ -557,8 +585,8 @@ auto DialogPlaceLabel::GetFormulaVisible() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::SetFormulaVisible(const QString &formula)
 {
-    const QString f = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString f = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (f.length() > 80)
     {

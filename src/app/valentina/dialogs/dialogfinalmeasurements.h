@@ -37,7 +37,7 @@
 
 namespace Ui
 {
-    class DialogFinalMeasurements;
+class DialogFinalMeasurements;
 }
 
 class DialogFinalMeasurements : public QDialog
@@ -51,10 +51,10 @@ public:
     auto FinalMeasurements() const -> QVector<VFinalMeasurement>;
 
 protected:
-    void closeEvent ( QCloseEvent * event ) override;
-    void changeEvent ( QEvent * event) override;
+    void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
     auto eventFilter(QObject *object, QEvent *event) -> bool override;
-    void showEvent( QShowEvent *event ) override;
+    void showEvent(QShowEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
 private slots:
     void ShowFinalMeasurementDetails();
@@ -68,16 +68,17 @@ private slots:
     void DeployFormula();
     void Fx();
     void FullUpdateFromFile();
+
 private:
     Q_DISABLE_COPY_MOVE(DialogFinalMeasurements) // NOLINT
     Ui::DialogFinalMeasurements *ui;
     /** @brief doc dom document container */
-    VPattern                    *m_doc;
-    VContainer                   m_data;
-    QVector<VFinalMeasurement>   m_measurements;
+    VPattern *m_doc;
+    VContainer m_data;
+    QVector<VFinalMeasurement> m_measurements;
     QSharedPointer<VTableSearch> m_search{};
-    int                          formulaBaseHeight{0};
-    bool                         m_isInitialized{false};
+    int formulaBaseHeight{0};
+    bool m_isInitialized{false};
 
     QMenu *m_searchHistory;
 
@@ -98,6 +99,8 @@ private:
     void InitSearchHistory();
     void SaveSearchRequest();
     void UpdateSearchControlsTooltips();
+
+    void InitIcons();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

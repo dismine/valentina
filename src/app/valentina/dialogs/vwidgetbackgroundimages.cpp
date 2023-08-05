@@ -26,23 +26,25 @@
  **
  *************************************************************************/
 #include "vwidgetbackgroundimages.h"
+#include "qstringliteral.h"
+#include "theme/vtheme.h"
 #include "ui_vwidgetbackgroundimages.h"
 
-#include "../vmisc/def.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vbackgroundpatternimage.h"
-#include "../vtools/undocommands/image/holdbackgroundimage.h"
-#include "../vtools/undocommands/image/renamebackgroundimage.h"
-#include "../vtools/undocommands/image/hidebackgroundimage.h"
+#include "../vmisc/def.h"
+#include "../vmisc/lambdaconstants.h"
+#include "../vmisc/vabstractapplication.h"
 #include "../vtools/undocommands/image/hideallbackgroundimages.h"
+#include "../vtools/undocommands/image/hidebackgroundimage.h"
 #include "../vtools/undocommands/image/holdallbackgroundimages.h"
-#include "../vtools/undocommands/image/zvaluemovebackgroundimage.h"
+#include "../vtools/undocommands/image/holdbackgroundimage.h"
 #include "../vtools/undocommands/image/movebackgroundimage.h"
+#include "../vtools/undocommands/image/renamebackgroundimage.h"
+#include "../vtools/undocommands/image/resetbackgroundimage.h"
 #include "../vtools/undocommands/image/rotatebackgroundimage.h"
 #include "../vtools/undocommands/image/scalebackgroundimage.h"
-#include "../vtools/undocommands/image/resetbackgroundimage.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vmisc/lambdaconstants.h"
+#include "../vtools/undocommands/image/zvaluemovebackgroundimage.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
@@ -64,8 +66,9 @@ void SetImageHold(QTableWidgetItem *item, const VBackgroundPatternImage &image)
 {
     if (item)
     {
-        (image.Hold()) ? item->setIcon(QIcon(QStringLiteral("://icon/16x16/hold_image.png")))
-                       : item->setIcon(QIcon(QStringLiteral("://icon/16x16/not_hold_image.png")));
+        const QString resource = QStringLiteral("icon");
+        (image.Hold()) ? item->setIcon(VTheme::GetIconResource(resource, QStringLiteral("16x16/hold_image.png")))
+                       : item->setIcon(VTheme::GetIconResource(resource, QStringLiteral("16x16/not_hold_image.png")));
     }
 }
 
@@ -74,8 +77,9 @@ void SetImageVisibility(QTableWidgetItem *item, const VBackgroundPatternImage &i
 {
     if (item)
     {
-        (image.Visible()) ? item->setIcon(QIcon(QStringLiteral("://icon/16x16/open_eye.png")))
-                          : item->setIcon(QIcon(QStringLiteral("://icon/16x16/closed_eye.png")));
+        const QString resource = QStringLiteral("icon");
+        item->setIcon(image.Visible() ? VTheme::GetIconResource(resource, QStringLiteral("16x16/open_eye.png"))
+                                      : VTheme::GetIconResource(resource, QStringLiteral("16x16/closed_eye.png")));
     }
 }
 
@@ -149,9 +153,9 @@ auto ScaleUnitConvertor(qreal base, qreal value, ScaleUnit from, ScaleUnit to) -
 
 //---------------------------------------------------------------------------------------------------------------------
 VWidgetBackgroundImages::VWidgetBackgroundImages(VAbstractPattern *doc, QWidget *parent)
-    : QWidget(parent),
-      ui(new Ui::VWidgetBackgroundImages),
-      m_doc(doc)
+  : QWidget(parent),
+    ui(new Ui::VWidgetBackgroundImages),
+    m_doc(doc)
 {
     ui->setupUi(this);
 
@@ -291,7 +295,7 @@ void VWidgetBackgroundImages::ImageNameChanged(int row, int column)
 void VWidgetBackgroundImages::ContextMenu(const QPoint &pos)
 {
     QTableWidgetItem *item = ui->tableWidget->itemAt(pos);
-    if(item == nullptr)
+    if (item == nullptr)
     {
         return;
     }
@@ -401,7 +405,8 @@ void VWidgetBackgroundImages::ContextMenu(const QPoint &pos)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VWidgetBackgroundImages::CurrentImageChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
+void VWidgetBackgroundImages::CurrentImageChanged(int currentRow, int currentColumn, int previousRow,
+                                                  int previousColumn)
 {
     Q_UNUSED(currentColumn)
     Q_UNUSED(previousColumn)
@@ -528,10 +533,11 @@ void VWidgetBackgroundImages::ApplyImageTransformation()
     }
     else if (ui->tabWidgetImageTransformation->indexOf(ui->tabScale) == index)
     { // scale
-        qreal sx = WidthScaleUnitConvertor(ui->doubleSpinBoxScaleWidth->value(), CurrentScaleUnit(),
-                                           ScaleUnit::Percent) / 100;
-        qreal sy = HeightScaleUnitConvertor(ui->doubleSpinBoxScaleHeight->value(), CurrentScaleUnit(),
-                                            ScaleUnit::Percent) / 100;
+        qreal sx =
+            WidthScaleUnitConvertor(ui->doubleSpinBoxScaleWidth->value(), CurrentScaleUnit(), ScaleUnit::Percent) / 100;
+        qreal sy =
+            HeightScaleUnitConvertor(ui->doubleSpinBoxScaleHeight->value(), CurrentScaleUnit(), ScaleUnit::Percent) /
+            100;
 
         QTransform imageMatrix = image.Matrix();
         QPointF originPos = image.BoundingRect().center();
@@ -544,7 +550,6 @@ void VWidgetBackgroundImages::ApplyImageTransformation()
 
         auto *command = new ScaleBackgroundImage(id, imageMatrix, m_doc);
         VAbstractApplication::VApp()->getUndoStack()->push(command);
-
     }
     else if (ui->tabWidgetImageTransformation->indexOf(ui->tabRotate) == index)
     { // rotate
@@ -841,37 +846,37 @@ void VWidgetBackgroundImages::InitImageTranslation()
     const int maxTranslate = 10000;
 
     ui->doubleSpinBoxImageHorizontalTranslate->setMinimum(
-                UnitConvertor(minTranslate, Unit::Cm, m_oldImageTranslationUnit));
+        UnitConvertor(minTranslate, Unit::Cm, m_oldImageTranslationUnit));
     ui->doubleSpinBoxImageHorizontalTranslate->setMaximum(
-                UnitConvertor(maxTranslate, Unit::Cm, m_oldImageTranslationUnit));
+        UnitConvertor(maxTranslate, Unit::Cm, m_oldImageTranslationUnit));
     ui->doubleSpinBoxImageHorizontalTranslate->setValue(0);
 
     ui->doubleSpinBoxImageVerticalTranslate->setMinimum(
-                UnitConvertor(minTranslate, Unit::Cm, m_oldImageTranslationUnit));
+        UnitConvertor(minTranslate, Unit::Cm, m_oldImageTranslationUnit));
     ui->doubleSpinBoxImageVerticalTranslate->setMaximum(
-                UnitConvertor(maxTranslate, Unit::Cm, m_oldImageTranslationUnit));
+        UnitConvertor(maxTranslate, Unit::Cm, m_oldImageTranslationUnit));
     ui->doubleSpinBoxImageVerticalTranslate->setValue(0);
 
     connect(ui->comboBoxTranslateUnit, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             [this V_LAMBDA_CONSTANTS(minTranslate, maxTranslate)]()
-    {
-        const Unit newUnit = CurrentTranslateUnit();
-        const qreal oldTranslateX = ui->doubleSpinBoxImageHorizontalTranslate->value();
-        const qreal oldTranslateY = ui->doubleSpinBoxImageVerticalTranslate->value();
+            {
+                const Unit newUnit = CurrentTranslateUnit();
+                const qreal oldTranslateX = ui->doubleSpinBoxImageHorizontalTranslate->value();
+                const qreal oldTranslateY = ui->doubleSpinBoxImageVerticalTranslate->value();
 
-        ui->doubleSpinBoxImageHorizontalTranslate->setMinimum(UnitConvertor(minTranslate, Unit::Cm, newUnit));
-        ui->doubleSpinBoxImageHorizontalTranslate->setMaximum(UnitConvertor(maxTranslate, Unit::Cm, newUnit));
+                ui->doubleSpinBoxImageHorizontalTranslate->setMinimum(UnitConvertor(minTranslate, Unit::Cm, newUnit));
+                ui->doubleSpinBoxImageHorizontalTranslate->setMaximum(UnitConvertor(maxTranslate, Unit::Cm, newUnit));
 
-        ui->doubleSpinBoxImageVerticalTranslate->setMinimum(UnitConvertor(minTranslate, Unit::Cm, newUnit));
-        ui->doubleSpinBoxImageVerticalTranslate->setMaximum(UnitConvertor(maxTranslate, Unit::Cm, newUnit));
+                ui->doubleSpinBoxImageVerticalTranslate->setMinimum(UnitConvertor(minTranslate, Unit::Cm, newUnit));
+                ui->doubleSpinBoxImageVerticalTranslate->setMaximum(UnitConvertor(maxTranslate, Unit::Cm, newUnit));
 
-        ui->doubleSpinBoxImageHorizontalTranslate->setValue(
+                ui->doubleSpinBoxImageHorizontalTranslate->setValue(
                     UnitConvertor(oldTranslateX, m_oldImageTranslationUnit, newUnit));
-        ui->doubleSpinBoxImageVerticalTranslate->setValue(
+                ui->doubleSpinBoxImageVerticalTranslate->setValue(
                     UnitConvertor(oldTranslateY, m_oldImageTranslationUnit, newUnit));
 
-        m_oldImageTranslationUnit = newUnit;
-    });
+                m_oldImageTranslationUnit = newUnit;
+            });
 
     SetCheckBoxValue(ui->checkBoxRelativeTranslation, true);
     connect(ui->checkBoxRelativeTranslation, &QCheckBox::toggled, this,
@@ -899,40 +904,40 @@ void VWidgetBackgroundImages::InitImageTranslation()
     ui->doubleSpinBoxScaleHeight->setMaximum(maxScale);
     ui->doubleSpinBoxScaleHeight->setValue(100);
 
-    connect(ui->comboBoxScaleUnit, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
-            [this V_LAMBDA_CONSTANTS(minScale, maxScale)]()
-    {
-        const ScaleUnit newUnit = CurrentScaleUnit();
-        const qreal oldScaleWidth = ui->doubleSpinBoxScaleWidth->value();
-        const qreal oldScaleHeight = ui->doubleSpinBoxScaleHeight->value();
-
-        ui->doubleSpinBoxScaleWidth->blockSignals(true);
-
-        ui->doubleSpinBoxScaleWidth->setMinimum(WidthScaleUnitConvertor(minScale, ScaleUnit::Percent, newUnit));
-        ui->doubleSpinBoxScaleWidth->setMinimum(WidthScaleUnitConvertor(minScale, ScaleUnit::Percent, newUnit));
-
-        ui->doubleSpinBoxScaleWidth->setValue(
-                    WidthScaleUnitConvertor(oldScaleWidth, m_oldImageScaleUnit, newUnit));
-        ui->doubleSpinBoxScaleWidth->blockSignals(false);
-
-        ui->doubleSpinBoxScaleHeight->blockSignals(true);
-
-        ui->doubleSpinBoxScaleHeight->setMaximum(HeightScaleUnitConvertor(maxScale, ScaleUnit::Percent, newUnit));
-        ui->doubleSpinBoxScaleHeight->setMaximum(HeightScaleUnitConvertor(maxScale, ScaleUnit::Percent, newUnit));
-
-        if (ui->checkBoxScaleProportionally->isChecked() && newUnit == ScaleUnit::Percent)
+    connect(
+        ui->comboBoxScaleUnit, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+        [this V_LAMBDA_CONSTANTS(minScale, maxScale)]()
         {
-            ui->doubleSpinBoxScaleHeight->setValue(ui->doubleSpinBoxScaleWidth->value());
-        }
-        else
-        {
-            ui->doubleSpinBoxScaleHeight->setValue(
-                        HeightScaleUnitConvertor(oldScaleHeight, m_oldImageScaleUnit, newUnit));
-        }
-        ui->doubleSpinBoxScaleHeight->blockSignals(false);
+            const ScaleUnit newUnit = CurrentScaleUnit();
+            const qreal oldScaleWidth = ui->doubleSpinBoxScaleWidth->value();
+            const qreal oldScaleHeight = ui->doubleSpinBoxScaleHeight->value();
 
-        m_oldImageScaleUnit = newUnit;
-    });
+            ui->doubleSpinBoxScaleWidth->blockSignals(true);
+
+            ui->doubleSpinBoxScaleWidth->setMinimum(WidthScaleUnitConvertor(minScale, ScaleUnit::Percent, newUnit));
+            ui->doubleSpinBoxScaleWidth->setMinimum(WidthScaleUnitConvertor(minScale, ScaleUnit::Percent, newUnit));
+
+            ui->doubleSpinBoxScaleWidth->setValue(WidthScaleUnitConvertor(oldScaleWidth, m_oldImageScaleUnit, newUnit));
+            ui->doubleSpinBoxScaleWidth->blockSignals(false);
+
+            ui->doubleSpinBoxScaleHeight->blockSignals(true);
+
+            ui->doubleSpinBoxScaleHeight->setMaximum(HeightScaleUnitConvertor(maxScale, ScaleUnit::Percent, newUnit));
+            ui->doubleSpinBoxScaleHeight->setMaximum(HeightScaleUnitConvertor(maxScale, ScaleUnit::Percent, newUnit));
+
+            if (ui->checkBoxScaleProportionally->isChecked() && newUnit == ScaleUnit::Percent)
+            {
+                ui->doubleSpinBoxScaleHeight->setValue(ui->doubleSpinBoxScaleWidth->value());
+            }
+            else
+            {
+                ui->doubleSpinBoxScaleHeight->setValue(
+                    HeightScaleUnitConvertor(oldScaleHeight, m_oldImageScaleUnit, newUnit));
+            }
+            ui->doubleSpinBoxScaleHeight->blockSignals(false);
+
+            m_oldImageScaleUnit = newUnit;
+        });
 
     connect(ui->doubleSpinBoxScaleHeight, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
             &VWidgetBackgroundImages::ScaleHeightChanged);
@@ -1016,7 +1021,7 @@ void VWidgetBackgroundImages::SetAbsolutePisition(const QUuid &id)
     QRectF rect = image.BoundingRect();
 
     ui->doubleSpinBoxImageHorizontalTranslate->setValue(
-                UnitConvertor(rect.topLeft().x(), Unit::Px, CurrentTranslateUnit()));
+        UnitConvertor(rect.topLeft().x(), Unit::Px, CurrentTranslateUnit()));
     ui->doubleSpinBoxImageVerticalTranslate->setValue(
-                UnitConvertor(rect.topLeft().y(), Unit::Px, CurrentTranslateUnit()));
+        UnitConvertor(rect.topLeft().y(), Unit::Px, CurrentTranslateUnit()));
 }

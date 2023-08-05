@@ -31,15 +31,15 @@
 
 #include <QTableWidget>
 
+#include "../vformat/vmeasurements.h"
 #include "../vmisc/def.h"
 #include "../vmisc/vlockguard.h"
-#include "../vformat/vmeasurements.h"
 #include "../vmisc/vtablesearch.h"
 #include "../vwidgets/vabstractmainwindow.h"
 
 namespace Ui
 {
-    class TMainWindow;
+class TMainWindow;
 } // namespace Ui
 
 class QLabel;
@@ -69,7 +69,7 @@ public:
 
 protected:
     void closeEvent(QCloseEvent *event) override;
-    void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent *event) override;
     auto eventFilter(QObject *object, QEvent *event) -> bool override;
     void ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator) final;
     auto RecentFileList() const -> QStringList override;
@@ -83,7 +83,7 @@ private slots:
     void Preferences();
     void ToolBarStyles();
 
-    bool FileSave(); // NOLINT(modernize-use-trailing-return-type)
+    bool FileSave();   // NOLINT(modernize-use-trailing-return-type)
     bool FileSaveAs(); // NOLINT(modernize-use-trailing-return-type)
     void AboutToShowWindowMenu();
     void ShowWindow() const;
@@ -92,12 +92,12 @@ private slots:
 #if defined(Q_OS_MAC)
     void AboutToShowDockMenu();
     void OpenAt(QAction *where);
-#endif //defined(Q_OS_MAC)
+#endif // defined(Q_OS_MAC)
 
     void SaveCustomerName();
     void SaveEmail();
     void SaveGender(int index);
-    void SaveBirthDate(const QDate & date);
+    void SaveBirthDate(const QDate &date);
     void SaveNotes();
     void SavePMSystem(int index);
 
@@ -145,27 +145,27 @@ private slots:
 
     void EditDimensionLabels();
     void DimensionCustomNames();
-    
+
     void AskDefaultSettings();
 
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(TMainWindow) // NOLINT
     Ui::TMainWindow *ui;
-    VMeasurements   *m_m{nullptr};
-    VContainer      *m_data{nullptr};
-    Unit             m_mUnit{Unit::Cm};
-    Unit             m_pUnit{Unit::Cm};
+    VMeasurements *m_m{nullptr};
+    VContainer *m_data{nullptr};
+    Unit m_mUnit{Unit::Cm};
+    Unit m_pUnit{Unit::Cm};
     MeasurementsType m_mType{MeasurementsType::Individual};
-    qreal            m_currentDimensionA{0};
-    qreal            m_currentDimensionB{0};
-    qreal            m_currentDimensionC{0};
-    QString          m_curFile{};
-    QComboBox       *m_gradationDimensionA{nullptr};
-    QComboBox       *m_gradationDimensionB{nullptr};
-    QComboBox       *m_gradationDimensionC{nullptr};
-    QComboBox       *m_comboBoxUnits{nullptr};
-    int              m_formulaBaseHeight;
+    qreal m_currentDimensionA{0};
+    qreal m_currentDimensionB{0};
+    qreal m_currentDimensionC{0};
+    QString m_curFile{};
+    QComboBox *m_gradationDimensionA{nullptr};
+    QComboBox *m_gradationDimensionB{nullptr};
+    QComboBox *m_gradationDimensionC{nullptr};
+    QComboBox *m_comboBoxUnits{nullptr};
+    int m_formulaBaseHeight;
     QSharedPointer<VLockGuard<char>> m_lock{nullptr};
     QSharedPointer<VTableSearch> m_search{};
     QLabel *m_labelGradationDimensionA{nullptr};
@@ -183,12 +183,12 @@ private:
     {
         MultisizeMeasurement() = default;
 
-        QString name{}; // NOLINT(misc-non-private-member-variables-in-classes)
-        qreal base{0}; // NOLINT(misc-non-private-member-variables-in-classes)
-        qreal shiftA{0}; // NOLINT(misc-non-private-member-variables-in-classes)
-        qreal shiftB{0}; // NOLINT(misc-non-private-member-variables-in-classes)
-        qreal shiftC{0}; // NOLINT(misc-non-private-member-variables-in-classes)
-        QString fullName{}; // NOLINT(misc-non-private-member-variables-in-classes)
+        QString name{};        // NOLINT(misc-non-private-member-variables-in-classes)
+        qreal base{0};         // NOLINT(misc-non-private-member-variables-in-classes)
+        qreal shiftA{0};       // NOLINT(misc-non-private-member-variables-in-classes)
+        qreal shiftB{0};       // NOLINT(misc-non-private-member-variables-in-classes)
+        qreal shiftC{0};       // NOLINT(misc-non-private-member-variables-in-classes)
+        QString fullName{};    // NOLINT(misc-non-private-member-variables-in-classes)
         QString description{}; // NOLINT(misc-non-private-member-variables-in-classes)
     };
 
@@ -225,7 +225,7 @@ private:
     auto MaybeSave() -> bool;
 
     auto AddCell(const QString &text, int row, int column, int aligment, bool ok = true) -> QTableWidgetItem *;
-    auto AddSeparatorCell(const QString &text, int row, int column, int aligment, bool ok = true) -> QTableWidgetItem*;
+    auto AddSeparatorCell(const QString &text, int row, int column, int aligment, bool ok = true) -> QTableWidgetItem *;
 
     void RefreshData(bool freshCall = false);
     void RefreshTable(bool freshCall = false);
@@ -254,8 +254,7 @@ private:
 
     void CreateWindowMenu(QMenu *menu);
 
-    template <class T>
-    void HackWidget(T **widget);
+    template <class T> void HackWidget(T **widget);
     void HackDimensionBaseValue();
     void HackDimensionShifts();
 
@@ -265,8 +264,8 @@ private:
 
     void ImportIndividualMeasurements(const QxtCsvModel &csv, const QVector<int> &map, bool withHeader);
     void ImportMultisizeMeasurements(const QxtCsvModel &csv, const QVector<int> &map, bool withHeader);
-    auto ImportMultisizeMeasurement(const QxtCsvModel &csv, int i, const QVector<int> &map,
-                                    vsizetype dimensionsCount, QSet<QString> &importedNames) -> MultisizeMeasurement;
+    auto ImportMultisizeMeasurement(const QxtCsvModel &csv, int i, const QVector<int> &map, vsizetype dimensionsCount,
+                                    QSet<QString> &importedNames) -> MultisizeMeasurement;
 
     void SetCurrentPatternUnit();
 
@@ -276,7 +275,9 @@ private:
 
     auto DimensionRestrictedValues(int index, const MeasurementDimension_p &dimension) -> QVector<double>;
 
-    auto OrderedMeasurments() const -> QMap<int, QSharedPointer<VMeasurement> >;
+    auto OrderedMeasurments() const -> QMap<int, QSharedPointer<VMeasurement>>;
+
+    void InitIcons();
 };
 
 #endif // TMAINWINDOW_H

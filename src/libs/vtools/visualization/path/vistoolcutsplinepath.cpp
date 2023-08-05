@@ -48,12 +48,14 @@
 VisToolCutSplinePath::VisToolCutSplinePath(const VContainer *data, QGraphicsItem *parent)
   : VisPath(data, parent)
 {
-    m_splPath1 = InitItem<VCurvePathItem>(Qt::darkGreen, this);
+    SetColorRole(VColorRole::VisSupportColor);
+
+    m_splPath1 = InitItem<VCurvePathItem>(VColorRole::VisSupportColor2, this);
     m_splPath1->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
-    m_splPath2 = InitItem<VCurvePathItem>(Qt::darkRed, this);
+    m_splPath2 = InitItem<VCurvePathItem>(VColorRole::VisSupportColor4, this);
     m_splPath2->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
 
-    m_point = InitPoint(Color(VColor::MainColor), this);
+    m_point = InitPoint(VColorRole::VisMainColor, this);
     m_point->setZValue(2);
     m_point->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
 }
@@ -64,8 +66,7 @@ void VisToolCutSplinePath::RefreshGeometry()
     if (m_splinePathId > NULL_ID)
     {
         const auto splPath = GetData()->GeometricObject<VAbstractCubicBezierPath>(m_splinePathId);
-        DrawPath(this, splPath->GetPath(), splPath->DirectionArrows(), Color(VColor::SupportColor), LineStyle(),
-                 Qt::RoundCap);
+        DrawPath(this, splPath->GetPath(), splPath->DirectionArrows(), LineStyle(), Qt::RoundCap);
 
         if (not qFuzzyIsNull(m_length))
         {
@@ -76,13 +77,11 @@ void VisToolCutSplinePath::RefreshGeometry()
             SCASSERT(spPath1 != nullptr)
             SCASSERT(spPath2 != nullptr)
 
-            DrawPoint(m_point, static_cast<QPointF>(*p), Color(VColor::MainColor));
+            DrawPoint(m_point, static_cast<QPointF>(*p));
             delete p;
 
-            DrawPath(m_splPath1, spPath1->GetPath(), spPath1->DirectionArrows(), Qt::darkGreen, LineStyle(),
-                     Qt::RoundCap);
-            DrawPath(m_splPath2, spPath2->GetPath(), spPath2->DirectionArrows(), Qt::darkRed, LineStyle(),
-                     Qt::RoundCap);
+            DrawPath(m_splPath1, spPath1->GetPath(), spPath1->DirectionArrows(), LineStyle(), Qt::RoundCap);
+            DrawPath(m_splPath2, spPath2->GetPath(), spPath2->DirectionArrows(), LineStyle(), Qt::RoundCap);
 
             delete spPath1;
             delete spPath2;
@@ -92,7 +91,7 @@ void VisToolCutSplinePath::RefreshGeometry()
             QPointF p = splPath->ClosestPoint(ScenePos());
             qreal length = splPath->GetLengthByPoint(p);
 
-            DrawPoint(m_point, p, Color(VColor::MainColor));
+            DrawPoint(m_point, p);
 
             const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
             SetToolTip(tr("Length = %1%2; "

@@ -1,9 +1,9 @@
 #include "vpgraphicstilegrid.h"
 
-#include "../vptilefactory.h"
 #include "../layout/vplayout.h"
 #include "../layout/vpsheet.h"
-#include "../vmisc/vmath.h"
+#include "../vmisc/theme/vscenestylesheet.h"
+#include "../vptilefactory.h"
 #include "../vwidgets/global.h"
 
 #include <QFileInfo>
@@ -29,8 +29,8 @@ auto SheetMargins(const VPSheetPtr &sheet) -> QMarginsF
 
 //---------------------------------------------------------------------------------------------------------------------
 auto OptimizeFontSizeToFitTextInRect(QPainter *painter, const QRectF &drawRect, const QString &text,
-                                     int flags = Qt::TextDontClip|Qt::TextWordWrap, double goalError =  0.01,
-                                     int maxIterationNumber=10) -> QFont
+                                     int flags = Qt::TextDontClip | Qt::TextWordWrap, double goalError = 0.01,
+                                     int maxIterationNumber = 10) -> QFont
 {
     QFont font;
 
@@ -44,8 +44,8 @@ auto OptimizeFontSizeToFitTextInRect(QPainter *painter, const QRectF &drawRect, 
 
     double minError = std::numeric_limits<double>::max();
     double error = std::numeric_limits<double>::max();
-    int iterationNumber=0;
-    while((error > goalError) && (iterationNumber<maxIterationNumber))
+    int iterationNumber = 0;
+    while ((error > goalError) && (iterationNumber < maxIterationNumber))
     {
         iterationNumber++;
         QRect fontBoundRect = painter->fontMetrics().boundingRect(drawRect.toRect(), flags, text);
@@ -58,15 +58,15 @@ auto OptimizeFontSizeToFitTextInRect(QPainter *painter, const QRectF &drawRect, 
         double xFactor = drawRect.width() / fontBoundRect.width();
         double yFactor = drawRect.height() / fontBoundRect.height();
         double factor;
-        if (xFactor<1 && yFactor<1)
+        if (xFactor < 1 && yFactor < 1)
         {
             factor = std::min(xFactor, yFactor);
         }
-        else if (xFactor>1 && yFactor>1)
+        else if (xFactor > 1 && yFactor > 1)
         {
             factor = std::max(xFactor, yFactor);
         }
-        else if (xFactor<1 && yFactor>1)
+        else if (xFactor < 1 && yFactor > 1)
         {
             factor = xFactor;
         }
@@ -75,8 +75,8 @@ auto OptimizeFontSizeToFitTextInRect(QPainter *painter, const QRectF &drawRect, 
             factor = yFactor;
         }
 
-        error = qFabs(factor-1);
-        if (factor > 1 )
+        error = qFabs(factor - 1);
+        if (factor > 1)
         {
             if (error < minError)
             {
@@ -88,7 +88,7 @@ auto OptimizeFontSizeToFitTextInRect(QPainter *painter, const QRectF &drawRect, 
             }
         }
         font = painter->font();
-        qreal size = font.pointSizeF()*factor;
+        qreal size = font.pointSizeF() * factor;
         if (size <= 0)
         {
             size = 0.00000001;
@@ -100,11 +100,11 @@ auto OptimizeFontSizeToFitTextInRect(QPainter *painter, const QRectF &drawRect, 
 
     return font;
 }
-}  // namespace
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-VPGraphicsTileGrid::VPGraphicsTileGrid(const VPLayoutPtr &layout, const QUuid &sheetUuid, QGraphicsItem *parent):
-    QGraphicsItem(parent),
+VPGraphicsTileGrid::VPGraphicsTileGrid(const VPLayoutPtr &layout, const QUuid &sheetUuid, QGraphicsItem *parent)
+  : QGraphicsItem(parent),
     m_layout(layout),
     m_sheetUuid(sheetUuid)
 {
@@ -114,7 +114,7 @@ VPGraphicsTileGrid::VPGraphicsTileGrid(const VPLayoutPtr &layout, const QUuid &s
 auto VPGraphicsTileGrid::boundingRect() const -> QRectF
 {
     VPLayoutPtr layout = m_layout.toStrongRef();
-    if(not layout.isNull() && layout->LayoutSettings().GetShowTiles())
+    if (not layout.isNull() && layout->LayoutSettings().GetShowTiles())
     {
         VPSheetPtr sheet = layout->GetSheet(m_sheetUuid);
 
@@ -130,11 +130,10 @@ auto VPGraphicsTileGrid::boundingRect() const -> QRectF
         qreal width = layout->TileFactory()->DrawingAreaWidth() - VPTileFactory::tileStripeWidth;
         qreal height = layout->TileFactory()->DrawingAreaHeight() - VPTileFactory::tileStripeWidth;
 
-        QRectF rect(sheetMargins.left(), sheetMargins.top(),
-                    layout->TileFactory()->ColNb(sheet) * (width / xScale),
+        QRectF rect(sheetMargins.left(), sheetMargins.top(), layout->TileFactory()->ColNb(sheet) * (width / xScale),
                     layout->TileFactory()->RowNb(sheet) * (height / yScale));
 
-        constexpr qreal halfPenWidth = penWidth/2.;
+        constexpr qreal halfPenWidth = penWidth / 2.;
 
         return rect.adjusted(-halfPenWidth, -halfPenWidth, halfPenWidth, halfPenWidth);
     }
@@ -149,12 +148,13 @@ void VPGraphicsTileGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem
     Q_UNUSED(option);
 
     VPLayoutPtr layout = m_layout.toStrongRef();
-    if(layout.isNull() || not layout->LayoutSettings().GetShowTiles())
+    if (layout.isNull() || not layout->LayoutSettings().GetShowTiles())
     {
         return;
     }
 
-    QPen pen(QColor(255,0,0,127), penWidth, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    QPen pen(VSceneStylesheet::ManualLayoutStyle().SheetTileGridColor(), penWidth, Qt::SolidLine, Qt::RoundCap,
+             Qt::RoundJoin);
     pen.setCosmetic(true);
     pen.setStyle(Qt::DashLine);
     QBrush noBrush(Qt::NoBrush);
@@ -166,17 +166,15 @@ void VPGraphicsTileGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem
 
     VWatermarkData watermarkData = layout->TileFactory()->WatermarkData();
 
-    auto PaintWatermark = [painter, layout, xScale, yScale, watermarkData]
-            (const QRectF &img)
+    auto PaintWatermark = [painter, layout, xScale, yScale, watermarkData](const QRectF &img)
     {
-        if (not layout->LayoutSettings().WatermarkPath().isEmpty() &&
-                layout->LayoutSettings().GetShowWatermark() && watermarkData.opacity > 0)
+        if (not layout->LayoutSettings().WatermarkPath().isEmpty() && layout->LayoutSettings().GetShowWatermark() &&
+            watermarkData.opacity > 0)
         {
             if (watermarkData.showImage && not watermarkData.path.isEmpty())
             {
                 VPTileFactory::PaintWatermarkImage(painter, img, watermarkData,
-                                                   layout->LayoutSettings().WatermarkPath(),
-                                                   xScale, yScale);
+                                                   layout->LayoutSettings().WatermarkPath(), true, xScale, yScale);
             }
 
             if (watermarkData.showText && not watermarkData.text.isEmpty())
@@ -195,14 +193,13 @@ void VPGraphicsTileGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem
     const int nbCol = layout->TileFactory()->ColNb(sheet);
     const int nbRow = layout->TileFactory()->RowNb(sheet);
 
-    QFont font = OptimizeFontSizeToFitTextInRect(painter,
-                                                 QRectF(sheetMargins.left(), sheetMargins.top(), width/3., height/3.),
-                                                 QString::number(nbRow * nbCol));
+    QFont font = OptimizeFontSizeToFitTextInRect(
+        painter, QRectF(sheetMargins.left(), sheetMargins.top(), width / 3., height / 3.),
+        QString::number(nbRow * nbCol));
 
     const qreal scale = SceneScale(scene());
 
-    auto PaintTileNumber = [painter, layout, nbCol, font, scale]
-            (const QRectF &img, int i, int j)
+    auto PaintTileNumber = [painter, layout, nbCol, font, scale](const QRectF &img, int i, int j)
     {
         if (layout->LayoutSettings().GetShowTileNumber() && font.pointSizeF() * scale >= minTextFontSize)
         {
@@ -211,30 +208,30 @@ void VPGraphicsTileGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem
             painter->setFont(font);
 
             QPen pen = painter->pen();
-            pen.setColor(Qt::black);
+            pen.setColor(VSceneStylesheet::ManualLayoutStyle().SheetTileNumberColor());
             painter->setPen(pen);
 
-            painter->drawText(img, Qt::AlignCenter, QString::number(j*nbCol + i+1));
+            painter->drawText(img, Qt::AlignCenter, QString::number(j * nbCol + i + 1));
 
             painter->restore();
         }
     };
 
-    for(int j=0;j<=nbRow;++j)
+    for (int j = 0; j <= nbRow; ++j)
     {
         // horizontal lines
-        painter->drawLine(QPointF(sheetMargins.left(), sheetMargins.top()+j*height),
-                          QPointF(sheetMargins.left()+nbCol*width, sheetMargins.top()+j*height));
+        painter->drawLine(QPointF(sheetMargins.left(), sheetMargins.top() + j * height),
+                          QPointF(sheetMargins.left() + nbCol * width, sheetMargins.top() + j * height));
 
-        for(int i=0;i<=nbCol;++i)
+        for (int i = 0; i <= nbCol; ++i)
         {
             // vertical lines
-            painter->drawLine(QPointF(sheetMargins.left()+i*width, sheetMargins.top()),
-                              QPointF(sheetMargins.left()+i*width, sheetMargins.top() + nbRow*height));
+            painter->drawLine(QPointF(sheetMargins.left() + i * width, sheetMargins.top()),
+                              QPointF(sheetMargins.left() + i * width, sheetMargins.top() + nbRow * height));
 
             if (j < nbRow && i < nbCol)
             {
-                QRectF img(sheetMargins.left()+i*width, sheetMargins.top()+j*height, width, height);
+                QRectF img(sheetMargins.left() + i * width, sheetMargins.top() + j * height, width, height);
 
                 PaintWatermark(img);
                 PaintTileNumber(img, i, j);

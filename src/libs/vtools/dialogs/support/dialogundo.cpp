@@ -31,7 +31,6 @@
 #include <QCloseEvent>
 #include <QLocale>
 #include <QPushButton>
-#include <Qt>
 
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vcommonsettings.h"
@@ -39,7 +38,9 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogUndo::DialogUndo(QWidget *parent)
-    :QDialog(parent), ui(new Ui::DialogUndo), result(UndoButton::Cancel)
+  : QDialog(parent),
+    ui(new Ui::DialogUndo),
+    result(UndoButton::Cancel)
 {
     ui->setupUi(this);
 
@@ -52,17 +53,19 @@ DialogUndo::DialogUndo(QWidget *parent)
     }
     else
     {
-        connect(ui->pushButtonUndo, &QPushButton::clicked, this, [this]()
-        {
-            result = UndoButton::Undo;
-            accept();
-        });
+        connect(ui->pushButtonUndo, &QPushButton::clicked, this,
+                [this]()
+                {
+                    result = UndoButton::Undo;
+                    accept();
+                });
     }
-    connect(ui->pushButtonFix, &QPushButton::clicked, this, [this]()
-    {
-        result = UndoButton::Fix;
-        accept();
-    });
+    connect(ui->pushButtonFix, &QPushButton::clicked, this,
+            [this]()
+            {
+                result = UndoButton::Fix;
+                accept();
+            });
     connect(ui->pushButtonCancel, &QPushButton::clicked, this, &DialogUndo::Cancel);
 
     setCursor(Qt::ArrowCursor);

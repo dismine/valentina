@@ -28,6 +28,7 @@
 
 #include "dialogtapepreferences.h"
 #include "../mapplication.h"
+#include "../vtools/dialogs/dialogtoolbox.h"
 #include "configpages/tapepreferencesconfigurationpage.h"
 #include "configpages/tapepreferencespathpage.h"
 #include "ui_dialogtapepreferences.h"
@@ -120,19 +121,7 @@ void DialogTapePreferences::changeEvent(QEvent *event)
 
     if (event->type() == QEvent::PaletteChange)
     {
-        QStyle *style = QApplication::style();
-
-        QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
-        SCASSERT(bOk != nullptr)
-        bOk->setIcon(style->standardIcon(QStyle::SP_DialogOkButton));
-
-        QPushButton *bApply = ui->buttonBox->button(QDialogButtonBox::Apply);
-        SCASSERT(bApply != nullptr)
-        bApply->setIcon(style->standardIcon(QStyle::SP_DialogApplyButton));
-
-        QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
-        SCASSERT(bCancel != nullptr)
-        bCancel->setIcon(style->standardIcon(QStyle::SP_DialogCancelButton));
+        InitDialogButtonBoxIcons(ui->buttonBox);
     }
 
     // remember to call base class implementation

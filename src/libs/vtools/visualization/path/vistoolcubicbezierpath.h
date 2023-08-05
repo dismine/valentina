@@ -29,7 +29,6 @@
 #ifndef VISTOOLCUBICBEZIERPATH_H
 #define VISTOOLCUBICBEZIERPATH_H
 
-
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
@@ -44,6 +43,7 @@
 class VisToolCubicBezierPath : public VisPath
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit VisToolCubicBezierPath(const VContainer *data, QGraphicsItem *parent = nullptr);
     ~VisToolCubicBezierPath() override;
@@ -54,21 +54,25 @@ public:
     void SetPath(const VCubicBezierPath &value);
     auto GetPath() const -> VCubicBezierPath;
 
-    auto type() const -> int override {return Type;}
-    enum {Type = UserType + static_cast<int>(Vis::ToolCubicBezierPath)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::ToolCubicBezierPath)
+    };
+
 private:
     Q_DISABLE_COPY_MOVE(VisToolCubicBezierPath) // NOLINT
-    QVector<VScaledEllipse *>  mainPoints{};
-    QVector<VScaledEllipse *>  ctrlPoints{};
-    QVector<VScaledLine *>     lines{};
-    VCurvePathItem            *newCurveSegment{nullptr};
-    VCubicBezierPath           path{};
-    VScaledLine               *helpLine1{nullptr};
-    VScaledLine               *helpLine2{nullptr};
+    QVector<VScaledEllipse *> mainPoints{};
+    QVector<VScaledEllipse *> ctrlPoints{};
+    QVector<VScaledLine *> lines{};
+    VCurvePathItem *newCurveSegment{nullptr};
+    VCubicBezierPath path{};
+    VScaledLine *helpLine1{nullptr};
+    VScaledLine *helpLine2{nullptr};
 
-    auto GetPoint(QVector<VScaledEllipse *> &points, quint32 i, qreal z = 0) -> VScaledEllipse *;
-    auto GetLine(quint32 i) -> VScaledLine *;
-    void Creating(const QVector<VPointF> &pathPoints , vsizetype pointsLeft);
+    auto GetPoint(QVector<VScaledEllipse *> &points, quint32 i, VColorRole role, qreal z = 0) -> VScaledEllipse *;
+    auto GetLine(quint32 i, VColorRole role) -> VScaledLine *;
+    void Creating(const QVector<VPointF> &pathPoints, vsizetype pointsLeft);
     void RefreshToolTip();
 };
 

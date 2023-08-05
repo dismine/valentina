@@ -38,7 +38,6 @@
 #include <QTranslator>
 #include <QUndoStack>
 #include <QWidget>
-#include <Qt>
 #include <QtDebug>
 
 #include "QtConcurrent/qtconcurrentrun.h"

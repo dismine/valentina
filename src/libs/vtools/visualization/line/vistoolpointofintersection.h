@@ -66,7 +66,7 @@ private:
     VScaledEllipse *m_axisP2{nullptr};
     VScaledLine    *m_axis2{nullptr};//axis1 is class themself
 
-    void ShowIntersection(const QLineF &axis1, const QLineF &axis2, const QColor &color);
+    void ShowIntersection(const QLineF &axis1, const QLineF &axis2);
 };
 
 //---------------------------------------------------------------------------------------------------------------------

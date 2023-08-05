@@ -42,7 +42,6 @@
 #include <QString>
 #include <QStringList>
 #include <QVariant>
-#include <Qt>
 #include <QtGlobal>
 
 #include "def.h"

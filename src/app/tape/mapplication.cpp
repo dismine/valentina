@@ -38,6 +38,7 @@
 #include "../vmisc/theme/vapplicationstyle.h"
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vsysexits.h"
+#include "qtpreprocessorsupport.h"
 #include "tmainwindow.h"
 #include "version.h"
 
@@ -610,6 +611,14 @@ auto MApplication::diagramsPath() -> QString
     {
         return file.absoluteFilePath();
     }
+
+#ifdef QBS_BUILD
+    file = QFileInfo(QCoreApplication::applicationDirPath() + "/../../.." + PKGDATADIR + dPath);
+    if (file.exists())
+    {
+        return file.absoluteFilePath();
+    }
+#endif // QBS_BUILD
 
 #if defined(APPIMAGE) && defined(Q_OS_LINUX)
     /* Fix path to diagrams when run inside AppImage. */

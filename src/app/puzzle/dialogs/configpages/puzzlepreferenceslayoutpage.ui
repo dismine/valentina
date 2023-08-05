@@ -87,7 +87,7 @@
                <item>
                 <widget class="QToolButton" name="toolButtonSheetPortraitOritation">
                  <property name="text">
-                  <string notr="true">...</string>
+                  <string notr="true"></string>
                  </property>
                  <property name="icon">
                   <iconset resource="../../../../libs/vmisc/share/resources/icon.qrc">
@@ -107,7 +107,7 @@
                <item>
                 <widget class="QToolButton" name="toolButtonSheetLandscapeOrientation">
                  <property name="text">
-                  <string notr="true">...</string>
+                  <string notr="true"></string>
                  </property>
                  <property name="icon">
                   <iconset resource="../../../../libs/vmisc/share/resources/icon.qrc">
@@ -475,7 +475,7 @@
              <item>
               <widget class="QToolButton" name="toolButtonTilePortraitOrientation">
                <property name="text">
-                <string notr="true">...</string>
+                <string notr="true"></string>
                </property>
                <property name="icon">
                 <iconset resource="../../../../libs/vmisc/share/resources/icon.qrc">
@@ -495,7 +495,7 @@
              <item>
               <widget class="QToolButton" name="toolButtonTileLandscapeOrientation">
                <property name="text">
-                <string notr="true">...</string>
+                <string notr="true"></string>
                </property>
                <property name="icon">
                 <iconset resource="../../../../libs/vmisc/share/resources/icon.qrc">

@@ -113,6 +113,7 @@ protected:
     void closeEvent(QCloseEvent *event) override;
     void showEvent(QShowEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
+    void changeEvent(QEvent *event) override;
     virtual void CheckState();
 
 private slots:
@@ -156,6 +157,8 @@ private:
                         bool square = false);
 
     auto Eval(const FormulaData &formulaData, bool &flag) -> qreal;
+
+    void InitIcons();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -34,7 +34,6 @@
 #include <QObject>
 #include <QtGlobal>
 
-
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <QtCore/QHashFunctions>
 #endif
@@ -56,14 +55,6 @@ enum class Mode : qint8
 {
     Creation,
     Show
-};
-
-enum class VColor : qint8
-{
-    MainColor,
-    SupportColor,
-    SupportColor2,
-    SupportColor3
 };
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -109,8 +100,10 @@ public:
     auto CurrentToolTip() const -> QString;
 
     void RefreshToolTip() const;
+
 signals:
     void ToolTip(const QString &toolTip) const; // clazy:exclude=const-signal-or-slot
+
 public slots:
     void MousePos(const QPointF &scenePos);
 
@@ -118,37 +111,29 @@ protected:
     virtual void InitPen() = 0;
     virtual void AddOnScene() = 0;
 
-    static auto InitPoint(const QColor &color, QGraphicsItem *parent, qreal z = 0) -> VScaledEllipse *;
-    static void DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, const QColor &color,
-                          Qt::PenStyle style = Qt::SolidLine);
-    virtual void DrawLine(VScaledLine *lineItem, const QLineF &line, const QColor &color,
-                          Qt::PenStyle style = Qt::SolidLine);
-    static void DrawPath(VCurvePathItem *pathItem, const QPainterPath &path, const QColor &color,
-                         Qt::PenStyle style = Qt::SolidLine, Qt::PenCapStyle cap = Qt::SquareCap);
+    static auto InitPoint(VColorRole role, QGraphicsItem *parent, qreal z = 0) -> VScaledEllipse *;
+    static void DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, Qt::PenStyle style = Qt::SolidLine);
+    virtual void DrawLine(VScaledLine *lineItem, const QLineF &line, Qt::PenStyle style = Qt::SolidLine);
+    static void DrawPath(VCurvePathItem *pathItem, const QPainterPath &path, Qt::PenStyle style = Qt::SolidLine,
+                         Qt::PenCapStyle cap = Qt::SquareCap);
     static void DrawPath(VCurvePathItem *pathItem, const QPainterPath &path,
-                         const QVector<DirectionArrow> &directionArrows, const QColor &color,
-                         Qt::PenStyle style = Qt::SolidLine, Qt::PenCapStyle cap = Qt::SquareCap);
+                         const QVector<DirectionArrow> &directionArrows, Qt::PenStyle style = Qt::SolidLine,
+                         Qt::PenCapStyle cap = Qt::SquareCap);
 
     template <typename Item> void AddItem(Item *item);
 
-    template <class Item> auto InitItem(const QColor &color, QGraphicsItem *parent) -> Item *;
+    template <class Item> auto InitItem(VColorRole role, QGraphicsItem *parent) -> Item *;
 
-    static auto GetPointItem(QVector<VScaledEllipse *> &points, quint32 i, const QColor &color, QGraphicsItem *parent)
+    static auto GetPointItem(QVector<VScaledEllipse *> &points, quint32 i, VColorRole role, QGraphicsItem *parent)
         -> VScaledEllipse *;
-    static auto GetCurveItem(QVector<VCurvePathItem *> &curves, quint32 i, const QColor &color, QGraphicsItem *parent)
+    static auto GetCurveItem(QVector<VCurvePathItem *> &curves, quint32 i, VColorRole role, QGraphicsItem *parent)
         -> VCurvePathItem *;
 
     static auto LengthToUser(qreal value) -> QString;
     static auto AngleToUser(qreal value) -> QString;
 
-    void SetColor(VColor type, const QColor &color);
-
-    auto Color(VColor type) const -> QColor;
-
     void SetScenePos(QPointF pos);
     auto ScenePos() const -> QPointF;
-
-    void SetMainColor(const QColor &value);
 
     void SetToolTip(const QString &tooltip);
 
@@ -162,7 +147,6 @@ private:
     Qt::PenStyle m_lineStyle{Qt::SolidLine};
     QString m_toolTip{};
     Mode m_mode{Mode::Creation};
-    QHash<VColor, QColor> m_colorShema{{VColor::MainColor, Qt::red}, {VColor::SupportColor, Qt::magenta}};
 };
 
 // cppcheck-suppress unknownMacro
@@ -180,14 +164,9 @@ template <typename Item> inline void Visualization::AddItem(Item *item)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class Item> inline auto Visualization::InitItem(const QColor &color, QGraphicsItem *parent) -> Item *
+template <class Item> inline auto Visualization::InitItem(VColorRole role, QGraphicsItem *parent) -> Item *
 {
-    Item *item = new Item(parent);
-
-    QPen visPen = item->pen();
-    visPen.setColor(color);
-
-    item->setPen(visPen);
+    Item *item = new Item(role, parent);
     item->setZValue(1);
     item->setFlags(QGraphicsItem::ItemStacksBehindParent);
     item->setVisible(false);

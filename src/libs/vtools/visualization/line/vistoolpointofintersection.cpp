@@ -33,24 +33,25 @@
 #include <QLine>
 #include <QPointF>
 #include <QSharedPointer>
-#include <Qt>
 #include <new>
 
 #include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
-#include "visline.h"
 #include "../vmisc/compatibility.h"
+#include "../vpatterndb/vcontainer.h"
+#include "visline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointOfIntersection::VisToolPointOfIntersection(const VContainer *data, QGraphicsItem *parent)
-    : VisLine(data, parent)
+  : VisLine(data, parent)
 {
-    m_axisP1 = InitPoint(Color(VColor::SupportColor), this);
-    m_axisP2 = InitPoint(Color(VColor::SupportColor), this); //-V656
-    m_axis2 = InitItem<VScaledLine>(Color(VColor::SupportColor), this);
+    SetColorRole(VColorRole::VisSupportColor);
 
-    m_point = InitPoint(Color(VColor::MainColor), this);
+    m_axisP1 = InitPoint(VColorRole::VisSupportColor, this);
+    m_axisP2 = InitPoint(VColorRole::VisSupportColor, this); //-V656
+    m_axis2 = InitItem<VScaledLine>(VColorRole::VisSupportColor, this);
+
+    m_point = InitPoint(VColorRole::VisMainColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -60,30 +61,30 @@ void VisToolPointOfIntersection::RefreshGeometry()
     if (m_point1Id <= NULL_ID)
     {
         axisL1 = Axis(ScenePos(), 90);
-        DrawLine(this, axisL1, Color(VColor::SupportColor), Qt::DashLine);
+        DrawLine(this, axisL1, Qt::DashLine);
     }
     else
     {
         const QSharedPointer<VPointF> first = GetData()->GeometricObject<VPointF>(m_point1Id);
-        DrawPoint(m_axisP1, static_cast<QPointF>(*first), Color(VColor::SupportColor));
+        DrawPoint(m_axisP1, static_cast<QPointF>(*first));
 
         axisL1 = Axis(static_cast<QPointF>(*first), 90);
-        DrawLine(this, axisL1, Color(VColor::SupportColor), Qt::DashLine);
+        DrawLine(this, axisL1, Qt::DashLine);
 
         QLineF axisL2;
         if (m_point2Id <= NULL_ID)
         {
             axisL2 = Axis(ScenePos(), 180);
-            ShowIntersection(axisL1, axisL2, Color(VColor::SupportColor));
+            ShowIntersection(axisL1, axisL2);
         }
         else
         {
             const QSharedPointer<VPointF> second = GetData()->GeometricObject<VPointF>(m_point2Id);
-            DrawPoint(m_axisP2, static_cast<QPointF>(*second), Color(VColor::SupportColor));
+            DrawPoint(m_axisP2, static_cast<QPointF>(*second));
             axisL2 = Axis(static_cast<QPointF>(*second), 180);
-            ShowIntersection(axisL1, axisL2, Color(VColor::MainColor));
+            ShowIntersection(axisL1, axisL2);
         }
-        DrawLine(m_axis2, axisL2, Color(VColor::SupportColor), Qt::DashLine);
+        DrawLine(m_axis2, axisL2, Qt::DashLine);
     }
 }
 
@@ -95,7 +96,7 @@ void VisToolPointOfIntersection::VisualMode(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfIntersection::ShowIntersection(const QLineF &axis1, const QLineF &axis2, const QColor &color)
+void VisToolPointOfIntersection::ShowIntersection(const QLineF &axis1, const QLineF &axis2)
 {
     QPointF p;
     QLineF::IntersectType intersect = Intersects(axis1, axis2, &p);
@@ -103,7 +104,7 @@ void VisToolPointOfIntersection::ShowIntersection(const QLineF &axis1, const QLi
     if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
     {
         m_point->setVisible(true);
-        DrawPoint(m_point, p, color);
+        DrawPoint(m_point, p);
     }
     else
     {

@@ -33,6 +33,7 @@
 #include <QCoreApplication>
 #include <QIcon>
 #include <QLocale>
+#include <QPainter>
 #include <QPixmap>
 #include <QSize>
 #include <QWidget>
@@ -40,13 +41,14 @@
 #include "../vproperty_p.h"
 
 VPE::VLineColorProperty::VLineColorProperty(const QString &name)
-    : VProperty(name,
+  : VProperty(name,
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-                QMetaType::Int),
+              QMetaType::Int),
 #else
-                QVariant::Int),
+              QVariant::Int),
 #endif
-      colors(), indexList()
+    colors(),
+    indexList()
 {
     VProperty::d_ptr->VariantValue = 0;
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -60,7 +62,7 @@ auto VPE::VLineColorProperty::data(int column, int role) const -> QVariant
 {
     if (colors.empty())
     {
-        return QVariant();
+        return {};
     }
 
     int tmpIndex = VProperty::d_ptr->VariantValue.toInt();
@@ -78,10 +80,8 @@ auto VPE::VLineColorProperty::data(int column, int role) const -> QVariant
     {
         return tmpIndex;
     }
-    else
-    {
-        return VProperty::data(column, role);
-    }
+
+    return VProperty::data(column, role);
 }
 
 auto VPE::VLineColorProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
@@ -89,19 +89,26 @@ auto VPE::VLineColorProperty::createEditor(QWidget *parent, const QStyleOptionVi
 {
     Q_UNUSED(options)
     Q_UNUSED(delegate)
-    QComboBox* tmpEditor = new QComboBox(parent);
+    auto *tmpEditor = new QComboBox(parent);
+    tmpEditor->setPalette(parent->palette());
 
     int size = tmpEditor->iconSize().height();
     // On Mac pixmap should be little bit smaller.
 #if defined(Q_OS_MAC)
     size -= 2; // Two pixels should be enough.
-#endif //defined(Q_OS_MAC)
+#endif         // defined(Q_OS_MAC)
 
     QMap<QString, QString>::const_iterator i = colors.constBegin();
     while (i != colors.constEnd())
     {
         QPixmap pix(size, size);
         pix.fill(QColor(i.key()));
+
+        // Draw a white border around the icon
+        QPainter painter(&pix);
+        painter.setPen(tmpEditor->palette().color(QPalette::Text));
+        painter.drawRect(0, 0, size - 1, size - 1);
+
         tmpEditor->addItem(QIcon(pix), i.value(), QVariant(i.key()));
         ++i;
     }
@@ -117,13 +124,13 @@ auto VPE::VLineColorProperty::createEditor(QWidget *parent, const QStyleOptionVi
 
 auto VPE::VLineColorProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
-    const QComboBox* tmpEditor = qobject_cast<const QComboBox*>(editor);
+    const auto *tmpEditor = qobject_cast<const QComboBox *>(editor);
     if (tmpEditor)
     {
         return tmpEditor->currentIndex();
     }
 
-    return QVariant(0);
+    return {0};
 }
 
 void VPE::VLineColorProperty::setColors(const QMap<QString, QString> &colors)
@@ -191,6 +198,6 @@ auto VPE::VLineColorProperty::IndexOfColor(const QMap<QString, QString> &colors,
 void VPE::VLineColorProperty::currentIndexChanged(int index)
 {
     Q_UNUSED(index)
-    UserChangeEvent *event = new UserChangeEvent();
-    QCoreApplication::postEvent ( VProperty::d_ptr->editor, event );
+    auto *event = new UserChangeEvent();
+    QCoreApplication::postEvent(VProperty::d_ptr->editor, event);
 }

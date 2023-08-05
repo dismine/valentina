@@ -30,15 +30,15 @@
 #include <QStyleOptionViewItem>
 #include <QVariant>
 #include <QWidget>
-#include <Qt>
 
 #include "plugins/vwidgetproperty.h"
 #include "vproperty.h"
 #include "vpropertyformwidget_p.h"
 
 VPE::VPropertyFormWidget::VPropertyFormWidget(const QString &title, const QString &description,
-                                         const QList<VProperty*>& properties, QWidget *parent)
-    : QGroupBox(title, parent), d_ptr(new VPropertyFormWidgetPrivate(properties))
+                                              const QList<VProperty *> &properties, QWidget *parent)
+  : QGroupBox(title, parent),
+    d_ptr(new VPropertyFormWidgetPrivate(properties))
 {
     VPE::VPropertyFormWidget::build();
     setToolTip(description);
@@ -46,7 +46,8 @@ VPE::VPropertyFormWidget::VPropertyFormWidget(const QString &title, const QStrin
 }
 
 VPE::VPropertyFormWidget::VPropertyFormWidget(VProperty *parent_property, QWidget *parent)
-    : QGroupBox(parent), d_ptr(new VPropertyFormWidgetPrivate())
+  : QGroupBox(parent),
+    d_ptr(new VPropertyFormWidgetPrivate())
 {
     if (parent_property)
     {
@@ -60,7 +61,8 @@ VPE::VPropertyFormWidget::VPropertyFormWidget(VProperty *parent_property, QWidge
 
 VPE::VPropertyFormWidget::VPropertyFormWidget(VPropertyFormWidgetPrivate *d_pointer, QWidget *parent,
                                               const QString &title, const QString &description)
-    : QGroupBox(title, parent), d_ptr(d_pointer)
+  : QGroupBox(title, parent),
+    d_ptr(d_pointer)
 {
     VPE::VPropertyFormWidget::build();
     setToolTip(description);
@@ -71,7 +73,6 @@ VPE::VPropertyFormWidget::~VPropertyFormWidget()
 {
     delete d_ptr;
 }
-
 
 void VPE::VPropertyFormWidget::build()
 {
@@ -97,14 +98,14 @@ void VPE::VPropertyFormWidget::build()
         return; //... only if there are properties
     }
 
-    QFormLayout* tmpFormLayout = new QFormLayout(this);
+    QFormLayout *tmpFormLayout = new QFormLayout(this);
     tmpFormLayout->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
     setLayout(tmpFormLayout);
 
     for (int i = 0; i < d_ptr->Properties.count(); ++i)
     {
         // Get the current property
-        VProperty* tmpProperty = d_ptr->Properties.value(i, nullptr);
+        VProperty *tmpProperty = d_ptr->Properties.value(i, nullptr);
         if (!tmpProperty)
         {
             continue;
@@ -118,7 +119,7 @@ void VPE::VPropertyFormWidget::build()
                 QWidget *group = new QWidget(this);
                 tmpFormLayout->addRow(group);
 
-                QFormLayout* subFormLayout = new QFormLayout(group);
+                QFormLayout *subFormLayout = new QFormLayout(group);
                 subFormLayout->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
                 QMargins margins = subFormLayout->contentsMargins();
                 margins.setTop(0);
@@ -127,7 +128,7 @@ void VPE::VPropertyFormWidget::build()
                 subFormLayout->setContentsMargins(margins);
 
                 group->setLayout(subFormLayout);
-                QList<VProperty*> children = tmpProperty->getChildren();
+                QList<VProperty *> children = tmpProperty->getChildren();
                 for (int j = 0; j < children.size(); ++j)
                 {
                     buildEditor(children[j], subFormLayout);
@@ -140,7 +141,7 @@ void VPE::VPropertyFormWidget::build()
             else
             {
                 // Child properties, the property itself is not being added
-                VPropertyFormWidget* tmpNewFormWidget = new VPropertyFormWidget(tmpProperty, this);
+                VPropertyFormWidget *tmpNewFormWidget = new VPropertyFormWidget(tmpProperty, this);
                 tmpFormLayout->addRow(tmpNewFormWidget);
                 d_ptr->EditorWidgets.append(VPropertyFormWidgetPrivate::SEditorWidget(tmpNewFormWidget));
                 tmpNewFormWidget->setCommitBehaviour(d_ptr->UpdateEditors);
@@ -148,7 +149,7 @@ void VPE::VPropertyFormWidget::build()
         }
         else if (tmpProperty->type() == "widget")
         {
-            VWidgetProperty* tmpWidgetProperty = static_cast<VWidgetProperty*>(tmpProperty);
+            VWidgetProperty *tmpWidgetProperty = static_cast<VWidgetProperty *>(tmpProperty);
             tmpFormLayout->addRow(tmpWidgetProperty->getWidget());
             d_ptr->EditorWidgets.append(VPropertyFormWidgetPrivate::SEditorWidget(tmpWidgetProperty->getWidget()));
         }
@@ -159,11 +160,11 @@ void VPE::VPropertyFormWidget::build()
     }
 }
 
-void VPE::VPropertyFormWidget::buildEditor(VProperty* property, QFormLayout* formLayout, Property type)
+void VPE::VPropertyFormWidget::buildEditor(VProperty *property, QFormLayout *formLayout, Property type)
 {
     // Add property (no child properties)
     // Create the editor (if it doesn't work, create empty widget)
-    QWidget* tmpEditor = property->createEditor(this, QStyleOptionViewItem(), nullptr);
+    QWidget *tmpEditor = property->createEditor(this, QStyleOptionViewItem(), nullptr);
     if (!tmpEditor)
     {
         tmpEditor = new QWidget(this);
@@ -182,7 +183,7 @@ void VPE::VPropertyFormWidget::buildEditor(VProperty* property, QFormLayout* for
     // add new row
     if (type == Property::Complex)
     {
-        QString name = "<b>"+property->getName()+"</b>";
+        QString name = "<b>" + property->getName() + "</b>";
         formLayout->addRow(name, tmpEditor);
     }
     else
@@ -216,8 +217,8 @@ void VPE::VPropertyFormWidget::commitData(int row)
         return;
     }
 
-    VPropertyFormWidgetPrivate::SEditorWidget& tmpEditorWidget = d_ptr->EditorWidgets[row];
-    VProperty* tmpProperty = d_ptr->Properties[row];
+    VPropertyFormWidgetPrivate::SEditorWidget &tmpEditorWidget = d_ptr->EditorWidgets[row];
+    VProperty *tmpProperty = d_ptr->Properties[row];
     if (tmpEditorWidget.FormWidget)
     {
         tmpEditorWidget.FormWidget->commitData();
@@ -250,8 +251,8 @@ void VPE::VPropertyFormWidget::loadData(int row)
         return;
     }
 
-    VPropertyFormWidgetPrivate::SEditorWidget& tmpEditorWidget = d_ptr->EditorWidgets[row];
-    VProperty* tmpProperty = d_ptr->Properties[row];
+    VPropertyFormWidgetPrivate::SEditorWidget &tmpEditorWidget = d_ptr->EditorWidgets[row];
+    VProperty *tmpProperty = d_ptr->Properties[row];
     if (tmpEditorWidget.FormWidget)
     {
         tmpEditorWidget.FormWidget->loadData();
@@ -266,7 +267,7 @@ void VPE::VPropertyFormWidget::setCommitBehaviour(bool auto_commit)
 {
     d_ptr->UpdateEditors = auto_commit;
 
-    const QList<VPropertyFormWidget*> tmpChildFormWidgets = getChildPropertyFormWidgets();
+    const QList<VPropertyFormWidget *> tmpChildFormWidgets = getChildPropertyFormWidgets();
     for (auto *tmpChild : tmpChildFormWidgets)
     {
         if (tmpChild)
@@ -297,7 +298,7 @@ auto VPE::VPropertyFormWidget::eventFilter(QObject *object, QEvent *event) -> bo
         return false;
     }
 
-    QWidget* editor = qobject_cast<QWidget*>(object);
+    QWidget *editor = qobject_cast<QWidget *>(object);
     if (!editor)
     {
         return false;
@@ -377,7 +378,7 @@ void VPE::VPropertyFormWidget::commitData(const QWidget *editor)
 
     for (int i = 0; i < d_ptr->EditorWidgets.count(); ++i)
     {
-        VPropertyFormWidgetPrivate::SEditorWidget& tmpEditorWidget = d_ptr->EditorWidgets[i];
+        VPropertyFormWidgetPrivate::SEditorWidget &tmpEditorWidget = d_ptr->EditorWidgets[i];
         if (tmpEditorWidget.Editor == editor)
         {
             commitData(i);

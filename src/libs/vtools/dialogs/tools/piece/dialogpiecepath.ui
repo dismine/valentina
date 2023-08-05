@@ -127,7 +127,7 @@
             <string>Move on top</string>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"></string>
            </property>
            <property name="icon">
             <iconset theme="go-top">
@@ -144,7 +144,7 @@
             <string>Move up</string>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"></string>
            </property>
            <property name="icon">
             <iconset theme="go-up">
@@ -161,7 +161,7 @@
             <string>Move down</string>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"></string>
            </property>
            <property name="icon">
             <iconset theme="go-down">
@@ -178,7 +178,7 @@
             <string>Move on bottom</string>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"></string>
            </property>
            <property name="icon">
             <iconset theme="go-bottom">
@@ -308,11 +308,11 @@
             <string>Formula wizard</string>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"></string>
            </property>
            <property name="icon">
             <iconset resource="../../../../vmisc/share/resources/icon.qrc">
-             <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+             <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -328,7 +328,7 @@
             <string notr="true"/>
            </property>
            <property name="pixmap">
-            <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+            <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/light/24x24/equal.png</pixmap>
            </property>
           </widget>
          </item>
@@ -544,11 +544,11 @@
                <string>Formula wizard</string>
               </property>
               <property name="text">
-               <string notr="true">...</string>
+               <string notr="true"></string>
               </property>
               <property name="icon">
                <iconset resource="../../../../vmisc/share/resources/icon.qrc">
-                <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+                <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -564,7 +564,7 @@
                <string notr="true"/>
               </property>
               <property name="pixmap">
-               <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+               <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/light/24x24/equal.png</pixmap>
               </property>
              </widget>
             </item>
@@ -743,11 +743,11 @@
                <string>Formula wizard</string>
               </property>
               <property name="text">
-               <string notr="true">...</string>
+               <string notr="true"></string>
               </property>
               <property name="icon">
                <iconset resource="../../../../vmisc/share/resources/icon.qrc">
-                <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+                <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -763,7 +763,7 @@
                <string notr="true"/>
               </property>
               <property name="pixmap">
-               <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+               <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/light/24x24/equal.png</pixmap>
               </property>
              </widget>
             </item>
@@ -1313,7 +1313,7 @@
                   </property>
                   <property name="icon">
                    <iconset resource="../../../../vmisc/share/resources/icon.qrc">
-                    <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+                    <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
                   </property>
                   <property name="iconSize">
                    <size>
@@ -1538,7 +1538,7 @@
                   </property>
                   <property name="icon">
                    <iconset resource="../../../../vmisc/share/resources/icon.qrc">
-                    <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+                    <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
                   </property>
                   <property name="iconSize">
                    <size>
@@ -1763,7 +1763,7 @@
                   </property>
                   <property name="icon">
                    <iconset resource="../../../../vmisc/share/resources/icon.qrc">
-                    <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+                    <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
                   </property>
                   <property name="iconSize">
                    <size>
@@ -2003,11 +2003,11 @@
             <string>Formula wizard</string>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"></string>
            </property>
            <property name="icon">
             <iconset resource="../../../../vmisc/share/resources/icon.qrc">
-             <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+             <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -2023,7 +2023,7 @@
             <string notr="true"/>
            </property>
            <property name="pixmap">
-            <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+            <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/light/24x24/equal.png</pixmap>
            </property>
           </widget>
          </item>

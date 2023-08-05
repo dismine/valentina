@@ -31,7 +31,6 @@
 #include <QDomElement>
 #include <QPen>
 #include <QSharedPointer>
-#include <Qt>
 #include <new>
 
 #include "../../../dialogs/tools/dialogcubicbezier.h"

@@ -102,7 +102,8 @@ public:
     static void PaintWatermarkText(QPainter *painter, const QRectF &img, const VWatermarkData &watermarkData,
                                    qreal xScale = 1.0, qreal yScale = 1.0);
     static void PaintWatermarkImage(QPainter *painter, const QRectF &img, const VWatermarkData &watermarkData,
-                                    const QString &watermarkPath, qreal xScale = 1.0, qreal yScale = 1.0);
+                                    const QString &watermarkPath, bool folowColorScheme, qreal xScale = 1.0,
+                                    qreal yScale = 1.0);
 
 private:
     // cppcheck-suppress unknownMacro

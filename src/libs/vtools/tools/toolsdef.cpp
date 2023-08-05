@@ -36,14 +36,14 @@
 #include <QPen>
 #include <QPixmap>
 #include <QRegularExpression>
-#include <QVector>
 #include <QStyle>
+#include <QVector>
 
-#include "../vgeometry/vgobject.h"
 #include "../qmuparser/qmudef.h"
+#include "../vgeometry/vgobject.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpropertyexplorer/checkablemessagebox.h"
-#include "../vmisc/vabstractvalapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 auto SourceToObjects(const QVector<SourceItem> &source) -> QVector<quint32>
@@ -51,7 +51,7 @@ auto SourceToObjects(const QVector<SourceItem> &source) -> QVector<quint32>
     QVector<quint32> ids;
     ids.reserve(source.size());
 
-    for (auto s: source)
+    for (auto s : source)
     {
         ids.append(s.id);
     }
@@ -81,8 +81,7 @@ auto SourceAliasValid(const SourceItem &item, const QSharedPointer<VGObject> &ob
         obj->SetAliasSuffix(oldAlias);
     }
 
-    if (not alias.isEmpty() && originAlias != alias &&
-        (not rx.match(alias).hasMatch() || not data->IsUnique(alias)))
+    if (not alias.isEmpty() && originAlias != alias && (not rx.match(alias).hasMatch() || not data->IsUnique(alias)))
     {
         return false;
     }
@@ -93,8 +92,7 @@ auto SourceAliasValid(const SourceItem &item, const QSharedPointer<VGObject> &ob
 //---------------------------------------------------------------------------------------------------------------------
 auto OriginAlias(quint32 id, const QVector<SourceItem> &source, const QSharedPointer<VGObject> &obj) -> QString
 {
-    auto item = std::find_if(source.begin(), source.end(),
-                            [id](const SourceItem &sItem) { return sItem.id == id; });
+    auto item = std::find_if(source.begin(), source.end(), [id](const SourceItem &sItem) { return sItem.id == id; });
     if (item != source.end())
     {
         if (obj->getType() == GOType::Point)
@@ -113,9 +111,9 @@ auto OriginAlias(quint32 id, const QVector<SourceItem> &source, const QSharedPoi
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto OperationLineStylesPics() -> QMap<QString, QIcon>
+auto OperationLineStylesPics(QColor backgroundColor, QColor textColor) -> QMap<QString, QIcon>
 {
-    QMap<QString, QIcon> map = LineStylesPics();
+    QMap<QString, QIcon> map = LineStylesPics(backgroundColor, textColor);
     map.insert(TypeLineDefault, QIcon());
     return map;
 }
@@ -133,7 +131,7 @@ auto ConfirmDeletion() -> int
     msgBox.setText(QObject::tr("Do you really want to delete?"));
     msgBox.setStandardButtons(QDialogButtonBox::Yes | QDialogButtonBox::No);
     msgBox.setDefaultButton(QDialogButtonBox::No);
-    msgBox.setIconPixmap(QApplication::style()->standardIcon(QStyle::SP_MessageBoxQuestion).pixmap(32, 32) );
+    msgBox.setIconPixmap(QApplication::style()->standardIcon(QStyle::SP_MessageBoxQuestion).pixmap(32, 32));
 
     int dialogResult = msgBox.exec();
 

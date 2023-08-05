@@ -31,16 +31,21 @@
 #include "../ifc/xml/vpatternconverter.h"
 #include "../ifc/xml/vvitconverter.h"
 #include "../ifc/xml/vvstconverter.h"
+#include "../qmuparser/qmudef.h"
+#include "../vganalytics/vganalytics.h"
 #include "../vmisc/compatibility.h"
 #include "../vmisc/dialogs/dialogaskcollectstatistic.h"
 #include "../vmisc/dialogs/dialogexporttocsv.h"
+#include "../vmisc/dialogs/dialogselectlanguage.h"
 #include "../vmisc/qxtcsvmodel.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vsysexits.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/measurements.h"
 #include "../vpatterndb/pmsystems.h"
 #include "../vpatterndb/variables/vmeasurement.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vtools/dialogs/support/dialogeditwrongformula.h"
 #include "def.h"
 #include "dialogs/dialogabouttape.h"
 #include "dialogs/dialogdimensioncustomnames.h"
@@ -51,17 +56,15 @@
 #include "dialogs/dialogrestrictdimension.h"
 #include "dialogs/dialogsetupmultisize.h"
 #include "dialogs/dialogtapepreferences.h"
+#include "mapplication.h" // Should be last because of definning qApp
+#include "qtpreprocessorsupport.h"
 #include "ui_tmainwindow.h"
+#include "vlitepattern.h"
 #include "vtapesettings.h"
+
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../qmuparser/qmudef.h"
-#include "../vganalytics/vganalytics.h"
-#include "../vmisc/dialogs/dialogselectlanguage.h"
-#include "../vtools/dialogs/support/dialogeditwrongformula.h"
-#include "mapplication.h" // Should be last because of definning qApp
-#include "vlitepattern.h"
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include "../vmisc/vtextcodec.h"
@@ -266,6 +269,8 @@ TMainWindow::TMainWindow(QWidget *parent)
     m_searchHistory(new QMenu(this))
 {
     ui->setupUi(this);
+
+    InitIcons();
 
     VAbstractApplication::VApp()->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
@@ -798,6 +803,11 @@ void TMainWindow::changeEvent(QEvent *event)
                 m_comboBoxUnits->blockSignals(false);
             }
         }
+    }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        InitIcons();
     }
 
     // remember to call base class implementation
@@ -1927,11 +1937,6 @@ void TMainWindow::ShowMDiagram(const QString &name)
                                           "<p align=\"center\"><b>%2</b>. <i>%3</i></p></body></html>")
                                       .arg(DialogMDataBase::ImgTag(number), number, trv->GuiText(name)));
     }
-    // This part is very ugly, can't find better way to resize dockWidget.
-    ui->labelDiagram->adjustSize();
-    // And also those 50 px. DockWidget has some border. And i can't find how big it is.
-    // Can lead to problem in future.
-    ui->dockWidgetDiagram->setMaximumWidth(ui->labelDiagram->width() + 50);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3184,11 +3189,9 @@ auto TMainWindow::MaybeSave() -> bool
             return true; // Don't ask if file was created without modifications.
         }
 
-        QScopedPointer<QMessageBox> messageBox(new QMessageBox(tr("Unsaved changes"),
-                                                               tr("Measurements have been modified.\n"
-                                                                  "Do you want to save your changes?"),
-                                                               QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No,
-                                                               QMessageBox::Cancel, this, Qt::Sheet));
+        QScopedPointer<QMessageBox> messageBox(new QMessageBox(
+            tr("Unsaved changes"), tr("Measurements have been modified. Do you want to save your changes?"),
+            QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No, QMessageBox::Cancel, this, Qt::Sheet));
 
         messageBox->setDefaultButton(QMessageBox::Yes);
         messageBox->setEscapeButton(QMessageBox::Cancel);
@@ -3310,12 +3313,13 @@ void TMainWindow::RefreshTable(bool freshCall)
         }
     }
 
-    if (freshCall)
-    {
-        ui->tableWidget->resizeColumnsToContents();
-        ui->tableWidget->resizeRowsToContents();
-    }
-    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
+    Q_UNUSED(freshCall)
+    //    if (freshCall)
+    //    {
+    //        ui->tableWidget->resizeColumnsToContents();
+    //        ui->tableWidget->resizeRowsToContents();
+    //    }
+    //    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
     ui->tableWidget->blockSignals(false);
 
     ui->actionExportToCSV->setEnabled(ui->tableWidget->rowCount() > 0);
@@ -3656,15 +3660,8 @@ void TMainWindow::Open(const QString &pathTo, const QString &filter)
 void TMainWindow::UpdatePadlock(bool ro)
 {
     ui->actionReadOnly->setChecked(ro);
-    if (ro)
-    {
-        ui->actionReadOnly->setIcon(QIcon("://tapeicon/24x24/padlock_locked.png"));
-    }
-    else
-    {
-        ui->actionReadOnly->setIcon(QIcon("://tapeicon/24x24/padlock_opened.png"));
-    }
-
+    ui->actionReadOnly->setIcon(ro ? QIcon("://tapeicon/24x24/padlock_locked.png")
+                                   : QIcon("://tapeicon/24x24/padlock_opened.png"));
     ui->actionReadOnly->setDisabled(m_mIsReadOnly);
 }
 
@@ -4376,6 +4373,17 @@ auto TMainWindow::OrderedMeasurments() const -> QMap<int, QSharedPointer<VMeasur
     }
 
     return orderedTable;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::InitIcons()
+{
+    QString iconResource = QStringLiteral("icon");
+    ui->toolButtonExpr->setIcon(VTheme::GetIconResource(iconResource, QStringLiteral("24x24/fx.png")));
+
+    QString tapeIconResource = QStringLiteral("tapeicon");
+    ui->actionMeasurementDiagram->setIcon(
+        VTheme::GetIconResource(tapeIconResource, QStringLiteral("24x24/mannequin.png")));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

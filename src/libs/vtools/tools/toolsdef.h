@@ -28,8 +28,8 @@
 #ifndef TOOLSDEF_H
 #define TOOLSDEF_H
 
-#include <QString>
 #include <QMetaType>
+#include <QString>
 
 #include "../ifc/ifcdef.h"
 
@@ -58,7 +58,7 @@ auto OriginAlias(quint32 id, const QVector<SourceItem> &source, const QSharedPoi
 auto SourceAliasValid(const SourceItem &item, const QSharedPointer<VGObject> &obj, const VContainer *data,
                       const QString &originAlias) -> bool;
 
-auto OperationLineStylesPics() -> QMap<QString, QIcon>;
+auto OperationLineStylesPics(QColor backgroundColor, QColor textColor) -> QMap<QString, QIcon>;
 
 auto ConfirmDeletion() -> int;
 

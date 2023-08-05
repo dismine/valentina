@@ -34,26 +34,26 @@
 #include <QGraphicsLineItem>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsSimpleTextItem>
+#include <QGraphicsView>
 #include <QLineF>
 #include <QPen>
-#include <Qt>
-#include <QGraphicsView>
 
-#include "global.h"
 #include "../vmisc/vabstractapplication.h"
+#include "global.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VMainGraphicsScene default constructor.
  */
 VMainGraphicsScene::VMainGraphicsScene(QObject *parent)
-    : QGraphicsScene(parent),
-      horScrollBar(0),
-      verScrollBar(0),
-      _transform(QTransform()),
-      scenePos(QPointF()),
-      origins()
-{}
+  : QGraphicsScene(parent),
+    horScrollBar(0),
+    verScrollBar(0),
+    _transform(QTransform()),
+    scenePos(QPointF()),
+    origins()
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -61,21 +61,22 @@ VMainGraphicsScene::VMainGraphicsScene(QObject *parent)
  * @param sceneRect scene rect.
  * @param parent parent object.
  */
-VMainGraphicsScene::VMainGraphicsScene(const QRectF & sceneRect, QObject * parent)
-    :QGraphicsScene ( sceneRect, parent ),
-      horScrollBar(0),
-      verScrollBar(0),
-      _transform(QTransform()),
-      scenePos(),
-      origins()
-{}
+VMainGraphicsScene::VMainGraphicsScene(const QRectF &sceneRect, QObject *parent)
+  : QGraphicsScene(sceneRect, parent),
+    horScrollBar(0),
+    verScrollBar(0),
+    _transform(QTransform()),
+    scenePos(),
+    origins()
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief mouseMoveEvent handle mouse move events.
  * @param event mouse move event.
  */
-void VMainGraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
+void VMainGraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
     scenePos = event->scenePos();
     emit mouseMove(event->scenePos());
@@ -169,7 +170,7 @@ void VMainGraphicsScene::InitOrigins()
 
         // Arrow left side
         QLineF arrowLeftLine = lineX;
-        arrowLeftLine.setAngle(arrowLeftLine.angle()-arrowAngle);
+        arrowLeftLine.setAngle(arrowLeftLine.angle() - arrowAngle);
         arrowLeftLine.setLength(arrowLength);
         auto *xLine2 = new QGraphicsLineItem(arrowLeftLine);
         xLine2->setPen(originsPen);
@@ -180,7 +181,7 @@ void VMainGraphicsScene::InitOrigins()
 
         // Arrow right side
         QLineF arrowRightLine = lineX;
-        arrowRightLine.setAngle(arrowRightLine.angle()+arrowAngle);
+        arrowRightLine.setAngle(arrowRightLine.angle() + arrowAngle);
         arrowRightLine.setLength(arrowLength);
         auto *xLine3 = new QGraphicsLineItem(arrowRightLine);
         xLine3->setPen(originsPen);
@@ -194,7 +195,7 @@ void VMainGraphicsScene::InitOrigins()
         xOrigin->setBrush(axisTextBrush);
         xOrigin->setFlag(QGraphicsItem::ItemIgnoresTransformations);
         xOrigin->setZValue(-0.5);
-        xOrigin->setPos(30, -(xOrigin->boundingRect().height()/2));
+        xOrigin->setPos(30, -(xOrigin->boundingRect().height() / 2));
         origins.append(xOrigin);
     }
 
@@ -210,7 +211,7 @@ void VMainGraphicsScene::InitOrigins()
 
         // Arrow left side
         QLineF arrowLeftLine = lineY;
-        arrowLeftLine.setAngle(arrowLeftLine.angle()-arrowAngle);
+        arrowLeftLine.setAngle(arrowLeftLine.angle() - arrowAngle);
         arrowLeftLine.setLength(arrowLength);
         auto *yLine2 = new QGraphicsLineItem(arrowLeftLine);
         yLine2->setPen(originsPen);
@@ -221,7 +222,7 @@ void VMainGraphicsScene::InitOrigins()
 
         // Arrow right side
         QLineF arrowRightLine = lineY;
-        arrowRightLine.setAngle(arrowRightLine.angle()+arrowAngle);
+        arrowRightLine.setAngle(arrowRightLine.angle() + arrowAngle);
         arrowRightLine.setLength(arrowLength);
         auto *yLine3 = new QGraphicsLineItem(arrowRightLine);
         yLine3->setPen(originsPen);
@@ -235,7 +236,7 @@ void VMainGraphicsScene::InitOrigins()
         yOrigin->setBrush(axisTextBrush);
         yOrigin->setFlag(QGraphicsItem::ItemIgnoresTransformations);
         yOrigin->setZValue(-0.5);
-        yOrigin->setPos(-(yOrigin->boundingRect().width()/2), 30);
+        yOrigin->setPos(-(yOrigin->boundingRect().width() / 2), 30);
         origins.append(yOrigin);
     }
 }
@@ -265,7 +266,7 @@ auto VMainGraphicsScene::VisibleItemsBoundingRect() const -> QRectF
     const QList<QGraphicsItem *> qItems = items();
     for (auto *item : qItems)
     {
-        if(not item->isVisible())
+        if (not item->isVisible())
         {
             continue;
         }

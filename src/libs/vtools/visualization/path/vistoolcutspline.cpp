@@ -33,29 +33,30 @@
 #include <QPainterPath>
 #include <QPointF>
 #include <QSharedPointer>
-#include <Qt>
 #include <new>
 
 #include "../vgeometry/vabstractcubicbezier.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
-#include "vispath.h"
-#include "../vwidgets/scalesceneitems.h"
 #include "../vmisc/vmodifierkey.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/scalesceneitems.h"
+#include "vispath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCutSpline::VisToolCutSpline(const VContainer *data, QGraphicsItem *parent)
-    :VisPath(data, parent)
+  : VisPath(data, parent)
 {
-    m_spl1 = InitItem<VCurvePathItem>(Qt::darkGreen, this);
+    SetColorRole(VColorRole::VisSupportColor);
+
+    m_spl1 = InitItem<VCurvePathItem>(VColorRole::VisSupportColor2, this);
     m_spl1->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
-    m_spl2 = InitItem<VCurvePathItem>(Qt::darkRed, this);
+    m_spl2 = InitItem<VCurvePathItem>(VColorRole::VisSupportColor4, this);
     m_spl2->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
 
-    m_point = InitPoint(Color(VColor::MainColor), this);
+    m_point = InitPoint(VColorRole::VisMainColor, this);
     m_point->setZValue(2);
     m_point->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
 }
@@ -66,7 +67,7 @@ void VisToolCutSpline::RefreshGeometry()
     if (m_splineId > NULL_ID)
     {
         const auto spl = GetData()->GeometricObject<VAbstractCubicBezier>(m_splineId);
-        DrawPath(this, spl->GetPath(), spl->DirectionArrows(), Color(VColor::SupportColor), LineStyle(), Qt::RoundCap);
+        DrawPath(this, spl->GetPath(), spl->DirectionArrows(), LineStyle(), Qt::RoundCap);
 
         if (not qFuzzyIsNull(m_length))
         {
@@ -81,22 +82,23 @@ void VisToolCutSpline::RefreshGeometry()
             VSpline sp2 = VSpline(VPointF(p), spl2p2, spl2p3, spl->GetP4());
             sp2.SetApproximationScale(spl->GetApproximationScale());
 
-            DrawPoint(m_point, p, Color(VColor::MainColor));
+            DrawPoint(m_point, p);
 
-            DrawPath(m_spl1, sp1.GetPath(), sp1.DirectionArrows(), Qt::darkGreen, LineStyle(), Qt::RoundCap);
-            DrawPath(m_spl2, sp2.GetPath(), sp2.DirectionArrows(), Qt::darkRed, LineStyle(), Qt::RoundCap);
+            DrawPath(m_spl1, sp1.GetPath(), sp1.DirectionArrows(), LineStyle(), Qt::RoundCap);
+            DrawPath(m_spl2, sp2.GetPath(), sp2.DirectionArrows(), LineStyle(), Qt::RoundCap);
         }
         else if (GetMode() == Mode::Creation)
         {
             QPointF p = spl->ClosestPoint(ScenePos());
             qreal length = spl->GetLengthByPoint(p);
 
-            DrawPoint(m_point, p, Color(VColor::MainColor));
+            DrawPoint(m_point, p);
 
             const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
             SetToolTip(tr("Length = %1%2; "
                           "<b>Mouse click</b> - finish selecting the length, "
-                          "<b>%3</b> - skip").arg(LengthToUser(length), prefix, VModifierKey::EnterKey()));
+                          "<b>%3</b> - skip")
+                           .arg(LengthToUser(length), prefix, VModifierKey::EnterKey()));
         }
     }
 }

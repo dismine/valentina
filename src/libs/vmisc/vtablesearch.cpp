@@ -32,17 +32,16 @@
 #include <QStringBuilder>
 #include <QTableWidget>
 #include <QTableWidgetItem>
-#include <Qt>
 
-#include "../vmisc/def.h"
 #include "../vmisc/compatibility.h"
+#include "../vmisc/def.h"
 
 const int VTableSearch::MaxHistoryRecords = 10;
 
 //---------------------------------------------------------------------------------------------------------------------
 VTableSearch::VTableSearch(QTableWidget *table, QObject *parent)
-    : QObject(parent),
-      table(table)
+  : QObject(parent),
+    table(table)
 {
 }
 
@@ -51,19 +50,19 @@ void VTableSearch::Clear()
 {
     SCASSERT(table != nullptr)
 
-    for(int i = 0; i < table->rowCount(); ++i)
+    for (int i = 0; i < table->rowCount(); ++i)
     {
-        for(int j = 0; j < table->columnCount(); ++j)
+        for (int j = 0; j < table->columnCount(); ++j)
         {
             if (QTableWidgetItem *item = table->item(i, j))
             {
                 if (item->row() % 2 != 0 && table->alternatingRowColors())
                 {
-                    item->setBackground(QPalette().alternateBase());
+                    item->setBackground(table->palette().alternateBase());
                 }
                 else
                 {
-                    item->setBackground(QPalette().base());
+                    item->setBackground(table->palette().base());
                 }
             }
         }
@@ -122,16 +121,16 @@ auto VTableSearch::FindTableItems(QString term) -> QList<QTableWidgetItem *>
 
     QRegularExpression re(term, options);
 
-    if(not re.isValid())
+    if (not re.isValid())
     {
         return {};
     }
 
     QList<QTableWidgetItem *> list;
 
-    for (int r=0; r<table->rowCount(); ++r)
+    for (int r = 0; r < table->rowCount(); ++r)
     {
-        for (int c=0; c<table->columnCount(); ++c)
+        for (int c = 0; c < table->columnCount(); ++c)
         {
             QTableWidgetItem *cell = table->item(r, c);
             if (cell != nullptr)
@@ -156,18 +155,18 @@ auto VTableSearch::FindCurrentMatchIndex() const -> int
         return 0;
     }
 
-    QList<QTableWidgetItem*> selectedItems = table->selectedItems();
+    QList<QTableWidgetItem *> selectedItems = table->selectedItems();
     if (selectedItems.isEmpty())
     {
         return 0;
     }
 
-    QTableWidgetItem* selectedItem = ConstFirst(selectedItems);
+    QTableWidgetItem *selectedItem = ConstFirst(selectedItems);
 
-    for (int i=0; i<searchList.size(); ++i)
+    for (int i = 0; i < searchList.size(); ++i)
     {
-        QTableWidgetItem* item = searchList.at(i);
-        if (item->row()>= selectedItem->row() && item->column()>= selectedItem->column())
+        QTableWidgetItem *item = searchList.at(i);
+        if (item->row() >= selectedItem->row() && item->column() >= selectedItem->column())
         {
             return i;
         }
@@ -179,7 +178,7 @@ auto VTableSearch::FindCurrentMatchIndex() const -> int
 //---------------------------------------------------------------------------------------------------------------------
 void VTableSearch::Find(const QString &term)
 {
-    if(table == nullptr)
+    if (table == nullptr)
     {
         return;
     }
@@ -293,11 +292,11 @@ void VTableSearch::RefreshList(const QString &term)
 
         if (searchIndex < 0)
         {
-           searchIndex = searchList.size() - 1;
+            searchIndex = searchList.size() - 1;
         }
         else if (searchIndex >= searchList.size())
         {
-           searchIndex = 0;
+            searchIndex = 0;
         }
 
         QTableWidgetItem *item = searchList.at(searchIndex);

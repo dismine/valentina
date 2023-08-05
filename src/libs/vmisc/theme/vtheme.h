@@ -57,6 +57,7 @@ public:
     void ResetThemeSettings() const;
 
     static auto GetIconResource(const QString &root, const QString &iconName) -> QIcon;
+    static auto GetPixmapResource(const QString &root, const QString &iconName) -> QPixmap;
     static auto GetResourceName(const QString &root, const QString &iconName) -> QString;
 
     static auto NativeDarkThemeAvailable() -> bool;
@@ -66,6 +67,9 @@ public:
     static void SetIconTheme();
     static void InitThemeMode();
     static auto ThemeStylesheet() -> QString;
+
+signals:
+    void ThemeSettingsChanged();
 
 private:
     Q_DISABLE_COPY_MOVE(VTheme) // NOLINT

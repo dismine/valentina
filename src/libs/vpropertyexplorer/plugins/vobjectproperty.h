@@ -21,7 +21,6 @@
 #ifndef VOBJECTPROPERTY_H
 #define VOBJECTPROPERTY_H
 
-
 #include <QMap>
 #include <QMetaObject>
 #include <QObject>
@@ -29,7 +28,6 @@
 #include <QStringList>
 #include <QStyleOptionViewItem>
 #include <QVariant>
-#include <Qt>
 #include <QtGlobal>
 
 #include "../vproperty.h"
@@ -43,9 +41,10 @@ namespace VPE
 class VPROPERTYEXPLORERSHARED_EXPORT VObjectProperty : public VProperty
 {
     Q_OBJECT // NOLINT
+
 public:
     //! Constructor
-    explicit VObjectProperty(const QString& name);
+    explicit VObjectProperty(const QString &name);
 
     //! Destructor
     virtual ~VObjectProperty() override {}
@@ -74,7 +73,7 @@ public:
     virtual auto getObjects() const -> QMap<QString, quint32>;
 
     //! Sets the value of the property
-    virtual void setValue(const QVariant& value) override;
+    virtual void setValue(const QVariant &value) override;
 
     //! Returns a string containing the type of the property
     virtual auto type() const -> QString override;
@@ -94,14 +93,14 @@ protected:
     //! The list of possible objects
     QMap<QString, quint32> objects;
 
-    void FillList(QComboBox *box, const QMap<QString, quint32> &list)const;
+    void FillList(QComboBox *box, const QMap<QString, quint32> &list) const;
     // No use of d-pointer in this case, because it is unlikely this will change. If it does, we can still add other
-    //members by reimplementing the VPropertyPrivate class without touching this header file.
+    // members by reimplementing the VPropertyPrivate class without touching this header file.
 
 private:
     Q_DISABLE_COPY_MOVE(VObjectProperty) // NOLINT
 };
 
-}
+} // namespace VPE
 
 #endif // VOBJECTPROPERTY_H

@@ -50,6 +50,7 @@
 #include "../vmisc/svgfont/vsvgfont.h"
 #include "../vmisc/svgfont/vsvgfontdatabase.h"
 #include "../vmisc/svgfont/vsvgfontengine.h"
+#include "../vmisc/theme/vscenestylesheet.h"
 #include "../vpapplication.h"
 #include "compatibility.h"
 #include "undocommands/vpundomovepieceonsheet.h"
@@ -72,14 +73,6 @@ QT_WARNING_POP
 
 namespace
 {
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
-
-Q_GLOBAL_STATIC_WITH_ARGS(QColor, mainColor, (Qt::black)) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(QColor, errorColor, (Qt::red))  // NOLINT
-
-QT_WARNING_POP
-
 //---------------------------------------------------------------------------------------------------------------------
 inline auto LineMatrix(const VPPiecePtr &piece, const QPointF &topLeft, qreal angle, const QPointF &linePos,
                        int maxLineWidth) -> QTransform
@@ -789,11 +782,11 @@ void VPGraphicsPiece::PaintStickyPath(QPainter *painter)
         if (painter != nullptr)
         {
             painter->save();
-            painter->setBrush(QBrush(Qt::BDiagPattern));
+            painter->setBrush(QBrush(VSceneStylesheet::ManualLayoutStyle().PieceOkColor(), Qt::BDiagPattern));
 
             QPen pen = painter->pen();
             pen.setStyle(Qt::DashLine);
-            pen.setColor(*mainColor);
+            pen.setColor(VSceneStylesheet::ManualLayoutStyle().PieceOkColor());
             painter->setPen(pen);
 
             painter->drawPath(m_stickyPath);
@@ -876,13 +869,13 @@ auto VPGraphicsPiece::PieceColor() const -> QColor
     VPPiecePtr piece = m_piece.toStrongRef();
     if (piece.isNull())
     {
-        return *mainColor;
+        return VSceneStylesheet::ManualLayoutStyle().PieceOkColor();
     }
 
     VPLayoutPtr layout = piece->Layout();
     if (layout.isNull())
     {
-        return *mainColor;
+        return VSceneStylesheet::ManualLayoutStyle().PieceOkColor();
     }
 
     bool outOfBound = false;
@@ -899,16 +892,16 @@ auto VPGraphicsPiece::PieceColor() const -> QColor
 
     if (outOfBound || superposition)
     {
-        return *errorColor;
+        return VSceneStylesheet::ManualLayoutStyle().PieceErrorColor();
     }
 
-    return *mainColor;
+    return VSceneStylesheet::ManualLayoutStyle().PieceOkColor();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPGraphicsPiece::NoBrush() const -> QBrush
 {
-    return m_hoverMode ? QBrush(QColor(199, 244, 249, 60)) : QBrush(Qt::NoBrush);
+    return m_hoverMode ? QBrush(VSceneStylesheet::ManualLayoutStyle().PieceHoverColor()) : QBrush(Qt::NoBrush);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

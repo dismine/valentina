@@ -35,15 +35,14 @@
 #include <new>
 
 #include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
+#include "../vpatterndb/vcontainer.h"
 #include "visline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolLine::VisToolLine(const VContainer *data, QGraphicsItem *parent)
-    :VisLine(data, parent)
+  : VisLine(data, parent)
 {
-    SetMainColor(Qt::red);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -60,7 +59,7 @@ void VisToolLine::RefreshGeometry()
         const QSharedPointer<VPointF> second = GetData()->GeometricObject<VPointF>(m_point2Id);
         line = QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
     }
-    DrawLine(this, line, Color(VColor::MainColor), LineStyle());
+    DrawLine(this, line, LineStyle());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -71,12 +70,11 @@ void VisToolLine::VisualMode(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolLine::DrawLine(VScaledLine *lineItem, const QLineF &line, const QColor &color, Qt::PenStyle style)
+void VisToolLine::DrawLine(VScaledLine *lineItem, const QLineF &line, Qt::PenStyle style)
 {
-    SCASSERT (lineItem != nullptr)
+    SCASSERT(lineItem != nullptr)
 
     QPen visPen = lineItem->pen();
-    visPen.setColor(color);
     visPen.setStyle(style);
 
     lineItem->setPen(visPen);

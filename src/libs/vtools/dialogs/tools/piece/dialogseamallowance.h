@@ -78,6 +78,7 @@ protected:
     void closeEvent(QCloseEvent *event) override;
     void showEvent(QShowEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
+    void changeEvent(QEvent *event) override;
     auto IsValid() const -> bool final;
     void SetPatternDoc(VAbstractPattern *doc) final;
 
@@ -343,6 +344,8 @@ private:
     void InitPassmarkAngleFormula(const VPieceNode &node);
     void InitPassmarkShapeType(const VPieceNode &node);
     void InitPassmarkAngleType(const VPieceNode &node);
+
+    void InitIcons();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

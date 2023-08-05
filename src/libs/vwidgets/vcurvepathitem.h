@@ -33,6 +33,7 @@
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
+#include "../vmisc/theme/themeDef.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
@@ -41,29 +42,49 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 class VCurvePathItem : public QGraphicsPathItem
 {
 public:
-    explicit VCurvePathItem(QGraphicsItem *parent = nullptr);
-    virtual ~VCurvePathItem() = default;
+    explicit VCurvePathItem(VColorRole role, QGraphicsItem *parent = nullptr);
+    ~VCurvePathItem() override = default;
 
-    virtual auto shape() const -> QPainterPath override;
+    auto shape() const -> QPainterPath override;
 
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                       QWidget *widget = nullptr) override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 
-    virtual auto type() const -> int override { return Type; }
-    enum { Type = UserType + static_cast<int>(Vis::CurvePathItem)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::CurvePathItem)
+    };
 
     void SetDirectionArrows(const QVector<QPair<QLineF, QLineF>> &arrows);
     void SetPoints(const QVector<QPointF> &points);
     void SetWidth(qreal width);
+
 protected:
     virtual void ScalePenWidth();
+
+    auto GetColorRole() const -> VColorRole;
+    void SetColorRole(VColorRole role);
+
 private:
     Q_DISABLE_COPY_MOVE(VCurvePathItem) // NOLINT
 
-    QVector<QPair<QLineF, QLineF>> m_directionArrows;
-    QVector<QPointF> m_points;
+    QVector<QPair<QLineF, QLineF>> m_directionArrows{};
+    QVector<QPointF> m_points{};
     qreal m_defaultWidth;
+    VColorRole m_role;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VCurvePathItem::SetColorRole(VColorRole role)
+{
+    m_role = role;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VCurvePathItem::GetColorRole() const -> VColorRole
+{
+    return m_role;
+}
 
 QT_WARNING_POP
 

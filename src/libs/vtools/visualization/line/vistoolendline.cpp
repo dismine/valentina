@@ -33,26 +33,22 @@
 #include <QLineF>
 #include <QPointF>
 #include <QSharedPointer>
-#include <Qt>
 #include <new>
 
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vmisc/vcommonsettings.h"
+#include "../visualization.h"
 #include "../vmisc/vmodifierkey.h"
 #include "../vpatterndb/vcontainer.h"
-#include "../visualization.h"
 #include "visline.h"
-#include "../vpatterndb/vtranslatevars.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolEndLine::VisToolEndLine(const VContainer *data, QGraphicsItem *parent)
-    : VisLine(data, parent)
+  : VisLine(data, parent)
 {
-    SetMainColor(Qt::red);
+    SetColorRole(VColorRole::VisMainColor);
 
-    m_point = InitPoint(Color(VColor::MainColor), this);
+    m_point = InitPoint(VColorRole::VisMainColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -76,15 +72,15 @@ void VisToolEndLine::RefreshGeometry()
         }
         else
         {
-            DrawPoint(m_point, static_cast<QPointF>(*first), Color(VColor::MainColor));
+            DrawPoint(m_point, static_cast<QPointF>(*first));
         }
     }
     else
     {
         line = VGObject::BuildLine(static_cast<QPointF>(*first), m_length, m_angle);
-        DrawPoint(m_point, line.p2(), Color(VColor::MainColor));
+        DrawPoint(m_point, line.p2());
     }
-    DrawLine(this, line, Color(VColor::MainColor), LineStyle());
+    DrawLine(this, line, LineStyle());
     static const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
     SetToolTip(tr("<b>Point at distance and angle</b>: angle = %1°, length = %2%3; "
                   "<b>%4</b> - sticking angle, <b>%5</b> - finish creation")

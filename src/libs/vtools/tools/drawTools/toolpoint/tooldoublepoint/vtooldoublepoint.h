@@ -29,7 +29,6 @@
 #ifndef VTOOLDOUBLEPOINT_H
 #define VTOOLDOUBLEPOINT_H
 
-
 #include <QGraphicsItem>
 #include <QGraphicsPathItem>
 #include <QMetaObject>
@@ -44,60 +43,65 @@
 
 class VSimplePoint;
 
-class VToolDoublePoint: public VAbstractPoint, public QGraphicsPathItem
+class VToolDoublePoint : public VAbstractPoint, public QGraphicsPathItem
 {
     Q_OBJECT // NOLINT
+
 public:
     VToolDoublePoint(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 p1id, quint32 p2id,
-                     const QString &notes, QGraphicsItem * parent = nullptr);
-    virtual ~VToolDoublePoint() = default;
+                     const QString &notes, QGraphicsItem *parent = nullptr);
+    ~VToolDoublePoint() override = default;
 
-    virtual auto type() const -> int override { return Type; }
-    enum { Type = UserType + static_cast<int>(Tool::DoublePoint)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Tool::DoublePoint)
+    };
 
     auto nameP1() const -> QString;
-    void    setNameP1(const QString &name);
+    void setNameP1(const QString &name);
 
     auto nameP2() const -> QString;
-    void    setNameP2(const QString &name);
+    void setNameP2(const QString &name);
 
     void SetNotes(const QString &notes) override;
 
-    virtual void GroupVisibility(quint32 object, bool visible) override;
-    virtual void ChangeLabelPosition(quint32 id, const QPointF &pos) override;
+    void GroupVisibility(quint32 object, bool visible) override;
+    void ChangeLabelPosition(quint32 id, const QPointF &pos) override;
 
-    virtual auto IsLabelVisible(quint32 id) const -> bool override;
-    virtual void SetLabelVisible(quint32 id, bool visible) override;
+    auto IsLabelVisible(quint32 id) const -> bool override;
+    void SetLabelVisible(quint32 id, bool visible) override;
+
 public slots:
-    void         Label1ChangePosition(const QPointF &pos);
-    void         Label2ChangePosition(const QPointF &pos);
-    virtual void Disable(bool disable, const QString &namePP) override;
-    virtual void EnableToolMove(bool move) override;
-    void         Point1Choosed();
-    void         Point2Choosed();
-    void         Point1Selected(bool selected);
-    void         Point2Selected(bool selected);
-    virtual void FullUpdateFromFile() override;
-    virtual void AllowHover(bool enabled) override;
-    virtual void AllowSelecting(bool enabled) override;
-    void         AllowLabelHover(bool enabled);
-    void         AllowLabelSelecting(bool enabled);
+    void Label1ChangePosition(const QPointF &pos);
+    void Label2ChangePosition(const QPointF &pos);
+    void Disable(bool disable, const QString &namePP) override;
+    void EnableToolMove(bool move) override;
+    void Point1Choosed();
+    void Point2Choosed();
+    void Point1Selected(bool selected);
+    void Point2Selected(bool selected);
+    void FullUpdateFromFile() override;
+    void AllowHover(bool enabled) override;
+    void AllowSelecting(bool enabled) override;
+    void AllowLabelHover(bool enabled);
+    void AllowLabelSelecting(bool enabled);
     virtual void ToolSelectionType(const SelectionType &type) override;
 
 protected:
     VSimplePoint *firstPoint;
     VSimplePoint *secondPoint;
 
-    quint32      p1id;
-    quint32      p2id;
+    quint32 p1id;
+    quint32 p2id;
 
-    virtual void UpdateNamePosition(quint32 id, const QPointF &pos) override;
-    virtual auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
-    virtual void keyReleaseEvent(QKeyEvent * event) override;
-    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) override;
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void AddToFile() override;
-    virtual void ChangeLabelVisibility(quint32 id, bool visible) override;
+    void UpdateNamePosition(quint32 id, const QPointF &pos) override;
+    auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
+    void keyReleaseEvent(QKeyEvent *event) override;
+    void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void AddToFile() override;
+    void ChangeLabelVisibility(quint32 id, bool visible) override;
 
     auto ComplexToolTip(quint32 itemId) const -> QString;
 

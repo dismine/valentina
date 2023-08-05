@@ -58,6 +58,8 @@ public:
      */
     void RefreshSelection();
 
+    void RefreshPieceIcon();
+
     /**
      * @brief CreatePieceIcon Creates an icon of the piece of given size
      * @param size of the icon

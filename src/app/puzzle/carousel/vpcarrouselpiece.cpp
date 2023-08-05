@@ -33,6 +33,7 @@
 #include <QPainter>
 
 #include "../layout/vppiece.h"
+#include "../vmisc/theme/vscenestylesheet.h"
 
 #include <QLoggingCategory>
 
@@ -44,18 +45,17 @@ Q_LOGGING_CATEGORY(pCarrouselPiece, "p.carrouselPiece") // NOLINT
 
 QT_WARNING_POP
 
-
 //---------------------------------------------------------------------------------------------------------------------
-VPCarrouselPiece::VPCarrouselPiece(const VPPiecePtr &piece, QListWidget* parent) :
-    QListWidgetItem(parent, Type),
+VPCarrouselPiece::VPCarrouselPiece(const VPPiecePtr &piece, QListWidget *parent)
+  : QListWidgetItem(parent, Type),
     m_piece(piece)
 {
     SCASSERT(m_piece != nullptr)
-    int width = 120 - 8;
-    QFontMetrics metrix = QFontMetrics(QFont());
-    QString clippedText = metrix.elidedText(piece->GetName(), Qt::ElideRight, width);
-    setIcon(CreatePieceIcon(QSize(120, 120)));
+    const int width = 120 - 8;
+    QString clippedText = QFontMetrics(font()).elidedText(piece->GetName(), Qt::ElideRight, width);
+    RefreshPieceIcon();
     setText(clippedText);
+    setToolTip(piece->GetName());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -72,6 +72,12 @@ void VPCarrouselPiece::RefreshSelection()
     {
         setSelected(piece->IsSelected());
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPCarrouselPiece::RefreshPieceIcon()
+{
+    setIcon(CreatePieceIcon(QSize(120, 120)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -93,25 +99,19 @@ auto VPCarrouselPiece::CreatePieceIcon(const QSize &size, bool isDragIcon) const
     QVector<QIcon::Mode> iconModes;
     iconModes.append(QIcon::Normal);
 
-    if(not isDragIcon)
+    if (not isDragIcon)
     {
         iconModes.append(QIcon::Selected);
     }
 
     QIcon icon;
 
-    for(auto iconMode : iconModes)
+    const VManualLayoutStyle &style = VSceneStylesheet::ManualLayoutStyle();
+
+    for (auto iconMode : iconModes)
     {
         QPixmap pixmap(size);
-
-        if(not isDragIcon)
-        {
-            pixmap.fill(QColor(Qt::white));
-        }
-        else
-        {
-            pixmap.fill(QColor(Qt::transparent));
-        }
+        pixmap.fill(not isDragIcon ? style.CarrouselPieceBackgroundColor() : QColor(Qt::transparent));
 
         QPainter painter;
         painter.begin(&pixmap);
@@ -122,34 +122,28 @@ auto VPCarrouselPiece::CreatePieceIcon(const QSize &size, bool isDragIcon) const
 
         painter.translate(spacing, spacing);
 
-        qreal scaleFactorX = canvasSize * 100 / (size.width() - spacing*2) / 100;
-        qreal scaleFactorY = canvasSize * 100 / (size.height() - spacing*2) / 100;
-        painter.scale(1./scaleFactorX, 1./scaleFactorY);
-        painter.setPen(QPen(Qt::black, 0.8*qMax(scaleFactorX, scaleFactorY)));
+        qreal scaleFactorX = canvasSize * 100 / (size.width() - spacing * 2) / 100;
+        qreal scaleFactorY = canvasSize * 100 / (size.height() - spacing * 2) / 100;
+        painter.scale(1. / scaleFactorX, 1. / scaleFactorY);
+        painter.setPen(QPen(style.CarrouselPieceColor(), 0.8 * qMax(scaleFactorX, scaleFactorY)));
 
-        if(not isDragIcon)
+        if (not isDragIcon)
         {
             painter.translate(dx, dy);
         }
         else
         {
-            painter.translate(-boundingRect.topLeft().x()+spacing, -boundingRect.topLeft().y()+spacing);
+            painter.translate(-boundingRect.topLeft().x() + spacing, -boundingRect.topLeft().y() + spacing);
         }
 
-        if(iconMode == QIcon::Selected)
-        {
-            painter.setBrush(QBrush(QColor(255,160,160,60)));
-        }
-        else
-        {
-            painter.setBrush(QBrush(Qt::white));
-        }
+        painter.setBrush(QBrush(iconMode == QIcon::Selected ? style.CarrouselPieceSelectedColor()
+                                                            : style.CarrouselPieceForegroundColor()));
 
         piece->DrawMiniature(painter);
 
         painter.end();
 
-        icon.addPixmap(pixmap,iconMode);
+        icon.addPixmap(pixmap, iconMode);
     }
 
     return icon;

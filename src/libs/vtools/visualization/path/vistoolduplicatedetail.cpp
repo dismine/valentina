@@ -30,8 +30,9 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolDuplicateDetail::VisToolDuplicateDetail(const VContainer *data, QGraphicsItem *parent)
-    : VisPath(data, parent)
-{}
+  : VisPath(data, parent)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolDuplicateDetail::RefreshGeometry()
@@ -51,7 +52,7 @@ void VisToolDuplicateDetail::RefreshGeometry()
         setPos(m_diff);
     }
 
-    DrawPath(this, PiecePath(piece), Color(VColor::MainColor), Qt::SolidLine, Qt::RoundCap);
+    DrawPath(this, PiecePath(piece), Qt::SolidLine, Qt::RoundCap);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

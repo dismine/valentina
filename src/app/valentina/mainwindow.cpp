@@ -27,76 +27,63 @@
  *************************************************************************/
 
 #include "mainwindow.h"
+
+#include <QAction>
+#include <QComboBox>
+#include <QDesktopServices>
+#include <QDoubleSpinBox>
+#include <QFileDialog>
+#include <QFileSystemWatcher>
+#include <QFuture>
+#include <QGlobalStatic>
+#include <QImageReader>
+#include <QInputDialog>
+#include <QMessageBox>
+#include <QProcess>
+#include <QProgressBar>
+#include <QScrollBar>
+#include <QSettings>
+#include <QShowEvent>
+#include <QStyleFactory>
+#include <QTimer>
+#include <QUndoStack>
+#include <QUuid>
+#include <QtConcurrent>
+#include <QtDebug>
+#include <QtGlobal>
+#include <chrono>
+#include <memory>
+#include <thread>
+
 #include "../ifc/exception/vexceptionconversionerror.h"
 #include "../ifc/exception/vexceptionemptyparameter.h"
 #include "../ifc/exception/vexceptioninvalidhistory.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/exception/vexceptionundo.h"
 #include "../ifc/exception/vexceptionwrongid.h"
+#include "../ifc/xml/utils.h"
+#include "../ifc/xml/vbackgroundpatternimage.h"
 #include "../ifc/xml/vpatternconverter.h"
 #include "../ifc/xml/vvitconverter.h"
 #include "../ifc/xml/vvstconverter.h"
 #include "../vformat/vmeasurements.h"
 #include "../vformat/vpatternrecipe.h"
 #include "../vganalytics/vganalytics.h"
+#include "../vlayout/dialogs/dialoglayoutscale.h"
 #include "../vlayout/dialogs/watermarkwindow.h"
+#include "../vlayout/vlayoutexporter.h"
 #include "../vmisc/customevents.h"
 #include "../vmisc/def.h"
 #include "../vmisc/dialogs/dialogaskcollectstatistic.h"
+#include "../vmisc/dialogs/dialogselectlanguage.h"
 #include "../vmisc/qxtcsvmodel.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vmodifierkey.h"
 #include "../vmisc/vsysexits.h"
 #include "../vmisc/vvalentinasettings.h"
-#include "../vtools/undocommands/renamepp.h"
-#include "../vtools/undocommands/undogroup.h"
-#include "../vwidgets/vmaingraphicsscene.h"
-#include "../vwidgets/vtoolbuttonpopup.h"
-#include "../vwidgets/vwidgetpopup.h"
-#include "core/vapplication.h"
-#include "core/vtooloptionspropertybrowser.h"
-#include "theme/vtheme.h"
-#include "ui_mainwindow.h"
-#include "vabstractapplication.h"
-#include "vsinglelineoutlinechar.h"
-#include <QAction>
-
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-#include "../vmisc/vtextcodec.h"
-#else
-#include <QTextCodec>
-#endif
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vmisc/backport/qoverload.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-
-#include "../vlayout/dialogs/dialoglayoutscale.h"
-#include "../vlayout/vlayoutexporter.h"
-#include "../vmisc/dialogs/dialogselectlanguage.h"
-#include "../vwidgets/vgraphicssimpletextitem.h"
-
 #include "../vpatterndb/variables/vincrement.h"
 #include "../vpatterndb/variables/vmeasurement.h"
-
-#include "../ifc/xml/utils.h"
-#include "../ifc/xml/vbackgroundpatternimage.h"
-#include "../vtools/undocommands/image/addbackgroundimage.h"
-#include "../vtools/undocommands/image/deletebackgroundimage.h"
-
-#include "dialogs/dialogaboutapp.h"
-#include "dialogs/dialogaddbackgroundimage.h"
-#include "dialogs/dialogfinalmeasurements.h"
-#include "dialogs/dialoghistory.h"
-#include "dialogs/dialogincrements.h"
-#include "dialogs/dialognewpattern.h"
-#include "dialogs/dialogpatternproperties.h"
-#include "dialogs/dialogpreferences.h"
-#include "dialogs/vwidgetbackgroundimages.h"
-#include "dialogs/vwidgetdetails.h"
-#include "dialogs/vwidgetgroups.h"
-
 #include "../vtools/dialogs/support/dialogeditlabel.h"
-
 #include "../vtools/dialogs/tools/dialogalongline.h"
 #include "../vtools/dialogs/tools/dialogarc.h"
 #include "../vtools/dialogs/tools/dialogarcwithlength.h"
@@ -138,12 +125,10 @@
 #include "../vtools/dialogs/tools/piece/dialogpin.h"
 #include "../vtools/dialogs/tools/piece/dialogplacelabel.h"
 #include "../vtools/dialogs/tools/piece/dialogseamallowance.h"
-
 #include "../vtools/tools/backgroundimage/vbackgroundimagecontrols.h"
 #include "../vtools/tools/backgroundimage/vbackgroundimageitem.h"
 #include "../vtools/tools/backgroundimage/vbackgroundpixmapitem.h"
 #include "../vtools/tools/backgroundimage/vbackgroundsvgitem.h"
-
 #include "../vtools/tools/drawTools/operation/flipping/vtoolflippingbyaxis.h"
 #include "../vtools/tools/drawTools/operation/flipping/vtoolflippingbyline.h"
 #include "../vtools/tools/drawTools/operation/vtoolmove.h"
@@ -178,12 +163,46 @@
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtooltriangle.h"
 #include "../vtools/tools/drawTools/vtoolline.h"
-#include "../vtools/tools/vtoolseamallowance.h"
-#include "../vtools/tools/vtooluniondetails.h"
-
 #include "../vtools/tools/nodeDetails/vtoolpiecepath.h"
 #include "../vtools/tools/nodeDetails/vtoolpin.h"
 #include "../vtools/tools/nodeDetails/vtoolplacelabel.h"
+#include "../vtools/tools/vtoolseamallowance.h"
+#include "../vtools/tools/vtooluniondetails.h"
+#include "../vtools/undocommands/image/addbackgroundimage.h"
+#include "../vtools/undocommands/image/deletebackgroundimage.h"
+#include "../vtools/undocommands/renamepp.h"
+#include "../vtools/undocommands/undogroup.h"
+#include "../vwidgets/vgraphicssimpletextitem.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/vtoolbuttonpopup.h"
+#include "../vwidgets/vwidgetpopup.h"
+#include "core/vapplication.h"
+#include "core/vtooloptionspropertybrowser.h"
+#include "dialogs/dialogaboutapp.h"
+#include "dialogs/dialogaddbackgroundimage.h"
+#include "dialogs/dialogfinalmeasurements.h"
+#include "dialogs/dialoghistory.h"
+#include "dialogs/dialogincrements.h"
+#include "dialogs/dialognewpattern.h"
+#include "dialogs/dialogpatternproperties.h"
+#include "dialogs/dialogpreferences.h"
+#include "dialogs/vwidgetbackgroundimages.h"
+#include "dialogs/vwidgetdetails.h"
+#include "dialogs/vwidgetgroups.h"
+#include "qstringliteral.h"
+#include "ui_mainwindow.h"
+#include "vabstractapplication.h"
+#include "vsinglelineoutlinechar.h"
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include "../vmisc/vtextcodec.h"
+#else
+#include <QTextCodec>
+#endif
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../vmisc/backport/qoverload.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
@@ -195,37 +214,9 @@
 #include <QScopeGuard>
 #endif
 
-#include <QFileDialog>
-#include <QInputDialog>
-#include <QMessageBox>
-#include <QScrollBar>
-#include <QShowEvent>
-#include <QtDebug>
-
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <QSourceLocation>
 #endif
-
-#include <QAction>
-#include <QComboBox>
-#include <QDesktopServices>
-#include <QDoubleSpinBox>
-#include <QFileSystemWatcher>
-#include <QFuture>
-#include <QGlobalStatic>
-#include <QImageReader>
-#include <QProcess>
-#include <QProgressBar>
-#include <QSettings>
-#include <QStyleFactory>
-#include <QTimer>
-#include <QUndoStack>
-#include <QUuid>
-#include <QtConcurrent>
-#include <QtGlobal>
-#include <chrono>
-#include <memory>
-#include <thread>
 
 #if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
 #include <QWinTaskbarButton>
@@ -2490,7 +2481,7 @@ void MainWindow::ExportDraw(const QString &fileName)
         if (item->type() == VGraphicsSimpleTextItem::Type)
         {
             auto *text = dynamic_cast<VGraphicsSimpleTextItem *>(item);
-            text->setBrush(text->BaseColor()); // Regular update doesn't work on labels
+            text->RefreshColor(); // Regular update doesn't work on labels
         }
     }
 
@@ -2835,12 +2826,14 @@ void MainWindow::ToolBarOption()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolBarStages()
 {
+    const QString resource = QStringLiteral("icon");
+
     m_leftGoToStage = new QLabel(this);
-    m_leftGoToStage->setPixmap(QPixmap(QStringLiteral("://icon/24x24/fast_forward_left_to_right_arrow.png")));
+    m_leftGoToStage->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/go-next-skip.png")));
     ui->toolBarStages->insertWidget(ui->actionDetails, m_leftGoToStage);
 
     m_rightGoToStage = new QLabel(this);
-    m_rightGoToStage->setPixmap(QPixmap(QStringLiteral("://icon/24x24/left_to_right_arrow.png")));
+    m_rightGoToStage->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/go-next.png")));
     ui->toolBarStages->insertWidget(ui->actionLayout, m_rightGoToStage);
 }
 
@@ -3687,8 +3680,10 @@ void MainWindow::ActionDraw(bool checked)
         qCDebug(vMainWindow, "Show draw scene");
         ArrowTool(true);
 
-        m_leftGoToStage->setPixmap(QPixmap(QStringLiteral("://icon/24x24/fast_forward_left_to_right_arrow.png")));
-        m_rightGoToStage->setPixmap(QPixmap(QStringLiteral("://icon/24x24/left_to_right_arrow.png")));
+        const QString resource = QStringLiteral("icon");
+
+        m_leftGoToStage->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/go-next-skip.png")));
+        m_rightGoToStage->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/go-next.png")));
 
         ui->actionDraw->setChecked(true);
         ui->actionDetails->setChecked(false);
@@ -3745,8 +3740,9 @@ void MainWindow::ActionDetails(bool checked)
         }
         m_comboBoxDraws->setCurrentIndex(m_comboBoxDraws->count() - 1); // Need to get data about all details
 
-        m_leftGoToStage->setPixmap(QPixmap(QStringLiteral("://icon/24x24/right_to_left_arrow.png")));
-        m_rightGoToStage->setPixmap(QPixmap(QStringLiteral("://icon/24x24/left_to_right_arrow.png")));
+        const QString resource = QStringLiteral("icon");
+        m_leftGoToStage->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/go-previous.png")));
+        m_rightGoToStage->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/go-next.png")));
 
         ui->actionDraw->setChecked(false);
         ui->actionDetails->setChecked(true);
@@ -3826,8 +3822,9 @@ void MainWindow::ActionLayout(bool checked)
     }
     m_comboBoxDraws->setCurrentIndex(m_comboBoxDraws->count() - 1); // Need to get data about all details
 
-    m_leftGoToStage->setPixmap(QPixmap(QStringLiteral("://icon/24x24/right_to_left_arrow.png")));
-    m_rightGoToStage->setPixmap(QPixmap(QStringLiteral("://icon/24x24/fast_forward_right_to_left_arrow.png")));
+    const QString resource = QStringLiteral("icon");
+    m_leftGoToStage->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/go-previous.png")));
+    m_rightGoToStage->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/go-previous-skip.png")));
 
     ui->actionDraw->setChecked(false);
     ui->actionDetails->setChecked(false);
@@ -5554,11 +5551,9 @@ auto MainWindow::MaybeSave() -> bool
 {
     if (this->isWindowModified() && m_guiEnabled)
     {
-        QScopedPointer<QMessageBox> messageBox(new QMessageBox(tr("Unsaved changes"),
-                                                               tr("The pattern has been modified.\n"
-                                                                  "Do you want to save your changes?"),
-                                                               QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No,
-                                                               QMessageBox::Cancel, this, Qt::Sheet));
+        QScopedPointer<QMessageBox> messageBox(new QMessageBox(
+            tr("Unsaved changes"), tr("The pattern has been modified. Do you want to save your changes?"),
+            QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No, QMessageBox::Cancel, this, Qt::Sheet));
 
         messageBox->setDefaultButton(QMessageBox::Yes);
         messageBox->setEscapeButton(QMessageBox::Cancel);

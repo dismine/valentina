@@ -26,7 +26,6 @@
 #include <QString>
 #include <QStyleOptionViewItem>
 #include <QVariant>
-#include <Qt>
 #include <QtGlobal>
 
 #include "../vproperty.h"

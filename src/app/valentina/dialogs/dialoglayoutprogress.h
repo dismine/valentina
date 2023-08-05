@@ -66,7 +66,7 @@ private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DialogLayoutProgress) // NOLINT
     Ui::DialogLayoutProgress *ui;
-    QMovie *m_movie;
+    QMovie *m_movie{nullptr};
     QElapsedTimer m_timer;
     qint64 m_timeout;
     bool m_isInitialized{false};

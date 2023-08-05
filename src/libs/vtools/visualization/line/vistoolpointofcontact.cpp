@@ -32,28 +32,29 @@
 #include <QLineF>
 #include <QPointF>
 #include <QSharedPointer>
-#include <Qt>
 #include <new>
 
 #include "../../tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofcontact.h"
 #include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
-#include "visline.h"
-#include "../vwidgets/global.h"
 #include "../vmisc/vmodifierkey.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/global.h"
+#include "visline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointOfContact::VisToolPointOfContact(const VContainer *data, QGraphicsItem *parent)
-    :VisLine(data, parent)
+  : VisLine(data, parent)
 {
-    m_arcPoint = InitPoint(Color(VColor::SupportColor), this);
-    m_lineP1 = InitPoint(Color(VColor::SupportColor), this);
-    m_lineP2 = InitPoint(Color(VColor::SupportColor), this);
-    m_circle = InitItem<VScaledEllipse>(Color(VColor::SupportColor), this);
+    SetColorRole(VColorRole::VisSupportColor);
+
+    m_arcPoint = InitPoint(VColorRole::VisSupportColor, this);
+    m_lineP1 = InitPoint(VColorRole::VisSupportColor, this);
+    m_lineP2 = InitPoint(VColorRole::VisSupportColor, this);
+    m_circle = InitItem<VScaledEllipse>(VColorRole::VisSupportColor, this);
     m_circle->SetPointMode(false);
 
-    m_point = InitPoint(Color(VColor::MainColor), this);
+    m_point = InitPoint(VColorRole::VisMainColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -62,46 +63,45 @@ void VisToolPointOfContact::RefreshGeometry()
     if (m_lineP1Id > NULL_ID)
     {
         const QSharedPointer<VPointF> first = GetData()->GeometricObject<VPointF>(m_lineP1Id);
-        DrawPoint(m_lineP1, static_cast<QPointF>(*first), Color(VColor::SupportColor));
+        DrawPoint(m_lineP1, static_cast<QPointF>(*first));
 
         if (m_lineP2Id <= NULL_ID)
         {
-            DrawLine(this, QLineF(static_cast<QPointF>(*first), ScenePos()), Color(VColor::SupportColor));
+            DrawLine(this, QLineF(static_cast<QPointF>(*first), ScenePos()));
         }
         else
         {
             const QSharedPointer<VPointF> second = GetData()->GeometricObject<VPointF>(m_lineP2Id);
-            DrawPoint(m_lineP2, static_cast<QPointF>(*second), Color(VColor::SupportColor));
-            DrawLine(this, QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)),
-                     Color(VColor::SupportColor));
+            DrawPoint(m_lineP2, static_cast<QPointF>(*second));
+            DrawLine(this, QLineF(static_cast<QPointF>(*first), static_cast<QPointF>(*second)));
 
             if (m_radiusId > NULL_ID)
             {
                 const QSharedPointer<VPointF> third = GetData()->GeometricObject<VPointF>(m_radiusId);
-                DrawPoint(m_arcPoint, static_cast<QPointF>(*third), Color(VColor::SupportColor));
+                DrawPoint(m_arcPoint, static_cast<QPointF>(*third));
 
                 if (not qFuzzyIsNull(m_radius))
                 {
                     QPointF fPoint;
                     VToolPointOfContact::FindPoint(m_radius, static_cast<QPointF>(*third), static_cast<QPointF>(*first),
                                                    static_cast<QPointF>(*second), &fPoint);
-                    DrawPoint(m_point, fPoint, Color(VColor::MainColor));
+                    DrawPoint(m_point, fPoint);
 
                     m_circle->setRect(PointRect(m_radius));
-                    DrawPoint(m_circle, static_cast<QPointF>(*third), Color(VColor::SupportColor), Qt::DashLine);
+                    DrawPoint(m_circle, static_cast<QPointF>(*third), Qt::DashLine);
                 }
                 else if (GetMode() == Mode::Creation)
                 {
-                    QLineF cursorLine (static_cast<QPointF>(*third), ScenePos());
+                    QLineF cursorLine(static_cast<QPointF>(*third), ScenePos());
                     qreal radius = cursorLine.length();
 
                     QPointF fPoint;
                     VToolPointOfContact::FindPoint(radius, static_cast<QPointF>(*third), static_cast<QPointF>(*first),
                                                    static_cast<QPointF>(*second), &fPoint);
-                    DrawPoint(m_point, fPoint, Color(VColor::MainColor));
+                    DrawPoint(m_point, fPoint);
 
                     m_circle->setRect(PointRect(radius));
-                    DrawPoint(m_circle, static_cast<QPointF>(*third), Color(VColor::SupportColor), Qt::DashLine);
+                    DrawPoint(m_circle, static_cast<QPointF>(*third), Qt::DashLine);
 
                     const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
                     SetToolTip(tr("Radius = %1%2; "

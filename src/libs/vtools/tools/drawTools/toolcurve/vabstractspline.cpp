@@ -49,6 +49,7 @@
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
+#include "../vmisc/theme/vscenestylesheet.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/global.h"
 
@@ -93,7 +94,9 @@ void VAbstractSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
                                    SceneScale(scene()));
 
     const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
-    setPen(QPen(CorrectColor(this, curve->GetColor()), width, LineStyleToPenStyle(curve->GetPenStyle()), Qt::RoundCap));
+    QColor penColor =
+        VSceneStylesheet::CorrectToolColor(this, VSceneStylesheet::CorrectToolColorForDarkTheme(curve->GetColor()));
+    setPen(QPen(penColor, width, LineStyleToPenStyle(curve->GetPenStyle()), Qt::RoundCap));
 
     auto PaintSpline = [this, curve](QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
     {

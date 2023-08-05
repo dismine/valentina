@@ -29,14 +29,12 @@
 #ifndef VISTOOLTRIANGLE_H
 #define VISTOOLTRIANGLE_H
 
-
 #include <QColor>
 #include <QGraphicsItem>
 #include <QLineF>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
-#include <Qt>
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
@@ -45,6 +43,7 @@
 class VisToolTriangle : public VisLine
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit VisToolTriangle(const VContainer *data, QGraphicsItem *parent = nullptr);
     ~VisToolTriangle() override = default;
@@ -57,26 +56,29 @@ public:
     void SetHypotenuseP1Id(quint32 value);
     void SetHypotenuseP2Id(quint32 value);
 
-    auto type() const -> int override {return Type;}
-    enum {Type = UserType + static_cast<int>(Vis::ToolTriangle)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::ToolTriangle)
+    };
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VisToolTriangle) // NOLINT
-    quint32         m_object1Id{NULL_ID};//axis first point
-    quint32         m_object2Id{NULL_ID};//axis second point
-    quint32         m_hypotenuseP1Id{NULL_ID};
-    quint32         m_hypotenuseP2Id{NULL_ID};
+    quint32 m_object1Id{NULL_ID};        // axis first point
+    quint32 m_object2Id{NULL_ID};        // axis second point
+    quint32 m_hypotenuseP1Id{NULL_ID};
+    quint32 m_hypotenuseP2Id{NULL_ID};
     VScaledEllipse *m_point{nullptr};
     VScaledEllipse *m_axisP1{nullptr};
     VScaledEllipse *m_axisP2{nullptr};
     VCurvePathItem *m_axis{nullptr};
     VScaledEllipse *m_hypotenuseP1{nullptr};
     VScaledEllipse *m_hypotenuseP2{nullptr};
-    VScaledLine    *m_foot1{nullptr};
-    VScaledLine    *m_foot2{nullptr};
+    VScaledLine *m_foot1{nullptr};
+    VScaledLine *m_foot2{nullptr};
 
-    static void DrawAimedAxis(VCurvePathItem *item, const QLineF &line, const QColor &color,
-                              Qt::PenStyle style = Qt::SolidLine);
+    static void DrawAimedAxis(VCurvePathItem *item, const QLineF &line, Qt::PenStyle style = Qt::SolidLine);
     static void DrawArrow(const QLineF &axis, QPainterPath &path, const qreal &arrow_size);
 };
 

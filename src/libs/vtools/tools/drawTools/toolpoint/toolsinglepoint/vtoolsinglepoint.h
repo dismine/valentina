@@ -29,7 +29,6 @@
 #ifndef VTOOLSINGLEPOINT_H
 #define VTOOLSINGLEPOINT_H
 
-
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
@@ -46,66 +45,64 @@ template <class T> class QSharedPointer;
 
 struct VToolSinglePointInitData : VDrawToolInitData
 {
-    VToolSinglePointInitData()
-        : VDrawToolInitData(),
-          name(),
-          mx(labelMX),
-          my(labelMY),
-          showLabel(true)
-    {}
-
-    QString name;
-    qreal   mx;
-    qreal   my;
-    bool    showLabel;
+    QString name{};
+    qreal mx{labelMX};
+    qreal my{labelMY};
+    bool showLabel{true};
 };
 
 /**
  * @brief The VToolSinglePoint class parent for all tools what create points.
  */
-class VToolSinglePoint: public VAbstractPoint, public VScenePoint
+class VToolSinglePoint : public VAbstractPoint, public VScenePoint
 {
     Q_OBJECT // NOLINT
+
 public:
     VToolSinglePoint(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes,
-                     QGraphicsItem * parent = nullptr);
-    virtual ~VToolSinglePoint() = default;
+                     QGraphicsItem *parent = nullptr);
+    ~VToolSinglePoint() override = default;
 
-    virtual auto type() const -> int override { return Type; }
-    enum { Type = UserType + static_cast<int>(Tool::SinglePoint)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Tool::SinglePoint)
+    };
 
     auto name() const -> QString;
-    void    setName(const QString &name);
+    void setName(const QString &name);
 
     void SetEnabled(bool enabled);
 
-    virtual void GroupVisibility(quint32 object, bool visible) override;
-    virtual void ChangeLabelPosition(quint32 id, const QPointF &pos) override;
+    void GroupVisibility(quint32 object, bool visible) override;
+    void ChangeLabelPosition(quint32 id, const QPointF &pos) override;
 
-    virtual auto IsLabelVisible(quint32 id) const -> bool override;
-    virtual void SetLabelVisible(quint32 id, bool visible) override;
+    auto IsLabelVisible(quint32 id) const -> bool override;
+    void SetLabelVisible(quint32 id, bool visible) override;
+
 public slots:
-    void         NameChangePosition(const QPointF &pos);
-    virtual void Disable(bool disable, const QString &namePP) override;
-    virtual void EnableToolMove(bool move) override;
-    void         PointChoosed();
-    void         PointSelected(bool selected);
-    virtual void FullUpdateFromFile() override;
-    virtual void AllowHover(bool enabled) override;
-    virtual void AllowSelecting(bool enabled) override;
-    void         AllowLabelHover(bool enabled);
-    void         AllowLabelSelecting(bool enabled);
-    virtual void ToolSelectionType(const SelectionType &type) override;
+    void NameChangePosition(const QPointF &pos);
+    void Disable(bool disable, const QString &namePP) override;
+    void EnableToolMove(bool move) override;
+    void PointChoosed();
+    void PointSelected(bool selected);
+    void FullUpdateFromFile() override;
+    void AllowHover(bool enabled) override;
+    void AllowSelecting(bool enabled) override;
+    void AllowLabelHover(bool enabled);
+    void AllowLabelSelecting(bool enabled);
+    void ToolSelectionType(const SelectionType &type) override;
+
 protected:
-    virtual void     UpdateNamePosition(quint32 id, const QPointF &pos) override;
-    virtual void     mousePressEvent(QGraphicsSceneMouseEvent *event) override;
-    virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
-    virtual void     hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
-    virtual auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
-    virtual void     keyReleaseEvent(QKeyEvent * event) override;
-    virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) override;
-    virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void     ChangeLabelVisibility(quint32 id, bool visible) override;
+    void UpdateNamePosition(quint32 id, const QPointF &pos) override;
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+    auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
+    void keyReleaseEvent(QKeyEvent *event) override;
+    void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void ChangeLabelVisibility(quint32 id, bool visible) override;
 
     template <class Item>
     static auto InitArc(VContainer *data, qreal segLength, const VPointF *p, quint32 curveId, const QString &alias1,
@@ -119,9 +116,8 @@ private:
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Item>
-inline auto VToolSinglePoint::InitArc(VContainer *data, qreal segLength, const VPointF *p,
-                                      quint32 curveId, const QString &alias1,
-                                      const QString &alias2) -> QPair<QString, QString>
+inline auto VToolSinglePoint::InitArc(VContainer *data, qreal segLength, const VPointF *p, quint32 curveId,
+                                      const QString &alias1, const QString &alias2) -> QPair<QString, QString>
 {
     QSharedPointer<Item> a1;
     QSharedPointer<Item> a2;

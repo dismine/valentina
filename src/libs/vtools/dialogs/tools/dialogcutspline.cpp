@@ -36,18 +36,19 @@
 #include <QTimer>
 #include <QToolButton>
 
-#include "../vpatterndb/vtranslatevars.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../../visualization/path/vistoolcutspline.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../qmuparser/qmudef.h"
 #include "../support/dialogeditwrongformula.h"
+#include "../vgeometry/vspline.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
-#include "ui_dialogcutspline.h"
-#include "../vgeometry/vspline.h"
-#include "../qmuparser/qmudef.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vabstractmainwindow.h"
+#include "ui_dialogcutspline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -56,11 +57,13 @@
  * @param parent parent widget
  */
 DialogCutSpline::DialogCutSpline(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogCutSpline),
-      m_timerFormula(new QTimer(this))
+  : DialogTool(data, toolId, parent),
+    ui(new Ui::DialogCutSpline),
+    m_timerFormula(new QTimer(this))
 {
     ui->setupUi(this);
+
+    InitIcons();
 
     m_timerFormula->setSingleShot(true);
     connect(m_timerFormula, &QTimer::timeout, this, &DialogCutSpline::EvalFormula);
@@ -68,7 +71,7 @@ DialogCutSpline::DialogCutSpline(const VContainer *data, quint32 toolId, QWidget
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
     ui->lineEditNamePoint->setText(
-                VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
+        VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     this->m_formulaBaseHeight = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
 
@@ -77,15 +80,15 @@ DialogCutSpline::DialogCutSpline(const VContainer *data, quint32 toolId, QWidget
     FillComboBoxSplines(ui->comboBoxSpline);
 
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogCutSpline::FXLength);
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
-    {
-        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, m_pointName, this->data, m_flagName);
-        CheckState();
-    });
-    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        m_timerFormula->start(formulaTimerTimeout);
-    });
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
+            [this]()
+            {
+                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, m_pointName, this->data,
+                                m_flagName);
+                CheckState();
+            });
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerFormula->start(formulaTimerTimeout); });
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogCutSpline::DeployFormulaTextEdit);
     connect(ui->comboBoxSpline, &QComboBox::currentTextChanged, this, &DialogCutSpline::SplineChanged);
 
@@ -128,8 +131,8 @@ void DialogCutSpline::SetPointName(const QString &value)
  */
 void DialogCutSpline::SetFormula(const QString &value)
 {
-    m_formula = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    m_formula = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed. TODO : see if I can get the max number of caracters in one line
     // of this PlainTextEdit to change 80 to this value
     if (m_formula.length() > 80)
@@ -167,7 +170,7 @@ void DialogCutSpline::setSplineId(quint32 value)
  */
 void DialogCutSpline::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare)// After first choose we ignore all objects
+    if (prepare) // After first choose we ignore all objects
     {
         return;
     }
@@ -216,9 +219,27 @@ void DialogCutSpline::closeEvent(QCloseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogCutSpline::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        InitIcons();
+        InitDialogButtonBoxIcons(ui->buttonBox);
+    }
+
+    // remember to call base class implementation
+    DialogTool::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogCutSpline::SplineChanged()
 {
-    CurrentCurveLength(getSplineId(), const_cast<VContainer *> (data));
+    CurrentCurveLength(getSplineId(), const_cast<VContainer *>(data));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -271,6 +292,15 @@ void DialogCutSpline::FinishCreating()
     emit ToolTip(QString());
     setModal(true);
     show();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutSpline::InitIcons()
+{
+    QString resource = QStringLiteral("icon");
+
+    ui->toolButtonExprLength->setIcon(VTheme::GetIconResource(resource, QStringLiteral("24x24/fx.png")));
+    ui->label_4->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/equal.png")));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -218,38 +218,40 @@ auto PenStyleToLineStyle(Qt::PenStyle penStyle) -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto PenStylePic(Qt::PenStyle style) -> QIcon
+auto PenStylePic(QColor backgroundColor, QColor textColor, Qt::PenStyle style) -> QIcon
 {
     QPixmap pix(80, 14);
-    pix.fill(Qt::white);
+    pix.fill(backgroundColor);
 
-    QBrush brush(Qt::black);
-    QPen pen(brush, 2.5, style);
+    QPen pen(textColor, 2.5, style);
 
     QPainter painter(&pix);
     painter.setPen(pen);
     painter.drawLine(2, 7, 78, 7);
 
-    return QIcon(pix);
+    painter.setPen(QPen(textColor, 0.25));
+    painter.drawRect(0, 0, pix.width() - 1, pix.height() - 1);
+
+    return {pix};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto LineStylesPics() -> QMap<QString, QIcon>
+auto LineStylesPics(QColor backgroundColor, QColor textColor) -> QMap<QString, QIcon>
 {
     QMap<QString, QIcon> map;
     const QStringList styles = StylesList();
 
     for (const auto &s : styles)
     {
-        map.insert(s, PenStylePic(LineStyleToPenStyle(s)));
+        map.insert(s, PenStylePic(backgroundColor, textColor, LineStyleToPenStyle(s)));
     }
     return map;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto CurvePenStylesPics() -> QMap<QString, QIcon>
+auto CurvePenStylesPics(QColor backgroundColor, QColor textColor) -> QMap<QString, QIcon>
 {
-    QMap<QString, QIcon> map = LineStylesPics();
+    QMap<QString, QIcon> map = LineStylesPics(backgroundColor, textColor);
     map.remove(TypeLineNone);
     return map;
 }

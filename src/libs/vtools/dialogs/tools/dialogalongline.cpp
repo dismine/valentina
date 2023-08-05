@@ -48,13 +48,14 @@
 #include "../support/dialogeditwrongformula.h"
 #include "../vgeometry/../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/variables/vlinelength.h"
+#include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
-#include "ui_dialogalongline.h"
 #include "../vwidgets/vabstractmainwindow.h"
+#include "ui_dialogalongline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -63,11 +64,13 @@
  * @param parent parent widget
  */
 DialogAlongLine::DialogAlongLine(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogAlongLine),
-      m_timerFormula(new QTimer(this))
+  : DialogTool(data, toolId, parent),
+    ui(new Ui::DialogAlongLine),
+    m_timerFormula(new QTimer(this))
 {
     ui->setupUi(this);
+
+    InitIcons();
 
     m_timerFormula->setSingleShot(true);
     connect(m_timerFormula, &QTimer::timeout, this, &DialogAlongLine::EvalFormula);
@@ -75,7 +78,7 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, quint32 toolId, QWidget
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
     ui->lineEditNamePoint->setText(
-                VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
+        VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
 
     this->m_formulaBaseHeight = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
@@ -84,29 +87,28 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, quint32 toolId, QWidget
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
-    FillComboBoxTypeLine(ui->comboBoxLineType, LineStylesPics());
+    FillComboBoxTypeLine(ui->comboBoxLineType, LineStylesPics(ui->comboBoxLineType->palette().color(QPalette::Base),
+                                                              ui->comboBoxLineType->palette().color(QPalette::Text)));
     FillComboBoxLineColors(ui->comboBoxLineColor);
 
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogAlongLine::FXLength);
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
-    {
-        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, m_pointName, this->data, m_flagName);
-        CheckState();
-    });
-    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        m_timerFormula->start(formulaTimerTimeout);
-    });
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
+            [this]()
+            {
+                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, m_pointName, this->data,
+                                m_flagName);
+                CheckState();
+            });
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerFormula->start(formulaTimerTimeout); });
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogAlongLine::DeployFormulaTextEdit);
-    connect(ui->comboBoxFirstPoint, &QComboBox::currentTextChanged,
-            this, &DialogAlongLine::PointChanged);
-    connect(ui->comboBoxSecondPoint, &QComboBox::currentTextChanged,
-            this, &DialogAlongLine::PointChanged);
+    connect(ui->comboBoxFirstPoint, &QComboBox::currentTextChanged, this, &DialogAlongLine::PointChanged);
+    connect(ui->comboBoxSecondPoint, &QComboBox::currentTextChanged, this, &DialogAlongLine::PointChanged);
 
     vis = new VisToolAlongLine(data);
 
     // Call after initialization vis!!!!
-    SetTypeLine(TypeLineNone);//By default don't show line
+    SetTypeLine(TypeLineNone); // By default don't show line
 
     ui->tabWidget->setCurrentIndex(0);
     SetTabStopDistance(ui->plainTextEditToolNotes);
@@ -186,7 +188,7 @@ DialogAlongLine::~DialogAlongLine()
  */
 void DialogAlongLine::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare)// After first choose we ignore all objects
+    if (prepare) // After first choose we ignore all objects
     {
         return;
     }
@@ -240,6 +242,24 @@ void DialogAlongLine::closeEvent(QCloseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogAlongLine::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        InitIcons();
+        InitDialogButtonBoxIcons(ui->buttonBox);
+    }
+
+    // remember to call base class implementation
+    DialogTool::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogAlongLine::SetCurrentLength()
 {
     VLengthLine *length = nullptr;
@@ -260,7 +280,7 @@ void DialogAlongLine::SetCurrentLength()
     SCASSERT(length != nullptr)
     length->SetName(currentLength);
 
-    auto *locData = const_cast<VContainer *> (data);
+    auto *locData = const_cast<VContainer *>(data);
     locData->AddVariable(length);
 }
 
@@ -282,8 +302,7 @@ void DialogAlongLine::ChosenSecondPoint(quint32 id, const QString &toolTip)
             }
             else
             {
-                auto *window = qobject_cast<VAbstractMainWindow *>(
-                    VAbstractValApplication::VApp()->getMainWindow());
+                auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
                 SCASSERT(window != nullptr)
                 connect(line, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
             }
@@ -312,6 +331,15 @@ void DialogAlongLine::FinishCreating()
     emit ToolTip(QString());
     setModal(true);
     show();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogAlongLine::InitIcons()
+{
+    const QString resource = QStringLiteral("icon");
+
+    ui->toolButtonExprLength->setIcon(VTheme::GetIconResource(resource, QStringLiteral("24x24/fx.png")));
+    ui->labelEqual->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/equal.png")));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -413,8 +441,8 @@ void DialogAlongLine::SetFirstPointId(quint32 value)
  */
 void DialogAlongLine::SetFormula(const QString &value)
 {
-    m_formula = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    m_formula = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (m_formula.length() > 80)
     {

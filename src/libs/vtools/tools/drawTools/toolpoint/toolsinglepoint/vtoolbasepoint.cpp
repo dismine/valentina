@@ -45,11 +45,14 @@
 #include <QUndoStack>
 #include <new>
 
-#include "../../../../dialogs/tools/dialogtool.h"
 #include "../../../../dialogs/tools/dialogsinglepoint.h"
+#include "../../../../dialogs/tools/dialogtool.h"
 #include "../../../../undocommands/addpatternpiece.h"
 #include "../../../../undocommands/deletepatternpiece.h"
 #include "../../../../undocommands/movespoint.h"
+#include "../../../vabstracttool.h"
+#include "../../../vdatatool.h"
+#include "../../vdrawtool.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
@@ -59,9 +62,6 @@
 #include "../vwidgets/vgraphicssimpletextitem.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
-#include "../../../vabstracttool.h"
-#include "../../../vdatatool.h"
-#include "../../vdrawtool.h"
 #include "vtoolsinglepoint.h"
 
 const QString VToolBasePoint::ToolType = QStringLiteral("single");
@@ -72,13 +72,13 @@ const QString VToolBasePoint::ToolType = QStringLiteral("single");
  * @param initData init data.
  * @param parent parent object.
  */
-VToolBasePoint::VToolBasePoint (const VToolBasePointInitData &initData, QGraphicsItem * parent )
-    :VToolSinglePoint(initData.doc, initData.data, initData.id, initData.notes, parent),
-     namePP(initData.nameActivPP)
+VToolBasePoint::VToolBasePoint(const VToolBasePointInitData &initData, QGraphicsItem *parent)
+  : VToolSinglePoint(initData.doc, initData.data, initData.id, initData.notes, parent),
+    namePP(initData.nameActivPP)
 {
-    m_baseColor = Qt::red;
-    this->setFlag(QGraphicsItem::ItemIsMovable, true);
-    this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+    SetColorRole(VColorRole::BasePointColor);
+    setFlag(QGraphicsItem::ItemIsMovable, true);
+    setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     m_namePoint->setBrush(Qt::black);
     ToolCreation(initData.typeCreation);
 }
@@ -131,7 +131,7 @@ auto VToolBasePoint::Create(VToolBasePointInitData initData) -> VToolBasePoint *
 //---------------------------------------------------------------------------------------------------------------------
 void VToolBasePoint::ShowVisualization(bool show)
 {
-    Q_UNUSED(show) //don't have any visualization for base point yet
+    Q_UNUSED(show) // don't have any visualization for base point yet
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -148,7 +148,7 @@ void VToolBasePoint::AddToFile()
     QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
     SaveOptions(sPoint, obj);
 
-    //Create pattern piece structure
+    // Create pattern piece structure
     QDomElement patternPiece = doc->createElement(VAbstractPattern::TagDraw);
     doc->SetAttribute(patternPiece, AttrName, namePP);
 
@@ -272,7 +272,7 @@ void VToolBasePoint::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepe
     doc->SetAttribute(domElement, AttrX, QString().setNum(VAbstractValApplication::VApp()->fromPixel(p.x())));
     doc->SetAttribute(domElement, AttrY, QString().setNum(VAbstractValApplication::VApp()->fromPixel(p.y())));
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept {return notes.isEmpty();});
+                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -334,7 +334,7 @@ auto VToolBasePoint::MakeToolTip() const -> QString
     const QString toolTip = QString("<table>"
                                     "<tr> <td><b>%1:</b> %2</td> </tr>"
                                     "</table>")
-            .arg(tr("Label"), point->name());
+                                .arg(tr("Label"), point->name());
     return toolTip;
 }
 
@@ -360,11 +360,11 @@ void VToolBasePoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quin
             ContextMenu<DialogSinglePoint>(event, id, RemoveOption::Disable);
         }
     }
-    catch(const VExceptionToolWasDeleted &e)
+    catch (const VExceptionToolWasDeleted &e)
     {
         qCDebug(vTool, "Tool was deleted. Immediately leave method.");
         Q_UNUSED(e)
-        return;//Leave this method immediately!!!
+        return; // Leave this method immediately!!!
     }
     qCDebug(vTool, "Context menu closed. Tool was not deleted.");
 }

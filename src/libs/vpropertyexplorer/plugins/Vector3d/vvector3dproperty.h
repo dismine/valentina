@@ -21,14 +21,12 @@
 #ifndef VVECTOR3DPROPERTY_H
 #define VVECTOR3DPROPERTY_H
 
-
-#include <stddef.h>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
 #include <QVariant>
-#include <Qt>
 #include <QtGlobal>
+#include <stddef.h>
 
 #include "../../vproperty.h"
 #include "../../vpropertyexplorer_global.h"
@@ -40,16 +38,22 @@ struct VPROPERTYEXPLORERSHARED_EXPORT Vector3D //-V690
 {
 public:
     Vector3D()
-        :X(0), Y(0), Z(0)
-    {}
+      : X(0),
+        Y(0),
+        Z(0)
+    {
+    }
 
-    Vector3D(const Vector3D& other)
-        :X(other.X), Y(other.Y), Z(other.Z)
-    {}
+    Vector3D(const Vector3D &other)
+      : X(other.X),
+        Y(other.Y),
+        Z(other.Z)
+    {
+    }
 
     auto operator=(const Vector3D &other) -> Vector3D &
     {
-        if ( &other == this )
+        if (&other == this)
         {
             return *this;
         }
@@ -76,8 +80,9 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 class VPROPERTYEXPLORERSHARED_EXPORT QVector3DProperty : public VProperty
 {
     Q_OBJECT // NOLINT
+
 public:
-    explicit QVector3DProperty(const QString& name);
+    explicit QVector3DProperty(const QString &name);
 
     virtual ~QVector3DProperty() override {}
 
@@ -91,7 +96,7 @@ public:
     virtual auto getVector() const -> Vector3D;
 
     //! Sets the Vector3d
-    virtual void setVector(const Vector3D& vect);
+    virtual void setVector(const Vector3D &vect);
 
     //! Sets the Vector3d
     virtual void setVector(double x, double y, double z);
@@ -107,7 +112,7 @@ public:
     virtual auto clone(bool include_children = true, VProperty *container = NULL) const -> VProperty * override;
 
     //! Sets the value of the property
-    virtual void setValue(const QVariant& value) override;
+    virtual void setValue(const QVariant &value) override;
 
     //! Returns the value of the property as a QVariant
     virtual auto getValue() const -> QVariant override;
@@ -118,6 +123,6 @@ private:
 
 QT_WARNING_POP
 
-}
+} // namespace VPE
 
 #endif // VVECTOR3DPROPERTY_H

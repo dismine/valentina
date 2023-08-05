@@ -21,7 +21,6 @@
 #ifndef VPROPERTYMODEL_H
 #define VPROPERTYMODEL_H
 
-
 #include <QAbstractItemModel>
 #include <QMap>
 #include <QMetaObject>
@@ -29,7 +28,6 @@
 #include <QObject>
 #include <QString>
 #include <QVariant>
-#include <Qt>
 #include <QtGlobal>
 
 #include "vproperty.h"
@@ -67,8 +65,9 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 class VPROPERTYEXPLORERSHARED_EXPORT VPropertyModel : public QAbstractItemModel
 {
     Q_OBJECT // NOLINT
+
 public:
-    explicit VPropertyModel(QObject * parent = nullptr);
+    explicit VPropertyModel(QObject *parent = nullptr);
     virtual ~VPropertyModel() override;
 
     //! Adds the property to the model and attaches it to the parentid
@@ -143,31 +142,31 @@ public:
     //! \param property_set The new property set. Setting this to NULL has the same effect as calling clear.
     //! \param emit_signals Default: true. Set this to false if you want to prevent the model from emmiting the reset
     //! model signals
-    virtual void setPropertySet(VPropertySet* property_set, bool emit_signals = true);
+    virtual void setPropertySet(VPropertySet *property_set, bool emit_signals = true);
 
     //! Removes a property from the model and returns it
     virtual auto takeProperty(const QString &id) -> VProperty *;
 
     //! Removes a property from the model and deletes it
-    virtual void removeProperty(const QString& id);
+    virtual void removeProperty(const QString &id);
 
 signals:
     //! This signal is being emitted, when the setData method is being called
-    void onDataChangedByEditor(VProperty* property);
+    void onDataChangedByEditor(VProperty *property);
 
 public slots:
     //! This function causes the views to update the property
-    void onDataChangedByModel(VProperty* property);
+    void onDataChangedByModel(VProperty *property);
 
 protected:
     //! Gets a property by its ModelIndex
     virtual auto getIndexFromProperty(VProperty *property, int column = 0) const -> QModelIndex;
 
     //! Protected constructor passing the private object
-    explicit VPropertyModel(VPropertyModelPrivate* d, QObject* parent = nullptr);
+    explicit VPropertyModel(VPropertyModelPrivate *d, QObject *parent = nullptr);
 
     //! The model data
-    VPropertyModelPrivate* d_ptr;
+    VPropertyModelPrivate *d_ptr;
 
 private:
     Q_DISABLE_COPY_MOVE(VPropertyModel) // NOLINT
@@ -175,6 +174,6 @@ private:
 
 QT_WARNING_POP
 
-}
+} // namespace VPE
 
 #endif // VPROPERTYMODEL_H

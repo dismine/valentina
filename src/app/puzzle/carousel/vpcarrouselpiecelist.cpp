@@ -27,24 +27,25 @@
  *************************************************************************/
 #include "vpcarrouselpiecelist.h"
 
+#include <QApplication>
 #include <QDrag>
 #include <QDragMoveEvent>
-#include <QPainter>
-#include <QApplication>
+#include <QLoggingCategory>
 #include <QMenu>
+#include <QPainter>
 
+#include "../layout/vplayout.h"
+#include "../layout/vppiece.h"
+#include "../layout/vpsheet.h"
+#include "../undocommands/vpundomovepieceonsheet.h"
+#include "../vmisc/theme/vtheme.h"
 #include "vpcarrousel.h"
 #include "vpcarrouselpiece.h"
+#include "vpmimedatapiece.h"
+
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "vpmimedatapiece.h"
-#include "../layout/vpsheet.h"
-#include "../layout/vplayout.h"
-#include "../undocommands/vpundomovepieceonsheet.h"
-#include "../layout/vppiece.h"
-
-#include <QLoggingCategory>
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
@@ -55,14 +56,29 @@ Q_LOGGING_CATEGORY(pCarrouselPieceList, "p.carrouselPieceList") // NOLINT
 QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
-VPCarrouselPieceList::VPCarrouselPieceList(QWidget* parent) :
-    QListWidget(parent)
+VPCarrouselPieceList::VPCarrouselPieceList(QWidget *parent)
+  : QListWidget(parent)
 {
-    setStyleSheet("QListWidget::item{border: 2px solid transparent; color: black;}  "
-                  "QListWidget::item:selected {border: 2px solid rgb(255,160,160);}");
+    InitStyleSheet();
     setContextMenuPolicy(Qt::DefaultContextMenu);
     setSelectionMode(QAbstractItemView::MultiSelection);
     setViewMode(QListView::IconMode);
+
+    // Because we cannot control icon color with stylesheet we must wait until scene style update. It happens after
+    // the palette change signal.
+    connect(VTheme::Instance(), &VTheme::ThemeSettingsChanged, this,
+            [this]()
+            {
+                for (int i = 0; i < count(); ++i)
+                {
+                    if (auto *pieceItem = dynamic_cast<VPCarrouselPiece *>(item(i)))
+                    {
+                        pieceItem->RefreshPieceIcon();
+                    }
+                }
+
+                InitStyleSheet();
+            });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -76,20 +92,22 @@ void VPCarrouselPieceList::Refresh()
 {
     clear();
 
-    if(not m_pieceList.isEmpty())
+    if (m_pieceList.isEmpty())
     {
-        // create the corresponding carrousel pieces
-        for (const auto &piece : qAsConst(m_pieceList)) // NOLINT(clang-analyzer-cplusplus.NewDeleteLeaks)
-        {
-            if (not piece.isNull())
-            {
-                // update the label of the piece
-                auto* carrouselpiece = new VPCarrouselPiece(piece, this);
-                carrouselpiece->setSelected(piece->IsSelected());
-            }
-        }
-        sortItems();
+        return;
     }
+
+    // create the corresponding carrousel pieces
+    for (const auto &piece : qAsConst(m_pieceList)) // NOLINT(clang-analyzer-cplusplus.NewDeleteLeaks)
+    {
+        if (not piece.isNull())
+        {
+            // update the label of the piece
+            auto *carrouselpiece = new VPCarrouselPiece(piece, this);
+            carrouselpiece->setSelected(piece->IsSelected());
+        }
+    }
+    sortItems();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -111,8 +129,8 @@ void VPCarrouselPieceList::mousePressEvent(QMouseEvent *event)
     if (!(event->modifiers() & Qt::ControlModifier))
     {
         // clearSelection doesn't work properly here so we go through the elements.
-        const QList<QListWidgetItem*> items = selectedItems();
-        for(auto *item: items)
+        const QList<QListWidgetItem *> items = selectedItems();
+        for (auto *item : items)
         {
             item->setSelected(false);
         }
@@ -142,10 +160,10 @@ void VPCarrouselPieceList::startDrag(Qt::DropActions supportedActions)
 {
     Q_UNUSED(supportedActions)
 
-    QListWidgetItem* _item = currentItem();
-    if(_item->type() == VPCarrouselPiece::Type)
+    QListWidgetItem *_item = currentItem();
+    if (_item->type() == VPCarrouselPiece::Type)
     {
-        auto *pieceItem = dynamic_cast<VPCarrouselPiece *> (_item);
+        auto *pieceItem = dynamic_cast<VPCarrouselPiece *>(_item);
         SCASSERT(pieceItem != nullptr)
 
         if (m_carrousel == nullptr)
@@ -169,7 +187,7 @@ void VPCarrouselPieceList::startDrag(Qt::DropActions supportedActions)
 
         drag->setDragCursor(VPMimeDataPiece::DragCursor(pixmap), Qt::MoveAction);
         drag->setMimeData(mimeData);
-        if(drag->exec() == Qt::MoveAction)
+        if (drag->exec() == Qt::MoveAction)
         {
             m_carrousel->Refresh();
             piece->SetSelected(false);
@@ -184,7 +202,7 @@ void VPCarrouselPieceList::startDrag(Qt::DropActions supportedActions)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPCarrouselPieceList::dragMoveEvent(QDragMoveEvent* e)
+void VPCarrouselPieceList::dragMoveEvent(QDragMoveEvent *e)
 {
     qCDebug(pCarrouselPieceList, "drag move");
     e->acceptProposedAction();
@@ -193,13 +211,13 @@ void VPCarrouselPieceList::dragMoveEvent(QDragMoveEvent* e)
 //---------------------------------------------------------------------------------------------------------------------
 void VPCarrouselPieceList::contextMenuEvent(QContextMenuEvent *event)
 {
-    QListWidgetItem* _item = currentItem();
-    if(_item == nullptr || _item->type() != VPCarrouselPiece::Type)
+    QListWidgetItem *_item = currentItem();
+    if (_item == nullptr || _item->type() != VPCarrouselPiece::Type)
     {
         return;
     }
 
-    auto *pieceItem = dynamic_cast<VPCarrouselPiece *> (_item);
+    auto *pieceItem = dynamic_cast<VPCarrouselPiece *>(_item);
     SCASSERT(pieceItem != nullptr)
 
     VPPiecePtr piece = pieceItem->GetPiece();
@@ -212,7 +230,7 @@ void VPCarrouselPieceList::contextMenuEvent(QContextMenuEvent *event)
 
     QMenu menu;
 
-    QVector<QAction*> moveToActions;
+    QVector<QAction *> moveToActions;
 
     if (not piece->Sheet().isNull())
     {
@@ -227,7 +245,7 @@ void VPCarrouselPieceList::contextMenuEvent(QContextMenuEvent *event)
             {
                 if (not sheet.isNull())
                 {
-                    QAction* moveToSheet = moveMenu->addAction(sheet->GetName());
+                    QAction *moveToSheet = moveMenu->addAction(sheet->GetName());
                     moveToSheet->setData(QVariant::fromValue(sheet));
                     moveToActions.append(moveToSheet);
                 }
@@ -244,13 +262,13 @@ void VPCarrouselPieceList::contextMenuEvent(QContextMenuEvent *event)
     QAction *removeAction = menu.addAction(tr("Remove from Sheet"));
     removeAction->setVisible(false);
 
-    if(not m_pieceList.isEmpty() && ConstFirst(m_pieceList)->Sheet() == nullptr)
+    if (not m_pieceList.isEmpty() && ConstFirst(m_pieceList)->Sheet() == nullptr)
     {
         moveAction->setVisible(true);
         deleteAction->setVisible(true);
     }
 
-    if(not m_pieceList.isEmpty() && ConstFirst(m_pieceList)->Sheet() != nullptr)
+    if (not m_pieceList.isEmpty() && ConstFirst(m_pieceList)->Sheet() != nullptr)
     {
         removeAction->setVisible(true);
     }
@@ -288,15 +306,30 @@ void VPCarrouselPieceList::contextMenuEvent(QContextMenuEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPCarrouselPieceList::InitStyleSheet()
+{
+    if (VTheme::ColorSheme() == VColorSheme::Dark)
+    {
+        setStyleSheet("QListWidget::item{border: 2px solid transparent;}"
+                      "QListWidget::item:selected {border: 2px solid rgb(255,160,160);}");
+    }
+    else
+    {
+        setStyleSheet("QListWidget::item{border: 2px solid transparent; color: black;}  "
+                      "QListWidget::item:selected {border: 2px solid rgb(255,160,160);}");
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPCarrouselPieceList::on_SelectionChangedExternal()
 {
     blockSignals(true);
-    for(int i = 0; i < count(); ++i)
+    for (int i = 0; i < count(); ++i)
     {
-        QListWidgetItem* _item = item(i);
-        if(_item->type() == VPCarrouselPiece::Type)
+        QListWidgetItem *_item = item(i);
+        if (_item->type() == VPCarrouselPiece::Type)
         {
-            auto *itemPiece = dynamic_cast<VPCarrouselPiece *> (_item);
+            auto *itemPiece = dynamic_cast<VPCarrouselPiece *>(_item);
             SCASSERT(itemPiece != nullptr)
             itemPiece->RefreshSelection();
         }

@@ -28,13 +28,13 @@
 #ifndef DIALOGTOOLBOX_H
 #define DIALOGTOOLBOX_H
 
+#include <QSharedPointer>
 #include <QString>
 #include <QtGlobal>
-#include <QSharedPointer>
 
-#include "../vpatterndb/variables/vinternalvariable.h"
-#include "../vmisc/typedef.h"
 #include "../vgeometry/vgeometrydef.h"
+#include "../vmisc/typedef.h"
+#include "../vpatterndb/variables/vinternalvariable.h"
 
 class QPlainTextEdit;
 class QPushButton;
@@ -48,6 +48,7 @@ class QLineEdit;
 class VContainer;
 class QListWidget;
 class VPieceNode;
+class QDialogButtonBox;
 
 constexpr int formulaTimerTimeout = 300;
 
@@ -59,7 +60,7 @@ QT_WARNING_DISABLE_GCC("-Weffc++")
 struct FormulaData
 {
     QString formula;
-    const QHash<QString, QSharedPointer<VInternalVariable> > *variables{nullptr};
+    const QHash<QString, QSharedPointer<VInternalVariable>> *variables{nullptr};
     QLabel *labelEditFormula{nullptr};
     QLabel *labelResult{nullptr};
     QString postfix;
@@ -70,14 +71,14 @@ struct FormulaData
 QT_WARNING_POP
 
 auto RowNode(QListWidget *listWidget, int i) -> VPieceNode;
-void   MoveCursorToEnd(QPlainTextEdit *plainTextEdit);
-void   DeployFormula(QDialog *dialog, QPlainTextEdit *formula, QPushButton *buttonGrowLength, int formulaBaseHeight);
+void MoveCursorToEnd(QPlainTextEdit *plainTextEdit);
+void DeployFormula(QDialog *dialog, QPlainTextEdit *formula, QPushButton *buttonGrowLength, int formulaBaseHeight);
 auto FilterObject(QObject *object, QEvent *event) -> bool;
 auto EvalToolFormula(QDialog *dialog, const FormulaData &data, bool &flag) -> qreal;
-void   ChangeColor(QWidget *widget, const QColor &color);
+void ChangeColor(QWidget *widget, const QColor &color);
 auto OkColor(QWidget *widget) -> QColor;
-void   CheckPointLabel(QDialog *dialog, QLineEdit* edit, QLabel *labelEditNamePoint, const QString &pointName,
-                       const VContainer *data, bool &flag);
+void CheckPointLabel(QDialog *dialog, QLineEdit *edit, QLabel *labelEditNamePoint, const QString &pointName,
+                     const VContainer *data, bool &flag);
 auto FindNotExcludedNodeDown(QListWidget *listWidget, int candidate) -> int;
 auto FindNotExcludedNodeUp(QListWidget *listWidget, int candidate) -> int;
 auto FindNotExcludedPointDown(QListWidget *listWidget, int start) -> int;
@@ -89,10 +90,11 @@ auto EachPointLabelIsUnique(QListWidget *listWidget) -> bool;
 auto InvalidSegment(QListWidget *listWidget, const VContainer *data, QString &error) -> bool;
 auto DialogWarningIcon() -> QString;
 auto NodeFont(QFont font, bool nodeExcluded = false) -> QFont;
-void   CurrentCurveLength(vidtype curveId, VContainer *data);
-void   SetTabStopDistance(QPlainTextEdit *edit, int tabWidthChar=4);
-auto LineColor(int size, const QString &color) -> QIcon;
+void CurrentCurveLength(vidtype curveId, VContainer *data);
+void SetTabStopDistance(QPlainTextEdit *edit, int tabWidthChar = 4);
+auto LineColor(const QColor &borderColor, int size, const QString &color) -> QIcon;
 auto SegmentAliases(GOType curveType, const QString &alias1, const QString &alias2) -> QPair<QString, QString>;
 auto GetNodeName(const VContainer *data, const VPieceNode &node, bool showPassmarkDetails = false) -> QString;
+void InitDialogButtonBoxIcons(QDialogButtonBox *buttonBox);
 
 #endif // DIALOGTOOLBOX_H

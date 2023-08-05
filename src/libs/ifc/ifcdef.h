@@ -179,9 +179,9 @@ extern const QString TypeLineDashDotDotLine;
 auto StylesList() -> QStringList;
 auto LineStyleToPenStyle(const QString &typeLine) -> Qt::PenStyle;
 auto PenStyleToLineStyle(Qt::PenStyle penStyle) -> QString;
-auto PenStylePic(Qt::PenStyle style) -> QIcon;
-auto LineStylesPics() -> QMap<QString, QIcon>;
-auto CurvePenStylesPics() -> QMap<QString, QIcon>;
+auto PenStylePic(QColor backgroundColor, QColor textColor, Qt::PenStyle style) -> QIcon;
+auto LineStylesPics(QColor backgroundColor, QColor textColor) -> QMap<QString, QIcon>;
+auto CurvePenStylesPics(QColor backgroundColor, QColor textColor) -> QMap<QString, QIcon>;
 
 extern const QString ColorDefault;
 extern const QString ColorBlack;

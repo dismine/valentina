@@ -44,14 +44,15 @@
 #include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../support/dialogeditwrongformula.h"
+#include "../vgeometry/vpointf.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
-#include "../vpatterndb/vtranslatevars.h"
 #include "../vpatterndb/vcontainer.h"
-#include "ui_dialogbisector.h"
-#include "../vwidgets/vabstractmainwindow.h"
+#include "../vpatterndb/vtranslatevars.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolbisector.h"
-#include "../vgeometry/vpointf.h"
+#include "../vwidgets/vabstractmainwindow.h"
+#include "ui_dialogbisector.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -60,11 +61,13 @@
  * @param parent parent widget
  */
 DialogBisector::DialogBisector(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogBisector),
-      m_timerFormula(new QTimer(this))
+  : DialogTool(data, toolId, parent),
+    ui(new Ui::DialogBisector),
+    m_timerFormula(new QTimer(this))
 {
     ui->setupUi(this);
+
+    InitIcons();
 
     m_timerFormula->setSingleShot(true);
     connect(m_timerFormula, &QTimer::timeout, this, &DialogBisector::EvalFormula);
@@ -72,7 +75,7 @@ DialogBisector::DialogBisector(const VContainer *data, quint32 toolId, QWidget *
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
     ui->lineEditNamePoint->setText(
-                VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
+        VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     this->m_formulaBaseHeight = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
 
@@ -80,27 +83,25 @@ DialogBisector::DialogBisector(const VContainer *data, quint32 toolId, QWidget *
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
-    FillComboBoxTypeLine(ui->comboBoxLineType, LineStylesPics());
+    FillComboBoxTypeLine(ui->comboBoxLineType, LineStylesPics(ui->comboBoxLineType->palette().color(QPalette::Base),
+                                                              ui->comboBoxLineType->palette().color(QPalette::Text)));
     FillComboBoxPoints(ui->comboBoxThirdPoint);
     FillComboBoxLineColors(ui->comboBoxLineColor);
 
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogBisector::FXLength);
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
-    {
-        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, m_pointName, this->data, m_flagName);
-        CheckState();
-    });
-    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        m_timerFormula->start(formulaTimerTimeout);
-    });
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
+            [this]()
+            {
+                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, m_pointName, this->data,
+                                m_flagName);
+                CheckState();
+            });
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerFormula->start(formulaTimerTimeout); });
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogBisector::DeployFormulaTextEdit);
-    connect(ui->comboBoxFirstPoint, &QComboBox::currentTextChanged,
-            this, &DialogBisector::PointNameChanged);
-    connect(ui->comboBoxSecondPoint, &QComboBox::currentTextChanged,
-            this, &DialogBisector::PointNameChanged);
-    connect(ui->comboBoxThirdPoint, &QComboBox::currentTextChanged,
-            this, &DialogBisector::PointNameChanged);
+    connect(ui->comboBoxFirstPoint, &QComboBox::currentTextChanged, this, &DialogBisector::PointNameChanged);
+    connect(ui->comboBoxSecondPoint, &QComboBox::currentTextChanged, this, &DialogBisector::PointNameChanged);
+    connect(ui->comboBoxThirdPoint, &QComboBox::currentTextChanged, this, &DialogBisector::PointNameChanged);
 
     vis = new VisToolBisector(data);
 
@@ -193,7 +194,7 @@ auto DialogBisector::GetPointName() const -> QString
  */
 void DialogBisector::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare)// After first choose we ignore all objects
+    if (prepare) // After first choose we ignore all objects
     {
         return;
     }
@@ -261,8 +262,8 @@ void DialogBisector::SetTypeLine(const QString &value)
  */
 void DialogBisector::SetFormula(const QString &value)
 {
-    m_formula = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    m_formula = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (m_formula.length() > 80)
     {
@@ -368,8 +369,7 @@ void DialogBisector::ShowDialog(bool click)
         const QSharedPointer<VPointF> p2 = data->GeometricObject<VPointF>(GetSecondPointId());
         const QSharedPointer<VPointF> p3 = data->GeometricObject<VPointF>(GetThirdPointId());
 
-        qreal angle = VToolBisector::BisectorAngle(static_cast<QPointF>(*p1),
-                                                   static_cast<QPointF>(*p2),
+        qreal angle = VToolBisector::BisectorAngle(static_cast<QPointF>(*p1), static_cast<QPointF>(*p2),
                                                    static_cast<QPointF>(*p3));
 
         QLineF baseLine(static_cast<QPointF>(*p2), static_cast<QPointF>(*p3));
@@ -415,6 +415,24 @@ void DialogBisector::closeEvent(QCloseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogBisector::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        InitIcons();
+        InitDialogButtonBoxIcons(ui->buttonBox);
+    }
+
+    // remember to call base class implementation
+    DialogTool::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogBisector::ChosenThirdPoint(quint32 id)
 {
     QSet<quint32> set;
@@ -426,8 +444,7 @@ void DialogBisector::ChosenThirdPoint(quint32 id)
     {
         if (SetObject(id, ui->comboBoxThirdPoint, QString()))
         {
-            auto *window = qobject_cast<VAbstractMainWindow *>(
-                VAbstractValApplication::VApp()->getMainWindow());
+            auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
             SCASSERT(window != nullptr)
 
             auto *line = qobject_cast<VisToolBisector *>(vis);
@@ -454,6 +471,15 @@ void DialogBisector::FinishCreating()
     emit ToolTip(QString());
     setModal(true);
     show();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogBisector::InitIcons()
+{
+    QString resource = QStringLiteral("icon");
+
+    ui->toolButtonExprLength->setIcon(VTheme::GetIconResource(resource, QStringLiteral("24x24/fx.png")));
+    ui->label_3->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/equal.png")));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

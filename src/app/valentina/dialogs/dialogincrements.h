@@ -29,9 +29,9 @@
 #ifndef DIALOGINCREMENTS_H
 #define DIALOGINCREMENTS_H
 
+#include "../vmisc/vtablesearch.h"
 #include "../vtools/dialogs/tools/dialogtool.h"
 #include "../xml/vpattern.h"
-#include "../vmisc/vtablesearch.h"
 
 #include <QPair>
 
@@ -39,7 +39,7 @@ class VIndividualMeasurements;
 
 namespace Ui
 {
-    class DialogIncrements;
+class DialogIncrements;
 }
 
 /**
@@ -48,6 +48,7 @@ namespace Ui
 class DialogIncrements : public DialogTool
 {
     Q_OBJECT // NOLINT
+
 public:
     DialogIncrements(VContainer *data, VPattern *doc, QWidget *parent = nullptr);
     ~DialogIncrements() override;
@@ -61,12 +62,12 @@ public slots:
     void FullUpdateFromFile();
 
 protected:
-    void closeEvent ( QCloseEvent * event ) override;
-    void changeEvent ( QEvent * event) override;
+    void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
     auto eventFilter(QObject *object, QEvent *event) -> bool override;
-    void showEvent( QShowEvent *event ) override;
+    void showEvent(QShowEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
-    auto IsValid() const -> bool final {return true;}
+    auto IsValid() const -> bool final { return true; }
 private slots:
     void ShowIncrementDetails();
     void AddIncrement();
@@ -111,11 +112,10 @@ private:
     QMenu *m_searchHistory;
     QMenu *m_searchHistoryPC;
 
-    template <typename T>
-    void FillTable(const QMap<QString, T> &varTable, QTableWidget *table);
+    template <typename T> void FillTable(const QMap<QString, T> &varTable, QTableWidget *table);
 
-    static void FillIncrementsTable(QTableWidget *table, const QMap<QString, QSharedPointer<VIncrement> > &increments,
-                             bool takePreviewCalculations);
+    static void FillIncrementsTable(QTableWidget *table, const QMap<QString, QSharedPointer<VIncrement>> &increments,
+                                    bool takePreviewCalculations);
 
     void FillIncrements();
     void FillPreviewCalculations();
@@ -129,16 +129,16 @@ private:
     void ShowUnits();
     static void ShowHeaderUnits(QTableWidget *table, int column, const QString &unit);
 
-    static auto AddCell(QTableWidget *table, const QString &text, int row, int column, int aligment,
-                              bool ok = true) -> QTableWidgetItem*;
+    static auto AddCell(QTableWidget *table, const QString &text, int row, int column, int aligment, bool ok = true)
+        -> QTableWidgetItem *;
     static auto AddSeparatorCell(QTableWidget *table, const QString &text, int row, int column, int aligment,
-                          bool ok = true) -> QTableWidgetItem*;
+                                 bool ok = true) -> QTableWidgetItem *;
 
     auto GetCustomName() const -> QString;
     static auto ClearIncrementName(const QString &name) -> QString;
 
     static auto EvalIncrementFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label,
-                              bool special) -> bool;
+                                     bool special) -> bool;
     void Controls(QTableWidget *table);
     void EnableDetails(QTableWidget *table, bool enabled);
 
@@ -161,6 +161,8 @@ private:
     void SavePreviewCalculationsSearchRequest();
     void UpdateSearchControlsTooltips();
     static void InitIncrementUnits(QComboBox *combo);
+
+    void InitIcons();
 };
 
 #endif // DIALOGINCREMENTS_H

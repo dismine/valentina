@@ -48,6 +48,7 @@
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
 #include "../vmisc/def.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/vcontainer.h"
@@ -70,6 +71,8 @@ DialogSpline::DialogSpline(const VContainer *data, quint32 toolId, QWidget *pare
     timerLength2(new QTimer(this))
 {
     ui->setupUi(this);
+
+    InitIcons();
 
     formulaBaseHeightAngle1 = ui->plainTextEditAngle1F->height();
     formulaBaseHeightAngle2 = ui->plainTextEditAngle2F->height();
@@ -96,7 +99,9 @@ DialogSpline::DialogSpline(const VContainer *data, quint32 toolId, QWidget *pare
     FillComboBoxPoints(ui->comboBoxP1);
     FillComboBoxPoints(ui->comboBoxP4);
     FillComboBoxLineColors(ui->comboBoxColor);
-    FillComboBoxTypeLine(ui->comboBoxPenStyle, CurvePenStylesPics());
+    FillComboBoxTypeLine(ui->comboBoxPenStyle,
+                         CurvePenStylesPics(ui->comboBoxPenStyle->palette().color(QPalette::Base),
+                                            ui->comboBoxPenStyle->palette().color(QPalette::Text)));
 
     ui->doubleSpinBoxApproximationScale->setMaximum(maxCurveApproximationScale);
 
@@ -223,6 +228,24 @@ void DialogSpline::closeEvent(QCloseEvent *event)
     ui->plainTextEditLength1F->blockSignals(true);
     ui->plainTextEditLength2F->blockSignals(true);
     DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSpline::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        InitIcons();
+        InitDialogButtonBoxIcons(ui->buttonBox);
+    }
+
+    // remember to call base class implementation
+    DialogTool::changeEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -468,6 +491,24 @@ auto DialogSpline::CurrentSpline() const -> VSpline
     spline.SetAliasSuffix(ui->lineEditAlias->text());
 
     return spline;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSpline::InitIcons()
+{
+    const QString resource = QStringLiteral("icon");
+
+    const QString fxIcon = QStringLiteral("24x24/fx.png");
+    ui->toolButtonExprLength1->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprAngle1->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprLength2->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprAngle2->setIcon(VTheme::GetIconResource(resource, fxIcon));
+
+    const QString equalIcon = QStringLiteral("24x24/equal.png");
+    ui->label_5->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    ui->label_8->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    ui->label_9->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    ui->label_10->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

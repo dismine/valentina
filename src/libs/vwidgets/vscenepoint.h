@@ -29,48 +29,60 @@
 #ifndef VSCENEPOINT_H
 #define VSCENEPOINT_H
 
-#include <QtGlobal>
 #include <QGraphicsEllipseItem>
+#include <QtGlobal>
 
 #include "../vmisc/def.h"
+#include "../vmisc/theme/themeDef.h"
 
 class VGraphicsSimpleTextItem;
 class VPointF;
 class VScaledLine;
 
-class VScenePoint: public QGraphicsEllipseItem
+class VScenePoint : public QGraphicsEllipseItem
 {
 public:
-    explicit VScenePoint(QGraphicsItem *parent = nullptr);
-    virtual ~VScenePoint() = default;
+    explicit VScenePoint(VColorRole role, QGraphicsItem *parent = nullptr);
+    ~VScenePoint() override = default;
 
-    virtual auto type() const -> int override { return Type; }
-    enum { Type = UserType + static_cast<int>(Vis::ScenePoint)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::ScenePoint)
+    };
 
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                       QWidget *widget = nullptr) override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
     virtual void RefreshPointGeometry(const VPointF &point);
 
     void RefreshLine();
 
+    auto GetColorRole() const -> VColorRole;
+    void SetColorRole(VColorRole role);
+
+    auto GetLabelLineColorRole() const -> VColorRole;
+    void SetLabelLineColorRole(VColorRole role);
+
+    auto GetLabelTextColorRole() const -> VColorRole;
+    void SetLabelTextColorRole(VColorRole role);
+
+    auto GetLabelTextHoverColorRole() const -> VColorRole;
+    void SetLabelTextHoverColorRole(VColorRole role);
+
 protected:
     /** @brief namePoint point label. */
-    VGraphicsSimpleTextItem *m_namePoint;
+    VGraphicsSimpleTextItem *m_namePoint; // NOLINT(cppcoreguidelines-non-private-member-variables-in-classes)
 
     /** @brief lineName line what we see if label moved too away from point. */
-    VScaledLine             *m_lineName;
+    VScaledLine *m_lineName; // NOLINT(cppcoreguidelines-non-private-member-variables-in-classes)
 
-    bool m_onlyPoint;
-    bool m_isHovered;
-    bool m_showLabel;
+    bool m_onlyPoint{false}; // NOLINT(cppcoreguidelines-non-private-member-variables-in-classes)
+    bool m_isHovered{false}; // NOLINT(cppcoreguidelines-non-private-member-variables-in-classes)
+    bool m_showLabel{true};  // NOLINT(cppcoreguidelines-non-private-member-variables-in-classes)
 
-    /** @brief m_baseColor base color of point. */
-    QColor m_baseColor;
+    bool m_selectedFromChild{false}; // NOLINT(cppcoreguidelines-non-private-member-variables-in-classes)
 
-    bool m_selectedFromChild;
-
-    virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
-    virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
 
     void SetOnlyPoint(bool value);
     auto IsOnlyPoint() const -> bool;
@@ -79,6 +91,20 @@ private:
     Q_DISABLE_COPY_MOVE(VScenePoint) // NOLINT
 
     void ScaleMainPenWidth(qreal scale);
+
+    VColorRole m_role;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VScenePoint::GetColorRole() const -> VColorRole
+{
+    return m_role;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VScenePoint::SetColorRole(VColorRole role)
+{
+    m_role = role;
+}
 
 #endif // VSCENEPOINT_H

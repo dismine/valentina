@@ -228,7 +228,7 @@
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
-        <string notr="true">...</string>
+        <string notr="true"></string>
        </property>
        <property name="icon">
         <iconset theme="go-up">
@@ -248,7 +248,7 @@
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Next %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
-        <string notr="true">...</string>
+        <string notr="true"></string>
        </property>
        <property name="icon">
         <iconset theme="go-down">

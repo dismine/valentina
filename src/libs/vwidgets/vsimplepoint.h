@@ -29,7 +29,6 @@
 #ifndef VSIMPLEPOINT_H
 #define VSIMPLEPOINT_H
 
-
 #include <QColor>
 #include <QGraphicsItem>
 #include <QMetaObject>
@@ -40,8 +39,8 @@
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
-#include "vabstractsimple.h"
 #include "../vwidgets/vscenepoint.h"
+#include "vabstractsimple.h"
 
 class VGraphicsSimpleTextItem;
 class VPointF;
@@ -49,15 +48,19 @@ class VPointF;
 class VSimplePoint : public VAbstractSimple, public VScenePoint
 {
     Q_OBJECT // NOLINT
+
 public:
-    VSimplePoint(quint32 id, const QColor &currentColor, QObject *parent = nullptr);
-    virtual ~VSimplePoint() = default;
+    VSimplePoint(quint32 id, VColorRole role, QObject *parent = nullptr);
+    ~VSimplePoint() override = default;
 
-    virtual auto type() const -> int override { return Type; }
-    enum { Type = UserType + static_cast<int>(Vis::SimplePoint)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::SimplePoint)
+    };
 
-    using VScenePoint::SetOnlyPoint;
     using VScenePoint::IsOnlyPoint;
+    using VScenePoint::SetOnlyPoint;
 
     void SetVisualizationMode(bool value);
     auto IsVisualizationMode() const -> bool;
@@ -68,7 +71,8 @@ public:
     void EnableToolMove(bool move);
     void AllowLabelHover(bool enabled);
     void AllowLabelSelecting(bool enabled);
-    virtual void ToolSelectionType(const SelectionType &type) override;
+    void ToolSelectionType(const SelectionType &type) override;
+
 signals:
     /**
      * @brief Choosed send id when clicked.
@@ -85,13 +89,13 @@ public slots:
     void ChangedPosition(const QPointF &pos);
 
 protected:
-    virtual void     mousePressEvent( QGraphicsSceneMouseEvent * event ) override;
-    virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
-    virtual void     hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
-    virtual void     hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
-    virtual void     keyReleaseEvent ( QKeyEvent * event ) override;
-    virtual auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
-    virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) override;
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
+    void keyReleaseEvent(QKeyEvent *event) override;
+    auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
+    void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
 
 private:
     Q_DISABLE_COPY_MOVE(VSimplePoint) // NOLINT

@@ -64,7 +64,7 @@ public:
       : QEvent(static_cast<QEvent::Type>(MyCustomEventType))
     {
     }
-    virtual ~UserChangeEvent() override;
+    ~UserChangeEvent() override;
 };
 
 class VPropertyPrivate;

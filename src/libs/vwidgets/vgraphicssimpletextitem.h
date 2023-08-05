@@ -29,7 +29,6 @@
 #ifndef VGRAPHICSSIMPLETEXTITEM_H
 #define VGRAPHICSSIMPLETEXTITEM_H
 
-
 #include <QGraphicsItem>
 #include <QGraphicsSimpleTextItem>
 #include <QMetaObject>
@@ -40,6 +39,12 @@
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
+#include "qtclasshelpermacros.h"
+#include "theme/themeDef.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
+#include "../vmisc/defglobal.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
 /**
  * @brief The VGraphicsSimpleTextItem class pointer label.
@@ -47,16 +52,20 @@
 class VGraphicsSimpleTextItem : public QObject, public QGraphicsSimpleTextItem
 {
     Q_OBJECT // NOLINT
+
 public:
-    explicit VGraphicsSimpleTextItem(QGraphicsItem *parent = nullptr);
-    explicit VGraphicsSimpleTextItem( const QString & text, QGraphicsItem *parent = nullptr );
-    virtual ~VGraphicsSimpleTextItem() =default;
+    explicit VGraphicsSimpleTextItem(VColorRole textColor, VColorRole textHoverColor, QGraphicsItem *parent = nullptr);
+    explicit VGraphicsSimpleTextItem(const QString &text, VColorRole textColor, VColorRole textHoverColor,
+                                     QGraphicsItem *parent = nullptr);
+    ~VGraphicsSimpleTextItem() override = default;
 
-    virtual auto type() const -> int override { return Type; }
-    enum { Type = UserType + static_cast<int>(Vis::GraphicsSimpleTextItem)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::GraphicsSimpleTextItem)
+    };
 
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                       QWidget *widget = nullptr) override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 
     void setEnabled(bool enabled);
     void LabelSelectionType(const SelectionType &type);
@@ -65,44 +74,84 @@ public:
 
     void SetRealPos(const QPointF &pos);
 
-    auto BaseColor() const -> QColor;
-    void   SetBaseColor(const QColor &baseColor);
-
     void SetDestination(const QPointF &destination);
+
+    void RefreshColor();
+
+    VColorRole GetTextColor() const;
+    void SetTextColor(VColorRole newTextColor);
+
+    VColorRole GetTextHoverColor() const;
+    void SetTextHoverColor(VColorRole newTextHoverColor);
 
 signals:
     /**
      * @brief NameChangePosition emit when label change position.
      * @param pos new posotion.
      */
-    void         NameChangePosition(const QPointF &pos);
+    void NameChangePosition(const QPointF &pos);
     /**
      * @brief ShowContextMenu emit when need show tool context menu.
      * @param event context menu event.
      */
-    void         ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
-    void         DeleteTool();
-    void         PointChoosed();
-    void         PointSelected(bool selected);
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
+    void DeleteTool();
+    void PointChoosed();
+    void PointSelected(bool selected);
+
 protected:
-    virtual auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
-    virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent *event ) override;
-    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent *event ) override;
-    virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent *event ) override;
-    virtual void mousePressEvent( QGraphicsSceneMouseEvent * event ) override;
-    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
-    virtual void keyReleaseEvent ( QKeyEvent * event ) override;
+    auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
+    void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+    void keyReleaseEvent(QKeyEvent *event) override;
+
 private:
-    SelectionType selectionType;
-    qreal         m_oldScale;
-    bool          m_showParentTooltip;
-    QPointF       m_realPos{};
-    QColor        m_baseColor{Qt::black};
-    QPointF       m_destination{};
+    Q_DISABLE_COPY_MOVE(VGraphicsSimpleTextItem) // NOLINT
+    SelectionType selectionType{SelectionType::ByMouseRelease};
+    qreal m_oldScale{1};
+    bool m_showParentTooltip{true};
+    QPointF m_realPos{};
+    QPointF m_destination{};
+    bool m_hoverFlag{false};
+    VColorRole m_textColor;
+    VColorRole m_textHoverColor;
 
     void Init();
 
     void CorrectLabelPosition();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VGraphicsSimpleTextItem::GetTextHoverColor() const -> VColorRole
+{
+    return m_textHoverColor;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VGraphicsSimpleTextItem::SetTextHoverColor(VColorRole newTextHoverColor)
+{
+    m_textHoverColor = newTextHoverColor;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VGraphicsSimpleTextItem::GetTextColor() const -> VColorRole
+{
+    return m_textColor;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VGraphicsSimpleTextItem::SetTextColor(VColorRole newTextColor)
+{
+    m_textColor = newTextColor;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VGraphicsSimpleTextItem::SetDestination(const QPointF &destination)
+{
+    m_destination = destination;
+}
 
 #endif // VGRAPHICSSIMPLETEXTITEM_H

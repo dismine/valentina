@@ -29,65 +29,75 @@
 #ifndef VGRAINLINEITEM_H
 #define VGRAINLINEITEM_H
 
-#include "vpieceitem.h"
-#include "../vpatterndb/floatItemData/floatitemdef.h"
 #include "../vmisc/def.h"
+#include "../vmisc/theme/themeDef.h"
+#include "../vpatterndb/floatItemData/floatitemdef.h"
+#include "vpieceitem.h"
 
 class VPieceGrainline;
 
 class VGrainlineItem final : public VPieceItem
 {
     Q_OBJECT // NOLINT
+
 public:
-    explicit VGrainlineItem(QGraphicsItem* pParent = nullptr);
+    explicit VGrainlineItem(VColorRole role, QGraphicsItem *pParent = nullptr);
     ~VGrainlineItem() override = default;
 
     auto shape() const -> QPainterPath override;
 
-    void paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption, QWidget* pWidget) override;
-    void UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal dLength, GrainlineArrowDirection eAT);
+    void paint(QPainter *pP, const QStyleOptionGraphicsItem *pOption, QWidget *pWidget) override;
+    void UpdateGeometry(const QPointF &ptPos, qreal dRotation, qreal dLength, GrainlineArrowDirection eAT);
 
-    auto type() const -> int override {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::GrainlineItem)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::GrainlineItem)
+    };
 
     auto Grainline() const -> VPieceGrainline;
 
+    auto GetColor() const -> QColor;
+    void SetColor(const QColor &color);
+
 signals:
     void SignalResized(qreal dLength);
-    void SignalRotated(qreal dRot, const QPointF& ptNewPos);
+    void SignalRotated(qreal dRot, const QPointF &ptNewPos);
 
 protected:
-    void mousePressEvent(QGraphicsSceneMouseEvent* pME) override;
-    void mouseMoveEvent(QGraphicsSceneMouseEvent* pME) override;
-    void mouseReleaseEvent(QGraphicsSceneMouseEvent* pME) override;
-    void hoverEnterEvent(QGraphicsSceneHoverEvent* pME) override;
-    void hoverLeaveEvent(QGraphicsSceneHoverEvent* pME) override;
+    void mousePressEvent(QGraphicsSceneMouseEvent *pME) override;
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *pME) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *pME) override;
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *pME) override;
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *pME) override;
     void Update() override;
     void UpdateRectangle();
 
     auto GetAngle(const QPointF &pt) const -> double override;
 
-    static auto Rotate(const QPointF& pt, const QPointF& ptCenter, qreal dAng) -> QPointF;
+    static auto Rotate(const QPointF &pt, const QPointF &ptCenter, qreal dAng) -> QPointF;
     auto GetInsideCorner(int i, qreal dDist) const -> QPointF;
 
 private:
     Q_DISABLE_COPY_MOVE(VGrainlineItem) // NOLINT
-    qreal                   m_dRotation{0};
-    qreal                   m_dStartRotation{0};
-    qreal                   m_dLength{0};
-    QPolygonF               m_polyBound{};
-    QPointF                 m_ptStartPos{};
-    QPointF                 m_ptStartMove{};
-    QPolygonF               m_polyResize{};
-    qreal                   m_dStartLength{0};
-    QPointF                 m_ptStart{};
-    QPointF                 m_ptFinish{};
-    QPointF                 m_ptSecondaryStart{};
-    QPointF                 m_ptSecondaryFinish{};
-    QPointF                 m_ptCenter{};
-    qreal                   m_dAngle{0};
+    qreal m_dRotation{0};
+    qreal m_dStartRotation{0};
+    qreal m_dLength{0};
+    QPolygonF m_polyBound{};
+    QPointF m_ptStartPos{};
+    QPointF m_ptStartMove{};
+    QPolygonF m_polyResize{};
+    qreal m_dStartLength{0};
+    QPointF m_ptStart{};
+    QPointF m_ptFinish{};
+    QPointF m_ptSecondaryStart{};
+    QPointF m_ptSecondaryFinish{};
+    QPointF m_ptCenter{};
+    qreal m_dAngle{0};
     GrainlineArrowDirection m_eArrowType{GrainlineArrowDirection::twoWaysUpDown};
-    double                  m_penWidth{1};
+    double m_penWidth{1};
+    VColorRole m_role;
+    QColor m_color{Qt::black};
 
     auto MainShape() const -> QPainterPath;
 
@@ -97,5 +107,17 @@ private:
 
     void UpdatePolyResize();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VGrainlineItem::GetColor() const -> QColor
+{
+    return m_color;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VGrainlineItem::SetColor(const QColor &color)
+{
+    m_color = color;
+}
 
 #endif // VGRAINLINEITEM_H

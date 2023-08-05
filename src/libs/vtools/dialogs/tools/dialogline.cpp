@@ -36,8 +36,8 @@
 #include <QPointer>
 #include <QVariant>
 
-#include "../../visualization/visualization.h"
 #include "../../visualization/line/vistoolline.h"
+#include "../../visualization/visualization.h"
 #include "../ifc/ifcdef.h"
 #include "dialogtool.h"
 #include "ui_dialogline.h"
@@ -49,9 +49,9 @@
  * @param parent parent widget
  */
 DialogLine::DialogLine(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogLine),
-      flagError(true)
+  : DialogTool(data, toolId, parent),
+    ui(new Ui::DialogLine),
+    flagError(true)
 {
     ui->setupUi(this);
     InitOkCancelApply(ui);
@@ -60,16 +60,15 @@ DialogLine::DialogLine(const VContainer *data, quint32 toolId, QWidget *parent)
     FillComboBoxPoints(ui->comboBoxSecondPoint);
     FillComboBoxLineColors(ui->comboBoxLineColor);
 
-    QMap<QString, QIcon> stylesPics = LineStylesPics();
-    stylesPics.remove(TypeLineNone);// Prevent hiding line
+    QMap<QString, QIcon> stylesPics = LineStylesPics(ui->comboBoxLineType->palette().color(QPalette::Base),
+                                                     ui->comboBoxLineType->palette().color(QPalette::Text));
+    stylesPics.remove(TypeLineNone); // Prevent hiding line
     FillComboBoxTypeLine(ui->comboBoxLineType, stylesPics);
 
     number = 0;
 
-    connect(ui->comboBoxFirstPoint, &QComboBox::currentTextChanged,
-            this, &DialogLine::PointNameChanged);
-    connect(ui->comboBoxSecondPoint, &QComboBox::currentTextChanged,
-            this, &DialogLine::PointNameChanged);
+    connect(ui->comboBoxFirstPoint, &QComboBox::currentTextChanged, this, &DialogLine::PointNameChanged);
+    connect(ui->comboBoxSecondPoint, &QComboBox::currentTextChanged, this, &DialogLine::PointNameChanged);
 
     vis = new VisToolLine(data);
 
@@ -179,7 +178,7 @@ void DialogLine::SaveData()
  */
 void DialogLine::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare == false)// After first choose we ignore all objects
+    if (prepare == false) // After first choose we ignore all objects
     {
         if (type == SceneObject::Point)
         {

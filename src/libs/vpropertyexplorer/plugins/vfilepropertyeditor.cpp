@@ -35,7 +35,6 @@
 #include <QSizePolicy>
 #include <QToolButton>
 #include <QUrl>
-#include <Qt>
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 #include <QRegularExpression>
@@ -44,8 +43,13 @@
 #endif
 
 VPE::VFileEditWidget::VFileEditWidget(QWidget *parent, bool is_directory)
-    : QWidget(parent), CurrentFilePath(), ToolButton(nullptr), FileLineEdit(nullptr), FileDialogFilter(), FilterList(),
-      Directory(is_directory)
+  : QWidget(parent),
+    CurrentFilePath(),
+    ToolButton(nullptr),
+    FileLineEdit(nullptr),
+    FileDialogFilter(),
+    FilterList(),
+    Directory(is_directory)
 {
     // Create the tool button,ToolButton = new QToolButton(this);
     ToolButton = new QToolButton(this);
@@ -53,7 +57,7 @@ VPE::VFileEditWidget::VFileEditWidget(QWidget *parent, bool is_directory)
     ToolButton->setText("...");
     ToolButton->setFixedWidth(20);
     ToolButton->installEventFilter(this);
-    setFocusProxy(ToolButton);  // Make the ToolButton the focus proxy
+    setFocusProxy(ToolButton); // Make the ToolButton the focus proxy
     setFocusPolicy(ToolButton->focusPolicy());
     connect(ToolButton, &QToolButton::clicked, this, &VFileEditWidget::onToolButtonClicked);
 
@@ -64,7 +68,7 @@ VPE::VFileEditWidget::VFileEditWidget(QWidget *parent, bool is_directory)
     FileLineEdit->installEventFilter(this);
 
     // The layout (a horizontal layout)
-    QHBoxLayout* layout = new QHBoxLayout(this);
+    QHBoxLayout *layout = new QHBoxLayout(this);
     layout->setSpacing(0);
     layout->setContentsMargins(0, 0, 0, 0);
     layout->addWidget(FileLineEdit);
@@ -74,12 +78,10 @@ VPE::VFileEditWidget::VFileEditWidget(QWidget *parent, bool is_directory)
     setAcceptDrops(true);
 }
 
-
 VPE::VFileEditWidget::~VFileEditWidget()
 {
     // nothing needs to be done here
 }
-
 
 void VPE::VFileEditWidget::setFile(const QString &value, bool emit_signal)
 {
@@ -96,8 +98,7 @@ void VPE::VFileEditWidget::setFile(const QString &value, bool emit_signal)
     }
 }
 
-
-void VPE::VFileEditWidget::setFilter(const QString &dialog_filter, const QStringList& filter_list)
+void VPE::VFileEditWidget::setFilter(const QString &dialog_filter, const QStringList &filter_list)
 {
     FileDialogFilter = dialog_filter;
     FilterList = filter_list;
@@ -113,21 +114,21 @@ auto VPE::VFileEditWidget::getFile() const -> QString
     return CurrentFilePath;
 }
 
-
 void VPE::VFileEditWidget::onToolButtonClicked()
 {
-    QString filepath = (Directory ? QFileDialog::getExistingDirectory(nullptr, tr("Directory"), CurrentFilePath,
-                                                                      QFileDialog::ShowDirsOnly
+    QString filepath =
+        (Directory ? QFileDialog::getExistingDirectory(nullptr, tr("Directory"), CurrentFilePath,
+                                                       QFileDialog::ShowDirsOnly
 #ifdef Q_OS_LINUX
-                                                                      | QFileDialog::DontUseNativeDialog
+                                                           | QFileDialog::DontUseNativeDialog
 #endif
-                                                                      )
-                                  : QFileDialog::getOpenFileName(nullptr, tr("Open File"), CurrentFilePath,
-                                                                 FileDialogFilter, nullptr
+                                                       )
+                   : QFileDialog::getOpenFileName(nullptr, tr("Open File"), CurrentFilePath, FileDialogFilter, nullptr
 #ifdef Q_OS_LINUX
-                                                                 , QFileDialog::DontUseNativeDialog
+                                                  ,
+                                                  QFileDialog::DontUseNativeDialog
 #endif
-                                                                 ));
+                                                  ));
     if (filepath.isNull() == false)
     {
         setFile(filepath, true);
@@ -141,11 +142,11 @@ auto VPE::VFileEditWidget::eventFilter(QObject *obj, QEvent *ev) -> bool
         ev->ignore();
         if (ev->type() == QEvent::DragEnter)
         {
-            dragEnterEvent(static_cast<QDragEnterEvent*>(ev));
+            dragEnterEvent(static_cast<QDragEnterEvent *>(ev));
         }
         else if (ev->type() == QEvent::Drop)
         {
-            dropEvent(static_cast<QDropEvent*>(ev));
+            dropEvent(static_cast<QDropEvent *>(ev));
         }
 
         if (ev->isAccepted())
@@ -178,8 +179,7 @@ auto VPE::VFileEditWidget::isDirectory() -> bool
     return Directory;
 }
 
-
-void VPE::VFileEditWidget::dragEnterEvent(QDragEnterEvent* event)
+void VPE::VFileEditWidget::dragEnterEvent(QDragEnterEvent *event)
 {
     QString tmpFileName;
     if (checkMimeData(event->mimeData(), tmpFileName))
@@ -190,18 +190,18 @@ void VPE::VFileEditWidget::dragEnterEvent(QDragEnterEvent* event)
 }
 
 // cppcheck-suppress unusedFunction
-void VPE::VFileEditWidget::dragMoveEvent(QDragMoveEvent* event)
+void VPE::VFileEditWidget::dragMoveEvent(QDragMoveEvent *event)
 {
     event->acceptProposedAction();
 }
 
 // cppcheck-suppress unusedFunction
-void VPE::VFileEditWidget::dragLeaveEvent(QDragLeaveEvent* event)
+void VPE::VFileEditWidget::dragLeaveEvent(QDragLeaveEvent *event)
 {
     event->accept();
 }
 
-void VPE::VFileEditWidget::dropEvent(QDropEvent* event)
+void VPE::VFileEditWidget::dropEvent(QDropEvent *event)
 {
     QString tmpFileName;
     if (checkMimeData(event->mimeData(), tmpFileName))
@@ -214,8 +214,7 @@ void VPE::VFileEditWidget::dropEvent(QDropEvent* event)
     }
 }
 
-
-auto VPE::VFileEditWidget::checkMimeData(const QMimeData* data, QString& file) const -> bool
+auto VPE::VFileEditWidget::checkMimeData(const QMimeData *data, QString &file) const -> bool
 {
     if (data->hasUrls())
     {
@@ -223,7 +222,7 @@ auto VPE::VFileEditWidget::checkMimeData(const QMimeData* data, QString& file) c
         QFileInfo tmpFileInfo;
 
         auto tmpUrl = std::find_if(tmpUrlList.cbegin(), tmpUrlList.cend(),
-                                  [](const QUrl &tmpUrl){return QFile::exists(tmpUrl.toLocalFile());});
+                                   [](const QUrl &tmpUrl) { return QFile::exists(tmpUrl.toLocalFile()); });
 
         if (tmpUrl != tmpUrlList.cend())
         {
@@ -254,16 +253,17 @@ auto VPE::VFileEditWidget::checkFileFilter(const QString &file) const -> bool
         return false;
     }
 
-    return std::any_of(FilterList.begin(), FilterList.end(), [file](const QString &tmpFilter)
-    {
+    return std::any_of(FilterList.begin(), FilterList.end(),
+                       [file](const QString &tmpFilter)
+                       {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
-        const QString wildcardFilter = QRegularExpression::wildcardToRegularExpression(tmpFilter);
-        QRegularExpression tmpRegExpFilter(QRegularExpression::anchoredPattern(wildcardFilter),
-                                          QRegularExpression::CaseInsensitiveOption);
-        return tmpRegExpFilter.match(file).hasMatch();
+                           const QString wildcardFilter = QRegularExpression::wildcardToRegularExpression(tmpFilter);
+                           QRegularExpression tmpRegExpFilter(QRegularExpression::anchoredPattern(wildcardFilter),
+                                                              QRegularExpression::CaseInsensitiveOption);
+                           return tmpRegExpFilter.match(file).hasMatch();
 #else
         QRegExp tmpRegExpFilter(tmpFilter, Qt::CaseInsensitive, QRegExp::Wildcard);
         return tmpRegExpFilter.exactMatch(file);
 #endif
-    });
+                       });
 }

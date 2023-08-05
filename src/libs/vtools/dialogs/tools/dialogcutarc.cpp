@@ -36,18 +36,19 @@
 #include <QTimer>
 #include <QToolButton>
 
-#include "../vpatterndb/vtranslatevars.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../../visualization/path/vistoolcutarc.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../qmuparser/qmudef.h"
 #include "../support/dialogeditwrongformula.h"
+#include "../vgeometry/varc.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
-#include "ui_dialogcutarc.h"
-#include "../vgeometry/varc.h"
-#include "../qmuparser/qmudef.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vabstractmainwindow.h"
+#include "ui_dialogcutarc.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -56,11 +57,13 @@
  * @param parent parent widget
  */
 DialogCutArc::DialogCutArc(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogCutArc),
-      m_timerFormula(new QTimer(this))
+  : DialogTool(data, toolId, parent),
+    ui(new Ui::DialogCutArc),
+    m_timerFormula(new QTimer(this))
 {
     ui->setupUi(this);
+
+    InitIcons();
 
     m_timerFormula->setSingleShot(true);
     connect(m_timerFormula, &QTimer::timeout, this, &DialogCutArc::EvalFormula);
@@ -68,7 +71,7 @@ DialogCutArc::DialogCutArc(const VContainer *data, quint32 toolId, QWidget *pare
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
     ui->lineEditNamePoint->setText(
-                VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
+        VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     m_formulaBaseHeight = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
 
@@ -77,15 +80,15 @@ DialogCutArc::DialogCutArc(const VContainer *data, quint32 toolId, QWidget *pare
     FillComboBoxArcs(ui->comboBoxArc);
 
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogCutArc::FXLength);
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
-    {
-        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, m_pointName, this->data, m_flagName);
-        CheckState();
-    });
-    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        m_timerFormula->start(formulaTimerTimeout);
-    });
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
+            [this]()
+            {
+                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, m_pointName, this->data,
+                                m_flagName);
+                CheckState();
+            });
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerFormula->start(formulaTimerTimeout); });
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogCutArc::DeployFormulaTextEdit);
 
     connect(ui->comboBoxArc, &QComboBox::currentTextChanged, this, &DialogCutArc::ArcChanged);
@@ -159,7 +162,7 @@ auto DialogCutArc::GetPointName() const -> QString
  */
 void DialogCutArc::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare)// After first choose we ignore all objects
+    if (prepare) // After first choose we ignore all objects
     {
         return;
     }
@@ -208,9 +211,27 @@ void DialogCutArc::closeEvent(QCloseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        InitIcons();
+        InitDialogButtonBoxIcons(ui->buttonBox);
+    }
+
+    // remember to call base class implementation
+    DialogTool::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogCutArc::ArcChanged()
 {
-    CurrentCurveLength(getArcId(), const_cast<VContainer *> (data));
+    CurrentCurveLength(getArcId(), const_cast<VContainer *>(data));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -266,6 +287,15 @@ void DialogCutArc::FinishCreating()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::InitIcons()
+{
+    QString resource = QStringLiteral("icon");
+
+    ui->toolButtonExprLength->setIcon(VTheme::GetIconResource(resource, QStringLiteral("24x24/fx.png")));
+    ui->label_4->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/equal.png")));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief setArcId set id of arc
  * @param value id
@@ -286,8 +316,8 @@ void DialogCutArc::setArcId(quint32 value)
  */
 void DialogCutArc::SetFormula(const QString &value)
 {
-    m_formula = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    m_formula = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (m_formula.length() > 80)
     {

@@ -28,7 +28,6 @@
 
 #include "dialogellipticalarc.h"
 
-#include <climits>
 #include <QDialog>
 #include <QLabel>
 #include <QPlainTextEdit>
@@ -36,20 +35,21 @@
 #include <QPushButton>
 #include <QTimer>
 #include <QToolButton>
-#include <Qt>
+#include <climits>
 
-#include "../vpatterndb/vtranslatevars.h"
 #include "../../visualization/path/vistoolellipticalarc.h"
 #include "../../visualization/visualization.h"
+#include "../qmuparser/qmudef.h"
 #include "../support/dialogeditwrongformula.h"
+#include "../vgeometry/vellipticalarc.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
-#include "ui_dialogellipticalarc.h"
-#include "../vgeometry/vellipticalarc.h"
-#include "../qmuparser/qmudef.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/global.h"
 #include "../vwidgets/vabstractmainwindow.h"
+#include "ui_dialogellipticalarc.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -58,15 +58,17 @@
  * @param parent parent widget
  */
 DialogEllipticalArc::DialogEllipticalArc(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogEllipticalArc),
-      m_timerRadius1(new QTimer(this)),
-      m_timerRadius2(new QTimer(this)),
-      m_timerF1(new QTimer(this)),
-      m_timerF2(new QTimer(this)),
-      m_timerRotationAngle(new QTimer(this))
+  : DialogTool(data, toolId, parent),
+    ui(new Ui::DialogEllipticalArc),
+    m_timerRadius1(new QTimer(this)),
+    m_timerRadius2(new QTimer(this)),
+    m_timerF1(new QTimer(this)),
+    m_timerF2(new QTimer(this)),
+    m_timerRotationAngle(new QTimer(this))
 {
     ui->setupUi(this);
+
+    InitIcons();
 
     this->m_formulaBaseHeightRadius1 = ui->plainTextEditRadius1->height();
     this->m_formulaBaseHeightRadius2 = ui->plainTextEditRadius2->height();
@@ -99,7 +101,9 @@ DialogEllipticalArc::DialogEllipticalArc(const VContainer *data, quint32 toolId,
 
     FillComboBoxPoints(ui->comboBoxBasePoint);
     FillComboBoxLineColors(ui->comboBoxColor);
-    FillComboBoxTypeLine(ui->comboBoxPenStyle, CurvePenStylesPics());
+    FillComboBoxTypeLine(ui->comboBoxPenStyle,
+                         CurvePenStylesPics(ui->comboBoxPenStyle->palette().color(QPalette::Base),
+                                            ui->comboBoxPenStyle->palette().color(QPalette::Text)));
 
     connect(ui->toolButtonExprRadius1, &QPushButton::clicked, this, &DialogEllipticalArc::FXRadius1);
     connect(ui->toolButtonExprRadius2, &QPushButton::clicked, this, &DialogEllipticalArc::FXRadius2);
@@ -107,37 +111,27 @@ DialogEllipticalArc::DialogEllipticalArc(const VContainer *data, quint32 toolId,
     connect(ui->toolButtonExprF2, &QPushButton::clicked, this, &DialogEllipticalArc::FXF2);
     connect(ui->toolButtonExprRotationAngle, &QPushButton::clicked, this, &DialogEllipticalArc::FXRotationAngle);
 
-    connect(ui->plainTextEditRadius1, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        m_timerRadius1->start(formulaTimerTimeout);
-    });
+    connect(ui->plainTextEditRadius1, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerRadius1->start(formulaTimerTimeout); });
 
-    connect(ui->plainTextEditRadius2, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        m_timerRadius2->start(formulaTimerTimeout);
-    });
+    connect(ui->plainTextEditRadius2, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerRadius2->start(formulaTimerTimeout); });
 
-    connect(ui->plainTextEditF1, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        m_timerF1->start(formulaTimerTimeout);
-    });
+    connect(ui->plainTextEditF1, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerF1->start(formulaTimerTimeout); });
 
-    connect(ui->plainTextEditF2, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        m_timerF2->start(formulaTimerTimeout);
-    });
+    connect(ui->plainTextEditF2, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerF2->start(formulaTimerTimeout); });
 
-    connect(ui->plainTextEditRotationAngle, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        m_timerRotationAngle->start(formulaTimerTimeout);
-    });
+    connect(ui->plainTextEditRotationAngle, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerRotationAngle->start(formulaTimerTimeout); });
 
     connect(ui->pushButtonGrowLengthRadius1, &QPushButton::clicked, this, &DialogEllipticalArc::DeployRadius1TextEdit);
     connect(ui->pushButtonGrowLengthRadius2, &QPushButton::clicked, this, &DialogEllipticalArc::DeployRadius2TextEdit);
     connect(ui->pushButtonGrowLengthF1, &QPushButton::clicked, this, &DialogEllipticalArc::DeployF1TextEdit);
     connect(ui->pushButtonGrowLengthF2, &QPushButton::clicked, this, &DialogEllipticalArc::DeployF2TextEdit);
-    connect(ui->pushButtonGrowLengthRotationAngle, &QPushButton::clicked,
-            this, &DialogEllipticalArc::DeployRotationAngleTextEdit);
+    connect(ui->pushButtonGrowLengthRotationAngle, &QPushButton::clicked, this,
+            &DialogEllipticalArc::DeployRotationAngleTextEdit);
 
     connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogEllipticalArc::ValidateAlias);
 
@@ -194,8 +188,8 @@ auto DialogEllipticalArc::GetRadius1() const -> QString
  */
 void DialogEllipticalArc::SetRadius1(const QString &value)
 {
-    m_radius1 = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    m_radius1 = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (m_radius1.length() > 80)
     {
@@ -227,8 +221,8 @@ auto DialogEllipticalArc::GetRadius2() const -> QString
  */
 void DialogEllipticalArc::SetRadius2(const QString &value)
 {
-    m_radius2 = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    m_radius2 = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (m_radius2.length() > 80)
     {
@@ -260,8 +254,8 @@ auto DialogEllipticalArc::GetF1() const -> QString
  */
 void DialogEllipticalArc::SetF1(const QString &value)
 {
-    m_f1 = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    m_f1 = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (m_f1.length() > 80)
     {
@@ -293,8 +287,8 @@ auto DialogEllipticalArc::GetF2() const -> QString
  */
 void DialogEllipticalArc::SetF2(const QString &value)
 {
-    m_f2 = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    m_f2 = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (m_f2.length() > 80)
     {
@@ -316,7 +310,8 @@ void DialogEllipticalArc::SetF2(const QString &value)
  */
 auto DialogEllipticalArc::GetRotationAngle() const -> QString
 {
-    return VTranslateVars::TryFormulaFromUser(m_rotationAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    return VTranslateVars::TryFormulaFromUser(m_rotationAngle,
+                                              VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -326,8 +321,8 @@ auto DialogEllipticalArc::GetRotationAngle() const -> QString
  */
 void DialogEllipticalArc::SetRotationAngle(const QString &value)
 {
-    m_rotationAngle = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    m_rotationAngle = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (m_rotationAngle.length() > 80)
     {
@@ -452,6 +447,26 @@ void DialogEllipticalArc::FinishCreating()
 
     setModal(true);
     show();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEllipticalArc::InitIcons()
+{
+    const QString resource = QStringLiteral("icon");
+
+    const QString fxIcon = QStringLiteral("24x24/fx.png");
+    ui->toolButtonExprRadius1->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprRadius2->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprF1->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprF2->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprRotationAngle->setIcon(VTheme::GetIconResource(resource, fxIcon));
+
+    const QString equalIcon = QStringLiteral("24x24/equal.png");
+    ui->label_1->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    ui->label_7->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    ui->label_8->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    ui->label_9->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    ui->label_12->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -593,8 +608,8 @@ void DialogEllipticalArc::ShowDialog(bool click)
 
         if (m_stage == 0) // radius 1
         {
-            //Radius of point circle, but little bigger. Need to handle with hover sizes.
-            if (line.length() <= ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene()))*1.5)
+            // Radius of point circle, but little bigger. Need to handle with hover sizes.
+            if (line.length() <= ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene())) * 1.5)
             {
                 return;
             }
@@ -611,8 +626,8 @@ void DialogEllipticalArc::ShowDialog(bool click)
             QPointF p = VGObject::ClosestPoint(radius2Line, scene->getScenePos());
             line = QLineF(static_cast<QPointF>(*center), p);
 
-            //Radius of point circle, but little bigger. Need to handle with hover sizes.
-            if (line.length() <= ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene()))*1.5)
+            // Radius of point circle, but little bigger. Need to handle with hover sizes.
+            if (line.length() <= ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene())) * 1.5)
             {
                 return;
             }
@@ -656,7 +671,7 @@ void DialogEllipticalArc::ShowDialog(bool click)
  */
 void DialogEllipticalArc::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare)// After first choose we ignore all objects
+    if (prepare) // After first choose we ignore all objects
     {
         return;
     }
@@ -722,6 +737,24 @@ void DialogEllipticalArc::closeEvent(QCloseEvent *event)
     ui->plainTextEditF2->blockSignals(true);
     ui->plainTextEditRotationAngle->blockSignals(true);
     DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEllipticalArc::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        InitIcons();
+        InitDialogButtonBoxIcons(ui->buttonBox);
+    }
+
+    // remember to call base class implementation
+    DialogTool::changeEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

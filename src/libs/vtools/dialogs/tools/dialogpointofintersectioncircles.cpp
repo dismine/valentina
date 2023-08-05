@@ -28,7 +28,6 @@
 
 #include "dialogpointofintersectioncircles.h"
 
-#include <climits>
 #include <QColor>
 #include <QComboBox>
 #include <QDialog>
@@ -39,33 +38,36 @@
 #include <QPushButton>
 #include <QTimer>
 #include <QToolButton>
-#include <Qt>
+#include <climits>
 
-#include "../vpatterndb/vtranslatevars.h"
-#include "../vpatterndb/vcontainer.h"
-#include "../../visualization/visualization.h"
 #include "../../visualization/line/vistoolpointofintersectioncircles.h"
+#include "../../visualization/visualization.h"
 #include "../support/dialogeditwrongformula.h"
+#include "../vgeometry/vpointf.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
-#include "ui_dialogpointofintersectioncircles.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vabstractmainwindow.h"
-#include "../vgeometry/vpointf.h"
+#include "ui_dialogpointofintersectioncircles.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointOfIntersectionCircles::DialogPointOfIntersectionCircles(const VContainer *data, quint32 toolId,
                                                                    QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogPointOfIntersectionCircles),
-      m_timerCircle1Radius(new QTimer(this)),
-      m_timerCircle2Radius(new QTimer(this))
+  : DialogTool(data, toolId, parent),
+    ui(new Ui::DialogPointOfIntersectionCircles),
+    m_timerCircle1Radius(new QTimer(this)),
+    m_timerCircle2Radius(new QTimer(this))
 {
     ui->setupUi(this);
+
+    InitIcons();
 
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
     ui->lineEditNamePoint->setText(
-                VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
+        VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
 
     this->m_formulaBaseHeightCircle1Radius = ui->plainTextEditCircle1Radius->height();
     this->m_formulaBaseHeightCircle2Radius = ui->plainTextEditCircle2Radius->height();
@@ -85,30 +87,28 @@ DialogPointOfIntersectionCircles::DialogPointOfIntersectionCircles(const VContai
     FillComboBoxPoints(ui->comboBoxCircle2Center);
     FillComboBoxCrossCirclesPoints(ui->comboBoxResult);
 
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
-    {
-        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, m_pointName, this->data, m_flagName);
-        CheckState();
-    });
-    connect(ui->comboBoxCircle1Center, &QComboBox::currentTextChanged,
-            this, &DialogPointOfIntersectionCircles::PointChanged);
-    connect(ui->comboBoxCircle2Center, &QComboBox::currentTextChanged,
-            this, &DialogPointOfIntersectionCircles::PointChanged);
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
+            [this]()
+            {
+                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, m_pointName, this->data,
+                                m_flagName);
+                CheckState();
+            });
+    connect(ui->comboBoxCircle1Center, &QComboBox::currentTextChanged, this,
+            &DialogPointOfIntersectionCircles::PointChanged);
+    connect(ui->comboBoxCircle2Center, &QComboBox::currentTextChanged, this,
+            &DialogPointOfIntersectionCircles::PointChanged);
 
     connect(ui->toolButtonExprCircle1Radius, &QPushButton::clicked, this,
             &DialogPointOfIntersectionCircles::FXCircle1Radius);
     connect(ui->toolButtonExprCircle2Radius, &QPushButton::clicked, this,
             &DialogPointOfIntersectionCircles::FXCircle2Radius);
 
-    connect(ui->plainTextEditCircle1Radius, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        m_timerCircle1Radius->start(formulaTimerTimeout);
-    });
+    connect(ui->plainTextEditCircle1Radius, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerCircle1Radius->start(formulaTimerTimeout); });
 
-    connect(ui->plainTextEditCircle2Radius, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        m_timerCircle2Radius->start(formulaTimerTimeout);
-    });
+    connect(ui->plainTextEditCircle2Radius, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerCircle2Radius->start(formulaTimerTimeout); });
 
     connect(ui->pushButtonGrowCircle1Radius, &QPushButton::clicked, this,
             &DialogPointOfIntersectionCircles::DeployCircle1RadiusTextEdit);
@@ -182,8 +182,8 @@ auto DialogPointOfIntersectionCircles::GetFirstCircleRadius() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionCircles::SetFirstCircleRadius(const QString &value)
 {
-    const QString formula = VAbstractValApplication::VApp()->TrVars()
-            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString formula = VAbstractValApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formula.length() > 80)
     {
@@ -208,8 +208,8 @@ auto DialogPointOfIntersectionCircles::GetSecondCircleRadius() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionCircles::SetSecondCircleRadius(const QString &value)
 {
-    const QString formula = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString formula = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formula.length() > 80)
     {
@@ -265,8 +265,8 @@ void DialogPointOfIntersectionCircles::ShowDialog(bool click)
         auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
         SCASSERT(scene != nullptr)
 
-        QSharedPointer<VPointF> center = data->GeometricObject<VPointF>(m_stage == 1 ? GetFirstCircleCenterId()
-                                                                                     : GetSecondCircleCenterId());
+        QSharedPointer<VPointF> center =
+            data->GeometricObject<VPointF>(m_stage == 1 ? GetFirstCircleCenterId() : GetSecondCircleCenterId());
 
         QLineF line(static_cast<QPointF>(*center), scene->getScenePos());
 
@@ -297,7 +297,7 @@ void DialogPointOfIntersectionCircles::ShowDialog(bool click)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionCircles::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare)// After first choose we ignore all objects
+    if (prepare) // After first choose we ignore all objects
     {
         return;
     }
@@ -322,8 +322,8 @@ void DialogPointOfIntersectionCircles::ChosenObject(quint32 id, const SceneObjec
                     else
                     {
                         ++m_stage;
-                        auto *window = qobject_cast<VAbstractMainWindow *>(
-                            VAbstractValApplication::VApp()->getMainWindow());
+                        auto *window =
+                            qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
                         SCASSERT(window != nullptr)
                         connect(vis.data(), &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
                     }
@@ -375,13 +375,15 @@ void DialogPointOfIntersectionCircles::PointChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionCircles::DeployCircle1RadiusTextEdit()
 {
-    DeployFormula(this, ui->plainTextEditCircle1Radius, ui->pushButtonGrowCircle1Radius, m_formulaBaseHeightCircle1Radius);
+    DeployFormula(this, ui->plainTextEditCircle1Radius, ui->pushButtonGrowCircle1Radius,
+                  m_formulaBaseHeightCircle1Radius);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionCircles::DeployCircle2RadiusTextEdit()
 {
-    DeployFormula(this, ui->plainTextEditCircle2Radius, ui->pushButtonGrowCircle2Radius, m_formulaBaseHeightCircle2Radius);
+    DeployFormula(this, ui->plainTextEditCircle2Radius, ui->pushButtonGrowCircle2Radius,
+                  m_formulaBaseHeightCircle2Radius);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -489,6 +491,24 @@ void DialogPointOfIntersectionCircles::closeEvent(QCloseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfIntersectionCircles::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        InitIcons();
+        InitDialogButtonBoxIcons(ui->buttonBox);
+    }
+
+    // remember to call base class implementation
+    DialogTool::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionCircles::FinishCreating()
 {
     vis->SetMode(Mode::Show);
@@ -498,6 +518,20 @@ void DialogPointOfIntersectionCircles::FinishCreating()
 
     setModal(true);
     show();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfIntersectionCircles::InitIcons()
+{
+    const QString resource = QStringLiteral("icon");
+
+    const QString fxIcon = QStringLiteral("24x24/fx.png");
+    ui->toolButtonExprCircle1Radius->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprCircle2Radius->setIcon(VTheme::GetIconResource(resource, fxIcon));
+
+    const QString equalIcon = QStringLiteral("24x24/equal.png");
+    ui->label_2->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    ui->label_3->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -39,10 +39,8 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisOperation::VisOperation(const VContainer *data, QGraphicsItem *parent)
-    : VisLine(data, parent)
+  : VisLine(data, parent)
 {
-    SetColor(VColor::SupportColor2, Qt::darkGreen);
-    SetColor(VColor::SupportColor3, Qt::darkBlue);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -66,20 +64,20 @@ void VisOperation::VisualMode(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VisOperation::GetPoint(quint32 i, const QColor &color) -> VScaledEllipse *
+auto VisOperation::GetPoint(quint32 i, VColorRole role) -> VScaledEllipse *
 {
-    return GetPointItem(m_points, i, color, this);
+    return GetPointItem(m_points, i, role, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VisOperation::GetCurve(quint32 i, const QColor &color) -> VCurvePathItem *
+auto VisOperation::GetCurve(quint32 i, VColorRole role) -> VCurvePathItem *
 {
     if (!m_curves.isEmpty() && static_cast<quint32>(m_curves.size() - 1) >= i)
     {
         return m_curves.at(static_cast<int>(i));
     }
 
-    auto *curve = InitItem<VCurvePathItem>(color, this);
+    auto *curve = InitItem<VCurvePathItem>(role, this);
     m_curves.append(curve);
     return curve;
 }
@@ -98,23 +96,22 @@ void VisOperation::RefreshFlippedObjects(quint32 originPointId, const QPointF &f
         // This check helps to find missed objects in the switch
         Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects were handled.");
 
-        switch(static_cast<GOType>(obj->getType()))
+        switch (static_cast<GOType>(obj->getType()))
         {
             case GOType::Point:
             {
                 const QSharedPointer<VPointF> p = GetData()->GeometricObject<VPointF>(id);
 
                 ++iPoint;
-                VScaledEllipse *point = GetPoint(static_cast<quint32>(iPoint), Color(VColor::SupportColor2));
-                DrawPoint(point, static_cast<QPointF>(*p), Color(VColor::SupportColor2));
+                VScaledEllipse *point = GetPoint(static_cast<quint32>(iPoint), VColorRole::VisSupportColor2);
+                DrawPoint(point, static_cast<QPointF>(*p));
 
                 ++iPoint;
-                point = GetPoint(static_cast<quint32>(iPoint), Color(VColor::SupportColor));
+                point = GetPoint(static_cast<quint32>(iPoint), VColorRole::VisSupportColor);
 
                 if (originPointId != NULL_ID)
                 {
-                    DrawPoint(point, static_cast<QPointF>(p->Flip(QLineF(firstPoint, secondPoint))),
-                              Color(VColor::SupportColor));
+                    DrawPoint(point, static_cast<QPointF>(p->Flip(QLineF(firstPoint, secondPoint))));
                 }
                 break;
             }

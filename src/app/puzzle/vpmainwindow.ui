@@ -233,7 +233,7 @@
         </property>
         <attribute name="icon">
          <iconset resource="share/resources/puzzleicon.qrc">
-          <normaloff>:/puzzleicon/64x64/iconCurrentPiece.png</normaloff>:/puzzleicon/64x64/iconCurrentPiece.png</iconset>
+          <normaloff>:/puzzleicon/light/64x64/iconCurrentPiece.png</normaloff>:/puzzleicon/light/64x64/iconCurrentPiece.png</iconset>
         </attribute>
         <attribute name="title">
          <string/>
@@ -870,7 +870,7 @@
                     <item>
                      <widget class="QToolButton" name="toolButtonSheetPortraitOritation">
                       <property name="text">
-                       <string notr="true">...</string>
+                       <string notr="true"/>
                       </property>
                       <property name="icon">
                        <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
@@ -893,7 +893,7 @@
                     <item>
                      <widget class="QToolButton" name="toolButtonSheetLandscapeOrientation">
                       <property name="text">
-                       <string notr="true">...</string>
+                       <string notr="true"/>
                       </property>
                       <property name="icon">
                        <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
@@ -950,11 +950,11 @@
                        <string>Force the grainline orientation to always be horizontal</string>
                       </property>
                       <property name="text">
-                       <string notr="true">...</string>
+                       <string notr="true"/>
                       </property>
                       <property name="icon">
                        <iconset resource="share/resources/puzzleicon.qrc">
-                        <normaloff>:/puzzleicon/32X32/horizontal_grainline.png</normaloff>:/puzzleicon/32X32/horizontal_grainline.png</iconset>
+                        <normaloff>:/puzzleicon/light/32x32/horizontal_grainline.png</normaloff>:/puzzleicon/light/32x32/horizontal_grainline.png</iconset>
                       </property>
                       <property name="iconSize">
                        <size>
@@ -973,11 +973,11 @@
                        <string>Force the grainline orientation to always be vertical</string>
                       </property>
                       <property name="text">
-                       <string notr="true">...</string>
+                       <string notr="true"/>
                       </property>
                       <property name="icon">
                        <iconset resource="share/resources/puzzleicon.qrc">
-                        <normaloff>:/puzzleicon/32X32/vertical_grainline.png</normaloff>:/puzzleicon/32X32/vertical_grainline.png</iconset>
+                        <normaloff>:/puzzleicon/light/32x32/vertical_grainline.png</normaloff>:/puzzleicon/light/32x32/vertical_grainline.png</iconset>
                       </property>
                       <property name="iconSize">
                        <size>
@@ -1203,7 +1203,7 @@
        <widget class="QWidget" name="tabTilesProperty">
         <attribute name="icon">
          <iconset resource="share/resources/puzzleicon.qrc">
-          <normaloff>:/puzzleicon/64x64/iconTiles.png</normaloff>:/puzzleicon/64x64/iconTiles.png</iconset>
+          <normaloff>:/puzzleicon/light/64x64/iconTiles.png</normaloff>:/puzzleicon/light/64x64/iconTiles.png</iconset>
         </attribute>
         <attribute name="title">
          <string/>
@@ -1316,7 +1316,7 @@
                     <item>
                      <widget class="QToolButton" name="toolButtonTilePortraitOrientation">
                       <property name="text">
-                       <string notr="true">...</string>
+                       <string notr="true"/>
                       </property>
                       <property name="icon">
                        <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
@@ -1339,7 +1339,7 @@
                     <item>
                      <widget class="QToolButton" name="toolButtonTileLandscapeOrientation">
                       <property name="text">
-                       <string notr="true">...</string>
+                       <string notr="true"/>
                       </property>
                       <property name="icon">
                        <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
@@ -1857,7 +1857,7 @@
                      </size>
                     </property>
                     <property name="text">
-                     <string notr="true">...</string>
+                     <string notr="true"/>
                     </property>
                     <property name="icon">
                      <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
@@ -2427,8 +2427,8 @@
  </resources>
  <connections/>
  <buttongroups>
+  <buttongroup name="buttonGroupRotationDirection"/>
   <buttongroup name="buttonGroupSheetOrientation"/>
   <buttongroup name="buttonGroupTileOrientation"/>
-  <buttongroup name="buttonGroupRotationDirection"/>
  </buttongroups>
 </ui>

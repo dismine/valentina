@@ -71,6 +71,7 @@ protected:
     void ShowVisualization() override;
     void SaveData() override;
     void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
     auto IsValid() const -> bool final;
     void showEvent(QShowEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
@@ -135,6 +136,8 @@ private:
     auto IsPathValid() const -> bool;
     auto ExtractPath() const -> VSplinePath;
     void ShowPointIssue(const QString &pName);
+
+    void InitIcons();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

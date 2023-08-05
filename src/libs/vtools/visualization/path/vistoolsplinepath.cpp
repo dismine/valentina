@@ -32,7 +32,6 @@
 #include <QLineF>
 #include <QPainterPath>
 #include <QPoint>
-#include <Qt>
 #include <QtAlgorithms>
 
 #include "../vgeometry/vabstractcurve.h"
@@ -40,27 +39,27 @@
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
 #include "../vgeometry/vsplinepoint.h"
-#include "../vpatterndb/vcontainer.h"
-#include "../vwidgets/vcontrolpointspline.h"
-#include "../vwidgets/scalesceneitems.h"
-#include "../vwidgets/global.h"
 #include "../visualization.h"
-#include "vispath.h"
 #include "../vmisc/vmodifierkey.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/global.h"
+#include "../vwidgets/scalesceneitems.h"
+#include "../vwidgets/vcontrolpointspline.h"
+#include "vispath.h"
 
 namespace
 {
 inline auto TriggerRadius() -> qreal
 {
-    return ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene()))*1.5;
+    return ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene())) * 1.5;
 }
-}
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolSplinePath::VisToolSplinePath(const VContainer *data, QGraphicsItem *parent)
-    : VisPath(data, parent)
+  : VisPath(data, parent)
 {
-    m_newCurveSegment = InitItem<VCurvePathItem>(Color(VColor::MainColor), this);
+    m_newCurveSegment = InitItem<VCurvePathItem>(VColorRole::VisMainColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -83,41 +82,41 @@ void VisToolSplinePath::RefreshGeometry()
     for (int i = 0; i < size; ++i)
     {
         VScaledEllipse *point = GetPoint(static_cast<unsigned>(i));
-        DrawPoint(point, static_cast<QPointF>(pathPoints.at(i).P()), Color(VColor::SupportColor));
+        DrawPoint(point, static_cast<QPointF>(pathPoints.at(i).P()));
     }
 
     if (GetMode() == Mode::Creation)
     {
         if (size > 1)
         {
-            for (vsizetype i = 1; i<=m_path.CountSubSpl(); ++i)
+            for (vsizetype i = 1; i <= m_path.CountSubSpl(); ++i)
             {
                 const auto preLastPoint = (m_path.CountSubSpl() - 1) * 2;
                 const auto lastPoint = preLastPoint + 1;
 
                 VSpline spl = m_path.GetSpline(i);
 
-                m_ctrlPoints.at(preLastPoint)->RefreshCtrlPoint(i, SplinePointPosition::FirstPoint,
-                                                                static_cast<QPointF>(spl.GetP2()),
-                                                                static_cast<QPointF>(spl.GetP1()));
+                m_ctrlPoints.at(preLastPoint)
+                    ->RefreshCtrlPoint(i, SplinePointPosition::FirstPoint, static_cast<QPointF>(spl.GetP2()),
+                                       static_cast<QPointF>(spl.GetP1()));
                 m_ctrlPoints.at(lastPoint)->RefreshCtrlPoint(i, SplinePointPosition::LastPoint,
                                                              static_cast<QPointF>(spl.GetP3()),
                                                              static_cast<QPointF>(spl.GetP4()));
             }
         }
 
-        Creating(static_cast<QPointF>(pathPoints.at(size-1).P()), size);
+        Creating(static_cast<QPointF>(pathPoints.at(size - 1).P()), size);
     }
 
     if (size == 1)
     {
         VSpline spline(pathPoints.at(0).P(), m_ctrlPoint, ScenePos(), VPointF(ScenePos()));
         spline.SetApproximationScale(ApproximationScale());
-        DrawPath(this, spline.GetPath(), Color(VColor::MainColor), LineStyle(), Qt::RoundCap);
+        DrawPath(this, spline.GetPath(), LineStyle(), Qt::RoundCap);
     }
     else if (size > 1)
     {
-        DrawPath(this, m_path.GetPath(), m_path.DirectionArrows(), Color(VColor::MainColor), LineStyle(), Qt::RoundCap);
+        DrawPath(this, m_path.GetPath(), m_path.DirectionArrows(), LineStyle(), Qt::RoundCap);
     }
 
     if (m_path.CountPoints() < 3)
@@ -127,7 +126,8 @@ void VisToolSplinePath::RefreshGeometry()
     else
     {
         SetToolTip(tr("<b>Curved path</b>: select three or more points, "
-                      "<b>%1</b> - finish creation").arg(VModifierKey::EnterKey()));
+                      "<b>%1</b> - finish creation")
+                       .arg(VModifierKey::EnterKey()));
     }
     if (GetMode() == Mode::Show)
     {
@@ -172,7 +172,7 @@ auto VisToolSplinePath::GetPoint(quint32 i) -> VScaledEllipse *
 
     m_pointSelected = false;
 
-    auto *point = InitPoint(Color(VColor::SupportColor), this);
+    auto *point = InitPoint(VColorRole::VisSupportColor, this);
     m_points.append(point);
 
     if (m_points.size() == 1)
@@ -183,7 +183,7 @@ auto VisToolSplinePath::GetPoint(quint32 i) -> VScaledEllipse *
     }
     else
     {
-        auto *controlPoint1 = new VControlPointSpline(m_points.size()-1, SplinePointPosition::LastPoint, this);
+        auto *controlPoint1 = new VControlPointSpline(m_points.size() - 1, SplinePointPosition::LastPoint, this);
         controlPoint1->hide();
         m_ctrlPoints.append(controlPoint1);
 
@@ -201,7 +201,7 @@ void VisToolSplinePath::DragControlPoint(vsizetype lastPoint, vsizetype preLastP
 {
     if (not m_ctrlPoints.at(lastPoint)->isVisible())
     {
-        //Radius of point circle, but little bigger. Need handle with hover sizes.
+        // Radius of point circle, but little bigger. Need handle with hover sizes.
         if (QLineF(pSpl, m_ctrlPoint).length() > TriggerRadius())
         {
             if (size == 1)
@@ -220,8 +220,8 @@ void VisToolSplinePath::DragControlPoint(vsizetype lastPoint, vsizetype preLastP
         }
     }
 
-    QLineF ctrlLine (pSpl, ScenePos());
-    ctrlLine.setAngle(ctrlLine.angle()+180);
+    QLineF ctrlLine(pSpl, ScenePos());
+    ctrlLine.setAngle(ctrlLine.angle() + 180);
 
     if (size == 1)
     {
@@ -229,7 +229,7 @@ void VisToolSplinePath::DragControlPoint(vsizetype lastPoint, vsizetype preLastP
     }
     else
     {
-        m_ctrlPoints.at(preLastPoint)->RefreshCtrlPoint(size-1, SplinePointPosition::LastPoint, ctrlLine.p2(), pSpl);
+        m_ctrlPoints.at(preLastPoint)->RefreshCtrlPoint(size - 1, SplinePointPosition::LastPoint, ctrlLine.p2(), pSpl);
         m_ctrlPoints.at(lastPoint)->RefreshCtrlPoint(size, SplinePointPosition::FirstPoint, m_ctrlPoint, pSpl);
     }
 
@@ -244,35 +244,35 @@ void VisToolSplinePath::DragControlPoint(vsizetype lastPoint, vsizetype preLastP
         const VSpline spl = m_path.GetSpline(size - 1);
         VSpline preSpl(spl.GetP1(), static_cast<QPointF>(spl.GetP2()), ctrlLine.p2(), VPointF(pSpl));
 
-        m_path[size-1].SetAngle2(spline.GetStartAngle(), spline.GetStartAngleFormula());
+        m_path[size - 1].SetAngle2(spline.GetStartAngle(), spline.GetStartAngleFormula());
         if (m_ctrlPoint != pSpl)
         {
-            m_path[size-1].SetLength1(preSpl.GetC2Length(), preSpl.GetC2LengthFormula());
-            m_path[size-1].SetLength2(spline.GetC1Length(), spline.GetC1LengthFormula());
+            m_path[size - 1].SetLength1(preSpl.GetC2Length(), preSpl.GetC2LengthFormula());
+            m_path[size - 1].SetLength2(spline.GetC1Length(), spline.GetC1LengthFormula());
         }
         else
         {
-            m_path[size-1].SetLength1(0, QChar('0'));
-            m_path[size-1].SetLength2(0, QChar('0'));
+            m_path[size - 1].SetLength1(0, QChar('0'));
+            m_path[size - 1].SetLength2(0, QChar('0'));
         }
         emit PathChanged(m_path);
     }
 
-    DrawPath(m_newCurveSegment, spline.GetPath(), Color(VColor::MainColor), Qt::SolidLine, Qt::RoundCap);
+    DrawPath(m_newCurveSegment, spline.GetPath(), Qt::SolidLine, Qt::RoundCap);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolSplinePath::NewCurveSegment(const VSpline &spline, const QPointF &pSpl, vsizetype size)
 {
-    m_path[size-1].SetAngle2(spline.GetStartAngle(), spline.GetStartAngleFormula());
+    m_path[size - 1].SetAngle2(spline.GetStartAngle(), spline.GetStartAngleFormula());
 
     if (m_ctrlPoint != pSpl)
     {
-        m_path[size-1].SetLength2(spline.GetC1Length(), spline.GetC1LengthFormula());
+        m_path[size - 1].SetLength2(spline.GetC1Length(), spline.GetC1LengthFormula());
     }
     else
     {
-        m_path[size-1].SetLength2(0, QChar('0'));
+        m_path[size - 1].SetLength2(0, QChar('0'));
     }
     emit PathChanged(m_path);
 }
@@ -302,6 +302,6 @@ void VisToolSplinePath::Creating(const QPointF &pSpl, vsizetype size)
 
         VSpline spline(VPointF(pSpl), m_ctrlPoint, ScenePos(), VPointF(ScenePos()));
         NewCurveSegment(spline, pSpl, size);
-        DrawPath(m_newCurveSegment, spline.GetPath(), Color(VColor::MainColor), Qt::SolidLine, Qt::RoundCap);
+        DrawPath(m_newCurveSegment, spline.GetPath(), Qt::SolidLine, Qt::RoundCap);
     }
 }

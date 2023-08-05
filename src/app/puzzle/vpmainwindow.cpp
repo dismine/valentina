@@ -30,6 +30,7 @@
 #include <QCloseEvent>
 #include <QFileDialog>
 #include <QFileSystemWatcher>
+#include <QLoggingCategory>
 #include <QPrintDialog>
 #include <QPrintPreviewDialog>
 #include <QPrinterInfo>
@@ -39,10 +40,12 @@
 #include <QUndoStack>
 #include <QtMath>
 #include <chrono>
+#include <thread>
 
 #include "../ifc/exception/vexception.h"
 #include "../ifc/xml/vlayoutconverter.h"
 #include "../vdxf/libdxfrw/drw_base.h"
+#include "../vganalytics/vganalytics.h"
 #include "../vlayout/dialogs/watermarkwindow.h"
 #include "../vlayout/vlayoutexporter.h"
 #include "../vlayout/vprintlayout.h"
@@ -51,11 +54,13 @@
 #include "../vmisc/dialogs/dialogselectlanguage.h"
 #include "../vmisc/lambdaconstants.h"
 #include "../vmisc/projectversion.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vsysexits.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "dialogs/dialogpuzzlepreferences.h"
 #include "dialogs/dialogsavemanuallayout.h"
 #include "dialogs/vpdialogabout.h"
+#include "layout/vppiece.h"
 #include "layout/vpsheet.h"
 #include "ui_vpmainwindow.h"
 #include "undocommands/vpundoaddsheet.h"
@@ -63,24 +68,19 @@
 #include "undocommands/vpundopiecerotate.h"
 #include "undocommands/vpundopiecezvaluemove.h"
 #include "vpapplication.h"
+#include "vptilefactory.h"
 #include "xml/vplayoutfilereader.h"
 #include "xml/vplayoutfilewriter.h"
+
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vganalytics/vganalytics.h"
-#include "layout/vppiece.h"
-#include "vptilefactory.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
 #include "../vmisc/backport/qscopeguard.h"
 #else
 #include <QScopeGuard>
 #endif
-
-#include <QLoggingCategory>
-#include <chrono>
-#include <thread>
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
@@ -1715,11 +1715,9 @@ auto VPMainWindow::MaybeSave() -> bool
     // TODO: Implement maybe save check
     if (this->isWindowModified())
     {
-        QScopedPointer<QMessageBox> messageBox(new QMessageBox(tr("Unsaved changes"),
-                                                               tr("Layout has been modified.\n"
-                                                                  "Do you want to save your changes?"),
-                                                               QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No,
-                                                               QMessageBox::Cancel, this, Qt::Sheet));
+        QScopedPointer<QMessageBox> messageBox(new QMessageBox(
+            tr("Unsaved changes"), tr("Layout has been modified. Do you want to save your changes?"),
+            QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No, QMessageBox::Cancel, this, Qt::Sheet));
 
         messageBox->setDefaultButton(QMessageBox::Yes);
         messageBox->setEscapeButton(QMessageBox::Cancel);
@@ -2758,7 +2756,7 @@ auto VPMainWindow::DrawTilesScheme(QPrinter *printer, QPainter *painter, const V
         if (watermarkData.showImage && not watermarkData.path.isEmpty())
         {
             VPTileFactory::PaintWatermarkImage(painter, target, watermarkData,
-                                               m_layout->LayoutSettings().WatermarkPath());
+                                               m_layout->LayoutSettings().WatermarkPath(), false);
         }
 
         if (watermarkData.showText && not watermarkData.text.isEmpty())
@@ -3347,6 +3345,29 @@ void VPMainWindow::RotatePieces()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::InitIcons()
+{
+    const QString resource = QStringLiteral("puzzleicon");
+
+    auto SetTabIcon = [resource, this](QWidget *tab, const QString &iconName)
+    {
+        const int index = ui->tabWidgetProperties->indexOf(tab);
+        if (index != -1)
+        {
+            ui->tabWidgetProperties->setTabIcon(index, VTheme::GetIconResource(resource, iconName));
+        }
+    };
+
+    SetTabIcon(ui->tabCurrentPieceProperty, QStringLiteral("64x64/iconCurrentPiece.png"));
+    SetTabIcon(ui->tabTilesProperty, QStringLiteral("64x64/iconTiles.png"));
+
+    ui->toolButtonGrainlineHorizontalOrientation->setIcon(
+        VTheme::GetIconResource(resource, QStringLiteral("32x32/horizontal_grainline.png")));
+    ui->toolButtonGrainlineVerticalOrientation->setIcon(
+        VTheme::GetIconResource(resource, QStringLiteral("32x32/vertical_grainline.png")));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionNew_triggered() // NOLINT(readability-convert-member-functions-to-static)
 {
     VPApplication::VApp()->NewMainWindow();
@@ -3394,6 +3415,11 @@ void VPMainWindow::changeEvent(QEvent *event)
 
         WindowsLocale();
         UpdateWindowTitle();
+    }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        InitIcons();
     }
 
     // remember to call base class implementation

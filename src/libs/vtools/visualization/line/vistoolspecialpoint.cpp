@@ -27,19 +27,18 @@
  *************************************************************************/
 
 #include "vistoolspecialpoint.h"
-#include "../vwidgets/vsimplepoint.h"
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/vsimplepoint.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolSpecialPoint::VisToolSpecialPoint(const VContainer *data, QGraphicsItem *parent)
-    : VisLine(data, parent)
+  : VisLine(data, parent)
 {
-    SetMainColor(Qt::red);
-    this->setZValue(2);// Show on top real tool
-    this->setPen(QPen(Qt::NoPen));
+    setZValue(2); // Show on top real tool
+    setPen(QPen(Qt::NoPen));
 
-    m_point = new VSimplePoint(NULL_ID, Color(VColor::MainColor));
+    m_point = new VSimplePoint(NULL_ID, VColorRole::VisMainColor);
     m_point->SetPointHighlight(true);
     m_point->setParentItem(this);
     m_point->SetVisualizationMode(true);
@@ -70,4 +69,3 @@ void VisToolSpecialPoint::VisualMode(quint32 id)
     m_pointId = id;
     StartVisualMode();
 }
-

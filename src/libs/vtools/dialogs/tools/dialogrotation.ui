@@ -180,11 +180,11 @@
             <string>Formula wizard</string>
            </property>
            <property name="text">
-            <string notr="true">...</string>
+            <string notr="true"></string>
            </property>
            <property name="icon">
             <iconset resource="../../../vmisc/share/resources/icon.qrc">
-             <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+             <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -200,7 +200,7 @@
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap resource="../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+            <pixmap resource="../../../vmisc/share/resources/icon.qrc">:/icon/light/24x24/equal.png</pixmap>
            </property>
           </widget>
          </item>

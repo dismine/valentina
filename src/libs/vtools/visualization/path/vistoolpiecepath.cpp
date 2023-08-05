@@ -27,19 +27,19 @@
  *************************************************************************/
 
 #include "vistoolpiecepath.h"
-#include "../vwidgets/vsimplepoint.h"
 #include "../vgeometry/vpointf.h"
-#include "../vwidgets/scalesceneitems.h"
-#include "../vmisc/compatibility.h"
 #include "../vlayout/vlayoutpoint.h"
+#include "../vmisc/compatibility.h"
+#include "../vwidgets/scalesceneitems.h"
+#include "../vwidgets/vsimplepoint.h"
 
 #include <QGraphicsSceneMouseEvent>
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPiecePath::VisToolPiecePath(const VContainer *data, QGraphicsItem *parent)
-    : VisPath(data, parent)
+  : VisPath(data, parent)
 {
-    m_line = InitItem<VScaledLine>(Color(VColor::SupportColor), this);
+    m_line = InitItem<VScaledLine>(VColorRole::VisSupportColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -49,14 +49,13 @@ void VisToolPiecePath::RefreshGeometry()
 
     if (m_path.CountNodes() > 0)
     {
-        DrawPath(this, m_path.PainterPath(GetData(), m_cuttingPath), Color(VColor::MainColor), m_path.GetPenType(),
-                 Qt::RoundCap);
+        DrawPath(this, m_path.PainterPath(GetData(), m_cuttingPath), m_path.GetPenType(), Qt::RoundCap);
 
         const QVector<VPointF> nodes = m_path.PathNodePoints(GetData());
 
         for (int i = 0; i < nodes.size(); ++i)
         {
-            VSimplePoint *point = GetPoint(static_cast<quint32>(i), Color(VColor::SupportColor));
+            VSimplePoint *point = GetPoint(static_cast<quint32>(i), VColorRole::VisSupportColor);
             point->RefreshPointGeometry(nodes.at(i)); // Keep first, you can hide only objects those have shape
             point->SetOnlyPoint(GetMode() == Mode::Creation);
             point->setVisible(true);
@@ -67,7 +66,7 @@ void VisToolPiecePath::RefreshGeometry()
             const QVector<VLayoutPoint> points = m_path.PathPoints(GetData());
             if (not points.empty())
             {
-                DrawLine(m_line, QLineF(ConstLast(points), ScenePos()), Color(VColor::SupportColor), Qt::DashLine);
+                DrawLine(m_line, QLineF(ConstLast(points), ScenePos()), Qt::DashLine);
             }
         }
     }
@@ -87,9 +86,9 @@ void VisToolPiecePath::mousePressEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VisToolPiecePath::GetPoint(quint32 i, const QColor &color) -> VSimplePoint *
+auto VisToolPiecePath::GetPoint(quint32 i, VColorRole role) -> VSimplePoint *
 {
-    return VisPath::GetPoint(m_points, i, color);
+    return VisPath::GetPoint(m_points, i, role);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

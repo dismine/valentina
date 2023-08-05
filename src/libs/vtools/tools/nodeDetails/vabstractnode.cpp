@@ -30,16 +30,15 @@
 
 #include <QSharedPointer>
 #include <QUndoStack>
-#include <Qt>
 
+#include "../ifc/exception/vexceptionwrongid.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../ifc/exception/vexceptionwrongid.h"
-#include "../vgeometry/vgobject.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vmisc/def.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../vabstracttool.h"
+#include "../vgeometry/vgobject.h"
+#include "../vmisc/def.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vcontainer.h"
 
 const QString VAbstractNode::AttrIdTool = QStringLiteral("idTool");
 
@@ -55,12 +54,12 @@ const QString VAbstractNode::AttrIdTool = QStringLiteral("idTool");
  */
 VAbstractNode::VAbstractNode(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &idNode,
                              const QString &drawName, const quint32 &idTool, QObject *parent)
-    : VAbstractTool(doc, data, id, parent),
-      parentType(ParentType::Item),
-      idNode(idNode),
-      idTool(idTool),
-      m_drawName(drawName),
-      m_exluded(false)
+  : VAbstractTool(doc, data, id, parent),
+    parentType(ParentType::Item),
+    idNode(idNode),
+    idTool(idTool),
+    m_drawName(drawName),
+    m_exluded(false)
 {
     _referens = 0;
 }

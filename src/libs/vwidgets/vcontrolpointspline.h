@@ -38,9 +38,10 @@
 #include <QtGlobal>
 
 #include "../vgeometry/vgeometrydef.h"
-#include "../vgeometry/vsplinepath.h"
 #include "../vmisc/def.h"
 #include "vscenepoint.h"
+
+class VScaledLine;
 
 /**
  * @brief The VControlPointSpline class control spline point.
@@ -53,15 +54,15 @@ public:
     VControlPointSpline(const vsizetype &indexSpline, SplinePointPosition position, QGraphicsItem *parent = nullptr);
     VControlPointSpline(const vsizetype &indexSpline, SplinePointPosition position, const QPointF &controlPoint,
                         bool freeAngle, bool freeLength, QGraphicsItem *parent = nullptr);
-    virtual ~VControlPointSpline() = default;
+    ~VControlPointSpline() override = default;
 
-    virtual auto type() const -> int override { return Type; }
+    auto type() const -> int override { return Type; }
     enum
     {
         Type = UserType + static_cast<int>(Vis::ControlPointSpline)
     };
 
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 signals:
     /**
      * @brief ControlPointChangePosition emit when control point change position.
@@ -86,11 +87,11 @@ protected:
     /** @brief controlLine pointer to line control point. */
     VScaledLine *controlLine;
 
-    virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
     auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
-    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
-    virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
-    virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+    void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
 
 private:
     Q_DISABLE_COPY_MOVE(VControlPointSpline) // NOLINT

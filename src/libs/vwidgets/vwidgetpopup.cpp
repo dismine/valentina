@@ -28,7 +28,6 @@
 
 #include "vwidgetpopup.h"
 
-#include <QScreen>
 #include <QFont>
 #include <QGuiApplication>
 #include <QLabel>
@@ -36,16 +35,20 @@
 #include <QMessageLogger>
 #include <QPoint>
 #include <QRect>
+#include <QScreen>
 #include <QTimer>
 #include <QVBoxLayout>
 #include <QWidget>
-#include <Qt>
 
 #include "../vmisc/def.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VWidgetPopup::VWidgetPopup(QWidget *parent)
-    :QFrame(parent, Qt::Popup), mWidget(nullptr), mOwn(true), mOldParent(nullptr), lifeTime(-1)
+  : QFrame(parent, Qt::Popup),
+    mWidget(nullptr),
+    mOwn(true),
+    mOldParent(nullptr),
+    lifeTime(-1)
 {
     setAttribute(Qt::WA_WindowPropagation);
 
@@ -111,7 +114,7 @@ void VWidgetPopup::Show(QPoint coord)
     QFrame::show();
 
     const QRect screen(QGuiApplication::primaryScreen()->availableGeometry());
-    coord.setX(coord.x() - width()/2);
+    coord.setX(coord.x() - width() / 2);
 
     if (coord.x() < screen.x())
     {
@@ -123,14 +126,14 @@ void VWidgetPopup::Show(QPoint coord)
         coord.setY(screen.y());
     }
 
-    if (coord.x() > (screen.right()-width()))
+    if (coord.x() > (screen.right() - width()))
     {
-        coord.setX(screen.right()-width());
+        coord.setX(screen.right() - width());
     }
 
-    if (coord.y() > (screen.bottom()-height()))
+    if (coord.y() > (screen.bottom() - height()))
     {
-        coord.setY(screen.bottom()-height());
+        coord.setY(screen.bottom() - height());
     }
     move(coord);
 

@@ -42,7 +42,6 @@
 #include <QPolygonF>
 #include <QTransform>
 #include <QUuid>
-#include <Qt>
 #include <QtConcurrent/QtConcurrentRun>
 #include <QtDebug>
 #include <QtMath>
@@ -1798,7 +1797,12 @@ void VLayoutPiece::CreateGrainlineItem(QGraphicsItem *parent) const
     }
 
     auto *item = new VGraphicsFillItem(VLayoutPiece::GrainlinePath(GetMappedGrainlineShape()), parent);
-    item->SetWidth(VAbstractApplication::VApp()->Settings()->WidthHairLine());
+    item->SetCustomPen(true);
+    QPen pen = item->pen();
+    pen.setWidthF(VAbstractApplication::VApp()->Settings()->WidthHairLine());
+    pen.setCapStyle(Qt::RoundCap);
+    pen.setJoinStyle(Qt::RoundJoin);
+    item->setPen(pen);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

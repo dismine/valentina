@@ -39,22 +39,17 @@
 #include <QPen>
 #include <QPoint>
 #include <QRectF>
-#include <Qt>
 
 #include "global.h"
-#include "../vgeometry/vgobject.h"
-#include "../vgeometry/vpointf.h"
 #include "vgraphicssimpletextitem.h"
-#include "../vmisc/vabstractapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VSimplePoint::VSimplePoint(quint32 id, const QColor &currentColor, QObject *parent)
-    : VAbstractSimple(id, parent),
-      VScenePoint(),
-      m_visualizationMode(false),
-      m_alwaysHovered(false)
+VSimplePoint::VSimplePoint(quint32 id, VColorRole role, QObject *parent)
+  : VAbstractSimple(id, parent),
+    VScenePoint(role),
+    m_visualizationMode(false),
+    m_alwaysHovered(false)
 {
-    m_baseColor = currentColor;
     connect(m_namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VSimplePoint::contextMenuEvent);
     connect(m_namePoint, &VGraphicsSimpleTextItem::DeleteTool, this, &VSimplePoint::DeleteFromLabel);
     connect(m_namePoint, &VGraphicsSimpleTextItem::PointChoosed, this, &VSimplePoint::PointChoosed);
@@ -151,13 +146,13 @@ void VSimplePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
         QGraphicsEllipseItem::mousePressEvent(event);
 
         // Somehow clicking on notselectable object do not clean previous selections.
-        if (not (flags() & ItemIsSelectable) && scene())
+        if (not(flags() & ItemIsSelectable) && scene())
         {
             scene()->clearSelection();
         }
 
         if (selectionType == SelectionType::ByMouseRelease)
-        {// Special for not selectable item first need to call standard mousePressEvent then accept event
+        { // Special for not selectable item first need to call standard mousePressEvent then accept event
             event->accept();
         }
         else
@@ -208,11 +203,11 @@ void VSimplePoint::keyReleaseEvent(QKeyEvent *event)
     {
         case Qt::Key_Delete:
             emit Delete();
-            return; //Leave this method immediately after call!!!
+            return; // Leave this method immediately after call!!!
         default:
             break;
     }
-    VScenePoint::keyReleaseEvent ( event );
+    VScenePoint::keyReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

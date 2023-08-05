@@ -76,39 +76,40 @@ class VAbstractOperation : public VDrawTool, public QGraphicsLineItem
     Q_INTERFACES(QGraphicsItem)
 
 public:
-    virtual ~VAbstractOperation() = default;
+    ~VAbstractOperation() override = default;
 
     static const QString TagItem;
     static const QString TagSource;
     static const QString TagDestination;
 
-    virtual auto getTagName() const -> QString override;
+    auto getTagName() const -> QString override;
 
     auto Suffix() const -> QString;
     void SetSuffix(const QString &suffix);
 
-    virtual void SetNotes(const QString &notes) override;
+    void SetNotes(const QString &notes) override;
 
     auto SourceItems() const -> QVector<SourceItem>;
 
-    virtual void GroupVisibility(quint32 object, bool visible) override;
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
-    virtual void ChangeLabelPosition(quint32 id, const QPointF &pos) override;
+    void GroupVisibility(quint32 object, bool visible) override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+    void ChangeLabelPosition(quint32 id, const QPointF &pos) override;
 
-    virtual auto IsLabelVisible(quint32 id) const -> bool override;
-    virtual void SetLabelVisible(quint32 id, bool visible) override;
+    auto IsLabelVisible(quint32 id) const -> bool override;
+    void SetLabelVisible(quint32 id, bool visible) override;
 
     static void ExtractData(const QDomElement &domElement, VAbstractOperationInitData &initData);
     static auto ExtractSourceData(const QDomElement &domElement) -> QVector<SourceItem>;
     static auto ExtractDestinationData(const QDomElement &domElement) -> QVector<DestinationItem>;
 
     static auto OperationColorsList() -> QMap<QString, QString>;
-public slots:
-    virtual void FullUpdateFromFile() override;
 
-    virtual void AllowHover(bool enabled) override;
-    virtual void AllowSelecting(bool enabled) override;
-    virtual void EnableToolMove(bool move) override;
+public slots:
+    void FullUpdateFromFile() override;
+
+    void AllowHover(bool enabled) override;
+    void AllowSelecting(bool enabled) override;
+    void EnableToolMove(bool move) override;
 
     void AllowPointHover(bool enabled);
     void AllowPointSelecting(bool enabled);
@@ -128,8 +129,8 @@ public slots:
     void AllowElArcHover(bool enabled);
     void AllowElArcSelecting(bool enabled);
 
-    virtual void ToolSelectionType(const SelectionType &type) override;
-    virtual void Disable(bool disable, const QString &namePP) override;
+    void ToolSelectionType(const SelectionType &type) override;
+    void Disable(bool disable, const QString &namePP) override;
     void ObjectSelected(bool selected, quint32 objId);
     void DeleteFromLabel();
     void LabelChangePosition(const QPointF &pos, quint32 labelId);
@@ -140,7 +141,7 @@ protected:
     QVector<SourceItem> source;
     QVector<DestinationItem> destination;
 
-    QMap<quint32, VAbstractSimple *> operatedObjects;
+    QMap<quint32, VAbstractSimple *> operatedObjects{};
 
     bool hasLinkedGroup{false};
     QString groupName{};
@@ -148,15 +149,15 @@ protected:
 
     explicit VAbstractOperation(const VAbstractOperationInitData &initData, QGraphicsItem *parent = nullptr);
 
-    virtual void AddToFile() override;
-    virtual void ChangeLabelVisibility(quint32 id, bool visible) override;
-    virtual void ApplyToolOptions(const QList<quint32> &oldDependencies, const QList<quint32> &newDependencies,
-                                  const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
-    virtual void PerformDelete() override;
-    virtual void ReadToolAttributes(const QDomElement &domElement) override;
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void AddToFile() override;
+    void ChangeLabelVisibility(quint32 id, bool visible) override;
+    void ApplyToolOptions(const QList<quint32> &oldDependencies, const QList<quint32> &newDependencies,
+                          const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
+    void PerformDelete() override;
+    void ReadToolAttributes(const QDomElement &domElement) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
 
-    virtual void UpdateNamePosition(quint32 id, const QPointF &pos) override;
+    void UpdateNamePosition(quint32 id, const QPointF &pos) override;
     void SaveSourceDestination(QDomElement &tag);
 
     template <typename T> void ShowToolVisualization(bool show);

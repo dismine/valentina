@@ -42,12 +42,12 @@
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 
-#include "../vmisc/def.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vpropertyexplorer/checkablemessagebox.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/xml/vwatermarkconverter.h"
 #include "../vformat/vwatermark.h"
+#include "../vmisc/def.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vpropertyexplorer/checkablemessagebox.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 WatermarkWindow::WatermarkWindow(const QString &patternPath, QWidget *parent)
@@ -66,54 +66,54 @@ WatermarkWindow::WatermarkWindow(const QString &patternPath, QWidget *parent)
 
     ToolBarStyle(ui->toolBar);
 
-    connect(ui->spinBoxOpacity, QOverload<int>::of(&QSpinBox::valueChanged),this,
-            [this](){WatermarkChangesWereSaved(false);});
+    connect(ui->spinBoxOpacity, QOverload<int>::of(&QSpinBox::valueChanged), this,
+            [this]() { WatermarkChangesWereSaved(false); });
 
-    connect(ui->lineEditText, &QLineEdit::textChanged, this, [this]()
-    {
-        WatermarkChangesWereSaved(false);
-    });
+    connect(ui->lineEditText, &QLineEdit::textChanged, this, [this]() { WatermarkChangesWereSaved(false); });
 
     connect(ui->spinBoxTextRotation, QOverload<int>::of(&QSpinBox::valueChanged), this,
-            [this](){WatermarkChangesWereSaved(false);});
+            [this]() { WatermarkChangesWereSaved(false); });
 
-    connect(ui->toolButtonFont, &QToolButton::clicked, this, [this]()
-    {
-        bool ok;
-        QFont font = QFontDialog::getFont(&ok, m_data.font, this);
-        if (ok)
-        {
-            WatermarkChangesWereSaved(false);
-            m_data.font = font;
-            ui->lineEditFontSample->setFont(font);
-        }
-    });
+    connect(ui->toolButtonFont, &QToolButton::clicked, this,
+            [this]()
+            {
+                bool ok;
+                QFont font = QFontDialog::getFont(&ok, m_data.font, this);
+                if (ok)
+                {
+                    WatermarkChangesWereSaved(false);
+                    m_data.font = font;
+                    ui->lineEditFontSample->setFont(font);
+                }
+            });
 
-    connect(ui->lineEditPath, &QLineEdit::textChanged, this, [this]()
-    {
-        WatermarkChangesWereSaved(false);
-        ValidatePath();
-    });
+    connect(ui->lineEditPath, &QLineEdit::textChanged, this,
+            [this]()
+            {
+                WatermarkChangesWereSaved(false);
+                ValidatePath();
+            });
 
-    connect(ui->pushButtonBrowse, &QPushButton::clicked, this, [this]()
-    {
-        const QString filter = tr("Images") + QLatin1String(" (*.png *.jpg *.jpeg *.bmp)");
-        const QString fileName = QFileDialog::getOpenFileName(this, tr("Watermark image"), QString(), filter,
-                                                              nullptr,
-                                                              VAbstractApplication::VApp()->NativeFileDialog());
-        if (not fileName.isEmpty())
-        {
-            ui->lineEditPath->setText(fileName);
-        }
-    });
+    connect(ui->pushButtonBrowse, &QPushButton::clicked, this,
+            [this]()
+            {
+                const QString filter = tr("Images") + QLatin1String(" (*.png *.jpg *.jpeg *.bmp)");
+                const QString fileName =
+                    QFileDialog::getOpenFileName(this, tr("Watermark image"), QString(), filter, nullptr,
+                                                 VAbstractApplication::VApp()->NativeFileDialog());
+                if (not fileName.isEmpty())
+                {
+                    ui->lineEditPath->setText(fileName);
+                }
+            });
 
-    connect(ui->spinBoxImageRotation, QOverload<int>::of(&QSpinBox::valueChanged),this,
-            [this](){WatermarkChangesWereSaved(false);});
+    connect(ui->spinBoxImageRotation, QOverload<int>::of(&QSpinBox::valueChanged), this,
+            [this]() { WatermarkChangesWereSaved(false); });
 
-    connect(ui->checkBoxGrayColor, &QCheckBox::stateChanged, this, [this](){WatermarkChangesWereSaved(false);});
+    connect(ui->checkBoxGrayColor, &QCheckBox::stateChanged, this, [this]() { WatermarkChangesWereSaved(false); });
 
-    connect(ui->groupBoxWatermarkText, &QGroupBox::toggled, this, [this](){WatermarkChangesWereSaved(false);});
-    connect(ui->groupBoxWatermarkImage, &QGroupBox::toggled, this, [this](){WatermarkChangesWereSaved(false);});
+    connect(ui->groupBoxWatermarkText, &QGroupBox::toggled, this, [this]() { WatermarkChangesWereSaved(false); });
+    connect(ui->groupBoxWatermarkImage, &QGroupBox::toggled, this, [this]() { WatermarkChangesWereSaved(false); });
 
     ui->pushButtonColorPicker->insertColor(Qt::black, tr("Black", "color"));
     ui->pushButtonColorPicker->insertColor(Qt::red, tr("Red", "color"));
@@ -133,12 +133,13 @@ WatermarkWindow::WatermarkWindow(const QString &patternPath, QWidget *parent)
     ui->pushButtonColorPicker->insertColor(Qt::lightGray, tr("Light gray", "color"));
 
     QVector<QColor> colors = VAbstractApplication::VApp()->Settings()->GetWatermarkCustomColors();
-    for (const auto& color : colors)
+    for (const auto &color : colors)
     {
         ui->pushButtonColorPicker->insertColor(color);
     }
 
-    connect(ui->pushButtonColorPicker, &QtColorPicker::colorChanged, this, [this](){WatermarkChangesWereSaved(false);});
+    connect(ui->pushButtonColorPicker, &QtColorPicker::colorChanged, this,
+            [this]() { WatermarkChangesWereSaved(false); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -168,13 +169,14 @@ auto WatermarkWindow::Open(QString path) -> bool
     // Convert to absolute path if need
     path = AbsoluteMPath(m_patternPath, path);
 
-    QFuture<VWatermarkConverter *> futureConverter = QtConcurrent::run([path]()
-    {
-        std::unique_ptr<VWatermarkConverter> converter(new VWatermarkConverter(path));
-        return converter.release();
-    });
+    QFuture<VWatermarkConverter *> futureConverter = QtConcurrent::run(
+        [path]()
+        {
+            std::unique_ptr<VWatermarkConverter> converter(new VWatermarkConverter(path));
+            return converter.release();
+        });
 
-    //We have unsaved changes or load more then one file per time
+    // We have unsaved changes or load more then one file per time
     if (OpenNewEditor(path))
     {
         return false;
@@ -206,8 +208,8 @@ auto WatermarkWindow::Open(QString path) -> bool
     }
     catch (VException &e)
     {
-        qCritical("%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
-                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        qCritical("%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")), qUtf8Printable(e.ErrorMessage()),
+                  qUtf8Printable(e.DetailedInformation()));
         Clear();
         return false;
     }
@@ -260,8 +262,8 @@ void WatermarkWindow::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void WatermarkWindow::showEvent(QShowEvent *event)
 {
-    QMainWindow::showEvent( event );
-    if ( event->spontaneous() )
+    QMainWindow::showEvent(event);
+    if (event->spontaneous())
     {
         return;
     }
@@ -278,7 +280,7 @@ void WatermarkWindow::showEvent(QShowEvent *event)
         resize(sz);
     }
 
-    m_isInitialized = true;//first show windows are held
+    m_isInitialized = true; // first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -323,7 +325,7 @@ auto WatermarkWindow::on_actionSaveAs_triggered() -> bool
         return false;
     }
 
-    QFileInfo f( fileName );
+    QFileInfo f(fileName);
     if (f.suffix().isEmpty() && f.suffix() != QLatin1String("vwm"))
     {
         fileName += QLatin1String(".vwm");
@@ -489,11 +491,9 @@ auto WatermarkWindow::MaybeSave() -> bool
 {
     if (this->isWindowModified())
     {
-        QScopedPointer<QMessageBox> messageBox(new QMessageBox(tr("Unsaved changes"),
-                                                               tr("The watermark has been modified.\n"
-                                                                  "Do you want to save your changes?"),
-                                                               QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No,
-                                                               QMessageBox::Cancel, this, Qt::Sheet));
+        QScopedPointer<QMessageBox> messageBox(new QMessageBox(
+            tr("Unsaved changes"), tr("The watermark has been modified. Do you want to save your changes?"),
+            QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No, QMessageBox::Cancel, this, Qt::Sheet));
 
         messageBox->setDefaultButton(QMessageBox::Yes);
         messageBox->setEscapeButton(QMessageBox::Cancel);
@@ -525,13 +525,13 @@ void WatermarkWindow::UpdateWindowTitle()
     bool isFileWritable = true;
     if (not m_curFile.isEmpty())
     {
-//#ifdef Q_OS_WIN32
-//        qt_ntfs_permission_lookup++; // turn checking on
-//#endif /*Q_OS_WIN32*/
+        // #ifdef Q_OS_WIN32
+        //         qt_ntfs_permission_lookup++; // turn checking on
+        // #endif /*Q_OS_WIN32*/
         isFileWritable = QFileInfo(m_curFile).isWritable();
-//#ifdef Q_OS_WIN32
-//        qt_ntfs_permission_lookup--; // turn it off again
-//#endif /*Q_OS_WIN32*/
+        // #ifdef Q_OS_WIN32
+        //         qt_ntfs_permission_lookup--; // turn it off again
+        // #endif /*Q_OS_WIN32*/
     }
 
     if (isFileWritable)
@@ -545,8 +545,8 @@ void WatermarkWindow::UpdateWindowTitle()
     setWindowFilePath(m_curFile);
 
 #if defined(Q_OS_MAC)
-    static QIcon fileIcon = QIcon(QCoreApplication::applicationDirPath() +
-                                  QLatin1String("/../Resources/Valentina.icns"));
+    static QIcon fileIcon =
+        QIcon(QCoreApplication::applicationDirPath() + QLatin1String("/../Resources/Valentina.icns"));
     QIcon icon;
     if (not m_curFile.isEmpty())
     {
@@ -566,14 +566,14 @@ void WatermarkWindow::UpdateWindowTitle()
         }
     }
     setWindowIcon(icon);
-#endif //defined(Q_OS_MAC)
+#endif // defined(Q_OS_MAC)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto WatermarkWindow::GetWatermarkFileName() -> QString
 {
     QString shownName = tr("untitled.vwm");
-    if(not m_curFile.isEmpty())
+    if (not m_curFile.isEmpty())
     {
         shownName = StrippedName(m_curFile);
     }
@@ -592,7 +592,8 @@ auto WatermarkWindow::ContinueFormatRewrite(const QString &currentFormatVersion,
         msgBox.setText(tr("This file is using previous format version v%1. The current is v%2. "
                           "Saving the file with this app version will update the format version for this "
                           "file. This may prevent you from be able to open the file with older app versions. "
-                          "Do you really want to continue?").arg(currentFormatVersion, maxFormatVersion));
+                          "Do you really want to continue?")
+                           .arg(currentFormatVersion, maxFormatVersion));
         msgBox.setStandardButtons(QDialogButtonBox::Yes | QDialogButtonBox::No);
         msgBox.setDefaultButton(QDialogButtonBox::No);
         msgBox.setIconPixmap(QApplication::style()->standardIcon(QStyle::SP_MessageBoxQuestion).pixmap(32, 32));
@@ -670,27 +671,27 @@ void WatermarkWindow::Clear()
 auto WatermarkWindow::IgnoreLocking(int error, const QString &path) -> bool
 {
     QMessageBox::StandardButton answer = QMessageBox::Abort;
-    switch(error)
+    switch (error)
     {
         case QLockFile::LockFailedError:
             answer = QMessageBox::warning(this, tr("Locking file"),
-                                           tr("This file already opened in another window. Ignore if you want "
-                                              "to continue (not recommended, can cause a data corruption)."),
-                                           QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
+                                          tr("This file already opened in another window. Ignore if you want "
+                                             "to continue (not recommended, can cause a data corruption)."),
+                                          QMessageBox::Abort | QMessageBox::Ignore, QMessageBox::Abort);
             break;
         case QLockFile::PermissionError:
             answer = QMessageBox::question(this, tr("Locking file"),
                                            tr("The lock file could not be created, for lack of permissions. "
                                               "Ignore if you want to continue (not recommended, can cause "
                                               "a data corruption)."),
-                                           QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
+                                           QMessageBox::Abort | QMessageBox::Ignore, QMessageBox::Abort);
             break;
         case QLockFile::UnknownError:
             answer = QMessageBox::question(this, tr("Locking file"),
                                            tr("Unknown error happened, for instance a full partition prevented "
                                               "writing out the lock file. Ignore if you want to continue (not "
                                               "recommended, can cause a data corruption)."),
-                                           QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
+                                           QMessageBox::Abort | QMessageBox::Ignore, QMessageBox::Abort);
             break;
         default:
             answer = QMessageBox::Abort;

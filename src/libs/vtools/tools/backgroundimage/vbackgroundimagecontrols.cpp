@@ -36,14 +36,16 @@
 #include <QScreen>
 #include <QUndoStack>
 
-#include "../ifc/xml/vabstractpattern.h"
-#include "vbackgroundimageitem.h"
-#include "../vwidgets/global.h"
-#include "../vmisc/vabstractvalapplication.h"
-#include "../../undocommands/image/scalebackgroundimage.h"
 #include "../../undocommands/image/rotatebackgroundimage.h"
+#include "../../undocommands/image/scalebackgroundimage.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vmath.h"
+#include "../vwidgets/global.h"
 #include "../vwidgets/vmaingraphicsview.h"
+#include "qstringliteral.h"
+#include "theme/vtheme.h"
+#include "vbackgroundimageitem.h"
 
 namespace
 {
@@ -51,7 +53,7 @@ namespace
 auto RectTopPoint(const QRectF &rect) -> QPointF
 {
     QLineF edge(rect.topLeft(), rect.topRight());
-    edge.setLength(edge.length()/2.);
+    edge.setLength(edge.length() / 2.);
     return edge.p2();
 }
 
@@ -59,7 +61,7 @@ auto RectTopPoint(const QRectF &rect) -> QPointF
 auto RectRightPoint(const QRectF &rect) -> QPointF
 {
     QLineF edge(rect.topRight(), rect.bottomRight());
-    edge.setLength(edge.length()/2.);
+    edge.setLength(edge.length() / 2.);
     return edge.p2();
 }
 
@@ -67,7 +69,7 @@ auto RectRightPoint(const QRectF &rect) -> QPointF
 auto RectBottomPoint(const QRectF &rect) -> QPointF
 {
     QLineF edge(rect.bottomLeft(), rect.bottomRight());
-    edge.setLength(edge.length()/2.);
+    edge.setLength(edge.length() / 2.);
     return edge.p2();
 }
 
@@ -75,15 +77,15 @@ auto RectBottomPoint(const QRectF &rect) -> QPointF
 auto RectLeftPoint(const QRectF &rect) -> QPointF
 {
     QLineF edge(rect.bottomLeft(), rect.topLeft());
-    edge.setLength(edge.length()/2.);
+    edge.setLength(edge.length() / 2.);
     return edge.p2();
 }
-}  // namespace
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-VBackgroundImageControls::VBackgroundImageControls(VAbstractPattern *doc, QGraphicsItem * parent)
-    : QGraphicsObject(parent),
-      m_doc(doc)
+VBackgroundImageControls::VBackgroundImageControls(VAbstractPattern *doc, QGraphicsItem *parent)
+  : QGraphicsObject(parent),
+    m_doc(doc)
 {
     SCASSERT(doc != nullptr)
     setVisible(false);
@@ -102,7 +104,6 @@ VBackgroundImageControls::VBackgroundImageControls(VAbstractPattern *doc, QGraph
     }
 #endif
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void VBackgroundImageControls::ActivateControls(const QUuid &id)
@@ -156,9 +157,8 @@ void VBackgroundImageControls::DeactivateControls(QGraphicsItem *item)
         return;
     }
 
-    if (item->type() == type() ||
-            item->type() == UserType + static_cast<int>(Tool::BackgroundPixmapImage) ||
-            item->type() == UserType + static_cast<int>(Tool::BackgroundSVGImage))
+    if (item->type() == type() || item->type() == UserType + static_cast<int>(Tool::BackgroundPixmapImage) ||
+        item->type() == UserType + static_cast<int>(Tool::BackgroundSVGImage))
     {
         return;
     }
@@ -178,7 +178,7 @@ void VBackgroundImageControls::UpdateControls()
 
     prepareGeometryChange();
     m_image = m_doc->GetBackgroundImage(m_id);
-    if(not m_customOrigin)
+    if (not m_customOrigin)
     {
         m_originPos = m_image.BoundingRect().center();
     }
@@ -199,21 +199,16 @@ auto VBackgroundImageControls::boundingRect() const -> QRectF
     {
         HandlerBoundingRect(BIHandleCorner::TopLeft, BIHandleCornerType::ScaleTopLeftBottomRight,
                             TopLeftHandlerPosition());
-        HandlerBoundingRect(BIHandleCorner::Top, BIHandleCornerType::ScaleTopBottom,
-                            TopHandlerPosition());
+        HandlerBoundingRect(BIHandleCorner::Top, BIHandleCornerType::ScaleTopBottom, TopHandlerPosition());
         HandlerBoundingRect(BIHandleCorner::TopRight, BIHandleCornerType::ScaleTopRightBottomLeft,
                             TopRightHandlerPosition());
-        HandlerBoundingRect(BIHandleCorner::Right, BIHandleCornerType::ScaleRightLeft,
-                            RightHandlerPosition());
+        HandlerBoundingRect(BIHandleCorner::Right, BIHandleCornerType::ScaleRightLeft, RightHandlerPosition());
         HandlerBoundingRect(BIHandleCorner::BottomRight, BIHandleCornerType::ScaleTopLeftBottomRight,
                             BottomRightHandlerPosition());
-        HandlerBoundingRect(BIHandleCorner::Bottom, BIHandleCornerType::ScaleTopBottom,
-                            BottomHandlerPosition());
+        HandlerBoundingRect(BIHandleCorner::Bottom, BIHandleCornerType::ScaleTopBottom, BottomHandlerPosition());
         HandlerBoundingRect(BIHandleCorner::BottomLeft, BIHandleCornerType::ScaleTopRightBottomLeft,
                             BottomLeftHandlerPosition());
-        HandlerBoundingRect(BIHandleCorner::Left, BIHandleCornerType::ScaleRightLeft,
-                            LeftHandlerPosition());
-
+        HandlerBoundingRect(BIHandleCorner::Left, BIHandleCornerType::ScaleRightLeft, LeftHandlerPosition());
     }
     else if (m_tranformationType == BITransformationType::Rotate)
     {
@@ -249,48 +244,42 @@ void VBackgroundImageControls::paint(QPainter *painter, const QStyleOptionGraphi
     {
         if (m_tranformationType == BITransformationType::Scale)
         {
-            painter->drawPixmap(TopLeftHandlerPosition(),
-                                HandlerPixmap(m_handleCornerHover == BIHandleCorner::TopLeft,
-                                              BIHandleCornerType::ScaleTopLeftBottomRight));
-            painter->drawPixmap(TopHandlerPosition(),
-                                HandlerPixmap(m_handleCornerHover == BIHandleCorner::Top,
-                                              BIHandleCornerType::ScaleTopBottom));
+            painter->drawPixmap(TopLeftHandlerPosition(), HandlerPixmap(m_handleCornerHover == BIHandleCorner::TopLeft,
+                                                                        BIHandleCornerType::ScaleTopLeftBottomRight));
+            painter->drawPixmap(TopHandlerPosition(), HandlerPixmap(m_handleCornerHover == BIHandleCorner::Top,
+                                                                    BIHandleCornerType::ScaleTopBottom));
             painter->drawPixmap(TopRightHandlerPosition(),
                                 HandlerPixmap(m_handleCornerHover == BIHandleCorner::TopRight,
                                               BIHandleCornerType::ScaleTopRightBottomLeft));
-            painter->drawPixmap(RightHandlerPosition(),
-                                HandlerPixmap(m_handleCornerHover == BIHandleCorner::Right,
-                                              BIHandleCornerType::ScaleRightLeft));
+            painter->drawPixmap(RightHandlerPosition(), HandlerPixmap(m_handleCornerHover == BIHandleCorner::Right,
+                                                                      BIHandleCornerType::ScaleRightLeft));
             painter->drawPixmap(BottomRightHandlerPosition(),
                                 HandlerPixmap(m_handleCornerHover == BIHandleCorner::BottomRight,
                                               BIHandleCornerType::ScaleTopLeftBottomRight));
-            painter->drawPixmap(BottomHandlerPosition(),
-                                HandlerPixmap(m_handleCornerHover == BIHandleCorner::Bottom,
-                                              BIHandleCornerType::ScaleTopBottom));
+            painter->drawPixmap(BottomHandlerPosition(), HandlerPixmap(m_handleCornerHover == BIHandleCorner::Bottom,
+                                                                       BIHandleCornerType::ScaleTopBottom));
             painter->drawPixmap(BottomLeftHandlerPosition(),
                                 HandlerPixmap(m_handleCornerHover == BIHandleCorner::BottomLeft,
                                               BIHandleCornerType::ScaleTopRightBottomLeft));
-            painter->drawPixmap(LeftHandlerPosition(),
-                                HandlerPixmap(m_handleCornerHover == BIHandleCorner::Left,
-                                              BIHandleCornerType::ScaleRightLeft));
+            painter->drawPixmap(LeftHandlerPosition(), HandlerPixmap(m_handleCornerHover == BIHandleCorner::Left,
+                                                                     BIHandleCornerType::ScaleRightLeft));
         }
         else if (m_tranformationType == BITransformationType::Rotate)
         {
-            painter->drawPixmap(TopLeftHandlerPosition(),
-                                HandlerPixmap(m_handleCornerHover == BIHandleCorner::TopLeft,
-                                              BIHandleCornerType::RotateTopLeft));
+            painter->drawPixmap(TopLeftHandlerPosition(), HandlerPixmap(m_handleCornerHover == BIHandleCorner::TopLeft,
+                                                                        BIHandleCornerType::RotateTopLeft));
 
-            painter->drawPixmap(TopRightHandlerPosition(),
-                                HandlerPixmap(m_handleCornerHover == BIHandleCorner::TopRight,
-                                              BIHandleCornerType::RotateTopRight));
+            painter->drawPixmap(
+                TopRightHandlerPosition(),
+                HandlerPixmap(m_handleCornerHover == BIHandleCorner::TopRight, BIHandleCornerType::RotateTopRight));
 
             painter->drawPixmap(BottomRightHandlerPosition(),
                                 HandlerPixmap(m_handleCornerHover == BIHandleCorner::BottomRight,
                                               BIHandleCornerType::RotateBottomRight));
 
-            painter->drawPixmap(BottomLeftHandlerPosition(),
-                                HandlerPixmap(m_handleCornerHover == BIHandleCorner::BottomLeft,
-                                              BIHandleCornerType::RotateBottomLeft));
+            painter->drawPixmap(
+                BottomLeftHandlerPosition(),
+                HandlerPixmap(m_handleCornerHover == BIHandleCorner::BottomLeft, BIHandleCornerType::RotateBottomLeft));
         }
     }
 
@@ -301,7 +290,7 @@ void VBackgroundImageControls::paint(QPainter *painter, const QStyleOptionGraphi
     painter->setPen(pen);
 
     QRectF rect = m_image.BoundingRect();
-    rect = QRectF(rect.topLeft()*sceneScale, rect.bottomRight()*sceneScale);
+    rect = QRectF(rect.topLeft() * sceneScale, rect.bottomRight() * sceneScale);
 
     painter->drawRect(rect.adjusted(-pen.width(), -pen.width(), pen.width(), pen.width()));
     painter->restore();
@@ -323,7 +312,7 @@ void VBackgroundImageControls::paint(QPainter *painter, const QStyleOptionGraphi
 //---------------------------------------------------------------------------------------------------------------------
 void VBackgroundImageControls::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    if(event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
+    if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
         m_transformationApplied = true;
         m_controlsVisible = false;
@@ -348,13 +337,13 @@ void VBackgroundImageControls::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
         const qreal sceneScale = SceneScale(scene());
         m_imageBoundingRect = m_image.BoundingRect();
-        m_imageScreenBoundingRect = QRectF(m_imageBoundingRect.topLeft()*sceneScale,
-                                           QSizeF(m_imageBoundingRect.width()*sceneScale,
-                                                  m_imageBoundingRect.height()*sceneScale));
+        m_imageScreenBoundingRect =
+            QRectF(m_imageBoundingRect.topLeft() * sceneScale,
+                   QSizeF(m_imageBoundingRect.width() * sceneScale, m_imageBoundingRect.height() * sceneScale));
 
         m_originalMatrix = m_image.Matrix();
 
-        switch(m_handleCornerHover)
+        switch (m_handleCornerHover)
         {
             case BIHandleCorner::TopLeft:
                 m_scaleDiff = event->pos() - m_imageScreenBoundingRect.topLeft();
@@ -413,7 +402,7 @@ void VBackgroundImageControls::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VBackgroundImageControls::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if(event->button() == Qt::LeftButton)
+    if (event->button() == Qt::LeftButton)
     {
         if (SelectedHandleCorner(event->pos()) != BIHandleCorner::Invalid)
         {
@@ -495,43 +484,35 @@ void VBackgroundImageControls::InitPixmaps()
     m_handleDisabledPixmaps.clear();
     m_handlePaths.clear();
 
-    auto InitPixmap = [this](BIHandleCornerType type, const QString &fileName)
+    auto InitPixmap = [this](BIHandleCornerType type, const QString &imageName)
     {
-        const QFileInfo fileInfo(fileName);
-        const QString imageName = fileInfo.baseName();
+        const QString fileName = QStringLiteral("32x32/%1.png").arg(imageName);
+        const QString fileNameHover = QStringLiteral("32x32/%1-hover.png").arg(imageName);
+        const QString fileNameDisabled = QStringLiteral("32x32/%1-disabled.png").arg(imageName);
 
-        const QString fileNameHover = QStringLiteral("%1/%2-hover.%3")
-                .arg(fileInfo.absolutePath(), imageName, fileInfo.suffix());
-
-        const QString fileNameDisabled = QStringLiteral("%1/%2-disabled.%3")
-                .arg(fileInfo.absolutePath(), imageName, fileInfo.suffix());
+        const QString resource = QStringLiteral("icon");
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
-        if (QGuiApplication::primaryScreen()->devicePixelRatio() >= 2 )
+        if (QGuiApplication::primaryScreen()->devicePixelRatio() >= 2)
         {
-            const QString fileName2x = QStringLiteral("%1/%2@2x.%3")
-                    .arg(fileInfo.absolutePath(), imageName, fileInfo.suffix());
+            const QString fileName2x = QStringLiteral("32x32/%1@2x.png").arg(imageName);
+            const QString fileName2xHover = QStringLiteral("32x32/%1-hover@2x.png").arg(imageName);
+            const QString fileName2xDisabled = QStringLiteral("32x32/%1-disabled@2x.png").arg(imageName);
 
-            const QString fileName2xHover = QStringLiteral("%1/%2-hover@2x.%3")
-                    .arg(fileInfo.absolutePath(), imageName, fileInfo.suffix());
-
-            const QString fileName2xDisabled = QStringLiteral("%1/%2-disabled@2x.%3")
-                    .arg(fileInfo.absolutePath(), imageName, fileInfo.suffix());
-
-            m_handlePixmaps.insert(type, QPixmap(fileName2x));
-            m_handleHoverPixmaps.insert(type, QPixmap(fileName2xHover));
-            m_handleDisabledPixmaps.insert(type, QPixmap(fileName2xDisabled));
+            m_handlePixmaps.insert(type, VTheme::GetPixmapResource(resource, fileName2x));
+            m_handleHoverPixmaps.insert(type, VTheme::GetPixmapResource(resource, fileName2xHover));
+            m_handleDisabledPixmaps.insert(type, VTheme::GetPixmapResource(resource, fileName2xDisabled));
         }
         else
         {
-            m_handlePixmaps.insert(type, QPixmap(fileName));
-            m_handleHoverPixmaps.insert(type, QPixmap(fileNameHover));
-            m_handleDisabledPixmaps.insert(type, QPixmap(fileNameDisabled));
+            m_handlePixmaps.insert(type, VTheme::GetPixmapResource(resource, fileName));
+            m_handleHoverPixmaps.insert(type, VTheme::GetPixmapResource(resource, fileNameHover));
+            m_handleDisabledPixmaps.insert(type, VTheme::GetPixmapResource(resource, fileNameDisabled));
         }
 #else
-        m_handlePixmaps.insert(type, QPixmap(fileName));
-        m_handleHoverPixmaps.insert(type, QPixmap(fileNameHover));
-        m_handleDisabledPixmaps.insert(type, QPixmap(fileNameDisabled));
+        m_handlePixmaps.insert(type, VTheme::GetPixmapResource(resource, fileName));
+        m_handleHoverPixmaps.insert(type, VTheme::GetPixmapResource(resource, fileNameHover));
+        m_handleDisabledPixmaps.insert(type, VTheme::GetPixmapResource(resource, fileNameDisabled));
 #endif
         QPainterPath p = PixmapToPainterPath(m_handlePixmaps.value(type));
         p.setFillRule(Qt::WindingFill);
@@ -539,14 +520,14 @@ void VBackgroundImageControls::InitPixmaps()
         m_handlePaths.insert(type, p);
     };
 
-    InitPixmap(BIHandleCornerType::ScaleTopLeftBottomRight, QStringLiteral("://icon/32x32/expand2.png"));
-    InitPixmap(BIHandleCornerType::ScaleTopBottom, QStringLiteral("://icon/32x32/double-arrow-vertical.png"));
-    InitPixmap(BIHandleCornerType::ScaleTopRightBottomLeft, QStringLiteral("://icon/32x32/expand1.png"));
-    InitPixmap(BIHandleCornerType::ScaleRightLeft, QStringLiteral("://icon/32x32/double-arrow-horizontal.png"));
-    InitPixmap(BIHandleCornerType::RotateTopLeft, QStringLiteral("://icon/32x32/rotate-top-left.png"));
-    InitPixmap(BIHandleCornerType::RotateTopRight, QStringLiteral("://icon/32x32/rotate-top-right.png"));
-    InitPixmap(BIHandleCornerType::RotateBottomRight, QStringLiteral("://icon/32x32/rotate-bottom-right.png"));
-    InitPixmap(BIHandleCornerType::RotateBottomLeft, QStringLiteral("://icon/32x32/rotate-bottom-left.png"));
+    InitPixmap(BIHandleCornerType::ScaleTopLeftBottomRight, QStringLiteral("expand2"));
+    InitPixmap(BIHandleCornerType::ScaleTopBottom, QStringLiteral("double-arrow-vertical"));
+    InitPixmap(BIHandleCornerType::ScaleTopRightBottomLeft, QStringLiteral("expand1"));
+    InitPixmap(BIHandleCornerType::ScaleRightLeft, QStringLiteral("double-arrow-horizontal"));
+    InitPixmap(BIHandleCornerType::RotateTopLeft, QStringLiteral("rotate-top-left"));
+    InitPixmap(BIHandleCornerType::RotateTopRight, QStringLiteral("rotate-top-right"));
+    InitPixmap(BIHandleCornerType::RotateBottomRight, QStringLiteral("rotate-bottom-right"));
+    InitPixmap(BIHandleCornerType::RotateBottomLeft, QStringLiteral("rotate-bottom-left"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -561,7 +542,7 @@ auto VBackgroundImageControls::TopHandlerPosition() const -> QPointF
     QRectF rect = ControllersRect();
     QPixmap handler = m_handlePixmaps.value(BIHandleCornerType::ScaleTopBottom);
     QSize size = handler.size() / handler.devicePixelRatio();
-    return {rect.topLeft().x() + (rect.width()/2. - size.width()/2.), rect.topLeft().y()};
+    return {rect.topLeft().x() + (rect.width() / 2. - size.width() / 2.), rect.topLeft().y()};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -580,7 +561,7 @@ auto VBackgroundImageControls::RightHandlerPosition() const -> QPointF
     QPixmap handler = m_handlePixmaps.value(BIHandleCornerType::ScaleRightLeft);
     QSize size = handler.size() / handler.devicePixelRatio();
     return {rect.topLeft().x() + (rect.width() - size.width()),
-                rect.topLeft().y() + (rect.height()/2. - size.height()/2.)};
+            rect.topLeft().y() + (rect.height() / 2. - size.height() / 2.)};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -589,8 +570,7 @@ auto VBackgroundImageControls::BottomRightHandlerPosition() const -> QPointF
     QRectF rect = ControllersRect();
     QPixmap handler = m_handlePixmaps.value(BIHandleCornerType::ScaleTopLeftBottomRight);
     QSize size = handler.size() / handler.devicePixelRatio();
-    return {rect.topLeft().x() + (rect.width() - size.width()),
-                rect.topLeft().y() + (rect.height() - size.height())};
+    return {rect.topLeft().x() + (rect.width() - size.width()), rect.topLeft().y() + (rect.height() - size.height())};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -599,8 +579,8 @@ auto VBackgroundImageControls::BottomHandlerPosition() const -> QPointF
     QRectF rect = ControllersRect();
     QPixmap handler = m_handlePixmaps.value(BIHandleCornerType::ScaleTopBottom);
     QSize size = handler.size() / handler.devicePixelRatio();
-    return {rect.topLeft().x() + (rect.width()/2. - size.width()/2.),
-                rect.topLeft().y() + (rect.height() - size.height())};
+    return {rect.topLeft().x() + (rect.width() / 2. - size.width() / 2.),
+            rect.topLeft().y() + (rect.height() - size.height())};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -618,7 +598,7 @@ auto VBackgroundImageControls::LeftHandlerPosition() const -> QPointF
     QRectF rect = ControllersRect();
     QPixmap handler = m_handlePixmaps.value(BIHandleCornerType::ScaleRightLeft);
     QSize size = handler.size() / handler.devicePixelRatio();
-    return {rect.topLeft().x(), rect.topLeft().y() + (rect.height()/2. - size.height()/2.)};
+    return {rect.topLeft().x(), rect.topLeft().y() + (rect.height() / 2. - size.height() / 2.)};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -776,7 +756,7 @@ auto VBackgroundImageControls::ScaleByTopLeft(QGraphicsSceneMouseEvent *event) c
 
         if (newScalePoint.y() > rect.bottomRight().y())
         {
-            newScalePoint.ry() = rect.bottomRight().y()- (newScalePoint.y() - rect.bottomRight().y());
+            newScalePoint.ry() = rect.bottomRight().y() - (newScalePoint.y() - rect.bottomRight().y());
         }
 
         diff = newScalePoint - rect.topLeft();
@@ -784,10 +764,10 @@ auto VBackgroundImageControls::ScaleByTopLeft(QGraphicsSceneMouseEvent *event) c
         nowRect = QRectF(newScalePoint, rect.bottomRight());
     }
 
-    qreal scaleX = nowRect.width()/rect.width();
-    qreal scaleY = nowRect.height()/rect.height();
+    qreal scaleX = nowRect.width() / rect.width();
+    qreal scaleY = nowRect.height() / rect.height();
 
-    if (not (event->modifiers() & Qt::ControlModifier))
+    if (not(event->modifiers() & Qt::ControlModifier))
     {
         if (diff.x() > 0 && diff.x() >= diff.y())
         {
@@ -808,8 +788,8 @@ auto VBackgroundImageControls::ScaleByTopLeft(QGraphicsSceneMouseEvent *event) c
 
     QTransform m;
 
-    QPointF scaleCenterOriginal = (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center()
-                                                                           : rectOriginal.bottomRight();
+    QPointF scaleCenterOriginal =
+        (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center() : rectOriginal.bottomRight();
 
     m.translate(scaleCenterOriginal.x(), scaleCenterOriginal.y());
 
@@ -882,8 +862,8 @@ auto VBackgroundImageControls::ScaleByTop(QGraphicsSceneMouseEvent *event) const
         nowRect = QRectF(QPointF(rect.topLeft().x(), newScalePoint.y()), rect.bottomRight());
     }
 
-    qreal scaleX = nowRect.height()/rect.height();
-    qreal scaleY = nowRect.height()/rect.height();
+    qreal scaleX = nowRect.height() / rect.height();
+    qreal scaleY = nowRect.height() / rect.height();
 
     if (event->modifiers() & Qt::ControlModifier)
     {
@@ -894,8 +874,8 @@ auto VBackgroundImageControls::ScaleByTop(QGraphicsSceneMouseEvent *event) const
 
     QTransform m;
 
-    QPointF scaleCenterOriginal = (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center()
-                                                                           : RectBottomPoint(rectOriginal);
+    QPointF scaleCenterOriginal =
+        (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center() : RectBottomPoint(rectOriginal);
 
     m.translate(scaleCenterOriginal.x(), scaleCenterOriginal.y());
     m.scale(scaleX, scaleY);
@@ -994,14 +974,14 @@ auto VBackgroundImageControls::ScaleByTopRight(QGraphicsSceneMouseEvent *event) 
 
         diff = newScalePoint - rect.topRight();
 
-        nowRect = QRectF(QPointF(rect.topLeft().x(), newScalePoint.y()),
-                         QPointF(newScalePoint.x(), rect.bottomRight().y()));
+        nowRect =
+            QRectF(QPointF(rect.topLeft().x(), newScalePoint.y()), QPointF(newScalePoint.x(), rect.bottomRight().y()));
     }
 
-    qreal scaleX = nowRect.width()/rect.width();
-    qreal scaleY = nowRect.height()/rect.height();
+    qreal scaleX = nowRect.width() / rect.width();
+    qreal scaleY = nowRect.height() / rect.height();
 
-    if (not (event->modifiers() & Qt::ControlModifier))
+    if (not(event->modifiers() & Qt::ControlModifier))
     {
         if (diff.x() < 0 && qAbs(diff.x()) >= qAbs(diff.y()))
         {
@@ -1021,8 +1001,8 @@ auto VBackgroundImageControls::ScaleByTopRight(QGraphicsSceneMouseEvent *event) 
     QPointF newScalePoint = pos - m_scaleDiff;
 
     QTransform m;
-    QPointF scaleCenterOriginal = (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center()
-                                                                           : rectOriginal.bottomLeft();
+    QPointF scaleCenterOriginal =
+        (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center() : rectOriginal.bottomLeft();
 
     m.translate(scaleCenterOriginal.x(), scaleCenterOriginal.y());
     m.scale(scaleX, scaleY);
@@ -1095,8 +1075,8 @@ auto VBackgroundImageControls::ScaleByRight(QGraphicsSceneMouseEvent *event) con
         nowRect = QRectF(rect.topLeft(), QPointF(newScalePoint.x(), rect.bottomRight().y()));
     }
 
-    qreal scaleX = nowRect.width()/rect.width();
-    qreal scaleY = nowRect.width()/rect.width();
+    qreal scaleX = nowRect.width() / rect.width();
+    qreal scaleY = nowRect.width() / rect.width();
 
     if (event->modifiers() & Qt::ControlModifier)
     {
@@ -1107,8 +1087,8 @@ auto VBackgroundImageControls::ScaleByRight(QGraphicsSceneMouseEvent *event) con
 
     QTransform m;
 
-    QPointF scaleCenterOriginal = (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center()
-                                                                           : RectLeftPoint(rectOriginal);
+    QPointF scaleCenterOriginal =
+        (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center() : RectLeftPoint(rectOriginal);
 
     m.translate(scaleCenterOriginal.x(), scaleCenterOriginal.y());
     m.scale(scaleX, scaleY);
@@ -1205,10 +1185,10 @@ auto VBackgroundImageControls::ScaleByBottomRight(QGraphicsSceneMouseEvent *even
         nowRect = QRectF(rect.topLeft(), newScalePoint);
     }
 
-    qreal scaleX = nowRect.width()/rect.width();
-    qreal scaleY = nowRect.height()/rect.height();
+    qreal scaleX = nowRect.width() / rect.width();
+    qreal scaleY = nowRect.height() / rect.height();
 
-    if (not (event->modifiers() & Qt::ControlModifier))
+    if (not(event->modifiers() & Qt::ControlModifier))
     {
         if (diff.x() < 0 && diff.x() <= diff.y())
         {
@@ -1230,8 +1210,8 @@ auto VBackgroundImageControls::ScaleByBottomRight(QGraphicsSceneMouseEvent *even
 
     QTransform m;
 
-    QPointF scaleCenterOriginal = (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center()
-                                                                           : rectOriginal.topLeft();
+    QPointF scaleCenterOriginal =
+        (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center() : rectOriginal.topLeft();
 
     m.translate(scaleCenterOriginal.x(), scaleCenterOriginal.y());
 
@@ -1304,8 +1284,8 @@ auto VBackgroundImageControls::ScaleByBottom(QGraphicsSceneMouseEvent *event) co
         nowRect = QRectF(rect.topLeft(), QPointF(rect.bottomRight().x(), newScalePoint.y()));
     }
 
-    qreal scaleX = nowRect.height()/rect.height();
-    qreal scaleY = nowRect.height()/rect.height();
+    qreal scaleX = nowRect.height() / rect.height();
+    qreal scaleY = nowRect.height() / rect.height();
 
     if (event->modifiers() & Qt::ControlModifier)
     {
@@ -1316,8 +1296,8 @@ auto VBackgroundImageControls::ScaleByBottom(QGraphicsSceneMouseEvent *event) co
 
     QTransform m;
 
-    QPointF scaleCenterOriginal = (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center()
-                                                                           : RectTopPoint(rectOriginal);
+    QPointF scaleCenterOriginal =
+        (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center() : RectTopPoint(rectOriginal);
 
     m.translate(scaleCenterOriginal.x(), scaleCenterOriginal.y());
     m.scale(scaleX, scaleY);
@@ -1394,7 +1374,7 @@ auto VBackgroundImageControls::ScaleByBottomLeft(QGraphicsSceneMouseEvent *event
                 }
                 else
                 {
-                    move = diff.y()*-1;
+                    move = diff.y() * -1;
                 }
             }
             qDebug() << move;
@@ -1417,14 +1397,14 @@ auto VBackgroundImageControls::ScaleByBottomLeft(QGraphicsSceneMouseEvent *event
 
         diff = newScalePoint - rect.topRight();
 
-        nowRect = QRectF(QPointF(newScalePoint.x(), rect.topLeft().y()),
-                         QPointF(rect.bottomRight().x(), newScalePoint.y()));
+        nowRect =
+            QRectF(QPointF(newScalePoint.x(), rect.topLeft().y()), QPointF(rect.bottomRight().x(), newScalePoint.y()));
     }
 
-    qreal scaleX = nowRect.width()/rect.width();
-    qreal scaleY = nowRect.height()/rect.height();
+    qreal scaleX = nowRect.width() / rect.width();
+    qreal scaleY = nowRect.height() / rect.height();
 
-    if (not (event->modifiers() & Qt::ControlModifier))
+    if (not(event->modifiers() & Qt::ControlModifier))
     {
         if (diff.x() > 0 && diff.x() >= diff.y())
         {
@@ -1444,8 +1424,8 @@ auto VBackgroundImageControls::ScaleByBottomLeft(QGraphicsSceneMouseEvent *event
     QPointF newScalePoint = pos - m_scaleDiff;
 
     QTransform m;
-    QPointF scaleCenterOriginal = (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center()
-                                                                           : rectOriginal.topRight();
+    QPointF scaleCenterOriginal =
+        (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center() : rectOriginal.topRight();
 
     m.translate(scaleCenterOriginal.x(), scaleCenterOriginal.y());
     m.scale(scaleX, scaleY);
@@ -1517,8 +1497,8 @@ auto VBackgroundImageControls::ScaleByLeft(QGraphicsSceneMouseEvent *event) cons
         nowRect = QRectF(QPointF(newScalePoint.x(), rect.topLeft().y()), rect.bottomRight());
     }
 
-    qreal scaleX = nowRect.width()/rect.width();
-    qreal scaleY = nowRect.width()/rect.width();
+    qreal scaleX = nowRect.width() / rect.width();
+    qreal scaleY = nowRect.width() / rect.width();
 
     if (event->modifiers() & Qt::ControlModifier)
     {
@@ -1529,8 +1509,8 @@ auto VBackgroundImageControls::ScaleByLeft(QGraphicsSceneMouseEvent *event) cons
 
     QTransform m;
 
-    QPointF scaleCenterOriginal = (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center()
-                                                                           : RectRightPoint(rectOriginal);
+    QPointF scaleCenterOriginal =
+        (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center() : RectRightPoint(rectOriginal);
 
     m.translate(scaleCenterOriginal.x(), scaleCenterOriginal.y());
     m.scale(scaleX, scaleY);
@@ -1581,7 +1561,7 @@ auto VBackgroundImageControls::ControllersRect() const -> QRectF
     QPixmap handler = m_handlePixmaps.value(BIHandleCornerType::ScaleTopLeftBottomRight);
     QRectF imageRect = m_image.BoundingRect();
 
-    imageRect = QRectF(imageRect.topLeft()*scale, QSizeF(imageRect.width()*scale, imageRect.height()*scale));
+    imageRect = QRectF(imageRect.topLeft() * scale, QSizeF(imageRect.width() * scale, imageRect.height() * scale));
     QRectF rect = imageRect;
 
     if (imageRect.width() < handler.width())
@@ -1597,7 +1577,7 @@ auto VBackgroundImageControls::ControllersRect() const -> QRectF
     }
 
     const qreal gap = 2;
-    rect.adjust(- (handler.width() + gap), - (handler.height() + gap), handler.width() + gap, handler.height() + gap);
+    rect.adjust(-(handler.width() + gap), -(handler.height() + gap), handler.width() + gap, handler.height() + gap);
 
     return rect;
 }
@@ -1614,22 +1594,16 @@ auto VBackgroundImageControls::SelectedHandleCorner(const QPointF &pos) const ->
 
     if (m_tranformationType == BITransformationType::Scale)
     {
-        corners =
-        {
-            {BIHandleCorner::TopLeft, ScaleTopLeftControl()},
-            {BIHandleCorner::Top, ScaleTopControl()},
-            {BIHandleCorner::TopRight, ScaleTopRightControl()},
-            {BIHandleCorner::Right, ScaleRightControl()},
-            {BIHandleCorner::BottomRight, ScaleBottomRightControl()},
-            {BIHandleCorner::Bottom, ScaleBottomControl()},
-            {BIHandleCorner::BottomLeft, ScaleBottomLeftControl()},
-            {BIHandleCorner::Left, ScaleLeftControl()},
+        corners = {
+            {BIHandleCorner::TopLeft, ScaleTopLeftControl()},         {BIHandleCorner::Top, ScaleTopControl()},
+            {BIHandleCorner::TopRight, ScaleTopRightControl()},       {BIHandleCorner::Right, ScaleRightControl()},
+            {BIHandleCorner::BottomRight, ScaleBottomRightControl()}, {BIHandleCorner::Bottom, ScaleBottomControl()},
+            {BIHandleCorner::BottomLeft, ScaleBottomLeftControl()},   {BIHandleCorner::Left, ScaleLeftControl()},
         };
     }
     else if (m_tranformationType == BITransformationType::Rotate)
     {
-        corners =
-        {
+        corners = {
             {BIHandleCorner::TopLeft, RotateTopLeftControl()},
             {BIHandleCorner::TopRight, RotateTopRightControl()},
             {BIHandleCorner::BottomRight, RotateBottomRightControl()},
@@ -1638,12 +1612,10 @@ auto VBackgroundImageControls::SelectedHandleCorner(const QPointF &pos) const ->
     }
 
     QPainterPath circle;
-    circle.addEllipse(pos.x()-4, pos.y()-4, 8, 8);
+    circle.addEllipse(pos.x() - 4, pos.y() - 4, 8, 8);
 
     auto CheckCorner = [circle](const QPainterPath &handler)
-    {
-        return handler.intersects(circle) || handler.contains(circle);
-    };
+    { return handler.intersects(circle) || handler.contains(circle); };
 
     auto i = corners.constBegin();
     while (i != corners.constEnd())
@@ -1684,7 +1656,7 @@ auto VBackgroundImageControls::OriginCircle1() const -> QPainterPath
     QPainterPath path;
     const qreal sceneScale = SceneScale(scene());
     QPointF screeOrigin = m_originPos * sceneScale;
-    path.addEllipse({screeOrigin.x()-radius1, screeOrigin.y()-radius1, radius1*2., radius1*2.});
+    path.addEllipse({screeOrigin.x() - radius1, screeOrigin.y() - radius1, radius1 * 2., radius1 * 2.});
     return path;
 }
 
@@ -1695,7 +1667,7 @@ auto VBackgroundImageControls::OriginCircle2() const -> QPainterPath
     QPainterPath path;
     const qreal sceneScale = SceneScale(scene());
     QPointF screeOrigin = m_originPos * sceneScale;
-    path.addEllipse({screeOrigin.x()-radius2, screeOrigin.y()-radius2, radius2*2., radius2*2.});
+    path.addEllipse({screeOrigin.x() - radius2, screeOrigin.y() - radius2, radius2 * 2., radius2 * 2.});
     return path;
 }
 
@@ -1719,46 +1691,38 @@ void VBackgroundImageControls::ScaleImage(QGraphicsSceneMouseEvent *event)
     QTransform imageMatrix = m_originalMatrix;
     const bool shiftModifier = event->modifiers() & Qt::ShiftModifier;
 
-    switch(m_handleCornerHover)
+    switch (m_handleCornerHover)
     {
         case BIHandleCorner::TopLeft:
-            ShowOrigin(shiftModifier ? m_imageBoundingRect.center()
-                                     : m_imageBoundingRect.bottomRight());
+            ShowOrigin(shiftModifier ? m_imageBoundingRect.center() : m_imageBoundingRect.bottomRight());
             imageMatrix *= ScaleByTopLeft(event);
             break;
         case BIHandleCorner::Top:
-            ShowOrigin(shiftModifier ? m_imageBoundingRect.center()
-                                     : RectBottomPoint(m_imageBoundingRect));
+            ShowOrigin(shiftModifier ? m_imageBoundingRect.center() : RectBottomPoint(m_imageBoundingRect));
             imageMatrix *= ScaleByTop(event);
             break;
         case BIHandleCorner::TopRight:
-            ShowOrigin(shiftModifier ? m_imageBoundingRect.center()
-                                     : m_imageBoundingRect.bottomLeft());
+            ShowOrigin(shiftModifier ? m_imageBoundingRect.center() : m_imageBoundingRect.bottomLeft());
             imageMatrix *= ScaleByTopRight(event);
             break;
         case BIHandleCorner::Right:
-            ShowOrigin(shiftModifier ? m_imageBoundingRect.center()
-                                     : RectLeftPoint(m_imageBoundingRect));
+            ShowOrigin(shiftModifier ? m_imageBoundingRect.center() : RectLeftPoint(m_imageBoundingRect));
             imageMatrix *= ScaleByRight(event);
             break;
         case BIHandleCorner::BottomRight:
-            ShowOrigin(shiftModifier ? m_imageBoundingRect.center()
-                                     : m_imageBoundingRect.topLeft());
+            ShowOrigin(shiftModifier ? m_imageBoundingRect.center() : m_imageBoundingRect.topLeft());
             imageMatrix *= ScaleByBottomRight(event);
             break;
         case BIHandleCorner::Bottom:
-            ShowOrigin(shiftModifier ? m_imageBoundingRect.center()
-                                     : RectTopPoint(m_imageBoundingRect));
+            ShowOrigin(shiftModifier ? m_imageBoundingRect.center() : RectTopPoint(m_imageBoundingRect));
             imageMatrix *= ScaleByBottom(event);
             break;
         case BIHandleCorner::BottomLeft:
-            ShowOrigin(shiftModifier ? m_imageBoundingRect.center()
-                                     : m_imageBoundingRect.topRight());
+            ShowOrigin(shiftModifier ? m_imageBoundingRect.center() : m_imageBoundingRect.topRight());
             imageMatrix *= ScaleByBottomLeft(event);
             break;
         case BIHandleCorner::Left:
-            ShowOrigin(shiftModifier ? m_imageBoundingRect.center()
-                                     : RectRightPoint(m_imageBoundingRect));
+            ShowOrigin(shiftModifier ? m_imageBoundingRect.center() : RectRightPoint(m_imageBoundingRect));
             imageMatrix *= ScaleByLeft(event);
             break;
         case BIHandleCorner::Invalid:
@@ -1779,23 +1743,19 @@ void VBackgroundImageControls::RotateImage(QGraphicsSceneMouseEvent *event)
 {
     const bool shiftModifier = event->modifiers() & Qt::ShiftModifier;
 
-    switch(m_handleCornerHover)
+    switch (m_handleCornerHover)
     {
         case BIHandleCorner::TopLeft:
-            ShowOrigin(shiftModifier ? m_imageBoundingRect.bottomRight()
-                                     : m_imageBoundingRect.center());
+            ShowOrigin(shiftModifier ? m_imageBoundingRect.bottomRight() : m_imageBoundingRect.center());
             break;
         case BIHandleCorner::TopRight:
-            ShowOrigin(shiftModifier ? m_imageBoundingRect.bottomLeft()
-                                     : m_imageBoundingRect.center());
+            ShowOrigin(shiftModifier ? m_imageBoundingRect.bottomLeft() : m_imageBoundingRect.center());
             break;
         case BIHandleCorner::BottomRight:
-            ShowOrigin(shiftModifier ? m_imageBoundingRect.topLeft()
-                                     : m_imageBoundingRect.center());
+            ShowOrigin(shiftModifier ? m_imageBoundingRect.topLeft() : m_imageBoundingRect.center());
             break;
         case BIHandleCorner::BottomLeft:
-            ShowOrigin(shiftModifier ? m_imageBoundingRect.topRight()
-                                     : m_imageBoundingRect.center());
+            ShowOrigin(shiftModifier ? m_imageBoundingRect.topRight() : m_imageBoundingRect.center());
             break;
         default:
             break;
@@ -1805,7 +1765,7 @@ void VBackgroundImageControls::RotateImage(QGraphicsSceneMouseEvent *event)
     {
         QPointF rotationNewPoint = event->pos();
         const qreal sceneScale = SceneScale(scene());
-        QPointF screenOriginPos = m_originPos*sceneScale;
+        QPointF screenOriginPos = m_originPos * sceneScale;
 
         QLineF initPosition(screenOriginPos, m_rotationStartPoint);
         QLineF initRotationPosition(screenOriginPos, rotationNewPoint);

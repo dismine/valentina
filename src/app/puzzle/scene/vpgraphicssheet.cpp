@@ -29,14 +29,17 @@
 #include "vpgraphicssheet.h"
 #include "../layout/vplayout.h"
 #include "../layout/vpsheet.h"
+#include "qnamespace.h"
+#include "theme/vscenestylesheet.h"
 
 #include <QtMath>
 
 //---------------------------------------------------------------------------------------------------------------------
-VPGraphicsSheet::VPGraphicsSheet(const VPLayoutPtr &layout, QGraphicsItem *parent):
-    QGraphicsItem(parent),
+VPGraphicsSheet::VPGraphicsSheet(const VPLayoutPtr &layout, QGraphicsItem *parent)
+  : QGraphicsItem(parent),
     m_layout(layout)
-{}
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsSheet::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -44,36 +47,56 @@ void VPGraphicsSheet::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
     Q_UNUSED(widget);
     Q_UNUSED(option);
 
-    QPen pen(QColor(0,179,255), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
-    pen.setCosmetic(true);
-    QBrush noBrush(Qt::NoBrush);
-    painter->setPen(pen);
-    painter->setBrush(noBrush);
-
-    QRectF sheetRect = GetSheetRect();
-
-    if(m_showMargin)
-    {
-        painter->drawRect(GetMarginsRect());
-    }
-
-    if(m_showBorder)
-    {
-        pen.setColor(Qt::black);
-
-        painter->setPen(pen);
-        painter->drawRect(sheetRect);
-    }
+    bool ignoreMargins = true;
 
     VPLayoutPtr layout = m_layout.toStrongRef();
 
-    if(not layout.isNull() && layout->LayoutSettings().GetShowGrid())
+    if (!layout.isNull())
     {
-        pen.setColor(QColor(204,204,204));
+        VPSheetPtr sheet = layout->GetFocusedSheet();
+        if (!sheet.isNull())
+        {
+            ignoreMargins = sheet->IgnoreMargins();
+        }
+    }
+
+    if (m_showMargin && !ignoreMargins)
+    {
+        QPen pen(VSceneStylesheet::ManualLayoutStyle().SheetMarginColor(), 1.5, Qt::SolidLine, Qt::RoundCap,
+                 Qt::RoundJoin);
+        pen.setCosmetic(true);
+
+        painter->save();
+        painter->setPen(pen);
+        painter->drawRect(GetMarginsRect());
+        painter->restore();
+    }
+
+    QRectF sheetRect = GetSheetRect();
+
+    if (m_showBorder)
+    {
+        QPen pen(VSceneStylesheet::ManualLayoutStyle().SheetBorderColor(), 1.5, Qt::SolidLine, Qt::RoundCap,
+                 Qt::RoundJoin);
+        pen.setCosmetic(true);
+
+        painter->save();
+        painter->setPen(pen);
+        painter->drawRect(sheetRect);
+        painter->restore();
+    }
+
+    if (not layout.isNull() && layout->LayoutSettings().GetShowGrid())
+    {
+        QPen pen(VSceneStylesheet::ManualLayoutStyle().SheetGridColor(), 1.5, Qt::SolidLine, Qt::RoundCap,
+                 Qt::RoundJoin);
+        pen.setCosmetic(true);
+
+        painter->save();
         painter->setPen(pen);
 
         qreal colWidth = layout->LayoutSettings().GetGridColWidth();
-        if(colWidth > 0)
+        if (colWidth > 0)
         {
             qreal colX = colWidth;
             while (colX < sheetRect.right())
@@ -85,7 +108,7 @@ void VPGraphicsSheet::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
         }
 
         qreal rowHeight = layout->LayoutSettings().GetGridRowHeight();
-        if(rowHeight > 0)
+        if (rowHeight > 0)
         {
             qreal rowY = rowHeight;
 
@@ -96,6 +119,7 @@ void VPGraphicsSheet::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
                 rowY += rowHeight;
             }
         }
+        painter->restore();
     }
 }
 

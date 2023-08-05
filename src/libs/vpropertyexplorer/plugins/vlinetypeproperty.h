@@ -29,7 +29,6 @@
 #ifndef VLINETYPEPROPERTY_H
 #define VLINETYPEPROPERTY_H
 
-
 #include <QIcon>
 #include <QMap>
 #include <QMetaObject>
@@ -38,7 +37,6 @@
 #include <QStyleOptionViewItem>
 #include <QVariant>
 #include <QVector>
-#include <Qt>
 #include <QtGlobal>
 
 #include "../vproperty.h"
@@ -50,26 +48,27 @@ namespace VPE
 class VPROPERTYEXPLORERSHARED_EXPORT VLineTypeProperty : public VProperty
 {
     Q_OBJECT // NOLINT
+
 public:
     //! Constructor
-    explicit VLineTypeProperty(const QString& name);
+    explicit VLineTypeProperty(const QString &name);
 
     //! Destructor
-    virtual ~VLineTypeProperty() override {}
+    ~VLineTypeProperty() override = default;
 
     //! Get the data how it should be displayed
-    virtual auto data(int column = DPC_Name, int role = Qt::DisplayRole) const -> QVariant override;
+    auto data(int column = DPC_Name, int role = Qt::DisplayRole) const -> QVariant override;
 
     //! Returns an editor widget, or NULL if it doesn't supply one
     //! \param parent The widget to which the editor will be added as a child
     //! \options Render options
     //! \delegate A pointer to the QAbstractItemDelegate requesting the editor. This can be used to connect signals and
     //! slots.
-    virtual auto createEditor(QWidget *parent, const QStyleOptionViewItem &options,
-                              const QAbstractItemDelegate *delegate) -> QWidget * override;
+    auto createEditor(QWidget *parent, const QStyleOptionViewItem &options, const QAbstractItemDelegate *delegate)
+        -> QWidget * override;
 
     //! Gets the data from the widget
-    virtual auto getEditorData(const QWidget *editor) const -> QVariant override;
+    auto getEditorData(const QWidget *editor) const -> QVariant override;
 
     //! Sets the line styles
     virtual void setStyles(const QMap<QString, QIcon> &styles);
@@ -78,17 +77,17 @@ public:
     virtual auto getStyles() const -> QMap<QString, QIcon>;
 
     //! Sets the value of the property
-    virtual void setValue(const QVariant& value) override;
+    void setValue(const QVariant &value) override;
 
     //! Returns a string containing the type of the property
-    virtual auto type() const -> QString override;
+    auto type() const -> QString override;
 
     //! Clones this property
     //! \param include_children Indicates whether to also clone the children
     //! \param container If a property is being passed here, no new VProperty is being created but instead it is tried
     //! to fill all the data into container. This can also be used when subclassing this function.
     //! \return Returns the newly created property (or container, if it was not NULL)
-    Q_REQUIRED_RESULT virtual auto clone(bool include_children = true, VProperty *container = nullptr) const
+    Q_REQUIRED_RESULT auto clone(bool include_children = true, VProperty *container = nullptr) const
         -> VProperty * override;
 
     static auto IndexOfStyle(const QMap<QString, QIcon> &styles, const QString &style) -> vpesizetype;
@@ -101,11 +100,12 @@ protected:
     QMap<QString, QIcon> styles;
     QVector<QString> indexList;
     // No use of d-pointer in this case, because it is unlikely this will change. If it does, we can still add other
-    //members by reimplementing the VPropertyPrivate class without touching this header file.
+    // members by reimplementing the VPropertyPrivate class without touching this header file.
+
 private:
     Q_DISABLE_COPY_MOVE(VLineTypeProperty) // NOLINT
 };
 
-}
+} // namespace VPE
 
 #endif // VLINETYPEPROPERTY_H

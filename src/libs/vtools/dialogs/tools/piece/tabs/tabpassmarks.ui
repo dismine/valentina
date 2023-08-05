@@ -437,7 +437,7 @@
                   </property>
                   <property name="icon">
                    <iconset resource="../../../../../vmisc/share/resources/icon.qrc">
-                    <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+                    <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
                   </property>
                   <property name="iconSize">
                    <size>
@@ -662,7 +662,7 @@
                   </property>
                   <property name="icon">
                    <iconset resource="../../../../../vmisc/share/resources/icon.qrc">
-                    <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+                    <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
                   </property>
                   <property name="iconSize">
                    <size>
@@ -890,7 +890,7 @@
                   </property>
                   <property name="icon">
                    <iconset resource="../../../../../vmisc/share/resources/icon.qrc">
-                    <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
+                    <normaloff>:/icon/light/24x24/fx.png</normaloff>:/icon/light/24x24/fx.png</iconset>
                   </property>
                   <property name="iconSize">
                    <size>

@@ -40,30 +40,29 @@
 #include <QRectF>
 #include <QSharedPointer>
 #include <QUndoStack>
-#include <Qt>
 #include <new>
 
 #include "../../../../undocommands/label/movelabel.h"
 #include "../../../../undocommands/label/showlabel.h"
+#include "../../../vabstracttool.h"
+#include "../../vdrawtool.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../vabstractpoint.h"
+#include "../vgeometry/vabstractcubicbezier.h"
+#include "../vgeometry/vabstractcubicbezierpath.h"
+#include "../vgeometry/varc.h"
+#include "../vgeometry/vellipticalarc.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
-#include "../vgeometry/vabstractcubicbezierpath.h"
-#include "../vgeometry/vabstractcubicbezier.h"
 #include "../vgeometry/vspline.h"
 #include "../vgeometry/vsplinepath.h"
-#include "../vgeometry/vellipticalarc.h"
-#include "../vgeometry/varc.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
-#include "../vwidgets/vgraphicssimpletextitem.h"
-#include "../vwidgets/scalesceneitems.h"
 #include "../vwidgets/global.h"
-#include "../../../vabstracttool.h"
-#include "../../vdrawtool.h"
-#include "../vabstractpoint.h"
+#include "../vwidgets/scalesceneitems.h"
+#include "../vwidgets/vgraphicssimpletextitem.h"
 #include "toolcut/vtoolcutsplinepath.h"
 
 QT_WARNING_PUSH
@@ -84,8 +83,8 @@ QT_WARNING_POP
  */
 VToolSinglePoint::VToolSinglePoint(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes,
                                    QGraphicsItem *parent)
-    : VAbstractPoint(doc, data, id, notes),
-      VScenePoint(parent)
+  : VAbstractPoint(doc, data, id, notes),
+    VScenePoint(VColorRole::PatternColor, parent)
 {
     connect(m_namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VToolSinglePoint::contextMenuEvent);
     connect(m_namePoint, &VGraphicsSimpleTextItem::DeleteTool, this, &VToolSinglePoint::DeleteFromLabel);
@@ -177,14 +176,15 @@ void VToolSinglePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
     VScenePoint::mousePressEvent(event);
 
     // Somehow clicking on notselectable object do not clean previous selections.
-    if (not (flags() & ItemIsSelectable) && scene())
+    if (not(flags() & ItemIsSelectable) && scene())
     {
         scene()->clearSelection();
     }
 
     if (selectionType == SelectionType::ByMouseRelease)
     {
-        event->accept();// Special for not selectable item first need to call standard mousePressEvent then accept event
+        event
+            ->accept(); // Special for not selectable item first need to call standard mousePressEvent then accept event
     }
     else
     {
@@ -297,16 +297,16 @@ void VToolSinglePoint::keyReleaseEvent(QKeyEvent *event)
             {
                 DeleteToolWithConfirm();
             }
-            catch(const VExceptionToolWasDeleted &e)
+            catch (const VExceptionToolWasDeleted &e)
             {
                 Q_UNUSED(e)
-                return;//Leave this method immediately!!!
+                return; // Leave this method immediately!!!
             }
             break;
         default:
             break;
     }
-    VScenePoint::keyReleaseEvent ( event );
+    VScenePoint::keyReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -393,10 +393,10 @@ void VToolSinglePoint::ToolSelectionType(const SelectionType &type)
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
 auto VToolSinglePoint::InitSegments(GOType curveType, qreal segLength, const VPointF *p, quint32 curveId,
-                                    VContainer *data, const QString &alias1,
-                                    const QString &alias2) -> QPair<QString, QString>
+                                    VContainer *data, const QString &alias1, const QString &alias2)
+    -> QPair<QString, QString>
 {
-    switch(curveType)
+    switch (curveType)
     {
         case GOType::EllipticalArc:
             return InitArc<VEllipticalArc>(data, segLength, p, curveId, alias1, alias2);

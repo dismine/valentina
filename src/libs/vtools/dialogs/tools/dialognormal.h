@@ -96,6 +96,7 @@ protected:
      */
     void SaveData() override;
     void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
     auto IsValid() const -> bool final;
 
 private:
@@ -127,6 +128,8 @@ private:
     qint32 m_number{0};
 
     void FinishCreating();
+
+    void InitIcons();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

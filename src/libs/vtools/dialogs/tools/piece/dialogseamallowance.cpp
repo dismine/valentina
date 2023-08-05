@@ -36,6 +36,7 @@
 #include "../../support/dialogeditlabel.h"
 #include "../../support/dialogeditwrongformula.h"
 #include "../vgeometry/vplacelabelitem.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vmodifierkey.h"
 #include "../vmisc/vvalentinasettings.h"
@@ -50,6 +51,7 @@
 #include "dialogpatternmaterials.h"
 #include "dialogpiecepath.h"
 #include "dialogplacelabel.h"
+#include "qstringliteral.h"
 #include "ui_dialogseamallowance.h"
 #include "ui_tabgrainline.h"
 #include "ui_tablabels.h"
@@ -181,6 +183,8 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, quint32 toolId,
     InitPinsTab();
     InitPassmarksTab();
     InitPlaceLabelsTab();
+
+    InitIcons();
 
     ChangeColor(uiTabPaths->labelEditName, OkColor(this));
     flagMainPathIsValid = MainPathIsValid();
@@ -691,6 +695,24 @@ void DialogSeamAllowance::resizeEvent(QResizeEvent *event)
         VAbstractApplication::VApp()->Settings()->SetToolSeamAllowanceDialogSize(size());
     }
     DialogTool::resizeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        InitIcons();
+        InitDialogButtonBoxIcons(ui->buttonBox);
+    }
+
+    // remember to call base class implementation
+    DialogTool::changeEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4432,6 +4454,43 @@ void DialogSeamAllowance::InitPassmarkAngleType(const VPieceNode &node)
         default:
             break;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitIcons()
+{
+    const QString resource = QStringLiteral("icon");
+
+    const QString fxIcon = QStringLiteral("24x24/fx.png");
+    uiTabGrainline->pushButtonRot->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    uiTabGrainline->pushButtonLen->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    uiTabLabels->pushButtonDLWidth->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    uiTabLabels->pushButtonDLHeight->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    uiTabLabels->pushButtonDLAngle->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    uiTabLabels->pushButtonPLWidth->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    uiTabLabels->pushButtonPLHeight->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    uiTabLabels->pushButtonPLAngle->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    uiTabPassmarks->toolButtonExprLength->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    uiTabPassmarks->toolButtonExprWidth->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    uiTabPassmarks->toolButtonExprAngle->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    uiTabPaths->toolButtonExprWidth->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    uiTabPaths->toolButtonExprBefore->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    uiTabPaths->toolButtonExprAfter->setIcon(VTheme::GetIconResource(resource, fxIcon));
+
+    const QString equalIcon = QStringLiteral("24x24/equal.png");
+    uiTabGrainline->labelEqual->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    uiTabGrainline->labelEqual_2->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    uiTabLabels->labelEqual_3->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    uiTabLabels->labelEqual_4->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    uiTabLabels->labelEqual_5->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    uiTabLabels->labelEqual_7->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    uiTabLabels->labelEqual_6->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    uiTabLabels->labelEqual_8->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    uiTabPaths->label_2->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    uiTabPaths->label_6->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    uiTabPaths->label_10->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+
+    uiTabPaths->label_3->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("32x32/clockwise.png")));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

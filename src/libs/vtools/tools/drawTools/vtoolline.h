@@ -29,7 +29,6 @@
 #ifndef VTOOLLINE_H
 #define VTOOLLINE_H
 
-
 #include <QDomElement>
 #include <QMetaObject>
 #include <QObject>
@@ -39,92 +38,91 @@
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/def.h"
-#include "vdrawtool.h"
 #include "../vwidgets/scalesceneitems.h"
+#include "vdrawtool.h"
 
 template <class T> class QSharedPointer;
 
 struct VToolLineInitData : VDrawToolInitData
 {
-    VToolLineInitData()
-        : VDrawToolInitData(),
-          firstPoint(NULL_ID),
-          secondPoint(NULL_ID),
-          typeLine(TypeLineLine),
-          lineColor(ColorBlack)
-    {}
-
-    quint32 firstPoint;
-    quint32 secondPoint;
-    QString typeLine;
-    QString lineColor;
+    quint32 firstPoint{NULL_ID};
+    quint32 secondPoint{NULL_ID};
+    QString typeLine{TypeLineLine};
+    QString lineColor{ColorBlack};
 };
 
 /**
  * @brief The VToolLine class tool for creation line.
  */
-class VToolLine: public VDrawTool, public VScaledLine
+class VToolLine : public VDrawTool, public VScaledLine
 {
     Q_OBJECT // NOLINT
+
 public:
-    virtual void     SetDialog() override;
+    ~VToolLine() override = default;
+
+    void SetDialog() override;
     static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                        VContainer *data) -> VToolLine *;
     static auto Create(VToolLineInitData initData) -> VToolLine *;
 
-    virtual auto type() const -> int override { return Type; }
-    enum { Type = UserType + static_cast<int>(Tool::Line)};
-    virtual auto getTagName() const -> QString override;
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Tool::Line)
+    };
+    auto getTagName() const -> QString override;
 
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                       QWidget *widget = nullptr) override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 
     auto FirstPointName() const -> QString;
     auto SecondPointName() const -> QString;
 
     auto GetLineColor() const -> QString;
-    void    SetLineColor(const QString &value);
+    void SetLineColor(const QString &value);
 
-    virtual void SetNotes(const QString &notes) override;
+    void SetNotes(const QString &notes) override;
 
-    virtual void     ShowVisualization(bool show) override;
+    void ShowVisualization(bool show) override;
 
-    virtual void     SetLineType(const QString &value) override;
-    virtual void     GroupVisibility(quint32 object, bool visible) override;
+    void SetLineType(const QString &value) override;
+    void GroupVisibility(quint32 object, bool visible) override;
+
 public slots:
-    virtual void     FullUpdateFromFile() override;
-    virtual void     ShowTool(quint32 id, bool enable) override;
-    virtual void     Disable(bool disable, const QString &namePP) override;
-    virtual void     AllowHover(bool enabled) override;
-    virtual void     AllowSelecting(bool enabled) override;
+    void FullUpdateFromFile() override;
+    void ShowTool(quint32 id, bool enable) override;
+    void Disable(bool disable, const QString &namePP) override;
+    void AllowHover(bool enabled) override;
+    void AllowSelecting(bool enabled) override;
+
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
+
 protected:
-    virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) override;
-    virtual void     AddToFile() override;
-    virtual void     hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) override;
-    virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) override;
-    virtual void     RemoveReferens() override;
-    virtual auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
-    virtual void     keyReleaseEvent(QKeyEvent * event) override;
-    virtual void     SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                                QList<quint32> &newDependencies) override;
-    virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void     ReadToolAttributes(const QDomElement &domElement) override;
-    virtual void     SetVisualization() override;
-    virtual auto MakeToolTip() const -> QString override;
+    void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
+    void AddToFile() override;
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
+    void RemoveReferens() override;
+    auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
+    void keyReleaseEvent(QKeyEvent *event) override;
+    void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies) override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void ReadToolAttributes(const QDomElement &domElement) override;
+    void SetVisualization() override;
+    auto MakeToolTip() const -> QString override;
 
 private:
     Q_DISABLE_COPY_MOVE(VToolLine) // NOLINT
 
     /** @brief firstPoint id first line point. */
-    quint32           firstPoint;
+    quint32 firstPoint;
 
     /** @brief secondPoint id second line point. */
-    quint32           secondPoint;
+    quint32 secondPoint;
 
     /** @brief lineColor color of a line. */
-    QString           lineColor;
+    QString lineColor;
 
     bool m_acceptHoverEvents;
 

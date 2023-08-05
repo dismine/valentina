@@ -39,7 +39,6 @@
 #include <QPrinter>
 #include <QString>
 #include <QStringList>
-#include <Qt>
 #include <csignal>
 
 #include "debugbreak.h"

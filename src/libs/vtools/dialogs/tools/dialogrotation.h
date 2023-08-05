@@ -103,6 +103,7 @@ protected:
     /** @brief SaveData Put dialog data in local variables */
     void SaveData() override;
     void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
     auto IsValid() const -> bool final;
 
 private slots:
@@ -142,6 +143,8 @@ private:
 
     void ValidateSourceAliases();
     void SetAliasValid(quint32 id, bool valid);
+
+    void InitIcons();
 };
 
 #endif // DIALOGROTATION_H

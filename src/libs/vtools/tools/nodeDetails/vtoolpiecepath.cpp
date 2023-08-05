@@ -28,11 +28,12 @@
 
 #include "vtoolpiecepath.h"
 #include "../../dialogs/tools/piece/dialogpiecepath.h"
-#include "../vpatterndb/vpiecepath.h"
-#include "../vpatterndb/vpiecenode.h"
 #include "../../undocommands/savepieceoptions.h"
-#include "../vtoolseamallowance.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/theme/vscenestylesheet.h"
+#include "../vpatterndb/vpiecenode.h"
+#include "../vpatterndb/vpiecepath.h"
+#include "../vtoolseamallowance.h"
 #include "../vwidgets/global.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -77,17 +78,17 @@ auto VToolPiecePath::Create(VToolPiecePathInitData initData) -> VToolPiecePath *
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::PiecePath, initData.doc);
-        //TODO Need create garbage collector and remove all nodes, that we don't use.
-        //Better check garbage before each saving file. Check only modeling tags.
+        // TODO Need create garbage collector and remove all nodes, that we don't use.
+        // Better check garbage before each saving file. Check only modeling tags.
         VToolPiecePath *pathTool = new VToolPiecePath(initData);
 
         VAbstractPattern::AddTool(initData.id, pathTool);
         if (initData.idTool != NULL_ID)
         {
-            //Some nodes we don't show on scene. Tool that create this nodes must free memory.
+            // Some nodes we don't show on scene. Tool that create this nodes must free memory.
             VDataTool *tool = VAbstractPattern::getTool(initData.idTool);
             SCASSERT(tool != nullptr);
-            pathTool->setParent(tool);// Adopted by a tool
+            pathTool->setParent(tool); // Adopted by a tool
         }
         else
         {
@@ -95,7 +96,7 @@ auto VToolPiecePath::Create(VToolPiecePathInitData initData) -> VToolPiecePath *
             { // Seam allowance tool already initializated and can't init the path
                 SCASSERT(initData.idObject > NULL_ID);
                 VToolSeamAllowance *saTool =
-                        qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(initData.idObject));
+                    qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(initData.idObject));
                 SCASSERT(saTool != nullptr);
                 pathTool->setParentItem(saTool);
                 pathTool->SetParentType(ParentType::Item);
@@ -103,8 +104,8 @@ auto VToolPiecePath::Create(VToolPiecePathInitData initData) -> VToolPiecePath *
             else
             {
                 // Try to prevent memory leak
-                initData.scene->addItem(pathTool);// First adopted by scene
-                pathTool->hide();// If no one will use node, it will stay hidden
+                initData.scene->addItem(pathTool); // First adopted by scene
+                pathTool->hide();                  // If no one will use node, it will stay hidden
                 pathTool->SetParentType(ParentType::Scene);
             }
         }
@@ -127,11 +128,12 @@ void VToolPiecePath::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     const qreal scale = SceneScale(scene());
     if (scale > 1)
     {
-        width = qMax(1., width/scale);
+        width = qMax(1., width / scale);
     }
 
     QPen toolPen = pen();
     toolPen.setWidthF(width);
+    toolPen.setColor(VSceneStylesheet::PatternPieceStyle().PieceColor());
 
     setPen(toolPen);
 
@@ -289,9 +291,9 @@ void VToolPiecePath::ToolCreation(const Source &typeCreation)
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolPiecePath::VToolPiecePath(const VToolPiecePathInitData &initData, QObject *qoParent, QGraphicsItem *parent)
-    :VAbstractNode(initData.doc, initData.data, initData.id, NULL_ID, initData.drawName, initData.idTool, qoParent),
-      QGraphicsPathItem(parent),
-      m_pieceId(initData.idObject)
+  : VAbstractNode(initData.doc, initData.data, initData.id, NULL_ID, initData.drawName, initData.idTool, qoParent),
+    QGraphicsPathItem(parent),
+    m_pieceId(initData.idObject)
 {
     RefreshGeometry();
     ToolCreation(initData.typeCreation);

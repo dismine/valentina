@@ -25,7 +25,6 @@
 #include <QLabel>
 #include <QPointer>
 #include <QPushButton>
-#include <Qt>
 
 #include "fvavailableupdate.h"
 #include "fvupdater.h"
@@ -33,8 +32,8 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 FvUpdateWindow::FvUpdateWindow(QWidget *parent)
-    : QDialog(parent),
-      m_ui(new Ui::FvUpdateWindow)
+  : QDialog(parent),
+    m_ui(new Ui::FvUpdateWindow)
 {
     m_ui->setupUi(this);
 
@@ -42,8 +41,8 @@ FvUpdateWindow::FvUpdateWindow(QWidget *parent)
     setAttribute(Qt::WA_DeleteOnClose, true);
 
     // Set the "new version is available" string
-    const QString newVersString = m_ui->newVersionIsAvailableLabel->text()
-            .arg(QGuiApplication::applicationDisplayName());
+    const QString newVersString =
+        m_ui->newVersionIsAvailableLabel->text().arg(QGuiApplication::applicationDisplayName());
     m_ui->newVersionIsAvailableLabel->setText(newVersString);
 
     // Connect buttons
@@ -71,13 +70,13 @@ auto FvUpdateWindow::UpdateWindowWithCurrentProposedUpdate() -> bool
     if (FvUpdater::IsTestBuild())
     {
         downloadString = tr("New %1 test version is now available. Would you like to download it now?")
-                .arg(QGuiApplication::applicationDisplayName());
+                             .arg(QGuiApplication::applicationDisplayName());
     }
     else
     {
-        downloadString = m_ui->wouldYouLikeToDownloadLabel->text()
-                .arg(QGuiApplication::applicationDisplayName(), proposedUpdate->GetEnclosureVersion(),
-                     QCoreApplication::applicationVersion());
+        downloadString = m_ui->wouldYouLikeToDownloadLabel->text().arg(QGuiApplication::applicationDisplayName(),
+                                                                       proposedUpdate->GetEnclosureVersion(),
+                                                                       QCoreApplication::applicationVersion());
     }
     m_ui->wouldYouLikeToDownloadLabel->setText(downloadString);
 

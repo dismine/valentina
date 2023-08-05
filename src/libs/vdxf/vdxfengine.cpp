@@ -43,7 +43,6 @@
 #include <QPen>
 #include <QPolygonF>
 #include <QTextItem>
-#include <Qt>
 #include <QtDebug>
 #include <QtMath>
 #include <memory>

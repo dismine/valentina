@@ -29,7 +29,6 @@
 #ifndef VISLINE_H
 #define VISLINE_H
 
-
 #include <QColor>
 #include <QGraphicsItem>
 #include <QGraphicsLineItem>
@@ -38,24 +37,28 @@
 #include <QObject>
 #include <QPointF>
 #include <QString>
-#include <Qt>
 #include <QtGlobal>
 
-#include "../vtools/visualization/visualization.h"
 #include "../vmisc/def.h"
+#include "../vtools/visualization/visualization.h"
 #include "../vwidgets/scalesceneitems.h"
 
-class VisLine: public Visualization, public VScaledLine
+class VisLine : public Visualization, public VScaledLine
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit VisLine(const VContainer *data, QGraphicsItem *parent = nullptr);
     ~VisLine() override = default;
 
-    auto type() const -> int override {return Type;}
-    enum {Type = UserType + static_cast<int>(Vis::Line)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::Line)
+    };
 
     static auto CorrectAngle(const qreal &angle) -> qreal;
+
 protected:
     auto Ray(const QPointF &firstPoint, const qreal &angle) const -> QPointF;
     auto Ray(const QPointF &firstPoint) const -> QPointF;
@@ -65,8 +68,8 @@ protected:
     void InitPen() override;
     void AddOnScene() override;
 
-    void DrawRay(VScaledLine *lineItem, const QPointF &p, const QPointF &pTangent, const QColor &color,
-                 Qt::PenStyle style);
+    void DrawRay(VScaledLine *lineItem, const QPointF &p, const QPointF &pTangent, Qt::PenStyle style);
+
 private:
     Q_DISABLE_COPY_MOVE(VisLine) // NOLINT
 };

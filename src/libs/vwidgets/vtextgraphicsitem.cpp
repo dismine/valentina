@@ -49,6 +49,7 @@
 #include "../vmisc/svgfont/vsvgfont.h"
 #include "../vmisc/svgfont/vsvgfontdatabase.h"
 #include "../vmisc/vabstractvalapplication.h"
+#include "theme/vscenestylesheet.h"
 #include "vtextgraphicsitem.h"
 
 namespace
@@ -165,9 +166,9 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 {
     Q_UNUSED(widget)
     Q_UNUSED(option)
-    painter->fillRect(m_rectBoundingBox, QColor(251, 251, 175, 128 /*50% opacity*/));
+    painter->fillRect(m_rectBoundingBox, VSceneStylesheet::PatternPieceStyle().LabelBackgroundColor());
     painter->setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
-    painter->setPen(Qt::black);
+    painter->setPen(VSceneStylesheet::PatternPieceStyle().LabelTextColor());
 
     PaintLabel(painter);
 
@@ -175,14 +176,14 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
     if (m_eMode != mNormal)
     {
         // outline the rectangle
-        painter->setPen(QPen(Qt::black, 2, Qt::DashLine));
+        painter->setPen(QPen(VSceneStylesheet::PatternPieceStyle().LabelModeColor(), 2, Qt::DashLine));
         painter->drawRect(boundingRect().adjusted(1, 1, -1, -1));
 
         if (m_eMode != mRotate)
         {
             // draw the resize square
-            painter->setPen(Qt::black);
-            painter->setBrush(Qt::black);
+            painter->setPen(VSceneStylesheet::PatternPieceStyle().LabelModeColor());
+            painter->setBrush(VSceneStylesheet::PatternPieceStyle().LabelModeColor());
             painter->drawRect(m_rectResize.adjusted(-1, -1, -1, -1));
 
             if (m_eMode == mResize)
@@ -195,13 +196,13 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
         else
         {
             // in rotate mode, draw the circle in the middle
-            painter->setPen(Qt::black);
-            painter->setBrush(Qt::black);
+            painter->setPen(VSceneStylesheet::PatternPieceStyle().LabelModeColor());
+            painter->setBrush(VSceneStylesheet::PatternPieceStyle().LabelModeColor());
             painter->drawEllipse(QPointF(m_rectBoundingBox.width() / 2, m_rectBoundingBox.height() / 2), rotateCircle,
                                  rotateCircle);
             if (m_rectBoundingBox.width() > minW * 3 && m_rectBoundingBox.height() > minH * 3)
             {
-                painter->setPen(QPen(Qt::black, 3));
+                painter->setPen(QPen(VSceneStylesheet::PatternPieceStyle().LabelModeColor(), 3));
                 painter->setBrush(Qt::NoBrush);
                 // and then draw the arc in each of the corners
                 int iTop = rotateRect - rotateArc;

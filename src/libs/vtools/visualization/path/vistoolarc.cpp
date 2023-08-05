@@ -31,28 +31,26 @@
 #include <QPainterPath>
 #include <QPointF>
 #include <QSharedPointer>
-#include <Qt>
-#include <new>
 #include <QtMath>
+#include <new>
 
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
+#include "../vgeometry/vgeometrydef.h"
 #include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
 #include "../vmisc/def.h"
-#include "qnamespace.h"
-#include "../vgeometry/vgeometrydef.h"
-#include "vispath.h"
-#include "../vwidgets/scalesceneitems.h"
 #include "../vmisc/vmodifierkey.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/scalesceneitems.h"
+#include "vispath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolArc::VisToolArc(const VContainer *data, QGraphicsItem *parent)
-    :VisPath(data, parent)
+  : VisPath(data, parent)
 {
-    m_arcCenter = InitPoint(Color(VColor::MainColor), this);
-    m_f1Point = InitPoint(Color(VColor::SupportColor), this);
+    m_arcCenter = InitPoint(VColorRole::VisSupportColor, this);
+    m_f1Point = InitPoint(VColorRole::VisSupportColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -63,7 +61,7 @@ void VisToolArc::RefreshGeometry()
         m_f1Point->setVisible(false);
 
         const QSharedPointer<VPointF> first = GetData()->GeometricObject<VPointF>(m_centerId);
-        DrawPoint(m_arcCenter, static_cast<QPointF>(*first), Color(VColor::SupportColor));
+        DrawPoint(m_arcCenter, static_cast<QPointF>(*first));
 
         if (GetMode() == Mode::Creation)
         {
@@ -85,28 +83,27 @@ void VisToolArc::RefreshGeometry()
 
             if (qFuzzyIsNull(m_radius))
             {
-                VArc arc = VArc (*first, r.length(), r.angle(), r.angle());
+                VArc arc = VArc(*first, r.length(), r.angle(), r.angle());
                 arc.SetApproximationScale(ApproximationScale());
-                DrawPath(this, arc.GetPath(), QVector<DirectionArrow>(), Color(VColor::SupportColor), Qt::DashLine,
-                         Qt::RoundCap);
+                DrawPath(this, arc.GetPath(), QVector<DirectionArrow>(), Qt::DashLine, Qt::RoundCap);
 
                 SetToolTip(tr("<b>Arc</b>: radius = %1%2; "
                               "<b>Mouse click</b> - finish selecting the radius, "
-                              "<b>%3</b> - skip").arg(LengthToUser(r.length()), prefix, VModifierKey::EnterKey()));
+                              "<b>%3</b> - skip")
+                               .arg(LengthToUser(r.length()), prefix, VModifierKey::EnterKey()));
             }
             else if (m_f1 < 0)
             {
                 qreal f1Angle = Angle();
-                VArc arc = VArc (*first, m_radius, f1Angle, f1Angle);
+                VArc arc = VArc(*first, m_radius, f1Angle, f1Angle);
                 arc.SetApproximationScale(ApproximationScale());
-                DrawPath(this, arc.GetPath(), QVector<DirectionArrow>(), Color(VColor::SupportColor), Qt::DashLine,
-                         Qt::RoundCap);
+                DrawPath(this, arc.GetPath(), QVector<DirectionArrow>(), Qt::DashLine, Qt::RoundCap);
 
                 QLineF f1Line = r;
                 f1Line.setLength(m_radius);
                 f1Line.setAngle(f1Angle);
 
-                DrawPoint(m_f1Point, f1Line.p2(), Color(VColor::SupportColor));
+                DrawPoint(m_f1Point, f1Line.p2());
 
                 SetToolTip(tr("<b>Arc</b>: radius = %1%2, first angle = %3°; "
                               "<b>Mouse click</b> - finish selecting the first angle, "
@@ -118,10 +115,9 @@ void VisToolArc::RefreshGeometry()
             else if (m_f1 >= 0)
             {
                 qreal f2Angle = StickyEnd(Angle());
-                VArc arc = VArc (*first, m_radius, m_f1, f2Angle);
+                VArc arc = VArc(*first, m_radius, m_f1, f2Angle);
                 arc.SetApproximationScale(ApproximationScale());
-                DrawPath(this, arc.GetPath(), arc.DirectionArrows(), Color(VColor::MainColor), LineStyle(),
-                         Qt::RoundCap);
+                DrawPath(this, arc.GetPath(), arc.DirectionArrows(), LineStyle(), Qt::RoundCap);
 
                 SetToolTip(tr("<b>Arc</b>: radius = %1%2, first angle = %3°, second angle = %4°; "
                               "<b>Mouse click</b> - finish creating, "
@@ -136,15 +132,13 @@ void VisToolArc::RefreshGeometry()
         {
             if (not qFuzzyIsNull(m_radius) && m_f1 >= 0 && m_f2 >= 0)
             {
-                VArc arc = VArc (*first, m_radius, m_f1, m_f2);
+                VArc arc = VArc(*first, m_radius, m_f1, m_f2);
                 arc.SetApproximationScale(ApproximationScale());
-                DrawPath(this, arc.GetPath(), arc.DirectionArrows(), Color(VColor::MainColor), LineStyle(),
-                         Qt::RoundCap);
+                DrawPath(this, arc.GetPath(), arc.DirectionArrows(), LineStyle(), Qt::RoundCap);
             }
             else
             {
-                DrawPath(this, QPainterPath(), QVector<DirectionArrow>(), Color(VColor::MainColor), LineStyle(),
-                         Qt::RoundCap);
+                DrawPath(this, QPainterPath(), QVector<DirectionArrow>(), LineStyle(), Qt::RoundCap);
             }
         }
     }

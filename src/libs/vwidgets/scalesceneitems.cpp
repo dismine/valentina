@@ -27,38 +27,51 @@
  *************************************************************************/
 
 #include "scalesceneitems.h"
-#include "global.h"
+#include "../vmisc/theme/vscenestylesheet.h"
 #include "../vmisc/vabstractapplication.h"
+#include "global.h"
 
 #include <QPen>
 
 //---------------------------------------------------------------------------------------------------------------------
-VScaledLine::VScaledLine(QGraphicsItem *parent)
-    : QGraphicsLineItem(parent)
-{}
+VScaledLine::VScaledLine(VColorRole role, QGraphicsItem *parent)
+  : QGraphicsLineItem(parent),
+    m_role(role)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
-VScaledLine::VScaledLine(const QLineF &line, QGraphicsItem *parent)
-    : QGraphicsLineItem(line, parent)
-{}
+VScaledLine::VScaledLine(const QLineF &line, VColorRole role, QGraphicsItem *parent)
+  : QGraphicsLineItem(line, parent),
+    m_role(role)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VScaledLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QPen lPen = pen();
+
+    if (m_role != VColorRole::CustomColor)
+    {
+        lPen.setColor(VSceneStylesheet::CorrectToolColor(this, VSceneStylesheet::Color(m_role)));
+    }
+
     const qreal width = ScaleWidth(m_isBoldLine ? VAbstractApplication::VApp()->Settings()->WidthMainLine()
                                                 : VAbstractApplication::VApp()->Settings()->WidthHairLine(),
                                    SceneScale(scene()));
-    lPen.setWidthF(qRound(width*100.)/100.);
+    lPen.setWidthF(qRound(width * 100.) / 100.);
     setPen(lPen);
 
     PaintWithFixItemHighlightSelected<QGraphicsLineItem>(this, painter, option, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VScaledEllipse::VScaledEllipse(QGraphicsItem *parent)
-    : QGraphicsEllipseItem(parent)
-{}
+VScaledEllipse::VScaledEllipse(VColorRole role, QGraphicsItem *parent)
+  : QGraphicsEllipseItem(parent),
+    m_role(role)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VScaledEllipse::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -67,6 +80,12 @@ void VScaledEllipse::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     const qreal width = ScaleWidth(VAbstractApplication::VApp()->Settings()->WidthMainLine(), scale);
 
     QPen visPen = pen();
+
+    if (m_role != VColorRole::CustomColor)
+    {
+        visPen.setColor(VSceneStylesheet::Color(m_role));
+    }
+
     visPen.setWidthF(width);
 
     setPen(visPen);

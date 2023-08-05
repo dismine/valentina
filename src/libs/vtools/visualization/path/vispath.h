@@ -29,7 +29,6 @@
 #ifndef VISPATH_H
 #define VISPATH_H
 
-
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
@@ -45,21 +44,27 @@ class VSimplePoint;
 class VisPath : public Visualization, public VCurvePathItem
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit VisPath(const VContainer *data, QGraphicsItem *parent = nullptr);
     ~VisPath() override = default;
 
     void SetApproximationScale(qreal approximationScale);
 
-    auto type() const -> int override {return Type;}
-    enum {Type = UserType + static_cast<int>(Vis::Path)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::Path)
+    };
+
 protected:
     void InitPen() override;
     void AddOnScene() override;
 
-    auto GetPoint(QVector<VSimplePoint *> &points, quint32 i, const QColor &color) -> VSimplePoint *;
+    auto GetPoint(QVector<VSimplePoint *> &points, quint32 i, VColorRole role) -> VSimplePoint *;
 
     auto ApproximationScale() const -> qreal;
+
 private:
     Q_DISABLE_COPY_MOVE(VisPath) // NOLINT
 

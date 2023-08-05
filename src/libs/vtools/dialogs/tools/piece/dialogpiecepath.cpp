@@ -30,6 +30,7 @@
 #include "../../../tools/vtoolseamallowance.h"
 #include "../../../visualization/path/vistoolpiecepath.h"
 #include "../../support/dialogeditwrongformula.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vmodifierkey.h"
 #include "../vpatterndb/variables/vincrement.h"
 #include "../vpatterndb/vpiecenode.h"
@@ -77,6 +78,8 @@ DialogPiecePath::DialogPiecePath(const VContainer *data, quint32 toolId, QWidget
 {
     ui->setupUi(this);
     InitOkCancel(ui);
+
+    InitIcons();
 
     InitPathTab();
     InitSeamAllowanceTab();
@@ -308,6 +311,24 @@ void DialogPiecePath::closeEvent(QCloseEvent *event)
     ui->plainTextEditFormulaVisible->blockSignals(true);
     ui->plainTextEditPassmarkLength->blockSignals(true);
     DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        InitIcons();
+        InitDialogButtonBoxIcons(ui->buttonBox);
+    }
+
+    // remember to call base class implementation
+    DialogTool::changeEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1137,7 +1158,8 @@ void DialogPiecePath::InitPathTab()
 {
     ui->lineEditName->setClearButtonEnabled(true);
 
-    FillComboBoxTypeLine(ui->comboBoxPenType, CurvePenStylesPics());
+    FillComboBoxTypeLine(ui->comboBoxPenType, CurvePenStylesPics(ui->comboBoxPenType->palette().color(QPalette::Base),
+                                                                 ui->comboBoxPenType->palette().color(QPalette::Text)));
 
     connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogPiecePath::NameChanged);
 
@@ -2201,4 +2223,25 @@ void DialogPiecePath::InitPassmarkAngleType(const VPieceNode &node)
         default:
             break;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::InitIcons()
+{
+    const QString resource = QStringLiteral("icon");
+
+    const QString fxIcon = QStringLiteral("24x24/fx.png");
+    ui->toolButtonExprWidth->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprBefore->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprAfter->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprLength->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprWidth_2->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprAngle->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprVisible->setIcon(VTheme::GetIconResource(resource, fxIcon));
+
+    const QString equalIcon = QStringLiteral("24x24/equal.png");
+    ui->label_2->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    ui->label_6->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    ui->label_10->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    ui->label_5->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
 }

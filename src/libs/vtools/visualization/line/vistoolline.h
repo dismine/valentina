@@ -29,14 +29,12 @@
 #ifndef VGRAPHICSLINEITEM_H
 #define VGRAPHICSLINEITEM_H
 
-
 #include <QColor>
 #include <QGraphicsItem>
 #include <QLineF>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
-#include <Qt>
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
@@ -45,6 +43,7 @@
 class VisToolLine : public VisLine
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit VisToolLine(const VContainer *data, QGraphicsItem *parent = nullptr);
     ~VisToolLine() override = default;
@@ -55,11 +54,15 @@ public:
     void SetPoint1Id(quint32 value);
     void SetPoint2Id(quint32 value);
 
-    auto type() const -> int override {return Type;}
-    enum {Type = UserType + static_cast<int>(Vis::ToolLine)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::ToolLine)
+    };
+
 protected:
-    void DrawLine(VScaledLine *lineItem, const QLineF &line, const QColor &color,
-                  Qt::PenStyle style = Qt::SolidLine) override;
+    void DrawLine(VScaledLine *lineItem, const QLineF &line, Qt::PenStyle style = Qt::SolidLine) override;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VisToolLine) // NOLINT

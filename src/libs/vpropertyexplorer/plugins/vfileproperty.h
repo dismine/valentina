@@ -21,7 +21,6 @@
 #ifndef VFILEPROPERTY_H
 #define VFILEPROPERTY_H
 
-
 #include <QMetaObject>
 #include <QObject>
 #include <QPointer>
@@ -29,7 +28,6 @@
 #include <QStringList>
 #include <QStyleOptionViewItem>
 #include <QVariant>
-#include <Qt>
 #include <QtGlobal>
 
 #include "../vproperty.h"
@@ -45,6 +43,7 @@ QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")
 class VPROPERTYEXPLORERSHARED_EXPORT VFileProperty : public VProperty
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit VFileProperty(const QString &name);
 
@@ -52,13 +51,13 @@ public:
     virtual ~VFileProperty() override;
 
     //! Sets the file filters. The file filters have to be like the ones passed a QFileOpenDialog.
-    virtual void setFileFilters(const QString& filefilters);
+    virtual void setFileFilters(const QString &filefilters);
 
     //! Returns the current file filters as a string
     virtual auto getFileFilters() const -> QString;
 
     //! Set file
-    virtual void setFile(const QString& file);
+    virtual void setFile(const QString &file);
 
     //! Get file
     virtual auto getFile() const -> QString;
@@ -83,7 +82,7 @@ public:
     //! Sets the settings. Available settings:
     //!
     //! key: "FileFilters" - value: File filters in the same format the QFileDialog expects it
-    virtual void setSetting(const QString& key, const QVariant& value) override;
+    virtual void setSetting(const QString &key, const QVariant &value) override;
 
     //! Get the settings. This function has to be implemented in a subclass in order to have an effect
     virtual auto getSetting(const QString &key) const -> QVariant override;
@@ -114,6 +113,6 @@ private:
 
 QT_WARNING_POP
 
-}
+} // namespace VPE
 
 #endif // VFILEPROPERTY_H

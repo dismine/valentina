@@ -32,27 +32,47 @@
 #include <QGraphicsLineItem>
 
 #include "../vmisc/def.h"
+#include "../vmisc/theme/themeDef.h"
 
 class VScaledLine : public QGraphicsLineItem
 {
 public:
-    explicit VScaledLine(QGraphicsItem * parent = nullptr);
-    explicit VScaledLine(const QLineF &line, QGraphicsItem * parent = nullptr);
+    explicit VScaledLine(VColorRole role, QGraphicsItem *parent = nullptr);
+    VScaledLine(const QLineF &line, VColorRole role, QGraphicsItem *parent = nullptr);
     ~VScaledLine() override = default;
 
-    auto type() const -> int override {return Type;}
-    enum {Type = UserType + static_cast<int>(Vis::ScaledLine)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::ScaledLine)
+    };
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 
     auto IsBoldLine() const -> bool;
     void SetBoldLine(bool bold);
 
+    auto GetColorRole() const -> VColorRole;
+    void SetColorRole(VColorRole role);
+
 private:
     Q_DISABLE_COPY_MOVE(VScaledLine) // NOLINT
 
     bool m_isBoldLine{true};
+    VColorRole m_role;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VScaledLine::GetColorRole() const -> VColorRole
+{
+    return m_role;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VScaledLine::SetColorRole(VColorRole role)
+{
+    m_role = role;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 inline auto VScaledLine::IsBoldLine() const -> bool
@@ -69,13 +89,17 @@ inline void VScaledLine::SetBoldLine(bool bold)
 class VScaledEllipse : public QGraphicsEllipseItem
 {
 public:
-    explicit VScaledEllipse(QGraphicsItem * parent = nullptr);
+    explicit VScaledEllipse(VColorRole role, QGraphicsItem *parent = nullptr);
     ~VScaledEllipse() override = default;
 
-    auto type() const -> int override {return Type;}
-    enum {Type = UserType + static_cast<int>(Vis::ScaledEllipse)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::ScaledEllipse)
+    };
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+
     auto PointMode() const -> bool;
     void SetPointMode(bool newPointMode);
 
@@ -83,6 +107,7 @@ private:
     Q_DISABLE_COPY_MOVE(VScaledEllipse) // NOLINT
 
     bool m_pointMode{true};
+    VColorRole m_role;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

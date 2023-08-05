@@ -42,6 +42,7 @@
 #include "../vgeometry/vellipticalarc.h"
 #include "../vgeometry/vplacelabelitem.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/theme/vscenestylesheet.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/floatItemData/vpatternlabeldata.h"
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
@@ -53,6 +54,7 @@
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../vwidgets/vnobrushscalepathitem.h"
 #include "../vwidgets/vpiecegrainline.h"
+#include "theme/themeDef.h"
 #include "toolsdef.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
@@ -1015,6 +1017,7 @@ void VToolSeamAllowance::paint(QPainter *painter, const QStyleOptionGraphicsItem
 {
     QPen toolPen = pen();
     toolPen.setWidthF(ScaleWidth(VAbstractApplication::VApp()->Settings()->WidthHairLine(), SceneScale(scene())));
+    toolPen.setColor(VSceneStylesheet::PatternPieceStyle().PieceColor());
 
     setPen(toolPen);
     m_seamAllowance->setPen(toolPen);
@@ -1376,7 +1379,7 @@ VToolSeamAllowance::VToolSeamAllowance(const VToolSeamAllowanceInitData &initDat
     m_seamAllowance(new VNoBrushScalePathItem(this)),
     m_dataLabel(new VTextGraphicsItem(VTextGraphicsItem::ItemType::PieceLabel, this)),
     m_patternInfo(new VTextGraphicsItem(VTextGraphicsItem::ItemType::PatternLabel, this)),
-    m_grainLine(new VGrainlineItem(this)),
+    m_grainLine(new VGrainlineItem(VColorRole::PieceColor, this)),
     m_passmarks(new QGraphicsPathItem(this)),
     m_placeLabels(new QGraphicsPathItem(this))
 {
@@ -1470,7 +1473,7 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
         not detail.IsSeamAllowance() || detail.IsSeamAllowanceBuiltIn())
     {
         m_mainPath = QPainterPath();
-        m_seamAllowance->setBrush(QBrush(Qt::Dense7Pattern));
+        m_seamAllowance->setBrush(QBrush(VSceneStylesheet::PatternPieceStyle().PieceColor(), Qt::Dense7Pattern));
         path = futurePath.result();
     }
     else

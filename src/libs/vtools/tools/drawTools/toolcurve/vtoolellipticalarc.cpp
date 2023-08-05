@@ -30,7 +30,6 @@
 
 #include <QPen>
 #include <QSharedPointer>
-#include <Qt>
 #include <new>
 
 #include "../../../dialogs/tools/dialogellipticalarc.h"

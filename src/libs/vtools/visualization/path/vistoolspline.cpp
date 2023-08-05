@@ -31,20 +31,19 @@
 #include <QLineF>
 #include <QPainterPath>
 #include <QSharedPointer>
-#include <Qt>
 #include <new>
 
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vgeometrydef.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
-#include "../vpatterndb/vcontainer.h"
-#include "../vwidgets/vcontrolpointspline.h"
-#include "../vwidgets/scalesceneitems.h"
-#include "../vwidgets/global.h"
 #include "../visualization.h"
-#include "vispath.h"
 #include "../vmisc/vmodifierkey.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vwidgets/global.h"
+#include "../vwidgets/scalesceneitems.h"
+#include "../vwidgets/vcontrolpointspline.h"
+#include "vispath.h"
 
 const int EMPTY_ANGLE = -1;
 
@@ -52,18 +51,18 @@ namespace
 {
 inline auto TriggerRadius() -> qreal
 {
-    return ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene()))*1.5;
+    return ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene())) * 1.5;
 }
-}
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolSpline::VisToolSpline(const VContainer *data, QGraphicsItem *parent)
-    : VisPath(data, parent),
-      m_angle1(EMPTY_ANGLE),
-      m_angle2(EMPTY_ANGLE)
+  : VisPath(data, parent),
+    m_angle1(EMPTY_ANGLE),
+    m_angle2(EMPTY_ANGLE)
 {
-    m_point1 = InitPoint(Color(VColor::SupportColor), this);
-    m_point4 = InitPoint(Color(VColor::SupportColor), this); //-V656
+    m_point1 = InitPoint(VColorRole::VisSupportColor, this);
+    m_point4 = InitPoint(VColorRole::VisSupportColor, this); //-V656
 
     auto *controlPoint1 = new VControlPointSpline(1, SplinePointPosition::FirstPoint, this);
     controlPoint1->hide();
@@ -86,7 +85,7 @@ void VisToolSpline::RefreshGeometry()
     if (m_point1Id > NULL_ID)
     {
         const auto first = GetData()->GeometricObject<VPointF>(m_point1Id);
-        DrawPoint(m_point1, static_cast<QPointF>(*first), Color(VColor::SupportColor));
+        DrawPoint(m_point1, static_cast<QPointF>(*first));
 
         if (GetMode() == Mode::Creation)
         {
@@ -97,12 +96,12 @@ void VisToolSpline::RefreshGeometry()
         {
             VSpline spline(*first, m_p2, ScenePos(), VPointF(ScenePos()));
             spline.SetApproximationScale(ApproximationScale());
-            DrawPath(this, spline.GetPath(), Color(VColor::MainColor), LineStyle(), Qt::RoundCap);
+            DrawPath(this, spline.GetPath(), LineStyle(), Qt::RoundCap);
         }
         else
         {
             const auto second = GetData()->GeometricObject<VPointF>(m_point4Id);
-            DrawPoint(m_point4, static_cast<QPointF>(*second), Color(VColor::SupportColor));
+            DrawPoint(m_point4, static_cast<QPointF>(*second));
 
             if (GetMode() == Mode::Creation)
             {
@@ -113,14 +112,13 @@ void VisToolSpline::RefreshGeometry()
             {
                 VSpline spline(*first, m_p2, m_p3, *second);
                 spline.SetApproximationScale(ApproximationScale());
-                DrawPath(this, spline.GetPath(), Color(VColor::MainColor), LineStyle(), Qt::RoundCap);
+                DrawPath(this, spline.GetPath(), LineStyle(), Qt::RoundCap);
             }
             else
             {
                 VSpline spline(*first, *second, m_angle1, m_angle2, m_kAsm1, m_kAsm2, m_kCurve);
                 spline.SetApproximationScale(ApproximationScale());
-                DrawPath(this, spline.GetPath(), spline.DirectionArrows(), Color(VColor::MainColor), LineStyle(),
-                         Qt::RoundCap);
+                DrawPath(this, spline.GetPath(), spline.DirectionArrows(), LineStyle(), Qt::RoundCap);
                 SetToolTip(tr("Use <b>%1</b> for sticking angle!").arg(VModifierKey::Shift()));
                 emit ToolTip(CurrentToolTip());
             }

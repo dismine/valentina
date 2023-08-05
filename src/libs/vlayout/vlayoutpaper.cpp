@@ -40,7 +40,6 @@
 #include <QThread>
 #include <QThreadPool>
 #include <QVector>
-#include <Qt>
 #include <QtAlgorithms>
 
 #ifdef LAYOUT_DEBUG

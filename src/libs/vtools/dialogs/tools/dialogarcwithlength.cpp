@@ -28,7 +28,6 @@
 
 #include "dialogarcwithlength.h"
 
-#include <climits>
 #include <QDialog>
 #include <QLabel>
 #include <QPlainTextEdit>
@@ -36,30 +35,33 @@
 #include <QPushButton>
 #include <QTimer>
 #include <QToolButton>
-#include <Qt>
+#include <climits>
 
-#include "../vpatterndb/vtranslatevars.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../../visualization/path/vistoolarcwithlength.h"
+#include "../../visualization/visualization.h"
+#include "../qmuparser/qmudef.h"
 #include "../support/dialogeditwrongformula.h"
+#include "../vgeometry/varc.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
-#include "../../visualization/visualization.h"
-#include "ui_dialogarcwithlength.h"
-#include "../vgeometry/varc.h"
-#include "../qmuparser/qmudef.h"
-#include "../vwidgets/vabstractmainwindow.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/global.h"
+#include "../vwidgets/vabstractmainwindow.h"
+#include "ui_dialogarcwithlength.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogArcWithLength::DialogArcWithLength(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogArcWithLength),
-      m_timerRadius(new QTimer(this)),
-      m_timerF1(new QTimer(this)),
-      m_timerLength(new QTimer(this))
+  : DialogTool(data, toolId, parent),
+    ui(new Ui::DialogArcWithLength),
+    m_timerRadius(new QTimer(this)),
+    m_timerF1(new QTimer(this)),
+    m_timerLength(new QTimer(this))
 {
     ui->setupUi(this);
+
+    InitIcons();
 
     this->m_formulaBaseHeightRadius = ui->plainTextEditRadius->height();
     this->m_formulaBaseHeightF1 = ui->plainTextEditF1->height();
@@ -82,7 +84,9 @@ DialogArcWithLength::DialogArcWithLength(const VContainer *data, quint32 toolId,
 
     FillComboBoxPoints(ui->comboBoxCenter);
     FillComboBoxLineColors(ui->comboBoxColor);
-    FillComboBoxTypeLine(ui->comboBoxPenStyle, CurvePenStylesPics());
+    FillComboBoxTypeLine(ui->comboBoxPenStyle,
+                         CurvePenStylesPics(ui->comboBoxPenStyle->palette().color(QPalette::Base),
+                                            ui->comboBoxPenStyle->palette().color(QPalette::Text)));
 
     ui->doubleSpinBoxApproximationScale->setMaximum(maxCurveApproximationScale);
 
@@ -90,20 +94,14 @@ DialogArcWithLength::DialogArcWithLength(const VContainer *data, quint32 toolId,
     connect(ui->toolButtonExprF1, &QPushButton::clicked, this, &DialogArcWithLength::FXF1);
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogArcWithLength::FXLength);
 
-    connect(ui->plainTextEditRadius, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        m_timerRadius->start(formulaTimerTimeout);
-    });
+    connect(ui->plainTextEditRadius, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerRadius->start(formulaTimerTimeout); });
 
-    connect(ui->plainTextEditF1, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        m_timerF1->start(formulaTimerTimeout);
-    });
+    connect(ui->plainTextEditF1, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerF1->start(formulaTimerTimeout); });
 
-    connect(ui->plainTextEditLength, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        m_timerLength->start(formulaTimerTimeout);
-    });
+    connect(ui->plainTextEditLength, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerLength->start(formulaTimerTimeout); });
 
     connect(ui->pushButtonGrowLengthRadius, &QPushButton::clicked, this, &DialogArcWithLength::DeployRadiusTextEdit);
     connect(ui->pushButtonGrowLengthF1, &QPushButton::clicked, this, &DialogArcWithLength::DeployF1TextEdit);
@@ -147,8 +145,8 @@ auto DialogArcWithLength::GetRadius() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::SetRadius(const QString &value)
 {
-    m_radius = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    m_radius = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (m_radius.length() > 80)
     {
@@ -172,8 +170,8 @@ auto DialogArcWithLength::GetF1() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::SetF1(const QString &value)
 {
-    m_f1 = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    m_f1 = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (m_f1.length() > 80)
     {
@@ -197,8 +195,8 @@ auto DialogArcWithLength::GetLength() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::SetLength(const QString &value)
 {
-    m_length = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    m_length = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (m_length.length() > 80)
     {
@@ -314,8 +312,8 @@ void DialogArcWithLength::ShowDialog(bool click)
 
             if (m_stageRadius)
             {
-                //Radius of point circle, but little bigger. Need handle with hover sizes.
-                if (line.length() <= ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene()))*1.5)
+                // Radius of point circle, but little bigger. Need handle with hover sizes.
+                if (line.length() <= ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene())) * 1.5)
                 {
                     return;
                 }
@@ -355,7 +353,7 @@ void DialogArcWithLength::ShowDialog(bool click)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (not prepare)// After first choose we ignore all objects
+    if (not prepare) // After first choose we ignore all objects
     {
         if (type == SceneObject::Point)
         {
@@ -363,8 +361,8 @@ void DialogArcWithLength::ChosenObject(quint32 id, const SceneObject &type)
             {
                 if (vis != nullptr)
                 {
-                    auto *window = qobject_cast<VAbstractMainWindow *>(
-                                VAbstractValApplication::VApp()->getMainWindow());
+                    auto *window =
+                        qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
                     SCASSERT(window != nullptr)
                     connect(vis.data(), &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
 
@@ -477,6 +475,24 @@ void DialogArcWithLength::closeEvent(QCloseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogArcWithLength::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        InitIcons();
+        InitDialogButtonBoxIcons(ui->buttonBox);
+    }
+
+    // remember to call base class implementation
+    DialogTool::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::ValidateAlias()
 {
     QRegularExpression rx(NameRegExp());
@@ -549,4 +565,20 @@ void DialogArcWithLength::FinishCreating()
 
     setModal(true);
     show();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogArcWithLength::InitIcons()
+{
+    const QString resource = QStringLiteral("icon");
+
+    const QString fxIcon = QStringLiteral("24x24/fx.png");
+    ui->toolButtonExprRadius->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprF1->setIcon(VTheme::GetIconResource(resource, fxIcon));
+    ui->toolButtonExprLength->setIcon(VTheme::GetIconResource(resource, fxIcon));
+
+    const QString equalIcon = QStringLiteral("24x24/equal.png");
+    ui->label_6->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    ui->label_9->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+    ui->label_10->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
 }

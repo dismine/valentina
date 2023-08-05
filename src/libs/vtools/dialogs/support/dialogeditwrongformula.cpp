@@ -28,7 +28,6 @@
 
 #include "dialogeditwrongformula.h"
 
-#include <qiterator.h>
 #include <QAbstractItemView>
 #include <QApplication>
 #include <QCheckBox>
@@ -47,40 +46,44 @@
 #include <QTableWidget>
 #include <QTableWidgetItem>
 #include <QTextCursor>
+#include <QTimer>
 #include <QToolButton>
 #include <QWidget>
-#include <Qt>
 #include <new>
-#include <QTimer>
 
-#include "../vpatterndb/vcontainer.h"
-#include "../vpatterndb/vtranslatevars.h"
+#include "../tools/dialogtool.h"
+#include "../vmisc/def.h"
+#include "../vmisc/theme/vtheme.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/variables/varcradius.h"
 #include "../vpatterndb/variables/vcurveangle.h"
-#include "../vpatterndb/variables/vcurvelength.h"
 #include "../vpatterndb/variables/vcurveclength.h"
+#include "../vpatterndb/variables/vcurvelength.h"
 #include "../vpatterndb/variables/vincrement.h"
 #include "../vpatterndb/variables/vlineangle.h"
 #include "../vpatterndb/variables/vlinelength.h"
 #include "../vpatterndb/variables/vmeasurement.h"
 #include "../vpatterndb/variables/vpiecearea.h"
-#include "../vmisc/def.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vmisc/vcommonsettings.h"
-#include "../tools/dialogtool.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vtranslatevars.h"
 #include "ui_dialogeditwrongformula.h"
 
 template <class T> class QSharedPointer;
 
-enum {ColumnName = 0, ColumnFullName};
+enum
+{
+    ColumnName = 0,
+    ColumnFullName
+};
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, quint32 toolId, QWidget *parent)
-    : QDialog(parent),
-      ui(new Ui::DialogEditWrongFormula),
-      m_data(data),
-      m_toolId(toolId),
-      timerFormula(new QTimer(this))
+  : QDialog(parent),
+    ui(new Ui::DialogEditWrongFormula),
+    m_data(data),
+    m_toolId(toolId),
+    timerFormula(new QTimer(this))
 {
     SCASSERT(data != nullptr)
 
@@ -115,12 +118,10 @@ DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, quint32 t
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogEditWrongFormula::PutHere);
     connect(ui->tableWidget, &QTableWidget::itemDoubleClicked, this, &DialogEditWrongFormula::PutVal);
 
-    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, [this]()
-    {
-        timerFormula->start(formulaTimerTimeout);
-    });
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this,
+            [this]() { timerFormula->start(formulaTimerTimeout); });
 
-    //Disable Qt::WaitCursor
+    // Disable Qt::WaitCursor
 #ifndef QT_NO_CURSOR
     if (QGuiApplication::overrideCursor() != nullptr)
     {
@@ -166,7 +167,7 @@ void DialogEditWrongFormula::DialogRejected()
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::EvalFormula()
-{    
+{
     FormulaData formulaData;
     formulaData.formula = ui->plainTextEditFormula->toPlainText();
     formulaData.variables = m_data->DataVariables();
@@ -191,7 +192,7 @@ void DialogEditWrongFormula::ValChanged(int row)
         ui->labelDescription->setText(QString());
         return;
     }
-    QTableWidgetItem *item = ui->tableWidget->item( row, ColumnName );
+    QTableWidgetItem *item = ui->tableWidget->item(row, ColumnName);
     const QString name = VAbstractApplication::VApp()->TrVars()->VarFromUser(item->text());
 
     try
@@ -414,8 +415,8 @@ void DialogEditWrongFormula::closeEvent(QCloseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::showEvent(QShowEvent *event)
 {
-    QDialog::showEvent( event );
-    if ( event->spontaneous() )
+    QDialog::showEvent(event);
+    if (event->spontaneous())
     {
         return;
     }
@@ -434,7 +435,7 @@ void DialogEditWrongFormula::showEvent(QShowEvent *event)
 
     CheckState();
 
-    m_isInitialized = true;//first show windows are held
+    m_isInitialized = true; // first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -448,6 +449,24 @@ void DialogEditWrongFormula::resizeEvent(QResizeEvent *event)
         VAbstractApplication::VApp()->Settings()->SetFormulaWizardDialogSize(size());
     }
     QDialog::resizeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+
+    if (event->type() == QEvent::PaletteChange)
+    {
+        InitIcons();
+        InitDialogButtonBoxIcons(ui->buttonBox);
+    }
+
+    // remember to call base class implementation
+    QDialog::changeEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -467,8 +486,8 @@ void DialogEditWrongFormula::CheckState()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::SetFormula(const QString &value)
 {
-    formula = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    formula = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        value, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     ui->plainTextEditFormula->setPlainText(formula);
     MoveCursorToEnd(ui->plainTextEditFormula);
     ui->plainTextEditFormula->selectAll();
@@ -538,7 +557,7 @@ void DialogEditWrongFormula::InitVariables()
     Measurements();
 
     // clear text filter every time when new radio button selected
-    auto ClearFilterFormulaInputs = [this] () { ui->filterFormulaInputs->clear(); };
+    auto ClearFilterFormulaInputs = [this]() { ui->filterFormulaInputs->clear(); };
 
     connect(ui->radioButtonStandardTable, &QRadioButton::clicked, this, &DialogEditWrongFormula::Measurements);
     connect(ui->radioButtonStandardTable, &QRadioButton::clicked, this, ClearFilterFormulaInputs);
@@ -600,12 +619,19 @@ auto DialogEditWrongFormula::Eval(const FormulaData &formulaData, bool &flag) ->
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::InitIcons()
+{
+    const QString resource = QStringLiteral("icon");
+
+    ui->label->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/equal.png")));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ShowVariable show variables in list
  * @param var container with variables
  */
-template <class key, class val>
-void DialogEditWrongFormula::ShowVariable(const QMap<key, val> &var)
+template <class key, class val> void DialogEditWrongFormula::ShowVariable(const QMap<key, val> &var)
 {
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->clearContents();
@@ -619,16 +645,16 @@ void DialogEditWrongFormula::ShowVariable(const QMap<key, val> &var)
         iMap.next();
         if (ui->checkBoxHideEmpty->isEnabled() && ui->checkBoxHideEmpty->isChecked() && iMap.value()->IsNotUsed())
         {
-            continue; //skip this measurement
+            continue; // skip this measurement
         }
         if (iMap.value()->Filter(m_toolId) == false)
-        {// If we create this variable don't show
+        { // If we create this variable don't show
             ui->tableWidget->setRowCount(ui->tableWidget->rowCount() + 1);
             auto *item = new QTableWidgetItem(iMap.key());
             QFont font = item->font();
             font.setBold(true);
             item->setFont(font);
-            ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, ColumnName, item);
+            ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, ColumnName, item);
         }
     }
     ui->tableWidget->blockSignals(false);
@@ -641,7 +667,7 @@ void DialogEditWrongFormula::ShowVariable(const QMap<key, val> &var)
  * @brief ShowMeasurements show measurements in table
  * @param var container with measurements
  */
-void DialogEditWrongFormula::ShowMeasurements(const QMap<QString, QSharedPointer<VMeasurement> > &var)
+void DialogEditWrongFormula::ShowMeasurements(const QMap<QString, QSharedPointer<VMeasurement>> &var)
 {
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->clearContents();
@@ -655,10 +681,10 @@ void DialogEditWrongFormula::ShowMeasurements(const QMap<QString, QSharedPointer
         iMap.next();
         if (ui->checkBoxHideEmpty->isEnabled() && ui->checkBoxHideEmpty->isChecked() && iMap.value()->IsNotUsed())
         {
-            continue; //skip this measurement
+            continue; // skip this measurement
         }
         if (not iMap.value()->Filter(m_toolId))
-        {// If we create this variable don't show
+        { // If we create this variable don't show
             ui->tableWidget->setRowCount(ui->tableWidget->rowCount() + 1);
             auto *itemName = new QTableWidgetItem(iMap.key());
             QFont fontName = itemName->font();
@@ -680,8 +706,8 @@ void DialogEditWrongFormula::ShowMeasurements(const QMap<QString, QSharedPointer
             }
 
             itemFullName->setToolTip(itemFullName->text());
-            ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, ColumnName, itemName);
-            ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, ColumnFullName, itemFullName);
+            ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, ColumnName, itemName);
+            ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, ColumnFullName, itemFullName);
         }
     }
     ui->tableWidget->blockSignals(false);
@@ -713,12 +739,11 @@ void DialogEditWrongFormula::ShowFunctions()
         QFont font = item->font();
         font.setBold(true);
         item->setFont(font);
-        ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, ColumnName, item);
+        ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, ColumnName, item);
 
-        functionsDescriptions.contains(i.key())
-            ? item->setToolTip(functionsDescriptions.value(i.key())
-                               .translate(VAbstractApplication::VApp()->Settings()->GetLocale()))
-            : item->setToolTip(i.value().getMdisambiguation());
+        functionsDescriptions.contains(i.key()) ? item->setToolTip(functionsDescriptions.value(i.key()).translate(
+                                                      VAbstractApplication::VApp()->Settings()->GetLocale()))
+                                                : item->setToolTip(i.value().getMdisambiguation());
         ++i;
     }
 
@@ -732,13 +757,13 @@ void DialogEditWrongFormula::ShowIncrementsInPreviewCalculation(bool show)
 {
     ui->checkBoxHideEmpty->setEnabled(false);
 
-    QMap<QString, QSharedPointer<VIncrement> > increments;
+    QMap<QString, QSharedPointer<VIncrement>> increments;
 
-    const QMap<QString, QSharedPointer<VIncrement> > list = m_data->DataIncrements();
-    QMap<QString, QSharedPointer<VIncrement> >::const_iterator i = list.constBegin();
+    const QMap<QString, QSharedPointer<VIncrement>> list = m_data->DataIncrements();
+    QMap<QString, QSharedPointer<VIncrement>>::const_iterator i = list.constBegin();
     while (i != list.constEnd())
     {
-        if(i.value()->IsPreviewCalculation() == show)
+        if (i.value()->IsPreviewCalculation() == show)
         {
             increments.insert(i.key(), i.value());
         }
@@ -772,7 +797,7 @@ void DialogEditWrongFormula::FilterVariablesEdited(const QString &filter)
         }
 
         // show rows with matched filter
-        const QList<QTableWidgetItem*> items = ui->tableWidget->findItems(filter, Qt::MatchContains);
+        const QList<QTableWidgetItem *> items = ui->tableWidget->findItems(filter, Qt::MatchContains);
         for (auto *item : items)
         {
             // If filter is empty findItems() for unknown reason returns nullptr items.

@@ -31,6 +31,7 @@
 #include <QFileInfo>
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
+#include <QGraphicsView>
 #include <QGuiApplication>
 #include <QIcon>
 #include <QPainter>
@@ -43,10 +44,9 @@
 #include "../undocommands/vpundooriginmove.h"
 #include "../undocommands/vpundopiecerotate.h"
 #include "../vmisc/compatibility.h"
+#include "../vmisc/theme/vscenestylesheet.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vwidgets/global.h"
-#include "qgraphicsscene.h"
-#include "qgraphicsview.h"
-#include "qnamespace.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
@@ -58,14 +58,6 @@ constexpr qreal penWidth = 2;
 
 const qreal centerRadius1 = 5;
 const qreal centerRadius2 = 10;
-
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
-
-Q_GLOBAL_STATIC_WITH_ARGS(const QColor, defaultColor, (Qt::black)) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QColor, hoverColor, (Qt::green))   // NOLINT
-
-QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 auto TransformationOrigin(const VPLayoutPtr &layout, const QRectF &boundingRect) -> VPTransformationOrigon
@@ -94,8 +86,7 @@ auto TransformationOrigin(const VPLayoutPtr &layout, const QRectF &boundingRect)
 //---------------------------------------------------------------------------------------------------------------------
 VPGraphicsTransformationOrigin::VPGraphicsTransformationOrigin(const VPLayoutPtr &layout, QGraphicsItem *parent)
   : QGraphicsObject(parent),
-    m_layout(layout),
-    m_color(*defaultColor)
+    m_layout(layout)
 {
     SCASSERT(m_layout != nullptr)
     setCursor(Qt::OpenHandCursor);
@@ -147,14 +138,14 @@ void VPGraphicsTransformationOrigin::paint(QPainter *painter, const QStyleOption
 
     const qreal scale = SceneScale(scene());
 
-    QPen pen(m_color, penWidth / scale, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    QPen pen(CurrentColor(), penWidth / scale, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 
     painter->setPen(pen);
 
     if (m_originVisible)
     {
         painter->save();
-        painter->setBrush(QBrush(m_color));
+        painter->setBrush(QBrush(CurrentColor()));
         painter->drawPath(Center1());
         painter->restore();
 
@@ -221,14 +212,14 @@ void VPGraphicsTransformationOrigin::mouseReleaseEvent(QGraphicsSceneMouseEvent 
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsTransformationOrigin::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    m_color = *hoverColor;
+    m_hoverMode = true;
     QGraphicsObject::hoverEnterEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsTransformationOrigin::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    m_color = *defaultColor;
+    m_hoverMode = false;
     QGraphicsObject::hoverEnterEvent(event);
 }
 
@@ -249,7 +240,7 @@ auto VPGraphicsTransformationOrigin::RotationCenter(QPainter *painter) const -> 
     if (painter != nullptr)
     {
         painter->save();
-        painter->setBrush(QBrush(m_color));
+        painter->setBrush(QBrush(CurrentColor()));
         painter->drawPath(Center1());
         painter->restore();
     }
@@ -302,6 +293,13 @@ auto VPGraphicsTransformationOrigin::Center2() const -> QPainterPath
     center2.addEllipse(rect);
 
     return center2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPGraphicsTransformationOrigin::CurrentColor() const -> QColor
+{
+    return m_hoverMode ? VSceneStylesheet::ManualLayoutStyle().PieceHandleHoverColor()
+                       : VSceneStylesheet::ManualLayoutStyle().PieceHandleColor();
 }
 
 // VPGraphicsPieceControls
@@ -571,34 +569,30 @@ void VPGraphicsPieceControls::InitPixmaps()
     m_handleHoverPixmaps.clear();
     m_handlePaths.clear();
 
-    auto InitPixmap = [this](VPHandleCornerType type, const QString &fileName)
+    auto InitPixmap = [this](VPHandleCornerType type, const QString &imageName)
     {
-        const QFileInfo fileInfo(fileName);
-        const QString imageName = fileInfo.baseName();
+        const QString fileName = QStringLiteral("32x32/%1.png").arg(imageName);
+        const QString fileNameHover = QStringLiteral("32x32/%1-hover.png").arg(imageName);
 
-        const QString fileNameHover =
-            QStringLiteral("%1/%2-hover.%3").arg(fileInfo.absolutePath(), imageName, fileInfo.suffix());
+        const QString resource = QStringLiteral("icon");
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
         if (QGuiApplication::primaryScreen()->devicePixelRatio() >= 2)
         {
-            const QString fileName2x =
-                QStringLiteral("%1/%2@2x.%3").arg(fileInfo.absolutePath(), imageName, fileInfo.suffix());
+            const QString fileName2x = QStringLiteral("32x32/%1@2x.png").arg(imageName);
+            const QString fileName2xHover = QStringLiteral("32x32/%1-hover@2x.png").arg(imageName);
 
-            const QString fileName2xHover =
-                QStringLiteral("%1/%2-hover@2x.%3").arg(fileInfo.absolutePath(), imageName, fileInfo.suffix());
-
-            m_handlePixmaps.insert(type, QPixmap(fileName2x));
-            m_handleHoverPixmaps.insert(type, QPixmap(fileName2xHover));
+            m_handlePixmaps.insert(type, VTheme::GetPixmapResource(resource, fileName2x));
+            m_handleHoverPixmaps.insert(type, VTheme::GetPixmapResource(resource, fileName2xHover));
         }
         else
         {
-            m_handlePixmaps.insert(type, QPixmap(fileName));
-            m_handleHoverPixmaps.insert(type, QPixmap(fileNameHover));
+            m_handlePixmaps.insert(type, VTheme::GetPixmapResource(resource, fileName));
+            m_handleHoverPixmaps.insert(type, VTheme::GetPixmapResource(resource, fileNameHover));
         }
 #else
-        m_handlePixmaps.insert(type, QPixmap(fileName));
-        m_handleHoverPixmaps.insert(type, QPixmap(fileNameHover));
+        m_handlePixmaps.insert(type, VTheme::GetPixmapResource(resource, fileName));
+        m_handleHoverPixmaps.insert(type, VTheme::GetPixmapResource(resource, fileNameHover));
 #endif
         QPainterPath p = PixmapToPainterPath(m_handlePixmaps.value(type));
         p.setFillRule(Qt::WindingFill);
@@ -606,10 +600,10 @@ void VPGraphicsPieceControls::InitPixmaps()
         m_handlePaths.insert(type, p);
     };
 
-    InitPixmap(VPHandleCornerType::TopLeft, QStringLiteral("://icon/32x32/rotate-top-left.png"));
-    InitPixmap(VPHandleCornerType::TopRight, QStringLiteral("://icon/32x32/rotate-top-right.png"));
-    InitPixmap(VPHandleCornerType::BottomRight, QStringLiteral("://icon/32x32/rotate-bottom-right.png"));
-    InitPixmap(VPHandleCornerType::BottomLeft, QStringLiteral("://icon/32x32/rotate-bottom-left.png"));
+    InitPixmap(VPHandleCornerType::TopLeft, QStringLiteral("rotate-top-left"));
+    InitPixmap(VPHandleCornerType::TopRight, QStringLiteral("rotate-top-right"));
+    InitPixmap(VPHandleCornerType::BottomRight, QStringLiteral("rotate-bottom-right"));
+    InitPixmap(VPHandleCornerType::BottomLeft, QStringLiteral("rotate-bottom-left"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

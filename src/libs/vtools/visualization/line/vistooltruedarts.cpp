@@ -32,32 +32,33 @@
 #include <QLineF>
 #include <QPointF>
 #include <QSharedPointer>
-#include <Qt>
 #include <new>
 
 #include "../../tools/drawTools/toolpoint/tooldoublepoint/vtooltruedarts.h"
 #include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
+#include "../vpatterndb/vcontainer.h"
 #include "visline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolTrueDarts::VisToolTrueDarts(const VContainer *data, QGraphicsItem *parent)
-    :VisLine(data, parent)
+  : VisLine(data, parent)
 {
-    m_baseLineP1 = InitPoint(Color(VColor::SupportColor), this);
-    m_baseLineP2 = InitPoint(Color(VColor::SupportColor), this);
-    m_dartP1 = InitPoint(Color(VColor::SupportColor), this);
-    m_dartP2 = InitPoint(Color(VColor::SupportColor), this);
-    m_dartP3 = InitPoint(Color(VColor::SupportColor), this);
+    SetColorRole(VColorRole::VisSupportColor);
 
-    m_lineblP1P1 = InitItem<VScaledLine>(Color(VColor::SupportColor), this);
-    m_lineblP2P2 = InitItem<VScaledLine>(Color(VColor::SupportColor), this);
-    m_p1d2 = InitItem<VScaledLine>(Color(VColor::SupportColor), this);
-    m_d2p2 = InitItem<VScaledLine>(Color(VColor::SupportColor), this);
+    m_baseLineP1 = InitPoint(VColorRole::VisSupportColor, this);
+    m_baseLineP2 = InitPoint(VColorRole::VisSupportColor, this);
+    m_dartP1 = InitPoint(VColorRole::VisSupportColor, this);
+    m_dartP2 = InitPoint(VColorRole::VisSupportColor, this);
+    m_dartP3 = InitPoint(VColorRole::VisSupportColor, this);
 
-    m_point1 = InitPoint(Color(VColor::MainColor), this);
-    m_point2 = InitPoint(Color(VColor::MainColor), this); //-V656
+    m_lineblP1P1 = InitItem<VScaledLine>(VColorRole::VisSupportColor, this);
+    m_lineblP2P2 = InitItem<VScaledLine>(VColorRole::VisSupportColor, this);
+    m_p1d2 = InitItem<VScaledLine>(VColorRole::VisSupportColor, this);
+    m_d2p2 = InitItem<VScaledLine>(VColorRole::VisSupportColor, this);
+
+    m_point1 = InitPoint(VColorRole::VisMainColor, this);
+    m_point2 = InitPoint(VColorRole::VisMainColor, this); //-V656
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -66,46 +67,42 @@ void VisToolTrueDarts::RefreshGeometry()
     if (m_baseLineP1Id > NULL_ID)
     {
         const QSharedPointer<VPointF> blP1 = GetData()->GeometricObject<VPointF>(m_baseLineP1Id);
-        DrawPoint(m_baseLineP1, static_cast<QPointF>(*blP1), Color(VColor::SupportColor));
+        DrawPoint(m_baseLineP1, static_cast<QPointF>(*blP1));
 
         if (m_baseLineP2Id <= NULL_ID)
         {
-            DrawLine(this, QLineF(static_cast<QPointF>(*blP1), ScenePos()), Color(VColor::SupportColor), Qt::DashLine);
+            DrawLine(this, QLineF(static_cast<QPointF>(*blP1), ScenePos()), Qt::DashLine);
         }
         else
         {
             const QSharedPointer<VPointF> blP2 = GetData()->GeometricObject<VPointF>(m_baseLineP2Id);
-            DrawPoint(m_baseLineP2, static_cast<QPointF>(*blP2), Color(VColor::SupportColor));
-            DrawLine(this, QLineF(static_cast<QPointF>(*blP1), static_cast<QPointF>(*blP2)),
-                     Color(VColor::SupportColor), Qt::DashLine);
+            DrawPoint(m_baseLineP2, static_cast<QPointF>(*blP2));
+            DrawLine(this, QLineF(static_cast<QPointF>(*blP1), static_cast<QPointF>(*blP2)), Qt::DashLine);
 
             if (m_dartP1Id > NULL_ID)
             {
                 const QSharedPointer<VPointF> d1 = GetData()->GeometricObject<VPointF>(m_dartP1Id);
-                DrawPoint(m_dartP1, static_cast<QPointF>(*d1), Color(VColor::SupportColor));
+                DrawPoint(m_dartP1, static_cast<QPointF>(*d1));
 
                 if (m_dartP2Id <= NULL_ID)
                 {
-                    DrawLine(m_p1d2, QLineF(static_cast<QPointF>(*d1), ScenePos()),
-                             Color(VColor::SupportColor));
+                    DrawLine(m_p1d2, QLineF(static_cast<QPointF>(*d1), ScenePos()));
                 }
                 else
                 {
                     const QSharedPointer<VPointF> d2 = GetData()->GeometricObject<VPointF>(m_dartP2Id);
-                    DrawPoint(m_dartP2, static_cast<QPointF>(*d2), Color(VColor::SupportColor));
-                    DrawLine(m_p1d2, QLineF(static_cast<QPointF>(*d1), static_cast<QPointF>(*d2)),
-                             Color(VColor::SupportColor));
+                    DrawPoint(m_dartP2, static_cast<QPointF>(*d2));
+                    DrawLine(m_p1d2, QLineF(static_cast<QPointF>(*d1), static_cast<QPointF>(*d2)));
 
                     if (m_dartP3Id <= NULL_ID)
                     {
-                        DrawLine(m_d2p2, QLineF(static_cast<QPointF>(*d2), ScenePos()), Color(VColor::SupportColor));
+                        DrawLine(m_d2p2, QLineF(static_cast<QPointF>(*d2), ScenePos()));
                     }
                     else
                     {
                         const QSharedPointer<VPointF> d3 = GetData()->GeometricObject<VPointF>(m_dartP3Id);
-                        DrawPoint(m_dartP3, static_cast<QPointF>(*d3), Color(VColor::SupportColor));
-                        DrawLine(m_d2p2, QLineF(static_cast<QPointF>(*d2), static_cast<QPointF>(*d3)),
-                                 Color(VColor::SupportColor));
+                        DrawPoint(m_dartP3, static_cast<QPointF>(*d3));
+                        DrawLine(m_d2p2, QLineF(static_cast<QPointF>(*d2), static_cast<QPointF>(*d3)));
 
                         QPointF p1;
                         QPointF p2;
@@ -113,13 +110,13 @@ void VisToolTrueDarts::RefreshGeometry()
                                                   static_cast<QPointF>(*d1), static_cast<QPointF>(*d2),
                                                   static_cast<QPointF>(*d3), p1, p2);
 
-                        DrawLine(m_lineblP1P1, QLineF(static_cast<QPointF>(*blP1), p1), Color(VColor::SupportColor));
-                        DrawLine(m_lineblP2P2, QLineF(static_cast<QPointF>(*blP2), p2), Color(VColor::SupportColor));
-                        DrawLine(m_p1d2, QLineF(p1, static_cast<QPointF>(*d2)), Color(VColor::SupportColor));
-                        DrawLine(m_d2p2, QLineF(static_cast<QPointF>(*d2), p2), Color(VColor::SupportColor));
+                        DrawLine(m_lineblP1P1, QLineF(static_cast<QPointF>(*blP1), p1));
+                        DrawLine(m_lineblP2P2, QLineF(static_cast<QPointF>(*blP2), p2));
+                        DrawLine(m_p1d2, QLineF(p1, static_cast<QPointF>(*d2)));
+                        DrawLine(m_d2p2, QLineF(static_cast<QPointF>(*d2), p2));
 
-                        DrawPoint(m_point1, p1, Color(VColor::MainColor));
-                        DrawPoint(m_point2, p2, Color(VColor::MainColor));
+                        DrawPoint(m_point1, p1);
+                        DrawPoint(m_point2, p2);
                     }
                 }
             }

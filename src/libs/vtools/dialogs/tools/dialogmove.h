@@ -163,6 +163,8 @@ private:
 
     void ValidateSourceAliases();
     void SetAliasValid(quint32 id, bool valid);
+
+    void InitIcons();
 };
 
 #endif // DIALOGMOVING_H

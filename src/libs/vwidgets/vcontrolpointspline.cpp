@@ -41,26 +41,23 @@
 #include <QPoint>
 #include <QPolygonF>
 #include <QRectF>
-#include <Qt>
 
-#include "../vwidgets/global.h"
 #include "../vgeometry/vgobject.h"
-#include "../vmisc/vabstractapplication.h"
 #include "../vmisc/literals.h"
-#include "vmaingraphicsscene.h"
-#include "vmaingraphicsview.h"
-#include "vgraphicssimpletextitem.h"
+#include "../vmisc/theme/themeDef.h"
+#include "../vwidgets/global.h"
 #include "scalesceneitems.h"
+#include "vmaingraphicsview.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VControlPointSpline::VControlPointSpline(const vsizetype &indexSpline, SplinePointPosition position,
                                          QGraphicsItem *parent)
-    : VScenePoint(parent),
-      controlLine(nullptr),
-      indexSpline(indexSpline),
-      position(position),
-      freeAngle(true),
-      freeLength(true)
+  : VScenePoint(VColorRole::ControlPointColor, parent),
+    controlLine(nullptr),
+    indexSpline(indexSpline),
+    position(position),
+    freeAngle(true),
+    freeLength(true)
 {
     Init();
 }
@@ -74,14 +71,14 @@ VControlPointSpline::VControlPointSpline(const vsizetype &indexSpline, SplinePoi
  * @param parent parent object.
  */
 VControlPointSpline::VControlPointSpline(const vsizetype &indexSpline, SplinePointPosition position,
-                                         const QPointF &controlPoint, bool freeAngle,
-                                         bool freeLength, QGraphicsItem *parent)
-    : VScenePoint(parent),
-      controlLine(nullptr),
-      indexSpline(indexSpline),
-      position(position),
-      freeAngle(freeAngle),
-      freeLength(freeLength)
+                                         const QPointF &controlPoint, bool freeAngle, bool freeLength,
+                                         QGraphicsItem *parent)
+  : VScenePoint(VColorRole::ControlPointColor, parent),
+    controlLine(nullptr),
+    indexSpline(indexSpline),
+    position(position),
+    freeAngle(freeAngle),
+    freeLength(freeLength)
 {
     Init();
 
@@ -96,13 +93,9 @@ VControlPointSpline::VControlPointSpline(const vsizetype &indexSpline, SplinePoi
 //---------------------------------------------------------------------------------------------------------------------
 void VControlPointSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    QPen lPen = controlLine->pen();
-    lPen.setColor(CorrectColor(controlLine, Qt::black));
-    controlLine->setPen(lPen);
-
     QPointF p1, p2;
     VGObject::LineIntersectCircle(QPointF(), ScaledRadius(SceneScale(scene())),
-                                  QLineF( QPointF(), controlLine->line().p1()), p1, p2);
+                                  QLineF(QPointF(), controlLine->line().p1()), p1, p2);
     QLineF line(controlLine->line().p1(), p1);
     controlLine->setLine(line);
 
@@ -140,8 +133,8 @@ auto VControlPointSpline::itemChange(QGraphicsItem::GraphicsItemChange change, c
             {
                 const QPointF splPoint = controlLine->line().p1() + pos();
 
-                QLineF newLine(splPoint, value.toPointF());// value - new position.
-                QLineF oldLine(splPoint, pos());// pos() - old position.
+                QLineF newLine(splPoint, value.toPointF()); // value - new position.
+                QLineF oldLine(splPoint, pos());            // pos() - old position.
 
                 if (not freeAngle)
                 {
@@ -174,7 +167,7 @@ auto VControlPointSpline::itemChange(QGraphicsItem::GraphicsItemChange change, c
                     const QList<QGraphicsView *> viewList = scene()->views();
                     if (not viewList.isEmpty())
                     {
-                        if (VMainGraphicsView *view = qobject_cast<VMainGraphicsView *>(viewList.at(0)))
+                        if (auto *view = qobject_cast<VMainGraphicsView *>(viewList.at(0)))
                         {
                             view->EnsureItemVisibleWithDelay(this, VMainGraphicsView::scrollDelay);
                         }
@@ -205,7 +198,7 @@ void VControlPointSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
         }
 
         // Somehow clicking on notselectable object do not clean previous selections.
-        if (not (flags() & ItemIsSelectable) && scene())
+        if (not(flags() & ItemIsSelectable) && scene())
         {
             scene()->clearSelection();
         }
@@ -236,28 +229,27 @@ void VControlPointSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event
 //---------------------------------------------------------------------------------------------------------------------
 void VControlPointSpline::Init()
 {
-    m_baseColor = Qt::red;
     SetOnlyPoint(true);
     this->setBrush(QBrush(Qt::NoBrush));
     this->setZValue(100);
 
-    controlLine = new VScaledLine(this);
+    controlLine = new VScaledLine(VColorRole::ControlLineColor, this);
     controlLine->SetBoldLine(false);
-    //controlLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
+    // controlLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
     controlLine->setVisible(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VControlPointSpline::SetCtrlLine(const QPointF &controlPoint, const QPointF &splinePoint)
 {
-    QLineF circleLine (QPointF(), splinePoint-controlPoint);
+    QLineF circleLine(QPointF(), splinePoint - controlPoint);
     const qreal radius = ScaledRadius(SceneScale(scene()));
 
     if (circleLine.length() > radius)
     {
         QPointF p1, p2;
         VGObject::LineIntersectCircle(QPointF(), radius, circleLine, p1, p2);
-        QLineF line(splinePoint-controlPoint, p1);
+        QLineF line(splinePoint - controlPoint, p1);
         controlLine->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
         controlLine->setLine(line);
         controlLine->setVisible(not line.isNull());

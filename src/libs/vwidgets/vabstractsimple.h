@@ -34,18 +34,18 @@
 #include <QObject>
 #include <QPen>
 #include <QString>
-#include <Qt>
 #include <QtGlobal>
 
-#include "../ifc/ifcdef.h"
 #include "../vgeometry/vgeometrydef.h"
 #include "../vmisc/def.h"
+#include "../vmisc/typedef.h"
 
 class QGraphicsSceneContextMenuEvent;
 
 class VAbstractSimple : public QObject
 {
     Q_OBJECT // NOLINT
+
 public:
     VAbstractSimple(quint32 id, QObject *parent = nullptr);
     virtual ~VAbstractSimple() = default;
@@ -53,10 +53,10 @@ public:
     virtual void ToolSelectionType(const SelectionType &type);
 
     auto GetType() const -> GOType;
-    void   SetType(const GOType &value);
+    void SetType(const GOType &value);
 
 signals:
-    void ShowContextMenu(QGraphicsSceneContextMenuEvent * event, quint32 id = NULL_ID);
+    void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID);
     void Delete();
 
 protected:
@@ -65,7 +65,7 @@ protected:
 
     SelectionType selectionType;
 
-    GOType  type;
+    GOType type;
 
 private:
     Q_DISABLE_COPY_MOVE(VAbstractSimple) // NOLINT

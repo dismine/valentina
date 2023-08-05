@@ -9,9 +9,7 @@
         <file>icon/32x32/option_draw.png</file>
         <file>icon/32x32/table.png</file>
         <file>icon/24x24/putHere.png</file>
-        <file>icon/24x24/equal.png</file>
         <file>icon/32x32/history.png</file>
-        <file>icon/32x32/put_after.png</file>
         <file>icon/32x32/layout.png</file>
         <file>icon/16x16/mirror.png</file>
         <file>icon/config.png</file>
@@ -32,23 +30,12 @@
         <file>icon/16x16/portrait.png</file>
         <file>icon/16x16/template.png</file>
         <file>icon/32x32/pdf.png</file>
-        <file>icon/24x24/fx.png</file>
-        <file>icon/16x16/fx.png</file>
         <file>icon/16x16/roll.png</file>
-        <file>icon/16x16/progress.gif</file>
+        <file>icon/16x16/roll@2x.png</file>
         <file>icon/32x32/export_to_picture_document.png</file>
-        <file>icon/24x24/fast_forward_left_to_right_arrow.png</file>
-        <file>icon/24x24/fast_forward_right_to_left_arrow.png</file>
-        <file>icon/24x24/left_to_right_arrow.png</file>
-        <file>icon/24x24/right_to_left_arrow.png</file>
-        <file>icon/32x32/clockwise.png</file>
         <file>icon/32x32/syncM.png</file>
         <file>icon/16x16/operations.png</file>
         <file>icon/16x16/operations@2x.png</file>
-        <file>icon/16x16/closed_eye.png</file>
-        <file>icon/16x16/closed_eye@2x.png</file>
-        <file>icon/16x16/open_eye.png</file>
-        <file>icon/16x16/open_eye@2x.png</file>
         <file>icon/16x16/allow_detail.png</file>
         <file>icon/16x16/allow_detail@2x.png</file>
         <file>icon/16x16/forbid_detail.png</file>
@@ -82,58 +69,144 @@
         <file>icon/24x24/close.png</file>
         <file>icon/24x24/close@2x.png</file>
         <file>icon/layout.png</file>
-        <file>icon/32x32/rotate-top-left-hover@2x.png</file>
-        <file>icon/32x32/rotate-top-left-hover.png</file>
-        <file>icon/32x32/rotate-top-left@2x.png</file>
-        <file>icon/32x32/rotate-top-left.png</file>
-        <file>icon/32x32/rotate-top-right-hover@2x.png</file>
-        <file>icon/32x32/rotate-top-right-hover.png</file>
-        <file>icon/32x32/rotate-top-right@2x.png</file>
-        <file>icon/32x32/rotate-top-right.png</file>
-        <file>icon/32x32/rotate-bottom-right-hover@2x.png</file>
-        <file>icon/32x32/rotate-bottom-right-hover.png</file>
-        <file>icon/32x32/rotate-bottom-right@2x.png</file>
-        <file>icon/32x32/rotate-bottom-right.png</file>
-        <file>icon/32x32/rotate-bottom-left-hover@2x.png</file>
-        <file>icon/32x32/rotate-bottom-left-hover.png</file>
-        <file>icon/32x32/rotate-bottom-left@2x.png</file>
-        <file>icon/32x32/rotate-bottom-left.png</file>
-        <file>icon/32x32/expand2-hover@2x.png</file>
-        <file>icon/32x32/expand2-hover.png</file>
-        <file>icon/32x32/expand2@2x.png</file>
-        <file>icon/32x32/expand2.png</file>
-        <file>icon/32x32/expand1-hover@2x.png</file>
-        <file>icon/32x32/expand1-hover.png</file>
-        <file>icon/32x32/expand1@2x.png</file>
-        <file>icon/32x32/expand1.png</file>
-        <file>icon/32x32/double-arrow-vertical-hover@2x.png</file>
-        <file>icon/32x32/double-arrow-vertical-hover.png</file>
-        <file>icon/32x32/double-arrow-vertical@2x.png</file>
-        <file>icon/32x32/double-arrow-vertical.png</file>
-        <file>icon/32x32/double-arrow-horizontal-hover@2x.png</file>
-        <file>icon/32x32/double-arrow-horizontal@2x.png</file>
-        <file>icon/32x32/double-arrow-horizontal-hover.png</file>
-        <file>icon/32x32/double-arrow-horizontal.png</file>
         <file>icon/svg/broken_path.svg</file>
-        <file>icon/16x16/not_hold_image@2x.png</file>
-        <file>icon/16x16/not_hold_image.png</file>
-        <file>icon/16x16/hold_image@2x.png</file>
-        <file>icon/16x16/hold_image.png</file>
-        <file>icon/32x32/rotate-top-right-disabled@2x.png</file>
-        <file>icon/32x32/rotate-top-right-disabled.png</file>
-        <file>icon/32x32/rotate-top-left-disabled@2x.png</file>
-        <file>icon/32x32/rotate-top-left-disabled.png</file>
-        <file>icon/32x32/rotate-bottom-right-disabled@2x.png</file>
-        <file>icon/32x32/rotate-bottom-right-disabled.png</file>
-        <file>icon/32x32/rotate-bottom-left-disabled@2x.png</file>
-        <file>icon/32x32/rotate-bottom-left-disabled.png</file>
-        <file>icon/32x32/expand2-disabled@2x.png</file>
-        <file>icon/32x32/expand2-disabled.png</file>
-        <file>icon/32x32/expand1-disabled@2x.png</file>
-        <file>icon/32x32/expand1-disabled.png</file>
-        <file>icon/32x32/double-arrow-vertical-disabled@2x.png</file>
-        <file>icon/32x32/double-arrow-vertical-disabled.png</file>
-        <file>icon/32x32/double-arrow-horizontal-disabled@2x.png</file>
-        <file>icon/32x32/double-arrow-horizontal-disabled.png</file>
+        <file>icon/light/16x16/fx@2x.png</file>
+        <file>icon/light/16x16/fx.png</file>
+        <file>icon/light/24x24/fx@2x.png</file>
+        <file>icon/light/24x24/fx.png</file>
+        <file>icon/dark/16x16/fx@2x.png</file>
+        <file>icon/dark/16x16/fx.png</file>
+        <file>icon/dark/24x24/fx@2x.png</file>
+        <file>icon/dark/24x24/fx.png</file>
+        <file>icon/light/24x24/equal@2x.png</file>
+        <file>icon/light/24x24/equal.png</file>
+        <file>icon/dark/24x24/equal@2x.png</file>
+        <file>icon/dark/24x24/equal.png</file>
+        <file>icon/light/16x16/progress.gif</file>
+        <file>icon/dark/16x16/progress.gif</file>
+        <file>icon/light/24x24/go-previous-skip@2x.png</file>
+        <file>icon/light/24x24/go-previous-skip.png</file>
+        <file>icon/light/24x24/go-previous@2x.png</file>
+        <file>icon/light/24x24/go-previous.png</file>
+        <file>icon/light/24x24/go-next-skip@2x.png</file>
+        <file>icon/light/24x24/go-next-skip.png</file>
+        <file>icon/light/24x24/go-next@2x.png</file>
+        <file>icon/light/24x24/go-next.png</file>
+        <file>icon/dark/24x24/go-previous-skip@2x.png</file>
+        <file>icon/dark/24x24/go-previous-skip.png</file>
+        <file>icon/dark/24x24/go-previous@2x.png</file>
+        <file>icon/dark/24x24/go-previous.png</file>
+        <file>icon/dark/24x24/go-next-skip@2x.png</file>
+        <file>icon/dark/24x24/go-next-skip.png</file>
+        <file>icon/dark/24x24/go-next@2x.png</file>
+        <file>icon/dark/24x24/go-next.png</file>
+        <file>icon/light/16x16/closed_eye@2x.png</file>
+        <file>icon/light/16x16/closed_eye.png</file>
+        <file>icon/light/16x16/open_eye@2x.png</file>
+        <file>icon/light/16x16/open_eye.png</file>
+        <file>icon/dark/16x16/open_eye@2x.png</file>
+        <file>icon/dark/16x16/open_eye.png</file>
+        <file>icon/dark/16x16/closed_eye@2x.png</file>
+        <file>icon/dark/16x16/closed_eye.png</file>
+        <file>icon/light/16x16/not_hold_image@2x.png</file>
+        <file>icon/light/16x16/not_hold_image.png</file>
+        <file>icon/light/16x16/hold_image@2x.png</file>
+        <file>icon/light/16x16/hold_image.png</file>
+        <file>icon/dark/16x16/not_hold_image@2x.png</file>
+        <file>icon/dark/16x16/not_hold_image.png</file>
+        <file>icon/dark/16x16/hold_image@2x.png</file>
+        <file>icon/dark/16x16/hold_image.png</file>
+        <file>icon/light/32x32/clockwise@2x.png</file>
+        <file>icon/light/32x32/clockwise.png</file>
+        <file>icon/dark/32x32/clockwise@2x.png</file>
+        <file>icon/dark/32x32/clockwise.png</file>
+        <file>icon/light/32x32/double-arrow-vertical-hover@2x.png</file>
+        <file>icon/light/32x32/double-arrow-vertical-hover.png</file>
+        <file>icon/light/32x32/double-arrow-vertical-disabled@2x.png</file>
+        <file>icon/light/32x32/double-arrow-vertical-disabled.png</file>
+        <file>icon/light/32x32/double-arrow-vertical@2x.png</file>
+        <file>icon/light/32x32/double-arrow-vertical.png</file>
+        <file>icon/light/32x32/double-arrow-horizontal-hover@2x.png</file>
+        <file>icon/light/32x32/double-arrow-horizontal-hover.png</file>
+        <file>icon/light/32x32/double-arrow-horizontal-disabled@2x.png</file>
+        <file>icon/light/32x32/double-arrow-horizontal-disabled.png</file>
+        <file>icon/light/32x32/double-arrow-horizontal@2x.png</file>
+        <file>icon/light/32x32/double-arrow-horizontal.png</file>
+        <file>icon/light/32x32/expand1@2x.png</file>
+        <file>icon/light/32x32/expand1.png</file>
+        <file>icon/light/32x32/expand1-disabled@2x.png</file>
+        <file>icon/light/32x32/expand1-disabled.png</file>
+        <file>icon/light/32x32/expand1-hover@2x.png</file>
+        <file>icon/light/32x32/expand1-hover.png</file>
+        <file>icon/light/32x32/expand2.png</file>
+        <file>icon/light/32x32/expand2@2x.png</file>
+        <file>icon/light/32x32/expand2-disabled@2x.png</file>
+        <file>icon/light/32x32/expand2-disabled.png</file>
+        <file>icon/light/32x32/expand2-hover@2x.png</file>
+        <file>icon/light/32x32/expand2-hover.png</file>
+        <file>icon/light/32x32/rotate-top-right-hover@2x.png</file>
+        <file>icon/light/32x32/rotate-top-right-hover.png</file>
+        <file>icon/light/32x32/rotate-top-right-disabled@2x.png</file>
+        <file>icon/light/32x32/rotate-top-right-disabled.png</file>
+        <file>icon/light/32x32/rotate-top-right@2x.png</file>
+        <file>icon/light/32x32/rotate-top-right.png</file>
+        <file>icon/light/32x32/rotate-top-left-hover@2x.png</file>
+        <file>icon/light/32x32/rotate-top-left-hover.png</file>
+        <file>icon/light/32x32/rotate-top-left-disabled@2x.png</file>
+        <file>icon/light/32x32/rotate-top-left-disabled.png</file>
+        <file>icon/light/32x32/rotate-top-left@2x.png</file>
+        <file>icon/light/32x32/rotate-top-left.png</file>
+        <file>icon/light/32x32/rotate-bottom-right-hover@2x.png</file>
+        <file>icon/light/32x32/rotate-bottom-right-hover.png</file>
+        <file>icon/light/32x32/rotate-bottom-right-disabled@2x.png</file>
+        <file>icon/light/32x32/rotate-bottom-right-disabled.png</file>
+        <file>icon/light/32x32/rotate-bottom-right@2x.png</file>
+        <file>icon/light/32x32/rotate-bottom-right.png</file>
+        <file>icon/light/32x32/rotate-bottom-left-hover@2x.png</file>
+        <file>icon/light/32x32/rotate-bottom-left-hover.png</file>
+        <file>icon/light/32x32/rotate-bottom-left-disabled@2x.png</file>
+        <file>icon/light/32x32/rotate-bottom-left-disabled.png</file>
+        <file>icon/light/32x32/rotate-bottom-left@2x.png</file>
+        <file>icon/light/32x32/rotate-bottom-left.png</file>
+        <file>icon/dark/32x32/double-arrow-vertical-hover@2x.png</file>
+        <file>icon/dark/32x32/double-arrow-vertical-hover.png</file>
+        <file>icon/dark/32x32/double-arrow-vertical-disabled@2x.png</file>
+        <file>icon/dark/32x32/double-arrow-vertical-disabled.png</file>
+        <file>icon/dark/32x32/double-arrow-vertical@2x.png</file>
+        <file>icon/dark/32x32/double-arrow-vertical.png</file>
+        <file>icon/dark/32x32/double-arrow-horizontal-hover@2x.png</file>
+        <file>icon/dark/32x32/double-arrow-horizontal-hover.png</file>
+        <file>icon/dark/32x32/double-arrow-horizontal-disabled@2x.png</file>
+        <file>icon/dark/32x32/double-arrow-horizontal-disabled.png</file>
+        <file>icon/dark/32x32/double-arrow-horizontal@2x.png</file>
+        <file>icon/dark/32x32/double-arrow-horizontal.png</file>
+        <file>icon/dark/32x32/rotate-top-right-hover@2x.png</file>
+        <file>icon/dark/32x32/rotate-top-right-hover.png</file>
+        <file>icon/dark/32x32/rotate-top-right-disabled@2x.png</file>
+        <file>icon/dark/32x32/rotate-top-right-disabled.png</file>
+        <file>icon/dark/32x32/rotate-top-right@2x.png</file>
+        <file>icon/dark/32x32/rotate-top-right.png</file>
+        <file>icon/dark/32x32/rotate-top-left-hover@2x.png</file>
+        <file>icon/dark/32x32/rotate-top-left-hover.png</file>
+        <file>icon/dark/32x32/rotate-top-left-disabled@2x.png</file>
+        <file>icon/dark/32x32/rotate-top-left-disabled.png</file>
+        <file>icon/dark/32x32/rotate-top-left@2x.png</file>
+        <file>icon/dark/32x32/rotate-top-left.png</file>
+        <file>icon/dark/32x32/rotate-bottom-right-hover@2x.png</file>
+        <file>icon/dark/32x32/rotate-bottom-right-hover.png</file>
+        <file>icon/dark/32x32/rotate-bottom-right-disabled@2x.png</file>
+        <file>icon/dark/32x32/rotate-bottom-right-disabled.png</file>
+        <file>icon/dark/32x32/rotate-bottom-right@2x.png</file>
+        <file>icon/dark/32x32/rotate-bottom-right.png</file>
+        <file>icon/dark/32x32/rotate-bottom-left-hover@2x.png</file>
+        <file>icon/dark/32x32/rotate-bottom-left-hover.png</file>
+        <file>icon/dark/32x32/rotate-bottom-left-disabled@2x.png</file>
+        <file>icon/dark/32x32/rotate-bottom-left-disabled.png</file>
+        <file>icon/dark/32x32/rotate-bottom-left@2x.png</file>
+        <file>icon/dark/32x32/rotate-bottom-left.png</file>
+        <file>icon/light/32x32/put_after@2x.png</file>
+        <file>icon/light/32x32/put_after.png</file>
+        <file>icon/dark/32x32/put_after@2x.png</file>
+        <file>icon/dark/32x32/put_after.png</file>
     </qresource>
 </RCC>

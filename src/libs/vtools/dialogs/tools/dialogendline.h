@@ -96,6 +96,7 @@ protected:
      */
     void SaveData() override;
     void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
     auto IsValid() const -> bool final;
 
 private:
@@ -126,6 +127,8 @@ private:
     bool flagName;
 
     void FinishCreating();
+
+    void InitIcons();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

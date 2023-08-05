@@ -27,19 +27,20 @@
  *************************************************************************/
 
 #include "vcurvepathitem.h"
-#include "../vwidgets/global.h"
 #include "../vgeometry/vabstractcurve.h"
+#include "../vmisc/theme/vscenestylesheet.h"
 #include "../vmisc/vabstractapplication.h"
+#include "global.h"
 
 #include <QPainter>
 
 //---------------------------------------------------------------------------------------------------------------------
-VCurvePathItem::VCurvePathItem(QGraphicsItem *parent)
-    : QGraphicsPathItem(parent),
-      m_directionArrows(),
-      m_points(),
-      m_defaultWidth(VAbstractApplication::VApp()->Settings()->WidthMainLine())
-{}
+VCurvePathItem::VCurvePathItem(VColorRole role, QGraphicsItem *parent)
+  : QGraphicsPathItem(parent),
+    m_defaultWidth(VAbstractApplication::VApp()->Settings()->WidthMainLine()),
+    m_role(role)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VCurvePathItem::shape() const -> QPainterPath
@@ -48,10 +49,10 @@ auto VCurvePathItem::shape() const -> QPainterPath
 
     if (not m_points.isEmpty())
     {
-        for (qint32 i = 0; i < m_points.count()-1; ++i)
+        for (qint32 i = 0; i < m_points.count() - 1; ++i)
         {
             itemPath.moveTo(m_points.at(i));
-            itemPath.lineTo(m_points.at(i+1));
+            itemPath.lineTo(m_points.at(i + 1));
         }
     }
     else
@@ -59,9 +60,9 @@ auto VCurvePathItem::shape() const -> QPainterPath
         itemPath = path();
     }
 
-    const QPainterPath arrowsPath = VAbstractCurve::ShowDirection(m_directionArrows,
-                                                                 ScaleWidth(VAbstractCurve::LengthCurveDirectionArrow(),
-                                                                             SceneScale(scene())));
+    const QPainterPath arrowsPath = VAbstractCurve::ShowDirection(
+        m_directionArrows, ScaleWidth(VAbstractCurve::LengthCurveDirectionArrow(), SceneScale(scene())));
+
     if (arrowsPath != QPainterPath())
     {
         itemPath.addPath(arrowsPath);
@@ -75,15 +76,20 @@ void VCurvePathItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 {
     ScalePenWidth();
 
-    const QPainterPath arrowsPath = VAbstractCurve::ShowDirection(m_directionArrows,
-                                                                 ScaleWidth(VAbstractCurve::LengthCurveDirectionArrow(),
-                                                                             SceneScale(scene())));
+    const QPainterPath arrowsPath = VAbstractCurve::ShowDirection(
+        m_directionArrows, ScaleWidth(VAbstractCurve::LengthCurveDirectionArrow(), SceneScale(scene())));
 
     if (arrowsPath != QPainterPath())
     {
         painter->save();
 
         QPen arrowPen(pen());
+
+        if (m_role != VColorRole::CustomColor)
+        {
+            arrowPen.setColor(VSceneStylesheet::Color(m_role));
+        }
+
         arrowPen.setStyle(Qt::SolidLine);
 
         painter->setPen(arrowPen);
@@ -97,7 +103,7 @@ void VCurvePathItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCurvePathItem::SetDirectionArrows(const QVector<QPair<QLineF, QLineF> > &arrows)
+void VCurvePathItem::SetDirectionArrows(const QVector<QPair<QLineF, QLineF>> &arrows)
 {
     m_directionArrows = arrows;
 }
@@ -121,6 +127,11 @@ void VCurvePathItem::ScalePenWidth()
 
     QPen toolPen = pen();
     toolPen.setWidthF(width);
+
+    if (m_role != VColorRole::CustomColor)
+    {
+        toolPen.setColor(VSceneStylesheet::Color(m_role));
+    }
 
     setPen(toolPen);
 }

@@ -34,36 +34,35 @@
 #include <QPoint>
 #include <QSharedPointer>
 #include <QUndoStack>
-#include <Qt>
 #include <new>
 
 #include "../../../../undocommands/label/movedoublelabel.h"
 #include "../../../../undocommands/label/showdoublelabel.h"
+#include "../../../vabstracttool.h"
+#include "../../../vdatatool.h"
+#include "../../vdrawtool.h"
 #include "../ifc/exception/vexception.h"
-#include "../ifc/exception/vexceptionbadid.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../vabstractpoint.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/theme/themeDef.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/../ifc/ifcdef.h"
 #include "../vwidgets/vsimplepoint.h"
-#include "../../../vabstracttool.h"
-#include "../../../vdatatool.h"
-#include "../../vdrawtool.h"
-#include "../vabstractpoint.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolDoublePoint::VToolDoublePoint(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 p1id, quint32 p2id,
                                    const QString &notes, QGraphicsItem *parent)
-    :VAbstractPoint(doc, data, id, notes),
-      QGraphicsPathItem(parent),
-      firstPoint(nullptr),
-      secondPoint(nullptr),
-      p1id(p1id),
-      p2id(p2id)
+  : VAbstractPoint(doc, data, id, notes),
+    QGraphicsPathItem(parent),
+    firstPoint(nullptr),
+    secondPoint(nullptr),
+    p1id(p1id),
+    p2id(p2id)
 {
-    firstPoint = new VSimplePoint(p1id, QColor(Qt::black));
+    firstPoint = new VSimplePoint(p1id, VColorRole::PatternColor);
     firstPoint->setParentItem(this);
     firstPoint->setToolTip(ComplexToolTip(p1id));
     connect(firstPoint, &VSimplePoint::Choosed, this, &VToolDoublePoint::Point1Choosed);
@@ -73,7 +72,7 @@ VToolDoublePoint::VToolDoublePoint(VAbstractPattern *doc, VContainer *data, quin
     connect(firstPoint, &VSimplePoint::NameChangedPosition, this, &VToolDoublePoint::Label1ChangePosition);
     firstPoint->RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(p1id));
 
-    secondPoint = new VSimplePoint(p2id, QColor(Qt::black));
+    secondPoint = new VSimplePoint(p2id, VColorRole::PatternColor);
     secondPoint->setParentItem(this);
     secondPoint->setToolTip(ComplexToolTip(p2id));
     connect(secondPoint, &VSimplePoint::Choosed, this, &VToolDoublePoint::Point2Choosed);
@@ -302,16 +301,16 @@ void VToolDoublePoint::ToolSelectionType(const SelectionType &type)
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDoublePoint::UpdateNamePosition(quint32 id, const QPointF &pos)
-{    
+{
     if (id == p1id)
     {
         VAbstractApplication::VApp()->getUndoStack()->push(
-                    new MoveDoubleLabel(doc, pos, MoveDoublePoint::FirstPoint, m_id, p1id));
+            new MoveDoubleLabel(doc, pos, MoveDoublePoint::FirstPoint, m_id, p1id));
     }
     else if (id == p2id)
     {
         VAbstractApplication::VApp()->getUndoStack()->push(
-                    new MoveDoubleLabel(doc, pos, MoveDoublePoint::SecondPoint, m_id, p2id));
+            new MoveDoubleLabel(doc, pos, MoveDoublePoint::SecondPoint, m_id, p2id));
     }
 }
 
@@ -354,16 +353,16 @@ void VToolDoublePoint::keyReleaseEvent(QKeyEvent *event)
             {
                 DeleteToolWithConfirm();
             }
-            catch(const VExceptionToolWasDeleted &e)
+            catch (const VExceptionToolWasDeleted &e)
             {
                 Q_UNUSED(e)
-                return;//Leave this method immediately!!!
+                return; // Leave this method immediately!!!
             }
             break;
         default:
             break;
     }
-    QGraphicsPathItem::keyReleaseEvent ( event );
+    QGraphicsPathItem::keyReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -432,12 +431,12 @@ void VToolDoublePoint::ChangeLabelVisibility(quint32 id, bool visible)
     if (id == p1id)
     {
         VAbstractApplication::VApp()->getUndoStack()->push(
-                    new ShowDoubleLabel(doc, m_id, p1id, visible, ShowDoublePoint::FirstPoint));
+            new ShowDoubleLabel(doc, m_id, p1id, visible, ShowDoublePoint::FirstPoint));
     }
     else if (id == p2id)
     {
         VAbstractApplication::VApp()->getUndoStack()->push(
-                    new ShowDoubleLabel(doc, m_id, p2id, visible, ShowDoublePoint::SecondPoint));
+            new ShowDoubleLabel(doc, m_id, p2id, visible, ShowDoublePoint::SecondPoint));
     }
 }
 
@@ -450,6 +449,6 @@ auto VToolDoublePoint::ComplexToolTip(quint32 itemId) const -> QString
                                     "<tr> <td><b>%1:</b> %2</td> </tr>"
                                     "%3"
                                     "</table>")
-            .arg(tr("Label"), point->name(), MakeToolTip());
+                                .arg(tr("Label"), point->name(), MakeToolTip());
     return toolTip;
 }
