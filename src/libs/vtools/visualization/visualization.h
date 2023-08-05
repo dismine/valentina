@@ -34,10 +34,6 @@
 #include <QObject>
 #include <QtGlobal>
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-#include <QtCore/QHashFunctions>
-#endif
-
 #include "../vgeometry/vabstractcurve.h"
 #include "../vmisc/def.h"
 #include "../vmisc/vabstractvalapplication.h"
@@ -56,14 +52,6 @@ enum class Mode : qint8
     Creation,
     Show
 };
-
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-Q_DECL_CONST_FUNCTION inline auto qHash(VColor key, uint seed = 0) noexcept -> uint
-{
-    auto underlyingValue = static_cast<typename std::underlying_type<VColor>::type>(key);
-    return ::qHash(underlyingValue, seed);
-}
-#endif
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")

@@ -28,6 +28,12 @@
 #ifndef THEMEDEF_H
 #define THEMEDEF_H
 
+#include <QtGlobal>
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include <QtCore/QHashFunctions>
+#endif
+
 enum class VColorRole
 {
     DefaultColor,
@@ -52,5 +58,13 @@ enum class VColorRole
     PieceNodeLabelHoverColor,
     PieceNodeLabelLineColor
 };
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+Q_DECL_CONST_FUNCTION inline auto qHash(VColorRole key, uint seed = 0) noexcept -> uint
+{
+    auto underlyingValue = static_cast<typename std::underlying_type<VColorRole>::type>(key);
+    return ::qHash(underlyingValue, seed);
+}
+#endif
 
 #endif // THEMEDEF_H

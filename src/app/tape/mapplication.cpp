@@ -27,18 +27,20 @@
  *************************************************************************/
 
 #include "mapplication.h"
+#include "../fervor/fvupdater.h"
 #include "../ifc/exception/vexceptionbadid.h"
 #include "../ifc/exception/vexceptionconversionerror.h"
 #include "../ifc/exception/vexceptionemptyparameter.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/exception/vexceptionwrongid.h"
+#include "../qmuparser/qmuparsererror.h"
 #include "../vganalytics/def.h"
 #include "../vganalytics/vganalytics.h"
 #include "../vmisc/projectversion.h"
+#include "../vmisc/qt_dispatch/qt_dispatch.h"
 #include "../vmisc/theme/vapplicationstyle.h"
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vsysexits.h"
-#include "qtpreprocessorsupport.h"
 #include "tmainwindow.h"
 #include "version.h"
 
@@ -46,10 +48,7 @@
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
-#include "../fervor/fvupdater.h"
-#include "../qmuparser/qmuparsererror.h"
-#include "../vmisc/qt_dispatch/qt_dispatch.h"
-
+#include <QCommandLineParser>
 #include <QDir>
 #include <QFileOpenEvent>
 #include <QGlobalStatic>
@@ -63,6 +62,7 @@
 #include <QStyleFactory>
 #include <QThread>
 #include <QTranslator>
+#include <QUuid>
 #include <iostream>
 
 #if !defined(BUILD_REVISION) && defined(QBS_BUILD)
@@ -81,9 +81,6 @@ QT_WARNING_DISABLE_INTEL(1418)
 Q_LOGGING_CATEGORY(mApp, "m.application") // NOLINT
 
 QT_WARNING_POP
-
-#include <QCommandLineParser>
-#include <QUuid>
 
 namespace
 {

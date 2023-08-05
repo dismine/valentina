@@ -57,7 +57,6 @@
 #include "dialogs/dialogsetupmultisize.h"
 #include "dialogs/dialogtapepreferences.h"
 #include "mapplication.h" // Should be last because of definning qApp
-#include "qtpreprocessorsupport.h"
 #include "ui_tmainwindow.h"
 #include "vlitepattern.h"
 #include "vtapesettings.h"

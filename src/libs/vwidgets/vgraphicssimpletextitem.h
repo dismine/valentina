@@ -39,8 +39,7 @@
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
-#include "qtclasshelpermacros.h"
-#include "theme/themeDef.h"
+#include "../vmisc/theme/themeDef.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
