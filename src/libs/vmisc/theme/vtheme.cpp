@@ -168,7 +168,7 @@ auto NativeWindowsDarkThemeAvailable() -> bool
 
 //---------------------------------------------------------------------------------------------------------------------
 #if defined(Q_OS_MACX)
-auto NativeMacDarkThemeAvailable() -> bool
+inline auto NativeMacDarkThemeAvailable() -> bool
 {
     return NSNativeMacDarkThemeAvailable();
 }
@@ -176,7 +176,7 @@ auto NativeMacDarkThemeAvailable() -> bool
 
 //---------------------------------------------------------------------------------------------------------------------
 #if defined(Q_OS_LINUX)
-auto NativeLinuxDarkThemeAvailable() -> bool
+inline auto NativeLinuxDarkThemeAvailable() -> bool
 {
     // There is no way to check native support. Assume always available.
     return true;
@@ -263,7 +263,7 @@ void VTheme::StoreDefaultThemeName(const QString &themeName)
 auto VTheme::NativeDarkThemeAvailable() -> bool
 {
 #if defined(Q_OS_MACX)
-    return NSNativeMacDarkThemeAvailable();
+    return NativeMacDarkThemeAvailable();
 #elif defined(Q_OS_WIN)
     return NativeWindowsDarkThemeAvailable();
 #elif defined(Q_OS_LINUX)
