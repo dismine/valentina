@@ -98,7 +98,7 @@ linux_task:
   matrix:
     - container:
         image: dismine/clang-ubuntu:latest
-        memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
+        memory: 12G  # Set to 12GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
       env:
         COMPILER: clang
         QMAKE_SPEC: "linux-clang"
