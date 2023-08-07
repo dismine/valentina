@@ -24,7 +24,6 @@
         <file>icon/32x32/arrowLeftUp.png</file>
         <file>icon/32x32/putHereLeft.png</file>
         <file>icon/path_config.png</file>
-        <file>icon/16x16/info.png</file>
         <file>icon/16x16/measurement.png</file>
         <file>icon/16x16/landscape.png</file>
         <file>icon/16x16/portrait.png</file>
@@ -36,10 +35,6 @@
         <file>icon/32x32/syncM.png</file>
         <file>icon/16x16/operations.png</file>
         <file>icon/16x16/operations@2x.png</file>
-        <file>icon/16x16/allow_detail.png</file>
-        <file>icon/16x16/allow_detail@2x.png</file>
-        <file>icon/16x16/forbid_detail.png</file>
-        <file>icon/16x16/forbid_detail@2x.png</file>
         <file>icon/32x32/grainline.png</file>
         <file>icon/32x32/grainline@2x.png</file>
         <file>icon/32x32/labels.png</file>
@@ -52,8 +47,6 @@
         <file>icon/32x32/passmark@2x.png</file>
         <file>icon/32x32/button.png</file>
         <file>icon/32x32/button@2x.png</file>
-        <file>icon/16x16/broom.png</file>
-        <file>icon/16x16/broom@2x.png</file>
         <file>icon/16x16/font_preferences@2x.png</file>
         <file>icon/16x16/font_preferences.png</file>
         <file>icon/32x32/font_preferences@2x.png</file>

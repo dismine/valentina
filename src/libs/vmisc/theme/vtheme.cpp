@@ -68,6 +68,8 @@ using namespace bpstd::literals::chrono_literals;
 #include "../vabstractapplication.h"
 #include "vscenestylesheet.h"
 
+#include <QtSvg/QSvgRenderer>
+
 namespace
 {
 #if QT_VERSION < QT_VERSION_CHECK(5, 9, 0)
@@ -336,11 +338,21 @@ auto VTheme::ColorSheme() -> VColorSheme
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VTheme::SetIconTheme()
+auto VTheme::DefaultThemeName() -> QString
 {
     VColorSheme colorScheme = ColorSheme();
     QString themePrefix = (colorScheme == VColorSheme::Light ? QStringLiteral("Light") : QStringLiteral("Dark"));
 
+#if defined(Q_OS_MACX)
+    return QStringLiteral("La-Sierra-%1").arg(themePrefix);
+#else
+    return QStringLiteral("Eleven-%1").arg(themePrefix);
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTheme::SetIconTheme()
+{
     static const char *GENERIC_ICON_TO_CHECK = "document-open";
     if (not QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK))
     {
@@ -348,12 +360,7 @@ void VTheme::SetIconTheme()
         // use an icon theme that we provide via a .qrc file
         // This case happens under Windows and Mac OS X
         // This does not happen under GNOME or KDE
-
-#if defined(Q_OS_MACX)
-        QIcon::setThemeName(QStringLiteral("La-Sierra-%1").arg(themePrefix));
-#else
-        QIcon::setThemeName(QStringLiteral("Eleven-%1").arg(themePrefix));
-#endif
+        QIcon::setThemeName(DefaultThemeName());
     }
     else
     {
@@ -362,7 +369,7 @@ void VTheme::SetIconTheme()
         if ((themeMode == VThemeMode::Dark && !ShouldApplyDarkTheme()) ||
             (themeMode == VThemeMode::Light && ShouldApplyDarkTheme()))
         {
-            QIcon::setThemeName(QStringLiteral("Eleven-%1").arg(themePrefix));
+            QIcon::setThemeName(DefaultThemeName());
         }
     }
 }
@@ -504,6 +511,18 @@ void VTheme::ResetThemeSettings() const
     VSceneStylesheet::ResetStyles();
 
     emit Instance()->ThemeSettingsChanged();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTheme::GetFallbackThemeIcon(const QString &iconName, QSize iconSize) -> QIcon
+{
+    QString filePath = QStringLiteral(":icons/%1/%2.svg").arg(DefaultThemeName(), iconName);
+
+    QIcon icon;
+    icon.addFile(filePath, iconSize, QIcon::Normal, QIcon::On);
+    iconSize *= 2;
+    icon.addFile(filePath, iconSize, QIcon::Normal, QIcon::On);
+    return icon;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

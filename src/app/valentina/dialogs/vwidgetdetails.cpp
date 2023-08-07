@@ -28,6 +28,7 @@
 
 #include "vwidgetdetails.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vtools/tools/vtoolseamallowance.h"
@@ -61,14 +62,6 @@ enum PieceColumn
     InLayout = 0,
     PieceName = 1
 };
-
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
-
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, allowDetailIcon, (QLatin1String("://icon/16x16/allow_detail.png")))   // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, forbidDetailIcon, (QLatin1String("://icon/16x16/forbid_detail.png"))) // NOLINT
-
-QT_WARNING_POP
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -148,6 +141,7 @@ void VWidgetDetails::changeEvent(QEvent *event)
     {
         ui->retranslateUi(this);
     }
+
     // remember to call base class implementation
     QWidget::changeEvent(event);
 }
@@ -235,7 +229,18 @@ void VWidgetDetails::ToggledPieceItem(QTableWidgetItem *item)
     if (details->contains(id))
     {
         const bool inLayout = details->value(id).IsInLayout();
-        inLayout ? item->setIcon(QIcon(*allowDetailIcon)) : item->setIcon(QIcon(*forbidDetailIcon));
+        if (inLayout)
+        {
+            item->setIcon(
+                QIcon::fromTheme(QStringLiteral("gtk-ok"),
+                                 VTheme::GetFallbackThemeIcon(QStringLiteral("16/actions/gtk-ok"), QSize(16, 16))));
+        }
+        else
+        {
+            item->setIcon(
+                QIcon::fromTheme(QStringLiteral("gtk-no"),
+                                 VTheme::GetFallbackThemeIcon(QStringLiteral("16/actions/gtk-no"), QSize(16, 16))));
+        }
 
         VToolSeamAllowance *tool = nullptr;
         try
@@ -255,7 +260,20 @@ auto VWidgetDetails::PrepareInLayoutColumnCell(const VPiece &det, quint32 id) ->
 {
     auto *item = new QTableWidgetItem();
     item->setTextAlignment(Qt::AlignHCenter);
-    item->setIcon(det.IsInLayout() ? QIcon(*allowDetailIcon) : QIcon(*forbidDetailIcon));
+
+    if (det.IsInLayout())
+    {
+        item->setIcon(
+            QIcon::fromTheme(QStringLiteral("gtk-ok"),
+                             VTheme::GetFallbackThemeIcon(QStringLiteral("16/actions/gtk-ok"), QSize(16, 16))));
+    }
+    else
+    {
+        item->setIcon(
+            QIcon::fromTheme(QStringLiteral("gtk-no"),
+                             VTheme::GetFallbackThemeIcon(QStringLiteral("16/actions/gtk-no"), QSize(16, 16))));
+    }
+
     item->setData(Qt::UserRole, id);
 
     // set the item non-editable (view only), and non-selectable

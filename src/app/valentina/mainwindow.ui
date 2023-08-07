@@ -421,8 +421,8 @@
           <string notr="true"/>
          </property>
          <property name="icon">
-          <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
-           <normaloff>:/icon/16x16/broom@2x.png</normaloff>:/icon/16x16/broom@2x.png</iconset>
+          <iconset theme="edit-clear-history">
+           <normaloff>.</normaloff>.</iconset>
          </property>
         </widget>
        </item>

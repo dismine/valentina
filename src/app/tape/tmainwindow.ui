@@ -824,8 +824,8 @@
       </widget>
       <widget class="QWidget" name="tabInformation">
        <attribute name="icon">
-        <iconset resource="share/resources/tapeicon.qrc">
-         <normaloff>:/tapeicon/16x16/info.png</normaloff>:/tapeicon/16x16/info.png</iconset>
+        <iconset theme="documentinfo">
+         <normaloff>.</normaloff>.</iconset>
        </attribute>
        <attribute name="title">
         <string>Information</string>

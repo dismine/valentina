@@ -56,6 +56,7 @@ public:
     void SetToAutoTheme() const;
     void ResetThemeSettings() const;
 
+    static auto GetFallbackThemeIcon(const QString &iconName, QSize iconSize) -> QIcon;
     static auto GetIconResource(const QString &root, const QString &iconName) -> QIcon;
     static auto GetPixmapResource(const QString &root, const QString &iconName) -> QPixmap;
     static auto GetResourceName(const QString &root, const QString &iconName) -> QString;
@@ -64,6 +65,7 @@ public:
     static auto IsInDarkTheme() -> bool;
     static auto ShouldApplyDarkTheme() -> bool;
     static auto ColorSheme() -> VColorSheme;
+    static auto DefaultThemeName() -> QString;
     static void SetIconTheme();
     static void InitThemeMode();
     static auto ThemeStylesheet() -> QString;
