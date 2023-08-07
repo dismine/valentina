@@ -59,9 +59,11 @@ auto main(int argc, char *argv[]) -> int
     Q_INIT_RESOURCE(breeze);     // NOLINT
     Q_INIT_RESOURCE(scenestyle); // NOLINT
 #if defined(Q_OS_MACX)
-    Q_INIT_RESOURCE(mac_theme); // NOLINT
+    Q_INIT_RESOURCE(mac_light_theme); // NOLINT
+    Q_INIT_RESOURCE(mac_dark_theme);  // NOLINT
 #else
-    Q_INIT_RESOURCE(win_theme); // NOLINT
+    Q_INIT_RESOURCE(win_light_theme); // NOLINT
+    Q_INIT_RESOURCE(win_dark_theme);  // NOLINT
 #endif
 
 #if defined(Q_OS_WIN)

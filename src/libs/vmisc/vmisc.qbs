@@ -200,19 +200,21 @@ VLib {
     }
 
     Group {
-        name: "Win icon theme"
+        name: "Win icon themes"
         prefix: "share/resources/"
         files: [
-            "win_theme.qrc"
+            "win_light_theme.qrc",
+            "win_dark_theme.qrc"
         ]
         condition: !qbs.targetOS.contains("macos")
     }
 
     Group {
-        name: "Mac icon theme"
+        name: "Mac icon themes"
         prefix: "share/resources/"
         files: [
-            "mac_theme.qrc"
+            "mac_light_theme.qrc",
+            "mac_dark_theme.qrc"
         ]
         condition: qbs.targetOS.contains("macos")
     }
