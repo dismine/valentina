@@ -65,4 +65,8 @@ Library {
         }
         fileTags: ["cpp_pch_src"]
     }
+
+    Export {
+        Depends { name: "buildconfig" }
+    }
 }
