@@ -32,7 +32,6 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vtools/dialogs/tools/dialoggroup.h"
 #include "../vtools/undocommands/undogroup.h"
-#include "qstringliteral.h"
 #include "ui_vwidgetgroups.h"
 
 #include <QCompleter>

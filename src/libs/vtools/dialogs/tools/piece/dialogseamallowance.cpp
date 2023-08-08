@@ -51,7 +51,6 @@
 #include "dialogpatternmaterials.h"
 #include "dialogpiecepath.h"
 #include "dialogplacelabel.h"
-#include "qstringliteral.h"
 #include "ui_dialogseamallowance.h"
 #include "ui_tabgrainline.h"
 #include "ui_tablabels.h"

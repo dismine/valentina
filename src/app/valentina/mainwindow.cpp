@@ -189,7 +189,6 @@
 #include "dialogs/vwidgetbackgroundimages.h"
 #include "dialogs/vwidgetdetails.h"
 #include "dialogs/vwidgetgroups.h"
-#include "qstringliteral.h"
 #include "ui_mainwindow.h"
 #include "vabstractapplication.h"
 #include "vsinglelineoutlinechar.h"

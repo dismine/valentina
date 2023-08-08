@@ -26,14 +26,11 @@
  **
  *************************************************************************/
 #include "vwidgetbackgroundimages.h"
-#include "qstringliteral.h"
-#include "theme/vtheme.h"
-#include "ui_vwidgetbackgroundimages.h"
-
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vbackgroundpatternimage.h"
 #include "../vmisc/def.h"
 #include "../vmisc/lambdaconstants.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vtools/undocommands/image/hideallbackgroundimages.h"
 #include "../vtools/undocommands/image/hidebackgroundimage.h"
@@ -45,6 +42,8 @@
 #include "../vtools/undocommands/image/rotatebackgroundimage.h"
 #include "../vtools/undocommands/image/scalebackgroundimage.h"
 #include "../vtools/undocommands/image/zvaluemovebackgroundimage.h"
+#include "ui_vwidgetbackgroundimages.h"
+
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)

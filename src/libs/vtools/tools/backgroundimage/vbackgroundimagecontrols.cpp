@@ -39,12 +39,11 @@
 #include "../../undocommands/image/rotatebackgroundimage.h"
 #include "../../undocommands/image/scalebackgroundimage.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vmath.h"
 #include "../vwidgets/global.h"
 #include "../vwidgets/vmaingraphicsview.h"
-#include "qstringliteral.h"
-#include "theme/vtheme.h"
 #include "vbackgroundimageitem.h"
 
 namespace
